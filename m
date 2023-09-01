@@ -2,46 +2,47 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8B62979010D
-	for <lists+samba-technical@lfdr.de>; Fri,  1 Sep 2023 19:04:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9DC6A790170
+	for <lists+samba-technical@lfdr.de>; Fri,  1 Sep 2023 19:29:01 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=kMuoZQgFXwGKkPEJ8RUwLKYBxf8zHDZunrF1HaLmjdc=; b=dBkU/F9mAcQ4/xopatwRlCMrI7
-	9Xg7TjL9PLwti/PMAScxq+UlBC/ulOtpPZNQVnb8WC9UH5zsfWAYyv7WqrOaBOhEumsx2SI0U9W+I
-	Dm2wbrsz4uNe+X1NahAB4m9rgRhAR7h5POzsQk1fj3k1JsJLFl5tZWzqaYbWavU4JHF5clyeOPXvO
-	JN7ZhWryiXbOY6vRqGS1zvExkaBbjT8lk2jnBVWAy09g+9awxjVfkXdtwl1UXfZh3BMsChMGtMpqO
-	d5GMXRUA6M4Md/yzjayzvHRfAZlyVdlevqhHCVEhyR/sj1v2YGUNXwmq1/6ig/dvDq1Tb0VQxbf7k
-	SazWHymg==;
-Received: from ip6-localhost ([::1]:25984 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
+	bh=A6ODDLtOME96bI05sSU4G1/+lN1FTpf6X6ZzhgfuqBw=; b=0EXVai6L4utVXeQgUW3/lGHNWm
+	hnBC51oD295YBfnyWtgMS599w00tVx41JVL4xdz7SnGPnAANN+j28grz4RGrvD2KOfxme8jXiiHAG
+	IN0a7YbNSLctpaaUD78dVDekUzl1wvhxdWAiz8SNfVabMSP9S3vLANJnXhO5gym8wfh32aaCyTBBZ
+	JbxU2E+uEFX3F86VwEMkf2gj3g9sR93f66lX6s0jy1100291oqulhsqKGkn0bbsq90bm7enfozZFS
+	xojprZO5iP8l7ZGsZAdTtWCgqt6bUkt8wf0CFqz7m5T3Yad+9ouCFETj48LmwRdRGvAZooqGe9iIZ
+	tESA5MgA==;
+Received: from ip6-localhost ([::1]:56430 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1qc7ZD-0009ZV-TA; Fri, 01 Sep 2023 17:04:19 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:23992) 
+	id 1qc7wn-000AF6-4W; Fri, 01 Sep 2023 17:28:41 +0000
+Received: from postal1.et.byu.edu ([128.187.48.31]:52732) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1qc7Z8-0009ZM-9I
- for samba-technical@lists.samba.org; Fri, 01 Sep 2023 17:04:17 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Cc:To:From:Date;
- bh=kMuoZQgFXwGKkPEJ8RUwLKYBxf8zHDZunrF1HaLmjdc=; b=jv7uqN50rPw+J98oXuD2jJ6s96
- 5vz6qdw4gTZAYheQZhKPiqSC4buZZLA31NS/zVn+QnCCia/TmKh2pFhhv185rG7TcG+erwcGdEMhv
- 968Q23ZDMFS2RdjRP9o3e3PlupJY+WXw7fRQuepIExUbYeME/efzkgyzGtI1QzsFQG3kmMfmNVB8y
- 52YYfUjvVEHDXL6jiW1y3Q2iItOMnBf4/FfGOBayGwHPyKYf1DlZSjaBVxsrluT74ifgfGFRr+V6b
- NdHgRTn3VkIYYlqR55n9fQA+onipu6NONo8LFLojueDDnVyphxr294dBocxagT5cJKdopz1G5rZ9p
- 4YlYH0voq5HHKuJkSOgeR2AFCSjVeTxQ1gucKHuu/AMOWDjWM9MJUhNNkR7gUXPW2QIfVgduy5JGh
- BP4KzJ9d3z1jA8euROBkbMq8GvLcYEETu+CRsqBcEpwH3y339OCYY9iHb0jh8MLKTzoptyVrpMEOD
- j6WqxZu2moHl2Nf6nC4Ooijh;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1qc7Z6-00BHOE-1K; Fri, 01 Sep 2023 17:04:12 +0000
-Date: Fri, 1 Sep 2023 10:04:10 -0700
-To: Richard Sharpe <realrichardsharpe@gmail.com>
-Subject: Re: Stupid users cause weird crashes in the DNS code ...
-Message-ID: <ZPIZij6tviIwnAP+@jeremy-acer>
-References: <CACyXjPx2amrwUZRYoMZOu+XGshLCRQtEDGsx_dfVVoLVP=VTbw@mail.gmail.com>
+ (Exim) id 1qc7wg-000AEx-OP
+ for samba-technical@lists.samba.org; Fri, 01 Sep 2023 17:28:38 +0000
+Received: from localhost (localhost [127.0.0.1])
+ by postal1.et.byu.edu (Postfix) with ESMTP id CCF7E5EE87
+ for <samba-technical@lists.samba.org>; Fri,  1 Sep 2023 11:10:28 -0600 (MDT)
+Received: from postal1.et.byu.edu ([127.0.0.1])
+ by localhost (postal1.et.byu.edu [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id QQq50i3T8Dqr for <samba-technical@lists.samba.org>;
+ Fri,  1 Sep 2023 11:10:28 -0600 (MDT)
+Received: from [10.35.115.21] (congo.et.byu.edu [10.35.115.21])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits))
+ (No client certificate requested)
+ by postal1.et.byu.edu (Postfix) with ESMTPSA id 614725E148
+ for <samba-technical@lists.samba.org>; Fri,  1 Sep 2023 11:10:28 -0600 (MDT)
+Message-ID: <cf3ce5e3-2204-ea22-01e3-cae651c86ab0@et.byu.edu>
+Date: Fri, 1 Sep 2023 11:10:24 -0600
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii; format=flowed
-Content-Disposition: inline
-In-Reply-To: <CACyXjPx2amrwUZRYoMZOu+XGshLCRQtEDGsx_dfVVoLVP=VTbw@mail.gmail.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.14.0
+To: samba-technical <samba-technical@lists.samba.org>
+Content-Language: en-US
+Subject: Mount point detection by device id comparison
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -55,32 +56,34 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jeremy Allison <jra@samba.org>
-Cc: samba-technical <samba-technical@lists.samba.org>
+From: Carson Buttars via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Carson Buttars <carson@et.byu.edu>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Fri, Sep 01, 2023 at 09:21:09AM -0700, Richard Sharpe via samba-technical wrote:
->Hi folks,
->
->I didn't follow the instructions carefully enough.
->
->I set up resolv.conf to point at 127.0.0.1 and an upstream nameserver
->(10.20.1.100).
->
->During provisioning that created an entry of 'dns resolver = 127.0.0.1'.
->
->That resulted in the following crash. Looks like a bug.
->
->Provisioning should not use any of the aliases for the current system
->as forwarders.
->
->In addition, perhaps the code should not crash if it gets a timeout.
->
->4.19.0rc4.
+Hello all,
 
-Can you add a "panic action = /bin/sleep 99999999"
-and catch it in gdb. Knowing *exactly* what line
-it goes down on will help. A lot :-).
+I have been working on a basic patch 
+(https://gitlab.com/samba-team/samba/-/merge_requests/3141?commit_id=4cf70194826920482952e7d4d60d76b84885843e) 
+to detect mount points and have gotten it to a working state where it 
+marks a file as a reparse point, adds FILE_ATTRIBUTE_REPARSE_POINT to 
+the mode, and sends IO_REPARSE_TAG_MOUNT_POINT to the client. I have 
+seen that there have been some recent changes related to reparse points, 
+and I'm wondering if there is a clear direction of where things are 
+heading in the future. So, here are my questions:
 
+My patch currently is making the comparison of device ids in the default 
+mode function: is that the most logical place for this to happen, or is 
+there somewhere better to do that?
+
+I am a new contributor and not very familiar with the processes of 
+getting a merge request accepted. Is there a route to getting more 
+direct feedback and/or guidance from a more senior developer?
+
+For me to make a patch that will work well with future changes, I'd also 
+like to know: is there a clear plan of how reparse points will be 
+handled in the future?
+
+Thanks,
+
+Carson Buttars
