@@ -2,63 +2,42 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id AA7FA7914AB
-	for <lists+samba-technical@lfdr.de>; Mon,  4 Sep 2023 11:23:42 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 23153791465
+	for <lists+samba-technical@lfdr.de>; Mon,  4 Sep 2023 11:09:49 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
-	bh=Qu5gocNp7Ie1SKO4h/OwB6ezAdFSbEBypmxDMY2g8VE=; b=zNWcZ4I7u64s3ZhoSfrp5gYBEB
-	euF5DQJbrRT9dk6d3ENS+/3IYpvvp1VPzAKYCOvr7sAsZgIOt959vLe6LLmpCYkRqWtkUf9WNrYIq
-	Ja34MujcGHDZAv47mYIB7KauHPqc4gikGg4tIjUwUhaskN2c4CJwbQrw0C3SBrwvpoCcFN2iXLQ+V
-	cnJJ6RApzEdoTtPK4Q76KhMT6VZdRQOihy5pzkUKjRIQci0rd4WwPYE949YvAnqY3Prq3hfHggYpB
-	77Oxg4IFpTwqrzNHxPPrZP0uG41jjEgUDW0K1/iQi0v/Yq02gsJrEiMCoLKy9icAXerT0+7qKEXQV
-	ErHWRZAQ==;
-Received: from ip6-localhost ([::1]:49962 helo=hr1.samba.org) 
+	bh=QrxJDXphbv3W9L1Asm6s21MZGiL5Ml08y1Ch8LQQOMs=; b=camkNkwz+2UuCfHYcntE4gkvkg
+	XBYUep1zLmkVSXZPi4CixuRcH5ye0pxIO/MZKMF4jwh/+F7IHEGeGY6phTTabbIRlaF36+BvcyzFT
+	78frcWOCKFrb8BPbxJDOx90d7yonL4cbP2YJ5qHapA+5KnTDrjyPmfa6Nq9b8iGCTyEki7BHckTYh
+	x258lFDMKz+BvzOiLgdcW7kSD382BN2boFvKCwNHNYp3z1VCWuu1fvR/e0kljcsiburQUl8SlRMC4
+	NNvtHixpWDOgJCOvPIcLPns16GH3OqU+iSKo+q1rekWghUtcllVYocwdg1HjCPh/80hXvgXZjBauG
+	ymqKPBjA==;
+Received: from ip6-localhost ([::1]:46342 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1qd5nq-000JcB-BQ; Mon, 04 Sep 2023 09:23:26 +0000
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124]:21792) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1qd5nf-000Jc2-W1
- for samba-technical@lists.samba.org; Mon, 04 Sep 2023 09:23:21 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1693819392;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding;
- bh=Qu5gocNp7Ie1SKO4h/OwB6ezAdFSbEBypmxDMY2g8VE=;
- b=LYntD4lwcrjFZ6o1+pIxUJZ2AR9nEvaJbmbMZrOqrhdQCuCWd/xyhalB297WfPQsDi5udQ
- kP9jHfqRE8zbA+zSf9yxtYvEkb8ShUWg7/YqQMlZMsktLNJJukvjgeSxyws1uwcyW7Gs1q
- 8jj1iRYzOQeV8bzzYamROLDpuoocSZc=
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1693819392;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding;
- bh=Qu5gocNp7Ie1SKO4h/OwB6ezAdFSbEBypmxDMY2g8VE=;
- b=LYntD4lwcrjFZ6o1+pIxUJZ2AR9nEvaJbmbMZrOqrhdQCuCWd/xyhalB297WfPQsDi5udQ
- kP9jHfqRE8zbA+zSf9yxtYvEkb8ShUWg7/YqQMlZMsktLNJJukvjgeSxyws1uwcyW7Gs1q
- 8jj1iRYzOQeV8bzzYamROLDpuoocSZc=
-Received: from mimecast-mx02.redhat.com (mx-ext.redhat.com [66.187.233.73])
- by relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-492-_FXUeOX0PZuUYk7aKWWqmg-1; Mon, 04 Sep 2023 05:07:13 -0400
-X-MC-Unique: _FXUeOX0PZuUYk7aKWWqmg-1
-Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.rdu2.redhat.com
- [10.11.54.8])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id B7987381DCA9;
- Mon,  4 Sep 2023 09:07:12 +0000 (UTC)
-Received: from magrathea.localnet (unknown [10.39.208.9])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 43255C02996;
- Mon,  4 Sep 2023 09:07:11 +0000 (UTC)
+	id 1qd5Zo-000JKj-15; Mon, 04 Sep 2023 09:08:56 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:19460) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1qd5Zf-000JKa-Ej
+ for samba-technical@lists.samba.org; Mon, 04 Sep 2023 09:08:51 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Message-ID:Date:To:From:CC;
+ bh=QrxJDXphbv3W9L1Asm6s21MZGiL5Ml08y1Ch8LQQOMs=; b=hb8oitNnTzMWFForkA7V+7L1PQ
+ jWMzZXmKCfRjyD28mEUhgh7py/Wxb8vAXxifACrIgWA+QQ4KL+xDeiNj0TGBv0k5KdRvyxpysfB4s
+ 9APsaVL+g+PqRbOcLM4q5BXrEMlrLJUcJJ+HSTwznz/B+lk+t4UE7Dj/yGfCY+6S4ODp3556arlcG
+ B5kqAq3kLOIoClvm+G8jkvoUW0QqW1kMm4o2S7fwM4CQ/da4vuaNpzBcvQ/Pd0yQVZhiofdeKjcIK
+ 5QGKwp/p0aUx0zlC/ky+eIFHiJdkHM6VPC1OT2Z5T054GZd5KCIuk/Ued6QDWkmGKmW/GFa7YVRAE
+ wEXY7PHB6LpdLMj/TU59CXD8DmGJs+My40dXr8oNTRn2uuPN8NuxhwlUqABWDMC/gNw4wjVbXqQJ2
+ nNgqFMyQ7S2WK09wsMjBOaBcIwfiNSUN2BNMfFXgc/SC2At+UoeUJ+ofAmhckpKURcicla1GYzRb2
+ lQjE9K+bnTsLT6CJbEn2HzZC;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1qd5Zd-00BffX-1O; Mon, 04 Sep 2023 09:08:45 +0000
 To: samba-technical@lists.samba.org, slow@samba.org
 Subject: `allow trusted domains = no` and `Unix Users`
-Date: Mon, 04 Sep 2023 11:07:10 +0200
-Message-ID: <2306152.ElGaqSPkdT@magrathea>
+Date: Mon, 04 Sep 2023 11:08:44 +0200
+Message-ID: <1873406.tdWV9SEqCh@magrathea>
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 3.1 on 10.11.54.8
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
 Content-Transfer-Encoding: 7Bit
 Content-Type: text/plain; charset="us-ascii"
 X-BeenThere: samba-technical@lists.samba.org
@@ -75,7 +54,7 @@ List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
 From: Andreas Schneider via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andreas Schneider <asn@redhat.com>
+Reply-To: Andreas Schneider <asn@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
@@ -103,6 +82,11 @@ Best regards
 
 
 	Andreas
+
+-- 
+Andreas Schneider                      asn@samba.org
+Samba Team                             www.samba.org
+GPG-ID:     8DFF53E18F2ABC8D8F3C92237EE0FC4DCC014E3D
 
 
 
