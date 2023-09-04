@@ -2,49 +2,65 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 872BA7901DF
-	for <lists+samba-technical@lfdr.de>; Fri,  1 Sep 2023 20:04:13 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id AA7FA7914AB
+	for <lists+samba-technical@lfdr.de>; Mon,  4 Sep 2023 11:23:42 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=adVpRuM2Iegd9bSx8bQQaqXOR1+ImAodyeYpfTw54gQ=; b=UpGqAoO91s/AlIgolToYghdVtb
-	sPe70hGEIGG2acIrxqHSBFaK5mw4u1OZ7YN6Y0lxKMx7QJFOCl53IgHHw94tSzclH2fK5gkuEYrf/
-	3D5e9Cd7SE2CJhHJgG4yyjkhEJcUwyPDZDnaim5DYYcevTEMu4h157NfzWfHEsNBZu/MukliV094S
-	WhrGPLNhUfIpQpM32KIxZz1sN9CSVPGtjbfKj0ghiPh3bgWg1Vjg84UOF7gtGTWCqw0OwQCmnmxm5
-	bvr/rM0iZp6BzR/0FJgy38+AQb9Qn2ldvVaktgX9YT4+9f3VKLBdvqb9A+f2zz/MMCZTId7xNek/Z
-	FaP1abKA==;
-Received: from ip6-localhost ([::1]:33626 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
+	bh=Qu5gocNp7Ie1SKO4h/OwB6ezAdFSbEBypmxDMY2g8VE=; b=zNWcZ4I7u64s3ZhoSfrp5gYBEB
+	euF5DQJbrRT9dk6d3ENS+/3IYpvvp1VPzAKYCOvr7sAsZgIOt959vLe6LLmpCYkRqWtkUf9WNrYIq
+	Ja34MujcGHDZAv47mYIB7KauHPqc4gikGg4tIjUwUhaskN2c4CJwbQrw0C3SBrwvpoCcFN2iXLQ+V
+	cnJJ6RApzEdoTtPK4Q76KhMT6VZdRQOihy5pzkUKjRIQci0rd4WwPYE949YvAnqY3Prq3hfHggYpB
+	77Oxg4IFpTwqrzNHxPPrZP0uG41jjEgUDW0K1/iQi0v/Yq02gsJrEiMCoLKy9icAXerT0+7qKEXQV
+	ErHWRZAQ==;
+Received: from ip6-localhost ([::1]:49962 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1qc8Uo-000AZv-JH; Fri, 01 Sep 2023 18:03:50 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:54108) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1qc8Ug-000AZm-QH
- for samba-technical@lists.samba.org; Fri, 01 Sep 2023 18:03:46 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Cc:To:From:Date;
- bh=adVpRuM2Iegd9bSx8bQQaqXOR1+ImAodyeYpfTw54gQ=; b=f0Uj8hMWApO7kRot8bDnd7q16V
- tt8yyE1MP8hcCQU0HlK/7iQUiyeerwHXKpdrDdlrLhRWSku9OYubPCBG7l48/WkSHvhhMrmjxeTtB
- zhhZEBemWm3eHULnPDl+W+mg2eOoVULG3WoaDffAnSjTq1hZxAqlNBOjjyjS58fgGUKDoFejVXL4j
- Tw/QG0OG1KbGOledzotehRmx/4b4C2iIfPvewQvFKQOBtxEU1vHL9//7kUwZP4qU9tcHsc+U1m0Zy
- 6iHSAZhEIYqGkTOoisuK6N3dyJobUJk/9zX/GJO7ryBfWBwtu9NB9hgYeIOwJc8KzNcQKtZAZQtAF
- fP/YmD1DIPt898Hkjqp2xKNl3TZsI79NTjUj5ZRTzySUw+8BV03IhaZGO1lRf4HuuQ3L43hhGtSgd
- 6sdKagOIGoo+k8Yg/WkquUDcLVCNqUQGMIKl2q0WEVkt8heNIaVUtP/bZsEtSH47b78q8sXnqtO13
- iWHqd+yx/QLkjg6PgbFG496t;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1qc8Uf-00BI13-2a; Fri, 01 Sep 2023 18:03:42 +0000
-Date: Fri, 1 Sep 2023 11:03:39 -0700
-To: Richard Sharpe <realrichardsharpe@gmail.com>
-Subject: Re: One simple stupid users trick owns all your bases ...
-Message-ID: <ZPIne6H8344yl8yR@jeremy-acer>
-References: <CACyXjPx2amrwUZRYoMZOu+XGshLCRQtEDGsx_dfVVoLVP=VTbw@mail.gmail.com>
- <ZPIZij6tviIwnAP+@jeremy-acer>
- <CACyXjPyFJ3qTGRrHZOi8Gqn-R5j0mq61HG2exFQFQZyDfbikPQ@mail.gmail.com>
+	id 1qd5nq-000JcB-BQ; Mon, 04 Sep 2023 09:23:26 +0000
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124]:21792) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1qd5nf-000Jc2-W1
+ for samba-technical@lists.samba.org; Mon, 04 Sep 2023 09:23:21 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1693819392;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=Qu5gocNp7Ie1SKO4h/OwB6ezAdFSbEBypmxDMY2g8VE=;
+ b=LYntD4lwcrjFZ6o1+pIxUJZ2AR9nEvaJbmbMZrOqrhdQCuCWd/xyhalB297WfPQsDi5udQ
+ kP9jHfqRE8zbA+zSf9yxtYvEkb8ShUWg7/YqQMlZMsktLNJJukvjgeSxyws1uwcyW7Gs1q
+ 8jj1iRYzOQeV8bzzYamROLDpuoocSZc=
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1693819392;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=Qu5gocNp7Ie1SKO4h/OwB6ezAdFSbEBypmxDMY2g8VE=;
+ b=LYntD4lwcrjFZ6o1+pIxUJZ2AR9nEvaJbmbMZrOqrhdQCuCWd/xyhalB297WfPQsDi5udQ
+ kP9jHfqRE8zbA+zSf9yxtYvEkb8ShUWg7/YqQMlZMsktLNJJukvjgeSxyws1uwcyW7Gs1q
+ 8jj1iRYzOQeV8bzzYamROLDpuoocSZc=
+Received: from mimecast-mx02.redhat.com (mx-ext.redhat.com [66.187.233.73])
+ by relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-492-_FXUeOX0PZuUYk7aKWWqmg-1; Mon, 04 Sep 2023 05:07:13 -0400
+X-MC-Unique: _FXUeOX0PZuUYk7aKWWqmg-1
+Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.8])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id B7987381DCA9;
+ Mon,  4 Sep 2023 09:07:12 +0000 (UTC)
+Received: from magrathea.localnet (unknown [10.39.208.9])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 43255C02996;
+ Mon,  4 Sep 2023 09:07:11 +0000 (UTC)
+To: samba-technical@lists.samba.org, slow@samba.org
+Subject: `allow trusted domains = no` and `Unix Users`
+Date: Mon, 04 Sep 2023 11:07:10 +0200
+Message-ID: <2306152.ElGaqSPkdT@magrathea>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <CACyXjPyFJ3qTGRrHZOi8Gqn-R5j0mq61HG2exFQFQZyDfbikPQ@mail.gmail.com>
+X-Scanned-By: MIMEDefang 3.1 on 10.11.54.8
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,102 +74,35 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jeremy Allison <jra@samba.org>
-Cc: samba-technical <samba-technical@lists.samba.org>
+From: Andreas Schneider via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andreas Schneider <asn@redhat.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Fri, Sep 01, 2023 at 10:15:22AM -0700, Richard Sharpe wrote:
->On Fri, Sep 1, 2023 at 10:04 AM Jeremy Allison <jra@samba.org> wrote:
->>
->> On Fri, Sep 01, 2023 at 09:21:09AM -0700, Richard Sharpe via samba-technical wrote:
->> >Hi folks,
->> >
->> >I didn't follow the instructions carefully enough.
->> >
->> >I set up resolv.conf to point at 127.0.0.1 and an upstream nameserver
->> >(10.20.1.100).
->> >
->> >During provisioning that created an entry of 'dns resolver = 127.0.0.1'.
->> >
->> >That resulted in the following crash. Looks like a bug.
->> >
->> >Provisioning should not use any of the aliases for the current system
->> >as forwarders.
->> >
->> >In addition, perhaps the code should not crash if it gets a timeout.
->> >
->> >4.19.0rc4.
->>
->> Can you add a "panic action = /bin/sleep 99999999"
->> and catch it in gdb. Knowing *exactly* what line
->> it goes down on will help. A lot :-).
->
->OK:
->
->#0  0x00007fa0f256dd98 in nanosleep () from /lib64/libc.so.6
->#1  0x00007fa0f256dc9e in sleep () from /lib64/libc.so.6
->#2  0x00007fa0f8e1c13b in log_stack_trace () at ../../lib/util/fault.c:306
->#3  0x00007fa0f8e1c33f in smb_panic_log (
->    why=why@entry=0x7ffc3acd6050 "Signal 11: Segmentation fault")
->    at ../../lib/util/fault.c:195
->#4  0x00007fa0f8e1c4b3 in smb_panic (
->    why=why@entry=0x7ffc3acd6050 "Signal 11: Segmentation fault")
->    at ../../lib/util/fault.c:206
->#5  0x00007fa0f8e1c619 in fault_report (sig=11) at ../../lib/util/fault.c:83
->#6  sig_fault (sig=11) at ../../lib/util/fault.c:94
->#7  <signal handler called>
->#8  0x00007fa0f7b90049 in dns_cli_request_udp_done (subreq=<optimized out>)
->    at ../../libcli/dns/dns.c:497
->#9  0x00007fa0f7b9134d in dns_udp_request_done (subreq=0x618001b18900)
->    at ../../libcli/dns/dns.c:157
->#10 0x00007fa0f9764929 in tdgram_recvfrom_done (subreq=0x61800533cd00)
->    at ../../lib/tsocket/tsocket.c:239
->#11 0x00007fa0f976b1f7 in tdgram_bsd_recvfrom_handler (
->    private_data=<optimized out>) at ../../lib/tsocket/tsocket_bsd.c:1186
->#12 0x00007fa0f9769c18 in tdgram_bsd_fde_handler (ev=<optimized out>,
->    fde=<optimized out>, flags=<optimized out>, private_data=<optimized out>)
->    at ../../lib/tsocket/tsocket_bsd.c:910
->#13 0x00007fa0f3dc53a7 in tevent_common_invoke_fd_handler ()
+Hello,
 
-tdgram_bsd_recvfrom_recv() calls tsocket_simple_int_recv()
-which should set:
+I have a user who set `allow trusted domains = no` in his smb.conf. He also 
+set `force user = localuser` on a share. However he is not able to connect to 
+the local share:
 
-         case TEVENT_REQ_TIMED_OUT:
-                 *perrno = ETIMEDOUT;
-                 return -1;
+[2023/07/27 12:31:43.434346,  3, pid=1019460, effective(0, 0), real(0, 0)] 
+../../source3/lib/util_names.c:84(is_allowed_domain)
+  is_allowed_domain: Not trusted domain 'UNIX USER'
+[2023/07/27 12:31:43.434350,  3, pid=1019460, effective(0, 0), real(0, 0), 
+class=auth] ../../source3/auth/auth_util.c:492(create_local_token)
+  create_local_token: Authentication failed for user [cortexuser] from 
+firewalled domain [UNIX USER]
 
-tdgram_recvfrom_done() looks like:
+The change was introduced by df5fe2d835169161d3930acf1e9c750dd2bc64b6
 
-static void tdgram_recvfrom_done(struct tevent_req *subreq)
-{
-         struct tevent_req *req = tevent_req_callback_data(subreq,
-                                  struct tevent_req);
-         struct tdgram_recvfrom_state *state = tevent_req_data(req,
-                                               struct tdgram_recvfrom_state);
-         ssize_t ret;
-         int sys_errno;
+Is it by intention that local unix users fall into the "trusted domain" 
+category or is this a bug?
 
-         ret = state->ops->recvfrom_recv(subreq, &sys_errno, state,
-                                         &state->buf, &state->src);
-         if (ret == -1) {
-                 tevent_req_error(req, sys_errno);
-                 return;
-         }
 
-         state->len = ret;
+Best regards
 
-         tevent_req_done(req);
-}
 
-state->ops->recvfrom_recv() should be tdgram_bsd_recvfrom_recv()
-which should be returning -1 in the ETIMEDOUT Case.
+	Andreas
 
-So it should never get to:
-
-lib/tsocket/tsocket.c:239
-
-:-(. Looking under gdb is the next step.
 
 
