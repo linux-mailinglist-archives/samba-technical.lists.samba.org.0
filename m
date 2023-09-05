@@ -2,49 +2,62 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id A3C197919B2
-	for <lists+samba-technical@lfdr.de>; Mon,  4 Sep 2023 16:33:44 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4673C792CA1
+	for <lists+samba-technical@lfdr.de>; Tue,  5 Sep 2023 19:41:58 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=+sVmxtHJjQ2Qutcp+VdRcpMa93b9jvy4wx92TsewoTU=; b=r16SoWCpGhZuZcdXM/xCGSlu4d
-	BXRWewS8d0IoNQqxqvqLUVAkf/Y+Xrzgf9YbrKypnBlLzBduFuw279LwKBJgb9+AtUFZQUyi2lSQ6
-	W7fm6h0/tc6h3KMOIs2o0odTk+s7a6dSQDmLECkZoPBPkWilriZoPAsV9aHtIuY65iQ4vQEXu3UVQ
-	awEHY+ziDwtgbYoBQo/dIp7O6w4AbHuktgNfNRo2DKdrkoSPI+fMknPzzcJD/OQQMBzvYCtQTYvvF
-	UUuz2zrWJpXpGASJMdSGwxXZGT9d+KZJQ86SsRzRv+4k7nDTJHLHeDfwKYgtUw7xcHKHnvK5kFuf3
-	rT5kCasA==;
-Received: from ip6-localhost ([::1]:54342 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=EjtpG6/BVmZkVrg4KlisvzRC8tC9uJgfXbDFQQx9ZPM=; b=oQIuI8VtZDYVMhplM9QhAZLXdo
+	0VR2sOFI8xtgimx5ksA1bTmHKvgL8YRNGOrmAqrb6KvEUvp7Y9cLCNy2F5BrzrQHAYKiSGpGva7dQ
+	HfX0j5qjyYDnyRs1l4pxcG/qHbhkwh0O986wJ4Us9+iaiT9IEh6ZCzEX+mKRmFEo6MKuRFQP0PTVV
+	kETm+Gix1143SGJq2tS+8rKW7N3hryHkNnz/HrhgzcBi2E4Im8nSplY0gBY3jTlS4gtM+DuWBgmIa
+	dgHiaggWokRzNn6ABTvOFwRx1AtqatscTabvltz9whNCuALH8MqGRO3cn6+QhCcKwpFj4oM2mAwf9
+	Q5oAhntA==;
+Received: from ip6-localhost ([::1]:25124 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1qdAdk-000QzN-G4; Mon, 04 Sep 2023 14:33:20 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:33910) 
+	id 1qda3I-000xSP-0c; Tue, 05 Sep 2023 17:41:24 +0000
+Received: from mail-qt1-x833.google.com ([2607:f8b0:4864:20::833]:54769) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1qdAdb-000QzE-Ji
- for samba-technical@lists.samba.org; Mon, 04 Sep 2023 14:33:16 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Cc:To:From:Date;
- bh=+sVmxtHJjQ2Qutcp+VdRcpMa93b9jvy4wx92TsewoTU=; b=G+y/j4XgSYJzIk9Sz/gnOwlb1d
- 75wyb2fyIBUpU5JtM3C6RfM/LHKY3F0EEJTcvop5wkJyrIgLjJ1ll0OJ9yBPAEPeqtrlGM21q8FAB
- vVQ4Ssm9qpnNUZ1PuKjARiwbA+l7lPg2mr15neoAfKGTrNYHMVRuziP/WlKeV8jAVy9O/LRSczYYU
- zcQdBkH5hGdk8pHFSuvD/I21xzwZpRE9tabgx5oqJiLKPkZjcGaxC6TdwQYkLJ7Jn54GWrIs3pGbC
- XRMbYzhz2rte41vSWEg/BUYUtse6nWj50KdaaDtml+qxRQkymEfS6C5inkh+OmQU7TCsFgJpQqKt9
- CznATqt7YPyxWfSeE/nD+/Po2fkmzCa1ab6huusSJL+m1bAZAJc/8yx/XtFTa4KuzPnSFIL4amU+g
- NEmC185XEEZS48YxI7ACd0ipt3UrGMLtQL4PKF6oK26dM8Pd8xYWSuijVm6YBdwl6jA1DjcgchYrA
- qTb0rLMhqLUBOV8sdS1ZQ2h/;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1qdAdV-00BjZb-2o; Mon, 04 Sep 2023 14:33:07 +0000
-Date: Mon, 4 Sep 2023 15:32:57 +0100
-To: Andreas Schneider <asn@samba.org>
-Subject: Re: `allow trusted domains = no` and `Unix Users`
-Message-ID: <20230904153257.594ff5db@devstation.samdom.example.com>
-In-Reply-To: <10344674.nUPlyArG6x@magrathea>
-References: <2306152.ElGaqSPkdT@magrathea> <2308461.ElGaqSPkdT@magrathea>
- <20230904140540.42736b49@devstation.samdom.example.com>
- <10344674.nUPlyArG6x@magrathea>
-X-Mailer: Claws Mail 3.17.3 (GTK+ 2.24.32; x86_64-pc-linux-gnu)
+ (Exim) id 1qda3B-000xSG-IT
+ for samba-technical@lists.samba.org; Tue, 05 Sep 2023 17:41:21 +0000
+Received: by mail-qt1-x833.google.com with SMTP id
+ d75a77b69052e-412989e3b7bso18663751cf.1
+ for <samba-technical@lists.samba.org>; Tue, 05 Sep 2023 10:41:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20221208; t=1693935675; x=1694540475; darn=lists.samba.org;
+ h=content-transfer-encoding:to:subject:message-id:date:from
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=EjtpG6/BVmZkVrg4KlisvzRC8tC9uJgfXbDFQQx9ZPM=;
+ b=KFSKPrSNBRGloCcM7aHbEex1ugFzKIIWQTqv/avlOrEpdbnybOq43ejVEjHP/UjmGg
+ vcxO9uq4JNgN8aTq3K4fsXwTM/kwTu/1aRlyvWIRAGBijU2IvRKgXQobShX9n2OtmNC2
+ rqstDCyP57TRUnLUNFGahExDWBN11mHTapEqy4aFjgdSEIrBPlY6vOf6sk8b07zsnGHy
+ 0fY5AOez5UiSLCGl5HtNwSDZYZAka48OmjfwmhRkmZ+4Z5wmeeHSpgm7LJFhx/6yEvT/
+ CFQrdhgE0tdwjQfK1us6jqzBSJ7PauOENAJ7oB2YGCCek4siDX157/4fZ8ahez0XhD0w
+ xStg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1693935675; x=1694540475;
+ h=content-transfer-encoding:to:subject:message-id:date:from
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=EjtpG6/BVmZkVrg4KlisvzRC8tC9uJgfXbDFQQx9ZPM=;
+ b=SPwmgxjQrvpNsW6ffHSJvTyPEqu6Y4utM6VF6cDfzTk5NItf2YaCbwpgBou6h21m0z
+ uQSGIOAOoUCoOq/ROP1v61cxQqpzksfTQwpzDkFP1nnLaa3ZgOJHz+lNqlS0J+TDLy+7
+ 42n38gyCfPkwRZWv0/ZcpyL6Y2QmgCfZOgNmYXpk4138MbFBQ6OhwYcy6i6JTmwCuuvI
+ AEVlVe3oIvEAMUxe+ABw9h5QM7uax4vgQlOBmUnkFAW50rsD8KJsm2ARseYyu8FAOmSO
+ g4l1Ird4tfMEFKVWWWPfqbLyzQRYXLsXtywEQn3qYPzmU2lVSyUGDxFe+vP5gEMnpX3G
+ +yTg==
+X-Gm-Message-State: AOJu0YxXTC54VacydvyRA0iNM1yQieu5JEbEM0bytRKFicEpO/w7BbHa
+ Mo888pCFUnocQ9vvG1YsqSpukWnOINEEHwgzdNLaR+eIaqk=
+X-Google-Smtp-Source: AGHT+IFTHdJzwyp45iPdqUrY8BKBx0N9d/te6zIitLZDxbhDqIRbWcfAkDfzOyAInhenxC34Po9T8ukLxBd6UA6TjWA=
+X-Received: by 2002:a05:6214:3984:b0:647:13b3:73b1 with SMTP id
+ ny4-20020a056214398400b0064713b373b1mr12734447qvb.36.1693935675383; Tue, 05
+ Sep 2023 10:41:15 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Date: Tue, 5 Sep 2023 10:37:59 -0700
+Message-ID: <CACyXjPwergRhYMWViO=xH4y8a44BU02PxEd1UEZk-DLm_ZR6qw@mail.gmail.com>
+Subject: Failed to join domain with un-interpolated string ...
+To: samba-technical <samba-technical@lists.samba.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,144 +71,28 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Rowland Penny via samba-technical <samba-technical@lists.samba.org>
-Reply-To: "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>
-Cc: Rowland Penny <rpenny@samba.org>, samba-technical@lists.samba.org
+From: Richard Sharpe via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Richard Sharpe <realrichardsharpe@gmail.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Mon, 04 Sep 2023 16:07:23 +0200
-Andreas Schneider <asn@samba.org> wrote:
+Hi folks,
 
-> On Monday, 4 September 2023 15:05:40 CEST Rowland Penny via
-> samba-technical wrote:
-> > On Mon, 04 Sep 2023 14:33:21 +0200
-> > 
-> > Andreas Schneider <asn@samba.org> wrote:
-> > > On Monday, 4 September 2023 11:38:11 CEST Rowland Penny via
-> > > 
-> > > samba-technical wrote:
-> > > > On Mon, 04 Sep 2023 11:07:10 +0200
-> > > > Andreas Schneider via samba-technical
-> > > > <samba-technical@lists.samba.org>
-> > > > 
-> > > > wrote:
-> > > > > Hello,
-> > > > > 
-> > > > > I have a user who set `allow trusted domains = no` in his
-> > > > > smb.conf. He also set `force user = localuser` on a share.
-> > > > > However he is not able to connect to the local share:
-> > > > > 
-> > > > > [2023/07/27 12:31:43.434346,  3, pid=1019460, effective(0, 0),
-> > > > > real(0,
-> > > > > 0)] ../../source3/lib/util_names.c:84(is_allowed_domain)
-> > > > > 
-> > > > >   is_allowed_domain: Not trusted domain 'UNIX USER'
-> > > > > 
-> > > > > [2023/07/27 12:31:43.434350,  3, pid=1019460, effective(0, 0),
-> > > > > real(0, 0),
-> > > > > class=auth] ../../source3/auth/auth_util.c:492(create_local_token)
-> > > > > create_local_token: Authentication failed for user
-> > > > > [cortexuser] from firewalled domain [UNIX USER]
-> > > > > 
-> > > > > The change was introduced by
-> > > > > df5fe2d835169161d3930acf1e9c750dd2bc64b6
-> > > > > 
-> > > > > Is it by intention that local unix users fall into the
-> > > > > "trusted domain" category or is this a bug?
-> > > > > 
-> > > > > 
-> > > > > Best regards
-> > > > > 
-> > > > > 	Andreas
-> > > > 
-> > > > Stop me if I am wrong, but doesn't 'allow trusted domains = no'
-> > > > mean that you only trust the domain that the computer is part
-> > > > of, so local users will not be part of that domain.
-> > > 
-> > > local users are not part of any domain as they are local to the
-> > > machine. However you can map domain users to local users.
-> > 
-> > My understanding is that you would require something like idmap_nss
-> > to map local users to domain users, so if this is the case, wouldn't
-> > this mean that you couldn't have any domain users on the machine if
-> > they were not also local users ?
-> 
-> No, not at all, see 'force user` or `username map` options.
+I am seeing the following errors when I inject delays into certain
+SAMR functions during domain join:
 
-I could understand this if 'allow trusted domains = yes' was set and
-then local users were trusted.
+"Failed to join domain: failed to join domain 'test.qa' over rpc:
+{Device Timeout} The specified I/O operation on %hs was not completed
+before the time-out period expired."
 
-> 
-> > 
-> > > The allow trusted domains documentation says:
-> > > 
-> > > If it is set to no, then attempts to connect to a resource from a
-> > > domain or workgroup other than the one which smbd is running in
-> > > will fail, even if that domain is trusted by the remote server
-> > > doing the authentication.
-> > > 
-> > > 'Unix Users' is a special domain for local users and smbd is
-> > > running in that domain too. It is a local domain.
-> > 
-> > I think you might find that 'Unix Users' is actually a workgroup.
-> 
-> There is nothing like this in the Windows world. It is a Samba
-> thing ...
+However, the '%hs' is not being replaced with an actual message.
 
-I could have sworn that in the dark and deepest past I ran something
-called 'Windows for workgroups', you know, that thing that came before
-domains. Oh well, I must have dreamt it ;-(
+Is this expected?
 
-> 
-> > > > Also, as I understand it, if you are trying to connect to the
-> > > > share as a local user that the domain knows nothing about, you
-> > > > will be denied access, but if you connect to the share as a
-> > > > known user and 'force user = localuser' is in the share, then
-> > > > everything would end up belonging to 'localuser'
-> > > 
-> > > You do not connect as a local user, you do connect as a domain
-> > > user however all share operations will happen under the user you
-> > > specify with "focre user".
-> > 
-> > Well, yes you do connect as a local user, it is just that Samba maps
-> > a domain user to a local user. In a domain, using something like
-> > idmap_rid, the domain users become local users, hence 'getent
-> > passwd' will display a domain users Unix details.
-> 
-> This has nothing to do with id mapping. Especially not the bug. The
-> bug is about 'force user = localunixuser' not working.
-
-The bug (if it is a bug), in my opinion, is not that 'force user' isn't
-working, it is that the user is getting rejected before it gets
-anywhere the share.
-
-> 
-> Trusted domain is an AD term and it means normally domains having a
-> trust. If you want you can says there is always a machine local
-> trust. If you don't trust your local machine, you shouldn't be using
-> it in the first place :-)
-
-Well yes, but 'allow trusted domains = no' should mean just that, do not
-allow any trusted domains.
-
-> 
-> > My feelings are that if 'allow trusted domains = no' is set, then it
-> > should do what it says, only trust the domain set in smb.conf, 'Unix
-> > Users, is not set in smb.conf, so it should not be allowed.
-> 
-> There is no domain Unix Users in the Windows world! It is something
-> Samba internal!
-
-In that case, why do you see 'Unix Users' in Windows permissions on
-Windows machines ?
-
-Rowland
-
-> 
-> 
-> 	Andreas
-> 
-> 
-
+--=20
+Regards,
+Richard Sharpe
+(=E4=BD=95=E4=BB=A5=E8=A7=A3=E6=86=82=EF=BC=9F=E5=94=AF=E6=9C=89=E6=9D=9C=
+=E5=BA=B7=E3=80=82--=E6=9B=B9=E6=93=8D)(=E4=BC=A0=E8=AF=B4=E6=9D=9C=E5=BA=
+=B7=E6=98=AF=E9=85=92=E7=9A=84=E5=8F=91=E6=98=8E=E8=80=85)
 
