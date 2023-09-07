@@ -2,66 +2,47 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 09753793FC6
-	for <lists+samba-technical@lfdr.de>; Wed,  6 Sep 2023 16:57:50 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 00904797124
+	for <lists+samba-technical@lfdr.de>; Thu,  7 Sep 2023 11:11:20 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
-	bh=Ca6cjnN1g2sS7i5yincX4nK7rj/aIkiF487Nw4V7oZ0=; b=2Ej6MRsR6US5Q4J3a4fAmRX8Pu
-	QqOQoHw8ijVHrGG7SsKuMavU9Vh4gkC3DetfhLdC90y0xjsYYMUb04/qK+rtbzMn+ipyVnZjO3pRn
-	b4+oTludjjREqYRfXXKTQfngNAS+0Jzt3ntfnyw1MQfxq9yQkhZorZxq3BUCbsgcXGRKjAsOcdiqi
-	gmRWg8v3mGEVvffQk6iGlKdeDT4RSwQbDqqrs8xe7qIqSdAb6WvylIUe0INWTGFSTVq3R3bUKQEQN
-	R+xfRrzDPZJ37wOBon4hKvMJ3EmWiBwH4h9z+3tdgJeYs9ZVGtzCwNV0hRLLhXIiIHDfH8iUDNAsM
-	+sSFL6Gg==;
-Received: from ip6-localhost ([::1]:39946 helo=hr1.samba.org) 
+	bh=g+J+zZlXtg1JRlEaVkMXkia7X4Zsbks/kBbHunA7sXE=; b=W8wEqfiUjHggtp2WXIzVFlohzU
+	J+QEyEiUeQ2Ly1vB/WERgrpiZskZJqYqrbCPTi4BCwGwivpevDmFP3dPZ0MPAWmcZUgFgnxvdXWz3
+	QssPnJjWsshjkYabOC2wk5yjJM2cHM+Lt0h0g/YMg11tZ9kF8ppPTbD2qTrfHjfrdxfV09boLRMkX
+	v2gfzN266h+jef00A7Wg+kkgQxsy2SYg7CAJ2vYw+av/5U3/+9S3YqT4xDFfHogyVsCi+n9ogF89R
+	jwXsqPtBfwbPKnZY3+SKbbftI9HAZWn53RDy6lqg0d65R0A6ixDySo2KByJIimEOX1sD+aE5xwpUR
+	5xmBuhCw==;
+Received: from ip6-localhost ([::1]:63366 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1qdtxz-001HVU-Lo; Wed, 06 Sep 2023 14:57:15 +0000
-Received: from mx.inno.tech ([185.228.49.205]:25437) 
- by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1qdtxt-001HVH-5G
- for samba-technical@lists.samba.org; Wed, 06 Sep 2023 14:57:13 +0000
-Received: from ksmg2.inno.local (localhost [127.0.0.1])
- by mx.inno.tech (Postfix) with ESMTP id 14F5A40003
- for <samba-technical@lists.samba.org>; Wed,  6 Sep 2023 17:57:06 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx.inno.tech 14F5A40003
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=inno.tech; s=s1;
- t=1694012226; bh=Ca6cjnN1g2sS7i5yincX4nK7rj/aIkiF487Nw4V7oZ0=;
- h=Message-ID:Date:MIME-Version:To:From:Subject:Content-Type:From;
- b=U0uQlNJ/CEPJSJ1NtBu183ANpHhK9gPkHVDlTNuUMaz1o1Hy1GNNvqWTwrvGSTsFu
- zNuCDAJIE61nT9NK2E7k2fq4pWZrnd/JSfIHrIksJud+XADFAOs7hcoLPCAY6gtBik
- C//+uvCSDPBddNhMAeUdNYU6oJH1eDAQJAzKpTrSd/e3Ppfc1kFP9+iXTs9RMlQvVX
- JH8BFkBS+3AwIfjgE4MjDk1LTesz2OPoYD3a1XvKO2wB9cq4H5FGvGOWZMk2PGsWMm
- zkyaCFrzqEqoNnUCo/eAZOZIDKqeUyTJboVnI7MykkvJfb4A063YwQNZjyoMhYleIj
- rANavV2xJ57oQ==
-Received: from SEC-DLP-QRNT (unknown [10.0.0.117])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
- (No client certificate requested)
- by mx.inno.tech (Postfix) with ESMTPS
- for <samba-technical@lists.samba.org>; Wed,  6 Sep 2023 17:57:06 +0300 (MSK)
-X-CHECKED: 1
-X-CHECKED-RELAY-ID: 3c279d7389fa9528e53a55e18b8e1fb6328980c7
-X-Cache: 20230906_175704761_00021706
-X-MS-Exchange-Organization-AuthAs: Partner
-Received: from [172.28.100.114] (172.28.100.114) by MAIL-DC2.inno.local
- (10.12.115.2) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1118.37; Wed, 6 Sep
- 2023 17:57:04 +0300
-Message-ID: <73469bea-a59d-42fa-b74a-75058a4aa947@inno.tech>
-Date: Wed, 6 Sep 2023 17:57:03 +0300
+	id 1qeB2G-001Ymo-EE; Thu, 07 Sep 2023 09:10:48 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:43428) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1qeB20-001Ylq-JS; Thu, 07 Sep 2023 09:10:38 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=From:To:Date:Message-ID:CC;
+ bh=g+J+zZlXtg1JRlEaVkMXkia7X4Zsbks/kBbHunA7sXE=; b=yEnxUorc19yoSR8uXQQ4sY+eS0
+ tzgVSA232FOMZE05HdhLdiIocEK82HHF/8JlWG17wR0QwHkcUpK0eLbSrA976h0Q2BOpUWQj43663
+ u7QPtEVeqr4qzbSPXfaHQPMqBjoOAy147JXSESgDxDdeduvBZX2lt1HN4cDqx+ZgQnwmdEW2wwAWP
+ 33d1az2TmuEOmkHywA10ylBgfmhr+xLV7gPF4CNNrZmh2k02VIwFHXJJYyDaOBJys67Ck59VAVFcn
+ taCNrXPImBkvcs9Sd1bnFuXdc1v3f3jbM1o4XgPqVfROwgc30AGTjidgbfI+gf0TnU4+2+YzE2bgB
+ AnUehiw4CIH3srTXZBayGTqiDuSzoyYVuBoGLmYnBzDf+7Gx8ZQtcy7F6hSdQhEYhczS7S9BKnI6e
+ 8LS3wTuySrK0bTSlTqYPiOPbcRhrB3yD5wo8xaRRU/mM0ICw8xALvbQOW/1icXkGVQqHcySGGfbU2
+ B0QL4Ld9++YW8ZYJRpJPcEkD;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1qeB1z-00CIhB-2i; Thu, 07 Sep 2023 09:10:31 +0000
+Message-ID: <6b3b348b-f0a8-e3bf-633a-bec9a5110ae1@samba.org>
+Date: Thu, 7 Sep 2023 11:10:30 +0200
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: <samba-technical@lists.samba.org>
-Content-Language: en-US
-Subject: IRPC not invoked in prefork master
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [172.28.100.114]
-X-KSMG-Rule-ID: 5
-X-KSMG-Message-Action: skipped
-X-KSMG-AntiSpam-Status: not scanned, allowlist
-X-KSMG-AntiPhishing: not scanned, allowlist
-X-KSMG-LinksScanning: not scanned, allowlist
-X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
- not scanned, allowlist
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.15.0
+Content-Language: de-DE
+To: samba-announce@lists.samba.org, samba@lists.samba.org,
+ samba-technical@lists.samba.org
+Subject: [Announce] Samba 4.17.11 Available for Download
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -75,28 +56,120 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Pavel Kalugin via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Pavel Kalugin <PKalugin@inno.tech>
+From: Jule Anger via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jule Anger <janger@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi. I added IRPC function to the ldap server and noticed it gets never 
-called. Digging it I found what I believe is a bug in the messaging 
-code: when prefork master receives imessaging datagram targeted to the 
-child messaging context it dispatches it to the child tevent, but there 
-is no event loop running on that. The result is that IRPC is not called 
-and both the dgram and `tevent_immediate` are leaked (i.e. they sit in 
-the queues forever).
+Release Announcements
+---------------------
 
-The fix that is working for me is here: 
-https://gitlab.com/samba-team/samba/-/merge_requests/3257
-
-I would appreciate it if someone would take a look at this. My 
-understanding of the subject is limited and probably there may exists a 
-more correct solution, or, rather, I'm doing something wrong with IRPC.
+This is the latest stable release of the Samba 4.17 release series.
 
 
--- 
-Pavel Kalugin
-inno.tech
+Changes since 4.17.10
+---------------------
+
+o  Jeremy Allison <jra@samba.org>
+    * BUG 15419: Weird filename can cause assert to fail in
+      openat_pathref_fsp_nosymlink().
+    * BUG 15420: reply_sesssetup_and_X() can dereference uninitialized tmp
+      pointer.
+    * BUG 15430: Missing return in reply_exit_done().
+    * BUG 15432: TREE_CONNECT without SETUP causes smbd to use uninitialized
+      pointer.
+
+o  Andrew Bartlett <abartlet@samba.org>
+    * BUG 15401: Improve GetNChanges to address some (but not all "Azure AD
+      Connect") syncronisation tool looping during the initial user sync 
+phase.
+    * BUG 15407: Samba replication logs show (null) DN.
+    * BUG 9959: Windows client join fails if a second container 
+CN=System exists
+     somewhere.
+
+o  Ralph Boehme <slow@samba.org>
+    * BUG 15342: Spotlight sometimes returns no results on latest macOS.
+    * BUG 15417: Renaming results in NT_STATUS_SHARING_VIOLATION if 
+previously
+      attempted to remove the destination.
+    * BUG 15427: Spotlight results return wrong date in result list.
+    * BUG 15463: macOS mdfind returns only 50 results.
+
+o  Volker Lendecke <vl@samba.org>
+    * BUG 15346: 2-3min delays at reconnect with 
+smb2_validate_sequence_number:
+      bad message_id 2.
+
+o  Stefan Metzmacher <metze@samba.org>
+    * BUG 15346: 2-3min delays at reconnect with 
+smb2_validate_sequence_number:
+      bad message_id 2.
+    * BUG 15441: samba-tool ntacl get segfault if aio_pthread appended.
+    * BUG 15446: DCERPC_PKT_CO_CANCEL and DCERPC_PKT_ORPHANED can't be 
+parsed.
+
+o  MikeLiu <mikeliu@qnap.com>
+    * BUG 15453: File doesn't show when user doesn't have permission if
+      aio_pthread is loaded.
+
+o  Noel Power <noel.power@suse.com>
+    * BUG 15384: net ads lookup (with unspecified realm) fails
+    * BUG 15435: Regression DFS not working with widelinks = true.
+
+o  Arvid Requate <requate@univention.de>
+    * BUG 9959: Windows client join fails if a second container 
+CN=System exists
+     somewhere.
+
+o  Martin Schwenke <mschwenke@ddn.com>
+    * BUG 15451: ctdb_killtcp fails to work with --enable-pcap and libpcap ≥
+      1.9.1.
+
+o  Jones Syue <jonessyue@qnap.com>
+    * BUG 15441: samba-tool ntacl get segfault if aio_pthread appended.
+    * BUG 15449: mdssvc: Do an early talloc_free() in _mdssvc_open().
+
+
+#######################################
+Reporting bugs & Development Discussion
+#######################################
+
+Please discuss this release on the samba-technical mailing list or by
+joining the #samba-technical:matrix.org matrix room, or
+#samba-technical IRC channel on irc.libera.chat.
+
+If you do report problems then please try to send high quality
+feedback. If you don't provide vital information to help us track down
+the problem then you will probably be ignored.  All bug reports should
+be filed under the Samba 4.1 and newer product in the project's Bugzilla
+database (https://bugzilla.samba.org/).
+
+
+======================================================================
+== Our Code, Our Bugs, Our Responsibility.
+== The Samba Team
+======================================================================
+
+
+
+================
+Download Details
+================
+
+The uncompressed tarballs and patch files have been signed
+using GnuPG (ID AA99442FB680B620).  The source code can be downloaded
+from:
+
+         https://download.samba.org/pub/samba/stable/
+
+The release notes are available online at:
+
+         https://www.samba.org/samba/history/samba-4.17.11.html
+
+Our Code, Our Bugs, Our Responsibility.
+(https://bugzilla.samba.org/)
+
+                         --Enjoy
+                         The Samba Team
 
