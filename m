@@ -2,109 +2,51 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 82B3779716B
-	for <lists+samba-technical@lfdr.de>; Thu,  7 Sep 2023 12:06:51 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 797677972D4
+	for <lists+samba-technical@lfdr.de>; Thu,  7 Sep 2023 15:26:44 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
-	bh=2LWDe6TUEJCoU50abvGkdTeQGo0TjX4I+Gx6S+CqARY=; b=PILVDvz07J/DueRclSwTLWHpuL
-	JnC9kn8zDFhJcBwtadSptR2/zv2dST7sM17zW56lRin3XwxkbpLnx+Sho7ArmH0YfDbHSWweKPyxI
-	WWa7GtPle7cKBwseQ77pWBG/zjvktoz1F11aonqbeAgtziUgmMFDjU6ECsA+86I4xj9otJaC6UB6s
-	gE76FvtAoBhG0yOcof+SjVAq4PKmXoxGpGPr0Itt8pgyTU4J5EJSh0/R2xqLKpo//aflWAH41e5Ro
-	EoU/nho19T0Z1RXMhkWHX3yHkBzruDxc95rCKr3S3E02sdIsBc70FOFjTFsgyoJndbkRLCF3ylIHq
-	gnMT2a5g==;
-Received: from ip6-localhost ([::1]:37390 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=ON719R8nPk5rzmjpGdfsuHAGkoaRi6GmoBtHyPzJYL8=; b=UhqDZGxaZ+Hm4EtH3XFZMg2ZXd
+	rESK6XneF0BLJ1UKAlCz3C1vjbsBvPk/UiLaMpqDMY5X65USki/F2UkUDKH2p2ds2hIjJbWp0yqIJ
+	7U5AfD5SKeWzGUI1afX2t3E8VJls3E0DmMrKZeU0xXHpDhmGP85QSkstq5G2+TBlSvyRQacsoOpT0
+	aYChnXYSFlLLyJV8XmcDbcfpoQGi98ts2IwHZIiEK4RLoDfy7Asmp/DDbFxgMkcd+AYDSV35hOus0
+	oHONHlMzfMXv1oFBnVumaqKCCugRmoRrxxiZUn7In9vws0vL1TmInp1P8xZIXXzKdpMu+G7rYE0xz
+	u8D0WCYg==;
+Received: from ip6-localhost ([::1]:29410 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1qeBu6-001bg7-4g; Thu, 07 Sep 2023 10:06:26 +0000
-Received: from mail-am0eur02olkn2065.outbound.protection.outlook.com
- ([40.92.49.65]:63712 helo=EUR02-AM0-obe.outbound.protection.outlook.com) 
- by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1qeBtz-001bfy-Te
- for samba-technical@lists.samba.org; Thu, 07 Sep 2023 10:06:24 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=NOHmeZPs1AO2J/bDmYtqKujZzCLzzUyz/wmawgZ6vev2C98lE9AI35mE/n5/plM+vZuSfDG/hrXPpCm7j4UxTj6frK+33RuUH0xEZcTq60UjICNVfMazKBlXMR28EG45HbC+BZFVv7z3PfEOSyuB58dVp5OD+QVJhKKVfHrf7qdhQ1hmFg3Jxi/1azuYTqiYnVyjYPEK07TFk/vJEnotQ1EoX3S46M9F3k5dRmNiD9icYkEM0995mtujbUfEI77GQjlXKQmXDJ74uqZ5lF5ceo7QKBft0FrS8SCc52tzca6bcDLQPfwAlnNlErNla+jggH666fSUD5GlK/YTnjjUwQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=u+gwzVvvsdTecsIEia3De0MH0C93uWPzZO6+H5Mnhhc=;
- b=AYT7NONhbVzr8FiGUnbR3FEN0LKoRBB+bgvlSMiscFIBFYtmaWQEMG1hM2Ma+7wssW+JWGkeDacNka+2/zc5V87L41/UrjF13HE0Iy7Y2InRAGOYz9Fnxyo/lfdH2znl422gXwlag8qWFQixhgR+8J15Ex4ix94i/RfJAnVkSk5PKstkBC6XD3CCUJVxTxudFxhCc2O+8qxznU2aY67Iz0SPm9AwvTx6JZZKAw4ZQ0xTlAQiQpHrm9d88x8UMFQjZz48zgay/9h6sJr3yPEg4WEBdrvS2AhcnTeU5eKhqUSbrfd2PZDlMHig+LUwmGMC3SeiFNHYYZQE9QVEvpoC/w==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
- dkim=none; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=outlook.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=u+gwzVvvsdTecsIEia3De0MH0C93uWPzZO6+H5Mnhhc=;
- b=l9gc4tv7zPq4dukc0ZQs2GKKQWODiZUQPwI8yak/bhqpoxZUn0rOqkZhs0azHjx0F7DLZ1BJRGuDPSW1HRjzLQ0CUvOH+yHqiBNv3xtWpo40hDP4fDScFgxVzX8pipR4/I7+j1T5cjvaXu/aTG16IcrVpkt9PIgrbus01QspD3qAMMfCDF6rp/f2oj/0gAMAlEx5sBWDUHEfITjNs7yPYCGfCr8RXTNB/LRcqLFDdUaeBbkyVAcQRLswB6sPVPeD+/Rpqd+VB70z/Jattr9geI5u7i4Ch63/TSZUsRPMUEZwDWUcBmRUb2XDGIUqVSjivITORpFn9zo7J9byzuEsiQ==
-Received: from DB9P192MB1684.EURP192.PROD.OUTLOOK.COM (2603:10a6:10:390::17)
- by DB8P192MB0584.EURP192.PROD.OUTLOOK.COM (2603:10a6:10:169::23) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6745.36; Thu, 7 Sep
- 2023 10:06:09 +0000
-Received: from DB9P192MB1684.EURP192.PROD.OUTLOOK.COM
- ([fe80::53a6:f162:4c99:c88a]) by DB9P192MB1684.EURP192.PROD.OUTLOOK.COM
- ([fe80::53a6:f162:4c99:c88a%7]) with mapi id 15.20.6745.034; Thu, 7 Sep 2023
- 10:06:09 +0000
-To: "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>
-Subject: The current progress of transparent failover features
-Thread-Topic: The current progress of transparent failover features
-Thread-Index: AQHZ4W+XWhjY+Qcan0KBcBj6HWaoGg==
-Date: Thu, 7 Sep 2023 10:06:08 +0000
-Message-ID: <DB9P192MB1684885556BC1D4D7C063923FEEEA@DB9P192MB1684.EURP192.PROD.OUTLOOK.COM>
-Accept-Language: zh-CN, en-US
-Content-Language: zh-CN
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-exchange-messagesentrepresentingtype: 1
-x-tmn: [BXgtgNQjuj4mQFe8dDZ4itRWrXaBDugoLsDXx/SSu6A=]
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: DB9P192MB1684:EE_|DB8P192MB0584:EE_
-x-ms-office365-filtering-correlation-id: 73bf869e-fe2b-4aa8-24b8-08dbaf8a0eb3
-x-microsoft-antispam-message-info: 1J2wqMGX+T+CTNN7aT3wxHn9mFJtRuieD7muAnerDepD77Ktv4e9hst0xPxog4LROYpMyj/oLUF8WcDHIbjOMa/MDdBcdSa1SA++H+xzKZzrzL+wAVDf6d8rBJ+5RQy+xjJliwToE1v9NkWUAJpGfbNvfxwiMR+3fs9DCpVMKjEMqyQ13aIzWsYN8U/3xtqQx14rn5Kt58R1wVIjmgYpHRnhoASfQSWO2Zeup6IymuzP6n4xrtqF4O3ad7r2aTo3K/hNQrP5FVZHsQPquHwA1f/d2PBp93se6TVf/MPJlaiYDOVZXDULTdU5eUe/ifcZ3Rgr+uwVTwy+4eLAwl8VElXe9plvWz78sjS2KtOG/f/WVTGpQf3mY8KGQGJskQupJO7SHLtOMfMOfuKadjsGbjfBfRIzPsQGO9Num4Gw3UBZVuRhURZLLw3wBeREj27hw4rNXIj2VkCy5/FU63MH8axpzRQspdVH8JlczYDdSwnHs6uBkSRrI5875lOS+mfLXsbznLoXVC35b0W1iXZyUxMFOlbKwM+eWKziXWeD+4csVhWCtyNFYuAO1R9Ze9IDY2Xj8NlzReqNGkPlRJmBmprYtIIvLRpvUvlvp1v4hRQ=
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?gb2312?B?dGQ3QTcvNTA3UWkxTmdIV0dWZXBWakUwUHZPNW1wMHREcmxJL1BiVUJST2JE?=
- =?gb2312?B?S21ObVBxNVZhQng0T1FEM0x6NHcxdUtHb1lyUlJaZEpwRkYvUU1PaVZOZjhW?=
- =?gb2312?B?L1IrV3hmR05lMmtBcmJRU0lMTDdMZ3N4d2hYakNtcWplT1AxdFZJd2YxdlZj?=
- =?gb2312?B?YTFiUlhXT0ZyYmlFenJGQVNwOTI0c2pBa1hzeHY4NlR6bEk5K3d3RVl5YVJC?=
- =?gb2312?B?UE1ENHZ1MW1YZXhuNzBsS0N0WWcvcGZXREZseFhPMzJjNnJVb1hXL2VNclMz?=
- =?gb2312?B?MUZ5T1ZZVTlpNkV0RjZMWU11MzRmSEltdjNlUWZ6K0VhUW1zMFA2cE93aDVV?=
- =?gb2312?B?WWs2dWtSV3RtSzR4NXBlc2wyTnpkWUNQK0c0MTV2dWw1ZThIZnYwUmVaZjU5?=
- =?gb2312?B?cERSQ1MrM1ZKdzBsY2lnZW5XQWpLSnM3QWpLVEJKcXUzUkkraXdXS1FxRW5Z?=
- =?gb2312?B?N3UrcDR0NVpOY0xsRFNyem04R3QwZysvR1NiSVg5Y2lTVlFkdEVYWlBjSHpC?=
- =?gb2312?B?UkE3bXk1NHFSTlpMKzJxbktDV0o4dm9xQmx3ZW5EQTBQQU5QbHVpQnI0R1Nu?=
- =?gb2312?B?eGtPZ0NoZ1h5TDFjcTdzOU5rVEtIRjdKRkVaKzd4aU5hdkoybjlWVGZ0SkU2?=
- =?gb2312?B?bEFiSnRMMjAxV0tucVRXYlVUbCtSdmtocUhQR2ZLVVorclJNS0E3dnVXSWNZ?=
- =?gb2312?B?cm5yM0syRnE1YnFDU05oUUdBZzduRzRjaWFUcU94bFV0TkViRWdMT0M3Y0N3?=
- =?gb2312?B?WnFsZ1VVRlhaYWN3eUE0SnhCV2VhYUU1MmRjczV1OUp4dE5venFqb2Q1RE45?=
- =?gb2312?B?a3FTT3JtQWMyWGFpeThoVHloMWM0aElIMDlqYWwxUEFDWFR1V1pHVjFHWFMr?=
- =?gb2312?B?WDZsZGJMWldaSUcvOVFCTVJuclppcUtzTUdHbjlzRTREQ2VlZjk5ZXZwNjJC?=
- =?gb2312?B?SmpzM0lTS2JHSkZBV2FQSTRxWGFNTEpmMVhWbTRneXIzR2hrUXB2RGkxSUxt?=
- =?gb2312?B?QVFWbVV1aFBKS2FXOEFvRlovLzdVcUdwU3NZL1BGVk14YlNzT0R6a1RTTTVp?=
- =?gb2312?B?TkV4aGNrNUNPRnVYY2g0NUYzUHBFYnhtMlhQSFk0ampXSm9iMDFtUzUvUEll?=
- =?gb2312?B?aW51eDlXam1EZkNPMnovNERjbXVuWGhub2hSbHQ0N091Mzc5dDNxMWJtSTZz?=
- =?gb2312?B?Z1JtakluLzVXSU56ZEpVL1dlM3dVbXc0VjlBNEt4WWxCZmF6d25KUFRIUVlJ?=
- =?gb2312?B?eDhXa0h3VUp0SkZ6aUwvci9ER1VFaURrWTBPQ3UyZFlkTUNwN1RBMGF6aG9p?=
- =?gb2312?B?VzdQY2l2RlQrZWVFS1UrWlduMTFWQkhKUUNreXg2UWhhSnk3RjJxNFpGdjY0?=
- =?gb2312?B?MjdoNGtpTFJmM2cxWnptTVd4ZGhqWCtEOTMwQlUvNlQ5YVl2cTQrQXptMWlh?=
- =?gb2312?B?bnlZNUswOWRDdVJObTJsZ29QMXJnRkVPYkZUbUk2V2hwUnJjd3FTU29kYVRW?=
- =?gb2312?B?NXUvanVWTEc0QUhFQ2FJcnVYMjZ6bDUyVUZoL3ZyNzU3UnM2dUYvY0NRRFBT?=
- =?gb2312?B?N2JLcW1jNVN0aUl4eXB4QXN4MVpaTXI1ZGkvamEvWUlmKzByb21zYXIrV3BW?=
- =?gb2312?B?NlVYYTNhY0QyNm9XSkpJT2gxdmEwUVdzbGZjM05MUlRuWVl2OUZQRWRydUpL?=
- =?gb2312?Q?fDMmOGOfQza7uZz06AgQ?=
+	id 1qeF1E-001eFC-TY; Thu, 07 Sep 2023 13:26:00 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:31398) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1qeF17-001eEh-Kw
+ for samba-technical@lists.samba.org; Thu, 07 Sep 2023 13:25:58 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=From:To:Date:Message-ID:CC;
+ bh=ON719R8nPk5rzmjpGdfsuHAGkoaRi6GmoBtHyPzJYL8=; b=MNyZw15NWedWToK7W678PAIpYg
+ 7BeIN0CSYL/etoTah4JYtuVoNVQjba1d4gFKw2d6/M/faMmBAnC9oPcQCcEPfVnUp6I4NhATtqscO
+ n+pkkV/lZ1cTBv3bfpHmIDqt4vzHSfvaAi2dt9UE9bcLFFPr+apueJ6ZCptrmB7vz74DFsW3a7XLZ
+ +//Rc147GBt5Lf5udQdm+saBMqIfi/jTo5Ug8rFkW32ZoEG1PiFqo347lehrGy6soL/z+YM2Oy9DX
+ 9215BaWIlYc43v5NizAhistSCikCVq0A1SNMsdYybOydn1v2U71jd/kQOcdqqnMBYGPa5br98UMqU
+ Aq4Ki8Ciaf69gQN0PLCX2WPLlDv7S+tXD8gmnMHeQ9mJ2jBbxpO9M4BaN7HZ2ke/ZzKT41lTTNTVB
+ 6x0cYjEIQjDYiR7Rhgas0N9UBiqJ2JXIHuiD56renQEH7uIuNuHVFAaLGhKvwLh6r0oMA8tXYdoES
+ 2KQR0Q4+lfFXX4s1IItcFKjM;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1qeF16-00CKxb-2K; Thu, 07 Sep 2023 13:25:52 +0000
+Message-ID: <3beafeac-ae25-d696-d0ef-4cec677c4e6d@samba.org>
+Date: Thu, 7 Sep 2023 15:25:52 +0200
 MIME-Version: 1.0
-X-OriginatorOrg: outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: DB9P192MB1684.EURP192.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
-X-MS-Exchange-CrossTenant-Network-Message-Id: 73bf869e-fe2b-4aa8-24b8-08dbaf8a0eb3
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
-X-MS-Exchange-CrossTenant-rms-persistedconsumerorg: 00000000-0000-0000-0000-000000000000
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB8P192MB0584
-X-Warn: EHLO/HELO not verified: Remote host 40.92.49.65
- (mail-am0eur02olkn2065.outbound.protection.outlook.com) incorrectly presented
- itself as EUR02-AM0-obe.outbound.protection.outlook.com
-Content-Type: text/plain; charset="gb2312"
-Content-Transfer-Encoding: base64
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.13.0
+Subject: Re: The current progress of transparent failover features
+Content-Language: en-US, de-DE
+To: =?UTF-8?B?6ZmIIOaWuei/mw==?= <sharingfun520@outlook.com>,
+ "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>
+References: <DB9P192MB1684885556BC1D4D7C063923FEEEA@DB9P192MB1684.EURP192.PROD.OUTLOOK.COM>
+In-Reply-To: <DB9P192MB1684885556BC1D4D7C063923FEEEA@DB9P192MB1684.EURP192.PROD.OUTLOOK.COM>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------g9c2debEM1yRyFToXaM0gul2"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -118,18 +60,71 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: =?utf-8?b?6ZmIIOaWuei/myB2aWEgc2FtYmEtdGVjaG5pY2Fs?=
- <samba-technical@lists.samba.org>
-Reply-To: =?gb2312?B?s8Igt729+A==?= <sharingfun520@outlook.com>
+From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Ralph Boehme <slow@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-SSB3YW50IHRvIGtub3cgdGhlIGN1cnJlbnQgZGV2ZWxvcG1lbnQgcHJvZ3Jlc3Mgb2YgdHJhbnNw
-YXJlbnQgZmFpbG92ZXIgZmVhdHVyZXMuIFdoZXJlIGNhbiBJIGdldCByZWxhdGVkIHJlc291cmNl
-cz8NCldobyBpcyBkZXZlbG9waW5nIGl0PyBPciBoYXMgZGV2ZWxvcG1lbnQgc3RvcHBlZD9SYWxw
-aCBCb2VobWUgc2xvd0BzYW1iYS5vcmc8bWFpbHRvOnNsb3dAc2FtYmEub3JnPiAncyBnaXQgcmVj
-b3JkIG9mIHRyYW5zcGFyZW50IGZhaWxvdmVyIGZlYXR1cmVzIG9ubHkgZ29lcyBiYWNrIHRvIDIw
-MTkuDQpJIHdhbnQgdG8gc3R1ZHlpbmcgdGhlIHRyYW5zcGFyZW50IGZhaWxvdmVyIGZlYXR1cmUs
-IHdoaWNoIGFjaGlldmVkIGluIHRoZSBXaW5kb3dzLCBidXQgbm90IG9uIExpbnV4Lg0KDQq00yBX
-aW5kb3dzILDm08q8/jxodHRwczovL2dvLm1pY3Jvc29mdC5jb20vZndsaW5rLz9MaW5rSWQ9NTUw
-OTg2Preiy80NCg0K
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------g9c2debEM1yRyFToXaM0gul2
+Content-Type: multipart/mixed; boundary="------------Lx6Q1JxEWO6ytiod1TZYpva7";
+ protected-headers="v1"
+From: Ralph Boehme <slow@samba.org>
+To: =?UTF-8?B?6ZmIIOaWuei/mw==?= <sharingfun520@outlook.com>,
+ "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>
+Message-ID: <3beafeac-ae25-d696-d0ef-4cec677c4e6d@samba.org>
+Subject: Re: The current progress of transparent failover features
+References: <DB9P192MB1684885556BC1D4D7C063923FEEEA@DB9P192MB1684.EURP192.PROD.OUTLOOK.COM>
+In-Reply-To: <DB9P192MB1684885556BC1D4D7C063923FEEEA@DB9P192MB1684.EURP192.PROD.OUTLOOK.COM>
+
+--------------Lx6Q1JxEWO6ytiod1TZYpva7
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
+
+T24gOS83LzIzIDEyOjA2LCDpmYgg5pa56L+bIHZpYSBzYW1iYS10ZWNobmljYWwgd3JvdGU6
+DQo+IEkgd2FudCB0byBrbm93IHRoZSBjdXJyZW50IGRldmVsb3BtZW50IHByb2dyZXNzIG9m
+IHRyYW5zcGFyZW50DQo+IGZhaWxvdmVyIGZlYXR1cmVzLiBXaGVyZSBjYW4gSSBnZXQgcmVs
+YXRlZCByZXNvdXJjZXM/DQoNCmh0dHBzOi8vZ2l0LnNhbWJhLm9yZy8/cD1zbG93L3NhbWJh
+LmdpdDthPXNob3J0bG9nO2g9cmVmcy9oZWFkcy9waC10ZXN0cw0KDQpJIHdhcyB3b3JraW5n
+IG9uIHRoaXMgaW4gbXkgc3BhcmUgdGltZS4gSXQgd2FzIGEgd29ya2luZyBwcm90b3R5cGUg
+YmFjayANCmluIDIwMTksIGEgcmViYXNlIG9uIHRvcCBvZiBjdXJyZW50IG1hc3RlciB3aWxs
+IGJlIGEgc2VyaW91cyBlZmZvcnQgaW4gDQppdHMgb3duIHJpZ2h0LiBBbmQgc3Vic2VxdWVu
+dGx5IHRoZXJlJ3Mgc3RpbGwgYSAqbG90KiB0byBkbyB0byBtYWtlIHRoaXMgDQpwcm9kdWN0
+aW9uIHJlYWR5Lg0KDQpDaGVlcnMhDQotc2xvdw0KDQotLQ0KTWVldCB1cyBhdCBTdG9yYWdl
+IERldmVsb3BlciBDb25mZXJlbmNlIChTREMpDQpPbiAxOHRoIHRvIDIxc3QgU2VwdGVtYmVy
+IDIwMjMgaW4gRnJlbW9udCwgQ0ENCk1vcmUgaW5mb3JtYXRpb24gYXQgaHR0cHM6Ly9zYW1i
+YS5wbHVzL2V2ZW50cw0KDQpNZWV0IHVzIGF0IHRoZSBjb25mZXJlbmNlIHN0b3JhZ2UyZGF5
+IDIwMjMhDQoyNnRoICYgMjd0aCBTZXB0ZW1iZXIsIGluIEZyYW5rZnVydCBhbSBNYWluDQpF
+dmVudCBvbiBTdG9yYWdlIE5ldHdvcmtzICYgRGF0YSBNYW5hZ2VtZW50DQpGaW5kIG1vcmUg
+aW5mbyBhdCBodHRwczovL3NhbWJhLnBsdXMvZXZlbnRzDQoNClJhbHBoIEJvZWhtZSwgU2Ft
+YmEgVGVhbSAgICAgICAgICAgICAgICAgICAgICBodHRwczovL3NhbWJhLm9yZy8NClNlck5l
+dCBTYW1iYSBUZWFtIExlYWQgICAgICAgICAgICAgICAgICAgICBodHRwczovL3Nlcm5ldC5k
+ZS9lbi8NClNBTUJBKyBTYW1iYSBwYWNrYWdlcyAgICAgICAgICAgICAgICAgICAgICAgIGh0
+dHBzOi8vc2FtYmEucGx1cy8NClNBTUJBKyBXZWJpbmFyICAgICAgICAgICAgICAgICBodHRw
+czovL3NhbWJhLnBsdXMvc2FtYmEtd2ViaW5hcnMNCg0K
+
+--------------Lx6Q1JxEWO6ytiod1TZYpva7--
+
+--------------g9c2debEM1yRyFToXaM0gul2
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature"
+
+-----BEGIN PGP SIGNATURE-----
+
+wsF5BAABCAAjFiEE+uLGCIokJSBRxVnkqh6bcSY5nkYFAmT5z2AFAwAAAAAACgkQqh6bcSY5nkY5
+lQ//V4hbYkHNIBWuGpsnp04YszWKlHhl+ljIPBpUe7qdZmswtY8SGY0hHe3isGIH/Q8gdo2qSgVU
+FtbhR4Q0mUWln/bY7yMStLvSv3hw9Vd8A0J7FXi+0hWJfSNCnoTi6gmbKwPIU3yTufDyWZhwZtn+
+vKQ0NhomySBWVPnh8nRJzVAu4Dt4MkQs9pOJ6jwBrUwrD4xDqCpVdYtcFD3jcNeQH+9P+uzI7mw2
+AJ6hS0iXzq7FwhsW6fBYMakFLjg5eIPBYDJMvP8Co6JyiWr3HPVQtmYUDFCGYdH8muZc5c/eUOs8
+a40mIAh/fR8jl4kv9r4ConQ+7/N8LM+57TtER7MQLqBrSlBOq/SAmp5F8mSzOpCTw/jW31UgU0y9
+D4Ml14hXNvFGkfiMqSnfqR+GcpqPtbJJoNZ0IcIrKCF2uW0eU5kTzvMuKiMyogeXFMJZ7bkaxmTm
+XNY++9s82mzLThbkP02kkvt5EctK53NycZu5XkG7TJXybj4Xs73bzeRAYoxrwPyy8oi+UXvUzycY
+2iH6vk4STHgKMapZrKJFGboSXmx8sYgWUcwgAgdZyXDYLvEhoarYUw7AT1nNqPOgD0bYLar25q7y
+LVG0Td90MDdZw6CBR8A52ty5V05oD3UXpw0LPAtQdmj2QL1ebqtaZ5e3Q0pI7jiFU52PexItcaJ+
+OP8=
+=Ywck
+-----END PGP SIGNATURE-----
+
+--------------g9c2debEM1yRyFToXaM0gul2--
+
