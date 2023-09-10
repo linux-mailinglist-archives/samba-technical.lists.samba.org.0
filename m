@@ -2,48 +2,51 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4B7A8799FC3
-	for <lists+samba-technical@lfdr.de>; Sun, 10 Sep 2023 22:33:20 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 39F4E799FCA
+	for <lists+samba-technical@lfdr.de>; Sun, 10 Sep 2023 22:35:31 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=BolBRMbxPOHv+lLJzgXnXI+186OSikasRNrvIVPOuSs=; b=4UQNDSikvMlVakLFwg8CkoVd8C
-	61KCP0F+t0YjMcL2wfyCK6S8LZSyAlKN8M2bmw5FAN7giuIr+7dUG5qGd26KPd9BlxU+Vs3wNxoBy
-	yDNbWMoKGiCcME+h/ajpzsE3YhsMWhPK8nkeEhOkduJiRly3vcGNnsJmY3mNvUsuKvuzMu5eWjM/Z
-	EjQm1qimWTtJpNM92rjtCqFVdX/fmX7JspjZzrMJGXLKBbA3erN5RUifn9iXlWF1e/BR8GUGNlT4d
-	8PyYUK/RxEGN24gAvxJSUwJwyKGNYT0M7cfYc8GRBHQasG7WLQG/cN3kt4YD1br91eC6Wkyy+ElZ1
-	MeoWAwsw==;
-Received: from ip6-localhost ([::1]:38408 helo=hr1.samba.org) 
+	bh=EFFpBUVhHLkxukUlET+1h23TeKi4ecwDi61rCBDeJbY=; b=I1UY14+8rNG6s8f3JpF/8nYeHd
+	5c/9JspCv64GUd12PjoPvODdds0o97Frr1iG9p5wOovre5FxPa6mmmtgzkZY4Nj7QMGjsEeRiUPa6
+	u7yt/IcsTruWYwsUv+pvMMPAt4mip9S4yTGTMhqSbVqimOlWkwaOOwZFUp8yKW+yL/HBNJcxSNBia
+	7p3Ycf3YIE8FkY+R8lJVCwD8db1PNf/CiMLQ+K/3W/543i79yLVmRaUASwiXVCfU21E8tgOOiadco
+	M1yHZ2WNgKBCP68zBHxvly/9o5+gTB1btI1PHQ79XfTJUGedHcLcNPxw9REQXAlGICzz7lffnT5FR
+	w5KOm6PQ==;
+Received: from ip6-localhost ([::1]:59532 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1qfR70-002k15-Qh; Sun, 10 Sep 2023 20:32:55 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:40778) 
+	id 1qfR9S-002kIH-Ha; Sun, 10 Sep 2023 20:35:26 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:52602) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1qfR6t-002k0w-Mg
- for samba-technical@lists.samba.org; Sun, 10 Sep 2023 20:32:52 +0000
+ (Exim) id 1qfR9J-002kI8-Se
+ for samba-technical@lists.samba.org; Sun, 10 Sep 2023 20:35:22 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Date:To:From:Message-ID:CC;
- bh=BolBRMbxPOHv+lLJzgXnXI+186OSikasRNrvIVPOuSs=; b=jCfLo5RnBZUyI7+rDlALN/U+19
- RxoruKbVCEdiWQxgPPsiY8lrAWf9IwRR4DXouaifadaibZWLS9+myzPO4u787DcLFjY2Lp4l+yRoE
- 6CTNHlGH48PoM0l4aVslUHszt9rMzAPKb0HYvkIlVhxqgfGTZyI0Hp/YyoeiQxadXknio/tsYUBzr
- Q7EzPhk/MQPsvl91USmSyjAaNGkk48HGjQx39UXfrArm2icSBvbWhk4G9grQO0jAA0xcEtYLUxpUu
- YLnxNKRRKriAdwO/Iy/eWZoCPR0sX7O5Fk4uwvapTPA8hQcFtCaQv9w9toXIsLaxyu/wVzmBQgvxs
- XW/Bn3Z63CNd7k3JO54WQlW2QOgzp20WnD8u7h+HYAxpk06VItasZBqfiLCa9RSxpC6aI7QCiUmc5
- P4U+AbDOGNNuh5N3YeGGYwglVyhrveHibvJlTAYxQkeLhzmEPBZiZiVNLxJu3AUYX2iRDKAyhw77Z
- btteifYHy3NT+rfejxjfzPrm;
+ bh=/Jt5IF9eGeTcnEdxe4DvqzAUl6v7DiU0IzX19NSEYwo=; b=XHgk/vDNijNdXrCsV/UOyAu3zU
+ KfPq+01jpUyJzjjL05V/F4TUvxeLzBA5tDaX0m67o1qhCtnzs220iyjehKpQxM+5pyAWUEckjIyro
+ awMH/sD5py44DYjaD2sZSGUGev7mMK+n+rmtCgTYLIAyhgzy/q6zIw9Cpyn7zX4bVzahra4+PbGOK
+ 3i4IaUAeEQtUVnHoDRBfYFh0/BEu1EYECtknANmM1d2SHFmwOsn0G3VZZMmNsfTN2nndZEC1jJygU
+ +Oeo2Vf2+iWRGYgO7kZzeezm0drGcWvkzr+qMY5NXOcWJIqu+LmCShHCHVM3njmtIhLqvU+gvjJ3q
+ prl9/30FatiXV0xmCf0pDDq1r/A5ZGGlWRtO5woXGmU5VPC7txZc7yJGvHZN5XqvFkFC9gtGcyqX7
+ dtYEXkV4Tg8Y8+IJVmfi9LKEaiOHtlSJAG1mdh0IsuHwvjiHzu2+YItq1fSyc8XdYoh8rdCeJPC9V
+ UUaPPGzSjoICPaGsPtQ/xv2C;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1qfR6r-00Co1z-2l; Sun, 10 Sep 2023 20:32:46 +0000
-Message-ID: <36eefba00b37b81c3feed836295ab5f095597f32.camel@samba.org>
-Subject: Re: why does samba build system versions all public-lib symbols?
+ (Exim) id 1qfR9G-00Co58-1R; Sun, 10 Sep 2023 20:35:15 +0000
+Message-ID: <e41305c4a67c1e85071174511b682230a5b19675.camel@samba.org>
+Subject: Re: two kerberos impls are used by samba now
 To: Michael Tokarev <mjt@tls.msk.ru>, samba-technical
  <samba-technical@lists.samba.org>
-Date: Mon, 11 Sep 2023 08:32:41 +1200
-In-Reply-To: <57ba45df-732e-2449-1b83-c198e7c0a81d@tls.msk.ru>
-References: <57ba45df-732e-2449-1b83-c198e7c0a81d@tls.msk.ru>
-Content-Type: text/plain; charset="UTF-8"
+Date: Mon, 11 Sep 2023 08:35:11 +1200
+In-Reply-To: <834e6dc0-1efb-958b-5a64-d27fc62e6e28@tls.msk.ru>
+References: <41985a01-8374-8f1a-5762-ededced82831@tls.msk.ru>
+ <fc386fdb62da5e1ff9f42b3a0d346a2dcdd1756d.camel@samba.org>
+ <834e6dc0-1efb-958b-5a64-d27fc62e6e28@tls.msk.ru>
 User-Agent: Evolution 3.36.5-0ubuntu1 
 MIME-Version: 1.0
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
+X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -62,149 +65,44 @@ Reply-To: Andrew Bartlett <abartlet@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Sat, 2023-09-09 at 13:57 +0300, Michael Tokarev via samba-technical
-wrote:
-> Hi!
+On Sun, 2023-09-10 at 23:12 +0300, Michael Tokarev wrote:
+> 10.09.2023 22:48, Andrew Bartlett wrpte:
+> > On Fri, 2023-09-08 at 22:04 +0300, Michael Tokarev via samba-
+> > technical wrote:
+> > > FWIW.
+> > > Just noticed that all samba executables on debian (built
+> > > withinternal heimdal) are linked with *two* sets of kerberos
+> > > libs.
+> > > This is due to libtirpc, which is a replacement for the formerin-
+> > > glibc RPC code, which uses libgssapi-krb5.
+> > > This should not be specific to debian but rather specific
+> > > toglibc.
+> > > Wonder how common symbols from two krb5 don't clash...
+> > 
+> > This is related to your other post, due to the symbol versions, as
+> > I understand it :-)
 > 
-> I grumbled on this list before about ABI symbol versioning in samba
-> public libs
-> already.  Here comes a question, finally: why?
+> Unfortunately it is not.  Only symbols from public libraries
+> withstable ABI are versioned in samba.  Symbols in private
+> libraries,including internal copy of heimdal, are not
+> versioned.  This iswhy we had named crashing due to some dns function
+> name clash.
 
-Three reasons, as I understand it.
+I thought we were versioning them with the Samba version?  We should
+be.
+> And two krb5 implementations are using quite a lot of common
+> symbols.It looks like no one come across a good crash yet because
+> tirpc israrely used with nfs + kerberos together with samba.  I guess
+> oncesomeone will try to use it with krb5+nfs, it will crash left
+> andright.
 
-Firstly, we were told by good and knowledgeable people from the
-distribution community that it was the "right thing to do".  Samba
-never used to provide public libraries, other that libsmbclient, and we
-were trying to grow up as a project and do things right. 
-
-There was a push at the time for the 'subprojects' to grow their own
-wings and move out of the monorepo.  We have a bit of this with the
-wrapper projects that Andreas maintains, but these are less impactful
-on a distribution as they are only needed for testing. 
-
-Secondly, to in conjunction with -rpath, to allow co-installation of
-Samba on a system that may have an existing Samba, to ensure we linked
-to the correct talloc, tevent etc.  We have had various issues with
-cross-linked Samba over the years, and some of the behaviour is hard-
-won.
-
-Thirdly, at the time, the public libraries were thought to be
-monotonically increasing in master, with very few changes in older
-versions and certainly none that would change symbols. 
-
-LDB
----
-
-LDB is not suitable to be a public library on any of these measures.
-
-It is used rarely outside Samba, it is developed and maintained as part
-of Samba and backported as part of Samba.  Security releases regularly
-require adding to the ABI, and development would be aided greatly if we
-could break it more often. 
-
-It should be released from the current release series, with
-monotonically increasing versions and no backports for use by sssd, but
-Samba should never consume this, and Samba backports should use the
-internal ldb with private symbols. 
-
-I would very, very gladly review and champion an effort to try again. 
-
-This might avoid the push-back we previously got (I wanted to remove
-the ldb releases and independent build system entirely).
-
-> Most often this becomes problematic when back-porting some symbol
-> changes
-> (usually newly added symbols) from current "mainline" branch to
-> previous
-> branches, sometimes multiple.
-> 
-> For example, ldb 2.8.0 introduced ldb_msg_add_distinguished_name()
-> and a
-> few others, while trying to fix an issue.  Current samba (4.19) uses
-> this
-> symbol.  When built against current ldb 2.8.0, this symbol will be
-> tied
-> to version 2.8.0.  Okay, so far so good.
-> 
-> This same symbol has been back-ported to previous ldb release,
-> introduced
-> in 2.7.2 version, and is used by samba 4.18.1.  So when samba 4.18.1+
-> is
-> built against ldb-2.7.2 which comes with it, it will be linked to
-> ldb_msg_add_distinguished_name@LDB_2.7.2, instead of
-> ldb_msg_add_distinguished_name@LDB_2.8.0, despite the fact this is
-> exactly
-> the same function.
-> 
-> So when I have, say, samba 4.18.4 installed, I can not upgrade ldb to
-> version 2.8.0, since this will break samba due to missing symbol of
-> version 2.7.2.
-> 
-> But it is more: the same symbol ldb_msg_add_distinguished_name has
-> been
-> back-ported to samba 4.17 too, which comes with ldb-2.6.2.  And
-> there,
-> it is named ldb_msg_add_distinguished_name@LDB_2.6.2 instead.  Which
-> is
-> 3rd name of the SAME symbol.  And I can't update libldb from 2.6.2 to
-> neither 2.7.2 nor 2.8.0, since this will obviously break samba.
-> 
-> Right now I have ldb-2.8.0 in debian, with 
-> ldb_msg_add_distinguished_name@LDB_2.8.0,
-> and samba 4.19.0 linked to it.  I can't re-build ldb with added sigs
-> file
-> from version 2.7.2 or 2.6.2 without recompiling all deps.  So I'm,
-> once
-> again, in a catch-22 situation, to decide which part to break.
-> 
-> Even if these symbols are only used by samba itself, - based on which
-> I
-> can have strong versioned (=binary:Version) dependency between samba
-> and
-> ldb packages, - this is possible because both are now built from the
-> same
-> source, - but these symbols are still part of public ABI, and other
-> software
-> *might* (start) using these symbols, and will be broken by each samba
-> upgrade.
-> 
-> So the question is: why to mark symbols with versions at all, why
-> can't
-> these be unversioned like almost all other software does?  What good
-> such versioning serves?
-
-I've followed your various pleas here and I cannot but agree.
-
-> I looked at the build system, - buildtools/wafsamba/samba_abi.py -
-> where
-> it generates the ld script file. I'm about to drop the whole thing in
-> there for debian and use manually crafted symbols vile instead, to
-> fix
-> this whole issue.  But even there I'll have to perform some sort of
-> transition from versioned to unversioned, or somesuch..
-
-We were trying to be 'good, well behaved' software, and follow
-distribution policies and guidance. 
-
-It would break distribution policies of not bundling, but I would:
- - release ldb versions for sssd, with versions.
- - *never* allow Samba to link to a system ldb. 
-
-How we deal with the ldb tools I'm not sure however.  Does sssd use and
-administration require them?  Would 'alternatives' be over the top?
-
+Very likely.
+Sofware is hard.
 Andrew Bartlett
--- 
-Andrew Bartlett (he/him)       https://samba.org/~abartlet/
-Samba Team Member (since 2001) https://samba.org
-Samba Team Lead                https://catalyst.net.nz/services/samba
-Catalyst.Net Ltd
 
+-- 
+Andrew Bartlett (he/him)       https://samba.org/~abartlet/Samba Team Member (since 2001) https://samba.orgSamba Team Lead                https://catalyst.net.nz/services/sambaCatalyst.Net Ltd
 Proudly developing Samba for Catalyst.Net Ltd - a Catalyst IT group
 company
-
 Samba Development and Support: https://catalyst.net.nz/services/samba
-
 Catalyst IT - Expert Open Source Solutions
-
-
