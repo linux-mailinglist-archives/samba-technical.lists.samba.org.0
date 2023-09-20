@@ -2,112 +2,70 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id EA28C7A66CD
-	for <lists+samba-technical@lfdr.de>; Tue, 19 Sep 2023 16:35:37 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9F0BF7A8202
+	for <lists+samba-technical@lfdr.de>; Wed, 20 Sep 2023 14:54:08 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=d/c3H1VAKGytmUMsig1MW9nSSPi6U1IOOkfwFsf0xVQ=; b=d0h9f0HxVPPsj1CqVjmsSBj3d1
-	TsXTX1d/TliFei70yAzvMaiolMjIFZ2UFKvDWYCpW0ztm31/7/T1bwaiAqj96FjwxDWC8QQVY6e12
-	wBSVp7plBzvj/5L/t6kDN5mgonymednr0pS5wgVhouCvG/q4nRt9LNidzyHmEvsasv9KdNj5IniH0
-	ldEO+uylIobvVTz/b6pC9YZlcsoASAdpoi8o1NboRUJ6lTKRAo1AZEcFVKxKRMf3FdlJItj5JsPUH
-	7dTCYd5y098afLKpByFLqlAbQXme5m0nR/AxsGphU9cUqV5sqElQwien4nqmtkifsVZp5z2M2jqXd
-	HK/+5hNw==;
-Received: from ip6-localhost ([::1]:65466 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=5cx/4/QTnSQH/xoBZtq0Dbb3QvNNJW5HvvEMLfrjPF8=; b=ALXb6ks7vLolRuc/o+MSkc92/D
+	lSEEHxY0iL4twgiOWV7i+Q9DS0kTlSUXx0xVlMFAaTdN9ARLKA615ipcbPb57/WpIG+nQ1UG0w2nV
+	LKjfgn0Z7zYkZ22Dorkv2BR7xEVfXveTkRWDceSAqLg968Q0T7j0HSe9fIP41oZZEwjgleOP6X/7J
+	BVzGudiwt0BsOUXu6o0mwMVw6PxfXj7R3xGowc42+6jWEnqWHz6TyxmZWZX1r64Ba25lv2NkOKkcd
+	QCNIEC44jEKOnCViODr60FYyqKErIeVcc1BXN16dj9PpC7K3Vuv5IbGPfrehmHE+/M9nSg9V6z8K3
+	XjvpOhhA==;
+Received: from ip6-localhost ([::1]:54710 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1qiboV-005JhN-Pt; Tue, 19 Sep 2023 14:34:55 +0000
-Received: from mail-bn7nam10on2043.outbound.protection.outlook.com
- ([40.107.92.43]:45024 helo=NAM10-BN7-obe.outbound.protection.outlook.com) 
- by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1qiboN-005JhD-A0
- for samba-technical@lists.samba.org; Tue, 19 Sep 2023 14:34:50 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=GRS/vB3PdFhEbuzv52uy4p2PFp/efULQ/2R38f8H4Xu+mAklp/kd2w6V5mdrQ5Ji97G0WhOawgK5UVibMYN0gXmb0cTN99U7zvF8J0s9dhjf0qQV0WYNnUh397FAoLzzTD/Z2Jtj1CwO1UpxXz99fUN1G/8zdWBUTFAab/w3jF50IEtK3BuWwRkOylcwUHwGFAVlVni3rbL5Aog7HLVCP+brtxGUokAOjoa5WeRqJMJm8SiuIhLlL9xwHTHado+jKu8eSzC4pRzF+wcmYDvuzcCECnUf1GGqC4wYopRIVBm9FaqwJLbFkUi5brNZJdY5KzQFb/Lbsuilgr67+dzhyw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=d/c3H1VAKGytmUMsig1MW9nSSPi6U1IOOkfwFsf0xVQ=;
- b=OX5RjaQhBnHcfikSNCibQpEIqkQMjWZ8MX4duYFggNbGI9VRdM1Dt98Grp989Y8Qskrb5LV3shfhLzQ+TeFkVCvcPjlWsMJxiNMEOxws0wJEZC64HvRRE7dtFNQ3omcgbFVWQVvcYoEOtOF6b5c1s/HNyAyUHYrzoXCwmatJ5uz33k/+KEE4duphOLG0473tD0687kmxfs+UEatOW7GFNYQIsgO8dUadhiNLx+6sgFMAKhglUD/MiUdtT8ITW3SSqpowXeHKX3Q6iZ6aTTQYaSDDTydPEzxguevdr4bsGNiIXvYfl1KJRhiOLyzufQZ0xF9+mojEr4reLz1YCnSKJw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=talpey.com; dmarc=pass action=none header.from=talpey.com;
- dkim=pass header.d=talpey.com; arc=none
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=talpey.com;
-Received: from SN6PR01MB4445.prod.exchangelabs.com (2603:10b6:805:e2::33) by
- LV3PR01MB8510.prod.exchangelabs.com (2603:10b6:408:1a4::11) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.6792.23; Tue, 19 Sep 2023 14:34:31 +0000
-Received: from SN6PR01MB4445.prod.exchangelabs.com
- ([fe80::cbe6:1667:cce0:3485]) by SN6PR01MB4445.prod.exchangelabs.com
- ([fe80::cbe6:1667:cce0:3485%6]) with mapi id 15.20.6792.026; Tue, 19 Sep 2023
- 14:34:31 +0000
-Message-ID: <b442e3f0-8a49-2252-fd02-f2c62ecd13a5@talpey.com>
-Date: Tue, 19 Sep 2023 07:34:25 -0700
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.15.1
-Subject: Re: [PATCH][SMB3 client] add dynamic trace points for smbdirect
- (RDMA) connect
-Content-Language: en-US
-To: Steve French <smfrench@gmail.com>, CIFS <linux-cifs@vger.kernel.org>
-References: <CAH2r5mssSM9HhMXVu8570jX7Yx1CyERhjeg4S+Rp77HWrTHb6g@mail.gmail.com>
-In-Reply-To: <CAH2r5mssSM9HhMXVu8570jX7Yx1CyERhjeg4S+Rp77HWrTHb6g@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+	id 1qiwhv-005TCT-0O; Wed, 20 Sep 2023 12:53:31 +0000
+Received: from smtp-out2.suse.de ([195.135.220.29]:51350) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1qityF-005SAD-Vy
+ for samba-technical@lists.samba.org; Wed, 20 Sep 2023 09:58:15 +0000
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 3BDE31FEB5;
+ Wed, 20 Sep 2023 09:58:09 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
+ t=1695203889; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=5cx/4/QTnSQH/xoBZtq0Dbb3QvNNJW5HvvEMLfrjPF8=;
+ b=BYHC4/FQp0jOPuSZahj4EmBcrB6WqWWyb6bVG4tzLJvtQOD6FLAr0dDhpQkR6V1shi0Mhn
+ Wnl16oS1oija7d9fXqGCmLn/ra7ZBIyWecE/f8BKE4QEvWRM8DTlr0qUeJQBIy74OP3jId
+ Xr35EzHqpCVb2+JvJzh1fo4PASSm4UY=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
+ s=susede2_ed25519; t=1695203889;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=5cx/4/QTnSQH/xoBZtq0Dbb3QvNNJW5HvvEMLfrjPF8=;
+ b=Inurd+QUrEWmA0gt+rtqxZtUQzsEAGSeU+EJGHN4fUZvLVNJlZX/VLCNUyqlPc1A4HF+Lq
+ dsq7y3KAnJwsQfCA==
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 2502313A64;
+ Wed, 20 Sep 2023 09:58:09 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([192.168.254.65])
+ by imap2.suse-dmz.suse.de with ESMTPSA id RdgECTHCCmUJCAAAMHmgww
+ (envelope-from <jack@suse.cz>); Wed, 20 Sep 2023 09:58:09 +0000
+Received: by quack3.suse.cz (Postfix, from userid 1000)
+ id B20DAA077D; Wed, 20 Sep 2023 11:58:08 +0200 (CEST)
+Date: Wed, 20 Sep 2023 11:58:08 +0200
+To: Jeff Layton <jlayton@kernel.org>
+Subject: Re: [PATCH v7 12/13] ext4: switch to multigrain timestamps
+Message-ID: <20230920095808.x2gurkdgbrqoumir@quack3>
+References: <20230807-mgctime-v7-0-d1dec143a704@kernel.org>
+ <20230919110457.7fnmzo4nqsi43yqq@quack3>
+ <1f29102c09c60661758c5376018eac43f774c462.camel@kernel.org>
+ <4511209.uG2h0Jr0uP@nimes>
+ <08b5c6fd3b08b87fa564bb562d89381dd4e05b6a.camel@kernel.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SN6PR01MB4445:EE_|LV3PR01MB8510:EE_
-X-MS-Office365-Filtering-Correlation-Id: 9a1cb68e-4e45-457f-0ed1-08dbb91d891e
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam-Message-Info: a9+DyTNzI5p5HY4hqvY2fU7GmGIHXG7buSeFNBjH7Vt7+xa8vrpSARnzUw/b0hJbRyA0WUQeuQMFNXB394DQHPauwdXliwYjYvV6Yw2R5LBsSUWBD+M/GmUZTuyoGI4tJ9/39CVY0+9UR9t8oceSz/gc0wpKxJd8NrKghj+blAsSoU0V4MxNg2V+HYma+CUp52+Fmdx1NydpMNLfo7vcADcQJCyDT9IoiuFNjdcuuBhaiDjc0XdExbc3nhbBp4vm4VSt0M0bGuT1jwTTFQ6paXlHosV5E6GOBoI7u0BI3I1yZCGRqkJldh6EpN7ReNNDoHu2b9yrT0A1LCnr2GKQc0DBEIVjGMcZI6ODt9Eq1aChs5VVjql3QzZ61EfQ7ZOrqlVnfnCDO9XxPIuPGJrbtcg/dFpTDnxm1X3txtjc5udiX8NoGhLq45QGU/3yz2FxrSSpbx5R9fc5M+YsVgUqrRJhe/M/Q4JCMYV+oqs8HWl/lHya/5nlrnPdlAahcIjYR4w3dRssE7mBxjeiJ20Tu+M/3IPIniDJtV4tE4IzNsap0SQ13t4FSW3yarTD1bYMhYGVyMMXPH/ETFA3c2oSwMIVCxgdoU7q7OBKJdd6Wz/skfjHwiQ9Z1aBpBjCy4O6iu+qY/iKSa7aAi7IDfeLeA==
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?Wml4bUQ4M1FOVEo5RUtSanl1RFRiaklwbEVuYTM2NE5US0QzNHh2ZWROdHhI?=
- =?utf-8?B?blBBcFhOejRpdks2TTJTR29Ta1J2Qko2M3lrZ2ZlMjdLZFJrVHJFd2FzL3ZJ?=
- =?utf-8?B?QTlxVEVCdXdaTGYzMkxBUEhicDBBcGJuSUdubno4S3g1b0lsbitSbVAydHU3?=
- =?utf-8?B?NkpabmRhWmt1eVV4Sm5XQlBtOWE2WFhTUjNNelU5QUlVZU5BZ2hLRHN4dlV4?=
- =?utf-8?B?ZEN6REJMRW93enI4VmtYWTkzOWdZK2hmRDRldXBZY1E0KzJ5QkpXVDNPL1Ar?=
- =?utf-8?B?Q1k4akRCL29EVDRBQ1VnOTYyWk5QajhxREhIUnVQUnZvT0NwRDhUWEYvekhZ?=
- =?utf-8?B?ZUxmRUpESTJFWnhVMXpJMGJHUnB5M085aUtwV0Zaa2NzbkMvZEF6OWd4eHJE?=
- =?utf-8?B?ZzJ6OTFXYkFGUElZdTVvbWZtL2VvSUQvNktoUGdOTmhIL2VtcHoxcDFkMFBo?=
- =?utf-8?B?bFhXNlF5QVRabHBWUllWVXBCdWVKNzA0SlNGNWFyYUdTQVloVjZXNjJnNW40?=
- =?utf-8?B?STNQT3BaWUxmSXR4YXFtclhGMW1aNVpiQVZOOE1rMHJyS1RzNVl2SHo4TnRW?=
- =?utf-8?B?TS9QYURFYnZ3V1VrQmxTc0h6eUFFdlIxUi96T2RpSEZpdXJKdGZoOHU3endp?=
- =?utf-8?B?UXVBTm1wMmdnWnlQTzd4MlJPTnhqdTJtOVQxQ2c1S3NIbWdnMjJ6bUd1U1Uy?=
- =?utf-8?B?Q0lpWkhUallwV1pHN2JieXV3SVcwNVNDUXcxMVp5UWhobVRVM0lDTUpxL1VK?=
- =?utf-8?B?TWVEaWlsU1hIbjJ1Mkg1T0xUMU9URURnTGoxaUh2Vk5yNERqRzF5TUU1cmxT?=
- =?utf-8?B?VXdVVWE3QzdKNUZMKzZ6NWErSCsxVU42VFlKRG85T2xmbE1JMTVhTU9Xc3FG?=
- =?utf-8?B?Z1hWYlhibTRrUGoxSG1TMUxSeWo0cDJkZGRTbFBDUUtEd2cydXZyaFlROHkx?=
- =?utf-8?B?WmJ0K2luUmJCZEpUQ2FVVS94UlVmWG1lYmE4RVB2N0xWNFN0eUEwWEFrdW1n?=
- =?utf-8?B?WFNQMWh0a0lwYVRCVVJjdXlzSGg3VE9Bb2swOS9abm1EMmJ6S3dYMXBaNnBE?=
- =?utf-8?B?WlJPaW1XZUdIUmVWdmc0a0FpRzV4TGJCV0NuOHhSMkF1UTVmR1FqRmFZMW9I?=
- =?utf-8?B?dGE2OEUrVEFMcURXSC9SOUt3b2xLLzJ5WFBCa0RIZlo3QkVKdlhXdU5hZDFk?=
- =?utf-8?B?V0FNb3habUQxNG1xVU94MEFWUXBOeEJHS01VK01uUXExN1YxWURHY090bTB6?=
- =?utf-8?B?RGdlMzcxaWEyOENSSTJ3Ly9wTitxWk83VEVlVytwa212UXBObktIaTl4U1BH?=
- =?utf-8?B?UGNiQTUvcWZ2a3hqZjZWY0V4SCsrd2FWRkczc3owSXd3aEpyZ0VGejdBZjFW?=
- =?utf-8?B?VTJLakFSVTFDQld3elhzNVhWQ0JUNFl3Y25RVlROZGVpMlVpVDloR09WREJS?=
- =?utf-8?B?SzBOSkdGVnVTbU1HbGtJd0lob1FKL2RxRVNCVlFtcm9lMEJ4eHRIaEUwMmEw?=
- =?utf-8?B?a0s5VnhTb0hvWU1EWTNDcVdya0ovSEJxUHNJZWZPWTJxMm4zQ1B3dGhySDBa?=
- =?utf-8?B?WGNkR1dZK1JueFRLa2hjOW9jRnZVNlBpdUhDM3MzczB5R294VTRGbkRsaVZI?=
- =?utf-8?B?WTJFREtwRVM4eFUwckVCb081U0NEbEpka2J1Q3NVRTB6MGpLQjd2YkIyY2JN?=
- =?utf-8?B?UGNnWlo1SVN3WFVrWC9GSlJucXhTNmRmN1FuVW45dWFRV002VXRnVlNFaTJH?=
- =?utf-8?B?NDI3eTBabmJpc0RGQ3hjS3FYMGlZL2pKd2oxWElUby96NHVPUDdRb3N1b0NR?=
- =?utf-8?B?K3FrK0t4MnhwVWpBU2NrTnVzR253RjZrK1ZEeThlOFNYMGJPTXJBbmZ3NXk1?=
- =?utf-8?B?MTZ3OWRKRG5FU0tRTFlIUTdPVjJYZkJkNGI4aExCckFleTVxMVZZcnRtQjZt?=
- =?utf-8?B?VmtTRmZ0Y3VIZURYN2FuOU9BZmRDaFdacEJmcnNrVUtzeXVTWTRGeVZtVFBL?=
- =?utf-8?B?UnlVcjhDcVNwaVU2RGJkdXBwYkNHdVJZNUQ3Q1NRbWJ1cmFEbmZ5dXZoQjJm?=
- =?utf-8?B?OXhoMHBRN1Y3aGZoQ0M1N0Q5aDZaQU5paXpMVnB1VnNCd2cveS8wNDJza2tx?=
- =?utf-8?Q?Gi2bqCh/5OpHNn79KEo2bl7dm?=
-X-OriginatorOrg: talpey.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 9a1cb68e-4e45-457f-0ed1-08dbb91d891e
-X-MS-Exchange-CrossTenant-AuthSource: SN6PR01MB4445.prod.exchangelabs.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 2b2dcae7-2555-4add-bc80-48756da031d5
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: K/mx1SxYUXaz6jNpGG7zdpAF4BLjGLyWTmZAofnZwQMOo6xni321PBCdElDP8bBc
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV3PR01MB8510
-X-Warn: EHLO/HELO not verified: Remote host 40.107.92.43
- (mail-bn7nam10on2043.outbound.protection.outlook.com) incorrectly presented
- itself as NAM10-BN7-obe.outbound.protection.outlook.com
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <08b5c6fd3b08b87fa564bb562d89381dd4e05b6a.camel@kernel.org>
+X-Mailman-Approved-At: Wed, 20 Sep 2023 12:53:27 +0000
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -121,33 +79,148 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Tom Talpey via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Tom Talpey <tom@talpey.com>
-Cc: Paulo Alcantara <pc@manguebit.com>,
- samba-technical <samba-technical@lists.samba.org>
+From: Jan Kara via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jan Kara <jack@suse.cz>
+Cc: Latchesar Ionkov <lucho@ionkov.net>,
+ Martin Brandenburg <martin@omnibond.com>,
+ Konstantin Komarov <almaz.alexandrovich@paragon-software.com>,
+ Jan Kara <jack@suse.cz>, linux-xfs@vger.kernel.org,
+ "Darrick J. Wong" <djwong@kernel.org>,
+ Dominique Martinet <asmadeus@codewreck.org>,
+ Christian Schoenebeck <linux_oss@crudebyte.com>, linux-unionfs@vger.kernel.org,
+ David Howells <dhowells@redhat.com>, Chris Mason <clm@fb.com>,
+ Andreas Dilger <adilger.kernel@dilger.ca>, Hans de Goede <hdegoede@redhat.com>,
+ Marc Dionne <marc.dionne@auristor.com>, codalist@coda.cs.cmu.edu,
+ linux-afs@lists.infradead.org, linux-mtd@lists.infradead.org,
+ Mike Marshall <hubcap@omnibond.com>, Paulo Alcantara <pc@manguebit.com>,
+ Amir Goldstein <l@gmail.com>, Eric Van Hensbergen <ericvh@kernel.org>,
+ bug-gnulib@gnu.org, Andreas Gruenbacher <agruenba@redhat.com>,
+ Miklos Szeredi <miklos@szeredi.hu>, Richard Weinberger <richard@nod.at>,
+ Mark Fasheh <mark@fasheh.com>, Hugh Dickins <hughd@google.com>,
+ Benjamin Coddington <bcodding@redhat.com>, Tyler Hicks <code@tyhicks.com>,
+ cluster-devel@redhat.com, coda@cs.cmu.edu, linux-mm@kvack.org,
+ Gao Xiang <xiang@kernel.org>, Iurii Zaikin <yzaikin@google.com>,
+ Namjae Jeon <linkinjeon@kernel.org>,
+ Trond Myklebust <trond.myklebust@hammerspace.com>,
+ Xi Ruoyao <xry111@linuxfromscratch.org>,
+ Shyam Prasad N <sprasad@microsoft.com>, ecryptfs@vger.kernel.org,
+ Kees Cook <keescook@chromium.org>, ocfs2-devel@lists.linux.dev,
+ linux-cifs@vger.kernel.org, Chao Yu <chao@kernel.org>,
+ linux-erofs@lists.ozlabs.org, Josef Bacik <josef@toxicpanda.com>,
+ Tom Talpey <tom@talpey.com>, Tejun Heo <tj@kernel.org>,
+ Yue Hu <huyue2@coolpad.com>, Alexander Viro <viro@zeniv.linux.org.uk>,
+ David Sterba <dsterba@suse.com>, Jaegeuk Kim <jaegeuk@kernel.org>,
+ ceph-devel@vger.kernel.org, Xiubo Li <xiubli@redhat.com>,
+ Ilya Dryomov <idryomov@gmail.com>,
+ OGAWA Hirofumi <hirofumi@mail.parknet.co.jp>, Jan Harkes <jaharkes@cs.cmu.edu>,
+ Christian Brauner <brauner@kernel.org>, linux-ext4@vger.kernel.org,
+ Theodore Ts'o <tytso@mit.edu>, Joseph Qi <joseph.qi@linux.alibaba.com>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>, v9fs@lists.linux.dev,
+ ntfs3@lists.linux.dev, samba-technical@lists.samba.org,
+ linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ Steve French <sfrench@samba.org>,
+ Sergey Senozhatsky <senozhatsky@chromium.org>,
+ Luis Chamberlain <mcgrof@kernel.org>, Jeffle Xu <jefflexu@linux.alibaba.com>,
+ devel@lists.orangefs.org, Anna Schumaker <anna@kernel.org>,
+ Jan Kara <jack@suse.com>, Bo b Peterson <rpeterso@redhat.com>,
+ linux-fsdevel@vger.kernel.org, Andrew Morton <akpm@linux-foundation.org>,
+ Sungjong Seo <sj1557.seo@samsung.com>, Bruno Haible <bruno@clisp.org>,
+ linux-nfs@vger.kernel.org, linux-btrfs@vger.kernel.org,
+ Joel Becker <jlbec@evilplan.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On 9/18/2023 11:20 PM, Steve French wrote:
->       smb3_smbd_connect_done and smb3_smbd_connect_err
+On Tue 19-09-23 12:31:08, Jeff Layton wrote:
+> On Tue, 2023-09-19 at 16:52 +0200, Bruno Haible wrote:
+> > Jeff Layton wrote:
+> > > I'm not sure what we can do for this test. The nap() function is making
+> > > an assumption that the timestamp granularity will be constant, and that
+> > > isn't necessarily the case now.
+> > 
+> > This is only of secondary importance, because the scenario by Jan Kara
+> > shows a much more fundamental breakage:
+> > 
+> > > > The ultimate problem is that a sequence like:
+> > > > 
+> > > > write(f1)
+> > > > stat(f2)
+> > > > write(f2)
+> > > > stat(f2)
+> > > > write(f1)
+> > > > stat(f1)
+> > > > 
+> > > > can result in f1 timestamp to be (slightly) lower than the final f2
+> > > > timestamp because the second write to f1 didn't bother updating the
+> > > > timestamp. That can indeed be a bit confusing to programs if they compare
+> > > > timestamps between two files. Jeff?
+> > > > 
+> > > 
+> > > Basically yes.
+> > 
+> > f1 was last written to *after* f2 was last written to. If the timestamp of f1
+> > is then lower than the timestamp of f2, timestamps are fundamentally broken.
+> > 
+> > Many things in user-space depend on timestamps, such as build system
+> > centered around 'make', but also 'find ... -newer ...'.
+> > 
 > 
-> To improve debugging of RDMA issues add those two new tracepoints. We
-> already had dynamic tracepoints for the non-RDMA connect done and
-> error cases, but didn't for the smbdirect cases.
 > 
-> See attached patch
+> What does breakage with make look like in this situation? The "fuzz"
+> here is going to be on the order of a jiffy. The typical case for make
+> timestamp comparisons is comparing source files vs. a build target. If
+> those are being written nearly simultaneously, then that could be an
+> issue, but is that a typical behavior? It seems like it would be hard to
+> rely on that anyway, esp. given filesystems like NFS that can do lazy
+> writeback.
+
+TL;DR I don't think we can just wave away the change as "the problem has
+always been there".
+
+Firstly, the fact that something is not quite reliable on NFS doesn't mean
+people don't rely on the behavior on local filesystems. NFS has a
+historical reputation of being a bit weird ;). Secondly, I agree that the
+same problems can manifest currently for files on two filesystems with
+different timestamp granularity. But again that is something that is rare -
+widely used filesystems have a granularity of a jiffy and in most cases
+build and source files are on the same filesystem anyway. So yes, in
+principle the problems could happen even before multigrain timestamps but
+having different granularity per inode just made them manifest in much much
+more setups and that matters because setups that were perfectly fine before
+are not anymore.
+
+> One of the operating principles with this series is that timestamps can
+> be of varying granularity between different files. Note that Linux
+> already violates this assumption when you're working across filesystems
+> of different types.
 > 
+> As to potential fixes if this is a real problem:
 
+Regarding whether the problem is real: I wouldn't worry too much about the
+particular test that started this thread. That seems like something very
+special. But the build system issues could be real - as you wrote in your
+motivation for the series - a lot can happen in a jiffy on contemporary
+computers. I can imagine build product having newer timestamp than build
+source because the modification of source managed to squeeze into the same
+jiffy and still use a coarse-grained timestamp. Or some other
+producer-consumer type of setup... Sure usually there would be enough
+stat(2) calls on both sides to force finegrained timestamps on both files
+but if there are not in some corner case, debugging the problem is really
+tough.
 
-This looks fine but it's pretty basic. The entire smbdirect handling
-in both client and server has its own idea of debug, with two (very)
-different ways to enable various levels. It requires a silly combination
-of /proc, ksmbd.control, "class" and "level" selections, and some weird
-other thing I don't even try to remember. Combined with the ancient
-cifs_dbg stuff, it is all just... unprintable.
+> I don't really want to put this behind a mount or mkfs option (a'la
+> relatime, etc.), but that is one possibility.
+> 
+> I wonder if it would be feasible to just advance the coarse-grained
+> current_time whenever we end up updating a ctime with a fine-grained
+> timestamp? It might produce some inode write amplification. Files that
+> were written within the same jiffy could see more inode transactions
+> logged, but that still might not be _too_ awful.
 
-Anyway
-Acked-by: Tom Talpey <tom@talpey.com>
+From a first glance I'd guess the performance overhead will be too big for
+a busy filesystem to enable this unconditionally. But I could be wrong...
 
-Tom.
+								Honza
+-- 
+Jan Kara <jack@suse.com>
+SUSE Labs, CR
 
