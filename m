@@ -2,67 +2,190 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id CFBE07B2D7B
-	for <lists+samba-technical@lfdr.de>; Fri, 29 Sep 2023 10:06:16 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7400C7B2D7D
+	for <lists+samba-technical@lfdr.de>; Fri, 29 Sep 2023 10:06:18 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=c3oHHfr+yAdtkrxVkV3qE0VFTbMzK/MU2TZf7sFiWp8=; b=gearluJgv+I8RCqnJIyY7+cHGh
-	9yhbCWoiNpfgxgDitTsNtpjUwe5QWp+GetdJv7kYq0NWIuTS8WhUEzz5TlwLFziqncQfXeRJq6Yq2
-	9syYvXqYQH/4X5gUPEg2OON774HIz+ziyAE6ThdOQDjujoT1E65afRLorQe7WD9AQgGQyY8jGm49p
-	0+8yO0MDT8DRZgj/rw6uyhgj2Q0Pr4ffTNAbAS5WZRstI6kLCius7c+5vUKLJk0bOL+7LF4bBnFyq
-	cOS8hKhl3zZ0d44DH1sfnP9UOCd5Xcljh9zbWNwuqir8nmP1ixG6DHzexn7TTuwVlyJ0wCppISLy/
-	A0dmHl3g==;
-Received: from ip6-localhost ([::1]:53078 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=AEM/fDbI9O0BImAELzI+hfXsnObtdXB3nh8ZZCXXqn0=; b=DUgIQGNh1LuawZZo2lYYq+tJa5
+	+fmmGcn7/dgKA+KguM3iqzNqkeVnPzBGVK/GpjxpDPxEFQIl8jLrPwnNKf3Ia8NLt2pMl8dAXT2n3
+	RHuqfhyr+tBBBXj9FXDwTwN7gm2ZMHqcfDu73JPLLslNApBa4Q1UwNIHBWXbDG74cyaDu06aL7Mx5
+	yDuYr2YEsEKuEXJIzWXEmKwFhx0Mejj1WTojAKR1fCEMM/50P9czfMT9yic08OCf/EXUjRT4G4VYO
+	btm3ajpQAMFg84I3LoEqb8MJgmBrs7SMR/5Ra8iIo4KLAydNaa/3Y30QcPlLlw49Kpsfv+53uVOiN
+	wITceH6g==;
+Received: from ip6-localhost ([::1]:43128 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1qm8VP-0075yh-Pn; Fri, 29 Sep 2023 08:05:48 +0000
-Received: from mail-vs1-xe35.google.com ([2607:f8b0:4864:20::e35]:47201) 
+	id 1qm8VX-00761V-RA; Fri, 29 Sep 2023 08:05:57 +0000
+Received: from new3-smtp.messagingengine.com ([66.111.4.229]:41631) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1qlpIl-006trU-NN
- for samba-technical@lists.samba.org; Thu, 28 Sep 2023 11:35:33 +0000
-Received: by mail-vs1-xe35.google.com with SMTP id
- ada2fe7eead31-4526a936dcaso5621203137.2
- for <samba-technical@lists.samba.org>; Thu, 28 Sep 2023 04:35:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1695900924; x=1696505724; darn=lists.samba.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=c3oHHfr+yAdtkrxVkV3qE0VFTbMzK/MU2TZf7sFiWp8=;
- b=RTrKqGA1cTQqBSixSkp/9DSRTj6skalWhqdESQ55AivoyFbMtPGiZtZTQW/Np9Tshe
- vyPXpMMaI4sV/WM6n2h/autwrbyTZeTzfgEkGxJnv5fAgdQDPx/fOnMSh26SVIlo/FlO
- Nn8ldhMKX+62HEIv7/x1Ux6uXQ/74iBTX0cbMleme0mi4MlMkmrUNgHPabapkmoW9M3A
- afEQKJJuVOJ2alSMiV3Cs+guM8r4DIYfwgwtfgvuhaK+/QYeDHYzrxtCoio0iZamvyJA
- THbenRDOeKZlJyDgDvMa7GglH8ERQq9Y+d5rigiSPxxWP/TF2KpcLuMbhNZkjjeGipyV
- y5Pg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695900924; x=1696505724;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=c3oHHfr+yAdtkrxVkV3qE0VFTbMzK/MU2TZf7sFiWp8=;
- b=Dm5cGcLrG3ajfna8bh5zr8mAVUT9uqPgAIJeXpkoc0uLNoISNP+YgPPgsc42/ULnMY
- MSOtZ5HMuVdutUsIc4EBEOC3s5kY+JoFAc/b4PBrNclCz47YecRNlZREHk251Fclgum7
- alLiDYl3R0dHWNUkTugxldZEgzeRTrUjwxDjYOqa+zw2PBj4dmsPbU4LAmHR1lrBGB0R
- WxW/J6m8UOF3f6BETFwubZ9p7ug8WQCYDBPUNrvCV5s2SF65dnBdvfFbaeqXzCxHF1Uu
- 4UNCjSoehzMaoO37tBKe9fR+BaOTZOOrlhjz/nZ0IovS1Czwg4z9DwEOVUrECBdBg7zI
- wnOw==
-X-Gm-Message-State: AOJu0YzbrFszNaaXGdgPlksbqg79nsyKYtFvQbpb8sfm0SFscdKLOd3M
- 7eL0PppoNFT+OsI0+6SY2zD5n16Xpadq8NgHaoI=
-X-Google-Smtp-Source: AGHT+IHhHz7xARweFavd1XDLqmOlGZR89qjTYiX4UH69lO2YZAJePIkqF9BJYGYmOq/G1/CVWLpaXpMDMsrrAqgyB+o=
-X-Received: by 2002:a67:ec16:0:b0:452:63b7:2f6d with SMTP id
- d22-20020a67ec16000000b0045263b72f6dmr830755vso.34.1695900924494; Thu, 28 Sep
- 2023 04:35:24 -0700 (PDT)
+ (Exim) id 1qltWT-006zBl-PA
+ for samba-technical@lists.samba.org; Thu, 28 Sep 2023 16:05:59 +0000
+Received: from compute6.internal (compute6.nyi.internal [10.202.2.47])
+ by mailnew.nyi.internal (Postfix) with ESMTP id 5C6B0581DAC;
+ Thu, 28 Sep 2023 11:48:43 -0400 (EDT)
+Received: from imap51 ([10.202.2.101])
+ by compute6.internal (MEProxy); Thu, 28 Sep 2023 11:48:43 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arndb.de; h=cc
+ :cc:content-type:content-type:date:date:from:from:in-reply-to
+ :in-reply-to:message-id:mime-version:references:reply-to:sender
+ :subject:subject:to:to; s=fm1; t=1695916123; x=1695923323; bh=AE
+ M/fDbI9O0BImAELzI+hfXsnObtdXB3nh8ZZCXXqn0=; b=Zb4LJ/iWxs7PYCxfSp
+ Mmj7xYkSAgWplciC0+hZqHaIVvkpCb/Wp0lEpODKkSCM40frExHvLz4EZAD1HZJ2
+ 9ttgDzhZqI1ch1xpfCA8FHvF2/PahtOaTm//TzyXbpTROeAOQjegRsYYeSoWNyYK
+ byMO63AHEnUHVIOFCUm+mvxA/KjnXoKo0xnweP/w+dWDOvLPjGksvDhU3ohZT6Yp
+ QpiswLlY9kvUQhVEctTQH/u+sDAFDQssEAik0gF+XDqfmAiKXNJoWxztil5xTMTb
+ X/lrYQ3vvVFk9wvd6DyfBmvUprhzlzpKTyylDH3eDykTx5H6fgxF/6J3HRQ+0H0e
+ vkbw==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ messagingengine.com; h=cc:cc:content-type:content-type:date:date
+ :feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
+ :message-id:mime-version:references:reply-to:sender:subject
+ :subject:to:to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender
+ :x-sasl-enc; s=fm2; t=1695916123; x=1695923323; bh=AEM/fDbI9O0BI
+ mAELzI+hfXsnObtdXB3nh8ZZCXXqn0=; b=n/Qf6qJXucXyk4LW4CL1tlnrKQD+5
+ he13BWxPblPpTww3+/1Dnpdhq7Gwr3a+fNA/QON3ImAoB4q0Q/wz7xwPYTvIh6y4
+ pI+Bd8aWYcux+cr2fpJzmkbS+P4O02I2hebi06+hrjnSwnPE23SfqSF4cbFR4hlH
+ YaVmK8v0yltudUYq72xKx5sAA01J7qL+ne43uzwAXwT6ryRFwbNVU+Y1mHF2dF66
+ agNWj0CMsq4gNWlnonaqngyXaD0pPv6qEhlNb+XbjMdBnMkU2kFvOV0FzP6pW1Jx
+ vJR5UdEjaUxDazFxTy4TLY4x736COIBHAoRVIXDZypp4DjDlHgBb2dBag==
+X-ME-Sender: <xms:VqAVZehkLTOXwS_xg_6r9_9U7myXUu9Xf4xrZ0lmC-mNKcMCcnNsJw>
+ <xme:VqAVZfCC0hBNW-6zWSNUDpimotTv1K_lD4MorQPse5pJgj_jwgOrIpVTd1e1lCsJ4
+ CyxiAxCxEI04_Mnbzk>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvkedrtddtgdeifecutefuodetggdotefrodftvf
+ curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
+ uegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenuc
+ fjughrpefofgggkfgjfhffhffvvefutgesthdtredtreertdenucfhrhhomhepfdetrhhn
+ ugcuuegvrhhgmhgrnhhnfdcuoegrrhhnugesrghrnhgusgdruggvqeenucggtffrrghtth
+ gvrhhnpeevhfffledtgeehfeffhfdtgedvheejtdfgkeeuvefgudffteettdekkeeufeeh
+ udenucffohhmrghinhepkhgvrhhnvghlrdhorhhgnecuvehluhhsthgvrhfuihiivgeptd
+ enucfrrghrrghmpehmrghilhhfrhhomheprghrnhgusegrrhhnuggsrdguvg
+X-ME-Proxy: <xmx:VqAVZWG45Rd33BgqA4LgSTkoIL6Ot1dfOvbe8RgsboLNiKSqszWOAg>
+ <xmx:VqAVZXQTxuydNZS_enwE9LlRoOhiuGF9gCIhq3TRrDdNwtGtt6FbIQ>
+ <xmx:VqAVZbxEBIkR5teHqxhFLdOZo9wRUGgFdkIYaLd2pyKQSq2CtJDzCg>
+ <xmx:W6AVZTZKpR7w9NLRl_L1L6zoNyttDC4RXO7dBXqniz-srYv7BlTPTA>
+Feedback-ID: i56a14606:Fastmail
+Received: by mailuser.nyi.internal (Postfix, from userid 501)
+ id BE4B9B60089; Thu, 28 Sep 2023 11:48:38 -0400 (EDT)
+X-Mailer: MessagingEngine.com Webmail Interface
+User-Agent: Cyrus-JMAP/3.9.0-alpha0-958-g1b1b911df8-fm-20230927.002-g1b1b911d
 MIME-Version: 1.0
+Message-Id: <6020d6e7-b187-4abb-bf38-dc09d8bd0f6d@app.fastmail.com>
+In-Reply-To: <20230928110554.34758-2-jlayton@kernel.org>
 References: <20230928110554.34758-1-jlayton@kernel.org>
- <20230928110554.34758-3-jlayton@kernel.org>
-In-Reply-To: <20230928110554.34758-3-jlayton@kernel.org>
-Date: Thu, 28 Sep 2023 14:35:13 +0300
-Message-ID: <CAOQ4uxjSrgGr+6UOs4ADGYCderpQ7hAaPjNmB1DExAPLQQsHSg@mail.gmail.com>
-Subject: Re: [PATCH 87/87] fs: move i_blocks up a few places in struct inode
-To: Jeff Layton <jlayton@kernel.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Fri, 29 Sep 2023 08:05:15 +0000
+ <20230928110554.34758-2-jlayton@kernel.org>
+Date: Thu, 28 Sep 2023 11:48:16 -0400
+To: "Jeff Layton" <jlayton@kernel.org>,
+ "Alexander Viro" <viro@zeniv.linux.org.uk>,
+ "Christian Brauner" <brauner@kernel.org>,
+ "Linus Torvalds" <torvalds@linux-foundation.org>,
+ "David Sterba" <dsterba@suse.cz>, "Amir Goldstein" <amir73il@gmail.com>,
+ "Theodore Ts'o" <tytso@mit.edu>,
+ "Eric W. Biederman" <ebiederm@xmission.com>,
+ "Kees Cook" <keescook@chromium.org>, "Jeremy Kerr" <jk@ozlabs.org>,
+ "Michael Ellerman" <mpe@ellerman.id.au>,
+ "Nicholas Piggin" <npiggin@gmail.com>,
+ "Christophe Leroy" <christophe.leroy@csgroup.eu>,
+ "Heiko Carstens" <hca@linux.ibm.com>, "Vasily Gorbik" <gor@linux.ibm.com>,
+ "Alexander Gordeev" <agordeev@linux.ibm.com>,
+ "Christian Borntraeger" <borntraeger@linux.ibm.com>,
+ "Sven Schnelle" <svens@linux.ibm.com>,
+ "Greg Kroah-Hartman" <gregkh@linuxfoundation.org>,
+ =?UTF-8?Q?Arve_Hj=C3=B8nnev=C3=A5g?= <arve@android.com>,
+ "Todd Kjos" <tkjos@android.com>, "Martijn Coenen" <maco@android.com>,
+ "Joel Fernandes" <joel@joelfernandes.org>,
+ "Carlos Llamas" <cmllamas@google.com>,
+ "Suren Baghdasaryan" <surenb@google.com>,
+ "Mattia Dongili" <malattia@linux.it>,
+ "Dennis Dalessandro" <dennis.dalessandro@cornelisnetworks.com>,
+ "Jason Gunthorpe" <jgg@ziepe.ca>, "Leon Romanovsky" <leon@kernel.org>,
+ "Brad Warrum" <bwarrum@linux.ibm.com>,
+ "Ritu Agarwal" <rituagar@linux.ibm.com>,
+ "Hans de Goede" <hdegoede@redhat.com>,
+ =?UTF-8?Q?Ilpo_J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>,
+ "Mark Gross" <markgross@kernel.org>, "Jiri Slaby" <jirislaby@kernel.org>,
+ "Eric Van Hensbergen" <ericvh@kernel.org>,
+ "Latchesar Ionkov" <lucho@ionkov.net>,
+ "Dominique Martinet" <asmadeus@codewreck.org>,
+ "Christian Schoenebeck" <linux_oss@crudebyte.com>,
+ "David Sterba" <dsterba@suse.com>, "David Howells" <dhowells@redhat.com>,
+ "Marc Dionne" <marc.dionne@auristor.com>, "Ian Kent" <raven@themaw.net>,
+ "Luis de Bethencourt" <luisbg@kernel.org>,
+ "Salah Triki" <salah.triki@gmail.com>,
+ "Tigran A. Aivazian" <aivazian.tigran@gmail.com>,
+ "Chris Mason" <clm@fb.com>, "Josef Bacik" <josef@toxicpanda.com>,
+ "Xiubo Li" <xiubli@redhat.com>, "Ilya Dryomov" <idryomov@gmail.com>,
+ "Jan Harkes" <jaharkes@cs.cmu.edu>, coda@cs.cmu.edu,
+ "Joel Becker" <jlbec@evilplan.org>, "Christoph Hellwig" <hch@lst.de>,
+ "Nicolas Pitre" <nico@fluxnic.net>,
+ "Rafael J . Wysocki" <rafael@kernel.org>,
+ "Ard Biesheuvel" <ardb@kernel.org>, "Gao Xiang" <xiang@kernel.org>,
+ "Chao Yu" <chao@kernel.org>, "Yue Hu" <huyue2@coolpad.com>,
+ "Jeffle Xu" <jefflexu@linux.alibaba.com>,
+ "Namjae Jeon" <linkinjeon@kernel.org>,
+ "Sungjong Seo" <sj1557.seo@samsung.com>, "Jan Kara" <jack@suse.com>,
+ "Andreas Dilger" <adilger.kernel@dilger.ca>,
+ "Jaegeuk Kim" <jaegeuk@kernel.org>,
+ "OGAWA Hirofumi" <hirofumi@mail.parknet.co.jp>,
+ "Christoph Hellwig" <hch@infradead.org>,
+ "Miklos Szeredi" <miklos@szeredi.hu>, "Bob Peterson" <rpeterso@redhat.com>,
+ "Andreas Gruenbacher" <agruenba@redhat.com>,
+ "Richard Weinberger" <richard@nod.at>,
+ "Anton Ivanov" <anton.ivanov@cambridgegreys.com>,
+ "Johannes Berg" <johannes@sipsolutions.net>,
+ "Mikulas Patocka" <mikulas@artax.karlin.mff.cuni.cz>,
+ "Mike Kravetz" <mike.kravetz@oracle.com>,
+ "Muchun Song" <muchun.song@linux.dev>, "Jan Kara" <jack@suse.cz>,
+ "David Woodhouse" <dwmw2@infradead.org>,
+ "Dave Kleikamp" <shaggy@kernel.org>, "Tejun Heo" <tj@kernel.org>,
+ "Trond Myklebust" <trond.myklebust@hammerspace.com>,
+ "Anna Schumaker" <anna@kernel.org>,
+ "Chuck Lever" <chuck.lever@oracle.com>, "Neil Brown" <neilb@suse.de>,
+ "Olga Kornievskaia" <kolga@netapp.com>, "Dai Ngo" <Dai.Ngo@oracle.com>,
+ "Tom Talpey" <tom@talpey.com>,
+ "Ryusuke Konishi" <konishi.ryusuke@gmail.com>,
+ "Anton Altaparmakov" <anton@tuxera.com>,
+ "Konstantin Komarov" <almaz.alexandrovich@paragon-software.com>,
+ "Mark Fasheh" <mark@fasheh.com>, "Joseph Qi" <joseph.qi@linux.alibaba.com>,
+ "Bob Copeland" <me@bobcopeland.com>, "Mike Marshall" <hubcap@omnibond.com>,
+ "Martin Brandenburg" <martin@omnibond.com>,
+ "Luis Chamberlain" <mcgrof@kernel.org>,
+ "Iurii Zaikin" <yzaikin@google.com>, "Tony Luck" <tony.luck@intel.com>,
+ "Guilherme G. Piccoli" <gpiccoli@igalia.com>,
+ "Anders Larsen" <al@alarsen.net>, "Steve French" <sfrench@samba.org>,
+ "Paulo Alcantara" <pc@manguebit.com>,
+ "Ronnie Sahlberg" <lsahlber@redhat.com>,
+ "Shyam Prasad N" <sprasad@microsoft.com>,
+ "Sergey Senozhatsky" <senozhatsky@chromium.org>,
+ "Phillip Lougher" <phillip@squashfs.org.uk>,
+ "Steven Rostedt" <rostedt@goodmis.org>,
+ "Masami Hiramatsu" <mhiramat@kernel.org>,
+ "Evgeniy Dushistov" <dushistov@mail.ru>,
+ "Chandan Babu R" <chandan.babu@oracle.com>,
+ "Darrick J. Wong" <djwong@kernel.org>,
+ "Damien Le Moal" <dlemoal@kernel.org>,
+ "Naohiro Aota" <naohiro.aota@wdc.com>,
+ "Johannes Thumshirn" <jth@kernel.org>,
+ "Alexei Starovoitov" <ast@kernel.org>,
+ "Daniel Borkmann" <daniel@iogearbox.net>,
+ "Andrii Nakryiko" <andrii@kernel.org>,
+ "Martin KaFai Lau" <martin.lau@linux.dev>, "Song Liu" <song@kernel.org>,
+ "Yonghong Song" <yonghong.song@linux.dev>,
+ "John Fastabend" <john.fastabend@gmail.com>,
+ "KP Singh" <kpsingh@kernel.org>, "Stanislav Fomichev" <sdf@google.com>,
+ "Hao Luo" <haoluo@google.com>, "Jiri Olsa" <jolsa@kernel.org>,
+ "Hugh Dickins" <hughd@google.com>,
+ "Andrew Morton" <akpm@linux-foundation.org>,
+ "David S . Miller" <davem@davemloft.net>,
+ "Eric Dumazet" <edumazet@google.com>, "Jakub Kicinski" <kuba@kernel.org>,
+ "Paolo Abeni" <pabeni@redhat.com>,
+ "John Johansen" <john.johansen@canonical.com>,
+ "Paul Moore" <paul@paul-moore.com>, "James Morris" <jmorris@namei.org>,
+ "Serge E. Hallyn" <serge@hallyn.com>,
+ "Stephen Smalley" <stephen.smalley.work@gmail.com>,
+ "Eric Paris" <eparis@parisplace.org>
+Subject: Re: [PATCH 86/87] fs: switch timespec64 fields in inode to discrete
+ integers
+Content-Type: text/plain
+X-Mailman-Approved-At: Fri, 29 Sep 2023 08:05:16 +0000
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -76,159 +199,47 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Amir Goldstein via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Amir Goldstein <amir73il@gmail.com>
-Cc: Latchesar Ionkov <lucho@ionkov.net>,
- Konstantin Komarov <almaz.alexandrovich@paragon-software.com>,
- "Rafael J. Wysocki" <rafael@kernel.org>, "Darrick J. Wong" <djwong@kernel.org>,
- Anders Larsen <al@alarsen.net>, Carlos Llamas <cmllamas@google.com>,
- Andrii Nakryiko <andrii@kernel.org>, Mattia Dongili <malattia@linux.it>,
- Hugh Dickins <hughd@google.com>, John Johansen <john.johansen@canonical.com>,
- Yonghong Song <yonghong.song@linux.dev>,
- Alexander Gordeev <agordeev@linux.ibm.com>, Christoph Hellwig <hch@lst.de>,
- Mike Marshall <hubcap@omnibond.com>, Paulo Alcantara <pc@manguebit.com>,
- linux-xfs@vger.kernel.org, Michael Ellerman <mpe@ellerman.id.au>,
- James Morris <jmorris@namei.org>,
- Christophe Leroy <christophe.leroy@csgroup.eu>,
- Christian Borntraeger <borntraeger@linux.ibm.com>, devel@lists.orangefs.org,
- Shyam Prasad N <sprasad@microsoft.com>, linux-um@lists.infradead.org,
- Nicholas Piggin <npiggin@gmail.com>, Alexander Viro <viro@zeniv.linux.org.uk>,
- Eric Van Hensbergen <ericvh@kernel.org>,
- Suren Baghdasaryan <surenb@google.com>,
- Trond Myklebust <trond.myklebust@hammerspace.com>,
- Anton Altaparmakov <anton@tuxera.com>, Christian Brauner <brauner@kernel.org>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- Stephen Smalley <stephen.smalley.work@gmail.com>, linux-usb@vger.kernel.org,
- linux-kernel@vger.kernel.org, Ronnie Sahlberg <lsahlber@redhat.com>,
- Sergey Senozhatsky <senozhatsky@chromium.org>,
- =?UTF-8?B?QXJ2ZSBIasO4bm5ldsOlZw==?= <arve@android.com>,
- Chuck Lever <chuck.lever@oracle.com>, Sven Schnelle <svens@linux.ibm.com>,
- Jiri Olsa <jolsa@kernel.org>, Jan Kara <jack@suse.com>,
- Tejun Heo <tj@kernel.org>, Andrew Morton <akpm@linux-foundation.org>,
- linux-trace-kernel@vger.kernel.org,
- Linus Torvalds <torvalds@linux-foundation.org>,
- Dave Kleikamp <shaggy@kernel.org>, linux-mm@kvack.org,
- Joel Fernandes <joel@joelfernandes.org>, Eric Dumazet <edumazet@google.com>,
- Stanislav Fomichev <sdf@google.com>, linux-s390@vger.kernel.org,
- linux-nilfs@vger.kernel.org, Paul Moore <paul@paul-moore.com>,
- Leon Romanovsky <leon@kernel.org>, John Fastabend <john.fastabend@gmail.com>,
- Luis Chamberlain <mcgrof@kernel.org>, codalist@coda.cs.cmu.edu,
- Iurii Zaikin <yzaikin@google.com>, Namjae Jeon <linkinjeon@kernel.org>,
- Masami Hiramatsu <mhiramat@kernel.org>, Todd Kjos <tkjos@android.com>,
- Vasily Gorbik <gor@linux.ibm.com>, selinux@vger.kernel.org,
- linuxppc-dev@lists.ozlabs.org, reiserfs-devel@vger.kernel.org,
- Miklos Szeredi <miklos@szeredi.hu>, Yue Hu <huyue2@coolpad.com>,
- Jaegeuk Kim <jaegeuk@kernel.org>, Martijn Coenen <maco@android.com>,
- OGAWA Hirofumi <hirofumi@mail.parknet.co.jp>, Hao Luo <haoluo@google.com>,
- Tony Luck <tony.luck@intel.com>, Theodore Ts'o <tytso@mit.edu>,
- Nicolas Pitre <nico@fluxnic.net>, linux-ntfs-dev@lists.sourceforge.net,
- Muchun Song <muchun.song@linux.dev>, linux-f2fs-devel@lists.sourceforge.net,
- "Guilherme G. Piccoli" <gpiccoli@igalia.com>, gfs2@lists.linux.dev,
- Eric Biederman <ebiederm@xmission.com>, Anna Schumaker <anna@kernel.org>,
- Brad Warrum <bwarrum@linux.ibm.com>, Mike Kravetz <mike.kravetz@oracle.com>,
- linux-efi@vger.kernel.org, Martin Brandenburg <martin@omnibond.com>,
- ocfs2-devel@lists.linux.dev, Alexei Starovoitov <ast@kernel.org>,
- platform-driver-x86@vger.kernel.org, Chris Mason <clm@fb.com>,
+From: Arnd Bergmann via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Arnd Bergmann <arnd@arndb.de>
+Cc: jfs-discussion@lists.sourceforge.net, linux-efi@vger.kernel.org,
+ platform-driver-x86@vger.kernel.org, gfs2@lists.linux.dev, linux-mm@kvack.org,
  linux-mtd@lists.infradead.org, linux-hardening@vger.kernel.org,
- Marc Dionne <marc.dionne@auristor.com>, Jiri Slaby <jirislaby@kernel.org>,
- linux-afs@lists.infradead.org, Ian Kent <raven@themaw.net>,
- Naohiro Aota <naohiro.aota@wdc.com>, Daniel Borkmann <daniel@iogearbox.net>,
- Dennis Dalessandro <dennis.dalessandro@cornelisnetworks.com>,
- linux-rdma@vger.kernel.org, coda@cs.cmu.edu,
- =?UTF-8?Q?Ilpo_J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>,
- Ilya Dryomov <idryomov@gmail.com>, Paolo Abeni <pabeni@redhat.com>,
- "Serge E. Hallyn" <serge@hallyn.com>, Kees Cook <keescook@chromium.org>,
- Arnd Bergmann <arnd@arndb.de>, autofs@vger.kernel.org,
- Steven Rostedt <rostedt@goodmis.org>, Mark Gross <markgross@kernel.org>,
- Damien Le Moal <dlemoal@kernel.org>, Eric Paris <eparis@parisplace.org>,
- ceph-devel@vger.kernel.org, Gao Xiang <xiang@kernel.org>,
- Jan Harkes <jaharkes@cs.cmu.edu>, linux-nfs@vger.kernel.org,
- linux-ext4@vger.kernel.org, Olga Kornievskaia <kolga@netapp.com>,
- Song Liu <song@kernel.org>, samba-technical@lists.samba.org,
- Steve French <sfrench@samba.org>, Jeremy Kerr <jk@ozlabs.org>,
- netdev@vger.kernel.org, Bob Peterson <rpeterso@redhat.com>,
+ linux-afs@lists.infradead.org, linux-s390@vger.kernel.org,
+ linux-nilfs@vger.kernel.org, linux-rdma@vger.kernel.org,
+ linux-unionfs@vger.kernel.org, codalist@coda.cs.cmu.edu,
+ linux-serial@vger.kernel.org, linux-ext4@vger.kernel.org,
+ devel@lists.orangefs.org, linux-trace-kernel@vger.kernel.org,
+ linux-cifs@vger.kernel.org, selinux@vger.kernel.org, apparmor@lists.ubuntu.com,
+ autofs@vger.kernel.org, linux-um@lists.infradead.org,
+ reiserfs-devel@vger.kernel.org, ocfs2-devel@lists.linux.dev,
+ ceph-devel@vger.kernel.org, linux-nfs@vger.kernel.org,
+ linux-ntfs-dev@lists.sourceforge.net, linuxppc-dev@lists.ozlabs.org,
+ v9fs@lists.linux.dev, linux-usb@vger.kernel.org,
+ samba-technical@lists.samba.org, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, linux-xfs@vger.kernel.org,
+ linux-security-module@vger.kernel.org, Netdev <netdev@vger.kernel.org>,
  linux-fsdevel@vger.kernel.org, bpf@vger.kernel.org, ntfs3@lists.linux.dev,
- linux-erofs@lists.ozlabs.org, "David S. Miller" <davem@davemloft.net>,
- Chandan Babu R <chandan.babu@oracle.com>, jfs-discussion@lists.sourceforge.net,
- Jan Kara <jack@suse.cz>, Neil Brown <neilb@suse.de>,
- Dominique Martinet <asmadeus@codewreck.org>,
- Christian Schoenebeck <linux_oss@crudebyte.com>,
- Bob Copeland <me@bobcopeland.com>, KP Singh <kpsingh@kernel.org>,
- linux-unionfs@vger.kernel.org, David Howells <dhowells@redhat.com>,
- Joseph Qi <joseph.qi@linux.alibaba.com>,
- Andreas Dilger <adilger.kernel@dilger.ca>,
- Mikulas Patocka <mikulas@artax.karlin.mff.cuni.cz>,
- Ard Biesheuvel <ardb@kernel.org>,
- Anton Ivanov <anton.ivanov@cambridgegreys.com>,
- Andreas Gruenbacher <agruenba@redhat.com>, Richard Weinberger <richard@nod.at>,
- Mark Fasheh <mark@fasheh.com>, Dai Ngo <Dai.Ngo@oracle.com>,
- Jason Gunthorpe <jgg@ziepe.ca>, linux-serial@vger.kernel.org,
- Jakub Kicinski <kuba@kernel.org>, Salah Triki <salah.triki@gmail.com>,
- Evgeniy Dushistov <dushistov@mail.ru>, linux-cifs@vger.kernel.org,
- Heiko Carstens <hca@linux.ibm.com>, Chao Yu <chao@kernel.org>,
- apparmor@lists.ubuntu.com, Josef Bacik <josef@toxicpanda.com>,
- Tom Talpey <tom@talpey.com>, Hans de Goede <hdegoede@redhat.com>,
- "Tigran A. Aivazian" <aivazian.tigran@gmail.com>,
- David Sterba <dsterba@suse.com>, Xiubo Li <xiubli@redhat.com>,
- Ryusuke Konishi <konishi.ryusuke@gmail.com>,
- Johannes Thumshirn <jth@kernel.org>, Ritu Agarwal <rituagar@linux.ibm.com>,
- Luis de Bethencourt <luisbg@kernel.org>,
- Martin KaFai Lau <martin.lau@linux.dev>, v9fs@lists.linux.dev,
- David Sterba <dsterba@suse.cz>, linux-security-module@vger.kernel.org,
- Jeffle Xu <jefflexu@linux.alibaba.com>,
- Phillip Lougher <phillip@squashfs.org.uk>,
- Johannes Berg <johannes@sipsolutions.net>,
- Sungjong Seo <sj1557.seo@samsung.com>, David Woodhouse <dwmw2@infradead.org>,
- linux-karma-devel@lists.sourceforge.net, linux-btrfs@vger.kernel.org,
- Joel Becker <jlbec@evilplan.org>
+ linux-erofs@lists.ozlabs.org, linux-karma-devel@lists.sourceforge.net,
+ linux-btrfs@vger.kernel.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Thu, Sep 28, 2023 at 2:06=E2=80=AFPM Jeff Layton <jlayton@kernel.org> wr=
-ote:
+On Thu, Sep 28, 2023, at 07:05, Jeff Layton wrote:
+> This shaves 8 bytes off struct inode, according to pahole.
 >
-> The recent change to use discrete integers instead of struct timespec64
-> in struct inode shaved 8 bytes off of it, but it also moves the i_lock
-> into the previous cacheline, away from the fields that it protects.
->
-> Move i_blocks up above the i_lock, which moves the new 4 byte hole to
-> just after the timestamps, without changing the size of the structure.
->
-
-Instead of creating an implicit hole, can you please move i_generation
-to fill the 4 bytes hole.
-
-It makes sense in the same cache line with i_ino and I could
-use the vacant 4 bytes hole above i_fsnotify_mask to expand the
-mask to 64bit (the 32bit event mask space is running out).
-
-Thanks,
-Amir.
-
 > Signed-off-by: Jeff Layton <jlayton@kernel.org>
-> ---
->  include/linux/fs.h | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/include/linux/fs.h b/include/linux/fs.h
-> index de902ff2938b..3e0fe0f52e7c 100644
-> --- a/include/linux/fs.h
-> +++ b/include/linux/fs.h
-> @@ -677,11 +677,11 @@ struct inode {
->         u32                     i_atime_nsec;
->         u32                     i_mtime_nsec;
->         u32                     i_ctime_nsec;
-> +       blkcnt_t                i_blocks;
->         spinlock_t              i_lock; /* i_blocks, i_bytes, maybe i_siz=
-e */
->         unsigned short          i_bytes;
->         u8                      i_blkbits;
->         u8                      i_write_hint;
-> -       blkcnt_t                i_blocks;
->
->  #ifdef __NEED_I_SIZE_ORDERED
->         seqcount_t              i_size_seqcount;
-> --
-> 2.41.0
->
+
+FWIW, this is similar to the approach that Deepa suggested
+back in 2016:
+
+https://lore.kernel.org/lkml/1452144972-15802-3-git-send-email-deepa.kernel@gmail.com/
+
+It was NaKed at the time because of the added complexity,
+though it would have been much easier to do it then,
+as we had to touch all the timespec references anyway.
+
+The approach still seems ok to me, but I'm not sure it's worth
+doing it now if we didn't do it then.
+
+     Arnd
 
