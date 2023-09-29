@@ -2,59 +2,82 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id F06437B2D80
-	for <lists+samba-technical@lfdr.de>; Fri, 29 Sep 2023 10:06:44 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D31017B2D81
+	for <lists+samba-technical@lfdr.de>; Fri, 29 Sep 2023 10:06:49 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=w4hql40FuyyfsTNK9D530X9ExV2y5b7TU7/1a0HHsnU=; b=rwN0qrbu8ELZ+q6f6I5OCHFa/g
-	q78OXHu3IoWAnHboXYPvJNQ059UwpIZz1sQXYFGnRnAknx7WC/LRk7ASoX58ChUEpNao/uLz0M+tv
-	9WApHCWXI0jrJokMOEuDry7O805xhYMuraLRqLnDIokoFdC/J2ebqqguOoyGI5SwCBMQTgVKf2ZWx
-	OgkkXCyMGpwspP4Lu5rPojezt3mNGioo475sXGBY+vF4LWgpquMVlvXgD/ovN7iFxh3SQYkCmswUj
-	5LACYCHTNbCyimfKphBsBUhGipqVwHJSVZ+dVS491d/wkFJFeYJ7C1Y+ZfHaV60r2B7q626FBMe7K
-	EJ2Wj2zQ==;
-Received: from ip6-localhost ([::1]:51914 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=bvzvBt54YKz6rxhAovyc5UddK2JDmyrig02MAqmRW1o=; b=RxdbFyzACRDBKPNLzCwNDlsmf6
+	TW+Qc8BG3gI9WhSbfV9jF2728tFbIaRC1+RZERYOknNmLjFOXw9hI0HUc3Jfnj78Fof03H+CA6Qxq
+	yBqJnJcXUA6v/2S5fklalo+ogb3L2da60wU4b4GujY7toS7O6AhiU0av02tIoGUe3EwZD9QbIx0eb
+	2rLfUfK9r5uCfo7FHs7zLfD/In9GzelrtdIEE166VIXR5FgJ2zaOoVlkqUdxylCfl8i7VUqvBMpVK
+	1V5MGm5wkgq1W1uFFRUTt1Q4MHaeze6uUY7sikT8vtRnU0EvCYvnWGetB42reZLQhh2ciP6QxBBfs
+	lxB/l05w==;
+Received: from ip6-localhost ([::1]:64954 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1qm8WA-0076Ln-0X; Fri, 29 Sep 2023 08:06:34 +0000
-Received: from outgoing-auth-1.mit.edu ([18.9.28.11]:53018
- helo=outgoing.mit.edu) 
- by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1qlyjl-0072Rw-Oh
- for samba-technical@lists.samba.org; Thu, 28 Sep 2023 21:40:01 +0000
-Received: from cwcc.thunk.org (pool-173-48-111-87.bstnma.fios.verizon.net
- [173.48.111.87]) (authenticated bits=0)
- (User authenticated as tytso@ATHENA.MIT.EDU)
- by outgoing.mit.edu (8.14.7/8.12.4) with ESMTP id 38SLQv6B021535
- (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 28 Sep 2023 17:26:58 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mit.edu; s=outgoing;
- t=1695936431; bh=w4hql40FuyyfsTNK9D530X9ExV2y5b7TU7/1a0HHsnU=;
- h=Date:From:Subject:Message-ID:MIME-Version:Content-Type;
- b=WaP79h5bQ62LFZ7vHHOCmGWKrdVEw7kTPaoOfwjqG7743/KpOeTQfqQpPAFra25uw
- qHhUQptGls8wmshhyjdnO9G7FinJGRSu/H+Pr36/HOeVsY2L1QKwp6wJYXWDQj3sU6
- spxP8X5T3MP/kvZK7FBaCvSP9XyEeM6QQ1hm7OJdJzn5aY8Xu6Fua+baunPXgUoy7L
- KhVrZIKyvYcsT0NIC33rKKlIWvn/ApA3rOkeZe9sao19Z+JDKma1IeqPjZOBPScT5p
- +jnf6c81JzZ84Oc7GpEzLi5aGjfgb8lOPxXH2Up3ynLvwNxgs1A65KPgjW+ME/+Top
- l7dosLTQv306w==
-Received: by cwcc.thunk.org (Postfix, from userid 15806)
- id 06AD715C0266; Thu, 28 Sep 2023 17:26:57 -0400 (EDT)
-Date: Thu, 28 Sep 2023 17:26:56 -0400
-To: Jeff Layton <jlayton@kernel.org>
-Subject: Re: [PATCH 86/87] fs: switch timespec64 fields in inode to discrete
- integers
-Message-ID: <20230928212656.GC189345@mit.edu>
+	id 1qm8WL-0076sI-Iq; Fri, 29 Sep 2023 08:06:45 +0000
+Received: from mail-ej1-x633.google.com ([2a00:1450:4864:20::633]:56578) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1qm1ev-0072ps-Az
+ for samba-technical@lists.samba.org; Fri, 29 Sep 2023 00:47:11 +0000
+Received: by mail-ej1-x633.google.com with SMTP id
+ a640c23a62f3a-9ad8d47ef2fso1739952166b.1
+ for <samba-technical@lists.samba.org>; Thu, 28 Sep 2023 17:47:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linux-foundation.org; s=google; t=1695948428; x=1696553228;
+ darn=lists.samba.org; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=bvzvBt54YKz6rxhAovyc5UddK2JDmyrig02MAqmRW1o=;
+ b=RxZaIsjbcfYo2WKCZ/iAKxIXbGasewGKCfcULgOSaJADKy1nZOHF/ywxpV181ckyI1
+ CI049Gv32poZdu2cdaE6BqGEmoWJMo7ShioxUIqm2nJobrLlys3YIdQA1ZiMVlXcJc2I
+ NzsGpBy0LmXCbCGn1eIpLvmTofPMS0IphVfA4=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1695948428; x=1696553228;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=bvzvBt54YKz6rxhAovyc5UddK2JDmyrig02MAqmRW1o=;
+ b=WP6jRkZr7zNvYEfBwjQBDrzsIRHbC87MTdHDkG56PDP+i6qvXutdj1JONZZ8dZtTg/
+ NIL5tHgMJvN12JzGMioY6LZMHpLsp37/vqwerbqyP2A+P3DGbPZLMATL8oweqixp4VhQ
+ h6j7Gwsrw2vwVfeaFV+C59ULI0/fWCqKvF9X5tSj/l2hkCYD2WYL/Qi4QTnYs6DjXWIC
+ pPVHp+UIOlXzPSdl/iGGyfzlP+cOv4Dj01cgKvEORgr8jAG8Wsva7c55kCS+SN5Bz8b0
+ YrGYACpiklSXwKBLa5mJ8h3b2F1SaCdmbG/DtkBrSfUL1sAxuoOH/0psaG2cvDmwl6iF
+ z/0w==
+X-Gm-Message-State: AOJu0YwFLA9ricZHmei3Kgact/tY5r7qvZEvzBvtrYxjgj+8EcbqY7/o
+ tp+HNHW1qzlC+Qx5a4XZi78mJfAtezIpQvhuyNJAaW5PiSI=
+X-Google-Smtp-Source: AGHT+IG9yNkYjqmS2CEzVN7WfqeJ86VQp8DVlT+MTZGJNJ8SUeT0ikx6nwAWtuRn7a/pD8YBdPlyWQ==
+X-Received: by 2002:a17:906:530b:b0:9b2:6b4f:6a39 with SMTP id
+ h11-20020a170906530b00b009b26b4f6a39mr2256851ejo.64.1695948428074; 
+ Thu, 28 Sep 2023 17:47:08 -0700 (PDT)
+Received: from mail-ed1-f54.google.com (mail-ed1-f54.google.com.
+ [209.85.208.54]) by smtp.gmail.com with ESMTPSA id
+ ty15-20020a170907c70f00b009ae6a6451fdsm10939480ejc.35.2023.09.28.17.47.07
+ for <samba-technical@lists.samba.org>
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 28 Sep 2023 17:47:07 -0700 (PDT)
+Received: by mail-ed1-f54.google.com with SMTP id
+ 4fb4d7f45d1cf-5230a22cfd1so17017452a12.1
+ for <samba-technical@lists.samba.org>; Thu, 28 Sep 2023 17:47:07 -0700 (PDT)
+X-Received: by 2002:aa7:d807:0:b0:530:52d2:f656 with SMTP id
+ v7-20020aa7d807000000b0053052d2f656mr2404674edq.21.1695946739584; Thu, 28 Sep
+ 2023 17:18:59 -0700 (PDT)
+MIME-Version: 1.0
 References: <20230928110554.34758-1-jlayton@kernel.org>
  <20230928110554.34758-2-jlayton@kernel.org>
  <6020d6e7-b187-4abb-bf38-dc09d8bd0f6d@app.fastmail.com>
  <af047e4a1c6947c59d4a13d4ae221c784a5386b4.camel@kernel.org>
  <20230928171943.GK11439@frogsfrogsfrogs>
  <6a6f37d16b55a3003af3f3dbb7778a367f68cd8d.camel@kernel.org>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <6a6f37d16b55a3003af3f3dbb7778a367f68cd8d.camel@kernel.org>
-X-Warn: EHLO/HELO not verified: Remote host 18.9.28.11
- (outgoing-auth-1.mit.edu) incorrectly presented itself as outgoing.mit.edu
-X-Mailman-Approved-At: Fri, 29 Sep 2023 08:05:16 +0000
+ <20230928212656.GC189345@mit.edu>
+In-Reply-To: <20230928212656.GC189345@mit.edu>
+Date: Thu, 28 Sep 2023 17:18:42 -0700
+X-Gmail-Original-Message-ID: <CAHk-=wjTynK9BdGbi+8eShU77nkPvipFwRxEd1TSBrw2+LiuDg@mail.gmail.com>
+Message-ID: <CAHk-=wjTynK9BdGbi+8eShU77nkPvipFwRxEd1TSBrw2+LiuDg@mail.gmail.com>
+Subject: Re: [PATCH 86/87] fs: switch timespec64 fields in inode to discrete
+ integers
+To: "Theodore Ts'o" <tytso@mit.edu>
+Content-Type: text/plain; charset="UTF-8"
+X-Mailman-Approved-At: Fri, 29 Sep 2023 08:05:14 +0000
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -68,8 +91,8 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Theodore Ts'o via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Theodore Ts'o <tytso@mit.edu>
+From: Linus Torvalds via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Linus Torvalds <torvalds@linux-foundation.org>
 Cc: Latchesar Ionkov <lucho@ionkov.net>,
  Konstantin Komarov <almaz.alexandrovich@paragon-software.com>,
  "Rafael J . Wysocki" <rafael@kernel.org>,
@@ -93,13 +116,12 @@ Cc: Latchesar Ionkov <lucho@ionkov.net>,
  Stephen Smalley <stephen.smalley.work@gmail.com>, linux-usb@vger.kernel.org,
  linux-kernel@vger.kernel.org, Ronnie Sahlberg <lsahlber@redhat.com>,
  Sergey Senozhatsky <senozhatsky@chromium.org>,
- Arve =?iso-8859-1?B?SGr4bm5lduVn?= <arve@android.com>,
+ =?UTF-8?B?QXJ2ZSBIasO4bm5ldsOlZw==?= <arve@android.com>,
  Chuck Lever <chuck.lever@oracle.com>, Sven Schnelle <svens@linux.ibm.com>,
  Jiri Olsa <jolsa@kernel.org>, Jan Kara <jack@suse.com>,
  Tejun Heo <tj@kernel.org>, Andrew Morton <akpm@linux-foundation.org>,
- linux-trace-kernel@vger.kernel.org,
- Linus Torvalds <torvalds@linux-foundation.org>,
- Dave Kleikamp <shaggy@kernel.org>, linux-mm@kvack.org,
+ linux-trace-kernel@vger.kernel.org, Dave Kleikamp <shaggy@kernel.org>,
+ samba-technical@lists.samba.org, linux-mm@kvack.org,
  Joel Fernandes <joel@joelfernandes.org>, Eric Dumazet <edumazet@google.com>,
  Stanislav Fomichev <sdf@google.com>, codalist@telemann.coda.cs.cmu.edu,
  linux-s390@vger.kernel.org, linux-nilfs@vger.kernel.org,
@@ -128,7 +150,7 @@ Cc: Latchesar Ionkov <lucho@ionkov.net>,
  Naohiro Aota <naohiro.aota@wdc.com>, Daniel Borkmann <daniel@iogearbox.net>,
  Dennis Dalessandro <dennis.dalessandro@cornelisnetworks.com>,
  linux-rdma@vger.kernel.org, coda@cs.cmu.edu,
- Ilpo =?iso-8859-1?Q?J=E4rvinen?= <ilpo.jarvinen@linux.intel.com>,
+ =?UTF-8?Q?Ilpo_J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>,
  Ilya Dryomov <idryomov@gmail.com>, Paolo Abeni <pabeni@redhat.com>,
  "Serge E. Hallyn" <serge@hallyn.com>,
  Christian Schoenebeck <linux_oss@crudebyte.com>,
@@ -139,7 +161,7 @@ Cc: Latchesar Ionkov <lucho@ionkov.net>,
  Gao Xiang <xiang@kernel.org>, Jan Harkes <jaharkes@cs.cmu.edu>,
  linux-nfs@vger.kernel.org, linux-ext4@vger.kernel.org,
  Olga Kornievskaia <kolga@netapp.com>, Song Liu <song@kernel.org>,
- samba-technical@lists.samba.org, Steve French <sfrench@samba.org>,
+ Jeff Layton <jlayton@kernel.org>, Steve French <sfrench@samba.org>,
  Jeremy Kerr <jk@ozlabs.org>, Netdev <netdev@vger.kernel.org>,
  Bob Peterson <rpeterso@redhat.com>, linux-fsdevel@vger.kernel.org,
  bpf@vger.kernel.org, ntfs3@lists.linux.dev, linux-erofs@lists.ozlabs.org,
@@ -179,38 +201,55 @@ Cc: Latchesar Ionkov <lucho@ionkov.net>,
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Thu, Sep 28, 2023 at 01:40:55PM -0400, Jeff Layton wrote:
-> 
-> Correct. We'd lose some fidelity in currently stored timestamps, but as
-> Linus and Ted pointed out, anything below ~100ns granularity is
-> effectively just noise, as that's the floor overhead for calling into
-> the kernel. It's hard to argue that any application needs that sort of
-> timestamp resolution, at least with contemporary hardware. 
-> 
-> Doing that would mean that tests that store specific values in the
-> atime/mtime and expect to be able to fetch exactly that value back would
-> break though, so we'd have to be OK with that if we want to try it. The
-> good news is that it's relatively easy to experiment with new ways to
-> store timestamps with these wrappers in place.
+On Thu, 28 Sept 2023 at 14:28, Theodore Ts'o <tytso@mit.edu> wrote:
+>
+> I don't think anyone will complain about breaking the userspace API
+> --- especially since if, say, the CIA was using this for their spies'
+> drop boxes, they probably wouldn't want to admit it.  :-)
 
-The reason why we store 1ns granularity in ext4's on-disk format (and
-accept that we only support times only a couple of centuries into the
-future, as opposed shooting for an on-disk format good for several
-millennia :-), was in case there was userspace that might try to store
-a very fine-grained timestamp and want to be able to get it back
-bit-for-bit identical.
+Well, you will find that real apps do kind of of care.
 
-For example, what if someone was trying to implement some kind of
-steganographic scheme where they going store a secret message (or more
-likely, a 256-bit AES key) in the nanosecond fields of the file's
-{c,m,a,cr}time timestamps, "hiding in plain sight".  Not that I think
-that we have to support something like that, since the field is for
-*timestamps* not cryptographic bits, so if we break someone who is
-doing that, do we care?
+Just to take a very real example, "git" will very much notice time
+granularity issues and care - because git will cache the 'stat' times
+in the index.
 
-I don't think anyone will complain about breaking the userspace API
---- especially since if, say, the CIA was using this for their spies'
-drop boxes, they probably wouldn't want to admit it.  :-)
+So if you get a different stat time (because the vfs layer has changed
+some granularity), git will then have to check the files carefully
+again and update the index.
 
-       	    	     	      	      	    - Ted
+You can simulate this "re-check all files" with something like this:
+
+    $ time git diff
+
+    real 0m0.040s
+    user 0m0.035s
+    sys 0m0.264s
+
+    $ rm .git/index && git read-tree HEAD
+
+    $ time git diff
+
+    real 0m9.595s
+    user 0m7.287s
+    sys 0m2.810s
+
+so the difference between just doing a "look, index information
+matches current 'stat' information" and "oops, index does not have the
+stat data" is "40 milliseconds" vs "10 seconds".
+
+That's a big difference, and you'd see that each time the granularity
+changes. But then once the index file has been updated, it's back to
+the good case.
+
+So yes, real programs to cache stat information, and it matters for performance.
+
+But I don't think any actual reasonable program will have
+*correctness* issues, though - because there are certainly filesystems
+out there that don't do nanosecond resolution (and other operations
+like copying trees around will obviously also change times).
+
+Anybody doing steganography in the timestamps is already not going to
+have a great time, really.
+
+                 Linus
 
