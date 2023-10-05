@@ -2,67 +2,52 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 91F397B8635
-	for <lists+samba-technical@lfdr.de>; Wed,  4 Oct 2023 19:15:27 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 10D927B9C64
+	for <lists+samba-technical@lfdr.de>; Thu,  5 Oct 2023 12:02:35 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=uN0/qBnSOCxuRcuMfH57mhCtCNdVLTpuCD2AqgTf59I=; b=3aloV6T+EkEsv9vfOBSjVF0YGe
-	lYJVhyW8f563X7Qq9KDYQzJn4R80ghyQHPy3isAJiTyRazByxJiZ4oX6GTMxm5IAr1GT8cE4JFfoM
-	tSFjkn82aJwglKY9l5RMjOU6bAooqKzECEnjeaDz5CZaLnPLDK9KrcNUTOy36NvPyBea9lMV1baS8
-	kQ1lYAqMQdk6iMczPWXMwQrZQsYrRj4Dv71tAEgjUubh40xY3Q4ekkayyW6mBIKdq/CocZ9wQRxCs
-	+Iwe14mmLEBeijB2lx6wwn8Wy6+M1SRMlFwa8WlkFsfgE7Gtq+fVwflmuw3BFv3IyA2gywZS4R1pc
-	P+mr9sbw==;
-Received: from ip6-localhost ([::1]:38062 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=3JmcJmVRbwQK91ggFRVHUcgjYOd4TKVkFAYGG+PetYY=; b=XpKzkKEitVuXg3HGP3SxNjhc+4
+	d0Jdvu7mn3YfBFgrPKxYFc/y8nyZIZIOfZRCBKXwxfJPj8m6Mh+V+OV2mLZxwDW5V6j3zLUCXuPhi
+	2h14+HTzgxy+CK5+GCZiTsRWMwmHNsDvp9bBuQ56BaelFI0sK85PEtz1x3ItNUActYXoo1xEOWKEi
+	WQGOpBVgG6wLf2gCTDFRbP9owUaJogh3TbN92x3rb0Utyo6hHqMjELBGDgq6oPmTgD8ra+wh4k553
+	rtN8XKhtA7uvR2LeOIKL/q3jDK9vgFdoLv53KUSGg4s24VaCsqykvGFHLTo4sGAHiclWzvMvONGBK
+	3htaPODw==;
+Received: from ip6-localhost ([::1]:39562 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1qo5Sn-000NFf-6X; Wed, 04 Oct 2023 17:15:08 +0000
-Received: from mail-lf1-x135.google.com ([2a00:1450:4864:20::135]:48534) 
+	id 1qoLB0-000QNs-OW; Thu, 05 Oct 2023 10:01:49 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:41144) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1qo5Sg-000NFV-GZ
- for samba-technical@lists.samba.org; Wed, 04 Oct 2023 17:15:05 +0000
-Received: by mail-lf1-x135.google.com with SMTP id
- 2adb3069b0e04-5044dd5b561so83579e87.1
- for <samba-technical@lists.samba.org>; Wed, 04 Oct 2023 10:15:00 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1696439700; x=1697044500; darn=lists.samba.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=uN0/qBnSOCxuRcuMfH57mhCtCNdVLTpuCD2AqgTf59I=;
- b=XyQlfzQeIRsP+c8S5PxVSjD3maNjVdbfVOUN1A+VWKqZUZt6/+bsGFbd+EjeXSxvMv
- RRv8m4szOhpUY9f4VEEXgIHv6871W5/W9Fmju4Ydsxhd44gnkJNplqSkKoEyTGChiXKp
- uM+5xS+VHoBSABQr1pFU+PVqd50dabdxTApz7WjP5h8ZDnkRmq72hxhPb3ROtQIkj6VY
- vlF4zgKG4gzKd7H1Pt7HwtYt8GlyEeCNrnWtoCEgxrPKPPc0eotbDZKSL9hb2Vk77aMG
- NJlck5ykfYuKKOXKLnI9NM99ZB7VRtqjdC80Wod5L84ttMFxBWvPQlPi2MCi/avhjwBc
- DMaw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696439700; x=1697044500;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=uN0/qBnSOCxuRcuMfH57mhCtCNdVLTpuCD2AqgTf59I=;
- b=o8/3X7SDC1xGRvuET8RDZtn88sygNZrggOYLFz05lQeMDbKjxTP5FDdcTcSzc9n9WC
- aaPd1TSjPKY+1YWp+F30VZEZVMenwPcKyGva8pq6DNCtfJoCRLTx6rddA4AnziuCy/4E
- 9r1MbJ9RK3BBsc1yVstuaJgQuA09cocMQhgNMknxoA//AnlR3eYnQhawPHkIat/zjWcx
- NZxaplUVuiPIcLk6ZisJe3LG9T9tfvYBIHsbkkCMpMGGVG3vm/FnS0BbNQxY1xRr+TaC
- iU4SzP0PIgDHjTF1Vsg9cu0ktrum9l6KQrw6NojCLRCZw8mnh7hj3+lBB343QH9es+pD
- F8sA==
-X-Gm-Message-State: AOJu0Ywc/p4cDZIVLUkpxdVJpoggfhP1hgFX7xcjoiSCYAp3+rRY14be
- QGJc61IZubhb9y/akQDSoui6R0vx7Qhv7HxqYis=
-X-Google-Smtp-Source: AGHT+IFaH/fFdbF+DkwG9xKZ0qeshMs9vxr3MPhrVxX7QwoI5Tx/rsMu4nwy0PRPqeHlT1Zml0o003d7n/XjVoIND9M=
-X-Received: by 2002:a05:6512:32cd:b0:4fa:f96c:745f with SMTP id
- f13-20020a05651232cd00b004faf96c745fmr3011246lfg.38.1696439699819; Wed, 04
- Oct 2023 10:14:59 -0700 (PDT)
+ (Exim) id 1qoLAt-000QNk-8b
+ for samba-technical@lists.samba.org; Thu, 05 Oct 2023 10:01:46 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=From:To:Date:Message-ID:CC;
+ bh=3JmcJmVRbwQK91ggFRVHUcgjYOd4TKVkFAYGG+PetYY=; b=R9qG2NxsKuaEpBXHD/aAWOJ9xo
+ 7+ehf/MNKDqkS/YJhCHervC8ch6C1Ey8u6iwnIIqKslTdR96sg5xq9WC/90X0KhHW8plwNxHnfsiZ
+ UdGulU/xe750YtX5nTLJSaTghLXWxlbPsyDeK+qys5zp4n+d8Dbi2jagG2Q9y8806A/1cq+EevFK6
+ tVnIAJADCx64Ah5/3GAX2MOleT6DF5H7e5+nfEN7kMhjPB0xul0D8aUfrD7rr5ohQLcEzo0F4Jane
+ BvrL80loNOpCn6YMc70WgNToDOZ/WAvshtDvQfbxsPFcR2z20N8TXM6Q6V19j7VLWKUlIwIddcMUX
+ 7IdGqeQ9YtB09S0B9ihPbu+GJPO3xoPDyIRXhLwxt9e3wfPWk6cM1sNewT/JD2Wex+xdhGUp5v0Lz
+ hFG4Ltfx34gh0+NH2YBTuHxrXG90nvtMsIqpXdJ8xkNdkGpDN1+HSJulp0dpJ0WrdSotdVspZnWH3
+ xqSI5/qnP4o4ZjqynndjIiZ1;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1qoLAq-00Gp09-2E; Thu, 05 Oct 2023 10:01:40 +0000
+Message-ID: <e4750f34-182e-9e41-0fd4-46e14f79a128@samba.org>
+Date: Thu, 5 Oct 2023 12:01:39 +0200
 MIME-Version: 1.0
-References: <20231004011303.979995-1-jrife@google.com>
- <9062eefc4114f9c9162a19f98a1b820c.pc@manguebit.com>
-In-Reply-To: <9062eefc4114f9c9162a19f98a1b820c.pc@manguebit.com>
-Date: Wed, 4 Oct 2023 12:14:48 -0500
-Message-ID: <CAH2r5mt4UGni0Wa2sqBA+OGuvnYjmy1ut0pzKa-1C1vUE=fEaw@mail.gmail.com>
-Subject: Re: [PATCH] smb: use kernel_connect() and kernel_bind()
-To: Paulo Alcantara <pc@manguebit.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.15.1
+Subject: Re: Mount point detection by device id comparison
+Content-Language: en-US, de-DE
+To: Carson Buttars <carson@et.byu.edu>, samba-technical@lists.samba.org
+References: <cf3ce5e3-2204-ea22-01e3-cae651c86ab0@et.byu.edu>
+ <242580f2-8a90-7bab-3702-5ff7ea9adc98@et.byu.edu>
+In-Reply-To: <242580f2-8a90-7bab-3702-5ff7ea9adc98@et.byu.edu>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------F2blkIAma0icD1qwaHoeFjRs"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -76,42 +61,73 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
-Cc: tom@talpey.com, sprasad@microsoft.com, linux-cifs@vger.kernel.org,
- samba-technical@lists.samba.org, Jordan Rife <jrife@google.com>,
- lsahlber@redhat.com, sfrench@samba.org, stable@vger.kernel.org
+From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Ralph Boehme <slow@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-tentatively merged into cifs-2.6.git for-next pending testing and
-additional review
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------F2blkIAma0icD1qwaHoeFjRs
+Content-Type: multipart/mixed; boundary="------------kYnnjTb2Dq7kYU16UGraS3JL";
+ protected-headers="v1"
+From: Ralph Boehme <slow@samba.org>
+To: Carson Buttars <carson@et.byu.edu>, samba-technical@lists.samba.org
+Message-ID: <e4750f34-182e-9e41-0fd4-46e14f79a128@samba.org>
+Subject: Re: Mount point detection by device id comparison
+References: <cf3ce5e3-2204-ea22-01e3-cae651c86ab0@et.byu.edu>
+ <242580f2-8a90-7bab-3702-5ff7ea9adc98@et.byu.edu>
+In-Reply-To: <242580f2-8a90-7bab-3702-5ff7ea9adc98@et.byu.edu>
 
-On Wed, Oct 4, 2023 at 10:44=E2=80=AFAM Paulo Alcantara <pc@manguebit.com> =
-wrote:
->
-> Jordan Rife <jrife@google.com> writes:
->
-> > Recent changes to kernel_connect() and kernel_bind() ensure that
-> > callers are insulated from changes to the address parameter made by BPF
-> > SOCK_ADDR hooks. This patch wraps direct calls to ops->connect() and
-> > ops->bind() with kernel_connect() and kernel_bind() to ensure that SMB
-> > mounts do not see their mount address overwritten in such cases.
-> >
-> > Link: https://lore.kernel.org/netdev/9944248dba1bce861375fcce9de663934d=
-933ba9.camel@redhat.com/
-> > Cc: <stable@vger.kernel.org> # 6.x.y
-> > Signed-off-by: Jordan Rife <jrife@google.com>
-> > ---
-> >  fs/smb/client/connect.c | 10 +++++-----
-> >  1 file changed, 5 insertions(+), 5 deletions(-)
->
-> Acked-by: Paulo Alcantara (SUSE) <pc@manguebit.com>
+--------------kYnnjTb2Dq7kYU16UGraS3JL
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
 
+SGkgQ2Fyc29uLA0KDQpzb3JyeSBmb3IgdGhlIGxvbmcgZGVsYXksIGJ1dCB0aGUgd2hvbGUg
+ZmlsZSBzZXJ2ZXIgdGVhbSB3YXMgYnVzeSBhdCBTREMgDQppbiBGcmVtb250LiBBbmQgdGhh
+bmtzIGZvciBjb250cmlidXRpbmchDQoNCk9uIDkvMjAvMjMgMTg6MDIsIENhcnNvbiBCdXR0
+YXJzIHZpYSBzYW1iYS10ZWNobmljYWwgd3JvdGU6DQo+IEkndmUgZ290dGVuIG5vIHJlc3Bv
+bnNlIG9uIHRoaXMuIElzIHRoZSByaWdodCBwbGFjZSB0byB0YWxrIGFib3V0IGl0IG9uIA0K
+PiBtYXRyaXg/DQoNCkVpdGhlciBvbmUgd2lsbCBkbywgbW9zdCBkZXZzIGFyZSBwcmVzZW50
+IGF0IGJvdGggcGxhY2VzLg0KDQpJIGd1ZXNzIFZvbGtlciB3b3VsZCBiZSBiZXR0ZXIgc3Vp
+dGVkIHRvIGFuc3dlciB5b3UgcXVlc3Rpb25zIGJ1dCBsZXQgbWUgDQp0cnk6DQoNCi0gc3Vi
+bWl0dGluZyBNUnMgdmlhIGdpdGxhYiBhbmQgdHJ5aW5nIHRvIGdldCBhdHRlbnRpb24gdmlh
+IHRoaXMgTUwgaXMgDQp0aGUgZGVmaW5pdGVseSB0aGUgd2F5IHRvIGdvDQoNCi0gYWZhaWN0
+IGZvciBjb21wbGV0ZSBoYW5kbGluZyBvZiANCkZJTEVfQVRUUklCVVRFX1JFUEFSU0VfUE9J
+TlQvSU9fUkVQQVJTRV9UQUdfTU9VTlRfUE9JTlQgdGhlcmUncyBtb3JlIA0Kc3R1ZmYgbmVl
+ZGVkLCBjZiBNUy1GU0NDIDIuMS4yLjUgTW91bnQgUG9pbnQgUmVwYXJzZSBEYXRhIEJ1ZmZl
+ciBhbmQgDQo8aHR0cHM6Ly9sZWFybi5taWNyb3NvZnQuY29tL2VuLXVzL3dpbmRvd3Mvd2lu
+MzIvZmlsZWlvL3JlcGFyc2UtcG9pbnRzPg0KDQotIFZvbGtlciBpcyBjdXJyZW50bHkgd29y
+a2luZyBhbiByZXBhcnNlIHBvaW50IHN1cHBvcnQgYXMgcGFydCBvZiBhbiANCmVmZm9ydCB0
+byBpbXBsZW1lbnQgU01CMyBVTklYIEV4dGVuc2lvbnMsIGJ1dCB0aGlzIHNob3VsZCBiZSwg
+YWZhaWN0LCANCmxhcmdlbHkgdGFuZ2VudGlhbA0KDQpIdGghDQotc2xvdw0KDQotLQ0KUmFs
+cGggQm9laG1lLCBTYW1iYSBUZWFtICAgICAgICAgICAgICAgICAgICAgIGh0dHBzOi8vc2Ft
+YmEub3JnLw0KU2VyTmV0IFNhbWJhIFRlYW0gTGVhZCAgICAgICAgICAgICAgICAgICAgIGh0
+dHBzOi8vc2VybmV0LmRlL2VuLw0KU0FNQkErIFNhbWJhIHBhY2thZ2VzICAgICAgICAgICAg
+ICAgICAgICAgICAgaHR0cHM6Ly9zYW1iYS5wbHVzLw0KU0FNQkErIFdlYmluYXIgICAgICAg
+ICAgICAgICAgIGh0dHBzOi8vc2FtYmEucGx1cy9zYW1iYS13ZWJpbmFycw0KDQo=
 
+--------------kYnnjTb2Dq7kYU16UGraS3JL--
 
---=20
-Thanks,
+--------------F2blkIAma0icD1qwaHoeFjRs
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature"
 
-Steve
+-----BEGIN PGP SIGNATURE-----
+
+wsF5BAABCAAjFiEE+uLGCIokJSBRxVnkqh6bcSY5nkYFAmUeiYMFAwAAAAAACgkQqh6bcSY5nkZZ
+wQ//TYgHJ/NK2p+vys4PHNMXonKbH+/ZnV8/lT4Q3QDANA/qsV/YK6EfqpXNeKwETMpHC8hTLSOn
+3rOEV+KXJzQdG//u1wTqfFscF5C3+XJJ54CI9he+eENFIbVYX5VBfoZHc/fy/usbZN3kVMaI8Xwo
+2cngR+TpGVT0lXd2qIPlxKg2WNg3ySbcWTovTf+BNGuRsucNGqKS0C7v9wbZfDhGhe4JZK7k28Az
+49i4N9p2RqwfmT/5rdr2kTdId3CCodu3x4bjSbZWu+pzLk/lKxt8+ZZjl1tDFhTwubqhq3+3K6h0
+yLxf3Mxo2G20WKb/RhcNhRXuAgH8qUeXUmrsObA8o642tdiUI166sAIex34Ku5ekseP/IFHimIwJ
+1X9272zmTu6YmqEsyimkeFq718wp+KyY/ApbZNG81Zq1+tfr1UEipNnY7P/KoewWTfbMMKWc0Rdn
+vPdlW3QlYzpW2Av1WuG9VtVR8jWVm37JFCIlHPxbtaJFPd9L/LZ3SgedsSd65ic4EaDXEkQETulX
+UJqF8y3RDkzOAFQzXZNyKmbwb9D2yFaDVDy2LuRM94+ijCsNUhfqmtjVUSOBD3jCRuk+LtLhNt0r
+3eMEm9XEZU+dI2YDmNaCzcCeD/LgPofTjzfBHce4aLNFSXCk3yRaf2hSJqFV3MIqJY1cFoaH4WwX
+DUI=
+=gzjE
+-----END PGP SIGNATURE-----
+
+--------------F2blkIAma0icD1qwaHoeFjRs--
 
