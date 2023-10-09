@@ -2,62 +2,72 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id ECB997BD27F
-	for <lists+samba-technical@lfdr.de>; Mon,  9 Oct 2023 06:15:55 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8622E7BE1F6
+	for <lists+samba-technical@lfdr.de>; Mon,  9 Oct 2023 15:58:38 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=IqBxmam5F7+VnQZu3In8O7rmGARTjuwgmHOYYCwTnJs=; b=ZEbq//1WjRlK/hHl6s8wPiWMBr
-	q4uh3Z79ENBafCOIXY03B7MKjoIiPFrUf5FAusg2uelG/WtbO5irFPE4OJU5h6agz5VwB7l55A9uL
-	+xzs2FZwG07g8Kh4klQatTlRFBvIO9GARah2FciA/ks7hUtGf83zgw6YTdEhZtGIryiDb5AvoRdln
-	Mu0xlNi4iXa4C/v/la8Vu0unFqW7A7IQVUw3iXCOWHCJRx1sGSTTCjBIJrVjptrZe0QSmTrMAbpfF
-	6nmpmO7oMWN7qgYt29DV1wqT9fUz40wc0WSXujRuhyjl+tmucs8lfWtzfu8uIshyVFUcM2kFP2+MM
-	QQOj7agw==;
-Received: from ip6-localhost ([::1]:32974 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
+	bh=EIHllxYAwmMx58CTHDCuQDWS16s6GWv+D/tF7N9u3+4=; b=VXiFfch5lBQD26AIveiZH9B6TH
+	MKzU1D8GPeI5dG/rx1rE8XHMSy07240pveW4LF112/WQTCYcKkcP8MtiniPkjUE6SDlcziR5Dn9Li
+	kmbJ2qMln4LQ0LaNWu0riLxEH0+MtyVKys1ofO9klS1erVFilsOD4T/BP8yGz6nZ2pIob+3+ORmq7
+	D9vN2wSOZblf2Bw52RB7p2jjol5oCEVRQNb0pL6b78G2vWBoAhD9Ox/hcJm6W5cADGJh5d/8IvXhW
+	tZ0Cm+1LeBCLxgsaqGiMZCQHohkaSc2Rb/Wgua3aT9XcLJNg4siVpAAc3nLLtTMOIy3sZeuuoIGGF
+	t+lABZBw==;
+Received: from ip6-localhost ([::1]:40594 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1qphg4-000d4j-6y; Mon, 09 Oct 2023 04:15:31 +0000
-Received: from mail-lf1-x130.google.com ([2a00:1450:4864:20::130]:60790) 
- by hr1.samba.org with esmtps
- (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1qphfw-000d4c-0m
- for samba-technical@lists.samba.org; Mon, 09 Oct 2023 04:15:28 +0000
-Received: by mail-lf1-x130.google.com with SMTP id
- 2adb3069b0e04-503065c4b25so5376772e87.1
- for <samba-technical@lists.samba.org>; Sun, 08 Oct 2023 21:15:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1696824921; x=1697429721; darn=lists.samba.org;
- h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=IqBxmam5F7+VnQZu3In8O7rmGARTjuwgmHOYYCwTnJs=;
- b=Hx7FuOOnf3JZyoBOxmVl2OEKVoIxvdyugLuJZI4g92iQ8HUAKEz1YEuWrv+nuD6tFT
- ywVWDlTEq/RA2Rby6Vr9ZivmA/yW9jUNnBlaUPLGVgEl8CHNN2oQtQNsiii9YsDHxv8A
- /UNaSvg+DwFjtwv3VMM+saaMqMP550lFHhgJb3KiZhrbojnz2g6uIX4ridlR7Rlph9Li
- kx3SLWEp9kcG3N3Up69jEE1FH9wJFx+87d2LrSOk6UOgiLd63DLY2h8HacLLp3H461/S
- 0b6GLz146FM5TBMT5+v3ToaW5aiyVWy2H1SMInehUAb54z8HxgtA3blYak5AlOmhjeuU
- dIPQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696824921; x=1697429721;
- h=to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=IqBxmam5F7+VnQZu3In8O7rmGARTjuwgmHOYYCwTnJs=;
- b=P2aYCmONyfPRxTvdHjVkBbnFlN454x2F83eFKLhbN0JUYTOROrZoUyqwEH9OA81+1a
- B3F65KqaBdIwI374iNsNlhybAocgaHNzr3yte2CUhvMXG25LIzJjH8pkGxM2b3R7K+az
- 5We59G9qfZJNKOgNW4LyTS9Q8+7wn2iqgPIphPVTvIwZzR73+mnO6o3g6inWgdgalus/
- UQ3jFbMD/Tj6vsv1IcL7D+730pnpTJY3gfBZIjE2E54eg/t5EyfVj55hr+1C+Bk7bwO9
- 6pqiYbnD94/BCUy/2BIMe2Fvp3cmB+OkjofyIW3E5IDpuxJ6qcwfTDnv+4aXHUuqGPi0
- tq8g==
-X-Gm-Message-State: AOJu0Yzbgnxj3BBytpHKZTa1mM0IC5aXKggf+NDXuadgUluARqWqQ6aK
- YyVqm4IT4yE1wdIjJHPxe8to0hA88EtYFf5cEZfm6F1C/Hc=
-X-Google-Smtp-Source: AGHT+IFnrNsj4JYHGAjDAAG0TP0UsOX5fkVRc3A2ywMdHcnuHboz/BKiPDvRO8E6ah/9S9NY3vXPY85/AezIW2IKBu0=
-X-Received: by 2002:a05:6512:758:b0:503:59d:fbff with SMTP id
- c24-20020a056512075800b00503059dfbffmr3610209lfs.2.1696824920645; Sun, 08 Oct
- 2023 21:15:20 -0700 (PDT)
+	id 1qpqlm-000fgH-St; Mon, 09 Oct 2023 13:58:02 +0000
+Received: from mx.inno.tech ([185.228.49.205]:44629) 
+ by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1qpqlj-000fg7-1B
+ for samba-technical@lists.samba.org; Mon, 09 Oct 2023 13:58:01 +0000
+Received: from ksmg2.inno.local (localhost [127.0.0.1])
+ by mx.inno.tech (Postfix) with ESMTP id ECB0A40029
+ for <samba-technical@lists.samba.org>; Mon,  9 Oct 2023 16:40:24 +0300 (MSK)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mx.inno.tech ECB0A40029
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=inno.tech; s=s1;
+ t=1696858824; bh=EIHllxYAwmMx58CTHDCuQDWS16s6GWv+D/tF7N9u3+4=;
+ h=From:To:Subject:Date:Message-ID:Content-Type:MIME-Version:From;
+ b=IbplXoha8kVddyjja16OUjWQ1X3tVHh4/xalgDGKr+d8LGI+YbsvHm07X8nMMFmc4
+ M8DgNIQWL5iB0SxNT1I4PJKD6ABpG06ehvHNbSHw07iqpV+rvKDqgTCmfl/9nk6cap
+ aLZet5KpSzI+D0l/CESS8ScG+9PhUAFLGsSkegWxhunPOyXH1GC3SEy2UQPG7gCjrM
+ F7zyISIxDlDLeDu/UWCVL6m00KSq+j6egpcxyXMRpkw6FbLCkIfBaApIR87oVHncUf
+ UMwUC3m4O/qrHhVgUtr/6SuzVkG3p8J0P5SmuGh6s95fiXaQiky5eSEQolXySANdmh
+ Ag2JrQz5aNVJQ==
+Received: from SEC-DLP-QRNT (unknown [10.0.0.117])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+ (No client certificate requested)
+ by mx.inno.tech (Postfix) with ESMTPS
+ for <samba-technical@lists.samba.org>; Mon,  9 Oct 2023 16:40:24 +0300 (MSK)
+X-CHECKED: 1
+X-CHECKED-RELAY-ID: 3c279d7389fa9528e53a55e18b8e1fb6328980c7
+X-Cache: 20231009_164024162_00021531
+X-MS-Exchange-Organization-AuthAs: Partner
+Received: from MAIL-DC1.inno.local (10.0.115.2) by MAIL-DC2.inno.local
+ (10.12.115.2) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1118.37; Mon, 9 Oct
+ 2023 16:40:23 +0300
+Received: from MAIL-DC1.inno.local ([10.0.115.10]) by MAIL-DC1.inno.local
+ ([10.0.115.10]) with mapi id 15.02.1118.037; Mon, 9 Oct 2023 16:40:23 +0300
+To: "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>
+Subject: Plans on MSA/gMSA support
+Thread-Topic: Plans on MSA/gMSA support
+Thread-Index: Adn6tdsEXMzDDjZHT1yqFg0kgRKZJg==
+Date: Mon, 9 Oct 2023 13:40:23 +0000
+Message-ID: <b1a2c6f144b048cbb630469e8c4c0f7c@inno.tech>
+Accept-Language: ru-RU, en-US
+Content-Language: ru-RU
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.0.0.117]
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-Date: Sun, 8 Oct 2023 23:15:09 -0500
-Message-ID: <CAH2r5mvxf3j6aXGdzh8b7cRYJ=fHvjfkv=aHPStJRYR+x8auiA@mail.gmail.com>
-Subject: New SMB3.1.1 command
-To: samba-technical <samba-technical@lists.samba.org>,
- CIFS <linux-cifs@vger.kernel.org>
-Content-Type: multipart/mixed; boundary="000000000000a4d2f4060740d6db"
+X-KSMG-Rule-ID: 5
+X-KSMG-Message-Action: skipped
+X-KSMG-AntiSpam-Status: not scanned, allowlist
+X-KSMG-AntiPhishing: not scanned, allowlist
+X-KSMG-LinksScanning: not scanned, allowlist
+X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
+ not scanned, allowlist
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -71,118 +81,14 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
+From: =?utf-8?b?0KfRg9C00L7QsiDQmNCz0L7RgNGMINCY0LPQvtGA0LXQstC40YcgdmlhIHNh?=
+ =?utf-8?q?mba-technical?= <samba-technical@lists.samba.org>
+Reply-To: =?utf-8?B?0KfRg9C00L7QsiDQmNCz0L7RgNGMINCY0LPQvtGA0LXQstC40Yc=?=
+ <ICHudov@inno.tech>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
---000000000000a4d2f4060740d6db
-Content-Type: text/plain; charset="UTF-8"
-
-Add structs and defines for new SMB3.1.1 command, server to client notification.
-
-    See MS-SMB2 section 2.2.44
-
-Also another minor patch to clarify some of the unused CreateOptions flags
-
-   See MS-SMB2 section 2.2.13
-
-See attached.
--- 
-Thanks,
-
-Steve
-
---000000000000a4d2f4060740d6db
-Content-Type: text/x-patch; charset="US-ASCII"; 
-	name="0001-Add-definition-for-new-smb3.1.1-command-type.patch"
-Content-Disposition: attachment; 
-	filename="0001-Add-definition-for-new-smb3.1.1-command-type.patch"
-Content-Transfer-Encoding: base64
-Content-ID: <f_lnidq4bl0>
-X-Attachment-Id: f_lnidq4bl0
-
-RnJvbSBiYzZiYjNjMGM4ODgzZjY0ODA2MTFkMjg0NTFmYzI5YWY5NjcyNmQwIE1vbiBTZXAgMTcg
-MDA6MDA6MDAgMjAwMQpGcm9tOiBTdGV2ZSBGcmVuY2ggPHN0ZnJlbmNoQG1pY3Jvc29mdC5jb20+
-CkRhdGU6IFN1biwgOCBPY3QgMjAyMyAyMzowNDowMSAtMDUwMApTdWJqZWN0OiBbUEFUQ0hdIEFk
-ZCBkZWZpbml0aW9uIGZvciBuZXcgc21iMy4xLjEgY29tbWFuZCB0eXBlCgpBZGQgc3RydWN0cyBh
-bmQgZGVmaW5lcyBmb3IgbmV3IFNNQjMuMS4xIGNvbW1hbmQsIHNlcnZlciB0byBjbGllbnQgbm90
-aWZpY2F0aW9uLgoKU2VlIE1TLVNNQjIgc2VjdGlvbiAyLjIuNDQKClNpZ25lZC1vZmYtYnk6IFN0
-ZXZlIEZyZW5jaCA8c3RmcmVuY2hAbWljcm9zb2Z0LmNvbT4KLS0tCiBmcy9zbWIvY29tbW9uL3Nt
-YjJwZHUuaCB8IDE1ICsrKysrKysrKysrKysrKwogMSBmaWxlIGNoYW5nZWQsIDE1IGluc2VydGlv
-bnMoKykKCmRpZmYgLS1naXQgYS9mcy9zbWIvY29tbW9uL3NtYjJwZHUuaCBiL2ZzL3NtYi9jb21t
-b24vc21iMnBkdS5oCmluZGV4IDMxOWZiOWZmYzZhMC4uNzNjZGNmMTRlZjI3IDEwMDY0NAotLS0g
-YS9mcy9zbWIvY29tbW9uL3NtYjJwZHUuaAorKysgYi9mcy9zbWIvY29tbW9uL3NtYjJwZHUuaApA
-QCAtMzQsNiArMzQsNyBAQAogI2RlZmluZSBTTUIyX1FVRVJZX0lORk9fSEUJMHgwMDEwCiAjZGVm
-aW5lIFNNQjJfU0VUX0lORk9fSEUJMHgwMDExCiAjZGVmaW5lIFNNQjJfT1BMT0NLX0JSRUFLX0hF
-CTB4MDAxMgorI2RlZmluZSBTTUIyX1NFUlZFUl9UT19DTElFTlRfTk9USUZJQ0FUSU9OIDB4MDAx
-MwogCiAvKiBUaGUgc2FtZSBsaXN0IGluIGxpdHRsZSBlbmRpYW4gKi8KICNkZWZpbmUgU01CMl9O
-RUdPVElBVEUJCWNwdV90b19sZTE2KFNNQjJfTkVHT1RJQVRFX0hFKQpAQCAtNDExLDYgKzQxMiw3
-IEBAIHN0cnVjdCBzbWIyX3RyZWVfZGlzY29ubmVjdF9yc3AgewogI2RlZmluZSBTTUIyX0dMT0JB
-TF9DQVBfUEVSU0lTVEVOVF9IQU5ETEVTIDB4MDAwMDAwMTAgLyogTmV3IHRvIFNNQjMgKi8KICNk
-ZWZpbmUgU01CMl9HTE9CQUxfQ0FQX0RJUkVDVE9SWV9MRUFTSU5HICAweDAwMDAwMDIwIC8qIE5l
-dyB0byBTTUIzICovCiAjZGVmaW5lIFNNQjJfR0xPQkFMX0NBUF9FTkNSWVBUSU9OCTB4MDAwMDAw
-NDAgLyogTmV3IHRvIFNNQjMgKi8KKyNkZWZpbmUgU01CMl9HTE9CQUxfQ0FQX05PVElGSUNBVElP
-TlMJMHgwMDAwMDA4MCAvKiBOZXcgdG8gU01CMy4xLjEgKi8KIC8qIEludGVybmFsIHR5cGVzICov
-CiAjZGVmaW5lIFNNQjJfTlRfRklORAkJCTB4MDAxMDAwMDAKICNkZWZpbmUgU01CMl9MQVJHRV9G
-SUxFUwkJMHgwMDIwMDAwMApAQCAtOTgxLDYgKzk4MywxOSBAQCBzdHJ1Y3Qgc21iMl9jaGFuZ2Vf
-bm90aWZ5X3JzcCB7CiAJX191OAlCdWZmZXJbXTsgLyogYXJyYXkgb2YgZmlsZSBub3RpZnkgc3Ry
-dWN0cyAqLwogfSBfX3BhY2tlZDsKIAorLyoKKyAqIFNNQjJfU0VSVkVSX1RPX0NMSUVOVF9OT1RJ
-RklDQVRJT046IFNlZSBNUy1TTUIyIHNlY3Rpb24gMi4yLjQ0CisgKi8KKworI2RlZmluZSBTTUIy
-X05PVElGWV9TRVNTSU9OX0NMT1NFRAkweDAwMDAKKworc3RydWN0IHNtYjJfc2VydmVyX2NsaWVu
-dF9ub3RpZmljYXRpb24geworCXN0cnVjdCBzbWIyX2hkciBoZHI7CisJX19sZTE2CVN0cnVjdHVy
-ZVNpemU7CisJX191MTYJUmVzZXJ2ZWQ7IC8qIE1CWiAqLworCV9fbGUzMglOb3RpZmljYXRpb25U
-eXBlOworCV9fdTgJTm90aWZpY2F0aW9uQnVmZmVyWzRdOyAvKiBNQlogKi8KK30gX19wYWNrZWQ7
-CiAKIC8qCiAgKiBTTUIyX0NSRUFURSAgU2VlIE1TLVNNQjIgc2VjdGlvbiAyLjIuMTMKLS0gCjIu
-MzkuMgoK
---000000000000a4d2f4060740d6db
-Content-Type: text/x-patch; charset="US-ASCII"; 
-	name="0001-SMB3-clarify-some-of-the-unused-CreateOption-flags.patch"
-Content-Disposition: attachment; 
-	filename="0001-SMB3-clarify-some-of-the-unused-CreateOption-flags.patch"
-Content-Transfer-Encoding: base64
-Content-ID: <f_lnidqhwh1>
-X-Attachment-Id: f_lnidqhwh1
-
-RnJvbSAzN2E1MmNlYjliN2I2ZTA5ODg0NjQ3MmUxYjgxZWU5NWJmYzBmNmNiIE1vbiBTZXAgMTcg
-MDA6MDA6MDAgMjAwMQpGcm9tOiBTdGV2ZSBGcmVuY2ggPHN0ZnJlbmNoQG1pY3Jvc29mdC5jb20+
-CkRhdGU6IFN1biwgOCBPY3QgMjAyMyAyMzoxMTozOCAtMDUwMApTdWJqZWN0OiBbUEFUQ0hdIFNN
-QjM6IGNsYXJpZnkgc29tZSBvZiB0aGUgdW51c2VkIENyZWF0ZU9wdGlvbiBmbGFncwoKVXBkYXRl
-IGNvbW1lbnRzIHRvIHNob3cgZmxhZ3Mgd2hpY2ggc2hvdWxkIGJlIG5vdCBzZXQgKHplcm8pLgoK
-U2VlIE1TLVNNQjIgc2VjdGlvbiAyLjIuMTMKClNpZ25lZC1vZmYtYnk6IFN0ZXZlIEZyZW5jaCA8
-c3RmcmVuY2hAbWljcm9zb2Z0LmNvbT4KLS0tCiBmcy9zbWIvY29tbW9uL3NtYjJwZHUuaCB8IDkg
-KysrKysrKystCiAxIGZpbGUgY2hhbmdlZCwgOCBpbnNlcnRpb25zKCspLCAxIGRlbGV0aW9uKC0p
-CgpkaWZmIC0tZ2l0IGEvZnMvc21iL2NvbW1vbi9zbWIycGR1LmggYi9mcy9zbWIvY29tbW9uL3Nt
-YjJwZHUuaAppbmRleCA3M2NkY2YxNGVmMjcuLjhhNDY5OTI5Y2Y2MiAxMDA2NDQKLS0tIGEvZnMv
-c21iL2NvbW1vbi9zbWIycGR1LmgKKysrIGIvZnMvc21iL2NvbW1vbi9zbWIycGR1LmgKQEAgLTEx
-MTIsMTYgKzExMTIsMjMgQEAgc3RydWN0IHNtYjJfc2VydmVyX2NsaWVudF9ub3RpZmljYXRpb24g
-ewogI2RlZmluZSBGSUxFX1dSSVRFX1RIUk9VR0hfTEUJCWNwdV90b19sZTMyKDB4MDAwMDAwMDIp
-CiAjZGVmaW5lIEZJTEVfU0VRVUVOVElBTF9PTkxZX0xFCQljcHVfdG9fbGUzMigweDAwMDAwMDA0
-KQogI2RlZmluZSBGSUxFX05PX0lOVEVSTUVESUFURV9CVUZGRVJJTkdfTEUgY3B1X3RvX2xlMzIo
-MHgwMDAwMDAwOCkKKy8qIEZJTEVfU1lOQ0hST05PVVNfSU9fQUxFUlRfTEUJCWNwdV90b19sZTMy
-KDB4MDAwMDAwMTApIHNob3VsZCBiZSB6ZXJvLCBpZ25vcmVkICovCisvKiBGSUxFX1NZTkNIUk9O
-T1VTX0lPX05PTkFMRVJUCQljcHVfdG9fbGUzMigweDAwMDAwMDIwKSBzaG91bGQgYmUgemVybywg
-aWdub3JlZCAqLwogI2RlZmluZSBGSUxFX05PTl9ESVJFQ1RPUllfRklMRV9MRQljcHVfdG9fbGUz
-MigweDAwMDAwMDQwKQogI2RlZmluZSBGSUxFX0NPTVBMRVRFX0lGX09QTE9DS0VEX0xFCWNwdV90
-b19sZTMyKDB4MDAwMDAxMDApCiAjZGVmaW5lIEZJTEVfTk9fRUFfS05PV0xFREdFX0xFCQljcHVf
-dG9fbGUzMigweDAwMDAwMjAwKQorLyogRklMRV9PUEVOX1JFTU9URV9JTlNUQU5jRQkJY3B1X3Rv
-X2xlMzIoMHgwMDAwMDQwMCkgc2hvdWxkIGJlIHplcm8sIGlnbm9yZWQgKi8KICNkZWZpbmUgRklM
-RV9SQU5ET01fQUNDRVNTX0xFCQljcHVfdG9fbGUzMigweDAwMDAwODAwKQotI2RlZmluZSBGSUxF
-X0RFTEVURV9PTl9DTE9TRV9MRQkJY3B1X3RvX2xlMzIoMHgwMDAwMTAwMCkKKyNkZWZpbmUgRklM
-RV9ERUxFVEVfT05fQ0xPU0VfTEUJCWNwdV90b19sZTMyKDB4MDAwMDEwMDApIC8qIE1CWiAqLwog
-I2RlZmluZSBGSUxFX09QRU5fQllfRklMRV9JRF9MRQkJY3B1X3RvX2xlMzIoMHgwMDAwMjAwMCkK
-ICNkZWZpbmUgRklMRV9PUEVOX0ZPUl9CQUNLVVBfSU5URU5UX0xFCWNwdV90b19sZTMyKDB4MDAw
-MDQwMDApCiAjZGVmaW5lIEZJTEVfTk9fQ09NUFJFU1NJT05fTEUJCWNwdV90b19sZTMyKDB4MDAw
-MDgwMDApCisvKiBGSUxFX09QRU5fUkVRVUlSSU5HX09QTE9DSwkJY3B1X3RvX2xlMzIoMHgwMDAx
-MDAwMCkgc2hvdWxkIGJlIHplcm8sIGlnbm9yZWQgKi8KKy8qIEZJTEVfRElTQUxMT1dfRVhDTFVT
-SVZFCQljcHVfdG9fbGUzMigweDAwMDIwMDAwKSBzaG91bGQgYmUgemVybywgaWdub3JlZCAqLwor
-LyogRklMRV9SRVNFUlZFX09QRklMVEVSCQljcHVfdG9fbGUzMigweDAwMTAwMDAwKSBNQlogKi8K
-ICNkZWZpbmUgRklMRV9PUEVOX1JFUEFSU0VfUE9JTlRfTEUJY3B1X3RvX2xlMzIoMHgwMDIwMDAw
-MCkKICNkZWZpbmUgRklMRV9PUEVOX05PX1JFQ0FMTF9MRQkJY3B1X3RvX2xlMzIoMHgwMDQwMDAw
-MCkKKy8qICNkZWZpbmUgRklMRV9PUEVOX0ZPUl9GUkVFX1NQQUNFX1FVRVJZIGNwdV90b19sZTMy
-KDB4MDA4MDAwMDApIHNob3VsZCBiZSB6ZXJvLCBpZ25vcmVkICovCiAjZGVmaW5lIENSRUFURV9P
-UFRJT05TX01BU0tfTEUgICAgICAgICAgY3B1X3RvX2xlMzIoMHgwMEZGRkZGRikKIAogI2RlZmlu
-ZSBGSUxFX1JFQURfUklHSFRTX0xFIChGSUxFX1JFQURfREFUQV9MRSB8IEZJTEVfUkVBRF9FQV9M
-RSBcCi0tIAoyLjM5LjIKCg==
---000000000000a4d2f4060740d6db--
+SGkgYWxsIQ0KDQpBcmUgdGhlcmUgYW55IHBsYW5zIG9uIGdNU0Egc3VwcG9ydCBpbiBTYW1iYT8g
+SSB3aXNoIEkgY291bGQgaGVscCB3aXRoIGltcGxlbWVudGF0aW9uIG9yIHRlc3RpbmcuDQoNCi0t
+DQpXaXRoIGJlc3QgcmVnYXJkcywgSWdvciBDaHVkb3YuDQoNCg==
 
