@@ -2,48 +2,62 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id C4D667BD0F6
-	for <lists+samba-technical@lfdr.de>; Mon,  9 Oct 2023 00:38:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8940B7BD269
+	for <lists+samba-technical@lfdr.de>; Mon,  9 Oct 2023 05:39:49 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=wsEt4JlV5ZSopNUnaALBQj5vyGo+/8Tl6xrKjPlhRAM=; b=Du+O0yGdGDALlDgTl9/AC0YPKS
-	1Q3MwVhvu0CXaARPCxpGYRQU90VPxW3ftqvRqxnKgadpekAYvtrI7U+oWSTlJoce+Y0vE9klWtxtY
-	IKyhkxHNZ4/TIXDrKOfluHLEwC7Vm+c22VpNJATAemQqZuRmdigDl1Apg5FpQ4b/VsSYQu0RgRZGS
-	KDu1ATHYUPfJTFiw8JqlUJaZ+rBBb7bhUnUvQVHi9ME2M+042KCcfnh6tsrAhu686ssn0A1JkJEJt
-	Bet/dbPtIdOv6jQkrBpppdx3q5Nu2dKME0gTUYGXQorvFQsf0KBZwld7/TB0TG6SZHdgSWbWqlZUC
-	jGQw28Yw==;
-Received: from ip6-localhost ([::1]:54436 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=F25uLhiY2el/6VY57mqoqlyozxz7V8aXB4U/G+qj6wg=; b=QvUaPy2ZM9NRmlgYE7mz5qZsFM
+	er2NXN9Ny7Uq0JEDr818U1w8MLHb7TQfD8wkGMCQXa9WoMgFZOuBp04Ea1Xs4m4Wxvme2Eb4IKM3c
+	7nRimj25TNGgFHJQ/SOgGlfGEUcSbLdzrjAAww8APXQ1yo3Aj7aJ7kD9dWoxpiLBeK7ZVnUWGVaov
+	qkBqD+7fX5ALZMQbKa+ttQrvtwMPU8tkS67GDTzrhnZq8IaMBn2i7GqoG3jhvIFEjziv3E0wn5TU3
+	Bi3Fgn1Ohj3GIdosABXW0aCeK43Y2xHE1OGNeHjZIn4kQsRFgrctcWHWt5EtSQURXdw/z7fPQK6Qw
+	aJKGL0ig==;
+Received: from ip6-localhost ([::1]:42344 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1qpcPt-000cOv-QA; Sun, 08 Oct 2023 22:38:28 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:58650) 
+	id 1qph6o-000cxG-HQ; Mon, 09 Oct 2023 03:39:05 +0000
+Received: from mail-lf1-x12b.google.com ([2a00:1450:4864:20::12b]:47341) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1qpcPp-000cOn-Di
- for samba-technical@lists.samba.org; Sun, 08 Oct 2023 22:38:27 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:To:From:Message-ID:CC;
- bh=wsEt4JlV5ZSopNUnaALBQj5vyGo+/8Tl6xrKjPlhRAM=; b=D4nw1roS39VIj/zOb2hX0h2712
- pCo8/U8ScoP3dh4ySxE/VrCeyj4K2Y3o/XOA2zE4rUsbim3vV9R3BZda+I74/zOMpZXQnHtfXLmAx
- QxQFuAsSidAZ3mOEtAd/XmcX1gVLvlqQ+ZACjhuBuTlxh7Bw/J2oNsNs8I5T5eGuPoaWYrn8RqeA5
- M5jVkU2Wz2tf+WLmF4JRXfI2C3aC+jo2hubJFHm9d+VdTZQr3JoOcIP3o9DbBRqC/Dot4JjM94mR9
- QqBrITa58pkmdAhCW42K3SOXQm5QESO1JHQnyM8uagAjeKlPv/f4H+alOYyPTZblufs+0SV3kR/zQ
- PUtGZ7eOtFBX5zMihReNjVrU8fZx+tUAd/AI2NAlloV7YpOEyH3AMon0So0t5EcIE8lzfb8NZQrwz
- 5xv/N6vKvLnho3O4UHMkdgJONTtotnYaKPWNr9Qzo8ycL/984dth8/KllLPMwG0FY38EGu6VhlMsM
- BUICX+ldQ58Jg+bPWS2n8P+A;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1qpcPn-00HMPi-0G; Sun, 08 Oct 2023 22:38:23 +0000
-Message-ID: <e6dbd15651f0948d77befd3260ba3347bcf016bf.camel@samba.org>
-Subject: Re: Authentication Policies and Silos
-To: Mikhail Kupchuk <mkupchuk@inno.tech>, samba-technical@lists.samba.org
-Date: Mon, 09 Oct 2023 11:38:20 +1300
-In-Reply-To: <8d501af6-e10a-474e-80c9-ff9682a30013@inno.tech>
-References: <8d501af6-e10a-474e-80c9-ff9682a30013@inno.tech>
-Content-Type: text/plain; charset="UTF-8"
-User-Agent: Evolution 3.36.5-0ubuntu1 
+ (Exim) id 1qph6k-000cx8-0E
+ for samba-technical@lists.samba.org; Mon, 09 Oct 2023 03:39:03 +0000
+Received: by mail-lf1-x12b.google.com with SMTP id
+ 2adb3069b0e04-50437c618b4so5039458e87.2
+ for <samba-technical@lists.samba.org>; Sun, 08 Oct 2023 20:39:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1696822739; x=1697427539; darn=lists.samba.org;
+ h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=F25uLhiY2el/6VY57mqoqlyozxz7V8aXB4U/G+qj6wg=;
+ b=W6vFYxhZftEnK5KmKLRGKcl5AWIgaBkCdUbdielqJJwu4ZgLj/r4kLgrG+bgIB0Y3j
+ 5rxtgfSZAP0pYgseb43n9kQ6rY1ug/isrNG8YdsOWYJqfmpmZB6knAhOm/FRRQ619yq5
+ QEN0jkmDEAi0F+fqjwjv6o0bGcbCWXAzTB+ct5cz0WvL7mSo5VTKSWSE1fuzFezAfttt
+ F2CqYIuw4Kb+ZwcthljC+eJMclqTUYOmoyB4SI1ibWTvmH/GV3bUMCKCZqmh+ELmYayA
+ Ubp4LdEX0tWja8MrXbtyrXq6kZPPvMu09s/4GH1rAnz8jCdKUlvfL9TY+3sdTjgtfIlZ
+ 5i1g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1696822739; x=1697427539;
+ h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=F25uLhiY2el/6VY57mqoqlyozxz7V8aXB4U/G+qj6wg=;
+ b=m6X2yH2piftxaS+3UpGzPrOBDdKZJ7pF/W0TxuWMEKfu8LpTGDdqMHviFcf9mxEFv0
+ dSaG9Vr+bEjCyGc+LZSwdA15e7PeBz02po9qUN0X7xTyF2/0ILIPpGtaEBvps+iSUkrM
+ FUJeoTKPN/ZgBKli740gEIOkakEQK97aQue7kAQnVcnnzmpDdwZCXO59YNoBT+gwODG/
+ WHLtkSerVQZ/SUn7fMJCwEGSIlb+fPTI1i/S5LyfR5pPMdRuP+uFUgQrPFVElvxmXtQh
+ /ZG8QjrVSs6QA3VcsoHK3uIwp/rn4LcOe+bFtk708y2ogR4xCxvUlPFxP5Xav3rsgkrN
+ Jr8Q==
+X-Gm-Message-State: AOJu0YyV5bEtPVTtJLjOoQDDREsw/uqvWOqZGEM3Zpr6tf6AaWjxuSOX
+ 54NblXsegR47D7dqPhozBxnS5l5cWElp80faJ7XXYkRTTKs=
+X-Google-Smtp-Source: AGHT+IFVIBO14V13vJBlhclqeZVm2nowlKI3tTxF61ZqBKFZPCuJlVugyd60rvYOoCB+Ag/STZzgZnZLCydVXCPmnoY=
+X-Received: by 2002:a19:435c:0:b0:500:91c1:9642 with SMTP id
+ m28-20020a19435c000000b0050091c19642mr11859253lfj.21.1696822738602; Sun, 08
+ Oct 2023 20:38:58 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
+Date: Sun, 8 Oct 2023 22:38:47 -0500
+Message-ID: <CAH2r5msM0UXTF2nLCSMb1KdjSP9ehVmuc2TL2RA_YG2Dww__Qw@mail.gmail.com>
+Subject: SMB2_SHAREFLAG_RESTRICT_EXCLUSIVE_OPENS to improve POSIX compat
+To: samba-technical <samba-technical@lists.samba.org>,
+ CIFS <linux-cifs@vger.kernel.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -57,53 +71,18 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
+From: Steve French via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Steve French <smfrench@gmail.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Sun, 2023-10-08 at 22:25 +0300, Mikhail Kupchuk via samba-technical
-wrote:
-> Hello, Samba developers!
-> 
-> Our team and our client are intrested in implementation of
-> Authentication Policies, Authentication Silos and the rest of "using
-> claims for access control decisions".
-> In 4.19 release notes you wrote "we continue to develop these
-> features" and I see more and more new commits related to this
-> functionality. Therefore, I conclude that these features are in quite
-> active ongoing development.
-> 
-> 1) Do you have some time-plans for releasing them?
-
-Development of this feature continues apace, and they should be in
-'Samba master' before the end of this year, hopefully in November.
-
-> 2) We have a development team and could take part in development of
-> these features. Maybe we could sync and cooperate somehow in
-> implementing to release it faster?
-
-All Samba users are encouraged to, in testing enviornments, take our
-'git master' and later our pre-releases to test out new features.  Real-world feedback is always a useful thing, and any issues found or just poor ergonomics can be discussed here and logged in our bugzilla.
-
-That would be the best thing that can be done for these features at
-this time.
-
-Andrew Bartlett
+Has there been any previous discussion about the share flag
+          "SMB2_SHAREFLAG_RESTRICT_EXCLUSIVE_OPENS"
+to see if it could help improve POSIX compatibility if it could be set
+on a per-share basis in Samba and/or ksmbd?
 
 -- 
-Andrew Bartlett (he/him)       https://samba.org/~abartlet/
-Samba Team Member (since 2001) https://samba.org
-Samba Team Lead                https://catalyst.net.nz/services/samba
-Catalyst.Net Ltd
+Thanks,
 
-Proudly developing Samba for Catalyst.Net Ltd - a Catalyst IT group
-company
-
-Samba Development and Support: https://catalyst.net.nz/services/samba
-
-Catalyst IT - Expert Open Source Solutions
-
-
-
+Steve
 
