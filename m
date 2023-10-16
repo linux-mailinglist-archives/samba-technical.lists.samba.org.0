@@ -2,45 +2,44 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 49AE87BFF87
-	for <lists+samba-technical@lfdr.de>; Tue, 10 Oct 2023 16:46:37 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4FB6E7CAB71
+	for <lists+samba-technical@lfdr.de>; Mon, 16 Oct 2023 16:27:43 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
-	bh=vsxhYj+aStmhUBCiMBJbBYEYmFzdLBzIEDdM3j9QdRs=; b=BUUZR6f8mw/4O9qmcRFYzZMoKR
-	5FIQRDRUIdF3vZXRlj386kPPV9ZNLD9Jq3LhSOnMHyFwnbygJubnWvLtc4v69R0mJF9HI0BDljcXp
-	hZMsCe03wKvKFv3/GpBUP/9867CdAuTOy8qufIqSd9gWECxAMc5gse8xtKa4y/3jsxnfDdToVRL1r
-	21Cu8/k/RFbv3/BWj1Miid4/Zyzi4hKMrxO4mtWNl+JLJlUopoGiivKu1H4tvNLHZcZcs8j7eI0B4
-	QfD2Z4G8BtPn6/XVe7jJzzzdFW2A7B4WqeuAm28ankY+wpcgLq7obLOcWOCF0lMb+tijEWzEC5Qar
-	8aP/NW/w==;
-Received: from ip6-localhost ([::1]:64436 helo=hr1.samba.org) 
+	bh=nWYz4Qhu7dayXSpGdBQvRxYFQSUD1NrN/tZ2SkHHDQk=; b=fZbtlySD1KoB5rRkfKeOXMFoCG
+	8ARE7kTbrp6c4FslknelxySORFUL7dTTFwu/nMNar2dOT8W6OV4fYqkCZk7ZMsPyvgC/bLp8RTjri
+	g1HqMIfU642qHueZO7mxLtR3RugVheFLkkuBu3yDGzAthWfGr3HIdpVWNhRHB8dmvb/9w6uJPGoE5
+	oDwYnurAz5Jzog26xVdajdQDgvLLgsk9bYvJXU0g7l4ojto9iD8geOrGN/9cxbMaVJyWLwbvZIQuw
+	F9ii7fbTf2a0Q4mYvQMO6sYVKy8M3d6lCoeH8NOOwDAcwjCRSYrATTN99LoTp7TXIAZIzZjbZadXA
+	OBF9GXug==;
+Received: from ip6-localhost ([::1]:34300 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1qqDzm-000s77-Te; Tue, 10 Oct 2023 14:46:03 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:36396) 
+	id 1qsOYs-000e82-Mr; Mon, 16 Oct 2023 14:27:14 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:58898) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1qqDz5-000s60-Fh; Tue, 10 Oct 2023 14:45:23 +0000
+ (Exim) id 1qsOYj-000e70-46; Mon, 16 Oct 2023 14:27:08 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=From:To:Date:Message-ID:CC;
- bh=vsxhYj+aStmhUBCiMBJbBYEYmFzdLBzIEDdM3j9QdRs=; b=uO4GxSv5pwb3TPDPrgifA6gX+P
- lKgjVCzsiw+KxuVnDUbi+1DwtoI5D60L6S+TjuuinqWQpedkETIaXDkYRgD0NjVyUzEGepbH4xW49
- GAPgWSvBuHTMhWYO1VRttBEUsGY1gpTwI6ACv2IA8HCe8Jsn/jxneonAvrN0jbp0uE27cpbgnXqh9
- kK6zzjgMBGDfqf6yLGlxc/waSenBS1taJ2zs4VRJSY0ETc2My8z6oVZcuslOveag3w5HUYG40evI1
- Lv9x1lQiFxPquzobJS2qVeVkgPekrexVLIzo/lN/I7WkkWGoA+DmlPEveK/kD9CecU349KL6uvx4o
- V7V0HkPgYg52KP4Ij9Kc7ozArL4tx+4rF6gsqXBFZOoZLwfaoswhSneVpCfOccfEvOLKQ5Wba8sFu
- UsmEJ4Kx8Is6uP0Qln4lAdkuh6HYmRwocjpvlRYMj0yGrspj149/pp7Smw0pmNIrDPoJkM+eHxIIT
- Reuux2FutNy2PxA+E1ZXm6qn;
+ bh=nWYz4Qhu7dayXSpGdBQvRxYFQSUD1NrN/tZ2SkHHDQk=; b=YAme0b2UFMbUZ9+V3jraJGxPJk
+ Ya2zPdG68SLtXs536yHytQTBHNvWhLaejLMPWn9QvlMoNkBBismZcxLLuG8aplLxR4FWn8APWdqP3
+ yvSukKnGA98052D/ylBNbnHkeEzSmY/bFn0wWc41KY+d6W7pnbZ7vXBg3pQTeQXZYKEZiaAQCC5L7
+ vdLaRRwV/7xjRZ1lg25M6W/BC1bXe+AJ4aWjF84xdjOFw05U4RCceE+Hibebsgm22wK2my+pHQ9xF
+ xRA8AUtzgVH56bX8oLHE5UrJwjrvuBnGZmHd1y9ya7kGAL7s/bzid+eto/KNCcmY4cGCAnf8TMwvO
+ 4sUnvQ/1/fASps7Il8IMrWT3J5y74qKE7X/OLtUHjtlFSJwDb0V5roiyz0QHFkdpNEguH2UocA35s
+ aNvzeebxi0LHiy4kxlcPN1wvcEeVx89DRViLhGMhOE/+1oNrsbvknZfuW5iW3dfX45vhNPx2an37d
+ iVIKBKhrXNC7Vrz/XjzAvMeB;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1qqDz2-0006en-39; Tue, 10 Oct 2023 14:45:17 +0000
-Message-ID: <c07cdbd1-9c8a-400d-b885-63e3862c3150@samba.org>
-Date: Tue, 10 Oct 2023 16:45:16 +0200
+ (Exim) id 1qsOYi-000thf-21; Mon, 16 Oct 2023 14:27:04 +0000
+Message-ID: <c2f6e93f-d85b-4463-8b14-54b341bf5730@samba.org>
+Date: Mon, 16 Oct 2023 16:27:04 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Content-Language: de-DE, en-US
+Content-Language: de-DE
 To: samba-announce@lists.samba.org, samba@lists.samba.org,
  samba-technical@lists.samba.org
-Subject: Samba 4.19.1, 4.18.8 and 4.17.12 Security Releases are available for
- Download
+Subject: [Announce] Samba 4.19.2 Available for Download
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-BeenThere: samba-technical@lists.samba.org
@@ -64,51 +63,40 @@ Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 Release Announcements
 ---------------------
 
-This is a security release in order to address the following defects:
+This is the latest stable release of the Samba 4.19 release series.
 
 
-o CVE-2023-3961:  Unsanitized pipe names allow SMB clients to connect as 
-root to
-                   existing unix domain sockets on the file system.
-https://www.samba.org/samba/security/CVE-2023-3961.html
-
-o CVE-2023-4091:  SMB client can truncate files to 0 bytes by opening 
-files with
-                   OVERWRITE disposition when using the acl_xattr Samba VFS
-                   module with the smb.conf setting
-                   "acl_xattr:ignore system acls = yes"
-https://www.samba.org/samba/security/CVE-2023-4091.html
-
-o CVE-2023-4154:  An RODC and a user with the GET_CHANGES right can view all
-                   attributes, including secrets and passwords. 
-Additionally,
-                   the access check fails open on error conditions.
-https://www.samba.org/samba/security/CVE-2023-4154.html
-
-o CVE-2023-42669: Calls to the rpcecho server on the AD DC can request 
-that the
-                   server block for a user-defined amount of time, denying
-                   service.
-https://www.samba.org/samba/security/CVE-2023-42669.html
-
-o CVE-2023-42670: Samba can be made to start multiple incompatible RPC
-                   listeners, disrupting service on the AD DC.
-https://www.samba.org/samba/security/CVE-2023-42670.html
-
-
-Changes
--------
+Changes since 4.19.1
+--------------------
 
 o  Jeremy Allison <jra@samba.org>
-    * BUG 15422: CVE-2023-3961.
-
-o  Andrew Bartlett <abartlet@samba.org>
-    * BUG 15424: CVE-2023-4154.
-    * BUG 15473: CVE-2023-42670.
-    * BUG 15474: CVE-2023-42669.
+    * BUG 15423: Use-after-free in aio_del_req_from_fsp during smbd shutdown
+      after failed IPC FSCTL_PIPE_TRANSCEIVE.
+    * BUG 15426: clidfs.c do_connect() missing a "return" after a 
+cli_shutdown()
+      call.
 
 o  Ralph Boehme <slow@samba.org>
-    * BUG 15439: CVE-2023-4091.
+    * BUG 15463: macOS mdfind returns only 50 results.
+
+o  Volker Lendecke <vl@samba.org>
+    * BUG 15481: GETREALFILENAME_CACHE can modify incoming new filename with
+      previous cache entry value.
+
+o  Stefan Metzmacher <metze@samba.org>
+    * BUG 15464: libnss_winbind causes memory corruption since samba-4.18,
+      impacts sendmail, zabbix, potentially more.
+
+o  Martin Schwenke <mschwenke@ddn.com>
+    * BUG 15479: ctdbd: setproctitle not initialized messages flooding logs.
+
+o  Joseph Sutton <josephsutton@catalyst.net.nz>
+    * BUG 15491: CVE-2023-5568 Heap buffer overflow with freshness 
+tokens in the
+      Heimdal KDC in Samba 4.19
+    * BUG 15477: The heimdal KDC doesn't detect s4u2self correctly when 
+fast is
+      in use.
 
 
 #######################################
@@ -145,14 +133,11 @@ from:
 
 The release notes are available online at:
 
-         https://www.samba.org/samba/history/samba-4.19.1.html
-         https://www.samba.org/samba/history/samba-4.18.8.html
-         https://www.samba.org/samba/history/samba-4.17.12.html
+         https://www.samba.org/samba/history/samba-4.19.2.html
 
 Our Code, Our Bugs, Our Responsibility.
 (https://bugzilla.samba.org/)
 
                          --Enjoy
                          The Samba Team
-
 
