@@ -2,50 +2,113 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id A0DEB7D007F
-	for <lists+samba-technical@lfdr.de>; Thu, 19 Oct 2023 19:27:39 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 601B87D012E
+	for <lists+samba-technical@lfdr.de>; Thu, 19 Oct 2023 20:11:47 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=MZXF6KW0dimxImgdzZJdzTMKWKRA1fk3HsjlLvwaqSk=; b=Ta0zFKuQyYSKUL9VkGGAY8RVMA
-	E+UFSNFbUYNUPB+q0pIi28fglzDpF9Og0OXMCmj7RgChxFTm+OElG3iVmz8uYKgJg9HwrjHPhiBJ7
-	MGaMN5sds/WPnnhKUb/lPF2uNagkLuBAhbg0Ux+t2Ffi1n/G6Fh6VMoGLVwCsHSj9hEIIO2avhK8o
-	OAJEgqH9gqAXwtzzrQgVcg99eFiI2/XMkyOTNeVNIGVVX44M7i356dpw4SL0AkTx/scn/Tast3Neb
-	De8DzDj77IwqqLJ4Toq5PZ8XUdo7vfAYqMRXx5+AdkR7SHijz2RWdqyfwHughuSJy1duZYV+UNC10
-	R4brZ2+g==;
-Received: from ip6-localhost ([::1]:43072 helo=hr1.samba.org) 
+	bh=fSL54lGRqq/uvGKflZf0t2xfnJ/0wpEAIenypWlYt3w=; b=LpKrtmoARy3NKPWiEaqamD4XlK
+	YywZEPoJN4BU8xqQL8PwgDF0rc5C+ljc+Oxq/0e/cb1qiH9HIihD2aEelxkl65vqylfLp5wTCBjti
+	wOnLsC1/fr1KWXdCyor50Sl9YD1J53EHJOwDupdBguVtBCJ4PlbN1m9mUaje9Myu/yK4mEe0fThBI
+	gAFm7RypNU1/387wY/eZ7JGcR51hBDcDW3ZIyjcgcFpKZfqHotkMj+bN3TVthqilDjt18q8JsfUXc
+	h2O8y7Bb4G8a+cEQ6Y9/ti+vGHmf1k6czaj7mMO6lQzuOiKQMhKi3XnnSRCCzx2gR21cqxw1Qbpd2
+	v6LbGpyg==;
+Received: from ip6-localhost ([::1]:27296 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1qtWnr-001MaF-Rw; Thu, 19 Oct 2023 17:27:23 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:44904) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1qtWnl-001Ma6-Hq
- for samba-technical@lists.samba.org; Thu, 19 Oct 2023 17:27:20 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=From:Cc:To:Date:Message-ID;
- bh=MZXF6KW0dimxImgdzZJdzTMKWKRA1fk3HsjlLvwaqSk=; b=qQJ5osdEoTiTaJ+Q7w81FmqLsZ
- RGsqbUuc+TTYj7HjrhywwlryJG4oCamuqdwIeX/SL/VfsgLSBKvc25U0WNtZyBhIPfuBwtzPhqHgn
- ZkCdR+ZNSGffIIDWb8xZF+YuNyDPwoDsCUiBLedLoQodItfQC89wkS9DwpT+PdqRgs7JfITxLPSBG
- B8VLSt54TwHMi9urHOr99Bsajwrj4kcXHN4e8ukQz40JsFgi/MAqUF3RJaUv5tgtOzjMnAb7FAgGk
- UNaQ4xjapovo0nrpJwf7LW08HJLuNVwlZlHDLOGS4lKVO+vlw7SNLrYMikwPOANBkFzJkf1dW0OGz
- NeJvI+p9JE9bLKW3jvsAHZHen4x3Lrn+toNYcq60jw52hCIAxQpBF6VTt4TrZHD12vdkx5w61ys94
- nteBvwiNMC+kXS6r400zUH3aS6T9ESTaEZE1bnunJuIHCzqHVjmasHV4Si8qRoFcLq/EFcu8ogT5T
- gA16b+YmP4NN7m9D1do8e+PJ;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1qtWnj-001XPG-2k; Thu, 19 Oct 2023 17:27:16 +0000
-Message-ID: <7861de81-2176-4996-82da-11b663c20991@samba.org>
-Date: Thu, 19 Oct 2023 19:27:15 +0200
-MIME-Version: 1.0
+	id 1qtXUK-001N4u-7v; Thu, 19 Oct 2023 18:11:16 +0000
+Received: from mail-dm6nam10on2061d.outbound.protection.outlook.com
+ ([2a01:111:f400:7e88::61d]:44545
+ helo=NAM10-DM6-obe.outbound.protection.outlook.com) 
+ by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1qtXUC-001N4l-U2
+ for samba-technical@lists.samba.org; Thu, 19 Oct 2023 18:11:13 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=hyk9Zo8rxplVuVRRvY7/J60CW0ZMGN1CgXIyl/YlRroPfIvjzRBvUw/J1+hOYlk3T74waH1x7O25l2ppJgADKRTpQJ47EjivXEjOtJqzgCP9wb7dTaf4/NzZcALYsN0leWMYN3L2h6SL8nZ1xsY2l3HWW+NiQRTb9/xHFQxgED+yDWmEvFjAJrVuSru4d5R4DYQTMSG5TVp/QAxrrkdQppWVREFgRUwmJDU7DWzzFKO1LPjgVO0xsezJdlAn/saWq1q3geNuXsokD2cwdH3EmiANL1q67CGC9wKN5YHRm6EZrRqdg86Pap9EQfO/HK32nC2kCpub9dj5N9m+BJx73w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=fSL54lGRqq/uvGKflZf0t2xfnJ/0wpEAIenypWlYt3w=;
+ b=en08pQUf5K/E7UFoOd3Z1AhzetumunTzOxHUJPKXqH97kYvkn28t4hiBlSAAt7z/wIoR/dcLTJSB9JsGQoYhuK+GdJceX9/8nJdk07aAHRLVv+1LgyMYPXErI4pj9FcTlxSQ3tT9ZbfbqvvJXZId1TYUpaGGR3QO7bnRw0KuuqjqBgTtpjiPW6bV9yNAEpdB3Ar0kHtet1CGncBYSH0wEF2vzh1xUFWMu6ErDUIeBmfuZylGD+QQlJG6e8cma814RC+sRgzZl55c0w+j33pRPQuyIwruCE4ynOYU+HwMWeME1EPukrEOaqBYR7ni9wRksZ+YaxVC4DCYuic8CZSNXA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=talpey.com; dmarc=pass action=none header.from=talpey.com;
+ dkim=pass header.d=talpey.com; arc=none
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=talpey.com;
+Received: from SN6PR01MB4445.prod.exchangelabs.com (2603:10b6:805:e2::33) by
+ SJ2PR01MB7982.prod.exchangelabs.com (2603:10b6:a03:4d1::21) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.6886.34; Thu, 19 Oct 2023 18:10:52 +0000
+Received: from SN6PR01MB4445.prod.exchangelabs.com
+ ([fe80::28cd:b4e1:d64b:7160]) by SN6PR01MB4445.prod.exchangelabs.com
+ ([fe80::28cd:b4e1:d64b:7160%4]) with mapi id 15.20.6907.021; Thu, 19 Oct 2023
+ 18:10:52 +0000
+Message-ID: <6e68caba-45aa-4512-81b4-a33d31d2bdb7@talpey.com>
+Date: Thu, 19 Oct 2023 14:10:51 -0400
 User-Agent: Mozilla Thunderbird
 Subject: Re: SMB3-POSIX: Move section 3 inside section 2 as 2.3
-Content-Language: en-US, de-DE
-To: David Mulder <dmulder@samba.org>
+To: Ralph Boehme <slow@samba.org>, David Mulder <dmulder@samba.org>
 References: <bb0a36f1-609d-4cb4-984f-be377375b3c0@samba.org>
  <ca9e50c5-ba42-7a3e-9158-24a08ed42512@samba.org>
-In-Reply-To: <ca9e50c5-ba42-7a3e-9158-24a08ed42512@samba.org>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------GSBVaZzvxrP7ZzEqyp0dNBn7"
+ <7861de81-2176-4996-82da-11b663c20991@samba.org>
+Content-Language: en-US
+In-Reply-To: <7861de81-2176-4996-82da-11b663c20991@samba.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SN6PR01MB4445:EE_|SJ2PR01MB7982:EE_
+X-MS-Office365-Filtering-Correlation-Id: 71f37b98-f1cf-4455-306c-08dbd0cebaff
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam-Message-Info: 9w+3YqHtKM/lXsdjOssSmeCa55KvF/c6XZ2iXRv1RJo9WQ1cXOXRbad3i8kStQ74VkdVmC8vnH3BoSf8WY+VydG42/UyDzCqYQeQJ3BNhPAfJ5ksqClKhuxYoPT1kX5ZilrH464d6OrqogSx14rWHbHVS2ONzi5/OnmSnUtvnbRcamP2yaueJR8uLzksg6ABwI8cDYOD3QpgsyVEoyaNHhmSm+An8eGYYooBO1/0eiM+lc8mndY+U27Gct1tjHFXb2fvBmjnucoGUbAy2pgLMumXpE+72m6xWYd5TTmeHnNKfgcNS/NrUz9c3xc13/8rpaVs6h3nX+wew96dXprGt7Jl/e8gICe91qwc84KYTlrJ03g+vGdrZhaGMqbzuCvmo00EQyVESMDk51f5GZsGZ+elyFl8rwrSJ3TfACOurd5MrHKrnSlGw+k03VpX7RH1aePeEfDE37mrLMQXGuSc33Ncao9D13x4H2t9nmcJ7wOpTqrzGBEyTn1JkKE20vw695uDqLa0wbjPRnBT4VCW3xqL6Ib7TnwJMdpPtWFGctYdLDeDJAlEyhRQWoK7mtJqpIcgxJF7g4NXVFYG4U+wuI8YadApmRerlsS3iSyFgH4=
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?WkYwdDVsNmFMTm96S1BpNHM5R3RSY3NzakcyRnRHSHFBMkUrSUxYVHZaQlpZ?=
+ =?utf-8?B?RjZLWFFJVmNIVlNSZS8zUXlub2dldkRCT0NYc0VMdmlqcTVqdDJ2WFBrckFo?=
+ =?utf-8?B?U2JCRWVCM3lhN0RlVDJIOGpIMVBpYjFUTHZEY2lZTHI1Z2x6WVVKaW9VTktu?=
+ =?utf-8?B?cHlYZ3VEQU9RNWs4anpLVE0zbFBpWFdVUmxmdXNIcmloYmVTbU1UYmxQUDhz?=
+ =?utf-8?B?eGVyeDhJOTc0K2ZaOEVjd3l2VXUzc0VuMXIwWDYvMXF5a29GV0t2c1BtSVd0?=
+ =?utf-8?B?WmRNM3o1aFhWVGFaWlNrdlZCeFc4SjNMT1B1UU14Sy9DckowUS83bE5XQ09q?=
+ =?utf-8?B?dGFGemorcTI5RGp6anBPTGVaY2xJUll3UTJSb2VEczhHZUxGRDRDODQ4Ukg3?=
+ =?utf-8?B?THAxbHJ4OHlleTE3cTFZM2VWN1ZwbFIxZzFQMDl3dFZhN0N3bGYwK0w3SFp2?=
+ =?utf-8?B?V0VZcFdsMXBqQmZGSzAwTkxqaThEUGFnU254ZG5aNnBwT1ZzekFGRmpubWMz?=
+ =?utf-8?B?ajNuZ3VIZHpUODJib2RYNndOUFJSMXBkWlM0a0tHR2NpT1ZCT3daQzlEMEdN?=
+ =?utf-8?B?VVgzREtTWEhmV1d6L2FrYkJzOUpxN1BjTEI1YmtLbHNIR1RDUUVJalFxK2w2?=
+ =?utf-8?B?TmF2Y1BaaXRGVExubHo4N2ZybDNZdGU4enJzbU8yRG1jejZmVFd6ZDZSWFRJ?=
+ =?utf-8?B?YU9jOU5YT2JoMWJ3a3Z4VDJ0R3VEcjloOG9EbmJtdjdrdDY0VitIWkQyRStS?=
+ =?utf-8?B?bEJvL0t0b0hpMzlZcmN3THkrODY1MnVFSDArZjNYZVEyM3dmc1J0cFg5NTNw?=
+ =?utf-8?B?LzZramFoOWFPcUgxNUZhM3dmL2RqdTE3YTZ5SHc0a2xnRDZiWmpRczRiNjVB?=
+ =?utf-8?B?aWZkVDgyeFl1S0NMYTl3Z2owRzErOE5UaDRrQTVqbkc0WWNZQld0NkE1NXdu?=
+ =?utf-8?B?M0lMenlJOEk0bkVQNkJmSHlPWTRWaU0waUo2RWhJV2NQSzFOQUpxZ0VLU1dN?=
+ =?utf-8?B?OTZtZ2YzVUd5cUJ3SGJJRVdjOUFQS3hxTWg4OUgvU1JoOFFoTzQvVy8rQXYw?=
+ =?utf-8?B?YTNoV1FCMjZGaGVHZ2o2eUlmNjhJbndKUW9XN000eVJxOVhYYTV2UVNNUndM?=
+ =?utf-8?B?ZWNteUdyQXpEMlR4ekZrbm5yQVA1cU5HYXZjNjNLdTIrMi9GQzlHeGhvbk9P?=
+ =?utf-8?B?S2hMd045LzFTMDlieXZONUFxQ2xNVVVZaXI3SUZqcHhzeE1RbFA1TzFOTjZM?=
+ =?utf-8?B?aWV0Mkw4T3JScjJBWjlLZ1h2ZnYzaERVZ1BwWHBwUUwwei9BQmlCcDhkNGhD?=
+ =?utf-8?B?bDVsaEFWWG9aVWlNQk5wZ2x0eEgvdUhUYUtWWDBudWFRSHQyNlcvMDgwMnE2?=
+ =?utf-8?B?SjdPSzBydmYvOWNXNWNqZnZTUER2eUlwQmx4Mit0VG1JbVBpWU9rR0xyYkcy?=
+ =?utf-8?B?WllndHIrMEY5NG8wYWFYem5RL2FZdml5bGoyZkU1VDBJaHMzSi9wN2VPZm9i?=
+ =?utf-8?B?L2hhOTljNTU1Y0ZrZUo5UHR3TE5RZzlvK21rSGttaXNBZWFpS3hhcjBCVEM5?=
+ =?utf-8?B?YmtpVHNYREhOeXd2UnJrcUl6VmU1TnhUWnVoS3FNSlBXR25zU0JvVHp4MkpW?=
+ =?utf-8?B?QnJudjVqN1NWNHNpdnhTWG9UcnhWY09OVlZ6WDFxR0taWXV1RXVQWkRkbjAx?=
+ =?utf-8?B?WWp6ZTFpU05kK0tRbUZJZUdmWCtaUGw4K1ZNL0wxMmkzV1NjTjdnZ1N3MEJ6?=
+ =?utf-8?B?MmpBTEhNTnpRQTBhYUt2S2FQbnVnRnQ1WUdaaGFtQ0V5VGxvYlNEaCtVMzVQ?=
+ =?utf-8?B?NEV5MHVmelNHQ1NkckRLU2dxcy9Fd1RZUm9Sb3lMYzA4M1ZHN1lpMUZySlJ6?=
+ =?utf-8?B?K1RrODBBNUorSkc2ZGxKRkRjdTgremJTNHZmbTFhbmQ3MkJJYzRMZHpTWmd1?=
+ =?utf-8?B?dzVwbjNKYkx2bGdFK3VsRkxSMVV6QXJmMmRKUk1DUzBiQzROTTRlWjcxSStp?=
+ =?utf-8?B?UTE3bEVCVTRVY3ROaENVUE01Ylg5cGJjVU9LOFZiaWMxaitmcCtMT0RZRzhr?=
+ =?utf-8?B?ck42K2hOQWlRMm1mNGtyMXF3SitKSnNMMTZ1aVJyZWtXWTVTVWJTZnB2S29z?=
+ =?utf-8?Q?iTCafnx+dXA61aI8m7ZNe10JP?=
+X-OriginatorOrg: talpey.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 71f37b98-f1cf-4455-306c-08dbd0cebaff
+X-MS-Exchange-CrossTenant-AuthSource: SN6PR01MB4445.prod.exchangelabs.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 2b2dcae7-2555-4add-bc80-48756da031d5
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: bpEnzfFCqPNYHtbXfXn6tNhAEC1VS7L2qcct/rT7nbtIRctengwmSQfKF7iwrZuk
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ2PR01MB7982
+X-Warn: EHLO/HELO not verified: Remote host 2a01:111:f400:7e88::61d
+ (mail-dm6nam10on2061d.outbound.protection.outlook.com) incorrectly presented
+ itself as NAM10-DM6-obe.outbound.protection.outlook.com
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,68 +122,46 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Ralph Boehme <slow@samba.org>
-Cc: Tom Talpey <tom@talpey.com>,
- samba-technical <samba-technical@lists.samba.org>,
+From: Tom Talpey via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Tom Talpey <tom@talpey.com>
+Cc: samba-technical <samba-technical@lists.samba.org>,
  Jeremy Allison <jra@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------GSBVaZzvxrP7ZzEqyp0dNBn7
-Content-Type: multipart/mixed; boundary="------------WuYn2S1tDFxXKupLohsiQkZc";
- protected-headers="v1"
-From: Ralph Boehme <slow@samba.org>
-To: David Mulder <dmulder@samba.org>
-Cc: Jeremy Allison <jra@samba.org>, Tom Talpey <tom@talpey.com>,
- samba-technical <samba-technical@lists.samba.org>
-Message-ID: <7861de81-2176-4996-82da-11b663c20991@samba.org>
-Subject: Re: SMB3-POSIX: Move section 3 inside section 2 as 2.3
-References: <bb0a36f1-609d-4cb4-984f-be377375b3c0@samba.org>
- <ca9e50c5-ba42-7a3e-9158-24a08ed42512@samba.org>
-In-Reply-To: <ca9e50c5-ba42-7a3e-9158-24a08ed42512@samba.org>
+On 10/19/2023 1:27 PM, Ralph Boehme wrote:
+> On 10/19/23 19:12, David Mulder wrote:
+>>
+>> On 10/19/23 11:09 AM, Ralph Boehme wrote:
+>>> Hi David,
+>>>
+>>> what would be your thoughts on this one?
+>>>
+>>> https://codeberg.org/SMB3UNIX/smb3_posix_spec/pulls/3
+>>>
+>>> @Jeremy: do you think you'd have some spare time to work with me on 
+>>> the section 3 server behavior stuff?
+>>>
+>>>
+>> Fine with me. Ralph, I've made you a member of the project, so you can 
+>> make any changes you like now.
+> 
+> thanks, but I'd like to keep a "needs two team members ack" policy. I 
+> don't thing we need signed-off and review-by stuff, but we definitely 
+> need more then two eyes on changes. :)
 
---------------WuYn2S1tDFxXKupLohsiQkZc
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
+I agree that's a good policy.
 
-T24gMTAvMTkvMjMgMTk6MTIsIERhdmlkIE11bGRlciB3cm90ZToNCj4gDQo+IE9uIDEwLzE5
-LzIzIDExOjA5IEFNLCBSYWxwaCBCb2VobWUgd3JvdGU6DQo+PiBIaSBEYXZpZCwNCj4+DQo+
-PiB3aGF0IHdvdWxkIGJlIHlvdXIgdGhvdWdodHMgb24gdGhpcyBvbmU/DQo+Pg0KPj4gaHR0
-cHM6Ly9jb2RlYmVyZy5vcmcvU01CM1VOSVgvc21iM19wb3NpeF9zcGVjL3B1bGxzLzMNCj4+
-DQo+PiBASmVyZW15OiBkbyB5b3UgdGhpbmsgeW91J2QgaGF2ZSBzb21lIHNwYXJlIHRpbWUg
-dG8gd29yayB3aXRoIG1lIG9uIA0KPj4gdGhlIHNlY3Rpb24gMyBzZXJ2ZXIgYmVoYXZpb3Ig
-c3R1ZmY/DQo+Pg0KPj4NCj4gRmluZSB3aXRoIG1lLiBSYWxwaCwgSSd2ZSBtYWRlIHlvdSBh
-IG1lbWJlciBvZiB0aGUgcHJvamVjdCwgc28geW91IGNhbiANCj4gbWFrZSBhbnkgY2hhbmdl
-cyB5b3UgbGlrZSBub3cuDQoNCnRoYW5rcywgYnV0IEknZCBsaWtlIHRvIGtlZXAgYSAibmVl
-ZHMgdHdvIHRlYW0gbWVtYmVycyBhY2siIHBvbGljeS4gSSANCmRvbid0IHRoaW5nIHdlIG5l
-ZWQgc2lnbmVkLW9mZiBhbmQgcmV2aWV3LWJ5IHN0dWZmLCBidXQgd2UgZGVmaW5pdGVseSAN
-Cm5lZWQgbW9yZSB0aGVuIHR3byBleWVzIG9uIGNoYW5nZXMuIDopDQoNClRoYW5rcyENCi1z
-bG93DQoNCg0KDQo=
+I noticed the same issue - section 3 in the usual template is for
+processing, and it's appropriate to place data structure stuff
+elsewhere. These filesystem-specific structs live in MS-FSCC in
+the Microsoft docs. It may not be a good idea to infect that
+document, but a new section 2.3 might not be the best choice
+either, since it's not a normal template. It's ok for now.
 
---------------WuYn2S1tDFxXKupLohsiQkZc--
+I have some changes in mind for some of the other 2.x sections
+too, after looking at the terminologies during SDC IOLab. Hopefully
+will have time soon to organize them.
 
---------------GSBVaZzvxrP7ZzEqyp0dNBn7
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-wsF5BAABCAAjFiEE+uLGCIokJSBRxVnkqh6bcSY5nkYFAmUxZvMFAwAAAAAACgkQqh6bcSY5nkZ/
-qRAAtyH9DJoQ3nKdeBoiitgcrdkzFVa/M5Q2HAKw5WD7CvRO7lhoSTVbwdsTVn8suu/ZnjG0W+bn
-dAylz0dfdib6NyeIwZWXVUJELVAUkujZ6+Go5wLPoig72g38LbEYK85GYHU0jxLx+GxNqLnZVpXo
-MNR8Uds/RFefT3SukOWn/yZlyMrjvMhjTZT1bZQhyg1H88A+gmktseoFAhxnigIzvgfGrfSbvWfL
-3cx32paDprLKB3n2dKKIDfHSuJY0qMC3vWOPUgx3P3pvFzvx6bylwE+9SL5ST5KVia/j+jXOBHoq
-+DZWCjAvGygfpksRmfnqkUxjRw6/ZOqAcM4im7HNKTLikExX7R7gYbl7skrzp61N3MeyXZ1bP9UI
-7ygpeBdTFUOGtRrybeP2L9Z3ezCfVy2PZvQzWlKrCPA9K/y6DGIvY9N92eU69gxU7Jx7NN4vwLRS
-TVAVSPPMCoXJGYkxfxTRBNmnhbPnkHnfU1TqHqEWK0RYfWGfGQNahuFA8swfaC4k5yH6FcFfaU6V
-odUWWbyfuqTzh3hpkvODlsshSoRKkovELyFeUTMecGXd6y2RKvgeE8aaps1xFxBESygaPQs5yDSM
-8IsA8zyZ25B7ML82K2/Caw/OsVPdeAMTlMPx32FlyacdXlMT7JDTsBWv2BptTK/tbQ+zL3kA5k22
-r7w=
-=4dms
------END PGP SIGNATURE-----
-
---------------GSBVaZzvxrP7ZzEqyp0dNBn7--
+What about "Client processing"?
 
