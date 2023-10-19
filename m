@@ -2,47 +2,49 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 34F7C7D003D
-	for <lists+samba-technical@lfdr.de>; Thu, 19 Oct 2023 19:09:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 43B9F7D004D
+	for <lists+samba-technical@lfdr.de>; Thu, 19 Oct 2023 19:13:09 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=qJfMo3LihXU+YUEQZOCHeeVs7gTzd9+1brz03yfpbso=; b=wUEMJ2xRwKudNqvwDBv7LWizOJ
-	uRscKOJKoFkCp2mtHY4fneii+6LtesNhCeO6gWt70onefUk7OsnWjEsxVZlkjAWcj3dsDM6K/x6vz
-	fTWjdhPcC7L3jN1u8Ejnpu+MwY4s0yTjHI8PuiL8J1pNGpiXTDw5V2xuuL2AL0s7Drk+nOJfOKOXv
-	Wq1ovu5KiE6X0xj04+xxcnR0gL3+vt4R3fhdLRZWEr/MMToLjIdQC6WcpQVDXLaFz4aII2B7cqthG
-	ipM1mgEBhjcuNUGquX5+sj7mq908Ug+yMrT9Lw/EDwE3ykyJIidyq572WU7CrUaA7OkfbdPmlBNFL
-	nlTYdd0g==;
-Received: from ip6-localhost ([::1]:60672 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=G/9o//56DgfydVu4SqDAEW5FFZJyytbt0bu4dfhk77g=; b=Yr8G4nItGk6lsV6nl+fsiiW7CK
+	rlwVoNslfU/0FOCbjYMo3vTxGdNF289shbk7F7zuG5R+F2rPYLdQq1H4a0EQu1gWMuxUgI54AMcVh
+	HQIbVKp4jmfgJI2Cngm/+XPv5P4TNw0wLZ2nHMeowtSuFcf/UOfhBnhxjmsrs6keMCF8r1qnCD0XY
+	h03NYQY6mtb/RI57IKh6kj5soO4m5SiFbDTQBPvy+u3kVAL9aRufCXn3j+zxnqLvOjvOkhFxSvOb6
+	6hmmqUgWBHgb6WclQ2pmkiCKLgrpoSQVm2WvJSwM4oatXXz/gyqqVwLlCg+dYhcOTYvBwRhM3i7bo
+	4KuesrjA==;
+Received: from ip6-localhost ([::1]:19880 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1qtWWR-001M0X-5r; Thu, 19 Oct 2023 17:09:23 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:27468) 
+	id 1qtWa0-001MI4-34; Thu, 19 Oct 2023 17:13:04 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:24682) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1qtWWM-001M0O-8b
- for samba-technical@lists.samba.org; Thu, 19 Oct 2023 17:09:21 +0000
+ (Exim) id 1qtWZv-001MHv-LJ
+ for samba-technical@lists.samba.org; Thu, 19 Oct 2023 17:13:02 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=From:Cc:To:Date:Message-ID;
- bh=qJfMo3LihXU+YUEQZOCHeeVs7gTzd9+1brz03yfpbso=; b=lkBmy6UBpejwJ0XNzAdtvxEEKB
- KtbHR2Tc9g9CbKHxIybk+8DoCJSJU534ltSNNFikduMGsgm/sKi3l+sOuZbUiCI9AUqq8ntvjPksC
- wtilsLWRGH1oaSAPNVkqFzrOh+H9kH1E2q7bnCd58a+x50DdfS5kqAcYVYeauArnI7+M2/OkCimPw
- R/hS6tN8X5xT5UW+4M7ZW70QKYWeuQTuEPWbMAHkf1lCDaA6zdmh7tpYpcEJpPjbqXmPOOwIop3+F
- YUHyqSZ/qEg1ZP6bqhl+ZtJCGtog1moyt/HaHRpPWMfxhkIqTEOolNOW58nGDNq3jZx5BnRKmukAq
- cjcF6bNbTIdaKQniV9FQegn8wqTcOYNyX2Hv8p1EbrzeYaybJFBcST04132gejrblp5T3BQX0ozZq
- jyaWcpEG7XM7D6I0Y1E2YkDA/fQhgGc4vF+co3dr86d/62RqzEVlKtskXZqyn8kvMUh8wpsJ643Ob
- 55+N9Gqe9+HHpNMs/PJ8+Q59;
+ bh=G/9o//56DgfydVu4SqDAEW5FFZJyytbt0bu4dfhk77g=; b=TLiBeoGN59cas3twQlOsqtM3zD
+ EcpPrHs0XH99KNJXTNGkdzC8VsB6G+Jqvg7ALVWIsnZ0NH1OYXlJDtniC+ueE6eE+eHHN15h/eBN/
+ juztuRA76CENSZ+G39MZOcjaUxaRmf/IhKMipjnp1DcB3QHYYJVrijIZ9FKXHrsqHOg8BWW5xJpjU
+ yeVn/ItfSWGOW8jY5DrubdnXx1I3u7UlC/pTixW6GCUEr5ZIDnScIMBWLMK50qT+pvZXviB1GEGZE
+ uRc2MYjkZ47ydG4mvcSW+khyUgMoSPT3Lk21JzdqcPsfdYHQZB5Dl7uxmVaQnI9F+fyA2ko+keXsJ
+ UydsdnFESFkBLXBSorHVi/7zyRHz1pZw1vL2/WFP0ktuYtl8ijQNcqv+ACReRE1lkBzPIh0/OynGT
+ xE1P9xOlgT/MoA3HSEUKnqwmTkW5aVF5+joSWSC65ddeSubkwr/6Fk0DEzAfuTJP+NUUlJ3ok+5km
+ d1blRDXqNIgVC6sUgbvzpOeM;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1qtWWL-001XBD-0G; Thu, 19 Oct 2023 17:09:17 +0000
-Message-ID: <bb0a36f1-609d-4cb4-984f-be377375b3c0@samba.org>
-Date: Thu, 19 Oct 2023 19:09:15 +0200
+ (Exim) id 1qtWZu-001XG4-2P; Thu, 19 Oct 2023 17:12:58 +0000
+Message-ID: <ca9e50c5-ba42-7a3e-9158-24a08ed42512@samba.org>
+Date: Thu, 19 Oct 2023 11:12:56 -0600
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: en-US, de-DE
-To: David Mulder <dmulder@samba.org>
-Subject: SMB3-POSIX: Move section 3 inside section 2 as 2.3
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------Ljam2FcIDToVZqtayuLbx6Sd"
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.14.0
+Subject: Re: SMB3-POSIX: Move section 3 inside section 2 as 2.3
+Content-Language: en-US
+To: Ralph Boehme <slow@samba.org>
+References: <bb0a36f1-609d-4cb4-984f-be377375b3c0@samba.org>
+In-Reply-To: <bb0a36f1-609d-4cb4-984f-be377375b3c0@samba.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -56,57 +58,37 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Ralph Boehme <slow@samba.org>
+From: David Mulder via samba-technical <samba-technical@lists.samba.org>
+Reply-To: David Mulder <dmulder@samba.org>
 Cc: Tom Talpey <tom@talpey.com>,
  samba-technical <samba-technical@lists.samba.org>,
  Jeremy Allison <jra@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------Ljam2FcIDToVZqtayuLbx6Sd
-Content-Type: multipart/mixed; boundary="------------Zy0993iZCzZ5WI6sTa4gAzQh";
- protected-headers="v1"
-From: Ralph Boehme <slow@samba.org>
-To: David Mulder <dmulder@samba.org>
-Cc: Jeremy Allison <jra@samba.org>, Tom Talpey <tom@talpey.com>,
- samba-technical <samba-technical@lists.samba.org>
-Message-ID: <bb0a36f1-609d-4cb4-984f-be377375b3c0@samba.org>
-Subject: SMB3-POSIX: Move section 3 inside section 2 as 2.3
 
---------------Zy0993iZCzZ5WI6sTa4gAzQh
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
+On 10/19/23 11:09 AM, Ralph Boehme wrote:
+> Hi David,
+>
+> what would be your thoughts on this one?
+>
+> https://codeberg.org/SMB3UNIX/smb3_posix_spec/pulls/3
+>
+> @Jeremy: do you think you'd have some spare time to work with me on 
+> the section 3 server behavior stuff?
+>
+>
+Fine with me. Ralph, I've made you a member of the project, so you can 
+make any changes you like now.
 
-SGkgRGF2aWQsDQoNCndoYXQgd291bGQgYmUgeW91ciB0aG91Z2h0cyBvbiB0aGlzIG9uZT8N
-Cg0KaHR0cHM6Ly9jb2RlYmVyZy5vcmcvU01CM1VOSVgvc21iM19wb3NpeF9zcGVjL3B1bGxz
-LzMNCg0KQEplcmVteTogZG8geW91IHRoaW5rIHlvdSdkIGhhdmUgc29tZSBzcGFyZSB0aW1l
-IHRvIHdvcmsgd2l0aCBtZSBvbiB0aGUgDQpzZWN0aW9uIDMgc2VydmVyIGJlaGF2aW9yIHN0
-dWZmPw0KDQpDaGVlcnMhDQotc2xvdw0K
+-- 
+David Mulder
+Labs Software Engineer, Samba
+SUSE
+1221 S Valley Grove Way, Suite 500
+Pleasant Grove, UT 84062
+(P)+1 385.208.2989
+dmulder@suse.com
+http://www.suse.com
 
---------------Zy0993iZCzZ5WI6sTa4gAzQh--
-
---------------Ljam2FcIDToVZqtayuLbx6Sd
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-wsF5BAABCAAjFiEE+uLGCIokJSBRxVnkqh6bcSY5nkYFAmUxYrwFAwAAAAAACgkQqh6bcSY5nkZa
-Yw/9G3ApiPiBrrS59r0rVbgfK9P9N/qdUSl0xR8cqxWDDTyLqfK5PCq77ItYDcS9pxqXNh3/2MIi
-8vRC/qt4fCoWUFzDf9Py8zOUAV9aFrqFqENNaRTGpMg+Oygo91U/1qWNIBH462bV4iut5mEzV+M2
-Seku0Q7/Cw+yoj9NRwHs7I3fBySaWmhQZbwwnvn/llNZCZ+/G0n77rArYJ8iUaqQS7KSdQgRZpmm
-iPWANU5SxOfYI8ke7W7WOo10xRHCsxKylL/6Wm1r2AIxZWMxaqmkXlyYq6Hr0QhTb5XfKG9Ps8ej
-Mu7kp2ftu/FQMw1Ogt+iI4ZqoxoKL9coXcEnW/iKHO5kKnR063rB1jftYqco57Tl3MfAIrlPk4H/
-hnmMd12qFemCYD7ErYQVSdyGYaHgmSD/oxjeEfWH08TfZBu8CA4cFDBnXIkzHV1HJizqS1DCud/Z
-FgVO6d6vEzDfd7e0Sjeiqx3W9VBQxz34gKyzRNfNYgYizrmdQzjcD6eih1QKZbYFJ9yWBSJM6sG+
-ssbKuDzsakEGxifsvoMLkV1+PXpPIQibgqBDRbPRp27dM30znvG7H6iOTJMFiPQG9xUEDP3Ssbe5
-1xmdYChEHpuP3TLFC++mENAY/1eTf/RQLAytLr3tZwWsgVrzgF/qS3Pu8Fk0x7t8s9I/VtsZml7/
-5e4=
-=FzkN
------END PGP SIGNATURE-----
-
---------------Ljam2FcIDToVZqtayuLbx6Sd--
 
