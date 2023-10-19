@@ -2,48 +2,49 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2D9977CD47D
-	for <lists+samba-technical@lfdr.de>; Wed, 18 Oct 2023 08:29:54 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5D6777CEDC6
+	for <lists+samba-technical@lfdr.de>; Thu, 19 Oct 2023 03:55:26 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
-	bh=d2y49uo7d7SxkX/kZ1ig/xJlexuamTKeb9Uz+KjSWfE=; b=lHcezuoXceo33nSX1SpAyfCyZL
-	KIZKuFu8enUbCUzOX/ET/b6oeCSgoJbQalAFwkFEFWNzT4FWIStRFrXQWi2HoK5rll79P/A4oDb9b
-	cachOt5ZEN0skC6DRd5TFH7kYiWWsQCekAbvQIRFWgtHF9IQIITKzRZ/08y6rWI4aDG+lnVpL+TAe
-	dcHUocNh3b//5I+K950o1UXeI/Kf/VW5A9FKZVh1XgdlzUXiHdZg9s6XWKCU2/+pKoEnn8UB5Wilq
-	HPmdlwvS3FHi1rJo54bNvPBmc5cSIpAyZECXUS4pUwa7+aRVxnauH3+bRbXuqADAOBVLvMC+iTFEB
-	DqJfGZSg==;
-Received: from ip6-localhost ([::1]:21946 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=kwc84lLFUNsg1irneLtxPE5zVUblKCkZyFHKLpUEeoI=; b=Gj8lA3Ek7Tl2mFvhm/MMQMPrKB
+	AAVVV4Q2GZasZVCfuTep1Q0EVv3yfpd4NiOoAX58xpmQztBu7+VHb+mlScLUS9kveWwGCLDggdjsp
+	exeLYtcrxOe/t3BaC5FIzH0twW4bIrHQL/de5xeAAYSWEzXWmalYZAog4MbEnZu/WCFColOx5gS4Y
+	rBIbuDtwwRjXL84yRu8jtTA2knrKr4yN+hQOCejaWMwO5NVoEnyzBCj67OjronT9/5RcTLlwwuek4
+	rpz0eZRhE1L/RxcVShw8xZNLX/MdtSIMG0w0X8qRYlYC7FGOWEhl98dpD6k/inSgq/ougTOoMZh6j
+	1clLPe/Q==;
+Received: from ip6-localhost ([::1]:18030 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1qt03I-000uQl-1A; Wed, 18 Oct 2023 06:29:08 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:44482) 
+	id 1qtIFN-0019wW-P3; Thu, 19 Oct 2023 01:54:49 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:57272) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1qt035-000uQc-TS
- for samba-technical@lists.samba.org; Wed, 18 Oct 2023 06:29:01 +0000
+ (Exim) id 1qtIFJ-0019wN-2I
+ for samba-technical@lists.samba.org; Thu, 19 Oct 2023 01:54:48 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Date:To:From:CC;
- bh=d2y49uo7d7SxkX/kZ1ig/xJlexuamTKeb9Uz+KjSWfE=; b=ClzoQ8EYSoI/jek/gRTiUINwql
- 3T3tQhvYJ7I79S22z7S+XRY2xtgfd/l34VaVbfMN6YCUf9Yqvkrajxq+rN8AUF9OHXJ9J/4koEX9Q
- V5/Kne5szTrX+/scRtkWivma/2S79g7ftKz05TLDZFmg9jHiZDcEIQkJFP1kSxGErlGUg2VBjTNVB
- 9NKCgB+fGGHaZt7LoUQ5OoPFUgsjEq+BYgbDDp+fgjmnVk79ntYZOS7u6AwmH8UAmuRlTILoM69YR
- hIiHuvkP0HumcB7f1u7LkAD7uSv7VSJUrqKWPzdye8Z2B5IciEveHNWwGEitjh66rkkIDMvfO5Uj5
- Xz/UBy0bwp8tGtJpUDmHS/Zv2k6AKm6t/caJI9ZMdN0GhwYI47IVOpRycg+SI1UejII8b2kzeayKr
- Fq/N5tXkSe1JBfdBO0mTejy6+YDI5zqaD09Wya/Lj8M+lsVOVhpESGIWHTYWaIFQMHc45w3gwZNg7
- 1eF9b1mmRWmdHHxecu2xFoem;
+ s=42; h=From:To:Date:Message-ID:CC;
+ bh=kwc84lLFUNsg1irneLtxPE5zVUblKCkZyFHKLpUEeoI=; b=s73jn9FJoiCCddoADW1ayHi6r0
+ mUwTbHeKWKJRFFiaKmAo1mQWDt0cHKitlgX5YMOn2WQAb9FcwbsjgsOT1zNqFdRo7MvezxTowgg0/
+ XPmyBnODGQIiVQkbjUxmQEbB2SbouhEReZrWiDy+8cP5PYn60p8uoBWGY0qjRsartDiYNPXrEZCZv
+ H/UGiQ/bAI324mWVV5UR/uw2zY6//Dq8SMcPsj2j8ix6ccyrdfiUkD0+a75HlbudN6FU81s8McJc8
+ Jv07NvFr0acJPEBgpgAk7lLzhNVVFcqoepiuixs6OINeWXWFDra3sCzyEwfwVD1aJGMinAcODrB6h
+ lD6aSwXsqiNwtO5jhhkSYWuDvgzFntgKVytY5WOOxf9YGAS0bEudx4qTdEIsM/g0bkT+MBT4VKgP6
+ xi8/F99vDel+P1127M9qLkv9Dz+AsqORr3KuEzNXNeIQi9uq754qD/LU4eGWdbXNB3Rdwz44B5AH4
+ TsOybxzuUV2Z+jSTCGEsaIov;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1qt034-001EG4-1w for samba-technical@lists.samba.org;
- Wed, 18 Oct 2023 06:28:54 +0000
-To: samba-technical@lists.samba.org
-Subject: Re: s4:torture: Increase multichannel timeout (was: [SCM] Samba Shared
- Repository - branch master updated)
-Date: Wed, 18 Oct 2023 08:28:53 +0200
-Message-ID: <5999563.lOV4Wx5bFT@magrathea>
-In-Reply-To: <E1qsqak-005Ezi-2G@hrx0.samba.org>
-References: <E1qsqak-005Ezi-2G@hrx0.samba.org>
+ (Exim) id 1qtIFI-001OWN-0u for samba-technical@lists.samba.org;
+ Thu, 19 Oct 2023 01:54:44 +0000
+Message-ID: <00f9d78e-01c6-4bad-a627-42adb3870fa2@samba.org>
+Date: Thu, 19 Oct 2023 14:54:38 +1300
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+User-Agent: Mozilla Thunderbird
+Subject: Re: s4:torture: Increase multichannel timeout
+Content-Language: en-GB
+To: samba-technical@lists.samba.org
+References: <E1qsqak-005Ezi-2G@hrx0.samba.org> <5999563.lOV4Wx5bFT@magrathea>
+In-Reply-To: <5999563.lOV4Wx5bFT@magrathea>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -57,39 +58,53 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andreas Schneider via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andreas Schneider <asn@samba.org>
+From: Joseph Sutton via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Joseph Sutton <jsutton@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Tuesday, 17 October 2023 22:23:02 CEST Andrew Bartlett wrote:
-> The branch, master has been updated
->        via  f392fdfd47f shadow_copy2: Add missing TALLOC_FREE
->        via  c6d0df787a1 s4:torture: Increase multichannel timeout
+On 18/10/23 7:28 pm, Andreas Schneider via samba-technical wrote:
+> On Tuesday, 17 October 2023 22:23:02 CEST Andrew Bartlett wrote:
+>> The branch, master has been updated
+>>         via  f392fdfd47f shadow_copy2: Add missing TALLOC_FREE
+>>         via  c6d0df787a1 s4:torture: Increase multichannel timeout
+> 
+> Hi,
+> 
+> I've increased the timeout which worked for me and the test didn't run into
+> timeouts anymore. However Joseph run into the issue again with
+> 
+> https://gitlab.com/samba-team/devel/samba/-/jobs/5316200327
+> 
+> Does it make sense to further increase the timeout or could there be another
+> issue. I'm not an expert in this area of the code.
+> 
+> https://gitlab.com/samba-team/samba/-/commit/
+> c6d0df787a1f6007e1f4594f68ff1f75a46bd293
+> 
 
-Hi,
+Here’s some more detailed output from a failed run:
+https://gitlab.com/samba-team/devel/samba/-/jobs/5324774640
 
-I've increased the timeout which worked for me and the test didn't run into 
-timeouts anymore. However Joseph run into the issue again with
+Testing for BUG 15346
+2023-10-19T01:09:58.811178Z: conn[0]: negprot done
+2023-10-19T01:09:58.811246Z: conn[3]: negprot done
+2023-10-19T01:09:58.811290Z: conn[5]: negprot done
+[…]
+2023-10-19T01:09:58.883395Z: conn[30]: echo done
+2023-10-19T01:11:31.861815Z: conn[3]: echo timed out
+UNEXPECTED(failure): samba3.smb2.multichannel.bugs.bug_15346(nt4_dc)
+REASON: Exception: Exception: 
+../../source4/torture/smb2/multichannel.c:2474: status was 
+NT_STATUS_IO_TIMEOUT, expected NT_STATUS_OK: smb2cli_echo_recv failed
 
-https://gitlab.com/samba-team/devel/samba/-/jobs/5316200327
+Connection 3 took just over 93 seconds to time out. 93 happens to be 
+equal to ‘state->num_conns * 3’, the current timeout value in seconds.
 
-Does it make sense to further increase the timeout or could there be another 
-issue. I'm not an expert in this area of the code.
+So it would appear that the failure is indeed due to this timeout. But 
+when the timeout is so long already, I don’t think that increasing it 
+further is going to help.
 
-https://gitlab.com/samba-team/samba/-/commit/
-c6d0df787a1f6007e1f4594f68ff1f75a46bd293
-
-
-Best regards
-
-
-	Andreas
-
--- 
-Andreas Schneider                      asn@samba.org
-Samba Team                             www.samba.org
-GPG-ID:     8DFF53E18F2ABC8D8F3C92237EE0FC4DCC014E3D
-
-
+Regards,
+Joseph
 
