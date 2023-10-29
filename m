@@ -2,45 +2,67 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 922527D7DF2
-	for <lists+samba-technical@lfdr.de>; Thu, 26 Oct 2023 09:59:29 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7A8D47DAE5F
+	for <lists+samba-technical@lfdr.de>; Sun, 29 Oct 2023 22:07:23 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
-	bh=maX2ZABglP/HeqAltvHjCEJ6D5gtBEV0hoW/ke27fA8=; b=i52jHqiWy3PvoyrqFMXMbdoGZQ
-	fs+fR1o0hoBKIucA1Ae6LZnXZI5nlQ8XejBdJGZcUjeCViXuYK7InwtZ8q5MoAdWm+wiEc8K7aY8k
-	EaX4qpqIfN30Ji8l/vGyv2mtev4sm8AItaiqgzNlG4ESLMAxR2YieL9oUN7P1AI7QzrwjMjJ4zYNI
-	LGX3Ot6QWjxjZbXf3U3BOLQp8fQmk3YQ+DbsqiVI4KeXDMV3u1tylcu7U9iOn7Kg4Jza3pPU3+ixM
-	xLwiIu4yLu/54GJ5XWcyUP4vaq3UkYks6esIS0IV/s+unNa0LMvtDYfZYulNOoQwKwUpYmxkfhVrD
-	Mpc79qPA==;
-Received: from ip6-localhost ([::1]:40614 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=hLOoptMH4lGq4kc4qhjKuPfnBFyacrSgPnd9+ruLLa8=; b=Mj/aYmN3SZNEBoSJ0m37lxX7XG
+	iHqsUmr5qJaXSVHZ+p6LXjQ0Bdiq9e20ElD/Wx56N0CBhiaqjryH1Q170IpajvSvX3csQdUxFIwI4
+	rf/sdqEvZIlh8S3a5H30FweaYjGDV1jL65XjYFgKDBSzXQQr+5mbhKnuV/2jqoKYedgT8aMRXCfT9
+	XZUZ4CRnqfa2yRpzzSzcDImESQa+XHeHau/s0etqLRt7Z1JurXfRZbeO0gM08JC/e/AtMwypni7Oo
+	wgn5ezW0H40TwwdC+IPhcnGwZ0XN0MSOcuY0IBEc849Ueo5uqWVfOHAoHkPyKqrUSvymEyVnhOyMG
+	taJARd2w==;
+Received: from ip6-localhost ([::1]:36848 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1qvvGk-002brz-FM; Thu, 26 Oct 2023 07:59:06 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:46572) 
+	id 1qxCzj-003QQ4-IK; Sun, 29 Oct 2023 21:06:51 +0000
+Received: from mail-lf1-x12d.google.com ([2a00:1450:4864:20::12d]:44301) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1qvvGb-002bro-Qk
- for samba-technical@lists.samba.org; Thu, 26 Oct 2023 07:59:00 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Date:To:From:CC;
- bh=maX2ZABglP/HeqAltvHjCEJ6D5gtBEV0hoW/ke27fA8=; b=aN/4J7BToOJ2i9gEdqK7IJOQV1
- /5j4cko8/cZAuguoyaHpYXHkF7fnoz2snbsAnj8Y4OndlplLieUWX0ezsbkqEAyA1dXfbxYNyWTqM
- 7UapnluFbbmsxD/FeIt1p6npHCBtl4Nhzoe11byV8acThaERF/rBTbRhFzSsjSNvRlazEnG558gbi
- 5JDy5dTrhuEGdydmdK+eEpq5lDP9cVhaSUz2O6kQzahF90hZW21zseFZg7lwakeCII131I12dqent
- jcpDZNpWYTB6BTFdFNJu2dOl9NHnCA3WEuTiaDGHYOrwZB4bOGX55daRYkhirOzJ5EyggTLhaOn0J
- 3GkncWVHk+dcIQn5sbg0V5Utq8ned22Ab9WEdJjC+kBKzwkzrGpG102qKrxoiMWxX2Mci2bTw7CPX
- X9BELmiJw9FHUONXqQTauvle6kalfhkYt0C10PrqzZzZGyX51RVeSbA/Jdo4f2qlyrUl1mZl4Wkh5
- nJR1yltJ2Hvmk7PB6/enzBGy;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1qvvGb-002hKt-01 for samba-technical@lists.samba.org;
- Thu, 26 Oct 2023 07:58:57 +0000
-To: samba-technical@lists.samba.org
-Subject: Leak Sanitizer in Samba
-Date: Thu, 26 Oct 2023 09:58:56 +0200
-Message-ID: <2330326.ElGaqSPkdT@magrathea>
+ (Exim) id 1qxCze-003QPv-Np
+ for samba-technical@lists.samba.org; Sun, 29 Oct 2023 21:06:49 +0000
+Received: by mail-lf1-x12d.google.com with SMTP id
+ 2adb3069b0e04-507f1c29f25so5265539e87.1
+ for <samba-technical@lists.samba.org>; Sun, 29 Oct 2023 14:06:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1698613605; x=1699218405; darn=lists.samba.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=hLOoptMH4lGq4kc4qhjKuPfnBFyacrSgPnd9+ruLLa8=;
+ b=GIQ15lryP9Gf129XghVyux6EkiNjFa5S7ly2kXODkFtjpFihZYZI4SGb9ndQCsd1Uo
+ dDDQNPT18iB9SfDZbbOE4XUCWn0rPuB4+nmO8CEwLyXQgdG5YiMPkquxQAWarPUbsEHi
+ 1+GT8+/rkYP+y5boWQwJ735j0BxvnEMOjRUbTRm4j5x0PVnbcBO+pQ5Lmyx6ec26/nD0
+ DUu4SSrQpJ2HRLFieCJ9Lri9bR6pjNhPRou2cj+w44N660bm4kcTzndoCrmcnYClm69/
+ ZLLK9xWhpUkx53MbKYOWe4wk5P5gwx7aXwIWH6Abzgx2DtsHvbeKW+3cXy6/ypYUVqN2
+ nTTg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1698613605; x=1699218405;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=hLOoptMH4lGq4kc4qhjKuPfnBFyacrSgPnd9+ruLLa8=;
+ b=vd0tf+QynT2hLgC1/rCbq+rTyysyVTwh19SlAoL3y9Ygihw77VWJILaty47ub7trEf
+ AJyyEyTJLeVypyQAuiekiTtj5JPvC2A6kJKymYtseLtOM45H2h9shBKOKL4XVDv9oxhq
+ ldiwTD2637VffdABxcnaKr4MZmiMm66arRsqDYbhmP7YI2twVFeD7+t0ykhzPcZ/Dtzj
+ SX36McDXUtPADmH1fDbTjtSPhchXbHz1R7yHLhCEr9PhUylqgVlfGeo87K+LbmYAuI1z
+ PGna5BvVC1AWQOTsyU05avufv1NGoUEl9sXUd4MGFojcpQhlq6RZmV9nVzIajHPS1L/3
+ mtyA==
+X-Gm-Message-State: AOJu0Ywm2ZjXuaxspxMObrFv85QH+FpfSIctr3uwSoZnqYnEF69Eq+Zw
+ rCyhTAPAHg3Zk4L0TYGYPeA2o3OCIV4MvrIAdrldGHwpGZ0=
+X-Google-Smtp-Source: AGHT+IEeNGSRnapd4aau9iR9xtr2fk1z7r3uG/qooUYbysju2je7yNF5iM1HCO1es+phgjFjsS6TWpQRHtmn3lBqz3s=
+X-Received: by 2002:a05:6512:962:b0:503:38fe:4598 with SMTP id
+ v2-20020a056512096200b0050338fe4598mr5084401lft.64.1698613604858; Sun, 29 Oct
+ 2023 14:06:44 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+References: <CAH2r5mvve4euMUqsBBqRr2VWgz7ukEZ15vZRVDO=zbzY=XhF1Q@mail.gmail.com>
+ <29169963-d1c6-4972-8e68-1f24d8d2e5b9@miami.edu>
+In-Reply-To: <29169963-d1c6-4972-8e68-1f24d8d2e5b9@miami.edu>
+Date: Sun, 29 Oct 2023 16:06:33 -0500
+Message-ID: <CAH2r5mv1phW57TErdO1jWQaUyZqiLmOEGdLDbF8RDfPwJvkPSA@mail.gmail.com>
+Subject: Re: [PATCH][CIFS] allow creating FIFOs when "sfu" mount option
+ specified
+To: "Brown, James William" <jim.brown@miami.edu>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -54,36 +76,74 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andreas Schneider via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andreas Schneider <asn@samba.org>
+From: Steve French via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Steve French <smfrench@gmail.com>
+Cc: "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi,
+Good catch - yes that was a typo - will fix.
 
-you might already know AddressSanitizer. AddressSanitizer also has a 
-LeakSanitizer built it, however it is disabled in Samba. I'm trying to get it 
-working as we have memory leaks probably in Winbind and rpcd-lsa. So the last 
-days I fixed issues which prevented to actually run 'make testenv'. In case 
-you want to help fixing memory leaks you can use this branch:
+On Fri, Oct 20, 2023 at 10:07=E2=80=AFAM Brown, James William via
+samba-technical <samba-technical@lists.samba.org> wrote:
+>
+> On 10/20/2023 12:32 AM, Steve French via samba-technical wrote:
+> > CAUTION: This email originated from outside the organization. DO NOT CL=
+ICK ON LINKS or OPEN ATTACHMENTS unless you know and trust the sender.
+> >
+> > mb3: fix creating FIFOs when mounting with "sfu" mount
+> >   option
+> >
+> > Fixes some xfstests including generic/564 and generic/157
+> >
+> > The "sfu" mount option can be useful for creating special files (charac=
+ter
+> > and block devices in particular) but could not create FIFOs. It did
+> > recognize existing empty files with the "system" attribute flag as FIFO=
+s
+> > but this is too general, so to support creating FIFOs more safely use a=
+ new
+> > tag (but the same length as those for char and block devices ie "IntxLN=
+K"
+> > and "IntxBLK") "LnxFIFO" to indicate that the file should be treated as=
+ a
+> > FIFO (when mounted with the "sfu").   For some additional context note =
+that
+> > "sfu" followed the way that "Services for Unix" on Windows handled thes=
+e
+> > special files (at least for character and block devices and symlinks),
+> > which is different than newer Windows which can handle special files
+> > as reparse points (which isn't an option to many servers).
+> >
+> > @@ -5135,6 +5135,12 @@ smb2_make_node(unsigned int xid, struct inode *i=
+node,
+> >               pdev->minor =3D cpu_to_le64(MINOR(dev));
+> >               rc =3D tcon->ses->server->ops->sync_write(xid, &fid, &io_=
+parms,
+> >                                                       &bytes_written, i=
+ov, 1);
+> > +     } else if (S_ISBLK(mode)) {
+> > +             memcpy(pdev->type, "LnxFIFO", 8);
+> > +             pdev->major =3D 0;
+> > +             pdev->minor =3D 0;
+> > +             rc =3D tcon->ses->server->ops->sync_write(xid, &fid, &io_=
+parms,
+> > +                                                     &bytes_written, i=
+ov, 1);
+> >       }
+> >       tcon->ses->server->ops->close(xid, tcon, &fid);
+> >       d_drop(dentry);
+> > --
+> Shouldn't "else if (S_ISBLK(mode))" be "S_ISFIFO"?
+>
+> else if (S_ISBLK(mode))
+>
+> else if (S_ISBLK(mode))
+>
 
-https://git.samba.org/?p=asn/samba.git;a=shortlog;h=refs/heads/asn-lsan
 
-I'm currently stuck with memcache and smbpasswd.
+--=20
+Thanks,
 
-The AD DC testenv already starts. It finds tfork leaks on shutdown. It would 
-be great if someone could fix those ...
-
-
-Best regards
-
-
-	Andreas
-
--- 
-Andreas Schneider                      asn@samba.org
-Samba Team                             www.samba.org
-GPG-ID:     8DFF53E18F2ABC8D8F3C92237EE0FC4DCC014E3D
-
-
+Steve
 
