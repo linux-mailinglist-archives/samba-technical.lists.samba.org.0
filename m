@@ -2,66 +2,47 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id A3FCB7DBC3B
-	for <lists+samba-technical@lfdr.de>; Mon, 30 Oct 2023 16:00:05 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 83B9C7DBC50
+	for <lists+samba-technical@lfdr.de>; Mon, 30 Oct 2023 16:03:44 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=Ei4SVboxDUAHFeS29uvc+mP3mIzSaR0zKoC0B2c1eC0=; b=skZTKMho2ZXqL4HER0EnKX7DzQ
-	qlLoePy1pDqAKTM5DCvMs7k88lV6xrG4+ymQWi1krW0nRY5Ti8pFi3YwxprgW3FJv8HHeXmY7OsRs
-	UWwEx25/Qt1bkis4MFKvFut4SrfA1XTO3XqiKXI0HUksEsU1kUkW3upjonwDKbIpAiSL0p0B7YQVM
-	EwzWKYSK5jXFnmVPkFng6wH8lxVWBK01zQwZQRY5w84JZckejdMxpmxEjhOKhamFl2sCjnO0uHHfW
-	Amx62nP3S5EMAXuRM8h20kBzbeq1Wt2Js78rREhwtQ4Y6BmeBQkK8vbt1olHNwhiIVPm7ivStU9f6
-	xdiB0Xfg==;
-Received: from ip6-localhost ([::1]:40172 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=uq7DUWHFah2NQAq/07sVsBKjzUXKMqW/QD3Blx4IFPg=; b=og6iyF/WB2lOgJ7aUuBrG9qUZc
+	HW87IB75X6RmwQAipck80oxPlF4VaVQ47/0Y8bznaoDneX2oQqonivkYZZU9kcSn9zLOzDouoN0DE
+	ps9Kdtw1xslirTOj+9fg57AbfcQb9VPb9xopoxHBffoOpctXSswBPPS/z7LneY2pCp1JPhztUxf2C
+	EH0Ag4WRkaPGas+PP2w+Pkk+5W8cvoEldcSFcxRspEU8XfRuPeoSHCfB7P+Y8B0Fa2qnjx6a6q5JK
+	CWkrPUG1vQE0VBNwwxpTyYiSwjla04kvErs+QiUc2wCNUP5k2Mp5V4ZRXVkKtWFs5ylWwUONuafjW
+	Zh7PgvtQ==;
+Received: from ip6-localhost ([::1]:18016 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1qxTji-003Z7m-D5; Mon, 30 Oct 2023 14:59:26 +0000
-Received: from mail-lf1-x132.google.com ([2a00:1450:4864:20::132]:56645) 
+	id 1qxTnm-003ZPh-Lm; Mon, 30 Oct 2023 15:03:38 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:42572) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1qxTja-003Z7d-F4
- for samba-technical@lists.samba.org; Mon, 30 Oct 2023 14:59:23 +0000
-Received: by mail-lf1-x132.google.com with SMTP id
- 2adb3069b0e04-507c8316abcso6436223e87.1
- for <samba-technical@lists.samba.org>; Mon, 30 Oct 2023 07:59:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1698677957; x=1699282757; darn=lists.samba.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Ei4SVboxDUAHFeS29uvc+mP3mIzSaR0zKoC0B2c1eC0=;
- b=hCvUSK+ErimGr+o1D9ubqg+mzJjb9mHuM81TuPVIiV5aK0wutVca3UwNdm/nA6lZPY
- vvG6YrEe6BWJwGhu/LztnlI1E6XlpoHxbbwCBTOU8UvQee5iw3kOOEFMJOEMYUAbI5U6
- Y0gjNRd7A4J6+k/nyItuonKgoDzL/zBSxCgNlyJkCEZIFRNXRThU4q6viYvg78yb+GU1
- cvJXn0vEAzLsqRPZGo4SMLODCjp2bs8LWbnOjMVzaDe8i1oSC/zRPRdrYnkUIfgY2oBu
- qZuAJAEP2iMrRVH2Kyb5LxpgCWWycfunfxZOffAHrEGGiMyv8/fNjTsyu+wTrBdJ4R4J
- NaXQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698677957; x=1699282757;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Ei4SVboxDUAHFeS29uvc+mP3mIzSaR0zKoC0B2c1eC0=;
- b=BqNrmcXtVrIN2ZtH2raDtwuQc6zji4I+IZIF08KWF8YaePdLizs7WwBPWG5omL8ber
- KxPPiis0m4R5cKzC26DCZ1x81ks9H9wgvOT1IoG/em6d55vpUCLgZ9trxwPgW0kXKcZ6
- wsHMkxUbGavLY9fUHB/pEbrQlMCuOGVXzO82NRwsCUVxevzkR0pzJ2QibuhJeslw1wYZ
- fs5jQVnnZB6YBK84FO4ZXUX7D+e5lyP9BFOxxxOnvegRacTXgzZ7hr9asfuDS0UoW3KA
- IL1xYg0gcyUhq+3IrvIrwEMuwOYWHxCenPvjAup8tAQZ4NEX96aVs/a4bOdVqWDoyHx1
- flWg==
-X-Gm-Message-State: AOJu0YxRvw9jRlk5ZmyBQ5QXxBbc+OttoMwIL+y7w2+WJn5CTIMcBavR
- 2rrikaUZHvULxw9P0uWgDnPBi684smtDWGJENa0=
-X-Google-Smtp-Source: AGHT+IFnHiYYLbnLtAvtWDi5NBzQUR1pU10INVUAIRK8blhtYZ9oG0ggRFL5AwXncTWFXHF+jw0MLgYhTpd2SXUhn0w=
-X-Received: by 2002:a19:8c0f:0:b0:503:1783:d5a9 with SMTP id
- o15-20020a198c0f000000b005031783d5a9mr6346912lfd.3.1698677956661; Mon, 30 Oct
- 2023 07:59:16 -0700 (PDT)
+ (Exim) id 1qxTnh-003ZPY-9m
+ for samba-technical@lists.samba.org; Mon, 30 Oct 2023 15:03:36 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=From:Cc:To:Date:Message-ID;
+ bh=uq7DUWHFah2NQAq/07sVsBKjzUXKMqW/QD3Blx4IFPg=; b=a97jICgtEYtwRXUud+uPXwIxUw
+ lT5v4i32qJwOgrel8STFKy74HONl+EIQJIjHH2J5ZAa96gNSADpcljMHM0uQbEfDbQ0ACSTgdVq7u
+ 1Q2pQLYZUZDlSZbWaVwM0JgEaMvWeu0EELZsFLfoRVcSvSEdQAFF2lzWLo1RR6Ix3V2E1uiwlUChB
+ Ap8014s23uXsxRlRKXhhVEuePQJNgYn0LPDrZ1wX5WYvrs5dS5bge9cPmnICQkI5LCPWa72X0UdWX
+ BI7DytqORQ8dHUMZDjfCWFa9I9S8pyPJBTpoK5JKD4OajSWFOPNNpGo/Max2VQm2rcX/gCkdcUJcH
+ pw3YsZQvStMojZR/4ZYHkhfHAHOmi5VVtpTqMTqSb61ADG8cWLNn5ZLA27dwD1S7fqH4mRFvzYMlr
+ mgikwwiEFWyQoywTjQIHnVKAjLw+sUpVk3hvW+nfrVK0DlV+/w3WYRavBrFPh6O0W5pdjk4etyuIJ
+ luwAfYb4TE+F8CpERTjGZHXe;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1qxTne-003L8u-28; Mon, 30 Oct 2023 15:03:30 +0000
+Message-ID: <3b2fa1bd-2eae-482a-a9d9-543ebb921046@samba.org>
+Date: Mon, 30 Oct 2023 16:03:29 +0100
 MIME-Version: 1.0
-References: <CAH2r5mvxf3j6aXGdzh8b7cRYJ=fHvjfkv=aHPStJRYR+x8auiA@mail.gmail.com>
- <CAGypqWydCTT5M6T_0k4y1jPVZyiOtsFGBxdQfHVDSfx_v-dX7A@mail.gmail.com>
-In-Reply-To: <CAGypqWydCTT5M6T_0k4y1jPVZyiOtsFGBxdQfHVDSfx_v-dX7A@mail.gmail.com>
-Date: Mon, 30 Oct 2023 09:59:01 -0500
-Message-ID: <CAH2r5mtYsnsW7EEdfJZ0LXPxV=D68Na0tSOHHvYf5XKTLUxqSQ@mail.gmail.com>
-Subject: Re: New SMB3.1.1 command
-To: Bharath SM <bharathsm.hsk@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US, de-DE
+To: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
+Subject: [SMB3 POSIX] POSIX client creates a file, set the ARCHIVE bit or not
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------zcEMg01DWgJGkkjf8f2Boi6p"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -75,30 +56,68 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
-Cc: CIFS <linux-cifs@vger.kernel.org>,
- samba-technical <samba-technical@lists.samba.org>
+From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Ralph Boehme <slow@samba.org>
+Cc: Volker Lendecke <vl@samba.org>, Stefan Metzmacher <metze@samba.org>,
+ Steven French <Steven.French@microsoft.com>, Tom Talpey <tom@talpey.com>,
+ Jeremy Allison <jra@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-corrected - and updated the changeset in for-next
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------zcEMg01DWgJGkkjf8f2Boi6p
+Content-Type: multipart/mixed; boundary="------------p91glEBcs9f2zhz7PggktU2u";
+ protected-headers="v1"
+From: Ralph Boehme <slow@samba.org>
+To: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
+Cc: Jeremy Allison <jra@samba.org>, Volker Lendecke <vl@samba.org>,
+ Stefan Metzmacher <metze@samba.org>, Tom Talpey <tom@talpey.com>,
+ Steven French <Steven.French@microsoft.com>
+Message-ID: <3b2fa1bd-2eae-482a-a9d9-543ebb921046@samba.org>
+Subject: [SMB3 POSIX] POSIX client creates a file, set the ARCHIVE bit or not
 
-On Mon, Oct 30, 2023 at 7:44=E2=80=AFAM Bharath SM <bharathsm.hsk@gmail.com=
-> wrote:
->
-> > Also another minor patch to clarify some of the unused CreateOptions fl=
-ags
-> >
-> >    See MS-SMB2 section 2.2.13
-> +/* FILE_OPEN_REMOTE_INSTANcE cpu_to_le32(0x00000400) should be zero, ign=
-ored */
-> INSTANcE should be corrected to INSTANCE
+--------------p91glEBcs9f2zhz7PggktU2u
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
 
+SGkhDQoNCkkganVzdCBzdHVtcGxlZCBvdmVyIG91ciBvbGQgU01CMSBVTklYIGV4dGVuc2lv
+bnMgY29kZSBkZWFsaW5nIHdpdGggZmlsZSANCmNyZWF0aW9uIGluIFBPU0lYIGNvbnRleHQu
+IFRoZXJlIHdlIGhhdmUgaW4gb3Blbl9maWxlX250Y3JlYXRlKCk6DQoNCiAgICAgICAgIGlm
+IChuZXdfZG9zX2F0dHJpYnV0ZXMgJiBGSUxFX0ZMQUdfUE9TSVhfU0VNQU5USUNTKSB7DQog
+ICAgICAgICAgICAgICAgIHBvc2l4X29wZW4gPSBUcnVlOw0KICAgICAgICAgICAgICAgICB1
+bnhfbW9kZSA9IChtb2RlX3QpKG5ld19kb3NfYXR0cmlidXRlcyAmIA0KfkZJTEVfRkxBR19Q
+T1NJWF9TRU1BTlRJQ1MpOw0KICAgICAgICAgICAgICAgICBuZXdfZG9zX2F0dHJpYnV0ZXMg
+PSAwOw0KICAgICAgICAgfSBlbHNlIHsNCiAgICAgICAgICAgICAgICAgLi4uDQogICAgICAg
+ICAgICAgICAgIG5ld19kb3NfYXR0cmlidXRlcyB8PSBGSUxFX0FUVFJJQlVURV9BUkNISVZF
+Ow0KICAgICAgICAgICAgICAgICAuLi4NCiAgICAgICAgIH0NCg0KV2h5IGRvbid0IHdlIHNl
+dCBBUkNISVZFIGZvciBmaWxlcyBjcmVhdGVkIGluIFBPU0lYIGNvbnRleHQ/IE1ha2VzIG5v
+IA0Kc2Vuc2UgdG8gbWUuDQoNCkEgInB1cmUiIFBPU0lYIGNsaWVudCB3b3VsZG4ndCBsb29r
+IGF0IHRoZSBET1MgYXR0cmlidXRlcyBhdCBhbGwsIGJ1dCANCnRoaXMgaW5mb3JtYXRpb24g
+bWlnaHQgYmUgdXNlZnVsIHRvIG90aGVyIGNsaWVudHMgYW5kIGFwcGxpY2F0aW9ucy4NCg0K
+KnNjcmF0Y2hlcyBoZWFkKg0KDQpUaGFua3MhDQotc2xvdw0K
 
+--------------p91glEBcs9f2zhz7PggktU2u--
 
---=20
-Thanks,
+--------------zcEMg01DWgJGkkjf8f2Boi6p
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature.asc"
 
-Steve
+-----BEGIN PGP SIGNATURE-----
+
+wsF5BAABCAAjFiEE+uLGCIokJSBRxVnkqh6bcSY5nkYFAmU/xcEFAwAAAAAACgkQqh6bcSY5nkbz
+YA//S871GSI+5aG2GQ4RTiIr+7N7qFLzoDeyRgkg5d6B8EbdZqo0HS/7vIbyl1//Ze2pSSYXuQq+
+fmDM729+5FTs93TwZuF5D5VmKpSU8HzRGLiAUL5oRGs7ei10JHIMoVGfTz5DeZOCoIdomowTISW+
+vbF6djuRIyfJGTf64qFp7LXbu78PN8fM5xdtutT83D4folxxR1FnRy9Pmt1IHvyaJyTe33KMNJQG
+ApcNWRTQYWmO1pY0lh8cn1SMLmothx6ArLl3W2zp3VPLmvZ0GgjFJflswZdWwMj2Nb+lJAE4MHjE
+XwMlOu3ErSTIHhahTzscM1mb2iNTsuRwyC8UzDGNzAZ2EB8g3cuvOXxVuHcmH+RSF5wcLlqnlSz9
+0CmplEAupV2jxOStdcDqDztjs+0Gvs3HGnx0Sgg6aIGKeV8ePfHD1CHRZjhy0m2E0rSVpLFekrRC
+8//4/g2CDOi3ZcD+GqkEeqCZAibdRSYid9J/AHR80nO66wmHTtO1n1b2YaG0gtiMq6qeh6C2j4Q3
+rhfZO3oOZgZQ29fOqA0T+ByGhC4uuYhfUQc3ghPsbCcK17p3YkK0SFOSgoE1GsVjD77wzIZxuojM
+9ws187pHjQoV1vx36HbQT3vw4SisauFeuY8RgakCgqeLo2xFqAJ3hEMmUSOyHrxTnGPH7B4sYo5V
+h5M=
+=1yHs
+-----END PGP SIGNATURE-----
+
+--------------zcEMg01DWgJGkkjf8f2Boi6p--
 
