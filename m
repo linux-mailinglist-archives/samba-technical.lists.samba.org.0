@@ -2,55 +2,61 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id D09B67DC013
-	for <lists+samba-technical@lfdr.de>; Mon, 30 Oct 2023 19:53:59 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8F2777DC4E1
+	for <lists+samba-technical@lfdr.de>; Tue, 31 Oct 2023 04:32:23 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=qj19nFQCurCDxnG7/WmwceqiOuKpOu4OeC16LTfw00M=; b=sggAyykLlGyKB/3P9t277q8AMP
-	QbBBOC3QiZ4zqMHjjXpGMC2AeFhEKoHXW7uw8pBz19MJLrh/44DJ5Do6/qFb7/J150dqsO1pVt4Xj
-	jVbPQVYIAx4b9Ne+EMfE86Onbruy1fGzhF5esIB/4QdxTvWxUubWMTE4/C94QBIe2tks/B1Cly9oP
-	EjiIWadkQjibl0B8wB2ezS8Vw379SOiJ+o/eLGY9EVYv4m67wYdEMDjIlSVCYxLHHbj4oNgBvsYW5
-	eLGyFKl8H0CIfP5keY6B8bmsVh6Gp6GjglCnmHpk9JwLtc8ZzR/SqPI+wWLo2Vkk4hOxsA3dadaGp
-	AuuMNROA==;
-Received: from ip6-localhost ([::1]:59768 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=2QdS7u2TWgcah9K813sHX1aJKtKY38tlLEWWtZYjS5Q=; b=ZqjpD2Dfg1frJBQVjkXF/NhrYu
+	3121DBFhu6U1CwAbGe6xzDLw7zX07oAXRwOcp2mAwNSFl/KIw/XKwdjGkuHEoRk/BACQv1AYP0paO
+	UBIewLetBGS4I9SmXjQvppsSQoIGr3xuSWG2RReyzWpNaFi2WFsafUkvBTmXHtOL6moQGIJD7w6L3
+	U0ryJPbp5Ds+oh6IjzZIezo4FO5HwGdx1IjevNgo6nMnClDt8+i0qM+Xex6F76Z3/QdP9p46SUbxi
+	RA+PV4AiNs0J04O73NyKA1yZu7awlfVk0dhvmUbiLPvcjd1PFbjBXGEtFV0zw8RA3hi8bIR/N5AmR
+	qHxo0AUA==;
+Received: from ip6-localhost ([::1]:40698 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1qxXOR-003c4k-80; Mon, 30 Oct 2023 18:53:43 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:19794) 
+	id 1qxfTi-003eMx-UG; Tue, 31 Oct 2023 03:31:43 +0000
+Received: from mail-lf1-x131.google.com ([2a00:1450:4864:20::131]:54285) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1qxXOM-003c4b-NA
- for samba-technical@lists.samba.org; Mon, 30 Oct 2023 18:53:41 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=From:Cc:To:Date:Message-ID;
- bh=qj19nFQCurCDxnG7/WmwceqiOuKpOu4OeC16LTfw00M=; b=wJ05jqJLp802Yt9CKER8jl9CqV
- fTLrLVKFgzATVWAGcWr64f0xk7xP2B3467iP4ElX3JYs6rDyRCOCTlKy7aDU3TWz5s9y+ZKF84h9J
- e4/SuWJShDP7dYwVQN0ihnBMSJRDhTsIxqf8vyCrdr4UOzNSuxvfJH94R01RLsWK3q+TRBZGgT0ZH
- kHA8z1gOeFl796f+n+U3j7fV2X27w87lJlMvpG1xAyjGMgNo8qIsmRJvwQXCfObrec1aiWkWXbII6
- wnSZVUpkB6jzcySJmMsQ3KJbrY8k81tYqLsEkR4dG7dAk1yVGg3LoE4htCAzXOfgsteCetMKWpEAk
- GwGqqkUmqiFVm2D/gfnbVZ/akwzP/v+4+dOUPCcMKbnTgeDKuRGITszFHutzlwEOvjXsCR1lhGKRP
- YJKEPlNcht1hgSNWxPhODGjpf22zcNKB6Af/hRMDHMM17TMwhf221Za/t15yGelUvKVbuQUMUE1NJ
- v756DlbOPRPb407As/4aZh7S;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1qxXOJ-003NAq-18; Mon, 30 Oct 2023 18:53:35 +0000
-Message-ID: <64ddbbd2-9499-4f6d-ae64-19fccd924220@samba.org>
-Date: Mon, 30 Oct 2023 19:53:34 +0100
+ (Exim) id 1qxfTd-003eMo-LX
+ for samba-technical@lists.samba.org; Tue, 31 Oct 2023 03:31:41 +0000
+Received: by mail-lf1-x131.google.com with SMTP id
+ 2adb3069b0e04-507a3b8b113so7516910e87.0
+ for <samba-technical@lists.samba.org>; Mon, 30 Oct 2023 20:31:37 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1698723096; x=1699327896; darn=lists.samba.org;
+ h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=2QdS7u2TWgcah9K813sHX1aJKtKY38tlLEWWtZYjS5Q=;
+ b=M6xFr81bKfLmOtrhX1SmD0nvWvYc3wWSyp9uDxO4vUE80tdbW31RRBZ03PKlYmw+Xv
+ 9delWNko80Xep9r6w3RLdlLQlxJ/MG0/QysmASXFoG1ie4U/1pjQzK2mFlTlbQ8GTQVb
+ tQKmuosp8nmDo+YIL3P6IOLYQLKYI0VDdIuBpkcqb2fggnpaO4hfbZVurRRHyJ23wqP9
+ XamDpTf2pzGVtG0lQArb5hsOdh92sRbqWAYfqPN8DS8JuanN784RKJwx2S0xRgxya3RI
+ mGmVIP7o7joClRs12yNVVoyq/erci2EwvGWLH2A+LBwkHRbHeUw17rlssvAtXmdp9fTk
+ BQgw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1698723096; x=1699327896;
+ h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=2QdS7u2TWgcah9K813sHX1aJKtKY38tlLEWWtZYjS5Q=;
+ b=g8rUJnLb3LV0/lp1n8t4v4bjUvC6llW7WXn2vQUQXQwJBkcFODZB7kc/yV6Kj7dxyc
+ BnC6zbj0apZmGMkGIKERAuIGcemEFaRMVNbNmZrGvaDXY/EGeeKT77OPxn+a/9KCcWDl
+ 1QSQKOzEzIswiYyBG6B4lqBNLTG5VaOCdP4Cjdjg+i3LSW3UlWoVwQDulpTwS58tNGCx
+ VkCrP2tar6iCG8DMF2B+No7bypMIE93OmeGdoTkYIH7Bi+j21bgKRnnvuVDes3mQU1md
+ dBYi8PTAGqwqYSHUbyUynJo7DqhZXEF3DZ1GA5bdRM9Df7rCUCPCOtrEAeLZHfjXI3qz
+ HXvA==
+X-Gm-Message-State: AOJu0Yza1T62l3l0ln7PRlmSuspLTsanne2srf0s5uI+IJnC7BEGO+WK
+ q2sZfDRNtlQe8xbBYTX3rO5TbLLbxqkYxlCTq2t5IaGJZi6Kkw==
+X-Google-Smtp-Source: AGHT+IGxAWXT9YCOlVvZSXeDrjsrImfw3LFAp5+/imFqqn5Ma6ldzPpvU9eqj0kBdawbI+ExeEXB24CMHDx6U0T51is=
+X-Received: by 2002:a19:5204:0:b0:500:780b:5bdc with SMTP id
+ m4-20020a195204000000b00500780b5bdcmr7842046lfb.49.1698723095873; Mon, 30 Oct
+ 2023 20:31:35 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [SMB3 POSIX] POSIX client creates a file, set the ARCHIVE bit or
- not
-Content-Language: en-US, de-DE
-To: Tom Talpey <tom@talpey.com>, Jeremy Allison <jra@samba.org>
-References: <3b2fa1bd-2eae-482a-a9d9-543ebb921046@samba.org>
- <ZT/ZoUmdarteCey4@jeremy-HP-Z840-Workstation>
- <18abc825-a35d-441b-9476-32c6c368275f@samba.org>
- <ZT/tY0fVsAaaqpZE@jeremy-HP-Z840-Workstation>
- <a92a20ea-5e03-4f0c-9129-db4c62043dd1@samba.org>
- <2c4005f6-e5f0-43b1-bc96-0d497e547934@talpey.com>
-In-Reply-To: <2c4005f6-e5f0-43b1-bc96-0d497e547934@talpey.com>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------zxlQksJyCVAe5caAQlgy5XWO"
+Date: Mon, 30 Oct 2023 22:31:24 -0500
+Message-ID: <CAH2r5mthWZsX8rwMW-r8CTymWDkGTWeaD8v6n_Wyp1=BPmeqhQ@mail.gmail.com>
+Subject: Linux SMB3 client quality improvements
+To: CIFS <linux-cifs@vger.kernel.org>, 
+ samba-technical <samba-technical@lists.samba.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -64,75 +70,36 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Ralph Boehme <slow@samba.org>
-Cc: Volker Lendecke <vl@samba.org>, Stefan Metzmacher <metze@samba.org>,
- Steven French <Steven.French@microsoft.com>,
- Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
+From: Steve French via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Steve French <smfrench@gmail.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------zxlQksJyCVAe5caAQlgy5XWO
-Content-Type: multipart/mixed; boundary="------------61ADmYzFlhm0O3GRFVKp7jM5";
- protected-headers="v1"
-From: Ralph Boehme <slow@samba.org>
-To: Tom Talpey <tom@talpey.com>, Jeremy Allison <jra@samba.org>
-Cc: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>,
- Volker Lendecke <vl@samba.org>, Stefan Metzmacher <metze@samba.org>,
- Steven French <Steven.French@microsoft.com>
-Message-ID: <64ddbbd2-9499-4f6d-ae64-19fccd924220@samba.org>
-Subject: Re: [SMB3 POSIX] POSIX client creates a file, set the ARCHIVE bit or
- not
-References: <3b2fa1bd-2eae-482a-a9d9-543ebb921046@samba.org>
- <ZT/ZoUmdarteCey4@jeremy-HP-Z840-Workstation>
- <18abc825-a35d-441b-9476-32c6c368275f@samba.org>
- <ZT/tY0fVsAaaqpZE@jeremy-HP-Z840-Workstation>
- <a92a20ea-5e03-4f0c-9129-db4c62043dd1@samba.org>
- <2c4005f6-e5f0-43b1-bc96-0d497e547934@talpey.com>
-In-Reply-To: <2c4005f6-e5f0-43b1-bc96-0d497e547934@talpey.com>
+Have been running a large set of xfstests against various server types
+and comparing where we were earlier this year with now - and see big
+improvements.
 
---------------61ADmYzFlhm0O3GRFVKp7jM5
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
+Here are some examples from cifs.ko to Samba server e.g. - comparing
+the 6.3 kernel from earlier this year to the current 6.6 kernel.    10
+additional tests pass:
 
-T24gMTAvMzAvMjMgMTk6MjUsIFRvbSBUYWxwZXkgd3JvdGU6DQo+IE9uIDEwLzMwLzIwMjMg
-MjoxMyBQTSwgUmFscGggQm9laG1lIHdyb3RlOg0KPj4gT24gMTAvMzAvMjMgMTg6NTIsIEpl
-cmVteSBBbGxpc29uIHdyb3RlOg0KPj4+IFllcCwgc291bmRzIGdvb2QgdG8gbWUgIQ0KPj4N
-Cj4+IG9rLiBOb3RpY2VkIHdlIG5lZWQgdGhlIHR3ZWFrIGF0IGEgc2xpZ2h0bHkgZGlmZmVy
-ZW50IHBsYWNlLCBidXQgDQo+PiBhbnl3YXksIHdvcmtpbmcgb24gaXQgd2hpbGUgYXQgaXQu
-DQo+Pg0KPiANCj4gSXMgdGhpcyByZWFsbHkgd29ydGggaXQ/IEl0IHNlZW1zIG9kZCB0byBz
-ZXQgYSBXaW5kb3dzLW9ubHkgYXR0cmlidXRlDQo+IGZyb20gYSBQb3NpeCBzeXN0ZW0sIGp1
-c3QgYmVjYXVzZSBpdCdzIHRoZXJlLiBJIGd1ZXNzIGl0J3MgbW9zdGx5DQo+IGhhcm1sZXNz
-IHRob3VnaC4NCg0KdG8gbWUgdGhlIHF1ZXN0aW9uIGlzOiBkbyB3ZSB3YW50IHRvIHNwZWNp
-YWwgY2FzZSB0aGlzIGluIHRoZSBzcGVjPyBJIA0Kd291bGQgcmF0aGVyIGp1c3QgaGF2ZSB0
-aGUgc2VydmVyIHNldCB0aGUgQVJDSElWRSBiaXQgZm9yIFBPU0lYIGNsaWVudHMgDQphY2Nv
-cmRpbmcgdG8gTVMtRlNBLg0KDQpPdG9oLCBpbiB0aGUgY2FzZSBvZiBTYW1iYSwgc3Rvcmlu
-ZyB0aGUgRE9TIGF0dHJzIGluIGFuIHhhdHRyIGluIHRoZSANCmZpbGVzeXN0ZW0gaXMgYW4g
-ZXh0cmEgSU8gc3lzY2FsbC4NCg0KLXNsb3cNCg0K
+No longer skipped: generic/051, 068, 390, 491
+No longer failed: generic/049, 069, 434, 474, 505, 524
 
---------------61ADmYzFlhm0O3GRFVKp7jM5--
+But ... we do have to check carefully, it looks like we do have two
+intermittent failures (mount/umount busy regressions due to deferred
+close) that were introduced after 6.3:
+New failures: 046, 048
 
---------------zxlQksJyCVAe5caAQlgy5XWO
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature.asc"
+Thank you Paulo, Shyam, Bharath and others for helping work through
+some of these.  From my investigations it looks like we should be able
+to get 20 to 30 additional test groups (from xfstests, the standard
+filesystem functional test suite) passing with a series of minor fixes
+and features.
 
------BEGIN PGP SIGNATURE-----
+Good progress ...
+-- 
+Thanks,
 
-wsF5BAABCAAjFiEE+uLGCIokJSBRxVnkqh6bcSY5nkYFAmU/+64FAwAAAAAACgkQqh6bcSY5nkaP
-2A//WJ6aLmitdA2fOu/UNmTIUUUAVxk1V8x9NawSafcRGlR6ZoSirlOfCVmk3hnXiISlhs3nQHwp
-OH72H2rrS8cnqWOGuCCUfrkkIheBGnxEw3eMtACzwiaJj876vl0LFbrrnZ1TWegVCJHWPIedr8KL
-aMTKF0IYBmKrlMFxC+TdTQxzG9wWSxHu+SEP20lMY9XyGHQSNG/WS6fdPWYSekUx+AaXE6+bdflW
-DeeP6cb4T6RrhmCYmn8z2RVh04VLho7niLUSs+vze0Tyh79vgEk8K43lmsQBYYfF/pEAdZwGhn8L
-UX7wbMjeymX6LFGYoW/nzcPqT99jKM+rin4yYLGtLZR6rafse8qSjZHxY/tSWKMcHotd4E0SB6g9
-pBiqGmBWhrYAu5MwMeNXWqSsg8KcyqlLUxyXFopMTkPY3c7Z++U7KiobZH8IDCNvowR/f+83WOuk
-w5BM3xEE4cxFkN5NBIwY5Z/EegRWf0CJTZC27HX7pRXvhktx9xB+nh2lRT+AGEDQTQsL3pADYhy0
-dq5QObTGe29qUGD4hmS+8m2whtwhnx6lalSfnm0HlwUoOjfdJeLdEeKCuRxXkHRBwTd+nJuxrdvi
-VpY+/QE7+VCgP40SYLOfYcW+jfOsCB3CFnDb/HzvFJiZVDaKZfVDfGeP58CqOppjtySSzwPNn4xu
-jEY=
-=h5Gu
------END PGP SIGNATURE-----
-
---------------zxlQksJyCVAe5caAQlgy5XWO--
+Steve
 
