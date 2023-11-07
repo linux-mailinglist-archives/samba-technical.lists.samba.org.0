@@ -2,48 +2,46 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 19FCD7E3692
-	for <lists+samba-technical@lfdr.de>; Tue,  7 Nov 2023 09:25:51 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id DEB437E4D72
+	for <lists+samba-technical@lfdr.de>; Wed,  8 Nov 2023 00:34:03 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=1blmEs+jMsHelxRleCofdqTlbv575+m0BdyhYPq5cM4=; b=5aVt2cqhjq9fmN4lW+7YAf2liC
-	gY2ZuQ5x00gWySa818fcefP0E3fUMInf2fWhBa37vJqVRUaRxERPsR1NqDH9G1xLAEp+oml/WNi9Q
-	PpLmBSoRBVp/Rr2f5CcJIvkK4py9X2SVOltE4CYIFQR4VKS3B0LAiMZKvf4w4B6VOLDkZH3gX9Yj4
-	NtM2Ra9Lk/1OpWN8bgDCLP8ytDc77VifW60fVnUlJYfhTS4ggoxnoQEZY2hlLJZegQfIx2nOULhZs
-	OjWWGGwLLWxS2+6FBNMZe7uiQi/HKqG6tizqu3YTxmZJM8q1JkTwxB74nSNNrlS93y6/rJ0amyjnm
-	4QVoSGKA==;
-Received: from ip6-localhost ([::1]:33060 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=NRUMgFiQbntEYD8eNC0l97dIYJxln9yI2vewsmL/7rQ=; b=OueHZHGJ0uKau9tXnl+RsPpN4U
+	fz5+SyH/SWR1ZaZfOnVPvpZhEl6ULmV6/SCmTlT5w5ElmuhwYrgwyxzBPl91afLCrMkLYId881DCw
+	vetd/fC4mttene4IdCa6z1lXG+jBo2FOCOyvdsAPw5EIbzak8Uq1liH3FMUaQDVfT9vf0xJ/vUafX
+	cdOJSXLRJQ17SHolZQXEPeb7tEoL50GlRzotwQmJi6IT0fjFCntNntErGjx9EKyg8712Z6sf9aUsy
+	t19+V065oLiYNH9XgcISo8baczqQcnVtrPy0AOOUkM4SMODCfrCD4SIXre1edA987DFdWMKYVQI+v
+	wa/58OmA==;
+Received: from ip6-localhost ([::1]:33000 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1r0HOT-006tod-DI; Tue, 07 Nov 2023 08:25:05 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:56870) 
+	id 1r0VZQ-0071ca-UL; Tue, 07 Nov 2023 23:33:20 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:33550) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1r0HOG-006toT-BZ
- for samba-technical@lists.samba.org; Tue, 07 Nov 2023 08:24:57 +0000
+ (Exim) id 1r0VZI-0071cQ-RM
+ for samba-technical@lists.samba.org; Tue, 07 Nov 2023 23:33:18 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:To:From:Message-ID:CC;
- bh=s/1v+4aWQPoH0hxW+es5NSPmhVqM+NaW0FvVEFxtwmU=; b=YEWMwLuTppCNmVVUNXtHlwEwgF
- 9yXaJdIM/52sr7yTDTtrMLcla/b8fnBd52IGiuEiBz29m29FDo0T+VMLa3ABbDjlrACyPXmcwYP5L
- Pc5cgOAXin+UUf2OCyuKigNykoGFyztVwtGm3pqN6i+oDUSF7hemnaR0VqGfIU6cGTru/Gkg5o3TI
- vCRI28Dpjopuzevmqzlqivtc7/OpFK2EG8pFgJ5BkKW1rb5y70OGOvtM6N+6v+kipCbOK7dvlsV3+
- k2/KELAzJZgFJ0Csra9x7TkprjYHw7lXVMWqsY37ASLen1gMqUtTml6mugBTdnPkV6r38rewAhGqQ
- OyuEGiZiM0DeBqXCJx2bhZe1W7C/9pVVwL67a3meT03mpRqkrZ0F+OHPCQJM896EAI4vJYc/NqOMM
- yekQo6ZNLItX7KJfRFMxYhEBBrcJ8RFHa5HDltu48OWanAT88v9/Xtl7SJ1WVXPBO3K3YQ9XO+Ty4
- LN0YLktPlj+EV/Kh2VrerP+s;
+ s=42; h=Message-ID:Cc:To:From:Date;
+ bh=NRUMgFiQbntEYD8eNC0l97dIYJxln9yI2vewsmL/7rQ=; b=NCt195+FpmWm8kYXQ3FW56Lp9I
+ SeAyhlf+HZ3R/cuBmp6etS+SbnhUrNO5Nwaa5a4QKfslPbibi0Z1F79VukpWmyKhdoXGZlbkAfWAg
+ NGflhOad+sLfhtTyjpqfYORliUT+bXE0Tn16iUgEJ3lNWJf1MXgVkZUyRhH8F6Fbq8zCEMXDgzuy+
+ uiRBON2jVIThL23ZEJo70QEArvSQkZ7gxLYMxnQfg4IUYIflpaWKd2yXxZUXPVtrWnpZJIWPMPv+f
+ yohrW7et2Ec+1oPNAgPlTzLkTZtceBxpl2UJBS3al8qddw24f8Sxzends++Wl1IpkQhBXrDVrqZ7Q
+ mlj8XJqCjnXwmqdPmRfBN43Q61rr/Zm/qbwLp2YNxF/AHJHACZSabIxCE+E1T3gVzeuoY1cNO/ias
+ GhAZOFOL7a6aKhaSAkY21gHYPRAxGeM7FigFnB69Ic6hVyoGgDLXWD5rAgyPy3sJuoUebjKnUjl/R
+ iOV2HA/THt+fQEpMx7vvTBQs;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1r0HOB-004nqU-0n for samba-technical@lists.samba.org;
- Tue, 07 Nov 2023 08:24:48 +0000
-Message-ID: <2e3c82031407ccfa2fcd96e4e374903fefebb4e4.camel@samba.org>
-Subject: The Evolution of Windows Authentication: Microsoft's plan to end
- NTLM (eventually)
-To: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
-Date: Tue, 07 Nov 2023 21:24:42 +1300
-User-Agent: Evolution 3.36.5-0ubuntu1 
+ (Exim) id 1r0VZG-004x3L-1X; Tue, 07 Nov 2023 23:33:10 +0000
+Date: Tue, 7 Nov 2023 15:33:07 -0800
+To: Ralph Boehme <slow@samba.org>
+Subject: Re: [SMB3UNIX] Add POSIX fs-info to the sepc
+Message-ID: <ZUrJMw4ivztcUe9J@jeremy-HP-Z840-Workstation>
+References: <e15589c9-1481-4344-8030-85fc737a1b56@samba.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
+Content-Type: text/plain; charset=us-ascii; format=flowed
+Content-Disposition: inline
+In-Reply-To: <e15589c9-1481-4344-8030-85fc737a1b56@samba.org>
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -57,17 +55,39 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
+From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jeremy Allison <jra@samba.org>
+Cc: Stefan Metzmacher <metze@samba.org>, Volker Lendecke <vl@samba.org>,
+ Tom Talpey <tom@talpey.com>,
+ Ralph Boehme via samba-technical <samba-technical@lists.samba.org>,
+ David Mulder <david.mulder@suse.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is worth a watch: https://www.youtube.com/watch?v=SEtARCtGP0Y
+On Sat, Nov 04, 2023 at 05:08:36PM +0100, Ralph Boehme wrote:
+>Hi Jeremy,
+>
+>I just noticed that POSIX fs-info is not in the SMB3 UNIX spec.
+>
+>As it's the same as CIFS UNIX, I've just created a section for it in 
+>the new spec.
+>
+>Can you please take a quick look before David reviews and possibly 
+>merges? Thanks!
+>
+>https://codeberg.org/SMB3UNIX/smb3_posix_spec/pulls/4
+>
+>Btw, I wonder whether it would make sense to host the spec on gitlab, 
+>so the whole team can more easily cooporate on it, rather then having 
+>everyone interested to sign up to codeberg too.
+>
+>I'd also like to host it on git.samba.org, automatically mirroring the 
+>primary cooperation platform.
+>
+>Thoughts?
 
-We need to think about getting Samba to implement IAKerb
--- 
-Andrew Bartlett (he/him)       https://samba.org/~abartlet/Samba Team Member (since 2001) https://samba.orgSamba Team Lead                https://catalyst.net.nz/services/sambaCatalyst.Net Ltd
-Proudly developing Samba for Catalyst.Net Ltd - a Catalyst IT group
-company
-Samba Development and Support: https://catalyst.net.nz/services/samba
-Catalyst IT - Expert Open Source Solutions
+All of this (including the change) LGTM.
+
+
+
+
