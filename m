@@ -2,50 +2,52 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 635BB7E9EAD
-	for <lists+samba-technical@lfdr.de>; Mon, 13 Nov 2023 15:28:41 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4A5BA7E9F2E
+	for <lists+samba-technical@lfdr.de>; Mon, 13 Nov 2023 15:51:05 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=SoA1b8Up4x8pZio6ByZeNAkTlls2h3yw+QI4oJ4g1QY=; b=WWKAIc8Iw2OJTwE342chFlp2iA
-	67yH5gOdlaVxVsYSZkHPxN7S8YTuQaF2aC/6ZhuAnNhppTVhlK/XmKh5ToBx9dwB+zCpXbSNFTWjg
-	ijvQ/VWgNHa/jN3TQfR1ur38/6vM1q21ZNIUL1qO6zCR11rTVb24hX8/X98mIkbr2yN4iPB5zmJX4
-	m6djpfhGEwmV9tatPzRazzFSqPjc2hySIZkGDF9UUOBhOWx0+nAacESfLdYesayta/QXMLTiRsssD
-	ajd9wrSOO8EjYyAcZj97mfwfHBIb2iwuzXx0kA6qcVIatAAEU520eGazElWRd2pH2hB2LPtVufq4T
-	Kjk4PQeA==;
-Received: from ip6-localhost ([::1]:50506 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=bk4SAuPLUS/Y72rpQeTxPQCE0eLnG5WbdjDCqowss98=; b=WmfgmqJK8VUjwtUn5oD4+6Yw73
+	cF5O/hIUTC8gzoCOOFTMRjiXgGCfu0iGpekb/ovrnrBEgJK7lSO6I3+b/d1Rrr8DDRwxLYYvlm6/a
+	Cnh7Ha8gCOcec3dU/XvKnqqcF+SqwtsmfDNDlBz3G+pCYeRwJPmdOZVQq6m5QXQYubUZ/IR4axlYl
+	K126ygK7jCcNFQFxVuL1vSPz64gZAqu8Sz/MivuhY7HOMhfN/NiIbN3xMWeqJabqPdj7Lfw8ovN23
+	amqo+RCVOt5jGoi7IUMFd5Cz9eEYIQOAXXTnAMUAkaxErodqXTUEuTbw5zJhK0Lx8+TeKO1o4ZezP
+	Dl2NQHbg==;
+Received: from ip6-localhost ([::1]:26826 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1r2XvE-007x3C-UQ; Mon, 13 Nov 2023 14:28:17 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:59872) 
+	id 1r2YGt-007xMJ-3k; Mon, 13 Nov 2023 14:50:39 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:34602) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1r2Xv5-007x32-Jb
- for samba-technical@lists.samba.org; Mon, 13 Nov 2023 14:28:11 +0000
+ (Exim) id 1r2YGm-007xM9-5z
+ for samba-technical@lists.samba.org; Mon, 13 Nov 2023 14:50:36 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=From:Cc:To:Date:Message-ID;
- bh=SoA1b8Up4x8pZio6ByZeNAkTlls2h3yw+QI4oJ4g1QY=; b=r0zCKsgtC+t6FYVwJkdh+1cb/T
- BAePVLHWgFPbiJt8ciKxpKuTrIqfrotv5RN8gorGT2bnlR8xsyIzvXLUxE9eoR9m6sKQ3p59ly4Ly
- J17AOiy0qSEm9C94cEJyxJtrXUI3bsKWCXDsWSpyDE05eiMKxsPDPOLLKzBzN8MUVCJlPBoW9G3c8
- YYhiCx0oS/Gp1pbbz5mYuGjnaOedTr4qVzdTWce9l6/Gn9Xz1bHPDqNaklnW+ubutFWCg9tD7rvq+
- XoOJn7zSiAePnqn/FhuZUmFkIsVdDH/qS5bZAp6b3kIcTCzKOXMdf4TH+U5DF4KvqaN3zvfJmAY32
- gaSw8suBv309o4RJAwPxSrq4PVnTnYztBDJKzGtFxGcJWLbTNmOliPE6StrgGX6vW3d2HpzBHBKzd
- UxiHLSZduC+ZwBhReM2K4YAnQD0RVT7f8UkihF9EDw68ekLCg4f+PAqg1oOOes9mIHDUkkJtxk+Ul
- R2HSUxT1cFezfubj7Lxhb0WN;
+ s=42; h=From:To:Date:Message-ID:CC;
+ bh=bk4SAuPLUS/Y72rpQeTxPQCE0eLnG5WbdjDCqowss98=; b=ylyzmSSrKVEXBUurV+orJh+DCp
+ fRuAoH9znNfcMGy3/dKIJP8QMFP9e7WLrFvuRYvbTEogKeRXz6YzZ5f0fZTaxIPNMFc/iayhSAnqn
+ TGmYoXOpKM03bVxTCtCLEV8roKuqbT1MGD6wX+YmjUgYiaB3VYGqEXETG7NdeHbyzRNE3yXdN+C3a
+ w8tSgf5HCvZM0gngsqVRjP4wf2K/KEVCvmbcdAj091sVKpb4llDoQwpJ2GNeUqkgXz+/R6H5hQ8gu
+ JI8i5a/wNG6zgdo9ZVO3x6xDYJLF0eEgWxTe9/yl51wLNplJT0vf4E2KXCTwKT/mlvx8wAQXgAK4g
+ 0+cKgGF3zsfT2Y3CxCTVn4+q8+CVNdX0xu6BSFByRqRXSYPHyXY/9iZ6hNJnGpKc98VOKT/0sf4FI
+ iVe30MAMBJL2PA5+PMwAyig5U/eqCwPFRYqgA0RpRixu+RZX7qpyMZJN7fu2Gp83QvWfjen1nXBrO
+ RASIhnnswcNWqIO2eQz8yiqk;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1r2Xv3-005veG-2Y; Mon, 13 Nov 2023 14:28:05 +0000
-Message-ID: <6c0ddbb6-4375-4d18-8e4e-0114dc7736cd@samba.org>
-Date: Mon, 13 Nov 2023 15:28:04 +0100
+ (Exim) id 1r2YGg-005vw7-2j for samba-technical@lists.samba.org;
+ Mon, 13 Nov 2023 14:50:28 +0000
+Message-ID: <4baa6aa2-052f-1e19-63c0-ef3711d9febd@samba.org>
+Date: Mon, 13 Nov 2023 07:50:25 -0700
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.14.0
 Subject: Re: I want to make ADCS support better and I need some advice
-Content-Language: en-US, de-DE
-To: David Mulder <dmulder@samba.org>, samba-technical@lists.samba.org
+Content-Language: en-US
+To: samba-technical@lists.samba.org
 References: <922de58f-d011-427d-8248-9f8ce7c90e74@app.fastmail.com>
  <19507e01-a2f0-fcd1-9b98-47a72cdf11f2@samba.org>
-In-Reply-To: <19507e01-a2f0-fcd1-9b98-47a72cdf11f2@samba.org>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------08J03xrtEVI6fgP7J5NGDUaM"
+ <6c0ddbb6-4375-4d18-8e4e-0114dc7736cd@samba.org>
+In-Reply-To: <6c0ddbb6-4375-4d18-8e4e-0114dc7736cd@samba.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,67 +61,33 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Ralph Boehme <slow@samba.org>
-Cc: =?UTF-8?Q?Bj=C3=B6rn_Jacke?= <bjacke@samba.org>
+From: David Mulder via samba-technical <samba-technical@lists.samba.org>
+Reply-To: David Mulder <dmulder@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------08J03xrtEVI6fgP7J5NGDUaM
-Content-Type: multipart/mixed; boundary="------------gWIbSu0GIJHRhi689RHbTpk5";
- protected-headers="v1"
-From: Ralph Boehme <slow@samba.org>
-To: David Mulder <dmulder@samba.org>, samba-technical@lists.samba.org
-Cc: =?UTF-8?Q?Bj=C3=B6rn_Jacke?= <bjacke@samba.org>
-Message-ID: <6c0ddbb6-4375-4d18-8e4e-0114dc7736cd@samba.org>
-Subject: Re: I want to make ADCS support better and I need some advice
-References: <922de58f-d011-427d-8248-9f8ce7c90e74@app.fastmail.com>
- <19507e01-a2f0-fcd1-9b98-47a72cdf11f2@samba.org>
-In-Reply-To: <19507e01-a2f0-fcd1-9b98-47a72cdf11f2@samba.org>
 
---------------gWIbSu0GIJHRhi689RHbTpk5
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
+On 11/13/23 7:28 AM, Ralph Boehme via samba-technical wrote:
+> On 11/13/23 14:56, David Mulder via samba-technical wrote:
+>> I'd additionally like to be able to contribute rust code to Samba, 
+>> and I'm certainly glad to see someone wanting to work on certificate 
+>> auto enrollment. I know there is some opposition to providing rust 
+>> code in Samba, I think because of platform support.
+>
+> iirc this was about AIX for which we do provide our SAMBA+ packages, 
+> but last time I checked several months ago AIX support was about to be 
+> released in rust, so this is likely not an issue anymore.
+Hrm, interesting. So perhaps we could work out a way to include Rust 
+code in Samba.
 
-T24gMTEvMTMvMjMgMTQ6NTYsIERhdmlkIE11bGRlciB2aWEgc2FtYmEtdGVjaG5pY2FsIHdy
-b3RlOg0KPiBJJ2QgYWRkaXRpb25hbGx5IGxpa2UgdG8gYmUgYWJsZSB0byBjb250cmlidXRl
-IHJ1c3QgY29kZSB0byBTYW1iYSwgYW5kIA0KPiBJJ20gY2VydGFpbmx5IGdsYWQgdG8gc2Vl
-IHNvbWVvbmUgd2FudGluZyB0byB3b3JrIG9uIGNlcnRpZmljYXRlIGF1dG8gDQo+IGVucm9s
-bG1lbnQuIEkga25vdyB0aGVyZSBpcyBzb21lIG9wcG9zaXRpb24gdG8gcHJvdmlkaW5nIHJ1
-c3QgY29kZSBpbiANCj4gU2FtYmEsIEkgdGhpbmsgYmVjYXVzZSBvZiBwbGF0Zm9ybSBzdXBw
-b3J0Lg0KDQppaXJjIHRoaXMgd2FzIGFib3V0IEFJWCBmb3Igd2hpY2ggd2UgZG8gcHJvdmlk
-ZSBvdXIgU0FNQkErIHBhY2thZ2VzLCBidXQgDQpsYXN0IHRpbWUgSSBjaGVja2VkIHNldmVy
-YWwgbW9udGhzIGFnbyBBSVggc3VwcG9ydCB3YXMgYWJvdXQgdG8gYmUgDQpyZWxlYXNlZCBp
-biBydXN0LCBzbyB0aGlzIGlzIGxpa2VseSBub3QgYW4gaXNzdWUgYW55bW9yZS4NCg0KLXNs
-b3cNCg0KLS0gDQpTZXJOZXQgU2FtYmEgVGVhbSBMZWFkICAgICAgICAgIGh0dHBzOi8vc2Ft
-YmEucGx1cy8NClNhbWJhIFRlYW0gTWVtYmVyICAgICAgICAgICAgICAgIGh0dHBzOi8vc2Ft
-YmEub3JnLw0KU0FNQkErIHBhY2thZ2VzICAgICAgICAgICAgICAgICBodHRwczovL3NhbWJh
-LnBsdXMvDQpXb3JsZHdpZGUgU2FtYmEgU3VwcG9ydCwgQ29uc3VsdGluZyBhbmQgRGV2ZWxv
-cG1lbnQNCg0KDQo=
+-- 
+David Mulder
+Labs Software Engineer, Samba
+SUSE
+1221 S Valley Grove Way, Suite 500
+Pleasant Grove, UT 84062
+(P)+1 385.208.2989
+dmulder@suse.com
+http://www.suse.com
 
---------------gWIbSu0GIJHRhi689RHbTpk5--
-
---------------08J03xrtEVI6fgP7J5NGDUaM
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-wsF5BAABCAAjFiEE+uLGCIokJSBRxVnkqh6bcSY5nkYFAmVSMnUFAwAAAAAACgkQqh6bcSY5nkZT
-mxAAh8oWseaSTd/Fl4QvAsYnw2LmiLV50MEYHdOwvf0RghFs/5QG5br6qZSYgbU4DR296l2NFQf5
-f9vQWruQNmxSt6a0rV40rI6rUdwjbwIv/28nISVpcddqCdjXOdetLqjC8WOsnwZW4Rn3JaYen7vs
-2fRju8fs10dLKAa4gO/kJ4bGAsTpNJE1PqACaU27XxkoJr4fwA9r8R4hxs0rAW+r8jC6WgCRdzbl
-F2+xqtCshlbA/i7tryv/5eKSAksyAnlC+s1d0wFiOvyEI6sS3FUXCuXUWY/Osjlt58+yuLjQ8YIs
-AiN99fi5Z9OpTEMnPgxzbzJKzj6tNheanMdU3Z2ffohn0P1cxWjj98W8TSBZherhj0Xhy6a5k3m6
-aHeWZDD5Vh6HrB8BYoOfdlACAM8UpRAgTz8Poj0Dbo1nonEuTvX7qd7HCJITn4N3PH56repTdp1U
-XOzwYjMS3cyi5D8fBVxh2xco4L8RFFwU8nRAsyKNRE9/H4zWzsS22w+DHQSi1bmcqShHU0WlmkOB
-1P9ibeJJYosMg6AOIHLm6+yvoyIi4kLZuIchBtRAqXxlk6fcaEQCjBSu9QCbONbY06QSjeYNQpaW
-nMra8D2DA9UQ2FWZOy94htIZ0MVThNsXSF1aaQLJvwcOEl/Pi0sk0aeQLnN+0P4BTG36Zkdvxzb+
-7vg=
-=0UMR
------END PGP SIGNATURE-----
-
---------------08J03xrtEVI6fgP7J5NGDUaM--
 
