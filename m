@@ -2,62 +2,53 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0F2667EA315
-	for <lists+samba-technical@lfdr.de>; Mon, 13 Nov 2023 19:50:05 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C7EA77EA344
+	for <lists+samba-technical@lfdr.de>; Mon, 13 Nov 2023 20:04:56 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=YdugKrF1IHQlb6TkxWiEpumPtlmZ379QWs8fZvedX24=; b=kB65qZP67XIUzMQBmoqSZv4M26
-	PpUVJMBgEFgQt/fsV21tnXAIkTw2JvUppWs40ESSXVoVfLq4XvsrHAZwdk/szsIa5Hpujn4s0m5Qp
-	go5dg+T5FLTp537AHws+Tqa4lA3wPa/+2RxdgavwP6QyAHjAaC5EWa0b9rDmUR6DZDh/SpbvAZ1/7
-	z5AbAgN+FwQBdQpecrKyjVcZQ343z557X7IdnOjz7Fo/lz/O1Uwd6B1Ztl/e05SSTSQIly/RPeGmM
-	Cm6Q6nJzcJtv2zaL4f4kUFfkOgkmphomi8kXvx25P04TIDzzyaYWH2I/1SvzK6nU9/7Q8hjy9kbQZ
-	AOOZKfog==;
-Received: from ip6-localhost ([::1]:28572 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=UBGWSU30fIduvN+gw/bT7fGZ3hedJB58PdFWUJ7JysI=; b=YcHSR/XtTVJWc0BeAFSTGLO+04
+	3m8jikYQqe0koHnjeeyLwQ7lWVJ4MsMHv9V8g08uE/O8AJ4oHTWBzJosA2g63gldzzxrpjGIeNu5O
+	W3fOacgn6g9ASJdgA19brMAUoC13u8jFpn9jiD8B7n6jP4CVy5d9ty+MoPbvWOvF03t7t/Vc7Atbc
+	kXZbNV+4hDIBYKsK6kARAuzoERenJOeVt+JMkNQczDkOT0MzRo23CH4XqIjTaRdNHA3HUC8EqSAZz
+	vmJgUtcorTvuH3ZQ7e06DngKNQehsu289eP2p8p3P4gk/dKInEzN7EiUCPCR7ZIhEGTtqtW4nSCL/
+	2WTIjm9Q==;
+Received: from ip6-localhost ([::1]:52030 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1r2c0R-0088OG-LQ; Mon, 13 Nov 2023 18:49:55 +0000
-Received: from mx.manguebit.com ([2a01:4f8:1c1e:a2ae::2]:36898) 
+	id 1r2cEc-0088gQ-9V; Mon, 13 Nov 2023 19:04:34 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:62286) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1r2c0J-0088O7-DW
- for samba-technical@lists.samba.org; Mon, 13 Nov 2023 18:49:51 +0000
-Message-ID: <6bcf9eb2d4ca5faa17e8e0842c4d69fd.pc@manguebit.com>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=manguebit.com;
- s=dkim; t=1699901384;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=YdugKrF1IHQlb6TkxWiEpumPtlmZ379QWs8fZvedX24=;
- b=YPH52W0vCrsa65YO0LWx28OiLIEZNBi9nurcA/VlQfU+CVhc4XSv9teWPiiXs1gcZ/1S6j
- 2z6MMwfd8OkzBd5XtpWD0d1jPzocppDfGsmsY3/drw2AAPshTJlSBzCpZUPzSLbrfuvkB6
- ymCPO/7JjQd0NXRxBi4v+t/uLTYZ+SFDkZ71rVWk7UHbVdcKcTmE4govFPIHZNuaQcH2AV
- 8Y3iAank794IxdExgLcjag4xkxyEzScpvdSHjKN5QJUrslHk0waL+X4k7/muesei2Gq/NX
- MK84RCVSmjfqn76DjhOU8Dt57bep+RotwQ0WgX5lh5w+ISu7XfufWzE4yVYqoA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=manguebit.com; 
- s=dkim; t=1699901384;
- h=from:from:sender:reply-to:subject:subject:date:date:
- message-id:message-id:to:to:cc:cc:mime-version:mime-version:
- content-type:content-type:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=YdugKrF1IHQlb6TkxWiEpumPtlmZ379QWs8fZvedX24=;
- b=IVzS7DHdzhuBCTwZEqcrJ0EebdfaWtnBVQZ6Tw+SV10HTFOC7qiUOOF+qiAgtNE2oqyUp3
- yujSJGmPc3XaAqgWbbde5G+cSFKXbfvWPX/QKlhBwyCwj1gTti0B3O6RsFH0yfPyNR5cmQ
- Va8kvIh3FMMkGlANinL+Cn7mBqvnXZ4eQ9jFKCa1hlIrTR54qLH1eRLh3q06w7kaRqcp52
- oSF1FZ/aQEHG6tbAR+yDY9uOlLwGLZ9Vso6JZbxxQ5/MaLlAAbBZpoqsjMp8VBF1Bl44Q0
- 8tfv52fOJnxnh4V6zU67knG0RoWXoUnDTy4Ea8OKjFk0nd5Ztut2s8KFZrOyTw==
-ARC-Authentication-Results: i=1; ORIGINATING;
- auth=pass smtp.auth=pc@manguebit.com smtp.mailfrom=pc@manguebit.com
-ARC-Seal: i=1; s=dkim; d=manguebit.com; t=1699901384; a=rsa-sha256; cv=none;
- b=govAlo1L714Gbqo1VbQfkM6vjRsK6bhNSG9DtUwjDdkU3lMBmC6+ud9z2NrKh9jj2D0PkB
- yIRk3dPQksDdh6Yi04mjjjTA1RpTozaISCoZrZrYIJYaTqcHrd9VbN+ciUQ2OioDao8vu9
- T8Ygh0cWuG/vVbIc+asUd+GgyLrWuhB5rsU8iuACu5+SNkWAG0m75Ykjzvec5KGLSpLOwe
- AloD5BcZc6XOF4a+NTZXcw6jhI8WBqi87a2SU59AqC9+nTDJhw51fgsqhPgGblhGPWfBCd
- olJoZV6+MNASjIPOVtxOL5/OR6QEOac9JvWGOdCc8SUlj7c2af8WnkYA58jEKw==
-To: Ekaterina Esina <eesina@astralinux.ru>, Steve French <sfrench@samba.org>
-Subject: Re: [PATCH] cifs: fix check of rc in function generate_smb3signingkey
-In-Reply-To: <20231113164241.32310-1-eesina@astralinux.ru>
-References: <20231113164241.32310-1-eesina@astralinux.ru>
-Date: Mon, 13 Nov 2023 15:49:41 -0300
+ (Exim) id 1r2cEU-0088gH-Fm
+ for samba-technical@lists.samba.org; Mon, 13 Nov 2023 19:04:30 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=From:To:Date:Message-ID:CC;
+ bh=UBGWSU30fIduvN+gw/bT7fGZ3hedJB58PdFWUJ7JysI=; b=Isa2JdegCH6M5ilYHXOzb0WgDf
+ Lf7py8AFXPemN6dij7HCoI1+Z3UEBPH+l/7d3PnaY22pCg+yKk7aPT96hic/NJYYthqPT4LqirGlP
+ z3vWkz6h3v7XC8WBXW3WK89PgarqHwnx/GS7BKN+NzdMlvd4eQCD+34eu909qOt2glxkinnqgLFDJ
+ p7LLeid1JBYCkl16pLSestG8kUc0vcy9FrFrgahtisLAhOGUXMlfMy1btetVDWragr1zY4SdDjan2
+ 1CXBvCoDMxroiCaP3IgV/3BJwIYW8e5qtigJE4EoBAxw/m2eCeNnJrBBZQhZn+dA5DC3EnfFMefMc
+ N29ohtAoE0AIU6MerOgs9QIIctw1oED91jPM+VX38uamefGQcVv+OQT/vpmy2l/3Ca+JXqHPQ1fjk
+ vxSsoxC1FKWERePkLVRW026ppo4FgNtAuyjHhM/H7eRBbwmiCOvlrGeNJJXxDjPeULDSAwNp1Nwp7
+ 7s16MFPTiyEa0z3I1ewW+FSc;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1r2cET-005yXE-2P for samba-technical@lists.samba.org;
+ Mon, 13 Nov 2023 19:04:25 +0000
+Message-ID: <dc587b8f-72c1-3437-2184-4a8e0200b73b@samba.org>
+Date: Mon, 13 Nov 2023 12:04:24 -0700
 MIME-Version: 1.0
-Content-Type: text/plain
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.14.0
+Subject: Re: rust in Samba (for certificate auto-enrolment)
+Content-Language: en-US
+To: samba-technical@lists.samba.org
+References: <922de58f-d011-427d-8248-9f8ce7c90e74@app.fastmail.com>
+ <19507e01-a2f0-fcd1-9b98-47a72cdf11f2@samba.org>
+ <6c0ddbb6-4375-4d18-8e4e-0114dc7736cd@samba.org>
+ <4161642b58cc7840c73c91cdb000716b423593db.camel@samba.org>
+In-Reply-To: <4161642b58cc7840c73c91cdb000716b423593db.camel@samba.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -71,32 +62,52 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Paulo Alcantara via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Paulo Alcantara <pc@manguebit.com>
-Cc: linux-cifs@vger.kernel.org, Shyam Prasad N <sprasad@microsoft.com>,
- lvc-project@linuxtesting.org, linux-kernel@vger.kernel.org,
- samba-technical@lists.samba.org, Aurelien Aptel <aaptel@suse.com>,
- Ronnie Sahlberg <lsahlber@redhat.com>, Tom Talpey <tom@talpey.com>,
- Ekaterina Esina <eesina@astralinux.ru>,
- Anastasia Belova <abelova@astralinux.ru>
+From: David Mulder via samba-technical <samba-technical@lists.samba.org>
+Reply-To: David Mulder <dmulder@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Ekaterina Esina <eesina@astralinux.ru> writes:
 
-> Remove extra check after condition, add check after generating key
-> for encryption. The check is needed to return non zero rc before
-> rewriting it with generating key for decryption.
+On 11/13/23 11:42 AM, Andrew Bartlett via samba-technical wrote:
+> On Mon, 2023-11-13 at 15:28 +0100, Ralph Boehme via samba-technical
+> wrote:
+>> On 11/13/23 14:56, David Mulder via samba-technical wrote:
+>>> I'd additionally like to be able to contribute rust code to Samba,
+>>> and
+>>> I'm certainly glad to see someone wanting to work on certificate
+>>> auto
+>>> enrollment. I know there is some opposition to providing rust code
+>>> in
+>>> Samba, I think because of platform support.
+>> iirc this was about AIX for which we do provide our SAMBA+ packages,
+>> but
+>> last time I checked several months ago AIX support was about to be
+>> released in rust, so this is likely not an issue anymore.
+> I would love to see some ways to start trying rust in Samba.  We will
+> only really know how we feel about it once we actually start using it
+> in anger, and our packagers start trying to package the result etc.
 >
-> Found by Linux Verification Center (linuxtesting.org) with SVACE.
+> Things that don't touch the core file server offering are clearly going
+> to be the easiest targets, while we start to understand what working
+> with rust will means for Samba.
 >
-> Fixes: d70e9fa55884 ("cifs: try opening channels after mounting")
-> Signed-off-by: Ekaterina Esina <eesina@astralinux.ru>
-> Co-developed-by: Anastasia Belova <abelova@astralinux.ru>
-> Signed-off-by: Anastasia Belova <abelova@astralinux.ru>
-> ---
->  fs/smb/client/smb2transport.c | 5 ++---
->  1 file changed, 2 insertions(+), 3 deletions(-)
+> So I think this is an ideal place to start.
+>
+> Python was in the same boat for a while, and so there is a
+> --without-python build we test that only uses python for the
+> build, but produces no python requirements in a bare fileserver.
+>
+> That helped us get over the line.
+I've also thought of writing some AAD/Entra ID stuff in Rust for Samba.
 
-Reviewed-by: Paulo Alcantara (SUSE) <pc@manguebit.com>
+-- 
+David Mulder
+Labs Software Engineer, Samba
+SUSE
+1221 S Valley Grove Way, Suite 500
+Pleasant Grove, UT 84062
+(P)+1 385.208.2989
+dmulder@suse.com
+http://www.suse.com
+
 
