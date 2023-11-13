@@ -2,63 +2,64 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 438A77EA609
-	for <lists+samba-technical@lfdr.de>; Mon, 13 Nov 2023 23:23:47 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D09387EA60D
+	for <lists+samba-technical@lfdr.de>; Mon, 13 Nov 2023 23:24:02 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=A2lUqDXZqftceSAE/EIfmIXCfWy49ECBlUcQBJOXPgk=; b=WHy1Oh7gjsIvDev/ulqAQU0BFP
-	UR1EGF5vvLURrntPTWBIn51dc96RAv/zLkfJgNKzf4TIx/Idfd6V9DUwUMklWLOG+WYRP8aOL9v+q
-	4SSsEa7C27+BVohStKJQbr74+3tK7EFejz70wk9RXerdDomR3MXV9H8i7jOh36vyHQb3YZPwvajGW
-	4ymZHT0sIZEIjrpy8Tj0e0Oler7r/fTXC43hrUCIVuKTF2lTYTprVNKqlKVDsCSqZi1ga2yqEDbW0
-	lggh7WAc9WTEWNZnogU3W/7fe4U2oZLZHDvy2VD4oQvImhAnPvZs2ofkE3uJKUwOvdojwgqom+fZs
-	QASQ0UEg==;
-Received: from ip6-localhost ([::1]:29950 helo=hr1.samba.org) 
+	bh=z2WWxIDUsdHp0wXasuKRqlZ64Nw6Dyphc54R0vg6D9Y=; b=2kD2HuGO7V1UYK85soxSDOYf24
+	XsM06OhnBZMp/OGjg4YuR3Hj1vU18LU26GiW0Kx1DUPAXekvlJJ5urEoviyrfVY+qcDo9/xukNXBC
+	Ckrc8OVds2sB1oUa3hcw8YNodY7P/sbUmrN79Ck+dsm94iWQDaJQ2A4miYMatfks+2v5TZAyApsf9
+	vSeE1vU9v2Ta6josUEkLLMX4Nf6S2/4qjjMaAuhISxmg1RYf2bwCAygkz7ai8sHdH4u82qwHd84Sr
+	ejgjAHhCieUrjOwMwl8DiibOzWpIGlSkULXtrKRCJ3SAgSKTvKOL7xScqdS9qkZ4/KZ2Nq8e2RYDS
+	4mCzCbpg==;
+Received: from ip6-localhost ([::1]:32634 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1r2fLC-0089l7-1Q; Mon, 13 Nov 2023 22:23:34 +0000
-Received: from mail-lf1-x135.google.com ([2a00:1450:4864:20::135]:50234) 
+	id 1r2fLZ-0089u0-Rz; Mon, 13 Nov 2023 22:23:57 +0000
+Received: from mail-lf1-x129.google.com ([2a00:1450:4864:20::129]:51585) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1r2fL2-0089ky-Ar
- for samba-technical@lists.samba.org; Mon, 13 Nov 2023 22:23:30 +0000
-Received: by mail-lf1-x135.google.com with SMTP id
- 2adb3069b0e04-507ad511315so7144881e87.0
- for <samba-technical@lists.samba.org>; Mon, 13 Nov 2023 14:23:23 -0800 (PST)
+ (Exim) id 1r2fLO-0089q0-H7
+ for samba-technical@lists.samba.org; Mon, 13 Nov 2023 22:23:52 +0000
+Received: by mail-lf1-x129.google.com with SMTP id
+ 2adb3069b0e04-507bd644a96so7117082e87.3
+ for <samba-technical@lists.samba.org>; Mon, 13 Nov 2023 14:23:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1699914203; x=1700519003; darn=lists.samba.org;
+ d=gmail.com; s=20230601; t=1699914225; x=1700519025; darn=lists.samba.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=A2lUqDXZqftceSAE/EIfmIXCfWy49ECBlUcQBJOXPgk=;
- b=UlncKJGbp0umt2RsO/5FSgJ5JL1emYrqd26/zH7dGYXHexWKugdUcMPllWbcYKxl7f
- e2Sl28JaOBM63hyYoQ5yvXnK/Ujl3MT7ISp1XdIW0Fa9FQ6zjYE1+cAUKqKH4ud6Kb8s
- eoeR9Q9v2PwG+DeLuMu45N2Ml0Hxr1I3F69dj84Rq4FmHjqmFqbFk/fi5L1afq9fuDsl
- OjU7NaPxyhJG0kCerorYW0QAcMDj3XT+9xuFcm37umFH/fMdBBVA/8o8V0PXhKh8PHxH
- MI36sJdWb+CyZYx9J69NOCGfUFKCvuYBZD/pE85lWyou4KIEYaAjvI162hk0tOCxwfpf
- uxrQ==
+ bh=z2WWxIDUsdHp0wXasuKRqlZ64Nw6Dyphc54R0vg6D9Y=;
+ b=CAH7a/WXhqmatr4rbtzErJNbOLMyfmX1zj84olUpXy5Md0y0WTJ3S7JMKJi/zrx/Hq
+ EhSdzFq7Rf5Yqn+m7h23jypYKK0A5tPFJ9fEXJluePkz1ldywaHaoTGg/b1UD7Fkucsg
+ Tkb6ZBBkfBbnOYKGHSOJEwM27Y4AboUzgioe/F2PWWQqJB9Dr/XwudqYHVbo5FTr1GRG
+ RSBG683SzjBUyNlyH3oCxqhc+WpxA6/El4bjreqczgJS3vOiZ76opFksnpUZKT7h7eUz
+ LSkZjuatSgBpvFaCoD2UDs2dQAd4RKmRAEBSkomIt4hWmRd1BaDWtM5F3QlHnKlFwRoe
+ O2wg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699914203; x=1700519003;
+ d=1e100.net; s=20230601; t=1699914225; x=1700519025;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=A2lUqDXZqftceSAE/EIfmIXCfWy49ECBlUcQBJOXPgk=;
- b=ZX0/lwY5ri+e5C3AZG8IaXzTxyY3PJy3mW3cobdi0VPS974lKyYHQ8fm9wuNiCvUj4
- Ld49n0Ce22EYRRPXmpUTAK/zri6n+OgfsstmZQoLCZpgmLEc8PVXRceqZl9n7J+eu/QG
- 5V8C4NWQIQnMJQM/kHDJapGV23FX2Ggo6aaTuOgSDq3AIYwQ2a8/kBdttTe5FDeytRkh
- Oy4Q0Qqnq0AnWJT+hGWcIUZ3MMVMVp3T3LbLaJCBPwoWOoDJ0dFiIPlTJ5+OZpEoZTTx
- KVKA5pNA9SXM6jmV71LOsWbIEA7pyKGD3Y20qHZn5LCrTxnKWwbJbm7nSBJ34ooYozo1
- QIkA==
-X-Gm-Message-State: AOJu0YxQE5FpLj+9yhEzlzWL7gMZpp29GT1kfD9s+o8jNm074sdksgc0
- 2sVmDHYik9+5pIJK+rGYL6OxFQbQWMX3F/eOPmQ=
-X-Google-Smtp-Source: AGHT+IFr6X1XkLCqQA0hMWpN32lZWWNiSSsFNeVxo8xuLBlvHKHIMKV+WYspvbgfnHFpWcrYXaRyFd/HgvI3CP7hHyI=
-X-Received: by 2002:a19:ae17:0:b0:506:926c:9b0d with SMTP id
- f23-20020a19ae17000000b00506926c9b0dmr4564696lfc.20.1699914202741; Mon, 13
- Nov 2023 14:23:22 -0800 (PST)
+ bh=z2WWxIDUsdHp0wXasuKRqlZ64Nw6Dyphc54R0vg6D9Y=;
+ b=P5CWfEdq+TsCudcmPrwjQQUO716Na1vTxYzQgXnPlNrvkRmrddKzMznmYIapI4/ApV
+ nJYGc4WvfP17HgmhWRs80pfDH0Txxq+6Dzdpvm8TQuMMpELlnX6EKCPjlh+lGwJe0abK
+ YZvvPmsjbtZzisk/gVb3lD6CECq0LN/J4ctYQuNlmLL3Mpm9itsFmWQEhNCeVZtnsACO
+ dNot/t8s80A7bWd8UL2GxWBmSo6QcZdQG07lNRrh3B8jz/LypkynA+sAU6UlUVlYa1m0
+ DYA1J9/611Unc9/4CnbFKcmhkvgsJ04RdbKjzVKCvgS633PTUGtr6b7PVO2GC4cG78sp
+ Pquw==
+X-Gm-Message-State: AOJu0YzSNpFsoT/q4tKFaOuWwZJCvlXI2gCV6a5upYatHIG5qdQnl3ol
+ MqvXecke/lVfFK7IEjbHEXXcwhXr/TcavfbOoZ4=
+X-Google-Smtp-Source: AGHT+IHcKruz1Vla5I9USOC6Qahqw9agqD2FOZVIx06sXye6LIqqJxk5vOu+344DzzDXRF93Ba1LsdoyD0BQJ/gVvWo=
+X-Received: by 2002:a05:6512:238b:b0:50a:7575:1339 with SMTP id
+ c11-20020a056512238b00b0050a75751339mr5952741lfv.18.1699914225580; Mon, 13
+ Nov 2023 14:23:45 -0800 (PST)
 MIME-Version: 1.0
-References: <20231113164241.32310-1-eesina@astralinux.ru>
-In-Reply-To: <20231113164241.32310-1-eesina@astralinux.ru>
-Date: Mon, 13 Nov 2023 16:23:11 -0600
-Message-ID: <CAH2r5mvSXmRx8j65hLZEpiHOs-72zDpUYF-uy4reR3R3vUzfZA@mail.gmail.com>
-Subject: Re: [PATCH] cifs: fix check of rc in function generate_smb3signingkey
-To: Ekaterina Esina <eesina@astralinux.ru>
+References: <20231113145232.12448-1-abelova@astralinux.ru>
+ <05bfafca49fbed96ea500c25a0606205.pc@manguebit.com>
+In-Reply-To: <05bfafca49fbed96ea500c25a0606205.pc@manguebit.com>
+Date: Mon, 13 Nov 2023 16:23:34 -0600
+Message-ID: <CAH2r5mv+ntKVtzx+9ooYPJna7R0=ovsZid9EghwW3pzi5G4+Xg@mail.gmail.com>
+Subject: Re: [PATCH] cifs: spnego: add ';' in HOST_KEY_LEN
+To: Paulo Alcantara <pc@manguebit.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
@@ -76,62 +77,37 @@ List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
 From: Steve French via samba-technical <samba-technical@lists.samba.org>
 Reply-To: Steve French <smfrench@gmail.com>
-Cc: Paulo Alcantara <pc@manguebit.com>, Tom Talpey <tom@talpey.com>,
- Shyam Prasad N <sprasad@microsoft.com>, lvc-project@linuxtesting.org,
- linux-cifs@vger.kernel.org, linux-kernel@vger.kernel.org,
- samba-technical@lists.samba.org, Aurelien Aptel <aaptel@suse.com>,
- Ronnie Sahlberg <lsahlber@redhat.com>, Steve French <sfrench@samba.org>,
+Cc: Tom Talpey <tom@talpey.com>, Shyam Prasad N <sprasad@microsoft.com>,
+ lvc-project@linuxtesting.org, linux-cifs@vger.kernel.org,
+ samba-technical@lists.samba.org, Jeff Layton <jlayton@kernel.org>,
+ linux-kernel@vger.kernel.org, Ronnie Sahlberg <lsahlber@redhat.com>,
+ Steve French <sfrench@samba.org>, Ekaterina Esina <eesina@astralinux.ru>,
  Anastasia Belova <abelova@astralinux.ru>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-tentatively merged into cifs-2.6.git for-next pending testing
+Tentatively merged into cifs-2.6.git for-next pending testing
 
-On Mon, Nov 13, 2023 at 10:43=E2=80=AFAM Ekaterina Esina <eesina@astralinux=
-.ru> wrote:
+On Mon, Nov 13, 2023 at 12:11=E2=80=AFPM Paulo Alcantara <pc@manguebit.com>=
+ wrote:
 >
-> Remove extra check after condition, add check after generating key
-> for encryption. The check is needed to return non zero rc before
-> rewriting it with generating key for decryption.
+> Anastasia Belova <abelova@astralinux.ru> writes:
 >
-> Found by Linux Verification Center (linuxtesting.org) with SVACE.
+> > "host=3D" should start with ';' (as in cifs_get_spnego_key)
+> > So its length should be 6.
+> >
+> > Found by Linux Verification Center (linuxtesting.org) with SVACE.
+> >
+> > Fixes: 7c9c3760b3a5 ("[CIFS] add constants for string lengths of keynam=
+es in SPNEGO upcall string")
+> > Signed-off-by: Anastasia Belova <abelova@astralinux.ru>
+> > Co-developed-by: Ekaterina Esina <eesina@astralinux.ru>
+> > Signed-off-by: Ekaterina Esina <eesina@astralinux.ru>
+> > ---
+> >  fs/smb/client/cifs_spnego.c | 4 ++--
+> >  1 file changed, 2 insertions(+), 2 deletions(-)
 >
-> Fixes: d70e9fa55884 ("cifs: try opening channels after mounting")
-> Signed-off-by: Ekaterina Esina <eesina@astralinux.ru>
-> Co-developed-by: Anastasia Belova <abelova@astralinux.ru>
-> Signed-off-by: Anastasia Belova <abelova@astralinux.ru>
-> ---
->  fs/smb/client/smb2transport.c | 5 ++---
->  1 file changed, 2 insertions(+), 3 deletions(-)
->
-> diff --git a/fs/smb/client/smb2transport.c b/fs/smb/client/smb2transport.=
-c
-> index 84ea67301303..5a3ca62d2f07 100644
-> --- a/fs/smb/client/smb2transport.c
-> +++ b/fs/smb/client/smb2transport.c
-> @@ -458,6 +458,8 @@ generate_smb3signingkey(struct cifs_ses *ses,
->                                   ptriplet->encryption.context,
->                                   ses->smb3encryptionkey,
->                                   SMB3_ENC_DEC_KEY_SIZE);
-> +               if (rc)
-> +                       return rc;
->                 rc =3D generate_key(ses, ptriplet->decryption.label,
->                                   ptriplet->decryption.context,
->                                   ses->smb3decryptionkey,
-> @@ -466,9 +468,6 @@ generate_smb3signingkey(struct cifs_ses *ses,
->                         return rc;
->         }
->
-> -       if (rc)
-> -               return rc;
-> -
->  #ifdef CONFIG_CIFS_DEBUG_DUMP_KEYS
->         cifs_dbg(VFS, "%s: dumping generated AES session keys\n", __func_=
-_);
->         /*
-> --
-> 2.30.2
->
+> Reviewed-by: Paulo Alcantara (SUSE) <pc@manguebit.com>
 >
 
 
