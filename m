@@ -2,52 +2,46 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4A5BA7E9F2E
-	for <lists+samba-technical@lfdr.de>; Mon, 13 Nov 2023 15:51:05 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4F5F07EA267
+	for <lists+samba-technical@lfdr.de>; Mon, 13 Nov 2023 18:51:14 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=bk4SAuPLUS/Y72rpQeTxPQCE0eLnG5WbdjDCqowss98=; b=WmfgmqJK8VUjwtUn5oD4+6Yw73
-	cF5O/hIUTC8gzoCOOFTMRjiXgGCfu0iGpekb/ovrnrBEgJK7lSO6I3+b/d1Rrr8DDRwxLYYvlm6/a
-	Cnh7Ha8gCOcec3dU/XvKnqqcF+SqwtsmfDNDlBz3G+pCYeRwJPmdOZVQq6m5QXQYubUZ/IR4axlYl
-	K126ygK7jCcNFQFxVuL1vSPz64gZAqu8Sz/MivuhY7HOMhfN/NiIbN3xMWeqJabqPdj7Lfw8ovN23
-	amqo+RCVOt5jGoi7IUMFd5Cz9eEYIQOAXXTnAMUAkaxErodqXTUEuTbw5zJhK0Lx8+TeKO1o4ZezP
-	Dl2NQHbg==;
-Received: from ip6-localhost ([::1]:26826 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=bucW0gpLDSNoaVWz4dQtDZUKz0CH+JyEKg571/3Vkhc=; b=CrBGmxIgcA3MibkfW8EweFRmZE
+	quxLwYvwGTJrZy4aaDjvCwmKQ2+FR/bLZNie/JijMD/jYh+C6KLOmrVmCeGKBf4UToKp7AvpfqG0N
+	s7ydk/drz0UxhwXhn/Kz7BpvDu3+a7tq3j0p4X0DMoexFLSzhi8nzlBZ4TJ8SfPd7WqiMQ2TPzpOQ
+	2Gh4+TyHp4Z0ESJSvupyDymags2VeSNMYKsiqmqI9cc/bQWfIicn89819FlWJB64Cpzcsg9lqiC2o
+	WFUc39T2ggJc60NizxXzDE1Bd6ZeuhmAR5ownHv5YRZ5NapzEA7qmXs0S9nyhbj+uz5BOxrdWlZmE
+	/HftxEog==;
+Received: from ip6-localhost ([::1]:44388 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1r2YGt-007xMJ-3k; Mon, 13 Nov 2023 14:50:39 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:34602) 
+	id 1r2b54-0087V1-8W; Mon, 13 Nov 2023 17:50:38 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:49036) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1r2YGm-007xM9-5z
- for samba-technical@lists.samba.org; Mon, 13 Nov 2023 14:50:36 +0000
+ (Exim) id 1r2b4v-0087Us-Su
+ for samba-technical@lists.samba.org; Mon, 13 Nov 2023 17:50:32 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=From:To:Date:Message-ID:CC;
- bh=bk4SAuPLUS/Y72rpQeTxPQCE0eLnG5WbdjDCqowss98=; b=ylyzmSSrKVEXBUurV+orJh+DCp
- fRuAoH9znNfcMGy3/dKIJP8QMFP9e7WLrFvuRYvbTEogKeRXz6YzZ5f0fZTaxIPNMFc/iayhSAnqn
- TGmYoXOpKM03bVxTCtCLEV8roKuqbT1MGD6wX+YmjUgYiaB3VYGqEXETG7NdeHbyzRNE3yXdN+C3a
- w8tSgf5HCvZM0gngsqVRjP4wf2K/KEVCvmbcdAj091sVKpb4llDoQwpJ2GNeUqkgXz+/R6H5hQ8gu
- JI8i5a/wNG6zgdo9ZVO3x6xDYJLF0eEgWxTe9/yl51wLNplJT0vf4E2KXCTwKT/mlvx8wAQXgAK4g
- 0+cKgGF3zsfT2Y3CxCTVn4+q8+CVNdX0xu6BSFByRqRXSYPHyXY/9iZ6hNJnGpKc98VOKT/0sf4FI
- iVe30MAMBJL2PA5+PMwAyig5U/eqCwPFRYqgA0RpRixu+RZX7qpyMZJN7fu2Gp83QvWfjen1nXBrO
- RASIhnnswcNWqIO2eQz8yiqk;
+ s=42; h=Message-ID:Cc:To:From:Date;
+ bh=bucW0gpLDSNoaVWz4dQtDZUKz0CH+JyEKg571/3Vkhc=; b=T1A5G7q41dXPnTkix9/qvYIUUv
+ 35JOmp9h1siSJtTvUMA2HWvgpWeT56O+s442qnqMuAwiSkzjNfDHJ64encQtntf91QeQ1VEYMkvVd
+ WaI2bJzuJGB/xtH1/0JuMxTgpYxtpbvHuwCW8qOztO+vHUMq1h6ttlw1/Spooq9KV2awBeNYXCZ90
+ C88Fe76f5BqWfL72rKtVmfF8YUSAeCQ3+yuJPs5ZRPbLjnRU89dzO5Ocl4eA+QPLZ1Lj60ZVOP4qW
+ CV3r+S2BstyDZ/1uT2qRN63yABBuOIYkAxMxpoGpPd7ft+i5ZuHQFk9dypnPfAuothx8KegF6U3cW
+ yHlsld8whJvYnQ19KF8vsCkuxfcGa+Rc3OAPocq6dRTmtn9yC65kdb86EA8P8moHr8qyVPds5tvtE
+ /XK/Iy6ZfYcDC2DOjyfV7W7cbakePeSa3PUW5TRujxuDD270jRmodC5Y133nQof5f6Z6sDiZhGeoP
+ D9kaMVhr3/gJi1FU/wp4SI5o;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1r2YGg-005vw7-2j for samba-technical@lists.samba.org;
- Mon, 13 Nov 2023 14:50:28 +0000
-Message-ID: <4baa6aa2-052f-1e19-63c0-ef3711d9febd@samba.org>
-Date: Mon, 13 Nov 2023 07:50:25 -0700
+ (Exim) id 1r2b4p-005xlg-2p; Mon, 13 Nov 2023 17:50:24 +0000
+Date: Mon, 13 Nov 2023 09:50:21 -0800
+To: Ralph Boehme <slow@samba.org>
+Subject: Re: [SMB3POSIX] File attributes
+Message-ID: <ZVJh3X9GQ5L9mLS0@jeremy-HP-Z840-Workstation>
+References: <e916bdea-4197-4372-a15b-cea41c8ebe03@samba.org>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.14.0
-Subject: Re: I want to make ADCS support better and I need some advice
-Content-Language: en-US
-To: samba-technical@lists.samba.org
-References: <922de58f-d011-427d-8248-9f8ce7c90e74@app.fastmail.com>
- <19507e01-a2f0-fcd1-9b98-47a72cdf11f2@samba.org>
- <6c0ddbb6-4375-4d18-8e4e-0114dc7736cd@samba.org>
-In-Reply-To: <6c0ddbb6-4375-4d18-8e4e-0114dc7736cd@samba.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii; format=flowed
+Content-Disposition: inline
+In-Reply-To: <e916bdea-4197-4372-a15b-cea41c8ebe03@samba.org>
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -61,33 +55,29 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: David Mulder via samba-technical <samba-technical@lists.samba.org>
-Reply-To: David Mulder <dmulder@samba.org>
+From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jeremy Allison <jra@samba.org>
+Cc: Tom Talpey <tom@talpey.com>, Volker Lendecke <vl@samba.org>,
+ Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-
-On 11/13/23 7:28 AM, Ralph Boehme via samba-technical wrote:
-> On 11/13/23 14:56, David Mulder via samba-technical wrote:
->> I'd additionally like to be able to contribute rust code to Samba, 
->> and I'm certainly glad to see someone wanting to work on certificate 
->> auto enrollment. I know there is some opposition to providing rust 
->> code in Samba, I think because of platform support.
+On Mon, Nov 13, 2023 at 12:28:18PM +0100, Ralph Boehme wrote:
+>Hi!
 >
-> iirc this was about AIX for which we do provide our SAMBA+ packages, 
-> but last time I checked several months ago AIX support was about to be 
-> released in rust, so this is likely not an issue anymore.
-Hrm, interesting. So perhaps we could work out a way to include Rust 
-code in Samba.
+>We had support for file atttributes in the CIFS UNIX extensions, this 
+>is currently not in the spec (or code) for SMB3 POSIX.
+>
+>Is this intentional? What is the reason?
 
--- 
-David Mulder
-Labs Software Engineer, Samba
-SUSE
-1221 S Valley Grove Way, Suite 500
-Pleasant Grove, UT 84062
-(P)+1 385.208.2989
-dmulder@suse.com
-http://www.suse.com
+Do you mean the attributes listed by:
 
+man chattr.
+
+chattr - change file attributes on a Linux file system
+
+This was at the insitence of Steve as I recall.
+We never implemented this.
+
+Might be done via a tunnelling ioctl ? Other thoughts ?
 
