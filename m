@@ -2,50 +2,50 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2188E7E9DEC
-	for <lists+samba-technical@lfdr.de>; Mon, 13 Nov 2023 14:56:47 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 635BB7E9EAD
+	for <lists+samba-technical@lfdr.de>; Mon, 13 Nov 2023 15:28:41 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=si8GVCKZJ/wEHbG62Pv89NOHpKpROPOsT/6W0nYmqdQ=; b=F+aGzoHA/A4BCc/PxXaQfDCJb5
-	MYOoFtOxUVnFHY+8Q42CYhaEVQwrX3z1dr1U3iqMqvjsQYb5rWHImmwv2B0d0wbUyf9brg6+rU+8i
-	xEtAmFweopg9ZMTpmIKu8ZY1mFFOCRsRuT4tuGmv8xE/v0Mn4w9AAyLzB8jrh6oM0dCAIXuzf+VBZ
-	xrkImU2Kbn2ZwrveANfGy6z07aVgm7E1XTcsMbfuDB3uEI3ruffpgmObrwJX9E1va0cNixGsJDyR7
-	u6gAmfLQq2yP923Z2+j1Fr/FELvnZa/DuFMsdDtXwYv6cTdv+0qDCkoRqmUtvbROiD1k4slQo/SGT
-	GYUgKMLA==;
-Received: from ip6-localhost ([::1]:64086 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=SoA1b8Up4x8pZio6ByZeNAkTlls2h3yw+QI4oJ4g1QY=; b=WWKAIc8Iw2OJTwE342chFlp2iA
+	67yH5gOdlaVxVsYSZkHPxN7S8YTuQaF2aC/6ZhuAnNhppTVhlK/XmKh5ToBx9dwB+zCpXbSNFTWjg
+	ijvQ/VWgNHa/jN3TQfR1ur38/6vM1q21ZNIUL1qO6zCR11rTVb24hX8/X98mIkbr2yN4iPB5zmJX4
+	m6djpfhGEwmV9tatPzRazzFSqPjc2hySIZkGDF9UUOBhOWx0+nAacESfLdYesayta/QXMLTiRsssD
+	ajd9wrSOO8EjYyAcZj97mfwfHBIb2iwuzXx0kA6qcVIatAAEU520eGazElWRd2pH2hB2LPtVufq4T
+	Kjk4PQeA==;
+Received: from ip6-localhost ([::1]:50506 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1r2XQR-007wkG-8f; Mon, 13 Nov 2023 13:56:27 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:36446) 
+	id 1r2XvE-007x3C-UQ; Mon, 13 Nov 2023 14:28:17 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:59872) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1r2XQL-007wk7-EK
- for samba-technical@lists.samba.org; Mon, 13 Nov 2023 13:56:25 +0000
+ (Exim) id 1r2Xv5-007x32-Jb
+ for samba-technical@lists.samba.org; Mon, 13 Nov 2023 14:28:11 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=From:To:Date:Message-ID:CC;
- bh=si8GVCKZJ/wEHbG62Pv89NOHpKpROPOsT/6W0nYmqdQ=; b=08PgwqunrGpFqLPq2VqJLG8hS0
- crVgr6U61bxzrprYH3Mp8HxC3J3+Vx71xvKAUzc45Ub1DhEGJzGUjjxjyPbXW4jOr0FSdZ0HE7tOl
- bK1t+fJ6diN/Hgf5oqw+Z8L+TcOxCdTvlhrlxZJXJfwCNzIF+OkJTXdJOpFmxQvuCoD79Z4dGVeXs
- Kn1GfQLVLg/bovr1atWhbEWoqqa6tr5Qe0QyThNDuymwSlKqZnZIR4PhQvapN7SlJ+hK7ZwPAIbks
- 6QREgM5pMBamUEsqUIsWiEkLYfk0Cm4RHry4TYAwxQbANfVjxKuHNP8ltEwTUZB0Qjy+WmBEc4JE5
- yQY6O4xWcQo0H9zqAmUZ3HhpXbPK5yqpxAaS+/jX+J9FJ5dsGgftybd0EStNrnoV7/t9jyq0e4UUb
- Ay6ubcqoJkCmf2Gvkn8rhGDToKiKcE1GP6MEfWOwIUsf8G0y5pbKsSiA3IEczvJN6mnnhOXggC/C7
- T6Zlo/GTAkaTt1GGL3QMxQS5;
+ s=42; h=From:Cc:To:Date:Message-ID;
+ bh=SoA1b8Up4x8pZio6ByZeNAkTlls2h3yw+QI4oJ4g1QY=; b=r0zCKsgtC+t6FYVwJkdh+1cb/T
+ BAePVLHWgFPbiJt8ciKxpKuTrIqfrotv5RN8gorGT2bnlR8xsyIzvXLUxE9eoR9m6sKQ3p59ly4Ly
+ J17AOiy0qSEm9C94cEJyxJtrXUI3bsKWCXDsWSpyDE05eiMKxsPDPOLLKzBzN8MUVCJlPBoW9G3c8
+ YYhiCx0oS/Gp1pbbz5mYuGjnaOedTr4qVzdTWce9l6/Gn9Xz1bHPDqNaklnW+ubutFWCg9tD7rvq+
+ XoOJn7zSiAePnqn/FhuZUmFkIsVdDH/qS5bZAp6b3kIcTCzKOXMdf4TH+U5DF4KvqaN3zvfJmAY32
+ gaSw8suBv309o4RJAwPxSrq4PVnTnYztBDJKzGtFxGcJWLbTNmOliPE6StrgGX6vW3d2HpzBHBKzd
+ UxiHLSZduC+ZwBhReM2K4YAnQD0RVT7f8UkihF9EDw68ekLCg4f+PAqg1oOOes9mIHDUkkJtxk+Ul
+ R2HSUxT1cFezfubj7Lxhb0WN;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1r2XQI-005vPd-30 for samba-technical@lists.samba.org;
- Mon, 13 Nov 2023 13:56:19 +0000
-Message-ID: <19507e01-a2f0-fcd1-9b98-47a72cdf11f2@samba.org>
-Date: Mon, 13 Nov 2023 06:56:17 -0700
+ (Exim) id 1r2Xv3-005veG-2Y; Mon, 13 Nov 2023 14:28:05 +0000
+Message-ID: <6c0ddbb6-4375-4d18-8e4e-0114dc7736cd@samba.org>
+Date: Mon, 13 Nov 2023 15:28:04 +0100
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.14.0
+User-Agent: Mozilla Thunderbird
 Subject: Re: I want to make ADCS support better and I need some advice
-To: samba-technical@lists.samba.org
+Content-Language: en-US, de-DE
+To: David Mulder <dmulder@samba.org>, samba-technical@lists.samba.org
 References: <922de58f-d011-427d-8248-9f8ce7c90e74@app.fastmail.com>
-Content-Language: en-US
-In-Reply-To: <922de58f-d011-427d-8248-9f8ce7c90e74@app.fastmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+ <19507e01-a2f0-fcd1-9b98-47a72cdf11f2@samba.org>
+In-Reply-To: <19507e01-a2f0-fcd1-9b98-47a72cdf11f2@samba.org>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------08J03xrtEVI6fgP7J5NGDUaM"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,38 +59,67 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: David Mulder via samba-technical <samba-technical@lists.samba.org>
-Reply-To: David Mulder <dmulder@samba.org>
+From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Ralph Boehme <slow@samba.org>
+Cc: =?UTF-8?Q?Bj=C3=B6rn_Jacke?= <bjacke@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------08J03xrtEVI6fgP7J5NGDUaM
+Content-Type: multipart/mixed; boundary="------------gWIbSu0GIJHRhi689RHbTpk5";
+ protected-headers="v1"
+From: Ralph Boehme <slow@samba.org>
+To: David Mulder <dmulder@samba.org>, samba-technical@lists.samba.org
+Cc: =?UTF-8?Q?Bj=C3=B6rn_Jacke?= <bjacke@samba.org>
+Message-ID: <6c0ddbb6-4375-4d18-8e4e-0114dc7736cd@samba.org>
+Subject: Re: I want to make ADCS support better and I need some advice
+References: <922de58f-d011-427d-8248-9f8ce7c90e74@app.fastmail.com>
+ <19507e01-a2f0-fcd1-9b98-47a72cdf11f2@samba.org>
+In-Reply-To: <19507e01-a2f0-fcd1-9b98-47a72cdf11f2@samba.org>
 
-On 11/10/23 7:09 PM, Joe Dillon via samba-technical wrote:
-> I want to improve samba's support for auto-enrolling and auto-renewing certificates.  I've identified a few key issues I want to resolve:
->
-> 1. Certificate Services Web Enrollment is required for discovering the PKI environment.  Web enrollment, while *probably* installed on a CA, isn't a component of auto enrollment, per MS-CAESO.  Additionally, CAWE *most likely* presents a certificate anchored by the PKI environment, which presents a chicken-egg type problem for using it to discover CA certificates.  Samba breaks this dependency cycle by retrieving the CA over HTTP, but that presents an opportunity for an attacker to potentially inject a rogue CA.
-> 2. Samba's discovery of enrollment services/other PKI configuration assumes the current domain is the forest root domain.  I'm trying to work on this as a good first issue.
-> 3. The GP client is currently limited to interacting with CA servers that expose WCCE and WSTEP endpoints.  These are optional roles, and as a result aren't guaranteed to exist.  Samba has MSRPC support, which is very unique on *nix platforms.  Samba could support MS-ICPR for CA servers that don't provide the web protocols.
->
-> I really want to help improve the above.  My challenge is my python skills.  I've written most of an MS-CAESO client in rust.  Should I complete this rust client, would it be of any use?  Should it be wrapped up in a nice python API?  Can I submit the necessary code to add MS-ICPR support to samba - purely so I could consume it myself?  Should I scrap the whole thing, learn python, and rewrite it?
+--------------gWIbSu0GIJHRhi689RHbTpk5
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
 
-I'd additionally like to be able to contribute rust code to Samba, and 
-I'm certainly glad to see someone wanting to work on certificate auto 
-enrollment. I know there is some opposition to providing rust code in 
-Samba, I think because of platform support.
+T24gMTEvMTMvMjMgMTQ6NTYsIERhdmlkIE11bGRlciB2aWEgc2FtYmEtdGVjaG5pY2FsIHdy
+b3RlOg0KPiBJJ2QgYWRkaXRpb25hbGx5IGxpa2UgdG8gYmUgYWJsZSB0byBjb250cmlidXRl
+IHJ1c3QgY29kZSB0byBTYW1iYSwgYW5kIA0KPiBJJ20gY2VydGFpbmx5IGdsYWQgdG8gc2Vl
+IHNvbWVvbmUgd2FudGluZyB0byB3b3JrIG9uIGNlcnRpZmljYXRlIGF1dG8gDQo+IGVucm9s
+bG1lbnQuIEkga25vdyB0aGVyZSBpcyBzb21lIG9wcG9zaXRpb24gdG8gcHJvdmlkaW5nIHJ1
+c3QgY29kZSBpbiANCj4gU2FtYmEsIEkgdGhpbmsgYmVjYXVzZSBvZiBwbGF0Zm9ybSBzdXBw
+b3J0Lg0KDQppaXJjIHRoaXMgd2FzIGFib3V0IEFJWCBmb3Igd2hpY2ggd2UgZG8gcHJvdmlk
+ZSBvdXIgU0FNQkErIHBhY2thZ2VzLCBidXQgDQpsYXN0IHRpbWUgSSBjaGVja2VkIHNldmVy
+YWwgbW9udGhzIGFnbyBBSVggc3VwcG9ydCB3YXMgYWJvdXQgdG8gYmUgDQpyZWxlYXNlZCBp
+biBydXN0LCBzbyB0aGlzIGlzIGxpa2VseSBub3QgYW4gaXNzdWUgYW55bW9yZS4NCg0KLXNs
+b3cNCg0KLS0gDQpTZXJOZXQgU2FtYmEgVGVhbSBMZWFkICAgICAgICAgIGh0dHBzOi8vc2Ft
+YmEucGx1cy8NClNhbWJhIFRlYW0gTWVtYmVyICAgICAgICAgICAgICAgIGh0dHBzOi8vc2Ft
+YmEub3JnLw0KU0FNQkErIHBhY2thZ2VzICAgICAgICAgICAgICAgICBodHRwczovL3NhbWJh
+LnBsdXMvDQpXb3JsZHdpZGUgU2FtYmEgU3VwcG9ydCwgQ29uc3VsdGluZyBhbmQgRGV2ZWxv
+cG1lbnQNCg0KDQo=
 
-Would you be able to contribute C code instead, perhaps? I could help 
-you tie that into the existing Python code. Take a look at the bindings 
-in `libgpo/pygpo.c`, for example.
+--------------gWIbSu0GIJHRhi689RHbTpk5--
 
--- 
-David Mulder
-Labs Software Engineer, Samba
-SUSE
-1221 S Valley Grove Way, Suite 500
-Pleasant Grove, UT 84062
-(P)+1 385.208.2989
-dmulder@suse.com
-http://www.suse.com
+--------------08J03xrtEVI6fgP7J5NGDUaM
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+
+wsF5BAABCAAjFiEE+uLGCIokJSBRxVnkqh6bcSY5nkYFAmVSMnUFAwAAAAAACgkQqh6bcSY5nkZT
+mxAAh8oWseaSTd/Fl4QvAsYnw2LmiLV50MEYHdOwvf0RghFs/5QG5br6qZSYgbU4DR296l2NFQf5
+f9vQWruQNmxSt6a0rV40rI6rUdwjbwIv/28nISVpcddqCdjXOdetLqjC8WOsnwZW4Rn3JaYen7vs
+2fRju8fs10dLKAa4gO/kJ4bGAsTpNJE1PqACaU27XxkoJr4fwA9r8R4hxs0rAW+r8jC6WgCRdzbl
+F2+xqtCshlbA/i7tryv/5eKSAksyAnlC+s1d0wFiOvyEI6sS3FUXCuXUWY/Osjlt58+yuLjQ8YIs
+AiN99fi5Z9OpTEMnPgxzbzJKzj6tNheanMdU3Z2ffohn0P1cxWjj98W8TSBZherhj0Xhy6a5k3m6
+aHeWZDD5Vh6HrB8BYoOfdlACAM8UpRAgTz8Poj0Dbo1nonEuTvX7qd7HCJITn4N3PH56repTdp1U
+XOzwYjMS3cyi5D8fBVxh2xco4L8RFFwU8nRAsyKNRE9/H4zWzsS22w+DHQSi1bmcqShHU0WlmkOB
+1P9ibeJJYosMg6AOIHLm6+yvoyIi4kLZuIchBtRAqXxlk6fcaEQCjBSu9QCbONbY06QSjeYNQpaW
+nMra8D2DA9UQ2FWZOy94htIZ0MVThNsXSF1aaQLJvwcOEl/Pi0sk0aeQLnN+0P4BTG36Zkdvxzb+
+7vg=
+=0UMR
+-----END PGP SIGNATURE-----
+
+--------------08J03xrtEVI6fgP7J5NGDUaM--
 
