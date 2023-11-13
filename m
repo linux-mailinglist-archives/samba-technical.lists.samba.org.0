@@ -2,63 +2,64 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id A80137E9D10
-	for <lists+samba-technical@lfdr.de>; Mon, 13 Nov 2023 14:24:49 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 354087E9D46
+	for <lists+samba-technical@lfdr.de>; Mon, 13 Nov 2023 14:36:00 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=vF05QaEOHcPakGPyitJCkj+gbDkU87JCmc6d/h+OtWA=; b=mgljJuVocBQrZ/nkLONKNdfNiY
-	busxwYeZWH7TaKWhUXtDEYLqrqU+/ixnZHV/jG+3BNCH/S9h7gKw9KPq12bRxnDyAj5HrA0yvfOhD
-	vJFv9zTRoqc24NtMIos29ZT0AoNhRy3Ud4WJHRVDMyaQm7Dj1Ko4TNNpnHWGrKSyJKSROaxDvvrnx
-	AMm/QNsx9NccQGv0jSdVIP5j3a2MD3HvCMcyJDfix+RUr/XWFiZPW+HKYlcOHcal7bNDvINDd9L19
-	hUsMFiRgwRpl6wm82vyajz6RQ6ZWJEe5ZzHtiishY/8GYE4WKTKWci+rOC9QGpUnzKndERz4oO5UT
-	8LZYWq6A==;
-Received: from ip6-localhost ([::1]:40080 helo=hr1.samba.org) 
+	bh=6OiTLud+yoVBH+r+tSp//k40Ti6bg8qeM74jXFlok6A=; b=gzc9iwTzL4iyr8onPU9enslq7P
+	vuTGe4dLE/o795ALkkOik40Gr0iJ0ql57rmEw++7fmkw05NGWb2z243xaBzv/H6354lt10KsldV9U
+	HpRQjyhT/JqCG7oqtUn3ZwE5kOaYks1LrhZ9bZLv3Pj6wsiPW85C1dCvpYkZOr9/jNAkh2pkn2d4s
+	8s/D50zyKVtpX2GwNyE7BPk/ilG0TK0x95pt7/mU7pM5U+Tv1tpUydrgk7BopzvgIhAxMklhULan1
+	5P7972p0153YgbEFjwT40D8HsJRD7xDtEWQHQ7hvQRuwAut8nPsdlfZIH2DimkHSXJM22rP+vKHcC
+	GstVhZBw==;
+Received: from ip6-localhost ([::1]:63788 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1r2Wvi-007vsU-Er; Mon, 13 Nov 2023 13:24:42 +0000
-Received: from mail-yb1-xb29.google.com ([2607:f8b0:4864:20::b29]:57855) 
+	id 1r2X6Q-007wAc-7r; Mon, 13 Nov 2023 13:35:46 +0000
+Received: from mail-yb1-xb32.google.com ([2607:f8b0:4864:20::b32]:60521) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1r2Wvd-007vsL-TT
- for samba-technical@lists.samba.org; Mon, 13 Nov 2023 13:24:40 +0000
-Received: by mail-yb1-xb29.google.com with SMTP id
- 3f1490d57ef6-da7ea62e76cso4774795276.3
- for <samba-technical@lists.samba.org>; Mon, 13 Nov 2023 05:24:37 -0800 (PST)
+ (Exim) id 1r2X6J-007wAR-Du
+ for samba-technical@lists.samba.org; Mon, 13 Nov 2023 13:35:42 +0000
+Received: by mail-yb1-xb32.google.com with SMTP id
+ 3f1490d57ef6-da077db5145so4388092276.0
+ for <samba-technical@lists.samba.org>; Mon, 13 Nov 2023 05:35:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1699881875; x=1700486675; darn=lists.samba.org;
+ d=gmail.com; s=20230601; t=1699882537; x=1700487337; darn=lists.samba.org;
  h=to:subject:message-id:date:from:in-reply-to:references:mime-version
  :from:to:cc:subject:date:message-id:reply-to;
- bh=hyiCV8mtqBBXFot+GWSWQ7kRDxX0C1Ru5+ywJU8twYQ=;
- b=jhQDzyjyZvwZx8sdEhM4uVgnt43xNKyY7d98quv6+Cj1QXO/u1uVbc0hPEAF8WL6kf
- J2cMxqBkqfdjhU3LodYiCJDQa++fBr7ZWozKx8wGSNGWDCLB75N1nC/8wXmy0BrkRLQw
- rMmTZhcDKnvdDQ2p9fUDvt+m3ybTcqHsou2amx90MZVBqvBTo/bsfGtkp2lCJGvdrZQd
- E89bMuWs4ACpijVAh/J2tFb9cwoidlK6dSZ698WYex3o8P3oZTnVtYWo7NeQ4QV6Dkr6
- SzBSyHWkMrK8fq0KPJnlUus5jEK2zgtihrjAhCWatwW+JpSEP7kSKGigU9BL+WHOUTOa
- 9hMQ==
+ bh=AEy7EVabLA1mhc3+pHxHVBEynaTXCj8cLHcdMXsEvPQ=;
+ b=JZgRG0jTC/ZiV6GstTs1Stto/sxE1txODQpN0A2LYDaX0BwnQ/qDtfDc7K10ZwhRN7
+ DgToYRpww6/QOqAfE6OtbjK89q2xStoW+wqT2OJQKd6o2w+nba7NkAfZjujEzLcU5l0e
+ tjNKgQjqBvc4oQiM+rcFDXEe7Y14/iJAf8Qyv6MGRVh6P9iXnxebfpdtrWKNATYBFej6
+ rKvcyJ4xjCItwaSGWmJ3VA8q3stzf8TOsXgZRmonDldFjASMwDDI0WdZ26M7oMZcDUJF
+ UKeLv7k6+3vdP1dVSVB+4fbijcaTlMQITrJnmRx3rLM0U+3zGZEaK3f00jpHZ6FFtuaj
+ 4WBA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699881875; x=1700486675;
+ d=1e100.net; s=20230601; t=1699882537; x=1700487337;
  h=to:subject:message-id:date:from:in-reply-to:references:mime-version
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=hyiCV8mtqBBXFot+GWSWQ7kRDxX0C1Ru5+ywJU8twYQ=;
- b=ZSif6HqTHzlcLcgocZjNxG7pf6GmQ/+VUtEifD3Or0yEe6PJCYYmVWGQ5kYbzSThKd
- FMO4a9Jp4irmNBubchnTe8LomV0G6zBWf/PsRha0txAP2gviJvuMnjoBoU0ojX8sNJv2
- tcNolkEoTLGbX5LtfL0JU0kIek5yGKy/JS8tomjsad8IE5DVpmbRn4mOiCmFQmWkUp+a
- jiP5dCbRNfIXhAnmUvTjfFgr/Y7+3B4BEyMgj/4qsCZfDhLdi+Tet3TJOrYrnHA7JqJi
- lvsmGP+qouISCz32EftqKPc0Y6+nGavaFM5l6h/XyhJV/G4hVAQf1WYvbT+VlDRsFt57
- bY4w==
-X-Gm-Message-State: AOJu0YzFoGjvkTU1GUX3kkGHgvvf1b2cRhAVERuN+gKblTbNADfDUer1
- J1EBvZ+jnGrbQI304l94TTU/nXTyk893apsLwUpH+WBtwiY=
-X-Google-Smtp-Source: AGHT+IEC2rPJr379+Ar8xJ2Lg4U42i3zAJ5VloagFhAb4aYJ385y37nMN+zsMtxja+B5P3n0EfYSCfaaYVbVktgAkmY=
-X-Received: by 2002:a25:37c8:0:b0:da0:c64f:ea10 with SMTP id
- e191-20020a2537c8000000b00da0c64fea10mr5657252yba.43.1699881875361; Mon, 13
- Nov 2023 05:24:35 -0800 (PST)
+ bh=AEy7EVabLA1mhc3+pHxHVBEynaTXCj8cLHcdMXsEvPQ=;
+ b=fvpdEchJIx4+edV+xbTseLtr/Bf0dPEMDMU487QfIGwyq7RGuhLUae57SSsBgKiKKU
+ nGu2jg/spMd7+KGBVFIlwFGlgOpj+d3K6+85Q/pu52PyyV3dSNoyAL5+UuyoBjvzF3Lk
+ PT+HopUvx1ablpgG0pWdwhL0GOIsZzpqF0Ymq6Bs4qZJvM8cSMjPMgQOV0UbEOs1nTo7
+ As0UFuNX3kjZozh5uShH+HLZGC8fW4UMZP4quAepLogQktNsjOWFgUotL2O7SzNxzfR8
+ jELEEdqDzguEKCU8POYHqymyeFkTKx7Ndd0ldcubiVtREXC50WR5CqgkkX4QAY6LJ2YR
+ HryA==
+X-Gm-Message-State: AOJu0YxuEe7kadyV0z2LD/kutSUGhcc+022Wj8O7gLoDs0ueodzjVhL3
+ jTXS7yQ9TGbB5uT9NGasWPcoczi7c6uuh2/stKy+iVm0wZM=
+X-Google-Smtp-Source: AGHT+IGhGCKCgRDg5/3FPiU+sh7tRLy8El5eBu/Uo0dJQRWs+feu4TJvFlHJTI5bKcYx03XVFnhbIDx48bSL8Ay4BmE=
+X-Received: by 2002:a25:d7d5:0:b0:d9c:fa2e:3b7c with SMTP id
+ o204-20020a25d7d5000000b00d9cfa2e3b7cmr6201622ybg.22.1699882537207; Mon, 13
+ Nov 2023 05:35:37 -0800 (PST)
 MIME-Version: 1.0
 References: <CAOGObpiMd0krLek4p46SYHTZpDwRGfGdD9PbxH_QUvVCe30-OQ@mail.gmail.com>
  <20231113125324.0cf1b58b@devstation.samdom.example.com>
  <CAOGObpi01iUPmGdB-KhjqNo8t0zgVWK8XJzjw8ATBYD0uWj8xQ@mail.gmail.com>
  <CAOGObpg3sK8soryGdY+BC=TG8=gctm-7gkR0LYxubkFMbGXXkg@mail.gmail.com>
  <20231113131844.1e590785@devstation.samdom.example.com>
-In-Reply-To: <20231113131844.1e590785@devstation.samdom.example.com>
-Date: Mon, 13 Nov 2023 14:24:24 +0100
-Message-ID: <CAOGObpi518QAHT61=NRBfNuyfCKT8+TV7Rf+Y0EX2YzCp5eqzA@mail.gmail.com>
+ <CAOGObpi518QAHT61=NRBfNuyfCKT8+TV7Rf+Y0EX2YzCp5eqzA@mail.gmail.com>
+In-Reply-To: <CAOGObpi518QAHT61=NRBfNuyfCKT8+TV7Rf+Y0EX2YzCp5eqzA@mail.gmail.com>
+Date: Mon, 13 Nov 2023 14:35:26 +0100
+Message-ID: <CAOGObpiU49+z0cQvvpqTZ5aW1ozzpKxz6x4GDeCx+iVwArAoeA@mail.gmail.com>
 Subject: Re: Audit log dsdb_group_json_audit with with "userSid": "S-1-5-18"
 To: "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>
 Content-Type: text/plain; charset="UTF-8"
@@ -81,36 +82,56 @@ Reply-To: Cristian Galvani <galvani.cristian@gmail.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-wbinfo -s S-1-5-18
-produces as expected:
-NT Authority\SYSTEM 5
+Problem found (I hope)
+The first thing is that is not a real problem, it a "samba-tool domain
+tombstones expunge" for testing in console I did "samba-tool domain
+tombstones expunge --tombstone-lifetime=10" and the output is the same of
+my first post
 
-what I can't understand is the origin of these activities that don't really
-exist ;(
+Il giorno lun 13 nov 2023 alle ore 14:24 Cristian Galvani <
+galvani.cristian@gmail.com> ha scritto:
 
-
-
-Il giorno lun 13 nov 2023 alle ore 14:19 Rowland Penny via samba-technical <
-samba-technical@lists.samba.org> ha scritto:
-
-> On Mon, 13 Nov 2023 14:04:51 +0100
-> Cristian Galvani via samba-technical <samba-technical@lists.samba.org>
-> wrote:
->
-> > Right,
-> > is mapped to  'NT Authority\SYSTEM'
-> > Samba version 4.16.11 on all DCs
-> >
->
-> Strange, there was a problem where 'S-1-5-18' didn't get mapped, but I
-> thought it had been fixed.
->
-> If you run 'wbinfo -s S-1-5-18', does it produce this output:
->
+> wbinfo -s S-1-5-18
+> produces as expected:
 > NT Authority\SYSTEM 5
 >
-> Rowland
+> what I can't understand is the origin of these activities that don't
+> really exist ;(
 >
 >
 >
+> Il giorno lun 13 nov 2023 alle ore 14:19 Rowland Penny via samba-technical
+> <samba-technical@lists.samba.org> ha scritto:
 >
+>> On Mon, 13 Nov 2023 14:04:51 +0100
+>> Cristian Galvani via samba-technical <samba-technical@lists.samba.org>
+>> wrote:
+>>
+>> > Right,
+>> > is mapped to  'NT Authority\SYSTEM'
+>> > Samba version 4.16.11 on all DCs
+>> >
+>>
+>> Strange, there was a problem where 'S-1-5-18' didn't get mapped, but I
+>> thought it had been fixed.
+>>
+>> If you run 'wbinfo -s S-1-5-18', does it produce this output:
+>>
+>> NT Authority\SYSTEM 5
+>>
+>> Rowland
+>>
+>>
+>>
+>>
+>
+>
+>
+
+-- 
+_______________________
+
+Via Bruno Buozzi 24 - 43126 Parma (PR)
+Cell: +39.339.2612261
+M@il: galvani.cristian@gmail.com
+_______________________
