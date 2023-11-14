@@ -2,50 +2,65 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 870B57EACCB
-	for <lists+samba-technical@lfdr.de>; Tue, 14 Nov 2023 10:16:14 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3A71D7EAD07
+	for <lists+samba-technical@lfdr.de>; Tue, 14 Nov 2023 10:31:26 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=+eVqhQS2GDz51Zw6xoF3463FXyU8BtJdFkm6NGoCyoE=; b=slZqDZW5JW3f9eRNLBnQOTqESK
-	PSUt4b8+sf5wOIhPk6KpjezY0D9uh5+FCuxYBOh0JiuR/I4tfeMk18TuPGFidAuH+sm2uFar4llpM
-	c1VogaLUhKuJjSpM3fs7MoJ7nPfblRWNYDKSGNRj3t2cqQxeVFd3D7XgrtT/01AtNXq8hVaP4XC2e
-	MX6zEmibx/Tsv4BUD6AHDEjzCtJjO4IUOwdG8EMDJWAZ1RNSGpTalHx5k/Ec71OJ6rZYeGmx/Vnbs
-	N/0ETlhbBrtt5XMgJYVb6WHARXcJBgbGZ+exwoJHlfrZqjC1hbcW3H2I0EKukGGZPH/hdZZaIZjQM
-	8TpEahig==;
-Received: from ip6-localhost ([::1]:39506 helo=hr1.samba.org) 
+	bh=7XAI842gwqpuCzETH/OJU9CSZeCdWRjR5wNnGkWZgBY=; b=fe/bT1+9tdJFl84OScxBZ8/CAO
+	u3CXhh0R4/XVan2HQ+IaKqLLw5ZKXodtgPXbB182TTpCUhy1k2LUtjur/oONJRdLsAlXun+T5t9Us
+	Z/XiY/F9n+yXfAKZ5pM71pjWWi5+ekMsR2cQ4UAtqACfpNbNR63ZS0Vmut7VyKuGWjYTCX0abrV+A
+	WT0uKW4bLThg0FAVPlh3c0v/z3oA5Pqkefda92+sl5RkZ3xUCuDo0wOQktYhjbExYgNgxmUXF0t1u
+	EOn6n43G31i2jLVUumCtJz1XcbNmpi99330ig6ogi+3b5RsX5ydlv8FvHX9SDRPxLRTqb2kZE5P5u
+	Hd/wkyhg==;
+Received: from ip6-localhost ([::1]:32812 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1r2pWK-008D1F-6P; Tue, 14 Nov 2023 09:15:44 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:43908) 
+	id 1r2plC-008DJf-O2; Tue, 14 Nov 2023 09:31:06 +0000
+Received: from mail-pg1-x536.google.com ([2607:f8b0:4864:20::536]:56689) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1r2pW1-008D16-GA
- for samba-technical@lists.samba.org; Tue, 14 Nov 2023 09:15:29 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=From:Cc:To:Date:Message-ID;
- bh=+eVqhQS2GDz51Zw6xoF3463FXyU8BtJdFkm6NGoCyoE=; b=D/evhWzcoCMq8hXfEnDDYCmWdZ
- PpTxZZg8MMtbpUDU7oOaCcY4Bu1VxuJQEw2BlDOYiGbD0RHmUMHiE3xjEPPlcvo8qatcQ5YC0yZfr
- kluW789jAL3TQa6PiSO6dR+k8QO4evx1fPEB7j5433ZXAEWzVZbskG86c5NokeLNJTGwRc6OBxguj
- IAEGY4H45/42m2z3L8ZWpGtq9WinhIQlUMNuoFoYuAf9R1Y2irntY5qyTyKPNytqf6Q3+5QRwt0fr
- CizQ7X8EANvZVd82h0Sh8cfkAG+mQUKxrvgsG5e7OJ3fGE8huo52ZwdvyYLPyEjfl6JU8A0gp4MAd
- Mi7FfRWV63nqQkz6GYNUdzVlmo7e5NEfZlvg76NdrRxgaNaNrWIJQTwMY9Tdefph5eE0M8RhV6Mox
- zu2HGaPmV9njp3fiObHKtIyd66NX9wVfFiLso7DFkg8ZYUK7AnBu/eUbUcPbDk5UsrYW2wqJ2aZz4
- UpcF5aCppkRykvtkXKhGvsJ9;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1r2pVw-0065Cc-2F; Tue, 14 Nov 2023 09:15:20 +0000
-Message-ID: <e6bd562a-296c-44f2-8164-8a90d98fa6e2@samba.org>
-Date: Tue, 14 Nov 2023 10:14:11 +0100
+ (Exim) id 1r2pl3-008DJW-D0
+ for samba-technical@lists.samba.org; Tue, 14 Nov 2023 09:31:01 +0000
+Received: by mail-pg1-x536.google.com with SMTP id
+ 41be03b00d2f7-5c18a3387f5so1189955a12.1
+ for <samba-technical@lists.samba.org>; Tue, 14 Nov 2023 01:30:56 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1699954255; x=1700559055; darn=lists.samba.org;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=7XAI842gwqpuCzETH/OJU9CSZeCdWRjR5wNnGkWZgBY=;
+ b=AvN7z6BJ7tTO9gN9mGomYHLFEFugeyO7si03GGWGE0sFltvPHmf6yYu5zwjx9XoNOh
+ 8dYVOBHz4B6n0usIeaUjLYJJ7iME0RzAzLMSqfZDCKavowoe4QPUn3Egs7CTefGwk9ih
+ 0mIoGp3Vn98WkgoQlM363xZeVVrzWjyR6J0VF0UrnbywvtU4S9Siho0sk7EaXfX3fkcX
+ Wxtqf73K8PlDt1ddnwXu4qDetbf8btBSGZ/nUt5+WmZt4insMJHWEo/pLJTmw4+yb9CE
+ qFlIpjAxkeWjrlWcHS1muy5bJ7E4gmX5+KtTHF0qnKZwq/WBpfkYI2CnronnBuPL9O1y
+ epxQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1699954255; x=1700559055;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=7XAI842gwqpuCzETH/OJU9CSZeCdWRjR5wNnGkWZgBY=;
+ b=LL+qBA4OeJV5r1XUWWNfmVtAtUgCp1gRP6rhzBoK6TB0qDVehNUC15qxbuBBs4BSS7
+ JEujPdJ6ikk2/XaJSBiGGrBq0t5DQN73zCiDKPnek9D5FtMdyBK+P+lOjlO7uiALVAX9
+ vkveNLsP4xBGZ5nuVl4yUY3n2YY0BA1MlT0BA3wiElDLgPXG4z0h/Pm9evgn9Zpvyxj/
+ jL0ZrXBf1iOypvYif688nZPLF2nk7HKUcUMvAUFZXUm9qf5l1K7d4ui4yMPkhLzxmDIW
+ fhNXqYBgjIvOkX3988LHTzzEwzQPJOwCEyYSorGw0oosR3q+tnXLuHjDUn/DizxCKw7r
+ 5M+g==
+X-Gm-Message-State: AOJu0YwCZ76QL7IMIIaj4LqhKt2xAooJnyYFkPlxw1DsEQ2JO/YF+RCQ
+ iAeZXIa3xZsFk5yHSwv+Hx0CmbH7js43HnR2M5A=
+X-Google-Smtp-Source: AGHT+IE0zX0kETdGX8Da/Y9I93FpGR+TNJPf6E4U7ockmteQDGqxwKfONUN1zwM5zc87YVczxijE2ucHFOWSEVdSCMA=
+X-Received: by 2002:a17:90b:3b83:b0:280:cc73:4c79 with SMTP id
+ pc3-20020a17090b3b8300b00280cc734c79mr6477719pjb.7.1699954254777; Tue, 14 Nov
+ 2023 01:30:54 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [SMB3POSIX] File attributes
-Content-Language: en-US, de-DE
-To: Jeremy Allison <jra@samba.org>, Steve French <smfrench@gmail.com>
 References: <e916bdea-4197-4372-a15b-cea41c8ebe03@samba.org>
  <ZVJh3X9GQ5L9mLS0@jeremy-HP-Z840-Workstation>
-In-Reply-To: <ZVJh3X9GQ5L9mLS0@jeremy-HP-Z840-Workstation>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------YoLkZwK0QDMy6uw0YGG8UOim"
+ <e6bd562a-296c-44f2-8164-8a90d98fa6e2@samba.org>
+In-Reply-To: <e6bd562a-296c-44f2-8164-8a90d98fa6e2@samba.org>
+Date: Tue, 14 Nov 2023 19:30:43 +1000
+Message-ID: <CAN05THS4H1+vHuPSnRQmiRtDDpnw3j0PUUJi6FwFZf_2zrAsRQ@mail.gmail.com>
+Subject: Re: [SMB3POSIX] File attributes
+To: Ralph Boehme <slow@samba.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,73 +74,53 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Ralph Boehme <slow@samba.org>
-Cc: Tom Talpey <tom@talpey.com>, Volker Lendecke <vl@samba.org>,
- Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
+From: ronnie sahlberg via samba-technical <samba-technical@lists.samba.org>
+Reply-To: ronnie sahlberg <ronniesahlberg@gmail.com>
+Cc: Tom Talpey <tom@talpey.com>, Steve French <smfrench@gmail.com>,
+ Ralph Boehme via samba-technical <samba-technical@lists.samba.org>,
+ Volker Lendecke <vl@samba.org>, Jeremy Allison <jra@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------YoLkZwK0QDMy6uw0YGG8UOim
-Content-Type: multipart/mixed; boundary="------------Thyi7o4HppQZ577KsV0vRnzi";
- protected-headers="v1"
-From: Ralph Boehme <slow@samba.org>
-To: Jeremy Allison <jra@samba.org>, Steve French <smfrench@gmail.com>
-Cc: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>,
- Tom Talpey <tom@talpey.com>, Volker Lendecke <vl@samba.org>
-Message-ID: <e6bd562a-296c-44f2-8164-8a90d98fa6e2@samba.org>
-Subject: Re: [SMB3POSIX] File attributes
-References: <e916bdea-4197-4372-a15b-cea41c8ebe03@samba.org>
- <ZVJh3X9GQ5L9mLS0@jeremy-HP-Z840-Workstation>
-In-Reply-To: <ZVJh3X9GQ5L9mLS0@jeremy-HP-Z840-Workstation>
+On Tue, 14 Nov 2023 at 19:16, Ralph Boehme via samba-technical
+<samba-technical@lists.samba.org> wrote:
+>
+> On 11/13/23 18:50, Jeremy Allison wrote:
+> > On Mon, Nov 13, 2023 at 12:28:18PM +0100, Ralph Boehme wrote:
+> >> We had support for file atttributes in the CIFS UNIX extensions, this
+> >> is currently not in the spec (or code) for SMB3 POSIX.
+> >>
+> >> Is this intentional? What is the reason?
+> >
+> > Do you mean the attributes listed by:
+> >
+> > man chattr.
+>
+> yes.
+>
+> > chattr - change file attributes on a Linux file system
+> >
+> > This was at the insitence of Steve as I recall.
+>
+> adding Steve to the loop.
+>
+> > We never implemented this.
+> >
+> > Might be done via a tunnelling ioctl ? Other thoughts ?
+>
+> well, it's a rabbit hole of its own and still seem to be rarely used on
+> Linux and the BSDs. It's not POSIX anyway so just declare it out of
+> scope for now?
 
---------------Thyi7o4HppQZ577KsV0vRnzi
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
+Not to derail, but "chattr +i" is not a rabbithole. It is very much real.
+If you are going to set up and run bind locally on a systemd-resolved
+infected system
+you literally must use chattr +i to stop it from ruining your /etc/resolv.conf
 
-T24gMTEvMTMvMjMgMTg6NTAsIEplcmVteSBBbGxpc29uIHdyb3RlOg0KPiBPbiBNb24sIE5v
-diAxMywgMjAyMyBhdCAxMjoyODoxOFBNICswMTAwLCBSYWxwaCBCb2VobWUgd3JvdGU6DQo+
-PiBXZSBoYWQgc3VwcG9ydCBmb3IgZmlsZSBhdHR0cmlidXRlcyBpbiB0aGUgQ0lGUyBVTklY
-IGV4dGVuc2lvbnMsIHRoaXMgDQo+PiBpcyBjdXJyZW50bHkgbm90IGluIHRoZSBzcGVjIChv
-ciBjb2RlKSBmb3IgU01CMyBQT1NJWC4NCj4+DQo+PiBJcyB0aGlzIGludGVudGlvbmFsPyBX
-aGF0IGlzIHRoZSByZWFzb24/DQo+IA0KPiBEbyB5b3UgbWVhbiB0aGUgYXR0cmlidXRlcyBs
-aXN0ZWQgYnk6DQo+IA0KPiBtYW4gY2hhdHRyLg0KDQp5ZXMuDQoNCj4gY2hhdHRyIC0gY2hh
-bmdlIGZpbGUgYXR0cmlidXRlcyBvbiBhIExpbnV4IGZpbGUgc3lzdGVtDQo+IA0KPiBUaGlz
-IHdhcyBhdCB0aGUgaW5zaXRlbmNlIG9mIFN0ZXZlIGFzIEkgcmVjYWxsLg0KDQphZGRpbmcg
-U3RldmUgdG8gdGhlIGxvb3AuDQoNCj4gV2UgbmV2ZXIgaW1wbGVtZW50ZWQgdGhpcy4NCj4g
-DQo+IE1pZ2h0IGJlIGRvbmUgdmlhIGEgdHVubmVsbGluZyBpb2N0bCA/IE90aGVyIHRob3Vn
-aHRzID8NCg0Kd2VsbCwgaXQncyBhIHJhYmJpdCBob2xlIG9mIGl0cyBvd24gYW5kIHN0aWxs
-IHNlZW0gdG8gYmUgcmFyZWx5IHVzZWQgb24gDQpMaW51eCBhbmQgdGhlIEJTRHMuIEl0J3Mg
-bm90IFBPU0lYIGFueXdheSBzbyBqdXN0IGRlY2xhcmUgaXQgb3V0IG9mIA0Kc2NvcGUgZm9y
-IG5vdz8NCg0KVGhlIExpbnV4IGludGVyZmFjZSBpcyB2aWEgaW9jdGxzIHNvIGRvaW5nIGl0
-IG92ZXIgdGhlIHdpcmUgdmlhIFNNQjIgDQpJT0NUTHMgbG9va3MgbGlrZSBhIGdvb2Qgd2F5
-IGZvcndhcmQgYWxsb3dpbmcgdXMgdG8gaWdub3JlIHRoaXMgZm9yIG5vdyANCmFuZCBwb3Nz
-aWJseSBhZGQgaXQgbGF0ZXIgaWYgdGhlcmUncyBkZW1hbmQgYW5kIHJlc291cmNlcyB0byBp
-bXBsZW1lbnQgaXQuDQoNCi1zbG93DQo=
-
---------------Thyi7o4HppQZ577KsV0vRnzi--
-
---------------YoLkZwK0QDMy6uw0YGG8UOim
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-wsF5BAABCAAjFiEE+uLGCIokJSBRxVnkqh6bcSY5nkYFAmVTOmMFAwAAAAAACgkQqh6bcSY5nkZp
-IQ//UagROhg18acryVQmHXxI+6Sr+XgpEgwkPoZzfmdfZVpNsiiKTTlV80HBOjBqw4jGglE3n+aF
-gbmntpLqQYqptZnKyCnTwv60FFnj7eHCw5J2VCCg05LHHYkrBd3gTCtaRBuoo3Guy00CD8bFR206
-3eYhThluF4xQFIAaHklVtON7OGBU+fG2JillL4xAKJmMxZYFlN6EX1aFV2gN1+eVaLXhDwtaBoo9
-7SC3bfRthNj/djQFS+4zp8lga90cJDJLHXjzRseHrOkn1yoDOCQMorA22MWvJzMCg0w5xt6QBY+w
-e/HX2Vv6r8myQoPRLs5YrAahq5OKU5rTvHFApBG5WXjAp8VhNBdHafYMuHAVGHyJEKIkEfLvE8B8
-6L0a8Ej2z0fu/KG02RPx69wA9OQe3ZV2tKpHwP18ot3Sc+dv2luEVlZb3GxN+p6lb6yx+2SA1HyO
-giFx7JG7vo94lBzkOxsrxTfunLIjGG/CJU4Smj4Vhcp8HyzuMAQlO1BmhImAl4/j3ahvrVWw07Bx
-h8rCNLNs9P2276uROiSSSVhn952KL5nn3lVyb7uzs0eUPfT0PIIGqlGw1TLKTCuDzZ6b/3WlYHeN
-/HiHj0azI09S50o1lrxKxIeeNepmtYahJXW1Yma8he7QOH7xFbEolNLDsYxJOcvgR5/keTZoUIPt
-RgQ=
-=xVtQ
------END PGP SIGNATURE-----
-
---------------YoLkZwK0QDMy6uw0YGG8UOim--
+>
+> The Linux interface is via ioctls so doing it over the wire via SMB2
+> IOCTLs looks like a good way forward allowing us to ignore this for now
+> and possibly add it later if there's demand and resources to implement it.
+>
+> -slow
 
