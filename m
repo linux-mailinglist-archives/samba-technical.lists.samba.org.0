@@ -2,66 +2,50 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id D09387EA60D
-	for <lists+samba-technical@lfdr.de>; Mon, 13 Nov 2023 23:24:02 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 870B57EACCB
+	for <lists+samba-technical@lfdr.de>; Tue, 14 Nov 2023 10:16:14 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=z2WWxIDUsdHp0wXasuKRqlZ64Nw6Dyphc54R0vg6D9Y=; b=2kD2HuGO7V1UYK85soxSDOYf24
-	XsM06OhnBZMp/OGjg4YuR3Hj1vU18LU26GiW0Kx1DUPAXekvlJJ5urEoviyrfVY+qcDo9/xukNXBC
-	Ckrc8OVds2sB1oUa3hcw8YNodY7P/sbUmrN79Ck+dsm94iWQDaJQ2A4miYMatfks+2v5TZAyApsf9
-	vSeE1vU9v2Ta6josUEkLLMX4Nf6S2/4qjjMaAuhISxmg1RYf2bwCAygkz7ai8sHdH4u82qwHd84Sr
-	ejgjAHhCieUrjOwMwl8DiibOzWpIGlSkULXtrKRCJ3SAgSKTvKOL7xScqdS9qkZ4/KZ2Nq8e2RYDS
-	4mCzCbpg==;
-Received: from ip6-localhost ([::1]:32634 helo=hr1.samba.org) 
+	bh=+eVqhQS2GDz51Zw6xoF3463FXyU8BtJdFkm6NGoCyoE=; b=slZqDZW5JW3f9eRNLBnQOTqESK
+	PSUt4b8+sf5wOIhPk6KpjezY0D9uh5+FCuxYBOh0JiuR/I4tfeMk18TuPGFidAuH+sm2uFar4llpM
+	c1VogaLUhKuJjSpM3fs7MoJ7nPfblRWNYDKSGNRj3t2cqQxeVFd3D7XgrtT/01AtNXq8hVaP4XC2e
+	MX6zEmibx/Tsv4BUD6AHDEjzCtJjO4IUOwdG8EMDJWAZ1RNSGpTalHx5k/Ec71OJ6rZYeGmx/Vnbs
+	N/0ETlhbBrtt5XMgJYVb6WHARXcJBgbGZ+exwoJHlfrZqjC1hbcW3H2I0EKukGGZPH/hdZZaIZjQM
+	8TpEahig==;
+Received: from ip6-localhost ([::1]:39506 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1r2fLZ-0089u0-Rz; Mon, 13 Nov 2023 22:23:57 +0000
-Received: from mail-lf1-x129.google.com ([2a00:1450:4864:20::129]:51585) 
+	id 1r2pWK-008D1F-6P; Tue, 14 Nov 2023 09:15:44 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:43908) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1r2fLO-0089q0-H7
- for samba-technical@lists.samba.org; Mon, 13 Nov 2023 22:23:52 +0000
-Received: by mail-lf1-x129.google.com with SMTP id
- 2adb3069b0e04-507bd644a96so7117082e87.3
- for <samba-technical@lists.samba.org>; Mon, 13 Nov 2023 14:23:46 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1699914225; x=1700519025; darn=lists.samba.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=z2WWxIDUsdHp0wXasuKRqlZ64Nw6Dyphc54R0vg6D9Y=;
- b=CAH7a/WXhqmatr4rbtzErJNbOLMyfmX1zj84olUpXy5Md0y0WTJ3S7JMKJi/zrx/Hq
- EhSdzFq7Rf5Yqn+m7h23jypYKK0A5tPFJ9fEXJluePkz1ldywaHaoTGg/b1UD7Fkucsg
- Tkb6ZBBkfBbnOYKGHSOJEwM27Y4AboUzgioe/F2PWWQqJB9Dr/XwudqYHVbo5FTr1GRG
- RSBG683SzjBUyNlyH3oCxqhc+WpxA6/El4bjreqczgJS3vOiZ76opFksnpUZKT7h7eUz
- LSkZjuatSgBpvFaCoD2UDs2dQAd4RKmRAEBSkomIt4hWmRd1BaDWtM5F3QlHnKlFwRoe
- O2wg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699914225; x=1700519025;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=z2WWxIDUsdHp0wXasuKRqlZ64Nw6Dyphc54R0vg6D9Y=;
- b=P5CWfEdq+TsCudcmPrwjQQUO716Na1vTxYzQgXnPlNrvkRmrddKzMznmYIapI4/ApV
- nJYGc4WvfP17HgmhWRs80pfDH0Txxq+6Dzdpvm8TQuMMpELlnX6EKCPjlh+lGwJe0abK
- YZvvPmsjbtZzisk/gVb3lD6CECq0LN/J4ctYQuNlmLL3Mpm9itsFmWQEhNCeVZtnsACO
- dNot/t8s80A7bWd8UL2GxWBmSo6QcZdQG07lNRrh3B8jz/LypkynA+sAU6UlUVlYa1m0
- DYA1J9/611Unc9/4CnbFKcmhkvgsJ04RdbKjzVKCvgS633PTUGtr6b7PVO2GC4cG78sp
- Pquw==
-X-Gm-Message-State: AOJu0YzSNpFsoT/q4tKFaOuWwZJCvlXI2gCV6a5upYatHIG5qdQnl3ol
- MqvXecke/lVfFK7IEjbHEXXcwhXr/TcavfbOoZ4=
-X-Google-Smtp-Source: AGHT+IHcKruz1Vla5I9USOC6Qahqw9agqD2FOZVIx06sXye6LIqqJxk5vOu+344DzzDXRF93Ba1LsdoyD0BQJ/gVvWo=
-X-Received: by 2002:a05:6512:238b:b0:50a:7575:1339 with SMTP id
- c11-20020a056512238b00b0050a75751339mr5952741lfv.18.1699914225580; Mon, 13
- Nov 2023 14:23:45 -0800 (PST)
+ (Exim) id 1r2pW1-008D16-GA
+ for samba-technical@lists.samba.org; Tue, 14 Nov 2023 09:15:29 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=From:Cc:To:Date:Message-ID;
+ bh=+eVqhQS2GDz51Zw6xoF3463FXyU8BtJdFkm6NGoCyoE=; b=D/evhWzcoCMq8hXfEnDDYCmWdZ
+ PpTxZZg8MMtbpUDU7oOaCcY4Bu1VxuJQEw2BlDOYiGbD0RHmUMHiE3xjEPPlcvo8qatcQ5YC0yZfr
+ kluW789jAL3TQa6PiSO6dR+k8QO4evx1fPEB7j5433ZXAEWzVZbskG86c5NokeLNJTGwRc6OBxguj
+ IAEGY4H45/42m2z3L8ZWpGtq9WinhIQlUMNuoFoYuAf9R1Y2irntY5qyTyKPNytqf6Q3+5QRwt0fr
+ CizQ7X8EANvZVd82h0Sh8cfkAG+mQUKxrvgsG5e7OJ3fGE8huo52ZwdvyYLPyEjfl6JU8A0gp4MAd
+ Mi7FfRWV63nqQkz6GYNUdzVlmo7e5NEfZlvg76NdrRxgaNaNrWIJQTwMY9Tdefph5eE0M8RhV6Mox
+ zu2HGaPmV9njp3fiObHKtIyd66NX9wVfFiLso7DFkg8ZYUK7AnBu/eUbUcPbDk5UsrYW2wqJ2aZz4
+ UpcF5aCppkRykvtkXKhGvsJ9;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1r2pVw-0065Cc-2F; Tue, 14 Nov 2023 09:15:20 +0000
+Message-ID: <e6bd562a-296c-44f2-8164-8a90d98fa6e2@samba.org>
+Date: Tue, 14 Nov 2023 10:14:11 +0100
 MIME-Version: 1.0
-References: <20231113145232.12448-1-abelova@astralinux.ru>
- <05bfafca49fbed96ea500c25a0606205.pc@manguebit.com>
-In-Reply-To: <05bfafca49fbed96ea500c25a0606205.pc@manguebit.com>
-Date: Mon, 13 Nov 2023 16:23:34 -0600
-Message-ID: <CAH2r5mv+ntKVtzx+9ooYPJna7R0=ovsZid9EghwW3pzi5G4+Xg@mail.gmail.com>
-Subject: Re: [PATCH] cifs: spnego: add ';' in HOST_KEY_LEN
-To: Paulo Alcantara <pc@manguebit.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [SMB3POSIX] File attributes
+Content-Language: en-US, de-DE
+To: Jeremy Allison <jra@samba.org>, Steve French <smfrench@gmail.com>
+References: <e916bdea-4197-4372-a15b-cea41c8ebe03@samba.org>
+ <ZVJh3X9GQ5L9mLS0@jeremy-HP-Z840-Workstation>
+In-Reply-To: <ZVJh3X9GQ5L9mLS0@jeremy-HP-Z840-Workstation>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------YoLkZwK0QDMy6uw0YGG8UOim"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -75,44 +59,73 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
-Cc: Tom Talpey <tom@talpey.com>, Shyam Prasad N <sprasad@microsoft.com>,
- lvc-project@linuxtesting.org, linux-cifs@vger.kernel.org,
- samba-technical@lists.samba.org, Jeff Layton <jlayton@kernel.org>,
- linux-kernel@vger.kernel.org, Ronnie Sahlberg <lsahlber@redhat.com>,
- Steve French <sfrench@samba.org>, Ekaterina Esina <eesina@astralinux.ru>,
- Anastasia Belova <abelova@astralinux.ru>
+From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Ralph Boehme <slow@samba.org>
+Cc: Tom Talpey <tom@talpey.com>, Volker Lendecke <vl@samba.org>,
+ Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Tentatively merged into cifs-2.6.git for-next pending testing
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------YoLkZwK0QDMy6uw0YGG8UOim
+Content-Type: multipart/mixed; boundary="------------Thyi7o4HppQZ577KsV0vRnzi";
+ protected-headers="v1"
+From: Ralph Boehme <slow@samba.org>
+To: Jeremy Allison <jra@samba.org>, Steve French <smfrench@gmail.com>
+Cc: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>,
+ Tom Talpey <tom@talpey.com>, Volker Lendecke <vl@samba.org>
+Message-ID: <e6bd562a-296c-44f2-8164-8a90d98fa6e2@samba.org>
+Subject: Re: [SMB3POSIX] File attributes
+References: <e916bdea-4197-4372-a15b-cea41c8ebe03@samba.org>
+ <ZVJh3X9GQ5L9mLS0@jeremy-HP-Z840-Workstation>
+In-Reply-To: <ZVJh3X9GQ5L9mLS0@jeremy-HP-Z840-Workstation>
 
-On Mon, Nov 13, 2023 at 12:11=E2=80=AFPM Paulo Alcantara <pc@manguebit.com>=
- wrote:
->
-> Anastasia Belova <abelova@astralinux.ru> writes:
->
-> > "host=3D" should start with ';' (as in cifs_get_spnego_key)
-> > So its length should be 6.
-> >
-> > Found by Linux Verification Center (linuxtesting.org) with SVACE.
-> >
-> > Fixes: 7c9c3760b3a5 ("[CIFS] add constants for string lengths of keynam=
-es in SPNEGO upcall string")
-> > Signed-off-by: Anastasia Belova <abelova@astralinux.ru>
-> > Co-developed-by: Ekaterina Esina <eesina@astralinux.ru>
-> > Signed-off-by: Ekaterina Esina <eesina@astralinux.ru>
-> > ---
-> >  fs/smb/client/cifs_spnego.c | 4 ++--
-> >  1 file changed, 2 insertions(+), 2 deletions(-)
->
-> Reviewed-by: Paulo Alcantara (SUSE) <pc@manguebit.com>
->
+--------------Thyi7o4HppQZ577KsV0vRnzi
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
 
+T24gMTEvMTMvMjMgMTg6NTAsIEplcmVteSBBbGxpc29uIHdyb3RlOg0KPiBPbiBNb24sIE5v
+diAxMywgMjAyMyBhdCAxMjoyODoxOFBNICswMTAwLCBSYWxwaCBCb2VobWUgd3JvdGU6DQo+
+PiBXZSBoYWQgc3VwcG9ydCBmb3IgZmlsZSBhdHR0cmlidXRlcyBpbiB0aGUgQ0lGUyBVTklY
+IGV4dGVuc2lvbnMsIHRoaXMgDQo+PiBpcyBjdXJyZW50bHkgbm90IGluIHRoZSBzcGVjIChv
+ciBjb2RlKSBmb3IgU01CMyBQT1NJWC4NCj4+DQo+PiBJcyB0aGlzIGludGVudGlvbmFsPyBX
+aGF0IGlzIHRoZSByZWFzb24/DQo+IA0KPiBEbyB5b3UgbWVhbiB0aGUgYXR0cmlidXRlcyBs
+aXN0ZWQgYnk6DQo+IA0KPiBtYW4gY2hhdHRyLg0KDQp5ZXMuDQoNCj4gY2hhdHRyIC0gY2hh
+bmdlIGZpbGUgYXR0cmlidXRlcyBvbiBhIExpbnV4IGZpbGUgc3lzdGVtDQo+IA0KPiBUaGlz
+IHdhcyBhdCB0aGUgaW5zaXRlbmNlIG9mIFN0ZXZlIGFzIEkgcmVjYWxsLg0KDQphZGRpbmcg
+U3RldmUgdG8gdGhlIGxvb3AuDQoNCj4gV2UgbmV2ZXIgaW1wbGVtZW50ZWQgdGhpcy4NCj4g
+DQo+IE1pZ2h0IGJlIGRvbmUgdmlhIGEgdHVubmVsbGluZyBpb2N0bCA/IE90aGVyIHRob3Vn
+aHRzID8NCg0Kd2VsbCwgaXQncyBhIHJhYmJpdCBob2xlIG9mIGl0cyBvd24gYW5kIHN0aWxs
+IHNlZW0gdG8gYmUgcmFyZWx5IHVzZWQgb24gDQpMaW51eCBhbmQgdGhlIEJTRHMuIEl0J3Mg
+bm90IFBPU0lYIGFueXdheSBzbyBqdXN0IGRlY2xhcmUgaXQgb3V0IG9mIA0Kc2NvcGUgZm9y
+IG5vdz8NCg0KVGhlIExpbnV4IGludGVyZmFjZSBpcyB2aWEgaW9jdGxzIHNvIGRvaW5nIGl0
+IG92ZXIgdGhlIHdpcmUgdmlhIFNNQjIgDQpJT0NUTHMgbG9va3MgbGlrZSBhIGdvb2Qgd2F5
+IGZvcndhcmQgYWxsb3dpbmcgdXMgdG8gaWdub3JlIHRoaXMgZm9yIG5vdyANCmFuZCBwb3Nz
+aWJseSBhZGQgaXQgbGF0ZXIgaWYgdGhlcmUncyBkZW1hbmQgYW5kIHJlc291cmNlcyB0byBp
+bXBsZW1lbnQgaXQuDQoNCi1zbG93DQo=
 
---=20
-Thanks,
+--------------Thyi7o4HppQZ577KsV0vRnzi--
 
-Steve
+--------------YoLkZwK0QDMy6uw0YGG8UOim
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+wsF5BAABCAAjFiEE+uLGCIokJSBRxVnkqh6bcSY5nkYFAmVTOmMFAwAAAAAACgkQqh6bcSY5nkZp
+IQ//UagROhg18acryVQmHXxI+6Sr+XgpEgwkPoZzfmdfZVpNsiiKTTlV80HBOjBqw4jGglE3n+aF
+gbmntpLqQYqptZnKyCnTwv60FFnj7eHCw5J2VCCg05LHHYkrBd3gTCtaRBuoo3Guy00CD8bFR206
+3eYhThluF4xQFIAaHklVtON7OGBU+fG2JillL4xAKJmMxZYFlN6EX1aFV2gN1+eVaLXhDwtaBoo9
+7SC3bfRthNj/djQFS+4zp8lga90cJDJLHXjzRseHrOkn1yoDOCQMorA22MWvJzMCg0w5xt6QBY+w
+e/HX2Vv6r8myQoPRLs5YrAahq5OKU5rTvHFApBG5WXjAp8VhNBdHafYMuHAVGHyJEKIkEfLvE8B8
+6L0a8Ej2z0fu/KG02RPx69wA9OQe3ZV2tKpHwP18ot3Sc+dv2luEVlZb3GxN+p6lb6yx+2SA1HyO
+giFx7JG7vo94lBzkOxsrxTfunLIjGG/CJU4Smj4Vhcp8HyzuMAQlO1BmhImAl4/j3ahvrVWw07Bx
+h8rCNLNs9P2276uROiSSSVhn952KL5nn3lVyb7uzs0eUPfT0PIIGqlGw1TLKTCuDzZ6b/3WlYHeN
+/HiHj0azI09S50o1lrxKxIeeNepmtYahJXW1Yma8he7QOH7xFbEolNLDsYxJOcvgR5/keTZoUIPt
+RgQ=
+=xVtQ
+-----END PGP SIGNATURE-----
+
+--------------YoLkZwK0QDMy6uw0YGG8UOim--
 
