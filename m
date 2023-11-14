@@ -2,51 +2,49 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id EC24F7EAD81
-	for <lists+samba-technical@lfdr.de>; Tue, 14 Nov 2023 11:03:48 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 83B6D7EB0A5
+	for <lists+samba-technical@lfdr.de>; Tue, 14 Nov 2023 14:14:15 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=oEXaGkqZc38m+cNktSahlS3D34vsixJifI4tkOmGk0M=; b=5oR7zQHlddR2pyuZECQ1A5ZRCT
-	rBWfmwG6mYH0GWM9hwTNCnnCMHKIg4TPWqnc6OpZ0KO8/rHnK3cmVnA8viiSeiP1ipvgv+pDoe+Bx
-	e0LHfrQ/fFJWyJH3ciSteUC31VO3hNxUTEBZ+NJyOJ2aMTuMGvdWdqo5aMI9qwL3Wkd1DU2UtBUd6
-	RjaI1mf/fqxjbLNGUkXSWJpB0h1tmFILXpFLWoMNrmxylQcfK1wD9Jp09Vgmh3azfyv2ewB1vol0z
-	xEjvit0S/8KUGBmkNscL4eN+Dcnedr8SYqzEqjuLIsMIq3jynggRoRRnClebMfId/i2+RebiPo4g8
-	3vc9E6lg==;
-Received: from ip6-localhost ([::1]:51650 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=5g1XjnbegEHArtZ3ItMCIJS3T9svKb4Ql/sLaRhAXA4=; b=zb5wkmKGENYgUdKudYgey86PCB
+	YHAJvIAL8tH5uoCE991VZ8MU4KqT66ZkPzCrBR3qnHx5+dDj8ZQdHbJG5nCvfkMA+TKdNXUMLfBBq
+	T1umQMqoqa6eonLqpGIOen/4O4+HkT8cMUIasLakD6zWIBfidtkwEWdu7p6qzVQA1+zpOjKQRFbsf
+	UkNBZ0iv8gEN7kwkhsWaYb0j+CQZvqBCKYvJnucEC+fDpnKxKKe6toZFNtSurOuE7u8MPxIxbMZ8H
+	avzjgWaxgLdW86oQZZmDoh2qHvJoZIVD4+LOeWHdkBfl3Kpa7KydXz5sXLcyDEZSibQlj2xucgLF5
+	Uy0kfdow==;
+Received: from ip6-localhost ([::1]:50712 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1r2qGX-008Dur-F0; Tue, 14 Nov 2023 10:03:29 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:59420) 
+	id 1r2tEP-008GJO-E6; Tue, 14 Nov 2023 13:13:29 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:12150) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1r2qGN-008DmC-Gl
- for samba-technical@lists.samba.org; Tue, 14 Nov 2023 10:03:22 +0000
+ (Exim) id 1r2tEK-008GJF-J0
+ for samba-technical@lists.samba.org; Tue, 14 Nov 2023 13:13:27 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:To:From:Date:CC;
- bh=oEXaGkqZc38m+cNktSahlS3D34vsixJifI4tkOmGk0M=; b=NHZI/lR2RYQzL89UlLGNM4NuNR
- kKeHk92uIAznj1tezu46Tj8Rh5E7KYACgxLwFmEIf52I7D43JSSGUYan7+lH95IMdNx1YUc0yn37m
- x6MF8r8jLn7q7o4oXT7e3cO42/SfiZvzOpNHgx9w2lI+LZ6oMKcud8Zfd4CCtftkdQE/qcw0EpRWo
- ry+9SEdBa99A0Dj5tQhig4/KlUj7TA8IQfHI/Xg7FqWTRmTKpD1BaU0k2E17N8kCDtW/ruQF6ZZH3
- D+Tq5fHvVbNYQrSI5r5SQr6Uif4veWMwSQeJfh/nlPHKKtxPKgvgov03ncECWvy2ob7Yw1oLGx61Y
- dsiXcRY8diEg/JJkHsv0IgKwJjEN0xIoi0/NgYmXvv6V/Ipd0tDDuEK0fIDpkbf4Urp21dnSiNR5u
- dNKUvIar4pXLKayWEUU25YaZhTdNa4DGBiBMJWNKW2AXFYkx1aY1yyULxDwokdVLlsKSSziUxqn5O
- yLqd7DlELIhkiym5tdt77Y9f;
+ s=42; h=Message-ID:Date:Cc:To:From;
+ bh=5g1XjnbegEHArtZ3ItMCIJS3T9svKb4Ql/sLaRhAXA4=; b=Myktl9z5Q75zlSWTB9So+Hn0Zg
+ 0AUF8tb7tk4gK8t+nSQ2mg879nvBjsBQjQUtI9VHF6rFGZnAaprMEFEU1Hs7k2f3DDtL2SiN8BrVg
+ 72OO80T96aZZPI7hp9xlNHYFcqocU0WxNa4pHkbwFqVynhi8onXn+e0TDcRnNp/q7GoCWYGI4Wdci
+ fFpo1QwzhCOWxfXYDEvhLF+4hyxtbmTihDvzKN3O4OjBpxEgrMiYyzjEqFsXz9SWxe8JsWXhhYayu
+ zBslW65fF40KSEJ8vC6Z7Ji9uqlxhAH8coMgAx25xf2kf2oThHwfkDt1bZrtfSkNh9q0K93D0PtuM
+ XMMNaPOuTlfvNTwFw7AW6toCowNYnDDuqxSTJgXAeaj+qI4Q/OvS0aURtEueNNn3XqJzIoJcrlBfP
+ gvVbWbogwkmhaW6snOzpse+bmL3L4eOowEjbheQN3j4VyN9lhcQ7jtBZWhU2XbQb4bIbFNEJWdc6X
+ J+B2OzG3YGmx6J1i/lte24Gi;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1r2qGM-0065fr-2U for samba-technical@lists.samba.org;
- Tue, 14 Nov 2023 10:03:18 +0000
-Date: Tue, 14 Nov 2023 10:03:16 +0000
-To: samba-technical@lists.samba.org
-Subject: Re: [SMB3POSIX] File attributes
-Message-ID: <20231114100316.3445208f@devstation.samdom.example.com>
-In-Reply-To: <CAN05THS4H1+vHuPSnRQmiRtDDpnw3j0PUUJi6FwFZf_2zrAsRQ@mail.gmail.com>
-References: <e916bdea-4197-4372-a15b-cea41c8ebe03@samba.org>
- <ZVJh3X9GQ5L9mLS0@jeremy-HP-Z840-Workstation>
- <e6bd562a-296c-44f2-8164-8a90d98fa6e2@samba.org>
- <CAN05THS4H1+vHuPSnRQmiRtDDpnw3j0PUUJi6FwFZf_2zrAsRQ@mail.gmail.com>
-X-Mailer: Claws Mail 4.1.1 (GTK 3.24.38; x86_64-pc-linux-gnu)
+ (Exim) id 1r2tEE-0067HJ-0h; Tue, 14 Nov 2023 13:13:18 +0000
+To: Martin Schwenke <martin@meltin.net>, samba-technical@lists.samba.org
+Subject: Re: Can we move Samba to C99 and past
+ -Werror=declaration-after-statement ?
+Date: Tue, 14 Nov 2023 14:13:17 +0100
+Message-ID: <5741361.DvuYhMxLoT@magrathea>
+In-Reply-To: <13413c0b-ea94-4cca-9ba8-c431df07517f@samba.org>
+References: <72d8df3ab0c58d2edf7660ad2af79935cb0a48a1.camel@samba.org>
+ <20231110091333.5afa2158@martins.ozlabs.org>
+ <13413c0b-ea94-4cca-9ba8-c431df07517f@samba.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,69 +58,70 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Rowland Penny via samba-technical <samba-technical@lists.samba.org>
-Reply-To: "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>
-Cc: Rowland Penny <rpenny@samba.org>
+From: Andreas Schneider via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andreas Schneider <asn@samba.org>
+Cc: Stefan Metzmacher <metze@samba.org>, Andrew Bartlett <abartlet@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Tue, 14 Nov 2023 19:30:43 +1000
-ronnie sahlberg via samba-technical <samba-technical@lists.samba.org>
+On Friday, 10 November 2023 10:44:23 CET Stefan Metzmacher via samba-technical 
 wrote:
-
-> On Tue, 14 Nov 2023 at 19:16, Ralph Boehme via samba-technical
-> <samba-technical@lists.samba.org> wrote:
-> >
-> > On 11/13/23 18:50, Jeremy Allison wrote:
-> > > On Mon, Nov 13, 2023 at 12:28:18PM +0100, Ralph Boehme wrote:
-> > >> We had support for file atttributes in the CIFS UNIX extensions,
-> > >> this is currently not in the spec (or code) for SMB3 POSIX.
-> > >>
-> > >> Is this intentional? What is the reason?
-> > >
-> > > Do you mean the attributes listed by:
-> > >
-> > > man chattr.
-> >
-> > yes.
-> >
-> > > chattr - change file attributes on a Linux file system
-> > >
-> > > This was at the insitence of Steve as I recall.
-> >
-> > adding Steve to the loop.
-> >
-> > > We never implemented this.
-> > >
-> > > Might be done via a tunnelling ioctl ? Other thoughts ?
-> >
-> > well, it's a rabbit hole of its own and still seem to be rarely
-> > used on Linux and the BSDs. It's not POSIX anyway so just declare
-> > it out of scope for now?
+> Am 09.11.23 um 23:13 schrieb Martin Schwenke via samba-technical:
+> > On Fri, 10 Nov 2023 10:58:04 +1300, Andrew Bartlett via samba-technical
+> > 
+> > <samba-technical@lists.samba.org> wrote:
+> >> Samba chooses to, for it's C style guide, to enforce -
+> >> Werror=declaration-after-statement
+> >> 
+> >> I understand that some prefer the style.
+> >> 
+> >> However C has moved on as a language, and libraries we use (Python 3.12
+> >> in this case) don't compile with it, and we are having to do quite some
+> >> contortions in
+> >> https://gitlab.com/samba-team/samba/-/merge_requests/3373 to build on
+> >> Fedora 39.
+> >> 
+> >> See also discussion at https://bugzilla.samba.org/show_bug.cgi?id=15513
+> >> 
+> >> Can we agree to just remove this requirement?
+> >> 
+> >> It will allow us to keep variables closer to their use, which is
+> >> helpful in a lot of ways, particularly in longer functions.
+> > 
+> > I think that sounds good.  Yes from me.
 > 
-> Not to derail, but "chattr +i" is not a rabbithole. It is very much
-> real. If you are going to set up and run bind locally on a
-> systemd-resolved infected system
-> you literally must use chattr +i to stop it from ruining your
-> /etc/resolv.conf
-
-Ah, no, in my opinion and experience, the best way to stop
-systemd-resolved from altering /etc/resolv.conf, is to remove
-systemd-resolved.
-
-If you have to make a file immutable, then there are problems
-elsewhere.
-
-Rowland
-
+> I'd like to keep -Werror=declaration-after-statement as long as possible.
 > 
-> >
-> > The Linux interface is via ioctls so doing it over the wire via SMB2
-> > IOCTLs looks like a good way forward allowing us to ignore this for
-> > now and possibly add it later if there's demand and resources to
-> > implement it.
-> >
-> > -slow
+> Variables appearing in the middle of a function, particularly in longer
+> functions, are really confusing to me. Thinks like common cleanup via goto
+> would not know of a variable exists yet...
+
+I'm also in favor of having all the variable declarations in one place. We 
+have LSP in the meantime and it is easy to figure out the type of variables.
+ 
+> And every time I saw a patch with the use a declaration in the middle,
+> I immediately thought this would lead to sloppy coding if we would allow
+> that everywhere.
+
+I just checked, at least clangd creates an error for this in neovim:
+
+clang: Variable 'wurst' is used uninitialized whenever 'if' condition is true 
+(fix available)
+
+gcc didn't complain.
+
+> > Can we also please declare for loop variable in the loop?
 > 
+> These would be very useful and I just checked they also work with
+> /opt/IBM/xlC/16.1.0/bin/xlC on AIX.
+> 
+> metze
+
+
+-- 
+Andreas Schneider                      asn@samba.org
+Samba Team                             www.samba.org
+GPG-ID:     8DFF53E18F2ABC8D8F3C92237EE0FC4DCC014E3D
+
 
 
