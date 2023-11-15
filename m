@@ -2,55 +2,56 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id C3FF57EB59B
-	for <lists+samba-technical@lfdr.de>; Tue, 14 Nov 2023 18:36:47 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D61377EBA8D
+	for <lists+samba-technical@lfdr.de>; Wed, 15 Nov 2023 01:23:22 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=w/kYGtZVxAAqj3CV+OoIlNpo3Z/WNsvqzhWaI8QQAPU=; b=qkcdyjEpPRdLzwjG16m2m1Bf5a
-	Zqw1ivtXm7W0NqfBEKG65NKdU9G/TGp2BPhG98z1J+4rujYIaBGZs882hTrq2MKAg9TLBuN5Tsw1U
-	eFlPUuaclLAjZ0W+xIAIu6UztvycH9VGCJ0LOJbA/pogr9d/oBOyuEwbXc6SbBOnAw7vJ1wvva/Xr
-	Q2O4tH14BiV9gstUwig99/T8Fijn6lsQOdiUGxgMNuXxhyPXGUP5NC8HC9N67YbopHoJ/XypqB66v
-	6oGHo6fwUdDFIXpLEEI/KrT9CWNr9m6v+uWkrvm19f38uXKVfPbQ33a+UmwMglzR7wuGmK2yeZ+kr
-	ywozx+3g==;
-Received: from ip6-localhost ([::1]:22406 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
+	bh=8AX+0oB+Wxg54VUt7Dqxqqw8cmSPeIzIoIbGqLEWwas=; b=UR/VsnEfpnk0o5nBQgQPuqg5ng
+	xjO+BVwTLJ3/1cMWtpmf/i/V2rKDC/YbtHtA7pQQ5bcLwePlSQo0uh+GGS5yUyedFDiSDZhrwlHAm
+	b4ja2wPBcDoRS37HTh9RDgsjwnzEibkEdL5VALVE18tb/8ri726Ovsma1ecxkNz7hS2IMohhBeLoD
+	XWkE6Y+a9v194+9x4L4Sfn8aBWfYo3neVha/cGbzOIQZpkEHs85GXJkmzP+4xlU6pBYNr2vXHD1LW
+	QBTFNcUEfc5AdIJubpF0OAw2c/7ARTycwAVEtiEWD0MTR/it9RpaZNgz4HBniWXn7jPpuCd9BE9ex
+	BxyEkHUA==;
+Received: from ip6-localhost ([::1]:50506 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1r2xL9-008Hzf-M7; Tue, 14 Nov 2023 17:36:43 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:59256) 
+	id 1r33g4-008Mnb-Fr; Wed, 15 Nov 2023 00:22:44 +0000
+Received: from cat-porwal-prod-mail1.catalyst.net.nz
+ ([2404:130:4080::4]:54934) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1r2xL5-008HzW-1B
- for samba-technical@lists.samba.org; Tue, 14 Nov 2023 17:36:41 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=From:Cc:To:Date:Message-ID;
- bh=w/kYGtZVxAAqj3CV+OoIlNpo3Z/WNsvqzhWaI8QQAPU=; b=SmHAZZmotu6k6EIm+X+pLU38GD
- 07XKRM3hyGb2p1FDfuiN8SN22GNNu5QUFhiZuHYd+f1Wg6AYjQAYBxr36EW//pOsdoR69jQ5C4Krs
- wkLUkCmmcCx+XtGwVELOUDyt0Sysw4RJjzGXxX0o1N1bgqDsXmRBJqpV3SYT5/qRdAWRtvQp45LSG
- WElJc1I0E+m1C/ldazpVZi5xiWSB2qC2shfc1uW4TwVBIJxIqNknyuojpnZ5/9QfZgLXcvLURsQ1x
- euA4XlZdJH4M5bAh+efQkFKMznzTn02Uk0xckkxgiZmu65JMtnQaV1TU5R13QE82qQ5/qto2JvX8e
- EDskjBlO+g7URe3zqBgJTsRramm6NoWdDBFX4+8qLkUdcO0BzvMKzrmhfOtFaRi8ZSWYHd5HVhe+k
- IF2sz2o3ppYMDgHoqJ9fJjycY3rqkZy35PQEZQoMxo9bluz8GI/AXIIu7kQm9IwgCnTGU16V2DFDQ
- LPmWS/3YQojA3h0g/MEXGep9;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1r2xL3-006A1y-0v; Tue, 14 Nov 2023 17:36:37 +0000
-Message-ID: <b37a0a89-3b0c-41ed-a1da-00a5872f282e@samba.org>
-Date: Tue, 14 Nov 2023 18:36:36 +0100
+ (Exim) id 1r33fx-008MnS-6H
+ for samba-technical@lists.samba.org; Wed, 15 Nov 2023 00:22:42 +0000
+Received: from [IPV6:2404:130:0:1000:2225:64ff:fe75:8a7f] (unknown
+ [IPv6:2404:130:0:1000:2225:64ff:fe75:8a7f])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (Client did not present a certificate)
+ (Authenticated sender: douglasb@catalyst.net.nz)
+ by cat-porwal-prod-mail1.catalyst.net.nz (Postfix) with ESMTPSA id B7930821A0
+ for <samba-technical@lists.samba.org>; Wed, 15 Nov 2023 13:22:15 +1300 (NZDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=catalyst.net.nz;
+ s=default; t=1700007735;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:autocrypt:autocrypt;
+ bh=8AX+0oB+Wxg54VUt7Dqxqqw8cmSPeIzIoIbGqLEWwas=;
+ b=x+KnztpI80gjFaqmz7eUYzX6blNPuxPes/jdoELlPfo5ZzWJZQGPYFz//hxDBp5y4rF4ft
+ SiSZLNSJyXC1DmY34s0fWQABRnJpWrP856Eds3Gnf/IuOHTD9pxWwbXmYY/qGcjqOPBfj1
+ 3+0ZL8KJKwYY4aZTiy+EB6xG2iyjjQj6NXn6OJRo4rAKWKvzIuoKQcFI1fg/jJ1MbMOBTx
+ 6z06Foyu0M1I5llMlsWMYi41VK330DWP9MBbj001v7EN1iHsQQMZKUcJmvMYgwXExE6cSy
+ FCMKGEcye93vUBD1EnhFK8U9HRwtZwH1NlGRRyD6hrc/CQXsHEFyVlbyR+Z3mQ==
+Message-ID: <eca883c1-c232-499c-b290-fec0978401ae@catalyst.net.nz>
+Date: Wed, 15 Nov 2023 13:22:14 +1300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [SMB3POSIX] File attributes
-Content-Language: en-US, de-DE
-To: Tom Talpey <tom@talpey.com>, ronnie sahlberg <ronniesahlberg@gmail.com>
-References: <e916bdea-4197-4372-a15b-cea41c8ebe03@samba.org>
- <ZVJh3X9GQ5L9mLS0@jeremy-HP-Z840-Workstation>
- <e6bd562a-296c-44f2-8164-8a90d98fa6e2@samba.org>
- <CAN05THS4H1+vHuPSnRQmiRtDDpnw3j0PUUJi6FwFZf_2zrAsRQ@mail.gmail.com>
- <137faebc-3bcc-4e01-add2-679465c934eb@talpey.com>
- <45f53fba-a78a-407c-b711-c2a61b836b9d@samba.org>
- <87e931d2-9780-478d-9b60-1dc32d9faf29@talpey.com>
-In-Reply-To: <87e931d2-9780-478d-9b60-1dc32d9faf29@talpey.com>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------5H0QpFIMOwvg6PrT8R8uV0Gi"
+Content-Language: en-US
+To: samba-technical <samba-technical@lists.samba.org>
+Subject: autobuild, CI broken by unix epoch > 1700000000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Spamd-Result: default: False [-0.09 / 15.00]; MIME_GOOD(-0.10)[text/plain];
+ XM_UA_NO_VERSION(0.01)[]; ARC_NA(0.00)[];
+ DCC_FAIL(0.00)[failed to scan and retransmits exceed];
+ DKIM_SIGNED(0.00)[catalyst.net.nz:s=default];
+ MIME_TRACE(0.00)[0:+]; MID_RHS_MATCH_FROM(0.00)[]
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -64,80 +65,23 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Ralph Boehme <slow@samba.org>
-Cc: Volker Lendecke <vl@samba.org>, Steve French <smfrench@gmail.com>,
- Ralph Boehme via samba-technical <samba-technical@lists.samba.org>,
- Jeremy Allison <jra@samba.org>
+From: Douglas Bagnall via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Douglas Bagnall <douglas.bagnall@catalyst.net.nz>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------5H0QpFIMOwvg6PrT8R8uV0Gi
-Content-Type: multipart/mixed; boundary="------------m0RcumGgehLuGnumSF80Q0XF";
- protected-headers="v1"
-From: Ralph Boehme <slow@samba.org>
-To: Tom Talpey <tom@talpey.com>, ronnie sahlberg <ronniesahlberg@gmail.com>
-Cc: Jeremy Allison <jra@samba.org>, Steve French <smfrench@gmail.com>,
- Volker Lendecke <vl@samba.org>,
- Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
-Message-ID: <b37a0a89-3b0c-41ed-a1da-00a5872f282e@samba.org>
-Subject: Re: [SMB3POSIX] File attributes
-References: <e916bdea-4197-4372-a15b-cea41c8ebe03@samba.org>
- <ZVJh3X9GQ5L9mLS0@jeremy-HP-Z840-Workstation>
- <e6bd562a-296c-44f2-8164-8a90d98fa6e2@samba.org>
- <CAN05THS4H1+vHuPSnRQmiRtDDpnw3j0PUUJi6FwFZf_2zrAsRQ@mail.gmail.com>
- <137faebc-3bcc-4e01-add2-679465c934eb@talpey.com>
- <45f53fba-a78a-407c-b711-c2a61b836b9d@samba.org>
- <87e931d2-9780-478d-9b60-1dc32d9faf29@talpey.com>
-In-Reply-To: <87e931d2-9780-478d-9b60-1dc32d9faf29@talpey.com>
+To get a unique OID in a test, we have
 
---------------m0RcumGgehLuGnumSF80Q0XF
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
+governs_id = f'1.3.6.1.4.1.7165.4.6.2.9.{self.timestamp[-8:]}.{suffix}'
 
-T24gMTEvMTQvMjMgMTg6MzQsIFRvbSBUYWxwZXkgd3JvdGU6DQo+IE9uIDExLzE0LzIwMjMg
-MTE6NDQgQU0sIFJhbHBoIEJvZWhtZSB3cm90ZToNCj4+IE9uIDExLzE0LzIzIDE3OjIyLCBU
-b20gVGFscGV5IHdyb3RlOg0KPj4+IEJ1dCwgZG9lcyBpdCBuZWVkIHRvIGJlIGV4cG9zZWQg
-dG8gcmVtb3RlIGFjY2Vzcz8gSXQgd291bGQgc2VlbSB0byBiZSBhbg0KPj4+IGFkbWluIGZ1
-bmN0aW9uLCBtb3N0IGFwcHJvcHJpYXRlIHRvIGFwcGx5IHZpYSB0aGUgc2VydmVyLWxvY2Fs
-IEFQSS4NCj4+Pg0KPj4+IFNvIHRvIGZsaXAgdGhlIHF1ZXN0aW9uLCBkb2VzICJjaGF0dHIg
-LWkiIChvciBhbnkgb2YgdGhlIHppbGxpb24gb3RoZXJzKQ0KPj4+IGV4cG9zZSBhbnkgbmV3
-IHZ1bG5lcmFiaWxpdHkgaWYgcmVtb3RlPyBTb21lIG9mIHRoZW0gbG9vayBmYWlybHkganVp
-Y3kNCj4+PiB0YXJnZXRzIGZvciByYW5zb213YXJlIGluZmlsdHJhdGlvbi4NCj4+DQo+PiB0
-aGVyZSBzZWVtcyB0byBiZSBhIHdvcmtpbmcgbG9jYWwgcHJpdmlsZWdlIHN5c3RlbSBhc3Nv
-Y2lhdGVkIHdpdGggdGhlIA0KPj4gYXR0cmlidXRlcy4gSWYgdGhpcyB3YXMgZmxhd2VkIHRo
-ZXJlJ2QgYWxyZWFkeSBiZSBhIHNlcmlvdXMgcHJvYmxlbSANCj4+IHdpdGggbG9jYWwgYWNj
-ZXNzLCBzbyBJIGRvbid0IHRoaW5rIHJlbW90ZSBhY2Nlc3MgY2hhbmdlcyB0aGUgYmlnIA0K
-Pj4gcGljdHVyZSwgZG9lcyBpdD8NCj4gDQo+IEFncmVlZCB0aGF0IHRoZSBwcml2aWxlZ2Ug
-bmVlZHMgdG8gYmUgY29ycmVjdGx5IG1hbmFnZWQhIEJ1dCBleHBvc2luZw0KPiBpdCByZW1v
-dGVseSBpbmNyZWFzZXMgdGhlIGF0dGFjayBzdXJmYWNlIHNpZ25pZmljYW50bHksIHNvIGlu
-IG15IHZpZXcNCj4gaXQgbmVlZHMgYSBnb29kIHJlYXNvbiwgYW5kIGNhcmVmdWwgc2VjdXJp
-dHkgYW5hbHlzaXMuIFRoYXQncyBhbGwuDQoNCnl1cCwgc28gaW1obyBhbm90aGVyIHJlYXNv
-biB0byBhdm9pZCBpdCBmb3IgdGhlIHRpbWUgYmVpbmcuIDopDQoNCg==
+which would have been fine for most of the last 90000000 seconds, but it 
+turns out that an OID field can't start with zero.
 
---------------m0RcumGgehLuGnumSF80Q0XF--
+Today at 11:13:20 NZ time the epoch flipped over to 1700000000, which 
+means `self.timestamp[-8:]` now starts with a number of zeros.
 
---------------5H0QpFIMOwvg6PrT8R8uV0Gi
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature.asc"
+We will need to backport to 4.19.
 
------BEGIN PGP SIGNATURE-----
+Douglas
 
-wsF5BAABCAAjFiEE+uLGCIokJSBRxVnkqh6bcSY5nkYFAmVTsCQFAwAAAAAACgkQqh6bcSY5nkYk
-Nw/9ES7OZW+0S/gyciUHqcH2QYzNoAODuCJQItkGLtRl1ztuWXr9Kaq5jV+cfKH0lbKIG43NXfgN
-wC7MEf/f0xwyyYP6EdiRXxLT/kSTbgUzmWX7SXSzDtELjALFbx8xlvZPaeMUzYQVzi+kii+ou8Qj
-tzPZ0oFASXnJLTam31+FoWv+/tGWJTn0vPF02hYo6S5IykjwwC3KIYcxv5BdjHboWns1G1xqNqe8
-/ZGrCSbNcbaFFDmIruV5EPE2V5QWqYK6f5kitzaQ1HUDbQBk6RO+5mAuhXyQqJWFu5aMyeklZE6b
-+nDQWmV/qO9wNlL6SLc3YhjcLNOC8oTs9fz2bTcFdDESCm00zUqMfKdU0oUz0Z+a4INNKw2eZ+tr
-JfTsO09tddvGUT1PTWqWJmi3uW7kBxETAc4Mo6qcsy9pBJIuTRflILtZ9ZfFC4J2LI3cUJRbLlgc
-rmRai6euZn57sIRoNOcu7/xIDk/2fZaLMi+8fL3n+olYadEi6xLEKeArAOm7SBsHv2VneVoEq1e+
-QaDwkckfIEd6iMTxj1JTZ3Kmm7Ks3De5yjPsFG+bhE0IVMbv2ehgf5oEgegfkSIrExlsXSm9gGG5
-f5Lz3/69OdUy9ApftmNne+zinjkFwRnBNK/2qnKKssBGn0yo6zwQsB9j2nDURHiDb+QLriCVfjTI
-PTI=
-=QFRj
------END PGP SIGNATURE-----
-
---------------5H0QpFIMOwvg6PrT8R8uV0Gi--
 
