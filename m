@@ -2,67 +2,54 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 89B357EBCB6
-	for <lists+samba-technical@lfdr.de>; Wed, 15 Nov 2023 06:15:28 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id AB96F7ECE5C
+	for <lists+samba-technical@lfdr.de>; Wed, 15 Nov 2023 20:42:36 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=z7pAMSl3cct7C8E2+QriIekL7CZjl1/WLUi3BGbJJ8g=; b=TEBZdmeHjf3+emoHoNcdp8Y1aQ
-	1K661eYI4XpFksMaTJQbQG6knl1tRj5SQeKYZf7KZ+fBhtpH/LzPsF6EsdA+DvByK5E7aCemXPE7n
-	sL59mScQfl3Q3f9p8vMgNDHS+Hpe+r42PMbVtScn8k+cDRmfu6p1iMvdUSN+ljAnXeJdnX6BCTVLk
-	17ue041dNFuaUX3qh2oTL4NnW2u47nnkeaMbI4p4D2hIZpSfrUG3oLHufQcChxEVx0jElLWSjiXPz
-	eUoIue8bCEy4BraFQvqLx0b3Y+9w5qWclHNf0P7CB4BHhb56HdJxCb0gmz+aTw7ClvYsg6u7Xxhso
-	pUK5Ugdw==;
-Received: from ip6-localhost ([::1]:38096 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=Q3r3VBfzbtE/sxeXhhNLfxnAN1xYv459goca+Uj8WKs=; b=LJvKFD7Z9rXvjcGQhoN8M7bWP1
+	4qGxchj3GH0OqtGb2/H7TnSe2keea8vvjcfMEnkBMjSXTROvY9UX4eiJpr8UIVB8vIpNmwaugFrPY
+	99AUmSXCrVGB37xojp4Ka47BPtxiNZpuhS5RJxfeghf6Kc1pH+b7gwOVDvGdqrAMzuBVsMppj5H1Z
+	uuIsCOurhvIjvnaRkvCLjHdaI7ZPBNHmomh+TsZ+uusENWuSUNiMmhLOHRwMM+RYGl7Tg+pl0lWWR
+	ih1G54cLbPgOXF+CnTRp2oBNtyxoqLTt3CnNRj+3l8rTgveZ0lqff4LIqjkFghGdd2gHTZ5SgCT56
+	Wv41Tt9g==;
+Received: from ip6-localhost ([::1]:44256 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1r38Ej-008OVj-UY; Wed, 15 Nov 2023 05:14:50 +0000
-Received: from mail-lf1-x12c.google.com ([2a00:1450:4864:20::12c]:43375) 
+	id 1r3Lls-008TvZ-Vg; Wed, 15 Nov 2023 19:41:57 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:53860) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1r38Ee-008OVa-Hb
- for samba-technical@lists.samba.org; Wed, 15 Nov 2023 05:14:47 +0000
-Received: by mail-lf1-x12c.google.com with SMTP id
- 2adb3069b0e04-507c1936fd5so504129e87.1
- for <samba-technical@lists.samba.org>; Tue, 14 Nov 2023 21:14:44 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1700025283; x=1700630083; darn=lists.samba.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=z7pAMSl3cct7C8E2+QriIekL7CZjl1/WLUi3BGbJJ8g=;
- b=RXhZrzWZsUF6EfTD6RcUNzsT4iaEYwY5D4Kg3EPa8FnHHVEp7tib4abg4ROdhx8+SM
- 3nrdsryun+tR19D9KBoP1O5PwFwMCtDXoHO9wWJxGF7ZZHC9gEKt78rGgfK48FYl3ma7
- RMJD5yvvIobA1mhleC5WExxOjYGGnNp6+EUTTLw05bbps+tKgUerL+fwZ0opQb4rwRPB
- vRRqQWQRaJNSClVChoKWQlPDlIZJ6K6mPZ2y+dgI+qoW0WTkyrm63x9v6V63Sowe13wK
- n6obx9isTX+x9KchWPSKHIgyy2GgpJAXd97DritesXrOO18Vsl2Wq/kynePkP7kbdLFp
- KD5g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700025283; x=1700630083;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=z7pAMSl3cct7C8E2+QriIekL7CZjl1/WLUi3BGbJJ8g=;
- b=iJMaeXPQsXzy8ZyA8p+B0OAhoyWRNuYDFEXoDlE7dphVpZf5xgfh633k+QNGCEXlcj
- xZn8EbOk/tH3OFsdw+P6HgrfmNsTWmwLOD9LTzrOTenMRfEWCROnZgZApCiMV7E8RTub
- lH1/YfCPriiDFXAg1vH+VYC/mNv69YYlsGaemi6yh1fVWFAP/9fieJHZwEryag669Tyz
- 9UqVn2mgotVQk8E1vqfn3Ybkhl5NA4u546deD8SExMJZyByp8NiVhqymGixV5cBEwDad
- n/vEo2sn/vvFFZIz+/aGVif0kTQEFqo1B4fydY511Z9itCg+rsFgmUeTHPzGIwh3kRFG
- f8IQ==
-X-Gm-Message-State: AOJu0YyoFlRMnlb86hrTFjEbgLiVH2fjPexjgoojXcoIPffL4RDlZZbN
- tCI6FaL9YrKkG/3qko0C9AOi4bUPFSWn7V+NT2xI6zsK
-X-Google-Smtp-Source: AGHT+IF6q7971As6IKQTvx08M7jnFd56EJNZYVYvrOan4yAdQupWQO2FLRe86WZCqv2LjQeagu57Qxd4uCOV8VdCJv0=
-X-Received: by 2002:a19:f704:0:b0:509:489f:5b6f with SMTP id
- z4-20020a19f704000000b00509489f5b6fmr1531857lfe.11.1700025282653; Tue, 14 Nov
- 2023 21:14:42 -0800 (PST)
+ (Exim) id 1r3Lln-008TvP-AZ
+ for samba-technical@lists.samba.org; Wed, 15 Nov 2023 19:41:54 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=From:To:Date:Message-ID:CC;
+ bh=Q3r3VBfzbtE/sxeXhhNLfxnAN1xYv459goca+Uj8WKs=; b=gY9G/Yd58KjY/z0PbAdv1Dm+Fo
+ kUB8/SxjtlpYRMrI2P1hQvzMlVK0D1UQ+3k86k50kECtadd002RGcWBWem0qj4Eb2l9fK2ls6Pjqp
+ ZpAO1luab+RqWIgCKOPoYZ4zf4kkB9Fu9x0EXq/ULoqeSx5mMtMyo/x39OYe7Mqcoz0GfJuydNqNa
+ kbjiwdepq2c9ecVK9XoCsMZYRX6k1Sp6s9KbYjD/qT/hZJ+tKk7w3T8OkzgGZDXVVUSH3u+tv7zB5
+ RPHeRC9awwiGPdnqAukUWEu44+NbpTEtGrPkEOhRadU/YoBk87BxyaXjD90aFrF+ebLOhPuMzaNmd
+ V/03dwOgKKrty8ZEGeeDCd9dE84VBoHWbLVzspNwMUPCL0MK613cxQGGy8POetRhvtPh39Gx6qN79
+ TWhjnsLcsJxIXtL+g3JSgUNGXH0fk8egtN8Bv05pypWFCmQ7nNApqmSGJMOYQpRbHhVlzRqwcwIb0
+ ibSbh72PEDJwIes3V/GWnjAS;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1r3Llk-006OG2-1c for samba-technical@lists.samba.org;
+ Wed, 15 Nov 2023 19:41:49 +0000
+Message-ID: <66505624-8efa-843d-ede0-8968d2951f59@samba.org>
+Date: Wed, 15 Nov 2023 12:41:47 -0700
 MIME-Version: 1.0
-References: <e916bdea-4197-4372-a15b-cea41c8ebe03@samba.org>
- <ZVJh3X9GQ5L9mLS0@jeremy-HP-Z840-Workstation>
- <e6bd562a-296c-44f2-8164-8a90d98fa6e2@samba.org>
-In-Reply-To: <e6bd562a-296c-44f2-8164-8a90d98fa6e2@samba.org>
-Date: Tue, 14 Nov 2023 23:14:30 -0600
-Message-ID: <CAH2r5mvqcwUfGD2c0e+oR=2V-dGroJK0_GKvoEzAc1tpNFRXcw@mail.gmail.com>
-Subject: Re: [SMB3POSIX] File attributes
-To: Ralph Boehme <slow@samba.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.14.0
+Subject: Re: I want to make ADCS support better and I need some advice
+Content-Language: en-US
+To: samba-technical@lists.samba.org
+References: <922de58f-d011-427d-8248-9f8ce7c90e74@app.fastmail.com>
+ <19507e01-a2f0-fcd1-9b98-47a72cdf11f2@samba.org>
+ <6c0ddbb6-4375-4d18-8e4e-0114dc7736cd@samba.org>
+ <4baa6aa2-052f-1e19-63c0-ef3711d9febd@samba.org>
+ <7b96929d-54f6-4e2f-8180-2810d7b6ae10@app.fastmail.com>
+In-Reply-To: <7b96929d-54f6-4e2f-8180-2810d7b6ae10@app.fastmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -76,63 +63,33 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
-Cc: Tom Talpey <tom@talpey.com>, Volker Lendecke <vl@samba.org>,
- Ralph Boehme via samba-technical <samba-technical@lists.samba.org>,
- Jeremy Allison <jra@samba.org>
+From: David Mulder via samba-technical <samba-technical@lists.samba.org>
+Reply-To: David Mulder <dmulder@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-interesting question - worth looking into.
 
-This reminded me that one POSIX feature that is problematic running to
-Samba server is that Samba (unlike other servers not just Windows)
-doesn't update ctime on hardlinks and doesn't update ctime on set or
-remove xattr (it looks like Samba server is returning the ctime from
-mtime not the ctime from the ctime)
+On 11/13/23 2:53 PM, Joe Dillon via samba-technical wrote:
+> AIX support is a tier-3 target in rust: https://github.com/rust-lang/compiler-team/issues/553.  Samba already depends dev-depends on rust (selftest requires python3-cryptography).  What's usually a showstopper for rust is gcc support.
+>
+> In my opinion, it makes the most sense to not re-invent the wheel though.  I had to write a Certificate Management over CMS implementation in rust because one didn't exist.  Python has python-cmc.  Would pulling in a dependency on python-asn1crypto be acceptable?  As I understand the source, the samba python module doesn't pull in any dependencies right now?
+>
+> Am I correct that the modules samba.dcerpc and ldb are currently undocumented?
 
-On Tue, Nov 14, 2023 at 3:15=E2=80=AFAM Ralph Boehme <slow@samba.org> wrote=
-:
->
-> On 11/13/23 18:50, Jeremy Allison wrote:
-> > On Mon, Nov 13, 2023 at 12:28:18PM +0100, Ralph Boehme wrote:
-> >> We had support for file atttributes in the CIFS UNIX extensions, this
-> >> is currently not in the spec (or code) for SMB3 POSIX.
-> >>
-> >> Is this intentional? What is the reason?
-> >
-> > Do you mean the attributes listed by:
-> >
-> > man chattr.
->
-> yes.
->
-> > chattr - change file attributes on a Linux file system
-> >
-> > This was at the insitence of Steve as I recall.
->
-> adding Steve to the loop.
->
-> > We never implemented this.
-> >
-> > Might be done via a tunnelling ioctl ? Other thoughts ?
->
-> well, it's a rabbit hole of its own and still seem to be rarely used on
-> Linux and the BSDs. It's not POSIX anyway so just declare it out of
-> scope for now?
->
-> The Linux interface is via ioctls so doing it over the wire via SMB2
-> IOCTLs looks like a good way forward allowing us to ignore this for now
-> and possibly add it later if there's demand and resources to implement it=
-.
->
-> -slow
+I've hacked up a way to build Rust via WAF here: 
+https://gitlab.com/samba-team/samba/-/merge_requests/3394
 
+This is ugly right now. There is probably a better way to do this. I 
+don't understand WAF well enough to make sensible changes here.
 
+-- 
+David Mulder
+Labs Software Engineer, Samba
+SUSE
+1221 S Valley Grove Way, Suite 500
+Pleasant Grove, UT 84062
+(P)+1 385.208.2989
+dmulder@suse.com
+http://www.suse.com
 
---=20
-Thanks,
-
-Steve
 
