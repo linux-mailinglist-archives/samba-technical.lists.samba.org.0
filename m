@@ -2,62 +2,61 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7E5FB7EE72C
-	for <lists+samba-technical@lfdr.de>; Thu, 16 Nov 2023 20:09:48 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id B1AB07EE72F
+	for <lists+samba-technical@lfdr.de>; Thu, 16 Nov 2023 20:11:20 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=e3qBTraQyMwi69i8yxLRuKzfw+FJeXAgWVTCFfRhTec=; b=hBfVDIJQEVvBEwwi1hHM9CZGTB
-	3SbpwYvkHvP122kC8AJmtwet3t0FzCeH2cu8zceriLTglbF8rKDnobkGYymKLjizOSuhWZVB7FxCX
-	1fCjDlnbNzRWHD50FHHZvYvF3xImpf7mQ8QPoteEYxiuQu/IImtpUyrKHIdqYBdjmN7diHXDzSNZ5
-	vKqRA654iYETyVfFS6kgiGyhS10aT9KovWzkwJW/gjYvNwaOPUkAN0grV8wciNlT1pf+I9IcvOgbw
-	ychURF8kzTfvgG81WJ2fMOUyqc/ey5rIbPQcjNMO9SVZI+lltTN4Y0e+vZDII4HMH6mde4Ks2O2AG
-	1u+bLENw==;
-Received: from ip6-localhost ([::1]:30780 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=HvqoSmET7AGneC0DU+9vvXM7mU+Afpt1Gl2P+52o3jI=; b=bakQRbF2fSC7nMuFB60nREzMMR
+	ZDlf4WFZjkx5PpAu1gENlwTIhd31oBaoKfux/6DKd2/A02IFsauA4wofD0ewCrDjhIyvMVc7bKeLV
+	vwDrrbDf6kF1wL9r+WJLxUuFVaV4n3XASFP8wgTwMNnfR/OSGMLZYXOcdM7Kho+OgnfVGg1IRKSbG
+	ZoLxpXmDOxfBNy5pI828EtWrEnqTEJWzzWE8szOPXwuQ3CxqCLUlwONXMpAZV9IScqqjaG9IWUHuo
+	XaI4P/czpq6iByQqCAD3eMOg5VLPmFSEwh78UdV6ERXTpAo6tYvjbKn81zlWURHczkMQlVZPco9VG
+	mW3A8rlw==;
+Received: from ip6-localhost ([::1]:60700 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1r3hk2-008hlI-B0; Thu, 16 Nov 2023 19:09:30 +0000
-Received: from mail-lf1-x131.google.com ([2a00:1450:4864:20::131]:60575) 
+	id 1r3hlk-008i2r-3F; Thu, 16 Nov 2023 19:11:16 +0000
+Received: from mail-lf1-x12a.google.com ([2a00:1450:4864:20::12a]:57455) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1r3hjw-008hl9-Kk
- for samba-technical@lists.samba.org; Thu, 16 Nov 2023 19:09:27 +0000
-Received: by mail-lf1-x131.google.com with SMTP id
- 2adb3069b0e04-507962561adso1752434e87.0
- for <samba-technical@lists.samba.org>; Thu, 16 Nov 2023 11:09:21 -0800 (PST)
+ (Exim) id 1r3hlf-008i2h-RO
+ for samba-technical@lists.samba.org; Thu, 16 Nov 2023 19:11:14 +0000
+Received: by mail-lf1-x12a.google.com with SMTP id
+ 2adb3069b0e04-5094cb3a036so1783809e87.2
+ for <samba-technical@lists.samba.org>; Thu, 16 Nov 2023 11:11:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1700161760; x=1700766560; darn=lists.samba.org;
- h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ d=gmail.com; s=20230601; t=1700161870; x=1700766670; darn=lists.samba.org;
+ h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
  :date:message-id:reply-to;
- bh=Dn04mRqD381J0knM3vu5fALJ+ePstcD8oihEcanhTwM=;
- b=lO6ufyhoSL6e0bVRoXgqOD6wfxn1MohGi4enqMWhmWhs5+92d4l/2wHglfac5KFYLk
- /miDkIjc7KOEqhi09UmW6Z5FdoKopWR7bJmT9+QO2EoIXLA73l/j1nPFm+4h4kdgZ8kn
- 0hgEuLWwL8qrW7ZdVhlww6GF0DEfgCBJx/DoAgDof9WwCXiUSXfCltXljWFVLr0nTFKW
- gri2bryNH6nwWGwjt+5fsKeQN7iS5WZfuNsjcedu+TgnKgFNLHkBZ/w9iGWUpwlQEnK0
- ijgVruBUQt5vpVaG5Bgpk7FA8IMiM+VeARsZGJUlSH+nzAZU/RgdW2C442fEhvn6VOrm
- 3DEg==
+ bh=HvqoSmET7AGneC0DU+9vvXM7mU+Afpt1Gl2P+52o3jI=;
+ b=XLY8wnOwnRC203sGCVacTuruQGFPk9hsCy3IMhMycMeHCmiJdnol5xRJIE3wx4SDrP
+ M9ZVi1Uq67zjzKah6TrcBN4l5YmaLNEgbFoTZL11+wH55UQvqdbcsC+mHubR0QVKKY3J
+ t/ZkPmSYg7rhyi+ddfkpEsB5r1vjEHs8tUiWyuQMIPNdoMGHxzxo29cwzkuSjcsximdZ
+ fP6pZIjjmgWHmomd/ahTgAMTbO/axeJx8jGkcI9r7qyvdgeffjAYA6uu6g1m9RTLdLfy
+ rRmSBuxDWy7vTsYUqeTibsv7CsErVmw55AAq5wcGYbOA2fI210pdpYDIyut+i0MzD4yH
+ ix+A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700161760; x=1700766560;
- h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+ d=1e100.net; s=20230601; t=1700161870; x=1700766670;
+ h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
  :from:to:cc:subject:date:message-id:reply-to;
- bh=Dn04mRqD381J0knM3vu5fALJ+ePstcD8oihEcanhTwM=;
- b=rPgQzp0x3B7lKDK1/j0DTc0By3l4f2ARO6IFCyvnkpXKzDSwei1JFg4vLwGhZ4SjOV
- ccC787JzWbzm5Lw9KSgcsBcsXJjSyN1EOXRmJtS0L8OORclLo3NAhupHZRHve/dS/+MH
- 4MgkBBRdRAo7eDXdeuRxqSj+9RNxFOkYznTrFI29jAZ3JEG2Wc7/bcgWNii7SQVnLKLU
- Jp9gVuRyeJfCHSWB1a/XF+C+KyjwYCS23PumR4dayqomYvVR0l4X+Y2r1diM7SjPdE5N
- AGTSJGL8lSuV1ePV6sJ8uXt6Til36B6ALY19kDJm5ZrkDCiI4MCsS7jheh3tWILw7IHm
- WeOg==
-X-Gm-Message-State: AOJu0YzIeK2J/Gftc7Gtf6miu+3Dc4QHS83RuThS0LvP3/rbdoy7uFzP
- JySwfX+R55O/MEm0pK91dNhFH3wpMgGwx0llEUY=
-X-Google-Smtp-Source: AGHT+IF1F+EubZIXeGExd5+TESvIhpKbU4PqgysTlfOId+BT+ooMNX3ywZHQS4ThhqWc1R1JaQsKEuzn1Zy++AhioaI=
-X-Received: by 2002:a05:6512:398a:b0:509:145c:6a49 with SMTP id
- j10-20020a056512398a00b00509145c6a49mr16599331lfu.42.1700161760232; Thu, 16
- Nov 2023 11:09:20 -0800 (PST)
+ bh=HvqoSmET7AGneC0DU+9vvXM7mU+Afpt1Gl2P+52o3jI=;
+ b=VWOwTO0VRg6y0abVk+AwEe9MgT7SNWPapHlQ+8oMvkrfHdtBI4HhQjqXZaDgWDelB0
+ m5BcKbPq7sjx7LuT44rYs1Wz85XA679yEQzNCceJF6dCxSq0qCVCQd2kks/icf4ZH7W9
+ D9LXtI6+dbSeLSTlHACYJxFj6MohUGBRSbewcWNZOxCjrFdfvU3ZaWTBIUWVVBxjE2uY
+ 17GZm1sHp1dJ2W8U3V8MW7Y+oYmgZOL4tZhVzVtED59CGoulT/Knyyj/qy/JNXFNrt83
+ VJ27rJu/Dg+TFgtZiZIqEymISi+ZDS093PVfCAJDaNHMD5IQPg2+IDUTTkHgmTXktno+
+ 18KQ==
+X-Gm-Message-State: AOJu0Yy0HJlZ0IV/HHTSlkYaf+vQBK0MFXKmQM5Jx9o3LLCOnDa4ioOc
+ AwgXaT7fPG+IQ6sLL2Z/OXJBa0GH7mJYV0Ui1R29cUHAkeu+ww==
+X-Google-Smtp-Source: AGHT+IFRVCxgaf/Z3tqusQJxhVAgc3v+PKDVWuF/KqBZYrhhWCHzv/pxlMIixAMYXwSLHgQOvnmQmNNwffletgg3BXU=
+X-Received: by 2002:a19:6409:0:b0:509:4e4f:65ac with SMTP id
+ y9-20020a196409000000b005094e4f65acmr10428397lfb.63.1700161870144; Thu, 16
+ Nov 2023 11:11:10 -0800 (PST)
 MIME-Version: 1.0
-Date: Thu, 16 Nov 2023 13:09:09 -0600
-Message-ID: <CAH2r5mvJ9=b=HCKPbi937SP-a0EhY1f5XcQHXPfXCD6TZq70BQ@mail.gmail.com>
+Date: Thu, 16 Nov 2023 13:10:58 -0600
+Message-ID: <CAH2r5mu8NBbW3ipMYd-UdfV+oDA1R7mwV-A8=PzU5qrd4kEiGg@mail.gmail.com>
 Subject: [PATCH][SMB client] two multichannel patches
 To: CIFS <linux-cifs@vger.kernel.org>, 
  samba-technical <samba-technical@lists.samba.org>
-Content-Type: multipart/mixed; boundary="000000000000c7aa00060a49c1ea"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
+Content-Type: multipart/mixed; boundary="0000000000005558fa060a49c8f3"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -73,18 +72,19 @@ List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
 From: Steve French via samba-technical <samba-technical@lists.samba.org>
 Reply-To: Steve French <smfrench@gmail.com>
+Cc: LKML <linux-kernel@vger.kernel.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
---000000000000c7aa00060a49c1ea
+--0000000000005558fa060a49c8f3
 Content-Type: text/plain; charset="UTF-8"
 
 Any thoughts on these two multichannel patches from Shyam (attached)?
 
-The first fixes: "cifs: account for primary channel in the interface list"
-which fixes a refcounting issue in channel deallocation.  The second fixes
-a lock ordering problem in the recent patch: "cifs: handle when server
-stops supporting multichannel"
+The first fixes: "cifs: account for primary channel in the interface
+list" which fixes a refcounting issue in channel deallocation.  The
+second fixes a lock ordering problem in the recent patch: "cifs:
+handle when server stops supporting multichannel"
 
 The code to handle the case of server disabling multichannel
 was picking iface_lock with chan_lock held. This goes against
@@ -103,19 +103,20 @@ that order for each secondary channel:
 8. lock chan_lock again
 
 Let me know if any test feedback or reviews
+
 -- 
 Thanks,
 
 Steve
 
---000000000000c7aa00060a49c1ea
+--0000000000005558fa060a49c8f3
 Content-Type: text/x-patch; charset="US-ASCII"; 
 	name="0001-cifs-fix-leak-of-iface-for-primary-channel.patch"
 Content-Disposition: attachment; 
 	filename="0001-cifs-fix-leak-of-iface-for-primary-channel.patch"
 Content-Transfer-Encoding: base64
-Content-ID: <f_lp1kbwn30>
-X-Attachment-Id: f_lp1kbwn30
+Content-ID: <f_lp1kgb1d0>
+X-Attachment-Id: f_lp1kgb1d0
 
 RnJvbSAyOTk1NGQ1YjFlMGQ2N2E0Y2Q2MWMzMGMyMjAxMDMwYzk3ZTk0YjFlIE1vbiBTZXAgMTcg
 MDA6MDA6MDAgMjAwMQpGcm9tOiBTaHlhbSBQcmFzYWQgTiA8c3ByYXNhZEBtaWNyb3NvZnQuY29t
@@ -142,14 +143,14 @@ dW50ICovCisJaWYgKHNlcy0+Y2hhbnNbMF0uaWZhY2UpIHsKKwkJa3JlZl9wdXQoJnNlcy0+Y2hh
 bnNbMF0uaWZhY2UtPnJlZmNvdW50LCByZWxlYXNlX2lmYWNlKTsKKwkJc2VzLT5jaGFuc1swXS5z
 ZXJ2ZXIgPSBOVUxMOworCX0KKwogCXNlc0luZm9GcmVlKHNlcyk7CiAJY2lmc19wdXRfdGNwX3Nl
 c3Npb24oc2VydmVyLCAwKTsKIH0KLS0gCjIuMzkuMgoK
---000000000000c7aa00060a49c1ea
+--0000000000005558fa060a49c8f3
 Content-Type: text/x-patch; charset="US-ASCII"; 
 	name="0002-cifs-fix-lock-ordering-while-disabling-multichannel.patch"
 Content-Disposition: attachment; 
 	filename="0002-cifs-fix-lock-ordering-while-disabling-multichannel.patch"
 Content-Transfer-Encoding: base64
-Content-ID: <f_lp1kc5bv1>
-X-Attachment-Id: f_lp1kc5bv1
+Content-ID: <f_lp1kgf651>
+X-Attachment-Id: f_lp1kgf651
 
 RnJvbSA1ZWVmMTJjNGUzMjMwZjIwMjVkYzQ2YWQ4YzRhM2JjMTk5NzhlNWQ3IE1vbiBTZXAgMTcg
 MDA6MDA6MDAgMjAwMQpGcm9tOiBTaHlhbSBQcmFzYWQgTiA8c3ByYXNhZEBtaWNyb3NvZnQuY29t
@@ -197,5 +198,5 @@ cm1pbmF0ZSA9IHRydWU7CisJCQkJY2lmc19zaWduYWxfY2lmc2RfZm9yX3JlY29ubmVjdChzZXJ2
 ZXIsIGZhbHNlKTsKKwkJCX0KIAkJCWNpZnNfcHV0X3RjcF9zZXNzaW9uKHNlcnZlciwgZmFsc2Up
 OwogCQl9CiAKKwkJc3Bpbl9sb2NrKCZzZXMtPmNoYW5fbG9jayk7CiAJfQogCiBkb25lOgotLSAK
 Mi4zOS4yCgo=
---000000000000c7aa00060a49c1ea--
+--0000000000005558fa060a49c8f3--
 
