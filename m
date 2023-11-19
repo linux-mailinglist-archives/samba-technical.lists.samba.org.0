@@ -2,47 +2,85 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id CDC2F7F022C
-	for <lists+samba-technical@lfdr.de>; Sat, 18 Nov 2023 20:04:01 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id CEEAA7F0420
+	for <lists+samba-technical@lfdr.de>; Sun, 19 Nov 2023 03:55:52 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=Y4a1li6NPqKpnItnc/VdTw+3whMOcrtid/aRLJVBR1Y=; b=mIoXmHz1OxCJgerG4vSR2f+9Lp
-	/Eh5lAVtNRKDvmE2XI3Wz3mB5ubd7n7hGcxh8Aaug0HoL1CXnMjJgSwHuilp3xHsUhZK8jDfPUYSo
-	jKqFWVulfZNbqBVuFm93XrSSzsNOIcefMTOvUo3aQvi/1swkYqGpaKHBXGDjT4NBrULP+f/Yltz1E
-	lIopJm0IEOTfkWld++SrKtGdzsK7kT85kdess1hFC5fX7UmVi7kPraEX+F0jmbQwqRuDxOVDvaDV3
-	bszKcLcxsI5d/HZZLsqRFoPRoSbdZ9z0TseVnN/X+tqS2bL27kLfsTxQVlZa1pbcqcqJutwSIu8Sz
-	SjlmGF9Q==;
-Received: from ip6-localhost ([::1]:41142 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
+	bh=4k8B78fmlXtEYmfBxNhKEsnMaWrnF1wBB8ISyZTChsw=; b=F0Lkl8zRcyBD1zlZAvYBcg8xnP
+	ztOWjFS8Y5ZTbPr2RmgUydHt3/i/LSs9Sz1bAg65BDWLLDqhqJMtZmTEVLv9NLiSbbEP7B1CysEkc
+	qXX8LiaysoilZXiEbPoKaySJaVr3u/3VYetODCHvb8rdGgziCD8sFOO1AkLsXBmkqv9ZFt4bla+eu
+	67Sa8QRyfeJX7c9vJU/rIC9vaOLfkqwe/mq2kJXt4s4+n2EGJECHS/bJzvFEHnuwbFvIOwBSJcfWz
+	i4XCR87PsE+qqVRw5FpIRN+NRHp5kZWZGTlclOtw3n9WylfzuT2B1iDsJXkVyuTE4p8Ogr/eEpN++
+	YgD+vWuQ==;
+Received: from ip6-localhost ([::1]:62346 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1r4Qb1-008qnd-8Z; Sat, 18 Nov 2023 19:03:11 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:63176) 
+	id 1r4Xxk-008rcG-GL; Sun, 19 Nov 2023 02:55:08 +0000
+Received: from wout3-smtp.messagingengine.com ([64.147.123.19]:40585) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1r4Qav-008qnU-5H
- for samba-technical@lists.samba.org; Sat, 18 Nov 2023 19:03:08 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=From:Cc:To:Date:Message-ID;
- bh=Y4a1li6NPqKpnItnc/VdTw+3whMOcrtid/aRLJVBR1Y=; b=Ny2ECNyqjRUNiQElax1+aWAm/7
- 5hxXYUMvTXgJBhdHSKXrzcPPN06Brt/67hbnWGR1daznUunQ2EHZFfQQz+bXOuUW8gKanTeY2zgY7
- /5ZRXmL6dtBDpb+NEJAbMWxk0AjnincLe9lIUnRNcpjZZ4Hx+8LfdqR6Q0ZlbXCQK3Kf8GBXMQEgk
- 0L/KCXVDvlpZd0jw5rfWIbpvpoWxUOxzw1HhyeCLsHrSKDKf0vBmF9qhPqd0NNrlla219Gu36XXgU
- R4bhH8ssdfF2PUGauhNoGeznCO4QDYZvbHeWo0BzWAyS+J7UK2QnjOqY/EJBM4QruP5Z2jznXl3M0
- H4nzMMxWIDppLFtH0JP4sa+e/Cm41gBhE1oFyzTH0eNyl/AK7N0aU9M5Jpcf6LMs3oAS70bT4EtTX
- BWQSamYsTpMHid2R37zxEW5DsQ2Kii7la33jq1pPNNsdiV4qhfYe79KYLUIKzeASMTP2ywsFW1RqG
- F57MHyd6giVX33el3eD9YNzS;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1r4Qam-006uOS-0C; Sat, 18 Nov 2023 19:02:56 +0000
-Message-ID: <b63ead3c-f0dd-4acb-ae01-14e887d1d03e@samba.org>
-Date: Sat, 18 Nov 2023 20:02:55 +0100
+ (Exim) id 1r4Xxc-008rc2-5s
+ for samba-technical@lists.samba.org; Sun, 19 Nov 2023 02:55:04 +0000
+Received: from compute2.internal (compute2.nyi.internal [10.202.2.46])
+ by mailout.west.internal (Postfix) with ESMTP id A0BFF32004ED
+ for <samba-technical@lists.samba.org>; Sat, 18 Nov 2023 21:54:51 -0500 (EST)
+Received: from imap51 ([10.202.2.101])
+ by compute2.internal (MEProxy); Sat, 18 Nov 2023 21:54:51 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=outurnate.com;
+ h=cc:content-type:content-type:date:date:from:from:in-reply-to
+ :in-reply-to:message-id:mime-version:references:reply-to:sender
+ :subject:subject:to:to; s=fm3; t=1700362491; x=1700448891; bh=4k
+ 8B78fmlXtEYmfBxNhKEsnMaWrnF1wBB8ISyZTChsw=; b=s+TZ2buRgHijOnLG2z
+ wLqAFUd/byzqxEhJDGZvny2yZuOvURXDwu0XB18syXPWV0vyoS4ceOY4OGQLR7TS
+ wJXFx4DorkN6Pawfy8+7pSZBOkVWwADhhM6Y/Bd9puULoL6vhKbpCrBdOKIadSF4
+ HN8ne6FFMkpOxSwK3dSj3TfZO1OP6bPCiaFKKzRQjyYbQvY52t841AJ05zzdI0yD
+ a2mv1e8rL2RypxDyoEv/DXnfHymtfIxOSOHc90eQ4EKauTWApZRGu6JZraN5Kwuj
+ ptvJbMnqE9xOnZn88tft2iWjHjp0K4XCnlbUf2S9oqL8eJZZndCcthoSrvX1BCc0
+ 6/0Q==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ messagingengine.com; h=cc:content-type:content-type:date:date
+ :feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
+ :message-id:mime-version:references:reply-to:sender:subject
+ :subject:to:to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender
+ :x-sasl-enc; s=fm1; t=1700362491; x=1700448891; bh=4k8B78fmlXtEY
+ mfBxNhKEsnMaWrnF1wBB8ISyZTChsw=; b=WY3cYOlboEf7b6TTEcH+4WiLMHI6F
+ 6YD7gborh5Wj9oGObxc6lp7P2ju2A/s/K5mZ1wRSMbUrD+xPezmSnpFmQhkszjay
+ /hNUdFP3CSmrEgRT/komyFv6FwFgZP1laTOyaZ98Qbp9gOKcO1ZGwLtWIpG1Liim
+ GLuVJA2mb+25WBqcjbzJgM7uchJ+Rml31GMRYmQqgsJrkEeU+lc11bMf9ZxESH2Q
+ RmaEFh/uribz/nN56BIjahgUagwVb3FsHe5CI/dhfve/YV9bDPw3vMklgT6q/YEU
+ B2o4Yjva9I7laHNgvNz9DQ3ZWQD+sdRanmSb2hYoC1XiqLBfnBOcC4IJQ==
+X-ME-Sender: <xms:-nhZZb4TD-y-YtFuYUsBiYU1kZFg97KGf4tRnNtsQbjCRLP7ofvh1Q>
+ <xme:-nhZZQ44Rk2sWeosNNwNdjL0vQNcVSn_kq2y1NJ758f0jDAUnF_2a-eceXYvBBOP9
+ 19cWoSGCP9904wfQ0Y>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvkedrudegfedghedvucetufdoteggodetrfdotf
+ fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
+ uceurghilhhouhhtmecufedttdenucenucfjughrpefofgggkfgjfhffhffvufgtsehttd
+ ertderredtnecuhfhrohhmpedflfhovgcuffhilhhlohhnfdcuoehjohhsvghphhesohhu
+ thhurhhnrghtvgdrtghomheqnecuggftrfgrthhtvghrnhephfejleeivdetkeegieehke
+ ejvdekfeeludetteefvdeuveekgefhieehhfeftedtnecuffhomhgrihhnpehgihhthhhu
+ sgdrtghomhdpghhithhlrggsrdgtohhmpdhsuhhsvgdrtghomhenucevlhhushhtvghruf
+ hiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpehjohhsvghphhesohhuthhurhhn
+ rghtvgdrtghomh
+X-ME-Proxy: <xmx:-nhZZSfKisXrNSjfTi8b4a5vNVygq16NTWmuDAKNNu32KDVkU4Wa5A>
+ <xmx:-nhZZcKIjkBVI7y-6z28ecspIweNvTJaLf31WyEL9zuRPVT2CNajvg>
+ <xmx:-nhZZfJKqhbDqlUtFyY0trdjXG83RG_R6KIqoelmtfGMI2Gysb9a8w>
+ <xmx:-3hZZUX4-jNOIgkE-wyjInz8AS5d8mtgmI02RsgUmL-dAXaKGg_LEA>
+Feedback-ID: ic7c14608:Fastmail
+Received: by mailuser.nyi.internal (Postfix, from userid 501)
+ id D589EB60089; Sat, 18 Nov 2023 21:54:50 -0500 (EST)
+X-Mailer: MessagingEngine.com Webmail Interface
+User-Agent: Cyrus-JMAP/3.9.0-alpha0-1108-g3a29173c6d-fm-20231031.005-g3a29173c
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: en-US, de-DE
-To: Jeremy Allison <jra@samba.org>
-Subject: [SMB3UNIX] Add POSIX-FSA and POSIX-FSCC
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------HferfaGqjfPItgIENtvEIgQe"
+Message-Id: <371d142b-32dc-44ec-a677-39d26ba96f0d@app.fastmail.com>
+In-Reply-To: <66505624-8efa-843d-ede0-8968d2951f59@samba.org>
+References: <922de58f-d011-427d-8248-9f8ce7c90e74@app.fastmail.com>
+ <19507e01-a2f0-fcd1-9b98-47a72cdf11f2@samba.org>
+ <6c0ddbb6-4375-4d18-8e4e-0114dc7736cd@samba.org>
+ <4baa6aa2-052f-1e19-63c0-ef3711d9febd@samba.org>
+ <7b96929d-54f6-4e2f-8180-2810d7b6ae10@app.fastmail.com>
+ <66505624-8efa-843d-ede0-8968d2951f59@samba.org>
+Date: Sat, 18 Nov 2023 21:54:30 -0500
+To: samba-technical@lists.samba.org
+Subject: Re: I want to make ADCS support better and I need some advice
+Content-Type: text/plain
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -56,80 +94,45 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Ralph Boehme <slow@samba.org>
-Cc: Volker Lendecke <vl@samba.org>, Steve French <smfrench@gmail.com>,
- Stefan Metzmacher <metze@samba.org>, Tom Talpey <tom@talpey.com>,
- Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
+From: Joe Dillon via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Joe Dillon <joseph@outurnate.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------HferfaGqjfPItgIENtvEIgQe
-Content-Type: multipart/mixed; boundary="------------c5gULPbzKiyN3g7X5D0NGc10";
- protected-headers="v1"
-From: Ralph Boehme <slow@samba.org>
-To: Jeremy Allison <jra@samba.org>
-Cc: Volker Lendecke <vl@samba.org>, Steve French <smfrench@gmail.com>,
- Tom Talpey <tom@talpey.com>,
- Ralph Boehme via samba-technical <samba-technical@lists.samba.org>,
- Stefan Metzmacher <metze@samba.org>
-Message-ID: <b63ead3c-f0dd-4acb-ae01-14e887d1d03e@samba.org>
-Subject: [SMB3UNIX] Add POSIX-FSA and POSIX-FSCC
+On Wed, Nov 15, 2023, at 2:41 PM, David Mulder via samba-technical wrote:
+> 
+> On 11/13/23 2:53 PM, Joe Dillon via samba-technical wrote:
+> > AIX support is a tier-3 target in rust: https://github.com/rust-lang/compiler-team/issues/553.  Samba already depends dev-depends on rust (selftest requires python3-cryptography).  What's usually a showstopper for rust is gcc support.
+> >
+> > In my opinion, it makes the most sense to not re-invent the wheel though.  I had to write a Certificate Management over CMS implementation in rust because one didn't exist.  Python has python-cmc.  Would pulling in a dependency on python-asn1crypto be acceptable?  As I understand the source, the samba python module doesn't pull in any dependencies right now?
+> >
+> > Am I correct that the modules samba.dcerpc and ldb are currently undocumented?
+> 
+> I've hacked up a way to build Rust via WAF here: 
+> https://gitlab.com/samba-team/samba/-/merge_requests/3394
+> 
+> This is ugly right now. There is probably a better way to do this. I 
+> don't understand WAF well enough to make sensible changes here.
+> 
+> -- 
+> David Mulder
+> Labs Software Engineer, Samba
+> SUSE
+> 1221 S Valley Grove Way, Suite 500
+> Pleasant Grove, UT 84062
+> (P)+1 385.208.2989
+> dmulder@suse.com
+> http://www.suse.com
 
---------------c5gULPbzKiyN3g7X5D0NGc10
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
+I managed to get the IDL for ICPR translated to PIDL.  Would appreciate some feedback on the IDL, in particular, on the dwFlags struct.  It has 8 bits of padding at the end and I wasn't able to discern what the convention is for reserved/padding bits in structs.  See here: https://gitlab.com/Outurnate/samba/-/commit/e7520d74583b0fb3cfeac0783ae741f197f8eb99#note_1657603227
 
-SGkhDQoNCkkndmUgd29ya2VkIGEgbG90IG9uIHRoZSBzcGVjIG92ZXIgdGhlIGxhc3QgMiB3
-ZWVrcy4NCg0KSSd2ZSBtb3N0bHkgZmluaXNoZWQgUE9TSVgtU01CMiAodGhlIGV4aXN0aW5n
-IHNwZWMsIGZpcnN0IGxpbmsgYmVsb3cpIA0KYW5kIHdoaWxlIHdvcmtpbmcgb24gdGhhdCBJ
-IHJlYWxpemVkIHRoYXQgaXQgbWFrZXMgYWJzb2x1dGVseSBubyBzZW5zZSANCnRvIGhhdmUg
-ZmlsZXN5c3RlbSBiZWhhdmlvdXIgaW4gUE9TSVgtU01CMiwgc28gSSd2ZSBzdGFydGVkIGEg
-UE9TSVgtRlNBIA0KZG9jdW1lbnQgYWxvbmdzaWRlIFBPU0lYLUZTQ0MuDQoNCk5hbWluZyBj
-b252ZW50aW9uOg0KDQpJJ20gZm9sbG93aW5nIE1TIG5vbWVuY2xhdHVyZSwganVzdCByZXBs
-YWNpbmcgdGhlIE1TLSBwcmVmaXggd2l0aCBQT1NJWCwgDQp3aGljaCBnaXZlcyBQT1NJWC1T
-TUIyLCBQT1NJWC1GU0EgYW5kIFBPU0lYLUZTQ0MuIFdpdGggdGhlc2UgaXQncyANCnBvc3Np
-YmxlIHRvIGhhdmUgbmljZSBhbmQgY29uc2lzdGVudCBjcm9zcyByZWZlcmVuY2VzLg0KDQpD
-dXJyZW50IFdJUDoNCg0KaHR0cHM6Ly93d3cuc2FtYmEub3JnL35zbG93L3NtYjNfcG9zaXhf
-ZXh0ZW5zaW9ucy5odG1sDQpodHRwczovL3d3dy5zYW1iYS5vcmcvfnNsb3cvZnNhX3Bvc2l4
-X2V4dGVuc2lvbnMuaHRtbA0KaHR0cHM6Ly93d3cuc2FtYmEub3JnL35zbG93L2ZzY2NfcG9z
-aXhfZXh0ZW5zaW9ucy5odG1sDQoNCkkndmUgY3JlYXRlZCBhIHByb2plY3QgZm9yIHRoaXMg
-dW5kZXIgdGhlIFNhbWJhIHVtYnJlbGxhIG9uIGdpdGxhYiBoZXJlOg0KDQpodHRwczovL2dp
-dGxhYi5jb20vc2FtYmEtdGVhbS9zbWIzLXBvc2l4LXNwZWMNCg0KV0lQIGJyYW5jaDoNCg0K
-aHR0cHM6Ly9naXRsYWIuY29tL3NhbWJhLXRlYW0vc21iMy1wb3NpeC1zcGVjLy0vY29tbWl0
-cy9zbG93LXdpcA0KDQpUaGUgaG9zdGluZyBvZiB0aGUgc3BlYyBvbiBDb2RlYmVyZyBmZWVs
-cyBhIHNvbWV3aGF0IG9kZCBhbmQgaGF2aW5nIHRoZSANCnNwZWMgaG9zdGVkIHdoZXJlIG1v
-c3QgY29udHJpYnV0b3JzIGFscmVhZHkgaGF2ZSBhbiBhY2NvdW50IHNpbXBsaWZpZXMgDQpj
-b2xsYWJvcmF0aW9uLiBXZSBjYW4gb2YgY291cnNlIGNvbnRpbnVlIHRvIHB1c2ggbWFzdGVy
-IHRvIENvZGViZXJnIG9uY2UgDQppbiBhIHdoaWxlIHRvIGhhdmUgYW4gaW5kZXBlbmRlbnQg
-aG9zdGluZywgaWYgdGhhdCBpcyB3aGF0IHNvbWUgbWlnaHQgDQpwcmVmZXI/DQoNCkknbSBw
-bGFubmluZyB0byBmaW5pc2ggUE9TSVgtRlNBIGluIHRoZSBuZXh0IHdlZWtzLiBJJ20gaGFw
-cHkgdG8gdGFrZSANCnJldmlld3MsIGZpeGVzLCBpbXByb3ZlbWVudHMgYW5kICJ5b3UgY2Fu
-J3QgZG8gdGhpcyEiLg0KDQotc2xvdw0K
+Right now, certificate enrollment relies on python-cryptography, which has rust components.  It uses the asn1 crate - my CMC implementation in rust uses the bcder crate, because that's what the CMS crate uses.  Design-wise, I have a few options, and I'm seeking some guidance here:
 
---------------c5gULPbzKiyN3g7X5D0NGc10--
+1) Pull a new dependency on python-cmc and by extension asn1crypto.  This will bring the number of asn1 parser libraries in samba to four (that I can count) - samba's asn1 lib, pyasn1 used in the test suite, and rust's asn1 crate.
+2) Write a new, minimal CMS and CMC implementation in rust on top of the asn1 crate, thus introducing no new dependencies.  This implementation would then be exposed to python to be combined with cepces and ldb to form a complete implementation.
+3) Have ICPR be the only in-tree component of this.  Shunt the rest of the implementation off to a certmonger helper binary.  This was my original design concept.  There would be a slight circular dependency - the helper would be dylinked to samba, then python would shell out to it during enrollment (like cepces).
 
---------------HferfaGqjfPItgIENtvEIgQe
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature.asc"
+Any direction is appreciate
 
------BEGIN PGP SIGNATURE-----
-
-wsF4BAABCAAjFiEE+uLGCIokJSBRxVnkqh6bcSY5nkYFAmVZCl8FAwAAAAAACgkQqh6bcSY5nkbR
-kg/3bDEs3y0it250Ab3/mVj1gUF6q/MtrXrLAIsQK3cRFydtgWwa8gKmIm8vTwBza4i7yg0b1P54
-EOUMofzGW3mpxDE3W4rPpOzfjpvtps0YtvLR1DKkP0NwGvLivDkyGoA0Ir1o351jIww866pFKck0
-KSWMmAbQlgqm/+spYh0VlJV3iaUFfU3bKQ4etBeT8OQnMYRNYy7eDjTmYGORxTypma0XmjPeH6L3
-xsz4LqjUtk92A7ohjz+XuG7CcPfdwCaH41N8MKvS/2ZvCM48gu8+kRxfgZuOry+/mCYWFJYsdMDR
-4cTuiP3ETW5tN2RAP1d6h4WL7y+pPCQjV2PiMZvAC8TPBw/HA/QJ6cxIldBpXz350X/b5IBnHzpS
-U7qGNIan+irD3vC/MziF/gDuMZfHAr5wGsANMl5txnnnLPcshutKeXLHnArv0VLDLFhAB5ZN7Vt8
-TW/KsxPJD7arhiLSkihEhrCHUAfPQMwVKWoUt9RWIH5tE+Y+jgq28Q/yZDe9S+uV44JXTed4AnUj
-2rsFH9u+xs74twqW2MbibLMdz+RePqTuk4uwqLTfDkYcUxpkVo47NYqPvFRDkMsL4rfg/d2dAANO
-mlbkbRzbMH4Aqog8y09C2wSkXKmUf769O6mbJjJS5FZDkYWImCs4YrQNbITTyXNXL6fF11DUofwA
-6Q==
-=YA8Q
------END PGP SIGNATURE-----
-
---------------HferfaGqjfPItgIENtvEIgQe--
+Joe Dillon
 
