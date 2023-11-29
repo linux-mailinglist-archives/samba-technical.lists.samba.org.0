@@ -2,54 +2,46 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0909F7FCE87
-	for <lists+samba-technical@lfdr.de>; Wed, 29 Nov 2023 06:51:34 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1264C7FDA3C
+	for <lists+samba-technical@lfdr.de>; Wed, 29 Nov 2023 15:47:24 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=0mSyvcP1dU057Wo8RnWjkwnG6wIvUOfbir2bD3xikqw=; b=grHvIKrvEeptvxuvpqcEr3rebn
-	Nv26lj61KxUmGWpzkjTCW60idJrhBZv7xdkQbunUVvseUj6Mi++8I+scJo6jnVkReQJj4uk58GAn6
-	5R6jZteOl6zmuHpi42kLs5bex/zcycrzGyhNKu4B4Xrrd0sG9kQO1/CG64P1qRHM/+SVjkZFl0Kdx
-	j1kgEjToVrc7XHv1Rl2WFRdyloy996ENoHjufebD3nMwM2fiqY3oJYDx9+ajDoUM20y6o3tW6Kosr
-	9ayosXj/yPFSxpnnEsjfR0oNZjYvAJC+dU2QedSnaPCG4dIEqKLqwvqC9/WdyCLnPxGUIz//hgqSW
-	Q65/SI5Q==;
-Received: from ip6-localhost ([::1]:51196 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
+	bh=xWYOAe/ga8Bh/EHthjbmGs2BVXG2QAQtrKM/e5IQep4=; b=qoYZnGz1GWBrnZzBZLs4lT8TZ6
+	5NocQxBx+fPUR+Eil3hgxm1/15jqBF+2pjfObrNeitpkz4jtMEPqJrGbuDm0uWKYmq/RCMhVOSF3Y
+	4Je53BcL2YwAXJ/nOt4BQ/w123U0/zuah9EVmjs94CHUysIL3yG/YJ4APnGQf2fakUM8PainVId2m
+	L/qE38qH8woHwwfSsySd42hQSG+q16Pgx3bOT50GGLclixYfRO47WsOsC59DkIQnDJleip1C5nA4k
+	Gr+uUge3Z2oJbOeB4bCdF8JHRmbmH0zJYs6T5kBrvzUITH7J2IqOalPDG3QxMkt+0DDuFezZLiD7A
+	2V0jpl5A==;
+Received: from ip6-localhost ([::1]:49622 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1r8DTF-001Iiu-Cx; Wed, 29 Nov 2023 05:50:49 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:15616) 
+	id 1r8Lq8-001MZr-68; Wed, 29 Nov 2023 14:47:00 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:57014) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1r8DTA-001Iil-E7
- for samba-technical@lists.samba.org; Wed, 29 Nov 2023 05:50:46 +0000
+ (Exim) id 1r8Lq0-001MYu-5P; Wed, 29 Nov 2023 14:46:55 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=From:Cc:To:Date:Message-ID;
- bh=0mSyvcP1dU057Wo8RnWjkwnG6wIvUOfbir2bD3xikqw=; b=nGFzLr/gCUJbqR98+5BaDKRvvS
- CILKaUGYEYLCklP8SZdqG0FbEPNiUXNG5IpauRsk6yr/cknCbL/OcnrltDyrJr8v11zsxjPrW1+4X
- D4Fd67prQrUWJDWpYFKfe7VM23imVDuCz3NNlB06gw4FqDT5kyIdFdGm0io+LFcj/ykqSqS/NLkSN
- d/TWa4PMYyAEPpKCGlK7dz6w1mO+tXY2J4zJm2BTYhksTzLeABWMrpckiD4Te7ETx1Yr3/yIpE4JZ
- Z0k9GZ4MwyBK/kNT8SrCbpzmrWcRnhlG4Mge675lZlvV14AM44HjeocjoHQmQnCZTXnCkN3tWaj+M
- iHTHSe3CS+PuAmG+8BlfHikV/c+Z3RQaFAPOa57/r997RcFonC3fUQvH8qlnjF+WIf/TSKny/Owzc
- g+7FfIIlhbDXDolyct8aGr04Mckn+OuD6zDBcB3ksV/eddsK+prR9o6cMPkEolVWV7/E5qPHgk8tb
- hpJehH1NxbRa+OWW2BeRbJaL;
+ s=42; h=From:To:Date:Message-ID:CC;
+ bh=xWYOAe/ga8Bh/EHthjbmGs2BVXG2QAQtrKM/e5IQep4=; b=IVVv/n04DcjcFVcYIwje/q//aU
+ MwW82G4/q697SaNhIgI1bGgKBWPmWK9nrmhLVVxI7zgstDfMDmEg/dTnvZ8cLOMhQlV3KYS31Rzim
+ Iup4CrMBEsvWjA6Z1dXLtwa+wJdn4r9XImafazdb/637Hn1cyqs0JCEVeDsMq0TNfRzAPMBI2TELa
+ ZxaQ28vkT1MO4qLIvuc/wkvg/ji1n8WNtgF1MT7ExJqdH298WPAn9I32fYkKr0D/MgKjo/JvaV5RS
+ 4CGgxowbzGHfACOnTPpm37vX97csm3DR4FdpzhXjnD9N8EiL24B4IJBrCzYOaZBHwDAyMzkp6/1t0
+ fjpzt6I2QZujhTbj3xZ2+DZYUXiOxEvZr3peq6YdvDGcOb+hJaKkqSqMSBwtex5Op4vZfWU8tDKqM
+ 53po/HBNN5EZPy3u2Lhdjc+wdjewez+NgVa60mOUK7aN/T3uXpq3x7Ziq4UOvIONVcV/vG1DpmQcy
+ 93B+HLET50OVL5aF1KYlfmlf;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1r8DT8-0011Ty-02; Wed, 29 Nov 2023 05:50:42 +0000
-Message-ID: <2769bde9-925d-4c88-98f8-88ef98efb63d@samba.org>
-Date: Wed, 29 Nov 2023 06:50:40 +0100
+ (Exim) id 1r8Lpz-0016mz-1X; Wed, 29 Nov 2023 14:46:51 +0000
+Message-ID: <ab72ed80-1a82-42a7-b34b-2632a2d51b72@samba.org>
+Date: Wed, 29 Nov 2023 15:46:50 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [SMB3POSIX] File attributes
-Content-Language: en-US, de-DE
-To: Jeremy Allison <jra@samba.org>, Steve French <smfrench@gmail.com>
-References: <e916bdea-4197-4372-a15b-cea41c8ebe03@samba.org>
- <ZVJh3X9GQ5L9mLS0@jeremy-HP-Z840-Workstation>
- <e6bd562a-296c-44f2-8164-8a90d98fa6e2@samba.org>
- <CAN05THS4H1+vHuPSnRQmiRtDDpnw3j0PUUJi6FwFZf_2zrAsRQ@mail.gmail.com>
- <CAH2r5mspC6iufincWMtHWrY=Le6nbsDEB3kpFxUFAhKSWR-2bg@mail.gmail.com>
- <ZWaKyLw/Q2uefb+i@jeremy-HP-Z840-Workstation>
-In-Reply-To: <ZWaKyLw/Q2uefb+i@jeremy-HP-Z840-Workstation>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------vSO0j5wie1uEEYSGm9ezhhEk"
+Content-Language: de-DE
+To: samba-announce@lists.samba.org, samba@lists.samba.org,
+ samba-technical@lists.samba.org
+Subject: [Announce] Samba 4.18.9 Available for Download
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -63,64 +55,154 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Ralph Boehme <slow@samba.org>
-Cc: Tom Talpey <tom@talpey.com>, Volker Lendecke <vl@samba.org>,
- Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
+From: Jule Anger via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jule Anger <janger@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------vSO0j5wie1uEEYSGm9ezhhEk
-Content-Type: multipart/mixed; boundary="------------XcSBwV0C4AUL8ThMT3N0WTOe";
- protected-headers="v1"
-From: Ralph Boehme <slow@samba.org>
-To: Jeremy Allison <jra@samba.org>, Steve French <smfrench@gmail.com>
-Cc: ronnie sahlberg <ronniesahlberg@gmail.com>, Tom Talpey <tom@talpey.com>,
- Volker Lendecke <vl@samba.org>,
- Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
-Message-ID: <2769bde9-925d-4c88-98f8-88ef98efb63d@samba.org>
-Subject: Re: [SMB3POSIX] File attributes
-References: <e916bdea-4197-4372-a15b-cea41c8ebe03@samba.org>
- <ZVJh3X9GQ5L9mLS0@jeremy-HP-Z840-Workstation>
- <e6bd562a-296c-44f2-8164-8a90d98fa6e2@samba.org>
- <CAN05THS4H1+vHuPSnRQmiRtDDpnw3j0PUUJi6FwFZf_2zrAsRQ@mail.gmail.com>
- <CAH2r5mspC6iufincWMtHWrY=Le6nbsDEB3kpFxUFAhKSWR-2bg@mail.gmail.com>
- <ZWaKyLw/Q2uefb+i@jeremy-HP-Z840-Workstation>
-In-Reply-To: <ZWaKyLw/Q2uefb+i@jeremy-HP-Z840-Workstation>
+Release Announcements
+---------------------
 
---------------XcSBwV0C4AUL8ThMT3N0WTOe
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
+This is the latest stable release of the Samba 4.18 release series.
+It contains the security-relevant bug CVE-2018-14628:
 
-T24gMTEvMjkvMjMgMDE6NTAsIEplcmVteSBBbGxpc29uIHdyb3RlOg0KPiBMZXQncyBzdGFy
-dCB3aXRoIGEgbWluaW11bSB1c2FibGUgZmVhdHVyZSBzZXQgdGhhdA0KPiBwZW9wbGUgYWN0
-dWFsbHkgdXNlLCBhbmQgb25jZSB3ZSBoYXZlIG1vcmUgZXhwZXJpZW5jZQ0KPiB3aXRoIHRo
-YXQgdGhlbiBsZXQncyAqY2FyZWZ1bGx5KiBkZWNpZGUgaWYgd2Ugd2FudC9uZWVkDQo+IHRv
-IGV4cGFuZCBpdC4NCg0Kc291bmRzIHJlYXNvbmFibGUuDQoNCi1zbG93DQo=
+     Wrong ntSecurityDescriptor values for "CN=Deleted Objects"
+     allow read of object tombstones over LDAP
+     (Administrator action required!)
+     https://www.samba.org/samba/security/CVE-2018-14628.html
 
---------------XcSBwV0C4AUL8ThMT3N0WTOe--
 
---------------vSO0j5wie1uEEYSGm9ezhhEk
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature.asc"
+Description of CVE-2018-14628
+-----------------------------
 
------BEGIN PGP SIGNATURE-----
+All versions of Samba from 4.0.0 onwards are vulnerable to an
+information leak (compared with the established behaviour of
+Microsoft's Active Directory) when Samba is an Active Directory Domain
+Controller.
 
-wsF5BAABCAAjFiEE+uLGCIokJSBRxVnkqh6bcSY5nkYFAmVm0TEFAwAAAAAACgkQqh6bcSY5nkZ+
-7BAArW5jcdvYeloSlxj1miifWhPT4P9dixcYU40SpxwBDNUCFiGJiaHmn8SZybDP7+7TzEQKOyqw
-WXf9OPyKVoWOwiOw3gElCro/Zkxt6mpxMKQI6QcHtTNQ5ruarthIp+FY8LTTBJCl79Yt9EX+iGPA
-up6cQPeVttm7RBhaBuG9L4/lxKJ6SqaJ9KMi7CEwHuXNqohN77DcjZ3yo00YujVOc5rjuw/JgO5K
-8AJ6CUpTzM8ECp2CJzFbiDP1IULFAD+tcc8lChSBKq2z2byK5Fypt9fMhO1/iJ31XEHaqpcHUNwZ
-3X00pPht6cOECdlgp9lYNKShjbFTQQLySuDxub9urHzg2k/If6Ncn4hsd+dZrO9IlxNINr5mxqSt
-xWUypTL9bVh34wibuUPy5i8Azvu86mAnnMKITgkKYXsG5Xfsf74oVuzcW8FOhSEQj26d/KAvZFhJ
-rVCQFL4gJ7ESFlWaCZ1s4P4LyGiaUveZIW4G/iZ25fl6TMfulgMqEJU3rmBug8+ee0fb4vSmuM8+
-maUezi0JzmYF4V84/XCchIO1a1qmbuiqZoN/jzaQNtzKUs88m7BgEjwXdxKWTnp4dLqmRx5MnnxN
-RBwcZbzyHiP4A4TSJU7xh13Ikpqlw9DB9jC7NcU1dpGoht5a9tAZFVxfIVOrCARE9hKbYfgkuujF
-mf4=
-=Ov+U
------END PGP SIGNATURE-----
+When a domain was provisioned with an unpatched Samba version,
+the ntSecurityDescriptor is simply inherited from 
+Domain/Partition-HEAD-Object
+instead of being very strict (as on a Windows provisioned domain).
 
---------------vSO0j5wie1uEEYSGm9ezhhEk--
+This means also non privileged users can use the
+LDAP_SERVER_SHOW_DELETED_OID control in order to view,
+the names and preserved attributes of deleted objects.
+
+No information that was hidden before the deletion is visible, but in
+with the correct ntSecurityDescriptor value in place the whole object
+is also not visible without administrative rights.
+
+There is no further vulnerability associated with this error, merely an
+information disclosure.
+
+Action required in order to resolve CVE-2018-14628!
+---------------------------------------------------
+
+The patched Samba does NOT protect existing domains!
+
+The administrator needs to run the following command
+(on only one domain controller)
+in order to apply the protection to an existing domain:
+
+   samba-tool dbcheck --cross-ncs --attrs=nTSecurityDescriptor --fix
+
+The above requires manual interaction in order to review the
+changes before they are applied. Typicall question look like this:
+
+   Reset nTSecurityDescriptor on CN=Deleted Objects,DC=samba,DC=org back 
+to provision default?
+         Owner mismatch: SY (in ref) DA(in current)
+         Group mismatch: SY (in ref) DA(in current)
+         Part dacl is different between reference and current here is 
+the detail:
+                 (A;;LCRPLORC;;;AU) ACE is not present in the reference
+                 (A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;SY) ACE is not present 
+in the reference
+                 (A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;DA) ACE is not present 
+in the reference
+                 (A;;CCDCLCSWRPWPSDRCWDWO;;;SY) ACE is not present in 
+the current
+                 (A;;LCRP;;;BA) ACE is not present in the current
+    [y/N/all/none] y
+   Fixed attribute 'nTSecurityDescriptor' of 'CN=Deleted 
+Objects,DC=samba,DC=org'
+
+The change should be confirmed with 'y' for all objects starting with
+'CN=Deleted Objects'.
+
+
+Changes since 4.18.8
+--------------------
+
+o  Michael Adam <obnox@samba.org>
+    * BUG 15497: Add make command for querying Samba version.
+
+o  Ralph Boehme <slow@samba.org>
+    * BUG 15487: smbd crashes if asked to return full information on 
+close of a
+      stream handle with delete on close disposition set.
+    * BUG 15521: smbd: fix close order of base_fsp and stream_fsp in
+      smb_fname_fsp_destructor().
+
+o  Björn Jacke <bj@sernet.de>
+    * BUG 15093: Files without "read attributes" NFS4 ACL permission are not
+      listed in directories.
+
+o  Stefan Metzmacher <metze@samba.org>
+    * BUG 13595: CVE-2018-14628 [SECURITY] Deleted Object tombstones 
+visible in
+      AD LDAP to normal users.
+
+o  Christof Schmitt <cs@samba.org>
+    * BUG 15507: vfs_gpfs stat calls fail due to file system permissions.
+
+o  Christof Schmitt <christof.schmitt@us.ibm.com>
+    * BUG 15497: Add make command for querying Samba version.
+
+o  Martin Schwenke <mschwenke@ddn.com>
+    * BUG 15479: ctdbd: setproctitle not initialized messages flooding logs.
+
+
+#######################################
+Reporting bugs & Development Discussion
+#######################################
+
+Please discuss this release on the samba-technical mailing list or by
+joining the #samba-technical:matrix.org matrix room, or
+#samba-technical IRC channel on irc.libera.chat.
+
+If you do report problems then please try to send high quality
+feedback. If you don't provide vital information to help us track down
+the problem then you will probably be ignored.  All bug reports should
+be filed under the Samba 4.1 and newer product in the project's Bugzilla
+database (https://bugzilla.samba.org/).
+
+
+======================================================================
+== Our Code, Our Bugs, Our Responsibility.
+== The Samba Team
+======================================================================
+
+
+
+================
+Download Details
+================
+
+The uncompressed tarballs and patch files have been signed
+using GnuPG (ID AA99442FB680B620).  The source code can be downloaded
+from:
+
+         https://download.samba.org/pub/samba/stable/
+
+The release notes are available online at:
+
+         https://www.samba.org/samba/history/samba-4.18.9.html
+
+Our Code, Our Bugs, Our Responsibility.
+(https://bugzilla.samba.org/)
+
+                         --Enjoy
+                         The Samba Team
 
