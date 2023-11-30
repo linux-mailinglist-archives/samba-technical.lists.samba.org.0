@@ -2,47 +2,33 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 24EB97FDA51
-	for <lists+samba-technical@lfdr.de>; Wed, 29 Nov 2023 15:49:10 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id B07C47FF37C
+	for <lists+samba-technical@lfdr.de>; Thu, 30 Nov 2023 16:22:38 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
-	bh=j/AiTjF7rMKT326H2sk6g9JnflzyO7n0nSO6HECl0Go=; b=MNCMdoVEQi5AKjakJpcHaxO71X
-	5fPkNYQxKwm+4UAE1Zr/7J5EexwqJ6K9lmaNv6kJm4xjUuNimnA3l0oDx7+drr7Sxe2ifwvCZNHnk
-	LEDWXfO7y5MtqRybvKLZDhiMvLLIHd1R6EomS4yYTK5Kkuc0ryWmOkZk0MbqWVArT9CzINYUQJ/3F
-	2l5I4+Taz9MagaqpF2xnzIB5AwE9v+cpZu/KjoA9FYunwEk9YL9uTOef+tbBWLyD6oVtUtJlXOKWL
-	95BqNUp6i4qnP2480iTdH/3HlvBRyDdQ284oIgK/aTH+xiAnBPgHKq4hoavlbFprNIXzL77rWJZUm
-	a0T5S7Tw==;
-Received: from ip6-localhost ([::1]:36228 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
+	bh=jCmdwRH6o5owCx+nq5kgNbkwu2QbA9BPu+BV1dYkstk=; b=PH2q9yTmxcTIjwJLVJKiAvsJy7
+	ztnsrf4dY751+xT1+tNaTdohvLZ8nn6aRAKJyhrFboGUbh/XH714mYH3fJsMuXUKTZSk9aDHytGoy
+	Ga/V7Od2oStbxC1U4HhtpvnhtMkop/r4QgjCwJ2sBgyXBP6KIrlkfh0AwbxrkwlZh47/8kknEjd9N
+	Y1RFKZNSbI1ny+eaOLV12DDhjl13HCBfrrt/h0RnvgAi+patFDWpzwQm8AvZfO8PHxUa7EBhZZtYe
+	FnhZH9Dp3iMVlcv5wvmDO3+xyI66fzfl3fDPj4JfaUWgcWAdkhdJ7iD5bAlcQgeiavouCIR5UZqUj
+	rS2JJWyA==;
+Received: from ip6-localhost ([::1]:34268 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1r8Ls9-001O7W-5T; Wed, 29 Nov 2023 14:49:05 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:60836) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1r8Ls4-001O6E-Ip
- for samba-technical@lists.samba.org; Wed, 29 Nov 2023 14:49:03 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=From:To:Date:Message-ID:CC;
- bh=j/AiTjF7rMKT326H2sk6g9JnflzyO7n0nSO6HECl0Go=; b=czayZNyTynZNP8yfSRdXedlg6+
- 3gnBDe/2cTWaOLAsrzIOjnMVcmtpQ1P9KIZ43V2ulQi/QrTDTPDAkBzvqky2jPf0+iVti1lSTKnyI
- 1pbFBFb9zVwMxonqkOwnPtlR8pT0KnrvIeEglIY3Fwx6vN3OtpQ+gwV5tgI/kYDdiHnEA50+NuAqV
- PxQsMWMXPxbJslEZzdi9HfrCdaCR9LbhZutqS/3qcF1ByDfqSVmZYCktoWQIFHTyER16IFB4pf7PU
- 9UVbUaux11o56RcyUPkmRamnqtDUA07uKxJeYut1kheuGWKOaDk+Kd+mwxonuUaetzdTwjDwGjqI5
- cQRj572721p8d2PoY9ZVeiZ0eZSvIk6+exZXSiNhNKk4WOmuw1IMeRT3qnkljy3rz0vrhpyQ43GXO
- p/+XmKJE0D31lu6ZRgkARxuN4pVswCztfkXbdOLhv0Op4MbubmtTkiWi8KRVd8swhOfKGkncOKwr6
- eu3LP1hy5WZqzJ/EGkWDl1na;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1r8Ls3-0016rN-38 for samba-technical@lists.samba.org;
- Wed, 29 Nov 2023 14:49:00 +0000
-Message-ID: <52b4f09c-2de2-43ef-ad70-e46c73c2cc5b@samba.org>
-Date: Wed, 29 Nov 2023 15:48:59 +0100
+	id 1r8irn-001hNU-Pw; Thu, 30 Nov 2023 15:22:15 +0000
+Received: from [104.200.28.160] (port=45140 helo=dup2.asynchrono.us) 
+ by hr1.samba.org with esmtp (Exim)
+ id 1r8iri-001hL4-7v; Thu, 30 Nov 2023 15:22:13 +0000
+Received: from li-241d88cc-27c5-11b2-a85c-c640472b3c85.ibm.com
+ (c-73-114-43-44.hsd1.ma.comcast.net [73.114.43.44])
+ by dup2.asynchrono.us (Postfix) with ESMTPSA id DAD871146;
+ Thu, 30 Nov 2023 15:03:48 +0000 (UTC)
+To: samba-technical@lists.samba.org, samba@lists.samba.org
+Subject: Samba in Kubernetes (and Containers) - Release v0.4
+Date: Thu, 30 Nov 2023 10:03:48 -0500
+Message-ID: <5903408.31r3eYUQgx@li-241d88cc-27c5-11b2-a85c-c640472b3c85.ibm.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: de-DE, en-US
-To: samba-technical@lists.samba.org
-Subject: [Release Planning 4.18] Samba 4.18.10
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -56,25 +42,41 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jule Anger via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jule Anger <janger@samba.org>
+From: John Mulligan via samba-technical <samba-technical@lists.samba.org>
+Reply-To: John Mulligan <phlogistonjohn@asynchrono.us>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi,
+The team behind the "Samba in Kubernetes" organization is happy to announce 
+our third batch of releases. Release v0.4 includes both features and fixes 
+across three of our five publicly-consumable projects. These are the samba-
+operator, samba-container, and sambacc projects. These releases are part of 
+our plan to make releases twice a year, or approximately every 6 months.
 
-Samba 4.18.10 is scheduled for Wednesday, January 31 2024.
+Our little organization may be called "Samba in Kubernetes" but the projects 
+go beyond just Kubernetes. The images built using the samba-container project 
+are standard OCI container images, so they can work just as well on Docker or 
+Podman as on Kubernetes or another compatible container orchestration system. 
+The smbmetrics project can export Samba metrics as a Prometheus 
+endpoint even if you don't have a container in sight.
+
+As previously mentioned, this is a batch of related projects. URLs for each 
+new release are available below:
+
+* https://github.com/samba-in-kubernetes/samba-operator/releases/tag/v0.4
+* https://github.com/samba-in-kubernetes/samba-container/releases/tag/v0.4
+* https://github.com/samba-in-kubernetes/sambacc/releases/tag/v0.4
+
+Other projects in our organization either had no changes since the last 
+release or are not ready/intended for wide consumption.
+
+We'd love to hear your feedback. We have the github discussions (web-forum 
+style) feature enabled on many of the repos. We also routinely read the samba 
+project mailing lists, so feel free to reply here as well.
 
 
-https://wiki.samba.org/index.php/Release_Planning_for_Samba_4.18
-has been updated accordingly.
+Thank you for your time.
 
 
-Jule
-
--- 
-Jule Anger
-Release Manager Samba Team  samba.org
-SerNet Samba Team           sernet.de
 
 
