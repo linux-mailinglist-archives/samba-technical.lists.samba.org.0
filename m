@@ -2,33 +2,30 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0E6127FF883
-	for <lists+samba-technical@lfdr.de>; Thu, 30 Nov 2023 18:40:42 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9924C8036A1
+	for <lists+samba-technical@lfdr.de>; Mon,  4 Dec 2023 15:28:13 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
-	bh=vxeOS7ahxqlVBXgM8U0X8If5HNDM6lCy50RTwo4xKVY=; b=AN+WY370/YvMzQenWczePLqkw3
-	tcj2Us35Kec2fIEILOyNegGEyEfOBvYSWADLcactWKiaMqHEGqt4IY+U7KOYl/oMwAh7px1l3IckM
-	xezf1yP7Yv/DKcIsJVHcJ9Kk0oATM/Ow63gEY7wHXM/MUs/YN85wCKPtzY0UOnQZ8XURjIDcJ0k9X
-	tCt3Gy14EtO07f6iD6Irt6IGbiBju6Hg3vc5v5qMsIFP1xdxyH5EzsOIXALG/CwRqe64qumVx+39Q
-	506tPNA4n4d4nxWtu+AGIU4EA3c+wt55yZgTMX1yi1hNnkdcolATefHoYRCJmBbwxtmwk9r/9cBmL
-	SJU0eTfQ==;
-Received: from ip6-localhost ([::1]:36606 helo=hr1.samba.org) 
+	bh=cDjE0BIoaEtLnZtl6OMSzJtymgJ/Fb/SLSZZLAd+nkw=; b=vwV/lHjoOrF01wG79FDjqbbYD1
+	P3N4j7eIa5rHnpsIBD6u7TQqmQNBfL33H5nmvlAHKpF6tJpeIcFhkpvNDV6dnLg+pbULOEFRFCuCf
+	MgmKPt0JgAjlkusP8wjU9JnUA4Omb5WAMVvo5E5+rC1IR+21zxZLK2sksj7aodUj0lm6Ds9EDkxTv
+	vWMgIFt6sZX8g5qbN3q9W3LIWr01ZSvn4X0ZjF7Cx6yxhcSAyF3+kmbdYVBAmmdgLyt6H98NYuBhw
+	jSucbzPpxsWVSROheTlufu25YkxDVI6qAnag7W/jfg5maYwGMyl3G8scE/2cyXNHgLPN2I+2Y5WeG
+	Xf52sxxg==;
+Received: from ip6-localhost ([::1]:21238 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1r8l1Q-001kmF-VP; Thu, 30 Nov 2023 17:40:21 +0000
-Received: from [104.200.28.160] (port=45142 helo=dup2.asynchrono.us) 
- by hr1.samba.org with esmtp (Exim) id 1r8l1F-001km5-KX
- for samba-technical@lists.samba.org; Thu, 30 Nov 2023 17:40:13 +0000
-Received: from li-241d88cc-27c5-11b2-a85c-c640472b3c85.ibm.com
- (c-73-114-43-44.hsd1.ma.comcast.net [73.114.43.44])
- by dup2.asynchrono.us (Postfix) with ESMTPSA id 5AE721146;
- Thu, 30 Nov 2023 17:40:06 +0000 (UTC)
+	id 1rA9v6-004Bhz-4p; Mon, 04 Dec 2023 14:27:36 +0000
+Received: from [104.200.28.160] (port=45144 helo=dup2.asynchrono.us) 
+ by hr1.samba.org with esmtp (Exim) id 1rA9v1-004Bhn-Bi
+ for samba-technical@lists.samba.org; Mon, 04 Dec 2023 14:27:33 +0000
+Received: from edfu.localnet (c-73-114-43-44.hsd1.ma.comcast.net
+ [73.114.43.44])
+ by dup2.asynchrono.us (Postfix) with ESMTPSA id C96241508
+ for <samba-technical@lists.samba.org>; Mon,  4 Dec 2023 14:27:27 +0000 (UTC)
 To: samba-technical@lists.samba.org
-Subject: Re: Samba in Kubernetes (and Containers) - Release v0.4
-Date: Thu, 30 Nov 2023 12:40:05 -0500
-Message-ID: <3190298.irdbgypaU6@li-241d88cc-27c5-11b2-a85c-c640472b3c85.ibm.com>
-In-Reply-To: <95f29b05-f994-464f-9b2d-639c78eed650@samba.org>
-References: <5903408.31r3eYUQgx@li-241d88cc-27c5-11b2-a85c-c640472b3c85.ibm.com>
- <95f29b05-f994-464f-9b2d-639c78eed650@samba.org>
+Subject: TLS issues with www.samba.org
+Date: Mon, 04 Dec 2023 09:27:27 -0500
+Message-ID: <5999991.DvuYhMxLoT@edfu>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7Bit
 Content-Type: text/plain; charset="us-ascii"
@@ -50,80 +47,37 @@ Reply-To: John Mulligan <phlogistonjohn@asynchrono.us>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Thursday, November 30, 2023 11:51:28 AM EST Ralph Boehme via samba-
-technical wrote:
-> Hi John,
-> 
-> thanks to you and anyone else working on this!
-> 
-> Any highlights of what's new in 0.4?
+Apologies if this has been reported before or already known, but I don't 
+remember seeing it discussed.
 
-I probably should have copied some of them into the email. The features are 
-mostly in sambacc (which is the tool the drives the startup/automation of 
-samba-container server images).
-We added 
-* Support for custom global options in AD DC configurations
-* Preliminary support for configurations fetched via HTTP/HTTPS or Ceph RADOS
+I am currently unable to view www.samba.org and bugzilla.samba.org in Firefox.
 
-The samba-container release takes the new sambacc as well as newer samba 
-versions.
+wiki.samba.org is not affected.
 
-The samba-operator build includes a newer version of Go and is updated to make 
-use of the new samba-operator build. It also gets a fixed version of the 
-'kustomize' configuration files for deployment on kubernetes.
+The error reported is:
+---
+Secure Connection Failed
 
+An error occurred during a connection to www.samba.org. The OCSP response does 
+not include a status for the certificate being verified.
 
-Thank you for asking!
+Error code: MOZILLA_PKIX_ERROR_OCSP_RESPONSE_FOR_CERT_MISSING
 
+    The page you are trying to view cannot be shown because the authenticity 
+of the received data could not be verified.
+    Please contact the website owners to inform them of this problem.
+---
 
-> 
-> 
-> On 11/30/23 16:03, John Mulligan via samba-technical wrote:
-> 
-> > The team behind the "Samba in Kubernetes" organization is happy to
-> > announce
- our third batch of releases. Release v0.4 includes both
-> > features and fixes across three of our five publicly-consumable projects.
-> > These are the samba- operator, samba-container, and sambacc projects.
-> > These releases are part of our plan to make releases twice a year, or
-> > approximately every 6 months. 
-> > Our little organization may be called "Samba in Kubernetes" but the
-> > projects
- go beyond just Kubernetes. The images built using the
-> > samba-container project are standard OCI container images, so they can
-> > work just as well on Docker or Podman as on Kubernetes or another
-> > compatible container orchestration system. The smbmetrics project can
-> > export Samba metrics as a Prometheus
-> > endpoint even if you don't have a container in sight.
-> > 
-> > As previously mentioned, this is a batch of related projects. URLs for
-> > each
- new release are available below:
-> > 
-> > * https://github.com/samba-in-kubernetes/samba-operator/releases/tag/v0.4
-> > *
-> > https://github.com/samba-in-kubernetes/samba-container/releases/tag/v0.4
-> > * https://github.com/samba-in-kubernetes/sambacc/releases/tag/v0.4
-> > 
-> > Other projects in our organization either had no changes since the last
-> > release or are not ready/intended for wide consumption.
-> > 
-> > We'd love to hear your feedback. We have the github discussions
-> > (web-forum
-> > style) feature enabled on many of the repos. We also routinely read the
-> > samba
- project mailing lists, so feel free to reply here as well.
-> > 
-> > 
-> > Thank you for your time.
-> > 
-> > 
-> > 
-> > 
-> 
-> 
+I used Firefox 120.0 (64-bit) and 119.0 (64-bit)
 
+Possible related link: https://support.mozilla.org/en-US/questions/1259329
 
+I can view the page on chromium based browsers.
+
+Anyway I thought I would share this with the team in case this is news to you.  
+Thanks!
+
+--John M.
 
 
 
