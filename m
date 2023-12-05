@@ -2,50 +2,66 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 548C1805F5D
-	for <lists+samba-technical@lfdr.de>; Tue,  5 Dec 2023 21:23:48 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A2686805F68
+	for <lists+samba-technical@lfdr.de>; Tue,  5 Dec 2023 21:28:27 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=GIZ3cCW2DH3bT2rS6O4sevryVhXXR1+YBStyvzPNps4=; b=C793ZasNQ8BvSX4px12hF+jYsZ
-	ZQvODFlCV91u+uZo9qvg7GbdYPQakhwFo3njrD34YgjvhfETVKGC9iyqtTqiuMxPiRxCkYus2rdvJ
-	wDXOPjvQpEoLxNtqYBII5R2qTvoQTH35mPVTv6fnLHvCkV27q2z2BnDukAIfYgnZTWNdfY7UDyRDY
-	ihIV/4y0mlr6y7nuxm/FomDfMaAfzoByKt9EsvZ7SdYAcadnPfNLueGnveoQ+VfrHBASmC3g6uZko
-	1GvBnYjtvZ2aAqlK5dw6Z2wk8A11JZD30qTHEIbjO/N0I3r55TgjAz6p+fKT4LxheByzriznTljSt
-	EXsZtATg==;
-Received: from ip6-localhost ([::1]:27566 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=7RnicbRYr4MjN0ahmWNWJIZL0VOp3Mp2AR5YZ+p8wLM=; b=QGUGeZ9atq+4+yv2/1LpdhfsRe
+	6m18MHvrUWnTYKK6vdsezA9iFxj9sJzgt3t4zoPoimeyUbMR/9mgkfgnq2a3j/967RninX2kgveiH
+	7RuqkNOUps5aygTiEO60/wedoTeP6fLqvnxUn7YAC7c6BsjqQVaNHhHadOrCjEMZwgD05TjTQNqx8
+	nUEM/eP+jM+Ar11vbsaeHs3VXONRDmHsvTK7G3k3J5BZAdyQSYKRQcPlvvrbfsXg+++gZYOXHBfv7
+	iYP8yDMfj8Unf/c0zefbdgw70g6W4OygNJu4gWRHldpOnQRCQtkCV3vjXs6Go6pxXcFWjEX1Vm1N5
+	IRmB+WTQ==;
+Received: from ip6-localhost ([::1]:46010 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1rAbwu-004Wwe-O6; Tue, 05 Dec 2023 20:23:20 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:37900) 
+	id 1rAc1m-004XE2-Mq; Tue, 05 Dec 2023 20:28:22 +0000
+Received: from mail-yb1-xb30.google.com ([2607:f8b0:4864:20::b30]:55510) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1rAbwr-004WwV-DX
- for samba-technical@lists.samba.org; Tue, 05 Dec 2023 20:23:19 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=From:To:Date:Message-ID:CC;
- bh=GIZ3cCW2DH3bT2rS6O4sevryVhXXR1+YBStyvzPNps4=; b=ZPZGvTi6eS7FNWBpJgIihsObSB
- rx+eZKRVZtkBHS1Xt2B/8HGlf+xntl36grx07zaM8nL54kM7ZCMY7S9Vn8W4L1JIVG/SgcsdMllY6
- 3qiOdKu29vAAa+sgDXXfOmmBusSSmZBqe7kcnz4CkYQntEqSI8rZwpSM5CUrjRZmScdDfx9sJKdlA
- T4oNjGFIEraiTgA5tguXHROUEXe8lfz/Fs/VM1kfCqOMkUgsgZgYhIrjBSuiuv5I3whWnX+yGsr2W
- 9NIu3qsGrgQbn+moprtDMwCQmctgBDNqcKeD5kI4RLDgS3wIxisx+TpFvtbk4hf/E/Nsi/NUSTecE
- j8FxfvOVQE3vBNy0MePCONgbsUflVuD9oi8CsgVQlmhZrQFLqdy5AHq3EX+FCwkM7KGPGhz16mX49
- 659SprqUYt9qDKCPdrb0HoJ9NkEcTOfUjaTJiDGObxcV0LbvtvaMhZien1zIneX3bo1b7K1FvwMJo
- A6wjry5CX136XRDZ2t75q9s6;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1rAbwq-0025Ax-1I; Tue, 05 Dec 2023 20:23:16 +0000
-Message-ID: <1017032a-b5c9-4ee2-8f24-c113d5839bc0@samba.org>
-Date: Tue, 5 Dec 2023 21:23:15 +0100
+ (Exim) id 1rAc1h-004XDs-Ol
+ for samba-technical@lists.samba.org; Tue, 05 Dec 2023 20:28:20 +0000
+Received: by mail-yb1-xb30.google.com with SMTP id
+ 3f1490d57ef6-db544987c79so4513740276.2
+ for <samba-technical@lists.samba.org>; Tue, 05 Dec 2023 12:28:15 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1701808094; x=1702412894; darn=lists.samba.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=7RnicbRYr4MjN0ahmWNWJIZL0VOp3Mp2AR5YZ+p8wLM=;
+ b=eSljXhM3AcKXf/dLvqKXSCNGzyCug9asfmktTy3rxByI+jV1vYhmb0CqQhrtTxtqgZ
+ BeougHZvGFeaI/r2v6yTvNQsz2ADzzof1vrvZfXhezLNv0R3HTxHO2frKjXXJG1AKEW5
+ oWZgQYWco7DLPdl21ccnL2uAE7nY1s9yqe2YeKBilZq+XTMURIa3g7XKVaTLjEHzw9p6
+ BzV1nHIJwh1YISPSROeO7oxLuYshwIh7ZGIjU2DlHGJC4V5VS2Dy83xNAxPVS2vKM9MX
+ dswiK2SjqrVZDkwksgW5GR/h7hLBpyzlQl2ACGmx8iDTV+ESRzo7CGCdG+zPdJKr+HFZ
+ Ovlw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1701808094; x=1702412894;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=7RnicbRYr4MjN0ahmWNWJIZL0VOp3Mp2AR5YZ+p8wLM=;
+ b=CgPRm7O/bDiaxPF2SDrMsoWfZ08y0EqNXEheQtze5W6R4FjuIslS382RT1Xk+COuWR
+ k4KO0/N3mRcml9yGYYYeefXKX4a0ee/phJdstaIoujw/G7+BjjHtlw6lrXu/cLIHaAZU
+ vxGDcWkSRwEEBBTOlibaPSQrH9kPaHVTC+YYmECkmV5/9Ek9pX0xTAu7ZmZre0KSCXod
+ GOR6MZCEgUaelg/mNmGIW7ABL+BQb9tBEVCFF1n8mqwA9Ve8r0CqimpAQUkgMORchgr4
+ JIGpBi6KHBWTec75oc1Lds9JYpccfrXc3ablAicAxl9Yi6zTVA9V8hmdiG5nd7WqYR9e
+ Evjg==
+X-Gm-Message-State: AOJu0YzXe001F2JUBbwMRVrDDqkTDww4zjPv1xK8oqOVyamVgKjG6HXS
+ 6Now5nizrMj2kWUjqpeTwxekgwsNzjjOUQTT+yRk8K3Y
+X-Google-Smtp-Source: AGHT+IEcAo6wB0/bcUyNF72hTB4iISLM06XrFBDitIy+nWKtK0OxEBJQgwaZj5umQ9sLVTd6u/iTkfgnRyrFSKqAEC8=
+X-Received: by 2002:a25:3614:0:b0:db5:4998:86eb with SMTP id
+ d20-20020a253614000000b00db5499886ebmr5368630yba.53.1701808094187; Tue, 05
+ Dec 2023 12:28:14 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: Oplock Lease stress test?
-Content-Language: en-US, de-DE
-To: Gordon Ross <gordon.w.ross@gmail.com>,
- _samba-tech <samba-technical@lists.samba.org>
 References: <CAD0Ztp3ZoJTyiEa_MYgvHHrivWW-KAgDTrjH0Yz-BGDPWUnozg@mail.gmail.com>
-In-Reply-To: <CAD0Ztp3ZoJTyiEa_MYgvHHrivWW-KAgDTrjH0Yz-BGDPWUnozg@mail.gmail.com>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------ZHthX4bN0ax5HSk6AGIuUXIX"
+ <1017032a-b5c9-4ee2-8f24-c113d5839bc0@samba.org>
+In-Reply-To: <1017032a-b5c9-4ee2-8f24-c113d5839bc0@samba.org>
+Date: Tue, 5 Dec 2023 15:27:57 -0500
+Message-ID: <CAD0Ztp3T-7OZ7w17=bEjTwE_0-1pBXfn3k8JZ63Si_5YKANvmw@mail.gmail.com>
+Subject: Re: Oplock Lease stress test?
+To: Ralph Boehme <slow@samba.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,55 +75,27 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Ralph Boehme <slow@samba.org>
+From: Gordon Ross via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Gordon Ross <gordon.w.ross@gmail.com>
+Cc: _samba-tech <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------ZHthX4bN0ax5HSk6AGIuUXIX
-Content-Type: multipart/mixed; boundary="------------VgkyScvTqQSlm4axVD0xvXjx";
- protected-headers="v1"
-From: Ralph Boehme <slow@samba.org>
-To: Gordon Ross <gordon.w.ross@gmail.com>,
- _samba-tech <samba-technical@lists.samba.org>
-Message-ID: <1017032a-b5c9-4ee2-8f24-c113d5839bc0@samba.org>
-Subject: Re: Oplock Lease stress test?
-References: <CAD0Ztp3ZoJTyiEa_MYgvHHrivWW-KAgDTrjH0Yz-BGDPWUnozg@mail.gmail.com>
-In-Reply-To: <CAD0Ztp3ZoJTyiEa_MYgvHHrivWW-KAgDTrjH0Yz-BGDPWUnozg@mail.gmail.com>
+Thanks.  I use those, but I'm looking for more interactions between
+open handles and a variety of file system operations, more like a
+real-world workload (and preferably with some randomness and ability
+for a significant number of virtual clients).
 
---------------VgkyScvTqQSlm4axVD0xvXjx
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
-
-SGkgR29yZG9uDQoNCk9uIDEyLzUvMjMgMjA6MjAsIEdvcmRvbiBSb3NzIHZpYSBzYW1iYS10
-ZWNobmljYWwgd3JvdGU6DQo+IENhbiBhbnlvbmUgc3VnZ2VzdCBhIHN0cmVzcyB0ZXN0IGZv
-ciBleGVyY2lzaW5nIFNNQiBzZXJ2ZXIgb3Bsb2NrIGFuZA0KPiBsZWFzZSBhY3Rpdml0eT8N
-Cg0Kc21idG9ydHVyZSBiZW5jaC5vcGxvY2sxLCBzbWIyLm9wbG9jaywgc21iMi5sZWFzZSA/
-DQoNCkh0aCENCi1zbG93DQo=
-
---------------VgkyScvTqQSlm4axVD0xvXjx--
-
---------------ZHthX4bN0ax5HSk6AGIuUXIX
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-wsF5BAABCAAjFiEE+uLGCIokJSBRxVnkqh6bcSY5nkYFAmVvhrMFAwAAAAAACgkQqh6bcSY5nkZA
-uBAAtMgCTt/JXu5otkmRph8QMZ1aCWS6DgiVbuXo9givPyBq8Gxoog7xBPficcpmT0NjgyVulW3O
-vL7iuWmaeLzudVfQ+nw+66gBHacWhD9zSc8v2X4NEAqBN4H9Q0ED+yt8ALQ1QkXR/xpV55xKacWl
-4cxTrVtIVvyQsn6pugWCq156Agj/OPKvzD9f/AscL3xMNw5IDowYXjgQNf0BjLze8zWY6aVlSeA8
-L/h4B8+2ytWHQjaHaohSqDPKaDe3K3nX9O4ju3a2wSbB94gUCyYsDfw5Cx1p+mc6PgYneCHf9kRw
-v1ttf7u8DxzqIp1ndBJOCB4pdi2GIW6mf27KIhrZojtRpWdh0chGtxKNXWZzRi7PJ+l9c9hvrA1T
-1TM2sOYLr2147Xd2KH8IJe4GtUu4PJIG8IXZVV1F4CNTqnPn0dYvs8SBXzjzcd+R6ih9+gYFAVBy
-GRidwqX9eokwI/BRD1+DBu9opKV6EnwxvE7xFDn3OpTlkNX2nZKHJzJB802EepCBFHrqfoA971q0
-5HEg2lLDxJYLBJOylsk+iMwS7R+uK+VPuJBrbTwcn8VpR7iVJF3/p26xkVG6uqKY65yL0YKBhuBv
-kHH6X1GuxPMHYGJzfx7nvitz00oiE7OLZq6ffhxOnOKl4D6234PDoeiJZFe3bsaLKJnJ3lpnCRy1
-D1U=
-=1vxX
------END PGP SIGNATURE-----
-
---------------ZHthX4bN0ax5HSk6AGIuUXIX--
+On Tue, Dec 5, 2023 at 3:23=E2=80=AFPM Ralph Boehme <slow@samba.org> wrote:
+>
+> Hi Gordon
+>
+> On 12/5/23 20:20, Gordon Ross via samba-technical wrote:
+> > Can anyone suggest a stress test for exercising SMB server oplock and
+> > lease activity?
+>
+> smbtorture bench.oplock1, smb2.oplock, smb2.lease ?
+>
+> Hth!
+> -slow
 
