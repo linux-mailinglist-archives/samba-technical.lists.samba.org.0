@@ -2,60 +2,50 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5789E805E81
-	for <lists+samba-technical@lfdr.de>; Tue,  5 Dec 2023 20:21:53 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 548C1805F5D
+	for <lists+samba-technical@lfdr.de>; Tue,  5 Dec 2023 21:23:48 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=5hoFRWAA46DrUy16nst7NocxVCpaYw2XqhD+JFTl+18=; b=TmX2VuFysCoQ0PQwkWPYZdyI9+
-	tuSxd/aEsbgadJHhd68BQXBVxzC73Zg6oWxLJ8ZBxHCePgq/vL/to/n8JIsYTF8fJsHTdPJuoCako
-	XWJr51JnzPOp+Q8991bfdua3XBxGTVYJXXz0YqOduas6xteC0YmrAhW5RmLHMHQHpZ7udf/B1/sH6
-	n5ZsnDz3e/YGJS2SbMZbn4b610RKNo43WdZUMciPzh9itF3gTJ8sAQLWf9LAW2V1JzQ+eU95qUmgy
-	LlzLuVDfYYBpOfQ5JM0/5OhUTW43PuwVSaqehLhy1QHovDW2UFVtOgAR5cMPuZOPQ7zBqUIhBtozw
-	Hs4zC4mg==;
-Received: from ip6-localhost ([::1]:56028 helo=hr1.samba.org) 
+	bh=GIZ3cCW2DH3bT2rS6O4sevryVhXXR1+YBStyvzPNps4=; b=C793ZasNQ8BvSX4px12hF+jYsZ
+	ZQvODFlCV91u+uZo9qvg7GbdYPQakhwFo3njrD34YgjvhfETVKGC9iyqtTqiuMxPiRxCkYus2rdvJ
+	wDXOPjvQpEoLxNtqYBII5R2qTvoQTH35mPVTv6fnLHvCkV27q2z2BnDukAIfYgnZTWNdfY7UDyRDY
+	ihIV/4y0mlr6y7nuxm/FomDfMaAfzoByKt9EsvZ7SdYAcadnPfNLueGnveoQ+VfrHBASmC3g6uZko
+	1GvBnYjtvZ2aAqlK5dw6Z2wk8A11JZD30qTHEIbjO/N0I3r55TgjAz6p+fKT4LxheByzriznTljSt
+	EXsZtATg==;
+Received: from ip6-localhost ([::1]:27566 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1rAaym-004U1N-OJ; Tue, 05 Dec 2023 19:21:12 +0000
-Received: from mail-yb1-xb34.google.com ([2607:f8b0:4864:20::b34]:58614) 
+	id 1rAbwu-004Wwe-O6; Tue, 05 Dec 2023 20:23:20 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:37900) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1rAayi-004U1E-8k
- for samba-technical@lists.samba.org; Tue, 05 Dec 2023 19:21:10 +0000
-Received: by mail-yb1-xb34.google.com with SMTP id
- 3f1490d57ef6-db3fa47c2f7so4637611276.0
- for <samba-technical@lists.samba.org>; Tue, 05 Dec 2023 11:21:07 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1701804066; x=1702408866; darn=lists.samba.org;
- h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=5hoFRWAA46DrUy16nst7NocxVCpaYw2XqhD+JFTl+18=;
- b=XxzG8WoaLwUwQpRQywiffIKeQUA2hwHJXcYvlvGIgK64b46DwVcxMVGmCE52ce45QB
- /5nOFlzcJO01bHXNXEGLdVQq59jz1tKbo/ZZQxQaYQO4Tj0fRyk7of8s45VGoSHtEGTS
- hFvzsGijmhodE/9d6cA9qJ7DXLfqygGskHqzCIvhIhwowtlG9x53NMkUUiFGubnf8bLb
- i/+4+7jKGu3WgH+ZvxFQJx/S03BnLjPdXrfXwKR+fkGrWla0Oucz3abJHWp2t8+uMrsr
- n+BL15NUt5uMrYMtSKXjTLvAET+gCjmhObFQ/ETH0o00WlBWz4khXekTh49C0uhXodH8
- 4gPg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701804066; x=1702408866;
- h=to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=5hoFRWAA46DrUy16nst7NocxVCpaYw2XqhD+JFTl+18=;
- b=FuwXhpao5+QQoPszwmo6kXueke0FfW8y0NfoEtLd01IyepV8kqH4mhhpL3gxog6/6Y
- vjW4Rj2ZWyhzhJH67XEouh0R+ud1e2ld0i7vacg5CDZ9pf0cqXW/AyvN+xucuELkMipr
- viDeQDUGTRbMqHLziM1TcWjBA8nLBUe/TnxQ5IQqeiab1VzHuDiJJGW9E2NH+Wet00WL
- /IlEJ+hIhJyr7lcrTZcmCPJ0Qq8uLXlFhDnIMrSu6m89CcF/DQeoOXfUblmvHlWCO/My
- eDrXu4cA0EP8oSrP6ssKqeasChCfUH9Ez74JYKLUZeOTBz+8nC6hArbc3wU3McQyf2ox
- UlVA==
-X-Gm-Message-State: AOJu0Ywzqkm3zsWgioKj3On2rWjmFvu/NuFSlcGo10ER5wif4zTqbmXg
- wFxBcFvCjgDddjfIenF92YtaCWuSIfBVL5JxwKYOe+Ez
-X-Google-Smtp-Source: AGHT+IHwd8OusJt3chJdRmyAfZPWV9gSsJL1wKIRNY3+UpNcFI6avOeqaeg1aXtBvGuIB9FRa1J/sj4qyvwXf0GmREM=
-X-Received: by 2002:a25:c101:0:b0:d81:5d20:97b9 with SMTP id
- r1-20020a25c101000000b00d815d2097b9mr4461262ybf.31.1701804065774; Tue, 05 Dec
- 2023 11:21:05 -0800 (PST)
+ (Exim) id 1rAbwr-004WwV-DX
+ for samba-technical@lists.samba.org; Tue, 05 Dec 2023 20:23:19 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=From:To:Date:Message-ID:CC;
+ bh=GIZ3cCW2DH3bT2rS6O4sevryVhXXR1+YBStyvzPNps4=; b=ZPZGvTi6eS7FNWBpJgIihsObSB
+ rx+eZKRVZtkBHS1Xt2B/8HGlf+xntl36grx07zaM8nL54kM7ZCMY7S9Vn8W4L1JIVG/SgcsdMllY6
+ 3qiOdKu29vAAa+sgDXXfOmmBusSSmZBqe7kcnz4CkYQntEqSI8rZwpSM5CUrjRZmScdDfx9sJKdlA
+ T4oNjGFIEraiTgA5tguXHROUEXe8lfz/Fs/VM1kfCqOMkUgsgZgYhIrjBSuiuv5I3whWnX+yGsr2W
+ 9NIu3qsGrgQbn+moprtDMwCQmctgBDNqcKeD5kI4RLDgS3wIxisx+TpFvtbk4hf/E/Nsi/NUSTecE
+ j8FxfvOVQE3vBNy0MePCONgbsUflVuD9oi8CsgVQlmhZrQFLqdy5AHq3EX+FCwkM7KGPGhz16mX49
+ 659SprqUYt9qDKCPdrb0HoJ9NkEcTOfUjaTJiDGObxcV0LbvtvaMhZien1zIneX3bo1b7K1FvwMJo
+ A6wjry5CX136XRDZ2t75q9s6;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1rAbwq-0025Ax-1I; Tue, 05 Dec 2023 20:23:16 +0000
+Message-ID: <1017032a-b5c9-4ee2-8f24-c113d5839bc0@samba.org>
+Date: Tue, 5 Dec 2023 21:23:15 +0100
 MIME-Version: 1.0
-Date: Tue, 5 Dec 2023 14:20:49 -0500
-Message-ID: <CAD0Ztp3ZoJTyiEa_MYgvHHrivWW-KAgDTrjH0Yz-BGDPWUnozg@mail.gmail.com>
-Subject: Oplock Lease stress test?
-To: _samba-tech <samba-technical@lists.samba.org>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: Oplock Lease stress test?
+Content-Language: en-US, de-DE
+To: Gordon Ross <gordon.w.ross@gmail.com>,
+ _samba-tech <samba-technical@lists.samba.org>
+References: <CAD0Ztp3ZoJTyiEa_MYgvHHrivWW-KAgDTrjH0Yz-BGDPWUnozg@mail.gmail.com>
+In-Reply-To: <CAD0Ztp3ZoJTyiEa_MYgvHHrivWW-KAgDTrjH0Yz-BGDPWUnozg@mail.gmail.com>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------ZHthX4bN0ax5HSk6AGIuUXIX"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -69,11 +59,55 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Gordon Ross via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Gordon Ross <gordon.w.ross@gmail.com>
+From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Ralph Boehme <slow@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Can anyone suggest a stress test for exercising SMB server oplock and
-lease activity?
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------ZHthX4bN0ax5HSk6AGIuUXIX
+Content-Type: multipart/mixed; boundary="------------VgkyScvTqQSlm4axVD0xvXjx";
+ protected-headers="v1"
+From: Ralph Boehme <slow@samba.org>
+To: Gordon Ross <gordon.w.ross@gmail.com>,
+ _samba-tech <samba-technical@lists.samba.org>
+Message-ID: <1017032a-b5c9-4ee2-8f24-c113d5839bc0@samba.org>
+Subject: Re: Oplock Lease stress test?
+References: <CAD0Ztp3ZoJTyiEa_MYgvHHrivWW-KAgDTrjH0Yz-BGDPWUnozg@mail.gmail.com>
+In-Reply-To: <CAD0Ztp3ZoJTyiEa_MYgvHHrivWW-KAgDTrjH0Yz-BGDPWUnozg@mail.gmail.com>
+
+--------------VgkyScvTqQSlm4axVD0xvXjx
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
+
+SGkgR29yZG9uDQoNCk9uIDEyLzUvMjMgMjA6MjAsIEdvcmRvbiBSb3NzIHZpYSBzYW1iYS10
+ZWNobmljYWwgd3JvdGU6DQo+IENhbiBhbnlvbmUgc3VnZ2VzdCBhIHN0cmVzcyB0ZXN0IGZv
+ciBleGVyY2lzaW5nIFNNQiBzZXJ2ZXIgb3Bsb2NrIGFuZA0KPiBsZWFzZSBhY3Rpdml0eT8N
+Cg0Kc21idG9ydHVyZSBiZW5jaC5vcGxvY2sxLCBzbWIyLm9wbG9jaywgc21iMi5sZWFzZSA/
+DQoNCkh0aCENCi1zbG93DQo=
+
+--------------VgkyScvTqQSlm4axVD0xvXjx--
+
+--------------ZHthX4bN0ax5HSk6AGIuUXIX
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+wsF5BAABCAAjFiEE+uLGCIokJSBRxVnkqh6bcSY5nkYFAmVvhrMFAwAAAAAACgkQqh6bcSY5nkZA
+uBAAtMgCTt/JXu5otkmRph8QMZ1aCWS6DgiVbuXo9givPyBq8Gxoog7xBPficcpmT0NjgyVulW3O
+vL7iuWmaeLzudVfQ+nw+66gBHacWhD9zSc8v2X4NEAqBN4H9Q0ED+yt8ALQ1QkXR/xpV55xKacWl
+4cxTrVtIVvyQsn6pugWCq156Agj/OPKvzD9f/AscL3xMNw5IDowYXjgQNf0BjLze8zWY6aVlSeA8
+L/h4B8+2ytWHQjaHaohSqDPKaDe3K3nX9O4ju3a2wSbB94gUCyYsDfw5Cx1p+mc6PgYneCHf9kRw
+v1ttf7u8DxzqIp1ndBJOCB4pdi2GIW6mf27KIhrZojtRpWdh0chGtxKNXWZzRi7PJ+l9c9hvrA1T
+1TM2sOYLr2147Xd2KH8IJe4GtUu4PJIG8IXZVV1F4CNTqnPn0dYvs8SBXzjzcd+R6ih9+gYFAVBy
+GRidwqX9eokwI/BRD1+DBu9opKV6EnwxvE7xFDn3OpTlkNX2nZKHJzJB802EepCBFHrqfoA971q0
+5HEg2lLDxJYLBJOylsk+iMwS7R+uK+VPuJBrbTwcn8VpR7iVJF3/p26xkVG6uqKY65yL0YKBhuBv
+kHH6X1GuxPMHYGJzfx7nvitz00oiE7OLZq6ffhxOnOKl4D6234PDoeiJZFe3bsaLKJnJ3lpnCRy1
+D1U=
+=1vxX
+-----END PGP SIGNATURE-----
+
+--------------ZHthX4bN0ax5HSk6AGIuUXIX--
 
