@@ -2,47 +2,57 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id A8B4B80484D
-	for <lists+samba-technical@lfdr.de>; Tue,  5 Dec 2023 04:48:54 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 38E8F804BD5
+	for <lists+samba-technical@lfdr.de>; Tue,  5 Dec 2023 09:07:27 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=AnbsJDLwNdp5ER0p6mnpYqzDLXzmxMvL2Sk7Z6OUSh0=; b=jCkl6S51qL8N92+IaGPdL/2J6e
-	aJNWN2ZP7SAQScjN0xPYt4siwCvi4eCXRIAgN4odKR1BQPlhEs1eWve6MIB/jpcmOU6/5l64lMMoT
-	FZyNUyNExIhoTaIdUIEpZUaGtcNFk48qaNBrPjzcKfzo4CWF8HJ1ihLl/Tx33JhEi7zgUh27FBn2x
-	mg6UQdZ8b6Qq+9jL15i9HY5/gUWX1KlB0PSiT5fE2HOvSdITpbdUXAIyCzyX/BBfenzUF4PFU6niQ
-	tzWFP879+qXFlUzJPZhYjtW2JcuYmXt6slupevNiUO+nMm5MblZObou6QMnnPonr3JV2tGJ+EZokt
-	1igfMxaQ==;
-Received: from ip6-localhost ([::1]:36294 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=ucC2V86r7+sQa+Sx1lOQO+DRmR/o2qrcMTWj/76X1iE=; b=VlmnGeZNgQto5e+9d2eR8qsdRp
+	0tphjpYxpVv0Ik2UmLosPmD3PlRJjbcqnk9LN6ATsVd3EaChSNqgBQhOxzcVvEjyos0Qsi9n2c1KD
+	3pFv5hdSxHmaDY91JYKLve5xmliQv3yZGurxC1NueGsww3j1Sdsu+ebOc7qlGrMsSoyGUsInj1h2M
+	O3E+N+0hvMbJAOvdIhmENLfE62jh0zx5mgcdyym6Y4cSn3muBM9lFM7AueHV+dWfIpIo+1Rk5XEad
+	KpZkA2+uMdI7e7/KfO6MkgfeVUn40Zvaszq6DLDz9KOAHGFaargpDAAlKWn7+bOQPaOU4gNzcCI4h
+	xTXQ+L6w==;
+Received: from ip6-localhost ([::1]:64648 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1rAMPo-004FlL-36; Tue, 05 Dec 2023 03:48:08 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:13772) 
+	id 1rAQS7-004Ght-9w; Tue, 05 Dec 2023 08:06:47 +0000
+Received: from sin.source.kernel.org ([2604:1380:40e1:4800::1]:53264) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1rAMPi-004FlC-AU
- for samba-technical@lists.samba.org; Tue, 05 Dec 2023 03:48:05 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:To:From:Message-ID:CC;
- bh=QfhS/17Xqzqz+VY/yb8qWn6lbYe898FfyUPZCRPFjXM=; b=V9GSn9IeJ7ruoTsDYk7ikGjRiY
- dHzlgTmiFPMi908fu+BATECRG9me1wEpUesC8pYrS7Z83FpKZbjcEKNPFnjyB8HEEHdPjA5h3jzKa
- HccZDOO3nNM3za/ugt6b34w5NvchX1kVLUlLwy0qxZdc5DSnlDj6D13LyatAaprfEsmxooQM0mJqx
- 8XsGKzFwMAIhoXoWplWiDacuu0VJqw+Hs0w1ySVsGqiqv4RazH0s1q0X1AMYRWjttmG2PXL9iM7T5
- RgAYV99cYBKJWsCjjU7z6hLl0Ti+g36iQ148WAhe44WKqK65uYe/3QHl/ghNboIqHNxrsiItSfFuW
- Xng0M/FN9wOWjfQgkNikQ6/oN+M06i7oDiOP/cMlzvcu8zDcIWcxaAEgtci8XTncALErsFRkB96j6
- R8Hs5n1sMaqyNuNm8tyD7pXn+7gax5RWJ9JnrerAYEFmVw9K9IV7JkrEUAzNt3dNYEyKEJ+2UI+wL
- 8L3aCyRHR1TktKnw0BlB83/l;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1rAMPh-001wfT-0B for samba-technical@lists.samba.org;
- Tue, 05 Dec 2023 03:48:01 +0000
-Message-ID: <7fb8e63cdc9de2c284cffc792c458df3b017c392.camel@samba.org>
-Subject: Looking to once again re-bundle LDB
-To: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
-Date: Tue, 05 Dec 2023 16:47:56 +1300
-User-Agent: Evolution 3.36.5-0ubuntu1 
+ (Exim) id 1rAQS3-004Ghj-4d
+ for samba-technical@lists.samba.org; Tue, 05 Dec 2023 08:06:45 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sin.source.kernel.org (Postfix) with ESMTP id 62323CE0946
+ for <samba-technical@lists.samba.org>; Tue,  5 Dec 2023 07:48:06 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9F0CFC433C9
+ for <samba-technical@lists.samba.org>; Tue,  5 Dec 2023 07:48:05 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1701762485;
+ bh=C6D0tLjPt3YkY5YoBs7Uj9K/0s2gcRdGIebkQ7OcGk0=;
+ h=From:Date:Subject:To:From;
+ b=OPSTIIjMZBPWjKvzj4GdvujQTV+DbIq3NGRJmz9uMYTWbBJJFa+amr6/JlQtodOUG
+ +iZHQVkJIDMTe/EM+ztg5V5L/JPOQmEZqwuR0M4hZUljV1a4V61XcAKvoXpUWcQpvz
+ WC1gGZRlTibUynErpiHGIoYP4Ty0mAI628F/KTUpTIxWXjc9WT5CEj2p+yYmI+fcqC
+ kw4VBgJ98Ywxw+E2W4Ekkw+wlLaXRPJrWoBkT5pCXnQuDHL47mLfJmUud7qF6mUW8x
+ MVE2yjNEEAe/HwjC+o5catj8Bg94HKAXp+siXOKytVjh1iPyRkGQwhToRMQw0q5zXN
+ RXH8VMqPtNEpg==
+Received: by mail-oa1-f54.google.com with SMTP id
+ 586e51a60fabf-1faf46f96ebso2443832fac.1
+ for <samba-technical@lists.samba.org>; Mon, 04 Dec 2023 23:48:05 -0800 (PST)
+X-Gm-Message-State: AOJu0YxCFS3O14zi6oIqXzxLxVF87fHixHajRF0ZErDfJjyM5B33cTgr
+ TtzpZSNbd8ylz5Atg2R2dcfTldTGMRl/4McMJZo=
+X-Google-Smtp-Source: AGHT+IGFvKbDumO/yFY9gPgUBCLeqsIvgmFpCai1pu68IuofO01ga+7en9K/PbtDESb/Y6ZHe2kxWKl7UPSNJJPn7Zo=
+X-Received: by 2002:a05:6870:350f:b0:1fa:31c4:6fd9 with SMTP id
+ k15-20020a056870350f00b001fa31c46fd9mr7730172oah.43.1701762484887; Mon, 04
+ Dec 2023 23:48:04 -0800 (PST)
 MIME-Version: 1.0
+Received: by 2002:ac9:5a85:0:b0:507:5de0:116e with HTTP; Mon, 4 Dec 2023
+ 23:48:03 -0800 (PST)
+Date: Tue, 5 Dec 2023 16:48:03 +0900
+X-Gmail-Original-Message-ID: <CAKYAXd9-61f1cjXMrovSEdio8fuTSbegfde4FZ9m1DAAS+CxRg@mail.gmail.com>
+Message-ID: <CAKYAXd9-61f1cjXMrovSEdio8fuTSbegfde4FZ9m1DAAS+CxRg@mail.gmail.com>
+Subject: Name string of SMB2_CREATE_ALLOCATION_SIZE is AlSi or AISi ?
+To: CIFS <linux-cifs@vger.kernel.org>, 
+ samba-technical <samba-technical@lists.samba.org>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -56,43 +66,22 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
+From: Namjae Jeon via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Namjae Jeon <linkinjeon@kernel.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Just a heads up that I'm still keen to reduce the burden of an LDB
-release at Samba security release time.
+I found that name strings of SMB2_CREATE_ALLOCATION_SIZE are different
+between samba and cifs/ksmbd like the following. In the MS-SMB2
+specification, the name of SMB2_CREATE_ALLOCATION_SIZE is defined as
+AISi.
+Is it a typo in the specification or is samba defining it incorrectly?
 
-The rough consensus at the end of 
-https://gitlab.com/samba-team/samba/-/merge_requests/374 seems to be to
-make ldb:
- - for public consumers behave like any other Samba public library (eg
-libwbclient), by removing the independent tarball and build system.
- - for Samba builds by default, to install ldb as a private library. 
+samba-4.19.2/libcli/smb/smb2_constants.h :
+#define SMB2_CREATE_TAG_ALSI "AlSi"
 
-The version numbers would remain, but could then diverge between ldb
-and pyldb-util for example (they would no longer be the tarball number,
-so would move just like other SO numbers do).
+/fs/smb/common/smb2pdu.h :
+#define SMB2_CREATE_ALLOCATION_SIZE             "AISi"
 
-We would change the ldb modules dir to have the version string in it,
-so that modules are not installed for the wrong version.
+Thanks.
 
-My current motivation comes from working on a pyldb change that would
-change pyldb-util, but also a long-running desire to make this simpler.
-
-Debian currently has this patch: 
-https://sources.debian.org/src/samba/2%3A4.19.3%2Bdfsg-1/debian/patches/Force-LDB-as-standalone.patch/
-
-This makes Samba public libldb as a public library, but from the main
-Samba build, so that the ldb build system is no longer used.
-
-Andrew Bartlett
-
-
--- 
-Andrew Bartlett (he/him)       https://samba.org/~abartlet/Samba Team Member (since 2001) https://samba.orgSamba Team Lead                https://catalyst.net.nz/services/sambaCatalyst.Net Ltd
-Proudly developing Samba for Catalyst.Net Ltd - a Catalyst IT group
-company
-Samba Development and Support: https://catalyst.net.nz/services/samba
-Catalyst IT - Expert Open Source Solutions
