@@ -2,59 +2,67 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2EBEF80632A
-	for <lists+samba-technical@lfdr.de>; Wed,  6 Dec 2023 01:06:44 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id F062B806DA1
+	for <lists+samba-technical@lfdr.de>; Wed,  6 Dec 2023 12:16:54 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=0yU3dr1huGD8ItoyIAJKlFQrhiElKLRDYkygTzXEmRw=; b=SxN18GDcQ4iKC/9ESgCqULZ6PR
-	A0u7T9hw4siJJo9xYUXvJ9cuYcqc8MciFZ5R5E/HJMOEybfRWCihXr/gOe//uCuw8sUzs32UIQOfa
-	MZg6w1PYJyyL3R4oF4C1e8COitsZfwgHrQFhCEgzgQKpCZGMip8JNOVJZbcA827e8quxUpOI54qQj
-	veMqoqWL+JzERbm6krp5B7udeFJuQH30CRlQK+p7OoYE5xn2ESfKTmbsYSnUNIBOoI7FUy5NSgnOT
-	Oic/cAzixeerh1eFmUZ0L9TI3g2Eg5sQiDdPHivO9BLoSTVokwNPFj/CkXYiAv9tFrXHovMTzCJMV
-	+HgzJbaQ==;
-Received: from ip6-localhost ([::1]:30550 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=7/oZHACPeEsD+mXYOiqtdmGuUQoOrWauvnLhXLrRq8s=; b=JCDc9ULoZOxnh8L+caCkDMfdlx
+	bWCB8TVezruwJsX4CYZ1G695Z1JMTW+aqS0QuNJO3IJ2wVmDeoAfL/s9zn5epuZEH49VXjo5VzvMO
+	6SY5FRJqDpUDEo9/h59rebO7AJ1E7Nq/Y252VYOSl6+va3TzHJxnBFtrtrbaSzWguhJx1aCffR1ZN
+	4F7FndQ94CXzFJn8X4st1A4jYyo9IixLqFu5mNzqp+Lv9b1uff33RTJKMQcHcWfce6+5mnRPASTrS
+	JNT3PPsV3tHL15kYsZcZkf4bTd63q8WiD0IYomiptbETz/Cl67IDAe1MnXiPvho0VuW6Y4fsEZswJ
+	2EmF33VA==;
+Received: from ip6-localhost ([::1]:37844 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1rAfQX-004Xx3-Fj; Wed, 06 Dec 2023 00:06:09 +0000
-Received: from ams.source.kernel.org ([145.40.68.75]:47738) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1rAfQS-004Xwt-Gf
- for samba-technical@lists.samba.org; Wed, 06 Dec 2023 00:06:06 +0000
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by ams.source.kernel.org (Postfix) with ESMTP id 46556B81A62
- for <samba-technical@lists.samba.org>; Tue,  5 Dec 2023 23:48:04 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9B483C433C7
- for <samba-technical@lists.samba.org>; Tue,  5 Dec 2023 23:48:03 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1701820083;
- bh=5haMR6z10LwAOwz3Tsgh9GHuu+CZhIvtF+q3fYjk5Oc=;
- h=In-Reply-To:References:From:Date:Subject:To:Cc:From;
- b=JDjsQFKSdDZ3KN5McafVlUhX4zob3BuFxFNTUM7tEW/39sUeJZY47zbqnzsNsguZN
- tsV5sMN5cRS8YG11g7zG6XjLMPJeWWMztDtLsU538zKAHE7UxPuQGx1WvNr4oSA/SD
- HMPTn3sj3zot0WbBcaE5hy6vt3SW4UwuWjfVgmDxeP+A0qvHKEbN8TCyuBki5cZwJ3
- EIVpjcsS/Nj2yQayPZ9IoWqKN8PVDS3yL4Oy5oFf8ThWalb+wYOKZOuKwDBrpLqzKT
- UYxz8jMPaVpUIm87F4NvfpqmFi/mQB320yUrXN6BwSH5N9MiVTSCk3VE09k/zM/VC8
- dKHtMf9+8ep7Q==
-Received: by mail-oa1-f48.google.com with SMTP id
- 586e51a60fabf-1fb4ee3d548so1403430fac.2
- for <samba-technical@lists.samba.org>; Tue, 05 Dec 2023 15:48:03 -0800 (PST)
-X-Gm-Message-State: AOJu0YyBJ1sshpG9PkSFGBRmUl06dshZyPnXDVWlcgrKEQ6BuwLe2Gzg
- OW53U4wvv0MDUT9P+jCsFB8nTrmxP1+hURJrvPs=
-X-Google-Smtp-Source: AGHT+IGLUX8l5j/S/fZgLsr0lFIdYu0vrQ/Oo28txNFc1zOl3DhBkxBJGMHYVqofCO+o/yKrZSN+AwBKhd31fzPT0Qc=
-X-Received: by 2002:a05:6870:8e0c:b0:1fb:75a:de69 with SMTP id
- lw12-20020a0568708e0c00b001fb075ade69mr9264911oab.87.1701820082923; Tue, 05
- Dec 2023 15:48:02 -0800 (PST)
+	id 1rAptK-004f96-O8; Wed, 06 Dec 2023 11:16:34 +0000
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124]:21567) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1rAptF-004f8Z-Hz
+ for samba-technical@lists.samba.org; Wed, 06 Dec 2023 11:16:32 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1701861385;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type;
+ bh=7/oZHACPeEsD+mXYOiqtdmGuUQoOrWauvnLhXLrRq8s=;
+ b=UgRZUp7twPJobQrEWl2ijOthEAVP01KUVG5qddMJSdrUgPw85VMVf67Tz+Z7U/hvxl+Y+J
+ BUeX1mOh2bHSUhl7i78Hed3F2K4csGBb4IaB7zngWtRUWvPvtrMNmm7VVsn7MARE2a9tLG
+ WShYWHk+VTSwEq1KPZGj68kGfSPCeFI=
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1701861385;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type;
+ bh=7/oZHACPeEsD+mXYOiqtdmGuUQoOrWauvnLhXLrRq8s=;
+ b=UgRZUp7twPJobQrEWl2ijOthEAVP01KUVG5qddMJSdrUgPw85VMVf67Tz+Z7U/hvxl+Y+J
+ BUeX1mOh2bHSUhl7i78Hed3F2K4csGBb4IaB7zngWtRUWvPvtrMNmm7VVsn7MARE2a9tLG
+ WShYWHk+VTSwEq1KPZGj68kGfSPCeFI=
+Received: from mimecast-mx02.redhat.com (mx-ext.redhat.com [66.187.233.73])
+ by relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-546-KyLGvAs-PLqcDVG0tjPYzQ-1; Wed,
+ 06 Dec 2023 06:00:34 -0500
+X-MC-Unique: KyLGvAs-PLqcDVG0tjPYzQ-1
+Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 494E529ABA20;
+ Wed,  6 Dec 2023 11:00:34 +0000 (UTC)
+Received: from warthog.procyon.org.uk (unknown [10.42.28.161])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id C4DAE40C6E2C;
+ Wed,  6 Dec 2023 11:00:32 +0000 (UTC)
+Organization: Red Hat UK Ltd. Registered Address: Red Hat UK Ltd, Amberley
+ Place, 107-111 Peascod Street, Windsor, Berkshire, SI4 1TE, United
+ Kingdom.
+ Registered in England and Wales under Company Registration No. 3798903
+To: fstests@vger.kernel.org, samba-technical@lists.samba.org,
+ linux-cifs@vger.kernel.org
+Subject: Issues with FIEMAP, xfstests, Samba, ksmbd and CIFS
 MIME-Version: 1.0
-Received: by 2002:ac9:5a85:0:b0:507:5de0:116e with HTTP; Tue, 5 Dec 2023
- 15:48:02 -0800 (PST)
-In-Reply-To: <e20433c2-82e8-41e0-aa29-279dd64996fc@samba.org>
-References: <CAKYAXd9-61f1cjXMrovSEdio8fuTSbegfde4FZ9m1DAAS+CxRg@mail.gmail.com>
- <e20433c2-82e8-41e0-aa29-279dd64996fc@samba.org>
-Date: Wed, 6 Dec 2023 08:48:02 +0900
-X-Gmail-Original-Message-ID: <CAKYAXd_m2OTmh_DyYSULXiMDPNzG-mWZRhB4oZXsCZ6saaTdrg@mail.gmail.com>
-Message-ID: <CAKYAXd_m2OTmh_DyYSULXiMDPNzG-mWZRhB4oZXsCZ6saaTdrg@mail.gmail.com>
-Subject: Re: Name string of SMB2_CREATE_ALLOCATION_SIZE is AlSi or AISi ?
-To: Ralph Boehme <slow@samba.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset="us-ascii"
+Content-ID: <447323.1701860432.1@warthog.procyon.org.uk>
+Date: Wed, 06 Dec 2023 11:00:32 +0000
+Message-ID: <447324.1701860432@warthog.procyon.org.uk>
+X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.2
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -68,38 +76,61 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Namjae Jeon via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Namjae Jeon <linkinjeon@kernel.org>
-Cc: CIFS <linux-cifs@vger.kernel.org>,
- samba-technical <samba-technical@lists.samba.org>,
- Interoperability Documentation Help <dochelp@microsoft.com>
+From: David Howells via samba-technical <samba-technical@lists.samba.org>
+Reply-To: David Howells <dhowells@redhat.com>
+Cc: Paulo Alcantara <pc@manguebit.com>, Steve French <sfrench@samba.org>,
+ "Darrick J. Wong" <djwong@kernel.org>, Dave Chinner <david@fromorbit.com>,
+ linux-kernel@vger.kernel.org, dhowells@redhat.com,
+ linux-fsdevel@vger.kernel.org, Filipe Manana <fdmanana@suse.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-2023-12-05 19:01 GMT+09:00, Ralph Boehme <slow@samba.org>:
-> On 12/5/23 08:48, Namjae Jeon via samba-technical wrote:
->> I found that name strings of SMB2_CREATE_ALLOCATION_SIZE are different
->> between samba and cifs/ksmbd like the following. In the MS-SMB2
->> specification, the name of SMB2_CREATE_ALLOCATION_SIZE is defined as
->> AISi.
->> Is it a typo in the specification or is samba defining it incorrectly?
->>
->> samba-4.19.2/libcli/smb/smb2_constants.h :
->> #define SMB2_CREATE_TAG_ALSI "AlSi"
->>
->> /fs/smb/common/smb2pdu.h :
->> #define SMB2_CREATE_ALLOCATION_SIZE             "AISi"
->
-> looks like a bug in MS-SMB2: they have the value as 0x416c5369, which is
-> "AlSi", with an "l" like in "l"ake.
-I will fix it in common header of cifs/ksmbd.
-Thanks for your check!
+Hi,
 
->
-> Adding dochelp to cc.
->
-> @dochelp: looks like you have a small bug in MS-SMB2. :)
->
-> -slow
->
+I've been debugging apparent cifs failures with xfstests, in particular
+generic/009, and I'm finding that the tests are failing because FIEMAP is not
+returning exactly the expected extent map.
+
+The problem is that the FSCTL_QUERY_ALLOCATED_RANGES smb RPC op can only
+return a list of ranges that are allocated and does not return any other
+information about those allocations or the gaps between them - and thus FIEMAP
+cannot express this information to the extent that the test expects.
+
+Further, as Steve also observed, the expectation that the individual subtests
+should return exactly those ranges is flawed.  The filesystem is at liberty to
+split extents, round up extents, bridge extents and automatically punch out
+blocks of zeros.  xfstests/common/punch allows for some of this, but I wonder
+if it needs to be more fuzzy.
+
+I wonder if the best xfstests can be expected to check is that the data we
+have written is within the allocated regions.
+
+Which brings me on to FALLOC_FL_ZERO_RANGE - is this guaranteed to result in
+an allocated region (if successful)?  Samba is translating FSCTL_SET_ZERO_DATA
+to FALLOC_FL_PUNCH_HOLE, as is ksmbd, and then there is no allocated range to
+report back (Samba and ksmbd use SEEK_HOLE/SEEK_DATA rather than FIEMAP -
+would a ZERO_RANGE even show up with that?).
+
+Finally, should the Linux cifs filesystem translate gaps in the result of
+FSCTL_QUERY_ALLOCATED_RANGES into 'unwritten' extents rather than leaving them
+as gaps in the list (to be reported as holes by xfs_io)?  This smacks a bit of
+adjusting things for the sake of making the testsuite work when the testsuite
+isn't quite compatible with the thing being tested.
+
+So:
+
+ - Should Samba and ksmbd be using FALLOC_FL_ZERO_RANGE rather than
+   PUNCH_HOLE?
+
+ - Should Samba and ksmbd be using FIEMAP rather than SEEK_DATA/HOLE?
+
+ - Should xfstests be less exacting in its FIEMAP analysis - or should this be
+   skipped for cifs?  I don't want to skip generic/009 as it checks some
+   corner cases that need testing, but it may not be possible to make the
+   exact extent matching work.
+
+Thanks,
+David
+
+
 
