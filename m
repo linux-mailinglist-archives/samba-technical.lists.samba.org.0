@@ -2,74 +2,67 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3EDC4806FF5
-	for <lists+samba-technical@lfdr.de>; Wed,  6 Dec 2023 13:39:03 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6D741808CCC
+	for <lists+samba-technical@lfdr.de>; Thu,  7 Dec 2023 16:59:43 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=TZQQ6BqHEI6hRsDFbv1/FW96mENZWMKFWNl0n0AGdhw=; b=GdAJ5Z1KcWyaACzYIgH01sDqyZ
-	4bcWJaprwIngLua/FjBQ9KD1V9bJfP2H5gPM9pTeaqg+NRwbWHEszzxOSHi4nvBD3QT7MCtY46qht
-	r+0WkXllvk3LMw/FqtiPK/3R4FE2klEZzaEhS/X1VREF1l7q0c9NgwVLQNjgn61GyQZYPQKebigNl
-	g6XeqdCfmaw7DraKJBOodF1CsxMLdVUJJRp/kcFgJhRqf9IaoXT8lTpqsNumRq10vIJ3FcF/7e2O8
-	P6BnoxeX8afHipHXI0AllFBmQ5c0nCQggs13tzu++wbnRcFOKsst0D21HywB0B/Hne5tI4UJ+gMDX
-	QEmVo0Mg==;
-Received: from ip6-localhost ([::1]:41064 helo=hr1.samba.org) 
+	bh=Rf4tLfo9pF6yxazJHapLb8GMJYYM77NLkk22oYwFpQA=; b=d+QZ+DoQ/IdRXzbCZdJSrsMrRL
+	DiRt7BrFAxAQoCE8CC35QNlxE+qGG3BWszI73S1iKmpH8N9lBjdUsaAP+3rnYEzBXYIFqp/1YZCVr
+	cxcj1+QTLk9x3yZpBT2u54bpxT3bCmMumYIb2jerTKcOiHeipjsauAHnibmutXPvmg2eh38GPiBXf
+	bfXzv8H/2L64X9xuMcQALqeXUj90L5auDWizRTBoZ7fVPLR5LDSsSaH8llvdwkuK8udmXM2v6931c
+	rFxb4wARwdpAeJ3A+geEGmMLXSdjKHF4U4O/cn37g2bItYNt1trGo7NHmIFnzgVwlwBsHyeIZf0JM
+	UoJpkmhg==;
+Received: from ip6-localhost ([::1]:54868 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1rArAr-004hjG-7x; Wed, 06 Dec 2023 12:38:45 +0000
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124]:23094) 
+	id 1rBGmE-00502U-Ot; Thu, 07 Dec 2023 15:59:02 +0000
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124]:44144) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1rArAl-004hj6-Cn
- for samba-technical@lists.samba.org; Wed, 06 Dec 2023 12:38:43 +0000
+ (Exim) id 1rBGm9-00502L-RC
+ for samba-technical@lists.samba.org; Thu, 07 Dec 2023 15:59:00 +0000
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1701866316;
+ s=mimecast20190719; t=1701964733;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=TZQQ6BqHEI6hRsDFbv1/FW96mENZWMKFWNl0n0AGdhw=;
- b=jVISvmAWQCxftrAgR0WXMbr1r6rJPZTLPh+0On0WaSzV0TF+5AC94pV5915Rdo2BQzapDM
- cwKFcu1T5PfsT3CrbxqwW4cSxbPygJm+jUpFozoldVhTfjO06nz5gJlBir/BEgNtOezbB9
- vdN1SacXazgaHvpQo4j7FFmz7y/D3Gk=
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type;
+ bh=Rf4tLfo9pF6yxazJHapLb8GMJYYM77NLkk22oYwFpQA=;
+ b=MSapM15jKDMereBgR69Ew2Jmz/uXAKPIoAeYLY/VnakMpWMcgqi8MKI8Yv2oG6jQk6NBuz
+ v/SU9r9fOTor2MtMTBtmiq85dpN6MFja9knG0gYdKXhnhLqg9h8r5Ea3tsCSsDb18yovP/
+ Ehfc1dxDCkgznZ2gbxiH/VhdaqFTWBg=
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1701866316;
+ s=mimecast20190719; t=1701964734;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=TZQQ6BqHEI6hRsDFbv1/FW96mENZWMKFWNl0n0AGdhw=;
- b=jVISvmAWQCxftrAgR0WXMbr1r6rJPZTLPh+0On0WaSzV0TF+5AC94pV5915Rdo2BQzapDM
- cwKFcu1T5PfsT3CrbxqwW4cSxbPygJm+jUpFozoldVhTfjO06nz5gJlBir/BEgNtOezbB9
- vdN1SacXazgaHvpQo4j7FFmz7y/D3Gk=
-Received: from mimecast-mx02.redhat.com (mx-ext.redhat.com [66.187.233.73])
- by relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-557-thj-CJ5vMACQz1wZWLOP9w-1; Wed,
- 06 Dec 2023 07:38:31 -0500
-X-MC-Unique: thj-CJ5vMACQz1wZWLOP9w-1
-Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.rdu2.redhat.com
- [10.11.54.1])
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type;
+ bh=Rf4tLfo9pF6yxazJHapLb8GMJYYM77NLkk22oYwFpQA=;
+ b=iB7iTkNj6xiCqtB49jINHPOI1Vp5gPPLq4ctdzK3lTS/v6w5nL3TvBPywshCR2U45AFNu2
+ e0pSIq8LWYP5rSMg25EUC4Rl2QmdYC36Gr06A9HRroLVA3L510ZzDKSj9406jw6IZoMPDa
+ QxGLfIBTL3tnxt3YE29IYa33KjxPkZE=
+Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
+ [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-139-b5LHgerXOWuiXKtScoUuSw-1; Thu, 07 Dec 2023 10:58:49 -0500
+X-MC-Unique: b5LHgerXOWuiXKtScoUuSw-1
+Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.6])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 2F74F29AB3F3;
- Wed,  6 Dec 2023 12:38:31 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 83A8C85A58B;
+ Thu,  7 Dec 2023 15:58:48 +0000 (UTC)
 Received: from warthog.procyon.org.uk (unknown [10.42.28.161])
- by smtp.corp.redhat.com (Postfix) with ESMTP id C252E3C2E;
- Wed,  6 Dec 2023 12:38:29 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 26F022166AE2;
+ Thu,  7 Dec 2023 15:58:47 +0000 (UTC)
 Organization: Red Hat UK Ltd. Registered Address: Red Hat UK Ltd, Amberley
  Place, 107-111 Peascod Street, Windsor, Berkshire, SI4 1TE, United
  Kingdom.
  Registered in England and Wales under Company Registration No. 3798903
-In-Reply-To: <447324.1701860432@warthog.procyon.org.uk>
-References: <447324.1701860432@warthog.procyon.org.uk>
-To: fstests@vger.kernel.org, samba-technical@lists.samba.org,
- linux-cifs@vger.kernel.org
-Subject: Re: Issues with FIEMAP, xfstests, Samba, ksmbd and CIFS
+To: Steve French <smfrench@gmail.com>,
+ Namjae Jeon <linkinjeon@kernel.org>, jra@samba.org
+Subject: Can fallocate() ops be emulated better using SMB request compounding?
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
-Content-ID: <449657.1701866309.1@warthog.procyon.org.uk>
-Content-Transfer-Encoding: quoted-printable
-Date: Wed, 06 Dec 2023 12:38:29 +0000
-Message-ID: <449658.1701866309@warthog.procyon.org.uk>
-X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.1
+Content-ID: <700922.1701964726.1@warthog.procyon.org.uk>
+Date: Thu, 07 Dec 2023 15:58:46 +0000
+Message-ID: <700923.1701964726@warthog.procyon.org.uk>
+X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.6
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -85,31 +78,58 @@ List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
 From: David Howells via samba-technical <samba-technical@lists.samba.org>
 Reply-To: David Howells <dhowells@redhat.com>
-Cc: Paulo Alcantara <pc@manguebit.com>, Steve French <sfrench@samba.org>,
- "Darrick J. Wong" <djwong@kernel.org>, Dave Chinner <david@fromorbit.com>,
- linux-kernel@vger.kernel.org, dhowells@redhat.com,
- linux-fsdevel@vger.kernel.org, Filipe Manana <fdmanana@suse.com>
+Cc: Tom Talpey <tom@talpey.com>, Stefan Metzmacher <metze@samba.org>,
+ linux-cifs@vger.kernel.org, samba-technical@lists.samba.org,
+ jlayton@kernel.org, dhowells@redhat.com
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-David Howells <dhowells@redhat.com> wrote:
+Hi Steve, Namjae, Jeremy,
 
-> So:
-> =
+At the moment certain fallocate() operations aren't very well implemented in
+the cifs filesystem on Linux, either because the protocol doesn't fully
+support them or because the ops being used don't also set the EOF marker at
+the same time and a separate RPC must be made to do that.
 
->  - Should Samba and ksmbd be using FALLOC_FL_ZERO_RANGE rather than
->    PUNCH_HOLE?
-> =
+For instance:
 
->  - Should Samba and ksmbd be using FIEMAP rather than SEEK_DATA/HOLE?
+ - FALLOC_FL_ZERO_RANGE does some zeroing and then sets the EOF as two
+   distinctly separate operations.  The code prevents you from doing this op
+   under some circumstances as it doesn't have an oplock and doesn't want to
+   race with a third party (note that smb3_punch_hole() doesn't have this
+   check).
 
- - Should Samba and ksmbd report 'unwritten' extents as being allocated?
+ - FALLOC_FL_COLLAPSE_RANGE uses COPYCHUNK to move the file down and then sets
+   the EOF as two separate operations as there is no protocol op for this.
+   However, the copy will likely fail if the ranges overlap and it's
+   non-atomic with respect to a third party.
 
->  - Should xfstests be less exacting in its FIEMAP analysis - or should t=
-his be
->    skipped for cifs?  I don't want to skip generic/009 as it checks some
->    corner cases that need testing, but it may not be possible to make th=
-e
->    exact extent matching work.
+ - FALLOC_FL_INSERT_RANGE has the same issues as FALLOC_FL_COLLAPSE_RANGE.
+
+Question: Would it be possible to do all of these better by using compounding
+with SMB2_FLAGS_RELATED_OPERATIONS?  In particular, if two components of a
+compound are marked related, does the second get skipped if the first fails?
+Further, are the two ops then essentially done atomically?
+
+If this is the case, then for FALLOC_FL_ZERO_RANGE, just compounding the
+SET_ZERO_DATA with the SET-EOF will reduce or eliminate the race window.
+
+For FALLOC_FL_COLLAPSE/INSERT_RANGE, we could compound the COPYCHUNK and
+SET-EOF.  As long as the SET-EOF won't happen if the COPYCHUNK fails, this
+will reduce the race.
+
+However, for COLLAPSE/INSERT, we can go further: recognise the { COPYCHUNK,
+SET-EOF } compound on the server and see if the file positions, chunk length
+EOF and future EOF are consistent with a collapse/insert request and, if so,
+convert the pair of them to a single fallocate() call and try that; if that
+fails, fall back to copy_file_range() and ftruncate().
+
+
+As an alternative, at least for removing the 3rd-party races, is it possible
+to make sure we have an appropriate oplock around the two components in each
+case?  It would mean potentially more trips to the server, but would remove
+the window, I think.
+
+David
 
 
