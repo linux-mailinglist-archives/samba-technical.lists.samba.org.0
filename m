@@ -2,64 +2,49 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id D4393808FA6
-	for <lists+samba-technical@lfdr.de>; Thu,  7 Dec 2023 19:12:34 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 70CC1808FEE
+	for <lists+samba-technical@lfdr.de>; Thu,  7 Dec 2023 19:32:53 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=6Nqs8UVnWo0Vs+ARTXh48J1b7B08lcg4/Yr5AclakK4=; b=gBKsqBAgDGJXWewQovCwHOdQWg
-	pJbZJvhPipIcgFsMTZosMROPUyUOVBR+7r73/tSOGJ/4zvkI5iJIYjR3zBOUKfH1Mv2fBu6nJ6rem
-	8RUG2oqVa2KatSxLKyuAC8NGOQC7oxhkRcqg8FcRYCOuslZy35VF0OEKTyHeWsQi0pFTj3sbt7O2r
-	M/IANFZpjI7L4oiDnUcgpFD33mZzd4u0ES/ERYI/Uv+/bjP6AHuEoJYNLXtP+NznZjE905bq1Lvuq
-	rDwRoud0Izm/DMkcBN4UR3T3xBW3K5BOL20OPv+uVqlcSxcMSb+LBA2xZqFVJDOjjvKgp2LyxmUIH
-	hzEonKhA==;
-Received: from ip6-localhost ([::1]:29282 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=U54oUgBdDBv69Iy6UYcPDEqi69VKSUFJNJev/TzXD7M=; b=dJ4BL0yubpWfp3Y3XEJj1kRiIf
+	j50wx3CYsOq4q5Z8E0hJ425OTvI/R2r3ulYra9Yj8SbruQmslehpKpylHhWjoZCnLkRVQZ7v8LRKf
+	la8gZyj/zjhfQqXnXCKWn1Hj8wz5WHdJ7WXgCfdac1SK2DRqZHXnUlbXheeF+s4WOD9EZuCBOGx+W
+	ghjAIVBZN/fbpoJ7TQCrHwemILkefTdkBRs1qpc40K/p5xDOW7I2GD53uHspjvTHG9cNMbBFz5nMR
+	t/L7GdgjSxk9t314xpflSZow/KkhCrtukOACX7KjSvt+tmm8JpIKwQJVYXmCE1k/KXqSJl0PY+Vgi
+	gGK3nEvA==;
+Received: from ip6-localhost ([::1]:34438 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1rBIr8-00516d-09; Thu, 07 Dec 2023 18:12:14 +0000
-Received: from mx.manguebit.com ([2a01:4f8:1c1e:a2ae::2]:40674) 
+	id 1rBJAu-0051Q3-8T; Thu, 07 Dec 2023 18:32:40 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:34824) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1rBIr1-00516U-Mb
- for samba-technical@lists.samba.org; Thu, 07 Dec 2023 18:12:11 +0000
-Message-ID: <2c1db0b4bfc23db7e1f2a70ec7ce32dc@manguebit.com>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=manguebit.com;
- s=dkim; t=1701972724;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=6Nqs8UVnWo0Vs+ARTXh48J1b7B08lcg4/Yr5AclakK4=;
- b=lM/NEk+jqkgjLsqctH6f+raDQ4iVihU6VY5cHFHon4HhG4eVE5dECuNWZZkhnDTOwDz9gD
- zznGsA4qiij/ebN1p+gW0WbnyVo87filoy5jNR8asXvd6/nW9psOEav9voWKNcQBUxojkE
- TwCCS4HqrtVJkBXB+9eDEhgbU/t0+l58B6sykYmqFkQtZNrY88Dn5rUc6OptAkCedFqnHy
- cjlkaF67HYjD5FTHbc6JcjTfbzrgZXogfBAoTGxkaocXdpgw6hufr26AJOptcGB9cbyTut
- jn2o01oWe2bpaiGmrbFdyNBped3gVWU91Aja3hqHeGuiKF87ZoRqRQTwDrhc6Q==
-ARC-Seal: i=1; s=dkim; d=manguebit.com; t=1701972724; a=rsa-sha256; cv=none;
- b=BE/6o2kW2U2DO20Tha4+4ToHFMkq1K0wKIbqfUZnoE/BaXQ99VsjvOGmxQnuVhW+MkKebm
- vQ5QSYPXU91d3zkhbBHmhAf04byyxkL8DAB4IwpeDcVau8dAud82O3y4YSHziMY9dRjcz4
- sK4pgA0OI+CwgNCNNFF/ELFIeo9Nvi64bmPq0pmbtP4I90pp5uW72CFhV4Hcbjr3jcbQ4N
- jEIPG47gYKkflbokLsskg1buY91P+lHfDRV0IgscT94js6trcmfAQBZ8hanhr18mUqy4et
- RMWeZzpdMcYKhtGWzXxuVjO7sIGF2/YJ8lguAm6PIhP61D1ZINejw/o5iT6cOA==
-ARC-Authentication-Results: i=1; ORIGINATING;
- auth=pass smtp.auth=pc@manguebit.com smtp.mailfrom=pc@manguebit.com
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=manguebit.com; 
- s=dkim; t=1701972724;
- h=from:from:sender:reply-to:subject:subject:date:date:
- message-id:message-id:to:to:cc:cc:mime-version:mime-version:
- content-type:content-type:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=6Nqs8UVnWo0Vs+ARTXh48J1b7B08lcg4/Yr5AclakK4=;
- b=UTlRAfp65YpX02QY8qExgum4fzElwCTlBm+GbOOvAMLCRtaRhutdp4uOaJRRpqgcka4OoT
- 1yt1guxS9NeugLTEZWl1TBBkFL/MzZuc8nxLj3sWiEQPH3mYXEA2JSSsGiHURz0o4CLQaY
- eA0DG1Nzbx3kB5XDXeypAiquJSXy5zeCxvdczvsPlJkpvAQglLLyTBYUbBDk/crwurkQxH
- Ns8blTmRrsjZAffRdn2AsbQF1+JTdtxuXWfpqzaZKbovyL/Vri5fLeEiUkmBZFeol5gbLw
- GVD3VRmxRmt8TWDa/62RrPXTpYWJ8ZRlP8Zpy985FNt3XjGLJCy5gUVDoF66kw==
-To: Jeremy Allison <jra@samba.org>, David Howells <dhowells@redhat.com>
+ (Exim) id 1rBJAp-0051Pu-5O
+ for samba-technical@lists.samba.org; Thu, 07 Dec 2023 18:32:37 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Message-ID:Cc:To:From:Date;
+ bh=U54oUgBdDBv69Iy6UYcPDEqi69VKSUFJNJev/TzXD7M=; b=NmJyB0KhZxJAKM0BxFF2BO/X72
+ 7Ikeyj+sfNULuzhvGSpUqqDizz3AR3Q9FyhTBQZ3XIGO6TApoddLwLU1yqz2fn7arRWHbAbFB7Pjy
+ NhqAMkY04RSNVQC6BGf6nphXgEA7jboTEL5SzXDCrtapYs+HTZcOqYfNRI/viY0/Bn5zIBo3hLzWA
+ G5Dd0OfBd7z5j0pSKus6evFpm3KeWUvTsHoGhq5nxgLqCcS2K7cyyCqw5CBUwO5vLLHZzmo/rFAwW
+ TlbdVCNxiW/irTH8mV/tLtdLhioK6wF/n9FReweKHo+6RfpnCIfoa1MnfBMyUhF9eARYJoIlTUjPu
+ cnEyvZLNRgDqyXetLQGLXkQeIBacrs07oQNJPQM7yhaKV4pNw7emA+4+t3WWej/nqdkzvo35nIgBC
+ bTrT6ac2/dt1sbNdAqfPF8v7bHiWGyFf32WHFmQvUioaji+8RYUtYyt+E0iOLvQHZG0g51/fx/6ms
+ NDwo+M3wvUu5K7G5vZY64fRE;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1rBJAm-002R73-0W; Thu, 07 Dec 2023 18:32:33 +0000
+Date: Thu, 7 Dec 2023 10:32:27 -0800
+To: David Howells <dhowells@redhat.com>
 Subject: Re: Can fallocate() ops be emulated better using SMB request
  compounding?
-In-Reply-To: <ZXIDgvZ8/iBhYXwy@jeremy-HP-Z840-Workstation>
-References: <700923.1701964726@warthog.procyon.org.uk>
- <ZXIDgvZ8/iBhYXwy@jeremy-HP-Z840-Workstation>
-Date: Thu, 07 Dec 2023 15:12:00 -0300
+Message-ID: <ZXIPuwnUNycH+ZuI@jeremy-HP-Z840-Workstation>
+References: <ZXIDgvZ8/iBhYXwy@jeremy-HP-Z840-Workstation>
+ <700923.1701964726@warthog.procyon.org.uk>
+ <1215461.1701971450@warthog.procyon.org.uk>
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Type: text/plain; charset=us-ascii; format=flowed
+Content-Disposition: inline
+In-Reply-To: <1215461.1701971450@warthog.procyon.org.uk>
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -73,8 +58,8 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Paulo Alcantara via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Paulo Alcantara <pc@manguebit.com>
+From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jeremy Allison <jra@samba.org>
 Cc: Stefan Metzmacher <metze@samba.org>, linux-cifs@vger.kernel.org,
  samba-technical@lists.samba.org, jlayton@kernel.org,
  Tom Talpey <tom@talpey.com>, Steve French <smfrench@gmail.com>,
@@ -82,48 +67,28 @@ Cc: Stefan Metzmacher <metze@samba.org>, linux-cifs@vger.kernel.org,
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Jeremy Allison <jra@samba.org> writes:
-
-> On Thu, Dec 07, 2023 at 03:58:46PM +0000, David Howells wrote:
->>Hi Steve, Namjae, Jeremy,
->>
->>At the moment certain fallocate() operations aren't very well implemented in
->>the cifs filesystem on Linux, either because the protocol doesn't fully
->>support them or because the ops being used don't also set the EOF marker at
->>the same time and a separate RPC must be made to do that.
->>
->>For instance:
->>
->> - FALLOC_FL_ZERO_RANGE does some zeroing and then sets the EOF as two
->>   distinctly separate operations.  The code prevents you from doing this op
->>   under some circumstances as it doesn't have an oplock and doesn't want to
->>   race with a third party (note that smb3_punch_hole() doesn't have this
->>   check).
->>
->> - FALLOC_FL_COLLAPSE_RANGE uses COPYCHUNK to move the file down and then sets
->>   the EOF as two separate operations as there is no protocol op for this.
->>   However, the copy will likely fail if the ranges overlap and it's
->>   non-atomic with respect to a third party.
->>
->> - FALLOC_FL_INSERT_RANGE has the same issues as FALLOC_FL_COLLAPSE_RANGE.
->>
->>Question: Would it be possible to do all of these better by using compounding
->>with SMB2_FLAGS_RELATED_OPERATIONS?  In particular, if two components of a
->>compound are marked related, does the second get skipped if the first fails?
+On Thu, Dec 07, 2023 at 05:50:50PM +0000, David Howells wrote:
+>Jeremy Allison <jra@samba.org> wrote:
 >
-> Yes:
+>> >Further, are the two ops then essentially done atomically?
+>>
+>> No. They are processed (at least in Samba) as two separate
+>> requests and can be raced by local or other remote access.
 >
-> https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-smb2/46dd4182-62d3-4e30-9fe5-e2ec124edca1
+>So just compounding them would leave us in the same situation we are in now -
+>which would be fine.
 >
-> "When the current operation requires a FileId and the previous operation
-> either contains or generates a FileId, if the previous operation fails
-> with an error, the server SHOULD<253> fail the current operation with
-> the same error code returned by the previous operation."
+>What do you think about the idea of having the server see a specifically
+>arranged compounded pair and turn them into an op that can't otherwise be
+>represented in the protocol?
 
-David, you could extend smb2_compound_op() like I did for compound
-create+{get,set}_reparse+getinfo+close in [1][2][3].
+Complex, ugly code. How long does the server wait
+for the second operation before proceeding with
+the first ?
 
-[1] https://lore.kernel.org/r/20231126025510.28147-2-pc@manguebit.com
-[2] https://lore.kernel.org/r/20231126025510.28147-3-pc@manguebit.com
-[3] https://lore.kernel.org/r/20231126025510.28147-8-pc@manguebit.com
+>Or is it better to try and get the protocol extended?
+
+If this is a Linux -> Linux op, we have a protocol
+space (the SMB3+POSIX) we can extend without having
+to go via Microsoft. But this would need to be very carefully designed.
 
