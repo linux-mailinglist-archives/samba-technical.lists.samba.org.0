@@ -2,68 +2,60 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 702FD80A516
-	for <lists+samba-technical@lfdr.de>; Fri,  8 Dec 2023 15:04:43 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 507FD80A9F6
+	for <lists+samba-technical@lfdr.de>; Fri,  8 Dec 2023 18:02:19 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=9GHg9mYYhpYtHkFtfDiPVVWry+U9bmV1TJtlDIch/n8=; b=3jc9CyMIXx2ZAW8qU/WhUfOY8R
-	sOGfJMHM/9McMD/k/o6PGzlsy22dqu7hu/giTLqtKsNEhMfLR5SiSZzOTIBg+7kNQht/vy0jNPZ+2
-	0QrThgR+svlBJ+L9sPPRLA/+FDmTbszO95p8O2cdXBmo4k7WEjwvdM6SZWtgFHWYq4FXxrPNNVeuw
-	4g0aG6l2rK11UdaCGd9S8i0gV8SDT3nkW3LvzKwutUAsgZRSrmskKNXg2fgmRd5AqO762G5onmvyl
-	P7Srcj9Yycr38WVJRFGWCg+WxYW4DTCObz/gHd442Nr7PBKFdxLsiToRGChosArQQ57W6S0rZQKOy
-	7hj/kEWg==;
-Received: from ip6-localhost ([::1]:51744 helo=hr1.samba.org) 
+	bh=Hx+KXbsrDsXqQ/asxho25qjSNIITqY/mDTMJmu3//Io=; b=26N1t+BhlwfG58aVeiO+yihaco
+	ix1m8Ug/qF6neuVEI2rnviK54xLh5BCIluJYSd3sstKFL1BYKpszGzoEWGDbhhz3sXGJrI1LZmv8V
+	ab19kaOSTP1UlMd2HqyYLVfknhrSBto+w0GoeBusSx+1uc8oVxStmojOAmPo2EYXsufScsijJFFqB
+	orAeU5c29DhLTp2X/XgImudUxcTNXrhkds6Eh5Ndtdx52UsN+tD6bui7WKsQZcfyL8a99ya0ZS/Mi
+	wF/rBnGH+r6f/RNXmB4Ydss5/xeSDnJUKZAH5SVY9gZReC8QYrRWiB5CvjETaU7EBResoeyX/2x17
+	H373fClw==;
+Received: from ip6-localhost ([::1]:50772 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1rBbSR-005Aro-VT; Fri, 08 Dec 2023 14:04:00 +0000
-Received: from mail-lf1-x12a.google.com ([2a00:1450:4864:20::12a]:42355) 
+	id 1rBeES-005BVX-Rx; Fri, 08 Dec 2023 17:01:44 +0000
+Received: from mail-lf1-x129.google.com ([2a00:1450:4864:20::129]:57682) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1rBbSM-005Ard-Dr
- for samba-technical@lists.samba.org; Fri, 08 Dec 2023 14:03:57 +0000
-Received: by mail-lf1-x12a.google.com with SMTP id
- 2adb3069b0e04-50be10acaf9so2008933e87.1
- for <samba-technical@lists.samba.org>; Fri, 08 Dec 2023 06:03:52 -0800 (PST)
+ (Exim) id 1rBeEO-005BVO-D2
+ for samba-technical@lists.samba.org; Fri, 08 Dec 2023 17:01:42 +0000
+Received: by mail-lf1-x129.google.com with SMTP id
+ 2adb3069b0e04-50c0f6b1015so2598525e87.3
+ for <samba-technical@lists.samba.org>; Fri, 08 Dec 2023 09:01:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1702044231; x=1702649031; darn=lists.samba.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=9GHg9mYYhpYtHkFtfDiPVVWry+U9bmV1TJtlDIch/n8=;
- b=gRfKQj5V1OhidGRswmEnIeVVBb6FcV0WGDDg/WjDXJ7mlo8IwAt0jDD6TaMJhnNYRa
- WiBT8K+/jqCz9Ox3qohMz8nRZtrqSxySfeJpB2azR5ASdZVw2tm+NY+/b8nJ9q1jh/ew
- zVaPgQl80+o+MDQtILNz/H8GaREjyaLok6F/wo7hSaNCAkjWCttftJZWT1ZHZjlB/XoU
- A+YsG1I2rJ3q4b9wB0PV8Pe5aWiBm3fvSwPsU2ckUA0Tc8NHMPdH2PKXTOkSun7ZoFUW
- JeNPRoEz0RU8UjFApnWKDYf7rhA75Sgnr4nrksFmdAo712KS5/yoB5MWLKxN4gl41y+E
- /tZQ==
+ d=gmail.com; s=20230601; t=1702054899; x=1702659699; darn=lists.samba.org;
+ h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=Hx+KXbsrDsXqQ/asxho25qjSNIITqY/mDTMJmu3//Io=;
+ b=Gc0seFjTaag7AvS2m0aSU/2RgxNIPmSLPkMRg1MVJvqAstludYO0ks0KtoCOlo2BZa
+ dLyqKcbCDcSEEuiBb64Xwg9+SDe5WiE2sUezvEYt02HInOFu6tEooMRF79iXteNAZoBR
+ bGMXymWbOJNihmTGlvw2YnT0kRX6YlzFU7AL40Y4izTAlVr/+l8NXiQUheDh4QJ5gVep
+ 2YmQ9u3l3s/glGX9RHWmIEga856vpR4m5O7R0WO6SlqBWVejvo4A8tdnBIn99y9cIJEJ
+ TSPRBreq5DEGL1oo6KaXdivR2E3w1IFdPchhjJqUziV1w/F8wLKaSAgTYsk5ls+cC4Cf
+ T+jw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702044231; x=1702649031;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=9GHg9mYYhpYtHkFtfDiPVVWry+U9bmV1TJtlDIch/n8=;
- b=kZ5JnmGcmkvWsH9YR3abcE7zZ3RNs6yIlD3MsMcmJBgn6saYjeQfWdBJhUJ+p98lus
- lzPeBHO2xezmFcKpl+Onx1Obu76OhO/2k7WDRJvatVGo/k7tNEDy/flNgfwYDVVxPhl0
- 5TNLupN6p5E+OrQQmS4lBEs2EMlS9ssf0D4DYGlB+mkkc4C5HI0291FxgLbr86cFdgfX
- 8hZH8fZFySdqSyh620IMe/8I6DPUfMIu7/APZ1PtDyM5kzW0jo4aq0WuXPHPWBsPUshx
- shEyg3ovGxkuQjlR8xaSEKkKdPQ/1rNQ7kl7V0QChgNuzEknCC05fkQhDUe7Ws6lpfsi
- Fijg==
-X-Gm-Message-State: AOJu0YxU0VnxMKkp90cvHRAub8i5JLWCV4RF08+j1GsPAA77p9Uvwxwl
- bdCZ5pOZOhIGUylbZ35/si6O6j4CIpp+Z+MD37Q=
-X-Google-Smtp-Source: AGHT+IFiYtAB4DX4Xl8v9W/TkeIy/J1MYZ8yoUrp6F848N4KQ4bwfn0Am8DcmxryW7xOyBVf7qDSUREBGXeIxAhGwo0=
-X-Received: by 2002:a05:6512:4894:b0:50c:1047:5a04 with SMTP id
- eq20-20020a056512489400b0050c10475a04mr102899lfb.15.1702044231052; Fri, 08
- Dec 2023 06:03:51 -0800 (PST)
+ d=1e100.net; s=20230601; t=1702054899; x=1702659699;
+ h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=Hx+KXbsrDsXqQ/asxho25qjSNIITqY/mDTMJmu3//Io=;
+ b=Wc4uXKkmfQkHWPl1gqvnVmV/9QEU9f6gffIjr9TZrlenBbhs7Z93ceABB+pE3vZMSi
+ A5yuEMQax4VLi3NIfx9toicBis7mszpDDBAJd8+SCaHa5XrR6TXG7s5JI7nErRUdktzB
+ kSHSBFIfkA5OdgSl+1Im0yQo49HVxFnQrvPn8ySRKDkp1b11qQXAkfAc0wDefOSVKg5o
+ bdrbbCGN80TtYlSTORNHBTClUaQSMXYsHMmSDhjMkLUHaQ8vpttHe+lnWi5eLOr+L7yS
+ hjLNf2Zcygn/CrNjk298Jm0asrCMwttKeq8etEPMNEkM5M+JNnpt3Z0C5Sb+4LjvgwCv
+ qEsg==
+X-Gm-Message-State: AOJu0Yzm0UqBMIjFcbDh+syGptdBBrbvedqxKn/fV07iDZ4WXmcyNAhi
+ ZwAp5p7/zPGhp+eUIVfb+OlKsosY5cJxw5F6zfztJDV9ZHY=
+X-Google-Smtp-Source: AGHT+IHWoPbuGSShxjR5HvyR57kAa14AEktbOwWC3/ZYoENSvlNd1Q8kPjNtjFOpN0sqDeJapBz2dA1iUIWVEF7vi9w=
+X-Received: by 2002:a05:6512:2350:b0:50b:f798:28be with SMTP id
+ p16-20020a056512235000b0050bf79828bemr115677lfu.92.1702054898254; Fri, 08 Dec
+ 2023 09:01:38 -0800 (PST)
 MIME-Version: 1.0
-References: <700923.1701964726@warthog.procyon.org.uk>
- <ZXIDgvZ8/iBhYXwy@jeremy-HP-Z840-Workstation>
- <1215461.1701971450@warthog.procyon.org.uk>
-In-Reply-To: <1215461.1701971450@warthog.procyon.org.uk>
-Date: Fri, 8 Dec 2023 08:03:39 -0600
-Message-ID: <CAH2r5mvM0+Py7bjahBfwpUnFPGJkZJL9KnwX5Pbw5QUGDv-0rw@mail.gmail.com>
-Subject: Re: Can fallocate() ops be emulated better using SMB request
- compounding?
-To: David Howells <dhowells@redhat.com>
+Date: Fri, 8 Dec 2023 11:01:27 -0600
+Message-ID: <CAH2r5mtK-JQeH5gLoGjUS5sywfd-KTJhnF_Mf4c+KCoapMEPhQ@mail.gmail.com>
+Subject: Lease keys and hardlinked files
+To: samba-technical <samba-technical@lists.samba.org>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -79,45 +71,49 @@ List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
 From: Steve French via samba-technical <samba-technical@lists.samba.org>
 Reply-To: Steve French <smfrench@gmail.com>
-Cc: Stefan Metzmacher <metze@samba.org>, linux-cifs@vger.kernel.org,
- samba-technical@lists.samba.org, jlayton@kernel.org,
- Tom Talpey <tom@talpey.com>, Namjae Jeon <linkinjeon@kernel.org>,
- Jeremy Allison <jra@samba.org>
+Cc: Shyam Prasad N <nspmangalore@gmail.com>, CIFS <linux-cifs@vger.kernel.org>,
+ Meetakshi Setiya <msetiya@microsoft.com>, meetakshisetiyaoss@gmail.com
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-> What do you think about the idea of having the server see a specifically
-> arranged compounded pair and turn them into an op that can't otherwise be
-> represented in the protocol?
+Following up on a question about hardlinks and caching data remotely,
+I tried a simple experiment:
 
-That makes sense for some cases (open, queryinfo e.g.) and has been
-done in the past for SMB3 servers.
+1) ln /mnt/hardlink1 /mnt/hardlink2
+   then
+2) echo "some data" >> /mnt/hardlink1
+   then
+3) echo "more stuff" >> /mnt/hardlink2
 
-On Thu, Dec 7, 2023 at 11:50=E2=80=AFAM David Howells <dhowells@redhat.com>=
- wrote:
->
-> Jeremy Allison <jra@samba.org> wrote:
->
-> > >Further, are the two ops then essentially done atomically?
-> >
-> > No. They are processed (at least in Samba) as two separate
-> > requests and can be raced by local or other remote access.
->
-> So just compounding them would leave us in the same situation we are in n=
-ow -
-> which would be fine.
->
-> What do you think about the idea of having the server see a specifically
-> arranged compounded pair and turn them into an op that can't otherwise be
-> represented in the protocol?
->
-> Or is it better to try and get the protocol extended?
->
-> David
->
+I see the second open (ie the one to hardlink2) fail with
+STATUS_INVALID_PARAMETER, presumably due to the lease key being reused
+for the second open (for hardlink2) came from the first open (of
+hardlink1).  It would be logical that leasekeys depend on the inode
+not that the pathname (so could handle hardlinks on the same mount)
+but that appears not to be the case.
+
+Interestingly the case when two clients access the hardlink (or eg.
+nosharesock mount to same share on /mnt1 and /mnt2) works more
+logically:
+
+1) hardlink /mnt1/hardlink1 /mnt1/hardlink2
+   then
+2) nosharesock mount /mnt2 to the same share
+   then
+3) echo "some data" >> /mnt1/hardlink1
+   then
+4) echo "more data" >> /mnt2/hardlink2
+
+What you see at step 4 is the open of /mnt2/hardlink2 generates a
+lease break of the (deferred close) handle on /mnt1/hardlink1 from RWH
+to RH, and the open of /mnt2/hardlink2 is given RH then after the
+write to hardlink2 you see a lease break from RH to none as expected
+before the close.
 
 
---=20
+
+
+-- 
 Thanks,
 
 Steve
