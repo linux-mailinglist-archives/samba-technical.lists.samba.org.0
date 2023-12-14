@@ -2,74 +2,76 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id C99EC80F927
-	for <lists+samba-technical@lfdr.de>; Tue, 12 Dec 2023 22:24:05 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5D3428123D5
+	for <lists+samba-technical@lfdr.de>; Thu, 14 Dec 2023 01:21:24 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=7+ltq4umEyzhbT90BaxvmEdVz/Wa64cQMFpsHfpnqKE=; b=peFZxv9797nuSLRmy9XCSEhK6d
-	tlFjTvEGJpBFhsaroRWOwwDeo5dtgn7/IHhX0XgNQL++5+vuuDeVTywzO5rxTReEjYJ0n3M339vn0
-	3cP3ia7WwyT8TKq3fWmiz30E6woyuM3P4VEkLPkmrbbC+X2lMTreEoiX1sx0YKflDnz5Wg/hTmD9a
-	Izm6vP3Z3mGknvVzYYImLARjH0fthw8yPCUzykq3cw6bfXCbKfp/KrnGUzEXKopihVH57BuO179XH
-	2gC+ttmwaE8CtF3+rj1QEO1pJQqXtVJL5jkFLczh2hSpeqeWao6tmzOc4KGjNQ5J+b7ObTgeWF88i
-	j51DqmZg==;
-Received: from ip6-localhost ([::1]:23218 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
+	bh=msLawhJIpMr1kzvZQZntNwf6YHaXVq9pbhWpM7nHRJE=; b=rQW9o8pIR1KT8nwOEHETMq614t
+	3fs1T3fW3iqcunTmTZ6LyP7RIHQwk3j6UnDX9aK84wf70Vi7yJ3Dt3Fr9MZn2KeIxshz+lv+eWTJa
+	0u/bLJLTiAMs/N2Pz8SpiqYg7nVY51Vw6sscLdQDEJ9x9CLEEzkQ7ivemp7FYn508Xeupf6IOzjTu
+	WtnTj5j7zfxYEUWD4rn7Se2zSrYcD43F5h1w8J6OFnLDCVW3ykJ+6PU36zm8XDtQIigK8m6oFarS0
+	Ajlysbq08M2aLxlFFL4tVO/CznPM6x3f9zlXZhLCZP+G+dlfv7yiUkAHS2FaYsXyYuM1tGYaVFnQw
+	hOjEPMrA==;
+Received: from ip6-localhost ([::1]:27512 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1rDADu-006WlN-CB; Tue, 12 Dec 2023 21:23:26 +0000
-Received: from mail-lf1-x12b.google.com ([2a00:1450:4864:20::12b]:39310) 
+	id 1rDZT8-0074UE-4D; Thu, 14 Dec 2023 00:20:50 +0000
+Received: from out5-smtp.messagingengine.com ([66.111.4.29]:39679) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1rDADo-006WlE-Jg
- for samba-technical@lists.samba.org; Tue, 12 Dec 2023 21:23:24 +0000
-Received: by mail-lf1-x12b.google.com with SMTP id
- 2adb3069b0e04-50bf015e5e4so1190309e87.1
- for <samba-technical@lists.samba.org>; Tue, 12 Dec 2023 13:23:20 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1702416198; x=1703020998; darn=lists.samba.org;
- h=content-transfer-encoding:in-reply-to:autocrypt:from:to:references
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=7+ltq4umEyzhbT90BaxvmEdVz/Wa64cQMFpsHfpnqKE=;
- b=jY/vObpx8HF29vQ1/rimMkoSv0Glp+yXS17aJtu7BHSwtmb6T4j8ifdMT91MjHbz0Y
- VnEpTyeTqhHqSJcN70V4HV0bJQzIGK2/d05L5oA3aTfvMWJ6ETVRkXZwBuyaOgZZwZls
- ERVjxP+iDaIGWKDYMiLa7Dgw7F4YpUc4ehC50of+/Il11XTQNCRxBSx9nZduczj6rd60
- gjQd2D5tBPCQr80hukt91R54bcqv8cIatNySxsvSEH35PInZZWaleA+GmUbYuy7JsSpI
- YRfLznCrzxPCGLLo5nm592qk1qkaEsyG64HIEwOrMk16Gna4KUT/6gtm4EZ4g4ArWSX+
- 1rbA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702416198; x=1703020998;
- h=content-transfer-encoding:in-reply-to:autocrypt:from:to:references
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=7+ltq4umEyzhbT90BaxvmEdVz/Wa64cQMFpsHfpnqKE=;
- b=Qjy2sDvOQGbQ6MHL7sBlCS+Ln+MLj5veGlC66P2zE2XGXHlA9df0sjlK2Rg2cOxzNK
- uX20QFbVhQxnPPuZHf/pmxEtUbELbYrUYioH78yOmhA0RTAOo32VQrvaBEopKtCPCcTs
- H1dEPpXQpZUwRETSMAMACFB46fELkvgaeW/IAhLHqb3ZXGx8sgYMAbLGdVsp3O5FZ7hG
- NiRMpdA4PnK4QwdFBAXtMHcDapH59woCdPLOoLK/XJRZfugq16z/kH1JN9Weo8UN3gun
- 6e9fGWsOs35vLlAgM3xDQjoKS7ZqZPKu/MzKPNrzSYwCDuQt7vw9B4PT1zZHHOaZVyGT
- ZNyQ==
-X-Gm-Message-State: AOJu0YyNUgMRkfcM+SpwehmvD66dqvxNNXxQ/sOIxXY2L9qvlTSDPSOK
- zLsGW67HPTTHlsVA35erJvqoWs+hw66Ctg==
-X-Google-Smtp-Source: AGHT+IG+s1AD4x/EDP00Tmn7iWjIAQFnShL4ufy70FNOZ4CF+iU4Ei8xxMVMNGqcuHPmK9EteXcDuA==
-X-Received: by 2002:a05:6512:3d1d:b0:50c:110a:b5ac with SMTP id
- d29-20020a0565123d1d00b0050c110ab5acmr7371835lfv.3.1702416197851; 
- Tue, 12 Dec 2023 13:23:17 -0800 (PST)
-Received: from [192.168.1.2] (h-98-128-130-182.A980.priv.bahnhof.se.
- [98.128.130.182]) by smtp.googlemail.com with ESMTPSA id
- t16-20020a056512069000b0050bfdfdf6ebsm1436343lfe.14.2023.12.12.13.23.17
- for <samba-technical@lists.samba.org>
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 12 Dec 2023 13:23:17 -0800 (PST)
-Message-ID: <92f7065a-96eb-4acc-a6f5-9a9b609f6fe2@gmail.com>
-Date: Tue, 12 Dec 2023 22:23:16 +0100
+ (Exim) id 1rDZT1-0074Tx-5n
+ for samba-technical@lists.samba.org; Thu, 14 Dec 2023 00:20:47 +0000
+Received: from compute2.internal (compute2.nyi.internal [10.202.2.46])
+ by mailout.nyi.internal (Postfix) with ESMTP id 4A7355C04E8
+ for <samba-technical@lists.samba.org>; Wed, 13 Dec 2023 19:20:33 -0500 (EST)
+Received: from imap51 ([10.202.2.101])
+ by compute2.internal (MEProxy); Wed, 13 Dec 2023 19:20:33 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=outurnate.com;
+ h=cc:content-type:content-type:date:date:from:from:in-reply-to
+ :message-id:mime-version:reply-to:subject:subject:to:to; s=fm1;
+ t=1702513233; x=1702599633; bh=msLawhJIpMr1kzvZQZntNwf6YHaXVq9p
+ bhWpM7nHRJE=; b=HPEcvoO5VGU+P/bhpyFwG1fz0yONpQndtmOmTfon/iKKq1wF
+ tbG0OWcRid4/5Oa7tVjEyExY29yImUsLakv/DFA1KMcCvM5mjphDpLvEBw3YV29/
+ LBYwzSViMUCxwutwk1qdHmxYGao16cvJlN0SFJp9HzlQbsZzRopPXgU/vLv2KbSa
+ vTiU6jd7BhrwtbfjLVEwQFJdEvId/lPBo+3Pc/d5RaEWPdZ/HR3G8xLIUAdEPeu3
+ /bocuR/hWHjG+/W913ewVRjfF1QfttzgjSYvmSvYrKfNvwY28ujBD4AyT4IHOA7j
+ IUFqWUw0RWy4N8MLnhP67GHKjtRi0eDjdM6VsA==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ messagingengine.com; h=cc:content-type:content-type:date:date
+ :feedback-id:feedback-id:from:from:in-reply-to:message-id
+ :mime-version:reply-to:subject:subject:to:to:x-me-proxy
+ :x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=
+ 1702513233; x=1702599633; bh=msLawhJIpMr1kzvZQZntNwf6YHaXVq9pbhW
+ pM7nHRJE=; b=MqnXnmNJYgx2cKnI1BNUwMqRAk94EWGPJWiZ0cMXV5PPWNFwiEr
+ R0tngLT19rPPjYGo8Qsbw6MRlV85R7YBXRPoq+VpEAoC5ounKLUmAjWIuVSHdhBb
+ qWJPOpBH5HP27Q6IATcqrjdRlLLdevcpFehzKPcvA7rQ/aL/n0HMhV3YIvAuH1cI
+ zA4Ze23VM9BX8TDxm2WpRQ2kpYDzcoBOXPnL2kBRs2wfR1cmzfE/J2Ldeku1Cm9f
+ lJ1Ssg4gNYTEFMVsTQpVUF3h66KooLPoHplA/G96TlPTvrhFZvIsYRknSeKmXjCa
+ VCu3AKYXnGWo8qwtpzvmLxKDayOy/mhWAlQ==
+X-ME-Sender: <xms:UUp6ZX3dpboXNuuRhGy9UOccsHOu9naOv8BFNaRplPpEMt4gu1vr9g>
+ <xme:UUp6ZWG4z1oCgORCLK-qiNhJ9YrdTiC161DzgPJJfyVkbZDDZT8KaH_bbC6pEm2Yd
+ RlDWD6HknzCgp8cqmo>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvkedrudelkedgvdduucetufdoteggodetrfdotf
+ fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
+ uceurghilhhouhhtmecufedttdenucenucfjughrpefofgggkfffhffvufgtsehttdertd
+ erredtnecuhfhrohhmpedflfhovgcuffhilhhlohhnfdcuoehjohhsvghphhesohhuthhu
+ rhhnrghtvgdrtghomheqnecuggftrfgrthhtvghrnhepkeejffejhfduieduveefuedttd
+ fghedukeeuhfejhfffveegvddtiedugfevgedvnecuvehluhhsthgvrhfuihiivgeptden
+ ucfrrghrrghmpehmrghilhhfrhhomhepjhhoshgvphhhsehouhhtuhhrnhgrthgvrdgtoh
+ hm
+X-ME-Proxy: <xmx:UUp6ZX7_5FhMnLFpbq91ZJbB5ZEgiXoJtfYKdZZt5NrtsHjehOCCvQ>
+ <xmx:UUp6Zc1oF6glLSw5Lgab31xCZU8zZz6yguBNszbImGcWD9GgpSwLfQ>
+ <xmx:UUp6ZaGRXzm_faeoRbRO1e0RWZ_YvNriYCe9L-RF_sQ5Oyyw-5ve3w>
+ <xmx:UUp6ZeSaU0ZTGPpoVWd-OgLCmveKPNISKuzI0vOSbqrcwgZ-hmsUgA>
+Feedback-ID: ic7c14608:Fastmail
+Received: by mailuser.nyi.internal (Postfix, from userid 501)
+ id 084B3B6008D; Wed, 13 Dec 2023 19:20:33 -0500 (EST)
+X-Mailer: MessagingEngine.com Webmail Interface
+User-Agent: Cyrus-JMAP/3.9.0-alpha0-1283-g327e3ec917-fm-20231207.002-g327e3ec9
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: [PATCH] nmb/smb.service.in: Silence empty N/SMBDOPTIONS warnings
-Content-Language: en-US
-References: <a974dcf5-5ab9-41c9-bab4-f828c1202bfa@gmail.com>
+Message-Id: <8fde5c31-92cb-4f66-a2d1-95f7ba4e7f1b@app.fastmail.com>
+Date: Wed, 13 Dec 2023 19:20:11 -0500
 To: samba-technical@lists.samba.org
-In-Reply-To: <a974dcf5-5ab9-41c9-bab4-f828c1202bfa@gmail.com>
-X-Forwarded-Message-Id: <a974dcf5-5ab9-41c9-bab4-f828c1202bfa@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Subject: Group Policy Ordering
+Content-Type: text/plain
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -83,59 +85,17 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Joakim Roubert via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Joakim Roubert <joakim.roubert@gmail.com>
+From: Joe Dillon via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Joe Dillon <joseph@outurnate.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Unset/empty NMBDOPTIONS and SMBDOPTIONS triggers the syslog warnings
+Suppose I link a policy called "Test Policy 1".  When samba-gpupdate runs, this policy will be in changed_gpo_list.  Suppose it sets the contents of /etc/test.txt to "testpolicy1".  The second time samba-gpupdate runs, it will not be in changed_gpo_list, and the CSE won't rewrite the file.  So far so good.  Now, I toggle "Test Policy 1" to enforced.  Rerunning samba-gpupdate does not process the policy.  Again, so far so good.  Suppose I link "Test Policy 2", unenforced.  Let's say the CSE for "Test Policy 2" would set the content of /etc/test.txt to "testpolicy2".  I would expect, since "Test Policy 1" has a higher priority, the contents of /etc/test.txt after a samba-gpupdate to be "testpolicy1".  When I run samba-gpupdate,  only "Test Policy 2" is processed, since it is the only one that changed.  "--force" obviously corrects the issue.
 
-nmbd.service: Referenced but unset environment variable evaluates to
-an empty string: NMBDOPTIONS
-smbd.service: Referenced but unset environment variable evaluates to
-an empty string: SMBDOPTIONS
+Is this intended behaviour or a bug?
 
-Setting the replace-with-nothing-if-not-set substitutions
-${NMBDOPTIONS:-} and ${SMBDOPTIONS:-} in the service files rather than
-using $NMBDOPTIONS and $SMBDOPTIONS mitigates this and shows this is
-what we want and not something that was missed (which the warning is
-all about).
+Second question: is it valid for GPOs based on .pol files to not write the registry entries to the local registry?  The above behaviour could be avoided if every gpupdate wrote all changes from all applicable GPOs to the registry and deferred processing to the end.
 
-Signed-off-by: Joakim Roubert <joakim.roubert@gmail.com>
----
-  packaging/systemd/nmb.service.in | 2 +-
-  packaging/systemd/smb.service.in | 2 +-
-  2 files changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/packaging/systemd/nmb.service.in 
-b/packaging/systemd/nmb.service.in
-index ceeeea408ec..2c53558d98c 100644
---- a/packaging/systemd/nmb.service.in
-+++ b/packaging/systemd/nmb.service.in
-@@ -8,7 +8,7 @@ After=network.target network-online.target
-  Type=notify
-  PIDFile=@PIDDIR@/nmbd.pid
-  EnvironmentFile=-@SYSCONFDIR@/sysconfig/samba
--ExecStart=@SBINDIR@/nmbd --foreground --no-process-group $NMBDOPTIONS
-+ExecStart=@SBINDIR@/nmbd --foreground --no-process-group ${NMBDOPTIONS:-}
-  ExecReload=/bin/kill -HUP $MAINPID
-  LimitCORE=infinity
-  @systemd_nmb_extra@
-diff --git a/packaging/systemd/smb.service.in 
-b/packaging/systemd/smb.service.in
-index 64c77c01502..3526339f24d 100644
---- a/packaging/systemd/smb.service.in
-+++ b/packaging/systemd/smb.service.in
-@@ -9,7 +9,7 @@ Type=notify
-  PIDFile=@PIDDIR@/smbd.pid
-  LimitNOFILE=16384
-  EnvironmentFile=-@SYSCONFDIR@/sysconfig/samba
--ExecStart=@SBINDIR@/smbd --foreground --no-process-group $SMBDOPTIONS
-+ExecStart=@SBINDIR@/smbd --foreground --no-process-group ${SMBDOPTIONS:-}
-  ExecReload=/bin/kill -HUP $MAINPID
-  LimitCORE=infinity
-  @systemd_smb_extra@
--- 
-2.43.0
-
+Thanks,
+Joe D
 
