@@ -2,52 +2,53 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4869B823F6F
-	for <lists+samba-technical@lfdr.de>; Thu,  4 Jan 2024 11:29:49 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id DC759824412
+	for <lists+samba-technical@lfdr.de>; Thu,  4 Jan 2024 15:46:57 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=GJtRVWqa1aPL8V3M2Ws57kvR7Lj8XCYw0RrpwWqh50o=; b=xA6SYuX63wAf4HU7q10YECXPAJ
-	NwCsgLE/hMSahLR6CJmR6EvPnQLXqfihiw9YKU+bGBpyQzo8zX6ELG4RvkJmKneODJZkG8VJA0HMg
-	8oHrrfEhbJpryDlAuUEfZIcaFZApLVCYdZstlEIoWQOM5aL6hjfQcnKCYy+KGa4ywh0CQfJl1As7C
-	++EXhvs3Kb7nVA4Tmo9ZJKsLm0V6Pi7doRdPVfpR0YZl5oGSw+h77lGwToxftlQjjsboRX8g0I16B
-	Jnz/F9csatz3LZqvB7xhhBwNLLAUaoN/pkC4K0wqCmtgCfhK8NVKMxo+ke9+3zAGMnzWut/AArikt
-	V1fGRsTA==;
-Received: from ip6-localhost ([::1]:34496 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=31XEj4cNOa0Sn9sUsDxqgi1UmV/eX7WyFWY2Io4hrL8=; b=C0YNrY8wgYJvTRNXiknfhdXW57
+	K0GnMULsQp+sUrf9VYENZkNJWitHt888EyLPnYFwVC5zxnopbae8wKp5TsKOU0vk7G+plYnh+miv6
+	9a4ex19gaQtVCDieEyoKcdLVW5B8hVEg4ZuDk61rerXeWGcu/S1AYUGq4BZqzbKRU1/nuOcgGEw6g
+	Ej1loZhz7QhDbqV1T1u4/NWIg48qwnc4MSsuSXXyy9m1LYeAiaeHnQwxCGGWvelc9GEMJCEvSA4mm
+	PyLkO2u5TiP7V6/QuBaRtnkX1FqkzWObzQAmI4Uy2l0hBmFHuLAV46MP2/vYK+jdsVCF+srxW/rCs
+	bDC+qarQ==;
+Received: from ip6-localhost ([::1]:29120 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1rLKyb-002KKD-1F; Thu, 04 Jan 2024 10:29:23 +0000
-Received: from gandalf.ozlabs.org ([150.107.74.76]:38351) 
+	id 1rLOzI-002NfV-GO; Thu, 04 Jan 2024 14:46:23 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:47158) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1rLKyW-002KK5-7P
- for samba-technical@lists.samba.org; Thu, 04 Jan 2024 10:29:21 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=meltin.net;
- s=202004; t=1704364148;
- bh=GJtRVWqa1aPL8V3M2Ws57kvR7Lj8XCYw0RrpwWqh50o=;
- h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
- b=UHBYyJoISTdym38l0MYBRznoDOWCIqKWpe6f+s97zUD/E5dKyof+BSfn/Dpvjl2Nr
- 1Iyg4kTKXdBjFj7kAxKq8p6yvXaWvTiu86bx7sf2Cov7c0LBJqqHF3uls6viDCmQbf
- SGkJ1JGpoWx8sjGcIq43/nflf6UsBhLHUm3OkTAo0kB75Zl4G7jOCO4F+R/ci98S18
- uZa5esH5AQcQRCJmvSP/2Zf74as5Zn5W8lUSC6ljv9B9hLgREomwvKyXN1erlfVbiZ
- jKecvbx664AoflzQgDwLAHh2lC0WZ+R+e8L6We/KSI4R3KDihycWh1/8rQb8H34ydZ
- z1yuszFeM0IqA==
-Received: from authenticated.ozlabs.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange ECDHE (prime256v1) server-signature RSA-PSS (4096 bits)
- server-digest SHA256) (No client certificate requested)
- by mail.ozlabs.org (Postfix) with ESMTPSA id 4T5N9c66KXz4wny;
- Thu,  4 Jan 2024 21:29:08 +1100 (AEDT)
-Date: Thu, 4 Jan 2024 21:29:07 +1100
-To: =?UTF-8?B?6ZmIIOaWuei/mw==?= <sharingfun520@outlook.com>
-Subject: Re: =?UTF-8?B?5Zue5aSNOg==?= CTDB and per record persistency
-Message-ID: <20240104212907.63a28f77@martins.ozlabs.org>
-In-Reply-To: <DB9P192MB1684640CE6DB300D687CEED8FE60A@DB9P192MB1684.EURP192.PROD.OUTLOOK.COM>
-References: <DB9P192MB1684F7EFAB5DCC7D2390DB77FE9FA@DB9P192MB1684.EURP192.PROD.OUTLOOK.COM>
- <20240103175012.51d1d4bf@martins.ozlabs.org>
- <DB9P192MB1684640CE6DB300D687CEED8FE60A@DB9P192MB1684.EURP192.PROD.OUTLOOK.COM>
-X-Mailer: Claws Mail 4.1.1 (GTK 3.24.38; x86_64-pc-linux-gnu)
+ (Exim) id 1rLOzD-002NfO-I9
+ for samba-technical@lists.samba.org; Thu, 04 Jan 2024 14:46:21 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=From:To:Date:Message-ID:CC;
+ bh=31XEj4cNOa0Sn9sUsDxqgi1UmV/eX7WyFWY2Io4hrL8=; b=ozeM2aczXG4DT/iluqbU1ekwV3
+ 0oopq3FP4t+ETrWXZPSM9+bQFR23Ry551mw/6bzRTxZZpF7CSmF7ADcoDZot4sl6QeMWE2HzfrzlB
+ JnpMCH9EOtHqMOuwppDFhsQJXbCZ1pJyjGoHxtkBMJE/gPzE1nKNGUrtteVo7luCODkPGbDxVMS9e
+ wHuu39BDGAprgH6t3p1ULFKQEv0sNuYBOEQMHyYssPMV/Z2W9XyXYunkIVcXUhTuQLj54lM9DGsAK
+ YO5AUL3++yIN0AfNgywLb2q4b6AGfj3SO5KBpIe6yDgkMR+bTnQSFlglYIgZVumxnUn6vXK+sEa5r
+ SN1WHcvHPcPCMYMliSzYRWifeh7YwTpPJkMPU7Bm7WLbdx+xFHlyFCdegaIzdWojBC0dTcr/GZc5y
+ WAxFfARBxhF9zFresLAbylPnDQMSjs7NICPVALR+Hw7WPjO5bOxMUFz9w9IpZMcPeWSXzSZZWRLCc
+ zJmTC2hJ8tDDir6onxNiH324;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1rLOzB-006Rmj-1O for samba-technical@lists.samba.org;
+ Thu, 04 Jan 2024 14:46:17 +0000
+Message-ID: <3e13bfd4-a763-a87e-2f36-36beeec957d7@samba.org>
+Date: Thu, 4 Jan 2024 07:46:16 -0700
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.14.0
+Subject: Re: Group Policy Ordering
+Content-Language: en-US
+To: samba-technical@lists.samba.org
+References: <8fde5c31-92cb-4f66-a2d1-95f7ba4e7f1b@app.fastmail.com>
+ <ddf5ae2e-0bb0-825e-5dde-67003aa419bc@samba.org>
+ <cbff5f90-ddd0-4f9d-968c-b4a1344fd81a@app.fastmail.com>
+In-Reply-To: <cbff5f90-ddd0-4f9d-968c-b4a1344fd81a@app.fastmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -61,40 +62,30 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Martin Schwenke via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Martin Schwenke <martin@meltin.net>
-Cc: "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>
+From: David Mulder via samba-technical <samba-technical@lists.samba.org>
+Reply-To: David Mulder <dmulder@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi,
 
-On Wed, 3 Jan 2024 07:28:58 +0000, =E9=99=88 =E6=96=B9=E8=BF=9B <sharingfun=
-520@outlook.com>
-wrote:
+On 12/27/23 6:03 PM, Joe Dillon via samba-technical wrote:
+> I'm at 4.19.3.  I'm missing any commits between its release and today.  Would the changes be in those commits?  From my testing, which is using a policy extension that just prints the contents of the changed_gpo_list, it appears a GPO that changes enforcement status isn't being passed in.
+The majority of the changes happened in commit 
+a8bad5d5b859a2a76ce18919fbe2bf42f8ef7562, but there were some minor 
+fixes following that one. This patch appears to have landed in 4.19.3. 
+So there is either a bug in the new get_gpo code, or in the CSEs 
+processing of the state. If I were to guess, I'd bet it's in the CSE.
+>  From my read of the certificate client extension, it appears this tdb contains a custom json representation of the client extension's state.  So, in essence, an extension must parse the pol file, read the current tdb settings, merge them with changed/deleted GPO settings, persist them to the tdb, then apply the settings to the local system (in whatever way the current GPO extension does so)
+Correct.
 
-> The file copying scenario  involves a cluster built using CTDB, with
-> two machines sharing a common public IP. When you copy files to the
-> shared directory and the node with the public IP experiences a
-> failure with subsequent failover, the file copying process continues
-> seamlessly without any error displayed on the Windows system. Do you
-> have any means to ensure that file copying can proceed normally even
-> during transparent failover events?
+-- 
+David Mulder
+Labs Software Engineer, Samba
+SUSE
+1221 S Valley Grove Way, Suite 500
+Pleasant Grove, UT 84062
+(P)+1 385.208.2989
+dmulder@suse.com
+http://www.suse.com
 
-Now I understand that you were talking about copying data from the
-cluster.  I thought you were talking about replicating data between
-nodes in the cluster.  Thanks for clarifying!
-
-Currently CTDB uses tickle ACKs and gratuitous ARPs to attempt
-failover.  While this works "seamlessly" for some applications, it
-doesn't work in some cases.
-
-I wasn't disagreeing with you: with modern SMB, the best way of
-achieving transparent failover would be to support persistent file
-handles.  Unfortunately, until now, this hasn't reached the top of
-anyone's priority queue, so it hasn't been implemented in clustered
-Samba.
-
-peace & happiness,
-martin
 
