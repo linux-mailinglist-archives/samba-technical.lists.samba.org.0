@@ -2,102 +2,86 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id D9EB58277AE
-	for <lists+samba-technical@lfdr.de>; Mon,  8 Jan 2024 19:35:23 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D5DBE827A6D
+	for <lists+samba-technical@lfdr.de>; Mon,  8 Jan 2024 22:51:10 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=XnX6ipO5Et8uSKZ6QpR/U4DH7wzjvjb3DDbGBhY65qE=; b=Yu8jDbkFWngW93rpuU0VYftWIN
-	MZL+rZB8Xqcfd+gv6UG+WSDYYi38R9V6TAEgOBytNVISdd1lAOCsVbSgOystJL3fwKojBdi9Z1aid
-	dbXE5Es2khNlM+2Wpc0Jc7/9rv/tErtu2lVwauQBczcbykEarAW3cqvxNgbrlxGX1c9dIIU/SHXp/
-	DrjNCXD9X5fK6RbRyY/7jCZ3djQA+4TlYM6XWtCTyBQlrW3nHcaOPVAQg8oMX839GlCDcspis1Dus
-	Cdb5no/npC/LE0i5elo69Qtz4iAUXuJHEKaHfMaPQcwKlzM7vQ8hqARWkJhzQpqgGsVRcuAx6h93/
-	Oj0ZvmgA==;
-Received: from ip6-localhost ([::1]:41096 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=h3L9Ms3RJbkhDRpENMDIIkYxze9oX7IYZ5aUjYfsps8=; b=tUnHbU39rbuuibtd5mgKwSSJSE
+	lAIYkI+1tcaafaPc5NsqEn26vnhN6YdEljqhRHpcpUNAy6h9vf/bfvImRCXP7Lj8JJ78ICMKiioJ5
+	zonlF5ZOY12O2F8nJYMpbihXNybL2rN46aZYsGcrLWW3ipYiCkS6Qs3VmbhJzh9iSkmRJnrkvSbwZ
+	BJ7DlH9GjsWtVWOUuhOo3egFp6BSgkDnVLvB70/wGtw+zYCcYgqeWmgMpL+KoLEOkoG576SXuDa08
+	ahGYdE/A3r9GaMZhrcW8KTHzWZPfu47EYGvZwXHLSIHVJ3fSw3wAf0gokeK+bq/YQuyrTfjqKB5ce
+	w34zwDbw==;
+Received: from ip6-localhost ([::1]:43738 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1rMuSY-002oVB-Lq; Mon, 08 Jan 2024 18:34:50 +0000
-Received: from smtp-out1.suse.de ([2a07:de40:b251:101:10:150:64:1]:42626) 
+	id 1rMxVt-002pFl-9Y; Mon, 08 Jan 2024 21:50:29 +0000
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124]:59295) 
  by hr1.samba.org with esmtps
- (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1rMuSR-002oV2-RP
- for samba-technical@lists.samba.org; Mon, 08 Jan 2024 18:34:48 +0000
-Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
- [IPv6:2a07:de40:b281:104:10:150:64:97])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 9A0BE21A44;
- Mon,  8 Jan 2024 18:17:54 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1704737874; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
+ (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__AES_256_GCM:256) (Exim)
+ id 1rMxVn-002pFc-RO
+ for samba-technical@lists.samba.org; Mon, 08 Jan 2024 21:50:27 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1704750620;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=XnX6ipO5Et8uSKZ6QpR/U4DH7wzjvjb3DDbGBhY65qE=;
- b=b4WiDj5AUEiY2IBAiuXY2c7Yei5NSm83IcU1AC3MQm85SnyDZxeo2BWAyWOqTW/l3cfbkh
- Q4/SaEXu+l0/AI1FzhZeXAgkxOen8oBxM4s1CyDmMs3ZFhy93cFeliswDCPBWAOAz17dvO
- Rs3vNkrAED7RWl1WtOCsejgQjPhOV9Q=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1704737874;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
+ bh=h3L9Ms3RJbkhDRpENMDIIkYxze9oX7IYZ5aUjYfsps8=;
+ b=P17I2cxE8Ijp+ve3OqPoIjQq4xz2PheqvzOTVja1FR6BgR+E/Q0+OP9vIFmHxemuhAfXZE
+ yAOl/pP6oAqxWNJHONBgr7NoH8kOH8BMnx06GlSilH962NpL90ArPT5uvQ2kZ0EOA2FLyH
+ fFyAW6p0pbDxoK36i43MQh37yZNs7WI=
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1704750620;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=XnX6ipO5Et8uSKZ6QpR/U4DH7wzjvjb3DDbGBhY65qE=;
- b=VSNAmRZLPF0pfvdq9U6ta377nHamNu6GZxhZNXN4ZVxhws2IGnUMwB8F4aVTvitj8TZNHj
- GwpiEJJrja/r4PDg==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1704737874; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=XnX6ipO5Et8uSKZ6QpR/U4DH7wzjvjb3DDbGBhY65qE=;
- b=b4WiDj5AUEiY2IBAiuXY2c7Yei5NSm83IcU1AC3MQm85SnyDZxeo2BWAyWOqTW/l3cfbkh
- Q4/SaEXu+l0/AI1FzhZeXAgkxOen8oBxM4s1CyDmMs3ZFhy93cFeliswDCPBWAOAz17dvO
- Rs3vNkrAED7RWl1WtOCsejgQjPhOV9Q=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1704737874;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=XnX6ipO5Et8uSKZ6QpR/U4DH7wzjvjb3DDbGBhY65qE=;
- b=VSNAmRZLPF0pfvdq9U6ta377nHamNu6GZxhZNXN4ZVxhws2IGnUMwB8F4aVTvitj8TZNHj
- GwpiEJJrja/r4PDg==
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 1676A13686;
- Mon,  8 Jan 2024 18:17:53 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id 9NsAMlE8nGWsXgAAD6G6ig
- (envelope-from <ematsumiya@suse.de>); Mon, 08 Jan 2024 18:17:53 +0000
-Date: Mon, 8 Jan 2024 15:17:51 -0300
-To: Jacob Shivers <jshivers@redhat.com>
-Subject: Re: Linux client SMB and DFS site awareness
-Message-ID: <20240108181751.natpy6fac7fzdjqd@suse.de>
-References: <CALe0_77CgEXNiXrM4oQ47sfHnDoML18oz5rmEu-_57Av0KRTkg@mail.gmail.com>
+ bh=h3L9Ms3RJbkhDRpENMDIIkYxze9oX7IYZ5aUjYfsps8=;
+ b=P17I2cxE8Ijp+ve3OqPoIjQq4xz2PheqvzOTVja1FR6BgR+E/Q0+OP9vIFmHxemuhAfXZE
+ yAOl/pP6oAqxWNJHONBgr7NoH8kOH8BMnx06GlSilH962NpL90ArPT5uvQ2kZ0EOA2FLyH
+ fFyAW6p0pbDxoK36i43MQh37yZNs7WI=
+Received: from mail-yw1-f199.google.com (mail-yw1-f199.google.com
+ [209.85.128.199]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-590-u0yWH5OSPO6kzR2fn5mOFA-1; Mon, 08 Jan 2024 16:50:18 -0500
+X-MC-Unique: u0yWH5OSPO6kzR2fn5mOFA-1
+Received: by mail-yw1-f199.google.com with SMTP id
+ 00721157ae682-5e9074bb7c5so29503767b3.0
+ for <samba-technical@lists.samba.org>; Mon, 08 Jan 2024 13:50:18 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1704750618; x=1705355418;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=h3L9Ms3RJbkhDRpENMDIIkYxze9oX7IYZ5aUjYfsps8=;
+ b=cyBjGJjZboWTh0o0XcO1Izb/HHKBNUDHtTLtUnMcna5A+Eo73wjd0NlSPRs32/hcRq
+ KYjYjGOZ5Bw//M5KCgnnBeKomAFbtfNFgAbaFsQoDddnrntfcUaDEo+Rc0qWFeXyFY+I
+ LRFf2nb4P39yBC70r5hQ3HgdWroOP9YnFkAxFTN/g/Mi9GdPO5fFbqe+XGdnsZRfknHu
+ 4L3fJDAbdtwbWuAQ/7NmzQIKkMoruSb+lncIzF9JcP3PkWIWiX/vWl54e6QnAn1KDb6f
+ 0W0gkM0Xu126Yiw1Ykk4SwEYxuQDkoiQ4YyQA8fQVplTskXPcVzCkPbVojpsOSoQ6j7r
+ eTkg==
+X-Gm-Message-State: AOJu0YzyGqEz7HDp759wwXzlulMltGJy9mFhTXJg05irOEk6gcN5xeZp
+ 5aqJvqHBLS5XuD49RGXhulSncrzvUTfn5U50ndIZ9Q7CN5bcRAdSzNR9CZ19Ce+2orlnBhoZzIK
+ sITghtp64aE1onB0ohwWUPj6x0Gdv4XrnJrwPIVyy08pUZsH00TiU
+X-Received: by 2002:a81:4742:0:b0:5eb:29e:45a3 with SMTP id
+ u63-20020a814742000000b005eb029e45a3mr2758878ywa.32.1704750618192; 
+ Mon, 08 Jan 2024 13:50:18 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IH0mjHn+eWP2TDMMlnHgtyr6G7HK36SREVu7O3klmm/rR5VIOWgvJQG4p4WgEySWe6CPqFJQ0L1ReKsmKeeIbI=
+X-Received: by 2002:a81:4742:0:b0:5eb:29e:45a3 with SMTP id
+ u63-20020a814742000000b005eb029e45a3mr2758873ywa.32.1704750617915; Mon, 08
+ Jan 2024 13:50:17 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii; format=flowed
-Content-Disposition: inline
-In-Reply-To: <CALe0_77CgEXNiXrM4oQ47sfHnDoML18oz5rmEu-_57Av0KRTkg@mail.gmail.com>
-Authentication-Results: smtp-out1.suse.de;
- dkim=pass header.d=suse.de header.s=susede2_rsa header.b=b4WiDj5A;
- dkim=pass header.d=suse.de header.s=susede2_ed25519 header.b=VSNAmRZL
-X-Rspamd-Server: rspamd2.dmz-prg2.suse.org
-X-Spamd-Result: default: False [-1.51 / 50.00]; ARC_NA(0.00)[];
- RCVD_VIA_SMTP_AUTH(0.00)[];
- R_DKIM_ALLOW(-0.20)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
- SPAMHAUS_XBL(0.00)[2a07:de40:b281:104:10:150:64:97:from];
- FROM_HAS_DN(0.00)[]; RCPT_COUNT_THREE(0.00)[3];
- TO_MATCH_ENVRCPT_ALL(0.00)[]; BAYES_HAM(-0.00)[40.31%];
- MIME_GOOD(-0.10)[text/plain]; NEURAL_HAM_LONG(-1.00)[-1.000];
- RCVD_COUNT_THREE(0.00)[3];
- DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
- DKIM_TRACE(0.00)[suse.de:+]; MX_GOOD(-0.01)[];
- TO_DN_ALL(0.00)[]; NEURAL_HAM_SHORT(-0.20)[-1.000];
- FUZZY_BLOCKED(0.00)[rspamd.com]; FROM_EQ_ENVFROM(0.00)[];
- MIME_TRACE(0.00)[0:+]; RCVD_TLS_ALL(0.00)[];
- MID_RHS_MATCH_FROM(0.00)[]
-X-Spam-Score: -1.51
-X-Rspamd-Queue-Id: 9A0BE21A44
-X-Spam-Flag: NO
+References: <CALe0_77CgEXNiXrM4oQ47sfHnDoML18oz5rmEu-_57Av0KRTkg@mail.gmail.com>
+ <20240108181751.natpy6fac7fzdjqd@suse.de>
+In-Reply-To: <20240108181751.natpy6fac7fzdjqd@suse.de>
+Date: Mon, 8 Jan 2024 16:49:41 -0500
+Message-ID: <CALe0_777GL=XQYSochOoph73madKm8DsRn+xQOcTmz9xh+wcHQ@mail.gmail.com>
+Subject: Re: Linux client SMB and DFS site awareness
+To: Enzo Matsumiya <ematsumiya@suse.de>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -111,45 +95,75 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Enzo Matsumiya via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Enzo Matsumiya <ematsumiya@suse.de>
+From: Jacob Shivers via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jacob Shivers <jshivers@redhat.com>
 Cc: CIFS <linux-cifs@vger.kernel.org>,
  samba-technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On 01/08, Jacob Shivers wrote:
->Hello,
+Hello Enzo,
+
+Thank you for the response!
+
+I failed to mention the initial aspect that is specific to mounting a
+domain based DFS share. This would contact a random domain controller
+instead of a DC local to the calling client's site, should it exist. A
+CLAP ping like that used by SSSD[0] could be used to identify the
+nearest domain controller prior to initiating a subsequent mount
+request. This is where the DNS discovery for a ldap entry would be
+applicable.
+
+Hope that helps to clarify the use case.
+
+Thanks again for the response.
+
+
+[0] https://docs.pagure.org/sssd.sssd/design_pages/active_directory_dns_sit=
+es.html
+
+On Mon, Jan 8, 2024 at 1:22=E2=80=AFPM Enzo Matsumiya <ematsumiya@suse.de> =
+wrote:
 >
->I have a use-case for a Linux SMB client to mount DFS replicated
->shares, with a preference for sites that are closer geographically.
->DNS site discovery/awareness exists within DFS[0], but I have not read
->of any work currently under investigation.
+> On 01/08, Jacob Shivers wrote:
+> >Hello,
+> >
+> >I have a use-case for a Linux SMB client to mount DFS replicated
+> >shares, with a preference for sites that are closer geographically.
+> >DNS site discovery/awareness exists within DFS[0], but I have not read
+> >of any work currently under investigation.
+>
+> DFS supports referral responses based both on site location and site cost=
+ing,
+> which are done on the _server_ (MS-DFSC 3.2.1.1 and 3.2.1.2).
+>
+> For site location, the targets are sorted with targets on the same site a=
+s
+> the client first, in random order, and then targets outside of client's s=
+ite
+> are appended, also in random order.
+>
+> If supported and enabled, referral responses based on site cost will, pra=
+ctically,
+> sort the targets from lowest to highest cost (relative to the client,
+> and in random order if same cost).
+>
+> On either case, the client will try to connect to the targets in order
+> it was received.
+>
+> >[0] https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-adt=
+s/7fcdce70-5205-44d6-9c3a-260e616a2f04?redirectedfrom=3DMSDN
+>
+> I don't see how the info on that link would apply to this particular
+> scenario, as doing such discovery on the client would be redundant since
+> the server, if properly implemented, already did it.
+>
+> Please clarify if you think I misunderstood your case.
+>
+>
+> Cheers,
+>
+> Enzo
+>
 
-DFS supports referral responses based both on site location and site costing,
-which are done on the _server_ (MS-DFSC 3.2.1.1 and 3.2.1.2).
-
-For site location, the targets are sorted with targets on the same site as
-the client first, in random order, and then targets outside of client's site
-are appended, also in random order.
-
-If supported and enabled, referral responses based on site cost will, practically,
-sort the targets from lowest to highest cost (relative to the client,
-and in random order if same cost).
-
-On either case, the client will try to connect to the targets in order
-it was received.
-
->[0] https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-adts/7fcdce70-5205-44d6-9c3a-260e616a2f04?redirectedfrom=MSDN
-
-I don't see how the info on that link would apply to this particular
-scenario, as doing such discovery on the client would be redundant since
-the server, if properly implemented, already did it.
-
-Please clarify if you think I misunderstood your case.
-
-
-Cheers,
-
-Enzo
 
