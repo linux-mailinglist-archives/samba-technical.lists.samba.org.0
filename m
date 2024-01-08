@@ -2,48 +2,78 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id D2D8F8271D9
-	for <lists+samba-technical@lfdr.de>; Mon,  8 Jan 2024 15:51:41 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D9B71827529
+	for <lists+samba-technical@lfdr.de>; Mon,  8 Jan 2024 17:30:07 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
-	bh=Qu+/3S005pB+ynP/Vyn84uV+aS8I0svS9z99NvYDPJk=; b=uTU0UBxJsYP1R7YsLq8R1p9JTp
-	jnwao+T1xGW1J3N2wv77Bx7PtOikJFKRfSb+iSPziw2wM/hKgvRTqiTsBP2c+3IjK6vX8jIwAVqUJ
-	h1/r8LSGTPOpVSo3GdK7z04RW17r3CjSRPDnH9vjIRjhe2N7R2F26rELVK5g9fjcd6L6YkNVtZsyy
-	w54m5vMvDSBX4YtJN/7zheBA9o2oCGjsh7yPU4dc7Jf5hqgppCkBbFvTH1JHjLaDfB0bR21ZMypDX
-	b2tktUHyQBLHgb1IMeCcBFSDW9ce0LYVM1Tk4qP3jEe/ZdO63wtT95t7oXJc3LqbyQZ8bnjQbxZhl
-	u80Geq3Q==;
-Received: from ip6-localhost ([::1]:51216 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=lFQMv9XwK9ej+tAG2vSPh6/ex1rfcZMiQqZcNXWZROs=; b=hj/UOOVQ9Io12+EX/m7FpRBDpd
+	bh1CdGlvjFg2lXe0xtPrDm6A/XS2aVDIPJHIj+J//NfxpyxCy5Kq+zvV1uAN2EJVQ/WBy1C0pgTgr
+	yrbzxqqkjiXlivkIKQgYb68eeheSCgDoyXdXnYcJaYWznwl8WEvTn3eK/GmKnpxaLZeCt0Tovk7lg
+	7cKrwcus0PuWQFzyBeMhTcDZLPfoMp2gXkvMAmsrOu638FAJlEAwlAjM46CdpuFCdCI+lFqyqZZFI
+	6twKiRaimfY2rxWRLuKIubMn3h8d6WE5KUzvqdy5/KqM3hSkxZO28rBISjMhpaLOLuDohMyHrWnJA
+	fJNMOJcA==;
+Received: from ip6-localhost ([::1]:43012 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1rMqyL-002nCu-KO; Mon, 08 Jan 2024 14:51:26 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:47462) 
+	id 1rMsVP-002o7b-Ls; Mon, 08 Jan 2024 16:29:39 +0000
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124]:46648) 
  by hr1.samba.org with esmtps
- (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1rMqxg-002n8U-1E
- for samba-technical@lists.samba.org; Mon, 08 Jan 2024 14:50:55 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=From:To:Date:Message-ID:CC;
- bh=Qu+/3S005pB+ynP/Vyn84uV+aS8I0svS9z99NvYDPJk=; b=pDUwZmoFUVMcSoIQXeNAd8cigR
- VaiHYQ9aPGoRb4BR81b/G6uJsNDTjZgNAWhWN92l89+SLOq3+17ZMxN2KYybTC6CWzCQVtPNwComw
- RQPE4DVDzQX1UpFe1QUeuBTm7OEYVoHNnYPkMKfM1VfJZnaS7Re3ac/A0ZXAKHT++eJSqYLz8f8yQ
- sa3/Gqc9+8PGymii92fJXvs3v068xDCOYA9KJwtWZ3Syk+TAWSnHPfAOSqgLRIlC2FKA4md7e0Z1n
- P4ff7SI2Ne7PMtXuR3l0FVfOutnaab6XUVtTyFa6iow9bcT5D76QFi7Hnl7rD8f+x3ZEgmDnaNTAv
- oMqoye4ikODBZF/VhtAdsgOPv4t8BhRoch5CfOul2Mf+XzIhGkqnoaYhJMoNe9UR4Vh90emzdJtKn
- vzoUSlPdTZMJhUSKi4eSdhfpXmwszmbdMFaP9vXaogngvz0PniFAzlvYVes0PCTi1PLoP8YYILc9e
- XWjXbz1kr+jdmNLW2C5jPBo1;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1rMqxc-0070re-2h for samba-technical@lists.samba.org;
- Mon, 08 Jan 2024 14:50:41 +0000
-Message-ID: <83de9ace-13a0-4855-85ec-d88c6e1765ee@samba.org>
-Date: Mon, 8 Jan 2024 15:50:40 +0100
+ (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__AES_256_GCM:256) (Exim)
+ id 1rMsVK-002o7M-9p
+ for samba-technical@lists.samba.org; Mon, 08 Jan 2024 16:29:37 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1704731370;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:mime-version:mime-version:content-type:content-type;
+ bh=lFQMv9XwK9ej+tAG2vSPh6/ex1rfcZMiQqZcNXWZROs=;
+ b=EOcmxlmhaoBzTtZcL7q4c+K1D40r1JBRwEEzApbBOZl5eFYhTg5J08/eUOn0MS9k7wmwTa
+ HZX+iqeMgpCWzwnT8ETFLP6+V7/6JKIzhJLAKzuvw7OS/Kcp8U493N+qgL/RVRCD/Ro43B
+ hlDi0AZnFLg7ZXj/uqwaGUuek3Xsi8Y=
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1704731370;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:mime-version:mime-version:content-type:content-type;
+ bh=lFQMv9XwK9ej+tAG2vSPh6/ex1rfcZMiQqZcNXWZROs=;
+ b=EOcmxlmhaoBzTtZcL7q4c+K1D40r1JBRwEEzApbBOZl5eFYhTg5J08/eUOn0MS9k7wmwTa
+ HZX+iqeMgpCWzwnT8ETFLP6+V7/6JKIzhJLAKzuvw7OS/Kcp8U493N+qgL/RVRCD/Ro43B
+ hlDi0AZnFLg7ZXj/uqwaGUuek3Xsi8Y=
+Received: from mail-yw1-f200.google.com (mail-yw1-f200.google.com
+ [209.85.128.200]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-532-JN-8selGMFqVoy8x3h7ASg-1; Mon, 08 Jan 2024 11:13:48 -0500
+X-MC-Unique: JN-8selGMFqVoy8x3h7ASg-1
+Received: by mail-yw1-f200.google.com with SMTP id
+ 00721157ae682-5e8996ead39so31887657b3.3
+ for <samba-technical@lists.samba.org>; Mon, 08 Jan 2024 08:13:48 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1704730428; x=1705335228;
+ h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=lFQMv9XwK9ej+tAG2vSPh6/ex1rfcZMiQqZcNXWZROs=;
+ b=v0mh4wCMGSpdImJxKb6wFm5RpXdK8R1mYTKYtQw+wnbWa8y5kK53JhWtj98Eo6OiGc
+ Z2eluGOx5CQ3z/naeSpgXDYdZQkgLS1gqwkPob6cOOqGGUgFv67kSnTIRhGi/Cea94rR
+ gdBLKw+YL1/jz+/uU/EMMCDQa+urg0v1A+svO9mauWxGfvHb7n5c8Hah/qPeuVdnl4tF
+ 7ZtWwKwlUpDgzdoNL3qfBf+aDurhqQVnFmhELI6UGC3RrHnVLOi8F6hCEsIMkE6/OCxG
+ rcQyGQkcHrhI9GfAQsbwMXBl1X9u0Bqcr0e7iUpocKNwcAdi5kW1dGeJmujrY++LJLOk
+ b8ew==
+X-Gm-Message-State: AOJu0YyVP152Kjsw+FGPPn2JjElZsIgbLGRgjkvnh5guB/vVpLzjNKIl
+ /0/mOsStmy2iQV8BR7zexXdh7432zLHdgEI+41d1FjMsnng7DsgYmF+KaZNp2MncHTB5L30LmAp
+ u8TuQeTStnvN2Da4UFlrScCZPgYqYmPcDty/bICIliP+1X8VA/Hg+b+9Qb7Fw8tM=
+X-Received: by 2002:a81:a0cb:0:b0:5f5:ca34:c1d with SMTP id
+ x194-20020a81a0cb000000b005f5ca340c1dmr2469046ywg.49.1704730428145; 
+ Mon, 08 Jan 2024 08:13:48 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IHeEMgaCZVBx0ixfeLvGAxJPO59TIbNQsubdgH3bNAFRgaSAlSLNFmVBSOZWkzfm0AOQ03fJlmlNmG4ZoHECNI=
+X-Received: by 2002:a81:a0cb:0:b0:5f5:ca34:c1d with SMTP id
+ x194-20020a81a0cb000000b005f5ca340c1dmr2469038ywg.49.1704730427923; Mon, 08
+ Jan 2024 08:13:47 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: de-DE, en-US
-To: samba-technical@lists.samba.org
-Subject: [Release Planning 4.19] Samba 4.19.5
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Date: Mon, 8 Jan 2024 11:13:11 -0500
+Message-ID: <CALe0_77CgEXNiXrM4oQ47sfHnDoML18oz5rmEu-_57Av0KRTkg@mail.gmail.com>
+Subject: Linux client SMB and DFS site awareness
+To: CIFS <linux-cifs@vger.kernel.org>, 
+ samba-technical <samba-technical@lists.samba.org>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -57,24 +87,34 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jule Anger via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jule Anger <janger@samba.org>
+From: Jacob Shivers via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jacob Shivers <jshivers@redhat.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi,
+Hello,
 
-Samba 4.19.5 is scheduled for Monday, February  19 2024.
+I have a use-case for a Linux SMB client to mount DFS replicated
+shares, with a preference for sites that are closer geographically.
+DNS site discovery/awareness exists within DFS[0], but I have not read
+of any work currently under investigation.
 
-https://wiki.samba.org/index.php/Release_Planning_for_Samba_4.19
-has been updated accordingly.
+Is anyone actively working on this issue in any capacity? If so, would
+they like help in some capacity whether testing/coding?
+
+If this issue is not being actively engaged is there a reason for
+this, e.g. low priority, technical complexity/implementation issues,
+or some other reason?
 
 
-Jule
+I had searched through mailing list archives and found no prior
+mention, but I do apologize if this has been discussed and is a
+broadly known discussion point.
 
--- 
-Jule Anger
-Release Manager Samba Team  samba.org
-SerNet Samba Team           sernet.de
+Thanks for any feedback,
+
+Jacob Shivers
+
+[0] https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-adts/7fcdce70-5205-44d6-9c3a-260e616a2f04?redirectedfrom=MSDN
 
 
