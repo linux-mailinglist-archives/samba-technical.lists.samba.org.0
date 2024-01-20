@@ -2,49 +2,47 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4E056833104
-	for <lists+samba-technical@lfdr.de>; Fri, 19 Jan 2024 23:56:02 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id E38378331F9
+	for <lists+samba-technical@lfdr.de>; Sat, 20 Jan 2024 01:52:55 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=fb2ifog0AvzIa1zmEGUmwv58TDjVEDhnZaln2MfdrgE=; b=ZLhutKK0Q/C8VnEnrvfNfAKEZz
-	AYwxGniTlPBWUiJkf9yKN6oC5Kml0OaaYdg/v+d2nuhoRdlJYIxURpr6kDW5ZDcCD8DQf9LnKmjc8
-	GUJ0viWrhodH02U1H8JCT5RwRUpIsnKbT2Iau9KH9jrZytamtYxO+RRFHQQKq09o6PbZHFMmF7a8f
-	L8IMDy+ExBtYAIuBt3IlmZeCbddwcbWwb5BMaAtw4OfOFKnLxNgHwzzi/PUj1/2Z19RCEik3pijjA
-	SiEOK+7I7JkfJjD1dm7/tWEC2erGNudpNYHXmBgXowEyUGyIqftcbMhp1Nq+meFEcxUAEOariZL6k
-	nFoCGVag==;
-Received: from ip6-localhost ([::1]:52944 helo=hr1.samba.org) 
+	bh=RNbR+Mg8ea6t86tdcm+iYF0PK728l1O32FUCYmrYTbQ=; b=khc/iwAJNNhXEU1odSJ3pGuoe2
+	HGINhc4ZQU27xVt6j+5RpMkfGsb2WsJWryvdsQFmyhYVGNzEEysvk/lfxoe/18moR4YhZMUCFZWx/
+	DBcEOUcoYoOqZXqUXrMlsOpkMb5ePqDUDPvT8ye/WJS0FUe8dEG1w/mGgorhEQWQ02qeptTQAM+qX
+	cxpJco1NKM5CX++AJDvAyrATngnosWkm5kg/A03bdymRw+r5Uz5mZ+Ijvo05/iGoWMOfEuTfdfEG8
+	vgq6Ys/3uZ2pG7EL59OhMoVqAKlubZf4ztE7kvyyrs/CRN2Fv+VlfG/l8OOAItz30hMTSUlK0FTcT
+	e1UDBECw==;
+Received: from ip6-localhost ([::1]:64206 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1rQxll-0040ZL-CZ; Fri, 19 Jan 2024 22:55:25 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:33890) 
+	id 1rQzar-0040ta-Fi; Sat, 20 Jan 2024 00:52:17 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:15568) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1rQxlZ-0040ZE-Pf
- for samba-technical@lists.samba.org; Fri, 19 Jan 2024 22:55:17 +0000
+ (Exim) id 1rQzam-0040tS-8r
+ for samba-technical@lists.samba.org; Sat, 20 Jan 2024 00:52:15 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Message-ID:Cc:To:From:Date;
- bh=fb2ifog0AvzIa1zmEGUmwv58TDjVEDhnZaln2MfdrgE=; b=WSHX3kcFs2h2DPowwhydggnnO2
- 3Fx9fDbMhTxcn49zzLwZbmiGQ51dQ62db8FKsd9Ln1vkAiAYnMY4GXCgvAELKkQ3nH5ymazLoA8hu
- FnainK0JMMEzwJWoEZrTL5wFWDNwPeYGGt8U28yZAFC00i5AOiyzXVeqWVLyV1mJcyglRXIGSX1+F
- ZaCM5VGmYCTv9Q+nu9c2cZtJLRADyH3Gfbpk4FLUFELDE1csx4s0Yb39w0mYoWHJcfnMmE25lMhV6
- BRq+7fmwIos8VQRLQcUtkjQFxDnzcr+h8L6tf9xW/KL2Hw4imb1rQ8lhnq1ra7rNIGgGTQnw8g/g+
- hvJPMH6XHKvQLFXvHG7QUortkhoBLhXb3sMlJn9I5dHm+r21/FGSpOfYWy+vrF9YJCt/YVHZi/2gk
- mUZc7JllWhhdZH4CYpwfJJIj8XeU6icU12NJ3HXAvcYD/8Fdfa55krJVqTV3ZZmOFY6WIpjtZvzYs
- jKG80+my6bkrAcRDb/c2SGgf;
+ bh=RNbR+Mg8ea6t86tdcm+iYF0PK728l1O32FUCYmrYTbQ=; b=o5WU7yQC2zjYlRgsD6+mMs2tLB
+ yF0fXQm96kN6qGJa6wTE+UdXxRstrVftPWUQTD+2mnrHJprh/2fBu6Yrw9ve8TB/ogJsuWVsmNWKY
+ KI1Kiv2sYs96Ue6986NADv7v7qf50nyH/fqpf+RvPFZgupI2Kg7FtD9lDu0i9iPCzqIfhNEHoKBER
+ yl6wSX23UqM2a4p0xxQNKnCnYo96vaSfj8U9VfstuNFUWvf5Didmc5M9MWTlk+CJidZEAwnq82AF2
+ Y9D/ddAWc/ZDDACcihqFGZSFqOrtb+q3yBE2Rp9WP4Ei2s1G74eVQOWmTjxhJ/Rj+IVF/cyE7Zr/p
+ Sv+nTxyc7uaF9S/5lSBbZUrGz9HdKVUGDRiyQ/q5E31IwPk3QwGkTeUKqPnJQ5jjeTEN8I46P1U8u
+ bK4iZegz23jXfOqYvHtZE2sNFcoFOeMVGirmElkE5jt4/dBAJyVANgfU3oUxL1DLpUTix9C04W+Gc
+ JG6QtKKgyDDeJlTFELOqJxhu;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1rQxlW-008nz9-2K; Fri, 19 Jan 2024 22:55:11 +0000
-Date: Fri, 19 Jan 2024 14:55:08 -0800
-To: Ralph Boehme <slow@samba.org>
-Subject: Re: CTDB and per record persistency
-Message-ID: <Zar9zONWdKHqmEFa@jeremy-HP-Z840-Workstation>
-References: <DB9P192MB1684F7EFAB5DCC7D2390DB77FE9FA@DB9P192MB1684.EURP192.PROD.OUTLOOK.COM>
- <9872c173-8fcc-4ea4-bddb-c734c10d0334@samba.org>
+ (Exim) id 1rQzal-008oUF-09; Sat, 20 Jan 2024 00:52:11 +0000
+Date: Fri, 19 Jan 2024 16:52:08 -0800
+To: Andreas Schneider <asn@samba.org>
+Subject: Re: Leak Sanitizer in Samba
+Message-ID: <ZasZOEEanBukpq5e@jeremy-HP-Z840-Workstation>
+References: <2330326.ElGaqSPkdT@magrathea>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Type: text/plain; charset=us-ascii; format=flowed
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <9872c173-8fcc-4ea4-bddb-c734c10d0334@samba.org>
+In-Reply-To: <2330326.ElGaqSPkdT@magrathea>
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,27 +58,27 @@ List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
 From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
 Reply-To: Jeremy Allison <jra@samba.org>
-Cc: =?utf-8?B?6ZmIIOaWuei/mw==?= <sharingfun520@outlook.com>,
- "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>
+Cc: samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Fri, Jan 05, 2024 at 04:36:13PM +0100, Ralph Boehme via samba-technical wrote:
->On 12/27/23 08:40, 陈 方进 via samba-technical wrote:
->>Hello , I learned from Ralph Böhme's speech on persistent handles at 
->>the 2018 SambaXP conference that amitay had proposed an idea 
->>regarding the persistence of each record in CTDB. I'm curious to
->>know if there has been any progress since then.
+On Thu, Oct 26, 2023 at 09:58:56AM +0200, Andreas Schneider via samba-technical wrote:
+>Hi,
 >
->no, unfortunately not. It's several months of work. I haven't been
->able to continue working on this in my spare time and so far there's 
->also no real interest in the industry to fund development of this 
->feature in Samba.
+>you might already know AddressSanitizer. AddressSanitizer also has a
+>LeakSanitizer built it, however it is disabled in Samba. I'm trying to get it
+>working as we have memory leaks probably in Winbind and rpcd-lsa. So the last
+>days I fixed issues which prevented to actually run 'make testenv'. In case
+>you want to help fixing memory leaks you can use this branch:
+>
+>https://git.samba.org/?p=asn/samba.git;a=shortlog;h=refs/heads/asn-lsan
+>
+>I'm currently stuck with memcache and smbpasswd.
+>
+>The AD DC testenv already starts. It finds tfork leaks on shutdown. It would
+>be great if someone could fix those ...
 
-That's pretty sad IMHO. There are so many commercial
-companies who use Samba that it's sad they can't
-club together to make this happen.
+This looks like a fun hobby :-). Any more leaks to look at ?
 
-Come on you guys, you know who you are :-). Let's
-make this happen !
+Can you maybe post ones you find here ?
 
