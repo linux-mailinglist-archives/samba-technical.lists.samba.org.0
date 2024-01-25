@@ -2,50 +2,67 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0B69683BEF6
-	for <lists+samba-technical@lfdr.de>; Thu, 25 Jan 2024 11:34:51 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2BFC783C44A
+	for <lists+samba-technical@lfdr.de>; Thu, 25 Jan 2024 15:05:54 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=d4dqZ5zCQR2dhyN28BBiOUfD/MqW2HG/AgQIX8Gd/Cg=; b=MA02Y48q/AUyHTYrVmB/NPPGw5
-	uhjjDeOsPVg9/KWkIqcNQlAGwUcEoCdYRb4aZG88uweSEbRebbFEMIbVXu4qQm8KMfGWFUYxrb9hA
-	WCe9HfSDJKYpDVfIGNFR42B9fdhjV7lzIOrV0aBBSPQMLO174p4QC53YRYFvThys4lyWNteo2oUEf
-	eY4hKEGLd8exKCmMkWgk3LeRagxtQPr4kmgn2OFs/YZqRVKT1m6TiyO/XLJXmcNTQzknNp1P7FTv2
-	6PVQx8IqUJRbz5QekechcMV6h186PLZYzrcGRsnl8JLhNc/kiwgns9lwFmtm3S5XlwMgpucABF2Er
-	ncVHRtMQ==;
-Received: from ip6-localhost ([::1]:33882 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=e12SznbgNVYlJuZvyyzaU+LAE5U/U9H1zetulJ+CfWs=; b=u08TOKLJiq2J+TRcYg/ekgxTI/
+	vKDeGLuBLlXTOTKUgnNvbAaLcaiKQ7L7Dzob5Tdi3rYCVKh3qh0WueOLfs9tUtDfpEI92Gm430pIg
+	pfyU3i1ef67Eu1lEGXhETKgPuZOuJtos4HCC2OSsoJJXns/l8RRldwlg9LmrV9dFTjgtPFgnBDapi
+	kyuRWu5Jh1bBhJ5NgtSm7xZyxzfoqG102K/36zJEXe0DVoafBBiMNVwT2T3O3f8IhYt8bGJSV8B5c
+	sFhpYn0WXxUsXL7HeH1RRPn6/uUg//EIF/vO9rYdJPNGImiD8WJxHTpsIiqbJ8v7QJAJvf9bg/hwQ
+	kBzWiDpA==;
+Received: from ip6-localhost ([::1]:20770 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1rSx49-004PRg-9l; Thu, 25 Jan 2024 10:34:37 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:44368) 
+	id 1rT0M6-004RL7-TE; Thu, 25 Jan 2024 14:05:23 +0000
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124]:37360) 
  by hr1.samba.org with esmtps
- (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1rSx43-004PRZ-TV
- for samba-technical@lists.samba.org; Thu, 25 Jan 2024 10:34:34 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=From:Cc:To:Date:Message-ID;
- bh=d4dqZ5zCQR2dhyN28BBiOUfD/MqW2HG/AgQIX8Gd/Cg=; b=quUgViSRXUE71k9rhc5+CN2kxp
- qmwwZQ5oDEiv8Z6TdWbD1U+J3X3nvSuzdpVg/wmPVFPZOuj1RfESWxBiSaYFBkPsHDM5Lzqg27CB1
- 1eJjbmex1MCpMLHavp0d22VKk+2oRWWQSffbo/uemKy3RNQd/G5GSHnJU8RVLmvZweMysKPAR/4k0
- f+2BhY7uUrpA5w/40V4q6n9wFPKuyF6hjyXXsTsACeCTx2lBOdu+4kbry1dHIpfS0nZvy06dT3GAq
- +N2wy0LBerc/p8y7HVQMdvpPOJ5aCuaWKDKH5vgHsub3kb0B2o9fuOacpDOke1Z6O4uJJYykVkFDH
- 79hhbGh/3l509HW4cKGEdbVSZOFQrXs7Irm600pV3p/Xpj/MYAbBx0ODbGj2xtYo0nCfPrRE+enQm
- WmUz+PEYr+OFLZJAjrH83gYkfZ3oe3dD67vhUd/zT/Sz4eI0noRX38b3Rqh1HRJ/R51yVdtp79yp8
- mI+RGBc2ebDGpO5nI8khChCi;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1rSx41-009hQn-1D; Thu, 25 Jan 2024 10:34:29 +0000
-Message-ID: <c3229d40-484b-429d-bf9f-dd3424c866ae@samba.org>
-Date: Thu, 25 Jan 2024 11:34:28 +0100
+ (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__AES_256_GCM:256) (Exim)
+ id 1rT0Lr-004RL0-Jd
+ for samba-technical@lists.samba.org; Thu, 25 Jan 2024 14:05:11 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1706191503;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type;
+ bh=e12SznbgNVYlJuZvyyzaU+LAE5U/U9H1zetulJ+CfWs=;
+ b=f21ZAQG6QJAhgr5MHWbnB6iUQXgIGH7lFpWNgib/ZcOl2tYBSH40jq3KaVhA8eAZ6Tt5/A
+ hKA15/3aflDIPgxavf8a46B1RN6TjI2QUY9dhwANzVojSeShpFAI3Gm7qxMvciDe2wFUne
+ qEshOTCEOckIphkSe92QziU9VlCyyM0=
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1706191503;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type;
+ bh=e12SznbgNVYlJuZvyyzaU+LAE5U/U9H1zetulJ+CfWs=;
+ b=f21ZAQG6QJAhgr5MHWbnB6iUQXgIGH7lFpWNgib/ZcOl2tYBSH40jq3KaVhA8eAZ6Tt5/A
+ hKA15/3aflDIPgxavf8a46B1RN6TjI2QUY9dhwANzVojSeShpFAI3Gm7qxMvciDe2wFUne
+ qEshOTCEOckIphkSe92QziU9VlCyyM0=
+Received: from mimecast-mx02.redhat.com (mx-ext.redhat.com [66.187.233.73])
+ by relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-640-ak9liix9McKY6rZIJ6D-Rw-1; Thu,
+ 25 Jan 2024 09:03:00 -0500
+X-MC-Unique: ak9liix9McKY6rZIJ6D-Rw-1
+Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.5])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 831452837815;
+ Thu, 25 Jan 2024 14:02:29 +0000 (UTC)
+Received: from warthog.procyon.org.uk (unknown [10.42.28.245])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id CC13951D5;
+ Thu, 25 Jan 2024 14:02:27 +0000 (UTC)
+Organization: Red Hat UK Ltd. Registered Address: Red Hat UK Ltd, Amberley
+ Place, 107-111 Peascod Street, Windsor, Berkshire, SI4 1TE, United
+ Kingdom.
+ Registered in England and Wales under Company Registration No. 3798903
+To: Gao Xiang <xiang@kernel.org>
+Subject: Roadmap for netfslib and local caching (cachefiles)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: What is needed to get the patch in bug 15376 into the tree?
-Content-Language: en-US, de-DE
-To: Andrew Walker <awalker@ixsystems.com>
-References: <C73B7A27-134A-4BA5-B7B4-AC88D98202C5@lysator.liu.se>
-In-Reply-To: <C73B7A27-134A-4BA5-B7B4-AC88D98202C5@lysator.liu.se>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------JA2EZmAXrb53L4tKnOxW0apI"
+Content-Type: text/plain; charset="us-ascii"
+Content-ID: <520667.1706191347.1@warthog.procyon.org.uk>
+Date: Thu, 25 Jan 2024 14:02:27 +0000
+Message-ID: <520668.1706191347@warthog.procyon.org.uk>
+X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.5
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,61 +76,164 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Ralph Boehme <slow@samba.org>
-Cc: "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>,
- Peter Eriksson <pen@lysator.liu.se>
+From: David Howells via samba-technical <samba-technical@lists.samba.org>
+Reply-To: David Howells <dhowells@redhat.com>
+Cc: linux-cifs@vger.kernel.org, Christian Brauner <brauner@kernel.org>,
+ Eric Sandeen <esandeen@redhat.com>, samba-technical@lists.samba.org,
+ v9fs@lists.linux.dev, Jeff Layton <jlayton@kernel.org>,
+ linux-nfs@vger.kernel.org, Matthew Wilcox <willy@infradead.org>,
+ linux-kernel@vger.kernel.org, dhowells@redhat.com,
+ linux-fsdevel@vger.kernel.org, ceph-devel@vger.kernel.org,
+ linux-afs@lists.infradead.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------JA2EZmAXrb53L4tKnOxW0apI
-Content-Type: multipart/mixed; boundary="------------S0UKHAS0lsJLs4MRki3AdPXa";
- protected-headers="v1"
-From: Ralph Boehme <slow@samba.org>
-To: Andrew Walker <awalker@ixsystems.com>
-Cc: "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>,
- Peter Eriksson <pen@lysator.liu.se>
-Message-ID: <c3229d40-484b-429d-bf9f-dd3424c866ae@samba.org>
-Subject: Re: What is needed to get the patch in bug 15376 into the tree?
-References: <C73B7A27-134A-4BA5-B7B4-AC88D98202C5@lysator.liu.se>
-In-Reply-To: <C73B7A27-134A-4BA5-B7B4-AC88D98202C5@lysator.liu.se>
+Here's a roadmap for the future development of netfslib and local caching
+(e.g. cachefiles).
 
---------------S0UKHAS0lsJLs4MRki3AdPXa
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
+Netfslib
+========
 
-SGkhDQoNCkBBbmRyZXc6IGNhbiB5b3UgdGFrZSBhIGxvb2s/DQoNClRoYW5rcyENCg0KLXNs
-b3cNCg0KT24gMS8yNS8yNCAxMDozOCwgUGV0ZXIgRXJpa3Nzb24gdmlhIHNhbWJhLXRlY2hu
-aWNhbCB3cm90ZToNCj4gSXQgd291bGQgYmUgbmljZSB0byBnZXQgdGhlIHN0dWZmIGluIHRo
-ZSBwYXRjaCBpbiBidWcgMTUzNzYgaW50byB0aGUgdHJlZSBzb21laG934oCmDQo+IFdpdGhv
-dXQgaXQgbW9kZXJuIFNhbWJhIHZlcnNpb25zIGlzIG9mIGxpbWl0ZWQgdXNlIGFzIGEgZmls
-ZXNlcnZlciBvbiBGcmVlQlNEID49MTMgd2l0aCBaRlMgdXNpbmcgWkZTIEFDTHMgYW5kL29y
-IGV4dGF0dHJzLg0KPiANCj4gDQo+IGh0dHBzOi8vYnVnemlsbGEuc2FtYmEub3JnL3Nob3df
-YnVnLmNnaT9pZD0xNTM3Nu+/vA0KPiANCj4gDQo+IC0gUGV0ZXINCg0K
+[>] Current state:
 
---------------S0UKHAS0lsJLs4MRki3AdPXa--
+The netfslib write helpers have gone upstream now and are in v6.8-rc1, with
+both the 9p and afs filesystems using them.  This provides larger I/O size
+support to 9p and write-streaming and DIO support to afs.
 
---------------JA2EZmAXrb53L4tKnOxW0apI
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature.asc"
+The helpers provide their own version of generic_perform_write() that:
 
------BEGIN PGP SIGNATURE-----
+ (1) doesn't use ->write_begin() and ->write_end() at all, completely taking
+     over all of of the buffered I/O operations, including writeback.
 
-wsF5BAABCAAjFiEE+uLGCIokJSBRxVnkqh6bcSY5nkYFAmWyOTQFAwAAAAAACgkQqh6bcSY5nkab
-ChAAo3I+M+wSo9wICq2VABRuxt20KokOqJlyXOaNj295+F/ZzCbwggGgvcpJp4TWG/EA7ejbnns+
-y0be83MSWavZFAbeStgvpcg0OAKN9T9AeYv7ePNqz/J9w7lb88nP2Ph/k4Js5P6WiEZ75Ih5E6Z0
-ejYxOPM2CSYZn/kycL6RtlG+YUQ09eFcd3eH1awUtDtgyKQ99e0H+Q4nTEYoZoXn8gcvex39izx6
-uM07wbEXfYzcpUtMYVog1J180ZotBNRRTimWMORTYfYlfYl1VeKM33REiLxp0Rn11z87+flgqq2w
-zRxbGvl/WY4hxzSmsVQqFPiHaVrXcWCTd284onLraXcLZFxL7uRwHlhCA782eQs0NFO3gwDEdWSx
-rN+UpwbjVdElFQNhZC8Uq9SsJAxKHbSiSP5HyNaDKqQbB4w67qmw8f4oPx6Ahh7M7rEUkfWXxAFq
-ByzrL2XnIInJUO3/e6DLLVlvmMzlJimr0ija76ri5Zucv4B1/1Lc+ogWLeaEr1eoe4NqPXXpSHFZ
-8C+azNVGp59s7qG4h3icqYNivpX1BYOxL2VURaYHotRGuk8wW4zRfuD+Qw1eyb/XzYtqDpuWpWP6
-PJQ4iKh0Afrrh9OzsqRw/nEjiiiIzy4D7yc7uTp6JSWFuaU9Yw8jCVX5CB7FB//yWHJMfGgkIN9K
-mlc=
-=NkyL
------END PGP SIGNATURE-----
+ (2) can perform write-through caching, setting up one or more write
+     operations and adding folios to them as we copy data into the pagecache
+     and then starting them as we finish.  This is then used for O_SYNC and
+     O_DSYNC and can be used with immediate-write caching modes in, say, cifs.
 
---------------JA2EZmAXrb53L4tKnOxW0apI--
+Filesystems using this then deal with iov_iters and ideally would not deal
+pages or folios at all - except incidentally where a wrapper is necessary.
+
+
+[>] Aims for the next merge window:
+
+Convert cifs to use netfslib.  This is now in Steve French's for-next branch.
+
+Implement content crypto and bounce buffering.  I have patches to do this, but
+it would only be used by ceph (see below).
+
+Make libceph and rbd use iov_iters rather than referring to pages and folios
+as much as possible.  This is mostly done and rbd works - but there's one bit
+in rbd that still needs doing.
+
+Convert ceph to use netfslib.  This is about half done, but there are some
+wibbly bits in the ceph RPCs that I'm not sure I fully grasp.  I'm not sure
+I'll quite manage this and it might get bumped.
+
+Finally, change netfslib so that it uses ->writepages() to write data to the
+cache, even data on clean pages just read from the server.  I have a patch to
+do this, but I need to move cifs and ceph over first.  This means that
+netfslib, 9p, afs, cifs and ceph will no longer use PG_private_2 (aka
+PG_fscache) and Willy can have it back - he just then has to wrest control
+from NFS and btrfs.
+
+
+[>] Aims for future merge windows:
+
+Using a larger chunk size than PAGE_SIZE - for instance 256KiB - but that
+might require fiddling with the VM readahead code to avoid read/read races.
+
+Cache AFS directories - there are just files and currently are downloaded and
+parsed locally for readdir and lookup.
+
+Cache directories from other filesystems.
+
+Cache inode metadata, xattrs.
+
+Add support for fallocate().
+
+Implement content crypto in other filesystems, such as cifs which has its own
+non-fscrypt way of doing this.
+
+Support for data transport compression.
+
+Disconnected operation.
+
+NFS.  NFS at the very least needs to be altered to give up the use of
+PG_private_2.
+
+
+Local Caching
+=============
+
+There are a number of things I want to look at with local caching:
+
+[>] Although cachefiles has switched from using bmap to using SEEK_HOLE and
+SEEK_DATA, this isn't sufficient as we cannot rely on the backing filesystem
+optimising things and introducing both false positives and false negatives.
+Cachefiles needs to track the presence/absence of data for itself.
+
+I had a partially-implemented solution that stores a block bitmap in an xattr,
+but that only worked up to files of 1G in size (with bits representing 256K
+blocks in a 512-byte bitmap).
+
+[>] An alternative cache format might prove more fruitful.  Various AFS
+implementations use a 'tagged cache' format with an index file and a bunch of
+small files each of which contains a single block (typically 256K in OpenAFS).
+
+This would offer some advantages over the current approach:
+
+ - it can handle entry reuse within the index
+ - doesn't require an external culling process
+ - doesn't need to truncate/reallocate when invalidating
+
+There are some downsides, including:
+
+ - each block is in a separate file
+ - metadata coherency is more tricky - a powercut may require a cache wipe
+ - the index key is highly variable in size if used for multiple filesystems
+
+But OpenAFS has been using this for something like 30 years, so it's probably
+worth a try.
+
+[>] Need to work out some way to store xattrs, directory entries and inode
+metadata efficiently.
+
+[>] Using NVRAM as the cache rather than spinning rust.
+
+[>] Support for disconnected operation to pin desirable data and keep
+track of changes.
+
+[>] A user API by which the cache for specific files or volumes can be
+flushed.
+
+
+Disconnected Operation
+======================
+
+I'm working towards providing support for disconnected operation, so that,
+provided you've got your working set pinned in the cache, you can continue to
+work on your network-provided files when the network goes away and resync the
+changes later.
+
+This is going to require a number of things:
+
+ (1) A user API by which files can be preloaded into the cache and pinned.
+
+ (2) The ability to track changes in the cache.
+
+ (3) A way to synchronise changes on reconnection.
+
+ (4) A way to communicate to the user when there's a conflict with a third
+     party change on reconnect.  This might involve communicating via systemd
+     to the desktop environment to ask the user to indicate how they'd like
+     conflicts recolved.
+
+ (5) A way to prompt the user to re-enter their authentication/crypto keys.
+
+ (6) A way to ask the user how to handle a process that wants to access data
+     we don't have (error/wait) - and how to handle the DE getting stuck in
+     this fashion.
+
+David
+
 
