@@ -2,45 +2,50 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 050B183BE0D
-	for <lists+samba-technical@lfdr.de>; Thu, 25 Jan 2024 10:54:48 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0B69683BEF6
+	for <lists+samba-technical@lfdr.de>; Thu, 25 Jan 2024 11:34:51 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Date:Subject:cc;
-	bh=XyVftmfC9lYW6cPSgMBGPzeiI+6OS5QumO8QIbwHqSY=; b=DjzzgQ3G3R7jvpm+WbPQzsWRzS
-	Bh7oWxBpBokcSew15zVvjudJDUrA3aO8X9M2ltux2zH+CiufB0NcmkFGFygl6huJaelNQfUqMX0+s
-	vwbGcomIFpmvcr4KHg7M5Xe8uHAS36IhpYxLB4QCrsau3MJSfDpu86lC7l6iHavzLTOvtQI5cpxsm
-	AW1D+/SGL0ci0/DNojTP85lywYR/ZqbKJ7cvwblCykM9I3V4rl8gAo1LxwKJBrSZ+4VIY3nvBsjdM
-	msbbzMC5xdr1mPjuUvyaMbVV+7xGo8Az4wXx6J8XOnkPCsrHTxINcycHAv5uso63AL05fzZQbQATA
-	foVG2qQQ==;
-Received: from ip6-localhost ([::1]:38754 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=d4dqZ5zCQR2dhyN28BBiOUfD/MqW2HG/AgQIX8Gd/Cg=; b=MA02Y48q/AUyHTYrVmB/NPPGw5
+	uhjjDeOsPVg9/KWkIqcNQlAGwUcEoCdYRb4aZG88uweSEbRebbFEMIbVXu4qQm8KMfGWFUYxrb9hA
+	WCe9HfSDJKYpDVfIGNFR42B9fdhjV7lzIOrV0aBBSPQMLO174p4QC53YRYFvThys4lyWNteo2oUEf
+	eY4hKEGLd8exKCmMkWgk3LeRagxtQPr4kmgn2OFs/YZqRVKT1m6TiyO/XLJXmcNTQzknNp1P7FTv2
+	6PVQx8IqUJRbz5QekechcMV6h186PLZYzrcGRsnl8JLhNc/kiwgns9lwFmtm3S5XlwMgpucABF2Er
+	ncVHRtMQ==;
+Received: from ip6-localhost ([::1]:33882 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1rSwR5-004OSD-B8; Thu, 25 Jan 2024 09:54:15 +0000
-Received: from mail.lysator.liu.se ([2001:6b0:17:f0a0::3]:59651) 
+	id 1rSx49-004PRg-9l; Thu, 25 Jan 2024 10:34:37 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:44368) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1rSwR1-004OS6-00
- for samba-technical@lists.samba.org; Thu, 25 Jan 2024 09:54:13 +0000
-Received: from mail.lysator.liu.se (localhost [127.0.0.1])
- by mail.lysator.liu.se (Postfix) with ESMTP id C5E8922569
- for <samba-technical@lists.samba.org>; Thu, 25 Jan 2024 10:38:24 +0100 (CET)
-Received: by mail.lysator.liu.se (Postfix, from userid 1004)
- id B90F4226A4; Thu, 25 Jan 2024 10:38:24 +0100 (CET)
-X-Spam-Score: -1.0
-Received: from smtpclient.apple (unknown [IPv6:2001:6b0:17:f002:1000::897])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mail.lysator.liu.se (Postfix) with ESMTPSA id 99EAC226A2
- for <samba-technical@lists.samba.org>; Thu, 25 Jan 2024 10:38:22 +0100 (CET)
-Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3774.300.61.1.2\))
-Subject: What is needed to get the patch in bug 15376 into the tree?
-Message-Id: <C73B7A27-134A-4BA5-B7B4-AC88D98202C5@lysator.liu.se>
-Date: Thu, 25 Jan 2024 10:38:12 +0100
-To: "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>
-X-Mailer: Apple Mail (2.3774.300.61.1.2)
-Content-Type: text/plain;
-	charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
+ (Exim) id 1rSx43-004PRZ-TV
+ for samba-technical@lists.samba.org; Thu, 25 Jan 2024 10:34:34 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=From:Cc:To:Date:Message-ID;
+ bh=d4dqZ5zCQR2dhyN28BBiOUfD/MqW2HG/AgQIX8Gd/Cg=; b=quUgViSRXUE71k9rhc5+CN2kxp
+ qmwwZQ5oDEiv8Z6TdWbD1U+J3X3nvSuzdpVg/wmPVFPZOuj1RfESWxBiSaYFBkPsHDM5Lzqg27CB1
+ 1eJjbmex1MCpMLHavp0d22VKk+2oRWWQSffbo/uemKy3RNQd/G5GSHnJU8RVLmvZweMysKPAR/4k0
+ f+2BhY7uUrpA5w/40V4q6n9wFPKuyF6hjyXXsTsACeCTx2lBOdu+4kbry1dHIpfS0nZvy06dT3GAq
+ +N2wy0LBerc/p8y7HVQMdvpPOJ5aCuaWKDKH5vgHsub3kb0B2o9fuOacpDOke1Z6O4uJJYykVkFDH
+ 79hhbGh/3l509HW4cKGEdbVSZOFQrXs7Irm600pV3p/Xpj/MYAbBx0ODbGj2xtYo0nCfPrRE+enQm
+ WmUz+PEYr+OFLZJAjrH83gYkfZ3oe3dD67vhUd/zT/Sz4eI0noRX38b3Rqh1HRJ/R51yVdtp79yp8
+ mI+RGBc2ebDGpO5nI8khChCi;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1rSx41-009hQn-1D; Thu, 25 Jan 2024 10:34:29 +0000
+Message-ID: <c3229d40-484b-429d-bf9f-dd3424c866ae@samba.org>
+Date: Thu, 25 Jan 2024 11:34:28 +0100
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: What is needed to get the patch in bug 15376 into the tree?
+Content-Language: en-US, de-DE
+To: Andrew Walker <awalker@ixsystems.com>
+References: <C73B7A27-134A-4BA5-B7B4-AC88D98202C5@lysator.liu.se>
+In-Reply-To: <C73B7A27-134A-4BA5-B7B4-AC88D98202C5@lysator.liu.se>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------JA2EZmAXrb53L4tKnOxW0apI"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -54,18 +59,61 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Peter Eriksson via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Peter Eriksson <pen@lysator.liu.se>
+From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Ralph Boehme <slow@samba.org>
+Cc: "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>,
+ Peter Eriksson <pen@lysator.liu.se>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-It would be nice to get the stuff in the patch in bug 15376 into the =
-tree somehow=E2=80=A6=20
-Without it modern Samba versions is of limited use as a fileserver on =
-FreeBSD >=3D13 with ZFS using ZFS ACLs and/or extattrs.
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------JA2EZmAXrb53L4tKnOxW0apI
+Content-Type: multipart/mixed; boundary="------------S0UKHAS0lsJLs4MRki3AdPXa";
+ protected-headers="v1"
+From: Ralph Boehme <slow@samba.org>
+To: Andrew Walker <awalker@ixsystems.com>
+Cc: "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>,
+ Peter Eriksson <pen@lysator.liu.se>
+Message-ID: <c3229d40-484b-429d-bf9f-dd3424c866ae@samba.org>
+Subject: Re: What is needed to get the patch in bug 15376 into the tree?
+References: <C73B7A27-134A-4BA5-B7B4-AC88D98202C5@lysator.liu.se>
+In-Reply-To: <C73B7A27-134A-4BA5-B7B4-AC88D98202C5@lysator.liu.se>
 
+--------------S0UKHAS0lsJLs4MRki3AdPXa
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
 
-https://bugzilla.samba.org/show_bug.cgi?id=3D15376=EF=BF=BC
+SGkhDQoNCkBBbmRyZXc6IGNhbiB5b3UgdGFrZSBhIGxvb2s/DQoNClRoYW5rcyENCg0KLXNs
+b3cNCg0KT24gMS8yNS8yNCAxMDozOCwgUGV0ZXIgRXJpa3Nzb24gdmlhIHNhbWJhLXRlY2hu
+aWNhbCB3cm90ZToNCj4gSXQgd291bGQgYmUgbmljZSB0byBnZXQgdGhlIHN0dWZmIGluIHRo
+ZSBwYXRjaCBpbiBidWcgMTUzNzYgaW50byB0aGUgdHJlZSBzb21laG934oCmDQo+IFdpdGhv
+dXQgaXQgbW9kZXJuIFNhbWJhIHZlcnNpb25zIGlzIG9mIGxpbWl0ZWQgdXNlIGFzIGEgZmls
+ZXNlcnZlciBvbiBGcmVlQlNEID49MTMgd2l0aCBaRlMgdXNpbmcgWkZTIEFDTHMgYW5kL29y
+IGV4dGF0dHJzLg0KPiANCj4gDQo+IGh0dHBzOi8vYnVnemlsbGEuc2FtYmEub3JnL3Nob3df
+YnVnLmNnaT9pZD0xNTM3Nu+/vA0KPiANCj4gDQo+IC0gUGV0ZXINCg0K
 
+--------------S0UKHAS0lsJLs4MRki3AdPXa--
 
-- Peter=
+--------------JA2EZmAXrb53L4tKnOxW0apI
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+wsF5BAABCAAjFiEE+uLGCIokJSBRxVnkqh6bcSY5nkYFAmWyOTQFAwAAAAAACgkQqh6bcSY5nkab
+ChAAo3I+M+wSo9wICq2VABRuxt20KokOqJlyXOaNj295+F/ZzCbwggGgvcpJp4TWG/EA7ejbnns+
+y0be83MSWavZFAbeStgvpcg0OAKN9T9AeYv7ePNqz/J9w7lb88nP2Ph/k4Js5P6WiEZ75Ih5E6Z0
+ejYxOPM2CSYZn/kycL6RtlG+YUQ09eFcd3eH1awUtDtgyKQ99e0H+Q4nTEYoZoXn8gcvex39izx6
+uM07wbEXfYzcpUtMYVog1J180ZotBNRRTimWMORTYfYlfYl1VeKM33REiLxp0Rn11z87+flgqq2w
+zRxbGvl/WY4hxzSmsVQqFPiHaVrXcWCTd284onLraXcLZFxL7uRwHlhCA782eQs0NFO3gwDEdWSx
+rN+UpwbjVdElFQNhZC8Uq9SsJAxKHbSiSP5HyNaDKqQbB4w67qmw8f4oPx6Ahh7M7rEUkfWXxAFq
+ByzrL2XnIInJUO3/e6DLLVlvmMzlJimr0ija76ri5Zucv4B1/1Lc+ogWLeaEr1eoe4NqPXXpSHFZ
+8C+azNVGp59s7qG4h3icqYNivpX1BYOxL2VURaYHotRGuk8wW4zRfuD+Qw1eyb/XzYtqDpuWpWP6
+PJQ4iKh0Afrrh9OzsqRw/nEjiiiIzy4D7yc7uTp6JSWFuaU9Yw8jCVX5CB7FB//yWHJMfGgkIN9K
+mlc=
+=NkyL
+-----END PGP SIGNATURE-----
+
+--------------JA2EZmAXrb53L4tKnOxW0apI--
+
