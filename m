@@ -2,72 +2,49 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 63FDF83C615
-	for <lists+samba-technical@lfdr.de>; Thu, 25 Jan 2024 16:07:55 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D843D83C716
+	for <lists+samba-technical@lfdr.de>; Thu, 25 Jan 2024 16:45:01 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=oAZlY5FFShoqY2jzLb0BK5KQwuTtjmp0YybmXSZUEAw=; b=FuNwAa7yl91caMLx8W8ED6s81S
-	ikjAdfB08XG64knYeC+soUQh6AGoDf0k+ohjHWtLfwtBLPRJZtbiqIVYQRckG16jlPtAaMkW983Rn
-	DuzaMQrOfqESsXCP3nt2rjfGbSMxavSbergetLiW81d4UxS4yfHb6P0fgPY8Y9xHe3d2/Ub5tuq2k
-	+BzgAi3GrlgMR5yc94ZWW3QEmu3W2++c9XcEpKC2jvbZuwcbyYwevBoZnGnMzFucGPuslgD7zERhg
-	me54MNK7EiEK2tuj2IJN80Q7T7Ar1AL3RKDKYVZ4FkyCXrNfdkJQml7ID3WWGmUZCNJELq1KAjXvH
-	064POOHQ==;
-Received: from ip6-localhost ([::1]:60554 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=kGJWsimsXHUPb3HbyJF8WqrRz/xxrLeoy+cnB5fYQeE=; b=ooJge6+Ve51Fe66WcoGfJREhGy
+	1I4VGv3DpcYwwqeaGMRdguN9tzEey6RmAFGr6j/ZD6hXJL5gXJw/MgsGEzlUogIoco5poRw1MQBER
+	HKQ5CdVrtLSbCAc7HthAOigxXtD1kvLvauokRoZokE4PEef6LXELs7Me76nuvg2ahCHg+LU5D7eIg
+	KVuPNrhZEo5iR473dhwoP1MEDGniUA952F8ZDhvgxkF39svukrWX5t6anaEWGCqMqt4TMQJGrJLn7
+	QxZWRx4tRwPruPRhnPrF8He8KZqnUa7Zq/dxCkfQRnBMk7M2D3skCeu+nfVUQF4ticfGE2Z6qXWf3
+	FuIKZiUg==;
+Received: from ip6-localhost ([::1]:23446 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1rT1K9-004Rft-Vs; Thu, 25 Jan 2024 15:07:26 +0000
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124]:52901) 
+	id 1rT1uH-004S48-GZ; Thu, 25 Jan 2024 15:44:45 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:29740) 
  by hr1.samba.org with esmtps
- (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__AES_256_GCM:256) (Exim)
- id 1rT1K5-004Rfl-3K
- for samba-technical@lists.samba.org; Thu, 25 Jan 2024 15:07:23 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1706195234;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=oAZlY5FFShoqY2jzLb0BK5KQwuTtjmp0YybmXSZUEAw=;
- b=jUPBUMoy+Z4t8eZysbScZ9jG4f2Rtr6+fHs//B+CHk/i7b8n6FCwz0XEWvLpLqbiLeANzH
- K0qWIp3gZgSi2moN8i6dyBbSnK5GXVSie6cwn9rp+V9w2/MJYsDPNm5Q9gMeU/T3lM9pE/
- kwAdJSKXV3z207rEJL46rc1pvN++Uxk=
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1706195234;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=oAZlY5FFShoqY2jzLb0BK5KQwuTtjmp0YybmXSZUEAw=;
- b=jUPBUMoy+Z4t8eZysbScZ9jG4f2Rtr6+fHs//B+CHk/i7b8n6FCwz0XEWvLpLqbiLeANzH
- K0qWIp3gZgSi2moN8i6dyBbSnK5GXVSie6cwn9rp+V9w2/MJYsDPNm5Q9gMeU/T3lM9pE/
- kwAdJSKXV3z207rEJL46rc1pvN++Uxk=
-Received: from mimecast-mx02.redhat.com (mx-ext.redhat.com [66.187.233.73])
- by relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-216-c9iSLK8_Pc6WcUKnO_R9ng-1; Thu,
- 25 Jan 2024 10:07:07 -0500
-X-MC-Unique: c9iSLK8_Pc6WcUKnO_R9ng-1
-Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.rdu2.redhat.com
- [10.11.54.3])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id E9553381AE4A;
- Thu, 25 Jan 2024 15:07:06 +0000 (UTC)
-Received: from warthog.procyon.org.uk (unknown [10.42.28.245])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 3DE6F1121306;
- Thu, 25 Jan 2024 15:07:05 +0000 (UTC)
-Organization: Red Hat UK Ltd. Registered Address: Red Hat UK Ltd, Amberley
- Place, 107-111 Peascod Street, Windsor, Berkshire, SI4 1TE, United
- Kingdom.
- Registered in England and Wales under Company Registration No. 3798903
-In-Reply-To: <B01D6639-6F09-4542-A1CE-5023D059B84F@redhat.com>
-References: <B01D6639-6F09-4542-A1CE-5023D059B84F@redhat.com>
- <520668.1706191347@warthog.procyon.org.uk>
-To: Benjamin Coddington <bcodding@redhat.com>
-Subject: Re: Roadmap for netfslib and local caching (cachefiles)
+ (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1rT1uA-004S3c-Ap
+ for samba-technical@lists.samba.org; Thu, 25 Jan 2024 15:44:41 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Message-ID:To:From:Date:CC;
+ bh=kGJWsimsXHUPb3HbyJF8WqrRz/xxrLeoy+cnB5fYQeE=; b=Rx1OjzoIY0Wva6nXbJJHdaZuek
+ Hb+Yp0M1l34RGcQMSedjTvy8+3H9IqO6Nw65M2nzZut7zLQmZGft8TvWTRIlTbAFZvf6D1amkId2F
+ 4MlDXqvul8UthCMiKFs625bYDJchFG6R0tFCIBXnOBsKss+tqkftpVieE5Hd5PmE6G080X6SVI8Km
+ anGWIvcOSBc0jfqMUTEk0X9kO9H4Q06GU1wCKO+y8Aa+DfoNUU5QgyvzDrejIeB1d3mffZ2RcMOLl
+ B4yhk5THY7vAxYUAPt/Pd/CkAzr1O1zZ04FGTRj+r6YlPXoOlE14M5sDZmomyaA+aLcgz0X0bUmMt
+ 0EckqBuPGJtTdaJG5yY9JyqXgVHWPYF6yAiuOnRKlyc54BWanutKKYL9b3Y36luiw8Zf/+/ljB57N
+ jZdLhfmAeaaQ0x6EUOIO+wgDQMR22x8h6f5ZfCa9weVAGPd1mfCo85EivMb8FAJk5KfFJcmTuhRa/
+ AFwmENfXBGIwIiGz+XW4TbwS;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1rT1u9-009kWE-2m for samba-technical@lists.samba.org;
+ Thu, 25 Jan 2024 15:44:37 +0000
+Date: Thu, 25 Jan 2024 15:44:36 +0000
+To: samba-technical@lists.samba.org
+Subject: Re: Order of getpwnam call in Get_Pwnam_internals
+Message-ID: <20240125154436.04a9f5de@devstation.samdom.example.com>
+In-Reply-To: <CAPSN9iQ1GJAU1oQTpK2k+z968X71NuO_932QgRPcWS55imdb7A@mail.gmail.com>
+References: <CAPSN9iQ1GJAU1oQTpK2k+z968X71NuO_932QgRPcWS55imdb7A@mail.gmail.com>
+X-Mailer: Claws Mail 4.1.1 (GTK 3.24.38; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-ID: <524117.1706195224.1@warthog.procyon.org.uk>
-Date: Thu, 25 Jan 2024 15:07:04 +0000
-Message-ID: <524118.1706195224@warthog.procyon.org.uk>
-X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.3
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -81,30 +58,29 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: David Howells via samba-technical <samba-technical@lists.samba.org>
-Reply-To: David Howells <dhowells@redhat.com>
-Cc: linux-cifs@vger.kernel.org, Christian Brauner <brauner@kernel.org>,
- Eric Sandeen <esandeen@redhat.com>, samba-technical@lists.samba.org,
- v9fs@lists.linux.dev, Jeff Layton <jlayton@kernel.org>,
- linux-nfs@vger.kernel.org, Matthew Wilcox <willy@infradead.org>,
- linux-kernel@vger.kernel.org, dhowells@redhat.com,
- linux-fsdevel@vger.kernel.org, ceph-devel@vger.kernel.org,
- Gao Xiang <xiang@kernel.org>, linux-afs@lists.infradead.org
+From: Rowland Penny via samba-technical <samba-technical@lists.samba.org>
+Reply-To: "samba@lists.samba.org" <samba@lists.samba.org>
+Cc: Rowland Penny <rpenny@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Benjamin Coddington <bcodding@redhat.com> wrote:
+On Thu, 25 Jan 2024 22:40:09 +0800
+hhyy ww via samba-technical <samba-technical@lists.samba.org> wrote:
 
-> > NFS.  NFS at the very least needs to be altered to give up the use of
-> > PG_private_2.
+> Hi List,
 > 
-> Forgive what may be a naive question, but where is NFS using PG_private_2?
+> I have a question about this commit
+> https://git.samba.org/?p=samba.git;a=commitdiff;h=ea4a0d509ef70e91baedc5eebf4f4bcff10dac96
+> 
+> Why samba change the the order of getpwnam call from
+> origin->lowercase->uppercase to lowercase->origin->uppercase?
+> 
+> Without this commit, what kind of problem will heppen?
+> 
+> HY Wu
 
-aka PG_fscache.
+Why are you pointing to a commit that happened over 20 years ago, the
+Samba code has changed out of all recognition since then.
 
-See nfs_fscache_release_folio() for example where it uses folio_test_fscache()
-and folio_wait_fscache().
-
-David
-
+Rowland
 
