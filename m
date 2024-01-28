@@ -2,70 +2,47 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7BA3883F171
-	for <lists+samba-technical@lfdr.de>; Sun, 28 Jan 2024 00:02:31 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 714E983F653
+	for <lists+samba-technical@lfdr.de>; Sun, 28 Jan 2024 17:08:47 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=N3PtoOCmflXE8JrM44LwtaHSMNzcJ3eR+Esxbam8yVg=; b=bQ1EK/BZzVPUTfTJujB6DpSYH5
-	cTbAVt8y5ThZUrJimYYXd94Sm9+oBcLEGkK0RMU5Gr70Skq+pJoYEKvkzdu03rEN8Lmhz2B6SLfEw
-	P5oN5bIp5vn3hGYgWmJVYgOPQ3eirHdTahgpW1wcf/QuDPJOCvPRLT9JF3Z87KE0cHapqKINTR12g
-	VfZ+/SLMqmbsWc3mJX3wz/cLDAWi8EV2GxrFj0KjsQDhW5plEQKKEi23caPF5v7T+sAVyZrfiB8xC
-	u9hDNvzxSR+YX86/9tPw4D8fiiEYrxqTy/aWxZl86sheyltxSCc76wTIx7DquxPVXyktPKWzCMD0l
-	x51PZYlA==;
-Received: from ip6-localhost ([::1]:64158 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=Rwl9oRBD1dOf0hjsaRZ1925+1ApeGybRdWhKDN4Vs7w=; b=LCKteMfJcnjdmkaRuNtqHQjgKd
+	xNbnAcxAZP9f3IJEje10IIA0QuOQ5Z4DFbCXKmNqWO9glQ/nuWfJGDspgA+79bbqo0NzkxWPl9Uvh
+	39OG0ipkpRFWCIeT3oCguayDmXrZjE+HO84Wrxd09Bb+np6SFT5eu9HH9In+a0Vb780pq6rgzygSp
+	dmlPG/x1MlpStB/XHFKBMmIX08rRzqN0+ZWIysdfdqgR1xT4jQ48KvXaO3XTfBwDPgYPFvLwjR7Ww
+	SpAxd82LH9fDYVW4UACWkCEBM/5V6h4+8bqk0bsEwxvezoUpSYDBNrxUth40p7b6oDBSMfMsPnSQR
+	OG5NDe9w==;
+Received: from ip6-localhost ([::1]:50406 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1rTrgD-004i6p-PN; Sat, 27 Jan 2024 23:01:41 +0000
-Received: from mail-lf1-x12f.google.com ([2a00:1450:4864:20::12f]:57774) 
+	id 1rU7hn-004lkY-2T; Sun, 28 Jan 2024 16:08:23 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:45752) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1rTrg6-004i6i-UX
- for samba-technical@lists.samba.org; Sat, 27 Jan 2024 23:01:39 +0000
-Received: by mail-lf1-x12f.google.com with SMTP id
- 2adb3069b0e04-51030ce36fbso738457e87.3
- for <samba-technical@lists.samba.org>; Sat, 27 Jan 2024 15:01:31 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1706396490; x=1707001290; darn=lists.samba.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=N3PtoOCmflXE8JrM44LwtaHSMNzcJ3eR+Esxbam8yVg=;
- b=So4Ca/hiWJoRYVAEabfbMcEDpwyRR0UerfxyJ4iLe1WxNYvN2pWL2r842WH2dLwzUZ
- bo4q9vXDKuOqsmdwhbytJxOy0kZnTwC1lJAojxj+l0hM07+GjtJ8Nk3LW/5N82xm9M0A
- vuXAevWi1YT8Yx0suxYUnzzca0JgdOegtzDQvP3JAjPyQ7oKCf+KWThdCZrMWKmxMxJi
- y9E1Bo5ji5KKJVpLbT6N1/gp2e4ghbwynxIup3mOClnx1eWZykftgtTBNXstufoVVWh9
- LrEPINunGXYmTZNVCJ0lagUj6qzG5i1V/spbMZ3nUKPj50pGtNLaP45f+rReZuPXA3L5
- LdLA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706396490; x=1707001290;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=N3PtoOCmflXE8JrM44LwtaHSMNzcJ3eR+Esxbam8yVg=;
- b=CI7788xgnmcVShNymWuFEk9+++dkPTtHdQOs/ITVSap7Isa/SaDAGXpzZW9jS+XmiV
- 8lXSSPqIR5wb5LqcCTwu6C8iV+wlxYp7cQ8g2pEEy1tXc60CuxhGskRy2nneuyFen/Em
- 3jhekvqfgqC3OWX0UWEwPXFdmMabENBGgr0jGtWAtyIJSriEAs5aUV1xgsFYipHTRSsL
- 78lAcXAHPaWt/L0Mv316PJ8EuLASBlLREubbue6QR0dys1WkoaR1skUmAfG2xQdhFD9w
- tyQOWNzY4J9nB06DGHZDps4H/Evs0f79hBml7YTXGD8Axf0YZbXNXRjjOoSgwQxCRqsv
- xPpQ==
-X-Gm-Message-State: AOJu0YytBKCycMiwKogiUgo0Z6mRqSNaijxQIme77AGFvqkl8fTglMHo
- q86B+CkyKTllaHl3dwce3bi3ULFqR5gmkq8j/incNMY0tTSI/UodBUod365D9rEjCr5Yj+QLf36
- tqaucEM7Moxr8KXZT+Znl/m7fWbR/e5fC
-X-Google-Smtp-Source: AGHT+IE+iOPuu6oBq6RfhXdXaSlN1kLy8vx7/5kCGbP8mMThNsfKdD+U3LBhdWItjkggF7qNNwFD84CJsW07upVjH9M=
-X-Received: by 2002:a05:6512:20d2:b0:50e:7aaf:ec53 with SMTP id
- u18-20020a05651220d200b0050e7aafec53mr1226739lfr.12.1706396490033; Sat, 27
- Jan 2024 15:01:30 -0800 (PST)
+ (Exim) id 1rU7hg-004lkN-Hi; Sun, 28 Jan 2024 16:08:20 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=To:From:Date:Message-ID:CC;
+ bh=Rwl9oRBD1dOf0hjsaRZ1925+1ApeGybRdWhKDN4Vs7w=; b=s8nlSuLPpDnSiiTUIxedU+7K77
+ mNVXC05yu1KW8AoJlavWWO50ObtIsqiA2148fGTRxo/Twzj3cVr2fY6AyGtYrky9RMsI1x3pjT25R
+ i8qoayWZsNJYJV/Kh2A97DSI/bTi/8y7GVhkdnRx9O2HjKFv3CcjopXZtvdAQQXuEF/QIPtY85zW9
+ Okhs+4VyGCr9kCXavVf0ziKHO+/0mM05dU2Z0JoA0ZcQWW/pQ9JhMFLJmBs6Vz7ZehUAi24+X7fel
+ evnsiHmbSgPvbi+uFAh/FIX+iRoaMMfwxL+oA/xYlbgwPgUMvw405e/e6NZ4Y9wp3EIaI3j9bolVO
+ UqkPioVOYwPBILgnfGjWKU8kTDgvCalvCE8OY+3BriwKX+r4mY4ipcI/ybEoK2B+h3pqxHFzhnWNK
+ N8kH6yj5mnHSi+fjSszOsefQ+PBtBe5wYP+dl2IsgYywwiTRg2/gwxILv8YXcAGP8/Vf9Pn66mL6l
+ ecXGWCfkjeDLt7N+kvht9p/3;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1rU7hd-00ADmS-1H; Sun, 28 Jan 2024 16:08:13 +0000
+Message-ID: <2fa86f4f-925e-47c1-9b98-5571cced984e@samba.org>
+Date: Sun, 28 Jan 2024 17:08:12 +0100
 MIME-Version: 1.0
-References: <20240126193143.245122-1-kovalev@altlinux.org>
- <2024012613-woozy-exhume-7b9d@gregkh>
- <472d92aa-1b49-43c9-a91f-80dfc8f25ad3@oracle.com>
-In-Reply-To: <472d92aa-1b49-43c9-a91f-80dfc8f25ad3@oracle.com>
-Date: Sat, 27 Jan 2024 17:01:18 -0600
-Message-ID: <CAH2r5mv2ipr4KJfMDXwHgq9L+kGdnRd1C2svcM=PCoDjA7uALA@mail.gmail.com>
-Subject: Re: [PATCH 0/2] smb: client: fix "df: Resource temporarily
- unavailable" on 5.10 stable kernel
-To: Harshit Mogalapalli <harshit.m.mogalapalli@oracle.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US, de-DE
+Subject: Invitation to SambaXP 2024: digital & free - 17th and 18th of April
+To: samba-technical@lists.samba.org, sambalist <samba@lists.samba.org>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------91nL3XhCwc3xEilAKbEv3mUM"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -79,78 +56,78 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
-Cc: "pc@manguebit.com" <pc@manguebit.com>, linux-cifs@vger.kernel.org,
- ndesaulniers@google.com, keescook@chromium.org, linux-doc@vger.kernel.org,
- Greg KH <greg@kroah.com>, corbet@lwn.net, samba-technical@lists.samba.org,
- linux-kernel@vger.kernel.org, stable@vger.kernel.org, "Mohamed Abuelfotoh,
- Hazem" <abuehaze@amazon.com>, sfrench@samba.org,
- Darren Kenny <darren.kenny@oracle.com>,
- Vegard Nossum <vegard.nossum@oracle.com>,
- Shyam Prasad N <nspmangalore@gmail.com>, kovalev@altlinux.org,
- natechancellor@gmail.com
+From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Ralph Boehme <slow@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Sat, Jan 27, 2024 at 12:43=E2=80=AFAM Harshit Mogalapalli
-<harshit.m.mogalapalli@oracle.com> wrote:
->
-> Hi,
->
-> Adding more people to CC.(who have looked at this issue)
->
-> On 27/01/24 6:19 am, Greg KH wrote:
-> > On Fri, Jan 26, 2024 at 10:31:41PM +0300, kovalev@altlinux.org wrote:
-> >> After mounting a remote cifs resource, it becomes unavailable:
-> >> df: /mnt/sambashare: Resource temporarily unavailable
-> >>
-> >> It was tested on the following Linux kernels:
-> >> Linux altlinux 5.10.208-std-def-alt1
-> >> Linux fedora 5.10.208-200.el8.x86_64
-> >>
-> >> The error appeared starting from kernel 5.10.206 after adding
-> >> the commit [1] "smb: client: fix OOB in SMB2_query_info_init()",
-> >> in which the buffer length increases by 1 as a result of changes:
-> >> ...
-> >> -      iov[0].iov_len =3D total_len - 1 + input_len;
-> >> +      iov[0].iov_len =3D len;
-> >> ...
-> >>
->
-> We can reproduce this on 5.15.148(latest 5.15.y) and Mohamed reported
-> this on 6.1.y, so we need backports there as well.
->
-> https://lore.kernel.org/all/09738f0f-53a2-43f1-a09d-a2bef48e1344@oracle.c=
-om/
->
->
-> [root@vm1 xfstests-dev]# ./check -g quick -s smb3
-> TEST_DEV=3D//<SERVER_IP>/TEST is mounted but not a type cifs filesystem
-> [root@vm1 xfstests-dev]# df
-> df: /mnt/test: Resource temporarily unavailable
->
->
-> This two patch series doesn't cleanly apply to 5.15.y.
->
-> Also I am unsure, which is the better approach to go with
->
-> Approach 1 - suggested by Paulo:
-> https://lore.kernel.org/all/446860c571d0699ed664175262a9e84b@manguebit.co=
-m/
->
-> Approach 2 - this series
-> Pulling in [PATCH 2/2] smb3: Replace smb2pdu 1-element arrays with
-> flex-arrays like this series did.
->
-> I think approach 1 is better as the changes are minimal, but please
-> correct me if that seems wrong.
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------91nL3XhCwc3xEilAKbEv3mUM
+Content-Type: multipart/mixed; boundary="------------ZySEAD2S8yxmgVQbbkd0aEU4";
+ protected-headers="v1"
+From: Ralph Boehme <slow@samba.org>
+To: samba-technical@lists.samba.org, sambalist <samba@lists.samba.org>
+Message-ID: <2fa86f4f-925e-47c1-9b98-5571cced984e@samba.org>
+Subject: Invitation to SambaXP 2024: digital & free - 17th and 18th of April
 
-Yes - Paulo's fix looks simple
+--------------ZySEAD2S8yxmgVQbbkd0aEU4
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
 
+SGVsbG8gU2FtYmFzIQ0KDQogRnJvbSAxN3RoIGFuZCAxOHRoIG9mIEFwcmlsIDIwMjQsIFNl
+ck5ldCB3aWxsIGJlIGhvc3RpbmcgU2FtYmFYUCBmb3IgDQp0aGUgMjNzdCB0aW1lLg0KDQpU
+aGUgT3JnYSBDb21taXR0ZWUgaGFzIHB1Ymxpc2hlZCB0aGUgYWdlbmRhIGF0IGh0dHBzOi8v
+c2FtYmF4cC5vcmcuDQoNClNhbWJhWFAgaXMgdGhlIGFubnVhbCBtZWV0aW5nIG9mIHRoZSBp
+bnRlcm5hdGlvbmFsIFNhbWJhIHRlYW0gYW5kIGl0cyANCmVjb3N5c3RlbSBvZiBkZXZlbG9w
+ZXJzLCB1c2VycyBhbmQgdmVuZG9ycyBhbGwgYXJvdW5kIHRoZSBnbG9iZSBzaW5jZSANCjIw
+MDIuIFRoZSAyM3JkIGNvbmZlcmVuY2Ugd2lsbCB0YWtlIHBsYWNlIG9uIDE3dGggYW5kIDE4
+dGggb2YgQXByaWwgDQoyMDI0LiBJdCB3aWxsIGJlIGhlbGQgZnJvbSAzcG0gdG8gOXBtIEdl
+cm1hbiB0aW1lIHpvbmUgKENFU1QpIGFzIGEgDQpkaWdpdGFsIGV2ZW50IHZpYSBab29tIC0g
+b3BlbiBtaWMgYW5kIHZpZGVvIHdpbGwgYWxsb3cgdGhlIGNvbW11bml0eSB0byANCmludGVy
+YWN0IGluIGEgYmV0dGVyIHdheS4NCg0KVGlja2V0cywgd2hpY2ggYXJlIGZyZWUgb2YgY2hh
+cmdlLCBhcmUgYWxzbyBhdmFpbGFibGUgdGhlcmUuIFRvIGFsbG93IGFzIA0KbWFueSBwZW9w
+bGUgYXMgcG9zc2libGUgd29ybGR3aWRlIHRvIHBhcnRpY2lwYXRlIHRoZSBwcm9ncmFtIHdp
+bGwgc3RhcnQgDQphdCAzIHBtIChDRVNUKSB0byBzZXJ2ZSBhcyBtYW55IGRpZmZlcmVudCB0
+aW1lIHpvbmVzIGFzIHBvc3NpYmxlLg0KDQpUaGUgYWN0dWFsIGNvbmZlcmVuY2Ugd2lsbCBi
+ZSBvcGVuZWQgYnkgY2hhaXJtYW4gSmVyZW15IEFsbGlzb24gKEdvb2dsZSANCi8gU2FtYmEg
+VGVhbSkgb24gQXByaWwgMTd0aCBhdCAzcG0uDQoNClNwZWNpYWwgdGhhbmtzIGdvIHRvIHRo
+aXMgeWVhcidzIHNwb25zb3JzIEdvb2dsZSwgTWljcm9zb2Z0IGFuZCBTZXJOZXQuDQoNClRo
+ZSBjb25mZXJlbmNlIGlzIGtpY2tlZCBvZmYgb24gQXByaWwgMTZ0aCBieSB0aHJlZSB3ZWJp
+bmFyczoNCg0KKiBTdGVmYW4gS2FuaWE6ICJGdW5jdGlvbiBMZXZlbCAyMDE2IHdoYXQncyBu
+ZXciDQoqIENsYXVkaW8gSi4gQ29uY2VwY2nDs24gQ2VydGFkOiAiQ8OzbW8gY29uZmlndXJh
+ciB1biBkb21pbmlvIFNhbWJhIDQgZGUgDQpBY3RpdmUgRGlyZWN0b3J5Ig0KKiBCasO2cm4g
+SmFja2U6ICJTZXR0aW5nIHVwIFNBTUJBIG9uIEFJWCBhbmQgcGlja2luZyB0aGUgbG93IGFu
+ZCB0aGUgDQpoaWdoZXIgaGFuZ2luZyBmcnVpdHMiDQoNCkRldGFpbGVkIGFic3RyYWN0cyBh
+bmQgZXZlcnl0aGluZyBuZWVkZWQgZm9yIHBhcnRpY2lwYXRpb24gY2FuIGFsc28gYmUgDQpm
+b3VuZCBhdCBodHRwczovL3NhbWJheHAub3JnLg0KDQpBbnkgcXVlc3Rpb25zPyBZb3UgY2Fu
+IGFsd2F5cyBjb250YWN0IHRoZSBMT0Mg4oCTIGp1c3QgbWFpbCB1cyBhdCANCmxvY0BzYW1i
+YVhQLm9yZy4NCg0KU2VlIHlvdSBhbGwgb25saW5lIQ0KLVJhbHBoDQoNCi0tIA0KUmFscGgg
+Qm9laG1lLCBTYW1iYSBUZWFtICAgICAgICAgICAgICAgICBodHRwczovL3NhbWJhLm9yZy8N
+ClNlck5ldCBTYW1iYSBUZWFtIExlYWQgICAgICBodHRwczovL3Nlcm5ldC5kZS9lbi90ZWFt
+LXNhbWJhDQo=
 
---=20
-Thanks,
+--------------ZySEAD2S8yxmgVQbbkd0aEU4--
 
-Steve
+--------------91nL3XhCwc3xEilAKbEv3mUM
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+wsF5BAABCAAjFiEE+uLGCIokJSBRxVnkqh6bcSY5nkYFAmW2e+wFAwAAAAAACgkQqh6bcSY5nkaL
+vhAAtVXLvHCnUElql1PCHgRzgl56ReD3jDhx2SJHAufJL6WirBsF1GB/GEZXSd5lBgpuX4qioZfJ
+PdpQaPojeq4cplQgkkzkaVSyTI/TqLIpIVYKac+SqpklIi5o/9C76dl89LPV/bctc0dy1rIT5GRP
++PK+nkLJy+DSGkQAwGFlOryxL6T/Ho8T+9HahQ+yewwCUFQGAN6yst/QRe0tlNvhyNo9JPXy/bgp
+gH47XlzMlphAUbaEh/Xb5mzQUTSRkBXnbYV9JVzvstOyM5zkBm/0/PLLw4NSUQJKQgSMSd+NFCDb
+NuhERpSyDBfjQAkSxtiDUOvct3RaJw4zX71WfaKTtlRTsWMbY+ng2k46STrcnl2+KjN+B4IaHyGB
+ka5eLEni6sihoffDik5W1Q1Fj1G7ct+ilxH+/ZvlVe+qhZhjTKD4/CtkFeiOGWFrdnzpsMCnu2Hc
+8L12dED8VhXAFo2sETDYJ/WA3yAGSfLSTq4Y9hJvxT97a9HPn/1dgOWgTNVD3aZPNofMk1ZYSXJp
+ZB8sC1LWfEf3ZT7kYUpc2cIFWE1AtlcYNWD4CMG5fXXKjN/jNkl175pncRGAAbqLUgFkO9nln+fM
+BUl3p/jH7MQqmv6L/vgiiQLtfkJXAPOkg7K11IQGoVCHjSs9qVuN8U9fJiy8wEkSOa0FAMH/VIzT
+7Z8=
+=/v2s
+-----END PGP SIGNATURE-----
+
+--------------91nL3XhCwc3xEilAKbEv3mUM--
 
