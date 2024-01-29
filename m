@@ -2,51 +2,59 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4B02E83F9F8
-	for <lists+samba-technical@lfdr.de>; Sun, 28 Jan 2024 22:03:33 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C157F84024D
+	for <lists+samba-technical@lfdr.de>; Mon, 29 Jan 2024 10:55:48 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=7TDvxP7uAEW31xb6pQoTYot/vEW81a684K5Cxxk+vFg=; b=Gveg2/hwIQGAYbdPX9aSDpisTC
-	xDwMhvlAPVuLU1+LLkASoEN7fedC5mcQx13GNPAlgYQ8h1dcGiYF8yY+mIRuCPamSOt5rfYTop6BT
-	2tLEO54p9XfvPfb+XEyT0umJn6Ts3RVpeB2SsqfQjaj27eE5BHt8a40MNsepOnu5AZ7Esgtuj79it
-	IYoQ0kKeXAN7soToJlYY3WmxFEB5m0qDi/lFFHI7oLHM3VLO0OO6z63UzGH/C0ySufGNSUqd0wuJj
-	0Ef/A0oxaLTPTnGZFvTFm1JReLKKueilrwCxkhXX5iifnP4HW8xDhRz7QdYltva0C1P56T9v6ve4d
-	WQBYE+Xw==;
-Received: from ip6-localhost ([::1]:23960 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=xHZnyFjxmBghoQ6lRHfgWcUkiOTQ/70ophArvCacXDI=; b=d6jX/T1oM+217NP5UaMX03RLNG
+	D6UEYBxsWv9pkfPh4gQFxLnX4w+ewU17djKSNJ1rBKguP9JUzXvEtLyFPhyFdaTWKDO3q9W3fY5v4
+	hfG9kfdF/9CczyK2na9cCOzZpCTvdorQDGDAOroNtmwce29O2tVJrafCgstygQdZvdRCnTU6vpsJQ
+	XzVd3JEuxmgFbR00FvhUb2FRoahuSZAIoSKntmuczzaolc9DNcqD4cnFKAC/dVM1yTpGfAygrigMO
+	1ZeYfxDEIstWywNeOLseCZrmK/vhc2F8GrVxVLtxW9VEOLz8HTh82YVtyxoXLWOMTmhGONgxFgFnc
+	JT6fSbGg==;
+Received: from ip6-localhost ([::1]:45060 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1rUCJ5-004onc-9q; Sun, 28 Jan 2024 21:03:11 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:35088) 
+	id 1rUOMC-004tUp-Jb; Mon, 29 Jan 2024 09:55:12 +0000
+Received: from mail.tranquil.it ([2001:bc8:392f:101::20]:55500) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1rUCJ0-004onV-A4
- for samba-technical@lists.samba.org; Sun, 28 Jan 2024 21:03:09 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Cc:To:From:Message-ID;
- bh=6NbGI+k2kmMdeXW/1WFaIaPmoMAcnThYj5NjXcO5yhg=; b=VhV2LsjTJqUX/cNx6Nt5Y/qi9Q
- 2XnhDPMPWxIboECaTlGtIZMMPJrQ0ShWpa4sUJS5kXsE+6s1OfAkN0wq5LHWRw+txd/Q17D2J9hfx
- w6XNjIUtfVb4o8PBA0bvx08k5H7Nua9cFsOAZYswRuN3qkPeDhzJ1EKb0DwPMtknxiNhzWM+AKXqU
- meoImWo8VMRy+TjRggyHon1nFAjm3UwQ01h7o5KAgXCbk2iEwU3jkx8SkKqU/d0+b5A377ZPyp+jd
- nui8wRBwcoSW3er6N8yeI6cp7hG/5wTvnPJD/ovxmkh60vbDLhgaSDd4ihTTnpVYyGlBvvwZnslr1
- /GEuDXeLh7qwaigxMzjhZD/wmEUqCVIVD3iVpkazmp+QtxvdnwcgRdp6weEQj8vF6tbe81w8qqOr/
- p/6X7TMGYprx2LuCUxzj1Yi7oMe5wxJ+K4i+izbe0pqa/MzKeIxL0ByeiIrBZm6AQ8r1eACyUWQkS
- Gcg7rQ4EOII3gVcNugBXEz1P;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1rUCIy-00AFJI-1X; Sun, 28 Jan 2024 21:03:05 +0000
-Message-ID: <38fa2c8184f9ec38055f42a5741cbc6f3c5f78ee.camel@samba.org>
-Subject: Re: Some notes on "Implement 'update keytab' for winbind and tools"
-To: Stefan Metzmacher <metze@samba.org>, Pavel Filipensky
- <pfilipensky@samba.org>
-Date: Mon, 29 Jan 2024 10:02:58 +1300
-In-Reply-To: <927cca4b-0409-4999-ac1f-1966266e65aa@samba.org>
-References: <731186894254eececaadb25c14ed49d1aee4a145.camel@samba.org>
- <927cca4b-0409-4999-ac1f-1966266e65aa@samba.org>
-User-Agent: Evolution 3.36.5-0ubuntu1 
+ (Exim) id 1rUOM5-004tUh-Li
+ for samba-technical@lists.samba.org; Mon, 29 Jan 2024 09:55:07 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=tranquil.it; s=mail;
+ t=1706521039;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=xHZnyFjxmBghoQ6lRHfgWcUkiOTQ/70ophArvCacXDI=;
+ b=V5KOnviIXNDL5mqtclcjPAT/UPWFcZ7gGEDru/Zha8Ey4ovxIAH9e9GwSJXWUYADZfTOsD
+ Qr10LFYBQwKadDullxpoMMFfhy4LZQKzgT2XyMgRKPWzbA1qNOZ0MdbnlhPSN5ZKyX7Pl9
+ qDurdEWZi6EkIriFLGE7bFcPx724dZ3TqqB2Zs4OQqHACymyXYMR6gvhfCJ2z42eeXvPU/
+ b3Ta5alThOCogcdWTuuzKskxUuIMIf3KSnfQVUtfwYjOqiZlL8Yn0isL13zz0K9dALw1oN
+ BjCk8XeWtdn4L5hApSXfqE5eudX8wn1TErwjwItpamas4hM975eCcosNQbwoFQ==
+Message-ID: <b168d73e-2375-4289-acac-c467c58eb479@tranquil.it>
+Date: Mon, 29 Jan 2024 10:37:17 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
+User-Agent: Mozilla Thunderbird
+Subject: Re: Azure AD (Entra ID) join specification
+Content-Language: en-US
+To: David Mulder <dmulder@samba.org>
+References: <c2139c3b-678d-55b7-4ec4-88db5215c487@samba.org>
+In-Reply-To: <c2139c3b-678d-55b7-4ec4-88db5215c487@samba.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Rspamd-Server: mail.tranquil.it
+X-Rspamd-Action: no action
+X-Spamd-Result: default: False [-0.09 / 25.00]; MIME_GOOD(-0.10)[text/plain];
+ XM_UA_NO_VERSION(0.01)[]; RCVD_COUNT_ZERO(0.00)[0];
+ ARC_NA(0.00)[]; FROM_EQ_ENVFROM(0.00)[]; MIME_TRACE(0.00)[0:+];
+ TO_DN_ALL(0.00)[]; DKIM_SIGNED(0.00)[tranquil.it:s=mail];
+ TO_MATCH_ENVRCPT_ALL(0.00)[];
+ ASN(0.00)[asn:3215, ipnet:90.115.0.0/17, country:FR];
+ FROM_HAS_DN(0.00)[]; RCPT_COUNT_THREE(0.00)[3];
+ MID_RHS_MATCH_FROM(0.00)[]
+X-Rspamd-Queue-Id: 4E5848182D
+X-Spamd-Bar: /
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,48 +68,44 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
-Cc: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
+From: Denis CARDON via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Denis CARDON <dcardon@tranquil.it>
+Cc: Simon FONTENEAU <sfonteneau@tranquil.it>,
+ samba-technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Wed, 2024-01-10 at 12:50 +0100, Stefan Metzmacher wrote:
-> Hi Andrew,
-> > For some reason this felt better as a mailing list post than just a
-> > MRupdate.
-> > I'm really sorry to give a chunky bit of feedback right as I go
-> > onleave, I'm sure is quite frustrating and you will probably want
-> > someclarification.
-> > Sadly I hadn't been paying attention to
-> > https://gitlab.com/samba-team/samba/-/merge_requests/1999
-> > 
-> > As Christmas is next week, I'll be stepping away from Samba mail
-> > andGitLab.
-> > I do trust metze to continue to give you good feedback if you want
-> > topush this through while I've stepped away - please don't write me
-> > downas blocking this - but I'm also keen to try and help get a good
-> > 'updatekeytab for other things' solution for all of Samba, using
-> > our keys orgMSA keys.
+Hi David,
+
+Le 26/01/2024 à 17:42, David Mulder via samba-technical a écrit :
+> I've made some minor changes to the join document for Azure AD. 
+> Specifically, there was a major mistake in the TransportKey definition. 
+> If you're working on a join implementation, make sure you pay close 
+> attention to the changes. Azure accepts just about any blob in the 
+> TransportKey field, and doesn't perform any validation on it. This only 
+> becomes obvious when future responses from Azure are garbled nonsense.
+
+I guess you are trying to look for a pure Entra ID join, but if it is 
+for a hybrid join, my colleague Simon at Tranquil IT did implement it in 
+our pure Python AzureAD Connect implementation [1].
+
+We don't use hybrid join much (our clients use WAPT [3], not Intune for 
+device management), so it may not be complete, but it did work when we 
+tried it for basic use case.
+
+Be sure to use the python-wcfbin from AndreasLrx, there is a bug in the 
+upstream xml binary library to communicate with Azure.
+
+Cheers,
+
+Denis
+
+
+[1] https://github.com/sfonteneau/AzureADConnect_Samba4/
+[2] 
+https://github.com/sfonteneau/AzureADConnect_Samba4/blob/main/libsync.py#L233
+[3] https://www.wapt.fr/en/doc/index.html
+
+
 > 
-> While this sounds very interesting we still need ways toexport
-> keytabs for our things like sshd, that also needsthe 'host/' service
-> principal.
-> And at least my main goal with MR 1999 is thatwe no longer need to
-> mess with 'kerberos method' and preventwinbindd from changing the
-> password every week.
 
-<snip>
-> But the basic infrastructure for an admin to controlhow keytabs are
-> updated is a clear win over the messwe currently have. My hope is
-> also to remove quitesome old code...
-
-Thanks for writing back.  This sounds like a good and useful plan.
-Andrew Bartlett
-
--- 
-Andrew Bartlett (he/him)       https://samba.org/~abartlet/Samba Team Member (since 2001) https://samba.orgSamba Team Lead                https://catalyst.net.nz/services/sambaCatalyst.Net Ltd
-Proudly developing Samba for Catalyst.Net Ltd - a Catalyst IT group
-company
-Samba Development and Support: https://catalyst.net.nz/services/samba
-Catalyst IT - Expert Open Source Solutions
