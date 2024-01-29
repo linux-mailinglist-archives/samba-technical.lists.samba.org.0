@@ -2,50 +2,47 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5BC78840AAA
-	for <lists+samba-technical@lfdr.de>; Mon, 29 Jan 2024 16:58:05 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 960C5840C1F
+	for <lists+samba-technical@lfdr.de>; Mon, 29 Jan 2024 17:48:18 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=1chksm26mG3e+NnlrL2RZTy8gVox1T4WXaUwlvmZRBc=; b=DjAcksV6JWJqLb5E/bPRIsfOBx
-	6NsTkAj4w7fmsnOKOweb0bVGfWE9Er63Iwk7Fw9hZguSPVj359DprIYPRdSdGSlx9XkXDaK+cnuD8
-	MKxdZTJuIC1cm5eMUNJa5owSsgQMnZ6+5pxRmyMOG700ItqKyr0DAiXD+bolFPUcTbwl2ndNwnM0Q
-	0tgdAaXnIOk9fwa92uGOTp5YcDz9W3ARR/jMeBbWWhi5eQwK520Uz8WmzZ/VofN8NOVl2DVOcu/PE
-	vMAYzp4Fe3erZkYmpvzfHAE86BtPSSE2Na0r1rK2aBti2IyfteVb4DWdPorRdIhn8xBjdKNRN8CGN
-	kcRTeVvw==;
-Received: from ip6-localhost ([::1]:60694 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
+	bh=fs/Z6SefkIwAB8i9GMZV8KU62x9uCuGNput5IEJ2f8o=; b=GDbTnlMnj00KhcDzPf9txgtXmt
+	6YOr0gnCp7TGs5bxoScRUPQVQkjbG+GsRUCLrloVdZ3j5alQQUV/D0SDHpV7Cp1cH8zL3MVDRRYWB
+	ZoL3O4EPUEKZ2FOBbk37+T9XODbaR9AqNmgsGcHEf7s5OoEg2M//3vf70esc3auPiqGle3KrBh0WA
+	fDEdKEuJCHSadyzPx0m0bqiYjdoUQbimx2yK3TMUzlX8/vhTS8cOPG1lUigf4nGE4x5CBrgmimZrM
+	hrfGgI5fwo0G8TUUX6hQIcGf4q1JgjKxfx4NOqrW3P6lfhJqmyvdPZn+RY4fLJ0MExNhr7nLyui40
+	5jJU94Iw==;
+Received: from ip6-localhost ([::1]:63986 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1rUU0w-004uzw-OC; Mon, 29 Jan 2024 15:57:38 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:20654) 
+	id 1rUUnX-004vte-ME; Mon, 29 Jan 2024 16:47:51 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:14528) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1rUU0n-004uzK-DP; Mon, 29 Jan 2024 15:57:33 +0000
+ (Exim) id 1rUUnN-004vsx-R4; Mon, 29 Jan 2024 16:47:44 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=From:To:Date:Message-ID:CC;
- bh=1chksm26mG3e+NnlrL2RZTy8gVox1T4WXaUwlvmZRBc=; b=CGZhvpKFJh64LVyBA18QyeqXDX
- 5jmlqjxd/6yNBG0Xd8E2Evq9GdhKxxj0pv37jTJ1R7cTvSWpTifZYOHOkB48ugM0wKyCZH9TSWzDM
- J/jezi5GE8KyMhvdT0xpy4zu67/bCXUeOlzfbPqeb+7Xi2HQKJSPNz6G8YY4vygnFSEOF1iCUzLWZ
- j67OGZyWUBHjFrVn8RS3TaVqLcz/9M/d0Od9O96zEdoOssp52fbe0Q4G9rawgvpfZVMDMhl1/pnFr
- 5XfAhsbWnLyVD6Fq2GQmubkrDBg9rM2x8ahZ82ehbGi1rOZO8PrX9c7AGlxHDlHuB7UOFXsqqE1fN
- aSa7hUEVUmLrgi6f+E5S/9JAA28ZpSGiY4kDD85hZD/T71ZrS/6/mcbALooYHgvdNkjExaEUK0Qn0
- 1XNDmxiA+dRfBHRxzwUR6Pzlu3qrLljpdrROlmChtV3yV7EI+dBcFkhsyRzc23YbFDCL21QqLGlH9
- Cc2srPKekDRo3X+UvRfXZWqI;
+ bh=fs/Z6SefkIwAB8i9GMZV8KU62x9uCuGNput5IEJ2f8o=; b=ZTwudO16lFVf9sRKnUZsCw8rS5
+ ya0i5NSCwUSLkoBhlUSgLpTdSuSEUvT5gQbsVLdxvfloIKEmt2DxPE2ijHO/vpbTppb4o0xuftLgv
+ va3fW+kvJdY2QmZqyT0PQj8H8ZQ/iDxRd2yC6j8xjwoWt2bzkTtc9NvEcExZtfVROEciAgCD9bQJY
+ CJII5J1GNXHkCj07jhprzFxHKb9ERclgVuS/iAnTiWQUQN456nbl2JeA0XhwFHKjIJFtQ2xQfMhzd
+ 04E9U3F3VPYvT+5V+778EFPl3DcJJJsxQkD00el2+17acmK4fGQNm6VH9OadoC33UNLttjdFu+igy
+ nsdbPdMc9TRabiJwX6wuGK4MdbsFKi+k/A5ynJCug5ofTRjStYvXdtRRlRtAC9iarVCJpukanDfOb
+ FdlWOgBGw7QCqmwPly4z9oJkjIdvp8CJs9o02qcrVGOhA9xSNzwo8Z9XOVAsXx6XOLwfChdhDqK1h
+ CkeUc0IsIaBxwhlvmfnuY76J;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1rUU0m-00AODL-2N; Mon, 29 Jan 2024 15:57:28 +0000
-Message-ID: <5d803c66-5740-4943-8985-edfb6e690f4f@samba.org>
-Date: Mon, 29 Jan 2024 16:57:27 +0100
+ (Exim) id 1rUUnN-00AOva-0l; Mon, 29 Jan 2024 16:47:41 +0000
+Message-ID: <e7c468ef-5466-4ae7-97c9-39c9fe6d627e@samba.org>
+Date: Mon, 29 Jan 2024 17:47:40 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [Samba] Invitation to SambaXP 2024: digital & free - 17th and
- 18th of April
-Content-Language: en-US, de-DE
-To: samba-technical@lists.samba.org, sambalist <samba@lists.samba.org>
-References: <2fa86f4f-925e-47c1-9b98-5571cced984e@samba.org>
-In-Reply-To: <2fa86f4f-925e-47c1-9b98-5571cced984e@samba.org>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------A1yhZdZYGTb6pfhJyXI5OwMo"
+Content-Language: de-DE
+To: samba-announce@lists.samba.org, samba@lists.samba.org,
+ samba-technical@lists.samba.org
+Subject: [Announce] Samba 4.20.0rc1 Available for Download
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,87 +56,188 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Ralph Boehme <slow@samba.org>
+From: Jule Anger via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jule Anger <janger@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------A1yhZdZYGTb6pfhJyXI5OwMo
-Content-Type: multipart/mixed; boundary="------------SRW39QAqnqT2uZXA1KtrXXgq";
- protected-headers="v1"
-From: Ralph Boehme <slow@samba.org>
-To: samba-technical@lists.samba.org, sambalist <samba@lists.samba.org>
-Message-ID: <5d803c66-5740-4943-8985-edfb6e690f4f@samba.org>
-Subject: Re: [Samba] Invitation to SambaXP 2024: digital & free - 17th and
- 18th of April
-References: <2fa86f4f-925e-47c1-9b98-5571cced984e@samba.org>
-In-Reply-To: <2fa86f4f-925e-47c1-9b98-5571cced984e@samba.org>
+Release Announcements
+=====================
 
---------------SRW39QAqnqT2uZXA1KtrXXgq
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
+This is the first release candidate of Samba 4.20.  This is *not*
+intended for production environments and is designed for testing
+purposes only.  Please report any defects via the Samba bug reporting
+system at https://bugzilla.samba.org/.
 
-SGVsbG8gU2FtYmFzLA0KDQpNeSBhcG9sb2dpZXMgdG8gSmVyZW15IGZvciBtaXN0YWtlbmx5
-IG1lbnRpb25pbmcgaGlzIGZvcm1lciBlbXBsb3llciANCnJhdGhlciB0aGFuIGhpcyBjdXJy
-ZW50IG9uZSwgd2hpY2ggaXMgQ0lRLCB0aGUgUm9jayBMaW51eCBmb2xrcy4gU29ycnkgDQph
-Ym91dCB0aGF0IQ0KDQpMb29raW5nIGZvcndhcmQgdG8gc2VlIHlvdSBhbGwhDQotUmFscGgN
-Cg0KLS0gDQpSYWxwaCBCb2VobWUsIFNhbWJhIFRlYW0gICAgICAgICAgICAgICAgIGh0dHBz
-Oi8vc2FtYmEub3JnLw0KU2VyTmV0IFNhbWJhIFRlYW0gTGVhZCAgICAgIGh0dHBzOi8vc2Vy
-bmV0LmRlL2VuL3RlYW0tc2FtYmENCg0KDQpPbiAxLzI4LzI0IDE3OjA4LCBSYWxwaCBCb2Vo
-bWUgdmlhIHNhbWJhIHdyb3RlOg0KPiBIZWxsbyBTYW1iYXMhDQo+IA0KPiAgRnJvbSAxN3Ro
-IGFuZCAxOHRoIG9mIEFwcmlsIDIwMjQsIFNlck5ldCB3aWxsIGJlIGhvc3RpbmcgU2FtYmFY
-UCBmb3IgDQo+IHRoZSAyM3N0IHRpbWUuDQo+IA0KPiBUaGUgT3JnYSBDb21taXR0ZWUgaGFz
-IHB1Ymxpc2hlZCB0aGUgYWdlbmRhIGF0IGh0dHBzOi8vc2FtYmF4cC5vcmcuDQo+IA0KPiBT
-YW1iYVhQIGlzIHRoZSBhbm51YWwgbWVldGluZyBvZiB0aGUgaW50ZXJuYXRpb25hbCBTYW1i
-YSB0ZWFtIGFuZCBpdHMgDQo+IGVjb3N5c3RlbSBvZiBkZXZlbG9wZXJzLCB1c2VycyBhbmQg
-dmVuZG9ycyBhbGwgYXJvdW5kIHRoZSBnbG9iZSBzaW5jZSANCj4gMjAwMi4gVGhlIDIzcmQg
-Y29uZmVyZW5jZSB3aWxsIHRha2UgcGxhY2Ugb24gMTd0aCBhbmQgMTh0aCBvZiBBcHJpbCAN
-Cj4gMjAyNC4gSXQgd2lsbCBiZSBoZWxkIGZyb20gM3BtIHRvIDlwbSBHZXJtYW4gdGltZSB6
-b25lIChDRVNUKSBhcyBhIA0KPiBkaWdpdGFsIGV2ZW50IHZpYSBab29tIC0gb3BlbiBtaWMg
-YW5kIHZpZGVvIHdpbGwgYWxsb3cgdGhlIGNvbW11bml0eSB0byANCj4gaW50ZXJhY3QgaW4g
-YSBiZXR0ZXIgd2F5Lg0KPiANCj4gVGlja2V0cywgd2hpY2ggYXJlIGZyZWUgb2YgY2hhcmdl
-LCBhcmUgYWxzbyBhdmFpbGFibGUgdGhlcmUuIFRvIGFsbG93IGFzIA0KPiBtYW55IHBlb3Bs
-ZSBhcyBwb3NzaWJsZSB3b3JsZHdpZGUgdG8gcGFydGljaXBhdGUgdGhlIHByb2dyYW0gd2ls
-bCBzdGFydCANCj4gYXQgMyBwbSAoQ0VTVCkgdG8gc2VydmUgYXMgbWFueSBkaWZmZXJlbnQg
-dGltZSB6b25lcyBhcyBwb3NzaWJsZS4NCj4gDQo+IFRoZSBhY3R1YWwgY29uZmVyZW5jZSB3
-aWxsIGJlIG9wZW5lZCBieSBjaGFpcm1hbiBKZXJlbXkgQWxsaXNvbiAoR29vZ2xlIA0KPiAv
-IFNhbWJhIFRlYW0pIG9uIEFwcmlsIDE3dGggYXQgM3BtLg0KPiANCj4gU3BlY2lhbCB0aGFu
-a3MgZ28gdG8gdGhpcyB5ZWFyJ3Mgc3BvbnNvcnMgR29vZ2xlLCBNaWNyb3NvZnQgYW5kIFNl
-ck5ldC4NCj4gDQo+IFRoZSBjb25mZXJlbmNlIGlzIGtpY2tlZCBvZmYgb24gQXByaWwgMTZ0
-aCBieSB0aHJlZSB3ZWJpbmFyczoNCj4gDQo+ICogU3RlZmFuIEthbmlhOiAiRnVuY3Rpb24g
-TGV2ZWwgMjAxNiB3aGF0J3MgbmV3Ig0KPiAqIENsYXVkaW8gSi4gQ29uY2VwY2nDs24gQ2Vy
-dGFkOiAiQ8OzbW8gY29uZmlndXJhciB1biBkb21pbmlvIFNhbWJhIDQgZGUgDQo+IEFjdGl2
-ZSBEaXJlY3RvcnkiDQo+ICogQmrDtnJuIEphY2tlOiAiU2V0dGluZyB1cCBTQU1CQSBvbiBB
-SVggYW5kIHBpY2tpbmcgdGhlIGxvdyBhbmQgdGhlIA0KPiBoaWdoZXIgaGFuZ2luZyBmcnVp
-dHMiDQo+IA0KPiBEZXRhaWxlZCBhYnN0cmFjdHMgYW5kIGV2ZXJ5dGhpbmcgbmVlZGVkIGZv
-ciBwYXJ0aWNpcGF0aW9uIGNhbiBhbHNvIGJlIA0KPiBmb3VuZCBhdCBodHRwczovL3NhbWJh
-eHAub3JnLg0KPiANCj4gQW55IHF1ZXN0aW9ucz8gWW91IGNhbiBhbHdheXMgY29udGFjdCB0
-aGUgTE9DIOKAkyBqdXN0IG1haWwgdXMgYXQgDQo+IGxvY0BzYW1iYVhQLm9yZy4NCj4gDQo+
-IFNlZSB5b3UgYWxsIG9ubGluZSENCj4gLVJhbHBoDQo+IA0KPiANCg0K
+Samba 4.20 will be the next version of the Samba suite.
 
---------------SRW39QAqnqT2uZXA1KtrXXgq--
 
---------------A1yhZdZYGTb6pfhJyXI5OwMo
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature.asc"
+UPGRADING
+=========
 
------BEGIN PGP SIGNATURE-----
 
-wsF5BAABCAAjFiEE+uLGCIokJSBRxVnkqh6bcSY5nkYFAmW3yugFAwAAAAAACgkQqh6bcSY5nkaF
-bw//TbvjOSssyWyrR7LAZudBEVlfwkNC/E+X8/ghoxqlR5HvNohy/+9kpStYmLQRvzQlzuPCmwJD
-TQU7tIXcAgZaQV9/ztdBBkrDCaQ+eoBsbCvR49ZCXuJejUG+17Avib8Fdih6vunuVmWUjeio3woc
-CeMqYLU+jRRegd8OCUUcuIirVN24G/Cpmg3IaYgppciuxvzdQMTny3geGLo1nlKXFv9qcW/lqal1
-skzrR1xeclMdfb6fF6ZERF6RFJSjl4GVZuv/IIV5tqybv9OB07K4zZ5TyyTE2zlMGUgGvjzVi2LJ
-M8i026w3WR46uMcCUYOO96e9DF/8CIdNbXxFsGo5XvUP2uUn9XBfuylBuQfvbLo/ocPmaERObEzp
-z2C4eJKNAqi0z4nqNvjMe6aVs9MnZC7nY09r5YoPYWS4nsDOR4/tX58Deg7qLm3hJIOkO9lcSFle
-NBZugBUIh8SAd/D9/8EKc55cKeg0OzOkpjmjEPyzazhGqlCV+/7FN/oekHsg5oYg3Z1EQtqrVPyL
-iwMZjWGBiyPryW1WjQcAkHRFEVZi2AzzkPpr7WGBfOyZghcsZznJHgE+/uwZqej+M5gJwqPig/IN
-BzoN9T/udMBoDcIPEoWsmY8q+imtiWZoD1ZYy5GTuDtkg9aGW7BDZzi0DnXIWWqy1hiVW3urxjFM
-ge8=
-=N3fK
------END PGP SIGNATURE-----
+NEW FEATURES/CHANGES
+====================
 
---------------A1yhZdZYGTb6pfhJyXI5OwMo--
+New Minimum MIT Krb5 version for Samba AD Domain Controller
+-----------------------------------------------------------
+
+Samba now requires MIT 1.21 when built against a system MIT Krb5 and
+acting as an Active Directory DC.  This addresses the issues that were
+fixed in CVE-2022-37967 (KrbtgtFullPacSignature) and ensures that
+Samba builds against the MIT version that allows us to avoid that
+attack.
+
+Removed dependency on Perl JSON module
+--------------------------------------
+
+Distributions are advised that the Perl JSON package is no longer
+required by Samba builds that use the imported Heimdal.  The build
+instead uses Perl's JSON::PP built into recent perl5 versions.
+
+Current lists of packages required by Samba for major distributions
+are found in the bootstrap/generated-dists/ directory of a Samba
+source tree.  While there will be some differences - due to features
+chosen by packagers - comparing these lists with the build dependencies
+in a package may locate other dependencies we no longer require.
+
+samba-tool user getpassword / syncpasswords ;rounds= change
+-----------------------------------------------------------
+
+The password access tool "samba-tool user getpassword" and the
+password sync tool "samba-tool user syncpasswords" allow attributes to
+be chosen for output, and accept parameters like
+pwdLastSet;format=GeneralizedTime
+
+These attributes then appear, in the same format, as the attributes in
+the LDIF output.  This was not the case for the ;rounds= parameter of
+virtualCryptSHA256 and virtualCryptSHA512, for example as
+--attributes="virtualCryptSHA256;rounds=50000"
+
+This release makes the behaviour consistent between these two
+features.  Installations using GPG-encrypted passwords (or plaintext
+storage) and the rounds= option, will find the output has changed
+
+from:
+virtualCryptSHA256: {CRYPT}$5$rounds=2561$hXem.M9onhM9Vuix$dFdSBwF
+
+to:
+virtualCryptSHA256;rounds=2561: 
+{CRYPT}$5$rounds=2561$hXem.M9onhM9Vuix$dFdSBwF
+
+Group Managed service account client-side features
+--------------------------------------------------
+
+samba-tool has been extended to provide client-side support for Group
+Managed Service accounts.  These accounts have passwords that change
+automatically, giving the advantages of service isolation without risk
+of poor, unchanging passwords.
+
+Where possible, Samba's existing samba-tool password handling
+commands, which in the past have only operated against the local
+sam.ldb have been extended to permit operation against a remote server
+with authenticated access to "-H ldap://$DCNAME"
+
+Supported operations include:
+  - reading the current and previous gMSA password via
+    "samba-tool user getpassword"
+  - writing a Kerberos Ticket Granting Ticket (TGT) to a local
+    credentials cache with a new command
+    "samba-tool user get-kerberos-ticket"
+
+New Windows Search Protocol Client
+----------------------------------
+
+Samba now by default builds new experimental Windows Search Protocol (WSP)
+command line client "wspsearch"
+
+The "wspsearch" cmd-line utility allows a WSP search request to be sent
+to a server (such as a windows server) that has the (WSP)
+Windows Search Protocol service configured and enabled.
+
+For more details see the wspsearch man page.
+
+Allow 'smbcacls' to save/restore DACLs to file
+--------------------------------------------
+
+'smbcacls' has been extended to allow DACLs to be saved and restored
+to/from a file. This feature mimics the functionality that windows cmd
+line tool 'icacls.exe' provides. Additionally files created either
+by 'smbcalcs' or 'icacls.exe' are interchangeable and can be used by
+either tool as the same file format is used.
+
+New options added are:
+  - '--save savefile'    Saves DACLs in sddl format to file
+  - '--recurse'          Performs the '--save' operation above on directory
+                         and all files/directories below.
+  - '--restore savefile' Restores the stored DACLS to files in directory
+
+REMOVED FEATURES
+================
+
+Get locally logged on users from utmp
+-------------------------------------
+
+The Workstation Service Remote Protocol [MS-WKST] calls NetWkstaGetInfo
+level 102 and NetWkstaEnumUsers level 0 and 1 return the list of locally
+logged on users. Samba was getting the list from utmp, which is not
+Y2038 safe. This feature has been completely removed and Samba will
+always return an empty list.
+
+
+smb.conf changes
+================
+
+   Parameter Name                          Description     Default
+   --------------                          -----------     -------
+   smb3 unix extensions                    Per share       -
+
+
+KNOWN ISSUES
+============
+
+https://wiki.samba.org/index.php/Release_Planning_for_Samba_4.20#Release_blocking_bugs
+
+
+#######################################
+Reporting bugs & Development Discussion
+#######################################
+
+Please discuss this release on the samba-technical mailing list or by
+joining the #samba-technical:matrix.org matrix room, or
+#samba-technical IRC channel on irc.libera.chat
+
+If you do report problems then please try to send high quality
+feedback. If you don't provide vital information to help us track down
+the problem then you will probably be ignored.  All bug reports should
+be filed under the Samba 4.1 and newer product in the project's Bugzilla
+database (https://bugzilla.samba.org/).
+
+
+======================================================================
+== Our Code, Our Bugs, Our Responsibility.
+== The Samba Team
+======================================================================
+
+
+================
+Download Details
+================
+
+The uncompressed tarballs and patch files have been signed
+using GnuPG (ID AA99442FB680B620).  The source code can be downloaded
+from:
+
+         https://download.samba.org/pub/samba/rc/
+
+The release notes are available online at:
+
+https://download.samba.org/pub/samba/rc/samba-4.20.0rc1.WHATSNEW.txt
+
+Our Code, Our Bugs, Our Responsibility.
+(https://bugzilla.samba.org/)
+
+                         --Enjoy
+                         The Samba Team
+
 
