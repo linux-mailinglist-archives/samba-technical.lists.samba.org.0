@@ -2,52 +2,50 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8DE1C8410E0
-	for <lists+samba-technical@lfdr.de>; Mon, 29 Jan 2024 18:38:41 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 47FC4841705
+	for <lists+samba-technical@lfdr.de>; Tue, 30 Jan 2024 00:39:29 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=cj2pRN3nRNLmx4Fiy+evZ9AcI9p/3OOEd7dXw42xKEQ=; b=eVQxGNRGnSA6aD4lUDkoUxHi+q
-	ieGO9kJ4+vYoWUqGhR5Gn9fkU7X7LXNbOKbSkv8rEzdtjPJItL5wHVqxgfTOOcYYpAteanVfpiLqy
-	WkhaxN7Pp9BLuRxy9j5r21wPQ4YtuGo/EgOnQeIFPbmLuMtnCHoKqZwg4ZTPfTRH16469AFMbe/CY
-	S5p5Wie9IIj59XSeyuweDSCoeE/1dSvyTge50NK7ChUYwRITbThxrxKe9zHKbCldj0DyfVVx3dDjq
-	YRdA7QYJMALyhNaIr5g3Gkz4Kg5rDW+nPjH9rvmj+JC8h+VORGOlUgJbdOo6VS/hDB6d0reWWBBTC
-	9GB5q4yQ==;
-Received: from ip6-localhost ([::1]:55672 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=Zz3Ml8bO8d0FDy/XJ9G0B7PQ4y6iD2bIwee/16J5/Tk=; b=r9lDOhKGU3p/ut8y1TrD69m41V
+	lFtcfSwjXoYE6PSdG0TpafF4Pa/KO5QiCq/Y8yg+Nx4Qir8VKRvOEEEsRhFHlRD7bnuMl7OfcWh43
+	art+oOhK7p16o/TEXMfi08jlqW6khfZxp7neo4ulkSN9uLWUPY9IbydYpH9zKyr0Am2DdKAmvJ5o/
+	EpQ+pqQH7ryjpHLbQKE79t0gb5cPlD7QpYh4I1ZOkQGKwShH67CCwowLPxvwqh8dnpDqccFGQ9BaG
+	jwfnWDKn5Xii223zzgfRKK4hHBB8QrPnobQK1ryLLPwX75FT8rqdjpmzuax4wf2aB9tvmXd3rPl7A
+	9IDdgw5w==;
+Received: from ip6-localhost ([::1]:33576 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1rUVaQ-004xqh-Mk; Mon, 29 Jan 2024 17:38:22 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:39838) 
+	id 1rUbDG-00521p-BZ; Mon, 29 Jan 2024 23:38:50 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:56778) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1rUVaL-004xqK-GA; Mon, 29 Jan 2024 17:38:20 +0000
+ (Exim) id 1rUbDB-00521i-TV
+ for samba-technical@lists.samba.org; Mon, 29 Jan 2024 23:38:48 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=From:Cc:To:Date:Message-ID;
- bh=cj2pRN3nRNLmx4Fiy+evZ9AcI9p/3OOEd7dXw42xKEQ=; b=3WxS4JLPegHoWx9pLbfD62jqXT
- m2jAvYqiHL6PAvG5XaBTPmH6fPwbxtT5zfR/4BQOXwwkC/nQOipM2Q7R5sZkxB38dbluJaXcU1auX
- eiDGFHr3LPyvYFTK9L3Qr51n1BH+iOU1c/kHhwHV9aAZgqs7uDvbsOWJ89ItO+7KnxlYZCSGjFf7n
- KkB3QNbbmqLdCpfg4VFws+LjJR4D40rs3kfrBfuTD4HwALSqfOv5LVdnSw3E5Pi9wlpnvFnBMmnrQ
- wxa99IKFYei7u8t5BAY4/eSMrdEVCTJ5m2SNhnUmwofmQOUdNyVSQe2tZ0OPma+12UoyPWqkQDy+J
- kPQb+BXQEGva/4wLnw1RGw3d0PNNPR67fE7rVKWcEak/WFIGcwtj0Y2h/EE2exHYbyKj656/gtak/
- +CJEor20DvzeghQPngcqOmmVhGTvWlUEp2+8h8jKre6vG7KB57I1sUwEpRetntrFei0Ak9e/OHJs6
- mO69h6ck0Bd+VI2WmZg1cUYw;
+ s=42; h=Date:To:From:Message-ID:CC;
+ bh=Zz3Ml8bO8d0FDy/XJ9G0B7PQ4y6iD2bIwee/16J5/Tk=; b=1jWCpt7rFMX9nlRd4SGCYf8pov
+ Bxv6IFjt5tVLmQj0uuPwyL3nDngvlGcAmuWg3nfwjlKUYr5qbciRm0z9+nlgJll2OxIbvarDIrrlR
+ 6euIBCAOpMiAWsrzW8hwgXsOn2Dk6KXjDRcy7YJOVKTclW4dOkA1xQuqpsizz2lxn+0KpK8MbHeWW
+ vdWvLhwP+iIaA7WHB5NsTnnaso/LUmZIZ2R8nO61U9SOlBiy2s0WaZTDa6KHp73o+7TmI7L+q8X0u
+ Q0mT0PgoTdPvD5d0qrwGfDyLz79d1s6n0aBWEXF5LGu2LAAZsEatNdBOrqey/dnKMfI9ckpOS49GA
+ KYJyN5OYSOFCdHKjvlGTi5grwQmOG1h1W+yLK4W9ET4PfKmxC6QfsqdU9W4LG1OZ0Gyvq4uCiKmcB
+ fgLTKrpk0x/DBrDPgw0RL2HGdMFwMTm1cmbthtH1KgHuN7qXpDO74iDP82g43AyNF2OTIhfNaLLCx
+ HLVhgoKoU3ZEwq/XRiNcztK8;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1rUVaK-00APhE-39; Mon, 29 Jan 2024 17:38:17 +0000
-Message-ID: <334b4f3e-8711-4e26-9668-166f57b9414d@samba.org>
-Date: Mon, 29 Jan 2024 18:38:16 +0100
+ (Exim) id 1rUbDA-00ASbn-1V; Mon, 29 Jan 2024 23:38:45 +0000
+Message-ID: <9dbc25ad89a932a035c943c7a4b9c1de37441996.camel@samba.org>
+Subject: libndr 4.0 issues.
+To: Michael Tokarev <mjt@tls.msk.ru>, Upstream Samba Technical Mailing list
+ <samba-technical@lists.samba.org>
+Date: Tue, 30 Jan 2024 12:38:40 +1300
+In-Reply-To: <9aa8499f-c764-4963-8112-a3f571f2a237@tls.msk.ru>
+References: <e7c468ef-5466-4ae7-97c9-39c9fe6d627e@samba.org>
+ <9aa8499f-c764-4963-8112-a3f571f2a237@tls.msk.ru>
+Content-Type: text/plain; charset="UTF-8"
+User-Agent: Evolution 3.36.5-0ubuntu1 
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [Samba] Invitation to SambaXP 2024: digital & free - 17th and
- 18th of April
-Content-Language: en-US, de-DE
-To: Jeremy Allison <jra@samba.org>
-References: <2fa86f4f-925e-47c1-9b98-5571cced984e@samba.org>
- <5d803c66-5740-4943-8985-edfb6e690f4f@samba.org>
- <ZbffMjb5aE4osjbc@jeremy-HP-Z840-Workstation>
-In-Reply-To: <ZbffMjb5aE4osjbc@jeremy-HP-Z840-Workstation>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------Pqo7ZxZthEfxJEelDBnTL8HM"
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -61,59 +59,71 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Ralph Boehme <slow@samba.org>
-Cc: sambalist <samba@lists.samba.org>, samba-technical@lists.samba.org
+From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andrew Bartlett <abartlet@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------Pqo7ZxZthEfxJEelDBnTL8HM
-Content-Type: multipart/mixed; boundary="------------G5OJZ7xCAhlBx0y0mca0DnSx";
- protected-headers="v1"
-From: Ralph Boehme <slow@samba.org>
-To: Jeremy Allison <jra@samba.org>
-Cc: samba-technical@lists.samba.org, sambalist <samba@lists.samba.org>
-Message-ID: <334b4f3e-8711-4e26-9668-166f57b9414d@samba.org>
-Subject: Re: [Samba] Invitation to SambaXP 2024: digital & free - 17th and
- 18th of April
-References: <2fa86f4f-925e-47c1-9b98-5571cced984e@samba.org>
- <5d803c66-5740-4943-8985-edfb6e690f4f@samba.org>
- <ZbffMjb5aE4osjbc@jeremy-HP-Z840-Workstation>
-In-Reply-To: <ZbffMjb5aE4osjbc@jeremy-HP-Z840-Workstation>
+On Tue, 2024-01-30 at 01:25 +0300, Michael Tokarev via samba wrote:
+> I uploaded 4.20.0~rc1 packages for debian bookworm and ubuntu jammy
+> to
+> the usual location, 
+> http://www.corpit.ru/mjt/packages/samba/
+> , together
+> with debian experimental.  This is just a first build, so handle with
+> extra care.
+> 
+> Since samba 4.20 changed libndr interface in an incompatible way
+> breaking
+> ABI, this update of samba-libs *will* break sssd and freeipa if used
+> together with samba, - there's no solution for this problem so
+> far.  I
+> do not plan to rebuild dependent packages (including for debian
+> backports)
+> just to make samba 4.20+ installable on older debian/ubuntu systems
+> together
+> with sssd and/or freeipa.
+> 
+> The only fix for this breakage (which was trivial to prevent in the
+> first
+> place)
 
---------------G5OJZ7xCAhlBx0y0mca0DnSx
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
+Can I get some detail on the trivial steps that could have avoided
+this?   
 
-T24gMS8yOS8yNCAxODoyNCwgSmVyZW15IEFsbGlzb24gd3JvdGU6DQo+IENsb3NlLCBidXQg
-aXQncyBSb2NreSBMaW51eCwgbm90IFJvY2sgOi0pLg0KDQphaGhoLCBJIGtub3csIHNvcnJ5
-ISBJcmEgd2FzIHF1aWNrZXIgdGhlbiB5b3UgaW4gcG9pbnRpbmcgdGhpcyBvdXQgDQpwcml2
-YXRlbHksIEkgd2FzIHN0aWxsIGhpZGluZyBpbiBteSBiYXNlbWVudCBpbiBzaGFtZS4gOikN
-Cg0KLVJhbHBoDQo=
+The reason we make a release candidate, and the reason we so
+greatly appricaite your efforts in packaging it, is to see how ideas
+that seem reasonable in development impact on the real world.
 
---------------G5OJZ7xCAhlBx0y0mca0DnSx--
+Note that the libndr flags that are now 64 bit are included in
+the ndr_pull and ndr_push structures, not just in the function prototypes, so I don't think symbol versions or munging etc would do the trick.  
 
---------------Pqo7ZxZthEfxJEelDBnTL8HM
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature.asc"
+But your feedback is valuable: we didn't end up needing the 33rd flag
+quite yet.  The work was merged into master to ensure that the idea
+landed while it was all ready (rather than needing to be re-worked
+after being dragged back out of the attic).
 
------BEGIN PGP SIGNATURE-----
+So we could include a patch in Samba 4.20.0rc2 to remove the 4.0.0 ABI
+and instead have a 3.0.2 for this release series, and punt the problem
+away for 6 months.  I would note that this still creates some of the 'non-linear ABI version' issues you have noticed in LDB, but perhaps if we plan properly we can sort that as well. 
 
-wsF5BAABCAAjFiEE+uLGCIokJSBRxVnkqh6bcSY5nkYFAmW34ogFAwAAAAAACgkQqh6bcSY5nkYI
-NA//cTpTSb07fs1841Mz75IU/pasXnutSi4H38pCy6RChuVBRLWlg+9rL1BtoQ5pE8te6VRY2V0C
-i7QIlixsFhukiGsO3W4sW0sOTR4t+JEhQj2O3wjRzN183taTZuXoMy/ALglzpZZX7ojjJN9SAQnZ
-xXV+x/tSzBq5XPZfl7xHa+DbGfQ2+5F+Bdu5OCAzRgkzrgwube07U79hh3Bddh8H+Q2w1pv89te6
-kPkEBlgqmy+tpgRyxX7jrBUejN7gzpAul6HglLRjsErycWIB7NqeW9t1uXS7OxyCryvQdmhOaPHw
-fPq1E7BhkoNrLHh8d6FyDVh9iiV7XKyo0/6x6lcaARfLHsjkGzj4Oh6rcGPwlqBeP1PbWg1NTNer
-WfrC7iPZ9k5GM60fV4YL2oPc67OYrKPHlIkrlCsws54cDXgfnbIqXTK8bxkowRuT0c7WPaoyk14m
-u2RcN98gmVljmFo8I8H6JaQ1AyS0voTOgIX9EtkB4PjSODcDCymYw77VwKmnvW5k5pCPaZ2M+9u+
-8VeAn/HJUFSQ3AAASA14RUWN8f7fP05+AFIfcl6PvFHNBiKoaFpOyXH+yYHDeQFhZjgGCWvuDgo3
-urXPCAURtHdyzBw8ms5jJV0yus731h+JHwSiiJ/wzB9brZG49EvEmzCBU8bS1sDjrw8pHizWaO0W
-jRY=
-=I72T
------END PGP SIGNATURE-----
+Anyway, please let us know your thoughts.  We know we don't to this
+public library thing very well, and the experience of those who live in
+this world more broadly is most valuable. 
 
---------------Pqo7ZxZthEfxJEelDBnTL8HM--
+Andrew Bartlett
+
+-- 
+Andrew Bartlett (he/him)       https://samba.org/~abartlet/
+Samba Team Member (since 2001) https://samba.org
+Samba Team Lead                https://catalyst.net.nz/services/samba
+Catalyst.Net Ltd
+
+Proudly developing Samba for Catalyst.Net Ltd - a Catalyst IT group
+company
+
+Samba Development and Support: https://catalyst.net.nz/services/samba
+
+Catalyst IT - Expert Open Source Solutions
+
 
