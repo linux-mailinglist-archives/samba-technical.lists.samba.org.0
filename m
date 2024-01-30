@@ -2,49 +2,43 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 47FC4841705
-	for <lists+samba-technical@lfdr.de>; Tue, 30 Jan 2024 00:39:29 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9096984211E
+	for <lists+samba-technical@lfdr.de>; Tue, 30 Jan 2024 11:22:11 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=Zz3Ml8bO8d0FDy/XJ9G0B7PQ4y6iD2bIwee/16J5/Tk=; b=r9lDOhKGU3p/ut8y1TrD69m41V
-	lFtcfSwjXoYE6PSdG0TpafF4Pa/KO5QiCq/Y8yg+Nx4Qir8VKRvOEEEsRhFHlRD7bnuMl7OfcWh43
-	art+oOhK7p16o/TEXMfi08jlqW6khfZxp7neo4ulkSN9uLWUPY9IbydYpH9zKyr0Am2DdKAmvJ5o/
-	EpQ+pqQH7ryjpHLbQKE79t0gb5cPlD7QpYh4I1ZOkQGKwShH67CCwowLPxvwqh8dnpDqccFGQ9BaG
-	jwfnWDKn5Xii223zzgfRKK4hHBB8QrPnobQK1ryLLPwX75FT8rqdjpmzuax4wf2aB9tvmXd3rPl7A
-	9IDdgw5w==;
-Received: from ip6-localhost ([::1]:33576 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=LpXwuIFpHjgBiBoe+FaYABzUUW+hUlKBSKQX4RxhLIA=; b=wyRhPuT66cdaW6MTJyObVMiNWp
+	ffmzRQJQ5yo5vn3J9ERm9ndKn9KTedUa9fg+vPTyO3RaAqIBuFFZAuFUiiMv04eA+6UXantNp3k88
+	cmVePzEbNB9KWNnVFgX64attZ44ggaXDTOxAk2O5DWB3CMN/9b7Z4Mia662snx/SFt05a/Fkgkxma
+	LC1JM71JR/pytXnBWC1tJRl2sqGI3jE77pvXri1yWXwoMjKIkpWc4rCddNRo2v/wvV1pAP6/0aNI6
+	BjIAQ/C51mqpKPhqUu+yWFoHmHs+0fhE/SPK0KM9MpOqSCaAt3Qtaf7OzCXN/eP7nHuYX0OzUsv+U
+	TAHpajhw==;
+Received: from ip6-localhost ([::1]:29930 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1rUbDG-00521p-BZ; Mon, 29 Jan 2024 23:38:50 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:56778) 
+	id 1rUlFR-0053sj-EL; Tue, 30 Jan 2024 10:21:45 +0000
+Received: from isrv.corpit.ru ([86.62.121.231]:33441) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1rUbDB-00521i-TV
- for samba-technical@lists.samba.org; Mon, 29 Jan 2024 23:38:48 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:To:From:Message-ID:CC;
- bh=Zz3Ml8bO8d0FDy/XJ9G0B7PQ4y6iD2bIwee/16J5/Tk=; b=1jWCpt7rFMX9nlRd4SGCYf8pov
- Bxv6IFjt5tVLmQj0uuPwyL3nDngvlGcAmuWg3nfwjlKUYr5qbciRm0z9+nlgJll2OxIbvarDIrrlR
- 6euIBCAOpMiAWsrzW8hwgXsOn2Dk6KXjDRcy7YJOVKTclW4dOkA1xQuqpsizz2lxn+0KpK8MbHeWW
- vdWvLhwP+iIaA7WHB5NsTnnaso/LUmZIZ2R8nO61U9SOlBiy2s0WaZTDa6KHp73o+7TmI7L+q8X0u
- Q0mT0PgoTdPvD5d0qrwGfDyLz79d1s6n0aBWEXF5LGu2LAAZsEatNdBOrqey/dnKMfI9ckpOS49GA
- KYJyN5OYSOFCdHKjvlGTi5grwQmOG1h1W+yLK4W9ET4PfKmxC6QfsqdU9W4LG1OZ0Gyvq4uCiKmcB
- fgLTKrpk0x/DBrDPgw0RL2HGdMFwMTm1cmbthtH1KgHuN7qXpDO74iDP82g43AyNF2OTIhfNaLLCx
- HLVhgoKoU3ZEwq/XRiNcztK8;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1rUbDA-00ASbn-1V; Mon, 29 Jan 2024 23:38:45 +0000
-Message-ID: <9dbc25ad89a932a035c943c7a4b9c1de37441996.camel@samba.org>
-Subject: libndr 4.0 issues.
-To: Michael Tokarev <mjt@tls.msk.ru>, Upstream Samba Technical Mailing list
- <samba-technical@lists.samba.org>
-Date: Tue, 30 Jan 2024 12:38:40 +1300
-In-Reply-To: <9aa8499f-c764-4963-8112-a3f571f2a237@tls.msk.ru>
+ (Exim) id 1rUlFM-0053sc-Hm
+ for samba-technical@lists.samba.org; Tue, 30 Jan 2024 10:21:43 +0000
+Received: from tsrv.corpit.ru (tsrv.tls.msk.ru [192.168.177.2])
+ by isrv.corpit.ru (Postfix) with ESMTP id 6E60048B31;
+ Tue, 30 Jan 2024 13:05:50 +0300 (MSK)
+Received: from [192.168.177.130] (mjt.wg.tls.msk.ru [192.168.177.130])
+ by tsrv.corpit.ru (Postfix) with ESMTP id D3D4B6ED1B;
+ Tue, 30 Jan 2024 13:04:55 +0300 (MSK)
+Message-ID: <6906e5c4-edbf-4731-a254-3a08bc4b3e31@tls.msk.ru>
+Date: Tue, 30 Jan 2024 13:04:55 +0300
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: libndr 4.0 issues.
+Content-Language: en-US
+To: Andrew Bartlett <abartlet@samba.org>,
+ Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
 References: <e7c468ef-5466-4ae7-97c9-39c9fe6d627e@samba.org>
  <9aa8499f-c764-4963-8112-a3f571f2a237@tls.msk.ru>
-Content-Type: text/plain; charset="UTF-8"
-User-Agent: Evolution 3.36.5-0ubuntu1 
-MIME-Version: 1.0
+ <9dbc25ad89a932a035c943c7a4b9c1de37441996.camel@samba.org>
+In-Reply-To: <9dbc25ad89a932a035c943c7a4b9c1de37441996.camel@samba.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
@@ -59,71 +53,119 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
+From: Michael Tokarev via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Michael Tokarev <mjt@tls.msk.ru>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Tue, 2024-01-30 at 01:25 +0300, Michael Tokarev via samba wrote:
-> I uploaded 4.20.0~rc1 packages for debian bookworm and ubuntu jammy
-> to
-> the usual location, 
-> http://www.corpit.ru/mjt/packages/samba/
-> , together
-> with debian experimental.  This is just a first build, so handle with
-> extra care.
+30.01.2024 02:38, Andrew Bartlett via samba-technical wrote:
+> On Tue, 2024-01-30 at 01:25 +0300, Michael Tokarev via samba wrote:
+...
+>> The only fix for this breakage (which was trivial to prevent in the
+>> first place)
 > 
-> Since samba 4.20 changed libndr interface in an incompatible way
-> breaking
-> ABI, this update of samba-libs *will* break sssd and freeipa if used
-> together with samba, - there's no solution for this problem so
-> far.  I
-> do not plan to rebuild dependent packages (including for debian
-> backports)
-> just to make samba 4.20+ installable on older debian/ubuntu systems
-> together
-> with sssd and/or freeipa.
+> Can I get some detail on the trivial steps that could have avoided
+> this?
+
+I did quite some thinking today, some experiments too, and looked much
+more closely at the actual ABI changes.  And the situation isn't as
+simple as I thought about yesterday.
+
+Note "trivial" here is a relative term, it is trivial compared to what
+has to be done now (which is to create stub libndr.so.3 with conversion
+functions of the same name for libndr.so.4 extending flags argument,
+with ld script "magic" and dlsym(RTLD_NEXT)), not necessary trivial by
+its own.
+
+And here, there are 2 roads actually, one is "right" but not exactly
+trivial, and another is hackish but simple.
+
+Let's take ndr_size_string() as an example.  It is (in libndr3 vs libndr4):
+
+  ndr_size_string: uint32_t (int, const char * const *, int)
+  ndr_size_string: uint32_t (int, const char * const *, ndr_flags_type)
+
+so the easy solution is to have a new function, say, ndr_size_string64
+(or ndr_size_string2 etc), and have ndr_size_string to be a macro to call
+ndr_size_string64, and a trivial ndr_size_string() function doing the same
+thing for compatibility with previous versions.  In other words, to
+redirect all "32bit" symbols to the newly added "64bit" symbols of the
+same name.  Yes, such wrappers had to be written for all changed functions.
+
+There are a few other interesting differences. For example, ndr_set_flags()
+accepts a *pointer* to libndr_flags.  And here, we're breaking the *API*,
+not just ABI, because now a program using this interface has hard time
+determining if they should use libndr_flags (which is new in libndr4 too)
+or uint32_t.  For this, a new separate function is preferred either way,
+with some simple compat layer.  Thankfully this symbol isn't used often,
+so there isn't much breakage with it.  But for a general case, such
+argument type changes should really be done with a tiny compat layer
+(maybe with a deprecation warning for one release or something).
+
+Now, the "right but not exactly trivial" way would be to actually use
+the symbol versioning mechanism.  It is not a black magic, it's actually
+quite simple once you understand how it works.  So that will be the same
+set of (wrapper/compat) functions but done in a stright-forward, clean
+way, without hackish re-#defines.  You write ndr_size_string_v3(uint32)
+which just call new ndr_size_string(uint64), and mark the v3 one in the
+ld script (or right in the code) as belonging to the previous version.
+Having ABI/*.syms files makes it easy to implement proper symbol versioning,
+but this has to be done (so at least some python/waf code needs to be
+written), and done in a way to be at least somewhat compatible with
+the before-versioned symbols - that means, at least on per-library basis,
+after ABI bumping.
+
+> The reason we make a release candidate, and the reason we so
+> greatly appricaite your efforts in packaging it, is to see how ideas
+> that seem reasonable in development impact on the real world.
 > 
-> The only fix for this breakage (which was trivial to prevent in the
-> first
-> place)
+> Note that the libndr flags that are now 64 bit are included in
+> the ndr_pull and ndr_push structures, not just in the function prototypes, so I don't think symbol versions or munging etc would do the trick.
 
-Can I get some detail on the trivial steps that could have avoided
-this?   
+And this is something I overlook yesterday.  This needs struct
+adjustments, - ie, allocating new struct, copying all fields
+with conversion when needed, running the new function, and copying
+back.  Since the current/old code does not use "larger" flags,
+this should work, but it is a bit fragile for sure.  This is how
+system call translation layer works in qemu for example, converting
+between host/guest type sizes and byte order, and works quite well.
 
-The reason we make a release candidate, and the reason we so
-greatly appricaite your efforts in packaging it, is to see how ideas
-that seem reasonable in development impact on the real world.
+I can do the wrappers work (and maybe I'll write a libndr3 stub
+with the conversions, if the way I think will actually work, - it
+is fragile, due to symbol name being the same, it may lead to old
+code calling new function directly instead of the wrapper depending
+on the order of loading).
 
-Note that the libndr flags that are now 64 bit are included in
-the ndr_pull and ndr_push structures, not just in the function prototypes, so I don't think symbol versions or munging etc would do the trick.  
+> But your feedback is valuable: we didn't end up needing the 33rd flag
+> quite yet.  The work was merged into master to ensure that the idea
+> landed while it was all ready (rather than needing to be re-worked
+> after being dragged back out of the attic).
 
-But your feedback is valuable: we didn't end up needing the 33rd flag
-quite yet.  The work was merged into master to ensure that the idea
-landed while it was all ready (rather than needing to be re-worked
-after being dragged back out of the attic).
+> So we could include a patch in Samba 4.20.0rc2 to remove the 4.0.0 ABI
+> and instead have a 3.0.2 for this release series, and punt the problem
+> away for 6 months.  I would note that this still creates some of the > 'non-linear ABI version' issues you have noticed in LDB, but perhaps if we plan properly we can sort that as well.
 
-So we could include a patch in Samba 4.20.0rc2 to remove the 4.0.0 ABI
-and instead have a 3.0.2 for this release series, and punt the problem
-away for 6 months.  I would note that this still creates some of the 'non-linear ABI version' issues you have noticed in LDB, but perhaps if we plan properly we can sort that as well. 
+I don't think reverting this is a good idea now, it will be quite messy.
 
-Anyway, please let us know your thoughts.  We know we don't to this
-public library thing very well, and the experience of those who live in
-this world more broadly is most valuable. 
+What is actually needed, I think, - is to decide if libndr is a public
+interface or not.  So far it is used in external projects (sssd and
+freeipa at least), but is treated more like an internal library in samba
+(unlike, say, libsmbclient).  And if it is public, we can try just a bit
+harder to avoid breaking compatibility, - maybe not for case like this
+one (which changed - while in a trivial way, but changed *many* symbols
+at once) but for previous changes like ndr1=>ndr2 or ndr2=>ndr3 bumps.
 
-Andrew Bartlett
+Also, at least in sssd libndr is used very lightly, - maybe it is worth
+to re-implement a thing in there instead of pulling it from samba.  But
+I for one still don't know what sssd is used for to begin with :)
 
--- 
-Andrew Bartlett (he/him)       https://samba.org/~abartlet/
-Samba Team Member (since 2001) https://samba.org
-Samba Team Lead                https://catalyst.net.nz/services/samba
-Catalyst.Net Ltd
+At the very least, I just implemented a trivial trick in debian/ubuntu
+to ensure we know we're breaking older stuff by the new samba, instead
+of allowing things to install just to discover something broke which
+needed older libndr :)  (rpm has better support for symbol deps than
+dpkg).
 
-Proudly developing Samba for Catalyst.Net Ltd - a Catalyst IT group
-company
+Thanks,
 
-Samba Development and Support: https://catalyst.net.nz/services/samba
-
-Catalyst IT - Expert Open Source Solutions
-
+/mjt
 
