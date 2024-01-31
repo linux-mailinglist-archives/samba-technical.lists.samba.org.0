@@ -2,45 +2,64 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 724CE84224A
-	for <lists+samba-technical@lfdr.de>; Tue, 30 Jan 2024 12:10:06 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 32C8884460A
+	for <lists+samba-technical@lfdr.de>; Wed, 31 Jan 2024 18:24:17 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=V2u/6ek3ZxKaEUYjSeoMNVMpJ95CTRCNIO14KwSDJpE=; b=dafqEpS2q3gpfItpDqnS26GYXi
-	kxB2KCn+zzy5uVXmU2/0H/QVMPlWXK865YqDm2CZCMte5ViFcrZyfWnuITcAqerVktloRkmPYNYmh
-	00q9wPMvUoKkVAVtEKtAaabKktCldUoaOimkb9gn+i2MxmCirTdgJ9ttjncnt7YWvn9isPlA/TXqi
-	KVMjo3ReWQ7SuSqQ2k42Kwxuz3CcGydsFXZW3ECv2VYIrJfCts+5imgrAlYwTC0itdAJQ07TVy7rQ
-	glYl/hO4DOaO9toCYqwV5GHBKvWoqyKlf5LxUOO3sb+UF8iMKQOSsQMvva5ppa0arI8xFILEw5Xrt
-	VJVDsAuQ==;
-Received: from ip6-localhost ([::1]:63454 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=T7jJIaYqMSfxPjtLTr60DeUKvzsmBPgfKadAEZC9wwo=; b=nIjZ1p+v10mrLqWaA9DGs87yEp
+	6MqWON+rEGpdnLX/lkzAla4dQe4MZugOV+JDE6gp+Kx85y9+6U8Q4girrqX0gQnmU8vzIHiG6ZTww
+	iH+DTYQ4cjUoW1mtUbtQiUBfV0pPN6B/kKRN/DMxMjeA2AAhLwvSh7KkjJ9NmWqb++6cqe+gY641l
+	Qi3K88tlg/RYlEenrNbNug3v5wZw6TQykWhX6rGXMzizH9Lz//6Og+dZuXvxC6zvci41tqaM/iaUx
+	WpAe4dDaiusAZMLV3tIzGrenVoZ7vKCn9CfGqog0TMvKQ9Jp9mh0UwIouBrSknqE9M4tYadJ7+YRo
+	i1KfHt7A==;
+Received: from ip6-localhost ([::1]:30120 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1rUlzr-005418-Ur; Tue, 30 Jan 2024 11:09:44 +0000
-Received: from isrv.corpit.ru ([86.62.121.231]:43863) 
+	id 1rVEJA-005Ifi-E4; Wed, 31 Jan 2024 17:23:32 +0000
+Received: from mx.manguebit.com ([2a01:4f8:1c1e:a2ae::2]:41494) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1rUlzn-005411-2f
- for samba-technical@lists.samba.org; Tue, 30 Jan 2024 11:09:41 +0000
-Received: from tsrv.corpit.ru (tsrv.tls.msk.ru [192.168.177.2])
- by isrv.corpit.ru (Postfix) with ESMTP id AA74448B93;
- Tue, 30 Jan 2024 14:10:30 +0300 (MSK)
-Received: from [192.168.177.130] (mjt.wg.tls.msk.ru [192.168.177.130])
- by tsrv.corpit.ru (Postfix) with ESMTP id F1A7F6ED7A;
- Tue, 30 Jan 2024 14:09:35 +0300 (MSK)
-Message-ID: <5c521818-f293-4549-9d3f-afce5354fbf1@tls.msk.ru>
-Date: Tue, 30 Jan 2024 14:09:35 +0300
+ (Exim) id 1rVEJ6-005Ifb-FZ
+ for samba-technical@lists.samba.org; Wed, 31 Jan 2024 17:23:30 +0000
+Message-ID: <e0861faa7b564362e384783d4e52e38c@manguebit.com>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=manguebit.com;
+ s=dkim; t=1706721797;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=T7jJIaYqMSfxPjtLTr60DeUKvzsmBPgfKadAEZC9wwo=;
+ b=T5SxKhAAJiH0NWcSdazzl+wRI6/ATIDRkkLlsiQNj6P+XSRcZbj16uQSZC0qMDWHAm/t32
+ y3POA/YOv31Sz7HR3CLt+qJJexg5TUwkuKcp5NJTBbFLZzZnu9zaEDytRQivcziCm+AZWH
+ LMgHe6mCtAMfq17ajMJCzLrvpP5ktkIwK78qGV82ODHXyN8rT0x2zsb3tG5RiAFgCsrTzy
+ NH74VvHMxbJKrFOC0ImAbgSq1Zfq9XhmDUE/MQUqsX4418pw5a2QvC9/S7qhsFiMZ1WXUL
+ mhzMCgYV1wv98suc2P4xMB91L0BXTjcy8EBwMzcdjcoQOHF8uG6EldVD2ldU7A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=manguebit.com; 
+ s=dkim; t=1706721797;
+ h=from:from:sender:reply-to:subject:subject:date:date:
+ message-id:message-id:to:to:cc:cc:mime-version:mime-version:
+ content-type:content-type:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=T7jJIaYqMSfxPjtLTr60DeUKvzsmBPgfKadAEZC9wwo=;
+ b=C7S5PNyeFynbMjNaJdSIVnEfbdRFQhB66SkNb1tyfxDZGujMTB0pCmkhAgVK0B/IzSCNn1
+ DAFhaayE8FIoBcoPKWW/aZ+0d9i7F7bfeTiHJ5DggJGzVECZnNjp757YOVxmGKTbFj1oc9
+ 7EUdrv8LuXa8AwB/9Sak9f74/9s76JnCe15r3D0Trtna3aMjyINxdnnEbQu95upfGYiDWH
+ MiDCKRwrq3JZfXl2IuDN2jJ53NpTh6XV15v+VU1vfKKZMBuzf9p1Es70dUre7kXa3rO1Ji
+ vVf1fYcK5zOWB4CBmewCsiBV4Hg/MYs4GAkvoyAtLLbwpAZviVA4gi8fLQQGLA==
+ARC-Authentication-Results: i=1; ORIGINATING;
+ auth=pass smtp.mailfrom=pc@manguebit.com
+ARC-Seal: i=1; s=dkim; d=manguebit.com; t=1706721797; a=rsa-sha256; cv=none;
+ b=o37iH5DlZhudX0g7wrQFXivWYBlZfw6KV7qoPJAOAGnneqnGleIIuyAbIJCgSkfaJercFA
+ C3wJSco9alFsazIkS88c9WTPVBCfqUiTAlYmkz2x/KW8rBkWJ9+ODTPvF3Zr4QMbyrGaAI
+ tQ1FMh0x1QNMcTKe7c9+xnOZnGfrxfdmGBxAngqv5a3U7ww6sF3xf0MW2VYeXOHpeOGHc5
+ tGudQ+zfB1Jrnx5O6JrqvOJDG9iCcS0yk0Oah8eGvnuN7xNPAUiTVqtezehrQKk6AnpWOX
+ BKHyojikbjpT6meialC9E4L4rrFOFFHt60tZVArrThILfV7IQDYxKBswH/fnwA==
+To: Dan Carpenter <dan.carpenter@linaro.org>
+Subject: Re: [PATCH] smb: client: Fix a NULL vs IS_ERR() check in
+ wsl_set_xattrs()
+In-Reply-To: <571c33b3-8378-49fd-84e1-57f622ef6db5@moroto.mountain>
+References: <571c33b3-8378-49fd-84e1-57f622ef6db5@moroto.mountain>
+Date: Wed, 31 Jan 2024 14:23:13 -0300
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: libndr 4.0 issues.
-Content-Language: en-US
-To: Andrew Bartlett <abartlet@samba.org>,
- Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
-References: <e7c468ef-5466-4ae7-97c9-39c9fe6d627e@samba.org>
- <9aa8499f-c764-4963-8112-a3f571f2a237@tls.msk.ru>
- <9dbc25ad89a932a035c943c7a4b9c1de37441996.camel@samba.org>
- <6906e5c4-edbf-4731-a254-3a08bc4b3e31@tls.msk.ru>
-In-Reply-To: <6906e5c4-edbf-4731-a254-3a08bc4b3e31@tls.msk.ru>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -54,51 +73,25 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Michael Tokarev via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Michael Tokarev <mjt@tls.msk.ru>
+From: Paulo Alcantara via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Paulo Alcantara <pc@manguebit.com>
+Cc: Tom Talpey <tom@talpey.com>, Shyam Prasad N <sprasad@microsoft.com>,
+ linux-cifs@vger.kernel.org, kernel-janitors@vger.kernel.org,
+ samba-technical@lists.samba.org, linux-kernel@vger.kernel.org,
+ Steve French <sfrench@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-30.01.2024 13:04, Michael Tokarev via samba-technical:
-...
-> Now, the "right but not exactly trivial" way would be to actually use
-> the symbol versioning mechanism.  It is not a black magic, it's actually
-> quite simple once you understand how it works.  So that will be the same
-> set of (wrapper/compat) functions but done in a stright-forward, clean
-> way, without hackish re-#defines.  You write ndr_size_string_v3(uint32)
-> which just call new ndr_size_string(uint64), and mark the v3 one in the
-> ld script (or right in the code) as belonging to the previous version.
-> Having ABI/*.syms files makes it easy to implement proper symbol versioning,
-> but this has to be done (so at least some python/waf code needs to be
-> written), and done in a way to be at least somewhat compatible with
-> the before-versioned symbols - that means, at least on per-library basis,
-> after ABI bumping.
+Dan Carpenter <dan.carpenter@linaro.org> writes:
 
-Samba does use some form of symbol versioning already, so there's no
-conversion needed.  But it does not allow for multiple versions of the
-same symbol, and the versioning itself is done a bit wrong.  Namely,
-current wafsamba only looks when the given symbol appeared, not when
-it changed.  For example, when a program uses one of the changed in v4
-symbols, such as that same ndr_size_string(), it gets linked with
-ndr_size_string@NDR_0.0.1 (it was ndr version 0.0.1 when this symbol
-first appeared), instead of the correct-by-now ndr_size_string@NDR_4.0.0,
-since it's version 4.0.0 when this symbol with this signature first
-appeared -- ndr_size_string@NDR_0.0.1 is not compatible with current
-interface.
+> This was intended to be an IS_ERR() check.  The ea_create_context()
+> function doesn't return NULL.
+>
+> Fixes: 1eab17fe485c ("smb: client: add support for WSL reparse points")
+> Signed-off-by: Dan Carpenter <dan.carpenter@linaro.org>
+> ---
+>  fs/smb/client/reparse.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 
-I just committed a change to debian bumping all changed symbols
-minver to current:
-
-https://salsa.debian.org/samba-team/samba/-/commit/b48cc627abb0ea1aa924de420419dcb2c21616dc
-
-but this should be done in wafsamba using this @VER mechanism.
-
-(and I missed similar changes in ldb before too, don't remember
-the details already).
-
-FWIW.
-
-Thanks,
-
-/mjt
+Reviewed-by: Paulo Alcantara <pc@manguebit.com>
 
