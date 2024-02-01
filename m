@@ -2,67 +2,47 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id EDFDA845F21
-	for <lists+samba-technical@lfdr.de>; Thu,  1 Feb 2024 19:02:44 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7907D84601E
+	for <lists+samba-technical@lfdr.de>; Thu,  1 Feb 2024 19:40:55 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=XO6MI34sx7y7sKtG0/owVEIu61lP2sL9c6sYjJfuMnM=; b=5arDFZB/Cyvxy4YWgG+eVKt9GJ
-	ZEwKeC60tm0RVJ/JaM/ycL1zHDHJsvKi4Na8sMz6RoKI0AdKQjgb7rTrGLZBXRiBbJSvXLxpw04Hl
-	7+UNI088rfNDOpltS3FPsDWGvT5HykwXKLlbk1KOJsU7CC1rT39R5duBAtUyM4LsYPkAI8LPZNWEm
-	UtvRIQFxHgxIDZmgIFzV1YUHHv9Q9bvUmTGykBWMZWjoJO2sMPgBRhgT93RbcCN/p2GCc9fNmheb/
-	s7YwW+mpvjVMeCLme28lGfmowgKsTU1vC18Ft5tCJB/zkRHRXG512jWfcQyl2j4zUsgjOm798/qYR
-	r3QsO2Ug==;
-Received: from ip6-localhost ([::1]:55764 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
+	bh=+/UCn+YdR1yc5sU8jNC/7zreG+9EhOjDlvxVOvQwqNI=; b=boLJ62LK57z/BMyZWQ2AwvnJQh
+	HKPcBZMDoWxlKEhHB+iOoQxI7B5YtTRddUTx9MW+tnUHXU2UDDHCjB83Z1W956JjUVVkkc4BfEywJ
+	daqRTHdcpv9fp22Gdc8sNDRIwJLKbvZHDFgqd6lGQusDTlnwHd5D3kYuZfmyn9hWqDLP82vTzWoYC
+	nmgwhWd0/B9gNeFLiAB7xPguboT1KPtMJTJ5H9v77TgSXvc4qGhf3mEsK90N4Vzi1vddpIElKNQ6D
+	AvYZOqh6j5o8DqmlfbbXiCFgXKptdpBzgm8V/bEEm7sEnQyChNjx5O9UjLsBnCDXd9JYbvDwJP/Ne
+	2BXpdvcw==;
+Received: from ip6-localhost ([::1]:62612 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1rVbO0-007ILY-8N; Thu, 01 Feb 2024 18:02:04 +0000
-Received: from mail-lf1-x133.google.com ([2a00:1450:4864:20::133]:54600) 
+	id 1rVbzG-007ITk-08; Thu, 01 Feb 2024 18:40:34 +0000
+Received: from plasma4.jpberlin.de ([80.241.57.33]:43587) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1rVbNv-007ILR-NF
- for samba-technical@lists.samba.org; Thu, 01 Feb 2024 18:02:01 +0000
-Received: by mail-lf1-x133.google.com with SMTP id
- 2adb3069b0e04-5112ea89211so1165626e87.1
- for <samba-technical@lists.samba.org>; Thu, 01 Feb 2024 10:01:58 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1706810517; x=1707415317; darn=lists.samba.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=XO6MI34sx7y7sKtG0/owVEIu61lP2sL9c6sYjJfuMnM=;
- b=iVz9E9RT3f+tIKa8WOHt4aEx0V04fZAVp0wxnGk/kH/H2IglA6ZD9Id32DaULH3tsz
- Mwmwi/EP0ZbgOlyrPmEOV/Do2F7+wlwMixph8RS471Mv48Z3YNutuh1/BICaSUVRk8Xe
- Hd4HnlwDUlNbluTqT028FGLrhCw1/qgD/fSx934Uv8Obz2XJ1XVvY5bPYsyg8MV1Ds9i
- TFHBt6mCm7MPktP19uztgwcYEQvvz/GSesx8MSbHWegwKsXJ7sdnEDLjfZW2JMBelC22
- Ht0Ui/NCKxT28jfK4BG60u2flnBqKMQfe/SYvQIgV0kYNkv+4ImVdHawoEBskBSLdeFR
- flkA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706810517; x=1707415317;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=XO6MI34sx7y7sKtG0/owVEIu61lP2sL9c6sYjJfuMnM=;
- b=GV6TEAjN3wzGn9DVW9fsrGYS1u2DVt5c+s0ATefegQUgN54jWpEZVffslkJ14SeoDU
- zBhVHU/b1xkvWIAqmC6sQPpuMw3gQ3af4NKwgl+vndijR59ql8lQyB1dXmdU9Zra/o6X
- O4/NcHwuh3hco+uZvFHrtuzqPp0EVBJ3wenkZigFML5uf1G34B9ozDg1rOylvf77jyLo
- NrkfHUBv++z1TGzstmyNIqxhP9PACtVPypYWIJIjkLhycCo6UX5mg6nrc5/qZIhB8no7
- m3/ARShXHXpxN85jLAa2SaKkisWy2qZr8/wwNhVQNxyjFScLdwMZlPyPqxztHehdcNgR
- JM2w==
-X-Gm-Message-State: AOJu0YzgSxNK2xo7JbiTuItSG1ZWTocSWu6F3Kp4qbwp8b6p+PNZJ04h
- O7v+P6/lPTdvz/YFsSh9cQ1l0DhD2sEUIwTWeXMNZNjXsBUXbcnT9wRynMXi4HeT9j6HlyYvq5o
- LZwjnDvVwQwLm/iYh+xCK/egzC+Q=
-X-Google-Smtp-Source: AGHT+IHuqoNPXgvjEts1kVWihMQu4JBgCDfOEuP3f3vDrRUiz+eDTghA25P/bF2vzA9TqscdoYX0lhuA7pck61vIO68=
-X-Received: by 2002:ac2:4579:0:b0:511:33d4:c99b with SMTP id
- k25-20020ac24579000000b0051133d4c99bmr127913lfm.43.1706810517341; Thu, 01 Feb
- 2024 10:01:57 -0800 (PST)
+ (Exim) id 1rVbz9-007ITc-5Y
+ for samba-technical@lists.samba.org; Thu, 01 Feb 2024 18:40:31 +0000
+Received: from spamfilter02.heinlein-hosting.de
+ (spamfilter02.heinlein-hosting.de [80.241.56.116])
+ by plasma.jpberlin.de (Postfix) with ESMTP id 8BD9CFEEFD;
+ Thu,  1 Feb 2024 19:22:43 +0100 (CET)
+Received: from plasma.jpberlin.de ([80.241.56.68])
+ by spamfilter02.heinlein-hosting.de (spamfilter02.heinlein-hosting.de
+ [80.241.56.116]) (amavisd-new, port 10030)
+ with ESMTP id 3CuCcfacJAUk; Thu,  1 Feb 2024 19:22:42 +0100 (CET)
+Received: from [192.168.123.203] (p5b2400db.dip0.t-ipconnect.de [91.36.0.219])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (Client did not present a certificate)
+ (Authenticated sender: stefan@kania-online.de)
+ by plasma.jpberlin.de (Postfix) with ESMTPSA id E2A07FEA08
+ for <samba-technical@lists.samba.org>; Thu,  1 Feb 2024 19:22:41 +0100 (CET)
+Message-ID: <14cf1029-2378-489d-bf9b-844ed9d67081@kania-online.de>
+Date: Thu, 1 Feb 2024 19:22:38 +0100
 MIME-Version: 1.0
-References: <2c310e00-84ac-49d7-88f4-e742d9170088@lrose.de>
-In-Reply-To: <2c310e00-84ac-49d7-88f4-e742d9170088@lrose.de>
-Date: Thu, 1 Feb 2024 12:01:45 -0600
-Message-ID: <CAH2r5muS+w+pv-32pYhui7yyvitdmCgbkfZdmbTyo3ffOHKpqA@mail.gmail.com>
-Subject: Re: State of unix extensions and symlink support
-To: LuKaRo <lists@lrose.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+To: samba-technical@lists.samba.org
+Content-Language: de-DE, en-US
+Subject: Question for time based group membership in FL 2016
+Content-Type: multipart/signed; protocol="application/pkcs7-signature";
+ micalg=sha-256; boundary="------------ms020101040302030202010506"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -76,43 +56,126 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
-Cc: Paulo Alcantara <pc@manguebit.com>, CIFS <linux-cifs@vger.kernel.org>,
- samba-technical@lists.samba.org
+From: Stefan Kania via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Stefan Kania <stefan@kania-online.de>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-To clarify, are you asking about symlinks that appear as symlinks both
-to the client and the server?
+This is a cryptographically signed message in MIME format.
 
-There are many cases where emulated symlinks (that appear as symlinks
-to the client, but expose no security risk on the server as they are
-emulated) - "mfysmlinks" (also what the Mac client uses) are preferred
-to enable.   The Linux client has this mount option so that symlinks
-can be emulated without requiring the server to support reparse points
-(see Paulo's recent patches for example) which are common for Windows
-for symlinks or without requiring the SMB3.1.1 Unix Extensions.
+--------------ms020101040302030202010506
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Thu, Feb 1, 2024 at 10:17=E2=80=AFAM LuKaRo via samba-technical
-<samba-technical@lists.samba.org> wrote:
->
-> Hi everyone,
->
-> is it possible to create symbolic links using the Linux cifs client
-> within a Samba share on a Linux server? Or is that entirely not possible
-> at the moment? I have read that smb3 unix extensions are part of Samba
-> 4.18, but only when compiling in developer mode?
->
-> Thanks for anyone who can shed some light in this regard,
->
-> Lukaro
->
->
+Hi to all,
+
+I already posted the question in the samba-mailinlist but I think it's 
+more a question for developers :-)
+
+I have a question about FL 2016 and if samba supports it. If yes, how 
+can I use it without powershell.
+
+In FL 2016 there is the possibility to put a user into a group and the 
+membership is time based. So I could put the user Foo into the group 
+'domain admins' for 30 minutes and after 30 minutes the system will 
+remove user foo from the group.
+
+But to activated this feature you have to give a powershell command:
+----------------
+Enable-ADOptionalFeature "Privileged Access Management Feature" -Scope 
+ForestOrConfigurationSet -Target example.net"
+-----------------
+
+This feature once enabled can't be disabled anymore
+
+Then I could add a user to a group:
+---------------
+Add-ADGroupMember -Identity "Domain Admins" -Members "Foo" 
+-MemberTimeToLive (New-TimeSpan -Minutes 30)
+---------------
+
+After 30 minutes Foo will be removed automatically.
+
+But if this feature is supported by samba 4.19 or 4.20 with FL 2016 
+activated, how could I set this?
+
+I try it with powershell for Linux, but the powershell for Linux is not 
+supporting AD-commands.
 
 
---=20
-Thanks,
+Stefan
 
-Steve
+
+--------------ms020101040302030202010506
+Content-Type: application/pkcs7-signature; name="smime.p7s"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="smime.p7s"
+Content-Description: Kryptografische S/MIME-Signatur
+
+MIAGCSqGSIb3DQEHAqCAMIACAQExDzANBglghkgBZQMEAgEFADCABgkqhkiG9w0BBwEAAKCC
+CdEwggSUMIIDfKADAgECAghxU09cSz6R1TANBgkqhkiG9w0BAQsFADBmMQswCQYDVQQGEwJE
+RTEzMDEGA1UECgwqREdOIERldXRzY2hlcyBHZXN1bmRoZWl0c25ldHogU2VydmljZSBHbWJI
+MSIwIAYDVQQDDBlkZ25zZXJ2aWNlIENBIDIgVHlwZSBFOlBOMB4XDTIzMDkyNTE4MDgzNVoX
+DTI0MDkyNDE4MDgzNVowbjELMAkGA1UEBhMCREUxITAfBgNVBAUTGDQwMDAwMDAwNjUxMWNm
+MDEzNmYxMWEwNDEVMBMGA1UEAwwMU3RlZmFuIEthbmlhMSUwIwYJKoZIhvcNAQkBFhZzdGVm
+YW5Aa2FuaWEtb25saW5lLmRlMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA1ULY
+84oACo6tokvBGHFH3ZqqbpFN09v3A+iqQRRy3N4PfYPPPn2Br4Xun5HhTDbXnppqxxzRh8xw
+tV6TZhuRfa2rOaNfloKJCUgvBcTc+AGCSED0GR/HG8KDqUarhczOSpVagbTeFMfr2rmVj9Mr
+B6KXoQnXcspUKZhllAOmluGJgZ96jaKclZb54/0Z7HOqUtLOCyBQjhB4WHPHCmMfmoBWWnll
+NCh5ArWxAq2oy3qh3vD41YcFCWfwsbhWu6H7i+DctxX1d2s4Yb8AGcVotY5QM4Ihfs83Axez
+nrfnM0DcyJxEyAYEy/NCcNVbnKiBxEc6bOHcOBfNBCk0gfxU8wIDAQABo4IBPDCCATgwHQYD
+VR0OBBYEFJ24mZ9+WXalRwYFaJEOZPfMjOiyMAwGA1UdEwEB/wQCMAAwHwYDVR0jBBgwFoAU
+6caT0dUPBmRy6mqWProQ8lRUsnkwVgYDVR0gBE8wTTBLBgwrBgEEAfsrAgEDAggwOzA5Bggr
+BgEFBQcCARYtaHR0cDovL3NlYzUuZGduc2VydmljZS5kZS9wb2xpY2llcy9pbmRleC5odG1s
+MD4GA1UdHwQ3MDUwM6AxoC+GLWh0dHA6Ly9zZWM1LmRnbnNlcnZpY2UuZGUvY3JsL2NybDIt
+dHlwZS1lLmNybDAOBgNVHQ8BAf8EBAMCBLAwHQYDVR0lBBYwFAYIKwYBBQUHAwIGCCsGAQUF
+BwMEMCEGA1UdEQQaMBiBFnN0ZWZhbkBrYW5pYS1vbmxpbmUuZGUwDQYJKoZIhvcNAQELBQAD
+ggEBADibCeP+7VM75NQfZByrA0oDOPQy1kwPtnBUqX4SZuCTIiM27NZDgYry1KJS+QuKbNmd
+3OirBVqls4rYFTk24qH+5CIstJKrxY+TMHnGk9KpsVVDplw+EyE79khhcAMrbS03WsRZiBd/
+Uk7W5cvfkrTlCIjLzhwvDBqea4+bRTbi8T63LtNHhOgaj7g3+J1xM/wVgVlobSXoXk69+8ZL
+1RG3on3r+1EmJpvCPJsL0BfUTia547lW4ectUBOrQ9eEri2eb+MW1QyileHPXv6OS465uN/b
+2kqY39wo95YEWmWRRZDsiKAqkuY/Qfx7FsodvAQo8kzCsyruNaZB5q6eqZIwggU1MIIEHaAD
+AgECAghVHErXZq0l9jANBgkqhkiG9w0BAQsFADBhMQswCQYDVQQGEwJERTEzMDEGA1UECgwq
+REdOIERldXRzY2hlcyBHZXN1bmRoZWl0c25ldHogU2VydmljZSBHbWJIMR0wGwYDVQQDDBRk
+Z25zZXJ2aWNlIFJvb3QgNzpQTjAeFw0xNjEwMjYwOTIyNDFaFw0yNDEwMjYwOTIyNDFaMGYx
+CzAJBgNVBAYTAkRFMTMwMQYDVQQKDCpER04gRGV1dHNjaGVzIEdlc3VuZGhlaXRzbmV0eiBT
+ZXJ2aWNlIEdtYkgxIjAgBgNVBAMMGWRnbnNlcnZpY2UgQ0EgMiBUeXBlIEU6UE4wggEiMA0G
+CSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDcpfKUP3THo0fSl2bOa6PNbRcDYZaE4ZV3vLGr
+e/U445OsRahORPeP/9L4nycTK6fUawpDTqOaDxtXYxjoJNC9LnKRxVB/UkBf0h25vN0L1iV4
+KhCaY8TimV0z2yUSlb2NuZ4gdBU69qJkasqYj+AP8OcQOo0idj9Nr1eloHD32i0JDPkhBj8V
+f6c6b7mNyn8yfZYvZlzzV2iQ/cvo6iFLx2wgG7mCkOZ8BAHGDFw6T0UIA0Bk60YhRMRxI7GX
+jMxBQA2Y/XXoP4dvQDDtMNmK0r5DUXof87w2brXctuQ2b4xNwFIErVoAQu8ftnXTm9iOtaOs
+WyLMZX6v5szaQBqBAgMBAAGjggHqMIIB5jASBgNVHRMBAf8ECDAGAQH/AgEAMB8GA1UdIwQY
+MBaAFAEMFht0ctM8FO4md7dJFFPY+4sbMFsGCCsGAQUFBwEBBE8wTTBLBggrBgEFBQcwAYY/
+aHR0cDovL3JvY3NwLWRnbi5kZ25zZXJ2aWNlLmRlOjgwODAvZWpiY2EvcHVibGljd2ViL3N0
+YXR1cy9vY3NwMGoGA1UdIARjMGEwXwYMKwYBBAH7KwIBBAIBME8wTQYIKwYBBQUHAgEWQWh0
+dHA6Ly93d3cuZGduc2VydmljZS5kZS90cnVzdGNlbnRlci9wdWJsaWMvZGduc2VydmljZS9p
+bmRleC5odG1sMIGZBgNVHR8EgZEwgY4wgYuggYiggYWGgYJsZGFwOi8vbGRhcC5kZ25zZXJ2
+aWNlLmRlOjM4OS9DTj1DUkwtMSxPPURHTiUyMFNlcnZpY2UlMjBHbWJILEM9REU/Y2VydGlm
+aWNhdGVSZXZvY2F0aW9uTGlzdD9iYXNlP29iamVjdENsYXNzPWNSTERpc3RyaWJ1dGlvblBv
+aW50MB0GA1UdDgQWBBTpxpPR1Q8GZHLqapY+uhDyVFSyeTAOBgNVHQ8BAf8EBAMCAQYwGwYJ
+KwYBBAHAbQMFBA4wDAYKKwYBBAHAbQMFATANBgkqhkiG9w0BAQsFAAOCAQEAq7w5+kXJ+/xT
+at0jiTX4GDX5HUeQohqAuLGfotHcqQqqjF8G6UUI0q4i0tnhHtldhZrNBOErgThGsToNZ1Y2
+Gn0FRrcrUU9LnhSMwd1XJ0Je6ERSdEh4vXf8YxJQGZJPCPJcrblhue0mmwO9nbhKewGglht5
+VWSHTS8vq5Da3zbxFG6lIdE62V4KqcMAiyY2BfL8guCPscTWl5txJrjb4ENo9nRqdzsXNEG3
+yyzgmyv6znQ4pGgTe5E6qXx5bO6XCDoUK4Kz1S82PzR6hvcxKZo7kKK2ut2B3buwU8xqfw73
+EMH8imv4LW/Sx59wKElKjijjHdNrFG/wMRobDYzMyTGCA4IwggN+AgEBMHIwZjELMAkGA1UE
+BhMCREUxMzAxBgNVBAoMKkRHTiBEZXV0c2NoZXMgR2VzdW5kaGVpdHNuZXR6IFNlcnZpY2Ug
+R21iSDEiMCAGA1UEAwwZZGduc2VydmljZSBDQSAyIFR5cGUgRTpQTgIIcVNPXEs+kdUwDQYJ
+YIZIAWUDBAIBBQCgggHhMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkF
+MQ8XDTI0MDIwMTE4MjIzOFowLwYJKoZIhvcNAQkEMSIEIB1ZHHbfdEGAm5qD0NvVcgNTUql7
+aU84TPKXydwRnxf9MGwGCSqGSIb3DQEJDzFfMF0wCwYJYIZIAWUDBAEqMAsGCWCGSAFlAwQB
+AjAKBggqhkiG9w0DBzAOBggqhkiG9w0DAgICAIAwDQYIKoZIhvcNAwICAUAwBwYFKw4DAgcw
+DQYIKoZIhvcNAwICASgwgYEGCSsGAQQBgjcQBDF0MHIwZjELMAkGA1UEBhMCREUxMzAxBgNV
+BAoMKkRHTiBEZXV0c2NoZXMgR2VzdW5kaGVpdHNuZXR6IFNlcnZpY2UgR21iSDEiMCAGA1UE
+AwwZZGduc2VydmljZSBDQSAyIFR5cGUgRTpQTgIIcVNPXEs+kdUwgYMGCyqGSIb3DQEJEAIL
+MXSgcjBmMQswCQYDVQQGEwJERTEzMDEGA1UECgwqREdOIERldXRzY2hlcyBHZXN1bmRoZWl0
+c25ldHogU2VydmljZSBHbWJIMSIwIAYDVQQDDBlkZ25zZXJ2aWNlIENBIDIgVHlwZSBFOlBO
+AghxU09cSz6R1TANBgkqhkiG9w0BAQEFAASCAQDKTmUVQ8RJYJnBLuL8tEMb6A5oLaI9japv
+bsRVCdn0dlj6zIU6GPAt94NY/wqDsctKLa7VTk6JzTyaCOSxvsjtJPi9f39tLWgyMVsz5TwU
+ZL3ZVZSHrZ55D36ai2YozZxe8XOrJBeJIhwo0iGWDVtClBK2S5MYYePqTlSVTKJzrkYhB7UL
+HpwHvJcC2cJWtTiBmavgb/0MvrY/1CwyAzDGKn/Kmp094Ca/oEh8WwZhcwLzcYMOvtesh58F
+h8fnk0HySI0tXeGUG2ui24MWIfvw9UcgaSPVF1nAhlBxZQ4VeQ3N0RBOXbpfTrxrEee6R7wg
+sJzj5hSUIDtN6mi+sXueAAAAAAAA
+--------------ms020101040302030202010506--
 
