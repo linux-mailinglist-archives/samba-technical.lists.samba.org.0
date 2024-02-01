@@ -2,47 +2,47 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 75D39844942
-	for <lists+samba-technical@lfdr.de>; Wed, 31 Jan 2024 21:57:21 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 913CC845A1F
+	for <lists+samba-technical@lfdr.de>; Thu,  1 Feb 2024 15:23:24 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
-	bh=aRpN/YZxkvA/36ExP6HIIzPLjMZXPoilH+2Yqt5+J7g=; b=gcPbemhCnz10GcJVyki1mx5TwT
-	Vr0kNQf0LQ36tXG0kuGREh4d84TVboReFWrglZMGXGb4MMXA4e5SztLfd1O2GX+uYEGH30JWKZCPD
-	rnZihF3l3PqGV3Cne1j6GwRe84dWG8Lb9Iuoeqcgx6DIPwhENbdvc+iUvbHQ/hLsMDCNrjiDD3zK+
-	Sc2Yt7Mjuuu2fyMopucGzX1n/Ck8W8x/rLpPFi4WANtHOFWisSPn2ZvJ8RUqjoBwEEmiLR2snGbii
-	B3VS+yhshRHFbSdoXholCYje7ukIWQcedJC0XWPoOcbAovmP075vnHRScmciaYPxAW3rs3HfnQwoQ
-	yZI4HkbQ==;
-Received: from ip6-localhost ([::1]:38222 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=2fvjqI9kSOJTgoKK0SKf9zUYhnsrfT10U7ENfrwg0KM=; b=WZexzH9CVg/DSn2ZLRYRSo5JVB
+	fJpTHBMNeJSB35aip++YlugKrRj/4x8eu3Flbo3jP4+o92aIG2t6+iPHU6v3G5+iDlp9KFR6cvrmO
+	0odhSQTPA/BkjArieCDPsEhCIpJ+E2gLD+7ZhMTzowUqA3hIAIIQgjczMDORNrJjiNDTH88gvf0AX
+	6uLhC7zNHnbQ3BYj0TekRNPPFqwW1QpqjEBd7GVy7LMzb58VQAwS69jpb2XN72UVOks0hscdSf5PG
+	62G2HmlHMlM+mGJjEfsRwn26oeG50SqjuVUUBVsJB+gPbtgwNxmh3jfxkm45WXTv+ReT7mnvO011s
+	DdI4i2tQ==;
+Received: from ip6-localhost ([::1]:62914 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1rVHdh-005KzD-HX; Wed, 31 Jan 2024 20:56:57 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:16312) 
+	id 1rVXxq-007Gl6-AP; Thu, 01 Feb 2024 14:22:50 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:54452) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1rVHdY-005KyX-CX; Wed, 31 Jan 2024 20:56:51 +0000
+ (Exim) id 1rVXxl-007Gky-46
+ for samba-technical@lists.samba.org; Thu, 01 Feb 2024 14:22:47 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=From:To:Date:Message-ID:CC;
- bh=aRpN/YZxkvA/36ExP6HIIzPLjMZXPoilH+2Yqt5+J7g=; b=2kOQLqwn/0wGUbE5CJ+kGEbRQO
- Xyfo+6fsHX1xeN3HUplEmfn0WdM4+hVPq3BKb9U1ZG27lemXFBqljoS9fjh/xJ9w40z04v0T2gOiR
- We5fzp9bmzgx/9I2oO+yEJSXqYaAeVMUUdILjqmXss3L+2+it+EJI6nMLz4h0fjwVqUtUu6m/ZZMD
- 9CjbZ2hV4czuMv7+w6UvVGnhgLLtQ7QM64SLU3mQVPd6qS97HDtX5fQdN3WxADETMRe2DuEhyzw0G
- Pr3ocWJvyFuBEtXs+hWc5AXyXtmNSlfpSdwYb9xxcCOA2aSScykQ0GvwY7EKym5WhrexzM4JFWqHj
- Jit4t4Jaxe/gYwu1DwUTJzQxVpeiVD0LbNbVIQUOQCLDOPAukexvRr0HnqROdUTP5Ahtcd55TIiyD
- OUI94ERQDMHFozjCcPwRvYz3SQhPmHER5JBmHB+3rXURHJZjXOoTOlVbctghv5KOJQgLePH5J+sF5
- oQfe1nwZwFwovLYIx0ffkuIb;
+ s=42; h=Message-ID:Date:Cc:To:From;
+ bh=2fvjqI9kSOJTgoKK0SKf9zUYhnsrfT10U7ENfrwg0KM=; b=QWFoyYyE0PIj5Bzn7OsT2Qo5GR
+ SuURwENz+vCku5F71zUmJ1O171hhOtNRVRwXPv0OAGJSdViUCv8H//Aqr64ow3wkAOUoAND4DZgTY
+ r2IQKGHOjUqg5EvyDqj6nWdobpDGxRDc2tyzuAG1WoN74AjaS8w1npCzz+JLiJDS2pZsx99Rfrd9X
+ opmKwYNVaSFZg0tFhlbUKsomb+TZrMQly01u4aUGCNQXvrbZh7f5fLPjAQYzC8+OBksBu5hBt9Tz1
+ gr5i/apyd8dUTQbHboGRXw39e7lPv3D+NhMOSzWrNSFZKhC71rFXpqVXUGjEoSW7gg6s3gk7MQNmp
+ qODi6FEPDG9jvgS9R/xak0O+kjQgWpZM7kN43dSQW9tN8AIafqdVNYCFIFO6HNMfgEZCuRpdCUnxG
+ 1dUIbnfDzZ2qpyz6ba9h81HQ0/Y1gjq9TNhFdBvxwqxTx78EkWCW0rs0M1IeW2W1+1fX8lkCUzPN9
+ ns8VSmWVcWspPtTVGA8GwTxD;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1rVHdX-00At3M-2Y; Wed, 31 Jan 2024 20:56:47 +0000
-Message-ID: <d7bf09c9-b83e-46c6-8c41-1adc4ca31ef6@samba.org>
-Date: Wed, 31 Jan 2024 21:56:45 +0100
+ (Exim) id 1rVXxh-00B1uT-2p; Thu, 01 Feb 2024 14:22:41 +0000
+To: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
+Subject: Re: Looking to once again re-bundle LDB
+Date: Thu, 01 Feb 2024 15:22:41 +0100
+Message-ID: <2272182.vFx2qVVIhK@magrathea>
+In-Reply-To: <7fb8e63cdc9de2c284cffc792c458df3b017c392.camel@samba.org>
+References: <7fb8e63cdc9de2c284cffc792c458df3b017c392.camel@samba.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: de-DE
-To: samba-announce@lists.samba.org, samba@lists.samba.org,
- samba-technical@lists.samba.org
-Subject: [Announce] Samba 4.18.10 Available for Download
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -56,112 +56,56 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jule Anger via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jule Anger <janger@samba.org>
+From: Andreas Schneider via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andreas Schneider <asn@samba.org>
+Cc: Andrew Bartlett <abartlet@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Release Announcements
----------------------
+On Tuesday, 5 December 2023 04:47:56 CET Andrew Bartlett via samba-technical 
+wrote:
+> Just a heads up that I'm still keen to reduce the burden of an LDB
+> release at Samba security release time.
+> 
+> The rough consensus at the end of
+> https://gitlab.com/samba-team/samba/-/merge_requests/374 seems to be to
+> make ldb:
+>  - for public consumers behave like any other Samba public library (eg
+> libwbclient), by removing the independent tarball and build system.
 
-This is the latest stable release of the Samba 4.18 release series.
+If it is done that way I'm fine with moving it back to Samba and do release it 
+with Samba releases.
 
+>  - for Samba builds by default, to install ldb as a private library.
+> 
+> The version numbers would remain, but could then diverge between ldb
+> and pyldb-util for example (they would no longer be the tarball number,
+> so would move just like other SO numbers do).
+> 
+> We would change the ldb modules dir to have the version string in it,
+> so that modules are not installed for the wrong version.
 
-Changes since 4.18.9
---------------------
+Sounds good.
 
-o  Ralph Boehme <slow@samba.org>
-    * BUG 13688: Windows 2016 fails to restore previous version of a 
-file from a
-      shadow_copy2 snapshot.
-    * BUG 15549: Symlinks on AIX are broken in 4.19 (and a few version 
-before
-      that).
+> My current motivation comes from working on a pyldb change that would
+> change pyldb-util, but also a long-running desire to make this simpler.
+> 
+> Debian currently has this patch:
+> https://sources.debian.org/src/samba/2%3A4.19.3%2Bdfsg-1/debian/patches/Forc
+> e-LDB-as-standalone.patch/
+> 
+> This makes Samba public libldb as a public library, but from the main
+> Samba build, so that the ldb build system is no longer used.
 
-o  Samuel Cabrero <scabrero@samba.org>
-    * BUG 13577: net changesecretpw cannot set the machine account 
-password if
-      secrets.tdb is empty.
-
-o  Bjoern Jacke <bj@sernet.de>
-    * BUG 12421: Fake directory create times has no effect.
-
-o  Björn Jacke <bjacke@samba.org>
-    * BUG 15540: For generating doc, take, if defined, env 
-XML_CATALOG_FILES.
-    * BUG 15541: Trivial C typo in nsswitch/winbind_nss_netbsd.c.
-    * BUG 15542: vfs_linux_xfs is incorrectly named.
-    * BUG 15550: ctime mixed up with mtime by smbd.
-
-o  Volker Lendecke <vl@samba.org>
-    * BUG 15523: ctdb RELEASE_IP causes a crash in release_ip if a 
-connection to
-      a non-public address disconnects first.
-    * BUG 15544: shadow_copy2 broken when current fileset's directories are
-      removed.
-
-o  Stefan Metzmacher <metze@samba.org>
-    * BUG 15523: ctdb RELEASE_IP causes a crash in release_ip if a 
-connection to
-      a non-public address disconnects first.
-    * BUG 15534: smbd does not detect ctdb public ipv6 addresses for 
-multichannel
-      exclusion.
-
-o  Martin Schwenke <mschwenke@ddn.com>
-    * BUG 15523: ctdb RELEASE_IP causes a crash in release_ip if a 
-connection to
-      a non-public address disconnects first.
-
-o  Shachar Sharon <ssharon@redhat.com>
-    * BUG 15440: Unable to copy and write files from clients to Ceph 
-cluster via
-      SMB Linux gateway with Ceph VFS module.
-
-o  Jones Syue <jonessyue@qnap.com>
-    * BUG 15547: Multichannel refresh network information.
-    * BUG 15555: smbpasswd reset permissions only if not 0600.
+Fine by me.
 
 
-#######################################
-Reporting bugs & Development Discussion
-#######################################
+	Andreas
 
-Please discuss this release on the samba-technical mailing list or by
-joining the #samba-technical:matrix.org matrix room, or
-#samba-technical IRC channel on irc.libera.chat.
-
-If you do report problems then please try to send high quality
-feedback. If you don't provide vital information to help us track down
-the problem then you will probably be ignored.  All bug reports should
-be filed under the Samba 4.1 and newer product in the project's Bugzilla
-database (https://bugzilla.samba.org/).
+-- 
+Andreas Schneider                      asn@samba.org
+Samba Team                             www.samba.org
+GPG-ID:     8DFF53E18F2ABC8D8F3C92237EE0FC4DCC014E3D
 
 
-======================================================================
-== Our Code, Our Bugs, Our Responsibility.
-== The Samba Team
-======================================================================
-
-
-
-================
-Download Details
-================
-
-The uncompressed tarballs and patch files have been signed
-using GnuPG (ID AA99442FB680B620).  The source code can be downloaded
-from:
-
-         https://download.samba.org/pub/samba/stable/
-
-The release notes are available online at:
-
-         https://www.samba.org/samba/history/samba-4.18.10.html
-
-Our Code, Our Bugs, Our Responsibility.
-(https://bugzilla.samba.org/)
-
-                         --Enjoy
-                         The Samba Team
 
