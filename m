@@ -2,51 +2,77 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9E1CA846BA5
-	for <lists+samba-technical@lfdr.de>; Fri,  2 Feb 2024 10:15:30 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 580A4846C46
+	for <lists+samba-technical@lfdr.de>; Fri,  2 Feb 2024 10:39:33 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=2Evd7rmUYJTrGnpEeBliNTjRMhTeJTsRoU6A5TDvqso=; b=XbhUyBOTkVXJqIV3cvQa7Sw6Th
-	tMGdW5b7jOH9YHDmZGRwtXZFa5HYmLQS0IzN6dMf8TccAUGABk3d/fXTHfMFJsY3FJEWGTKW8qKIX
-	sEr/k0irC65Um6gCdSnRZu/INN766Xpy0BK/eWWQvOFbluFrc7JjCqKiD4oFicGaZCGQbUOroQBQW
-	zzNERUM/E6/sjEQ+MoB5+nsugIk9AIyWwyXp9aO2V56P9LydStf1Z1FqSOYn5zhzoFsuXFGF0K08W
-	wDjSb2Jkqf25CMkiuM4tRz1eqOBz3Fs/NB8mfcFzyqpEp/ChHHLya5cph9Qb2BtnQGK3TUwlyhWin
-	n+/3RkrA==;
-Received: from ip6-localhost ([::1]:35686 helo=hr1.samba.org) 
+	bh=wHJ0ZbfgWEHJkmk/qXr9UNf442Dbd6DzpxutUc/KgHU=; b=0OKIMdzb+vKSHmw4zF0YRTYIqK
+	yXUBhFAIxogZ9K7EmmS3w69L6W0Z1qbKHT+hnYARdsGQapB8++U3P0DqxpZJcv6ZWxTX4ccRPuQlf
+	1AEYdoV/l31qyKk/ybN62L3Dn/NpRChSdbP1c6h6Ry/P0pAA9g7jjDKPkikgufSTenOT0hbJO95Jz
+	R/bHgsgWHzXkkdzqkow19KXNRJei9Z+rNqvcNJjFOcxevxpD08ahhCJoUhquE0yfiqe9z/7Yg4jZf
+	dhBjES27TxVm1Ep3ZM8JFdRG44rWAuKBt81/hRa7fldWvoCyfBAHD8ZevD0z8YGjYGN/2RhNNrJfv
+	0n0zdfiQ==;
+Received: from ip6-localhost ([::1]:29352 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1rVpdd-007LEO-9Q; Fri, 02 Feb 2024 09:15:09 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:34368) 
+	id 1rVq0o-007LLN-CZ; Fri, 02 Feb 2024 09:39:06 +0000
+Received: from mail-ej1-x634.google.com ([2a00:1450:4864:20::634]:59666) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1rVpdZ-007LEH-6S
- for samba-technical@lists.samba.org; Fri, 02 Feb 2024 09:15:07 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=From:To:Date:Message-ID:CC;
- bh=2Evd7rmUYJTrGnpEeBliNTjRMhTeJTsRoU6A5TDvqso=; b=lJMYjuk/Ufx0BOrGHzajScWRYW
- X+oiygE6wwfWIS77nJddtCCd5hYpYahhn20oD2vVYsbOMMjrFZtZu+YqvuJU1thv3wWLr0g9vhhLv
- wH89NUrtC3rmSRbvFd51xoZ52JGWT+9i5M/j+GoR+67kMIPXhecA5ohI+OT5CXCl/woZFlrQBj7me
- XhuLJ40Yn6dHMSi/jG2rAbTFwv/wmoWSAhHsq9tThkAeeBDI1PmGU853V0gKIHtzrGnKQzWTQSdbX
- a+nYzOcV2n9N20Dy+q3kfjKPSOjKfkjC31TknIZiwmqxmNw+vsYa2DVZYjojq6c8461ImeOHgR+Vm
- 7nPbmFpKPAtwTmdBFQTOM7RSU0hls3cAZOZBP/qdoTG56xuD0ALMCyJxRfcWRrWxQoRxCZJ54guVV
- uYJ4trUYzf/c39XECPFIviXwaWjScb2LpTr7dfN5ArJGXwXQ42D54k9/LswuqFy60X6FKyk3XSV+I
- fNmR6MB4Md6Aoa996p1Iqr8E;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1rVpdX-00BAJP-1v; Fri, 02 Feb 2024 09:15:03 +0000
-Message-ID: <e677de75-1ef5-4185-abb7-d29285ee7861@samba.org>
-Date: Fri, 2 Feb 2024 10:15:03 +0100
+ (Exim) id 1rVq0k-007LLG-3S
+ for samba-technical@lists.samba.org; Fri, 02 Feb 2024 09:39:04 +0000
+Received: by mail-ej1-x634.google.com with SMTP id
+ a640c23a62f3a-a363961b96aso248139666b.3
+ for <samba-technical@lists.samba.org>; Fri, 02 Feb 2024 01:39:01 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1706866741; x=1707471541; darn=lists.samba.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:to:subject:user-agent:mime-version:date:message-id:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=wHJ0ZbfgWEHJkmk/qXr9UNf442Dbd6DzpxutUc/KgHU=;
+ b=LGTi1NitRZ8xpvAIR1YOHAIr3lZ7quIVzLJ6rxv8sbv15D2rAPht8HFrePNGfSVSLu
+ IJhdOvzD/bqk+LeIbKDH51b2AI8OEY4cHbJK3pBVWVZ7Z8LyMV/YiYNnhcHNTJnbF13Z
+ tC7dXhkp9hzYl6YbLvqfHDTmHhTjjYzXJ6XGMZWu5H8Ahvk0ir/7GVl6gB01FuDk4b1p
+ qrk1cQerD3jNy0FttbgjYct2HXz8Niu9ESzzqEn4GUSSj1kAbHdnngkMWAaTPGnrte3b
+ /qePWHxqp9UQcNv/1FyP5wrCmDNUBIqnro8Pe/+TPRnAyTpU4eDOctXYEkhAN7RbJj+w
+ jPAA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1706866741; x=1707471541;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=wHJ0ZbfgWEHJkmk/qXr9UNf442Dbd6DzpxutUc/KgHU=;
+ b=Bcl+2W7E4XwrRSGYOYtGokS4jCPdO0OzT1+IyKe6DOiBJWOj3QPBRJ14X3q0oEgFHW
+ JMuG3UuBH4aDHJ4SJpLMAPy8bFRPrVJT1bBjSDpkadxRDoLUMYtvU84iXQMB3XIdV3ev
+ po/xUORYahALqY50qm3xVxJj2jFMRgXGEFD6EuX0xqyNYUJFNcaaEdA6jw6sh34Qqdrc
+ Eg3XXWwzXrVFb9pwgxI/cufKihPyZ/g7kBF+jmXBRCrWkvCRT9Fx4au8dAt/VObacElU
+ Y5LlPxtfNtqkqhYW3kINIeekqY1JHI5ZBV9GV8mQv+4ZoXoA3rVI6ZMPLgDCk2Pz2HcB
+ b7GQ==
+X-Gm-Message-State: AOJu0Yz7WX1KeJXdEKa2O+aK6TQzT6OEr/7vE3QihR4hN/xktN+E1vPd
+ yNTAyWgt7H4DITCo+8N8LMMobwIEkGk4Lzz6jbrdoqcAplp70pfuE8vhUodO
+X-Google-Smtp-Source: AGHT+IEOAl0MSx8DQ2+o3GbRMHby4/QjXM56tJEbpErcm3pO9+e4fnsOmql41/gRK44uDC5qC1JBMw==
+X-Received: by 2002:a17:906:b88e:b0:a36:5c43:1812 with SMTP id
+ hb14-20020a170906b88e00b00a365c431812mr5845004ejb.22.1706866740918; 
+ Fri, 02 Feb 2024 01:39:00 -0800 (PST)
+Received: from [192.168.10.106] ([45.83.235.18])
+ by smtp.gmail.com with ESMTPSA id
+ a27-20020a170906191b00b00a35df307713sm692390eje.161.2024.02.02.01.39.00
+ for <samba-technical@lists.samba.org>
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 02 Feb 2024 01:39:00 -0800 (PST)
+Message-ID: <18a76118-bc8e-4e23-b0b9-b22101958d14@gmail.com>
+Date: Fri, 2 Feb 2024 10:39:00 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: Question for time based group membership in FL 2016
-Content-Language: en-US, de-DE
-To: Douglas Bagnall <douglas.bagnall@catalyst.net.nz>,
- Stefan Kania <stefan@kania-online.de>, samba-technical@lists.samba.org
+To: samba-technical@lists.samba.org
 References: <14cf1029-2378-489d-bf9b-844ed9d67081@kania-online.de>
  <6d845bb3-3348-4025-abec-e749287d7392@catalyst.net.nz>
-In-Reply-To: <6d845bb3-3348-4025-abec-e749287d7392@catalyst.net.nz>
+ <728bedf6-dcf3-4006-b73d-9331db2b8777@gmail.com>
+ <59c38ffb-9ab3-44ef-9c56-2ff12078fd1b@kania-online.de>
+Content-Language: nl
+In-Reply-To: <59c38ffb-9ab3-44ef-9c56-2ff12078fd1b@kania-online.de>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,35 +86,38 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Stefan Metzmacher <metze@samba.org>
+From: Kees van Vloten via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Kees van Vloten <keesvanvloten@gmail.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Am 01.02.24 um 21:38 schrieb Douglas Bagnall via samba-technical:
-> On 2/02/24 07:22, Stefan Kania via samba-technical wrote:
->> Hi to all,
->>
->> I already posted the question in the samba-mailinlist but I think it's more a question for developers :-)
->>
->> I have a question about FL 2016 and if samba supports it. If yes, how can I use it without powershell.
->>
->> In FL 2016 there is the possibility to put a user into a group and the membership is time based. So I could put the user Foo into the group 'domain admins' for 30 minutes 
->> and after 30 minutes the system will remove user foo from the group.
-> 
-> That sounds good. We don't do that, and we don't call it part of "functional level 2016".
-> 
-> The things that count as "functional level" are listed here:
-> 
-> https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/active-directory-functional-levels
-> 
-> They are protocol level things -- supporting FL2016 means you can properly be a DC in an FL2016 domain.
-> 
-> Temporary memberships is a useful trick that Windows Server 2016 can do, for which FL2016 is necessary, but not sufficient.
 
-I haven't read the whole thread yet, but note that I have wip patches for timed linked attributes in
-https://git.samba.org/?p=metze/samba/wip.git;a=shortlog;h=refs/heads/master-drsuapi
+On 02-02-2024 09:44, Stefan Kania via samba-technical wrote:
+> Hi Kees,
+>
+> I will take a look at it, maybe I can get some input from it :-). My 
+> problem is not to set an attribute an a conjob to find users and 
+> remove them from a group. That's something I managed already I added a 
+> new attribute to cn=user put the time in unix-format + 3600  in this 
+> attribute and check with a conjob every 5 minutes. If time expires I 
+> remove the user from the group. BUT the DCs are located in different 
+> timezone, that's the point where it geting tricky :-)
+Why don't you use LDAP time?
 
-metze
+That is the same everywhere (and more logical to use in an ldap 
+attribute) and it's not too hard to convert it to unix-time:
 
+unix_timestamp=($ldap_timestamp/10000000)-11644473600
+
+- Kees.
+
+> Stefan
+>
+> Am 01.02.24 um 22:16 schrieb Kees van Vloten via samba-technical:
+>>
+>> I have created a kind similar implementation called auto-lock, where 
+>> (admin-)users that member of the "autolock" group automatically get 
+>> disabled at midnight every day 
+>> (https://github.com/kvvloten/samba_integrations/tree/main/domain_controller/manage_scripts#disable-special-users-daily)
+>
 
