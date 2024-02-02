@@ -2,52 +2,51 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id F00FC846B05
-	for <lists+samba-technical@lfdr.de>; Fri,  2 Feb 2024 09:44:56 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9E1CA846BA5
+	for <lists+samba-technical@lfdr.de>; Fri,  2 Feb 2024 10:15:30 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=AxsYliHcXT57KNG6J5bg5A5B8lG3D9gpqQf+qHhB3aY=; b=43RJV2o/H5G/2ASiSTMezrIWLU
-	YQuWp5rHVtIMDHZuhX7R8GOzHZBVnkIg+1xR6mqxsa6Vw8fWq0ML31Q8p9fR3AyY36EoJlq7nP/KQ
-	uT72giy6AkYJKCJ48Cpmk4u39xaTj+a2PpCUszB8wC6s4lBO2kT31vyVdLusfpFMRygOt04hDU8fQ
-	afHAMpHhhMTRmI0AMUSUNZKFlJUx4DqMsLQSOeLAZqRKu4TA8KxyKu8xP38VYndup8UM0efL3RU2W
-	bFrf1TYUkaASl31Y/e2XQ4brKdElBFuW78qjkTkrFoy//Fremc7mo2WjocmysYO8TN5ORXJIZ/nEc
-	cNUtZkNg==;
-Received: from ip6-localhost ([::1]:34430 helo=hr1.samba.org) 
+	bh=2Evd7rmUYJTrGnpEeBliNTjRMhTeJTsRoU6A5TDvqso=; b=XbhUyBOTkVXJqIV3cvQa7Sw6Th
+	tMGdW5b7jOH9YHDmZGRwtXZFa5HYmLQS0IzN6dMf8TccAUGABk3d/fXTHfMFJsY3FJEWGTKW8qKIX
+	sEr/k0irC65Um6gCdSnRZu/INN766Xpy0BK/eWWQvOFbluFrc7JjCqKiD4oFicGaZCGQbUOroQBQW
+	zzNERUM/E6/sjEQ+MoB5+nsugIk9AIyWwyXp9aO2V56P9LydStf1Z1FqSOYn5zhzoFsuXFGF0K08W
+	wDjSb2Jkqf25CMkiuM4tRz1eqOBz3Fs/NB8mfcFzyqpEp/ChHHLya5cph9Qb2BtnQGK3TUwlyhWin
+	n+/3RkrA==;
+Received: from ip6-localhost ([::1]:35686 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1rVpA8-007L6J-Cb; Fri, 02 Feb 2024 08:44:40 +0000
-Received: from plasma4.jpberlin.de ([80.241.57.33]:54191) 
+	id 1rVpdd-007LEO-9Q; Fri, 02 Feb 2024 09:15:09 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:34368) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1rVpA4-007L6C-Em
- for samba-technical@lists.samba.org; Fri, 02 Feb 2024 08:44:38 +0000
-Received: from spamfilter02.heinlein-hosting.de
- (spamfilter02.heinlein-hosting.de [80.241.56.116])
- by plasma.jpberlin.de (Postfix) with ESMTP id ABEC3FED6F;
- Fri,  2 Feb 2024 09:44:30 +0100 (CET)
-Received: from plasma.jpberlin.de ([80.241.56.68])
- by spamfilter02.heinlein-hosting.de (spamfilter02.heinlein-hosting.de
- [80.241.56.116]) (amavisd-new, port 10030)
- with ESMTP id RaPBTLpZbQna; Fri,  2 Feb 2024 09:44:26 +0100 (CET)
-Received: from [192.168.123.204] (p5b2400db.dip0.t-ipconnect.de [91.36.0.219])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (Client did not present a certificate)
- (Authenticated sender: stefan@kania-online.de)
- by plasma.jpberlin.de (Postfix) with ESMTPSA id 1A142FED76
- for <samba-technical@lists.samba.org>; Fri,  2 Feb 2024 09:44:26 +0100 (CET)
-Message-ID: <59c38ffb-9ab3-44ef-9c56-2ff12078fd1b@kania-online.de>
-Date: Fri, 2 Feb 2024 09:44:20 +0100
+ (Exim) id 1rVpdZ-007LEH-6S
+ for samba-technical@lists.samba.org; Fri, 02 Feb 2024 09:15:07 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=From:To:Date:Message-ID:CC;
+ bh=2Evd7rmUYJTrGnpEeBliNTjRMhTeJTsRoU6A5TDvqso=; b=lJMYjuk/Ufx0BOrGHzajScWRYW
+ X+oiygE6wwfWIS77nJddtCCd5hYpYahhn20oD2vVYsbOMMjrFZtZu+YqvuJU1thv3wWLr0g9vhhLv
+ wH89NUrtC3rmSRbvFd51xoZ52JGWT+9i5M/j+GoR+67kMIPXhecA5ohI+OT5CXCl/woZFlrQBj7me
+ XhuLJ40Yn6dHMSi/jG2rAbTFwv/wmoWSAhHsq9tThkAeeBDI1PmGU853V0gKIHtzrGnKQzWTQSdbX
+ a+nYzOcV2n9N20Dy+q3kfjKPSOjKfkjC31TknIZiwmqxmNw+vsYa2DVZYjojq6c8461ImeOHgR+Vm
+ 7nPbmFpKPAtwTmdBFQTOM7RSU0hls3cAZOZBP/qdoTG56xuD0ALMCyJxRfcWRrWxQoRxCZJ54guVV
+ uYJ4trUYzf/c39XECPFIviXwaWjScb2LpTr7dfN5ArJGXwXQ42D54k9/LswuqFy60X6FKyk3XSV+I
+ fNmR6MB4Md6Aoa996p1Iqr8E;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1rVpdX-00BAJP-1v; Fri, 02 Feb 2024 09:15:03 +0000
+Message-ID: <e677de75-1ef5-4185-abb7-d29285ee7861@samba.org>
+Date: Fri, 2 Feb 2024 10:15:03 +0100
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
 Subject: Re: Question for time based group membership in FL 2016
-To: samba-technical@lists.samba.org
+Content-Language: en-US, de-DE
+To: Douglas Bagnall <douglas.bagnall@catalyst.net.nz>,
+ Stefan Kania <stefan@kania-online.de>, samba-technical@lists.samba.org
 References: <14cf1029-2378-489d-bf9b-844ed9d67081@kania-online.de>
  <6d845bb3-3348-4025-abec-e749287d7392@catalyst.net.nz>
- <728bedf6-dcf3-4006-b73d-9331db2b8777@gmail.com>
-Content-Language: de-DE, en-US
-Organization: Stefan Kania
-In-Reply-To: <728bedf6-dcf3-4006-b73d-9331db2b8777@gmail.com>
-Content-Type: multipart/signed; protocol="application/pkcs7-signature";
- micalg=sha-256; boundary="------------ms070803050003070508010409"
+In-Reply-To: <6d845bb3-3348-4025-abec-e749287d7392@catalyst.net.nz>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -61,121 +60,35 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Stefan Kania via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Stefan Kania <stefan@kania-online.de>
+From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Stefan Metzmacher <metze@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is a cryptographically signed message in MIME format.
-
---------------ms070803050003070508010409
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-
-Hi Kees,
-
-I will take a look at it, maybe I can get some input from it :-). My 
-problem is not to set an attribute an a conjob to find users and remove 
-them from a group. That's something I managed already I added a new 
-attribute to cn=user put the time in unix-format + 3600  in this 
-attribute and check with a conjob every 5 minutes. If time expires I 
-remove the user from the group. BUT the DCs are located in different 
-timezone, that's the point where it geting tricky :-)
-
-Stefan
-
-Am 01.02.24 um 22:16 schrieb Kees van Vloten via samba-technical:
+Am 01.02.24 um 21:38 schrieb Douglas Bagnall via samba-technical:
+> On 2/02/24 07:22, Stefan Kania via samba-technical wrote:
+>> Hi to all,
+>>
+>> I already posted the question in the samba-mailinlist but I think it's more a question for developers :-)
+>>
+>> I have a question about FL 2016 and if samba supports it. If yes, how can I use it without powershell.
+>>
+>> In FL 2016 there is the possibility to put a user into a group and the membership is time based. So I could put the user Foo into the group 'domain admins' for 30 minutes 
+>> and after 30 minutes the system will remove user foo from the group.
 > 
-> I have created a kind similar implementation called auto-lock, where 
-> (admin-)users that member of the "autolock" group automatically get 
-> disabled at midnight every day 
-> (https://github.com/kvvloten/samba_integrations/tree/main/domain_controller/manage_scripts#disable-special-users-daily)
+> That sounds good. We don't do that, and we don't call it part of "functional level 2016".
+> 
+> The things that count as "functional level" are listed here:
+> 
+> https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/active-directory-functional-levels
+> 
+> They are protocol level things -- supporting FL2016 means you can properly be a DC in an FL2016 domain.
+> 
+> Temporary memberships is a useful trick that Windows Server 2016 can do, for which FL2016 is necessary, but not sufficient.
 
--- 
-Stefan Kania
-Landweg 13
-25693 St. Michaelisdonn
+I haven't read the whole thread yet, but note that I have wip patches for timed linked attributes in
+https://git.samba.org/?p=metze/samba/wip.git;a=shortlog;h=refs/heads/master-drsuapi
 
+metze
 
-Signieren jeder E-Mail hilft Spam zu reduzieren und schützt Ihre 
-Privatsphäre. Ein kostenfreies Zertifikat erhalten Sie unter 
-https://www.dgn.de/dgncert/index.html
-Download der root-Zertifikate: https://www.dgn.de/dgncert/downloads.html
-
-Neuer GPG-Key der public key befindet sich im Anhang
-
-
-
---------------ms070803050003070508010409
-Content-Type: application/pkcs7-signature; name="smime.p7s"
-Content-Transfer-Encoding: base64
-Content-Disposition: attachment; filename="smime.p7s"
-Content-Description: Kryptografische S/MIME-Signatur
-
-MIAGCSqGSIb3DQEHAqCAMIACAQExDzANBglghkgBZQMEAgEFADCABgkqhkiG9w0BBwEAAKCC
-CdEwggSUMIIDfKADAgECAghxU09cSz6R1TANBgkqhkiG9w0BAQsFADBmMQswCQYDVQQGEwJE
-RTEzMDEGA1UECgwqREdOIERldXRzY2hlcyBHZXN1bmRoZWl0c25ldHogU2VydmljZSBHbWJI
-MSIwIAYDVQQDDBlkZ25zZXJ2aWNlIENBIDIgVHlwZSBFOlBOMB4XDTIzMDkyNTE4MDgzNVoX
-DTI0MDkyNDE4MDgzNVowbjELMAkGA1UEBhMCREUxITAfBgNVBAUTGDQwMDAwMDAwNjUxMWNm
-MDEzNmYxMWEwNDEVMBMGA1UEAwwMU3RlZmFuIEthbmlhMSUwIwYJKoZIhvcNAQkBFhZzdGVm
-YW5Aa2FuaWEtb25saW5lLmRlMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA1ULY
-84oACo6tokvBGHFH3ZqqbpFN09v3A+iqQRRy3N4PfYPPPn2Br4Xun5HhTDbXnppqxxzRh8xw
-tV6TZhuRfa2rOaNfloKJCUgvBcTc+AGCSED0GR/HG8KDqUarhczOSpVagbTeFMfr2rmVj9Mr
-B6KXoQnXcspUKZhllAOmluGJgZ96jaKclZb54/0Z7HOqUtLOCyBQjhB4WHPHCmMfmoBWWnll
-NCh5ArWxAq2oy3qh3vD41YcFCWfwsbhWu6H7i+DctxX1d2s4Yb8AGcVotY5QM4Ihfs83Axez
-nrfnM0DcyJxEyAYEy/NCcNVbnKiBxEc6bOHcOBfNBCk0gfxU8wIDAQABo4IBPDCCATgwHQYD
-VR0OBBYEFJ24mZ9+WXalRwYFaJEOZPfMjOiyMAwGA1UdEwEB/wQCMAAwHwYDVR0jBBgwFoAU
-6caT0dUPBmRy6mqWProQ8lRUsnkwVgYDVR0gBE8wTTBLBgwrBgEEAfsrAgEDAggwOzA5Bggr
-BgEFBQcCARYtaHR0cDovL3NlYzUuZGduc2VydmljZS5kZS9wb2xpY2llcy9pbmRleC5odG1s
-MD4GA1UdHwQ3MDUwM6AxoC+GLWh0dHA6Ly9zZWM1LmRnbnNlcnZpY2UuZGUvY3JsL2NybDIt
-dHlwZS1lLmNybDAOBgNVHQ8BAf8EBAMCBLAwHQYDVR0lBBYwFAYIKwYBBQUHAwIGCCsGAQUF
-BwMEMCEGA1UdEQQaMBiBFnN0ZWZhbkBrYW5pYS1vbmxpbmUuZGUwDQYJKoZIhvcNAQELBQAD
-ggEBADibCeP+7VM75NQfZByrA0oDOPQy1kwPtnBUqX4SZuCTIiM27NZDgYry1KJS+QuKbNmd
-3OirBVqls4rYFTk24qH+5CIstJKrxY+TMHnGk9KpsVVDplw+EyE79khhcAMrbS03WsRZiBd/
-Uk7W5cvfkrTlCIjLzhwvDBqea4+bRTbi8T63LtNHhOgaj7g3+J1xM/wVgVlobSXoXk69+8ZL
-1RG3on3r+1EmJpvCPJsL0BfUTia547lW4ectUBOrQ9eEri2eb+MW1QyileHPXv6OS465uN/b
-2kqY39wo95YEWmWRRZDsiKAqkuY/Qfx7FsodvAQo8kzCsyruNaZB5q6eqZIwggU1MIIEHaAD
-AgECAghVHErXZq0l9jANBgkqhkiG9w0BAQsFADBhMQswCQYDVQQGEwJERTEzMDEGA1UECgwq
-REdOIERldXRzY2hlcyBHZXN1bmRoZWl0c25ldHogU2VydmljZSBHbWJIMR0wGwYDVQQDDBRk
-Z25zZXJ2aWNlIFJvb3QgNzpQTjAeFw0xNjEwMjYwOTIyNDFaFw0yNDEwMjYwOTIyNDFaMGYx
-CzAJBgNVBAYTAkRFMTMwMQYDVQQKDCpER04gRGV1dHNjaGVzIEdlc3VuZGhlaXRzbmV0eiBT
-ZXJ2aWNlIEdtYkgxIjAgBgNVBAMMGWRnbnNlcnZpY2UgQ0EgMiBUeXBlIEU6UE4wggEiMA0G
-CSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDcpfKUP3THo0fSl2bOa6PNbRcDYZaE4ZV3vLGr
-e/U445OsRahORPeP/9L4nycTK6fUawpDTqOaDxtXYxjoJNC9LnKRxVB/UkBf0h25vN0L1iV4
-KhCaY8TimV0z2yUSlb2NuZ4gdBU69qJkasqYj+AP8OcQOo0idj9Nr1eloHD32i0JDPkhBj8V
-f6c6b7mNyn8yfZYvZlzzV2iQ/cvo6iFLx2wgG7mCkOZ8BAHGDFw6T0UIA0Bk60YhRMRxI7GX
-jMxBQA2Y/XXoP4dvQDDtMNmK0r5DUXof87w2brXctuQ2b4xNwFIErVoAQu8ftnXTm9iOtaOs
-WyLMZX6v5szaQBqBAgMBAAGjggHqMIIB5jASBgNVHRMBAf8ECDAGAQH/AgEAMB8GA1UdIwQY
-MBaAFAEMFht0ctM8FO4md7dJFFPY+4sbMFsGCCsGAQUFBwEBBE8wTTBLBggrBgEFBQcwAYY/
-aHR0cDovL3JvY3NwLWRnbi5kZ25zZXJ2aWNlLmRlOjgwODAvZWpiY2EvcHVibGljd2ViL3N0
-YXR1cy9vY3NwMGoGA1UdIARjMGEwXwYMKwYBBAH7KwIBBAIBME8wTQYIKwYBBQUHAgEWQWh0
-dHA6Ly93d3cuZGduc2VydmljZS5kZS90cnVzdGNlbnRlci9wdWJsaWMvZGduc2VydmljZS9p
-bmRleC5odG1sMIGZBgNVHR8EgZEwgY4wgYuggYiggYWGgYJsZGFwOi8vbGRhcC5kZ25zZXJ2
-aWNlLmRlOjM4OS9DTj1DUkwtMSxPPURHTiUyMFNlcnZpY2UlMjBHbWJILEM9REU/Y2VydGlm
-aWNhdGVSZXZvY2F0aW9uTGlzdD9iYXNlP29iamVjdENsYXNzPWNSTERpc3RyaWJ1dGlvblBv
-aW50MB0GA1UdDgQWBBTpxpPR1Q8GZHLqapY+uhDyVFSyeTAOBgNVHQ8BAf8EBAMCAQYwGwYJ
-KwYBBAHAbQMFBA4wDAYKKwYBBAHAbQMFATANBgkqhkiG9w0BAQsFAAOCAQEAq7w5+kXJ+/xT
-at0jiTX4GDX5HUeQohqAuLGfotHcqQqqjF8G6UUI0q4i0tnhHtldhZrNBOErgThGsToNZ1Y2
-Gn0FRrcrUU9LnhSMwd1XJ0Je6ERSdEh4vXf8YxJQGZJPCPJcrblhue0mmwO9nbhKewGglht5
-VWSHTS8vq5Da3zbxFG6lIdE62V4KqcMAiyY2BfL8guCPscTWl5txJrjb4ENo9nRqdzsXNEG3
-yyzgmyv6znQ4pGgTe5E6qXx5bO6XCDoUK4Kz1S82PzR6hvcxKZo7kKK2ut2B3buwU8xqfw73
-EMH8imv4LW/Sx59wKElKjijjHdNrFG/wMRobDYzMyTGCA4IwggN+AgEBMHIwZjELMAkGA1UE
-BhMCREUxMzAxBgNVBAoMKkRHTiBEZXV0c2NoZXMgR2VzdW5kaGVpdHNuZXR6IFNlcnZpY2Ug
-R21iSDEiMCAGA1UEAwwZZGduc2VydmljZSBDQSAyIFR5cGUgRTpQTgIIcVNPXEs+kdUwDQYJ
-YIZIAWUDBAIBBQCgggHhMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkF
-MQ8XDTI0MDIwMjA4NDQyMFowLwYJKoZIhvcNAQkEMSIEIJETJJO9qxHtJ/DJ1RLwFhPRhIzL
-KBJ4LRaez8/HFb+SMGwGCSqGSIb3DQEJDzFfMF0wCwYJYIZIAWUDBAEqMAsGCWCGSAFlAwQB
-AjAKBggqhkiG9w0DBzAOBggqhkiG9w0DAgICAIAwDQYIKoZIhvcNAwICAUAwBwYFKw4DAgcw
-DQYIKoZIhvcNAwICASgwgYEGCSsGAQQBgjcQBDF0MHIwZjELMAkGA1UEBhMCREUxMzAxBgNV
-BAoMKkRHTiBEZXV0c2NoZXMgR2VzdW5kaGVpdHNuZXR6IFNlcnZpY2UgR21iSDEiMCAGA1UE
-AwwZZGduc2VydmljZSBDQSAyIFR5cGUgRTpQTgIIcVNPXEs+kdUwgYMGCyqGSIb3DQEJEAIL
-MXSgcjBmMQswCQYDVQQGEwJERTEzMDEGA1UECgwqREdOIERldXRzY2hlcyBHZXN1bmRoZWl0
-c25ldHogU2VydmljZSBHbWJIMSIwIAYDVQQDDBlkZ25zZXJ2aWNlIENBIDIgVHlwZSBFOlBO
-AghxU09cSz6R1TANBgkqhkiG9w0BAQEFAASCAQC3hxhkiT3uhmfXhdxfFiwd6Ls9loT1HGuk
-fKWSiR8ClMBvwZRisOByMv4qvjHQIz+kLMs5jXjTgkjGXZgrrWJSe21rm/zKOUBKxCKUXIqy
-MIkz15nj5sSlxdYjJTUdw18WCFs75kSGqyxyYGVfpYj2/TNPn10RZbcuqEpz7jfG1zMMw8nw
-Fgy99UGfbz2BP8vIR0DUxyKveXRZ9ooGyb6xcK7p5es6a6pgKPDeHID7OCrU1JP2rCw1NmoR
-xbmKzwD0FmRho2MlcInZlzBJ41oK+QG6+CQ7K4PjxFIN8QYx+qPMHG29a+ckTRwkPWddkWqL
-INsgXLl7rv11X+X/3ndGAAAAAAAA
---------------ms070803050003070508010409--
 
