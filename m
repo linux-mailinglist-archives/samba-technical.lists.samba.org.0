@@ -2,79 +2,51 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6235684637D
-	for <lists+samba-technical@lfdr.de>; Thu,  1 Feb 2024 23:34:21 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2BEA9846A8E
+	for <lists+samba-technical@lfdr.de>; Fri,  2 Feb 2024 09:22:13 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=6NYsJO2ADFnfYNSUKy8Dw9cwok9fDPUDcRUYaa08xhE=; b=J+1U5j+u0+NvK/oFd0Jb/4hEr9
-	2/KBtxn0TeoQhayfpKeO5jUMQKfn+R9Dd3hkuHAkO8q96UMgbxpYMa7YGafR0abVJTGCQKlTVjqq2
-	eX6FMCg8+IGFfzrbR0AsTlwcyWQgWfPoaDylCWO4o7R4cC/ISZzaBLU/1x3xWZyQ7LYP394/ZiTLw
-	xcLvifxZcbQqnIRunVnAUlR0B+ZRgZX0Sjnxavj1ta+GVBhoLcoTV6k/u7rBPPN39CUnR2XfsdsLH
-	ptt2bFu5vmcYMdAR+Yb63AQRWE7R3qxPnZUggpihWKqivABPlZzG/AHjSiNUPAKir5sTNgJX5n6Ex
-	mAwEdHGQ==;
-Received: from ip6-localhost ([::1]:31940 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=0gKfR2GXFD3Bp0gGS2UdPKpgs/N4dpJ0BnqLopJEFMs=; b=17CKJcAWINqlT42WgrGg4xaKC5
+	ENI065IWFnUlHcOss7WkGhWMqUBFR/rx3E+F5dYA6U/1o1suND2wfgYRiAU2t19sddJF99Kzvm+hP
+	N4HBrEGJOkYQEVTfmYIBJV3WmH2V5PWW0EAnlsx5n1VPJC9Q1K9tet5yw2RL+k1fV+FWy8wyfCwaP
+	2mO6GIthM5zhDNB/D+wlgAYPTxvaPwtNWX35d0a6veFqQ8jiGIiHJ00H5SGUriv5cghL7HSKG/W9u
+	31wKQ/S6V+unsdMcnF0Vio6BAuJ2ADksXFPmDfH10H2KZmGhV6dPPmg3Rq00Inxhz64Twq5y6lz4R
+	N6RitTag==;
+Received: from ip6-localhost ([::1]:51282 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1rVfdQ-007Jb3-Gi; Thu, 01 Feb 2024 22:34:16 +0000
-Received: from mail-ej1-x62a.google.com ([2a00:1450:4864:20::62a]:53601) 
+	id 1rVong-007KzF-Jz; Fri, 02 Feb 2024 08:21:28 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:18460) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1rVfdL-007Jaw-Jy
- for samba-technical@lists.samba.org; Thu, 01 Feb 2024 22:34:13 +0000
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-a35e9161b8cso204995366b.3
- for <samba-technical@lists.samba.org>; Thu, 01 Feb 2024 14:34:11 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1706826850; x=1707431650; darn=lists.samba.org;
- h=content-transfer-encoding:in-reply-to:from:references:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=6NYsJO2ADFnfYNSUKy8Dw9cwok9fDPUDcRUYaa08xhE=;
- b=k7YkPYBvQI1t9TWZK6MTDuouXnhNVqwdKpFslM1V4TztSVYBjS655QeCVQBTaUzcds
- 73FQ5JpPDuSASk/9JQ588Vt/fvl7vVyIjQlIa6qV+ISYw36eJT4j4JL2xQ3FCPsospig
- IAKAAcGC3oVIDWYHswSoFdB+7BYH+0B82nuXcTwJrYf3C2AQeXOC6+EGnDEA0+HBZU1F
- TJbVP3UI4IQ74zJr5t9MwQt0rCds17TFpnICCeDUioo6X+dH/9MsXsbtPBz/P83YTb7q
- Hys72P3zZ5ESe1B+MEFcFTwLuVju5Nkv0zFYynSbH8QdKhXq8/2nzUdnXeCsFG/BccM6
- Anng==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706826850; x=1707431650;
- h=content-transfer-encoding:in-reply-to:from:references:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=6NYsJO2ADFnfYNSUKy8Dw9cwok9fDPUDcRUYaa08xhE=;
- b=n0sbvudAgtKFBMdDg7Exq6+9jVeAy3wEo86RDLoKCmsyaE9/j//9jXOe67/3RIjESv
- 1eSo5/F/kFrmgN7TJfAWi0+fOHLWKRn9ICRunFdZnhVX4j0m0PHHJ+iC+wWte+PTZz/e
- eamacBcKnSS1d2evzL6Tk6ofrYK9QjrSsWK/LJ7OJT2/CAYwgWBijNjU+Ec+GAzwQe5g
- kl+gLvKFsuD/9I2PNUeRJBbgQ4P+AkpddD7Gv805y7micBsyNmMtmuNeTrjf6sfOPcbY
- IJ1kPg2KLfqULMp/5WZH8JZhQLJOq9vJs+LhKGw8n6aLwgYL4luf6BYykAZkFqfzwcBb
- DXTg==
-X-Gm-Message-State: AOJu0YxYjqgCHwAj0c7lgWiw5jfoskbosFs126x/4jl5POcscCTD7suz
- LrvhhHdc+tBLmSvSpQ7Ouc8//IqBn4rHRAqTkjEhSjgRtlBRqSQ7i60jwqne
-X-Google-Smtp-Source: AGHT+IHNQEB6DF77tCea/aGJSzTXB7kWSpRY077i3jHA8JVoOvdCHUPiNS6ZG68bzoEumdpFIFW0qQ==
-X-Received: by 2002:a17:906:13d0:b0:a36:7c26:b6f with SMTP id
- g16-20020a17090613d000b00a367c260b6fmr277839ejc.52.1706826850146; 
- Thu, 01 Feb 2024 14:34:10 -0800 (PST)
-X-Forwarded-Encrypted: i=0;
- AJvYcCW08w7xOjQD+/6IyIDJGW8MrrsXvW+hq9Yk7nqUj/BMUsR0anyrXMG6Ov6xIje0AinKNYMF8a2tWkrNjsRY/eqds5k2ltiEohXLLYzgrDUU
-Received: from [192.168.10.106] ([45.83.235.18])
- by smtp.gmail.com with ESMTPSA id
- ds3-20020a170907724300b00a34a20b247fsm223128ejc.84.2024.02.01.14.34.09
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 01 Feb 2024 14:34:09 -0800 (PST)
-Message-ID: <e50b5dc3-0859-4cad-8a94-021fb0b5517d@gmail.com>
-Date: Thu, 1 Feb 2024 23:34:09 +0100
+ (Exim) id 1rVonc-007Kz8-Iz
+ for samba-technical@lists.samba.org; Fri, 02 Feb 2024 08:21:27 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Date:To:From:Message-ID:CC;
+ bh=ud1cJ5lG6/q87mnId8oSSE0DYC5JPpsk1LDLXRxBcAk=; b=snkqocj77ful7BAoH92fokqh3K
+ ete2IvbllIBmT2Dn9GFi01nzhfadt+gPb+v/zvr5VTrNjJM7bL2UK9iKItGDyrTxEMj9L1QJmKWbh
+ Yl0pX9t8dWlxDoDs7/yc6fsVMp74vGznILHOKxm8O2r+NkiyvxBTcl+WoOn7DCfAta/MxcwzvdFIG
+ D8EtvTfxlJIyuWEgxJybWsotdBd1+I4NdCnn0afaW/4Pvy0KIbZ1mdZl2kAjOiCk5XHUen0OOLUNR
+ O4rg/iA2zOpjixlBojoXDUUS++TP4hwgNl/Kn7PtaMs/Z7EhLreDbliYtqVlXJVTHfijuCRiAMQaD
+ bthnncvwy5y4JGFSdbQPkDThqdj1VX7epHFDE0eD9sSSiWYloqrVd5kcmMBBi6v2WKBszAj4bXgTH
+ ZxlsmBx61IRnxrR6H9WmsgXhggD+kYsfHk7rG1Mgu50sm1n1xKCkhppmbpDs/LwhPDpz8bz8haem0
+ YfeQP2PETvnoAv5JWAXyfgv/;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1rVonZ-00B9tw-01; Fri, 02 Feb 2024 08:21:21 +0000
+Message-ID: <d117b1ca8691a040dc187a0c7c767acf96c4e13a.camel@samba.org>
+Subject: Re: Looking to once again re-bundle LDB
+To: Andreas Schneider <asn@samba.org>, Upstream Samba Technical Mailing list
+ <samba-technical@lists.samba.org>
+Date: Fri, 02 Feb 2024 21:21:17 +1300
+In-Reply-To: <2272182.vFx2qVVIhK@magrathea>
+References: <7fb8e63cdc9de2c284cffc792c458df3b017c392.camel@samba.org>
+ <2272182.vFx2qVVIhK@magrathea>
+User-Agent: Evolution 3.36.5-0ubuntu1 
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: Question for time based group membership in FL 2016
-Content-Language: nl, en-US
-To: Douglas Bagnall <douglas.bagnall@catalyst.net.nz>,
- samba-technical@lists.samba.org
-References: <14cf1029-2378-489d-bf9b-844ed9d67081@kania-online.de>
- <6d845bb3-3348-4025-abec-e749287d7392@catalyst.net.nz>
- <728bedf6-dcf3-4006-b73d-9331db2b8777@gmail.com>
- <df237dc3-d1b9-41ab-823a-fbac5ce9df22@catalyst.net.nz>
-In-Reply-To: <df237dc3-d1b9-41ab-823a-fbac5ce9df22@catalyst.net.nz>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
+X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -88,28 +60,53 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Kees van Vloten via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Kees van Vloten <keesvanvloten@gmail.com>
+From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andrew Bartlett <abartlet@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
+On Thu, 2024-02-01 at 15:22 +0100, Andreas Schneider wrote:
+> On Tuesday, 5 December 2023 04:47:56 CET Andrew Bartlett via samba-
+> technical wrote:
+> > Just a heads up that I'm still keen to reduce the burden of an
+> > LDBrelease at Samba security release time.
+> > The rough consensus at the end of
+> > https://gitlab.com/samba-team/samba/-/merge_requests/374 seems to
+> > be tomake ldb: - for public consumers behave like any other Samba
+> > public library (eglibwbclient), by removing the independent tarball
+> > and build system.
+> 
+> If it is done that way I'm fine with moving it back to Samba and do
+> release it with Samba releases.
 
-On 01-02-2024 22:33, Douglas Bagnall wrote:
-> hi Kees,
->
->> Still, if you know what this powershell call changes in the LDAP 
->> record of the group, the user or elsewhere in LDAP, you can mimic 
->> this functionality quite easily with a little cron script on the DC.
->
-> I had similar thoughts, but it sounds this Windows Server 2016 feature 
-> is a bit cleverer than that -- in particular, the KDC will not issue 
-> tickets that outlive an expiring group.
->
-> cheers,
-> Douglas
->
-Thanks for providing more background, Douglas!
+Thanks so much.  As I mention below another of my MRs makes more sense
+with this done, so I'll get this done soon.
+> >  - for Samba builds by default, to install ldb as a private
+> > library.
+> > The version numbers would remain, but could then diverge between
+> > ldband pyldb-util for example (they would no longer be the tarball
+> > number,so would move just like other SO numbers do).
+> > We would change the ldb modules dir to have the version string in
+> > it,so that modules are not installed for the wrong version.
+> 
+> Sounds good.
+> > My current motivation comes from working on a pyldb change that
+> > wouldchange pyldb-util, but also a long-running desire to make this
+> > simpler.
+> > Debian currently has this patch:
+> > https://sources.debian.org/src/samba/2%3A4.19.3%2Bdfsg-1/debian/patches/Forc
+> > e-LDB-as-standalone.patch/
+> > This makes Samba public libldb as a public library, but from the
+> > mainSamba build, so that the ldb build system is no longer used.
+> 
+> Fine by me.
 
-- Kees.
+Thank you so much for your flexibility and understanding.
+Andrew Bartlett
 
-
+-- 
+Andrew Bartlett (he/him)       https://samba.org/~abartlet/Samba Team Member (since 2001) https://samba.orgSamba Team Lead                https://catalyst.net.nz/services/sambaCatalyst.Net Ltd
+Proudly developing Samba for Catalyst.Net Ltd - a Catalyst IT group
+company
+Samba Development and Support: https://catalyst.net.nz/services/samba
+Catalyst IT - Expert Open Source Solutions
