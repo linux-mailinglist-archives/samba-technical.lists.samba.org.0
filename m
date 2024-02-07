@@ -2,73 +2,63 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id C913F84B014
-	for <lists+samba-technical@lfdr.de>; Tue,  6 Feb 2024 09:40:09 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1063B84C4A6
+	for <lists+samba-technical@lfdr.de>; Wed,  7 Feb 2024 07:09:30 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:to;
-	bh=zVAaAYx+uRJrIVM9VYECDgmw/4CaprkfGNuPI6DSTlw=; b=ONfgIWIGRRI3z0lf3ydql8Pq2R
-	5RcVmKoapLJiCEIpivgrRvfjCNPfTUebEH2fzJNJ37OD2aTg69aUDJlS4E9avAwDKgNNWwUqA3Cuv
-	jkQRsjOxPGn70ctxNnTbBlaRFjqIJRdOIpXpmpab9ho6wKXiQcp9USQ1r/zdm12mhjhJVHLBBuG+n
-	/rR5AoAoohwXyAzgGNm1iJZIITHAurN/p2Zz97/jNXLFS1JCKh8LUyO9W+7TqPkZdPVuwoaF4KU5r
-	+T6rP+RN+KI65ZiOthoBgqHJlLcp0+NUOvN0c9Zx9fxRECvBEGJaa+ooN2dllGH+0cPUFRJVXXUGs
-	3CNVUFSw==;
-Received: from ip6-localhost ([::1]:45870 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=ADXEMElfjIHUfaepUHiUfsHqNMNprQGCgn7+GCgP9EE=; b=xVuCvvr6YXTePtBbWOAxyprpwB
+	j8SP7T9cCBp2K4tIG8PTzdx0S84GJKuPyKfpOn2PxatVwoF6JWMCj9A52D9TyT3y7iVb+mtYbG0jc
+	JnrZ4uOIyWq/l8hIJj9jpO7KoJrFCGz4J/JzTP2JeG9tHFbe4I9X16SVz7sjFWf6S6g0OLlViCuSD
+	+zWIlTmRMKnKo5w9c0eMXO0zUowd3brdU2bi9ka1FYo4fkKOzi670X0jIRe1MgS+NmijqqvF+qhKk
+	aFrS8ToGrt3r+dxOYsRmtwbsp5EBe0RsIQ8ER2dCcLM4jEE4f4xh0VCnKxMVTgidRKEo67+hshUUS
+	2LLBqWDg==;
+Received: from ip6-localhost ([::1]:36284 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1rXGzA-007Zj9-M5; Tue, 06 Feb 2024 08:39:20 +0000
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124]:49861) 
+	id 1rXb73-007gXr-2q; Wed, 07 Feb 2024 06:08:49 +0000
+Received: from mail-lf1-x130.google.com ([2a00:1450:4864:20::130]:58508) 
  by hr1.samba.org with esmtps
- (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__AES_256_GCM:256) (Exim)
- id 1rXGz6-007Zj2-17
- for samba-technical@lists.samba.org; Tue, 06 Feb 2024 08:39:18 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1707208752;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:to:
- cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=zVAaAYx+uRJrIVM9VYECDgmw/4CaprkfGNuPI6DSTlw=;
- b=PIsc2qI0gOYOc9gMb65pfBo+TwBWke7nYFE3ALN59Zt9hHJ2kClwhjngb3I/QC8Au5tlqM
- RTDiwNJSDjCdXXSixDzROq5+7C43N/c5/t0S0UaZtZllonzKE8lGItZkn896EImIgkBilK
- edz5T+ExnDdR8NaqaNEDigSYiFtet6k=
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1707208752;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:to:
- cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=zVAaAYx+uRJrIVM9VYECDgmw/4CaprkfGNuPI6DSTlw=;
- b=PIsc2qI0gOYOc9gMb65pfBo+TwBWke7nYFE3ALN59Zt9hHJ2kClwhjngb3I/QC8Au5tlqM
- RTDiwNJSDjCdXXSixDzROq5+7C43N/c5/t0S0UaZtZllonzKE8lGItZkn896EImIgkBilK
- edz5T+ExnDdR8NaqaNEDigSYiFtet6k=
-Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
- [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-343-cq73PueiM7GdY63RPfS8Fg-1; Tue, 06 Feb 2024 03:39:04 -0500
-X-MC-Unique: cq73PueiM7GdY63RPfS8Fg-1
-Received: from smtp.corp.redhat.com (int-mx10.intmail.prod.int.rdu2.redhat.com
- [10.11.54.10])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 1158383B7E6;
- Tue,  6 Feb 2024 08:39:04 +0000 (UTC)
-Received: from warthog.procyon.org.uk (unknown [10.42.28.245])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 61BE3492BF0;
- Tue,  6 Feb 2024 08:39:02 +0000 (UTC)
-Organization: Red Hat UK Ltd. Registered Address: Red Hat UK Ltd, Amberley
- Place, 107-111 Peascod Street, Windsor, Berkshire, SI4 1TE, United
- Kingdom.
- Registered in England and Wales under Company Registration No. 3798903
-In-Reply-To: <520668.1706191347@warthog.procyon.org.uk>
-References: <520668.1706191347@warthog.procyon.org.uk>
-Subject: Re: Roadmap for netfslib and local caching (cachefiles)
+ (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1rXb6v-007gXk-N1
+ for samba-technical@lists.samba.org; Wed, 07 Feb 2024 06:08:46 +0000
+Received: by mail-lf1-x130.google.com with SMTP id
+ 2adb3069b0e04-5114b2b3b73so251595e87.0
+ for <samba-technical@lists.samba.org>; Tue, 06 Feb 2024 22:08:41 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1707286120; x=1707890920; darn=lists.samba.org;
+ h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=ADXEMElfjIHUfaepUHiUfsHqNMNprQGCgn7+GCgP9EE=;
+ b=AsYrUz0ZvzCXJaoG1aSJyQjOrAfu3hFkEqf9DoK+TeXwFLiIR0vKzuFV2uD/i4dcsA
+ EVldEZkDxxbQt9kDuazaPN6Guo+pDLIiIGhpcpV/6qEZ37UNaSFtDFcaZl45BiFYdZ2u
+ wJfqdyW5zdq6yO4VwnrP6M2y6yCIy0Wbma2Oq8TZqdI8OLQWrzAjNv59rLYKaMqYd5lZ
+ Pw+EnXC8VrdhhZnO0YrXjZMiAI3uswZX0PPblfFe7BddODFIgakgC78gYki6MprcRDDb
+ lIwTZNHAD4LuMbeFyEfVxD2ZRYSdnKUbPSb2uozraF9g7XNXGtVWoTnKGuI20O/I10c4
+ YKLg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1707286120; x=1707890920;
+ h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=ADXEMElfjIHUfaepUHiUfsHqNMNprQGCgn7+GCgP9EE=;
+ b=Sh57P2ojeG+/rc94UWWuIcrNSBGT+kfP2gE1uuwv7pXJk3Si1wOYwkODQmpZgbqoc+
+ gB4ePe6DohCMukDXZ7ktY5WEi8OBpxsk7/2XO0b9nzJIJOWSZKSXSvOA2uz3Nh/O9Icq
+ WOhcWoe8zyWTNJX2pEkG9E41w21tC3xmPnQg77Sg4L55p2GpTrjpdCteKEbCxlW5QIKf
+ 86nUVMxIUzKapudxPzfbYshBQbSoxjlyOetKntfTnkZ9AkaQB5txs6xVAue+FqEt9YSp
+ H/Iv3dKRyMYiAgYVX2C+a6oIwmBg3UukTjR03zfBb7dvhgTl0FUcdTWPAy9h0ipV9veF
+ ZjqA==
+X-Gm-Message-State: AOJu0YyDYgx5rpcL0FRUSVsKjlZX1uJor0UObDsG/eprD7MJSr2NNgeI
+ 1LGbxY+Hf9LuTQnnPh2LAZw28hNAdvRh9VERSW9auYb4J8gAYe1MVSX1tnskhAzhJGaORZZJshT
+ 5L4G2hw4st+RglOwOtX0WBTTfEwRou4jZlqw=
+X-Google-Smtp-Source: AGHT+IEegdTGD0uwj8MW5iwQbvbtw0M2QT7eszRTwqGLA3sBmKNqd8Ht3r/OZO5EZ1PXLyQqBWolBkOZK4rd0PPmhyU=
+X-Received: by 2002:ac2:5f52:0:b0:511:47cf:d09d with SMTP id
+ 18-20020ac25f52000000b0051147cfd09dmr3082269lfz.3.1707286119645; Tue, 06 Feb
+ 2024 22:08:39 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-ID: <3114773.1707208741.1@warthog.procyon.org.uk>
-Content-Transfer-Encoding: quoted-printable
-Date: Tue, 06 Feb 2024 08:39:01 +0000
-Message-ID: <3114774.1707208741@warthog.procyon.org.uk>
-X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.10
+Date: Wed, 7 Feb 2024 00:08:28 -0600
+Message-ID: <CAH2r5mutYBiXyBnMWKF66DGrKHd7=ypsPGcg_XSrJW=JykNBbQ@mail.gmail.com>
+Subject: [PATCH][smb client] updating warning message for sec=krb5p
+To: samba-technical <samba-technical@lists.samba.org>,
+ CIFS <linux-cifs@vger.kernel.org>
+Content-Type: multipart/mixed; boundary="000000000000b11cdf0610c4860d"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -82,103 +72,66 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: David Howells via samba-technical <samba-technical@lists.samba.org>
-Reply-To: David Howells <dhowells@redhat.com>
-Cc: linux-cifs@vger.kernel.org, Christian Brauner <brauner@kernel.org>,
- Eric Sandeen <esandeen@redhat.com>, samba-technical@lists.samba.org,
- v9fs@lists.linux.dev, Jeff Layton <jlayton@kernel.org>,
- linux-nfs@vger.kernel.org, Matthew Wilcox <willy@infradead.org>,
- linux-kernel@vger.kernel.org, dhowells@redhat.com,
- linux-fsdevel@vger.kernel.org, ceph-devel@vger.kernel.org,
- Gao Xiang <xiang@kernel.org>, linux-afs@lists.infradead.org
+From: Steve French via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Steve French <smfrench@gmail.com>
+Cc: Shyam Prasad N <nspmangalore@gmail.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-David Howells <dhowells@redhat.com> wrote:
+--000000000000b11cdf0610c4860d
+Content-Type: text/plain; charset="UTF-8"
 
-> Disconnected Operation
-> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> =
+    smb3: clarify mount warning
 
-> I'm working towards providing support for disconnected operation, so tha=
-t,
-> provided you've got your working set pinned in the cache, you can contin=
-ue to
-> work on your network-provided files when the network goes away and resyn=
-c the
-> changes later.
-> =
+    When a user tries to use the "sec=krb5p" mount parameter to encrypt
+    data on connection to a server (when authenticating with Kerberos), we
+    indicate that it is not supported, but do not note the equivalent
+    recommended mount parameter ("sec=krb5,seal") which turns on encryption
+    for that mount (and uses Kerberos for auth).  Without an updated
+mount warning
+    it could confuse some NFS users.   Note that for SMB3+ we support
+encryption,
+    but consider it ("seal") a distinct mount parameter since the same
+user may choose
+    to encrypt to one share but not another from the same client.
+Update the warning message
+    to reduce confusion.
 
-> This is going to require a number of things:
-> =
+    See attached.
+-- 
+Thanks,
 
->  (1) A user API by which files can be preloaded into the cache and pinne=
-d.
-> =
+Steve
 
->  (2) The ability to track changes in the cache.
-> =
+--000000000000b11cdf0610c4860d
+Content-Type: text/x-patch; charset="US-ASCII"; name="0001-smb3-clarify-mount-warning.patch"
+Content-Disposition: attachment; 
+	filename="0001-smb3-clarify-mount-warning.patch"
+Content-Transfer-Encoding: base64
+Content-ID: <f_lsbdxbje0>
+X-Attachment-Id: f_lsbdxbje0
 
->  (3) A way to synchronise changes on reconnection.
-> =
-
->  (4) A way to communicate to the user when there's a conflict with a thi=
-rd
->      party change on reconnect.  This might involve communicating via sy=
-stemd
->      to the desktop environment to ask the user to indicate how they'd l=
-ike
->      conflicts recolved.
-> =
-
->  (5) A way to prompt the user to re-enter their authentication/crypto ke=
-ys.
-> =
-
->  (6) A way to ask the user how to handle a process that wants to access =
-data
->      we don't have (error/wait) - and how to handle the DE getting stuck=
- in
->      this fashion.
-
-Some further thoughts stemming from a discussion with Willy:
-
- - Would need to store the pre-disconnection metadata as well as any updat=
-ed
-   metadata.  When performing conflict resolution, userspace would need to=
- be
-   able to access these in addition to the current state (local) and curre=
-nt
-   state (server).
-
- - Would need the ability to include extra stats, such as the AFS data
-   version, that are used for cache coherency management.
-
- - Would need to provide an API by which userspace can access both states =
-of
-   the data, possibly including the original data if we still have it in t=
-he
-   cache.  That could be a number of ioctls on the target file.
-
- - Would need a range of resolution options in userspace, not limited to k=
-eep
-   local, keep remote, but also the option to stash one/both somewhere.  M=
-ay
-   also need to provide app-specific resolvers - merging git trees for
-   example, but also what do you do about sqlite databases, say?
-
- - There may be bulk changes that the user would want to resolve in bulk,
-   perhaps by "everything in the subtree" or pattern matching rules,
-   e.g. "disard all .o files" or "take the .o file matching the newest .c =
-file
-   in the same directory".
-
- - May need to change how expired keys are handled so that they aren't alr=
-eady
-   garbage collected, but can continue to be used as a token off which to =
-hang
-   cached access rights.
-
-David
-
+RnJvbSA2MDhiMGQ1ODBmOTE3ZTAyYjZhZmQxYmUzZTQ3OWIyOTU4N2JiODhhIE1vbiBTZXAgMTcg
+MDA6MDA6MDAgMjAwMQpGcm9tOiBTdGV2ZSBGcmVuY2ggPHN0ZnJlbmNoQG1pY3Jvc29mdC5jb20+
+CkRhdGU6IFR1ZSwgNiBGZWIgMjAyNCAyMzo1NzoxOCAtMDYwMApTdWJqZWN0OiBbUEFUQ0hdIHNt
+YjM6IGNsYXJpZnkgbW91bnQgd2FybmluZwoKV2hlbiBhIHVzZXIgdHJpZXMgdG8gdXNlIHRoZSAi
+c2VjPWtyYjVwIiBtb3VudCBwYXJhbWV0ZXIgdG8gZW5jcnlwdApkYXRhIG9uIGNvbm5lY3Rpb24g
+dG8gYSBzZXJ2ZXIgKHdoZW4gYXV0aGVudGljYXRpbmcgd2l0aCBLZXJiZXJvcyksIHdlCmluZGlj
+YXRlIHRoYXQgaXQgaXMgbm90IHN1cHBvcnRlZCwgYnV0IGRvIG5vdCBub3RlIHRoZSBlcXVpdmFs
+ZW50CnJlY29tbWVuZGVkIG1vdW50IHBhcmFtZXRlciAoInNlYz1rcmI1LHNlYWwiKSB3aGljaCB0
+dXJucyBvbiBlbmNyeXB0aW9uCmZvciB0aGF0IG1vdW50IChhbmQgdXNlcyBLZXJiZXJvcyBmb3Ig
+YXV0aCkuICBVcGRhdGUgdGhlIHdhcm5pbmcgbWVzc2FnZS4KClNpZ25lZC1vZmYtYnk6IFN0ZXZl
+IEZyZW5jaCA8c3RmcmVuY2hAbWljcm9zb2Z0LmNvbT4KLS0tCiBmcy9zbWIvY2xpZW50L2ZzX2Nv
+bnRleHQuYyB8IDIgKy0KIDEgZmlsZSBjaGFuZ2VkLCAxIGluc2VydGlvbigrKSwgMSBkZWxldGlv
+bigtKQoKZGlmZiAtLWdpdCBhL2ZzL3NtYi9jbGllbnQvZnNfY29udGV4dC5jIGIvZnMvc21iL2Ns
+aWVudC9mc19jb250ZXh0LmMKaW5kZXggNjAwYTc3MDUyYzNiLi42OTkzY2QzNThiOTQgMTAwNjQ0
+Ci0tLSBhL2ZzL3NtYi9jbGllbnQvZnNfY29udGV4dC5jCisrKyBiL2ZzL3NtYi9jbGllbnQvZnNf
+Y29udGV4dC5jCkBAIC0yMTEsNyArMjExLDcgQEAgY2lmc19wYXJzZV9zZWN1cml0eV9mbGF2b3Jz
+KHN0cnVjdCBmc19jb250ZXh0ICpmYywgY2hhciAqdmFsdWUsIHN0cnVjdCBzbWIzX2ZzX2MKIAog
+CXN3aXRjaCAobWF0Y2hfdG9rZW4odmFsdWUsIGNpZnNfc2VjZmxhdm9yX3Rva2VucywgYXJncykp
+IHsKIAljYXNlIE9wdF9zZWNfa3JiNXA6Ci0JCWNpZnNfZXJyb3JmKGZjLCAic2VjPWtyYjVwIGlz
+IG5vdCBzdXBwb3J0ZWQhXG4iKTsKKwkJY2lmc19lcnJvcmYoZmMsICJzZWM9a3JiNXAgaXMgbm90
+IHN1cHBvcnRlZC4gVXNlIHNlYz1rcmI1LHNlYWwgaW5zdGVhZFxuIik7CiAJCXJldHVybiAxOwog
+CWNhc2UgT3B0X3NlY19rcmI1aToKIAkJY3R4LT5zaWduID0gdHJ1ZTsKLS0gCjIuNDAuMQoK
+--000000000000b11cdf0610c4860d--
 
