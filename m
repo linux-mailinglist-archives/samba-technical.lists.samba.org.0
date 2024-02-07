@@ -2,63 +2,47 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1063B84C4A6
-	for <lists+samba-technical@lfdr.de>; Wed,  7 Feb 2024 07:09:30 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id DE4F084D218
+	for <lists+samba-technical@lfdr.de>; Wed,  7 Feb 2024 20:14:17 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=ADXEMElfjIHUfaepUHiUfsHqNMNprQGCgn7+GCgP9EE=; b=xVuCvvr6YXTePtBbWOAxyprpwB
-	j8SP7T9cCBp2K4tIG8PTzdx0S84GJKuPyKfpOn2PxatVwoF6JWMCj9A52D9TyT3y7iVb+mtYbG0jc
-	JnrZ4uOIyWq/l8hIJj9jpO7KoJrFCGz4J/JzTP2JeG9tHFbe4I9X16SVz7sjFWf6S6g0OLlViCuSD
-	+zWIlTmRMKnKo5w9c0eMXO0zUowd3brdU2bi9ka1FYo4fkKOzi670X0jIRe1MgS+NmijqqvF+qhKk
-	aFrS8ToGrt3r+dxOYsRmtwbsp5EBe0RsIQ8ER2dCcLM4jEE4f4xh0VCnKxMVTgidRKEo67+hshUUS
-	2LLBqWDg==;
-Received: from ip6-localhost ([::1]:36284 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
+	bh=F0nLjodw2l591qCGBYvhnpWN0EsPS8v5w+jOXzi2Lvc=; b=Zrgvd0qvw9UoMWIvcIznkRcNMp
+	bk+iim7S6dLNy8p/m8RDTyIGFlAq14/npN3YGVmLxqMQEZfVA3nhC3jsjwgb2NxXPbuLZk+ag4ezy
+	WLBel++W03tQSFPvWKIwecwwLvLE9hqXVV1cX93/ylgmwXt9TEnPF8WWiUDkTgnoyWAJgzPr4jUf1
+	wl1YXpIUS/rIrTZulOXjf25Vye0gFLs/DTxomzpSSa7ukRwGf9uitUWzBFQvG7A4DXuhXAtZoSZza
+	FM024SyZCxxy88kCnh9RpMYDNXIFwrZ34Eo7BjkjsbQa896HKnjk/ogkpuPaVV4v1UrxFfU5rDix9
+	Nj81bQ+g==;
+Received: from ip6-localhost ([::1]:33222 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1rXb73-007gXr-2q; Wed, 07 Feb 2024 06:08:49 +0000
-Received: from mail-lf1-x130.google.com ([2a00:1450:4864:20::130]:58508) 
+	id 1rXnMV-007onk-Fk; Wed, 07 Feb 2024 19:13:35 +0000
+Received: from plasma4.jpberlin.de ([80.241.57.33]:60717) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1rXb6v-007gXk-N1
- for samba-technical@lists.samba.org; Wed, 07 Feb 2024 06:08:46 +0000
-Received: by mail-lf1-x130.google.com with SMTP id
- 2adb3069b0e04-5114b2b3b73so251595e87.0
- for <samba-technical@lists.samba.org>; Tue, 06 Feb 2024 22:08:41 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1707286120; x=1707890920; darn=lists.samba.org;
- h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=ADXEMElfjIHUfaepUHiUfsHqNMNprQGCgn7+GCgP9EE=;
- b=AsYrUz0ZvzCXJaoG1aSJyQjOrAfu3hFkEqf9DoK+TeXwFLiIR0vKzuFV2uD/i4dcsA
- EVldEZkDxxbQt9kDuazaPN6Guo+pDLIiIGhpcpV/6qEZ37UNaSFtDFcaZl45BiFYdZ2u
- wJfqdyW5zdq6yO4VwnrP6M2y6yCIy0Wbma2Oq8TZqdI8OLQWrzAjNv59rLYKaMqYd5lZ
- Pw+EnXC8VrdhhZnO0YrXjZMiAI3uswZX0PPblfFe7BddODFIgakgC78gYki6MprcRDDb
- lIwTZNHAD4LuMbeFyEfVxD2ZRYSdnKUbPSb2uozraF9g7XNXGtVWoTnKGuI20O/I10c4
- YKLg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707286120; x=1707890920;
- h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=ADXEMElfjIHUfaepUHiUfsHqNMNprQGCgn7+GCgP9EE=;
- b=Sh57P2ojeG+/rc94UWWuIcrNSBGT+kfP2gE1uuwv7pXJk3Si1wOYwkODQmpZgbqoc+
- gB4ePe6DohCMukDXZ7ktY5WEi8OBpxsk7/2XO0b9nzJIJOWSZKSXSvOA2uz3Nh/O9Icq
- WOhcWoe8zyWTNJX2pEkG9E41w21tC3xmPnQg77Sg4L55p2GpTrjpdCteKEbCxlW5QIKf
- 86nUVMxIUzKapudxPzfbYshBQbSoxjlyOetKntfTnkZ9AkaQB5txs6xVAue+FqEt9YSp
- H/Iv3dKRyMYiAgYVX2C+a6oIwmBg3UukTjR03zfBb7dvhgTl0FUcdTWPAy9h0ipV9veF
- ZjqA==
-X-Gm-Message-State: AOJu0YyDYgx5rpcL0FRUSVsKjlZX1uJor0UObDsG/eprD7MJSr2NNgeI
- 1LGbxY+Hf9LuTQnnPh2LAZw28hNAdvRh9VERSW9auYb4J8gAYe1MVSX1tnskhAzhJGaORZZJshT
- 5L4G2hw4st+RglOwOtX0WBTTfEwRou4jZlqw=
-X-Google-Smtp-Source: AGHT+IEegdTGD0uwj8MW5iwQbvbtw0M2QT7eszRTwqGLA3sBmKNqd8Ht3r/OZO5EZ1PXLyQqBWolBkOZK4rd0PPmhyU=
-X-Received: by 2002:ac2:5f52:0:b0:511:47cf:d09d with SMTP id
- 18-20020ac25f52000000b0051147cfd09dmr3082269lfz.3.1707286119645; Tue, 06 Feb
- 2024 22:08:39 -0800 (PST)
+ (Exim) id 1rXnMR-007ond-KJ
+ for samba-technical@lists.samba.org; Wed, 07 Feb 2024 19:13:33 +0000
+Received: from spamfilter01.heinlein-hosting.de
+ (spamfilter01.heinlein-hosting.de [80.241.56.115])
+ by plasma.jpberlin.de (Postfix) with ESMTP id 857D2FEFE2;
+ Wed,  7 Feb 2024 20:13:24 +0100 (CET)
+Received: from plasma.jpberlin.de ([80.241.56.68])
+ by spamfilter01.heinlein-hosting.de (spamfilter01.heinlein-hosting.de
+ [80.241.56.115]) (amavisd-new, port 10030)
+ with ESMTP id bwez13R6knfo; Wed,  7 Feb 2024 20:13:23 +0100 (CET)
+Received: from [192.168.123.203] (p5b2400db.dip0.t-ipconnect.de [91.36.0.219])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (Client did not present a certificate)
+ (Authenticated sender: stefan@kania-online.de)
+ by plasma.jpberlin.de (Postfix) with ESMTPSA id EBCF7FEFAC
+ for <samba-technical@lists.samba.org>; Wed,  7 Feb 2024 20:13:22 +0100 (CET)
+Message-ID: <c478c72b-d7ab-4d7f-bb38-94e309b1a42e@kania-online.de>
+Date: Wed, 7 Feb 2024 20:13:22 +0100
 MIME-Version: 1.0
-Date: Wed, 7 Feb 2024 00:08:28 -0600
-Message-ID: <CAH2r5mutYBiXyBnMWKF66DGrKHd7=ypsPGcg_XSrJW=JykNBbQ@mail.gmail.com>
-Subject: [PATCH][smb client] updating warning message for sec=krb5p
-To: samba-technical <samba-technical@lists.samba.org>,
- CIFS <linux-cifs@vger.kernel.org>
-Content-Type: multipart/mixed; boundary="000000000000b11cdf0610c4860d"
+To: samba-technical@lists.samba.org
+Content-Language: de-DE, en-US
+Subject: default value for "winbind separator"
+Content-Type: multipart/signed; protocol="application/pkcs7-signature";
+ micalg=sha-256; boundary="------------ms070004030105090909070302"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -72,66 +56,149 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
-Cc: Shyam Prasad N <nspmangalore@gmail.com>
+From: Stefan Kania via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Stefan Kania <stefan@kania-online.de>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
---000000000000b11cdf0610c4860d
-Content-Type: text/plain; charset="UTF-8"
+This is a cryptographically signed message in MIME format.
 
-    smb3: clarify mount warning
+--------------ms070004030105090909070302
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-    When a user tries to use the "sec=krb5p" mount parameter to encrypt
-    data on connection to a server (when authenticating with Kerberos), we
-    indicate that it is not supported, but do not note the equivalent
-    recommended mount parameter ("sec=krb5,seal") which turns on encryption
-    for that mount (and uses Kerberos for auth).  Without an updated
-mount warning
-    it could confuse some NFS users.   Note that for SMB3+ we support
-encryption,
-    but consider it ("seal") a distinct mount parameter since the same
-user may choose
-    to encrypt to one share but not another from the same client.
-Update the warning message
-    to reduce confusion.
+Hello,
 
-    See attached.
--- 
-Thanks,
+up this point I never ever used or noticed the default setting of the 
+"winbind separator" I only know that it was "+" in the early days of 
+Samba. Now that I tried to get GPOs (for smb_conf) running on a DC the 
+following was happend:
 
-Steve
+I created the GPO, linked the gpo and then did a "samba-gpupdate 
+--force" that changes my smb.conf in that way, that all possible options 
+were written into my smb.conf. Including "winbind separator = \"
+Up to the point where I did a "testparm" I did not notice the "winbind 
+separator = \" option. But as testparm was showing:
+-----------
+ERROR: the 'winbind separator' parameter must be a single character.
+-----------
 
---000000000000b11cdf0610c4860d
-Content-Type: text/x-patch; charset="US-ASCII"; name="0001-smb3-clarify-mount-warning.patch"
-Content-Disposition: attachment; 
-	filename="0001-smb3-clarify-mount-warning.patch"
+
+I did a "testparm | grep winbind " and I saw:
+-----------
+-------------
+root@addc01:~# grep winbind /etc/samba/smb.conf
+...
+         winbind sealed pipes = Yes
+         winbind separator = \
+         winbind use default domain = No
+...
+-----------
+the problem here is that the default character for the winbind separator 
+is the backslash. but the backslash quotes the next character und the 
+next character is the LF so the LF is now a "normal" character followed 
+by " winbind use default domain = No". so for testparm the line looks like:
+winbind separator = winbind use default domain = No
+
+And that's wrong. In the early days of Samba the setting was "winbind 
+separator = + ".
+
+Is there a reason why the character was changed? A nice side effect is:
+
+-----------------
+  root@addc01:~# getent group sshlogin
+EXAMPLEwsshlogin:x:3000016:EXAMPLEwskania
+-----------------
+
+it sould be:
+-----------------
+root@addc01:~# getent group sshlogin
+EXAMPLE\sshlogin:x:3000016:EXAMPLE\skania
+-----------------
+
+So now the backslash is replaced with the "w" from "winbind use default 
+domain = No"
+
+I removed the option "winbinds separator = \" but the next time 
+samba-gpupdate is running the parameter ist back again. When I change 
+the backslash with a "+" getent is showing the "+" as the separator.
+
+So the backslash makes sense, but not putting all default values into 
+smb.conf when running samba-gpupdate on a DC.
+Or write a workaround for testparm :-) to hide the problem.
+
+Stefan
+
+--------------ms070004030105090909070302
+Content-Type: application/pkcs7-signature; name="smime.p7s"
 Content-Transfer-Encoding: base64
-Content-ID: <f_lsbdxbje0>
-X-Attachment-Id: f_lsbdxbje0
+Content-Disposition: attachment; filename="smime.p7s"
+Content-Description: Kryptografische S/MIME-Signatur
 
-RnJvbSA2MDhiMGQ1ODBmOTE3ZTAyYjZhZmQxYmUzZTQ3OWIyOTU4N2JiODhhIE1vbiBTZXAgMTcg
-MDA6MDA6MDAgMjAwMQpGcm9tOiBTdGV2ZSBGcmVuY2ggPHN0ZnJlbmNoQG1pY3Jvc29mdC5jb20+
-CkRhdGU6IFR1ZSwgNiBGZWIgMjAyNCAyMzo1NzoxOCAtMDYwMApTdWJqZWN0OiBbUEFUQ0hdIHNt
-YjM6IGNsYXJpZnkgbW91bnQgd2FybmluZwoKV2hlbiBhIHVzZXIgdHJpZXMgdG8gdXNlIHRoZSAi
-c2VjPWtyYjVwIiBtb3VudCBwYXJhbWV0ZXIgdG8gZW5jcnlwdApkYXRhIG9uIGNvbm5lY3Rpb24g
-dG8gYSBzZXJ2ZXIgKHdoZW4gYXV0aGVudGljYXRpbmcgd2l0aCBLZXJiZXJvcyksIHdlCmluZGlj
-YXRlIHRoYXQgaXQgaXMgbm90IHN1cHBvcnRlZCwgYnV0IGRvIG5vdCBub3RlIHRoZSBlcXVpdmFs
-ZW50CnJlY29tbWVuZGVkIG1vdW50IHBhcmFtZXRlciAoInNlYz1rcmI1LHNlYWwiKSB3aGljaCB0
-dXJucyBvbiBlbmNyeXB0aW9uCmZvciB0aGF0IG1vdW50IChhbmQgdXNlcyBLZXJiZXJvcyBmb3Ig
-YXV0aCkuICBVcGRhdGUgdGhlIHdhcm5pbmcgbWVzc2FnZS4KClNpZ25lZC1vZmYtYnk6IFN0ZXZl
-IEZyZW5jaCA8c3RmcmVuY2hAbWljcm9zb2Z0LmNvbT4KLS0tCiBmcy9zbWIvY2xpZW50L2ZzX2Nv
-bnRleHQuYyB8IDIgKy0KIDEgZmlsZSBjaGFuZ2VkLCAxIGluc2VydGlvbigrKSwgMSBkZWxldGlv
-bigtKQoKZGlmZiAtLWdpdCBhL2ZzL3NtYi9jbGllbnQvZnNfY29udGV4dC5jIGIvZnMvc21iL2Ns
-aWVudC9mc19jb250ZXh0LmMKaW5kZXggNjAwYTc3MDUyYzNiLi42OTkzY2QzNThiOTQgMTAwNjQ0
-Ci0tLSBhL2ZzL3NtYi9jbGllbnQvZnNfY29udGV4dC5jCisrKyBiL2ZzL3NtYi9jbGllbnQvZnNf
-Y29udGV4dC5jCkBAIC0yMTEsNyArMjExLDcgQEAgY2lmc19wYXJzZV9zZWN1cml0eV9mbGF2b3Jz
-KHN0cnVjdCBmc19jb250ZXh0ICpmYywgY2hhciAqdmFsdWUsIHN0cnVjdCBzbWIzX2ZzX2MKIAog
-CXN3aXRjaCAobWF0Y2hfdG9rZW4odmFsdWUsIGNpZnNfc2VjZmxhdm9yX3Rva2VucywgYXJncykp
-IHsKIAljYXNlIE9wdF9zZWNfa3JiNXA6Ci0JCWNpZnNfZXJyb3JmKGZjLCAic2VjPWtyYjVwIGlz
-IG5vdCBzdXBwb3J0ZWQhXG4iKTsKKwkJY2lmc19lcnJvcmYoZmMsICJzZWM9a3JiNXAgaXMgbm90
-IHN1cHBvcnRlZC4gVXNlIHNlYz1rcmI1LHNlYWwgaW5zdGVhZFxuIik7CiAJCXJldHVybiAxOwog
-CWNhc2UgT3B0X3NlY19rcmI1aToKIAkJY3R4LT5zaWduID0gdHJ1ZTsKLS0gCjIuNDAuMQoK
---000000000000b11cdf0610c4860d--
+MIAGCSqGSIb3DQEHAqCAMIACAQExDzANBglghkgBZQMEAgEFADCABgkqhkiG9w0BBwEAAKCC
+CdEwggSUMIIDfKADAgECAghxU09cSz6R1TANBgkqhkiG9w0BAQsFADBmMQswCQYDVQQGEwJE
+RTEzMDEGA1UECgwqREdOIERldXRzY2hlcyBHZXN1bmRoZWl0c25ldHogU2VydmljZSBHbWJI
+MSIwIAYDVQQDDBlkZ25zZXJ2aWNlIENBIDIgVHlwZSBFOlBOMB4XDTIzMDkyNTE4MDgzNVoX
+DTI0MDkyNDE4MDgzNVowbjELMAkGA1UEBhMCREUxITAfBgNVBAUTGDQwMDAwMDAwNjUxMWNm
+MDEzNmYxMWEwNDEVMBMGA1UEAwwMU3RlZmFuIEthbmlhMSUwIwYJKoZIhvcNAQkBFhZzdGVm
+YW5Aa2FuaWEtb25saW5lLmRlMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA1ULY
+84oACo6tokvBGHFH3ZqqbpFN09v3A+iqQRRy3N4PfYPPPn2Br4Xun5HhTDbXnppqxxzRh8xw
+tV6TZhuRfa2rOaNfloKJCUgvBcTc+AGCSED0GR/HG8KDqUarhczOSpVagbTeFMfr2rmVj9Mr
+B6KXoQnXcspUKZhllAOmluGJgZ96jaKclZb54/0Z7HOqUtLOCyBQjhB4WHPHCmMfmoBWWnll
+NCh5ArWxAq2oy3qh3vD41YcFCWfwsbhWu6H7i+DctxX1d2s4Yb8AGcVotY5QM4Ihfs83Axez
+nrfnM0DcyJxEyAYEy/NCcNVbnKiBxEc6bOHcOBfNBCk0gfxU8wIDAQABo4IBPDCCATgwHQYD
+VR0OBBYEFJ24mZ9+WXalRwYFaJEOZPfMjOiyMAwGA1UdEwEB/wQCMAAwHwYDVR0jBBgwFoAU
+6caT0dUPBmRy6mqWProQ8lRUsnkwVgYDVR0gBE8wTTBLBgwrBgEEAfsrAgEDAggwOzA5Bggr
+BgEFBQcCARYtaHR0cDovL3NlYzUuZGduc2VydmljZS5kZS9wb2xpY2llcy9pbmRleC5odG1s
+MD4GA1UdHwQ3MDUwM6AxoC+GLWh0dHA6Ly9zZWM1LmRnbnNlcnZpY2UuZGUvY3JsL2NybDIt
+dHlwZS1lLmNybDAOBgNVHQ8BAf8EBAMCBLAwHQYDVR0lBBYwFAYIKwYBBQUHAwIGCCsGAQUF
+BwMEMCEGA1UdEQQaMBiBFnN0ZWZhbkBrYW5pYS1vbmxpbmUuZGUwDQYJKoZIhvcNAQELBQAD
+ggEBADibCeP+7VM75NQfZByrA0oDOPQy1kwPtnBUqX4SZuCTIiM27NZDgYry1KJS+QuKbNmd
+3OirBVqls4rYFTk24qH+5CIstJKrxY+TMHnGk9KpsVVDplw+EyE79khhcAMrbS03WsRZiBd/
+Uk7W5cvfkrTlCIjLzhwvDBqea4+bRTbi8T63LtNHhOgaj7g3+J1xM/wVgVlobSXoXk69+8ZL
+1RG3on3r+1EmJpvCPJsL0BfUTia547lW4ectUBOrQ9eEri2eb+MW1QyileHPXv6OS465uN/b
+2kqY39wo95YEWmWRRZDsiKAqkuY/Qfx7FsodvAQo8kzCsyruNaZB5q6eqZIwggU1MIIEHaAD
+AgECAghVHErXZq0l9jANBgkqhkiG9w0BAQsFADBhMQswCQYDVQQGEwJERTEzMDEGA1UECgwq
+REdOIERldXRzY2hlcyBHZXN1bmRoZWl0c25ldHogU2VydmljZSBHbWJIMR0wGwYDVQQDDBRk
+Z25zZXJ2aWNlIFJvb3QgNzpQTjAeFw0xNjEwMjYwOTIyNDFaFw0yNDEwMjYwOTIyNDFaMGYx
+CzAJBgNVBAYTAkRFMTMwMQYDVQQKDCpER04gRGV1dHNjaGVzIEdlc3VuZGhlaXRzbmV0eiBT
+ZXJ2aWNlIEdtYkgxIjAgBgNVBAMMGWRnbnNlcnZpY2UgQ0EgMiBUeXBlIEU6UE4wggEiMA0G
+CSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDcpfKUP3THo0fSl2bOa6PNbRcDYZaE4ZV3vLGr
+e/U445OsRahORPeP/9L4nycTK6fUawpDTqOaDxtXYxjoJNC9LnKRxVB/UkBf0h25vN0L1iV4
+KhCaY8TimV0z2yUSlb2NuZ4gdBU69qJkasqYj+AP8OcQOo0idj9Nr1eloHD32i0JDPkhBj8V
+f6c6b7mNyn8yfZYvZlzzV2iQ/cvo6iFLx2wgG7mCkOZ8BAHGDFw6T0UIA0Bk60YhRMRxI7GX
+jMxBQA2Y/XXoP4dvQDDtMNmK0r5DUXof87w2brXctuQ2b4xNwFIErVoAQu8ftnXTm9iOtaOs
+WyLMZX6v5szaQBqBAgMBAAGjggHqMIIB5jASBgNVHRMBAf8ECDAGAQH/AgEAMB8GA1UdIwQY
+MBaAFAEMFht0ctM8FO4md7dJFFPY+4sbMFsGCCsGAQUFBwEBBE8wTTBLBggrBgEFBQcwAYY/
+aHR0cDovL3JvY3NwLWRnbi5kZ25zZXJ2aWNlLmRlOjgwODAvZWpiY2EvcHVibGljd2ViL3N0
+YXR1cy9vY3NwMGoGA1UdIARjMGEwXwYMKwYBBAH7KwIBBAIBME8wTQYIKwYBBQUHAgEWQWh0
+dHA6Ly93d3cuZGduc2VydmljZS5kZS90cnVzdGNlbnRlci9wdWJsaWMvZGduc2VydmljZS9p
+bmRleC5odG1sMIGZBgNVHR8EgZEwgY4wgYuggYiggYWGgYJsZGFwOi8vbGRhcC5kZ25zZXJ2
+aWNlLmRlOjM4OS9DTj1DUkwtMSxPPURHTiUyMFNlcnZpY2UlMjBHbWJILEM9REU/Y2VydGlm
+aWNhdGVSZXZvY2F0aW9uTGlzdD9iYXNlP29iamVjdENsYXNzPWNSTERpc3RyaWJ1dGlvblBv
+aW50MB0GA1UdDgQWBBTpxpPR1Q8GZHLqapY+uhDyVFSyeTAOBgNVHQ8BAf8EBAMCAQYwGwYJ
+KwYBBAHAbQMFBA4wDAYKKwYBBAHAbQMFATANBgkqhkiG9w0BAQsFAAOCAQEAq7w5+kXJ+/xT
+at0jiTX4GDX5HUeQohqAuLGfotHcqQqqjF8G6UUI0q4i0tnhHtldhZrNBOErgThGsToNZ1Y2
+Gn0FRrcrUU9LnhSMwd1XJ0Je6ERSdEh4vXf8YxJQGZJPCPJcrblhue0mmwO9nbhKewGglht5
+VWSHTS8vq5Da3zbxFG6lIdE62V4KqcMAiyY2BfL8guCPscTWl5txJrjb4ENo9nRqdzsXNEG3
+yyzgmyv6znQ4pGgTe5E6qXx5bO6XCDoUK4Kz1S82PzR6hvcxKZo7kKK2ut2B3buwU8xqfw73
+EMH8imv4LW/Sx59wKElKjijjHdNrFG/wMRobDYzMyTGCA4IwggN+AgEBMHIwZjELMAkGA1UE
+BhMCREUxMzAxBgNVBAoMKkRHTiBEZXV0c2NoZXMgR2VzdW5kaGVpdHNuZXR6IFNlcnZpY2Ug
+R21iSDEiMCAGA1UEAwwZZGduc2VydmljZSBDQSAyIFR5cGUgRTpQTgIIcVNPXEs+kdUwDQYJ
+YIZIAWUDBAIBBQCgggHhMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkF
+MQ8XDTI0MDIwNzE5MTMyMlowLwYJKoZIhvcNAQkEMSIEIAxqS56p2dzo53zDFdBVDi4KoZz1
+y286sjYv7FlYcEaeMGwGCSqGSIb3DQEJDzFfMF0wCwYJYIZIAWUDBAEqMAsGCWCGSAFlAwQB
+AjAKBggqhkiG9w0DBzAOBggqhkiG9w0DAgICAIAwDQYIKoZIhvcNAwICAUAwBwYFKw4DAgcw
+DQYIKoZIhvcNAwICASgwgYEGCSsGAQQBgjcQBDF0MHIwZjELMAkGA1UEBhMCREUxMzAxBgNV
+BAoMKkRHTiBEZXV0c2NoZXMgR2VzdW5kaGVpdHNuZXR6IFNlcnZpY2UgR21iSDEiMCAGA1UE
+AwwZZGduc2VydmljZSBDQSAyIFR5cGUgRTpQTgIIcVNPXEs+kdUwgYMGCyqGSIb3DQEJEAIL
+MXSgcjBmMQswCQYDVQQGEwJERTEzMDEGA1UECgwqREdOIERldXRzY2hlcyBHZXN1bmRoZWl0
+c25ldHogU2VydmljZSBHbWJIMSIwIAYDVQQDDBlkZ25zZXJ2aWNlIENBIDIgVHlwZSBFOlBO
+AghxU09cSz6R1TANBgkqhkiG9w0BAQEFAASCAQCxnvbTz+TDrGav1+f5aG8UrvxvBcg5YX6R
++53haNwabY1CmagacTWQWCddbziZY6tUsonRi7QxCbTUz+D9IX5Dz9SgyvF8eSm7dV9NXylf
+bj/ozoAvTA+bEKs3xTC8lrqpc4/SAj1rx7wGcCOKyZ7dcycdtm6argUb4c4x4xiFxRYeu9yN
+l4VUZMA71rpAfRhWZmfGp8ivW2BPkPv4Zx9MeCRcun2a1na4a8CZcH8TjY+I+Ba/XdHtlAJK
+6sAgjzPm3kuwYDvLhaHfjsQ6PTjykA3qTOqUtKxYI0672DGtUQLtLJiwV9AJm8nq6AsRImOk
+PjmQpVUDe5tqRrg63WP6AAAAAAAA
+--------------ms070004030105090909070302--
 
