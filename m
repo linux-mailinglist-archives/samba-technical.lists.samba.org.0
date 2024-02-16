@@ -2,70 +2,77 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5711F8573D7
-	for <lists+samba-technical@lfdr.de>; Fri, 16 Feb 2024 03:55:08 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D7189857B48
+	for <lists+samba-technical@lfdr.de>; Fri, 16 Feb 2024 12:15:10 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=hivLGoohBi9jxN+iXA1gU/EMsAbGNah9+ljlZTWvHBw=; b=RMqovBzEQjncHrqyK4uZgPJ/cQ
-	ZVzWz61/GJ3UUqJbt1FzZgZn845XuY6OTVdNpAngG2gsiqcQ+82jB4C9hRSknz2Opce6VnnFxwvy/
-	CehBhxY3+G7m6L+86EFNpdV1hdfKZ1itvTJmKlPb/+uxhkWLHX/6VE2gu5O7MSLT50DesJAjlPDn0
-	uOM5HiNgsVRCHkAE1ZTodwV+aCOl/TloI2G37iRFndXmujv73OKCRcy4ZMUWraMzsrOVvYfXS8/r5
-	CwcNSJHGweZwXw4P3HaY3oSAX5DG+vjCRgbOAVh1VkealdM/oTvLftQEwOI9pwEkLQlveRGfj2g/J
-	RoqgYnAQ==;
-Received: from ip6-localhost ([::1]:37520 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
+	bh=Mz3Np6MukIBDbnIdmdE/FeDYnZRpZjL3aVYk9DoBchA=; b=BVonkGBHHwixGDa2vqHiBxnEYl
+	F+k3f9dqGbJpDaZ6QGqIuuw7EGLSlolgjYb/DB11QJPDjptWhH+/R1IImW8T1s6+zUeLMpXk0hT2i
+	d5QUpiQdeyIIhXLICHkUJCfIgKBtJo0HXp3NudMN1GMnnXddW+J61G/SJOdz0ehguXDez8FK/Hn0E
+	kUn3wp/R0ErIl+SxGvoez0bKdLAN6RvwW6/aJmUHLBBcH7u2TPsELOHgXH3+cacuQnqjIFTexKcKJ
+	/eOz8EzReeKefL+7InB75VTnxx4pOUHoWUwSEQmv+6znUved/fG5b/SiDvLB+IoVbCEXAM2LzRtbT
+	m3UH7vag==;
+Received: from ip6-localhost ([::1]:21450 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1raoMz-008eLF-Ik; Fri, 16 Feb 2024 02:54:33 +0000
-Received: from mail-lf1-x12f.google.com ([2a00:1450:4864:20::12f]:60814) 
+	id 1rawAp-008gbJ-Ln; Fri, 16 Feb 2024 11:14:31 +0000
+Received: from mx.inno.tech ([185.228.49.205]:25530) 
  by hr1.samba.org with esmtps
- (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1raoMu-008eL8-Ue
- for samba-technical@lists.samba.org; Fri, 16 Feb 2024 02:54:31 +0000
-Received: by mail-lf1-x12f.google.com with SMTP id
- 2adb3069b0e04-511acd26befso1994287e87.1
- for <samba-technical@lists.samba.org>; Thu, 15 Feb 2024 18:54:28 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1708052068; x=1708656868; darn=lists.samba.org;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=QDrPJa6LvzA2dvfkyydTb5utmbW9CEWoR/VE7noEqac=;
- b=gheh9dUZ2S9rOHBCdJwhr4BU8o8Su+ydIPNz+UojxvGGhJ4gS9hrdICSktlUSiOMCg
- oxxyl5AGJ3zF6Ydvvm8Iw7Ob54d9c0IP14IXgABUdYVIkQOYJ4YmBfaSfRmqOcpvgxbX
- U0KB9uRt+kdis3MfvqY2mph/t1bIXRUJmalyL0N9Wk7NkENJrvgyyV2esad7nOcrdljy
- oUvFF6x75JXh6HyQFiNCOTg+wuzmnVaCF2lLCd25WFc9cfzhz4rPojTHUd2htWr2yVV+
- SaKqAt0Zn9RlpI6ERdstG/2dVH3cqIbUbSoSkvJTFgVr0w02313/GOgDDQhji7mdG3wE
- /1Kw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708052068; x=1708656868;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=QDrPJa6LvzA2dvfkyydTb5utmbW9CEWoR/VE7noEqac=;
- b=ZbryslcxWBLVRU/50c/ugkSb36MTGZ/xVTDIER/41P73cYpWzWha0W5mjx7QDvIivh
- EOI1yXY42Tgez7Pow4ViZn+EvjDMuu0RDVtW/uf8pmg5N1kK7atv1jIbaY8tvqAwREBu
- 7envBzywELPdJ+Djk/s3CRik2dmYksDGS5GbrZPmKotK2zghLjRK24WEQPXmQLFXnAAK
- epgg2prdKGO/F5DWIsmlakWJr416Pg36+0u1M/Vj66Y/szCmoOwM/zHaV/qc5aeZa3Bx
- K5LkVWTLwnDJihkC417susLVgY6Hmr82lurOXWBdV4ArrKsG1h1pJhLCCVzYt8l1ntrF
- 10UA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWjRdlTZMZ2PG1UiGkUKvJafMWOgPFs+ygL2SXe1okgThd3Pl/rR+uKmHGIUYf3EZ2BfYuZbdqff+sT38ChfGuLf/TO9ROnl7ZmolCU7yRi
-X-Gm-Message-State: AOJu0Yz6GM2UkqVsaWMcp16rDit7KrMc+yZ+8yuuEWibd7QpnvDjsIJF
- w31Y9CdT+p9RbFOf0GcMD+1fSmkL/utr4epP4B8S3k/AvkdQqS25ZlZ8Zhv4gg8Hm4/4TNp5/C5
- 05HcAj0XJvEa0av1qoab6odbL1sg=
-X-Google-Smtp-Source: AGHT+IFiVjAdoLMXp6A0tVlp08sAMFlHy2fNLeYde5rYHD0p3E6DS47GUE3aeZJ54ob1RfoJf3QzFg65NbWj6ZNsno8=
-X-Received: by 2002:ac2:4189:0:b0:511:3460:925c with SMTP id
- z9-20020ac24189000000b005113460925cmr2415352lfh.65.1708052067341; Thu, 15 Feb
- 2024 18:54:27 -0800 (PST)
+ (TLS1.2:ECDHE_SECP256R1__RSA_SHA512__AES_256_GCM:256) (Exim)
+ id 1rawAl-008gb0-8G
+ for samba-technical@lists.samba.org; Fri, 16 Feb 2024 11:14:29 +0000
+Received: from ksmg3 (localhost [127.0.0.1])
+ by mx.inno.tech (Postfix) with ESMTP id 75E4F80005;
+ Fri, 16 Feb 2024 14:14:22 +0300 (MSK)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mx.inno.tech 75E4F80005
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=inno.tech; s=s1;
+ t=1708082062; bh=Mz3Np6MukIBDbnIdmdE/FeDYnZRpZjL3aVYk9DoBchA=;
+ h=From:To:Subject:Date:Message-ID:Content-Type:MIME-Version:From;
+ b=LFu22Egk7IUFRRGFniXDOpvT0iMIYorp6Z2wQV0QMblwftl+awRhz64aROT5uFwI9
+ pramWOpdOodhF/dLpM07DTwKINCEDd4Q8Ui5He8YQQPYqEJPiphHxi38lW7VAzDxqZ
+ jHPJOe87+gl3zEnEqIE0VT7bXP8qHF323lAgWJoYW4Yxz+Nfl79r7tOClLx6jmodJ6
+ /coiEQGHFl8/du7c8nD207whp6BYSeA1FgSo86wRWO4jmPn4ILDe01EnMSHVLgYpyv
+ 3zQofkNE8fBXPtSaBYR/4anyDYMCwkJUq8KSzmwhpWy3cu5ErZq1YMivYXNtR/Dw+R
+ ERzf0PLs2KLSQ==
+Received: from SEC-DLP-QRNT (unknown [10.0.0.117])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+ (No client certificate requested)
+ by mx.inno.tech (Postfix) with ESMTPS;
+ Fri, 16 Feb 2024 14:14:22 +0300 (MSK)
+X-CHECKED: 1
+X-CHECKED-RELAY-ID: 3c279d7389fa9528e53a55e18b8e1fb6328980c7
+X-Cache: 20240216_141422062_00015290
+X-MS-Exchange-Organization-AuthAs: Partner
+Received: from MAIL-DC1.inno.local (10.0.115.2) by MAIL-DC1.inno.local
+ (10.0.115.2) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1118.40; Fri, 16 Feb
+ 2024 14:14:21 +0300
+Received: from MAIL-DC1.inno.local ([10.0.115.10]) by MAIL-DC1.inno.local
+ ([10.0.115.10]) with mapi id 15.02.1118.040; Fri, 16 Feb 2024 14:14:21 +0300
+To: =?utf-8?B?QmrDtnJuIEJhdW1iYWNo?= <bb@sernet.de>,
+ "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>
+Subject: RE: smbd: Broken access to share
+Thread-Topic: smbd: Broken access to share
+Thread-Index: AdpgH1hPuaFKQ4ZdTjar1D/HlL9lOwADG/oAACLyytA=
+Date: Fri, 16 Feb 2024 11:14:21 +0000
+Message-ID: <4b79869d3da4448096bc54491dcb4bec@inno.tech>
+References: <c4ef9c77c4784a1898abdd266e5dccb5@inno.tech>
+ <ec8cb899-c1e7-45bd-97c9-a8d57f2c2fa9@sernet.de>
+In-Reply-To: <ec8cb899-c1e7-45bd-97c9-a8d57f2c2fa9@sernet.de>
+Accept-Language: en-GB, en-US
+Content-Language: ru-RU
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.0.0.117]
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-References: <CAH2r5mtUnLDtwbW7or=Uc+AXkzLpHsJoPuoLE7yyjPVYjvZCow@mail.gmail.com>
- <CANT5p=oNRF9BAgybCX7dE+KvYj=k2G3tERa+fMJOY6tsuZ00Hw@mail.gmail.com>
-In-Reply-To: <CANT5p=oNRF9BAgybCX7dE+KvYj=k2G3tERa+fMJOY6tsuZ00Hw@mail.gmail.com>
-Date: Thu, 15 Feb 2024 18:54:14 -0800
-Message-ID: <CAH2r5mtcLQqfow0VdUY+BP8-9Sa0yfng8OzitZz6WhCK1VUv7w@mail.gmail.com>
-Subject: Re: [WIP PATCH] allow changing the password on remount in some cases
-To: Shyam Prasad N <nspmangalore@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
+X-KSMG-Rule-ID: 5
+X-KSMG-Message-Action: skipped
+X-KSMG-AntiSpam-Status: not scanned, allowlist
+X-KSMG-AntiPhishing: not scanned, allowlist
+X-KSMG-LinksScanning: not scanned, allowlist
+X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
+ not scanned, allowlist
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -79,71 +86,53 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
-Cc: Meetakshi Setiya <meetakshisetiyaoss@gmail.com>,
- CIFS <linux-cifs@vger.kernel.org>, Bharath S M <bharathsm@microsoft.com>,
- samba-technical <samba-technical@lists.samba.org>,
- David Howells <dhowells@redhat.com>
+From: =?utf-8?b?0JrRg9C/0YfRg9C6INCc0LjRhdCw0LjQuyDQk9C10L7RgNCz0LjQtdCy0Lg=?=
+ =?utf-8?q?=D1=87_via_samba-technical?= <samba-technical@lists.samba.org>
+Reply-To: =?utf-8?B?0JrRg9C/0YfRg9C6INCc0LjRhdCw0LjQuyDQk9C10L7RgNCz0LjQtdCy0Lg=?=
+ =?utf-8?B?0Yc=?= <MKupchuk@inno.tech>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-I lean toward allowing password change on remount if network disconnected
-even if there are cases where harmless because it should be non confusing
-if reconnect fails with new password where case of allowing password change
-in mount when session active could be very confusing if it took hours for
-reconnect to ever happen (user might not associate it with an remount hours
-or days earlier)
+SGVsbG8gQmrDtnJuLA0KDQpUaGFuayB5b3UgZm9yIHBvaW50aW5nIHRoYXQgb3V0LiBCdXQgb3Vy
+IHByb2JsZW0gc3RpbGwgZXhpc3RzIHdpdGggbGF0ZXN0IHNvdXJjZXMgZnJvbSBtYXN0ZXIuDQpX
+aGlsZSBpbnZlc3RpZ2F0aW5nIHRoZSBwcm9ibGVtLCBJIGRpZCBub3Qgcm9sbGJhY2sgZXhhY3Rs
+eSB0aGF0IGNvbW1pdCwgYnV0IEkgZGlkIGNoZWNrb3V0IDEyNzM0ODQ4ZGM5OTAxYjkzMjY0NDEz
+OWFhYTdlM2Y3OGU1NWM4ZGMgKGNvbW1pdCBwcmlvciB0byAwZTM4MzZlMzk2MWYyYjdjMzkxNzNj
+ZTEwMjNkM2M5MmFkZGVmNjMwKSBhbmQgcHJvYmxlbSBkaXNhcHBlYXJlZC4NClNvLCBJIGRlY2lk
+ZWQgdGhhdCB0aGUgcHJvYmxlbSBpcyBvbmx5IGluIDBlMzgzNmUzOTYxZjJiN2MzOTE3M2NlMTAy
+M2QzYzkyYWRkZWY2MzAuDQpCdXQgYXMgYXBwZWFycywgdGhlIHByb2JsZW0gaXMgbm90IG9ubHkg
+aW4gdGhhdCBvbmUgY29tbWl0LCBidXQgaW4gc2V2ZXJhbCBjb21taXRzIGluICJwcmVmZXIgY2Fw
+YWJpbGl0aWVzIG92ZXIgYmVjb21lX3Jvb3QiIHNldC4NCldoZW4gSSBhcHBseSBhIHBhdGNoIGxp
+a2UgdGhpcyB0byBsYXRlc3Qgc291cmNlczoNCg0KZGlmZiAtLWdpdCBhL3NvdXJjZTMvbGliL3N5
+c3RlbS5jIGIvc291cmNlMy9saWIvc3lzdGVtLmMNCmluZGV4IGJkYWE3MjNmZDMuLjRhZDI2NTI0
+ZGUgMTAwNjQ0DQotLS0gYS9zb3VyY2UzL2xpYi9zeXN0ZW0uYw0KKysrIGIvc291cmNlMy9saWIv
+c3lzdGVtLmMNCkBAIC02NDMsNyArNjQzLDcgQEAgc3RhdGljIGJvb2wgc2V0X3Byb2Nlc3NfY2Fw
+YWJpbGl0eShlbnVtIHNtYmRfY2FwYWJpbGl0eSBjYXBhYmlsaXR5LA0KICBHYWluIHRoZSBvcGxv
+Y2sgY2FwYWJpbGl0eSBmcm9tIHRoZSBrZXJuZWwgaWYgcG9zc2libGUuDQogKioqKioqKioqKioq
+KioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioq
+KioqKioqKi8NCg0KLSNpZiBkZWZpbmVkKEhBVkVfUE9TSVhfQ0FQQUJJTElUSUVTKSAmJiBkZWZp
+bmVkKENBUF9EQUNfT1ZFUlJJREUpDQorI2lmIGRlZmluZWQoSEFWRV9QT1NJWF9DQVBBQklMSVRJ
+RVMpICYmIGRlZmluZWQoQ0FQX0RBQ19PVkVSUklERSkgJiYgZGVmaW5lZChDQVBfREFDX09WRVJS
+SURFX0ZJWEVEKQ0KIHN0YXRpYyBib29sIGhhdmVfY2FwX2RhY19vdmVycmlkZSA9IHRydWU7DQog
+I2Vsc2UNCiBzdGF0aWMgYm9vbCBoYXZlX2NhcF9kYWNfb3ZlcnJpZGUgPSBmYWxzZTsNCg0Kd2hp
+Y2ggaW4gZmFjdCBkaXNhYmxlcyBhbGwgdGhhdCAicHJlZmVyIGNhcGFiaWxpdGllcyBvdmVyIGJl
+Y29tZV9yb290IiBjb21taXRzIHNldCwNCk91ciBwcm9ibGVtIGdvZXMgYXdheSBhbmQgZXZlcnl0
+aGluZyB3b3JrcyBhZ2Fpbi4NCg0KDQpCZXN0IHdpc2hlcywNCk1pY2hhZWwNCg0KLS0tLS1Pcmln
+aW5hbCBNZXNzYWdlLS0tLS0NCkZyb206IEJqw7ZybiBCYXVtYmFjaCA8YmJAc2VybmV0LmRlPiAN
+ClNlbnQ6IFRodXJzZGF5LCBGZWJydWFyeSAxNSwgMjAyNCAxMDoyNyBQTQ0KVG86INCa0YPQv9GH
+0YPQuiDQnNC40YXQsNC40Lsg0JPQtdC+0YDQs9C40LXQstC40YcgPE1LdXBjaHVrQGlubm8udGVj
+aD47IHNhbWJhLXRlY2huaWNhbEBsaXN0cy5zYW1iYS5vcmcNClN1YmplY3Q6IFJlOiBzbWJkOiBC
+cm9rZW4gYWNjZXNzIHRvIHNoYXJlDQoNCg0KDQpIaSBNaWNoYWVsLA0KDQpPbiAyLzE1LzI0IDE3
+OjI2LCDQmtGD0L/Rh9GD0Log0JzQuNGF0LDQuNC7INCT0LXQvtGA0LPQuNC10LLQuNGHIHZpYSBz
+YW1iYS10ZWNobmljYWwgd3JvdGU6DQo+IEZvdW5kIG91dCB0aGF0IHRoaXMgcGF0Y2ggaHR0cHM6
+Ly9naXRsYWIuY29tL3NhbWJhLXRlYW0vc2FtYmEvLS9jb21taXQvMGUzODM2ZTM5NjFmMmI3YzM5
+MTczY2UxMDIzZDNjOTJhZGRlZjYzMCBicm9rZSBhY2Nlc3MgdG8gc3lzdm9sIGZvciAiRG9tYWlu
+IEFkbWlucyIgZ3JvdXAgbWVtYmVycy4NCg0KdGhpcyBwYXRjaCBoYXMgYmVlbiByZXZlcnRlZCwg
+YWxyZWFkeToNCmh0dHBzOi8vZ2l0bGFiLmNvbS9zYW1iYS10ZWFtL3NhbWJhLy0vY29tbWl0LzY5
+N2Q0MTQyMGI0ZjQ4MzAzOTZhY2ZiYzk2YmQxZjFjMWYwNTMxZjQNCg0KQmVzdCByZWdhcmRzLA0K
+QmrDtnJuDQoNCi0tDQpTZXJOZXQgR21iSCwgQmFobmhvZnNhbGxlZSAxYiwgMzcwODEgR8O2dHRp
+bmdlbg0KcGhvbmU6IDA1NTEtMzcwMDAwLTAsIG1haWx0bzprb250YWt0QHNlcm5ldC5kZQ0KR2Vz
+Y2guRi46IERyLiBKb2hhbm5lcyBMb3hlbiB1bmQgUmVpbmhpbGQgSnVuZyBBRyBHw7Z0dGluZ2Vu
+OiBIUi1CIDI4MTYgLSBodHRwOi8vd3d3LnNlcm5ldC5kZQ0KRGF0ZW5zY2h1dHo6IGh0dHBzOi8v
+d3d3LnNlcm5ldC5kZS9kYXRlbnNjaHV0eg0K
 
-On Thu, Feb 15, 2024, 17:52 Shyam Prasad N <nspmangalore@gmail.com> wrote:
-
-> On Tue, Feb 13, 2024 at 12:23=E2=80=AFPM Steve French <smfrench@gmail.com=
-> wrote:
-> >
-> > cifs: Work-in-progress patch to allow changing password
-> >  during remount
-> >
-> > There are cases where a session is disconnected but we can
-> > not reconnect successfully since the user's password has changed
-> > on the server (or expired) and this case currently can not be fixed
-> > without unmount and mounting again which is not always realistic to do.
-> > This patch allows remount to change the password when the session
-> > is disconnected.
-> >
-> > This patch needs to be tested for cases where you have multiuser mounts
-> > and to make sure that there are no cases where we are changing
-> > passwords for a different user than the one for the master tcon's
-> > session (cifs_sb->tcon->ses->username)
-> >
-> > Future patches should also allow us to setup the keyring (cifscreds)
-> > to have an "alternate password" so we would be able to change
-> > the password before the session drops (without the risk of races
-> > between when the password changes and the disconnect occurs -
-> > ie cases where the old password is still needed because the new
-> > password has not fully rolled out to all servers yet).
-> >
-> > See attached patch
-> >
-> >
-> > --
-> > Thanks,
-> >
-> > Steve
->
-> need_recon would also be true in other cases, for example when the
-> network is temporarily disconnected. This patch will allow changing of
-> password even then.
-> We could setup a special flag when the server returns a
-> STATUS_LOGON_FAILURE for SessionSetup. We can make the check for that
-> flag and then allow password change on remount.
->
-> Another option is to extend the multiuser keyring mechanism for single
-> user use case as well, and use that for password update.
-> Ideally, we should be able to setup multiple passwords in that keyring
-> and iterate through them once to see if SessionSetup goes through.
-> It'll be a bigger change than this though.
->
-> --
-> Regards,
-> Shyam
->
