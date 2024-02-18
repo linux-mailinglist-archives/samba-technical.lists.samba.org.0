@@ -2,47 +2,63 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 74CC4859148
-	for <lists+samba-technical@lfdr.de>; Sat, 17 Feb 2024 18:12:52 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7A02A85975B
+	for <lists+samba-technical@lfdr.de>; Sun, 18 Feb 2024 15:15:00 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
-	bh=9A4yRNpe/5TFW+FOCzcl1KEouh50OoU4hoRQHv6AhzI=; b=ncj+meV1YoaagWCC4gdOZGqAOx
-	nKlR65rV6dtTRWscBcFmJ4Iiob3RK1adf+InCxPZrWXHOzlVhU/Ic6nrYJcfXVx8OqN2TaqeGgbPn
-	4efqR9ZdCHgL68nbopzbVuH+oYt1evmESOjH9ES7Omm/zdEoBBheeL0+R5kKZeFyZ5Ae4sx+wbVHM
-	lEMg7AFF6sy/yQ5r8nDD8myRJtXq/8nRwlS+VKguUnh1MpT/Dc1R4ItMJR8nRpHHPSBQiiFG15iWn
-	P05J7HwMchHXxZPMUol7Og5DSRzzX15PwjxueXyiE9j+JX7oNb6kLRef8dBuR5JXTS7tYEu/4SVa1
-	Eh8Yy2bw==;
-Received: from ip6-localhost ([::1]:48546 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=WCZeTngdTdY4LMvqp0SlCZmKfhPgCdnb3nqSo8FJWQ4=; b=gS3RQb+mPoTsiHcFDE6O5DeE3c
+	R6S4HpSLktfgY2Uaz00sJfRXvLJSBvE7W15aCJjB3O5d2OwhEfFczev2iHViNcbqzxIfFi0J33gCe
+	5G8jALtHd1mWf8MFPxrA/qYAC8g/DXlzsMIyuPH3gzD7jjL7xylxSAG6lrVeFMWyRPatcOsCMwp2e
+	8QgMc+A+dTjoQt/WLGMQPnlSniVXtBbFRbcRN5lMewtsEeUbKRyO2CJVx4WytLJ5De7swLFuNKsEc
+	RRmrXH9ftlpPYGU9hAyjD3IPzMvV7JSLD+Dy4kLdXrfTw43Xrflpl1ilTta5ZPVuZKKXO/ss/klbt
+	8AoYDK8Q==;
+Received: from ip6-localhost ([::1]:20560 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1rbOEQ-008n84-Oh; Sat, 17 Feb 2024 17:12:06 +0000
-Received: from plasma4.jpberlin.de ([80.241.57.33]:44451) 
+	id 1rbhvs-008q2V-13; Sun, 18 Feb 2024 14:14:16 +0000
+Received: from mail-il1-x129.google.com ([2607:f8b0:4864:20::129]:54491) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1rbOEL-008n7w-ON
- for samba-technical@lists.samba.org; Sat, 17 Feb 2024 17:12:04 +0000
-Received: from spamfilter05.heinlein-hosting.de
- (spamfilter05.heinlein-hosting.de [80.241.56.123])
- by plasma.jpberlin.de (Postfix) with ESMTP id EACAAFEC16;
- Sat, 17 Feb 2024 18:11:51 +0100 (CET)
-Received: from plasma.jpberlin.de ([80.241.56.68])
- by spamfilter05.heinlein-hosting.de (spamfilter05.heinlein-hosting.de
- [80.241.56.123]) (amavisd-new, port 10030)
- with ESMTP id s1-8rCMFT1mI; Sat, 17 Feb 2024 18:11:50 +0100 (CET)
-Received: from [192.168.123.203] (p5b2400db.dip0.t-ipconnect.de [91.36.0.219])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (Client did not present a certificate)
- (Authenticated sender: stefan@kania-online.de)
- by plasma.jpberlin.de (Postfix) with ESMTPSA id 16580FEC14
- for <samba-technical@lists.samba.org>; Sat, 17 Feb 2024 18:11:49 +0100 (CET)
-Message-ID: <e8210ddc-4506-4255-bcbe-f24ff86b2f0a@kania-online.de>
-Date: Sat, 17 Feb 2024 18:11:49 +0100
+ (Exim) id 1rbhvn-008q2O-9K
+ for samba-technical@lists.samba.org; Sun, 18 Feb 2024 14:14:14 +0000
+Received: by mail-il1-x129.google.com with SMTP id
+ e9e14a558f8ab-36423c819a3so14379885ab.0
+ for <samba-technical@lists.samba.org>; Sun, 18 Feb 2024 06:14:08 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1708265645; x=1708870445; darn=lists.samba.org;
+ h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=WCZeTngdTdY4LMvqp0SlCZmKfhPgCdnb3nqSo8FJWQ4=;
+ b=ZuNfhyzfZ7VzIz2h+5wECH2CkjeVjFaxsNGCFs27thqLFH1+KFR1J+GUT41PHud2VX
+ lwtOVDRvXGkO5anSm5+6GXxQ3hfpQb58jqCgMDBDX2ruX5Al27+ZbF909NfBZ37998V3
+ 3rpM/lDP9kTLZ1Zpp2lsJ5i748KIOHfUs2/pM6noExMERTcRPio/VlJIv5N09Zxj0hWh
+ z9SHZbN8nHJQzvFs+MshUWxUrJgmwUk9QH/WhILXiWLoyk1Xwy1Ou9/99vmxt5+bp7de
+ UrC39ZkYfmuwezp3ZaSXhIWjj/xIktKmqHrs/DIK7yIjGzKcA0CvRCP+gSn4qmMsjR7m
+ oa8A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1708265645; x=1708870445;
+ h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=WCZeTngdTdY4LMvqp0SlCZmKfhPgCdnb3nqSo8FJWQ4=;
+ b=fLfRXtICF2SSE5FDfs6sUZsQatRLFOn1Jz3ye2fpeO5R7bC8Xhaxc5VGTxXdZTamZL
+ rmKrj/rxdsiHwg73dT+npiOPe+NlfUjiAN9HAua2qNSBNhA+AKdP6T+YjmxluNya7Rem
+ 7KZHSuUzJ32Jhlh08oc5hvU+KVfnrYi2QAvEKAolih4yMlu4Uy7VmBiknWANXkq8intk
+ BKEfKx0FE5y11trGAT4RJoqvuTrgYmP5qGF9i7vQDcE6y5kpPVF3d4s+7IMDEEZA25e1
+ yHDj3mAH9H2ZVlrvY5SqGMJyYccU4Aos3FImshho0K8uocn4b2k16u4HWTtb4lGT6EFM
+ ECUQ==
+X-Gm-Message-State: AOJu0Yw4L4DIKUcJb6vTuKwalSiFskU2U/H/+lIK/GKVp1BffoLi+reL
+ vYYwdJm7q8Hu7Unhf2j9m4uAGR899u+RzeHLPyrHkawHObKWSZDDBzKnQJf9QKv8T6aqgHG06gW
+ 0y70KEHzO7w6yQNFFElK2PzRFA84ZlHojjgQ=
+X-Google-Smtp-Source: AGHT+IGqyUEyvVJ914NiqsIxGvZYkOdktkjd2gtvcwYheoX1g4w3GL/aFjfqmF4Gu8Qmuzdc/g8+5wwDrOG6lWKYBDU=
+X-Received: by 2002:a6b:f310:0:b0:7c7:3e8b:1d94 with SMTP id
+ m16-20020a6bf310000000b007c73e8b1d94mr3061596ioh.14.1708265645608; Sun, 18
+ Feb 2024 06:14:05 -0800 (PST)
 MIME-Version: 1.0
-To: samba-technical@lists.samba.org
-Content-Language: de-DE, en-US
-Subject: setting up authentication policies in 4.20rc2
-Content-Type: multipart/signed; protocol="application/pkcs7-signature";
- micalg=sha-256; boundary="------------ms070807030508050302030508"
+Date: Sun, 18 Feb 2024 09:13:54 -0500
+Message-ID: <CAOCN9rxnv=Wx7OJQ4JDdZQn62D1VKjYSBYGOjX45CJLSq=-LJw@mail.gmail.com>
+Subject: Samba 4.20.0rc2 fails to support "--with-includelibs" or build
+ Heimdall Kerberos
+To: samba-technical <samba-technical@lists.samba.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -56,131 +72,69 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Stefan Kania via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Stefan Kania <stefan@kania-online.de>
+From: Nico Kadel-Garcia via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Nico Kadel-Garcia <nkadel@gmail.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is a cryptographically signed message in MIME format.
+I've been publishing backports of current Samba releases for RHEL to
+include full domain controller capability for a few years now. Red Hat
+elects to turn off the domain controller features at build time, and
+the Fedora SRPM's reflect this decision for RHEL. Building for RHEL
+meand activating "--with-includelibs" in order to avoid conflicts with
+the libldb, libtdb, etc. versons used by sssd and other default tools.
 
---------------ms070807030508050302030508
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-
-Hi to all,
-
-I just tried to setup authentication policies and authentication silos 
-in 4.20rc2.
-Following these steps:
-1. create a policy
-samba-tool domain auth policy create --enforce --name winclient-pol
-
-2. create a silo
-samba-tool domain auth silo create --enforce --name=winclient-silo
-
-3. adding a at least one user and one host to the silo
-samba-tool domain auth silo member grant --name=winclient-silo 
---member=winclient\$
-samba-tool domain auth silo member grant --name=winclient-silo 
---member=padmin
-
-BTW: In 4.19 it was "silo member add"
-
-4. Set single policy for all principals in this silo. with 4.19 that was 
-possible and that's by the way also possible with a windows DC. That's 
-on a windows DC called "Use a single policy for all principals that 
-belog to this authentication silo"
-
-In 4.20 the option --policy is missing, you have only the option to add:
---user-authentication-policy=
---service-authentication-policy=
---computer-authentication-policy=
-So it would be nice if the option --policy will be back
-
-The next step after creating the silo and the policy and adding the 
-clients and users to the silo would be adding:
-  --service-allowed-to-authenticate-from=SDDL
-and/or
--service-allowed-to-authenticate-to=SDDL
-
-But were can I get the SDDL for the user and the client?
-
-Stefan
+My current work is published at https://github.com/nkadel/samba4repo/.
+When I enable the use of the built-in Heimdall Kerberos with the
+"system_mit_krb5" option in the .spec file, I get these errors when
+compiling Samba with the "mock" command.
 
 
-
-
-
---------------ms070807030508050302030508
-Content-Type: application/pkcs7-signature; name="smime.p7s"
-Content-Transfer-Encoding: base64
-Content-Disposition: attachment; filename="smime.p7s"
-Content-Description: Kryptografische S/MIME-Signatur
-
-MIAGCSqGSIb3DQEHAqCAMIACAQExDzANBglghkgBZQMEAgEFADCABgkqhkiG9w0BBwEAAKCC
-CdEwggSUMIIDfKADAgECAghxU09cSz6R1TANBgkqhkiG9w0BAQsFADBmMQswCQYDVQQGEwJE
-RTEzMDEGA1UECgwqREdOIERldXRzY2hlcyBHZXN1bmRoZWl0c25ldHogU2VydmljZSBHbWJI
-MSIwIAYDVQQDDBlkZ25zZXJ2aWNlIENBIDIgVHlwZSBFOlBOMB4XDTIzMDkyNTE4MDgzNVoX
-DTI0MDkyNDE4MDgzNVowbjELMAkGA1UEBhMCREUxITAfBgNVBAUTGDQwMDAwMDAwNjUxMWNm
-MDEzNmYxMWEwNDEVMBMGA1UEAwwMU3RlZmFuIEthbmlhMSUwIwYJKoZIhvcNAQkBFhZzdGVm
-YW5Aa2FuaWEtb25saW5lLmRlMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA1ULY
-84oACo6tokvBGHFH3ZqqbpFN09v3A+iqQRRy3N4PfYPPPn2Br4Xun5HhTDbXnppqxxzRh8xw
-tV6TZhuRfa2rOaNfloKJCUgvBcTc+AGCSED0GR/HG8KDqUarhczOSpVagbTeFMfr2rmVj9Mr
-B6KXoQnXcspUKZhllAOmluGJgZ96jaKclZb54/0Z7HOqUtLOCyBQjhB4WHPHCmMfmoBWWnll
-NCh5ArWxAq2oy3qh3vD41YcFCWfwsbhWu6H7i+DctxX1d2s4Yb8AGcVotY5QM4Ihfs83Axez
-nrfnM0DcyJxEyAYEy/NCcNVbnKiBxEc6bOHcOBfNBCk0gfxU8wIDAQABo4IBPDCCATgwHQYD
-VR0OBBYEFJ24mZ9+WXalRwYFaJEOZPfMjOiyMAwGA1UdEwEB/wQCMAAwHwYDVR0jBBgwFoAU
-6caT0dUPBmRy6mqWProQ8lRUsnkwVgYDVR0gBE8wTTBLBgwrBgEEAfsrAgEDAggwOzA5Bggr
-BgEFBQcCARYtaHR0cDovL3NlYzUuZGduc2VydmljZS5kZS9wb2xpY2llcy9pbmRleC5odG1s
-MD4GA1UdHwQ3MDUwM6AxoC+GLWh0dHA6Ly9zZWM1LmRnbnNlcnZpY2UuZGUvY3JsL2NybDIt
-dHlwZS1lLmNybDAOBgNVHQ8BAf8EBAMCBLAwHQYDVR0lBBYwFAYIKwYBBQUHAwIGCCsGAQUF
-BwMEMCEGA1UdEQQaMBiBFnN0ZWZhbkBrYW5pYS1vbmxpbmUuZGUwDQYJKoZIhvcNAQELBQAD
-ggEBADibCeP+7VM75NQfZByrA0oDOPQy1kwPtnBUqX4SZuCTIiM27NZDgYry1KJS+QuKbNmd
-3OirBVqls4rYFTk24qH+5CIstJKrxY+TMHnGk9KpsVVDplw+EyE79khhcAMrbS03WsRZiBd/
-Uk7W5cvfkrTlCIjLzhwvDBqea4+bRTbi8T63LtNHhOgaj7g3+J1xM/wVgVlobSXoXk69+8ZL
-1RG3on3r+1EmJpvCPJsL0BfUTia547lW4ectUBOrQ9eEri2eb+MW1QyileHPXv6OS465uN/b
-2kqY39wo95YEWmWRRZDsiKAqkuY/Qfx7FsodvAQo8kzCsyruNaZB5q6eqZIwggU1MIIEHaAD
-AgECAghVHErXZq0l9jANBgkqhkiG9w0BAQsFADBhMQswCQYDVQQGEwJERTEzMDEGA1UECgwq
-REdOIERldXRzY2hlcyBHZXN1bmRoZWl0c25ldHogU2VydmljZSBHbWJIMR0wGwYDVQQDDBRk
-Z25zZXJ2aWNlIFJvb3QgNzpQTjAeFw0xNjEwMjYwOTIyNDFaFw0yNDEwMjYwOTIyNDFaMGYx
-CzAJBgNVBAYTAkRFMTMwMQYDVQQKDCpER04gRGV1dHNjaGVzIEdlc3VuZGhlaXRzbmV0eiBT
-ZXJ2aWNlIEdtYkgxIjAgBgNVBAMMGWRnbnNlcnZpY2UgQ0EgMiBUeXBlIEU6UE4wggEiMA0G
-CSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDcpfKUP3THo0fSl2bOa6PNbRcDYZaE4ZV3vLGr
-e/U445OsRahORPeP/9L4nycTK6fUawpDTqOaDxtXYxjoJNC9LnKRxVB/UkBf0h25vN0L1iV4
-KhCaY8TimV0z2yUSlb2NuZ4gdBU69qJkasqYj+AP8OcQOo0idj9Nr1eloHD32i0JDPkhBj8V
-f6c6b7mNyn8yfZYvZlzzV2iQ/cvo6iFLx2wgG7mCkOZ8BAHGDFw6T0UIA0Bk60YhRMRxI7GX
-jMxBQA2Y/XXoP4dvQDDtMNmK0r5DUXof87w2brXctuQ2b4xNwFIErVoAQu8ftnXTm9iOtaOs
-WyLMZX6v5szaQBqBAgMBAAGjggHqMIIB5jASBgNVHRMBAf8ECDAGAQH/AgEAMB8GA1UdIwQY
-MBaAFAEMFht0ctM8FO4md7dJFFPY+4sbMFsGCCsGAQUFBwEBBE8wTTBLBggrBgEFBQcwAYY/
-aHR0cDovL3JvY3NwLWRnbi5kZ25zZXJ2aWNlLmRlOjgwODAvZWpiY2EvcHVibGljd2ViL3N0
-YXR1cy9vY3NwMGoGA1UdIARjMGEwXwYMKwYBBAH7KwIBBAIBME8wTQYIKwYBBQUHAgEWQWh0
-dHA6Ly93d3cuZGduc2VydmljZS5kZS90cnVzdGNlbnRlci9wdWJsaWMvZGduc2VydmljZS9p
-bmRleC5odG1sMIGZBgNVHR8EgZEwgY4wgYuggYiggYWGgYJsZGFwOi8vbGRhcC5kZ25zZXJ2
-aWNlLmRlOjM4OS9DTj1DUkwtMSxPPURHTiUyMFNlcnZpY2UlMjBHbWJILEM9REU/Y2VydGlm
-aWNhdGVSZXZvY2F0aW9uTGlzdD9iYXNlP29iamVjdENsYXNzPWNSTERpc3RyaWJ1dGlvblBv
-aW50MB0GA1UdDgQWBBTpxpPR1Q8GZHLqapY+uhDyVFSyeTAOBgNVHQ8BAf8EBAMCAQYwGwYJ
-KwYBBAHAbQMFBA4wDAYKKwYBBAHAbQMFATANBgkqhkiG9w0BAQsFAAOCAQEAq7w5+kXJ+/xT
-at0jiTX4GDX5HUeQohqAuLGfotHcqQqqjF8G6UUI0q4i0tnhHtldhZrNBOErgThGsToNZ1Y2
-Gn0FRrcrUU9LnhSMwd1XJ0Je6ERSdEh4vXf8YxJQGZJPCPJcrblhue0mmwO9nbhKewGglht5
-VWSHTS8vq5Da3zbxFG6lIdE62V4KqcMAiyY2BfL8guCPscTWl5txJrjb4ENo9nRqdzsXNEG3
-yyzgmyv6znQ4pGgTe5E6qXx5bO6XCDoUK4Kz1S82PzR6hvcxKZo7kKK2ut2B3buwU8xqfw73
-EMH8imv4LW/Sx59wKElKjijjHdNrFG/wMRobDYzMyTGCA4IwggN+AgEBMHIwZjELMAkGA1UE
-BhMCREUxMzAxBgNVBAoMKkRHTiBEZXV0c2NoZXMgR2VzdW5kaGVpdHNuZXR6IFNlcnZpY2Ug
-R21iSDEiMCAGA1UEAwwZZGduc2VydmljZSBDQSAyIFR5cGUgRTpQTgIIcVNPXEs+kdUwDQYJ
-YIZIAWUDBAIBBQCgggHhMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkF
-MQ8XDTI0MDIxNzE3MTE0OVowLwYJKoZIhvcNAQkEMSIEIPFGCD8K3yzAasBHejbCzN3GIoqG
-viiJCirPQIQM3ZX+MGwGCSqGSIb3DQEJDzFfMF0wCwYJYIZIAWUDBAEqMAsGCWCGSAFlAwQB
-AjAKBggqhkiG9w0DBzAOBggqhkiG9w0DAgICAIAwDQYIKoZIhvcNAwICAUAwBwYFKw4DAgcw
-DQYIKoZIhvcNAwICASgwgYEGCSsGAQQBgjcQBDF0MHIwZjELMAkGA1UEBhMCREUxMzAxBgNV
-BAoMKkRHTiBEZXV0c2NoZXMgR2VzdW5kaGVpdHNuZXR6IFNlcnZpY2UgR21iSDEiMCAGA1UE
-AwwZZGduc2VydmljZSBDQSAyIFR5cGUgRTpQTgIIcVNPXEs+kdUwgYMGCyqGSIb3DQEJEAIL
-MXSgcjBmMQswCQYDVQQGEwJERTEzMDEGA1UECgwqREdOIERldXRzY2hlcyBHZXN1bmRoZWl0
-c25ldHogU2VydmljZSBHbWJIMSIwIAYDVQQDDBlkZ25zZXJ2aWNlIENBIDIgVHlwZSBFOlBO
-AghxU09cSz6R1TANBgkqhkiG9w0BAQEFAASCAQC1KwQEIquCbWZFnIwgrD7Jg/0hK0iVugAG
-xqmBoih7h/LK9ZKJkAiS2l3N9vzsduCF4mXd3dJuGCXoP4WtLFdOwyRJWhv1n/p+RcbEvkaY
-lOdlQaRqCqCzZv5futNSPYpUwWmtE6qxtGVxKfiqgebkrxQBnHtrw+7qFsjMwQLV7h2bppUm
-5smOwF3UYIFQ15TjecamEk1tzxAnPmtM7PlkiDgGk0zRZNk6x4qBA35Ixdub3iUa/fVDL5dM
-OCiBet4Stkr5zYTVNpEHmIhqjFB6Zrte/DnKGUUueKYNUrS4xCBDjNxTKmSk3O2JmNHPbtQF
-Zh4xVdSa3RMQJPbFCGK/AAAAAAAA
---------------ms070807030508050302030508--
+error: Bad exit status from /var/tmp/rpm-tmp.sarBcy (%build)
+RPM build errors:
+    Bad exit status from /var/tmp/rpm-tmp.sarBcy (%build)
+Child return code was: 1
+EXCEPTION: [Error('Command failed: \n # /usr/bin/systemd-nspawn -q -M
+62568e9bb2da46fb9560a29c33520d1a -D
+/var/lib/mock/centos-stream+epel-9-x86_64/root -a -u mockbuild
+--capability=cap_ipc_lock --
+bind=/tmp/mock-resolv.0z11du6p:/etc/resolv.conf
+--bind=/dev/mapper/control --bind=/dev/fuse --bind=/dev/loop-control
+--bind=/dev/loop0 --bind=/dev/loop1 --bind=/dev/loop2
+--bind=/dev/loop3 --bind=/
+dev/loop4 --bind=/dev/loop5 --bind=/dev/loop6 --bind=/dev/loop7
+--bind=/dev/loop8 --bind=/dev/loop9 --bind=/dev/loop10
+--bind=/dev/loop11 --console=pipe --setenv=TERM=vt100
+--setenv=SHELL=/bin/bash
+ --setenv=HOME=/builddir --setenv=HOSTNAME=mock
+--setenv=PATH=/usr/bin:/bin:/usr/sbin:/sbin
+\'--setenv=PROMPT_COMMAND=printf "\\033]0;<mock-chroot>\\007"\'
+\'--setenv=PS1=<mock-chroot> \\s-\\v\\$ \
+' --setenv=LANG=C.UTF-8 --resolv-conf=off bash --login -c
+\'/usr/bin/rpmbuild -bb  --target
+x86_64 --nodeps /builddir/build/originals/samba.spec\'\n', 1)]
+Traceback (most recent call last):
+  File "/usr/lib/python3.9/site-packages/mockbuild/trace_decorator.py",
+line 93, in trace
+    result = func(*args, **kw)
+  File "/usr/lib/python3.9/site-packages/mockbuild/util.py", line 612,
+in do_with_status
+    raise exception.Error("Command failed: \n # %s\n%s" %
+(cmd_pretty(command, env), output), child.returncode)
+mockbuild.exception.Error: Command failed:
+ # /usr/bin/systemd-nspawn -q -M 62568e9bb2da46fb9560a29c33520d1a -D
+/var/lib/mock/centos-stream+epel-9-x86_64/root -a -u mockbuild
+--capability=cap_ipc_lock
+--bind=/tmp/mock-resolv.0z11du6p:/etc/resolv.conf
+--bind=/dev/mapper/control --bind=/dev/fuse --bind=/dev/loop-control
+--bind=/dev/loop0 --bind=/dev/loop1 --bind=/dev/loop2
+--bind=/dev/loop3 --bind=/dev/loop4 --bind=/dev/loop5
+--bind=/dev/loop6 --bind=/dev/loop7 --bind=/dev/loop8
+--bind=/dev/loop9 --bind=/dev/loop10 --bind=/dev/loop11 --console=pipe
+--setenv=TERM=vt100 --setenv=SHELL=/bin/bash --setenv=HOME=/builddir
+--setenv=HOSTNAME=mock --setenv=PATH=/usr/bin:/bin:/usr/sbin:/sbin
+'--setenv=PROMPT_COMMAND=printf "\033]0;<mock-chroot>\007"'
+'--setenv=PS1=<mock-chroot> \s-\v\$ ' --setenv=LANG=C.UTF-8
+--resolv-conf=off bash --login -c '/usr/bin/rpmbuild -bb  --target
+x86_64 --nodeps /builddir/build/originals/samba.spec'
 
