@@ -2,77 +2,50 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id B9BF685A8DE
-	for <lists+samba-technical@lfdr.de>; Mon, 19 Feb 2024 17:25:30 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7655A85A8F4
+	for <lists+samba-technical@lfdr.de>; Mon, 19 Feb 2024 17:28:44 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
-	bh=fw4Ue4rjf7dgcaYAwCgIZc+exAM/hYChzmdLII/W9Fk=; b=McBxqjYXqp6jR67Z2nQihSGV3b
-	boR+UViARSZSE1D1SytnxbzaCfUCxRW07+oEeI5Ukedp5QhPOGa12oHyyZVCAL78QCDTGSnSdihrC
-	2VCpABDiS542qW0cnGc/BnZXKoG74/39OrH21ugh2Q1V2UzcJ6scM+5YGP7+stKaUWo9S+KWY1seR
-	b+OqbSCQ6dgCkasKEtW5UEO5lQGnyTIkJEx6JSTIsDoMPwRSy/MqSqJM5eqKzVN6njkMVjjQcLN/a
-	7aZoP7PSm3xs2LTNo1lMzbTLeuKuf0/zSBFv0JdwElpikAFm/A4qBsfycc+f0NAaEew03DwTHiITO
-	8V9NRT9w==;
-Received: from ip6-localhost ([::1]:26980 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=hIFxN7WJ4yRdzhaUgEidcSWDcMwouQ8l3IStnv2VX+Y=; b=Dj/r6GywYuoHb8rsBJUr8BUviO
+	d33He/Bgng+Lr4pq1qDjxI81zJg+C+mu4h93AMzEgTOUf3P86zz4AYMf3CAel+5faJTqOiSnC08iX
+	PtUZHZ10ui4H9SOxzxRODP4jrMFESK4ndHfE8/E6z+LpAUaC0JmziNxXQykQ3Jh5yBxyCd1xUHE+h
+	jICAVPHoPR0YTWbGnoAhhEMRE1k+UY+PdzZ/f1TG9a/+gKpOl1Sd/Qel+3lk70MCGdJv/JJ2uChPi
+	5A06NHEAPYuykrHQ+/xnGokr/+eXCAbLI5OLkFusF4PEhi2py6+3dH1RU3yaqiu2+yYGowfmly2wV
+	COcqLeWQ==;
+Received: from ip6-localhost ([::1]:51722 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1rc6SI-008vA9-BI; Mon, 19 Feb 2024 16:25:22 +0000
-Received: from mx.inno.tech ([185.228.49.205]:15854) 
+	id 1rc6VQ-008vFV-0P; Mon, 19 Feb 2024 16:28:36 +0000
+Received: from plasma4.jpberlin.de ([80.241.57.33]:59515) 
  by hr1.samba.org with esmtps
- (TLS1.2:ECDHE_SECP256R1__RSA_SHA512__AES_256_GCM:256) (Exim)
- id 1rc6S7-008vA2-4H
- for samba-technical@lists.samba.org; Mon, 19 Feb 2024 16:25:14 +0000
-Received: from ksmg3 (localhost [127.0.0.1])
- by mx.inno.tech (Postfix) with ESMTP id 095D480015;
- Mon, 19 Feb 2024 19:25:08 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx.inno.tech 095D480015
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=inno.tech; s=s1;
- t=1708359908; bh=fw4Ue4rjf7dgcaYAwCgIZc+exAM/hYChzmdLII/W9Fk=;
- h=From:To:Subject:Date:Message-ID:Content-Type:MIME-Version:From;
- b=m1TrrlQh2FYeVkjh21lcEnLhAHp7TU8hQ8G8dtyZAsUOfQK+FweVNWAQu7j0l0N9J
- E54rUHX/UWzjrZzo1TGRx/kLFES+rr2bYh0u/k5OqhVEzh0vV6eorYITkuwIF1ZH+q
- UjjEVF5WnUvVylXEnMW74AT3Fzb72TqcNA9frtbo8SRNENvCpOkscXj/wvRtPnZRMs
- rvZNLTTcztlu8DlUodFJRJnALD8Nmb9pYokJbJD72haz8U0tgughF5+T3eljtzNXV8
- GVNG5QQxALhPcC98s5CXYPwieD26zxdQGGSjkW622O6FBBrIJOKKATuQ6QiktWLAvY
- lUnv2ZC22k8xQ==
-Received: from SEC-DLP-QRNT (unknown [10.0.0.117])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
- (No client certificate requested)
- by mx.inno.tech (Postfix) with ESMTPS;
- Mon, 19 Feb 2024 19:25:08 +0300 (MSK)
-X-CHECKED: 1
-X-CHECKED-RELAY-ID: 3c279d7389fa9528e53a55e18b8e1fb6328980c7
-X-Cache: 20240219_192506241_00028671
-X-MS-Exchange-Organization-AuthAs: Partner
-Received: from MAIL-DC1.inno.local (10.0.115.2) by MAIL-DC2.inno.local
- (10.12.115.2) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1118.40; Mon, 19 Feb
- 2024 19:25:05 +0300
-Received: from MAIL-DC1.inno.local ([10.0.115.10]) by MAIL-DC1.inno.local
- ([10.0.115.10]) with mapi id 15.02.1118.040; Mon, 19 Feb 2024 19:25:05 +0300
-To: Michael Tokarev <mjt@tls.msk.ru>, "samba-technical@lists.samba.org"
- <samba-technical@lists.samba.org>
-Subject: RE: smbd: Broken access to share
-Thread-Topic: smbd: Broken access to share
-Thread-Index: AdpgH1hPuaFKQ4ZdTjar1D/HlL9lOwADG/oAACLyytD///hqAP/6zFMAgAo4+4D//81MQA==
-Date: Mon, 19 Feb 2024 16:25:05 +0000
-Message-ID: <721498a94efc48bba3e4d17bdc6eda30@inno.tech>
-References: <c4ef9c77c4784a1898abdd266e5dccb5@inno.tech><ec8cb899-c1e7-45bd-97c9-a8d57f2c2fa9@sernet.de><4b79869d3da4448096bc54491dcb4bec@inno.tech><e75610fe-7479-4057-b48f-f207711f6c0a@sernet.de><1e58ff293a634a2594f9ac6a7fdbb470@inno.tech>
- <00cb5b3d-572a-4ebd-9c1c-50df9fafc129@tls.msk.ru>
-In-Reply-To: <00cb5b3d-572a-4ebd-9c1c-50df9fafc129@tls.msk.ru>
-Accept-Language: en-GB, en-US
-Content-Language: ru-RU
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.0.0.114]
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+ (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1rc6VL-008vFO-HG
+ for samba-technical@lists.samba.org; Mon, 19 Feb 2024 16:28:34 +0000
+Received: from spamfilter01.heinlein-hosting.de
+ (spamfilter01.heinlein-hosting.de [80.241.56.115])
+ by plasma.jpberlin.de (Postfix) with ESMTP id 527A7FEA4B;
+ Mon, 19 Feb 2024 17:28:26 +0100 (CET)
+Received: from plasma.jpberlin.de ([80.241.56.68])
+ by spamfilter01.heinlein-hosting.de (spamfilter01.heinlein-hosting.de
+ [80.241.56.115]) (amavisd-new, port 10030)
+ with ESMTP id DZjRgxqTD8ZL; Mon, 19 Feb 2024 17:28:25 +0100 (CET)
+Received: from [192.168.123.203] (p5b2400db.dip0.t-ipconnect.de [91.36.0.219])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (Client did not present a certificate)
+ (Authenticated sender: stefan@kania-online.de)
+ by plasma.jpberlin.de (Postfix) with ESMTPSA id D4873AB725
+ for <samba-technical@lists.samba.org>; Mon, 19 Feb 2024 17:28:24 +0100 (CET)
+Message-ID: <f16c0d4d-0040-4179-ad24-e40a98d5f0ac@kania-online.de>
+Date: Mon, 19 Feb 2024 17:28:24 +0100
 MIME-Version: 1.0
-X-KSMG-Rule-ID: 5
-X-KSMG-Message-Action: skipped
-X-KSMG-AntiSpam-Status: not scanned, allowlist
-X-KSMG-AntiPhishing: not scanned, allowlist
-X-KSMG-LinksScanning: not scanned, allowlist
-X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
- not scanned, allowlist
+Subject: Re: setting up authentication policies in 4.20rc2
+Content-Language: de-DE, en-US
+To: samba-technical@lists.samba.org
+References: <e8210ddc-4506-4255-bcbe-f24ff86b2f0a@kania-online.de>
+ <d7e23578-1526-4835-9438-306da6a95ac1@samba.org>
+In-Reply-To: <d7e23578-1526-4835-9438-306da6a95ac1@samba.org>
+Content-Type: multipart/signed; protocol="application/pkcs7-signature";
+ micalg=sha-256; boundary="------------ms050408010005060209060703"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -86,18 +59,189 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: =?utf-8?b?0JrRg9C/0YfRg9C6INCc0LjRhdCw0LjQuyDQk9C10L7RgNCz0LjQtdCy0Lg=?=
- =?utf-8?q?=D1=87_via_samba-technical?= <samba-technical@lists.samba.org>
-Reply-To: =?utf-8?B?0JrRg9C/0YfRg9C6INCc0LjRhdCw0LjQuyDQk9C10L7RgNCz0LjQtdCy0Lg=?=
- =?utf-8?B?0Yc=?= <MKupchuk@inno.tech>
+From: Stefan Kania via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Stefan Kania <stefan@kania-online.de>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-SGVsbG8sIE1pY2hhZWwhDQoNCj5naXRsYWIuaW5uby50ZWNoOiBkb21haW4gbmFtZSBkb2VzIG5v
-dCBleGlzdCBhbmQgdGhlcmUncyBubyBzdWNoIGNvbW1pdCBpbiB0aGUgb2ZmaWNpYWwgc2FtYmEg
-Z2l0IHJlcG9zaXRvcnksIGVpdGhlci4NCg0KSSdtIHZlcnkgc29ycnkuIENvcGllZCBsaW5rIGZy
-b20gd3JvbmcgYnJvd3NlciB0YWIgKGFub3RoZXIgdGVzdCBjb21taXQgaW4gb3VyIG1pcnJvciBv
-ZiBTYW1iYSByZXBvKS4NCkNvcnJlY3QgbGluayB0byBjb21taXQgYXQgZ2l0bGFiLmNvbToNCmh0
-dHBzOi8vZ2l0bGFiLmNvbS9zYW1iYS10ZWFtL3NhbWJhLy0vY29tbWl0LzVlOTI1Zjk3NTVmYWQx
-ODA4NjM4NjExNTdhYTc1NDhkODNkZDNmZGUNCg0KQmVzdCB3aXNoZXMsDQpNaWNoYWVsLg0K
+This is a cryptographically signed message in MIME format.
+
+--------------ms050408010005060209060703
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+
+
+
+Am 19.02.24 um 02:48 schrieb Jo Sutton via samba-technical:
+> On 18/02/24 6:11 am, Stefan Kania via samba-technical wrote:
+>> Hi to all,
+>>
+>> I just tried to setup authentication policies and authentication silos 
+>> in 4.20rc2.
+>> Following these steps:
+>> 1. create a policy
+>> samba-tool domain auth policy create --enforce --name winclient-pol
+>>
+>> 2. create a silo
+>> samba-tool domain auth silo create --enforce --name=winclient-silo
+>>
+>> 3. adding a at least one user and one host to the silo
+>> samba-tool domain auth silo member grant --name=winclient-silo 
+>> --member=winclient\$
+>> samba-tool domain auth silo member grant --name=winclient-silo 
+>> --member=padmin
+>>
+>> BTW: In 4.19 it was "silo member add"
+>>
+>> 4. Set single policy for all principals in this silo. with 4.19 that 
+>> was possible and that's by the way also possible with a windows DC. 
+>> That's on a windows DC called "Use a single policy for all principals 
+>> that belog to this authentication silo"
+>>
+>> In 4.20 the option --policy is missing, you have only the option to add:
+>> --user-authentication-policy=
+>> --service-authentication-policy=
+>> --computer-authentication-policy=
+>> So it would be nice if the option --policy will be back
+>>
+> 
+> We removed this option in commit 
+> c22400fd8ef961e472ce2803cf4a2ec58b778795. I don’t remember our exact 
+> reasoning, but we must have thought that it didn’t make much sense for a 
+> user and a computer to share the same authentication policy.
+
+
+In this picture us see the screenshot from (soory it's a german DC) that 
+you cann select either all policies or select one.
+
+https://ibb.co/kGB3XhR
+
+I think, with Samba we should have the same possibility.
+
+> 
+>> The next step after creating the silo and the policy and adding the 
+>> clients and users to the silo would be adding:
+>>   --service-allowed-to-authenticate-from=SDDL
+>> and/or
+>> -service-allowed-to-authenticate-to=SDDL
+>>
+>> But were can I get the SDDL for the user and the client?
+>>
+> 
+> Can you explain what you’d like to accomplish in this scenario? If you 
+> want to make sure the user ‘padmin’ authenticates from the computer 
+> ‘winclient$’, you can use 
+> ‘--user-allowed-to-authenticate-from-device-silo=winclient-silo’, and 
+> make sure the user and the computer both belong to the silo. Or if you 
+> want to let only users in the silo authenticate to the computer 
+> ‘winclient$’, you can use 
+> ‘--computer-allowed-to-authenticate-to-by-silo=winclient-silo’.
+> 
+
+
+
+I wan't to disallow the user padmin to login at the computer with the 
+name winclient. So all users who are member of the silo winclient-silo 
+should not be able to login to the computer winclient.
+So for example I create a policy login-to-DCs, than add the group 
+"domain users" to the silo and the DCs. In a windows-Domain now I can 
+configure to allow all userers are equal to a list of users or not equal.
+As you can see in the next picture, I can choose either if the user is 
+equal to the list to allow the access, or the user is not equal to the 
+list to allowed to access.
+
+https://ibb.co/SxgRzZW
+
+I'm missing the part of selecting "member of the list" or "not member of 
+the list"
+
+
+
+
+
+Stefan
+>> Stefan
+>>
+>>
+>>
+>>
+> 
+> Cheers,
+> Jo (she/her)
+> 
+
+
+
+--------------ms050408010005060209060703
+Content-Type: application/pkcs7-signature; name="smime.p7s"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="smime.p7s"
+Content-Description: Kryptografische S/MIME-Signatur
+
+MIAGCSqGSIb3DQEHAqCAMIACAQExDzANBglghkgBZQMEAgEFADCABgkqhkiG9w0BBwEAAKCC
+CdEwggSUMIIDfKADAgECAghxU09cSz6R1TANBgkqhkiG9w0BAQsFADBmMQswCQYDVQQGEwJE
+RTEzMDEGA1UECgwqREdOIERldXRzY2hlcyBHZXN1bmRoZWl0c25ldHogU2VydmljZSBHbWJI
+MSIwIAYDVQQDDBlkZ25zZXJ2aWNlIENBIDIgVHlwZSBFOlBOMB4XDTIzMDkyNTE4MDgzNVoX
+DTI0MDkyNDE4MDgzNVowbjELMAkGA1UEBhMCREUxITAfBgNVBAUTGDQwMDAwMDAwNjUxMWNm
+MDEzNmYxMWEwNDEVMBMGA1UEAwwMU3RlZmFuIEthbmlhMSUwIwYJKoZIhvcNAQkBFhZzdGVm
+YW5Aa2FuaWEtb25saW5lLmRlMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA1ULY
+84oACo6tokvBGHFH3ZqqbpFN09v3A+iqQRRy3N4PfYPPPn2Br4Xun5HhTDbXnppqxxzRh8xw
+tV6TZhuRfa2rOaNfloKJCUgvBcTc+AGCSED0GR/HG8KDqUarhczOSpVagbTeFMfr2rmVj9Mr
+B6KXoQnXcspUKZhllAOmluGJgZ96jaKclZb54/0Z7HOqUtLOCyBQjhB4WHPHCmMfmoBWWnll
+NCh5ArWxAq2oy3qh3vD41YcFCWfwsbhWu6H7i+DctxX1d2s4Yb8AGcVotY5QM4Ihfs83Axez
+nrfnM0DcyJxEyAYEy/NCcNVbnKiBxEc6bOHcOBfNBCk0gfxU8wIDAQABo4IBPDCCATgwHQYD
+VR0OBBYEFJ24mZ9+WXalRwYFaJEOZPfMjOiyMAwGA1UdEwEB/wQCMAAwHwYDVR0jBBgwFoAU
+6caT0dUPBmRy6mqWProQ8lRUsnkwVgYDVR0gBE8wTTBLBgwrBgEEAfsrAgEDAggwOzA5Bggr
+BgEFBQcCARYtaHR0cDovL3NlYzUuZGduc2VydmljZS5kZS9wb2xpY2llcy9pbmRleC5odG1s
+MD4GA1UdHwQ3MDUwM6AxoC+GLWh0dHA6Ly9zZWM1LmRnbnNlcnZpY2UuZGUvY3JsL2NybDIt
+dHlwZS1lLmNybDAOBgNVHQ8BAf8EBAMCBLAwHQYDVR0lBBYwFAYIKwYBBQUHAwIGCCsGAQUF
+BwMEMCEGA1UdEQQaMBiBFnN0ZWZhbkBrYW5pYS1vbmxpbmUuZGUwDQYJKoZIhvcNAQELBQAD
+ggEBADibCeP+7VM75NQfZByrA0oDOPQy1kwPtnBUqX4SZuCTIiM27NZDgYry1KJS+QuKbNmd
+3OirBVqls4rYFTk24qH+5CIstJKrxY+TMHnGk9KpsVVDplw+EyE79khhcAMrbS03WsRZiBd/
+Uk7W5cvfkrTlCIjLzhwvDBqea4+bRTbi8T63LtNHhOgaj7g3+J1xM/wVgVlobSXoXk69+8ZL
+1RG3on3r+1EmJpvCPJsL0BfUTia547lW4ectUBOrQ9eEri2eb+MW1QyileHPXv6OS465uN/b
+2kqY39wo95YEWmWRRZDsiKAqkuY/Qfx7FsodvAQo8kzCsyruNaZB5q6eqZIwggU1MIIEHaAD
+AgECAghVHErXZq0l9jANBgkqhkiG9w0BAQsFADBhMQswCQYDVQQGEwJERTEzMDEGA1UECgwq
+REdOIERldXRzY2hlcyBHZXN1bmRoZWl0c25ldHogU2VydmljZSBHbWJIMR0wGwYDVQQDDBRk
+Z25zZXJ2aWNlIFJvb3QgNzpQTjAeFw0xNjEwMjYwOTIyNDFaFw0yNDEwMjYwOTIyNDFaMGYx
+CzAJBgNVBAYTAkRFMTMwMQYDVQQKDCpER04gRGV1dHNjaGVzIEdlc3VuZGhlaXRzbmV0eiBT
+ZXJ2aWNlIEdtYkgxIjAgBgNVBAMMGWRnbnNlcnZpY2UgQ0EgMiBUeXBlIEU6UE4wggEiMA0G
+CSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDcpfKUP3THo0fSl2bOa6PNbRcDYZaE4ZV3vLGr
+e/U445OsRahORPeP/9L4nycTK6fUawpDTqOaDxtXYxjoJNC9LnKRxVB/UkBf0h25vN0L1iV4
+KhCaY8TimV0z2yUSlb2NuZ4gdBU69qJkasqYj+AP8OcQOo0idj9Nr1eloHD32i0JDPkhBj8V
+f6c6b7mNyn8yfZYvZlzzV2iQ/cvo6iFLx2wgG7mCkOZ8BAHGDFw6T0UIA0Bk60YhRMRxI7GX
+jMxBQA2Y/XXoP4dvQDDtMNmK0r5DUXof87w2brXctuQ2b4xNwFIErVoAQu8ftnXTm9iOtaOs
+WyLMZX6v5szaQBqBAgMBAAGjggHqMIIB5jASBgNVHRMBAf8ECDAGAQH/AgEAMB8GA1UdIwQY
+MBaAFAEMFht0ctM8FO4md7dJFFPY+4sbMFsGCCsGAQUFBwEBBE8wTTBLBggrBgEFBQcwAYY/
+aHR0cDovL3JvY3NwLWRnbi5kZ25zZXJ2aWNlLmRlOjgwODAvZWpiY2EvcHVibGljd2ViL3N0
+YXR1cy9vY3NwMGoGA1UdIARjMGEwXwYMKwYBBAH7KwIBBAIBME8wTQYIKwYBBQUHAgEWQWh0
+dHA6Ly93d3cuZGduc2VydmljZS5kZS90cnVzdGNlbnRlci9wdWJsaWMvZGduc2VydmljZS9p
+bmRleC5odG1sMIGZBgNVHR8EgZEwgY4wgYuggYiggYWGgYJsZGFwOi8vbGRhcC5kZ25zZXJ2
+aWNlLmRlOjM4OS9DTj1DUkwtMSxPPURHTiUyMFNlcnZpY2UlMjBHbWJILEM9REU/Y2VydGlm
+aWNhdGVSZXZvY2F0aW9uTGlzdD9iYXNlP29iamVjdENsYXNzPWNSTERpc3RyaWJ1dGlvblBv
+aW50MB0GA1UdDgQWBBTpxpPR1Q8GZHLqapY+uhDyVFSyeTAOBgNVHQ8BAf8EBAMCAQYwGwYJ
+KwYBBAHAbQMFBA4wDAYKKwYBBAHAbQMFATANBgkqhkiG9w0BAQsFAAOCAQEAq7w5+kXJ+/xT
+at0jiTX4GDX5HUeQohqAuLGfotHcqQqqjF8G6UUI0q4i0tnhHtldhZrNBOErgThGsToNZ1Y2
+Gn0FRrcrUU9LnhSMwd1XJ0Je6ERSdEh4vXf8YxJQGZJPCPJcrblhue0mmwO9nbhKewGglht5
+VWSHTS8vq5Da3zbxFG6lIdE62V4KqcMAiyY2BfL8guCPscTWl5txJrjb4ENo9nRqdzsXNEG3
+yyzgmyv6znQ4pGgTe5E6qXx5bO6XCDoUK4Kz1S82PzR6hvcxKZo7kKK2ut2B3buwU8xqfw73
+EMH8imv4LW/Sx59wKElKjijjHdNrFG/wMRobDYzMyTGCA4IwggN+AgEBMHIwZjELMAkGA1UE
+BhMCREUxMzAxBgNVBAoMKkRHTiBEZXV0c2NoZXMgR2VzdW5kaGVpdHNuZXR6IFNlcnZpY2Ug
+R21iSDEiMCAGA1UEAwwZZGduc2VydmljZSBDQSAyIFR5cGUgRTpQTgIIcVNPXEs+kdUwDQYJ
+YIZIAWUDBAIBBQCgggHhMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkF
+MQ8XDTI0MDIxOTE2MjgyNFowLwYJKoZIhvcNAQkEMSIEIFewlkA+9TJ7VonJ34Bxgu66C9VZ
+pTTCM/3Um0lpSZ5XMGwGCSqGSIb3DQEJDzFfMF0wCwYJYIZIAWUDBAEqMAsGCWCGSAFlAwQB
+AjAKBggqhkiG9w0DBzAOBggqhkiG9w0DAgICAIAwDQYIKoZIhvcNAwICAUAwBwYFKw4DAgcw
+DQYIKoZIhvcNAwICASgwgYEGCSsGAQQBgjcQBDF0MHIwZjELMAkGA1UEBhMCREUxMzAxBgNV
+BAoMKkRHTiBEZXV0c2NoZXMgR2VzdW5kaGVpdHNuZXR6IFNlcnZpY2UgR21iSDEiMCAGA1UE
+AwwZZGduc2VydmljZSBDQSAyIFR5cGUgRTpQTgIIcVNPXEs+kdUwgYMGCyqGSIb3DQEJEAIL
+MXSgcjBmMQswCQYDVQQGEwJERTEzMDEGA1UECgwqREdOIERldXRzY2hlcyBHZXN1bmRoZWl0
+c25ldHogU2VydmljZSBHbWJIMSIwIAYDVQQDDBlkZ25zZXJ2aWNlIENBIDIgVHlwZSBFOlBO
+AghxU09cSz6R1TANBgkqhkiG9w0BAQEFAASCAQDSZEb5PNf0WvzFLVHFCAfVLpzgrBRunSju
+uewTM8SS2ly3cNMB3aJDU0L3j04XOInEjbG7aojLetIbvCtkDVeFDD2N8o9o9834v+9ueOKj
+EYJnaTpnoDASttFOrPwcThpQYMfJWnY3UitaA//y5rnRQHUm/9hRxpM4PN+WDDdqP5HTfnM2
+Zh/6gSh8Lk4BYMcpEou7JaVIaiKuUiq6I7JQpsv7y1OrEaCnu/etKmi82apctRMcvYeoJbKD
+dZu5t/65EXBU7xD2d/VVbKWKLMQwQoPWheOC+FN2dRxcgKYEoM6TyvDR+o1fo9Ns7aKTv6ux
+bCpxTj+YpvD3nq9Dlp7mAAAAAAAA
+--------------ms050408010005060209060703--
 
