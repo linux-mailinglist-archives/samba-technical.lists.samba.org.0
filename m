@@ -2,48 +2,45 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id D609B859A94
-	for <lists+samba-technical@lfdr.de>; Mon, 19 Feb 2024 02:48:59 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id CBD2D85A17A
+	for <lists+samba-technical@lfdr.de>; Mon, 19 Feb 2024 11:58:12 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=f7o2bsFMAmJYjE1pYG5qZWBN2kaqKhi1tfPyfqknCZA=; b=R3KJZqczJwakBU/bNHxKOtZ2+Z
-	OoDCkia9blsdF36KqpYzMk6D1eFt1aDxm5/x6bcP5lQZHxtEB+7I1hkyrCvGlmzLCWYcE+a1mqIgl
-	PxMz6bV1MRRWFD8TXo7R9ZmkMnHoTZjsOaWskapb6xzfTj6ZLXwEHEtXXlknbJmKjW79lyxIt3aRl
-	NYmuHoth7Bz+qCKcXWly220USx+aBZ9geP3kDjJouma/0C9x1PIeuzV7rfXPhI2h8YvxmHJZ8tfYa
-	qwvu37P8p3wZpZyNij48CLNP5gT1e/1ov1MZHQqtlWHFQKSfuVN2RPo1fLV31gElPz9bKllBfTXOR
-	HWql6Ypw==;
-Received: from ip6-localhost ([::1]:45642 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
+	bh=rlNNdur97Yo9hlB/wou28f1SOS//cUA+UrdoN4MZ5YQ=; b=nIwoV4mW5LApbW8N8W/alypAR+
+	4WBvgOmqw9OVqTkJxOyRimwuUeT21biSk4zvqGjZHPbjdt6fMfVY+2H3lpgzLrUqKdD4BdLQRUxjz
+	ocIHdaqMJvWOOQp8OAIGKsLZIS6BJNKeZCeR/d28iLxQ7zyf4gqQhgL11RGMLQ2m+jPoEMJEa7wLt
+	MGELp2rLWWR/2hvE5QW14YDJ7hh5alUfeeYWa95QapYV7nFnFKYwT2ETBPsKNyJmJ+08xNKyZRHcK
+	4uNoWmqiEVV/wWOM27yhym3WBknOungIGslSYfaMT23OajzsD8GJTarAVak4p6l6/sxmOn9r/XsSh
+	F7cEdbdg==;
+Received: from ip6-localhost ([::1]:50564 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1rbslc-008rNL-Nk; Mon, 19 Feb 2024 01:48:24 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:49044) 
+	id 1rc1LB-008sou-8g; Mon, 19 Feb 2024 10:57:41 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:57938) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1rbslX-008rNE-O9
- for samba-technical@lists.samba.org; Mon, 19 Feb 2024 01:48:21 +0000
+ (Exim) id 1rc1L1-008soD-M1; Mon, 19 Feb 2024 10:57:34 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=From:To:Date:Message-ID:CC;
- bh=f7o2bsFMAmJYjE1pYG5qZWBN2kaqKhi1tfPyfqknCZA=; b=YZ1pEWfi83gnSe8yqZwapLoGTn
- EBL3J9CNHpe5xyuO2HlU06EY9qn2xRAZlTFptmM/Q1ZmaFW0vPCfB0fRw2tMXPJtR6N+nURpMv1XJ
- vaoo2GIhvZvyFXcZ8niH+VDl7NZ1slJDyX2mmm91rHv4/RYz2q4AO6e3ulRz1LTJaxIq7jy7M18yR
- ZaILIhhU8nS0WG5Xf/IfvOvI3EMZQj/fpmgvt83mcF7A3iTQMkiRv3W38EOno5yci4/6RmnZX6NU+
- VHrXGLDCAe9HKETx+EKQEWBy8z9gDopHi61zIjUrVs4CXNMqcgepzzyqqqSsZjfsnXWI+mi0Edkqd
- 2DIYw/ng5CG/YWdZhjWb+Mb+WQ5nXNWekRHm6DwD87zo5+e1WcKQ8ZRqxv5HzeiGDo8Kmliyqd41u
- g3bm1ijn69tzf8PTdBoqN7El19FX79iD/+0MlPWCr5XX7/IuXrTgaZgRaoz8NU3mOP0mtqO17Mg8u
- ehW5IaRtFjWFIv3L5XOykH7P;
+ bh=rlNNdur97Yo9hlB/wou28f1SOS//cUA+UrdoN4MZ5YQ=; b=NpYjQlQ1ewIyOrYZibDQqjOdeh
+ LRTKB24N4jCuKi4YjYKipZoJ1CaYPLekBhh6WInMno+5XV2qsP9EqFgkK7JR9WT1bDAiFmpn8tzds
+ WoCC1XFjv4br2Sd4MPwzIKJo70/QddszEk1YPPefUXjHfDwiF32Wy0mvzlJww0eJb9hh+4bt3q3wQ
+ n3KR0ofzgqGaiMyIX7jfEk8hAiMpuprXNVxW0fzvlfJVssYdkKZi8QIYxJi086viDtwqhOVL5g2cn
+ zTjbru3hOh1gd4VglsHa4IzmJcEAxUpBJX62n8QnVEWyxI12FzyEysCsPi/JOYqxGL49UEWlnRGBK
+ y5ZyKkAcFlQKtpRCEuPx7I6s3wVUipgnJWbjHC+POScaPJgEtaQ3aH9HYstWMSHkWVtiRRM2wd5Qq
+ 9MBqKI8c7FNm9nIhc/g03yVUAebt3uZYYKfZddVaXXzUkr8bRL1U6MlOrKDLtqE2p0XGQHSheIsi4
+ l9mBuYs/S5Xi2enUBIbhsTfw;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1rbslT-00DggC-2B for samba-technical@lists.samba.org;
- Mon, 19 Feb 2024 01:48:16 +0000
-Message-ID: <d7e23578-1526-4835-9438-306da6a95ac1@samba.org>
-Date: Mon, 19 Feb 2024 14:48:06 +1300
+ (Exim) id 1rc1L1-00DlQc-0A; Mon, 19 Feb 2024 10:57:31 +0000
+Message-ID: <c51fd7f3-10d8-4c3f-84ac-225032623f0e@samba.org>
+Date: Mon, 19 Feb 2024 11:57:30 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: setting up authentication policies in 4.20rc2
-Content-Language: en-GB
-To: samba-technical@lists.samba.org
-References: <e8210ddc-4506-4255-bcbe-f24ff86b2f0a@kania-online.de>
-In-Reply-To: <e8210ddc-4506-4255-bcbe-f24ff86b2f0a@kania-online.de>
+Content-Language: de-DE
+To: samba-announce@lists.samba.org, samba@lists.samba.org,
+ samba-technical@lists.samba.org
+Subject: [Announce] Samba 4.19.5 Available for Download
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-BeenThere: samba-technical@lists.samba.org
@@ -59,72 +56,91 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jo Sutton via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jo Sutton <jsutton@samba.org>
+From: Jule Anger via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jule Anger <janger@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On 18/02/24 6:11 am, Stefan Kania via samba-technical wrote:
-> Hi to all,
-> 
-> I just tried to setup authentication policies and authentication silos 
-> in 4.20rc2.
-> Following these steps:
-> 1. create a policy
-> samba-tool domain auth policy create --enforce --name winclient-pol
-> 
-> 2. create a silo
-> samba-tool domain auth silo create --enforce --name=winclient-silo
-> 
-> 3. adding a at least one user and one host to the silo
-> samba-tool domain auth silo member grant --name=winclient-silo 
-> --member=winclient\$
-> samba-tool domain auth silo member grant --name=winclient-silo 
-> --member=padmin
-> 
-> BTW: In 4.19 it was "silo member add"
-> 
-> 4. Set single policy for all principals in this silo. with 4.19 that was 
-> possible and that's by the way also possible with a windows DC. That's 
-> on a windows DC called "Use a single policy for all principals that 
-> belog to this authentication silo"
-> 
-> In 4.20 the option --policy is missing, you have only the option to add:
-> --user-authentication-policy=
-> --service-authentication-policy=
-> --computer-authentication-policy=
-> So it would be nice if the option --policy will be back
-> 
+Release Announcements
+---------------------
 
-We removed this option in commit 
-c22400fd8ef961e472ce2803cf4a2ec58b778795. I don’t remember our exact 
-reasoning, but we must have thought that it didn’t make much sense for a 
-user and a computer to share the same authentication policy.
+This is the latest stable release of the Samba 4.19 release series.
 
-> The next step after creating the silo and the policy and adding the 
-> clients and users to the silo would be adding:
->   --service-allowed-to-authenticate-from=SDDL
-> and/or
-> -service-allowed-to-authenticate-to=SDDL
-> 
-> But were can I get the SDDL for the user and the client?
-> 
 
-Can you explain what you’d like to accomplish in this scenario? If you 
-want to make sure the user ‘padmin’ authenticates from the computer 
-‘winclient$’, you can use 
-‘--user-allowed-to-authenticate-from-device-silo=winclient-silo’, and 
-make sure the user and the computer both belong to the silo. Or if you 
-want to let only users in the silo authenticate to the computer 
-‘winclient$’, you can use 
-‘--computer-allowed-to-authenticate-to-by-silo=winclient-silo’.
+Changes since 4.19.4
+--------------------
 
-> Stefan
-> 
-> 
-> 
-> 
+o  Ralph Boehme <slow@samba.org>
+    * BUG 13688: Windows 2016 fails to restore previous version of a 
+file from a
+      shadow_copy2 snapshot.
+    * BUG 15549: Symlinks on AIX are broken in 4.19 (and a few version 
+before
+      that).
 
-Cheers,
-Jo (she/her)
+o  Bjoern Jacke <bj@sernet.de>
+    * BUG 12421: Fake directory create times has no effect.
+
+o  Björn Jacke <bjacke@samba.org>
+    * BUG 15550: ctime mixed up with mtime by smbd.
+
+o  David Mulder <dmulder@samba.org>
+    * BUG 15548: samba-gpupdate --rsop fails if machine is not in a site.
+
+o  Gabriel Nagy <gabriel.nagy@canonical.com>
+    * BUG 15557: gpupdate: The root cert import when NDES is not 
+available is
+      broken.
+
+o  Andreas Schneider <asn@samba.org>
+    * BUG 15552: samba-gpupdate should print a useful message if 
+cepces-submit
+      can't be found.
+    * BUG 15558: samba-gpupdate logging doesn't work.
+
+o  Jones Syue <jonessyue@qnap.com>
+    * BUG 15555: smbpasswd reset permissions only if not 0600.
+
+
+#######################################
+Reporting bugs & Development Discussion
+#######################################
+
+Please discuss this release on the samba-technical mailing list or by
+joining the #samba-technical:matrix.org matrix room, or
+#samba-technical IRC channel on irc.libera.chat.
+
+If you do report problems then please try to send high quality
+feedback. If you don't provide vital information to help us track down
+the problem then you will probably be ignored.  All bug reports should
+be filed under the Samba 4.1 and newer product in the project's Bugzilla
+database (https://bugzilla.samba.org/).
+
+
+======================================================================
+== Our Code, Our Bugs, Our Responsibility.
+== The Samba Team
+======================================================================
+
+
+
+================
+Download Details
+================
+
+The uncompressed tarballs and patch files have been signed
+using GnuPG (ID AA99442FB680B620).  The source code can be downloaded
+from:
+
+         https://download.samba.org/pub/samba/stable/
+
+The release notes are available online at:
+
+         https://www.samba.org/samba/history/samba-4.19.5.html
+
+Our Code, Our Bugs, Our Responsibility.
+(https://bugzilla.samba.org/)
+
+                         --Enjoy
+                         The Samba Team
 
