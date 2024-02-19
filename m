@@ -2,51 +2,51 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7B2AD85AF41
-	for <lists+samba-technical@lfdr.de>; Mon, 19 Feb 2024 23:58:26 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5DE3085AFE7
+	for <lists+samba-technical@lfdr.de>; Tue, 20 Feb 2024 00:54:13 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=4EzBVTIfJzGx+OxBDSM1I99cblJT8CvMwHdk6V8u/98=; b=Tx3alIwRWFG4ahRl4kDzxnjhLU
-	XTnQ+GfSOfwkjr9/Qri4dPG7q13nu3nNoim9U85NjdffsTZZ2i0HI7wfNbjgX9fEDEnrJlzQeCJBw
-	Uef0bwoqzo8ubtDVd0w4fz1g0c+rd7XdfJHK0gWzbFvyCU0rmcrlYTtU5VHkWn13f6q91lYsZQnGt
-	jtocxRgy/czJxzeNxzYCR2hpS52z6zgau1RXdO8ipMBP+ueUi6nPam8URKUu1MIb9h3hdbhEA1BbM
-	FMhdUXkyHhn8CX/wTW1XSPDa1jh/feGGeZD8rOP3FdA9TdU+SADTy5nbh1JXyDQfC4riqRrzCfS7t
-	R3hqtSFg==;
-Received: from ip6-localhost ([::1]:24992 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=GE4dXIWI6lPDgjZ/kvM38i+9RMWD2IdG6SgmZOu57Zc=; b=1dO1xqgWeRXuZJazjtcUtRtXEG
+	8R8U0Z3Tt39bmO4EvOAWuLiQR+70f7TUu5WpvUG5B5jBnQ6YgbXoHlSsEZE5wxkeXwtBr9POEhUP5
+	Wc04cKPPU8hB4hy4dKrbqaTKMYYKbdR/Y3XKwdAVqPRlVlQGrKXz1Fs1/A1POiQ2klesfoSzatTxK
+	Lso3Y4uC1UVSx5jSNZLojcjtuSz2gSxu6LWes/SlwFZV2GNb2KjtdwdSkkMAgIMBTNHcykrLQA5Uc
+	n0y7/ZPFsZjAcm5DCs9qwEEQC2Nu9cb5P6G6PeJ3f8l8vKtHCSIVDA14+sC+ZLUYMvs/kI0eL3bf2
+	kOyHbsPg==;
+Received: from ip6-localhost ([::1]:21862 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1rcCa2-008wzQ-OF; Mon, 19 Feb 2024 22:57:46 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:40866) 
+	id 1rcDS9-008x8O-Sy; Mon, 19 Feb 2024 23:53:41 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:58250) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1rcCZy-008wzI-88
- for samba-technical@lists.samba.org; Mon, 19 Feb 2024 22:57:44 +0000
+ (Exim) id 1rcDS5-008x8H-8P
+ for samba-technical@lists.samba.org; Mon, 19 Feb 2024 23:53:39 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Cc:To:From:Message-ID;
- bh=4EzBVTIfJzGx+OxBDSM1I99cblJT8CvMwHdk6V8u/98=; b=XcvHXm+jPyjJOyOJOhKPC9Th3E
- zrssnyiNOAuG2MchUSzLOra7CKaV1XI2rARgAp9jXjzWRLr00MP0M0Y4YtqqeQ/+PRYX7plP9BEAN
- Ot49o+9yHWt8cZe2fr1c7YjDH9GL/eTeIL5+hz7pYkr2EKi/juaWNL9c4nrfSySqInN5o/ZNDsuU2
- tYwQwnEQpzcCGKxluC4RxFYfaznQdo0Nl07KUYmb3alYv6fzk+tx0GBiet7sgA3U7/fXJrw3u07JQ
- 7V0CWAQBZ5PIVGb0xHnXn3ZYLVRNu1l9+6eo4PcVaIYUS1XITmYylDrYiTGEah2dDiK2fsw1yqmyu
- DNhCTvwnhWzU7HTf8WgUYynA8fG7tVsEUna/qZWHgL2eYhzgFYuTY/YWsxQU4BUZ9B5fNBYmtvnsq
- kATZ7BiwExJ12NO0DDYLHr8SX2387Fjw9FZl/CTwkjViH14Ns2/9R99rE9Sye9qIn9urQt9atPx4A
- MkMb1m5rXalJ7CIh9XIetlR1;
+ s=42; h=From:To:Date:Message-ID:CC;
+ bh=GE4dXIWI6lPDgjZ/kvM38i+9RMWD2IdG6SgmZOu57Zc=; b=pxEFbs4LPnHRy7fxkRtofmniIL
+ FH3KotsP/4N8SdcSx6I7a+7z551nzYoPem1HSdJ7w5RgBL8AeujQWj7iugaAXodSHYKqs8b+fKQUI
+ XFU6rIsqbcJTlVE3bCn9c+SlcSAdNCxDpzCFZdNJhykUT7ZDogd/fBEljoIPk5gFcwcWTGi5eQ+9m
+ /P2ECNrdeyW2NJ2b6jvg6XA4AJ+DnYCgZSpveS5RGLKZriJpDW+CBh5Nb6FECc3XTGe48a0LDuDOE
+ Gs6Xn1y2pItzvf5ks3FFRBdTYSSUEsNNBnBaJITCJeDT2DpYP0uwBV/LQVEX9Mfsi29K8jgBcdE2k
+ kT0L/42BlVjaQv2y0iBI9ju0VXzUMLWVN4HYqKMryynwU+dz5xRQ8lEy3hJwtCkwU5e07ocwM/5Pa
+ OKt6pwEomzRKsPJVE6T1IjlbrJYJ2N4Tebsg/TA+GD1ZvzBOkwTD51dKk55rKqIuC8Rp7VwKr7em5
+ J3Xz1Ilnx66jUs9KMMMlDtEK;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1rcCZw-00Dr0z-2L; Mon, 19 Feb 2024 22:57:41 +0000
-Message-ID: <c29264988638d7d980a21bc8b2dfb1e1c8a8ef45.camel@samba.org>
+ (Exim) id 1rcDS4-00DrKK-1Y for samba-technical@lists.samba.org;
+ Mon, 19 Feb 2024 23:53:36 +0000
+Message-ID: <41970043-2f0a-44a5-b1eb-249f3ed7a219@samba.org>
+Date: Tue, 20 Feb 2024 12:53:28 +1300
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
 Subject: Re: setting up authentication policies in 4.20rc2
-To: "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>
-Date: Tue, 20 Feb 2024 11:57:36 +1300
-In-Reply-To: <20240219213441.61e401c3@devstation.samdom.example.com>
+To: samba-technical@lists.samba.org
 References: <e8210ddc-4506-4255-bcbe-f24ff86b2f0a@kania-online.de>
  <d7e23578-1526-4835-9438-306da6a95ac1@samba.org>
- <20240219164507.6a37e945@devstation.samdom.example.com>
- <017aeac7f3da70b70c14d5f8fbdf9abe20dfc5ab.camel@samba.org>
- <20240219213441.61e401c3@devstation.samdom.example.com>
-Content-Type: text/plain; charset="UTF-8"
-User-Agent: Evolution 3.36.5-0ubuntu1 
-MIME-Version: 1.0
+ <f16c0d4d-0040-4179-ad24-e40a98d5f0ac@kania-online.de>
+Content-Language: en-GB
+In-Reply-To: <f16c0d4d-0040-4179-ad24-e40a98d5f0ac@kania-online.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
@@ -61,144 +61,127 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
+From: Jo Sutton via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jo Sutton <jsutton@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Mon, 2024-02-19 at 21:34 +0000, Rowland Penny via samba-technical
-wrote:
-> On Tue, 20 Feb 2024 09:38:35 +1300
-> Andrew Bartlett <
-> abartlet@samba.org
-> > wrote:
+On 20/02/24 5:28 am, Stefan Kania via samba-technical wrote:
 > 
-> > On Mon, 2024-02-19 at 16:45 +0000, Rowland Penny via samba-
-> > technical
-> > wrote:
-> > > On Mon, 19 Feb 2024 14:48:06 +1300
-> > > Jo Sutton via samba-technical <
-> > > samba-technical@lists.samba.org
-> > > 
-> > > > wrote:
-> > > > On 18/02/24 6:11 am, Stefan Kania via samba-technical wrote:
-> > > > > Hi to all,
-> > > > > 
-> > > > > I just tried to setup authentication policies and
-> > > > > authentication
-> > > > > silos in 4.20rc2.
-> > > > > Following these steps:
-> > > > > 1. create a policy
-> > > > > samba-tool domain auth policy create --enforce --name
-> > > > > winclient-
-> > > > > pol
-> > > > > 
-> > > > > 2. create a silo
-> > > > > samba-tool domain auth silo create --enforce --
-> > > > > name=winclient-
-> > > > > silo
-> > > > > 
-> > > > > 3. adding a at least one user and one host to the silo
-> > > > > samba-tool domain auth silo member grant --name=winclient-
-> > > > > silo 
-> > > > > --member=winclient\$
-> > > > > samba-tool domain auth silo member grant --name=winclient-
-> > > > > silo 
-> > > > > --member=padmin
-> > > > > 
-> > > > > BTW: In 4.19 it was "silo member add"
-> > > > > 
-> > > > > 4. Set single policy for all principals in this silo. with
-> > > > > 4.19
-> > > > > that was possible and that's by the way also possible with a
-> > > > > windows DC. That's on a windows DC called "Use a single
-> > > > > policy
-> > > > > for
-> > > > > all principals that belog to this authentication silo"
-> > > > > 
-> > > > > In 4.20 the option --policy is missing, you have only the
-> > > > > option
-> > > > > to
-> > > > > add: --user-authentication-policy=
-> > > > > --service-authentication-policy=
-> > > > > --computer-authentication-policy=
-> > > > > So it would be nice if the option --policy will be back
-> > > > > 
-> > > > 
-> > > > We removed this option in commit 
-> > > > c22400fd8ef961e472ce2803cf4a2ec58b778795. I don’t remember our
-> > > > exact 
-> > > > reasoning, but we must have thought that it didn’t make much
-> > > > sense
-> > > > for a user and a computer to share the same authentication
-> > > > policy.
-> > > > 
-> > > 
-> > > Can I what was the reasoning about this ? Seeing as a computer in
-> > > AD
-> > > is
-> > > just a user with an extra objectclass.
-> > > 
-> > > I am trying to get my head around all this, but I am struggling
-> > > at
-> > > the
-> > > moment.
-> > 
-> > The difference is that user's log on to computers, but computers
-> > don't
-> > have anything else to log on to, so policies that say 'you must log
-> > on
-> > to from these computers' make no sense.
-> > 
-> > Computers can also authenticate users (check their password over
-> > NETLOGON) and are servers that can both accept NTLM and Kerberos,
-> > but
-> > yes, the introduction of authentication policies is the first point
-> > at
-> > which users and computers started to have a real difference in how
-> > they are treated when acting as a client.
-> > 
-> > This is also why the options were split, because in development we
-> > realised it was really easy to set a policy that made no sense, we
-> > even went to the point of banning some in the UI.  
-> > 
-> > But yes, we would like feedback on the real world application of
-> > these
-> > tools and while our work here is done (I can't promise that we have
-> > massive amounts of time to come back here and rework) if we do,
-> > every
-> > detail from the real world helps us rework once, not multiple
-> > times.
-> > 
-> > Andrew Bartlett
 > 
-> It makes sense when you describe it in that way, but how will it
-> affect
-> the use of a machines ticket in an ldbsearch ?
+> Am 19.02.24 um 02:48 schrieb Jo Sutton via samba-technical:
+>> On 18/02/24 6:11 am, Stefan Kania via samba-technical wrote:
+>>> Hi to all,
+>>>
+>>> I just tried to setup authentication policies and authentication 
+>>> silos in 4.20rc2.
+>>> Following these steps:
+>>> 1. create a policy
+>>> samba-tool domain auth policy create --enforce --name winclient-pol
+>>>
+>>> 2. create a silo
+>>> samba-tool domain auth silo create --enforce --name=winclient-silo
+>>>
+>>> 3. adding a at least one user and one host to the silo
+>>> samba-tool domain auth silo member grant --name=winclient-silo 
+>>> --member=winclient\$
+>>> samba-tool domain auth silo member grant --name=winclient-silo 
+>>> --member=padmin
+>>>
+>>> BTW: In 4.19 it was "silo member add"
+>>>
+>>> 4. Set single policy for all principals in this silo. with 4.19 that 
+>>> was possible and that's by the way also possible with a windows DC. 
+>>> That's on a windows DC called "Use a single policy for all principals 
+>>> that belog to this authentication silo"
+>>>
+>>> In 4.20 the option --policy is missing, you have only the option to add:
+>>> --user-authentication-policy=
+>>> --service-authentication-policy=
+>>> --computer-authentication-policy=
+>>> So it would be nice if the option --policy will be back
+>>>
+>>
+>> We removed this option in commit 
+>> c22400fd8ef961e472ce2803cf4a2ec58b778795. I don’t remember our exact 
+>> reasoning, but we must have thought that it didn’t make much sense for 
+>> a user and a computer to share the same authentication policy.
+> 
+> 
+> In this picture us see the screenshot from (soory it's a german DC) that 
+> you cann select either all policies or select one.
+> 
+> https://ibb.co/kGB3XhR
+> 
+> I think, with Samba we should have the same possibility.
+> 
+>>
+>>> The next step after creating the silo and the policy and adding the 
+>>> clients and users to the silo would be adding:
+>>>   --service-allowed-to-authenticate-from=SDDL
+>>> and/or
+>>> -service-allowed-to-authenticate-to=SDDL
+>>>
+>>> But were can I get the SDDL for the user and the client?
+>>>
+>>
+>> Can you explain what you’d like to accomplish in this scenario? If you 
+>> want to make sure the user ‘padmin’ authenticates from the computer 
+>> ‘winclient$’, you can use 
+>> ‘--user-allowed-to-authenticate-from-device-silo=winclient-silo’, and 
+>> make sure the user and the computer both belong to the silo. Or if you 
+>> want to let only users in the silo authenticate to the computer 
+>> ‘winclient$’, you can use 
+>> ‘--computer-allowed-to-authenticate-to-by-silo=winclient-silo’.
+>>
+> 
+> 
+> 
+> I wan't to disallow the user padmin to login at the computer with the 
+> name winclient. So all users who are member of the silo winclient-silo 
+> should not be able to login to the computer winclient.
+> So for example I create a policy login-to-DCs, than add the group 
+> "domain users" to the silo and the DCs. In a windows-Domain now I can 
+> configure to allow all userers are equal to a list of users or not equal.
+> As you can see in the next picture, I can choose either if the user is 
+> equal to the list to allow the access, or the user is not equal to the 
+> list to allowed to access.
+> 
+> https://ibb.co/SxgRzZW
+> 
+> I'm missing the part of selecting "member of the list" or "not member of 
+> the list"
+> 
+> 
+> 
+> 
+> 
+> Stefan
 
-It is more that if you wanted a user ticket for running ldbsearch, you
-should make sure to get it with FAST, armored with the machine account (kinit can help you with this, if you have access to the machine's credential cache, but we need to extend winbindd to help with this for the unprivileged case).
+First, I think you’ll want to do:
 
-This might be needed if you have a policy that the user account can
-only log in from a particular computer. 
+samba-tool user auth silo assign winclient\$ --silo=winclient-silo
+samba-tool user auth silo assign padmin --silo=winclient-silo
 
-Machine accounts end up with fewer restrictions, as they otherwise
-don't make sense. 
+to assign the silo to the user and the client.
 
-Andrew Bartlett
--- 
-Andrew Bartlett (he/him)       https://samba.org/~abartlet/
-Samba Team Member (since 2001) https://samba.org
-Samba Team Lead                https://catalyst.net.nz/services/samba
-Catalyst.Net Ltd
+I don’t think you want ‘--service-allowed-to…’. Those options apply to 
+Managed Service Accounts, which you don’t appear to be dealing with.
 
-Proudly developing Samba for Catalyst.Net Ltd - a Catalyst IT group
-company
+I think this might be the command you want? —
 
-Samba Development and Support: https://catalyst.net.nz/services/samba
+samba-tool domain auth policy modify --name=winclient-pol 
+--user-allowed-to-authenticate-from='O:SYG:SYD:(XA;OICI;CR;;;WD;(Not_Member_of 
+SID(S-1-2-3)))'
 
-Catalyst IT - Expert Open Source Solutions
+where winclient’s SID is substituted for ‘S-1-2-3’.
 
+That should prevent any users in the silo from authenticating, unless 
+they use FAST from a computer other than ‘winclient’.
 
+Is that what you’re looking for?
+
+Cheers,
+Jo (she/her)
 
 
