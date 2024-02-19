@@ -2,49 +2,50 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id C125485AA43
-	for <lists+samba-technical@lfdr.de>; Mon, 19 Feb 2024 18:47:48 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 23FEA85AD47
+	for <lists+samba-technical@lfdr.de>; Mon, 19 Feb 2024 21:39:17 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=Zzmehb8OSHEmWKgvrfkilma+ZN7YHrkgO4VAHXKOWY0=; b=5Wgcg9ev0rHLjC0uc5FpZ8dJ5G
-	KPztQG3jfO5+aiLHgGbHpT0JZu7o9YPUZDZwKQdwnR/nL1LoOmLZVUsc0VnOAYa3+pKhrMnJUQ9yv
-	4yUL3F+VqvIZz0MwYwj3joPrw0Id8i+01Ye7hExCn7KWZi9oXSAcPivavyoRorz7eXmli7SjGkKvq
-	WTbFUHgpdgIYCCXlVUQo+NdYXBF6hpMG74sqSn7N7vuRbSG6bdQocyj0iDovZYXGG9ojEFSRnsLWn
-	TngvGICfIaU9n4aQ83SzcqgMqUIeNVfYFsSM0GedKpt3iOKg6H/y1vjAX+CX3Jcxq8LKBmwcCwomA
-	9n2XEEEw==;
-Received: from ip6-localhost ([::1]:57408 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=NsBb4DUVe7e1XUp9/uGqd15ibA45V6JeMt/S7vMu4Uw=; b=zQgz9joIua3bZgBejwFleCGaOh
+	CODTIZ9TH9kPiHd2vcrxJOLxQoPYOscgfZno4U/v+6YYJspyVE0KqNxJIsrkTTpvYs7Vj2SD+X2Us
+	nBfknVh6aipg4b1z8eGLTS5hgBAYYF4or8TbWgYR6QcYlTN99Z1GdvkPvEIGCGtlFv67NUES4GVFt
+	Xd8MVqTBMGv5xL0znh54bZdVRSeoMjp/yWMzL8CyBAjMeBEmj3Ys/vmwtEIk0q5QuM7Yk3iZJZLQX
+	o/78CUusEZPjiK9jRMpPDmMcc3RM5EOq0uIkVl8f54nIHd03wbWOfErAjfOTWaEcGg84iq53UvV6V
+	FJkttlIw==;
+Received: from ip6-localhost ([::1]:55914 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1rc7jX-008vpc-MQ; Mon, 19 Feb 2024 17:47:15 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:23550) 
+	id 1rcAPV-008wdb-GZ; Mon, 19 Feb 2024 20:38:45 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:33130) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1rc7jT-008vpV-Fa
- for samba-technical@lists.samba.org; Mon, 19 Feb 2024 17:47:13 +0000
+ (Exim) id 1rcAPR-008wdU-8s
+ for samba-technical@lists.samba.org; Mon, 19 Feb 2024 20:38:44 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:To:From:Date:CC;
- bh=Zzmehb8OSHEmWKgvrfkilma+ZN7YHrkgO4VAHXKOWY0=; b=Yl1kzhDLTTH22c3iWgRRCVWNiJ
- bF5vpNhFZ3UC/ockToqBpgYrky0pmRHHsbetBeNUW1GlygLMkqtHL3EBMRp18s0y9ivsq3pqjt06+
- Nj/B8Te+T+rc5dhPIMkVS9RDw8JwZcSLZmf1OaYilYDqIqw8xC2OOTFhj40myAlQIvuTYpLOncHbA
- ao4XtL3Z8ZVO4hc2u6uEXWySSD9Sqrfv0O4l8jCRaTuDay3SW17oIAXYUzkxt2K8B1HzcoFh++uEE
- jYzR36YgCxBTrztIDgaEzk3gC6tO05Flb1JBVLvApu/iON/hCC1NgXKFWTWTMIosxUyG3tPvTBMu0
- udiOh5uCpA8l1SRfUWoamQtQ3Btq4f93ke3NsXAp4Ojl5WJ3OZONIgaaJ6K6I0MtEicZRCDFuLsQf
- 6TxjxHjPwd0z06tuerVmjbcwhJq9tJKcQoXDpJ/SMe1yF13kWNCXl9fw4JgwTHf+5uZfrdY+75paK
- VbFx7QgoEqd76QQhmXE3FsLk;
+ s=42; h=Date:Cc:To:From:Message-ID;
+ bh=NsBb4DUVe7e1XUp9/uGqd15ibA45V6JeMt/S7vMu4Uw=; b=QtTPDiQg19neyJAfmuN0i9QfLj
+ mhEGBNxe7g3sr/TySrJl3LG6JVQq6wxPWKOUbwx8J37t4l6Fppoa5hoxi3fiBRMFQSLZh/bdrAecq
+ O8U9PMrCYMLpJmeXMSlInMJnwvCp8aGBxvH1XRzfvhb6N2KLPQIub5xUTNSfBB4/MF5nYzH4sAcMX
+ IDVucBLkwJ0/WyJOvxpD3xr/bEi0pDA56d/I6RgmpCp4LUaJ59sSnnbWx9rX6KWCcxSAKWzDsC9wf
+ 11cpIFGiRz/bkjhqxN+Q8VeWtkiwzFLffTx6lUXgn4tMq9WOtEpNOidMW3NnD8LmmdTP7zsdpTHSi
+ grDgY4QhccSO7YEL/i2G3zJT6niWArIDDR3jVykVb8RqVf3PNrF77EUw0RGMrFt2eKS0ramf7/u45
+ fpM7WX5CdSnPg/PUmi7uaU/D0UwzeSVT4uDReCJZOzclij60kafiiigSOC6UMHiXdOTGhvIwzcHS0
+ Oezv9rw7cg3ikWLgMp2TFkRz;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1rc7jR-00DpAi-38 for samba-technical@lists.samba.org;
- Mon, 19 Feb 2024 17:47:10 +0000
-Date: Mon, 19 Feb 2024 17:47:08 +0000
-To: samba-technical@lists.samba.org
-Subject: Re: [MS-GPOL] 3.2.5.1.4 Site Search
-Message-ID: <20240219174708.4990e0c1@devstation.samdom.example.com>
-In-Reply-To: <4365205.UPlyArG6xL@magrathea>
-References: <4365205.UPlyArG6xL@magrathea>
-X-Mailer: Claws Mail 4.1.1 (GTK 3.24.38; x86_64-pc-linux-gnu)
+ (Exim) id 1rcAPP-00DqCm-35; Mon, 19 Feb 2024 20:38:40 +0000
+Message-ID: <017aeac7f3da70b70c14d5f8fbdf9abe20dfc5ab.camel@samba.org>
+Subject: Re: setting up authentication policies in 4.20rc2
+To: "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>
+Date: Tue, 20 Feb 2024 09:38:35 +1300
+In-Reply-To: <20240219164507.6a37e945@devstation.samdom.example.com>
+References: <e8210ddc-4506-4255-bcbe-f24ff86b2f0a@kania-online.de>
+ <d7e23578-1526-4835-9438-306da6a95ac1@samba.org>
+ <20240219164507.6a37e945@devstation.samdom.example.com>
+Content-Type: text/plain; charset="UTF-8"
+User-Agent: Evolution 3.36.5-0ubuntu1 
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,76 +59,104 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Rowland Penny via samba-technical <samba-technical@lists.samba.org>
-Reply-To: "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>
-Cc: Rowland Penny <rpenny@samba.org>
+From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andrew Bartlett <abartlet@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Mon, 19 Feb 2024 17:52:59 +0100
-Andreas Schneider via samba-technical <samba-technical@lists.samba.org>
+On Mon, 2024-02-19 at 16:45 +0000, Rowland Penny via samba-technical
 wrote:
+> On Mon, 19 Feb 2024 14:48:06 +1300
+> Jo Sutton via samba-technical <
+> samba-technical@lists.samba.org
+> > wrote:
+> 
+> > On 18/02/24 6:11 am, Stefan Kania via samba-technical wrote:
+> > > Hi to all,
+> > > 
+> > > I just tried to setup authentication policies and authentication
+> > > silos in 4.20rc2.
+> > > Following these steps:
+> > > 1. create a policy
+> > > samba-tool domain auth policy create --enforce --name winclient-
+> > > pol
+> > > 
+> > > 2. create a silo
+> > > samba-tool domain auth silo create --enforce --name=winclient-
+> > > silo
+> > > 
+> > > 3. adding a at least one user and one host to the silo
+> > > samba-tool domain auth silo member grant --name=winclient-silo 
+> > > --member=winclient\$
+> > > samba-tool domain auth silo member grant --name=winclient-silo 
+> > > --member=padmin
+> > > 
+> > > BTW: In 4.19 it was "silo member add"
+> > > 
+> > > 4. Set single policy for all principals in this silo. with 4.19
+> > > that was possible and that's by the way also possible with a
+> > > windows DC. That's on a windows DC called "Use a single policy
+> > > for
+> > > all principals that belog to this authentication silo"
+> > > 
+> > > In 4.20 the option --policy is missing, you have only the option
+> > > to
+> > > add: --user-authentication-policy=
+> > > --service-authentication-policy=
+> > > --computer-authentication-policy=
+> > > So it would be nice if the option --policy will be back
+> > > 
+> > 
+> > We removed this option in commit 
+> > c22400fd8ef961e472ce2803cf4a2ec58b778795. I don’t remember our
+> > exact 
+> > reasoning, but we must have thought that it didn’t make much sense
+> > for a user and a computer to share the same authentication policy.
+> > 
+> 
+> Can I what was the reasoning about this ? Seeing as a computer in AD
+> is
+> just a user with an extra objectclass.
+> 
+> I am trying to get my head around all this, but I am struggling at
+> the
+> moment.
 
-> Hi,
-> 
-> "[MS-GPOL] 3.2.5.1.4 Site Search" wants to know the site of the
-> client.
-> 
-> Details:
-> 
-> https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gpol/
-> c2ce6870-c863-40b0-94c1-73cf53b6e634
-> 
-> In order to do that, it does a netr_DsRGetSiteName() on the local
-> machine to the local rpc_server. If you sniff the network traffic, on
-> the DC you can see that the clients rpc_server does a CLAP query:
-> 
-> bin/ldbsearch --use-kerberos=no -H
-> ldap://win-dc01.earth.milkyway.site - UAdministrator%Secret007! -b ''
-> --scope=base
-> '(&(DnsDomain=EARTH.MILKYWAY.SITE.)(Host=SAMBA1))(NtVer=0x20000016)'
-> Netlogon # record 1 dn: 
-> Netlogon::
-> EwBcAFwAVwBJAE4ALQBEAEMAMAAxAAAAAABFAEEAUgBUAEgAAABsfosaQV2fQrJLMfR
-> xuNCLAAAAAAAAAAAAAAAAAAAAAAVlYXJ0aAhtaWxreXdheQRzaXRlAMBGCFdJTi1EQzAxwEYKOKjA
-> ffMDAAMAAAD/////
+The difference is that user's log on to computers, but computers don't
+have anything else to log on to, so policies that say 'you must log on
+to from these computers' make no sense.
 
-Have you tried adding '--show-binary' to your ldbsearch to see if you
-get the result in a readable form ?
+Computers can also authenticate users (check their password over
+NETLOGON) and are servers that can both accept NTLM and Kerberos, but
+yes, the introduction of authentication policies is the first point at
+which users and computers started to have a real difference in how they
+are treated when acting as a client.
 
-Rowland
+This is also why the options were split, because in development we
+realised it was really easy to set a policy that made no sense, we even
+went to the point of banning some in the UI.  
 
-> 
-> # returned 1 records
-> # 1 entries
-> # 0 referrals
-> 
-> I think this is actually the same as:
-> 
-> 
-> $ wbinfo --dsgetdcname=earth.milkyway.site
-> \\WIN-DC01.earth.milkyway.site
-> \\192.168.56.10
-> 1
-> 1a8b7e6c-5d41-429f-b24b-31f471b8d08b
-> earth.milkyway.site
-> earth.milkyway.site
-> 0xe003f3fd
-> Default-First-Site-Name
-> Default-First-Site-Name
-> 
-> 
-> As samba-gpupdate is written in Python, the question is how to do a 
-> dsgetdcname() from Python? Could someone give some pointers?
-> 
-> 
-> 
-> 
-> Thanks
-> 
-> 
-> 	Andreas
-> 
-> 
+But yes, we would like feedback on the real world application of these
+tools and while our work here is done (I can't promise that we have
+massive amounts of time to come back here and rework) if we do, every
+detail from the real world helps us rework once, not multiple times.
+
+Andrew Bartlett
+
+
+-- 
+Andrew Bartlett (he/him)       https://samba.org/~abartlet/
+Samba Team Member (since 2001) https://samba.org
+Samba Team Lead                https://catalyst.net.nz/services/samba
+Catalyst.Net Ltd
+
+Proudly developing Samba for Catalyst.Net Ltd - a Catalyst IT group
+company
+
+Samba Development and Support: https://catalyst.net.nz/services/samba
+
+Catalyst IT - Expert Open Source Solutions
+
+
 
 
