@@ -2,50 +2,51 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7655A85A8F4
-	for <lists+samba-technical@lfdr.de>; Mon, 19 Feb 2024 17:28:44 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A8B2385A92E
+	for <lists+samba-technical@lfdr.de>; Mon, 19 Feb 2024 17:42:36 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=hIFxN7WJ4yRdzhaUgEidcSWDcMwouQ8l3IStnv2VX+Y=; b=Dj/r6GywYuoHb8rsBJUr8BUviO
-	d33He/Bgng+Lr4pq1qDjxI81zJg+C+mu4h93AMzEgTOUf3P86zz4AYMf3CAel+5faJTqOiSnC08iX
-	PtUZHZ10ui4H9SOxzxRODP4jrMFESK4ndHfE8/E6z+LpAUaC0JmziNxXQykQ3Jh5yBxyCd1xUHE+h
-	jICAVPHoPR0YTWbGnoAhhEMRE1k+UY+PdzZ/f1TG9a/+gKpOl1Sd/Qel+3lk70MCGdJv/JJ2uChPi
-	5A06NHEAPYuykrHQ+/xnGokr/+eXCAbLI5OLkFusF4PEhi2py6+3dH1RU3yaqiu2+yYGowfmly2wV
-	COcqLeWQ==;
-Received: from ip6-localhost ([::1]:51722 helo=hr1.samba.org) 
+	bh=h87UCb7n0PIZBr7mygCJhTgSmtoXHBaIIRSKjCUiOos=; b=jiDQBatZKrkvpMWemhztn0xK4Q
+	9T6c8eULL5kRoI0nZ8eRdkX1jFhXX+P72Zd9pZL76VFNScV5TWcLxxN9EbK9o0MO/rPqA5kQW4X4e
+	exAijvq89fiNDNKmDbv/3fTtBWazMikB1WDa6SFK6jJXXaBR/STxEERzTXFHhPcz5DiEE2u/1vWRH
+	CDaZMi4gzLZgaXyplgDFHrqsmatnYebLyMOgdmEuyqpZEPDLp868+L/bRnezSUij1haZeKtUySuoA
+	na9eVAp+hHlVu+DRGHlT+SxBjS7OpVsaxe8ghyHKmDCyJ+MfIrQ5P6e+Aic9K6nKwO+UG/TZQdEQ0
+	X9jCbMsg==;
+Received: from ip6-localhost ([::1]:27008 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1rc6VQ-008vFV-0P; Mon, 19 Feb 2024 16:28:36 +0000
-Received: from plasma4.jpberlin.de ([80.241.57.33]:59515) 
+	id 1rc6ij-008vLk-Bq; Mon, 19 Feb 2024 16:42:21 +0000
+Received: from plasma4.jpberlin.de ([80.241.57.33]:40559) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1rc6VL-008vFO-HG
- for samba-technical@lists.samba.org; Mon, 19 Feb 2024 16:28:34 +0000
-Received: from spamfilter01.heinlein-hosting.de
- (spamfilter01.heinlein-hosting.de [80.241.56.115])
- by plasma.jpberlin.de (Postfix) with ESMTP id 527A7FEA4B;
- Mon, 19 Feb 2024 17:28:26 +0100 (CET)
+ (Exim) id 1rc6ie-008vLd-P5
+ for samba-technical@lists.samba.org; Mon, 19 Feb 2024 16:42:19 +0000
+Received: from spamfilter06.heinlein-hosting.de
+ (spamfilter06.heinlein-hosting.de [80.241.56.125])
+ by plasma.jpberlin.de (Postfix) with ESMTP id A5D36FEB79;
+ Mon, 19 Feb 2024 17:42:11 +0100 (CET)
 Received: from plasma.jpberlin.de ([80.241.56.68])
- by spamfilter01.heinlein-hosting.de (spamfilter01.heinlein-hosting.de
- [80.241.56.115]) (amavisd-new, port 10030)
- with ESMTP id DZjRgxqTD8ZL; Mon, 19 Feb 2024 17:28:25 +0100 (CET)
+ by spamfilter06.heinlein-hosting.de (spamfilter06.heinlein-hosting.de
+ [80.241.56.125]) (amavisd-new, port 10030)
+ with ESMTP id XZijniGAW_2r; Mon, 19 Feb 2024 17:42:07 +0100 (CET)
 Received: from [192.168.123.203] (p5b2400db.dip0.t-ipconnect.de [91.36.0.219])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (Client did not present a certificate)
  (Authenticated sender: stefan@kania-online.de)
- by plasma.jpberlin.de (Postfix) with ESMTPSA id D4873AB725
- for <samba-technical@lists.samba.org>; Mon, 19 Feb 2024 17:28:24 +0100 (CET)
-Message-ID: <f16c0d4d-0040-4179-ad24-e40a98d5f0ac@kania-online.de>
-Date: Mon, 19 Feb 2024 17:28:24 +0100
+ by plasma.jpberlin.de (Postfix) with ESMTPSA id F0DB2FEB6E
+ for <samba-technical@lists.samba.org>; Mon, 19 Feb 2024 17:42:06 +0100 (CET)
+Message-ID: <95cc6c6e-85d5-47ab-9482-faaef430c406@kania-online.de>
+Date: Mon, 19 Feb 2024 17:42:06 +0100
 MIME-Version: 1.0
 Subject: Re: setting up authentication policies in 4.20rc2
 Content-Language: de-DE, en-US
 To: samba-technical@lists.samba.org
 References: <e8210ddc-4506-4255-bcbe-f24ff86b2f0a@kania-online.de>
  <d7e23578-1526-4835-9438-306da6a95ac1@samba.org>
-In-Reply-To: <d7e23578-1526-4835-9438-306da6a95ac1@samba.org>
+ <f16c0d4d-0040-4179-ad24-e40a98d5f0ac@kania-online.de>
+In-Reply-To: <f16c0d4d-0040-4179-ad24-e40a98d5f0ac@kania-online.de>
 Content-Type: multipart/signed; protocol="application/pkcs7-signature";
- micalg=sha-256; boundary="------------ms050408010005060209060703"
+ micalg=sha-256; boundary="------------ms060708070001060506050702"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -66,113 +67,32 @@ Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
 This is a cryptographically signed message in MIME format.
 
---------------ms050408010005060209060703
+--------------ms060708070001060506050702
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 
 
 
-Am 19.02.24 um 02:48 schrieb Jo Sutton via samba-technical:
-> On 18/02/24 6:11 am, Stefan Kania via samba-technical wrote:
->> Hi to all,
->>
->> I just tried to setup authentication policies and authentication silos 
->> in 4.20rc2.
->> Following these steps:
->> 1. create a policy
->> samba-tool domain auth policy create --enforce --name winclient-pol
->>
->> 2. create a silo
->> samba-tool domain auth silo create --enforce --name=winclient-silo
->>
->> 3. adding a at least one user and one host to the silo
->> samba-tool domain auth silo member grant --name=winclient-silo 
->> --member=winclient\$
->> samba-tool domain auth silo member grant --name=winclient-silo 
->> --member=padmin
->>
->> BTW: In 4.19 it was "silo member add"
->>
->> 4. Set single policy for all principals in this silo. with 4.19 that 
->> was possible and that's by the way also possible with a windows DC. 
->> That's on a windows DC called "Use a single policy for all principals 
->> that belog to this authentication silo"
->>
->> In 4.20 the option --policy is missing, you have only the option to add:
->> --user-authentication-policy=
->> --service-authentication-policy=
->> --computer-authentication-policy=
->> So it would be nice if the option --policy will be back
->>
+Am 19.02.24 um 17:28 schrieb Stefan Kania via samba-technical:
+> I wan't to disallow the user padmin to login at the computer with the 
+> name winclient. So all users who are member of the silo winclient-silo 
+> should not be able to login to the computer winclient.
+> So for example I create a policy login-to-DCs, than add the group 
+> "domain users" to the silo and the DCs. In a windows-Domain now I can 
+> configure to allow all userers are equal to a list of users or not equal.
+> As you can see in the next picture, I can choose either if the user is 
+> equal to the list to allow the access, or the user is not equal to the 
+> list to allowed to access.
 > 
-> We removed this option in commit 
-> c22400fd8ef961e472ce2803cf4a2ec58b778795. I don’t remember our exact 
-> reasoning, but we must have thought that it didn’t make much sense for a 
-> user and a computer to share the same authentication policy.
-
-
-In this picture us see the screenshot from (soory it's a german DC) that 
-you cann select either all policies or select one.
-
-https://ibb.co/kGB3XhR
-
-I think, with Samba we should have the same possibility.
-
+> https://ibb.co/SxgRzZW
 > 
->> The next step after creating the silo and the policy and adding the 
->> clients and users to the silo would be adding:
->>   --service-allowed-to-authenticate-from=SDDL
->> and/or
->> -service-allowed-to-authenticate-to=SDDL
->>
->> But were can I get the SDDL for the user and the client?
->>
-> 
-> Can you explain what you’d like to accomplish in this scenario? If you 
-> want to make sure the user ‘padmin’ authenticates from the computer 
-> ‘winclient$’, you can use 
-> ‘--user-allowed-to-authenticate-from-device-silo=winclient-silo’, and 
-> make sure the user and the computer both belong to the silo. Or if you 
-> want to let only users in the silo authenticate to the computer 
-> ‘winclient$’, you can use 
-> ‘--computer-allowed-to-authenticate-to-by-silo=winclient-silo’.
-> 
+> I'm missing the part of selecting "member of the list" or "not member of 
+> the list"
 
+The condition is missing in Samba, like in most tutorial you find with 
+google.
 
-
-I wan't to disallow the user padmin to login at the computer with the 
-name winclient. So all users who are member of the silo winclient-silo 
-should not be able to login to the computer winclient.
-So for example I create a policy login-to-DCs, than add the group 
-"domain users" to the silo and the DCs. In a windows-Domain now I can 
-configure to allow all userers are equal to a list of users or not equal.
-As you can see in the next picture, I can choose either if the user is 
-equal to the list to allow the access, or the user is not equal to the 
-list to allowed to access.
-
-https://ibb.co/SxgRzZW
-
-I'm missing the part of selecting "member of the list" or "not member of 
-the list"
-
-
-
-
-
-Stefan
->> Stefan
->>
->>
->>
->>
-> 
-> Cheers,
-> Jo (she/her)
-> 
-
-
-
---------------ms050408010005060209060703
+--------------ms060708070001060506050702
 Content-Type: application/pkcs7-signature; name="smime.p7s"
 Content-Transfer-Encoding: base64
 Content-Disposition: attachment; filename="smime.p7s"
@@ -229,19 +149,19 @@ EMH8imv4LW/Sx59wKElKjijjHdNrFG/wMRobDYzMyTGCA4IwggN+AgEBMHIwZjELMAkGA1UE
 BhMCREUxMzAxBgNVBAoMKkRHTiBEZXV0c2NoZXMgR2VzdW5kaGVpdHNuZXR6IFNlcnZpY2Ug
 R21iSDEiMCAGA1UEAwwZZGduc2VydmljZSBDQSAyIFR5cGUgRTpQTgIIcVNPXEs+kdUwDQYJ
 YIZIAWUDBAIBBQCgggHhMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkF
-MQ8XDTI0MDIxOTE2MjgyNFowLwYJKoZIhvcNAQkEMSIEIFewlkA+9TJ7VonJ34Bxgu66C9VZ
-pTTCM/3Um0lpSZ5XMGwGCSqGSIb3DQEJDzFfMF0wCwYJYIZIAWUDBAEqMAsGCWCGSAFlAwQB
+MQ8XDTI0MDIxOTE2NDIwNlowLwYJKoZIhvcNAQkEMSIEICRftHVNhj/LMjB/TDhJNj2P+y17
+5/ATK/TZ78TviJxhMGwGCSqGSIb3DQEJDzFfMF0wCwYJYIZIAWUDBAEqMAsGCWCGSAFlAwQB
 AjAKBggqhkiG9w0DBzAOBggqhkiG9w0DAgICAIAwDQYIKoZIhvcNAwICAUAwBwYFKw4DAgcw
 DQYIKoZIhvcNAwICASgwgYEGCSsGAQQBgjcQBDF0MHIwZjELMAkGA1UEBhMCREUxMzAxBgNV
 BAoMKkRHTiBEZXV0c2NoZXMgR2VzdW5kaGVpdHNuZXR6IFNlcnZpY2UgR21iSDEiMCAGA1UE
 AwwZZGduc2VydmljZSBDQSAyIFR5cGUgRTpQTgIIcVNPXEs+kdUwgYMGCyqGSIb3DQEJEAIL
 MXSgcjBmMQswCQYDVQQGEwJERTEzMDEGA1UECgwqREdOIERldXRzY2hlcyBHZXN1bmRoZWl0
 c25ldHogU2VydmljZSBHbWJIMSIwIAYDVQQDDBlkZ25zZXJ2aWNlIENBIDIgVHlwZSBFOlBO
-AghxU09cSz6R1TANBgkqhkiG9w0BAQEFAASCAQDSZEb5PNf0WvzFLVHFCAfVLpzgrBRunSju
-uewTM8SS2ly3cNMB3aJDU0L3j04XOInEjbG7aojLetIbvCtkDVeFDD2N8o9o9834v+9ueOKj
-EYJnaTpnoDASttFOrPwcThpQYMfJWnY3UitaA//y5rnRQHUm/9hRxpM4PN+WDDdqP5HTfnM2
-Zh/6gSh8Lk4BYMcpEou7JaVIaiKuUiq6I7JQpsv7y1OrEaCnu/etKmi82apctRMcvYeoJbKD
-dZu5t/65EXBU7xD2d/VVbKWKLMQwQoPWheOC+FN2dRxcgKYEoM6TyvDR+o1fo9Ns7aKTv6ux
-bCpxTj+YpvD3nq9Dlp7mAAAAAAAA
---------------ms050408010005060209060703--
+AghxU09cSz6R1TANBgkqhkiG9w0BAQEFAASCAQApB7w8WpHkJ/nSqqjW3Jw/hyCAqvyokg0N
+tlhr1GNtrsagRn5nlP8W3eHu61ge7YlzO5JkgjJNHyuWQONSSVEfzYEq54kzGWVtsLgtkIuu
+Ndk6jo4Etin7mbQ98xrOZVRMJKh1RUA7GYcynzuWAR4OPdC/uoxtc5kOnNirlqIysoS3xtc0
+K57OXJn5Nx8DYT3cz2zXjb289yLhVQDAy0d+TdBZQmJp7cyytREAUy3TdJnOGG2p/GNn0nvd
+MFEZevHGVZaihYxUASiV/kaWdaLIXRQ6sqLVkdW+e/9jftM51hYwN82zQeWiA0Y83/Mb0hAG
+82eiitjCfXZMB51dx6gzAAAAAAAA
+--------------ms060708070001060506050702--
 
