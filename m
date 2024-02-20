@@ -2,52 +2,48 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5DE3085AFE7
-	for <lists+samba-technical@lfdr.de>; Tue, 20 Feb 2024 00:54:13 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9557585B3E0
+	for <lists+samba-technical@lfdr.de>; Tue, 20 Feb 2024 08:23:41 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=GE4dXIWI6lPDgjZ/kvM38i+9RMWD2IdG6SgmZOu57Zc=; b=1dO1xqgWeRXuZJazjtcUtRtXEG
-	8R8U0Z3Tt39bmO4EvOAWuLiQR+70f7TUu5WpvUG5B5jBnQ6YgbXoHlSsEZE5wxkeXwtBr9POEhUP5
-	Wc04cKPPU8hB4hy4dKrbqaTKMYYKbdR/Y3XKwdAVqPRlVlQGrKXz1Fs1/A1POiQ2klesfoSzatTxK
-	Lso3Y4uC1UVSx5jSNZLojcjtuSz2gSxu6LWes/SlwFZV2GNb2KjtdwdSkkMAgIMBTNHcykrLQA5Uc
-	n0y7/ZPFsZjAcm5DCs9qwEEQC2Nu9cb5P6G6PeJ3f8l8vKtHCSIVDA14+sC+ZLUYMvs/kI0eL3bf2
-	kOyHbsPg==;
-Received: from ip6-localhost ([::1]:21862 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=LkGvQsMhRrsm/UGq6zgrXTARvZz0lZeEEUv/+hxy9AE=; b=bdzGqYKOfx6mFslrsna35amPKb
+	M0B/Ko+QTjqDckgB2Ntc9GfeZqPNshBNrMPFzDHOeQgS+qbOCiHKk9hRxzthGZAeTZMeh3ntcHX8O
+	2kNy7BPuIhyIl//xSkLfVD27PamJ5/j52y5iLknRvTSgZWkdKWorYrPr4E2he5x9NapPdCQj/0XPx
+	jTqTNL1sWkCTWaH6ffkFBRToh0U3/mB2RzzWDQc942danePnxszYntc2NLKIj9tMJR9ssfM9IRQbQ
+	jW0LRb/giRVKUb3HjRGaPakPoIBO7zvw9aoQLtOpUwQN6QcpknDKDq7dl7zhq3QxUrlDUrDhg5ZVs
+	dTzxEjoA==;
+Received: from ip6-localhost ([::1]:51818 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1rcDS9-008x8O-Sy; Mon, 19 Feb 2024 23:53:41 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:58250) 
+	id 1rcKSx-008yUZ-6n; Tue, 20 Feb 2024 07:22:59 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:12426) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1rcDS5-008x8H-8P
- for samba-technical@lists.samba.org; Mon, 19 Feb 2024 23:53:39 +0000
+ (Exim) id 1rcKSm-008yUR-Pe
+ for samba-technical@lists.samba.org; Tue, 20 Feb 2024 07:22:52 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=From:To:Date:Message-ID:CC;
- bh=GE4dXIWI6lPDgjZ/kvM38i+9RMWD2IdG6SgmZOu57Zc=; b=pxEFbs4LPnHRy7fxkRtofmniIL
- FH3KotsP/4N8SdcSx6I7a+7z551nzYoPem1HSdJ7w5RgBL8AeujQWj7iugaAXodSHYKqs8b+fKQUI
- XFU6rIsqbcJTlVE3bCn9c+SlcSAdNCxDpzCFZdNJhykUT7ZDogd/fBEljoIPk5gFcwcWTGi5eQ+9m
- /P2ECNrdeyW2NJ2b6jvg6XA4AJ+DnYCgZSpveS5RGLKZriJpDW+CBh5Nb6FECc3XTGe48a0LDuDOE
- Gs6Xn1y2pItzvf5ks3FFRBdTYSSUEsNNBnBaJITCJeDT2DpYP0uwBV/LQVEX9Mfsi29K8jgBcdE2k
- kT0L/42BlVjaQv2y0iBI9ju0VXzUMLWVN4HYqKMryynwU+dz5xRQ8lEy3hJwtCkwU5e07ocwM/5Pa
- OKt6pwEomzRKsPJVE6T1IjlbrJYJ2N4Tebsg/TA+GD1ZvzBOkwTD51dKk55rKqIuC8Rp7VwKr7em5
- J3Xz1Ilnx66jUs9KMMMlDtEK;
+ s=42; h=Message-ID:Date:Cc:To:From;
+ bh=LkGvQsMhRrsm/UGq6zgrXTARvZz0lZeEEUv/+hxy9AE=; b=R9GwPUATLWK2k4X1GkaeCg2fgv
+ yhCseDoISMBd7AEeJjWCdQTkA1PTJ82X5nIT2zgT+beqAxXb8y2R7baVFKyMBv+JphOj0r/NKQtIm
+ A624JOqzFuepHG7ann3N+oAyOLht0IfDIpslQeU3W6SHk4wNQgLy/yUjE7vE/CMO8TR3IyPjwJJck
+ JN8NRYDvf+HZG8mAbMOw8W9SQPQ9StDBlA463FBJ+tB78iS8h4k2f/7wqxama5eh5OQNuX7jHv8Xc
+ MrmMwPU+9GXBeiQrz9WPNJIPILv1aYFFztKWxQYbxkEbjireWNJuK/1p957Oqt4vtO9iNHudC3/Lv
+ qeHI+xobxBI0BOsfFFmXLSec4HxCO6Kf7iqJ6MleRcTboQ+OWsy3WqYfnwlg4BAMOxhTai7V+6WvG
+ +KT61KY3Sr8OVpKDAyScWoT7Pe1Y+I5NezCDv0WE6DIt4R7rvQR0Nmki0qA2jPO2Fy4hbRfZTxHqP
+ 6b7ti8uwsCDcfyMUusNxCuj+;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1rcDS4-00DrKK-1Y for samba-technical@lists.samba.org;
- Mon, 19 Feb 2024 23:53:36 +0000
-Message-ID: <41970043-2f0a-44a5-b1eb-249f3ed7a219@samba.org>
-Date: Tue, 20 Feb 2024 12:53:28 +1300
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: setting up authentication policies in 4.20rc2
+ (Exim) id 1rcKSk-00DurV-0L; Tue, 20 Feb 2024 07:22:46 +0000
 To: samba-technical@lists.samba.org
-References: <e8210ddc-4506-4255-bcbe-f24ff86b2f0a@kania-online.de>
- <d7e23578-1526-4835-9438-306da6a95ac1@samba.org>
- <f16c0d4d-0040-4179-ad24-e40a98d5f0ac@kania-online.de>
-Content-Language: en-GB
-In-Reply-To: <f16c0d4d-0040-4179-ad24-e40a98d5f0ac@kania-online.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Subject: Re: [MS-GPOL] 3.2.5.1.4 Site Search
+Date: Tue, 20 Feb 2024 08:22:45 +0100
+Message-ID: <2627406.vYhyI6sBWr@magrathea>
+In-Reply-To: <20240219174708.4990e0c1@devstation.samdom.example.com>
+References: <4365205.UPlyArG6xL@magrathea>
+ <20240219174708.4990e0c1@devstation.samdom.example.com>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -61,127 +57,88 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jo Sutton via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jo Sutton <jsutton@samba.org>
+From: Andreas Schneider via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andreas Schneider <asn@samba.org>
+Cc: Rowland Penny via samba-technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On 20/02/24 5:28 am, Stefan Kania via samba-technical wrote:
+On Monday, 19 February 2024 18:47:08 CET Rowland Penny via samba-technical 
+wrote:
+> On Mon, 19 Feb 2024 17:52:59 +0100
+> Andreas Schneider via samba-technical <samba-technical@lists.samba.org>
 > 
+> wrote:
+> > Hi,
+> > 
+> > "[MS-GPOL] 3.2.5.1.4 Site Search" wants to know the site of the
+> > client.
+> > 
+> > Details:
+> > 
+> > https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gpol/
+> > c2ce6870-c863-40b0-94c1-73cf53b6e634
+> > 
+> > In order to do that, it does a netr_DsRGetSiteName() on the local
+> > machine to the local rpc_server. If you sniff the network traffic, on
+> > the DC you can see that the clients rpc_server does a CLAP query:
+> > 
+> > bin/ldbsearch --use-kerberos=no -H
+> > ldap://win-dc01.earth.milkyway.site - UAdministrator%Secret007! -b ''
+> > --scope=base
+> > '(&(DnsDomain=EARTH.MILKYWAY.SITE.)(Host=SAMBA1))(NtVer=0x20000016)'
+> > Netlogon # record 1 dn:
+> > Netlogon::
+> > EwBcAFwAVwBJAE4ALQBEAEMAMAAxAAAAAABFAEEAUgBUAEgAAABsfosaQV2fQrJLMfR
+> > xuNCLAAAAAAAAAAAAAAAAAAAAAAVlYXJ0aAhtaWxreXdheQRzaXRlAMBGCFdJTi1EQzAxwEYKO
+> > KjA ffMDAAMAAAD/////
 > 
-> Am 19.02.24 um 02:48 schrieb Jo Sutton via samba-technical:
->> On 18/02/24 6:11 am, Stefan Kania via samba-technical wrote:
->>> Hi to all,
->>>
->>> I just tried to setup authentication policies and authentication 
->>> silos in 4.20rc2.
->>> Following these steps:
->>> 1. create a policy
->>> samba-tool domain auth policy create --enforce --name winclient-pol
->>>
->>> 2. create a silo
->>> samba-tool domain auth silo create --enforce --name=winclient-silo
->>>
->>> 3. adding a at least one user and one host to the silo
->>> samba-tool domain auth silo member grant --name=winclient-silo 
->>> --member=winclient\$
->>> samba-tool domain auth silo member grant --name=winclient-silo 
->>> --member=padmin
->>>
->>> BTW: In 4.19 it was "silo member add"
->>>
->>> 4. Set single policy for all principals in this silo. with 4.19 that 
->>> was possible and that's by the way also possible with a windows DC. 
->>> That's on a windows DC called "Use a single policy for all principals 
->>> that belog to this authentication silo"
->>>
->>> In 4.20 the option --policy is missing, you have only the option to add:
->>> --user-authentication-policy=
->>> --service-authentication-policy=
->>> --computer-authentication-policy=
->>> So it would be nice if the option --policy will be back
->>>
->>
->> We removed this option in commit 
->> c22400fd8ef961e472ce2803cf4a2ec58b778795. I don’t remember our exact 
->> reasoning, but we must have thought that it didn’t make much sense for 
->> a user and a computer to share the same authentication policy.
-> 
-> 
-> In this picture us see the screenshot from (soory it's a german DC) that 
-> you cann select either all policies or select one.
-> 
-> https://ibb.co/kGB3XhR
-> 
-> I think, with Samba we should have the same possibility.
-> 
->>
->>> The next step after creating the silo and the policy and adding the 
->>> clients and users to the silo would be adding:
->>>   --service-allowed-to-authenticate-from=SDDL
->>> and/or
->>> -service-allowed-to-authenticate-to=SDDL
->>>
->>> But were can I get the SDDL for the user and the client?
->>>
->>
->> Can you explain what you’d like to accomplish in this scenario? If you 
->> want to make sure the user ‘padmin’ authenticates from the computer 
->> ‘winclient$’, you can use 
->> ‘--user-allowed-to-authenticate-from-device-silo=winclient-silo’, and 
->> make sure the user and the computer both belong to the silo. Or if you 
->> want to let only users in the silo authenticate to the computer 
->> ‘winclient$’, you can use 
->> ‘--computer-allowed-to-authenticate-to-by-silo=winclient-silo’.
->>
-> 
-> 
-> 
-> I wan't to disallow the user padmin to login at the computer with the 
-> name winclient. So all users who are member of the silo winclient-silo 
-> should not be able to login to the computer winclient.
-> So for example I create a policy login-to-DCs, than add the group 
-> "domain users" to the silo and the DCs. In a windows-Domain now I can 
-> configure to allow all userers are equal to a list of users or not equal.
-> As you can see in the next picture, I can choose either if the user is 
-> equal to the list to allow the access, or the user is not equal to the 
-> list to allowed to access.
-> 
-> https://ibb.co/SxgRzZW
-> 
-> I'm missing the part of selecting "member of the list" or "not member of 
-> the list"
-> 
-> 
-> 
-> 
-> 
-> Stefan
+> Have you tried adding '--show-binary' to your ldbsearch to see if you
+> get the result in a readable form ?
 
-First, I think you’ll want to do:
+I need the result in python and there ndr_unpack on the data doesn't work:
 
-samba-tool user auth silo assign winclient\$ --silo=winclient-silo
-samba-tool user auth silo assign padmin --silo=winclient-silo
+{'val': <nbt.NETLOGON_SAM_LOGON_RESPONSE talloc based object at 
+0x561bae0c4c60>}
+ 
+python doesn't really understand the result.
 
-to assign the silo to the user and the client.
+> Rowland
+> 
+> > # returned 1 records
+> > # 1 entries
+> > # 0 referrals
+> > 
+> > I think this is actually the same as:
+> > 
+> > 
+> > $ wbinfo --dsgetdcname=earth.milkyway.site
+> > \\WIN-DC01.earth.milkyway.site
+> > \\192.168.56.10
+> > 1
+> > 1a8b7e6c-5d41-429f-b24b-31f471b8d08b
+> > earth.milkyway.site
+> > earth.milkyway.site
+> > 0xe003f3fd
+> > Default-First-Site-Name
+> > Default-First-Site-Name
+> > 
+> > 
+> > As samba-gpupdate is written in Python, the question is how to do a
+> > dsgetdcname() from Python? Could someone give some pointers?
+> > 
+> > 
+> > 
+> > 
+> > Thanks
+> > 
+> > 	Andreas
 
-I don’t think you want ‘--service-allowed-to…’. Those options apply to 
-Managed Service Accounts, which you don’t appear to be dealing with.
 
-I think this might be the command you want? —
+-- 
+Andreas Schneider                      asn@samba.org
+Samba Team                             www.samba.org
+GPG-ID:     8DFF53E18F2ABC8D8F3C92237EE0FC4DCC014E3D
 
-samba-tool domain auth policy modify --name=winclient-pol 
---user-allowed-to-authenticate-from='O:SYG:SYD:(XA;OICI;CR;;;WD;(Not_Member_of 
-SID(S-1-2-3)))'
-
-where winclient’s SID is substituted for ‘S-1-2-3’.
-
-That should prevent any users in the silo from authenticating, unless 
-they use FAST from a computer other than ‘winclient’.
-
-Is that what you’re looking for?
-
-Cheers,
-Jo (she/her)
 
 
