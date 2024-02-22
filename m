@@ -2,54 +2,70 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id B27DB85F358
-	for <lists+samba-technical@lfdr.de>; Thu, 22 Feb 2024 09:45:02 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 02EC285F6A8
+	for <lists+samba-technical@lfdr.de>; Thu, 22 Feb 2024 12:21:18 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=H746s7/tGmDPSHpdWP7oTousmgeHKYPVrjC2DXMawNI=; b=OH/fUf5zjDAI9zJRjmH+koUOCD
-	rDLVNyg5vugrzHqjFrgwwRqSp982D1ssAiNEp8O8jldj/uwjHrw91rOVmC60mu0cgR+nUbnS86Fdz
-	KtpGE7l/yaYmBXAvU3eZoNRku39yjPUTK+ejOOY0qJ1nzQTzdZYIBoPGeeLozVBBUFmNy77tLUE+V
-	YU96ka9Ky3UbRCoh/sdRDo89tg4+lnL/3seDNX62qTTL8a4NU2FpLXZoDXNFe02t15mG6VpqyH7op
-	MO4Jzl9uIwV6jyCtMGhYFAACJhsUyAtKjF1PqParsj70kPuLtlq4p9apwoSwkBJ2zPmkNZVPSsYqD
-	M7nNQRyQ==;
-Received: from ip6-localhost ([::1]:29518 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=LPoBMnsb3gS4Rs9L9OAxvvlN8RkZUtTPsWd7Jd+IW8k=; b=Y2mYhhQYhOBwEmXLLh3JKHVuDd
+	4QZZ3/EXCQbv0VWnxncwm0Mci838nAX11PpLLHNuaayPey48UYtKCA5vElXuqM0cw1bOA+ykEa7af
+	l2D/NpHYvUqRvJGz5gUnawRFgaSoYUXCptnMm7opGX5xTFsmRliug93bQ9nzcgJrT07E7ASHojT7S
+	skXEs8TxaIPs4aBpBYrGJGEdjnsue9sc2riV0O64J+2NjxQq2WOrmkWdBP55o6YJeGTFaxB2GCc1Y
+	Pxfhw7By2edV+AQEyoGNMeIMla8jOj1pR1eLUVgXLwgbRA/GoSwPVTOmZ2LoFmj3kcGayzykEV8ug
+	fELjH7cQ==;
+Received: from ip6-localhost ([::1]:32546 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1rd4go-0098QH-Pc; Thu, 22 Feb 2024 08:44:22 +0000
-Received: from plasma4.jpberlin.de ([80.241.57.33]:44557) 
+	id 1rd789-0099cw-UG; Thu, 22 Feb 2024 11:20:46 +0000
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124]:45215) 
  by hr1.samba.org with esmtps
- (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1rd4gj-0098QA-QS
- for samba-technical@lists.samba.org; Thu, 22 Feb 2024 08:44:20 +0000
-Received: from spamfilter04.heinlein-hosting.de
- (spamfilter04.heinlein-hosting.de [80.241.56.122])
- by plasma.jpberlin.de (Postfix) with ESMTP id BE831FE8E0;
- Thu, 22 Feb 2024 09:44:10 +0100 (CET)
-Received: from plasma.jpberlin.de ([80.241.56.68])
- by spamfilter04.heinlein-hosting.de (spamfilter04.heinlein-hosting.de
- [80.241.56.122]) (amavisd-new, port 10030)
- with ESMTP id h9zP_1s-sNJ8; Thu, 22 Feb 2024 09:44:09 +0100 (CET)
-Received: from [192.168.123.203] (p5b2400db.dip0.t-ipconnect.de [91.36.0.219])
+ (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__AES_256_GCM:256) (Exim)
+ id 1rd783-0099cp-MM
+ for samba-technical@lists.samba.org; Thu, 22 Feb 2024 11:20:43 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1708600836;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=LPoBMnsb3gS4Rs9L9OAxvvlN8RkZUtTPsWd7Jd+IW8k=;
+ b=AC7jGYPj4hBvLzhBU68S0NvugArPZE/ItbHXzK1aHu/T9y9j3lfOvZxIt7zlm3pW3q6iE6
+ Og8qUzjMuQKRsdOw4TIcoWKzL0nxeEWg2zZqAcZXHX1A8aaB68oNICwz0LcmicuU8lOAbR
+ 1BMOq9jhrX83lcgOrlbAvrULaEfZwtM=
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1708600836;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=LPoBMnsb3gS4Rs9L9OAxvvlN8RkZUtTPsWd7Jd+IW8k=;
+ b=AC7jGYPj4hBvLzhBU68S0NvugArPZE/ItbHXzK1aHu/T9y9j3lfOvZxIt7zlm3pW3q6iE6
+ Og8qUzjMuQKRsdOw4TIcoWKzL0nxeEWg2zZqAcZXHX1A8aaB68oNICwz0LcmicuU8lOAbR
+ 1BMOq9jhrX83lcgOrlbAvrULaEfZwtM=
+Received: from mimecast-mx02.redhat.com (mx-ext.redhat.com [66.187.233.73])
+ by relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-135-cin_vBNFPfKUDo38Szi26A-1; Thu,
+ 22 Feb 2024 06:20:30 -0500
+X-MC-Unique: cin_vBNFPfKUDo38Szi26A-1
+Received: from smtp.corp.redhat.com (int-mx10.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.10])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (Client did not present a certificate)
- (Authenticated sender: stefan@kania-online.de)
- by plasma.jpberlin.de (Postfix) with ESMTPSA id 53958FE8C0
- for <samba-technical@lists.samba.org>; Thu, 22 Feb 2024 09:44:09 +0100 (CET)
-Message-ID: <c4f8b006-c039-475d-98a0-d204c8ac4c27@kania-online.de>
-Date: Thu, 22 Feb 2024 09:44:08 +0100
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 489D2282476C;
+ Thu, 22 Feb 2024 11:20:30 +0000 (UTC)
+Received: from warthog.procyon.org.uk (unknown [10.42.28.15])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id DF17E492BD7;
+ Thu, 22 Feb 2024 11:20:27 +0000 (UTC)
+Organization: Red Hat UK Ltd. Registered Address: Red Hat UK Ltd, Amberley
+ Place, 107-111 Peascod Street, Windsor, Berkshire, SI4 1TE, United
+ Kingdom.
+ Registered in England and Wales under Company Registration No. 3798903
+To: Steve French <sfrench@samba.org>
+Subject: [RFC PATCH] cifs: Fix writeback data corruption
 MIME-Version: 1.0
-Subject: Re: setting up authentication policies in 4.20rc2
-Content-Language: de-DE, en-US
-To: samba-technical@lists.samba.org
-References: <e8210ddc-4506-4255-bcbe-f24ff86b2f0a@kania-online.de>
- <d7e23578-1526-4835-9438-306da6a95ac1@samba.org>
- <f16c0d4d-0040-4179-ad24-e40a98d5f0ac@kania-online.de>
- <41970043-2f0a-44a5-b1eb-249f3ed7a219@samba.org>
- <dd0574da-8fd6-4218-9876-b07be2f97fd4@kania-online.de>
- <49439c3b-6562-486a-acfa-26ed990e8082@samba.org>
-In-Reply-To: <49439c3b-6562-486a-acfa-26ed990e8082@samba.org>
-Content-Type: multipart/signed; protocol="application/pkcs7-signature";
- micalg=sha-256; boundary="------------ms030506050608050507060005"
+Content-Type: text/plain; charset="us-ascii"
+Content-ID: <652316.1708600826.1@warthog.procyon.org.uk>
+Content-Transfer-Encoding: quoted-printable
+Date: Thu, 22 Feb 2024 11:20:26 +0000
+Message-ID: <652317.1708600826@warthog.procyon.org.uk>
+X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.10
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -63,129 +79,565 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Stefan Kania via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Stefan Kania <stefan@kania-online.de>
+From: David Howells via samba-technical <samba-technical@lists.samba.org>
+Reply-To: David Howells <dhowells@redhat.com>
+Cc: Paulo Alcantara <pc@manguebit.com>, Tom Talpey <tom@talpey.com>,
+ Shyam Prasad N <sprasad@microsoft.com>, linux-cifs@vger.kernel.org,
+ samba-technical@lists.samba.org, Jeff Layton <jlayton@kernel.org>,
+ linux-kernel@vger.kernel.org, Matthew Wilcox <willy@infradead.org>,
+ dhowells@redhat.com, linux-fsdevel@vger.kernel.org, netfs@lists.linux.dev
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is a cryptographically signed message in MIME format.
+cifs writeback doesn't correctly handle the case where
+cifs_extend_writeback() hits a point where it is considering an additional
+folio, but this would overrun the wsize - at which point it drops out of
+the xarray scanning loop and calls xas_pause().  The problem is that
+xas_pause() advances the loop counter - thereby skipping that page.
 
---------------ms030506050608050507060005
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+What needs to happen is for xas_reset() to be called any time we decide we
+don't want to process the page we're looking at, but rather send the
+request we are building and start a new one.
 
+Fix this by copying and adapting the netfslib writepages code as a
+temporary measure, with cifs writeback intending to be offloaded to
+netfslib in the near future.
 
+This also fixes the issue with the use of filemap_get_folios_tag() causing
+retry of a bunch of pages which the extender already dealt with.
 
-Am 21.02.24 um 03:50 schrieb Jo Sutton via samba-technical:
-> I think the problem is the SID in the authentication policy’s SDDL. 
-> S-1-5-21-2545884418-1286714830-2149023192-512 is the SID of the Domain 
-> Administrators group. Thus, what the SDDL means is “users with this 
-> authentication policy applied may authenticate from devices that don’t 
-> belong to the Domain Administrators group”. Note that it’s the *device* 
-> that the condition applies to, not the user. So it won’t make a 
-> difference if the user is in the Domain Administrators group or not.
-> 
-> If you want the policy to prevent users from logging into the computer 
-> ‘winclient’, try using that computer’s SID instead of the Domain 
-> Administrators SID.
-> 
-> Cheers,
-> Jo (she/her)
+This can be tested by creating, say, a 64K file somewhere not on cifs
+(otherwise copy-offload may get underfoot), mounting a cifs share with a
+wsize of 64000, copying the file to it and then comparing the original fil=
+e
+and the copy:
 
-Hi Jo,
+        dd if=3D/dev/urandom of=3D/tmp/64K bs=3D64k count=3D1
+        mount //192.168.6.1/test /mnt -o user=3D...,pass=3D...,wsize=3D640=
+00
+        cp /tmp/64K /mnt/64K
+        cmp /tmp/64K /mnt/64K
 
-this makes no sens at all. Normally you don't need a silo at all, you 
-can just create a policy add some hosts and users to the policy define a 
-condition and every time you need anew host or user assign the policy to 
-the user. Compare it with the filesystem (I know it's not the same) it 
-would be the same giving permission via ACL to every single user. Nobody 
-would do this. You assign a group to the directories ACL and give the 
-group the permission and assign users to the group.
+Without the fix, the cmp fails at position 64000 (or shortly thereafter).
 
-The same should be done with the policies. You create the policy with 
-the condition (that's the permission comparing to a filesystem ACL). 
-Then you create the silo and assign all the users and hosts to the silo. 
-Then you add the silo to the permission. So I can have different silos 
-with different users and hosts and assign the policy to them.
+Fixes: d08089f649a0 ("cifs: Change the I/O paths to use an iterator rather=
+ than a page list")
+Signed-off-by: David Howells <dhowells@redhat.com>
+cc: Steve French <sfrench@samba.org>
+cc: Paulo Alcantara <pc@manguebit.com>
+cc: Ronnie Sahlberg <ronniesahlberg@gmail.com>
+cc: Shyam Prasad N <sprasad@microsoft.com>
+cc: Tom Talpey <tom@talpey.com>
+cc: Jeff Layton <jlayton@kernel.org>
+cc: linux-cifs@vger.kernel.org
+cc: samba-technical@lists.samba.org
+cc: netfs@lists.linux.dev
+cc: linux-fsdevel@vger.kernel.org
+---
+ fs/smb/client/file.c |  284 ++++++++++++++++++++++++++++-----------------=
+------
+ 1 file changed, 158 insertions(+), 126 deletions(-)
 
-But with samba-tool it's not possible to assign a silo to a policy with
-samba-tool domain auth policy modify --name=winclient-pol 
---user-allowed-to-authenticate-from=winclient-silo
+diff --git a/fs/smb/client/file.c b/fs/smb/client/file.c
+index f391c9b803d8..671ce6ebd203 100644
+--- a/fs/smb/client/file.c
++++ b/fs/smb/client/file.c
+@@ -2624,20 +2624,20 @@ static int cifs_partialpagewrite(struct page *page=
+, unsigned from, unsigned to)
+  * dirty pages if possible, but don't sleep while doing so.
+  */
+ static void cifs_extend_writeback(struct address_space *mapping,
++				  struct xa_state *xas,
+ 				  long *_count,
+ 				  loff_t start,
+ 				  int max_pages,
+-				  size_t max_len,
+-				  unsigned int *_len)
++				  loff_t max_len,
++				  size_t *_len)
+ {
+ 	struct folio_batch batch;
+ 	struct folio *folio;
+-	unsigned int psize, nr_pages;
+-	size_t len =3D *_len;
+-	pgoff_t index =3D (start + len) / PAGE_SIZE;
++	unsigned int nr_pages;
++	pgoff_t index =3D (start + *_len) / PAGE_SIZE;
++	size_t len;
+ 	bool stop =3D true;
+ 	unsigned int i;
+-	XA_STATE(xas, &mapping->i_pages, index);
+ =
 
-That's what you are doing in a Windows domain.
+ 	folio_batch_init(&batch);
+ =
 
-Stefan
+@@ -2648,54 +2648,64 @@ static void cifs_extend_writeback(struct address_s=
+pace *mapping,
+ 		 */
+ 		rcu_read_lock();
+ =
 
---------------ms030506050608050507060005
-Content-Type: application/pkcs7-signature; name="smime.p7s"
-Content-Transfer-Encoding: base64
-Content-Disposition: attachment; filename="smime.p7s"
-Content-Description: Kryptografische S/MIME-Signatur
+-		xas_for_each(&xas, folio, ULONG_MAX) {
++		xas_for_each(xas, folio, ULONG_MAX) {
+ 			stop =3D true;
+-			if (xas_retry(&xas, folio))
++			if (xas_retry(xas, folio))
+ 				continue;
+ 			if (xa_is_value(folio))
+ 				break;
+-			if (folio->index !=3D index)
++			if (folio->index !=3D index) {
++				xas_reset(xas);
+ 				break;
++			}
++
+ 			if (!folio_try_get_rcu(folio)) {
+-				xas_reset(&xas);
++				xas_reset(xas);
+ 				continue;
+ 			}
+ 			nr_pages =3D folio_nr_pages(folio);
+-			if (nr_pages > max_pages)
++			if (nr_pages > max_pages) {
++				xas_reset(xas);
+ 				break;
++			}
+ =
 
-MIAGCSqGSIb3DQEHAqCAMIACAQExDzANBglghkgBZQMEAgEFADCABgkqhkiG9w0BBwEAAKCC
-CdEwggSUMIIDfKADAgECAghxU09cSz6R1TANBgkqhkiG9w0BAQsFADBmMQswCQYDVQQGEwJE
-RTEzMDEGA1UECgwqREdOIERldXRzY2hlcyBHZXN1bmRoZWl0c25ldHogU2VydmljZSBHbWJI
-MSIwIAYDVQQDDBlkZ25zZXJ2aWNlIENBIDIgVHlwZSBFOlBOMB4XDTIzMDkyNTE4MDgzNVoX
-DTI0MDkyNDE4MDgzNVowbjELMAkGA1UEBhMCREUxITAfBgNVBAUTGDQwMDAwMDAwNjUxMWNm
-MDEzNmYxMWEwNDEVMBMGA1UEAwwMU3RlZmFuIEthbmlhMSUwIwYJKoZIhvcNAQkBFhZzdGVm
-YW5Aa2FuaWEtb25saW5lLmRlMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA1ULY
-84oACo6tokvBGHFH3ZqqbpFN09v3A+iqQRRy3N4PfYPPPn2Br4Xun5HhTDbXnppqxxzRh8xw
-tV6TZhuRfa2rOaNfloKJCUgvBcTc+AGCSED0GR/HG8KDqUarhczOSpVagbTeFMfr2rmVj9Mr
-B6KXoQnXcspUKZhllAOmluGJgZ96jaKclZb54/0Z7HOqUtLOCyBQjhB4WHPHCmMfmoBWWnll
-NCh5ArWxAq2oy3qh3vD41YcFCWfwsbhWu6H7i+DctxX1d2s4Yb8AGcVotY5QM4Ihfs83Axez
-nrfnM0DcyJxEyAYEy/NCcNVbnKiBxEc6bOHcOBfNBCk0gfxU8wIDAQABo4IBPDCCATgwHQYD
-VR0OBBYEFJ24mZ9+WXalRwYFaJEOZPfMjOiyMAwGA1UdEwEB/wQCMAAwHwYDVR0jBBgwFoAU
-6caT0dUPBmRy6mqWProQ8lRUsnkwVgYDVR0gBE8wTTBLBgwrBgEEAfsrAgEDAggwOzA5Bggr
-BgEFBQcCARYtaHR0cDovL3NlYzUuZGduc2VydmljZS5kZS9wb2xpY2llcy9pbmRleC5odG1s
-MD4GA1UdHwQ3MDUwM6AxoC+GLWh0dHA6Ly9zZWM1LmRnbnNlcnZpY2UuZGUvY3JsL2NybDIt
-dHlwZS1lLmNybDAOBgNVHQ8BAf8EBAMCBLAwHQYDVR0lBBYwFAYIKwYBBQUHAwIGCCsGAQUF
-BwMEMCEGA1UdEQQaMBiBFnN0ZWZhbkBrYW5pYS1vbmxpbmUuZGUwDQYJKoZIhvcNAQELBQAD
-ggEBADibCeP+7VM75NQfZByrA0oDOPQy1kwPtnBUqX4SZuCTIiM27NZDgYry1KJS+QuKbNmd
-3OirBVqls4rYFTk24qH+5CIstJKrxY+TMHnGk9KpsVVDplw+EyE79khhcAMrbS03WsRZiBd/
-Uk7W5cvfkrTlCIjLzhwvDBqea4+bRTbi8T63LtNHhOgaj7g3+J1xM/wVgVlobSXoXk69+8ZL
-1RG3on3r+1EmJpvCPJsL0BfUTia547lW4ectUBOrQ9eEri2eb+MW1QyileHPXv6OS465uN/b
-2kqY39wo95YEWmWRRZDsiKAqkuY/Qfx7FsodvAQo8kzCsyruNaZB5q6eqZIwggU1MIIEHaAD
-AgECAghVHErXZq0l9jANBgkqhkiG9w0BAQsFADBhMQswCQYDVQQGEwJERTEzMDEGA1UECgwq
-REdOIERldXRzY2hlcyBHZXN1bmRoZWl0c25ldHogU2VydmljZSBHbWJIMR0wGwYDVQQDDBRk
-Z25zZXJ2aWNlIFJvb3QgNzpQTjAeFw0xNjEwMjYwOTIyNDFaFw0yNDEwMjYwOTIyNDFaMGYx
-CzAJBgNVBAYTAkRFMTMwMQYDVQQKDCpER04gRGV1dHNjaGVzIEdlc3VuZGhlaXRzbmV0eiBT
-ZXJ2aWNlIEdtYkgxIjAgBgNVBAMMGWRnbnNlcnZpY2UgQ0EgMiBUeXBlIEU6UE4wggEiMA0G
-CSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDcpfKUP3THo0fSl2bOa6PNbRcDYZaE4ZV3vLGr
-e/U445OsRahORPeP/9L4nycTK6fUawpDTqOaDxtXYxjoJNC9LnKRxVB/UkBf0h25vN0L1iV4
-KhCaY8TimV0z2yUSlb2NuZ4gdBU69qJkasqYj+AP8OcQOo0idj9Nr1eloHD32i0JDPkhBj8V
-f6c6b7mNyn8yfZYvZlzzV2iQ/cvo6iFLx2wgG7mCkOZ8BAHGDFw6T0UIA0Bk60YhRMRxI7GX
-jMxBQA2Y/XXoP4dvQDDtMNmK0r5DUXof87w2brXctuQ2b4xNwFIErVoAQu8ftnXTm9iOtaOs
-WyLMZX6v5szaQBqBAgMBAAGjggHqMIIB5jASBgNVHRMBAf8ECDAGAQH/AgEAMB8GA1UdIwQY
-MBaAFAEMFht0ctM8FO4md7dJFFPY+4sbMFsGCCsGAQUFBwEBBE8wTTBLBggrBgEFBQcwAYY/
-aHR0cDovL3JvY3NwLWRnbi5kZ25zZXJ2aWNlLmRlOjgwODAvZWpiY2EvcHVibGljd2ViL3N0
-YXR1cy9vY3NwMGoGA1UdIARjMGEwXwYMKwYBBAH7KwIBBAIBME8wTQYIKwYBBQUHAgEWQWh0
-dHA6Ly93d3cuZGduc2VydmljZS5kZS90cnVzdGNlbnRlci9wdWJsaWMvZGduc2VydmljZS9p
-bmRleC5odG1sMIGZBgNVHR8EgZEwgY4wgYuggYiggYWGgYJsZGFwOi8vbGRhcC5kZ25zZXJ2
-aWNlLmRlOjM4OS9DTj1DUkwtMSxPPURHTiUyMFNlcnZpY2UlMjBHbWJILEM9REU/Y2VydGlm
-aWNhdGVSZXZvY2F0aW9uTGlzdD9iYXNlP29iamVjdENsYXNzPWNSTERpc3RyaWJ1dGlvblBv
-aW50MB0GA1UdDgQWBBTpxpPR1Q8GZHLqapY+uhDyVFSyeTAOBgNVHQ8BAf8EBAMCAQYwGwYJ
-KwYBBAHAbQMFBA4wDAYKKwYBBAHAbQMFATANBgkqhkiG9w0BAQsFAAOCAQEAq7w5+kXJ+/xT
-at0jiTX4GDX5HUeQohqAuLGfotHcqQqqjF8G6UUI0q4i0tnhHtldhZrNBOErgThGsToNZ1Y2
-Gn0FRrcrUU9LnhSMwd1XJ0Je6ERSdEh4vXf8YxJQGZJPCPJcrblhue0mmwO9nbhKewGglht5
-VWSHTS8vq5Da3zbxFG6lIdE62V4KqcMAiyY2BfL8guCPscTWl5txJrjb4ENo9nRqdzsXNEG3
-yyzgmyv6znQ4pGgTe5E6qXx5bO6XCDoUK4Kz1S82PzR6hvcxKZo7kKK2ut2B3buwU8xqfw73
-EMH8imv4LW/Sx59wKElKjijjHdNrFG/wMRobDYzMyTGCA4IwggN+AgEBMHIwZjELMAkGA1UE
-BhMCREUxMzAxBgNVBAoMKkRHTiBEZXV0c2NoZXMgR2VzdW5kaGVpdHNuZXR6IFNlcnZpY2Ug
-R21iSDEiMCAGA1UEAwwZZGduc2VydmljZSBDQSAyIFR5cGUgRTpQTgIIcVNPXEs+kdUwDQYJ
-YIZIAWUDBAIBBQCgggHhMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkF
-MQ8XDTI0MDIyMjA4NDQwOFowLwYJKoZIhvcNAQkEMSIEIJRAfJ9f34mHF+onY3EXhfVC3Dpb
-O6OdLZBX8quWk+jdMGwGCSqGSIb3DQEJDzFfMF0wCwYJYIZIAWUDBAEqMAsGCWCGSAFlAwQB
-AjAKBggqhkiG9w0DBzAOBggqhkiG9w0DAgICAIAwDQYIKoZIhvcNAwICAUAwBwYFKw4DAgcw
-DQYIKoZIhvcNAwICASgwgYEGCSsGAQQBgjcQBDF0MHIwZjELMAkGA1UEBhMCREUxMzAxBgNV
-BAoMKkRHTiBEZXV0c2NoZXMgR2VzdW5kaGVpdHNuZXR6IFNlcnZpY2UgR21iSDEiMCAGA1UE
-AwwZZGduc2VydmljZSBDQSAyIFR5cGUgRTpQTgIIcVNPXEs+kdUwgYMGCyqGSIb3DQEJEAIL
-MXSgcjBmMQswCQYDVQQGEwJERTEzMDEGA1UECgwqREdOIERldXRzY2hlcyBHZXN1bmRoZWl0
-c25ldHogU2VydmljZSBHbWJIMSIwIAYDVQQDDBlkZ25zZXJ2aWNlIENBIDIgVHlwZSBFOlBO
-AghxU09cSz6R1TANBgkqhkiG9w0BAQEFAASCAQAXfCttsMcOULwHk8Sz2hO47TJxIXRiuEdD
-Lju8uBsWcik1jiRKCA2PXeqm5O0zOQkJmO7wc/2DvAGknI7FL8s1PrZA7sPx2vjL0caRB35A
-ONTcGUqxsLyKdp4EQIvhevX5cFyJkBvLsEsT9JkPbQHrzy6OiFbhQiI7YxIl2ZEZn+/d3aVi
-o7tLcKi3ub3R7dYsDrjQWqp6aJzhVOtYsJor2UKSeXClEEV/agxQ9yfkBivgV3jzE4O67rew
-8duwMoVEfjM15drwgt+yXx9z0rv8YLeLEtBIKHLbbK8W0KG0LBDEdTeXDd6AaAjoL7+/Bywr
-+vRuTsYCAWI2WdbcCCdpAAAAAAAA
---------------ms030506050608050507060005--
+ 			/* Has the page moved or been split? */
+-			if (unlikely(folio !=3D xas_reload(&xas))) {
++			if (unlikely(folio !=3D xas_reload(xas))) {
+ 				folio_put(folio);
++				xas_reset(xas);
+ 				break;
+ 			}
+ =
+
+ 			if (!folio_trylock(folio)) {
+ 				folio_put(folio);
++				xas_reset(xas);
+ 				break;
+ 			}
+-			if (!folio_test_dirty(folio) || folio_test_writeback(folio)) {
++			if (!folio_test_dirty(folio) ||
++			    folio_test_writeback(folio)) {
+ 				folio_unlock(folio);
+ 				folio_put(folio);
++				xas_reset(xas);
+ 				break;
+ 			}
+ =
+
+ 			max_pages -=3D nr_pages;
+-			psize =3D folio_size(folio);
+-			len +=3D psize;
++			len =3D folio_size(folio);
+ 			stop =3D false;
+-			if (max_pages <=3D 0 || len >=3D max_len || *_count <=3D 0)
+-				stop =3D true;
+ =
+
+ 			index +=3D nr_pages;
++			*_count -=3D nr_pages;
++			*_len +=3D len;
++			if (max_pages <=3D 0 || *_len >=3D max_len || *_count <=3D 0)
++				stop =3D true;
++
+ 			if (!folio_batch_add(&batch, folio))
+ 				break;
+ 			if (stop)
+ 				break;
+ 		}
+ =
+
+-		if (!stop)
+-			xas_pause(&xas);
++		xas_pause(xas);
+ 		rcu_read_unlock();
+ =
+
+ 		/* Now, if we obtained any pages, we can shift them to being
+@@ -2712,16 +2722,12 @@ static void cifs_extend_writeback(struct address_s=
+pace *mapping,
+ 			if (!folio_clear_dirty_for_io(folio))
+ 				WARN_ON(1);
+ 			folio_start_writeback(folio);
+-
+-			*_count -=3D folio_nr_pages(folio);
+ 			folio_unlock(folio);
+ 		}
+ =
+
+ 		folio_batch_release(&batch);
+ 		cond_resched();
+ 	} while (!stop);
+-
+-	*_len =3D len;
+ }
+ =
+
+ /*
+@@ -2729,8 +2735,10 @@ static void cifs_extend_writeback(struct address_sp=
+ace *mapping,
+  */
+ static ssize_t cifs_write_back_from_locked_folio(struct address_space *ma=
+pping,
+ 						 struct writeback_control *wbc,
++						 struct xa_state *xas,
+ 						 struct folio *folio,
+-						 loff_t start, loff_t end)
++						 unsigned long long start,
++						 unsigned long long end)
+ {
+ 	struct inode *inode =3D mapping->host;
+ 	struct TCP_Server_Info *server;
+@@ -2739,17 +2747,18 @@ static ssize_t cifs_write_back_from_locked_folio(s=
+truct address_space *mapping,
+ 	struct cifs_credits credits_on_stack;
+ 	struct cifs_credits *credits =3D &credits_on_stack;
+ 	struct cifsFileInfo *cfile =3D NULL;
+-	unsigned int xid, wsize, len;
+-	loff_t i_size =3D i_size_read(inode);
+-	size_t max_len;
++	unsigned long long i_size =3D i_size_read(inode), max_len;
++	unsigned int xid, wsize;
++	size_t len;
+ 	long count =3D wbc->nr_to_write;
+ 	int rc;
+ =
+
+ 	/* The folio should be locked, dirty and not undergoing writeback. */
++	if (!folio_clear_dirty_for_io(folio))
++		BUG();
+ 	folio_start_writeback(folio);
+ =
+
+ 	count -=3D folio_nr_pages(folio);
+-	len =3D folio_size(folio);
+ =
+
+ 	xid =3D get_xid();
+ 	server =3D cifs_pick_channel(cifs_sb_master_tcon(cifs_sb)->ses);
+@@ -2779,10 +2788,12 @@ static ssize_t cifs_write_back_from_locked_folio(s=
+truct address_space *mapping,
+ 	wdata->server =3D server;
+ 	cfile =3D NULL;
+ =
+
+-	/* Find all consecutive lockable dirty pages, stopping when we find a
+-	 * page that is not immediately lockable, is not dirty or is missing,
+-	 * or we reach the end of the range.
++	/* Find all consecutive lockable dirty pages that have contiguous
++	 * written regions, stopping when we find a page that is not
++	 * immediately lockable, is not dirty or is missing, or we reach the
++	 * end of the range.
+ 	 */
++	len =3D folio_size(folio);
+ 	if (start < i_size) {
+ 		/* Trim the write to the EOF; the extra data is ignored.  Also
+ 		 * put an upper limit on the size of a single storedata op.
+@@ -2801,19 +2812,18 @@ static ssize_t cifs_write_back_from_locked_folio(s=
+truct address_space *mapping,
+ 			max_pages -=3D folio_nr_pages(folio);
+ =
+
+ 			if (max_pages > 0)
+-				cifs_extend_writeback(mapping, &count, start,
++				cifs_extend_writeback(mapping, xas, &count, start,
+ 						      max_pages, max_len, &len);
+ 		}
+-		len =3D min_t(loff_t, len, max_len);
+ 	}
+-
+-	wdata->bytes =3D len;
++	len =3D min_t(unsigned long long, len, i_size - start);
+ =
+
+ 	/* We now have a contiguous set of dirty pages, each with writeback
+ 	 * set; the first page is still locked at this point, but all the rest
+ 	 * have been unlocked.
+ 	 */
+ 	folio_unlock(folio);
++	wdata->bytes =3D len;
+ =
+
+ 	if (start < i_size) {
+ 		iov_iter_xarray(&wdata->iter, ITER_SOURCE, &mapping->i_pages,
+@@ -2864,102 +2874,118 @@ static ssize_t cifs_write_back_from_locked_folio=
+(struct address_space *mapping,
+ /*
+  * write a region of pages back to the server
+  */
+-static int cifs_writepages_region(struct address_space *mapping,
+-				  struct writeback_control *wbc,
+-				  loff_t start, loff_t end, loff_t *_next)
++static ssize_t cifs_writepages_begin(struct address_space *mapping,
++				     struct writeback_control *wbc,
++				     struct xa_state *xas,
++				     unsigned long long *_start,
++				     unsigned long long end)
+ {
+-	struct folio_batch fbatch;
++	struct folio *folio;
++	unsigned long long start =3D *_start;
++	ssize_t ret;
+ 	int skips =3D 0;
+ =
+
+-	folio_batch_init(&fbatch);
+-	do {
+-		int nr;
+-		pgoff_t index =3D start / PAGE_SIZE;
++search_again:
++	/* Find the first dirty page. */
++	rcu_read_lock();
+ =
+
+-		nr =3D filemap_get_folios_tag(mapping, &index, end / PAGE_SIZE,
+-					    PAGECACHE_TAG_DIRTY, &fbatch);
+-		if (!nr)
++	for (;;) {
++		folio =3D xas_find_marked(xas, end / PAGE_SIZE, PAGECACHE_TAG_DIRTY);
++		if (xas_retry(xas, folio) || xa_is_value(folio))
++			continue;
++		if (!folio)
+ 			break;
+ =
+
+-		for (int i =3D 0; i < nr; i++) {
+-			ssize_t ret;
+-			struct folio *folio =3D fbatch.folios[i];
++		if (!folio_try_get_rcu(folio)) {
++			xas_reset(xas);
++			continue;
++		}
+ =
+
+-redo_folio:
+-			start =3D folio_pos(folio); /* May regress with THPs */
++		if (unlikely(folio !=3D xas_reload(xas))) {
++			folio_put(folio);
++			xas_reset(xas);
++			continue;
++		}
+ =
+
+-			/* At this point we hold neither the i_pages lock nor the
+-			 * page lock: the page may be truncated or invalidated
+-			 * (changing page->mapping to NULL), or even swizzled
+-			 * back from swapper_space to tmpfs file mapping
+-			 */
+-			if (wbc->sync_mode !=3D WB_SYNC_NONE) {
+-				ret =3D folio_lock_killable(folio);
+-				if (ret < 0)
+-					goto write_error;
+-			} else {
+-				if (!folio_trylock(folio))
+-					goto skip_write;
+-			}
++		xas_pause(xas);
++		break;
++	}
++	rcu_read_unlock();
++	if (!folio)
++		return 0;
+ =
+
+-			if (folio->mapping !=3D mapping ||
+-			    !folio_test_dirty(folio)) {
+-				start +=3D folio_size(folio);
+-				folio_unlock(folio);
+-				continue;
+-			}
++	start =3D folio_pos(folio); /* May regress with THPs */
+ =
+
+-			if (folio_test_writeback(folio) ||
+-			    folio_test_fscache(folio)) {
+-				folio_unlock(folio);
+-				if (wbc->sync_mode =3D=3D WB_SYNC_NONE)
+-					goto skip_write;
++	/* At this point we hold neither the i_pages lock nor the page lock:
++	 * the page may be truncated or invalidated (changing page->mapping to
++	 * NULL), or even swizzled back from swapper_space to tmpfs file
++	 * mapping
++	 */
++lock_again:
++	if (wbc->sync_mode !=3D WB_SYNC_NONE) {
++		ret =3D folio_lock_killable(folio);
++		if (ret < 0)
++			return ret;
++	} else {
++		if (!folio_trylock(folio))
++			goto search_again;
++	}
+ =
+
+-				folio_wait_writeback(folio);
++	if (folio->mapping !=3D mapping ||
++	    !folio_test_dirty(folio)) {
++		start +=3D folio_size(folio);
++		folio_unlock(folio);
++		goto search_again;
++	}
++
++	if (folio_test_writeback(folio) ||
++	    folio_test_fscache(folio)) {
++		folio_unlock(folio);
++		if (wbc->sync_mode !=3D WB_SYNC_NONE) {
++			folio_wait_writeback(folio);
+ #ifdef CONFIG_CIFS_FSCACHE
+-				folio_wait_fscache(folio);
++			folio_wait_fscache(folio);
+ #endif
+-				goto redo_folio;
+-			}
+-
+-			if (!folio_clear_dirty_for_io(folio))
+-				/* We hold the page lock - it should've been dirty. */
+-				WARN_ON(1);
+-
+-			ret =3D cifs_write_back_from_locked_folio(mapping, wbc, folio, start, =
+end);
+-			if (ret < 0)
+-				goto write_error;
+-
+-			start +=3D ret;
+-			continue;
+-
+-write_error:
+-			folio_batch_release(&fbatch);
+-			*_next =3D start;
+-			return ret;
++			goto lock_again;
++		}
+ =
+
+-skip_write:
+-			/*
+-			 * Too many skipped writes, or need to reschedule?
+-			 * Treat it as a write error without an error code.
+-			 */
++		start +=3D folio_size(folio);
++		if (wbc->sync_mode =3D=3D WB_SYNC_NONE) {
+ 			if (skips >=3D 5 || need_resched()) {
+ 				ret =3D 0;
+-				goto write_error;
++				goto out;
+ 			}
+-
+-			/* Otherwise, just skip that folio and go on to the next */
+ 			skips++;
+-			start +=3D folio_size(folio);
+-			continue;
+ 		}
++		goto search_again;
++	}
+ =
+
+-		folio_batch_release(&fbatch);		=
+
+-		cond_resched();
+-	} while (wbc->nr_to_write > 0);
++	ret =3D cifs_write_back_from_locked_folio(mapping, wbc, xas, folio, star=
+t, end);
++out:
++	if (ret > 0)
++		*_start =3D start + ret;
++	return ret;
++}
+ =
+
+-	*_next =3D start;
+-	return 0;
++/*
++ * Write a region of pages back to the server
++ */
++static int cifs_writepages_region(struct address_space *mapping,
++				  struct writeback_control *wbc,
++				  unsigned long long *_start,
++				  unsigned long long end)
++{
++	ssize_t ret;
++
++	XA_STATE(xas, &mapping->i_pages, *_start / PAGE_SIZE);
++
++	do {
++		ret =3D cifs_writepages_begin(mapping, wbc, &xas, _start, end);
++		if (ret > 0 && wbc->nr_to_write > 0)
++			cond_resched();
++	} while (ret > 0 && wbc->nr_to_write > 0);
++
++	return ret > 0 ? 0 : ret;
+ }
+ =
+
+ /*
+@@ -2968,7 +2994,7 @@ static int cifs_writepages_region(struct address_spa=
+ce *mapping,
+ static int cifs_writepages(struct address_space *mapping,
+ 			   struct writeback_control *wbc)
+ {
+-	loff_t start, next;
++	loff_t start, end;
+ 	int ret;
+ =
+
+ 	/* We have to be careful as we can end up racing with setattr()
+@@ -2976,28 +3002,34 @@ static int cifs_writepages(struct address_space *m=
+apping,
+ 	 * to prevent it.
+ 	 */
+ =
+
+-	if (wbc->range_cyclic) {
++	if (wbc->range_cyclic && mapping->writeback_index) {
+ 		start =3D mapping->writeback_index * PAGE_SIZE;
+-		ret =3D cifs_writepages_region(mapping, wbc, start, LLONG_MAX, &next);
+-		if (ret =3D=3D 0) {
+-			mapping->writeback_index =3D next / PAGE_SIZE;
+-			if (start > 0 && wbc->nr_to_write > 0) {
+-				ret =3D cifs_writepages_region(mapping, wbc, 0,
+-							     start, &next);
+-				if (ret =3D=3D 0)
+-					mapping->writeback_index =3D
+-						next / PAGE_SIZE;
+-			}
++		ret =3D cifs_writepages_region(mapping, wbc, &start, LLONG_MAX);
++		if (ret < 0)
++			goto out;
++
++		if (wbc->nr_to_write <=3D 0) {
++			mapping->writeback_index =3D start / PAGE_SIZE;
++			goto out;
+ 		}
++
++		start =3D 0;
++		end =3D mapping->writeback_index * PAGE_SIZE;
++		mapping->writeback_index =3D 0;
++		ret =3D cifs_writepages_region(mapping, wbc, &start, end);
++		if (ret =3D=3D 0)
++			mapping->writeback_index =3D start / PAGE_SIZE;
+ 	} else if (wbc->range_start =3D=3D 0 && wbc->range_end =3D=3D LLONG_MAX)=
+ {
+-		ret =3D cifs_writepages_region(mapping, wbc, 0, LLONG_MAX, &next);
++		start =3D 0;
++		ret =3D cifs_writepages_region(mapping, wbc, &start, LLONG_MAX);
+ 		if (wbc->nr_to_write > 0 && ret =3D=3D 0)
+-			mapping->writeback_index =3D next / PAGE_SIZE;
++			mapping->writeback_index =3D start / PAGE_SIZE;
+ 	} else {
+-		ret =3D cifs_writepages_region(mapping, wbc,
+-					     wbc->range_start, wbc->range_end, &next);
++		start =3D wbc->range_start;
++		ret =3D cifs_writepages_region(mapping, wbc, &start, wbc->range_end);
+ 	}
+ =
+
++out:
+ 	return ret;
+ }
+ =
+
 
