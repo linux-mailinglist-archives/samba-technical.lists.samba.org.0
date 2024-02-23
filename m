@@ -2,67 +2,72 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id D0CFA86139F
-	for <lists+samba-technical@lfdr.de>; Fri, 23 Feb 2024 15:09:20 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 47DF9861C33
+	for <lists+samba-technical@lfdr.de>; Fri, 23 Feb 2024 19:59:40 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=DQ/LzJJfBJCKVDK6q7WrGii3p2efzatgCGr1R/lL0Io=; b=3wI0Z/PU7WH2I+iEyckPoF+EWV
-	5a+O25rJkfKpoYEW18qiYYwYqBvZnyXP3ZaYPK83pn7s/2KUTwbHUs/TqtdtHEA//oLMwcL9mbHLN
-	f72q0THNZs68/0hsw7DpyGhiiMcUvGXtXXhg49p/w8jftK3NUfCp7Hk22bM2u+g+x/xZAGEqi3vxe
-	5mEr+IlElKx4x3C3eC+ZKhqAH/xPB49bgsmwsF7w04mkb8uPplwv2OKu0xH19uChx2rvO2N49bAy6
-	E42Ye0P37QWEEdelQLvX6UglJ0kkUZrIXcPfhN+N/nfAeCGRXDWSsfhwngvbdJOqA4OlAtVuXnM8m
-	AaXz7FMQ==;
-Received: from ip6-localhost ([::1]:24776 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=r0ZNOV7vLX3TtO2Mgftc62LE+eOfcah04FjIA6cXMR0=; b=zWNeM81+c/OD7R8NO7SS/6n4wy
+	S895KBartlypTL7UMbMM28LTUfh3jUca+4gtbOxqjAZctrjLOeQY/6o5m8bXiPnOvDzq/tQlGDkmf
+	nxY13wuJnyY4fCOyhpXGTVugRglaSVTyRHyvZMDSh6nFJGlnEJKFWARvH/hMEZPOsjXtAK+Dd7tu4
+	i/qZQJ0l84I1P8AMdYjs/D57S5NNI4zKRfYbD4DDGvsNAwSugLSzq/TBr8h2H8xKsUtYvSu+GiP9D
+	t96z1b1l53mns/0e+cO02RTe+kUp2VLIjd9sdfAx7Vz/hcCWM4FZPOpnDVXF1lS1tnUOMBIG0sgsM
+	K/rw8O+g==;
+Received: from ip6-localhost ([::1]:62680 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1rdWEJ-009HF9-4i; Fri, 23 Feb 2024 14:08:47 +0000
-Received: from mx.manguebit.com ([2a01:4f8:1c1e:a2ae::2]:53802) 
+	id 1rdal9-009IvS-Op; Fri, 23 Feb 2024 18:58:59 +0000
+Received: from mail-lf1-x12f.google.com ([2a00:1450:4864:20::12f]:57418) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1rdWED-009HF2-Qu
- for samba-technical@lists.samba.org; Fri, 23 Feb 2024 14:08:44 +0000
-Message-ID: <e215357d673befaf1a2198aeb26b595b@manguebit.com>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=manguebit.com;
- s=dkim; t=1708697311;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=DQ/LzJJfBJCKVDK6q7WrGii3p2efzatgCGr1R/lL0Io=;
- b=ULbon3CxdOjjIkuaOJgE/wlyfRO/FPejJfsfYuaiDCwB0acHg9dmddFtb8GRmDsEtscHaI
- fac2Wi09sOuuuCn5RhAVCtb1PZ2pho5LD8ipFLVnSmnTh4IY0TLEo+BFcrOlVU7hKk2UrO
- xgCGte4B74G/MjOhyP+U6TMMOrHLC11fjuJrMIUFelI1MG2kaf9nbEGJVUGt4QYGVnbGQ5
- kJX+GHm4ZEquijTj1F4TQwu3qf4dzLs8QBT3ai6es7GUlUE8sWyG7Ju/GuOF9SRt/tmwbJ
- RGKLcAMHRLedGE4QmXcQavh+PTulFW/2UPgwhoDACn6QHFlTcA2GLyTo6fWcOQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=manguebit.com; 
- s=dkim; t=1708697311;
- h=from:from:sender:reply-to:subject:subject:date:date:
- message-id:message-id:to:to:cc:cc:mime-version:mime-version:
- content-type:content-type:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=DQ/LzJJfBJCKVDK6q7WrGii3p2efzatgCGr1R/lL0Io=;
- b=Z+EFF2NYL7AZP2/DCjUT9N27XaCQt1Ei72rOhncPFW6uXIJ863dJBunMRyRwIwmF+KZQm7
- Y3KTOA1bued54MjEgUqmwCFN2D9xfiyE9F8Ji7doWIrADUkEWdI0dReR3F1wz4a9MqBi0V
- jR1K/CESjUcEbbzKU5csMvhvBoQ9ZGUvPU4Q6fBB5fcfghbbTfD8XuKp53MHExaLV6r7XT
- 5Ui39Rj3TVQe8xmQkjsu+8PLLnF6wEzjVI/xnwMfPmY9hT0DYzo1s7fy0DmLlrmdDSM84B
- ueeW3i+4CMWiX46vXUwssrs80WlhYQYurvFRIa2ye8HAV8aPJfYyLxZpz6G8xg==
-ARC-Authentication-Results: i=1; ORIGINATING;
- auth=pass smtp.mailfrom=pc@manguebit.com
-ARC-Seal: i=1; s=dkim; d=manguebit.com; t=1708697311; a=rsa-sha256; cv=none;
- b=Yk8Y86VPl8FMJacYJytZ9HWQDgoxbfejODI11gHuXgjrreH4Jv7uBy+uTQFfqPGTsgYKza
- wyrk7kTglrDYT2t2hLqAAoAng8q1XHrx5aDxF8MG/TiEiFPLEj51hGeLULxo8g/i8043ji
- 4gqKNdGUt+rAhfKrl2vhfciqcKYUkWBc/Xuh7iVz1OxWGXiF2gacNKsjeGRzKt3iueVthS
- rg3qjkpBm4q/bcPXU5Ho6nzaWP/YrOLrcv1Ppa3sWZsZokvfuGK/DvnA+nBRejhGD/5sSo
- nS6H1ARrTcmdwGdeUVNIbxkw6ofnEVKx2NP8MSnoCRpiJNgkuSQ0OeYzt+OkMQ==
-To: Shyam Prasad N <nspmangalore@gmail.com>, Steve French <smfrench@gmail.com>
-Subject: Re: [WIP PATCH] allow changing the password on remount in some cases
-In-Reply-To: <CANT5p=qTe2XQJYVdYiVkc34WdsE4ekHaH0f4uMwUoDtSNchwug@mail.gmail.com>
+ (Exim) id 1rdal1-009IvL-G3
+ for samba-technical@lists.samba.org; Fri, 23 Feb 2024 18:58:55 +0000
+Received: by mail-lf1-x12f.google.com with SMTP id
+ 2adb3069b0e04-512ed314881so490476e87.2
+ for <samba-technical@lists.samba.org>; Fri, 23 Feb 2024 10:58:51 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1708714730; x=1709319530; darn=lists.samba.org;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=r0ZNOV7vLX3TtO2Mgftc62LE+eOfcah04FjIA6cXMR0=;
+ b=DFPKa/DzR+mCxhNIJxg4CfjlEfrZPA0CZmYnLqnaCU8iiINgDvgw8u3C/L0gPycCiq
+ f7ef9DRIlTco2JaBw5bV6gDEj9ya/yk+nxAFpzOqw5W38hb24+bhnNbOco/ijeIU3gFH
+ gJed1pOVX/lUK0W9ZV5wZWpsttqV9qgA5yEoCZjoglU5qHbWhvAQ7A1BtcvH3xJNoQrK
+ jTnr/oZjaVf5xMkpYZV0o7UjWYaTTYHbkalKzx48CEjroN5O1a78Ch3cRnhnz+BLoEoy
+ EXQQ7HyPzhitTSUWLsyWf0L4UgC3GyAnuU4TdFBa++asdEkWnAs9xsZLSI2NZUKEEAw/
+ C++w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1708714730; x=1709319530;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=r0ZNOV7vLX3TtO2Mgftc62LE+eOfcah04FjIA6cXMR0=;
+ b=dt3Lo8WoLdReY0qT5HQnuQAWjlaczDXaVsG3uino3DufJvCeLtvlKSZqo9iHVz9Du9
+ bdSdmvjpvNI5+CzLPlzEbVqG/a1O8h1IEI3Ox4MOj5GQPY8pSZw8+tpYr6ytrCL0S5hJ
+ FPnDLaXWWhHjWKpjz2vXx+nCaODT+Z7nnbaZsfWvu8r2TxPYrPIMVDdJY8l5aZWf8iGY
+ rgZ7PemwGbGI3nxDriF3GHAFT8ioiRBK94eGPI+SwXd7xeTSZ+b1ENVY6Lym/ir6JTub
+ s4GtiitCeJkN8UNkpfg4ruSHtoHqOkv2HrBlRxjHieSEEyXRAs2ceOeg/PGJzr7xojDP
+ dcmw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVBw1U9AdX10AiZ8C4rGTU+ZY2bp5KHfQzXcvpE0XM3HS7kW9EBQ01ZsZqcF4BQ3XbIAu/fiKaU+IPRTXN5dnLML7e2UAo7cDmolcmvwTQY
+X-Gm-Message-State: AOJu0Yyzkw/ooJMM93jkBi0C7P7385z8whJb1bJiaxDVjy/HtT1LZMd/
+ UfwphYZwmLacQiZ1ls9fLSPyOcJbVfmFOyY5pIrkfnzLpYE30SNjdIHXeMJlt0V7OPInELEzB/q
+ TbZQXm9xKIGRNq8jfsZSQhjTXb/RT2vgFXSk=
+X-Google-Smtp-Source: AGHT+IECP/Nt+ShRihe8rChjqu3bwpyp4mkcsu/y0RxmoR36enzMOV/IskLwxeeGWXhcThPSmD3mGmkFvhbClrWxeWI=
+X-Received: by 2002:ac2:44d6:0:b0:512:ed6b:1796 with SMTP id
+ d22-20020ac244d6000000b00512ed6b1796mr391926lfm.49.1708714729934; Fri, 23 Feb
+ 2024 10:58:49 -0800 (PST)
+MIME-Version: 1.0
 References: <CAH2r5mtUnLDtwbW7or=Uc+AXkzLpHsJoPuoLE7yyjPVYjvZCow@mail.gmail.com>
  <CANT5p=oNRF9BAgybCX7dE+KvYj=k2G3tERa+fMJOY6tsuZ00Hw@mail.gmail.com>
  <bc2eaf5b9eafe2134820d1ea8c07e43f@manguebit.com>
  <CAH2r5mtSB0nDKxAJHtnp6USgoeVN7hNF79NaOcX_pnF5MVPFhA@mail.gmail.com>
  <CANT5p=qTe2XQJYVdYiVkc34WdsE4ekHaH0f4uMwUoDtSNchwug@mail.gmail.com>
-Date: Fri, 23 Feb 2024 11:08:27 -0300
-MIME-Version: 1.0
-Content-Type: text/plain
+ <e215357d673befaf1a2198aeb26b595b@manguebit.com>
+In-Reply-To: <e215357d673befaf1a2198aeb26b595b@manguebit.com>
+Date: Fri, 23 Feb 2024 12:58:37 -0600
+Message-ID: <CAH2r5msfi54usMaqKR_-jpMkY4yBD+zd7bNPOjru60NyNWORJQ@mail.gmail.com>
+Subject: Re: [WIP PATCH] allow changing the password on remount in some cases
+To: Paulo Alcantara <pc@manguebit.com>
+Content-Type: multipart/mixed; boundary="0000000000008027f00612112650"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -76,22 +81,150 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Paulo Alcantara via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Paulo Alcantara <pc@manguebit.com>
-Cc: Meetakshi Setiya <meetakshisetiyaoss@gmail.com>,
- CIFS <linux-cifs@vger.kernel.org>, Bharath S M <bharathsm@microsoft.com>,
+From: Steve French via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Steve French <smfrench@gmail.com>
+Cc: Shyam Prasad N <nspmangalore@gmail.com>, CIFS <linux-cifs@vger.kernel.org>,
  samba-technical <samba-technical@lists.samba.org>,
- David Howells <dhowells@redhat.com>
+ David Howells <dhowells@redhat.com>, Bharath S M <bharathsm@microsoft.com>,
+ Meetakshi Setiya <meetakshisetiyaoss@gmail.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Shyam Prasad N <nspmangalore@gmail.com> writes:
+--0000000000008027f00612112650
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-> No major objections for this patch. While it may not cover all cases
-> like DFS, multiuser etc., it's still a starting point to allowing
-> users to change password on existing mounts without unmounting.
+Here is an updated patch which handles the point about preventing remount
+from changing it for the sec=3Dkrb5 case.
 
-As long as it doesn't go through -stable and is accompanied with at
-least a new option like 'forcenewcreds', should be fine.  Then you have
-the next merge window to handle the missing cases and fix any problems.
+This does look like something important for stable (users have cases where
+they can't unmount due to a running app but need to update an expired
+password) - are you preferring that we only allow this when user also speci=
+fies
+a new mount option in addition to "remount" ie "forcenewcreds" (or probably
+better would be to call it "newpassword=3D" mount option)?
+
+On Fri, Feb 23, 2024 at 8:08=E2=80=AFAM Paulo Alcantara <pc@manguebit.com> =
+wrote:
+>
+> Shyam Prasad N <nspmangalore@gmail.com> writes:
+>
+> > No major objections for this patch. While it may not cover all cases
+> > like DFS, multiuser etc., it's still a starting point to allowing
+> > users to change password on existing mounts without unmounting.
+>
+> As long as it doesn't go through -stable and is accompanied with at
+> least a new option like 'forcenewcreds', should be fine.  Then you have
+> the next merge window to handle the missing cases and fix any problems.
+
+
+
+--=20
+Thanks,
+
+Steve
+
+--0000000000008027f00612112650
+Content-Type: text/x-patch; charset="US-ASCII"; 
+	name="0001-cifs-allow-changing-password-during-remount.patch"
+Content-Disposition: attachment; 
+	filename="0001-cifs-allow-changing-password-during-remount.patch"
+Content-Transfer-Encoding: base64
+Content-ID: <f_lsz0mgrg0>
+X-Attachment-Id: f_lsz0mgrg0
+
+RnJvbSA3OGQ1Yzc2ODNmNDVlNTVlNTU1NTE2ZGU4MGU1YTE3ZGE2ZWRlNmM0IE1vbiBTZXAgMTcg
+MDA6MDA6MDAgMjAwMQpGcm9tOiBTdGV2ZSBGcmVuY2ggPHN0ZnJlbmNoQG1pY3Jvc29mdC5jb20+
+CkRhdGU6IFR1ZSwgMTMgRmViIDIwMjQgMDA6NDA6MDEgLTA2MDAKU3ViamVjdDogW1BBVENIXSBj
+aWZzOiBhbGxvdyBjaGFuZ2luZyBwYXNzd29yZCBkdXJpbmcgcmVtb3VudAoKVGhlcmUgYXJlIGNh
+c2VzIHdoZXJlIGEgc2Vzc2lvbiBpcyBkaXNjb25uZWN0ZWQgYW5kIHBhc3N3b3JkIGhhcyBjaGFu
+Z2VkCm9uIHRoZSBzZXJ2ZXIgKG9yIGV4cGlyZWQpIGZvciB0aGlzIHVzZXIgYW5kIHRoaXMgY3Vy
+cmVudGx5IGNhbiBub3QKYmUgZml4ZWQgd2l0aG91dCB1bm1vdW50IGFuZCBtb3VudGluZyBhZ2Fp
+bi4gIFRoaXMgcGF0Y2ggYWxsb3dzCnJlbW91bnQgdG8gY2hhbmdlIHRoZSBwYXNzd29yZCAoZm9y
+IHRoZSBub24gS2VyYmVyb3MgY2FzZSwgS2VyYmVyb3MKdGlja2V0IHJlZnJlc2ggaXMgaGFuZGxl
+ZCBkaWZmZXJlbnRseSkgd2hlbiB0aGUgc2Vzc2lvbiBpcyBkaXNjb25uZWN0ZWQKYW5kIHRoZSB1
+c2VyIGNhbiBub3QgcmVjb25uZWN0IGR1ZSB0byBzdGlsbCB1c2luZyBvbGQgcGFzc3dvcmQuCgpG
+dXR1cmUgcGF0Y2hlcyBzaG91bGQgYWxzbyBhbGxvdyB1cyB0byBzZXR1cCB0aGUga2V5cmluZyAo
+Y2lmc2NyZWRzKQp0byBoYXZlIGFuICJhbHRlcm5hdGUgcGFzc3dvcmQiIHNvIHdlIHdvdWxkIGJl
+IGFibGUgdG8gY2hhbmdlCnRoZSBwYXNzd29yZCBiZWZvcmUgdGhlIHNlc3Npb24gZHJvcHMgKHdp
+dGhvdXQgdGhlIHJpc2sgb2YgcmFjZXMKYmV0d2VlbiB3aGVuIHRoZSBwYXNzd29yZCBjaGFuZ2Vz
+IGFuZCB0aGUgZGlzY29ubmVjdCBvY2N1cnMgLQppZSBjYXNlcyB3aGVyZSB0aGUgb2xkIHBhc3N3
+b3JkIGlzIHN0aWxsIG5lZWRlZCBiZWNhdXNlIHRoZSBuZXcKcGFzc3dvcmQgaGFzIG5vdCBmdWxs
+eSByb2xsZWQgb3V0IHRvIGFsbCBzZXJ2ZXJzIHlldCkuCgpDYzogc3RhYmxlQHZnZXIua2VybmVs
+Lm9yZwpTaWduZWQtb2ZmLWJ5OiBTdGV2ZSBGcmVuY2ggPHN0ZnJlbmNoQG1pY3Jvc29mdC5jb20+
+Ci0tLQogZnMvc21iL2NsaWVudC9jaWZzX2RlYnVnLmMgfCAgMiArKwogZnMvc21iL2NsaWVudC9j
+aWZzZ2xvYi5oICAgfCAgMSArCiBmcy9zbWIvY2xpZW50L2ZzX2NvbnRleHQuYyB8IDI1ICsrKysr
+KysrKysrKysrKysrKysrLS0tLS0KIGZzL3NtYi9jbGllbnQvc21iMnBkdS5jICAgIHwgIDUgKysr
+KysKIDQgZmlsZXMgY2hhbmdlZCwgMjggaW5zZXJ0aW9ucygrKSwgNSBkZWxldGlvbnMoLSkKCmRp
+ZmYgLS1naXQgYS9mcy9zbWIvY2xpZW50L2NpZnNfZGVidWcuYyBiL2ZzL3NtYi9jbGllbnQvY2lm
+c19kZWJ1Zy5jCmluZGV4IDNlNDIwOWY0MWMxOC4uMjNkMjYyMmI5NjlmIDEwMDY0NAotLS0gYS9m
+cy9zbWIvY2xpZW50L2NpZnNfZGVidWcuYworKysgYi9mcy9zbWIvY2xpZW50L2NpZnNfZGVidWcu
+YwpAQCAtNDg4LDYgKzQ4OCw4IEBAIHN0YXRpYyBpbnQgY2lmc19kZWJ1Z19kYXRhX3Byb2Nfc2hv
+dyhzdHJ1Y3Qgc2VxX2ZpbGUgKm0sIHZvaWQgKnYpCiAJCQkJc2VzLT5zZXNfY291bnQsIHNlcy0+
+c2VydmVyT1MsIHNlcy0+c2VydmVyTk9TLAogCQkJCXNlcy0+Y2FwYWJpbGl0aWVzLCBzZXMtPnNl
+c19zdGF0dXMpOwogCQkJfQorCQkJaWYgKHNlcy0+ZXhwaXJlZF9wd2QpCisJCQkJc2VxX3B1dHMo
+bSwgInBhc3N3b3JkIG5vIGxvbmdlciB2YWxpZCAiKTsKIAkJCXNwaW5fdW5sb2NrKCZzZXMtPnNl
+c19sb2NrKTsKIAogCQkJc2VxX3ByaW50ZihtLCAiXG5cdFNlY3VyaXR5IHR5cGU6ICVzICIsCmRp
+ZmYgLS1naXQgYS9mcy9zbWIvY2xpZW50L2NpZnNnbG9iLmggYi9mcy9zbWIvY2xpZW50L2NpZnNn
+bG9iLmgKaW5kZXggNTNjNzVjZmIzM2FiLi5lYzlhMjZiZDA1YTEgMTAwNjQ0Ci0tLSBhL2ZzL3Nt
+Yi9jbGllbnQvY2lmc2dsb2IuaAorKysgYi9mcy9zbWIvY2xpZW50L2NpZnNnbG9iLmgKQEAgLTEw
+NjYsNiArMTA2Niw3IEBAIHN0cnVjdCBjaWZzX3NlcyB7CiAJZW51bSBzZWN1cml0eUVudW0gc2Vj
+dHlwZTsgLyogd2hhdCBzZWN1cml0eSBmbGF2b3Igd2FzIHNwZWNpZmllZD8gKi8KIAlib29sIHNp
+Z247CQkvKiBpcyBzaWduaW5nIHJlcXVpcmVkPyAqLwogCWJvb2wgZG9tYWluQXV0bzoxOworCWJv
+b2wgZXhwaXJlZF9wd2Q7ICAvKiB0cmFjayBpZiBhY2Nlc3MgZGVuaWVkIG9yIGV4cGlyZWQgcHdk
+IHNvIGNhbiBrbm93IGlmIG5lZWQgdG8gdXBkYXRlICovCiAJdW5zaWduZWQgaW50IGZsYWdzOwog
+CV9fdTE2IHNlc3Npb25fZmxhZ3M7CiAJX191OCBzbWIzc2lnbmluZ2tleVtTTUIzX1NJR05fS0VZ
+X1NJWkVdOwpkaWZmIC0tZ2l0IGEvZnMvc21iL2NsaWVudC9mc19jb250ZXh0LmMgYi9mcy9zbWIv
+Y2xpZW50L2ZzX2NvbnRleHQuYwppbmRleCA0YjJmNWFhMmVhMGUuLjEyODI3MGU3Njk0ZiAxMDA2
+NDQKLS0tIGEvZnMvc21iL2NsaWVudC9mc19jb250ZXh0LmMKKysrIGIvZnMvc21iL2NsaWVudC9m
+c19jb250ZXh0LmMKQEAgLTc3Miw3ICs3NzIsNyBAQCBzdGF0aWMgdm9pZCBzbWIzX2ZzX2NvbnRl
+eHRfZnJlZShzdHJ1Y3QgZnNfY29udGV4dCAqZmMpCiAgKi8KIHN0YXRpYyBpbnQgc21iM192ZXJp
+ZnlfcmVjb25maWd1cmVfY3R4KHN0cnVjdCBmc19jb250ZXh0ICpmYywKIAkJCQkgICAgICAgc3Ry
+dWN0IHNtYjNfZnNfY29udGV4dCAqbmV3X2N0eCwKLQkJCQkgICAgICAgc3RydWN0IHNtYjNfZnNf
+Y29udGV4dCAqb2xkX2N0eCkKKwkJCQkgICAgICAgc3RydWN0IHNtYjNfZnNfY29udGV4dCAqb2xk
+X2N0eCwgYm9vbCBuZWVkX3JlY29uKQogewogCWlmIChuZXdfY3R4LT5wb3NpeF9wYXRocyAhPSBv
+bGRfY3R4LT5wb3NpeF9wYXRocykgewogCQljaWZzX2Vycm9yZihmYywgImNhbiBub3QgY2hhbmdl
+IHBvc2l4cGF0aHMgZHVyaW5nIHJlbW91bnRcbiIpOwpAQCAtNzk4LDggKzc5OCwxMyBAQCBzdGF0
+aWMgaW50IHNtYjNfdmVyaWZ5X3JlY29uZmlndXJlX2N0eChzdHJ1Y3QgZnNfY29udGV4dCAqZmMs
+CiAJfQogCWlmIChuZXdfY3R4LT5wYXNzd29yZCAmJgogCSAgICAoIW9sZF9jdHgtPnBhc3N3b3Jk
+IHx8IHN0cmNtcChuZXdfY3R4LT5wYXNzd29yZCwgb2xkX2N0eC0+cGFzc3dvcmQpKSkgewotCQlj
+aWZzX2Vycm9yZihmYywgImNhbiBub3QgY2hhbmdlIHBhc3N3b3JkIGR1cmluZyByZW1vdW50XG4i
+KTsKLQkJcmV0dXJuIC1FSU5WQUw7CisJCWlmIChuZWVkX3JlY29uID09IGZhbHNlKSB7CisJCQlj
+aWZzX2Vycm9yZihmYywKKwkJCQkgICAgImNhbiBub3QgY2hhbmdlIHBhc3N3b3JkIG9mIGFjdGl2
+ZSBzZXNzaW9uIGR1cmluZyByZW1vdW50XG4iKTsKKwkJCXJldHVybiAtRUlOVkFMOworCQl9IGVs
+c2UgaWYgKG9sZF9jdHgtPnNlY3R5cGUgPT0gS2VyYmVyb3MpCisJCQljaWZzX2Vycm9yZihmYywK
+KwkJCQkgICAgImNhbiBub3QgY2hhbmdlIHBhc3N3b3JkIGZvciBLZXJiZXJvcyB2aWEgcmVtb3Vu
+dFxuIik7CiAJfQogCWlmIChuZXdfY3R4LT5kb21haW5uYW1lICYmCiAJICAgICghb2xkX2N0eC0+
+ZG9tYWlubmFtZSB8fCBzdHJjbXAobmV3X2N0eC0+ZG9tYWlubmFtZSwgb2xkX2N0eC0+ZG9tYWlu
+bmFtZSkpKSB7CkBAIC04NDMsOSArODQ4LDE0IEBAIHN0YXRpYyBpbnQgc21iM19yZWNvbmZpZ3Vy
+ZShzdHJ1Y3QgZnNfY29udGV4dCAqZmMpCiAJc3RydWN0IHNtYjNfZnNfY29udGV4dCAqY3R4ID0g
+c21iM19mYzJjb250ZXh0KGZjKTsKIAlzdHJ1Y3QgZGVudHJ5ICpyb290ID0gZmMtPnJvb3Q7CiAJ
+c3RydWN0IGNpZnNfc2JfaW5mbyAqY2lmc19zYiA9IENJRlNfU0Iocm9vdC0+ZF9zYik7CisJc3Ry
+dWN0IGNpZnNfc2VzICpzZXMgPSBjaWZzX3NiX21hc3Rlcl90Y29uKGNpZnNfc2IpLT5zZXM7CisJ
+Ym9vbCBuZWVkX3JlY29uID0gZmFsc2U7CiAJaW50IHJjOwogCi0JcmMgPSBzbWIzX3ZlcmlmeV9y
+ZWNvbmZpZ3VyZV9jdHgoZmMsIGN0eCwgY2lmc19zYi0+Y3R4KTsKKwlpZiAoc2VzLT5leHBpcmVk
+X3B3ZCkKKwkJbmVlZF9yZWNvbiA9IHRydWU7CisKKwlyYyA9IHNtYjNfdmVyaWZ5X3JlY29uZmln
+dXJlX2N0eChmYywgY3R4LCBjaWZzX3NiLT5jdHgsIG5lZWRfcmVjb24pOwogCWlmIChyYykKIAkJ
+cmV0dXJuIHJjOwogCkBAIC04NTgsNyArODY4LDEyIEBAIHN0YXRpYyBpbnQgc21iM19yZWNvbmZp
+Z3VyZShzdHJ1Y3QgZnNfY29udGV4dCAqZmMpCiAJU1RFQUxfU1RSSU5HKGNpZnNfc2IsIGN0eCwg
+VU5DKTsKIAlTVEVBTF9TVFJJTkcoY2lmc19zYiwgY3R4LCBzb3VyY2UpOwogCVNURUFMX1NUUklO
+RyhjaWZzX3NiLCBjdHgsIHVzZXJuYW1lKTsKLQlTVEVBTF9TVFJJTkdfU0VOU0lUSVZFKGNpZnNf
+c2IsIGN0eCwgcGFzc3dvcmQpOworCWlmIChuZWVkX3JlY29uID09IGZhbHNlKQorCQlTVEVBTF9T
+VFJJTkdfU0VOU0lUSVZFKGNpZnNfc2IsIGN0eCwgcGFzc3dvcmQpOworCWVsc2UgIHsKKwkJa2Zy
+ZWVfc2Vuc2l0aXZlKHNlcy0+cGFzc3dvcmQpOworCQlzZXMtPnBhc3N3b3JkID0ga3N0cmR1cChj
+dHgtPnBhc3N3b3JkLCBHRlBfS0VSTkVMKTsKKwl9CiAJU1RFQUxfU1RSSU5HKGNpZnNfc2IsIGN0
+eCwgZG9tYWlubmFtZSk7CiAJU1RFQUxfU1RSSU5HKGNpZnNfc2IsIGN0eCwgbm9kZW5hbWUpOwog
+CVNURUFMX1NUUklORyhjaWZzX3NiLCBjdHgsIGlvY2hhcnNldCk7CmRpZmYgLS1naXQgYS9mcy9z
+bWIvY2xpZW50L3NtYjJwZHUuYyBiL2ZzL3NtYi9jbGllbnQvc21iMnBkdS5jCmluZGV4IDYwOGVl
+MDU0OTFlMi4uYTUwMDM4MGQxYjJlIDEwMDY0NAotLS0gYS9mcy9zbWIvY2xpZW50L3NtYjJwZHUu
+YworKysgYi9mcy9zbWIvY2xpZW50L3NtYjJwZHUuYwpAQCAtMTUzNiw2ICsxNTM2LDExIEBAIFNN
+QjJfc2Vzc19zZW5kcmVjZWl2ZShzdHJ1Y3QgU01CMl9zZXNzX2RhdGEgKnNlc3NfZGF0YSkKIAkJ
+CSAgICAmc2Vzc19kYXRhLT5idWYwX3R5cGUsCiAJCQkgICAgQ0lGU19MT0dfRVJST1IgfCBDSUZT
+X1NFU1NfT1AsICZyc3BfaW92KTsKIAljaWZzX3NtYWxsX2J1Zl9yZWxlYXNlKHNlc3NfZGF0YS0+
+aW92WzBdLmlvdl9iYXNlKTsKKwlpZiAocmMgPT0gMCkKKwkJc2Vzc19kYXRhLT5zZXMtPmV4cGly
+ZWRfcHdkID0gZmFsc2U7CisJZWxzZSBpZiAoKHJjID09IC1FQUNDRVMpIHx8IChyYyA9PSAtRUtF
+WUVYUElSRUQpIHx8IChyYyA9PSAtRUtFWVJFVk9LRUQpKQorCQlzZXNzX2RhdGEtPnNlcy0+ZXhw
+aXJlZF9wd2QgPSB0cnVlOworCiAJbWVtY3B5KCZzZXNzX2RhdGEtPmlvdlswXSwgJnJzcF9pb3Ys
+IHNpemVvZihzdHJ1Y3Qga3ZlYykpOwogCiAJcmV0dXJuIHJjOwotLSAKMi40MC4xCgo=
+--0000000000008027f00612112650--
 
