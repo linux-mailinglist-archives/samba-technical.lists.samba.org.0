@@ -2,48 +2,55 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5FF3F86D412
-	for <lists+samba-technical@lfdr.de>; Thu, 29 Feb 2024 21:20:38 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id B19A586D484
+	for <lists+samba-technical@lfdr.de>; Thu, 29 Feb 2024 21:41:55 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=U2lOSFyAGCRiPUk+/ROJ3O7UXCjcdhukMcQaU3PcnW8=; b=SfQq4fCUUoNN4BTxbleXn2PuXh
-	fDlGKDeqggXhlxmXXwCaPKeiuUo+F9GaTV21I6zPZ1ZNuh0pNywO98JqXMmOBr0ucvqsF7n0TxvzY
-	zkfX8HJMHP1aG/2lmppkMYdHpmlq7qObktPC0+lJcbAsbiVMQ5m7XrFAUFvIZyxfd40oslpcQVsGZ
-	kwglBBBXR8flrju+PxZLvFII/19upAAUK+fDCLVkf0zxAGH7XI25gBvOqTC1UqLRiPo4T6MtRIMLC
-	nz46QvUofX4A06lvFkS/mSs0/l2kZAfpKE42KXWvLnLGsYa7tlx0ME1BjGX/5afiUT4T6c3l+k2+b
-	rNZ/Ipyg==;
-Received: from ip6-localhost ([::1]:60850 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
+	bh=IS5vutZL4xHcCFXmr9Qtcdg3OYv/Pnxvy1BuJ3aQAFg=; b=qepocZL0L3yIWeJc6U9alilv3z
+	Y5S4yJ8/VNwTQemXc1ZKFjqrssWJOANKKcb+m89/cqs86yq98Tj+RLm1IACgzrqa485l9y9veiupF
+	69Zn7NuqbKc/GMZRXMvKeab8pNVoIsX5Iug4ntPj0IIWlSS1ujV9a3fLIW5aDRCHvFvHxGq57xa4v
+	MFbahO7/XlrVsreYIbiRPotsVmUQflN9CYhgLyNRmtwyJEpLzUe2J8P7UZeBu98yeRbZmvLK2w+kh
+	UUzVzA9NiyWnUlPDQeyWRWPkIdhYdfiqqx0oEaD51dP8B821AAr1Xh3T2qJJFT2y1zSus3FhjVV0U
+	adlbl/xQ==;
+Received: from ip6-localhost ([::1]:32906 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1rfmst-009j2B-7I; Thu, 29 Feb 2024 20:20:03 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:16778) 
+	id 1rfnDj-009jex-Kt; Thu, 29 Feb 2024 20:41:35 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:48368) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1rfmsn-009j22-H1
- for samba-technical@lists.samba.org; Thu, 29 Feb 2024 20:20:00 +0000
+ (Exim) id 1rfnDf-009jep-0X
+ for samba-technical@lists.samba.org; Thu, 29 Feb 2024 20:41:33 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:To:From:Message-ID:CC;
- bh=SCIJSCDh4DIB8mpi2uv65wmtGBXgrzmgmxujtUgIxaI=; b=yPJFBal7/L29zc3824ehahct8x
- v36GxMaOgyD0SbOtoAJEWVVHlk1kacDbyKaH68Rgi9f89SH1Ad4g08qS+ZAYTHA6S6FbNt4XmEyoc
- GDExdYSdvH0OKW4Y0/vqhY4fekjNmE/mN+ixVnfeNPVbfYal+me4yfdxJS91o/yjUS5pu+3TOgDN2
- WV2FjGPShXBVvYpiphkbBFRjdlpBbM0/Fsy/gb/26qm55QHqkyWQP8O8A7eGoYGgUZBBX64vE/Xn5
- h39TugcLkbw7I/xn2DvNwrYFxfF0Es2qgdTgTxTVsBWc6DOqjUHoKmV9Oy19JwIV47yjlu80y0dpf
- 1VPMj1EegcZfDMlI8k2oq8Yy+hBDK2mNGJrC1U9Vb/GWzBYPkiRPz7EP/8NFdtaD8ZcF+t6PzEBYT
- 3msToT5Xr1+dLIhk+LDx1jWUYkoYl4lqCKTix6nZLGkE3M/swed4lnxXDmMc5oNVQMjbWVfiOIo7D
- 5nyl//ugVuaeAChlPTYcP3QI;
+ s=42; h=Date:Cc:To:From:Message-ID;
+ bh=QyUKxUJjWJ/01TQEATGhPjuAR8HuyZgmIMAAidBSAp4=; b=kNlTP5jYGmvNZ4CoxtQjw+47uT
+ uChXPUN4B6v9A1nMijcEC1I0kKS3hmmn2+NsNHuOQLYyknKly1DCqZVE/yT3fzdfCyj5eIi/r9KEu
+ qGl5idm9yAgHdYObhDARz3Fv+pEQdcRI+mX5Bx2Kd4oY/XbZXW03a8aYHN8vR07HdAKnMW6SP//WN
+ tv8nI/+kKKyOSgpPrshspFtCJHElksfnVCA97jbfoGhlGPHecdu2MXK5F71Q46VXTbZkcHm6Y9bQk
+ Wb4cAg9ZvqjCrzGwBvE+zxQEgGub6pycpiG7LG35z0VfUDWHBfaPvUDPlBWn+cN1yDEsw5GpnIFh3
+ v8iVTa5+VQO1SJr212Jr6M+I2WX9R0wpwbdXR6ng7Tz7/Ryj12BXtBU0QbPhVWd8kXtaOUUlFhFAl
+ SGivPKFUaCIn2D3ROVBVQFUU68bn+1s0HSWDU3CpfT8DtKXjw5mBBUgtIXaH/jc4X8knUT8Uqf0QP
+ AcnsqrWZBJIXJD8Q4hZe3UJJ;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1rfmsm-00FUoZ-0l; Thu, 29 Feb 2024 20:19:56 +0000
-Message-ID: <975d227206d53fe93ef5cb5a3561f5363eae1832.camel@samba.org>
-Subject: Re: Regression: ldb performance with indexes
-To: Andreas Schneider <asn@samba.org>, samba-technical@lists.samba.org
-Date: Fri, 01 Mar 2024 09:19:52 +1300
-In-Reply-To: <2223722.hkbZ0PkbqX@magrathea>
-References: <2223722.hkbZ0PkbqX@magrathea>
+ (Exim) id 1rfnDd-00FV1x-2D; Thu, 29 Feb 2024 20:41:30 +0000
+Message-ID: <ba174768cd7099d45ea9ea33842845be7d69cac9.camel@samba.org>
+Subject: Re: Samba 4.20.0rc2 fails to support "--with-includelibs" or build
+ Heimdall Kerberos
+To: Nico Kadel-Garcia <nkadel@gmail.com>
+Date: Fri, 01 Mar 2024 09:41:26 +1300
+In-Reply-To: <CAOCN9ry_QhZ6ZvUMpx7mzLgjdLFBeX1-1=CmbCsBSDKadnRaYQ@mail.gmail.com>
+References: <CAOCN9rxnv=Wx7OJQ4JDdZQn62D1VKjYSBYGOjX45CJLSq=-LJw@mail.gmail.com>
+ <ZdIU8U1tFrsf0Yi2@toolbox>
+ <CAOCN9rwCGJOhK2EkCDJOeahbt7j1R5fNpbd+55rjrKrtCbqjtA@mail.gmail.com>
+ <Zd2jaaIxgSWMiZ6f@toolbox>
+ <CAOCN9rz3nPyzGyyZVHAydFxaO0wDstMnDSZUttYs6D+c4VXk3w@mail.gmail.com>
+ <6b86a32e36a815cd2394e05600d963262601f7c1.camel@samba.org>
+ <CAOCN9ry_QhZ6ZvUMpx7mzLgjdLFBeX1-1=CmbCsBSDKadnRaYQ@mail.gmail.com>
 User-Agent: Evolution 3.36.5-0ubuntu1 
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
@@ -60,25 +67,27 @@ List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
 From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
 Reply-To: Andrew Bartlett <abartlet@samba.org>
+Cc: Alexander Bokovoy <ab@samba.org>,
+ samba-technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Thu, 2024-02-29 at 16:36 +0100, Andreas Schneider via samba-
-technical wrote:
-> Hi,
-> my colleagues discovered a performance issue in libldb:
-> https://bugzilla.samba.org/show_bug.cgi?id=15590
+So glad to have helped, and very appreciative of your work.
+Andrew,
+On Thu, 2024-02-29 at 08:41 -0500, Nico Kadel-Garcia wrote:
+> It's a *veru good* red herring! It helped show me where the dang
+> sharkwas gobbling all the little fishies. Namely the latest
+> samba.spec fromthe Fedora published SRPM for samba delete the heimdal
+> directory, "toensure the use of gnutls".
+> Bad Red Hat! No biscuit!
+> It's compiling successfully now. though it still requires tuning
+> forslightly different files in the RPM. Thank you for the pointer..
 > 
-> As soon as you use indexes, ldbadd will be magnitudes slower than it
-> was before.
-> Could some ldb expert please look into it?
-
-Your subject says a regression.  What version is this a regression
-against?
-The very nature of a DB index is that it will take time to create,
-possibly a lot of time, but should make reads faster.
-Andrew Bartlett
-
+> On Wed, Feb 28, 2024 at 10:10 PM Andrew Bartlett <abartlet@samba.org>
+> wrote:
+> > I think this is a red herring.  The files did move, but so did the
+> > heimdal_build directory that references them.
+> > Andrew,
 -- 
 Andrew Bartlett (he/him)       https://samba.org/~abartlet/
 Samba Team Member (since 2001) https://samba.org
