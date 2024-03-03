@@ -2,48 +2,65 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id B75DD86DF61
-	for <lists+samba-technical@lfdr.de>; Fri,  1 Mar 2024 11:40:10 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7C06B86F380
+	for <lists+samba-technical@lfdr.de>; Sun,  3 Mar 2024 04:25:45 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=sPUuPNHkRuLKNN5jY/RBKJtJl0iXMas25vLU674HII8=; b=T12araw5KD4R8cmJilfrfRjO8N
-	KwAuUbBjj9ApoMuCl19eT07ty07+EUgT1sVGeOUy92dtkIdwPinTKoRHeAW6wOfOvuFqVXLZvTskB
-	ijhzB47IAAOp+FqljbFNrbkMXl4fWZ3KGn0eW1QnTAmXoEaofEYUNewhv8WniQNxlr+hzUAVYBgUZ
-	00RWP//EzOv/Ht/2wNttTuTN0nNCe1RLrb0xGbsHlS2JavL+AZX7AmEK2NGMZ3riKQxyIZbN7IYLe
-	Mb1CWdIbpTJBKD1UYIBEZ0CyiL4UUcbCzunQVC8KYAlc8aISKOwHGnsEQBQfoqhojMbvqV8Cqa/On
-	JAUGO5iw==;
-Received: from ip6-localhost ([::1]:30436 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=6yIUnORpumXezRtbo78j26ge/4qtJhnke9kcXnIdLfM=; b=r33P+SouSsbL0hPzkGk+OO1e55
+	jmNKbkFi1j4kEIKkSgVUQaIDwyMzFmJF71vb3j+AsWb6wO2ht/tfwjMw0O9ZephGbuqELTMbtAtiz
+	2MVtvJG9YYT1kUT+NahYAilXDh9cwFSUy11uTEcsmda+vQ0Remcij3h7pg/QZuUnY9RcqACk4cwFn
+	nwXvioQydesl+XFaoAqbEbt/GoP3/ZIzxihA1IQoIhROrTkxH3Tg9UHYj8LjRZryUx+Xigw+ezdON
+	/mJp2MbjRl9hAnn2cErpjdU6px8Oya/NV8EnUM5P71MVje6Ogns1gqt3FNHxvAjMsSiPFujJwfjWm
+	1OQqX3Sw==;
+Received: from ip6-localhost ([::1]:57402 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1rg0IU-00BbR2-3d; Fri, 01 Mar 2024 10:39:22 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:30242) 
+	id 1rgcT9-00BhGb-Ct; Sun, 03 Mar 2024 03:24:55 +0000
+Received: from mail-qt1-x82a.google.com ([2607:f8b0:4864:20::82a]:57575) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1rg0IQ-00BbQv-1t
- for samba-technical@lists.samba.org; Fri, 01 Mar 2024 10:39:20 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Date:Cc:To:From;
- bh=sPUuPNHkRuLKNN5jY/RBKJtJl0iXMas25vLU674HII8=; b=ZJZL6FMgUj9ko8nkqCvF18bGp+
- o2zLgjhqu4QruqisTTfdfspjEnAprIryE7bQtccXmnim1HHFPo6bIUTXVFctzpTGxy54HowwpfWYp
- DwQn9hvD2KgSLDPv1U/2D6vFAMdodheLgPAWfmC1/sGhj7CCxLvxTITCz8j9ruf0kZxFAccUiR5Fj
- MZRDbCFOFKA9MYlsgv+6+QfHOjsi/pRJdjQgjfE8tHqheCGf/dBZMMZu+F7e1F1TAcJnEbKUtI141
- FR/8YLdlJhbIY1u7PRj3krFbesDJuV4R7VRAL0X75g0R38YrpY1q7NtFMdMFLiNaydC0P5L0PxPBr
- P8Bk0RYcTLfLX+xJy5c9jvwjiUSGHcxaQgSNwZL1Uezdh8Y9yx2syuKjcnumgdbp1swH4Y2Zr4qkn
- G84MaNmKIOyzExQqLLrkbNb5H9/AQ4r1xQJtjGMEw/T+eWSHC5euyqibNNQUOXiylV9JI+kJKB7JL
- c+6w9VEs9/ismlAek1SCjKbY;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1rg0IO-00FbzO-0P; Fri, 01 Mar 2024 10:39:16 +0000
-To: samba-technical@lists.samba.org
-Subject: Re: Regression: ldb performance with indexes
-Date: Fri, 01 Mar 2024 11:39:15 +0100
-Message-ID: <4856178.OV4Wx5bFTl@magrathea>
-In-Reply-To: <741d1eaff17826e83259005d75db43c6b400282e.camel@samba.org>
-References: <2223722.hkbZ0PkbqX@magrathea> <26313942.1r3eYUQgxm@magrathea>
- <741d1eaff17826e83259005d75db43c6b400282e.camel@samba.org>
+ (Exim) id 1rgcT4-00BhGT-1y
+ for samba-technical@lists.samba.org; Sun, 03 Mar 2024 03:24:52 +0000
+Received: by mail-qt1-x82a.google.com with SMTP id
+ d75a77b69052e-429de32dad9so24252831cf.2
+ for <samba-technical@lists.samba.org>; Sat, 02 Mar 2024 19:24:45 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1709436284; x=1710041084; darn=lists.samba.org;
+ h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=q0YxWOye16qtKHeNY95GZkNLxhQcPDGok1yFNQXAT0g=;
+ b=Bi0UiG9mEwP2Ac2IrGnJRtRa+7FzUVVJapGUOHa9SIYDNy+2HNwka3y/Z++GiFfN/p
+ 06eYAMixIi1c+WTVx65Ofg5PxCrU8IlYU6IEq85iAD/JMDtv/JSaUTOnIqT4obdZIcZN
+ BzX0VSYyp8ODV9iMBco7+EdhRnTZUp/QaPphZgmbw/qhoZZiHcjUXM8F4nxDaFkfTKZ8
+ DM7SDWP0ydcX9Ifi3xog916q0mIEl3esJvig4XhVpQECcgsXsSqV8Eik6a+dcxG2xSWe
+ zgnbPbd7khx6x6ckCogM+Zpulf8KXTogMYH2W/5LlXseZtc4Uw2V8th664+GQcA28S0P
+ 8mhQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1709436284; x=1710041084;
+ h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=q0YxWOye16qtKHeNY95GZkNLxhQcPDGok1yFNQXAT0g=;
+ b=JC7hLwV0Kxxb7igclfcc8meWrcrZHTl0/9BHwZgfU61Bjtono1hRcZTi83CnJCncCQ
+ wnzyBCCkNiZzzwS2LhToA/wThKx4kCfHQg0V/egaYajMo19qg1xMR0V9DHpAcDoVBvxn
+ rzvTDAEldaiHk+3xxpZ43reZABN6NqlD+GyS/tl5JcJnva3I3QoE68B0385wrUTiM90F
+ bskHv5ep39knGNDRAJCxLIaMo+BRgKEjnimYgRPDhvhrKAVH+SyFp5otUAmaNft+2PPy
+ iDpnwP4133OUjHuSwVN/X8B1gypGAIWfi529qeksTzx/ZGDI9Mim3MS9x4uAaqQC09zM
+ V+2g==
+X-Gm-Message-State: AOJu0YwBDy+lahGuBjZDxC1JeBUehlCApOw6kOeHYe7XPJ2kdnV2AmgZ
+ +uFrnwb7CsR6E2hYYEKY4VJl+Dkm74uqQ1M0y5px08SAMshXNnIr4MLbKR6Uw1+Gk9zAh5Q0Jcw
+ K9U9AYCTbhRMPhZmMXPpoAkU9THWfliBQ
+X-Google-Smtp-Source: AGHT+IFCRb6BRhQybJ9F9UwtKpfXPxg6JDAHOUcD8FV4+vnD5GEzrzErBTapisRy/ZRmtRBkm+E7kMAu6Am3Ccwy61Y=
+X-Received: by 2002:ac8:7d15:0:b0:42e:d65d:78d6 with SMTP id
+ g21-20020ac87d15000000b0042ed65d78d6mr5477554qtb.51.1709436284083; Sat, 02
+ Mar 2024 19:24:44 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+Date: Sat, 2 Mar 2024 19:21:24 -0800
+Message-ID: <CACyXjPzVO5hDs8mXUWppErO6H+Gi4DbmO9tU+uz+rAdvJLkwHg@mail.gmail.com>
+Subject: A QUERY_INFO FILE_STREAM_INFORMATION on Samba behaves differently
+ than Windows when the buffer is not big enough.
+To: samba-technical <samba-technical@lists.samba.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -57,111 +74,35 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andreas Schneider via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andreas Schneider <asn@samba.org>
-Cc: Andrew Bartlett <abartlet@samba.org>
+From: Richard Sharpe via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Richard Sharpe <realrichardsharpe@gmail.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Thursday, 29 February 2024 22:39:35 CET Andrew Bartlett via samba-technical 
-wrote:
-> On Thu, 2024-02-29 at 22:31 +0100, Andreas Schneider wrote:
-> > On Thursday, 29 February 2024 21:19:52 CET Andrew Bartlett via samba-
-> > 
-> > technical wrote:
-> > > On Thu, 2024-02-29 at 16:36 +0100, Andreas Schneider via samba-
-> > > 
-> > > technical wrote:
-> > > > Hi,my colleagues discovered a performance issue in libldb:
-> > > > https://bugzilla.samba.org/show_bug.cgi?id=15590
-> > > > 
-> > > > As soon as you use indexes, ldbadd will be magnitudes slower than
-> > > > itwas before.Could some ldb expert please look into it?
-> > > 
-> > > Your subject says a regression.  What version is this a
-> > > regressionagainst?
-> > 
-> > Isn't that obvious from the bug report?
-> > Here is the short summary:
-> > $ bash repro.sh 20000 indexesAdded 2 records successfullyAdded 20000
-> > records successfully
-> > On Samba 4.10: 0m01.231sOn Samba 4.19: 1m30.924s (that's 90 times
-> > slower)
-> > 
-> > > The very nature of a DB index is that it will take time to
-> > > create,possibly a lot of time, but should make reads faster.
-> > 
-> > Either the DB index doesn't work at all in Samba 4.10 or there is a
-> > huge performance problem in Samba 4.19. What is it?
-> 
-> Thanks, that wasn't written as obviously on the bug, thanks for the
-> clarification.
+Hi folks,
 
-I used our CentOS 8 Stream CI image for bisecting. You can't bisect easily on 
-a modern Linux Distribution, as the included waf would not have support for 
-newer Python versions like 3.12.
+I am using Samba to test some stuff where we are using QUERY_INFO
+FILE_STREAM_INFO and I notice that Samba behaves differently to Windows
+around STATUS_BUFFER_OVERFLOW.
 
-In case you want to reproduce it, here is my run:
+When Windows returns STATUS_BUFFER_OVERFLOW for a QUERY_INFO
+FILE_STREAM_INFO it returns as many items as will fit in the space you say
+is in your buffer.
 
-[samba@09821f63851d samba]$ git bisect reset                                                                                                                                
-Previous HEAD position was 201684e59fd lib ldb ldb_key_value tests: Add tests 
-for wrapped operations                                                                                 
-Switched to branch 'master'                                                                                                                                                          
-Your branch is up to date with 'origin/master'.                                                                                                                                      
-[samba@09821f63851d samba]$ git bisect start                                                                                                                                         
-status: waiting for both good and bad commits                                                                                                                                        
-[samba@09821f63851d samba]$ git bisect bad 
-763b52d237763e90e67f5061050f99a92ed7901c
-status: waiting for good commit(s), bad commit known                                                                                                                                 
-[samba@09821f63851d samba]$ git bisect good 
-fb12a252613205dd0ebcfc8716847aed510e07cb                                                                                                 
-Bisecting: 31 revisions left to test after this (roughly 5 steps)              
-[5823dc5414742b023b1bfee4c9183c9f474e8205] s3:libnet: Use 
-gnutls_error_to_ntstatus() in libnet_passwd
-[samba@09821f63851d samba]$ git bisect bad 
-Bisecting: 15 revisions left to test after this (roughly 4 steps)   
-[aa2a3d95098231f48d7c308881bf66418164111e] dnsp.idl: fix payload for 
-DSPROPERTY_ZONE_DELETED_FROM_HOSTNAME
-[samba@09821f63851d samba]$ git bisect bad
-Bisecting: 7 revisions left to test after this (roughly 3 steps) 
-[565341baf537c9b3145a882d6a23ad4f155c0036] lib ldb key value: add nested 
-transaction support.
-[samba@09821f63851d samba]$ git bisect good        
-Bisecting: 3 revisions left to test after this (roughly 2 steps)
-[feb96ee8e558797d68ad0af669eb9010c0487b9f] lib ldb key value: use 
-TALLOC_FREE() per README.Coding
-[samba@09821f63851d samba]$ git bisect bad                      
-Bisecting: 1 revision left to test after this (roughly 1 step)
-[1a52b03b2f4c1503b52784f1a01f8291b78e7604] lib ldb key value: Remove 
-check_parent from ldb_kv_index_idxptr()
-[samba@09821f63851d samba]$ git bisect good   
-Bisecting: 0 revisions left to test after this (roughly 0 steps)                       
-[b6b5b5fe355fee2a4096e9214831cb88c7a2a4c6] lib ldb key value: fix index 
-buffering
-[samba@09821f63851d samba]$ git bisect bad
-b6b5b5fe355fee2a4096e9214831cb88c7a2a4c6 is the first bad commit
-commit b6b5b5fe355fee2a4096e9214831cb88c7a2a4c6
-Author: Gary Lockyer <gary@catalyst.net.nz>
-Date:   Wed Mar 6 15:28:45 2019 +1300
-             
-    lib ldb key value: fix index buffering
+Samba returns nothing.
 
-    As a performance enhancement the key value layer maintains a cache of
-    the index records, which is written to disk as part of a prepare commit.
-    This patch adds an extra cache at the operation layer to ensure that the
-    cached indexes remain consistent in the event of an operation failing.
+I checked the code in master and it looks the same as earlier versions.
 
-    Add test to test for index corruption in a failed modify.
+It looks like instead of returning STATUS_BUFFER_OVERFLOW, we should set an
+error variable and break from the loop in marshall_stream_info.
 
-    Signed-off-by: Gary Lockyer <gary@catalyst.net.nz>
-    Reviewed-by: Andrew Bartlett <abartlet@samba.org>
-    Pair-Programmed-With: Andrew Bartlett <abartlet@samba.org>
-    Signed-off-by: Andrew Bartlett <abartlet@samba.org>
+Finally, the whole API around stream info is retarded anyway since you have
+no way to know how many streams there are and now much space you need to
+allow. (However, that is not Samba's fault.)
 
--- 
-Andreas Schneider                      asn@samba.org
-Samba Team                             www.samba.org
-GPG-ID:     8DFF53E18F2ABC8D8F3C92237EE0FC4DCC014E3D
-
-
-
+--=20
+Regards,
+Richard Sharpe
+(=E4=BD=95=E4=BB=A5=E8=A7=A3=E6=86=82=EF=BC=9F=E5=94=AF=E6=9C=89=E6=9D=9C=
+=E5=BA=B7=E3=80=82--=E6=9B=B9=E6=93=8D)(=E4=BC=A0=E8=AF=B4=E6=9D=9C=E5=BA=
+=B7=E6=98=AF=E9=85=92=E7=9A=84=E5=8F=91=E6=98=8E=E8=80=85)
