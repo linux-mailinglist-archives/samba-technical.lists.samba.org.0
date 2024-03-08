@@ -2,73 +2,111 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5A9AB875835
-	for <lists+samba-technical@lfdr.de>; Thu,  7 Mar 2024 21:23:08 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8F288875EBB
+	for <lists+samba-technical@lfdr.de>; Fri,  8 Mar 2024 08:42:16 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=6xbj6kfKYFycADPkyqjTomsxdR3myyejYOVqL9Ut/k0=; b=jITZqwdXypZn2msyO3LhnPTFne
-	uj2EXm33Cw4rT4BoMwZgrYLvkriH7csqKsRwmiPXyyDn9J6UT5FP+S/lgqmNsmJxGJOXjUMErZfTb
-	iOB9GqjnzNSXU34hgwxSec/4uetWkfMw8463g+zYLz+UDPyGZAWPQIv7HycbXyxt64eEr9A0Bcxwu
-	8N1tnYe+5PyPcrw7N16ZqYyHAEYZNRgib591toxd8NPgro9tJ2xVnSeF7cW3Stg2NmgQuxCl0YBnJ
-	Sih/vGDod+WfKdh76mlh07MTzF57iC65tTUFvyudU/EYjMGTGoGbliIB/jF7vflzKsm+KwMsC0K45
-	qVpxe9Uw==;
-Received: from ip6-localhost ([::1]:46720 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
+	bh=qagCkvSMoBHdZ854oi4uSX8acXl/ldRvPhfbySzDuC8=; b=R0D1hN7Kn/86LOREQL5ot/HEAm
+	fB/CTvPTkzhOfOJgLngIFtcB6PIVV3xmi1ZTJfdvJEUMU5LTt5KTbH8j/JrXuHm9aV7cTEHsheJAi
+	7nNlx8eA5FIuCrIEMzRGd7v6payiYA6SzffomAH0t6Yw4Jzj8EfDiMGh2TL3Z11jjR/JojCOvLNs1
+	uXpaXn/HDvEu6uzgk4T5rLWO7cqe1WDvQQzvdJumsKIbpgpjSwqfRAHpEicZUzZXMMSDHREgNHy4l
+	HSAL4R2GlvsFJI8h+B9I1Hclzjq/dS1YbhHB7rtIl1l9Uzcg568GVhYDeC/zSf7NpGFRr7aBqM9So
+	77rS79bw==;
+Received: from ip6-localhost ([::1]:32560 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1riKGS-00C0f9-A9; Thu, 07 Mar 2024 20:22:52 +0000
-Received: from mail-vs1-xe29.google.com ([2607:f8b0:4864:20::e29]:56597) 
+	id 1riUrA-00C2EA-7L; Fri, 08 Mar 2024 07:41:28 +0000
+Received: from mail-vi1eur05olkn2012.outbound.protection.outlook.com
+ ([40.92.90.12]:64833 helo=EUR05-VI1-obe.outbound.protection.outlook.com) 
  by hr1.samba.org with esmtps
- (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1riKGN-00C0f2-PU
- for samba-technical@lists.samba.org; Thu, 07 Mar 2024 20:22:50 +0000
-Received: by mail-vs1-xe29.google.com with SMTP id
- ada2fe7eead31-472a3dee161so323545137.1
- for <samba-technical@lists.samba.org>; Thu, 07 Mar 2024 12:22:47 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ixsystems.com; s=google; t=1709842965; x=1710447765; darn=lists.samba.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=6xbj6kfKYFycADPkyqjTomsxdR3myyejYOVqL9Ut/k0=;
- b=YREbnyEuSMgcfeE+YM6wdSjbEweQzeBDiF+i3EQY1fa5ZxFYgeesZR+KpcRrxSAmCL
- YMAROrn18fB42Lr0cHr73igfg4a0lmRCKnmPNLlg5wuIBFnptdBSGah9cl6uRBCpRRXJ
- qS+PLrtonUus/XBkNCTa0E5O21XFDGxy3rZakLLUuxsJwcmeOd7sGTKXfgmcQZGXmGjm
- Aag44t4cQnsmkJsYFLtYn3Bpmlj5VGMdIJnpvie57PhvKh01/PvcDbaQAIHuS1+3bbLW
- svDDOWNKJIwC5DeZ8kwC5g3MVZS4ZRjXirCQuhm9RthCv4GUFVCIW4HDqCemGYnkO2nP
- 6M6A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709842965; x=1710447765;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=6xbj6kfKYFycADPkyqjTomsxdR3myyejYOVqL9Ut/k0=;
- b=bvtTIQnj7HoZufrGEzlx/WfeTzNAjSzBuTw3jpxNzFwjYMo1TQh+YCIy8c7f3v3HO2
- YaSilii+wtDoA44IaOJkEyUw87v31sx4xGoCV/7td2JtuqxBtzOwA3OI+vb2rPeRLKki
- 7Bh4Bv329+/X/nh54o7EI/89oqyQtRrdPKi3EAEREkDWE1zyJd0TB/NuKLlcjJ7o4TgZ
- UIbylR9TBeqnPSckZ98IqvaBP/yEEb/ZHsimAfRE+0mfmU1JRiO4osDCa9JqBvActNuG
- M4loT3jrRRF6u3uDcYs2itlHzvBFMTKD+uL1+SIOgI01ZoGHG9Ym7ONborFqpaI9PeTq
- mVIg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWwI3KNgnaAWe2mhejx7nWLWNRVRty9KKTjPxpGwjG9MRSzdb15FRB2Nyc1LKe4Hyz/KUhL6bd3E4ePSQ6Qb1tVKBsO33mJ/76nuYdAV14k
-X-Gm-Message-State: AOJu0YzrUeAzjknFDMDKPN0htOojoq3fYSVWjYfAEGiOhrer54Z0WL/e
- dJ21wBzTnycagMS06Wr23cCdLxkHY7V9YeF19q7Qqk5vUDdL2uC9HVFchg278XsqdQYj8Wq1Y3p
- bsAuvS7Cd2DqAdHBrdePcUWXrXiCDCuQ6p7HQ
-X-Google-Smtp-Source: AGHT+IFronwxMMHkcckLT9rFBLjnZhvZHnpYrjZvP+dDG/QrNH6L26ofm9YjWXE2n0J7F43BCIlvZW8mc35ZPNBPzAA=
-X-Received: by 2002:a05:6102:242f:b0:473:886:5616 with SMTP id
- l15-20020a056102242f00b0047308865616mr1518189vsi.5.1709842965693; Thu, 07 Mar
- 2024 12:22:45 -0800 (PST)
+ (TLS1.2:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__AES_256_GCM:256) (Exim)
+ id 1riUr1-00C2Dt-Qx; Fri, 08 Mar 2024 07:41:23 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=ZInUQkdiVrNU4yUmmOhp/ZdOwJt7N86G36ZT4CaS3/F2dc57uyga7EdragT8ElO9tJLDq0SnK5XkC0PIx0L5ria7Qn5w7O+97tpMgJDVc8w06ktFdrEH2ljp80ZvW1ZYpCeiknZ/W8TEP2ghrNDJ5VXI9rngIEE2udVxBrKL5THu4I3g7XwI9h8VRwm8fut7Ys69iBDJ9TXv2JQ+akW+1LPHn4i/exb+qNzWSsHkWrZeIxDX0BeGH2MUmJosnlWnlcrCO5cAv+rpyn8WS5orlr6jpy7yyUJyjYXhaaATbiPdrpIj+n3SP0J/1R4xAlqVh+IYE/yU5l9xy1cvgqSolw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=qagCkvSMoBHdZ854oi4uSX8acXl/ldRvPhfbySzDuC8=;
+ b=F6aoJD+B+6dWyKf9ER/T3Nh+L09xq/bmOEn4lHYe52S/D70a9JQkT4BrftFZ+XmCVvQSHnMZ4IPgZB6EkMVZQrQrcV2dIO1++/z6RyQEP8jPIqWuKeQzqM1WiB/CkR34dl1oP9wF+lHY5YtdDSxi8AnSzo6W5FOaDFsWko8R6ewg9kmiuAMHFsTPWD6apwPaKG8fa5mKPuEq1tR2JHaq1tLoH7umnHJn6WTiL/cA1HcSFox9nY/E3UWimJvecr1ViMuoUMVzmAYEKFcyVt6d52OjwKK6j79IuBwRKaAAinmGlbjx5dSt4bswMAvAjoEDlZJ05LHylF+cg5DERQHumg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
+ dkim=none; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=outlook.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=qagCkvSMoBHdZ854oi4uSX8acXl/ldRvPhfbySzDuC8=;
+ b=YQHWBq9rUSNYnZyhJCFBQctRU5vfbqyUUUviMjTJRaWorRL0WUiXUaf9KCdu5sPd4zQ1eK48HXK8xd0ZoUQxrhfXZr9kTb69Bfwty1Is+Ov8qvScWEgQj0FKKDy+UiaaYHzGwb0yxK0y07W6NuzYlE3znBo8SI9hZZg7QvgqRQ0dXLz7NBlqv7syukLxOM+EibtOCAhAPDn3ptPZmmA+6i8XI8yyYeooAf3gWoPYKixt1D9mf1ceC19XH0jwykjhb0kjvTlPzzCUK4kqt13zqBGGKI0GFRUf7txkvgv/T9RoJNF7nQZIKlfFLPrJWoW6OkZz+guSVfyI4JntUOBs4Q==
+Received: from DB9P192MB1684.EURP192.PROD.OUTLOOK.COM (2603:10a6:10:390::17)
+ by AM7P192MB0739.EURP192.PROD.OUTLOOK.COM (2603:10a6:20b:174::8) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7362.27; Fri, 8 Mar
+ 2024 07:41:03 +0000
+Received: from DB9P192MB1684.EURP192.PROD.OUTLOOK.COM
+ ([fe80::fbcc:49cb:4b31:c95d]) by DB9P192MB1684.EURP192.PROD.OUTLOOK.COM
+ ([fe80::fbcc:49cb:4b31:c95d%7]) with mapi id 15.20.7362.019; Fri, 8 Mar 2024
+ 07:41:03 +0000
+To: "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>,
+ "samba@lists.samba.org" <samba@lists.samba.org>
+Subject: Assistance Needed with Persistent Handles Integration into Version
+ 4.19.3
+Thread-Topic: Assistance Needed with Persistent Handles Integration into
+ Version 4.19.3
+Thread-Index: AQHacSqpIaidueTP/ECi+WJw/gAE9w==
+Date: Fri, 8 Mar 2024 07:41:03 +0000
+Message-ID: <DB9P192MB1684DD738FE6C6B4132AEBD6FE272@DB9P192MB1684.EURP192.PROD.OUTLOOK.COM>
+Accept-Language: zh-CN, en-US
+Content-Language: zh-CN
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+msip_labels: 
+x-ms-exchange-messagesentrepresentingtype: 1
+x-tmn: [nZdBA0VYjAGYht/7l4LN5ErP9qTHG2YqbOjK1q0/ikA=]
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: DB9P192MB1684:EE_|AM7P192MB0739:EE_
+x-ms-office365-filtering-correlation-id: 4e80c1cb-9ef8-4f12-62e7-08dc3f431b9c
+x-microsoft-antispam-message-info: a3dHXtzka1bM2D7OYe3wfXxSEw17igFNqfcMlYr+mIhu/hTnRvRDTnM2Zp0TEJfs3wULRwIYABomQMyCzdDsL0T3bwW8IRvknM3VmQpgzYePJke4yKiwOBsQBObnK8ICobzhzQiAIZ9qY7jHQX/w2lMWegcYqhM3RhSCr1EmyAU91SSAOPs2AHNl8/1KlQnb3447BlZOqgUzzfyeHClcnZ08VVWIaaQFyEQYqqGTaK18b0T+W8hpR4+poAXTO09Q509XtBd6CkzjfZkYiqvh+rSjyPZRxj+Yenhfwgta30fKMHYOMhlODf/tFpNlp4oSNHuNi+ODBtLNtjxW4Yly5M031hBIGfnBHXRDd0MywSpDUEKI1vYqABeRg91dIeTFz7CWtkrxZvJG8UwubYYiCFHWuyKY9I7sAh8lyoF/6z/nHlFx/uK0cL1B2TM7iy2TgLzrAJV6f04snZHoWRNuTfetl+RjGZ+GydPdy3mRwZcPAtc184zOCL2ncDsZzoSbe5TJEFnQG6Y4AElnEzPdrLleREO5XfxRfPKmxHimpRI+8yKMKeN/Q1uQTo2CG8oY
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?utf-8?B?SkN0NHRXTWlDRWZMNEJhSmc4L0RKRHB2VkZQSWo0OTgrajJNc2Qrc05rNE5r?=
+ =?utf-8?B?eklYWXMxRUszZEpKRGZWRTRBdGR1cnY0MXVNNHdDc01QTWFVc08weDA2MVZJ?=
+ =?utf-8?B?djUzNUJGVTNTR3o2bFU5cUNzdVpXWWFGa2lqblRRcFA2L3h1U3JLVTg3a0I4?=
+ =?utf-8?B?dms2MllsK0pwcGpqWDlCeExrd0FDVFRUd3ZIajJ0NkErU083eUZGWmJIWllM?=
+ =?utf-8?B?Mm5pWFQvZmNtRDRJUnEwbnYrL1JFYXNDQTYrZnBRcWd5NkIvalZOZGxieWFw?=
+ =?utf-8?B?SmROOXRqTXU3eGNlMnpURE9sdGNWekpHSEE5ekFnc25BWUNSdGs3Q0VnVjFV?=
+ =?utf-8?B?cko0cTAyK2FBRVE0NDFHNkpYZTZDZkVTN0dYRDIydy9JV2dZV2d5YW83aUtR?=
+ =?utf-8?B?M2VFMUFXR1ZYZEpjVGdZTTBBcEhjcGpnYkdCMFlJRTNoK21Uc0NwWVM4bnBJ?=
+ =?utf-8?B?Nk5SWnFtVGdERUQ4czFZckdUNHhUV3NwaWVJLzBkbWV3TnF5ZVF2aDNScnd2?=
+ =?utf-8?B?OUMrOWtPWjRKR2JZT3cxZmljenV1M01Da0hIeHliVlM5Q25ocnN4dU02N3JM?=
+ =?utf-8?B?V3NDVm5sb2FpeXdpWElOeFZ5YkcySU9Nbi9NdXFvN056eExoZ0gvc0FvTXdM?=
+ =?utf-8?B?RFIxTE9UQXV5Nlk0UWNvVW8yOFBQNTlmZmliUUVjU1pGU2hTbzMrK2pjUlJ2?=
+ =?utf-8?B?a1RRZWhCV2pvRm9COE9aOFllek1sSnhsczF2WFNGbzZFaUZMaWNYS08wcWxk?=
+ =?utf-8?B?UXBTYWZOdFVMRS9pS3pIMzk4M2d3NWdVY1djdjY2dlBEekxNTlZnazVVdTkr?=
+ =?utf-8?B?dTR0STZLbnN3QkRoZVBZcWVlNHZjU3AwbFMrR0VXZ1hZbXk1Z2V2L2FicG5B?=
+ =?utf-8?B?Zk9oK2lKWjc0akFnQmxyZDd5ZCt5cUJ5ZEF4UmxzV2tYc0lSWDQ2WFJXSG9m?=
+ =?utf-8?B?THFFT0wvMEdWOTcxYWpRam42MmE2NHhYendtWDdyTndOR3JGNm5WM0M4czBn?=
+ =?utf-8?B?MzZyaXM3SzhQNU9PWWhkYWxFeWZRc05CMmRpb2JPeE1KMkVLN05wdWZ6VG9a?=
+ =?utf-8?B?QUN2M3V5ejNDTDFha0ppT252Ykx1UENmM2oxaWo5c0tPVXVwaC9hVEJ4V1lO?=
+ =?utf-8?B?MUpTN3c1MXp0TXZDTCtsbU9BUWUrYTJEWVR4cFpQaUVtWTUzSVVlSjNYTGND?=
+ =?utf-8?B?U2llbzBsMFNicSs2cXphcFBwaWpuWGwwcEt4VkUydGNqVzVxZjVvbWdybTdp?=
+ =?utf-8?B?REQ3YUNsbWtOVkZsYUpmMDRiSGN5R0NsUC95UFp0a05laDR4VkxIaXR2OU02?=
+ =?utf-8?B?QWZRYkhoSS84QjZaQnM4TGhaZVB0NitWQkdld1ZpcTJBUTNjSEp6Skw1THl2?=
+ =?utf-8?B?SkxKY1V2WHd4ZHprd2JZSGMvSnJtdStZTmh6cFpDWmxERGY3RE1tZEM0R3gw?=
+ =?utf-8?B?dGdqNDNDVHo5QThtTmcxc1EvbU1aRXRBdjczSXZqSFFvcEpZRlY2ak4xMzVS?=
+ =?utf-8?B?Q1A2RXljbTY4M05qUWN5THE5dXBwY05ML2FvLzVWeEl0YmEzbjAwTys5WGRQ?=
+ =?utf-8?B?UUorcnYxbVFwdkZZRFhqWVBzQVVJTDBBT2lYT2Q2SnQweHBIK0pDUGFwblRm?=
+ =?utf-8?Q?3I+BoYvBtQ3hsoflxsbNmo1GgQxbkEZLXa/hHEKeqsso=3D?=
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-References: <CAH2r5mutAn2G3eC7yRByF5YeCMokzo=Br0AdVRrre0AqRRmTEQ@mail.gmail.com>
- <CAOQ4uxg8YbaYVU1ns5BMtbW8b0Wd8_k=eFWj7o36SkZ5Lokhpg@mail.gmail.com>
- <CAH2r5msvgB19yQsxJtTCeZN+1np3TGkSPnQvgu_C=VyyhT=_6Q@mail.gmail.com>
- <nbqjigckee7m3b5btquetn3wfj3bzcirm75jwnbmhjyxyqximr@ouyqocmrjmfa>
- <CAH2r5mt_FY=9Dg6_K1+gYMAKuyPAPO0yRZ9hKcLkyypmUjxQZA@mail.gmail.com>
-In-Reply-To: <CAH2r5mt_FY=9Dg6_K1+gYMAKuyPAPO0yRZ9hKcLkyypmUjxQZA@mail.gmail.com>
-Date: Thu, 7 Mar 2024 12:22:32 -0800
-Message-ID: <CAB5c7xrnE=egCK3iD1=OSNTaAvRqQRJK_wWXdogfGN5TDCHq_Q@mail.gmail.com>
-Subject: Re: [LSF/MM/BPF TOPIC] statx attributes
-To: Steve French <smfrench@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-OriginatorOrg: outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: DB9P192MB1684.EURP192.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4e80c1cb-9ef8-4f12-62e7-08dc3f431b9c
+X-MS-Exchange-CrossTenant-rms-persistedconsumerorg: 00000000-0000-0000-0000-000000000000
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM7P192MB0739
+X-Warn: EHLO/HELO not verified: Remote host 40.92.90.12
+ (mail-vi1eur05olkn2012.outbound.protection.outlook.com) incorrectly presented
+ itself as EUR05-VI1-obe.outbound.protection.outlook.com
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -82,64 +120,34 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Walker via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Walker <awalker@ixsystems.com>
-Cc: CIFS <linux-cifs@vger.kernel.org>, Christian Brauner <brauner@kernel.org>,
- Amir Goldstein <amir73il@gmail.com>, Jan Kara <jack@suse.cz>,
- Kent Overstreet <kent.overstreet@linux.dev>,
- samba-technical <samba-technical@lists.samba.org>,
- David Howells <dhowells@redhat.com>,
- linux-fsdevel <linux-fsdevel@vger.kernel.org>,
- lsf-pc <lsf-pc@lists.linux-foundation.org>
+From: chin housin via samba-technical <samba-technical@lists.samba.org>
+Reply-To: chin housin <sharingfun520@outlook.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Thu, Mar 7, 2024 at 2:04=E2=80=AFPM Steve French <smfrench@gmail.com> wr=
-ote:
->
-> On Thu, Mar 7, 2024 at 11:45=E2=80=AFAM Kent Overstreet
-> <kent.overstreet@linux.dev> wrote:
-> >
-> > On Thu, Mar 07, 2024 at 10:37:13AM -0600, Steve French wrote:
-> > > > Which API is used in other OS to query the offline bit?
-> > > > Do they use SMB specific API, as Windows does?
-> > >
-> > > No it is not smb specific - a local fs can also report this.  It is
-> > > included in the attribute bits for files and directories, it also
-> > > includes a few additional bits that are used by HSM software on local
-> > > drives (e.g. FILE_ATTRIBUTE_PINNED when the file may not be taken
-> > > offline by HSM software)
-> > > ATTRIBUTE_HIDDEN
-> > > ATTRIBUTE_SYSTEM
-> > > ATTRIBUTE_DIRECTORY
-> > > ATTRIGBUTE_ARCHIVE
-> > > ATTRIBUTE_TEMPORARY
-> > > ATTRIBUTE_SPARSE_FILE
-> > > ATTRIBUTE_REPARE_POINT
-> > > ATTRIBUTE_COMPRESSED
-> > > ATTRIBUTE_NOT_CONTENT_INDEXED
-> > > ATTRIBUTE_ENCRYPTED
-> > > ATTRIBUTE_OFFLINE
-> >
-> > we've already got some of these as inode flags available with the
-> > getflags ioctl (compressed, also perhaps encrypted?) - but statx does
-> > seem a better place for them.
-> >
-> > statx can also report when they're supported, which does make sense for
-> > these.
-> >
-> > ATTRIBUTE_DIRECTORY, though?
-> >
-> > we also need to try to define the semantics for these and not just dump
-> > them in as just a bunch of identifiers if we want them to be used by
-> > other things - and we do.
->
-> They are all pretty clearly defined, but many are already in Linux,
-> and a few are not relevant (e.g. ATTRIBUTE_DIRECTORY is handled in
-> mode bits).  I suspect that Macs have equivalents of most of these
-> too.
-
-MacOS and FreeBSD return many of these in stat(2) output via st_flags.
-Current set of supported flags are documented in chflags(2) manpage on both
-platforms.
+SGnvvIwKScKgYW3CoGN1cnJlbnRsecKgaW7CoHRoZcKgcHJvY2Vzc8Kgb2bCoGludGVncmF0aW5n
+wqBwZXJzaXN0ZW50wqBoYW5kbGXCoGNvZGXCoGludG/CoHZlcnNpb27CoDQuMTkuM8KgYW5kwqBo
+YXZlwqBlbmNvdW50ZXJlZMKgYcKgY291cGxlwqBvZsKgaXNzdWVzwqBmb3LCoHdoaWNowqB3ZcKg
+c2Vla8KgeW91csKgZ3VpZGFuY2U6CgoxLsKgSW7CoHRoZcKgcmVwbGF5wqBjYWNoZcKgc2VjdGlv
+bsKgb2bCoHZlcnNpb27CoDQuMTkuMyzCoHRoZcKgZnVuY3Rpb27CoGBzbWJYc3J2X29wZW5fc2V0
+X3JlcGxheV9jYWNoZWDCoGhhc8KgZGlzY29udGludWVkwqB0aGXCoHVzZcKgb2bCoGBnbG9iYWxf
+aWRgwqBhbmTCoG9ubHnCoGFkZGVkwqBhwqBsb2NhbMKgZmxhZ8KgKERCV1JBUF9SRVBMQUNFKS7C
+oEnCoHdvbmRlcsKgaWbCoHRoZXJlwqBoYXPCoGJlZW7CoGFuecKgY29uc2lkZXJhdGlvbsKgdG/C
+oGluY2x1ZGXCoHRoZcKgcGVyc2lzdGVudMKgZmxhZ8KgKERCV1JBUF9QRVJTSVNURU5UKcKgYXPC
+oHdlbGwuCjIuwqBXaGVuwqBJwqBjaGFuZ2XCoHRoZcKgZmxhZ8KgZnJvbcKgYERCV1JBUF9GTEFH
+X05PTkVgwqB0b8KgYERCV1JBUF9GTEFHX1BFUl9SRUNfUEVSU0lTVEVOVGDCoGluwqB0aGXCoGBs
+b2NraW5nX2luaXRfaW50ZXJuYWxgwqBmdW5jdGlvbsKgb2bCoHNoYXJlX21vZGVfbG9jay5jLMKg
+ScKgYW3CoHVuYWJsZcKgdG/CoGFjY2Vzc8KgdGhlwqBzaGFyZWTCoGZvbGRlci7CoFRoZcKgZXJy
+b3LCoG1lc3NhZ2XCoMKgaXM6wqAiXDE5Mi4xNjguMjQuOFxwaMKgaXPCoGluYWNjZXNzaWJsZS7C
+oFlvdcKgbWlnaHTCoG5vdMKgaGF2ZcKgcGVybWlzc2lvbsKgdG/CoHVzZcKgdGhpc8KgbmV0d29y
+a8KgcmVzb3VyY2UuwqBDb250YWN0wqB0aGXCoGFkbWluaXN0cmF0b3LCoG9mwqB0aGlzwqBzZXJ2
+ZXLCoHRvwqBmaW5kwqBvdXTCoGlmwqB5b3XCoGhhdmXCoGFjY2Vzc8KgcGVybWlzc2lvbnMuwqBU
+aGXCoHJlcXVlc3TCoG9wZXJhdGlvbsKgY291bGTCoG5vdMKgYmXCoGNvbXBsZXRlZMKgYmVjYXVz
+ZcKgb2bCoGHCoHNldmVyZcKgbWVkaWHCoGZhaWx1cmXCoG9ywqBjb3JydXB0aW9uwqBvZsKgdGhl
+wqBkYXRhwqBzdHJ1Y3R1cmXCoG9uwqB0aGXCoGRpc2suIgoKRnVydGhlcm1vcmUswqBJwqB3b3Vs
+ZMKgbGlrZcKgdG/CoGlucXVpcmXCoHNpbmNlcmVsecKgaWbCoHBlcnNpc3RlbnTCoGhhbmRsZXPC
+oGFyZcKgc3RpbGzCoHVuZGVywqBjb25zaWRlcmF0aW9uwqBmb3LCoHZlcnNpb27CoDQuMTkuMz/C
+oEFyZcKgdGhlecKgc3RpbGzCoG9uwqB0aGXCoGRldmVsb3BtZW50wqBhZ2VuZGE/CgpZb3VywqBh
+c3Npc3RhbmNlwqBhbmTCoGd1aWRhbmNlwqBpbsKgdGhpc8KgbWF0dGVywqB3b3VsZMKgYmXCoGdy
+ZWF0bHnCoGFwcHJlY2lhdGVkLgoKcGVhY2UgJiBoYXBwaW5lc3MsCmhvdXNpbg==
 
