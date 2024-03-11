@@ -2,46 +2,52 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5677F8779A9
-	for <lists+samba-technical@lfdr.de>; Mon, 11 Mar 2024 02:52:34 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 88E3B877BC0
+	for <lists+samba-technical@lfdr.de>; Mon, 11 Mar 2024 09:37:09 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=t6Vi+SuqydEAwTCCW5qSwR/Tx4XBQ78/tAodmyjWfcA=; b=N9cU/Scpz01pBuPoo9Aq/pcN5j
-	C3/zZhqtsWsn2KFwmcRxdzJhXGRrDSCW2sgb/v+L1MhHdQdfyiHJvSoBS4O96XZRky+mmZUJF19/v
-	zyd21RyDqWEWytJpRw6MTovgxKrV032NXY8VL//FFYTw7FbKUxziasuaq0/SEelHI8/+LVvsWlo5R
-	f21bDQzgb64InZ3XaxPiA5qq9uqHjfNxVjDNe6yxAMUt/KRR0JFVQQEa7FvjiQqJezp3pqV1RMYqW
-	dC6Gyu9oRglBKPbhFcbFIjoEmtGW0sl8uj3i5szAj8hzhqrav6AbY1vfZJpOjGGJhja4ARxDr+sNA
-	qk7vI5XQ==;
-Received: from ip6-localhost ([::1]:44164 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=jdI6nv25z5nVPnftdHSu59IzF6kLzzsHE4135U3ooC0=; b=snSTS5mJD89L4iewRJqwrYjTuO
+	CsYcPdEj99Wu+Idu3fzXeWp409KR/aqgoD3eMBWzyyhOcAdS0VOYm1IwDWFyweCNZ19ZaMZCGXu0d
+	tYl0aRTOemXi3QoRtdN6s8xUIqza4GHb5qf0cUVFAF1/XTvh5AUYnF5De16JLht8e4ydT89EEoGM5
+	vMoSIr0WfepD0DOtuh9d9U8fCNvk4sxn+PjkEreayM5A1Lc2D6W9eJYM+H0evyBjBLvUC14b/W0Kg
+	bwDx+867ubBgdamp+s7aOBuOhmThCX/Nv5sifT/pfQa8Puu4TI3KFUgjsIV/fqS+D0PCetLxdPhPB
+	004lUbuw==;
+Received: from ip6-localhost ([::1]:31236 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1rjUpe-0005xi-VE; Mon, 11 Mar 2024 01:52:04 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:61210) 
+	id 1rjb8y-0006qg-3m; Mon, 11 Mar 2024 08:36:25 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:45622) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1rjUpZ-0005xb-QN
- for samba-technical@lists.samba.org; Mon, 11 Mar 2024 01:52:01 +0000
+ (Exim) id 1rjb8t-0006qZ-GD
+ for samba-technical@lists.samba.org; Mon, 11 Mar 2024 08:36:23 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Cc:To:From:Message-ID;
- bh=t6Vi+SuqydEAwTCCW5qSwR/Tx4XBQ78/tAodmyjWfcA=; b=P3FqbH/+wQFTiJRoMA6qRglxCm
- VKWud1LzQ8GX3DoKz+OXfwE+xjrSKmVfOSHLa1qoWa3NAY9qKfyG5F4cOYuZjwqioaxE39EWWlTfh
- 5idIHIKUza9RcVJm5KCDBp/0Yabo4fb58BfakQN//cTtBpotAsWYG+MuoL5wFdVE7lk/RUzdhTdrE
- 63udHQGNGnKQpAt9VYkbFuu17eCNxLDdj5RGyXpiVuzZWCmw5rjEFvbOr1YxaE8dWEPu8MHtjOkSm
- geTqk9RzpKzUDtMGpDUShZZvquqIR8RaqcsOy1QWo2yuhYomhrL93DBWl+Pp/4AGui/5CuRsQLLJt
- bkJI/tiUXM6B0fbgbR/eBy7Vc6UjpdJe41KDxRonx7E5I6hRW/u2hxNA0QE0MT+cTzxdt7ju/cSpw
- Us7J8CwD90jSao/G7kEkfo89gJVw63A/13mZTiWGFsc8PAmtey1vnOwkokKgLwIkcohrkvLZQeez/
- 8TNFC3Xqw3Iz+HxymJXuKgoo;
+ s=42; h=From:To:Date:Message-ID:CC;
+ bh=jdI6nv25z5nVPnftdHSu59IzF6kLzzsHE4135U3ooC0=; b=lCW4OhuzFTxLoCF2EFV4kWcOmy
+ EAdoagdELs6aYURvQaVgAl2p2CCNg4/RilyclMHgD/JmDvLl/PrjjzdOhKdNbj6XUbboXTB5zB4o0
+ uKCa7+tkh8GI+QuvNJZphekZ2Jn7Lo36jl96x5o8R8Ajfw0PZCbBzjByZiT7QBuxr2YdizN5JzwFZ
+ Osayf7r8L1Jm6Xw9S+IIuKHJiXtlisQb2+d0kOYLDmm7JD6pNA+YGbkTIAN2DxRpQbE5TuWMIuq8t
+ 81dzoES9WPdYwb4huoy5LVqdrDEUc6fI8tGoxSbQO44LtpBWW/PEWzYTz0C6e5AmwtIcaDGMtMo0Z
+ J1/Y2pRTt+a5IZ+WTg7WrsrCxj4O5ZdBH/1wxAcZHfTz9E2CbkM7re2/c7bJn+8r7uUdgOK3gdlSZ
+ NzSAPUMVXh93mAdTkq9jhB1fKXP67IWOY1O1scDrRZMLXuQb75PQ4xiic5vdZUGeyVSsh7MrODVSF
+ Xpq3ZDn98Dxsp6h2iVTMGs1x;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1rjUpY-000AtH-14; Mon, 11 Mar 2024 01:51:56 +0000
-Message-ID: <f738f2b35864be24916119e36b0b2812c506225e.camel@samba.org>
-Subject: practical GitLab steps for the Samba (4.17) LTS project
-To: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
-Date: Mon, 11 Mar 2024 14:51:52 +1300
-Content-Type: text/plain; charset="UTF-8"
-User-Agent: Evolution 3.36.5-0ubuntu1 
+ (Exim) id 1rjb8r-000ESk-1S; Mon, 11 Mar 2024 08:36:17 +0000
+Message-ID: <09f8323b-d230-4605-af6a-cfd88b87a83a@samba.org>
+Date: Mon, 11 Mar 2024 09:36:16 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [Samba] Assistance Needed with Persistent Handles Integration
+ into Version 4.19.3
+Content-Language: en-US, de-DE
+To: chin housin <sharingfun520@outlook.com>,
+ "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>
+References: <DB9P192MB1684DD738FE6C6B4132AEBD6FE272@DB9P192MB1684.EURP192.PROD.OUTLOOK.COM>
+In-Reply-To: <DB9P192MB1684DD738FE6C6B4132AEBD6FE272@DB9P192MB1684.EURP192.PROD.OUTLOOK.COM>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------XsF0exXLkipeRM0XU27VO3sp"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -55,73 +61,84 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
-Cc: Santiago Ruano =?ISO-8859-1?Q?Rinc=F3n?= <santiago@freexian.com>
+From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Ralph Boehme <slow@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-A few eagle eyed observers will have noticed 
-https://www.freexian.com/blog/samba-4.17-lts/
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------XsF0exXLkipeRM0XU27VO3sp
+Content-Type: multipart/mixed; boundary="------------Y5RsacCrWCOCJI0NrE8OBFvg";
+ protected-headers="v1"
+From: Ralph Boehme <slow@samba.org>
+To: chin housin <sharingfun520@outlook.com>,
+ "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>
+Message-ID: <09f8323b-d230-4605-af6a-cfd88b87a83a@samba.org>
+Subject: Re: [Samba] Assistance Needed with Persistent Handles Integration
+ into Version 4.19.3
+References: <DB9P192MB1684DD738FE6C6B4132AEBD6FE272@DB9P192MB1684.EURP192.PROD.OUTLOOK.COM>
+In-Reply-To: <DB9P192MB1684DD738FE6C6B4132AEBD6FE272@DB9P192MB1684.EURP192.PROD.OUTLOOK.COM>
 
-Freexian is very keen to build a community able to support specific
-Samba releases, initially Samba 4.17 in this case, for longer than the
-Samba Team is promising. 
+--------------Y5RsacCrWCOCJI0NrE8OBFvg
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
 
-As mentioned in the blog, they are working with my employer Catalyst to
-get things going, with regard to the actual engineering. 
+T24gMy84LzI0IDA4OjQxLCBjaGluIGhvdXNpbiB2aWEgc2FtYmEgd3JvdGU6DQo+IEhp77yM
+IEkgYW0gY3VycmVudGx5IGluIHRoZSBwcm9jZXNzIG9mIGludGVncmF0aW5nIHBlcnNpc3Rl
+bnQgaGFuZGxlDQo+IGNvZGUgaW50byB2ZXJzaW9uIDQuMTkuMyBhbmQgaGF2ZSBlbmNvdW50
+ZXJlZCBhIGNvdXBsZSBvZiBpc3N1ZXMgZm9yDQo+IHdoaWNoIHdlIHNlZWsgeW91ciBndWlk
+YW5jZToNCg0Kd2hpY2ggY29kZT8gTXkgb2xkZXIgV0lQIGJyYW5jaGVzPyBQbGVhc2Ugbm90
+ZSB0aGF0IHRob3NlIGFyZSAqZmFyKiBmcm9tIA0KcHJvZHVjdGlvbiByZWFkeSBhbmQgc2hv
+dWxkIG5vdCBiZSB1c2VkDQoNCj4gMS4gSW4gdGhlIHJlcGxheSBjYWNoZSBzZWN0aW9uIG9m
+IHZlcnNpb24gNC4xOS4zLCB0aGUgZnVuY3Rpb24NCj4gYHNtYlhzcnZfb3Blbl9zZXRfcmVw
+bGF5X2NhY2hlYCBoYXMgZGlzY29udGludWVkIHRoZSB1c2Ugb2YNCj4gYGdsb2JhbF9pZGAg
+YW5kIG9ubHkgYWRkZWQgYSBsb2NhbCBmbGFnIChEQldSQVBfUkVQTEFDRSkuIEkgd29uZGVy
+IGlmDQo+IHRoZXJlIGhhcyBiZWVuIGFueSBjb25zaWRlcmF0aW9uIHRvIGluY2x1ZGUgdGhl
+IHBlcnNpc3RlbnQgZmxhZw0KPiAoREJXUkFQX1BFUlNJU1RFTlQpIGFzIHdlbGwuIDIuIFdo
+ZW4gSSBjaGFuZ2UgdGhlIGZsYWcgZnJvbQ0KPiBgREJXUkFQX0ZMQUdfTk9ORWAgdG8gYERC
+V1JBUF9GTEFHX1BFUl9SRUNfUEVSU0lTVEVOVGAgaW4gdGhlDQo+IGBsb2NraW5nX2luaXRf
+aW50ZXJuYWxgIGZ1bmN0aW9uIG9mIHNoYXJlX21vZGVfbG9jay5jLCBJIGFtIHVuYWJsZSB0
+bw0KPiBhY2Nlc3MgdGhlIHNoYXJlZCBmb2xkZXIuIFRoZSBlcnJvciBtZXNzYWdlICBpczog
+IlwxOTIuMTY4LjI0LjhccGggaXMNCj4gaW5hY2Nlc3NpYmxlLiBZb3UgbWlnaHQgbm90IGhh
+dmUgcGVybWlzc2lvbiB0byB1c2UgdGhpcyBuZXR3b3JrDQo+IHJlc291cmNlLiBDb250YWN0
+IHRoZSBhZG1pbmlzdHJhdG9yIG9mIHRoaXMgc2VydmVyIHRvIGZpbmQgb3V0IGlmIHlvdQ0K
+PiBoYXZlIGFjY2VzcyBwZXJtaXNzaW9ucy4gVGhlIHJlcXVlc3Qgb3BlcmF0aW9uIGNvdWxk
+IG5vdCBiZSBjb21wbGV0ZWQNCj4gYmVjYXVzZSBvZiBhIHNldmVyZSBtZWRpYSBmYWlsdXJl
+IG9yIGNvcnJ1cHRpb24gb2YgdGhlIGRhdGEgc3RydWN0dXJlDQo+IG9uIHRoZSBkaXNrLiIN
+Cj4gDQo+IEZ1cnRoZXJtb3JlLCBJIHdvdWxkIGxpa2UgdG8gaW5xdWlyZSBzaW5jZXJlbHkg
+aWYgcGVyc2lzdGVudCBoYW5kbGVzDQo+IGFyZSBzdGlsbCB1bmRlciBjb25zaWRlcmF0aW9u
+IGZvciB2ZXJzaW9uIDQuMTkuMz8gQXJlIHRoZXkgc3RpbGwgb24NCj4gdGhlIGRldmVsb3Bt
+ZW50IGFnZW5kYT8NCg0KU2FkbHksIGR1ZSB0byBtaXNzaW5nIGZ1bmRpbmcgdGhlcmUgaGFz
+bid0IGJlZW4gYWN0aXZlIGRldmVsb3BtZW50IG9uIA0KdGhpcyBmZWF0dXJlIGZvciBzZXZl
+cmFsIHllYXJzLiBUaGVyZSdzIGxpa2VseSBlbm91Z2ggdG8gZG8gdG8ga2VlcCBhIA0KU2Ft
+YmEgZGV2ZWxvcGVyIGJ1c3kgZm9yIHNldmVyYWwgbW9udGhzLg0KDQpDaGVlcnMhDQotc2xv
+dw0KDQotLSANClNlck5ldCBTYW1iYSBUZWFtIExlYWQgICAgICAgaHR0cHM6Ly9zYW1iYS5w
+bHVzLw0KU2FtYmEgVGVhbSBNZW1iZXIgICAgICAgICAgICAgaHR0cHM6Ly9zYW1iYS5vcmcv
+DQpTQU1CQSsgcGFja2FnZXMgICAgICAgICAgICAgIGh0dHBzOi8vc2FtYmEucGx1cy8NClNl
+ck5ldCBTYW1iYSBTdXBwb3J0LCBDb25zdWx0aW5nIGFuZCBEZXZlbG9wbWVudA0K
 
-I'm keen to meet a few goals with this effort:
+--------------Y5RsacCrWCOCJI0NrE8OBFvg--
 
- - make this as much of a community effort as possible
- - be as to be as transparent as possible
- - have a clear agreed, tested tree as to what patches are included in
-a Samba 4.17 LTS (so patches are not forgotten).
- - Not be confused for upstream Samba releases, but still have a
-trustworthy canonical location. 
+--------------XsF0exXLkipeRM0XU27VO3sp
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature.asc"
 
-What I'm thinking to do is to have a repo under our Samba Team
-namespace at (say) https://gitlab.com/samba-team/lts/samba that would
-hold the canonical LTS tree.  We would do all the development work for
-the LTS in GitLab as normal, except for patches under embargo (if any
-work is done pre-embargo).  This in particular will ensure we can use
-the GitLab CI system and the Samba Team's runners and GitLab runner
-quota to ensure everything keeps working.   
+-----BEGIN PGP SIGNATURE-----
 
-Unlike upstream Samba however, we will do the merge (with rebase) on
-GitLab, so as not to put requirements on the autobuild host (it is
-fairly easy to keep old CI runners going).  In the short term we would
-keep to the Samba Team's rules on patch review, but the LTS team may
-adopt different practices over time as the effort develops. 
+wsF5BAABCAAjFiEE+uLGCIokJSBRxVnkqh6bcSY5nkYFAmXuwoAFAwAAAAAACgkQqh6bcSY5nkbg
+SxAAnUFqs9kBp/H3MRX7Km4Rr8rUItUsA66J/2dPoSIaDOc7X3sy34+XJdJy0T3zwg76XSlPlwm6
+3IwLdMdNaWre17pJ5zOdhz5ptBxO082ySCoEfZBLIUj0foxWsJAdr6kL2H83KVlARERDaxj2vZ7U
+fqFhGVj1zbBsEL9/nhGiui/f81eFVTcJlX4/fAJxXxMG9sSGYQQCOtGAgm9bzZlQbsCupgkUUDxe
+8r8VUOmUu5lTlQqcDnrTQG32R2why2THnSjWd1fb5BOtOxFfOfjWvje/Q3dgoCZd5U3BvNvd3gLp
+lfIAfqyQeZgakoCN4W2ao3lETTjGPFMF/NwaDPSp1QO6IqurSZq1oCdoblQdlEUKYD5VkHoM4HwH
+yGy92oJ4GomXtqrcrmG3fc67tZX8kvp4oFS6H4Sh5tPDQiroSMnEFlOwJhEx4LKw9IAD6jZ59Rs2
+Efo7ug8PxejTfR4YkM4O7fI/hOHhmt5KbM7REKF84cVKbEVb9v4GE1Hu47JiaJLd59nbbGGCysWk
+faGt4hF/vrySj+LHjDpXKAgM+nnSE3UAPwmQ2E1gwLFbz1+q7Lu3WYZc9//GVXq55GYGYfUTbVWH
+LUjt9fLhsoUWQ3kGKeb7wOGUSaDi+FkB+tT0FOuS1M2U8CuPpsXCNEx2XwKWCMCyIOd0zp+Z4mCg
+P2A=
+=M0Un
+-----END PGP SIGNATURE-----
 
-If possible, it would also be nice if we could have this mirrored to
-git.samba.org as a backup. 
-
-To be clear, this would be an LTS only for security patches,
-we don't plan to re-open development of other fixes. 
-
-Finally, we do need to track what patches are being worked on etc.  I'm
-hoping this will be OK to do in Samba's bugzilla (as this is available
-pre-disclosure), perhaps as child bugs. 
-
-Does anybody have any thoughts on this?
-
-Andrew Bartlett
-
-
--- 
-Andrew Bartlett (he/him)       https://samba.org/~abartlet/
-Samba Team Member (since 2001) https://samba.org
-Samba Team Lead                https://catalyst.net.nz/services/samba
-Catalyst.Net Ltd
-
-Proudly developing Samba for Catalyst.Net Ltd - a Catalyst IT group
-company
-
-Samba Development and Support: https://catalyst.net.nz/services/samba
-
-Catalyst IT - Expert Open Source Solutions
-
-
-
+--------------XsF0exXLkipeRM0XU27VO3sp--
 
