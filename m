@@ -2,47 +2,69 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 204F48782D0
-	for <lists+samba-technical@lfdr.de>; Mon, 11 Mar 2024 16:12:43 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 22C0E87894C
+	for <lists+samba-technical@lfdr.de>; Mon, 11 Mar 2024 21:09:18 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
-	bh=h1407hJf+Me3KQA/Dw2yUti06t+Kz2GNI2mudzK7xQ0=; b=Qn1oDJFFlOiKjIGpcHE6qW5+th
-	5d0d3P0zk3hohRl1izzDAf0+NrRTuJ3qHh//i8kVdc/3jZY3JrcDzGfKNv7PMCvwYVaZn5yD8C1vq
-	mOdxeJaNn+kIRqQKjjohGvHp+BQ+V/nuSqy7BYh0ZdhlzwQ6458R4eDvFDno/tRC3u+geddTZadGI
-	btj4RvzaYDHr5YqMcue2oeFJEPSPXfIsJI9zzwj8afg4mDfesQ9ii8frhV2DhS3t/XzxykdSoXLU5
-	FExSy4oo+xyjncsAAXoWUv5K+cJKQ3ETQIiMlkUEF3DM5KeDi8F/pZOdJQxRVayNGd6HaK42YHvWp
-	J5irt5+w==;
-Received: from ip6-localhost ([::1]:62248 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=DolZCnO1rkeIhTnsUyR5xnbRO8Vn4PDRwuM4uJdwaeY=; b=st37SVv1NDua5fZBSBbQYPcEGi
+	tJ5QydhbFFz57lMqQcm6QZYuz+e4jRSw8yp95QawG8SXDUupyaUW1GK3Z9TybwK6BVefUUSVDrYxp
+	g3O8p6/4vg/+kzVN+/f53+P22fPWuvXPekNBpbhN3r2oTF29E3ObV4QKaKQc5MEF4Lcx176gNuSMe
+	WJMKrDtYhdsQCM8/j32JsWqGDV8Mc/cpAYcijqE0EVSVdo/49lMSsvM+KiAoCxfiL5cCslY4SaYSa
+	OSEu+SnrhC6ETci7RdOy9X4831xMn3zUcYLr6jHE4O7v/X8FcBva4cZeT2m8LbT1JxmON6KEawFg2
+	l4d7eG6A==;
+Received: from ip6-localhost ([::1]:30266 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1rjhJx-00099O-V2; Mon, 11 Mar 2024 15:12:11 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:59184) 
+	id 1rjlwi-000BnP-VO; Mon, 11 Mar 2024 20:08:30 +0000
+Received: from mail-lf1-x12f.google.com ([2a00:1450:4864:20::12f]:57765) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1rjhJo-00098i-DW; Mon, 11 Mar 2024 15:12:04 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=From:To:Date:Message-ID:CC;
- bh=h1407hJf+Me3KQA/Dw2yUti06t+Kz2GNI2mudzK7xQ0=; b=3MTJS3XzzPjPaY9JxRiQhH43fI
- GNKZcCL7QPAUzpA5GcMD747xL1+aTP1sHOKkI8k0+nfGCHPFaaw12UcB8uMfT8C0y2XN4xO46ln2r
- sxTw6Z6duK7Tmwi5ohHVcCEUKRAF+zxysNQ/4c60hXDlVOD1LfoDuUdnzbDS6zjBzUqzkRWHlm/9m
- mDMu1sYfqoSyVF59Ly8CjBgvYLsE2+P7em1UHt0aqWoHz8kVysWmZ9lGjlwstsr4/FzLa6tnlz2xT
- oiqTvaU70K7HmMrVO5nAghzTAMEsiXls65wd7PmvMBkdEVscduok+8jLJAl/krCmbt9y+l9CmsIye
- LXhO9MtEOtJBOptnNd2UglelKzgeneNOblghrnera4PrG5UezlFcLXjfwOai6JG56ofp4TYxJlEaj
- BRfpRKXYMMwtcyn6N9ko3xmz0O70+rT+xNOG0PwmVoJYvAqUpvL0WEUV85CRnWyq4Wie/B6towxLE
- y4Bm89PfugeWxJ4mOggwaKHV;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1rjhJo-000Hhk-33; Mon, 11 Mar 2024 15:12:01 +0000
-Message-ID: <fdf67aa0-0faa-46f4-8780-668c1a948518@samba.org>
-Date: Mon, 11 Mar 2024 16:12:00 +0100
+ (Exim) id 1rjlwe-000BnI-4P
+ for samba-technical@lists.samba.org; Mon, 11 Mar 2024 20:08:27 +0000
+Received: by mail-lf1-x12f.google.com with SMTP id
+ 2adb3069b0e04-513b16bb739so890518e87.3
+ for <samba-technical@lists.samba.org>; Mon, 11 Mar 2024 13:08:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1710187703; x=1710792503; darn=lists.samba.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=DolZCnO1rkeIhTnsUyR5xnbRO8Vn4PDRwuM4uJdwaeY=;
+ b=XuIroEghmDWGGRhosulG6Ff+nI814iCTvZ6mYIHxo9BRW5B0FvGp3eyn/HuicFQfn3
+ ilSqXMMRwAXmSwaXG0ZYGd5uCocNn1dfPzY7M+MjODx6aCw6pIy56L5dRwM2KFzCn8/G
+ AGWXFUIxFOerUUTufcPwPSLMaoot6OqsIdaGBAe54YX0t1RGT7lOWi8ZW5BrmD+YRTfQ
+ tZ6ym7goU0DfN3ebUg1lcWm3InxyDbJTPbSA13PM1JpSP/hF+uZ5rop8Huwp5Hl3hFzG
+ vymxsh1yJOr1S9EO1g5Jg2YrM/LiMbADyggRweoA0R7yjnVef4W+mQrYW0yppNJnmZdk
+ b/CQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1710187703; x=1710792503;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=DolZCnO1rkeIhTnsUyR5xnbRO8Vn4PDRwuM4uJdwaeY=;
+ b=j/a8NtaHgvojdoQDk/moHuzy7FZMCKFusmonSjClYZhdzJc3MMs9R8aftjmfjG571u
+ eQG/JE9Cg2MDTqddBDrNEVei4RCtQyL4C9yHRKGjMwT7+OdhRiNpat36bX5eEudcHYov
+ 9sfbGvKLE/ZV1OMQyRgHRwgSe3wopsAV1etZ0vU1xp9l1PCDrLqDhVknUodY64rRXowj
+ rJ0hBcq8QwBEtwSkaxAitAXbJfqqKJ1SkzcqJHs2wK316Z9ZaTCdYQBE96Q4twheds+0
+ K5B6pBfOhRJJg0Xet4gR+UHSnxTDywjuIsLwD2nrxBQSOSRrbiMb9CMxoxtl0an0S67s
+ 597g==
+X-Gm-Message-State: AOJu0Yzo756aF15/s2QgNOs+wLTwUP1MmXTyAVTLupK+GFL0NJkiP0m7
+ bfN3mDWgmvSDnKi4FDOUX5bY2Kanc/0UfD1wcw6Fz8ikePsDRl8v/7BXogzDOrnpdnwt9RCqYVg
+ MTM9QgW30g1B2BPbezNfK0QfP4OCy+86Ti2M=
+X-Google-Smtp-Source: AGHT+IHc/tYouUj8AwfqpT2DSFoOwpWdiFNogFxnrIc+kM5Oqbzdhb6n4ckD2xk+oFv+k6bAd0IBAG4zLjXaytYPGTc=
+X-Received: by 2002:ac2:5e64:0:b0:513:3dd3:f132 with SMTP id
+ a4-20020ac25e64000000b005133dd3f132mr4724283lfr.58.1710187703212; Mon, 11 Mar
+ 2024 13:08:23 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: de-DE
-To: samba-announce@lists.samba.org, samba@lists.samba.org,
- samba-technical@lists.samba.org
-Subject: [Announce] Samba 4.20.0rc4 Available for Download
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+References: <cover.1710173427.git.lucien.xin@gmail.com>
+ <CADvbK_d1yEDebPFM-fSeu2i30upruA+fPMN0sZ6Ngg7EGNd1BQ@mail.gmail.com>
+In-Reply-To: <CADvbK_d1yEDebPFM-fSeu2i30upruA+fPMN0sZ6Ngg7EGNd1BQ@mail.gmail.com>
+Date: Mon, 11 Mar 2024 15:08:11 -0500
+Message-ID: <CAH2r5muqwk0Va6RG31M1ev6CWAdNQkRSoMdPTvPxoz5sZ5C_QQ@mail.gmail.com>
+Subject: Fwd: [RFC PATCH net-next 0/5] net: In-kernel QUIC implementation with
+ Userspace handshake
+To: samba-technical <samba-technical@lists.samba.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -56,314 +78,320 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jule Anger via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jule Anger <janger@samba.org>
+From: Steve French via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Steve French <smfrench@gmail.com>
+Cc: Xin Long <lucien.xin@gmail.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Release Announcements
-=====================
-
-This is the fourth release candidate of Samba 4.20.  This is *not*
-intended for production environments and is designed for testing
-purposes only.  Please report any defects via the Samba bug reporting
-system at https://bugzilla.samba.org/.
-
-Samba 4.20 will be the next version of the Samba suite.
-
-
-UPGRADING
-=========
-
-
-NEW FEATURES/CHANGES
-====================
-
-New Minimum MIT Krb5 version for Samba AD Domain Controller
------------------------------------------------------------
-
-Samba now requires MIT 1.21 when built against a system MIT Krb5 and
-acting as an Active Directory DC.  This addresses the issues that were
-fixed in CVE-2022-37967 (KrbtgtFullPacSignature) and ensures that
-Samba builds against the MIT version that allows us to avoid that
-attack.
-
-Removed dependency on Perl JSON module
---------------------------------------
-
-Distributions are advised that the Perl JSON package is no longer
-required by Samba builds that use the imported Heimdal.  The build
-instead uses Perl's JSON::PP built into recent perl5 versions.
-
-Current lists of packages required by Samba for major distributions
-are found in the bootstrap/generated-dists/ directory of a Samba
-source tree.  While there will be some differences - due to features
-chosen by packagers - comparing these lists with the build dependencies
-in a package may locate other dependencies we no longer require.
-
-samba-tool user getpassword / syncpasswords ;rounds= change
------------------------------------------------------------
-
-The password access tool "samba-tool user getpassword" and the
-password sync tool "samba-tool user syncpasswords" allow attributes to
-be chosen for output, and accept parameters like
-pwdLastSet;format=GeneralizedTime
-
-These attributes then appear, in the same format, as the attributes in
-the LDIF output.  This was not the case for the ;rounds= parameter of
-virtualCryptSHA256 and virtualCryptSHA512, for example as
---attributes="virtualCryptSHA256;rounds=50000"
-
-This release makes the behaviour consistent between these two
-features.  Installations using GPG-encrypted passwords (or plaintext
-storage) and the rounds= option, will find the output has changed
-
-from:
-virtualCryptSHA256: {CRYPT}$5$rounds=2561$hXem.M9onhM9Vuix$dFdSBwF
-
-to:
-virtualCryptSHA256;rounds=2561: 
-{CRYPT}$5$rounds=2561$hXem.M9onhM9Vuix$dFdSBwF
-
-Group Managed service account client-side features
---------------------------------------------------
-
-samba-tool has been extended to provide client-side support for Group
-Managed Service accounts.  These accounts have passwords that change
-automatically, giving the advantages of service isolation without risk
-of poor, unchanging passwords.
-
-Where possible, Samba's existing samba-tool password handling
-commands, which in the past have only operated against the local
-sam.ldb have been extended to permit operation against a remote server
-with authenticated access to "-H ldap://$DCNAME"
-
-Supported operations include:
-  - reading the current and previous gMSA password via
-    "samba-tool user getpassword"
-  - writing a Kerberos Ticket Granting Ticket (TGT) to a local
-    credentials cache with a new command
-    "samba-tool user get-kerberos-ticket"
-
-New Windows Search Protocol Client
-----------------------------------
-
-Samba now by default builds new experimental Windows Search Protocol (WSP)
-command line client "wspsearch"
-
-The "wspsearch" cmd-line utility allows a WSP search request to be sent
-to a server (such as a windows server) that has the (WSP)
-Windows Search Protocol service configured and enabled.
-
-For more details see the wspsearch man page.
-
-Allow 'smbcacls' to save/restore DACLs to file
---------------------------------------------
-
-'smbcacls' has been extended to allow DACLs to be saved and restored
-to/from a file. This feature mimics the functionality that windows cmd
-line tool 'icacls.exe' provides. Additionally files created either
-by 'smbcalcs' or 'icacls.exe' are interchangeable and can be used by
-either tool as the same file format is used.
-
-New options added are:
-  - '--save savefile'    Saves DACLs in sddl format to file
-  - '--recurse'          Performs the '--save' operation above on directory
-                         and all files/directories below.
-  - '--restore savefile' Restores the stored DACLS to files in directory
-
-Samba-tool extensions for AD Claims, Authentication Policies and Silos
-----------------------------------------------------------------------
-
-samba-tool now allows users to be associated with claims.  In the
-Samba AD DC, claims derive from Active Directory attributes mapped
-into specific names.  These claims can be used in rules, which are
-conditional ACEs in a security descriptor, that decide if a user is
-restricted by an authentication policy.
-
-samba-tool also allows the creation and management of authentication
-policies, which are rules about where a user may authenticate from,
-if NTLM is permitted, and what services a user may authenticate to.
-
-Finally, support is added for the creation and management of
-authentication silos, which are helpful in defining network boundaries
-by grouping users and the services they connect to.
-
-Please note: The command line syntax for these tools is not final, and
-may change before the next release, as we gain user feedback.  The
-syntax will be locked in once Samba offers 2016 AD Functional Level as
-a default.
-
-AD DC support for Authentication Silos and Authentication Policies
-------------------------------------------------------------------
-
-The Samba AD DC now also honours any existing claims, authentication
-policy and authentication silo configuration previously created (eg
-from an import of a Microsoft AD), as well as new configurations
-created with samba-tool.  The use of Microsoft's Powershell based
-client tools is not expected to work.
-
-To use this feature, the functional level must be set to 2012_R2 or
-later with:
-
-  ad dc functional level = 2016
-
-in the smb.conf.
-
-The smb.conf file on each DC must have 'ad dc functional level = 2016'
-set to have the partially complete feature available.  This will also,
-at first startup, update the server's own AD entry with the configured
-functional level.
-
-For new domains, add these parameters to 'samba-tool provision'
-
---option="ad dc functional level = 2016" --function-level=2016
-
-The second option, setting the overall domain functional level
-indicates that all DCs should be at this functional level.
-
-To raise the domain functional level of an existing domain, after
-updating the smb.conf and restarting Samba run
-samba-tool domain schemaupgrade --schema=2019
-samba-tool domain functionalprep --function-level=2016
-samba-tool domain level raise --domain-level=2016 --forest-level=2016
-
-This support is still new, so is not enabled by default in this
-release.  The above instructions are set at 2016, which while not
-complete, matches what our testing environment validates.
-
-Conditional ACEs and Resource Attribute ACEs
---------------------------------------------
-
-Ordinary Access Control Entries (ACEs) unconditionally allow or deny
-access to a given user or group. Conditional ACEs have an additional
-section that describes conditions under which the ACE applies. If the
-conditional expression is true, the ACE works like an ordinary ACE,
-otherwise it is ignored. The condition terms can refer to claims,
-group memberships, and attributes on the object itself. These
-attributes are described in Resource Attribute ACEs that occur in the
-object's System Access Control List (SACL). Conditional ACEs are
-described in Microsoft documentation.
-
-Conditional ACE evaluation is controlled by the "acl claims
-evaluation" smb.conf option. The default value is "AD DC only" which
-enables them in AD DC settings. The other option is "never", which
-disables them altogether. There is currently no option to enable them
-on the file server (this is likely to change in future releases).
-
-The Security Descriptor Definition Language has extensions for
-conditional ACEs and resource attribute ACEs; these are now supported
-by Samba.
-
-
-REMOVED FEATURES
-================
-
-Get locally logged on users from utmp
--------------------------------------
-
-The Workstation Service Remote Protocol [MS-WKST] calls NetWkstaGetInfo
-level 102 and NetWkstaEnumUsers level 0 and 1 return the list of locally
-logged on users. Samba was getting the list from utmp, which is not
-Y2038 safe. This feature has been completely removed and Samba will
-always return an empty list.
-
-
-smb.conf changes
-================
-
-   Parameter Name                          Description     Default
-   --------------                          -----------     -------
-   smb3 unix extensions                    Per share       -
-   acl claims evaluation                   new             AD DC only
-
-
-CHANGES SINCE 4.20.0rc3
-=======================
-
-o  Andreas Schneider <asn@samba.org>
-    * BUG 15588: samba-gpupdate: Correctly implement site support.
-
-
-CHANGES SINCE 4.20.0rc2
-=======================
-
-o  Rob van der Linde <rob@catalyst.net.nz>
-    * BUG 15575: Remove unsupported "Final" keyword missing from Python 3.6.
-
-o  Stefan Metzmacher <metze@samba.org>
-    * BUG 15577: Additional witness backports for 4.20.0.
-
-o  Noel Power <noel.power@suse.com>
-    * BUG 15579: Error output with wspsearch.
-
-o  Martin Schwenke <mschwenke@ddn.com>
-    * BUG 15580: Packet marshalling push support missing for
-      CTDB_CONTROL_TCP_CLIENT_DISCONNECTED and
-      CTDB_CONTROL_TCP_CLIENT_PASSED.
-
-o  Jo Sutton <josutton@catalyst.net.nz>
-    * BUG 15575: Remove unsupported "Final" keyword missing from Python 3.6.
-
-
-CHANGES SINCE 4.20.0rc1
-=======================
-
-o  Douglas Bagnall <douglas.bagnall@catalyst.net.nz>
-    * BUG 15574: Performance regression for NDR parsing of security 
-descriptors.
-
-o  Anoop C S <anoopcs@samba.org>
-    * BUG 15565: Build and install man page for wspsearch client utility.
-
-o  Andreas Schneider <asn@samba.org>
-    * BUG 15558: samba-gpupdate logging doesn't work.
-
-
-KNOWN ISSUES
-============
-
-https://wiki.samba.org/index.php/Release_Planning_for_Samba_4.20#Release_blocking_bugs
-
-
-#######################################
-Reporting bugs & Development Discussion
-#######################################
-
-Please discuss this release on the samba-technical mailing list or by
-joining the #samba-technical:matrix.org matrix room, or
-#samba-technical IRC channel on irc.libera.chat
-
-If you do report problems then please try to send high quality
-feedback. If you don't provide vital information to help us track down
-the problem then you will probably be ignored.  All bug reports should
-be filed under the Samba 4.1 and newer product in the project's Bugzilla
-database (https://bugzilla.samba.org/).
-
-
-======================================================================
-== Our Code, Our Bugs, Our Responsibility.
-== The Samba Team
-======================================================================
-
-
-================
-Download Details
-================
-
-The uncompressed tarballs and patch files have been signed
-using GnuPG (ID AA99442FB680B620).  The source code can be downloaded
-from:
-
-         https://download.samba.org/pub/samba/rc/
-
-The release notes are available online at:
-
-https://download.samba.org/pub/samba/rc/samba-4.20.0rc4.WHATSNEW.txt
-
-Our Code, Our Bugs, Our Responsibility.
-(https://bugzilla.samba.org/)
-
-                         --Enjoy
-                         The Samba Team
+FYI.  Interesting and potentially important patchset since SMB3.1.1
+protocol supports QUIC
+
+Patchset Link:
+https://lore.kernel.org/netdev/cover.1710173427.git.lucien.xin@gmail.com/
+
+Thanks.
+---------- Forwarded message ---------
+From: Xin Long <lucien.xin@gmail.com>
+Date: Mon, Mar 11, 2024 at 12:19=E2=80=AFPM
+Subject: [RFC PATCH net-next 0/5] net: In-kernel QUIC implementation
+with Userspace handshake
+To: network dev <netdev@vger.kernel.org>
+Cc: <davem@davemloft.net>, <kuba@kernel.org>, Eric Dumazet
+<edumazet@google.com>, Paolo Abeni <pabeni@redhat.com>, Steve French
+<smfrench@gmail.com>, Namjae Jeon <linkinjeon@kernel.org>, Chuck Lever
+III <chuck.lever@oracle.com>, Jeff Layton <jlayton@kernel.org>,
+Sabrina Dubroca <sd@queasysnail.net>, Tyler Fanelli
+<tfanelli@redhat.com>, Pengtao He <hepengtao@xiaomi.com>
+
+
+Introduction
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+This is an implementation of the QUIC protocol as defined in RFC9000. QUIC
+is an UDP-Based Multiplexed and Secure Transport protocol, and it provides
+applications with flow-controlled streams for structured communication,
+low-latency connection establishment, and network path migration. QUIC
+includes security measures that ensure confidentiality, integrity, and
+availability in a range of deployment circumstances.
+
+This implementation of QUIC in the kernel space enables users to utilize
+the QUIC protocol through common socket APIs in user space. Additionally,
+kernel subsystems like SMB and NFS can seamlessly operate over the QUIC
+protocol after handshake using net/handshake APIs.
+
+Note that In-Kernel QUIC implementation does NOT target Crypto Offload
+support for existing Userland QUICs, and Crypto Offload intended for
+Userland QUICs can NOT be utilized for Kernel consumers, such as SMB.
+Therefore, there is no conflict between In-Kernel QUIC and Crypto
+Offload for Userland QUICs.
+
+This implementation offers fundamental support for the following RFCs:
+
+- RFC9000 - QUIC: A UDP-Based Multiplexed and Secure Transport
+- RFC9001 - Using TLS to Secure QUIC
+- RFC9002 - QUIC Loss Detection and Congestion Control
+- RFC9221 - An Unreliable Datagram Extension to QUIC
+- RFC9287 - Greasing the QUIC Bit
+- RFC9368 - Compatible Version Negotiation for QUIC
+- RFC9369 - QUIC Version 2
+- Handshake APIs for tlshd Use - SMB/NFS over QUIC
+
+Implementation
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+The central idea is to implement QUIC within the kernel, incorporating an
+userspace handshake approach.
+
+Only the processing and creation of raw TLS Handshake Messages, facilitated
+by a tls library like gnutls, take place in userspace. These messages are
+exchanged through sendmsg/recvmsg() mechanisms, with cryptographic details
+carried in the control message (cmsg).
+
+The entirety of QUIC protocol, excluding TLS Handshake Messages processing
+and creation, resides in the kernel. Instead of utilizing a User Level
+Protocol (ULP) layer, it establishes a socket of IPPROTO_QUIC type (similar
+to IPPROTO_MPTCP) operating over UDP tunnels.
+
+Kernel consumers can initiate a handshake request from kernel to userspace
+via the existing net/handshake netlink. The userspace component, tlshd from
+ktls-utils, manages the QUIC handshake request processing.
+
+- Handshake Architecture:
+
+      +------+  +------+
+      | APP1 |  | APP2 | ...
+      +------+  +------+
+      +-------------------------------------------------+
+      |                libquic (ktls-utils)             |<--------------+
+      |      {quic_handshake_server/client/param()}     |               |
+      +-------------------------------------------------+
++---------------------+
+        {send/recvmsg()}         {set/getsockopt()}            | tlshd
+(ktls-utils)  |
+        [CMSG handshake_info]    [SOCKOPT_CRYPTO_SECRET]
++---------------------+
+                                 [SOCKOPT_TRANSPORT_PARAM_EXT]
+              | ^                            | ^                        | ^
+  Userspace   | |                            | |                        | |
+  ------------|-|----------------------------|-|------------------------|-|=
+--------------
+  Kernel      | |                            | |                        | |
+              v |                            v |                        v |
+      +--------------------------------------------------+
++-------------+
+      |  socket (IPPRTOTO_QUIC)  |       protocol        |<----+   |
+handshake   |
+      +--------------------------------------------------+     |   |
+netlink APIs|
+      | inqueue | outqueue | cong | path | connection_id |     |
++-------------+
+      +--------------------------------------------------+     |      |    =
+  |
+      |   packet   |   frame   |   crypto   |   pnmap    |     |
++-----+ +-----+
+      +--------------------------------------------------+     |   |
+  | |     |
+      |         input           |       output           |     |---|
+SMB | | NFS | ...
+      +--------------------------------------------------+     |   |
+  | |     |
+      |                   UDP tunnels                    |     |
++-----+ +--+--+
+      +--------------------------------------------------+     +-----------=
+---|
+
+- Post Handshake Architecture:
+
+      +------+  +------+
+      | APP1 |  | APP2 | ...
+      +------+  +------+
+        {send/recvmsg()}         {set/getsockopt()}
+        [CMSG stream_info]       [SOCKOPT_KEY_UPDATE]
+                                 [SOCKOPT_CONNECTION_MIGRATION]
+                                 [SOCKOPT_STREAM_OPEN/RESET/STOP_SENDING]
+                                 [...]
+              | ^                            | ^
+  Userspace   | |                            | |
+  ------------|-|----------------------------|-|----------------
+  Kernel      | |                            | |
+              v |                            v |
+      +--------------------------------------------------+
+      |  socket (IPPRTOTO_QUIC)  |       protocol        |<----+
+{kernel_send/recvmsg()}
+      +--------------------------------------------------+     |
+{kernel_set/getsockopt()}
+      | inqueue | outqueue | cong | path | connection_id |     |
+      +--------------------------------------------------+     |
+      |   packet   |   frame   |   crypto   |   pnmap    |     |
++-----+ +-----+
+      +--------------------------------------------------+     |   |
+  | |     |
+      |         input           |       output           |     |---|
+SMB | | NFS | ...
+      +--------------------------------------------------+     |   |
+  | |     |
+      |                   UDP tunnels                    |     |
++-----+ +--+--+
+      +--------------------------------------------------+     +-----------=
+---|
+
+Usage
+=3D=3D=3D=3D=3D
+
+This implementation supports a mapping of QUIC into sockets APIs. Similar
+to TCP and SCTP, a typical Server and Client use the following system call
+sequence to communicate:
+
+       Client                    Server
+    ------------------------------------------------------------------
+    sockfd =3D socket(IPPROTO_QUIC)      listenfd =3D socket(IPPROTO_QUIC)
+    bind(sockfd)                       bind(listenfd)
+                                       listen(listenfd)
+    connect(sockfd)
+    quic_client_handshake(sockfd)
+                                       sockfd =3D accecpt(listenfd)
+                                       quic_server_handshake(sockfd, cert)
+
+    sendmsg(sockfd)                    recvmsg(sockfd)
+    close(sockfd)                      close(sockfd)
+                                       close(listenfd)
+
+Please note that quic_client_handshake() and quic_server_handshake() functi=
+ons
+are currently sourced from libquic in the github lxin/quic repository, and =
+might
+be integrated into ktls-utils in the future. These functions are responsibl=
+e for
+receiving and processing the raw TLS handshake messages until the completio=
+n of
+the handshake process.
+
+For utilization by kernel consumers, it is essential to have the tlshd serv=
+ice
+(from ktls-utils) installed and running in userspace. This service receives
+and manages kernel handshake requests for kernel sockets. In kernel, the AP=
+Is
+closely resemble those used in userspace:
+
+       Client                    Server
+    -----------------------------------------------------------------------=
+-
+    __sock_create(IPPROTO_QUIC, &sock)  __sock_create(IPPROTO_QUIC, &sock)
+    kernel_bind(sock)                   kernel_bind(sock)
+                                        kernel_listen(sock)
+    kernel_connect(sock)
+    tls_client_hello_x509(args:{sock})
+                                        kernel_accept(sock, &newsock)
+                                        tls_server_hello_x509(args:{newsock=
+})
+
+    kernel_sendmsg(sock)                kernel_recvmsg(newsock)
+    sock_release(sock)                  sock_release(newsock)
+                                        sock_release(sock)
+
+Please be aware that tls_client_hello_x509() and tls_server_hello_x509() ar=
+e
+APIs from net/handshake/. They are employed to dispatch the handshake reque=
+st
+to the userspace tlshd service and subsequently block until the handshake
+process is completed.
+
+For advanced usage,
+see man doc: https://github.com/lxin/quic/wiki/man
+and examples: https://github.com/lxin/quic/tree/main/tests
+
+The QUIC module is currently labeled as "EXPERIMENTAL".
+
+Xin Long (5):
+  net: define IPPROTO_QUIC and SOL_QUIC constants for QUIC protocol
+  net: include quic.h in include/uapi/linux for QUIC protocol
+  net: implement QUIC protocol code in net/quic directory
+  net: integrate QUIC build configuration into Kconfig and Makefile
+  Documentation: introduce quic.rst to provide description of QUIC
+    protocol
+
+ Documentation/networking/quic.rst |  160 +++
+ include/linux/socket.h            |    1 +
+ include/uapi/linux/in.h           |    2 +
+ include/uapi/linux/quic.h         |  189 +++
+ net/Kconfig                       |    1 +
+ net/Makefile                      |    1 +
+ net/quic/Kconfig                  |   34 +
+ net/quic/Makefile                 |   20 +
+ net/quic/cong.c                   |  229 ++++
+ net/quic/cong.h                   |   84 ++
+ net/quic/connection.c             |  172 +++
+ net/quic/connection.h             |  117 ++
+ net/quic/crypto.c                 |  979 ++++++++++++++++
+ net/quic/crypto.h                 |  140 +++
+ net/quic/frame.c                  | 1803 ++++++++++++++++++++++++++++
+ net/quic/frame.h                  |  162 +++
+ net/quic/hashtable.h              |  125 ++
+ net/quic/input.c                  |  693 +++++++++++
+ net/quic/input.h                  |  169 +++
+ net/quic/number.h                 |  174 +++
+ net/quic/output.c                 |  638 ++++++++++
+ net/quic/output.h                 |  194 +++
+ net/quic/packet.c                 | 1179 +++++++++++++++++++
+ net/quic/packet.h                 |   99 ++
+ net/quic/path.c                   |  434 +++++++
+ net/quic/path.h                   |  131 +++
+ net/quic/pnmap.c                  |  217 ++++
+ net/quic/pnmap.h                  |  134 +++
+ net/quic/protocol.c               |  711 +++++++++++
+ net/quic/protocol.h               |   56 +
+ net/quic/sample_test.c            |  339 ++++++
+ net/quic/socket.c                 | 1823 +++++++++++++++++++++++++++++
+ net/quic/socket.h                 |  293 +++++
+ net/quic/stream.c                 |  248 ++++
+ net/quic/stream.h                 |  147 +++
+ net/quic/timer.c                  |  241 ++++
+ net/quic/timer.h                  |   29 +
+ net/quic/unit_test.c              | 1024 ++++++++++++++++
+ 38 files changed, 13192 insertions(+)
+ create mode 100644 Documentation/networking/quic.rst
+ create mode 100644 include/uapi/linux/quic.h
+ create mode 100644 net/quic/Kconfig
+ create mode 100644 net/quic/Makefile
+ create mode 100644 net/quic/cong.c
+ create mode 100644 net/quic/cong.h
+ create mode 100644 net/quic/connection.c
+ create mode 100644 net/quic/connection.h
+ create mode 100644 net/quic/crypto.c
+ create mode 100644 net/quic/crypto.h
+ create mode 100644 net/quic/frame.c
+ create mode 100644 net/quic/frame.h
+ create mode 100644 net/quic/hashtable.h
+ create mode 100644 net/quic/input.c
+ create mode 100644 net/quic/input.h
+ create mode 100644 net/quic/number.h
+ create mode 100644 net/quic/output.c
+ create mode 100644 net/quic/output.h
+ create mode 100644 net/quic/packet.c
+ create mode 100644 net/quic/packet.h
+ create mode 100644 net/quic/path.c
+ create mode 100644 net/quic/path.h
+ create mode 100644 net/quic/pnmap.c
+ create mode 100644 net/quic/pnmap.h
+ create mode 100644 net/quic/protocol.c
+ create mode 100644 net/quic/protocol.h
+ create mode 100644 net/quic/sample_test.c
+ create mode 100644 net/quic/socket.c
+ create mode 100644 net/quic/socket.h
+ create mode 100644 net/quic/stream.c
+ create mode 100644 net/quic/stream.h
+ create mode 100644 net/quic/timer.c
+ create mode 100644 net/quic/timer.h
+ create mode 100644 net/quic/unit_test.c
+
+--
+2.43.0
+
+
+
+--=20
+Thanks,
+
+Steve
 
