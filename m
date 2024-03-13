@@ -2,50 +2,47 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0C30B87A45D
-	for <lists+samba-technical@lfdr.de>; Wed, 13 Mar 2024 09:57:37 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id E6E2F87AAEA
+	for <lists+samba-technical@lfdr.de>; Wed, 13 Mar 2024 17:07:52 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=xATN+fNLVBW0nteqrTdPZMmMoa9Qs0vDSOCiZfaH0lg=; b=EOoIeThgMAIPRyWTNdy4ywm4nX
-	zXoG1y5211v1Ajf74Z41rdnCyHP3Lu1mAaRq+wmtBvvaEMRGOKN50sGN9sCqlepeOvwMbt061lcRV
-	xlIcA6KifRkkgcQ2gYMdCa0cj0hnwZoYPAoJM6PTTtCnxJCFX7zcmyx5EUvpiNV2eyKek+0xnfI3g
-	3S/XFMGYx3VU2DOzOEEF80LtYUSDDc7URIiUPY27pJCpaQOp2vv9S9ZRNnMvEEsMz6LThgg2nW1Y0
-	8/9OVa3r5yDgw1iabGf5PAyPQC8+P35gKloRkYJzQrglT3OdO5cuYcMpNQw7wkRLcDetgQAu8DP3U
-	kGdUEZyw==;
-Received: from ip6-localhost ([::1]:39624 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
+	bh=s51r1yGfm8unm6GGhVRp15sPw8F4Y60vFqxj5EEZAGE=; b=QUYBaLpLPOxGlx/UxObUDZkT+F
+	WbpJiRKhEWfzjJGqJxDhuU9bMGqGky47cnI/WcC2eZBohZhLOt3w95hQiQ1SaVCnNHd4UUSPKW1o3
+	W9sogWlsEoc5N0Zu4rohC0KGGCaGSwO647G2m0vrMOE8QLfulyo1rHPKTYLBjfXzRnbPM1NDDMO6H
+	RL7wQrm/2Qx6w98BieFpAG6uR/K80F8T1CCbxULhCaFwymOmgfczlFAVx1hQ7Bf6iK7H3BR8GC0Wv
+	x5EKT6b2FcwjHQqF9Lz7rqAQMDLjxavqwwHDg9xfaAkA2/JqkJP/EEX76UeN/SVWalV7h94fkxtms
+	kUYky9dw==;
+Received: from ip6-localhost ([::1]:54220 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1rkKPs-000HKx-JI; Wed, 13 Mar 2024 08:56:53 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:35248) 
+	id 1rkR8O-000ILq-PN; Wed, 13 Mar 2024 16:07:17 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:28800) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1rkKPn-000HKq-Kd
- for samba-technical@lists.samba.org; Wed, 13 Mar 2024 08:56:50 +0000
+ (Exim) id 1rkR8E-000IL8-P6; Wed, 13 Mar 2024 16:07:10 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=From:Cc:To:Date:Message-ID;
- bh=xATN+fNLVBW0nteqrTdPZMmMoa9Qs0vDSOCiZfaH0lg=; b=PrIwJ+KCxV6PSDaxTUgT33tXBI
- VrFziHv26mOylNEZR+pli8jUbx0FO8s8je8jIcW4sMj3AL0CyOD1T9GnV2G5l9/OVZ2dbVWNIpWnj
- wAL98punqFnsGrTMDZLbhmmPHIVP4g0Gn9CZtOyOKX6OMYQF+fFD1Owv2NkiBdiJjPLCjxQHShWSM
- cZPtCc/6qIaYkfccOXpvY6O8CC38Tc63E+9WF0pIzk5q3ouRu3vOZTWpxkjfYGlENxygtS8K0fGF8
- exdgMuDYhDm1TZQaNh2GQG2SN6QXNIb0AmVZY/kfFm9kk+Ei0FAqNjTkzcBrRJLtDtZEg2u9g5MwY
- o3t/sWAQVkgH9sgN/UFoDxTjCqADtRbqE00Uo0MJPH4WleVXAtKLvobTxUhednqiSFZZX4TikZIFE
- Dk8ZmWGBytateOQaH7csYP55mHfBjLj04wiknvGf2k7Ujtgycht7YI2ke6Lf9TkXbRkqv4pKvt5qi
- pIJcbk84ByAHzbr0J6v6XY5d;
+ s=42; h=From:To:Date:Message-ID:CC;
+ bh=s51r1yGfm8unm6GGhVRp15sPw8F4Y60vFqxj5EEZAGE=; b=l7liz8EbZ0ee2IuccgncmeycYc
+ 5jEsAG+fOPf/YG4/j4UVRj2KA33qz7jeq9tKem2enOF41URjl7hOq1KQrMt5nZxMHoaiC8O4RApk5
+ Wwi0trTzwvyVDIZyQX1yjS75vzIGUlkhIOz/FZ/zDJJKqRMiETI1FiTSqp7H8xfcYiGhW+X51N+3U
+ wbBA7aAOIqSj5kIWrE0aUBHl/S7XYT6VxA3QuM4UA942OHFtYKttt3cmyB/+OgKDxSEwPnqLM2r5f
+ vIqSmQtWnxQ9qQ5CfLQk6p1r+JPk2H/lU02I5Co1DS9fVBGIXqKyTf72em0GjL8UdA5idFXGY5sqn
+ doe+bK7KgtiQ+Z4afOyAyPJlUdsIN4KuDRtP/VL5Lq2TUQE1ua8Rns2wMmQOk8W7YVLS2lxMyazem
+ kePWCPUOrWN1dzb5bgYgEm0mQFy5ETQSITiE1+AY2Z7icTuSfZamnmpJ20s9HJdIvKXtgbzjCXDHr
+ FpMeXi7H/2m+oYwM+Uz7usPc;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1rkKPl-000dql-00; Wed, 13 Mar 2024 08:56:45 +0000
-Message-ID: <74d5db09-6b5c-4054-b9d3-542f34769083@samba.org>
-Date: Wed, 13 Mar 2024 09:56:41 +0100
+ (Exim) id 1rkR85-000hxm-0y; Wed, 13 Mar 2024 16:06:57 +0000
+Message-ID: <d4deb33b-c78d-4be7-a6c8-1ae9654fdcd5@samba.org>
+Date: Wed, 13 Mar 2024 17:06:57 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH net-next 0/5] net: In-kernel QUIC implementation with
- Userspace handshake
-To: Xin Long <lucien.xin@gmail.com>, network dev <netdev@vger.kernel.org>
-References: <cover.1710173427.git.lucien.xin@gmail.com>
-Content-Language: en-US, de-DE
-In-Reply-To: <cover.1710173427.git.lucien.xin@gmail.com>
+Content-Language: de-DE
+To: samba-announce@lists.samba.org, samba@lists.samba.org,
+ samba-technical@lists.samba.org
+Subject: [Announce] Samba 4.18.11 Available for Download
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,79 +56,66 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Stefan Metzmacher <metze@samba.org>
-Cc: "linux-cifs@vger.kernel.org" <linux-cifs@vger.kernel.org>,
- Sabrina Dubroca <sd@queasysnail.net>,
- Samba Technical <samba-technical@lists.samba.org>,
- Jeff Layton <jlayton@kernel.org>, davem@davemloft.net,
- Steve French <smfrench@gmail.com>, Eric Dumazet <edumazet@google.com>,
- Chuck Lever III <chuck.lever@oracle.com>, Tyler Fanelli <tfanelli@redhat.com>,
- kuba@kernel.org, Paolo Abeni <pabeni@redhat.com>,
- Namjae Jeon <linkinjeon@kernel.org>, Pengtao He <hepengtao@xiaomi.com>
+From: Jule Anger via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jule Anger <janger@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi Xin Long,
+Release Announcements
+---------------------
 
-first many thanks for working on this topic!
+This is the latest stable release of the Samba 4.18 release series.
+There will be security releases only beyond this point.
 
-> Usage
-> =====
-> 
-> This implementation supports a mapping of QUIC into sockets APIs. Similar
-> to TCP and SCTP, a typical Server and Client use the following system call
-> sequence to communicate:
-> 
->         Client                    Server
->      ------------------------------------------------------------------
->      sockfd = socket(IPPROTO_QUIC)      listenfd = socket(IPPROTO_QUIC)
->      bind(sockfd)                       bind(listenfd)
->                                         listen(listenfd)
->      connect(sockfd)
->      quic_client_handshake(sockfd)
->                                         sockfd = accecpt(listenfd)
->                                         quic_server_handshake(sockfd, cert)
-> 
->      sendmsg(sockfd)                    recvmsg(sockfd)
->      close(sockfd)                      close(sockfd)
->                                         close(listenfd)
-> 
-> Please note that quic_client_handshake() and quic_server_handshake() functions
-> are currently sourced from libquic in the github lxin/quic repository, and might
-> be integrated into ktls-utils in the future. These functions are responsible for
-> receiving and processing the raw TLS handshake messages until the completion of
-> the handshake process.
 
-I see a problem with this design for the server, as one reason to
-have SMB over QUIC is to use udp port 443 in order to get through
-firewalls. As QUIC has the concept of ALPN it should be possible
-let a conumer only listen on a specif ALPN, so that the smb server
-and web server on "h3" could both accept connections.
+Changes since 4.18.10
+---------------------
 
-So the server application should have a way to specify the desired
-ALPN before or during the bind() call. I'm not sure if the
-ALPN is available in cleartext before any crypto is needed,
-so if the ALPN is encrypted it might be needed to also register
-a server certificate and key together with the ALPN.
-Because multiple application may not want to share the same key.
+o  Martin Schwenke <mschwenke@ddn.com>
+    * BUG 15580: Packet marshalling push support missing for
+      CTDB_CONTROL_TCP_CLIENT_DISCONNECTED and
+      CTDB_CONTROL_TCP_CLIENT_PASSED
 
-This needs to work indepented of kernel or userspace application.
 
-We may want ksmbd (kernel smb server) and apache or smbd (Samba's userspace smb server)
-together with apache. And maybe event ksmbd with one certificate for
-ksmbd.example.com and smbd with a certificate for smbd.example.com
-both on ALPN "smb", while apache uses "h3" with a certificate for
-apache.example.com and nginx with "h3" and a certificate for
-nginx.example.com.
+#######################################
+Reporting bugs & Development Discussion
+#######################################
 
-But also smbd with "smb" as well as apache with "h3" both using
-a certificate for quic.example.com.
+Please discuss this release on the samba-technical mailing list or by
+joining the #samba-technical:matrix.org matrix room, or
+#samba-technical IRC channel on irc.libera.chat.
 
-I guess TLS Server Name Indication also works for QUIC, correct?
+If you do report problems then please try to send high quality
+feedback. If you don't provide vital information to help us track down
+the problem then you will probably be ignored.  All bug reports should
+be filed under the Samba 4.1 and newer product in the project's Bugzilla
+database (https://bugzilla.samba.org/).
 
-For the client side I guess dynamic udp ports are used and
-there's no problem with multiple applications...
 
-metze
+======================================================================
+== Our Code, Our Bugs, Our Responsibility.
+== The Samba Team
+======================================================================
+
+
+
+================
+Download Details
+================
+
+The uncompressed tarballs and patch files have been signed
+using GnuPG (ID AA99442FB680B620).  The source code can be downloaded
+from:
+
+         https://download.samba.org/pub/samba/stable/
+
+The release notes are available online at:
+
+         https://www.samba.org/samba/history/samba-4.18.11.html
+
+Our Code, Our Bugs, Our Responsibility.
+(https://bugzilla.samba.org/)
+
+                         --Enjoy
+                         The Samba Team
 
