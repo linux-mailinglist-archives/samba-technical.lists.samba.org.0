@@ -2,62 +2,113 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4B7D08871C5
-	for <lists+samba-technical@lfdr.de>; Fri, 22 Mar 2024 18:12:48 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 38EF48872E3
+	for <lists+samba-technical@lfdr.de>; Fri, 22 Mar 2024 19:18:27 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=ceE09WSdBbtbMcWlz4ZDhqs/Qiz4gkyYQu133soPsgI=; b=OUOJFq0yLdpm7DqTbAch4IvekM
-	OA7fwHNNnLZ/SgXKCPwxbnsAhCR6kuVqa6dmB+OAs2d/tvFLHJNLsnKTYaWuZhrnvzRiA7mOEhXeI
-	GAI7L8ko7P6/hJUC/C+P1EMtPoCIEQcWtBdd0gtRBMt34tDipPl+HWuexeKrdp81JOdX+hCIJaGjF
-	0uAtT9SoWdiKUloLyAJgsAR2SNSXoqclVJR0iVmo3Zik/H2D8d4y2kQcQDero7nop6j2NdgNCRSTM
-	5t6BSRA54y3YZT66nTE3FRJi3+yLvarGJhyn4YHL8vmpvT2b1nDqNrva3gjP3bJVPGFe1SJjXyPLG
-	betOBCZA==;
-Received: from ip6-localhost ([::1]:55248 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=PlvvT56FcpB2k1KIXYEmUJsf6MSP8wFhW5SDcNxm5Q4=; b=ScdCSYoef3s8Ynu9ruhRgaJ1Mv
+	KmzP3M8ZW+Jti59pTVfaA4n39Uodw6ha4NiJ5fl3fqcarSsZFUajpCZ4XzXclW6keNBWK19aaCg5H
+	+S9Feg3GHXPx5KhoxHMUYQEv18gXAA6xUow/uKZ069bj7+xETen0fT1qtXZiN8tehSqcm6Q1jScXB
+	X0I7PHpQ9lzfXwdnPHdBxa4+ugYnfO84B/izcUrPAhtjkDUZutQn1XOAAEL6L/MHgS6EdRInwtq3p
+	p+ADNs3zqupznvTEYJkscPfjFt9pQklHJTR8o/To5e1Wcow60Unv9kfk+COcKCFRq+fXhra6kJMsX
+	D54TBg1A==;
+Received: from ip6-localhost ([::1]:40416 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1rniR9-0011US-Lc; Fri, 22 Mar 2024 17:12:12 +0000
-Received: from mail.tranquil.it ([2001:bc8:392f:101::20]:50334) 
+	id 1rnjSh-0012SA-Sg; Fri, 22 Mar 2024 18:17:53 +0000
+Received: from mail-bn7nam10on20700.outbound.protection.outlook.com
+ ([2a01:111:f403:2009::700]:16736
+ helo=NAM10-BN7-obe.outbound.protection.outlook.com) 
  by hr1.samba.org with esmtps
- (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1rniR3-0011UK-8p
- for samba-technical@lists.samba.org; Fri, 22 Mar 2024 17:12:09 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=tranquil.it; s=mail;
- t=1711126525;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=jHdxKDtJ1qY+Ksa0mgMSaSHEbO7x4TxlA/DXeEZz8Oc=;
- b=xU0cKFmekgrJ9eaMatmd4e7cgz/c0OE+FC4dxXvD61k+pWp6ulZjuEpHCPahSTRFB6gF0H
- Rpcq+vTa5SRHXdY4r5Se5NnRVQcIDSY0Wq8M7PO5VX5EZLut9FnhAZWzCrYithkMeVcLK+
- 4qlI54izFiVFOBE3pO8Jea5Z1fqMc5k4Ke+zBymf7/6Qdt1U7jk7izXp4auufWUl2fzP6q
- jy/rjRGveZYMrD4GdeRRxOtzBXpFEh/2Nz7Q2fhG3CFb3QTqTFnYMC1NDxHP7DuVD+Ewwg
- w/l2sHXuB3di1aPZ4/OVeyK697WT0v+NyvuYMgMaBlRzKuTkviv3HNhZVzEtUw==
-Content-Type: multipart/mixed; boundary="------------4fVY6jdmCYcFOYR4yyZFxW3h"
-Message-ID: <b7669c93-fb36-4949-bea0-c295836ebd27@tranquil.it>
-Date: Fri, 22 Mar 2024 17:55:23 +0100
+ (TLS1.2:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__AES_256_GCM:256) (Exim)
+ id 1rnjSb-0012S3-AF
+ for samba-technical@lists.samba.org; Fri, 22 Mar 2024 18:17:50 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=W7kZD+RVpt6q3CH4GQrBQT1RJXUW3gc0DMpj13NkxdA+mpvUGeA+0fwkeae4GXdQQ3d4B24uRsY/S58zoLlrOJ38CIkjPnOOboITmS4LAGkFfEqgTyR+2nmW0yWjgz+tuLycFb0EglcAnGMuF2go0ckuefCxR3fLVZsdBwot3NZViZpoDk4vWwZxJQNw61K2LInhP1pChQRjoEtMyhKMMB9ykY6T57WBqoaH5A/6O0+aXwcG1iDaOsFhElDnIr92+JoliTTwYzu5vpTpEJZaydPqRAljU9HkCLuq01N/+3BRBCPUotRFcZRNWGxLPOM4b8pVJq85YttTGWCGOr3+/g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=PlvvT56FcpB2k1KIXYEmUJsf6MSP8wFhW5SDcNxm5Q4=;
+ b=beSc8a9OvG017oazFeNnKv3XI/Op4T3y08nBV1dAFcmkHhSVypeN/TQLmWsnSVdSG2A21g7Uh8vJ/7cFFJ/iPv0yGFgwmERGk8ir4dIjpqcz7ZYQuH5OQDhzfA48mefuQRUT1TOtHJx5AwcRrJpC4wol4nefTw1HZskZiLgCeHMwJeSB8dVBSRGQHq/LKFwxP39/Q8OEj4WQ+UDMxscK7ztMIEarDnEAJPPPhPtnHIzoUKRxEzw4OVzIiuaF8tV0BpjL6UadvS3chWDDqL8jGX/kJytfegZowMVIk/IU+Ebd0TnzzwiWbKX5Gg8JXSQz36KixOdTLUdo2Y3Qs2AgLA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=talpey.com; dmarc=pass action=none header.from=talpey.com;
+ dkim=pass header.d=talpey.com; arc=none
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=talpey.com;
+Received: from CH0PR01MB7170.prod.exchangelabs.com (2603:10b6:610:f8::12) by
+ BN0PR01MB6896.prod.exchangelabs.com (2603:10b6:408:16b::7) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.7409.15; Fri, 22 Mar 2024 18:17:29 +0000
+Received: from CH0PR01MB7170.prod.exchangelabs.com
+ ([fe80::260f:c1b2:616a:af0]) by CH0PR01MB7170.prod.exchangelabs.com
+ ([fe80::260f:c1b2:616a:af0%6]) with mapi id 15.20.7409.023; Fri, 22 Mar 2024
+ 18:17:28 +0000
+Date: Fri, 22 Mar 2024 14:17:07 -0400 (EDT)
+To: Steve French <smfrench@gmail.com>
+Message-ID: <0a4cf834-c102-4497-a5dc-2bb44d6083f1@talpey.com>
+In-Reply-To: <CAH2r5mt1X3wp89FLUN_VEzA1kCQmu8x8bVAyi0cdG7-b2V=Bmw@mail.gmail.com>
+References: <ZfQC6Xk+E6HtCtsI@rbudubuntu.daqjip3ntomehmqy3wvpaa3zyf.bx.internal.cloudapp.net>
+ <CA+EPQ67TC27FTmN30QRHji61ymrD=0y-NZ_CHOi7tAq2qcFWQw@mail.gmail.com>
+ <CAH2r5mt1X3wp89FLUN_VEzA1kCQmu8x8bVAyi0cdG7-b2V=Bmw@mail.gmail.com>
+Subject: Re: [PATCH] Retrying on failed server close
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+X-Correlation-ID: <0a4cf834-c102-4497-a5dc-2bb44d6083f1@talpey.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: Fwd: Regression: ldb performance with indexes
-To: samba-technical@lists.samba.org
-References: <4856178.OV4Wx5bFTl@magrathea>
- <44c7b6c9-519a-4b01-ae62-2d03b033c3d4@tranquil.it>
-Content-Language: fr
-In-Reply-To: <44c7b6c9-519a-4b01-ae62-2d03b033c3d4@tranquil.it>
-X-Spamd-Result: default: False [-2.99 / 25.00]; REPLY(-4.00)[];
- MIME_BASE64_TEXT_BOGUS(1.00)[];
- MIME_GOOD(-0.10)[multipart/mixed,multipart/alternative,text/plain];
- MIME_BASE64_TEXT(0.10)[]; XM_UA_NO_VERSION(0.01)[];
- ARC_NA(0.00)[]; MIME_TRACE(0.00)[0:+,1:+,2:+,3:~,4:+,5:+,6:+];
- TO_DN_SOME(0.00)[]; RCVD_COUNT_ZERO(0.00)[0];
- ASN(0.00)[asn:3215, ipnet:90.115.0.0/17, country:FR];
- NEURAL_HAM(-0.00)[-0.988]; FROM_HAS_DN(0.00)[];
- RCPT_COUNT_FIVE(0.00)[5]; FROM_EQ_ENVFROM(0.00)[];
- MID_RHS_MATCH_FROM(0.00)[]; TO_MATCH_ENVRCPT_ALL(0.00)[];
- DKIM_SIGNED(0.00)[tranquil.it:s=mail]; HAS_ATTACHMENT(0.00)[]
-X-Rspamd-Server: mail.tranquil.it
-X-Spamd-Bar: --
-X-Rspamd-Queue-Id: 8D5F389182
-X-Rspamd-Action: no action
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CH0PR01MB7170:EE_|BN0PR01MB6896:EE_
+X-MS-Office365-Filtering-Correlation-Id: 588d760b-57d6-4834-5298-08dc4a9c4f04
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam-Message-Info: 1g0n8DhTR7b29QdBZcZC61LwKlNXnCvxT8+mUwERovoFO/GP4uMZJbLIClN3lqFfJUsTsfgdIiZ2q8dSLu9F2s3pS/5UAxEu2qOBuZ+UTsRiVjJrSPPKRE6WdZBpo1/8Oy8Qrc7nBcZLlSllEpavE2ti19E/hmItFho2THoj/8uiXeeZItE3N+6b1mcKvhM6T5MJapIYUIsV2vL0NNRd36iFMkvJIE7JdFpL97/qIlorpd2+3yeEzN/Gf5hR5bSfZgjTgvoQxNAWZ0DmqEpKIjsflubfi1hf74Ls7p9gcKuaeAo7HNwMWogkWJ0kKTJl/SEw4WXCP9Xz6Bshp6aSO5mWqUAasOrLnbEyS6iiVgvxbhVXIQUwvPM+bFfJ86yDeWv1szKWfmuGotdWGq4BZFKynXaUkc7WEZ5Rf33p+2F/+r0GNh3OcjEgH2M7LiACR+u7ybKUU2XWLOV1XXx+E1i2u96toG097Hm3UbZrlfOgcmU9j7ynvMmVUh0vdNTLDcPbKVOarXA20Ex4bODvM0IhILUoJT56tc0NMdzWOAxp9rY9g3Fv5wtoYoSCqHjLE4HONVcPOPy6uUSbXXboBJSFkgaa41axYkVXtBFZ5S/7AeDyndpvingS4ApEaqnGEBqdvCsxvAE0OWHdSWwAJoGuZI9IwokoHzKlL+ZYylnCdKc24BoVcJklpXTYiaI+hKSyhmPUD7LVAg63BCpzQCm9KJBYUM7QL9sKQ/gSbkw=
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?QXFjZmZ0ZE40UHRobVdMUkRhb2xESXNLZklPVUhzRThjWHpibi8zTHAzWHZU?=
+ =?utf-8?B?TjVlbVZTYitxM29HWXZHb0VaQnpHQXFFT2o5Wis5alByMmlDdWpNNGFmbFdX?=
+ =?utf-8?B?akFVS2VaODlpNXQxK2x1MUZkTklxQzNZb3d2YjZjc3FEK0diUTAvVjA2VjZn?=
+ =?utf-8?B?VlJUUWpPeU1LbFpTZ1ExbUhWNmFUVXVWdDFRRENGbHNpV3RHcFVXblhUbE95?=
+ =?utf-8?B?dVpsd1JzZFd5M1hPYzUzRkhMMUZKTHBVS1VmVEZOWE9qNEk0VGdVL0xCWElG?=
+ =?utf-8?B?Sjd3MUNGelRLc0wvck5hYi96K3dXME1jdzlnQnNaa2xyUkpwVGVleUE3aHQy?=
+ =?utf-8?B?akpQRWVKM3NFWnprUkR4aHMxNU9TRWN0alBZTUZSeDM5cEpyK1E3NnhzVDY4?=
+ =?utf-8?B?bE9weGNyNnVnYkFLRjVVeEtSR2s2dUhkb3NscHQwckkvdGtpVTVmbWdpOEhl?=
+ =?utf-8?B?WVJQNGcvOGxOTGcyWlp6OXJwOU9USEt1SmVlTUh4ZnNKSmlqUEE1UnZXWGph?=
+ =?utf-8?B?R1kzeUY2cjdjS3ZoSEV3V2dZZXNBeXNPc1lZd3BrQlhDUjZWRjBBaCt2Ymc5?=
+ =?utf-8?B?NjhHM0pyMmlBdWpNZ3EvU3Z6bWMvblpSMStyaDMydElxOWxhdjNhQ2UrUkJE?=
+ =?utf-8?B?blFJU1M0c1Q2cStsQlhHblBHWFFTeVZhdVp6dXU2YVRmNjh3T2JVRVlsc2Fh?=
+ =?utf-8?B?WnhTQXo4L043NEptd25wVlVzRzh4ZkRkZUI3ajNxaTJLdEtKanBmcWVIVW1n?=
+ =?utf-8?B?ZXByTWlNUUFJSzlnczRZdW5VcXJDVlV6TTVOMUpaK2JlTVRQTWQzWGwxOEU4?=
+ =?utf-8?B?QVEwQ3VOVVpiWEtvYW9uWjhLTjdQVjNmZG5nU0pPb2JUWW5LRGdBYVV0encr?=
+ =?utf-8?B?R3RnYnlDTkVxTjA2bmpzeVkwZXdBd3NOeHZIMGJOWllpdk41b2dYa2IxdXdH?=
+ =?utf-8?B?N3RJUGhkWDNmN05ONDlQWktLVk56bDZsbFIzb0RSTDNZOFA5NVpNOVNwVkdY?=
+ =?utf-8?B?ZW1odWdWNU1HOU9lbkpJM1gxWW1uTHhRL2tyV3l6S21QaXlPTWdWUCswT2Mw?=
+ =?utf-8?B?ZGRoem14TXZMWVZzaisvcGpqYjB6cTNkMFNUSXdkM2NQWU5oQVRNWFVaWVZh?=
+ =?utf-8?B?dVo0RUc0Mmo2L3B4cFZCWjQ4RFN2bXZIYXozaFdvTFYzd1pNQk5MSU1wazJC?=
+ =?utf-8?B?VXVueU04M01SRlZ4TFFPMFZHWUJVYXRTVStsWlZqdjRjdjhiOExDT2Yzd24v?=
+ =?utf-8?B?WDU0aGhCRFFBWkhnR1ZzNithdEVqSlpwNkFub0VOcDVHR3RzdFJzd2VyUHZi?=
+ =?utf-8?B?UFZKbTYvOHpXa2dOLzYxQ21RUzU2QTQvVm1lQlJScUU3dllVeWl6bHB0ZmZU?=
+ =?utf-8?B?M2FhVGp6SndteXAzMW9JM1F6QW9XN0lJM282UGVGTSt1d3FwTjQ3WWpSSXdM?=
+ =?utf-8?B?S3BORVFGb0dKc3FqQm5lQWxFcEtrTnAwd1ZkRnhhOFdQR3ZOc0FiYkFnRUMz?=
+ =?utf-8?B?eG5GMmhaS0hoTVowc2Q1REw0WkE0SGdWZ0QwdkZqKzZnQjNrTkNiUlpHT2tk?=
+ =?utf-8?B?VVhRNFZoUFVjSThRTnVxZ3lucGJwSkJnSWdIaUg1VERZWVMzZEZWYWVMZGZr?=
+ =?utf-8?B?cnc1WlhyWXZHVUlacVZNMDczNWdvaXBjeEZwS1ptSlJlNkNLZWc3azVhMisw?=
+ =?utf-8?B?VzJzaXgzK2xkR2VaaDlUNjZObW4wZy83YmhmOTJMM2VCbnB1SlQ4Ry9LMlJv?=
+ =?utf-8?B?MHV5cTB1YjBTM2pNT3E0NWhmdTVqK0dpNktwbFdnTWlGVEM3L0hlaGNKd2RW?=
+ =?utf-8?B?Q0dxUnA2WUcwd2pQKzJiL1hYelpsY1RoS3QzVW02d2lsQTdWc0wxQ3oxSU9q?=
+ =?utf-8?B?YzZxTmdYNmlLYlRpWXd4ZFJWK0RiZVVDTjFGWVE2WGpORUVnNjRJOVZZdm1l?=
+ =?utf-8?B?b0ZwVUE3TVp4MWdBSmhwSVVJcFZEY3JheHhuazZCcW40NlVNSU5pWXAyTXhG?=
+ =?utf-8?B?MnNCeDVQR1Z4YmRwWWJUMUJJdWlBRDFqUWc2S09zMnhzNmJQanUzZWxOY0Ju?=
+ =?utf-8?B?V2Vlc2pUdGNaYnh1eWpXTHNoV2FJaUwwN2ZqWEdaMXBDNEdpYnYyMHRBYjRN?=
+ =?utf-8?Q?FUq8yz/pcIT6RVkQvJku9DyXp?=
+X-OriginatorOrg: talpey.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 588d760b-57d6-4834-5298-08dc4a9c4f04
+X-MS-Exchange-CrossTenant-AuthSource: CH0PR01MB7170.prod.exchangelabs.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 2b2dcae7-2555-4add-bc80-48756da031d5
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 6l4hYt/j/j63zNssGp1GBhgzzB/Zrmqv1fWTEbZL0fB2Idf68uNwRBFsRGZS9TZJ
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN0PR01MB6896
+X-Warn: EHLO/HELO not verified: Remote host 2a01:111:f403:2009::700
+ (mail-bn7nam10on20700.outbound.protection.outlook.com) incorrectly presented
+ itself as NAM10-BN7-obe.outbound.protection.outlook.com
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -71,170 +122,474 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: =?utf-8?q?Andr=C3=A9as_LEROUX_via_samba-technical?=
- <samba-technical@lists.samba.org>
-Reply-To: =?UTF-8?Q?Andr=C3=A9as_LEROUX?= <aleroux@tranquil.it>
-Cc: Andreas Schneider <asn@samba.org>, yalemu@tranquil.it,
- Denis CARDON <dcardon@tranquil.it>, Andrew Bartlett <abartlet@samba.org>
+From: Tom Talpey via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Tom Talpey <tom@talpey.com>
+Cc: pc@manguebit.com, linux-cifs@vger.kernel.org, sprasad@microsoft.com,
+ samba-technical@lists.samba.org, linux-kernel@vger.kernel.org,
+ sfrench@samba.org, Ritvik Budhiraja <budhirajaritviksmb@gmail.com>,
+ bharathsm.hsk@gmail.com
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is a multi-part message in MIME format.
---------------4fVY6jdmCYcFOYR4yyZFxW3h
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+[resending as plain text stupid phone]
 
-Hi Andreas and Andrew,
+Aren't these local errors, triggered by failure to send the close? Servers =
+can fail the close too of course, which should also be retried, if appropri=
+ate to the error.
 
- >>>> > Hi,my colleagues discovered a performance issue in libldb:
- >>>> > https://bugzilla.samba.org/show_bug.cgi?id=15590
- >>>> > > > > As soon as you use indexes, ldbadd will be magnitudes
- >> slower than
- >>>> > itwas before.Could some ldb expert please look into it?
- >>>> > > Your subject says a regression. What version is this a
- >>>> regressionagainst?
- >>>> Isn't that obvious from the bug report?
- >>> Here is the short summary:
- >>> $ bash repro.sh 20000 indexesAdded 2 records successfullyAdded
- >> 20000
- >>> records successfully
- >>> On Samba 4.10: 0m01.231sOn Samba 4.19: 1m30.924s (that's 90 times
- >>> slower)
- >>>> > The very nature of a DB index is that it will take time to
- >>>> create,possibly a lot of time, but should make reads faster.
- >>>> Either the DB index doesn't work at all in Samba 4.10 or there
- >> is a
- >>> huge performance problem in Samba 4.19. What is it?
- >>
- >> Thanks, that wasn't written as obviously on the bug, thanks for the
- >> clarification.
- >
- > I used our CentOS 8 Stream CI image for bisecting. You can't bisect
- > easily on a modern Linux Distribution, as the included waf would not
- > have support for newer Python versions like 3.12.
- >
- > In case you want to reproduce it, here is my run:
+Tom.
 
-I'm Andréas from Tranquil IT dev team. Denis and Yohannès asked me this 
-week to take a look at the performance issues on large domains, which 
-include this issue in the current thread along the mdb large transaction 
-issues.
+Mar 22, 2024 10:50:10 AM Steve French <smfrench@gmail.com>:
 
-The attached patchset goes through all the tdb and ldb make test.
-
-* LMDB : increase MDB_IDL_LOGN from 16 to 18 to accomodate large nested 
-transactions
-* tdb : fail-fast when record hash doesn't match expected hash to avoid 
-to read/copy the entire record
-* ldb : increase DEFAULT_INDEX_CACHE_SIZE from 491 to 8089 to increase 
-the number of bucket to have smaller bucket to have faster iteration in 
-each buckets in tdb_find
-
-With this patchset we can upgrade large domains (>200k objects) to 
-FL2k16 level in approximatly 1 hour instead of 3 days :-)
-
-[root@srvads1-bl1cw ~]# bash repro.sh 20000 indexes Added 2 records 
-successfully Added 20000 records successfully real 0m0.536s user 
-0m0.798s sys 0m0.105s
-
-Tranquil IT team is expert at deploying Samba-AD in large domains, but 
-we are not core devs, so I may have missed something during my debugging 
-/ patching session. Don't hesitate to comment and tell me what you think 
-about this patchset, if there are some pitfalls that I missed or if the 
-style can be improved.
-
-
-Cheers,
-
-Andréas
---------------4fVY6jdmCYcFOYR4yyZFxW3h
-Content-Type: text/plain; charset=UTF-8;
- name="tis-increase-mdb-idl-logn.patch"
-Content-Disposition: attachment; filename="tis-increase-mdb-idl-logn.patch"
-Content-Transfer-Encoding: base64
-
-ZGlmZiAtdXAgYS9saWJyYXJpZXMvbGlibG1kYi9taWRsLmggYi9saWJyYXJpZXMvbGlibG1k
-Yi9taWRsLmgKLS0tIGEvbGlicmFyaWVzL2xpYmxtZGIvbWlkbC5oCTIwMTgtMDMtMjIgMTY6
-MjM6MDUuMDAwMDAwMDAwICswMTAwCisrKyBiL2xpYnJhcmllcy9saWJsbWRiL21pZGwuaAky
-MDI0LTAzLTIxIDExOjQ2OjU0LjYxNjAwMDAwMCArMDEwMApAQCAtNTYsNyArNTYsNyBAQCB0
-eXBlZGVmIE1EQl9JRCAqTURCX0lETDsKIC8qIElETCBzaXplcyAtIGxpa2VseSBzaG91bGQg
-YmUgZXZlbiBiaWdnZXIKICAqICAgbGltaXRpbmcgZmFjdG9yczogc2l6ZW9mKElEKSwgdGhy
-ZWFkIHN0YWNrIHNpemUKICAqLwotI2RlZmluZQlNREJfSURMX0xPR04JMTYJLyogREJfU0la
-RSBpcyAyXjE2LCBVTV9TSVpFIGlzIDJeMTcgKi8KKyNkZWZpbmUJTURCX0lETF9MT0dOCTE4
-CS8qIERCX1NJWkUgaXMgMl4xOCwgVU1fU0laRSBpcyAyXjE5ICovCiAjZGVmaW5lIE1EQl9J
-RExfREJfU0laRQkJKDE8PE1EQl9JRExfTE9HTikKICNkZWZpbmUgTURCX0lETF9VTV9TSVpF
-CQkoMTw8KE1EQl9JRExfTE9HTisxKSkK
---------------4fVY6jdmCYcFOYR4yyZFxW3h
-Content-Type: text/plain; charset=UTF-8; name="tis-tdbfind.patch"
-Content-Disposition: attachment; filename="tis-tdbfind.patch"
-Content-Transfer-Encoding: base64
-
-ZGlmZiAtcnVOIGEvY29tbW9uL2lvLmMgYi9jb21tb24vaW8uYwotLS0gYS9jb21tb24vaW8u
-YwkyMDIzLTA3LTE4IDEwOjE0OjU0LjQ5MDA5MTAwMCArMDIwMAorKysgYi9jb21tb24vaW8u
-YwkyMDI0LTAzLTIxIDE1OjQ5OjM4Ljc4MDYzNDc4NCArMDEwMApAQCAtNzQxLDYgKzc0MSwy
-NiBAQAogCXJldHVybiByZXN1bHQ7CiB9CiAKKworLyogQ2hlY2sgaWYgdGhlIHJlY29yZCBo
-YXNoIG1hdGNoIHRoZSBleHBlY3RlZCBvbmUuIElmIG5vdCwgbW92ZSB0aGUgb2Zmc2V0IHRv
-IHRoZSBuZXh0IHJlY29yZCAqLworCitpbnQgdGRiX3JlY19pc2hhc2goc3RydWN0IHRkYl9j
-b250ZXh0ICp0ZGIsIHRkYl9vZmZfdCAqb2ZmLCB1aW50MzJfdCBoYXNoKSB7CisJdWludDMy
-X3QgcmVhZF9oYXNoOworCisJLy8gRW5zdXJlIHRoZSByZWNvcmQgaXMgbm90IG9vYgorCWlm
-ICh0ZGJfb29iKHRkYiwgKm9mZiwgc2l6ZW9mKHN0cnVjdCB0ZGJfcmVjb3JkKSwgMCkgIT0g
-MCkKKwkJIHJldHVybiAtMTsKKworCS8vIFJlYWQgb25seSBmdWxsX2hhc2ggdmFsdWUgYW5k
-IGNvbXBhcmUgaXQgdG8gZXhwZWN0ZWQgaGFzaAorCWlmICh0ZGItPm1ldGhvZHMtPnRkYl9y
-ZWFkKHRkYiwgKm9mZiArIG9mZnNldG9mKHN0cnVjdCB0ZGJfcmVjb3JkLCBmdWxsX2hhc2gp
-LCAmcmVhZF9oYXNoLCBzaXplb2YoaGFzaCksIERPQ09OVigpKSA9PSAtMSkKKwkJIHJldHVy
-biAtMTsKKwlpZiAocmVhZF9oYXNoID09IGhhc2gpCisJCSByZXR1cm4gMTsKKworCS8vIFJl
-YWQgdGhlIG5leHQgcG9pbnRlciB2YWx1ZQorCXJldHVybiB0ZGItPm1ldGhvZHMtPnRkYl9y
-ZWFkKHRkYiwgKm9mZiwgb2ZmLCBzaXplb2YodGRiX29mZl90KSxET0NPTlYoKSk7Cit9CisK
-IC8qIHJlYWQvd3JpdGUgYSByZWNvcmQgKi8KIGludCB0ZGJfcmVjX3JlYWQoc3RydWN0IHRk
-Yl9jb250ZXh0ICp0ZGIsIHRkYl9vZmZfdCBvZmZzZXQsIHN0cnVjdCB0ZGJfcmVjb3JkICpy
-ZWMpCiB7CmRpZmYgLXJ1TiBhL2NvbW1vbi90ZGIuYyBiL2NvbW1vbi90ZGIuYwotLS0gYS9j
-b21tb24vdGRiLmMJMjAyMy0wNy0xOCAxMDoxNDo1NC40OTQwOTEwMDAgKzAyMDAKKysrIGIv
-Y29tbW9uL3RkYi5jCTIwMjQtMDMtMjIgMDk6NDQ6MDcuMDYwNjMzODQ2ICswMTAwCkBAIC0x
-MzMsNyArMTMzLDE5IEBACiAKIAkvKiBrZWVwIGxvb2tpbmcgdW50aWwgd2UgZmluZCB0aGUg
-cmlnaHQgcmVjb3JkICovCiAJd2hpbGUgKHJlY19wdHIpIHsKLQkJYm9vbCBvazsKKwkJaW50
-IGlzX2hhc2hfcmVzdWx0ID0gdGRiX3JlY19pc2hhc2godGRiLCAmcmVjX3B0ciwgaGFzaCk7
-CisKKwkJLyogRmFpbGVkIHRvIHJlYWQgdGhlIGhhc2gvbmV4dCBwb2ludGVyIG9mIHRoaXMg
-cmVjb3JkICovCisJCWlmIChpc19oYXNoX3Jlc3VsdCA9PSAtMSkKKwkJCXJldHVybiAwOwor
-CQkvKiBSZWNvcmQgaGFzaCBkb2Vzbid0IG1hdGNoIGV4cGVjdGVkIGhhc2ggc28gd2UgZmFp
-bCBmYXN0IGluc3RlYWQgb2YgY29weWluZyB0aGUgZW50aXJlIHJlY29yZC4KKwkJICAgcmVj
-X3B0ciBhbHJlYWR5IG1vdmVkIHRvIG5leHQgcmVjb3JkIGJ5IHRkYl9yZWNfaXNoYXNoLgor
-CQkgICBTdGlsbCBuZWVkIHRvIGNoZWNrIHRoZSBjaGFpbndhbGsgdG8gYXZvaWQgY2lyY3Vs
-YXIgc2VhcmNoICovCisJCWVsc2UgaWYgKGlzX2hhc2hfcmVzdWx0ID09IDApIHsKKwkJCWlm
-ICghdGRiX2NoYWlud2Fsa19jaGVjayh0ZGIsICZjaGFpbndhbGssIHJlY19wdHIpKQorCQkJ
-CXJldHVybiAwOworCQkJY29udGludWU7CisJCX0KIAogCQlpZiAodGRiX3JlY19yZWFkKHRk
-YiwgcmVjX3B0ciwgcikgPT0gLTEpCiAJCQlyZXR1cm4gMDsKQEAgLTE0NywxMCArMTU5LDgg
-QEAKCQl9CgkJcmVjX3B0ciA9IHItPm5leHQ7CiAKLQkJb2sgPSB0ZGJfY2hhaW53YWxrX2No
-ZWNrKHRkYiwgJmNoYWlud2FsaywgcmVjX3B0cik7Ci0JCWlmICghb2spIHsKKwkJaWYgKCF0
-ZGJfY2hhaW53YWxrX2NoZWNrKHRkYiwgJmNoYWlud2FsaywgcmVjX3B0cikpCiAJCQlyZXR1
-cm4gMDsKLQkJfQogCX0KIAl0ZGItPmVjb2RlID0gVERCX0VSUl9OT0VYSVNUOwogCXJldHVy
-biAwOwpkaWZmIC1ydU4gYS9jb21tb24vdGRiX3ByaXZhdGUuaCBiL2NvbW1vbi90ZGJfcHJp
-dmF0ZS5oCi0tLSBhL2NvbW1vbi90ZGJfcHJpdmF0ZS5oCTIwMjMtMDctMTggMTA6MTQ6NTQu
-NDk0MDkxMDAwICswMjAwCisrKyBiL2NvbW1vbi90ZGJfcHJpdmF0ZS5oCTIwMjQtMDMtMjEg
-MTU6NTA6MzkuMjQ0NjM0MTQxICswMTAwCkBAIC0zMjIsNiArMzIyLDcgQEAKIGludCB0ZGJf
-bG9ja19yZWNvcmQoc3RydWN0IHRkYl9jb250ZXh0ICp0ZGIsIHRkYl9vZmZfdCBvZmYpOwog
-aW50IHRkYl91bmxvY2tfcmVjb3JkKHN0cnVjdCB0ZGJfY29udGV4dCAqdGRiLCB0ZGJfb2Zm
-X3Qgb2ZmKTsKIGJvb2wgdGRiX25lZWRzX3JlY292ZXJ5KHN0cnVjdCB0ZGJfY29udGV4dCAq
-dGRiKTsKK2ludCB0ZGJfcmVjX2lzaGFzaChzdHJ1Y3QgdGRiX2NvbnRleHQgKnRkYiwgdGRi
-X29mZl90ICpvZmYsIHVpbnQzMl90IGhhc2gpOwogaW50IHRkYl9yZWNfcmVhZChzdHJ1Y3Qg
-dGRiX2NvbnRleHQgKnRkYiwgdGRiX29mZl90IG9mZnNldCwgc3RydWN0IHRkYl9yZWNvcmQg
-KnJlYyk7CiBpbnQgdGRiX3JlY193cml0ZShzdHJ1Y3QgdGRiX2NvbnRleHQgKnRkYiwgdGRi
-X29mZl90IG9mZnNldCwgc3RydWN0IHRkYl9yZWNvcmQgKnJlYyk7CiB1bnNpZ25lZCBjaGFy
-ICp0ZGJfYWxsb2NfcmVhZChzdHJ1Y3QgdGRiX2NvbnRleHQgKnRkYiwgdGRiX29mZl90IG9m
-ZnNldCwgdGRiX2xlbl90IGxlbik7Cgo=
---------------4fVY6jdmCYcFOYR4yyZFxW3h
-Content-Type: text/plain; charset=UTF-8; name="tis-ldbfind.patch"
-Content-Disposition: attachment; filename="tis-ldbfind.patch"
-Content-Transfer-Encoding: base64
-
-ZGlmZiAtcnVOIGEvbGRiX2tleV92YWx1ZS9sZGJfa3YuaCBiL2xkYl9rZXlfdmFsdWUvbGRi
-X2t2LmgKLS0tIGEvbGRiX2tleV92YWx1ZS9sZGJfa3YuaAkyMDIzLTA3LTE4IDEwOjE0OjU0
-LjQzODA5MDgwMCArMDIwMAorKysgYi9sZGJfa2V5X3ZhbHVlL2xkYl9rdi5oCTIwMjQtMDMt
-MjEgMTU6NDg6NTcuMzEyNjM1MjI1ICswMTAwCkBAIC0yNDksNyArMjQ5LDcgQEAKICAqIFRo
-ZSB2YWx1ZSBjaG9zZW4gZ2l2ZXMgYSBwcmltZSBtb2R1bG8gZm9yIHRoZSBoYXNoIHRhYmxl
-IGFuZCBrZWVwcyB0aGUKICAqIHRkYiBtZW1vcnkgb3ZlcmhlYWQgdW5kZXIgNCBrQgogICov
-Ci0jZGVmaW5lIERFRkFVTFRfSU5ERVhfQ0FDSEVfU0laRSA0OTEKKyNkZWZpbmUgREVGQVVM
-VF9JTkRFWF9DQUNIRV9TSVpFIDgwODkgCiAKIHN0cnVjdCBsZGJfcGFyc2VfdHJlZTsKCg==
-
-
---------------4fVY6jdmCYcFOYR4yyZFxW3h--
+> Do you know a repro scenario where you can get the server to return
+> EAGAIN or EBUSY?
+>=20
+> SInce close is also issued from other paths than the one you issued
+> retries from (_cifsFileInfo_put) - are there other cases we should be
+> retrying?=C2=A0 e.g. error paths in do_create and atomic_open, cifs_open,
+> cifs_close_dir, find_cifs_entry
+>=20
+> Also do you know a scenario where we can repro the negative total open
+> files count?
+>=20
+> On Fri, Mar 22, 2024 at 2:33=E2=80=AFAM Ritvik Budhiraja
+> <budhirajaritviksmb@gmail.com> wrote:
+>>=20
+>> Attaching the updated patch
+>>=20
+>>=20
+>> On Fri, 15 Mar 2024 at 01:12, Ritvik Budhiraja <budhirajaritviksmb@gmail=
+.com> wrote:
+>>>=20
+>>> In the current implementation, CIFS close sends a close to the server
+>>> and does not check for the success of the server close. This patch adds
+>>> functionality to check for server close return status and retries
+>>> in case of an EBUSY or EAGAIN error
+>>>=20
+>>> Signed-off-by: Ritvik Budhiraja <rbudhiraja@microsoft.com>
+>>> ---
+>>> fs/smb/client/cifsfs.c=C2=A0=C2=A0 | 11 +++++++
+>>> fs/smb/client/cifsglob.h |=C2=A0 7 +++--
+>>> fs/smb/client/file.c=C2=A0=C2=A0=C2=A0=C2=A0 | 63 +++++++++++++++++++++=
++++++++++++++++----
+>>> fs/smb/client/smb1ops.c=C2=A0 |=C2=A0 4 +--
+>>> fs/smb/client/smb2ops.c=C2=A0 |=C2=A0 9 +++---
+>>> 5 files changed, 80 insertions(+), 14 deletions(-)
+>>>=20
+>>> diff --git a/fs/smb/client/cifsfs.c b/fs/smb/client/cifsfs.c
+>>> index fb368b191eef..e4b2ded86fce 100644
+>>> --- a/fs/smb/client/cifsfs.c
+>>> +++ b/fs/smb/client/cifsfs.c
+>>> @@ -160,6 +160,7 @@ struct workqueue_struct=C2=A0=C2=A0=C2=A0=C2=A0 *de=
+crypt_wq;
+>>> struct workqueue_struct=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 *file=
+info_put_wq;
+>>> struct workqueue_struct=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 *cifs=
+oplockd_wq;
+>>> struct workqueue_struct=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 *defe=
+rredclose_wq;
+>>> +struct workqueue_struct=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 *ser=
+verclose_wq;
+>>> __u32 cifs_lock_secret;
+>>>=20
+>>> /*
+>>> @@ -1890,6 +1891,13 @@ init_cifs(void)
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0 goto out_destroy_cifsoplockd_wq;
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 }
+>>>=20
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 serverclose_wq =3D alloc_workqueu=
+e("serverclose",
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0 WQ_FREEZABLE|WQ_MEM_RECLAIM, 0);
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 if (!serverclose_wq) {
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0 rc =3D -ENOMEM;
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0 goto out_destroy_serverclose_wq;
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 }
+>>> +
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 rc =3D cifs_init_inodecache(=
+);
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 if (rc)
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0 goto out_destroy_deferredclose_wq;
+>>> @@ -1964,6 +1972,8 @@ init_cifs(void)
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 destroy_workqueue(decrypt_wq=
+);
+>>> out_destroy_cifsiod_wq:
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 destroy_workqueue(cifsiod_wq=
+);
+>>> +out_destroy_serverclose_wq:
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 destroy_workqueue(serverclose_wq)=
+;
+>>> out_clean_proc:
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 cifs_proc_clean();
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 return rc;
+>>> @@ -1993,6 +2003,7 @@ exit_cifs(void)
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 destroy_workqueue(cifsoplock=
+d_wq);
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 destroy_workqueue(decrypt_wq=
+);
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 destroy_workqueue(fileinfo_p=
+ut_wq);
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 destroy_workqueue(serverclose_wq)=
+;
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 destroy_workqueue(cifsiod_wq=
+);
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 cifs_proc_clean();
+>>> }
+>>> diff --git a/fs/smb/client/cifsglob.h b/fs/smb/client/cifsglob.h
+>>> index 53c75cfb33ab..c99bc3b3ff56 100644
+>>> --- a/fs/smb/client/cifsglob.h
+>>> +++ b/fs/smb/client/cifsglob.h
+>>> @@ -429,10 +429,10 @@ struct smb_version_operations {
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 /* set fid protocol-specific=
+ info */
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 void (*set_fid)(struct cifsF=
+ileInfo *, struct cifs_fid *, __u32);
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 /* close a file */
+>>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 void (*close)(const unsigned int,=
+ struct cifs_tcon *,
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 int (*close)(const unsigned int, =
+struct cifs_tcon *,
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 struct cifs_fid *=
+);
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 /* close a file, returning f=
+ile attributes and timestamps */
+>>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 void (*close_getattr)(const unsig=
+ned int xid, struct cifs_tcon *tcon,
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 int (*close_getattr)(const unsign=
+ed int xid, struct cifs_tcon *tcon,
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 struct cifsFileIn=
+fo *pfile_info);
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 /* send a flush request to t=
+he server */
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 int (*flush)(const unsigned =
+int, struct cifs_tcon *, struct cifs_fid *);
+>>> @@ -1420,6 +1420,7 @@ struct cifsFileInfo {
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 bool invalidHandle:1;=C2=A0=
+=C2=A0 /* file closed via session abend */
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 bool swapfile:1;
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 bool oplock_break_cancelled:=
+1;
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 bool offload:1; /* offload final =
+part of _put to a wq */
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 unsigned int oplock_epoch; /=
+* epoch from the lease break */
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 __u32 oplock_level; /* oploc=
+k/lease level from the lease break */
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 int count;
+>>> @@ -1428,6 +1429,7 @@ struct cifsFileInfo {
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 struct cifs_search_info srch=
+_inf;
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 struct work_struct oplock_br=
+eak; /* work for oplock breaks */
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 struct work_struct put; /* w=
+ork for the final part of _put */
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 struct work_struct serverclose; /=
+* work for serverclose */
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 struct delayed_work deferred=
+;
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 bool deferred_close_schedule=
+d; /* Flag to indicate close is scheduled */
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 char *symlink_target;
+>>> @@ -2085,6 +2087,7 @@ extern struct workqueue_struct *decrypt_wq;
+>>> extern struct workqueue_struct *fileinfo_put_wq;
+>>> extern struct workqueue_struct *cifsoplockd_wq;
+>>> extern struct workqueue_struct *deferredclose_wq;
+>>> +extern struct workqueue_struct *serverclose_wq;
+>>> extern __u32 cifs_lock_secret;
+>>>=20
+>>> extern mempool_t *cifs_mid_poolp;
+>>> diff --git a/fs/smb/client/file.c b/fs/smb/client/file.c
+>>> index c3b8e7091a4d..c1379ec27dcd 100644
+>>> --- a/fs/smb/client/file.c
+>>> +++ b/fs/smb/client/file.c
+>>> @@ -445,6 +445,7 @@ cifs_down_write(struct rw_semaphore *sem)
+>>> }
+>>>=20
+>>> static void cifsFileInfo_put_work(struct work_struct *work);
+>>> +void serverclose_work(struct work_struct *work);
+>>>=20
+>>> struct cifsFileInfo *cifs_new_fileinfo(struct cifs_fid *fid, struct fil=
+e *file,
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0 struct tcon_link *tlink, __u32 oplock,
+>>> @@ -491,6 +492,7 @@ struct cifsFileInfo *cifs_new_fileinfo(struct cifs_=
+fid *fid, struct file *file,
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 cfile->tlink =3D cifs_get_tl=
+ink(tlink);
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 INIT_WORK(&cfile->oplock_bre=
+ak, cifs_oplock_break);
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 INIT_WORK(&cfile->put, cifsF=
+ileInfo_put_work);
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 INIT_WORK(&cfile->serverclose, se=
+rverclose_work);
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 INIT_DELAYED_WORK(&cfile->de=
+ferred, smb2_deferred_work_close);
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 mutex_init(&cfile->fh_mutex)=
+;
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 spin_lock_init(&cfile->file_=
+info_lock);
+>>> @@ -582,6 +584,40 @@ static void cifsFileInfo_put_work(struct work_stru=
+ct *work)
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 cifsFileInfo_put_final(cifs_=
+file);
+>>> }
+>>>=20
+>>> +void serverclose_work(struct work_struct *work)
+>>> +{
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 struct cifsFileInfo *cifs_file =
+=3D container_of(work,
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 struct cifs=
+FileInfo, serverclose);
+>>> +
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 struct cifs_tcon *tcon =3D tlink_=
+tcon(cifs_file->tlink);
+>>> +
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 struct TCP_Server_Info *server =
+=3D tcon->ses->server;
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 int rc;
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 int retries =3D 0;
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 int MAX_RETRIES =3D 4;
+>>> +
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 do {
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0 if (server->ops->close_getattr)
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 rc =3D serv=
+er->ops->close_getattr(0, tcon, cifs_file);
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0 else if (server->ops->close)
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 rc =3D serv=
+er->ops->close(0, tcon, &cifs_file->fid);
+>>> +
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0 if (rc =3D=3D -EBUSY || rc =3D=3D -EAGAIN) {
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 retries++;
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 msleep(250)=
+;
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0 }
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 } while ((rc =3D=3D -EBUSY || rc =
+=3D=3D -EAGAIN) && (retries < MAX_RETRIES)
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 );
+>>> +
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 if (retries =3D=3D MAX_RETRIES)
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0 printk(KERN_WARNING "[CIFS_CLOSE] Serverclose failed %d tim=
+es, giving up\n", MAX_RETRIES);
+>>> +
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 if (cifs_file->offload)
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0 queue_work(fileinfo_put_wq, &cifs_file->put);
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 else
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0 cifsFileInfo_put_final(cifs_file);
+>>> +}
+>>> +
+>>> /**
+>>> =C2=A0 * cifsFileInfo_put - release a reference of file priv data
+>>> =C2=A0 *
+>>> @@ -622,10 +658,13 @@ void _cifsFileInfo_put(struct cifsFileInfo *cifs_=
+file,
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 struct cifs_fid fid =3D {};
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 struct cifs_pending_open ope=
+n;
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 bool oplock_break_cancelled;
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 bool serverclose_offloaded =3D fa=
+lse;
+>>>=20
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 spin_lock(&tcon->open_file_l=
+ock);
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 spin_lock(&cifsi->open_file_=
+lock);
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 spin_lock(&cifs_file->file_i=
+nfo_lock);
+>>> +
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 cifs_file->offload =3D offload;
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 if (--cifs_file->count > 0) =
+{
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0 spin_unlock(&cifs_file->file_info_lock);
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0 spin_unlock(&cifsi->open_file_lock);
+>>> @@ -667,13 +706,20 @@ void _cifsFileInfo_put(struct cifsFileInfo *cifs_=
+file,
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 if (!tcon->need_reconnect &&=
+ !cifs_file->invalidHandle) {
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0 struct TCP_Server_Info *server =3D tcon->ses->server;
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0 unsigned int xid;
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0 int rc;
+>>>=20
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0 xid =3D get_xid();
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0 if (server->ops->close_getattr)
+>>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 server->ops=
+->close_getattr(xid, tcon, cifs_file);
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 rc =3D serv=
+er->ops->close_getattr(xid, tcon, cifs_file);
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0 else if (server->ops->close)
+>>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 server->ops=
+->close(xid, tcon, &cifs_file->fid);
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 rc =3D serv=
+er->ops->close(xid, tcon, &cifs_file->fid);
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0 _free_xid(xid);
+>>> +
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0 if (rc =3D=3D -EBUSY || rc =3D=3D -EAGAIN) {
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 // Server c=
+lose failed, hence offloading it as an async op
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 queue_work(=
+serverclose_wq, &cifs_file->serverclose);
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 serverclose=
+_offloaded =3D true;
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0 }
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 }
+>>>=20
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 if (oplock_break_cancelled)
+>>> @@ -681,10 +727,15 @@ void _cifsFileInfo_put(struct cifsFileInfo *cifs_=
+file,
+>>>=20
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 cifs_del_pending_open(&open)=
+;
+>>>=20
+>>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 if (offload)
+>>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0 queue_work(fileinfo_put_wq, &cifs_file->put);
+>>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 else
+>>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0 cifsFileInfo_put_final(cifs_file);
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 // if serverclose has been offloa=
+ded to wq (on failure), it will
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 // handle offloading put as well.=
+ If serverclose not offloaded,
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 // we need to handle offloading p=
+ut here.
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 if (!serverclose_offloaded) {
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0 if (offload)
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 queue_work(=
+fileinfo_put_wq, &cifs_file->put);
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0 else
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 cifsFileInf=
+o_put_final(cifs_file);
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 }
+>>> }
+>>>=20
+>>> int cifs_open(struct inode *inode, struct file *file)
+>>> diff --git a/fs/smb/client/smb1ops.c b/fs/smb/client/smb1ops.c
+>>> index a9eaba8083b0..212ec6f66ec6 100644
+>>> --- a/fs/smb/client/smb1ops.c
+>>> +++ b/fs/smb/client/smb1ops.c
+>>> @@ -753,11 +753,11 @@ cifs_set_fid(struct cifsFileInfo *cfile, struct c=
+ifs_fid *fid, __u32 oplock)
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 cinode->can_cache_brlcks =3D=
+ CIFS_CACHE_WRITE(cinode);
+>>> }
+>>>=20
+>>> -static void
+>>> +static int
+>>> cifs_close_file(const unsigned int xid, struct cifs_tcon *tcon,
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0 struct cifs_fid *fid)
+>>> {
+>>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 CIFSSMBClose(xid, tcon, fid->netf=
+id);
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 return CIFSSMBClose(xid, tcon, fi=
+d->netfid);
+>>> }
+>>>=20
+>>> static int
+>>> diff --git a/fs/smb/client/smb2ops.c b/fs/smb/client/smb2ops.c
+>>> index 4695433fcf39..1dcd4944958f 100644
+>>> --- a/fs/smb/client/smb2ops.c
+>>> +++ b/fs/smb/client/smb2ops.c
+>>> @@ -1411,14 +1411,14 @@ smb2_set_fid(struct cifsFileInfo *cfile, struct=
+ cifs_fid *fid, __u32 oplock)
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 memcpy(cfile->fid.create_gui=
+d, fid->create_guid, 16);
+>>> }
+>>>=20
+>>> -static void
+>>> +static int
+>>> smb2_close_file(const unsigned int xid, struct cifs_tcon *tcon,
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0 struct cifs_fid *fid)
+>>> {
+>>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 SMB2_close(xid, tcon, fid->persis=
+tent_fid, fid->volatile_fid);
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 return SMB2_close(xid, tcon, fid-=
+>persistent_fid, fid->volatile_fid);
+>>> }
+>>>=20
+>>> -static void
+>>> +static int
+>>> smb2_close_getattr(const unsigned int xid, struct cifs_tcon *tcon,
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 struct cifsFileInfo *cfile)
+>>> {
+>>> @@ -1429,7 +1429,7 @@ smb2_close_getattr(const unsigned int xid, struct=
+ cifs_tcon *tcon,
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 rc =3D __SMB2_close(xid, tco=
+n, cfile->fid.persistent_fid,
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 cfile->fid.volatile_fid, &file_inf)=
+;
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 if (rc)
+>>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0 return;
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0 return rc;
+>>>=20
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 inode =3D d_inode(cfile->den=
+try);
+>>>=20
+>>> @@ -1458,6 +1458,7 @@ smb2_close_getattr(const unsigned int xid, struct=
+ cifs_tcon *tcon,
+>>>=20
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 /* End of file and Attribute=
+s should not have to be updated on close */
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 spin_unlock(&inode->i_lock);
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 return rc;
+>>> }
+>>>=20
+>>> static int
+>>> --=20
+>>> 2.34.1
+>>>=20
+>=20
+>=20
+> --=20
+> Thanks,
+>=20
+> Steve
 
