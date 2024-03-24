@@ -2,52 +2,62 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1000D887433
-	for <lists+samba-technical@lfdr.de>; Fri, 22 Mar 2024 21:36:17 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C782D887BBB
+	for <lists+samba-technical@lfdr.de>; Sun, 24 Mar 2024 06:07:52 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=z8jHHi8LfLyjMr5frBRt8s3dnj7vk9WOlNh1Mnd6+7w=; b=GwHdNE9gdbgB44BFAwW/5EIIdS
-	pmAZkd9tuRUOB7f9b5bkrZzw9lmHN/GYPpmLhfZIXwQ3rojOJGk5fb383Ch4wLBeVSxV0WRt2O60w
-	NqZmNpFX8SOrCLvw2wTUZIB7Ztiu04pg7dlt41JYXHm5tKqLhD5EFe0tfSqxknjxHTX72ZC750vtO
-	mnj9zEy6Z2v/G1Hjo8aqA/FTKv4oLAhhx/deih5h8c8S4fHYK5s2lgkK88dfdM36bWBAAfNNi3x2K
-	F1pqKx9v60JMCrVgY3C+Aiylc3b337jMTpHrZRH2bOC97TkoDF0ETAhin1DCcbhTepQYCE+TGQfgj
-	PHwvDD2g==;
-Received: from ip6-localhost ([::1]:21044 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=kcQ7aqapAzWh9V2jYgjZvNL++i4wCg6TaQgakyEunLo=; b=ajuzMqrF0wsjmCf/XC23+/S4cK
+	VJ87fbgbrV3CZYpFk0BpVFInGjAX9/XNWJD+r5R2vH818OQdTFS8rOOGOz+Ol3KUhFQayk1FcN2Ic
+	4aGQcDd+w+qqjpshGp/sj/HJHEpIFJrxap3ood8NTNMmjDQ4GIFcTwB+GgM4TE4giTyEOwK/T5lVA
+	dfaTp97qWSVq9sQEgkxXwDblLxspKqfHaGlPmST9q21hfHFTwukGjyUxE+vgjpeRf3YhGoFQpwOJ4
+	h0BrCcyx4KyJl/pTvrTUiJ9h7lR72Y+QxEOZ1eSPx5sRw46qcBgqac5eAdnQJlTMMJdtXHUqKZePS
+	9UiUqmFA==;
+Received: from ip6-localhost ([::1]:59344 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1rnlc2-0013KD-VB; Fri, 22 Mar 2024 20:35:40 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:39550) 
+	id 1roG4X-0017mo-8o; Sun, 24 Mar 2024 05:07:06 +0000
+Received: from mail-lf1-x12e.google.com ([2a00:1450:4864:20::12e]:53633) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1rnlby-0013K6-86
- for samba-technical@lists.samba.org; Fri, 22 Mar 2024 20:35:38 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Cc:To:From:Message-ID;
- bh=b7QvTyQksEHZf0elu518JwwQaPKEV7BR0ldEyUclnCg=; b=HG+MHH9ziONYM/NSsPsg0Dyh1j
- /pWDnA86U2jBDl64TlMh3DMp2Eq3pyaXufgrhonGziXTBmbThtFxMCMqRHu2F2+8jKpJ/e8jm4fjW
- wKWoIaBSCCU0IbrJm3+JhxXd3aZw9GOzLHDrifIHMLqcnHogl0PTlwV6Pe+wmBroqC+pV2rFwHeoo
- UT6y7fySxrdqhecZSXIq2devufCIYTlS3ieMDY8IRAS/D0UWLUGjKfA3/n5U9mS+8ShW20i/pccUv
- iH/53Klyxrw4YE3dt36dldzTm/7zuYD1fE8hgjMIVzC4PqcQyFSR1YAUcPiiIoWgEi3R1vnD7VkqT
- vAcjy+VcHD3i4NCZYQIxhMha6K7/YXWQy9JvTQw5J2MQ0/vbvivettle4yOfavsPUHtmWbljG1WcL
- q0L8aYCirIjRgyTkKv1JozpGA2LfQpjyCzj/j9c+ozLcOzsAZaEa/dLfbAjuXUSpuCndrokRX71NN
- 6g0ulNTF18x3lD2yIv1W6gFj;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1rnlbx-002QTg-2j; Fri, 22 Mar 2024 20:35:34 +0000
-Message-ID: <f09a03b8f405c2cc9a2e97df5576a927eb823cdd.camel@samba.org>
-Subject: Re: Fwd: Regression: ldb performance with indexes
-To: =?ISO-8859-1?Q?Andr=E9as?= LEROUX <aleroux@tranquil.it>, 
- samba-technical@lists.samba.org
-Date: Sat, 23 Mar 2024 09:35:27 +1300
-In-Reply-To: <b7669c93-fb36-4949-bea0-c295836ebd27@tranquil.it>
-References: <4856178.OV4Wx5bFTl@magrathea>
- <44c7b6c9-519a-4b01-ae62-2d03b033c3d4@tranquil.it>
- <b7669c93-fb36-4949-bea0-c295836ebd27@tranquil.it>
-User-Agent: Evolution 3.36.5-0ubuntu1 
+ (Exim) id 1roG4T-0017mf-Ga
+ for samba-technical@lists.samba.org; Sun, 24 Mar 2024 05:07:04 +0000
+Received: by mail-lf1-x12e.google.com with SMTP id
+ 2adb3069b0e04-515a81928a1so356343e87.3
+ for <samba-technical@lists.samba.org>; Sat, 23 Mar 2024 22:07:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1711256820; x=1711861620; darn=lists.samba.org;
+ h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=kcQ7aqapAzWh9V2jYgjZvNL++i4wCg6TaQgakyEunLo=;
+ b=Gdio4oXQSTogB88UuQ/vWq5FCY8XC5GKtnVhx6mGoCLWjKoB6DonhhbjtYNg6bbR95
+ c7lWwrNDG4EI+aSNrkcQWl+ztNTPKyGfE7NgyhY0C0cPkEWIlj7x2qhg/Q/DhGj4NnEV
+ weMxlN6GT2mPCnmLEYbJ9bJgzwPto5dYF7GfP2wUN1nDxMqyuKwiT4eqqpjkwyZHXTxJ
+ tmdvxfnQ8awjU8l9UOPxEYPZ4fNmDU3XKCrs2UBAO3lnlLqlqdJ2Eroia+5AjimUmgpb
+ 12WymfpEmhqVanJq2fO30YJUjol1ErPaPf8d/S57oekFigo6YiTRlOSVmIEKszxW65qj
+ yySQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1711256820; x=1711861620;
+ h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=kcQ7aqapAzWh9V2jYgjZvNL++i4wCg6TaQgakyEunLo=;
+ b=XvqYyY5C4wfOipcIynz45c8hWv9VL0JMxq5jAFPxaF0BQaJA7kzcuk/eP+RPTrVCFk
+ 8B88BXdgRTdriIUoSD+PTe3cP8ysSQh45EnIpX4EoO++iDdg/PxgPSjo1qz4EKWbaUSp
+ uQzS4TAXSfPuBswOyVwrXTwAjSuGq+SxtFNN4r1lPZodFpNy/21a57AqFuZKhy7ZOJh8
+ GvTdv1J7vywy4+h5b/pu1YW3RSC5YJy4x2C4Mq+53PW2O6QIG/e6v9pVej+eQx20+t9O
+ IZLUas8A/9sK32tQy1gZzqung+eLdd4CglIGcKzo/ytYrPKwJ5AIew62zTgDuUgHBNJH
+ 2+lw==
+X-Gm-Message-State: AOJu0Yzx/rYqRLDotlKHkl+u/CMsjNrPh6U52PlEL2VMF+d5oGfBcmTz
+ vpEuSrRsJRspa9AnMXqTxKYImc40b0nOIk4ODBWuEs7i2PA16Q4uCtR+nMCPgzYm91hMVy5kDUc
+ yxWm7IymeuCgSyK5XmMR28YAGNXM=
+X-Google-Smtp-Source: AGHT+IEjiRV5XamzppIO6hae9gz9OzZSCuvxxDzciOqIO3plgnEYfQJ8Z1a7g7B/mvxwm+w4orKTmCSUKzZgcjakZUU=
+X-Received: by 2002:a05:6512:715:b0:513:2f96:72b5 with SMTP id
+ b21-20020a056512071500b005132f9672b5mr2482250lfs.33.1711256820226; Sat, 23
+ Mar 2024 22:07:00 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
+Date: Sun, 24 Mar 2024 00:06:49 -0500
+Message-ID: <CAH2r5mu0HtRs_5hmKFLoh+OhWsHroAAHwvH51chaPJWWmpGPSg@mail.gmail.com>
+Subject: [PATCH][SMB3 client] add trace event for mknod
+To: CIFS <linux-cifs@vger.kernel.org>
+Content-Type: multipart/mixed; boundary="000000000000e3fe3f06146106ee"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -61,176 +71,96 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
-Cc: Andreas Schneider <asn@samba.org>, yalemu@tranquil.it,
- Denis CARDON <dcardon@tranquil.it>
+From: Steve French via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Steve French <smfrench@gmail.com>
+Cc: Paulo Alcantara <pc@manguebit.com>,
+ samba-technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Fri, 2024-03-22 at 17:55 +0100, Andréas LEROUX wrote:
->     Hi Andreas and Andrew,
-> 
->     
-> 
->     >>>> > Hi,my colleagues discovered a performance
->     issue in libldb:
-> 
->     >>>> >
->     https://bugzilla.samba.org/show_bug.cgi?id=15590
-> 
->     >>>> > > > > As soon as you use indexes,
->     ldbadd will be magnitudes
-> 
->     >> slower than
-> 
->     >>>> > itwas before.Could some ldb expert please look
->     into it?
-> 
->     >>>> > > Your subject says a regression. What
->     version is this a
-> 
->     >>>> regressionagainst?
-> 
->     >>>> Isn't that obvious from the bug report?
-> 
->     >>> Here is the short summary:
-> 
->     >>> $ bash repro.sh 20000 indexesAdded 2 records
->     successfullyAdded
-> 
->     >> 20000
-> 
->     >>> records successfully
-> 
->     >>> On Samba 4.10: 0m01.231sOn Samba 4.19: 1m30.924s
->     (that's 90 times
-> 
->     >>> slower)
-> 
->     >>>> > The very nature of a DB index is that it will
->     take time to
-> 
->     >>>> create,possibly a lot of time, but should make
->     reads faster.
-> 
->     >>>> Either the DB index doesn't work at all in Samba
->     4.10 or there
-> 
->     >> is a
-> 
->     >>> huge performance problem in Samba 4.19. What is it?
-> 
->     >> 
-> 
->     >> Thanks, that wasn't written as obviously on the bug, thanks
->     for the
-> 
->     >> clarification.
-> 
->     > 
-> 
->     > I used our CentOS 8 Stream CI image for bisecting. You can't
->     bisect
-> 
->     > easily on a modern Linux Distribution, as the included waf
->     would not
-> 
->     > have support for newer Python versions like 3.12.
-> 
->     > 
-> 
->     > In case you want to reproduce it, here is my run:
-> 
->     
-> 
->     I'm Andréas from Tranquil IT dev team. Denis and Yohannès asked
-> me
->     this week to take a look at the performance issues on large
-> domains,
->     which include this issue in the current thread along the mdb
-> large
->     transaction issues.
-> 
->     
-> 
->     The attached patchset goes through all the tdb and ldb make test.
-> 
->     
-> 
->     * LMDB : increase MDB_IDL_LOGN from 16 to 18 to accomodate large
->     nested transactions
-> 
->     * tdb : fail-fast when record hash doesn't match expected hash to
->     avoid to read/copy the entire record
-> 
->     * ldb : increase DEFAULT_INDEX_CACHE_SIZE from 491 to 8089 to
->     increase the number of bucket to have smaller bucket to have
-> faster
->     iteration in each buckets in tdb_find
-> 
->     
-> 
->     With this patchset we can upgrade large domains (>200k
->       objects) to FL2k16 level in approximatly 1 hour instead of 3
-> days
->       :-) 
-> 
->     
-> 
->     [root@srvads1-bl1cw ~]# bash repro.sh 20000 indexes
-> Added 2 records successfully
-> Added 20000 records successfully
-> real    0m0.536s
-> user    0m0.798s
-> sys     0m0.105s
-> 
->     Tranquil IT team is expert at deploying Samba-AD in large
->       domains, but we are not core devs, so I may have missed
-> something
->       during my debugging / patching session. Don't hesitate to
-> comment
->       and tell me what you think about this patchset, if there are
-> some
->       pitfalls that I missed or if the style can be improved.
-Firstly, these are very impressive improvements.
+--000000000000e3fe3f06146106ee
+Content-Type: text/plain; charset="UTF-8"
 
-Thanks so much for your work debugging this and getting to the root of
-the problem, this is very much appreciated. 
-Do you have any data on how much of the improvement is due to ldb
-patch, and how much is due to each of the other patches? 
+See attached
 
-Did you happen to use Brendan Greg's FlameGraph tool for the debugging
-(this is what we often use), and if so, can you share the graphs?  I
-want to understand if perhaps we need to consider restructuring the
-caller. 
-https://www.brendangregg.com/FlameGraphs/cpuflamegraphs.html#Instructions
+Add trace points to help debug mknod and mkfifo:
 
-For this series if you could please:
- - send in a send in a Samba Developer Declaration per 
-https://www.samba.org/samba/devel/copyright-policy.html
- - create a gitlab account
- - let me know the username
+   smb3_mknod_done
+   smb3_mknod_enter
+   smb3_mknod_err
 
-Once I give you access to the devel repo, so you can run the full
-testsuite under our quota, please follow our contribution steps here:
-https://wiki.samba.org/index.php/Contribute#Subsequent_Merge_Requests_(and_complex_first_requests)
+Example output:
 
-Create one merge request for each of the two patches.  I realise that
-seems overkill, but the LMDB cache size change is much easier to
-justify in the interim. 
+      TASK-PID     CPU#  |||||  TIMESTAMP  FUNCTION
+         | |         |   |||||     |         |
+    mkfifo-6163    [003] .....   960.425558: smb3_mknod_enter: xid=12
+sid=0xb55130f6 tid=0x46e6241c path=\fifo1
+    mkfifo-6163    [003] .....   960.432719: smb3_mknod_done: xid=12
+sid=0xb55130f6 tid=0x46e6241c
 
-This will help ensure we have this as a fully checked merged request
-that we can get into the tree.
 
-Of course the LMDB patch needs to go to upstream, but is of course most
-valued. 
-
-Andrew Bartlett
 -- 
+Thanks,
 
-Andrew Bartlett (he/him)       https://samba.org/~abartlet/Samba Team Member (since 2001) https://samba.orgSamba Team Lead                https://catalyst.net.nz/services/sambaCatalyst.Net Ltd
-Proudly developing Samba for Catalyst.Net Ltd - a Catalyst IT group
-company
-Samba Development and Support: https://catalyst.net.nz/services/samba
-Catalyst IT - Expert Open Source Solutions
+Steve
+
+--000000000000e3fe3f06146106ee
+Content-Type: text/x-patch; charset="US-ASCII"; 
+	name="0001-smb3-add-trace-event-for-mknod.patch"
+Content-Disposition: attachment; 
+	filename="0001-smb3-add-trace-event-for-mknod.patch"
+Content-Transfer-Encoding: base64
+Content-ID: <f_lu523hfx0>
+X-Attachment-Id: f_lu523hfx0
+
+RnJvbSBiZGEwYjA2YzAyNjNkNGQ0Mjk4OTEyNDgyNjc1MWQ5ZTdmYTgyOTc4IE1vbiBTZXAgMTcg
+MDA6MDA6MDAgMjAwMQpGcm9tOiBTdGV2ZSBGcmVuY2ggPHN0ZnJlbmNoQG1pY3Jvc29mdC5jb20+
+CkRhdGU6IFN1biwgMjQgTWFyIDIwMjQgMDA6MDE6MDIgLTA1MDAKU3ViamVjdDogW1BBVENIXSBz
+bWIzOiBhZGQgdHJhY2UgZXZlbnQgZm9yIG1rbm9kCgpBZGQgdHJhY2UgcG9pbnRzIHRvIGhlbHAg
+ZGVidWcgbWtub2QgYW5kIG1rZmlmbzoKCiAgIHNtYjNfbWtub2RfZG9uZQogICBzbWIzX21rbm9k
+X2VudGVyCiAgIHNtYjNfbWtub2RfZXJyCgpFeGFtcGxlIG91dHB1dDoKCiAgICAgIFRBU0stUElE
+ICAgICBDUFUjICB8fHx8fCAgVElNRVNUQU1QICBGVU5DVElPTgogICAgICAgICB8IHwgICAgICAg
+ICB8ICAgfHx8fHwgICAgIHwgICAgICAgICB8CiAgICBta2ZpZm8tNjE2MyAgICBbMDAzXSAuLi4u
+LiAgIDk2MC40MjU1NTg6IHNtYjNfbWtub2RfZW50ZXI6IHhpZD0xMiBzaWQ9MHhiNTUxMzBmNiB0
+aWQ9MHg0NmU2MjQxYyBwYXRoPVxmaWZvMQogICAgbWtmaWZvLTYxNjMgICAgWzAwM10gLi4uLi4g
+ICA5NjAuNDMyNzE5OiBzbWIzX21rbm9kX2RvbmU6IHhpZD0xMiBzaWQ9MHhiNTUxMzBmNiB0aWQ9
+MHg0NmU2MjQxYwoKU2lnbmVkLW9mZi1ieTogU3RldmUgRnJlbmNoIDxzdGZyZW5jaEBtaWNyb3Nv
+ZnQuY29tPgotLS0KIGZzL3NtYi9jbGllbnQvZGlyLmMgICB8IDcgKysrKysrKwogZnMvc21iL2Ns
+aWVudC90cmFjZS5oIHwgNCArKystCiAyIGZpbGVzIGNoYW5nZWQsIDEwIGluc2VydGlvbnMoKyks
+IDEgZGVsZXRpb24oLSkKCmRpZmYgLS1naXQgYS9mcy9zbWIvY2xpZW50L2Rpci5jIGIvZnMvc21i
+L2NsaWVudC9kaXIuYwppbmRleCA4OTMzM2Q5YmNlMzYuLmQxMWRjM2FhNDU4YiAxMDA2NDQKLS0t
+IGEvZnMvc21iL2NsaWVudC9kaXIuYworKysgYi9mcy9zbWIvY2xpZW50L2Rpci5jCkBAIC02MTIs
+MTEgKzYxMiwxOCBAQCBpbnQgY2lmc19ta25vZChzdHJ1Y3QgbW50X2lkbWFwICppZG1hcCwgc3Ry
+dWN0IGlub2RlICppbm9kZSwKIAkJZ290byBta25vZF9vdXQ7CiAJfQogCisJdHJhY2Vfc21iM19t
+a25vZF9lbnRlcih4aWQsIHRjb24tPnNlcy0+U3VpZCwgdGNvbi0+dGlkLCBmdWxsX3BhdGgpOwor
+CiAJcmMgPSB0Y29uLT5zZXMtPnNlcnZlci0+b3BzLT5tYWtlX25vZGUoeGlkLCBpbm9kZSwgZGly
+ZW50cnksIHRjb24sCiAJCQkJCSAgICAgICBmdWxsX3BhdGgsIG1vZGUsCiAJCQkJCSAgICAgICBk
+ZXZpY2VfbnVtYmVyKTsKIAogbWtub2Rfb3V0OgorCWlmIChyYykKKwkJdHJhY2Vfc21iM19ta25v
+ZF9lcnIoeGlkLCAgdGNvbi0+c2VzLT5TdWlkLCB0Y29uLT50aWQsIHJjKTsKKwllbHNlCisJCXRy
+YWNlX3NtYjNfbWtub2RfZG9uZSh4aWQsIHRjb24tPnNlcy0+U3VpZCwgdGNvbi0+dGlkKTsKKwog
+CWZyZWVfZGVudHJ5X3BhdGgocGFnZSk7CiAJZnJlZV94aWQoeGlkKTsKIAljaWZzX3B1dF90bGlu
+ayh0bGluayk7CmRpZmYgLS1naXQgYS9mcy9zbWIvY2xpZW50L3RyYWNlLmggYi9mcy9zbWIvY2xp
+ZW50L3RyYWNlLmgKaW5kZXggZjljMWZkMzJkMGI4Li41ZTgzY2I5ZGE5MDIgMTAwNjQ0Ci0tLSBh
+L2ZzL3NtYi9jbGllbnQvdHJhY2UuaAorKysgYi9mcy9zbWIvY2xpZW50L3RyYWNlLmgKQEAgLTM3
+NSw2ICszNzUsNyBAQCBERUZJTkVfU01CM19JTkZfQ09NUE9VTkRfRU5URVJfRVZFTlQoZ2V0X3Jl
+cGFyc2VfY29tcG91bmRfZW50ZXIpOwogREVGSU5FX1NNQjNfSU5GX0NPTVBPVU5EX0VOVEVSX0VW
+RU5UKGRlbGV0ZV9lbnRlcik7CiBERUZJTkVfU01CM19JTkZfQ09NUE9VTkRfRU5URVJfRVZFTlQo
+bWtkaXJfZW50ZXIpOwogREVGSU5FX1NNQjNfSU5GX0NPTVBPVU5EX0VOVEVSX0VWRU5UKHRkaXNf
+ZW50ZXIpOworREVGSU5FX1NNQjNfSU5GX0NPTVBPVU5EX0VOVEVSX0VWRU5UKG1rbm9kX2VudGVy
+KTsKIAogREVDTEFSRV9FVkVOVF9DTEFTUyhzbWIzX2luZl9jb21wb3VuZF9kb25lX2NsYXNzLAog
+CVRQX1BST1RPKHVuc2lnbmVkIGludCB4aWQsCkBAIC00MTUsNyArNDE2LDcgQEAgREVGSU5FX1NN
+QjNfSU5GX0NPTVBPVU5EX0RPTkVfRVZFTlQocXVlcnlfd3NsX2VhX2NvbXBvdW5kX2RvbmUpOwog
+REVGSU5FX1NNQjNfSU5GX0NPTVBPVU5EX0RPTkVfRVZFTlQoZGVsZXRlX2RvbmUpOwogREVGSU5F
+X1NNQjNfSU5GX0NPTVBPVU5EX0RPTkVfRVZFTlQobWtkaXJfZG9uZSk7CiBERUZJTkVfU01CM19J
+TkZfQ09NUE9VTkRfRE9ORV9FVkVOVCh0ZGlzX2RvbmUpOwotCitERUZJTkVfU01CM19JTkZfQ09N
+UE9VTkRfRE9ORV9FVkVOVChta25vZF9kb25lKTsKIAogREVDTEFSRV9FVkVOVF9DTEFTUyhzbWIz
+X2luZl9jb21wb3VuZF9lcnJfY2xhc3MsCiAJVFBfUFJPVE8odW5zaWduZWQgaW50IHhpZCwKQEAg
+LTQ2MSw2ICs0NjIsNyBAQCBERUZJTkVfU01CM19JTkZfQ09NUE9VTkRfRVJSX0VWRU5UKHF1ZXJ5
+X3dzbF9lYV9jb21wb3VuZF9lcnIpOwogREVGSU5FX1NNQjNfSU5GX0NPTVBPVU5EX0VSUl9FVkVO
+VChta2Rpcl9lcnIpOwogREVGSU5FX1NNQjNfSU5GX0NPTVBPVU5EX0VSUl9FVkVOVChkZWxldGVf
+ZXJyKTsKIERFRklORV9TTUIzX0lORl9DT01QT1VORF9FUlJfRVZFTlQodGRpc19lcnIpOworREVG
+SU5FX1NNQjNfSU5GX0NPTVBPVU5EX0VSUl9FVkVOVChta25vZF9lcnIpOwogCiAvKgogICogRm9y
+IGxvZ2dpbmcgU01CMyBTdGF0dXMgY29kZSBhbmQgQ29tbWFuZCBmb3IgcmVzcG9uc2VzIHdoaWNo
+IHJldHVybiBlcnJvcnMKLS0gCjIuNDAuMQoK
+--000000000000e3fe3f06146106ee--
+
