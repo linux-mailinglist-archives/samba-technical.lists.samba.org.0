@@ -2,62 +2,143 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id C782D887BBB
-	for <lists+samba-technical@lfdr.de>; Sun, 24 Mar 2024 06:07:52 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2E7A188A1A1
+	for <lists+samba-technical@lfdr.de>; Mon, 25 Mar 2024 14:22:13 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=kcQ7aqapAzWh9V2jYgjZvNL++i4wCg6TaQgakyEunLo=; b=ajuzMqrF0wsjmCf/XC23+/S4cK
-	VJ87fbgbrV3CZYpFk0BpVFInGjAX9/XNWJD+r5R2vH818OQdTFS8rOOGOz+Ol3KUhFQayk1FcN2Ic
-	4aGQcDd+w+qqjpshGp/sj/HJHEpIFJrxap3ood8NTNMmjDQ4GIFcTwB+GgM4TE4giTyEOwK/T5lVA
-	dfaTp97qWSVq9sQEgkxXwDblLxspKqfHaGlPmST9q21hfHFTwukGjyUxE+vgjpeRf3YhGoFQpwOJ4
-	h0BrCcyx4KyJl/pTvrTUiJ9h7lR72Y+QxEOZ1eSPx5sRw46qcBgqac5eAdnQJlTMMJdtXHUqKZePS
-	9UiUqmFA==;
-Received: from ip6-localhost ([::1]:59344 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
+	bh=Pa4oM2DJzAWitv2awq7SEZ8m02O49MUxFahnKPIJ7gY=; b=Bb4iL1Igg8hwY/ukzux31jVvYX
+	3k2MizfohfOu9jZjlMbkQBosD4VId6dEg4KHt+QDYPVMqWZs+iaL3sjAnzqz48LcWk+gfiYQSfnft
+	GvRcBQX67awU1exXK3zKaQ0KKkNUFXypA79i+Uh1mB3d3dIwydYnjF9c0U/j7146KgA7OSApTk0+0
+	y5WFcX/HMzkk2hAkJx3/hjem2SZXUYeJaonKHqPfrMp8+iwCWIyu/1G+Q3IgzbOay3KXrca6J/tzT
+	vY+pDrQf3oql1E7Bed+zHmKRXorVnsTR9c1hpgZ+ybhlfXreYDVKg0T4bibi72GE8DB6mqbkpiQQN
+	WvkAWBNQ==;
+Received: from ip6-localhost ([::1]:34720 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1roG4X-0017mo-8o; Sun, 24 Mar 2024 05:07:06 +0000
-Received: from mail-lf1-x12e.google.com ([2a00:1450:4864:20::12e]:53633) 
+	id 1rokGi-001Eyo-2L; Mon, 25 Mar 2024 13:21:41 +0000
+Received: from mx0a-00069f02.pphosted.com ([205.220.165.32]:49294) 
  by hr1.samba.org with esmtps
- (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1roG4T-0017mf-Ga
- for samba-technical@lists.samba.org; Sun, 24 Mar 2024 05:07:04 +0000
-Received: by mail-lf1-x12e.google.com with SMTP id
- 2adb3069b0e04-515a81928a1so356343e87.3
- for <samba-technical@lists.samba.org>; Sat, 23 Mar 2024 22:07:02 -0700 (PDT)
+ (TLS1.2:ECDHE_SECP256R1__RSA_SHA512__AES_256_GCM:256) (Exim)
+ id 1rokGS-001Eyc-TI
+ for samba-technical@lists.samba.org; Mon, 25 Mar 2024 13:21:39 +0000
+Received: from pps.filterd (m0246627.ppops.net [127.0.0.1])
+ by mx0b-00069f02.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
+ 42P8pNLu020195
+ for <samba-technical@lists.samba.org>; Mon, 25 Mar 2024 11:48:35 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
+ h=message-id : date :
+ to : from : subject : content-type : content-transfer-encoding :
+ mime-version; s=corp-2023-11-20;
+ bh=Pa4oM2DJzAWitv2awq7SEZ8m02O49MUxFahnKPIJ7gY=;
+ b=KhEygcSU0cPGkPx40O2lzQh3iZ0ygHcaBeSe0YqZ3yFERR+7NUoVp57/vD1tnzljeVX3
+ BwfpC6ze1eW0Vr4mkk9TRR8yRNo8lWa9SO+RbpbiRTE2hfL2v15rar6hxaMOZC9keh3c
+ TO50CF+Kke2CBbHkCG5AeJNLHz7XvSz4FtUNcpVqYWCekrhJjVYpQEozgdkBzM6myy4X
+ B9S/ZjrGrUUz7UH1QynalLbvoKF+kIa3lUSh1PjDkHZ0uAjY1QhF5m5muoxXZYT17ksG
+ 2FwKY2Gg5qIed81LP34kr7dQHr3fqBor2LJwkKECvRzp7XXfWrXNhBU4RZKONnryZEp2 aQ== 
+Received: from iadpaimrmta03.imrmtpd1.prodappiadaev1.oraclevcn.com
+ (iadpaimrmta03.appoci.oracle.com [130.35.103.27])
+ by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 3x1np2agqy-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK)
+ for <samba-technical@lists.samba.org>; Mon, 25 Mar 2024 11:48:34 +0000
+Received: from pps.filterd
+ (iadpaimrmta03.imrmtpd1.prodappiadaev1.oraclevcn.com [127.0.0.1])
+ by iadpaimrmta03.imrmtpd1.prodappiadaev1.oraclevcn.com (8.17.1.19/8.17.1.19)
+ with ESMTP id 42PA41MS016113
+ for <samba-technical@lists.samba.org>; Mon, 25 Mar 2024 11:48:33 GMT
+Received: from nam12-dm6-obe.outbound.protection.outlook.com
+ (mail-dm6nam12lp2169.outbound.protection.outlook.com [104.47.59.169])
+ by iadpaimrmta03.imrmtpd1.prodappiadaev1.oraclevcn.com (PPS) with ESMTPS id
+ 3x1nh5c8nr-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK)
+ for <samba-technical@lists.samba.org>; Mon, 25 Mar 2024 11:48:33 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=D6gUyveuFFN3yosdGQncCrW5FKQAZY05tsUdfdIZdqk2dtTmuRd8YRQsRVw3mApZTYbCQ+TujsZFS4B/ooz7/BKxFMC+u1rtK5Xcm89IbM16y6PTqTbpAxkuY9A3aLaBSAeJfmZoIvSNsTiqRJYxeWfx1rVcXCJXcuoLlUdSxyVNOxA6XiazwBBROw8ylxxcJMme/th4hQlgV0aNTowi3OSEapREVthEiQATOKdVxdH7y3dNn5MdN68V8DHdc9x3ILuoxzv/u8xayqCmUT13MY2lv68/DHilHR7rAKbkAsgRieqW3QKBMqh5Idbjp7SV04u/nRI0uhC+IEoFB6S10Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=Pa4oM2DJzAWitv2awq7SEZ8m02O49MUxFahnKPIJ7gY=;
+ b=iuo5O32irdO3eF/0dAwfYncOBB+GE+SsItgfa7uzlMUWpUxRBRMjEMnZcVPuQV4UnZQe3vAT3hFsbDW+j1s87aGBj9vjkYul/5mpZ+HlLBkfvFG5XH1sGpBROnjEh2vCHWXLIeP2dKAo8So3mxkymzuLduD9NixONyjiqMInXr4zDMlrjsO0RhEtx08GBDTLyoy1TB9V3YXkdXFluU/CHm4w9kBjdIB5v0nQJkdi7L4uTZlN+FZb2v+QdrF9uOPZmTgb9NoZRl9H9Kr5V7+4lZI/94X2krzOmUxm5oTmYURMqvv+c7mcJbBmrQ2POpsPsgPZLjxSpiB5ZKUbvk7A/g==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oracle.com; dmarc=pass action=none header.from=oracle.com;
+ dkim=pass header.d=oracle.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1711256820; x=1711861620; darn=lists.samba.org;
- h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=kcQ7aqapAzWh9V2jYgjZvNL++i4wCg6TaQgakyEunLo=;
- b=Gdio4oXQSTogB88UuQ/vWq5FCY8XC5GKtnVhx6mGoCLWjKoB6DonhhbjtYNg6bbR95
- c7lWwrNDG4EI+aSNrkcQWl+ztNTPKyGfE7NgyhY0C0cPkEWIlj7x2qhg/Q/DhGj4NnEV
- weMxlN6GT2mPCnmLEYbJ9bJgzwPto5dYF7GfP2wUN1nDxMqyuKwiT4eqqpjkwyZHXTxJ
- tmdvxfnQ8awjU8l9UOPxEYPZ4fNmDU3XKCrs2UBAO3lnlLqlqdJ2Eroia+5AjimUmgpb
- 12WymfpEmhqVanJq2fO30YJUjol1ErPaPf8d/S57oekFigo6YiTRlOSVmIEKszxW65qj
- yySQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711256820; x=1711861620;
- h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=kcQ7aqapAzWh9V2jYgjZvNL++i4wCg6TaQgakyEunLo=;
- b=XvqYyY5C4wfOipcIynz45c8hWv9VL0JMxq5jAFPxaF0BQaJA7kzcuk/eP+RPTrVCFk
- 8B88BXdgRTdriIUoSD+PTe3cP8ysSQh45EnIpX4EoO++iDdg/PxgPSjo1qz4EKWbaUSp
- uQzS4TAXSfPuBswOyVwrXTwAjSuGq+SxtFNN4r1lPZodFpNy/21a57AqFuZKhy7ZOJh8
- GvTdv1J7vywy4+h5b/pu1YW3RSC5YJy4x2C4Mq+53PW2O6QIG/e6v9pVej+eQx20+t9O
- IZLUas8A/9sK32tQy1gZzqung+eLdd4CglIGcKzo/ytYrPKwJ5AIew62zTgDuUgHBNJH
- 2+lw==
-X-Gm-Message-State: AOJu0Yzx/rYqRLDotlKHkl+u/CMsjNrPh6U52PlEL2VMF+d5oGfBcmTz
- vpEuSrRsJRspa9AnMXqTxKYImc40b0nOIk4ODBWuEs7i2PA16Q4uCtR+nMCPgzYm91hMVy5kDUc
- yxWm7IymeuCgSyK5XmMR28YAGNXM=
-X-Google-Smtp-Source: AGHT+IEjiRV5XamzppIO6hae9gz9OzZSCuvxxDzciOqIO3plgnEYfQJ8Z1a7g7B/mvxwm+w4orKTmCSUKzZgcjakZUU=
-X-Received: by 2002:a05:6512:715:b0:513:2f96:72b5 with SMTP id
- b21-20020a056512071500b005132f9672b5mr2482250lfs.33.1711256820226; Sat, 23
- Mar 2024 22:07:00 -0700 (PDT)
+ d=oracle.onmicrosoft.com; s=selector2-oracle-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Pa4oM2DJzAWitv2awq7SEZ8m02O49MUxFahnKPIJ7gY=;
+ b=FTYDITYjKUApTS2OuTMce8g8GEW7fCARx6OAZZmxmNrN5spgqgGVBp1rJ4pmWLg+b/NkUV8uGWLS6pAOnHLcV8ojz4xG5MHeYman4MR2awIRWGBN3IXdm5fORmC0ngi/J8VO778B5uJ4I6h4WhiETv+ZnT1KCVuDrKh2ySpDSGw=
+Received: from PH7SPRMB0112.namprd10.prod.outlook.com (2603:10b6:510:27b::15)
+ by CH3PR10MB7713.namprd10.prod.outlook.com (2603:10b6:610:1bc::6)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7409.31; Mon, 25 Mar
+ 2024 11:48:31 +0000
+Received: from PH7SPRMB0112.namprd10.prod.outlook.com
+ ([fe80::275d:1e2:ebd2:e8df]) by PH7SPRMB0112.namprd10.prod.outlook.com
+ ([fe80::275d:1e2:ebd2:e8df%4]) with mapi id 15.20.7409.026; Mon, 25 Mar 2024
+ 11:48:28 +0000
+Message-ID: <60725160-9dc1-446e-8abf-c96be94b50a8@oracle.com>
+Date: Mon, 25 Mar 2024 12:48:23 +0100
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US
+To: samba-technical <samba-technical@lists.samba.org>
+Subject: How to obtain username in idmap_tdb2 script?
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 MIME-Version: 1.0
-Date: Sun, 24 Mar 2024 00:06:49 -0500
-Message-ID: <CAH2r5mu0HtRs_5hmKFLoh+OhWsHroAAHwvH51chaPJWWmpGPSg@mail.gmail.com>
-Subject: [PATCH][SMB3 client] add trace event for mknod
-To: CIFS <linux-cifs@vger.kernel.org>
-Content-Type: multipart/mixed; boundary="000000000000e3fe3f06146106ee"
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PH7SPRMB0112:EE_|CH3PR10MB7713:EE_
+X-MS-Office365-Filtering-Correlation-Id: cc47f0c0-2030-4d50-0172-08dc4cc17c9f
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam-Message-Info: TisYgOO+zl9s8bxOmCd4mAtwikT/AWKR23YpH+dNAj2XaGRufoWFtTPo+MFP9KFpPYfI1QaG2xeuI0+N8fvza1ExObMluNqszWBdX0O6cbOF+Wv34UG4MHJLmvSizY8OV9qxaD68aRkllPv1yaR3oeUjRDiuIAR/9J+8vmFW7lwpxnv32BfzYUTgSYcmlGcBRMd9IblyQzdAkVRzcg/e8wuJn6Q/060S3tyvkhfPyKWpAhkFgHU/yS89k5ul/1yqr+iexaGQKouLIP9+iK2vOZeNIGj3gN+cqiBwB7tigkPHV3zyiHP6uELIssoW28/kzDW7fKC0l7gBbihIW3xpe8iag5lI06t3vcZ6KzncCvfvclU2uU7s52S3/dcIj3ecdHNydsLR+dbABlwVHlO2mqz8JOVr6ei2AmeTuyKFQEK/8WYGqer4AwJRHk6auuU5jb6hL4LUnOBNKfdxhrOEGsn3N68vPPRsfwtOjHzoEGni2AsN3ZoZz8KtUbwWo6nvpNevXlj+zjq8nZ8O5+zu1Rxtrd8puOMg0kOl1IUwGNkygrtlFWH8PWEs9f7aaGY4UPAu0Xu0mdKHnDFHstbZ4rKeV0otUpy+sEOry423PoaarDTHgND0WxfmZHASxGKP7c8ExjA16jG5b3FvX2dX/jWFqEn9/UNL5pfTdFALQxk=
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?V25QZFJFVDc3TnoyTnlCUmhGOW5TU1NVT3JrNjRGQlZ1RStqaDVGQTdGMEVV?=
+ =?utf-8?B?d3JVRzQ0VE9qR3g4ZXIxNWZMeUphdEtsbzNDMmFoQ1o3UlB2b1M1b0svb0JU?=
+ =?utf-8?B?WFVwTEpDLzRDWHJ3TXdWR2FxekxRU3lkUnFRaHhWM0JJdmI5MHNLRGZla3Zr?=
+ =?utf-8?B?SzZzNVphU0FCOVpSOUdrM21ET1hZaHcydXhxNmZxM3I0UExTMEZ6QXlOdjZs?=
+ =?utf-8?B?dmx0WDBvYkE4WmVEMncxeVJqZHZ0eGdIOEJIMkNIdEE4UktSYTIzdmh1SUxm?=
+ =?utf-8?B?MFhmb2ZWdEZaUUFFQU1QRytMVGNaY1NnQlRFMGlRZnh2MG5ueklyblVib3Jh?=
+ =?utf-8?B?TyttcVJTMDNCV0VnMmRhQTVEdDc2clBLVi9DYVdxUDJIOHRTTlRXa1E0S2VB?=
+ =?utf-8?B?dTN0S0pnY1pzMThHd0xEb3NZb3Y1WDY0R0Nudmc0bllOZ1kwOUp1TENhOTFO?=
+ =?utf-8?B?WHdVVkdiZEdaTU9sYmNWaFRob1lpUi9LMUFVUHU2aTk5QkZiZlg4dEw2cUZU?=
+ =?utf-8?B?OEE3Rk1xYkFSbzlldUdCTS9aVW5wYlV1dGtSN3lwdzN6ai9EWlJQR2ZzVFRZ?=
+ =?utf-8?B?cnVWejlJOGs4TW5JQzZzRDRMcnhPV2tUdUlodjlMWldRQzJwWjdva0luNDhu?=
+ =?utf-8?B?ckhpSHhncUt6ZUhqSklaaVBRd0RhVFZBNm1sMndJWUMvdjNYaGtDTzZqWGNM?=
+ =?utf-8?B?TzNPd3NxVDRKUCtCWTZvRmZ3T1NhVEd6d0pmVk9KbTNZeTRjZmVXUFBxeUhp?=
+ =?utf-8?B?WGI2NlNwTTBmek1SWDZCUTJ0Y2xuMVoyTjlOejVGQldUeXlwZ1dlOVBTZlBz?=
+ =?utf-8?B?UlJLVEhTeTJPc3kwNEVlTEwxdUZPeDZoTFhVUXI4bGc0LzM1cmxzNUp5dG8x?=
+ =?utf-8?B?VkJuTitteWpWRTE5cE1PVnNPWFZXdXZJTmVzREpzNkpvaGo3ZW04UG9rL1pF?=
+ =?utf-8?B?QXZGL2Y0U2JXWkxPUitFRkVGbTRjaGEvcGdtajdFbU4xRVE1L0VjSVI5WVUy?=
+ =?utf-8?B?NVJQQWNENVIrM1lIUEtLNnRTZkZ5WU1lb0hHQXErZlZHODVWVXJtS0lUd014?=
+ =?utf-8?B?OXVCSnNIVEhXN0dCejdWdXBlNFlKb3J0aDZDcmxuR2ZsRExUampRQ09ld3pF?=
+ =?utf-8?B?NkRHejlVL0FFNGo5MThzVzVqaVpnZ3VqeHJCcER1VzlmTWo2KzIyUk5RcVB6?=
+ =?utf-8?B?WHV0K0J1cnR5ZCt2WkI1ZVlSYWRyU3NxY04vNTcyaDhJTHo1Ni9ISy9PR2dV?=
+ =?utf-8?B?YSttQTIxc2QwRHM5YldxRURuL3p1WHRMWEVHRDRuaGQyS29iblh1Q0x1Vzhi?=
+ =?utf-8?B?N1dFZFJSTkx5eitEWHpHcGEyZVZNdDNVNHlVenZWUnV6WXdzcWNRcVFQMzZi?=
+ =?utf-8?B?Z0k4cmRxUFVSZWswODZIUXp4d0FQSjhFckdZU2pKbUgrbWk4aHk5VzNDT2RD?=
+ =?utf-8?B?SXlYSVZQbmEzUWhmSzB5YkFmK3VFSTg0cUJJdHc0ZHMrMGVqR3ZGenorUXoy?=
+ =?utf-8?B?dC96a25iY08wcmRCZ2FSUytITlNrVDFIREhYcGtUM2ROYXlEeEJsUjRrQ2VQ?=
+ =?utf-8?B?QXFjN1JPdWlFREpYWEJhZW9BRTkxaDZEa2FXZmc5RnFEcGZqN0h2R2JCbDUz?=
+ =?utf-8?B?ZWhEbmpsZkY2SUgvdkp5RzFvVXVOekVLYXlRWkd1SkFpQnVmcEZkZGxaVkF0?=
+ =?utf-8?B?SkFyWDdzZE9RSXBLakZyaUFMOEU3RCs2d3BiTUJNMG52WG4vVUpKbERTTjJM?=
+ =?utf-8?B?d0ZUME1obE9EWExuVE1DQWxNVWxBcE9rOWR0OWNJcVN4MXRqMXlkWE9Ld1RI?=
+ =?utf-8?B?WVpFSy84MkgwM2lSaSsxV1BNMlMvaXNFV0hsYTJJRVQvQTRZUmJCdUp3Yith?=
+ =?utf-8?B?aHh0djVXbXdsZWNtWUtSWFBoeW5wMlByU05qd2drM2tjWjlFMVpjd21PYlBY?=
+ =?utf-8?B?aDdyc0VKNFhPZm9MUTFBQ2NMRmxQNVpCNnVCUFN4K2NtS2tYakh4OWFZTnkw?=
+ =?utf-8?B?R3p0RHFET3dCd3k3QUxHSFpCNW1FekgrZW5HcWw3SEUyT1JNZWg5UEE3b3Rq?=
+ =?utf-8?B?V2M4SU5rZXdoVjk1ejRHa0RyWlQweXNPNWFuNlIvNVY2SHFxL3ArdXVyYnhP?=
+ =?utf-8?Q?5NBUpZwy1k7wnr2ii0ZwWVHS+?=
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0: ZhFjy0w6ka/D39q5ZejQrm8SKVCUPyMb1RLfKlzqkBySVUCPFcOYpWAI0vzOvoa/hNxr+fKCGtJUD+Ffc4wSPxfjYGcaobQQvuweUAQDFaox7m1zs1N6xB1LKc9c92MDXzNuY+Dxxt2RQ26FILnfKWyTuu3wjFJPzDDmya6pnq93iY1QuTsOT+pvSjmJXxZGCg1fbfUOBZtyZRLkVziwvpC/svYAkJ8fjvssBPYlGv8hQTTulJsMHpZCCxhb8WCNF1nninXaGrhtAmqV3SZdP1OZk2yOs5P2/V1T59/1BH1YiUwcftKymv8OmWZEETHekh39TgEb2mSLbU9us2d83KxAOCQlZpQnHyvigmAfBUym04AXh7lRHjNP3iwkB//o/S8dXEOlL46cIgYjrW9yPHLjCobIOJkrblDy3tPEd3mppqIqeAwfHsGugypvg5uW5w5wC7pBPWLAJfPvlxfh7XpiU58ggOQJ3MygCPAYILaO0X5sTH3zZxFr/meURKCer3rqG00PVirXVHz34ulFVAZSVNNblOPwR3NbscWsBpF5WQueZZ497BdtyPi7Ql1GhzsWHKk3EwPIktKCPGnmi3OjXdK1qgp+SBPfsbRLE0A=
+X-OriginatorOrg: oracle.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: cc47f0c0-2030-4d50-0172-08dc4cc17c9f
+X-MS-Exchange-CrossTenant-AuthSource: PH7SPRMB0112.namprd10.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 4e2c6054-71cb-48f1-bd6c-3a9705aca71b
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: kXk9F9iLUkVypgHXyorl11Y1zYBDKzQSIMshvJoq25ueEqk4lHs8VhWxmrs6Ga4B1063JqLKWZllCEuqRH6i/Q==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR10MB7713
+X-Proofpoint-GUID: ay34NWJxJdodOiHRiTNC97JCYZ1EYO7P
+X-Proofpoint-ORIG-GUID: ay34NWJxJdodOiHRiTNC97JCYZ1EYO7P
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -71,96 +152,62 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
-Cc: Paulo Alcantara <pc@manguebit.com>,
- samba-technical <samba-technical@lists.samba.org>
+From: =?utf-8?q?Ji=C5=99=C3=AD_=C5=A0a=C5=A1ek_-_Solaris_Prague_via_samba-techn?=
+ =?utf-8?q?ical?= <samba-technical@lists.samba.org>
+Reply-To: =?UTF-8?B?SmnFmcOtIMWgYcWhZWsgLSBTb2xhcmlzIFByYWd1ZQ==?=
+ <jiri.sasek@oracle.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
---000000000000e3fe3f06146106ee
-Content-Type: text/plain; charset="UTF-8"
+Hello experts,
+I tried a script like:
 
-See attached
+#!/bin/bash
 
-Add trace points to help debug mknod and mkfifo:
+case $1 in
+   SIDTOID)
+     echo $1 $2 >> /var/samba/log/idmap_script
+     name=`/usr/bin/wbinfo -s $2`
+     echo resolved $name >> /var/samba/log/idmap_script
+...
 
-   smb3_mknod_done
-   smb3_mknod_enter
-   smb3_mknod_err
+to resolve user-name instead of SID to be able to lookup local 
+passwd/group tables for UID/GID and return it from the script.
 
-Example output:
+note: I also tried to set domain:
+   wbinfo --domain SMBSETUP ...
 
-      TASK-PID     CPU#  |||||  TIMESTAMP  FUNCTION
-         | |         |   |||||     |         |
-    mkfifo-6163    [003] .....   960.425558: smb3_mknod_enter: xid=12
-sid=0xb55130f6 tid=0x46e6241c path=\fifo1
-    mkfifo-6163    [003] .....   960.432719: smb3_mknod_done: xid=12
-sid=0xb55130f6 tid=0x46e6241c
+Goal is to avoid of using the username map in case the thousands of 
+users are needed to map.
+
+tested by command:
+wbinfo -i SMBSETUP\\User01
+
+/var/samba/log/idmap_script:
+SIDTOID S-1-5-21-2333814099-3920965580-3603487294-8647
+resolved
 
 
--- 
-Thanks,
+/var/samba/log/log.winbindd-idmap:
+[2024/03/25 10:19:11.783791,  3] 
+../../lib/util/modules.c:167(load_module_absolute_path)
+   load_module_absolute_path: Module 
+'/usr/lib/samba/sparcv9/idmap/tdb2.so' loaded
+[2024/03/25 10:19:11.784043,  1] 
+../../source3/winbindd/idmap_tdb2.c:561(idmap_tdb2_db_init)
+   using idmap script '/etc/samba/idmap_script'
+failed to call wbcLookupSid: WBC_ERR_DOMAIN_NOT_FOUND
+Could not lookup sid S-1-5-21-2333814099-3920965580-3603487294-8647
 
-Steve
+on command line (for reference):
+wbinfo -s S-1-5-21-2333814099-3920965580-3603487294-8647
+SMBSETUP\User01 1
+...it works fine
 
---000000000000e3fe3f06146106ee
-Content-Type: text/x-patch; charset="US-ASCII"; 
-	name="0001-smb3-add-trace-event-for-mknod.patch"
-Content-Disposition: attachment; 
-	filename="0001-smb3-add-trace-event-for-mknod.patch"
-Content-Transfer-Encoding: base64
-Content-ID: <f_lu523hfx0>
-X-Attachment-Id: f_lu523hfx0
+Do you have an idea how to solve this issue?
 
-RnJvbSBiZGEwYjA2YzAyNjNkNGQ0Mjk4OTEyNDgyNjc1MWQ5ZTdmYTgyOTc4IE1vbiBTZXAgMTcg
-MDA6MDA6MDAgMjAwMQpGcm9tOiBTdGV2ZSBGcmVuY2ggPHN0ZnJlbmNoQG1pY3Jvc29mdC5jb20+
-CkRhdGU6IFN1biwgMjQgTWFyIDIwMjQgMDA6MDE6MDIgLTA1MDAKU3ViamVjdDogW1BBVENIXSBz
-bWIzOiBhZGQgdHJhY2UgZXZlbnQgZm9yIG1rbm9kCgpBZGQgdHJhY2UgcG9pbnRzIHRvIGhlbHAg
-ZGVidWcgbWtub2QgYW5kIG1rZmlmbzoKCiAgIHNtYjNfbWtub2RfZG9uZQogICBzbWIzX21rbm9k
-X2VudGVyCiAgIHNtYjNfbWtub2RfZXJyCgpFeGFtcGxlIG91dHB1dDoKCiAgICAgIFRBU0stUElE
-ICAgICBDUFUjICB8fHx8fCAgVElNRVNUQU1QICBGVU5DVElPTgogICAgICAgICB8IHwgICAgICAg
-ICB8ICAgfHx8fHwgICAgIHwgICAgICAgICB8CiAgICBta2ZpZm8tNjE2MyAgICBbMDAzXSAuLi4u
-LiAgIDk2MC40MjU1NTg6IHNtYjNfbWtub2RfZW50ZXI6IHhpZD0xMiBzaWQ9MHhiNTUxMzBmNiB0
-aWQ9MHg0NmU2MjQxYyBwYXRoPVxmaWZvMQogICAgbWtmaWZvLTYxNjMgICAgWzAwM10gLi4uLi4g
-ICA5NjAuNDMyNzE5OiBzbWIzX21rbm9kX2RvbmU6IHhpZD0xMiBzaWQ9MHhiNTUxMzBmNiB0aWQ9
-MHg0NmU2MjQxYwoKU2lnbmVkLW9mZi1ieTogU3RldmUgRnJlbmNoIDxzdGZyZW5jaEBtaWNyb3Nv
-ZnQuY29tPgotLS0KIGZzL3NtYi9jbGllbnQvZGlyLmMgICB8IDcgKysrKysrKwogZnMvc21iL2Ns
-aWVudC90cmFjZS5oIHwgNCArKystCiAyIGZpbGVzIGNoYW5nZWQsIDEwIGluc2VydGlvbnMoKyks
-IDEgZGVsZXRpb24oLSkKCmRpZmYgLS1naXQgYS9mcy9zbWIvY2xpZW50L2Rpci5jIGIvZnMvc21i
-L2NsaWVudC9kaXIuYwppbmRleCA4OTMzM2Q5YmNlMzYuLmQxMWRjM2FhNDU4YiAxMDA2NDQKLS0t
-IGEvZnMvc21iL2NsaWVudC9kaXIuYworKysgYi9mcy9zbWIvY2xpZW50L2Rpci5jCkBAIC02MTIs
-MTEgKzYxMiwxOCBAQCBpbnQgY2lmc19ta25vZChzdHJ1Y3QgbW50X2lkbWFwICppZG1hcCwgc3Ry
-dWN0IGlub2RlICppbm9kZSwKIAkJZ290byBta25vZF9vdXQ7CiAJfQogCisJdHJhY2Vfc21iM19t
-a25vZF9lbnRlcih4aWQsIHRjb24tPnNlcy0+U3VpZCwgdGNvbi0+dGlkLCBmdWxsX3BhdGgpOwor
-CiAJcmMgPSB0Y29uLT5zZXMtPnNlcnZlci0+b3BzLT5tYWtlX25vZGUoeGlkLCBpbm9kZSwgZGly
-ZW50cnksIHRjb24sCiAJCQkJCSAgICAgICBmdWxsX3BhdGgsIG1vZGUsCiAJCQkJCSAgICAgICBk
-ZXZpY2VfbnVtYmVyKTsKIAogbWtub2Rfb3V0OgorCWlmIChyYykKKwkJdHJhY2Vfc21iM19ta25v
-ZF9lcnIoeGlkLCAgdGNvbi0+c2VzLT5TdWlkLCB0Y29uLT50aWQsIHJjKTsKKwllbHNlCisJCXRy
-YWNlX3NtYjNfbWtub2RfZG9uZSh4aWQsIHRjb24tPnNlcy0+U3VpZCwgdGNvbi0+dGlkKTsKKwog
-CWZyZWVfZGVudHJ5X3BhdGgocGFnZSk7CiAJZnJlZV94aWQoeGlkKTsKIAljaWZzX3B1dF90bGlu
-ayh0bGluayk7CmRpZmYgLS1naXQgYS9mcy9zbWIvY2xpZW50L3RyYWNlLmggYi9mcy9zbWIvY2xp
-ZW50L3RyYWNlLmgKaW5kZXggZjljMWZkMzJkMGI4Li41ZTgzY2I5ZGE5MDIgMTAwNjQ0Ci0tLSBh
-L2ZzL3NtYi9jbGllbnQvdHJhY2UuaAorKysgYi9mcy9zbWIvY2xpZW50L3RyYWNlLmgKQEAgLTM3
-NSw2ICszNzUsNyBAQCBERUZJTkVfU01CM19JTkZfQ09NUE9VTkRfRU5URVJfRVZFTlQoZ2V0X3Jl
-cGFyc2VfY29tcG91bmRfZW50ZXIpOwogREVGSU5FX1NNQjNfSU5GX0NPTVBPVU5EX0VOVEVSX0VW
-RU5UKGRlbGV0ZV9lbnRlcik7CiBERUZJTkVfU01CM19JTkZfQ09NUE9VTkRfRU5URVJfRVZFTlQo
-bWtkaXJfZW50ZXIpOwogREVGSU5FX1NNQjNfSU5GX0NPTVBPVU5EX0VOVEVSX0VWRU5UKHRkaXNf
-ZW50ZXIpOworREVGSU5FX1NNQjNfSU5GX0NPTVBPVU5EX0VOVEVSX0VWRU5UKG1rbm9kX2VudGVy
-KTsKIAogREVDTEFSRV9FVkVOVF9DTEFTUyhzbWIzX2luZl9jb21wb3VuZF9kb25lX2NsYXNzLAog
-CVRQX1BST1RPKHVuc2lnbmVkIGludCB4aWQsCkBAIC00MTUsNyArNDE2LDcgQEAgREVGSU5FX1NN
-QjNfSU5GX0NPTVBPVU5EX0RPTkVfRVZFTlQocXVlcnlfd3NsX2VhX2NvbXBvdW5kX2RvbmUpOwog
-REVGSU5FX1NNQjNfSU5GX0NPTVBPVU5EX0RPTkVfRVZFTlQoZGVsZXRlX2RvbmUpOwogREVGSU5F
-X1NNQjNfSU5GX0NPTVBPVU5EX0RPTkVfRVZFTlQobWtkaXJfZG9uZSk7CiBERUZJTkVfU01CM19J
-TkZfQ09NUE9VTkRfRE9ORV9FVkVOVCh0ZGlzX2RvbmUpOwotCitERUZJTkVfU01CM19JTkZfQ09N
-UE9VTkRfRE9ORV9FVkVOVChta25vZF9kb25lKTsKIAogREVDTEFSRV9FVkVOVF9DTEFTUyhzbWIz
-X2luZl9jb21wb3VuZF9lcnJfY2xhc3MsCiAJVFBfUFJPVE8odW5zaWduZWQgaW50IHhpZCwKQEAg
-LTQ2MSw2ICs0NjIsNyBAQCBERUZJTkVfU01CM19JTkZfQ09NUE9VTkRfRVJSX0VWRU5UKHF1ZXJ5
-X3dzbF9lYV9jb21wb3VuZF9lcnIpOwogREVGSU5FX1NNQjNfSU5GX0NPTVBPVU5EX0VSUl9FVkVO
-VChta2Rpcl9lcnIpOwogREVGSU5FX1NNQjNfSU5GX0NPTVBPVU5EX0VSUl9FVkVOVChkZWxldGVf
-ZXJyKTsKIERFRklORV9TTUIzX0lORl9DT01QT1VORF9FUlJfRVZFTlQodGRpc19lcnIpOworREVG
-SU5FX1NNQjNfSU5GX0NPTVBPVU5EX0VSUl9FVkVOVChta25vZF9lcnIpOwogCiAvKgogICogRm9y
-IGxvZ2dpbmcgU01CMyBTdGF0dXMgY29kZSBhbmQgQ29tbWFuZCBmb3IgcmVzcG9uc2VzIHdoaWNo
-IHJldHVybiBlcnJvcnMKLS0gCjIuNDAuMQoK
---000000000000e3fe3f06146106ee--
+Is there any better interface i.e. on python ABI?
+
+Many thanks,
+Jiri
 
