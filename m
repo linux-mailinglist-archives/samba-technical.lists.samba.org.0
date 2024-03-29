@@ -2,49 +2,66 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id C1AA188EC8F
-	for <lists+samba-technical@lfdr.de>; Wed, 27 Mar 2024 18:24:36 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id CB4728913C4
+	for <lists+samba-technical@lfdr.de>; Fri, 29 Mar 2024 07:32:06 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
-	bh=78rEV80rRieF/9kHWM8TN9v6uNdJWgQoaAb+gOicS2c=; b=ADw05/rC2oJNPSBUgNaGAjLhEF
-	th0ALCKmvLVXUETkkIw1J37SpdoNf4SK85gFBvsqQ2+HF6DVEJ+qpiMqMdWKIEF/c9YH6rlTlEBEL
-	GFEBEX1y2BNMlH42pT4ys8scVzmu0TdsEs8mmjL7rWvGNT9K1PUKIWtgRVxySpyYULJEhAA8SU2mH
-	86Wk4U/2Z3KbsNpLEMPr37F512UE/jEnA35IH3AxKc9EO1WKR18BDguOxqQBGRyxiN7+s7nYFIB6/
-	bioYs7ev5EsTW3odpgiJP3DraOMkpQT9s9XDKNSyA+kzhAvSyr8Y0PlyzLcsjPEncDJ7iouoNyEID
-	5ffsNtSQ==;
-Received: from ip6-localhost ([::1]:48730 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=M99wBygfGsxC5Fq3pgTqPVft4uFNhZ02XjuB4v30Nes=; b=oFoxpH3fzBIJZIab4fTxx0bXBh
+	2TQY158AXKHIaa9iDDesYra4kX/0jVz6Owr111wjtAiWeWulMakNpJ4SJwz8UdGcws3epe9Vhhsw1
+	jox+Z3U+m5E2HaAKzDMkNT/93jINWZY2KbN5NYTyCCZbBRDVAQ01580f8goJ6w2dLa3WXorSgK8gU
+	fxn3boma+DaNHAHjvVPSMtLhcqJ5MJU6qdI/MuAU3iXhpFLhN0N4WmXu9QCEgJhk699iiXkAM3yVe
+	ikPPzM8b0MRa/jKi6q91pOM9T/J6GIMW+49NJV8ZnE/V3jm2vC8Z7aDUzii/P9xJmHlDft+/7YErd
+	5rw/URuw==;
+Received: from ip6-localhost ([::1]:60622 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1rpX0j-001PPt-Ha; Wed, 27 Mar 2024 17:24:27 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:35930) 
+	id 1rq5li-001cDw-SY; Fri, 29 Mar 2024 06:31:16 +0000
+Received: from mail-lf1-x129.google.com ([2a00:1450:4864:20::129]:44282) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1rpX0N-001PMw-S2
- for samba-technical@lists.samba.org; Wed, 27 Mar 2024 17:24:13 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=From:To:Date:Message-ID:CC;
- bh=/8KzJv9OYZm6F2h5YIY49r2UDZM4y4Os/gO4uyfxNVE=; b=b7xVYvqqE3S2UG54gh+ukpZA2D
- aptbj68M2dlBjigu4J6JLtVIkE/4pbrO8PLm7ScNr9bD/Y776mY4UscDE5pMeNjW9CI9CvnzLaez9
- PlFjWSL9cpFeAgj7J6sUdGr4oxKSG9IfPGfTsUOHIskaLfJZyKPHAf0rT+klqrWkZUn5LhoBjXyff
- B2AUc2idQOUss/k0I9nh1ycJHrt2Tx0VmyD6Lq7z+rebHFGFDFU417i5ZycknCIHCJxOqgmsGljjJ
- /zk9DonziE50ORTnnmsYI14u9GzOVvET3l/TVvu4+khmymxc3z+kXQzFngFWgTY4ugy3iX0VP1D2B
- IZDtLT/Jd/cH3kqP6XUsY0WGF1LKXUTo2dbAIBu67IxkNLcly7BHmo90e9kQHoqoiunciAfMGixl8
- 1WeeE2bv8jE2duMywLFDfzWCwNiiJ1agzs3uzQQG+LhhpNPTjBUlMeNqFM3QLIQw8rp3THbk68GzD
- w6/XeHYX85EI/ejc3YfUz2yN;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1rpX0N-003ExB-1I for samba-technical@lists.samba.org;
- Wed, 27 Mar 2024 17:24:03 +0000
-Message-ID: <14ffbaa8-856e-4044-b90f-48bcb7d7804f@samba.org>
-Date: Wed, 27 Mar 2024 18:24:03 +0100
+ (Exim) id 1rq5lP-001cDo-B3
+ for samba-technical@lists.samba.org; Fri, 29 Mar 2024 06:30:59 +0000
+Received: by mail-lf1-x129.google.com with SMTP id
+ 2adb3069b0e04-5157af37806so1963546e87.0
+ for <samba-technical@lists.samba.org>; Thu, 28 Mar 2024 23:30:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1711693854; x=1712298654; darn=lists.samba.org;
+ h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=M99wBygfGsxC5Fq3pgTqPVft4uFNhZ02XjuB4v30Nes=;
+ b=ZWvAy1Hn4n7GbIrHNlo/KRFa0EO4Uyl/i9qE7lzK3YbCmzD92jVn4i/m/6848Jl45D
+ WCJHCMwj20JhBy+pUPFWtODqNv0nE2FpE7nq3jlvWG5eXFDMM4UrKltR28MvoT8csemW
+ mFxWfDp0OITWKQeb8WZEfbD2wMqzz1M49Th+6FiciuD1gaH1sqzCAPmr+zR63m6hyvvU
+ D2svYqxEhS40CclB+b6bZztucSxKI+LwaaRLztgAF04aZPCWXzZQgobtvs7CSC44Wdjj
+ Xgi7OamWzaMfMQaICmiD5R1SoS9V97CTRHN2iNpDMxYFJREHMLPvt+xTRYeFa4UeVHgH
+ ZTZw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1711693854; x=1712298654;
+ h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=M99wBygfGsxC5Fq3pgTqPVft4uFNhZ02XjuB4v30Nes=;
+ b=DLY4PKDwQPGg7YizD4T8QvwWP5gJCMoU6mtyO/gQAD8esoPNhjQrVJQGumhIUVMVm+
+ Kkz1UiZJ5SmzUdVIeJICaCzAWeXbAtvWYA0VuU7aiamEVXhAyZHBfiBTyMIzLfkP8OlT
+ 3NClfyCyxG8Jf5v1CJDHmAnxpw/xICu5NgygIq8nwq6lTq7JjDe24SAgAL9ethtmauYL
+ 8V4Blwjd3PeAqCq4wrH5W9Z3eJgFkn5u1d5sGoVFp/iNloOYMG27BmGnMEahkuk8x2I1
+ 6TencJMhw6C/k7G8udre8WTRAmYCbLkm9amvjXxXcCnBakzDJwNKKcnYGeF7yI5wDdap
+ uujw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXpQaxPMN/QC2kNhp0+fXU/5ODrp1gRCy9RcvKkIaVIbL8lDlybHjaA81BpkV9xYHv3UGzvshKyBXPSao0mx43hJO9OJf4WSMh+c7BX8wN7
+X-Gm-Message-State: AOJu0YzXMZGyfOjCKsXvUBMM3mUQB4Uo9AogftewGNlWZZI2av+vSfhy
+ WTXi+/XZm1APPSVMSAOYDNh2n3GFEs7LV7uX0Nv/yAXQ6vTFSifZfml2tE8iu19T2+7xOOxHyks
+ wWNnnbf/oqQOAbx7XbCRjVSG1lxU=
+X-Google-Smtp-Source: AGHT+IFCrzw2EW7Rs5fpfTVOyMybC5a4YPCWuZtNq14XUWpTYFqCr/K3jGnGZLkLlCQxU0RnuREZWHmYfDOYVfR+ezc=
+X-Received: by 2002:ac2:4642:0:b0:515:b764:9057 with SMTP id
+ s2-20020ac24642000000b00515b7649057mr1020533lfo.35.1711693853910; Thu, 28 Mar
+ 2024 23:30:53 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: de-DE
-To: samba-technical@lists.samba.org
-Subject: [Release Planning 4.20] Samba 4.20.0
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
+Date: Fri, 29 Mar 2024 01:30:42 -0500
+Message-ID: <CAH2r5muYgYr=kxSkzCmNQLaF0br_QZ2s=BLPd_TnOnPmTUz_WQ@mail.gmail.com>
+Subject: [PATCH][WIP] populate superblock uuid at mount time
+To: CIFS <linux-cifs@vger.kernel.org>, 
+ samba-technical <samba-technical@lists.samba.org>,
+ Namjae Jeon <linkinjeon@kernel.org>
+Content-Type: multipart/mixed; boundary="0000000000002089d50614c6c85c"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,27 +75,106 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jule Anger via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jule Anger <janger@samba.org>
+From: Steve French via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Steve French <smfrench@gmail.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi,
+--0000000000002089d50614c6c85c
+Content-Type: text/plain; charset="UTF-8"
 
-with today's release of Samba 4.20.0,
-- Samba 4.19 has been turned into the *maintenance mode* and
-- Samba 4.18 into the *security fixes only mode*.
-- Samba 4.17 is end of life now.
+In order to get the unique id for the volume (the 8 byte
+VolumeSerialNumber) we need to issue a QUERY_INFO level 59
+(FILE_ID_INFORMATION).  Today we only query the older 4 byte (not
+guaranteed to be unique serial number).   See section 2.4.21 of
+MS-FSCC.  Looks like Samba and ksmbd do not support this info level
+though - although Windows does support it.
 
-Samba 4.20.1 is scheduled for Wednesday, May 8 2024.
-https://wiki.samba.org/index.php/Release_Planning_for_Samba_4.20
-has been updated accordingly.
+Any thoughts on ksmbd or Samba support for FILE_ID_INFORMATION query?
 
-
-Best,
-Jule
+See attached work in progress patch
 
 -- 
-Jule Anger
-Release Manager Samba Team  samba.org
-SerNet Samba Team           sernet.de
+Thanks,
+
+Steve
+
+--0000000000002089d50614c6c85c
+Content-Type: text/x-patch; charset="US-ASCII"; 
+	name="0001-smb3-update-sb-uuid-when-full-id-information-availab.patch"
+Content-Disposition: attachment; 
+	filename="0001-smb3-update-sb-uuid-when-full-id-information-availab.patch"
+Content-Transfer-Encoding: base64
+Content-ID: <f_luca8ywa0>
+X-Attachment-Id: f_luca8ywa0
+
+RnJvbSBhNWY5MGI0NmIxN2QyMGFmNGNkYmZhZTZhYzQzZGFiYzFlNThlODdlIE1vbiBTZXAgMTcg
+MDA6MDA6MDAgMjAwMQpGcm9tOiBTdGV2ZSBGcmVuY2ggPHN0ZnJlbmNoQG1pY3Jvc29mdC5jb20+
+CkRhdGU6IEZyaSwgMjkgTWFyIDIwMjQgMDA6MzA6NDkgLTA1MDAKU3ViamVjdDogW1BBVENIXSBz
+bWIzOiB1cGRhdGUgc2IgdXVpZCB3aGVuIGZ1bGwgaWQgaW5mb3JtYXRpb24gYXZhaWxhYmxlCgpT
+b21lIHNlcnZlcnMgbGlrZSBXaW5kb3dzIGFuZCBBenVyZSByZXBvcnQgdGhlIGxhcmdlciAoMTYg
+Ynl0ZSkKdW5pcXVlIHZvbHVtZSBzZXJpYWwgbnVtYmVyLiAgRm9yIHRob3NlIHRoYXQgcmV0dXJu
+IGZ1bGxfaWRfaW5mb3JtYXRpb24KcG9wdWxhdGUgdGhlIHNiLT5zX3V1aWQKClRoaXMgd2lsbCBh
+bHNvIGFsbG93IHRoZSBuZXcgaW9jdGwgRlNfSU9DX0dFVEZTVVVJRCB0byB3b3JrCgpTaWduZWQt
+b2ZmLWJ5OiBTdGV2ZSBGcmVuY2ggPHN0ZnJlbmNoQG1pY3Jvc29mdC5jb20+Ci0tLQogZnMvc21i
+L2NsaWVudC9jaWZzZnMuYyAgICB8ICAyICsrCiBmcy9zbWIvY2xpZW50L2NpZnNnbG9iLmggIHwg
+IDEgKwogZnMvc21iL2NsaWVudC9zbWIyb3BzLmMgICB8ICAyICsrCiBmcy9zbWIvY2xpZW50L3Nt
+YjJwZHUuYyAgIHwgMTggKysrKysrKysrKysrKysrKysrCiBmcy9zbWIvY2xpZW50L3NtYjJwcm90
+by5oIHwgIDIgKysKIDUgZmlsZXMgY2hhbmdlZCwgMjUgaW5zZXJ0aW9ucygrKQoKZGlmZiAtLWdp
+dCBhL2ZzL3NtYi9jbGllbnQvY2lmc2ZzLmMgYi9mcy9zbWIvY2xpZW50L2NpZnNmcy5jCmluZGV4
+IGFhNmYxZWNiN2MwZS4uYzY0NDVmOTNkOTU0IDEwMDY0NAotLS0gYS9mcy9zbWIvY2xpZW50L2Np
+ZnNmcy5jCisrKyBiL2ZzL3NtYi9jbGllbnQvY2lmc2ZzLmMKQEAgLTI2OSw2ICsyNjksOCBAQCBj
+aWZzX3JlYWRfc3VwZXIoc3RydWN0IHN1cGVyX2Jsb2NrICpzYikKIAkJZ290byBvdXRfbm9fcm9v
+dDsKIAl9CiAKKwlpZiAodGNvbi0+dm9sX3V1aWQgIT0gMCkKKwkJc3VwZXJfc2V0X3V1aWQoc2Is
+ICh2b2lkICopJnRjb24tPnZvbF91dWlkLCBzaXplb2YodGNvbi0+dm9sX3V1aWQpKTsKICNpZmRl
+ZiBDT05GSUdfQ0lGU19ORlNEX0VYUE9SVAogCWlmIChjaWZzX3NiLT5tbnRfY2lmc19mbGFncyAm
+IENJRlNfTU9VTlRfU0VSVkVSX0lOVU0pIHsKIAkJY2lmc19kYmcoRllJLCAiZXhwb3J0IG9wcyBz
+dXBwb3J0ZWRcbiIpOwpkaWZmIC0tZ2l0IGEvZnMvc21iL2NsaWVudC9jaWZzZ2xvYi5oIGIvZnMv
+c21iL2NsaWVudC9jaWZzZ2xvYi5oCmluZGV4IDdlZDlkMDVmNjg5MC4uZGFlMTExNjZlYjZmIDEw
+MDY0NAotLS0gYS9mcy9zbWIvY2xpZW50L2NpZnNnbG9iLmgKKysrIGIvZnMvc21iL2NsaWVudC9j
+aWZzZ2xvYi5oCkBAIC0xMjY0LDYgKzEyNjQsNyBAQCBzdHJ1Y3QgY2lmc190Y29uIHsKIAlfX3Uz
+MiBzaGFyZV9mbGFnczsKIAlfX3UzMiBtYXhpbWFsX2FjY2VzczsKIAlfX3UzMiB2b2xfc2VyaWFs
+X251bWJlcjsKKwlfX3U2NCB2b2xfdXVpZDsgLyogZnVsbCAoNjQgYml0LCB1bmlxdWUpIHNlcmlh
+bCBudW1iZXIgKi8KIAlfX2xlNjQgdm9sX2NyZWF0ZV90aW1lOwogCV9fdTY0IHNuYXBzaG90X3Rp
+bWU7IC8qIGZvciB0aW1ld2FycCB0b2tlbnMgLSB0aW1lc3RhbXAgb2Ygc25hcHNob3QgKi8KIAlf
+X3UzMiBoYW5kbGVfdGltZW91dDsgLyogcGVyc2lzdGVudCBhbmQgZHVyYWJsZSBoYW5kbGUgdGlt
+ZW91dCBpbiBtcyAqLwpkaWZmIC0tZ2l0IGEvZnMvc21iL2NsaWVudC9zbWIyb3BzLmMgYi9mcy9z
+bWIvY2xpZW50L3NtYjJvcHMuYwppbmRleCAyZWQ0NTY5NDhmMzQuLjg0ZDJmM2YxYzg5YSAxMDA2
+NDQKLS0tIGEvZnMvc21iL2NsaWVudC9zbWIyb3BzLmMKKysrIGIvZnMvc21iL2NsaWVudC9zbWIy
+b3BzLmMKQEAgLTgzMSw2ICs4MzEsOCBAQCBzbWIzX3Fmc190Y29uKGNvbnN0IHVuc2lnbmVkIGlu
+dCB4aWQsIHN0cnVjdCBjaWZzX3Rjb24gKnRjb24sCiAJaWYgKHJjKQogCQlyZXR1cm47CiAKKwlT
+TUIyX2dldF92b2xfc2VyaWFsX251bSh4aWQsIHRjb24sIGZpZC5wZXJzaXN0ZW50X2ZpZCwgZmlk
+LnZvbGF0aWxlX2ZpZCk7CisKIAlTTUIzX3JlcXVlc3RfaW50ZXJmYWNlcyh4aWQsIHRjb24sIHRy
+dWUgLyogY2FsbGVkIGR1cmluZyAgbW91bnQgKi8pOwogCiAJU01CMl9RRlNfYXR0cih4aWQsIHRj
+b24sIGZpZC5wZXJzaXN0ZW50X2ZpZCwgZmlkLnZvbGF0aWxlX2ZpZCwKZGlmZiAtLWdpdCBhL2Zz
+L3NtYi9jbGllbnQvc21iMnBkdS5jIGIvZnMvc21iL2NsaWVudC9zbWIycGR1LmMKaW5kZXggM2Vh
+Njg4NTU4ZTZjLi5mMjYyYjgyNTFiMmUgMTAwNjQ0Ci0tLSBhL2ZzL3NtYi9jbGllbnQvc21iMnBk
+dS5jCisrKyBiL2ZzL3NtYi9jbGllbnQvc21iMnBkdS5jCkBAIC0zOTA4LDYgKzM5MDgsMjQgQEAg
+U01CMl9xdWVyeV9hY2woY29uc3QgdW5zaWduZWQgaW50IHhpZCwgc3RydWN0IGNpZnNfdGNvbiAq
+dGNvbiwKIAkJCSAgU01CMl9NQVhfQlVGRkVSX1NJWkUsIE1JTl9TRUNfREVTQ19MRU4sIGRhdGEs
+IHBsZW4pOwogfQogCitpbnQKK1NNQjJfZ2V0X3ZvbF9zZXJpYWxfbnVtKGNvbnN0IHVuc2lnbmVk
+IGludCB4aWQsIHN0cnVjdCBjaWZzX3Rjb24gKnRjb24sCisJCQl1NjQgcGVyc2lzdGVudF9maWQs
+IHU2NCB2b2xhdGlsZV9maWQpCit7CisJaW50IHJjOworCXN0cnVjdCBzbWIyX2ZpbGVfaWRfaW5m
+b3JtYXRpb24gdm9sX2luZm87CisKKwlyYyA9IHF1ZXJ5X2luZm8oeGlkLCB0Y29uLCBwZXJzaXN0
+ZW50X2ZpZCwgdm9sYXRpbGVfZmlkLAorCQkJICBGSUxFX0lEX0lORk9STUFUSU9OLCBTTUIyX09f
+SU5GT19GSUxFLCAwLAorCQkJICBzaXplb2Yoc3RydWN0IHNtYjJfZmlsZV9pZF9pbmZvcm1hdGlv
+biksCisJCQkgIHNpemVvZihzdHJ1Y3Qgc21iMl9maWxlX2lkX2luZm9ybWF0aW9uKSwKKwkJCSAg
+KHZvaWQgKiopJnZvbF9pbmZvLCBOVUxMKTsKKwlpZiAoIXJjKQorCQl0Y29uLT52b2xfdXVpZCA9
+IGxlNjRfdG9fY3B1KHZvbF9pbmZvLlZvbHVtZVNlcmlhbE51bWJlcik7CisKKwlyZXR1cm4gcmM7
+Cit9CisKIGludAogU01CMl9nZXRfc3J2X251bShjb25zdCB1bnNpZ25lZCBpbnQgeGlkLCBzdHJ1
+Y3QgY2lmc190Y29uICp0Y29uLAogCQkgdTY0IHBlcnNpc3RlbnRfZmlkLCB1NjQgdm9sYXRpbGVf
+ZmlkLCBfX2xlNjQgKnVuaXF1ZWlkKQpkaWZmIC0tZ2l0IGEvZnMvc21iL2NsaWVudC9zbWIycHJv
+dG8uaCBiL2ZzL3NtYi9jbGllbnQvc21iMnByb3RvLmgKaW5kZXggNzMyMTY5ZDhhNjdhLi5iNTE4
+ZjFmZGVkY2YgMTAwNjQ0Ci0tLSBhL2ZzL3NtYi9jbGllbnQvc21iMnByb3RvLmgKKysrIGIvZnMv
+c21iL2NsaWVudC9zbWIycHJvdG8uaApAQCAtMjA3LDYgKzIwNyw4IEBAIGV4dGVybiB2b2lkIFNN
+QjJfcXVlcnlfaW5mb19mcmVlKHN0cnVjdCBzbWJfcnFzdCAqcnFzdCk7CiBleHRlcm4gaW50IFNN
+QjJfcXVlcnlfYWNsKGNvbnN0IHVuc2lnbmVkIGludCB4aWQsIHN0cnVjdCBjaWZzX3Rjb24gKnRj
+b24sCiAJCQkgIHU2NCBwZXJzaXN0ZW50X2ZpbGVfaWQsIHU2NCB2b2xhdGlsZV9maWxlX2lkLAog
+CQkJICB2b2lkICoqZGF0YSwgdW5zaWduZWQgaW50ICpwbGVuLCB1MzIgaW5mbyk7CitleHRlcm4g
+aW50IFNNQjJfZ2V0X3ZvbF9zZXJpYWxfbnVtKGNvbnN0IHVuc2lnbmVkIGludCB4aWQsIHN0cnVj
+dCBjaWZzX3Rjb24gKnRjb24sCisJCQkgICAgdTY0IHBlcnNpc3RlbnRfZmlkLCB1NjQgdm9sYXRp
+bGVfZmlkKTsKIGV4dGVybiBpbnQgU01CMl9nZXRfc3J2X251bShjb25zdCB1bnNpZ25lZCBpbnQg
+eGlkLCBzdHJ1Y3QgY2lmc190Y29uICp0Y29uLAogCQkJICAgIHU2NCBwZXJzaXN0ZW50X2ZpZCwg
+dTY0IHZvbGF0aWxlX2ZpZCwKIAkJCSAgICBfX2xlNjQgKnVuaXF1ZWlkKTsKLS0gCjIuNDAuMQoK
+--0000000000002089d50614c6c85c--
+
