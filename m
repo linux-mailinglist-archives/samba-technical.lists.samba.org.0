@@ -2,47 +2,51 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id D2517894EAB
-	for <lists+samba-technical@lfdr.de>; Tue,  2 Apr 2024 11:27:08 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D85C88955AF
+	for <lists+samba-technical@lfdr.de>; Tue,  2 Apr 2024 15:45:17 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=mhnkTENGmAOKzTGmdz0BczXtZVb+A/0kSlPFDf/nnzo=; b=BzDySHEJF9sbC2RWQBwpFbzQ+k
-	fY7Oke2lgK0pnFvhBQt1WOWdhuHZf7JAumILqdkY03pQWhSOTu9esF1RqqxqN1ogaQ/78kD7+L2cJ
-	Ckxbx62p5zbXFNOOiB6I84F0zu+UITRzLH0QOe6VBLnC5osLNunkcBHoLPuBTYvMRGq3p8XacSB2n
-	SV1LcStL6Cfzxz3jL8LDF9/QLWT+snHgIl2Qmru/Vgn9siANOFccsC5WUVbmur3953GuOMlc1LU59
-	T90p0EslKGCykvxgVlxAHz4iK2tN9TEPLOkXasdQvCB5XJanLqczt0MyIAX47VRW5+mKtMP3t0e+I
-	BR1pWj3w==;
-Received: from ip6-localhost ([::1]:25898 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=MF2zL9JEQx5TTorHWP5H4onNcOrsRi46rdJxOwpDL6M=; b=BtKGjOwuxVEulHaQdMxtBdfD9c
+	qxkJ02Ha78VeNHSVEz1z0SEaM+PaeUVwhTUR8EKU2G4XqkMkRqZ6M7LnWR1Nmerxtku9g6ZWbVpR2
+	KaIFeLKjlkWBQNS4Qf0Myc2IPEBamRyxSqmPKRA7FEhexYQ9Krb/sZNZ4p2+EGYoSVeHyFVLQYLQP
+	1sKCLqi1rKD+bDFonWk+UzoOGM4o0KwXACVGDS37cYE5VImAP2pbJxC9uZxfeGVR6uuRGYecA7XSb
+	Nn+eyVNY2uPSNkKjOnL632oiNTfbHR4vC9AImMZmyL+6bz3uCwzbvD3MspJSwQIiG/0l147lQ2VZY
+	SK5wfqjg==;
+Received: from ip6-localhost ([::1]:22614 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1rraPa-003kQd-T6; Tue, 02 Apr 2024 09:26:34 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:58108) 
+	id 1rreQa-003mHM-EX; Tue, 02 Apr 2024 13:43:52 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:41246) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1rraPW-003kQV-Up
- for samba-technical@lists.samba.org; Tue, 02 Apr 2024 09:26:33 +0000
+ (Exim) id 1rreQV-003mHE-TK
+ for samba-technical@lists.samba.org; Tue, 02 Apr 2024 13:43:49 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Cc:To:From:Date;
- bh=mhnkTENGmAOKzTGmdz0BczXtZVb+A/0kSlPFDf/nnzo=; b=qWq1wB2jQz+2MGNUT57zuN+NQn
- Ze6UAxN1dUbft5JaBU8Kfi4p1zUm7z+Jnsx9JU3PH9Fos1clO8IHeTqWu4npV8SX0zqIA+eF9p5U1
- 8sBFI/ZkLeq6AD+bnZXLuQscT2+MTUeEmmSx0U2ZU3YgZng9AdxGQ0tS3noKi2iTIYNf8tSpP+rPQ
- 23LER5SImJ2H/fNiVJsXsuWXCDPpXY1fl7Jo32j3Dg3p4Eaz8lTLyfHQtMtVY8MLZdRzSMYTWUcee
- jcnnPNn/mlnPdj1e8mbWptTIwYaHfmswN4zfhPxVzf4nDnqmG3mxISqryWLN3M048h2xdbKaC5fK4
- aOvYf5dQSkAVFkRBCDymcuSiSVOR6hc01FWgWPj/qFqqt+ObH2J2jJeiRl+DHR2Bpn3DDN6XUgh7s
- AQsdp7EwKUR2arl0CDdI/co5upkwTnZUOJISpT1wWsoNVwpKDcCe+PGiRSrBSMSVeqwSufPezp/Yo
- qQSphCr47357o1jLbn40VWdO;
+ s=42; h=From:Cc:To:Date:Message-ID;
+ bh=MF2zL9JEQx5TTorHWP5H4onNcOrsRi46rdJxOwpDL6M=; b=dlDLE6/RkZo635d6SDwSy0WDoV
+ GZPpRPon1NGE4+gVeTshq+9QgB7alc/FZp7uiQvbHIQk8cwGLzP2OTUbfgqYogeCKlYGizt/rFBOR
+ T3noeTX+JFq5Taj03Cdl1tvlcrXe58k9ABJmLx840o0m0j3pKZfNWwBx9gHzAmtB0AOthbdLXeLs6
+ ZzTJ7w1pSP9xyPCQZJTGnPwYzuW70QndRVZcUxNZrdAe6Q+jNmPK/24W855I6MRskNJZYAidRiOZI
+ yiYsCZTyMJw4+W4ROZUBCU5ECvGpbBoEMKTJtyzIztFrwnUhxkP2x28GSEU4ps9c024jeykTrpiVp
+ 2fPL4n9gNE6IIhMHYRHm7N3rzNWutegPIVyCpt9+IZJiY6iAChPbohs60kovkEnRplDsgLXmGq834
+ JBP7NFROs4hZLZtBmfcGGDt6RKr15YXP3/vqZSkHTOUsDrfYdQp6byGnJVfhngGcO3lLpJWic++pq
+ 6JWoUjvoN+7frGPz8e7rjpcc;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1rraPV-004EGZ-25; Tue, 02 Apr 2024 09:26:30 +0000
-Date: Tue, 2 Apr 2024 20:26:21 +1100
-To: Ralph Boehme <slow@samba.org>
-Subject: Re: Simplify copy-reflink code
-Message-ID: <20240402202621.2c234f13@echidna>
-In-Reply-To: <2c5e4e5d-4115-49b5-9af5-a488cfc601a8@samba.org>
-References: <2c5e4e5d-4115-49b5-9af5-a488cfc601a8@samba.org>
+ (Exim) id 1rreQU-004I0n-2K; Tue, 02 Apr 2024 13:43:46 +0000
+Message-ID: <e5c49135-4fa4-40ec-bdbd-6446e1d156cb@samba.org>
+Date: Tue, 2 Apr 2024 15:43:44 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: Simplify copy-reflink code
+To: David Disseldorp <ddiss@samba.org>
+References: <2c5e4e5d-4115-49b5-9af5-a488cfc601a8@samba.org>
+ <20240402202621.2c234f13@echidna>
+Content-Language: en-US, de-DE
+In-Reply-To: <20240402202621.2c234f13@echidna>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------vtUWGDV28SKiWn0RAMu0aAmQ"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -56,52 +60,65 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: David Disseldorp via samba-technical <samba-technical@lists.samba.org>
-Reply-To: David Disseldorp <ddiss@samba.org>
+From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Ralph Boehme <slow@samba.org>
 Cc: samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi Ralph!
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------vtUWGDV28SKiWn0RAMu0aAmQ
+Content-Type: multipart/mixed; boundary="------------1PnGF4uH0Qt5SENjm5Vn3y8q";
+ protected-headers="v1"
+From: Ralph Boehme <slow@samba.org>
+To: David Disseldorp <ddiss@samba.org>
+Cc: samba-technical@lists.samba.org
+Message-ID: <e5c49135-4fa4-40ec-bdbd-6446e1d156cb@samba.org>
+Subject: Re: Simplify copy-reflink code
+References: <2c5e4e5d-4115-49b5-9af5-a488cfc601a8@samba.org>
+ <20240402202621.2c234f13@echidna>
+In-Reply-To: <20240402202621.2c234f13@echidna>
 
-On Tue, 2 Apr 2024 09:49:57 +0200, Ralph Boehme wrote:
+--------------1PnGF4uH0Qt5SENjm5Vn3y8q
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
 
-> Hi David!
-> 
-> If you have the time, can you please take a look at
-> 
-> https://gitlab.com/samba-team/samba/-/merge_requests/3566 ?
-> 
-> I'm basically adding copy-reflink support to vfs_default alongside a new 
-> option "filesystem reflinks" that sets FILE_SUPPORTS_BLOCK_REFCOUNTING 
-> in the share capabilities if enabled..
-> 
-> This works on eg ZFS by just setting "filesystem reflinks = yes". 
-> vfs_btrfs still sets FILE_SUPPORTS_BLOCK_REFCOUNTING if the module is 
-> configured, so there's no behaviour change for btrfs. But for other 
-> filesystems we have the choice of either setting 
-> FILE_SUPPORTS_BLOCK_REFCOUNTING in the module or relying on the new option.
-> 
-> I had initially spotted a bug in vfs_btrfs and after fixing that [1], I 
-> realized that requiring all VFS modules to explicitly code copy-reflink 
-> support into them is not ideal and just moving it to vfs_default 
-> simplifies the modules a lot. The branch still contains the commit and 
-> its revert to demonstrate the problem.
-> 
-> tl;dr:
-> 
-> no change in behaviour, great simplification.
+SGkgRGF2aWQsDQoNCnRoYW5rcyBmb3IgdGFraW5nIGEgbG9vayENCg0KT24gNC8yLzI0IDEx
+OjI2LCBEYXZpZCBEaXNzZWxkb3JwIHdyb3RlOg0KPiBTb3VuZHMgZ29vZCB0byBtZSwgYWx0
+aG91Z2ggSSdsbCBuZWVkIGEgYml0IG9mIHRpbWUgdGhpcyB3ZWVrIHRvIHRha2UgYQ0KPiBs
+b29rIChhbmQgZG8gc29tZSB0ZXN0aW5nKS4NCg0KdGhhdCB3b3VsZCBiZSBhd2Vzb21lIQ0K
+DQo+IElmIGl0J3MgcGFzc2luZyB0aGUgY29weS1jaHVuayAmIGR1cC1leHRlbnQNCj4gdG9y
+dHVyZSB0ZXN0cyBvbiBhIGJ0cmZzLWJhY2tlZCBzaGFyZSwgdGhlbiBJJ20gY29uZmlkZW50
+IHRoYXQgaXQgc2hvdWxkDQo+IGJlIGZpbmUuIA0KDQp5ZXMsIHRoZXkncmUgc3RpbGwgcGFz
+c2luZy4NCg0KPiBIb3dldmVyLCBteSBjb25maWRlbmNlIGluIHRoZSB0ZXN0cyBpcyByZWR1
+Y2VkIC0gSSB0aG91Z2h0IHRoZXkNCj4gZXhlcmNpc2VkIHRoZSBCVFJGU19JT0NfQ0xPTkVf
+UkFOR0UgZmFsbGJhY2sgY29kZS1wYXRoLCBzbyBzaG91bGQgaGF2ZQ0KPiBjYXVnaHQgWzFd
+LiBQZXJoYXBzIGl0J3MganVzdCB0aGF0IG5vYm9keSB0ZXN0cyBhdG9wIGJ0cmZzPw0KDQpJ
+IGd1ZXNzIGZvciB0aGUgY29tbW9uIHdvcmtsb2FkIG9mIGNvcHlpbmcgZmlsZXMgdGhlIGZh
+bGxiYWNrIGlzIGp1c3QgDQpuZXZlciB0cmlnZ2VyZWQuDQoNCi1zbG93DQoNCg==
 
-Sounds good to me, although I'll need a bit of time this week to take a
-look (and do some testing). If it's passing the copy-chunk & dup-extent
-torture tests on a btrfs-backed share, then I'm confident that it should
-be fine. However, my confidence in the tests is reduced - I thought they
-exercised the BTRFS_IOC_CLONE_RANGE fallback code-path, so should have
-caught [1]. Perhaps it's just that nobody tests atop btrfs?
+--------------1PnGF4uH0Qt5SENjm5Vn3y8q--
 
-Cheers, David
+--------------vtUWGDV28SKiWn0RAMu0aAmQ
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature.asc"
 
-> [1] 
-> <https://gitlab.com/samba-team/samba/-/merge_requests/3566/diffs?commit_id=48d8b9c7ad528790b24de5b1ccbfd8b04a2622cf>
+-----BEGIN PGP SIGNATURE-----
 
+wsF5BAABCAAjFiEE+uLGCIokJSBRxVnkqh6bcSY5nkYFAmYMC5AFAwAAAAAACgkQqh6bcSY5nkYf
+tg//WonjV58AnYX7CnRKVeOOADuoCfZK1MZluJoZJHP8dfjOWdrpQ1Vbi2TtYcHa61EBbZi6qG3s
+836j17PP6dBWGBCQthpah5vnRA6bxiv+fWxaS1VWKX1dB9gcCg8oK8YesXLXoclDFQzY0iKusZ9E
+dSLo/wmQ9zSxXI6OhOEzZy3/Epr7JdbWsRWp1aIL54A51p5oJau8vjsxMmmHk0rGNMRfCkPKyHvr
+fq5zm8SzR0M+Dch4ecGNx7G0JnLd76/zUdjVReBHk1CcqwWFAx7w02j7MpY/eI7WSLCUQoUGzEvd
+fqSR2TBs9iuFaKzi4UGCSS7rSNj3Ko+zf56KuTLalWZeDXmW0ZBe2gb5hGe/hXsLLikeiT6teDy3
+leYjtd01d7HvNVmR3yGapipTCSXnbHCr4PEePr3pYydlYzodWTH6XkcBFVbJIa8HXvkN+navikMz
+0DxMr4M2rJoECfhi4PhOZrsLMBLhyPKD0WQ6E6y/aV9Z4QQp0QwazLKuTbqPurzHbZAa4qfnXykK
+aJv8zpc6htLUqB5UD+KBoyhYhz0FNYp+nxQvpfuuTy54p+3vNylbNWYNAr4O2xUUYR6mFojR6GDG
+wxhW3vPGzgKyIRTOuS3FGKUkTCxxi3/LyAwqqVIoaX/QeKajtUeugXqbM6lN6leAo1D7jadNCu7K
+yMg=
+=LsY5
+-----END PGP SIGNATURE-----
+
+--------------vtUWGDV28SKiWn0RAMu0aAmQ--
 
