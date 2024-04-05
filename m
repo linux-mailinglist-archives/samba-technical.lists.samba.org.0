@@ -2,55 +2,53 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 967B68994D9
-	for <lists+samba-technical@lfdr.de>; Fri,  5 Apr 2024 07:57:55 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C59D2899B5A
+	for <lists+samba-technical@lfdr.de>; Fri,  5 Apr 2024 12:55:49 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=nYg1UoZwrVuCtdzzBWhufU5B3raca01Wt3IPExmvCXs=; b=DoxwxiGeTM2jOZlNoiiu2qe7ZK
-	VhpAPU5ehuZep45S9o7g4+/ShrVQmmkD6Eydfxx9yIs2bey+qJQY0/VjS6E9YTl2/4iDpI5OUahPD
-	LRyF0kA8OWnEENoi4Ao0U5XQKZDb3+1QQndcIeoGReHmjtZzIkPPY4Jf0cV1VBukol4WoaAjWyF2D
-	BPU4qrVS+PFWHn67Gt+5A/i7crQpYMWo+nL+TKj/AOtcnfXafb0LynC101zpDSDEyHGIYO+h6v3P3
-	3n3r6hxQBU21dZRH+zi5be4VjOzKDUXE4m2DNjZDhrFGsnYQU+gGBYDP6Gmhcvrt31pS+v2y9Zsax
-	yC7DLpRg==;
-Received: from ip6-localhost ([::1]:42106 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=5k2BN16xaVzKfnDNlM2l7Fy2X+jfElKEfTSio5MLzyI=; b=syl6AoLJQOyoIBHBPRc4oB4pzo
+	d8+DN2oSvPl8YnvHZExdCSwDynI2hx37O2BCKgfccUOz/+9vJh++KVq9BMechsFqAwKB4taxEMjjF
+	he7AL7LKTbl6A8xWSmHkyN+zaaQoYoGKhvhh3LE5PpkgL0m0VjIrmcyFngECUJUCSE/dnK+o5YIAH
+	XJbRptl3cc7yXHxpwddt38iRF82ZI1WF0FMPxmtcK1eQNKfLH36MZkN6Nh/YRZcKRDsIf+2mwClBW
+	y5xo2R2GJUiN2f1fGZA2pphp56EvO2ICpzLYDB+9+thvbZ3BdVXNpolCEWe9my9/yJ5lQDbjKG6CS
+	/rD48tiQ==;
+Received: from ip6-localhost ([::1]:26580 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1rscZx-003wyL-Ed; Fri, 05 Apr 2024 05:57:33 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:11786) 
+	id 1rshDu-003yeY-Eq; Fri, 05 Apr 2024 10:55:06 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:19540) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1rscZt-003wyE-Mq
- for samba-technical@lists.samba.org; Fri, 05 Apr 2024 05:57:31 +0000
+ (Exim) id 1rshDq-003yeO-73
+ for samba-technical@lists.samba.org; Fri, 05 Apr 2024 10:55:04 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=From:Cc:To:Date:Message-ID;
- bh=nYg1UoZwrVuCtdzzBWhufU5B3raca01Wt3IPExmvCXs=; b=MAgmawktORfQhEO6yHfVHlqQVN
- auUlcWL1lNWPEu0mxi7XGLpMn6U9S3afCTQTwbEl8YoP1H3rIdkGe/OU/sJ/jHWiUIAjZ/Dps7lOh
- fwZbD9AjYSZQSltAamYgzbgmREkR+xwL3zrPp8D1NW45FTXYUp27fWf1b4oJ8uu8yG6VYpIzklb7y
- pCJmzxjG0DW2sS4PKeoXsE9FNk1IuKxFSXTY0zjsrGDfT7SJNr3AWxHvbZU0pJR0rPxiraavq5Lru
- on3i4tQoTbYGgcchjbcihjEmYajGiPVq8AQNSV3DHy7fH/Uywylg1BwhuyCzOJ4Cj4KSU9vzKqq6v
- cr5vDU2t5fAcXznLGrS+n57yUkrtEzc2rIpSEnppXYRFKzZbWRvWGRFYyS0JksP7YEsBms0jcFSkf
- 1b80wKkobVMZSwEeMrX/++bfghNb3GRdFvfwhzZisLuaLPfdJHA3/TuNwaXT3Un1yiyWi6QYK4Rkn
- D9RA0Mm8/8uqHBLmeQHOl5N6;
+ s=42; h=Message-ID:Cc:To:From:Date;
+ bh=5k2BN16xaVzKfnDNlM2l7Fy2X+jfElKEfTSio5MLzyI=; b=GPRzy+sSu10G35xo1178bIXQzh
+ OB9KUnVOM123ADQkyvvS2yOcJTxJb3DBMNw2SN3E120W8vgUu6yBSr6DMuBh1wIYQb43T0vxiKuYN
+ tgecXvgUSxt9myxXmSPK856uA+J31AMTg0uUk0X/m6xgpBiRJxWrctoopr5YS2ULQwS6VUiJ0u0dX
+ ZaSDA7nPdswE7Lyz+KhpYKgaX/2gL7hCVBDFkd/MgkrrCiNaFG4wNMI6HF7lj+O/QVuebddqVu0Ry
+ MuyxfFsILRpn4BIOlefOgGNsXJoOjIKOGWw2Q2OBVnVeVweV0lYgDjhXx0lujycuZIfrMyQnGRSiB
+ wqaeur51hv1pGS+PvTsTVaokp8AyGoHvXsZRfDhbKstHH0OWmCFfeyad0fpG3/gUlFbqqeqPwiKbS
+ JmLKqWwzEF+MbnMv0RmwwTqqu3ipeqnm8hDvoW/cDYfcETlhjtSlKySt8mM6IPknI07R0xlFeGJM1
+ du16Wld1dg20fIP6KQh4LShh;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1rscZt-004phW-0A; Fri, 05 Apr 2024 05:57:29 +0000
-Message-ID: <b0967fbb-0805-4021-96cf-0735c3c1b5c1@samba.org>
-Date: Fri, 5 Apr 2024 07:57:28 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
+ (Exim) id 1rshDo-004tIx-2m; Fri, 05 Apr 2024 10:55:01 +0000
+Date: Fri, 5 Apr 2024 21:54:55 +1100
+To: Ralph Boehme <slow@samba.org>
 Subject: Re: Simplify copy-reflink code
-To: David Disseldorp <ddiss@samba.org>
+Message-ID: <20240405215455.1099794a@echidna>
+In-Reply-To: <b0967fbb-0805-4021-96cf-0735c3c1b5c1@samba.org>
 References: <2c5e4e5d-4115-49b5-9af5-a488cfc601a8@samba.org>
  <20240402202621.2c234f13@echidna>
  <e5c49135-4fa4-40ec-bdbd-6446e1d156cb@samba.org>
  <20240404125840.230c5d67@echidna>
  <b5f914db-41b9-4e76-89a8-fb5dc45e28f8@samba.org>
  <20240405162145.40ac3bc4@echidna>
-Content-Language: en-US, de-DE
-In-Reply-To: <20240405162145.40ac3bc4@echidna>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------0z0pUNejMSgp6j6vxYLYD20G"
+ <b0967fbb-0805-4021-96cf-0735c3c1b5c1@samba.org>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -64,76 +62,44 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Ralph Boehme <slow@samba.org>
+From: David Disseldorp via samba-technical <samba-technical@lists.samba.org>
+Reply-To: David Disseldorp <ddiss@samba.org>
 Cc: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------0z0pUNejMSgp6j6vxYLYD20G
-Content-Type: multipart/mixed; boundary="------------b4OfDOYRWcddw69dbdv0IOoZ";
- protected-headers="v1"
-From: Ralph Boehme <slow@samba.org>
-To: David Disseldorp <ddiss@samba.org>
-Cc: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
-Message-ID: <b0967fbb-0805-4021-96cf-0735c3c1b5c1@samba.org>
-Subject: Re: Simplify copy-reflink code
-References: <2c5e4e5d-4115-49b5-9af5-a488cfc601a8@samba.org>
- <20240402202621.2c234f13@echidna>
- <e5c49135-4fa4-40ec-bdbd-6446e1d156cb@samba.org>
- <20240404125840.230c5d67@echidna>
- <b5f914db-41b9-4e76-89a8-fb5dc45e28f8@samba.org>
- <20240405162145.40ac3bc4@echidna>
-In-Reply-To: <20240405162145.40ac3bc4@echidna>
+On Fri, 5 Apr 2024 07:57:28 +0200, Ralph Boehme wrote:
+...
+> On 4/5/24 07:21, David Disseldorp wrote:
+> > I don't think dup-extents should fallback to copy; with the initial
+> > implementation we had VFS_COPY_CHUNK_FL_MUST_CLONE to make this
+> > explicit. However, the MS-FSCC spec doesn't appear to state that cloning
+> > is a hard requirement, only that it should be supported alongside
+> > FILE_SUPPORTS_BLOCK_REFCOUNTING and that offsets+lengths need to be
+> > "logical cluster boundary" aligned.  
+> 
+> MS-FSA 2.1.5.9.4 FSCTL_DUPLICATE_EXTENTS_TO_FILE makes it pretty clear 
+> what should be done and that a fallback to data copy is not in scope.
 
---------------b4OfDOYRWcddw69dbdv0IOoZ
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
+Ah great, I was wondering why I couldn't find anything clear in MS-SMB2
+or MS-FSCC...
 
-SGkgRGF2aWQsDQoNCnRoYW5rcyBhZ2FpbiBmb3IgdGFraW5nIGEgbG9vayENCg0KT24gNC81
-LzI0IDA3OjIxLCBEYXZpZCBEaXNzZWxkb3JwIHdyb3RlOg0KPiBJIGRvbid0IHRoaW5rIGR1
-cC1leHRlbnRzIHNob3VsZCBmYWxsYmFjayB0byBjb3B5OyB3aXRoIHRoZSBpbml0aWFsDQo+
-IGltcGxlbWVudGF0aW9uIHdlIGhhZCBWRlNfQ09QWV9DSFVOS19GTF9NVVNUX0NMT05FIHRv
-IG1ha2UgdGhpcw0KPiBleHBsaWNpdC4gSG93ZXZlciwgdGhlIE1TLUZTQ0Mgc3BlYyBkb2Vz
-bid0IGFwcGVhciB0byBzdGF0ZSB0aGF0IGNsb25pbmcNCj4gaXMgYSBoYXJkIHJlcXVpcmVt
-ZW50LCBvbmx5IHRoYXQgaXQgc2hvdWxkIGJlIHN1cHBvcnRlZCBhbG9uZ3NpZGUNCj4gRklM
-RV9TVVBQT1JUU19CTE9DS19SRUZDT1VOVElORyBhbmQgdGhhdCBvZmZzZXRzK2xlbmd0aHMg
-bmVlZCB0byBiZQ0KPiAibG9naWNhbCBjbHVzdGVyIGJvdW5kYXJ5IiBhbGlnbmVkLg0KDQpN
-Uy1GU0EgMi4xLjUuOS40IEZTQ1RMX0RVUExJQ0FURV9FWFRFTlRTX1RPX0ZJTEUgbWFrZXMg
-aXQgcHJldHR5IGNsZWFyIA0Kd2hhdCBzaG91bGQgYmUgZG9uZSBhbmQgdGhhdCBhIGZhbGxi
-YWNrIHRvIGRhdGEgY29weSBpcyBub3QgaW4gc2NvcGUuDQoNCj4gV2UgcHJvYmFibHkgbmVl
-ZCB0byBkbyBzb21lIHRlc3RpbmcgYWdhaW5zdCBtb2Rlcm4gUmVGUyB0byBjaGVjayBzb21l
-IG9mDQo+IHRoZXNlIHF1ZXN0aW9ucy4NCg0KDQpJJ20gd29ya2luZyB3aXRoIGEgY3VzdG9t
-ZXIgd2hvIGlzIHRlc3Rpbmcgd2l0aCBhIFdpbmRvd3Mgc2VydmVyIHdpdGggDQpSZUZTIHdo
-ZXJlIGhlIHVzZXMgYSB0ZXN0aW5nIHByb2dyYW0gWzFdIHJ1bm5pbmcgb24gdGhlIGNsaWVu
-dCB0aGF0IA0KYWxsb3dzIG1hbnVhbCBjb250cm9sIG92ZXIgdGhlIG9wZXJhdGlvbiBhbmQg
-cmVzdWx0cyBjb25maXJtIHRoZSBzcGVjOiANCm5vIGZhbGxiYWNrLCBmYWlsdXJlIG9uIG5v
-biBhbGlnbmVkIElPIHJlcXVlc3QuDQoNClsxXSBodHRwczovL2dpdGh1Yi5jb20vdGRld2lu
-L3JlZnMtZmNsb25lDQoNClRoYW5rcyENCi1zbG93DQo=
+> > We probably need to do some testing against modern ReFS to check some of
+> > these questions.  
+> 
+> 
+> I'm working with a customer who is testing with a Windows server with 
+> ReFS where he uses a testing program [1] running on the client that 
+> allows manual control over the operation and results confirm the spec: 
+> no fallback, failure on non aligned IO request.
+> 
+> [1] https://github.com/tdewin/refs-fclone
 
---------------b4OfDOYRWcddw69dbdv0IOoZ--
+Interesting, thanks! What about unaligned lengths when it covers the end
+of a file? Btrfs has similar (FS block size) alignment restrictions for
+clone, but will permit unaligned clone lengths when it corresponds to
+the final extent. IIUC the existing MS-FSA pseudocode does't accept
+any misalignment.
 
---------------0z0pUNejMSgp6j6vxYLYD20G
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-wsF5BAABCAAjFiEE+uLGCIokJSBRxVnkqh6bcSY5nkYFAmYPksgFAwAAAAAACgkQqh6bcSY5nkZG
-5BAAu7A2tgi4+jQVGgPWHZ8J0fU5K/fowriTYLi/NiUxN/PPR0DLeVD/5JdZxPbVyHkAmArgrJsX
-rhbvbrBKDSQDKSxmlHvYOc1t3ZQBbw48r0ops6T1qbzieCR6xxr/bGAne42Fsk/TyBpPv+7REkKH
-Fx6pBMQ4G0o6XcNhqZ/bq2lAsKrzvoonNZ/wTvmsoJFiKdxw48bwyPrUwdkToQzcFOCErw4ggd/F
-Fk7VYnjmMmoEb/KaeOF3VStP0Pm1D8mxLKE74VpOSC4E5GlywpDvFZDwR4B8wUUzJaaFLixHwPHZ
-ReJLovf12V4kQEjM2G8OjCDDinYBFnmTphW3OLkXd00G8hVk8oLvuzvBx6KKOphRjXcyxGiOJr5W
-0CtmcNyvcs7CD3cRvTFM9inRBNJst3jkTTDLd+zmXpGic0SkJCjMEqE3TpbhgAq+j9BAzHrtOT9Q
-SiPUa5pVJ4YFjsdr9q/TIXjVv5ngiEmAI1QT7b1eUacMtIAhtX7L8VkNt87+7P/bzyRLdRmIzRrD
-wPrds+OUGgOfBoHk/59l+KNfuXfuHqYkm8p9vF9DMTEan3A1OiMg9WeceE42PsdjxcyKHjz73QIP
-OW1GS6qhJpdHQaMFFb8U/zLjJ4Gw/y1Li+NGkXxUVagiNaRWOygj9TMP133oYfDgzEWeSiLUmtSI
-R80=
-=dtMN
------END PGP SIGNATURE-----
-
---------------0z0pUNejMSgp6j6vxYLYD20G--
+Cheers, David
 
