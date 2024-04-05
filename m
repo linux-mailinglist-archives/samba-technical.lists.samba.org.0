@@ -2,66 +2,65 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8177B89920B
-	for <lists+samba-technical@lfdr.de>; Fri,  5 Apr 2024 01:20:52 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C0E618992AC
+	for <lists+samba-technical@lfdr.de>; Fri,  5 Apr 2024 02:49:47 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=MI+qfzpviQ6203tqR2NcHQB0VPCJX0zA2qLw4gc27aE=; b=k34D7bFJKscn7hG7+bdn4sC5X7
-	CoR4zE3k9urH1r4MvRo41ctW0KQpp2ogtPvN9/7CwyaFXUwLlsNggzIyQ5LsagEWp1lm865SC4RNW
-	lOpkApxuJW8ftTVJkf0SZZen6YfVjR4CQq8RC4Eb9CGOe+oelCJXf3D5pJCwhuDB/R4fwDvBT0fne
-	6HEWHHkcKY/pWQSnLTJFlHkh0VqefesbVxnsWiTsHHxHM+NKkBPzaomdF+jHVL1Rbkyn2z19+RXLi
-	mkhv55UwbHBZiB4PLZPCEqj3HRIRyoSGus1YNqS0gLrbaJplYylb2EwX2wxz4h6yyDJ3LH0IzGy4e
-	zynbp+jg==;
-Received: from ip6-localhost ([::1]:52118 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=K7YiUqv8hSwp9Y2wQywvprR8lJkcMd1wbd/c9fj8C88=; b=qpZe8OOYdwi2Pd/YP7oDnw0Xi0
+	VShJ8/nymyKaKcBGIjTQzdoQvx+mM5cPuc+yOCGfTEfYmXV6DpjPep/NxqoUXQBUxwZotILyL+Ovc
+	7Onx4U0HqNZFssSxvH+c9w/eLBg/LnEvPJKUQ/j3MAeB7ACwAAWcfL02IXvOwzklX2GMw3jSdzCSx
+	wwY9lvIypkBSGT6H0gVGc2b96At2JcGsbtPNmmixm02BslKGvI2z15JTMpwFS9JiFsP/lgo3UI08j
+	E/H+5IuCl2Z3s6vRkGnKTxSZi5mJT4fBWQ7b17NqBUfYQEbH8uxNZhq28AVmPujay5SvP0eaaZSSK
+	lG7fP+ew==;
+Received: from ip6-localhost ([::1]:26692 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1rsWN2-003w5R-LH; Thu, 04 Apr 2024 23:19:48 +0000
-Received: from mail-lf1-x134.google.com ([2a00:1450:4864:20::134]:46537) 
+	id 1rsXla-003wJ8-Oc; Fri, 05 Apr 2024 00:49:14 +0000
+Received: from mx.manguebit.com ([167.235.159.17]:41684) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1rsWMy-003w5K-5z
- for samba-technical@lists.samba.org; Thu, 04 Apr 2024 23:19:46 +0000
-Received: by mail-lf1-x134.google.com with SMTP id
- 2adb3069b0e04-516c5c39437so2032325e87.1
- for <samba-technical@lists.samba.org>; Thu, 04 Apr 2024 16:19:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1712272782; x=1712877582; darn=lists.samba.org;
- h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=MI+qfzpviQ6203tqR2NcHQB0VPCJX0zA2qLw4gc27aE=;
- b=UNhX6Ch8DhJhg1eDHvPdF21SMODTpTeo2QwJBfG0EwAKRp2uAvI3mzFj6PDqGzEe0d
- 7z3VcuxgJ8qk1WeaRnm6FCg6GjiDnLUEi4iSTo/vZbrYUuKhD4lV+EFPUUYoQ7IelpHT
- 73hwYp78ILXt70Pt3cyKpMq63xQdureNqbWE7edN6YxaB6zmfErVhib7FGxjBXt4t6Vb
- /WshkB38Uipa8a6L78zO2l3x2qXyG53wM7YlBg47VCeyFmsdB4GuqGoWNUVjzg92Hpb6
- j6KAW/PDeL7XibHPw4eB48jwAAJqfuZ1ZqxiFvaEeAgzIGwAlpNTU4aC+eSwa+i2kdPB
- iLrw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712272782; x=1712877582;
- h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=MI+qfzpviQ6203tqR2NcHQB0VPCJX0zA2qLw4gc27aE=;
- b=Zg/HF6QnYRocdS1m8xWeXpk90XX58jL9SsFAIu9oxADxcGkl1uU+3uTjcOiTiWb3cG
- i8aVL5Pt44VJfB37z7aeiAR0NkUyF2w8AhRbm75+LXUhgsbxydFu/Q/zeE5uPVHosjc5
- g3jdxo8/GKClBLwgkCErXDr6t/wEfI7Z00OEeSJuL6nqM/TCeq5vbOBa3OND3ndGlQF+
- JOsIrE6KnnQRGf34Q1b6s+cdS77hyv6ZAUK68rZZbEKpV9iu7ndUXR1E65hkCoZyFyrT
- 0cknFGlq/QtmsnV2LuQmKfe3EAh0Xs0RZPvEofCaPG8P4WLwrYy9d+IGMdaRiClbA9F/
- OIJw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCU5xDwZ5bXbTl4CcDyo0c2cphfsN0qnh9OZuIKKoHFG/GNLSr+QgOoW9v9g9dRAG0B3W+g++UYYRluoS7TZJ8iNDLh6vVMp/ssg8k05nta+
-X-Gm-Message-State: AOJu0YyJH0UlaJRTsKN8lZB2kTEdp/hD7NuLq2GTkkunGk0FMzZ2u6YB
- 977Mn8QEO/1wxHGkErTirugOnZ/d4MY7YfCsL+BwLQXGZsiFEQI8HMRTw2YkSO1IOouF5YNjYFj
- XMQy0of1V+tOouESjd9Cx9r5KgLo=
-X-Google-Smtp-Source: AGHT+IGsWQ/1HQwj1pPWVAc2ZoaY1jNoziM7NldhkFE5iaMyf9zKAZVqVUMvGzOt/TorXz22eJZIO2qwgc8Q1yRbMlI=
-X-Received: by 2002:a19:c203:0:b0:516:d14a:9692 with SMTP id
- l3-20020a19c203000000b00516d14a9692mr1298685lfc.6.1712272781876; Thu, 04 Apr
- 2024 16:19:41 -0700 (PDT)
-MIME-Version: 1.0
-Date: Thu, 4 Apr 2024 18:19:30 -0500
-Message-ID: <CAH2r5muFhPy+zJ7iuyOajVT8PQhO=2ruazg0kkbKOz3_YeNWSw@mail.gmail.com>
-Subject: [SMB3] fix reconnect so it can handle cases where server is doing
- password rotation
-To: CIFS <linux-cifs@vger.kernel.org>, 
+ (Exim) id 1rsXlW-003wJ1-NE
+ for samba-technical@lists.samba.org; Fri, 05 Apr 2024 00:49:12 +0000
+Message-ID: <b1680423bce48c6ee54e43f894607ba1@manguebit.com>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=manguebit.com;
+ s=dkim; t=1712276656;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=K7YiUqv8hSwp9Y2wQywvprR8lJkcMd1wbd/c9fj8C88=;
+ b=tDihX92CZy8RFJEJtYr2H5Iif3FbpniuQNGRskiK8Mwibp+VXO4oQ8kEd39Ig6zTASM47U
+ 9xHNgEtetwMzpnv2+yKxdbVnV3dvcOD9nB78jDir3BGcDcWYdcSdyYylScH3SsUXMjwtP2
+ 4arl2wCsMAGyv+xeXxDq63uswEg8MKhlidTrgzXBKh1Ae4S1qXFRioVPUbi3fozejAi7A/
+ eWKb9bLLpnkaXYFhQqGrRwyVDC6kMxiiik8Rnm2PSeSAsxNcxoXAjEm5OrvpHX2qVVyM3X
+ 1nFIJVBZIYg4jCTqktrajY7GBpqhqA1AJ+NQQiTf4eTIux+Labv815plkduWug==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=manguebit.com; 
+ s=dkim; t=1712276656;
+ h=from:from:sender:reply-to:subject:subject:date:date:
+ message-id:message-id:to:to:cc:cc:mime-version:mime-version:
+ content-type:content-type:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=K7YiUqv8hSwp9Y2wQywvprR8lJkcMd1wbd/c9fj8C88=;
+ b=FzWWU6Grmaps+SQzCFnYbD/RfrQ/7IwKbgl6Xn7een1Vzagl1h6UmJRt8YMvgHgnHSPqh3
+ T0GwJylwrXLj9MX+ldwtSeN/RJWGAVj114cz6Ci8IjcVZuRSRZdkP5wxQynoRYDVZVipwd
+ Bf4W6ebVqeX48pidCEts8teJouj/NWyopha8+/nsKlUYUDN9XoF+QFNhw8QDGu6Mg8Z7kX
+ E4DZ/DwHMNjy+j9gjqEcrCMso3xubfQLKOZDVc3hSKvv94h14Hy6AX620unF2GdXRlOo8g
+ aipwcugHwVYvdgweA6GkTW6i24zJqFcyGMuLjqYPfRUMer7Oth3EdMjGrVYtZQ==
+ARC-Authentication-Results: i=1; ORIGINATING;
+ auth=pass smtp.mailfrom=pc@manguebit.com
+ARC-Seal: i=1; s=dkim; d=manguebit.com; t=1712276656; a=rsa-sha256; cv=none;
+ b=S5viGfaWXr9Cs/q7CA7eiB51ne4ttO6r88ws8tBhnGNsDWWk1TwINNR7kYxKH7wZKuynG5
+ K6f/LB7U630q2iRcvUjXS1hvS+wwBH+vgQPR3k8+fuZxNhj8U5udZmtkprxMeHivcDWVFo
+ j4yxiU4fcGGaopxlcd5b8+EbSv/rZb86SBM3cy3CNluDAuDDTxqnlbliCF2gVqERD4nssG
+ D9/KOrz+boFRWPe1Au0WZxMmTBAs6qpgkbRQ4Jpc+Pm5Tm6nM3MTl8GxdKMlUnvJ3F+lYA
+ oZG+xp0pfkif4HGNum+Ls9aHBVMWyOMFxtpInIjKY1GX1qQ9XBRFHVvcfO5Iuw==
+To: Steve French <smfrench@gmail.com>, CIFS <linux-cifs@vger.kernel.org>,
  samba-technical <samba-technical@lists.samba.org>
-Content-Type: multipart/mixed; boundary="000000000000ec3d7706154d9220"
+Subject: Re: [SMB3] fix reconnect so it can handle cases where server is
+ doing password rotation
+In-Reply-To: <CAH2r5muFhPy+zJ7iuyOajVT8PQhO=2ruazg0kkbKOz3_YeNWSw@mail.gmail.com>
+References: <CAH2r5muFhPy+zJ7iuyOajVT8PQhO=2ruazg0kkbKOz3_YeNWSw@mail.gmail.com>
+Date: Thu, 04 Apr 2024 21:24:13 -0300
+MIME-Version: 1.0
+Content-Type: text/plain
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -75,176 +74,19 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
+From: Paulo Alcantara via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Paulo Alcantara <pc@manguebit.com>
 Cc: Shyam Prasad N <nspmangalore@gmail.com>, Tom Talpey <tom@talpey.com>,
  Bharath S M <bharathsm@microsoft.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
---000000000000ec3d7706154d9220
-Content-Type: text/plain; charset="UTF-8"
+Steve French <smfrench@gmail.com> writes:
 
-There are various use cases that are becoming more common in which password
-changes are scheduled on a server(s) periodically but the clients connected
-to this server need to stay connected (even in the face of brief network
-reconnects) due to mounts which can not be easily unmounted and mounted at
-will, and servers that do password rotation do not always have the ability
-to tell the clients exactly when to the new password will be effective,
-so add support for an alt password ("password2=") on mount (and also
-remount) so that we can anticipate the upcoming change to the server
-without risking breaking existing mounts.
+> An alternative would have been to use the kernel keyring for this but the
+> processes doing the reconnect does not have access to the keyring but does
+> have access to the ses structure.
 
-An alternative would have been to use the kernel keyring for this but the
-processes doing the reconnect does not have access to the keyring but does
-have access to the ses structure.
-
-See attached Linux client patch
--- 
-Thanks,
-
-Steve
-
---000000000000ec3d7706154d9220
-Content-Type: text/x-patch; charset="US-ASCII"; 
-	name="0001-smb3-fix-broken-reconnect-when-password-changing-on-.patch"
-Content-Disposition: attachment; 
-	filename="0001-smb3-fix-broken-reconnect-when-password-changing-on-.patch"
-Content-Transfer-Encoding: base64
-Content-ID: <f_luluye4s0>
-X-Attachment-Id: f_luluye4s0
-
-RnJvbSBhZWY1MTAzMThlMzg0MWE0YWQzYmJhNzhjNWY4ZTEwNzdhMGY1YjA5IE1vbiBTZXAgMTcg
-MDA6MDA6MDAgMjAwMQpGcm9tOiBTdGV2ZSBGcmVuY2ggPHN0ZnJlbmNoQG1pY3Jvc29mdC5jb20+
-CkRhdGU6IFRodSwgNCBBcHIgMjAyNCAxODowNjo1NiAtMDUwMApTdWJqZWN0OiBbUEFUQ0hdIHNt
-YjM6IGZpeCBicm9rZW4gcmVjb25uZWN0IHdoZW4gcGFzc3dvcmQgY2hhbmdpbmcgb24gdGhlCiBz
-ZXJ2ZXIgYnkgYWxsb3dpbmcgcGFzc3dvcmQgcm90YXRpb24KClRoZXJlIGFyZSB2YXJpb3VzIHVz
-ZSBjYXNlcyB0aGF0IGFyZSBiZWNvbWluZyBtb3JlIGNvbW1vbiBpbiB3aGljaCBwYXNzd29yZApj
-aGFuZ2VzIGFyZSBzY2hlZHVsZWQgb24gYSBzZXJ2ZXIocykgcGVyaW9kaWNhbGx5IGJ1dCB0aGUg
-Y2xpZW50cyBjb25uZWN0ZWQKdG8gdGhpcyBzZXJ2ZXIgbmVlZCB0byBzdGF5IGNvbm5lY3RlZCAo
-ZXZlbiBpbiB0aGUgZmFjZSBvZiBicmllZiBuZXR3b3JrCnJlY29ubmVjdHMpIGR1ZSB0byBtb3Vu
-dHMgd2hpY2ggY2FuIG5vdCBiZSBlYXNpbHkgdW5tb3VudGVkIGFuZCBtb3VudGVkIGF0CndpbGws
-IGFuZCBzZXJ2ZXJzIHRoYXQgZG8gcGFzc3dvcmQgcm90YXRpb24gZG8gbm90IGFsd2F5cyBoYXZl
-IHRoZSBhYmlsaXR5CnRvIHRlbGwgdGhlIGNsaWVudHMgZXhhY3RseSB3aGVuIHRvIHRoZSBuZXcg
-cGFzc3dvcmQgd2lsbCBiZSBlZmZlY3RpdmUsCnNvIGFkZCBzdXBwb3J0IGZvciBhbiBhbHQgcGFz
-c3dvcmQgKCJwYXNzd29yZDI9Iikgb24gbW91bnQgKGFuZCBhbHNvCnJlbW91bnQpIHNvIHRoYXQg
-d2UgY2FuIGFudGljaXBhdGUgdGhlIHVwY29taW5nIGNoYW5nZSB0byB0aGUgc2VydmVyCndpdGhv
-dXQgcmlza2luZyBicmVha2luZyBleGlzdGluZyBtb3VudHMuCgpBbiBhbHRlcm5hdGl2ZSB3b3Vs
-ZCBoYXZlIGJlZW4gdG8gdXNlIHRoZSBrZXJuZWwga2V5cmluZyBmb3IgdGhpcyBidXQgdGhlCnBy
-b2Nlc3NlcyBkb2luZyB0aGUgcmVjb25uZWN0IGRvZXMgbm90IGhhdmUgYWNjZXNzIHRvIHRoZSBr
-ZXlyaW5nIGJ1dCBkb2VzCmhhdmUgYWNjZXNzIHRvIHRoZSBzZXMgc3RydWN0dXJlLgoKU2lnbmVk
-LW9mZi1ieTogU3RldmUgRnJlbmNoIDxzdGZyZW5jaEBtaWNyb3NvZnQuY29tPgotLS0KIGZzL3Nt
-Yi9jbGllbnQvY2lmc2dsb2IuaCAgIHwgIDEgKwogZnMvc21iL2NsaWVudC9jb25uZWN0LmMgICAg
-fCAgOCArKysrKysrKwogZnMvc21iL2NsaWVudC9mc19jb250ZXh0LmMgfCAyMSArKysrKysrKysr
-KysrKysrKysrKysKIGZzL3NtYi9jbGllbnQvZnNfY29udGV4dC5oIHwgIDIgKysKIGZzL3NtYi9j
-bGllbnQvbWlzYy5jICAgICAgIHwgIDEgKwogZnMvc21iL2NsaWVudC9zbWIycGR1LmMgICAgfCAx
-MSArKysrKysrKysrKwogNiBmaWxlcyBjaGFuZ2VkLCA0NCBpbnNlcnRpb25zKCspCgpkaWZmIC0t
-Z2l0IGEvZnMvc21iL2NsaWVudC9jaWZzZ2xvYi5oIGIvZnMvc21iL2NsaWVudC9jaWZzZ2xvYi5o
-CmluZGV4IGY2YTMwMjIwNWY4OS4uOWUwMmYyN2VmNzBmIDEwMDY0NAotLS0gYS9mcy9zbWIvY2xp
-ZW50L2NpZnNnbG9iLmgKKysrIGIvZnMvc21iL2NsaWVudC9jaWZzZ2xvYi5oCkBAIC0xMDc3LDYg
-KzEwNzcsNyBAQCBzdHJ1Y3QgY2lmc19zZXMgewogCQkJCSAgIGFuZCBhZnRlciBtb3VudCBvcHRp
-b24gcGFyc2luZyB3ZSBmaWxsIGl0ICovCiAJY2hhciAqZG9tYWluTmFtZTsKIAljaGFyICpwYXNz
-d29yZDsKKwljaGFyICpwYXNzd29yZDI7IC8qIFdoZW4ga2V5IHJvdGF0aW9uIHVzZWQsIG5ldyBw
-YXNzd29yZCBtYXkgYmUgc2V0IGJlZm9yZSBpdCBleHBpcmVzICovCiAJY2hhciB3b3Jrc3RhdGlv
-bl9uYW1lW0NJRlNfTUFYX1dPUktTVEFUSU9OX0xFTl07CiAJc3RydWN0IHNlc3Npb25fa2V5IGF1
-dGhfa2V5OwogCXN0cnVjdCBudGxtc3NwX2F1dGggKm50bG1zc3A7IC8qIGNpcGhlcnRleHQsIGZs
-YWdzLCBzZXJ2ZXIgY2hhbGxlbmdlICovCmRpZmYgLS1naXQgYS9mcy9zbWIvY2xpZW50L2Nvbm5l
-Y3QuYyBiL2ZzL3NtYi9jbGllbnQvY29ubmVjdC5jCmluZGV4IDg1Njc5YWUxMDZmZC4uNGUzNTk3
-MDY4MWJmIDEwMDY0NAotLS0gYS9mcy9zbWIvY2xpZW50L2Nvbm5lY3QuYworKysgYi9mcy9zbWIv
-Y2xpZW50L2Nvbm5lY3QuYwpAQCAtMjE4Myw2ICsyMTgzLDcgQEAgY2lmc19zZXRfY2lmc2NyZWRz
-KHN0cnVjdCBzbWIzX2ZzX2NvbnRleHQgKmN0eCwgc3RydWN0IGNpZnNfc2VzICpzZXMpCiAJfQog
-CiAJKytkZWxpbTsKKwkvKiBCQiBjb25zaWRlciBhZGRpbmcgc3VwcG9ydCBmb3IgcGFzc3dvcmQy
-IChLZXkgUm90YXRpb24pIGZvciBtdWx0aXVzZXIgaW4gZnV0dXJlICovCiAJY3R4LT5wYXNzd29y
-ZCA9IGtzdHJuZHVwKGRlbGltLCBsZW4sIEdGUF9LRVJORUwpOwogCWlmICghY3R4LT5wYXNzd29y
-ZCkgewogCQljaWZzX2RiZyhGWUksICJVbmFibGUgdG8gYWxsb2NhdGUgJXpkIGJ5dGVzIGZvciBw
-YXNzd29yZFxuIiwKQEAgLTIyMDYsNiArMjIwNyw3IEBAIGNpZnNfc2V0X2NpZnNjcmVkcyhzdHJ1
-Y3Qgc21iM19mc19jb250ZXh0ICpjdHgsIHN0cnVjdCBjaWZzX3NlcyAqc2VzKQogCQkJa2ZyZWUo
-Y3R4LT51c2VybmFtZSk7CiAJCQljdHgtPnVzZXJuYW1lID0gTlVMTDsKIAkJCWtmcmVlX3NlbnNp
-dGl2ZShjdHgtPnBhc3N3b3JkKTsKKwkJCS8qIG5vIG5lZWQgdG8gZnJlZSBjdHgtPnBhc3N3b3Jk
-MiBzaW5jZSBub3QgYWxsb2NhdGVkIGluIHRoaXMgcGF0aCAqLwogCQkJY3R4LT5wYXNzd29yZCA9
-IE5VTEw7CiAJCQlnb3RvIG91dF9rZXlfcHV0OwogCQl9CkBAIC0yMzE3LDYgKzIzMTksMTIgQEAg
-Y2lmc19nZXRfc21iX3NlcyhzdHJ1Y3QgVENQX1NlcnZlcl9JbmZvICpzZXJ2ZXIsIHN0cnVjdCBz
-bWIzX2ZzX2NvbnRleHQgKmN0eCkKIAkJaWYgKCFzZXMtPnBhc3N3b3JkKQogCQkJZ290byBnZXRf
-c2VzX2ZhaWw7CiAJfQorCS8qIGN0eC0+cGFzc3dvcmQgZnJlZWQgYXQgdW5tb3VudCAqLworCWlm
-IChjdHgtPnBhc3N3b3JkMikgeworCQlzZXMtPnBhc3N3b3JkMiA9IGtzdHJkdXAoY3R4LT5wYXNz
-d29yZDIsIEdGUF9LRVJORUwpOworCQlpZiAoIXNlcy0+cGFzc3dvcmQyKQorCQkJZ290byBnZXRf
-c2VzX2ZhaWw7CisJfQogCWlmIChjdHgtPmRvbWFpbm5hbWUpIHsKIAkJc2VzLT5kb21haW5OYW1l
-ID0ga3N0cmR1cChjdHgtPmRvbWFpbm5hbWUsIEdGUF9LRVJORUwpOwogCQlpZiAoIXNlcy0+ZG9t
-YWluTmFtZSkKZGlmZiAtLWdpdCBhL2ZzL3NtYi9jbGllbnQvZnNfY29udGV4dC5jIGIvZnMvc21i
-L2NsaWVudC9mc19jb250ZXh0LmMKaW5kZXggYjdiZmU3MDViMmM0Li42YzcyN2Q4YzMxZTggMTAw
-NjQ0Ci0tLSBhL2ZzL3NtYi9jbGllbnQvZnNfY29udGV4dC5jCisrKyBiL2ZzL3NtYi9jbGllbnQv
-ZnNfY29udGV4dC5jCkBAIC0xNjIsNiArMTYyLDcgQEAgY29uc3Qgc3RydWN0IGZzX3BhcmFtZXRl
-cl9zcGVjIHNtYjNfZnNfcGFyYW1ldGVyc1tdID0gewogCWZzcGFyYW1fc3RyaW5nKCJ1c2VybmFt
-ZSIsIE9wdF91c2VyKSwKIAlmc3BhcmFtX3N0cmluZygicGFzcyIsIE9wdF9wYXNzKSwKIAlmc3Bh
-cmFtX3N0cmluZygicGFzc3dvcmQiLCBPcHRfcGFzcyksCisJZnNwYXJhbV9zdHJpbmcoInBhc3N3
-b3JkMiIsIE9wdF9wYXNzMiksCiAJZnNwYXJhbV9zdHJpbmcoImlwIiwgT3B0X2lwKSwKIAlmc3Bh
-cmFtX3N0cmluZygiYWRkciIsIE9wdF9pcCksCiAJZnNwYXJhbV9zdHJpbmcoImRvbWFpbiIsIE9w
-dF9kb21haW4pLApAQCAtMzQ1LDYgKzM0Niw3IEBAIHNtYjNfZnNfY29udGV4dF9kdXAoc3RydWN0
-IHNtYjNfZnNfY29udGV4dCAqbmV3X2N0eCwgc3RydWN0IHNtYjNfZnNfY29udGV4dCAqY3R4CiAJ
-bmV3X2N0eC0+bm9kZW5hbWUgPSBOVUxMOwogCW5ld19jdHgtPnVzZXJuYW1lID0gTlVMTDsKIAlu
-ZXdfY3R4LT5wYXNzd29yZCA9IE5VTEw7CisJbmV3X2N0eC0+cGFzc3dvcmQyID0gTlVMTDsKIAlu
-ZXdfY3R4LT5zZXJ2ZXJfaG9zdG5hbWUgPSBOVUxMOwogCW5ld19jdHgtPmRvbWFpbm5hbWUgPSBO
-VUxMOwogCW5ld19jdHgtPlVOQyA9IE5VTEw7CkBAIC0zNTcsNiArMzU5LDcgQEAgc21iM19mc19j
-b250ZXh0X2R1cChzdHJ1Y3Qgc21iM19mc19jb250ZXh0ICpuZXdfY3R4LCBzdHJ1Y3Qgc21iM19m
-c19jb250ZXh0ICpjdHgKIAlEVVBfQ1RYX1NUUihwcmVwYXRoKTsKIAlEVVBfQ1RYX1NUUih1c2Vy
-bmFtZSk7CiAJRFVQX0NUWF9TVFIocGFzc3dvcmQpOworCURVUF9DVFhfU1RSKHBhc3N3b3JkMik7
-CiAJRFVQX0NUWF9TVFIoc2VydmVyX2hvc3RuYW1lKTsKIAlEVVBfQ1RYX1NUUihVTkMpOwogCURV
-UF9DVFhfU1RSKHNvdXJjZSk7CkBAIC05MDUsNiArOTA4LDggQEAgc3RhdGljIGludCBzbWIzX3Jl
-Y29uZmlndXJlKHN0cnVjdCBmc19jb250ZXh0ICpmYykKIAllbHNlICB7CiAJCWtmcmVlX3NlbnNp
-dGl2ZShzZXMtPnBhc3N3b3JkKTsKIAkJc2VzLT5wYXNzd29yZCA9IGtzdHJkdXAoY3R4LT5wYXNz
-d29yZCwgR0ZQX0tFUk5FTCk7CisJCWtmcmVlX3NlbnNpdGl2ZShzZXMtPnBhc3N3b3JkMik7CisJ
-CXNlcy0+cGFzc3dvcmQyID0ga3N0cmR1cChjdHgtPnBhc3N3b3JkMiwgR0ZQX0tFUk5FTCk7CiAJ
-fQogCVNURUFMX1NUUklORyhjaWZzX3NiLCBjdHgsIGRvbWFpbm5hbWUpOwogCVNURUFMX1NUUklO
-RyhjaWZzX3NiLCBjdHgsIG5vZGVuYW1lKTsKQEAgLTEzMDUsNiArMTMxMCwxOCBAQCBzdGF0aWMg
-aW50IHNtYjNfZnNfY29udGV4dF9wYXJzZV9wYXJhbShzdHJ1Y3QgZnNfY29udGV4dCAqZmMsCiAJ
-CQlnb3RvIGNpZnNfcGFyc2VfbW91bnRfZXJyOwogCQl9CiAJCWJyZWFrOworCWNhc2UgT3B0X3Bh
-c3MyOgorCQlrZnJlZV9zZW5zaXRpdmUoY3R4LT5wYXNzd29yZDIpOworCQljdHgtPnBhc3N3b3Jk
-MiA9IE5VTEw7CisJCWlmIChzdHJsZW4ocGFyYW0tPnN0cmluZykgPT0gMCkKKwkJCWJyZWFrOwor
-CisJCWN0eC0+cGFzc3dvcmQyID0ga3N0cmR1cChwYXJhbS0+c3RyaW5nLCBHRlBfS0VSTkVMKTsK
-KwkJaWYgKGN0eC0+cGFzc3dvcmQyID09IE5VTEwpIHsKKwkJCWNpZnNfZXJyb3JmKGZjLCAiT09N
-IHdoZW4gY29weWluZyBwYXNzd29yZDIgc3RyaW5nXG4iKTsKKwkJCWdvdG8gY2lmc19wYXJzZV9t
-b3VudF9lcnI7CisJCX0KKwkJYnJlYWs7CiAJY2FzZSBPcHRfaXA6CiAJCWlmIChzdHJsZW4ocGFy
-YW0tPnN0cmluZykgPT0gMCkgewogCQkJY3R4LT5nb3RfaXAgPSBmYWxzZTsKQEAgLTE2MDgsNiAr
-MTYyNSw4IEBAIHN0YXRpYyBpbnQgc21iM19mc19jb250ZXh0X3BhcnNlX3BhcmFtKHN0cnVjdCBm
-c19jb250ZXh0ICpmYywKICBjaWZzX3BhcnNlX21vdW50X2VycjoKIAlrZnJlZV9zZW5zaXRpdmUo
-Y3R4LT5wYXNzd29yZCk7CiAJY3R4LT5wYXNzd29yZCA9IE5VTEw7CisJa2ZyZWVfc2Vuc2l0aXZl
-KGN0eC0+cGFzc3dvcmQyKTsKKwljdHgtPnBhc3N3b3JkMiA9IE5VTEw7CiAJcmV0dXJuIC1FSU5W
-QUw7CiB9CiAKQEAgLTE3MTMsNiArMTczMiw4IEBAIHNtYjNfY2xlYW51cF9mc19jb250ZXh0X2Nv
-bnRlbnRzKHN0cnVjdCBzbWIzX2ZzX2NvbnRleHQgKmN0eCkKIAljdHgtPnVzZXJuYW1lID0gTlVM
-TDsKIAlrZnJlZV9zZW5zaXRpdmUoY3R4LT5wYXNzd29yZCk7CiAJY3R4LT5wYXNzd29yZCA9IE5V
-TEw7CisJa2ZyZWVfc2Vuc2l0aXZlKGN0eC0+cGFzc3dvcmQyKTsKKwljdHgtPnBhc3N3b3JkMiA9
-IE5VTEw7CiAJa2ZyZWUoY3R4LT5zZXJ2ZXJfaG9zdG5hbWUpOwogCWN0eC0+c2VydmVyX2hvc3Ru
-YW1lID0gTlVMTDsKIAlrZnJlZShjdHgtPlVOQyk7CmRpZmYgLS1naXQgYS9mcy9zbWIvY2xpZW50
-L2ZzX2NvbnRleHQuaCBiL2ZzL3NtYi9jbGllbnQvZnNfY29udGV4dC5oCmluZGV4IDhhMzU2NDVl
-MGI2NS4uYTk0N2JkZGViYTI3IDEwMDY0NAotLS0gYS9mcy9zbWIvY2xpZW50L2ZzX2NvbnRleHQu
-aAorKysgYi9mcy9zbWIvY2xpZW50L2ZzX2NvbnRleHQuaApAQCAtMTQ1LDYgKzE0NSw3IEBAIGVu
-dW0gY2lmc19wYXJhbSB7CiAJT3B0X3NvdXJjZSwKIAlPcHRfdXNlciwKIAlPcHRfcGFzcywKKwlP
-cHRfcGFzczIsCiAJT3B0X2lwLAogCU9wdF9kb21haW4sCiAJT3B0X3NyY2FkZHIsCkBAIC0xNzcs
-NiArMTc4LDcgQEAgc3RydWN0IHNtYjNfZnNfY29udGV4dCB7CiAKIAljaGFyICp1c2VybmFtZTsK
-IAljaGFyICpwYXNzd29yZDsKKwljaGFyICpwYXNzd29yZDI7CiAJY2hhciAqZG9tYWlubmFtZTsK
-IAljaGFyICpzb3VyY2U7CiAJY2hhciAqc2VydmVyX2hvc3RuYW1lOwpkaWZmIC0tZ2l0IGEvZnMv
-c21iL2NsaWVudC9taXNjLmMgYi9mcy9zbWIvY2xpZW50L21pc2MuYwppbmRleCAzM2FjNGY4ZjUw
-NTAuLjdkMTVhMTk2OWI4MSAxMDA2NDQKLS0tIGEvZnMvc21iL2NsaWVudC9taXNjLmMKKysrIGIv
-ZnMvc21iL2NsaWVudC9taXNjLmMKQEAgLTk4LDYgKzk4LDcgQEAgc2VzSW5mb0ZyZWUoc3RydWN0
-IGNpZnNfc2VzICpidWZfdG9fZnJlZSkKIAlrZnJlZShidWZfdG9fZnJlZS0+c2VydmVyRG9tYWlu
-KTsKIAlrZnJlZShidWZfdG9fZnJlZS0+c2VydmVyTk9TKTsKIAlrZnJlZV9zZW5zaXRpdmUoYnVm
-X3RvX2ZyZWUtPnBhc3N3b3JkKTsKKwlrZnJlZV9zZW5zaXRpdmUoYnVmX3RvX2ZyZWUtPnBhc3N3
-b3JkMik7CiAJa2ZyZWUoYnVmX3RvX2ZyZWUtPnVzZXJfbmFtZSk7CiAJa2ZyZWUoYnVmX3RvX2Zy
-ZWUtPmRvbWFpbk5hbWUpOwogCWtmcmVlX3NlbnNpdGl2ZShidWZfdG9fZnJlZS0+YXV0aF9rZXku
-cmVzcG9uc2UpOwpkaWZmIC0tZ2l0IGEvZnMvc21iL2NsaWVudC9zbWIycGR1LmMgYi9mcy9zbWIv
-Y2xpZW50L3NtYjJwZHUuYwppbmRleCBjMGM0OTMzYWY1ZmMuLjg2YzY0N2E5NDdjYyAxMDA2NDQK
-LS0tIGEvZnMvc21iL2NsaWVudC9zbWIycGR1LmMKKysrIGIvZnMvc21iL2NsaWVudC9zbWIycGR1
-LmMKQEAgLTM2Nyw2ICszNjcsMTcgQEAgc21iMl9yZWNvbm5lY3QoX19sZTE2IHNtYjJfY29tbWFu
-ZCwgc3RydWN0IGNpZnNfdGNvbiAqdGNvbiwKIAkJfQogCiAJCXJjID0gY2lmc19zZXR1cF9zZXNz
-aW9uKDAsIHNlcywgc2VydmVyLCBubHNfY29kZXBhZ2UpOworCQlpZiAoKHJjID09IC1FQUNDRVMp
-IHx8IChyYyA9PSAtRUtFWUVYUElSRUQpIHx8IChyYyA9PSAtRUtFWVJFVk9LRUQpKSB7CisJCQkv
-KgorCQkJICogVHJ5IGFsdGVybmF0ZSBwYXNzd29yZCBmb3IgbmV4dCByZWNvbm5lY3QgKGtleSBy
-b3RhdGlvbgorCQkJICogY291bGQgYmUgZW5hYmxlZCBvbiB0aGUgc2VydmVyIGUuZy4pIGlmIGFu
-IGFsdGVybmF0ZQorCQkJICogcGFzc3dvcmQgaXMgYXZhaWxhYmxlIGFuZCB0aGUgY3VycmVudCBw
-YXNzd29yZCBpcyBleHBpcmVkLAorCQkJICogYnV0IGRvIG5vdCBzd2FwIG9uIG5vbiBwd2QgcmVs
-YXRlZCBlcnJvcnMgbGlrZSBob3N0IGRvd24KKwkJCSAqLworCQkJaWYgKHNlcy0+cGFzc3dvcmQy
-KQorCQkJCXN3YXAoc2VzLT5wYXNzd29yZDIsIHNlcy0+cGFzc3dvcmQpOworCQl9CisKIAkJaWYg
-KChyYyA9PSAtRUFDQ0VTKSAmJiAhdGNvbi0+cmV0cnkpIHsKIAkJCW11dGV4X3VubG9jaygmc2Vz
-LT5zZXNzaW9uX211dGV4KTsKIAkJCXJjID0gLUVIT1NURE9XTjsKLS0gCjIuNDAuMQoK
---000000000000ec3d7706154d9220--
+Are sure?  For example, DNS resolver and kerberos auth require keyring
+and are used over reconnect.
 
