@@ -2,66 +2,66 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id DE27689E171
-	for <lists+samba-technical@lfdr.de>; Tue,  9 Apr 2024 19:20:38 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 380998A3C2D
+	for <lists+samba-technical@lfdr.de>; Sat, 13 Apr 2024 12:13:31 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=8KKTyTIbsFc3DDsu9SnRNh0iL4iS4ZelDeybkdPPbqE=; b=Y8UbA352zWghQLwk44gseFIgki
-	Nx7kmvybpcW9EYOBsyHcjxs9d2gqgXweh5E+G/c5BybVH9A5QBMolu8P4NHOUWmHy4C5FRSn5KrYg
-	Wx1OwrDfCqfEVIJspE8IVNCrj5I2/8T39xQtbLguyTdQH16dQvnuoccXgLRFQj1T8JnpYUlcQMoI6
-	j7/zOeq10Qf5JfenGyBD44c8soe63y6iyjS8a/AwZU8Obzv6DbZ6Xo2pwUHFPMx9JaTGuDLVtuVL0
-	NNb89ivBHp+eW0gY+AmXwRoqOpwH5/XT18vctS+FeCSJ2Sn3ZZW1UcB/yCkGassfnop3A69v+Nh27
-	q6VCeS7A==;
-Received: from ip6-localhost ([::1]:32534 helo=hr1.samba.org) 
+	bh=pp0/G7jaP4xfrxL+Nun8zOzJR4cjAehFUaa+BSEMdpo=; b=aWTWvggf2WyPpMBwxjiS0U6GlJ
+	sTFXlR680RlKILfhG+6u1ww6o5Ab5VJ+twQ5cJDypAZSnXgnoOGV6NmY8an9HOGvzMoihHmuJpWaH
+	bXJOVzoG8hPH8QQ/1UgxBnhXZnq4tpB9M9puSWZRt+JVwXOGQxCSJ8A9fFWS61Akk9HuBwlBuzu3L
+	suPkgFWLIX85JCcyueJ6fRUV1WET6hVwWMDurJOnWiOa1xsTqswIsFl6tBa6ZFp3Ad2H1QfnEQh8E
+	zfDdlj7ugQrPxJG3Plp62lNxUAdnx3UGAs1wTHYtRCUQBB04Q3zUVa+epHMtoTyNAucsC98WfmrcX
+	nAAu2A1Q==;
+Received: from ip6-localhost ([::1]:53228 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1ruF8S-004QAB-HL; Tue, 09 Apr 2024 17:19:52 +0000
-Received: from mail-lf1-x131.google.com ([2a00:1450:4864:20::131]:45355) 
+	id 1rvaMh-004iFR-UN; Sat, 13 Apr 2024 10:12:08 +0000
+Received: from mail-ed1-x533.google.com ([2a00:1450:4864:20::533]:48315) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1ruF8M-004QA4-Ti
- for samba-technical@lists.samba.org; Tue, 09 Apr 2024 17:19:49 +0000
-Received: by mail-lf1-x131.google.com with SMTP id
- 2adb3069b0e04-516d0161e13so6600762e87.3
- for <samba-technical@lists.samba.org>; Tue, 09 Apr 2024 10:19:46 -0700 (PDT)
+ (Exim) id 1rvaMd-004iFK-KC
+ for samba-technical@lists.samba.org; Sat, 13 Apr 2024 10:12:05 +0000
+Received: by mail-ed1-x533.google.com with SMTP id
+ 4fb4d7f45d1cf-56e47843cc7so1647767a12.0
+ for <samba-technical@lists.samba.org>; Sat, 13 Apr 2024 03:11:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1712683186; x=1713287986; darn=lists.samba.org;
+ d=gmail.com; s=20230601; t=1713003118; x=1713607918; darn=lists.samba.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=8KKTyTIbsFc3DDsu9SnRNh0iL4iS4ZelDeybkdPPbqE=;
- b=BBrWwhHUGVY/KG5XqRy1I0zmLHqZjtlLRSfld/eQZobA5aE7EGRkRiGeTRxvFO7JCE
- 2QkUjnL+8cDs8cZreZ5liiqWOWKY+Ag6czWnPjf4B1C+oaouF3oKVLzol/ttoPRC+6q9
- PwomvB+0xvXE0qEF7j6g5fdMg3eRm2LsVUcQzIF5+/wefGfw2+HQag5RYak0Pxm2zv++
- f2hkd6yR1ypurvj6+WmvO/yixIgIVM5jb7idzjSFBI9LWl5St1DhRyFnP7KqilDwWEPu
- SGD6DFYEGE+LIqzwPRF8QLybINNdaMgpXIuV0tQibXCsc3yN+5HeGO/VE1W671njMm/+
- iLtQ==
+ bh=pp0/G7jaP4xfrxL+Nun8zOzJR4cjAehFUaa+BSEMdpo=;
+ b=nEIRcT2b2Ig8hU5kjZNHX/22Zb9OotLZk8UM20Bp23GgkmvtBpGf2aAh9aArPQnOKo
+ pLnxaOeVvPSpN7qNSMNFwJfR3HHeUEfikPJX2SNyunkCCEVfqXIpckwoc0rt8DBSCPKW
+ Uv5TjammuHSkdcGYKTJ+eyRpTuK6u3tdorHPZLPekmy6wHSZZ6fgr+louYaNAcieoTTV
+ 7AVrWEevXcz+YWbqyzZzk3FisKnrFBqzSxlONBnJQOkQ0EDjdccS25xcIkI8T1rNKIef
+ xaW+m8WeOqKJLbsYPrXIGxu0yNZ7etmCXq3zKqqLxqt9F14vtOV0sGY/HYKUi+VU/nYA
+ mm5Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712683186; x=1713287986;
+ d=1e100.net; s=20230601; t=1713003118; x=1713607918;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=8KKTyTIbsFc3DDsu9SnRNh0iL4iS4ZelDeybkdPPbqE=;
- b=uySrgWjI+AFmxStLc7HjpjxsvGJaBaa4bHcBalRsbl/haDctO4JQrJ7kbdJzkLzT/p
- NjCKGO58bIr16KMZdC3aZSJA3Qd84xRaIYWNKPdQaknwDCZ3MRMqQJPwUD/8wDL3DVLh
- LovPk7BlRd95rElqUXi//lR6jUsC3sdyttsWpBl5S+1gy8FtZCRkThwj0/qZf0DfzGFX
- 8vTPQDDoG8wA2oX8tkSrAtEu0864CHnLyOdQFUxxm4ySj7r4BzL5R30vhRc5Xo6PUUd6
- mbOP9WDRf0qoyliUpHU64ScH2bJhnUhv8xNU8+8QLCpXxTl3mg38jNfTZBl6Fqh7nSjR
- OeEA==
+ bh=pp0/G7jaP4xfrxL+Nun8zOzJR4cjAehFUaa+BSEMdpo=;
+ b=rmLW5nZGMwfv+mtgNcp+vxOpR5lTG80ExEybLYWbzxxYnI4sHFTxSGc5mgC9AkS1jU
+ Nbj1URdfJeUMiv98e0murG5qirxuDtpf22olN6MXcKdmPwYlTRmme3uWzpiqPJBvcp2R
+ oKnX9N2YTx1XaswfFB7GqZnN/6pv8sEygc28y8y9zz15Go8sVuNr9WCcqDmE0EuJMOiG
+ YNtn38TB2fatiAdGICKHNIxTgl8qCESL1u8pxU1pu+OU974L7zQFxlrPNW3PxfIYnF1x
+ ua8khq1FaL4s9a4iUtBSaT36Mzh1+xAgfKdcvezmjRvc7PjcqtfGfWtLMban6CIJDg9z
+ Y6cw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW69bywBrzBg9PL0G6fWH+/ymnucyLR9iZjsx+n1xJtQe2hRIa1r7LoQRO/bZRlepHxTN7p10PT0jj/yvp/sj/FAcf/3ln0fnBOxZMQdo91
-X-Gm-Message-State: AOJu0YzIvu+/TuWnyVOM4Ozmbbh25HtTr+3m74iu83jFXM7ml4EqH/25
- U6wMnuN16eH+7xUO5YyvdCiUS8G+G/uN7+sQzo0veb6kaebI8b/CBUNgBCUmfv7srwYmM5wnSKB
- F0K0BS3gbYS0cd8Cex59VtVpr5jQ=
-X-Google-Smtp-Source: AGHT+IHt8ErjIQn0O9arjDfyXAUYVqGbU2vGyiifjGUrhIpjsTlIKqBAACuFKQqa8zx36Zjqw844fK8J4vt+g0KmYVQ=
-X-Received: by 2002:ac2:465e:0:b0:516:d250:86c4 with SMTP id
- s30-20020ac2465e000000b00516d25086c4mr37955lfo.59.1712683185400; Tue, 09 Apr
- 2024 10:19:45 -0700 (PDT)
+ AJvYcCWs3tLXWV7/J4zgH3BOY4N2NYSJWUrkV24wkeNBTVIiUyD8H29vPRxCQDEfcMmXJgrVAxanPALEhS9AgcsP/Q7QOC8y+J7Hh6UxQ+5yBjEu
+X-Gm-Message-State: AOJu0YwXJgJPtFB2gZ7TCjY6mOJGp5jjQYc3Jjj/6EPQE5Mifxc9MCDZ
+ Oetms+gLOpI4s0+NUKMeuQLaOSjkteYCSbNipuxtEeotugVQGzUgl+bQtPrSU9lXvrR+N4w7u1p
+ Gob9kJXMrDFo/59/KRqs3B0ScVHFP8Q==
+X-Google-Smtp-Source: AGHT+IHbtoFqqjXX5yyttD1d6EXR2Ucsz/XnNTkzhDCPle8jgk8iv+xWYiUcY861uOmzEGG6a/rKvF6l9YveU6MTRbc=
+X-Received: by 2002:a2e:81c3:0:b0:2d4:9fbe:b5f with SMTP id
+ s3-20020a2e81c3000000b002d49fbe0b5fmr2758427ljg.36.1712998947218; Sat, 13 Apr
+ 2024 02:02:27 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240409112758.467112-1-rickaran@axis.com>
  <20240409112758.467112-2-rickaran@axis.com>
 In-Reply-To: <20240409112758.467112-2-rickaran@axis.com>
-Date: Tue, 9 Apr 2024 12:19:34 -0500
-Message-ID: <CAH2r5mviWen9OGKq++d+c=eGgKgGequ=97df+agFy0gn8hK9fw@mail.gmail.com>
+Date: Sat, 13 Apr 2024 04:02:15 -0500
+Message-ID: <CAH2r5msm+xFyMPCJV7Luf6aQ04cHOhevmjJi8J-2Bf711T1ziQ@mail.gmail.com>
 Subject: Re: [PATCH v2 1/1] smb: client: Fix hang in smb2_reconnect
 To: Rickard Andersson <rickaran@axis.com>
 Content-Type: text/plain; charset="UTF-8"
@@ -88,14 +88,15 @@ Cc: pc@manguebit.com, linux-cifs@vger.kernel.org, sprasad@microsoft.com,
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-I tried this on 6.8-rc7 and current 6.9-rc3 and it didn't fail on either.
+Shyam and I tried some experiments and there are two cases where the
+patch breaks:
+1) ChangeNotify will time out
+2) Certainly byte range lock calls (they can be allowed to block) will time=
+out
 
-I tried (to Samba, and using the mount parms you suggested for
-cifs.ko) with both "killall -s SIGSTOP smbd" and also with "killall
-smbd" - but unmount worked fine in both cases.
-
-Do you know if this fails to ksmbd or Samba or ...?  Other ideas for
-how to repro this?
+An obvious alternative would be to not make this change for the
+commands like ChangeNotify and blocking locks but allow it for the
+others.
 
 On Tue, Apr 9, 2024 at 6:29=E2=80=AFAM Rickard Andersson <rickaran@axis.com=
 > wrote:
