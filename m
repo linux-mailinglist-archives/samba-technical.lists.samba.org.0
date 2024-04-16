@@ -2,65 +2,61 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 63D688A5843
-	for <lists+samba-technical@lfdr.de>; Mon, 15 Apr 2024 18:55:06 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B338F8A5F67
+	for <lists+samba-technical@lfdr.de>; Tue, 16 Apr 2024 02:46:09 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=WCkGk/wyeJPxvX4GPCPt5k2Ckw/YjVz9eWkCKVmg0Es=; b=sI/2R9QcL1CVBkesussnuo1hoV
-	Ika+xGz7eEzrDgUEReQPJDZ7P5EtR1BmXUTyEffz+JH2OUvhDgT+k1Y00IrnFj2PB4fFSjJf+ctei
-	dsc52dsB2s0lYzaeGhALSm8WvzlOuOA1nsgBaDR3vFqmaK6Aq815RcXBNDuYycnAlYAF5er0/tP6F
-	dz0hi2Asxbo4DY8izJhj6wFNNaCa1bacYwLANhHRu4XK3uAW7TbxAbHh8JsvMe73OkBewR7sv0F4+
-	spuawCRiuF7r+GEA/E82YUC+gY68/jwysNppmbNQuEUAI9xG/el0Td5pzfBdsVqPkS0+olJiRaI6o
-	bpAOQhpA==;
-Received: from ip6-localhost ([::1]:58262 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=R2at1VyBpUTFVHVAwQTUAeEMu9H4iwF5swJRAN+QyMg=; b=piYap/sC4mWB5oVQHyAY8gdMIk
+	wpYK1QBmnpTB8TKDSdKw2myzqCccdyCY1IubLtusLaY+17S70QfZB/LRGpvxfT7BQLRHaQAthek+k
+	a3+XTQG2hhO/mxcjLdkYDtqWePOctdUYGpi2ozYQ3zY1t11S3oj66DeCCADx+5ENFuHPSVTBH91yo
+	P3QKdMj1QnFmJ+PGAH1h739pSFb2OUBPSVHWstlQUaXdyKL0S8p1s1K2KUg0uvJgNThh3PPGucgan
+	/RgtgyyXFP/m8kwkR9T9E2gI1703j5z/nvGSe7+JQZDfA0YKWL6vrbHnefgs4DwNI1EYQrxSXsspa
+	Oc2D2dfA==;
+Received: from ip6-localhost ([::1]:27976 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1rwPb5-004put-9L; Mon, 15 Apr 2024 16:54:23 +0000
-Received: from mail-lj1-x22f.google.com ([2a00:1450:4864:20::22f]:48537) 
+	id 1rwWwx-004rfS-Ay; Tue, 16 Apr 2024 00:45:27 +0000
+Received: from dfw.source.kernel.org ([139.178.84.217]:48742) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1rwPb0-004pum-Qu
- for samba-technical@lists.samba.org; Mon, 15 Apr 2024 16:54:21 +0000
-Received: by mail-lj1-x22f.google.com with SMTP id
- 38308e7fff4ca-2d8a24f8a3cso37130981fa.1
- for <samba-technical@lists.samba.org>; Mon, 15 Apr 2024 09:54:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1713200056; x=1713804856; darn=lists.samba.org;
- h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=WCkGk/wyeJPxvX4GPCPt5k2Ckw/YjVz9eWkCKVmg0Es=;
- b=EdMBqPoODcCzRIlPpCLt7K2a1QtbewZPLLgBg0jLGpxiac5NxRtgz3BbJbGqFf2G2y
- GhJ+YrjuocD+4kTjF0X9Nfh5rt27kCEGEY/px7W4Wq/Gazqd8LzCnahfmXAM2fesy6BD
- XgHLBWluI4YBXHKZBx9fB3fTiJRXNvRsfHi7ejZURFGgIHnn6OQlQRhMNrjgGGBwbh2C
- UIRdg+etmCnG6nvEpoKGVviMAWywoek6ovyPkZVBdiTprwO3BasjN73yLC+UV96zFQ+0
- 5tg4jVhs20eJr7emXphNZOD6Fim0LtRDPfrqg7y5LOHUNFZ6+GD7o6Ahy/S75CE/ctXa
- YqLw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713200056; x=1713804856;
- h=to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=WCkGk/wyeJPxvX4GPCPt5k2Ckw/YjVz9eWkCKVmg0Es=;
- b=jKn5QqjiXuJNxjVzUj+H9KjlvRYUQF43SOgA3EypEKZfxFGwW8weo52zgjHYaZMk4f
- fSEOQYnsI83G7v5yeI6oJAjR0vJuaLOW7cZy6QVELDtjPhP5vguW65lQhucm5EGygCPn
- U9r0cVfSTksPSUXqfPXZ9Qx9c5uikwX3mYVHiQAw/NC53AoN9lfz7B8wnXmWpLIVtlDo
- qCjU9D9XMz0UqT5QSiVtVFJ/K1elvN51qdyYLTQJKnJTASvN+jSyW//f5J8AblGIyA15
- 88hRVXDS6ECjo4xUyNyrnlCsIkUEKJ3/Ys+Y0nDOqhU1e3rplt7guCxRJoXQMu1Pearc
- H1iQ==
+ (Exim) id 1rwWws-004rfL-9X
+ for samba-technical@lists.samba.org; Tue, 16 Apr 2024 00:45:24 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id EE38D60ED0
+ for <samba-technical@lists.samba.org>; Tue, 16 Apr 2024 00:28:54 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9DB54C3277B
+ for <samba-technical@lists.samba.org>; Tue, 16 Apr 2024 00:28:54 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1713227334;
+ bh=R2at1VyBpUTFVHVAwQTUAeEMu9H4iwF5swJRAN+QyMg=;
+ h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
+ b=eJ0O+gNYDB9eaf2vvRtbzxodo6u+8KwG5MiL/kSksfWPtUSYJmo56oEFxJJyTuOzh
+ UtZ5RErnZ43fxLxHsQnn+PYNgl5O4Rn538mpkqw0ptefzsj3kzGgGmWMZbsxBQTKkK
+ JR8QbV+/jpwuI+ZOaGv6tHX4o1TiQ9MpfwVctAk2GX8fbNRLPJhiIWGrsb2gAo4pd8
+ XuLSBmKGS1JsOF5oeIYBXJUbW/vfSxVxQaWna4Q/Fknyg8WlUBV4bb7q7KvgILnwr0
+ kAtNS6ZWsa/eyXAwaJ4XK35ntBZgQAqbTIbeff4uv9l3wTAkwtdDLN3ewu9JA0VCgo
+ XslYHAPvErPoA==
+Received: by mail-oa1-f48.google.com with SMTP id
+ 586e51a60fabf-22fa7e4b0beso2493324fac.1
+ for <samba-technical@lists.samba.org>; Mon, 15 Apr 2024 17:28:54 -0700 (PDT)
 X-Forwarded-Encrypted: i=1;
- AJvYcCV4bM31m0ulzlVTOdEAX/4fw4+vRhyPUCvaOwOl3SyWqKbCySh12eYBXFUuddNkcH8UNLp5rtovwThEwcjTpxsGYKbDDLS3OBQAe0lqmnU7
-X-Gm-Message-State: AOJu0Yw490epvEwNhT55zWAW/7HqZpPTgopH8t+QWVQodgix+n3nqC+a
- wbhZKSvYae7/VJnDpbl6rGpwF2kWsH6xoSj5Ci7dxrOr39oZMnGVJnCCFPjdVghepabThgnPO8I
- arS7uheRdLwjCdIbgl2n3NKfKzCU=
-X-Google-Smtp-Source: AGHT+IE3mnc1QgRI8s4hmIaW7FSoRefXUw9LoIh/n0ONRWa5C48H8mvN0QPp2+WdS7LYC2EMhJ3uKAdWZ5qmC697rCA=
-X-Received: by 2002:a05:651c:10ba:b0:2d6:db84:5e93 with SMTP id
- k26-20020a05651c10ba00b002d6db845e93mr5508160ljn.47.1713200056351; Mon, 15
- Apr 2024 09:54:16 -0700 (PDT)
+ AJvYcCXQVyoPgvmhAcHaYhrwKiRbJQ558Zk994TmNyBWd8aBF/wWcpvpXplGj7rQSUvfeKC0v7P+CDq2gEJ11WVJfO7mDgi+9d0KA42Faf6Y6kR/
+X-Gm-Message-State: AOJu0YxHP0RGZ7KpYQ9K1JxHDDGscPIWuUv2jyNwPwwCnodC9DuI4J+C
+ F2loj4g+Z9eshzWqUU3psnkw8EFlzK8wY0mbuMfi8g+zDFdUSMpY/OWtTK6WzNp7iXfN7j+ZG0D
+ bP4Hi8wy3AzGCi+pwuM6DIJ1groE=
+X-Google-Smtp-Source: AGHT+IGHbmG7IqkstwyLgOdAb3XeBSVIgmOiLeUy6inVpnWQ5YydAYhBsfvKhsavzx6ZVXCcl5kFnOPpACRl9cwYQ8c=
+X-Received: by 2002:a05:6870:a195:b0:229:ec87:cc29 with SMTP id
+ a21-20020a056870a19500b00229ec87cc29mr15860308oaf.49.1713227333970; Mon, 15
+ Apr 2024 17:28:53 -0700 (PDT)
 MIME-Version: 1.0
-Date: Mon, 15 Apr 2024 11:54:04 -0500
-Message-ID: <CAH2r5ms7EWvNFVJ7_D7QXWOyj+oViKDJD2EuoY3n=w1c5wLTKQ@mail.gmail.com>
-Subject: current ksmbd
-To: Namjae Jeon <linkinjeon@kernel.org>, CIFS <linux-cifs@vger.kernel.org>, 
- samba-technical <samba-technical@lists.samba.org>
+References: <CAH2r5ms7EWvNFVJ7_D7QXWOyj+oViKDJD2EuoY3n=w1c5wLTKQ@mail.gmail.com>
+In-Reply-To: <CAH2r5ms7EWvNFVJ7_D7QXWOyj+oViKDJD2EuoY3n=w1c5wLTKQ@mail.gmail.com>
+Date: Tue, 16 Apr 2024 09:28:42 +0900
+X-Gmail-Original-Message-ID: <CAKYAXd-gN2uQ4B9UvUdvCM_A+qnrMuCHGQO7irfFozbjKBxpZA@mail.gmail.com>
+Message-ID: <CAKYAXd-gN2uQ4B9UvUdvCM_A+qnrMuCHGQO7irfFozbjKBxpZA@mail.gmail.com>
+Subject: Re: current ksmbd
+To: Steve French <smfrench@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -74,32 +70,41 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
+From: Namjae Jeon via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Namjae Jeon <linkinjeon@kernel.org>
+Cc: CIFS <linux-cifs@vger.kernel.org>,
+ samba-technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-We are up to 221 fstests run vs. ksmbd, and buildbot tests pass with
-current ksmb (this is with 6.9-rc4):
-http://smb311-linux-testing.southcentralus.cloudapp.azure.com/#/builders/10/builds/52
+2024=EB=85=84 4=EC=9B=94 16=EC=9D=BC (=ED=99=94) =EC=98=A4=EC=A0=84 1:54, S=
+teve French <smfrench@gmail.com>=EB=8B=98=EC=9D=B4 =EC=9E=91=EC=84=B1:
+>
+> We are up to 221 fstests run vs. ksmbd, and buildbot tests pass with
+> current ksmb (this is with 6.9-rc4):
+> http://smb311-linux-testing.southcentralus.cloudapp.azure.com/#/builders/=
+10/builds/52
+>
+> There are lots of minor features (and some fixes) that should be able
+> to be doable to increase this number even more.
+>
+> Note that Samba passes some tests that are skipped when run to ksmbd
+> that should be investigated:
+> e.g. generic/022 ("xfs_io fcollapse") and generic/351 ("xfs_io
+> fsinsert") and also generic/021 and 031 ("fallocate: Invalid argument)
+> and generic/525 ("pread: invalid argument") and generic/568 (which
+> looks like fallocate bug)
+Okay. I will check it after sambaXP.
 
-There are lots of minor features (and some fixes) that should be able
-to be doable to increase this number even more.
-
-Note that Samba passes some tests that are skipped when run to ksmbd
-that should be investigated:
-e.g. generic/022 ("xfs_io fcollapse") and generic/351 ("xfs_io
-fsinsert") and also generic/021 and 031 ("fallocate: Invalid argument)
-and generic/525 ("pread: invalid argument") and generic/568 (which
-looks like fallocate bug)
-
-Samba fails two tests that pass to ksmbd generic/286 ("create sparse
-file failed") and generic/591 (splice test) that also should be
-investigated.
-
-
--- 
-Thanks,
-
-Steve
+Thanks for your check!
+>
+> Samba fails two tests that pass to ksmbd generic/286 ("create sparse
+> file failed") and generic/591 (splice test) that also should be
+> investigated.
+>
+>
+> --
+> Thanks,
+>
+> Steve
 
