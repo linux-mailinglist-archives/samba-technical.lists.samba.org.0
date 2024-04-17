@@ -2,72 +2,50 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id CCAA38A8339
-	for <lists+samba-technical@lfdr.de>; Wed, 17 Apr 2024 14:35:27 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C770A8A8558
+	for <lists+samba-technical@lfdr.de>; Wed, 17 Apr 2024 15:53:43 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=e5g+9Z9HtsHEKxe2LaOAecd54UvAXCkGQ96msWQj9N4=; b=IryOH1h4uoiouxUUIO/SVt9fUc
-	iez5JXObo/iRCnyf7qnUMgW/D5d7vS0mIPn20nSV4jBJGWZT8lLT/ueVPdEksEfF+t3ehgTQhhuvY
-	KNUjOS+VlPrmJ5Ftep+dvE91/kRSqF0MAi+cdeCRgdFXVdM1Ubs9djdTWuoXycIKvLbddm/eFRFLj
-	qMAdj3kMGv4MhN2dqokgnWPw5pdCA+Ww2kSILeAOXdfrasgcX4jQeVa7Muv8dblmQeFAH9f+T4I7M
-	ONltqbw0bk5IrJ99kkKJOInAU8I5HbnzChT6ARxuN/R73XjJ8+Zp/sphtwuCr3x/0Jhu+ydH5ngF1
-	FPgb7H3g==;
-Received: from ip6-localhost ([::1]:40446 helo=hr1.samba.org) 
+	bh=zoy3YjMJIrzYEbtLbdQ7+KikEyj0xnTUqoqyF9m0W0k=; b=M3iPeP1ntwGG/B66fbZZDVNn4F
+	wzgX9vGoXWRaJfJ7Salk485AYl3HGFvB1RJ0cNZLCmABOUtqEIHmwuS9Q7oBADrC74TeczV2n40Mn
+	NsovQFQliVWjndbv/Y6JxwvIhITD8Y8SbfA08bzWmZOm58OhQniXGtZkKt04xCsCCT/iqE7H5w/ST
+	8prhgl/fS9kGOgM37yZe+ysy6VSO2VSc3TTGVCnWi2BwulLPR0K0BiCnEjUBkziUeaEfTi4mmYP0A
+	MKH30uE4Ja1WNdReVwGyX1bzCFb8xsiDaX2q8rwHgmnCj5uG5vT6KqJlDGddk+jlhP/rxG8DhTqes
+	j6ZSTp1A==;
+Received: from ip6-localhost ([::1]:19566 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1rx4Ur-004yCP-Mx; Wed, 17 Apr 2024 12:34:42 +0000
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124]:29157) 
+	id 1rx5io-004yPt-JS; Wed, 17 Apr 2024 13:53:10 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:33006) 
  by hr1.samba.org with esmtps
- (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__AES_256_GCM:256) (Exim)
- id 1rx4Un-004yCI-MV
- for samba-technical@lists.samba.org; Wed, 17 Apr 2024 12:34:39 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1713357273;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=e5g+9Z9HtsHEKxe2LaOAecd54UvAXCkGQ96msWQj9N4=;
- b=MEl69lzC0HCbzLsj4jocSw9D5vfU473w1gbp007uf7oJ5ymk2xqpeANysVBp+xpXpajejC
- +GWN5EzOKEL1hwunG6mn9apwJthshnQw88BKxGqt6KMxs151jTqfWRZOT5YyPmT1BGDyVt
- riu9w3DUvsQzyx84NHzQaSmwZKOpIns=
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1713357274;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=e5g+9Z9HtsHEKxe2LaOAecd54UvAXCkGQ96msWQj9N4=;
- b=F7aikNKGKuveGTYjLzb3YeUpTBj2fPEmy7Zk2U6tfw+QGUMR1JfJTj4d5lmvkX6SrO4z+o
- cdUMU8ZFsyYxphQLm8nS/Islav+VbCUnAuXEePzFtwaEXGGFfVD5ipxkxXN20N6mgVAR+/
- 7JJjQnxQkuCz+RqDe7PHVaJ9LfngmYs=
-Received: from mimecast-mx02.redhat.com (mx-ext.redhat.com [66.187.233.73])
- by relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-577-HZb4tYkCOiuraGxVwvC9Yw-1; Wed,
- 17 Apr 2024 08:18:48 -0400
-X-MC-Unique: HZb4tYkCOiuraGxVwvC9Yw-1
-Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.rdu2.redhat.com
- [10.11.54.3])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id D17DE3C0253F;
- Wed, 17 Apr 2024 12:18:47 +0000 (UTC)
-Received: from warthog.procyon.org.uk (unknown [10.42.28.200])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 762A6112132A;
- Wed, 17 Apr 2024 12:18:46 +0000 (UTC)
-Organization: Red Hat UK Ltd. Registered Address: Red Hat UK Ltd, Amberley
- Place, 107-111 Peascod Street, Windsor, Berkshire, SI4 1TE, United
- Kingdom.
- Registered in England and Wales under Company Registration No. 3798903
-In-Reply-To: <202404161031.468b84f-oliver.sang@intel.com>
-References: <202404161031.468b84f-oliver.sang@intel.com>
-To: kernel test robot <oliver.sang@intel.com>
-Subject: Re: [dhowells-fs:cifs-netfs] [cifs] b4834f12a4:
- WARNING:at_fs/netfs/write_collect.c:#netfs_writeback_lookup_folio
+ (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1rx5ik-004yPm-91
+ for samba-technical@lists.samba.org; Wed, 17 Apr 2024 13:53:08 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Message-ID:Date:Cc:To:From;
+ bh=zoy3YjMJIrzYEbtLbdQ7+KikEyj0xnTUqoqyF9m0W0k=; b=d+KU26cFwFe3qfZNgAmhbGQ901
+ ITXCiMvcArOnWSpTP7fbA08auPKqn10d9zC8khy5EqR1ZMa0nd8Fer9n27NEhQubX9252vd3gS8YF
+ ziTYu7UbbeR8e7Mt8nSjSuA6GonHdoxtpg3+AnDJrA6+A0tscDsXdFqJe5BlT7IPJRyJFQSSHaCjv
+ nMTyA7T59kLMDmlxYbXLbtDFU9SjPgcJzqx9xJsioPe001RKQL0x+sf3pP2SO5PVJ4W0flXZOL3bc
+ avrlPd7Wj7BAmeWOvdJqh7MnNqPP/dxoT9AHwYgDrpfvkXIt6KZavT6fCamWrFGq3JXxb9V+cWPXY
+ 3qX4CJxhSFbDWlIYJO7yLEV+GQDo4ceTyOjBi3bhwj9sAh1qoD/1plumSd5PTM+QpT30A7Dbjw/NI
+ b2wy/fF/E2MyxQGk05iHjJjqK1VfDstSobLkktQt9nDCpUXRS6P3v2tjXS+q0tCXZ6jkO5GF2NUsB
+ 8SlnxdahfXeKB34g1ARRSr7S;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1rx5ig-006tyY-1y; Wed, 17 Apr 2024 13:53:02 +0000
+To: =?ISO-8859-1?Q?Andr=E9as?= LEROUX <aleroux@tranquil.it>,
+ samba-technical@lists.samba.org
+Subject: Re: Fwd: Regression: ldb performance with indexes
+Date: Wed, 17 Apr 2024 15:53:01 +0200
+Message-ID: <2680239.lGaqSPkdTl@magrathea>
+In-Reply-To: <f09a03b8f405c2cc9a2e97df5576a927eb823cdd.camel@samba.org>
+References: <4856178.OV4Wx5bFTl@magrathea>
+ <b7669c93-fb36-4949-bea0-c295836ebd27@tranquil.it>
+ <f09a03b8f405c2cc9a2e97df5576a927eb823cdd.camel@samba.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-ID: <164953.1713356321.1@warthog.procyon.org.uk>
-Date: Wed, 17 Apr 2024 13:18:41 +0100
-Message-ID: <164954.1713356321@warthog.procyon.org.uk>
-X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.3
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -81,22 +59,57 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: David Howells via samba-technical <samba-technical@lists.samba.org>
-Reply-To: David Howells <dhowells@redhat.com>
-Cc: Shyam Prasad N <nspmangalore@gmail.com>, Steve French <sfrench@samba.org>,
- lkp@intel.com, linux-cifs@vger.kernel.org, Rohith
- Surabattula <rohiths.msft@gmail.com>, samba-technical@lists.samba.org,
- Jeff Layton <jlayton@kernel.org>, dhowells@redhat.com,
- linux-fsdevel@vger.kernel.org, oe-lkp@lists.linux.dev, netfs@lists.linux.dev
+From: Andreas Schneider via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andreas Schneider <asn@samba.org>
+Cc: yalemu@tranquil.it, Denis CARDON <dcardon@tranquil.it>,
+ Andrew Bartlett <abartlet@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-When I try and do "sudo bin/lkp install job.yaml", I get an error because
-Fedora 39 doesn't have a libarchive-tools package.
+On Friday, 22 March 2024 21:35:27 GMT+2 Andrew Bartlett via samba-technical=
+=20
+wrote:
+> Firstly, these are very impressive improvements.
 
-Also, I can't find a "filemicro_seqwriterandvargam.f" script, presumably
-because it would get patched into existence by the failing install step above.
+Hi Andr=C3=A9as,
 
-David
+I agree, this is great work.
+=20
+> Thanks so much for your work debugging this and getting to the root of
+> the problem, this is very much appreciated.
+> Do you have any data on how much of the improvement is due to ldb
+> patch, and how much is due to each of the other patches?
+>=20
+> Did you happen to use Brendan Greg's FlameGraph tool for the debugging
+> (this is what we often use), and if so, can you share the graphs?  I
+> want to understand if perhaps we need to consider restructuring the
+> caller.
+> https://www.brendangregg.com/FlameGraphs/cpuflamegraphs.html#Instructions
+>=20
+> For this series if you could please:
+>  - send in a send in a Samba Developer Declaration per
+> https://www.samba.org/samba/devel/copyright-policy.html
+>  - create a gitlab account
+>  - let me know the username
+>=20
+> Once I give you access to the devel repo, so you can run the full
+> testsuite under our quota, please follow our contribution steps here:
+> https://wiki.samba.org/index.php/Contribute#Subsequent_Merge_Requests_(an=
+d_c
+> omplex_first_requests)
+
+I didn't see a merge request so far? Any update on that?
+
+
+Best regards
+
+
+	Andreas
+
+=2D-=20
+Andreas Schneider                      asn@samba.org
+Samba Team                             www.samba.org
+GPG-ID:     8DFF53E18F2ABC8D8F3C92237EE0FC4DCC014E3D
+
 
 
