@@ -2,50 +2,62 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id C770A8A8558
-	for <lists+samba-technical@lfdr.de>; Wed, 17 Apr 2024 15:53:43 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B6B348AA3FC
+	for <lists+samba-technical@lfdr.de>; Thu, 18 Apr 2024 22:22:12 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=zoy3YjMJIrzYEbtLbdQ7+KikEyj0xnTUqoqyF9m0W0k=; b=M3iPeP1ntwGG/B66fbZZDVNn4F
-	wzgX9vGoXWRaJfJ7Salk485AYl3HGFvB1RJ0cNZLCmABOUtqEIHmwuS9Q7oBADrC74TeczV2n40Mn
-	NsovQFQliVWjndbv/Y6JxwvIhITD8Y8SbfA08bzWmZOm58OhQniXGtZkKt04xCsCCT/iqE7H5w/ST
-	8prhgl/fS9kGOgM37yZe+ysy6VSO2VSc3TTGVCnWi2BwulLPR0K0BiCnEjUBkziUeaEfTi4mmYP0A
-	MKH30uE4Ja1WNdReVwGyX1bzCFb8xsiDaX2q8rwHgmnCj5uG5vT6KqJlDGddk+jlhP/rxG8DhTqes
-	j6ZSTp1A==;
-Received: from ip6-localhost ([::1]:19566 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=Vjr23Z53w969AUhAblrzf+t0LGa6uC2BR9O7rxvFrVM=; b=5unmpjlFyC4JLSfW5r0xDxgXCB
+	APtOdrNJGGmNv1LDfY17Pkh/UmW+T/L50S9kzo1wVfUNBoB5giooCtDcc7KdbMhggo5uham8CVcLz
+	KuKNqjjfEOWSAp28bnEZOy0NadvHp1S9RpCy0zWdLPMDG0UVrLmIYdSmYlYl7jqOe8QcXHbeFIVqC
+	ExENX8zOZdqb72aNE9aN5TbSIsBQ4G5esYSSvS+iA3kOOAhc8nUHCbni+Ek7/JOOCSXfYS8e6T2o8
+	ETQfBS3zgyTm1JPRVz4XzJQZvGOoWOYl9CgTYL3ryMk5NUvp7kcRAnWFx999soujz98F/XgfVPMVG
+	XZHWdOQw==;
+Received: from ip6-localhost ([::1]:26188 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1rx5io-004yPt-JS; Wed, 17 Apr 2024 13:53:10 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:33006) 
+	id 1rxYG4-0057ED-DL; Thu, 18 Apr 2024 20:21:24 +0000
+Received: from mail-lf1-x136.google.com ([2a00:1450:4864:20::136]:44349) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1rx5ik-004yPm-91
- for samba-technical@lists.samba.org; Wed, 17 Apr 2024 13:53:08 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Date:Cc:To:From;
- bh=zoy3YjMJIrzYEbtLbdQ7+KikEyj0xnTUqoqyF9m0W0k=; b=d+KU26cFwFe3qfZNgAmhbGQ901
- ITXCiMvcArOnWSpTP7fbA08auPKqn10d9zC8khy5EqR1ZMa0nd8Fer9n27NEhQubX9252vd3gS8YF
- ziTYu7UbbeR8e7Mt8nSjSuA6GonHdoxtpg3+AnDJrA6+A0tscDsXdFqJe5BlT7IPJRyJFQSSHaCjv
- nMTyA7T59kLMDmlxYbXLbtDFU9SjPgcJzqx9xJsioPe001RKQL0x+sf3pP2SO5PVJ4W0flXZOL3bc
- avrlPd7Wj7BAmeWOvdJqh7MnNqPP/dxoT9AHwYgDrpfvkXIt6KZavT6fCamWrFGq3JXxb9V+cWPXY
- 3qX4CJxhSFbDWlIYJO7yLEV+GQDo4ceTyOjBi3bhwj9sAh1qoD/1plumSd5PTM+QpT30A7Dbjw/NI
- b2wy/fF/E2MyxQGk05iHjJjqK1VfDstSobLkktQt9nDCpUXRS6P3v2tjXS+q0tCXZ6jkO5GF2NUsB
- 8SlnxdahfXeKB34g1ARRSr7S;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1rx5ig-006tyY-1y; Wed, 17 Apr 2024 13:53:02 +0000
-To: =?ISO-8859-1?Q?Andr=E9as?= LEROUX <aleroux@tranquil.it>,
- samba-technical@lists.samba.org
-Subject: Re: Fwd: Regression: ldb performance with indexes
-Date: Wed, 17 Apr 2024 15:53:01 +0200
-Message-ID: <2680239.lGaqSPkdTl@magrathea>
-In-Reply-To: <f09a03b8f405c2cc9a2e97df5576a927eb823cdd.camel@samba.org>
-References: <4856178.OV4Wx5bFTl@magrathea>
- <b7669c93-fb36-4949-bea0-c295836ebd27@tranquil.it>
- <f09a03b8f405c2cc9a2e97df5576a927eb823cdd.camel@samba.org>
+ (Exim) id 1rxYG0-0057E5-OS
+ for samba-technical@lists.samba.org; Thu, 18 Apr 2024 20:21:22 +0000
+Received: by mail-lf1-x136.google.com with SMTP id
+ 2adb3069b0e04-51ab4ee9df8so232604e87.1
+ for <samba-technical@lists.samba.org>; Thu, 18 Apr 2024 13:21:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1713471679; x=1714076479; darn=lists.samba.org;
+ h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=Vjr23Z53w969AUhAblrzf+t0LGa6uC2BR9O7rxvFrVM=;
+ b=MiD16andBMwBhu4UlDleqNjx4W6sdwm4aJlBdBCQjqaoouk+VRiNLC7RITS8zSGIGW
+ /M0AGDQ5XTj7/m+m+vsb3t4qKUwKnKMYZCu82qAu3zu9eqKHYeplXZw20s7mvslEzB65
+ 4PCXR9H1z8VDHnK0qRNF1gUWc8FXHCMmSQXjLE99qmzvxe9pQ3r3NXsS+20icUuGUEfc
+ BiBJRoK23y1dSSqWF7vIIDhcPe8PO2lVXqrQjy8hN2c1DKKRLj/3mear7rzUBwDwcTPM
+ QNUX+1YLzkg1NEDDkOEp/Ckp/Ft4QqsKsfdcTKGKbUu0Vf7w9sbAo2+azxm3BPcF3nTd
+ vhRQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1713471679; x=1714076479;
+ h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=Vjr23Z53w969AUhAblrzf+t0LGa6uC2BR9O7rxvFrVM=;
+ b=nYXOvBaEciPobZH8ZTEGoTo/yugQW+/W2yBfE80+vnji5bD5y+pCo6jfqMD7v7/z42
+ zsbuI8w0p23OqMJZwB6lLxr9qMMvgR3IRcplGzub36EHpJYsKKCzNRJbwjEBKXidN15P
+ CAKOqAlhbCiz3K6EO6p3H0Hz6gFYn+vPJPqmk6x8qWxdzl0M1fVqWbWOxysURgiQqRIP
+ eSnamY9m9rctsTV7/tbGpsOMkUFilF5CkmMR0J772zrxzVSGwuukif7ny3kV/aDuC+ST
+ 91mfmFFzBxOsx2199VEXwpeKdkV41WHUpWJN/doCDVtr2QXYeIFvrXoz8mDWstTTPXUO
+ f6OA==
+X-Gm-Message-State: AOJu0YxQKdbuZrZvrQ+1qxBleuYUBIjbcfAgu1An4evy9zDVhYnEuYHn
+ 9wfCm6zyjKYPh1rXbA3pdMVTvpIBuUezTF1qUhPYY2TsRBiyctlPEY39lgt57Zlzp31sU6IXrAT
+ xVu3MALOwwxWzzINWT4Eh5851pWCKJU6T
+X-Google-Smtp-Source: AGHT+IE9sYOveWLhfEBtHB++ePCrCeDMXzV+t2nTAO0CXzN2nn9QW5X0bOZIy7TTBIB1ldDDdH3kxB+nMZQf5eKv+EA=
+X-Received: by 2002:ac2:5381:0:b0:519:730:b399 with SMTP id
+ g1-20020ac25381000000b005190730b399mr84137lfh.9.1713471678809; Thu, 18 Apr
+ 2024 13:21:18 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="utf-8"
+Date: Thu, 18 Apr 2024 15:21:08 -0500
+Message-ID: <CAH2r5mstDacz=gvpjFQeB_nc1kBjyzTZw57tF8UNrXARXkV1rQ@mail.gmail.com>
+Subject: Missing protocol features that could help Linux
+To: samba-technical <samba-technical@lists.samba.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,57 +71,30 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andreas Schneider via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andreas Schneider <asn@samba.org>
-Cc: yalemu@tranquil.it, Denis CARDON <dcardon@tranquil.it>,
- Andrew Bartlett <abartlet@samba.org>
+From: Steve French via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Steve French <smfrench@gmail.com>
+Cc: CIFS <linux-cifs@vger.kernel.org>, Namjae Jeon <linkinjeon@kernel.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Friday, 22 March 2024 21:35:27 GMT+2 Andrew Bartlett via samba-technical=
-=20
-wrote:
-> Firstly, these are very impressive improvements.
+Was following up on a recent question about support for Linux features
+that are missing that could help us pass more xfstests
 
-Hi Andr=C3=A9as,
+Looking at the standard fstests for Linux (xfstests that are skipped
+or fail for cifs.ko) to find 'features' that would help, perhaps
+extending the current POSIX Extensions or adding a couple of SMB3.1.1
+FSCTLs, I spotted a few obvious ones:
 
-I agree, this is great work.
-=20
-> Thanks so much for your work debugging this and getting to the root of
-> the problem, this is very much appreciated.
-> Do you have any data on how much of the improvement is due to ldb
-> patch, and how much is due to each of the other patches?
->=20
-> Did you happen to use Brendan Greg's FlameGraph tool for the debugging
-> (this is what we often use), and if so, can you share the graphs?  I
-> want to understand if perhaps we need to consider restructuring the
-> caller.
-> https://www.brendangregg.com/FlameGraphs/cpuflamegraphs.html#Instructions
->=20
-> For this series if you could please:
->  - send in a send in a Samba Developer Declaration per
-> https://www.samba.org/samba/devel/copyright-policy.html
->  - create a gitlab account
->  - let me know the username
->=20
-> Once I give you access to the devel repo, so you can run the full
-> testsuite under our quota, please follow our contribution steps here:
-> https://wiki.samba.org/index.php/Contribute#Subsequent_Merge_Requests_(an=
-d_c
-> omplex_first_requests)
+ 1) renameat2 (RENAME_EXCHANGE) and renameat2(WHITEOUT)  2) FITRIM
+support 3) trusted namespace (perhaps xattr/EA extension) 4) attr
+namespace 5) deduplication 6) chattr -i 7) unshare (namespace command)
+8) delayed allocation 9) dax 10) attr namespace security 11) fstrim
+12) chattr +s 13) exchange range
 
-I didn't see a merge request so far? Any update on that?
+Any thoughts on which of these which would be 'easy' for samba and/or
+ksmbd server to implement (e.g. as new fsctls)?
+-- 
+Thanks,
 
-
-Best regards
-
-
-	Andreas
-
-=2D-=20
-Andreas Schneider                      asn@samba.org
-Samba Team                             www.samba.org
-GPG-ID:     8DFF53E18F2ABC8D8F3C92237EE0FC4DCC014E3D
-
-
+Steve
 
