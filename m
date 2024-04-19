@@ -2,68 +2,58 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 19C7F8AB515
-	for <lists+samba-technical@lfdr.de>; Fri, 19 Apr 2024 20:30:38 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id ED3348AB540
+	for <lists+samba-technical@lfdr.de>; Fri, 19 Apr 2024 20:51:56 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=UKvA2hIl/lZ9LpPbX9KEFtwsYuABWxG6VOiLjWeGDEo=; b=m8CKiS3xicmkka+sGSCaxHzLlO
-	DeN+DvRyIJAVBMuP/F7Cfg0m1xc/psw3ryhGP8oX+ba7QxIfqNsu08Nyuli2U7RgpIlZCD6g2nOM+
-	H7n+fUTyFryO5vbbQYop2eWajQS6XFJUnw7dVQGq5KpMBLIcQgGJRXE9b6TT+gRYewY2kJwiq48Vn
-	uimcl0AmAzGq1WuUyrMfB0jvcKCfXK8sRdnUIeHNeRzBsAXVyglmuDMtTDnib5+kTpw3R5Uim+VZY
-	+eDBF6pqNJodZxGhCzofdL2Y3/MQbMID2HMfvqJ2pvsz+F+gS9uikfh6OumcZ/YgcmRM6uerL88sw
-	uF8vElmg==;
-Received: from ip6-localhost ([::1]:43052 helo=hr1.samba.org) 
+	bh=tl/VLQ/5yMD25OAHeaSWFERWgpOCQAbMx/26ApeSk1U=; b=tfh2ZfXWjNh1hC01L0N5q2NSky
+	/yAJGToE6NyrqzYz0cnFqxYgOTI6wOxT6RsEeMJ1mO7Vz/xoqrEKfHVxVvolTf5Q1yIyMUtdP1Q1d
+	1weo+RaXg2rTajlhm3PDOytsBYFLiiLR+6Djh1gtlJGkFI/wYXij8IeRuLtxHTeJ0YRAoO9i9PmjZ
+	j5RcvsVcjVBaEm01OOLaLMVAtF3mnOeFTRJwdNF8Lw1Wbv/OQgJo75NUCMyDEm10DXFVpOqOYwX6+
+	qgyj6GQ7AXqAfAKg58rM6E/OOZiO9pX5SYCMWpnUryWxhW+JP+68esLC2CtBAr2mw+RmJvYQ8GqFc
+	VSlMNq5Q==;
+Received: from ip6-localhost ([::1]:54572 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1rxszm-005DhK-4m; Fri, 19 Apr 2024 18:29:58 +0000
-Received: from mail-pf1-x429.google.com ([2607:f8b0:4864:20::429]:59514) 
+	id 1rxtKl-005DoU-Qm; Fri, 19 Apr 2024 18:51:39 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:60986) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1rxszg-005DhC-BC
- for samba-technical@lists.samba.org; Fri, 19 Apr 2024 18:29:55 +0000
-Received: by mail-pf1-x429.google.com with SMTP id
- d2e1a72fcca58-6ecee1f325bso2193571b3a.2
- for <samba-technical@lists.samba.org>; Fri, 19 Apr 2024 11:29:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1713551390; x=1714156190; darn=lists.samba.org;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=D6TSsr3b1eklCuU1UzWVwP69F6MjtQ94xzCS4GSy5hw=;
- b=cc4MhdX68nZ6IOBGmJZd3Jz0a8HSE6PFGx5XMf7wYoV/23i62o7jfP+mZ9Iit4TuH+
- vOABS/n+70TPz79bXDj7G6U3t/bttdwnIqQbYkCY6hIHtAQWAeKN/YomfoU+Jl29QJQb
- U75bRWRLr2HMbp0n7OQF223NeB8uF0yagqkdN9upSMLFXXCSzYbZidP+7ukbe7A1akxt
- lb3ensk1oSiQfWidtZ8D5Ok3/CzKgTU7xAwQYsPTUhL9B+Y6afyT/25IdhOyw/GKW9kj
- KxHetGmv9KBZdCmDZ2uzewwOnsW3Vw/0Mj/ptUw8u8BnFva5QqFTuOvzH8ismQ78Q5jx
- M3mA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713551390; x=1714156190;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=D6TSsr3b1eklCuU1UzWVwP69F6MjtQ94xzCS4GSy5hw=;
- b=Y2nUQslgkfaqhaHDr/oiBLlBDj0uOmSoDp0IsY/dz0Chu/Jc6epNRCOXZO+6zn8Mhp
- FceRQ/82AXN+jyjspf2L+diq7aVwPl3j6t/0wuRNDdXpIIBq1o4uOGO15wzBLncNeieZ
- 06QGbX5eeQI1is8mQ6NM4uuGlTvQ8g870UhvDceEU99nSywtEdsH+IzqyLQ3oWt2hwLc
- V399u89EVoKzZKoxnHxcwAoXls2n5tN4YnwMNzcB7yg4K/ZVvYuqfi9r2s7wGpL7iPHN
- ZbhaDal/YmQkaTf9t2nYUyBpYzR6yO0RomNRdTFGr0e5dmXXRIxY3qZYhLKzqK7IA/h4
- kUSg==
-X-Gm-Message-State: AOJu0YxEvYOyGDeDRrj8W3XTEkhgNWFdfUkhOwmiHIrGUPl/rZIdOnqA
- YuHTPAmVEKt625Ck6vTwgFVY+/WF6wCjtaHuI8/fvLoFE5Zl2hdlrn22ldh3x2Kg+c0dOVhco+p
- 7IY7AkpCeQySq5t+jYh2KDojzB01rtWdJ
-X-Google-Smtp-Source: AGHT+IGxuKmaicI9PyqHx12u02tchu/RzbeHIbJLcvHnwszdcNWCi2SFATGL0KWa26de7CPqejNxKnGmjSt1AmjXi4A=
-X-Received: by 2002:a05:6a21:328f:b0:1a7:5100:7559 with SMTP id
- yt15-20020a056a21328f00b001a751007559mr3989179pzb.32.1713551389582; Fri, 19
- Apr 2024 11:29:49 -0700 (PDT)
+ (Exim) id 1rxtKh-005DoN-A0
+ for samba-technical@lists.samba.org; Fri, 19 Apr 2024 18:51:37 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=From:Cc:To:Date:Message-ID;
+ bh=tl/VLQ/5yMD25OAHeaSWFERWgpOCQAbMx/26ApeSk1U=; b=hkHRmyCrrjJSybWSu88cRcys8a
+ 0FQuwQbfeyW/cXI0T4aPJtCx5MoQxEiPDBoa1EjsNLsKuGHiLch1A30yrqm6mJT5PxJQiCzeh9410
+ DbeUyCGH/keP2HNgZ/rsZiprSEV9i/b0h1Qvq7WC2IzIjiJR1ipaIv8ZP1Us3bPgnSfp4o6yc2WIa
+ pQSAA3PbgCSsZv6ExYjm/08qD6an9rKfbI29twZ+3jT8H38oXPP/i/WeN624vfxpCYwUZSC4mcZ8u
+ +nt+m+KVDvDBITm6wxAJbGD4ODVtzXPvJGhqgdDYZxpRx9HPq3NRvXMGUoIdX+na5SFIiri7KHRyL
+ 1SSxFsfCHgaeTTsfbt23bbDu7zU/L8uqCh5hvWsdR/s7Jy5mc4t0yN3ScQursD9h4d2BrKBGoIUPK
+ AogJR0tykns6l0O0H4TykKQOAsSkTjvSyuJxCYR4rbarjpWEuLGz6YKA7O/D0KBTVEA+XLrdeAdsb
+ 599BdI4W5TthaV1bigzDlD08;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1rxtKe-007IwV-05; Fri, 19 Apr 2024 18:51:32 +0000
+Message-ID: <95922a2f-07a1-4555-acd2-c745e59bcb8e@samba.org>
+Date: Fri, 19 Apr 2024 20:51:31 +0200
 MIME-Version: 1.0
-References: <CAO9H7P_SpZ0fGDvTc_2XDLRiR1rSdy-2ztBv07h1ECmj_mnoHw@mail.gmail.com>
- <93429498-3f66-483e-bb4c-c051f5dcc2f0@samba.org>
-In-Reply-To: <93429498-3f66-483e-bb4c-c051f5dcc2f0@samba.org>
-Date: Fri, 19 Apr 2024 20:29:38 +0200
-Message-ID: <CAO9H7P8i+BBLAwJqzR8dsTsV9o5ypMMcQcJUY2HvJLk3YWDYUA@mail.gmail.com>
-Subject: Re: Doubts about Samba's unicode translation tables
-To: Ralph Boehme <slow@samba.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
+User-Agent: Mozilla Thunderbird
+Subject: Re: [RFC PATCH net-next 0/5] net: In-kernel QUIC implementation with
+ Userspace handshake
+To: Xin Long <lucien.xin@gmail.com>
+References: <cover.1710173427.git.lucien.xin@gmail.com>
+ <74d5db09-6b5c-4054-b9d3-542f34769083@samba.org>
+ <CADvbK_dzVcDKsJ9RN9oc0K1Jwd+kYjxgE6q=ioRbVGhJx7Qznw@mail.gmail.com>
+ <f427b422-6cfc-45ac-88eb-3e7694168b63@samba.org>
+ <CADvbK_cA-RCLiUUWkyNsS=4OhkWrUWb68QLg28yO2=8PqNuGBQ@mail.gmail.com>
+ <438496a6-7f90-403d-9558-4a813e842540@samba.org>
+ <CADvbK_fkbOnhKL+Rb+pp+NF+VzppOQ68c=nk_6MSNjM_dxpCoQ@mail.gmail.com>
+ <1456b69c-4ffd-4a08-b120-6a00abf1eb05@samba.org>
+ <CADvbK_cQRpyzHG4UUOzfgmqLndvpx5Cd+d59rrqGRp0ic3PyxA@mail.gmail.com>
+Content-Language: en-US, de-DE
+In-Reply-To: <CADvbK_cQRpyzHG4UUOzfgmqLndvpx5Cd+d59rrqGRp0ic3PyxA@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -77,90 +67,72 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Xavi Hernandez via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Xavi Hernandez <xhernandez@gmail.com>
-Cc: Stefan Metzmacher <metze@samba.org>, gd@samba.org,
- samba-technical@lists.samba.org
+From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Stefan Metzmacher <metze@samba.org>
+Cc: "linux-cifs@vger.kernel.org" <linux-cifs@vger.kernel.org>,
+ Sabrina Dubroca <sd@queasysnail.net>, network dev <netdev@vger.kernel.org>,
+ Jeff Layton <jlayton@kernel.org>, Namjae Jeon <linkinjeon@kernel.org>,
+ Steve French <smfrench@gmail.com>, Eric Dumazet <edumazet@google.com>,
+ Chuck Lever III <chuck.lever@oracle.com>, Tyler Fanelli <tfanelli@redhat.com>,
+ Samba Technical <samba-technical@lists.samba.org>, kuba@kernel.org,
+ Paolo Abeni <pabeni@redhat.com>, davem@davemloft.net,
+ Pengtao He <hepengtao@xiaomi.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi Ralph,
+Hi Xin Long,
 
-On Fri, Apr 19, 2024 at 7:16=E2=80=AFPM Ralph Boehme <slow@samba.org> wrote=
-:
+>> But I think its unavoidable for the ALPN and SNI fields on
+>> the server side. As every service tries to use udp port 443
+>> and somehow that needs to be shared if multiple services want to
+>> use it.
+>>
+>> I guess on the acceptor side we would need to somehow detach low level
+>> udp struct sock from the logical listen struct sock.
+>>
+>> And quic_do_listen_rcv() would need to find the correct logical listening
+>> socket and call quic_request_sock_enqueue() on the logical socket
+>> not the lowlevel udo socket. The same for all stuff happening after
+>> quic_request_sock_enqueue() at the end of quic_do_listen_rcv.
+>>
+> The implementation allows one low level UDP sock to serve for multiple
+> QUIC socks.
+> 
+> Currently, if your 3 quic applications listen to the same address:port
+> with SO_REUSEPORT socket option set, the incoming connection will choose
+> one of your applications randomly with hash(client_addr+port) vi
+> reuseport_select_sock() in quic_sock_lookup().
+> 
+> It should be easy to do a further match with ALPN between these 3 quic
+> socks that listens to the same address:port to get the right quic sock,
+> instead of that randomly choosing.
 
-> On 4/19/24 11:04, Xavi Hernandez via samba-technical wrote:
-> > The first question is why Samba uses two tables while Windows only
-> requires
-> > one ?
->
-> cf 3ed9c903671e795964ce3da9d0080444ef3eb5e9 and
->
-> https://bugzilla.samba.org/show_bug.cgi?id=3D13018
+Ah, that sounds good.
 
+> The problem is to parse the TLS Client_Hello message to get the ALPN in
+> quic_sock_lookup(), which is not a proper thing to do in kernel, and
+> might be rejected by networking maintainers, I need to check with them.
 
-This seems to be related to the posix strcasecmp() function but, if I'm not
-wrong, Samba shouldn't compare filenames based on the posix specification.
+Is the reassembling of CRYPTO frames done in the kernel or
+userspace? Can you point me to the place in the code?
 
-I've found some very old archived references coming from blog.msdn.com
-where it seems to be described how filesystem names comparisons are made
-(and it doesn't seem like any "standard" case-insensitive function), though
-I'm not sure if they are still relevant:
+If it's really impossible to do in C code maybe
+registering a bpf function in order to allow a listener
+to check the intial quic packet and decide if it wants to serve
+that connection would be possible as last resort?
 
-https://archives.miloush.net/michkap/archive/2005/01/16/353873.html
-https://archives.miloush.net/michkap/archive/2005/10/17/481600.html
+> Will you be able to work around this by using Unix Domain Sockets pass
+> the sockfd to another process?
 
+Not really. As that would strict coordination between a lot of
+independent projects.
 
+> (Note that we're assuming all your 3 applications are using in-kernel QUIC)
 
->
-> > For what purpose is the lowercase translation table in Samba used ?
-> > Is the Samba's case-insensitive comparison method actually equal to
-> Windows
-> > ?
->
-> Hopefully. :)
->
-> > I've also extracted the $UpCase file from a Windows 11 machine and I've
-> > found that the Samba's uppercase table is very similar but not identica=
-l
-> > (there are 339 different values). Is this expected ?
->
-> I guess not. Can you share the differences?
->
+Sure, but I guess for servers using port 443 that the only long term option.
+and I don't think it will be less performant than a userspace implementation.
 
-Please, take a look at my previous email. I've attached a text file with
-the differences.
-
-
-
-> > I'm new to Samba, so I will be very grateful for any insights you might
-> > give me about how the unicode tables work in Samba and any other
-> important
-> > details related to the case-insensitive accesses.
->
-> The higher level processing is from get_real_filename_at() try the VFS
-> via SMB_VFS_GET_REAL_FILENAME_AT() and if the VFS doesn't implement this
-> (vfs_default returns NT_STATUS_NOT_SUPPORTED), go via
-> get_real_filename_full_scan_at() which ends up calling
->
-> fname_equal() -> strequal() -> strcasecmp_m() -> strcasecmp_m_handle()
-> which contains the core logic.
->
-
-More or less I already followed that path, but if that's all the story,
-then I don't understand why tolower_m() is used. Apparently NTFS doesn't
-use any lowercase conversion to compare file names, just the uppercase
-table, and the uppercase table is different. So I'm not sure how the result
-of the comparison could always be the same. Of course the differences will
-only appear for very rare corner cases (or specially crafted names), but
-I'm not sure if it's relevant or not.
-
-Also, if I want to implement something similar on the CephFS side, is it
-safe to use the NTFS table or should I use the Samba version, which seems a
-bit more complex ?
-
-Xavi
+Thanks!
+metze
 
 
-> -slow
->
