@@ -2,48 +2,47 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 978DF8AB28E
-	for <lists+samba-technical@lfdr.de>; Fri, 19 Apr 2024 17:56:03 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5FDA58AB294
+	for <lists+samba-technical@lfdr.de>; Fri, 19 Apr 2024 17:56:24 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=KqGQPaqehHcI2IeKAf2Liecz53eBG4Btw11mugwJjeg=; b=roJAbeAGETefm5s9xpPBNK+I9w
-	oJvqCN1gqwPog/UbjtFaEsorMleyTO0VWpqZU1PE5otoSf13FREQ6a/hV5z6IZP0Iw2KLpvj6R5cE
-	Ge+vY+RUq/AfDmuENBd7zJ9l7vQS0p5bWympfQvl9VkrPvtrsb8I9cuKUF3eYsTr4kE7bPgENLwlK
-	zOD49ML85bV8viEE34RK4y/lSAdEdwGCpAl2JbffWlxoohNQvL1nm/qvuD0gLrBuKlIm+MT46PZoU
-	NPjQd6hIvip6ZkuUEiGJ193A7IRS1BuP49WUNGCYZ4m8OCoESxrX5dEdS+GinuU8VnNbK3HD5iYrg
-	pKEN9JSQ==;
-Received: from ip6-localhost ([::1]:33040 helo=hr1.samba.org) 
+	bh=7qF7hVDKUt4SPeSocwhUSFA2qqcVa8SJ+ZdaNQ+3G+w=; b=FS8+USz+Yig9K2yanjYJWLh5ZP
+	qh6keIH/MnUbltoLsJLiss8qLr4zBBZshRBNzqxX+RHxU3lfyTSgIx/oyW4C8uJhsNqTkisS4/qaK
+	zRQWvVaJSAs6SYliMamaGxqy3ESGCyPcbJENhccaUzCL4H8xnRiNdWM7MsRYgAEUk/CceYlQJeRTF
+	nzR9pNkAbM5Dcx2pI0xn/aGO3CjltmGfrm8aryn4vzxMHtRpekBMgwOWEbUBpB6Et54A27ehn3BcS
+	KIM5sN8bh0Af/h3+2XWYBiqclFnWNVpbZubFK9WgRkRlhnD5tWIKuCsTDOG/k6/P7NaJQvMigiYDO
+	OS7orlSw==;
+Received: from ip6-localhost ([::1]:56846 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1rxqaE-005CWM-Jb; Fri, 19 Apr 2024 15:55:26 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:51994) 
+	id 1rxqb5-005Cbf-Un; Fri, 19 Apr 2024 15:56:20 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:50916) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1rxqa9-005CWF-HE
- for samba-technical@lists.samba.org; Fri, 19 Apr 2024 15:55:24 +0000
+ (Exim) id 1rxqb0-005CbT-Kj
+ for samba-technical@lists.samba.org; Fri, 19 Apr 2024 15:56:17 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Message-ID:Cc:To:From:Date;
- bh=KqGQPaqehHcI2IeKAf2Liecz53eBG4Btw11mugwJjeg=; b=pWg7KJEQDnbfZTi55LPPgfwu42
- EhAMr+G51dYVQt1HshKAS+NYuwg1xDWh2tT/OPTkBp2XtVn9/xLxcyD1Dzxfc7rF1UwP7D545w5hk
- QdXIVZQALABSGqVP7Vp3Tjmea3yhTvcea0SmPWDUhwY4Aylfn6wvMCOuzA+fT0b3S0slo5vbwrSur
- mlSrYwO9KGwAKue6Yj9W0r9/cV+RCLOvwdNiZBkTS6qrgitFoEkMy05I7D20uJLLEC5Ajyzrj0R4z
- tD3K5a7VTBggbgFqGz6r+IzMMGmV+P2BXXquf3Fy2wOG3vjojl/7aM8z3kwFJ+uoiZA/DOc4bu0dv
- FdqVJPxHBt4Jku76y1dW75SlMoSZ4fcVJR83CbuyLJTvT9EcgA2BkG9UnoLKvqsfeZwnJQnhfMH9s
- hmPOXudxWyCgfOtNi3nsQpoIRVTevBvEen0wT0DAKznUd1OowyHSkuMnjFG8YTiH/uZ+XLlFsn+Ps
- xSQuYlcNd95h/ZIxtIZy7SvI;
+ bh=7qF7hVDKUt4SPeSocwhUSFA2qqcVa8SJ+ZdaNQ+3G+w=; b=vEL2h1Ucu7AgnJZFCKY3wyAp9y
+ /mek9r/K0qdQLjpITCloGAqTCzaaRso+ijAezWduUAqk7Hv6P/MXnUkZOkONFh3n7xqy0mdKkpa4g
+ enb3INur2f4VQgQRLNze+RvM0Wv8vPkj9pJZm8TBqNJY7VUL8bmRueM6kaVQ18ACLWTtm3eUZlRlM
+ LC6CwL+Kdo19EmM25lnzeH9Fuxip4ptNFm+n6RNcIGpYhDkkUgAq+cVgpYvckE8swNsABKTaZwb/c
+ J2KXH7+05pYeBbCalYu1yg2cuDcPCrWB3cxzO+4IlZwxsM3uN/G9MTXlH0w4aGb/KEnojQRYnsKn2
+ a49UdNTVz3/NY4I5bOFWuer3Ah9BYFKy11gn9PyWd7cI0Z9y/8bXHOZxHvFeK8gQBFvfBMDnbDQiA
+ 8G0Np5c44JefDc/ZroOkzgOwibhCDpzgC9H4uUyDAy0Vw+d3k58eVyTQem7UQcMKrXPhTM1dUymJi
+ kpLdV/EIrZrcSeGtgYZBqdDl;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1rxqa3-007HKk-0k; Fri, 19 Apr 2024 15:55:16 +0000
-Date: Fri, 19 Apr 2024 08:55:12 -0700
-To: Andrew Bartlett <abartlet@samba.org>
-Subject: Re: Missing protocol features that could help Linux
-Message-ID: <ZiKT4CursWvT2dhq@jeremy-HP-Z840-Workstation>
-References: <CAH2r5mstDacz=gvpjFQeB_nc1kBjyzTZw57tF8UNrXARXkV1rQ@mail.gmail.com>
- <c7d80c1538db3a414636977314feba13871907ef.camel@samba.org>
+ (Exim) id 1rxqay-007HNR-2M; Fri, 19 Apr 2024 15:56:13 +0000
+Date: Fri, 19 Apr 2024 08:56:10 -0700
+To: Xavi Hernandez <xhernandez@gmail.com>
+Subject: Re: Doubts about Samba's unicode translation tables
+Message-ID: <ZiKUGvWj3xp07NO8@jeremy-HP-Z840-Workstation>
+References: <CAO9H7P_SpZ0fGDvTc_2XDLRiR1rSdy-2ztBv07h1ECmj_mnoHw@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii; format=flowed
 Content-Disposition: inline
-In-Reply-To: <c7d80c1538db3a414636977314feba13871907ef.camel@samba.org>
+In-Reply-To: <CAO9H7P_SpZ0fGDvTc_2XDLRiR1rSdy-2ztBv07h1ECmj_mnoHw@mail.gmail.com>
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,30 +58,35 @@ List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
 From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
 Reply-To: Jeremy Allison <jra@samba.org>
-Cc: Steve French <smfrench@gmail.com>,
- samba-technical <samba-technical@lists.samba.org>,
- Namjae Jeon <linkinjeon@kernel.org>, CIFS <linux-cifs@vger.kernel.org>
+Cc: Stefan Metzmacher <metze@samba.org>, gd@samba.org,
+ samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Fri, Apr 19, 2024 at 01:40:34PM +1200, Andrew Bartlett wrote:
->POSIX <-> POSIX locking over SMB is something I have a client trying to
->get working with SMB3.
+On Fri, Apr 19, 2024 at 11:04:40AM +0200, Xavi Hernandez via samba-technical wrote:
+>Hi all,
 >
->They have a use case where, as I understand it so far, the mapping of
->POSIX fcntl() read and write locks to SMB locks isn't 1-1, because they
->expect advisory locks, but SMB locks are mandatory as far as I read
->it.
+>I'm currently trying to integrate Samba with CephFS, and one of the
+>important things to improve is to access CephFS files in an insensitive way
+>without needing to scan the entire directory from smbd.
 >
->They use cifs.ko and Samba, so it isn't about working with Windows, it
->is about running Libreoffice on LInux against Samba.
+>During this work I've found that Samba does the case insensitive comparison
+>using a couple of UTF16 translation tables (one that converts to uppercase
+>and another that converts to lowercase).
+>
+>Looking at how NTFS does the same thing I've found that it also uses a
+>UTF16 table stored in the $UpCase special NTFS file located in the root of
+>the volume.
+>
+>The first question is why Samba uses two tables while Windows only requires
+>one ?
+>For what purpose is the lowercase translation table in Samba used ?
+>Is the Samba's case-insensitive comparison method actually equal to Windows
+>?
+>
+>I've also extracted the $UpCase file from a Windows 11 machine and I've
+>found that the Samba's uppercase table is very similar but not identical
+>(there are 339 different values). Is this expected ?
 
-That's not going to work the way LibreOffice on Linux expects,
-until we fully expose POSIX locking semantics.
-
-It's the range semantics that will probably break them.
-
-POSIX locks can be split/merged/overlapped. Windows locks
-must be distinct. Currently over SMB3 we only expose Windows
-locks.
+Posting the differences would be very interesting. Thanks !
 
