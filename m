@@ -2,51 +2,48 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7D4B48AB3C8
-	for <lists+samba-technical@lfdr.de>; Fri, 19 Apr 2024 18:53:22 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 09EDF8AB3D4
+	for <lists+samba-technical@lfdr.de>; Fri, 19 Apr 2024 18:55:29 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=CdLUAg6J9P9CgZmrtUFiWuJ3BIHGk3wTFq9/m4uRmuY=; b=wV0YcC43AetHm5R/BybifR9+ea
-	A5A1Kry7gbOEflwPXRfiJWclRY07q/xra0uSlTpbTs1+XDitKNUe7VKp2uU0FmtHxJvynq4swNBM8
-	BfAeDiThj8TITFajCQbeLUwZhbzG1FpCPPke92bm+62NofKYP9Acv0PcDAo2O1ipTijJSV7ttp8pA
-	D9J2MeSkuR8lNV30Gc8tzF2XLIoHLDNuGbYbKbaSZkBwEFbbGgDHS2kCP/wXB096sctWs1XK9o2u9
-	OSrn1oc+1oDMzexAfqGKlzKMl9atuqyKdY7lJYOZRGMUUaNkweQv7LR3CNhgim4Uc3Cc1WaYhDz8J
-	F0/kp4pg==;
-Received: from ip6-localhost ([::1]:44932 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=3Wkhrr08905LBJQuA2p6CC2d4NwSOTYcOSg+PuulNiw=; b=t8AicV2I3iGIlBIJBAC5kWbfJQ
+	xTdN9fv64R0lwsVed5TWzvtX/72hyPhym2SoqnlZ30OKEENf1JaKSZ3tp10Qadu3uRFmxh6SM3g3V
+	2M9wCmgkllmo0Uqe325PAx2qJlZdgb4jnEGhWlDVqaTFHTFoX6vwGWyZ7EI3PI/b2WfdcHkuEJE8N
+	4XcM6Wm9mvt9EuSYIsYZKTFR3/mVGD9RJR3BLCvyeyHSLxweDwYXChajIXL1Zfy34gJlTFFovtVDf
+	/1CATqnJ5OY/yK4LU+Av/nMGJvfF6G9mXD4wvgV7JUffc+5uTzcJWJbcecAfVRxfJJOOnUaNwt9NH
+	fVymgnSg==;
+Received: from ip6-localhost ([::1]:44264 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1rxrU3-005D0P-Gg; Fri, 19 Apr 2024 16:53:07 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:33384) 
+	id 1rxrWG-005D5q-E6; Fri, 19 Apr 2024 16:55:24 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:63716) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1rxrTz-005D0F-5Z
- for samba-technical@lists.samba.org; Fri, 19 Apr 2024 16:53:05 +0000
+ (Exim) id 1rxrW8-005D5j-4l
+ for samba-technical@lists.samba.org; Fri, 19 Apr 2024 16:55:19 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=From:Cc:To:Date:Message-ID;
- bh=CdLUAg6J9P9CgZmrtUFiWuJ3BIHGk3wTFq9/m4uRmuY=; b=x2SCEn0YNrzqzeCmS3kvevJtdl
- lg816d81lX1biP+U/8I/9Q2qdTyp7BLP4gL9DroAG8O0MTGDmSz7ky6l5orEYPQ8gydqKV0cHByc9
- JNIZFaJcfwjvblzQ//wlUfAYFSOuf2Bj6kV34HDVsK4bR7k6pH9KeYjvdi8cVs1mrFLUiara6cc71
- ap3dNaDZh1y4L8wtM5jEgFI5vuyuMTI049pauEPRaHP1DvinZ6GF4hJR8ihCD+HaY+za/+WoaOx1C
- nVylZVTkHcE6N0Didj+KPSIxQ/2bNG5xTWP+lhCTIaLWoRDDGU0923bYne2Z1NyCBQK1jkancdCsN
- GvN0t20Z9tuab75jxitJZ8UEIo0IcJHCZWTcINDjUPhoDKA7rwCzrkSPF3hUyxIShMauWQje9sLVY
- PhI5cvlDt8MldG94l631xWF++A+SsAAdsu/pCWjlePr+prbGN6/5ndDB2ZRHKFYaAMM61l3k0TKqi
- SHruXGf1zmjbyCpCE0lUT08y;
+ s=42; h=Message-ID:Cc:To:From:Date;
+ bh=3Wkhrr08905LBJQuA2p6CC2d4NwSOTYcOSg+PuulNiw=; b=1Gi3dI6LyP8Bj/gxxkUa5b6cZo
+ 16pxq2S1m1M/DFjR+dt6aa/U6/LbVIqelYJkVJUzoam6JQYMg+f/cYMsJgaOO50frwMRs6qqM7Kkx
+ sqEM4D3NaNktvyGkzCev1ob6Q5fpTir/ch35tdgWN+odPfKS0aUZu0guRVk26llz6Tbzxtd2txKnp
+ gaCp/og6eK1bObDuZucv9ctRklLAFtVjC4LabIBtoOxUV7TDk25XgFkmwfuAz9QJR8k8xioqHQqbY
+ x7TlwrBEZ0wSiF5XEj5aLfcIiQt6x6hF89Necnm82QPfy/AxKeh8iRIZH0wxfWTXMIY4OL77C7N+f
+ zKvlQ+JXfbN2cjeX5RKJVH4UK9H98dRnPYpVM9rFV9sTexoeTzhc/TKsbvTtw7kJjBNjqcqmrxPyv
+ KrMdu6yo0F7QfhXquEA8b69eySpraaEhwmvsm89pzceeK59G6205QtdDiR2fVGl3wqhygn4gBJZPq
+ eHgjU2KVRmpTiOuWlfVmMOcm;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1rxrTy-007Hw8-01; Fri, 19 Apr 2024 16:53:02 +0000
-Message-ID: <e69bad72-9139-4b01-afe5-5d34edc077a1@samba.org>
-Date: Fri, 19 Apr 2024 18:53:01 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
+ (Exim) id 1rxrW4-007I0L-0K; Fri, 19 Apr 2024 16:55:13 +0000
+Date: Fri, 19 Apr 2024 09:55:09 -0700
+To: Ralph Boehme <slow@samba.org>
 Subject: Re: Missing protocol features that could help Linux
-To: Steve French <smfrench@gmail.com>,
- samba-technical <samba-technical@lists.samba.org>
+Message-ID: <ZiKh7cYq5/Z7zwNj@jeremy-HP-Z840-Workstation>
 References: <CAH2r5mstDacz=gvpjFQeB_nc1kBjyzTZw57tF8UNrXARXkV1rQ@mail.gmail.com>
-Content-Language: en-US, de-DE
-In-Reply-To: <CAH2r5mstDacz=gvpjFQeB_nc1kBjyzTZw57tF8UNrXARXkV1rQ@mail.gmail.com>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------mdtgv3JNGIQa0naBBbp00lUM"
+ <e69bad72-9139-4b01-afe5-5d34edc077a1@samba.org>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii; format=flowed
+Content-Disposition: inline
+In-Reply-To: <e69bad72-9139-4b01-afe5-5d34edc077a1@samba.org>
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,99 +57,45 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Ralph Boehme <slow@samba.org>
-Cc: CIFS <linux-cifs@vger.kernel.org>, Namjae Jeon <linkinjeon@kernel.org>,
- Jeremy Allison <jra@samba.org>
+From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jeremy Allison <jra@samba.org>
+Cc: Steve French <smfrench@gmail.com>,
+ samba-technical <samba-technical@lists.samba.org>,
+ Namjae Jeon <linkinjeon@kernel.org>, CIFS <linux-cifs@vger.kernel.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------mdtgv3JNGIQa0naBBbp00lUM
-Content-Type: multipart/mixed; boundary="------------2A7TsdRsXHAyfa8HrzUIZq0I";
- protected-headers="v1"
-From: Ralph Boehme <slow@samba.org>
-To: Steve French <smfrench@gmail.com>,
- samba-technical <samba-technical@lists.samba.org>
-Cc: CIFS <linux-cifs@vger.kernel.org>, Namjae Jeon <linkinjeon@kernel.org>,
- Jeremy Allison <jra@samba.org>
-Message-ID: <e69bad72-9139-4b01-afe5-5d34edc077a1@samba.org>
-Subject: Re: Missing protocol features that could help Linux
-References: <CAH2r5mstDacz=gvpjFQeB_nc1kBjyzTZw57tF8UNrXARXkV1rQ@mail.gmail.com>
-In-Reply-To: <CAH2r5mstDacz=gvpjFQeB_nc1kBjyzTZw57tF8UNrXARXkV1rQ@mail.gmail.com>
-Autocrypt-Gossip: addr=jra@samba.org; keydata=
- xsDiBDxEcLsRBADMQzpWoVuu4oiq23q5AfZDbakENMP/8ZU+AnzqzGr70lIEJb2jfcudViUT
- 97+RmXptlnDmE4/ILOf6w0udMlQ9Jpm+iqxbr35D/6qvFgrgE+PnNAPlKSlI2fyGuLhpv1QP
- forHV13gB3B6S/ZWHpf/owKnJMwu8ozQpjnMnqOiVwCg8QnSX2AFCMd3HLQsqVaMdlO+jBEE
- AKrMu2Pavmyc/eoNfrjgeRoNRkwHCINWO5u93o92dngWK/hN1QOOCQfAzqZ1JwS5Q+E2gGug
- 4OVaZI1vZGsAzb06TSnS4fmrOfwHqltSDsCHhwd+pyWkIvi96Swx00e1NEwNExEBo5NrGunf
- fONGlfRc+WhMLIk0u2e2V14R+ebDA/42T+cQZtUR6EdBReHVpmckQXXcE8cIqsu6UpZCsdEP
- N6YjxQKgTKWQWoxE2k4lYl9KsDK1BaF6rLNz/yt2RAVb1qZVaOqpITZWwzykzH60dMaX/G1S
- GWuN28by9ghI2LIsxcXHiDhG2CZxyfogBDDXoTPXlVMdk55IwAJny8Wj4s0eSmVyZW15IEFs
- bGlzb24gPGpyYUBzYW1iYS5vcmc+wlcEExECABcFAjxEcLsFCwcKAwQDFQMCAxYCAQIXgAAK
- CRCl3XhJ1sA2rDHZAKDwxfxpGuCOAuDHaN3ULDrIzKw9DQCdHb3Sq5WKfeqeaY2ZKXT3AmXl
- Fq7OwE0EPERwvhAEAIY1K5TICtxmFOeoRMW39jtF8DNSXl/se6HBe3Wy5Cz43lMZ6NvjDATa
- 1w3JlkmjUyIDP29ApqmMu78Tv4UUxAh1PhyTttX1/aorTlIdVYFjey/yW4mSDXUBhPvMpq52
- TncLRmK9HC6mIxJqS0vi6W9IqGOqDRZph3GzVzJN7WvLAAMGA/sGAyg2rVsBzs77WH0jPO+A
- QZDj+Hf/RFHOwmcyG7/XgmV6LOcQP4HfQHH3DGYihu5cZj3BeWKPDJnjOjB2qmr+FTjYEsjw
- LDBNG7rjRye412rUbNwmEtcD2/dw4xNyu5h2u+1++KVBPf4SqG/a10gDqGJXDHA1Os5MmnQl
- 3CTq9sJGBBgRAgAGBQI8RHC+AAoJEKXdeEnWwDasbeIAoL6+EsZKAYrZ2w22A6V67tRNGOIe
- AJ0cV9+pk/vqEgbv8ipKU4iniZclhg==
+On Fri, Apr 19, 2024 at 06:53:01PM +0200, Ralph Boehme wrote:
+>On 4/18/24 22:21, Steve French via samba-technical wrote:
+>>Was following up on a recent question about support for Linux features
+>>that are missing that could help us pass more xfstests
+>>
+>>Looking at the standard fstests for Linux (xfstests that are skipped
+>>or fail for cifs.ko) to find 'features' that would help, perhaps
+>>extending the current POSIX Extensions or adding a couple of SMB3.1.1
+>>FSCTLs, I spotted a few obvious ones:
+>>
+>>  1) renameat2 (RENAME_EXCHANGE) and renameat2(WHITEOUT)  2) FITRIM
+>>support 3) trusted namespace (perhaps xattr/EA extension) 4) attr
+>>namespace 5) deduplication 6) chattr -i 7) unshare (namespace command)
+>>8) delayed allocation 9) dax 10) attr namespace security 11) fstrim
+>>12) chattr +s 13) exchange range
+>>
+>>Any thoughts on which of these which would be 'easy' for samba and/or
+>>ksmbd server to implement (e.g. as new fsctls)?
+>
+>well, I guess none of these will be really "easy".
+>
+>Iirc when I last brough up file attributes, we vetted towards 
+>postponing this kind of stuff until we have full support for the core 
+>SMB3 POSIX features in Samba. Iirc the only real thing missing there 
+>is symlink/reparse point handling and for that we need to settle on 
+>which reparse type to use (WSL vs NFS) as discussed yesterday. It 
+>would be a *huge* help Steve, if you can pursue this internally, this 
+>has been a blocker for the whole project since quite some time...
 
---------------2A7TsdRsXHAyfa8HrzUIZq0I
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
-
-T24gNC8xOC8yNCAyMjoyMSwgU3RldmUgRnJlbmNoIHZpYSBzYW1iYS10ZWNobmljYWwgd3Jv
-dGU6DQo+IFdhcyBmb2xsb3dpbmcgdXAgb24gYSByZWNlbnQgcXVlc3Rpb24gYWJvdXQgc3Vw
-cG9ydCBmb3IgTGludXggZmVhdHVyZXMNCj4gdGhhdCBhcmUgbWlzc2luZyB0aGF0IGNvdWxk
-IGhlbHAgdXMgcGFzcyBtb3JlIHhmc3Rlc3RzDQo+IA0KPiBMb29raW5nIGF0IHRoZSBzdGFu
-ZGFyZCBmc3Rlc3RzIGZvciBMaW51eCAoeGZzdGVzdHMgdGhhdCBhcmUgc2tpcHBlZA0KPiBv
-ciBmYWlsIGZvciBjaWZzLmtvKSB0byBmaW5kICdmZWF0dXJlcycgdGhhdCB3b3VsZCBoZWxw
-LCBwZXJoYXBzDQo+IGV4dGVuZGluZyB0aGUgY3VycmVudCBQT1NJWCBFeHRlbnNpb25zIG9y
-IGFkZGluZyBhIGNvdXBsZSBvZiBTTUIzLjEuMQ0KPiBGU0NUTHMsIEkgc3BvdHRlZCBhIGZl
-dyBvYnZpb3VzIG9uZXM6DQo+IA0KPiAgIDEpIHJlbmFtZWF0MiAoUkVOQU1FX0VYQ0hBTkdF
-KSBhbmQgcmVuYW1lYXQyKFdISVRFT1VUKSAgMikgRklUUklNDQo+IHN1cHBvcnQgMykgdHJ1
-c3RlZCBuYW1lc3BhY2UgKHBlcmhhcHMgeGF0dHIvRUEgZXh0ZW5zaW9uKSA0KSBhdHRyDQo+
-IG5hbWVzcGFjZSA1KSBkZWR1cGxpY2F0aW9uIDYpIGNoYXR0ciAtaSA3KSB1bnNoYXJlIChu
-YW1lc3BhY2UgY29tbWFuZCkNCj4gOCkgZGVsYXllZCBhbGxvY2F0aW9uIDkpIGRheCAxMCkg
-YXR0ciBuYW1lc3BhY2Ugc2VjdXJpdHkgMTEpIGZzdHJpbQ0KPiAxMikgY2hhdHRyICtzIDEz
-KSBleGNoYW5nZSByYW5nZQ0KPiANCj4gQW55IHRob3VnaHRzIG9uIHdoaWNoIG9mIHRoZXNl
-IHdoaWNoIHdvdWxkIGJlICdlYXN5JyBmb3Igc2FtYmEgYW5kL29yDQo+IGtzbWJkIHNlcnZl
-ciB0byBpbXBsZW1lbnQgKGUuZy4gYXMgbmV3IGZzY3Rscyk/DQoNCndlbGwsIEkgZ3Vlc3Mg
-bm9uZSBvZiB0aGVzZSB3aWxsIGJlIHJlYWxseSAiZWFzeSIuDQoNCklpcmMgd2hlbiBJIGxh
-c3QgYnJvdWdoIHVwIGZpbGUgYXR0cmlidXRlcywgd2UgdmV0dGVkIHRvd2FyZHMgcG9zdHBv
-bmluZyANCnRoaXMga2luZCBvZiBzdHVmZiB1bnRpbCB3ZSBoYXZlIGZ1bGwgc3VwcG9ydCBm
-b3IgdGhlIGNvcmUgU01CMyBQT1NJWCANCmZlYXR1cmVzIGluIFNhbWJhLiBJaXJjIHRoZSBv
-bmx5IHJlYWwgdGhpbmcgbWlzc2luZyB0aGVyZSBpcyANCnN5bWxpbmsvcmVwYXJzZSBwb2lu
-dCBoYW5kbGluZyBhbmQgZm9yIHRoYXQgd2UgbmVlZCB0byBzZXR0bGUgb24gd2hpY2ggDQpy
-ZXBhcnNlIHR5cGUgdG8gdXNlIChXU0wgdnMgTkZTKSBhcyBkaXNjdXNzZWQgeWVzdGVyZGF5
-LiBJdCB3b3VsZCBiZSBhIA0KKmh1Z2UqIGhlbHAgU3RldmUsIGlmIHlvdSBjYW4gcHVyc3Vl
-IHRoaXMgaW50ZXJuYWxseSwgdGhpcyBoYXMgYmVlbiBhIA0KYmxvY2tlciBmb3IgdGhlIHdo
-b2xlIHByb2plY3Qgc2luY2UgcXVpdGUgc29tZSB0aW1lLi4uDQoNCi1zbG93DQoNCg==
-
---------------2A7TsdRsXHAyfa8HrzUIZq0I--
-
---------------mdtgv3JNGIQa0naBBbp00lUM
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-wsF5BAABCAAjFiEE+uLGCIokJSBRxVnkqh6bcSY5nkYFAmYioW0FAwAAAAAACgkQqh6bcSY5nkai
-yg//ShKTodwJKbzqEMo/gLLtz+Q2zUykb0yTcw8P1UB4VkeSwJTldq0dqNCXOOqxMcGp0pNMVl69
-Ra7qziNgxSd4DfCqPJCP7km+xmmDVCjMNumiAoqtJ2T7+VhvKLRCunIxND1GvjBHcVj60qKTIOdF
-Dq1s4t9fL7UYotoP8UquCXuN7mZyxL+qLFqi408eAivxbchhgU56nQ1LaTzTtp79ifzKXiGiKm06
-gqDNOD0fKYNnG3gz+6RAJb48lEsPnWZSyO2vFw+9fvqGnlT2l5TRURFW0y0RA/KOIMVjTUpPjs37
-LCxboqG3vROgfJZbvUjgmd7Xqt/Qc2utbVPB4XE61sZHElH2upqiwcRdy3f80JMkwXR/qY4IVDR3
-zo3/GoMSwKTE1kZnUJQfVZesbXGOZhwzNJuD1GRR1wcASMBCX6MFf6aJDkxP7kf2nFHlv4RkKV4Z
-gS0y2PKHbCPLWif+zwRN9lygvn4kNILYd5AnjDAAQESBLAOEmDBaWamUIQEjr9RnhwBvOTCd+A5e
-BVJdw5cudOAnrnDoAaD4JlDOjOBMNzdzPk0REEhe3OAW6Qfi0A1pbngb9IQllQwSWWmlomI14PrA
-gcOvFFoxs5fbBut7xACD+ujz8MCj6pGiyiogxPsiol+ykxqjF1rHa4XB510qkkVsqp6A4YtHGR5q
-6Dg=
-=Iaqv
------END PGP SIGNATURE-----
-
---------------mdtgv3JNGIQa0naBBbp00lUM--
+renameat2 (RENAME_EXCHANGE) and renameat2(WHITEOUT) need to be
+mapped into Windows SMB3 operations. We should not (IMHO) add new
+SMB3 operation semantics into POSIX that overlap existing Windows
+SMB3 operations.
 
