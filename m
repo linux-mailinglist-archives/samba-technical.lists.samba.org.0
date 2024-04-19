@@ -2,67 +2,51 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 875568AB34D
-	for <lists+samba-technical@lfdr.de>; Fri, 19 Apr 2024 18:26:27 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7D4B48AB3C8
+	for <lists+samba-technical@lfdr.de>; Fri, 19 Apr 2024 18:53:22 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=upfTM4+r77Xp8kRYkuqZK2ZsBAmHSPS8/nYQsvwCmnk=; b=XYlTpUvWL2/lnrwMty6haQvmun
-	2sLGybQAUPV4B4ph3HMW5kIGdOLjWMFZw5N8zBFjEdLFmsoJKJo+M0OHp+MalwX11DJAJIXPRRYFs
-	zJIQV04bAymwrAjJPE5lr1of+NUsEkTddUpdFyFrtwgp8kbl1j2u+Jn7ts3c4gL/YYYR/EVw/eUeb
-	NhUjKEpFp31VoFFsMpgAFM7VgpAQLUqr/ouH9Nv0WbCLZ2wqEAlX8iK6PfpEol20Bxf+SieKdp5+r
-	jUHW1rebUSJqdd7lALoR8ZlFV5hZ3tNUKi3MxK0jCK580Vl2CVhGj9FueR18+SCk1TZEHFOu/lhKp
-	s3qgmAYg==;
-Received: from ip6-localhost ([::1]:20844 helo=hr1.samba.org) 
+	bh=CdLUAg6J9P9CgZmrtUFiWuJ3BIHGk3wTFq9/m4uRmuY=; b=wV0YcC43AetHm5R/BybifR9+ea
+	A5A1Kry7gbOEflwPXRfiJWclRY07q/xra0uSlTpbTs1+XDitKNUe7VKp2uU0FmtHxJvynq4swNBM8
+	BfAeDiThj8TITFajCQbeLUwZhbzG1FpCPPke92bm+62NofKYP9Acv0PcDAo2O1ipTijJSV7ttp8pA
+	D9J2MeSkuR8lNV30Gc8tzF2XLIoHLDNuGbYbKbaSZkBwEFbbGgDHS2kCP/wXB096sctWs1XK9o2u9
+	OSrn1oc+1oDMzexAfqGKlzKMl9atuqyKdY7lJYOZRGMUUaNkweQv7LR3CNhgim4Uc3Cc1WaYhDz8J
+	F0/kp4pg==;
+Received: from ip6-localhost ([::1]:44932 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1rxr3r-005Cs3-K9; Fri, 19 Apr 2024 16:26:03 +0000
-Received: from mail-pj1-x102f.google.com ([2607:f8b0:4864:20::102f]:43348) 
+	id 1rxrU3-005D0P-Gg; Fri, 19 Apr 2024 16:53:07 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:33384) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1rxr3l-005Crv-CE
- for samba-technical@lists.samba.org; Fri, 19 Apr 2024 16:26:01 +0000
-Received: by mail-pj1-x102f.google.com with SMTP id
- 98e67ed59e1d1-2a2e5d86254so2368904a91.1
- for <samba-technical@lists.samba.org>; Fri, 19 Apr 2024 09:25:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1713543954; x=1714148754; darn=lists.samba.org;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=RNLk9/Jyk27e3/gJs/RDHbnIjvIKuebMQKwO4Wr4FzQ=;
- b=eGHytLom5LBFwrFkWc6bglsRJozvc3fQeD4jxH+V2hkU5iXZLOvKVsNcfEFAl7ULjU
- CrTe4XwccEAHI6bVIG1Tjrhc6AwUXttgjG1JVuQa1wVdnRcyrWRqUEN2DQ5iOQx+HxeS
- 01pAf6tGF53gWnwA9E7g5zc6NAVLrMgwg5YxTRtrC9QZze6334pDJjxPNQsqzZTyk8dy
- ABbhyv5d6ml/q8zFhqtkCHA+HII72gfEtzNtlEYxcM1tGvI9dsjaTlL8/pWJ59gbIlNY
- 09BbjWg0G2djQclfjWhSJY358zQmnu3yG7JKv8499xga4alt4/yQ945whivedWv7wZ7I
- bnkQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713543954; x=1714148754;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=RNLk9/Jyk27e3/gJs/RDHbnIjvIKuebMQKwO4Wr4FzQ=;
- b=EGkZA630m1hDeElN0jWhPX6Mn7suwHHCwjEfH2SFUHu2Q/AjvgDwdMVwO2F6LgmlfL
- nicUWwno1BxHLV8KL9ehfSbV9kP2s0UA7THrARAY2f0T5aY49fXbF4KOdmwHDjPl2F9i
- QStdyNZ08cUHi7FDPCeGxMok2Oq6u8mRq8oOC2JIiCES5qbSdNxgsRRc+EBDopOv24Yd
- cigT+i4YVylXQcRNSREVT08dpx2KMTTFMXcaxO9to36Bc+1+P6L39wxgb/3aMpvndARw
- x3FMclueaHGmUSIJ70taryeQwGXX+0t9XfU+hFslIXzECIx+Ckxr/12uh4Gm4R8QMJ3I
- JZzw==
-X-Gm-Message-State: AOJu0Yy/7iATe1KmALYpmIA65wfRbVefycsah1HXCOXEVDce/3CnWAr8
- uh9BdF04ahrGup+R57dS4mWLsFXgfVymyiaZkJRXun9TKgq+iarjkpIXClXEofP8p5/0djSQBg0
- qwb8zXTPJNTFEtfvMxjy4nF3fSaRhqA==
-X-Google-Smtp-Source: AGHT+IHvQqInyjFE8YzLF68lITaG7vbOTBmWidDB9x9CikTTfoVJ4yXjs2k2MQIfNUYfrx2jFIYyDWFgCz+V6rOqPXE=
-X-Received: by 2002:a17:90b:3114:b0:2a5:575:c58d with SMTP id
- gc20-20020a17090b311400b002a50575c58dmr8446869pjb.16.1713543953738; Fri, 19
- Apr 2024 09:25:53 -0700 (PDT)
+ (Exim) id 1rxrTz-005D0F-5Z
+ for samba-technical@lists.samba.org; Fri, 19 Apr 2024 16:53:05 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=From:Cc:To:Date:Message-ID;
+ bh=CdLUAg6J9P9CgZmrtUFiWuJ3BIHGk3wTFq9/m4uRmuY=; b=x2SCEn0YNrzqzeCmS3kvevJtdl
+ lg816d81lX1biP+U/8I/9Q2qdTyp7BLP4gL9DroAG8O0MTGDmSz7ky6l5orEYPQ8gydqKV0cHByc9
+ JNIZFaJcfwjvblzQ//wlUfAYFSOuf2Bj6kV34HDVsK4bR7k6pH9KeYjvdi8cVs1mrFLUiara6cc71
+ ap3dNaDZh1y4L8wtM5jEgFI5vuyuMTI049pauEPRaHP1DvinZ6GF4hJR8ihCD+HaY+za/+WoaOx1C
+ nVylZVTkHcE6N0Didj+KPSIxQ/2bNG5xTWP+lhCTIaLWoRDDGU0923bYne2Z1NyCBQK1jkancdCsN
+ GvN0t20Z9tuab75jxitJZ8UEIo0IcJHCZWTcINDjUPhoDKA7rwCzrkSPF3hUyxIShMauWQje9sLVY
+ PhI5cvlDt8MldG94l631xWF++A+SsAAdsu/pCWjlePr+prbGN6/5ndDB2ZRHKFYaAMM61l3k0TKqi
+ SHruXGf1zmjbyCpCE0lUT08y;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1rxrTy-007Hw8-01; Fri, 19 Apr 2024 16:53:02 +0000
+Message-ID: <e69bad72-9139-4b01-afe5-5d34edc077a1@samba.org>
+Date: Fri, 19 Apr 2024 18:53:01 +0200
 MIME-Version: 1.0
-References: <CAO9H7P_SpZ0fGDvTc_2XDLRiR1rSdy-2ztBv07h1ECmj_mnoHw@mail.gmail.com>
- <ZiKUGvWj3xp07NO8@jeremy-HP-Z840-Workstation>
-In-Reply-To: <ZiKUGvWj3xp07NO8@jeremy-HP-Z840-Workstation>
-Date: Fri, 19 Apr 2024 18:25:42 +0200
-Message-ID: <CAO9H7P8CpzDrYzPjFe03twWcP4ei+eC9214jdctfJRK-G8TxaA@mail.gmail.com>
-Subject: Re: Doubts about Samba's unicode translation tables
-To: Jeremy Allison <jra@samba.org>
-Content-Type: multipart/mixed; boundary="000000000000ab932a0616758a2e"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
+User-Agent: Mozilla Thunderbird
+Subject: Re: Missing protocol features that could help Linux
+To: Steve French <smfrench@gmail.com>,
+ samba-technical <samba-technical@lists.samba.org>
+References: <CAH2r5mstDacz=gvpjFQeB_nc1kBjyzTZw57tF8UNrXARXkV1rQ@mail.gmail.com>
+Content-Language: en-US, de-DE
+In-Reply-To: <CAH2r5mstDacz=gvpjFQeB_nc1kBjyzTZw57tF8UNrXARXkV1rQ@mail.gmail.com>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------mdtgv3JNGIQa0naBBbp00lUM"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -76,221 +60,99 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Xavi Hernandez via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Xavi Hernandez <xhernandez@gmail.com>
-Cc: Stefan Metzmacher <metze@samba.org>, gd@samba.org,
- samba-technical@lists.samba.org
+From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Ralph Boehme <slow@samba.org>
+Cc: CIFS <linux-cifs@vger.kernel.org>, Namjae Jeon <linkinjeon@kernel.org>,
+ Jeremy Allison <jra@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
---000000000000ab932a0616758a2e
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------mdtgv3JNGIQa0naBBbp00lUM
+Content-Type: multipart/mixed; boundary="------------2A7TsdRsXHAyfa8HrzUIZq0I";
+ protected-headers="v1"
+From: Ralph Boehme <slow@samba.org>
+To: Steve French <smfrench@gmail.com>,
+ samba-technical <samba-technical@lists.samba.org>
+Cc: CIFS <linux-cifs@vger.kernel.org>, Namjae Jeon <linkinjeon@kernel.org>,
+ Jeremy Allison <jra@samba.org>
+Message-ID: <e69bad72-9139-4b01-afe5-5d34edc077a1@samba.org>
+Subject: Re: Missing protocol features that could help Linux
+References: <CAH2r5mstDacz=gvpjFQeB_nc1kBjyzTZw57tF8UNrXARXkV1rQ@mail.gmail.com>
+In-Reply-To: <CAH2r5mstDacz=gvpjFQeB_nc1kBjyzTZw57tF8UNrXARXkV1rQ@mail.gmail.com>
+Autocrypt-Gossip: addr=jra@samba.org; keydata=
+ xsDiBDxEcLsRBADMQzpWoVuu4oiq23q5AfZDbakENMP/8ZU+AnzqzGr70lIEJb2jfcudViUT
+ 97+RmXptlnDmE4/ILOf6w0udMlQ9Jpm+iqxbr35D/6qvFgrgE+PnNAPlKSlI2fyGuLhpv1QP
+ forHV13gB3B6S/ZWHpf/owKnJMwu8ozQpjnMnqOiVwCg8QnSX2AFCMd3HLQsqVaMdlO+jBEE
+ AKrMu2Pavmyc/eoNfrjgeRoNRkwHCINWO5u93o92dngWK/hN1QOOCQfAzqZ1JwS5Q+E2gGug
+ 4OVaZI1vZGsAzb06TSnS4fmrOfwHqltSDsCHhwd+pyWkIvi96Swx00e1NEwNExEBo5NrGunf
+ fONGlfRc+WhMLIk0u2e2V14R+ebDA/42T+cQZtUR6EdBReHVpmckQXXcE8cIqsu6UpZCsdEP
+ N6YjxQKgTKWQWoxE2k4lYl9KsDK1BaF6rLNz/yt2RAVb1qZVaOqpITZWwzykzH60dMaX/G1S
+ GWuN28by9ghI2LIsxcXHiDhG2CZxyfogBDDXoTPXlVMdk55IwAJny8Wj4s0eSmVyZW15IEFs
+ bGlzb24gPGpyYUBzYW1iYS5vcmc+wlcEExECABcFAjxEcLsFCwcKAwQDFQMCAxYCAQIXgAAK
+ CRCl3XhJ1sA2rDHZAKDwxfxpGuCOAuDHaN3ULDrIzKw9DQCdHb3Sq5WKfeqeaY2ZKXT3AmXl
+ Fq7OwE0EPERwvhAEAIY1K5TICtxmFOeoRMW39jtF8DNSXl/se6HBe3Wy5Cz43lMZ6NvjDATa
+ 1w3JlkmjUyIDP29ApqmMu78Tv4UUxAh1PhyTttX1/aorTlIdVYFjey/yW4mSDXUBhPvMpq52
+ TncLRmK9HC6mIxJqS0vi6W9IqGOqDRZph3GzVzJN7WvLAAMGA/sGAyg2rVsBzs77WH0jPO+A
+ QZDj+Hf/RFHOwmcyG7/XgmV6LOcQP4HfQHH3DGYihu5cZj3BeWKPDJnjOjB2qmr+FTjYEsjw
+ LDBNG7rjRye412rUbNwmEtcD2/dw4xNyu5h2u+1++KVBPf4SqG/a10gDqGJXDHA1Os5MmnQl
+ 3CTq9sJGBBgRAgAGBQI8RHC+AAoJEKXdeEnWwDasbeIAoL6+EsZKAYrZ2w22A6V67tRNGOIe
+ AJ0cV9+pk/vqEgbv8ipKU4iniZclhg==
 
-Hi Jeremy,
-
-On Fri, Apr 19, 2024 at 5:56=E2=80=AFPM Jeremy Allison <jra@samba.org> wrot=
-e:
-
-> On Fri, Apr 19, 2024 at 11:04:40AM +0200, Xavi Hernandez via
-> samba-technical wrote:
-> >Hi all,
-> >
-> >I'm currently trying to integrate Samba with CephFS, and one of the
-> >important things to improve is to access CephFS files in an insensitive
-> way
-> >without needing to scan the entire directory from smbd.
-> >
-> >During this work I've found that Samba does the case insensitive
-> comparison
-> >using a couple of UTF16 translation tables (one that converts to upperca=
-se
-> >and another that converts to lowercase).
-> >
-> >Looking at how NTFS does the same thing I've found that it also uses a
-> >UTF16 table stored in the $UpCase special NTFS file located in the root =
-of
-> >the volume.
-> >
-> >The first question is why Samba uses two tables while Windows only
-> requires
-> >one ?
-> >For what purpose is the lowercase translation table in Samba used ?
-> >Is the Samba's case-insensitive comparison method actually equal to
-> Windows
-> >?
-> >
-> >I've also extracted the $UpCase file from a Windows 11 machine and I've
-> >found that the Samba's uppercase table is very similar but not identical
-> >(there are 339 different values). Is this expected ?
->
-> Posting the differences would be very interesting. Thanks !
->
-
-In all cases except one, the Samba table translates the unicode character
-to itself, while the Windows table does some other translation.
-
-The exception is character U+03C2, which is translated to itself by the
-Windows table, but to U+03A3 by the Samba table.
-
-I've attached a file with all the differences.
-
-Regards,
-
-Xavi
-
---000000000000ab932a0616758a2e
-Content-Type: text/plain; charset="US-ASCII"; name="differences.txt"
-Content-Disposition: attachment; filename="differences.txt"
+--------------2A7TsdRsXHAyfa8HrzUIZq0I
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: base64
-Content-ID: <f_lv6vszgs0>
-X-Attachment-Id: f_lv6vszgs0
 
-RGlmZmVyZW5jZXMgaW4gdXBwZXJjYXNlIHRyYW5zbGF0aW9uIHRhYmxlcyBmb3IgU2FtYmEgYW5k
-IFdpbjExLgoKJy0tLS0tLScgbWVhbnMgdGhhdCB0aGVyZSdzIG5vIHRyYW5zbGF0aW9uLCBpdCdz
-IG1hcHBlZCB0byBpdHNlbGYuCgpVbmljb2RlICAgU2FtYmEgIFdpbjExClUrMDE4MCAtPiAtLS0t
-LS0gVSswMjQzClUrMDE5NSAtPiAtLS0tLS0gVSswMUY2ClUrMDE5QSAtPiAtLS0tLS0gVSswMjNE
-ClUrMDE5RSAtPiAtLS0tLS0gVSswMjIwClUrMDFCRiAtPiAtLS0tLS0gVSswMUY3ClUrMDFGOSAt
-PiAtLS0tLS0gVSswMUY4ClUrMDIxOSAtPiAtLS0tLS0gVSswMjE4ClUrMDIxQiAtPiAtLS0tLS0g
-VSswMjFBClUrMDIxRCAtPiAtLS0tLS0gVSswMjFDClUrMDIxRiAtPiAtLS0tLS0gVSswMjFFClUr
-MDIyMyAtPiAtLS0tLS0gVSswMjIyClUrMDIyNSAtPiAtLS0tLS0gVSswMjI0ClUrMDIyNyAtPiAt
-LS0tLS0gVSswMjI2ClUrMDIyOSAtPiAtLS0tLS0gVSswMjI4ClUrMDIyQiAtPiAtLS0tLS0gVSsw
-MjJBClUrMDIyRCAtPiAtLS0tLS0gVSswMjJDClUrMDIyRiAtPiAtLS0tLS0gVSswMjJFClUrMDIz
-MSAtPiAtLS0tLS0gVSswMjMwClUrMDIzMyAtPiAtLS0tLS0gVSswMjMyClUrMDIzQyAtPiAtLS0t
-LS0gVSswMjNCClUrMDI0MiAtPiAtLS0tLS0gVSswMjQxClUrMDI0NyAtPiAtLS0tLS0gVSswMjQ2
-ClUrMDI0OSAtPiAtLS0tLS0gVSswMjQ4ClUrMDI0QiAtPiAtLS0tLS0gVSswMjRBClUrMDI0RCAt
-PiAtLS0tLS0gVSswMjRDClUrMDI0RiAtPiAtLS0tLS0gVSswMjRFClUrMDI1MCAtPiAtLS0tLS0g
-VSsyQzZGClUrMDI1MSAtPiAtLS0tLS0gVSsyQzZEClUrMDI2QiAtPiAtLS0tLS0gVSsyQzYyClUr
-MDI3MSAtPiAtLS0tLS0gVSsyQzZFClUrMDI3RCAtPiAtLS0tLS0gVSsyQzY0ClUrMDI4MCAtPiAt
-LS0tLS0gVSswMUE2ClUrMDI4OSAtPiAtLS0tLS0gVSswMjQ0ClUrMDI4QyAtPiAtLS0tLS0gVSsw
-MjQ1ClUrMDM3MSAtPiAtLS0tLS0gVSswMzcwClUrMDM3MyAtPiAtLS0tLS0gVSswMzcyClUrMDM3
-NyAtPiAtLS0tLS0gVSswMzc2ClUrMDM3QiAtPiAtLS0tLS0gVSswM0ZEClUrMDM3QyAtPiAtLS0t
-LS0gVSswM0ZFClUrMDM3RCAtPiAtLS0tLS0gVSswM0ZGClUrMDNDMiAtPiBVKzAzQTMgLS0tLS0t
-ClUrMDNENyAtPiAtLS0tLS0gVSswM0NGClUrMDNEOSAtPiAtLS0tLS0gVSswM0Q4ClUrMDNEQiAt
-PiAtLS0tLS0gVSswM0RBClUrMDNERCAtPiAtLS0tLS0gVSswM0RDClUrMDNERiAtPiAtLS0tLS0g
-VSswM0RFClUrMDNFMSAtPiAtLS0tLS0gVSswM0UwClUrMDNGMiAtPiAtLS0tLS0gVSswM0Y5ClUr
-MDNGOCAtPiAtLS0tLS0gVSswM0Y3ClUrMDNGQiAtPiAtLS0tLS0gVSswM0ZBClUrMDQ1MCAtPiAt
-LS0tLS0gVSswNDAwClUrMDQ1RCAtPiAtLS0tLS0gVSswNDBEClUrMDQ4QiAtPiAtLS0tLS0gVSsw
-NDhBClUrMDQ4RCAtPiAtLS0tLS0gVSswNDhDClUrMDQ4RiAtPiAtLS0tLS0gVSswNDhFClUrMDRD
-NiAtPiAtLS0tLS0gVSswNEM1ClUrMDRDQSAtPiAtLS0tLS0gVSswNEM5ClUrMDRDRSAtPiAtLS0t
-LS0gVSswNENEClUrMDRDRiAtPiAtLS0tLS0gVSswNEMwClUrMDRFRCAtPiAtLS0tLS0gVSswNEVD
-ClUrMDRGNyAtPiAtLS0tLS0gVSswNEY2ClUrMDRGQiAtPiAtLS0tLS0gVSswNEZBClUrMDRGRCAt
-PiAtLS0tLS0gVSswNEZDClUrMDRGRiAtPiAtLS0tLS0gVSswNEZFClUrMDUwMSAtPiAtLS0tLS0g
-VSswNTAwClUrMDUwMyAtPiAtLS0tLS0gVSswNTAyClUrMDUwNSAtPiAtLS0tLS0gVSswNTA0ClUr
-MDUwNyAtPiAtLS0tLS0gVSswNTA2ClUrMDUwOSAtPiAtLS0tLS0gVSswNTA4ClUrMDUwQiAtPiAt
-LS0tLS0gVSswNTBBClUrMDUwRCAtPiAtLS0tLS0gVSswNTBDClUrMDUwRiAtPiAtLS0tLS0gVSsw
-NTBFClUrMDUxMSAtPiAtLS0tLS0gVSswNTEwClUrMDUxMyAtPiAtLS0tLS0gVSswNTEyClUrMDUx
-NSAtPiAtLS0tLS0gVSswNTE0ClUrMDUxNyAtPiAtLS0tLS0gVSswNTE2ClUrMDUxOSAtPiAtLS0t
-LS0gVSswNTE4ClUrMDUxQiAtPiAtLS0tLS0gVSswNTFBClUrMDUxRCAtPiAtLS0tLS0gVSswNTFD
-ClUrMDUxRiAtPiAtLS0tLS0gVSswNTFFClUrMDUyMSAtPiAtLS0tLS0gVSswNTIwClUrMDUyMyAt
-PiAtLS0tLS0gVSswNTIyClUrMUQ3OSAtPiAtLS0tLS0gVStBNzdEClUrMUQ3RCAtPiAtLS0tLS0g
-VSsyQzYzClUrMUVGQiAtPiAtLS0tLS0gVSsxRUZBClUrMUVGRCAtPiAtLS0tLS0gVSsxRUZDClUr
-MUVGRiAtPiAtLS0tLS0gVSsxRUZFClUrMUY4MCAtPiAtLS0tLS0gVSsxRjg4ClUrMUY4MSAtPiAt
-LS0tLS0gVSsxRjg5ClUrMUY4MiAtPiAtLS0tLS0gVSsxRjhBClUrMUY4MyAtPiAtLS0tLS0gVSsx
-RjhCClUrMUY4NCAtPiAtLS0tLS0gVSsxRjhDClUrMUY4NSAtPiAtLS0tLS0gVSsxRjhEClUrMUY4
-NiAtPiAtLS0tLS0gVSsxRjhFClUrMUY4NyAtPiAtLS0tLS0gVSsxRjhGClUrMUY5MCAtPiAtLS0t
-LS0gVSsxRjk4ClUrMUY5MSAtPiAtLS0tLS0gVSsxRjk5ClUrMUY5MiAtPiAtLS0tLS0gVSsxRjlB
-ClUrMUY5MyAtPiAtLS0tLS0gVSsxRjlCClUrMUY5NCAtPiAtLS0tLS0gVSsxRjlDClUrMUY5NSAt
-PiAtLS0tLS0gVSsxRjlEClUrMUY5NiAtPiAtLS0tLS0gVSsxRjlFClUrMUY5NyAtPiAtLS0tLS0g
-VSsxRjlGClUrMUZBMCAtPiAtLS0tLS0gVSsxRkE4ClUrMUZBMSAtPiAtLS0tLS0gVSsxRkE5ClUr
-MUZBMiAtPiAtLS0tLS0gVSsxRkFBClUrMUZBMyAtPiAtLS0tLS0gVSsxRkFCClUrMUZBNCAtPiAt
-LS0tLS0gVSsxRkFDClUrMUZBNSAtPiAtLS0tLS0gVSsxRkFEClUrMUZBNiAtPiAtLS0tLS0gVSsx
-RkFFClUrMUZBNyAtPiAtLS0tLS0gVSsxRkFGClUrMUZCMyAtPiAtLS0tLS0gVSsxRkJDClUrMUZD
-MyAtPiAtLS0tLS0gVSsxRkNDClUrMUZGMyAtPiAtLS0tLS0gVSsxRkZDClUrMjE0RSAtPiAtLS0t
-LS0gVSsyMTMyClUrMjE4NCAtPiAtLS0tLS0gVSsyMTgzClUrMkMzMCAtPiAtLS0tLS0gVSsyQzAw
-ClUrMkMzMSAtPiAtLS0tLS0gVSsyQzAxClUrMkMzMiAtPiAtLS0tLS0gVSsyQzAyClUrMkMzMyAt
-PiAtLS0tLS0gVSsyQzAzClUrMkMzNCAtPiAtLS0tLS0gVSsyQzA0ClUrMkMzNSAtPiAtLS0tLS0g
-VSsyQzA1ClUrMkMzNiAtPiAtLS0tLS0gVSsyQzA2ClUrMkMzNyAtPiAtLS0tLS0gVSsyQzA3ClUr
-MkMzOCAtPiAtLS0tLS0gVSsyQzA4ClUrMkMzOSAtPiAtLS0tLS0gVSsyQzA5ClUrMkMzQSAtPiAt
-LS0tLS0gVSsyQzBBClUrMkMzQiAtPiAtLS0tLS0gVSsyQzBCClUrMkMzQyAtPiAtLS0tLS0gVSsy
-QzBDClUrMkMzRCAtPiAtLS0tLS0gVSsyQzBEClUrMkMzRSAtPiAtLS0tLS0gVSsyQzBFClUrMkMz
-RiAtPiAtLS0tLS0gVSsyQzBGClUrMkM0MCAtPiAtLS0tLS0gVSsyQzEwClUrMkM0MSAtPiAtLS0t
-LS0gVSsyQzExClUrMkM0MiAtPiAtLS0tLS0gVSsyQzEyClUrMkM0MyAtPiAtLS0tLS0gVSsyQzEz
-ClUrMkM0NCAtPiAtLS0tLS0gVSsyQzE0ClUrMkM0NSAtPiAtLS0tLS0gVSsyQzE1ClUrMkM0NiAt
-PiAtLS0tLS0gVSsyQzE2ClUrMkM0NyAtPiAtLS0tLS0gVSsyQzE3ClUrMkM0OCAtPiAtLS0tLS0g
-VSsyQzE4ClUrMkM0OSAtPiAtLS0tLS0gVSsyQzE5ClUrMkM0QSAtPiAtLS0tLS0gVSsyQzFBClUr
-MkM0QiAtPiAtLS0tLS0gVSsyQzFCClUrMkM0QyAtPiAtLS0tLS0gVSsyQzFDClUrMkM0RCAtPiAt
-LS0tLS0gVSsyQzFEClUrMkM0RSAtPiAtLS0tLS0gVSsyQzFFClUrMkM0RiAtPiAtLS0tLS0gVSsy
-QzFGClUrMkM1MCAtPiAtLS0tLS0gVSsyQzIwClUrMkM1MSAtPiAtLS0tLS0gVSsyQzIxClUrMkM1
-MiAtPiAtLS0tLS0gVSsyQzIyClUrMkM1MyAtPiAtLS0tLS0gVSsyQzIzClUrMkM1NCAtPiAtLS0t
-LS0gVSsyQzI0ClUrMkM1NSAtPiAtLS0tLS0gVSsyQzI1ClUrMkM1NiAtPiAtLS0tLS0gVSsyQzI2
-ClUrMkM1NyAtPiAtLS0tLS0gVSsyQzI3ClUrMkM1OCAtPiAtLS0tLS0gVSsyQzI4ClUrMkM1OSAt
-PiAtLS0tLS0gVSsyQzI5ClUrMkM1QSAtPiAtLS0tLS0gVSsyQzJBClUrMkM1QiAtPiAtLS0tLS0g
-VSsyQzJCClUrMkM1QyAtPiAtLS0tLS0gVSsyQzJDClUrMkM1RCAtPiAtLS0tLS0gVSsyQzJEClUr
-MkM1RSAtPiAtLS0tLS0gVSsyQzJFClUrMkM2MSAtPiAtLS0tLS0gVSsyQzYwClUrMkM2NSAtPiAt
-LS0tLS0gVSswMjNBClUrMkM2NiAtPiAtLS0tLS0gVSswMjNFClUrMkM2OCAtPiAtLS0tLS0gVSsy
-QzY3ClUrMkM2QSAtPiAtLS0tLS0gVSsyQzY5ClUrMkM2QyAtPiAtLS0tLS0gVSsyQzZCClUrMkM3
-MyAtPiAtLS0tLS0gVSsyQzcyClUrMkM3NiAtPiAtLS0tLS0gVSsyQzc1ClUrMkM4MSAtPiAtLS0t
-LS0gVSsyQzgwClUrMkM4MyAtPiAtLS0tLS0gVSsyQzgyClUrMkM4NSAtPiAtLS0tLS0gVSsyQzg0
-ClUrMkM4NyAtPiAtLS0tLS0gVSsyQzg2ClUrMkM4OSAtPiAtLS0tLS0gVSsyQzg4ClUrMkM4QiAt
-PiAtLS0tLS0gVSsyQzhBClUrMkM4RCAtPiAtLS0tLS0gVSsyQzhDClUrMkM4RiAtPiAtLS0tLS0g
-VSsyQzhFClUrMkM5MSAtPiAtLS0tLS0gVSsyQzkwClUrMkM5MyAtPiAtLS0tLS0gVSsyQzkyClUr
-MkM5NSAtPiAtLS0tLS0gVSsyQzk0ClUrMkM5NyAtPiAtLS0tLS0gVSsyQzk2ClUrMkM5OSAtPiAt
-LS0tLS0gVSsyQzk4ClUrMkM5QiAtPiAtLS0tLS0gVSsyQzlBClUrMkM5RCAtPiAtLS0tLS0gVSsy
-QzlDClUrMkM5RiAtPiAtLS0tLS0gVSsyQzlFClUrMkNBMSAtPiAtLS0tLS0gVSsyQ0EwClUrMkNB
-MyAtPiAtLS0tLS0gVSsyQ0EyClUrMkNBNSAtPiAtLS0tLS0gVSsyQ0E0ClUrMkNBNyAtPiAtLS0t
-LS0gVSsyQ0E2ClUrMkNBOSAtPiAtLS0tLS0gVSsyQ0E4ClUrMkNBQiAtPiAtLS0tLS0gVSsyQ0FB
-ClUrMkNBRCAtPiAtLS0tLS0gVSsyQ0FDClUrMkNBRiAtPiAtLS0tLS0gVSsyQ0FFClUrMkNCMSAt
-PiAtLS0tLS0gVSsyQ0IwClUrMkNCMyAtPiAtLS0tLS0gVSsyQ0IyClUrMkNCNSAtPiAtLS0tLS0g
-VSsyQ0I0ClUrMkNCNyAtPiAtLS0tLS0gVSsyQ0I2ClUrMkNCOSAtPiAtLS0tLS0gVSsyQ0I4ClUr
-MkNCQiAtPiAtLS0tLS0gVSsyQ0JBClUrMkNCRCAtPiAtLS0tLS0gVSsyQ0JDClUrMkNCRiAtPiAt
-LS0tLS0gVSsyQ0JFClUrMkNDMSAtPiAtLS0tLS0gVSsyQ0MwClUrMkNDMyAtPiAtLS0tLS0gVSsy
-Q0MyClUrMkNDNSAtPiAtLS0tLS0gVSsyQ0M0ClUrMkNDNyAtPiAtLS0tLS0gVSsyQ0M2ClUrMkND
-OSAtPiAtLS0tLS0gVSsyQ0M4ClUrMkNDQiAtPiAtLS0tLS0gVSsyQ0NBClUrMkNDRCAtPiAtLS0t
-LS0gVSsyQ0NDClUrMkNDRiAtPiAtLS0tLS0gVSsyQ0NFClUrMkNEMSAtPiAtLS0tLS0gVSsyQ0Qw
-ClUrMkNEMyAtPiAtLS0tLS0gVSsyQ0QyClUrMkNENSAtPiAtLS0tLS0gVSsyQ0Q0ClUrMkNENyAt
-PiAtLS0tLS0gVSsyQ0Q2ClUrMkNEOSAtPiAtLS0tLS0gVSsyQ0Q4ClUrMkNEQiAtPiAtLS0tLS0g
-VSsyQ0RBClUrMkNERCAtPiAtLS0tLS0gVSsyQ0RDClUrMkNERiAtPiAtLS0tLS0gVSsyQ0RFClUr
-MkNFMSAtPiAtLS0tLS0gVSsyQ0UwClUrMkNFMyAtPiAtLS0tLS0gVSsyQ0UyClUrMkQwMCAtPiAt
-LS0tLS0gVSsxMEEwClUrMkQwMSAtPiAtLS0tLS0gVSsxMEExClUrMkQwMiAtPiAtLS0tLS0gVSsx
-MEEyClUrMkQwMyAtPiAtLS0tLS0gVSsxMEEzClUrMkQwNCAtPiAtLS0tLS0gVSsxMEE0ClUrMkQw
-NSAtPiAtLS0tLS0gVSsxMEE1ClUrMkQwNiAtPiAtLS0tLS0gVSsxMEE2ClUrMkQwNyAtPiAtLS0t
-LS0gVSsxMEE3ClUrMkQwOCAtPiAtLS0tLS0gVSsxMEE4ClUrMkQwOSAtPiAtLS0tLS0gVSsxMEE5
-ClUrMkQwQSAtPiAtLS0tLS0gVSsxMEFBClUrMkQwQiAtPiAtLS0tLS0gVSsxMEFCClUrMkQwQyAt
-PiAtLS0tLS0gVSsxMEFDClUrMkQwRCAtPiAtLS0tLS0gVSsxMEFEClUrMkQwRSAtPiAtLS0tLS0g
-VSsxMEFFClUrMkQwRiAtPiAtLS0tLS0gVSsxMEFGClUrMkQxMCAtPiAtLS0tLS0gVSsxMEIwClUr
-MkQxMSAtPiAtLS0tLS0gVSsxMEIxClUrMkQxMiAtPiAtLS0tLS0gVSsxMEIyClUrMkQxMyAtPiAt
-LS0tLS0gVSsxMEIzClUrMkQxNCAtPiAtLS0tLS0gVSsxMEI0ClUrMkQxNSAtPiAtLS0tLS0gVSsx
-MEI1ClUrMkQxNiAtPiAtLS0tLS0gVSsxMEI2ClUrMkQxNyAtPiAtLS0tLS0gVSsxMEI3ClUrMkQx
-OCAtPiAtLS0tLS0gVSsxMEI4ClUrMkQxOSAtPiAtLS0tLS0gVSsxMEI5ClUrMkQxQSAtPiAtLS0t
-LS0gVSsxMEJBClUrMkQxQiAtPiAtLS0tLS0gVSsxMEJCClUrMkQxQyAtPiAtLS0tLS0gVSsxMEJD
-ClUrMkQxRCAtPiAtLS0tLS0gVSsxMEJEClUrMkQxRSAtPiAtLS0tLS0gVSsxMEJFClUrMkQxRiAt
-PiAtLS0tLS0gVSsxMEJGClUrMkQyMCAtPiAtLS0tLS0gVSsxMEMwClUrMkQyMSAtPiAtLS0tLS0g
-VSsxMEMxClUrMkQyMiAtPiAtLS0tLS0gVSsxMEMyClUrMkQyMyAtPiAtLS0tLS0gVSsxMEMzClUr
-MkQyNCAtPiAtLS0tLS0gVSsxMEM0ClUrMkQyNSAtPiAtLS0tLS0gVSsxMEM1ClUrQTY0MSAtPiAt
-LS0tLS0gVStBNjQwClUrQTY0MyAtPiAtLS0tLS0gVStBNjQyClUrQTY0NSAtPiAtLS0tLS0gVStB
-NjQ0ClUrQTY0NyAtPiAtLS0tLS0gVStBNjQ2ClUrQTY0OSAtPiAtLS0tLS0gVStBNjQ4ClUrQTY0
-QiAtPiAtLS0tLS0gVStBNjRBClUrQTY0RCAtPiAtLS0tLS0gVStBNjRDClUrQTY0RiAtPiAtLS0t
-LS0gVStBNjRFClUrQTY1MSAtPiAtLS0tLS0gVStBNjUwClUrQTY1MyAtPiAtLS0tLS0gVStBNjUy
-ClUrQTY1NSAtPiAtLS0tLS0gVStBNjU0ClUrQTY1NyAtPiAtLS0tLS0gVStBNjU2ClUrQTY1OSAt
-PiAtLS0tLS0gVStBNjU4ClUrQTY1QiAtPiAtLS0tLS0gVStBNjVBClUrQTY1RCAtPiAtLS0tLS0g
-VStBNjVDClUrQTY1RiAtPiAtLS0tLS0gVStBNjVFClUrQTY2MyAtPiAtLS0tLS0gVStBNjYyClUr
-QTY2NSAtPiAtLS0tLS0gVStBNjY0ClUrQTY2NyAtPiAtLS0tLS0gVStBNjY2ClUrQTY2OSAtPiAt
-LS0tLS0gVStBNjY4ClUrQTY2QiAtPiAtLS0tLS0gVStBNjZBClUrQTY2RCAtPiAtLS0tLS0gVStB
-NjZDClUrQTY4MSAtPiAtLS0tLS0gVStBNjgwClUrQTY4MyAtPiAtLS0tLS0gVStBNjgyClUrQTY4
-NSAtPiAtLS0tLS0gVStBNjg0ClUrQTY4NyAtPiAtLS0tLS0gVStBNjg2ClUrQTY4OSAtPiAtLS0t
-LS0gVStBNjg4ClUrQTY4QiAtPiAtLS0tLS0gVStBNjhBClUrQTY4RCAtPiAtLS0tLS0gVStBNjhD
-ClUrQTY4RiAtPiAtLS0tLS0gVStBNjhFClUrQTY5MSAtPiAtLS0tLS0gVStBNjkwClUrQTY5MyAt
-PiAtLS0tLS0gVStBNjkyClUrQTY5NSAtPiAtLS0tLS0gVStBNjk0ClUrQTY5NyAtPiAtLS0tLS0g
-VStBNjk2ClUrQTcyMyAtPiAtLS0tLS0gVStBNzIyClUrQTcyNSAtPiAtLS0tLS0gVStBNzI0ClUr
-QTcyNyAtPiAtLS0tLS0gVStBNzI2ClUrQTcyOSAtPiAtLS0tLS0gVStBNzI4ClUrQTcyQiAtPiAt
-LS0tLS0gVStBNzJBClUrQTcyRCAtPiAtLS0tLS0gVStBNzJDClUrQTcyRiAtPiAtLS0tLS0gVStB
-NzJFClUrQTczMyAtPiAtLS0tLS0gVStBNzMyClUrQTczNSAtPiAtLS0tLS0gVStBNzM0ClUrQTcz
-NyAtPiAtLS0tLS0gVStBNzM2ClUrQTczOSAtPiAtLS0tLS0gVStBNzM4ClUrQTczQiAtPiAtLS0t
-LS0gVStBNzNBClUrQTczRCAtPiAtLS0tLS0gVStBNzNDClUrQTczRiAtPiAtLS0tLS0gVStBNzNF
-ClUrQTc0MSAtPiAtLS0tLS0gVStBNzQwClUrQTc0MyAtPiAtLS0tLS0gVStBNzQyClUrQTc0NSAt
-PiAtLS0tLS0gVStBNzQ0ClUrQTc0NyAtPiAtLS0tLS0gVStBNzQ2ClUrQTc0OSAtPiAtLS0tLS0g
-VStBNzQ4ClUrQTc0QiAtPiAtLS0tLS0gVStBNzRBClUrQTc0RCAtPiAtLS0tLS0gVStBNzRDClUr
-QTc0RiAtPiAtLS0tLS0gVStBNzRFClUrQTc1MSAtPiAtLS0tLS0gVStBNzUwClUrQTc1MyAtPiAt
-LS0tLS0gVStBNzUyClUrQTc1NSAtPiAtLS0tLS0gVStBNzU0ClUrQTc1NyAtPiAtLS0tLS0gVStB
-NzU2ClUrQTc1OSAtPiAtLS0tLS0gVStBNzU4ClUrQTc1QiAtPiAtLS0tLS0gVStBNzVBClUrQTc1
-RCAtPiAtLS0tLS0gVStBNzVDClUrQTc1RiAtPiAtLS0tLS0gVStBNzVFClUrQTc2MSAtPiAtLS0t
-LS0gVStBNzYwClUrQTc2MyAtPiAtLS0tLS0gVStBNzYyClUrQTc2NSAtPiAtLS0tLS0gVStBNzY0
-ClUrQTc2NyAtPiAtLS0tLS0gVStBNzY2ClUrQTc2OSAtPiAtLS0tLS0gVStBNzY4ClUrQTc2QiAt
-PiAtLS0tLS0gVStBNzZBClUrQTc2RCAtPiAtLS0tLS0gVStBNzZDClUrQTc2RiAtPiAtLS0tLS0g
-VStBNzZFClUrQTc3QSAtPiAtLS0tLS0gVStBNzc5ClUrQTc3QyAtPiAtLS0tLS0gVStBNzdCClUr
-QTc3RiAtPiAtLS0tLS0gVStBNzdFClUrQTc4MSAtPiAtLS0tLS0gVStBNzgwClUrQTc4MyAtPiAt
-LS0tLS0gVStBNzgyClUrQTc4NSAtPiAtLS0tLS0gVStBNzg0ClUrQTc4NyAtPiAtLS0tLS0gVStB
-Nzg2ClUrQTc4QyAtPiAtLS0tLS0gVStBNzhCCg==
---000000000000ab932a0616758a2e--
+T24gNC8xOC8yNCAyMjoyMSwgU3RldmUgRnJlbmNoIHZpYSBzYW1iYS10ZWNobmljYWwgd3Jv
+dGU6DQo+IFdhcyBmb2xsb3dpbmcgdXAgb24gYSByZWNlbnQgcXVlc3Rpb24gYWJvdXQgc3Vw
+cG9ydCBmb3IgTGludXggZmVhdHVyZXMNCj4gdGhhdCBhcmUgbWlzc2luZyB0aGF0IGNvdWxk
+IGhlbHAgdXMgcGFzcyBtb3JlIHhmc3Rlc3RzDQo+IA0KPiBMb29raW5nIGF0IHRoZSBzdGFu
+ZGFyZCBmc3Rlc3RzIGZvciBMaW51eCAoeGZzdGVzdHMgdGhhdCBhcmUgc2tpcHBlZA0KPiBv
+ciBmYWlsIGZvciBjaWZzLmtvKSB0byBmaW5kICdmZWF0dXJlcycgdGhhdCB3b3VsZCBoZWxw
+LCBwZXJoYXBzDQo+IGV4dGVuZGluZyB0aGUgY3VycmVudCBQT1NJWCBFeHRlbnNpb25zIG9y
+IGFkZGluZyBhIGNvdXBsZSBvZiBTTUIzLjEuMQ0KPiBGU0NUTHMsIEkgc3BvdHRlZCBhIGZl
+dyBvYnZpb3VzIG9uZXM6DQo+IA0KPiAgIDEpIHJlbmFtZWF0MiAoUkVOQU1FX0VYQ0hBTkdF
+KSBhbmQgcmVuYW1lYXQyKFdISVRFT1VUKSAgMikgRklUUklNDQo+IHN1cHBvcnQgMykgdHJ1
+c3RlZCBuYW1lc3BhY2UgKHBlcmhhcHMgeGF0dHIvRUEgZXh0ZW5zaW9uKSA0KSBhdHRyDQo+
+IG5hbWVzcGFjZSA1KSBkZWR1cGxpY2F0aW9uIDYpIGNoYXR0ciAtaSA3KSB1bnNoYXJlIChu
+YW1lc3BhY2UgY29tbWFuZCkNCj4gOCkgZGVsYXllZCBhbGxvY2F0aW9uIDkpIGRheCAxMCkg
+YXR0ciBuYW1lc3BhY2Ugc2VjdXJpdHkgMTEpIGZzdHJpbQ0KPiAxMikgY2hhdHRyICtzIDEz
+KSBleGNoYW5nZSByYW5nZQ0KPiANCj4gQW55IHRob3VnaHRzIG9uIHdoaWNoIG9mIHRoZXNl
+IHdoaWNoIHdvdWxkIGJlICdlYXN5JyBmb3Igc2FtYmEgYW5kL29yDQo+IGtzbWJkIHNlcnZl
+ciB0byBpbXBsZW1lbnQgKGUuZy4gYXMgbmV3IGZzY3Rscyk/DQoNCndlbGwsIEkgZ3Vlc3Mg
+bm9uZSBvZiB0aGVzZSB3aWxsIGJlIHJlYWxseSAiZWFzeSIuDQoNCklpcmMgd2hlbiBJIGxh
+c3QgYnJvdWdoIHVwIGZpbGUgYXR0cmlidXRlcywgd2UgdmV0dGVkIHRvd2FyZHMgcG9zdHBv
+bmluZyANCnRoaXMga2luZCBvZiBzdHVmZiB1bnRpbCB3ZSBoYXZlIGZ1bGwgc3VwcG9ydCBm
+b3IgdGhlIGNvcmUgU01CMyBQT1NJWCANCmZlYXR1cmVzIGluIFNhbWJhLiBJaXJjIHRoZSBv
+bmx5IHJlYWwgdGhpbmcgbWlzc2luZyB0aGVyZSBpcyANCnN5bWxpbmsvcmVwYXJzZSBwb2lu
+dCBoYW5kbGluZyBhbmQgZm9yIHRoYXQgd2UgbmVlZCB0byBzZXR0bGUgb24gd2hpY2ggDQpy
+ZXBhcnNlIHR5cGUgdG8gdXNlIChXU0wgdnMgTkZTKSBhcyBkaXNjdXNzZWQgeWVzdGVyZGF5
+LiBJdCB3b3VsZCBiZSBhIA0KKmh1Z2UqIGhlbHAgU3RldmUsIGlmIHlvdSBjYW4gcHVyc3Vl
+IHRoaXMgaW50ZXJuYWxseSwgdGhpcyBoYXMgYmVlbiBhIA0KYmxvY2tlciBmb3IgdGhlIHdo
+b2xlIHByb2plY3Qgc2luY2UgcXVpdGUgc29tZSB0aW1lLi4uDQoNCi1zbG93DQoNCg==
+
+--------------2A7TsdRsXHAyfa8HrzUIZq0I--
+
+--------------mdtgv3JNGIQa0naBBbp00lUM
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+wsF5BAABCAAjFiEE+uLGCIokJSBRxVnkqh6bcSY5nkYFAmYioW0FAwAAAAAACgkQqh6bcSY5nkai
+yg//ShKTodwJKbzqEMo/gLLtz+Q2zUykb0yTcw8P1UB4VkeSwJTldq0dqNCXOOqxMcGp0pNMVl69
+Ra7qziNgxSd4DfCqPJCP7km+xmmDVCjMNumiAoqtJ2T7+VhvKLRCunIxND1GvjBHcVj60qKTIOdF
+Dq1s4t9fL7UYotoP8UquCXuN7mZyxL+qLFqi408eAivxbchhgU56nQ1LaTzTtp79ifzKXiGiKm06
+gqDNOD0fKYNnG3gz+6RAJb48lEsPnWZSyO2vFw+9fvqGnlT2l5TRURFW0y0RA/KOIMVjTUpPjs37
+LCxboqG3vROgfJZbvUjgmd7Xqt/Qc2utbVPB4XE61sZHElH2upqiwcRdy3f80JMkwXR/qY4IVDR3
+zo3/GoMSwKTE1kZnUJQfVZesbXGOZhwzNJuD1GRR1wcASMBCX6MFf6aJDkxP7kf2nFHlv4RkKV4Z
+gS0y2PKHbCPLWif+zwRN9lygvn4kNILYd5AnjDAAQESBLAOEmDBaWamUIQEjr9RnhwBvOTCd+A5e
+BVJdw5cudOAnrnDoAaD4JlDOjOBMNzdzPk0REEhe3OAW6Qfi0A1pbngb9IQllQwSWWmlomI14PrA
+gcOvFFoxs5fbBut7xACD+ujz8MCj6pGiyiogxPsiol+ykxqjF1rHa4XB510qkkVsqp6A4YtHGR5q
+6Dg=
+=Iaqv
+-----END PGP SIGNATURE-----
+
+--------------mdtgv3JNGIQa0naBBbp00lUM--
 
