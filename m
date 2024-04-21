@@ -2,40 +2,40 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id ED3348AB540
-	for <lists+samba-technical@lfdr.de>; Fri, 19 Apr 2024 20:51:56 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E8C6C8AC0F8
+	for <lists+samba-technical@lfdr.de>; Sun, 21 Apr 2024 21:28:09 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=tl/VLQ/5yMD25OAHeaSWFERWgpOCQAbMx/26ApeSk1U=; b=tfh2ZfXWjNh1hC01L0N5q2NSky
-	/yAJGToE6NyrqzYz0cnFqxYgOTI6wOxT6RsEeMJ1mO7Vz/xoqrEKfHVxVvolTf5Q1yIyMUtdP1Q1d
-	1weo+RaXg2rTajlhm3PDOytsBYFLiiLR+6Djh1gtlJGkFI/wYXij8IeRuLtxHTeJ0YRAoO9i9PmjZ
-	j5RcvsVcjVBaEm01OOLaLMVAtF3mnOeFTRJwdNF8Lw1Wbv/OQgJo75NUCMyDEm10DXFVpOqOYwX6+
-	qgyj6GQ7AXqAfAKg58rM6E/OOZiO9pX5SYCMWpnUryWxhW+JP+68esLC2CtBAr2mw+RmJvYQ8GqFc
-	VSlMNq5Q==;
-Received: from ip6-localhost ([::1]:54572 helo=hr1.samba.org) 
+	bh=Lg/qlzZwLKwph3NU6upqfUukKASnvxR4/ZL4TRGp+6o=; b=V/WiTlv334Rs750MQhWzFZqn8M
+	qYNxcjrJeTzqH0OUwGyLP9V7WowtRvhH8QGVBbafak7wg/k2WfphI1+95ZQpY1/dzHuq6R27vqKI2
+	lWoRsW0yfwTuofU8OwOCJJGt8clzcStGqf4/O8v13QBSHk5DuEJSZNOPzBTAMs/RIbhzQUlg1VYjn
+	iTh8QeogAXoheMc7DjNBWNVkYcduXJzE0mRrzaaSKAAeaV+Gs/Ah3GlsbPHzOKKDQ4pAyw7t/uOKH
+	cIzlVobnQvz/dIiG1pvBa1VOAQY55nRIRt6bv4r0k1iCc50Jrg5VBquoyHKBD4d2goTBmLoEPBiDs
+	kRAXTEMw==;
+Received: from ip6-localhost ([::1]:56240 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1rxtKl-005DoU-Qm; Fri, 19 Apr 2024 18:51:39 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:60986) 
+	id 1rycqM-005KEE-Ep; Sun, 21 Apr 2024 19:27:18 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:54572) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1rxtKh-005DoN-A0
- for samba-technical@lists.samba.org; Fri, 19 Apr 2024 18:51:37 +0000
+ (Exim) id 1rycqH-005KE7-DR
+ for samba-technical@lists.samba.org; Sun, 21 Apr 2024 19:27:16 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=From:Cc:To:Date:Message-ID;
- bh=tl/VLQ/5yMD25OAHeaSWFERWgpOCQAbMx/26ApeSk1U=; b=hkHRmyCrrjJSybWSu88cRcys8a
- 0FQuwQbfeyW/cXI0T4aPJtCx5MoQxEiPDBoa1EjsNLsKuGHiLch1A30yrqm6mJT5PxJQiCzeh9410
- DbeUyCGH/keP2HNgZ/rsZiprSEV9i/b0h1Qvq7WC2IzIjiJR1ipaIv8ZP1Us3bPgnSfp4o6yc2WIa
- pQSAA3PbgCSsZv6ExYjm/08qD6an9rKfbI29twZ+3jT8H38oXPP/i/WeN624vfxpCYwUZSC4mcZ8u
- +nt+m+KVDvDBITm6wxAJbGD4ODVtzXPvJGhqgdDYZxpRx9HPq3NRvXMGUoIdX+na5SFIiri7KHRyL
- 1SSxFsfCHgaeTTsfbt23bbDu7zU/L8uqCh5hvWsdR/s7Jy5mc4t0yN3ScQursD9h4d2BrKBGoIUPK
- AogJR0tykns6l0O0H4TykKQOAsSkTjvSyuJxCYR4rbarjpWEuLGz6YKA7O/D0KBTVEA+XLrdeAdsb
- 599BdI4W5TthaV1bigzDlD08;
+ bh=Lg/qlzZwLKwph3NU6upqfUukKASnvxR4/ZL4TRGp+6o=; b=KlLXaYox3G9F3LYbGJTAvFrxGg
+ xBJoadfHfmxcDezhW4BpYBGR9p1Qb6JEHoQIxKPiryqsFy40bGj/1+ul4zmMNygrx8+7/WyLi/JBD
+ 5RKN11OZOuP7U9XcPSm6QECnWitsinOgGtpNlT23eWSiVgMUNHoWKU/Lz4/WwRPbHj7bT52kXbVm+
+ CCIlqihXQj8aYs6kHxczweFkySYWCJHf2ulA6uAt+lIxCUxUs2tK2q4pA+CLv84DuAfRMWO9rEzMi
+ foTRb8LxGRFlLehgPvn4Me9vFdwxubEH/H+hCigRqvmTJHxhcQxcJVf2OWAOqYeGajSrO2ba8TYVE
+ 1/tfZOcvUIxQHWw/YQGRGJti+sOmmz0xywWxsN09stps18tplAPS6n1ivyB4g/mIvA21TwA4Jx9kn
+ ZtgWaxNLiXJpTNL39KQbZSBTWiB761oZPvJDpK7+dBTWovqunkfet048tPa9BIUUmgwwMCjtwBNFp
+ RU5HH1kgeIfKdpDr5zv7p1nu;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1rxtKe-007IwV-05; Fri, 19 Apr 2024 18:51:32 +0000
-Message-ID: <95922a2f-07a1-4555-acd2-c745e59bcb8e@samba.org>
-Date: Fri, 19 Apr 2024 20:51:31 +0200
+ (Exim) id 1rycqC-007aLj-0t; Sun, 21 Apr 2024 19:27:08 +0000
+Message-ID: <dc3815af-5b46-452b-8bcc-30a0934740a2@samba.org>
+Date: Sun, 21 Apr 2024 21:27:07 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [RFC PATCH net-next 0/5] net: In-kernel QUIC implementation with
@@ -50,10 +50,13 @@ References: <cover.1710173427.git.lucien.xin@gmail.com>
  <CADvbK_fkbOnhKL+Rb+pp+NF+VzppOQ68c=nk_6MSNjM_dxpCoQ@mail.gmail.com>
  <1456b69c-4ffd-4a08-b120-6a00abf1eb05@samba.org>
  <CADvbK_cQRpyzHG4UUOzfgmqLndvpx5Cd+d59rrqGRp0ic3PyxA@mail.gmail.com>
+ <95922a2f-07a1-4555-acd2-c745e59bcb8e@samba.org>
+ <CADvbK_eR4++HbR_RncjV9N__M-uTHtmqcC+_Of1RKVw7Uqf9Cw@mail.gmail.com>
+ <CADvbK_dEWNNA_i1maRk4cmAB_uk4G4x0eZfZbrVX=zJ+2H9o_A@mail.gmail.com>
 Content-Language: en-US, de-DE
-In-Reply-To: <CADvbK_cQRpyzHG4UUOzfgmqLndvpx5Cd+d59rrqGRp0ic3PyxA@mail.gmail.com>
+In-Reply-To: <CADvbK_dEWNNA_i1maRk4cmAB_uk4G4x0eZfZbrVX=zJ+2H9o_A@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -80,59 +83,92 @@ Cc: "linux-cifs@vger.kernel.org" <linux-cifs@vger.kernel.org>,
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi Xin Long,
-
->> But I think its unavoidable for the ALPN and SNI fields on
->> the server side. As every service tries to use udp port 443
->> and somehow that needs to be shared if multiple services want to
->> use it.
+Am 20.04.24 um 21:32 schrieb Xin Long:
+> On Fri, Apr 19, 2024 at 3:19 PM Xin Long <lucien.xin@gmail.com> wrote:
 >>
->> I guess on the acceptor side we would need to somehow detach low level
->> udp struct sock from the logical listen struct sock.
+>> On Fri, Apr 19, 2024 at 2:51 PM Stefan Metzmacher <metze@samba.org> wrote:
+>>>
+>>> Hi Xin Long,
+>>>
+>>>>> But I think its unavoidable for the ALPN and SNI fields on
+>>>>> the server side. As every service tries to use udp port 443
+>>>>> and somehow that needs to be shared if multiple services want to
+>>>>> use it.
+>>>>>
+>>>>> I guess on the acceptor side we would need to somehow detach low level
+>>>>> udp struct sock from the logical listen struct sock.
+>>>>>
+>>>>> And quic_do_listen_rcv() would need to find the correct logical listening
+>>>>> socket and call quic_request_sock_enqueue() on the logical socket
+>>>>> not the lowlevel udo socket. The same for all stuff happening after
+>>>>> quic_request_sock_enqueue() at the end of quic_do_listen_rcv.
+>>>>>
+>>>> The implementation allows one low level UDP sock to serve for multiple
+>>>> QUIC socks.
+>>>>
+>>>> Currently, if your 3 quic applications listen to the same address:port
+>>>> with SO_REUSEPORT socket option set, the incoming connection will choose
+>>>> one of your applications randomly with hash(client_addr+port) vi
+>>>> reuseport_select_sock() in quic_sock_lookup().
+>>>>
+>>>> It should be easy to do a further match with ALPN between these 3 quic
+>>>> socks that listens to the same address:port to get the right quic sock,
+>>>> instead of that randomly choosing.
+>>>
+>>> Ah, that sounds good.
+>>>
+>>>> The problem is to parse the TLS Client_Hello message to get the ALPN in
+>>>> quic_sock_lookup(), which is not a proper thing to do in kernel, and
+>>>> might be rejected by networking maintainers, I need to check with them.
+>>>
+>>> Is the reassembling of CRYPTO frames done in the kernel or
+>>> userspace? Can you point me to the place in the code?
+>> In quic_inq_handshake_tail() in kernel, for Client Initial packet
+>> is processed when calling accept(), this is the path:
 >>
->> And quic_do_listen_rcv() would need to find the correct logical listening
->> socket and call quic_request_sock_enqueue() on the logical socket
->> not the lowlevel udo socket. The same for all stuff happening after
->> quic_request_sock_enqueue() at the end of quic_do_listen_rcv.
+>> quic_accept()-> quic_accept_sock_init() -> quic_packet_process() ->
+>> quic_packet_handshake_process() -> quic_frame_process() ->
+>> quic_frame_crypto_process() -> quic_inq_handshake_tail().
 >>
-> The implementation allows one low level UDP sock to serve for multiple
-> QUIC socks.
+>> Note that it's with the accept sock, not the listen sock.
+>>
+>>>
+>>> If it's really impossible to do in C code maybe
+>>> registering a bpf function in order to allow a listener
+>>> to check the intial quic packet and decide if it wants to serve
+>>> that connection would be possible as last resort?
+>> That's a smart idea! man.
+>> I think the bpf hook in reuseport_select_sock() is meant to do such
+>> selection.
+>>
+>> For the Client initial packet (the only packet you need to handle),
+>> I double you will need to do the reassembling, as Client Hello TLS message
+>> is always less than 400 byte in my env.
+>>
+>> But I think you need to do the decryption for the Client initial packet
+>> before decoding it then parsing the TLS message from its crypto frame.
+> I created this patch:
 > 
-> Currently, if your 3 quic applications listen to the same address:port
-> with SO_REUSEPORT socket option set, the incoming connection will choose
-> one of your applications randomly with hash(client_addr+port) vi
-> reuseport_select_sock() in quic_sock_lookup().
+> https://github.com/lxin/quic/commit/aee0b7c77df3f39941f98bb901c73fdc560befb8
 > 
-> It should be easy to do a further match with ALPN between these 3 quic
-> socks that listens to the same address:port to get the right quic sock,
-> instead of that randomly choosing.
+> to do this decryption in quic_sock_look() before calling
+> reuseport_select_sock(), so that it provides the bpf selector with
+> a plain-text QUIC initial packet:
+> 
+> https://datatracker.ietf.org/doc/html/rfc9000#section-17.2.2
+> 
+> If it's complex for you to do the decryption for the initial packet in
+> the bpf selector, I will apply this patch. Please let me know.
 
-Ah, that sounds good.
+I guess in addition to quic_server_handshake(), which is called
+after accept(), there should be quic_server_prepare_listen()
+(and something similar for in kernel servers) that setup the reuseport
+magic for the socket, so that it's not needed in every application.
 
-> The problem is to parse the TLS Client_Hello message to get the ALPN in
-> quic_sock_lookup(), which is not a proper thing to do in kernel, and
-> might be rejected by networking maintainers, I need to check with them.
+It seems there is only a single ebpf program possible per
+reuseport group, so there has to be just a single one.
 
-Is the reassembling of CRYPTO frames done in the kernel or
-userspace? Can you point me to the place in the code?
+But is it possible for in kernel servers to also register an epbf program?
 
-If it's really impossible to do in C code maybe
-registering a bpf function in order to allow a listener
-to check the intial quic packet and decide if it wants to serve
-that connection would be possible as last resort?
-
-> Will you be able to work around this by using Unix Domain Sockets pass
-> the sockfd to another process?
-
-Not really. As that would strict coordination between a lot of
-independent projects.
-
-> (Note that we're assuming all your 3 applications are using in-kernel QUIC)
-
-Sure, but I guess for servers using port 443 that the only long term option.
-and I don't think it will be less performant than a userspace implementation.
-
-Thanks!
 metze
-
 
