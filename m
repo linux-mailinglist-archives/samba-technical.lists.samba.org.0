@@ -2,67 +2,62 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 46A748AC840
-	for <lists+samba-technical@lfdr.de>; Mon, 22 Apr 2024 11:02:56 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4588B8AC893
+	for <lists+samba-technical@lfdr.de>; Mon, 22 Apr 2024 11:12:03 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=K6ZYJnM52Y/SjgnocrXxcXei2ReHIgpTeZJFFOAop8w=; b=Fj4gbjsTBCugA95W64y2m975un
-	lgo/9NooUxCbP+vtAcOMbqVhxtieS3QdddLMlNIwk1pLvKuFxe35bUxhR7rIcKHC+NYiWj1+cb6j7
-	thpaiNr2K/jkZhpf+qSZaJv63TLzh6P4oLY8SKqB/bNVZ2BlJNNhqtQbOI7CkPTtzAQzeIrh3cU78
-	KrG1FqHi7lAgsjycRc8uBZojN0beInqD4a01IbGIm5V/KoVDpWRqql33MWyeUXwpzp3D95maHBwyz
-	KdqrDxGfYwCb6rrYdap1vjKEzFM+IgNCkMxA1P7J+WYm3COcERCnaMapTs31fYyaSnKGNz5rUsXjQ
-	+JFJkPhw==;
-Received: from ip6-localhost ([::1]:49254 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=Fg1lkX+Yl+2au3l9WIgkDrbEclhhUvRaRJOpVbKQwmU=; b=26s1fQjFtOgOCNxaOd3j9UW3wG
+	tDFaw9eDRRpesmK6+9pk2jo/xUnUbthd03Jej60yAZJ3W9gpiRACDugMhtREab6wAGmxtySrafteD
+	bJu8wzH6YNZJzfGbBR8Ps8GbuXCpFgVVmOau25/LHaG1Qzz2rtI5zwnD0HZA+yIQZsl+ejjKkOaJZ
+	V7Quneq3Y+fuSBqe19hikt1eWGrYOZPZ0UAnn4grUiBO2iVommh+djKPVanFVUdTRcw+bjRLFmB+U
+	HOnj7c5tIHbyhcCmv9Eb6hD/ynL+aXCthveEb7BB9V5PSYZoSvOexU1Mxe8ZljeOws3XuUxMTzs6F
+	RGq1cgyA==;
+Received: from ip6-localhost ([::1]:54486 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1rypYx-005M2z-SN; Mon, 22 Apr 2024 09:02:11 +0000
-Received: from mail-pf1-x42b.google.com ([2607:f8b0:4864:20::42b]:60911) 
+	id 1rypiN-005M8u-HC; Mon, 22 Apr 2024 09:11:55 +0000
+Received: from mail-pf1-x42f.google.com ([2607:f8b0:4864:20::42f]:53572) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1rypYp-005M2s-L4
- for samba-technical@lists.samba.org; Mon, 22 Apr 2024 09:02:08 +0000
-Received: by mail-pf1-x42b.google.com with SMTP id
- d2e1a72fcca58-6ed32341906so3971757b3a.1
- for <samba-technical@lists.samba.org>; Mon, 22 Apr 2024 02:01:54 -0700 (PDT)
+ (Exim) id 1rypiK-005M8n-1A
+ for samba-technical@lists.samba.org; Mon, 22 Apr 2024 09:11:54 +0000
+Received: by mail-pf1-x42f.google.com with SMTP id
+ d2e1a72fcca58-6f00f24f761so3416816b3a.3
+ for <samba-technical@lists.samba.org>; Mon, 22 Apr 2024 02:11:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1713776513; x=1714381313; darn=lists.samba.org;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=MiF5cYXcs2XczhhlVTBaIW2G750tVhccIIGQbzm9pA4=;
- b=OTawrJMBfIeYmDeWGju0ZFWXUZ5yIf7VxRGEP+bUcwLVqQ8aC/vcWelpp3X+9ZY4BA
- j18GMdYrBLfZalZd3JIVeVeZkCFnhL6pwlyYep0mznYdIqQzgguzK/Oro8gGqBKIdjYv
- f/uOwFqOSnvf2FS5JAU32FVrEsYO8WM5AkQ2P0OHlvTPrH/86ORu6NhOlLQ06g29fpzo
- amC3HbuRE2URkB9fIravXX5BaJYxa4cgmxIvYY4EbArW/tI8dUG6/HnjowLFcygapM+J
- sc9JvAyaFHJWrsfBtlw0qMMj7hsBEKhjAyVioYPBNvLpj6zD17lQfOUBZGFsYsnkTmDP
- t71g==
+ d=gmail.com; s=20230601; t=1713777101; x=1714381901; darn=lists.samba.org;
+ h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=sAhBPJSRijdnJAr5urf3udqCtHinLCC7G7+oUUkBvTE=;
+ b=XIBkWNSijotRRueKZ7ZixAv2ZP4nOPDlfV51VShuDrAeZZyhPyv/0v0dhHr2fJyt5t
+ 3UgaYPiiOWXAghpREs36wOuyJPg2/1egeTFYFyG72YdvGo6ZAyMJRtjkk0CmDlrzta31
+ slqYLZfwtMseDNdrp6UGFaqpaFldd2RBPHpiOiTYQ6TqdeoImapE2Xu5hGgrWJEt3M73
+ 1cEBprYBaHxdsWtOx5qNFwi88syfjO1xdKqugp8Dn5no822XNcQeTHG6mqSqAEqiDVLC
+ hE883JbQckDetah4AKJk5MABGs8N8RSKIfcFHJstL3fXPUufl0pUR23N78/lY2dDwXn4
+ 8tmg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713776513; x=1714381313;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=MiF5cYXcs2XczhhlVTBaIW2G750tVhccIIGQbzm9pA4=;
- b=vyuJw43a+/auPkm249qU7uJM9C10mcLZDRni77Je4A/vDiqwait1N+xKQ8D71CenMb
- wI7SxRx4gnIYbRQQwvMH8lHU6g6F2hud0jQ4xEjGQkpxS2LM7Q3XySn4597Jmak7oxeR
- v7et6y5aAoDHqubwxx/FOPKKgftOmSmtufEfIeRdKi90/V+hTLnmB/sT6k3A3FbVeglG
- S4Zz9Gs6Pl9GEQ2RBrxgIAg4Rk+br/CwCHPtf3gARXy5At9KUHxbMJ5VwrzjQp2KZFWX
- OfR1aNjbr7AO7qhjPLgvSoMtzFTuRD5gZN+b0J2YaxlozEU42RJGfHzzf7ZefCk98yz5
- gkMw==
-X-Gm-Message-State: AOJu0YzHeIQcH8etQc8wQfeGnHG4gH8uUn8IX327AY/MLE61hTZelDlr
- 2YRaFkY3i5OQgIn8FTT1mQrt4sadzr8S6ykGnE2gR6gQKLFec/l9hPkUEPz/Fq1G+ihQH6JCND8
- o39nbgH3HX2gxqC8ZEqwfTFjqkZvUu8kd
-X-Google-Smtp-Source: AGHT+IGCGuv0+r7yBUGLXQ23gZxHqVGxq6MojDr8erPfLQgc2CByhxQsTmUZLR95v0Sd6Civ/pPPbSvUWZu1X0RtUx8=
-X-Received: by 2002:a05:6a20:6f0e:b0:1ad:1cae:a0b3 with SMTP id
- gt14-20020a056a206f0e00b001ad1caea0b3mr2992744pzb.12.1713776512649; Mon, 22
- Apr 2024 02:01:52 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1713777101; x=1714381901;
+ h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=sAhBPJSRijdnJAr5urf3udqCtHinLCC7G7+oUUkBvTE=;
+ b=LUMTTSYCDKamHnfvVZo8XBkJGc3tUKffo6k45vsJzpyI9JXRj7dO+z5sRylz5BHd8Y
+ zBLZ/M7b3EeedyoCPivT1ePa80eijN/UdLKuKfBCteJ+An/ULVLw5LfpSVF0vE7+ViYK
+ 69y8cD1vVQ8gsnPAIC120R5binkVL9JN5cJn81snjNj/ji/4Wifvem1WSAQBrL41nuDt
+ ahInYRujvyTic3UY1dVTUIvVRKlTe6P5U+05WN6kudA7AGTyX8TUxvCLRxcbodc76EUo
+ SiA9TOvT3WDPH6+RlVNi4kwejV5/rszhS7vevCOKmI/UEz2MpWpFgAIyNOfL2vGMYKiB
+ E9rw==
+X-Gm-Message-State: AOJu0YyYUutJyUHbHlLKBWa6OD4LsJOfp+64TaH69NPJtdIH4d0OxfPs
+ 28mxktIIaVivenk6MmiZnT9pcRIRfTSkkM2WgKNLBopsgop/87GIavhAi/V63HCw4tlFOg8g6Wc
+ Af8v0togfNH7pikaYQud212AvmgSj6A==
+X-Google-Smtp-Source: AGHT+IHuP6vbDtcfe1Of8LuAConWZrIF2Nq416U6scFfWh4huOV3YZTEOJA+dMi+2Rp5Uwp8zCMFRx9qlkMhHVpFgUU=
+X-Received: by 2002:a05:6a20:9c9a:b0:1ad:6e4:db70 with SMTP id
+ mj26-20020a056a209c9a00b001ad06e4db70mr4277601pzb.29.1713777101199; Mon, 22
+ Apr 2024 02:11:41 -0700 (PDT)
 MIME-Version: 1.0
-References: <CAO9H7P_SpZ0fGDvTc_2XDLRiR1rSdy-2ztBv07h1ECmj_mnoHw@mail.gmail.com>
- <8e5edd50-f29a-4bed-9878-2b1b293ff2e8@catalyst.net.nz>
-In-Reply-To: <8e5edd50-f29a-4bed-9878-2b1b293ff2e8@catalyst.net.nz>
-Date: Mon, 22 Apr 2024 11:01:41 +0200
-Message-ID: <CAO9H7P-7XyuptwYrftk1Sm+uiYWN0h+K1kGTKFBk5YdQqK2XDA@mail.gmail.com>
-Subject: Re: Doubts about Samba's unicode translation tables
-To: Douglas Bagnall <douglas.bagnall@catalyst.net.nz>
+Date: Mon, 22 Apr 2024 11:11:30 +0200
+Message-ID: <CAO9H7P_oqwoJoC_8mWNZVYZ-pxrYt9TrEt3t0LJsEvS32EorEg@mail.gmail.com>
+Subject: Proposal for changes in become root
+To: samba-technical@lists.samba.org
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
@@ -79,113 +74,37 @@ List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
 From: Xavi Hernandez via samba-technical <samba-technical@lists.samba.org>
 Reply-To: Xavi Hernandez <xhernandez@gmail.com>
-Cc: Stefan Metzmacher <metze@samba.org>, gd@samba.org,
- samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi Douglas,
+Hi all,
 
-On Mon, Apr 22, 2024 at 7:26=E2=80=AFAM Douglas Bagnall <
-douglas.bagnall@catalyst.net.nz> wrote:
+One of the things I've found during my work with Samba and CephFS is that
+CephFS (and actually most (all ?) other remote filesystems accessed without
+using a kernel mount) don't really care about the effective uid/gid of the
+process because the credentials to use for a given operation are actually
+passed as an additional argument to the appropriate function of the remote
+filesystem.
 
-> On 19/04/24 21:04, Xavi Hernandez via samba-technical wrote:
-> > The first question is why Samba uses two tables while Windows only
-> requires
-> > one ?
-> > For what purpose is the lowercase translation table in Samba used ?
-> > Is the Samba's case-insensitive comparison method actually equal to
-> Windows
-> > ?
->
-> I don't have real answers, but I think the current mappings date back to
-> this 2001 commit:
->
->
-> https://gitlab.com/samba-team/samba/-/commit/9bcd133e9e7b0cfe974f273fb234=
-09d660af8358
->
-> The Windows sorting weight tables change often.
-> On https://www.microsoft.com/en-us/download/details.aspx?id=3D10921 we se=
-e:
->
->    Windows Vista Sorting Weight Table.txt
->    Windows 8 and Windows Server 2012 Sorting Weight Table.txt
->    Windows Server 2008 Sorting Weight Table.txt
->    Windows 7 and Windows server 2008 R2 Sorting Weight Table.txt
->    Windows 8 Upper Case Mapping Table.txt
->    Windows NT 4.0 through Windows Server 2003 Sorting Weight Table.txt
->    Windows 10 Sorting Weight Table.txt
->
-> That is not exactly the same thing as case mapping (apart perhaps from
-> the one called "Windows 8 Upper Case Mapping Table"). It seems likely tha=
-t
-> a lot of the changes are for new Unicode characters beyond the 16 bit
-> plane.
->
-> "Windows 8 Upper Case Mapping Table.txt" has at least some of the changes
-> in
-> your differences.txt.
->
-> This Gitlab thread is related:
->
->
-> https://gitlab.com/samba-team/sam.txtba/-/merge_requests/3258#note_157634=
-1163
-> <https://gitlab.com/samba-team/samba/-/merge_requests/3258#note_157634116=
-3>
->
-> I have never got to the bottom of why we do what we do and how it differs
-> from Windows, but I suspect the answer is it works well enough most of
-> the time. That's worrying, but not enough to make it a priority.
->
+So changing the user to root and back to the connection user adds a lot of
+unnecessary system calls in some workloads.
 
-Thanks for taking a look and for the valuable links.
+To avoid this overhead in those cases, I'm thinking if it could be possible
+to implement that functionality in a VFS module as a new stacked function.
+The idea is that become_root() (and maybe other functions) instead of
+directly changing the process owner, they should call the VFS stack. If
+none of the VFS modules provides an alternative, then vfs_default would
+implement the system call equivalent to what is currently done. On the
+other hand, if a VFS module has a better way to implement that, it could
+intercept the request and do whatever changes are necessary internally to
+send future requests using the new credentials, but completely avoiding the
+unnecessary syscalls.
 
-I think we are dealing with two different things here. On one side we have
-locale-based case-insensitive comparisons. This is the most common
-situation for applications where they need to be able to compare two
-strings based on the specific rules for the user location, so that the
-result of the comparison yields what the user would expect. The same exact
-strings for another user in another location (with another locale) may have
-different rules for comparison and return a different result.
+I'm not sure if this could even have other benefits to implement
+alternative privilege escalation methods as regular VFS modules.
 
-On the other side we have case-insensitive NTFS file accesses. In this case
-the rules need to be a bit different. I see 2 major things to consider:
+What do you think ?
 
-1. The comparison cannot be locale-related
-
-When a file is saved to the filesystem, it cannot depend on the locale of
-the user (or even the server) whether a file name is "equivalent" to
-another or not, because changing the locale can cause the appearance of
-duplicated files in a directory.
-
-2. Only comparison for equality is required
-
-To find a file by name in a directory we just need to compare
-case-insentitively for equality (normally a hash is used to find the bucket
-where the file resides and then a case-insensitive comparison for equality
-is enough). We don't care about the relative order of the existing name and
-the name we are looking for. Another very different thing is, after having
-listed all directory entries, to sort them by name to show them to the
-user. This later comparison depends on the locale and is made on the client
-side.
-
-I think that NTFS implements the $UpCase table just for this purpose: It's
-locale-independent and it's used just for equality, and this is independent
-of the generic NLS-aware functions that Windows provides.
-
-From what I understand (though I may be wrong), it seems like Samba is
-using a mix of both things: it uses fixed tables to convert the string
-case, which is locale-independent, but then it does relative comparisons
-(i.e. greater/less than, instead of just equality). I don't know how NTFS
-works exactly, and most of the information I've found is quite old, so
-maybe I'm completely wrong here, but I think it makes sense to do
-case-insensitive comparisons for a filesystem in the way I've explained,
-and it would also explain why NTFS still has the $UpCase file.
-
-Does this make any sense ?
-
-Best regards,
+Thanks,
 
 Xavi
