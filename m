@@ -2,54 +2,66 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 13BEE8AD397
-	for <lists+samba-technical@lfdr.de>; Mon, 22 Apr 2024 19:57:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 551B58ADBB7
+	for <lists+samba-technical@lfdr.de>; Tue, 23 Apr 2024 03:57:32 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=FGjPfItBlotJ+B2g9ZTUTCJ1x+FzuFq6E79f1op+xvY=; b=hQGMKVP1U3DRYqZLkYXYyqvL2m
-	G4rSH3/sgYd9qDslgL1PhQTwgCNnFgcFzPhhGpg1UD1NM1BT2mTVhV2vvohSudw2EnMrGei7wnjQk
-	1X+0aKylXM+sepV2xlJUoj7qv6hfIX/16zcRazIZuB1RYctcpF+ldj4M8vD2+LIgMyUJ0L/iWhIql
-	wjmoRk/MbcYZk3OFANo+Rg+cKRJe74UzOfARGsbvvUOBqXBc4KP7WnW9VkUJIfyCcA9Bb0x1ilJ/A
-	uUKwU+z1R7C7RNX7/rQPuUV22dsUk2Nzx3FyTuwGrM2foz5hCNeEj2VPoTqxJM4RIcgD0tUoER8cN
-	XKboIkoQ==;
-Received: from ip6-localhost ([::1]:48234 helo=hr1.samba.org) 
+	bh=GVY+wPHkc7pfuGKTqnpxRDhEPTjtxriF7PpGtO6iGb8=; b=Z+4Zvyn0cHWc4CF/4fTAAWNzBc
+	yYFjX2biD6fvjmN6iy2Em1p9gL38yzZJRAoinhR+hoqrSYPYshxRFo1+31TpFUAs4kMwH1KwkhOS7
+	lUvwZrwHEglFIDKLHQDkzQVQRUaOAOJ6OWtqYX/NYc/JamQ/J/FhPy3mPZLhPabX/Xl4eBJjlmrcG
+	kV4tX0C3JPOepvO6PBN+zhV7SSS2qAIvf5RadU0P79fKMaHS8r06ftNA31bVPkJeitl+Wyy6ioItG
+	uUEuPo5w1zyx7ssAXKEzJKxX0fZoVIPrv4rsHqHCTE2H67/wFvSjo/0c6gVCs/vALtKQhslfqjgRp
+	1bbv2v1g==;
+Received: from ip6-localhost ([::1]:42740 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1ryxuC-005Ntq-Uc; Mon, 22 Apr 2024 17:56:41 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:15074) 
+	id 1rz5Oz-005P24-Dc; Tue, 23 Apr 2024 01:56:57 +0000
+Received: from cat-hlzsim-prod-mail1.catalyst.net.nz ([103.250.242.12]:51100) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1ryxu8-005Nti-Qb
- for samba-technical@lists.samba.org; Mon, 22 Apr 2024 17:56:39 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=From:Cc:To:Date:Message-ID;
- bh=FGjPfItBlotJ+B2g9ZTUTCJ1x+FzuFq6E79f1op+xvY=; b=K3znjZh9xAmyhv/H9osOwIbO7Z
- Y5MJLaU0L1YIFND50QrHMnA9P6tpGcyLgUohdI9xKLDhVFd8nU3/jf+N3izSccf2mQ9p5E9RWREDu
- f5xvllCAl4PLBdXqnrQmpjUFWZoIV33d/NwG5xmFb/x1mVEteGhVqxRv6ITsvOAYgJ/H1E93lsE1E
- D71kp57Ob9x0P6dZKNmH5JcssAztCyHtA1S65L/IewuTmvB41nwVTSkZ29bk5I2fivsJoxmJYJ4aI
- Cevb0CEcLZ+/vJUn+ALzqBWT9ldoAs3LGi1D7d68N5CCOkdB9XSsx2hJ9gbRd38r65vuw9bDVgQHm
- G6FLpp3/zbmKEUON4pzD7Rmm4RkMO9BOJ0aeZcLZXB86vhiko/1jn9Is/nvdmQqx1tnQMQhrl7+FS
- 7s4axkIoe6A8+U6pKO2yY7iMVIVrHO6c+/UDXO8p9Fz+wk61knprbMRMohSDp74VNAVApAr6dMK7d
- gokRtkfH8mHxyVRlhVWuMNwS;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1ryxu2-007jse-1S; Mon, 22 Apr 2024 17:56:30 +0000
-Message-ID: <928cdbd1-a1ed-4b5e-93e9-866ba5f8e504@samba.org>
-Date: Mon, 22 Apr 2024 19:56:29 +0200
+ (Exim) id 1rz5Ot-005P1x-2M
+ for samba-technical@lists.samba.org; Tue, 23 Apr 2024 01:56:55 +0000
+Received: from [192.168.1.219] (unknown [114.23.142.188])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (Client did not present a certificate)
+ (Authenticated sender: douglasb@catalyst.net.nz)
+ by cat-hlzsim-prod-mail1.catalyst.net.nz (Postfix) with ESMTPSA id 04DB03FD14; 
+ Tue, 23 Apr 2024 13:56:42 +1200 (NZST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=catalyst.net.nz;
+ s=default; t=1713837404;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=GVY+wPHkc7pfuGKTqnpxRDhEPTjtxriF7PpGtO6iGb8=;
+ b=MuFpmPeq2WPZvGZsuyV+AQIkd2F44dzIFrlZ1a+tHu5Psth7f1JONnVCho+1Vd+f+e7FPM
+ Tem5rn5MfYtaDoxp2FUBlRvQcYzMrMy16AW2s8XXOBWtCDyUWRNJtv2BCdbK0wdWqR9hJz
+ YtYzwWX2sgJFKVGqIMhMurpgOI9IuLgt/i8tfX6qTzfQLwoTUd9LY+PmAf/iA8xMUtBeX9
+ 9Su5MCsyzQMwl1Q/xR2rGuS7+nHheup7357WWqR5EYHStJKswHAiYz11tSo2ieCAo7/G29
+ LL+g26qL9F2i+pofCLuNig7r6MDcpSnh+CC5bu9dQbFIl/rKVS0tMEpphSquMw==
+Authentication-Results: ORIGINATING;
+ auth=pass smtp.auth=douglasb@catalyst.net.nz
+ smtp.mailfrom=douglas.bagnall@catalyst.net.nz
+Message-ID: <2c0bcd14-b0eb-4226-97d0-f141b6c20e4f@catalyst.net.nz>
+Date: Tue, 23 Apr 2024 13:56:41 +1200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: Proposal for changes in become root
+Subject: Re: Doubts about Samba's unicode translation tables
 To: Xavi Hernandez <xhernandez@gmail.com>
-References: <CAO9H7P_oqwoJoC_8mWNZVYZ-pxrYt9TrEt3t0LJsEvS32EorEg@mail.gmail.com>
- <4249c3b6-3b4e-4bd3-95e5-864158e5797f@samba.org>
- <CAO9H7P8Cttbg6v-Cn+rRR5cKc06K1pid9oQqsjPnHL49iCE=ig@mail.gmail.com>
- <17264f9a-2d6f-4bf4-a0e7-f28372a6f82a@samba.org>
- <CAO9H7P8jocp0J_8oFqnYCmheS0o83x6B7koFBMQa_Y2vwdETtw@mail.gmail.com>
-Content-Language: en-US, de-DE
-In-Reply-To: <CAO9H7P8jocp0J_8oFqnYCmheS0o83x6B7koFBMQa_Y2vwdETtw@mail.gmail.com>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------00Ykiu0HMbs0Ht5ZVotl1y0O"
+References: <CAO9H7P_SpZ0fGDvTc_2XDLRiR1rSdy-2ztBv07h1ECmj_mnoHw@mail.gmail.com>
+ <8e5edd50-f29a-4bed-9878-2b1b293ff2e8@catalyst.net.nz>
+ <CAO9H7P-7XyuptwYrftk1Sm+uiYWN0h+K1kGTKFBk5YdQqK2XDA@mail.gmail.com>
+Content-Language: en-NZ
+In-Reply-To: <CAO9H7P-7XyuptwYrftk1Sm+uiYWN0h+K1kGTKFBk5YdQqK2XDA@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Spamd-Result: default: False [-0.09 / 15.00]; MIME_GOOD(-0.10)[text/plain];
+ XM_UA_NO_VERSION(0.01)[]; FREEMAIL_ENVRCPT(0.00)[gmail.com];
+ ARC_NA(0.00)[]; FREEMAIL_TO(0.00)[gmail.com];
+ MID_RHS_MATCH_FROM(0.00)[];
+ DKIM_SIGNED(0.00)[catalyst.net.nz:s=default];
+ ASN(0.00)[asn:56030, ipnet:114.23.0.0/16, country:NZ];
+ MIME_TRACE(0.00)[0:+]
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -63,60 +75,72 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Ralph Boehme <slow@samba.org>
-Cc: samba-technical@lists.samba.org
+From: Douglas Bagnall via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Douglas Bagnall <douglas.bagnall@catalyst.net.nz>
+Cc: Stefan Metzmacher <metze@samba.org>, gd@samba.org,
+ samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------00Ykiu0HMbs0Ht5ZVotl1y0O
-Content-Type: multipart/mixed; boundary="------------Ml1tBgJfwQeBJnjo04Q5VZT2";
- protected-headers="v1"
-From: Ralph Boehme <slow@samba.org>
-To: Xavi Hernandez <xhernandez@gmail.com>
-Cc: samba-technical@lists.samba.org
-Message-ID: <928cdbd1-a1ed-4b5e-93e9-866ba5f8e504@samba.org>
-Subject: Re: Proposal for changes in become root
-References: <CAO9H7P_oqwoJoC_8mWNZVYZ-pxrYt9TrEt3t0LJsEvS32EorEg@mail.gmail.com>
- <4249c3b6-3b4e-4bd3-95e5-864158e5797f@samba.org>
- <CAO9H7P8Cttbg6v-Cn+rRR5cKc06K1pid9oQqsjPnHL49iCE=ig@mail.gmail.com>
- <17264f9a-2d6f-4bf4-a0e7-f28372a6f82a@samba.org>
- <CAO9H7P8jocp0J_8oFqnYCmheS0o83x6B7koFBMQa_Y2vwdETtw@mail.gmail.com>
-In-Reply-To: <CAO9H7P8jocp0J_8oFqnYCmheS0o83x6B7koFBMQa_Y2vwdETtw@mail.gmail.com>
+On 22/04/24 21:01, Xavi Hernandez wrote:
 
---------------Ml1tBgJfwQeBJnjo04Q5VZT2
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
+> I think we are dealing with two different things here. On one side we have 
+> locale-based case-insensitive comparisons. This is the most common situation for 
+> applications where they need to be able to compare two strings based on the 
+> specific rules for the user location, so that the result of the comparison 
+> yields what the user would expect. The same exact strings for another user in 
+> another location (with another locale) may have different rules for comparison 
+> and return a different result.
+> 
+> On the other side we have case-insensitive NTFS file accesses. In this case the 
+> rules need to be a bit different. I see 2 major things to consider:
+> 
+> 1. The comparison cannot be locale-related
+> 
+> When a file is saved to the filesystem, it cannot depend on the locale of the 
+> user (or even the server) whether a file name is "equivalent" to another or not, 
+> because changing the locale can cause the appearance of duplicated files in a 
+> directory.
+> 
+> 2. Only comparison for equality is required
+> 
+> To find a file by name in a directory we just need to compare case-insentitively 
+> for equality (normally a hash is used to find the bucket where the file resides 
+> and then a case-insensitive comparison for equality is enough). We don't care 
+> about the relative order of the existing name and the name we are looking for. 
+> Another very different thing is, after having listed all directory entries, to 
+> sort them by name to show them to the user. This later comparison depends on the 
+> locale and is made on the client side.
+> 
+> I think that NTFS implements the $UpCase table just for this purpose: It's 
+> locale-independent and it's used just for equality, and this is independent of 
+> the generic NLS-aware functions that Windows provides.
+> 
+>  From what I understand (though I may be wrong), it seems like Samba is using a 
+> mix of both things: it uses fixed tables to convert the string case, which is 
+> locale-independent, but then it does relative comparisons (i.e. greater/less 
+> than, instead of just equality). I don't know how NTFS works exactly, and most 
+> of the information I've found is quite old, so maybe I'm completely wrong here, 
+> but I think it makes sense to do case-insensitive comparisons for a filesystem 
+> in the way I've explained, and it would also explain why NTFS still has the 
+> $UpCase file.
+> 
+> Does this make any sense ?
 
-T24gNC8yMi8yNCAxNDoxNSwgWGF2aSBIZXJuYW5kZXogd3JvdGU6DQo+IFllcy4gSXQgbWFr
-ZXMgYSBsb3Qgb2Ygc2Vuc2UuIEkgc3RpbGwgbmVlZCB0byB1bmRlcnN0YW5kIHRoZSBkZXRh
-aWxzIA0KPiBiZXR0ZXIsIGJ1dCBsZXQgbWUga25vdyBpZiBJIGNhbiBoZWxwIHdpdGggc29t
-ZXRoaW5nLg0KDQpjb25ncmF0cyEgSXQncyBub3cgeW91ciBwcm9qZWN0IGFuZCB3ZSB3aWxs
-IGhlbHAuIDopDQoNCkNoZWVycyENCi1zbG93DQo=
+Yes. A sorting compare will give you equality (in a given locale), but it won't
+give you a canonical version for hashing.
 
---------------Ml1tBgJfwQeBJnjo04Q5VZT2--
+In Samba we may conflate things because we are not just a remote NTFS, we are
+also Active Directory and RPCs.
 
---------------00Ykiu0HMbs0Ht5ZVotl1y0O
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature.asc"
+I am curious whether "Windows 8 Upper Case Mapping Table.txt" from
 
------BEGIN PGP SIGNATURE-----
+>>     On https://www.microsoft.com/en-us/download/details.aspx?id=10921
 
-wsF5BAABCAAjFiEE+uLGCIokJSBRxVnkqh6bcSY5nkYFAmYmpM0FAwAAAAAACgkQqh6bcSY5nkbZ
-WRAArW8Usea2Qws1/5xZ4TWzxYJFBewsJTNXhRJG8DoRKsyArgbqVBVRn+Xw+50BKg2xpl5T53Yv
-lXsrIlt433wOipCg5LfmqV/gUwQXzMZMUnVQLglwwO9YB1d21NTCtVB53oeTUHcUHwzZLY6OxMEA
-pZZJHsFn7zwjKqnevETZp8t6nylHiyM8Ij1GXnRZecwd1F7I8ZSJDW4/S9XYbQtc8EtFW8IAMoe/
-adjmPdXxBM6C+kHJmi0x8qDXwQXJ5hTgLTgV3VN72hAPtDOT4NwsC5TluXwbm/2Jbh/z2EKrkR1O
-amarCvmFCLuvc1gGI3fLFjenmvW25s3A+MWY5LJtiRL6zgGYPheRMXf0KaK3nU4A2q6JX6gQY+f3
-8d669KcfEo00RyIVDVv9UBpzmvPgXUlcUQ+hb6+lQw0K1tzCdis5+o6+crPKEWDkthkhH5VPxl/L
-PSDRz9NU8QNkEeghH+S6DdQPba3RApaPee86lI1cfRx1FHvZp6k0Z3eIpxeuLrzPcvIXS3MVIAIH
-7W32lCv8MugWq9KGTDsTjf/kfmtAZHeMFFYyH7r6g3ADViNUe2PCePoamim6s6SvFRYRLHxOiV8j
-dVnKbIwrUnXokzkSDF2K4fCwQyXyaM8bfoKq5vGUWSi2GdU6Ub4mJoxp0AEaXYDhRdTSypvxOjNO
-86M=
-=o7LJ
------END PGP SIGNATURE-----
+matches the $UpCase table you find, and whether that means we just have an old
+one from win2k days. I don't see a change in Linux's fs/ntfs/upcase.c though, so
+I suspect not.
 
---------------00Ykiu0HMbs0Ht5ZVotl1y0O--
+Douglas
+
 
