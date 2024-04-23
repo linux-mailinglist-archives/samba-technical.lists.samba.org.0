@@ -2,88 +2,71 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id B7D958AEB3D
-	for <lists+samba-technical@lfdr.de>; Tue, 23 Apr 2024 17:38:13 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 87DA28AF6F0
+	for <lists+samba-technical@lfdr.de>; Tue, 23 Apr 2024 20:58:38 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
-	bh=kUlkL4wHxCdLSZRXavhemhG3+xVG6ff28kKwlrgsX78=; b=q6K7qVM/soKGwZq+RCH4EWrVYN
-	nfEeO4ocQDEKOoRPE+Tbqu105YXhwal+2syinH3QXkjoNkp0NVXPElxA0GV7B0JamwQyv/CvUg2u0
-	P5UpTjEifdHs8VCNsUmGvmig13/JFcp8WjFnCmtM/mGwuo2azGl2GPqG2yXg35hfVusXqz5UE4Xo3
-	VaArN/O3kDxqNKFEcIqdq1BrZzHRVlx/zgVXqdMAKFhNnDNNQXrQN9lfjS6E4nowo7j9HJ82ZCWB/
-	D3Tnig4eGDMVowHRsEwhancRbmflcigSPQbrUYuXHwItTd8p9fId3hynr3F+iRWSO61ixOVofdjEH
-	b0pNFEtg==;
-Received: from ip6-localhost ([::1]:46552 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=nsPyp10OeuKCiKp5cBxCcE/H7nRREeJ5Tm8uW6q5gxA=; b=Xxyhmgzxc+A5+HAfY6L7A47y6D
+	D/JOwDyhROq2J65oT8jKVjTj7dVtgTwkzE4GuL4GjcdFiEDVyR/WEsMu6V9/RcJcwhpsRzRT4ZVoI
+	g6WttinXLk164mA4ZJdXy5ryInqDoazqmY9EOiW5Mkc1+YWyfknYVX4V232fthIjemwt12kVSWLQp
+	qdl46yOgWjsnhbr91Oe/NRWjsngP40NHZL/rLjToD0xfOsJMZkcNATK5xJIHYUZURbb89oc6xXorW
+	N7+O3AVSkT6wWyi7o89cp8hkULsNLFhnZrINvY7frso+ZeBeHoTn4bvI+PQT7G9DoUyQlUfrVtnHQ
+	Qr75iM8w==;
+Received: from ip6-localhost ([::1]:36648 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1rzIDV-005Siz-T3; Tue, 23 Apr 2024 15:37:57 +0000
-Received: from sonic312-23.consmr.mail.ne1.yahoo.com ([66.163.191.204]:40562) 
+	id 1rzLKu-005TAz-Li; Tue, 23 Apr 2024 18:57:48 +0000
+Received: from mail-lj1-x22f.google.com ([2a00:1450:4864:20::22f]:60500) 
  by hr1.samba.org with esmtps
- (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__AES_256_GCM:256) (Exim)
- id 1rzIDR-005Sis-1R
- for samba-technical@lists.samba.org; Tue, 23 Apr 2024 15:37:55 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=aol.com; s=a2048;
- t=1713886669; bh=kUlkL4wHxCdLSZRXavhemhG3+xVG6ff28kKwlrgsX78=;
- h=From:To:References:In-Reply-To:Subject:Date:From:Subject:Reply-To;
- b=MZRWXyA7uCilKOCv9bJ0f7bFudZ8W2GUARw+9TGz6MWIQS8qJ2iPuaoA8n2KGsgrWkg8W6aqhcqUeu7nNRglFHw/l8TFkAqwLF+jlgbdkXd/lcdB2Pk50agDXTF4G7JjNWTgE6XhnqmDdbb1ZYdy/CSAG5rV/gnu5x6Q5N5dT/a+KIg1W1eVXT0s24mcs9PPz9crpfc79brgUtB28kkc/G3YPrLuQd2wFMlly4twF2Jw0aQoPv8R/DAV1Iml0fodThmmbGME3NigRhNyAi4+ibk0h6una1tR36XevxaePcglDFvD2BClGa92OM1iQQFSH98OnLV1m4gJrJo3IIABnw==
-X-SONIC-DKIM-SIGN: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048;
- t=1713886669; bh=4IsFzMlG7tZhUtBXsAKKwGEW0CAUi2kmqbvcWAtaCT+=;
- h=X-Sonic-MF:From:To:Subject:Date:From:Subject;
- b=VOEVZ0Dz6VvOzgpJLdNPbURMoTu8464uRhlY8AdZUVRGxtVJ7zHLyUHblc2P7Qx7EJC0GtsowaNTzD/n/bjUh2ZvzRFurndd4DyV0HI5KHk1Z7EGUDTbRAllRFfD+sqNIWvRNxJgkEUyt4fBsf9GeDdRO7mIXnjl9fUuLZw5nsa+bPeTfOnzNlVOM9ydUydo9Xk9OorShiCRGq2f/KcyttKeQgntkgb4Xj0G0WlUiOtUZT+7na/ztta9pBVYHtBdNqoKEU3uhflQSVeUm7LS+JbhuuMPOrJkzOidxPhAzR6T6WoQ1NDjxMYxnjt/aRZW4AG7h+at1kwOEhyCt3PX+A==
-X-YMail-OSG: PCVY1GAVM1mNFDQlJZDA1Nn9Sga5rYJqI8Mwyv.LVKQuy_efMQej1Cq8xVlaM5i
- RKjkvuvmue0pPgNJn_HfW2_gtuXMIKsaNvVJWrzpMVvo_9pOeO_xjDUkKbZ5r8_UitxlkS18XyQD
- 9cUuHp10tr3.5ADKGVXU1ZxgDOri.Rzz0KH1hEWr4KN1s0Nhux1cSrMgW3aDYfb0vn9GsWC6g4dc
- QaDhW23MaC.Ti8uCfcB9qMxf6OFF9ARi8jOIWbSvg0RR62_wae9dpWeKWrR2hnslFbMK37FxgMHt
- fI_76yez.0GyVAvXNWVkNzXjXBbaleBZ0zymfC0gPPKvhNODQjRdkV7Jk.WlYYE0BPLVzo37hIsw
- T6RYiTubiXdlNba.TMGJByyb2ltKMpjS8Q7oPkpdFoMm3l47xMphYA93gA.5_oAa6jrjYL7EHHHF
- 9RgnCkUPDjYuVOkWupm_2fm5ufHCYy6sAaOo.J7FZyhpQAsmKZYCU4avAnpLzhSinATV5wzSlGxm
- MRTmx7xdBgT_XuV5QzwwYtg352FyeQmBAjxEf0ghTKrAGV7Rhmn9F.hUZE7aKP44hABbztKEA2lZ
- ozUnNude8bGWNJYsPcMiKMaZmr8tlvGYGQScipeRg6Ew9IfgD6kpGb0oBaAwXM2RwysdjJ4zBWko
- Hs6PHHSyuEiVZJUhCfQsa54fAaGRZ1GmkGHhwlVrq5Amegnp6UFLqW.aYfTaHFNWb43ikX_JJq.s
- m_tn4jQTJRC1AsHAvte2QSPFau5ZadyCQBdKl9bfxpFbrWsGPD1njpzX4V...IfLclqPGxF62s5J
- _EowBW5oO3SKPNKTKaZXz8dWkllc_KkZsz2QAZEenlQRmJILfnlvBqZqOEVhuW4LqKadnFwtx9yG
- 215zefSPQ3U48Vy83P_1_YY2fduoakXBK3j6CWjOf_.1SLkEMNEo0k1JkecBhZ1RrTWz8gJM087D
- aUpaWRrTi0lPSDDTr6qPDzVLRd9oCrpKGFauCrWpS0Y2nh2WZjRk64OFGYFzNzJVPJzrAueSE9lw
- luLqJc9VBv2Xz0tfjxQkbdfvLu12l7z979YAYMYkyCrdmtewWskXKveqBuXkJEHPlIecwP1jH8IO
- IrKWbAnvmwH_Ph.5xX0htyHa_qY00K2oXxLBPMOKmVRYmLKE3r7lmaYM.DL.5LqmSwSVAZ7uzuYT
- i95ELvRuUpMjXhKC.eos4VG5pOCZieLVU1Mxzyn5PVdCfs3se7FNnEgXlAXX5FXRAh90wHYre.wx
- nD1glQILTRGiwS.S6jAJnWvSs3TXsedptLKjpqDd9Cc2b6kB9D01.KEzYgpUOEru.5JvPfwmL4aB
- k2bdkzvvZuJURo689nph9UYUz2pSrYpz0NyLXBu2j.3.gxLCbgHTYPqTpxp.0XqPNWfkxfUqdGna
- W4Yd05UO9wDykIeS6RhziOdlxhRyaj8YNehGQsgn5fzX3FaHHE.4rYdPP_0qeA3qHRpGLR4CDIXr
- jJhV_yrGWrFQZzUFV1yEI3piodiwMDoEfp.JjEdjiyCSNgW2YxjIYpKlCakRQ7LUL3kJzn2VDptY
- LiV0uZCG4ejFXlUaxNCpUBdi7EjfwhWigvs6OC4dohbdn1Eu7Bjr8fPKHcZJCXDIK6g13Q77BK6O
- gRGuCWyyz6jSv9e4pOaa2cPoL2m2Bev156DmOP62j4fgUUnwmOK6lrZSGTpy5p8xhdRME6DYwqb2
- 2Sj5PL6BNS32QCn7J2ysQgiyHgwI34rUz9XnREHElaxMflNAs5LJqBEOempUDxzdEO3ukxzJiBHJ
- p44Z4AyvCH1m._J5wpZDIj5fX1R2PVTDgCli2_b.ncH.UI25OWWDw4n4UrTGGpdm4N6JkkwRU1dk
- iPgFHEVj2dx32.UMDXIQvtn2k.QbPf_UgMzXB62n7.vvmh1ya8HBXD8cwSU59IAZxOVRgPhLD1lW
- p3JxsbzPL5i2fHVTRH5Gsk1AC75JGMEvOrkSeDA.Upyk5cImegCdeF0SQnv.ELh1L0laMQkc_UoE
- atbJmq3t0lOWaY9dnHWaWALPayFBJGzOZnimcFBeonMKEYcBdFA7qXzgEY0mAHZ5DUd2vw8.HXQG
- yPg.fQaBKpkrKS6ZrZ8E33_7FcD8DQOz8hP7OIqgv68jzUUp3kWhSXB2qrK7amrO2N3lo85q_PSb
- .1ja2yoytw4ISYnK7PIjRdZH9a_XTrbJZfYkaysNISzg4RnBR5q8GECi3BcsM_YaoMVLh9Ac-
-X-Sonic-MF: <rac8006@aol.com>
-X-Sonic-ID: f960e5ca-9e62-4ba7-ae86-70648650b8cc
-Received: from sonic.gate.mail.ne1.yahoo.com by
- sonic312.consmr.mail.ne1.yahoo.com with HTTP; Tue, 23 Apr 2024 15:37:49 +0000
-Received: by hermes--production-bf1-5cc9fc94c8-kfglr (Yahoo Inc. Hermes SMTP
- Server) with ESMTPA ID a7aa91dbbc13b7a750cdb14b674b3363; 
- Tue, 23 Apr 2024 15:37:45 +0000 (UTC)
-To: <samba-technical@lists.samba.org>
-References: <015301da9581$80865ce0$819316a0$.ref@aol.com>
- <015301da9581$80865ce0$819316a0$@aol.com>
- <20240423151917.40726f90@devstation.samdom.example.com>
- <019001da958c$4cb79270$e626b750$@aol.com>
- <20240423162021.0c58005a@devstation.samdom.example.com>
-In-Reply-To: <20240423162021.0c58005a@devstation.samdom.example.com>
-Subject: RE: samba shares across different os's
-Date: Tue, 23 Apr 2024 11:37:44 -0400
-Message-ID: <029f01da9594$30773c70$9165b550$@aol.com>
+ (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1rzLKp-005TAp-5i
+ for samba-technical@lists.samba.org; Tue, 23 Apr 2024 18:57:45 +0000
+Received: by mail-lj1-x22f.google.com with SMTP id
+ 38308e7fff4ca-2d895e2c6efso91652051fa.0
+ for <samba-technical@lists.samba.org>; Tue, 23 Apr 2024 11:57:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1713898662; x=1714503462; darn=lists.samba.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=nsPyp10OeuKCiKp5cBxCcE/H7nRREeJ5Tm8uW6q5gxA=;
+ b=mMB0KgemIQzUzjAu0YxMU4cYZ55h4i3rUYHsX6viXB26pQRWAOncVJU78/PTpWjXDw
+ /aiy7OSL50fj1xq/QcY7OxArcGA3lTnjSJV1DLH51UjOrOC2tDBNaed0vNxSrMvR4P7Z
+ fSSrd2m2Q3lTRDVl3E5ZAUnf/16n8th0cEOFwifBJvel7JunNknWg9zCE5eaE8l33tIE
+ kRf8dGjsyEkFtUXX5Rv2jV9pMVkUuL8PtzuX8tUqr9m4YXV/MGKBToiUxfdGshyAThcj
+ SYdACQaSo/YvUdxASGvCShUOIYlAYbku2ElddvQQCQ3HaFGaFL7ZqJKtTWthfpON5rRw
+ 1hXw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1713898662; x=1714503462;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=nsPyp10OeuKCiKp5cBxCcE/H7nRREeJ5Tm8uW6q5gxA=;
+ b=oIhn0ksazMWIapC2px5z/9WpaUf1HgAsLYD6FhyDKP5/uGjqUv2CKor35ppeGol9Yh
+ M9UgNPkugjEDYnkeSIWDmtbi6Yy/Lez4Bnhpb7MHzgmIQkJ/3F/jYrzrTbDrOxEHlJlJ
+ 0lQuGGNFd6ypJ8ZOmMdlZ8f0su+mdpNCjT6U3NqE1kekJiODLZbzkR0rkJPBmta08kBD
+ /gLaracpr8GPyTWx8aKuuVkwDCRZ7A4gYv0YwdYNdIm5R3KN6f4GaUXF6/ZmYrpvAV9f
+ vUM2pjhK3jzqPdd8swI3IhuCnpVv06Lfy38SvUMjT//f7xD2s280SBC7TzQL/cJXGhNl
+ QwGA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWbav1Kwu3uKSvv4d3mrg6vtCX5bR+2cRM3BmNO+F9SgiNFjgEFH6CJj1+lwtIV6okp2T29bD//jGReodgMJXjESP5XubYIGbUHcRn0NTLb
+X-Gm-Message-State: AOJu0YwBdN0zqi+0jsm6TDUyr32fBAy01c8I83cS0NqelPnk68u20MhI
+ V/2Jb2I50PUZPllfhbpYkmP3hv22ynAsxHJXh4H4kYXAg70aQ4s1g9x2fU5PEuthap1a6w6+hpt
+ krRStRVhs0yIPWnKeLAIwihMcAyM=
+X-Google-Smtp-Source: AGHT+IHyUbgmTQf8WX/KSODwBX8UO62Tz1THto0rGm8zXU1bsDSgxeFNTae5Mwrjovdr+Z0pnTT4lcY1hnZFn8QvvTo=
+X-Received: by 2002:a2e:be8c:0:b0:2da:78e:f766 with SMTP id
+ a12-20020a2ebe8c000000b002da078ef766mr94273ljr.38.1713898661255; Tue, 23 Apr
+ 2024 11:57:41 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain;
-	charset="us-ascii"
-Content-Transfer-Encoding: 7bit
-X-Mailer: Microsoft Outlook 16.0
-Content-Language: en-us
-Thread-Index: AQICLfS/TmbevJVMnm0Pcgy/qA5NVgGHOGS6Aq0DWKkCf+34lAECcu5vsOkUQuA=
-X-Antivirus: Avast (VPS 240423-2, 4/23/2024), Outbound message
-X-Antivirus-Status: Clean
+References: <20231204203514.2093855-1-sashal@kernel.org>
+ <20231204203514.2093855-15-sashal@kernel.org>
+In-Reply-To: <20231204203514.2093855-15-sashal@kernel.org>
+Date: Tue, 23 Apr 2024 13:57:29 -0500
+Message-ID: <CAH2r5mt2gwyyAqotBv5U1esJQggGUbz8_J=6k_Z69X2dRRK8Ug@mail.gmail.com>
+Subject: Re: [PATCH AUTOSEL 6.1 15/17] smb: client,
+ common: fix fortify warnings
+To: Sasha Levin <sashal@kernel.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -97,91 +80,279 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: George via samba-technical <samba-technical@lists.samba.org>
-Reply-To: rac8006@aol.com
+From: Steve French via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Steve French <smfrench@gmail.com>
+Cc: linux-cifs@vger.kernel.org, Dmitry Antipov <dmantipov@yandex.ru>,
+ samba-technical@lists.samba.org, linux-kernel@vger.kernel.org,
+ stable@vger.kernel.org, sfrench@samba.org, Namjae Jeon <linkinjeon@kernel.org>,
+ Steve French <stfrench@microsoft.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-I guess the real question is how does one mount the share on different OS's
-with the same user but different uid's.  If the mount get mounted owned by
-root how does a user add or modify a file if he is not root.  I want the
-files on the WD Device to be available to any local device in my house.  I
-have a user x on the Debian Linux and windows and both laptops. The Dlink
-system is going to be removed from the network.  So smb1 should not be a
-problem any more.  
+Note that kernels that backported this fix will also need this ksmbd
+fix (fixes a bug when Macs mount to ksmbd)
 
-PS I used to be on three different lists.  I tried to stop receiving email
-from three lists but was not able to stop the technical emails.  At the time
-I was trying to find out why samba was writing to disk every few seconds.
-Keeping the system from sleeping.  I've been retired from software
-engineering for 20 years.  
+commit 0268a7cc7fdc47d90b6c18859de7718d5059f6f1
+Author: Namjae Jeon <linkinjeon@kernel.org>
+Date:   Fri Apr 19 23:46:34 2024 +0900
 
------Original Message-----
-From: samba-technical <samba-technical-bounces@lists.samba.org> On Behalf Of
-Rowland Penny via samba-technical
-Sent: Tuesday, April 23, 2024 11:20 AM
-To: samba-technical@lists.samba.org
-Cc: Rowland Penny <rpenny@samba.org>
-Subject: Re: samba shares across different os's
+    ksmbd: common: use struct_group_attr instead of struct_group for
+network_open_info
 
-On Tue, 23 Apr 2024 10:41:16 -0400
-George via samba-technical <samba-technical@lists.samba.org> wrote:
+    4byte padding cause the connection issue with the applications of MacOS=
+.
+    smb2_close response size increases by 4 bytes by padding, And the smb
+    client of MacOS check it and stop the connection. This patch use
+    struct_group_attr instead of struct_group for network_open_info to use
+     __packed to avoid padding.
 
-> The Dlink system is version 1.  The WD system is smb3 after the latest 
-> OS update.  The windows system has smb1 enabled.  I have had the Dlink 
-> system mounted to the windows system for years and it has been working 
-> fine.  Not sure how to tell what version of samba the shares are 
-> mounted.
+    Fixes: 0015eb6e1238 ("smb: client, common: fix fortify warnings")
+    Cc: stable@vger.kernel.org
+    Signed-off-by: Namjae Jeon <linkinjeon@kernel.org>
+    Signed-off-by: Steve French <stfrench@microsoft.com>
 
-If the Dlink only uses SMBv1m then the shares on it will have to use SMBv1.
+On Mon, Dec 4, 2023 at 2:36=E2=80=AFPM Sasha Levin <sashal@kernel.org> wrot=
+e:
+>
+> From: Dmitry Antipov <dmantipov@yandex.ru>
+>
+> [ Upstream commit 0015eb6e12384ff1c589928e84deac2ad1ceb236 ]
+>
+> When compiling with gcc version 14.0.0 20231126 (experimental)
+> and CONFIG_FORTIFY_SOURCE=3Dy, I've noticed the following:
+>
+> In file included from ./include/linux/string.h:295,
+>                  from ./include/linux/bitmap.h:12,
+>                  from ./include/linux/cpumask.h:12,
+>                  from ./arch/x86/include/asm/paravirt.h:17,
+>                  from ./arch/x86/include/asm/cpuid.h:62,
+>                  from ./arch/x86/include/asm/processor.h:19,
+>                  from ./arch/x86/include/asm/cpufeature.h:5,
+>                  from ./arch/x86/include/asm/thread_info.h:53,
+>                  from ./include/linux/thread_info.h:60,
+>                  from ./arch/x86/include/asm/preempt.h:9,
+>                  from ./include/linux/preempt.h:79,
+>                  from ./include/linux/spinlock.h:56,
+>                  from ./include/linux/wait.h:9,
+>                  from ./include/linux/wait_bit.h:8,
+>                  from ./include/linux/fs.h:6,
+>                  from fs/smb/client/smb2pdu.c:18:
+> In function 'fortify_memcpy_chk',
+>     inlined from '__SMB2_close' at fs/smb/client/smb2pdu.c:3480:4:
+> ./include/linux/fortify-string.h:588:25: warning: call to '__read_overflo=
+w2_field'
+> declared with attribute warning: detected read beyond size of field (2nd =
+parameter);
+> maybe use struct_group()? [-Wattribute-warning]
+>   588 |                         __read_overflow2_field(q_size_field, size=
+);
+>       |                         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~=
+~
+>
+> and:
+>
+> In file included from ./include/linux/string.h:295,
+>                  from ./include/linux/bitmap.h:12,
+>                  from ./include/linux/cpumask.h:12,
+>                  from ./arch/x86/include/asm/paravirt.h:17,
+>                  from ./arch/x86/include/asm/cpuid.h:62,
+>                  from ./arch/x86/include/asm/processor.h:19,
+>                  from ./arch/x86/include/asm/cpufeature.h:5,
+>                  from ./arch/x86/include/asm/thread_info.h:53,
+>                  from ./include/linux/thread_info.h:60,
+>                  from ./arch/x86/include/asm/preempt.h:9,
+>                  from ./include/linux/preempt.h:79,
+>                  from ./include/linux/spinlock.h:56,
+>                  from ./include/linux/wait.h:9,
+>                  from ./include/linux/wait_bit.h:8,
+>                  from ./include/linux/fs.h:6,
+>                  from fs/smb/client/cifssmb.c:17:
+> In function 'fortify_memcpy_chk',
+>     inlined from 'CIFS_open' at fs/smb/client/cifssmb.c:1248:3:
+> ./include/linux/fortify-string.h:588:25: warning: call to '__read_overflo=
+w2_field'
+> declared with attribute warning: detected read beyond size of field (2nd =
+parameter);
+> maybe use struct_group()? [-Wattribute-warning]
+>   588 |                         __read_overflow2_field(q_size_field, size=
+);
+>       |                         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~=
+~
+>
+> In both cases, the fortification logic inteprets calls to 'memcpy()' as a=
+n
+> attempts to copy an amount of data which exceeds the size of the specifie=
+d
+> field (i.e. more than 8 bytes from __le64 value) and thus issues an overr=
+ead
+> warning. Both of these warnings may be silenced by using the convenient
+> 'struct_group()' quirk.
+>
+> Signed-off-by: Dmitry Antipov <dmantipov@yandex.ru>
+> Acked-by: Namjae Jeon <linkinjeon@kernel.org>
+> Signed-off-by: Steve French <stfrench@microsoft.com>
+> Signed-off-by: Sasha Levin <sashal@kernel.org>
+> ---
+>  fs/smb/client/cifspdu.h | 24 ++++++++++++++----------
+>  fs/smb/client/cifssmb.c |  6 ++++--
+>  fs/smb/client/smb2pdu.c |  8 +++-----
+>  fs/smb/client/smb2pdu.h | 16 +++++++++-------
+>  fs/smb/common/smb2pdu.h | 17 ++++++++++-------
+>  5 files changed, 40 insertions(+), 31 deletions(-)
+>
+> diff --git a/fs/smb/client/cifspdu.h b/fs/smb/client/cifspdu.h
+> index c403816d0b6c1..97bb1838555b4 100644
+> --- a/fs/smb/client/cifspdu.h
+> +++ b/fs/smb/client/cifspdu.h
+> @@ -882,11 +882,13 @@ typedef struct smb_com_open_rsp {
+>         __u8 OplockLevel;
+>         __u16 Fid;
+>         __le32 CreateAction;
+> -       __le64 CreationTime;
+> -       __le64 LastAccessTime;
+> -       __le64 LastWriteTime;
+> -       __le64 ChangeTime;
+> -       __le32 FileAttributes;
+> +       struct_group(common_attributes,
+> +               __le64 CreationTime;
+> +               __le64 LastAccessTime;
+> +               __le64 LastWriteTime;
+> +               __le64 ChangeTime;
+> +               __le32 FileAttributes;
+> +       );
+>         __le64 AllocationSize;
+>         __le64 EndOfFile;
+>         __le16 FileType;
+> @@ -2268,11 +2270,13 @@ typedef struct {
+>  /* QueryFileInfo/QueryPathinfo (also for SetPath/SetFile) data buffer fo=
+rmats */
+>  /***********************************************************************=
+*******/
+>  typedef struct { /* data block encoding of response to level 263 QPathIn=
+fo */
+> -       __le64 CreationTime;
+> -       __le64 LastAccessTime;
+> -       __le64 LastWriteTime;
+> -       __le64 ChangeTime;
+> -       __le32 Attributes;
+> +       struct_group(common_attributes,
+> +               __le64 CreationTime;
+> +               __le64 LastAccessTime;
+> +               __le64 LastWriteTime;
+> +               __le64 ChangeTime;
+> +               __le32 Attributes;
+> +       );
+>         __u32 Pad1;
+>         __le64 AllocationSize;
+>         __le64 EndOfFile;       /* size ie offset to first free byte in f=
+ile */
+> diff --git a/fs/smb/client/cifssmb.c b/fs/smb/client/cifssmb.c
+> index c90d4ec9292ca..67c5fc2b2db94 100644
+> --- a/fs/smb/client/cifssmb.c
+> +++ b/fs/smb/client/cifssmb.c
+> @@ -1234,8 +1234,10 @@ CIFS_open(const unsigned int xid, struct cifs_open=
+_parms *oparms, int *oplock,
+>                 *oplock |=3D CIFS_CREATE_ACTION;
+>
+>         if (buf) {
+> -               /* copy from CreationTime to Attributes */
+> -               memcpy((char *)buf, (char *)&rsp->CreationTime, 36);
+> +               /* copy commonly used attributes */
+> +               memcpy(&buf->common_attributes,
+> +                      &rsp->common_attributes,
+> +                      sizeof(buf->common_attributes));
+>                 /* the file_info buf is endian converted by caller */
+>                 buf->AllocationSize =3D rsp->AllocationSize;
+>                 buf->EndOfFile =3D rsp->EndOfFile;
+> diff --git a/fs/smb/client/smb2pdu.c b/fs/smb/client/smb2pdu.c
+> index 847d69d327c2a..aea7770fb5631 100644
+> --- a/fs/smb/client/smb2pdu.c
+> +++ b/fs/smb/client/smb2pdu.c
+> @@ -3425,12 +3425,10 @@ __SMB2_close(const unsigned int xid, struct cifs_=
+tcon *tcon,
+>         } else {
+>                 trace_smb3_close_done(xid, persistent_fid, tcon->tid,
+>                                       ses->Suid);
+> -               /*
+> -                * Note that have to subtract 4 since struct network_open=
+_info
+> -                * has a final 4 byte pad that close response does not ha=
+ve
+> -                */
+>                 if (pbuf)
+> -                       memcpy(pbuf, (char *)&rsp->CreationTime, sizeof(*=
+pbuf) - 4);
+> +                       memcpy(&pbuf->network_open_info,
+> +                              &rsp->network_open_info,
+> +                              sizeof(pbuf->network_open_info));
+>         }
+>
+>         atomic_dec(&tcon->num_remote_opens);
+> diff --git a/fs/smb/client/smb2pdu.h b/fs/smb/client/smb2pdu.h
+> index 1237bb86e93a8..8ac99563487c1 100644
+> --- a/fs/smb/client/smb2pdu.h
+> +++ b/fs/smb/client/smb2pdu.h
+> @@ -339,13 +339,15 @@ struct smb2_file_reparse_point_info {
+>  } __packed;
+>
+>  struct smb2_file_network_open_info {
+> -       __le64 CreationTime;
+> -       __le64 LastAccessTime;
+> -       __le64 LastWriteTime;
+> -       __le64 ChangeTime;
+> -       __le64 AllocationSize;
+> -       __le64 EndOfFile;
+> -       __le32 Attributes;
+> +       struct_group(network_open_info,
+> +               __le64 CreationTime;
+> +               __le64 LastAccessTime;
+> +               __le64 LastWriteTime;
+> +               __le64 ChangeTime;
+> +               __le64 AllocationSize;
+> +               __le64 EndOfFile;
+> +               __le32 Attributes;
+> +       );
+>         __le32 Reserved;
+>  } __packed; /* level 34 Query also similar returned in close rsp and ope=
+n rsp */
+>
+> diff --git a/fs/smb/common/smb2pdu.h b/fs/smb/common/smb2pdu.h
+> index 9619015d78f29..778c1e3b70bc1 100644
+> --- a/fs/smb/common/smb2pdu.h
+> +++ b/fs/smb/common/smb2pdu.h
+> @@ -699,13 +699,16 @@ struct smb2_close_rsp {
+>         __le16 StructureSize; /* 60 */
+>         __le16 Flags;
+>         __le32 Reserved;
+> -       __le64 CreationTime;
+> -       __le64 LastAccessTime;
+> -       __le64 LastWriteTime;
+> -       __le64 ChangeTime;
+> -       __le64 AllocationSize;  /* Beginning of FILE_STANDARD_INFO equiva=
+lent */
+> -       __le64 EndOfFile;
+> -       __le32 Attributes;
+> +       struct_group(network_open_info,
+> +               __le64 CreationTime;
+> +               __le64 LastAccessTime;
+> +               __le64 LastWriteTime;
+> +               __le64 ChangeTime;
+> +               /* Beginning of FILE_STANDARD_INFO equivalent */
+> +               __le64 AllocationSize;
+> +               __le64 EndOfFile;
+> +               __le32 Attributes;
+> +       );
+>  } __packed;
+>
+>
+> --
+> 2.42.0
+>
+>
 
-> When I mount the Dlink to the Debian system it complains and says I 
-> need to use vers=1.0. But the WD system when mounted on the Debian 
-> system does not complain.  The WD device is running 4.3.11.
 
-SMBv3 support was added at 4.3.0, but there have been numerous updates and
-CVE's since then, Samba latest is 4.20.0
+--=20
+Thanks,
 
-> I'm not sure how I copied the files I think I used a cp -r  but forgot 
-> to use the -a option.
-
-If it is available, then rsync would have probably been better, but if it
-isn't then 'cp -a' would have been better than 'cp -r' (see 'man cp').
-
-> I think the fix for the all
-> of the folders being empty was doing a chown -r user *  This seemed to 
-> allow most folders to display there contents.
-
-If that worked, then the files had probably been transferred, but then
-belonged to another user/group and you were not allowed to see them.
-
-> When I mount the
-> WD on the Debian system the owner/group is always root:root.  
-
-That is fairly standard for a mount.
-
-> I'm using the WD because it has been sitting around not used for a few 
-> years.  I'm not real happy with it because they use a non standard 64k 
-> pagesize.  Which means you have to compile your own programs that ware 
-> not on the device rather than just apt install.
-> I just thought that I could remove the Dlink and use the WD.  It is a 
-> low power device that can be left on all the time.  Which allows me to 
-> access the files from any of my pcs's or laptops or phone or TV's.
-
-If it works for you, then great, but it is still an elderly device and if I
-were you, I would be looking on it as a 'stop gap' until I could replace it
-with something newer, but it is totally your decision.
-
-> 
-> Sorry for posting on this forum.  It is the only one I get email from.
-
-Not a problem really, but the thing is, samba-technical is meant for
-discussing the 'internals' of Samba, problems like yours are best discussed
-on the samba mailing list, so it might be an idea to register for that next
-time ;-)
-
-Rowland
-
-
-
+Steve
 
