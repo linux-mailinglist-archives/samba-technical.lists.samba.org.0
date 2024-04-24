@@ -2,68 +2,62 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id DFD528AFDE1
-	for <lists+samba-technical@lfdr.de>; Wed, 24 Apr 2024 03:34:58 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7C25D8B00B9
+	for <lists+samba-technical@lfdr.de>; Wed, 24 Apr 2024 06:56:31 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=/knYYhSGvWpb2zY89wxMIfXwHxKMotVN42dmr8XUaqI=; b=14QujJlA4hMAMkbgHqNi08ctpg
-	E9cEJlehQSJ2Oz4W9iOjLVhY3K3k+N5eHRyiA26+MOgRrqSYIfxSuEeeX/cxvMRVjJDMlsBxrqC2t
-	WxiJjhKm2x+24ugxq3wXwYIBBt+qi7ll94xV4y6xaDkdMOnaBCZ/D3YVfSUMtmN1I+yy1IvOO3HzC
-	qifZu0uNhkOiqdyUPpjTWxF8GZPABsy3y4LPWWipTMZB8rNwmyx3WgmGyYc+zZww+zXpgsnanR1tJ
-	jeuqSxKaw/yNS+g8ttC9802vHOaEO8iXFgXNzGPOK19NO01pTfPquWlQzdcG8OGObrt8YXxW4hYeC
-	b0Q9tXmg==;
-Received: from ip6-localhost ([::1]:50772 helo=hr1.samba.org) 
+	bh=sTa0ddi19PvhSuGL5F1fIfzICHhbPQ7+XRAogkqvhXg=; b=yGHSMPE2ega5oxdeC3vRYGnNsg
+	dJ9eABISYUdXSlOnUlWcfihah0D00/cV6d04ST1IezGDJcqpQsUzQ24Q+nNiVcy0zOTRtAeDnUYnq
+	MEJJJD+O9piKlF4HIsukkGkShiaaXqWjoISaYmOlT8QsWj+mNMyWgCMcCihtA+No5kOjJjT5W9NvC
+	fOSeEj1NDMQF+ZNCQbwgaz+8toSbqNWImAG0YLEH6gBLTf2hE7syz0cp5HqKvF7nf1U6nqDPCpJSq
+	ELh6ajCmD+ZREF1tj50Q03nJ0EJ87Uh3lpIuPbN3ZwzhEHD+4z+SBSz85hSQtZGkYm0pUM0gixjDk
+	6MzI6++g==;
+Received: from ip6-localhost ([::1]:42288 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1rzRWX-005U4V-N4; Wed, 24 Apr 2024 01:34:13 +0000
-Received: from cat-hlzsim-prod-mail1.catalyst.net.nz ([103.250.242.12]:59002) 
+	id 1rzUfb-005UiN-0F; Wed, 24 Apr 2024 04:55:47 +0000
+Received: from sin.source.kernel.org ([2604:1380:40e1:4800::1]:36510) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1rzRWR-005U4O-CM
- for samba-technical@lists.samba.org; Wed, 24 Apr 2024 01:34:11 +0000
-Received: from [192.168.1.219] (unknown [114.23.142.188])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (Client did not present a certificate)
- (Authenticated sender: douglasb@catalyst.net.nz)
- by cat-hlzsim-prod-mail1.catalyst.net.nz (Postfix) with ESMTPSA id A5E3A41E06; 
- Wed, 24 Apr 2024 13:33:58 +1200 (NZST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=catalyst.net.nz;
- s=default; t=1713922439;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=/knYYhSGvWpb2zY89wxMIfXwHxKMotVN42dmr8XUaqI=;
- b=apKlTXdQ2MtxOrCTNRpXzULYqciVc97bVgBYFt36SK0SJ0yIUi+VrTH8a76jOVuLnu0mb9
- Q1t4+5CoUN/yHbkpZNm/7TGWcX3Ts2XNFJR4YOSbXPSJzB/DPwgk9jP3UTC0QtevMIfp0Q
- 49dAI5mAWsmU+nSMVZb02aY4hdWXY1bm3SIgaAIATWY9ZwErKthv4nxWtosekWtprKXbcc
- Z0DtpEGw5XadjwdmNdrkzvq4tJEQWn7f5ngOd3Qz1Kxrs2CWVanIw86tXO2oCykbmJsYGS
- X1LbASYGvV0WYBGVimm+eq+3Zy4lBxblJcBvkYnJtQPR95QTODXSIW4WCJwv3Q==
-Authentication-Results: ORIGINATING;
- auth=pass smtp.auth=douglasb@catalyst.net.nz
- smtp.mailfrom=douglas.bagnall@catalyst.net.nz
-Message-ID: <09fbc00d-50c2-4ec1-b4db-9e80576650a2@catalyst.net.nz>
-Date: Wed, 24 Apr 2024 13:33:56 +1200
+ (Exim) id 1rzUfV-005Ui1-Ir
+ for samba-technical@lists.samba.org; Wed, 24 Apr 2024 04:55:44 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sin.source.kernel.org (Postfix) with ESMTP id 76CDFCE138F
+ for <samba-technical@lists.samba.org>; Wed, 24 Apr 2024 04:36:47 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9670DC32782
+ for <samba-technical@lists.samba.org>; Wed, 24 Apr 2024 04:36:46 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1713933406;
+ bh=tuSpJeVelX2QtRfHSrv0QUZCsOHtMcWqiSaVBdtewZI=;
+ h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
+ b=Q2MSAfj3yxayUF9+Oz8+JlsgGXN7IugQC+IWyMJW76V4XmJwGE6Y6RXp5Q9CDGMZC
+ UngAqVu0X04kCxtyWogsQidX1VMkPGQqV8ccMEo5A64U6sd1a5a0EzgIfXDKTNWCMR
+ XzUsIn31WgWGCj1y4OzP+Iiux5QHbIofabX27g6k+IC+HjxGJICiqSOBUsxggec+Zk
+ +41oKkeyQe9RV01ZdXuy/o1y4g/ooHMDQjVAzIe5GySSXb0Sebm8nSj37voIq2SZP+
+ h6V7Nc8sKOehDY0hi/HNFSC0XrYq7xsv+6Mr6xx06bpiIkj5DjgfODuEo8jkOQJLWO
+ 1/fQ4w8raZANA==
+Received: by mail-oo1-f41.google.com with SMTP id
+ 006d021491bc7-5ad28c0b85eso2143081eaf.2
+ for <samba-technical@lists.samba.org>; Tue, 23 Apr 2024 21:36:46 -0700 (PDT)
+X-Forwarded-Encrypted: i=1;
+ AJvYcCU/Hnmgd7pKPgAuTsKZmxgpUmfb7elM9c2IEOnVTvnkLxi02R+ia8feQygUV+C23ht9VjqNE4t+xvof2CLUFPxmFnAKP67t31o9bfr15yKM
+X-Gm-Message-State: AOJu0Yz7HOGVTa74RWULYClt1FNGsFWGpTTGOlMCsLOQB8LgLAZArhJq
+ L7EIabAeaji9QDbr+wcW9yf3/LpawqezwDOH1soDESLefUYVJqvlZ2caR3qDez5Yl+Y/3rtUBCU
+ hOLdW318vdu93mH+8DkoopcCvMuM=
+X-Google-Smtp-Source: AGHT+IEg0W5Eme7ZwqVBNJB+djHMHMyVJwSm+D3dx88b5Z7CAy1prCkiEaSrwPv8JwvaqQt/nWjqOmAvcDEiczmpQmc=
+X-Received: by 2002:a4a:987:0:b0:5ac:9efc:3b02 with SMTP id
+ 129-20020a4a0987000000b005ac9efc3b02mr1251950ooa.8.1713933405856; Tue, 23 Apr
+ 2024 21:36:45 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: Doubts about Samba's unicode translation tables
-To: Xavi Hernandez <xhernandez@gmail.com>
-References: <CAO9H7P_SpZ0fGDvTc_2XDLRiR1rSdy-2ztBv07h1ECmj_mnoHw@mail.gmail.com>
- <8e5edd50-f29a-4bed-9878-2b1b293ff2e8@catalyst.net.nz>
- <CAO9H7P-7XyuptwYrftk1Sm+uiYWN0h+K1kGTKFBk5YdQqK2XDA@mail.gmail.com>
- <2c0bcd14-b0eb-4226-97d0-f141b6c20e4f@catalyst.net.nz>
- <CAO9H7P8-EyJWwGyYpehrcgkAaZ7j1KA=_bF9JYFMHyRmRuDypA@mail.gmail.com>
-Content-Language: en-NZ
-In-Reply-To: <CAO9H7P8-EyJWwGyYpehrcgkAaZ7j1KA=_bF9JYFMHyRmRuDypA@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Spamd-Result: default: False [-0.09 / 15.00]; MIME_GOOD(-0.10)[text/plain];
- XM_UA_NO_VERSION(0.01)[]; FREEMAIL_ENVRCPT(0.00)[gmail.com];
- ARC_NA(0.00)[]; FREEMAIL_TO(0.00)[gmail.com];
- MID_RHS_MATCH_FROM(0.00)[];
- DKIM_SIGNED(0.00)[catalyst.net.nz:s=default];
- ASN(0.00)[asn:56030, ipnet:114.23.0.0/16, country:NZ];
- MIME_TRACE(0.00)[0:+]
+References: <ZihxUuQOkZ6Zz363@neat>
+In-Reply-To: <ZihxUuQOkZ6Zz363@neat>
+Date: Wed, 24 Apr 2024 13:36:34 +0900
+X-Gmail-Original-Message-ID: <CAKYAXd-i3Fjv-7JmQa8bSrWD69yFfi8jqfBJV51JgyseA-yXFQ@mail.gmail.com>
+Message-ID: <CAKYAXd-i3Fjv-7JmQa8bSrWD69yFfi8jqfBJV51JgyseA-yXFQ@mail.gmail.com>
+Subject: Re: [PATCH][next] smb: client: Fix struct_group() usage in __packed
+ structs
+To: "Gustavo A. R. Silva" <gustavoars@kernel.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -77,76 +71,282 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Douglas Bagnall via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Douglas Bagnall <douglas.bagnall@catalyst.net.nz>
-Cc: Stefan Metzmacher <metze@samba.org>, gd@samba.org,
- samba-technical@lists.samba.org
+From: Namjae Jeon via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Namjae Jeon <linkinjeon@kernel.org>
+Cc: Paulo Alcantara <pc@manguebit.com>, Tom Talpey <tom@talpey.com>,
+ Shyam Prasad N <sprasad@microsoft.com>, linux-cifs@vger.kernel.org,
+ Dmitry Antipov <dmantipov@yandex.ru>, samba-technical@lists.samba.org,
+ linux-kernel@vger.kernel.org, Steve French <sfrench@samba.org>,
+ Bharath SM <bharathsm@microsoft.com>, linux-hardening@vger.kernel.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On 23/04/24 20:39, Xavi Hernandez wrote:
+2024=EB=85=84 4=EC=9B=94 24=EC=9D=BC (=EC=88=98) =EC=98=A4=EC=A0=84 11:41, =
+Gustavo A. R. Silva <gustavoars@kernel.org>=EB=8B=98=EC=9D=B4 =EC=9E=91=EC=
+=84=B1:
+>
+> Use struct_group_attr() in __packed structs, instead of struct_group().
+>
+> Below you can see the pahole output before/after changes:
+>
+> pahole -C smb2_file_network_open_info fs/smb/client/smb2ops.o
+> struct smb2_file_network_open_info {
+>         union {
+>                 struct {
+>                         __le64     CreationTime;         /*     0     8 *=
+/
+>                         __le64     LastAccessTime;       /*     8     8 *=
+/
+>                         __le64     LastWriteTime;        /*    16     8 *=
+/
+>                         __le64     ChangeTime;           /*    24     8 *=
+/
+>                         __le64     AllocationSize;       /*    32     8 *=
+/
+>                         __le64     EndOfFile;            /*    40     8 *=
+/
+>                         __le32     Attributes;           /*    48     4 *=
+/
+>                 };                                       /*     0    56 *=
+/
+>                 struct {
+>                         __le64     CreationTime;         /*     0     8 *=
+/
+>                         __le64     LastAccessTime;       /*     8     8 *=
+/
+>                         __le64     LastWriteTime;        /*    16     8 *=
+/
+>                         __le64     ChangeTime;           /*    24     8 *=
+/
+>                         __le64     AllocationSize;       /*    32     8 *=
+/
+>                         __le64     EndOfFile;            /*    40     8 *=
+/
+>                         __le32     Attributes;           /*    48     4 *=
+/
+>                 } network_open_info;                     /*     0    56 *=
+/
+>         };                                               /*     0    56 *=
+/
+>         __le32                     Reserved;             /*    56     4 *=
+/
+>
+>         /* size: 60, cachelines: 1, members: 2 */
+>         /* last cacheline: 60 bytes */
+> } __attribute__((__packed__));
+>
+> pahole -C smb2_file_network_open_info fs/smb/client/smb2ops.o
+> struct smb2_file_network_open_info {
+>         union {
+>                 struct {
+>                         __le64     CreationTime;         /*     0     8 *=
+/
+>                         __le64     LastAccessTime;       /*     8     8 *=
+/
+>                         __le64     LastWriteTime;        /*    16     8 *=
+/
+>                         __le64     ChangeTime;           /*    24     8 *=
+/
+>                         __le64     AllocationSize;       /*    32     8 *=
+/
+>                         __le64     EndOfFile;            /*    40     8 *=
+/
+>                         __le32     Attributes;           /*    48     4 *=
+/
+>                 } __attribute__((__packed__));           /*     0    52 *=
+/
+>                 struct {
+>                         __le64     CreationTime;         /*     0     8 *=
+/
+>                         __le64     LastAccessTime;       /*     8     8 *=
+/
+>                         __le64     LastWriteTime;        /*    16     8 *=
+/
+>                         __le64     ChangeTime;           /*    24     8 *=
+/
+>                         __le64     AllocationSize;       /*    32     8 *=
+/
+>                         __le64     EndOfFile;            /*    40     8 *=
+/
+>                         __le32     Attributes;           /*    48     4 *=
+/
+>                 } __attribute__((__packed__)) network_open_info;       /*=
+     0    52 */
+>         };                                               /*     0    52 *=
+/
+>         __le32                     Reserved;             /*    52     4 *=
+/
+>
+>         /* size: 56, cachelines: 1, members: 2 */
+>         /* last cacheline: 56 bytes */
+> };
+>
+> pahole -C smb_com_open_rsp fs/smb/client/cifssmb.o
+> struct smb_com_open_rsp {
+>         ...
+>
+>         union {
+>                 struct {
+>                         __le64     CreationTime;         /*    48     8 *=
+/
+>                         __le64     LastAccessTime;       /*    56     8 *=
+/
+>                         /* --- cacheline 1 boundary (64 bytes) --- */
+>                         __le64     LastWriteTime;        /*    64     8 *=
+/
+>                         __le64     ChangeTime;           /*    72     8 *=
+/
+>                         __le32     FileAttributes;       /*    80     4 *=
+/
+>                 };                                       /*    48    40 *=
+/
+>                 struct {
+>                         __le64     CreationTime;         /*    48     8 *=
+/
+>                         __le64     LastAccessTime;       /*    56     8 *=
+/
+>                         /* --- cacheline 1 boundary (64 bytes) --- */
+>                         __le64     LastWriteTime;        /*    64     8 *=
+/
+>                         __le64     ChangeTime;           /*    72     8 *=
+/
+>                         __le32     FileAttributes;       /*    80     4 *=
+/
+>                 } common_attributes;                     /*    48    40 *=
+/
+>         };                                               /*    48    40 *=
+/
+>
+>         ...
+>
+>         /* size: 111, cachelines: 2, members: 14 */
+>         /* last cacheline: 47 bytes */
+> } __attribute__((__packed__));
+>
+> pahole -C smb_com_open_rsp fs/smb/client/cifssmb.o
+> struct smb_com_open_rsp {
+>         ...
+>
+>         union {
+>                 struct {
+>                         __le64     CreationTime;         /*    48     8 *=
+/
+>                         __le64     LastAccessTime;       /*    56     8 *=
+/
+>                         /* --- cacheline 1 boundary (64 bytes) --- */
+>                         __le64     LastWriteTime;        /*    64     8 *=
+/
+>                         __le64     ChangeTime;           /*    72     8 *=
+/
+>                         __le32     FileAttributes;       /*    80     4 *=
+/
+>                 } __attribute__((__packed__));           /*    48    36 *=
+/
+>                 struct {
+>                         __le64     CreationTime;         /*    48     8 *=
+/
+>                         __le64     LastAccessTime;       /*    56     8 *=
+/
+>                         /* --- cacheline 1 boundary (64 bytes) --- */
+>                         __le64     LastWriteTime;        /*    64     8 *=
+/
+>                         __le64     ChangeTime;           /*    72     8 *=
+/
+>                         __le32     FileAttributes;       /*    80     4 *=
+/
+>                 } __attribute__((__packed__)) common_attributes;       /*=
+    48    36 */
+>         };                                               /*    48    36 *=
+/
+>
+>         ...
+>
+>         /* size: 107, cachelines: 2, members: 14 */
+>         /* last cacheline: 43 bytes */
+> } __attribute__((__packed__));
+>
+> pahole -C FILE_ALL_INFO fs/smb/client/cifssmb.o
+> typedef struct {
+>         union {
+>                 struct {
+>                         __le64     CreationTime;         /*     0     8 *=
+/
+>                         __le64     LastAccessTime;       /*     8     8 *=
+/
+>                         __le64     LastWriteTime;        /*    16     8 *=
+/
+>                         __le64     ChangeTime;           /*    24     8 *=
+/
+>                         __le32     Attributes;           /*    32     4 *=
+/
+>                 };                                       /*     0    40 *=
+/
+>                 struct {
+>                         __le64     CreationTime;         /*     0     8 *=
+/
+>                         __le64     LastAccessTime;       /*     8     8 *=
+/
+>                         __le64     LastWriteTime;        /*    16     8 *=
+/
+>                         __le64     ChangeTime;           /*    24     8 *=
+/
+>                         __le32     Attributes;           /*    32     4 *=
+/
+>                 } common_attributes;                     /*     0    40 *=
+/
+>         };                                               /*     0    40 *=
+/
+>
+>         ...
+>
+>         /* size: 113, cachelines: 2, members: 17 */
+>         /* last cacheline: 49 bytes */
+> } __attribute__((__packed__)) FILE_ALL_INFO;
+>
+> pahole -C FILE_ALL_INFO fs/smb/client/cifssmb.o
+> typedef struct {
+>         union {
+>                 struct {
+>                         __le64     CreationTime;         /*     0     8 *=
+/
+>                         __le64     LastAccessTime;       /*     8     8 *=
+/
+>                         __le64     LastWriteTime;        /*    16     8 *=
+/
+>                         __le64     ChangeTime;           /*    24     8 *=
+/
+>                         __le32     Attributes;           /*    32     4 *=
+/
+>                 } __attribute__((__packed__));           /*     0    36 *=
+/
+>                 struct {
+>                         __le64     CreationTime;         /*     0     8 *=
+/
+>                         __le64     LastAccessTime;       /*     8     8 *=
+/
+>                         __le64     LastWriteTime;        /*    16     8 *=
+/
+>                         __le64     ChangeTime;           /*    24     8 *=
+/
+>                         __le32     Attributes;           /*    32     4 *=
+/
+>                 } __attribute__((__packed__)) common_attributes;       /*=
+     0    36 */
+>         };                                               /*     0    36 *=
+/
+>
+>         ...
+>
+>         /* size: 109, cachelines: 2, members: 17 */
+>         /* last
 
->     I am curious whether "Windows 8 Upper Case Mapping Table.txt" from
-> 
->      >>     On https://www.microsoft.com/en-us/download/details.aspx?id=10921
->     <https://www.microsoft.com/en-us/download/details.aspx?id=10921>
-> 
->     matches the $UpCase table you find, and whether that means we just have an old
->     one from win2k days. I don't see a change in Linux's fs/ntfs/upcase.c though, so
->     I suspect not.
-> 
-> 
-> I've done a bit more research. Actually, the kernel ntfs driver doesn't generate 
-> the upcase table, it just loads it from the $UpCase file in the NTFS filesystem 
-> and uses it for filename comparisons. The comparison function uses the table to 
-> convert both strings to uppercase (maybe not strictly uppercase, but a canonical 
-> value) and compares it. Nothing else.
-
-Right. It turns out I was looking at the old fs/ntfs/, not the current fs/ntfs3/.
-
-> I've looked at the code that creates NTFS filesystems (mkfs.ntfs in ntfsprogs 
-> package) and I've seen that it supports 3 different upcase tables for 3 
-> different Windows versions. I've extracted all 3 tables from ntfsprogs (winxp, 
-> vista, win7), the table from the "Windows 8 Upper Case Mapping Table.txt" file 
-> (win8), the table from Samba code (samba), and the table from a Windows 11 
-> machine (win11).
-> 
-> What I've seen is that win7, win8 and win11 are identical, vista is different 
-> from all the others, and winxp and samba are equal.
-> 
-> The ntfsprogs package also has code to generate a lowcase table. I generated the 
-> lowcase table for winxp and compared it to the lowcase_table from Samba. They 
-> are equal.
-> 
-> So it seems that Samba is using Windows XP tables.
-> 
-> Some questions:
-> 
-> Should we update the table to the latest Win8 ?
-
-This is complicated, and I'm not the best person to answer.
-
-As I understand it, you can mount an XP volume with a Windows 11 kernel (or 
-current Linux), and nothing will go wrong.
-
-But if we change this table, upgrading Samba from 4.20 to 4.21 would cause 
-"ȩ.txt" to collide with "Ȩ.txt". That could be very bad for a few users, and 
-somewhere between irrelevant and good for everyone else.
-
-If we do update the table, I think it would be best to generate a upcase-table.c 
-dynamically during build using either a copy of "Windows 8 Upper Case Mapping 
-Table.txt" (if we can work out the license, about which we are picky), or using 
-declarative ranges as ntfsprogs and the old kernel do.
-
-> Should we support different tables and make it configurable ?
-> Should we dynamically load the table from the shared filesystem itself (similar 
-> to accessing an existing NTFS) ?
-> 
-> Should we differentiate regular case-insensitive comparison from filename 
-> comparison ?
-
-For now, I will just say they are reasonable questions.
-
-Douglas
-
+cacheline: 45 bytes */
+> } __attribute__((__packed__)) FILE_ALL_INFO;
+>
+> Fixes: 0015eb6e1238 ("smb: client, common: fix fortify warnings")
+> Cc: stable@vger.kernel.org
+> Signed-off-by: Gustavo A. R. Silva <gustavoars@kernel.org>
+Looks good to me:)
+Reviewed-by: Namjae Jeon <linkinjeon@kernel.org>
+Thanks!
 
