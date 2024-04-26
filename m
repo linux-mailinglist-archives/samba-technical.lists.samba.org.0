@@ -2,66 +2,65 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id BDBA08B3370
-	for <lists+samba-technical@lfdr.de>; Fri, 26 Apr 2024 10:57:20 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4D4918B3387
+	for <lists+samba-technical@lfdr.de>; Fri, 26 Apr 2024 11:05:17 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=Q2pEeDTYgZgn4hwUL7ZGzmZnqIMR6LoTfbNN89+uR1s=; b=Ui64Wc03AELpKMWg3BzpTFrjYs
-	gVkGmtconPXsiEjPo2CCsVmJemhO4CnM335XlOpzDo5MY7kv2VQaMKBSu4YLH0dN4Cv3DiGeWgXvW
-	zF+IestyxSihvXoTC9ojfvNYhg+6CrodAUp1FOR4r06aSpf7jNgAQrvV/AiuhsMcMmpfJLrK9z4Ey
-	0rpJT++4CeySObh8Ga1fzlHXIXXTFT7FE6BgfWS4DNKGtjke5FcbLdErcbg8od7uMJOuahpHCnCsL
-	cq1nQk5BbRL9x/sHJJo951eRmxpVN0hJkuVDn353mLg8oLNKL6MGrIUJXOk+KZSM3Pbi3lhJQsej6
-	2tfIFBVA==;
-Received: from ip6-localhost ([::1]:58358 helo=hr1.samba.org) 
+	bh=6NNWrHZ8QYLMXcRHSm4QHBMib2eMk/fIeCbE+svUghk=; b=ZFai6jDNFetYCvBVnaLEDmAMA0
+	dO9TwgP3ybzTPNVV2arV9sThJomhz4IIM1AUBPb0oA1wyjq1XQxfstDU0/Iejb9hxLKmVZ5ERyDuj
+	wDkDACJz37B8mglYgwVwy206sSJ0nYPgSImQB3tyLtJaQkgUYSK+jkZoCjjsLLiD3sGsJNrtMuKRP
+	eGnmkO9sYuK2+ccAs+sC7RKjvKzXCcys6DEJCtFm+W1sgSWv+7radIj2oS2fwkUwHDlVncb9AWlGc
+	T+5yd8vlshzlQ6cBBrrBG6YOmKqf0vwyo6M6+owsWGdSY1dVX7FBaJDtCCu+bRcjyrlxGRsozget9
+	ojlUrOaw==;
+Received: from ip6-localhost ([::1]:18506 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1s0HOI-005ndW-DT; Fri, 26 Apr 2024 08:57:10 +0000
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124]:25620) 
+	id 1s0HVw-005njG-UU; Fri, 26 Apr 2024 09:05:05 +0000
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124]:41007) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__AES_256_GCM:256) (Exim)
- id 1s0HOD-005ndP-FG
- for samba-technical@lists.samba.org; Fri, 26 Apr 2024 08:57:07 +0000
+ id 1s0HVr-005nj6-Bf
+ for samba-technical@lists.samba.org; Fri, 26 Apr 2024 09:05:02 +0000
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1714121822;
+ s=mimecast20190719; t=1714122296;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=Q2pEeDTYgZgn4hwUL7ZGzmZnqIMR6LoTfbNN89+uR1s=;
- b=NgE9NuW3Q9dl9+xBugFx0FGtexSevTrtLhxV1DjCn8n1BXySfyRcQJm2btokrT6h8HdhSb
- XIoIy/wU7X7BAk/u9S/BrLfHzex44Aule7Z8Arz63Mn+QFSsHP0Ss0UJnPR2VUzvSattkv
- kBFdJc28ibbP1VJw7Yab/UqoyCxk2qs=
+ bh=6NNWrHZ8QYLMXcRHSm4QHBMib2eMk/fIeCbE+svUghk=;
+ b=a2SO1Y/WSQU+Nd2htTqOoltlK0VCKyAUbWh/K62gTFT9U0/WuLvLGu6Vgpm1Iw12H9sFyN
+ blkFoh0mc4gCOhklwvFYOGhZZ55j7R+ARjpUhXs2SySllh+mtot7CISTjcnNGLKdwGkT/Y
+ sYTjVCuu64D37ZsEvwUORA1F/vRvbxE=
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1714121822;
+ s=mimecast20190719; t=1714122296;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=Q2pEeDTYgZgn4hwUL7ZGzmZnqIMR6LoTfbNN89+uR1s=;
- b=NgE9NuW3Q9dl9+xBugFx0FGtexSevTrtLhxV1DjCn8n1BXySfyRcQJm2btokrT6h8HdhSb
- XIoIy/wU7X7BAk/u9S/BrLfHzex44Aule7Z8Arz63Mn+QFSsHP0Ss0UJnPR2VUzvSattkv
- kBFdJc28ibbP1VJw7Yab/UqoyCxk2qs=
-Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
- [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-17-qRaC9TC_OIC8O5N87ajHKw-1; Fri, 26 Apr 2024 04:57:00 -0400
-X-MC-Unique: qRaC9TC_OIC8O5N87ajHKw-1
-Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.rdu2.redhat.com
- [10.11.54.6])
+ bh=6NNWrHZ8QYLMXcRHSm4QHBMib2eMk/fIeCbE+svUghk=;
+ b=a2SO1Y/WSQU+Nd2htTqOoltlK0VCKyAUbWh/K62gTFT9U0/WuLvLGu6Vgpm1Iw12H9sFyN
+ blkFoh0mc4gCOhklwvFYOGhZZ55j7R+ARjpUhXs2SySllh+mtot7CISTjcnNGLKdwGkT/Y
+ sYTjVCuu64D37ZsEvwUORA1F/vRvbxE=
+Received: from mimecast-mx02.redhat.com (mx-ext.redhat.com [66.187.233.73])
+ by relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-596-6fuerLXVOliK6Ject2zWEg-1; Fri,
+ 26 Apr 2024 05:04:51 -0400
+X-MC-Unique: 6fuerLXVOliK6Ject2zWEg-1
+Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.5])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 5B03E8032FA;
- Fri, 26 Apr 2024 08:56:59 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 5AC5B3830095;
+ Fri, 26 Apr 2024 09:04:51 +0000 (UTC)
 Received: from warthog.procyon.org.uk (unknown [10.42.28.200])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 146B72166B31;
- Fri, 26 Apr 2024 08:56:57 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 148F1EC685;
+ Fri, 26 Apr 2024 09:04:49 +0000 (UTC)
 Organization: Red Hat UK Ltd. Registered Address: Red Hat UK Ltd, Amberley
  Place, 107-111 Peascod Street, Windsor, Berkshire, SI4 1TE, United
  Kingdom.
  Registered in England and Wales under Company Registration No. 3798903
-In-Reply-To: <2145850.1714121572@warthog.procyon.org.uk>
-References: <2145850.1714121572@warthog.procyon.org.uk>
- <Zin4G2VYUiaYxsKQ@xsang-OptiPlex-9020>
+In-Reply-To: <Zin4G2VYUiaYxsKQ@xsang-OptiPlex-9020>
+References: <Zin4G2VYUiaYxsKQ@xsang-OptiPlex-9020>
  <202404161031.468b84f-oliver.sang@intel.com>
  <164954.1713356321@warthog.procyon.org.uk>
 To: Oliver Sang <oliver.sang@intel.com>
@@ -69,11 +68,11 @@ Subject: Re: [dhowells-fs:cifs-netfs] [cifs] b4834f12a4:
  WARNING:at_fs/netfs/write_collect.c:#netfs_writeback_lookup_folio
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
-Content-ID: <2145948.1714121817.1@warthog.procyon.org.uk>
+Content-ID: <2146095.1714122289.1@warthog.procyon.org.uk>
 Content-Transfer-Encoding: quoted-printable
-Date: Fri, 26 Apr 2024 09:56:57 +0100
-Message-ID: <2145949.1714121817@warthog.procyon.org.uk>
-X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.6
+Date: Fri, 26 Apr 2024 10:04:49 +0100
+Message-ID: <2146096.1714122289@warthog.procyon.org.uk>
+X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.5
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -97,26 +96,29 @@ Cc: Shyam Prasad N <nspmangalore@gmail.com>, Steve French <sfrench@samba.org>,
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-David Howells <dhowells@redhat.com> wrote:
+Okay I got it to install somehow by moving tmp-pkg to pkg, running lkp
+install (which failed), then moving it back and running lkp install again,
+which succeeded.
 
-> =3D=3D> Retrieving sources...
->   -> Source is https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/=
-linux.git
->   -> Cloning linux git repo...
-> Cloning into bare repository '/root/lkp-tests/programs/turbostat/pkg/lin=
-ux'...
+Running lkp split-job gives me:
 
-Actually, it cloned the linux git repo twice by http, once into:
+/root/lkp-tests/lib/erb.rb:35: warning: Passing safe_level with the 2nd ar=
+gument of ERB.new is deprecated. Do not use it, and specify other argument=
+s as keyword arguments.
+/root/lkp-tests/lib/erb.rb:35: warning: Passing trim_mode with the 3rd arg=
+ument of ERB.new is deprecated. Use keyword argument like ERB.new(str, tri=
+m_mode: ...) instead.
+/root/lkp-tests/lib/erb.rb:35: warning: Passing safe_level with the 2nd ar=
+gument of ERB.new is deprecated. Do not use it, and specify other argument=
+s as keyword arguments.
+/root/lkp-tests/lib/erb.rb:35: warning: Passing trim_mode with the 3rd arg=
+ument of ERB.new is deprecated. Use keyword argument like ERB.new(str, tri=
+m_mode: ...) instead.
+job.yaml =3D> ./job-performance-1HDD-btrfs-cifs-filemicro_seqwriterandvarg=
+am.f-b4834f12a4df607aaedc627fa9b93f3b18f664ba-debian-12-x86_64-20240206.cg=
+z.yaml
 
-	programs/turbostat/pkg/linux/
-
-which is a bare repo, and once into:
-
-	tmp-pkg/turbostat/src/linux/
-
-which has all the files checked out.
-
-If it must clone linux, can it at least clone one from the other?
+It looks like some of the Ruby scripting is out of date.
 
 David
 
