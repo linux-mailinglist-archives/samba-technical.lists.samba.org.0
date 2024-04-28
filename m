@@ -2,77 +2,62 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 88BED8B345D
-	for <lists+samba-technical@lfdr.de>; Fri, 26 Apr 2024 11:43:20 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 339008B4DA8
+	for <lists+samba-technical@lfdr.de>; Sun, 28 Apr 2024 21:42:16 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=6Ii9FxdCUhkSL/NP0ErV+eSCcUrQRGZSNZBjNMLs3pc=; b=of/OWZCgUDj/0gmnGqbqNgL6Tm
-	By2s5tih07+T6IPErrNZgFuNiOzqFvkD4KBsJXgFF/eQ/T3LixZS9qXO9uOfJS0Q9FrDkR0XZvR2r
-	unp9NsvEFp+ky2wEKyF6Nb12ejJk7T/fH1I5YSzwdIf8xUpvab9raGsDyyu2EODA6q1Vxj+/xcX85
-	xuABnoNHipXWcZFVRvFc6ByBm28hjoP0u06U0OlryEUNtnar0wx1GhJRJAuedVcwyUjR0MuSmUqd+
-	QhBQ0g1nsXbhF8r813MuwBHFSgAaFmITus7vrYRjjtnPIpIPVY8VbALcr5eXxz9Zse5n0tNDAqKXF
-	AQDOxaBg==;
-Received: from ip6-localhost ([::1]:63092 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=W7B77MMYlzqldg99ccBq2wH+c+UxOC4I7BCkF7uClEg=; b=f6tfb9b24fKq3UX26Kqds7tC5w
+	rX8GKdf/LE9gRDTw3giArJLSv/L6Aqw2ClEriP2SbT9xJn8BwDLu5Tg3nJ/VUf8Nq41R23bGRfy2v
+	kTMgthQOUZwHY8RU49Mkg7Lh5pOQnXKPGgIv1qiducbkd3/3HhyjNzJH4aHbqVWJ96bTa1HNY77DY
+	JVdtRKW3mL9b9Np585oK4AotLwyNHWPHOqszmoEFDk18vPiv2VaAhLweoEF8pH9lMoLS5Z169PkLV
+	xuK7bk0fndhe3Le3HZqxkbup35fKOCw0m34zAeNoEZca+3ly3hctfGSZ607DPIR6EVraDRBpshGFi
+	CVqdLzTg==;
+Received: from ip6-localhost ([::1]:42480 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1s0I6Z-005nu5-Sd; Fri, 26 Apr 2024 09:42:55 +0000
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124]:47893) 
+	id 1s1AOy-005wqH-Iw; Sun, 28 Apr 2024 19:41:32 +0000
+Received: from mail-lj1-x22e.google.com ([2a00:1450:4864:20::22e]:49403) 
  by hr1.samba.org with esmtps
- (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__AES_256_GCM:256) (Exim)
- id 1s0I6V-005nty-04
- for samba-technical@lists.samba.org; Fri, 26 Apr 2024 09:42:53 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1714124567;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=6Ii9FxdCUhkSL/NP0ErV+eSCcUrQRGZSNZBjNMLs3pc=;
- b=JTwYE2yJnbB9DUaHYzxXlupffBYRjk/qSmKp2+aDrtVmUZOYvrSGDT+BpLox5gcUSOuB5w
- GAwpZsyrtEeUkLHYSYXCFs2znXpUmg3wCZg1WXVj9zm2x2Gx5zjrS6Cn8HLwKJcmavxk7B
- r8/WME4D/+NujPKZUtSk6F9TnItOXk8=
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1714124567;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=6Ii9FxdCUhkSL/NP0ErV+eSCcUrQRGZSNZBjNMLs3pc=;
- b=JTwYE2yJnbB9DUaHYzxXlupffBYRjk/qSmKp2+aDrtVmUZOYvrSGDT+BpLox5gcUSOuB5w
- GAwpZsyrtEeUkLHYSYXCFs2znXpUmg3wCZg1WXVj9zm2x2Gx5zjrS6Cn8HLwKJcmavxk7B
- r8/WME4D/+NujPKZUtSk6F9TnItOXk8=
-Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
- [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-454-nd8bGkfbPNO6Q_6JHXsyew-1; Fri, 26 Apr 2024 05:42:44 -0400
-X-MC-Unique: nd8bGkfbPNO6Q_6JHXsyew-1
-Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.rdu2.redhat.com
- [10.11.54.4])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 7825C8001B2;
- Fri, 26 Apr 2024 09:42:43 +0000 (UTC)
-Received: from warthog.procyon.org.uk (unknown [10.42.28.200])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 35B522033A49;
- Fri, 26 Apr 2024 09:42:42 +0000 (UTC)
-Organization: Red Hat UK Ltd. Registered Address: Red Hat UK Ltd, Amberley
- Place, 107-111 Peascod Street, Windsor, Berkshire, SI4 1TE, United
- Kingdom.
- Registered in England and Wales under Company Registration No. 3798903
-In-Reply-To: <Zin4G2VYUiaYxsKQ@xsang-OptiPlex-9020>
-References: <Zin4G2VYUiaYxsKQ@xsang-OptiPlex-9020>
- <202404161031.468b84f-oliver.sang@intel.com>
- <164954.1713356321@warthog.procyon.org.uk>
-To: Oliver Sang <oliver.sang@intel.com>
-Subject: Re: [dhowells-fs:cifs-netfs] [cifs] b4834f12a4:
- WARNING:at_fs/netfs/write_collect.c:#netfs_writeback_lookup_folio
+ (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1s1AOt-005wqA-OY
+ for samba-technical@lists.samba.org; Sun, 28 Apr 2024 19:41:30 +0000
+Received: by mail-lj1-x22e.google.com with SMTP id
+ 38308e7fff4ca-2db6f5977e1so43054301fa.2
+ for <samba-technical@lists.samba.org>; Sun, 28 Apr 2024 12:41:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1714333282; x=1714938082; darn=lists.samba.org;
+ h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=W7B77MMYlzqldg99ccBq2wH+c+UxOC4I7BCkF7uClEg=;
+ b=FahVaIT8YGaPgM6n5657qcWovWi2SSTJY7/o6PxNo735dlMYAXZeahmQyxobyn793R
+ VKox5mR2HR1KyExR7shTPmSWxTGXlKqtIpf3/R0ap4ZljQQ/SX8uaHYv/3od23+SDl0L
+ 1Wf0J+AUbtYCCiH+vwPi2fbz2VsEzTQTj2lLO1fxM8FyO8QFjjZoMzA9MaTlrSB1q3fW
+ IhgWZlfM8i4ZiGoB2zKOn6O91xZ7lmsx9ST1dn6CkLDJnAWIuxbL5LrxMqdIwrKaN3ue
+ 2CM45naRahYqh6Su4hpdVkqT7NBvBtmDhr2LPjNrVLqq+2WPmG/HoDc1PR2KOxwM6AWB
+ 4OWg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1714333282; x=1714938082;
+ h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=W7B77MMYlzqldg99ccBq2wH+c+UxOC4I7BCkF7uClEg=;
+ b=fUQkVHsIGNH6ESBNqdt9kB80M3guj8JQ8ygB2Ksob7jmRiOULJAUx0b1A1g5Qw0/lH
+ RhDHoOjN8FbrQloJJvS2vdXD2fi2pz/u/DAL4SYcKYhwy53PTaDyVuwOQE9E815sBd83
+ limk3oGYDBLjCqiwOjHg33KsSKfpGbvxwyF9T81anqlgLU4VEmd+Lqz5o5C2EZwHygPK
+ lxbXEQs+MRupLowjScEj/3IbbXVdowo4GNYV9J9jfHow/0KOm+a8qXuGKPcbT2sclS0G
+ FkVMDepLElGf2pJZiJk5vHZ8IAlwNjEi1bsHzRhGGodwhKuot7xGLmQt10zXyIEmCCog
+ Lqzw==
+X-Gm-Message-State: AOJu0Yx2m+ZNZnOKXbTXmrAcFlUxneWb/u/xF3L2dSiwbVqsUjcFigsJ
+ HvzuigKBKW6jev4Ofo/vGZFNeYJamDaug4F6cF/VMs7F9S/nPzfji8RZKW9EPPCv5d4FBwb2dM0
+ VEG+GTNDIzy//iN5oXXmpKAU3U3KfbwHw
+X-Google-Smtp-Source: AGHT+IE6VvUGnTLqRBWdNKVOHLHKEmUQk6ZMzPtL7KAkCL9afFg8yqmmf1rDIsuZT3TRSqXP0LgsV5wU/W3tc2+AnUA=
+X-Received: by 2002:ac2:46cd:0:b0:519:2828:c284 with SMTP id
+ p13-20020ac246cd000000b005192828c284mr4667717lfo.65.1714333281863; Sun, 28
+ Apr 2024 12:41:21 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-ID: <2146613.1714124561.1@warthog.procyon.org.uk>
-Content-Transfer-Encoding: quoted-printable
-Date: Fri, 26 Apr 2024 10:42:41 +0100
-Message-ID: <2146614.1714124561@warthog.procyon.org.uk>
-X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.4
+Date: Sun, 28 Apr 2024 14:41:10 -0500
+Message-ID: <CAH2r5muXqpZN1mu=WAhaxXe0yRB7Rib_CaoGo3h15wwcSPZFuw@mail.gmail.com>
+Subject: Samba ctime still reported incorrectly
+To: samba-technical <samba-technical@lists.samba.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -86,52 +71,25 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: David Howells via samba-technical <samba-technical@lists.samba.org>
-Reply-To: David Howells <dhowells@redhat.com>
-Cc: Shyam Prasad N <nspmangalore@gmail.com>, Steve French <sfrench@samba.org>,
- lkp@intel.com, linux-cifs@vger.kernel.org, Rohith
- Surabattula <rohiths.msft@gmail.com>, samba-technical@lists.samba.org,
- Jeff Layton <jlayton@kernel.org>, dhowells@redhat.com,
- linux-fsdevel@vger.kernel.org, oe-lkp@lists.linux.dev, netfs@lists.linux.dev
+From: Steve French via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Steve French <smfrench@gmail.com>
+Cc: CIFS <linux-cifs@vger.kernel.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Trying to do "lkp run job.yaml" doesn't work:
+I did another test of the Samba server ctime bug on Samba master
+(4.21.0pre1) and Samba server is still broken in how it reports ctime.
+An example scenario is simple, creating a hardlink is supposed to
+update ctime on a file (and this works fine to Windows server and
+ksmbd etc) but Samba server mistakenly reports ctime as mtime (unless
+you mount with the "posix" mount option).  This e.g. breaks xfstest
+generic/236 when run to Samba
 
-/root/lkp-tests/filters/need_kconfig.rb:20:in `read_kernel_kconfigs': .con=
-fig doesn't exist: /pkg/linux/x86_64-rhel-8.3/gcc-13/b4834f12a4df607aaedc6=
-27fa9b93f3b18f664ba/.config (Job::ParamError)
-        from /root/lkp-tests/filters/need_kconfig.rb:176:in `block in expa=
-nd_expression'
-        from /root/lkp-tests/lib/erb.rb:51:in `eval'
-        from /root/lkp-tests/lib/erb.rb:51:in `expand_expression'
-        from /root/lkp-tests/lib/job.rb:646:in `evaluate_param'
-        from /root/lkp-tests/lib/job.rb:694:in `block in expand_params'
-        from /root/lkp-tests/lib/job.rb:79:in `block in for_each_in'
-        from /root/lkp-tests/lib/job.rb:78:in `each'
-        from /root/lkp-tests/lib/job.rb:78:in `for_each_in'
-        from /root/lkp-tests/lib/job.rb:691:in `expand_params'
-        from /root/lkp-tests/bin/run-local:138:in `<main>'
+More information is at:
+https://bugzilla.samba.org/show_bug.cgi?id=10883
 
-I tried to run the filebench directly, but that only wants to hammer on
-/tmp/bigfileset/ and also wants a file for SHM precreating in /tmp.  I was
-able to get it to work with cifs by:
+-- 
+Thanks,
 
-touch /tmp/filebench-shm-IF6uX8
-truncate -s 184975240 /tmp/filebench-shm-IF6uX8
-mkdir /tmp/bigfileset
-mount //myserver/test /tmp/bigfileset/ -o user=3Dshares,pass=3D...,cache=3D=
-loose
-
-/root/lkp-tests/programs/filebench/pkg/filebench-lkp/lkp/benchmarks/filebe=
-nch/bin/filebench -f /lkp/benchmarks/filebench/share/filebench/workloads/f=
-ilemicro_seqwriterandvargam.f
-
-It tries to remove /tmp/bigfileset/, can't because it's mounted, and then
-continues anyway.
-
-It should be easier than this ;-)
-
-David
-
+Steve
 
