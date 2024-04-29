@@ -2,61 +2,48 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4E4B58B5D59
-	for <lists+samba-technical@lfdr.de>; Mon, 29 Apr 2024 17:21:06 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1388C8B5E26
+	for <lists+samba-technical@lfdr.de>; Mon, 29 Apr 2024 17:53:03 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=A9ktU0Nf4obPdWQwapwO4Fue1aOYnmHa/ofJdgBDRUs=; b=OQ8WAu9uzxkOqphQZO582dKwQ8
-	AoDb8BcA4IDLa05pQd/GGvJI+Ej35L9F1a2vq4U3cURH4UHJSeOEqKd7Xm2lIQqWibG8mYvMczPi/
-	Tofhwp3iaCKl+lIbjNn21FswzDD7m/GlDAkViRyC2l4nikn1lreDanjRts1o5KuBVUvVhbSs77zJo
-	dGTwC708CGKsriEuuMXOzittye0WscxRbywYgBpb0Mp2cvBSajtSV5W6uyQaM1oMSJI4QvxICe4hx
-	8KMQgZaWemMIKwPHDj6BUCb7lEZ886PAPHHDjZ32NonowjLQKS50iA9tGe/o2GrH1SlMesHmTGipg
-	K+d9IX1g==;
-Received: from ip6-localhost ([::1]:63060 helo=hr1.samba.org) 
+	bh=/zIMuv6S6ehyd3dOslxT4P0Stq5OCWEq8Rr+/vXrr7k=; b=Wn8wSsSsFKuKUHHhYxMY9H6+X4
+	kFMWbKk2FtDtlMpvs7Zagku5R7f7xI9RB15mEdclO+2hslA3tICTg5mirtkwznA1xCZE0eTseqH/W
+	AIKcBYO7lxHNSEHBkPzLlC54GnUAbV1hkHcIDGiGpnDdhUSsW2oNZxhANvbZHl+VWyV/AfdKnf4Mi
+	bmAfaSIuCiQkEBkB6ZDgo7yjJQScbptWs22AH+Jr9Mizn97OtytZo2RRf0iMl3pqEONK0CGNA+p+Y
+	iHzc3a0oLCsOR5vUCQV1TjPob81IBs8GbmBfVVItaZDUH08wxasrdvniNdjijtXT7Jbv2eR9opSOz
+	+rBOoVBw==;
+Received: from ip6-localhost ([::1]:42664 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1s1Snx-0060Lp-MF; Mon, 29 Apr 2024 15:20:33 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:25676) 
+	id 1s1TIt-0060jY-Jc; Mon, 29 Apr 2024 15:52:31 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:28084) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1s1Snt-0060Li-5Y
- for samba-technical@lists.samba.org; Mon, 29 Apr 2024 15:20:31 +0000
+ (Exim) id 1s1TIp-0060jR-Ho
+ for samba-technical@lists.samba.org; Mon, 29 Apr 2024 15:52:30 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=From:Cc:To:Date:Message-ID;
- bh=A9ktU0Nf4obPdWQwapwO4Fue1aOYnmHa/ofJdgBDRUs=; b=zpGPjFtnZ6GaKQKZXq10ucwhLa
- VtWqH5hnkxprC+3k6fB9xaso9eMcly2wLESyp0c3jeqr+FDBkGrf4KA826rEe5bgeeAWyHm/1bCaV
- c3Dbuc9KRF9o6QxxdqZGbz1oxJ5h5iG9JqJT2iHL662kdkfqfQ4qf9LQgZrKaIc5+yGQvMnpXnBnY
- lx02FXgcCQH0zOCSIFLs0k5MA5RaTZyLkG9Q/9n2WpVTHbHtFMM+ZhWZQzMkUpTvetstaVzQOQFZT
- 8ravFC28+1TzSrjmri3stsdv6t6nOoVdbvqrCJ6b0WyDVkNLfnsXCBsNhBoFCeQ0uZRdhhMlQ7jLX
- 3UE51s8mvFl1xn4CA23bNBN1eYeyhUdME1u3Gymq/elQsggrCstgeG3vX8B8bH1r/HuaBhtaXSbSp
- chjmGOmRHh0BR7+z3IwE9VswiihPuEgnJ8bmZIk5bUY2mx3GUM4NZNhz9hB7CYFlZqLQK1lrDiXFv
- qmpIWBbP36Ms89qytcWuukrU;
+ bh=/zIMuv6S6ehyd3dOslxT4P0Stq5OCWEq8Rr+/vXrr7k=; b=XfMeb1tUCGT19BPnRj0PhUYb+U
+ gtjhw36jNj40YFBqqFr9oxPJRZ8MsTKmwvOiT+2wXvT9aHYlVpNuw/6l8cleTqFQ8c7txkSm2ajnv
+ WGWj2fnTH7gwkeuzgYEDc2aq6uvapt8MBhGqLYBJNm0+u8+o2Qg6/i9sxO6h3T8ZHgvHi5Re2whNZ
+ tyQwZUr6K1r5z54hoKOM/KqiON7fVz6hbS2A+OGqFTDLBjeaPf+mmYuliJ3KgG4J9WalopBkq2YnQ
+ RMzxmbLE5U/+UDi4Sjljedrn7+hlddjdIfkQ8FUzy1hhcomzxCe6loEg4KhC7VURM7v8AEJb8vN8k
+ ojfxeGcOeaQZzRceTgi9Jp7eooFxXb9uRX4qSGzNqXMeNzoDMjYrL8ERyIQgjy856qd0DfbpFsLfO
+ wk/E4W7rYIXJBWtDkKgL5IjUs3Y6Zfl7R7fZYkpwoPAFELaPpKX8UT/Ot+TPkqfXitKUTjW0NSYys
+ 9JPjLRaWi8FAuTQuDxvROsIq;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1s1Snn-008ww2-0f; Mon, 29 Apr 2024 15:20:23 +0000
-Message-ID: <2365b657-bea4-4527-9fce-ad11c690bde3@samba.org>
-Date: Mon, 29 Apr 2024 17:20:22 +0200
+ (Exim) id 1s1TIp-008xF6-04; Mon, 29 Apr 2024 15:52:27 +0000
+Message-ID: <8c63936e-3d09-402f-88e5-3115c32da7e6@samba.org>
+Date: Mon, 29 Apr 2024 17:52:26 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH net-next 0/5] net: In-kernel QUIC implementation with
- Userspace handshake
-To: Xin Long <lucien.xin@gmail.com>
-References: <cover.1710173427.git.lucien.xin@gmail.com>
- <74d5db09-6b5c-4054-b9d3-542f34769083@samba.org>
- <CADvbK_dzVcDKsJ9RN9oc0K1Jwd+kYjxgE6q=ioRbVGhJx7Qznw@mail.gmail.com>
- <f427b422-6cfc-45ac-88eb-3e7694168b63@samba.org>
- <CADvbK_cA-RCLiUUWkyNsS=4OhkWrUWb68QLg28yO2=8PqNuGBQ@mail.gmail.com>
- <438496a6-7f90-403d-9558-4a813e842540@samba.org>
- <CADvbK_fkbOnhKL+Rb+pp+NF+VzppOQ68c=nk_6MSNjM_dxpCoQ@mail.gmail.com>
- <1456b69c-4ffd-4a08-b120-6a00abf1eb05@samba.org>
- <CADvbK_cQRpyzHG4UUOzfgmqLndvpx5Cd+d59rrqGRp0ic3PyxA@mail.gmail.com>
- <95922a2f-07a1-4555-acd2-c745e59bcb8e@samba.org>
- <CADvbK_eR4++HbR_RncjV9N__M-uTHtmqcC+_Of1RKVw7Uqf9Cw@mail.gmail.com>
- <CADvbK_dEWNNA_i1maRk4cmAB_uk4G4x0eZfZbrVX=zJ+2H9o_A@mail.gmail.com>
- <dc3815af-5b46-452b-8bcc-30a0934740a2@samba.org>
- <CADvbK_e__qpCa44uF+J2Z+2Lhb2suktTNT+CeQayk_uhckVYqQ@mail.gmail.com>
+Subject: Re: samba-gpoupdate
+To: David Mulder <dmulder@suse.com>
+References: <a41d2cce-e9d5-4322-80f1-e04aae0505c7@samba.org>
+ <ca6277a8-4b77-4842-a18d-c10b1e93f810@suse.com>
 Content-Language: en-US, de-DE
-In-Reply-To: <CADvbK_e__qpCa44uF+J2Z+2Lhb2suktTNT+CeQayk_uhckVYqQ@mail.gmail.com>
+In-Reply-To: <ca6277a8-4b77-4842-a18d-c10b1e93f810@suse.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
@@ -74,84 +61,151 @@ List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
 From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
 Reply-To: Stefan Metzmacher <metze@samba.org>
-Cc: "linux-cifs@vger.kernel.org" <linux-cifs@vger.kernel.org>,
- Sabrina Dubroca <sd@queasysnail.net>, network dev <netdev@vger.kernel.org>,
- Jeff Layton <jlayton@kernel.org>, Namjae Jeon <linkinjeon@kernel.org>,
- Steve French <smfrench@gmail.com>, Eric Dumazet <edumazet@google.com>,
- Chuck Lever III <chuck.lever@oracle.com>, Tyler Fanelli <tfanelli@redhat.com>,
- Samba Technical <samba-technical@lists.samba.org>, kuba@kernel.org,
- Paolo Abeni <pabeni@redhat.com>, davem@davemloft.net,
- Pengtao He <hepengtao@xiaomi.com>
+Cc: Samba Technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi Xin Long,
+Hi David,
+
+thanks for the feedback so far!
+
+>> Do we really want to apply all those gp_extensions by default?
+>> I would have assumed that the admin needs to configure them explicitly.
+>>
+>> Pure ad dc samba internal stuff like gp_access_ext, gp_krb_ext
+>> and my new gp_privilege_rights_ext should run by default on an ad dc
+>> and only there (the server role is checked in the code).
+>>
+>> But all others messing with critical stuff in /etc looks dangerous
+>> without explicitly selecting them.
+>>
+>> I'm also not sure how the things from get_gp_client_side_extensions() work.
+> 
+> That's for loading custom client extensions (for example, if a company has internal policies they want applied). I'm not sure if anyone is using this.
+> 
+> See https://dmulder.github.io/group-policy-book/writing-group-policy-extensions.html#cse
+> 
+> The `register_gp_extension` and `unregister_gp_extension` functions control the policies added by get_gp_client_side_extensions().
+> 
+> Notice the `samba-tool gpo cse register` and `samba-tool gpo cse unregister` commands also.
+
+Ok, I think it would be useful if all extensions would go via this and would
+be listed by 'samba-tool gpo cse list'.
+
+In addition something like 'samba-tool gpo cse enable' and
+'samba-tool gpo cse disable' would be useful in order to give the admin more control
+over it. Then 'samba-tool gpo cse list' could list all active once
+and 'samba-tool gpo cse list-available' would list all possible once.
+
+The only question is how this could be done in a compatible way compared
+to released samba versions.
+
+>> Also 'apply group policies = yes' meaning we apply computer and user gpo's
+>> looks also very unflexible.
+> Agreed. This could use some work.
+
+>> Maybe we could have a 'samba-gpoupdate --ad-dc-computer' that runs
+>> from a task forked from 'samba' instead of winbindd.
+>> And that will only do ad dc specific stuff.
+>> And the current mode would only work on domain members?
+> Fine with me. Also, if an admin would really like to have a certain gpo apply to the ADDC, they can always re-enable it with `samba-tool gpo cse register`.
+
+I think some ad dc specific extensions would be registered and enabled by default.
+
+And something like a 'samba-tool gpo cse register --all-available' could be used to
+restore the old behavior. Also a 'samba-tool gpo cse register --all-for-ad-dc'...
 
 >>
-> Just confirmed from other ebpf experts, there are no in-kernel interfaces
-> for loading and interacting with BPF maps/programs(other than from BPF itself).
-> 
-> It seems that we have to do this match in QUIC stack. In the latest QUIC
-> code, I added quic_packet_get_alpn(), a 59-line function, to parse ALPNs
-> and then it will search for the listen sock with these ALPNs in
-> quic_sock_lookup().
-> 
-> I introduced 'alpn_match' module param, and it can be enabled when loading
-> the module QUIC by:
-> 
->    # modprobe quic alpn_match=1
-> 
-> You can test it by tests/sample_test in the latest code:
-> 
->    Start 3 servers:
-> 
->      # ./sample_test server 0.0.0.0 1234 \
->          ./keys/server-key.pem ./keys/server-cert.pem smbd
->      # ./sample_test server 0.0.0.0 1234 \
->          ./keys/server-key.pem ./keys/server-cert.pem h3
->      # ./sample_test server 0.0.0.0 1234 \
->          ./keys/server-key.pem ./keys/server-cert.pem ksmbd
-> 
->    Try to connect on clients with:
-> 
->      # ./sample_test client 127.0.0.1 1234 ksmbd
->      # ./sample_test client 127.0.0.1 1234 smbd
->      # ./sample_test client 127.0.0.1 1234 h3
-> 
->    to see if the corresponding server responds.
-> 
-> There might be some concerns but it's also a useful feature that can not
-> be implemented in userland QUICs. The commit is here:
-> 
-> https://github.com/lxin/quic/commit/de82f8135f4e9196b503b4ab5b359d88f2b2097f
-> 
-> Please check if this is enough for SMB applications.
+>> Also note this seems to fail badly for users not from the primary domain...
+> I wasn't aware of that. What error are you getting?
 
-It look great thanks!
+As far as I can see we're using the machine credentials to fetch the user gpos
+and try fetch them from a dc in the servers domain not in the users domain.
 
-> Note as a listen socket is now identified by [address + port + ALPN] when
-> alpn_match=1, this feature does NOT require SO_REUSEPORT socket option to
-> be set, unless one wants multiple sockets to listen to
-> the same [address + port + ALPN].
+I think windows fetch user gpos as user from the users domain.
+I also think the servers machine credentials may not have permissions to fetch the users gpos,
+even in the same domain.
 
-I'd argue that this should be the default and be required before listen()
-or maybe before bind(), so that it can return EADDRINUSE. As EADDRINUSE should only
-happen for servers it might be useful to have a QUIC_SOCKOPT_LISTEN_ALPN instead of
-QUIC_SOCKOPT_ALPN. As QUIC_SOCKOPT_ALPN on a client socket should not generate let
-bind() care about the alpn value at all.
+I also saw that we use the account name as key into the apply logs (and maybe other stuff),
+I guess we want to use the account sid instead as that can never change, while the name can.
 
-For listens on tcp you also need to specify an explicit port (at least in order
-to be useful).
+Any idea how we can go this such a change:
 
-And it would mean that all application would use it and not block other applications
-from using an explicit alpn.
+> diff --git a/source4/scripting/bin/samba-gpupdate b/source4/scripting/bin/samba-gpupdate
+> index 503a299a6b03..7b882575747c 100755
+> --- a/source4/scripting/bin/samba-gpupdate
+> +++ b/source4/scripting/bin/samba-gpupdate
+> @@ -30,29 +30,7 @@ sys.path.insert(0, "bin/python")
+>  import optparse
+>  from samba import getopt as options
+>  from samba.gp.gpclass import apply_gp, unapply_gp, GPOStorage, rsop
+> -from samba.gp.gp_sec_ext import gp_krb_ext, gp_access_ext, gp_privilege_rights_ext
+>  from samba.gp.gp_ext_loader import get_gp_client_side_extensions
+> -from samba.gp.gp_scripts_ext import gp_scripts_ext, gp_user_scripts_ext
+> -from samba.gp.gp_sudoers_ext import gp_sudoers_ext
+> -from samba.gp.vgp_sudoers_ext import vgp_sudoers_ext
+> -from samba.gp.gp_smb_conf_ext import gp_smb_conf_ext
+> -from samba.gp.gp_msgs_ext import gp_msgs_ext
+> -from samba.gp.vgp_symlink_ext import vgp_symlink_ext
+> -from samba.gp.vgp_files_ext import vgp_files_ext
+> -from samba.gp.vgp_openssh_ext import vgp_openssh_ext
+> -from samba.gp.vgp_motd_ext import vgp_motd_ext
+> -from samba.gp.vgp_issue_ext import vgp_issue_ext
+> -from samba.gp.vgp_startup_scripts_ext import vgp_startup_scripts_ext
+> -from samba.gp.vgp_access_ext import vgp_access_ext
+> -from samba.gp.gp_gnome_settings_ext import gp_gnome_settings_ext
+> -from samba.gp.gp_cert_auto_enroll_ext import gp_cert_auto_enroll_ext
+> -from samba.gp.gp_firefox_ext import gp_firefox_ext
+> -from samba.gp.gp_chromium_ext import gp_chromium_ext, gp_chrome_ext
+> -from samba.gp.gp_firewalld_ext import gp_firewalld_ext
+> -from samba.gp.gp_centrify_sudoers_ext import gp_centrify_sudoers_ext
+> -from samba.gp.gp_centrify_crontab_ext import gp_centrify_crontab_ext, \
+> -                                             gp_user_centrify_crontab_ext
+> -from samba.gp.gp_drive_maps_ext import gp_drive_maps_user_ext
+>  from samba.credentials import Credentials
+>  from samba.gp.util.logging import logger_init
+>  
+> @@ -100,34 +78,8 @@ if __name__ == "__main__":
+>      machine_exts, user_exts = get_gp_client_side_extensions(lp.configfile)
+>      gp_extensions = []
+>      if opts.target == 'Computer':
+> -        gp_extensions.append(gp_access_ext)
+> -        gp_extensions.append(gp_privilege_rights_ext)
+> -        gp_extensions.append(gp_krb_ext)
+> -        gp_extensions.append(gp_scripts_ext)
+> -        gp_extensions.append(gp_sudoers_ext)
+> -        gp_extensions.append(vgp_sudoers_ext)
+> -        gp_extensions.append(gp_centrify_sudoers_ext)
+> -        gp_extensions.append(gp_centrify_crontab_ext)
+> -        gp_extensions.append(gp_smb_conf_ext)
+> -        gp_extensions.append(gp_msgs_ext)
+> -        gp_extensions.append(vgp_symlink_ext)
+> -        gp_extensions.append(vgp_files_ext)
+> -        gp_extensions.append(vgp_openssh_ext)
+> -        gp_extensions.append(vgp_motd_ext)
+> -        gp_extensions.append(vgp_issue_ext)
+> -        gp_extensions.append(vgp_startup_scripts_ext)
+> -        gp_extensions.append(vgp_access_ext)
+> -        gp_extensions.append(gp_gnome_settings_ext)
+> -        gp_extensions.append(gp_cert_auto_enroll_ext)
+> -        gp_extensions.append(gp_firefox_ext)
+> -        gp_extensions.append(gp_chromium_ext)
+> -        gp_extensions.append(gp_chrome_ext)
+> -        gp_extensions.append(gp_firewalld_ext)
+>          gp_extensions.extend(machine_exts)
+>      elif opts.target == 'User':
+> -        gp_extensions.append(gp_user_scripts_ext)
+> -        gp_extensions.append(gp_user_centrify_crontab_ext)
+> -        gp_extensions.append(gp_drive_maps_user_ext)
+>          gp_extensions.extend(user_exts)
+>  
+>      if opts.rsop:
 
-Also an module parameter for this means the administrator would have to take care
-of it, which means it might be unuseable if loaded with it.
+Also change get_gplog() to take the sid (maybe in addition)
+and use the sid as primary index.
 
-I hope to find some time in the next weeks to play with this.
-Should be relatively trivial create a prototype for samba's smbd.
+With all that how can we make that compatible with current releases?
+Any idea?
 
-Thanks!
 metze
 
