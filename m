@@ -2,72 +2,70 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id C68B78B65ED
-	for <lists+samba-technical@lfdr.de>; Tue, 30 Apr 2024 00:54:16 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3C0248B68BD
+	for <lists+samba-technical@lfdr.de>; Tue, 30 Apr 2024 05:31:25 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=B+nn7rejfSMOi9pnyXQlF9+lad0HzqS+xk6hNvaRABg=; b=mDgkOVgVenJQ8pGYDPqy0PKtll
-	5gUegYq/1ev+ZjTiA+B5kIfN5NKh+jknlo+KRnIcIlQq4LBDQqDX3fZqxUt1b3Ouj4bwZDO1K+ZBQ
-	Gv86I82nq7Fc5X7FQjD5tEqxt3770VCnF/X+tbEKmGa3nriGOmIz19g4BuAgLGdgE8ZVaUuc+gyp1
-	9SbtnkwcutHhpxMxMM0ww7qcWyO+3HzXsYCVNiovZFH10bX1eLGFwKg/KdsBFXh/TO3lGmJVUQeqD
-	Etnbpuuugqume/3LUTRcIm7LUAk8sfBd9HmhF7MGApuHQ78+tsCErMWV3FCRQ82IV5DdyWUFCifn+
-	OOMrftow==;
-Received: from ip6-localhost ([::1]:62910 helo=hr1.samba.org) 
+	bh=MoZlXSZP/0npl5u6Gp7hc8n3Y3K8zPSHo+Cg+9jfJxs=; b=R6QrVU2rfpqNJ0tdTbMmbMrgOq
+	hmmQs1o7n89cttpAL4zVNUcVdPpjeu7LRkdA/FMEWkreFVoJ0rneJ4tObkWhpIoopQgv5W4n1xcsO
+	h1Y5FayoKDhhQAqG3+UBtADqSpYjsukEr+GSR3ZMrPOJQ3pWe4/0CgxVa7c6pUlvtw/682afXTohw
+	BHNaYGlWnGMwSDsn4u9nC3jLj4XLYyzFfkCp64ZAV10t0RB8ku2/dIULQi3jNdbX2kGtjHbihCG5k
+	WOlr8DqgqOetssxiZ59UkDlkpDuxHrokMC6cha8YBOBmmwOPIieVYxJpfiZP7vlGpaMJFtA7Usj6k
+	5xaC9nPg==;
+Received: from ip6-localhost ([::1]:27086 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1s1ZsP-0062Jr-Ca; Mon, 29 Apr 2024 22:53:37 +0000
-Received: from mail-lj1-x22b.google.com ([2a00:1450:4864:20::22b]:54748) 
+	id 1s1eCY-0062ms-WF; Tue, 30 Apr 2024 03:30:43 +0000
+Received: from mail-lj1-x22d.google.com ([2a00:1450:4864:20::22d]:52569) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1s1ZsK-0062Jk-Oc
- for samba-technical@lists.samba.org; Mon, 29 Apr 2024 22:53:34 +0000
-Received: by mail-lj1-x22b.google.com with SMTP id
- 38308e7fff4ca-2dd041acff1so58556311fa.1
- for <samba-technical@lists.samba.org>; Mon, 29 Apr 2024 15:53:32 -0700 (PDT)
+ (Exim) id 1s1eCU-0062mk-09
+ for samba-technical@lists.samba.org; Tue, 30 Apr 2024 03:30:40 +0000
+Received: by mail-lj1-x22d.google.com with SMTP id
+ 38308e7fff4ca-2dd6a7ae2dcso82403511fa.1
+ for <samba-technical@lists.samba.org>; Mon, 29 Apr 2024 20:30:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1714431211; x=1715036011; darn=lists.samba.org;
+ d=gmail.com; s=20230601; t=1714447833; x=1715052633; darn=lists.samba.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=B+nn7rejfSMOi9pnyXQlF9+lad0HzqS+xk6hNvaRABg=;
- b=dZapltywpTAc7CUGyTr6s60S/o4CvjGa8m6J/bu9AL0ROMeq9602xcaKAfruQbxNp6
- 2/W/hNIrwg1dznCi+yAAMeRFFtfzwpl0wWV/187StH4UscQ7W1iyFWO8bGqf2s+K6OJ/
- PfMgAysFrWeiPHvO8bjJo6pKYqHQVeG8PRW2UkSX0jGrM1ysafQUZUvY3KH5qVBHEMIb
- geagi3TLZk4pJtu+njd/nBcTtW2GDC3QL0kGAC7W7FsoFIhhjf2ODHBamnwvJUry0/bp
- stRODnLconTdLiU/B41RLcegbKqGXZNZys5QAs+wKI0C0070KN58Y4+Pen6v9E+RWZE3
- vfqQ==
+ bh=MoZlXSZP/0npl5u6Gp7hc8n3Y3K8zPSHo+Cg+9jfJxs=;
+ b=MdbpGp4uj5qvLwKbTavjktLtaDqLsGBA07Zn9d9tRvvq0MULmn/9APFj071M0udGuH
+ uJO3Y/rKrSTDSSrb8YgVl9X+3pyJiaXZ7HRtYMYbs4kL2eCEM6tKnD9PCovkq3XwxgJJ
+ y1OxEmRJzB5F8bAQLs3SgFRsOvCmkRrSHUA9xKIw8M1hubkBXnasZNcFNgfmsLbebetQ
+ FBjX2kG3233QeoMG0RLULKgNUSCNllKLwRXATjbbhpih/GqwKuUSx8f7FJ/PvyCx7TYi
+ GZcJAezru0EE3QOQmPgLM6oTRxb1Q0FtRS0YoNm/Bq9lMP+4BLzYgOgQg8gKT2RCMQhx
+ vQHw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714431211; x=1715036011;
+ d=1e100.net; s=20230601; t=1714447833; x=1715052633;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=B+nn7rejfSMOi9pnyXQlF9+lad0HzqS+xk6hNvaRABg=;
- b=ucVN3CInq15/m4ajnOS203d8mr9wZ3s7TFYWWqCsl0F/WOctb7E6dU1vk/GL/0n9ne
- f/kdx6OkOcL/cjwt2/BR9CBv8khUrwGvm/oSX+VWbbjO9kj7uPGwY/NjJkh1+Fc3Uu/m
- VX3UUYqMOEMFUuuCAcTruaFrk4jTSU9omfPXhkpygItw4hLsvv8YfZwLwoYHnXDzZTYO
- UWCvMlVTac3jE4g96EO+DkK83gbwB3cjcCd+FtSu/lHyGBbwDcQvYFkHLGka69V17utc
- RErxeOtw7/vTPBBrpugtkq81ekiM4j4rBXMxQiVEZUB5JgSqOpm7zoIF8pAihcVyyhuQ
- njmQ==
+ bh=MoZlXSZP/0npl5u6Gp7hc8n3Y3K8zPSHo+Cg+9jfJxs=;
+ b=p2rkdrPE8IxGngxmStldP8dnt6YHpqJEp7PLcdmkNBFGYCP68TRamHFERXxlHTUxEP
+ +QkkcG8ZQnvQGxgUL2wTSNULegurbM/I5eB7ZBcarK7sXxmCdwMZOBKHiAcnvTWI7UYt
+ dCwvMUYBkIFst2C3GcUGW0qise7vQoIptxeFU8KmZknXQb0L9KGr/pDfcKFW3X3nu0SK
+ PRz0w36poeJ/NPASteqEL+yD0eb2E+JQCE0P5Cl1Sb1RlKYiEYjVgm+XabsaMtLOXBao
+ M0EOEU6EQBlZmWbAiSn35oJIGsy6D8qdIws4p0iw8AvndRBrECU0DU8HqL768hEdAhw1
+ 4Klg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUz1vl9q9mqQIbvtC+wx+wnMgiAwqDqkap0lEpj0WTaTo+HEe+OroVLFNaofttvK332WwmuTbDxMMwTB5QM9gvk83d0ipuDkWma9F4E6XIA
-X-Gm-Message-State: AOJu0Yyoc2NXRYBlf4R7W6hG71/npfeoG1HGn/85aMjbW69IFZFbd8Iw
- rHHOnEkcy5oIijc6r9Y94Yeq+3jovwM8+hgOt46zawds3ecj0XYridSxmwIBiM9B/WYETGoHXKQ
- D5BtT4hG95e528UaypbMBqhppSyY=
-X-Google-Smtp-Source: AGHT+IHSd1VtqaF5oo9Pz/bv3BQCuJdf2vBdIoB4MdeNqaZOYgV4E1kXKdlyXgvDNKRk+U1IF1mJqd669LG4Ne7VBX4=
-X-Received: by 2002:a2e:82c6:0:b0:2da:49f2:d059 with SMTP id
- n6-20020a2e82c6000000b002da49f2d059mr6435532ljh.27.1714431211136; Mon, 29 Apr
- 2024 15:53:31 -0700 (PDT)
+ AJvYcCU3hZLcc1GYRVrKPaC3EuyJXEMILXMYU4u5ZmcEwFFL3MOD7ehJwJNKztzegUQQ4fYKdXZS7AlnqmTaphj/Fp61Ijjn9eh+28r8nXjEAZ+m
+X-Gm-Message-State: AOJu0YwZCcCLYX7/gNv9UV1cVc3reRDcFbZ5Ooo3Xj3G+S6jru6hNLNF
+ P81w4ZzEOv/P7kfPEpP/PgcIH3kBsQs/b99TUgZ0nn5ROkP7x/hxqL6OAZOl7bV+u+Tthi97js7
+ B85YNP+ix2odJuT2sLlA8CatuVjBrtA==
+X-Google-Smtp-Source: AGHT+IFwkPOLqw8WtqjbNzTmmhTNLX0Q1atBGD1deVAz7dqHzyROhOur4V0LlxYm2Cw/rLJsRgiss0ST8lIYG/3J6Tg=
+X-Received: by 2002:a05:651c:221b:b0:2e0:5d7:a3a6 with SMTP id
+ y27-20020a05651c221b00b002e005d7a3a6mr6445182ljq.9.1714447832661; Mon, 29 Apr
+ 2024 20:30:32 -0700 (PDT)
 MIME-Version: 1.0
-References: <CAH2r5muXqpZN1mu=WAhaxXe0yRB7Rib_CaoGo3h15wwcSPZFuw@mail.gmail.com>
- <b40a9f3b-6d2d-4ddc-9ca3-9d8bb21ee0b9@samba.org>
- <Zi/WD7EsxMBilrT0@jeremy-HP-Z840-Workstation>
- <d9f60326-9ddf-485f-81c8-2012b7598484@samba.org>
- <Zi/8DEo+ZiF24LLw@jeremy-HP-Z840-Workstation>
- <CAH2r5mu2Qr5W1eUOz-JFyf4X6Wk9X2Jr4XFza4tJmH+mVVZqLw@mail.gmail.com>
- <ZjAHFSxjaYaybUSb@jeremy-HP-Z840-Workstation>
-In-Reply-To: <ZjAHFSxjaYaybUSb@jeremy-HP-Z840-Workstation>
-Date: Mon, 29 Apr 2024 17:53:19 -0500
-Message-ID: <CAH2r5mtacbysWjnuDUoTghxPqccp=GzQug1ZE+eRSK=UoqR_gQ@mail.gmail.com>
-Subject: Re: Samba ctime still reported incorrectly
+References: <CAH2r5msg91ad+K+eZmCjKCJeDgyb6xcUUhmpaXeeTFjqFZUeBA@mail.gmail.com>
+ <72ec968a-ac67-415f-8478-d1b9017c0326@samba.org>
+ <CAH2r5muhcnf6iYaB25k+wZC50b5pNV+enrK=Ye_-9t2NCVdCJQ@mail.gmail.com>
+ <83480311-74b1-4ee6-be85-5b21b0f55ee9@samba.org>
+ <Zi/UzF/guANa02KO@jeremy-HP-Z840-Workstation>
+In-Reply-To: <Zi/UzF/guANa02KO@jeremy-HP-Z840-Workstation>
+Date: Mon, 29 Apr 2024 22:30:21 -0500
+Message-ID: <CAH2r5msSmi7z0usFAU-BGctoApZthgqy6j9ZdghYRyifBNB60A@mail.gmail.com>
+Subject: Re: query fs info level 0x100
 To: Jeremy Allison <jra@samba.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -91,27 +89,27 @@ Cc: CIFS <linux-cifs@vger.kernel.org>,
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-I tried experiment with Windows and yes WIndows updates the change
-time (but not write time) as expected:
-e.g. on adding a hardlink, or adding an extended attribute so not just
-Linux that benefits by the proper behavior.
+Worked for me.  You can add my Reviewed-by and Tested-by if you want.
 
-On Mon, Apr 29, 2024 at 3:46=E2=80=AFPM Jeremy Allison <jra@samba.org> wrot=
-e:
+On Mon, Apr 29, 2024 at 12:11=E2=80=AFPM Jeremy Allison <jra@samba.org> wro=
+te:
 >
-> On Mon, Apr 29, 2024 at 03:16:02PM -0500, Steve French wrote:
+> On Mon, Apr 29, 2024 at 06:44:39PM +0200, Ralph Boehme wrote:
+> >On 4/29/24 6:13 PM, Steve French wrote:
+> >>But the (current Samba) server fails the level 100 (level 0x64 in hex)
+> >>FS_POSIX_INFO with "STATUS_INVALID_ERROR_CLASS"
+> >>which causes all xfstests to break since they can't verify the mount
+> >>(e.g. with "stat -f").
+> >>Nothing related to this on the client has changed, and ksmbd has
+> >>always supported this so works fine there.
 > >
-> >Another test to try is xfstest generic/728 (which checks that ctime is
-> >updated on setxattr)
-> >and xfstest generic/236 (checking that ctime is updated when hardlink up=
-dated,
-> >where I originally found this bug)
+> >ah, I broke it. Fix attached. Really embarrassing...
 >
-> Well remember the time tests are meant only to pass vs a Windows SMB3
+> Double embarrassing, I +1 reviewed it. So sorry for the bug :-(.
 
-I checked a few things - but
 
---
+
+--=20
 Thanks,
 
 Steve
