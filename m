@@ -2,46 +2,47 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id A36CB8BF5F3
-	for <lists+samba-technical@lfdr.de>; Wed,  8 May 2024 08:16:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2A7F18BF851
+	for <lists+samba-technical@lfdr.de>; Wed,  8 May 2024 10:18:17 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
-	bh=I7fiHuzVVoLI+MWwgadC6VDw92Ega75pYvmkSYdtfz8=; b=IQS+FcsTrg4p5xYaVuV88hqgDL
-	o+67Zodz8ULbts1bblNBbfGADdZMAOpylm7LYjeLH7oqf3YwsvRgrcKLlEC2VxS5M93IdmY5kGBki
-	g+hAsIhOsT8Q9TrgSQhSOjA/smxeN9qDNHj4IRbm1CSFKrTcPWLrvzWejnZJVUy8bUB3gH3a+Rp2T
-	pRDgMkDg60oDbikM6JYGeeiLgWzlnnNTbkhjOtAr/O85TxealMQfwv0BUPr760CqizAZBDY42+Vfg
-	o2qXr5Do+lPCHvlrrBGwug0bNGVXdVQk2eHJjG0jfY8cR8WAXYJBjgjJtrtdkAyDUJOPJVQdrwICv
-	rUC2YAfQ==;
-Received: from ip6-localhost ([::1]:52334 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
+	bh=MacAX+VO+LGa4569/huQWGFBeRVz/HPUfhvB7PjLU60=; b=Owraqfng031P3gjjBPeMt+ZNxW
+	tYB0AQXas+TPl0TlQ6+jIPA/Cf5a5s0tOSElZpgEfcEDxO47zuVxjeHolqBzPhwT1wPMQKz50Z0tl
+	xHsqXyFNmff62Lq+D4JA2sk0ASiejo3M8ElaErf5CjuznoE9Ik97IRgr0/q2q3po+n18NsAXu1Cgw
+	WYN1NejUJjbYcq1rDFJMON0vRQqVE52Kx+58N9bdtY+8OWhfRQKYAVpuF64oLEoL3EudnUwrkcY0m
+	PtIgmW+4okhqcRI/xhk1gl4YH8vJBhdm9CCqNu3bGEoCdg7iWFEBlVJtiwRMiGNvCjO0Bp3RBi8wZ
+	+f6a7Big==;
+Received: from ip6-localhost ([::1]:26470 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1s4aah-008TYG-FO; Wed, 08 May 2024 06:15:47 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:16170) 
+	id 1s4cUt-008UJE-F8; Wed, 08 May 2024 08:17:55 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:30186) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1s4aac-008TY9-QX
- for samba-technical@lists.samba.org; Wed, 08 May 2024 06:15:45 +0000
+ (Exim) id 1s4cUk-008UIX-CO; Wed, 08 May 2024 08:17:48 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Date:To:From:CC;
- bh=I7fiHuzVVoLI+MWwgadC6VDw92Ega75pYvmkSYdtfz8=; b=LN3K8EVn0T2hr9Zr4+5tpfHR64
- /YanZabhVvwa5+OrkPinRxcJXvtqEHjC4AXER9b51OFG/hlrD3zfAJKdFTycFiRr1IFYXUQ/yKQ1W
- ubLbshkHeQ1zBO89rAfzA5HRwDGPd6Me1BcfHIKCahDpUQDbOK/BHtqoNnCFqyeXeIWGUy0g9cCBD
- z263YgTZ8pJXTUOFpyJcyFxcwtF9rOBsmU2+gbsI4HEwsaBnuEdMs04E2i9tflNoiInvI95xeYDdi
- RnjBqNOjM9DVQNw3IDvIe/IUSldugY0EolXcdD96p8YZtlb52K3gZgSn52D77Nqg8wAuTghkOBMHw
- jUjzaSI1YL9nPLXoEawr8ELbKzEzY2sHZOxSv0rbvc3sE7Y6vUHdo4MeLSNChsdLYEut4KRcsWQs6
- dU+yd2cNS5n+jdx0oje9MDHbujqORt/olpUhsP4vrKNX25sFm7q3bW+2tSpEas01a/t1HyXJJ5gwf
- LGg9QTEhJB3cvDwPV6R0twan;
+ s=42; h=From:To:Date:Message-ID:CC;
+ bh=MacAX+VO+LGa4569/huQWGFBeRVz/HPUfhvB7PjLU60=; b=ibMPWFpGlxbtFpP6cJi1hZdiVO
+ Mkagu6t6Fkrr1yLTOB/zA3RTP31sa/4mWyS0LpDoLKgi4jlvQCtS8fHGy/d6pxmwEGli+p55BUIN8
+ bY0yl5TUcrqY8HYQRS6x2Q2nbn0ncTXJNyVbjRYeu6EWTBvvhFQW3mL2Fh5jD4vvaOcdzEw9IOgE0
+ eX+UJY3x8J9yIzNLvWpGw7dVOZBvNkRQnPvJCTupLU28/CnSjtKN7aZyVnkJy5x+6iyVU7JkCKvBs
+ LPXXGsZfjOH4HdOMl2uHLUmNWl2gU8oS55bin+QlOMNeq3akATyvwCU94yVymd7yRBBKstqBMm+G+
+ Hn95zbD3PBc/QEmD3lz++hfps57kBp+sxHPPVwFg3B+J2RsAdSytuMdACIXZMRxrVKsXAegkdhUK0
+ PjycylESNXDl8vH23E2Izk0cKVZsPDuoXmjImwEVWsesxlo62jpkQiil8xnIvdgCsrISfFxedFMdV
+ URMn3FimG+dysQi+Fr/N5/h4;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1s4aac-00ALnH-0X for samba-technical@lists.samba.org;
- Wed, 08 May 2024 06:15:42 +0000
-To: samba-technical@lists.samba.org
-Subject: Gitlab CI fails
-Date: Wed, 08 May 2024 08:15:41 +0200
-Message-ID: <2650765.fDdHjke4Dd@magrathea>
+ (Exim) id 1s4cUj-00AORP-2Y; Wed, 08 May 2024 08:17:45 +0000
+Message-ID: <3fca632b-f1b4-4826-9411-29a75f318c11@samba.org>
+Date: Wed, 8 May 2024 10:17:45 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Content-Language: de-DE
+To: samba-announce@lists.samba.org, samba@lists.samba.org,
+ samba-technical@lists.samba.org
+Subject: [Announce] Samba 4.20.1 Available for Download
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -55,49 +56,82 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andreas Schneider via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andreas Schneider <asn@samba.org>
+From: Jule Anger via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jule Anger <janger@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi,
+Release Announcements
+---------------------
 
-the CI fails for me for all o3 runners [1] with:
-
-[70(1029)/303 at 3m36s] samba.tests.ntacls
-UNEXPECTED(failure): 
-samba.tests.ntacls.samba.tests.ntacls.NtaclsTests.test_setntacl_forcenative(none)
-REASON: Exception: Exception: Traceback (most recent call last):
-  File "/builds/samba-testbase/samba-o3/bin/python/samba/tests/ntacls.py", 
-line 87, in test_setntacl_forcenative
-    DOMAIN_SID, self.session_info, "native")
-AssertionError: Exception not raised by setntacl
-
-I can reproduce this locally as my home directory is ext4. On gitlab runners, 
-the filesystem is also ext4.
-
-/dev/sda1 on /builds type ext4 (rw,nosuid,nodev,relatime,commit=30)
+This is the latest stable release of the Samba 4.20 release series.
 
 
-The is no comment what exception it is actually expecting and why. I have no 
-clue about this code. Could someone who understand what this is supposed to 
-test take a look?
+Changes since 4.20.0
+--------------------
+
+o  Douglas Bagnall <douglas.bagnall@catalyst.net.nz>
+    * BUG 15630: dns update debug message is too noisy.
+
+o  Alexander Bokovoy <ab@samba.org>
+    * BUG 15635: Do not fail PAC validation for RFC8009 checksums types.
+
+o  Pavel Filipenský <pfilipensky@samba.org>
+    * BUG 15605: Improve performance of lookup_groupmem() in idmap_ad.
+
+o  Anna Popova <popova.anna235@gmail.com>
+    * BUG 15636: Smbcacls incorrectly propagates inheritance with 
+Inherit-Only
+      flag.
+
+o  Noel Power <noel.power@suse.com>
+    * BUG 15611: http library doesn't support 'chunked transfer encoding'.
+
+o  Andreas Schneider <asn@samba.org>
+    * BUG 15600: Provide a systemd service file for the background queue 
+daemon.
 
 
-Thanks
+#######################################
+Reporting bugs & Development Discussion
+#######################################
+
+Please discuss this release on the samba-technical mailing list or by
+joining the #samba-technical:matrix.org matrix room, or
+#samba-technical IRC channel on irc.libera.chat.
+
+If you do report problems then please try to send high quality
+feedback. If you don't provide vital information to help us track down
+the problem then you will probably be ignored.  All bug reports should
+be filed under the Samba 4.1 and newer product in the project's Bugzilla
+database (https://bugzilla.samba.org/).
 
 
-	Andreas
+======================================================================
+== Our Code, Our Bugs, Our Responsibility.
+== The Samba Team
+======================================================================
 
 
-[1] https://gitlab.com/samba-team/devel/samba/-/pipelines/1282142686
 
+================
+Download Details
+================
 
+The uncompressed tarballs and patch files have been signed
+using GnuPG (ID AA99442FB680B620).  The source code can be downloaded
+from:
 
--- 
-Andreas Schneider                      asn@samba.org
-Samba Team                             www.samba.org
-GPG-ID:     8DFF53E18F2ABC8D8F3C92237EE0FC4DCC014E3D
+         https://download.samba.org/pub/samba/stable/
 
+The release notes are available online at:
+
+         https://www.samba.org/samba/history/samba-4.20.1.html
+
+Our Code, Our Bugs, Our Responsibility.
+(https://bugzilla.samba.org/)
+
+                         --Enjoy
+                         The Samba Team
 
 
