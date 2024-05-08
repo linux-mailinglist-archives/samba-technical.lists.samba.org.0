@@ -2,49 +2,52 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 348DE8BFF9A
-	for <lists+samba-technical@lfdr.de>; Wed,  8 May 2024 15:57:29 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C2BCA8C0156
+	for <lists+samba-technical@lfdr.de>; Wed,  8 May 2024 17:47:04 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=tL2pMOGjVsZCbdMFBYjby4jSFWPDPl5dUqU71+SyNtw=; b=ZxDVFAMV9k/gBU49/AjkX/GfpP
-	8ytJNjbaNblNTswHfMNNqQQdGlx1ZKJjsao8NRO6q0ZFJ2asQk4xrvEAvZFzvM33X//RRtCCSRMmj
-	Gu6Vrax+/Ov0DUIktKvNiBIzeNBkqwrZ5a6ePu2i3oTuWoHubxDMRppnxoG5onUI4Lo7aZm6DXEEP
-	LAoO0YMIzHl9ioykkuNIgfw8BOB1PKcxrq5xbtXsz0XAeMRmHFOhsLHmvSrhzoMrJATyELPfGDShp
-	ZAzguqangqydpwkFKECRumGHKCmNtZAQbYePRbVjUBYd+PvVnjmCGdCxDbpqPsxKrtaQzRWMf/V3f
-	lxcSBUkw==;
-Received: from ip6-localhost ([::1]:22388 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=Au3hW7vZCK6TJMIQ7okYzLmiFEzPrtXJbiFGyaDcBPk=; b=R/8TB3bSulyWnfLdl9WAjF90xM
+	tpCLD0GRHtSBhwURx0W5m6QY/8YHJGwMGVNOFCM5Wfx7Y2fxS3D1+vpW/mMZCLAQ/YuFeTsMh/F8r
+	b66A0us4R0IihEe4KiBDtqZFhGbC6X6yshtlq/aFvekxr+bcjpPAo6O9LeSm7aG+CflHkNWOt3njU
+	qf6IBYWEcQHAvjlmvD8VUN3yyyN526genaAy9npiBUP49RFxLu81cEASmMl12PRWQG/cTOiOm0Z25
+	Vj4uQaeInVClfRyr5qPEqR0UdG8GcM/R6anwd/mNWkf+F1cffkdGx6rbaw1knKik5l0NEG5bDMHYZ
+	1jvz1PxQ==;
+Received: from ip6-localhost ([::1]:40458 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1s4hnQ-008XTZ-Qx; Wed, 08 May 2024 13:57:24 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:29408) 
+	id 1s4jV0-008Xj7-GH; Wed, 08 May 2024 15:46:30 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:61728) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1s4hnM-008XTS-JB
- for samba-technical@lists.samba.org; Wed, 08 May 2024 13:57:23 +0000
+ (Exim) id 1s4jUw-008Xj0-8T
+ for samba-technical@lists.samba.org; Wed, 08 May 2024 15:46:28 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Date:Cc:To:From;
- bh=tL2pMOGjVsZCbdMFBYjby4jSFWPDPl5dUqU71+SyNtw=; b=i3RtDlb6yRpcaQlHvuzSyKftGl
- sbIz2npoG6Jbbz2wLEqsG5qsEHGda/CJmI3wjlq0G4L6xnyiz+RbbHy9EZVIuc+4e1hGIU1n6Y7Fo
- wPe6D6A7UzcSU8xcJ/NoKJwjxbiHf25nkFiHpJSNUGaXFisZTh9yMmQYxYlwDcF+cuf/lRrRZbWXo
- MGBdZ35Df688XOruzAkSSinK2G7iqSJB9uRFkptpkCe1iAqwpDFuFxXVJNe/GI1pocxPHYD0k4pze
- o+ruxvF8iOu5fvXgLZ8h3xVASn+dVLUJkbuDCIvXtlEy5IhF02cu1nTGuz1Wa0+FPAFOVbsbUFiS7
- CIiuiJC2HMF0BHX9G8jJWNxnw/04TGQq1ziAqvlNZS3EEQ9oC3OF/nTJRbybiZamSpwVt1P2kwqpS
- es3Y0u1l+1O6aZeI/3SXhQp3NKeOoyBbtawvQlayyCv+SabFXY+gmY84m5YCUDUPRy9RbyZXlXuyo
- NenjG6WZJV0sdgGQ/qCku7Y+;
+ s=42; h=From:Cc:To:Date:Message-ID;
+ bh=Au3hW7vZCK6TJMIQ7okYzLmiFEzPrtXJbiFGyaDcBPk=; b=Av2x6bw93Fe/B/LF9gLTDkfVEC
+ m6CX6w8zKJ0OvQwPSzTA58NAHpmhKuWStSbfX4OjAeaxIBzQRXiyYWBGD+vZEkft3Fz0yPdnm9EEd
+ uvZ1ykF5irn44h9nXv+6vuAVdc8K+mYB6sPufop8nlt3csYd77Xyg093i8fX0tA1D5nQr7PVCzHip
+ 5gXGBQrvHbitzCB4UXJsas84Wd9vhYQdXtpX7VqrIeMjCDhat35VDGcnA2Rnj6aa5VXnOnKM47vL2
+ XP7LBKKG7ERrmIJPF5WMgvoyfcJw/AQA4af+Cu+s9YbR1mwn468YI1x8/xqC/j7vyts32iOMwNGgF
+ Gqy/kWb+4mFhFtAIP09axy4Upa05lfAdjeGwak8nTk7YhFDy1v2dMfJTJZ954qclQQh38ly+HCjOS
+ FwWAaupyIjLJYjXGn1KXt8PjGhQFR1IG04xQqTTtaV6TKVq8L8qX7BWOkHgsVTsCDw6hjttUt7AjJ
+ bJnErLx8nWpknYFuKoqyHna3;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1s4hnL-00ARn3-2i; Wed, 08 May 2024 13:57:19 +0000
-To: samba-technical@lists.samba.org
-Subject: Re: Fwd: Regression: ldb performance with indexes
-Date: Wed, 08 May 2024 15:57:19 +0200
-Message-ID: <2262962.t9SDvczpPo@magrathea>
-In-Reply-To: <2221646.h6RI2rZIcs@magrathea>
-References: <4856178.OV4Wx5bFTl@magrathea>
- <52bc03e9ab383fff654a28a0f309ac02e3bb5b9e.camel@samba.org>
- <2221646.h6RI2rZIcs@magrathea>
+ (Exim) id 1s4jUv-00ASaL-29; Wed, 08 May 2024 15:46:25 +0000
+Message-ID: <034ae3ad-feef-4f4f-b2fe-fdeebacfec6b@samba.org>
+Date: Wed, 8 May 2024 17:46:21 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: samba-gpoupdate
+To: David Mulder <dmulder@suse.com>
+References: <a41d2cce-e9d5-4322-80f1-e04aae0505c7@samba.org>
+ <ca6277a8-4b77-4842-a18d-c10b1e93f810@suse.com>
+ <8c63936e-3d09-402f-88e5-3115c32da7e6@samba.org>
+ <f0a93a6b-ed97-4a67-bfa3-9cbd5fcb7ad5@samba.org>
+Content-Language: en-US, de-DE
+In-Reply-To: <f0a93a6b-ed97-4a67-bfa3-9cbd5fcb7ad5@samba.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,139 +61,148 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andreas Schneider via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andreas Schneider <asn@samba.org>
-Cc: Andreas Schneider <asn@samba.org>, yalemu@tranquil.it,
- Denis CARDON <dcardon@tranquil.it>,
- =?ISO-8859-1?Q?Andr=E9as?= LEROUX <aleroux@tranquil.it>,
- Andrew Bartlett <abartlet@samba.org>
+From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Stefan Metzmacher <metze@samba.org>
+Cc: Samba Technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Friday, 3 May 2024 19:20:28 GMT+2 Andreas Schneider via samba-technical=
-=20
-wrote:
-> On Thursday, 2 May 2024 22:51:31 GMT+2 Andrew Bartlett via samba-technical
->=20
-> wrote:
-> > On Thu, 2024-05-02 at 14:49 +0200, Andreas Schneider via samba-
-> >=20
-> > technical wrote:
-> > > On Friday, 22 March 2024 17:55:23 GMT+2 Andr=C3=A9as LEROUX via samba-
-> > >=20
-> > > technical wrote:
-> > > > Hi Andreas and Andrew,
-> > > >=20
-> > > >  >>>> > Hi,my colleagues discovered a performance issue in libldb:
-> > > > >>>> > https://bugzilla.samba.org/show_bug.cgi?id=3D15590
-> > > > >>>> >=20
-> > > >  >>>> >  >>>> > > > > As soon as you use indexes, ldbadd will be
-> > > >=20
-> > > > magnitudes >>  >> slower than >>  >>>> > itwas before.Could some
-> > > > ldb expert please look into it? >>>> >  >>>> > > Your subject says
-> > > > a regression. What version is this a >>>>  >>>> regressionagainst?
-> > > >=20
-> > > > >>>> Isn't that obvious from the bug report? >>>  >>> Here is the
-> > > >=20
-> > > > short summary: >>> $ bash repro.sh 20000 indexesAdded 2 records
-> > > > successfullyAdded >>  >> 20000 >>  >>> records successfully >>> On
-> > > > Samba 4.10: 0m01.231sOn Samba 4.19: 1m30.924s (that's 90 times >>>
-> > > > slower) >>>  >>>> > The very nature of a DB index is that it will
-> > > > take time to >>>>  >>>> create,possibly a lot of time, but should
-> > > > make reads faster. >>>> Either the DB index doesn't work at all in
-> > > > Samba 4.10 or there >>  >> is a >>  >>> huge performance problem in
-> > > > Samba 4.19. What is it? >>  >> Thanks, that wasn't written as
-> > > > obviously on the bug, thanks for the >> clarification. >  > I used
-> > > > our CentOS 8 Stream CI image for bisecting. You can't bisect >
-> > > > easily on a modern Linux Distribution, as the included waf would
-> > > > not > have support for newer Python versions like 3.12.
-> > > >=20
-> > > >  > In case you want to reproduce it, here is my run:I'm Andr=C3=A9as
-> > > >=20
-> > > > from Tranquil IT dev team. Denis and Yohann=C3=A8s asked me thiswee=
-k to
-> > > > take a look at the performance issues on large domains,
-> > > > whichinclude this issue in the current thread along the mdb large
-> > > > transactionissues.
-> > > > The attached patchset goes through all the tdb and ldb make test.
-> > > > * LMDB : increase MDB_IDL_LOGN from 16 to 18 to accomodate large
-> > > > nestedtransactions* tdb : fail-fast when record hash doesn't match
-> > > > expected hash to avoidto read/copy the entire record* ldb :
-> > > > increase DEFAULT_INDEX_CACHE_SIZE from 491 to 8089 to increasethe
-> > > > number of bucket to have smaller bucket to have faster iteration
-> > > > ineach buckets in tdb_find
-> > > > With this patchset we can upgrade large domains (>200k objects)
-> > > > toFL2k16 level in approximatly 1 hour instead of 3 days :-)
-> > > > [root@srvads1-bl1cw ~]# bash repro.sh 20000 indexes Added 2
-> > > > recordssuccessfully Added 20000 records successfully real 0m0.536s
-> > > > user0m0.798s sys 0m0.105s
-> > >=20
-> > > I'm sorry but I'm not able to reproduce this:
-> > >=20
-> > > tis-tdbfind.patch:
-> > > bash repro_dev_ldb.sh 10000 indexesAdded 2 records successfullyAdded
-> > > 10000 records successfully
-> > > real    0m9.035suser    0m9.021ssys     0m0.283s
-> > >=20
-> > > tis-ldbfind.patch:
-> > > bash repro_dev_ldb.sh 10000 indexesAdded 2 records successfullyAdded
-> > > 10000 records successfully
-> > > real    0m8.929suser    0m8.980ssys     0m0.219s
-> > >=20
-> > >=20
-> > > I have a patch in the area to get rid of some malloc calls, but the
-> > > only give a really small improvement.
-> > >=20
-> > > I don't know what workflow your patches exactly improve but it would
-> > > be nice to have a reproducer :-)
-> >=20
-> > Just a quick note to connect some threads.  We have three discussions
-> > on this same issue, we should probably centralise here as this is where
-> > things started, but just so folks can follow, see:
-> > https://bugzilla.samba.org/show_bug.cgi?id=3D15590https://gitlab.com/sa=
-mba-t
-> > ea m/samba/-/merge_requests/3616 In short, the emerging consensus is th=
-at
-> > we really need is a better data structure than an in-memory TDB for the
-> > in-memory cache needed to keep the indexes lined up with the database in
-> > this case.
->=20
-> From https://gitlab.com/samba-team/samba/-/merge_requests/3616
->=20
-> The in-memory TDB is probably the wrong usage here and a red-black tree
-> might be the solution.
->=20
-> There is lib/dbwrap/dbwrap_rbt.h. From the API it should be straight forw=
-ard
-> and quick to replace the tdb API in lib/ldb/ldb_key_value/ldb_kv_index.c
-> with it just for testing.
-> If it fixes it, we should try to make lib/util/rbtree.c a SUBSYSTEM and l=
-ink
-> it into libldb. As libldb is not standalone anymore, this should be doabl=
-e.
+Hi David,
 
-Using a red black tree doesn't solve the issue:
+>>>> Do we really want to apply all those gp_extensions by default?
+>>>> I would have assumed that the admin needs to configure them explicitly.
+>>>>
+>>>> Pure ad dc samba internal stuff like gp_access_ext, gp_krb_ext
+>>>> and my new gp_privilege_rights_ext should run by default on an ad dc
+>>>> and only there (the server role is checked in the code).
+>>>>
+>>>> But all others messing with critical stuff in /etc looks dangerous
+>>>> without explicitly selecting them.
+>>>>
+>>>> I'm also not sure how the things from get_gp_client_side_extensions() work.
+>>>
+>>> That's for loading custom client extensions (for example, if a company has internal policies they want applied). I'm not sure if anyone is using this.
+>>>
+>>> See https://dmulder.github.io/group-policy-book/writing-group-policy-extensions.html#cse
+>>>
+>>> The `register_gp_extension` and `unregister_gp_extension` functions control the policies added by get_gp_client_side_extensions().
+>>>
+>>> Notice the `samba-tool gpo cse register` and `samba-tool gpo cse unregister` commands also.
+>>
+>> Ok, I think it would be useful if all extensions would go via this and would
+>> be listed by 'samba-tool gpo cse list'.
+>  >
+>> In addition something like 'samba-tool gpo cse enable' and
+>> 'samba-tool gpo cse disable' would be useful in order to give the admin more control
+>> over it. Then 'samba-tool gpo cse list' could list all active once
+>> and 'samba-tool gpo cse list-available' would list all possible once.
+>>
+>> The only question is how this could be done in a compatible way compared
+>> to released samba versions.
+> 
+> I'm currently working on auto register builtin cses in parse_gpext_conf()
+> 
+> There I'll try to work out if the registration should enable or disable
+> them based on 'apply group policies = yes' and the existence of gpo.tdb
+> 
+> And instead of a absolute filepath I think a python module name like
+> "samba.gp.gp_sec_ext" should be possible, that makes it much easier
+> to test without changes with 'bin/samba-gpoupdate' without make install.
+> And also with packaging changes.
+> 
+> All registered cses in gpext.conf will also get MachinePolicyDisabled
+> and UserPolicyDisabled.'samba-tool gpo cse update' will let admins change it explicitly.
+> And get_gp_client_side_extensions() will only return enabled policies.
 
-$ bash repro_dev_ldb.sh 10000 indexes
-RED BLACK TREE
-RED BLACK TREE
-RED BLACK TREE
-Added 2 records successfully
-RED BLACK TREE
-Added 10000 records successfully
+Ok, I now found that cse GUID are wellknown things.
 
-real    0m9.299s
-user    0m9.212s
-sys     0m0.263s
+E.g. MS-GPSB specifies:
 
-https://git.samba.org/?p=3Dasn/samba.git;a=3Dshortlog;h=3Drefs/heads/asn-ldb
+CSE GUID{827D319E-6EAC-11D2-A4EA-00C04F79F83A}
+Tool extension GUID (computer policy settings){803E14A0-B4FB-11D0-A0D0-00A0C90F574B}
+
+And these are stored in the gPCMachineExtensionNames and gPCUserExtensionNames attributes.
+And our client completely ignores them.
+
+I also found that we only process single changed policies unless samba-gpupdate --force is used,
+but it's important to process all policies related to a cse in the correct order.
+
+For the [Privilege Rights] feature it's extremely important to get the order correct,
+as per Right/Privilege only the first processed policy should be applied and all others are
+ignored. So 'SeUndockPrivilege = *S-1-5-32-544' in the first policy and 'SeUndockPrivilege = *S-1-5-32-545'
+as well as 'SeEnableDelegationPrivilege = *S-1-5-32-545' in the 2nd policy means that the
+effective result looks like this:
+
+SeUndockPrivilege = *S-1-5-32-544
+SeEnableDelegationPrivilege = *S-1-5-32-544
+
+and the 'SeUndockPrivilege = *S-1-5-32-545' from the 2nd policy is ignored.
+
+While researching on this I found that we apply the policies in the wrong order,
+assume the following:
 
 
+DC=domain,DC=example
+- DomainGPO1
+- DomainGP02
+- DomainGP03 (enforced)
+- DomainGP04 (enforced)
+OU=SomeOU,DC=domain,DC=example
+- SomeOUGPO1
+- SomeOUGPO2
+- SomeOUGPO3 (enforced)
+- SomeOUGPO4 (enforced)
+OU=Computers,OU=SomeOU,DC=domain,DC=example
+- ComputersGPO1
+- ComputersGPO2
+- ComputersGPO3 (enforced)
+- ComputersGPO4 (enforced)
 
-=2D-=20
-Andreas Schneider                      asn@samba.org
-Samba Team                             www.samba.org
-GPG-ID:     8DFF53E18F2ABC8D8F3C92237EE0FC4DCC014E3D
+Default-first-Site-Name:
+- SiteGPO1
+- SiteGPO2
+- SiteGPO3 (enforced)
+- SiteGPO4 (enforced)
 
+Gives the following order for CN=computer,OU=SomeOU,DC=domain,DC=example:
 
+SiteGPO3
+SiteGPO4
+DomainGPO3
+DomainGPO4
+SomeOUGPO3
+SomeOUGPO4
+ComputersGPO3
+ComputersGPO4
+ComputersGPO1
+ComputersGP02
+SomeOUGPO1
+SomeOUGPO2
+DomainGPO1
+DomainGPO2
+SiteGPO1
+SiteGPO2
+
+While samba-gpupdate --rsop shows this:
+
+GPO: SiteGPO2
+GPO: SiteGPO1
+GPO: DomainGPO2
+GPO: DomainGPO1
+GPO: SomeOUGPO2
+GPO: SomeOUGPO1
+GPO: ComputersGPO2
+GPO: ComputersGPO1
+GPO: SiteGPO4
+GPO: SiteGPO3
+GPO: DomainGPO4
+GPO: DomainGPO3
+GPO: SomeOUGPO4
+GPO: SomeOUGPO3
+GPO: ComputersGPO4
+GPO: ComputersGPO3
+
+Any comment would be highly appreciated!
+
+metze
 
