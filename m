@@ -2,63 +2,49 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2E68F8C436A
-	for <lists+samba-technical@lfdr.de>; Mon, 13 May 2024 16:44:12 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8483D8C44DC
+	for <lists+samba-technical@lfdr.de>; Mon, 13 May 2024 18:11:04 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=xvXK/F0LflGATfnEUUyWB1Jr4RJL8TIUbecbk0NqTkM=; b=NNtKnkW3igIAslhyhbu6FACtdV
-	kXDnoupStnXaoX/dvOzp6UNygTZpNgrBab2U7owX0BFMyNank/XmvGDIhbuCRFAewuJn07QW8WQJt
-	4teexG/TW3hMba4u+owSeKyDlMI6HiNam3jIWfp+y0gT4sytkyostpeWuuFcG+95zoQVouuGGu3Ra
-	YbgyKu6QCVM4WIRDxv2SRDJgkUgUZqmu41nUtXzdVzhYdnhRJ3Z0/AoLOlUhtEax1pi9ABhWgY98d
-	Q2BEP29+QkJwIMx85ttOnG2DM/W8USE2TM9xBU/bJb8aY0y8VyCo4qxst4sDe+g/9Xq86/PAH5ZTF
-	fAbdmblg==;
-Received: from ip6-localhost ([::1]:52948 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=hlrkIL+5VeaHqrWJHY1AwO/gy5X9kZKher73VPElw3U=; b=texcZVCq/2rYCSdbZei3RR7CRv
+	Qf0eX+W6SAoiD36qiquhSRMmDU00XPzN6k0xA31wT3Ugpf9z1H18Ai5DxpTDJLhYS7LqHGEfdNmVB
+	xRNJGhbYhm2k+WnOML733a5nyE7yXeTRWama5nSfdbCKrbIEer/r75kYYVzQSD6aLoRLIXH8gl5zY
+	FQEO+tcA6wYfXn34sL0JyrsJAqFfPluNsCY/rT8/aeHkDmfp83Atxn04vdXTqEqdLt1QYLQuT4Eh8
+	giOsqOssQyi5qDgxBKmeCF1ogCaomD/taEyWCvY9pJoV3L9N3ZpxwjKGaaBBFoiANRjUalpcAVcDn
+	uTNKuacQ==;
+Received: from ip6-localhost ([::1]:30446 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1s6Wti-008nNN-69; Mon, 13 May 2024 14:43:26 +0000
-Received: from mail-oa1-x33.google.com ([2001:4860:4864:20::33]:52503) 
+	id 1s6YFx-008nc6-M1; Mon, 13 May 2024 16:10:29 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:52500) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1s6Wtd-008nNF-QM
- for samba-technical@lists.samba.org; Mon, 13 May 2024 14:43:24 +0000
-Received: by mail-oa1-x33.google.com with SMTP id
- 586e51a60fabf-240cb6ed477so2739319fac.1
- for <samba-technical@lists.samba.org>; Mon, 13 May 2024 07:43:21 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1715611396; x=1716216196; darn=lists.samba.org;
- h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=TqjRrvsD66vG+1HaIiPMFwk/UXR9bXS2DrZTtIfxnNQ=;
- b=I4UI7+DuDANNDi+NGdztFOImeuNAvp7FFXN8q0oi34nHUaxlRBZR52Kckaqi7Fg0sy
- VVgZOAZwg5JNlesXvOrh71H6LpO2WtHWMzUkwc3HPXFUKYmkkL5fTbSTetIViWwtAubP
- 2w5tevwXeDxxNvBCyRWKRKDVlvOfhPpawzWMCXhC5vZHOCMIiwqT3F8SPYSpOLVWEkkX
- 3q7rLr2r5r2/ZVYKNkJA8JA69J4IjxkmMK9PsXLF63kFMFTs7v/OUURUWb1xzgyvLgZn
- XtNSXONRv7rvGIk03e3eeYiWpKQFbdnRIig2qscHscsQdIm23kaRh0i5EdKY7a8E/5Wy
- QI6w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1715611396; x=1716216196;
- h=to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=TqjRrvsD66vG+1HaIiPMFwk/UXR9bXS2DrZTtIfxnNQ=;
- b=Ig4qFWhQBXpVRyZxzgMrE29DA5EeSx2AEXX299bxyhAMZ+ck45XTDS6K8ISXEXlfu2
- 3DcoU/M/YKqzARLeO6ENtHKdNoulSiCeHdiJQsMdVbIpIQpR5Y2UL35FiiN7Dr+AY50U
- x6gqtf9P0g8JngPtYI4W4nTtxgDXosEEBdVM7LEPlvekyXNJuAG4+GX+hpufAZaXo2py
- PZK/6wjXdT2Z031JiJvMYbFvx8D4aNOw6wrXy1kVzLssZcdCLv6H/zIdkpAdsg3FK20E
- Brra5bLD8J2ZgFg1JywQZr0fjbqzvRMZfabPdxFYlCv6AByNsQ1el2aWIZbF81IM+4An
- VeBg==
-X-Gm-Message-State: AOJu0Yxw4SLEV6tpm148hYwTWpQ7thAAxTFrmw0j59evS17oNstUr9V6
- ajzKOzn0qRCoH0EAtkeSarw4/oPDRNqqlA+cjhHBqyMrSwpAF/WjPv2QN83p7C8MjnOGsPZkO78
- EbSar+o50MCk3CnhZqASFF59w20Pp61+K
-X-Google-Smtp-Source: AGHT+IHp2lX4YtsE9meOlgnbMDWlHJ6AtT00eFt+alVK1YQzEqsoPpPLgfo6yuGwzTNQ6UhL1y8RpTLukD/6EGreR6M=
-X-Received: by 2002:a05:6870:4191:b0:22a:1cd5:dc5 with SMTP id
- 586e51a60fabf-24172a594efmr12036193fac.20.1715611396272; Mon, 13 May 2024
- 07:43:16 -0700 (PDT)
-MIME-Version: 1.0
-Date: Mon, 13 May 2024 17:38:51 +0300
-Message-ID: <CAN4xyZOYsusPpMjOyUakgEsdjQQsXZRNTER-Jq4Zis20F6gKWQ@mail.gmail.com>
-Subject: Openchange and last Samba releases ?
+ (Exim) id 1s6YFt-008nby-PV
+ for samba-technical@lists.samba.org; Mon, 13 May 2024 16:10:28 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Message-ID:To:From:Date:CC;
+ bh=hlrkIL+5VeaHqrWJHY1AwO/gy5X9kZKher73VPElw3U=; b=WuskxAzF2N1MZOpRO1C3nIa2b+
+ jfSgJWHGmOXp0rijxO3IWu5OFXOqplxSYCUjM6rTHBzFjCZUD+X9Tnn7X2onP2GEQZDZ27Vg0gsWW
+ QMGIGVBg+XSvKcP2/5TbAcSwJ4anWsGOeMgDUuRchLE98Y9jZnn5ITlCgC5O3mtH5M6ZH7xUuQYNW
+ gHvIVFsStvYEa6DbYzHNaJdJjS0HGytW5gi58CA071qJMUbf17P+S2fmoA7WDPRFoDPs3C05rDkbj
+ vqquFVB8W8GTgK9/G8BBXJpmhNfNYOThn/ipm8iFapBuZei2q+8oE/9pNunDh3Yj4CZ0OJxQ2ko8k
+ l2EJYN1HYaWJElbOR5zDG+YFXiQtzAREnZ3OYK9KRD8TocMwxsgBeItOv80kUnbWUriI3eagC2yRo
+ YRC+RXhBk3l512lCQ3mNEWMEv2glu9qyMjhBf72YiuBVXnuXpMK4y2+f2fC62hGep0khxNssMRVy1
+ czJCSv5Akf+iAm+yypBO8jon;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1s6YFs-00BDqS-0z for samba-technical@lists.samba.org;
+ Mon, 13 May 2024 16:10:24 +0000
+Date: Mon, 13 May 2024 17:10:21 +0100
 To: samba-technical@lists.samba.org
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
+Subject: Re: Openchange and last Samba releases ?
+Message-ID: <20240513171022.18943734@devstation.samdom.example.com>
+In-Reply-To: <CAN4xyZOYsusPpMjOyUakgEsdjQQsXZRNTER-Jq4Zis20F6gKWQ@mail.gmail.com>
+References: <CAN4xyZOYsusPpMjOyUakgEsdjQQsXZRNTER-Jq4Zis20F6gKWQ@mail.gmail.com>
+X-Mailer: Claws Mail 4.1.1 (GTK 3.24.38; x86_64-pc-linux-gnu)
+MIME-Version: 1.0
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -72,19 +58,42 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: CpServiceSPb via samba-technical <samba-technical@lists.samba.org>
-Reply-To: CpServiceSPb <cpservicespb@gmail.com>
+From: Rowland Penny via samba-technical <samba-technical@lists.samba.org>
+Reply-To: "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>
+Cc: Rowland Penny <rpenny@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Was anybody successful in building of Openchange with the latest Samba
-versions ?
-If yes, was it a git Openchage version or some customized/tuned one ?
-And what was the Samba version ?
+On Mon, 13 May 2024 17:38:51 +0300
+CpServiceSPb via samba-technical <samba-technical@lists.samba.org>
+wrote:
 
-Just in case,I founded the following quite git repositories:
-https://github.com/openchange/openchange
-https://github.com/openela-main/openchange/tree/el9/SOURCES
-<https://github.com/openela-main/openchange>
-https://github.com/Zentyal/openchange
-https://github.com/SlavekB/openchange
+> Was anybody successful in building of Openchange with the latest Samba
+> versions ?
+
+I thought that openchange was a dead project, I seem to remember that
+it relied on private Samba protocols and it wouldn't build when these
+changed.
+
+> If yes, was it a git Openchage version or some customized/tuned one ?
+> And what was the Samba version ?
+
+The last Samba version I can recall it building with was around 4.2
+
+> 
+> Just in case,I founded the following quite git repositories:
+> https://github.com/openchange/openchange
+> https://github.com/openela-main/openchange/tree/el9/SOURCES
+> <https://github.com/openela-main/openchange>
+> https://github.com/Zentyal/openchange
+> https://github.com/SlavekB/openchange
+
+Yes, but they do not seem to have received any updates for years.
+
+I am not saying 'do not try to build it with the latest Samba', but that
+it will undoubtedly require a lot of work, including rewriting large
+parts of openchange.
+
+Rowland
+
+
