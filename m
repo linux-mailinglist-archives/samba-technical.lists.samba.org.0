@@ -2,48 +2,49 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3A05D8C57F7
-	for <lists+samba-technical@lfdr.de>; Tue, 14 May 2024 16:32:04 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0444A8CB5FD
+	for <lists+samba-technical@lfdr.de>; Wed, 22 May 2024 00:24:34 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=Nuxdp1nC/ys3S07NEmaJqHwnXtf9OfidC+cHC89rG2k=; b=V0fcheCJgvJ7B2osxlMWd1PSI+
-	CVOgGQfwg7VKqzC5tISV07XsoXrlSPBYAqhorCYnhAoWF1xOvI2ghqfGh/PtkqR0FyrThIiT/Hf1z
-	4uV+LcIV/+femnJ+gtK4bpP70QyOQOrYFZxMNh/ujaZpLNxku4NUX7nytBfCd41dqgsYtNzWOaF2V
-	CB26mKNT95uK+HwOW8QNFC64cU2I8WI8lI0J1nn1ojRkzjeZM4ATPTz01sPEF7R+j/w4gb6d3/gUQ
-	5wsB5kOdFj90hXJgDk4SucavGyn0h1heRcGySGkTni8661DsX1SkDdu1tyM522wRjPL8Va+sBKpJQ
-	BPcjfdvg==;
-Received: from ip6-localhost ([::1]:45240 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=Ds3YAsBXjSvLaw+/gDrrS6SnkEqsgYzGdYXPTSE9jBI=; b=HxKj49x0r3lnZC3MrQM03jFUvW
+	+ncN4pyXEwSEBLCIRuGJEVlk9VCZEN1m4RZ/8yHsxP68LbtRjK/uQH6TVgTNqOIl3EgPAB9/ZgUJr
+	bG+zgKrPLhBehc8qgWWCQ3/Ov6r1Lk+OAh9YFw1gGcImK2wSw0aqmoJYQS9eO0I8qM63DVNJTO1Ii
+	vdR604cFVDtLhSj2c23jf9drbSPGHJnmykKfOJNXQ9wAjUXdQNGCsv0JdzX/x572nHFW2IcLs1zAd
+	gLL7cKO9ebTUrYBRpZJjToOuokdC/Mu3RDSJdZLb+Y/6PmOJh6jz00kDeLlhLYH85JHrlU/d3zOxw
+	FfFXGm1Q==;
+Received: from ip6-localhost ([::1]:29296 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1s6tCC-008uMD-H9; Tue, 14 May 2024 14:32:00 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:65104) 
+	id 1s9Xtb-009Zip-NG; Tue, 21 May 2024 22:23:47 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:61618) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1s6tC7-008uM6-Pi
- for samba-technical@lists.samba.org; Tue, 14 May 2024 14:31:58 +0000
+ (Exim) id 1s9XtW-009Zii-Hn
+ for samba-technical@lists.samba.org; Tue, 21 May 2024 22:23:45 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Date:Cc:To:From;
- bh=Nuxdp1nC/ys3S07NEmaJqHwnXtf9OfidC+cHC89rG2k=; b=NT20wITpnR4GbDokhmWSPX90e3
- Mo3dn4WLfze0JZSFSA32CC/Wzd+6QSruRSEghVATjeypBFER44Trb3yWy2orHT3n1AIlQ4Uatgxku
- ysxJfZ46pxNLSV2gZNnZqvaXz7wPUDFUYNB4KNAsXSaHLg1zlhGk9supDeb2WHyvYVATvIYCWklvn
- m6YJC3Wl+3l6xmydIGn+f6Dpz16rCAfNs8gVdasjR9aSWEGcrSCWWSSXZ8SCSdZaj+0IcyS4gy9DU
- +TGYs8FqLdLvKj8cG4GliFHim6qd+ZkWxo9lt+MEacaBZqHB3hPnBZxwOsapLJcAkU/2wEAvgD35E
- xCUvh+h2MLMuVyjjl8u/M/lY/FwNDboqGreAvq0PqfQOZb7+EC9XixgBLJJ9Q86NHmm2sbHs1rL52
- dcpGUq3jcSP24XIWllGEvXPzZ+Bme/7bipvj6hsaP270k1e55NsV8ZGSDxnjRTAnRoYFXkPPCVIfV
- p+WygGnVqIr8eyl1QUHBe1a7;
+ s=42; h=Date:To:From:Message-ID:CC;
+ bh=d3qHlHMgJGTsBB4o5RdEOFSq95oTQf0bkgiRMCqSdHk=; b=IHH/POWwuxW6uU6MTMcHu7CnU8
+ ek4UrH5i3ltcJkFJ5SgRt4iZ8bykd5SiQdBPTRmrQdALDDNuIZRg6w/E7cApJDd7yIVsyLaGFssFR
+ sko8v3qZIY0LeibNdokBUx5q9U6aDWnjH5U8dspTMEGii+5Vg6YNwWOphOunCEuP9jCVeWHMWSq19
+ pSm0Mml46zU11FKEo/wSLbNUrRczpKvCnHCl3HlaUw+uphDAlcfIeya0yjrjMTxmiq0wDe0r3Qtd3
+ QED6cs9H7Z2Ou360CwKcuJJCuOiobff9+ltfva84ciTP7Na8PylEAP2Os9G7V73NrIUar6dwCU1vg
+ m8f4rWw67FFFLcKmgWflYnH6vuuH4OUbzA7WBcPAvLr97OHUZfGPaj/ikn255AGT1ZaKc6r67j5Dn
+ 3Pad3PAspX2N02WsFOt1FwPJWnZVXLHUOur5vM0yH/d/7UGtw5OSA/6VxChQwQ2D+PIwQBdM3sTWR
+ HGqP4HPohPmcsXuHSQBKSk6l;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1s6tC6-00BOQ8-1U; Tue, 14 May 2024 14:31:54 +0000
-To: samba-technical@lists.samba.org
-Subject: Re: Fwd: Regression: ldb performance with indexes
-Date: Tue, 14 May 2024 16:31:53 +0200
-Message-ID: <2090201.YKUYFuaPT4@magrathea>
-In-Reply-To: <2262962.t9SDvczpPo@magrathea>
-References: <4856178.OV4Wx5bFTl@magrathea> <2221646.h6RI2rZIcs@magrathea>
- <2262962.t9SDvczpPo@magrathea>
+ (Exim) id 1s9XtV-00CTYn-0v for samba-technical@lists.samba.org;
+ Tue, 21 May 2024 22:23:41 +0000
+Message-ID: <e9b3c0d0f1a94a8977e067c048eb56592d6bfe49.camel@samba.org>
+Subject: Improving smbd_smb2_request_setinfo_done/smbd_smb2_request_error
+ tracing
+To: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
+Date: Wed, 22 May 2024 10:23:37 +1200
+User-Agent: Evolution 3.36.5-0ubuntu1 
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="utf-8"
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -57,168 +58,56 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andreas Schneider via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andreas Schneider <asn@samba.org>
-Cc: Andreas Schneider <asn@samba.org>, yalemu@tranquil.it,
- Denis CARDON <dcardon@tranquil.it>,
- =?ISO-8859-1?Q?Andr=E9as?= LEROUX <aleroux@tranquil.it>,
- Andrew Bartlett <abartlet@samba.org>
+From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andrew Bartlett <abartlet@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Wednesday, 8 May 2024 15:57:19 GMT+2 Andreas Schneider via samba-technic=
-al=20
-wrote:
-> On Friday, 3 May 2024 19:20:28 GMT+2 Andreas Schneider via samba-technical
->=20
-> wrote:
-> > On Thursday, 2 May 2024 22:51:31 GMT+2 Andrew Bartlett via samba-techni=
-cal
-> >=20
-> > wrote:
-> > > On Thu, 2024-05-02 at 14:49 +0200, Andreas Schneider via samba-
-> > >=20
-> > > technical wrote:
-> > > > On Friday, 22 March 2024 17:55:23 GMT+2 Andr=C3=A9as LEROUX via sam=
-ba-
-> > > >=20
-> > > > technical wrote:
-> > > > > Hi Andreas and Andrew,
-> > > > >=20
-> > > > >  >>>> > Hi,my colleagues discovered a performance issue in libldb:
-> > > > > >>>> > https://bugzilla.samba.org/show_bug.cgi?id=3D15590
-> > > > > >>>> >=20
-> > > > >  >>>> >  >>>> > > > > As soon as you use indexes, ldbadd will be
-> > > > >=20
-> > > > > magnitudes >>  >> slower than >>  >>>> > itwas before.Could some
-> > > > > ldb expert please look into it? >>>> >  >>>> > > Your subject says
-> > > > > a regression. What version is this a >>>>  >>>> regressionagainst?
-> > > > >=20
-> > > > > >>>> Isn't that obvious from the bug report? >>>  >>> Here is the
-> > > > >=20
-> > > > > short summary: >>> $ bash repro.sh 20000 indexesAdded 2 records
-> > > > > successfullyAdded >>  >> 20000 >>  >>> records successfully >>> On
-> > > > > Samba 4.10: 0m01.231sOn Samba 4.19: 1m30.924s (that's 90 times >>>
-> > > > > slower) >>>  >>>> > The very nature of a DB index is that it will
-> > > > > take time to >>>>  >>>> create,possibly a lot of time, but should
-> > > > > make reads faster. >>>> Either the DB index doesn't work at all in
-> > > > > Samba 4.10 or there >>  >> is a >>  >>> huge performance problem =
-in
-> > > > > Samba 4.19. What is it? >>  >> Thanks, that wasn't written as
-> > > > > obviously on the bug, thanks for the >> clarification. >  > I used
-> > > > > our CentOS 8 Stream CI image for bisecting. You can't bisect >
-> > > > > easily on a modern Linux Distribution, as the included waf would
-> > > > > not > have support for newer Python versions like 3.12.
-> > > > >=20
-> > > > >  > In case you want to reproduce it, here is my run:I'm Andr=C3=
-=A9as
-> > > > >=20
-> > > > > from Tranquil IT dev team. Denis and Yohann=C3=A8s asked me thisw=
-eek to
-> > > > > take a look at the performance issues on large domains,
-> > > > > whichinclude this issue in the current thread along the mdb large
-> > > > > transactionissues.
-> > > > > The attached patchset goes through all the tdb and ldb make test.
-> > > > > * LMDB : increase MDB_IDL_LOGN from 16 to 18 to accomodate large
-> > > > > nestedtransactions* tdb : fail-fast when record hash doesn't match
-> > > > > expected hash to avoidto read/copy the entire record* ldb :
-> > > > > increase DEFAULT_INDEX_CACHE_SIZE from 491 to 8089 to increasethe
-> > > > > number of bucket to have smaller bucket to have faster iteration
-> > > > > ineach buckets in tdb_find
-> > > > > With this patchset we can upgrade large domains (>200k objects)
-> > > > > toFL2k16 level in approximatly 1 hour instead of 3 days :-)
-> > > > > [root@srvads1-bl1cw ~]# bash repro.sh 20000 indexes Added 2
-> > > > > recordssuccessfully Added 20000 records successfully real 0m0.536s
-> > > > > user0m0.798s sys 0m0.105s
-> > > >=20
-> > > > I'm sorry but I'm not able to reproduce this:
-> > > >=20
-> > > > tis-tdbfind.patch:
-> > > > bash repro_dev_ldb.sh 10000 indexesAdded 2 records successfullyAdded
-> > > > 10000 records successfully
-> > > > real    0m9.035suser    0m9.021ssys     0m0.283s
-> > > >=20
-> > > > tis-ldbfind.patch:
-> > > > bash repro_dev_ldb.sh 10000 indexesAdded 2 records successfullyAdded
-> > > > 10000 records successfully
-> > > > real    0m8.929suser    0m8.980ssys     0m0.219s
-> > > >=20
-> > > >=20
-> > > > I have a patch in the area to get rid of some malloc calls, but the
-> > > > only give a really small improvement.
-> > > >=20
-> > > > I don't know what workflow your patches exactly improve but it would
-> > > > be nice to have a reproducer :-)
-> > >=20
-> > > Just a quick note to connect some threads.  We have three discussions
-> > > on this same issue, we should probably centralise here as this is whe=
-re
-> > > things started, but just so folks can follow, see:
-> > > https://bugzilla.samba.org/show_bug.cgi?id=3D15590https://gitlab.com/=
-samba
-> > > -t
-> > > ea m/samba/-/merge_requests/3616 In short, the emerging consensus is
-> > > that
-> > > we really need is a better data structure than an in-memory TDB for t=
-he
-> > > in-memory cache needed to keep the indexes lined up with the database=
- in
-> > > this case.
-> >=20
-> > From https://gitlab.com/samba-team/samba/-/merge_requests/3616
-> >=20
-> > The in-memory TDB is probably the wrong usage here and a red-black tree
-> > might be the solution.
-> >=20
-> > There is lib/dbwrap/dbwrap_rbt.h. From the API it should be straight
-> > forward and quick to replace the tdb API in
-> > lib/ldb/ldb_key_value/ldb_kv_index.c with it just for testing.
-> > If it fixes it, we should try to make lib/util/rbtree.c a SUBSYSTEM and
-> > link it into libldb. As libldb is not standalone anymore, this should be
-> > doable.
-> Using a red black tree doesn't solve the issue:
->=20
-> $ bash repro_dev_ldb.sh 10000 indexes
-> RED BLACK TREE
-> RED BLACK TREE
-> RED BLACK TREE
-> Added 2 records successfully
-> RED BLACK TREE
-> Added 10000 records successfully
->=20
-> real    0m9.299s
-> user    0m9.212s
-> sys     0m0.263s
->=20
-> https://git.samba.org/?p=3Dasn/samba.git;a=3Dshortlog;h=3Drefs/heads/asn-=
-ldb
+Kia Ora Team,
 
-The thing is that those subtrees have 4 entries, with 10000 entries we walk=
-=20
-4x10000 so 40000.
+I've been helping a client out who is improving the Go SMB2 client
+implementation and today we got caught in the weeds just trying to set
+ACLs on Samba.
 
-This needs to be optimized. As dbwrap_rbt is similar to tdb we share the sa=
-me=20
-problems. Those could be removed if a real rbtree is used.
+We probably have something really silly wrong, as despite being root
+and just setting an ACL with smbcacls, it fails. 
 
-So someone with more ldb knowlege should look into this. I dunno if we alwa=
-ys=20
-need all those 4 entries and are then overwriting stuff or if we always=20
-traverse those 4 entries but don't have too if we found the one we need.
+Anyway, it was heavy going debugging partly as our logs are sparse in
+that code, and partly as even when we have logs, the very helpful
+'location' macros don't work as well as we would like
 
-With two rbtrees we could just push nodes from one tree to another. It is j=
-ust=20
-pointer that should be fast. Allocating memory and traversing is probably w=
-hat=20
-makes it so extremely slow.
+So smbd2_smb2_request_error() prints the location of the failure, but
+if that is just smbd_smb2_request_setinfo_done():137 we don't get many
+more clues.
 
+Is there a legitimate way this this be unwrapped (I see I'm not meant
+to read the guts of the tevent_req) to be 
 
-	Andreas
+smbd_smb2_request_error_ex(req, status, NULL, subreq-
+>internal.finish_location)
 
-=2D-=20
-Andreas Schneider                      asn@samba.org
-Samba Team                             www.samba.org
-GPG-ID:     8DFF53E18F2ABC8D8F3C92237EE0FC4DCC014E3D
+I still don't do much with tevent, so I'm wondering is that legitimate
+in this code?  Will that always be filled in?  Or could it be NULL, and
+can I rely on it at least being initialised?
+
+(eg so i can do):
+
+smbd_smb2_request_error_ex(req, status, NULL,subreq-
+>internal.finish_location ? subreq->internal.finish_location
+: __location__)
+
+Anyway, just wanted to give feedback and perhaps improve debugging here
+for the next person, but lost.
+
+Thanks,
+
+Andrew Bartlett
 
 
 
+-- 
+Andrew Bartlett (he/him)       https://samba.org/~abartlet/Samba Team Member (since 2001) https://samba.orgSamba Team Lead                https://catalyst.net.nz/services/sambaCatalyst.Net Ltd
+Proudly developing Samba for Catalyst.Net Ltd - a Catalyst IT group
+company
+Samba Development and Support: https://catalyst.net.nz/services/samba
+Catalyst IT - Expert Open Source Solutions
