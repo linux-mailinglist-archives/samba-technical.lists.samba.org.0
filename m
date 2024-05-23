@@ -2,47 +2,56 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id C0CFA8CDCCB
-	for <lists+samba-technical@lfdr.de>; Fri, 24 May 2024 00:09:30 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 295B98CDD07
+	for <lists+samba-technical@lfdr.de>; Fri, 24 May 2024 00:50:33 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=mKSmG4bryHB2Har1pnfRbXQ0QDC/nMHNEZCYjcbWBHM=; b=0AWkEj9qHTr6akKKbmoI4wiLXX
-	qxh11MuuFMBpoH1i2Eff9x5rT9UfOujvo3/KuqA/aoiucSsrPsRNoi5Y3T7EMNCGp1hImXmu591Tc
-	7rAKzFpBk3fOF8oqLpaNmqw0Wf1p8g5REFOpvGqpGG/uKtWcCXAEKze821Wy7mlIl7CUM1Etiw99+
-	vHevQTTM19MjkegxP3PMz9h9y45TwCssZ7Vm9Gr8oYfXp0x34IxnKUdDZiUAFxk6WlEylfArxwbzk
-	/fFlJrBW1VdD+zztany+TyeVNr9spgequheuIwjWVYgIvjd0Vr7je00V+9Du6WulWux0vEqo0t76J
-	1jHIxxkQ==;
-Received: from ip6-localhost ([::1]:41736 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=jgLiZwgqHMSCIjnuUjkSdN8ATR1To460rOqPAkvpqjc=; b=zTitDgJ3QJvIIQ3QKLOG7FHpQJ
+	5T02rUyxGp8qHJkbWaM02EBIyby9VN0dfWqbJwc4aTpRfEUXs1sm4OiUV09XAGVpakNMXtV2q2QwL
+	nhKYvqzQW/sZvxqvKpYL4yBJ8ECl8pQDAq7AnveI3dX+LMk0cOIIps11R3xy4YQKzV7W+QrG2SluM
+	+1hMm2O1J6hPpf8D9QTAPxdkMGLnVdAugCDpqTTjbz3zJOAqpdWd9Xs/7IX9zXwIl3FCLfIFSLpxS
+	ZGRZ3p38ECOVvUJGGm6CtCoPBB22UvB2N8OZRT3RwyUWmy+7/f+mT+aPeQzaMPW13ry7uTQuhVqQS
+	unL9Pf4g==;
+Received: from ip6-localhost ([::1]:23834 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1sAGcG-009nPc-S4; Thu, 23 May 2024 22:08:52 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:39262) 
+	id 1sAHGC-009nme-O3; Thu, 23 May 2024 22:50:08 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:17800) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1sAGc9-009nPC-5I; Thu, 23 May 2024 22:08:47 +0000
+ (Exim) id 1sAHG7-009nmV-UQ
+ for samba-technical@lists.samba.org; Thu, 23 May 2024 22:50:06 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:To:From:Message-ID:CC;
- bh=mKSmG4bryHB2Har1pnfRbXQ0QDC/nMHNEZCYjcbWBHM=; b=PT+EJQGu1lRLEd9uiCJKd+HHbp
- thynCi85f5WnaDIy6l/5awUWAZiPY8cXZkvbXrGkIkvJclNR+wpmKywCUPgHfn1AdxFjUuxREqrbp
- slsG3rzVtrm32DMEcsQPqljSXUPtLl/aCitYsCm9PNVBzxxAHF6xqRh2i5Q+1MuTtfxjObF52tvif
- YoMN9O1lnpe2hrI7Uxu0Y47dO3jlNYEYWfqNgG+JGoZnxcBgO6PCb7kMPwDEMCYOp77lByp5RurrQ
- j8P1DLdaCyl3Fy5+XnB3VxJHLU+jUTN3A//K8nRhcaz1gONJAhOIycdfG090RDr9T8rOz4ct/+rv1
- WmRiVJJtGhw189nmbYjnNAcR0xZvmWZvkNIRMob4Bwq1YySnh1xeOMNtDqc2XplC3YLD0u5zjMp09
- h43kHDRokzcjVCpSQecDCK+rtd2hub4xEJdHIgkDVc/lFl7QXbuohf9Zbn5LETT5rk91YgCAGdRBS
- WNOo3me+qlrkwylOs4DUFrTH;
+ s=42; h=Message-ID:Cc:To:From:Date;
+ bh=jgLiZwgqHMSCIjnuUjkSdN8ATR1To460rOqPAkvpqjc=; b=Z5wOlQyXPeMLx7Z4LJcsTQoSai
+ 4JVB5w3Xeqs3EuLI4GDETPu9FYBkujOvPrRQG1zPrTZt9P1i1HtS/b25qTQMPOM3rQQdkgllaJN0N
+ GZLglMk6DYKZxQ/YPjd7jn4vUrX/coXZ/ZDPAAexqBZ+sOQ7Xc3yDHiLW9xENTMcqyjYqk4aoZyeR
+ b2gYlNI9vi2IQlmIMZoMiMCv5vDF9Z8VsUUpyPYalCdeDH9GcOVit1U5GG7y1p/njWTLkyECxQACy
+ ksAWDmNFfcJp6jux9eS+cx9UDZ0HH68z2WsBMjdEUx3x3w4GqTLz/0iAZ3vFn1fFdM4jalRs6u0wJ
+ 1d0mTFgVNJoKs2D1L529XKo9+PIFDLRpclpO13piEFmbVQUJ2qexGPneU6bZBOnUBC11/dOzbd76U
+ OuihhlFdVNVMI3bufCgJfhSPrBMP7KBqWO9ltilZ/Bh3AWwqutbMmH8AWOLMzoRbOwXbrCsY/X0zH
+ cgBzdks0xDbKvIfna1zd3w2k;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1sAGc6-00CsCw-19; Thu, 23 May 2024 22:08:43 +0000
-Message-ID: <05990bf855c261f5d83f2c1bc15296eb3231e1ef.camel@samba.org>
-Subject: Announcing a community effort to provide "LTS" for Samba 4.17:
- Samba LTS Community
-To: samba@lists.samba.org, Upstream Samba Technical Mailing list
- <samba-technical@lists.samba.org>
-Date: Fri, 24 May 2024 10:08:37 +1200
-Content-Type: text/plain; charset="UTF-8"
-User-Agent: Evolution 3.36.5-0ubuntu1 
+ (Exim) id 1sAHG2-00CsRT-2l; Thu, 23 May 2024 22:49:59 +0000
+Date: Thu, 23 May 2024 15:49:51 -0700
+To: Paulo Alcantara <pc@manguebit.com>
+Subject: Re: Bug in Samba's implementation of FSCTL_QUERY_ALLOCATED_RANGES?
+Message-ID: <Zk/ID+Ma3rlbCM1e@jeremy-HP-Z840-Workstation>
+References: <CAN05THTB+7B0W8fbe_KPkF0C1eKfi_sPWYyuBVDrjQVbufN8Jg@mail.gmail.com>
+ <20240522185305.69e04dab@echidna>
+ <349671.1716335639@warthog.procyon.org.uk>
+ <370800.1716374185@warthog.procyon.org.uk>
+ <20240523145420.5bf49110@echidna>
+ <CAN05THRuP4_7FvOOrTxHcZXC4dWjjqStRLqS7G_iCAwU5MUNwQ@mail.gmail.com>
+ <476489.1716445261@warthog.procyon.org.uk>
+ <477167.1716446208@warthog.procyon.org.uk>
+ <6ea739f6-640a-4f13-a9a9-d41538be9111@talpey.com>
+ <af49124840aa5960107772673f807f88@manguebit.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii; format=flowed
+Content-Disposition: inline
+In-Reply-To: <af49124840aa5960107772673f807f88@manguebit.com>
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -56,59 +65,48 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
+From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jeremy Allison <jra@samba.org>
+Cc: David Howells <dhowells@redhat.com>, linux-cifs@vger.kernel.org,
+ David Howells via samba-technical <samba-technical@lists.samba.org>,
+ Tom Talpey <tom@talpey.com>, Steve French <sfrench@samba.org>,
+ David Disseldorp <ddiss@samba.org>, jra@samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-At https://gitlab.com/samba-team/lts-community/samba some Samba
-community members are collaborating to provide backports for Samba 4.17
-for longer than the official Samba release cycle.
+On Thu, May 23, 2024 at 12:28:35PM -0300, Paulo Alcantara wrote:
+>Tom Talpey <tom@talpey.com> writes:
+>
+>> Yeah, I think this is a Samba server issue. Ronnie is right that it
+>> should return a partial response and a STATUS_BUFFER_OVERFLOW error
+>> indicating that it's partial. It's not supposed to return
+>> STATUS_BUFFER_TOO_SMALL unless the entire buffer is less than one
+>> entry.
+>>
+>> MS-FSA section 2.5.10.22
+>>
+>> https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-fsa/385dec98-90fe-477f-9789-20a47a7b8467
+>
+>Yes.  I've just tested it against Windows Server 2022 and it correctly
+>returns STATUS_BUFFER_OVERFLOW.
 
-See https://wiki.samba.org/index.php/Samba_LTS_Community for our wiki
-page. 
+Bug is in fsctl_qar():
 
-This is not an effort of the Samba Team itself, but the Samba Team is
-grateful to provide a neutral host and the CI so that quality can be
-maintained by the community members doing the work. 
+         ndr_ret = ndr_push_struct_blob(out_output, mem_ctx, &qar_rsp,
+                 (ndr_push_flags_fn_t)ndr_push_fsctl_query_alloced_ranges_rsp);
+         if (ndr_ret != NDR_ERR_SUCCESS) {
+                 DEBUG(0, ("failed to marshall QAR rsp\n"));
+                 return NT_STATUS_INVALID_PARAMETER;
+         }
 
-In terms of actual engineering the project itself will stay consistent
-with the Samba Team's rule of two-team members to approve each change,
-and is planning to manage that via GitLab merge requests for public
-patches, and the existing Bugzilla process if any work is done under
-embargo.  Mailing list collaboration will be on samba-technical if
-required.  
+         if (out_output->length > in_max_output) {
+                 DEBUG(2, ("QAR output len %lu exceeds max %lu\n",
+                           (unsigned long)out_output->length,
+                           (unsigned long)in_max_output));
+                 data_blob_free(out_output);
+                 return NT_STATUS_BUFFER_TOO_SMALL;
+         }
 
-The hope that this can be a truly community collaboration for those who
-need to keep older Samba versions going for a bit longer (you do not
-need to be on the Samba Team to help with backports of public patches).
-
-You may have seen announcements from one party who is funding
-some engineering of this effort, and we thank them for that, without
-their support this would not be able to start.  
-
-It is hoped, and really good success here will rely on this, that
-others who are using Samba 4.7 and would like it supported a bit longer
-to work with us on the backport efforts. 
-
-For end users, we know that Samba moves fast, and so we hope this
-allows you to obtain from your distributor longer support for Samba
-than has been possible under the main release/use/deprecation cycle so
-far.
-
-Andrew Bartlett 
-
--- 
-Andrew Bartlett (he/him)       https://samba.org/~abartlet/
-Samba Team Member (since 2001) https://samba.org
-Samba Team Lead                https://catalyst.net.nz/services/samba
-Catalyst.Net Ltd
-
-Proudly developing Samba for Catalyst.Net Ltd - a Catalyst IT group
-company
-
-Samba Development and Support: https://catalyst.net.nz/services/samba
-
-Catalyst IT - Expert Open Source Solutions
-
+I'm guessing in this case we need to just truncate out_output->length
+to in_max_output and return STATUS_BUFFER_OVERFLOW.
 
