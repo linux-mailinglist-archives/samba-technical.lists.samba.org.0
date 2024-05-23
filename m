@@ -2,72 +2,49 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 922EE8CBF51
-	for <lists+samba-technical@lfdr.de>; Wed, 22 May 2024 12:37:17 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 64F068CCB88
+	for <lists+samba-technical@lfdr.de>; Thu, 23 May 2024 06:55:13 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=Z2eswcLWLrokwlSeNmsp1rGG7SqGmuU6iodQGIpucDc=; b=rL2eWS5g/LgfY9eFygCjEeY2x2
-	FKoVJMD01W5Bm16Mo4O5irZEr3TNMEFd9cjbVnOTvBpUNhXC7V2no6r51tnbEIJIfRLthrPGkehKD
-	PDQ6TD9f+u/jKWkCISjq7CkNU65PhsdeRcpcfE4OD+q3cLgFgyIcAGmIWVx1sCoTpNVy+hxXje+uw
-	wIRqh+mDaSmU+uBdHCmwr5/huhHX3TnPTczxK3zIdj1FaYOl6dFGoLF6XWARQtlkzaKZ5b138S+RP
-	6yO9t9L6NbUuPpMrIA4wf90OBdg5iCXovn33YSgz+llGXe4scAf2Iqto7jR77HWcCL6e2x2vzuSRi
-	+WwOQOdQ==;
-Received: from ip6-localhost ([::1]:27082 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=+1qRNJ8Vdsf5fcOmSC9GtqL+iSnXJZKWMOFF9aL4XUI=; b=IuOLlSi7PZIfbYic9CIxsvuIWe
+	r94G2DBQ+XiQK/bd7FqiRfOTLrMME+p+AR4u8X754Emc+SDeq+7v+IOW8jmx9Rplbcp4sbjzUfP3X
+	ABDKcaYn174L5U/ur4zjIyMY/Tov/I8+L6bRrD9yAsqSN7GH312t2UQl7oMBcnwacdpSJh0EpTI7x
+	ZZqe9t0HQ5TJm+sML505ef25d7BTYI1T3waIe+3KKmZ3Ud3aQR1oXWDL/3NfKyJr2cNdS1MnhuT6e
+	EJ+kuuWOOMMm5vvoQZ9K+0EQhIhbDZCuzgOrP4liWbYyU0BFBISR7cQxfGckfZSCTAym96Ecj3V/W
+	zyjLIVTg==;
+Received: from ip6-localhost ([::1]:54922 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1s9jKo-009bRO-0c; Wed, 22 May 2024 10:36:38 +0000
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124]:42993) 
+	id 1sA0TM-009hAO-Ou; Thu, 23 May 2024 04:54:36 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:53370) 
  by hr1.samba.org with esmtps
- (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__AES_256_GCM:256) (Exim)
- id 1s9jKk-009bRH-Eh
- for samba-technical@lists.samba.org; Wed, 22 May 2024 10:36:36 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1716374190;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=Z2eswcLWLrokwlSeNmsp1rGG7SqGmuU6iodQGIpucDc=;
- b=Ta4A5FnUHsJrNyOSf895aUQjuFpZi3VF3/kfkdwuUMNsCqEzafL+B9sJbqVU4Z4+0YaZ5D
- pXw/MKHeSBr3kyi1yz7hDDY56YHV8W89Ze9XU7jFkxjyn20XTFd3vsY3ivz8l4cjZYkUXl
- /70U9Enz9jwHf3XmdmG4ujhqzwMMxrw=
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1716374190;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=Z2eswcLWLrokwlSeNmsp1rGG7SqGmuU6iodQGIpucDc=;
- b=Ta4A5FnUHsJrNyOSf895aUQjuFpZi3VF3/kfkdwuUMNsCqEzafL+B9sJbqVU4Z4+0YaZ5D
- pXw/MKHeSBr3kyi1yz7hDDY56YHV8W89Ze9XU7jFkxjyn20XTFd3vsY3ivz8l4cjZYkUXl
- /70U9Enz9jwHf3XmdmG4ujhqzwMMxrw=
-Received: from mimecast-mx02.redhat.com (mx-ext.redhat.com [66.187.233.73])
- by relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-120-6Sc82J_7MT-LaWT92udlKg-1; Wed,
- 22 May 2024 06:36:28 -0400
-X-MC-Unique: 6Sc82J_7MT-LaWT92udlKg-1
-Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.rdu2.redhat.com
- [10.11.54.6])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 2A9D0380008F;
- Wed, 22 May 2024 10:36:28 +0000 (UTC)
-Received: from warthog.procyon.org.uk (unknown [10.42.28.20])
- by smtp.corp.redhat.com (Postfix) with ESMTP id ADEDD200A35C;
- Wed, 22 May 2024 10:36:26 +0000 (UTC)
-Organization: Red Hat UK Ltd. Registered Address: Red Hat UK Ltd, Amberley
- Place, 107-111 Peascod Street, Windsor, Berkshire, SI4 1TE, United
- Kingdom.
- Registered in England and Wales under Company Registration No. 3798903
-In-Reply-To: <20240522185305.69e04dab@echidna>
+ (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1sA0TI-009hAH-FT
+ for samba-technical@lists.samba.org; Thu, 23 May 2024 04:54:34 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Message-ID:Cc:To:From:Date;
+ bh=+1qRNJ8Vdsf5fcOmSC9GtqL+iSnXJZKWMOFF9aL4XUI=; b=Z5GYinCQFOqtbf0c0K8oj5EuBR
+ 1Lk/MxMgH3hBKdhR5M/leH3vkBUWs0zPHRSCfGNs74RYsH5aCfL9xUYaSoEwUvxBSujT0+BGzu51Z
+ sBTUxqSOWndZcTHDmG2FU2NpJx1GaT9rcl3nY5dy/KiRgMBxpKqhKhN87Nn2VkTSa9PqRoU5+AV02
+ futh58sU85SBEPQoQXX/vcRWMAq90kdZ5jrKlxCDtCzYEeEV1NXc8uzo8azM9NuRnM22lbvoiZT3y
+ vYJRy9rPwMLrmZbGHR9SyzvlzH5iWlnxqWEPgpDPQFh+7N/QpKpTh/tBC5RFDL6Tnb/zKZZFJXHuL
+ 6m+u3zN+pX2le/BKVgAkUFzTJ2XvSSszpyRRDXUaF1m1DCix+QjkeUk5UeD/Feqo4b2dBhSqbxDcL
+ QvjD0uhpL+JGWyCQBCifsotPBU/uQAG02Ccet3Ah9dSeGdkWwuhuN6dxewuXK1pzXgldYhh4sL1cg
+ +5RF1l8jBssKw2sh8OFHHTMD;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1sA0TG-00Ci61-1N; Thu, 23 May 2024 04:54:31 +0000
+Date: Thu, 23 May 2024 14:54:20 +1000
+To: David Howells <dhowells@redhat.com>
+Subject: Re: Bug in Samba's implementation of FSCTL_QUERY_ALLOCATED_RANGES?
+Message-ID: <20240523145420.5bf49110@echidna>
+In-Reply-To: <370800.1716374185@warthog.procyon.org.uk>
 References: <20240522185305.69e04dab@echidna>
  <349671.1716335639@warthog.procyon.org.uk>
-To: David Disseldorp <ddiss@samba.org>
-Subject: Re: Bug in Samba's implementation of FSCTL_QUERY_ALLOCATED_RANGES?
+ <370800.1716374185@warthog.procyon.org.uk>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-ID: <370799.1716374185.1@warthog.procyon.org.uk>
-Date: Wed, 22 May 2024 11:36:25 +0100
-Message-ID: <370800.1716374185@warthog.procyon.org.uk>
-X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.6
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -81,23 +58,29 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: David Howells via samba-technical <samba-technical@lists.samba.org>
-Reply-To: David Howells <dhowells@redhat.com>
-Cc: Paulo Alcantara <pc@manguebit.com>, Steve French <sfrench@samba.org>,
- linux-cifs@vger.kernel.org,
+From: David Disseldorp via samba-technical <samba-technical@lists.samba.org>
+Reply-To: David Disseldorp <ddiss@samba.org>
+Cc: Steve French <sfrench@samba.org>, linux-cifs@vger.kernel.org,
  David Howells via samba-technical <samba-technical@lists.samba.org>,
- dhowells@redhat.com, Jeremy Allison <jra@samba.org>
+ Jeremy Allison <jra@samba.org>, Paulo Alcantara <pc@manguebit.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-David Disseldorp <ddiss@samba.org> wrote:
-> ...
-> I think the best way to proceed here would be to capture traffic for the
-> same workload against a Windows SMB server. This could be don't by using
-> your cifs.ko workload or extending test_ioctl_sparse_qar_malformed().
+On Wed, 22 May 2024 11:36:25 +0100, David Howells wrote:
 
-I don't have a windows server I can try.  Steve may be able to try that.
+> David Disseldorp <ddiss@samba.org> wrote:
+> > ...
+> > I think the best way to proceed here would be to capture traffic for the
+> > same workload against a Windows SMB server. This could be don't by using
+> > your cifs.ko workload or extending test_ioctl_sparse_qar_malformed().  
+> 
+> I don't have a windows server I can try.  Steve may be able to try that.
 
-David
+I'll put it on my todo list for the next time I have a Windows VM
+sitting around. I do recall testing Samba alongside Windows when doing
+the initial implementation, but QAR is very FS block / allocation size
+specific, so 1:1 behaviour isn't straightforward (nor is it required by
+the FSCTL_QUERY_ALLOCATED_RANGES / FSCTL_SET_ZERO_DATA specs).
 
+Cheers, David
 
