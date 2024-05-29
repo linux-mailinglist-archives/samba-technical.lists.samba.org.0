@@ -2,62 +2,62 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3FEDC8D2984
-	for <lists+samba-technical@lfdr.de>; Wed, 29 May 2024 02:40:28 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 297028D2BB4
+	for <lists+samba-technical@lfdr.de>; Wed, 29 May 2024 06:18:52 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=o9CwId0xnwx3hHWV1wZL+nCUMqk07WiWz1DrZM7MP38=; b=YaLGSwABheiv3erOVda8D9xRTX
-	bIJcWCfEJQ+EdJvGtV6krRZOpvgZKOr4bGGPBJcJyteImpMPGXdvbAmX0Ifg5nBD0ErDOTDwHBhdV
-	rJhnIG5ZMv/eH6+SMeuwGlLlAkIHzxfbpcwWdi9KOqVhGlr0mcLUHw/nZw6mAABh+utKdURxz8FnI
-	xueVodX66Qj/ueH7Cw/dxBipBPSuDUL/yF9uXA6k3Dn0l2XML/qM1pykmBMTQSjt9JKTJ6r7+mv+v
-	/XC84gE6iLTD552nVfA8OSSFxKG4Negunubqp3zlsbpCEqkVTnXlX0A5Q+JExX5w1ihLTeVIj4kH9
-	E8CGomQg==;
-Received: from ip6-localhost ([::1]:63020 helo=hr1.samba.org) 
+	bh=FRDJoOM1hOAoBkAqN0BWwBP0h8aMZDQpzsARbUtbeZo=; b=gFrJskNg2Wm9Gv4sk0IAcbVEDc
+	Sg7bjLdyH3CNbUpq9zNyTaJgCN7/jzgK0zBYzMZsYbX75azbUFBKZtaN2O1jRXCGtoKSfkcN3yY+8
+	ZHWbDGRNmmn9hS5gip1IogWKJ2TeEEDW2UTcC39cVh0b7fet5xg+N7Xkehejmb++UbT+0lohtUk+z
+	4xItfDQnn5P87NE2/2h5oXWkWNEe8iLS1S38He42QoYHjzVVUCocyV+hrGQinbUNa20+09j247zkQ
+	QlGUU5+r5zZDmGBEkIeCOtMpAS/pLODoR+KRfep5oFcUHVXaYZqia77T5AqCcbdmhx85yrVZEB48V
+	CLRLmAyg==;
+Received: from ip6-localhost ([::1]:28638 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1sC7Mc-00ACAJ-E9; Wed, 29 May 2024 00:40:22 +0000
-Received: from cat-hlzsim-prod-mail1.catalyst.net.nz ([103.250.242.12]:50316) 
+	id 1sCAlN-00ACUG-FS; Wed, 29 May 2024 04:18:09 +0000
+Received: from mail-lf1-x130.google.com ([2a00:1450:4864:20::130]:53663) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1sC7MO-00ACAA-Ve
- for samba-technical@lists.samba.org; Wed, 29 May 2024 00:40:13 +0000
-Received: from [192.168.192.96] (wlgwil-nat-office.catalyst.net.nz
- [202.78.240.7])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (Client did not present a certificate)
- (Authenticated sender: douglasb@catalyst.net.nz)
- by cat-hlzsim-prod-mail1.catalyst.net.nz (Postfix) with ESMTPSA id 6AF6E3FBC6; 
- Wed, 29 May 2024 12:40:02 +1200 (NZST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=catalyst.net.nz;
- s=default; t=1716943202;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=o9CwId0xnwx3hHWV1wZL+nCUMqk07WiWz1DrZM7MP38=;
- b=VWEjzH5R7z9bgAUT9WK2pA3KNPSqfnaQLu+U55GCXTnfkgpFXJC5ZVlPTBecmtlW6V8g/2
- zKUV0fXhsL38PLIWdNHLBXW6aj4OpQxAGJ+OXRax0EfrYbX68alTcvIf4b9gF9/HB9w0Ko
- osZ4Ee+JmFdQeG1MregH+fR+KnZZLUhPzbvE/kljWJKh9ddNPR3UwxLf3RLa3ygN8TVedA
- N1IH3knoKqoAfaJiRdROBaxAVpibMjN7cbyRppfecB9bOzWCC3Ig512UuWe/6IVBz2lf+6
- vUgGfF3AdF832GJrHo8wUXMdbO8iSYNm4R0GGmpWPPCG4nRKTMOAI/rSxrYiQA==
-Message-ID: <db7e729b-ee1d-45a1-b93f-23e229c8db22@catalyst.net.nz>
-Date: Wed, 29 May 2024 12:40:00 +1200
+ (Exim) id 1sCAlI-00ACU9-9A
+ for samba-technical@lists.samba.org; Wed, 29 May 2024 04:18:06 +0000
+Received: by mail-lf1-x130.google.com with SMTP id
+ 2adb3069b0e04-52b0d25b54eso145493e87.3
+ for <samba-technical@lists.samba.org>; Tue, 28 May 2024 21:18:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1716956283; x=1717561083; darn=lists.samba.org;
+ h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=FRDJoOM1hOAoBkAqN0BWwBP0h8aMZDQpzsARbUtbeZo=;
+ b=a7zsCiqlTg0ZmFDXv50TXYla2whyGTUaFxTF+ftqX/7UKJU5r1lqdihzIKliJvqMDW
+ QbvLWcQnKnFs6szZHVGE/hf4wQ2F/fd/hgpU14kItm1k0AVZwKcDNgqGIx6P8+9kcyP8
+ JVYmFJ6uwcLkXq8XE20ZKZ16wnL32mhSSEhVcfOttj6EEXihVHPX4UUBLleImbwJTwgt
+ Gn+q7YJy6D965zCf9L3xRAr03BdslUJW1O90hJDh8GWf1yA4Cx1q2orGwj0lrm6BNwgu
+ MkAjiUfVuZn7//fneWjO/JtmDMv6vGgBUVqJIFgoAyfNVTBsCPMYF/ll/OquSbW+hyz1
+ z1/Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1716956283; x=1717561083;
+ h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=FRDJoOM1hOAoBkAqN0BWwBP0h8aMZDQpzsARbUtbeZo=;
+ b=fsk0/irnBRgZZYNYvR7wPmt32ciwaENEhPBN4eL6Gj3trLuf8GRoJrEqy04SDVYQwP
+ m9q1JmtxzbFZckfQpMnexYKsiZY2pkOdNwp5a3Y2evgICU3wrf4YXULKjCDjU6rV/I+z
+ zmh+K1Upv1tZNs2ag1Yp1HJ1oj9wraH64mM6CRF+kxiF+Rfvt1DhIchhkGPV0IzBCK+q
+ 5Xw2C3Thvr3SpiX6SQm3c1/2tjgE/VG54Q5qkYtUa0I1ME0dUojpeC/PfdcvoaEJV/rD
+ 8py6sWFc+QFVeKl1/WSUbsU/hNXzZR6p8bOQ2tEK9cOKX2fMP7vcedXB5jbQEVDQKnnC
+ p50g==
+X-Gm-Message-State: AOJu0YyDOaWcWXfuzuqS3lOy7PNNqHT9K6jNgw3a0I8pyRvS3Q2Hazmv
+ +z7vPDUKt0iIkABSOmukh18nihj7iuUm9cm9ImyiAjopvSFj/kgP6NIlhpuLRtlIcOuw4ZNpKjB
+ A6JOruGypz/tN7wczDnn39tzXXd8=
+X-Google-Smtp-Source: AGHT+IEGKwAZiOngGR91G05JTmhnzi8gsdagPXKdgXXFWPJHsEoOvBE6/pGbS6achva3E5Iyc0fNhtyKre+SNQjuBgk=
+X-Received: by 2002:a05:6512:4c1:b0:523:54a2:3836 with SMTP id
+ 2adb3069b0e04-52965f10e3dmr10141713e87.33.1716956282630; Tue, 28 May 2024
+ 21:18:02 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: Fwd: Regression: ldb performance with indexes
-To: Andreas Schneider <asn@samba.org>, abartlet@samba.org
-References: <4856178.OV4Wx5bFTl@magrathea> <2262962.t9SDvczpPo@magrathea>
- <2090201.YKUYFuaPT4@magrathea> <5597028.rdbgypaU67@magrathea>
-Content-Language: en-US
-In-Reply-To: <5597028.rdbgypaU67@magrathea>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [-30.09 / 15.00];
- LOCAL_WHITELIST_IP(-30.00)[202.78.240.7];
- MIME_GOOD(-0.10)[text/plain]; XM_UA_NO_VERSION(0.01)[];
- DKIM_SIGNED(0.00)[catalyst.net.nz:s=default];
- MIME_TRACE(0.00)[0:+]; ARC_NA(0.00)[];
- MID_RHS_MATCH_FROM(0.00)[]
+Date: Tue, 28 May 2024 23:17:51 -0500
+Message-ID: <CAH2r5msbOL10R65Wsa75yUox1ncHQW_fmnD+iPg2x3pZQmOGBA@mail.gmail.com>
+Subject: creating sockets with SFU xattrs
+To: CIFS <linux-cifs@vger.kernel.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -71,52 +71,26 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Douglas Bagnall via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Douglas Bagnall <douglas.bagnall@catalyst.net.nz>
-Cc: samba-technical@lists.samba.org
+From: Steve French via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Steve French <smfrench@gmail.com>
+Cc: samba-technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On 28/05/24 23:56, Andreas Schneider via samba-technical wrote:
-> On Tuesday, 14 May 2024 16:31:53 GMT+2 Andreas Schneider via samba-technical
-> wrote:
->>> Using a red black tree doesn't solve the issue:
->>>
->>> $ bash repro_dev_ldb.sh 10000 indexes
->>> RED BLACK TREE
->>> RED BLACK TREE
->>> RED BLACK TREE
->>> Added 2 records successfully
->>> RED BLACK TREE
->>> Added 10000 records successfully
->>>
->>> real    0m9.299s
->>> user    0m9.212s
->>> sys     0m0.263s
->>>
->>> https://git.samba.org/?p=asn/samba.git;a=shortlog;h=refs/heads/asn-ldb
->>
->> The thing is that those subtrees have 4 entries, with 10000 entries we walk
->> 4x10000 so 40000.
->>
->> This needs to be optimized. As dbwrap_rbt is similar to tdb we share the
->> same problems. Those could be removed if a real rbtree is used.
->>
->> So someone with more ldb knowlege should look into this. I dunno if we
->> always need all those 4 entries and are then overwriting stuff or if we
->> always traverse those 4 entries but don't have too if we found the one we
->> need.
->>
->> With two rbtrees we could just push nodes from one tree to another. It is
->> just pointer that should be fast. Allocating memory and traversing is
->> probably what makes it so extremely slow.
-> 
-> Andrew,
-> 
-> any comments?
+I noticed xfstest generic/423 failing to Samba with "sfu" mount option
+(with "cifs does not support mknod/mkfifo") which turned out to be due
+to cifs.ko not supporting creating sockets with the "sfu" mount option
+(it works for fifos, block and char devices but not sockets - unlike
+with e.g. WSL reparse points)
 
-I might be able to look at it soon.
+Block devices are mapped using the string "IntxBLK" to identify them,
+char devices with "IntxCHR" symlinks with "IntxLNK" and FIFOs with
+"LnxFIFO" but there isn't a mapping for sockets.   Any thoughts on
+adding "LnxSocket" for this special case (creating a unix socket when
+"sfu" is enabled)?
 
-Douglas
+-- 
+Thanks,
 
+Steve
 
