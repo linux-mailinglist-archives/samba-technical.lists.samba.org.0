@@ -2,172 +2,174 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 96E8C8FD6B0
-	for <lists+samba-technical@lfdr.de>; Wed,  5 Jun 2024 21:43:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 195DB8FD6C0
+	for <lists+samba-technical@lfdr.de>; Wed,  5 Jun 2024 21:48:47 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=oatf7mOY06MOGyYR+tj+zHOrhSnGkDD+2BEa6GPulyA=; b=A8MGpzLe31LY+P0fTDVfdJ0Q1p
-	MJbN6nV1qFoMAwkyczOvxY2mI/xoyNXCTxzop8eq6Q6rpPum9DZHHTWCMqxxi2a3fyBpuy75vpDfg
-	SXTq5MY/V2H+uPB9u3L64bSHmo9XpHBZVa4ukJPZnJ4okMktAf3qc+ULUErjZWXYJFrt37MmMBqD9
-	JdYpbsJzFgMnbfVWYVGyYy3zffuDzqW9WC53kumbT7zq51jXW6AmSDPnYJTO3lfyrnCp84QU021uJ
-	Yu006f3iUTmhnO9VkRCCdc2SMzpUUdviJCAGJdknXM7Sd/Ac5muW98AtTNmzqQgvZp9hBmEZ4Lmqc
-	0II5NA9g==;
-Received: from ip6-localhost ([::1]:41660 helo=hr1.samba.org) 
+	bh=4NPzuA8YzO+mEb5K5htOLJRYHNpQ6NrpyWsowGGEZZA=; b=QCW9/RBu7WGDDKNe79X6q8/sZN
+	gpixrgY3fFqVTRt1mXkPkVhCGeyLNsCUWzk6D7cmieJbAbxNzQrKiOQoL7+Y8fe9k8d8kc34tvJNq
+	zfhhhTF0dTb2f3BqyzHFzcmK1JAarAepgk73VHQz4ZSDJg2usQP8NjQON4SoIHWwhXp+aXYTzIlhY
+	BmkgqMIwZDdZ5EFTMvmlzBaA9ahRHqCItor3dl+yoUxZLnbH5F8rHCTMP7TaSXURmRfcZCLK+NIYR
+	QwwhI92CSOu9sLurd2YvLsGb1VgX3RKhvtIAcVTI/lT2ji3kCfe54Sz5B9dH949O/oTmV8admVdTv
+	ZVu1mUbQ==;
+Received: from ip6-localhost ([::1]:27766 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1sEwXR-00Cltl-AB; Wed, 05 Jun 2024 19:43:13 +0000
-Received: from mx0b-00069f02.pphosted.com ([205.220.177.32]:56014) 
+	id 1sEwcg-00ClzI-O1; Wed, 05 Jun 2024 19:48:38 +0000
+Received: from mx0a-00069f02.pphosted.com ([205.220.165.32]:61750) 
  by hr1.samba.org with esmtps
  (TLS1.2:ECDHE_SECP256R1__RSA_SHA512__AES_256_GCM:256) (Exim)
- id 1sEwXM-00Clte-Lp
- for samba-technical@lists.samba.org; Wed, 05 Jun 2024 19:43:11 +0000
-Received: from pps.filterd (m0246630.ppops.net [127.0.0.1])
+ id 1sEwcc-00ClzA-5h
+ for samba-technical@lists.samba.org; Wed, 05 Jun 2024 19:48:36 +0000
+Received: from pps.filterd (m0246627.ppops.net [127.0.0.1])
  by mx0b-00069f02.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
- 455J3qQ8002421; Wed, 5 Jun 2024 19:24:34 GMT
+ 455JINNw015747; Wed, 5 Jun 2024 19:48:29 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
  h=cc : content-type :
  date : from : in-reply-to : message-id : mime-version : references :
  subject : to; s=corp-2023-11-20;
- bh=oatf7mOY06MOGyYR+tj+zHOrhSnGkDD+2BEa6GPulyA=;
- b=BNIwGLWs7XTIjoXlAlXDAWnlQEcGoPUo96uP2sRqX98E8CPQslpKJn5taWurPOUJ42M5
- JJgGvjJz19v79ea/h6TmTgjiJ1//wYItYpAmVrNdkIy3b319ymvTImzEPnudRcm9tDC9
- ATJ83eoXwZ+P2sEvLssJd0m6Ff8GH4q4iCuN1B2Geqhu0AlqEMsv6syeYpvnoAvfqxQa
- h4ohWhtvR6v8ifx2pyaWj/wnKmCZqEjGiyRgHvbs/Bvp4NKzNU8rIpzBSgYKpyRqj92o
- zcW+SG6lLbjpy0g0r+JswlN1cSuCmrMg46kirfjU2AAPRcv+T7vWvs0U/xqgfoyukNWt tw== 
-Received: from iadpaimrmta01.imrmtpd1.prodappiadaev1.oraclevcn.com
- (iadpaimrmta01.appoci.oracle.com [130.35.100.223])
- by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 3yjbsq22y9-1
+ bh=4NPzuA8YzO+mEb5K5htOLJRYHNpQ6NrpyWsowGGEZZA=;
+ b=Chx4SiSVVHpz4H9uEjCXAoJuM1D2kbTopKdYJfK8t/0Kf0y/RWyv7ka3TKDaZBOELymz
+ gXzrqf8wMLrlGnAt6+8lI9OjP3KqKLOKAZETpOT5SbEDJLOA8ZR2L9y+3ZvdV4vlV0mO
+ P07CZsjf9M8aDO0KltqhldL05ou6P/vCTGGcE1JJkny1npUA4dLSRBijIEa5GUhF0s+K
+ GvEa8+A+XuycOdtG93h2ajknNLPqxesC0WJCxidP8STcTeW9jahemm9+AN6oOajc5AhM
+ Idi2iPWTVjprbb4c+uWu8vS68hVd8znOA0dLchRiOS5d1fh52LE/0JDKVRY5nTFEHX3G eg== 
+Received: from phxpaimrmta01.imrmtpd1.prodappphxaev1.oraclevcn.com
+ (phxpaimrmta01.appoci.oracle.com [138.1.114.2])
+ by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 3yjbsya4eb-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Wed, 05 Jun 2024 19:24:34 +0000
+ Wed, 05 Jun 2024 19:48:29 +0000
 Received: from pps.filterd
- (iadpaimrmta01.imrmtpd1.prodappiadaev1.oraclevcn.com [127.0.0.1])
- by iadpaimrmta01.imrmtpd1.prodappiadaev1.oraclevcn.com (8.17.1.19/8.17.1.19)
- with ESMTP id 455IC6lo016225; Wed, 5 Jun 2024 19:24:34 GMT
-Received: from nam11-co1-obe.outbound.protection.outlook.com
- (mail-co1nam11lp2168.outbound.protection.outlook.com [104.47.56.168])
- by iadpaimrmta01.imrmtpd1.prodappiadaev1.oraclevcn.com (PPS) with ESMTPS id
- 3ygrsc0bfe-1
+ (phxpaimrmta01.imrmtpd1.prodappphxaev1.oraclevcn.com [127.0.0.1])
+ by phxpaimrmta01.imrmtpd1.prodappphxaev1.oraclevcn.com (8.17.1.19/8.17.1.19)
+ with ESMTP id 455JCrbZ005555; Wed, 5 Jun 2024 19:48:28 GMT
+Received: from nam12-dm6-obe.outbound.protection.outlook.com
+ (mail-dm6nam12lp2168.outbound.protection.outlook.com [104.47.59.168])
+ by phxpaimrmta01.imrmtpd1.prodappphxaev1.oraclevcn.com (PPS) with ESMTPS id
+ 3ygrmff051-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Wed, 05 Jun 2024 19:24:33 +0000
+ Wed, 05 Jun 2024 19:48:28 +0000
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=RfdCTpowseQqilRKhsv16R4VqhxXaFNhoGR9Xg0Bk1nN2EBjx09VGOHXhhUY4ngImCLR2bMBKRtHtzK/uGvVg9DN2dALZ9xCd3cQNMJyiObbHCpV9V4mOO1AQKTOmbBsu3P2WC8+ESttnhZCspC3n9dh2bgrPGXyUb0WgBJnOWVVKkf/mnN4n0/i0dxYM8/KcDdhLaUMOTiZ4q/Ebz0IKgaQMKNoCAoD79EQ5cDgrPBWMfs9EMCTsMNzpDZKWkAysQ493V+gKLy0mOkwMIkKFzsOCjeS67McIB6HdpaEdhUyU4IhvoH32eyoHHKtZSNvrsrheYaCa4Wk9tkAGK+bEw==
+ b=hF/CAWDvJgC+5wPnidMsqJdB7XXq+l4sZx05l7h8BWiVkjTOZZw0YK3RDVwDvUEbr4GQmGCOvJ4nUFwsX7MCm37bAmzd/Y0iZV0J4k6CDuYaWba1PjGMVmFPsrGONRX4KtQKo+MtqOtSW5neFJGUNtCxoj4vLQb0Fw4eUVOsWSBukEoqIznnoASHe3qvF1X4JL705/eE3ppeHiVDM+uVLTN4tFSiNuel5bMTkqpi6fgG0alkRN3SxO78fNMzzooClvxkuvP1QtNiOy1NJr4v8T8Isi55/cjEWuYoH0tr0MlzRpuIT9Q0pQl+82H2F6s4TkXT4ZPOD3NU0UUmfLVOIA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=oatf7mOY06MOGyYR+tj+zHOrhSnGkDD+2BEa6GPulyA=;
- b=CeGq/50m2VR031PfvS+B5hRSNvvtrdC4kMLKaIi3r8Zwc3jd4alHUpbUhA1GhfJYBfOzMBklMSHWMcEysj4/Q35x1O0oWYBbaW8HbN6XxS9m1kY42tk+2UIHnSohkn898pIEgaZ4uxliCj5DG4kOukc0BJz1S1Uz7XzyjnS+rbqoiJ/5tvPWTkCkd27yWeJFht3kBGEKfMD4jHdjdjSqAy4gQSLK8keoEPUKk4BM/LO3F6rvRR47DY7djFnAPfm0YOsnnQwQeRZE2yMsEAd+9yl8ETMx1pFFJeT2v2jNIMBuQj9SPBr9Mz77dhpqiSWoUG4rFdt02pXm4OxDiQYKsA==
+ bh=4NPzuA8YzO+mEb5K5htOLJRYHNpQ6NrpyWsowGGEZZA=;
+ b=HInjJFA4ilgW6FapvMv259Tf0bJyrWMsrgKGGkC5NEnBOg0w5Om/+R2sDcnzTTopE+QiF49qDgOfESL4hFyEI3EUGRtDsWI+7OQGW3ZxaQB3gTI3hihT6zNNOpyrleFBEZYk4bYpNV5qxY5zvnxf6IoKHvKa9QURWTPFIqOQ9AAVHSqKNQIwYq/U8x0WNEM1YcQFTikxBxC4ffI4x3QU6lHkxcVSOzxR8tFcnMVCWoSBBTHsW7JA/xe7q2BDxH7vLbc1gg4lT4jRjGOccMU1XTaqVApWeHihQTAKpCJXVj+gCMYOJ2dllUlTUD9cMgSLBeIg2nsgDGb+lls+a5jv0g==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=oracle.com; dmarc=pass action=none header.from=oracle.com;
  dkim=pass header.d=oracle.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=oracle.onmicrosoft.com; s=selector2-oracle-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=oatf7mOY06MOGyYR+tj+zHOrhSnGkDD+2BEa6GPulyA=;
- b=c0Skj52rCY2/BMtYedhSWCghIH0Irov7HrdyIuKYia+pKLzY347/OSMf59OtIy++NbuEcRrPZb9D4FU7PzuMX74dWRMexHLYizFyBo4LEhPUja7XyDIUOlq/l32oTizO2qf7MF3T2D7wLaZ/EC/dC3VPx2cmcZO0S/LBRnUH3Yk=
+ bh=4NPzuA8YzO+mEb5K5htOLJRYHNpQ6NrpyWsowGGEZZA=;
+ b=S9Qy9ZtK9RLLUr2DtBRrDdxmuqZ6Qls0LQEP8TL51wKII4qIpoFVj79YD5YpYWSKpN1I1G4DzCjjmla25cfIzdKDUiOxEggoWH72HWc7+o5VClpWIFV5V377DD06xUJ/AivBX7TXriE8s87leL4cA1hTXFPEtJVdJoX967hklIY=
 Received: from DM4PR10MB5943.namprd10.prod.outlook.com (2603:10b6:8:a1::9) by
- DS0PR10MB8174.namprd10.prod.outlook.com (2603:10b6:8:1fc::19) with
+ PH0PR10MB4503.namprd10.prod.outlook.com (2603:10b6:510:3a::20) with
  Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.7633.31; Wed, 5 Jun 2024 19:24:31 +0000
+ 15.20.7633.27; Wed, 5 Jun 2024 19:47:59 +0000
 Received: from DM4PR10MB5943.namprd10.prod.outlook.com
  ([fe80::c7d9:25b8:a7a3:5e77]) by DM4PR10MB5943.namprd10.prod.outlook.com
  ([fe80::c7d9:25b8:a7a3:5e77%5]) with mapi id 15.20.7633.018; Wed, 5 Jun 2024
- 19:24:31 +0000
-Date: Wed, 5 Jun 2024 21:24:07 +0200
+ 19:47:59 +0000
+Date: Wed, 5 Jun 2024 21:47:35 +0200
 To: Stefan Metzmacher <metze@samba.org>
 Subject: Re: [External] : Re: missing krb5 dependencies after recent changes
  in nightly bits
-Message-ID: <ZmC7V3JsFXo1tYV-@ultra>
+Message-ID: <ZmDA14dT72iP-Hjg@ultra>
 References: <Zl4Dh9XZ2XsQWROD@ultra> <ZmCG254bAl-mvxIt@ultra>
  <1ea6c4d8-b062-4619-87b9-ca7c2064aed0@samba.org>
+ <ZmC7V3JsFXo1tYV-@ultra>
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-In-Reply-To: <1ea6c4d8-b062-4619-87b9-ca7c2064aed0@samba.org>
+In-Reply-To: <ZmC7V3JsFXo1tYV-@ultra>
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DM4PR10MB5943:EE_|DS0PR10MB8174:EE_
-X-MS-Office365-Filtering-Correlation-Id: 3c30233b-407b-489d-6dd3-08dc85951ff4
+X-MS-TrafficTypeDiagnostic: DM4PR10MB5943:EE_|PH0PR10MB4503:EE_
+X-MS-Office365-Filtering-Correlation-Id: d378d89a-0581-47ce-fe31-08dc8598674e
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?MG5adVZ5bjlmRWRrSlFHV1UwdXprVVhzOHI2SVV4Sk9jQ1owSmdRaytKR0VX?=
- =?utf-8?B?RlErdXAwMTFEcjhqMnpUNmQ3RmVBcWoxczZQTlVuWmVzaUp6TXpjQ0ZiQUZo?=
- =?utf-8?B?R3pCdVpmWGZpZEhZdWJ1V1F5UDF3aU5wckd0cjBWdC94aExEcDhCbTlSU2Fi?=
- =?utf-8?B?Q3FDdFMrN1pVVXpMMEMzTHY5cU1aVTdlaXRjTXlucE9GQkZIcUROcGFYMEdW?=
- =?utf-8?B?ek9XMGZrTStlY3MyYUVMdXBFaW81KzNVSjFIUVhEd0ZMV041dk1JK2hYRVFE?=
- =?utf-8?B?QXJ6Sk54QWJkZUlzYy9oVjdCTXhXQndVNnprSVNSL0MzaXk2ZnFVZE9EdWZ5?=
- =?utf-8?B?Ump4QVlIL1hpbStoOVBBNWdadFNQbU9nYmpOUWdZbEhZaFgwc1RMTksxUWFx?=
- =?utf-8?B?czFHOEFtZGs0SC8zRisxcWdycXpSL2YxenNLMVlCYXh5Wnozd1VaamFiLzY5?=
- =?utf-8?B?UWlWVTV5c0tvb2E4THc1NmJxa0FrdVBVVEJWV3lUSEVFL2ZUSDdBOTFXaDFN?=
- =?utf-8?B?VU9hdHZFQ3IwS1JEVDNHZUgyTjBxTnhWL2tmQ1lkeFl4bW53ZDRzYUYwTTFM?=
- =?utf-8?B?WTM5MWR3YUgvWWNtVnBSWGNiN0hYUmNOYVg0MGJJaWJwQWZJZmNDSkQ0SHU3?=
- =?utf-8?B?SzdRYWgxTzFtYTJ6WVVXSHUvdjJCTmQ2R3dVQWV2OUkxU2FSUEF2MnArSklB?=
- =?utf-8?B?Njl5ck0xS3BaWDBSRGozdnVsUmFTdUpVbTI4SlZHQkhQOElmWVlXK3VDcUFI?=
- =?utf-8?B?anB4TlFGTm1jemo2TEk0ZnpnRVU5NG1OZVVCN3RwRGVrRHBYRmYxS3ZRckpr?=
- =?utf-8?B?em5HbjlBWTZqb0taeFlpQ1IyZGJiZmFFOHNyRG9jOWc2VGZsU3BLZ1NQOWNW?=
- =?utf-8?B?cmxmUU0xa05RNWlFeVFLOFRYOVpJS1dBSlN1ZTVJV1BSaTVwTFI2SGRYRncx?=
- =?utf-8?B?Tks4WWlVVGgrYjNWU3V1cFN5SUF5ZCtiNnFRcHkvdmRCcXRzTllnR2h6YUg4?=
- =?utf-8?B?bHQ3eGQxbVpPT2VheitSZmxCSERPWCtiWW5MdldvWVI2YVRmaU9ZK3U3Nm1i?=
- =?utf-8?B?RHNReFpXM3RNdlF0OHdwMzBPbVpqbytHcTBUR1g0NE80QWk5Q1ZaR09COHZ5?=
- =?utf-8?B?czVqTEdoZktFV00weHlaODJkVjhKNUlwUldoWDlRREkvaVNhY21vQkZPWlY2?=
- =?utf-8?B?eE5paWFPclQvZ2s0RWJpVTUzYmZjS21DRmRMS0V6R1ZrM1pQQWplS2tCT0JT?=
- =?utf-8?B?NHd5ZlhCOXg1VUZXVE0zYnorQ0tjQnVmcmdJNmlKTmxlS3VkaW1kMTJxbFhp?=
- =?utf-8?B?TFk1S2JLLzk4bGF2eHM4cFlsYlZOdmhla3YwQ1gwSFdac0Vja0d5b1BOcHpN?=
- =?utf-8?B?TkpnMW8ySWMxcjEzVjRxSzEydWpuZExnS3ZWcmRNL1JUOTU2akxMRC9WTFJU?=
- =?utf-8?B?N2NHODYveE41YU85Qzhac0pLdlNZK2h1R0ZQcFVteUJOQ21yNVpNd3Nha3I1?=
- =?utf-8?B?Z1YzMTgwemxxSXVqN011YnR3eHdXRkpyN3VrRGxoUU1YSWs2cHpBUTRVVjU1?=
- =?utf-8?B?dTRoRXBlOS9TWmpjNU1RZXE0bUZDODVUaHdPK2pNOWQ1UmI1bkd4ampvWVlW?=
- =?utf-8?B?c0pQZFJIVXI1blVySzdmM2ZBUnRQa04vT0J0UVJyaHlHQjFkR1F2WUwralVi?=
- =?utf-8?B?VzU2WjV6RUJYRnFIR0VybEkxdjhoUDJjWnp6OU12V1V6eDNXMU9PUWxBPT0=?=
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?UTdHNEdmOXVLSjVMKzZncjJ5RXZWYTdQS1V3SU8wdE9XdnptOWRCTDhCTFds?=
+ =?utf-8?B?cUZNKzhwNWxCdkJFOEVHaGFwL1hwQnRFeTdtRGJoTy9yeUlmaEt6eVk4Tm1s?=
+ =?utf-8?B?YzQ4NFBPMFBHMmZNVDNRRU9pTTcrT0o1MlV5YjhQcFI1VitKRlB4TUVYd3Vr?=
+ =?utf-8?B?NlBHZ1ZSMmd1NjF3VmZMVXJVU1U3dW1nTWgzVzhVSDd0ci9rNUJOamVWdm5D?=
+ =?utf-8?B?M3BkRU5sRFpqZjBBbmo0WUJCT2NPa0RzdGt2cTVacXN5Ymo1bENocjI5dWxZ?=
+ =?utf-8?B?ZUJCRXlmVnk0aDArb3ZVWXI5M0c3YWRvZUR6eUFOakVONHVvQkRPaTNudDFi?=
+ =?utf-8?B?OHdQSnJBVk5LbGYwM3ZyTjFYdXpwc3hXSGdQMFA5QmE5UHhxSjd5K0VHTHZy?=
+ =?utf-8?B?bHNaNFFpaWlXa3BJNkV5M2hhcFRna3pjUnlUVkRaQ3Zuci96N0dRVWFhdlc3?=
+ =?utf-8?B?eHRKNUw5cXE1QjRvU1VDVXBjdUlNbWc1UFQ4ZU1DSXFtdDlCcDBNUVhCb0R3?=
+ =?utf-8?B?Unk5NkQ2L1pTVHh5bis4MlIrcUIxN1B5eVhYNi8vT3NHc3h0WHpPcG81VE8z?=
+ =?utf-8?B?bkZSWWFobFlJYy9iU0ljeUQ3L1hnWUdGTWNReXBwdVRscm8vUWhtNEQzQ2o3?=
+ =?utf-8?B?bVBrSkd5Sms5NDF3QTQrL0IvMG5rK1Q0RGJFeW5rYXlXZjg3RXJ2TE1NaG5r?=
+ =?utf-8?B?TmlNU2taalpHRzh3YnJuclBFYjlWZlVVMUh4bnE4UU4ydzNVSHZyM1lucnY0?=
+ =?utf-8?B?eUJoTXhoaUgxWDM0WlNjK1UyUGRkdmtrVFNNaFE0dk9hdWZ4ZlBUbUdqMlZQ?=
+ =?utf-8?B?Y0JMaUY1OE5kckxDVUxEdk5TS3hqTFUyUjh0MklZYW0waEdKbTltUERIcGJV?=
+ =?utf-8?B?UFp6K1NkNWgwQzNEYkZpYTNVdFFseTVpbTZzZWJwZmRGSlBqUGlKU0s4V2JJ?=
+ =?utf-8?B?NkpWME5oNWJtQklxN0FmVU5qZGw0NHlDK243R2s3MkdXNDNwMG43ZzdCdFJZ?=
+ =?utf-8?B?WXVZSlQvVUVYT09nL2o3RW5xVUVYOEtIWHdFNVJNT1lyTnhoZ3d1ekE2dFcv?=
+ =?utf-8?B?cWJ6aTZ6V0VZS0pMaUFoSGJFRkZLWFVIeDU0TnZMTFZ3R2lERHk4VHU4L2l5?=
+ =?utf-8?B?aXZMTmFsYklZSEpIT1J5ckhjSXFJVjE1dGJWcDF1aDVsZHd3ckNDNVFVM2Y2?=
+ =?utf-8?B?VG1jcmE1eVRuMEp2dzN3dXZtRzJkSzE3WWs1c2YrTG9ZOGUwN2pORVVrR0Ny?=
+ =?utf-8?B?aEVlaDgwWWJwVGx2cW9qeGhNSTdGTXVQNWdDUnd4YXl1Yko2QzhSMys0RVIy?=
+ =?utf-8?B?NGQ4blVhcWp2Znh5UjFtOFlmRTRiNXhKUzZwL3l3TW0zSmIxanZETUJabEtl?=
+ =?utf-8?B?U00vK1dPVmJBK2gxR3Z4K2xxZ2ZUaTdhNDBMalpsS0hEc3MvOXJod1QrSkQv?=
+ =?utf-8?B?SmFSWlQyWEsrUTJwRGg0RzVzR0IyU1BRSjVuRGpZUC8wM2dGbDRhODRic0Zj?=
+ =?utf-8?B?WVBMSDZ6NTNEM1M2UEpGeHdsbE5IeFo3Z3RSZlBYWjEzVC9GTTQ0THlhazg1?=
+ =?utf-8?B?bWY4KzZiOTg2dGQwNEZLZFZnVHc3UjBwM2EyVmZVNmFLUkc0L01SeVgvRU1N?=
+ =?utf-8?B?VjRwcTlkbHRVNE1hZXF2OFlHUmpITVNyUkpTa3NneVQzUUpGU2liRURyRkJX?=
+ =?utf-8?B?VG5mb1l3SjJRdXcyWGk0aUtIeE9TL3RxZVczcFRaQitwWmo1eExFcmp5SXlG?=
+ =?utf-8?Q?irFMvuPk5CvHhPYdw4+G5ZOJnR99JTpzxPxzbr0?=
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?b3NOekcyM3NiM3krYVNYQnh6elE1QzJqNllHU2dDK25vMWNqd1NQZWxUM0I4?=
- =?utf-8?B?cWtFRVlvUGdXYy9MZ1B5R3JVK2UzZGd2Y1FZUU1YTER5QUp4QkxvK1dhVzEr?=
- =?utf-8?B?bHhFWFhHWkt5NjRiN1UydjBLM3c2UkdQN3VpSkFPSGhLVVltakwwWmlMeTlW?=
- =?utf-8?B?RWFkek0zOVk4MjBEajZDQStsT0hvYTdrc1p1Rkd1cXFQaUFEOWhMZ0VUNEts?=
- =?utf-8?B?MGRaZjlReHdQTlRLN2d3Q0o2aDhSZElTcWltd29iNE5ZUUZLcnRGRlZKanpa?=
- =?utf-8?B?ZE96NnZxTHUvZ1dWRHE2Ni9HTjZiUVBrakxHeld2M1RjSEZYRkNhMkNOQ2Q4?=
- =?utf-8?B?R1BzQ2pxaDlWbm5lc2gyV1F6UUR3M1AyM3BKbngxM09FcENZMHRWbFYveE1u?=
- =?utf-8?B?ZHZObS9zODVKd0QybG5vcHlhTjkwbEZmOWd3NzBUTlZyd2VyZ2hlMVlCekNF?=
- =?utf-8?B?TXBUbXZMTFZ6TlluMWxNaGIrSkt4UjYwNEczdVhWY2p0MHlHN3JNa3I5b2Rr?=
- =?utf-8?B?UUFrZW0vc0kxaTFxOWp6VFNUelVKMFhzdG5kb0dNSDgyTnZ6TWMxSndQdUtw?=
- =?utf-8?B?TmJaWUphUTRucjhXYzBEd0hjVUVwZGMwUFBWRU8yN1RQZkFHK0pPTnZoT2ht?=
- =?utf-8?B?NENmQU43dGNYblhSZHo2alhURjdMeDBWQ1pjUWZqeEthcjFjSFUzcFRpRnRq?=
- =?utf-8?B?UjVoVTRLR2N0RmNlR0hlZUNXYmw5bnRvMW1aOVBMUkFPZklFcU1kUUdYVGYz?=
- =?utf-8?B?ZkFEdE5SMTlnMjJHNGFrYy8zVjRLLzZCYmo1a0RIT2xJclh6NFRzWFhPSG8z?=
- =?utf-8?B?RjJSU242b01VbTVUV2c5RXlZN25qYUNFOXQ1MDArSzBOdWVDTUdCT05QUmNt?=
- =?utf-8?B?Y2ZoYUZSdG4raUlGa0FoOHhkem5OWTZBQ0FoYmNSRmNEMkE1UVFkcStZQXdK?=
- =?utf-8?B?TlJqMXp3enFDZlhTaDdVNTN4aVpLM09SU1JmczZuSWVJb1d5cDVyeDQxanNY?=
- =?utf-8?B?RmN4V0R2RFlvanhFMmM5YUJ6TWFXRFA0azFFRncvSnRTaXdaM1lkbURSRGpQ?=
- =?utf-8?B?Q3NZanpOTUhBTWM2WFRyT2lGUVZjSVJWZEMwck5uRjdtRWkxWWMranJmZFkv?=
- =?utf-8?B?QTRJWm1lTkZVbGprSlY3bCtWVmNBRkhKRUlVRGJWc2NTVXF0RUlDL2VCL0tI?=
- =?utf-8?B?U1FIa1JTeVZqbVRNZkJvUStSbVB4MTRuTklYdnNoZUlrNGhLWm83SVFyakdt?=
- =?utf-8?B?U2s3R1FvYzFPUXZXZ3poY2NrdmRZK3UrK0JiT2JpaCttUi9IQ0d2c2FHaXV2?=
- =?utf-8?B?ZC9pVUpQb0JqbzdnajdTQjZQK09wbkdIVVNWbFdKZFZkN1Jqa2tRU2RwN1d2?=
- =?utf-8?B?NC8zVkJlaGMydUdXRVNpRWk0eW82OWI5MUZ0b21tRFBiZXdvNms4UTVZbzVv?=
- =?utf-8?B?KzVTRnlJcTZ5bUxBUkVpMFVCUno2TE05NTd5VUlaZkJib1hWcERRVlA4Y3RC?=
- =?utf-8?B?Vm8wMU9JaldnNU5OZ2pKVUNheVZoKzNXNnFuNDQrMGZnQmYwaVVZZk1GaytN?=
- =?utf-8?B?c0RUbEc2OG1EOG1Nd1R1TkFZRmZxekJ1eW5hTWhxSThMTG01N3lWWGZxWnJZ?=
- =?utf-8?B?WU8zYkZUQ2s0eEhuNWhDdzJxVlJTM0svV1hpd01PS0IwMHBTMjN1eDAwUlFF?=
- =?utf-8?B?dFVuOWNTc3ZGYm96a29lWFdocXJFU0w4S1V6R2lHZEdWQ21oQTZVNXNHTEMr?=
- =?utf-8?B?aWJwaUpVNUNqaXE1R1JxVGd3dFNTSjJEVTZZRkdyUGowTjk5YjBVeXNZQ2JP?=
- =?utf-8?B?RkVzbTdaK245VXdOOHVBK1FYejAxcmtxOCt1aVE2UDZaaFdDT0NzLzB4eFN1?=
- =?utf-8?B?Smh3WjdKNitlb3ZuN3BGc3lpQndwQU1RYkVPdEcxZ0lYV3ViOVRZa0ljVUNP?=
- =?utf-8?B?amM3YjI3VEt6VXZXQVlSVTJ5UDRDYWhEVVFLdEJlVkRLRFBTSnFIQ0VXL21W?=
- =?utf-8?B?eXVmQjFjcEk3M3JEMXFYakdiU1NCTlY1UzdFK1VBMzNJSk1kRG91Vkp4Mkg3?=
- =?utf-8?B?blpGQnRHRFRxMHVKMjVWZjdwUzIza21uaUpwUjdzQ2dPek1aY09HamtqS2xU?=
- =?utf-8?B?d0MzSDYySC9RSVZxV2c3NnZGdWZQUzR2ZjJjZ3V3Rmx3YkJWM3VidHFVTjdh?=
- =?utf-8?B?MUE9PQ==?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?YkVPL0Q0cVhNUU5LRzZ6K0F6ZThGTGh5UWk5dnMvNWNqazkyYlNqclZOYWRB?=
+ =?utf-8?B?b1UwUy8ybTNBbkU1SUlXc3FsK0FwNDBuSFdsaVVteWtTUGFYYXMvSFdXanNT?=
+ =?utf-8?B?WkxIcnRKNkN5SkdWeVVsc25obHZEM0o0cGU0QlJPZ0p4NnRZVEhKMW9hRmRw?=
+ =?utf-8?B?Ym96MHE2R0dnM200ZjBnbTdoU3ljQTdCVDVXYjVPdHMrZmdNeG1hSU04VkZW?=
+ =?utf-8?B?QlFDOEV5aFZrVkJTd0E3MU03bVc4RHNRRmJ3WGRia21xZ2h4KzhnOUM0enZ0?=
+ =?utf-8?B?YWVVblVvU2s4QUN0QXpObDFCTmhDS2RDUk1aeDFIQWYrakZCQjJlT01rRWFC?=
+ =?utf-8?B?QzRhWGFUTVlyL1l3K05TUCtZWExOMFVZaU90TjNqcWp1V2cxa0Rxclp3cUJW?=
+ =?utf-8?B?OGdSbUQ0NHBvcG03SlRkd0pjMm5HUHNpdVRoZ011RVNINmlZdHdnY3lDOFY1?=
+ =?utf-8?B?Q2hFRGs5U1NvZ3lRWFVoUDU3b0h1eUU0d2M5NzR2UE5VVzRzdlJBQ0xvVHkv?=
+ =?utf-8?B?ZGVpdm4yemV6cVlwdmZRdXNEczdVaCtPeHNuR1hyU1J1K1RnZGJwR1BwdGxm?=
+ =?utf-8?B?T2pkelhGL0U4S2RPbWZpUUMyZWJiSEMwbWFyZ1A5UEtZOG9IUUI0a25jcDFV?=
+ =?utf-8?B?NHUyZUh1cmppOTJqNkJoQlpZVURIQW9NcXkvZGQzRE80UDMxaGtGenZwMGhl?=
+ =?utf-8?B?OE01TDNPTGR0Sm1pMm16RklxVGpiSUhBeWl5Y3BSOWpzNHNuY2J0WTZvT2Zo?=
+ =?utf-8?B?dEczdUU4WHUvcDFMNk05cWYwM2RSQVBoZWNqRzd5OEtGWk1hS2ZuWlR2MUU2?=
+ =?utf-8?B?djdUM05KcmJuY2tWcjdxem5IVWdCR0E3OVlNVFdpTkVTWHlBOUNHOTJ1Zzcz?=
+ =?utf-8?B?NjhTbzJNbmxQbmlYL0EvbG05Y0tYSWNpTmNDMmJhUEJEd2dYelFabDVuNUFB?=
+ =?utf-8?B?dUdUcjQ5M3l4Q0tqM2RiazYxMTVCelZFRE1vMHVGc1ZTRTkwYWZzbkkvRVI1?=
+ =?utf-8?B?MmF1V2FjRnozdllyYWovNldCOFlnQzVtcXdYTm5VTjI1akF2bWt5T1AwbHMz?=
+ =?utf-8?B?WjhpMWR5YnYwZlBsU0hWQTR0TTdYdi8yNXdXaGlFYnJSbEorVy9iTnFVQ25L?=
+ =?utf-8?B?N3pWb3V1SGRiQU5HWUlVbEdoQzkxRzRqQWMrRGtCanhjcTRRVjU5eERHbXJ1?=
+ =?utf-8?B?VW1UK3p4RkgxODFVNWF2VnozTGNMWVBRRUhQTkRJYm9XaGV6VzlKdzhPeVdL?=
+ =?utf-8?B?VW1sZWpRUWljcDVVdkNwVVh6MmUwSTRQSk9reDhlNkFFTTdpc2hYSzhRSjRQ?=
+ =?utf-8?B?RCt1RG54akpxTGhvS1hCS3BIUms5SmhTS0xlcWVvZHNWdHZUVzlyc09NZGhq?=
+ =?utf-8?B?eWpza3kzR2cwbG45b3FYUWJCVHpTWnpaVm5aUEJHMSt1c0hRanV1T3pCYWhU?=
+ =?utf-8?B?U0gzSlhyanZZckpqOTVwZVFDa2s4YmdENHowM2htLy9mOEgza09LOW8rVGl6?=
+ =?utf-8?B?WWF4QS9rajUrMEhOaGR2TGllbDV3dmdkcThYS0NXcklCZmlPUHJnbDNhajhy?=
+ =?utf-8?B?Njd0OWJVYi9VbGJmS0hlSmNQSlhsTXQ5Nm5WcVk2c2lnTERvMExCT3FxQVZa?=
+ =?utf-8?B?bjVoYXJKaitTaXdpUU0wSHFOTzBqVjlyQ0Q4eGFMTjE3ZTZjNjV4R3p2U2JY?=
+ =?utf-8?B?QS9MMXoxaWVsU01YZmRjaWtjMnh5OHFpTG5YU2Q1UUhVZVRqcjhTdjd5Y1pF?=
+ =?utf-8?B?d1ZMYXFRNE5TTDgvQzQ3MGpWU05aRjMyM3hqSW5lOUF4ZGxFZUNWbzFhK2kx?=
+ =?utf-8?B?UnJ1WUM3S05PaDU3SndJVjNCamJLbzc4Qzh0U1pJSGxsOUE2QVU1ajBWNnUr?=
+ =?utf-8?B?QkxKR1Q5MHRNUERSai9mTEIyREVJd0RyaS9BQ0hhN1NSRGRYMTlDNEZSK2Vs?=
+ =?utf-8?B?OWJNajE3SlBrYWh3bGNhVkxhdUJDb2tWckxRVkJSM3V3bFVPQVA3d2YyNlly?=
+ =?utf-8?B?S2QranRxak5KblVRanJ5aEltSWV2RlZMOVJKNXU1MXgwSDVXRGFDUFRvMVp0?=
+ =?utf-8?B?NlJ2RHliNzI1VkZFUlBYbmZFK0dkK0V4MnBCN1ZhTmI0TDgwMCtMVjA0aWhN?=
+ =?utf-8?B?VStsRlAvdjRCSzJpSmhZdERxUVJjc0l3Vk9qMkZLSDRYVjlZNWtKUmp6SXNP?=
+ =?utf-8?B?UkE9PQ==?=
 X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0: GxBTWpYIBvRRHyO7OnUp5+Votmjy6pBf235msiTnSb3byTVQ4ru8Mv5iWxV8GWRarRQ7T1Vuzq3QdSuB1agOUoojq2wEsls2uA/jR+6ClC1H44hF+k4uhf7F14tiiWHiRYG4cMaDzwY/wrzk3g4eaUjgYqczmARSKG9i5ggYm7RN3mpVJ7nggPoEEKQwI6Xn3BPuUUYIj68h7sFzwkfzJt+ZBYLXfxBbx7sdgqIbZmaeIOXrtK7RQEXlSlFdWjW1aA5RNHVJHMfhjhiRfY/TDI2fcrmxYNLHVXEpF+1T9OIlRH362EL3TAsXYMsDPW8ghV96lzrc5Uk1be7mdNtVnmJuByadYX7L7XKZ9S2IL0vqNHuZ6oT1bRKooYoY7a46u4HYfZDLbMI2vUwIhFyZoVXFcnfD/z73Em0UatbM585QOmlcaL9AMbuY/Twe0Bf31wwOf/JGiwz3gCaZ1oHL8QlGiOJA8Aqs+vlmXqYgq2qEqDnyut+q0vtcDVQgUtnn0ZIH3i2IRDuZINuX43BVY6Er1iYMlhd/K2S2VKCsqze0fCL2bcVBln/di6vhBOckZ+h/JlbNqkjmP8r9ngBinINjR6qU8ytHH98ahlxyZjU=
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0: 3sVKsoW2xZW3M8YMSha40Fmkc3nkC/RF6i6EqmtJoBwRh+c6yoVQganWdps664JZ4JXYVdzjWJBHpt407FDZEabzC9xVzu+fTKSS1fgzNu+cZZdQCyhn7uNJ8rCduYKpw7puwac5hwes4Kf/wbG5ITqDFEeLWKFbCM3YForYCjHt4g+7Sc2ondxp/auT+fcDVCe//EmsSG/K1l0HHtFqP4ArPWwQYd+K9sHoNWAoFtKcpBtYniI0LKjTUhF2csZWaufLfML3VxlP0Y6DiC6wsM5gkh+SHjHsC4s7kOQyWnUs52M0AwCnfCpB/GIALHUECcaJYAr7L9PNR7O66SdDzz76srelXqdAaS3f25x3aXltdYWpMv9h7GxuP8VdAruzu9m8MTlP79UtDu9sRS+07fpogMUMpS2p4K9Fvabd/c0KJaj5FzAmg32D2F4iGH4U2jp4PIvR+xEuJdgUauFpiYIHUnhoRDccH2V50dwfgtMIgCBFlJMnMzWVAGOzAOciz7xDBNTNg98XrmEZUaChEQ2qMCANlm5RhsWVNI53a1w60Mf7qQ1w75WS+Hd+pbef771inaae2LnigJ3vwl6xnYPInUYJmxs53QzBx/VVXc0=
 X-OriginatorOrg: oracle.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3c30233b-407b-489d-6dd3-08dc85951ff4
+X-MS-Exchange-CrossTenant-Network-Message-Id: d378d89a-0581-47ce-fe31-08dc8598674e
 X-MS-Exchange-CrossTenant-AuthSource: DM4PR10MB5943.namprd10.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 4e2c6054-71cb-48f1-bd6c-3a9705aca71b
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: bMFialCGIvBMKu2JOoTecP94fukpgu7EQxpAf5teVo5PSwW8gZBkVh6OjBxGjJtY4WVzmuWj0Va5vAd1/4cRcjCKKMRq1xVdT+Hx8ze2e1k=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR10MB8174
-X-Proofpoint-GUID: eDj7LLSLCBQu1JxTKmUJlQ8DPcd6SHLo
-X-Proofpoint-ORIG-GUID: eDj7LLSLCBQu1JxTKmUJlQ8DPcd6SHLo
+X-MS-Exchange-CrossTenant-UserPrincipalName: 6NjodytebjJ0GLMUoGAMMjCy9fHfzTzU/y9T7DYXo8B4BaKP3YJX63K8OK8kkUgCI2XuVnJ2PS7fIMbRPdJy5UJyebSp0eRupbiFKu+Udgg=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0PR10MB4503
+X-Proofpoint-GUID: V91XPY6zoJtO9rUKf3r-biPHXvPKXXms
+X-Proofpoint-ORIG-GUID: V91XPY6zoJtO9rUKf3r-biPHXvPKXXms
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -187,53 +189,110 @@ Cc: samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Thank you! That might be it.
-Let me try to build with your patch.
+Hi Stefan,
+
+Still fails. With your patch it's better, LP_RESOLVE builds,
+but DNS_UTIL and LIBNMB do not build.
+
+The 'krb5.h' seems to be included through libads.
+Maybe libads needs to define its dependency on 'krb5'?
+
+Errors:
+
+[1175/3103] Compiling source3/libads/kerberos.c
+In file included from ../../source3/libads/kerberos_proto.h:33,
+                 from ../../source3/libsmb/namequery.c:33:
+../../lib/replace/system/kerberos.h:33:10: fatal error: krb5.h: No such file or
+directory
+   33 | #include <krb5.h>
+      |          ^~~~~~~~
+compilation terminated.
+
+Waf: Leaving directory `/builds/vbatrla/samba/bin/default'
+Build failed
+ -> task in 'LIBNMB' failed with exit status 1 (run with -v to display more info
+rmation)
+
+---
+
+[1982/3103] Compiling lib/ldb/tools/ldbadd.c
+In file included from ../../source3/libads/kerberos_proto.h:33,
+                 from ../../source3/include/ads.h:79,
+                 from ../../source3/utils/net_proto.h:26,
+                 from ../../source3/utils/net.h:183,
+                 from ../../source3/utils/net_dns.c:23:
+../../lib/replace/system/kerberos.h:33:10: fatal error: krb5.h: No such file or directory
+   33 | #include <krb5.h>
+      |          ^~~~~~~~
+compilation terminated.
+
+In file included from ../../source3/libads/kerberos_proto.h:33,
+                 from ../../source3/include/ads.h:79,
+                 from ../../source3/utils/net_proto.h:26,
+                 from ../../source3/utils/net.h:183,
+                 from ../../source3/utils/net_ads_join_dns.c:24:
+../../lib/replace/system/kerberos.h:33:10: fatal error: krb5.h: No such file or directory
+   33 | #include <krb5.h>
+      |          ^~~~~~~~
+compilation terminated.
+
+Waf: Leaving directory `/builds/vbatrla/samba/bin/default'
+Build failed
+ -> task in 'DNS_UTIL' failed with exit status 1 (run with -v to display more information)
+ -> task in 'DNS_UTIL' failed with exit status 1 (run with -v to display more information)
+
+Thanks,
 
 Vita
 
-On Wed, Jun 05, 2024 at 05:50:17PM +0200, Stefan Metzmacher wrote:
-> Am 05.06.24 um 17:40 schrieb Vita Batrla via samba-technical:
-> > I found the changeset that introduced the regression.
-> > The git bisect command says the culprit is:
+On Wed, Jun 05, 2024 at 09:24:07PM +0200, Vita Batrla wrote:
+> Thank you! That might be it.
+> Let me try to build with your patch.
+> 
+> Vita
+> 
+> On Wed, Jun 05, 2024 at 05:50:17PM +0200, Stefan Metzmacher wrote:
+> > Am 05.06.24 um 17:40 schrieb Vita Batrla via samba-technical:
+> > > I found the changeset that introduced the regression.
+> > > The git bisect command says the culprit is:
+> > > 
+> > > $ git bisect bad
+> > >
+> > > I suspect this change in lib/addns/wscript_build:
+> > > 
+> > > @@ -11,6 +11,6 @@ bld.SAMBA_LIBRARY('addns',
+> > >                         error.c
+> > >                         dnsquery_srv.c
+> > >                     ''',
+> > >                     public_deps='samba-util gssapi ndr resolv dns_lookup',
+> > >                     public_deps='samba-util gensec ndr resolv dns_lookup',
 > > 
-> > $ git bisect bad
-> >
-> > I suspect this change in lib/addns/wscript_build:
+> > Sorry for breaking it, I missed this:
 > > 
-> > @@ -11,6 +11,6 @@ bld.SAMBA_LIBRARY('addns',
-> >                         error.c
-> >                         dnsquery_srv.c
-> >                     ''',
-> >                     public_deps='samba-util gssapi ndr resolv dns_lookup',
-> >                     public_deps='samba-util gensec ndr resolv dns_lookup',
-> 
-> Sorry for breaking it, I missed this:
-> 
-> From 67f686a9495649cc2c201c051aaa35d5d8c64133 Mon Sep 17 00:00:00 2001
-> From: Stefan Metzmacher <metze@samba.org>
-> Date: Wed, 5 Jun 2024 17:46:53 +0200
-> Subject: [PATCH] lib/addns: remove unused kerberos/gssapi includes in dns.h
-> 
-> Signed-off-by: Stefan Metzmacher <metze@samba.org>
-> ---
->  lib/addns/dns.h | 2 --
->  1 file changed, 2 deletions(-)
-> 
-> diff --git a/lib/addns/dns.h b/lib/addns/dns.h
-> index abf0906fdabe..6e605cbec2eb 100644
-> --- a/lib/addns/dns.h
-> +++ b/lib/addns/dns.h
-> @@ -27,8 +27,6 @@
-> 
->  #include "../replace/replace.h"
->  #include "system/network.h"
-> -#include "system/kerberos.h"
-> -#include "system/gssapi.h"
-> 
->  /* make sure we have included the correct config.h */
->  #ifndef NO_CONFIG_H /* for some tests */
-> -- 
-> 2.34.1
-> 
+> > From 67f686a9495649cc2c201c051aaa35d5d8c64133 Mon Sep 17 00:00:00 2001
+> > From: Stefan Metzmacher <metze@samba.org>
+> > Date: Wed, 5 Jun 2024 17:46:53 +0200
+> > Subject: [PATCH] lib/addns: remove unused kerberos/gssapi includes in dns.h
+> > 
+> > Signed-off-by: Stefan Metzmacher <metze@samba.org>
+> > ---
+> >  lib/addns/dns.h | 2 --
+> >  1 file changed, 2 deletions(-)
+> > 
+> > diff --git a/lib/addns/dns.h b/lib/addns/dns.h
+> > index abf0906fdabe..6e605cbec2eb 100644
+> > --- a/lib/addns/dns.h
+> > +++ b/lib/addns/dns.h
+> > @@ -27,8 +27,6 @@
+> > 
+> >  #include "../replace/replace.h"
+> >  #include "system/network.h"
+> > -#include "system/kerberos.h"
+> > -#include "system/gssapi.h"
+> > 
+> >  /* make sure we have included the correct config.h */
+> >  #ifndef NO_CONFIG_H /* for some tests */
+> > -- 
+> > 2.34.1
+> > 
 
