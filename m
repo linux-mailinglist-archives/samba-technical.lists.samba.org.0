@@ -2,48 +2,48 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 42D2B9025E4
-	for <lists+samba-technical@lfdr.de>; Mon, 10 Jun 2024 17:45:02 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 13C72902BAE
+	for <lists+samba-technical@lfdr.de>; Tue, 11 Jun 2024 00:29:56 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
-	bh=QkQQqek4SqiPogya+azcCGMEWExf8EZC5VOMNQucsVg=; b=vvvxVKkjCCGsGJmN/HpJQPHqBN
-	J7DvRjoxPUE9UZrjTbNbHjuLeKehgOrl1+3E6Hjv6HjpOZVF9i7frPoHvKsICgLeBX1R0/oYpEh2h
-	nYTQCrlhpdiC+1fQjuVbfr5n0fEUwjQAlRnZkyF7/b66fo4RtMJSsSLYYhyQ3JnpJNDJUkdLjw+Q+
-	eLySa51PiazmAvYzwxD64tdqpvK5FwiK01WpnTjoFWCV9Zz3RnkEZjxqcQUK8r9DPKyrykajA6RLo
-	/c0Yqe5F3IQT9IGPQJ9ao1QGML3Kwd22ugmxM4DfCvP4fUFe+DmK1bpfGPHJqqNeizANFhH8AG3pB
-	SpRartow==;
-Received: from ip6-localhost ([::1]:58752 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=CgGmJn0pb/aOAtqZ3gmxAL5TtOo2jsF4w3LU8lHc8vE=; b=ojduj4evZdexsno0IFc1duFEv1
+	lPgMkVLEV1mCyIZrFirSm8STCXyNDyaG0CsJRB5CWAikLvQZfAa042zJFeCKciXsqv4WAj2ZOI5qR
+	kXejQhZYD68NfpD9WbofeOwuq5g2bPV/lOVf0twUpWyiE7MP7zpirHewQpcTcB/pRl7XlDhhMiDv4
+	yNG/mrdqrjaF+Tun3RLB/Zhj+sY+zVl1yW7Uu1WuBpQ23vgobD18xm0seuHO2MHJC71g1/7YXw8ZA
+	c5PPQW5/IbGj2bqHkeqd/u7gfNA3le4097iQcSyCQvbiJY/1CLS9kZt+IQXgPj/sLzVOY1IOwP/bu
+	PUSyCWzw==;
+Received: from ip6-localhost ([::1]:57938 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1sGhCV-00DNoa-Jn; Mon, 10 Jun 2024 15:44:51 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:36544) 
+	id 1sGnVq-00DPJC-Ix; Mon, 10 Jun 2024 22:29:14 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:54862) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1sGhCO-00DNny-H4
- for samba-technical@lists.samba.org; Mon, 10 Jun 2024 15:44:47 +0000
+ (Exim) id 1sGnVm-00DPJ5-Df
+ for samba-technical@lists.samba.org; Mon, 10 Jun 2024 22:29:13 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=From:To:Date:Message-ID:CC;
- bh=QkQQqek4SqiPogya+azcCGMEWExf8EZC5VOMNQucsVg=; b=MqLdpC+7OZ/anKT/U9tC51fm5i
- uGrJkjU+bTHpcZm0SHg0j7+qMChhUCu8L1kfmb5d4Sw1tHYjWC0vOgSct0xnCy9lDGZtItn235GoA
- cDOee4mTPwqKaCUckb2SRSLbe+HgfL1nIelHUIIDDoUKDkzVOwJqqBljDOCd3daY9Kxjsw9crdlKM
- W3Ych9A9Ox2p4AfpvkUkU25G4ncaYSLMkgJh5cFDsC4WNNjvP+zbmJiKioZ92eCK6hHCvDw/em1h6
- nAsPRVctZYGfKmK2kl2JqyVjSlMBpz512Q4I/8uxvtbxyZWUoswrbe3uBa/EXjdgfiWnH0s19c4ig
- /yNzxcRyde8gmm7TIl790c/Ta2bjZp4MyZrXEduzvGM6tob6ro7s8AvWbAjHIwCdcvoz85H2mGIc1
- Kxz0oswC6pVDRkzcolfqpJtc4dV+66iyrnD+2AfvKC0wiJ23a6Q4R2Z+2NwI2v5IIhbMv224M6eXq
- QnE2ibiOFL5uas8pxIFu/Lx4;
+ s=42; h=Date:To:From:Message-ID:CC;
+ bh=MJmvug0Rz+swhBJxo8MsmeY/EYav62uTPxJXcU2JyZE=; b=ayNjfo5Dj1iRLHqPdGf/xrWWnC
+ 8irbnleBlwWCZUorgLuDYPvHglKo7sQa1g4LCwvQ4yQiZr1Yx5E+HUdRKKYwMIFlF193Z6YQxprvf
+ 2lIb7Ehbbz1w75kbPcWZhXCvkCULXvXWO9U97Pg9kRkLByC4KTb49tWnOw4cubUc8HGrbi+6Y9+1a
+ zpogVXhxrGvXEibR+0sCIwRbvl+AskxR11y0zIKPZEipzlYEWOsaJz5n37953x35KVw1W13JEUvng
+ Lq2rbo11mda5syL3x1TSe9vsC7vQdYZlMFTr9Ci9SluPJOU/yQLxzWw5ObZxPor0mVtcBP7STDHC+
+ 0QOIjk6r0eIEFtfHdkS9vlETcnqrpQKDRq5+mJwfnKkQAJzIV+E+dYxpRNhBSHyAPkcn5ZjIOhe7b
+ iSCpgGWnoP64zQ6+z//wl8odsnMx1gvNU+IYHhCDRKx9uZ1Y1k5nY19+5H4ysGYKvXmCS9S7xnN+f
+ 6N64eZByY1O60yJcaHqvNs7E;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1sGhCO-00FzVU-0e for samba-technical@lists.samba.org;
- Mon, 10 Jun 2024 15:44:44 +0000
-Message-ID: <d980bea9-5040-4b8f-97e9-3261f7ed7751@samba.org>
-Date: Mon, 10 Jun 2024 17:44:43 +0200
+ (Exim) id 1sGnVl-00G21b-0f for samba-technical@lists.samba.org;
+ Mon, 10 Jun 2024 22:29:09 +0000
+Message-ID: <d5f766b90be9baa1a3f0eba4ec6e9ffcd7e5ca6b.camel@samba.org>
+Subject: Options for Samba LTS merge practices
+To: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
+Date: Tue, 11 Jun 2024 10:29:05 +1200
+User-Agent: Evolution 3.36.5-0ubuntu1 
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: de-DE
-To: samba-technical@lists.samba.org
-Subject: [Release Planning 4.19] Samba 4.19.8
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
+X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -57,24 +57,38 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jule Anger via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jule Anger <janger@samba.org>
+From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andrew Bartlett <abartlet@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi,
+I've been thinking about how to do merges in our LTS repo at 
+https://gitlab.com/samba-team/lts-community/samba
 
-Samba 4.19.8 is scheduled for Monday, August 12 2024.
+I'm asking only for LTS as it is being done just in GitLab 
 
-https://wiki.samba.org/index.php/Release_Planning_for_Samba_4.19
-has been updated accordingly.
+I'm thinking this repo will, at least initially use 
+
+Merge commit with semi-linear history
 
 
-Jule
+https://docs.gitlab.com/ee/user/project/merge_requests/methods/index.html#merge-commit-with-semi-linear-history
 
+I think this avoids the branch spaghetti issue with merge commits and
+keeps everything bisectable, while grouping patches (which is helpful
+in this LTS environment) to ensure good traceability in this effort
+back to the MRs with the approvals (upstream we do that in the
+bugzilla).
+
+Anyway, I wanted to check here for any strong views.
+
+(If this goes well, perhaps we might consider something similar in our
+main repo, but I'm not suggesting that now)
+
+Andrew Bartlett
 -- 
-Jule Anger
-Release Manager Samba Team  samba.org
-SerNet Samba Team           sernet.de
-
-
+Andrew Bartlett (he/him)       https://samba.org/~abartlet/Samba Team Member (since 2001) https://samba.orgSamba Team Lead                https://catalyst.net.nz/services/sambaCatalyst.Net Ltd
+Proudly developing Samba for Catalyst.Net Ltd - a Catalyst IT group
+company
+Samba Development and Support: https://catalyst.net.nz/services/samba
+Catalyst IT - Expert Open Source Solutions
