@@ -2,90 +2,70 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5281B90906F
-	for <lists+samba-technical@lfdr.de>; Fri, 14 Jun 2024 18:36:02 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 76F66909211
+	for <lists+samba-technical@lfdr.de>; Fri, 14 Jun 2024 19:58:47 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=pWClqSzIrhX0zaI0Q5xWiBUPgaQmPqtQWLE+OG81fS0=; b=XlPTIBWbnLir0DtKJRlkAV1Z4y
-	9c0V9ojIsgVw7Uk58CSt/Tm4ZArC7PmcClTmhBPfPtLMCsKcMkiRZbFFja6NWG5ROE5Q23tPiygBY
-	k6NKK2dA21wAYnxC/tnKobivgY1dPYUyI7VseytZ32kNpyXJx/FzRVGChUcGPTdmrB6YEoKEKKEQx
-	JK7XjexoehgiIJzm2Da7SK1BOB79akTPtB0EWalMwaXLxZiwZWCo+0+7RhSSUqFa8gNC+wOHqs3tu
-	ig999hNmjBTH5EpUz8Cbix2WysmyFpm00w9eQPDOfS0YmLolngyQWmeMgkiyED6lWnecGhEopK9A2
-	Y52XT1Tw==;
-Received: from ip6-localhost ([::1]:65382 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=GILKZDItdd3j1P2FkcCvz44akW43rqMhwWgwb4koatE=; b=yeWZuj5CaQhU79/PBbfx2PQwep
+	AViDWttw96+ohF9IKsJaJdAySqgw6E9svBdeJu24wrkPT3QSiFj8X+uCXQSCVObFN96+l4hyop78j
+	W7+aAmqVKiQC4rWiu4GCwYrrPMJr5c8NSwpWlI8ku0DUZz4Wuyt5O7I9M8I7elZaK5JIz3W+c5EZ7
+	k9rxt0FOVB/zf3Ifo4/TURiXCM0oawBD8RKF00RduHWOFOuzmA6ggq2KPyoZWoGTf1Nvnu3rFOnDC
+	h/6A0HG+lyEIoMhn7Sru2KrvuqmX9LEtKYBsj9ZOjHit5MlriyYcUtSo0mhTbvfziu6rVNW1Fethu
+	yOPsBP/w==;
+Received: from ip6-localhost ([::1]:58606 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1sI9tZ-00DqCs-EB; Fri, 14 Jun 2024 16:35:21 +0000
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124]:57231) 
+	id 1sIBC0-00Dqkt-7I; Fri, 14 Jun 2024 17:58:28 +0000
+Received: from mail-lf1-x135.google.com ([2a00:1450:4864:20::135]:48299) 
  by hr1.samba.org with esmtps
- (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__AES_256_GCM:256) (Exim)
- id 1sI9tU-00DqCi-D8
- for samba-technical@lists.samba.org; Fri, 14 Jun 2024 16:35:19 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1718382912;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding;
- bh=pWClqSzIrhX0zaI0Q5xWiBUPgaQmPqtQWLE+OG81fS0=;
- b=G0JvWezhpWBukk+WdekbQBSBLU4uTjyIVwF2BvRrlsPixNvCGmDOZBzhTHbhSR1o3qO6VR
- ciM7dLxwvJXg9xBfnAXsnlMH18k/yNQ+1+uODTTnAKbLeswg9rdx3Osp0wY8zPtYj3gnVa
- /ei/cb6Qh2793188EU0I7chNPtM1Fcg=
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1718382913;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding;
- bh=pWClqSzIrhX0zaI0Q5xWiBUPgaQmPqtQWLE+OG81fS0=;
- b=Y6KSIOk8kJw9WT5zMalz3k0gzWwPNjr2T4s8CEpJonybniY5X3agBemDYGEWUO39EBivUC
- /05M3y3Rpz/ZzGLzv/zx4nEMexh/UK03gGlxyPI1BVO4GOhZVj+IedPmPVUYPUGKBEGhaD
- 1NOGh+WOhUPFBUheXWrrTG8tD01hB80=
-Received: from mail-lf1-f69.google.com (mail-lf1-f69.google.com
- [209.85.167.69]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-617-RI3Nfy0XO3aDTTrDglswSw-1; Fri, 14 Jun 2024 12:19:13 -0400
-X-MC-Unique: RI3Nfy0XO3aDTTrDglswSw-1
-Received: by mail-lf1-f69.google.com with SMTP id
- 2adb3069b0e04-52c7cff3b89so1832296e87.0
- for <samba-technical@lists.samba.org>; Fri, 14 Jun 2024 09:19:13 -0700 (PDT)
+ (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1sIBBu-00Dqkm-7Y
+ for samba-technical@lists.samba.org; Fri, 14 Jun 2024 17:58:25 +0000
+Received: by mail-lf1-x135.google.com with SMTP id
+ 2adb3069b0e04-52bc1261e8fso2875443e87.0
+ for <samba-technical@lists.samba.org>; Fri, 14 Jun 2024 10:58:21 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1718387901; x=1718992701; darn=lists.samba.org;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=zBIyoi+p6nAtEctYKpcWjN27GPWe1pucSH6tIg85YiM=;
+ b=HHFbC6e4xRm87tbTOtv6GB8ax+Z10QtnYvk+YYeltyAwd8htRtygNSJ3XVe/F1nw62
+ 4G1C+AeZRs5wDz4HmS16mVq59jucblLjMRvqsMgTS/6V2jxGGITUOBTV6xyNwudFpLCP
+ YQtt4FxnXbyA0dAe0hmiVD3zJpdIv9PVRWPB3CamEMNJNOFacLjc07y6MFhgKRfESPZR
+ 2jlfqxfPEUcrW/fE1zF8OXwXIoGYAztOwyrns0dPQZ8D4JnGhypaJbmL509W+Jmap4ap
+ fZoWUSY1/2tbogK52UfjQKnGuNP9Mpo5bigwEd3tnX+RKE+A7hSralXbDzzJdzEAtmRx
+ kADw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718381951; x=1718986751;
- h=mime-version:user-agent:content-transfer-encoding:date:to:from
- :subject:message-id:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=pWClqSzIrhX0zaI0Q5xWiBUPgaQmPqtQWLE+OG81fS0=;
- b=B0rMtuoBIiyWWbG0TyEbi7kPVY+zPK7dC/RtPgC4qSju2nPaLRjukDQ2/5zidJt4Dk
- 9kuoY0FuaOFkwpZt0ifnB4CF8uxp+15axLaJPcQZLuKYCW/5yLAYeC+3u93eo4bfeBDs
- ZPA9JtQYomkYuzZ/CFiU1NEtiyqE5J5FT3MElIk7JTdsn/NxDK0/5D8D76WFNwqJxLSf
- KhyaIstCk/E4dgVVrcSCYWSen1HGFtKq3eX1ihFinnMQGDLrTxrkCDPs5KwSTjGTyZog
- UVYWjId4ybjTL1dOJwXrMijWqEON0KzXlevwjlKQy9BZG4EkASSRWrSDrlJCmT6HajIJ
- Yf9Q==
-X-Gm-Message-State: AOJu0Ywd1j0lq4gR4hL8utgJAisGsOV8n2eUmDc3owddUH5j+xL7O1eP
- HtbHqybRveG2BLB2uwr9Dk34+3UJsXvwYlq2lVLU9iHG3qYWDD74szInjG7jx2hlGbq0JSniKmt
- XV4seYOf37rIQaENfBa5H61fI+rfDGM8j/lCqxPRwqmzO5dNjAomuYW4hXM3SymBEGy5+FYdA41
- 7vTG0nuhacJ38jOQK01CjC6+ZKvekgsNPWudL/Nd7PJlS2IVl+
-X-Received: by 2002:a19:f809:0:b0:52c:89ff:10bf with SMTP id
- 2adb3069b0e04-52ca6e999e7mr1784827e87.67.1718381951295; 
- Fri, 14 Jun 2024 09:19:11 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IEYEgUJlcZ3kSjCnYrKr9hsvrTAlrd/9caiwms7bZyN3l5CMqrKDmR02jj8WBFd4v9kj1JECw==
-X-Received: by 2002:a19:f809:0:b0:52c:89ff:10bf with SMTP id
- 2adb3069b0e04-52ca6e999e7mr1784804e87.67.1718381950579; 
- Fri, 14 Jun 2024 09:19:10 -0700 (PDT)
-Received: from splp2.home.spui.uk ([2a01:4b00:b705:d600:8ff1:d9a5:3bb5:3502])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-422f6127c6fsm67734445e9.24.2024.06.14.09.19.09
- for <samba-technical@lists.samba.org>
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 14 Jun 2024 09:19:10 -0700 (PDT)
-Message-ID: <d5a2f19e8e319d29cbae169da4c0d33b7edf3a9e.camel@redhat.com>
-Subject: smb2.session.reauth4: UID/GID to use as anonymous user when
- modifying DACL
-To: samba-technical@lists.samba.org
-Date: Fri, 14 Jun 2024 17:19:09 +0100
-User-Agent: Evolution 3.52.2 (3.52.2-1.fc40)
+ d=1e100.net; s=20230601; t=1718387901; x=1718992701;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=zBIyoi+p6nAtEctYKpcWjN27GPWe1pucSH6tIg85YiM=;
+ b=bn/pWBnDsxgk6peuZ2dPnU0KIFzC5MDxZ/gcesxlCFoSrUifFruyi3rW7mtclMWP4O
+ hL1nJzymx6wDZxUSWXoFju+H/SWzYc/o9YoUw2VJEW8FBM2pFwrKtfQdmQ3sB0PbHVDv
+ aO50AOuNb45qIPNqNlmUlJcfh7HT07j2qyYINxRSpUAjs1Rn40Wt1+CaqQk6z/GeTmyw
+ s/r8QdyiNQwkNvOOPrtZcbcBxBTyTOEC+a73TxorI1kevEytMdNG3QOEEGgfqPb4rmdL
+ qvSLtyiMeVlkMhdwnhIolixK1/JE87N6vFPnWHm5iSN/vPpo/ad1JAQ7hSQzstyq+0/u
+ g9eA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXt/lNiIFL7K0JXiK0nX4BE98tcFaGeZ1lHD1iryc4qgvkxZHpwNB5lmHwo6OVDK18OCIXvqO33/ZCmlZqodSoA7z2nD4zxIAoUPqUyUWN3
+X-Gm-Message-State: AOJu0Yw4Ipwrxi2NL+9xpdIeeH8ZKTjgmafMoJH5eyUZ1As56PqOxPJ5
+ 4dKTYUbovwpuV/9UsfqNxvbzg6Kn/WlMNV2Edai+jjyhMDqdfy+ntaqlNH5s6siXACpJ4Tq6zLi
+ z8DvOaUgZNPo2SIXH3VW4FcM1hDI=
+X-Google-Smtp-Source: AGHT+IFPgrI+XOVyPXCGZSmA53iQPcrxc33s7Eswc6YQqN5F35xKen6AJCL8R8auJDKWE29rXvLseGBGXSB02mtAihM=
+X-Received: by 2002:a19:e041:0:b0:52c:8df9:2e6f with SMTP id
+ 2adb3069b0e04-52ca6e92d40mr2269631e87.42.1718387900544; Fri, 14 Jun 2024
+ 10:58:20 -0700 (PDT)
 MIME-Version: 1.0
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
+References: <202406141533.e9eb9ad9-oliver.sang@intel.com>
+In-Reply-To: <202406141533.e9eb9ad9-oliver.sang@intel.com>
+Date: Fri, 14 Jun 2024 12:58:09 -0500
+Message-ID: <CAH2r5muisz3GrrPREB=sSH6h_sMS7E+WMynvZQqevHGzrmtcvg@mail.gmail.com>
+Subject: Re: [dhowells-fs:netfs-writeback] [netfs,
+ cifs] d639a2f9ab: xfstests.generic.080.fail
+To: kernel test robot <oliver.sang@intel.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -99,64 +79,114 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Sachin Prabhu via samba-technical <samba-technical@lists.samba.org>
-Reply-To: sprabhu@redhat.com
+From: Steve French via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Steve French <smfrench@gmail.com>
+Cc: Paulo Alcantara <pc@manguebit.com>, Steve French <sfrench@samba.org>,
+ lkp@intel.com, linux-cifs@vger.kernel.org, samba-technical@lists.samba.org,
+ Jeff Layton <jlayton@kernel.org>, David Howells <dhowells@redhat.com>,
+ linux-fsdevel@vger.kernel.org, oe-lkp@lists.linux.dev, netfs@lists.linux.dev
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hello Team,=20
+I also ran into this (mtime update bug) so did not merge this patch into
+cifs-2.6.git for-next
 
-I have been testing the latest vfs_ceph2(experimental) module in the
-process of being written by Shachar Sharon.
-I hit a failure in the test=20
-smb2.session.reauth4
+On Fri, Jun 14, 2024 at 2:57=E2=80=AFAM kernel test robot <oliver.sang@inte=
+l.com>
+wrote:
 
-failure: samba3.smb2.session.reauth4 [
-Exception: ../../source4/torture/smb2/session.c:603: status was
-NT_STATUS_ACCESS_DENIED, expected NT_STATUS_OK: smb2_setinfo_file
-failed
+>
+>
+> Hello,
+>
+> kernel test robot noticed "xfstests.generic.080.fail" on:
+>
+> commit: d639a2f9abbeb29246eb144e6a3ed9edd3f6d887 ("netfs, cifs: Move
+> CIFS_INO_MODIFIED_ATTR to netfs_inode")
+> https://git.kernel.org/cgit/linux/kernel/git/dhowells/linux-fs.git
+> netfs-writeback
+>
+> in testcase: xfstests
+> version: xfstests-x86_64-e46fa3a7-1_20240612
+> with following parameters:
+>
+>         disk: 4HDD
+>         fs: ext4
+>         fs2: smbv3
+>         test: generic-080
+>
+>
+>
+> compiler: gcc-13
+> test machine: 4 threads Intel(R) Core(TM) i5-6500 CPU @ 3.20GHz (Skylake)
+> with 32G memory
+>
+> (please refer to attached dmesg/kmsg for entire log/backtrace)
+>
+>
+>
+>
+> If you fix the issue in a separate patch/commit (i.e. not just a new
+> version of
+> the same patch/commit), kindly add following tags
+> | Reported-by: kernel test robot <oliver.sang@intel.com>
+> | Closes:
+> https://lore.kernel.org/oe-lkp/202406141533.e9eb9ad9-oliver.sang@intel.co=
+m
+>
+> 2024-06-13 08:02:14 mount /dev/sdb1 /fs/sdb1
+> 2024-06-13 08:02:15 mkdir -p /smbv3//cifs/sdb1
+> 2024-06-13 08:02:15 export FSTYP=3Dcifs
+> 2024-06-13 08:02:15 export TEST_DEV=3D//localhost/fs/sdb1
+> 2024-06-13 08:02:15 export TEST_DIR=3D/smbv3//cifs/sdb1
+> 2024-06-13 08:02:15 export
+> CIFS_MOUNT_OPTIONS=3D-ousername=3Droot,password=3Dpass,noperm,vers=3D3.0,=
+mfsymlinks,actimeo=3D0
+> 2024-06-13 08:02:15 echo generic/080
+> 2024-06-13 08:02:15 ./check -E tests/cifs/exclude.incompatible-smb3.txt -=
+E
+> tests/cifs/exclude.very-slow.txt generic/080
+> FSTYP         -- cifs
+> PLATFORM      -- Linux/x86_64 lkp-skl-d05 6.10.0-rc2-00003-gd639a2f9abbe
+> #1 SMP PREEMPT_DYNAMIC Thu Jun 13 09:50:57 CST 2024
+>
+> generic/080       [failed, exit status 2]- output mismatch (see
+> /lkp/benchmarks/xfstests/results//generic/080.out.bad)
+>     --- tests/generic/080.out   2024-06-12 14:13:57.000000000 +0000
+>     +++ /lkp/benchmarks/xfstests/results//generic/080.out.bad   2024-06-1=
+3
+> 08:03:12.373660796 +0000
+>     @@ -1,2 +1,4 @@
+>      QA output created by 080
+>      Silence is golden.
+>     +mtime not updated
+>     +ctime not updated
+>     ...
+>     (Run 'diff -u /lkp/benchmarks/xfstests/tests/generic/080.out
+> /lkp/benchmarks/xfstests/results//generic/080.out.bad'  to see the entire
+> diff)
+> Ran: generic/080
+> Failures: generic/080
+> Failed 1 of 1 tests
+>
+>
+>
+>
+> The kernel config and materials to reproduce are available at:
+>
+> https://download.01.org/0day-ci/archive/20240614/202406141533.e9eb9ad9-ol=
+iver.sang@intel.com
+>
+>
+>
+> --
+> 0-DAY CI Kernel Test Service
+> https://github.com/intel/lkp-tests/wiki
+>
+>
+>
 
-]
+--=20
+Thanks,
 
-From what I understand, the test does the following
-test_session_reauth4()
-- SESSION setup with test user
-- CREATE file
-- GETINFO SEC_INFO on the file - get owner, group and dacl
-- Reauthticate as anonymous - SESSION setup with anonymous user
-- SETINFO on file - We copy the DACL from the earlier GETINFO and add
-additional access for anonymous user.
-- Reauthenticate as original user - SESSION setup with test user.
-- GETINFO on the same file
-
-The failure happend when we attempt the SETINFO as anonymous user and
-an ACCESS_DENIED error is returned at
-https://gitlab.com/synarete/samba/-/blob/vfs_ceph_ll/source3/modules/vfs_ce=
-ph2.c?ref_type=3Dheads#L1039
-
-This appears to be caused by the perms set earlier and passed to the
-ceph_ll_listxattr(). These are set at
-https://gitlab.com/synarete/samba/-/blob/vfs_ceph_ll/source3/modules/vfs_ce=
-ph2.c?ref_type=3Dheads#L533
-using the uid and gid in unix_token.
-
-By adding instrumentation, we can see that the uid/gid set in the
-unix_token at this time is for user nobody/nobody which is mapped to
-anonymous user. This user obviously doesn't have permissions to modify
-the file.=C2=A0
-
-At the same time, I can also see that getuid()/getgid() returns 0/0 and
-geteuid()/getegid() also returns 0/0. Does the default plugin use
-uid/gid 0/0 while performing this operation?
-
-I have the following questions
-1) What are we testing for with this smbtorture test?
-2) Is the anonymous user allowed to modify the DACL of the file as done
-in the test? This would obviously lead to access denied errors as we
-see currently.
-3) What uid/gid should be set when performing this action as the
-anonymous user?
-
-Sachin Prabhu
-
-
+Steve
