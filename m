@@ -2,63 +2,49 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 98DFA91151D
-	for <lists+samba-technical@lfdr.de>; Thu, 20 Jun 2024 23:49:21 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2D0D09115F0
+	for <lists+samba-technical@lfdr.de>; Fri, 21 Jun 2024 00:53:44 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=iGsIbvP9wUJrA+gK6+dqv0wXwaQSuhDcKjqgH75vrn8=; b=RRw1mt3aQhY3j0fFZBdMr1MspA
-	QzLDhwy3HGEzKw3APY3ym1z/uIYHhK0tnS6bcjRpunNFXuE730cOD71Lphc/DW2fgrfYBTOYnV3NO
-	47s+BN0Scaw9bqHm2lvf5aK7POr5J3qay2TwxIJO5dCVy5ULLEkDGXYCHarya0VoZ7IrCgKeoE39n
-	fJm86NLmvIyKcXta9+LBEO9YWjUkNZwKl83X7AFNm2x18IvF8IC3Bj4yRiN1Vtd9mqtfLE/rmXuWM
-	YsybjYdEKXTT7bqge710UgkAuNoOx1xSTxPWa6WcLf1GYSzHowcShaBO/YLc56bVqufkzju03QXVR
-	lNRypqxA==;
-Received: from ip6-localhost ([::1]:26268 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=iLJV2+wo/zseHrrWV0YEIwEct+KOy1nwZ8ZyGWZXqZ8=; b=OZm7SZ/4a3E911ZEYrDfaesnlM
+	N/Wm1DOhT8/A/IyrQhtmjmh/ZEqeAKZbeqbfHq1zDDg7Gyw5VJvZlOPM/lIKAQwuTmVyMUo0fHHwd
+	QyAbD8KvfzwDJfx25OFGPI0s0g7hJuvne4lVKp4XJ2kgkfLc8F3RwC684uZTO+aNX9VbO48D4/LWh
+	WeR9MLycTM8HhqnbnnipQlYe3BnC/QnutFz6Z1D/748fi7hwo2IwoAzz17m10D1F7bR1gqWlM1PsH
+	fNNMY4f3B93vQ+jETuJcIxbilqc5w9RnnD0ElrfocQU/bbGLtJ6F71W2a6mWFK3R6/vgkCj20VL6U
+	WitqKgCg==;
+Received: from ip6-localhost ([::1]:34934 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1sKPeG-00ElHt-1Y; Thu, 20 Jun 2024 21:48:52 +0000
-Received: from cat-hlzsim-prod-mail1.catalyst.net.nz ([103.250.242.12]:37264) 
+	id 1sKQeS-00ElUd-OM; Thu, 20 Jun 2024 22:53:08 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:42694) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1sKPeA-00ElHm-II
- for samba-technical@lists.samba.org; Thu, 20 Jun 2024 21:48:49 +0000
-Received: from [192.168.192.96] (wlgwil-nat-office.catalyst.net.nz
- [202.78.240.7])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (Client did not present a certificate)
- (Authenticated sender: douglasb@catalyst.net.nz)
- by cat-hlzsim-prod-mail1.catalyst.net.nz (Postfix) with ESMTPSA id 6C50B401DD; 
- Fri, 21 Jun 2024 09:48:39 +1200 (NZST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=catalyst.net.nz;
- s=default; t=1718920119;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=iGsIbvP9wUJrA+gK6+dqv0wXwaQSuhDcKjqgH75vrn8=;
- b=oi8iTV8i4oz2KuJvqG8yZtjnu0MoIVO9niwj52aTHusuifTowrs0NpCV8xDzoo6rp0sxbL
- lNn2JendaxNy3mkPDcWTNQe2ESJLZoo3UtpdtaxkuY3oqt9CfAcBR+wojPouIGPxKf7HgO
- oBrim2GVWsZWq1I62uhK3GEIoRva1VIVxuaib3rReI/pxcQzue9+JWQT5PuhFMTAmxEc8b
- fy2ld2vMkis7487YcGKdKqmD8tKKje2QqdtSvd75SIsJL5O+1WXWTrjgA2h2762oAlfTXZ
- BVPS8RiEm2mLnhPjHUB+dgGmfDYP1O+E3RvCBCZOntMZC2KQHkGyyiW3Y0oczQ==
-Message-ID: <0c94a659-e0df-483c-8efb-faaf907148f5@catalyst.net.nz>
-Date: Fri, 21 Jun 2024 09:48:38 +1200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
+ (Exim) id 1sKQeN-00ElUW-A9
+ for samba-technical@lists.samba.org; Thu, 20 Jun 2024 22:53:06 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Date:To:From:Message-ID:CC;
+ bh=iLJV2+wo/zseHrrWV0YEIwEct+KOy1nwZ8ZyGWZXqZ8=; b=uZ7SZ9NYxq33RIrOppnj+vFLX6
+ qk7UanG7aqRnzVDCo2koY9AJI3Pz5Vx/vnSMiLcv5m9oUKAUNLc6C4X2AgrthuRwe9nvyqD9vXRKe
+ OEW49hduoyt1D1uQKXJBXqooOruL3LzAiJudctaXmgzxJDZg4kM7Ty7s1Qn3m8V4MCy+6/fO01YTp
+ I8/xrlWytIBUMb6d0OzQtrelpeW8cWwy+yXCGJlsr2pygvrzv1/r8nfaL2xP9qj+35T33Rehae+kp
+ 1ObJlG9Thg3+Esn4iQGrok+tw6AuthvjQ/Nkm6r9rKLzub4lVoAJnfPTBUWDiBNzzwCY0iYcza1N+
+ RLFsajctzfJxYHY+cqIFWadCTFwZB6WSHMOex6BIgalFwYAMhlWbA570DDL72iejTKp4b/26vA3dv
+ tYBB8GTEhChnUpa9OKIxTNFm9Nodk6os95korQTHvPisFm1eCum3idr+U2lIoumxe8+RYvP7P3ot1
+ hN2fPZqXf4G8GKwVkBKhqzYH;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1sKQeK-0008GJ-22; Thu, 20 Jun 2024 22:53:01 +0000
+Message-ID: <050f14547c398b5d73faf917540f02dc0dee7f74.camel@samba.org>
 Subject: Re: vendor version/revision string
-To: Michael Tokarev <mjt@tls.msk.ru>,
- samba-technical <samba-technical@lists.samba.org>
-References: <7bcfc541-aa5e-4663-a6e0-d21c2b3f3c33@tls.msk.ru>
-Content-Language: en-US
+To: Michael Tokarev <mjt@tls.msk.ru>, samba-technical
+ <samba-technical@lists.samba.org>
+Date: Fri, 21 Jun 2024 10:52:56 +1200
 In-Reply-To: <7bcfc541-aa5e-4663-a6e0-d21c2b3f3c33@tls.msk.ru>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Spamd-Result: default: False [-30.09 / 15.00];
- LOCAL_WHITELIST_IP(-30.00)[202.78.240.7];
- MIME_GOOD(-0.10)[text/plain]; XM_UA_NO_VERSION(0.01)[];
- MIME_TRACE(0.00)[0:+];
- DKIM_SIGNED(0.00)[catalyst.net.nz:s=default];
- GENERIC_REPUTATION(0.00)[-0.99999968009844]; ARC_NA(0.00)[];
- MID_RHS_MATCH_FROM(0.00)[]
+References: <7bcfc541-aa5e-4663-a6e0-d21c2b3f3c33@tls.msk.ru>
+Content-Type: text/plain; charset="UTF-8"
+User-Agent: Evolution 3.36.5-0ubuntu1 
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -72,66 +58,120 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Douglas Bagnall via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Douglas Bagnall <douglas.bagnall@catalyst.net.nz>
+From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andrew Bartlett <abartlet@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On 20/06/24 18:46, Michael Tokarev via samba-technical wrote:
+On Thu, 2024-06-20 at 09:46 +0300, Michael Tokarev via samba-technical
+wrote:
+> Hi!
+> 
+> After Andrew added --vendor-name & --vendor-patch-revision options, I
+> decided to give
+> it another try to embed downstream (distribution) version info into
+> the binaries
+> (yes, I know all that stuff were there before too, in a form of
+> VERSION file).
+> 
+> And faced the same old issue which I faced before, when I tried that
+> previously and
+> failed.
+> 
+> The prob is that --vendor-patch-revision expects just a
+> number.  While in debian,
+> version string is a string with many words, - even the debian
+> revision "number"
+> (everything after the upstream version) isn't a number but a
+> string.  For example,
+> 4.17.12+dfsg-0+deb12u1~bpo11+1 - there, --vendor-patch-revision is
+> "0+deb12u1~bpo11+1".
+> So --vendor-patch-revision can't be used obviously (as it fails right
+> away if something
+> besides a number is specified).
 
-> So I tried to (ab-)use --vendor-name instead, - adding debian version 
+Yeah, this was one of those moments when the "smacking my head" meme
+felt appropriate, it is set as an int in the configure stage because
+otherwise the build fails when we encode it into a protocol structure
+element (trying to represent the version in a binary form)! 
+
+I was much frustrated, my simple little improvement was getting complex
+(Samba as ever), and thankfully found I could restrict it to an in at
+the command line parsing layer!
+
+> So I tried to (ab-)use --vendor-name instead, - adding debian version
 > string right to
-> this one (there's no need to have both options, one is definitely 
-> enough).  And while
-> at first it worked (for a simple version like 4.20.2+dfsg-1), it still 
-> fails later during
-> build process with a version string which contains a tilde, like 
+> this one (there's no need to have both options, one is definitely
+> enough).  And while
+> at first it worked (for a simple version like 4.20.2+dfsg-1), it
+> still fails later during
+> build process with a version string which contains a tilde, like
 > 4.20.2+dfsg-1~mjt-ubt24 -
-> it fails at link time because linker script will contain tilde in a 
+> it fails at link time because linker script will contain tilde in a
 > symbol name:
 > 
 > SAMBA_4.20.2_UBUNTU_4.20.2_DFSG_1~MJT_UBT24_PRIVATE_SAMBA {
 > ..
 > }
 > 
-> The wafsamba thing is tough to deal with (it's probably the most uneasy 
-> build system in
-> the world).  I tried this change:
+> The wafsamba thing is tough to deal with (it's probably the most
+> uneasy build system in
+> the world).  I tried this change:
 > 
 > --- a/buildtools/wafsamba/samba_abi.py
 > +++ b/buildtools/wafsamba/samba_abi.py
 > @@ -288,3 +288,3 @@ def abi_build_vscript(task):
->   def VSCRIPT_MAP_PRIVATE(bld, libname, orig_vscript, version, 
+>   def VSCRIPT_MAP_PRIVATE(bld, libname, orig_vscript, version,
 > private_vscript):
-> -    version = version.replace("-", "_").replace("+","_").upper()
-> +    version = version.replace("-", 
+> -    version = version.replace("-", "_").replace("+","_").upper()
+> +    version = version.replace("-",
 > "_").replace("+","_").replace("~","_").upper()
->       t = bld.SAMBA_GENERATOR(private_vscript,
-> @@ -317,3 +317,3 @@ def ABI_VSCRIPT(bld, libname, abi_directory, 
+>       t = bld.SAMBA_GENERATOR(private_vscript,
+> @@ -317,3 +317,3 @@ def ABI_VSCRIPT(bld, libname, abi_directory,
 > version, vscript, abi_match=None, p
->       libname = libname.replace("-", "_").replace("+","_").upper()
-> -    version = version.replace("-", "_").replace("+","_").upper()
-> +    version = version.replace("-", 
+>       libname = libname.replace("-", "_").replace("+","_").upper()
+> -    version = version.replace("-", "_").replace("+","_").upper()
+> +    version = version.replace("-",
 > "_").replace("+","_").replace("~","_").upper()
-
-OK, I'm thinking we just jump to --vendor-suffix and
-
-       version = re.sub(r'\W', '_', version).upper()
-
-for these.
-
 > 
->  there's still a prob in manpages:
+> (ugly but ok).
+
+I see Douglas has a better idea down-thread.  Hopefully that can get
+implemented. 
+
+> This made the build succeed.  However, while whole version string
+> sort of made it
+> into the executables, there's still a prob in manpages:
 > 
 > Samba 4.20.2-Debian-4.
 > 
 > Yes, it is cut at the first dot.
 
-Did that not happen the old way, if you patch
-SAMBA_VERSION_VENDOR_SUFFIX and such?
+I looked into this, something is just truncating it before generating
+the TROFF.  Even if "4.21.0pre1-DEVELOPERBUILD" is in the
+bin/default/docs-xml/build/DTD/samba.build.version then 
 
-The missing bit is "20.2+dfsg-1~mjt-ubt24"?
+.TH "NET" "8" "05/06/2024" "Samba 4\&.21\&.0pre1\-DEVELOPE" "System
+Administration tools"
 
-Douglas
+Is what is emitted.  So some truncation the docbook-xml layers that I
+dare not even look into. 
+
+Thanks as always for your feedback,
+
+Andrew Bartlett
+
+-- 
+Andrew Bartlett (he/him)       https://samba.org/~abartlet/
+Samba Team Member (since 2001) https://samba.org
+Samba Team Lead                https://catalyst.net.nz/services/samba
+Catalyst.Net Ltd
+
+Proudly developing Samba for Catalyst.Net Ltd - a Catalyst IT group
+company
+
+Samba Development and Support: https://catalyst.net.nz/services/samba
+
+Catalyst IT - Expert Open Source Solutions
 
 
