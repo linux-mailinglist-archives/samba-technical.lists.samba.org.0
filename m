@@ -2,61 +2,39 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0264F90F9CD
-	for <lists+samba-technical@lfdr.de>; Thu, 20 Jun 2024 01:33:09 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BE08B90FCF7
+	for <lists+samba-technical@lfdr.de>; Thu, 20 Jun 2024 08:47:51 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=F4CpIzNzbBUMPI+mEbkLZg02CLmFQNk66TZ/t91MMao=; b=BIENWUz3bC5l6vU0SeGTr88tlU
-	utYxTIzIB1nTInEEADw/qSuUtGv4UNSddzZxjKv3zPO4vXz7s3JWkDwTna0E74u3KXhkNESecKNOK
-	TODW3b9gvDIsqQbzCIgyHG9sdrB6mhIZojOmLOc/dlO/wx9JClJzyO+9LEuONR+Z+bxLZNk5zG6ZD
-	xsJtLiIMmcFLdg4uahXJdIUZU1H+dhY0vyI6pvOOgBYuvqbrfFMHkbE0wKDfLoF/60TmsnInBtzBt
-	xSReoWGhVFhyEWhhiosWkv7B4cBTbQKncgHXYH5gz2f7Ct7k6BeUq8ZycOrudE7O65R8HkmBGzWTt
-	9VjMgrSQ==;
-Received: from ip6-localhost ([::1]:32978 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
+	bh=K9jfbNWPH86dQNe3bpPSLPD02wnDn1Pq6aNeH3JTzg8=; b=eYuyDNNmE7qrf7Tqr5tMK7R4Ov
+	xZvJaDnAIfcMoPIszjueBufALBYqBQ+Cjj2eLdYF8Ks1A5YcLK05s534YYXldgNfSVEVKl66VgEYI
+	WkEQyK70EIoPCo5X3uEIQgven38ss2upPTf6TkZf/cgfeD6Iv2oIel8Zv1Aqn8TeujTZ+mt4TyvLw
+	ohXRuElnXmjw0Gd1xezxEuaQUUitLUHClogahpDRtvPydKjlao99TEhrpVr1tg9rCKA1Iq6JbTlFK
+	mShoOSVkCRtHKjZDaAz1IqR3HlAbsz7P2WEHC0IR7FmbH6vKCWY8795oMw5Tp6LOY8xQDhzZEOdx2
+	54dgWOww==;
+Received: from ip6-localhost ([::1]:33530 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1sK4my-00EY6f-7P; Wed, 19 Jun 2024 23:32:28 +0000
-Received: from sin.source.kernel.org ([2604:1380:40e1:4800::1]:34022) 
+	id 1sKBZa-00EaGM-BH; Thu, 20 Jun 2024 06:47:06 +0000
+Received: from isrv.corpit.ru ([86.62.121.231]:41071) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1sK4mt-00EY6Y-1i
- for samba-technical@lists.samba.org; Wed, 19 Jun 2024 23:32:25 +0000
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sin.source.kernel.org (Postfix) with ESMTP id 38576CE2139
- for <samba-technical@lists.samba.org>; Wed, 19 Jun 2024 23:32:15 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 86D8CC32781
- for <samba-technical@lists.samba.org>; Wed, 19 Jun 2024 23:32:13 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1718839933;
- bh=F4CpIzNzbBUMPI+mEbkLZg02CLmFQNk66TZ/t91MMao=;
- h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
- b=fLUXXsvZAPE9OKsb3U0T1Wij/dHh7+TZHI6YSxmnJ31CHIL0NM1VEn2t+F9OooW7e
- YH1LEvqE5BltEbIzJoZEb+PJLxNBkS3j8KZeWhZmi6CubdXtB33kBy+LLmSK+Ngryr
- XaMRIWBR23l66F2sIo2AcL/tPysTE9P7XN8vL1rxrd0zU/hw9O7qA1qhyJI+N7hgkW
- v27trALBU5biyPJka64GjGcpegFsOC6t/nbhJo6FdjwuqGrX2t+wiAyQkzB8+dCacf
- e9ZJm2tH906glOF2cdzu6oPozbv+qiQMUmulYQh3ZiEJv4NRHanmglzAy5dIJ+C25G
- xnu5KsammyuBA==
-Received: by mail-oo1-f43.google.com with SMTP id
- 006d021491bc7-5b97a071c92so127754eaf.1
- for <samba-technical@lists.samba.org>; Wed, 19 Jun 2024 16:32:13 -0700 (PDT)
-X-Forwarded-Encrypted: i=1;
- AJvYcCX1zcdrrkj9lBCfuLxrGrCwytPZ6BUT5HOza1Oew5RGF+x9kETaAHPstZUG5JWokdkjiZGsvRQHadEMqvqp7xBEM9M9Cx+N/fzCCsGSFJFy
-X-Gm-Message-State: AOJu0YyjCNYB8KjSXQCuq8L/22Jp4VNnYC3xkFxzXXIlS1dULNfdySng
- ui6KTuN32yuH1qeQMi5JvxpTdaPsOo5tptaObmpHZjKsQHPY2SwSq3OY/VImWXRBB5+vZxOQ394
- 8LcEuXJO7xEUbLkwKaIWBspEPlEE=
-X-Google-Smtp-Source: AGHT+IHztATvBmnqgF15p6/sdSBgWtaA7Pf8BZ+Y2cUp/dd+2nIxbJC+EgJkCNcFTcQIFIugOT8rEaxmZOCNLtYCLKw=
-X-Received: by 2002:a4a:91c2:0:b0:5bb:672:4067 with SMTP id
- 006d021491bc7-5c1adc0d1fcmr4011799eaf.7.1718839932856; Wed, 19 Jun 2024
- 16:32:12 -0700 (PDT)
+ (Exim) id 1sKBZO-00EaGD-Em
+ for samba-technical@lists.samba.org; Thu, 20 Jun 2024 06:46:57 +0000
+Received: from tsrv.corpit.ru (tsrv.tls.msk.ru [192.168.177.2])
+ by isrv.corpit.ru (Postfix) with ESMTP id 2269672216
+ for <samba-technical@lists.samba.org>; Thu, 20 Jun 2024 09:48:08 +0300 (MSK)
+Received: from [192.168.177.130] (mjt.wg.tls.msk.ru [192.168.177.130])
+ by tsrv.corpit.ru (Postfix) with ESMTP id 64D3DEDE1F
+ for <samba-technical@lists.samba.org>; Thu, 20 Jun 2024 09:46:50 +0300 (MSK)
+Message-ID: <7bcfc541-aa5e-4663-a6e0-d21c2b3f3c33@tls.msk.ru>
+Date: Thu, 20 Jun 2024 09:46:50 +0300
 MIME-Version: 1.0
-References: <20240619161753.385508-1-chenxiaosong@chenxiaosong.com>
-In-Reply-To: <20240619161753.385508-1-chenxiaosong@chenxiaosong.com>
-Date: Thu, 20 Jun 2024 08:32:01 +0900
-X-Gmail-Original-Message-ID: <CAKYAXd-V80sdH2uXoDe+xqf9N-gFYTjqWtERrB+-vH0s0NUMvw@mail.gmail.com>
-Message-ID: <CAKYAXd-V80sdH2uXoDe+xqf9N-gFYTjqWtERrB+-vH0s0NUMvw@mail.gmail.com>
-Subject: Re: [PATCH] ksmbd: remove duplicate SMB2 Oplock levels definitions
-To: chenxiaosong@chenxiaosong.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US, ru-RU
+To: samba-technical <samba-technical@lists.samba.org>
+Subject: vendor version/revision string
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -70,26 +48,73 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Namjae Jeon via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Namjae Jeon <linkinjeon@kernel.org>
-Cc: pc@manguebit.com, tom@talpey.com, sprasad@microsoft.com,
- liuzhengyuan@kylinos.cn, linux-cifs@vger.kernel.org, liuyun01@kylinos.cn,
- samba-technical@lists.samba.org, linux-kernel@vger.kernel.org,
- huhai@kylinos.cn, sfrench@samba.org, senozhatsky@chromium.org,
- bharathsm@microsoft.com, chenxiaosong@kylinos.cn
+From: Michael Tokarev via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Michael Tokarev <mjt@tls.msk.ru>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-2024=EB=85=84 6=EC=9B=94 20=EC=9D=BC (=EB=AA=A9) =EC=98=A4=EC=A0=84 1:18, <=
-chenxiaosong@chenxiaosong.com>=EB=8B=98=EC=9D=B4 =EC=9E=91=EC=84=B1:
->
-> From: ChenXiaoSong <chenxiaosong@kylinos.cn>
->
-> smb/common already have SMB2 Oplock levels definitions, remove duplicate
-> definitions in server.
->
-> Signed-off-by: ChenXiaoSong <chenxiaosong@kylinos.cn>
-> Signed-off-by: ChenXiaoSong <chenxiaosong@chenxiaosong.com>
-Applied it to #ksmbd-for-next-next.
-Thanks for your patch!
+Hi!
+
+After Andrew added --vendor-name & --vendor-patch-revision options, I decided to give
+it another try to embed downstream (distribution) version info into the binaries
+(yes, I know all that stuff were there before too, in a form of VERSION file).
+
+And faced the same old issue which I faced before, when I tried that previously and
+failed.
+
+The prob is that --vendor-patch-revision expects just a number.  While in debian,
+version string is a string with many words, - even the debian revision "number"
+(everything after the upstream version) isn't a number but a string.  For example,
+4.17.12+dfsg-0+deb12u1~bpo11+1 - there, --vendor-patch-revision is "0+deb12u1~bpo11+1".
+So --vendor-patch-revision can't be used obviously (as it fails right away if something
+besides a number is specified).
+
+So I tried to (ab-)use --vendor-name instead, - adding debian version string right to
+this one (there's no need to have both options, one is definitely enough).  And while
+at first it worked (for a simple version like 4.20.2+dfsg-1), it still fails later during
+build process with a version string which contains a tilde, like 4.20.2+dfsg-1~mjt-ubt24 -
+it fails at link time because linker script will contain tilde in a symbol name:
+
+SAMBA_4.20.2_UBUNTU_4.20.2_DFSG_1~MJT_UBT24_PRIVATE_SAMBA {
+..
+}
+
+The wafsamba thing is tough to deal with (it's probably the most uneasy build system in
+the world).  I tried this change:
+
+--- a/buildtools/wafsamba/samba_abi.py
++++ b/buildtools/wafsamba/samba_abi.py
+@@ -288,3 +288,3 @@ def abi_build_vscript(task):
+  def VSCRIPT_MAP_PRIVATE(bld, libname, orig_vscript, version, private_vscript):
+-    version = version.replace("-", "_").replace("+","_").upper()
++    version = version.replace("-", "_").replace("+","_").replace("~","_").upper()
+      t = bld.SAMBA_GENERATOR(private_vscript,
+@@ -317,3 +317,3 @@ def ABI_VSCRIPT(bld, libname, abi_directory, version, vscript, abi_match=None, p
+      libname = libname.replace("-", "_").replace("+","_").upper()
+-    version = version.replace("-", "_").replace("+","_").upper()
++    version = version.replace("-", "_").replace("+","_").replace("~","_").upper()
+
+(ugly but ok).
+
+This made the build succeed.  However, while whole version string sort of made it
+into the executables, there's still a prob in manpages:
+
+Samba 4.20.2-Debian-4.
+
+Yes, it is cut at the first dot.
+
+I'll keep it this way for now, - at least the binaries now properly log whole version
+string finally, which is something.
+
+JFYI.
+
+Thanks,
+
+/mjt
+
+-- 
+GPG Key transition (from rsa2048 to rsa4096) since 2024-04-24.
+New key: rsa4096/61AD3D98ECDF2C8E  9D8B E14E 3F2A 9DD7 9199  28F1 61AD 3D98 ECDF 2C8E
+Old key: rsa2048/457CE0A0804465C5  6EE1 95D1 886E 8FFB 810D  4324 457C E0A0 8044 65C5
+Transition statement: http://www.corpit.ru/mjt/gpg-transition-2024.txt
 
