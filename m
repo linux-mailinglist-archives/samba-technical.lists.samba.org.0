@@ -2,51 +2,59 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id C479091172E
-	for <lists+samba-technical@lfdr.de>; Fri, 21 Jun 2024 02:14:24 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6048591197B
+	for <lists+samba-technical@lfdr.de>; Fri, 21 Jun 2024 06:33:51 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=0QQinY99Mb831ruYevOpR+gcyDoI97SKYhxOZe2HG1U=; b=sTal02owJ9yJV5odADuX9X9ijS
-	njOjfLG8dKzqUwOx6j5EN7eq930vmh24S4sLDsDRmksoyFIy2q3o6wmVoO7hetIlBz2UgZLZ9ALvV
-	7gjrxRcBI0JJZp2omLsEuHVvZk+sjYVDxEFpYJIcsHH6de6OvZp9AS/qq9YhZcfBUWlhrXprJ2G8n
-	gqU38YeUkFwz9S5xDnvCHo8B57hJYa47Zmb2FMgE3VHUBnaAcvGsUaPjALTybUu2MvS9y4aahhggD
-	fcGGl9na/MjNGvtYaYeEhA4V8u+TCpLw8hRLyMEmG96xoDtXYEvZqv7ceVd5SV38F8vFORQ/us+RO
-	LU4KCPfQ==;
-Received: from ip6-localhost ([::1]:63404 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=xfW1VvqoS5GPayLwNi5+EPc1w1LY8co3NXY1dfD9BDE=; b=WFfEvb6sMxfpzPgcHUmoEJN8NL
+	1XcH5kXS6xN88pe04fxF3wC0cuXa+0iSXjeR/FI7h0ZeJ38oZJYNHy2+JIToo4ZJwWsCbc6eHNsIK
+	thQPi+gXOYCYSWX+6IexHwc839QTtHdxNNmD5+zvXPbipio3411Qdirknc54jeBfa2tHyqpmkVh+D
+	o1ZmgspqNG53pAgf0JeTU0Q+VMLwrb6VxAquRS8r+uc9znNVym1W0kpDwPb9AghRlpj+5CpI8egeP
+	QIT3eodmATj0X8K7piD3EYCJt79YlqRG5kwQ773+Z27nwcj+d3PmNHzZiTm2v+SgiEmP3rmjgDa6J
+	nfJjyQbg==;
+Received: from ip6-localhost ([::1]:64582 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1sKRuY-00Eloq-Rq; Fri, 21 Jun 2024 00:13:50 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:61232) 
+	id 1sKVxR-00En7J-Bu; Fri, 21 Jun 2024 04:33:05 +0000
+Received: from mail-wr1-x42b.google.com ([2a00:1450:4864:20::42b]:43297) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1sKRuT-00Eloj-JI
- for samba-technical@lists.samba.org; Fri, 21 Jun 2024 00:13:48 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:To:From:Message-ID:CC;
- bh=UScLQhkjmQgkbGxJcXb+IyTD2NGkzSfk+OWf34AzxWY=; b=zstGUksrNBhS6/g2i+b1bckqkE
- JeE/SNb3Vs+H2l4GDbodhiFihyIuaYYejT2iwRM+0ZLdVQWqKIpSClcLB/gT+1NyQZHJDFE5/zCI+
- glb800DHJrGyL1NAwtWOxrTqcLxea7I0+XTnt7/Y0hfbzafsrkS172jGk2ArBR+zcbpFhCGDymFhn
- 1PR9MBFBoRsa8vFUH9Io1/3jht1yji7ixUkwUsVFUQN25E6qQvqk+I4Rn3+73MfYgJvKlbQ2HjIcn
- 7Rh5mry5yqU7n0t0GwXytPN8bBGXaarLE/8vcAraMUXOCX9RkM0MnPkSSzA9rTls2J13snHA4iZMc
- YwDCODYt7UMqL+iLu7uHgIRMD6x60j35KjkxdEEDHXkIHAGbKQjKXYYjp0LgkPpg3v0me+N9TE9YL
- 5FSA5kUC2hn78jbYEQmtQohlIh/K4q8z6aUD/Zn+gBElS6JOu7V0IylguraIt9gsSj/B1PXTm2AGd
- 53rvw0jYhSdVMFcfJTt9pWZt;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1sKRuQ-0008nn-2A; Fri, 21 Jun 2024 00:13:44 +0000
-Message-ID: <1c2b9dfa483ba0a0fda0178f21da21749183c3ab.camel@samba.org>
-Subject: Re: vendor version/revision string
-To: Douglas Bagnall <douglas.bagnall@catalyst.net.nz>, Michael Tokarev
- <mjt@tls.msk.ru>, samba-technical <samba-technical@lists.samba.org>
-Date: Fri, 21 Jun 2024 12:13:37 +1200
-In-Reply-To: <c191d350-1dc1-42b8-a341-26281707e908@catalyst.net.nz>
-References: <7bcfc541-aa5e-4663-a6e0-d21c2b3f3c33@tls.msk.ru>
- <050f14547c398b5d73faf917540f02dc0dee7f74.camel@samba.org>
- <c191d350-1dc1-42b8-a341-26281707e908@catalyst.net.nz>
-User-Agent: Evolution 3.36.5-0ubuntu1 
+ (Exim) id 1sKVxN-00En7C-8r
+ for samba-technical@lists.samba.org; Fri, 21 Jun 2024 04:33:03 +0000
+Received: by mail-wr1-x42b.google.com with SMTP id
+ ffacd0b85a97d-3621ac606e1so1596967f8f.1
+ for <samba-technical@lists.samba.org>; Thu, 20 Jun 2024 21:33:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=egnyte.com; s=google; t=1718944380; x=1719549180; darn=lists.samba.org;
+ h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=cVRP31fEFbe+6sb1xWV+6w1HJc5v+Pqt3OYLDA2Gm40=;
+ b=gkkqywvhPlWKME7YMJ9+C0KgqF+ele9OYTeC1QyLdglPizSA8wj+MVSKaj5UkD9KB4
+ 4zZnEA0WKcCg31OAphHa8OkBmdBKMl6fWxvqXU5vhqIkGQkvL4EQyeKrrL6wtoZG3WDI
+ tSFGpEHjdd13hrBA4cmD5ZDVvOwDpNgc0Go7E=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1718944380; x=1719549180;
+ h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=cVRP31fEFbe+6sb1xWV+6w1HJc5v+Pqt3OYLDA2Gm40=;
+ b=j1cXcgh0kR9OWuqu1HNqHqSTc+a1mGdJOIjq1puP4nDw4MqyvWm2285PMtAS/42WNY
+ o4JR4zmIzVSeQV1xIXifGZz5wx2XtKZI01NLyXvoll01NR/B1pQDCFOHij0eSGFRDggR
+ 71gcytnJAUtNkHyUej/h9ISdwXnoCXYggfA96r/90ijNalMQW4R2RG3RkDf8H0CABul6
+ Z17sJ/67o+fRSbVmF09hkLvxvJpxn7IrCo19jtF7+sri3Gy4Qfk/QOxgHfguzgwrrP8x
+ GxIZXLsK3JdMC+ucTlVz8YVwshKSdQ/jVIKDp1ECQJWloNPrMTB5H+qcZUJ+EWC2L6AR
+ UzhA==
+X-Gm-Message-State: AOJu0Yx9u/68qxiMPCMSyuEz1H7oZ2dPxl176IKDOZznEc9GjkJLYBZN
+ 8Rr5qyQHl2tirsJ4vY6Zs4eMkcEm/lQNtXTp6El59NO6t4mOhr7RRNFqPmCbb3UWyumsklCp2lS
+ 3v8h31R6d57udZ7cVmSfHs4Hx376kTTByVAAZtYevS96ByaS0UvI=
+X-Google-Smtp-Source: AGHT+IHfH+xngZvBT+OKvf/FA/7+V1mPV4eGkmQMh0roAqVU+VZ5HgBy4tkQti5iDl7U39/BC38VqwT2/BYlm98H2/g=
+X-Received: by 2002:adf:ef89:0:b0:360:38a6:6bd8 with SMTP id
+ ffacd0b85a97d-362ffb42f05mr5685205f8f.20.1718944379798; Thu, 20 Jun 2024
+ 21:32:59 -0700 (PDT)
 MIME-Version: 1.0
+Date: Fri, 21 Jun 2024 10:02:48 +0530
+Message-ID: <CAF2c6-HkQ9_6R4Q8MmBE+i_XcU_rmMdTfWmDvV4R3fNmyKRx1g@mail.gmail.com>
+Subject: Understanding fstat call in streams_xattr
+To: samba-technical@lists.samba.org
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
 X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
@@ -61,36 +69,28 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
+From: Varun Mittal via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Varun Mittal <vmittal@egnyte.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Fri, 2024-06-21 at 11:09 +1200, Douglas Bagnall via samba-technical
-wrote:
-> On 21/06/24 10:52, Andrew Bartlett via samba-technical wrote:
-> > .TH "NET" "8" "05/06/2024" "Samba 4\&.21\&.0pre1\-DEVELOPE"
-> > "SystemAdministration tools"
-> > Is what is emitted.  So some truncation the docbook-xml layers that
-> > Idare not even look into.
-> 
-> https://docbook.sourceforge.net/release/xsl/current/doc/manpages/man.th.extra2.max.length.html
-> perhaps.
+Hi
+I am trying to configure the vfs_fruit and vfs_streams_xattr modules with
+Samba version 4.18
+However, the setxattr call keeps failing with an error in
+streams_xattr_fstat function of the streams_xattr module.
 
-diff --git a/docs-xml/xslt/man.xsl b/docs-xml/xslt/man.xslindex
-e252b56d5e5..e6df84af450 100644--- a/docs-xml/xslt/man.xsl+++ b/docs-
-xml/xslt/man.xsl@@ -10,6 +10,7 @@ <xsl:param
-name="chunk.first.sections" select="1"/> <xsl:param
-name="use.id.as.filename" select="1"/> <xsl:param
-name="man.endnotes.are.numbered" select="0"/>+<xsl:param
-name="man.th.extra2.max.length">300</xsl:param>  <!--      Our ulink
-stylesheet omits @url part if content was specified
+Digging into the code, there is 1 snippet I could not understand
 
-Fixed it.
-Andrew Bartlett
--- 
-Andrew Bartlett (he/him)       https://samba.org/~abartlet/Samba Team Member (since 2001) https://samba.orgSamba Team Lead                https://catalyst.net.nz/services/sambaCatalyst.Net Ltd
-Proudly developing Samba for Catalyst.Net Ltd - a Catalyst IT group
-company
-Samba Development and Support: https://catalyst.net.nz/services/samba
-Catalyst IT - Expert Open Source Solutions
+static int streams_xattr_fstat(vfs_handle_struct *handle, files_struct
+*fsp, SMB_STRUCT_STAT *sbuf) { ... sbuf->st_ex_size =
+get_xattr_size_fsp(fsp->base_fsp, io->xattr_name); if (sbuf->st_ex_size ==
+-1) { SET_STAT_INVALID(*sbuf); return -1; } ... } static ssize_t
+get_xattr_size_fsp(struct files_struct *fsp, const char *xattr_name) { ...
+status = get_ea_value_fsp(talloc_tos(), fsp, xattr_name, &ea);
+...
+result = ea.value.length-1; ...
+return result; }
+
+Why is there -1 in the result ?
+If I simply remove this -1, I was able to get setxattr to work
