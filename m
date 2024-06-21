@@ -2,50 +2,96 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3BF4D911FC1
-	for <lists+samba-technical@lfdr.de>; Fri, 21 Jun 2024 10:59:26 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 39014912235
+	for <lists+samba-technical@lfdr.de>; Fri, 21 Jun 2024 12:21:14 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=d+kbcoGavva3UhEVHwjwXK5lIFfthaHHa7hEzAML8HI=; b=yuB3yOrRb44f2XyrG2q2BBvFRO
-	rEb4+mpcoZIQG/03NG7NgLk8pSzgLDUF3rI6qnAnHnkHwN1NCD641VG/TNZnDrdR4m91JIp5pxA6Y
-	kHQRUqM5z8Ki7gKKtb/72Mjn483oCm68gGbMAl73V4WK9Ex8K04XEEcBjfw+InojjIeFmpMlum25o
-	GXUL6mu4e4fwsZxBFEBsd+vCdRALsBITEmlzF8DuVErsuDzaVUgZGnz/j0GoVvATSIQwmNGqsTgN+
-	HtB1h+c0/1LszJpwC299qLaJj+JvMQs3CpAbIOHPyYKx8DtnUY240UPUqFRZAE0ZXJ3a65cikaqbU
-	b4iN3K3Q==;
-Received: from ip6-localhost ([::1]:26456 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
+	bh=I5MZnkv/q7nJY4HHzW8meFkkO/c4uNlLeBVqHiXc3xU=; b=qz2NfPIPjfuZHlaEUFJw1q3BMy
+	3MmewxaPBS1jHLa3dKW59rkQqqwDu36SrRSLZSt1VwV3drzMDKre4mxX5Kidv62KInmVNdv3Jg5Dv
+	aRlLEjTnfi0EC5DWbtgpbqhnG1eyAC2ldPe0T+yziaEBPz1wRTZw5Ek1FbS2Wj1U98l+KBICW/Jk1
+	bEdYgctpzgOsRZL6UhxQovf3cU7IKvlT754VSA8qYAXzvBEEYjATb1dYFjPsTab5MT5Y0VwT2zapH
+	VjDgShCv6KjYX7Phw4ehfCH7ojH2e3/hsKeCq5DSxy7XLS/eZ41Oq8Bf5DPrU0LHTo/R7WGm/ctsH
+	/xOiR0TQ==;
+Received: from ip6-localhost ([::1]:39516 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1sKa6p-00EpzB-1Q; Fri, 21 Jun 2024 08:59:03 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:35204) 
+	id 1sKbNm-00EqiE-3C; Fri, 21 Jun 2024 10:20:38 +0000
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124]:30695) 
  by hr1.samba.org with esmtps
- (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1sKa6k-00Epz4-OZ
- for samba-technical@lists.samba.org; Fri, 21 Jun 2024 08:59:01 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=From:To:Date:Message-ID:CC;
- bh=d+kbcoGavva3UhEVHwjwXK5lIFfthaHHa7hEzAML8HI=; b=m2OhlGaTQdgn8E3WrMU0M0R1VH
- MPa6GZqmLxEsdWq0EwNA07ghJcmMtG+JakCxl4neuAy96SUpdh7XxNg5DqTe3EdHD68Y+nKQBbW7W
- EaKtmCggjT6T2qC3G3AhlgSIRGFM6YmSKTKICWQtqcnwDmrdcVEPNnRa8RZndqH/FU76N7S6Sk2Bi
- yvwNkcnRbm70hAnRU/FH5xFWeObisL/XTRH51lAGIhpbNbbHWI/CVkVBDNTBT/1AsDPy0JLj3VnU4
- waD1e63eiNNAo2v2Z0yvFFaK8qnjyYmn02cad5cJ1sqn+J6RaijQS8wRC2n4C4cedOYbJRCbxsnXz
- zs9FvMwrPzHpNklyVyfSgRIvK/gjzejY3OUGronenKd0GOI2+JFkEkv0YvDd+fa3MNrJwwlPfjX7R
- DZXduxwQRqyrxKliKQAPKPx93nmxbXWX7fjWZM7XMA0g8R6zRiMN7I+Z+t66DfAUlnyhTf2+HYxYF
- 4FwVmvh8VkvsCNL3pHw9iBRI;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1sKa6j-000EBW-0O; Fri, 21 Jun 2024 08:58:57 +0000
-Message-ID: <6f38ea75-1646-48fc-8bea-c7cf28b83c07@samba.org>
-Date: Fri, 21 Jun 2024 10:58:56 +0200
+ (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__AES_256_GCM:256) (Exim)
+ id 1sKbNg-00Eqi4-Gz
+ for samba-technical@lists.samba.org; Fri, 21 Jun 2024 10:20:35 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1718965228;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=I5MZnkv/q7nJY4HHzW8meFkkO/c4uNlLeBVqHiXc3xU=;
+ b=ajY87xSMu+MetUrUl2EeOi/eLR2pxkd9sQF+zOpNeFqBldnNQB/ZMNXdHA0FHkEI8I9olD
+ FAdvPwLR06Xu1t4FumUHwuJC/1YVjJm5BWmVriePFnbabeUfEa8tlXS70hhyJ1vmckSlaU
+ BS+KfZsjl6wKJueMv/7d57RdAnueHyc=
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1718965229;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=I5MZnkv/q7nJY4HHzW8meFkkO/c4uNlLeBVqHiXc3xU=;
+ b=XElD9sJY1R9WBMUd3iaGx9+aAMW3e2FcxopfGqFzHqbne93he4EGlcOVzSdvL79AoTbehi
+ 0j2IHZzAQ+ZQ1L1hPqIPuFtoFeXuZWA79wy/412oR1ULPV7kqg+zu48kUeSumU0WGU9zRh
+ WgGh5zKoE9l8jYBCwId5oH0wtf9B+CA=
+Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
+ [209.85.128.71]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-67-yM5pAGgHM9q6b43f2kFmZw-1; Fri, 21 Jun 2024 06:20:27 -0400
+X-MC-Unique: yM5pAGgHM9q6b43f2kFmZw-1
+Received: by mail-wm1-f71.google.com with SMTP id
+ 5b1f17b1804b1-422322e4abaso10285225e9.1
+ for <samba-technical@lists.samba.org>; Fri, 21 Jun 2024 03:20:27 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1718965226; x=1719570026;
+ h=mime-version:user-agent:content-transfer-encoding:references
+ :in-reply-to:date:cc:to:from:subject:message-id:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=I5MZnkv/q7nJY4HHzW8meFkkO/c4uNlLeBVqHiXc3xU=;
+ b=wjTXycv2xrzK264OizAjMilSmseOEQfTS1V9DeUKdKNNLVQNs9sFmlJYYJVTTXrzLy
+ 4CKSYOI+ZeTHXnVVCkBGmfGUqBopOlz+mXyCMmGugehqEpEJ4EKj23gpBUd21H6nWaKZ
+ iX5V85fDx0HTJXHHCoUNNindRemauGg8L2/9Cs4N0Is4Gygp69leEOfluln814eV5klA
+ 5PqPfYTbCLFHc+jWIPoKqMN3iootYEv1mPPCZ+VRK8f+MJrPw2XjhPxXMkiXXwmNNpmZ
+ 9LQKRr1GNF1eF8Np6bYBM2Be3KAzOMcx38lSYPWW4enHyc2Fom70/QQupKQ4hnIaSwy3
+ K2ww==
+X-Gm-Message-State: AOJu0YxwkQreaZiGvF3Fc9l4aScNjUYFci1xFgK4F9f3FJJ8iJ+2SYsC
+ GeF445x+M9eCRJY7u7gYQXbMGHCxIC8chIgMqDlTs4ysmjF8b3UeqkTuSi/wRt8zbZWqRoZ1swN
+ mBGqoLhelqz/5zRSUCSCevusvP5cxswW5F+W9r0J6VlTJFEgxh2yBDFJ0b24mgaAsKw==
+X-Received: by 2002:a05:600c:4506:b0:422:291:6b3e with SMTP id
+ 5b1f17b1804b1-4246f56d2b6mr104200615e9.1.1718965226469; 
+ Fri, 21 Jun 2024 03:20:26 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IE3Grd/Y3e8pxVkeRvNdbaicIxw4QYMMsCF44TGvW/kvxFENFK8+/ymQk44A3UhvfP5s6NL8g==
+X-Received: by 2002:a05:600c:4506:b0:422:291:6b3e with SMTP id
+ 5b1f17b1804b1-4246f56d2b6mr104200445e9.1.1718965226085; 
+ Fri, 21 Jun 2024 03:20:26 -0700 (PDT)
+Received: from [192.168.21.108]
+ (host81-157-9-97.range81-157.btcentralplus.com. [81.157.9.97])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-36638f86566sm1298857f8f.64.2024.06.21.03.20.25
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 21 Jun 2024 03:20:25 -0700 (PDT)
+Message-ID: <e20ab35eea44679b3ae0da629cb4c7da1178ea11.camel@redhat.com>
+Subject: Re: smb2.session.reauth4: UID/GID to use as anonymous user when
+ modifying DACL
+To: Stefan Metzmacher <metze@samba.org>, Xavi Hernandez <xhernandez@gmail.com>
+Date: Fri, 21 Jun 2024 11:20:24 +0100
+In-Reply-To: <35b4b0bc-1e9a-4d69-9fce-ba8782d1ce65@samba.org>
+References: <d5a2f19e8e319d29cbae169da4c0d33b7edf3a9e.camel@redhat.com>
+ <6e9a8ade-8357-4c35-8d1b-c0749503011d@samba.org>
+ <CAO9H7P876Qx8wEN_kfYQKUW7XqMWevfqx7A0kAbf_1UJkmu=zw@mail.gmail.com>
+ <35b4b0bc-1e9a-4d69-9fce-ba8782d1ce65@samba.org>
+User-Agent: Evolution 3.52.2 (3.52.2-1.fc40)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: Understanding fstat call in streams_xattr
-To: Varun Mittal <vmittal@egnyte.com>, samba-technical@lists.samba.org
-References: <CAF2c6-HkQ9_6R4Q8MmBE+i_XcU_rmMdTfWmDvV4R3fNmyKRx1g@mail.gmail.com>
-Content-Language: en-US, de-DE
-In-Reply-To: <CAF2c6-HkQ9_6R4Q8MmBE+i_XcU_rmMdTfWmDvV4R3fNmyKRx1g@mail.gmail.com>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------MVhLYR4dfIAgEilOMDlshbVh"
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,61 +105,77 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Ralph Boehme <slow@samba.org>
+From: Sachin Prabhu via samba-technical <samba-technical@lists.samba.org>
+Reply-To: sprabhu@redhat.com
+Cc: samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------MVhLYR4dfIAgEilOMDlshbVh
-Content-Type: multipart/mixed; boundary="------------zgjZMJZz2pTHpR8EBaV0DtHq";
- protected-headers="v1"
-From: Ralph Boehme <slow@samba.org>
-To: Varun Mittal <vmittal@egnyte.com>, samba-technical@lists.samba.org
-Message-ID: <6f38ea75-1646-48fc-8bea-c7cf28b83c07@samba.org>
-Subject: Re: Understanding fstat call in streams_xattr
-References: <CAF2c6-HkQ9_6R4Q8MmBE+i_XcU_rmMdTfWmDvV4R3fNmyKRx1g@mail.gmail.com>
-In-Reply-To: <CAF2c6-HkQ9_6R4Q8MmBE+i_XcU_rmMdTfWmDvV4R3fNmyKRx1g@mail.gmail.com>
+Thanks Metze,=20
 
---------------zgjZMJZz2pTHpR8EBaV0DtHq
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
+That information will be of great use with updating the new vfs_ceph
+module.
 
-T24gNi8yMS8yNCA2OjMyIEFNLCBWYXJ1biBNaXR0YWwgdmlhIHNhbWJhLXRlY2huaWNhbCB3
-cm90ZToNCj4gV2h5IGlzIHRoZXJlIC0xIGluIHRoZSByZXN1bHQgPw0KPiBJZiBJIHNpbXBs
-eSByZW1vdmUgdGhpcyAtMSwgSSB3YXMgYWJsZSB0byBnZXQgc2V0eGF0dHIgdG8gd29yaw0K
-DQp0aGF0IGxvb2tzIGxpa2UgdGhlIHBsYWNlIHdoZXJlIHdlJ3JlIHN0cmlwcGluZyBvZmYg
-dGhlIHRyYWlsaW5nIG51bCANCmJ5dGUgd2hpY2ggaW4gdGhlIHBhc3Qgd2FzIHJlcXVpcmVk
-IHRvIGhhdmUgaW4gb3JkZXIgdG8gaW1wbGVtZW50IA0KemVyby1ieXRlcyBzaXplZCBzdHJl
-YW1zIHdpdGggYW4geGF0dHIgYmFja2VuZCB3aGVuIGluIHRoZSBwYXN0IHhhdHRycyANCmRp
-ZG4ndCBhbGxvdyBmb3IgMC1ieXRlIHNpemVkIHhhdHRycywgc28gd2UgaGFkIHRvIHN0b3Jl
-IGFuIGVtcHR5IGJ5dGUuDQoNCi1zbG93DQoNCi0tIA0KU2VyTmV0IFNhbWJhIFRlYW0gTGVh
-ZA0KU2FtYmEgU3VwcG9ydCwgQ29uc3VsdGluZyBhbmQgRGV2ZWxvcG1lbnQNClNhbWJhIFRl
-YW0gTWVtYmVyICAgICAgaHR0cHM6Ly9zYW1iYS5vcmcvDQpTQU1CQSsgcGFja2FnZXMgICAg
-ICAgaHR0cHM6Ly9zYW1iYS5wbHVzLw0K
+Sachin Prabhu
 
---------------zgjZMJZz2pTHpR8EBaV0DtHq--
+On Mon, 2024-06-17 at 12:30 +0200, Stefan Metzmacher wrote:
+> Hi Xavi,
+>=20
+> > > > At the same time, I can also see that getuid()/getgid() returns
+> > > > 0/0 and
+> > > > geteuid()/getegid() also returns 0/0. Does the default plugin
+> > > > use
+> > > > uid/gid 0/0 while performing this operation?
+> > > >=20
+> > > > I have the following questions
+> > > > 1) What are we testing for with this smbtorture test?
+> > > > 2) Is the anonymous user allowed to modify the DACL of the file
+> > > > as done
+> > > > in the test? This would obviously lead to access denied errors
+> > > > as we
+> > > > see currently.
+> > >=20
+> > > It checks the reauthentication has no effect on open file handles
+> > > only on new file handles. After the SMB2 Create only fsp-
+> > > >access_mask
+> > > matters for access checking.
+> > >=20
+> > > > 3) What uid/gid should be set when performing this action as
+> > > > the
+> > > > anonymous user?
+> > >=20
+> > > Maybe you need to remember the low level token at open time
+> > > and use that.
+> > >=20
+> >=20
+> > I'm not sure if this will work in all cases. When the acl_xattr vfs
+> > module
+> > is used, the Windows ACLs are stored in "security.NTACL". To
+> > correctly set
+> > this xattr, the process needs to become root on a kernel mounted
+> > filesystem
+> > because the kernel doesn't allow a regular user to modify that
+> > xattr, even
+> > if the user has permissions to modify the file.
+> >=20
+> > If a share uses a vfs module instead of a kernel mount to export
+> > the
+> > filesystem, and that filesystem also requires root privileges to
+> > modify the
+> > "security" namespace, then using the cached permissions at the time
+> > of
+> > opening the file won't be enough.
+> >=20
+> > I think that the unix token should be kept consistent with the
+> > effective
+> > owner of the process at all times to avoid this problem or similar
+> > ones.
+>=20
+> We have get_current_utok(), which refects become_root().
+> Currently that can be used instead of handle->conn->session_info-
+> >unix_token.
+>=20
+> metze
+>=20
 
---------------MVhLYR4dfIAgEilOMDlshbVh
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-wsF5BAABCAAjFiEE+uLGCIokJSBRxVnkqh6bcSY5nkYFAmZ1QNAFAwAAAAAACgkQqh6bcSY5nkYd
-RQ/+K0M1c5PWjYbD+wXknRLiEzfLl2FdfNdDFsWkSl/D4eVDp5KCRdAsBX30QN+avNVxeEviL79q
-rwMdTByL/AwuyPH9FuvmwMtwjd/gN+is9fTOVqZcUbHhrMlwdqA5TimSt/VrKdLtkFUIBsoiy00N
-EU6h8rS5TUilCG8cvKvC9khezZfCvjNp3+HhuFhhvu7TTQ0WUgjp9HH0qETQYzXJFUwjhjzIxpCq
-6chwJwJneUuoK0myJlkIOP+ZSXazpSiO+3RvfEwsIKIqAe6iPeDaVMQSqNnLGLNuvNg2J1ZaVI5h
-wPsbZ3X/Rp6noXWkzAs00nTgYeF+7S7vwxiJ2mT9ATpKp7xjAVLdba7kEDidYpqy3+/Jh9UbPCfp
-5uqRYIH+QSw2qE3PRj4Yrw7a8+kK5BYkCxjTfyiD/l+Lx5FwDq9Vw9pggRnBbAlvfr0aOJ0rfJDX
-bfQYoxMd3CREJaXYHGnPZB1QbnH+twARDkBcFYYHLWuNyhvcju32qLbwPSK662HerfrQn4XpMBCZ
-ifpcLLfOhQv2J7+hx3GRtlIUDdjTQj3tlZjpoiVQRSBKu5BHMXBynOZtkMFBo4j4wQ1ARRegk2dn
-1IHXJN3ueqZn0wG4iWYVXHFqcGsoiXuZgSGHLoXjctYai5NShY1Qwudt3XtyhBDXh0q2LA9UNvTW
-VVM=
-=5dLi
------END PGP SIGNATURE-----
-
---------------MVhLYR4dfIAgEilOMDlshbVh--
 
