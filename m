@@ -2,96 +2,65 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 39014912235
-	for <lists+samba-technical@lfdr.de>; Fri, 21 Jun 2024 12:21:14 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BF5B09131FD
+	for <lists+samba-technical@lfdr.de>; Sat, 22 Jun 2024 06:56:06 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=I5MZnkv/q7nJY4HHzW8meFkkO/c4uNlLeBVqHiXc3xU=; b=qz2NfPIPjfuZHlaEUFJw1q3BMy
-	3MmewxaPBS1jHLa3dKW59rkQqqwDu36SrRSLZSt1VwV3drzMDKre4mxX5Kidv62KInmVNdv3Jg5Dv
-	aRlLEjTnfi0EC5DWbtgpbqhnG1eyAC2ldPe0T+yziaEBPz1wRTZw5Ek1FbS2Wj1U98l+KBICW/Jk1
-	bEdYgctpzgOsRZL6UhxQovf3cU7IKvlT754VSA8qYAXzvBEEYjATb1dYFjPsTab5MT5Y0VwT2zapH
-	VjDgShCv6KjYX7Phw4ehfCH7ojH2e3/hsKeCq5DSxy7XLS/eZ41Oq8Bf5DPrU0LHTo/R7WGm/ctsH
-	/xOiR0TQ==;
-Received: from ip6-localhost ([::1]:39516 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=PjkLr3hnbU4GGot+aDOsUETk9dtYm8kWyhcqcUqDqRM=; b=hh1zL5e+rWwrk9ae9wBlp2j9Mz
+	Wk0kn5Vpci77yq3fBGZHeZk1OqDv3XFJJbGmGi8ZGdybJKlXbaByutMhIWWouS7mD4HVDTmPRKtOh
+	T8WPijzuu8PnWHVbAJGxZsWCaHJYU3ki+LuW/TVvVJvYQyPxm/8Zp1AM5rSXGvld4+afPkXJpDK6t
+	IAgLp1zTirWE3HLymYv0XnjQkaSGemT5TuAszYppDI0B62dhb0uMhcyNaqwBEnLU54npV8DvB/2kw
+	FSVGYMH5o1ErFzEmMfsmm2hBuYA2SoPJLCKe/kNIbxS+Tx8oOj8h+LXYmT6dFAGJ9A833uyJ/Oqqe
+	SN7itDuw==;
+Received: from ip6-localhost ([::1]:24762 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1sKbNm-00EqiE-3C; Fri, 21 Jun 2024 10:20:38 +0000
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124]:30695) 
+	id 1sKsmW-00014u-1R; Sat, 22 Jun 2024 04:55:20 +0000
+Received: from mail-wr1-x429.google.com ([2a00:1450:4864:20::429]:56359) 
  by hr1.samba.org with esmtps
- (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__AES_256_GCM:256) (Exim)
- id 1sKbNg-00Eqi4-Gz
- for samba-technical@lists.samba.org; Fri, 21 Jun 2024 10:20:35 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1718965228;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=I5MZnkv/q7nJY4HHzW8meFkkO/c4uNlLeBVqHiXc3xU=;
- b=ajY87xSMu+MetUrUl2EeOi/eLR2pxkd9sQF+zOpNeFqBldnNQB/ZMNXdHA0FHkEI8I9olD
- FAdvPwLR06Xu1t4FumUHwuJC/1YVjJm5BWmVriePFnbabeUfEa8tlXS70hhyJ1vmckSlaU
- BS+KfZsjl6wKJueMv/7d57RdAnueHyc=
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1718965229;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=I5MZnkv/q7nJY4HHzW8meFkkO/c4uNlLeBVqHiXc3xU=;
- b=XElD9sJY1R9WBMUd3iaGx9+aAMW3e2FcxopfGqFzHqbne93he4EGlcOVzSdvL79AoTbehi
- 0j2IHZzAQ+ZQ1L1hPqIPuFtoFeXuZWA79wy/412oR1ULPV7kqg+zu48kUeSumU0WGU9zRh
- WgGh5zKoE9l8jYBCwId5oH0wtf9B+CA=
-Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
- [209.85.128.71]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-67-yM5pAGgHM9q6b43f2kFmZw-1; Fri, 21 Jun 2024 06:20:27 -0400
-X-MC-Unique: yM5pAGgHM9q6b43f2kFmZw-1
-Received: by mail-wm1-f71.google.com with SMTP id
- 5b1f17b1804b1-422322e4abaso10285225e9.1
- for <samba-technical@lists.samba.org>; Fri, 21 Jun 2024 03:20:27 -0700 (PDT)
+ (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1sKsmK-00014n-M4
+ for samba-technical@lists.samba.org; Sat, 22 Jun 2024 04:55:12 +0000
+Received: by mail-wr1-x429.google.com with SMTP id
+ ffacd0b85a97d-364a3d5d901so1933475f8f.0
+ for <samba-technical@lists.samba.org>; Fri, 21 Jun 2024 21:55:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=egnyte.com; s=google; t=1719032108; x=1719636908; darn=lists.samba.org;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=GVwKbGNaKk96ET1ZnEV9Itlwc1KP2IkXr2PclAetGIk=;
+ b=bHQx1pjJ98hBHiRRC26lq6XF7sxGF8bMhtDIIvqchGHjuRxkaAMdpiuT1G+8fmcovu
+ B74iC8gSyvTISkFxSZeXf0l+0bU4q/2Xl6pS0k7lQezGrCQUsG/LkfQOiYWekpmZQb5Q
+ Vz6MfhFSSC+4l5rlVBHYXlS2rgj2FjrtDaCEI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1718965226; x=1719570026;
- h=mime-version:user-agent:content-transfer-encoding:references
- :in-reply-to:date:cc:to:from:subject:message-id:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=I5MZnkv/q7nJY4HHzW8meFkkO/c4uNlLeBVqHiXc3xU=;
- b=wjTXycv2xrzK264OizAjMilSmseOEQfTS1V9DeUKdKNNLVQNs9sFmlJYYJVTTXrzLy
- 4CKSYOI+ZeTHXnVVCkBGmfGUqBopOlz+mXyCMmGugehqEpEJ4EKj23gpBUd21H6nWaKZ
- iX5V85fDx0HTJXHHCoUNNindRemauGg8L2/9Cs4N0Is4Gygp69leEOfluln814eV5klA
- 5PqPfYTbCLFHc+jWIPoKqMN3iootYEv1mPPCZ+VRK8f+MJrPw2XjhPxXMkiXXwmNNpmZ
- 9LQKRr1GNF1eF8Np6bYBM2Be3KAzOMcx38lSYPWW4enHyc2Fom70/QQupKQ4hnIaSwy3
- K2ww==
-X-Gm-Message-State: AOJu0YxwkQreaZiGvF3Fc9l4aScNjUYFci1xFgK4F9f3FJJ8iJ+2SYsC
- GeF445x+M9eCRJY7u7gYQXbMGHCxIC8chIgMqDlTs4ysmjF8b3UeqkTuSi/wRt8zbZWqRoZ1swN
- mBGqoLhelqz/5zRSUCSCevusvP5cxswW5F+W9r0J6VlTJFEgxh2yBDFJ0b24mgaAsKw==
-X-Received: by 2002:a05:600c:4506:b0:422:291:6b3e with SMTP id
- 5b1f17b1804b1-4246f56d2b6mr104200615e9.1.1718965226469; 
- Fri, 21 Jun 2024 03:20:26 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IE3Grd/Y3e8pxVkeRvNdbaicIxw4QYMMsCF44TGvW/kvxFENFK8+/ymQk44A3UhvfP5s6NL8g==
-X-Received: by 2002:a05:600c:4506:b0:422:291:6b3e with SMTP id
- 5b1f17b1804b1-4246f56d2b6mr104200445e9.1.1718965226085; 
- Fri, 21 Jun 2024 03:20:26 -0700 (PDT)
-Received: from [192.168.21.108]
- (host81-157-9-97.range81-157.btcentralplus.com. [81.157.9.97])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-36638f86566sm1298857f8f.64.2024.06.21.03.20.25
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 21 Jun 2024 03:20:25 -0700 (PDT)
-Message-ID: <e20ab35eea44679b3ae0da629cb4c7da1178ea11.camel@redhat.com>
-Subject: Re: smb2.session.reauth4: UID/GID to use as anonymous user when
- modifying DACL
-To: Stefan Metzmacher <metze@samba.org>, Xavi Hernandez <xhernandez@gmail.com>
-Date: Fri, 21 Jun 2024 11:20:24 +0100
-In-Reply-To: <35b4b0bc-1e9a-4d69-9fce-ba8782d1ce65@samba.org>
-References: <d5a2f19e8e319d29cbae169da4c0d33b7edf3a9e.camel@redhat.com>
- <6e9a8ade-8357-4c35-8d1b-c0749503011d@samba.org>
- <CAO9H7P876Qx8wEN_kfYQKUW7XqMWevfqx7A0kAbf_1UJkmu=zw@mail.gmail.com>
- <35b4b0bc-1e9a-4d69-9fce-ba8782d1ce65@samba.org>
-User-Agent: Evolution 3.52.2 (3.52.2-1.fc40)
+ d=1e100.net; s=20230601; t=1719032108; x=1719636908;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=GVwKbGNaKk96ET1ZnEV9Itlwc1KP2IkXr2PclAetGIk=;
+ b=JtjbPCQGZdgAw6VKTGmR+LoWBho/m2W71EBydMIc8WXgaRQv++oWz81M4tbkqwtQ8u
+ bUxo+e5nIJHJn6olPKcLelt7AHhr8gl9wpatgiPaytL1nAdxB/AwE8nRlLwIizAdJqdq
+ Xvs/e5YFzZNtG65pEEq11vFBVkWlfuvVgdNaUe4oRFywgYamXGb0uMeg0p1turMscru5
+ m7lFI/dLu+Ii3uIGeEeVspEZZvPXudauWNztcf/N92+787+YX4JAYk4QZjta/iN3OZU8
+ 2jrwZ8Qm5Ups1R5hModPu6+JjJklK0DEcGCbCJtZ0BzX9BkkHe8HRWZVYvnclgELqaGU
+ W9nw==
+X-Gm-Message-State: AOJu0Yx1ZmzZv+p7gS+h4hM6sQulQ8PwrBI7stNsA3X6VOZVkgaJnrzH
+ 38BIjEBVh2X5EuJQis6yE0xDjMnU6YEgoT/YYtu4+KvVRgWEVI+4rvjZH4sdAQtgj6cU7CcqBfQ
+ klWwH1K9Z9bjl1izMC3AgvKN6jwdlkFVo1SkHvQ==
+X-Google-Smtp-Source: AGHT+IF90lUO1HyjsAlxD4rLY5+B2urR0lINfKOWldLJm5q5QTtPC702aJy03R9nBCGXBX7OwKcpGcsDiPmJ/QUvYrM=
+X-Received: by 2002:adf:e443:0:b0:362:9888:c37 with SMTP id
+ ffacd0b85a97d-36317b82b6emr6773053f8f.35.1719032107401; Fri, 21 Jun 2024
+ 21:55:07 -0700 (PDT)
 MIME-Version: 1.0
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
+References: <CAF2c6-HkQ9_6R4Q8MmBE+i_XcU_rmMdTfWmDvV4R3fNmyKRx1g@mail.gmail.com>
+ <6f38ea75-1646-48fc-8bea-c7cf28b83c07@samba.org>
+In-Reply-To: <6f38ea75-1646-48fc-8bea-c7cf28b83c07@samba.org>
+Date: Sat, 22 Jun 2024 10:24:56 +0530
+Message-ID: <CAF2c6-Gq4O95Hu6pRH_5pj=W_48an9Bn3777y2s-OLv+6OrMkQ@mail.gmail.com>
+Subject: Re: Understanding fstat call in streams_xattr
+To: Ralph Boehme <slow@samba.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -105,77 +74,38 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Sachin Prabhu via samba-technical <samba-technical@lists.samba.org>
-Reply-To: sprabhu@redhat.com
+From: Varun Mittal via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Varun Mittal <vmittal@egnyte.com>
 Cc: samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Thanks Metze,=20
+Going through other parts of the code, I can see similar jugglery being
+done at other places
+Adding +/-1 to the ea lengths.
+It seems my VFS backend did not return the expected error if the attribute
+was not found.
+This was causing streams_xattr_openat not to create that 1-byte attribute,
+which fstat was expecting.
+Once I changed the error, it worked.
 
-That information will be of great use with updating the new vfs_ceph
-module.
+On Fri, Jun 21, 2024 at 2:28=E2=80=AFPM Ralph Boehme <slow@samba.org> wrote=
+:
 
-Sachin Prabhu
-
-On Mon, 2024-06-17 at 12:30 +0200, Stefan Metzmacher wrote:
-> Hi Xavi,
->=20
-> > > > At the same time, I can also see that getuid()/getgid() returns
-> > > > 0/0 and
-> > > > geteuid()/getegid() also returns 0/0. Does the default plugin
-> > > > use
-> > > > uid/gid 0/0 while performing this operation?
-> > > >=20
-> > > > I have the following questions
-> > > > 1) What are we testing for with this smbtorture test?
-> > > > 2) Is the anonymous user allowed to modify the DACL of the file
-> > > > as done
-> > > > in the test? This would obviously lead to access denied errors
-> > > > as we
-> > > > see currently.
-> > >=20
-> > > It checks the reauthentication has no effect on open file handles
-> > > only on new file handles. After the SMB2 Create only fsp-
-> > > >access_mask
-> > > matters for access checking.
-> > >=20
-> > > > 3) What uid/gid should be set when performing this action as
-> > > > the
-> > > > anonymous user?
-> > >=20
-> > > Maybe you need to remember the low level token at open time
-> > > and use that.
-> > >=20
-> >=20
-> > I'm not sure if this will work in all cases. When the acl_xattr vfs
-> > module
-> > is used, the Windows ACLs are stored in "security.NTACL". To
-> > correctly set
-> > this xattr, the process needs to become root on a kernel mounted
-> > filesystem
-> > because the kernel doesn't allow a regular user to modify that
-> > xattr, even
-> > if the user has permissions to modify the file.
-> >=20
-> > If a share uses a vfs module instead of a kernel mount to export
-> > the
-> > filesystem, and that filesystem also requires root privileges to
-> > modify the
-> > "security" namespace, then using the cached permissions at the time
-> > of
-> > opening the file won't be enough.
-> >=20
-> > I think that the unix token should be kept consistent with the
-> > effective
-> > owner of the process at all times to avoid this problem or similar
-> > ones.
->=20
-> We have get_current_utok(), which refects become_root().
-> Currently that can be used instead of handle->conn->session_info-
-> >unix_token.
->=20
-> metze
->=20
-
-
+> On 6/21/24 6:32 AM, Varun Mittal via samba-technical wrote:
+> > Why is there -1 in the result ?
+> > If I simply remove this -1, I was able to get setxattr to work
+>
+> that looks like the place where we're stripping off the trailing nul
+> byte which in the past was required to have in order to implement
+> zero-bytes sized streams with an xattr backend when in the past xattrs
+> didn't allow for 0-byte sized xattrs, so we had to store an empty byte.
+>
+> -slow
+>
+> --
+> SerNet Samba Team Lead
+> Samba Support, Consulting and Development
+> Samba Team Member      https://samba.org/
+> SAMBA+ packages       https://samba.plus/
+>
