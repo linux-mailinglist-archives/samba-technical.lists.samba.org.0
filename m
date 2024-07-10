@@ -2,68 +2,69 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9F4BA92CDFE
-	for <lists+samba-technical@lfdr.de>; Wed, 10 Jul 2024 11:14:06 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7BE1F92D984
+	for <lists+samba-technical@lfdr.de>; Wed, 10 Jul 2024 21:49:47 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=qzVwGh5lfi8WMsnbEdmfVHnMhLj7jpDMJHMnyDucIRs=; b=NykrmyCeqoHmIYnUU2T2mAFrfl
-	a0z4IFCJ+i2nhIAFaaZuICoGGWZd6cjqFwbZMtouMwPywrw3byVCkmaEwGrn1uRWCAU/2mWlOvoQ9
-	66crmBrEyzskm/0LCFfBneOuNbk4KZQruMVmn4xk3mQgM3fsEQE3qMmH7XgtAMle5u2KjEzoB68mw
-	9tIZWMIn5Fll2fnpe+k7N1iqmtJwbgaH4BKv/x/3VI71yVGIbw41XiTFnYBInM46BgEV9l4ldUXtg
-	0h1UgV//u7ZkV5V4aGxtGobnkS54hGQ4J6cENC46TWoISCD021dnWkvWOtam0YeS448M1Wh5Ce1st
-	mcLoXSTg==;
-Received: from ip6-localhost ([::1]:21204 helo=hr1.samba.org) 
+	bh=Mn7tf1n9eqS4vdwHAMfIoIm/ajGZvR74ISU+VBQiKkM=; b=fXFvMXmUbUEOzmRuP+PfauTXib
+	6+RCOdbLI3Qo82vY4/m/0wbv4R4cNfyeOyArW11/NWpF3/wgJ2o02qhuBbm2whp8j1mEdOBIS/uMu
+	o4MdoVeBmRlygbWMo7aKWwdy3ntrFCynLEJ00REM3tqsQR7GEFK4fHt1gsPS2Kjx9Dmrbk6/Tkxff
+	179/VuzumB/XSOCZ/1gAKE2XXw2gOVrj8DTNeki7Wnrt3wMwV7t+fYyM4m7lBiP0djx7h+ocakJsT
+	eJXU6GB23FL9WXBbrhTUxPUNPLVa69RC/pP6Wj1wYHyHrxhsxi5SoCHo7QnZ1DC42iKKyXawzd84d
+	6A14Y2Nw==;
+Received: from ip6-localhost ([::1]:28314 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1sRTOk-000Lzx-FK; Wed, 10 Jul 2024 09:14:02 +0000
-Received: from mail-ed1-x534.google.com ([2a00:1450:4864:20::534]:50212) 
+	id 1sRdJZ-000P0X-22; Wed, 10 Jul 2024 19:49:21 +0000
+Received: from mail-lf1-x134.google.com ([2a00:1450:4864:20::134]:46585) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1sRTOg-000Lzp-57
- for samba-technical@lists.samba.org; Wed, 10 Jul 2024 09:14:00 +0000
-Received: by mail-ed1-x534.google.com with SMTP id
- 4fb4d7f45d1cf-585e774fd3dso7906456a12.0
- for <samba-technical@lists.samba.org>; Wed, 10 Jul 2024 02:13:57 -0700 (PDT)
+ (Exim) id 1sRdJU-000P0Q-Pm
+ for samba-technical@lists.samba.org; Wed, 10 Jul 2024 19:49:19 +0000
+Received: by mail-lf1-x134.google.com with SMTP id
+ 2adb3069b0e04-52e9b9fb3dcso178750e87.1
+ for <samba-technical@lists.samba.org>; Wed, 10 Jul 2024 12:49:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1720602837; x=1721207637; darn=lists.samba.org;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=dIlC+2Xt+32fkKYTAyoBacrSR8RJi5jbw6ESx2yOcZ0=;
- b=MpQbAvHsuDeokYqBWs9oIyddoja97RCZ9NazuOsPFEPx5CVcP/1ouVQkAdf8pBEITs
- Szhjv+4XsFH56v5V4exxpqb7VeiwSEEyappb1RecCGGnNPz/4PRa0WNXu10FVZ8IBDqe
- E9NlI0QZ9EZBM50F8bQmJsRP0JpGa+q4YFBP55nhRZYzwIzyr1WrV2m7brHSWFZYByJf
- eFmOdKx9+L2H4NXkrkLO307CORZqI9Mb8CcK2JjMKc+sjbOvQDf477kWDmjejqpxHtFR
- /QieqA5qsP7n3d/opN2iOEMpFbAdcvpFOlbvvnp+iGYSgez6ty39J2fzJHs6dWdHEg6R
- NcoA==
+ d=gmail.com; s=20230601; t=1720640955; x=1721245755; darn=lists.samba.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Mn7tf1n9eqS4vdwHAMfIoIm/ajGZvR74ISU+VBQiKkM=;
+ b=TzHHhw9SRG5NxSlXHi4HN7g0a41LLEfGrsGantzpDA1vlpOhvb3HW28crH3KB/h1OY
+ WhSYEQrPWVshUJPhrOJL3jcsUi0n/bvlt2/ulescdJz8pxQ0MVVoUkIkYDfYt0EOlit5
+ ZTQ+eW5+cJBT9YkxASQeWPLr5EUsdSNzGKpzkODNbaGLew3dPLOKKjpXzhnnOSHY/OMH
+ dbZPeneqI3UYqWwBiGdCgeSg5P5/xKw5dnWzVuqxiTesHgbsFRkiWO5SWNZa8DzufYQm
+ 5ERznMWp5gvujhccsdo6yxGjpwFQEk7B9/Ywyr5nwu8WnwIZjuKNVk9pE3VQbUrBm5sI
+ 3jOw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1720602837; x=1721207637;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=dIlC+2Xt+32fkKYTAyoBacrSR8RJi5jbw6ESx2yOcZ0=;
- b=lm56P+x4DYb1lVfAKUSsbQXEIPPfkesX0FWV7MPT1TzGv2O+UqnW/Pr2DKAfbSmyiZ
- zixky9ol1cnb9c+XWMlg+EiWtxawHPQMnCJoMvPKs37xXrUOZfk+9oo3EGQZcVlQmteX
- fA+ZHaHhmlI7BAgF7CMxp1JWn0YEtjqsHPilJpwd2gwdupVxl8V+npXDYj+71+Z1FC34
- ESxnGuV/GZ4JrvkHapYUC2RcaVWwH1eEXIneOCP4PEGBNQ/JrtJ27cRtKBy915jJooux
- xD6IT6XYdSFMm8lSWex1OaRI70BicN+Zz+q8r8lkZbaG0D++wQRk1yxOwC4/NicQuPR0
- BIxA==
-X-Gm-Message-State: AOJu0YyzkrHaEAiwPJ1fg9OlA1kiP+p5swojbgpSKf71RDXSRIBJuwod
- MACPUNt8UoW01CEjuom8lnLozFqfIjIiCa3GyQJC/Y7XJJ0GKB2P4f49SytzTjjEgMZEEmyDDIR
- kdDb5PgUvlEXHoU2LVi0RDg2fgTvvgfcgGEaWhQ==
-X-Google-Smtp-Source: AGHT+IGh1LPrO9Q1xY/8FGCj2mB+sEnJbiRAV5GRbrrcjMvaFoaE9uEzDbFYMgyW1eN/7jiPu8hgYRnJjoGh42CCTvw=
-X-Received: by 2002:a05:6402:518d:b0:58c:2a57:b1e7 with SMTP id
- 4fb4d7f45d1cf-594ba98ea54mr3857720a12.8.1720602836701; Wed, 10 Jul 2024
- 02:13:56 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1720640955; x=1721245755;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=Mn7tf1n9eqS4vdwHAMfIoIm/ajGZvR74ISU+VBQiKkM=;
+ b=v6+YPpvR8iUdRix83fBVxLltJtY/j9SgZvJeyij7KmreybxfMOvnqVt2cmarCW+NNv
+ tMjJpRvdMeeh6vLh1RE3dxJrYW4TXasGMvRyP8T+7krt7l3Rs4bMwe4b2oTGp4n3xJ1S
+ ASYN8YYQ9heBJM8gOoqWBBzbm1zxKjIH2vXYBm25xFdKK3IXvkuLAaE/5HSN7xsl+xf3
+ iXyhq4x9uT7KvPfewZG2i6a3glQLGgeXY1qFW8/PTg9lGU97k6xTkdYYTtMZg85+msgJ
+ QyLKpr+MIk1V110WOrwBadRlEL6NnQ88K7ZDExEflbqrtCtWn2kxqI9Hc8bYv+Q4oZPd
+ h06A==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCV/FMLYFgDP4rhALPWl3wHrVPtx5EbmE5YuLyWKPOengoS/zPGJvejKXLozsaiGK5kvp+JLcMpGJkBWbLESIwryfJsHwc9+PgnK5MXv2OTW
+X-Gm-Message-State: AOJu0Yzjtok5mprCrm0NK2ijHbw8OjSNvUTCtOYg4swirblpFmVFRKFF
+ Ri8wSs/Bq95b3QgaZInB3X+LtAiXwhw4Hml4HJpIDR/2Imim161VIrMnpn5qMADq1zIC7ZW+CJt
+ /uTQUYOvBoDrCh8M7LhU3ssptDy4=
+X-Google-Smtp-Source: AGHT+IEyaVajNPO+TUbI0u+tauTGQUtgoPcUomKHl5sHgI13fZAn9wJR+ra/wRSqzZFh/zaLJFpc/1fthi6vaH6v3aA=
+X-Received: by 2002:ac2:4206:0:b0:52c:e030:1450 with SMTP id
+ 2adb3069b0e04-52eb99913a3mr3412098e87.14.1720640954762; Wed, 10 Jul 2024
+ 12:49:14 -0700 (PDT)
 MIME-Version: 1.0
-References: <CAAu4aPGRqJd7sGeocixh=Zkv0X85HSXtJcJZsM7VM7gPVQx=Wg@mail.gmail.com>
- <013b26e5fc784d1286303a15a93a62afe69fe733.camel@samba.org>
-In-Reply-To: <013b26e5fc784d1286303a15a93a62afe69fe733.camel@samba.org>
-Date: Wed, 10 Jul 2024 12:13:36 +0300
-Message-ID: <CAAu4aPEHBXzOm+sZcYwZOci=Ue=h0TP=DztJurb-BRqV-wLuFw@mail.gmail.com>
-Subject: Re: problem transfer domain dns zones and forest dns zones
-To: Andrew Bartlett <abartlet@samba.org>
+References: <20240705204352.975013-1-profnandaa@gmail.com>
+In-Reply-To: <20240705204352.975013-1-profnandaa@gmail.com>
+Date: Wed, 10 Jul 2024 14:49:03 -0500
+Message-ID: <CAH2r5muZF19O4Atro_TjjiQsrhXT6fodZwwWuGskOxQwh8P=6A@mail.gmail.com>
+Subject: Re: [PATCH] cifs-utils: smbinfo: add gettconinfo command
+To: Anthony Nandaa <profnandaa@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -77,91 +78,127 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Omnis ludis - games via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Omnis ludis - games <sergey.gortinsc17@gmail.com>
-Cc: samba-technical@lists.samba.org
+From: Steve French via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Steve French <smfrench@gmail.com>
+Cc: linux-cifs@vger.kernel.org, samba-technical@lists.samba.org,
+ Pavel Shilovsky <pshilovsky@samba.org>, sfrench@samba.org,
+ stfrench@microsoft.com
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-yes, I conducted manual testing first from the windows server side and I
-managed to change the owner through adsi edit by connecting to a
-samba-based domain controller, then I found a variable that needed to be
-replaced and performed a role change already through the samba-tool fsmo
-role transfer --all -U Administrator command, I was asked for a password
-and that's it the roles have been successfully transferred
+Pavel,
 
-=D1=81=D1=80, 10 =D0=B8=D1=8E=D0=BB. 2024=E2=80=AF=D0=B3. =D0=B2 12:09, And=
-rew Bartlett <abartlet@samba.org>:
+looks good - I checked it out and tested it.  It can be helpful in
+debugging server logs to have this information (about the tree id and
+session id for a particular mount)
 
-> On Wed, 2024-07-10 at 11:34 +0300, Omnis ludis - games via samba-technica=
-l
+Can add my Tested-by and or Reviewed-by if you want
+
+On Fri, Jul 5, 2024 at 3:44=E2=80=AFPM Anthony Nandaa <profnandaa@gmail.com=
 > wrote:
 >
-> while transferring fsmo roles I encountered a problem transferring the
+> As a follow up on the patch on Linux: de4eceab578e
+> ("smb3: allow dumping session and tcon id to improve stats analysis
+> and debugging") [1]
 >
-> DomainDnsZones and ForestDnzZones roles in samba 4.20.2, I went to the
+> Add `gettconinfo` command to dump both the TCON Id and Session Id of
+> a given SMB mount; to help with correlation in cases when multiple
+> mounts are to the same share.
 >
-> samba source code in the fsmo.py file and started studying the code snipp=
-et
+> Example run:
+> ```
+> ./smbinfo gettconinfo /mnt/smb_share
+> TCON Id: 0x1
+> Session Id: 0xa40000000001
+> ```
 >
-> in the Transfer_dns_role() function
+> [1] https://github.com/torvalds/linux/commit/de4eceab578ead12a71e5b5588a5=
+7e142bbe8ceb
 >
+> Cc: Pavel Shilovsky <pshilovsky@samba.org>
+> Cc: Steve French <stfrench@microsoft.com>
+> Signed-off-by: Anthony Nandaa <profnandaa@gmail.com>
+> ---
+>  smbinfo     | 29 +++++++++++++++++++++++++++++
+>  smbinfo.rst |  2 ++
+>  2 files changed, 31 insertions(+)
 >
-> if master_dns_name !=3D new_dns_name:
+> diff --git a/smbinfo b/smbinfo
+> index 73c5bb3..3467b0b 100755
+> --- a/smbinfo
+> +++ b/smbinfo
+> @@ -35,6 +35,7 @@ CIFS_QUERY_INFO          =3D 0xc018cf07
+>  CIFS_ENUMERATE_SNAPSHOTS =3D 0x800ccf06
+>  CIFS_DUMP_KEY            =3D 0xc03acf08
+>  CIFS_DUMP_FULL_KEY       =3D 0xc011cf0a
+> +CIFS_GET_TCON_INFO       =3D 0x800ccf0c
 >
->         lp =3D sambaopts.get_loadparm()
+>  # large enough input buffer length
+>  INPUT_BUFFER_LENGTH =3D 16384
+> @@ -289,6 +290,10 @@ def main():
+>      sap.add_argument("file")
+>      sap.set_defaults(func=3Dcmd_keys)
 >
->         creds =3D credopts.get_credentials(lp, Fallback_machine=3DTrue)
+> +    sap =3D subp.add_parser("gettconinfo", help=3D"Prints TCON Id and Se=
+ssion Id for a cifs file")
+> +    sap.add_argument("file")
+> +    sap.set_defaults(func=3Dcmd_gettconinfo)
+> +
+>      # parse arguments
+>      args =3D ap.parse_args()
 >
->         samdb =3D SamDB(url=3D"ldap://%s" % (master_dns_name),
+> @@ -876,5 +881,29 @@ def cmd_keys(args):
+>          print("ServerIn  Key: %s"%bytes_to_hex(kd.server_in_key))
+>          print("ServerOut key: %s"%bytes_to_hex(kd.server_out_key))
 >
->                       session_info=3Dsystem_session(),
+> +class SmbMntTconInfoStruct:
+> +    def __init__(self):
+> +        self.tid =3D 0
+> +        self.session_id =3D 0
+> +
+> +    def ioctl(self, fd):
+> +        buf =3D bytearray()
+> +        buf.extend(struct.pack("=3DIQ", self.tid, self.session_id))
+> +        fcntl.ioctl(fd, CIFS_GET_TCON_INFO, buf, True)
+> +        (self.tid, self.session_id) =3D struct.unpack_from('=3DIQ', buf,=
+ 0)
+> +
+> +def cmd_gettconinfo(args):
+> +    fd =3D os.open(args.file, os.O_RDONLY)
+> +    tcon =3D SmbMntTconInfoStruct()
+> +
+> +    try:
+> +        tcon.ioctl(fd)
+> +    except Exception as e:
+> +        print("syscall failed: %s"%e)
+> +        return False
+> +
+> +    print("TCON Id: 0x%x"%tcon.tid)
+> +    print("Session Id: 0x%x"%tcon.session_id)
+> +
+>  if __name__ =3D=3D '__main__':
+>      main()
+> diff --git a/smbinfo.rst b/smbinfo.rst
+> index 1acf3c4..17270c5 100644
+> --- a/smbinfo.rst
+> +++ b/smbinfo.rst
+> @@ -96,6 +96,8 @@ COMMAND
+>  the SMB3 traffic of this mount can be decryped e.g. via wireshark
+>  (requires root).
 >
->                       credentials=3Dcredits, lp=3Dlp)
->
-> and then I discovered a problem in the line SamDB(url=3D"ldap://%s" %
->
-> (master_dns_name)
->
-> you must use new_dns_name, otherwise the following error will occur when
->
-> transferring roles.
->
-> Failed to add role 'domaindns': LDAP error 53 LDAP_UNWILLING_TO_PERFORM -
->
-> <000020AE: SvcErr: DSID-03152DA8, issue 5003 (WILL_NOT_PERFORM), data 0
->
-> since the ability to make corrections to the owner of the video is
->
-> prohibited by MSAD, please fix this in the next version of Samba
->
->
-> I assume you mean that the change to the FSMO role owner must be made on
-> the new FSMO role owner?
->
-> Perhaps submit a merge request with this, including a test (or at least
-> checking that it is covered by an existing one) if possible?
->
-> https://wiki.samba.org/index.php/Contribute
->
-> Samba is often not quite as strict as windows, it would be great if teste=
-d
-> changes to tighten this up were also contributed, but that would be a
-> harder task.
->
-> Andrew Bartlett
->
+> +`gettconinfo`: Prints both the TCON Id and Session Id for a cifs file.
+> +
+>  *****
+>  NOTES
+>  *****
 > --
+> 2.34.1
 >
-> Andrew Bartlett (he/him)       https://samba.org/~abartlet/
-> Samba Team Member (since 2001) https://samba.org
-> Samba Team Lead                https://catalyst.net.nz/services/samba
-> Catalyst.Net Ltd
 >
-> Proudly developing Samba for Catalyst.Net Ltd - a Catalyst IT group compa=
-ny
->
-> Samba Development and Support: https://catalyst.net.nz/services/samba
->
-> Catalyst IT - Expert Open Source Solutions
->
+
+
+--=20
+Thanks,
+
+Steve
+
