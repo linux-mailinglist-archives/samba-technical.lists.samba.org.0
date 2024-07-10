@@ -2,62 +2,49 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7767592CD13
-	for <lists+samba-technical@lfdr.de>; Wed, 10 Jul 2024 10:35:30 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 391BF92CDF1
+	for <lists+samba-technical@lfdr.de>; Wed, 10 Jul 2024 11:09:27 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=dQRD32miCDY45rhTn/QvCDtyw1PvVvg/j/2L1t59Tvo=; b=cchrQ0mQgDFoOZm/vYglvCO1kG
-	goOjGb0koCcJZunOFlqJtNgZq9HjgIQrUCEfuhMWvmpQp7k6uXG2rufOCLZku7OBW5rV6oAsJGSlW
-	M7qM+trxakDU2EeX29AJO0SVjxB1r9DJj7yWz9LDRLio0PZ1nPQb3H6ki5Hdl5ECdvUon+jwSXsbq
-	iC/Jazu2bm7brzEvAImcX6/elI+ihPL0h90CWSrsUdyHueabHifnMyaQxE1elhzzU2Edj4O7lfMAO
-	kHbgR2kb+B4HP33JSRoMjWoQpfMZv0C1u8ZloywtCpby7lZm68q3TEIgmM484en1HvmbO0xTxYmmh
-	wYrTpB7Q==;
-Received: from ip6-localhost ([::1]:55300 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=N5uQIt0OLnZ8UyQJIxIL9prRvuRN+HxSoh66P1AYBy8=; b=VWG1CJamkBZeYO9mFUbX+tkFKr
+	nywhWX6nhvOnnxm9mM5u9ApX4vc6kmzOJ477sYz/LZT6x1n0bBiUr31F/blChhxkE6xipJ7bJjmYg
+	UfDcSBYdp2+3cTxK+9PhjetOu0slYTeDP+dLY5Hy3Lx4NV/ZcWTaEFwYmgFmuxj9WJGNtlOYbKmkt
+	sjFLFR3aSj6ghDCoR2GoWkDrLteW6aBoH+hTM5mkf1q8IGj1ef24ZNlHYuYR6BzgtNYtWHn3kZDjC
+	FvWBpUBI6keZPdk5kCXnnHMhn2vb8PV52lYqK9pEvwU0QS6/aRG8wufdh/ZIttUTkfZj0eXNZ5Qbv
+	53fdEdWw==;
+Received: from ip6-localhost ([::1]:19774 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1sRSmy-000LYL-Ul; Wed, 10 Jul 2024 08:35:01 +0000
-Received: from mail-ej1-x634.google.com ([2a00:1450:4864:20::634]:53561) 
+	id 1sRTJx-000Luc-5a; Wed, 10 Jul 2024 09:09:05 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:63386) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1sRSmu-000LYE-N2
- for samba-technical@lists.samba.org; Wed, 10 Jul 2024 08:34:58 +0000
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-a77cc44f8aaso295987866b.3
- for <samba-technical@lists.samba.org>; Wed, 10 Jul 2024 01:34:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1720600495; x=1721205295; darn=lists.samba.org;
- h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=ufcPVCIAAf2ZceShhLp15WL1JGRtrF/VhWyT6J1mQFc=;
- b=RVHvjJFtG9lyQD2rvHsv+NCSeUyFsvpYa07MzwJ1JvpyNm4esPt1dAjwY2R1zMGDsH
- M05KjZ/r1cOo36/fkX/5IowT5lUukS8OOX+PqL2RXos0SOCdFZopjKMqoMgjKJKzTQuS
- gtuQLzI1PqbtbbsBvgYESULi9Qw1k1Cf2Zl4jtZRrRmPeMpgFgMdWQAlh9eCNZmnMwWd
- dVpncEA2eq7l1lH2kOrFqV8bx5Bk3Na8z/gwBQq+6VORyj/xZ3Dea1B6Rk1GlKQGiV3c
- 55s7d+SxsI4UD7sZgoCQPNFPFhYnKMQJsLpiCAgPS5AWGm2DkLJa33v3eXtY53OGwN8W
- goDA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1720600495; x=1721205295;
- h=to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=ufcPVCIAAf2ZceShhLp15WL1JGRtrF/VhWyT6J1mQFc=;
- b=ZG/R+EBSK0xR91TOxH2kcyLOxjl4CQBZnKMr/iYAZllkbF+S6CQmIGWsgffMNctYK5
- +JnWK9mdVgzowZiP+4+tFaM+zaMy7mccTgG2nnS+kFH/x4ZDkKOpHgls6f3yNm00HlYG
- PcWQ4u+lWJwSvxvgU7cclhgoFsPtkWU0UGK2G1JJwvnRtpiATHSOD/QV7/kd9HISYctp
- i37Yist/djh9TWS3lLUvy9PcrKc/iqtGIM/FY+Na0AG3dYfBQfQ8oTWtGNF3XGS9dRHR
- 1YKWDpYzimjAUaP5rdG78MyLTBuaemO7yjSwQi8NgPkrv6GJpyG3M6w467aZYTTYtmHx
- 1mvw==
-X-Gm-Message-State: AOJu0Yxy3f0xXbGf2AX2//J4WmnveVHbAg+Gn584ytY9KFnMrNL7RjwU
- GjPMZA83KH4S07ktEDtK+S94p1ZAd0UCSuvHqUD4zPnOZmplGv+Orj7WxmCCcUWuUh5fuXYIOJJ
- cMRVGNjcAbLCoq+11ViMpz31afZoPacaiPCgHZg==
-X-Google-Smtp-Source: AGHT+IGdO3FiXOLIFjEuPkjYvWzoTVFDrr8WrLl/mgCnTD9YRlXrS6UeiapZU6vH+D2iNotLWOFhkimC07fAgkQk1tQ=
-X-Received: by 2002:a05:6402:885:b0:58b:f46f:ae45 with SMTP id
- 4fb4d7f45d1cf-594bb773fb7mr3781273a12.23.1720600495082; Wed, 10 Jul 2024
- 01:34:55 -0700 (PDT)
+ (Exim) id 1sRTJs-000LuV-KO
+ for samba-technical@lists.samba.org; Wed, 10 Jul 2024 09:09:03 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Date:To:From:Message-ID:CC;
+ bh=uhyut1BcQHzdWl2Trn+FgqX7X+2u/PBZWBhx0Bs6bP0=; b=nLIzs1nwsv6YFwNsRfLepE+UcK
+ qQVTiZVxIYV4DTFmj1QzWkKVTlNJwbmUXx8+InX8Xskfd2hT9Gc+lwwebSUemu5mlleuUEdZJxj0/
+ nxgcPBjSVlOO+nDlzqNc+5eXB7K0S30nhD8EhJjEg0gEDMb0e0Fag6pavr98nnqflIDUgwLt9jBBP
+ 79ETgmnHzqS/mUB+fZBt/RJ9ntuG8GwWMRnW/7YzGOvEOwWFE5uB7w6/xEBBkiPRauZaR+NXnZjwq
+ 6eJraGuOeUc/TdG0DkPP3FehugWyNIPseGZEEKF6D9BKpg8hJzdvT9wtPpYtb4X5a/NwCJX6wyls6
+ TmXxmrLNINyawyvVidwfSwkVUVNO/PG3pAqEJs2TyV5l3CVopzyNz/z/dyoP6DfoX21frVLqc/6rd
+ Hd/Qiebz6lvNtkupzUzhCnt+Cu6rg6Ll5dNYqbUHinFLiHOQ2u31NVqGfqMIWFLizKE6J6LYNyx6n
+ X7hSUZSpTaU3k8S5e/TuvWL9;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1sRTJr-000hk4-0U; Wed, 10 Jul 2024 09:08:59 +0000
+Message-ID: <013b26e5fc784d1286303a15a93a62afe69fe733.camel@samba.org>
+Subject: Re: problem transfer domain dns zones and forest dns zones
+To: Omnis ludis - games <sergey.gortinsc17@gmail.com>, 
+ samba-technical@lists.samba.org
+Date: Wed, 10 Jul 2024 21:08:54 +1200
+In-Reply-To: <CAAu4aPGRqJd7sGeocixh=Zkv0X85HSXtJcJZsM7VM7gPVQx=Wg@mail.gmail.com>
+References: <CAAu4aPGRqJd7sGeocixh=Zkv0X85HSXtJcJZsM7VM7gPVQx=Wg@mail.gmail.com>
+User-Agent: Evolution 3.36.5-0ubuntu1 
 MIME-Version: 1.0
-Date: Wed, 10 Jul 2024 11:34:35 +0300
-Message-ID: <CAAu4aPGRqJd7sGeocixh=Zkv0X85HSXtJcJZsM7VM7gPVQx=Wg@mail.gmail.com>
-Subject: problem transfer domain dns zones and forest dns zones
-To: samba-technical@lists.samba.org
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
@@ -72,27 +59,48 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Omnis ludis - games via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Omnis ludis - games <sergey.gortinsc17@gmail.com>
+From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andrew Bartlett <abartlet@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-while transferring fsmo roles I encountered a problem transferring the
-DomainDnsZones and ForestDnzZones roles in samba 4.20.2, I went to the
-samba source code in the fsmo.py file and started studying the code snippet
-in the Transfer_dns_role() function
+On Wed, 2024-07-10 at 11:34 +0300, Omnis ludis - games via samba-
+technical wrote:
+> while transferring fsmo roles I encountered a problem transferring
+> theDomainDnsZones and ForestDnzZones roles in samba 4.20.2, I went to
+> thesamba source code in the fsmo.py file and started studying the
+> code snippetin the Transfer_dns_role() function
+> if master_dns_name != new_dns_name:        lp =
+> sambaopts.get_loadparm()        creds = credopts.get_credentials(lp,
+> Fallback_machine=True)        samdb = SamDB(url="ldap://%s" %
+> (master_dns_name),                      session_info=system_session()
+> ,                      credentials=credits, lp=lp)and then I
+> discovered a problem in the line SamDB(url="ldap://%s"
+> %(master_dns_name)you must use new_dns_name, otherwise the following
+> error will occur whentransferring roles.Failed to add role
+> 'domaindns': LDAP error 53 LDAP_UNWILLING_TO_PERFORM -<000020AE:
+> SvcErr: DSID-03152DA8, issue 5003 (WILL_NOT_PERFORM), data 0since the
+> ability to make corrections to the owner of the video isprohibited by
+> MSAD, please fix this in the next version of Samba
 
-if master_dns_name != new_dns_name:
-        lp = sambaopts.get_loadparm()
-        creds = credopts.get_credentials(lp, Fallback_machine=True)
-        samdb = SamDB(url="ldap://%s" % (master_dns_name),
-                      session_info=system_session(),
-                      credentials=credits, lp=lp)
-and then I discovered a problem in the line SamDB(url="ldap://%s" %
-(master_dns_name)
-you must use new_dns_name, otherwise the following error will occur when
-transferring roles.
-Failed to add role 'domaindns': LDAP error 53 LDAP_UNWILLING_TO_PERFORM -
-<000020AE: SvcErr: DSID-03152DA8, issue 5003 (WILL_NOT_PERFORM), data 0
-since the ability to make corrections to the owner of the video is
-prohibited by MSAD, please fix this in the next version of Samba
+I assume you mean that the change to the FSMO role owner must be made
+on the new FSMO role owner?
+
+Perhaps submit a merge request with this, including a test (or at least
+checking that it is covered by an existing one) if possible?
+
+https://wiki.samba.org/index.php/Contribute
+
+Samba is often not quite as strict as windows, it would be great if
+tested changes to tighten this up were also contributed, but that would
+be a harder task.
+
+Andrew Bartlett
+
+
+-- 
+Andrew Bartlett (he/him)       https://samba.org/~abartlet/Samba Team Member (since 2001) https://samba.orgSamba Team Lead                https://catalyst.net.nz/services/sambaCatalyst.Net Ltd
+Proudly developing Samba for Catalyst.Net Ltd - a Catalyst IT group
+company
+Samba Development and Support: https://catalyst.net.nz/services/samba
+Catalyst IT - Expert Open Source Solutions
