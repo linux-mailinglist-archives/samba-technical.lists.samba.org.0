@@ -2,68 +2,65 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id AF2399303CD
-	for <lists+samba-technical@lfdr.de>; Sat, 13 Jul 2024 07:49:33 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id F2AF7930BC6
+	for <lists+samba-technical@lfdr.de>; Sun, 14 Jul 2024 23:32:21 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=VAFb9ygn4t+yhC5XAo+LnDHiYZOFZtBcIf6QNmQl3X8=; b=3H5aZubRRiF68pXVVGJJ+aKQor
-	uNBUk9k+O4gzjxJXB482wp6w8464tB6M9jRrcgLDqljf4UThMJE0Xr8QBafI8/yjgCr5tCP/ihMaA
-	Xz7eVM1jd6mJ2pSSmijVfZrsAxEp8hQID7rf9HiR+pqKoFuL33wdowb6kYMBgHXYRDJqGJM0V/OQc
-	MzZ+W1A6+5EZa4mSsZsloRC+btsPduq/9WK0QDiOHmSAFVyV7NDG8c4MWmYT73dKt1sojij77vlJw
-	yiAMQ+AB0OgRNh4XzTETPeUnR2YF+Kl+GAM5AADrAYLhTUZGIlGzR8OhOgpxmy4jJrHvjOIsZqNR/
-	hDpLl+Jw==;
-Received: from ip6-localhost ([::1]:63520 helo=hr1.samba.org) 
+	bh=v4xkzDWX19N9oFSSTQeCe65G8IASeY++bNpXDyU0BaI=; b=StRqfLZ9GVycTEXKsKd/i5/CMe
+	wj+WslpmX2UoOFlk5ugUzvOy8l2evlC+jGHFJNMSdQ5fMiihpssgvIcge8aTfe+rk+qYXMn/dwGFN
+	6NmOJwJKfjwhISSjNG1qRbIJRSjPEw7w7K7LelpW3JeXnG9xnDbA/roY9PHBbr0cef1V1dcKoK8Cj
+	OY72MetXAYJGWLJP4IWIofABeqWpevo0dVyWnc32LmoxnDdWfmY3KOeCWXcLEOdIb2aKEXE98UYWk
+	ovnZszw1H40q0lcIQoFdZUCSwtXAWNojvivizOdaQva8ZDx87oEm5WCFwCmqCy3mz+ypvUKT2KsEh
+	XltoxfFg==;
+Received: from ip6-localhost ([::1]:19940 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1sSVd2-000Zyd-6j; Sat, 13 Jul 2024 05:49:04 +0000
-Received: from mail-lf1-x132.google.com ([2a00:1450:4864:20::132]:51221) 
+	id 1sT6oZ-000gvC-Qh; Sun, 14 Jul 2024 21:31:27 +0000
+Received: from mail-lj1-x236.google.com ([2a00:1450:4864:20::236]:55540) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1sSVcx-000ZyW-V3
- for samba-technical@lists.samba.org; Sat, 13 Jul 2024 05:49:02 +0000
-Received: by mail-lf1-x132.google.com with SMTP id
- 2adb3069b0e04-52e9c55febcso3509634e87.2
- for <samba-technical@lists.samba.org>; Fri, 12 Jul 2024 22:48:59 -0700 (PDT)
+ (Exim) id 1sT6oV-000gv5-0F
+ for samba-technical@lists.samba.org; Sun, 14 Jul 2024 21:31:25 +0000
+Received: by mail-lj1-x236.google.com with SMTP id
+ 38308e7fff4ca-2eec7e431d9so46751471fa.2
+ for <samba-technical@lists.samba.org>; Sun, 14 Jul 2024 14:31:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1720849738; x=1721454538; darn=lists.samba.org;
+ d=gmail.com; s=20230601; t=1720992681; x=1721597481; darn=lists.samba.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=VAFb9ygn4t+yhC5XAo+LnDHiYZOFZtBcIf6QNmQl3X8=;
- b=frowS0xBemFqtQXjnukVcALuw5heLv5gNvKWS3IxufZCe1fbCImnP+CLgMfxk6BpYu
- J9aLnDn7a1cgBOacNUIIWzpm6Cul2NfPo7TwGDfLNFYj+Tt1YN+IrneKadPwK7DoF5eM
- XVQVCBdgVyFxaQ8+WKWar71aAE/q0y0ZvTTv4jO/s4DV+oQCc9jSdU1hYOoam+fjsMqW
- ch69W1A/vQ3YE2Xp3ouTWSQku3IlsGl3XOAOiZtKLGsC6EZgK8i8IJrlBuKPKUm/magL
- RizRf9c3OjBVMp6g9A4DK2BpwmcG3YMqqNn5ZwVT74mEpm50cH3Bh9HgE7TkCcEH/KIA
- pVhQ==
+ bh=v4xkzDWX19N9oFSSTQeCe65G8IASeY++bNpXDyU0BaI=;
+ b=N4c4E7i/hLOCccTSvLIcqIo2LGFhjr6WJMV48KpUxbWGqI1SYJ7Kci4HyXI0uT4v2L
+ rMRbw4K8TUDRnCWZuMyx2qhLT7gD9FltKjgf76okZ4PaCABW9cIgmnCUXJOFdkxAjG26
+ LS0HZRGlwZe6UGggRkngL9g1C9zVsc167/XLCECEAW3mKjlAl2onUtic2HspUx1fa5H4
+ TdLsQ/qPjP+2tJQdrP0ZWzrzU5yYi11qyXo/13N+M4PPxKgVvmlG0idIxJB1QB+GPncw
+ /I4pxJSpKtIZroB+1T5yRh+bN26XOrX/oZkk86ilnRyiDyu83yGnfWuqash0wQZjAU9j
+ NRIg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1720849738; x=1721454538;
+ d=1e100.net; s=20230601; t=1720992681; x=1721597481;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=VAFb9ygn4t+yhC5XAo+LnDHiYZOFZtBcIf6QNmQl3X8=;
- b=rrfOLek47CQOrCAfA4Ii+YscLGqSCOIxvlglB0AJ5XxkzzwaJG49nNBCULTM0bDrZR
- 7MP0r5U+b77HdtfBO/27n2AkkgEufocGTqbnIlJn64VvWwNFdT6iN5SBXhM+lPcb6bTk
- qT2ivqMRvZlb2lzvyIYfkpO2rUEKlxh49uAlbYc0qzPAMfS/Qt0iLB+CgJ1105x96viY
- CZvwP3TZmr48LpKF58Lfg05MgjB9HnPxOLUvpmMMxuWNFObYRwZLIdFKWxD9nKmqu/ho
- xiHkdDDY4xOtt/czFjdJit42szQsKEOF1JXe/Y333NoMhSVEKaN39BndEi9jFkbjWNRd
- yhvA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXZe/7tbwrkFVTTsSgSx5aLROomj/XsWVr9BJRZW1i7Kw+Llvg1wgmqVHyEOpZTTa/iKJUypA0RNE8lj5U/1CsSJYrIFqGgf/uTIJa58Jcx
-X-Gm-Message-State: AOJu0YxsFkJu5Sg8Zvi0gpztlWE898up9r+tH8u1ozxwp2LvMOHkiEDr
- g01txaBcyJTbyphbFtkVSQ1jbMy4ISOWsLBvtUMsaTLg8B8HWZvB6g0KW48BEZwJGK3OPHTCqaO
- XuKdwoIjVAxVuKV6E+IvBcuBX58Q=
-X-Google-Smtp-Source: AGHT+IGBPFr/6JyyTqHENo/wKQE8Wd2NIWuGjAtCa1AB6CUK42Kq+bHuYgl61IcxzABXofjzfSPIcas3Ohmsn2MD/z0=
-X-Received: by 2002:a05:6512:3088:b0:52e:987f:cfc6 with SMTP id
- 2adb3069b0e04-52eb99d33f6mr9567162e87.51.1720849738012; Fri, 12 Jul 2024
- 22:48:58 -0700 (PDT)
+ bh=v4xkzDWX19N9oFSSTQeCe65G8IASeY++bNpXDyU0BaI=;
+ b=HArM7HWLAsaOfjtY6gGv+U6AwfkmkE4l+umE28VrCw8g8Vq5r7xh+Q02yVD+QrC7xC
+ DTnY4tORYD5Dq414zOQXHsp8QB4pakNnJsnLC+qBpoSHP/XbX4ghl7zWGrEcgdqhE78l
+ tus6rs3DOAtWhoo1cj3KWIp3BgTKl9UgBlAmn6ie0MIAnyzFVnblUTeV1i06VtTsysm0
+ JBamkuaTY7aMrBFlA5X0WcWdFg17qlZKGyNPDx3wKaUgW4Jg71SEnCi/GY9yKPjhF07T
+ gBBThPkdOn4Y98JnBIqjvtJyBIq/WvyYdBhXnADsVcXGpwNt9g6G/FUnf9Wi8t15YNZm
+ a77Q==
+X-Gm-Message-State: AOJu0YxXHSzguy4ysgEyCXFy20joQNMl02P3sfMhZb4TYWR79MvCF6r1
+ lN9+YJEcFSXIwhcRKUu1zy/dMkScBHiw3DyyLL5t2MNaKddmfnx682C0FEmHLmzC3Ntmj2N8HHV
+ YZiW3gu+TuGVOtFfnsui9x1KDVt0=
+X-Google-Smtp-Source: AGHT+IHZzsUJb+X/1SRiHsZxjcp8GphpXB7juokaQr1xHTkTa0/CX9uDQm+sFRpdXWKF/6b8s8qSfjvWuuxrH2AC3HY=
+X-Received: by 2002:a2e:9d06:0:b0:2ec:5469:9d57 with SMTP id
+ 38308e7fff4ca-2eeb318275cmr108695541fa.41.1720992680928; Sun, 14 Jul 2024
+ 14:31:20 -0700 (PDT)
 MIME-Version: 1.0
-References: <CAH2r5mv2V3vdupgmR75WsNGrfdbaPo0Mw+6x82KK9vgUYu5AkQ@mail.gmail.com>
- <CAH2r5msriif9aOTVa57n2PnEjUHYgpimuz7vTG8deS=KOZt3hw@mail.gmail.com>
-In-Reply-To: <CAH2r5msriif9aOTVa57n2PnEjUHYgpimuz7vTG8deS=KOZt3hw@mail.gmail.com>
-Date: Sat, 13 Jul 2024 11:18:47 +0530
-Message-ID: <CANT5p=orFiPMujTrXE2_8kvxgV9fYU+QkXOSzg4eynDJY_Kr6g@mail.gmail.com>
-Subject: Re: [PATCH] cifs: fix setting SecurityFlags to true
-To: Steve French <smfrench@gmail.com>
+References: <18310e20-826f-45ab-b69e-dbfe47a1f83f@web.de>
+In-Reply-To: <18310e20-826f-45ab-b69e-dbfe47a1f83f@web.de>
+Date: Sun, 14 Jul 2024 16:31:09 -0500
+Message-ID: <CAH2r5mvbk6OrX59dybJvS=ANdzzidsj=rDzRUFrBrjff-upSkg@mail.gmail.com>
+Subject: Re: [PATCH] cifs: Use seq_putc() in two functions
+To: Markus Elfring <Markus.Elfring@web.de>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
@@ -79,58 +76,70 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Shyam Prasad N via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Shyam Prasad N <nspmangalore@gmail.com>
-Cc: CIFS <linux-cifs@vger.kernel.org>,
- samba-technical <samba-technical@lists.samba.org>
+From: Steve French via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Steve French <smfrench@gmail.com>
+Cc: Paulo Alcantara <pc@manguebit.com>, linux-cifs@vger.kernel.org,
+ Shyam Prasad N <sprasad@microsoft.com>, samba-technical@lists.samba.org,
+ kernel-janitors@vger.kernel.org, LKML <linux-kernel@vger.kernel.org>,
+ Steve French <sfrench@samba.org>, Bharath SM <bharathsm@microsoft.com>,
+ Tom Talpey <tom@talpey.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Thu, Jul 11, 2024 at 9:12=E2=80=AFPM Steve French <smfrench@gmail.com> w=
-rote:
->
-> V2 of patch
->
->     If you try to set /proc/fs/cifs/SecurityFlags to 1 it
->     will set them to CIFSSEC_MUST_NTLMV2 which no longer is
->     relevant (the less secure ones like lanman have been removed
->     from cifs.ko) and is also missing some flags (like for
->     signing and encryption) and can even cause mount to fail,
->     so change this to set it to Kerberos in this case.
->
->     Also change the description of the SecurityFlags to remove mention
->     of flags which are no longer supported.
->
-> On Tue, Jul 9, 2024 at 6:45=E2=80=AFPM Steve French <smfrench@gmail.com> =
-wrote:
-> >
-> > If you try to set /proc/fs/cifs/SecurityFlags to 1 it
-> > will set them to CIFSSEC_MUST_NTLMV2 which is obsolete and no
-> > longer checked, and will cause mount to fail, so change this
-> > to set it to a more understandable default (ie include Kerberos
-> > as well).
-> >
-> > Also change the description of the SecurityFlags to remove mention
-> > of various flags which are no longer supported (due to removal
-> > of weak security such as lanman and ntlmv1).
-> >
-> >
-> >
-> > --
-> > Thanks,
-> >
-> > Steve
->
->
->
-> --
-> Thanks,
->
-> Steve
+are there other examples of modules where similar changes have been made?
 
-Looks good to me.
+On Sun, Jul 14, 2024 at 3:35=E2=80=AFAM Markus Elfring <Markus.Elfring@web.=
+de> wrote:
+>
+> From: Markus Elfring <elfring@users.sourceforge.net>
+> Date: Sun, 14 Jul 2024 10:23:49 +0200
+>
+> Single characters should be put into a sequence.
+> Thus use the corresponding function =E2=80=9Cseq_putc=E2=80=9D.
+>
+> This issue was transformed by using the Coccinelle software.
+>
+> Signed-off-by: Markus Elfring <elfring@users.sourceforge.net>
+> ---
+>  fs/smb/client/cifs_swn.c | 2 +-
+>  fs/smb/client/cifsfs.c   | 2 +-
+>  2 files changed, 2 insertions(+), 2 deletions(-)
+>
+> diff --git a/fs/smb/client/cifs_swn.c b/fs/smb/client/cifs_swn.c
+> index 7233c6a7e6d7..68998c6ba7a2 100644
+> --- a/fs/smb/client/cifs_swn.c
+> +++ b/fs/smb/client/cifs_swn.c
+> @@ -655,7 +655,7 @@ void cifs_swn_dump(struct seq_file *m)
+>                 seq_printf(m, "%s", swnreg->ip_notify ? "(y)" : "(n)");
+>         }
+>         mutex_unlock(&cifs_swnreg_idr_mutex);
+> -       seq_puts(m, "\n");
+> +       seq_putc(m, '\n');
+>  }
+>
+>  void cifs_swn_check(void)
+> diff --git a/fs/smb/client/cifsfs.c b/fs/smb/client/cifsfs.c
+> index 6397fdefd876..ce5cb72bb81f 100644
+> --- a/fs/smb/client/cifsfs.c
+> +++ b/fs/smb/client/cifsfs.c
+> @@ -491,7 +491,7 @@ cifs_show_security(struct seq_file *s, struct cifs_se=
+s *ses)
+>         }
+>
+>         if (ses->sign)
+> -               seq_puts(s, "i");
+> +               seq_putc(s, 'i');
+>
+>         if (ses->sectype =3D=3D Kerberos)
+>                 seq_printf(s, ",cruid=3D%u",
+> --
+> 2.45.2
+>
+>
+
 
 --=20
-Regards,
-Shyam
+Thanks,
+
+Steve
 
