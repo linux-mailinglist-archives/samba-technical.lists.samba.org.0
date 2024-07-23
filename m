@@ -2,66 +2,68 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id A1999939916
-	for <lists+samba-technical@lfdr.de>; Tue, 23 Jul 2024 07:09:02 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 08883939980
+	for <lists+samba-technical@lfdr.de>; Tue, 23 Jul 2024 07:57:14 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=PqpSyzfOqfBgpniyCbv/7Z74nENzVCrnnHH4dQbwPEk=; b=BqioUYSo4v2y9MhHATXQDncXsL
-	aAoG6HHRttlJfHJROUFz38fouQlliNSMFmBMx60Ba7Z0BNrbIcormGdx1jEITNOCrbjaLKiR97TEA
-	bmu5iT3wk/qAAkL3lQtkq1O08TNVvHfJ4wEUDumwolW/39hwaBKRGFjQSn9maMsvHG1pfFb75Ihx9
-	TzpqXMKrYMQ3el72nAXnGenL6b8VjHvdcFsKI4iFfV8vCyHx6rmC6cfEojC2pAAnek4EpQCOWFoiK
-	ZJTV/UwXmuXXMNnCiDB89/i2NBj7DqH5JObFg29BNzer2ULtH87snt4ghbBvlSh2FHN8K8iw9DrTc
-	BkR8eoaw==;
-Received: from ip6-localhost ([::1]:44248 helo=hr1.samba.org) 
+	bh=Eyg85J8K9ihH82p0hRx+2qtj9MLkxnAavrxsh5Wv+NE=; b=yRt4LMdSv4vTr7QxZHfnjX9soT
+	WoY/PrO2DduQMTCLdcHBuY79kUx22mXkOZomqt/gKRA4GziwgO5RvDWAyA6X8ezZFYTNK+HasZ7Sz
+	EMQyGnnsSOUmUUHDk0rV0PqnIVDAJMVLMkGO40Hh1DclAaOgw8Lx+6invhJz2HzN6TKbpS1RVj8Tq
+	4xCzFaVBMLr/kHCW2UeIRBnFmcNod3V4t7cgueXOvZkx0wAOLvub3AlEpH2ofxZ32lQlje4Yz5dHH
+	4xmDIeCO8G5GezPxveqotXql+UdsjzhLSYcWyqP2JSOrpbQNMZkhHxGQVd522stLei/L37NqZDr5K
+	dbIFPShg==;
+Received: from ip6-localhost ([::1]:61058 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1sW7ku-001Jdq-S5; Tue, 23 Jul 2024 05:08:08 +0000
-Received: from mail-lf1-x12a.google.com ([2a00:1450:4864:20::12a]:56609) 
+	id 1sW8Vl-001Jow-25; Tue, 23 Jul 2024 05:56:33 +0000
+Received: from mail-lf1-x12a.google.com ([2a00:1450:4864:20::12a]:57414) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1sW7kp-001Jdh-DQ
- for samba-technical@lists.samba.org; Tue, 23 Jul 2024 05:08:05 +0000
+ (Exim) id 1sW8Vg-001Jop-DF
+ for samba-technical@lists.samba.org; Tue, 23 Jul 2024 05:56:30 +0000
 Received: by mail-lf1-x12a.google.com with SMTP id
- 2adb3069b0e04-52f024f468bso2787366e87.1
- for <samba-technical@lists.samba.org>; Mon, 22 Jul 2024 22:08:02 -0700 (PDT)
+ 2adb3069b0e04-52efaae7edfso2243671e87.2
+ for <samba-technical@lists.samba.org>; Mon, 22 Jul 2024 22:56:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1721711282; x=1722316082; darn=lists.samba.org;
+ d=gmail.com; s=20230601; t=1721714187; x=1722318987; darn=lists.samba.org;
  h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
  :date:message-id:reply-to;
- bh=PqpSyzfOqfBgpniyCbv/7Z74nENzVCrnnHH4dQbwPEk=;
- b=RXk6SG2Xwwf7nX0WdnSEeN8puTLpI+Nh6YnfDrgEBKiIQ2Zv49RZizWLz166rPTf5W
- sHqeKNd42rylCWsMyjS2Eh3ESxOmLQ3kWYwp9DINDunXc5WFNKMtlQ4lP+x70mNpeJYe
- y8p4PPcHegiNc/njhfrFOsMBy3oSt/h77V0rRmWADE/JH4q3k96eSKA76Cj86YCsecDk
- lFpT/JpqrARpnuapr/T9Y73Z02YQ8xmR5ySEyr6DFQflACXNLaER2OC9y1EkXAvF/xBw
- 0isD92iIDb6aPkYmWbHNvo8+34jSVLZKhjEqx+glRSpAiiOta4E73ysMvNKAhN+fgQKp
- I+YA==
+ bh=Eyg85J8K9ihH82p0hRx+2qtj9MLkxnAavrxsh5Wv+NE=;
+ b=c2jt9eZf2ob8c4y+4gj5ew1uLp8MKY+AQdHbgh2EbNP0fkM59DVUu7OLcrcD4J40EF
+ H5FlxHHBWfArNsA2jZ7KvvZrJrbZejnDad/OyKCxMyN4S4AaRm8snKz7AT6+iLasqWlW
+ 9h15D/HtRNIvNrJ4EYoocRNa1+ssUeFKbZe5yIDrbWmFgWUqkTrZIH9YjM9BaipRlqYp
+ sJHLGG+YsXXSoUORfBOpqmibSMydQzItjUliy2WVh64MEfmKWXD2jdtZvzhel/xaLckY
+ lw8oF9MgSe5gk7p1d27lrf0bU/gFnO2TuHplKMFWqV8vsiABrnv6GNMB5vg11IMx2+HX
+ oHkA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721711282; x=1722316082;
+ d=1e100.net; s=20230601; t=1721714187; x=1722318987;
  h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
  :from:to:cc:subject:date:message-id:reply-to;
- bh=PqpSyzfOqfBgpniyCbv/7Z74nENzVCrnnHH4dQbwPEk=;
- b=jH0iM77VnD+M24Re/aK9kStkBx/BA24eUGFchp1bLL4wGdr5gsKfbhMYFaEWVQCu2N
- DvOdOC7kwV3+L6hNAjkxg1j2Xvt08wd/DGTP92mqr24dj1rHHMw1mxBm8n00xjj1T0c6
- TYAMNPJ7zCKoGDbk/hK5P0wYiwpDKQiimotvKFY2FMqNDgTwduBA9/eMt/AznLJ+aH9R
- TDpyqlT9lduQdhzAzD6sjY3cd0BPxksTdOkeScLmAtXvj3Vt0wI6V+jCxTOHdt8U+W+q
- 4lZSVH9eJSnbqZPFnkS82ogud6AcogtRhVjN3QLt0lxjkgwVETZM/1kpRXQi5Lajgkmp
- BKxQ==
+ bh=Eyg85J8K9ihH82p0hRx+2qtj9MLkxnAavrxsh5Wv+NE=;
+ b=TxdS9ywyj7rv4mXimrjqgdkqAiB07Iil1iQkoOO2jf38Y562vxr3PxLOl1Cdnq/EBE
+ aemKKb2DvQPyS2emKWFdiht0SxU3b3CKvWLomn+yHwRmFAW1smWLDDLcyI/8544cuEwc
+ pyrNIc9Qe/oS10bdESPLbDeTsYEosuzryXs1b5sb9YVIwRDN9VWTL4dvejp82t42oBIs
+ RYAkkg3H4gm/JYLVPiRJ2m/ngvZ4ydXnorp75jbjuhHa+zSipa4AK8enRFGDboxEf6Cg
+ +qQbJLMP2uuVfYK6E2e17StZp7bSMlAivWBVNX2jjQkLPgMs7/3YJjrgUWbiFhQDT/9F
+ 6o7w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVsNp+7DGQfHbNuQ2Su4Keo1vVJE+btmlXff43ekOipLpNXXaWLryd2y9pYpUvWfPdCoQPPJygsSZHnYziuD6pj5HaUl4JMxc/mi71wZUBO
-X-Gm-Message-State: AOJu0YxyQexvUkkVF2yt/LjFM1o/GrOwstARwby0NAQqVwY4ZHeZW9ZV
- E6f65x346xBa9JtDxa56NKzgcOOjNTw9077KWvXUlYnZXe8tfhl0cPdWleo5e7/RHSz9b1EuZwn
- BJtEzzk54MiZOtgxyJxudWPGLSPc=
-X-Google-Smtp-Source: AGHT+IGFaeQAFoLrUxTqgAbwSwnExwQvEx8ysZRM+N6jejJsr3AfjoUEc5Fmt5oU6JOXIMqMqOS9LInBiS+YhWPdty4=
+ AJvYcCW9bUTJfTICHZj7jEFDMUC7zAlCldh+dpyE+0venUmHWaNSnJJ0k/2A5S5BM105QV5RFbLPDq5z4ci4Xau4Yk6QHDV/TuprzgmOn38gLqic
+X-Gm-Message-State: AOJu0Ywf47DPO+Jh++RXZ6IoEtZDub4QDFu3BHWqFp76pCVs6zAiIXnh
+ CGikfVQbYrNS/5UL+TVpB+51qO5CcJje8O13KFu5+Ix53Vv5ZVdEBEEzi9vn3b6BRnxZJB6iyWD
+ N5/yitS7DyzXgFXMLHJ1db2VsRyk=
+X-Google-Smtp-Source: AGHT+IE7ebaVGF0FCj1gjWT7OgagQGgXPXNxI8yTB+YxqCDVea1beFx94JHCQNlZ3cG/eqoEhJFuvr91vfrvReVtKR8=
 X-Received: by 2002:a05:6512:2209:b0:52e:f2a6:8e1a with SMTP id
- 2adb3069b0e04-52efb7e8103mr6118513e87.29.1721711281502; Mon, 22 Jul 2024
- 22:08:01 -0700 (PDT)
+ 2adb3069b0e04-52efb7e8103mr6190757e87.29.1721714186771; Mon, 22 Jul 2024
+ 22:56:26 -0700 (PDT)
 MIME-Version: 1.0
-Date: Tue, 23 Jul 2024 00:07:50 -0500
-Message-ID: <CAH2r5mu2LTRDPX7KbM3V_d7FybuPnvCMRd6YV3__H-7mn1N9uA@mail.gmail.com>
-Subject: [PATCH][CIFS] fix reconnect with SMB1 Unix Extensions
-To: Andrew Bartlett <abartlet@samba.org>,
- samba-technical <samba-technical@lists.samba.org>, 
- CIFS <linux-cifs@vger.kernel.org>, Kevin Ottens <kevin.ottens@enioka.com>
-Content-Type: multipart/mixed; boundary="000000000000571cef061de3251f"
+Date: Tue, 23 Jul 2024 00:56:15 -0500
+Message-ID: <CAH2r5mse9o8tuS9UM9soq02MwweULT9KnUxOzoBHEirHxB3Gog@mail.gmail.com>
+Subject: [PATCH][CIFS] mount with "unix" mount option for SMB1 incorrectly
+ handled
+To: CIFS <linux-cifs@vger.kernel.org>, 
+ samba-technical <samba-technical@lists.samba.org>,
+ Andrew Bartlett <abartlet@samba.org>, 
+ Kevin Ottens <kevin.ottens@enioka.com>
+Content-Type: multipart/mixed; boundary="00000000000081fa73061de3d20d"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -81,69 +83,83 @@ Cc: Paulo Alcantara <pc@manguebit.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
---000000000000571cef061de3251f
+--00000000000081fa73061de3d20d
 Content-Type: text/plain; charset="UTF-8"
 
-Andrew had pointed out having problems with SMB1 Unix extensions to
-Samba when investigating an unrelated problem, and when I tried it I
-noticed a serious reconnect issue with the SMB1 Unix Extensions.
+When Andrew Bartlett mentioned problems using the SMB1 Unix Extensions to Samba
+I noticed a couple of client bugs.  This fixes the second problem I noticed.
 
-When mounting with the SMB1 Unix Extensions (e.g. mounts
-to Samba with vers=1.0), cifs.ko reconnects no longer reset the
-Unix Extensions (SetFSInfo SET_FILE_UNIX_BASIC) after tcon so most
-operations (e.g. stat, ls, open, statfs) will fail continuously
-with:
-        "Operation not supported"
-if the connection ever resets (e.g. due to brief network disconnect)
+Although by default we negotiate CIFS Unix Extensions for SMB1 mounts
+to Samba (and they work if the user does not specify "unix" or "posix"
+or "linux" on mount), and we do properly handle when a user turns them
+off with "nounix" mount parm, ... but with the  changes to the mount
+API we broke cases where the user explicitly specified the "unix"
+option (or equivalently "linux" or "posix") on mount with vers=1.0 to
+Samba or other servers which support the CIFS Unix Extensions.
 
-Fix attached
+   "mount error(95): Operation not supported"
 
+and logged:
 
+   "CIFS: VFS: Check vers= mount option. SMB3.11 disabled but required
+for POSIX extensions"
+
+even though CIFS Unix Extensions are supported for vers=1.0  This
+patch fixes the case where the user specifies both "unix" (or
+equivalently "posix" or "linux") and "vers=1.0" on mount to a server
+which supports the CIFS Unix Extensions.
+
+See attached
 
 -- 
 Thanks,
 
 Steve
 
---000000000000571cef061de3251f
+--00000000000081fa73061de3d20d
 Content-Type: text/x-patch; charset="US-ASCII"; 
-	name="0001-cifs-fix-reconnect-with-SMB1-UNIX-Extensions.patch"
+	name="0001-cifs-mount-with-unix-mount-option-for-SMB1-incorrect.patch"
 Content-Disposition: attachment; 
-	filename="0001-cifs-fix-reconnect-with-SMB1-UNIX-Extensions.patch"
+	filename="0001-cifs-mount-with-unix-mount-option-for-SMB1-incorrect.patch"
 Content-Transfer-Encoding: base64
-Content-ID: <f_lyxyflgw0>
-X-Attachment-Id: f_lyxyflgw0
+Content-ID: <f_lyy03ev00>
+X-Attachment-Id: f_lyy03ev00
 
-RnJvbSAyYTliM2ViMWIwODM4Y2M5OWFhZmRjNTBlMzcxMzg1MzhkNDU5M2JiIE1vbiBTZXAgMTcg
+RnJvbSA2YmUzNmVlMGFjY2VlZjAzYWI2MTk4NTc4NmNhMjM4YTEzMjcyMWU2IE1vbiBTZXAgMTcg
 MDA6MDA6MDAgMjAwMQpGcm9tOiBTdGV2ZSBGcmVuY2ggPHN0ZnJlbmNoQG1pY3Jvc29mdC5jb20+
-CkRhdGU6IE1vbiwgMjIgSnVsIDIwMjQgMjM6NDA6MDggLTA1MDAKU3ViamVjdDogW1BBVENIXSBj
-aWZzOiBmaXggcmVjb25uZWN0IHdpdGggU01CMSBVTklYIEV4dGVuc2lvbnMKCldoZW4gbW91bnRp
-bmcgd2l0aCB0aGUgU01CMSBVbml4IEV4dGVuc2lvbnMgKGUuZy4gbW91bnRzCnRvIFNhbWJhIHdp
-dGggdmVycz0xLjApLCByZWNvbm5lY3RzIG5vIGxvbmdlciByZXNldCB0aGUKVW5peCBFeHRlbnNp
-b25zIChTZXRGU0luZm8gU0VUX0ZJTEVfVU5JWF9CQVNJQykgYWZ0ZXIgdGNvbiBzbyBtb3N0Cm9w
-ZXJhdGlvbnMgKGUuZy4gc3RhdCwgbHMsIG9wZW4sIHN0YXRmcykgd2lsbCBmYWlsIGNvbnRpbnVv
-dXNseQp3aXRoOgogICAgICAgICJPcGVyYXRpb24gbm90IHN1cHBvcnRlZCIKaWYgdGhlIGNvbm5l
-Y3Rpb24gZXZlciByZXNldHMgKGUuZy4gZHVlIHRvIGJyaWVmIG5ldHdvcmsgZGlzY29ubmVjdCkK
-CkNjOiBzdGFibGVAdmdlci5rZXJuZWwub3JnClNpZ25lZC1vZmYtYnk6IFN0ZXZlIEZyZW5jaCA8
-c3RmcmVuY2hAbWljcm9zb2Z0LmNvbT4KLS0tCiBmcy9zbWIvY2xpZW50L2Nvbm5lY3QuYyB8IDE1
-ICsrKysrKysrKysrKysrLQogMSBmaWxlIGNoYW5nZWQsIDE0IGluc2VydGlvbnMoKyksIDEgZGVs
-ZXRpb24oLSkKCmRpZmYgLS1naXQgYS9mcy9zbWIvY2xpZW50L2Nvbm5lY3QuYyBiL2ZzL3NtYi9j
-bGllbnQvY29ubmVjdC5jCmluZGV4IDdhMTZlMTJmNWRhOC4uYjY2ZDhiMDNhMzg5IDEwMDY0NAot
-LS0gYS9mcy9zbWIvY2xpZW50L2Nvbm5lY3QuYworKysgYi9mcy9zbWIvY2xpZW50L2Nvbm5lY3Qu
-YwpAQCAtMzgwNyw4ICszODA3LDIxIEBAIENJRlNUQ29uKGNvbnN0IHVuc2lnbmVkIGludCB4aWQs
-IHN0cnVjdCBjaWZzX3NlcyAqc2VzLAogCQllbHNlCiAJCQl0Y29uLT5GbGFncyA9IDA7CiAJCWNp
-ZnNfZGJnKEZZSSwgIlRjb24gZmxhZ3M6IDB4JXhcbiIsIHRjb24tPkZsYWdzKTsKLQl9CiAKKwkJ
-LyoKKwkJICogcmVzZXRfY2lmc191bml4X2NhcHMgY2FsbHMgUUZTSW5mbyB3aGljaCByZXF1aXJl
-cworCQkgKiBuZWVkX3JlY29ubmVjdCB0byBiZSBmYWxzZSwgYnV0IHdlIHdvdWxkIG5vdCBuZWVk
-IHRvIGNhbGwKKwkJICogcmVzZXRfY2FwcyBpZiB0aGlzIHdlcmUgbm90IGEgcmVjb25uZWN0IGNh
-c2Ugc28gbXVzdCBjaGVjaworCQkgKiBuZWVkX3JlY29ubmVjdCBmbGFnIGhlcmUuICBUaGUgY2Fs
-bGVyIHdpbGwgYWxzbyBjbGVhcgorCQkgKiBuZWVkX3JlY29ubmVjdCB3aGVuIHRjb24gd2FzIHN1
-Y2Nlc3NmdWwgYnV0IG5lZWRlZCB0byBiZQorCQkgKiBjbGVhcmVkIGVhcmxpZXIgaW4gdGhlIGNh
-c2Ugb2YgdW5peCBleHRlbnNpb25zIHJlY29ubmVjdAorCQkgKi8KKwkJaWYgKHRjb24tPm5lZWRf
-cmVjb25uZWN0ICYmIHRjb24tPnVuaXhfZXh0KSB7CisJCQljaWZzX2RiZyhGWUksICJyZXNldHRp
-bmcgY2FwcyBmb3IgJXNcbiIsIHRjb24tPnRyZWVfbmFtZSk7CisJCQl0Y29uLT5uZWVkX3JlY29u
-bmVjdCA9IGZhbHNlOworCQkJcmVzZXRfY2lmc191bml4X2NhcHMoeGlkLCB0Y29uLCBOVUxMLCBO
-VUxMKTsKKwkJfQorCX0KIAljaWZzX2J1Zl9yZWxlYXNlKHNtYl9idWZmZXIpOwogCXJldHVybiBy
-YzsKIH0KLS0gCjIuNDMuMAoK
---000000000000571cef061de3251f--
+CkRhdGU6IFR1ZSwgMjMgSnVsIDIwMjQgMDA6NDQ6NDggLTA1MDAKU3ViamVjdDogW1BBVENIXSBj
+aWZzOiBtb3VudCB3aXRoICJ1bml4IiBtb3VudCBvcHRpb24gZm9yIFNNQjEgaW5jb3JyZWN0bHkK
+IGhhbmRsZWQKCkFsdGhvdWdoIGJ5IGRlZmF1bHQgd2UgbmVnb3RpYXRlIENJRlMgVW5peCBFeHRl
+bnNpb25zIGZvciBTTUIxIG1vdW50cyB0bwpTYW1iYSAoYW5kIHRoZXkgd29yayBpZiB0aGUgdXNl
+ciBkb2VzIG5vdCBzcGVjaWZ5ICJ1bml4IiBvciAicG9zaXgiIG9yCiJsaW51eCIgb24gbW91bnQp
+LCBhbmQgd2UgZG8gcHJvcGVybHkgaGFuZGxlIHdoZW4gYSB1c2VyIHR1cm5zIHRoZW0gb2ZmCndp
+dGggIm5vdW5peCIgbW91bnQgcGFybS4gIEJ1dCB3aXRoIHRoZSBjaGFuZ2VzIHRvIHRoZSBtb3Vu
+dCBBUEkgd2UKYnJva2UgY2FzZXMgd2hlcmUgdGhlIHVzZXIgZXhwbGljaXRseSBzcGVjaWZpZXMg
+dGhlICJ1bml4IiBvcHRpb24gKG9yCmVxdWl2YWxlbnRseSAibGludXgiIG9yICJwb3NpeCIpIG9u
+IG1vdW50IHdpdGggdmVycz0xLjAgdG8gU2FtYmEgb3Igb3RoZXIKc2VydmVycyB3aGljaCBzdXBw
+b3J0IHRoZSBDSUZTIFVuaXggRXh0ZW5zaW9ucy4KCiAibW91bnQgZXJyb3IoOTUpOiBPcGVyYXRp
+b24gbm90IHN1cHBvcnRlZCIKCmFuZCBsb2dnZWQ6CgogIkNJRlM6IFZGUzogQ2hlY2sgdmVycz0g
+bW91bnQgb3B0aW9uLiBTTUIzLjExIGRpc2FibGVkIGJ1dCByZXF1aXJlZCBmb3IgUE9TSVggZXh0
+ZW5zaW9ucyIKCmV2ZW4gdGhvdWdoIENJRlMgVW5peCBFeHRlbnNpb25zIGFyZSBzdXBwb3J0ZWQg
+Zm9yIHZlcnM9MS4wICBUaGlzIHBhdGNoIGZpeGVzCnRoZSBjYXNlIHdoZXJlIHRoZSB1c2VyIHNw
+ZWNpZmllcyBib3RoICJ1bml4IiAob3IgZXF1aXZhbGVudGx5ICJwb3NpeCIgb3IKImxpbnV4Iikg
+YW5kICJ2ZXJzPTEuMCIgb24gbW91bnQgdG8gYSBzZXJ2ZXIgd2hpY2ggc3VwcG9ydHMgdGhlCkNJ
+RlMgVW5peCBFeHRlbnNpb25zLgoKQ2M6IHN0YWJsZUB2Z2VyLmtlcm5lbC5vcmcKU2lnbmVkLW9m
+Zi1ieTogU3RldmUgRnJlbmNoIDxzdGZyZW5jaEBtaWNyb3NvZnQuY29tPgotLS0KIGZzL3NtYi9j
+bGllbnQvY29ubmVjdC5jIHwgNyArKysrKysrCiAxIGZpbGUgY2hhbmdlZCwgNyBpbnNlcnRpb25z
+KCspCgpkaWZmIC0tZ2l0IGEvZnMvc21iL2NsaWVudC9jb25uZWN0LmMgYi9mcy9zbWIvY2xpZW50
+L2Nvbm5lY3QuYwppbmRleCBiNjZkOGIwM2EzODkuLmMzZDhkN2I3YjQ2YSAxMDA2NDQKLS0tIGEv
+ZnMvc21iL2NsaWVudC9jb25uZWN0LmMKKysrIGIvZnMvc21iL2NsaWVudC9jb25uZWN0LmMKQEAg
+LTI2MTQsNiArMjYxNCwxMyBAQCBjaWZzX2dldF90Y29uKHN0cnVjdCBjaWZzX3NlcyAqc2VzLCBz
+dHJ1Y3Qgc21iM19mc19jb250ZXh0ICpjdHgpCiAJCQljaWZzX2RiZyhWRlMsICJTZXJ2ZXIgZG9l
+cyBub3Qgc3VwcG9ydCBtb3VudGluZyB3aXRoIHBvc2l4IFNNQjMuMTEgZXh0ZW5zaW9uc1xuIik7
+CiAJCQlyYyA9IC1FT1BOT1RTVVBQOwogCQkJZ290byBvdXRfZmFpbDsKKwkJfSBlbHNlIGlmIChz
+ZXMtPnNlcnZlci0+dmFscy0+cHJvdG9jb2xfaWQgPT0gU01CMTBfUFJPVF9JRCkKKwkJCWlmIChj
+YXBfdW5peChzZXMpKQorCQkJCWNpZnNfZGJnKEZZSSwgIlVuaXggRXh0ZW5zaW9ucyByZXF1ZXN0
+ZWQgb24gU01CMSBtb3VudFxuIik7CisJCQllbHNlIHsKKwkJCQljaWZzX2RiZyhWRlMsICJTTUIx
+IFVuaXggRXh0ZW5zaW9ucyBub3Qgc3VwcG9ydGVkIGJ5IHNlcnZlclxuIik7CisJCQkJcmMgPSAt
+RU9QTk9UU1VQUDsKKwkJCQlnb3RvIG91dF9mYWlsOwogCQl9IGVsc2UgewogCQkJY2lmc19kYmco
+VkZTLAogCQkJCSJDaGVjayB2ZXJzPSBtb3VudCBvcHRpb24uIFNNQjMuMTEgZGlzYWJsZWQgYnV0
+IHJlcXVpcmVkIGZvciBQT1NJWCBleHRlbnNpb25zXG4iKTsKLS0gCjIuNDMuMAoK
+--00000000000081fa73061de3d20d--
 
