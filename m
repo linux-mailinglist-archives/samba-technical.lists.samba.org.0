@@ -2,70 +2,69 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4316F93A977
-	for <lists+samba-technical@lfdr.de>; Wed, 24 Jul 2024 00:49:38 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5DEDA93A97A
+	for <lists+samba-technical@lfdr.de>; Wed, 24 Jul 2024 00:51:09 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=Ezg52eHclr4j0zq4BJBkryPVzNv/N9mlBGgYhA+rqMY=; b=GNpHLaf7ugO3Rv9mPUzgFzH2nm
-	GQ4BDmnq39jLRBwljZUjz5EufAY/uYRd0/G/H12uBy04NsvcKyJGVergCexKOj158afpjLSiYh8s4
-	G1h1P3hA0yt6iCz4LUwpYDL6XRngUmvLY5Om69s+Pn+o6krS1/99dMV7gRLgsYhoPoMYE8nFhenHg
-	g+EfsQZ6g8nPe2IPlnBTbo1EGtQaL+ZZSaULcD7vkigieOkrkNJHYoZu6MVpDXkwn3NcBqeFk8H5R
-	+rdhfmFbBiRvxpWEqovqI8pGlZnXKr6X/wGm+oP6OrQ8hIdjxoIUxZnHELhdOsuA6PhN6Dx81B166
-	na3XUMWw==;
-Received: from ip6-localhost ([::1]:30936 helo=hr1.samba.org) 
+	bh=ES59BCfEuAfxXID0F6oW+II6SH5dXpK5Bso9en7P/4M=; b=xvIWFeylwDCIVTf0qWaVRi7yY8
+	tnj38wvyZPZ7XE2VJMzBxMYG3zXS/nAjmSBa9Zb6o9v26rUZmdI0yCGrY0+nt86JIbe5Kf3B+XT6L
+	fbYNunCHqMpvQLZTP77lx140zz50O0BJV58JoiLzYaIEVyBgTN3MdxRLrg6MrufgZdX4Tys4TF1CL
+	K7up6IEONNR3meCl1Y/o9a4WLWd22RNM0JHjJiimmifN67Rgg1pTEUB8+aum2VQtqyrl/rUdnWiFV
+	4rtLe+uzXt161YT6uihPrSauLe3vKmpRusSc5y5uWzOU2llpDJ055xkGMvtfzNPPNVhOJ6HPNsbF8
+	tD6fxMzg==;
+Received: from ip6-localhost ([::1]:50782 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1sWOJT-001MtE-4T; Tue, 23 Jul 2024 22:48:55 +0000
-Received: from mail-lf1-x12e.google.com ([2a00:1450:4864:20::12e]:43058) 
+	id 1sWOLY-001Mya-3b; Tue, 23 Jul 2024 22:51:04 +0000
+Received: from mail-lf1-x12b.google.com ([2a00:1450:4864:20::12b]:46536) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1sWOJO-001Mt7-QD
- for samba-technical@lists.samba.org; Tue, 23 Jul 2024 22:48:53 +0000
-Received: by mail-lf1-x12e.google.com with SMTP id
- 2adb3069b0e04-52fcc56c882so252311e87.0
- for <samba-technical@lists.samba.org>; Tue, 23 Jul 2024 15:48:50 -0700 (PDT)
+ (Exim) id 1sWOLU-001MyT-5Q
+ for samba-technical@lists.samba.org; Tue, 23 Jul 2024 22:51:02 +0000
+Received: by mail-lf1-x12b.google.com with SMTP id
+ 2adb3069b0e04-52f01b8738dso2859097e87.1
+ for <samba-technical@lists.samba.org>; Tue, 23 Jul 2024 15:50:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1721774929; x=1722379729; darn=lists.samba.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Ezg52eHclr4j0zq4BJBkryPVzNv/N9mlBGgYhA+rqMY=;
- b=gVniZrzhRsR8Z1cxy1LPcVexo8RFJI6JQGLXtLTKAPRnuyKdE5iSUZ4ivVcDqj8gim
- GM+6Hzm5wctUrwJbKDu5YKRbkpQqkbk4sfM6ihX9NqP/vbMfyD96Lk8kQn6IVbwnjTpP
- +K3tulP25YXM8na492lV6GjLblMDTGRXyu0glStk5NGD3uF4xf1spepAGL4iWnLI4gjH
- 52+51qPEBOJFqrxNU4oQEQGqFf2tvORf19dF5BVMA+MXSaU0Sq8IXq+b+7MujhCeVBfB
- hp6v/QAb/FWfePxQcluDxuL0kgA7oDySmmkecbkx0vuXilLYMcTYKD+q8pXuuzR21NMr
- AHMw==
+ d=gmail.com; s=20230601; t=1721775058; x=1722379858; darn=lists.samba.org;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=ES59BCfEuAfxXID0F6oW+II6SH5dXpK5Bso9en7P/4M=;
+ b=bQsvhk/BDQ/8L65koktmeJtQ//OwPudAC15RFkGhH9OLDTuBPQ9NacdQto+76m96lc
+ Z92wc9/uYIQ9EUW+ca2Cmhi8wcM5Dcch+QJAvua2ZVb+ASjqDlmn8871KE3UPxVUMMzt
+ MFHj+TDvCXYOAtTbI0nb7B6soY/wfZP2XxHA6Nz8VmGZtcReQ9w1MWwAg9COASgA6PwI
+ 8IJ0J5VVSL6h1cAVOtIV8QSCr0szL2bY4Kznms9WnIiTxEoaQ8wYZoZEH2cUZg6i0Bv3
+ GGqISoK7ejSX/gNxKUCsDw0NyO8j8MQPdyVm9xhye73pRS03J3YHROQ6XBN9uMWwdN2p
+ utTQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721774929; x=1722379729;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Ezg52eHclr4j0zq4BJBkryPVzNv/N9mlBGgYhA+rqMY=;
- b=TA3J9enO3JHfoI/WFU1poy6omDFWxtxfmZK15pdZZinZDgqd1UV6PPWdFe4SLH4xVH
- NKBthfyZjuarK7S1a14Vga+7WSjc+gxurC+TUG8aNbLSA0F4TdgHq+Qz53/LgoM301K0
- bRwDmUwLBpNl8WAuDv7sa68dtJeAScHCXULg9hWM3nk21ReAlNUACgP6V9EMbb1R+5zw
- S7YNnC/PfHdxaWDAthDRyHLbLKOUeUmFx3hifkNbbQswo3yT/FyVJdGBqnT/w/8zyztJ
- 8Gvk71veK665W5HsbXDaMgmIpv6rKKkUcpaATDOizNXVf+684nVs3aSoMJF9LZLkjzwf
- mZUw==
+ d=1e100.net; s=20230601; t=1721775058; x=1722379858;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=ES59BCfEuAfxXID0F6oW+II6SH5dXpK5Bso9en7P/4M=;
+ b=c9NKPx2LYQ+jWZ2TtAYr6wg9oDTHj1KO6O6saK1qyDPKtoXvettHJEvQAphWeudPvr
+ iRv2eAF4g0mZ3FcPLnO9bNPpZnYaIeaCu85TzE7c0ZGV0MvnOZ/1RoDPHnWxWWDTSqdw
+ lbllhiTRMRh3dQuSumTIBVINCw+UsirIXnkdeHFP+OpmGLB1zy0Rv0eBb+8VfoAFG8Ep
+ 9bZoDHEv3yaaUJFpsFcp5a1AlNGnKwdpoSvWziFrvZm7mbVFBzJvB45V19VG0Cn6OUM8
+ fCaced/fFiwRs1BiPvMAFwsPej99fBnDV8Y3UJluUf6jkvJupooq9XXNgZAHQPfPrTMK
+ trow==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVa9BRb5Hs5LoJ95u0xpnDpx4T7Egs55m67TBe06xkrS/aDbcxiRntK9i3fRKjpB20jj+C2iG+caHvXLqi8wXbJet5/T4y6f22E1BY/EwRX
-X-Gm-Message-State: AOJu0YzoSdvx/HCclLcz740IoVIIVLAq4IBUzD6TBz04oHbY0cit9wJz
- MS2eZvjj1VtHSOBKeruU9nPsB3Mja4VF1MyDzFV/sya4KKz6SBcbH9YOif9BRALsr1ldwC5bIiR
- TMZlvGZGk1yEGA8dyPbAgJWUSe9gtw347
-X-Google-Smtp-Source: AGHT+IFAWjl75rvRITC8oU1EWcaQCB9TEMTgIZzmojMWDMCmNyi/UA5XFvmezaW/1vinOlJXFxGZiwOoOEYB+w+nEC8=
-X-Received: by 2002:a05:6512:3044:b0:52e:7f23:5d98 with SMTP id
- 2adb3069b0e04-52fcf8b5068mr17989e87.8.1721774928873; Tue, 23 Jul 2024
- 15:48:48 -0700 (PDT)
+ AJvYcCWRGvbcScbUTHVFax7OxARNAbTH0bPXZkf0VrWYL7LGK5IswJO/ZPgQos2ejAPBFRFxJHVy0c7g4JiqLi5OlHtEUlxOWWdLEnFU5bGrBOOn
+X-Gm-Message-State: AOJu0Yy1M6zag5swYohcEQv0Hx/bEbr8oDqfZYe5D9tR64eCLX8cfmMP
+ A9iEMg64WPQeeRxXJtNWOT8z0WdViB/N1/2OPXrMoSJAgYSUkLA4F+AuyX5ZRUanqaUCBPdPEHk
+ on1abkz/zLkb+d1BN1OklTxdkVpOL8w==
+X-Google-Smtp-Source: AGHT+IGyoPW8W2ZIVH4om3vY67WuHjE9OA4VsnmQGKnBi270ljt/ok4VRrS7XbofCa0WIsndrUHIvaMkofb4h/tKSmw=
+X-Received: by 2002:a05:6512:2204:b0:52c:dbe7:cfd5 with SMTP id
+ 2adb3069b0e04-52fcf000c42mr177660e87.32.1721775057566; Tue, 23 Jul 2024
+ 15:50:57 -0700 (PDT)
 MIME-Version: 1.0
-References: <202407240638.kjmPxwJV-lkp@intel.com>
-In-Reply-To: <202407240638.kjmPxwJV-lkp@intel.com>
-Date: Tue, 23 Jul 2024 17:48:37 -0500
-Message-ID: <CAH2r5mtC6LAFJxvoeWe4DPAKx=01LdYRSO7FE0R_jOC0iVX40A@mail.gmail.com>
-Subject: Re: [cifs:for-next 2/3] ERROR: modpost: "reset_cifs_unix_caps"
- [fs/smb/client/cifs.ko] undefined!
-To: kernel test robot <lkp@intel.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+References: <CAH2r5mu2LTRDPX7KbM3V_d7FybuPnvCMRd6YV3__H-7mn1N9uA@mail.gmail.com>
+In-Reply-To: <CAH2r5mu2LTRDPX7KbM3V_d7FybuPnvCMRd6YV3__H-7mn1N9uA@mail.gmail.com>
+Date: Tue, 23 Jul 2024 17:50:46 -0500
+Message-ID: <CAH2r5muHFV8D2+SrDKQiUSkxzDfAG4zJ3rUdQnBXDT12u5D2Ww@mail.gmail.com>
+Subject: Re: [PATCH][CIFS] fix reconnect with SMB1 Unix Extensions
+To: Andrew Bartlett <abartlet@samba.org>,
+ samba-technical <samba-technical@lists.samba.org>, 
+ CIFS <linux-cifs@vger.kernel.org>, Kevin Ottens <kevin.ottens@enioka.com>
+Content-Type: multipart/mixed; boundary="000000000000b0bb5a061df1fe34"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -81,137 +80,93 @@ List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
 From: Steve French via samba-technical <samba-technical@lists.samba.org>
 Reply-To: Steve French <smfrench@gmail.com>
-Cc: linux-cifs@vger.kernel.org, samba-technical@lists.samba.org,
- oe-kbuild-all@lists.linux.dev
+Cc: Paulo Alcantara <pc@manguebit.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Fixed with this change and repushed to for-next
+--000000000000b0bb5a061df1fe34
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/fs/smb/client/connect.c b/fs/smb/client/connect.c
-index b66d8b03a389..89d9f86cc29a 100644
---- a/fs/smb/client/connect.c
-+++ b/fs/smb/client/connect.c
-@@ -3686,6 +3686,7 @@ int cifs_mount(struct cifs_sb_info *cifs_sb,
-struct smb3_fs_context *ctx)
- }
- #endif
+updated to add missing #ifdef
 
-+#ifdef CONFIG_CIFS_ALLOW_INSECURE_LEGACY
- /*
-  * Issue a TREE_CONNECT request.
-  */
-@@ -3825,6 +3826,7 @@ CIFSTCon(const unsigned int xid, struct cifs_ses *ses=
-,
-        cifs_buf_release(smb_buffer);
-        return rc;
- }
-+#endif /* CONFIG_CIFS_ALLOW_INSECURE_LEGACY */
 
- static void delayed_free(struct rcu_head *p)
- {
-
-On Tue, Jul 23, 2024 at 5:37=E2=80=AFPM kernel test robot <lkp@intel.com> w=
-rote:
+On Tue, Jul 23, 2024 at 12:07=E2=80=AFAM Steve French <smfrench@gmail.com> =
+wrote:
 >
-> tree:   git://git.samba.org/sfrench/cifs-2.6.git for-next
-> head:   dde12e91303b6d38322ed69801ce3129aba82ad5
-> commit: 2a9b3eb1b0838cc99aafdc50e37138538d4593bb [2/3] cifs: fix reconnec=
-t with SMB1 UNIX Extensions
-> config: x86_64-randconfig-101-20240723 (https://download.01.org/0day-ci/a=
-rchive/20240724/202407240638.kjmPxwJV-lkp@intel.com/config)
-> compiler: gcc-10 (Ubuntu 10.5.0-1ubuntu1) 10.5.0
-> reproduce (this is a W=3D1 build): (https://download.01.org/0day-ci/archi=
-ve/20240724/202407240638.kjmPxwJV-lkp@intel.com/reproduce)
+> Andrew had pointed out having problems with SMB1 Unix extensions to
+> Samba when investigating an unrelated problem, and when I tried it I
+> noticed a serious reconnect issue with the SMB1 Unix Extensions.
 >
-> If you fix the issue in a separate patch/commit (i.e. not just a new vers=
-ion of
-> the same patch/commit), kindly add following tags
-> | Reported-by: kernel test robot <lkp@intel.com>
-> | Closes: https://lore.kernel.org/oe-kbuild-all/202407240638.kjmPxwJV-lkp=
-@intel.com/
+> When mounting with the SMB1 Unix Extensions (e.g. mounts
+> to Samba with vers=3D1.0), cifs.ko reconnects no longer reset the
+> Unix Extensions (SetFSInfo SET_FILE_UNIX_BASIC) after tcon so most
+> operations (e.g. stat, ls, open, statfs) will fail continuously
+> with:
+>         "Operation not supported"
+> if the connection ever resets (e.g. due to brief network disconnect)
 >
-> All errors (new ones prefixed by >>, old ones prefixed by <<):
+> Fix attached
 >
-> WARNING: modpost: missing MODULE_DESCRIPTION() in kernel/locking/test-ww_=
-mutex.o
-> WARNING: modpost: missing MODULE_DESCRIPTION() in mm/dmapool_test.o
-> WARNING: modpost: missing MODULE_DESCRIPTION() in mm/zsmalloc.o
-> WARNING: modpost: missing MODULE_DESCRIPTION() in fs/unicode/utf8-selftes=
-t.o
-> WARNING: modpost: missing MODULE_DESCRIPTION() in lib/math/rational.o
-> WARNING: modpost: missing MODULE_DESCRIPTION() in lib/find_bit_benchmark.=
-o
-> WARNING: modpost: missing MODULE_DESCRIPTION() in lib/test_dhry.o
-> WARNING: modpost: missing MODULE_DESCRIPTION() in lib/test_firmware.o
-> WARNING: modpost: missing MODULE_DESCRIPTION() in lib/test_sysctl.o
-> WARNING: modpost: missing MODULE_DESCRIPTION() in lib/test_ida.o
-> WARNING: modpost: missing MODULE_DESCRIPTION() in lib/test-kstrtox.o
-> WARNING: modpost: missing MODULE_DESCRIPTION() in lib/test_min_heap.o
-> WARNING: modpost: missing MODULE_DESCRIPTION() in lib/test_module.o
-> WARNING: modpost: missing MODULE_DESCRIPTION() in lib/test_static_keys.o
-> WARNING: modpost: missing MODULE_DESCRIPTION() in lib/test_static_key_bas=
-e.o
-> WARNING: modpost: missing MODULE_DESCRIPTION() in lib/test_printf.o
-> WARNING: modpost: missing MODULE_DESCRIPTION() in lib/test_scanf.o
-> WARNING: modpost: missing MODULE_DESCRIPTION() in lib/test_bitmap.o
-> WARNING: modpost: missing MODULE_DESCRIPTION() in lib/test_xarray.o
-> WARNING: modpost: missing MODULE_DESCRIPTION() in lib/test_maple_tree.o
-> WARNING: modpost: missing MODULE_DESCRIPTION() in lib/test_kmod.o
-> WARNING: modpost: missing MODULE_DESCRIPTION() in lib/test_memcat_p.o
-> WARNING: modpost: missing MODULE_DESCRIPTION() in lib/test_blackhole_dev.=
-o
-> WARNING: modpost: missing MODULE_DESCRIPTION() in lib/test_meminit.o
-> WARNING: modpost: missing MODULE_DESCRIPTION() in lib/test_free_pages.o
-> WARNING: modpost: missing MODULE_DESCRIPTION() in lib/atomic64_test.o
-> WARNING: modpost: missing MODULE_DESCRIPTION() in drivers/dma/qcom/hdma.o
-> WARNING: modpost: missing MODULE_DESCRIPTION() in drivers/cxl/core/cxl_co=
-re.o
-> WARNING: modpost: missing MODULE_DESCRIPTION() in drivers/cxl/cxl_pci.o
-> WARNING: modpost: missing MODULE_DESCRIPTION() in drivers/cxl/cxl_mem.o
-> WARNING: modpost: missing MODULE_DESCRIPTION() in drivers/cxl/cxl_pmem.o
-> WARNING: modpost: missing MODULE_DESCRIPTION() in drivers/cxl/cxl_port.o
-> WARNING: modpost: missing MODULE_DESCRIPTION() in drivers/usb/serial/usb_=
-debug.o
-> WARNING: modpost: missing MODULE_DESCRIPTION() in drivers/usb/serial/mxup=
-ort.o
-> WARNING: modpost: missing MODULE_DESCRIPTION() in drivers/usb/serial/navm=
-an.o
-> WARNING: modpost: missing MODULE_DESCRIPTION() in drivers/usb/serial/usb-=
-serial-simple.o
-> WARNING: modpost: missing MODULE_DESCRIPTION() in drivers/usb/serial/symb=
-olserial.o
-> WARNING: modpost: missing MODULE_DESCRIPTION() in drivers/devfreq/governo=
-r_simpleondemand.o
-> WARNING: modpost: missing MODULE_DESCRIPTION() in drivers/devfreq/governo=
-r_userspace.o
-> WARNING: modpost: missing MODULE_DESCRIPTION() in drivers/pcmcia/pcmcia_r=
-src.o
-> WARNING: modpost: missing MODULE_DESCRIPTION() in drivers/pcmcia/yenta_so=
-cket.o
-> WARNING: modpost: missing MODULE_DESCRIPTION() in samples/kfifo/bytestrea=
-m-example.o
-> WARNING: modpost: missing MODULE_DESCRIPTION() in samples/kfifo/dma-examp=
-le.o
-> WARNING: modpost: missing MODULE_DESCRIPTION() in samples/kfifo/inttype-e=
-xample.o
-> WARNING: modpost: missing MODULE_DESCRIPTION() in samples/kfifo/record-ex=
-ample.o
-> WARNING: modpost: missing MODULE_DESCRIPTION() in samples/kobject/kobject=
--example.o
-> WARNING: modpost: missing MODULE_DESCRIPTION() in samples/kobject/kset-ex=
-ample.o
-> >> ERROR: modpost: "reset_cifs_unix_caps" [fs/smb/client/cifs.ko] undefin=
-ed!
+>
 >
 > --
-> 0-DAY CI Kernel Test Service
-> https://github.com/intel/lkp-tests/wiki
+> Thanks,
 >
+> Steve
+
 
 
 --=20
 Thanks,
 
 Steve
+
+--000000000000b0bb5a061df1fe34
+Content-Type: text/x-patch; charset="US-ASCII"; 
+	name="0002-cifs-fix-reconnect-with-SMB1-UNIX-Extensions.patch"
+Content-Disposition: attachment; 
+	filename="0002-cifs-fix-reconnect-with-SMB1-UNIX-Extensions.patch"
+Content-Transfer-Encoding: base64
+Content-ID: <f_lyz0egn50>
+X-Attachment-Id: f_lyz0egn50
+
+RnJvbSBhMjE0Mzg0Y2UyNmI2MTExZWE4YzhkNThmYTgyYTFjYTYzOTk2YzM4IE1vbiBTZXAgMTcg
+MDA6MDA6MDAgMjAwMQpGcm9tOiBTdGV2ZSBGcmVuY2ggPHN0ZnJlbmNoQG1pY3Jvc29mdC5jb20+
+CkRhdGU6IE1vbiwgMjIgSnVsIDIwMjQgMjM6NDA6MDggLTA1MDAKU3ViamVjdDogW1BBVENIIDIv
+M10gY2lmczogZml4IHJlY29ubmVjdCB3aXRoIFNNQjEgVU5JWCBFeHRlbnNpb25zCgpXaGVuIG1v
+dW50aW5nIHdpdGggdGhlIFNNQjEgVW5peCBFeHRlbnNpb25zIChlLmcuIG1vdW50cwp0byBTYW1i
+YSB3aXRoIHZlcnM9MS4wKSwgcmVjb25uZWN0cyBubyBsb25nZXIgcmVzZXQgdGhlClVuaXggRXh0
+ZW5zaW9ucyAoU2V0RlNJbmZvIFNFVF9GSUxFX1VOSVhfQkFTSUMpIGFmdGVyIHRjb24gc28gbW9z
+dApvcGVyYXRpb25zIChlLmcuIHN0YXQsIGxzLCBvcGVuLCBzdGF0ZnMpIHdpbGwgZmFpbCBjb250
+aW51b3VzbHkKd2l0aDoKICAgICAgICAiT3BlcmF0aW9uIG5vdCBzdXBwb3J0ZWQiCmlmIHRoZSBj
+b25uZWN0aW9uIGV2ZXIgcmVzZXRzIChlLmcuIGR1ZSB0byBicmllZiBuZXR3b3JrIGRpc2Nvbm5l
+Y3QpCgpDYzogc3RhYmxlQHZnZXIua2VybmVsLm9yZwpSZXZpZXdlZC1ieTogUGF1bG8gQWxjYW50
+YXJhIChSZWQgSGF0KSA8cGNAbWFuZ3VlYml0LmNvbT4KU2lnbmVkLW9mZi1ieTogU3RldmUgRnJl
+bmNoIDxzdGZyZW5jaEBtaWNyb3NvZnQuY29tPgotLS0KIGZzL3NtYi9jbGllbnQvY29ubmVjdC5j
+IHwgMTcgKysrKysrKysrKysrKysrKy0KIDEgZmlsZSBjaGFuZ2VkLCAxNiBpbnNlcnRpb25zKCsp
+LCAxIGRlbGV0aW9uKC0pCgpkaWZmIC0tZ2l0IGEvZnMvc21iL2NsaWVudC9jb25uZWN0LmMgYi9m
+cy9zbWIvY2xpZW50L2Nvbm5lY3QuYwppbmRleCA3YTE2ZTEyZjVkYTguLjg5ZDlmODZjYzI5YSAx
+MDA2NDQKLS0tIGEvZnMvc21iL2NsaWVudC9jb25uZWN0LmMKKysrIGIvZnMvc21iL2NsaWVudC9j
+b25uZWN0LmMKQEAgLTM2ODYsNiArMzY4Niw3IEBAIGludCBjaWZzX21vdW50KHN0cnVjdCBjaWZz
+X3NiX2luZm8gKmNpZnNfc2IsIHN0cnVjdCBzbWIzX2ZzX2NvbnRleHQgKmN0eCkKIH0KICNlbmRp
+ZgogCisjaWZkZWYgQ09ORklHX0NJRlNfQUxMT1dfSU5TRUNVUkVfTEVHQUNZCiAvKgogICogSXNz
+dWUgYSBUUkVFX0NPTk5FQ1QgcmVxdWVzdC4KICAqLwpAQCAtMzgwNywxMSArMzgwOCwyNSBAQCBD
+SUZTVENvbihjb25zdCB1bnNpZ25lZCBpbnQgeGlkLCBzdHJ1Y3QgY2lmc19zZXMgKnNlcywKIAkJ
+ZWxzZQogCQkJdGNvbi0+RmxhZ3MgPSAwOwogCQljaWZzX2RiZyhGWUksICJUY29uIGZsYWdzOiAw
+eCV4XG4iLCB0Y29uLT5GbGFncyk7Ci0JfQogCisJCS8qCisJCSAqIHJlc2V0X2NpZnNfdW5peF9j
+YXBzIGNhbGxzIFFGU0luZm8gd2hpY2ggcmVxdWlyZXMKKwkJICogbmVlZF9yZWNvbm5lY3QgdG8g
+YmUgZmFsc2UsIGJ1dCB3ZSB3b3VsZCBub3QgbmVlZCB0byBjYWxsCisJCSAqIHJlc2V0X2NhcHMg
+aWYgdGhpcyB3ZXJlIG5vdCBhIHJlY29ubmVjdCBjYXNlIHNvIG11c3QgY2hlY2sKKwkJICogbmVl
+ZF9yZWNvbm5lY3QgZmxhZyBoZXJlLiAgVGhlIGNhbGxlciB3aWxsIGFsc28gY2xlYXIKKwkJICog
+bmVlZF9yZWNvbm5lY3Qgd2hlbiB0Y29uIHdhcyBzdWNjZXNzZnVsIGJ1dCBuZWVkZWQgdG8gYmUK
+KwkJICogY2xlYXJlZCBlYXJsaWVyIGluIHRoZSBjYXNlIG9mIHVuaXggZXh0ZW5zaW9ucyByZWNv
+bm5lY3QKKwkJICovCisJCWlmICh0Y29uLT5uZWVkX3JlY29ubmVjdCAmJiB0Y29uLT51bml4X2V4
+dCkgeworCQkJY2lmc19kYmcoRllJLCAicmVzZXR0aW5nIGNhcHMgZm9yICVzXG4iLCB0Y29uLT50
+cmVlX25hbWUpOworCQkJdGNvbi0+bmVlZF9yZWNvbm5lY3QgPSBmYWxzZTsKKwkJCXJlc2V0X2Np
+ZnNfdW5peF9jYXBzKHhpZCwgdGNvbiwgTlVMTCwgTlVMTCk7CisJCX0KKwl9CiAJY2lmc19idWZf
+cmVsZWFzZShzbWJfYnVmZmVyKTsKIAlyZXR1cm4gcmM7CiB9CisjZW5kaWYgLyogQ09ORklHX0NJ
+RlNfQUxMT1dfSU5TRUNVUkVfTEVHQUNZICovCiAKIHN0YXRpYyB2b2lkIGRlbGF5ZWRfZnJlZShz
+dHJ1Y3QgcmN1X2hlYWQgKnApCiB7Ci0tIAoyLjQzLjAKCg==
+--000000000000b0bb5a061df1fe34--
 
