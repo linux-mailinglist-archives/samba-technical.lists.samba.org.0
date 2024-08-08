@@ -2,67 +2,68 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id F283C94B24A
-	for <lists+samba-technical@lfdr.de>; Wed,  7 Aug 2024 23:44:02 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 863F494C67B
+	for <lists+samba-technical@lfdr.de>; Thu,  8 Aug 2024 23:52:51 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=jll19MbGKA1ExOhPJwMcVT0BjOA2+xszLa20Qb3/6ts=; b=WxusrhTakYjEYXSXac8P8oHd2Y
-	mqyA1w0Q+MUFd5DU5yu596Ouq4+vSPMYYFTXLUSoxXF46jz/mCOKRr/Pn35A4XukDL30M8vBJRMpu
-	G5KxVU/9692yPPCdko4pHCREj0+RGFyx+dRqSl4GusUhHEiHQvWg0qSCFR4iW70fLHZC/cb9rKJyl
-	s4wSmVlftW4MQYiDyzuIVDTMNO7OFBQp9IoUh8M0LFWhQgWp5wpv+9h1hqWofHubFu4eSgsY6gN97
-	EdXUYS/NYtiUTdSnbSGkA0jv7FdVjYvcECvYGEaPluS15uR7jyBcOb+U+mt0CClEmGn+IKLi/e+VK
-	bZrFzoUA==;
-Received: from ip6-localhost ([::1]:56982 helo=hr1.samba.org) 
+	bh=zTilJSTMzzmTUfM8PwyjqnLeW2jPuc+7Tc/WpwcfYso=; b=Fd3P4caT0q9ZTRgAWunkk5e6K7
+	wvJBrFDIUoyAFmt9n+0LrI5l8E1Je5kL0VoY8eCP50ra5Cdlh+u8rYH2HnlpXAVQVEtNWHs68jn1m
+	iW0hCyCJbsu/8G3RLqmFCV5yS6jluB3dMb235M6lYCTVNCk/vjdbRhwePQ3usTMmN8R2KJWWlmbFu
+	3uXcHObFtVm/oYDbj6/bicPenqpw4kA0K6kHZQbjOkmGRMVLP4qVkGUxfiYADBR+KZDl/w1vYJSyM
+	tr6LVB2qobXoKMCxos/L8QE0MjL0JvykNlMVfB3qiBw5MgyPnLZcm+2ZYPGB6JMDIl7rpcJ4mk4Y/
+	uSDnf3oQ==;
+Received: from ip6-localhost ([::1]:52884 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1sboRq-0049iJ-3B; Wed, 07 Aug 2024 21:43:58 +0000
-Received: from mail-lj1-x22a.google.com ([2a00:1450:4864:20::22a]:60427) 
+	id 1scB36-004Clo-OT; Thu, 08 Aug 2024 21:51:56 +0000
+Received: from mail-lf1-x136.google.com ([2a00:1450:4864:20::136]:44244) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1sboRk-0049iC-NH
- for samba-technical@lists.samba.org; Wed, 07 Aug 2024 21:43:54 +0000
-Received: by mail-lj1-x22a.google.com with SMTP id
- 38308e7fff4ca-2f15e48f35bso3006271fa.0
- for <samba-technical@lists.samba.org>; Wed, 07 Aug 2024 14:43:52 -0700 (PDT)
+ (Exim) id 1scB31-004Clg-Q4
+ for samba-technical@lists.samba.org; Thu, 08 Aug 2024 21:51:53 +0000
+Received: by mail-lf1-x136.google.com with SMTP id
+ 2adb3069b0e04-52efe4c7c16so1978032e87.0
+ for <samba-technical@lists.samba.org>; Thu, 08 Aug 2024 14:51:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1723067031; x=1723671831; darn=lists.samba.org;
+ d=gmail.com; s=20230601; t=1723153910; x=1723758710; darn=lists.samba.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=jll19MbGKA1ExOhPJwMcVT0BjOA2+xszLa20Qb3/6ts=;
- b=kKFA3U1RgMpRFb1Re8LurO3tVS16FIu77jIdnhlzfFE2JTaGxoYpWzFmDDTqkSR28J
- cOeoysd6tUt0KV/cjUmi+INGIvAh1M3HesY74069BdmMZ+ad3R2kCsLwcNRWBi/Br++N
- X1mytcA+Z2PkkvJ08XEi42OIIqtUOq5EXwxw1vBERn4WLp0RLK/sKAl1GYvuJ7PmtDjw
- 4RAKY1cNLQgSXLZSuoypRGVri7pNo3KD/vXVQBC7ynVMDFk6ag2QdaA2PVcvNcbgR/tZ
- BE60/CrrTSncoscPS9eZMa9xP3Ae6931oYiPZh4jDwiBYfGqPQzCm2rPR103gN20WMdT
- v98g==
+ bh=zTilJSTMzzmTUfM8PwyjqnLeW2jPuc+7Tc/WpwcfYso=;
+ b=nlyReK/Sm6JDLeBP0PsGv1XzZdc3rHpzjgwQZyKNHu+mvJvqSqZFihQ+VAUjbPaOLc
+ ZJA1iYd2DP+OVqQSE7BdLI2BsoUR9uXFzu2fmPkekT6Ow9msRTysRN8hM95311KP4par
+ +G6+9Ma6eHSmSfoCD2w1ASPBdLwFjawbRCoDn4zL2Ay4DTFSlJZRxAc6eN9RKETE60pP
+ EcT3SEvjf2A3OfdJwDU7spr5NzdxAQyuI4XkZyaI04uwckv+BmYoex2nz9poGdBIe9TU
+ MLkfoG63bkhnh9RgiLzv9Z61E1ZSw5DVSWOGHzwi2W/iMpYQFMeCuzRhXzuvhxB1YLoc
+ gFLg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723067031; x=1723671831;
+ d=1e100.net; s=20230601; t=1723153910; x=1723758710;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=jll19MbGKA1ExOhPJwMcVT0BjOA2+xszLa20Qb3/6ts=;
- b=jRaIjnu1DUuoewOYb2YJl4D9YZn1QtgPT4aKr7WeAzGRldc375DkTmRYk+yB5UK2RK
- mDTq0HyhqEsfo+zIZT4xEcQ7p2Fha4x72WpZIamadHuZHzRaJc0JkSUHTlUaCrY0cP78
- RIte1Hd1OS/8tr1KlBMCS0VFKr+zeL4ZCX/DineX5NZ6NprkYNZUOTf5LLlHRQmgWPF8
- sSSGwTbEPLso8lqybdH+yC1XArLE1uaVFy5+bPSRDc0W5PUrzUHTOLk/3w7PK0/anFZo
- d81LlhWJ4BXLXuIOA8GfUAUr+VS41hxbzS2G+i/gQvyjRKe+Z+Jl5ZDglaucb6J+CZ6y
- Do7Q==
+ bh=zTilJSTMzzmTUfM8PwyjqnLeW2jPuc+7Tc/WpwcfYso=;
+ b=Bg68CJWjkLdkUMGshwcucJwinVs0FR6HU/+lDXLI3taJjKt+aKs0AzU3F7kau24Hqi
+ XoeWlbC8ovXjSNzDAUc+BAGYq/zuEUphsk1F+hVYgyVugGIhDYjpZ6HUCeSCmbiuIVAC
+ wXd/ZvGpVy2q/8gJ1osVQhV4WM7xTBM8fZm0Ua0nw8vOKFBwfIBUej2fiLpIxk5CU8cg
+ NfqVFUpLaHE0swHdqzQNeDlCqZgytfbLW3REA/yfdJ69ClKOasmzcWYFArEvDLuHAfXK
+ 9La1cy+Lf6mEirnvsjcZOcyltzyOQdLh6qQVQ1C4d/90hCzQJ8r9ggwzArrDGY8pqOEW
+ aAiA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXQK651YBtmf/aunVt0FGSv01iS3jvlgH3GnbLqA6r7BkDQPyhr6P5MLqlSCeOxWImmSO185d0z7t9oOyd9LRGpRW0X0WtE6VHaLroXBlpJ
-X-Gm-Message-State: AOJu0Yye8nrzh+2nDUHZWdHkeN5jpt3DSBA9eGYhL2Or7tM0JSAdI0WV
- Xm5d4QC+ybi1mHKvMl1Jiu70dyCpGNHzi8k3mtsiWf7y/VEwNz29gZHoF2bkS0NrQ1l6NEz4HCv
- R8YpsGQh7hlmVFIlyRf3TgzS8n0c=
-X-Google-Smtp-Source: AGHT+IFVIyLTqdb8azfpb133JgIONeq3ywsb/Aea06oSsz8r2rgOsh6GqvlrMVg47Bz/l18QM1G0RB+ZwFoW1rvyyzI=
-X-Received: by 2002:a2e:9110:0:b0:2ef:2c20:e061 with SMTP id
- 38308e7fff4ca-2f15aab0a5emr132863931fa.22.1723067030885; Wed, 07 Aug 2024
- 14:43:50 -0700 (PDT)
+ AJvYcCXkpYEPQveZRELGl2cV7dNFM0Ivv0X/yYoJQFAVFFIcng7XUwaUEuaBGrY2G28PsOd6pyDuhltX/0VXnfb4HVnP24A8W1frexY0/jGa0/hI
+X-Gm-Message-State: AOJu0YzYVKLZfNrYZX/GIzWVDqolhXwBNlVx/kBBgIil1apXneYsJQfe
+ 7WMavH5yb9z8DbBCkV+AYbjbTv07eDiqdooIdbOUmiMVuOtvOlgghEp1U/GuZV1tC10mqftLTXC
+ Z9/CjXOjSPZbRg42oDJqIrPbb2Dw=
+X-Google-Smtp-Source: AGHT+IGES8fNHsGvpYv7uRV9s1I4pkbSiW25z5WmM1/EEFB1wRmanyCXIXI8O8RexuT7mqGHIaX1FSuWqO2mBT4epPY=
+X-Received: by 2002:a05:6512:15aa:b0:52e:987f:cfe4 with SMTP id
+ 2adb3069b0e04-530e5876b8fmr2151699e87.30.1723153909723; Thu, 08 Aug 2024
+ 14:51:49 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240807165320.56450-1-shenxiaxi26@gmail.com>
-In-Reply-To: <20240807165320.56450-1-shenxiaxi26@gmail.com>
-Date: Wed, 7 Aug 2024 16:43:39 -0500
-Message-ID: <CAH2r5mu_hvBnbzbRnpzjAULubsTf5o4TsD3Piqjwn6HsF7BC8A@mail.gmail.com>
-Subject: Re: [PATCH] Fix spelling errors in Server Message Block
-To: Xiaxi Shen <shenxiaxi26@gmail.com>
+References: <20240808122331.342473-1-suhui@nfschina.com>
+In-Reply-To: <20240808122331.342473-1-suhui@nfschina.com>
+Date: Thu, 8 Aug 2024 16:51:37 -0500
+Message-ID: <CAH2r5mshFXCMO38WMZP0NzrugKZn1QexLSH+2aEMcZnB2S0+zA@mail.gmail.com>
+Subject: Re: [PATCH] smb/client: avoid possible NULL dereference in
+ cifs_free_subrequest()
+To: Su Hui <suhui@nfschina.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
@@ -80,146 +81,72 @@ List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
 From: Steve French via samba-technical <samba-technical@lists.samba.org>
 Reply-To: Steve French <smfrench@gmail.com>
-Cc: pc@manguebit.com, tom@talpey.com, sprasad@microsoft.com,
- linux-cifs@vger.kernel.org, javier.carrasco.cruz@gmail.com,
- samba-technical@lists.samba.org, linux-kernel@vger.kernel.org,
- sfrench@samba.org, bharathsm@microsoft.com, skhan@linuxfoundation.org
+Cc: pc@manguebit.com, nathan@kernel.org, sprasad@microsoft.com,
+ linux-cifs@vger.kernel.org, kernel-janitors@vger.kernel.org,
+ samba-technical@lists.samba.org, llvm@lists.linux.dev, ndesaulniers@google.com,
+ linux-kernel@vger.kernel.org, tom@talpey.com,
+ David Howells <dhowells@redhat.com>, bharathsm@microsoft.com, morbo@google.com,
+ justinstitt@google.com
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-merged into cifs-2.6.git for-next
+Tentatively merged into cifs-2.6.git pending review/testing
 
+Did minor update to add Cc: stable
 
-On Wed, Aug 7, 2024 at 11:53=E2=80=AFAM Xiaxi Shen <shenxiaxi26@gmail.com> =
-wrote:
+On Thu, Aug 8, 2024 at 7:26=E2=80=AFAM Su Hui <suhui@nfschina.com> wrote:
 >
-> Fixed typos in various files under fs/smb/client/
+> Clang static checker (scan-build) warning:
+>         cifsglob.h:line 890, column 3
+>         Access to field 'ops' results in a dereference of a null pointer.
 >
-> Signed-off-by: Xiaxi Shen <shenxiaxi26@gmail.com>
+> Commit 519be989717c ("cifs: Add a tracepoint to track credits involved in
+> R/W requests") adds a check for 'rdata->server', and let clang throw this
+> warning about NULL dereference.
+>
+> When 'rdata->credits.value !=3D 0 && rdata->server =3D=3D NULL' happens,
+> add_credits_and_wake_if() will call rdata->server->ops->add_credits().
+> This will cause NULL dereference problem. Add a check for 'rdata->server'
+> to avoid NULL dereference.
+>
+> Signed-off-by: Su Hui <suhui@nfschina.com>
 > ---
->  fs/smb/client/cifsglob.h  | 4 ++--
->  fs/smb/client/misc.c      | 2 +-
->  fs/smb/client/smbdirect.c | 8 ++++----
->  fs/smb/client/transport.c | 2 +-
->  4 files changed, 8 insertions(+), 8 deletions(-)
+>  fs/smb/client/file.c | 8 ++++++--
+>  1 file changed, 6 insertions(+), 2 deletions(-)
 >
-> diff --git a/fs/smb/client/cifsglob.h b/fs/smb/client/cifsglob.h
-> index f6d1f075987f..66677b8fc9be 100644
-> --- a/fs/smb/client/cifsglob.h
-> +++ b/fs/smb/client/cifsglob.h
-> @@ -345,7 +345,7 @@ struct smb_version_operations {
->         /* connect to a server share */
->         int (*tree_connect)(const unsigned int, struct cifs_ses *, const =
-char *,
->                             struct cifs_tcon *, const struct nls_table *)=
-;
-> -       /* close tree connecion */
-> +       /* close tree connection */
->         int (*tree_disconnect)(const unsigned int, struct cifs_tcon *);
->         /* get DFS referrals */
->         int (*get_dfs_refer)(const unsigned int, struct cifs_ses *,
-> @@ -816,7 +816,7 @@ struct TCP_Server_Info {
->          * Protected by @refpath_lock and @srv_lock.  The @refpath_lock i=
-s
->          * mostly used for not requiring a copy of @leaf_fullpath when ge=
-tting
->          * cached or new DFS referrals (which might also sleep during I/O=
-).
-> -        * While @srv_lock is held for making string and NULL comparions =
-against
-> +        * While @srv_lock is held for making string and NULL comparisons=
- against
->          * both fields as in mount(2) and cache refresh.
->          *
->          * format: \\HOST\SHARE[\OPTIONAL PATH]
-> diff --git a/fs/smb/client/misc.c b/fs/smb/client/misc.c
-> index b28ff62f1f15..3fe5bfc389d0 100644
-> --- a/fs/smb/client/misc.c
-> +++ b/fs/smb/client/misc.c
-> @@ -352,7 +352,7 @@ checkSMB(char *buf, unsigned int total_read, struct T=
-CP_Server_Info *server)
->                                  * on simple responses (wct, bcc both zer=
-o)
->                                  * in particular have seen this on
->                                  * ulogoffX and FindClose. This leaves
-> -                                * one byte of bcc potentially unitialize=
-d
-> +                                * one byte of bcc potentially uninitiali=
-zed
->                                  */
->                                 /* zero rest of bcc */
->                                 tmp[sizeof(struct smb_hdr)+1] =3D 0;
-> diff --git a/fs/smb/client/smbdirect.c b/fs/smb/client/smbdirect.c
-> index d74e829de51c..7bcc379014ca 100644
-> --- a/fs/smb/client/smbdirect.c
-> +++ b/fs/smb/client/smbdirect.c
-> @@ -406,7 +406,7 @@ static void smbd_post_send_credits(struct work_struct=
- *work)
->                         else
->                                 response =3D get_empty_queue_buffer(info)=
-;
->                         if (!response) {
-> -                               /* now switch to emtpy packet queue */
-> +                               /* now switch to empty packet queue */
->                                 if (use_receive_queue) {
->                                         use_receive_queue =3D 0;
->                                         continue;
-> @@ -618,7 +618,7 @@ static struct rdma_cm_id *smbd_create_id(
+> diff --git a/fs/smb/client/file.c b/fs/smb/client/file.c
+> index b2405dd4d4d4..45459af5044d 100644
+> --- a/fs/smb/client/file.c
+> +++ b/fs/smb/client/file.c
+> @@ -315,7 +315,7 @@ static void cifs_free_subrequest(struct netfs_io_subr=
+equest *subreq)
+>  #endif
+>         }
 >
->  /*
->   * Test if FRWR (Fast Registration Work Requests) is supported on the de=
-vice
-> - * This implementation requries FRWR on RDMA read/write
-> + * This implementation requires FRWR on RDMA read/write
->   * return value: true if it is supported
->   */
->  static bool frwr_is_supported(struct ib_device_attr *attrs)
-> @@ -2177,7 +2177,7 @@ static int allocate_mr_list(struct smbd_connection =
-*info)
->   * MR available in the list. It may access the list while the
->   * smbd_mr_recovery_work is recovering the MR list. This doesn't need a =
-lock
->   * as they never modify the same places. However, there may be several C=
-PUs
-> - * issueing I/O trying to get MR at the same time, mr_list_lock is used =
-to
-> + * issuing I/O trying to get MR at the same time, mr_list_lock is used t=
-o
->   * protect this situation.
->   */
->  static struct smbd_mr *get_mr(struct smbd_connection *info)
-> @@ -2311,7 +2311,7 @@ struct smbd_mr *smbd_register_mr(struct smbd_connec=
-tion *info,
->         /*
->          * There is no need for waiting for complemtion on ib_post_send
->          * on IB_WR_REG_MR. Hardware enforces a barrier and order of exec=
-ution
-> -        * on the next ib_post_send when we actaully send I/O to remote p=
-eer
-> +        * on the next ib_post_send when we actually send I/O to remote p=
-eer
->          */
->         rc =3D ib_post_send(info->id->qp, &reg_wr->wr, NULL);
->         if (!rc)
-> diff --git a/fs/smb/client/transport.c b/fs/smb/client/transport.c
-> index adfe0d058701..6e68aaf5bd20 100644
-> --- a/fs/smb/client/transport.c
-> +++ b/fs/smb/client/transport.c
-> @@ -1289,7 +1289,7 @@ compound_send_recv(const unsigned int xid, struct c=
-ifs_ses *ses,
->  out:
->         /*
->          * This will dequeue all mids. After this it is important that th=
-e
-> -        * demultiplex_thread will not process any of these mids any futh=
-er.
-> +        * demultiplex_thread will not process any of these mids any furt=
-her.
->          * This is prevented above by using a noop callback that will not
->          * wake this thread except for the very last PDU.
->          */
+> -       if (rdata->credits.value !=3D 0)
+> +       if (rdata->credits.value !=3D 0) {
+>                 trace_smb3_rw_credits(rdata->rreq->debug_id,
+>                                       rdata->subreq.debug_index,
+>                                       rdata->credits.value,
+> @@ -323,8 +323,12 @@ static void cifs_free_subrequest(struct netfs_io_sub=
+request *subreq)
+>                                       rdata->server ? rdata->server->in_f=
+light : 0,
+>                                       -rdata->credits.value,
+>                                       cifs_trace_rw_credits_free_subreq);
+> +               if (rdata->server)
+> +                       add_credits_and_wake_if(rdata->server, &rdata->cr=
+edits, 0);
+> +               else
+> +                       rdata->credits.value =3D 0;
+> +       }
+>
+> -       add_credits_and_wake_if(rdata->server, &rdata->credits, 0);
+>         if (rdata->have_xid)
+>                 free_xid(rdata->xid);
+>  }
 > --
-> 2.34.1
+> 2.30.2
 >
 >
 
