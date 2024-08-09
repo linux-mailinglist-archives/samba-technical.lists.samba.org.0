@@ -2,68 +2,60 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 863F494C67B
-	for <lists+samba-technical@lfdr.de>; Thu,  8 Aug 2024 23:52:51 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0C3E794C8BF
+	for <lists+samba-technical@lfdr.de>; Fri,  9 Aug 2024 05:09:37 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=zTilJSTMzzmTUfM8PwyjqnLeW2jPuc+7Tc/WpwcfYso=; b=Fd3P4caT0q9ZTRgAWunkk5e6K7
-	wvJBrFDIUoyAFmt9n+0LrI5l8E1Je5kL0VoY8eCP50ra5Cdlh+u8rYH2HnlpXAVQVEtNWHs68jn1m
-	iW0hCyCJbsu/8G3RLqmFCV5yS6jluB3dMb235M6lYCTVNCk/vjdbRhwePQ3usTMmN8R2KJWWlmbFu
-	3uXcHObFtVm/oYDbj6/bicPenqpw4kA0K6kHZQbjOkmGRMVLP4qVkGUxfiYADBR+KZDl/w1vYJSyM
-	tr6LVB2qobXoKMCxos/L8QE0MjL0JvykNlMVfB3qiBw5MgyPnLZcm+2ZYPGB6JMDIl7rpcJ4mk4Y/
-	uSDnf3oQ==;
-Received: from ip6-localhost ([::1]:52884 helo=hr1.samba.org) 
+	bh=Pa7eDJ4t1xpc18+Np23nsKw+Qc3avfwtmBY5kU8KZ50=; b=teGmDCfmJT8G0iHy/nWVS+gSg4
+	tWvpLq/QtZskkqQqHSk6oplWXYccyeOV3GAR0rmxwrIrXYbR90yJ2gCGI1tnQ3Ig5YT6i4EmsveMv
+	wZmgfrXjjzifCJIlBMSV/ILnCQTkJJnHkbS9/Dw/VrEmJgNpTEfTYALIN5x5YJpl7s+IC6316wPnV
+	vI5ENbAjvA992rc+ZyCgM5F+2EK9OuhV/erR8na7cQw65TRz0n0YW0GczSwStYvmmFF1d4jmw0Iy4
+	NgjQE5T8f31wFPJHKSDqGDxxfrBlahq96m6AxH1OkBqsgM9W1M0dtuV4Uk4ky7ouJ6eVs57dUqHpI
+	NZIShPgQ==;
+Received: from ip6-localhost ([::1]:29634 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1scB36-004Clo-OT; Thu, 08 Aug 2024 21:51:56 +0000
-Received: from mail-lf1-x136.google.com ([2a00:1450:4864:20::136]:44244) 
+	id 1scFzo-004DWd-Kb; Fri, 09 Aug 2024 03:08:52 +0000
+Received: from sin.source.kernel.org ([2604:1380:40e1:4800::1]:53460) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1scB31-004Clg-Q4
- for samba-technical@lists.samba.org; Thu, 08 Aug 2024 21:51:53 +0000
-Received: by mail-lf1-x136.google.com with SMTP id
- 2adb3069b0e04-52efe4c7c16so1978032e87.0
- for <samba-technical@lists.samba.org>; Thu, 08 Aug 2024 14:51:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1723153910; x=1723758710; darn=lists.samba.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=zTilJSTMzzmTUfM8PwyjqnLeW2jPuc+7Tc/WpwcfYso=;
- b=nlyReK/Sm6JDLeBP0PsGv1XzZdc3rHpzjgwQZyKNHu+mvJvqSqZFihQ+VAUjbPaOLc
- ZJA1iYd2DP+OVqQSE7BdLI2BsoUR9uXFzu2fmPkekT6Ow9msRTysRN8hM95311KP4par
- +G6+9Ma6eHSmSfoCD2w1ASPBdLwFjawbRCoDn4zL2Ay4DTFSlJZRxAc6eN9RKETE60pP
- EcT3SEvjf2A3OfdJwDU7spr5NzdxAQyuI4XkZyaI04uwckv+BmYoex2nz9poGdBIe9TU
- MLkfoG63bkhnh9RgiLzv9Z61E1ZSw5DVSWOGHzwi2W/iMpYQFMeCuzRhXzuvhxB1YLoc
- gFLg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723153910; x=1723758710;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=zTilJSTMzzmTUfM8PwyjqnLeW2jPuc+7Tc/WpwcfYso=;
- b=Bg68CJWjkLdkUMGshwcucJwinVs0FR6HU/+lDXLI3taJjKt+aKs0AzU3F7kau24Hqi
- XoeWlbC8ovXjSNzDAUc+BAGYq/zuEUphsk1F+hVYgyVugGIhDYjpZ6HUCeSCmbiuIVAC
- wXd/ZvGpVy2q/8gJ1osVQhV4WM7xTBM8fZm0Ua0nw8vOKFBwfIBUej2fiLpIxk5CU8cg
- NfqVFUpLaHE0swHdqzQNeDlCqZgytfbLW3REA/yfdJ69ClKOasmzcWYFArEvDLuHAfXK
- 9La1cy+Lf6mEirnvsjcZOcyltzyOQdLh6qQVQ1C4d/90hCzQJ8r9ggwzArrDGY8pqOEW
- aAiA==
+ (Exim) id 1scFzk-004DWV-Au
+ for samba-technical@lists.samba.org; Fri, 09 Aug 2024 03:08:50 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sin.source.kernel.org (Postfix) with ESMTP id 3CDC2CE1383
+ for <samba-technical@lists.samba.org>; Fri,  9 Aug 2024 02:51:43 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7D33EC32782
+ for <samba-technical@lists.samba.org>; Fri,  9 Aug 2024 02:51:42 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1723171902;
+ bh=Pa7eDJ4t1xpc18+Np23nsKw+Qc3avfwtmBY5kU8KZ50=;
+ h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
+ b=Tp2RTvOgG3K4xiDPI7cCiLrTQs1QX2Bl8yGPYlnC4aio0GCEidWPGX6jqMoXF7Wre
+ BWlskMjaVUut6fuLMHcruUIw14PLApn3VNdcGecwOAtQFlR8TnRuOoA52kB1qgw0cA
+ OYbjLLrJQNTp2eWRq+kIIwlPCXKh6d2GmaJPNnTYkUSrn2DnOXFvjgv4ihKqC03asb
+ yvUbgW1S45OwDJjdf0CVyyNKNJ9ZyvGxzz/Hg6QmaSMgy0r8cTHgSkw6hbABj+SpCH
+ okFzxwdgB08ySM0CrPGTjSfPZ286vBBbQOgAKYNmSp9bknI0gvo7ebgL67QW+wlWJD
+ /GwUgmQDOnz8Q==
+Received: by mail-oa1-f47.google.com with SMTP id
+ 586e51a60fabf-260f1664fdfso1068198fac.1
+ for <samba-technical@lists.samba.org>; Thu, 08 Aug 2024 19:51:42 -0700 (PDT)
 X-Forwarded-Encrypted: i=1;
- AJvYcCXkpYEPQveZRELGl2cV7dNFM0Ivv0X/yYoJQFAVFFIcng7XUwaUEuaBGrY2G28PsOd6pyDuhltX/0VXnfb4HVnP24A8W1frexY0/jGa0/hI
-X-Gm-Message-State: AOJu0YzYVKLZfNrYZX/GIzWVDqolhXwBNlVx/kBBgIil1apXneYsJQfe
- 7WMavH5yb9z8DbBCkV+AYbjbTv07eDiqdooIdbOUmiMVuOtvOlgghEp1U/GuZV1tC10mqftLTXC
- Z9/CjXOjSPZbRg42oDJqIrPbb2Dw=
-X-Google-Smtp-Source: AGHT+IGES8fNHsGvpYv7uRV9s1I4pkbSiW25z5WmM1/EEFB1wRmanyCXIXI8O8RexuT7mqGHIaX1FSuWqO2mBT4epPY=
-X-Received: by 2002:a05:6512:15aa:b0:52e:987f:cfe4 with SMTP id
- 2adb3069b0e04-530e5876b8fmr2151699e87.30.1723153909723; Thu, 08 Aug 2024
- 14:51:49 -0700 (PDT)
+ AJvYcCX7ZMW4bpSRCyXGNK2Lis4/RiSkpHEPHapBwKWuZr9CcHPqQZVGkHbJv3fQEP8WOEuv2tlnyoXP9yxgcKOuVlY3hohrbreyELoNZ/3E7cHD
+X-Gm-Message-State: AOJu0YxMwVRDmVbCtPesNlJHwlU1WiDDgarK0iqCPFbq7QY7HSbt/oEt
+ asJEWFtCZgojqTIW6kWpdxsM2PfgXN3J6wmvDeFVvIrWTxhUe5gS3mPHwANNNETQg44HjlBBBqm
+ uCp8nd+XYss2Y5MVAYSpu0rNjVkE=
+X-Google-Smtp-Source: AGHT+IEoUjgjrKsz7zNykn14iHMUq5I0duHy7vcOoiOasSgT3fpmZ3N3RprxQxmTKbqOGsGT1nvjMGBGPRFnlESiqUo=
+X-Received: by 2002:a05:6870:46a8:b0:25d:fc34:ba6a with SMTP id
+ 586e51a60fabf-26c62cbe04amr286423fac.26.1723171901804; Thu, 08 Aug 2024
+ 19:51:41 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240808122331.342473-1-suhui@nfschina.com>
-In-Reply-To: <20240808122331.342473-1-suhui@nfschina.com>
-Date: Thu, 8 Aug 2024 16:51:37 -0500
-Message-ID: <CAH2r5mshFXCMO38WMZP0NzrugKZn1QexLSH+2aEMcZnB2S0+zA@mail.gmail.com>
-Subject: Re: [PATCH] smb/client: avoid possible NULL dereference in
- cifs_free_subrequest()
-To: Su Hui <suhui@nfschina.com>
+References: <ZrVA1N6Iv0Byb3I7@cute>
+In-Reply-To: <ZrVA1N6Iv0Byb3I7@cute>
+Date: Fri, 9 Aug 2024 11:51:30 +0900
+X-Gmail-Original-Message-ID: <CAKYAXd-5gKBEAO_GvSKBLciiB1qhjevTSd8kre_-nJQpTw+3vQ@mail.gmail.com>
+Message-ID: <CAKYAXd-5gKBEAO_GvSKBLciiB1qhjevTSd8kre_-nJQpTw+3vQ@mail.gmail.com>
+Subject: Re: [PATCH][next] smb: smb2pdu.h: Use static_assert() to check struct
+ sizes
+To: "Gustavo A. R. Silva" <gustavoars@kernel.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
@@ -79,80 +71,33 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
-Cc: pc@manguebit.com, nathan@kernel.org, sprasad@microsoft.com,
- linux-cifs@vger.kernel.org, kernel-janitors@vger.kernel.org,
- samba-technical@lists.samba.org, llvm@lists.linux.dev, ndesaulniers@google.com,
- linux-kernel@vger.kernel.org, tom@talpey.com,
- David Howells <dhowells@redhat.com>, bharathsm@microsoft.com, morbo@google.com,
- justinstitt@google.com
+From: Namjae Jeon via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Namjae Jeon <linkinjeon@kernel.org>
+Cc: Paulo Alcantara <pc@manguebit.com>, Tom Talpey <tom@talpey.com>,
+ Shyam Prasad N <sprasad@microsoft.com>, linux-cifs@vger.kernel.org,
+ samba-technical@lists.samba.org, linux-kernel@vger.kernel.org,
+ Steve French <sfrench@samba.org>,
+ Sergey Senozhatsky <senozhatsky@chromium.org>,
+ Bharath SM <bharathsm@microsoft.com>, linux-hardening@vger.kernel.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Tentatively merged into cifs-2.6.git pending review/testing
+2024=EB=85=84 8=EC=9B=94 9=EC=9D=BC (=EA=B8=88) =EC=98=A4=EC=A0=84 7:04, Gu=
+stavo A. R. Silva <gustavoars@kernel.org>=EB=8B=98=EC=9D=B4 =EC=9E=91=EC=84=
+=B1:
+>
+> Commit 9f9bef9bc5c6 ("smb: smb2pdu.h: Avoid -Wflex-array-member-not-at-en=
+d
+> warnings") introduced tagged `struct create_context_hdr`. We want to
+> ensure that when new members need to be added to the flexible structure,
+> they are always included within this tagged struct.
+>
+> So, we use `static_assert()` to ensure that the memory layout for
+> both the flexible structure and the tagged struct is the same after
+> any changes.
+>
+> Signed-off-by: Gustavo A. R. Silva <gustavoars@kernel.org>
+Acked-by: Namjae Jeon <linkinjeon@kernel.org>
 
-Did minor update to add Cc: stable
-
-On Thu, Aug 8, 2024 at 7:26=E2=80=AFAM Su Hui <suhui@nfschina.com> wrote:
->
-> Clang static checker (scan-build) warning:
->         cifsglob.h:line 890, column 3
->         Access to field 'ops' results in a dereference of a null pointer.
->
-> Commit 519be989717c ("cifs: Add a tracepoint to track credits involved in
-> R/W requests") adds a check for 'rdata->server', and let clang throw this
-> warning about NULL dereference.
->
-> When 'rdata->credits.value !=3D 0 && rdata->server =3D=3D NULL' happens,
-> add_credits_and_wake_if() will call rdata->server->ops->add_credits().
-> This will cause NULL dereference problem. Add a check for 'rdata->server'
-> to avoid NULL dereference.
->
-> Signed-off-by: Su Hui <suhui@nfschina.com>
-> ---
->  fs/smb/client/file.c | 8 ++++++--
->  1 file changed, 6 insertions(+), 2 deletions(-)
->
-> diff --git a/fs/smb/client/file.c b/fs/smb/client/file.c
-> index b2405dd4d4d4..45459af5044d 100644
-> --- a/fs/smb/client/file.c
-> +++ b/fs/smb/client/file.c
-> @@ -315,7 +315,7 @@ static void cifs_free_subrequest(struct netfs_io_subr=
-equest *subreq)
->  #endif
->         }
->
-> -       if (rdata->credits.value !=3D 0)
-> +       if (rdata->credits.value !=3D 0) {
->                 trace_smb3_rw_credits(rdata->rreq->debug_id,
->                                       rdata->subreq.debug_index,
->                                       rdata->credits.value,
-> @@ -323,8 +323,12 @@ static void cifs_free_subrequest(struct netfs_io_sub=
-request *subreq)
->                                       rdata->server ? rdata->server->in_f=
-light : 0,
->                                       -rdata->credits.value,
->                                       cifs_trace_rw_credits_free_subreq);
-> +               if (rdata->server)
-> +                       add_credits_and_wake_if(rdata->server, &rdata->cr=
-edits, 0);
-> +               else
-> +                       rdata->credits.value =3D 0;
-> +       }
->
-> -       add_credits_and_wake_if(rdata->server, &rdata->credits, 0);
->         if (rdata->have_xid)
->                 free_xid(rdata->xid);
->  }
-> --
-> 2.30.2
->
->
-
-
---=20
-Thanks,
-
-Steve
+Thanks!
 
