@@ -2,48 +2,48 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 44D2894D847
-	for <lists+samba-technical@lfdr.de>; Fri,  9 Aug 2024 23:01:46 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0127994F8F8
+	for <lists+samba-technical@lfdr.de>; Mon, 12 Aug 2024 23:30:24 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=xWAB1g/0SzLTPFRCFXtydMCFwYseeTo/2qmUztiF7dM=; b=Y83+gz5EAMPjuFMMZ5xq3h52LI
-	qLBihg7vB5YsqOrNQUH5pdBULUtWDplfvjrkoR8JQMNqYYT+OFSZ61qzUkhq4HKjdo9NM4+jD+c//
-	6OfYBqVA7e8n1glXfc0aSmGff/bSgQCyM0QwM3DLTn25HymiGRggU7zG7Q+9PppBF48jHOszKWi2d
-	/f+zch2RXghAR8s6IPxxP0cbxFOIM8E1E0m/VbhB5hSmdcgJs4bPEseFeel6ZcMWzIHFQJiCDa1GG
-	GisIxVFZVu8s5UT1w55a8isnKhfcBBcGMeLnzLuEv1MtHbi4OsVO81Y9fNOaF5R5+M6WqWiggATbu
-	Z0qMqDjw==;
-Received: from ip6-localhost ([::1]:57054 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
+	bh=jLRcwOz+XjdQ8VNc7x+LXqcsVnDyKa4YGUQ79XkW9lE=; b=niAkMXbaOeqko1zo/eei7oBdn7
+	j86qvsPeMy8vXnmoXB08a90a+luOPEJbo/qZz4XBzFtHrrPFMlfwl71jMsLQnmJO3tuAExfxBVF2c
+	JmroE2aK9lyGY1HEOw4IxkcH6pzXFnyEc3zhocav2phFfjYhUFBJvQf2rNeUaodqr9kBJZvcysLMM
+	/5RGdeSJTah06bfAuw+kxmyzLpp//mFg3Q4o16O37piiOZ2bKSyMknc+fEMdrMa59x5O/fGBxdHDw
+	cuAtMcWCg4dE8oaEHmKaNKtMacYqrzXGkDwJxR90ow6WlwxNy2KNpDwgCHbJuDed4Vcj4CImnwH1j
+	W+87ZzXg==;
+Received: from ip6-localhost ([::1]:22836 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1scWjL-004Hxv-4L; Fri, 09 Aug 2024 21:00:59 +0000
-Received: from postal3.et.byu.edu ([128.187.48.33]:44044) 
+	id 1sdcbf-004Tuq-Oi; Mon, 12 Aug 2024 21:29:35 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:29418) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1scWjG-004Hxo-CW
- for samba-technical@lists.samba.org; Fri, 09 Aug 2024 21:00:57 +0000
-Received: from localhost (localhost [127.0.0.1])
- by postal3.et.byu.edu (Postfix) with ESMTP id 19FDF6E0D8
- for <samba-technical@lists.samba.org>; Fri,  9 Aug 2024 15:00:49 -0600 (MDT)
-Received: from postal3.et.byu.edu ([127.0.0.1])
- by localhost (postal3.et.byu.edu [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id rBmDyrkrJlID for <samba-technical@lists.samba.org>;
- Fri,  9 Aug 2024 15:00:48 -0600 (MDT)
-Received: from [10.35.115.20] (edo.et.byu.edu [10.35.115.20])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by postal3.et.byu.edu (Postfix) with ESMTPSA id 9EED06E0D0
- for <samba-technical@lists.samba.org>; Fri,  9 Aug 2024 15:00:48 -0600 (MDT)
-Message-ID: <47bef7c7-50c7-4185-8268-89c0f5664703@et.byu.edu>
-Date: Fri, 9 Aug 2024 15:00:48 -0600
+ (Exim) id 1sdcba-004Tuj-PV
+ for samba-technical@lists.samba.org; Mon, 12 Aug 2024 21:29:33 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=From:To:Date:Message-ID:CC;
+ bh=jLRcwOz+XjdQ8VNc7x+LXqcsVnDyKa4YGUQ79XkW9lE=; b=uqjbrFXqXkh6rDd/cnpJeaCTGJ
+ L7iewud157ocAGHWXxH7Gi7VYd7YN1EilL5FuH91qwC5+e+U9H+NSWYif0TCUXwgam+JpngrvG8iW
+ AlsChqBSzKNsfOPk/8F299kq+t1idkkwjHcPdVLHiwV9DCER2iHQJL4JlYFKa9V/DJyuPHFxUwLqR
+ 4FAAo+xvHaETdPorYcO9+nvbqIP9j9G/870mVjU4nLhJ0PYwXgmAYswdpUQR7z5Emtw4/Q/yreGRH
+ Oj+mjwYXysxUrt87VaIhUwBQzOHPJXX0/Y1uSBjjoyPeVTWjxihEZALquE6qDriBwWLXh21XuYHyp
+ H64+eUXHQlW12PojFIcPzlqlDijEYxOHv7m+HUBKamuxEb5a1Kd6V2sHcqtpq2rwDyXX3Pj6VW3L0
+ +sgdRsoxDmgcEP2rJsVie1DDHNIrea9lyYA+W24ODZCRlXge9m2sXx0veO5YTDAA0w4l/12Oze4fE
+ qTHKJHL42/js61ps0bfJx+3e;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1sdcbZ-0067SY-2r for samba-technical@lists.samba.org;
+ Mon, 12 Aug 2024 21:29:30 +0000
+Message-ID: <37323893-503b-455c-beb6-fede11a44eb9@samba.org>
+Date: Mon, 12 Aug 2024 15:29:27 -0600
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: become_root() Necessary for Group Quota in quotas.c?
-To: samba-technical@lists.samba.org
-References: <65ad7c9a-38a3-4224-b40e-b7c991c8e0b2@et.byu.edu>
 Content-Language: en-US
-In-Reply-To: <65ad7c9a-38a3-4224-b40e-b7c991c8e0b2@et.byu.edu>
+To: samba-technical <samba-technical@lists.samba.org>
+Subject: CI can't reach internet to fetch rust packages
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
+Content-Transfer-Encoding: 8bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -57,47 +57,49 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Orion via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Orion <orion@et.byu.edu>
+From: David Mulder via samba-technical <samba-technical@lists.samba.org>
+Reply-To: David Mulder <dmulder@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Here is my proposed patch of the file source3/smbd/quotas.c to fix the 
-issue I outlined previously:
+I'm getting this failure when doing a `cargo test` via samba test in CI:
 
-@@ -458,10 +458,8 @@ try_group_quota:
-             S_ISDIR(fname->st.st_ex_mode) &&
-             fname->st.st_ex_mode & S_ISGID) {
-                 id.gid = fname->st.st_ex_gid;
--               become_root();
-                 r = SMB_VFS_GET_QUOTA(conn, fname, SMB_GROUP_QUOTA_TYPE, id,
-                                       &D);
--               unbecome_root();
-         } else {
-                 id.gid = getegid();
-                 r = SMB_VFS_GET_QUOTA(conn, fname, SMB_GROUP_QUOTA_TYPE, id,
+     Updating crates.io index
+warning: spurious network error (3 tries remaining): [7] Couldn't 
+connect to server (Failed to connect to index.crates.io port 443 after 
+42 ms: Couldn't connect to server)
+warning: spurious network error (2 tries remaining): [7] Couldn't 
+connect to server (Failed to connect to index.crates.io port 443 after 0 
+ms: Couldn't connect to server)
+warning: spurious network error (1 tries remaining): [7] Couldn't 
+connect to server (Failed to connect to index.crates.io port 443 after 0 
+ms: Couldn't connect to server)
+error: failed to get `libc` as a dependency of package `config v4.21.0 
+(/builds/samba-testbase/samba-o3/rust/config)`
 
-Any comments would be appreciated.
+Caused by:
+   download of config.json failed
 
-On 8/1/24 17:06, Orion wrote:
-> We have a situation in which the root user does not have access to the 
-> files contained in a directory with SGID set. When a user navigates to 
-> this directory and Samba attempts to request the quota for the 
-> directory, it fails when the code later attempts to do a stat on the 
-> file because of lack of permissions.
->
-> In the file samba/source3/smbd/quotas.c if the SGID bit is set, the 
-> code changes the effective GID to the GID of the folder, uses 
-> become_root() to change to root, and then requests the quota. However, 
-> if the SGID bit is not set, quotas.c requests the quota without using 
-> the become_root() function. The question I have is, why when the SGID 
-> bit is set does it change to root before requesting the quota?
->
-> Can we remove the become_root() function call for this instance and 
-> request the quota as the GID of the folder?
->
-> I tested removing the become_root() and unbecome_root() function 
-> calls, and for our particular setup, it works perfectly. However, I am 
-> curious if there is some other setup that may have issues if this bit 
-> is removed.
->
+Caused by:
+   failed to download from `https://index.crates.io/config.json`
+
+Caused by:
+   [7] Couldn't connect to server (Failed to connect to index.crates.io 
+port 443 after 0 ms: Couldn't connect to server)
+
+Doing `cargo build` during the build phase does not fail to download 
+dependencies. Any one know what's causing this?
+
+https://gitlab.com/samba-team/devel/samba/-/jobs/7566611520
+
+-- 
+David Mulder
+Labs Software Engineer, Samba
+SUSE
+1221 S Valley Grove Way, Suite 500
+Pleasant Grove, UT 84062
+(P)+1 385.208.2989
+dmulder@suse.com
+http://www.suse.com
+
+
