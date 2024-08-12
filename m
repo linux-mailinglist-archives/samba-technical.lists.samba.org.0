@@ -2,50 +2,48 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8927F94F906
-	for <lists+samba-technical@lfdr.de>; Mon, 12 Aug 2024 23:38:19 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5423494FA5F
+	for <lists+samba-technical@lfdr.de>; Tue, 13 Aug 2024 01:42:01 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=lJEiOvZ4xNmqspMod3AGF8ijii7gK6wuTCziyGWvkk8=; b=rYbhv2PWJuNas3yuCTdNVHB2LI
-	llys5+1d4VszD3N0NN91WwSUG+1XAMNWGCunyrYOVT1ay3W6CqoS+j+vcjq7z4q1ersEzg0AJtsLr
-	fEFTRWN3GnEfBq0SyCO+ZqqsftHOPUjzDlFy++pumYEptj12izbK4j//frZ9dCvyYRN1/Bvh0g8CB
-	2l+/wlMZ9cl47Jim+8Dd21zRhe01Xons6cBUF58nf5RXxCVrzZsphrrv955mxNpca/JNa3ZHZJaJh
-	N7XgeQo+BSDCv8ZIP1b8EiqlIk/z19m2l8Lpb0c8v9lcbIS+/UcwwZosOX49rImpN0F1HFHtWlIo3
-	E+jaolUg==;
-Received: from ip6-localhost ([::1]:34180 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=PXYumxXXFHHsJeJyz0JpG8yGc+9TGqNsfVG8wCRIpOY=; b=fiiO07JtcKkgew7kyGw80V31Bt
+	XDmkdBtd5NgAWewx64NGRxYVP1tQ+nu1ieyQbVuebhsyyyiYm7VirYr9JvRTD4QH60/ynZuyXrj8m
+	/PXUSgzK1uc7LaXgmuOd+J66iYCGSW3o8y/4O0NQdqtjWjTme4WEt1jrIzfIcYGhKfYlyzYfbZc30
+	cb6+0SpVByPhz1QOry6MPNI9bHwSliQfjxAbtCSrLhvNJJGi717BsliCr2O707MqsLltYgNYzhTVN
+	oSIjwMIZrACF5D++2k/kov8qEh96MyAQk+/s6/sfdZ0Rx+JaFyWzKJ2+a5UNTX9byON3zk7v1/Xud
+	6Ravl+ng==;
+Received: from ip6-localhost ([::1]:41104 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1sdcjy-004U0Y-95; Mon, 12 Aug 2024 21:38:10 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:24176) 
+	id 1sdefD-004UJT-2e; Mon, 12 Aug 2024 23:41:23 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:64660) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1sdcjt-004U0Q-36
- for samba-technical@lists.samba.org; Mon, 12 Aug 2024 21:38:08 +0000
+ (Exim) id 1sdef7-004UJG-IB
+ for samba-technical@lists.samba.org; Mon, 12 Aug 2024 23:41:20 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:To:From:Message-ID:CC;
- bh=D6NQPZ//xQOM3mYIXmVsBmRcaXxxhQbuvbij17KFn34=; b=UZYIWjizzTEKbUWvWRgxiHYcZz
- 9FEZQD8UpYwQrJfbQLTsmuPJPZPrdTJwlWQ5CAzAKIyXKHqzbvlbH5s0HUvdLJM/NW/a6kx2q/rMv
- pcbhd+m7EsH9IFlAMHPyOzr36jaytJYqCpB+Lwi9/8v1QAV80GpFv1S0DJV9ZEuZ40bz2AiY42YRr
- DG8tSyQn05FWNvJ1iwAfjLRB/y30gFAW3LU+tk5eTjqCjTl2+Q6IM5TwsB5TdXTrgZCFMyiCYSF+K
- jBSLSYyjtHV2Y5tyB+NLpWccOtg5UJ63qtZecyLTPkac9N9BEu4dpjBqhAvOO+BhrjU0cIHOJkcLT
- KVTbkbBKScMUkpfCDz6zr4bYft7f+zbLqWjgP5gPjyTgC4mKmAI2XUROU6maHiwIxrNGanojg80s1
- 37gSwDExh09TmAPxeLlumeA/hJNBzYsYkZg8U2pLCn91UuTqKSDudaYiEBsQ4IkrliOcMcXW5bf7/
- 5LClyx07t89y512LDcbdvTSY;
+ s=42; h=Message-ID:Cc:To:From:Date;
+ bh=PXYumxXXFHHsJeJyz0JpG8yGc+9TGqNsfVG8wCRIpOY=; b=eFuFUcdiaT2gLt8JwcAiJc6gx5
+ qGDYsOo4ukg3Cel5/eEYogbXsOzYLWc4VLejJNUZdmR6mQsRLc91/hs/zaeJ31YISMMvmjVNg6KDZ
+ 0bzDU01rHc8dAKywmVZHKAF1WIl0K3AgXGdP3gzGurDRC0dwiyHgTN8yYUi2okaSC4plKvzFg5qr+
+ P+wUrNlRrjtXy4RxlOhZpg4kxnCCxMBm2+J3G5FGObi6/X4deSAQR8azgDyoLZ4UPAveviVkTgi8f
+ VlFvR2hcBYO96kIy1yEW0E1qDzxnd1T8rfyzjWoQ/LhvvWDdbzYIncNi/8W4QkoGJtxKvrKuQKdpn
+ rmD9ZC0KW8M5hcLpZMPvp8Qfgy/g/Eo2+f3UsgnPYgANNAOEhqXRpcuwenEJ+KzKDicnKa89k1DJQ
+ n4Nj6ymm+A6rVu07PIxmo14VJq85kTpDZY1mZkRTEdWp331t53Bzh1sXfYn67spQLLSTr1M/k6w7M
+ pEsk5GMa3r6p2z4m3/t7+aPD;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1sdcjr-0067Wo-0g; Mon, 12 Aug 2024 21:38:03 +0000
-Message-ID: <0ef42b0d9fda725ae617220b19abdfbcc416ee55.camel@samba.org>
-Subject: Re: CI can't reach internet to fetch rust packages
-To: David Mulder <dmulder@samba.org>, samba-technical
- <samba-technical@lists.samba.org>
-Date: Tue, 13 Aug 2024 09:37:59 +1200
-In-Reply-To: <37323893-503b-455c-beb6-fede11a44eb9@samba.org>
-References: <37323893-503b-455c-beb6-fede11a44eb9@samba.org>
-User-Agent: Evolution 3.36.5-0ubuntu1 
+ (Exim) id 1sdef6-0068Br-0p; Mon, 12 Aug 2024 23:41:16 +0000
+Date: Mon, 12 Aug 2024 16:41:13 -0700
+To: Orion <orion@et.byu.edu>
+Subject: Re: become_root() Necessary for Group Quota in quotas.c?
+Message-ID: <ZrqdmVERI9qENUBE@samba.org>
+References: <65ad7c9a-38a3-4224-b40e-b7c991c8e0b2@et.byu.edu>
+ <47bef7c7-50c7-4185-8268-89c0f5664703@et.byu.edu>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <47bef7c7-50c7-4185-8268-89c0f5664703@et.byu.edu>
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,50 +57,66 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
+From: Christof Schmitt via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Christof Schmitt <cs@samba.org>
+Cc: samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Mon, 2024-08-12 at 15:29 -0600, David Mulder via samba-technical
-wrote:
-> I'm getting this failure when doing a `cargo test` via samba test in
-> CI:
->      Updating crates.io indexwarning: spurious network error (3 tries
-> remaining): [7] Couldn't connect to server (Failed to connect to
-> index.crates.io port 443 after 42 ms: Couldn't connect to
-> server)warning: spurious network error (2 tries remaining): [7]
-> Couldn't connect to server (Failed to connect to index.crates.io port
-> 443 after 0 ms: Couldn't connect to server)warning: spurious network
-> error (1 tries remaining): [7] Couldn't connect to server (Failed to
-> connect to index.crates.io port 443 after 0 ms: Couldn't connect to
-> server)error: failed to get `libc` as a dependency of package `config
-> v4.21.0 (/builds/samba-testbase/samba-o3/rust/config)`
-> Caused by:   download of config.json failed
-> Caused by:   failed to download from `
-> https://index.crates.io/config.json`
+On Fri, Aug 09, 2024 at 03:00:48PM -0600, Orion via samba-technical wrote:
+> Here is my proposed patch of the file source3/smbd/quotas.c to fix the issue
+> I outlined previously:
 > 
-> Caused by:   [7] Couldn't connect to server (Failed to connect to
-> index.crates.io port 443 after 0 ms: Couldn't connect to server)
-> Doing `cargo build` during the build phase does not fail to download
-> dependencies. Any one know what's causing this?
-> https://gitlab.com/samba-team/devel/samba/-/jobs/7566611520
+> @@ -458,10 +458,8 @@ try_group_quota:
+>             S_ISDIR(fname->st.st_ex_mode) &&
+>             fname->st.st_ex_mode & S_ISGID) {
+>                 id.gid = fname->st.st_ex_gid;
+> -               become_root();
+>                 r = SMB_VFS_GET_QUOTA(conn, fname, SMB_GROUP_QUOTA_TYPE, id,
+>                                       &D);
+> -               unbecome_root();
+>         } else {
+>                 id.gid = getegid();
+>                 r = SMB_VFS_GET_QUOTA(conn, fname, SMB_GROUP_QUOTA_TYPE, id,
+> 
+> Any comments would be appreciated.
+> 
+> On 8/1/24 17:06, Orion wrote:
+> > We have a situation in which the root user does not have access to the
+> > files contained in a directory with SGID set. When a user navigates to
+> > this directory and Samba attempts to request the quota for the
+> > directory, it fails when the code later attempts to do a stat on the
+> > file because of lack of permissions.
 
-It will be socker_wrapper, I think we now have code to stop our tests
-leaking out.  
-If you want access to the real internet, remove the socket wrapper
-environment variables or otherwise disable it. 
-But also, don't do that.  At least in the past, the autobuild host does
-not permit outbound access, so you will need to work with the
-sysadmins. 
-The preferred pattern from our C model of software development is to
-encode dependencies at image generation time, and manually install on
-the autobuild host.
-Andrew Bartlett
+This sounds confusing. Why would the root not have access to the
+directory?
 
--- 
-Andrew Bartlett (he/him)       https://samba.org/~abartlet/Samba Team Member (since 2001) https://samba.orgSamba Team Lead                https://catalyst.net.nz/services/sambaCatalyst.Net Ltd
-Proudly developing Samba for Catalyst.Net Ltd - a Catalyst IT group
-company
-Samba Development and Support: https://catalyst.net.nz/services/samba
-Catalyst IT - Expert Open Source Solutions
+> > In the file samba/source3/smbd/quotas.c if the SGID bit is set, the code
+> > changes the effective GID to the GID of the folder, uses become_root()
+> > to change to root, and then requests the quota. However, if the SGID bit
+> > is not set, quotas.c requests the quota without using the become_root()
+> > function. The question I have is, why when the SGID bit is set does it
+> > change to root before requesting the quota?
+> > 
+> > Can we remove the become_root() function call for this instance and
+> > request the quota as the GID of the folder?
+> > 
+> > I tested removing the become_root() and unbecome_root() function calls,
+> > and for our particular setup, it works perfectly. However, I am curious
+> > if there is some other setup that may have issues if this bit is
+> > removed.
+
+Orion,
+
+while i worked on this a while ago, i do not recall the details of this
+change. Looking at the overall picture this could result in a scenario
+of one user querying quota for a completely different group, not the
+user's primary or secondary group.  Is it guaranteed that any user can
+always query any group quota? If so, your change is valid. If not, we
+could look into first issuing the GET_QUOTA call without root
+privileges, and repeat it when permission is denied (EPERM?) as root.
+
+Regards,
+
+Christof
+
