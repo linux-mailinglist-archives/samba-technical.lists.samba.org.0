@@ -2,48 +2,49 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5423494FA5F
-	for <lists+samba-technical@lfdr.de>; Tue, 13 Aug 2024 01:42:01 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B139594FB08
+	for <lists+samba-technical@lfdr.de>; Tue, 13 Aug 2024 03:23:52 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=PXYumxXXFHHsJeJyz0JpG8yGc+9TGqNsfVG8wCRIpOY=; b=fiiO07JtcKkgew7kyGw80V31Bt
-	XDmkdBtd5NgAWewx64NGRxYVP1tQ+nu1ieyQbVuebhsyyyiYm7VirYr9JvRTD4QH60/ynZuyXrj8m
-	/PXUSgzK1uc7LaXgmuOd+J66iYCGSW3o8y/4O0NQdqtjWjTme4WEt1jrIzfIcYGhKfYlyzYfbZc30
-	cb6+0SpVByPhz1QOry6MPNI9bHwSliQfjxAbtCSrLhvNJJGi717BsliCr2O707MqsLltYgNYzhTVN
-	oSIjwMIZrACF5D++2k/kov8qEh96MyAQk+/s6/sfdZ0Rx+JaFyWzKJ2+a5UNTX9byON3zk7v1/Xud
-	6Ravl+ng==;
-Received: from ip6-localhost ([::1]:41104 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
+	bh=OCj+8dcyCL3NAs0bwG/cQFR1ODQ9g63kys/XeNFAvZs=; b=wTHZIG0KayN4guv6zFhdsDAZfF
+	AlubGk/J9jFVAg5HF8y14pi59Ox3fyDDlvgfDV5tFJboxfFfiia78jOCbg/yScdVjR+e1FicXbmZC
+	AFQKWMJk/gQeW15IXt1DJOV1Sy3uV70Pv75J6hk7CYhAuuHAc0OBvXS4Tvxft5Dl+r78qE7eSIz2C
+	mtqIqMz/fxOxucUPTyK9BzSD74DJpuO4WnldLGhYfqBteoj9GMVEK7+0S/I5ScOqeBAYdWOisyPOK
+	3zFhwKHoQWTCbR1xiT9Y2k9Y0By990Uv3ncQ/yYtZXOkU5dxaOdaUYeLXuoH1KrQIiuVOUFkhQIo2
+	V68bHgWw==;
+Received: from ip6-localhost ([::1]:41718 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1sdefD-004UJT-2e; Mon, 12 Aug 2024 23:41:23 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:64660) 
+	id 1sdgFj-004Ud6-Pi; Tue, 13 Aug 2024 01:23:11 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:30086) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1sdef7-004UJG-IB
- for samba-technical@lists.samba.org; Mon, 12 Aug 2024 23:41:20 +0000
+ (Exim) id 1sdgFf-004Ucz-Dy
+ for samba-technical@lists.samba.org; Tue, 13 Aug 2024 01:23:09 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Cc:To:From:Date;
- bh=PXYumxXXFHHsJeJyz0JpG8yGc+9TGqNsfVG8wCRIpOY=; b=eFuFUcdiaT2gLt8JwcAiJc6gx5
- qGDYsOo4ukg3Cel5/eEYogbXsOzYLWc4VLejJNUZdmR6mQsRLc91/hs/zaeJ31YISMMvmjVNg6KDZ
- 0bzDU01rHc8dAKywmVZHKAF1WIl0K3AgXGdP3gzGurDRC0dwiyHgTN8yYUi2okaSC4plKvzFg5qr+
- P+wUrNlRrjtXy4RxlOhZpg4kxnCCxMBm2+J3G5FGObi6/X4deSAQR8azgDyoLZ4UPAveviVkTgi8f
- VlFvR2hcBYO96kIy1yEW0E1qDzxnd1T8rfyzjWoQ/LhvvWDdbzYIncNi/8W4QkoGJtxKvrKuQKdpn
- rmD9ZC0KW8M5hcLpZMPvp8Qfgy/g/Eo2+f3UsgnPYgANNAOEhqXRpcuwenEJ+KzKDicnKa89k1DJQ
- n4Nj6ymm+A6rVu07PIxmo14VJq85kTpDZY1mZkRTEdWp331t53Bzh1sXfYn67spQLLSTr1M/k6w7M
- pEsk5GMa3r6p2z4m3/t7+aPD;
+ s=42; h=Message-ID:To:From:Date:CC;
+ bh=OCj+8dcyCL3NAs0bwG/cQFR1ODQ9g63kys/XeNFAvZs=; b=ck7XT7KFjAxRRb5NBTvTiXvuwh
+ wj/GKlJi/LtRKU76oLLEjSaPSiVWMkz6rYs0YnLaMoKnVP6poDV2c8ngMXgoZEWX3RqVx7sLk8LJm
+ xyHJTkXH56izN4CVRt+i/SLtYtz10EzHg7LRQ//atftGrJmY+PgUfc6eeQtozI+I+PBdF3fZaTugY
+ yQOoY+J1dxqhusRNHNKuMNYUuxU9iXOUDCpos3iDc9vhK1uiS2QGtZuTa67XnBpBfl45+TGPrBrcg
+ w6z3bXewLa3Po1gY74iiVASQhyDV/bnUgNtBmoR9qRAODFk0sNSz8unUUu3rYK1wuJxXCYYBaFDbG
+ 40AaLz8MvPxteSEtXPsWAQN6ikQVk2KBPhrSyFdSuo0PFd64OMkVbTDWBZN7utjThUmuGVMzYH0CG
+ tDxWBGOBYbdd3R71s1YxkBaNu/sPu2+t8R2TaR/QWgbQvkBYbBPZlCW90cRmq4zeGP0jY/aHGrjhq
+ O+0sME09Njfo1MZij2GO7moO;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1sdef6-0068Br-0p; Mon, 12 Aug 2024 23:41:16 +0000
-Date: Mon, 12 Aug 2024 16:41:13 -0700
-To: Orion <orion@et.byu.edu>
-Subject: Re: become_root() Necessary for Group Quota in quotas.c?
-Message-ID: <ZrqdmVERI9qENUBE@samba.org>
-References: <65ad7c9a-38a3-4224-b40e-b7c991c8e0b2@et.byu.edu>
- <47bef7c7-50c7-4185-8268-89c0f5664703@et.byu.edu>
+ (Exim) id 1sdgFd-0068lk-3B; Tue, 13 Aug 2024 01:23:06 +0000
+Date: Tue, 13 Aug 2024 01:22:57 +0000
+To: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>,
+ David Mulder <dmulder@samba.org>
+Subject: Re: CI can't reach internet to fetch rust packages
+Message-ID: <20240813012257.4efbe77b.ddiss@samba.org>
+In-Reply-To: <0ef42b0d9fda725ae617220b19abdfbcc416ee55.camel@samba.org>
+References: <37323893-503b-455c-beb6-fede11a44eb9@samba.org>
+ <0ef42b0d9fda725ae617220b19abdfbcc416ee55.camel@samba.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <47bef7c7-50c7-4185-8268-89c0f5664703@et.byu.edu>
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -57,66 +58,29 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Christof Schmitt via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Christof Schmitt <cs@samba.org>
-Cc: samba-technical@lists.samba.org
+From: David Disseldorp via samba-technical <samba-technical@lists.samba.org>
+Reply-To: David Disseldorp <ddiss@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Fri, Aug 09, 2024 at 03:00:48PM -0600, Orion via samba-technical wrote:
-> Here is my proposed patch of the file source3/smbd/quotas.c to fix the issue
-> I outlined previously:
-> 
-> @@ -458,10 +458,8 @@ try_group_quota:
->             S_ISDIR(fname->st.st_ex_mode) &&
->             fname->st.st_ex_mode & S_ISGID) {
->                 id.gid = fname->st.st_ex_gid;
-> -               become_root();
->                 r = SMB_VFS_GET_QUOTA(conn, fname, SMB_GROUP_QUOTA_TYPE, id,
->                                       &D);
-> -               unbecome_root();
->         } else {
->                 id.gid = getegid();
->                 r = SMB_VFS_GET_QUOTA(conn, fname, SMB_GROUP_QUOTA_TYPE, id,
-> 
-> Any comments would be appreciated.
-> 
-> On 8/1/24 17:06, Orion wrote:
-> > We have a situation in which the root user does not have access to the
-> > files contained in a directory with SGID set. When a user navigates to
-> > this directory and Samba attempts to request the quota for the
-> > directory, it fails when the code later attempts to do a stat on the
-> > file because of lack of permissions.
+On Tue, 13 Aug 2024 09:37:59 +1200, Andrew Bartlett via samba-technical wrote:
+...
+> If you want access to the real internet, remove the socket wrapper
+> environment variables or otherwise disable it. 
+> But also, don't do that.
 
-This sounds confusing. Why would the root not have access to the
-directory?
+Indeed.
 
-> > In the file samba/source3/smbd/quotas.c if the SGID bit is set, the code
-> > changes the effective GID to the GID of the folder, uses become_root()
-> > to change to root, and then requests the quota. However, if the SGID bit
-> > is not set, quotas.c requests the quota without using the become_root()
-> > function. The question I have is, why when the SGID bit is set does it
-> > change to root before requesting the quota?
-> > 
-> > Can we remove the become_root() function call for this instance and
-> > request the quota as the GID of the folder?
-> > 
-> > I tested removing the become_root() and unbecome_root() function calls,
-> > and for our particular setup, it works perfectly. However, I am curious
-> > if there is some other setup that may have issues if this bit is
-> > removed.
+> At least in the past, the autobuild host does
+> not permit outbound access, so you will need to work with the
+> sysadmins. 
+> The preferred pattern from our C model of software development is to
+> encode dependencies at image generation time, and manually install on
+> the autobuild host.
 
-Orion,
+"cargo vendor" should allow you to dump your (hopefully audited and
+trusted) dependencies in a directory somewhere and build from that.
+Would that be an option here, David?
 
-while i worked on this a while ago, i do not recall the details of this
-change. Looking at the overall picture this could result in a scenario
-of one user querying quota for a completely different group, not the
-user's primary or secondary group.  Is it guaranteed that any user can
-always query any group quota? If so, your change is valid. If not, we
-could look into first issuing the GET_QUOTA call without root
-privileges, and repeat it when permission is denied (EPERM?) as root.
-
-Regards,
-
-Christof
+Cheers, Dave
 
