@@ -2,62 +2,51 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7C66195A221
-	for <lists+samba-technical@lfdr.de>; Wed, 21 Aug 2024 17:58:49 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id EB33E95A27F
+	for <lists+samba-technical@lfdr.de>; Wed, 21 Aug 2024 18:12:01 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=eGNGO2uvY56vUZH6mFvyOPdmZDbNvIRo3dnZ0pU/ySM=; b=5rjel0GiChOnFarOR1Vjz9mMxU
-	PF+4s6m7Hbcw3KrgdYWZm60ebPC74pNOrAcODIt56XU5+QFts6DycpkFFXg9mNMBQnS1RldhrEqb7
-	55wJiWdEAH4sYCx0YHtSdPgJA8/LSFQjQUYwJ4STH9EAIUP7o9HsVTwrLsQF53PdS7dGGCwoCrpOO
-	i2pywn0UXKfaVkxNvHhVsLGg+qtSFQua2NKd3fUCjdt5n0gfrgq+m/po2hdL+kYNsBkoal9sW74JX
-	Nyi3qP00IpZ3nXOn9zcLSCy0iZqugdfbF8RQ6+jB5xbbcwrBH1g06Q+GtawSDA9sEKSgGlfspCPK9
-	Tye+cO5A==;
-Received: from ip6-localhost ([::1]:59186 helo=hr1.samba.org) 
+	bh=qVwRaNUS929dJN12CJsugsT1bxV7ktNGouRjht4AW7w=; b=I/EtSvHVtzR5sjIXv+YcuC5dpU
+	MK0V0g/LKHJb00aoS4UPH1hYBHPJOZ8/dUxhpcubHl0wWy72XkiLo+OPW9oqPpylSVKmdUIllvoJb
+	lx3w/fRscCcsffFZxnYBkimjq1kxj+n6gAD42jQrVWIxJrSO3EjkEeeF64cXyQ78lScGDNQCetMsO
+	kkOs02JP5tyd38broyLifntYkMlJYHRYILN5JNCJxoQnTtBiQWyRWFdKHxsdWEPosent0f1tT4PcV
+	I+oFHrVcWizJQRZQgowWjmRlmVuXu4tQAFRqQVD40WZ95wYX8YJ7r0BBnjgi2VHaXpUbYUauaqEBQ
+	Bu5YDB7Q==;
+Received: from ip6-localhost ([::1]:56622 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1sgnik-005AmW-Er; Wed, 21 Aug 2024 15:58:02 +0000
-Received: from mail-lf1-x134.google.com ([2a00:1450:4864:20::134]:51630) 
+	id 1sgnw4-005AtZ-9D; Wed, 21 Aug 2024 16:11:48 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:59476) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1sgnig-005AmP-E8
- for samba-technical@lists.samba.org; Wed, 21 Aug 2024 15:58:00 +0000
-Received: by mail-lf1-x134.google.com with SMTP id
- 2adb3069b0e04-533488ffb03so1176465e87.3
- for <samba-technical@lists.samba.org>; Wed, 21 Aug 2024 08:57:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1724255876; x=1724860676; darn=lists.samba.org;
- h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=eGNGO2uvY56vUZH6mFvyOPdmZDbNvIRo3dnZ0pU/ySM=;
- b=WRiKkfKhm+EyvrEITnGhs/1Fj70ZsjSx9dHKHqiRG2u5uv0IIBRsucgA+MoNNyrav8
- UzbW3oIfudxjqcSDptDr03shloB7Tp8I8fpFAVBBRJo6ST/TeFex54DlLwBTsSp3HxUa
- SGrV8w+eBQQWVy+B/Ex9FhBWMXa/zSJSsxusFKWKvh+RK/4NHF95hIei3KiK145KQBH2
- cdyDvMgHqlo2ktIkmcMurq16vKH4gaMp3Xrsn6CYlzsXyWtqzxmQj1/BELLj8UeBwy6w
- ZPptvy+UVOpbr2rYpBbhNfxeK03IqTVcEZdo5QU7KuOAAGRcchQ2BMB88VlsejTizQiB
- 89eQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724255876; x=1724860676;
- h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=eGNGO2uvY56vUZH6mFvyOPdmZDbNvIRo3dnZ0pU/ySM=;
- b=j0KQwUzF3J616nxkYiv78S87Usq3zWd4x4iw4u/tLP4aOWORpHfP0ypcfe1ksthjZO
- QUxQahe71e8g23+a9aYT0JL6MegbY1WnI366DekSYVgaBe5hRoW9t0u5jQsVZ/mimIRf
- KIhgoFv8qvGrOHlTVzPkYxAAmWRmO46sn/2NAtIFAV8h9kqaw46t7H5SDCOSbo6R+X9A
- hlB1R0WILdJFfoI0ZOcq0DlapYJXAn+Kt0r9D8kYisH+NKpd35XrnJofOSi8GR4m2uO5
- laZ2vjogrT15E+oVej/ehoifItBAeTOTFzDsfrFxzNDzX1bmYqBj5k8EbodflatDmZHu
- v4GA==
-X-Gm-Message-State: AOJu0Yz06ZN03UF6iQ7de0HilSErDJBxBPGuSCzCZ841yE4QGuKn77D9
- 4GZtgGDZz2TogKyw3Er0MD785mzCEirWh30lmOhUatadPqh3nscVlp3r/Ta8DkCK/jluY4WjyiI
- e1im/T/lhvZCGLIh9vE/kGBaAD3r296wS
-X-Google-Smtp-Source: AGHT+IF+0hEFmIUeAhcvxa3+ecoDmFJ+ZGPVQR7RCXbLBMk1PmvbmpDXchfmRSTemnKkS9zHDvmQ6JRkqDGDH/za0EQ=
-X-Received: by 2002:a05:6512:2210:b0:52e:f2a9:b21a with SMTP id
- 2adb3069b0e04-533485545afmr1653090e87.19.1724255876267; Wed, 21 Aug 2024
- 08:57:56 -0700 (PDT)
+ (Exim) id 1sgnw0-005AtR-NO
+ for samba-technical@lists.samba.org; Wed, 21 Aug 2024 16:11:46 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=From:Cc:To:Date:Message-ID;
+ bh=qVwRaNUS929dJN12CJsugsT1bxV7ktNGouRjht4AW7w=; b=kTYYHtpV/elApte76iKn+BkbXz
+ GYMtiZ6vor93hPbS4v0b+JetDPfS/+dGTsVwlTDuhK9REVj/kFX96WbQGOg3MRpI12B+j4O7i4pCI
+ gzOvjp98wx5MkYfFBItXCUyDpfXmCd9w7t9n7m+sWwKrQThM7vjrWkClB8sEnj2d7mLUgekteXTVA
+ 0ChwooNbcAOGoOdfQc9fx94Az1MxA4FzJWAjfDgwWKpx6v/he+EdwhUm8Fo4DIBvh/rJnXm248bYf
+ mdKPKED8Wnc+bHyQNagmBjSWF4yCOJvbm21aG3V++tEFH9emqSI4EaBZb4dzvtEcA+iQeeXOgwkk7
+ zl2iRVP2q8DDmF6B37QNGNPg0332GwUImqp4wLOmLZ7HZC/Po69oJ2G85iP3x//pRR8qnihv1S3NB
+ aIY4cxSPZNd7gIIy1Qp2CBpnskxEU493KYrxR+2NuHdv1+g+Cp905lDd6ACUEVdBj5g5FdqOSefej
+ F6GDcDavKEbuk3Ajk13kwVtc;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1sgnvz-007V4y-1h; Wed, 21 Aug 2024 16:11:43 +0000
+Message-ID: <f1bc4bde-f1ff-4b52-9cf4-822f94b31a75@samba.org>
+Date: Wed, 21 Aug 2024 18:11:42 +0200
 MIME-Version: 1.0
-Date: Wed, 21 Aug 2024 10:57:45 -0500
-Message-ID: <CAH2r5mtUTOFgaQMbsWwkAD-XDRiVwyAGT=Q7n9i5Sd6Wf=9q+Q@mail.gmail.com>
-Subject: Samba server multichannel session setup regression?
-To: samba-technical <samba-technical@lists.samba.org>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: Samba server multichannel session setup regression?
+To: Steve French <smfrench@gmail.com>,
+ samba-technical <samba-technical@lists.samba.org>
+References: <CAH2r5mtUTOFgaQMbsWwkAD-XDRiVwyAGT=Q7n9i5Sd6Wf=9q+Q@mail.gmail.com>
+Content-Language: en-US, de-DE
+In-Reply-To: <CAH2r5mtUTOFgaQMbsWwkAD-XDRiVwyAGT=Q7n9i5Sd6Wf=9q+Q@mail.gmail.com>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------Df5GuAkqejEExWAZtpG1RR6N"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -71,29 +60,58 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
+From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Ralph Boehme <slow@samba.org>
 Cc: Shyam Prasad N <nspmangalore@gmail.com>, CIFS <linux-cifs@vger.kernel.org>,
  Paulo Alcantara <pc@manguebit.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Mounting multichannel from Linux to Samba server on localhost
-(even current master Version 4.22.0pre1-GIT-8edb1fd13c1 but I also see
-it failing on Samba 4.21 - but it works fine on Samba 4.19.5 and has
-worked for years)
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------Df5GuAkqejEExWAZtpG1RR6N
+Content-Type: multipart/mixed; boundary="------------EF4z5S2hfCFiyF8MmTKKKTp5";
+ protected-headers="v1"
+From: Ralph Boehme <slow@samba.org>
+To: Steve French <smfrench@gmail.com>,
+ samba-technical <samba-technical@lists.samba.org>
+Cc: Shyam Prasad N <nspmangalore@gmail.com>, CIFS
+ <linux-cifs@vger.kernel.org>, Paulo Alcantara <pc@manguebit.com>
+Message-ID: <f1bc4bde-f1ff-4b52-9cf4-822f94b31a75@samba.org>
+Subject: Re: Samba server multichannel session setup regression?
+References: <CAH2r5mtUTOFgaQMbsWwkAD-XDRiVwyAGT=Q7n9i5Sd6Wf=9q+Q@mail.gmail.com>
+In-Reply-To: <CAH2r5mtUTOFgaQMbsWwkAD-XDRiVwyAGT=Q7n9i5Sd6Wf=9q+Q@mail.gmail.com>
 
-I see many repeated:
+--------------EF4z5S2hfCFiyF8MmTKKKTp5
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
 
-[ 1936.825332] CIFS: Status code returned 0xc000000d STATUS_INVALID_PARAMETER
-[ 1936.825344] CIFS: VFS: \\ Send error in SessSetup = -22
-[ 1936.825353] CIFS: VFS: failed to open extra channel on
-iface:0000:0000:0000:0000:0000:0000:0000:0001 rc=-22
+SGkgU3RldmUsDQoNCk9uIDgvMjEvMjQgNTo1NyBQTSwgU3RldmUgRnJlbmNoIHdyb3RlOg0K
+PiB0cnlpbmcgdG8gc2V0dXAgYWRkaXRpb25hbCBjaGFubmVscy4gIEFueSBpZGVhcyB3aGF0
+IGNoYW5nZWQ/DQpjYW4geW91IHNob3cgdXMgYSBuZXR3b3JrIHRyYWNlIHBsZWFzZT8NCg0K
+VGhhbmtzIQ0KLXNsb3cNCg==
 
-trying to setup additional channels.  Any ideas what changed?
+--------------EF4z5S2hfCFiyF8MmTKKKTp5--
 
--- 
-Thanks,
+--------------Df5GuAkqejEExWAZtpG1RR6N
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature.asc"
 
-Steve
+-----BEGIN PGP SIGNATURE-----
+
+wsF5BAABCAAjFiEE+uLGCIokJSBRxVnkqh6bcSY5nkYFAmbGEb4FAwAAAAAACgkQqh6bcSY5nkaL
+BRAAxDBnNnBv46NfK0LFZDP9G7UNyk/dBy+odDrEx4/PnfuSi7ylUYYkdcNC2Cc6adk8bCvIQM7o
+Xes7aGJ2yRFLoWqman8gkGOzmXZVGQpP3Jh8oZretmzoWmVE0HS88WTUAxjQndaFsCpSRaUHaR9e
+Gfi6CUf1SJxoKef7x/hClByYB0+4s4Y+qmdyU/x6XkYqD03+WsnIc3VFrV2zTjGy1/d4ssC5YP62
+01TKGirKvOs2vciouiw2rQgvRARqNrFx5fS9F8AdhsUf/TZSWhqMLJo4BnQSE8q723V7EAd76bxr
+V16RvxMSEQWOw+PXdd3sSytnGX8yyk/YH1yHuuISHr4rzRR8TR9S3AUA/hhFmN7Fo9pQ50W7rI5S
+J9Eb8ojCoA6SK4+LRg/bvMDCnQIlmPUa5Z55D6LyUb+YnEWsVnYxbXsnDGZNTmMFHaGOARHJcoV2
+T9p1MIR2Nk6nsJO6Kygk17D4ThgbxjCdDJ1TnXwOZ6zMAfGadSNje+Qt//EU/XbpEjzLqBzY9VDs
+RXXg6CF6qxZCiHEGTUBjBFAhLOc/1uVSc4NBJy9HqulILowGRLvco/Xyslpndw3YzKEh/mPP6nNA
+vMUAFpIzi4lS0ObMDaK5pVeK+Yib7EwzK9mzUmQSqnCHkl/TXjqeQEtUINpcjuUc+86D6LZVHNHZ
+sRw=
+=qFC5
+-----END PGP SIGNATURE-----
+
+--------------Df5GuAkqejEExWAZtpG1RR6N--
 
