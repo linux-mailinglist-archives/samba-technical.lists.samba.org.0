@@ -2,68 +2,47 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 44F2E95A3F8
-	for <lists+samba-technical@lfdr.de>; Wed, 21 Aug 2024 19:36:36 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C9EB995BF5F
+	for <lists+samba-technical@lfdr.de>; Thu, 22 Aug 2024 22:02:49 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=vwGKPR9dScyEf6RIlTCNqkBAFknVGBL0G4lRztfOGK0=; b=Fb/OSmTNJeuL3VMcfEmnKpHoHP
-	ODUzR0zMxfPu423l4pQ9PfDwULrQpelDuBHhAQr6UUGJlZ8iRiBFW8Q/xfLC77mrqSpwUAOnEmiFb
-	nhHILpJVvAAsX5t9JLi7Zh0dkqBAJawJFZbYcAG/Hb2YDkI6yNJLRjgu8PmM8uQYkvQc5oadcJnNM
-	iVx9GlPlsu1/GXXbyau/4vA5wI5cWNjcVSEN1cd1gBSxQegDUqEtIOiHEpCCNzaBQK0HNvZOKJARC
-	MOzgHy9xbd0lJAJ+3XgWX7VQkpaDsqAcrgg8eC+qkqH/5opuxKOuWjMpsT2fdVLIwEC2n+T5NINFk
-	h5aW4ffQ==;
-Received: from ip6-localhost ([::1]:25488 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=RJIr9PAQVdwFbdMOhFM2xkJumPryLsInKUBvirTGJww=; b=ufsW/7Xyq41RDyyCA9WfzJZBbZ
+	s2vGlfPfRRxbJsvtrUeqqPOUNHvTTMSaMTzW5trrv5n0QyqssZQ48MAiMKmzE+g+Pe3/m/acpUQt3
+	HYlI/tqrcIPnozm41l/4TWPhjT0cgF4WOsA5PB+19q4I9xq5VznPoOkSTb+iRugD3AoFk9GDN5eh6
+	XX9qf75jvazZ5SpXUELSWHVWhgbIdMicJmW5kIDSdpC/TNr/vKdsfITwFSWXQCsLBD4ymsLE3A5EW
+	B0R4YmabKbg0szaoFdNf2S/z7GgT4Nahjdkb+2YdITLu3vEaqkcVrgNiX9FAyxRird5WBsXt81aEc
+	+Fhru2Mg==;
+Received: from ip6-localhost ([::1]:44552 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1sgpFW-005B50-Jq; Wed, 21 Aug 2024 17:35:58 +0000
-Received: from mail-lj1-x229.google.com ([2a00:1450:4864:20::229]:48580) 
+	id 1shE0N-005Hen-E8; Thu, 22 Aug 2024 20:01:59 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:37918) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1sgpFS-005B4t-2g
- for samba-technical@lists.samba.org; Wed, 21 Aug 2024 17:35:56 +0000
-Received: by mail-lj1-x229.google.com with SMTP id
- 38308e7fff4ca-2f3ce5bc6adso46810981fa.1
- for <samba-technical@lists.samba.org>; Wed, 21 Aug 2024 10:35:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1724261752; x=1724866552; darn=lists.samba.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=vwGKPR9dScyEf6RIlTCNqkBAFknVGBL0G4lRztfOGK0=;
- b=AYPdNwRQf6ZvsEnEPevxBbrlnNSgU4s2YPKgPQuA2i2iSYfQMVU41mMozGWqIxVMhW
- HqH8DqH9bDBhDwyXpv8l8p6DNuj8x/H5X38SQpWSile6gi2t5CmYnVcwRgLK0VX4pawk
- wpirO1anEYBtQx/z1ztT6U4PCshd2tBrcoJHnUnhHYh0FINCieCo5si/xMrfzZduxK3J
- msJ4atrJVMQiFfL8MhXsw//YKbh+Ykp9ecmjAAjNOTqkUMEajsIdphOekPUlPX9uZneq
- MFMONGh72ywdvWdSiuB/XLKf7qd/926iBy4JX6eXS0xDA8P8Rj+1iLpT02UPczNxRTYR
- za/Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724261752; x=1724866552;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=vwGKPR9dScyEf6RIlTCNqkBAFknVGBL0G4lRztfOGK0=;
- b=XcJHv0kzzP+u7BKv0elZOQKxVHLlsHWxOm/xNl5PuhuX890GDnyGiqQEp1xungtxms
- CtxBUI48pSjV9+O3i87+wUQFsf9MhcP+CG4WIyA9gB4CjGnapbNJCLIgnciT+m2uCeht
- QPVtnmlr+QZaolS7lwBb3r7gnE63WRQ+E+TL+KywCC0x63SugW8xTYrZwaSrkyP/IFv3
- 0+SYaVLuXEoGgKAe/pFIcP3Ypy7oyo3XwYr+qMRT37ItjtnE6yaRH/hKlBMtVD1p9CgJ
- BU7ZeBaYZKb04aAR9TCHkujgGkjS01IA4rvcmn8Y7e8Bq7UBAo0pgh6dKj0xGlje2v1N
- w6Wg==
-X-Gm-Message-State: AOJu0YwNElBGjHd8qAYiq96jNwwBS1sEgcuEX0cB+gVTvrzEP+jWyWbw
- XACJPb7tjAorVL10ePuMVTVG1mwdoVRUemGzy4Xa8Uzki4nrDHqFhHw17Yhg7RBk9Oikp59jjiw
- VEk2aZJE21Jy3cHrLqrNDBy3jvN0=
-X-Google-Smtp-Source: AGHT+IE9XAgPiD6lsAiAE5ZEFlqHmA0fIxRHDUJRB057zPRD7NZpTgiLXjh3OvaSEz1WN1GKPoqf8MG1hKeZ9J4bIrI=
-X-Received: by 2002:a05:6512:2214:b0:52c:8aa6:4e9d with SMTP id
- 2adb3069b0e04-5334855e05emr2626320e87.29.1724261751977; Wed, 21 Aug 2024
- 10:35:51 -0700 (PDT)
+ (Exim) id 1shE0I-005Heg-KY
+ for samba-technical@lists.samba.org; Thu, 22 Aug 2024 20:01:56 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Message-ID:Cc:To:From:Date;
+ bh=RJIr9PAQVdwFbdMOhFM2xkJumPryLsInKUBvirTGJww=; b=mB2DEzNB5IGXwS81/fhT3CcQDg
+ nhYPuvKc7eKsDDUwKUH0EtxzfUTIUS/rqKN+L3UrtVuGcTYbMXvj9Cg1RXs3r7AafEDIprRs4Ir3V
+ aKOrR/W2pbJa30cru5xbPodqvCaqhFVdWv2SHG3Xs+ZZQRELE3CJxsIrPSeDeAhc3wFJF6KDLfwHb
+ BKZhjURXTDKufwx8S8e12jHeVBLLHQ7Tb62QV4VeOjK+IbfZ5J6ihZtHI9T67Y/omhF80/1I/weq+
+ wyVpDeu51dW2cdbyWRwhjUK/MpnmQL9yIxLtxGhW/0rbW7dqpJwUCYWyffySB84Kt/Fp6i4AoNPhA
+ dkyfmS6hphE1s9JSn7bxyjMZXsmQAUVN4ViZrp4+X05xzG1uM21UMQC31eeBH4kdhzfP4MYOREe2c
+ +ydZuoC5W47ca4HMfySQd5J/gR2rgzyi+XjZ0GZRQMExHDVevuDR9sfGWKw5LZHnICor14D3uy1dW
+ 2OZLeRE9i/OBzJW9LKMSCeIx;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1shE0G-007hXI-2J; Thu, 22 Aug 2024 20:01:53 +0000
+Date: Thu, 22 Aug 2024 13:01:50 -0700
+To: John Hixson <jhixson@freebsd.org>
+Subject: Re: Helping to improve FreeBSD support
+Message-ID: <ZseZLpuINSxGdIJZ@jeremy-HP-Z840-Workstation>
+References: <tc6xfz3it47oxa224ert4fs2u36h3qefm2elc64kugofrujk4t@vh2wevz6y6qc>
 MIME-Version: 1.0
-References: <CAH2r5mtUTOFgaQMbsWwkAD-XDRiVwyAGT=Q7n9i5Sd6Wf=9q+Q@mail.gmail.com>
- <f1bc4bde-f1ff-4b52-9cf4-822f94b31a75@samba.org>
-In-Reply-To: <f1bc4bde-f1ff-4b52-9cf4-822f94b31a75@samba.org>
-Date: Wed, 21 Aug 2024 12:35:40 -0500
-Message-ID: <CAH2r5muFV2+SXhGmkv5WYawtAyzK0D6y5hFLS4x6542cUwjACg@mail.gmail.com>
-Subject: Re: Samba server multichannel session setup regression?
-To: Ralph Boehme <slow@samba.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=us-ascii; format=flowed
+Content-Disposition: inline
+In-Reply-To: <tc6xfz3it47oxa224ert4fs2u36h3qefm2elc64kugofrujk4t@vh2wevz6y6qc>
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -77,40 +56,25 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
-Cc: Shyam Prasad N <nspmangalore@gmail.com>, CIFS <linux-cifs@vger.kernel.org>,
- samba-technical <samba-technical@lists.samba.org>,
- Paulo Alcantara <pc@manguebit.com>
+From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jeremy Allison <jra@samba.org>
+Cc: samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Ugh - I can't reproduce it now.  I added an additional test user
-(smbpasswd -a) and cleaned up a few comments in the smb.conf file and
-interfaces line and it works now.   My best theory is that it was
-triggered due to minor difference in the interfaces line of the newer
-smb.conf
-
-If and when I can reproduce it again, will send you a trace, but when
-I had looked at it before there wasn't anything obvious in the session
-setup on the additional channels that wireshark decoder flaagged.
-
-On Wed, Aug 21, 2024 at 11:11=E2=80=AFAM Ralph Boehme <slow@samba.org> wrot=
-e:
+On Wed, Jul 17, 2024 at 08:54:20PM -0700, John Hixson via samba-technical wrote:
+>Howdy!
 >
-> Hi Steve,
+>Would Samba be interested in better FreeBSD support? I am reaching out
+>on behalf of the FreeBSD Foundation. We would like to help improve
+>support in whatever way we can. What needs to happen?
 >
-> On 8/21/24 5:57 PM, Steve French wrote:
-> > trying to setup additional channels.  Any ideas what changed?
-> can you show us a network trace please?
+>For starters, I would like to help get as many of our port patches
+>upstreamed as possible. I would also be interested in helping out in
+>areas that are specific to FreeBSD. It would also be nice to have some
+>CI setup.
 >
-> Thanks!
-> -slow
+>Interested? Where to go from here?
 
-
-
---=20
-Thanks,
-
-Steve
+Very interested. Please send the port patches upstream !
 
