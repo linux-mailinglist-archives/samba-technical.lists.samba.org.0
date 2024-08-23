@@ -2,58 +2,73 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 043F895CDAD
-	for <lists+samba-technical@lfdr.de>; Fri, 23 Aug 2024 15:22:02 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id CA75095D31F
+	for <lists+samba-technical@lfdr.de>; Fri, 23 Aug 2024 18:21:48 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=YqubPSbosPV5jgGnAgJ2amswF0hQKABp49RdOjYClVM=; b=kxox4BE3eRlD+IJ9K4fFkqzhNX
-	qhL0KKXwbBPIPTK/VWQxRTQBH3TZPJPa4W+1Aqjl8xWJnnpLHdQI7X49+f8kKRQFpGf7pAFI2erq0
-	WQmWxtclnBXSnjU0qrYgGgUR9vjBwJZmJq6mYWMNQfa6zO62BieYcMdGiHA7FvgwafkC4qRwhDJhJ
-	+/Z34bNsxVJC6Kzm4DmGRQ5h2G/wGNg49df4GJm4dM/COMD65QPj/FVFScqIsbcRtHB4m9kqxGr2T
-	aY0KfiXb6SlYdvo0kAVqTfaoiHarXvMqAhAsd84un+IzsJyROjRDPx14xq0JYBFFHHuTS4+NsGvU/
-	/r3qDfRg==;
-Received: from ip6-localhost ([::1]:48444 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=a7OM/W0EJtp2+JAIBDghW4ypLqo6G3RHtMu+hNZuDVs=; b=Mk9j8HeP5HYmDKTdbsuLv2VEUs
+	7f8YZmsJ08y/OPIJuRofI4e8N5aVPNljSiX9qgr9kAnf0U4cc9YNUl5yUBeUrJ7TXFV+tGeEx0jDt
+	9Z+q24Ai8iDMs29dAbyP5kzSCVqEXy6zhRx43LdL3nd0rJJiteIn83o5TqhpUIKXpag/oDJO1O3y8
+	ZdAyNzfAqPuTL7dXlPGDCwwUfzdb+oQ4eZeUsW7lrGXENYzCV9mIbLHy9M4Jz8YQqxKUtINcosVru
+	Tot54cGSXC9LrUztD4V9Bv1zz6H4o5UWl8aD4cYZNEGQ37U0k+zlswNIkSdpC44SR9KtF7mk7dhHi
+	OHdUjhtg==;
+Received: from ip6-localhost ([::1]:29396 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1shUE5-005LDX-LW; Fri, 23 Aug 2024 13:21:13 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:28682) 
+	id 1shX2C-005LdO-Eg; Fri, 23 Aug 2024 16:21:08 +0000
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124]:42993) 
  by hr1.samba.org with esmtps
- (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1shUDz-005LDO-RI
- for samba-technical@lists.samba.org; Fri, 23 Aug 2024 13:21:12 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Cc:To:From:Date;
- bh=YqubPSbosPV5jgGnAgJ2amswF0hQKABp49RdOjYClVM=; b=1Z0YEVmGV7ty1nYuic+HgOcKqJ
- je2ZyY/eAc4pCsFRlQtO5rJRIwzpjpK4Xzc1jI42Ontp0XSeS9BKef1WrxThXQDiSxoeT00HrpZpJ
- 070mbzc03+qPWfLNvQ8Qc2lMBKer5jpLdB8tmclj16a+QOgInP63VISi8acmBw6D7orLnASGHQfeR
- YlSnT/kzc0xxdc/DpbNnynyrbu5QUVu45FjPAZiWY5uRbEmCDyK+aqsWiJW3HuEugOrwvgC+fVtre
- 2/5lbxivK6wCZKMvBO1RRao64lCYM+8OCIuQgIIg2DprxieMl3qi7NylyFpbAlNIWEqFuZOeMUfnH
- r57eQ1odXUTL8lEQZraLdVP73+O9mqRrbZc0T+7DcdMzm9gqFVUcJCa9+CVd22dAcgzAYC+7EZvgJ
- L0ayzOHTQ29ha0sbJrgdHIulOtBirMy0pHiksn8Aif0ns+OBPic8Pusi0cHEEXG3FWpVvCbqGrZ69
- 39mYHG2ymGbjJ/Daz6tJ8Qcw;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1shUDw-007ojn-2h; Fri, 23 Aug 2024 13:21:05 +0000
-Date: Fri, 23 Aug 2024 13:20:52 +0000
-To: David Howells <dhowells@redhat.com>
-Subject: Re: Bug in Samba's implementation of FSCTL_QUERY_ALLOCATED_RANGES?
-Message-ID: <20240823132052.3f591f2f.ddiss@samba.org>
-In-Reply-To: <319947.1724365560@warthog.procyon.org.uk>
-References: <Zk/ID+Ma3rlbCM1e@jeremy-HP-Z840-Workstation>
- <CAN05THTB+7B0W8fbe_KPkF0C1eKfi_sPWYyuBVDrjQVbufN8Jg@mail.gmail.com>
- <20240522185305.69e04dab@echidna>
- <349671.1716335639@warthog.procyon.org.uk>
- <370800.1716374185@warthog.procyon.org.uk>
- <20240523145420.5bf49110@echidna>
- <CAN05THRuP4_7FvOOrTxHcZXC4dWjjqStRLqS7G_iCAwU5MUNwQ@mail.gmail.com>
- <476489.1716445261@warthog.procyon.org.uk>
- <477167.1716446208@warthog.procyon.org.uk>
- <6ea739f6-640a-4f13-a9a9-d41538be9111@talpey.com>
- <af49124840aa5960107772673f807f88@manguebit.com>
- <319947.1724365560@warthog.procyon.org.uk>
+ (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__AES_256_GCM:256) (Exim)
+ id 1shX28-005LdH-8G
+ for samba-technical@lists.samba.org; Fri, 23 Aug 2024 16:21:06 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1724430060;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=a7OM/W0EJtp2+JAIBDghW4ypLqo6G3RHtMu+hNZuDVs=;
+ b=hpwVSInmIMAYW55TMZfd7FCLBrsJSdQr1dRgOllCvX/Wci7ZYy6/4oQ6mL59tbzjZAjc8t
+ dFWqSjljw7FPUijAuvsvHJGV4/gMaNDfe7WkU0v/d7XoM6CBTAJENtDo1K9hi0OXYsBjd5
+ Z8GMdP/HDmyPyteEGTCzVpX+7CT79AM=
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1724430061;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=a7OM/W0EJtp2+JAIBDghW4ypLqo6G3RHtMu+hNZuDVs=;
+ b=eK1TZvDsqiFMsLmXlHPLzIWwFKPhS7ntTIaLkPncb9lY3ZK9lBw/RAtnVGAphjnTLHI10u
+ wKNiT/et1PuhGio1GuG0UebkpaI2YHzxr58AcXRSHxyRskN7PVrMy5g68/Uc6aMI9/MokR
+ dzvj61EH+ib7GWdYPv19lE/rKjvBWug=
+Received: from mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-562-iuW8mKDwMJKn3vMTBBxWRA-1; Fri,
+ 23 Aug 2024 12:19:14 -0400
+X-MC-Unique: iuW8mKDwMJKn3vMTBBxWRA-1
+Received: from mx-prod-int-02.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-02.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.15])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id DDF911955BED; Fri, 23 Aug 2024 16:19:11 +0000 (UTC)
+Received: from warthog.procyon.org.uk (unknown [10.42.28.30])
+ by mx-prod-int-02.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
+ id 6ACE019560AA; Fri, 23 Aug 2024 16:19:07 +0000 (UTC)
+Organization: Red Hat UK Ltd. Registered Address: Red Hat UK Ltd, Amberley
+ Place, 107-111 Peascod Street, Windsor, Berkshire, SI4 1TE, United
+ Kingdom.
+ Registered in England and Wales under Company Registration No. 3798903
+In-Reply-To: <20240823161209.434705-1-dhowells@redhat.com>
+References: <20240823161209.434705-1-dhowells@redhat.com>
+To: Steve French <sfrench@samba.org>, Jeremy Allison <jra@samba.org>,
+ samba-technical@lists.samba.org
+Subject: Samba llseek bug
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"
+Content-ID: <434991.1724429946.1@warthog.procyon.org.uk>
+Date: Fri, 23 Aug 2024 17:19:06 +0100
+Message-ID: <434992.1724429946@warthog.procyon.org.uk>
+X-Scanned-By: MIMEDefang 3.0 on 10.30.177.15
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -67,59 +82,27 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: David Disseldorp via samba-technical <samba-technical@lists.samba.org>
-Reply-To: David Disseldorp <ddiss@samba.org>
-Cc: Paulo Alcantara <pc@manguebit.com>, Steve French <sfrench@samba.org>,
- linux-cifs@vger.kernel.org,
- David Howells via samba-technical <samba-technical@lists.samba.org>,
- Tom Talpey <tom@talpey.com>, Jeremy Allison <jra@samba.org>
+From: David Howells via samba-technical <samba-technical@lists.samba.org>
+Reply-To: David Howells <dhowells@redhat.com>
+Cc: Paulo Alcantara <pc@manguebit.com>, linux-cifs@vger.kernel.org,
+ linux-nfs@vger.kernel.org, v9fs@lists.linux.dev,
+ Jeff Layton <jlayton@kernel.org>, linux-kernel@vger.kernel.org,
+ Matthew Wilcox <willy@infradead.org>, dhowells@redhat.com, linux-mm@kvack.org,
+ linux-fsdevel@vger.kernel.org, netfs@lists.linux.dev,
+ ceph-devel@vger.kernel.org, linux-erofs@lists.ozlabs.org,
+ linux-afs@lists.infradead.org, Christian Brauner <christian@brauner.io>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Thanks for the follow up ping...
+Note that whilst testing my cifs fixes with the generic/075 and generic/112
+xfstests, the tests occasionally hit a bug in Samba whereby llseek() fails
+because there are too many extents in the server file for the server to
+report.  I've noted this before:
 
-On Thu, 22 Aug 2024 23:26:00 +0100, David Howells wrote:
+	https://lore.kernel.org/linux-cifs/349671.1716335639@warthog.procyon.org.uk/
 
-> >         if (out_output->length > in_max_output) {
-> >                 DEBUG(2, ("QAR output len %lu exceeds max %lu\n",
-> >                           (unsigned long)out_output->length,
-> >                           (unsigned long)in_max_output));
-> >                 data_blob_free(out_output);
-> >                 return NT_STATUS_BUFFER_TOO_SMALL;
-> >         }
-> > 
-> > I'm guessing in this case we need to just truncate out_output->length
-> > to in_max_output and return STATUS_BUFFER_OVERFLOW.  
-> 
-> Do you perchance have a fix for this?  I'm seeing it cause failures in
-> xfstests when running against cifs connected to samba.
+is there a fix for this I can try?
 
-I've proposed a fix via
-https://gitlab.com/samba-team/samba/-/merge_requests/3775
-
-If you want to try it yourself...
-
-The following changes since commit b0996ed589a931902a304237d6c03efce2b16f6b:
-
-  s3:tests: Fix spelling error (2024-08-22 10:38:09 +0000)
-
-are available in the Git repository at:
-
-  https://gitlab.com/ddiss/samba.git qar_rsp_truncation
-
-for you to fetch changes up to 3c034c4d177ea2367b3131f813381d91c98ab7e1:
-
-  s4:torture/smb2: test FSCTL_QUERY_ALLOCATED_RANGES truncation (2024-08-23 13:06:04 +0000)
-
-----------------------------------------------------------------
-David Disseldorp (2):
-      smb2_ioctl: truncate FSCTL_QUERY_ALLOCATED_RANGES responses
-      s4:torture/smb2: test FSCTL_QUERY_ALLOCATED_RANGES truncation
-
- source3/smbd/smb2_ioctl.c         |   4 +-
- source3/smbd/smb2_ioctl_filesys.c |  54 ++++++++------
- source4/libcli/smb2/ioctl.c       |   3 +-
- source4/torture/smb2/ioctl.c      | 150 +++++++++++++++++++++++++++++++++++++-
- 4 files changed, 187 insertions(+), 24 deletions(-)
+David
 
 
