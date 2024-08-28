@@ -2,48 +2,85 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 75458960BFC
-	for <lists+samba-technical@lfdr.de>; Tue, 27 Aug 2024 15:27:31 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id CA756962523
+	for <lists+samba-technical@lfdr.de>; Wed, 28 Aug 2024 12:43:02 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
-	bh=GRFC4qU+WBTtzC9nsHlZCN3XrfMzadkfYtW5Tdfbndw=; b=i/AR4vv32C3onmmgkkDijY2aXb
-	k4cBB6nZYTMGN5AeIGNdL/j4M5wP8W1wweOnNBCv826EWSDIR/Ev2kKZrysTmGCj6wAaLi/jLl/xo
-	RLoU4eQf8Iw4nLNf4WQlgG3z0YSpUMrOHkGmG67O0gL4TcV6obmuuYGvh1EaTtKNQ5RNB9LfzPXnL
-	W6xTk4/Q2WUL/r0JpIS6ELMv1UM+oQ+W3MoHEvE3UIcPa05MDozT7Zs1itzZJYfw5jRJQNX1TgGtX
-	H1kIocBGgSO8XzOC9R9yVsFShlQceEN8LNWxVboDlsfsiy4ppu1AhJpPf04J8L8d/iorVA4CIxeq0
-	fBOHi7Tg==;
-Received: from ip6-localhost ([::1]:58482 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=LIA5XOnOJBX+w2ruOqm+kbWk2vXV02oxBTBE8OSAOCg=; b=4qUyJ9y0sxwRlo4H5gTSEtyMiO
+	NTZV3NZK1IFYZBCl60cI7IbmnlZBexdG1mScRA+LTNpYzdrVF2CFaeDnAmSI9D+Bco65fzSFA2FVj
+	WVSPPkOJHlosLW7hRl903XoTb33AToosYC3jk35CSsNvYfn8sS6ycJAqykuzE1ydXrTNwCTzny4nT
+	S101t6P+AHeHhdLIY7DDwV65WLsPkXEy7OZo2odpEiL+3D9iCMPvpThJapXPTMcBvoRw4yGJ9EaCU
+	RVz3orUaRt/oGPWPO8SjLX+UqsNFJcoNSXq6+XRoF9YcDO8SYOHCSe6Vi+0YkNcJwFkSXuCb6Rcup
+	UAh3ImWg==;
+Received: from ip6-localhost ([::1]:43170 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1siwED-005bMG-IZ; Tue, 27 Aug 2024 13:27:21 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:23432) 
+	id 1sjG7v-005hsK-1I; Wed, 28 Aug 2024 10:42:11 +0000
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124]:26607) 
  by hr1.samba.org with esmtps
- (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1siwDu-005bL2-19
- for samba-technical@lists.samba.org; Tue, 27 Aug 2024 13:27:12 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=From:To:Date:Message-ID:CC;
- bh=GRFC4qU+WBTtzC9nsHlZCN3XrfMzadkfYtW5Tdfbndw=; b=pEMocEZqMeq7kjlGRkH3RQ9jpj
- mknOKBWdi+4oShTrtEhC2M5i0hSt7YinF7OYg4ssohej/wtTU4qfNs9Gq3pgJhKFbxFpZXFkYIv9h
- Rl9pltuEeu9kAcXHDzvLZDrQFvfYI7K3C67nhmCVbCazvUfPj4ntbSczcwXRR6bijJox6QowUdU+Z
- IoOQsK++VdDjEpg0BbRiBFLZReMB2aXy5yINvcNr277txuzE4F2h4nK4T+x44y/5gkydmSe9GNqrw
- 8M2oDpAqUtuwn8DHELyIxnAfgqROUfqf5+digYQNKfNWJUjEu/TweF1VwJA0DtDXf0U3wA6rmOyUw
- 96YsJeeehu5qEf1Dhm5Rq6yMzqe02VZRVjjXKdzlEHpohdWEHnD8/CnoPFJ11+kVxyMQ0vSMHqsMu
- bbGU/R1U58ELYAy1u2iKZtWWEVl4Uz0DSKIX/bRoNmR1kU7uTujyAUruicvubxJ+SBdUWhhPHJlEk
- i9a/5dS1KaeRpOZJW62EE3k2;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1siwDt-008aTK-03 for samba-technical@lists.samba.org;
- Tue, 27 Aug 2024 13:27:01 +0000
-Message-ID: <2c05c429-acc3-4063-8874-11a27a1fe27d@samba.org>
-Date: Tue, 27 Aug 2024 15:27:00 +0200
+ (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__AES_256_GCM:256) (Exim)
+ id 1sjG7o-005hsD-Gw
+ for samba-technical@lists.samba.org; Wed, 28 Aug 2024 10:42:07 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1724841721;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=LIA5XOnOJBX+w2ruOqm+kbWk2vXV02oxBTBE8OSAOCg=;
+ b=iKr/lGYds/FRiR9kunvZLzi9G4bCbi3v8EckBjfx8kgLTS33pn3bA3kUjWvIKnvTFHmcUf
+ IGJCl9umpmNOvTlE86kuvvOXN5b4cF0v+6W16HUoKchaKhbPMwEHMke8+26E2YJq9g8ulj
+ 39JIcR4D531agT7+Ix9zE5Jypb2Z5fU=
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1724841721;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=LIA5XOnOJBX+w2ruOqm+kbWk2vXV02oxBTBE8OSAOCg=;
+ b=iKr/lGYds/FRiR9kunvZLzi9G4bCbi3v8EckBjfx8kgLTS33pn3bA3kUjWvIKnvTFHmcUf
+ IGJCl9umpmNOvTlE86kuvvOXN5b4cF0v+6W16HUoKchaKhbPMwEHMke8+26E2YJq9g8ulj
+ 39JIcR4D531agT7+Ix9zE5Jypb2Z5fU=
+Received: from mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-70-4kX-rALdOvOQwzUKJ44Phg-1; Wed,
+ 28 Aug 2024 06:25:47 -0400
+X-MC-Unique: 4kX-rALdOvOQwzUKJ44Phg-1
+Received: from mx-prod-int-02.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-02.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.15])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 512581955D4E; Wed, 28 Aug 2024 10:25:45 +0000 (UTC)
+Received: from warthog.procyon.org.uk (unknown [10.42.28.30])
+ by mx-prod-int-02.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
+ id 39BD519560AA; Wed, 28 Aug 2024 10:25:42 +0000 (UTC)
+Organization: Red Hat UK Ltd. Registered Address: Red Hat UK Ltd, Amberley
+ Place, 107-111 Peascod Street, Windsor, Berkshire, SI4 1TE, United
+ Kingdom.
+ Registered in England and Wales under Company Registration No. 3798903
+In-Reply-To: <20240823132052.3f591f2f.ddiss@samba.org>
+References: <20240823132052.3f591f2f.ddiss@samba.org>
+ <Zk/ID+Ma3rlbCM1e@jeremy-HP-Z840-Workstation>
+ <CAN05THTB+7B0W8fbe_KPkF0C1eKfi_sPWYyuBVDrjQVbufN8Jg@mail.gmail.com>
+ <20240522185305.69e04dab@echidna> <349671.1716335639@warthog.procyon.org.uk>
+ <370800.1716374185@warthog.procyon.org.uk> <20240523145420.5bf49110@echidna>
+ <CAN05THRuP4_7FvOOrTxHcZXC4dWjjqStRLqS7G_iCAwU5MUNwQ@mail.gmail.com>
+ <476489.1716445261@warthog.procyon.org.uk>
+ <477167.1716446208@warthog.procyon.org.uk>
+ <6ea739f6-640a-4f13-a9a9-d41538be9111@talpey.com>
+ <af49124840aa5960107772673f807f88@manguebit.com>
+ <319947.1724365560@warthog.procyon.org.uk>
+To: David Disseldorp <ddiss@samba.org>
+Subject: Re: Bug in Samba's implementation of FSCTL_QUERY_ALLOCATED_RANGES?
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: de-DE, en-US
-To: samba-technical@lists.samba.org
-Subject: [Release Planning 4.21] Samba 4.21.0
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"
+Content-ID: <951876.1724840740.1@warthog.procyon.org.uk>
+Content-Transfer-Encoding: quoted-printable
+Date: Wed, 28 Aug 2024 11:25:40 +0100
+Message-ID: <951877.1724840740@warthog.procyon.org.uk>
+X-Scanned-By: MIMEDefang 3.0 on 10.30.177.15
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -57,24 +94,35 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jule Anger via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jule Anger <janger@samba.org>
+From: David Howells via samba-technical <samba-technical@lists.samba.org>
+Reply-To: David Howells <dhowells@redhat.com>
+Cc: Paulo Alcantara <pc@manguebit.com>, Tom Talpey <tom@talpey.com>,
+ linux-cifs@vger.kernel.org,
+ David Howells via samba-technical <samba-technical@lists.samba.org>,
+ dhowells@redhat.com, Steve French <sfrench@samba.org>,
+ Jeremy Allison <jra@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi,
+Hi David,
 
-Samba 4.21.0 is scheduled for Monday, September 2 2024.
+I tried to apply the patch to the Fedora samba rpm, but I get:
 
-https://wiki.samba.org/index.php/Release_Planning_for_Samba_4.21
-has been updated accordingly.
+mold: error: undefined symbol: torture_assert_size_equal
+>>> referenced by <artificial>
+>>>               /tmp/ccVA4FUD.ltrans35.ltrans.o:(test_ioctl_sparse_qar_t=
+runcated.lto_priv.0)
+>>> referenced by <artificial>
+>>>               /tmp/ccVA4FUD.ltrans35.ltrans.o:(test_ioctl_sparse_qar_t=
+runcated.lto_priv.0)
+>>> referenced by <artificial>
+>>>               /tmp/ccVA4FUD.ltrans35.ltrans.o:(test_ioctl_sparse_qar_t=
+runcated.lto_priv.0)
+collect2: error: ld returned 1 exit status
 
 
-Jule
+Do I actually need the torture test patch?
 
--- 
-Jule Anger
-Release Manager Samba Team  samba.org
-SerNet Samba Team           sernet.de
+David
 
 
