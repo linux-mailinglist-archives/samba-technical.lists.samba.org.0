@@ -2,67 +2,68 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 38EF596750C
-	for <lists+samba-technical@lfdr.de>; Sun,  1 Sep 2024 06:44:34 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 16C1F967C35
+	for <lists+samba-technical@lfdr.de>; Sun,  1 Sep 2024 22:51:09 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=aBtRKRMQWYzKZO+mGYF6UE6dJWp8UJ4hAbPEjFtpHqo=; b=6aqiSeE6NCWqy59oEb4VxZl3au
-	5WHz1WhZGVOPIOO/O/t/HoUz6SMIxRxuw1CXDNINrKUEAAVJh6DCoI9mZ3qOpSarNFn2fUPHMw/5b
-	dNCfWJhRZMK+XcvjlZRkyFE/25tXdMQWbWJCv48E73vCXN4nKVK9oPdBZ724oJTIyh8XxrrxhczQ5
-	9FW7MAhB8fe4488aw3FaBfFheOZkTWrkvdi+DDXl4HBMWcdKlbq7WinAwtbFcsArUGpFBLImdKsyI
-	6cMsj17EmlO0oR8AcY6BTr53SfhnyF0AH9Ls1f1tM8da/uXF75iQbUIHXsSAifunl/KBQd+IjKSpm
-	AsLHnSHA==;
-Received: from ip6-localhost ([::1]:65484 helo=hr1.samba.org) 
+	bh=nmvtuu/nnTTPB5TNvDIzqgJV2raybGXEoThCiuyR1CU=; b=2Ny3AHlYuzsUIMtF19azt0gGgK
+	7N1oBaS2HfNt6R/q63QjNQqO9Fm/2XZb80fWVnfreFpV7pYbxr2FJsjdATWbTHfv3PZ6KZamlMzqF
+	C4qOBSSstFfHmLrR2uIIL1ISNr+HerVm1mVl+Q8v/8flAFGf0fgeo0bIpcudiHDK/DopTqO8QJ7Vc
+	FGAyihCm14Px1LUkh/4BDQHIO4NhuxyWZcR0RFDgmY8pIbM7fDgd3xFeTb2GxD9bnfQ29uz3l3Ef4
+	Weq6g0BphV2QtgM77Xwbcqtqo5p4fVR57MtRoqlgphWpmIpgwHEqMBCYEVjlA2fabuJqN5msS7wjF
+	4PiDzHBA==;
+Received: from ip6-localhost ([::1]:26408 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1skcRv-007lYz-JY; Sun, 01 Sep 2024 04:44:28 +0000
-Received: from mail-lf1-x12c.google.com ([2a00:1450:4864:20::12c]:59899) 
+	id 1skrWn-007mxH-3q; Sun, 01 Sep 2024 20:50:29 +0000
+Received: from mail-lf1-x132.google.com ([2a00:1450:4864:20::132]:57661) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1skcRo-007lYF-3V
- for samba-technical@lists.samba.org; Sun, 01 Sep 2024 04:44:22 +0000
-Received: by mail-lf1-x12c.google.com with SMTP id
- 2adb3069b0e04-5334adf7249so4161332e87.3
- for <samba-technical@lists.samba.org>; Sat, 31 Aug 2024 21:44:19 -0700 (PDT)
+ (Exim) id 1skrWb-007mx9-0C
+ for samba-technical@lists.samba.org; Sun, 01 Sep 2024 20:50:26 +0000
+Received: by mail-lf1-x132.google.com with SMTP id
+ 2adb3069b0e04-533de5a88f8so3651021e87.3
+ for <samba-technical@lists.samba.org>; Sun, 01 Sep 2024 13:50:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1725165859; x=1725770659; darn=lists.samba.org;
+ d=gmail.com; s=20230601; t=1725223815; x=1725828615; darn=lists.samba.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=aBtRKRMQWYzKZO+mGYF6UE6dJWp8UJ4hAbPEjFtpHqo=;
- b=HdVQw2gwvHCZtvP1mOB8oXaq8f5XeBD1D8VL8rNJVS8a/lM07JIJH5Bn6/n9TpCUfS
- alp9kBPjNzAKKW8bRikcx2QbcpXnYcpc3UQgisZdw1CWSF1XX0KaIN1iMpEQkn4Yrjm6
- AX1ZUkVR4zKIcMjNtdkc6Kr8xzr6weSXgEtdSA0LLB9YmvfZrI3IH8ouVMUpzpG5Nf18
- eeT0xG4spEp77zBQHurXnc907+Kv1lFOHYlqdBL1SM/058gOVf64QZGT2l5UvIHz3EVE
- BThcJqoF/Kc70GRYIyQZlUGXL/4J0OY1YStoamLz0Fga3mbAhfCzEzu3ul3PVb5ygxjo
- V1Zw==
+ bh=nmvtuu/nnTTPB5TNvDIzqgJV2raybGXEoThCiuyR1CU=;
+ b=RtR5TpVB/59TFmN7HiTOMO3oFxnthO7dew07/TfTzgcH+QLtkCG2qNjkRvViolf33+
+ QQFqDvJVtmq6CFTo4StPFgSus05W+LXVUHsV3N8L5rRZIXPwXtq9ZRK/SqWR7iv7lQJJ
+ qTHou3eBMT8LILUXxbSxZcvPEg8hK9+550YDEpLr8NKvnct4sj1GaIReNfvB3GMig5Y9
+ itNHEGluiK9TeqMZaSHmnhQvpnq/z5htVWXOiLm18ZxJ4FtLGIq2pPREsPSpxdyIW5AK
+ s+2bKaJtL1KUjbIRDawcZTQoUky0MwzU1RJutrwYYjP3A4LV2EF2tdF3vP9aWQ0WcqPY
+ ANkg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725165859; x=1725770659;
+ d=1e100.net; s=20230601; t=1725223815; x=1725828615;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=aBtRKRMQWYzKZO+mGYF6UE6dJWp8UJ4hAbPEjFtpHqo=;
- b=Ck8qJZEcxhV7FuEpYMiYfjGvgTmtxJwEbOJ3BoSmnA/ANoo59hWibbFthdBYIN5j+x
- h5ZqfSLzO41TpN4ifgjE0pIl0JRrGJxRsGYRBehwWKTm3oxo+JdJBPnQElAp+RMwfb3y
- VUIm7ExWAQ9yifZt5b6uid9ZD99IBUS34oIsWAATKLRfNj2WWRVky7dasAA/OSj3KrbI
- EXio0JjnoY1D7Wkxtpop+/QvcQF5CkizEiIziVYTzJ71A5LO1ICjmubE/SsnPeivabLF
- 3P/aUMC/sKGXa4GTgKb05VBCkjY0H4vIaGiMIUSq3ImG7EJxoPVAZUYwl7H4yhl2q9sS
- MzPw==
+ bh=nmvtuu/nnTTPB5TNvDIzqgJV2raybGXEoThCiuyR1CU=;
+ b=sIl6rxUiv1gz5MRrjbSFF2kLe9geEX8QGg/iA4kk2FIgVbng1GKetcPKvFuPfmP/62
+ 4gjHoE/HJsRcIsnWKA+VYdd8EwRoxNV+18XTACHchMKv7kMb76Lddxd3vCPTF3MI/17n
+ iqygd6B4z91eN6jfPz92BoDVXZ54lf8vlbJoyNXJsOQurs7/DEneTmP+LpMZ5BYgJamc
+ R4Zv6EiEkRWonbwhiUb7u/0JThjjF3Evn0PynHYBqW60+Z9mhyUSHEnVYYkv+r/EtYbg
+ jgZjLhpWZiGiw0j2wPE3Ca15ncqyveAsj9FzOFpeSKTcBr3wXDi0ZB6EJEy7QDnnHjWs
+ 6rtw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVl9n2EkCxo6gYMCL+zGL9FdFRv42S7/fhAWce/famV8SeL4GS1BOuf/y1p2Xic2fMFW8IWY447KLOhv5CDB68=@lists.samba.org
-X-Gm-Message-State: AOJu0Yyj52zik44zR6pgasx3WuTlbr326UE+8Rmk23nuLP+szgLd/kgf
- 1rz1lYo72836yDOzRnr6nmTmLuu+iMsPkm5j4r3TU16Pn6Q1qDN3KmOQBQH20xnuqlnQ6avSS04
- i+zvxSYgyZDJYDpAFlQlVjRRGLc4=
-X-Google-Smtp-Source: AGHT+IFPecv30WQWJ10cN57Q/RGQoGMicgHiKPf3/lUr3fyGdydhdb5QraimYObk1KPkSWRX5zbkHO34p/i+7q/WlTY=
-X-Received: by 2002:a05:6512:3ba5:b0:530:ad8b:de11 with SMTP id
- 2adb3069b0e04-53546afd8dfmr3791376e87.9.1725165858324; Sat, 31 Aug 2024
- 21:44:18 -0700 (PDT)
+ AJvYcCU5kYriH5SHZt67wm4roBqe4mQe4wUe/phH7xAsQv1zkHTqGioXKMSNEUjp7km6xYg5wk/uoaFEvm1Q9VLYDyQ=@lists.samba.org
+X-Gm-Message-State: AOJu0Ywsp3mwte3hkMw5xePUBOQx52aK7PJVuXfaXbOUn08dOvUA09Ps
+ vkuWjgz5uxyZuarr5NOPuwAllCO3eKi04t2utlzr4+xfgap7oV3gbtzNFAZy3j+w+n3vUoKE+K8
+ 6Je3Rat7bL3Mv5OZTsyER2NAIT7A=
+X-Google-Smtp-Source: AGHT+IG/8AvC2IZQG8jqrB7dUuMYI9EscwxoJgIuyGSjXS7j3FsDwsUJazVMpgHaKq3g1u2kyX2l4lqKO5wzDzEgD9A=
+X-Received: by 2002:a05:6512:1382:b0:530:dab8:7dd6 with SMTP id
+ 2adb3069b0e04-53546ba7bffmr5010405e87.50.1725223814609; Sun, 01 Sep 2024
+ 13:50:14 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240829115241.3204608-1-liyuesong@vivo.com>
-In-Reply-To: <20240829115241.3204608-1-liyuesong@vivo.com>
-Date: Sat, 31 Aug 2024 23:44:07 -0500
-Message-ID: <CAH2r5mtBGfU-UFmzJv4YKPKQ==Zs+r6j2TG1m_uzAJm2GJJguQ@mail.gmail.com>
-Subject: Re: [PATCH v1] cifs: convert to use ERR_CAST()
-To: Yuesong Li <liyuesong@vivo.com>
+References: <20240901164002.117305-2-thorsten.blum@toblux.com>
+In-Reply-To: <20240901164002.117305-2-thorsten.blum@toblux.com>
+Date: Sun, 1 Sep 2024 15:50:03 -0500
+Message-ID: <CAH2r5msAs9Lm=jzWd=pYnK3r9iANSNRTqHvHxNjzsBucgq9Ktw@mail.gmail.com>
+Subject: Re: [RESEND PATCH] smb3: Use min() to improve _smbd_get_connection()
+To: Thorsten Blum <thorsten.blum@toblux.com>,
+ Shen Lichuan <shenlichuan@vivo.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
@@ -82,44 +83,57 @@ From: Steve French via samba-technical <samba-technical@lists.samba.org>
 Reply-To: Steve French <smfrench@gmail.com>
 Cc: pc@manguebit.com, tom@talpey.com, sprasad@microsoft.com,
  linux-cifs@vger.kernel.org, samba-technical@lists.samba.org,
- linux-kernel@vger.kernel.org, sfrench@samba.org, bharathsm@microsoft.com,
- opensource.kernel@vivo.com
+ linux-kernel@vger.kernel.org, sfrench@samba.org, bharathsm@microsoft.com
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-tentatively merged to cifs-2.6.git for-next-next (target for 6.12-rc)
-pending additional review and testing
+There is a similar patch in cifs-2.6.git for-next-next (for 6.12-rc) from
 
-On Thu, Aug 29, 2024 at 6:53=E2=80=AFAM Yuesong Li <liyuesong@vivo.com> wro=
-te:
+smfrench@smfrench-ThinkPad-P52:~/cifs-2.6$ git show
+commit a85383ccf515f82ad791f9bfe70b0e6fb5a2117f (HEAD ->
+for-next-next, origin/for-next-next)
+Author: Shen Lichuan <shenlichuan@vivo.com>
+Date:   Tue Aug 27 16:54:20 2024 +0800
+
+    smb: client: Use min() macro
+
+    Use the min() macro to simplify the function and improve
+    its readability.
+
+    Signed-off-by: Shen Lichuan <shenlichuan@vivo.com>
+    Signed-off-by: Steve French <stfrench@microsoft.com>
+
+On Sun, Sep 1, 2024 at 11:40=E2=80=AFAM Thorsten Blum <thorsten.blum@toblux=
+.com> wrote:
 >
-> Use ERR_CAST() as it is designed for casting an error pointer to
-> another type.
+> Use the min() macro to simplify the _smbd_get_connection() function and
+> improve its readability.
 >
-> This macro uses the __force and __must_check modifiers, which are used
-> to tell the compiler to check for errors where this macro is used.
->
-> Signed-off-by: Yuesong Li <liyuesong@vivo.com>
+> Signed-off-by: Thorsten Blum <thorsten.blum@toblux.com>
 > ---
->  fs/smb/client/connect.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+>  fs/smb/client/smbdirect.c | 6 ++----
+>  1 file changed, 2 insertions(+), 4 deletions(-)
 >
-> diff --git a/fs/smb/client/connect.c b/fs/smb/client/connect.c
-> index c1c14274930a..c51b536aa9ad 100644
-> --- a/fs/smb/client/connect.c
-> +++ b/fs/smb/client/connect.c
-> @@ -4069,7 +4069,7 @@ __cifs_construct_tcon(struct cifs_sb_info *cifs_sb,=
- kuid_t fsuid)
+> diff --git a/fs/smb/client/smbdirect.c b/fs/smb/client/smbdirect.c
+> index 7bcc379014ca..8f782edc3fd7 100644
+> --- a/fs/smb/client/smbdirect.c
+> +++ b/fs/smb/client/smbdirect.c
+> @@ -1585,10 +1585,8 @@ static struct smbd_connection *_smbd_get_connectio=
+n(
+>         conn_param.initiator_depth =3D 0;
 >
->         ses =3D cifs_get_smb_ses(master_tcon->ses->server, ctx);
->         if (IS_ERR(ses)) {
-> -               tcon =3D (struct cifs_tcon *)ses;
-> +               tcon =3D ERR_CAST(ses);
->                 cifs_put_tcp_session(master_tcon->ses->server, 0);
->                 goto out;
->         }
+>         conn_param.responder_resources =3D
+> -               info->id->device->attrs.max_qp_rd_atom
+> -                       < SMBD_CM_RESPONDER_RESOURCES ?
+> -               info->id->device->attrs.max_qp_rd_atom :
+> -               SMBD_CM_RESPONDER_RESOURCES;
+> +               min(info->id->device->attrs.max_qp_rd_atom,
+> +                   SMBD_CM_RESPONDER_RESOURCES);
+>         info->responder_resources =3D conn_param.responder_resources;
+>         log_rdma_mr(INFO, "responder_resources=3D%d\n",
+>                 info->responder_resources);
 > --
-> 2.34.1
+> 2.46.0
 >
 >
 
