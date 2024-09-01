@@ -2,65 +2,69 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id D91A496581E
-	for <lists+samba-technical@lfdr.de>; Fri, 30 Aug 2024 09:12:08 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 610D3967509
+	for <lists+samba-technical@lfdr.de>; Sun,  1 Sep 2024 06:44:21 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=LhByPWJGIPwskeK0ezj2Mx3vUl2irUaPibjCZEu92ac=; b=goQWcus7u3f/CiOe7CM0kIxN4i
-	YyhWaW2ynQSUsGRQUyoN8UeTD1Mm1FzZWeehTmp74bH3TewAyQG9UeZBXryqYo05zAVzr+2AIk5nm
-	yL9RmidNvC/HYWc3ULnom3u1rPVztZ1BHc8NhgUTY5zmjKmGFpOaZcv6XRBE6cumb537iBaiMHeKL
-	F5VxhOW4O6tPe3gMWN/CQfXTTNx8ZEt9hS5Yy68ggcnkzTWatCKwtv5dcpQvt6PEvImXNK1jDSQvC
-	wIm+gDs0hkP1opv2X2uO1j2flzdNZubdy1RFCvgjBrq8L90qgXn+ekcaZElED5CLB+m6EwA4Rv9m9
-	RnCgeZGw==;
-Received: from ip6-localhost ([::1]:64938 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=XB13jX7pqzNo9GSIstR/wq8ueYkysOGTG6QjGevDfZY=; b=aXs565pV+P6qRe6Fdx94FRXxq7
+	eB5CA8xIvVa+ZJ75VEdN+oaz5Gmh4BpsCV+Xdu1G00LESDT0UgAKVBHJiaflGua1FYCVV9iVrhdZM
+	3y+qyePyEcYSxqLjIKHkNolWz6KsAStAAP92Ipy+54+bcJov0ZFkf9EayMDuH2mtKO8Ji/eAY9ij3
+	0x6tNrwcZpu9F0egb63nIuRnIWEalkYDZvLkGTnmOfqx6QPs2kjAyc2FAcOmwy81iIReLgM2RxTPU
+	BbG6xX+pSkMUcefaUR1HDOUfpV7+4ulTIBVc0KoAYRypQG9oKf9yxkuwrc74PEKpmuTuu/o574Ymv
+	r05cgY8A==;
+Received: from ip6-localhost ([::1]:25848 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1sjvn6-005pEW-MQ; Fri, 30 Aug 2024 07:11:28 +0000
-Received: from mail-ed1-x535.google.com ([2a00:1450:4864:20::535]:58862) 
+	id 1skcR7-007lUp-QR; Sun, 01 Sep 2024 04:43:37 +0000
+Received: from mail-lf1-x12b.google.com ([2a00:1450:4864:20::12b]:47304) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1sjvmv-005pEP-AJ
- for samba-technical@lists.samba.org; Fri, 30 Aug 2024 07:11:20 +0000
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-5c0abaae174so1596292a12.1
- for <samba-technical@lists.samba.org>; Fri, 30 Aug 2024 00:11:16 -0700 (PDT)
+ (Exim) id 1skcR3-007lUi-Ax
+ for samba-technical@lists.samba.org; Sun, 01 Sep 2024 04:43:35 +0000
+Received: by mail-lf1-x12b.google.com with SMTP id
+ 2adb3069b0e04-53345dcd377so4200975e87.2
+ for <samba-technical@lists.samba.org>; Sat, 31 Aug 2024 21:43:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1725001875; x=1725606675; darn=lists.samba.org;
- h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=icXVHrzAzkisBCnSmmLuUTR2fS7DZ5X/XtWNPwr69rA=;
- b=WWLD6N7oLvrj46bMOrLonhVXFluQgI0UQitglRKxh1m5TS1LEmsuGyQkXT73kKSMt2
- YURzCGY2CxYY4j8UWc9i15Vi3/LHT9YDRwka2LqPk8s3VCndR2tTYA8A2VG5xInuMAxw
- 7Oq9/TqL1jcO9i8CIKT2Cx3v/GCLcpSkIq3N+pHaIamt+9oUjNu73+GoCHqW3A7PVT7K
- etBeY7oCY3/iFoYsiOcurk2GOnIbglzfdA5pT+Gjp6x+NpjN/VNbtWdGgKdlQ+H/UHsA
- jM3rMDbZBwInMefG2ma5KET261ki1e7CQlc+Y+a4DUOM9Lt9OGW6aErI4idnJj5q/5iX
- G8rA==
+ d=gmail.com; s=20230601; t=1725165812; x=1725770612; darn=lists.samba.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=XB13jX7pqzNo9GSIstR/wq8ueYkysOGTG6QjGevDfZY=;
+ b=gthsAdJjN85xoYsR5DBP+dWgcvXO1ccr2Pdx4l9LzHT84XN7lqtVkSRtL9EbIiihsX
+ /W43nyj5iR4UhBl9Zy7gf4P0mPfk8eTqEi6AcYr/owvxGEBvDFbRV5cUUQYRT/zoAdRU
+ UZGt8AOvr2TSemt2d7dq68Cr1Imfx6FLwtDbag/dG2OBsDKLUzYl/R0jRzQSfUWMbj6T
+ jpL8W8XvlTLbz+N1gmhF+g11hC1ewjyz9wME4IBniQMgkkv5rjHcoDo1KNfIKUYFUnjW
+ pRnVzBEHC/ilOG8edXe7yEcXd5NE9ODS6bwZ98dZAvOTJkDX3LxWDlShzxlWZODSQIVA
+ F5/A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725001875; x=1725606675;
- h=to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=icXVHrzAzkisBCnSmmLuUTR2fS7DZ5X/XtWNPwr69rA=;
- b=lSMg3rIDvbKQ6eoBf4Aqfy+hlvGmMqFD74qRoRbPNmZ6BJNRlhpIXIicfXHPBU13YH
- rQvWzMfqXJ5//PEWDQdRlf9+qVHWLkgvftukOY2xyg1uk47Tr/0U32gQV3bqxbz+QMgY
- mN0OiOcVL6ebvBsHb7XOebnCckWAm/hGRLboyUnRUgmPxluum2nHBMfCNRLwCJb8jGLt
- iYiG2FTwxoHuPY8Ch/unWBuaY2l1zbe2NuFeUUVQymFCEewD3yhlfEMSeMzLftCe/xpb
- r2BYhUuQtqjVJ6dr+p+CB9fiZk3VC5k9OHVuWlJAQ9h6DqgjDdjKvpCfE/VwTiiIVdsu
- inXQ==
-X-Gm-Message-State: AOJu0YyXgw6kqV0mzwoGcuvAHOEpSHLjxkVV5fLAUvW4WFDqoc2Ra86j
- KuHTqPe9hrkmyBrJQ9uA7BZ3/uvcMl5axFNMlaubmFDi2is0xB+yrMp+YwlMg9OEntjgb6O4EKq
- Gtqys4Bu+2pq5afbYYdGkSVjVs6Sk1+dSaL4=
-X-Google-Smtp-Source: AGHT+IGZtJMibxUnFZGu1nuO6Rp21ZUsGhKcpe3ALQYZ3VFj7w/tUBE1RjbhGvzCdy07rkQRPpQ3UcMwANhk9+xUWqw=
-X-Received: by 2002:a05:6402:234f:b0:5a1:1b3f:fbf5 with SMTP id
- 4fb4d7f45d1cf-5c21ed3e07cmr4413516a12.12.1725001874816; Fri, 30 Aug 2024
- 00:11:14 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1725165812; x=1725770612;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=XB13jX7pqzNo9GSIstR/wq8ueYkysOGTG6QjGevDfZY=;
+ b=dNhS4IFYELVeETK9Ttu0VsTn1k/kDKUoBdI4ejeB8XkQioMX2v37UmTPck0w8aVrD4
+ wjOkZ04gGliMm7v0/530muI9VV0+NqCX7gv6KkKQjXICwImydNy52fcMNn/B9EE/hH8A
+ Zm59vLqq4AcCJoZtpNhv+/gAr6SlPez3HNfsWwQ4kgHMxR4sEElASTrNkgLtAJRcOwgX
+ U4JVIffYRhadu9lthkyD8jYBznuA1n40IO+z2lqINd5Q7CQ6CqtYnX4nzqUGwegvL1zo
+ CA/XV21tKx8ObjddATgBJ/X0+6twbY9V98wTzqbFwBe8LCIaW5vum5kj1cCEIalYjRU8
+ EQEQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCV9heYhrjhRSuE2CeDyADM18zez5Ch+zveSC6wPwr/pIPcVkJQ5KsmQHWQRuHtqNhS5OE6sibva2bjLEOwuTmo=@lists.samba.org
+X-Gm-Message-State: AOJu0YyNXM/StRTaNlkdic/KI8DDqmSPhG1BXhZTxoSsMpX37L3V+A+E
+ SF9X5pFwBU/vDAwheVbff4PkUiK8++5AkWr9rvU+5G6/kQ7NrFqxJEJkeeMo2u7hS5GJxDnserH
+ 1loLTwMqbxZ0PO1lxj4U+c8UUXWk=
+X-Google-Smtp-Source: AGHT+IHu4y+uRiMhDn0qrmVune+00KaG6AT8nPwiLjbra3+fFieFK0+pk+mIHvbGu5xjBuCn1mALeBcQLNE4j/WlkzY=
+X-Received: by 2002:a05:6512:3c99:b0:52e:9f17:841a with SMTP id
+ 2adb3069b0e04-53546af3048mr5220331e87.6.1725165811310; Sat, 31 Aug 2024
+ 21:43:31 -0700 (PDT)
 MIME-Version: 1.0
-Date: Fri, 30 Aug 2024 10:11:03 +0300
-Message-ID: <CAAu4aPH0nJao+Nn808R=3S8e-quUHr4u9S+9tuqO4CUmq8MOwQ@mail.gmail.com>
-Subject: outgoing neighbors do not appear in drs showrepl when samba is
- located in a separate site
-To: samba-technical@lists.samba.org
+References: <20240827085420.76655-1-shenlichuan@vivo.com>
+In-Reply-To: <20240827085420.76655-1-shenlichuan@vivo.com>
+Date: Sat, 31 Aug 2024 23:43:20 -0500
+Message-ID: <CAH2r5mtEvkw-v6dr7KdxoA6kzhraEx06kosrYoD-p1kmkX7cgw@mail.gmail.com>
+Subject: Re: [PATCH v1] smb: client: Use min() macro
+To: Shen Lichuan <shenlichuan@vivo.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -74,18 +78,72 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Omnis ludis - games via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Omnis ludis - games <sergey.gortinsc17@gmail.com>
+From: Steve French via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Steve French <smfrench@gmail.com>
+Cc: pc@manguebit.com, tom@talpey.com, sprasad@microsoft.com,
+ linux-cifs@vger.kernel.org, samba-technical@lists.samba.org,
+ linux-kernel@vger.kernel.org, sfrench@samba.org, bharathsm@microsoft.com,
+ opensource.kernel@vivo.com
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hello, if you enter samba into the windows domain in a separate site where
-there is no one, then outgoing neighbors do not appear, maybe someone has
-encountered this problem? if anything, the sites are interconnected via
-site link and replication between them is set in the range of 15 minutes,
-there was also an attempt to make repadmin /kcc from windows and samba_kcc
---attempt-live-connections, but none of this led to success, I also noticed
-that the FromTo connection is hanging on the windows side, but still not on
-the samba side, maybe someone else can tell me if I=E2=80=99m looking at th=
-e source
-code in the netcmd/drs.py file correctly
+tentatively merged to cifs-2.6.git for-next-next (target for 6.12-rc)
+pending additional review and testing
+
+On Tue, Aug 27, 2024 at 3:54=E2=80=AFAM Shen Lichuan <shenlichuan@vivo.com>=
+ wrote:
+>
+> Use the min() macro to simplify the function and improve
+> its readability.
+>
+> Signed-off-by: Shen Lichuan <shenlichuan@vivo.com>
+> ---
+>  fs/smb/client/cifsacl.c   | 2 +-
+>  fs/smb/client/smbdirect.c | 8 +++-----
+>  2 files changed, 4 insertions(+), 6 deletions(-)
+>
+> diff --git a/fs/smb/client/cifsacl.c b/fs/smb/client/cifsacl.c
+> index f5b6df82e857..2f9a1bb6e21c 100644
+> --- a/fs/smb/client/cifsacl.c
+> +++ b/fs/smb/client/cifsacl.c
+> @@ -187,7 +187,7 @@ compare_sids(const struct cifs_sid *ctsid, const stru=
+ct cifs_sid *cwsid)
+>         /* compare all of the subauth values if any */
+>         num_sat =3D ctsid->num_subauth;
+>         num_saw =3D cwsid->num_subauth;
+> -       num_subauth =3D num_sat < num_saw ? num_sat : num_saw;
+> +       num_subauth =3D min(num_sat, num_saw);
+>         if (num_subauth) {
+>                 for (i =3D 0; i < num_subauth; ++i) {
+>                         if (ctsid->sub_auth[i] !=3D cwsid->sub_auth[i]) {
+> diff --git a/fs/smb/client/smbdirect.c b/fs/smb/client/smbdirect.c
+> index 7bcc379014ca..f307122b59fe 100644
+> --- a/fs/smb/client/smbdirect.c
+> +++ b/fs/smb/client/smbdirect.c
+> @@ -1584,11 +1584,9 @@ static struct smbd_connection *_smbd_get_connectio=
+n(
+>         memset(&conn_param, 0, sizeof(conn_param));
+>         conn_param.initiator_depth =3D 0;
+>
+> -       conn_param.responder_resources =3D
+> -               info->id->device->attrs.max_qp_rd_atom
+> -                       < SMBD_CM_RESPONDER_RESOURCES ?
+> -               info->id->device->attrs.max_qp_rd_atom :
+> -               SMBD_CM_RESPONDER_RESOURCES;
+> +       conn_param.responder_resources =3D
+> +               min(info->id->device->attrs.max_qp_rd_atom,
+> +                   SMBD_CM_RESPONDER_RESOURCES);
+>         info->responder_resources =3D conn_param.responder_resources;
+>         log_rdma_mr(INFO, "responder_resources=3D%d\n",
+>                 info->responder_resources);
+> --
+> 2.17.1
+>
+>
+
+
+--=20
+Thanks,
+
+Steve
+
