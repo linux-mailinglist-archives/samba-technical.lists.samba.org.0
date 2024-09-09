@@ -2,49 +2,66 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9AD77968735
-	for <lists+samba-technical@lfdr.de>; Mon,  2 Sep 2024 14:11:09 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B3430970AEF
+	for <lists+samba-technical@lfdr.de>; Mon,  9 Sep 2024 03:12:57 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
-	bh=lLVPDNWgry7YTD2gNaj11cW/+Snr0khDiL63VeEeGVI=; b=toSavGj9Jgbfq5cVVHbVJdOltQ
-	EK8Qn5fltvbExGk8KT+t1Qf6HkEZVNiecpy3NCSX6S23bBdMdaNe/562QH8zMHhjwafHIg2MEbTQl
-	Z6he825gcHbK8ENG5kJvrNIWeDQIuTUuHDzWtQQkfY5vLxquGi/Qr4TA9vSgj07Y55A4jhRcNcgFE
-	YkwZ7z3/GDuE5fnjUqCk1y5OIgmRP3+pzQxgK+Wzrvu89iztp3GuJu27s3QOsb6fMIBa0ahacoEug
-	Rnu6k+cGmfDAsnHx+KGUURe0iINllRf5WCdMUzY+yEipVYtLCevamJb//QsvTAUwAjrOYMWezJ2CW
-	89hMmrFg==;
-Received: from ip6-localhost ([::1]:19194 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=FC8DA1RitRFO9s2XSqQLDWC+hDdqNRLOBg1YLV6pXX0=; b=Vp8B5TRpHOPMan98muMfDS/wmN
+	Aw06HjDPrhrtFmYUdYq/Y7lsmyLuZUxwZmDN0a2ln/BMh3NDnmRwtnDSRI7h247ag0Cmht/nH1ga4
+	AMQpcDXfm/lL5zI1BKUWNBxR4rr++rWIzIqnQeCVpw+xzfOzywxnzlBMlNLZxbLeqxY8/A9fXmXVI
+	CCppmbIdrCnIRh4N4ySM42g6IqVgCIwJyhmRqEP15m+y57lxyLY0pBkGnRlNuo0skvPDazng01q/j
+	DC+JYrtxxwZ632Zu3LbTWVD0hEzUz5BXxw6hsX3qUi300/ovs7a6da7XN41VTv6vckzf4zKP6uQyE
+	cGd68owg==;
+Received: from ip6-localhost ([::1]:32622 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1sl5td-007pKw-AP; Mon, 02 Sep 2024 12:11:01 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:61492) 
+	id 1snSws-0088AG-F6; Mon, 09 Sep 2024 01:12:10 +0000
+Received: from mail-lf1-x12d.google.com ([2a00:1450:4864:20::12d]:61927) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1sl5tZ-007pKp-0o
- for samba-technical@lists.samba.org; Mon, 02 Sep 2024 12:10:59 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=From:To:Date:Message-ID:CC;
- bh=uzfCrfW/atUBW1ATct1OmHbSzU2fWFlUCk+2eYZSUBw=; b=nPPEhXmH7BF46FmkVG6G3FUpek
- lc6KoEQ3DARF1F641waR/+C9L8yv38j27oLDoX51QpvnrVjxsT5Ejufq+XHLSJEMizMrB68wZU5GT
- PMyjRgtCgF1cBeOOr4L+En591LgWMLpHkannGvAbulz9UTABninLsVhp7UViKmMzb0U4Ep1h8cE44
- xYjHz++ox3x4ATj828RwpbjDCFlQSzg4JFc/2PkpAPQbSewBV/4cj4m+pTRdFbjmA9zIHHFL7tR76
- 7pxvwaHKOEyODn2LNuDwuuhh2+rwi8YEZMm89GCR030zlItHzlblceHxGH7wvLZe74ZNI9XYUBxSx
- 61X2ISuEgNe6WVEG04o8ZGbrW2FltrK0+kZax/5KM1i6tNsjvwKxdIPI9ZKyAw83aemulSu2XhJVu
- Ul/6KCbT8YW3dT6dcR07M7Dx2AuYZyZYM61wWUijJ7KtR3BKgyf2f8ILlzF9oNZJzkX9UWy71k7Pm
- sT2aCSWxJMZ8H4TL4dlCDTwn;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1sl5tY-009dnI-0K for samba-technical@lists.samba.org;
- Mon, 02 Sep 2024 12:10:56 +0000
-Message-ID: <cde07380-47b5-4d2d-a0ac-8885555cbb9f@samba.org>
-Date: Mon, 2 Sep 2024 14:10:55 +0200
+ (Exim) id 1snSwn-0088A9-73
+ for samba-technical@lists.samba.org; Mon, 09 Sep 2024 01:12:07 +0000
+Received: by mail-lf1-x12d.google.com with SMTP id
+ 2adb3069b0e04-535dc4ec181so3399052e87.3
+ for <samba-technical@lists.samba.org>; Sun, 08 Sep 2024 18:12:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1725844323; x=1726449123; darn=lists.samba.org;
+ h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=FC8DA1RitRFO9s2XSqQLDWC+hDdqNRLOBg1YLV6pXX0=;
+ b=BppZf10UIJP55c47t4dSpQOUSD4NR/PXlzpokt3ivN5DY6DLCmo6CPhyfW2b4pPhf+
+ aptHHkDzw2rtItAYYGTV7uBkUZv1CLaEjJj6HGsOCM3mj/Z1et8d5moXc+ZV3OQMVNiK
+ o6z0YlbvUC6QfTf2E0Za0Y3TpO2hR+4UmMWUVXmgled6qrVDG5Y8C5BQCzQte8SKtqGX
+ SCYAV+/IsJ5NZrjR5c0itlVMI5MBbd3PmZgHp/dL8kiS7eV4ycOvIJ7/K3sbLpYqT2Tt
+ xZqwT6U6pomqGgm3nTvhaeGx+SQLREl/2DBWGzGKvWYwTOoGJrrYFDP6va1QUp3KZ46t
+ guGg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1725844323; x=1726449123;
+ h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=FC8DA1RitRFO9s2XSqQLDWC+hDdqNRLOBg1YLV6pXX0=;
+ b=IL7AuaxjYbRKNjFHqd0WNOno4bu1x4ig2YLILbjy9fWBx309aPTgCdGPs7RcN27bax
+ 9TL4TwD/WAJaN4h7zwQfsKs+r36G/2/eGJotV8Phb0VpqbuKpAFIlW9KYKOLryYwL5gZ
+ 9UHdjv3dj7D9/sL/kSzUTzCxYasLT9+oYTOjW/P4rtpnzC+59KGA4BgpUxv9ylQdA8n8
+ VFC8KDAMcEX+w1kXRvqTsU/GzbxN6FGqRJPnDMHADec6uIPnRXoH3NR0w0gwcsXY6Ulc
+ j6DnXLgRHfBSyxhYsPj9OmOKkwFNyce5k6XRzhc21XOEdv7htRZsJPVi96gpnPIElfUb
+ oxFw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCW4gqBQmrgsQRHgZ5qjwtz54vPtvDzwCPJP5gx8/+ig+7g7tqQSGPPmuOmuDCh5WUYIXIKM7AH7OMrRv8l3n1k=@lists.samba.org
+X-Gm-Message-State: AOJu0YxBe3lslMvqIBG1u56o1aC1jBBLmrfZNXlzUVkq3fu6rDPnVfad
+ QNZIEBOUct0CqSYLlyELVa4XE2VeRMcyzEVlqCH+ROu+d/SkM71BgSzaoVH3YCI8j/28EGigU0x
+ Tqqzhl7unqlf7LpJryHb1ZkeQPoo=
+X-Google-Smtp-Source: AGHT+IE06XlY3Aws/B4tNQpqklSEnl2D64bvLknSxCUR5e+FK74bGoMU+jMb2P3OyiEie2EPk1Y5QYA+3j4xUM3pT4g=
+X-Received: by 2002:a05:6512:2313:b0:535:3ca5:daa with SMTP id
+ 2adb3069b0e04-536587a54a5mr4830421e87.7.1725844322625; Sun, 08 Sep 2024
+ 18:12:02 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: de-DE, en-US
-To: samba-technical@lists.samba.org
-Subject: [Release Planning 4.21] Samba 4.21.1
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
+Date: Sun, 8 Sep 2024 20:11:51 -0500
+Message-ID: <CAH2r5mvVZrgVTdmxXwVVYrNkCS-QXQkMhwCA9At+mboiBvE-5g@mail.gmail.com>
+Subject: generic/236 test failure (failure to update ctime on hardlink) turned
+ out not to be a client issue
+To: CIFS <linux-cifs@vger.kernel.org>, 
+ samba-technical <samba-technical@lists.samba.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,29 +75,27 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jule Anger via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jule Anger <janger@samba.org>
+From: Steve French via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Steve French <smfrench@gmail.com>
+Cc: Paulo Alcantara <pc@manguebit.com>, David Howells <dhowells@redhat.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi,
+Was having problems reproducing the generic/236 ("Check ctime updated
+or not if file linked") failure that we saw on the buildbot to Windows
+(e.g. http://smb311-linux-testing.southcentralus.cloudapp.azure.com/#/builders/6/builds/67/steps/91/logs/stdio)
+but then found out that the issue was the clock was off on the test
+server VM.  When I reset the time in the Windows server VM properly
+the test now passes in our 'buildbot.'
 
-with today's release of Samba 4.21.0,
-- Samba 4.20 has been turned into the *maintenance mode* and
-- Samba 4.19 into the *security fixes only mode* (there will be a last 
-bugfix release in October).
-- Samba 4.18 is end of life now.
-
-
-Samba 4.21.1 is scheduled for Monday, October 14 2024.
-
-https://wiki.samba.org/index.php/Release_Planning_for_Samba_4.21
-has been updated accordingly.
-
-
-Jule
+The test (generic/236) still fails to Samba server but that is a
+server bug (Samba server reads ctime from mtime so you don't see ctime
+updated on hardlinks as expected), but at least this test works to
+Windows server, ksmbd server etc, and have confirmed that it is not a
+Linux client issue.
 
 -- 
-Jule Anger
-Release Manager Samba Team  samba.org
-SerNet Samba Team           sernet.de
+Thanks,
+
+Steve
+
