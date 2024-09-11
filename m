@@ -2,67 +2,67 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 81970972992
-	for <lists+samba-technical@lfdr.de>; Tue, 10 Sep 2024 08:32:12 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1331A975C5D
+	for <lists+samba-technical@lfdr.de>; Wed, 11 Sep 2024 23:27:34 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=QHHDxP8q1G6s76c8erH0zozRAfA5zWrhh1AM5ajLUl4=; b=6QOlCRkwn0KnqMeJtS9XuXuo1n
-	iU3Z30MVxNOr2m8d3nPwIS3raijtaB+VsWVWogmDfa+aBvrFlloPHim3wozHlvkZnwWo26UzB5Nx1
-	2pWKJ+XFsNISlDqTA/g4EDrxbAV52L+5flza/ygwSg9FkjaqdHkTyvto5GzGkrcLc2MYzvErOzCtD
-	NNwi8EAW/D1rqSNQyiKBXO6QA3z+WHL1HhZTT1l1X7GN6LWV9QQBReuGrVJupwFrifNPJQZGDlptc
-	f3xIzA6m5rgSSS2OkkR7K7XqyTm9ExTSuQLhtmkfRsoqafcBzHny8QXrpzF3FDxu6zrBVMkKWkANS
-	7qs4tOVg==;
-Received: from ip6-localhost ([::1]:26006 helo=hr1.samba.org) 
+	bh=sqtRh/pJ/kG5Ee3Qg3j3oLtps4VUqaM2CM4az1A8dtU=; b=BvgHqbFaxo4rLON5LiVHduuifk
+	vMKFxBEKmxqFap5LgpnEg6NDpQ2BTYG2uWiMsoJYR8i8OUKVQnzZjxmz+XIEnlp/zCBhyyAlRz5LL
+	UvrajR3Ze3XEAOHgoaYlw/toEzvNi+xEHMP91Db3wqGT/0zXNZRDssbPFngXV9Zbz5LuJ/BqiL06y
+	gzlOGcpTm9Dc3fTVWajOW3izZgR8sNiDL+grIHYTEWUw7C6HAEZ+/H7dJ7O1NWPaEKOXRpseBNtRF
+	ltaG9dT08sh2oXdqcnbxqKFsqtADQxoHIBYyCPiYwWuB513vC3C94a2s2czoMaAoNp6/ZSZs1nAOJ
+	OyC2CCTg==;
+Received: from ip6-localhost ([::1]:56270 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1snuQ0-008BTq-F5; Tue, 10 Sep 2024 06:32:05 +0000
-Received: from mail-lf1-x12c.google.com ([2a00:1450:4864:20::12c]:57624) 
+	id 1soUra-008I8p-5h; Wed, 11 Sep 2024 21:26:58 +0000
+Received: from mail-lf1-x133.google.com ([2a00:1450:4864:20::133]:42019) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1snuPr-008BSv-Ru
- for samba-technical@lists.samba.org; Tue, 10 Sep 2024 06:31:59 +0000
-Received: by mail-lf1-x12c.google.com with SMTP id
- 2adb3069b0e04-53658f30749so4297373e87.3
- for <samba-technical@lists.samba.org>; Mon, 09 Sep 2024 23:31:55 -0700 (PDT)
+ (Exim) id 1soUrU-008I8i-QU
+ for samba-technical@lists.samba.org; Wed, 11 Sep 2024 21:26:55 +0000
+Received: by mail-lf1-x133.google.com with SMTP id
+ 2adb3069b0e04-535694d67eeso253802e87.0
+ for <samba-technical@lists.samba.org>; Wed, 11 Sep 2024 14:26:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1725949915; x=1726554715; darn=lists.samba.org;
+ d=gmail.com; s=20230601; t=1726090011; x=1726694811; darn=lists.samba.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=QHHDxP8q1G6s76c8erH0zozRAfA5zWrhh1AM5ajLUl4=;
- b=N/jk8Y2x34GhMWTQylcRXdIChsaoahAFR17n2RDYYSF4O7rgkxL6KDDVfVytj9VXhv
- gNXOvxDfCxdt/eTOnIsFU5VWH5dw5dyIB57QKf6BcoA8CXmIVIOUBO0vsBgW4XMWaEcm
- a1xGSZ7Fk59SpblIcHUgllJaXY8tNnXVItN5XkW4QGX4hNKVMJcvhlv23ZrzsNAmiQd/
- NhJdm/kHYges4GMgffHkjBrn7MtwocQvVVpm9HTwtW2bczn00Y6EORV3TfWRpz0aPNO+
- CuWAZa+UpXAINdnh+bdypBlKA9ZjLLyQyPwFQ+uNIJrureSkjTTbkp72RNErDjIVWtgS
- WPZA==
+ bh=sqtRh/pJ/kG5Ee3Qg3j3oLtps4VUqaM2CM4az1A8dtU=;
+ b=Kgge2Ql6wQ+GMiDiEiuW9TvHu1EjcnqW6gxmb04RaGgxPdCxlWDAd4HlovW5vuPIXa
+ pq+3HAi9Obow4N7GPp1K9bUykjlME1cha7O4Q5THT98AbpK1WULxsBBuBjWKeD5TLR5G
+ 74MI4WBaWblL4mjTrZqZEKB42CaCEqFconmiyLKI5o79GNNugmwg1Cl87jGzPz5M0/FR
+ jw08qK39h9/GPrRTuy0nyIXIxzzgSGNJBGlhGXpozs0NWjXywuFg/sBkMlCyS9pE7mCA
+ q0UT8Ofr5M6ZMlCFWSkPacwD+nYecqRRSK6DHDGJlfmHlvea+X/EQ7JZeNCsHNz0JsKX
+ WyRA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725949915; x=1726554715;
+ d=1e100.net; s=20230601; t=1726090011; x=1726694811;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=QHHDxP8q1G6s76c8erH0zozRAfA5zWrhh1AM5ajLUl4=;
- b=tJhlmk7s4nFd6SWWavKMH2+fBrZhdC5Eru+f6Eh9eYgZvKnpmU8BcqPx3k4D3PUEx1
- atT9ASpxqAedzJ1gfTOugjHU5TCrbQwVp7sexcpsXPNxZcqsS6UTkDinxaoOKdWWEqbl
- sQlRfIKEV2pyPwZAZ/2EleE8oKQ7/kYD+Z6090BqDTqnbuJuvOWEP1EXAkKnb7OhZSfJ
- VaxXdXLGMgT6PnGWajcUsvfrGv7FpCsmGAeYS5e2rLgIR/M3N9+llCEqyldiWkAkdOoE
- IpsgKju5HtATrazM6Eao8vmDMVxxiRRC6hLofYfh0X0H1H2hwWo19hWcTBsM5+TQ4QPp
- sn4w==
+ bh=sqtRh/pJ/kG5Ee3Qg3j3oLtps4VUqaM2CM4az1A8dtU=;
+ b=PSD1CdkmGMSdfgKZiJwtLCutbir8uJXGXvSzwgkNpW/EVSppLELiVOlYvUMbObVmwb
+ bDEDdQRRCKVXVwQzuR7uXEEUOhtZH17YoEpLakvO7U0HUdewh9xDZ1WfVltMdFX74Tzk
+ ltdbdE6Vicgw1oQUNTL6bNELcfrQs6HM2kCVtADpXX0fkB8yrVVEKB3i79CGGVhnSK75
+ 4qY01+tVhgX60cFqNvMJVJMiVKdw307rGxEON1durRotDVFuS8VH5d7TAaVnJzO+Ma5A
+ gsRV95zGCQWW1sp6VrX7zsax/wCgsImPfyNzHdZwSU3Dy6kO8ay5JAk2zadypRAwD748
+ zYdg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWcUPH3RA9B0v0fHSjYoTJGH0C4K1EnMHtb+tu/l2RVu4B5UuUXOKFnobiLkHTS7tAlWJJc8PaWo/5fgMUZHg0=@lists.samba.org
-X-Gm-Message-State: AOJu0YxL2rxF9LMup5abRFwcxuaOmDH54E8nsgS1G7S97jo3wdhkI2lt
- Vod0wxgBVjElBvO55v1G9I2RzmCMyOOcK2u3b38zJdh0NqzAsQkTkeSrZb9+hPQLag5MIvGoUDa
- 7tOj7hazWoflrFhU399PqHeMQAMg=
-X-Google-Smtp-Source: AGHT+IH+7EEc+C2nGHJwLNTOiThWrJQIkEF3cND3sycvQdbIm3Qrf4Plp+uRx9QJO0EjbFk8/NH4qpMM4wHQbWeDI/U=
-X-Received: by 2002:a05:6512:1395:b0:52e:764b:b20d with SMTP id
- 2adb3069b0e04-536587b4d0emr7807964e87.28.1725949914702; Mon, 09 Sep 2024
- 23:31:54 -0700 (PDT)
+ AJvYcCVYZUmuSxNf4fmoUA5/+9+d6fdpBJaLDu6JSqZcyczXjr/VQBmbhWTgbi9ucQT8JrBjzKX6JcLB2f8NGbQomL8=@lists.samba.org
+X-Gm-Message-State: AOJu0YyPl7CBVQpdWzxmRwOpcl1l6qYe5/tRim2GDCEv0EdKC3WEs8CA
+ 0BM9oi/NcC0LmLnTJUxaRZNRYmVb6/s29O8u5KDiZXN0eDRyBm+iYryUz1AV7CMAXqh5HWKAL9S
+ fGra6qGDoDYOy7+n6Q8BQBpSNL4w=
+X-Google-Smtp-Source: AGHT+IFC8+ySnmybQlygTyoRyhYMxq7uAqdH0Tu9Gl/JShGnHyNqwXrbsLhR7L3k9aYMEkxezsOAaYTLJ7OjHjnL66A=
+X-Received: by 2002:a05:6512:12cb:b0:52f:27e:a82e with SMTP id
+ 2adb3069b0e04-5367909dca5mr192274e87.21.1726090010686; Wed, 11 Sep 2024
+ 14:26:50 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240829115241.3204608-1-liyuesong@vivo.com>
-In-Reply-To: <20240829115241.3204608-1-liyuesong@vivo.com>
-Date: Tue, 10 Sep 2024 01:31:43 -0500
-Message-ID: <CAH2r5mt4TNMYe73UJCA_VLXMCm+5p48yDL7dEprJc4fgr0+tsA@mail.gmail.com>
-Subject: Re: [PATCH v1] cifs: convert to use ERR_CAST()
-To: Yuesong Li <liyuesong@vivo.com>
+References: <20240910151418.1233049-2-u.kleine-koenig@baylibre.com>
+In-Reply-To: <20240910151418.1233049-2-u.kleine-koenig@baylibre.com>
+Date: Wed, 11 Sep 2024 16:26:39 -0500
+Message-ID: <CAH2r5mu_PT+34JqL7O6yqfDua=6NNU+AP4+n56FJSc1X5Rpp3Q@mail.gmail.com>
+Subject: Re: [PATCH] smb3: Fix complilation for gcc9
+To: =?UTF-8?Q?Uwe_Kleine=2DK=C3=B6nig?= <u.kleine-koenig@baylibre.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
@@ -80,43 +80,96 @@ List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
 From: Steve French via samba-technical <samba-technical@lists.samba.org>
 Reply-To: Steve French <smfrench@gmail.com>
-Cc: pc@manguebit.com, linux-cifs@vger.kernel.org,
- samba-technical@lists.samba.org, opensource.kernel@vivo.com
+Cc: Paulo Alcantara <pc@manguebit.com>, Tom Talpey <tom@talpey.com>,
+ Shyam Prasad N <sprasad@microsoft.com>, linux-cifs@vger.kernel.org,
+ Enzo Matsumiya <ematsumiya@suse.de>, samba-technical@lists.samba.org,
+ linux-kernel@vger.kernel.org, Steve French <sfrench@samba.org>,
+ Bharath SM <bharathsm@microsoft.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-merged into cifs-2.6.git for-next
+this looks like it doesn't apply anymore due to changes in "smb:
+client: compress: LZ77 code improvements cleanup"
 
-On Thu, Aug 29, 2024 at 6:53=E2=80=AFAM Yuesong Li <liyuesong@vivo.com> wro=
-te:
+Let me know if you see any problems building the current for-next
+
+13b68d44990d (HEAD -> for-next, origin/for-next) smb: client:
+compress: LZ77 code improvements cleanup
+1dcb0b607b9b smb: client: insert compression check/call on write requests
+ee71379301eb smb3: mark compression as CONFIG_EXPERIMENTAL and fix
+missing compression operation
+
+Enzo,
+Is it easier for you to update patch 1 and 3, to make it smaller so
+you don't have to add code in patch 1 that you remove in patch 3?
+Also let me know if other patches to try?
+
+On Tue, Sep 10, 2024 at 10:14=E2=80=AFAM Uwe Kleine-K=C3=B6nig
+<u.kleine-koenig@baylibre.com> wrote:
 >
-> Use ERR_CAST() as it is designed for casting an error pointer to
-> another type.
+> Compiling an x86_64 allmodconfig on Ubuntu 20.04.6 using gcc Ubuntu
+> 9.4.0-1ubuntu1~20.04.2) 9.4.0 fails as follows:
 >
-> This macro uses the __force and __must_check modifiers, which are used
-> to tell the compiler to check for errors where this macro is used.
+>         $ make fs/smb/client/compress/lz77.o
+>         ...
+>           CC [M]  fs/smb/client/compress/lz77.o
+>         In file included from fs/smb/client/compress/lz77.c:10:
+>         fs/smb/client/compress/lz77.h: In function =E2=80=98__count_commo=
+n_bytes=E2=80=99:
+>         fs/smb/client/compress/lz77.h:220:1: error: no return statement i=
+n function returning non-void [-Werror=3Dreturn-type]
+>           220 | }
+>               | ^
+>         cc1: all warnings being treated as errors
+>         make[5]: *** [scripts/Makefile.build:244: fs/smb/client/compress/=
+lz77.o] Error 1
+>         make[4]: *** [scripts/Makefile.build:485: fs/smb/client] Error 2
+>         make[3]: *** [scripts/Makefile.build:485: fs/smb] Error 2
+>         make[2]: *** [scripts/Makefile.build:485: fs] Error 2
+>         make[1]: *** [Makefile:1926: .] Error 2
+>         make: *** [Makefile:224: __sub-make] Error 2
 >
-> Signed-off-by: Yuesong Li <liyuesong@vivo.com>
+> That compiler seems to know about __has_builtin but not to have
+> __builtin_ctzll. In that case fall back to the implementation that is
+> also active in the #ifndef __has_builtin case.
+>
+> Fixes: 0fa8d04ff36d ("smb3: mark compression as CONFIG_EXPERIMENTAL and f=
+ix missing compression operation")
+> Signed-off-by: Uwe Kleine-K=C3=B6nig <u.kleine-koenig@baylibre.com>
 > ---
->  fs/smb/client/connect.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+> Hello,
 >
-> diff --git a/fs/smb/client/connect.c b/fs/smb/client/connect.c
-> index c1c14274930a..c51b536aa9ad 100644
-> --- a/fs/smb/client/connect.c
-> +++ b/fs/smb/client/connect.c
-> @@ -4069,7 +4069,7 @@ __cifs_construct_tcon(struct cifs_sb_info *cifs_sb,=
- kuid_t fsuid)
+> feel free to squash this into the original commit.
 >
->         ses =3D cifs_get_smb_ses(master_tcon->ses->server, ctx);
->         if (IS_ERR(ses)) {
-> -               tcon =3D (struct cifs_tcon *)ses;
-> +               tcon =3D ERR_CAST(ses);
->                 cifs_put_tcp_session(master_tcon->ses->server, 0);
->                 goto out;
->         }
+> Best regards
+> Uwe
+>
+>  fs/smb/client/compress/lz77.h | 4 +---
+>  1 file changed, 1 insertion(+), 3 deletions(-)
+>
+> diff --git a/fs/smb/client/compress/lz77.h b/fs/smb/client/compress/lz77.=
+h
+> index 3d0d3eaa8ffb..4fb939296f39 100644
+> --- a/fs/smb/client/compress/lz77.h
+> +++ b/fs/smb/client/compress/lz77.h
+> @@ -200,10 +200,8 @@ static __always_inline long lz77_copy(u8 *dst, const=
+ u8 *src, size_t count)
+>
+>  static __always_inline unsigned int __count_common_bytes(const unsigned =
+long diff)
+>  {
+> -#ifdef __has_builtin
+> -#  if __has_builtin(__builtin_ctzll)
+> +#if defined(__has_builtin) && __has_builtin(__builtin_ctzll)
+>         return (unsigned int)__builtin_ctzll(diff) >> 3;
+> -#  endif
+>  #else
+>         /* count trailing zeroes */
+>         unsigned long bits =3D 0, i, z =3D 0;
+>
+> base-commit: 6708132e80a2ced620bde9b9c36e426183544a23
 > --
-> 2.34.1
+> 2.45.2
 >
 >
 
