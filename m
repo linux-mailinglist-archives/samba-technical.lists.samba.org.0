@@ -2,69 +2,48 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1331A975C5D
-	for <lists+samba-technical@lfdr.de>; Wed, 11 Sep 2024 23:27:34 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 081B2976C60
+	for <lists+samba-technical@lfdr.de>; Thu, 12 Sep 2024 16:44:08 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=sqtRh/pJ/kG5Ee3Qg3j3oLtps4VUqaM2CM4az1A8dtU=; b=BvgHqbFaxo4rLON5LiVHduuifk
-	vMKFxBEKmxqFap5LgpnEg6NDpQ2BTYG2uWiMsoJYR8i8OUKVQnzZjxmz+XIEnlp/zCBhyyAlRz5LL
-	UvrajR3Ze3XEAOHgoaYlw/toEzvNi+xEHMP91Db3wqGT/0zXNZRDssbPFngXV9Zbz5LuJ/BqiL06y
-	gzlOGcpTm9Dc3fTVWajOW3izZgR8sNiDL+grIHYTEWUw7C6HAEZ+/H7dJ7O1NWPaEKOXRpseBNtRF
-	ltaG9dT08sh2oXdqcnbxqKFsqtADQxoHIBYyCPiYwWuB513vC3C94a2s2czoMaAoNp6/ZSZs1nAOJ
-	OyC2CCTg==;
-Received: from ip6-localhost ([::1]:56270 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=teklIScTz8cpi7D+lxRSYAqGeTz2FE9plHf+jEFXVvk=; b=ho6HV2/Fw7LzXXom/Th7xGPXna
+	Lc3S/lGGCQReWptjvaGDecjL1iPFObQKk8lCRcHF358tuBmiSd1U5dLCyFtNz7nf+9iMW18zKPW56
+	BLBNYiL27OBNOrt/vrIZXZsDgM/0ABupfpndzVji4Hm8nyIAwqF/NVc8FzgJDvYu8jwbrT9VY2PUg
+	ZO2dCjcl76ISPs7eIaUnVA++Ivx0okmYu6weJqURLx72Bl+TGP4d5tqX74b94bLjJOR3/0pSb710/
+	zATngj1qaaHVQuiYbqHk/VyRs4Dis5q0doHbiNbi3BnyCAavVpI2D61xgHPk75hJDxI9xxP0ArZmu
+	taQf4nrw==;
+Received: from ip6-localhost ([::1]:54710 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1soUra-008I8p-5h; Wed, 11 Sep 2024 21:26:58 +0000
-Received: from mail-lf1-x133.google.com ([2a00:1450:4864:20::133]:42019) 
+	id 1sol2h-008KTa-2j; Thu, 12 Sep 2024 14:43:31 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:11200) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1soUrU-008I8i-QU
- for samba-technical@lists.samba.org; Wed, 11 Sep 2024 21:26:55 +0000
-Received: by mail-lf1-x133.google.com with SMTP id
- 2adb3069b0e04-535694d67eeso253802e87.0
- for <samba-technical@lists.samba.org>; Wed, 11 Sep 2024 14:26:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1726090011; x=1726694811; darn=lists.samba.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=sqtRh/pJ/kG5Ee3Qg3j3oLtps4VUqaM2CM4az1A8dtU=;
- b=Kgge2Ql6wQ+GMiDiEiuW9TvHu1EjcnqW6gxmb04RaGgxPdCxlWDAd4HlovW5vuPIXa
- pq+3HAi9Obow4N7GPp1K9bUykjlME1cha7O4Q5THT98AbpK1WULxsBBuBjWKeD5TLR5G
- 74MI4WBaWblL4mjTrZqZEKB42CaCEqFconmiyLKI5o79GNNugmwg1Cl87jGzPz5M0/FR
- jw08qK39h9/GPrRTuy0nyIXIxzzgSGNJBGlhGXpozs0NWjXywuFg/sBkMlCyS9pE7mCA
- q0UT8Ofr5M6ZMlCFWSkPacwD+nYecqRRSK6DHDGJlfmHlvea+X/EQ7JZeNCsHNz0JsKX
- WyRA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726090011; x=1726694811;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=sqtRh/pJ/kG5Ee3Qg3j3oLtps4VUqaM2CM4az1A8dtU=;
- b=PSD1CdkmGMSdfgKZiJwtLCutbir8uJXGXvSzwgkNpW/EVSppLELiVOlYvUMbObVmwb
- bDEDdQRRCKVXVwQzuR7uXEEUOhtZH17YoEpLakvO7U0HUdewh9xDZ1WfVltMdFX74Tzk
- ltdbdE6Vicgw1oQUNTL6bNELcfrQs6HM2kCVtADpXX0fkB8yrVVEKB3i79CGGVhnSK75
- 4qY01+tVhgX60cFqNvMJVJMiVKdw307rGxEON1durRotDVFuS8VH5d7TAaVnJzO+Ma5A
- gsRV95zGCQWW1sp6VrX7zsax/wCgsImPfyNzHdZwSU3Dy6kO8ay5JAk2zadypRAwD748
- zYdg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVYZUmuSxNf4fmoUA5/+9+d6fdpBJaLDu6JSqZcyczXjr/VQBmbhWTgbi9ucQT8JrBjzKX6JcLB2f8NGbQomL8=@lists.samba.org
-X-Gm-Message-State: AOJu0YyPl7CBVQpdWzxmRwOpcl1l6qYe5/tRim2GDCEv0EdKC3WEs8CA
- 0BM9oi/NcC0LmLnTJUxaRZNRYmVb6/s29O8u5KDiZXN0eDRyBm+iYryUz1AV7CMAXqh5HWKAL9S
- fGra6qGDoDYOy7+n6Q8BQBpSNL4w=
-X-Google-Smtp-Source: AGHT+IFC8+ySnmybQlygTyoRyhYMxq7uAqdH0Tu9Gl/JShGnHyNqwXrbsLhR7L3k9aYMEkxezsOAaYTLJ7OjHjnL66A=
-X-Received: by 2002:a05:6512:12cb:b0:52f:27e:a82e with SMTP id
- 2adb3069b0e04-5367909dca5mr192274e87.21.1726090010686; Wed, 11 Sep 2024
- 14:26:50 -0700 (PDT)
+ (Exim) id 1sol2Z-008KTB-Hv; Thu, 12 Sep 2024 14:43:26 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=To:From:Date:Message-ID:CC;
+ bh=teklIScTz8cpi7D+lxRSYAqGeTz2FE9plHf+jEFXVvk=; b=H/hIBuUiO0VY1kjzsFAZDnUuxP
+ yIdNvTinWugzo4U92PnT1mcYpvAhr+OJtOr81vMcNM5AOOXGeT5Fo5PTzM5BhgVyf+GpK6WinH3wW
+ 1N4BUgIGnK2Qm7HDd2vHgLSmL3r3XMYkYnUvsrpVLAatDAuYRu6T0ChsIH4QQT+CGwHVokyubYDQS
+ 1BHv52oY2iqDcgUn4sP32tpMEOKWM72abKwwKWnUhG+tTPiSTh/6whSIcaviLw31jfCcm2ZWMdMXO
+ AQiq7mQiSZnSKXCDztWoKospZKLUy9IC9dChww/SiR1SepHv46KX9JwJhA7upRAuhaa2bwtEI/ndZ
+ 9pIzE3szAhZuFcQ5oOk8cUBNAOMxXhIHN55o7ocope4gfU6MWSNn5qNlXIJ884ByldyA6NGURj7WD
+ 5gAA64+bn1jF/vk9Lcvr8ogIFUNi1BXKnF96VV1PFvw0HnzgYUugBVW8AgDv7rOMOv+X8FiCMtnRp
+ pL2ErL8I2YUz5Jej98/MINd9;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1sol2X-00BtSX-2L; Thu, 12 Sep 2024 14:43:21 +0000
+Message-ID: <be66c54e-7e37-4bac-8d7c-efde20d22d48@samba.org>
+Date: Thu, 12 Sep 2024 16:43:20 +0200
 MIME-Version: 1.0
-References: <20240910151418.1233049-2-u.kleine-koenig@baylibre.com>
-In-Reply-To: <20240910151418.1233049-2-u.kleine-koenig@baylibre.com>
-Date: Wed, 11 Sep 2024 16:26:39 -0500
-Message-ID: <CAH2r5mu_PT+34JqL7O6yqfDua=6NNU+AP4+n56FJSc1X5Rpp3Q@mail.gmail.com>
-Subject: Re: [PATCH] smb3: Fix complilation for gcc9
-To: =?UTF-8?Q?Uwe_Kleine=2DK=C3=B6nig?= <u.kleine-koenig@baylibre.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US, de-DE
+Subject: Samba secures funding from Sovereign Tech Fund
+To: sambalist <samba@lists.samba.org>,
+ samba-technical <samba-technical@lists.samba.org>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------NPAH4LnK0V0kSNu58Pvih0Cg"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -78,104 +57,85 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
-Cc: Paulo Alcantara <pc@manguebit.com>, Tom Talpey <tom@talpey.com>,
- Shyam Prasad N <sprasad@microsoft.com>, linux-cifs@vger.kernel.org,
- Enzo Matsumiya <ematsumiya@suse.de>, samba-technical@lists.samba.org,
- linux-kernel@vger.kernel.org, Steve French <sfrench@samba.org>,
- Bharath SM <bharathsm@microsoft.com>
+From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Ralph Boehme <slow@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-this looks like it doesn't apply anymore due to changes in "smb:
-client: compress: LZ77 code improvements cleanup"
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------NPAH4LnK0V0kSNu58Pvih0Cg
+Content-Type: multipart/mixed; boundary="------------47Qns4VqntKfTtWthrcnP0JI";
+ protected-headers="v1"
+From: Ralph Boehme <slow@samba.org>
+To: sambalist <samba@lists.samba.org>,
+ samba-technical <samba-technical@lists.samba.org>
+Message-ID: <be66c54e-7e37-4bac-8d7c-efde20d22d48@samba.org>
+Subject: Samba secures funding from Sovereign Tech Fund
 
-Let me know if you see any problems building the current for-next
+--------------47Qns4VqntKfTtWthrcnP0JI
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
 
-13b68d44990d (HEAD -> for-next, origin/for-next) smb: client:
-compress: LZ77 code improvements cleanup
-1dcb0b607b9b smb: client: insert compression check/call on write requests
-ee71379301eb smb3: mark compression as CONFIG_EXPERIMENTAL and fix
-missing compression operation
+SGVsbG8gU2FtYmFpc3RhcyENCg0KU29tZSBvZiB5b3UgaGF2ZSBhbHJlYWR5IG5vdGljZWQg
+dGhlIGV4Y2l0aW5nIG5ld3MgdGhhdCBJJ2QgbGlrZSB0byANCmhlcmVieSBzaGFyZSB3aXRo
+IGFsbCBvZiB5b3U6DQoNClRoZSBTYW1iYSBwcm9qZWN0IGhhcyBzZWN1cmVkIHNpZ25pZmlj
+YW50IGZ1bmRpbmcgWzFdIGZyb20gdGhlIEdlcm1hbiANClNvdmVyZWlnbiBUZWNoIEZ1bmQg
+KFNURikgdG8gYWR2YW5jZSB0aGUgcHJvamVjdC4gVGhlIGludmVzdG1lbnQgd2FzIA0Kc3Vj
+Y2Vzc2Z1bGx5IGFwcGxpZWQgZm9yIGJ5IFNlck5ldC4gT3ZlciB0aGUgbmV4dCAxOCBtb250
+aHMsIFNhbWJhIA0KZGV2ZWxvcGVycyBmcm9tIFNlck5ldCB3aWxsIHRhY2tsZSAxNyBrZXkg
+ZGV2ZWxvcG1lbnQgc3VicHJvamVjdHMgYWltZWQgDQphdCBlbmhhbmNpbmcgU2FtYmHigJlz
+IHNlY3VyaXR5LCBzY2FsYWJpbGl0eSwgYW5kIGZ1bmN0aW9uYWxpdHkuDQoNClRoZSBTb3Zl
+cmVpZ24gVGVjaCBGdW5kIGlzIGEgR2VybWFuIGZlZGVyYWwgZ292ZXJubWVudCBmdW5kaW5n
+IHByb2dyYW0gDQp0aGF0IHN1cHBvcnRzIHRoZSBkZXZlbG9wbWVudCwgaW1wcm92ZW1lbnQs
+IGFuZCBtYWludGVuYW5jZSBvZiBvcGVuIA0KZGlnaXRhbCBpbmZyYXN0cnVjdHVyZS4gVGhl
+aXIgZ29hbCBpcyB0byBzdXN0YWluYWJseSBzdHJlbmd0aGVuIHRoZSBvcGVuIA0Kc291cmNl
+IGVjb3N5c3RlbS4gWzJdDQoNClRoZSBwcm9qZWN0J3MgZm9jdXMgaXMgb24gYXJlYXMgbGlr
+ZSBTTUIzIFRyYW5zcGFyZW50IEZhaWxvdmVyLCBTTUIzIA0KVU5JWCBleHRlbnNpb25zLCBT
+TUItRGlyZWN0LCBQZXJmb3JtYW5jZSBhbmQgbW9kZXJuIHNlY3VyaXR5IHByb3RvY29scyAN
+CnN1Y2ggYXMgU01CIG92ZXIgUVVJQy4gVGhlc2UgaW1wcm92ZW1lbnRzIGFyZSBkZXNpZ25l
+ZCB0byBlbnN1cmUgdGhhdCANClNhbWJhIHJlbWFpbnMgYSByb2J1c3QgYW5kIHNlY3VyZSBz
+b2x1dGlvbiBmb3Igb3JnYW5pemF0aW9ucyB0aGF0IHJlbHkgDQpvbiBhIHNvdmVyZWlnbiBJ
+VCBpbmZyYXN0cnVjdHVyZS4gRGV2ZWxvcG1lbnQgd29yayBiZWdhbiBhcyBlYXJseSBhcyAN
+ClNlcHRlbWJlciB0aGUgMXN0IGFuZCBpcyBleHBlY3RlZCB0byBiZSBjb21wbGV0ZWQgYnkg
+dGhlIGVuZCBvZiBGZWJydWFyeSANCjIwMjYgZm9yIGFsbCBzdWJwcm9qZWN0cy4NCg0KQWxs
+IGRldmVsb3BtZW50IHdpbGwgYmUgZG9uZSBpbiB0aGUgb3BlbiBmb2xsb3dpbmcgdGhlIGV4
+aXN0aW5nIFNhbWJhIA0KZGV2ZWxvcG1lbnQgcHJvY2Vzcy4gRmlyc3QgZ2l0bGFiIENJIHBp
+cGVsaW5lcyBoYXZlIGFscmVhZHkgYmVlbiBydW5uaW5nIA0KWzRdIGFuZCBnaXRsYWIgTVJz
+IHdpbGwgYXBwZWFyIHNvb24hDQoNCldpdGggYSBncmVhdCBkZXZlbG9wbWVudCB0ZWFtLCBJ
+IGFtIGxvb2tpbmcgZm9yd2FyZCB0byBzaWduaWZpY2FudGx5IA0KaW1wcm92aW5nIFNhbWJh
+IG92ZXIgdGhlIG5leHQgMTggbW9udGhzIGFuZCBjYW4ndCB3YWl0IHRvIHNlZSB0aGUgDQpm
+ZWF0dXJlIGluIHRoZSBoYW5kcyBvZiBvdXIgdXNlcnMhDQoNCkNoZWVycyENCi1zbG93DQoN
+ClsxXSA8aHR0cHM6Ly93d3cuc292ZXJlaWdudGVjaGZ1bmQuZGUvdGVjaC9zYW1iYT4NClsy
+XSA8aHR0cHM6Ly93d3cuc292ZXJlaWdudGVjaGZ1bmQuZGUvPg0KWzNdIA0KPGh0dHBzOi8v
+d3d3LnNlcm5ldC5kZS9lbi9uZXdzL25ld3MtZGV0YWlsL3NvdmVyZWlnbi10ZWNoLWZ1bmQt
+aW52ZXN0cy1pbi1zYW1iYS1wcm9qZWN0Pg0KWzRdIDxodHRwczovL2dpdGxhYi5jb20vc2Ft
+YmEtdGVhbS9kZXZlbC9zYW1iYS8tL3BpcGVsaW5lcy8xNDQ2Mjk5NjczPg0KDQotLSANClNl
+ck5ldCBTYW1iYSBUZWFtIExlYWQgaHR0cHM6Ly9zZXJuZXQuZGUvDQpTYW1iYSBUZWFtIE1l
+bWJlciAgICAgIGh0dHBzOi8vc2FtYmEub3JnLw0KU0FNQkErIHBhY2thZ2VzICAgICAgIGh0
+dHBzOi8vc2FtYmEucGx1cy8NCg0K
 
-Enzo,
-Is it easier for you to update patch 1 and 3, to make it smaller so
-you don't have to add code in patch 1 that you remove in patch 3?
-Also let me know if other patches to try?
+--------------47Qns4VqntKfTtWthrcnP0JI--
 
-On Tue, Sep 10, 2024 at 10:14=E2=80=AFAM Uwe Kleine-K=C3=B6nig
-<u.kleine-koenig@baylibre.com> wrote:
->
-> Compiling an x86_64 allmodconfig on Ubuntu 20.04.6 using gcc Ubuntu
-> 9.4.0-1ubuntu1~20.04.2) 9.4.0 fails as follows:
->
->         $ make fs/smb/client/compress/lz77.o
->         ...
->           CC [M]  fs/smb/client/compress/lz77.o
->         In file included from fs/smb/client/compress/lz77.c:10:
->         fs/smb/client/compress/lz77.h: In function =E2=80=98__count_commo=
-n_bytes=E2=80=99:
->         fs/smb/client/compress/lz77.h:220:1: error: no return statement i=
-n function returning non-void [-Werror=3Dreturn-type]
->           220 | }
->               | ^
->         cc1: all warnings being treated as errors
->         make[5]: *** [scripts/Makefile.build:244: fs/smb/client/compress/=
-lz77.o] Error 1
->         make[4]: *** [scripts/Makefile.build:485: fs/smb/client] Error 2
->         make[3]: *** [scripts/Makefile.build:485: fs/smb] Error 2
->         make[2]: *** [scripts/Makefile.build:485: fs] Error 2
->         make[1]: *** [Makefile:1926: .] Error 2
->         make: *** [Makefile:224: __sub-make] Error 2
->
-> That compiler seems to know about __has_builtin but not to have
-> __builtin_ctzll. In that case fall back to the implementation that is
-> also active in the #ifndef __has_builtin case.
->
-> Fixes: 0fa8d04ff36d ("smb3: mark compression as CONFIG_EXPERIMENTAL and f=
-ix missing compression operation")
-> Signed-off-by: Uwe Kleine-K=C3=B6nig <u.kleine-koenig@baylibre.com>
-> ---
-> Hello,
->
-> feel free to squash this into the original commit.
->
-> Best regards
-> Uwe
->
->  fs/smb/client/compress/lz77.h | 4 +---
->  1 file changed, 1 insertion(+), 3 deletions(-)
->
-> diff --git a/fs/smb/client/compress/lz77.h b/fs/smb/client/compress/lz77.=
-h
-> index 3d0d3eaa8ffb..4fb939296f39 100644
-> --- a/fs/smb/client/compress/lz77.h
-> +++ b/fs/smb/client/compress/lz77.h
-> @@ -200,10 +200,8 @@ static __always_inline long lz77_copy(u8 *dst, const=
- u8 *src, size_t count)
->
->  static __always_inline unsigned int __count_common_bytes(const unsigned =
-long diff)
->  {
-> -#ifdef __has_builtin
-> -#  if __has_builtin(__builtin_ctzll)
-> +#if defined(__has_builtin) && __has_builtin(__builtin_ctzll)
->         return (unsigned int)__builtin_ctzll(diff) >> 3;
-> -#  endif
->  #else
->         /* count trailing zeroes */
->         unsigned long bits =3D 0, i, z =3D 0;
->
-> base-commit: 6708132e80a2ced620bde9b9c36e426183544a23
-> --
-> 2.45.2
->
->
+--------------NPAH4LnK0V0kSNu58Pvih0Cg
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
 
---=20
-Thanks,
+wsF5BAABCAAjFiEE+uLGCIokJSBRxVnkqh6bcSY5nkYFAmbi/gkFAwAAAAAACgkQqh6bcSY5nkYs
+ARAAm9TvNM1nXkKibJp77oXf2Tmotnp8lD5nCoUaZdOMAkV6SmfetAAvrLaQj1FhiS4+zEsGvInf
+8HZCynE3rZf4mRgC6+6zvSnjtliMM/VnN/H2rU4id0ld4Ng2w8WnCuCyIT+rdQo7nT2SwH8lklrP
+0Zy0Y4ZMNVhAp+fSt3vb1hofhYt9cFDqMCXSGuebQEoQ999PnaCccuDHwjPZG5IEzDAFi47qXMAv
+2yDRl0xaIuRczToNCTTEgL43dKRxdTGP8uaxlZyouYKFWJgxmblTiivfSbGx+R2jn2YNNI2pFLMm
+KBMJq9b0Lqx3H6YOwV2WV9TZ7eiqBdhIHNvoWJXMTA0o6ghPI6Jkj5JyG10dIgqJ7YklmtgsmU1r
+0iQ+elcz4o3tPKu1GFkv41QmIT9qP2JyFPakxj3SnHNeUgwvcsTgBDYTea+jiK5LteutIBbs044M
+v42TCO147jsEjduE8IjfeTDOpw6ro6SLaV94T8zy8C/D5CRsWxUXszNtrdxagSg/VE7+CDrlAFXc
+b1I1RE/3DfakNQvoKGpHby31Kd3Q3LWSnCK9VYRy0rffRFAvM4YZGJvS3yIoMU9wDvsCa+2krrwo
+ov+aNoJOVAHOm3eUvbMZn2butIILuohOYnxZ790oEC7TpCbSY5rSJWL9r/6dbEG6EPibMD9AIui0
+nSQ=
+=h8/1
+-----END PGP SIGNATURE-----
 
-Steve
+--------------NPAH4LnK0V0kSNu58Pvih0Cg--
 
