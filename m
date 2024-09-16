@@ -2,69 +2,73 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4E793978E9E
-	for <lists+samba-technical@lfdr.de>; Sat, 14 Sep 2024 09:02:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 90891979F8E
+	for <lists+samba-technical@lfdr.de>; Mon, 16 Sep 2024 12:41:00 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=6l7g0LdQah9o3EhzHA23MPWVKxJxaJ6FUilB71sXpwc=; b=GPVCbHg0LNq6zVeSda5M5Pr5yZ
-	hAkPYMZ8cXI/rkxA2WytZdACUilMogfuyf9UFlVVg3HoOVZa/PCcNjGlsy7MqfLnEQYVXPYlXnMxM
-	uLlMYJzy4v3citj5xFE2JSbNLsi423vhym1qRmcFiZ8dZvN3FwBIMHYXgvviPqf4agyC8FbOm4XZs
-	HzBYXqDPCck12aifsJjOl8Apbbu0gsNzMwXr4aY6HaK3xk/fllCbZPz2jge/pM9oKM388/n2boUGv
-	vBb55EgFz9+atURyDS6oJ/zJSndPqRtmh5sZoH8vJbSFWP2tXN4vliC1kz0FJe4J4haSorjBMr/v+
-	hJWKZXKQ==;
-Received: from ip6-localhost ([::1]:28636 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=yhcNOV+akvmlPEBsqDRaj33vSsYLiwBwI4YZtgYT9s0=; b=G1WW7YsXBKL22GGLYMhQfr5lk9
+	5tftLdCGudiMu7HH5V54+3uEAGPx6sUXVSFjjDB884fL3tVsBOzO5d9Gi9Uo5XRFjnwLRVBLfZN+W
+	KINmyNLjXR1uXvbN935ti+Nd3zg14nHrYDLeVsA8H8h04p1S+qQn8PhKgcI48iXBIRQFFJoYttpAl
+	tCtnbMUtrwTyjrSYL/NqQRlbynomlImmy95eJ4LJ6EqRlsf9NzTo1R6uTz8Vf7RhP0R6hdpl1BfDK
+	eZLQhyyjMp/6OFlqy4AyFmmOX5K84O36PNttVAxc0JhIdfn5T4+WDPeQNfgs9ncVhYtY2NtRX7sfz
+	BWVYS8Bw==;
+Received: from ip6-localhost ([::1]:41806 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1spMnK-000208-LM; Sat, 14 Sep 2024 07:02:10 +0000
-Received: from mail-ed1-x52f.google.com ([2a00:1450:4864:20::52f]:49370) 
+	id 1sq99T-0008N9-6u; Mon, 16 Sep 2024 10:40:15 +0000
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124]:38527) 
  by hr1.samba.org with esmtps
- (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1spMn8-0001zw-DW
- for samba-technical@lists.samba.org; Sat, 14 Sep 2024 07:02:01 +0000
-Received: by mail-ed1-x52f.google.com with SMTP id
- 4fb4d7f45d1cf-5c42bd0386cso449510a12.2
- for <samba-technical@lists.samba.org>; Sat, 14 Sep 2024 00:01:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1726297317; x=1726902117; darn=lists.samba.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=6l7g0LdQah9o3EhzHA23MPWVKxJxaJ6FUilB71sXpwc=;
- b=b1F42XOK1TXxc62T14Hay2Jz72UcMfgXj+EBUDxActoBpbE+z8bllwNISpdiKy7xpz
- pv7FjC5k/5pq6AI8xcArbwAMVzrFVZkZB6vCo78Yzd8Vkp4AKt13qXCvUr1Rm/1PS4lG
- MBfJRdpmvAIV+2LYH9edIpMD5MvUwk16wuP3ctzh/ySUvKXeeA22IwvVV0GC0KmGDHyE
- qiNWzHcyZiJybKZ6dF+suQ58wgFAXEm1+VlsVtfYEsC66xdKp02OJbBQYThqsvBJK0s3
- Tlr7vJEtLdm106W22zgqzMK1WiICkkjR0HDRt9NamAYpFA/xkP/jCZKGrRe780ik6uEp
- y77A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726297317; x=1726902117;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=6l7g0LdQah9o3EhzHA23MPWVKxJxaJ6FUilB71sXpwc=;
- b=rgtqnfpUljxw1KjZd/bnbI8GXKIuAYyBq/L/BoA37AbUFKY2rVyvjU5sXVy+gjTXPO
- 3vbwuBwrmgKaWA1UE4THNLpq4fLwvEvueuVPIOsMBU2XLpeK2IcAjMwcsN5jupF11+G8
- RYMIjUs+nZEURQpDNYjMrW45rHjWMOw3pEqSUhe7QS73d52/KZh4AlRMswN05g15JVTk
- osaAHKtEMpl/snOgmrvIuGBxtLgDkPrTYDvE0dSQ4tJyKQoOgroVViXIxjh+g8w3SL6a
- Gg9ZJAw306H6Pm7S9PQpS11xZXDoMQFC/rdkVpbxVybIZgwUdKLu32OmIdQ3+OongA9A
- G9qg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCV1OliB73DVxWsJUQhtN0v08GaNeYGD0I8ESZn9lWO7uTuHooiq1iHXb1ziHKM+arcZeR/zJC0mOfQ1bBx7fHk=@lists.samba.org
-X-Gm-Message-State: AOJu0Yw4PevqjbCcGry32W8zAN5IJq9UZA+aP7VIgX0IhsVAdlApo6da
- tIF1tHXgO67SfJ9DEHM/j6WMA1AMd5PENXplrC00d0nQy1yqrDR9axzgX8zUaupRbvGvsYUJXid
- O67h4EU9g8we4dxAxHWv06sfYkM4=
-X-Google-Smtp-Source: AGHT+IEE2saBGygWxDJ3U4apTV+do/bn/X9SwwTbX/oYmeNrknyvfLHSqrYm9iRxqVd9NnVm1UQZGIyATM9OYsfmC5Q=
-X-Received: by 2002:aa7:c483:0:b0:5c2:4bd1:30c3 with SMTP id
- 4fb4d7f45d1cf-5c413e4d024mr6471304a12.27.1726297317207; Sat, 14 Sep 2024
- 00:01:57 -0700 (PDT)
+ (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__AES_256_GCM:256) (Exim)
+ id 1sq99I-0008N1-Sv
+ for samba-technical@lists.samba.org; Mon, 16 Sep 2024 10:40:07 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1726483201;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=yhcNOV+akvmlPEBsqDRaj33vSsYLiwBwI4YZtgYT9s0=;
+ b=NX2n9gvpE4g1+nd7wlCrw2Fj5TY2vmSQnFgGmE/G/j38irx5zUU7hMMzFjPF8N+//PDOr0
+ lF4PtPUm3YiYYtWLQtH0rv11oG07L5hRgHHX62lqubjr+Q9TlgDHgqErq66CKdiVNC4yV1
+ q1n3MBXcrf4UsuqqR+O4BcXKpGVZKmI=
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1726483201;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=yhcNOV+akvmlPEBsqDRaj33vSsYLiwBwI4YZtgYT9s0=;
+ b=NX2n9gvpE4g1+nd7wlCrw2Fj5TY2vmSQnFgGmE/G/j38irx5zUU7hMMzFjPF8N+//PDOr0
+ lF4PtPUm3YiYYtWLQtH0rv11oG07L5hRgHHX62lqubjr+Q9TlgDHgqErq66CKdiVNC4yV1
+ q1n3MBXcrf4UsuqqR+O4BcXKpGVZKmI=
+Received: from mx-prod-mc-04.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-397-PweIc-PCNkaGCJlIzebK2g-1; Mon,
+ 16 Sep 2024 06:23:16 -0400
+X-MC-Unique: PweIc-PCNkaGCJlIzebK2g-1
+Received: from mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.4])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mx-prod-mc-04.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 12841195422B; Mon, 16 Sep 2024 10:23:14 +0000 (UTC)
+Received: from warthog.procyon.org.uk (unknown [10.42.28.14])
+ by mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
+ id D5DB030001AB; Mon, 16 Sep 2024 10:23:09 +0000 (UTC)
+Organization: Red Hat UK Ltd. Registered Address: Red Hat UK Ltd, Amberley
+ Place, 107-111 Peascod Street, Windsor, Berkshire, SI4 1TE, United
+ Kingdom.
+ Registered in England and Wales under Company Registration No. 3798903
+In-Reply-To: <202409161629.98887b2-oliver.sang@intel.com>
+References: <202409161629.98887b2-oliver.sang@intel.com>
+To: kernel test robot <oliver.sang@intel.com>
+Subject: Re: [linux-next:fs-next] [netfs,
+ cifs] 73425800ac: xfstests.generic.080.fail
 MIME-Version: 1.0
-References: <20240821065637.2294496-1-lihongbo22@huawei.com>
-In-Reply-To: <20240821065637.2294496-1-lihongbo22@huawei.com>
-Date: Sat, 14 Sep 2024 02:01:45 -0500
-Message-ID: <CAH2r5mur8ahks54Mn6bHYQL9JkfphkioVF9AZwM7aUKgU6zu2A@mail.gmail.com>
-Subject: Re: [PATCH -next] smb: use LIST_HEAD() to simplify code
-To: Hongbo Li <lihongbo22@huawei.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="us-ascii"
+Content-ID: <1835553.1726482188.1@warthog.procyon.org.uk>
+Date: Mon, 16 Sep 2024 11:23:08 +0100
+Message-ID: <1835554.1726482188@warthog.procyon.org.uk>
+X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.4
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -78,154 +82,31 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
-Cc: pc@manguebit.com, tom@talpey.com, sprasad@microsoft.com,
- linux-cifs@vger.kernel.org, samba-technical@lists.samba.org, sfrench@samba.org,
- bharathsm@microsoft.com
+From: David Howells via samba-technical <samba-technical@lists.samba.org>
+Reply-To: David Howells <dhowells@redhat.com>
+Cc: Paulo Alcantara <pc@manguebit.com>, Steve French <sfrench@samba.org>,
+ Christian Brauner <brauner@kernel.org>, lkp@intel.com,
+ linux-cifs@vger.kernel.org, linux-fsdevel@vger.kernel.org,
+ Jeff Layton <jlayton@kernel.org>, dhowells@redhat.com,
+ Linux Memory Management List <linux-mm@kvack.org>,
+ samba-technical@lists.samba.org, oe-lkp@lists.linux.dev, netfs@lists.linux.dev
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-tentatively merged into cifs-2.6.git for-next pending review/testing
+kernel test robot <oliver.sang@intel.com> wrote:
 
-On Wed, Aug 21, 2024 at 1:49=E2=80=AFAM Hongbo Li <lihongbo22@huawei.com> w=
-rote:
->
-> list_head can be initialized automatically with LIST_HEAD()
-> instead of calling INIT_LIST_HEAD(). No functional impact.
->
-> Signed-off-by: Hongbo Li <lihongbo22@huawei.com>
-> ---
->  fs/smb/client/connect.c  | 3 +--
->  fs/smb/client/file.c     | 7 ++-----
->  fs/smb/client/misc.c     | 9 +++------
->  fs/smb/client/smb2file.c | 4 +---
->  4 files changed, 7 insertions(+), 16 deletions(-)
->
-> diff --git a/fs/smb/client/connect.c b/fs/smb/client/connect.c
-> index d2307162a2de..72092b53e889 100644
-> --- a/fs/smb/client/connect.c
-> +++ b/fs/smb/client/connect.c
-> @@ -997,11 +997,10 @@ clean_demultiplex_info(struct TCP_Server_Info *serv=
-er)
->         }
->
->         if (!list_empty(&server->pending_mid_q)) {
-> -               struct list_head dispose_list;
->                 struct mid_q_entry *mid_entry;
->                 struct list_head *tmp, *tmp2;
-> +               LIST_HEAD(dispose_list);
->
-> -               INIT_LIST_HEAD(&dispose_list);
->                 spin_lock(&server->mid_lock);
->                 list_for_each_safe(tmp, tmp2, &server->pending_mid_q) {
->                         mid_entry =3D list_entry(tmp, struct mid_q_entry,=
- qhead);
-> diff --git a/fs/smb/client/file.c b/fs/smb/client/file.c
-> index 1fc66bcf49eb..a5e6c7b63230 100644
-> --- a/fs/smb/client/file.c
-> +++ b/fs/smb/client/file.c
-> @@ -1406,7 +1406,7 @@ void
->  cifs_reopen_persistent_handles(struct cifs_tcon *tcon)
->  {
->         struct cifsFileInfo *open_file, *tmp;
-> -       struct list_head tmp_list;
-> +       LIST_HEAD(tmp_list);
->
->         if (!tcon->use_persistent || !tcon->need_reopen_files)
->                 return;
-> @@ -1414,7 +1414,6 @@ cifs_reopen_persistent_handles(struct cifs_tcon *tc=
-on)
->         tcon->need_reopen_files =3D false;
->
->         cifs_dbg(FYI, "Reopen persistent handles\n");
-> -       INIT_LIST_HEAD(&tmp_list);
->
->         /* list all files open on tree connection, reopen resilient handl=
-es  */
->         spin_lock(&tcon->open_file_lock);
-> @@ -2097,9 +2096,7 @@ cifs_unlock_range(struct cifsFileInfo *cfile, struc=
-t file_lock *flock,
->         struct cifsInodeInfo *cinode =3D CIFS_I(d_inode(cfile->dentry));
->         struct cifsLockInfo *li, *tmp;
->         __u64 length =3D cifs_flock_len(flock);
-> -       struct list_head tmp_llist;
-> -
-> -       INIT_LIST_HEAD(&tmp_llist);
-> +       LIST_HEAD(tmp_llist);
->
->         /*
->          * Accessing maxBuf is racy with cifs_reconnect - need to store v=
-alue
-> diff --git a/fs/smb/client/misc.c b/fs/smb/client/misc.c
-> index c6f11e6f9eb9..dab526191b07 100644
-> --- a/fs/smb/client/misc.c
-> +++ b/fs/smb/client/misc.c
-> @@ -751,12 +751,11 @@ cifs_close_deferred_file(struct cifsInodeInfo *cifs=
-_inode)
->  {
->         struct cifsFileInfo *cfile =3D NULL;
->         struct file_list *tmp_list, *tmp_next_list;
-> -       struct list_head file_head;
-> +       LIST_HEAD(file_head);
->
->         if (cifs_inode =3D=3D NULL)
->                 return;
->
-> -       INIT_LIST_HEAD(&file_head);
->         spin_lock(&cifs_inode->open_file_lock);
->         list_for_each_entry(cfile, &cifs_inode->openFileList, flist) {
->                 if (delayed_work_pending(&cfile->deferred)) {
-> @@ -787,9 +786,8 @@ cifs_close_all_deferred_files(struct cifs_tcon *tcon)
->  {
->         struct cifsFileInfo *cfile;
->         struct file_list *tmp_list, *tmp_next_list;
-> -       struct list_head file_head;
-> +       LIST_HEAD(file_head);
->
-> -       INIT_LIST_HEAD(&file_head);
->         spin_lock(&tcon->open_file_lock);
->         list_for_each_entry(cfile, &tcon->openFileList, tlist) {
->                 if (delayed_work_pending(&cfile->deferred)) {
-> @@ -819,11 +817,10 @@ cifs_close_deferred_file_under_dentry(struct cifs_t=
-con *tcon, const char *path)
->  {
->         struct cifsFileInfo *cfile;
->         struct file_list *tmp_list, *tmp_next_list;
-> -       struct list_head file_head;
->         void *page;
->         const char *full_path;
-> +       LIST_HEAD(file_head);
->
-> -       INIT_LIST_HEAD(&file_head);
->         page =3D alloc_dentry_path();
->         spin_lock(&tcon->open_file_lock);
->         list_for_each_entry(cfile, &tcon->openFileList, tlist) {
-> diff --git a/fs/smb/client/smb2file.c b/fs/smb/client/smb2file.c
-> index c23478ab1cf8..bc2b838eab6f 100644
-> --- a/fs/smb/client/smb2file.c
-> +++ b/fs/smb/client/smb2file.c
-> @@ -196,9 +196,7 @@ smb2_unlock_range(struct cifsFileInfo *cfile, struct =
-file_lock *flock,
->         struct cifsInodeInfo *cinode =3D CIFS_I(d_inode(cfile->dentry));
->         struct cifsLockInfo *li, *tmp;
->         __u64 length =3D 1 + flock->fl_end - flock->fl_start;
-> -       struct list_head tmp_llist;
-> -
-> -       INIT_LIST_HEAD(&tmp_llist);
-> +       LIST_HEAD(tmp_llist);
->
->         /*
->          * Accessing maxBuf is racy with cifs_reconnect - need to store v=
-alue
-> --
-> 2.34.1
->
->
+> in testcase: xfstests
+> version: xfstests-x86_64-b1465280-1_20240909
+> with following parameters:
+> 
+> 	disk: 4HDD
+> 	fs: ext4
+> 	fs2: smbv3
+> 	test: generic-080
 
+What's the server?  Samba, Windows, Azure or ksmbd?  It seems to matter quite
+a lot.
 
---=20
-Thanks,
+David
 
-Steve
 
