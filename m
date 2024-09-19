@@ -2,48 +2,63 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1420097B1B4
-	for <lists+samba-technical@lfdr.de>; Tue, 17 Sep 2024 17:11:30 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7654697C2B8
+	for <lists+samba-technical@lfdr.de>; Thu, 19 Sep 2024 03:51:56 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
-	bh=hWp/4f3CIEiFHTTZ75Fa2ZKWCKe8rg2HCsXk343McKk=; b=vYwiFrp8dWmJlHDUyLOWCW1Q4D
-	n+20rJfl2QmCI7I03ESBHmo8SiYAkBD6F5s4l2JjO8yO5Lme+xCphs7QX51CTl6tP+720ljA07YD8
-	c5gzanKCgResSn9ReZTS/UoSL/T3PoGhZ+Y99y1prgSDsiOQBKtwacY9Hvl9jHyEI3fqm8FNafRxP
-	jcaT/FhnSh0bYfx+kGJAx7cODUKnP/q/pRGCdUSO9g93NuO+soLtY0YZ3B3wSh1pGctBE/5ytHa85
-	JHDdHK4nf99IhNPT8gx5MrOlchPh+AcF15dyd4xoqzJnR23qDkF3HPzo+++fFZvS3LXx/mtNPa59d
-	XCQkuVHg==;
-Received: from ip6-localhost ([::1]:47698 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=nrkkztT7w1cV9Fu7bDVSJQ/4r3mWFA0eqS0w90TAvVA=; b=z8MxVQ9U0x9xegTyIG8dQ2LtHs
+	mBEPp8JHiBqr/iZwss/X5iff+ETJlnnSFgEMd8PjxhhVLR38+j3JF81WRts3KTXAi9xe0W7L7/Brb
+	sV1Hg7ZIlCm7WW0N2IRMUrHS8gtMatS9DLTjfihopYoQbU7qeatNzgXVDPYSSKyCuJl3VPpfzENGl
+	/o8wqaMVvym2nB1lIV9kl5HKaginoONk2Ke0jazFB1IYeMILZuyqXg/Fekbw0twLAl78DNfFSP43g
+	O5YeUXKmiHdINWzdhcIE0P+bj3EhMOT+t5OOWAEsqYPDDCPw5bzjE1I4/e9RnBKbj2Qqb/v+plCIs
+	Os3mTSaA==;
+Received: from ip6-localhost ([::1]:47178 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1sqZrR-000CKu-Nd; Tue, 17 Sep 2024 15:11:25 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:62468) 
+	id 1sr6KE-000Ikk-Tn; Thu, 19 Sep 2024 01:51:18 +0000
+Received: from mail-lj1-x22e.google.com ([2a00:1450:4864:20::22e]:52418) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1sqZrN-000CKZ-81
- for samba-technical@lists.samba.org; Tue, 17 Sep 2024 15:11:23 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=From:To:Date:Message-ID:CC;
- bh=hWp/4f3CIEiFHTTZ75Fa2ZKWCKe8rg2HCsXk343McKk=; b=oGCV6acqXK5Bkpj0lApBhQOxwA
- kCqUGdK3LzlHW8/F65grCmTTKj8jhKs3GphS4Js4IX4GIaQo8+Llv8+sB3l6GYNdlkP5xgWpjGqMZ
- J59PPM+AviJrPnRVEB4+hqCqmtwqQfKdT40WzmcyhsFovskFeq8XTCsCj4aWYY6N+MTp8rhlBc+qK
- mLIQ4CR2wOxnayP58CkSdi+VAxRFf834sCxDg748vVZKOaxegAqUfBeGj+jCb7RwrbJFSIz9AHMEA
- 9NjU81XmNutW0agjgTWUXq6NFv/Kp+Gz4xmf/Jw0Ybd6rtwbECTgwdJ30+nwIr4b48exM8Yrmbq6y
- vbEZn0sb7JhG1GewWTGVWuqVSZ+3Uu91LJ/KgEV/nDhBgKKkQ/N4TXZf4C6ictxZW/Xjp3VUixqv7
- D2t5WDBsQR0zvkbrskMJk3Z1vhguqfA+SP8q8VZpOXuExUlEiQH/kjIWJpSIMTqHIZuV37MVvfhfL
- LBikwiq++rKZeaWkFmFOcbkB;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1sqZrM-000ZLL-3B for samba-technical@lists.samba.org;
- Tue, 17 Sep 2024 15:11:21 +0000
-Message-ID: <5c2cf047-c18c-4eec-ae09-c9783e995b49@samba.org>
-Date: Tue, 17 Sep 2024 17:11:20 +0200
+ (Exim) id 1sr6KA-000Ikd-5H
+ for samba-technical@lists.samba.org; Thu, 19 Sep 2024 01:51:16 +0000
+Received: by mail-lj1-x22e.google.com with SMTP id
+ 38308e7fff4ca-2f761461150so3566301fa.0
+ for <samba-technical@lists.samba.org>; Wed, 18 Sep 2024 18:51:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1726710672; x=1727315472; darn=lists.samba.org;
+ h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=nrkkztT7w1cV9Fu7bDVSJQ/4r3mWFA0eqS0w90TAvVA=;
+ b=FfAh7Trd3BJt+zfhJ4m1ZNp6x2kO/W9eUxiKLfx6oHDfGkYfKS+bTVXJh2txk6UrwM
+ DF7GI/sYj+zNVXHeIW9yyv9a/6KKNMVuKEg/kO59OUKzNNKrkaczxbQJAcQgPjXqiQph
+ MxvK4STq/GecAqhrZWcMB00nFrHe9d35OvJRFRhc3qSEfIGDuaF7ISom7q+L05KpUW+5
+ +Tw/VJ5R9KcJhYMs5iIxeaVQJhu8uBNUJBohbJE7t0ITnVEMIcK9iV7ifyXodkZGsx1E
+ EJGu3pnCp8ciiucdLXJ46tPuhQW6K79OJeGiDWz+I9n6gXOTniQCSwXlEeUICj/jcrp/
+ QXqA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1726710672; x=1727315472;
+ h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=nrkkztT7w1cV9Fu7bDVSJQ/4r3mWFA0eqS0w90TAvVA=;
+ b=YVn6XWLiQOViJyI6E40vSqtSmI74u4+iPYhs8qMZnRM+KnoLfAvpuZbBcM1saP1BfP
+ 3gKHjqk9RSBBFoWvyg9hQu5o80H3zC3HWZRdaM4/zo7FXHpekadf9o6N731sxv7RiIuP
+ BMIRerIySrrc5HyDQlblQVzTda5YUuxkAXOo/G2OuiBWunjLm3/BQdIhB0g0Fr1BlYrV
+ +py+F4+rrcwiI8iIV6DbAqOiGlELKImt650+gi9Ldp93jIAUS169P99CqCtAjaxOcVqA
+ seLJD78tr5iTUHvV8wwL1m26AnJaQRjuEDXeDo6IhJd+GiHVK7roKTUkqtnG3X5gSiqg
+ 328g==
+X-Gm-Message-State: AOJu0YwU5xatf5sB/uJRhKfa6Gjthx8a005By/FbCz4JNMu5+MjubqAs
+ numQhrRC3q5zzR/eAZpiuX3aUPt0RqIK7y/oEg6D6rjeuzwGoktgvY5sAo/4xyo23qBoM4shsT2
+ CeUvRTshd2k4gYb60NaNL90i2+YpDcMhL
+X-Google-Smtp-Source: AGHT+IFpGEeFclUOdQxNulFGUzQUBciA+e7DYlBYWLs133x9rnnGvxqzaMgrhSaCsFmoZ165O5PpACDMDzil8JZIgWI=
+X-Received: by 2002:a05:6512:3a8c:b0:52c:deb9:904b with SMTP id
+ 2adb3069b0e04-5367ff24cb6mr13029182e87.38.1726710671851; Wed, 18 Sep 2024
+ 18:51:11 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: de-DE, en-US
-To: samba-technical@lists.samba.org
-Subject: [Release Planning 4.20] Samba 4.20.6
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Date: Wed, 18 Sep 2024 20:50:58 -0500
+Message-ID: <CAH2r5muLs97YW12d1C4TWS4wHF-mbphVJCqzVe9LBNE6iYLPKQ@mail.gmail.com>
+Subject: Network discovery of nearby Samba servers
+To: samba-technical <samba-technical@lists.samba.org>,
+ CIFS <linux-cifs@vger.kernel.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -57,24 +72,21 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jule Anger via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jule Anger <janger@samba.org>
+From: Steve French via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Steve French <smfrench@gmail.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi,
+Today during one of the presentations at SDC, the Apple developers
+mentioned a tool called "Bonjour" ("Avahi" in Linux) that is used to
+find nearby file servers to mount to.   Is this (Avahi) possible for
+us to use from Linux to find nearby Samba servers to mount to?  I
+couldn't find instructions on how to setup Samba for this.
 
-Samba 4.20.6 is scheduled for Tuesday, November 19 2024.
-
-https://wiki.samba.org/index.php/Release_Planning_for_Samba_4.20
-has been updated accordingly.
-
-
-Jule
+Ideas?
 
 -- 
-Jule Anger
-Release Manager Samba Team  samba.org
-SerNet Samba Team           sernet.de
+Thanks,
 
+Steve
 
