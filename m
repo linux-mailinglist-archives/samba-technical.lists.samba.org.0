@@ -2,72 +2,62 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id E790F97E662
-	for <lists+samba-technical@lfdr.de>; Mon, 23 Sep 2024 09:10:08 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 95C6898600A
+	for <lists+samba-technical@lfdr.de>; Wed, 25 Sep 2024 16:13:08 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=2lDimM0Uis4sHfBgBpHSwx2c5/VL/mJyvDIOhdl/yb8=; b=qFfLHbca9u4hbgoxLJi+EfFPYP
-	6DwOUb5YJ/Zt9xO7+U3CKguTM6kcfCruxpgma+GtIGQ7NW7Dr0tO1ReFf5oGnyjVTy9xsReKB+iaw
-	iu6UtIHpZZYmRFHPyyPyoHs9KQNyEpM7ngFlI/DG6kygiW40bkB3+EnjdJiYAYQ16H9ZzPTteRVkA
-	4gEEo/yyiJ4xy9kbLzv5KnnwOl9/cDGideKSIL86bOD/8tIQ//kLlnXFAdOWv680S1tkNLHOBsAzd
-	74heFOOr3nCgvE80xrU3KVHyJK0CFYwnCKsLaDAaSSE/IkhMTztMUsNYSFpXLaGXdqYMlke/kA7S7
-	x0Ppi9QQ==;
-Received: from ip6-localhost ([::1]:47720 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=iG2/lTAfEgLjAaRpv4EoM4L/DWaXGYqjJGv5aw2l9SI=; b=Xk+ETaCb41c+2E2qNzvUO7ZS1k
+	XacOAVHKLYm09vCdXqTR56wKJodqo4fzcji+hewnOZ9zoXHRKDN1MPxLWWQJpK0L7AgxB0xFo7Dg8
+	UCYPEcgCIs9PhdBE2iarZdY8zA1/Z9N+UQLQ2rgivxWuFrb9xPkXKi++TAeC8CxyhBlu3CJi1/8jb
+	PaceykMJs256oocxvZMy2uaRBtVfBf+NKCABY22mIlUNDar9PBOgDvI+It3dGUZ4ataIwnHF6lZx6
+	GVYOyEwHkrG5FZzPktGdJGp3lKGMxu8DrVU3R8fG4dbd70VPVVZzU3PGIu8TcC233Yg3KFXig0BGh
+	02bFHuVQ==;
+Received: from ip6-localhost ([::1]:30232 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1ssdCB-000XNH-Ir; Mon, 23 Sep 2024 07:09:19 +0000
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124]:56487) 
+	id 1stSkl-000fJa-Uy; Wed, 25 Sep 2024 14:12:28 +0000
+Received: from dfw.source.kernel.org ([139.178.84.217]:52438) 
  by hr1.samba.org with esmtps
- (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__AES_256_GCM:256) (Exim)
- id 1ssdC3-000XNA-Pc
- for samba-technical@lists.samba.org; Mon, 23 Sep 2024 07:09:15 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1727075347;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=2lDimM0Uis4sHfBgBpHSwx2c5/VL/mJyvDIOhdl/yb8=;
- b=W/0QgyXcr6HIHJb7tHzCYXTDnar5iTJzf6l1xabOSDwtEp0if9z60TsmCVs5vRbTLGfK44
- giOOCKmC/vjnCE9LWhgEf/LrdRYjTO3IPTBHRWNpRZyrLNf9BJu7am76vruXX8zK4zcfYL
- gatHwsT4Qqf6agxItVWNRoboFmo2lMA=
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1727075347;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=2lDimM0Uis4sHfBgBpHSwx2c5/VL/mJyvDIOhdl/yb8=;
- b=W/0QgyXcr6HIHJb7tHzCYXTDnar5iTJzf6l1xabOSDwtEp0if9z60TsmCVs5vRbTLGfK44
- giOOCKmC/vjnCE9LWhgEf/LrdRYjTO3IPTBHRWNpRZyrLNf9BJu7am76vruXX8zK4zcfYL
- gatHwsT4Qqf6agxItVWNRoboFmo2lMA=
-Received: from mx-prod-mc-04.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-682-BUxCkdedMSymFuojPHzqnQ-1; Mon,
- 23 Sep 2024 03:09:03 -0400
-X-MC-Unique: BUxCkdedMSymFuojPHzqnQ-1
-Received: from mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com (unknown
- [10.30.177.17])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mx-prod-mc-04.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 7142C19054EE; Mon, 23 Sep 2024 07:09:01 +0000 (UTC)
-Received: from warthog.procyon.org.uk (unknown [10.42.28.145])
- by mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id 1AA241956052; Mon, 23 Sep 2024 07:08:56 +0000 (UTC)
-Organization: Red Hat UK Ltd. Registered Address: Red Hat UK Ltd, Amberley
- Place, 107-111 Peascod Street, Windsor, Berkshire, SI4 1TE, United
- Kingdom.
- Registered in England and Wales under Company Registration No. 3798903
-In-Reply-To: <202409221711.b537f7a8-oliver.sang@intel.com>
-References: <202409221711.b537f7a8-oliver.sang@intel.com>
-To: kernel test robot <oliver.sang@intel.com>
-Subject: Re: [linus:master] [cifs] 43a64bd02f: xfstests.generic.465.fail
+ (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1stSkh-000fJT-OM
+ for samba-technical@lists.samba.org; Wed, 25 Sep 2024 14:12:26 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id F19EC5C5D59
+ for <samba-technical@lists.samba.org>; Wed, 25 Sep 2024 13:53:28 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7D312C4CED0
+ for <samba-technical@lists.samba.org>; Wed, 25 Sep 2024 13:53:32 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1727272412;
+ bh=iG2/lTAfEgLjAaRpv4EoM4L/DWaXGYqjJGv5aw2l9SI=;
+ h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
+ b=pXD0LcCq772rNuTIJDDjOooo3H1qUN4uilnjWwub6U0A8jeKSseaQ9CcfgmmUcc1K
+ wP6EMiX8i1AX4Orj565pmn558DHjbzcggKad97k6UtIAUsFQtw6MkTXgeJ6WEHnU7I
+ eYsCKWaziqUZmv9O+KybuhfT3PzufyJYDdlSOeQLWvtGyf4XCqO8niDyKn+AhJHCcg
+ keDwN6qOwdM/Df3SSbNVLVtCMql7o5IHRRRHo8jaalc76oB6BbbwnJadBsUplnwC68
+ VxkSr0ACN0KfebDp7kPewgSN9VR8Uq+Ic0aBmaSU5U5MdXg3J9wwmE7ythhqwMO7jB
+ wGZKqpZXw6B6g==
+Received: by mail-oo1-f46.google.com with SMTP id
+ 006d021491bc7-5e1b72fc5f3so3565058eaf.2
+ for <samba-technical@lists.samba.org>; Wed, 25 Sep 2024 06:53:32 -0700 (PDT)
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWlz+8X45VN6YkYgptgh7AgGt3/9WOoAJbRdUpf52WK0lBaWiIzzABixhZMe3PHzEZ8Y1EHOYjcuyRV+LZ/Kis=@lists.samba.org
+X-Gm-Message-State: AOJu0Ywsm7+1H/esubkUmjTS3XUOynQzyXYkMd3B3hKF2KexzEWrlOSe
+ iYiEFVpwd3KwcK6HDAUgpArSir0W6aRNmfle0AYDKaTksTIDSMxarzryNYXvqD8cXOzI6f0019g
+ XLrlWC3lNjCbN9etdL9QwH43ZFO8=
+X-Google-Smtp-Source: AGHT+IElzBEU3s+VBMa7k1g2Urn4DTRJjr0JWICjaq9tn8fBnjdxqevworOBb6UwozmZ8jWB2kDA2hGqzutJm+tOnRg=
+X-Received: by 2002:a05:6871:1cd:b0:261:110b:84fd with SMTP id
+ 586e51a60fabf-286e13810eemr2152155fac.11.1727272411709; Wed, 25 Sep 2024
+ 06:53:31 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-ID: <743743.1727075336.1@warthog.procyon.org.uk>
-Date: Mon, 23 Sep 2024 08:08:56 +0100
-Message-ID: <743744.1727075336@warthog.procyon.org.uk>
-X-Scanned-By: MIMEDefang 3.0 on 10.30.177.17
+References: <20240925074323.9823-1-shenlichuan@vivo.com>
+In-Reply-To: <20240925074323.9823-1-shenlichuan@vivo.com>
+Date: Wed, 25 Sep 2024 22:53:19 +0900
+X-Gmail-Original-Message-ID: <CAKYAXd-O3zANLJaQpaDc7VsUJTODRG5k08L+HG7sjLAwv7MpGg@mail.gmail.com>
+Message-ID: <CAKYAXd-O3zANLJaQpaDc7VsUJTODRG5k08L+HG7sjLAwv7MpGg@mail.gmail.com>
+Subject: Re: [PATCH v1] smb: Correct typos in multiple comments across various
+ files
+To: Shen Lichuan <shenlichuan@vivo.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -81,24 +71,35 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: David Howells via samba-technical <samba-technical@lists.samba.org>
-Reply-To: David Howells <dhowells@redhat.com>
-Cc: Paulo Alcantara <pc@manguebit.com>, linux-cifs@vger.kernel.org, Christian
- Brauner <brauner@kernel.org>, lkp@intel.com,
- samba-technical@lists.samba.org, Jeff Layton <jlayton@kernel.org>,
- linux-kernel@vger.kernel.org, dhowells@redhat.com, oe-lkp@lists.linux.dev,
- Linus Torvalds <torvalds@linux-foundation.org>,
- Steve French <stfrench@microsoft.com>
+From: Namjae Jeon via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Namjae Jeon <linkinjeon@kernel.org>
+Cc: pc@manguebit.com, tom@talpey.com, sprasad@microsoft.com,
+ linux-cifs@vger.kernel.org, samba-technical@lists.samba.org,
+ linux-kernel@vger.kernel.org, sfrench@samba.org, senozhatsky@chromium.org,
+ bharathsm@microsoft.com, opensource.kernel@vivo.com
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-kernel test robot <oliver.sang@intel.com> wrote:
-
-> kernel test robot noticed "xfstests.generic.465.fail" on:
-
-It works fine for me.  Can you grab the contents of /proc/fs/netfs/stats after
-it has failed?
-
-David
-
+On Wed, Sep 25, 2024 at 4:43=E2=80=AFPM Shen Lichuan <shenlichuan@vivo.com>=
+ wrote:
+>
+> Fixed some confusing typos that were currently identified witch codespell=
+,
+> the details are as follows:
+>
+> -in the code comments:
+> fs/smb/common/smb2pdu.h:9: specfication =3D=3D> specification
+> fs/smb/common/smb2pdu.h:494: usally =3D=3D> usually
+> fs/smb/common/smb2pdu.h:1064: Attrubutes =3D=3D> Attributes
+> fs/smb/server/connection.c:28: cleand =3D=3D> cleaned
+> fs/smb/server/ksmbd_netlink.h:216: struture =3D=3D> structure
+> fs/smb/server/oplock.c:799: conains =3D=3D> contains
+> fs/smb/server/oplock.c:1487: containted =3D=3D> contained
+> fs/smb/server/server.c:282: proccessing =3D=3D> processing
+> fs/smb/server/smb_common.c:491: comforms =3D=3D> conforms
+> fs/smb/server/xattr.h:102: ATTRIBUITE =3D=3D> ATTRIBUTE
+>
+> Signed-off-by: Shen Lichuan <shenlichuan@vivo.com>
+Applied it to #ksmbd-for-next-next.
+Thanks!
 
