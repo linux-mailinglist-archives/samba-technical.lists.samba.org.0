@@ -2,70 +2,60 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 992F29865FA
-	for <lists+samba-technical@lfdr.de>; Wed, 25 Sep 2024 19:52:00 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 58435986F1A
+	for <lists+samba-technical@lfdr.de>; Thu, 26 Sep 2024 10:42:20 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=vntbvLH7rqyOAKyTPuolDaXhL9GWPVckxp3Y+1WSIJ0=; b=XkRAVeM34EBIfcpd3fG2kI96LZ
-	dhSArfhB4m/AAmSCVmwOCsTXv/ke7W225tTMN/9ol2knV5Eq+YIvawRTQqmQjsCinJGLKws1TBpdW
-	zwCkXI5nMcmAjpslBTr2jYb8vUNDsmMYsLZyyaZ+XGbLU+BakvREtceerPkD86RqyEkI9yNkhuk4f
-	gAHVtggnzj5G/tKDp2jV5u3yk18MRanyLtmd4ltxHYomL2pznwLOmImLpMg7Xn3l9faEsetcmhIbZ
-	MolTgmsihOmUvqoPm7LU1bB43BSLOrOCtFjtfZGfXJepNCU8w5Tszm/lopAyJ0JWQfbB0MqHCzDPY
-	aj9XFLqA==;
-Received: from ip6-localhost ([::1]:40218 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=1th0J6kGvepIW/2NsBvnz8Idq0+2tTDhMa0v4AfYUtg=; b=lTia5YQeTF1VkcVoCDvu0jc0bF
+	xYa0emq12ig4WOarmv5wE73Ep/ge1JZ06+yhjwQGnkyzlxRjkDG8O7k2qOM6ukgjrrGwULHUoHiXn
+	AGzz9yaygPtDEI3y7/xRHTIms7p4dOlMRi2xNPZ0/wRXDUF+uBkgqH1Z/N4AtYIR+6cmXFS8SU4gd
+	aqmjJ4TjqOMcnG3/hgTmeEPnxWHqBxeXWNS8mS23MT6xqpAMYkuQ4RM4g0j6RGvrb5GfmX8rm9izB
+	7Ca+6AignH0hMjjIUzTPO0hc8f69Lskjog0vX/Y2VLLluF7RQ0TaA2RjlVkAGpU+Euj/v8mga+ml7
+	829kjXlA==;
+Received: from ip6-localhost ([::1]:60780 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1stWAD-000fhL-IV; Wed, 25 Sep 2024 17:50:57 +0000
-Received: from mail-lf1-x132.google.com ([2a00:1450:4864:20::132]:47397) 
+	id 1stk4D-000htJ-T4; Thu, 26 Sep 2024 08:41:41 +0000
+Received: from mail-wr1-x430.google.com ([2a00:1450:4864:20::430]:56791) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1stWA9-000fhE-4v
- for samba-technical@lists.samba.org; Wed, 25 Sep 2024 17:50:55 +0000
-Received: by mail-lf1-x132.google.com with SMTP id
- 2adb3069b0e04-535be093a43so148959e87.3
- for <samba-technical@lists.samba.org>; Wed, 25 Sep 2024 10:50:52 -0700 (PDT)
+ (Exim) id 1stk48-000htC-TG
+ for samba-technical@lists.samba.org; Thu, 26 Sep 2024 08:41:39 +0000
+Received: by mail-wr1-x430.google.com with SMTP id
+ ffacd0b85a97d-374c1e5fe79so478368f8f.1
+ for <samba-technical@lists.samba.org>; Thu, 26 Sep 2024 01:41:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1727286651; x=1727891451; darn=lists.samba.org;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=1FH8rwk3er87y7EQSrSfkfYIDVp5KXDiUAFH2K6gy3I=;
- b=YJqfVyCqHDNeXgX67pTOPcg8vQgIIyd5anPmYXNmhk6qTJA7EwzS/u0L+JpEzRY38t
- cKmJ5wWlxGqH3EuErMW0CblB32KbJkbYUDZYi/vrYtRuyF0H77MOGI/msW3RKKS7/HOb
- xG+l2o/hxZYN6LAg+3FRnpF403Wpldo7vx9/tRjvhN8BhdwM1iawLQvbwERDj31kzeyy
- RmfIPY4e8ckpw5lUGdJYj++tUUeIiDzI82yVxxMpqvh67R2QsO1bubzehEVUFxbCfsOu
- 0vP+Y6DyzcA6mzidsAp7aiO1ZQ5bFdMw+k8IRPGsYN3AtKv93I1qfgM9XOEP8buZyAFN
- EEUg==
+ d=egnyte.com; s=google; t=1727340095; x=1727944895; darn=lists.samba.org;
+ h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=R208JydqJzQ9F/NMhXrY9TY+tchMZwXiIYzS+mj9g48=;
+ b=kNZRAxmFMJfYkNy/Jy0/F2RMNzvy4DxdSEIB5h8h1vC/JoClwsAJzSyuBbS2HmRwIX
+ I6BQFUAUG3Rz6vGgSHKorwOaopvKegYALNkVScs0G2Cw/t9SQ+WTejCmq0lBAvpewesk
+ 62h2+0/b7w1Wdj0NlXh0kT9f7zGg4P9emDMYU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727286651; x=1727891451;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=1FH8rwk3er87y7EQSrSfkfYIDVp5KXDiUAFH2K6gy3I=;
- b=mF3FkCrapYfqC1AIpRJhuKf5F+2haJzCFdV5RkgDQZ00nvWrGlL7YlqC+uhYdGo/cl
- dGACa0TuKUyPPwQWWlkitED27PwHFkPheJBP9WmPjwW+BX58R2CnLsgmBeFEYb2aOeU1
- lk2QXG5MNftTYzUvE3yiedAe5iUw8G/V1SFqVJdEriwIwcd/3ShC7hacadL5oFWgE2Mk
- +bwGb4MWIi3rs8mXWiuCTWPKs0OM1xJAoRzHmTNkVqj0IpdxqMFfqsbcFxzAaTDNB+RX
- z9ZDGo8IDPxhemaZwktbc0S7NZ4ibXydPEvTLeILjWqjMgIeAw8OfMtKEriZFaL0AEgN
- cLLg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCU9gVAPcbDb9JWzCMnh2e6mjpmm8v0UA3KY7w0SLwScqPAUrC6arGfyCUE54aCPt3K2l2//HMwcSL0izj1B6IM=@lists.samba.org
-X-Gm-Message-State: AOJu0Yy7TsxrTN+gIVpIWWlZ1wOLJnF6KnUa/nIfCwfkKtU+mm4Cish3
- Dv8J4KO+4z3fWVPNs0RLYOL1jzo6btY3uV4G5ktKWURAUNrcQpHmMelThPxFOA6/Ytx2xkfhu4t
- v4iNyWGiaSpf3joHR0ZsAWFrv/Vg=
-X-Google-Smtp-Source: AGHT+IHNelNdV22WgfzA3PTK67DSLiiHxUD5zUm0kmEzhA6aPXbpjzE+8dB2Vd0OuQN+A5MEGoXwpz3YaL+fzX8ZvLk=
-X-Received: by 2002:a05:6512:3ca4:b0:52c:cc38:592c with SMTP id
- 2adb3069b0e04-538693ab0c1mr2395715e87.0.1727286651010; Wed, 25 Sep 2024
- 10:50:51 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1727340095; x=1727944895;
+ h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=R208JydqJzQ9F/NMhXrY9TY+tchMZwXiIYzS+mj9g48=;
+ b=X3LvGm37Cd1gJ7zBtBIwnSj2r4ZaRF7Il/hdJatFHCdTjBTCj04+9AshC3B428tybn
+ DdgZ9+IJENtR6knJikGkbgkpYBTeDW1ApXqIiAleYq7YoxK8BprPcoA8kFJwmEZQ0aRN
+ sFeYc7WbPpTXjfCgCBiFfztto5icbO7JpXkV0r9Ut4Vmj71RN7FFeK4UWqy+XbhMkxnZ
+ 4101dJ9vvBpX6FlxFftuWsRLF/kby6CUYjop3E7nzluioitFAyEc1EW2c1xFYPTJ3ArH
+ RygC6YCg9vz93LkYTMoLDb7BmBqtIUnSRP1k6GDnIG3Aw/Kl5Cx37V7BsQjFedTYI5gI
+ 1n+w==
+X-Gm-Message-State: AOJu0Yx6Kyq15tle/L74qyWQMdfXKdvSrwbU0L4dGAJLOZMABDcgtlHr
+ y2XPdtEUYRfApFGd3kaeAoJQA3wN1bZfZx+WnYwAfw+9DbxgmFX+vn+dAp6gMXQAefDaz3ZcER4
+ F9au927InmY39a5AgBqccY+FpzKXASJCtkDHtNWjs2JpsrQB/Do2Hlw==
+X-Google-Smtp-Source: AGHT+IHvwoNw6vxexep07bNJHCVhhQWZzZXP4FxefUPdgpH5ktBuiL1uzHUBeVQ1LEwOYhRKwmKkv/G+VsWhl78YxUQ=
+X-Received: by 2002:a5d:4807:0:b0:374:c61a:69b8 with SMTP id
+ ffacd0b85a97d-37cc24678a0mr3493854f8f.15.1727340094933; Thu, 26 Sep 2024
+ 01:41:34 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240925074323.9823-1-shenlichuan@vivo.com>
- <CAKYAXd-O3zANLJaQpaDc7VsUJTODRG5k08L+HG7sjLAwv7MpGg@mail.gmail.com>
-In-Reply-To: <CAKYAXd-O3zANLJaQpaDc7VsUJTODRG5k08L+HG7sjLAwv7MpGg@mail.gmail.com>
-Date: Wed, 25 Sep 2024 12:50:37 -0500
-Message-ID: <CAH2r5mtY0xsi5MQ0W6uyx0Q6CAv4CW5w4530G0ewKeUf7WsfyQ@mail.gmail.com>
-Subject: Re: [PATCH v1] smb: Correct typos in multiple comments across various
- files
-To: Namjae Jeon <linkinjeon@kernel.org>
+Date: Thu, 26 Sep 2024 14:11:23 +0530
+Message-ID: <CAF2c6-EiavvBJmf6gKRp394E1s4AjANH29PqWeJbiNdbCas3YA@mail.gmail.com>
+Subject: VFS fruit and streams_xattr fake_fd passed on to other modules in
+ stack
+To: samba-technical@lists.samba.org
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
@@ -80,44 +70,33 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
-Cc: Paulo Alcantara <pc@manguebit.com>, CIFS <linux-cifs@vger.kernel.org>,
- Shyam Prasad N <sprasad@microsoft.com>, Shen Lichuan <shenlichuan@vivo.com>,
- samba-technical <samba-technical@lists.samba.org>,
- LKML <linux-kernel@vger.kernel.org>, Tom Talpey <tom@talpey.com>,
- Steve French <sfrench@samba.org>, Bharath S M <bharathsm@microsoft.com>,
- Sergey Senozhatsky <senozhatsky@chromium.org>, opensource.kernel@vivo.com
+From: Varun Mittal via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Varun Mittal <vmittal@egnyte.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Let me know if you want me to update ksmbd for next so we can send a few of
-these Saturday upstream
+Hi
 
-On Wed, Sep 25, 2024, 9:13=E2=80=AFAM Namjae Jeon via samba-technical <
-samba-technical@lists.samba.org> wrote:
+I am working with VFS fruit and streams_xattr modules stacked before the
+module for my filesystem. Samba version 4.18 and my SMB clients are Mac
 
-> On Wed, Sep 25, 2024 at 4:43=E2=80=AFPM Shen Lichuan <shenlichuan@vivo.co=
-m> wrote:
-> >
-> > Fixed some confusing typos that were currently identified witch
-> codespell,
-> > the details are as follows:
-> >
-> > -in the code comments:
-> > fs/smb/common/smb2pdu.h:9: specfication =3D=3D> specification
-> > fs/smb/common/smb2pdu.h:494: usally =3D=3D> usually
-> > fs/smb/common/smb2pdu.h:1064: Attrubutes =3D=3D> Attributes
-> > fs/smb/server/connection.c:28: cleand =3D=3D> cleaned
-> > fs/smb/server/ksmbd_netlink.h:216: struture =3D=3D> structure
-> > fs/smb/server/oplock.c:799: conains =3D=3D> contains
-> > fs/smb/server/oplock.c:1487: containted =3D=3D> contained
-> > fs/smb/server/server.c:282: proccessing =3D=3D> processing
-> > fs/smb/server/smb_common.c:491: comforms =3D=3D> conforms
-> > fs/smb/server/xattr.h:102: ATTRIBUITE =3D=3D> ATTRIBUTE
-> >
-> > Signed-off-by: Shen Lichuan <shenlichuan@vivo.com>
-> Applied it to #ksmbd-for-next-next.
-> Thanks!
->
->
+My smb.conf snippet:
+        fruit:metadata = stream
+        fruit:resource = stream
+        vfs objects = fruit streams_xattr <my-module>
+        kernel share modes = Yes
+
+I observe that the fruit module generates a fake_fd for AFP attributes and
+then tries to take a lock with this fd.
+However the fruit module doesn't implement a filesystem_sharemode wrapper,
+so this is passed on to the streams_xattr module. Since that module doesn't
+know about this fake fd, it passes it on to the next module. My VFS module
+is unaware of this fd as well so it asserts
+
+A similar thing happens with close() call of the fake_fd generated by
+streams_xattr module.
+The following check fails and the close() for fake_fd is passed on to the
+next module
+        if (!fsp_is_alternate_stream(fsp))
+
+Am I missing some configuration ?
