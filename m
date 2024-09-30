@@ -2,61 +2,51 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 58435986F1A
-	for <lists+samba-technical@lfdr.de>; Thu, 26 Sep 2024 10:42:20 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E5836989C76
+	for <lists+samba-technical@lfdr.de>; Mon, 30 Sep 2024 10:18:07 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=1th0J6kGvepIW/2NsBvnz8Idq0+2tTDhMa0v4AfYUtg=; b=lTia5YQeTF1VkcVoCDvu0jc0bF
-	xYa0emq12ig4WOarmv5wE73Ep/ge1JZ06+yhjwQGnkyzlxRjkDG8O7k2qOM6ukgjrrGwULHUoHiXn
-	AGzz9yaygPtDEI3y7/xRHTIms7p4dOlMRi2xNPZ0/wRXDUF+uBkgqH1Z/N4AtYIR+6cmXFS8SU4gd
-	aqmjJ4TjqOMcnG3/hgTmeEPnxWHqBxeXWNS8mS23MT6xqpAMYkuQ4RM4g0j6RGvrb5GfmX8rm9izB
-	7Ca+6AignH0hMjjIUzTPO0hc8f69Lskjog0vX/Y2VLLluF7RQ0TaA2RjlVkAGpU+Euj/v8mga+ml7
-	829kjXlA==;
-Received: from ip6-localhost ([::1]:60780 helo=hr1.samba.org) 
+	bh=TZNrqUfZlPxWQH5MhtuTial7uFizInb4E/jJBCYBrXs=; b=QsNZIcB1OCRG+/tPkDKiFEGEuM
+	xxMQvx8+0r4LC/QnZp8b1h4olU0cng9vlz82UQng2vr9qklvEsuo/QN3wWIf9jce3vmMgbV4BPv4k
+	7o4SWLhwZl8GKBYCaSe04tdFNZUgtXdmdtektEvC45DLpeejsnsx1qVQ1yjBtfcVbHI3Z03vsz2CV
+	XGSFQfgEXg1fmVcYnRxH7qq5yh7HeE0nNOVn+3OGsayT5moV1VKUqxqXDGP6gDICHavArJc8SqNAQ
+	4bylGBGZTasDLwWZEQlCgxpXv2tG3mqh9YxVXxC+6KRB0ZCakc7Oig72MFTPT0PHgAk4u2WMcj/yZ
+	uuX5q3Qw==;
+Received: from ip6-localhost ([::1]:19036 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1stk4D-000htJ-T4; Thu, 26 Sep 2024 08:41:41 +0000
-Received: from mail-wr1-x430.google.com ([2a00:1450:4864:20::430]:56791) 
+	id 1svBat-000soA-Nh; Mon, 30 Sep 2024 08:17:23 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:44894) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1stk48-000htC-TG
- for samba-technical@lists.samba.org; Thu, 26 Sep 2024 08:41:39 +0000
-Received: by mail-wr1-x430.google.com with SMTP id
- ffacd0b85a97d-374c1e5fe79so478368f8f.1
- for <samba-technical@lists.samba.org>; Thu, 26 Sep 2024 01:41:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=egnyte.com; s=google; t=1727340095; x=1727944895; darn=lists.samba.org;
- h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=R208JydqJzQ9F/NMhXrY9TY+tchMZwXiIYzS+mj9g48=;
- b=kNZRAxmFMJfYkNy/Jy0/F2RMNzvy4DxdSEIB5h8h1vC/JoClwsAJzSyuBbS2HmRwIX
- I6BQFUAUG3Rz6vGgSHKorwOaopvKegYALNkVScs0G2Cw/t9SQ+WTejCmq0lBAvpewesk
- 62h2+0/b7w1Wdj0NlXh0kT9f7zGg4P9emDMYU=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727340095; x=1727944895;
- h=to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=R208JydqJzQ9F/NMhXrY9TY+tchMZwXiIYzS+mj9g48=;
- b=X3LvGm37Cd1gJ7zBtBIwnSj2r4ZaRF7Il/hdJatFHCdTjBTCj04+9AshC3B428tybn
- DdgZ9+IJENtR6knJikGkbgkpYBTeDW1ApXqIiAleYq7YoxK8BprPcoA8kFJwmEZQ0aRN
- sFeYc7WbPpTXjfCgCBiFfztto5icbO7JpXkV0r9Ut4Vmj71RN7FFeK4UWqy+XbhMkxnZ
- 4101dJ9vvBpX6FlxFftuWsRLF/kby6CUYjop3E7nzluioitFAyEc1EW2c1xFYPTJ3ArH
- RygC6YCg9vz93LkYTMoLDb7BmBqtIUnSRP1k6GDnIG3Aw/Kl5Cx37V7BsQjFedTYI5gI
- 1n+w==
-X-Gm-Message-State: AOJu0Yx6Kyq15tle/L74qyWQMdfXKdvSrwbU0L4dGAJLOZMABDcgtlHr
- y2XPdtEUYRfApFGd3kaeAoJQA3wN1bZfZx+WnYwAfw+9DbxgmFX+vn+dAp6gMXQAefDaz3ZcER4
- F9au927InmY39a5AgBqccY+FpzKXASJCtkDHtNWjs2JpsrQB/Do2Hlw==
-X-Google-Smtp-Source: AGHT+IHvwoNw6vxexep07bNJHCVhhQWZzZXP4FxefUPdgpH5ktBuiL1uzHUBeVQ1LEwOYhRKwmKkv/G+VsWhl78YxUQ=
-X-Received: by 2002:a5d:4807:0:b0:374:c61a:69b8 with SMTP id
- ffacd0b85a97d-37cc24678a0mr3493854f8f.15.1727340094933; Thu, 26 Sep 2024
- 01:41:34 -0700 (PDT)
+ (Exim) id 1svBao-000so3-FZ
+ for samba-technical@lists.samba.org; Mon, 30 Sep 2024 08:17:20 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=From:To:Date:Message-ID:CC;
+ bh=TZNrqUfZlPxWQH5MhtuTial7uFizInb4E/jJBCYBrXs=; b=lD1cyoDFFd5NYzpveQTCsNCETq
+ rjwB1KhAdTTQXHjoVT8X5fIwz/IZHvvd0ucBCqNqMwCc4Y5aAKOl1l8jCOOKn3DcYM0M29xhuWv5s
+ Q3HNNf5hO4pefi824RWdykkhPNfNMcc6IuVSCYLDotvOJK4gNQ8g1HJHKtUVhMlsJk9dnS8xePqnT
+ kW7VhObUpqLb9LWLa9aa+dboWDfhv8BhXHLxdLN+4lGcMiVbNEVGCoVFDs1UwZmGj0eAAr4A7noHF
+ zGxRBPYacz5mBEUyiT1EfVD6FGQ1HLtv2qcCSrWXFJgWbExZnGubB5fFNtxTdFr3X6LtjFghRBL5D
+ RlZJgjUn9+lvjfQqcCOTcHCoIH2aG+u5QHzclUnXQhJ8heUTD2bAGhTTsnEaK76RpB4oCNd2vejtw
+ OfVnNxXvHNus/jYka1k5P3P3JqhdqgMUA1P2UR3rWwu+p6TshQXnspiZG9i5nOvACHqNLfpLkW4Nt
+ wlw0S6kLN9eQ3K+KwJc46y/4;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1svBan-002g7S-1z; Mon, 30 Sep 2024 08:17:17 +0000
+Message-ID: <faa88fc1-369b-4278-bdf1-28ce69baa41a@samba.org>
+Date: Mon, 30 Sep 2024 10:17:16 +0200
 MIME-Version: 1.0
-Date: Thu, 26 Sep 2024 14:11:23 +0530
-Message-ID: <CAF2c6-EiavvBJmf6gKRp394E1s4AjANH29PqWeJbiNdbCas3YA@mail.gmail.com>
-Subject: VFS fruit and streams_xattr fake_fd passed on to other modules in
+User-Agent: Mozilla Thunderbird
+Subject: Re: VFS fruit and streams_xattr fake_fd passed on to other modules in
  stack
-To: samba-technical@lists.samba.org
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
+To: Varun Mittal <vmittal@egnyte.com>, samba-technical@lists.samba.org
+References: <CAF2c6-EiavvBJmf6gKRp394E1s4AjANH29PqWeJbiNdbCas3YA@mail.gmail.com>
+Content-Language: en-US, de-DE
+In-Reply-To: <CAF2c6-EiavvBJmf6gKRp394E1s4AjANH29PqWeJbiNdbCas3YA@mail.gmail.com>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------nyD328zcOVFcRoXxsNp8zVjr"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -70,33 +60,61 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Varun Mittal via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Varun Mittal <vmittal@egnyte.com>
+From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Ralph Boehme <slow@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------nyD328zcOVFcRoXxsNp8zVjr
+Content-Type: multipart/mixed; boundary="------------PuVEGZ0EOzq1vrivZXJDKKQX";
+ protected-headers="v1"
+From: Ralph Boehme <slow@samba.org>
+To: Varun Mittal <vmittal@egnyte.com>, samba-technical@lists.samba.org
+Message-ID: <faa88fc1-369b-4278-bdf1-28ce69baa41a@samba.org>
+Subject: Re: VFS fruit and streams_xattr fake_fd passed on to other modules in
+ stack
+References: <CAF2c6-EiavvBJmf6gKRp394E1s4AjANH29PqWeJbiNdbCas3YA@mail.gmail.com>
+In-Reply-To: <CAF2c6-EiavvBJmf6gKRp394E1s4AjANH29PqWeJbiNdbCas3YA@mail.gmail.com>
 
-I am working with VFS fruit and streams_xattr modules stacked before the
-module for my filesystem. Samba version 4.18 and my SMB clients are Mac
+--------------PuVEGZ0EOzq1vrivZXJDKKQX
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
 
-My smb.conf snippet:
-        fruit:metadata = stream
-        fruit:resource = stream
-        vfs objects = fruit streams_xattr <my-module>
-        kernel share modes = Yes
+SGkgVmFydW4sDQoNCk9uIDkvMjYvMjQgMTA6NDEgQU0sIFZhcnVuIE1pdHRhbCB2aWEgc2Ft
+YmEtdGVjaG5pY2FsIHdyb3RlOg0KPiBBbSBJIG1pc3Npbmcgc29tZSBjb25maWd1cmF0aW9u
+ID8NCg0KSSBndWVzcyB0aGlzIGlzIGN1cnJlbnRseSBub3Qgc3VwcG9ydGVkIGJ5IGZydWl0
+IGFuZCB3b3VsZCByZXF1aXJlIHNvbWUgDQpkZXZlbG9wbWVudCBlZmZvcnQgdG8gaW1wbGVt
+ZW50IHRoaXMuDQoNClVubGVzcyB1c2luZyBzdHJlYW1zX2RlcG90LCBrZXJuZWwgc2hhcmUg
+bW9kZXMgY2FuJ3Qgd29yayB3aGVuIHN0cmVhbXMgDQphcmUgYmFja2VkIGJ5IHhhdHRycywg
+c28gSSBndWVzcyB0aGUgZml4IGlzIHRvIGltcGxlbWVudCANCmZpbGVzeXN0ZW1fc2hhcmVt
+b2RlIGluIGZydWl0IGFzIGEgbm8tb3AsIGJ1dCBJJ2QgaGF2ZSB0byB0YWtlIGEgY2xvc2Vy
+IA0KbG9vay4NCg0KLXNsb3cNCg0KLS0gDQpTZXJOZXQgU2FtYmEgVGVhbSBMZWFkIGh0dHBz
+Oi8vc2VybmV0LmRlLw0KU2FtYmEgVGVhbSBNZW1iZXIgICAgICBodHRwczovL3NhbWJhLm9y
+Zy8NClNBTUJBKyBwYWNrYWdlcyAgICAgICBodHRwczovL3NhbWJhLnBsdXMvDQo=
 
-I observe that the fruit module generates a fake_fd for AFP attributes and
-then tries to take a lock with this fd.
-However the fruit module doesn't implement a filesystem_sharemode wrapper,
-so this is passed on to the streams_xattr module. Since that module doesn't
-know about this fake fd, it passes it on to the next module. My VFS module
-is unaware of this fd as well so it asserts
+--------------PuVEGZ0EOzq1vrivZXJDKKQX--
 
-A similar thing happens with close() call of the fake_fd generated by
-streams_xattr module.
-The following check fails and the close() for fake_fd is passed on to the
-next module
-        if (!fsp_is_alternate_stream(fsp))
+--------------nyD328zcOVFcRoXxsNp8zVjr
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature.asc"
 
-Am I missing some configuration ?
+-----BEGIN PGP SIGNATURE-----
+
+wsF5BAABCAAjFiEE+uLGCIokJSBRxVnkqh6bcSY5nkYFAmb6XowFAwAAAAAACgkQqh6bcSY5nkZ4
++hAAl3ny2yUjkbS0gWLZI1edVvkF9R6ky2T2EZxCY7AUwfrvWeKij7rrISDuv0EHkLgZqcdlmuo2
+AAfrH3+oAGRtms+yUC7Ew9BVA7tXWyMy1l3G9RVf1pPN8v6Fo5WimngMlGzIN23xpD5PE5IABuyp
+8USCtNWcb5ZhsxKrxPEVKIEt0bKxJBFs50z7VsgFs6VZ3sDWFu2QKefZC5PG6IeLLrMSXoFAPam4
+lgXxcafUHvE/mOWQMRvmvnbge338Vbheywdf6yyHwtj+hx65PwLgQCRmk0aPOXOoQPXixrTCZHjt
+4aVscvBogGAO1M3ZBmHHWE7z8cGnq9GP2nmnVPzzGFngw8f9xfCOHjXrunxe8PIg2kj1Q6M/r/2a
+cv1/UjyPsOdcZHVyTDdYqpJPZMc2uWgPSEpDn9XewDZOm72TE/xeUV+9l9jz3Ll81izTV7WZjqo8
+yJGzZSqSxVE116LfqMZx4rHvkDuNaTiYRk2Ma21cVucC7AxYHCZDVjeIsHcu9MTmp+2w1T0Dx/Lg
+C7oNWUpbWQbjkafV8OYoY6U53NwPfmqrxhuYXZWXkx3TqwrP4hof2Zq24y5Bwwx84f26NzahltQp
+9w77VJw+ba4cYkaAdouj8nZYPtda9Gb3ghEOebSW7YK1nchrDa/cJQrM9h4mSUddv3UZqwUihV2Q
+ITk=
+=UE1s
+-----END PGP SIGNATURE-----
+
+--------------nyD328zcOVFcRoXxsNp8zVjr--
+
