@@ -2,70 +2,51 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id A738D98CB5D
-	for <lists+samba-technical@lfdr.de>; Wed,  2 Oct 2024 04:55:39 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3731198CDF3
+	for <lists+samba-technical@lfdr.de>; Wed,  2 Oct 2024 09:45:02 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=HBtfLT5n5Bak6dzvoaIlQiioBlabZ6tHJXqAKEWWupA=; b=LtENgn3YtXOyTdH4BiHGeDmDwq
-	ZA14DewL5iN1DvQyaFTQSWcMgifXUlHlbwSlIuYBq+/34JZwNyz5sskYbAUV0sU2/v+c5CrjnF5C2
-	WYaNWPC8iS5MCa+eKceAhBDoAvGHFTuzQu45krX0kYdgs4IgR4oFdP8FohXjsHEZsS0CIUFT2ONQr
-	ygTZtxzaPIFRcMUHwovA5h2COt8Qbi5ycbnBzCSMfZloG7pWGF0GK0XPL6vSUOnI9LaIzQZ2IfbOw
-	6DT14AjVKUfEiIWpqefUx7jvGACvtHnJr1tw1DbRcwhs3+mveWh6xkVi6fo75wHCC59NcYrjtL6OX
-	bFsaKjCw==;
-Received: from ip6-localhost ([::1]:25764 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=oY9GpVLNcEmYqW4eepmmOmBHJ8KexUVA3p6EDNls5Ks=; b=3pwa3i2XgZRqE1YbXRtbUPrzFV
+	/8xxsWgkF4b4PRvnk7moX7YdZ5XFb8jyV3Jdso3d33RdKfm/00VGGuKxrB9SWE2sxBUDmvhzV68TU
+	lLHpcoMoF3NIBy+lnc6vIyr5yXavoE2+BnEguhH0GvnJzxJiIGw0Jmdld4ACyfVxx70Ron+jfQlAc
+	Ede1ZZ5X7Jz204OKulz5eY4IXPY7lncq8QZZwtKp8+A0USvR59KgjcDaYRWMacwb9hIb0ZPFpUINF
+	O4E/M13Imtb+TMX9HctFX+1UZArg8FULC1Dqvey0IYrwx505vtz6Yt41JzCMP+zuc8L2/sVumNVR3
+	BLAm+B4Q==;
+Received: from ip6-localhost ([::1]:42468 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1svpWP-002p4d-5E; Wed, 02 Oct 2024 02:55:25 +0000
-Received: from mail-lj1-x229.google.com ([2a00:1450:4864:20::229]:43206) 
+	id 1svu23-002plu-6A; Wed, 02 Oct 2024 07:44:23 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:48440) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1svpWK-002p4V-J0
- for samba-technical@lists.samba.org; Wed, 02 Oct 2024 02:55:23 +0000
-Received: by mail-lj1-x229.google.com with SMTP id
- 38308e7fff4ca-2fada911953so3927371fa.0
- for <samba-technical@lists.samba.org>; Tue, 01 Oct 2024 19:55:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1727837719; x=1728442519; darn=lists.samba.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=HBtfLT5n5Bak6dzvoaIlQiioBlabZ6tHJXqAKEWWupA=;
- b=L7ZNa4VPy/tdkIEL9aiYqSHq9aWBT561f+bVi0ahLI4r4uXD62/OzsPA44cYzJeDf0
- 1xLdo8LyHx5bfjv9jy5iu1gQ1rWsSwc1SzJE9B4uoqhqoTr8JV+cL68RgOWKtU8Y3zOg
- lkhPr9kp82oJxTDl6Z1Ht0jZZbSAQdQcVeO023TWL5+D0N6yo3cxhyVn4q4ufCchfxCn
- ua8qirkhaPex1+KbPTGjQ7f2KxJnVz8Yio3p9rPkgeA5sF3BrEhhngOIc+wE9U4SvhYQ
- zNnTZBCNj70L0AG0dikGRQhnrREELg356H2F+dk3DclDFJMorXHaPNJMzUqAPzaIIAYW
- v8lQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727837719; x=1728442519;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=HBtfLT5n5Bak6dzvoaIlQiioBlabZ6tHJXqAKEWWupA=;
- b=clq+Czlz4V6lE5sUZ1NE1lPxtrnIOvGgDaWsz+C6s+h8sS+6QU3Nyo5bmtVuqaSroU
- O72gLU2Zio3ksMTNDd+xn72DQKDMn8JZElmugdrJ2J/vMwTsb8KNj18iqyopCAmzq3zL
- hUgCi6FI80Du7beLJ1Cy/9aJLZNFyX/1JOLVy974O6r29I/ao+ldrO2W8sGHuKtiE4Lx
- +psQTay4J27ntUEc+e99GgHwpy6JC/rF8smuClmfVllQmiZTN5RQLlZ4J/D8QaLwGb4G
- q+MMuDCKPwXIq3+VGk2rlqGssvCbEg/RQQQyhmglyeYyHgRKPCbIshEwh20L0XT6ULgy
- IEYw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW/defGvUKJWcPNLr4G+Awm3cC2b3cNu5ddu8pSiHRU51zqvQP0Z+yXHhuDPEpa73agISZ+xdkfDlhH69/PlS8=@lists.samba.org
-X-Gm-Message-State: AOJu0YxctoxN2Gx7fTPQ+dzdzGg1uLpUtF+t6BZcp4b8HetA6aRUqg9g
- dh/DGmWl1JEoCn9Z8O/56a5hPvc7onKdovWH2zeFYZZQk2XejoBTvW7lWTUVv3/aqCGNUrSOjjD
- 9Y62WAhXBDbhSJa5l4F2wrteM10w=
-X-Google-Smtp-Source: AGHT+IHssEqv0unBInb7m7EItT105TTfXc09hELEcUF1hMnepLQhaifGSa/TVocR+krv64hJQLxxX3BUS26zCCjKc0g=
-X-Received: by 2002:a05:6512:230e:b0:539:933c:51c6 with SMTP id
- 2adb3069b0e04-539a0176bf7mr423546e87.29.1727837718605; Tue, 01 Oct 2024
- 19:55:18 -0700 (PDT)
+ (Exim) id 1svu1u-002pln-Ht
+ for samba-technical@lists.samba.org; Wed, 02 Oct 2024 07:44:17 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=From:To:Date:Message-ID:CC;
+ bh=oY9GpVLNcEmYqW4eepmmOmBHJ8KexUVA3p6EDNls5Ks=; b=FfNwdZirMyx47nEWEAZu5ZGk7M
+ qM7QCKUfRxFT0eY4gQFR6zItfWAjAGgEq+QPngtE4fccc3uSRuwOjsngkk+kd5o9a8qR9QmR+DeSW
+ k/Fz0nudPCAtjFuFxDsqc85T4Zsmyn8UhOih38sq8W+ykmdjgXYtfHS27fmTYLwZJRy4YjlJhZjrh
+ ytvGahBlMHuBt0fakvOXNeSnWHgFnJCl/lzzoOeegIkWFGPytKKtUjUc1siGzJ0hxPlSeFs5rrjV7
+ 4uahf7OiJeFXlZahM0edv7DT4RSD8f6Q1MPc+ltlTtJirKhNmQeG5gMc8v3wGIcSyuIlpB93GFH14
+ 64KuZGeFmCAgm1xXPlUpEGWx2uRS045X9vtXQwfLIwQdvXmcewIV0zT82IVdCuxywruxBrFxvV+ps
+ rJAKS02F4xIa83QwL7bowfvNhCs5zcgMh8HMrDPtGbNf8kbg0V3VKJ+gC+N6O9mE1xyUHgKpS+tS0
+ go0WsUy1klu3sunydA87/TSI;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1svu1t-003296-0r; Wed, 02 Oct 2024 07:44:13 +0000
+Message-ID: <56ac8ed5-781d-4ca9-95e6-75a6e52c34e3@samba.org>
+Date: Wed, 2 Oct 2024 09:44:12 +0200
 MIME-Version: 1.0
-References: <20240620083729.28623-1-wangrong@uniontech.com>
- <CAH2r5msOQ=OWAgRoYG5kO7fndMWt=_7ZBET-M3mkXMfgnLCM1A@mail.gmail.com>
-In-Reply-To: <CAH2r5msOQ=OWAgRoYG5kO7fndMWt=_7ZBET-M3mkXMfgnLCM1A@mail.gmail.com>
-Date: Tue, 1 Oct 2024 21:55:07 -0500
-Message-ID: <CAH2r5mv0fZTiczADy2Ym65unER3kQoXTSaA_Q_9Jd72YQhusbw@mail.gmail.com>
-Subject: Re: [PATCH] smb: client: use actual path when queryfs
-To: wangrong <wangrong@uniontech.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: SMB POSIX Extensions specification
+To: =?UTF-8?Q?Pali_Roh=C3=A1r?= <pali@kernel.org>,
+ samba-technical@lists.samba.org, linux-cifs@vger.kernel.org
+References: <20241002073519.2fee66fwopzy3dpp@pali>
+Content-Language: en-US, de-DE
+In-Reply-To: <20241002073519.2fee66fwopzy3dpp@pali>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------sIcR74uqMEPq5ZQHkap7q4yj"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -79,200 +60,59 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
-Cc: pc@manguebit.com, tom@talpey.com, sprasad@microsoft.com,
- linux-cifs@vger.kernel.org, samba-technical@lists.samba.org,
- linux-kernel@vger.kernel.org, sfrench@samba.org
+From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Ralph Boehme <slow@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Merged into cifs-2.6.git for-next tentatively but want to do some more
-testing on this (and any additional review comments would be welcome)
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------sIcR74uqMEPq5ZQHkap7q4yj
+Content-Type: multipart/mixed; boundary="------------Ih3GYj69kv3uPzl0DWNKIsSz";
+ protected-headers="v1"
+From: Ralph Boehme <slow@samba.org>
+To: =?UTF-8?Q?Pali_Roh=C3=A1r?= <pali@kernel.org>,
+ samba-technical@lists.samba.org, linux-cifs@vger.kernel.org
+Message-ID: <56ac8ed5-781d-4ca9-95e6-75a6e52c34e3@samba.org>
+Subject: Re: SMB POSIX Extensions specification
+References: <20241002073519.2fee66fwopzy3dpp@pali>
+In-Reply-To: <20241002073519.2fee66fwopzy3dpp@pali>
 
-On Tue, Oct 1, 2024 at 9:33=E2=80=AFPM Steve French <smfrench@gmail.com> wr=
-ote:
->
-> Paulo just found this potentially important fix in email (it had gotten m=
-issed).
->
-> The one suspicious thing about this though ... we should have some
-> code paths where we would use the cached root handle for statfs
-> (which is preferable to doing an open of a new handle, since it is
-> already open we don't risk an error coming back on open).
->
-> Any ideas whether we also need additional changes to use the cached
-> root handle better in statfs (since in most cases to
-> Windows we would expect to have that)?
->
->
-> On Thu, Jun 20, 2024 at 3:54=E2=80=AFAM wangrong <wangrong@uniontech.com>=
- wrote:
-> >
-> > Due to server permission control, the client does not have access to
-> > the shared root directory, but can access subdirectories normally, so
-> > users usually mount the shared subdirectories directly. In this case,
-> > queryfs should use the actual path instead of the root directory to
-> > avoid the call returning an error (EACCES).
-> >
-> > Signed-off-by: wangrong <wangrong@uniontech.com>
-> > ---
-> >  fs/smb/client/cifsfs.c   | 13 ++++++++++++-
-> >  fs/smb/client/cifsglob.h |  2 +-
-> >  fs/smb/client/smb1ops.c  |  2 +-
-> >  fs/smb/client/smb2ops.c  | 19 ++++++++++++-------
-> >  4 files changed, 26 insertions(+), 10 deletions(-)
-> >
-> > diff --git a/fs/smb/client/cifsfs.c b/fs/smb/client/cifsfs.c
-> > index bb86fc064..a4d59f0f5 100644
-> > --- a/fs/smb/client/cifsfs.c
-> > +++ b/fs/smb/client/cifsfs.c
-> > @@ -313,8 +313,17 @@ cifs_statfs(struct dentry *dentry, struct kstatfs =
-*buf)
-> >         struct TCP_Server_Info *server =3D tcon->ses->server;
-> >         unsigned int xid;
-> >         int rc =3D 0;
-> > +       const char *full_path;
-> > +       void *page;
-> >
-> >         xid =3D get_xid();
-> > +       page =3D alloc_dentry_path();
-> > +
-> > +       full_path =3D build_path_from_dentry(dentry, page);
-> > +       if (IS_ERR(full_path)) {
-> > +               rc =3D PTR_ERR(full_path);
-> > +               goto statfs_out;
-> > +       }
-> >
-> >         if (le32_to_cpu(tcon->fsAttrInfo.MaxPathNameComponentLength) > =
-0)
-> >                 buf->f_namelen =3D
-> > @@ -330,8 +339,10 @@ cifs_statfs(struct dentry *dentry, struct kstatfs =
-*buf)
-> >         buf->f_ffree =3D 0;       /* unlimited */
-> >
-> >         if (server->ops->queryfs)
-> > -               rc =3D server->ops->queryfs(xid, tcon, cifs_sb, buf);
-> > +               rc =3D server->ops->queryfs(xid, tcon, full_path, cifs_=
-sb, buf);
-> >
-> > +statfs_out:
-> > +       free_dentry_path(page);
-> >         free_xid(xid);
-> >         return rc;
-> >  }
-> > diff --git a/fs/smb/client/cifsglob.h b/fs/smb/client/cifsglob.h
-> > index 73482734a..d3118d748 100644
-> > --- a/fs/smb/client/cifsglob.h
-> > +++ b/fs/smb/client/cifsglob.h
-> > @@ -483,7 +483,7 @@ struct smb_version_operations {
-> >                         __u16 net_fid, struct cifsInodeInfo *cifs_inode=
-);
-> >         /* query remote filesystem */
-> >         int (*queryfs)(const unsigned int, struct cifs_tcon *,
-> > -                      struct cifs_sb_info *, struct kstatfs *);
-> > +                      const char *, struct cifs_sb_info *, struct ksta=
-tfs *);
-> >         /* send mandatory brlock to the server */
-> >         int (*mand_lock)(const unsigned int, struct cifsFileInfo *, __u=
-64,
-> >                          __u64, __u32, int, int, bool);
-> > diff --git a/fs/smb/client/smb1ops.c b/fs/smb/client/smb1ops.c
-> > index 212ec6f66..e3a195824 100644
-> > --- a/fs/smb/client/smb1ops.c
-> > +++ b/fs/smb/client/smb1ops.c
-> > @@ -909,7 +909,7 @@ cifs_oplock_response(struct cifs_tcon *tcon, __u64 =
-persistent_fid,
-> >
-> >  static int
-> >  cifs_queryfs(const unsigned int xid, struct cifs_tcon *tcon,
-> > -            struct cifs_sb_info *cifs_sb, struct kstatfs *buf)
-> > +            const char *path, struct cifs_sb_info *cifs_sb, struct kst=
-atfs *buf)
-> >  {
-> >         int rc =3D -EOPNOTSUPP;
-> >
-> > diff --git a/fs/smb/client/smb2ops.c b/fs/smb/client/smb2ops.c
-> > index c8e536540..bb7194386 100644
-> > --- a/fs/smb/client/smb2ops.c
-> > +++ b/fs/smb/client/smb2ops.c
-> > @@ -2784,7 +2784,7 @@ smb2_query_info_compound(const unsigned int xid, =
-struct cifs_tcon *tcon,
-> >
-> >  static int
-> >  smb2_queryfs(const unsigned int xid, struct cifs_tcon *tcon,
-> > -            struct cifs_sb_info *cifs_sb, struct kstatfs *buf)
-> > +            const char *path, struct cifs_sb_info *cifs_sb, struct kst=
-atfs *buf)
-> >  {
-> >         struct smb2_query_info_rsp *rsp;
-> >         struct smb2_fs_full_size_info *info =3D NULL;
-> > @@ -2793,7 +2793,7 @@ smb2_queryfs(const unsigned int xid, struct cifs_=
-tcon *tcon,
-> >         int rc;
-> >
-> >
-> > -       rc =3D smb2_query_info_compound(xid, tcon, "",
-> > +       rc =3D smb2_query_info_compound(xid, tcon, path,
-> >                                       FILE_READ_ATTRIBUTES,
-> >                                       FS_FULL_SIZE_INFORMATION,
-> >                                       SMB2_O_INFO_FILESYSTEM,
-> > @@ -2821,28 +2821,33 @@ smb2_queryfs(const unsigned int xid, struct cif=
-s_tcon *tcon,
-> >
-> >  static int
-> >  smb311_queryfs(const unsigned int xid, struct cifs_tcon *tcon,
-> > -              struct cifs_sb_info *cifs_sb, struct kstatfs *buf)
-> > +              const char *path, struct cifs_sb_info *cifs_sb, struct k=
-statfs *buf)
-> >  {
-> >         int rc;
-> > -       __le16 srch_path =3D 0; /* Null - open root of share */
-> > +       __le16 *utf16_path =3D NULL;
-> >         u8 oplock =3D SMB2_OPLOCK_LEVEL_NONE;
-> >         struct cifs_open_parms oparms;
-> >         struct cifs_fid fid;
-> >
-> >         if (!tcon->posix_extensions)
-> > -               return smb2_queryfs(xid, tcon, cifs_sb, buf);
-> > +               return smb2_queryfs(xid, tcon, path, cifs_sb, buf);
-> >
-> >         oparms =3D (struct cifs_open_parms) {
-> >                 .tcon =3D tcon,
-> > -               .path =3D "",
-> > +               .path =3D path,
-> >                 .desired_access =3D FILE_READ_ATTRIBUTES,
-> >                 .disposition =3D FILE_OPEN,
-> >                 .create_options =3D cifs_create_options(cifs_sb, 0),
-> >                 .fid =3D &fid,
-> >         };
-> >
-> > -       rc =3D SMB2_open(xid, &oparms, &srch_path, &oplock, NULL, NULL,
-> > +       utf16_path =3D cifs_convert_path_to_utf16(path, cifs_sb);
-> > +       if (utf16_path =3D=3D NULL)
-> > +               return -ENOMEM;
-> > +
-> > +       rc =3D SMB2_open(xid, &oparms, utf16_path, &oplock, NULL, NULL,
-> >                        NULL, NULL);
-> > +       kfree(utf16_path);
-> >         if (rc)
-> >                 return rc;
-> >
-> > --
-> > 2.20.1
-> >
-> >
->
->
-> --
-> Thanks,
->
-> Steve
+--------------Ih3GYj69kv3uPzl0DWNKIsSz
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
 
+T24gMTAvMi8yNCA5OjM1IEFNLCBQYWxpIFJvaMOhciB3cm90ZToNCj4gSGVsbG8sIEkgd291
+bGQgbGlrZSB0byBhc2ssIGlzIHRoZXJlIGFueSBub3JtYXRpdmUgc3BlY2lmaWNhdGlvbiBv
+Zg0KPiBTTUIgUE9TSVggRXh0ZW5zaW9ucz8gQmVjYXVzZSBJIHdhcyBub3QgYWJsZSB0byBm
+aW5kIGFueXRoaW5nIGluDQo+IE1TLVNNQjIgYW5kIG5laXRoZXIgaW4gb3RoZXIgcmVsYXRl
+ZCBkb2N1bWVudHMuDQoNCnRoaXMgaXMgc3RpbGwgdmVyeSBtdWNoIFdJUC4NCg0KaHR0cHM6
+Ly9naXRsYWIuY29tL3NhbWJhLXRlYW0vc21iMy1wb3NpeC1zcGVjDQpodHRwczovL2dpdGxh
+Yi5jb20vc2FtYmEtdGVhbS9zbWIzLXBvc2l4LXNwZWMvLS9yZWxlYXNlcw0KDQpJJ20gaG9z
+dGluZyBXSVAgaHRtbCB2ZXJzaW9ucyBoZXJlOg0KDQpodHRwczovL3d3dy5zYW1iYS5vcmcv
+fnNsb3cvU01CM19QT1NJWC8NCg0KLXNsb3cNCg==
 
+--------------Ih3GYj69kv3uPzl0DWNKIsSz--
 
---=20
-Thanks,
+--------------sIcR74uqMEPq5ZQHkap7q4yj
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature.asc"
 
-Steve
+-----BEGIN PGP SIGNATURE-----
+
+wsF5BAABCAAjFiEE+uLGCIokJSBRxVnkqh6bcSY5nkYFAmb8+cwFAwAAAAAACgkQqh6bcSY5nkYE
+7A/+JFDnTh/0tM7SDhJJZmaQygOstfMI7Hl1SOknWqTnndMUwvaxa05WHnGtIqAc0SgHPLhpYP8U
+nVwpX4FwYXfMZNnar2kBXD7VcM+WytLZuN9onNfelBefuJMFe5/6/iCsSfa0U1NE/b3iS3+ou1tR
+n4Ic2YdotSrcQo3HvnYa+c4t54qIix3KTXuCNr0/Clmznmt8UAG9QGvBYTxRyvoh6JEMerRUsV/c
+bJRdV1g4QplnKsz+fJuRZ3LOtAxgoJ0SsbGOXMKuU9729BD4D/uEXNOF0Nq737GCFtvxRuoTl466
+fTr0B6f7mINEy2MjMaELkLet2hsgQdagi75ki6tW+pZ8mCwKdoWH3Xr9inYHiH8K3j45MDf3UDgQ
+Rt0JxPn0d/bUcwe7ioorkvdtDTrhH0LHFsX+z5Ywgmu7dH/ZXd4OfYtS+PzssDzoVAZwJ9E2sYLB
+Nzz3b+xPR/2ApeVE4B4TCHkSaYlsOZQ9bgTIBf6s2ytCOz6JxIcgvnI9pU1S2JiFQlJjyJtsb8sS
+ODBOFOIr5oDNqQTQ3egxKRnbuZU+8tfEk47h+vNVVlQ3ZJo9epFVeN5ikdlzREHoftVuLp9l2w0U
+zMRnAKbx+lnizh3qzmzorquVodIJM43xQmjtUVZevbKJJ3aus00lOzaifPfWgwsBShMfbgyEmk5K
+I3A=
+=jPmn
+-----END PGP SIGNATURE-----
+
+--------------sIcR74uqMEPq5ZQHkap7q4yj--
 
