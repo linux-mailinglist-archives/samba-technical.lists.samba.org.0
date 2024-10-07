@@ -2,61 +2,69 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id DA0EB99227B
-	for <lists+samba-technical@lfdr.de>; Mon,  7 Oct 2024 02:35:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4BB77992360
+	for <lists+samba-technical@lfdr.de>; Mon,  7 Oct 2024 06:12:01 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=zTSb+6kF5YnLk0c43LMq5gPoNbkooDf5vo/3cbdFwcM=; b=VNhxmXOT+ADq7M+2RQz0Lam8VX
-	KuocY9XjW62x5b3hk/bikG+TfmVtuxM9+/3Mudi7JGHr7EqET9Wj6E+NaCGJzCgXuQ1c/rEul21I0
-	jgqfIilF8R8ufgQ/v/6ZL2p6QSxA+suxIECT5l/bcz+Oyx6ija1Hah8T8oMUVWh1qx6HXUGwaWvks
-	1DeKex6HW8J2VrMkjq8V8AEMmA52MWHrgz/BRhqhMJztFSCBux9jjsemp1pQ0P1mwgWh1va85V0Xu
-	0FwznInBmMR+Iqjn6JYUloZFnz6dwGm2K2yrkmyfMHLR879WkAnXO2KEustYsIUOWiz2iKP8V8Vkb
-	Wx4FlICQ==;
-Received: from ip6-localhost ([::1]:28270 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=nOgArWBJC8EePXX6ZD6ccL3/wpe9oAMr2gqSbvNQi/8=; b=EYQXCi5mnCVHEj3b6lUXGAr1ee
+	85T0rk8lInvsxuQS7ffQbe0hrxkr+wQIx0JDk6a+2lfVVPCmGpk11NLmP1Ad86cYm3rT5nGOXuuqp
+	9aYMnB47R2etbGNLv05kiFZrbKrJgfQ4pPt3Vj3KkIPI/zhD79/eQQu5P95b4zCN9NQAvG144MMC1
+	g8tl9YS4XhmNHeXcEDfJLjjy+POET8zBeViujDeJ8bjIOxNIzHp9KwOHhjCAES5VgCcoyxEdcTcHo
+	XZoUhfKm8+15yqkl9Smkg46ChVs4EMV2pYY+pETlQgsh9Xa9n+48ON+ai323F18DDDspz9VGQg7pm
+	7b1Q85YA==;
+Received: from ip6-localhost ([::1]:20554 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1sxbiH-003BOH-BU; Mon, 07 Oct 2024 00:35:01 +0000
-Received: from mail-ej1-f42.google.com ([209.85.218.42]:55303) 
+	id 1sxf5i-003Bd3-3J; Mon, 07 Oct 2024 04:11:26 +0000
+Received: from mail-lj1-x22e.google.com ([2a00:1450:4864:20::22e]:59454) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1sxbiC-003BOA-Cu
- for samba-technical@lists.samba.org; Mon, 07 Oct 2024 00:34:58 +0000
-Received: by mail-ej1-f42.google.com with SMTP id
- a640c23a62f3a-a8d446adf6eso662204566b.2
- for <samba-technical@lists.samba.org>; Sun, 06 Oct 2024 17:34:55 -0700 (PDT)
+ (Exim) id 1sxf5b-003Bcw-Vy
+ for samba-technical@lists.samba.org; Mon, 07 Oct 2024 04:11:23 +0000
+Received: by mail-lj1-x22e.google.com with SMTP id
+ 38308e7fff4ca-2fac787f39fso40553351fa.2
+ for <samba-technical@lists.samba.org>; Sun, 06 Oct 2024 21:11:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1728274278; x=1728879078; darn=lists.samba.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=nOgArWBJC8EePXX6ZD6ccL3/wpe9oAMr2gqSbvNQi/8=;
+ b=ftMjP0k6HUQW0y985AKDvjWdhUHYXgti9LvAgmOgkftydXkfCQAGpnqaggsCrxdnOb
+ KPflmILD9RHrgbULD/9F+aGP7ItmQCBeqrEEJpzMvT5dg8/Ya7n7u7JOJUf/OMWJemr8
+ poc+PfgcsDtYj3Usd84BOHmK7Z5dZoSWFOo7Wmw7mntw1qhGSrErbltwFcpqRR4ikU0Q
+ 5k7rXzVXsRV888G7vKiL1wz1haFE9FU8s5CmEPkhvtfJhtb+3YrRC4CMIAqsjTOMiL/X
+ PxSdexYqILGWh4MG6ZZRe9yzPnPxkUWy3hh6+yevLag4hixUJ1j+n47SXu8WvTggN+bL
+ qp6g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728261295; x=1728866095;
- h=to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=zTSb+6kF5YnLk0c43LMq5gPoNbkooDf5vo/3cbdFwcM=;
- b=QC5eHqCSf9Al1Vuo2USdo7aacnoGt69CjeCSG0/7BwPfCpljQ8PaFk238U8yt0SKsD
- 9P8G0VaShZmkiYwrCbM2pZC6sYgHdtNKat5zLVvZUo9vCP2rsvpr6lcOS5DZk27OQKPF
- uSuUpLJUVlJwYzFi3x2lkTirWu011cpen2PMx8W2u0q8ET+i4H6SJBSsJ37OluOig/J0
- QGlqCk6YgFQ5DE9ZU6Rf+FdblbfN4UZWa0PRAezT9hO86xAS6GAiY8EVGcLOWx0Hk3/R
- vobxuKf9bvp3ORkP48eC1uLHB2lp2aDHcTFMG1hJRB6Xh1+Bf00yZKIuNfpsn8gRK/44
- ALZA==
+ d=1e100.net; s=20230601; t=1728274278; x=1728879078;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=nOgArWBJC8EePXX6ZD6ccL3/wpe9oAMr2gqSbvNQi/8=;
+ b=GRG9/K+xGWHgqZpb/AttVtHNtvvCWnpbZY48z1R2O0aTTm1/MTBBtShUkuH1rzBnUu
+ 4byiRZQz3qhOlYYrpNDbCqE/KOsbEiGEB8FFS1t5k1dYM9iosOnnqFfM2wnoNVwDVpem
+ N0FxAACCX39dxvwQ5TK/li8G1Tl6XPu9b7cKeiaxak1Li3g5L963fK0zrvk78snc6iAq
+ oClCJCdJE92UN7JBhaLxIeZjhtGr4ITm/1/8v8fhnTBaBOHKgZVucPWp2OzFBcpDEf9T
+ gyEGcMnIc+FJsBf2GS6IhFKVxZLsbLBTBDQe9it6Ww0urFfajQlGSeJm8hPcVxFq8H3Y
+ x4/A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUcKKvyynivl9CpVSqO8NUAaTFHoYuPbVwZlDe3o0a0+MzBUuAYp1JObZb3gEANpUdHtNap0eWkIiozSp8+WUE=@lists.samba.org
-X-Gm-Message-State: AOJu0YyiwpB9U7jAPtikcJWKBIHxTELJGQ2aZN4Rh9wd4LDNl2u9Cv8S
- STJiCJDSVFR8pNzmYuiH3p8Xpz2tmXvr4vdaybwE8CFV3IzZBSsxc5ycpPcDPA2kOG/F1q+bmCz
- GOSRJB7JjfKoO2wZ0Y5n9KqIf1Q==
-X-Google-Smtp-Source: AGHT+IF97Rl33dJlZXO+eywiE4wgdx8hkOH5l3f32qTBueUyMwnQ9oddo24f3pSQm1OMIFRDlOY/vv1JsNpsETGW8Bs=
-X-Received: by 2002:a17:907:7206:b0:a99:3dbf:648d with SMTP id
- a640c23a62f3a-a993dbf6715mr507220866b.45.1728261294503; Sun, 06 Oct 2024
- 17:34:54 -0700 (PDT)
+ AJvYcCUl5CfcF7UmuR7vyJFDyHgp5cnL6wY7JmW0H8gL+tQEGjRsIG25FRIcFT8cRd0LDSVTQmIC6HvmfDbdP+LqL9M=@lists.samba.org
+X-Gm-Message-State: AOJu0YwtJseYe0BtQBrr5oPGvQyM+AkW/qmWKvUs4Lu3Y6MTrb0VvaLK
+ aAQDkipIZUiB4ZAo7iMzgNF8seH4B5fwrHkYVEi7SQOY2o+qd6yDdctzn3hkQDsxv6Rldr7frip
+ tgBpGae5IOysrKt2Q2HkEyjZPIMk=
+X-Google-Smtp-Source: AGHT+IFZ5wRH6KQjFJkULO+H6xtDDe0Y4MoVBbNHr537uuoluDWd91eMT9lO+88/pRE7voBqHVE5Wp+6sajcy6L/R10=
+X-Received: by 2002:a05:6512:104b:b0:535:3c94:70c2 with SMTP id
+ 2adb3069b0e04-539ab87710amr4641895e87.19.1728274277641; Sun, 06 Oct 2024
+ 21:11:17 -0700 (PDT)
 MIME-Version: 1.0
-Date: Sun, 6 Oct 2024 17:34:42 -0700
-Message-ID: <CAKywueS5Qqgz62xjjJh08n2tQaFPhbi-B1a9JiSvZjDsiP=ciw@mail.gmail.com>
-Subject: [ANNOUNCE] cifs-utils release 7.1 ready for download
-To: linux-cifs <linux-cifs@vger.kernel.org>, 
- samba-technical <samba-technical@lists.samba.org>,
- Steve French <smfrench@gmail.com>, 
- Bharath S M <bharathsm@microsoft.com>, David Voit <david.voit@gmail.com>, 
- Paulo Alcantara <pc@manguebit.com>, Anthony Nandaa <profnandaa@gmail.com>, 
- =?UTF-8?Q?Pavel_Filipensk=C3=BD?= <pfilipensky@samba.org>, 
- Sam James <sam@gentoo.org>, Daniel Parks <danielrparks@ti.com>, 
- Henrique Carvalho <henrique.carvalho@suse.com>,
- Pavel Shilovsky <piastryyy@gmail.com>
+References: <20241007004855.150168-1-linux@treblig.org>
+In-Reply-To: <20241007004855.150168-1-linux@treblig.org>
+Date: Sun, 6 Oct 2024 23:11:06 -0500
+Message-ID: <CAH2r5mvHnBnoS+hcyFiqNO8Z9rvzy6x=segDEvgP_hCyXfcAPg@mail.gmail.com>
+Subject: Re: [PATCH] cifs: Remove unused functions
+To: linux@treblig.org
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -70,47 +78,163 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Pavel Shilovsky via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Pavel Shilovsky <pshilovsky@samba.org>
+From: Steve French via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Steve French <smfrench@gmail.com>
+Cc: pc@manguebit.com, tom@talpey.com, sprasad@microsoft.com,
+ linux-cifs@vger.kernel.org, samba-technical@lists.samba.org,
+ linux-kernel@vger.kernel.org, sfrench@samba.org, bharathsm@microsoft.com
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-New version 7.1 of cifs-utils has been released today.
+tentatively merged into cifs-2.6.git for-next pending testing and any
+additional reviews
 
-It brings LDAP Ping capability, smbinfo gettconinfo command and
-various improvements to documentation.
+On Sun, Oct 6, 2024 at 7:49=E2=80=AFPM <linux@treblig.org> wrote:
+>
+> From: "Dr. David Alan Gilbert" <linux@treblig.org>
+>
+> cifs_ses_find_chan() has been unused since commit
+> f486ef8e2003 ("cifs: use the chans_need_reconnect bitmap for reconnect st=
+atus")
+>
+> cifs_read_page_from_socket() has been unused since commit
+> d08089f649a0 ("cifs: Change the I/O paths to use an iterator rather than =
+a page list")
+>
+> cifs_chan_in_reconnect() has been unused since commit
+> bc962159e8e3 ("cifs: avoid race conditions with parallel reconnects")
+>
+> Remove them.
+>
+> Signed-off-by: Dr. David Alan Gilbert <linux@treblig.org>
+> ---
+>  fs/smb/client/cifsproto.h |  9 ---------
+>  fs/smb/client/connect.c   | 12 ------------
+>  fs/smb/client/sess.c      | 32 --------------------------------
+>  3 files changed, 53 deletions(-)
+>
+> diff --git a/fs/smb/client/cifsproto.h b/fs/smb/client/cifsproto.h
+> index 68c716e6261b..1d3470bca45e 100644
+> --- a/fs/smb/client/cifsproto.h
+> +++ b/fs/smb/client/cifsproto.h
+> @@ -252,10 +252,6 @@ extern int cifs_read_from_socket(struct TCP_Server_I=
+nfo *server, char *buf,
+>                                  unsigned int to_read);
+>  extern ssize_t cifs_discard_from_socket(struct TCP_Server_Info *server,
+>                                         size_t to_read);
+> -extern int cifs_read_page_from_socket(struct TCP_Server_Info *server,
+> -                                       struct page *page,
+> -                                       unsigned int page_offset,
+> -                                       unsigned int to_read);
+>  int cifs_read_iter_from_socket(struct TCP_Server_Info *server,
+>                                struct iov_iter *iter,
+>                                unsigned int to_read);
+> @@ -623,8 +619,6 @@ enum securityEnum cifs_select_sectype(struct TCP_Serv=
+er_Info *,
+>  int cifs_alloc_hash(const char *name, struct shash_desc **sdesc);
+>  void cifs_free_hash(struct shash_desc **sdesc);
+>
+> -struct cifs_chan *
+> -cifs_ses_find_chan(struct cifs_ses *ses, struct TCP_Server_Info *server)=
+;
+>  int cifs_try_adding_channels(struct cifs_ses *ses);
+>  bool is_server_using_iface(struct TCP_Server_Info *server,
+>                            struct cifs_server_iface *iface);
+> @@ -640,9 +634,6 @@ cifs_chan_set_in_reconnect(struct cifs_ses *ses,
+>  void
+>  cifs_chan_clear_in_reconnect(struct cifs_ses *ses,
+>                                struct TCP_Server_Info *server);
+> -bool
+> -cifs_chan_in_reconnect(struct cifs_ses *ses,
+> -                         struct TCP_Server_Info *server);
+>  void
+>  cifs_chan_set_need_reconnect(struct cifs_ses *ses,
+>                              struct TCP_Server_Info *server);
+> diff --git a/fs/smb/client/connect.c b/fs/smb/client/connect.c
+> index adf8758847f6..15d94ac4095e 100644
+> --- a/fs/smb/client/connect.c
+> +++ b/fs/smb/client/connect.c
+> @@ -794,18 +794,6 @@ cifs_discard_from_socket(struct TCP_Server_Info *ser=
+ver, size_t to_read)
+>         return cifs_readv_from_socket(server, &smb_msg);
+>  }
+>
+> -int
+> -cifs_read_page_from_socket(struct TCP_Server_Info *server, struct page *=
+page,
+> -       unsigned int page_offset, unsigned int to_read)
+> -{
+> -       struct msghdr smb_msg =3D {};
+> -       struct bio_vec bv;
+> -
+> -       bvec_set_page(&bv, page, to_read, page_offset);
+> -       iov_iter_bvec(&smb_msg.msg_iter, ITER_DEST, &bv, 1, to_read);
+> -       return cifs_readv_from_socket(server, &smb_msg);
+> -}
+> -
+>  int
+>  cifs_read_iter_from_socket(struct TCP_Server_Info *server, struct iov_it=
+er *iter,
+>                            unsigned int to_read)
+> diff --git a/fs/smb/client/sess.c b/fs/smb/client/sess.c
+> index 3216f786908f..c88e9657f47a 100644
+> --- a/fs/smb/client/sess.c
+> +++ b/fs/smb/client/sess.c
+> @@ -115,18 +115,6 @@ cifs_chan_clear_in_reconnect(struct cifs_ses *ses,
+>         ses->chans[chan_index].in_reconnect =3D false;
+>  }
+>
+> -bool
+> -cifs_chan_in_reconnect(struct cifs_ses *ses,
+> -                         struct TCP_Server_Info *server)
+> -{
+> -       unsigned int chan_index =3D cifs_ses_get_chan_index(ses, server);
+> -
+> -       if (chan_index =3D=3D CIFS_INVAL_CHAN_INDEX)
+> -               return true;    /* err on the safer side */
+> -
+> -       return CIFS_CHAN_IN_RECONNECT(ses, chan_index);
+> -}
+> -
+>  void
+>  cifs_chan_set_need_reconnect(struct cifs_ses *ses,
+>                              struct TCP_Server_Info *server)
+> @@ -487,26 +475,6 @@ cifs_chan_update_iface(struct cifs_ses *ses, struct =
+TCP_Server_Info *server)
+>         spin_unlock(&ses->chan_lock);
+>  }
+>
+> -/*
+> - * If server is a channel of ses, return the corresponding enclosing
+> - * cifs_chan otherwise return NULL.
+> - */
+> -struct cifs_chan *
+> -cifs_ses_find_chan(struct cifs_ses *ses, struct TCP_Server_Info *server)
+> -{
+> -       int i;
+> -
+> -       spin_lock(&ses->chan_lock);
+> -       for (i =3D 0; i < ses->chan_count; i++) {
+> -               if (ses->chans[i].server =3D=3D server) {
+> -                       spin_unlock(&ses->chan_lock);
+> -                       return &ses->chans[i];
+> -               }
+> -       }
+> -       spin_unlock(&ses->chan_lock);
+> -       return NULL;
+> -}
+> -
+>  static int
+>  cifs_ses_add_channel(struct cifs_ses *ses,
+>                      struct cifs_server_iface *iface)
+> --
+> 2.46.2
+>
+>
 
-Links
 
-webpage: https://wiki.samba.org/index.php/LinuxCIFS_utils
-tarball: https://download.samba.org/pub/linux-cifs/cifs-utils/
-git: git://git.samba.org/cifs-utils.git
-gitweb: http://git.samba.org/?p=cifs-utils.git;a=summary
+--=20
+Thanks,
 
-Detailed list of changes since 7.0 was released:
-
-0fae4c7 cifs-utils: bump version to 7.1
-2cd7b1f cifs: update documentation for sloppy mount option
-9918019 docs: add closetimeo description
-c4c30b5 docs: add compress description
-454870a checkopts: update it to work with latest kernel version
-465f213 cifs-utils: add documentation for multichannel and max_channels
-b3fe25c cifs-utils: smbinfo: add gettconinfo command
-c6bf4d9 Implement CLDAP Ping to find the closest site
-4718e09 (for-next) mount.cifs.rst: update section about xattr/acl support
-e7ec003 mount.cifs.rst: add missing reference for sssd
-3870f5b getcifsacl, setcifsacl: add missing <endian.h> include for le32toh
-c8ec7d1 getcifsacl, setcifsacl: add missing <linux/limits.h> include
-for XATTR_SIZE_MAX
-25d6552 cifs-utils: Make automake treat /sbin as exec, not data
-dac3301 pam_cifscreds: fix warning on NULL arg passed to %s in pam_syslog()
-7314638 cifs.upcall: fix UAF in get_cachename_from_process_env()
-ef0d95e cifs-utils: add documentation for acregmax and acdirmax
-2260c0d setcifsacl: Fix uninitialized value.
-1eee8e8 Use explicit "#!/usr/bin/python3"
-
-Thanks to everyone who contributed to the release!
-
-Best regards,
-Pavel Shilovsky
+Steve
 
