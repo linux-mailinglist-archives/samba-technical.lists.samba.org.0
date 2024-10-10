@@ -2,62 +2,53 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4FA6D998DD9
-	for <lists+samba-technical@lfdr.de>; Thu, 10 Oct 2024 18:53:36 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 287DF999481
+	for <lists+samba-technical@lfdr.de>; Thu, 10 Oct 2024 23:38:50 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=czYKXY4sn13yj1sg8US+iDQP8+zUbToMdti2ra2vDpQ=; b=pjHWRKz33dnRLTVVWONAbH+Ej+
-	lpYKnUtCv2V6e/3Ovzogu0dHeFB1pOw7M//IVM5KNlNLSS+7o5gVd2nJDlKkH105yXiwSy8bkUXag
-	SD2ft9xtodpN/csDG2kWjEgIL4IriAvicPM85txsnergF74qEDFhGVNWAeU+HnVRt7/tnOUdkh+AL
-	AlBGenREejkcZr3G+aYNF+sIjHauliWQ0/AJEPVm+cRaUWvUZHb1H+w7hcd5k2D97ND6J2xMJCX+m
-	nn8GBkH19Icr3kS8+fzCPPlQD6/PF0aN5hVLqUD9AaNuV4eZ0lCoKdLAZiuSzBJRxvFyFIvDTLFZJ
-	3Rx9Na7g==;
-Received: from ip6-localhost ([::1]:37296 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=dKAa47nf+tm02aGWd4dWqKh/he4yj02NgA0Hc3Qu4CA=; b=hG0WYraY11ThA7V+7aOf5YD2Q3
+	sR1fozE7PCRrJJM/PLLLRXd/QtUQTZphhiCJUM/d4EVYicoYUx3nV8qD1O3aoA41uX9Z/PpYt5beU
+	HHbw0Bl4nT7wfAJASwSXGg0Lddp5x0bvyzYmfH9IM0nq2oLnNHH6IKcCAVLARFdWDNnpM6PMRrokj
+	rFlgF7XgqR+dVSvX0HBA+EjwaeGnPsm9GbPUUrzqQiIZ9dfhUGoAHqCnqIiYSsrgumfaql0kDGy07
+	GJa/m1bxaDVz/MpyGC0cDnZq1dWRzNmI4Cqtm3hgkelbmH8dyzBjSnYRIZYloL0qdwOTK0k2sp4cS
+	pvvLSvLg==;
+Received: from ip6-localhost ([::1]:30382 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1sywPg-003VR2-5h; Thu, 10 Oct 2024 16:53:20 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:63028) 
+	id 1sz0rM-003WiF-PP; Thu, 10 Oct 2024 21:38:12 +0000
+Received: from cat-porwal-prod-mail10.catalyst.net.nz ([202.49.242.1]:36608) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1sywPb-003VQv-Jq
- for samba-technical@lists.samba.org; Thu, 10 Oct 2024 16:53:17 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=From:Cc:To:Date:Message-ID;
- bh=czYKXY4sn13yj1sg8US+iDQP8+zUbToMdti2ra2vDpQ=; b=COJHfLhEHHDwTfi1UlqM3wW+r+
- gOc4YwGfxD1oG707A+5YMvPHQBEtKmKW0rqcJiqTML1yNOATt8LKRViQlDO66+EWyVhhqYnnnW31g
- +DTeex/xir9415aHN2rU9XmDG7KO8gGj0lJvzElCnSZWH9Tl9H9xeVuosKfW6/DmwOTQ6Qm4baRCi
- 2vKm3W4j2WZoIs5b0mVXl0dCI6CDwhrSAEzGM3F6Jrp6awq5tiZnGi0i94STIbBqbAnrE5T73a4QL
- pVkNxXrtPARMkIQaumFHqH859kee2pyME3VfCuFzY4sHSNFds4WVd6HEp3ZERqKuPgm+IPAZ6ksEU
- duJlghw3f3AOUQAePxu6s4wHvr0Oktft+iNjWNSpGqbF32Qggs0nzqnAFq8vmR+J6kELgVGa68vxJ
- MgdwYgDdhYVFmRw5e4R6U+RxmSTh202LrfcPceWU6Zzbe7vc+oXda6Kqv8ORPLr+GkfOBxYclbQZC
- 9yyd3xCUQdkPtu0En9SxUniq;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1sywPa-004EgP-0V; Thu, 10 Oct 2024 16:53:14 +0000
-Message-ID: <20304cda-37da-47b2-9260-a8478373376b@samba.org>
-Date: Thu, 10 Oct 2024 18:53:09 +0200
+ (Exim) id 1sz0rH-003Wi7-Md
+ for samba-technical@lists.samba.org; Thu, 10 Oct 2024 21:38:11 +0000
+Received: from [192.168.192.96] (wlgwil-nat-office.catalyst.net.nz
+ [202.78.240.7])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (Client did not present a certificate)
+ (Authenticated sender: douglasb@catalyst.net.nz)
+ by cat-porwal-prod-mail10.catalyst.net.nz (Postfix) with ESMTPSA id 61BD2D5;
+ Fri, 11 Oct 2024 10:21:23 +1300 (NZDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=catalyst.net.nz;
+ s=default; t=1728595283;
+ bh=qeUbalxqSW3maOV5rMyGh/XgQKMw2lRG7zXGKB/CnrY=;
+ h=Date:Subject:To:References:From:In-Reply-To:From;
+ b=YCbHWrW4Lb+fszwv4t3nkHfFLOVRqU4ZhBpKqaxT2+ducIJs7zE83RPD9viVBKhqF
+ 5MReCLkXduewsgr5Uys5+SdQvyKaR+w8YKO5MtxzfOyHGFUkIrsVEjQzF4pIf72maf
+ ujrDG2pg1qnha25tnykAQUyvW0gghzIM8gDsS/mTVFjAxgDEw1jzOeHdsvYZMDa3zX
+ sM51RCokjILFisQExhKRpjshoPODI+FQcL3ZkfMXP6zr/+hHYSLJXOupTE2MQ9F5/9
+ k24BAdNPKEhmnnfv3iSNyDtgTfKxtQlfuZ/Ve3SFapoZtWgV3iGSlvE0DSpwx3TQbc
+ rniJNKcwN9l6A==
+Message-ID: <297faa9c-6788-436b-bfb3-8d2107b8596d@catalyst.net.nz>
+Date: Fri, 11 Oct 2024 10:21:22 +1300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: Current Samba master incorrectly returns STATUS_INVALID_HANDLE on
- copy_chunk
-To: Stefan Metzmacher <metze@samba.org>, Jeremy Allison <jra@samba.org>
-References: <CAH2r5mt7cE8Cc2K5K8nRM2RL=R-rwuAR9h6SSyEqtApuochtuQ@mail.gmail.com>
- <e12d7594-02df-4cbb-80fc-276d907afd90@samba.org>
- <CAH2r5muqSmNy+3SViFKNJ=5Sm61u8r9ej9Wy8JLUDeC2XHwccA@mail.gmail.com>
- <77aff6ef-291d-4840-82e2-b02646949541@samba.org>
- <d84732db-dea1-4fbd-9fc9-105c115c9ca0@samba.org>
- <990b4f16-2f5a-49ab-8a14-8b1f3cee94dc@samba.org>
- <ZwVM1-C0kBfJzNfM@jeremy-HP-Z840-Workstation>
- <569625f6-e0d2-43db-88cf-eb0fff6eb70e@samba.org>
- <ZwbczZYBsTU03Ycv@jeremy-HP-Z840-Workstation>
- <b84b2bb0-0afe-4f9e-9553-1a0201ed92d3@samba.org>
- <ZwblLYrVQM92eFl8@jeremy-HP-Z840-Workstation>
- <7980bb29-e434-487f-b70d-aa9d29156f00@samba.org>
-Content-Language: en-US, de-DE
-In-Reply-To: <7980bb29-e434-487f-b70d-aa9d29156f00@samba.org>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------DJZRpraVekr0AKeYDJluehv9"
+Subject: Re: authentication policies in Samba 4.21
+To: Stefan Kania <stefan@kania-online.de>, samba-technical@lists.samba.org
+References: <df1213a5-5153-463b-bacd-5d93ff8d2f6b@kania-online.de>
+Content-Language: en-US
+In-Reply-To: <df1213a5-5153-463b-bacd-5d93ff8d2f6b@kania-online.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -71,89 +62,48 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Ralph Boehme <slow@samba.org>
-Cc: Steve French <smfrench@gmail.com>,
- samba-technical <samba-technical@lists.samba.org>,
- CIFS <linux-cifs@vger.kernel.org>
+From: Douglas Bagnall via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Douglas Bagnall <douglas.bagnall@catalyst.net.nz>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------DJZRpraVekr0AKeYDJluehv9
-Content-Type: multipart/mixed; boundary="------------WlCx0GI13tBqDORFJ4j1kcvp";
- protected-headers="v1"
-From: Ralph Boehme <slow@samba.org>
-To: Stefan Metzmacher <metze@samba.org>, Jeremy Allison <jra@samba.org>
-Cc: Steve French <smfrench@gmail.com>,
- samba-technical <samba-technical@lists.samba.org>,
- CIFS <linux-cifs@vger.kernel.org>
-Message-ID: <20304cda-37da-47b2-9260-a8478373376b@samba.org>
-Subject: Re: Current Samba master incorrectly returns STATUS_INVALID_HANDLE on
- copy_chunk
-References: <CAH2r5mt7cE8Cc2K5K8nRM2RL=R-rwuAR9h6SSyEqtApuochtuQ@mail.gmail.com>
- <e12d7594-02df-4cbb-80fc-276d907afd90@samba.org>
- <CAH2r5muqSmNy+3SViFKNJ=5Sm61u8r9ej9Wy8JLUDeC2XHwccA@mail.gmail.com>
- <77aff6ef-291d-4840-82e2-b02646949541@samba.org>
- <d84732db-dea1-4fbd-9fc9-105c115c9ca0@samba.org>
- <990b4f16-2f5a-49ab-8a14-8b1f3cee94dc@samba.org>
- <ZwVM1-C0kBfJzNfM@jeremy-HP-Z840-Workstation>
- <569625f6-e0d2-43db-88cf-eb0fff6eb70e@samba.org>
- <ZwbczZYBsTU03Ycv@jeremy-HP-Z840-Workstation>
- <b84b2bb0-0afe-4f9e-9553-1a0201ed92d3@samba.org>
- <ZwblLYrVQM92eFl8@jeremy-HP-Z840-Workstation>
- <7980bb29-e434-487f-b70d-aa9d29156f00@samba.org>
-In-Reply-To: <7980bb29-e434-487f-b70d-aa9d29156f00@samba.org>
-Autocrypt-Gossip: addr=jra@samba.org; keydata=
- xsDiBDxEcLsRBADMQzpWoVuu4oiq23q5AfZDbakENMP/8ZU+AnzqzGr70lIEJb2jfcudViUT
- 97+RmXptlnDmE4/ILOf6w0udMlQ9Jpm+iqxbr35D/6qvFgrgE+PnNAPlKSlI2fyGuLhpv1QP
- forHV13gB3B6S/ZWHpf/owKnJMwu8ozQpjnMnqOiVwCg8QnSX2AFCMd3HLQsqVaMdlO+jBEE
- AKrMu2Pavmyc/eoNfrjgeRoNRkwHCINWO5u93o92dngWK/hN1QOOCQfAzqZ1JwS5Q+E2gGug
- 4OVaZI1vZGsAzb06TSnS4fmrOfwHqltSDsCHhwd+pyWkIvi96Swx00e1NEwNExEBo5NrGunf
- fONGlfRc+WhMLIk0u2e2V14R+ebDA/42T+cQZtUR6EdBReHVpmckQXXcE8cIqsu6UpZCsdEP
- N6YjxQKgTKWQWoxE2k4lYl9KsDK1BaF6rLNz/yt2RAVb1qZVaOqpITZWwzykzH60dMaX/G1S
- GWuN28by9ghI2LIsxcXHiDhG2CZxyfogBDDXoTPXlVMdk55IwAJny8Wj4s0eSmVyZW15IEFs
- bGlzb24gPGpyYUBzYW1iYS5vcmc+wlcEExECABcFAjxEcLsFCwcKAwQDFQMCAxYCAQIXgAAK
- CRCl3XhJ1sA2rDHZAKDwxfxpGuCOAuDHaN3ULDrIzKw9DQCdHb3Sq5WKfeqeaY2ZKXT3AmXl
- Fq7OwE0EPERwvhAEAIY1K5TICtxmFOeoRMW39jtF8DNSXl/se6HBe3Wy5Cz43lMZ6NvjDATa
- 1w3JlkmjUyIDP29ApqmMu78Tv4UUxAh1PhyTttX1/aorTlIdVYFjey/yW4mSDXUBhPvMpq52
- TncLRmK9HC6mIxJqS0vi6W9IqGOqDRZph3GzVzJN7WvLAAMGA/sGAyg2rVsBzs77WH0jPO+A
- QZDj+Hf/RFHOwmcyG7/XgmV6LOcQP4HfQHH3DGYihu5cZj3BeWKPDJnjOjB2qmr+FTjYEsjw
- LDBNG7rjRye412rUbNwmEtcD2/dw4xNyu5h2u+1++KVBPf4SqG/a10gDqGJXDHA1Os5MmnQl
- 3CTq9sJGBBgRAgAGBQI8RHC+AAoJEKXdeEnWwDasbeIAoL6+EsZKAYrZ2w22A6V67tRNGOIe
- AJ0cV9+pk/vqEgbv8ipKU4iniZclhg==
+hi Stefan,
 
---------------WlCx0GI13tBqDORFJ4j1kcvp
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
+On 11/10/24 05:11, Stefan Kania via samba-technical wrote:
+> I'm just testing how it's going on with the auth-policies in 4.21 and I 
+> see now it's possible to set conditions with:
+> user-allowed-to-authenticate-to
+> ...
+> 
+> When I set a condition I see:
+> "msDS-ComputerAllowedToAuthenticateTo": "O:SYG:SYD:(XA;OICI;CR;;;WD; 
+> (@USER.ad://ext/AuthenticationSilo == \"win11-computer\"))",
+> I can allow the users from the silo to authenticate
+> But in the Windows-world it's possible to disallow the authentication, 
+> then it looks like this:
+> "msDS-ComputerAllowedToAuthenticateTo": "O:SYG:SYD:(XA;OICI;CR;;;WD; 
+> (@USER.ad://ext/AuthenticationSilo != \"win11-computer\"))",
+> 
+> 
+> Am I missing something or is it not yet possible?
 
-T24gMTAvMTAvMjQgMTE6MDEgQU0sIFN0ZWZhbiBNZXR6bWFjaGVyIHdyb3RlOg0KPiBpZiBv
-ZmZzZXQgLTIgc2hvdWxkIGJlIHVzZWQuIE9uIHRoZSBzZXJ2ZXIgd2UgY291bGQgbWFwIHRo
-YXQgdG8gDQo+IHB3cml0ZXYyKFJXRl9BUFBFTkQpLg0KDQpobSwgdGhhdCBzZWVtcyB0byBi
-ZSBhIExpbnV4IG9ubHkgdGhpbmcuDQoNCg0K
+That would be expected to work, with the effect that anyone who does not 
+have ad://ext/AuthenticationSilo set to "win11-computer" would be allowed.
 
---------------WlCx0GI13tBqDORFJ4j1kcvp--
+Another way to write it would be something like
 
---------------DJZRpraVekr0AKeYDJluehv9
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature.asc"
+  "O:SYG:SYD:(XD;OICI;CR;;;WD; (@USER.ad://ext/AuthenticationSilo == 
+\"win11-computer\"))(A;OICI;CR;;;WD)"
 
------BEGIN PGP SIGNATURE-----
+where the XD ACE type means "conditional deny". If the condition is not 
+met, we fall through to the second ACE which is a global allow.
 
-wsF5BAABCAAjFiEE+uLGCIokJSBRxVnkqh6bcSY5nkYFAmcIBnUFAwAAAAAACgkQqh6bcSY5nkbV
-2g/6A6leDj+DsH9EA2ZBYqXrcxd7I78LHIrYfkiMsxPSXXEWv62i6/5QCgkImn6YK15bU25jd1tN
-+znKSkrgf6MP8Dgv+YLavpscR+dXa71Wq7iyFGwQZ/Qe2mk+YcmDsCTgv0BqadPVWIyCvtH++DeV
-ClOlBEtLnHLYOjscriNwJb0li6xNDiMNAt/Usq9l2X4PjhlTUnXcksSVBnpm98fUVVGXufFFeMOw
-5ln7NbFD2u7uBfjNEtkiPevHZ0BwzvsVsny4q7y8AOfSXsrPYDSu+NPdZ2zlAkJDUqksFtt6Qt0a
-i8m9lcm7KlYZjTetOl99xK1eqhOZlKr/w6LkUPHfMTaO8uNy/bg5ry5mJgVVPldpoLv09vhy29/s
-Bc1/3lOkoXAo+TOY3ymeUkongsm655AsEVorDPgSr68ylDmmJKm+N0rqxjTf/JxzgGof1YOsN0bG
-anovSNE4uyTHrUpxGprAPrm1bCXIb1rim4v8h33OpB/InAMTuERsO+XxLXrzakaz55K9OLjFX1l2
-snnaLt+0EfZg/LX/C476KO7/VSxbyM91RF9uYCZlDwqXS+PM99MdqK1WbLZbGvQhFgXiKnz3++AX
-DX9csst7ZR0au+REEz2+5EU73wgP+raPNnongxcJ64cytWCtUV+vnGgRDuVjisBnQe7uPiNIxOic
-4vU=
-=IKtQ
------END PGP SIGNATURE-----
+There is a difference between conditional deny with '==' and a 
+conditional allow with '!=' in the way they interact with other ACEs, 
+and there could be a difference if ad://ext/AuthenticationSilo somehow 
+had multiple values, but I don't think that can happen.
 
---------------DJZRpraVekr0AKeYDJluehv9--
+cheers,
+Douglas
+
 
