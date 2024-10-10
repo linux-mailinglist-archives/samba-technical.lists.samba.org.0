@@ -2,58 +2,57 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 68424998D66
-	for <lists+samba-technical@lfdr.de>; Thu, 10 Oct 2024 18:29:18 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id CEB81998DB7
+	for <lists+samba-technical@lfdr.de>; Thu, 10 Oct 2024 18:43:13 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
-	bh=yJEoybq7oV1vgNgDb6F6lfvnoaEXqvDRsTyWRSFHolY=; b=hlNIFr/DFWxqB1R+mQhUALTVjg
-	IXHK7BwXr7oRhTZYM5/ze/KAXMRyDoN6+3Os27ZlMNioDTHNp3f/KH5y+OhxiZqlAcw6WBJl+UFtf
-	3RA4BJHoUfvTDcn6M0mxeGpXsomkk+LV2UQV/FGALIayku3SfoQKWHe501j+zQsgM84GIV/MVDEc7
-	xtImi8gX24vKWdw3BTH9wOegIh52Wr3NtIM00dtUtLS9cQRrFXe5pIjd6wTQKQm8lANKq4Ibia4se
-	1MBkqw5F6gFAFKBlVtO1pgW/ewGkHRueWCsKx/vsijJ0iSYRy9tyoOOmT4LSm80nteYCuFGpL6Dqu
-	TW/6NW7A==;
-Received: from ip6-localhost ([::1]:51192 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=Vj5KpDy6+wRoimMezhxY3Vwgej5JKpoav3MEFnPK//8=; b=cV173ODC2gi9/hDtCyXa0o6zeq
+	5DOOoaIQtLf+Tna4map0LZCoGj/YKK/9y6WrJTyQNbEI3553VLukC0ONUHomzP9DMhguK75ODLi3p
+	valFe21orq00AtPgDYyvqnSmq4vBPChaIvqp9edzvRyYLF8Jtdd44/xPaFExjVPf/af8LXhWJyNel
+	QWhyajK9ZPhihx3HpNeU+HBZSC1g7LTQxmJxs/M6QniEo2iRJ/J9QRNxBT0ZrUTYdUikXRuN/Fgbm
+	ZgjoSycBfIh1EEIBfd5LYleNfiQXn+L3gPm4OyjQg6++SJxq2AomNBjZq81upkBLw8cv+J33j+l0N
+	LUKV1vyQ==;
+Received: from ip6-localhost ([::1]:60898 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1syw1o-003VFW-8T; Thu, 10 Oct 2024 16:28:40 +0000
-Received: from plasma6.jpberlin.de ([80.241.56.68]:59685) 
+	id 1sywFi-003VKz-7I; Thu, 10 Oct 2024 16:43:02 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:16100) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1syw1h-003VFP-30
- for samba-technical@lists.samba.org; Thu, 10 Oct 2024 16:28:37 +0000
-Received: from spamfilter02.heinlein-hosting.de
- (spamfilter02.heinlein-hosting.de [80.241.56.116])
- by plasma.jpberlin.de (Postfix) with ESMTP id 69271C0A11;
- Thu, 10 Oct 2024 18:11:08 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kania-online.de;
- s=MBO0001; t=1728576668;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:mime-version:mime-version:content-type:content-type;
- bh=yJEoybq7oV1vgNgDb6F6lfvnoaEXqvDRsTyWRSFHolY=;
- b=0YhcDWI19Xsldc02/gQx1yV854QdviyHJgARg2izNNIN5bRyCvbCjwbRZM0xebj6qjyT93
- rppWuU/nj7rDZ5lLV7y9wA8AqZzjunTuo6gtKva/hD66EBmZD4NPbGnc/XLJ4HMU+mL1HG
- JYuyVsLR6tJ5iLtthi8vOCYjxS82S+Pccjza3PHYYe8Vr6Yq+zQtmoVd4FWbLaTp4AXc6h
- zKIMWFBIfrq9TieiQSDeN0AtfWQHv4Co7syPoBlWAZkLhhjF41XWlvyL0NSyrCaidPWL+s
- hlLqR2sAwklnd0AhCJQ1xAIf22Q8Yc9Q7yE0uBN0F0Riyv43utETMLFOu2jcJA==
-Received: from plasma.jpberlin.de ([80.241.56.68])
- by spamfilter02.heinlein-hosting.de (spamfilter02.heinlein-hosting.de
- [80.241.56.116]) (amavisd-new, port 10030)
- with ESMTP id ryujomgQNGXz; Thu, 10 Oct 2024 18:11:03 +0200 (CEST)
-Received: from [192.168.123.203] (p5b240946.dip0.t-ipconnect.de [91.36.9.70])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (Client did not present a certificate)
- (Authenticated sender: stefan@kania-online.de)
- by plasma.jpberlin.de (Postfix) with ESMTPSA id E9E9AC038D
- for <samba-technical@lists.samba.org>; Thu, 10 Oct 2024 18:11:02 +0200 (CEST)
-Message-ID: <df1213a5-5153-463b-bacd-5d93ff8d2f6b@kania-online.de>
-Date: Thu, 10 Oct 2024 18:11:00 +0200
+ (Exim) id 1sywFe-003VKs-HP
+ for samba-technical@lists.samba.org; Thu, 10 Oct 2024 16:43:00 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Message-ID:Cc:To:From:Date;
+ bh=Vj5KpDy6+wRoimMezhxY3Vwgej5JKpoav3MEFnPK//8=; b=Qjb5CzINBAm1J7Q/gyDX2suIss
+ +vMZd0L7+VWECIvLYxr4z9Nq3nCa1ROVaHB2QmrOXov5g23trsPxH1AgFo8tjmQjGZOQlo4NAhD94
+ BmH9L6vKqU1/HannobBWHjinRXWpVsEXBPPNlXebmvdUIOeIs8B1BP74OH/vm//uNSnY1YBiFJgUK
+ EaeS1itce2JyfPiP7tCWbgxTVq4W4jWCQcQ9022t4MLFj7SksmS0h+SQaOuHCpS82UjWrHUPe+jLr
+ oDjbj10mlipk6R6r6vfTHYHLu79VYlMpIzu7TFCWEb1PcKcGatoSDYkh2z1eqYuLeRZpPiDGnZr4X
+ DXn04ZCf24jdx7neFsxpPdA8gceOO9/ye/HRZ/6GQwQQOFzTkG7nThu9xDSAe9Kl33PoNfvOufuTf
+ H7jYB/VdSYQmEZWKfENV29QeBCcTkBWpRZjJARbE1q4kf1cHIkuHtM0C3OieYXejYgpkLKLsaC+7u
+ oeEjJvHUcpzF+m8hnlCy9N4E;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1sywFc-004Eae-1s; Thu, 10 Oct 2024 16:42:56 +0000
+Date: Thu, 10 Oct 2024 09:42:53 -0700
+To: Stefan Metzmacher <metze@samba.org>
+Subject: Re: Current Samba master incorrectly returns STATUS_INVALID_HANDLE
+ on copy_chunk
+Message-ID: <ZwgEDfnvQWwd1R7N@jeremy-HP-Z840-Workstation>
+References: <CAH2r5muqSmNy+3SViFKNJ=5Sm61u8r9ej9Wy8JLUDeC2XHwccA@mail.gmail.com>
+ <77aff6ef-291d-4840-82e2-b02646949541@samba.org>
+ <d84732db-dea1-4fbd-9fc9-105c115c9ca0@samba.org>
+ <990b4f16-2f5a-49ab-8a14-8b1f3cee94dc@samba.org>
+ <ZwVM1-C0kBfJzNfM@jeremy-HP-Z840-Workstation>
+ <569625f6-e0d2-43db-88cf-eb0fff6eb70e@samba.org>
+ <ZwbczZYBsTU03Ycv@jeremy-HP-Z840-Workstation>
+ <b84b2bb0-0afe-4f9e-9553-1a0201ed92d3@samba.org>
+ <ZwblLYrVQM92eFl8@jeremy-HP-Z840-Workstation>
+ <7980bb29-e434-487f-b70d-aa9d29156f00@samba.org>
 MIME-Version: 1.0
-To: samba-technical@lists.samba.org
-Content-Language: en-US, de-DE
-Subject: authentication policies in Samba 4.21
-Organization: Stefan Kania
-Content-Type: multipart/signed; protocol="application/pkcs7-signature";
- micalg=sha-256; boundary="------------ms050807070908030709070601"
+Content-Type: text/plain; charset=us-ascii; format=flowed
+Content-Disposition: inline
+In-Reply-To: <7980bb29-e434-487f-b70d-aa9d29156f00@samba.org>
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -67,118 +66,32 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Stefan Kania via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Stefan Kania <stefan@kania-online.de>
+From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jeremy Allison <jra@samba.org>
+Cc: Steve French <smfrench@gmail.com>,
+ samba-technical <samba-technical@lists.samba.org>,
+ CIFS <linux-cifs@vger.kernel.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is a cryptographically signed message in MIME format.
+On Thu, Oct 10, 2024 at 11:01:48AM +0200, Stefan Metzmacher wrote:
+>
+>MS-FSA 2.1.5.4 Server Requests a Write has this:
+>
+>If ByteOffset equals -2, then set ByteOffset to Open.CurrentByteOffset.
+>
+>So I think if a file is opened with O_APPEND (on the client), a write() syscall without explicit
+>offset (so no pwrite), could be mapped to an SMB2 write with offset -2.
+>But I fear the linux vfs layer already replaces offset before cifs_file_write_iter() and friends
+>are called... But I guess the per operation IOCB_APPEND flag can be used in order to decide
+>if offset -2 should be used. On the server we could map that to pwritev2(RWF_APPEND).
+>So O_APPEND could be a client only thing...
 
---------------ms050807070908030709070601
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
+Hmmm. We should test against a Windows server doing an open with
+FILE_APPEND_DATA|SYNCHRONIZE and an offset of other than -2, and
+see if it writes at the end of file or not.
 
-SSdtIGp1c3QgdGVzdGluZyBob3cgaXQncyBnb2luZyBvbiB3aXRoIHRoZSBhdXRoLXBvbGlj
-aWVzIGluIDQuMjEgYW5kIEkgDQpzZWUgbm93IGl0J3MgcG9zc2libGUgdG8gc2V0IGNvbmRp
-dGlvbnMgd2l0aDoNCnVzZXItYWxsb3dlZC10by1hdXRoZW50aWNhdGUtdG8NCi4uLg0KDQpX
-aGVuIEkgc2V0IGEgY29uZGl0aW9uIEkgc2VlOg0KIm1zRFMtQ29tcHV0ZXJBbGxvd2VkVG9B
-dXRoZW50aWNhdGVUbyI6IA0KIk86U1lHOlNZRDooWEE7T0lDSTtDUjs7O1dEOyhAVVNFUi5h
-ZDovL2V4dC9BdXRoZW50aWNhdGlvblNpbG8gPT0gDQpcIndpbjExLWNvbXB1dGVyXCIpKSIs
-DQpJIGNhbiBhbGxvdyB0aGUgdXNlcnMgZnJvbSB0aGUgc2lsbyB0byBhdXRoZW50aWNhdGUN
-CkJ1dCBpbiB0aGUgV2luZG93cy13b3JsZCBpdCdzIHBvc3NpYmxlIHRvIGRpc2FsbG93IHRo
-ZSBhdXRoZW50aWNhdGlvbiwgDQp0aGVuIGl0IGxvb2tzIGxpa2UgdGhpczoNCiJtc0RTLUNv
-bXB1dGVyQWxsb3dlZFRvQXV0aGVudGljYXRlVG8iOiANCiJPOlNZRzpTWUQ6KFhBO09JQ0k7
-Q1I7OztXRDsoQFVTRVIuYWQ6Ly9leHQvQXV0aGVudGljYXRpb25TaWxvICE9IA0KXCJ3aW4x
-MS1jb21wdXRlclwiKSkiLA0KDQoNCkFtIEkgbWlzc2luZyBzb21ldGhpbmcgb3IgaXMgaXQg
-bm90IHlldCBwb3NzaWJsZT8NCg0KDQo=
-
---------------ms050807070908030709070601
-Content-Type: application/pkcs7-signature; name="smime.p7s"
-Content-Transfer-Encoding: base64
-Content-Disposition: attachment; filename="smime.p7s"
-Content-Description: Kryptografische S/MIME-Signatur
-
-MIAGCSqGSIb3DQEHAqCAMIACAQExDzANBglghkgBZQMEAgEFADCABgkqhkiG9w0BBwEAAKCC
-DLMwggYDMIID66ADAgECAgwEaYxY0V6t5+cpnHAwDQYJKoZIhvcNAQELBQAwUjELMAkGA1UE
-BhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24g
-R0NDIFI2IFNNSU1FIENBIDIwMjMwHhcNMjQwOTI3MjAwMTE2WhcNMjcwOTI4MjAwMTE2WjBI
-MR8wHQYDVQQDDBZzdGVmYW5Aa2FuaWEtb25saW5lLmRlMSUwIwYJKoZIhvcNAQkBFhZzdGVm
-YW5Aa2FuaWEtb25saW5lLmRlMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAk1Wp
-pY9PMd6TNd+nUvWJ3RkA7fXwaZYBPlz+HyIh43KCUohVW0dweP44qfMBHjlVrAsgC6+VI+bd
-EWjvF9ZcWLHIj/IxonVe1HnN1DfYwp7/1qigJBjmfNwcdqlHHgRJ/WW8TblYLshwB94c+b5L
-J6ScRf4KCLYgTjmX/+/OpV9Zfzn0NvGNfyakUpeEz/36Mr1UPtWVchsGpuCsoGbylE0AOZug
-z2yOoLxAmd5YYLVI0uZ3IM1iGZPVcN0P9r9F1Gap4Vm9mi6+chx+ScAu/WfdzaBVlFoXA7w6
-X/QxpQXtnifpKxqE5qqrPqCCo9sXLLgD3yW1iFcBVTgzNyZQRwIDAQABo4IB4TCCAd0wDgYD
-VR0PAQH/BAQDAgWgMIGTBggrBgEFBQcBAQSBhjCBgzBGBggrBgEFBQcwAoY6aHR0cDovL3Nl
-Y3VyZS5nbG9iYWxzaWduLmNvbS9jYWNlcnQvZ3NnY2NyNnNtaW1lY2EyMDIzLmNydDA5Bggr
-BgEFBQcwAYYtaHR0cDovL29jc3AuZ2xvYmFsc2lnbi5jb20vZ3NnY2NyNnNtaW1lY2EyMDIz
-MGUGA1UdIAReMFwwCQYHZ4EMAQUBATALBgkrBgEEAaAyASgwQgYKKwYBBAGgMgoDAzA0MDIG
-CCsGAQUFBwIBFiZodHRwczovL3d3dy5nbG9iYWxzaWduLmNvbS9yZXBvc2l0b3J5LzAJBgNV
-HRMEAjAAMEEGA1UdHwQ6MDgwNqA0oDKGMGh0dHA6Ly9jcmwuZ2xvYmFsc2lnbi5jb20vZ3Nn
-Y2NyNnNtaW1lY2EyMDIzLmNybDAhBgNVHREEGjAYgRZzdGVmYW5Aa2FuaWEtb25saW5lLmRl
-MB0GA1UdJQQWMBQGCCsGAQUFBwMCBggrBgEFBQcDBDAfBgNVHSMEGDAWgBQAKTaeXHq6D68t
-UC3boCOFGLCgkjAdBgNVHQ4EFgQU0kHF9fFBXygVDjwNe5DkaSxVk3cwDQYJKoZIhvcNAQEL
-BQADggIBAL0WoW7dCmTQxxo1dMGyld5LLS9wCa7goc07GplzOsEJ5GmfeNGapy+dP2NfmenH
-XYKPnP/8hosTk6GDgck1HaP4wP5RvZ4ALVraLs4XSQiENz9954Sim3YzjFbG2aoqXpv/C0ha
-MwzR7LBCa/OwUJot5wO7R++6SE98/ZeYUqGDIgVcmH+UOYE/5yxM+M4aDXFUR2LCQO2ejPcZ
-a3QzlnMJUYPPw3U4Udbs9MRy40FunbmWUzu4yEddlo9GikG5NEI6wC7hFEpC4joYmvEZXRlT
-UqS8wug7QKRLyeLhXw04h0GYL0mrx1yj7x4CXqRjjRpterRlAkgFj2zEEpQ4DMiVcl8fZZ7T
-xkQGlbfa+HEp9y9/NluiNeoqAMF/lzS8haLHDXLdrdWPitBQazmcsyQ3LlcmeAMjchOIcUWt
-EKxIRCoedt6xbuIX5D2ul0H6rPE2BrimedwF6AZFPFk3/KHAbjhfkAElHiNjgg4uwUji+d9q
-zIR6Di3W2WdTCCwzp/6V2eEWdlQ8z8U4v3aF80fwzp6dOuFmti/mOayUrAYCUC6DBLjkA4EY
-MS6Nc1dr4f4dffnOceF4deCDN3nH8bRPEXs+kvnA91vw008dvJ+Df7jcJmDrt2tmzZPDTV6l
-neB5rj7E+6Qcvadj6c5hl7L5Tc/v6LZx6DCVX0BA2KpPMIIGqDCCBJCgAwIBAgIQfofDCS7X
-Zu8vIeKo0KeY9DANBgkqhkiG9w0BAQwFADBMMSAwHgYDVQQLExdHbG9iYWxTaWduIFJvb3Qg
-Q0EgLSBSNjETMBEGA1UEChMKR2xvYmFsU2lnbjETMBEGA1UEAxMKR2xvYmFsU2lnbjAeFw0y
-MzA0MTkwMzUzNTNaFw0yOTA0MTkwMDAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQKExBH
-bG9iYWxTaWduIG52LXNhMSgwJgYDVQQDEx9HbG9iYWxTaWduIEdDQyBSNiBTTUlNRSBDQSAy
-MDIzMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAwjAEbSkPcSyn26Zn9VtoE/xB
-vzYmNW29bW1pJZ7jrzKwPJm/GakCvy0IIgObMsx9bpFaq30X1kEJZnLUzuE1/hlchatYqyOR
-VBeHlv5V0QRSXY4faR0dCkIhXhoGknZ2O0bUJithcN1IsEADNizZ1AJIaWsWbQ4tYEYjytEd
-vfkxz1WtX3SjtecZR+9wLJLt6HNa4sC//QKdjyfr/NhDCzYrdIzAssoXFnp4t+HcMyQTrj0r
-pD8KkPj96sy9axzegLbzte7wgTHbWBeJGp0sKg7BAu+G0Rk6teO1yPd75arbCvfY/NaRRQHk
-6tmG71gpLdB1ZhP9IcNYyeTKXIgfMh2tVK9DnXGaksYCyi6WisJa1Oa+poUroX2ESXO6o03l
-VxiA1xyfG8lUzpUNZonGVrUjhG5+MdY16/6b0uKejZCLbgu6HLPvIyqdTb9XqF4XWWKu+OMD
-s/rWyQ64v3mvSa0te5Q5tchm4m9K0Pe9LlIKBk/gsgfaOHJDp4hYx4wocDr8DeCZe5d5wCFk
-xoGc1ckM8ZoMgpUc4pgkQE5ShxYMmKbPvNRPa5YFzbFtcFn5RMr1Mju8gt8J0c+dxYco2hi7
-dEW391KKxGhv7MJBcc+0x3FFTnmhU+5t6+CnkKMlrmzyaoeVryRTvOiH4FnTNHtVKUYDsCM0
-CLDdMNgoxgkCAwEAAaOCAX4wggF6MA4GA1UdDwEB/wQEAwIBhjBMBgNVHSUERTBDBggrBgEF
-BQcDAgYIKwYBBQUHAwQGCisGAQQBgjcUAgIGCisGAQQBgjcKAwwGCisGAQQBgjcKAwQGCSsG
-AQQBgjcVBjASBgNVHRMBAf8ECDAGAQH/AgEAMB0GA1UdDgQWBBQAKTaeXHq6D68tUC3boCOF
-GLCgkjAfBgNVHSMEGDAWgBSubAWjkxPioufi1xzWx/B/yGdToDB7BggrBgEFBQcBAQRvMG0w
-LgYIKwYBBQUHMAGGImh0dHA6Ly9vY3NwMi5nbG9iYWxzaWduLmNvbS9yb290cjYwOwYIKwYB
-BQUHMAKGL2h0dHA6Ly9zZWN1cmUuZ2xvYmFsc2lnbi5jb20vY2FjZXJ0L3Jvb3QtcjYuY3J0
-MDYGA1UdHwQvMC0wK6ApoCeGJWh0dHA6Ly9jcmwuZ2xvYmFsc2lnbi5jb20vcm9vdC1yNi5j
-cmwwEQYDVR0gBAowCDAGBgRVHSAAMA0GCSqGSIb3DQEBDAUAA4ICAQCRkUdr1aIDRmkNI5jx
-5ggapGUThq0KcM2dzpMu314mJne8yKVXwzfKBtqbBjbUNMODnBkhvZcnbHUStur2/nt1tP3e
-e8KyNhYxzv4DkI0NbV93JChXipfsan7YjdfEk5vI2Fq+wpbGALyyWBgfy79YIgbYWATB158t
-vEh5UO8kpGpjY95xv+070X3FYuGyeZyIvao26mN872FuxRxYhNLwGHIy38N9ASa1Q3BTNKSr
-HrZngadofHglG5W3TMFR11JOEOAUHhUgpbVVvgCYgGA6dSX0y5z7k3rXVyjFOs7KBSXrdJPK
-adpl4vqYphH7+P40nzBRcxJHrv5FeXlTrb+drjyXNjZSCmzfkOuCqPspBuJ7vab0/9oeNERg
-nz6SLCjLKcDXbMbKcRXgNhFBlzN4OUBqieSBXk80w2Nzx12KvNj758WavxOsXIbX0Zxwo1h3
-uw75AI2v8qwFWXNclO8qW2VXoq6kihWpeiuvDmFfSAwRLxwwIjgUuzG9SaQ+pOomuaC7QTKW
-MI0hL0b4mEPq9GsPPQq1UmwkcYFJ/Z4I93DZuKcXmKMmuANTS6wxwIEw8Q5MQ6y9fbJxGEOg
-OgYL4QIqNULb5CYPnt2LeiIiEnh8Uuh8tawqSjnR0h7Bv5q4mgo3L1Z9QQuexUntWD96t4o0
-q1jXWLyrpgP7ZcnuCzGCBD0wggQ5AgEBMGIwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEds
-b2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gR0NDIFI2IFNNSU1FIENBIDIw
-MjMCDARpjFjRXq3n5ymccDANBglghkgBZQMEAgEFAKCCAqwwGAYJKoZIhvcNAQkDMQsGCSqG
-SIb3DQEHATAcBgkqhkiG9w0BCQUxDxcNMjQxMDEwMTYxMTAwWjAvBgkqhkiG9w0BCQQxIgQg
-1ZuMzb4Xgk31VoRW8/UH8iv1JI10A4g+Xwsh/Zd6NqowcQYJKwYBBAGCNxAEMWQwYjBSMQsw
-CQYDVQQGEwJCRTEZMBcGA1UEChMQR2xvYmFsU2lnbiBudi1zYTEoMCYGA1UEAxMfR2xvYmFs
-U2lnbiBHQ0MgUjYgU01JTUUgQ0EgMjAyMwIMBGmMWNFerefnKZxwMHMGCyqGSIb3DQEJEAIL
-MWSgYjBSMQswCQYDVQQGEwJCRTEZMBcGA1UEChMQR2xvYmFsU2lnbiBudi1zYTEoMCYGA1UE
-AxMfR2xvYmFsU2lnbiBHQ0MgUjYgU01JTUUgQ0EgMjAyMwIMBGmMWNFerefnKZxwMIIBVwYJ
-KoZIhvcNAQkPMYIBSDCCAUQwCwYJYIZIAWUDBAEqMAsGCWCGSAFlAwQBAjAKBggqhkiG9w0D
-BzANBggqhkiG9w0DAgIBBTANBggqhkiG9w0DAgIBBTAHBgUrDgMCBzANBggqhkiG9w0DAgIB
-BTAHBgUrDgMCGjALBglghkgBZQMEAgEwCwYJYIZIAWUDBAICMAsGCWCGSAFlAwQCAzALBglg
-hkgBZQMEAgQwCwYJYIZIAWUDBAIHMAsGCWCGSAFlAwQCCDALBglghkgBZQMEAgkwCwYJYIZI
-AWUDBAIKMAsGCSqGSIb3DQEBATALBgkrgQUQhkg/AAIwCAYGK4EEAQsAMAgGBiuBBAELATAI
-BgYrgQQBCwIwCAYGK4EEAQsDMAsGCSuBBRCGSD8AAzAIBgYrgQQBDgAwCAYGK4EEAQ4BMAgG
-BiuBBAEOAjAIBgYrgQQBDgMwDQYJKoZIhvcNAQEBBQAEggEARL5ESFFeRoFKDhoDVE9m2HqB
-JWJRU8ywNc6rPdtDZdsnI3D34w35QWhOjSl939OrDs+KZphpTwrt4DZn+9ZJ3ggiAK9b/kXK
-7eBSlC6JcBBv4rh1+WSbKK9a7589DJhtqtYfvBMLILh95WjRPtDmrTsYWp6tzmUcWh1HTQpA
-SJ9X3syusE1ruRFI/Fd5szuG41jh+wU8D02JHR/v/NO06tWUwD93AgDdsAh2ykZjhRFMlq6u
-NX2iHwOe2tfhpHwsle6G/H4w8IOJJoxtQRSB56NukF3C772vS6eEE8vMoOd6svJ+zy/Bctmz
-BlJAhJKCXn07XCk+v9Xzgx0HJUvQoQAAAAAAAA==
---------------ms050807070908030709070601--
+Looks like the protocol has one way of expressing APPEND, and
+the internal syscall has another. We need to figure out what
+is required on the wire to see what works.
 
