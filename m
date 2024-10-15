@@ -2,53 +2,68 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id B3BAC99D8E9
-	for <lists+samba-technical@lfdr.de>; Mon, 14 Oct 2024 23:19:33 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 77AB599DECA
+	for <lists+samba-technical@lfdr.de>; Tue, 15 Oct 2024 08:55:06 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=cbkjhDaSMDItSylwOR9RIjivsNCXwCALaMQN2awy34k=; b=r+zg3wrvdueln9nAyJhGkYiWZv
-	PUVrwo/w5zcvwn/DZdyLhDaGpehm6/fKiRRnOhPmOQ2dWX3HVoFYVhLp8s12KGXXFRZA9tS0do6Pf
-	LF3J8Hn41bpDkTWtFer/Go6OThD6xV89QwB4MMA8CRm7B8P+QaFnP84TZjBTx/F1D15dd8Hoj10Z2
-	7LnicpxY1bt/jrQNFHTk236Km8EjTHyv60imX8MUWuBl9msCCUpZz2Ae8CQdxRFkuAoqxn1/uVvzs
-	w9OVKfRAm5LqQKhioBHSSiDQs22puYdAHP00dEerlHQZq+RowRMQzwFKoYUuJTNqfFgeCscl7Nqn7
-	i9PSoePg==;
-Received: from ip6-localhost ([::1]:40794 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=bYoxbXLHxK1kgIXKbO2jUi14bXrjU4Uz8kY78v/ZRKg=; b=iy7MUxoj+CiAgYZ3oM8GeZeL0+
+	xD3qQnIQC45a203fZ7TKid+cBs+StCVtJtuuAQ6yE7T0Z3Bz25+gFWyj1N+jNO0FZNAXgOqJt9cVq
+	c3n1fziimq0SWJzh9tj4aW1vTKREl+WiiBOdTRsXZkzT279ZiTjP+tKgHVhc9Pj8OB1qmvUD9NcK7
+	/32DI1S51Ns1A5e/GUTi1ymZ8BTkbLSWF0+/haW1ePN5QxUtNaBVrAcsxNuLTNr6K81SryG0Tyy/T
+	D45QQ7nI8xBkhDXoARy/g1JtSY80O3lgQv1pSohmKA8W9lkwr4bNZ463Llu3rpSWR4AETrV8y2AQy
+	iYbZa5rw==;
+Received: from ip6-localhost ([::1]:57134 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1t0SSu-003z8Q-9T; Mon, 14 Oct 2024 21:18:56 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:31398) 
+	id 1t0bRT-0040SX-Hj; Tue, 15 Oct 2024 06:54:03 +0000
+Received: from plasma6.jpberlin.de ([80.241.56.68]:46059) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1t0SSp-003z8J-Cf
- for samba-technical@lists.samba.org; Mon, 14 Oct 2024 21:18:54 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:To:From:Message-ID:CC;
- bh=MM+OFc9yOoUI7uD/6p3ImDcSY+9wCCi7OGMmTwguvtk=; b=Vzk9qGPVmkpJzDmPeBBdPjCh5u
- 1azkKJtPHI8EVsPIWGg7j3IQjCEkHPURCLHuvdEtX2peHxdXDAo1Jpd3EURqyXfp0/T+sRRsZA4yk
- 7cGVaJSItDqRjTUVD3omWG1Ehs+0zYWJcub1USlhbgRmmkcT1AuKD8fvbWuqJeIL0FPp+mV3l8eG1
- dSOQ4asJVb0TX8JUQdA068Y8eA6j79lVm/qLi9ZD/OSMbq0QqKVQ8EafgjLa6p6tYODsLf3n6fuaI
- ELCApWgsHdENZD6FLMlUoH/OSwwGd+/rs9znYzEW8cevUrM03skSI78CJQCru7l89KT8WPP4b1m/T
- kIqaasLDID2u6zDBf7K0pf8DPSHCD/GqOeR1TAbMpCcxCM5UDa7tTO/4NnvLukh0nOrTK2wGHaj4U
- bTaj/DzYycFNZ8MzFnwGrkRoAjspc0pOPWarI71D44IEAszrs8munEe4qLMwftpYU0Yw3JgYixZDO
- XbQ2efWaRZxs+psLJZK0Fh9x;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1t0SSn-004p7r-25; Mon, 14 Oct 2024 21:18:50 +0000
-Message-ID: <e6d8889be70994a7e0a41b1fef1db579729d9670.camel@samba.org>
+ (Exim) id 1t0bRL-0040SP-2y
+ for samba-technical@lists.samba.org; Tue, 15 Oct 2024 06:53:59 +0000
+Received: from spamfilter02.heinlein-hosting.de
+ (spamfilter02.heinlein-hosting.de [80.241.56.116])
+ by plasma.jpberlin.de (Postfix) with ESMTP id 475A2AC36E;
+ Tue, 15 Oct 2024 08:53:49 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kania-online.de;
+ s=MBO0001; t=1728975229;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=bYoxbXLHxK1kgIXKbO2jUi14bXrjU4Uz8kY78v/ZRKg=;
+ b=oze77EW6NLgo2xRm3oWKR7Bue9QWXkXYItFpjZE4jmYWTjHbXLG9NMfbGc7BeMERkR0eDJ
+ L6vgiB4Dv6OhMZoB0eNMb9IY0zwiJ11U+tdzWrt/yvOdwsIR7wRc2GPM+f2foa3gKKVmDv
+ yCpxHEKhY3OiRezXpWAmygWHcQojwhqptFHf6HoINUi4ldecmB2Z6MnMmwq4GxUwb6M4D7
+ 5oNmIM5R4VyZgEutuulWMfwCGZ9L1wfIyE6P43qS/MLhOuGUKiRxdiMLopzEkgAYlkg90F
+ ojIfzIhWjt6OVyP+3yic6AOYW4QOR2rfC3FMzjiJJdiLbbdy82QBH1JDmyCckg==
+Received: from plasma.jpberlin.de ([80.241.56.68])
+ by spamfilter02.heinlein-hosting.de (spamfilter02.heinlein-hosting.de
+ [80.241.56.116]) (amavisd-new, port 10030)
+ with ESMTP id MZ073nQMFDHF; Tue, 15 Oct 2024 08:53:43 +0200 (CEST)
+Received: from [192.168.101.179] (i689719B5.versanet.de [104.151.25.181])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (Client did not present a certificate)
+ (Authenticated sender: stefan@kania-online.de)
+ by plasma.jpberlin.de (Postfix) with ESMTPSA id 73C1BAAC8C
+ for <samba-technical@lists.samba.org>; Tue, 15 Oct 2024 08:53:43 +0200 (CEST)
+Message-ID: <78b1c795-0b68-470e-ae1d-3626aad8d7d6@kania-online.de>
+Date: Tue, 15 Oct 2024 08:53:43 +0200
+MIME-Version: 1.0
 Subject: Re: authentication policies in Samba 4.21
-To: Jennifer Sutton <jsutton@samba.org>, samba-technical@lists.samba.org
-Date: Tue, 15 Oct 2024 10:18:44 +1300
-In-Reply-To: <1eb80efc-4bb2-4b7c-b339-5b92277e782e@samba.org>
+To: samba-technical@lists.samba.org
 References: <df1213a5-5153-463b-bacd-5d93ff8d2f6b@kania-online.de>
  <297faa9c-6788-436b-bfb3-8d2107b8596d@catalyst.net.nz>
  <48c2847c-7d05-4e1a-9e85-52b1ba5d0b30@catalyst.net.nz>
  <ef60d0ef-25df-4081-9764-5dbc05bfc655@kania-online.de>
  <1eb80efc-4bb2-4b7c-b339-5b92277e782e@samba.org>
-User-Agent: Evolution 3.36.5-0ubuntu1 
-MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
+ <49b4b9af-033a-4534-90e3-ac633ff8bfd8@kania-online.de>
+ <7bf96a40-7472-47ca-b81c-7e9121c598b4@samba.org>
+ <68fe1182-281f-42ea-ac18-b0a2bf49961d@samba.org>
+Content-Language: de-DE
+Organization: Stefan Kania
+In-Reply-To: <68fe1182-281f-42ea-ac18-b0a2bf49961d@samba.org>
+Content-Type: multipart/signed; protocol="application/pkcs7-signature";
+ micalg=sha-256; boundary="------------ms090801010102090303070006"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -62,131 +77,118 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
+From: Stefan Kania via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Stefan Kania <stefan@kania-online.de>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Sat, 2024-10-12 at 13:53 +1300, Jennifer Sutton via samba-technical
-wrote:
-> On 12/10/24 6:49 am, Stefan Kania via samba-technical wrote:
-> > Hi Douglas,
-> > Am 11.10.24 um 03:36 schrieb Douglas Bagnall:
-> > > On 11/10/24 10:21, Douglas Bagnall via samba-technical wrote:
-> > > > hi Stefan,
-> > > > On 11/10/24 05:11, Stefan Kania via samba-technical wrote:
-> > > > > I'm just testing how it's going on with the auth-policies in
-> > > > > 4.21 and I see now it's possible to set conditions with:user-
-> > > > > allowed-to-authenticate-to...
-> > > > > When I set a condition I see:"msDS-
-> > > > > ComputerAllowedToAuthenticateTo":
-> > > > > "O:SYG:SYD:(XA;OICI;CR;;;WD;
-> > > > > (@USER.ad://ext/AuthenticationSilo == \"win11-computer\"))",I 
-> > > > > can allow the users from the silo to authenticateBut in the
-> > > > > Windows-world it's possible to disallow the authentication,
-> > > > > then it looks like this:"msDS-
-> > > > > ComputerAllowedToAuthenticateTo":
-> > > > > "O:SYG:SYD:(XA;OICI;CR;;;WD;
-> > > > > (@USER.ad://ext/AuthenticationSilo != \"win11-computer\"))",
-> > > > > 
-> > > > > Am I missing something or is it not yet possible?
-> > > 
-> > > OK, now I see that maybe we are talking about different things.
-> > > When you say "possible", you mean "possible using samba-tool or
-> > > something".
-> > Yes, exactly :-)
-> > > I was thinking more along the lines of "will it work if it gets
-> > > in this state?".
-> > > In that case, I think you are looking for something like this:
-> > >      samba-tool domain auth policy modify  \             --name
-> > > foo  \            --user-allowed-to-authenticate-
-> > > to="O:SYG:SYD:..."
-> > > The other way is a shortcut to allow the most common thing.
-> > That's what is missing. What is needed is another option to:
-> > samba-tool domain  auth policy computer-allowed-to-authenticate-to
-> > set --by-silo=win11-computer --name=win11
-> > Something like --deny and --allow. That's by the way how it is done
-> > on a Windows-System.
-> > Take a look at this howto:
-> > https://thesleepyadmins.com/2024/07/16/active-directory-authentication-policies-and-authentication-policy-silos/
-> > 
-> > You will find a picture (nearly at the end) named "Create control
-> > conditions" This picture is showing that you can choose between
-> > allow or deny.
-> > I try to set the XD or != via a ldif-file:----------------dn:
-> > CN=win11,CN=AuthN Policies,CN=AuthN Policy
-> > Configuration,CN=Services,CN=Configuration,DC=example,DC=netchanget
-> > ype: modifyreplace: msDS-ComputerAllowedToAuthenticateTomsDS-
-> > ComputerAllowedToAuthenticateTo:
-> > "O:SYG:SYD:(XD;OICI;CR;;;WD;(@USER.ad://ext/AuthenticationSilo ==
-> > \"win11-computer\"))",----------------
-> > But when I try to view the policy I get:--------------
-> > --root@dc01:~# samba-tool domain  auth policy view --name
-> > win11ERROR(runtime): uncaught exception - (11, 'Buffer Size Error')
-> >   File "/usr/lib/python3/dist-
-> > packages/sernet/samba/netcmd/__init__.py", line 353, in _run    
-> > return self.run(*args, **kwargs)           
-> > ^^^^^^^^^^^^^^^^^^^^^^^^^   File "/usr/lib/python3/dist-
-> > packages/sernet/samba/netcmd/domain/auth/policy/policy.py", line
-> > 163, in run     policy = AuthenticationPolicy.get(ldb, cn=name)
-> >              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^   File
-> > "/usr/lib/python3/dist-
-> > packages/sernet/samba/domain/models/model.py", line 286, in get    
-> > return cls.query(samdb, **kwargs).get()           
-> > ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^   File "/usr/lib/python3/dist-
-> > packages/sernet/samba/domain/models/query.py", line 87, in get    
-> > return self._from_message(self.result[0])           
-> > ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^   File "/usr/lib/python3/dist-
-> > packages/sernet/samba/domain/models/query.py", line 65, in
-> > _from_message     return model._from_message(self.samdb, message)
-> >            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^   File
-> > "/usr/lib/python3/dist-
-> > packages/sernet/samba/domain/models/model.py", line 148, in
-> > _from_message     obj._apply(samdb, message)   File
-> > "/usr/lib/python3/dist-
-> > packages/sernet/samba/domain/models/model.py", line 162, in _apply
-> >     setattr(self, attr, field.from_db_value(samdb,
-> > message[field.name]))                        
-> > ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^   File
-> > "/usr/lib/python3/dist-
-> > packages/sernet/samba/domain/models/fields.py", line 402, in
-> > from_db_value     return ndr_unpack(security.descriptor, value[0])
-> >            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^   File
-> > "/usr/lib/python3/dist-packages/sernet/samba/ndr.py", line 48, in
-> > ndr_unpack     ndr_unpack(data, allow_remaining=allow_remaining)---
-> > -------------And here again it the working condition from a
-> > Windows-domain-----------msDS-UserAllowedToAuthenticateFrom:
-> > O:SYG:SYD:(XA;OICI;CR;;;WD;(@USER.example://ext/AuthenticationSilo
-> > != "winclient-silo"))-----------As you can see, it stays "XA" only
-> > it changes from "==" to !=" and this is handled by the option
-> > "deny" or "allow" in the condition.
-> > Stefan
-> > > Douglas
-> > 
-> > 
-> > 
-> 
-> The problem is that SDDL has two separate representations: the
-> encoded binary representation, and the SDDL string representation
-> (like “O:SYG:SYD:…”. msDS-ComputerAllowedToAuthenticateTo uses the
-> binary representation, and if you set it to an SDDL string instead,
-> ndr_unpack() will be unable to decode it, as you see here.
-> The recommended way to set the SDDL is like so:
-> samba-tool domain auth policy modify --name win11 --computer-allowed-
-> to-authenticate-to=SDDL
-> Does Windows cope with an SDDL string in the msDS-
-> ComputerAllowedToAuthenticateTo attribute?
+This is a cryptographically signed message in MIME format.
 
-Regarding setting SDDL, if using ldb tools to do it:
-The Samba-side magic that allows LDB tools to show and set string-
-format SDDL into ntSecurityDescriptor is controlled by samba/lib/ldb-
-samba/ldif_handlers.c
-This list could be extended.
-Andrew,
+--------------ms090801010102090303070006
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
 
--- 
-Andrew Bartlett (he/him)       https://samba.org/~abartlet/Samba Team Member (since 2001) https://samba.orgSamba Team Lead                https://catalyst.net.nz/services/sambaCatalyst.Net Ltd
-Proudly developing Samba for Catalyst.Net Ltd - a Catalyst IT group
-company
-Samba Development and Support: https://catalyst.net.nz/services/samba
-Catalyst IT - Expert Open Source Solutions
+SSB3aWxsIHRyeSB0aGlzIHRvbmlnaHQsIGhvcGUgaXQgd2lsbCB3b3JrIDotKQ0KDQpBbSAx
+NC4xMC4yNCB1bSAwMTozOSBzY2hyaWViIEplbm5pZmVyIFN1dHRvbiB2aWEgc2FtYmEtdGVj
+aG5pY2FsOg0KPiBPbiAxNC8xMC8yNCAxMjozMyBwbSwgSmVubmlmZXIgU3V0dG9uIHZpYSBz
+YW1iYS10ZWNobmljYWwgd3JvdGU6DQo+PiBzYW1iYS10b29sIGRvbWFpbiBhdXRoIHBvbGlj
+eSBtb2RpZnkgLS1uYW1lIHdpbjExIA0KPj4gLS1jb21wdXRlci1hbGxvd2VkLXRvLWF1dGhl
+bnRpY2F0ZS10bz1POlNZRzpTWUQ6KFhBO09JQ0k7Q1I7OztXRDsoQFVTRVIuZXhhbXBsZTov
+L2V4dC9BdXRoZW50aWNhdGlvblNpbG8gIT0gXCJ3aW5jbGllbnQtc2lsb1wiKSkiDQo+IA0K
+PiBPaCwgcHJldGVuZCB0aGVyZSB3YXMgYSBkb3VibGUgcXVvdGUgYWZ0ZXIgDQo+IOKAmC0t
+Y29tcHV0ZXItYWxsb3dlZC10by1hdXRoZW50aWNhdGUtdG/igJkuDQo+IA0KPiBDaGVlcnMs
+DQo+IEplbm5pZmVyIChzaGUvaGVyKQ0KPiANCg0KLS0gDQpTdGVmYW4gS2FuaWENCkxhbmR3
+ZWcgMTMNCjI1NjkzIFN0LiBNaWNoYWVsaXNkb25uDQoNCg0KU2lnbmllcmVuIGplZGVyIEUt
+TWFpbCBoaWxmdCBTcGFtIHp1IHJlZHV6aWVyZW4gdW5kIHNjaMO8dHp0IElocmUgDQpQcml2
+YXRzcGjDpHJlLiBFaW4ga29zdGVuZnJlaWVzIFplcnRpZmlrYXQgZXJoYWx0ZW4gU2llIHVu
+dGVyIA0KaHR0cHM6Ly93d3cuZGduLmRlL2RnbmNlcnQvaW5kZXguaHRtbA0KRG93bmxvYWQg
+ZGVyIHJvb3QtWmVydGlmaWthdGU6IGh0dHBzOi8vd3d3LmRnbi5kZS9kZ25jZXJ0L2Rvd25s
+b2Fkcy5odG1sDQoNCk5ldWVyIEdQRy1LZXkgZGVyIHB1YmxpYyBrZXkgYmVmaW5kZXQgc2lj
+aCBpbSBBbmhhbmcNCg0KDQo=
+
+--------------ms090801010102090303070006
+Content-Type: application/pkcs7-signature; name="smime.p7s"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="smime.p7s"
+Content-Description: Kryptografische S/MIME-Signatur
+
+MIAGCSqGSIb3DQEHAqCAMIACAQExDzANBglghkgBZQMEAgEFADCABgkqhkiG9w0BBwEAAKCC
+DLMwggYDMIID66ADAgECAgwEaYxY0V6t5+cpnHAwDQYJKoZIhvcNAQELBQAwUjELMAkGA1UE
+BhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24g
+R0NDIFI2IFNNSU1FIENBIDIwMjMwHhcNMjQwOTI3MjAwMTE2WhcNMjcwOTI4MjAwMTE2WjBI
+MR8wHQYDVQQDDBZzdGVmYW5Aa2FuaWEtb25saW5lLmRlMSUwIwYJKoZIhvcNAQkBFhZzdGVm
+YW5Aa2FuaWEtb25saW5lLmRlMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAk1Wp
+pY9PMd6TNd+nUvWJ3RkA7fXwaZYBPlz+HyIh43KCUohVW0dweP44qfMBHjlVrAsgC6+VI+bd
+EWjvF9ZcWLHIj/IxonVe1HnN1DfYwp7/1qigJBjmfNwcdqlHHgRJ/WW8TblYLshwB94c+b5L
+J6ScRf4KCLYgTjmX/+/OpV9Zfzn0NvGNfyakUpeEz/36Mr1UPtWVchsGpuCsoGbylE0AOZug
+z2yOoLxAmd5YYLVI0uZ3IM1iGZPVcN0P9r9F1Gap4Vm9mi6+chx+ScAu/WfdzaBVlFoXA7w6
+X/QxpQXtnifpKxqE5qqrPqCCo9sXLLgD3yW1iFcBVTgzNyZQRwIDAQABo4IB4TCCAd0wDgYD
+VR0PAQH/BAQDAgWgMIGTBggrBgEFBQcBAQSBhjCBgzBGBggrBgEFBQcwAoY6aHR0cDovL3Nl
+Y3VyZS5nbG9iYWxzaWduLmNvbS9jYWNlcnQvZ3NnY2NyNnNtaW1lY2EyMDIzLmNydDA5Bggr
+BgEFBQcwAYYtaHR0cDovL29jc3AuZ2xvYmFsc2lnbi5jb20vZ3NnY2NyNnNtaW1lY2EyMDIz
+MGUGA1UdIAReMFwwCQYHZ4EMAQUBATALBgkrBgEEAaAyASgwQgYKKwYBBAGgMgoDAzA0MDIG
+CCsGAQUFBwIBFiZodHRwczovL3d3dy5nbG9iYWxzaWduLmNvbS9yZXBvc2l0b3J5LzAJBgNV
+HRMEAjAAMEEGA1UdHwQ6MDgwNqA0oDKGMGh0dHA6Ly9jcmwuZ2xvYmFsc2lnbi5jb20vZ3Nn
+Y2NyNnNtaW1lY2EyMDIzLmNybDAhBgNVHREEGjAYgRZzdGVmYW5Aa2FuaWEtb25saW5lLmRl
+MB0GA1UdJQQWMBQGCCsGAQUFBwMCBggrBgEFBQcDBDAfBgNVHSMEGDAWgBQAKTaeXHq6D68t
+UC3boCOFGLCgkjAdBgNVHQ4EFgQU0kHF9fFBXygVDjwNe5DkaSxVk3cwDQYJKoZIhvcNAQEL
+BQADggIBAL0WoW7dCmTQxxo1dMGyld5LLS9wCa7goc07GplzOsEJ5GmfeNGapy+dP2NfmenH
+XYKPnP/8hosTk6GDgck1HaP4wP5RvZ4ALVraLs4XSQiENz9954Sim3YzjFbG2aoqXpv/C0ha
+MwzR7LBCa/OwUJot5wO7R++6SE98/ZeYUqGDIgVcmH+UOYE/5yxM+M4aDXFUR2LCQO2ejPcZ
+a3QzlnMJUYPPw3U4Udbs9MRy40FunbmWUzu4yEddlo9GikG5NEI6wC7hFEpC4joYmvEZXRlT
+UqS8wug7QKRLyeLhXw04h0GYL0mrx1yj7x4CXqRjjRpterRlAkgFj2zEEpQ4DMiVcl8fZZ7T
+xkQGlbfa+HEp9y9/NluiNeoqAMF/lzS8haLHDXLdrdWPitBQazmcsyQ3LlcmeAMjchOIcUWt
+EKxIRCoedt6xbuIX5D2ul0H6rPE2BrimedwF6AZFPFk3/KHAbjhfkAElHiNjgg4uwUji+d9q
+zIR6Di3W2WdTCCwzp/6V2eEWdlQ8z8U4v3aF80fwzp6dOuFmti/mOayUrAYCUC6DBLjkA4EY
+MS6Nc1dr4f4dffnOceF4deCDN3nH8bRPEXs+kvnA91vw008dvJ+Df7jcJmDrt2tmzZPDTV6l
+neB5rj7E+6Qcvadj6c5hl7L5Tc/v6LZx6DCVX0BA2KpPMIIGqDCCBJCgAwIBAgIQfofDCS7X
+Zu8vIeKo0KeY9DANBgkqhkiG9w0BAQwFADBMMSAwHgYDVQQLExdHbG9iYWxTaWduIFJvb3Qg
+Q0EgLSBSNjETMBEGA1UEChMKR2xvYmFsU2lnbjETMBEGA1UEAxMKR2xvYmFsU2lnbjAeFw0y
+MzA0MTkwMzUzNTNaFw0yOTA0MTkwMDAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQKExBH
+bG9iYWxTaWduIG52LXNhMSgwJgYDVQQDEx9HbG9iYWxTaWduIEdDQyBSNiBTTUlNRSBDQSAy
+MDIzMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAwjAEbSkPcSyn26Zn9VtoE/xB
+vzYmNW29bW1pJZ7jrzKwPJm/GakCvy0IIgObMsx9bpFaq30X1kEJZnLUzuE1/hlchatYqyOR
+VBeHlv5V0QRSXY4faR0dCkIhXhoGknZ2O0bUJithcN1IsEADNizZ1AJIaWsWbQ4tYEYjytEd
+vfkxz1WtX3SjtecZR+9wLJLt6HNa4sC//QKdjyfr/NhDCzYrdIzAssoXFnp4t+HcMyQTrj0r
+pD8KkPj96sy9axzegLbzte7wgTHbWBeJGp0sKg7BAu+G0Rk6teO1yPd75arbCvfY/NaRRQHk
+6tmG71gpLdB1ZhP9IcNYyeTKXIgfMh2tVK9DnXGaksYCyi6WisJa1Oa+poUroX2ESXO6o03l
+VxiA1xyfG8lUzpUNZonGVrUjhG5+MdY16/6b0uKejZCLbgu6HLPvIyqdTb9XqF4XWWKu+OMD
+s/rWyQ64v3mvSa0te5Q5tchm4m9K0Pe9LlIKBk/gsgfaOHJDp4hYx4wocDr8DeCZe5d5wCFk
+xoGc1ckM8ZoMgpUc4pgkQE5ShxYMmKbPvNRPa5YFzbFtcFn5RMr1Mju8gt8J0c+dxYco2hi7
+dEW391KKxGhv7MJBcc+0x3FFTnmhU+5t6+CnkKMlrmzyaoeVryRTvOiH4FnTNHtVKUYDsCM0
+CLDdMNgoxgkCAwEAAaOCAX4wggF6MA4GA1UdDwEB/wQEAwIBhjBMBgNVHSUERTBDBggrBgEF
+BQcDAgYIKwYBBQUHAwQGCisGAQQBgjcUAgIGCisGAQQBgjcKAwwGCisGAQQBgjcKAwQGCSsG
+AQQBgjcVBjASBgNVHRMBAf8ECDAGAQH/AgEAMB0GA1UdDgQWBBQAKTaeXHq6D68tUC3boCOF
+GLCgkjAfBgNVHSMEGDAWgBSubAWjkxPioufi1xzWx/B/yGdToDB7BggrBgEFBQcBAQRvMG0w
+LgYIKwYBBQUHMAGGImh0dHA6Ly9vY3NwMi5nbG9iYWxzaWduLmNvbS9yb290cjYwOwYIKwYB
+BQUHMAKGL2h0dHA6Ly9zZWN1cmUuZ2xvYmFsc2lnbi5jb20vY2FjZXJ0L3Jvb3QtcjYuY3J0
+MDYGA1UdHwQvMC0wK6ApoCeGJWh0dHA6Ly9jcmwuZ2xvYmFsc2lnbi5jb20vcm9vdC1yNi5j
+cmwwEQYDVR0gBAowCDAGBgRVHSAAMA0GCSqGSIb3DQEBDAUAA4ICAQCRkUdr1aIDRmkNI5jx
+5ggapGUThq0KcM2dzpMu314mJne8yKVXwzfKBtqbBjbUNMODnBkhvZcnbHUStur2/nt1tP3e
+e8KyNhYxzv4DkI0NbV93JChXipfsan7YjdfEk5vI2Fq+wpbGALyyWBgfy79YIgbYWATB158t
+vEh5UO8kpGpjY95xv+070X3FYuGyeZyIvao26mN872FuxRxYhNLwGHIy38N9ASa1Q3BTNKSr
+HrZngadofHglG5W3TMFR11JOEOAUHhUgpbVVvgCYgGA6dSX0y5z7k3rXVyjFOs7KBSXrdJPK
+adpl4vqYphH7+P40nzBRcxJHrv5FeXlTrb+drjyXNjZSCmzfkOuCqPspBuJ7vab0/9oeNERg
+nz6SLCjLKcDXbMbKcRXgNhFBlzN4OUBqieSBXk80w2Nzx12KvNj758WavxOsXIbX0Zxwo1h3
+uw75AI2v8qwFWXNclO8qW2VXoq6kihWpeiuvDmFfSAwRLxwwIjgUuzG9SaQ+pOomuaC7QTKW
+MI0hL0b4mEPq9GsPPQq1UmwkcYFJ/Z4I93DZuKcXmKMmuANTS6wxwIEw8Q5MQ6y9fbJxGEOg
+OgYL4QIqNULb5CYPnt2LeiIiEnh8Uuh8tawqSjnR0h7Bv5q4mgo3L1Z9QQuexUntWD96t4o0
+q1jXWLyrpgP7ZcnuCzGCA1AwggNMAgEBMGIwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEds
+b2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gR0NDIFI2IFNNSU1FIENBIDIw
+MjMCDARpjFjRXq3n5ymccDANBglghkgBZQMEAgEFAKCCAb8wGAYJKoZIhvcNAQkDMQsGCSqG
+SIb3DQEHATAcBgkqhkiG9w0BCQUxDxcNMjQxMDE1MDY1MzQzWjAvBgkqhkiG9w0BCQQxIgQg
+RQgpwHif9sNk7tm3p1lrmlHsUfIm48bMXgL56Cx5/dowbAYJKoZIhvcNAQkPMV8wXTALBglg
+hkgBZQMEASowCwYJYIZIAWUDBAECMAoGCCqGSIb3DQMHMA4GCCqGSIb3DQMCAgIAgDANBggq
+hkiG9w0DAgIBQDAHBgUrDgMCBzANBggqhkiG9w0DAgIBKDBxBgkrBgEEAYI3EAQxZDBiMFIx
+CzAJBgNVBAYTAkJFMRkwFwYDVQQKExBHbG9iYWxTaWduIG52LXNhMSgwJgYDVQQDEx9HbG9i
+YWxTaWduIEdDQyBSNiBTTUlNRSBDQSAyMDIzAgwEaYxY0V6t5+cpnHAwcwYLKoZIhvcNAQkQ
+AgsxZKBiMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQKExBHbG9iYWxTaWduIG52LXNhMSgwJgYD
+VQQDEx9HbG9iYWxTaWduIEdDQyBSNiBTTUlNRSBDQSAyMDIzAgwEaYxY0V6t5+cpnHAwDQYJ
+KoZIhvcNAQEBBQAEggEAa/5jJUnuNXhC1CyogMCCJ1s+72peRm7GHpX0H56muVG8wVFI91ZN
+gYUuPZygUZXphhto3Tk37Kx8IdB+oVEh4NZR255AXRrKP2pfZsgQxAp+1bA/9Fr8WzHSV82R
+y+JoJOwpgj20jN1sn9ptN3j5OFpgEJnWO37WSQBccO4J27OVFPztmzVAfjrxAViesiIRXOUz
+HlzJsA4n461MhaRZJdUKALkOvl5KD8Oq0z2HDNIKuYSJKXOz5CiTobvev7nQrKodlpiDgcBY
+0Tt0ECNcoSOx8rsVn/H+GDWuGs5nAcLEeazKpyXs4lJdV5TFVEw+SUVa1Jlb80Z2TQx1FdG/
+lQAAAAAAAA==
+--------------ms090801010102090303070006--
+
