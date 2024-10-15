@@ -2,52 +2,53 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 77AB599DECA
-	for <lists+samba-technical@lfdr.de>; Tue, 15 Oct 2024 08:55:06 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7D46F99F509
+	for <lists+samba-technical@lfdr.de>; Tue, 15 Oct 2024 20:18:31 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=bYoxbXLHxK1kgIXKbO2jUi14bXrjU4Uz8kY78v/ZRKg=; b=iy7MUxoj+CiAgYZ3oM8GeZeL0+
-	xD3qQnIQC45a203fZ7TKid+cBs+StCVtJtuuAQ6yE7T0Z3Bz25+gFWyj1N+jNO0FZNAXgOqJt9cVq
-	c3n1fziimq0SWJzh9tj4aW1vTKREl+WiiBOdTRsXZkzT279ZiTjP+tKgHVhc9Pj8OB1qmvUD9NcK7
-	/32DI1S51Ns1A5e/GUTi1ymZ8BTkbLSWF0+/haW1ePN5QxUtNaBVrAcsxNuLTNr6K81SryG0Tyy/T
-	D45QQ7nI8xBkhDXoARy/g1JtSY80O3lgQv1pSohmKA8W9lkwr4bNZ463Llu3rpSWR4AETrV8y2AQy
-	iYbZa5rw==;
-Received: from ip6-localhost ([::1]:57134 helo=hr1.samba.org) 
+	bh=pzZOB7Et1ISImVxIy/L5yzYJiysGUQ1TfHcmLzo8Igk=; b=KepBTOjEEZM1V1hZME81seK5jh
+	A0Wzx+x4TXNZ15n5dLCFFYayaP1dExu3Xv1YJVgoz4HMOBE0SFyrrGjOgjXlBe8a2aMrNsoAi2E8m
+	avRPVp9ZTEQ7Jc7kJe+xs0TGZCP1esGrCjSl+9QrpQ3aYl91VtFwyx1qRdI1MykGDgugc6dqd1yBy
+	prlt1zlFhK0KuJxVE6ThEj7pPOd5KWpPm/DavRyw6zUswi6mpeH3OD4b/NYxCWTdmRnkPhSd0x9rk
+	bk8LtF5Hmbij5lo1qHjYI7t22+xpKn/+RNaR5GHPNnIc1keaE92useNTLjYf4GwD/lmqv+h1Q8MNN
+	OatPwhFA==;
+Received: from ip6-localhost ([::1]:32798 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1t0bRT-0040SX-Hj; Tue, 15 Oct 2024 06:54:03 +0000
-Received: from plasma6.jpberlin.de ([80.241.56.68]:46059) 
+	id 1t0m7F-0045GA-2i; Tue, 15 Oct 2024 18:17:53 +0000
+Received: from plasma6.jpberlin.de ([80.241.56.68]:38069) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1t0bRL-0040SP-2y
- for samba-technical@lists.samba.org; Tue, 15 Oct 2024 06:53:59 +0000
-Received: from spamfilter02.heinlein-hosting.de
- (spamfilter02.heinlein-hosting.de [80.241.56.116])
- by plasma.jpberlin.de (Postfix) with ESMTP id 475A2AC36E;
- Tue, 15 Oct 2024 08:53:49 +0200 (CEST)
+ (Exim) id 1t0m7A-0045G3-QX
+ for samba-technical@lists.samba.org; Tue, 15 Oct 2024 18:17:51 +0000
+Received: from spamfilter04.heinlein-hosting.de
+ (spamfilter04.heinlein-hosting.de [80.241.56.122])
+ by plasma.jpberlin.de (Postfix) with ESMTP id 2B88FB72F9;
+ Tue, 15 Oct 2024 20:17:43 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kania-online.de;
- s=MBO0001; t=1728975229;
+ s=MBO0001; t=1729016263;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=bYoxbXLHxK1kgIXKbO2jUi14bXrjU4Uz8kY78v/ZRKg=;
- b=oze77EW6NLgo2xRm3oWKR7Bue9QWXkXYItFpjZE4jmYWTjHbXLG9NMfbGc7BeMERkR0eDJ
- L6vgiB4Dv6OhMZoB0eNMb9IY0zwiJ11U+tdzWrt/yvOdwsIR7wRc2GPM+f2foa3gKKVmDv
- yCpxHEKhY3OiRezXpWAmygWHcQojwhqptFHf6HoINUi4ldecmB2Z6MnMmwq4GxUwb6M4D7
- 5oNmIM5R4VyZgEutuulWMfwCGZ9L1wfIyE6P43qS/MLhOuGUKiRxdiMLopzEkgAYlkg90F
- ojIfzIhWjt6OVyP+3yic6AOYW4QOR2rfC3FMzjiJJdiLbbdy82QBH1JDmyCckg==
+ bh=pzZOB7Et1ISImVxIy/L5yzYJiysGUQ1TfHcmLzo8Igk=;
+ b=LYjSnizCGfJSiPjIXcFKoxFhthVhf4ZVrB86EhfESO3uqmVGqca6yQvdY2H80qEvfWGt+R
+ V5h6cfDGd0tSeVP4AfHJh4Lpif/ZnLSiphzMYB7upF8knQJeQiHV8Lr3y4KE5IB9WxqQho
+ 1aFc00Ckpmp/TswvqJHIsaxreF288UgjIxugOsJ+ok+vgt5JOZM/IXn/J/ts+xoCTXPGTh
+ b4vnvAtSXdYIzWf+kMbfHbDtkrNg+oRU3SYHTBX5r4F1xorBJLxy63hvb5jLhPdcnzzlam
+ t6HV1rwWW0Pv0TKorF8BFQgURFKiHHnO5K4V1R5Zd1LMhqrCs5PLjsdIvZy9Hg==
 Received: from plasma.jpberlin.de ([80.241.56.68])
- by spamfilter02.heinlein-hosting.de (spamfilter02.heinlein-hosting.de
- [80.241.56.116]) (amavisd-new, port 10030)
- with ESMTP id MZ073nQMFDHF; Tue, 15 Oct 2024 08:53:43 +0200 (CEST)
-Received: from [192.168.101.179] (i689719B5.versanet.de [104.151.25.181])
+ by spamfilter04.heinlein-hosting.de (spamfilter04.heinlein-hosting.de
+ [80.241.56.122]) (amavisd-new, port 10030)
+ with ESMTP id hveXRjFWcLcY; Tue, 15 Oct 2024 20:17:36 +0200 (CEST)
+Received: from [IPV6:2a01:599:813:5134:982b:283b:4890:1d68]
+ (tmo-116-201.customers.d1-online.com [80.187.116.201])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (Client did not present a certificate)
  (Authenticated sender: stefan@kania-online.de)
- by plasma.jpberlin.de (Postfix) with ESMTPSA id 73C1BAAC8C
- for <samba-technical@lists.samba.org>; Tue, 15 Oct 2024 08:53:43 +0200 (CEST)
-Message-ID: <78b1c795-0b68-470e-ae1d-3626aad8d7d6@kania-online.de>
-Date: Tue, 15 Oct 2024 08:53:43 +0200
+ by plasma.jpberlin.de (Postfix) with ESMTPSA id E3911B7297
+ for <samba-technical@lists.samba.org>; Tue, 15 Oct 2024 20:17:35 +0200 (CEST)
+Message-ID: <afa75a49-2ae4-4e14-9363-d5c31d7ef2a9@kania-online.de>
+Date: Tue, 15 Oct 2024 20:17:34 +0200
 MIME-Version: 1.0
 Subject: Re: authentication policies in Samba 4.21
 To: samba-technical@lists.samba.org
@@ -63,7 +64,7 @@ Content-Language: de-DE
 Organization: Stefan Kania
 In-Reply-To: <68fe1182-281f-42ea-ac18-b0a2bf49961d@samba.org>
 Content-Type: multipart/signed; protocol="application/pkcs7-signature";
- micalg=sha-256; boundary="------------ms090801010102090303070006"
+ micalg=sha-256; boundary="------------ms060608090908020404090707"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -84,29 +85,25 @@ Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
 This is a cryptographically signed message in MIME format.
 
---------------ms090801010102090303070006
+--------------ms060608090908020404090707
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: base64
 
-SSB3aWxsIHRyeSB0aGlzIHRvbmlnaHQsIGhvcGUgaXQgd2lsbCB3b3JrIDotKQ0KDQpBbSAx
-NC4xMC4yNCB1bSAwMTozOSBzY2hyaWViIEplbm5pZmVyIFN1dHRvbiB2aWEgc2FtYmEtdGVj
-aG5pY2FsOg0KPiBPbiAxNC8xMC8yNCAxMjozMyBwbSwgSmVubmlmZXIgU3V0dG9uIHZpYSBz
-YW1iYS10ZWNobmljYWwgd3JvdGU6DQo+PiBzYW1iYS10b29sIGRvbWFpbiBhdXRoIHBvbGlj
-eSBtb2RpZnkgLS1uYW1lIHdpbjExIA0KPj4gLS1jb21wdXRlci1hbGxvd2VkLXRvLWF1dGhl
-bnRpY2F0ZS10bz1POlNZRzpTWUQ6KFhBO09JQ0k7Q1I7OztXRDsoQFVTRVIuZXhhbXBsZTov
-L2V4dC9BdXRoZW50aWNhdGlvblNpbG8gIT0gXCJ3aW5jbGllbnQtc2lsb1wiKSkiDQo+IA0K
-PiBPaCwgcHJldGVuZCB0aGVyZSB3YXMgYSBkb3VibGUgcXVvdGUgYWZ0ZXIgDQo+IOKAmC0t
-Y29tcHV0ZXItYWxsb3dlZC10by1hdXRoZW50aWNhdGUtdG/igJkuDQo+IA0KPiBDaGVlcnMs
-DQo+IEplbm5pZmVyIChzaGUvaGVyKQ0KPiANCg0KLS0gDQpTdGVmYW4gS2FuaWENCkxhbmR3
-ZWcgMTMNCjI1NjkzIFN0LiBNaWNoYWVsaXNkb25uDQoNCg0KU2lnbmllcmVuIGplZGVyIEUt
-TWFpbCBoaWxmdCBTcGFtIHp1IHJlZHV6aWVyZW4gdW5kIHNjaMO8dHp0IElocmUgDQpQcml2
-YXRzcGjDpHJlLiBFaW4ga29zdGVuZnJlaWVzIFplcnRpZmlrYXQgZXJoYWx0ZW4gU2llIHVu
-dGVyIA0KaHR0cHM6Ly93d3cuZGduLmRlL2RnbmNlcnQvaW5kZXguaHRtbA0KRG93bmxvYWQg
-ZGVyIHJvb3QtWmVydGlmaWthdGU6IGh0dHBzOi8vd3d3LmRnbi5kZS9kZ25jZXJ0L2Rvd25s
-b2Fkcy5odG1sDQoNCk5ldWVyIEdQRy1LZXkgZGVyIHB1YmxpYyBrZXkgYmVmaW5kZXQgc2lj
-aCBpbSBBbmhhbmcNCg0KDQo=
+SGkgSmVubmlmZXIsDQoNCnRoYW5rIHlvdSA6LSksIG5vdyBJIHNldCB0aGUgYXV0aC1wb2xp
+Y3kgd2l0aCAhPS4gTm93IEkgY2FuIHN0YXJ0IA0KdGVzdGluZyB0aGUgcG9saWNpZXMgYW5k
+IHNpbG9zLg0KDQpTdGVmYW4NCg0KQW0gMTQuMTAuMjQgdW0gMDE6Mzkgc2NocmllYiBKZW5u
+aWZlciBTdXR0b24gdmlhIHNhbWJhLXRlY2huaWNhbDoNCj4gT24gMTQvMTAvMjQgMTI6MzMg
+cG0sIEplbm5pZmVyIFN1dHRvbiB2aWEgc2FtYmEtdGVjaG5pY2FsIHdyb3RlOg0KPj4gc2Ft
+YmEtdG9vbCBkb21haW4gYXV0aCBwb2xpY3kgbW9kaWZ5IC0tbmFtZSB3aW4xMSANCj4+IC0t
+Y29tcHV0ZXItYWxsb3dlZC10by1hdXRoZW50aWNhdGUtdG89TzpTWUc6U1lEOihYQTtPSUNJ
+O0NSOzs7V0Q7KEBVU0VSLmV4YW1wbGU6Ly9leHQvQXV0aGVudGljYXRpb25TaWxvICE9IFwi
+d2luY2xpZW50LXNpbG9cIikpIg0KPiANCj4gT2gsIHByZXRlbmQgdGhlcmUgd2FzIGEgZG91
+YmxlIHF1b3RlIGFmdGVyIA0KPiDigJgtLWNvbXB1dGVyLWFsbG93ZWQtdG8tYXV0aGVudGlj
+YXRlLXRv4oCZLg0KPiANCj4gQ2hlZXJzLA0KPiBKZW5uaWZlciAoc2hlL2hlcikNCj4gDQoN
+Ck5ldWVyIEdQRy1LZXkgZGVyIHB1YmxpYyBrZXkgYmVmaW5kZXQgc2ljaCBpbSBBbmhhbmcN
+Cg0KDQo=
 
---------------ms090801010102090303070006
+--------------ms060608090908020404090707
 Content-Type: application/pkcs7-signature; name="smime.p7s"
 Content-Transfer-Encoding: base64
 Content-Disposition: attachment; filename="smime.p7s"
@@ -176,19 +173,19 @@ OgYL4QIqNULb5CYPnt2LeiIiEnh8Uuh8tawqSjnR0h7Bv5q4mgo3L1Z9QQuexUntWD96t4o0
 q1jXWLyrpgP7ZcnuCzGCA1AwggNMAgEBMGIwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEds
 b2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gR0NDIFI2IFNNSU1FIENBIDIw
 MjMCDARpjFjRXq3n5ymccDANBglghkgBZQMEAgEFAKCCAb8wGAYJKoZIhvcNAQkDMQsGCSqG
-SIb3DQEHATAcBgkqhkiG9w0BCQUxDxcNMjQxMDE1MDY1MzQzWjAvBgkqhkiG9w0BCQQxIgQg
-RQgpwHif9sNk7tm3p1lrmlHsUfIm48bMXgL56Cx5/dowbAYJKoZIhvcNAQkPMV8wXTALBglg
+SIb3DQEHATAcBgkqhkiG9w0BCQUxDxcNMjQxMDE1MTgxNzM0WjAvBgkqhkiG9w0BCQQxIgQg
+CPsB6lFeKamcpD5A6W29Rq0q81y1/J95nDPDtlUeLXEwbAYJKoZIhvcNAQkPMV8wXTALBglg
 hkgBZQMEASowCwYJYIZIAWUDBAECMAoGCCqGSIb3DQMHMA4GCCqGSIb3DQMCAgIAgDANBggq
 hkiG9w0DAgIBQDAHBgUrDgMCBzANBggqhkiG9w0DAgIBKDBxBgkrBgEEAYI3EAQxZDBiMFIx
 CzAJBgNVBAYTAkJFMRkwFwYDVQQKExBHbG9iYWxTaWduIG52LXNhMSgwJgYDVQQDEx9HbG9i
 YWxTaWduIEdDQyBSNiBTTUlNRSBDQSAyMDIzAgwEaYxY0V6t5+cpnHAwcwYLKoZIhvcNAQkQ
 AgsxZKBiMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQKExBHbG9iYWxTaWduIG52LXNhMSgwJgYD
 VQQDEx9HbG9iYWxTaWduIEdDQyBSNiBTTUlNRSBDQSAyMDIzAgwEaYxY0V6t5+cpnHAwDQYJ
-KoZIhvcNAQEBBQAEggEAa/5jJUnuNXhC1CyogMCCJ1s+72peRm7GHpX0H56muVG8wVFI91ZN
-gYUuPZygUZXphhto3Tk37Kx8IdB+oVEh4NZR255AXRrKP2pfZsgQxAp+1bA/9Fr8WzHSV82R
-y+JoJOwpgj20jN1sn9ptN3j5OFpgEJnWO37WSQBccO4J27OVFPztmzVAfjrxAViesiIRXOUz
-HlzJsA4n461MhaRZJdUKALkOvl5KD8Oq0z2HDNIKuYSJKXOz5CiTobvev7nQrKodlpiDgcBY
-0Tt0ECNcoSOx8rsVn/H+GDWuGs5nAcLEeazKpyXs4lJdV5TFVEw+SUVa1Jlb80Z2TQx1FdG/
-lQAAAAAAAA==
---------------ms090801010102090303070006--
+KoZIhvcNAQEBBQAEggEALN7AXnyvnofac80GTRfjyTSb0YnFKtUk2kR18wte/m7mVeub58at
+rPE4aRG84Hl3Dae+tCxQjhMV8BOI3a84koeE4ZfLbm2lbk0OfQA+51mAFc0FQ66ba3YVhniz
+HDTn+UGd0ZQymCOz1JIBomDvJVYkqJXbldq+aXLmqtfDlDeyMV3XG65eip/3O3eIb7f/CY0Q
+p5Kni9j7Y5ysImHD02HXn5IyU4z2410uJD/oAFNUEQ675GrfwE5/9Kpg3Tyu5HQ4e/O7eWv9
+Em3PwojPkGk7DEO475IKycrVtzJ58jFp+T7ayIwvtgIujPGb9OzVf/iVRySWro4tw5eaHrWV
+oQAAAAAAAA==
+--------------ms060608090908020404090707--
 
