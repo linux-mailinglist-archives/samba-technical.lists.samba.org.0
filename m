@@ -2,70 +2,47 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 651AF9A00D4
-	for <lists+samba-technical@lfdr.de>; Wed, 16 Oct 2024 07:36:52 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 52AC49A21FA
+	for <lists+samba-technical@lfdr.de>; Thu, 17 Oct 2024 14:16:51 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=FpFzgW48v/2WJ52rpa7W+YR88yLyOSmQvacK2YcE0vs=; b=4UD/MtKor7Ktvg1UvWJNQxqvQx
-	WVkP9t6kFMGSvRav3nhMppblQRgtb4TYXKCdeBt05vHE/0FfvSCy9mgfTg66r3HdJlMARFZVeMif5
-	hrxMS2Y1yCDgdohhJVFY0HJScDtXoFqyCSRCErqteSz6R0m6v8vuXk0Tuv+GjaRsf9kXhyek103M0
-	iJzMzv3a2DQ3iMr+zFYBXoVLhhNT1id2NLZnGRZ/GRamRvEiQVSZgBY0p5MhKdCBGC2MGYi56gKOF
-	yEcXo0CNhDwxl0k2nH+Ww5naBcBDM6WJgY1+BfD0TkY0rlyqbA/lT7XB6mL1jZePlwXDPwaHiqxPw
-	Y3V+btJg==;
-Received: from ip6-localhost ([::1]:52718 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
+	bh=mmqgQKb2awtM26oGcxUChLt4RMp69iLKn5gWuBgTyCs=; b=D0vITuqiZtT6tiEfQ1Rin7wYXg
+	4J6keM2G8HvD6OVLjmH87b70jqQJAEemv/FVfnpEEux0t+A02ipW3KQrsbcvQyEBn8qdBGI3wTVIk
+	5iosNVyYf3r80U539P9eaiLIXZg1NTOn0B/wzZ4Rv2G4Nu+ru0K1OiGaLMtWrD/XW9Eb3ZiGfcnUT
+	kcdesysSfuhUBIHyOzpruNawew4CEGAIuIhQPBTMh8zKEuogTmFd4THsL3iTNV19+fUxP+02ug6bV
+	yBt0u+xTIPkdXBGm7W8nA8bUkFDpazc7eVwbiWJC2mPoAx6HgClFgu0WwJARbboQkAr6sp6GeuCzr
+	+rce0oJw==;
+Received: from ip6-localhost ([::1]:56438 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1t0whi-0047ED-Gt; Wed, 16 Oct 2024 05:36:14 +0000
-Received: from mail-lf1-x12c.google.com ([2a00:1450:4864:20::12c]:46467) 
+	id 1t1PQP-004DjJ-JQ; Thu, 17 Oct 2024 12:16:17 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:13836) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1t0whd-0047E6-8O
- for samba-technical@lists.samba.org; Wed, 16 Oct 2024 05:36:12 +0000
-Received: by mail-lf1-x12c.google.com with SMTP id
- 2adb3069b0e04-53a007743e7so1786282e87.1
- for <samba-technical@lists.samba.org>; Tue, 15 Oct 2024 22:36:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1729056968; x=1729661768; darn=lists.samba.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=FpFzgW48v/2WJ52rpa7W+YR88yLyOSmQvacK2YcE0vs=;
- b=KiL6RTZ6uHag+mGT/98la9Kwp6oTz4ts/TonjYIt+LBZ/p6bwQJgjd4k2XcUVfMWTM
- JIe3WZkWe7jJ+M+X3PbRTgzkgISEJ614/QVy4VXRGexpvcXzYH2CJKihTsLBy1lzqM+z
- BcEusJXoNrgJNtA2ZIsrXQLjI3AThwrPVKEU1vFGFIiEVFGXio68OTtuh+JBmq7eFY7O
- QP6xBdCkdLMF7eRQsOXpsKA2WQKZ+BkT3Ikems7d/YSIYBm3PDS6xtu4+rkXjCLpYUJ6
- wRAkGnBVM3JFyoHA0vrwlKyeHa2i5zev/1With8RbC2HvxpvQWxuHrOSbBOSPThvw1MX
- FrKQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729056968; x=1729661768;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=FpFzgW48v/2WJ52rpa7W+YR88yLyOSmQvacK2YcE0vs=;
- b=YuOYNnuqY0QZQTbVdQK1I23IQ0mAAFzo/MBuw2fPoTmyqlb0W++wi6sUSdBqsUVuj1
- Kxog+7NPu27vbHBR5nvEH5vfdksyXhvA5ubdS4I3cmSNnlRNLTCXProyyQ0d8rNbxCHN
- Ik167kX8Gi0aBMvK1pY5tiPqmSbutEyAhT83iatN5RVGRyuvXo7/MrOp6j8+AMI2yqUx
- KUG5CHP5VAUvqFYOhKZ+byxmfIpr3OzEHeSgzDk3o0w0t+tQc9o4DI8Po1MN+EaN5mBs
- 8DftqahX0Bhp5p12DWuLjmCEqvkStyKPfwaCO+v1NX7zVrGVh2boxV7lu7AT63dOm5Au
- EtmQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCViujPa5Wu8og58X1dNyG0huj3mp+FZ39OZKE9CrDBVzmLBLv3DeZ2BaqUtn/Z0nC6chkHTZXvFya91kPfIG0s=@lists.samba.org
-X-Gm-Message-State: AOJu0YzcK6W9lQDU9Bsp0GDYU8iFmBPjdM8ZN0c0lXuM63LqiQhHwYpw
- jJxq+JbTqzPB3LpKSnWU25dlnMOm6fQtfDjLNFaJ7N5GYP5piJTbEJhnngjwcK5eCKsxuMF/3uu
- L32XBRnPS+P3QKXBBD7Dy3Zpwnfc=
-X-Google-Smtp-Source: AGHT+IHndmCm/EMXJXuOFINZjOEoWro6KrtmVvkmaBHgAUiFCfIOV+zT26SggvV9rS71zmBuYVLfzcWnox5WdYRK8qs=
-X-Received: by 2002:a05:6512:3f29:b0:539:ee04:2321 with SMTP id
- 2adb3069b0e04-539ee0424e1mr5151271e87.33.1729056967486; Tue, 15 Oct 2024
- 22:36:07 -0700 (PDT)
+ (Exim) id 1t1PQF-004Dic-N4; Thu, 17 Oct 2024 12:16:12 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=From:To:Date:Message-ID:CC;
+ bh=mmqgQKb2awtM26oGcxUChLt4RMp69iLKn5gWuBgTyCs=; b=kqQuAofBJa00q0Ufndcqq1QVe4
+ PuHT3ULJTq/szXqXtbwT8MeawzyxFtqGI15vicJNzmxkezRTdNFmDnVYHA1SHxorFFzFSX1NC5NyR
+ AHRganEFttXloQZ9kTkEQRul7M6BBU3sgKBKf7EeoOJ5Bn2lqcbkeklV4pnfDOazxgGwaNqgTJ+qU
+ +OSBbLAJiTuecxv5/UprUTc3YrT7sSxNcCRctPJzWdHtxpe/9SIh2Cgfh5TA1UA2N5UWaGmtcBF9f
+ WPcFxL9maJT5dAcHZ2GGqT11btnF4zE2kmyICIfdHLypK5WDZRisI0aewJzZ2BGenGlRA4doOq6Ne
+ D/iEb7IA3bMXI4VKAEiZFPZ7T++hrjMiQIglp69la3ojEx5aQEuUjyahJ8t6J3pyYNfW1AkCKFFx5
+ VantVQVSVS5w+76qVUF53fn/cxvzyFShdudU+qhCnbyJegmtYFhaBUXKzRWKoCfhtgWldjxE2pKz6
+ f/upLhsjqmgn/Y0QporIaX+U;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1t1PQF-005Gib-0i; Thu, 17 Oct 2024 12:16:07 +0000
+Message-ID: <97b4f1c9-f963-40f1-a27c-4bb2d59477e4@samba.org>
+Date: Thu, 17 Oct 2024 14:16:06 +0200
 MIME-Version: 1.0
-References: <20241015102036.2882322-1-suhui@nfschina.com>
- <c0afa02b-991c-4601-bacb-13ace9cb96f2@stanley.mountain>
-In-Reply-To: <c0afa02b-991c-4601-bacb-13ace9cb96f2@stanley.mountain>
-Date: Wed, 16 Oct 2024 00:35:56 -0500
-Message-ID: <CAH2r5msLmsCn_uHqyzFy8CXy6uCheOECNSXLReJdS4u1C4aN0w@mail.gmail.com>
-Subject: Re: [PATCH v2] smb: client: fix possible double free in smb2_set_ea()
-To: Dan Carpenter <dan.carpenter@linaro.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Content-Language: de-DE
+To: samba-announce@lists.samba.org, samba@lists.samba.org,
+ samba-technical@lists.samba.org
+Subject: [Announce] Samba 4.19.9 Available for Download
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -79,58 +56,95 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
-Cc: pc@manguebit.com, tom@talpey.com, sprasad@microsoft.com,
- llvm@lists.linux.dev, Su Hui <suhui@nfschina.com>, linux-cifs@vger.kernel.org,
- kernel-janitors@vger.kernel.org, samba-technical@lists.samba.org,
- nathan@kernel.org, ndesaulniers@google.com, linux-kernel@vger.kernel.org,
- sfrench@samba.org, bharathsm@microsoft.com, morbo@google.com,
- justinstitt@google.com, stfrench@microsoft.com
+From: Jule Anger via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jule Anger <janger@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-merged into cifs-2.6.git for-next pending additional testing
+Release Announcements
+---------------------
 
-On Tue, Oct 15, 2024 at 5:45=E2=80=AFAM Dan Carpenter <dan.carpenter@linaro=
-.org> wrote:
->
-> On Tue, Oct 15, 2024 at 06:20:37PM +0800, Su Hui wrote:
-> > Clang static checker(scan-build) warning=EF=BC=9A
-> > fs/smb/client/smb2ops.c:1304:2: Attempt to free released memory.
-> >  1304 |         kfree(ea);
-> >       |         ^~~~~~~~~
-> >
-> > There is a double free in such case:
-> > 'ea is initialized to NULL' -> 'first successful memory allocation for
-> > ea' -> 'something failed, goto sea_exit' -> 'first memory release for e=
-a'
-> > -> 'goto replay_again' -> 'second goto sea_exit before allocate memory
-> > for ea' -> 'second memory release for ea resulted in double free'.
-> >
-> > Re-initialie 'ea' to NULL near to the replay_again label, it can fix th=
-is
-> > double free problem.
-> >
-> > Fixes: 4f1fffa23769 ("cifs: commands that are retried should have repla=
-y flag set")
-> > Signed-off-by: Su Hui <suhui@nfschina.com>
-> > ---
-> > v2:
-> > - Move 'ea =3D NULL' near to the replay_again label.(Dan's suggestion)
->
-> Thanks!
->
-> Reviewed-by: Dan Carpenter <dan.carpenter@linaro.org>
->
-> regards,
-> dan carpenter
->
->
+This is the latest stable release of the Samba 4.19 release series.
 
 
---=20
-Thanks,
+Changes since 4.19.8
+--------------------
 
-Steve
+o  Douglas Bagnall <douglas.bagnall@catalyst.net.nz>
+    * BUG 15590: libldb: performance issue with indexes (ldb 2.8.2 is 
+already
+      released).
+
+o  Ralph Boehme <slow@samba.org>
+    * BUG 15624: DH reconnect error handling can lead to stale sharemode 
+entries.
+
+o  David Disseldorp <ddiss@samba.org>
+    * BUG 15699: Incorrect FSCTL_QUERY_ALLOCATED_RANGES response when 
+truncated.
+
+o  Stefan Metzmacher <metze@samba.org>
+    * BUG 15280: irpc_destructor may crash during shutdown.
+    * BUG 15624: DH reconnect error handling can lead to stale sharemode 
+entries.
+    * BUG 15696: Compound SMB2 requests don't return
+      NT_STATUS_NETWORK_SESSION_EXPIRED for all requests, confuses
+      MacOSX clients.
+
+o  Shachar Sharon <ssharon@redhat.com>
+    * BUG 15700: Crash when readlinkat fails.
+
+
+#######################################
+Reporting bugs & Development Discussion
+#######################################
+
+Please discuss this release on the samba-technical mailing list or by
+joining the #samba-technical:matrix.org matrix room, or
+#samba-technical IRC channel on irc.libera.chat.
+
+If you do report problems then please try to send high quality
+feedback. If you don't provide vital information to help us track down
+the problem then you will probably be ignored.  All bug reports should
+be filed under the Samba 4.1 and newer product in the project's Bugzilla
+database (https://bugzilla.samba.org/).
+
+
+======================================================================
+== Our Code, Our Bugs, Our Responsibility.
+== The Samba Team
+======================================================================
+
+
+
+================
+Download Details
+================
+
+The uncompressed tarballs and patch files have been signed
+using GnuPG (ID AA99442FB680B620).  The source code can be downloaded
+from:
+
+         https://download.samba.org/pub/samba/stable/
+
+The release notes are available online at:
+
+         https://www.samba.org/samba/history/samba-4.19.9.html
+
+
+If you are building/using ldb from a system library, you'll
+also need the related updated ldb tarball, otherwise you can ignore it.
+The uncompressed ldb tarballs have been signed using GnuPG (ID 
+4793916113084025).
+The ldb source code can be downloaded from:
+
+https://download.samba.org/pub/ldb/ldb-2.8.2.tar.gz
+
+
+Our Code, Our Bugs, Our Responsibility.
+(https://bugzilla.samba.org/)
+
+                         --Enjoy
+                         The Samba Team
+
 
