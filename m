@@ -2,48 +2,55 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 238E79AD876
-	for <lists+samba-technical@lfdr.de>; Thu, 24 Oct 2024 01:32:32 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 382449AF342
+	for <lists+samba-technical@lfdr.de>; Thu, 24 Oct 2024 22:02:28 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=Z+0+gMBeWDa7dx48hbyYINQ1WA++vX+nRewkjGCDkcs=; b=dwJs4BQjk5jilM5kX2ZC/xWEyX
-	Oh9pNFo/mRFVo+umLpaXX5tt/3AjXP3kdzJ5P2MALEMdaBcWui0OafO6zAJDVn5rDJBbrRWKh4PzX
-	c/q5xzZRnnPJdS7I5YAEKNMZ/V+J0B4NU4cj+KdqsZbhHbHNI9gBI/2sCrMJ6pqMnPOb5C+R4doWT
-	IIdxM6ejFzVtK9onodwTzx7Jxt4TftfHW9J1KP2nHVpFaYYdkvO6ID8uXCPNpPioqe3jamONr5orP
-	SnUov66MoVP18CmiwILiL+md8LlU8V15j+rzZ5bQGaZGuQekKvVH6+NPn1VHkPZNDte6Z8ONypK/g
-	AzXU97iw==;
-Received: from ip6-localhost ([::1]:34030 helo=hr1.samba.org) 
+	bh=lnyEyfF8GIyGhPOIJq5UI0kwrhnL8fy3tN1YXHoSaHw=; b=KKJafZl4y9z7XgaZ1++DZgxAWg
+	/Q1yhsecKJ0QkeqJSakcj+015WuFAUbqxi6Pb0wHKXTW01vl5o9yTY9+nXmaej2Th4UumPT18bbd/
+	AXsZ3ySEwRik/bMXsfNkyT+oJhvfLXCJ5nIIKg+z90xfLSn5YxmYWoWE4KaJUJbJS+ZGGFcl1pbN6
+	2gQgiQtmuVc7bGYmM6TX7X7Q37otBrzwMAoevuEP+Zc5/69T1EOUgntHJwpDf6gBz1ptkvwObHMId
+	BJMR3qANtMun1AymGssETZPY3FSIjfCyEIoGNV05gmS801h/UW3OcU9VthqXshYcJ6wnWTLHO0dMG
+	O4H9g51w==;
+Received: from ip6-localhost ([::1]:65196 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1t3kpe-004sA8-OC; Wed, 23 Oct 2024 23:32:02 +0000
-Received: from cat-hlzsim-prod-mail21.catalyst.net.nz
- ([103.250.241.204]:50906) by hr1.samba.org with esmtps
+	id 1t441g-004wJ2-CA; Thu, 24 Oct 2024 20:01:44 +0000
+Received: from plasma6.jpberlin.de ([80.241.56.68]:37533) 
+ by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1t3kpY-004sA1-4V
- for samba-technical@lists.samba.org; Wed, 23 Oct 2024 23:31:59 +0000
-Received: from [192.168.192.96] (wlgwil-nat-office.catalyst.net.nz
- [202.78.240.7])
+ (Exim) id 1t441Z-004wIu-2e
+ for samba-technical@lists.samba.org; Thu, 24 Oct 2024 20:01:40 +0000
+Received: from spamfilter05.heinlein-hosting.de
+ (spamfilter05.heinlein-hosting.de [80.241.56.123])
+ by plasma.jpberlin.de (Postfix) with ESMTP id 2B739AA7DB;
+ Thu, 24 Oct 2024 22:01:30 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kania-online.de;
+ s=MBO0001; t=1729800090;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=lnyEyfF8GIyGhPOIJq5UI0kwrhnL8fy3tN1YXHoSaHw=;
+ b=ICbX8WOLZTWzWca5S5c9LrNrBlKdm9WmRDJGWs16u32xd/AfK8V+iNut1IYc4d7kUK3ZbJ
+ so6wGn2qpzXNeTMqPMEr2+t43TczU/U0MbBq7m5RNnOZVc3aXrblykIRxQuNws07FuURAc
+ 7kAWnpB5q6DsFFSkvNkVpzWLLn+EmGu5/y8mpGGOBNx2W2WU+y8ywRYBGjgp0RRcsbPAVv
+ 73QmJqshJUbpEnN3CoXbcMQsI1TYPvioCFPOn/pV6MzroRTLyHeg8KtA5oWi7Gotsu8NYN
+ K1WI8HrLC5C2jKu2RL23kVsg3XLSVSc29A82AdP0fEOUEMz/tq6CgdCgHDrAAA==
+Received: from plasma.jpberlin.de ([80.241.56.68])
+ by spamfilter05.heinlein-hosting.de (spamfilter05.heinlein-hosting.de
+ [80.241.56.123]) (amavisd-new, port 10030)
+ with ESMTP id Tmic8D_fi41V; Thu, 24 Oct 2024 22:01:25 +0200 (CEST)
+Received: from [192.168.123.225] (p5b240946.dip0.t-ipconnect.de [91.36.9.70])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (Client did not present a certificate)
- (Authenticated sender: douglasb@catalyst.net.nz)
- by cat-hlzsim-prod-mail21.catalyst.net.nz (Postfix) with ESMTPSA id CE4539D;
- Thu, 24 Oct 2024 12:31:49 +1300 (NZDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=catalyst.net.nz;
- s=default; t=1729726309;
- bh=1TVPPZbRamPeZiNoLIjWql3ovPJPEI0Qn6L7k2sKJxs=;
- h=Date:Subject:To:References:From:In-Reply-To:From;
- b=YBq93YQ7e84pCP6/BEDgbrGpq6GjyBSl1yjaoALjNDQWR4MTzOzgtLr4Ei336cV1q
- 9XFhqBXk+McUWX1YHxcctOC/63mfYO8IkJqLk9a60vnR/eKzKERAvy+EgtAdtR1kmZ
- Y4oJxNzV1OGkQUKK+gTKExUdSrTBSi2DnuWOgKeHoy/nNkufLuNWCSEg2vgVjCuGyk
- 67wv1Nlj17pjN473BmrjTJCSHeGUdGITkaNWcDFdKa/zyFkinAJlbYRr550VtiHDm1
- QqPouGfpJeXH3JtnzRQB+FLTNyRafCdu7AD2yVbrtIU2zw18Gl/p0/lptqEyeKaAWI
- 8/CDcCr2bDJaQ==
-Message-ID: <cb71c66c-f7e8-474c-9457-0e82b8b4e5bc@catalyst.net.nz>
-Date: Thu, 24 Oct 2024 12:31:49 +1300
+ (Authenticated sender: stefan@kania-online.de)
+ by plasma.jpberlin.de (Postfix) with ESMTPSA id 05E6AAA9A5;
+ Thu, 24 Oct 2024 22:01:24 +0200 (CEST)
+Message-ID: <82457840-e665-414b-b7a8-9cb6dc803c1a@kania-online.de>
+Date: Thu, 24 Oct 2024 22:01:24 +0200
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
 Subject: Re: authentication policies in Samba 4.21
-To: Stefan Kania <stefan@kania-online.de>,
+To: Douglas Bagnall <douglas.bagnall@catalyst.net.nz>,
  samba-technical <samba-technical@lists.samba.org>
 References: <df1213a5-5153-463b-bacd-5d93ff8d2f6b@kania-online.de>
  <297faa9c-6788-436b-bfb3-8d2107b8596d@catalyst.net.nz>
@@ -59,10 +66,12 @@ References: <df1213a5-5153-463b-bacd-5d93ff8d2f6b@kania-online.de>
  <c420e24b-562d-4592-a9df-d0dddd069e22@kania-online.de>
  <f1cbcc0d-3f5e-4e1b-94da-ae76d2f2b9d5@kania-online.de>
  <60405467-4994-4a9b-8d31-136871c5b721@catalyst.net.nz>
-Content-Language: en-US
-In-Reply-To: <60405467-4994-4a9b-8d31-136871c5b721@catalyst.net.nz>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+ <cb71c66c-f7e8-474c-9457-0e82b8b4e5bc@catalyst.net.nz>
+Content-Language: de-DE, en-GB
+Organization: Stefan Kania
+In-Reply-To: <cb71c66c-f7e8-474c-9457-0e82b8b4e5bc@catalyst.net.nz>
+Content-Type: multipart/signed; protocol="application/pkcs7-signature";
+ micalg=sha-256; boundary="------------ms050607070605050703040204"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -76,41 +85,142 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Douglas Bagnall via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Douglas Bagnall <douglas.bagnall@catalyst.net.nz>
+From: Stefan Kania via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Stefan Kania <stefan@kania-online.de>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On 24/10/24 11:09, Douglas Bagnall via samba-technical wrote:
+This is a cryptographically signed message in MIME format.
 
-> So on a computer, you add msDS-AssignedAuthNPolicy containing the DN of 
-> the policy, and the backlink will magically appear on the policy (like 
-> member and memberOf).
+--------------ms050607070605050703040204
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
 
-samba-tool user auth policy assign --policy win11-policy  samba-DC
+DQoNCkFtIDI0LjEwLjI0IHVtIDAxOjMxIHNjaHJpZWIgRG91Z2xhcyBCYWduYWxsIHZpYSBz
+YW1iYS10ZWNobmljYWw6DQo+IE9uIDI0LzEwLzI0IDExOjA5LCBEb3VnbGFzIEJhZ25hbGwg
+dmlhIHNhbWJhLXRlY2huaWNhbCB3cm90ZToNCj4gDQo+PiBTbyBvbiBhIGNvbXB1dGVyLCB5
+b3UgYWRkIG1zRFMtQXNzaWduZWRBdXRoTlBvbGljeSBjb250YWluaW5nIHRoZSBETiANCj4+
+IG9mIHRoZSBwb2xpY3ksIGFuZCB0aGUgYmFja2xpbmsgd2lsbCBtYWdpY2FsbHkgYXBwZWFy
+IG9uIHRoZSBwb2xpY3kgDQo+PiAobGlrZSBtZW1iZXIgYW5kIG1lbWJlck9mKS4NCj4gDQo+
+IHNhbWJhLXRvb2wgdXNlciBhdXRoIHBvbGljeSBhc3NpZ24gLS1wb2xpY3kgd2luMTEtcG9s
+aWN5wqAgc2FtYmEtRENUaGF0J3MgdGhlIHBhcnQgSSBtaXNzZWQuIE5vdyBJIGFzc2lnbmVk
+IHBvbGljeSB0byB0aGUgdXNlci4gQnV0IHN0aWxsIA0Kbm90IHdvcmtpbmcuIEkgdHJpZWQg
+c28gbWFueSB0aGluZ3Mgc28gSSBkb24ndCBrbm93IHdoYXQgSSBzdGlsbCBoYXZlIA0KYW5k
+IHdoYXQgSSBkb24ndCBoYXZlLiBUaGVyZSBpcyBzb21ldGhpbmcgd3Jvbmcgd2l0aCBteSBH
+UE8gYmVjYXVzZSBJIA0KY2hhbmdlZCBzbyBtdWNoLiBJIHdpbGwgcmVjcmVhdGUgdGhlIERv
+bWFpbiBhbmQgcmVzdGFydCBldmVyeXRoaW5nIDotKQ0KDQpEb3VnbGFzIGhhdmUgeW91IGV2
+ZXIgZ2V0IGl0IHdvcmtpbmc/DQoNCj4gDQo+IHNob3VsZCBwdXQgdGhlIG1zRFMtQXNzaWdu
+ZWRBdXRoTlBvbGljeSBhdHRyaWJ1dGUgb24gdGhlIERDICh5ZXMsIGl0IA0KPiBkb2VzIGxv
+b2sgc3RyYW5nZSB0aGF0IHlvdSB1c2UgJ3NhbWJhLXRvb2wgdXNlcicgdG8gYXBwbHkgdGhl
+IHBvbGljeSB0byANCj4gYSBjb21wdXRlcikuIEkgdGhpbmsgdGhpcyBjb3JyZXNwb25kcyB0
+byB0aGlzIHN0ZXAgeW91IG1lbnRpb25lZCBlYXJsaWVyOg0KPiANCj4+PiBPbiBhIFdpbmRv
+d3MtREMgeW91IG5vdyBoYXZlIHRvIGFzc2lnbiB0aGUgcG9saWN5IHRvIHRoZSB1c2VyIGFu
+ZCANCj4+PiBjb21wdXRlciBidXQgb24gdGhlIHNhbWJhLWRjIHRoaXMgaXMgYWxyZWFkeSBk
+b25lOiBsZGJzZWFyY2ggDQo+Pj4gLS11cmw9L3Zhci9saWIvc2FtYmEvcHJpdmF0ZS9zYW0u
+bGRiIENOPXN0a2EgLS1jcm9zcy1uY3MgLVUgDQo+Pj4gYWRtaW5pc3RyYXRvcg0KPj4+IC4u
+Lg0KPj4+IG1zRFMtQXV0aE5Qb2xpY3lTaWxvTWVtYmVyc0JMOiBDTj13aW4xMS1zaWxvLENO
+PUF1dGhOIFNpbG9zLENOPUF1dGhOIA0KPj4+IFBvbGljeSBDb25maWd1cmF0aW9uLENOPVNl
+cnZpY2VzLENOPUNvbmZpZ3VyYXRpb24sREM9ZXhhbXBsZSxEQz1uZXQNCj4+PiAuLi4gDQo+
+IA0KPiBUaGF0ICJtc0RTLUF1dGhOUG9saWN5U2lsb01lbWJlcnNCTCIgaXMgdGhlIGJhY2ts
+aW5rIGZvciB0aGUgc2lsbyAodGhlIA0KPiAibWVtYmVyb2YiIGVxdWl2YWxlbnQpLCBub3Qg
+dGhlIHBvbGljeS4NCj4gDQo+IElmIHlvdSBoYXZlIGEgLS11c2VyLWFsbG93ZWQtdG8tYXV0
+aGVudGljYXRlLWZyb20gcG9saWN5LCB5b3Ugd2FudCB0byANCj4gYXBwbHkgaXQgdG8gdGhl
+IHVzZXIuIFdpdGggYcKgIC0tdXNlci1hbGxvd2VkLXRvLWF1dGhlbnRpY2F0ZS10byBwb2xp
+Y3ksIA0KPiBpdCBhcHBsaWVzIHRvIHRoZSBzZXJ2ZXIuDQo+IA0KPiBTaW1pbGFybHkgZm9y
+ICItLXNlcnZpY2UtYWxsb3dlZC0qIiBhbmQgIi0tY29tcHV0ZXItYWxsb3dlZC0qIiwgdGhl
+IA0KPiAiLWZyb20iIHZhcmlhbnRzIGFwcGx5IHRvIHRoZSBjbGllbnQsIGFuZCB0aGUgIi10
+byIgb25lcyB0byBzZXJ2ZXJzLg0KPiANCj4gDQo+IGNoZWVycywNCj4gRG91Z2xhcw0KPiAN
+Cj4gDQoNCi0tIA0KU3RlZmFuIEthbmlhDQpMYW5kd2VnIDEzDQoyNTY5MyBTdC4gTWljaGFl
+bGlzZG9ubg0KDQoNClNpZ25pZXJlbiBqZWRlciBFLU1haWwgaGlsZnQgU3BhbSB6dSByZWR1
+emllcmVuIHVuZCBzY2jDvHR6dCBJaHJlIA0KUHJpdmF0c3Bow6RyZS4gRWluIGtvc3RlbmZy
+ZWllcyBaZXJ0aWZpa2F0IGVyaGFsdGVuIFNpZSB1bnRlciANCmh0dHBzOi8vd3d3LmRnbi5k
+ZS9kZ25jZXJ0L2luZGV4Lmh0bWwNCkRvd25sb2FkIGRlciByb290LVplcnRpZmlrYXRlOiBo
+dHRwczovL3d3dy5kZ24uZGUvZGduY2VydC9kb3dubG9hZHMuaHRtbA0KDQpOZXVlciBHUEct
+S2V5IGRlciBwdWJsaWMga2V5IGJlZmluZGV0IHNpY2ggaW0gQW5oYW5nDQoNCg0K
 
-should put the msDS-AssignedAuthNPolicy attribute on the DC (yes, it 
-does look strange that you use 'samba-tool user' to apply the policy to 
-a computer). I think this corresponds to this step you mentioned earlier:
+--------------ms050607070605050703040204
+Content-Type: application/pkcs7-signature; name="smime.p7s"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="smime.p7s"
+Content-Description: Kryptografische S/MIME-Signatur
 
->> On a Windows-DC you now have to assign the policy to the user and computer but on the samba-dc this is already done: 
->> ldbsearch --url=/var/lib/samba/private/sam.ldb CN=stka --cross-ncs -U administrator
->> ...
->> msDS-AuthNPolicySiloMembersBL: CN=win11-silo,CN=AuthN Silos,CN=AuthN Policy Configuration,CN=Services,CN=Configuration,DC=example,DC=net
->> ... 
-
-That "msDS-AuthNPolicySiloMembersBL" is the backlink for the silo (the 
-"memberof" equivalent), not the policy.
-
-If you have a --user-allowed-to-authenticate-from policy, you want to 
-apply it to the user. With a  --user-allowed-to-authenticate-to policy, 
-it applies to the server.
-
-Similarly for "--service-allowed-*" and "--computer-allowed-*", the 
-"-from" variants apply to the client, and the "-to" ones to servers.
-
-
-cheers,
-Douglas
-
+MIAGCSqGSIb3DQEHAqCAMIACAQExDzANBglghkgBZQMEAgEFADCABgkqhkiG9w0BBwEAAKCC
+DLMwggYDMIID66ADAgECAgwEaYxY0V6t5+cpnHAwDQYJKoZIhvcNAQELBQAwUjELMAkGA1UE
+BhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24g
+R0NDIFI2IFNNSU1FIENBIDIwMjMwHhcNMjQwOTI3MjAwMTE2WhcNMjcwOTI4MjAwMTE2WjBI
+MR8wHQYDVQQDDBZzdGVmYW5Aa2FuaWEtb25saW5lLmRlMSUwIwYJKoZIhvcNAQkBFhZzdGVm
+YW5Aa2FuaWEtb25saW5lLmRlMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAk1Wp
+pY9PMd6TNd+nUvWJ3RkA7fXwaZYBPlz+HyIh43KCUohVW0dweP44qfMBHjlVrAsgC6+VI+bd
+EWjvF9ZcWLHIj/IxonVe1HnN1DfYwp7/1qigJBjmfNwcdqlHHgRJ/WW8TblYLshwB94c+b5L
+J6ScRf4KCLYgTjmX/+/OpV9Zfzn0NvGNfyakUpeEz/36Mr1UPtWVchsGpuCsoGbylE0AOZug
+z2yOoLxAmd5YYLVI0uZ3IM1iGZPVcN0P9r9F1Gap4Vm9mi6+chx+ScAu/WfdzaBVlFoXA7w6
+X/QxpQXtnifpKxqE5qqrPqCCo9sXLLgD3yW1iFcBVTgzNyZQRwIDAQABo4IB4TCCAd0wDgYD
+VR0PAQH/BAQDAgWgMIGTBggrBgEFBQcBAQSBhjCBgzBGBggrBgEFBQcwAoY6aHR0cDovL3Nl
+Y3VyZS5nbG9iYWxzaWduLmNvbS9jYWNlcnQvZ3NnY2NyNnNtaW1lY2EyMDIzLmNydDA5Bggr
+BgEFBQcwAYYtaHR0cDovL29jc3AuZ2xvYmFsc2lnbi5jb20vZ3NnY2NyNnNtaW1lY2EyMDIz
+MGUGA1UdIAReMFwwCQYHZ4EMAQUBATALBgkrBgEEAaAyASgwQgYKKwYBBAGgMgoDAzA0MDIG
+CCsGAQUFBwIBFiZodHRwczovL3d3dy5nbG9iYWxzaWduLmNvbS9yZXBvc2l0b3J5LzAJBgNV
+HRMEAjAAMEEGA1UdHwQ6MDgwNqA0oDKGMGh0dHA6Ly9jcmwuZ2xvYmFsc2lnbi5jb20vZ3Nn
+Y2NyNnNtaW1lY2EyMDIzLmNybDAhBgNVHREEGjAYgRZzdGVmYW5Aa2FuaWEtb25saW5lLmRl
+MB0GA1UdJQQWMBQGCCsGAQUFBwMCBggrBgEFBQcDBDAfBgNVHSMEGDAWgBQAKTaeXHq6D68t
+UC3boCOFGLCgkjAdBgNVHQ4EFgQU0kHF9fFBXygVDjwNe5DkaSxVk3cwDQYJKoZIhvcNAQEL
+BQADggIBAL0WoW7dCmTQxxo1dMGyld5LLS9wCa7goc07GplzOsEJ5GmfeNGapy+dP2NfmenH
+XYKPnP/8hosTk6GDgck1HaP4wP5RvZ4ALVraLs4XSQiENz9954Sim3YzjFbG2aoqXpv/C0ha
+MwzR7LBCa/OwUJot5wO7R++6SE98/ZeYUqGDIgVcmH+UOYE/5yxM+M4aDXFUR2LCQO2ejPcZ
+a3QzlnMJUYPPw3U4Udbs9MRy40FunbmWUzu4yEddlo9GikG5NEI6wC7hFEpC4joYmvEZXRlT
+UqS8wug7QKRLyeLhXw04h0GYL0mrx1yj7x4CXqRjjRpterRlAkgFj2zEEpQ4DMiVcl8fZZ7T
+xkQGlbfa+HEp9y9/NluiNeoqAMF/lzS8haLHDXLdrdWPitBQazmcsyQ3LlcmeAMjchOIcUWt
+EKxIRCoedt6xbuIX5D2ul0H6rPE2BrimedwF6AZFPFk3/KHAbjhfkAElHiNjgg4uwUji+d9q
+zIR6Di3W2WdTCCwzp/6V2eEWdlQ8z8U4v3aF80fwzp6dOuFmti/mOayUrAYCUC6DBLjkA4EY
+MS6Nc1dr4f4dffnOceF4deCDN3nH8bRPEXs+kvnA91vw008dvJ+Df7jcJmDrt2tmzZPDTV6l
+neB5rj7E+6Qcvadj6c5hl7L5Tc/v6LZx6DCVX0BA2KpPMIIGqDCCBJCgAwIBAgIQfofDCS7X
+Zu8vIeKo0KeY9DANBgkqhkiG9w0BAQwFADBMMSAwHgYDVQQLExdHbG9iYWxTaWduIFJvb3Qg
+Q0EgLSBSNjETMBEGA1UEChMKR2xvYmFsU2lnbjETMBEGA1UEAxMKR2xvYmFsU2lnbjAeFw0y
+MzA0MTkwMzUzNTNaFw0yOTA0MTkwMDAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQKExBH
+bG9iYWxTaWduIG52LXNhMSgwJgYDVQQDEx9HbG9iYWxTaWduIEdDQyBSNiBTTUlNRSBDQSAy
+MDIzMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAwjAEbSkPcSyn26Zn9VtoE/xB
+vzYmNW29bW1pJZ7jrzKwPJm/GakCvy0IIgObMsx9bpFaq30X1kEJZnLUzuE1/hlchatYqyOR
+VBeHlv5V0QRSXY4faR0dCkIhXhoGknZ2O0bUJithcN1IsEADNizZ1AJIaWsWbQ4tYEYjytEd
+vfkxz1WtX3SjtecZR+9wLJLt6HNa4sC//QKdjyfr/NhDCzYrdIzAssoXFnp4t+HcMyQTrj0r
+pD8KkPj96sy9axzegLbzte7wgTHbWBeJGp0sKg7BAu+G0Rk6teO1yPd75arbCvfY/NaRRQHk
+6tmG71gpLdB1ZhP9IcNYyeTKXIgfMh2tVK9DnXGaksYCyi6WisJa1Oa+poUroX2ESXO6o03l
+VxiA1xyfG8lUzpUNZonGVrUjhG5+MdY16/6b0uKejZCLbgu6HLPvIyqdTb9XqF4XWWKu+OMD
+s/rWyQ64v3mvSa0te5Q5tchm4m9K0Pe9LlIKBk/gsgfaOHJDp4hYx4wocDr8DeCZe5d5wCFk
+xoGc1ckM8ZoMgpUc4pgkQE5ShxYMmKbPvNRPa5YFzbFtcFn5RMr1Mju8gt8J0c+dxYco2hi7
+dEW391KKxGhv7MJBcc+0x3FFTnmhU+5t6+CnkKMlrmzyaoeVryRTvOiH4FnTNHtVKUYDsCM0
+CLDdMNgoxgkCAwEAAaOCAX4wggF6MA4GA1UdDwEB/wQEAwIBhjBMBgNVHSUERTBDBggrBgEF
+BQcDAgYIKwYBBQUHAwQGCisGAQQBgjcUAgIGCisGAQQBgjcKAwwGCisGAQQBgjcKAwQGCSsG
+AQQBgjcVBjASBgNVHRMBAf8ECDAGAQH/AgEAMB0GA1UdDgQWBBQAKTaeXHq6D68tUC3boCOF
+GLCgkjAfBgNVHSMEGDAWgBSubAWjkxPioufi1xzWx/B/yGdToDB7BggrBgEFBQcBAQRvMG0w
+LgYIKwYBBQUHMAGGImh0dHA6Ly9vY3NwMi5nbG9iYWxzaWduLmNvbS9yb290cjYwOwYIKwYB
+BQUHMAKGL2h0dHA6Ly9zZWN1cmUuZ2xvYmFsc2lnbi5jb20vY2FjZXJ0L3Jvb3QtcjYuY3J0
+MDYGA1UdHwQvMC0wK6ApoCeGJWh0dHA6Ly9jcmwuZ2xvYmFsc2lnbi5jb20vcm9vdC1yNi5j
+cmwwEQYDVR0gBAowCDAGBgRVHSAAMA0GCSqGSIb3DQEBDAUAA4ICAQCRkUdr1aIDRmkNI5jx
+5ggapGUThq0KcM2dzpMu314mJne8yKVXwzfKBtqbBjbUNMODnBkhvZcnbHUStur2/nt1tP3e
+e8KyNhYxzv4DkI0NbV93JChXipfsan7YjdfEk5vI2Fq+wpbGALyyWBgfy79YIgbYWATB158t
+vEh5UO8kpGpjY95xv+070X3FYuGyeZyIvao26mN872FuxRxYhNLwGHIy38N9ASa1Q3BTNKSr
+HrZngadofHglG5W3TMFR11JOEOAUHhUgpbVVvgCYgGA6dSX0y5z7k3rXVyjFOs7KBSXrdJPK
+adpl4vqYphH7+P40nzBRcxJHrv5FeXlTrb+drjyXNjZSCmzfkOuCqPspBuJ7vab0/9oeNERg
+nz6SLCjLKcDXbMbKcRXgNhFBlzN4OUBqieSBXk80w2Nzx12KvNj758WavxOsXIbX0Zxwo1h3
+uw75AI2v8qwFWXNclO8qW2VXoq6kihWpeiuvDmFfSAwRLxwwIjgUuzG9SaQ+pOomuaC7QTKW
+MI0hL0b4mEPq9GsPPQq1UmwkcYFJ/Z4I93DZuKcXmKMmuANTS6wxwIEw8Q5MQ6y9fbJxGEOg
+OgYL4QIqNULb5CYPnt2LeiIiEnh8Uuh8tawqSjnR0h7Bv5q4mgo3L1Z9QQuexUntWD96t4o0
+q1jXWLyrpgP7ZcnuCzGCA1AwggNMAgEBMGIwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEds
+b2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gR0NDIFI2IFNNSU1FIENBIDIw
+MjMCDARpjFjRXq3n5ymccDANBglghkgBZQMEAgEFAKCCAb8wGAYJKoZIhvcNAQkDMQsGCSqG
+SIb3DQEHATAcBgkqhkiG9w0BCQUxDxcNMjQxMDI0MjAwMTI0WjAvBgkqhkiG9w0BCQQxIgQg
+QZ46BSLQM0rpziIiRJHiY6UqUUzlMuZc/iy5MLhLMoQwbAYJKoZIhvcNAQkPMV8wXTALBglg
+hkgBZQMEASowCwYJYIZIAWUDBAECMAoGCCqGSIb3DQMHMA4GCCqGSIb3DQMCAgIAgDANBggq
+hkiG9w0DAgIBQDAHBgUrDgMCBzANBggqhkiG9w0DAgIBKDBxBgkrBgEEAYI3EAQxZDBiMFIx
+CzAJBgNVBAYTAkJFMRkwFwYDVQQKExBHbG9iYWxTaWduIG52LXNhMSgwJgYDVQQDEx9HbG9i
+YWxTaWduIEdDQyBSNiBTTUlNRSBDQSAyMDIzAgwEaYxY0V6t5+cpnHAwcwYLKoZIhvcNAQkQ
+AgsxZKBiMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQKExBHbG9iYWxTaWduIG52LXNhMSgwJgYD
+VQQDEx9HbG9iYWxTaWduIEdDQyBSNiBTTUlNRSBDQSAyMDIzAgwEaYxY0V6t5+cpnHAwDQYJ
+KoZIhvcNAQEBBQAEggEAbEb0xE+jbLy3IcvdJYYXLS8shv5+Wbl4+xK+ePFDVAHUFJKgk4LS
+AKsKco/bMc9QEF6O3EGGKbxNppaGAvIX7LYQV8XiUI2/XOeoHeqR61kibK6L50RkrKVZueM6
+0Qk8yzoC8cIHsmoVIXtEkFsX0SyDUq0wYiqW8soHAwu05FeOClMDVPuPC/ZCSOUxJeChy4uV
+c3oYxtzchBu+8asG3Px0poAjJazEsfBvUVLBdaIyk9fORMjYH3iatIbyuQyiZlEOGlMC/SoK
+FbW3zvHvXFv05GwzrAibn+PSBeUgha0ua4FULhwT2DR1P01STu7yq1coRwaAJslTDuWtKePX
+lQAAAAAAAA==
+--------------ms050607070605050703040204--
 
