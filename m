@@ -2,48 +2,44 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 70FD99B3DB7
-	for <lists+samba-technical@lfdr.de>; Mon, 28 Oct 2024 23:27:27 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 349B89B3E56
+	for <lists+samba-technical@lfdr.de>; Tue, 29 Oct 2024 00:19:51 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=GsOZ/XthbLbpZtwBXMLHCMdVHlbAXyZByxJwsoTV3fY=; b=ZvKBf9xJ0XLMkClijpL6egrBnf
-	JXoXDFGSXK8aK5pIM3XBVIzw/F3DgLjTGnOAygi4ce32jK1UtIeeYGcOMmNy+BPO86FZ6iKVaGQLc
-	MRpuPRnlR9yyI2yw0Ibpm9qfQp6uqC0D4ADOtedg//SK7qnKL0S8PPOVv7Tv4kxGvAy483NuxQDP3
-	dMPag1mC/splI5wc0CmwOWmuem6JJfAIWVb0u1etWWBltOriqDGzHTYHPD7xe1Zd++9isClZRYF46
-	XHtTdZoXakiK7hUZcSD/wE+6CQjv7Gjo0n/uTPaoBXFD5Cc+Wf7ycqgi/p/tlD/rJQhsqv6B0V7ez
-	k14agIBQ==;
-Received: from ip6-localhost ([::1]:61910 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=Z62qVOOlGXTAoICWqoMpVJmaWGhOmidojV6gCWOKbxU=; b=DQcdYPVW5aPUvRn7DRnb9ydFqk
+	S5KWR3E8mPKhOZyNQ7JviETskth2dcYB4T4p3kISOiusIgqupPzbpbgstO1HaFl29jCShhYkGgTRY
+	qAk85BSIa0gseKIHXWN1pEaUjqyn1aB3+f7FUNKsDGMkC2H92iVbsJv7NORKUOckShx4iCg3sHv7a
+	2q4pi+taS2fkMU98wYHiNdJ3ih3OSbwfWHpy1F84LKqOGYcWmMSvPjf7WLL8rRUP86FkgSZNTJm3V
+	psw2L6aofsDtMec2YpOYUdXzuZQL9b0NckmQ0HqhzPBdIe88EpQk1SOcTrG4SiDrr/6ppaQG+6g49
+	4cNh/k6Q==;
+Received: from ip6-localhost ([::1]:48370 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1t5YCc-005Oph-AB; Mon, 28 Oct 2024 22:27:10 +0000
-Received: from cat-porwal-prod-mail10.catalyst.net.nz ([202.49.242.1]:40968) 
+	id 1t5Z19-005Oxz-0N; Mon, 28 Oct 2024 23:19:23 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:26202) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1t5YCW-005Opa-PB
- for samba-technical@lists.samba.org; Mon, 28 Oct 2024 22:27:08 +0000
-Received: from [192.168.1.219] (unknown [114.23.142.188])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (Client did not present a certificate)
- (Authenticated sender: douglasb@catalyst.net.nz)
- by cat-porwal-prod-mail10.catalyst.net.nz (Postfix) with ESMTPSA id 4ADAF6DE; 
- Tue, 29 Oct 2024 11:26:56 +1300 (NZDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=catalyst.net.nz;
- s=default; t=1730154416;
- bh=pi5HGZJDZyvbVUpYmlb9BB5OmJVbI0ZRM00zLYM9a+g=;
- h=Date:Subject:To:References:From:In-Reply-To:From;
- b=scdmGelQ6SJn0QqG19t+AU0PoKInzRLsX1phWwP78HGD+J19o85rcNCseI/om6hx7
- 504yR5x+EVyM/+S0Q4aWeUuQXvS8GY1aR6siUTiOi4h+ym1fs/X4pZzyPvLHH/9r9R
- WiJnwaA93jar5pQscjvvdfnkLaN7BoriMotKdQKcw8JFJfJM1j5S0RFfwerFtViCJS
- QtCorEf2ZMGyG4CyyUNzZ09eXreN8TeZmxG0BVY3MfO5JI3stABF084+80CyK+D1WG
- 11ceZNO/SwGdgVflKGPdEJi6izZsNbvho4euF9htU3dMO+mbU3EwaYlnsp1n95572o
- NK72lkvw3I0EA==
-Message-ID: <0f4e2d3b-12b2-4dfc-88ef-0b52c12bf6db@catalyst.net.nz>
-Date: Tue, 29 Oct 2024 11:26:54 +1300
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
+ (Exim) id 1t5Z14-005Oxs-Da
+ for samba-technical@lists.samba.org; Mon, 28 Oct 2024 23:19:20 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Date:To:From:Message-ID:CC;
+ bh=ky5SD8ZMIVce6KY/pNI8Rsz76FbBKQQiZJApHx1Vg1s=; b=WV5y1cmgf+B9I1LZpeUKJHgVQ6
+ dAnUDaFqdtv/ND7Dk1a5Q7+ZBQbQ5PK0cLIMTiD2QN+NUtTFkmrgV+Lh9n99UCFX5hu3jkzMZgAV3
+ Gs2Z5jxrE7e6JCB8nxSFeIOLyvKBtX199g+6uWO+2Rj0Di5QEyoKxePKqP16xRuHwaTMMqvLwekLM
+ ZzUCIacXnVoHT+Ejg9nWiEA/AYb4JnbITRQUA4FQnLExoVksyTp7RC9ElcZtDFK+4lowQwfLdndZg
+ NuJITbU2BfFS+CqoE1ebN2ZnyRvYxSammm6Shdh4D4SyhsJP0eD9lgPbEQnofqa+P09DFnyjjF1cQ
+ lhqSIyQ6OmPDmbsqp8w4EaKPikO8vwJoPieVhgcvdbTXVOX+7O5Z7ODOw1aIJLR4izemBkGFT9tCI
+ 2TvaiV2ug5IJ3ypEKRdDvqrIPV4p9W5sja0ODMyfOuo0S9iaX5gytZmCIQn/jUtd1D3TaeDQ5b2eY
+ 12mk8T3jeR4CuaPyKrCSKX7S;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1t5Z12-0071er-1a; Mon, 28 Oct 2024 23:19:16 +0000
+Message-ID: <8499f04d71a8b01b56e4c5a69fb67f6887314d0a.camel@samba.org>
 Subject: Re: authentication policies in Samba 4.21
-To: Stefan Kania <stefan@kania-online.de>,
- samba-technical <samba-technical@lists.samba.org>
+To: Douglas Bagnall <douglas.bagnall@catalyst.net.nz>, Stefan Kania
+ <stefan@kania-online.de>, samba-technical <samba-technical@lists.samba.org>
+Date: Tue, 29 Oct 2024 12:19:12 +1300
+In-Reply-To: <0f4e2d3b-12b2-4dfc-88ef-0b52c12bf6db@catalyst.net.nz>
 References: <df1213a5-5153-463b-bacd-5d93ff8d2f6b@kania-online.de>
  <297faa9c-6788-436b-bfb3-8d2107b8596d@catalyst.net.nz>
  <48c2847c-7d05-4e1a-9e85-52b1ba5d0b30@catalyst.net.nz>
@@ -58,10 +54,12 @@ References: <df1213a5-5153-463b-bacd-5d93ff8d2f6b@kania-online.de>
  <c420e24b-562d-4592-a9df-d0dddd069e22@kania-online.de>
  <ab589c2f-f13b-4560-bd18-7a1e88634a0d@catalyst.net.nz>
  <1a14a7d4-3d56-4212-9420-0affed9ffd18@kania-online.de>
-Content-Language: en-NZ
-In-Reply-To: <1a14a7d4-3d56-4212-9420-0affed9ffd18@kania-online.de>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+ <0f4e2d3b-12b2-4dfc-88ef-0b52c12bf6db@catalyst.net.nz>
+User-Agent: Evolution 3.52.4 (3.52.4-1.fc40) 
+MIME-Version: 1.0
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -75,56 +73,68 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Douglas Bagnall via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Douglas Bagnall <douglas.bagnall@catalyst.net.nz>
+From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andrew Bartlett <abartlet@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On 29/10/24 02:29, Stefan Kania wrote:
-> Starting from the beginning. Set up the Domain with:
-> samba-tool domain provision --domain=example --real=example.net --host-ip=192.168.56.21 --backend-store=mdb
-> --dns-backend=BIND9_DLZ --adminpass=Passw0rd --function-level=2016 --option="ad dc functional level = 2016"
-> 
-> Create some users and groups.
-> 
-> Then start the show:
-> -------------------------
-> Creating the two GPO
-> 1. default domain controller policy
-> Setting  KDC for claims
+On Tue, 2024-10-29 at 11:26 +1300, Douglas Bagnall via samba-technical
+wrote:
+> On 29/10/24 02:29, Stefan Kania wrote:
+> > Starting from the beginning. Set up the Domain with:
+> > samba-tool domain provision --domain=3Dexample --real=3Dexample.net --h=
+ost-ip=3D192.168.56.21 --backend-store=3Dmdb
+> > --dns-backend=3DBIND9_DLZ --adminpass=3DPassw0rd --function-level=3D201=
+6 --option=3D"ad dc functional level =3D 2016"
+> >=20
+> > Create some users and groups.
+> >=20
+> > Then start the show:
+> > -------------------------
+> > Creating the two GPO
+> > 1. default domain controller policy
+> > Setting=C2=A0 KDC for claims
+>=20
+> I'm not actually sure what this part does (which is normal for me and GPO=
+s).
+>=20
+> > 2. default domain policy
+> > Setting Kerberos for claims
+> >=20
+> > 3. All steps to create the auth-policy and auth-silo and assigning the =
+policy
+> > samba-tool domain=C2=A0 auth policy create --name win11-policy --enforc=
+e
+> > samba-tool domain=C2=A0 auth policy modify --user-tgt-lifetime-mins=3D9=
+0 --name win11-policy
+> > samba-tool domain auth silo create --name win11-silo --enforce
+> > samba-tool domain auth silo member grant --name win11-silo --member=3Ds=
+tka
+>=20
+> At this point you should be able to see the silo claim in a new kerberos =
+ticket,
+> using `net ads kerberos pac dump  -Ustka`.
+>=20
+> > samba-tool domain auth silo member grant --name win11-silo --member=3DW=
+INCLIENT11\$
+> > samba-tool domain=C2=A0 auth policy user-allowed-to-authenticate-to set=
+ --by-silo=3Dwin11-silo --name=3Dwin11-policy
+>=20
+>  *computer-allowed-to-authenticate-to
+>=20
+> It would have been better for us to name this
+>=20
+>   allowed-to-authenticate-to-computer
+>=20
+> but I guess we are following the object names from Microsoft.
 
-I'm not actually sure what this part does (which is normal for me and GPOs).
+We did, but fixing the names shown in our user interface would be
+reasonable to consider.=C2=A0
 
-> 2. default domain policy
-> Setting Kerberos for claims
-> 
-> 3. All steps to create the auth-policy and auth-silo and assigning the policy
-> samba-tool domain  auth policy create --name win11-policy --enforce
-> samba-tool domain  auth policy modify --user-tgt-lifetime-mins=90 --name win11-policy
-> samba-tool domain auth silo create --name win11-silo --enforce
-> samba-tool domain auth silo member grant --name win11-silo --member=stka
+Andrew,
 
-At this point you should be able to see the silo claim in a new kerberos ticket,
-using `net ads kerberos pac dump  -Ustka`.
-
-> samba-tool domain auth silo member grant --name win11-silo --member=WINCLIENT11\$
-> samba-tool domain  auth policy user-allowed-to-authenticate-to set --by-silo=win11-silo --name=win11-policy
-
- *computer-allowed-to-authenticate-to
-
-It would have been better for us to name this
-
-  allowed-to-authenticate-to-computer
-
-but I guess we are following the object names from Microsoft.
-
-The rest of the trouble probably follows from this.
-
-If that's not enough, we might need to look at
-
-ldbsearch --url=/var/lib/samba/private/sam.ldb '(|(CN=stka)(CN=win11*))' --cross-ncs
-
-cheers,
-Douglas
-
+--=20
+Andrew Bartlett (he/him) https://samba.org/~abartlet/
+Samba Team Member (since 2001) https://samba.org
+Samba Developer, Catalyst IT https://catalyst.net.nz/services/samba
 
