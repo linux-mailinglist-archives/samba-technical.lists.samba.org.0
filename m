@@ -2,54 +2,47 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6EC7E9B4669
-	for <lists+samba-technical@lfdr.de>; Tue, 29 Oct 2024 11:06:55 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 47F449B46D2
+	for <lists+samba-technical@lfdr.de>; Tue, 29 Oct 2024 11:27:51 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
-	bh=uz1bp45Vadlx3hx1W8poWJA7de+GCO6ebklwtalrPm0=; b=tAxbgHWRMAfrxkzwedi4wLrQY8
-	7Ps93oXl4jBt4wrqgrOZWc5ITuhYnLiBe15M03Ir7c9j6sDcbQQr0jbz7G4VurKEyKytECJX8RFW0
-	NIkzkXd85aQfFyywzwEZOXniBEbS8UlvSr95xp+OSJQumT+Q5AbCcgrPHu5S3CV3TmqenwqO9Xfdf
-	7luo5kS6a9TQUnTxblBI1fK+sRFU9tbOK3ftCH+faQgfACtjWvRYRnqZ8tknIC4UUd+wdX+OT/iRB
-	tKqEBSktYsJDgEtFgVJu+DFCe0/smJo+VsjrQFeRT2UmwAGkTlZ30/xxKkNyoFiO6I6UgnpQSIyO2
-	pjuAC4eA==;
-Received: from ip6-localhost ([::1]:55816 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=AMm23hNlcK8F2kSGXOvZImg55xrDCkOUKWOT1SylhqM=; b=ICTlRH+BxDYbplPjVE+hYtzXb2
+	S3dlmY7T+zO5owIfVZDYrbBm5qWn2yzTJv5qt+SzA4djBf6C0aGMo0rn60ca9m4TLqYxcKW4hmtRo
+	V7fJ41eu6suv4TXPAVBvN8MJiphJUk/Dx0wYfnXtym2cU6tsLBHTENu+gaMwIKy2z3O/Q6bBXhPKm
+	I2InLhniiPaFf9djmPcSPKaqP3zy9hKyj4J/FSNCh5D/p6v8tHiKiJD8hPEp8luw5d6i1Vp2YDr2F
+	JQjtBWqsbQWahKalgi0Or+5Q7CQOGIk08zcrwNqE0vNj8b3DaJdhVbGLLAXTngJLudNlYhIwZJKXM
+	GSwWa2YQ==;
+Received: from ip6-localhost ([::1]:44112 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1t5j7M-005RID-QL; Tue, 29 Oct 2024 10:06:28 +0000
-Received: from plasma31.jpberlin.de ([80.241.56.82]:39631) 
- by hr1.samba.org with esmtps
+	id 1t5jRt-005S7S-KA; Tue, 29 Oct 2024 10:27:41 +0000
+Received: from cat-hlzsim-prod-mail21.catalyst.net.nz
+ ([103.250.241.204]:33462) by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1t5j7I-005RI6-Ts
- for samba-technical@lists.samba.org; Tue, 29 Oct 2024 10:06:27 +0000
-Received: from spamfilter05.heinlein-hosting.de
- (spamfilter05.heinlein-hosting.de [80.241.56.123])
- by plasma.jpberlin.de (Postfix) with ESMTP id 4CE70A27E3;
- Tue, 29 Oct 2024 11:06:19 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kania-online.de;
- s=MBO0001; t=1730196379;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=uz1bp45Vadlx3hx1W8poWJA7de+GCO6ebklwtalrPm0=;
- b=DBdc6V8EtLVqQr8nuMBMPaIvNRFWTGk4jO2GM25EYQCkYg6H4r9xWHi0d1evYKEsmYFjQl
- +V9YMz6WW54RR3cHect0fbpcAv2yFGTXqTjB7SpgmVj60YEIN0yBGis0fAMGuAb7vHj8Xe
- KiGPKOa/WztV1eUd04rhkaCAU2OwkajYx2ZM6rGzkYAwUhQuVLod1zUzUkPtkTOwLXSafU
- WKVqjc9QePkwFRfMv8HXWwIDWonRtmywTc4zCDC6sNXjsrKdapSDA2SbtFnzqd4RPYAdjb
- p5HPO2gcuisQn4ABnAYy39te1HrxPg45w18ax/12aJcv0CqCyFchtXk/S7GcZQ==
-Received: from plasma.jpberlin.de ([80.241.56.76])
- by spamfilter05.heinlein-hosting.de (spamfilter05.heinlein-hosting.de
- [80.241.56.123]) (amavisd-new, port 10030)
- with ESMTP id fJ-PNFNGEqbK; Tue, 29 Oct 2024 11:06:10 +0100 (CET)
-Received: from [192.168.123.203] (p5b240946.dip0.t-ipconnect.de [91.36.9.70])
+ (Exim) id 1t5jRk-005S6b-29
+ for samba-technical@lists.samba.org; Tue, 29 Oct 2024 10:27:36 +0000
+Received: from [192.168.1.219] (unknown [114.23.142.188])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (Client did not present a certificate)
- (Authenticated sender: stefan@kania-online.de)
- by plasma.jpberlin.de (Postfix) with ESMTPSA id 57AEBA25C2;
- Tue, 29 Oct 2024 11:06:10 +0100 (CET)
-Message-ID: <70db5ba2-8cfc-42f4-a493-0228954debdb@kania-online.de>
-Date: Tue, 29 Oct 2024 11:06:09 +0100
+ (Authenticated sender: douglasb@catalyst.net.nz)
+ by cat-hlzsim-prod-mail21.catalyst.net.nz (Postfix) with ESMTPSA id D0917C7;
+ Tue, 29 Oct 2024 23:27:22 +1300 (NZDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=catalyst.net.nz;
+ s=default; t=1730197642;
+ bh=AMm23hNlcK8F2kSGXOvZImg55xrDCkOUKWOT1SylhqM=;
+ h=Date:Subject:To:References:From:In-Reply-To:From;
+ b=WKuB9cQ2sMDGmHat4lon/GjTLS9bIILQJfpMCXNXPOJ+pTZ1OIVv5WqWO3WisSZqS
+ HhQnfQQxvUKU7MLziufS2vlnQyiecyBWcq+HcunsEvqRZtA4k5WEWftaLQNT9O7L41
+ +kNnYIibuojyWRyfoghrSZEABCC69K4Jc0WX7/2l66XjquTM/0WW1yu3EyzztXiqsq
+ iRomN/QrgS82WyPuampaL1tP8r4SpPPtXDAi26tf6Wx//9TVGoVq02HlsS/g94afQk
+ XQfsad4qNdrTD6jJy512B1BluYI7eYv2kL8uiHVK+13TyHY8RYXlL2TBgCLWhhdVyh
+ bw6LGUrCkPIpA==
+Message-ID: <84bb05ba-823e-40a7-ba6b-d3c7ec6f2af1@catalyst.net.nz>
+Date: Tue, 29 Oct 2024 23:27:21 +1300
 MIME-Version: 1.0
-To: Douglas Bagnall <douglas.bagnall@catalyst.net.nz>,
+User-Agent: Mozilla Thunderbird
+Subject: Re: authentication policies in Samba 4.21
+To: Stefan Kania <stefan@kania-online.de>,
  samba-technical <samba-technical@lists.samba.org>,
  Andrew Bartlett <abartlet@samba.org>
 References: <df1213a5-5153-463b-bacd-5d93ff8d2f6b@kania-online.de>
@@ -67,13 +60,11 @@ References: <df1213a5-5153-463b-bacd-5d93ff8d2f6b@kania-online.de>
  <ab589c2f-f13b-4560-bd18-7a1e88634a0d@catalyst.net.nz>
  <1a14a7d4-3d56-4212-9420-0affed9ffd18@kania-online.de>
  <0f4e2d3b-12b2-4dfc-88ef-0b52c12bf6db@catalyst.net.nz>
-Content-Language: en-US, de-DE
-Organization: Stefan Kania
-Subject: Re: authentication policies in Samba 4.21
-In-Reply-To: <0f4e2d3b-12b2-4dfc-88ef-0b52c12bf6db@catalyst.net.nz>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------AYBPTbi6yoT5h9oRRk5RFjhw"
+ <70db5ba2-8cfc-42f4-a493-0228954debdb@kania-online.de>
+Content-Language: en-NZ
+In-Reply-To: <70db5ba2-8cfc-42f4-a493-0228954debdb@kania-online.de>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -87,266 +78,32 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Stefan Kania via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Stefan Kania <stefan@kania-online.de>
+From: Douglas Bagnall via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Douglas Bagnall <douglas.bagnall@catalyst.net.nz>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------AYBPTbi6yoT5h9oRRk5RFjhw
-Content-Type: multipart/mixed; boundary="------------H3WYPI6pHmjh3uRYpcmY1KBd";
- protected-headers="v1"
-From: Stefan Kania <stefan@kania-online.de>
-To: Douglas Bagnall <douglas.bagnall@catalyst.net.nz>,
- samba-technical <samba-technical@lists.samba.org>,
- Andrew Bartlett <abartlet@samba.org>
-Message-ID: <70db5ba2-8cfc-42f4-a493-0228954debdb@kania-online.de>
-Subject: Re: authentication policies in Samba 4.21
-References: <df1213a5-5153-463b-bacd-5d93ff8d2f6b@kania-online.de>
- <297faa9c-6788-436b-bfb3-8d2107b8596d@catalyst.net.nz>
- <48c2847c-7d05-4e1a-9e85-52b1ba5d0b30@catalyst.net.nz>
- <ef60d0ef-25df-4081-9764-5dbc05bfc655@kania-online.de>
- <1eb80efc-4bb2-4b7c-b339-5b92277e782e@samba.org>
- <49b4b9af-033a-4534-90e3-ac633ff8bfd8@kania-online.de>
- <7bf96a40-7472-47ca-b81c-7e9121c598b4@samba.org>
- <68fe1182-281f-42ea-ac18-b0a2bf49961d@samba.org>
- <afa75a49-2ae4-4e14-9363-d5c31d7ef2a9@kania-online.de>
- <b5f3c39b-43c8-4b43-943d-cd851128173c@kania-online.de>
- <5d10619f-c4ed-4190-a4d1-1cec480ee108@catalyst.net.nz>
- <c420e24b-562d-4592-a9df-d0dddd069e22@kania-online.de>
- <ab589c2f-f13b-4560-bd18-7a1e88634a0d@catalyst.net.nz>
- <1a14a7d4-3d56-4212-9420-0affed9ffd18@kania-online.de>
- <0f4e2d3b-12b2-4dfc-88ef-0b52c12bf6db@catalyst.net.nz>
-In-Reply-To: <0f4e2d3b-12b2-4dfc-88ef-0b52c12bf6db@catalyst.net.nz>
+On 29/10/24 23:06, Stefan Kania wrote:
 
---------------H3WYPI6pHmjh3uRYpcmY1KBd
-Content-Type: multipart/mixed; boundary="------------traMi4503OkVlEeLD2uoGVAB"
+> I did ldbsearch --url=/var/lib/samba/private/sam.ldb '(|(CN=stka)(CN=win11*)(CN=WINCLIENT11*))' --cross-ncs to also see
+> the computer object and I got:
 
---------------traMi4503OkVlEeLD2uoGVAB
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
+[...]
 
-DQoNCkFtIDI4LjEwLjI0IHVtIDIzOjI2IHNjaHJpZWIgRG91Z2xhcyBCYWduYWxsIHZpYSBz
-YW1iYS10ZWNobmljYWw6DQo+IE9uIDI5LzEwLzI0IDAyOjI5LCBTdGVmYW4gS2FuaWEgd3Jv
-dGU6DQo+PiBTdGFydGluZyBmcm9tIHRoZSBiZWdpbm5pbmcuIFNldCB1cCB0aGUgRG9tYWlu
-IHdpdGg6DQo+PiBzYW1iYS10b29sIGRvbWFpbiBwcm92aXNpb24gLS1kb21haW49ZXhhbXBs
-ZSAtLXJlYWw9ZXhhbXBsZS5uZXQgLS1ob3N0LWlwPTE5Mi4xNjguNTYuMjEgLS1iYWNrZW5k
-LXN0b3JlPW1kYg0KPj4gLS1kbnMtYmFja2VuZD1CSU5EOV9ETFogLS1hZG1pbnBhc3M9UGFz
-c3cwcmQgLS1mdW5jdGlvbi1sZXZlbD0yMDE2IC0tb3B0aW9uPSJhZCBkYyBmdW5jdGlvbmFs
-IGxldmVsID0gMjAxNiINCj4+DQo+PiBDcmVhdGUgc29tZSB1c2VycyBhbmQgZ3JvdXBzLg0K
-Pj4NCj4+IFRoZW4gc3RhcnQgdGhlIHNob3c6DQo+PiAtLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tDQo+PiBDcmVhdGluZyB0aGUgdHdvIEdQTw0KPj4gMS4gZGVmYXVsdCBkb21haW4gY29u
-dHJvbGxlciBwb2xpY3kNCj4+IFNldHRpbmfCoCBLREMgZm9yIGNsYWltcw0KPiANCj4gSSdt
-IG5vdCBhY3R1YWxseSBzdXJlIHdoYXQgdGhpcyBwYXJ0IGRvZXMgKHdoaWNoIGlzIG5vcm1h
-bCBmb3IgbWUgYW5kIEdQT3MpLg0KV2l0aG91dCB0aGUgR1BPcyBjbGFpbXMgd2lsbCBub3Qg
-d29yayBhbmQgc28gYXV0aC1wb2xpY2llcyB3b24ndCB3b3JrLg0KPiANCj4+IDIuIGRlZmF1
-bHQgZG9tYWluIHBvbGljeQ0KPj4gU2V0dGluZyBLZXJiZXJvcyBmb3IgY2xhaW1zDQo+Pg0K
-Pj4gMy4gQWxsIHN0ZXBzIHRvIGNyZWF0ZSB0aGUgYXV0aC1wb2xpY3kgYW5kIGF1dGgtc2ls
-byBhbmQgYXNzaWduaW5nIHRoZSBwb2xpY3kNCj4+IHNhbWJhLXRvb2wgZG9tYWluwqAgYXV0
-aCBwb2xpY3kgY3JlYXRlIC0tbmFtZSB3aW4xMS1wb2xpY3kgLS1lbmZvcmNlDQo+PiBzYW1i
-YS10b29sIGRvbWFpbsKgIGF1dGggcG9saWN5IG1vZGlmeSAtLXVzZXItdGd0LWxpZmV0aW1l
-LW1pbnM9OTAgLS1uYW1lIHdpbjExLXBvbGljeQ0KPj4gc2FtYmEtdG9vbCBkb21haW4gYXV0
-aCBzaWxvIGNyZWF0ZSAtLW5hbWUgd2luMTEtc2lsbyAtLWVuZm9yY2UNCj4+IHNhbWJhLXRv
-b2wgZG9tYWluIGF1dGggc2lsbyBtZW1iZXIgZ3JhbnQgLS1uYW1lIHdpbjExLXNpbG8gLS1t
-ZW1iZXI9c3RrYQ0KPiANCj4gQXQgdGhpcyBwb2ludCB5b3Ugc2hvdWxkIGJlIGFibGUgdG8g
-c2VlIHRoZSBzaWxvIGNsYWltIGluIGEgbmV3IGtlcmJlcm9zIHRpY2tldCwNCj4gdXNpbmcg
-YG5ldCBhZHMga2VyYmVyb3MgcGFjIGR1bXAgIC1Vc3RrYWAuDQoNCm5vLiBJIGdvdDoNCnJv
-b3RAZGMwMTp+IyBuZXQgYWRzIGtlcmJlcm9zIHBhYyBkdW1wICAtVXN0a2ENClBhc3N3b3Jk
-IGZvciBbRVhBTVBMRVxzdGthXToNCmZhaWxlZCB0byBxdWVyeSBrZXJiZXJvcyBQQUM6IE5U
-X1NUQVRVU19MT0dPTl9GQUlMVVJFDQoNClRoZW4gSSBwdXQgYSAiLWQgNCIgdG8gdGhlIGNv
-bW1hbmQgdG8gc2VlIGEgbGl0dGxlIGJpdCBtb3JlIGFuZCBJIGdvdDoNCi0tLS0tLS0tLS0t
-DQpQYXNzd29yZCBmb3IgW0VYQU1QTEVcc3RrYV06DQphZHNfa3JiNV9ta19yZXE6IHNtYl9r
-cmI1X2dldF9jcmVkZW50aWFscyBmYWlsZWQgZm9yIERDMDEkQEVYQU1QTEUuTkVUIA0KKFRp
-Y2tldCBleHBpcmVkKQ0KZmFpbGVkIHRvIGdldCB0aWNrZXQgZm9yIERDMDEkQEVYQU1QTEUu
-TkVUOiBUaWNrZXQgZXhwaXJlZA0KZmFpbGVkIHRvIHF1ZXJ5IGtlcmJlcm9zIFBBQzogTlRf
-U1RBVFVTX0xPR09OX0ZBSUxVUkUNCnJldHVybiBjb2RlID0gLTENCi0tLS0tLS0tLS0tDQpU
-aGF0J3Mgc3RyYW5nZS4NCg0KT25lIG1vcmUgdGhpbmc6DQpJZiBJIGRvICJraW5pdCBzdGth
-IiBhbmQgcmlnaHQgYWZ0ZXIgZ2V0dGluZyB0aGUgdGlja2V0IEkgZG8gYSBrbGlzdCwgDQpJ
-J20sIGdldHRpbmcNCi0tLS0tLS0tLS0tLS0tLS0tLQ0Kcm9vdEBkYzAxOn4jIGtsaXN0DQpD
-cmVkZW50aWFscyBjYWNoZTogRklMRTovdG1wL2tyYjVjY18wDQogICAgICAgICBQcmluY2lw
-YWw6IHN0a2FARVhBTVBMRS5ORVQNCg0KICAgSXNzdWVkICAgICAgICAgICAgICAgIEV4cGly
-ZXMgICAgICAgIFByaW5jaXBhbA0KT2N0IDI5IDEwOjQ2OjI1IDIwMjQgID4+PkV4cGlyZWQ8
-PDwgIGtyYnRndC9FWEFNUExFLk5FVEBFWEFNUExFLk5FVA0KDQotLS0tLS0tLS0tLS0tLS0t
-LS0NClRoZW4gSSByZWNyZWF0ZWQgdGhlIHBvbGljeSBhbmQgdGhlIHNpbG8gdGhpcyB0aW1l
-IHdpdGhvdXQ6DQotLS0tLS0tLQ0Kc2FtYmEtdG9vbCBkb21haW4gIGF1dGggcG9saWN5IG1v
-ZGlmeSAtLXVzZXItdGd0LWxpZmV0aW1lLW1pbnM9OTAgLS1uYW1lIA0Kd2luMTEtcG9saWN5
-DQotLS0tLS0tLQ0KQWdhaW4gImtpbml0IHN0a2EiIGFuZCBrbGlzdA0KLS0tLS0tLS0tDQpy
-b290QGRjMDE6fiMga2xpc3QNCkNyZWRlbnRpYWxzIGNhY2hlOiBGSUxFOi90bXAva3JiNWNj
-XzANCiAgICAgICAgIFByaW5jaXBhbDogc3RrYUBFWEFNUExFLk5FVA0KDQogICBJc3N1ZWQg
-ICAgICAgICAgICAgICAgRXhwaXJlcyAgICAgICAgICAgICAgIFByaW5jaXBhbA0KT2N0IDI5
-IDEwOjUxOjU1IDIwMjQgIE9jdCAyOSAxNDo1MTo1NSAyMDI0ICBrcmJ0Z3QvRVhBTVBMRS5O
-RVRARVhBTVBMRS5ORVQNCg0KLS0tLS0tLS0tDQpUaGUgdGlja2V0IGlzIG9ubHkgNCBob3Vy
-cyB2YWxpZGUgYmVjYXVzZSB0aGUgdXNlciBpc3QgbWVtYmVyIG9mdCB0aGUgDQoicHJvdGVj
-dGVkIHVzZXJzIiBncm91cC4gVGhlbiBJIGFnYWluIGRpZCAibmV0IGFkcyBrZXJiZXJvcyBw
-YWMgZHVtcCANCi1Vc3RrYSIuIE5vdyBJIHNlZSBhIGxvdCBvZiBQQUMgaW5mb3JtYXRpb24u
-DQpBcyBzb29uIGFzIEkgYWRkIHRoZSAtLXVzZXItdGd0LWxpZmV0aW1lLW1pbnMgdGhlIHBy
-b2JsZW0gd2l0aCB0aGUgDQpleHBpcmVkIHRpY2tldCBpcyBiYWNrLg0KDQoNCj4gDQo+PiBz
-YW1iYS10b29sIGRvbWFpbiBhdXRoIHNpbG8gbWVtYmVyIGdyYW50IC0tbmFtZSB3aW4xMS1z
-aWxvIC0tbWVtYmVyPVdJTkNMSUVOVDExXCQNCj4+IHNhbWJhLXRvb2wgZG9tYWluwqAgYXV0
-aCBwb2xpY3kgdXNlci1hbGxvd2VkLXRvLWF1dGhlbnRpY2F0ZS10byBzZXQgLS1ieS1zaWxv
-PXdpbjExLXNpbG8gLS1uYW1lPXdpbjExLXBvbGljeQ0KPiANCj4gICAqY29tcHV0ZXItYWxs
-b3dlZC10by1hdXRoZW50aWNhdGUtdG8NCj4gDQo+IEl0IHdvdWxkIGhhdmUgYmVlbiBiZXR0
-ZXIgZm9yIHVzIHRvIG5hbWUgdGhpcw0KPiANCj4gICAgYWxsb3dlZC10by1hdXRoZW50aWNh
-dGUtdG8tY29tcHV0ZXINCj4gDQo+IGJ1dCBJIGd1ZXNzIHdlIGFyZSBmb2xsb3dpbmcgdGhl
-IG9iamVjdCBuYW1lcyBmcm9tIE1pY3Jvc29mdC4NCnRoZSBuYW1lIHNob3VsZCBzdGF5IGJl
-Y2F1c2UgaXQncyBleGFjdGx5IHRoZSBzYW1lIGFzIGluIHRoZSANCk1pY3Jvc29mdC13b3Js
-ZC4NCj4gDQo+IFRoZSByZXN0IG9mIHRoZSB0cm91YmxlIHByb2JhYmx5IGZvbGxvd3MgZnJv
-bSB0aGlzLg0KPiANCj4gSWYgdGhhdCdzIG5vdCBlbm91Z2gsIHdlIG1pZ2h0IG5lZWQgdG8g
-bG9vayBhdA0KPiANCj4gbGRic2VhcmNoIC0tdXJsPS92YXIvbGliL3NhbWJhL3ByaXZhdGUv
-c2FtLmxkYiAnKHwoQ049c3RrYSkoQ049d2luMTEqKSknIC0tY3Jvc3MtbmNzDQo+IA0KSSBk
-aWQgbGRic2VhcmNoIC0tdXJsPS92YXIvbGliL3NhbWJhL3ByaXZhdGUvc2FtLmxkYiANCico
-fChDTj1zdGthKShDTj13aW4xMSopKENOPVdJTkNMSUVOVDExKikpJyAtLWNyb3NzLW5jcyB0
-byBhbHNvIHNlZSB0aGUgDQpjb21wdXRlciBvYmplY3QgYW5kIEkgZ290Og0KLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tDQojIHJlY29yZCAxDQpkbjogQ049d2luMTEtc2lsbyxDTj1BdXRo
-TiBTaWxvcyxDTj1BdXRoTiBQb2xpY3kgDQpDb25maWd1cmF0aW9uLENOPVNlcnZpY2VzLENO
-PUNvbmZpZ3VyYXRpb24sREM9ZXhhbXBsZSxEQz1uZXQNCm9iamVjdENsYXNzOiB0b3ANCm9i
-amVjdENsYXNzOiBtc0RTLUF1dGhOUG9saWN5U2lsbw0KY246IHdpbjExLXNpbG8NCmluc3Rh
-bmNlVHlwZTogNA0Kd2hlbkNyZWF0ZWQ6IDIwMjQxMDI5MDkyNzA0LjBaDQp1U05DcmVhdGVk
-OiA0MzM2DQpuYW1lOiB3aW4xMS1zaWxvDQpvYmplY3RHVUlEOiBkYTVmY2FiNS04MDgxLTQ2
-M2QtODc0Ni1lOWY1MTE3YjEyMDgNCm9iamVjdENhdGVnb3J5OiANCkNOPW1zLURTLUF1dGhO
-LVBvbGljeS1TaWxvLENOPVNjaGVtYSxDTj1Db25maWd1cmF0aW9uLERDPWV4YW1wDQogIGxl
-LERDPW5ldA0KbXNEUy1BdXRoTlBvbGljeVNpbG9FbmZvcmNlZDogVFJVRQ0KbXNEUy1BdXRo
-TlBvbGljeVNpbG9NZW1iZXJzOiBDTj1zdGthLE9VPWZpcm1hLERDPWV4YW1wbGUsREM9bmV0
-DQptc0RTLUF1dGhOUG9saWN5U2lsb01lbWJlcnM6IENOPVdJTkNMSUVOVDExLE9VPWZpcm1h
-LERDPWV4YW1wbGUsREM9bmV0DQp3aGVuQ2hhbmdlZDogMjAyNDEwMjkwOTI3MTUuMFoNCnVT
-TkNoYW5nZWQ6IDQzMzgNCmRpc3Rpbmd1aXNoZWROYW1lOiBDTj13aW4xMS1zaWxvLENOPUF1
-dGhOIFNpbG9zLENOPUF1dGhOIFBvbGljeSANCkNvbmZpZ3VyYXRpb24sDQogIENOPVNlcnZp
-Y2VzLENOPUNvbmZpZ3VyYXRpb24sREM9ZXhhbXBsZSxEQz1uZXQNCg0KIyByZWNvcmQgMg0K
-ZG46IENOPXdpbjExLXBvbGljeSxDTj1BdXRoTiBQb2xpY2llcyxDTj1BdXRoTiBQb2xpY3kg
-DQpDb25maWd1cmF0aW9uLENOPVNlcnZpY2VzLENOPUNvbmZpZ3VyYXRpb24sREM9ZXhhbXBs
-ZSxEQz1uZXQNCm9iamVjdENsYXNzOiB0b3ANCm9iamVjdENsYXNzOiBtc0RTLUF1dGhOUG9s
-aWN5DQpjbjogd2luMTEtcG9saWN5DQppbnN0YW5jZVR5cGU6IDQNCndoZW5DcmVhdGVkOiAy
-MDI0MTAyOTA5MjY1NS4wWg0KdVNOQ3JlYXRlZDogNDMzNA0KbmFtZTogd2luMTEtcG9saWN5
-DQpvYmplY3RHVUlEOiA5ODU3MWJmOS03ZWEzLTRiYjAtYjQ5MS0zYTUzY2Y3OGNlODUNCm9i
-amVjdENhdGVnb3J5OiANCkNOPW1zLURTLUF1dGhOLVBvbGljeSxDTj1TY2hlbWEsQ049Q29u
-ZmlndXJhdGlvbixEQz1leGFtcGxlLERDDQogID1uZXQNCm1zRFMtQXV0aE5Qb2xpY3lFbmZv
-cmNlZDogVFJVRQ0KbXNEUy1TdHJvbmdOVExNUG9saWN5OiAwDQptc0RTLVVzZXJUR1RMaWZl
-dGltZTogOTANCm1zRFMtVXNlckFsbG93ZWRUb0F1dGhlbnRpY2F0ZVRvOjogDQpBUUFFZ0JR
-QUFBQWdBQUFBQUFBQUFDd0FBQUFCQVFBQUFBQUFCUklBQUFBDQogIEJBUUFBQUFBQUJSSUFB
-QUFFQUhnQUFRQUFBQWtEY0FBQUFRQUFBUUVBQUFBQUFBRUFBQUFBWVhKMGVQazJBQUFBWVFC
-a0FEb0FMd0F2DQogIEFHVUFlQUIwQUM4QVFRQjFBSFFBYUFCbEFHNEFkQUJwQUdNQVlRQjBB
-R2tBYndCdUFGTUFhUUJzQUc4QUVCUUFBQUIzQUdrQWJnQXhBDQogIERFQUxRQnpBR2tBYkFC
-dkFJQUFBQUE9DQp3aGVuQ2hhbmdlZDogMjAyNDEwMjkwOTI3MjEuMFoNCnVTTkNoYW5nZWQ6
-IDQzMzkNCm1zRFMtQXNzaWduZWRBdXRoTlBvbGljeUJMOiBDTj1zdGthLE9VPWZpcm1hLERD
-PWV4YW1wbGUsREM9bmV0DQptc0RTLUFzc2lnbmVkQXV0aE5Qb2xpY3lCTDogQ049V0lOQ0xJ
-RU5UMTEsT1U9ZmlybWEsREM9ZXhhbXBsZSxEQz1uZXQNCmRpc3Rpbmd1aXNoZWROYW1lOiBD
-Tj13aW4xMS1wb2xpY3ksQ049QXV0aE4gUG9saWNpZXMsQ049QXV0aE4gUG9saWN5IA0KQ29u
-ZmlndXJhDQogIHRpb24sQ049U2VydmljZXMsQ049Q29uZmlndXJhdGlvbixEQz1leGFtcGxl
-LERDPW5ldA0KDQojIHJlY29yZCAzDQpkbjogQ049c3RrYSxPVT1maXJtYSxEQz1leGFtcGxl
-LERDPW5ldA0Kb2JqZWN0Q2xhc3M6IHRvcA0Kb2JqZWN0Q2xhc3M6IHBlcnNvbg0Kb2JqZWN0
-Q2xhc3M6IG9yZ2FuaXphdGlvbmFsUGVyc29uDQpvYmplY3RDbGFzczogdXNlcg0KY246IHN0
-a2ENCmluc3RhbmNlVHlwZTogNA0Kd2hlbkNyZWF0ZWQ6IDIwMjQxMDI1MTcxMzU5LjBaDQp1
-U05DcmVhdGVkOiA0MTk1DQpuYW1lOiBzdGthDQpvYmplY3RHVUlEOiBkYWE5Mjk3NS0xODVm
-LTRjOWItOTBhMy1kMTNkYTgxMDhhYmYNCmJhZFB3ZENvdW50OiAwDQpjb2RlUGFnZTogMA0K
-Y291bnRyeUNvZGU6IDANCmJhZFBhc3N3b3JkVGltZTogMA0KbGFzdExvZ29mZjogMA0KcHJp
-bWFyeUdyb3VwSUQ6IDUxMw0Kb2JqZWN0U2lkOiBTLTEtNS0yMS03NzI5MTgzMTgtMjg1NzE5
-Mjc2MC0yMjkxMzM3OTkxLTExMDQNCmFjY291bnRFeHBpcmVzOiA5MjIzMzcyMDM2ODU0Nzc1
-ODA3DQpzQU1BY2NvdW50TmFtZTogc3RrYQ0Kc0FNQWNjb3VudFR5cGU6IDgwNTMwNjM2OA0K
-dXNlclByaW5jaXBhbE5hbWU6IHN0a2FAZXhhbXBsZS5uZXQNCm9iamVjdENhdGVnb3J5OiBD
-Tj1QZXJzb24sQ049U2NoZW1hLENOPUNvbmZpZ3VyYXRpb24sREM9ZXhhbXBsZSxEQz1uZXQN
-CnB3ZExhc3RTZXQ6IDEzMzc0MzUwMDM5OTMxOTQwNA0KdXNlckFjY291bnRDb250cm9sOiA1
-MTINCm1lbWJlck9mOiBDTj1hbGxlLE9VPWZpcm1hLERDPWV4YW1wbGUsREM9bmV0DQptZW1i
-ZXJPZjogQ049c2dyb3VwLE9VPWZpcm1hLERDPWV4YW1wbGUsREM9bmV0DQptZW1iZXJPZjog
-Q049UHJvdGVjdGVkIFVzZXJzLENOPVVzZXJzLERDPWV4YW1wbGUsREM9bmV0DQptZW1iZXJP
-ZjogQ049RG9tYWluIEFkbWlucyxDTj1Vc2VycyxEQz1leGFtcGxlLERDPW5ldA0KbGFzdExv
-Z29uVGltZXN0YW1wOiAxMzM3NDM1MjQwNTk3NjYzNzANCm1zRFMtQXV0aE5Qb2xpY3lTaWxv
-TWVtYmVyc0JMOiBDTj13aW4xMS1zaWxvLENOPUF1dGhOIFNpbG9zLENOPUF1dGhOIA0KUG9s
-aWN5IENvDQogIG5maWd1cmF0aW9uLENOPVNlcnZpY2VzLENOPUNvbmZpZ3VyYXRpb24sREM9
-ZXhhbXBsZSxEQz1uZXQNCm1zRFMtQXNzaWduZWRBdXRoTlBvbGljeTogQ049d2luMTEtcG9s
-aWN5LENOPUF1dGhOIFBvbGljaWVzLENOPUF1dGhOIA0KUG9saWN5IENvDQogIG5maWd1cmF0
-aW9uLENOPVNlcnZpY2VzLENOPUNvbmZpZ3VyYXRpb24sREM9ZXhhbXBsZSxEQz1uZXQNCndo
-ZW5DaGFuZ2VkOiAyMDI0MTAyOTA5MjcyNy4wWg0KdVNOQ2hhbmdlZDogNDM0MA0KbGFzdExv
-Z29uOiAxMzM3NDY2Nzc1NjQzNjYxNDANCmxvZ29uQ291bnQ6IDIxNA0KZGlzdGluZ3Vpc2hl
-ZE5hbWU6IENOPXN0a2EsT1U9ZmlybWEsREM9ZXhhbXBsZSxEQz1uZXQNCg0KIyByZWNvcmQg
-NA0KZG46IENOPVdJTkNMSUVOVDExLE9VPWZpcm1hLERDPWV4YW1wbGUsREM9bmV0DQpvYmpl
-Y3RDbGFzczogdG9wDQpvYmplY3RDbGFzczogcGVyc29uDQpvYmplY3RDbGFzczogb3JnYW5p
-emF0aW9uYWxQZXJzb24NCm9iamVjdENsYXNzOiB1c2VyDQpvYmplY3RDbGFzczogY29tcHV0
-ZXINCmNuOiBXSU5DTElFTlQxMQ0KaW5zdGFuY2VUeXBlOiA0DQp3aGVuQ3JlYXRlZDogMjAy
-NDEwMjUxNzIyMjcuMFoNCnVTTkNyZWF0ZWQ6IDQyMDkNCm5hbWU6IFdJTkNMSUVOVDExDQpv
-YmplY3RHVUlEOiA3MTRhNmY5Yy01NzBmLTQ4N2MtOTUyYi0xNjA3NGMwNzkxMDgNCnVzZXJB
-Y2NvdW50Q29udHJvbDogNDA5Ng0KYmFkUHdkQ291bnQ6IDANCmNvZGVQYWdlOiAwDQpjb3Vu
-dHJ5Q29kZTogMA0KYmFkUGFzc3dvcmRUaW1lOiAwDQpsYXN0TG9nb2ZmOiAwDQpwd2RMYXN0
-U2V0OiAxMzM3NDM1MDU0Nzg4NDAzODcNCnByaW1hcnlHcm91cElEOiA1MTUNCm9iamVjdFNp
-ZDogUy0xLTUtMjEtNzcyOTE4MzE4LTI4NTcxOTI3NjAtMjI5MTMzNzk5MS0xMTA5DQphY2Nv
-dW50RXhwaXJlczogOTIyMzM3MjAzNjg1NDc3NTgwNw0Kc0FNQWNjb3VudE5hbWU6IFdJTkNM
-SUVOVDExJA0Kc0FNQWNjb3VudFR5cGU6IDgwNTMwNjM2OQ0KZE5TSG9zdE5hbWU6IHdpbmNs
-aWVudDExLmV4YW1wbGUubmV0DQpzZXJ2aWNlUHJpbmNpcGFsTmFtZTogSE9TVC93aW5jbGll
-bnQxMS5leGFtcGxlLm5ldA0Kc2VydmljZVByaW5jaXBhbE5hbWU6IFJlc3RyaWN0ZWRLcmJI
-b3N0L3dpbmNsaWVudDExLmV4YW1wbGUubmV0DQpzZXJ2aWNlUHJpbmNpcGFsTmFtZTogSE9T
-VC9XSU5DTElFTlQxMQ0Kc2VydmljZVByaW5jaXBhbE5hbWU6IFJlc3RyaWN0ZWRLcmJIb3N0
-L1dJTkNMSUVOVDExDQpvYmplY3RDYXRlZ29yeTogQ049Q29tcHV0ZXIsQ049U2NoZW1hLENO
-PUNvbmZpZ3VyYXRpb24sREM9ZXhhbXBsZSxEQz1uZXQNCmlzQ3JpdGljYWxTeXN0ZW1PYmpl
-Y3Q6IEZBTFNFDQpsYXN0TG9nb25UaW1lc3RhbXA6IDEzMzc0MzUwNTQ4MDk3NjAxMA0Kb3Bl
-cmF0aW5nU3lzdGVtOiBXaW5kb3dzIDExIFBybw0Kb3BlcmF0aW5nU3lzdGVtVmVyc2lvbjog
-MTAuMCAoMjI2MzEpDQptc0RTLVN1cHBvcnRlZEVuY3J5cHRpb25UeXBlczogMjgNCmxhc3RM
-b2dvbjogMTMzNzQ2NjcxNTgwODQ2NTUwDQpsb2dvbkNvdW50OiA0OQ0KbXNEUy1BdXRoTlBv
-bGljeVNpbG9NZW1iZXJzQkw6IENOPXdpbjExLXNpbG8sQ049QXV0aE4gU2lsb3MsQ049QXV0
-aE4gDQpQb2xpY3kgQ28NCiAgbmZpZ3VyYXRpb24sQ049U2VydmljZXMsQ049Q29uZmlndXJh
-dGlvbixEQz1leGFtcGxlLERDPW5ldA0KbXNEUy1Bc3NpZ25lZEF1dGhOUG9saWN5OiBDTj13
-aW4xMS1wb2xpY3ksQ049QXV0aE4gUG9saWNpZXMsQ049QXV0aE4gDQpQb2xpY3kgQ28NCiAg
-bmZpZ3VyYXRpb24sQ049U2VydmljZXMsQ049Q29uZmlndXJhdGlvbixEQz1leGFtcGxlLERD
-PW5ldA0Kd2hlbkNoYW5nZWQ6IDIwMjQxMDI5MDkyNzMzLjBaDQp1U05DaGFuZ2VkOiA0MzQx
-DQpkaXN0aW5ndWlzaGVkTmFtZTogQ049V0lOQ0xJRU5UMTEsT1U9ZmlybWEsREM9ZXhhbXBs
-ZSxEQz1uZXQNCg0KLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tDQpFdmVyeXRoaW5nIGxvb2sg
-Z29vZCB0byBtZQ0KDQpIZXJlIHRoZSB2YWx1ZSBmcm9tIHRoZSBjb25kaXRpb246DQpyb290
-QGRjMDE6fiMgc2FtYmEtdG9vbCBkb21haW4gYXV0aCBwb2xpY3kgdmlldyAtLW5hbWUgd2lu
-MTEtcG9saWN5DQotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0NCnsNCiAgICJjbiI6ICJ3aW4x
-MS1wb2xpY3kiLA0KICAgImRpc3Rpbmd1aXNoZWROYW1lIjogIkNOPXdpbjExLXBvbGljeSxD
-Tj1BdXRoTiBQb2xpY2llcyxDTj1BdXRoTiANClBvbGljeSBDb25maWd1cmF0aW9uLENOPVNl
-cnZpY2VzLENOPUNvbmZpZ3VyYXRpb24sREM9ZXhhbXBsZSxEQz1uZXQiLA0KICAgImRuIjog
-IkNOPXdpbjExLXBvbGljeSxDTj1BdXRoTiBQb2xpY2llcyxDTj1BdXRoTiBQb2xpY3kgDQpD
-b25maWd1cmF0aW9uLENOPVNlcnZpY2VzLENOPUNvbmZpZ3VyYXRpb24sREM9ZXhhbXBsZSxE
-Qz1uZXQiLA0KICAgImluc3RhbmNlVHlwZSI6IDQsDQogICAibXNEUy1BdXRoTlBvbGljeUVu
-Zm9yY2VkIjogdHJ1ZSwNCiAgICJtc0RTLVN0cm9uZ05UTE1Qb2xpY3kiOiAwLA0KICAgIm1z
-RFMtVXNlckFsbG93ZWRUb0F1dGhlbnRpY2F0ZVRvIjogDQoiTzpTWUc6U1lEOihYQTtPSUNJ
-O0NSOzs7V0Q7KEBVU0VSLmFkOi8vZXh0L0F1dGhlbnRpY2F0aW9uU2lsbyA9PSANClwid2lu
-MTEtc2lsb1wiKSkiLA0KICAgIm1zRFMtVXNlclRHVExpZmV0aW1lIjogOTAsDQogICAibmFt
-ZSI6ICJ3aW4xMS1wb2xpY3kiLA0KICAgIm9iamVjdENhdGVnb3J5IjogDQoiQ049bXMtRFMt
-QXV0aE4tUG9saWN5LENOPVNjaGVtYSxDTj1Db25maWd1cmF0aW9uLERDPWV4YW1wbGUsREM9
-bmV0IiwNCiAgICJvYmplY3RDbGFzcyI6IFsNCiAgICAgInRvcCIsDQogICAgICJtc0RTLUF1
-dGhOUG9saWN5Ig0KICAgXSwNCiAgICJvYmplY3RHVUlEIjogIjk4NTcxYmY5LTdlYTMtNGJi
-MC1iNDkxLTNhNTNjZjc4Y2U4NSINCn0NCg0KLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tDQpT
-byBub3csIGZvciBtZSBhbmQgaG93IGl0IHdvcmtzIGluIGEgTWljcm9zb2Z0IGVudmlyb25t
-ZW50LiBBbGwgVXNlcnMgDQooaGVyZSBzdGthKSB3aG8gYXJlIG1lbWJlciBvZiB0aGUgc2ls
-byBzaG91bGQgb25seSBiZSBhYmxlIHRvIGxvZ2luIHRvIA0KY29tcHV0ZXJzIHdoaWNoIGFs
-c28gbWVtYmVyIG9mIHRoZSBzaWxvLg0KDQpjaGVlcnMsDQpTdGVmYW4NCg0KPiBjaGVlcnMs
-DQo+IERvdWdsYXMNCj4gDQo+IA0KDQoNCg0K
---------------traMi4503OkVlEeLD2uoGVAB
-Content-Type: application/pgp-keys; name="OpenPGP_0x52F6D4DD1BB68AB5.asc"
-Content-Disposition: attachment; filename="OpenPGP_0x52F6D4DD1BB68AB5.asc"
-Content-Description: OpenPGP public key
-Content-Transfer-Encoding: quoted-printable
+> # record 2
+> dn: CN=win11-policy,CN=AuthN Policies,CN=AuthN Policy Configuration,CN=Services,CN=Configuration,DC=example,DC=net
 
------BEGIN PGP PUBLIC KEY BLOCK-----
+[...]
 
-xjMEZD5zHxYJKwYBBAHaRw8BAQdAMVmXn59f0nkYv5WMsQq+KrcYCsNfaUj/WZtg
-zdF72yDNJVN0ZWZhbiBLYW5pYSA8c3RlZmFuQGthbmlhLW9ubGluZS5kZT7CiQQT
-FggAMRYhBGxP1rNZHkCiVplAgVL21N0btoq1BQJkPnNQAhsDBAsJCAcFFQgJCgsF
-FgIDAQAACgkQUvbU3Ru2irXx0QEAtwVwH3XaKI4V5K8xNBFjLCvNHZsOBiF1zXRe
-V3+ocvcA/i+HTEj2s+Xw0AdOCzTKpUetOkifYMHmRdzoRdjItaUIzjgEZD5zHxIK
-KwYBBAGXVQEFAQEHQLCpLYCfOAWfcF2Za/K3FymUQPfyIZ/eupKMlQrGRJUhAwEI
-B8J4BBgWCAAgFiEEbE/Ws1keQKJWmUCBUvbU3Ru2irUFAmQ+c1ACGwwACgkQUvbU
-3Ru2irV69QEAxwzfX/shQahBfmica2GbWv7hytmlnu/QFNP2WNDb/9MA/133+PWv
-q8PePaEGS4s2tRUd8ktDKmVYz7EnJwaCyqcH
-=3Dxppn
------END PGP PUBLIC KEY BLOCK-----
+> msDS-UserAllowedToAuthenticateTo:: AQAEgBQAAAAgAAAAAAAAACwAAAABAQAAAAAABRIAAAA
+>  BAQAAAAAABRIAAAAEAHgAAQAAAAkDcAAAAQAAAQEAAAAAAAEAAAAAYXJ0ePk2AAAAYQBkADoALwAv
+>  AGUAeAB0AC8AQQB1AHQAaABlAG4AdABpAGMAYQB0AGkAbwBuAFMAaQBsAG8AEBQAAAB3AGkAbgAxA
+>  DEALQBzAGkAbABvAIAAAAA=
 
---------------traMi4503OkVlEeLD2uoGVAB--
+We need this to be "msDS-ComputerAllowedToAuthenticateTo::".
 
---------------H3WYPI6pHmjh3uRYpcmY1KBd--
+Because the thing you want to control authentication to is a computer.
 
---------------AYBPTbi6yoT5h9oRRk5RFjhw
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature.asc"
+Douglas
 
------BEGIN PGP SIGNATURE-----
-
-wnsEABYIACMWIQRsT9azWR5AolaZQIFS9tTdG7aKtQUCZyCzkQUDAAAAAAAKCRBS9tTdG7aKtQnE
-APkBnh53TPRYZofE1oz2TGuFE6+3uCbsxWectvkePeB4yAD9FfyPPjd4PVgCJOvZSjlT16+fTR6W
-RhTNimBpo2ViQwM=
-=+0Yi
------END PGP SIGNATURE-----
-
---------------AYBPTbi6yoT5h9oRRk5RFjhw--
 
