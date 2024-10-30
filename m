@@ -2,59 +2,45 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6324B9B69D6
-	for <lists+samba-technical@lfdr.de>; Wed, 30 Oct 2024 17:58:20 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 02A359B6A9D
+	for <lists+samba-technical@lfdr.de>; Wed, 30 Oct 2024 18:15:39 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
-	bh=J0uIdZ4uwB46cezm++p21FXw/TfVLmKnQ+a2MQyor7Q=; b=XY/KMDDkX9DgUzMODFW8TRNBnS
-	i4/RIB9HEhlVsBgO4wGwZz36EP0EQ3dPy+TzrMomp5fJWrecFVWyeDf89f7XnZ8ph5R92l5pLgWpF
-	DQy+4tf7nJLOKODZ969p1puYqPb9Og4HJ36ij8sxr30bgezwnlxEXwclupTC4vz0j2WesfnVwteCU
-	jld0dNtpsNAVQ9f1Rz5u7OeqkCmp5sRJFFEPLlUa2OEC9B1v6Cd/Yn2Gz7QXgAl/Khof5RMJubyER
-	kPN+rMCZ+l3d9VbJFiDuDjrm8Cyc494tXgogNUhE4x8p2BcY70wKp0VZPu8v5CzJEta2ucClcyvU5
-	/L/GkOaQ==;
-Received: from ip6-localhost ([::1]:28820 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=0usVrK+ynNLzTJ+c320XVNglA7gSb2OZm2gRxFC5dCQ=; b=nIiL9s/zAw/Z+nTvqG1Ro+xcEs
+	JCvAtn4RrkTpIehpSPmvRZFXWj9irYK2Y7m30b6x5qbAGu41bYVSmOlB0akBquzMn3ycVI1A96U2Z
+	7u4VL2qEMF8iZxWdYueVz/geP5ZfuFAM/lSAcYW98oXBic0Axs11db7E0q/GPH3eC8CShIaUjFzO4
+	zBQwQIck0rbMyAfJ9rDFHfUHIVUJYa0062jIZO0mPKAJBuNJoZdvYJd5Kt2a/YF5k78Sgq04HP4IS
+	wXm6P/QPsD5sSjxh/ZLnkPUOW8Pyrf0/dnSUD3wWlmlHm5ZraurobTNb0de+oHyhoRrt3jvtJK9yb
+	wdMgdXjw==;
+Received: from ip6-localhost ([::1]:46430 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1t6C0r-005atw-84; Wed, 30 Oct 2024 16:57:41 +0000
-Received: from plasma6.jpberlin.de ([80.241.56.68]:41059) 
+	id 1t6CHx-005aza-Do; Wed, 30 Oct 2024 17:15:21 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:60484) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1t6C0m-005atp-6N
- for samba-technical@lists.samba.org; Wed, 30 Oct 2024 16:57:38 +0000
-Received: from spamfilter01.heinlein-hosting.de
- (spamfilter01.heinlein-hosting.de [80.241.56.115])
- by plasma.jpberlin.de (Postfix) with ESMTP id DA365AC117;
- Wed, 30 Oct 2024 17:57:29 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kania-online.de;
- s=MBO0001; t=1730307450;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=J0uIdZ4uwB46cezm++p21FXw/TfVLmKnQ+a2MQyor7Q=;
- b=K/Fc5DEwL+b8KW/MJZJ41sxNxd2Dc3bHUlTrpzf2bTeDogLo1TRUdyCuIMZtrJm5nTX/P1
- ha9fYwUvcNZXsb4nlp97CSvjSURE5eqaEaF3zopUEQfhEmktKBpOU6JP09ITeTXof4gpGm
- ETl2JhxtJF76RJXBm4WTYTYC8MRDMs+YrgeKQo/OR9rlS3UxpGpVVRmCd4fRSRcQm/nfyq
- Mb/YTYLo2QUOLZu5ZODgVitedXcAJLmIZgLNoFIs07F0LN+EDy+MaRGaPQnlCASSl5Nalc
- Pso4e3wYMcq+7BJSIqhJothj7iMWzuUKD64AJaSe652OGEHlTh1NaIzsF7IGAA==
-Received: from plasma.jpberlin.de ([80.241.56.68])
- by spamfilter01.heinlein-hosting.de (spamfilter01.heinlein-hosting.de
- [80.241.56.115]) (amavisd-new, port 10030)
- with ESMTP id tcDE5OfE8Dlu; Wed, 30 Oct 2024 17:57:23 +0100 (CET)
-Received: from [192.168.123.203] (p5b240946.dip0.t-ipconnect.de [91.36.9.70])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (Client did not present a certificate)
- (Authenticated sender: stefan@kania-online.de)
- by plasma.jpberlin.de (Postfix) with ESMTPSA id AB104AAC8C;
- Wed, 30 Oct 2024 17:57:22 +0100 (CET)
-Message-ID: <cc717f18-2a82-4d46-959c-27da326a047f@kania-online.de>
-Date: Wed, 30 Oct 2024 17:57:21 +0100
-MIME-Version: 1.0
-To: Douglas Bagnall <douglas.bagnall@catalyst.net.nz>,
- samba-technical <samba-technical@lists.samba.org>,
- Andrew Bartlett <abartlet@samba.org>
+ (Exim) id 1t6CHo-005azS-Ag
+ for samba-technical@lists.samba.org; Wed, 30 Oct 2024 17:15:15 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Message-ID:To:From:Date:CC;
+ bh=0usVrK+ynNLzTJ+c320XVNglA7gSb2OZm2gRxFC5dCQ=; b=iSkftEry7TrNefE/xtIM0hTYKB
+ lxzIqGer967mMKM2Aw36NKB+LOmoa5Irsx5ryPWAYyEzr7jAPSSRqA5zCqLAwHmxKbge2cuT61EP2
+ NAwuU+1tbG2mVgSDKn3IrDq8lLXxFJ/MRjPtvpk1mEQzMrV6ybwTvpwGWDwFfIyEUA+iac/QRvVpR
+ gjTegMSAghHzwAJwsCQJK20fz43bgdh+IR3DsH8Qe+r5UfP0ZYfaBNpaaezj6/0Onjax0BwtvBvb2
+ O/q8xjF8h/wSfyxnpoRo6ekUkZA1SlbDDYxp+f2O9YXH/NBwmTeD538ie/Ib3UHwg+QzNnfsSRsie
+ ep1F6N767a9yGuT35i61P0vzba2nAHPtI1FGF7jzpgfKHGAggiYOD52jgwkim/n5YnHy0/P1nCC04
+ OznoW01zHGPfzCXQSxSA3nzuihQqAbBYB+BtCsyM3i8lnTGQyG0qgLVypUUHi91IIdphVt3hLMbA+
+ 7FqnFYBkpxa+vphbyfv52uJ9;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1t6CHm-008N5K-2h for samba-technical@lists.samba.org;
+ Wed, 30 Oct 2024 17:15:11 +0000
+Date: Wed, 30 Oct 2024 17:15:07 +0000
+To: samba-technical@lists.samba.org
+Subject: Re: authentication policies in Samba 4.21
+Message-ID: <20241030171507.5d092646@devstation.samdom.example.com>
+In-Reply-To: <cc717f18-2a82-4d46-959c-27da326a047f@kania-online.de>
 References: <df1213a5-5153-463b-bacd-5d93ff8d2f6b@kania-online.de>
- <ef60d0ef-25df-4081-9764-5dbc05bfc655@kania-online.de>
- <1eb80efc-4bb2-4b7c-b339-5b92277e782e@samba.org>
  <49b4b9af-033a-4534-90e3-ac633ff8bfd8@kania-online.de>
  <7bf96a40-7472-47ca-b81c-7e9121c598b4@samba.org>
  <68fe1182-281f-42ea-ac18-b0a2bf49961d@samba.org>
@@ -70,13 +56,11 @@ References: <df1213a5-5153-463b-bacd-5d93ff8d2f6b@kania-online.de>
  <664df4a2-5133-4094-a233-5c6838413072@kania-online.de>
  <898167c5-b7d7-4bb2-9f3e-979f41608bb4@kania-online.de>
  <489883dd-1318-4172-b0b0-0f379714f927@catalyst.net.nz>
-Content-Language: en-US, de-DE
-Organization: Stefan Kania
-Subject: Re: authentication policies in Samba 4.21
-In-Reply-To: <489883dd-1318-4172-b0b0-0f379714f927@catalyst.net.nz>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------aZ0tayuwlXEforVd70seaGnd"
+ <cc717f18-2a82-4d46-959c-27da326a047f@kania-online.de>
+X-Mailer: Claws Mail 4.1.1 (GTK 3.24.38; x86_64-pc-linux-gnu)
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -90,274 +74,298 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Stefan Kania via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Stefan Kania <stefan@kania-online.de>
+From: Rowland Penny via samba-technical <samba-technical@lists.samba.org>
+Reply-To: "samba@lists.samba.org" <samba@lists.samba.org>
+Cc: Rowland Penny <rpenny@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------aZ0tayuwlXEforVd70seaGnd
-Content-Type: multipart/mixed; boundary="------------4SIl59vKcmiuS0U8LSiLCPN7";
- protected-headers="v1"
-From: Stefan Kania <stefan@kania-online.de>
-To: Douglas Bagnall <douglas.bagnall@catalyst.net.nz>,
- samba-technical <samba-technical@lists.samba.org>,
- Andrew Bartlett <abartlet@samba.org>
-Message-ID: <cc717f18-2a82-4d46-959c-27da326a047f@kania-online.de>
-Subject: Re: authentication policies in Samba 4.21
-References: <df1213a5-5153-463b-bacd-5d93ff8d2f6b@kania-online.de>
- <48c2847c-7d05-4e1a-9e85-52b1ba5d0b30@catalyst.net.nz>
- <ef60d0ef-25df-4081-9764-5dbc05bfc655@kania-online.de>
- <1eb80efc-4bb2-4b7c-b339-5b92277e782e@samba.org>
- <49b4b9af-033a-4534-90e3-ac633ff8bfd8@kania-online.de>
- <7bf96a40-7472-47ca-b81c-7e9121c598b4@samba.org>
- <68fe1182-281f-42ea-ac18-b0a2bf49961d@samba.org>
- <afa75a49-2ae4-4e14-9363-d5c31d7ef2a9@kania-online.de>
- <b5f3c39b-43c8-4b43-943d-cd851128173c@kania-online.de>
- <5d10619f-c4ed-4190-a4d1-1cec480ee108@catalyst.net.nz>
- <c420e24b-562d-4592-a9df-d0dddd069e22@kania-online.de>
- <ab589c2f-f13b-4560-bd18-7a1e88634a0d@catalyst.net.nz>
- <1a14a7d4-3d56-4212-9420-0affed9ffd18@kania-online.de>
- <0f4e2d3b-12b2-4dfc-88ef-0b52c12bf6db@catalyst.net.nz>
- <70db5ba2-8cfc-42f4-a493-0228954debdb@kania-online.de>
- <84bb05ba-823e-40a7-ba6b-d3c7ec6f2af1@catalyst.net.nz>
- <664df4a2-5133-4094-a233-5c6838413072@kania-online.de>
- <898167c5-b7d7-4bb2-9f3e-979f41608bb4@kania-online.de>
- <489883dd-1318-4172-b0b0-0f379714f927@catalyst.net.nz>
-In-Reply-To: <489883dd-1318-4172-b0b0-0f379714f927@catalyst.net.nz>
+On Wed, 30 Oct 2024 17:57:21 +0100
+Stefan Kania via samba-technical <samba-technical@lists.samba.org>
+wrote:
 
---------------4SIl59vKcmiuS0U8LSiLCPN7
-Content-Type: multipart/mixed; boundary="------------okg9AX4aqaxkP02Qm8NZXdlD"
+> Hi Douglas
+>=20
+> Am 30.10.24 um 02:39 schrieb Douglas Bagnall via samba-technical:
+> > On 30/10/24 06:33, Stefan Kania wrote:
+> >> I still not getting it working like expected. I now set up a
+> >> Windows AD (Server 2022)to test it and get the ldap output for the
+> >> user, the computer, the policy and the silo. I will post it here
+> >> as soon as I'm finished to compare the results.
+> >=20
+> > Here is the next pitfall. With
+> >=20
+> >  =C2=A0 samba-tool domain auth policy modify --name win11-policy \
+> >  =C2=A0=C2=A0 --computer-allowed-to-authenticate-to \
+> >  =C2=A0=C2=A0=C2=A0 'O:SYG:SYD:(XA;OICI;CR;;;WD;(@USER.ad://ext/Authent=
+icationSilo
+> > !=3D "win11-silo"))'
+> >=20
+> > the '(@USER.ad://ext/AuthenticationSilo !=3D "win11-silo")' condition
+> > will first look for '@USER.ad://ext/AuthenticationSilo'. If it does
+> > not exist (the user is in no silo) this will fail, and the
+> > condition will default to not-allowing.
+> >=20
+> > In effect this condition says the user needs to be in a silo that
+> > isn't "win11-silo".
+>=20
+> Yes, I know that was something I tried.
+>=20
+> Now I have configured the auth-policy and auth-silo on a Windows=20
+> 2022-server Active Directory. I used the same names, so it is easy to=20
+> follow. Here you see what I get when searching for the user, the
+> client, the silo and the policy:
+> ------------------------
+> root@debclient:~# ldbsearch -H ldap://win2022.winexample.net
+> '(|(CN=3Dst ka)(CN=3Dwin11*)(cn=3Dwinclient11))' --cross-ncs -U
+> administrator Password for [WINEXAMPLE\administrator]:
+> # record 1
+> dn: CN=3Dwin11-policy,CN=3DAuthN Policies,CN=3DAuthN Policy=20
+> Configuration,CN=3DServices,CN=3DConfiguration,DC=3Dwinexample,DC=3Dnet
+> objectClass: top
+> objectClass: msDS-AuthNPolicy
+> cn: win11-policy
+> distinguishedName: CN=3Dwin11-policy,CN=3DAuthN Policies,CN=3DAuthN Polic=
+y=20
+> Configura
+>   tion,CN=3DServices,CN=3DConfiguration,DC=3Dwinexample,DC=3Dnet
+> instanceType: 4
+> whenCreated: 20241030153647.0Z
+> whenChanged: 20241030161452.0Z
+> uSNCreated: 20506
+> uSNChanged: 24650
+> name: win11-policy
+> objectGUID: 37e6612a-15bf-4540-b1b2-db136a1cb877
+> objectCategory:=20
+> CN=3Dms-DS-AuthN-Policy,CN=3DSchema,CN=3DConfiguration,DC=3Dwinexample
+>   ,DC=3Dnet
+> dSCorePropagationData: 20241030153647.0Z
+> dSCorePropagationData: 16010101000000.0Z
+> msDS-UserAllowedToAuthenticateTo::=20
+> AQAEgBQAAAAgAAAAAAAAACwAAAABAQAAAAAABRIAAAA
+>   BAQAAAAAABRIAAAACAHgAAQAAAAkDcAAAAQAAAQEAAAAAAAEAAAAAYXJ0ePk2AAAAYQBkAD=
+oALwAv
+>   AGUAeAB0AC8AQQB1AHQAaABlAG4AdABpAGMAYQB0AGkAbwBuAFMAaQBsAG8AEBQAAAB3AGk=
+AbgAxA
+>   DEALQBzAGkAbABvAIAAAAA=3D
+> msDS-UserAllowedToAuthenticateFrom::=20
+> AQAEgBQAAAAgAAAAAAAAACwAAAABAQAAAAAABRIAA
+>   AABAQAAAAAABRIAAAACAHgAAQAAAAkDcAAAAQAAAQEAAAAAAAEAAAAAYXJ0ePk2AAAAYQBk=
+ADoALw
+>   AvAGUAeAB0AC8AQQB1AHQAaABlAG4AdABpAGMAYQB0AGkAbwBuAFMAaQBsAG8AEBQAAAB3A=
+GkAbgA
+>   xADEALQBzAGkAbABvAIAAAAA=3D
+> msDS-UserTGTLifetime: 72000000000
+> msDS-ComputerAllowedToAuthenticateTo::=20
+> AQAEgBQAAAAgAAAAAAAAACwAAAABAQAAAAAABRI
+>   AAAABAQAAAAAABRIAAAACAHgAAQAAAAkDcAAAAQAAAQEAAAAAAAEAAAAAYXJ0ePk2AAAAYQ=
+BkADoA
+>   LwAvAGUAeAB0AC8AQQB1AHQAaABlAG4AdABpAGMAYQB0AGkAbwBuAFMAaQBsAG8AEBQAAAB=
+3AGkAb
+>   gAxADEALQBzAGkAbABvAIAAAAA=3D
+> msDS-ServiceAllowedToAuthenticateTo::=20
+> AQAEgBQAAAAgAAAAAAAAACwAAAABAQAAAAAABRIA
+>   AAABAQAAAAAABRIAAAACAHgAAQAAAAkDcAAAAQAAAQEAAAAAAAEAAAAAYXJ0ePk2AAAAYQB=
+kADoAL
+>   wAvAGUAeAB0AC8AQQB1AHQAaABlAG4AdABpAGMAYQB0AGkAbwBuAFMAaQBsAG8AEBQAAAB3=
+AGkAbg
+>   AxADEALQBzAGkAbABvAIAAAAA=3D
+> msDS-ServiceAllowedToAuthenticateFrom::=20
+> AQAEgBQAAAAgAAAAAAAAACwAAAABAQAAAAAABR
+>   IAAAABAQAAAAAABRIAAAACAHgAAQAAAAkDcAAAAQAAAQEAAAAAAAEAAAAAYXJ0ePk2AAAAY=
+QBkADo
+>   ALwAvAGUAeAB0AC8AQQB1AHQAaABlAG4AdABpAGMAYQB0AGkAbwBuAFMAaQBsAG8AEBQAAA=
+B3AGkA
+>   bgAxADEALQBzAGkAbABvAIEAAAA=3D
+> msDS-UserAuthNPolicyBL: CN=3Dwin11-silo,CN=3DAuthN Silos,CN=3DAuthN Polic=
+y=20
+> Configura
+>   tion,CN=3DServices,CN=3DConfiguration,DC=3Dwinexample,DC=3Dnet
+> msDS-ComputerAuthNPolicyBL: CN=3Dwin11-silo,CN=3DAuthN Silos,CN=3DAuthN
+> Policy Confi
+>   guration,CN=3DServices,CN=3DConfiguration,DC=3Dwinexample,DC=3Dnet
+> msDS-ServiceAuthNPolicyBL: CN=3Dwin11-silo,CN=3DAuthN Silos,CN=3DAuthN
+> Policy Config
+>   uration,CN=3DServices,CN=3DConfiguration,DC=3Dwinexample,DC=3Dnet
+> msDS-AuthNPolicyEnforced: TRUE
+> msDS-UserAllowedNTLMNetworkAuthentication: FALSE
+> msDS-ServiceAllowedNTLMNetworkAuthentication: FALSE
+> msDS-StrongNTLMPolicy: 0
+>=20
+> # record 2
+> dn: CN=3Dwin11-silo,CN=3DAuthN Silos,CN=3DAuthN Policy=20
+> Configuration,CN=3DServices,CN=3DConfiguration,DC=3Dwinexample,DC=3Dnet
+> objectClass: top
+> objectClass: msDS-AuthNPolicySilo
+> cn: win11-silo
+> distinguishedName: CN=3Dwin11-silo,CN=3DAuthN Silos,CN=3DAuthN Policy=20
+> Configuration,
+>   CN=3DServices,CN=3DConfiguration,DC=3Dwinexample,DC=3Dnet
+> instanceType: 4
+> whenCreated: 20241030154104.0Z
+> whenChanged: 20241030162958.0Z
+> uSNCreated: 20511
+> uSNChanged: 24683
+> name: win11-silo
+> objectGUID: b2ea79d2-8187-4a35-9839-6a807016857d
+> objectCategory:=20
+> CN=3Dms-DS-AuthN-Policy-Silo,CN=3DSchema,CN=3DConfiguration,DC=3Dwinex
+>   ample,DC=3Dnet
+> dSCorePropagationData: 20241030154104.0Z
+> dSCorePropagationData: 16010101000000.0Z
+> msDS-AssignedAuthNPolicySiloBL:
+> CN=3DWINCLIENT11,OU=3Dfirma,DC=3Dwinexample,DC=3Dnet
+> msDS-AssignedAuthNPolicySiloBL: CN=3Dst
+> ka,OU=3Dfirma,DC=3Dwinexample,DC=3Dnet msDS-AssignedAuthNPolicySiloBL:
+> CN=3DWIN2022,OU=3DDomain Controllers,DC=3Dwinexample ,DC=3Dnet
+> msDS-AuthNPolicySiloMembers:
+> CN=3DWINCLIENT11,OU=3Dfirma,DC=3Dwinexample,DC=3Dnet
+> msDS-AuthNPolicySiloMembers: CN=3Dst ka,OU=3Dfirma,DC=3Dwinexample,DC=3Dn=
+et
+> msDS-UserAuthNPolicy: CN=3Dwin11-policy,CN=3DAuthN Policies,CN=3DAuthN
+> Policy Config
+> uration,CN=3DServices,CN=3DConfiguration,DC=3Dwinexample,DC=3Dnet
+> msDS-ComputerAuthNPolicy: CN=3Dwin11-policy,CN=3DAuthN Policies,CN=3DAuthN
+> Policy Co
+> nfiguration,CN=3DServices,CN=3DConfiguration,DC=3Dwinexample,DC=3Dnet
+> msDS-ServiceAuthNPolicy: CN=3Dwin11-policy,CN=3DAuthN Policies,CN=3DAuthN
+> Policy Con
+> figuration,CN=3DServices,CN=3DConfiguration,DC=3Dwinexample,DC=3Dnet
+> msDS-AuthNPolicySiloEnforced: TRUE
+>=20
+> # record 3
+> dn: CN=3Dst ka,OU=3Dfirma,DC=3Dwinexample,DC=3Dnet
+> objectClass: top
+> objectClass: person
+> objectClass: organizationalPerson
+> objectClass: user
+> cn: st ka
+> sn: ka
+> givenName: st
+> distinguishedName: CN=3Dst ka,OU=3Dfirma,DC=3Dwinexample,DC=3Dnet
+> instanceType: 4
+> whenCreated: 20241030135710.0Z
+> whenChanged: 20241030161239.0Z
+> displayName: st ka
+> uSNCreated: 12810
+> memberOf: CN=3Dmygroup,OU=3Dfirma,DC=3Dwinexample,DC=3Dnet
+> memberOf: CN=3DProtected Users,CN=3DUsers,DC=3Dwinexample,DC=3Dnet
+> memberOf::
+> Q049RG9tw6RuZW4tQWRtaW5zLENOPVVzZXJzLERDPXdpbmV4YW1wbGUsREM9bmV0
+> uSNChanged: 24649 name: st ka
+> objectGUID: ec0bc2f7-f670-45f6-b58b-e1f93c0121e2
+> userAccountControl: 66048
+> badPwdCount: 0
+> codePage: 0
+> countryCode: 0
+> badPasswordTime: 0
+> lastLogoff: 0
+> lastLogon: 133747795013375240
+> pwdLastSet: 133747702303167784
+> primaryGroupID: 513
+> objectSid: S-1-5-21-876824351-968303257-185465824-1103
+> adminCount: 1
+> accountExpires: 9223372036854775807
+> logonCount: 41
+> sAMAccountName: stka
+> sAMAccountType: 805306368
+> userPrincipalName: stka@winexample.net
+> objectCategory:
+> CN=3DPerson,CN=3DSchema,CN=3DConfiguration,DC=3Dwinexample,DC=3Dnet
+> dSCorePropagationData: 20241030161239.0Z dSCorePropagationData:
+> 20241030135710.0Z dSCorePropagationData: 16010101000000.0Z
+> lastLogonTimestamp: 133747742703371877
+> msDS-AssignedAuthNPolicySilo: CN=3Dwin11-silo,CN=3DAuthN Silos,CN=3DAuthN=
+=20
+> Policy Con
+>   figuration,CN=3DServices,CN=3DConfiguration,DC=3Dwinexample,DC=3Dnet
+> msDS-AuthNPolicySiloMembersBL: CN=3Dwin11-silo,CN=3DAuthN Silos,CN=3DAuth=
+N=20
+> Policy Co
+>   nfiguration,CN=3DServices,CN=3DConfiguration,DC=3Dwinexample,DC=3Dnet
+>=20
+> # record 4
+> dn: CN=3DWINCLIENT11,OU=3Dfirma,DC=3Dwinexample,DC=3Dnet
+> objectClass: top
+> objectClass: person
+> objectClass: organizationalPerson
+> objectClass: user
+> objectClass: computer
+> cn: WINCLIENT11
+> distinguishedName: CN=3DWINCLIENT11,OU=3Dfirma,DC=3Dwinexample,DC=3Dnet
+> instanceType: 4
+> whenCreated: 20241030141150.0Z
+> whenChanged: 20241030154310.0Z
+> uSNCreated: 16410
+> uSNChanged: 20519
+> name: WINCLIENT11
+> objectGUID: 36b6c9a2-6297-452f-ac43-a6cb46635e63
+> userAccountControl: 4096
+> badPwdCount: 0
+> codePage: 0
+> countryCode: 0
+> badPasswordTime: 0
+> lastLogoff: 0
+> lastLogon: 133747794979471652
+> localPolicyFlags: 0
+> pwdLastSet: 133747711109077000
+> primaryGroupID: 515
+> objectSid: S-1-5-21-876824351-968303257-185465824-1106
+> accountExpires: 9223372036854775807
+> logonCount: 50
+> sAMAccountName: WINCLIENT11$
+> sAMAccountType: 805306369
+> operatingSystem: Windows 11 Pro
+> operatingSystemVersion: 10.0 (22631)
+> dNSHostName: winclient11.winexample.net
+> servicePrincipalName: RestrictedKrbHost/WINCLIENT11
+> servicePrincipalName: HOST/WINCLIENT11
+> servicePrincipalName: RestrictedKrbHost/winclient11.winexample.net
+> servicePrincipalName: HOST/winclient11.winexample.net
+> objectCategory:
+> CN=3DComputer,CN=3DSchema,CN=3DConfiguration,DC=3Dwinexample,DC=3Dnet
+> isCriticalSystemObject: FALSE dSCorePropagationData: 20241030141321.0Z
+> dSCorePropagationData: 16010101000000.0Z
+> lastLogonTimestamp: 133747711110786794
+> msDS-SupportedEncryptionTypes: 28
+> msDS-AssignedAuthNPolicySilo: CN=3Dwin11-silo,CN=3DAuthN Silos,CN=3DAuthN=
+=20
+> Policy Con
+>   figuration,CN=3DServices,CN=3DConfiguration,DC=3Dwinexample,DC=3Dnet
+> msDS-AuthNPolicySiloMembersBL: CN=3Dwin11-silo,CN=3DAuthN Silos,CN=3DAuth=
+N=20
+> Policy Co
+>   nfiguration,CN=3DServices,CN=3DConfiguration,DC=3Dwinexample,DC=3Dnet
+>=20
+> ------------------------
+> and this is working :-)
+> As you can see, the policy is using UserAllowedToAuthenticateTo and
+> the assignment is different to the one we have in Samba
+>=20
+> Here the value from UserAllowedToAuthenticateTo:
+> --------------
+> root@debclient:~# ldbsearch -H ldap://win2022.winexample.net
+> '(|(CN=3Dst ka)(CN=3Dwin11*)(cn=3Dwinclient11))' --cross-ncs=20
+> msDS-UserAllowedToAuthenticateTo  -U administrator=20
+>=20
+> Password for [WINEXAMPLE\administrator]:
+> # record 1
+> dn: CN=3Dwin11-policy,CN=3DAuthN Policies,CN=3DAuthN Policy=20
+> Configuration,CN=3DServices,CN=3DConfiguration,DC=3Dwinexample,DC=3Dnet
+> msDS-UserAllowedToAuthenticateTo::=20
+> AQAEgBQAAAAgAAAAAAAAACwAAAABAQAAAAAABRIAAAA=20
+> BAQAAAAAABRIAAAACAHgAAQAAAAkDcAAAAQAAAQEAAAAAAAEAAAAAYXJ0ePk2AAAAYQBkADoA=
+LwAv=20
+> AGUAeAB0AC8AQQB1AHQAaABlAG4AdABpAGMAYQB0AGkAbwBuAFMAaQBsAG8AEBQAAAB3AGkAb=
+gAxA
+>   DEALQBzAGkAbABvAIAAAAA=3D
+> --------------
+> I don't know how to translate the Attribut so that it is readable. If=20
+> you could give me a hint, i translate it, so that you can read it. It=20
+> should a base64 string but I can't convert it.
+>=20
 
---------------okg9AX4aqaxkP02Qm8NZXdlD
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
+Try adding '--show-binary' to the ldbsearch command
 
-SGkgRG91Z2xhcw0KDQpBbSAzMC4xMC4yNCB1bSAwMjozOSBzY2hyaWViIERvdWdsYXMgQmFn
-bmFsbCB2aWEgc2FtYmEtdGVjaG5pY2FsOg0KPiBPbiAzMC8xMC8yNCAwNjozMywgU3RlZmFu
-IEthbmlhIHdyb3RlOg0KPj4gSSBzdGlsbCBub3QgZ2V0dGluZyBpdCB3b3JraW5nIGxpa2Ug
-ZXhwZWN0ZWQuIEkgbm93IHNldCB1cCBhIFdpbmRvd3MgDQo+PiBBRCAoU2VydmVyIDIwMjIp
-dG8gdGVzdCBpdCBhbmQgZ2V0IHRoZSBsZGFwIG91dHB1dCBmb3IgdGhlIHVzZXIsIHRoZSAN
-Cj4+IGNvbXB1dGVyLCB0aGUgcG9saWN5IGFuZCB0aGUgc2lsby4gSSB3aWxsIHBvc3QgaXQg
-aGVyZSBhcyBzb29uIGFzIEknbSANCj4+IGZpbmlzaGVkIHRvIGNvbXBhcmUgdGhlIHJlc3Vs
-dHMuDQo+IA0KPiBIZXJlIGlzIHRoZSBuZXh0IHBpdGZhbGwuIFdpdGgNCj4gDQo+ICDCoCBz
-YW1iYS10b29sIGRvbWFpbiBhdXRoIHBvbGljeSBtb2RpZnkgLS1uYW1lIHdpbjExLXBvbGlj
-eSBcDQo+ICDCoMKgIC0tY29tcHV0ZXItYWxsb3dlZC10by1hdXRoZW50aWNhdGUtdG8gXA0K
-PiAgwqDCoMKgICdPOlNZRzpTWUQ6KFhBO09JQ0k7Q1I7OztXRDsoQFVTRVIuYWQ6Ly9leHQv
-QXV0aGVudGljYXRpb25TaWxvICE9IA0KPiAid2luMTEtc2lsbyIpKScNCj4gDQo+IHRoZSAn
-KEBVU0VSLmFkOi8vZXh0L0F1dGhlbnRpY2F0aW9uU2lsbyAhPSAid2luMTEtc2lsbyIpJyBj
-b25kaXRpb24gd2lsbCANCj4gZmlyc3QgbG9vayBmb3IgJ0BVU0VSLmFkOi8vZXh0L0F1dGhl
-bnRpY2F0aW9uU2lsbycuIElmIGl0IGRvZXMgbm90IGV4aXN0IA0KPiAodGhlIHVzZXIgaXMg
-aW4gbm8gc2lsbykgdGhpcyB3aWxsIGZhaWwsIGFuZCB0aGUgY29uZGl0aW9uIHdpbGwgZGVm
-YXVsdCANCj4gdG8gbm90LWFsbG93aW5nLg0KPiANCj4gSW4gZWZmZWN0IHRoaXMgY29uZGl0
-aW9uIHNheXMgdGhlIHVzZXIgbmVlZHMgdG8gYmUgaW4gYSBzaWxvIHRoYXQgaXNuJ3QgDQo+
-ICJ3aW4xMS1zaWxvIi4NCg0KWWVzLCBJIGtub3cgdGhhdCB3YXMgc29tZXRoaW5nIEkgdHJp
-ZWQuDQoNCk5vdyBJIGhhdmUgY29uZmlndXJlZCB0aGUgYXV0aC1wb2xpY3kgYW5kIGF1dGgt
-c2lsbyBvbiBhIFdpbmRvd3MgDQoyMDIyLXNlcnZlciBBY3RpdmUgRGlyZWN0b3J5LiBJIHVz
-ZWQgdGhlIHNhbWUgbmFtZXMsIHNvIGl0IGlzIGVhc3kgdG8gDQpmb2xsb3cuIEhlcmUgeW91
-IHNlZSB3aGF0IEkgZ2V0IHdoZW4gc2VhcmNoaW5nIGZvciB0aGUgdXNlciwgdGhlIGNsaWVu
-dCwgDQp0aGUgc2lsbyBhbmQgdGhlIHBvbGljeToNCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LQ0Kcm9vdEBkZWJjbGllbnQ6fiMgbGRic2VhcmNoIC1IIGxkYXA6Ly93aW4yMDIyLndpbmV4
-YW1wbGUubmV0ICcofChDTj1zdCANCmthKShDTj13aW4xMSopKGNuPXdpbmNsaWVudDExKSkn
-IC0tY3Jvc3MtbmNzIC1VIGFkbWluaXN0cmF0b3INClBhc3N3b3JkIGZvciBbV0lORVhBTVBM
-RVxhZG1pbmlzdHJhdG9yXToNCiMgcmVjb3JkIDENCmRuOiBDTj13aW4xMS1wb2xpY3ksQ049
-QXV0aE4gUG9saWNpZXMsQ049QXV0aE4gUG9saWN5IA0KQ29uZmlndXJhdGlvbixDTj1TZXJ2
-aWNlcyxDTj1Db25maWd1cmF0aW9uLERDPXdpbmV4YW1wbGUsREM9bmV0DQpvYmplY3RDbGFz
-czogdG9wDQpvYmplY3RDbGFzczogbXNEUy1BdXRoTlBvbGljeQ0KY246IHdpbjExLXBvbGlj
-eQ0KZGlzdGluZ3Vpc2hlZE5hbWU6IENOPXdpbjExLXBvbGljeSxDTj1BdXRoTiBQb2xpY2ll
-cyxDTj1BdXRoTiBQb2xpY3kgDQpDb25maWd1cmENCiAgdGlvbixDTj1TZXJ2aWNlcyxDTj1D
-b25maWd1cmF0aW9uLERDPXdpbmV4YW1wbGUsREM9bmV0DQppbnN0YW5jZVR5cGU6IDQNCndo
-ZW5DcmVhdGVkOiAyMDI0MTAzMDE1MzY0Ny4wWg0Kd2hlbkNoYW5nZWQ6IDIwMjQxMDMwMTYx
-NDUyLjBaDQp1U05DcmVhdGVkOiAyMDUwNg0KdVNOQ2hhbmdlZDogMjQ2NTANCm5hbWU6IHdp
-bjExLXBvbGljeQ0Kb2JqZWN0R1VJRDogMzdlNjYxMmEtMTViZi00NTQwLWIxYjItZGIxMzZh
-MWNiODc3DQpvYmplY3RDYXRlZ29yeTogDQpDTj1tcy1EUy1BdXRoTi1Qb2xpY3ksQ049U2No
-ZW1hLENOPUNvbmZpZ3VyYXRpb24sREM9d2luZXhhbXBsZQ0KICAsREM9bmV0DQpkU0NvcmVQ
-cm9wYWdhdGlvbkRhdGE6IDIwMjQxMDMwMTUzNjQ3LjBaDQpkU0NvcmVQcm9wYWdhdGlvbkRh
-dGE6IDE2MDEwMTAxMDAwMDAwLjBaDQptc0RTLVVzZXJBbGxvd2VkVG9BdXRoZW50aWNhdGVU
-bzo6IA0KQVFBRWdCUUFBQUFnQUFBQUFBQUFBQ3dBQUFBQkFRQUFBQUFBQlJJQUFBQQ0KICBC
-QVFBQUFBQUFCUklBQUFBQ0FIZ0FBUUFBQUFrRGNBQUFBUUFBQVFFQUFBQUFBQUVBQUFBQVlY
-SjBlUGsyQUFBQVlRQmtBRG9BTHdBdg0KICBBR1VBZUFCMEFDOEFRUUIxQUhRQWFBQmxBRzRB
-ZEFCcEFHTUFZUUIwQUdrQWJ3QnVBRk1BYVFCc0FHOEFFQlFBQUFCM0FHa0FiZ0F4QQ0KICBE
-RUFMUUJ6QUdrQWJBQnZBSUFBQUFBPQ0KbXNEUy1Vc2VyQWxsb3dlZFRvQXV0aGVudGljYXRl
-RnJvbTo6IA0KQVFBRWdCUUFBQUFnQUFBQUFBQUFBQ3dBQUFBQkFRQUFBQUFBQlJJQUENCiAg
-QUFCQVFBQUFBQUFCUklBQUFBQ0FIZ0FBUUFBQUFrRGNBQUFBUUFBQVFFQUFBQUFBQUVBQUFB
-QVlYSjBlUGsyQUFBQVlRQmtBRG9BTHcNCiAgQXZBR1VBZUFCMEFDOEFRUUIxQUhRQWFBQmxB
-RzRBZEFCcEFHTUFZUUIwQUdrQWJ3QnVBRk1BYVFCc0FHOEFFQlFBQUFCM0FHa0FiZ0ENCiAg
-eEFERUFMUUJ6QUdrQWJBQnZBSUFBQUFBPQ0KbXNEUy1Vc2VyVEdUTGlmZXRpbWU6IDcyMDAw
-MDAwMDAwDQptc0RTLUNvbXB1dGVyQWxsb3dlZFRvQXV0aGVudGljYXRlVG86OiANCkFRQUVn
-QlFBQUFBZ0FBQUFBQUFBQUN3QUFBQUJBUUFBQUFBQUJSSQ0KICBBQUFBQkFRQUFBQUFBQlJJ
-QUFBQUNBSGdBQVFBQUFBa0RjQUFBQVFBQUFRRUFBQUFBQUFFQUFBQUFZWEowZVBrMkFBQUFZ
-UUJrQURvQQ0KICBMd0F2QUdVQWVBQjBBQzhBUVFCMUFIUUFhQUJsQUc0QWRBQnBBR01BWVFC
-MEFHa0Fid0J1QUZNQWFRQnNBRzhBRUJRQUFBQjNBR2tBYg0KICBnQXhBREVBTFFCekFHa0Fi
-QUJ2QUlBQUFBQT0NCm1zRFMtU2VydmljZUFsbG93ZWRUb0F1dGhlbnRpY2F0ZVRvOjogDQpB
-UUFFZ0JRQUFBQWdBQUFBQUFBQUFDd0FBQUFCQVFBQUFBQUFCUklBDQogIEFBQUJBUUFBQUFB
-QUJSSUFBQUFDQUhnQUFRQUFBQWtEY0FBQUFRQUFBUUVBQUFBQUFBRUFBQUFBWVhKMGVQazJB
-QUFBWVFCa0FEb0FMDQogIHdBdkFHVUFlQUIwQUM4QVFRQjFBSFFBYUFCbEFHNEFkQUJwQUdN
-QVlRQjBBR2tBYndCdUFGTUFhUUJzQUc4QUVCUUFBQUIzQUdrQWJnDQogIEF4QURFQUxRQnpB
-R2tBYkFCdkFJQUFBQUE9DQptc0RTLVNlcnZpY2VBbGxvd2VkVG9BdXRoZW50aWNhdGVGcm9t
-OjogDQpBUUFFZ0JRQUFBQWdBQUFBQUFBQUFDd0FBQUFCQVFBQUFBQUFCUg0KICBJQUFBQUJB
-UUFBQUFBQUJSSUFBQUFDQUhnQUFRQUFBQWtEY0FBQUFRQUFBUUVBQUFBQUFBRUFBQUFBWVhK
-MGVQazJBQUFBWVFCa0FEbw0KICBBTHdBdkFHVUFlQUIwQUM4QVFRQjFBSFFBYUFCbEFHNEFk
-QUJwQUdNQVlRQjBBR2tBYndCdUFGTUFhUUJzQUc4QUVCUUFBQUIzQUdrQQ0KICBiZ0F4QURF
-QUxRQnpBR2tBYkFCdkFJRUFBQUE9DQptc0RTLVVzZXJBdXRoTlBvbGljeUJMOiBDTj13aW4x
-MS1zaWxvLENOPUF1dGhOIFNpbG9zLENOPUF1dGhOIFBvbGljeSANCkNvbmZpZ3VyYQ0KICB0
-aW9uLENOPVNlcnZpY2VzLENOPUNvbmZpZ3VyYXRpb24sREM9d2luZXhhbXBsZSxEQz1uZXQN
-Cm1zRFMtQ29tcHV0ZXJBdXRoTlBvbGljeUJMOiBDTj13aW4xMS1zaWxvLENOPUF1dGhOIFNp
-bG9zLENOPUF1dGhOIFBvbGljeSANCkNvbmZpDQogIGd1cmF0aW9uLENOPVNlcnZpY2VzLENO
-PUNvbmZpZ3VyYXRpb24sREM9d2luZXhhbXBsZSxEQz1uZXQNCm1zRFMtU2VydmljZUF1dGhO
-UG9saWN5Qkw6IENOPXdpbjExLXNpbG8sQ049QXV0aE4gU2lsb3MsQ049QXV0aE4gUG9saWN5
-IA0KQ29uZmlnDQogIHVyYXRpb24sQ049U2VydmljZXMsQ049Q29uZmlndXJhdGlvbixEQz13
-aW5leGFtcGxlLERDPW5ldA0KbXNEUy1BdXRoTlBvbGljeUVuZm9yY2VkOiBUUlVFDQptc0RT
-LVVzZXJBbGxvd2VkTlRMTU5ldHdvcmtBdXRoZW50aWNhdGlvbjogRkFMU0UNCm1zRFMtU2Vy
-dmljZUFsbG93ZWROVExNTmV0d29ya0F1dGhlbnRpY2F0aW9uOiBGQUxTRQ0KbXNEUy1TdHJv
-bmdOVExNUG9saWN5OiAwDQoNCiMgcmVjb3JkIDINCmRuOiBDTj13aW4xMS1zaWxvLENOPUF1
-dGhOIFNpbG9zLENOPUF1dGhOIFBvbGljeSANCkNvbmZpZ3VyYXRpb24sQ049U2VydmljZXMs
-Q049Q29uZmlndXJhdGlvbixEQz13aW5leGFtcGxlLERDPW5ldA0Kb2JqZWN0Q2xhc3M6IHRv
-cA0Kb2JqZWN0Q2xhc3M6IG1zRFMtQXV0aE5Qb2xpY3lTaWxvDQpjbjogd2luMTEtc2lsbw0K
-ZGlzdGluZ3Vpc2hlZE5hbWU6IENOPXdpbjExLXNpbG8sQ049QXV0aE4gU2lsb3MsQ049QXV0
-aE4gUG9saWN5IA0KQ29uZmlndXJhdGlvbiwNCiAgQ049U2VydmljZXMsQ049Q29uZmlndXJh
-dGlvbixEQz13aW5leGFtcGxlLERDPW5ldA0KaW5zdGFuY2VUeXBlOiA0DQp3aGVuQ3JlYXRl
-ZDogMjAyNDEwMzAxNTQxMDQuMFoNCndoZW5DaGFuZ2VkOiAyMDI0MTAzMDE2Mjk1OC4wWg0K
-dVNOQ3JlYXRlZDogMjA1MTENCnVTTkNoYW5nZWQ6IDI0NjgzDQpuYW1lOiB3aW4xMS1zaWxv
-DQpvYmplY3RHVUlEOiBiMmVhNzlkMi04MTg3LTRhMzUtOTgzOS02YTgwNzAxNjg1N2QNCm9i
-amVjdENhdGVnb3J5OiANCkNOPW1zLURTLUF1dGhOLVBvbGljeS1TaWxvLENOPVNjaGVtYSxD
-Tj1Db25maWd1cmF0aW9uLERDPXdpbmV4DQogIGFtcGxlLERDPW5ldA0KZFNDb3JlUHJvcGFn
-YXRpb25EYXRhOiAyMDI0MTAzMDE1NDEwNC4wWg0KZFNDb3JlUHJvcGFnYXRpb25EYXRhOiAx
-NjAxMDEwMTAwMDAwMC4wWg0KbXNEUy1Bc3NpZ25lZEF1dGhOUG9saWN5U2lsb0JMOiBDTj1X
-SU5DTElFTlQxMSxPVT1maXJtYSxEQz13aW5leGFtcGxlLERDPW5ldA0KbXNEUy1Bc3NpZ25l
-ZEF1dGhOUG9saWN5U2lsb0JMOiBDTj1zdCBrYSxPVT1maXJtYSxEQz13aW5leGFtcGxlLERD
-PW5ldA0KbXNEUy1Bc3NpZ25lZEF1dGhOUG9saWN5U2lsb0JMOiBDTj1XSU4yMDIyLE9VPURv
-bWFpbiANCkNvbnRyb2xsZXJzLERDPXdpbmV4YW1wbGUNCiAgLERDPW5ldA0KbXNEUy1BdXRo
-TlBvbGljeVNpbG9NZW1iZXJzOiBDTj1XSU5DTElFTlQxMSxPVT1maXJtYSxEQz13aW5leGFt
-cGxlLERDPW5ldA0KbXNEUy1BdXRoTlBvbGljeVNpbG9NZW1iZXJzOiBDTj1zdCBrYSxPVT1m
-aXJtYSxEQz13aW5leGFtcGxlLERDPW5ldA0KbXNEUy1Vc2VyQXV0aE5Qb2xpY3k6IENOPXdp
-bjExLXBvbGljeSxDTj1BdXRoTiBQb2xpY2llcyxDTj1BdXRoTiBQb2xpY3kgDQpDb25maWcN
-CiAgdXJhdGlvbixDTj1TZXJ2aWNlcyxDTj1Db25maWd1cmF0aW9uLERDPXdpbmV4YW1wbGUs
-REM9bmV0DQptc0RTLUNvbXB1dGVyQXV0aE5Qb2xpY3k6IENOPXdpbjExLXBvbGljeSxDTj1B
-dXRoTiBQb2xpY2llcyxDTj1BdXRoTiANClBvbGljeSBDbw0KICBuZmlndXJhdGlvbixDTj1T
-ZXJ2aWNlcyxDTj1Db25maWd1cmF0aW9uLERDPXdpbmV4YW1wbGUsREM9bmV0DQptc0RTLVNl
-cnZpY2VBdXRoTlBvbGljeTogQ049d2luMTEtcG9saWN5LENOPUF1dGhOIFBvbGljaWVzLENO
-PUF1dGhOIA0KUG9saWN5IENvbg0KICBmaWd1cmF0aW9uLENOPVNlcnZpY2VzLENOPUNvbmZp
-Z3VyYXRpb24sREM9d2luZXhhbXBsZSxEQz1uZXQNCm1zRFMtQXV0aE5Qb2xpY3lTaWxvRW5m
-b3JjZWQ6IFRSVUUNCg0KIyByZWNvcmQgMw0KZG46IENOPXN0IGthLE9VPWZpcm1hLERDPXdp
-bmV4YW1wbGUsREM9bmV0DQpvYmplY3RDbGFzczogdG9wDQpvYmplY3RDbGFzczogcGVyc29u
-DQpvYmplY3RDbGFzczogb3JnYW5pemF0aW9uYWxQZXJzb24NCm9iamVjdENsYXNzOiB1c2Vy
-DQpjbjogc3Qga2ENCnNuOiBrYQ0KZ2l2ZW5OYW1lOiBzdA0KZGlzdGluZ3Vpc2hlZE5hbWU6
-IENOPXN0IGthLE9VPWZpcm1hLERDPXdpbmV4YW1wbGUsREM9bmV0DQppbnN0YW5jZVR5cGU6
-IDQNCndoZW5DcmVhdGVkOiAyMDI0MTAzMDEzNTcxMC4wWg0Kd2hlbkNoYW5nZWQ6IDIwMjQx
-MDMwMTYxMjM5LjBaDQpkaXNwbGF5TmFtZTogc3Qga2ENCnVTTkNyZWF0ZWQ6IDEyODEwDQpt
-ZW1iZXJPZjogQ049bXlncm91cCxPVT1maXJtYSxEQz13aW5leGFtcGxlLERDPW5ldA0KbWVt
-YmVyT2Y6IENOPVByb3RlY3RlZCBVc2VycyxDTj1Vc2VycyxEQz13aW5leGFtcGxlLERDPW5l
-dA0KbWVtYmVyT2Y6OiBRMDQ5Ukc5dHc2UnVaVzR0UVdSdGFXNXpMRU5PUFZWelpYSnpMRVJE
-UFhkcGJtVjRZVzF3YkdVc1JFTTlibVYwDQp1U05DaGFuZ2VkOiAyNDY0OQ0KbmFtZTogc3Qg
-a2ENCm9iamVjdEdVSUQ6IGVjMGJjMmY3LWY2NzAtNDVmNi1iNThiLWUxZjkzYzAxMjFlMg0K
-dXNlckFjY291bnRDb250cm9sOiA2NjA0OA0KYmFkUHdkQ291bnQ6IDANCmNvZGVQYWdlOiAw
-DQpjb3VudHJ5Q29kZTogMA0KYmFkUGFzc3dvcmRUaW1lOiAwDQpsYXN0TG9nb2ZmOiAwDQps
-YXN0TG9nb246IDEzMzc0Nzc5NTAxMzM3NTI0MA0KcHdkTGFzdFNldDogMTMzNzQ3NzAyMzAz
-MTY3Nzg0DQpwcmltYXJ5R3JvdXBJRDogNTEzDQpvYmplY3RTaWQ6IFMtMS01LTIxLTg3Njgy
-NDM1MS05NjgzMDMyNTctMTg1NDY1ODI0LTExMDMNCmFkbWluQ291bnQ6IDENCmFjY291bnRF
-eHBpcmVzOiA5MjIzMzcyMDM2ODU0Nzc1ODA3DQpsb2dvbkNvdW50OiA0MQ0Kc0FNQWNjb3Vu
-dE5hbWU6IHN0a2ENCnNBTUFjY291bnRUeXBlOiA4MDUzMDYzNjgNCnVzZXJQcmluY2lwYWxO
-YW1lOiBzdGthQHdpbmV4YW1wbGUubmV0DQpvYmplY3RDYXRlZ29yeTogQ049UGVyc29uLENO
-PVNjaGVtYSxDTj1Db25maWd1cmF0aW9uLERDPXdpbmV4YW1wbGUsREM9bmV0DQpkU0NvcmVQ
-cm9wYWdhdGlvbkRhdGE6IDIwMjQxMDMwMTYxMjM5LjBaDQpkU0NvcmVQcm9wYWdhdGlvbkRh
-dGE6IDIwMjQxMDMwMTM1NzEwLjBaDQpkU0NvcmVQcm9wYWdhdGlvbkRhdGE6IDE2MDEwMTAx
-MDAwMDAwLjBaDQpsYXN0TG9nb25UaW1lc3RhbXA6IDEzMzc0Nzc0MjcwMzM3MTg3Nw0KbXNE
-Uy1Bc3NpZ25lZEF1dGhOUG9saWN5U2lsbzogQ049d2luMTEtc2lsbyxDTj1BdXRoTiBTaWxv
-cyxDTj1BdXRoTiANClBvbGljeSBDb24NCiAgZmlndXJhdGlvbixDTj1TZXJ2aWNlcyxDTj1D
-b25maWd1cmF0aW9uLERDPXdpbmV4YW1wbGUsREM9bmV0DQptc0RTLUF1dGhOUG9saWN5U2ls
-b01lbWJlcnNCTDogQ049d2luMTEtc2lsbyxDTj1BdXRoTiBTaWxvcyxDTj1BdXRoTiANClBv
-bGljeSBDbw0KICBuZmlndXJhdGlvbixDTj1TZXJ2aWNlcyxDTj1Db25maWd1cmF0aW9uLERD
-PXdpbmV4YW1wbGUsREM9bmV0DQoNCiMgcmVjb3JkIDQNCmRuOiBDTj1XSU5DTElFTlQxMSxP
-VT1maXJtYSxEQz13aW5leGFtcGxlLERDPW5ldA0Kb2JqZWN0Q2xhc3M6IHRvcA0Kb2JqZWN0
-Q2xhc3M6IHBlcnNvbg0Kb2JqZWN0Q2xhc3M6IG9yZ2FuaXphdGlvbmFsUGVyc29uDQpvYmpl
-Y3RDbGFzczogdXNlcg0Kb2JqZWN0Q2xhc3M6IGNvbXB1dGVyDQpjbjogV0lOQ0xJRU5UMTEN
-CmRpc3Rpbmd1aXNoZWROYW1lOiBDTj1XSU5DTElFTlQxMSxPVT1maXJtYSxEQz13aW5leGFt
-cGxlLERDPW5ldA0KaW5zdGFuY2VUeXBlOiA0DQp3aGVuQ3JlYXRlZDogMjAyNDEwMzAxNDEx
-NTAuMFoNCndoZW5DaGFuZ2VkOiAyMDI0MTAzMDE1NDMxMC4wWg0KdVNOQ3JlYXRlZDogMTY0
-MTANCnVTTkNoYW5nZWQ6IDIwNTE5DQpuYW1lOiBXSU5DTElFTlQxMQ0Kb2JqZWN0R1VJRDog
-MzZiNmM5YTItNjI5Ny00NTJmLWFjNDMtYTZjYjQ2NjM1ZTYzDQp1c2VyQWNjb3VudENvbnRy
-b2w6IDQwOTYNCmJhZFB3ZENvdW50OiAwDQpjb2RlUGFnZTogMA0KY291bnRyeUNvZGU6IDAN
-CmJhZFBhc3N3b3JkVGltZTogMA0KbGFzdExvZ29mZjogMA0KbGFzdExvZ29uOiAxMzM3NDc3
-OTQ5Nzk0NzE2NTINCmxvY2FsUG9saWN5RmxhZ3M6IDANCnB3ZExhc3RTZXQ6IDEzMzc0Nzcx
-MTEwOTA3NzAwMA0KcHJpbWFyeUdyb3VwSUQ6IDUxNQ0Kb2JqZWN0U2lkOiBTLTEtNS0yMS04
-NzY4MjQzNTEtOTY4MzAzMjU3LTE4NTQ2NTgyNC0xMTA2DQphY2NvdW50RXhwaXJlczogOTIy
-MzM3MjAzNjg1NDc3NTgwNw0KbG9nb25Db3VudDogNTANCnNBTUFjY291bnROYW1lOiBXSU5D
-TElFTlQxMSQNCnNBTUFjY291bnRUeXBlOiA4MDUzMDYzNjkNCm9wZXJhdGluZ1N5c3RlbTog
-V2luZG93cyAxMSBQcm8NCm9wZXJhdGluZ1N5c3RlbVZlcnNpb246IDEwLjAgKDIyNjMxKQ0K
-ZE5TSG9zdE5hbWU6IHdpbmNsaWVudDExLndpbmV4YW1wbGUubmV0DQpzZXJ2aWNlUHJpbmNp
-cGFsTmFtZTogUmVzdHJpY3RlZEtyYkhvc3QvV0lOQ0xJRU5UMTENCnNlcnZpY2VQcmluY2lw
-YWxOYW1lOiBIT1NUL1dJTkNMSUVOVDExDQpzZXJ2aWNlUHJpbmNpcGFsTmFtZTogUmVzdHJp
-Y3RlZEtyYkhvc3Qvd2luY2xpZW50MTEud2luZXhhbXBsZS5uZXQNCnNlcnZpY2VQcmluY2lw
-YWxOYW1lOiBIT1NUL3dpbmNsaWVudDExLndpbmV4YW1wbGUubmV0DQpvYmplY3RDYXRlZ29y
-eTogQ049Q29tcHV0ZXIsQ049U2NoZW1hLENOPUNvbmZpZ3VyYXRpb24sREM9d2luZXhhbXBs
-ZSxEQz1uZXQNCmlzQ3JpdGljYWxTeXN0ZW1PYmplY3Q6IEZBTFNFDQpkU0NvcmVQcm9wYWdh
-dGlvbkRhdGE6IDIwMjQxMDMwMTQxMzIxLjBaDQpkU0NvcmVQcm9wYWdhdGlvbkRhdGE6IDE2
-MDEwMTAxMDAwMDAwLjBaDQpsYXN0TG9nb25UaW1lc3RhbXA6IDEzMzc0NzcxMTExMDc4Njc5
-NA0KbXNEUy1TdXBwb3J0ZWRFbmNyeXB0aW9uVHlwZXM6IDI4DQptc0RTLUFzc2lnbmVkQXV0
-aE5Qb2xpY3lTaWxvOiBDTj13aW4xMS1zaWxvLENOPUF1dGhOIFNpbG9zLENOPUF1dGhOIA0K
-UG9saWN5IENvbg0KICBmaWd1cmF0aW9uLENOPVNlcnZpY2VzLENOPUNvbmZpZ3VyYXRpb24s
-REM9d2luZXhhbXBsZSxEQz1uZXQNCm1zRFMtQXV0aE5Qb2xpY3lTaWxvTWVtYmVyc0JMOiBD
-Tj13aW4xMS1zaWxvLENOPUF1dGhOIFNpbG9zLENOPUF1dGhOIA0KUG9saWN5IENvDQogIG5m
-aWd1cmF0aW9uLENOPVNlcnZpY2VzLENOPUNvbmZpZ3VyYXRpb24sREM9d2luZXhhbXBsZSxE
-Qz1uZXQNCg0KLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tDQphbmQgdGhpcyBpcyB3b3JraW5n
-IDotKQ0KQXMgeW91IGNhbiBzZWUsIHRoZSBwb2xpY3kgaXMgdXNpbmcgVXNlckFsbG93ZWRU
-b0F1dGhlbnRpY2F0ZVRvIGFuZCB0aGUgDQphc3NpZ25tZW50IGlzIGRpZmZlcmVudCB0byB0
-aGUgb25lIHdlIGhhdmUgaW4gU2FtYmENCg0KSGVyZSB0aGUgdmFsdWUgZnJvbSBVc2VyQWxs
-b3dlZFRvQXV0aGVudGljYXRlVG86DQotLS0tLS0tLS0tLS0tLQ0Kcm9vdEBkZWJjbGllbnQ6
-fiMgbGRic2VhcmNoIC1IIGxkYXA6Ly93aW4yMDIyLndpbmV4YW1wbGUubmV0ICcofChDTj1z
-dCANCmthKShDTj13aW4xMSopKGNuPXdpbmNsaWVudDExKSknIC0tY3Jvc3MtbmNzIA0KbXNE
-Uy1Vc2VyQWxsb3dlZFRvQXV0aGVudGljYXRlVG8gIC1VIGFkbWluaXN0cmF0b3IgDQoNClBh
-c3N3b3JkIGZvciBbV0lORVhBTVBMRVxhZG1pbmlzdHJhdG9yXToNCiMgcmVjb3JkIDENCmRu
-OiBDTj13aW4xMS1wb2xpY3ksQ049QXV0aE4gUG9saWNpZXMsQ049QXV0aE4gUG9saWN5IA0K
-Q29uZmlndXJhdGlvbixDTj1TZXJ2aWNlcyxDTj1Db25maWd1cmF0aW9uLERDPXdpbmV4YW1w
-bGUsREM9bmV0DQptc0RTLVVzZXJBbGxvd2VkVG9BdXRoZW50aWNhdGVUbzo6IA0KQVFBRWdC
-UUFBQUFnQUFBQUFBQUFBQ3dBQUFBQkFRQUFBQUFBQlJJQUFBQSANCkJBUUFBQUFBQUJSSUFB
-QUFDQUhnQUFRQUFBQWtEY0FBQUFRQUFBUUVBQUFBQUFBRUFBQUFBWVhKMGVQazJBQUFBWVFC
-a0FEb0FMd0F2IA0KQUdVQWVBQjBBQzhBUVFCMUFIUUFhQUJsQUc0QWRBQnBBR01BWVFCMEFH
-a0Fid0J1QUZNQWFRQnNBRzhBRUJRQUFBQjNBR2tBYmdBeEENCiAgREVBTFFCekFHa0FiQUJ2
-QUlBQUFBQT0NCi0tLS0tLS0tLS0tLS0tDQpJIGRvbid0IGtub3cgaG93IHRvIHRyYW5zbGF0
-ZSB0aGUgQXR0cmlidXQgc28gdGhhdCBpdCBpcyByZWFkYWJsZS4gSWYgDQp5b3UgY291bGQg
-Z2l2ZSBtZSBhIGhpbnQsIGkgdHJhbnNsYXRlIGl0LCBzbyB0aGF0IHlvdSBjYW4gcmVhZCBp
-dC4gSXQgDQpzaG91bGQgYSBiYXNlNjQgc3RyaW5nIGJ1dCBJIGNhbid0IGNvbnZlcnQgaXQu
-DQoNClN0ZWZhbg0KDQoNCj4gDQo+IERvdWdsYXMNCj4gDQo+IA0KDQotLSANClN0ZWZhbiBL
-YW5pYQ0KTGFuZHdlZyAxMw0KMjU2OTMgU3QuIE1pY2hhZWxpc2Rvbm4NCg0KDQo=
---------------okg9AX4aqaxkP02Qm8NZXdlD
-Content-Type: application/pgp-keys; name="OpenPGP_0x52F6D4DD1BB68AB5.asc"
-Content-Disposition: attachment; filename="OpenPGP_0x52F6D4DD1BB68AB5.asc"
-Content-Description: OpenPGP public key
-Content-Transfer-Encoding: quoted-printable
-
------BEGIN PGP PUBLIC KEY BLOCK-----
-
-xjMEZD5zHxYJKwYBBAHaRw8BAQdAMVmXn59f0nkYv5WMsQq+KrcYCsNfaUj/WZtg
-zdF72yDNJVN0ZWZhbiBLYW5pYSA8c3RlZmFuQGthbmlhLW9ubGluZS5kZT7CiQQT
-FggAMRYhBGxP1rNZHkCiVplAgVL21N0btoq1BQJkPnNQAhsDBAsJCAcFFQgJCgsF
-FgIDAQAACgkQUvbU3Ru2irXx0QEAtwVwH3XaKI4V5K8xNBFjLCvNHZsOBiF1zXRe
-V3+ocvcA/i+HTEj2s+Xw0AdOCzTKpUetOkifYMHmRdzoRdjItaUIzjgEZD5zHxIK
-KwYBBAGXVQEFAQEHQLCpLYCfOAWfcF2Za/K3FymUQPfyIZ/eupKMlQrGRJUhAwEI
-B8J4BBgWCAAgFiEEbE/Ws1keQKJWmUCBUvbU3Ru2irUFAmQ+c1ACGwwACgkQUvbU
-3Ru2irV69QEAxwzfX/shQahBfmica2GbWv7hytmlnu/QFNP2WNDb/9MA/133+PWv
-q8PePaEGS4s2tRUd8ktDKmVYz7EnJwaCyqcH
-=3Dxppn
------END PGP PUBLIC KEY BLOCK-----
-
---------------okg9AX4aqaxkP02Qm8NZXdlD--
-
---------------4SIl59vKcmiuS0U8LSiLCPN7--
-
---------------aZ0tayuwlXEforVd70seaGnd
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-wnsEABYIACMWIQRsT9azWR5AolaZQIFS9tTdG7aKtQUCZyJlcQUDAAAAAAAKCRBS9tTdG7aKtZYD
-AQD0X5VGbiHzbMgog8vQDhxQB8KXhxmmO0WmdFe0W2oFRAEAyuoLDLPZLh4rYJOb239x5QznJCAV
-pD5Y1xC3OXL/DA0=
-=ch4W
------END PGP SIGNATURE-----
-
---------------aZ0tayuwlXEforVd70seaGnd--
+Rowland
 
