@@ -2,44 +2,69 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4CD049B6C89
-	for <lists+samba-technical@lfdr.de>; Wed, 30 Oct 2024 20:02:21 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A05269B6CBE
+	for <lists+samba-technical@lfdr.de>; Wed, 30 Oct 2024 20:10:53 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=cz9BxzuW/0DPEH5dUVNi2p5YHONWeNZEHc7Be5PNBaA=; b=WYw8GnzYrkfeDwbbyU7TW1I1Re
-	hvsqW7sTQovTA/qOoL1acHBa506uUFZwwMu+XKmKOf2ewRqD8ME3Q+Sim4HY7C3gcqsvlMD+vXack
-	Nd6CykLVxZoVgOUCuGPXX2kH09Fl7JfTrr/bQ3w4p2VcEorviDPe3SJy5bdRg+s43vhfRXuntKXB5
-	tCkT2jXt4agqSwma6PflmEVj9zLOoUCcVY0x9FjIeXdCHbRcKk9f0qE5Z6DE8UFzK5yg1NVv1p/Aq
-	oMr9jQq19RzPodUaEq6O/owLHE71NfjQv7CljPs89nGAWmHqekPM8DGHlfZVLAzZOznSVI5wWAhrG
-	3+AGS/5g==;
-Received: from ip6-localhost ([::1]:39236 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=c9lRziFFj82TG+DHMvPpF07RTKqX3L0rsgNgXh5OtOc=; b=yKEhl505YTQ7vYKxaFT850sDdc
+	3YvRGL+B/1im1qwfW192QjLiT5Ky3aVoUFY55SFU74Fm9kDbYfdPUbgCR12DVsXSOkAmbFmWLiS54
+	I9w8b0gHL+DCy/lMJCvqoiha42Y5pQ7KSvfDcnB0g89MHiO9m/PAEZueb7YbML4zb4ht8shzGDltX
+	orKKIot/rZpTaI5nB8yfk8VJwCHQNH1giRdVRCLhIYpTZbiYzjCc1QduSLUscPT5dAC0QnTFL4lgi
+	S5HJlHgPaq3SEm/l/10FVn4HoUuvQJXqhW1SD+lYv/53M2rpIl6ivDtVRgQ1Vj0Xr6OihATdHhD5S
+	/AjYbJDw==;
+Received: from ip6-localhost ([::1]:20612 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1t6DxN-005bmF-Oe; Wed, 30 Oct 2024 19:02:13 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:43582) 
+	id 1t6E5T-005brU-Ag; Wed, 30 Oct 2024 19:10:35 +0000
+Received: from mail-wm1-x32f.google.com ([2a00:1450:4864:20::32f]:52298) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1t6DxI-005bm8-Uw
- for samba-technical@lists.samba.org; Wed, 30 Oct 2024 19:02:11 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:To:From:Date:CC;
- bh=cz9BxzuW/0DPEH5dUVNi2p5YHONWeNZEHc7Be5PNBaA=; b=gekYKlOE9/IJq12KCwx+ztaOhS
- hhwEQkcuLXA1iqZcrtsJzQkB3FBO5tJQl0PKQYKsBOBDZdl+jXbWsPTjD+lp/ncfAiDu1y+YyNBTi
- d7EXTptWIW1Bdz6Wgm+ANT1su149+kCzkEi5F0Kko05z3HL+SPx7E97aV7CxMTYIHBBKofjqWU7gD
- UV4VWNHfrMCL5dN/ip9obnXABlQG6iWGE53WDF/VQ2lSN+OtpdR52bxIVdzu/pMVChnidbuXiPE59
- W5zBZ2Tk/qMZO6ksiIE6f4U5WqdEqSSvhBdXdHDidh1wAAANqMaPLyWMHH2BLTO7w+n5lAggKcG/N
- yBn/oIOWhZC5CegCC2G0v5a8PYoNbThRe2sd8mILbReTD6H4BQSVZhc/uJY+dpe0f4DBqhsn8N0zO
- s/WHIuA2QEYWovau10xzKFCk13mdKBaPHzYVLaFRdjMbmKIhjyV6VG9i0/t5pz6STm7xasUDUA9Sg
- Z1G4Rj58SF4NUruqYv1oVgcT;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1t6DxI-008Nvh-0V for samba-technical@lists.samba.org;
- Wed, 30 Oct 2024 19:02:08 +0000
-Date: Wed, 30 Oct 2024 19:02:06 +0000
-To: samba-technical@lists.samba.org
+ (Exim) id 1t6E5O-005brN-9n
+ for samba-technical@lists.samba.org; Wed, 30 Oct 2024 19:10:32 +0000
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-43162cf1eaaso1924005e9.0
+ for <samba-technical@lists.samba.org>; Wed, 30 Oct 2024 12:10:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=puzzle-itc.de; s=google; t=1730315429; x=1730920229; darn=lists.samba.org;
+ h=content-transfer-encoding:content-language:in-reply-to:organization
+ :autocrypt:from:references:to:subject:user-agent:mime-version:date
+ :message-id:from:to:cc:subject:date:message-id:reply-to;
+ bh=c9lRziFFj82TG+DHMvPpF07RTKqX3L0rsgNgXh5OtOc=;
+ b=aOUjIK0sBw9iYltvFlAZqLbQFn6BY+wRf5qssR0BJ2x5TAhLVGRACDalZ/1dITVW0T
+ 5TLo96Wv5R3HUgEYo8vZYCu7HiOQiYR6ysUmAS2YvoITxLKbEMn7p3hWLVDVoVOFfXeH
+ 9aqQBvZh3JYoSMcsINAwVGmnbzCU+2bX8G6eY=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1730315429; x=1730920229;
+ h=content-transfer-encoding:content-language:in-reply-to:organization
+ :autocrypt:from:references:to:subject:user-agent:mime-version:date
+ :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=c9lRziFFj82TG+DHMvPpF07RTKqX3L0rsgNgXh5OtOc=;
+ b=FenTHqC++bz1QYOTHlDhtfIDqblLdZUjey3csxxNMxWTWvlMCtINB/f4sdkeAnDSDl
+ JgXY9t3GIP8e3AWMzykPUkE/n2uzMofI3E3UAzFVfWKGOL/9a4Qwtv+2TaMLCP7ttP66
+ GKr/3GXVDQ7xHEs4rCwJVMY0gKXQDcx8lA/Qgc9wWHR6z+QsgYECkQ2unVDJ3BOybMbJ
+ a+Ko+ePx0TZajeR3tsYVaE3GBo0pOh7gSEOCpUTiIDepOupwdNOzjmfw3UTzUlWg7Ep7
+ LK5ujTn5yI4vuJ8TdmoJMdxz9Up9U47Tnx0I5Ap/nQvfRJdgNLcPgfDTZldy9zpmiKZn
+ npkA==
+X-Gm-Message-State: AOJu0YywPRFEk0Gjp0kbJPdob2+w04XIUUU2dMaOH7b6FlAZ1jTdfhwx
+ S30ZvnOduRgcn1PLkjR84pZStFMc5aar8xPGSxbCUN0FS/a/jBJuMUr+9sdGT9VxFGVP6F2LDu+
+ VwBcabqcRC/IdpI96UylZHTRecmRkd0nPhFd7is33cVt9BwrsNY3s7njoOmf6hEG6hURWwZ1f
+X-Google-Smtp-Source: AGHT+IF0uKtdhbEI23766LEE+FCy02L0h9vbBBz8VqrCjmPmfyoGuaJ7I2H4JGJVvrMBZGYZ5UgZjQ==
+X-Received: by 2002:a05:600c:3b87:b0:431:59b2:f0c4 with SMTP id
+ 5b1f17b1804b1-4319ac99158mr183836295e9.8.1730315428590; 
+ Wed, 30 Oct 2024 12:10:28 -0700 (PDT)
+Received: from ?IPV6:2a02:8070:8e85:24c0:c7d0:7e76:dab6:b73?
+ ([2a02:8070:8e85:24c0:c7d0:7e76:dab6:b73])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-431bd9181e7sm29700405e9.1.2024.10.30.12.10.27
+ for <samba-technical@lists.samba.org>
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 30 Oct 2024 12:10:28 -0700 (PDT)
+Message-ID: <7f79260a-7aa2-4d21-a12d-b26346c78d51@puzzle-itc.de>
+Date: Wed, 30 Oct 2024 20:10:27 +0100
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
 Subject: Re: authentication policies in Samba 4.21
-Message-ID: <20241030190206.65d2416c@devstation.samdom.example.com>
-In-Reply-To: <5b45562a-4bc5-4adb-9f75-d3c91a08d719@kania-online.de>
+To: samba-technical@lists.samba.org
 References: <df1213a5-5153-463b-bacd-5d93ff8d2f6b@kania-online.de>
  <b5f3c39b-43c8-4b43-943d-cd851128173c@kania-online.de>
  <5d10619f-c4ed-4190-a4d1-1cec480ee108@catalyst.net.nz>
@@ -57,10 +82,11 @@ References: <df1213a5-5153-463b-bacd-5d93ff8d2f6b@kania-online.de>
  <920d8e6f-2215-427c-a6f6-e515bbb6cad8@kania-online.de>
  <20241030183355.6de5092a@devstation.samdom.example.com>
  <5b45562a-4bc5-4adb-9f75-d3c91a08d719@kania-online.de>
-X-Mailer: Claws Mail 4.1.1 (GTK 3.24.38; x86_64-pc-linux-gnu)
-MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Organization: Puzzle ITC Deutschland GmbH
+In-Reply-To: <5b45562a-4bc5-4adb-9f75-d3c91a08d719@kania-online.de>
+Content-Language: en-US
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: base64
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -74,178 +100,157 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Rowland Penny via samba-technical <samba-technical@lists.samba.org>
-Reply-To: "samba@lists.samba.org" <samba@lists.samba.org>
-Cc: Rowland Penny <rpenny@samba.org>
+From: Daniel Kobras via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Daniel Kobras <kobras@puzzle-itc.de>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Wed, 30 Oct 2024 19:56:08 +0100
-Stefan Kania via samba-technical <samba-technical@lists.samba.org>
-wrote:
-
-> 
-> 
-> Am 30.10.24 um 19:33 schrieb Rowland Penny via samba-technical:
-> > On Wed, 30 Oct 2024 19:16:53 +0100
-> > Stefan Kania via samba-technical <samba-technical@lists.samba.org>
-> > wrote:
-> > 
-> >>
-> >> Am 30.10.24 um 18:15 schrieb Rowland Penny via samba-technical:
-> >>> Try adding '--show-binary' to the ldbsearch command
-> >>
-> >> No, I only get an empty string. I think the problem is, that the
-> >> binary is converted to base64 if listed with ldbsearch.
-> >>
-> >> root@debclient:~# ldbsearch -H ldap://win2022.winexample.net
-> >> 'CN=win11-policy' --cross-ncs  msDS-UserAllowedToAuthenticateTo  -U
-> >> administrator --show-binary
-> >> Password for [WINEXAMPLE\administrator]:
-> >> # record 1
-> >> dn: CN=win11-policy,CN=AuthN Policies,CN=AuthN Policy
-> >> Configuration,CN=Services,CN=Configuration,DC=winexample,DC=net
-> >> msDS-UserAllowedToAuthenticateTo:
-> >>    
-> >>
-> >>
-> >> # returned 1 records
-> >> # 1 entries
-> >> # 0 referrals
-> >>
-> >> Stefan
-> >>
-> >>
-> >>
-> > 
-> > Strange, it works for myself, example:
-> > 
-> > sudo ldbsearch -H /var/lib/samba/private/sam.ldb -b
-> > "DC=ForestDnsZones,dc=samdom,dc=example,dc=com" -s sub
-> > '(objectclass=*)'
-> > 
-> > Produces
-> > 
-> > ...............
-> > # record 19
-> > dn:
-> > DC=_kerberos._tcp.dc,DC=_msdcs.samdom.example.com,CN=MicrosoftDNS,DC=ForestDnsZones,DC=samdom,DC=example,DC=com
-> > objectClass: top objectClass: dnsNode
-> > instanceType: 4
-> > whenCreated: 20220910074319.0Z
-> > uSNCreated: 5515
-> > showInAdvancedViewOnly: TRUE
-> > name: _kerberos._tcp.dc
-> > objectGUID: 4cc3e13a-cee2-46c3-868f-459eccb43ecc
-> > objectCategory:
-> > CN=Dns-Node,CN=Schema,CN=Configuration,DC=samdom,DC=example,DC =com
-> > dc: _kerberos._tcp.dc
-> > dnsRecord::
-> > IwAhAAXwAABuAAAAAAADhAAAAAAAAAAAAAAAZABYGwQGcnBpZGMyBnNhbWRvbQdleG
-> > FtcGxlA2NvbQA= dnsRecord::
-> > IwAhAAXwAABuAAAAAAADhAAAAAAAAAAAAAAAZABYGwQGcnBpZGMxBnNhbWRvbQdleG
-> > FtcGxlA2NvbQA= dnsRecord::
-> > IwAhAAXwAABtAAAAAAADhAAAAAAAAAAAAAAAZABYGwQGdG1wZGMxBnNhbWRvbQdleG
-> > FtcGxlA2NvbQA= whenChanged: 20231019102846.0Z
-> > uSNChanged: 5618
-> > distinguishedName:
-> > DC=_kerberos._tcp.dc,DC=_msdcs.samdom.example.com,CN=Micros
-> > oftDNS,DC=ForestDnsZones,DC=samdom,DC=example,DC=com
-> > 
-> > But:
-> > 
-> > sudo ldbsearch --show-binary -H /var/lib/samba/private/sam.ldb -b
-> > "DC=ForestDnsZones,dc=samdom,dc=example,dc=com" -s sub
-> > '(objectclass=*)'
-> > 
-> > Produces
-> > 
-> > # record 19
-> > dn:
-> > DC=_kerberos._tcp.dc,DC=_msdcs.samdom.example.com,CN=MicrosoftDNS,DC=ForestDnsZones,DC=samdom,DC=example,DC=com
-> > objectClass: top objectClass: dnsNode
-> > instanceType: 4
-> > whenCreated: 20220910074319.0Z
-> > uSNCreated: 5515
-> > showInAdvancedViewOnly: TRUE
-> > name: _kerberos._tcp.dc
-> > objectGUID: 4cc3e13a-cee2-46c3-868f-459eccb43ecc
-> > objectCategory:
-> > CN=Dns-Node,CN=Schema,CN=Configuration,DC=samdom,DC=example,DC=com
-> > dc: _kerberos._tcp.dc dnsRecord:     NDR: struct
-> > dnsp_DnssrvRpcRecord wDataLength              : 0x0023 (35)
-> >          wType                    : DNS_TYPE_SRV (33)
-> >          version                  : 0x05 (5)
-> >          rank                     : DNS_RANK_ZONE (240)
-> >          flags                    : 0x0000 (0)
-> >          dwSerial                 : 0x0000006e (110)
-> >          dwTtlSeconds             : 0x00000384 (900)
-> >          dwReserved               : 0x00000000 (0)
-> >          dwTimeStamp              : 0x00000000 (0)
-> >          data                     : union dnsRecordData(case 33)
-> >          srv: struct dnsp_srv
-> >              wPriority                : 0x0000 (0)
-> >              wWeight                  : 0x0064 (100)
-> >              wPort                    : 0x0058 (88)
-> >              nameTarget               : rpidc2.samdom.example.com
-> > 
-> > dnsRecord:     NDR: struct dnsp_DnssrvRpcRecord
-> >          wDataLength              : 0x0023 (35)
-> >          wType                    : DNS_TYPE_SRV (33)
-> >          version                  : 0x05 (5)
-> >          rank                     : DNS_RANK_ZONE (240)
-> >          flags                    : 0x0000 (0)
-> >          dwSerial                 : 0x0000006e (110)
-> >          dwTtlSeconds             : 0x00000384 (900)
-> >          dwReserved               : 0x00000000 (0)
-> >          dwTimeStamp              : 0x00000000 (0)
-> >          data                     : union dnsRecordData(case 33)
-> >          srv: struct dnsp_srv
-> >              wPriority                : 0x0000 (0)
-> >              wWeight                  : 0x0064 (100)
-> >              wPort                    : 0x0058 (88)
-> >              nameTarget               : rpidc1.samdom.example.com
-> > 
-> > dnsRecord:     NDR: struct dnsp_DnssrvRpcRecord
-> >          wDataLength              : 0x0023 (35)
-> >          wType                    : DNS_TYPE_SRV (33)
-> >          version                  : 0x05 (5)
-> >          rank                     : DNS_RANK_ZONE (240)
-> >          flags                    : 0x0000 (0)
-> >          dwSerial                 : 0x0000006d (109)
-> >          dwTtlSeconds             : 0x00000384 (900)
-> >          dwReserved               : 0x00000000 (0)
-> >          dwTimeStamp              : 0x00000000 (0)
-> >          data                     : union dnsRecordData(case 33)
-> >          srv: struct dnsp_srv
-> >              wPriority                : 0x0000 (0)
-> >              wWeight                  : 0x0064 (100)
-> >              wPort                    : 0x0058 (88)
-> >              nameTarget               : tmpdc1.samdom.example.com
-> > 
-> > whenChanged: 20231019102846.0Z
-> > uSNChanged: 5618
-> > distinguishedName:
-> > DC=_kerberos._tcp.dc,DC=_msdcs.samdom.example.com,CN=MicrosoftDNS,DC=ForestDnsZones,DC=samdom,DC=example,DC=com
-> > 
-> > Not the same search, but it does expand '::' attributes.
-> 
-> Yes, that is working (in both Microsoft-AD and Samba-AD) but not for
-> the Attribtute msDS-UserAllowedToAuthenticateTo. Either searching in
-> a samba-AD or a Microsoft-AD. I tried "nettools" a tool to search the 
-> Microsoft AD Ldap and see all attributes with the value, but the 
-> attribute msDS-UserAllowedToAuthenticateTo is empty :-( only
-> ldbsearch is giving the value but not as readable SDDL-String. In a
-> samba-AD I use samba-tool to read it but I can't use samba-tool in a
-> Microsoft AD. The only way, I think, will work is adding a samba-DC
-> to my Microsoft-AD.
-> 
-
-If '--show-binary' expands some '::' attributes but not others, then I
-think you have found a bug.
-
-As for samba-tool, have you tried it against Microsoft AD ?
-
-Rowland
-
+SGkgYWxsIQ0KDQpBbSAzMC4xMC4yNCB1bSAxOTo1NiBzY2hyaWViIFN0ZWZhbiBLYW5pYSB2aWEg
+c2FtYmEtdGVjaG5pY2FsOg0KPiANCj4gDQo+IEFtIDMwLjEwLjI0IHVtIDE5OjMzIHNjaHJpZWIg
+Um93bGFuZCBQZW5ueSB2aWEgc2FtYmEtdGVjaG5pY2FsOg0KPj4gT24gV2VkLCAzMCBPY3QgMjAy
+NCAxOToxNjo1MyArMDEwMA0KPj4gU3RlZmFuIEthbmlhIHZpYSBzYW1iYS10ZWNobmljYWwgPHNh
+bWJhLXRlY2huaWNhbEBsaXN0cy5zYW1iYS5vcmc+DQo+PiB3cm90ZToNCj4+DQo+Pj4NCj4+PiBB
+bSAzMC4xMC4yNCB1bSAxODoxNSBzY2hyaWViIFJvd2xhbmQgUGVubnkgdmlhIHNhbWJhLXRlY2hu
+aWNhbDoNCj4+Pj4gVHJ5IGFkZGluZyAnLS1zaG93LWJpbmFyeScgdG8gdGhlIGxkYnNlYXJjaCBj
+b21tYW5kDQo+Pj4NCj4+PiBObywgSSBvbmx5IGdldCBhbiBlbXB0eSBzdHJpbmcuIEkgdGhpbmsg
+dGhlIHByb2JsZW0gaXMsIHRoYXQgdGhlDQo+Pj4gYmluYXJ5IGlzIGNvbnZlcnRlZCB0byBiYXNl
+NjQgaWYgbGlzdGVkIHdpdGggbGRic2VhcmNoLg0KPj4+DQo+Pj4gcm9vdEBkZWJjbGllbnQ6fiMg
+bGRic2VhcmNoIC1IIGxkYXA6Ly93aW4yMDIyLndpbmV4YW1wbGUubmV0DQo+Pj4gJ0NOPXdpbjEx
+LXBvbGljeScgLS1jcm9zcy1uY3PCoCBtc0RTLVVzZXJBbGxvd2VkVG9BdXRoZW50aWNhdGVUb8Kg
+IC1VDQo+Pj4gYWRtaW5pc3RyYXRvciAtLXNob3ctYmluYXJ5DQo+Pj4gUGFzc3dvcmQgZm9yIFtX
+SU5FWEFNUExFXGFkbWluaXN0cmF0b3JdOg0KPj4+ICMgcmVjb3JkIDENCj4+PiBkbjogQ049d2lu
+MTEtcG9saWN5LENOPUF1dGhOIFBvbGljaWVzLENOPUF1dGhOIFBvbGljeQ0KPj4+IENvbmZpZ3Vy
+YXRpb24sQ049U2VydmljZXMsQ049Q29uZmlndXJhdGlvbixEQz13aW5leGFtcGxlLERDPW5ldA0K
+Pj4+IG1zRFMtVXNlckFsbG93ZWRUb0F1dGhlbnRpY2F0ZVRvOg0KPj4+DQo+Pj4NCj4+PiAjIHJl
+dHVybmVkIDEgcmVjb3Jkcw0KPj4+ICMgMSBlbnRyaWVzDQo+Pj4gIyAwIHJlZmVycmFscw0KPj4+
+DQo+Pj4gU3RlZmFuDQo+Pj4NCj4+Pg0KPj4+DQo+Pg0KPj4gU3RyYW5nZSwgaXQgd29ya3MgZm9y
+IG15c2VsZiwgZXhhbXBsZToNCj4+DQo+PiBzdWRvIGxkYnNlYXJjaCAtSCAvdmFyL2xpYi9zYW1i
+YS9wcml2YXRlL3NhbS5sZGIgLWINCj4+ICJEQz1Gb3Jlc3REbnNab25lcyxkYz1zYW1kb20sZGM9
+ZXhhbXBsZSxkYz1jb20iIC1zIHN1YiAnKG9iamVjdGNsYXNzPSopJw0KPj4NCj4+IFByb2R1Y2Vz
+DQo+Pg0KPj4gLi4uLi4uLi4uLi4uLi4uDQo+PiAjIHJlY29yZCAxOQ0KPj4gZG46IA0KPj4gREM9
+X2tlcmJlcm9zLl90Y3AuZGMsREM9X21zZGNzLnNhbWRvbS5leGFtcGxlLmNvbSxDTj1NaWNyb3Nv
+ZnRETlMsREM9Rm9yZXN0RG5zWm9uZXMsREM9c2FtZG9tLERDPWV4YW1wbGUsREM9Y29tDQo+PiBv
+YmplY3RDbGFzczogdG9wDQo+PiBvYmplY3RDbGFzczogZG5zTm9kZQ0KPj4gaW5zdGFuY2VUeXBl
+OiA0DQo+PiB3aGVuQ3JlYXRlZDogMjAyMjA5MTAwNzQzMTkuMFoNCj4+IHVTTkNyZWF0ZWQ6IDU1
+MTUNCj4+IHNob3dJbkFkdmFuY2VkVmlld09ubHk6IFRSVUUNCj4+IG5hbWU6IF9rZXJiZXJvcy5f
+dGNwLmRjDQo+PiBvYmplY3RHVUlEOiA0Y2MzZTEzYS1jZWUyLTQ2YzMtODY4Zi00NTllY2NiNDNl
+Y2MNCj4+IG9iamVjdENhdGVnb3J5OiBDTj1EbnMtIA0KPj4gTm9kZSxDTj1TY2hlbWEsQ049Q29u
+ZmlndXJhdGlvbixEQz1zYW1kb20sREM9ZXhhbXBsZSxEQw0KPj4gwqAgPWNvbQ0KPj4gZGM6IF9r
+ZXJiZXJvcy5fdGNwLmRjDQo+PiBkbnNSZWNvcmQ6OiANCj4+IEl3QWhBQVh3QUFCdUFBQUFBQUFE
+aEFBQUFBQUFBQUFBQUFBQVpBQllHd1FHY25CcFpHTXlCbk5oYldSdmJRZGxlRw0KPj4gwqAgRnRj
+R3hsQTJOdmJRQT0NCj4+IGRuc1JlY29yZDo6IA0KPj4gSXdBaEFBWHdBQUJ1QUFBQUFBQURoQUFB
+QUFBQUFBQUFBQUFBWkFCWUd3UUdjbkJwWkdNeEJuTmhiV1J2YlFkbGVHDQo+PiDCoCBGdGNHeGxB
+Mk52YlFBPQ0KPj4gZG5zUmVjb3JkOjogDQo+PiBJd0FoQUFYd0FBQnRBQUFBQUFBRGhBQUFBQUFB
+QUFBQUFBQUFaQUJZR3dRR2RHMXdaR014Qm5OaGJXUnZiUWRsZUcNCj4+IMKgIEZ0Y0d4bEEyTnZi
+UUE9DQo+PiB3aGVuQ2hhbmdlZDogMjAyMzEwMTkxMDI4NDYuMFoNCj4+IHVTTkNoYW5nZWQ6IDU2
+MTgNCj4+IGRpc3Rpbmd1aXNoZWROYW1lOiANCj4+IERDPV9rZXJiZXJvcy5fdGNwLmRjLERDPV9t
+c2Rjcy5zYW1kb20uZXhhbXBsZS5jb20sQ049TWljcm9zDQo+PiDCoCBvZnRETlMsREM9Rm9yZXN0
+RG5zWm9uZXMsREM9c2FtZG9tLERDPWV4YW1wbGUsREM9Y29tDQo+Pg0KPj4gQnV0Og0KPj4NCj4+
+IHN1ZG8gbGRic2VhcmNoIC0tc2hvdy1iaW5hcnkgLUggL3Zhci9saWIvc2FtYmEvcHJpdmF0ZS9z
+YW0ubGRiIC1iDQo+PiAiREM9Rm9yZXN0RG5zWm9uZXMsZGM9c2FtZG9tLGRjPWV4YW1wbGUsZGM9
+Y29tIiAtcyBzdWIgJyhvYmplY3RjbGFzcz0qKScNCj4+DQo+PiBQcm9kdWNlcw0KPj4NCj4+ICMg
+cmVjb3JkIDE5DQo+PiBkbjogDQo+PiBEQz1fa2VyYmVyb3MuX3RjcC5kYyxEQz1fbXNkY3Muc2Ft
+ZG9tLmV4YW1wbGUuY29tLENOPU1pY3Jvc29mdEROUyxEQz1Gb3Jlc3REbnNab25lcyxEQz1zYW1k
+b20sREM9ZXhhbXBsZSxEQz1jb20NCj4+IG9iamVjdENsYXNzOiB0b3ANCj4+IG9iamVjdENsYXNz
+OiBkbnNOb2RlDQo+PiBpbnN0YW5jZVR5cGU6IDQNCj4+IHdoZW5DcmVhdGVkOiAyMDIyMDkxMDA3
+NDMxOS4wWg0KPj4gdVNOQ3JlYXRlZDogNTUxNQ0KPj4gc2hvd0luQWR2YW5jZWRWaWV3T25seTog
+VFJVRQ0KPj4gbmFtZTogX2tlcmJlcm9zLl90Y3AuZGMNCj4+IG9iamVjdEdVSUQ6IDRjYzNlMTNh
+LWNlZTItNDZjMy04NjhmLTQ1OWVjY2I0M2VjYw0KPj4gb2JqZWN0Q2F0ZWdvcnk6IENOPURucy0g
+DQo+PiBOb2RlLENOPVNjaGVtYSxDTj1Db25maWd1cmF0aW9uLERDPXNhbWRvbSxEQz1leGFtcGxl
+LERDPWNvbQ0KPj4gZGM6IF9rZXJiZXJvcy5fdGNwLmRjDQo+PiBkbnNSZWNvcmQ6wqDCoMKgwqAg
+TkRSOiBzdHJ1Y3QgZG5zcF9EbnNzcnZScGNSZWNvcmQNCj4+IMKgwqDCoMKgwqDCoMKgwqAgd0Rh
+dGFMZW5ndGjCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCA6IDB4MDAyMyAoMzUpDQo+PiDCoMKg
+wqDCoMKgwqDCoMKgIHdUeXBlwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAg
+OiBETlNfVFlQRV9TUlYgKDMzKQ0KPj4gwqDCoMKgwqDCoMKgwqDCoCB2ZXJzaW9uwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCA6IDB4MDUgKDUpDQo+PiDCoMKgwqDCoMKgwqDCoMKg
+IHJhbmvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIDogRE5TX1JBTktf
+Wk9ORSAoMjQwKQ0KPj4gwqDCoMKgwqDCoMKgwqDCoCBmbGFnc8KgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgIDogMHgwMDAwICgwKQ0KPj4gwqDCoMKgwqDCoMKgwqDCoCBkd1Nl
+cmlhbMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIDogMHgwMDAwMDA2ZSAoMTEwKQ0K
+Pj4gwqDCoMKgwqDCoMKgwqDCoCBkd1R0bFNlY29uZHPCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAg
+OiAweDAwMDAwMzg0ICg5MDApDQo+PiDCoMKgwqDCoMKgwqDCoMKgIGR3UmVzZXJ2ZWTCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgIDogMHgwMDAwMDAwMCAoMCkNCj4+IMKgwqDCoMKgwqDCoMKg
+wqAgZHdUaW1lU3RhbXDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCA6IDB4MDAwMDAwMDAgKDAp
+DQo+PiDCoMKgwqDCoMKgwqDCoMKgIGRhdGHCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgIDogdW5pb24gZG5zUmVjb3JkRGF0YShjYXNlIDMzKQ0KPj4gwqDCoMKgwqDCoMKg
+wqDCoCBzcnY6IHN0cnVjdCBkbnNwX3Nydg0KPj4gwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHdQ
+cmlvcml0ecKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCA6IDB4MDAwMCAoMCkNCj4+IMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB3V2VpZ2h0wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoCA6IDB4MDA2NCAoMTAwKQ0KPj4gwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHdQb3J0
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgOiAweDAwNTggKDg4KQ0KPj4g
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIG5hbWVUYXJnZXTCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgIDogcnBpZGMyLnNhbWRvbS5leGFtcGxlLmNvbQ0KPj4NCj4+IGRuc1JlY29yZDrCoMKg
+wqDCoCBORFI6IHN0cnVjdCBkbnNwX0Ruc3NydlJwY1JlY29yZA0KPj4gwqDCoMKgwqDCoMKgwqDC
+oCB3RGF0YUxlbmd0aMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIDogMHgwMDIzICgzNSkNCj4+
+IMKgwqDCoMKgwqDCoMKgwqAgd1R5cGXCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoCA6IEROU19UWVBFX1NSViAoMzMpDQo+PiDCoMKgwqDCoMKgwqDCoMKgIHZlcnNpb27CoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIDogMHgwNSAoNSkNCj4+IMKgwqDCoMKgwqDC
+oMKgwqAgcmFua8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgOiBETlNf
+UkFOS19aT05FICgyNDApDQo+PiDCoMKgwqDCoMKgwqDCoMKgIGZsYWdzwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgOiAweDAwMDAgKDApDQo+PiDCoMKgwqDCoMKgwqDCoMKg
+IGR3U2VyaWFswqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgOiAweDAwMDAwMDZlICgx
+MTApDQo+PiDCoMKgwqDCoMKgwqDCoMKgIGR3VHRsU2Vjb25kc8KgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoCA6IDB4MDAwMDAzODQgKDkwMCkNCj4+IMKgwqDCoMKgwqDCoMKgwqAgZHdSZXNlcnZlZMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgOiAweDAwMDAwMDAwICgwKQ0KPj4gwqDCoMKgwqDC
+oMKgwqDCoCBkd1RpbWVTdGFtcMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIDogMHgwMDAwMDAw
+MCAoMCkNCj4+IMKgwqDCoMKgwqDCoMKgwqAgZGF0YcKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqAgOiB1bmlvbiBkbnNSZWNvcmREYXRhKGNhc2UgMzMpDQo+PiDCoMKgwqDC
+oMKgwqDCoMKgIHNydjogc3RydWN0IGRuc3Bfc3J2DQo+PiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqAgd1ByaW9yaXR5wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIDogMHgwMDAwICgwKQ0K
+Pj4gwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHdXZWlnaHTCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgIDogMHgwMDY0ICgxMDApDQo+PiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAg
+d1BvcnTCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCA6IDB4MDA1OCAoODgp
+DQo+PiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgbmFtZVRhcmdldMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqAgOiBycGlkYzEuc2FtZG9tLmV4YW1wbGUuY29tDQo+Pg0KPj4gZG5zUmVjb3Jk
+OsKgwqDCoMKgIE5EUjogc3RydWN0IGRuc3BfRG5zc3J2UnBjUmVjb3JkDQo+PiDCoMKgwqDCoMKg
+wqDCoMKgIHdEYXRhTGVuZ3RowqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgOiAweDAwMjMgKDM1
+KQ0KPj4gwqDCoMKgwqDCoMKgwqDCoCB3VHlwZcKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgIDogRE5TX1RZUEVfU1JWICgzMykNCj4+IMKgwqDCoMKgwqDCoMKgwqAgdmVyc2lv
+bsKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgOiAweDA1ICg1KQ0KPj4gwqDCoMKg
+wqDCoMKgwqDCoCByYW5rwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCA6
+IEROU19SQU5LX1pPTkUgKDI0MCkNCj4+IMKgwqDCoMKgwqDCoMKgwqAgZmxhZ3PCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCA6IDB4MDAwMCAoMCkNCj4+IMKgwqDCoMKgwqDC
+oMKgwqAgZHdTZXJpYWzCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCA6IDB4MDAwMDAw
+NmQgKDEwOSkNCj4+IMKgwqDCoMKgwqDCoMKgwqAgZHdUdGxTZWNvbmRzwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgIDogMHgwMDAwMDM4NCAoOTAwKQ0KPj4gwqDCoMKgwqDCoMKgwqDCoCBkd1Jlc2Vy
+dmVkwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCA6IDB4MDAwMDAwMDAgKDApDQo+PiDCoMKg
+wqDCoMKgwqDCoMKgIGR3VGltZVN0YW1wwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgOiAweDAw
+MDAwMDAwICgwKQ0KPj4gwqDCoMKgwqDCoMKgwqDCoCBkYXRhwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoCA6IHVuaW9uIGRuc1JlY29yZERhdGEoY2FzZSAzMykNCj4+IMKg
+wqDCoMKgwqDCoMKgwqAgc3J2OiBzdHJ1Y3QgZG5zcF9zcnYNCj4+IMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoCB3UHJpb3JpdHnCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgOiAweDAwMDAg
+KDApDQo+PiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgd1dlaWdodMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqAgOiAweDAwNjQgKDEwMCkNCj4+IMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoCB3UG9ydMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIDogMHgwMDU4
+ICg4OCkNCj4+IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBuYW1lVGFyZ2V0wqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoCA6IHRtcGRjMS5zYW1kb20uZXhhbXBsZS5jb20NCj4+DQo+PiB3aGVu
+Q2hhbmdlZDogMjAyMzEwMTkxMDI4NDYuMFoNCj4+IHVTTkNoYW5nZWQ6IDU2MTgNCj4+IGRpc3Rp
+bmd1aXNoZWROYW1lOiANCj4+IERDPV9rZXJiZXJvcy5fdGNwLmRjLERDPV9tc2Rjcy5zYW1kb20u
+ZXhhbXBsZS5jb20sQ049TWljcm9zb2Z0RE5TLERDPUZvcmVzdERuc1pvbmVzLERDPXNhbWRvbSxE
+Qz1leGFtcGxlLERDPWNvbQ0KPj4NCj4+IE5vdCB0aGUgc2FtZSBzZWFyY2gsIGJ1dCBpdCBkb2Vz
+IGV4cGFuZCAnOjonIGF0dHJpYnV0ZXMuDQo+IA0KPiBZZXMsIHRoYXQgaXMgd29ya2luZyAoaW4g
+Ym90aCBNaWNyb3NvZnQtQUQgYW5kIFNhbWJhLUFEKSBidXQgbm90IGZvciB0aGUgDQo+IEF0dHJp
+YnR1dGUgbXNEUy1Vc2VyQWxsb3dlZFRvQXV0aGVudGljYXRlVG8uIEVpdGhlciBzZWFyY2hpbmcg
+aW4gYSANCj4gc2FtYmEtQUQgb3IgYSBNaWNyb3NvZnQtQUQuIEkgdHJpZWQgIm5ldHRvb2xzIiBh
+IHRvb2wgdG8gc2VhcmNoIHRoZSANCj4gTWljcm9zb2Z0IEFEIExkYXAgYW5kIHNlZSBhbGwgYXR0
+cmlidXRlcyB3aXRoIHRoZSB2YWx1ZSwgYnV0IHRoZSANCj4gYXR0cmlidXRlIG1zRFMtVXNlckFs
+bG93ZWRUb0F1dGhlbnRpY2F0ZVRvIGlzIGVtcHR5IDotKCBvbmx5IGxkYnNlYXJjaCANCj4gaXMg
+Z2l2aW5nIHRoZSB2YWx1ZSBidXQgbm90IGFzIHJlYWRhYmxlIFNEREwtU3RyaW5nLiBJbiBhIHNh
+bWJhLUFEIEkgdXNlIA0KPiBzYW1iYS10b29sIHRvIHJlYWQgaXQgYnV0IEkgY2FuJ3QgdXNlIHNh
+bWJhLXRvb2wgaW4gYSBNaWNyb3NvZnQgQUQuIFRoZSANCj4gb25seSB3YXksIEkgdGhpbmssIHdp
+bGwgd29yayBpcyBhZGRpbmcgYSBzYW1iYS1EQyB0byBteSBNaWNyb3NvZnQtQUQuDQoNClRoaXMg
+d29ya3MgZm9yIGRuc1JlY29yZCBiZWNhdXNlIGxkYnNlYXJjaCBrbm93cyBhYm91dCB0aGUgc3lu
+dGF4IGZvciANCnRoaXMgYXR0cmlidXRlLCBzZWUgc2FtYmFfYXR0cmlidXRlc1tdIGluIGxpYi9s
+ZGItc2FtYmEvbGRpZl9oYW5kbGVycy5jLiANCkZvciBtc0RTLVVzZXJBbGxvd2VkVG9BdXRoZW50
+aWNhdGVUbyB0byBzaG93IHVwIGFzIFNEREwsIGl0IG5lZWRzIGEgDQpzaW1pbGFyIGVudHJ5LCBi
+aW5kaW5nIGl0IHRvICh1bnRlc3RlZCkgDQpMREJfU1lOVEFYX1NBTUJBX1NFQ1VSSVRZX0RFU0NS
+SVBUT1IuIFNhbWUgZm9yIGl0cyBjb21wYW5pb25zIA0KbXNEUy1Db21wdXRlckFsbG93ZWRUb0F1
+dGhlbnRpY2F0ZVRvLCANCm1zRFMtU2VydmljZUFsbG93ZWRUb0F1dGhlbnRpY2F0ZVRvLCBhbmQg
+YWxzbyANCm1zRFMtQWxsb3dlZFRvQWN0T25CZWhhbGZPZk90aGVySWRlbnRpdHkuDQoNCktpbmQg
+cmVnYXJkcywNCg0KRGFuaWVsDQotLSANCkRhbmllbCBLb2JyYXMNClByaW5jaXBhbCBBcmNoaXRl
+Y3QNClB1enpsZSBJVEMgRGV1dHNjaGxhbmQNCis0OSA3MDcxIDE0MzE2IDANCnd3dy5wdXp6bGUt
+aXRjLmRlDQoKLS0gClB1enpsZSBJVEMgRGV1dHNjaGxhbmQgR21iSApTaXR6IGRlciBHZXNlbGxz
+Y2hhZnQ6IEVpc2VuYmFobnN0cmHDn2UgMSwgNzIwNzIgClTDvGJpbmdlbgoKRWluZ2V0cmFnZW4g
+YW0gQW10c2dlcmljaHQgU3R1dHRnYXJ0IEhSQiA3NjU4MDIKR2VzY2jDpGZ0c2bDvGhyZXI6IApM
+dWthcyBLYWxsaWVzLCBEYW5pZWwgS29icmFzLCBNYXJrIFByw7ZobAoK
 
