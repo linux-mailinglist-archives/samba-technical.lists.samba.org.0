@@ -2,63 +2,67 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id A2DCE9C1DCC
-	for <lists+samba-technical@lfdr.de>; Fri,  8 Nov 2024 14:24:42 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7D0AA9C1DE4
+	for <lists+samba-technical@lfdr.de>; Fri,  8 Nov 2024 14:26:45 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=6JnQulGVHQVUM9oNoiqG+sX6UU1uZQZakEjePNwhAfM=; b=dhobuCTexPRNFQHq3dMo+9O+Nl
-	uD/s7Pg0YUKG7SRtzeb/TixY3IepONrtvbvpStLtm81LQwPYX10QgExTehWH5Ou+JMoCWEwI2zrdz
-	LXPxlhppYg7B7vU3VSEztpx3KjCgVYjh+BznVsWWNPapaty67FYNSXDJiOeerDqQNNCmzgSGl/+EG
-	Q0DRXyzzWg5TVHpasZVaU4g/e8OrGTGF5bnPkVHrLNbhfv+/jrvFvqo8IfMZq3w/Tf/tjwPEY2ba2
-	lKkXOnZrE0DlScTiRmfDkeoWQZ7xp/wqJsg2yh0Tp1nHhtUC62/DD0xaKJDuCIjaZ6sB0Z4wc+m/A
-	RouJqUTQ==;
-Received: from ip6-localhost ([::1]:37268 helo=hr1.samba.org) 
+	bh=SKANQO/cR7G5TkeUCl2Xbeh7lhpcW2B54x1QdIzty7s=; b=Sigt45AJE0Xd1yUNfUXPvGNPnq
+	DLrJn2y2tN9quR75pJdDV4cWTx7qAR43x3aDnreCqpklMD/EHkxlaPWk1etKxeyiP71LomtZlLJKl
+	iXr11uISO+qzHqCgA+EwKLiWeu5g5Yqu9Yb2qBQWSJuLjUv4zmBOQI3UYP4H6TP4zyfZzb6v9c2r2
+	Xve5/ZZsy8XBmetXzyEJuUFmweyiKo3ItBY9P825c3VG02BMBMx1v7Zd0JXPAJu7QRN3p9lY7a9UN
+	vbmi4efPIzD9TVO+UGbn9lham4NZVcAeY/aC/e7rjbxC55vBMoSs0AYwnMFX0/sd46kl0igNfbrfm
+	0qYhqx9w==;
+Received: from ip6-localhost ([::1]:24960 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1t9Oy2-0087oJ-Ho; Fri, 08 Nov 2024 13:24:02 +0000
-Received: from mail-ej1-x62b.google.com ([2a00:1450:4864:20::62b]:59676) 
+	id 1t9P0b-0087tU-Hk; Fri, 08 Nov 2024 13:26:41 +0000
+Received: from mail-ej1-x631.google.com ([2a00:1450:4864:20::631]:56778) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1t9Oxy-0087oC-VS
- for samba-technical@lists.samba.org; Fri, 08 Nov 2024 13:24:01 +0000
-Received: by mail-ej1-x62b.google.com with SMTP id
- a640c23a62f3a-a9a68480164so302105866b.3
- for <samba-technical@lists.samba.org>; Fri, 08 Nov 2024 05:23:58 -0800 (PST)
+ (Exim) id 1t9P0X-0087tN-7l
+ for samba-technical@lists.samba.org; Fri, 08 Nov 2024 13:26:39 +0000
+Received: by mail-ej1-x631.google.com with SMTP id
+ a640c23a62f3a-a9a0ec0a94fso335659466b.1
+ for <samba-technical@lists.samba.org>; Fri, 08 Nov 2024 05:26:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1731072236; x=1731677036; darn=lists.samba.org;
- h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=k/eoRTwZVu+zux/H8BcMiK5z2DRQFSb799JXqIxcG7A=;
- b=BgrwTovEQgZD7lHPq/JKTj6NfCn58bMpICoyJReq4CjzABcN7qghBBvbf+llbSRd7o
- HWXaNVJBJoyTxhqhAHjvFWnPIhP8aZg18GpVXrx6CvIhAH9uR/hUkOOzTShV6TmtNy6r
- 12AP47GGu8mJnx9MkoUTFEZDq3l56oYOM9kNzVDbTFFV6jL9QhS+sI+r0hkyPPhmt76s
- wxkoAJgfeVJagUPVL6zJMZEu5CFJsEbrF2tm5uUtxSAgxKYviFhp5t+2vD+dolfsYMsa
- zRO/+ByzoHGNTaWYWthvdiA9FunbzhArjz/JG+5TQW+dbIQiAVjivLjQatRssDtrnLTN
- fJeQ==
+ d=gmail.com; s=20230601; t=1731072395; x=1731677195; darn=lists.samba.org;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=vRiGO06R/xy69WgIYYmFdvafNKH1wnc42Tyi+/ZjFMs=;
+ b=NkhqpGpjo9x2iyoWzGfqq+80eoufhKo+sEl4kSti0L8ZnHc199sN5W1Gx5D5rO2NEo
+ /3ZWESTXc/Fxox/Z88NY24osMZfZJEp6GpQ5wb2wKic7pCWkaTnt3Pb9GsI+P5BByME6
+ /DPGAT00zG3qExSo4Jcgu03LKL02fmCWtzblvBHBxyGcRDQkAF8T4c9w/UZg3ee1ZJ1k
+ VVh4BaO8FJnQeumZBfvIzZIKzBWp8TmwfRDK4W6rtoigiKJjxy+qUqnfGG0x8gP93QyR
+ 06ADGA3N6M5TGTRDMvQ7jjKK9fY3n1odwBVQ7K6FHHTUCS46EyCIB7yK9/sFIUZAhBUe
+ 6/Ng==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731072236; x=1731677036;
- h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=k/eoRTwZVu+zux/H8BcMiK5z2DRQFSb799JXqIxcG7A=;
- b=D4o8ZLs+d3PtyLWMgKYhyfI3k4tOCelhZUaMWpxKyZxLXImZyTFsOGRU6Uypg4ztUP
- pl/FTYkGi6DxjN8xhWvwj7IjBGCSYmJ9ao2NpgXPMaFsuitcZjozWNOlWoSXSyxl/t0w
- Ow+N1pCilOUCTTZpeRIByUVDu4t0pEBhxg/440BgEv05FhFDOFtIRhuQNowtDSjUHmPb
- rpuLrjnJ0BM3RECsgw05utYmMl8oOnNpjlMSnAxVWn/p7mGWN6jJuppAUqGVkuYmCTpa
- I8lUS3mcP8Aj9CcXLiKJAhleda+PoxtCesvol7zjZzG2JvNqHR2rm5Xl9ptjMODTr665
- VlJA==
-X-Gm-Message-State: AOJu0Yw7g92bzhcyhQquUIMySL6/JtVlBV7VPc90Hsq4vkBbibpdjfRC
- x5JhTusJ1/pm0Z3bf1TNSdCn57YWS/CWQEePFRbdclwEiZ8ptjswo8VvyDYhPgU2JN8ceuVfrh4
- 1mzUeuQ0+NDulXR1vFN6uPP3ECCIOU2p0
-X-Google-Smtp-Source: AGHT+IHoPYsRYP8Kh0vEl6INCoqD7ycEr/apPVidU3Jm1ZA1hXNIRcMm30TLmxoNYrOARD+LVvuhoYuj03b7g+bZp0U=
-X-Received: by 2002:a17:906:da85:b0:a99:f56e:ce40 with SMTP id
- a640c23a62f3a-a9ef0021723mr247403266b.47.1731072236219; Fri, 08 Nov 2024
- 05:23:56 -0800 (PST)
+ d=1e100.net; s=20230601; t=1731072395; x=1731677195;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=vRiGO06R/xy69WgIYYmFdvafNKH1wnc42Tyi+/ZjFMs=;
+ b=YTqAnvU/GeKB3cuczjZ5USRZb5D2cchiRykebfreQfRp770uOkNWbGbUIno8TOh37g
+ RaJmPz+z5xMkE7zPc8PWwiY+dQZ1OWp11ZLiFZtQULfnY1NLmD2ZgXFxQgTyV+Hqxu1G
+ m8+EPmtBXi+k/Dfttg9cXChBG5u0DAMPF5uDxNmcQ7cM7CsPwJviqHfKZ/XlH7uqIUag
+ U2b09p/4tTrHDlCWW8M3YWp7QqsqXxiaNGCel++GqHH/WjxHAr+ahzk2XMH0kOqmndCI
+ T1oZnBKKquSnylAfcpSiNzpdA7BDfl9AICrLnjcuIuFCmyCuCysq5qW9q8+YWTlAyMTF
+ mnLw==
+X-Gm-Message-State: AOJu0YzhGv1V6fvkbxp96y5uVXhUE25INz+Sj1OjLWLAiHH8tMVuIMnt
+ sD/x4cC0Z+ulUnq+ZzG0twHFJ7MyHBwl/QHKF+ZmvjKfc3zEp8et6MMtRu9Zjst+ka8dBODfWk1
+ 9oB8So5NAeP+SzPLgcSvdxLY1LWrsmw==
+X-Google-Smtp-Source: AGHT+IFtM1FxfFR+P+oKkPTXOGLj2fCozSHEplEXkCDvYEsyS7dwGsThgoXHQX5Tn7fpObKz2Milpb/sWBaQOfIkCDs=
+X-Received: by 2002:a17:907:844:b0:a9e:c267:2040 with SMTP id
+ a640c23a62f3a-a9ef0007298mr250277266b.51.1731072393505; Fri, 08 Nov 2024
+ 05:26:33 -0800 (PST)
 MIME-Version: 1.0
-Date: Fri, 8 Nov 2024 18:53:44 +0530
-Message-ID: <CAP4uAdpmq+vUOGJfJEMWh2dpQUYqOrQj14f_qvMehoUCebT7sA@mail.gmail.com>
-Subject: Latest samba4.21 configure cannot find ldap.h, lber.h files and
+References: <CAP4uAdpmq+vUOGJfJEMWh2dpQUYqOrQj14f_qvMehoUCebT7sA@mail.gmail.com>
+In-Reply-To: <CAP4uAdpmq+vUOGJfJEMWh2dpQUYqOrQj14f_qvMehoUCebT7sA@mail.gmail.com>
+Date: Fri, 8 Nov 2024 18:56:22 +0530
+Message-ID: <CAP4uAdr-QPDNKCfm1hxBtOciuosdVCV-GL4WZpPvd4UjCguo6A@mail.gmail.com>
+Subject: Re: Latest samba4.21 configure cannot find ldap.h, lber.h files and
  libraries on freebsd
 To: samba-technical <samba-technical@lists.samba.org>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
@@ -78,25 +82,37 @@ Reply-To: sandeep nag <sandeepnagamalli@gmail.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi All,
+Though I installed the openldap server and client and see that  ldap.h,
+lber.h are present  in /usr/local/includes on my machine.
 
-Seeing following error on freebsd with samba 4.21  ./configure
+On Fri, Nov 8, 2024 at 6:53=E2=80=AFPM sandeep nag <sandeepnagamalli@gmail.=
+com>
+wrote:
 
-> [1/1] Compiling
-^[[32mbin/.conf_check_cb0399a8760ccc5bafb05dce08fe487f/test.c^[[0m
-
-['/usr/bin/clang', '-D_SAMBA_BUILD_=4', '-DHAVE_CONFIG_H=1', '-MMD',
-'-D_GNU_SOURCE=1', '-D_XOPEN_SOURCE_EXTENDED=1', '../../test.c', '-c',
-'-o/root/src/samba
-/bin/.conf_check_cb0399a8760ccc5bafb05dce08fe487f/testbuild/default/test.c.1.o']
-err: ../../test.c:455:10: fatal error: 'ldap.h' file not found
-  455 | #include <ldap.h>
-      |          ^~~~~~~~
-1 error generated.
-
-I see the 3 patches mentioned here, are already in the code.
-https://bugzilla.samba.org/show_bug.cgi?id=15623
-
-
-Thanks,
-Sandeep
+> Hi All,
+>
+> Seeing following error on freebsd with samba 4.21  ./configure
+>
+> > [1/1] Compiling
+> ^[[32mbin/.conf_check_cb0399a8760ccc5bafb05dce08fe487f/test.c^[[0m
+>
+> ['/usr/bin/clang', '-D_SAMBA_BUILD_=3D4', '-DHAVE_CONFIG_H=3D1', '-MMD',
+> '-D_GNU_SOURCE=3D1', '-D_XOPEN_SOURCE_EXTENDED=3D1', '../../test.c', '-c'=
+,
+> '-o/root/src/samba
+>
+> /bin/.conf_check_cb0399a8760ccc5bafb05dce08fe487f/testbuild/default/test.=
+c.1.o']
+> err: ../../test.c:455:10: fatal error: 'ldap.h' file not found
+>   455 | #include <ldap.h>
+>       |          ^~~~~~~~
+> 1 error generated.
+>
+> I see the 3 patches mentioned here, are already in the code.
+> https://bugzilla.samba.org/show_bug.cgi?id=3D15623
+>
+>
+> Thanks,
+> Sandeep
+>
+>
