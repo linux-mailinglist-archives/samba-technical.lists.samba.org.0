@@ -2,69 +2,59 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2C7539C1EEB
-	for <lists+samba-technical@lfdr.de>; Fri,  8 Nov 2024 15:12:37 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2A7EB9C2E30
+	for <lists+samba-technical@lfdr.de>; Sat,  9 Nov 2024 16:27:29 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=o4n6YagE2bxbqlCK9QcH4lbce3E1YHZ1WGjfhNF4Yo4=; b=5Bimf44IO2WJaYfVOTcsXlwW1R
-	xIRKYj8EEu8kLW/wfTRw2hMdCwu+N18J+Cj6FOVjKg1dYCI/nKsyTEQRc6mG7zzEsAsx+aRnLkOut
-	yHgUZ7vz90lux+TK3jLHA1dZPBerU2mEYU4MPT5ZZfrhsSYni3/34vN0ND2Lqu6Qcz/VrFf9/ZFR7
-	+52X9OQV0d8kzBhHGHlAZ0l+45HGUTr0fgcTAj3siAUtrj2gf0f/Fl+wxlsviXLNhlGjv13W+p+eT
-	fWJj86+LPJtEHq5hhtARstvmBGS4JP+5pOHeRxSDpVGwRG2JmY+SDxfXyAI+94wS8/wkJO7PO1V8U
-	AUTIjzEQ==;
-Received: from ip6-localhost ([::1]:24468 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=3ndEaZSkUEK3L30O/5Q72jkM+JUOw8ML+pDEzUQgukM=; b=OFz7plZp4ySDR5OTUR5N8/gINb
+	QcpqgqxKShb4wMMA8rMPezoUlKNqTU251qmJzxoOEmCVpOSsIhOC1OU+k5oQCqJlF1W88OvDqEjI5
+	nNsds4/upC25iUd3W+7brMpx2vmy8Wt4qi7ri+cwI/jtcy41xPsTELcyhJCUGDTMBL5DcWHlYUh89
+	mh4Yn3wkKh/yfon/G/LyCQzcU5N1joinyiOSUZe4LiAM3lk3VfN2ec94l35EXhcfcVUVSgAvnNogP
+	jVIBuPhWnb+D41/FDR0Fk7kp6m6nmEf3r5TdcJkg6xdXJjX1WVGrMChQGC7xEo1lp+B1gku1Lp1Hq
+	6p1kAQjA==;
+Received: from ip6-localhost ([::1]:28590 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1t9Pij-00882D-SZ; Fri, 08 Nov 2024 14:12:17 +0000
-Received: from mail-ej1-x636.google.com ([2a00:1450:4864:20::636]:55577) 
+	id 1t9nMM-008Bjr-0L; Sat, 09 Nov 2024 15:26:46 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:23384) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1t9Pif-008826-CY
- for samba-technical@lists.samba.org; Fri, 08 Nov 2024 14:12:15 +0000
-Received: by mail-ej1-x636.google.com with SMTP id
- a640c23a62f3a-a9eb68e0bd1so301356566b.3
- for <samba-technical@lists.samba.org>; Fri, 08 Nov 2024 06:12:12 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1731075131; x=1731679931; darn=lists.samba.org;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=LQAEl80XcjSuXsza6CSJv/jma0VbKXkN2hqIDc+wSGg=;
- b=QIbGsCMrjiz3sgmkf7q4D7m0ezhlFvB9iI3g6Mr13wksSgy6uezIRLIJKgdhvK9Lop
- W8sPeY4q1skAE6Y+O3vjDFy8CKGqHRf+3u1JQzdOxXyvI2T2fb6vRtCXodkDvWHBk4Vh
- zDd1MiS/npOlVLCd4m/OOvqKn4C1lUW0RjcWhimkboqZmkb634hjoJD50/3kvv5ScjGt
- m0QC5//cYhfWwh+3Gey8mPMQ6xu8+ejiVSv7coy0POuCk0YtzULEg7W/Nj8KhR0k2H44
- x/qUE0cv0HlPDAmYirFKLEGQRRxemOW6d9ICC8j6JSgMijpDWldkDi1Yoa31wsiJCSvh
- BGwA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731075131; x=1731679931;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=LQAEl80XcjSuXsza6CSJv/jma0VbKXkN2hqIDc+wSGg=;
- b=ItXGwBnzmvBSl7ZYleWazJvk/I51YBdT1kTMpVbc7oj9sE8cAxZujoA43ohZbEa3/g
- eT+OgWYK1ozho9rrsRK0+8xr5crkucvE2WDIK5L+3i/qn7cqR1U5jB4w3eEyk/F3YP3O
- CC4n0gGfmpaf+D1S+jtqodigOVscXHMkjBW0et1cUWsotIaZovUx5CN1RXmVK1XfOCE2
- usC33NTxmF/pJwc4Fm5u/fA14m+g9M3valwFHEN3W1JC7T0DKNTtsFskBEpWVKQercC2
- 81zSJKAnErNZEiLD3tjW/RyjXROOMiAMrqmNHg9aNgrgLn1d6WQ21AKOhTHie/EiIbwt
- 5CMA==
-X-Gm-Message-State: AOJu0YzOjJ22NlidEwhF7t9/U8pkQxTcNCsWCa5lGYT9Vn8+bNkBFOX5
- xooxDqlTb2kbA/GNjomvzsQXdammlUqX4HBYjYMeQquSsRpxR3/hcUttrJwfZGQk9J1AJqR96SL
- noZUsjg1vas/hL3DvHfDGxZsr5wlGGC28
-X-Google-Smtp-Source: AGHT+IHIgBk5luj5oqFuaQrRINWMnXAz/12PN4h3XHTEYlWm726qfKek8iD3u5isJG6fKU2TYyAP5bZhkwdDbbEXxTc=
-X-Received: by 2002:a17:907:1c10:b0:a9a:7f84:93e3 with SMTP id
- a640c23a62f3a-a9eefee9bd2mr246675166b.14.1731075131359; Fri, 08 Nov 2024
- 06:12:11 -0800 (PST)
+ (Exim) id 1t9nMH-008Bjk-7j
+ for samba-technical@lists.samba.org; Sat, 09 Nov 2024 15:26:43 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Cc:To:From:Date:Message-ID;
+ bh=3ndEaZSkUEK3L30O/5Q72jkM+JUOw8ML+pDEzUQgukM=; b=MCtJMv3hqNE7H50yROuLumEyEq
+ 2wL/MvO8XfWp0MufihAbezGrLtYv+vkerdQCJtScZqar+QTqpRu321kgfCsMQkyRAV3Ybl2+cO3Xq
+ MpkeGqdpzd30wNa45wh0Co1eOMXLlHf8CqSAksyi1sUYUmRPLKfrDUh0Y/P0mXkr9dtnJorSmaEep
+ fOT2SdONjLttkEY6HuoUhQHkuRWuXoLyozeDAQwtFt4ThXoT9q4st9SZ9fj8GHGSmkFDn/u2JRQgl
+ P5zq87kKkjrFSLE2h4kgK+H/j+5tbYNk8xA3RuKFv0+MpcGPDMDLNp9YuWF/eIBUwrJC583zB5kuM
+ 7h/Q6ju5kovqw1QHgllPGbcwRshXyELphfv8KsdX0J92eCxGsXmtyjk+Y0BFWX18n5jMSVscizsPr
+ cNV3XdtzemQdW33JJ0/Be3jydpNJtGmbtZa1We5AKCAiG7YUtCm0LRzrz1lV38Ql4Qkqe+2fxZ95o
+ rgDChmmPUrSAQy4X1ao8sdR6;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1t9nMG-009n9r-09; Sat, 09 Nov 2024 15:26:40 +0000
+Message-ID: <c146a052-40e2-4d90-9a8e-9236a0b2dc20@samba.org>
+Date: Sat, 9 Nov 2024 16:26:38 +0100
 MIME-Version: 1.0
-References: <CAP4uAdpmq+vUOGJfJEMWh2dpQUYqOrQj14f_qvMehoUCebT7sA@mail.gmail.com>
- <CAP4uAdr-QPDNKCfm1hxBtOciuosdVCV-GL4WZpPvd4UjCguo6A@mail.gmail.com>
-In-Reply-To: <CAP4uAdr-QPDNKCfm1hxBtOciuosdVCV-GL4WZpPvd4UjCguo6A@mail.gmail.com>
-Date: Fri, 8 Nov 2024 19:42:00 +0530
-Message-ID: <CAP4uAdq8fH+gtopNo29r3ZZak7CrP7Z4ZtDSXqYj1fO8H0Nq=Q@mail.gmail.com>
-Subject: Re: Latest samba4.21 configure cannot find ldap.h, lber.h files and
- libraries on freebsd
-To: samba-technical <samba-technical@lists.samba.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
+User-Agent: Mozilla Thunderbird
+Subject: Re: Current Samba master incorrectly returns STATUS_INVALID_HANDLE on
+ copy_chunk
+To: Jeremy Allison <jra@samba.org>
+References: <CAH2r5mt7cE8Cc2K5K8nRM2RL=R-rwuAR9h6SSyEqtApuochtuQ@mail.gmail.com>
+ <e12d7594-02df-4cbb-80fc-276d907afd90@samba.org>
+ <CAH2r5muqSmNy+3SViFKNJ=5Sm61u8r9ej9Wy8JLUDeC2XHwccA@mail.gmail.com>
+ <77aff6ef-291d-4840-82e2-b02646949541@samba.org>
+ <d84732db-dea1-4fbd-9fc9-105c115c9ca0@samba.org>
+ <990b4f16-2f5a-49ab-8a14-8b1f3cee94dc@samba.org>
+ <ZwVM1-C0kBfJzNfM@jeremy-HP-Z840-Workstation>
+ <569625f6-e0d2-43db-88cf-eb0fff6eb70e@samba.org>
+ <ZwbczZYBsTU03Ycv@jeremy-HP-Z840-Workstation>
+Content-Language: en-US, de-DE
+In-Reply-To: <ZwbczZYBsTU03Ycv@jeremy-HP-Z840-Workstation>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------cOEj8OXwS68UUQXua0fyKnEh"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -78,52 +68,96 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: sandeep nag via samba-technical <samba-technical@lists.samba.org>
-Reply-To: sandeep nag <sandeepnagamalli@gmail.com>
+From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Ralph Boehme <slow@samba.org>
+Cc: Steve French <smfrench@gmail.com>,
+ samba-technical <samba-technical@lists.samba.org>,
+ CIFS <linux-cifs@vger.kernel.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-I am able to resolve by adding  /usr/local/include
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------cOEj8OXwS68UUQXua0fyKnEh
+Content-Type: multipart/mixed; boundary="------------LsgPkVcuPDgTiCXaDwff07Y5";
+ protected-headers="v1"
+From: Ralph Boehme <slow@samba.org>
+To: Jeremy Allison <jra@samba.org>
+Cc: Steve French <smfrench@gmail.com>, CIFS <linux-cifs@vger.kernel.org>,
+ samba-technical <samba-technical@lists.samba.org>
+Message-ID: <c146a052-40e2-4d90-9a8e-9236a0b2dc20@samba.org>
+Subject: Re: Current Samba master incorrectly returns STATUS_INVALID_HANDLE on
+ copy_chunk
+References: <CAH2r5mt7cE8Cc2K5K8nRM2RL=R-rwuAR9h6SSyEqtApuochtuQ@mail.gmail.com>
+ <e12d7594-02df-4cbb-80fc-276d907afd90@samba.org>
+ <CAH2r5muqSmNy+3SViFKNJ=5Sm61u8r9ej9Wy8JLUDeC2XHwccA@mail.gmail.com>
+ <77aff6ef-291d-4840-82e2-b02646949541@samba.org>
+ <d84732db-dea1-4fbd-9fc9-105c115c9ca0@samba.org>
+ <990b4f16-2f5a-49ab-8a14-8b1f3cee94dc@samba.org>
+ <ZwVM1-C0kBfJzNfM@jeremy-HP-Z840-Workstation>
+ <569625f6-e0d2-43db-88cf-eb0fff6eb70e@samba.org>
+ <ZwbczZYBsTU03Ycv@jeremy-HP-Z840-Workstation>
+In-Reply-To: <ZwbczZYBsTU03Ycv@jeremy-HP-Z840-Workstation>
+Autocrypt-Gossip: addr=jra@samba.org; keydata=
+ xsDiBDxEcLsRBADMQzpWoVuu4oiq23q5AfZDbakENMP/8ZU+AnzqzGr70lIEJb2jfcudViUT
+ 97+RmXptlnDmE4/ILOf6w0udMlQ9Jpm+iqxbr35D/6qvFgrgE+PnNAPlKSlI2fyGuLhpv1QP
+ forHV13gB3B6S/ZWHpf/owKnJMwu8ozQpjnMnqOiVwCg8QnSX2AFCMd3HLQsqVaMdlO+jBEE
+ AKrMu2Pavmyc/eoNfrjgeRoNRkwHCINWO5u93o92dngWK/hN1QOOCQfAzqZ1JwS5Q+E2gGug
+ 4OVaZI1vZGsAzb06TSnS4fmrOfwHqltSDsCHhwd+pyWkIvi96Swx00e1NEwNExEBo5NrGunf
+ fONGlfRc+WhMLIk0u2e2V14R+ebDA/42T+cQZtUR6EdBReHVpmckQXXcE8cIqsu6UpZCsdEP
+ N6YjxQKgTKWQWoxE2k4lYl9KsDK1BaF6rLNz/yt2RAVb1qZVaOqpITZWwzykzH60dMaX/G1S
+ GWuN28by9ghI2LIsxcXHiDhG2CZxyfogBDDXoTPXlVMdk55IwAJny8Wj4s0eSmVyZW15IEFs
+ bGlzb24gPGpyYUBzYW1iYS5vcmc+wlcEExECABcFAjxEcLsFCwcKAwQDFQMCAxYCAQIXgAAK
+ CRCl3XhJ1sA2rDHZAKDwxfxpGuCOAuDHaN3ULDrIzKw9DQCdHb3Sq5WKfeqeaY2ZKXT3AmXl
+ Fq7OwE0EPERwvhAEAIY1K5TICtxmFOeoRMW39jtF8DNSXl/se6HBe3Wy5Cz43lMZ6NvjDATa
+ 1w3JlkmjUyIDP29ApqmMu78Tv4UUxAh1PhyTttX1/aorTlIdVYFjey/yW4mSDXUBhPvMpq52
+ TncLRmK9HC6mIxJqS0vi6W9IqGOqDRZph3GzVzJN7WvLAAMGA/sGAyg2rVsBzs77WH0jPO+A
+ QZDj+Hf/RFHOwmcyG7/XgmV6LOcQP4HfQHH3DGYihu5cZj3BeWKPDJnjOjB2qmr+FTjYEsjw
+ LDBNG7rjRye412rUbNwmEtcD2/dw4xNyu5h2u+1++KVBPf4SqG/a10gDqGJXDHA1Os5MmnQl
+ 3CTq9sJGBBgRAgAGBQI8RHC+AAoJEKXdeEnWwDasbeIAoL6+EsZKAYrZ2w22A6V67tRNGOIe
+ AJ0cV9+pk/vqEgbv8ipKU4iniZclhg==
 
-     conf.ADD_EXTRA_INCLUDES('#include/public #source4 #lib #source4/lib
-#source4/include #include #lib/replace')
-+    conf.ADD_EXTRA_INCLUDES('/usr/local/include')
+--------------LsgPkVcuPDgTiCXaDwff07Y5
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
 
-On Fri, Nov 8, 2024 at 6:56=E2=80=AFPM sandeep nag <sandeepnagamalli@gmail.=
-com>
-wrote:
+T24gMTAvOS8yNCA5OjQzIFBNLCBKZXJlbXkgQWxsaXNvbiB3cm90ZToNCj4gQ2FuIHdlIGp1
+c3QgbWFwIChhY2Nlc3NfbWFzayAoRklMRV9BUFBFTkRfREFUQXxTWU5DSFJPTklaRSkpID09
+ICANCj4gKEZJTEVfQVBQRU5EX0RBVEF8U1lOQ0hST05JWkUpKQ0KPiB0byBPX0FQUEVORCwg
+cmVnYXJkbGVzcyBvZiBQT1NJWCBtb2RlID8NCg0KdGhpbmtpbmcgYWJvdXQgdGhpcyBhIGJp
+dCBtb3JlLCB0aGlzIHNlZW1zIGRvYWJsZSwgYWxiZWl0IG9ubHkgZm9yIFBPU0lYIA0KbW9k
+ZS4gRm9yIG5vbi1QT1NJWCBtb2RlIHdlIGNvdWxkIHBvdGVudGlhbGx5IGJyZWFrIFdJbmRv
+d3MgYXBwbGljYXRpb24gDQp0aGF0IG9wZW4gb25seSB3aXRoIEZJTEVfQVBQRU5EX0RBVEE6
+IEkgY2hlY2tlZCB3aXRoIGEgdG9ydHVyZSB0ZXN0IHRoYXQgDQpXaW5kb3dzIGRvZXNuJ3Qg
+ZW5mb3JjZSBhcHBlbmQgYmVoYXZpb3VyIGZvciBGSUxFX0FQUEVORF9EQVRBfFNZTkNIUk9O
+SVpFLg0KDQpGb3IgUE9TSVggb3BlbnMgd2Ugc2hvdWxkIGFsc28gYWxsb3cgY29tYmluYXRp
+b25zIGxpa2UgDQpGSUxFX1JFQURfQVRUUklCVVRFU3xGSUxFX0FQUEVORF9EQVRBIHRvIG1h
+cCB0byBPX0FQUEVORCwgc28gY2xpZW50cyBjYW4gDQp3cml0ZSBpbiBhcHBlbmQgbW9kZSB0
+byB0aGUgaGFuZGxlIGFuZCBzdGlsbCBhcmUgYWJsZSB0byBmc3RhdCgpIGl0Lg0KDQpodHRw
+czovL2dpdGxhYi5jb20vc2FtYmEtdGVhbS9zYW1iYS8tL21lcmdlX3JlcXVlc3RzLzM4NjMN
+Cg0KVGhvdWdodHM/DQoNCi1zbG93DQo=
 
-> Though I installed the openldap server and client and see that  ldap.h,
-> lber.h are present  in /usr/local/includes on my machine.
->
-> On Fri, Nov 8, 2024 at 6:53=E2=80=AFPM sandeep nag <sandeepnagamalli@gmai=
-l.com>
-> wrote:
->
->> Hi All,
->>
->> Seeing following error on freebsd with samba 4.21  ./configure
->>
->> > [1/1] Compiling
->> ^[[32mbin/.conf_check_cb0399a8760ccc5bafb05dce08fe487f/test.c^[[0m
->>
->> ['/usr/bin/clang', '-D_SAMBA_BUILD_=3D4', '-DHAVE_CONFIG_H=3D1', '-MMD',
->> '-D_GNU_SOURCE=3D1', '-D_XOPEN_SOURCE_EXTENDED=3D1', '../../test.c', '-c=
-',
->> '-o/root/src/samba
->>
->> /bin/.conf_check_cb0399a8760ccc5bafb05dce08fe487f/testbuild/default/test=
-.c.1.o']
->> err: ../../test.c:455:10: fatal error: 'ldap.h' file not found
->>   455 | #include <ldap.h>
->>       |          ^~~~~~~~
->> 1 error generated.
->>
->> I see the 3 patches mentioned here, are already in the code.
->> https://bugzilla.samba.org/show_bug.cgi?id=3D15623
->>
->>
->> Thanks,
->> Sandeep
->>
->>
+--------------LsgPkVcuPDgTiCXaDwff07Y5--
+
+--------------cOEj8OXwS68UUQXua0fyKnEh
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+wsF5BAABCAAjFiEE+uLGCIokJSBRxVnkqh6bcSY5nkYFAmcvfy8FAwAAAAAACgkQqh6bcSY5nkZG
+ohAAgVzoWwNAYkqYR72AH7Bp2ZTlXerXK7u0Kf1LUAGWuS0xHG/JmmjaR2RJJC/1Ua4lcNwWBQxA
+0x3oIlm+4m/EP9NuveT89LZnleOzt/CufOBydgR9yTnAOraEYf9++9PY/+I2jQJKvWXJkczbKCuV
+sbBO6WM2iGFg4ywc/edHz3ysim3FMvYe4Pt+0j1jcAtex9Zw4CYgR/8GtbFMY2YXaacmxq8Wl7Ft
+AQejEAYOzohmAaMe6J68NauMJSUXjIuK/BKPn8SQtQ2p6kykN/LQBsTQjqih2q1tE/PcdCOJ8F4A
+GahCQo/2EffQ+pI2MBTI3bu0zQduzGYvuw0NM+/eAoEpkBjVjMsIcSX/PAzQGntdYcqjR6BM6fNH
+QsHOI8LJDoO+9y7kxgvXS+ZCg9HOOE+EFxavqHOzdFCT/qvMDC5dJcC9wCTRjbYidznWmqeG/pvT
++CDfVleT8EuT+/gB7n1gnXKngfmnHJL8tyizuZO4FtGr9BVBQpyaJlPq5xOn0yr5wm3oFrlBUZdn
+1UH7G7vlpgzCCzxVprx9viNvwT5n1vUkx33/YN4Y6JQsRnoBA6ZBSQT+QDP4ecsL0AFA+uYMloGa
+o7mi33TkY3NT7vGOoP+vfyCtoIVIWT7aLlNz6c44dp0f24ibPJUOz9LudCDNWedk0dmgwAUn1wtE
+h3M=
+=eYq3
+-----END PGP SIGNATURE-----
+
+--------------cOEj8OXwS68UUQXua0fyKnEh--
+
