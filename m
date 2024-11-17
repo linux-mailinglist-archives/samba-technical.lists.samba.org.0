@@ -2,67 +2,68 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id C99D39C7997
-	for <lists+samba-technical@lfdr.de>; Wed, 13 Nov 2024 18:06:43 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 70FD49D06F3
+	for <lists+samba-technical@lfdr.de>; Mon, 18 Nov 2024 00:09:14 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=zEep/OMfJyldzNvkNFDVhhiUsnQA3+XUm5BPLdUV5Uo=; b=rsBSB9X4orsR2wRHpwuTANNTEl
-	3kzdBpWSjA5/lF2kCaUMk07Rp55kop+7GAcZwGnjcSKfZ+ewxwcL22FfnTdfRjPASNwUStWyuTOWB
-	KiXJmcRmmRBcpkFwhvTRgcC7YVc4uAqFvtBVz5KFC36W14NIvrK9UHycaHnxiXNXlviEgqR0c6AnF
-	wCtW5ArBGJnUCsU+Txr33hpjg9ry4p4k1Ypx2x3ceBUsyJJMcTBI1ULZcfG6HjfrWUVf13tXAZa2f
-	n4yialIYUYFRgSsDs2d4wGVX484a3NO81BcUwdjRrxMBkANGFbfL2C5I4kiqXELwMxyEyqkzf3tLf
-	xwHMNfbw==;
-Received: from ip6-localhost ([::1]:61652 helo=hr1.samba.org) 
+	bh=MNN7ziIzHnkd18GYio7H3EiJ5Cg8s0kx1zTc8dpUr6c=; b=gZpa4Lvn0Kl1wEBceaDRLiBeG9
+	r8Z+KkFi9C30W3V9JiYKS0AQWgvgOwmZnlOEKEM1gv3HICM+DzarHjQZQo2FynAQiiWpabmcyqQMh
+	6m+fIivKfmdwMqRTRV+ZuluoyXPYh7g8r/uNL3MAabXIE83Jlpe8cY728pmO320nKRmRfXkJPk8TT
+	lAdnwtHwH4izlRVM9EKQ9CEaSTR+5m3PyVJstrqVyafvdIsY538ZCZPOSgyxUFIRBsmngM6P9eZuv
+	+14rLESxkDh4C5fX0AEo6tGFO8ESoRGHU258dQVqh+TuKfX917BfRThBF4Pb7FDTZ5nISkxGi1Isd
+	8unVw7mg==;
+Received: from ip6-localhost ([::1]:54672 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1tBGob-008VBd-SZ; Wed, 13 Nov 2024 17:06:01 +0000
-Received: from mail-lf1-x134.google.com ([2a00:1450:4864:20::134]:54608) 
+	id 1tCoNc-0008KG-Fv; Sun, 17 Nov 2024 23:08:32 +0000
+Received: from mail-lf1-x12b.google.com ([2a00:1450:4864:20::12b]:56783) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1tBGoX-008VBW-7L
- for samba-technical@lists.samba.org; Wed, 13 Nov 2024 17:05:59 +0000
-Received: by mail-lf1-x134.google.com with SMTP id
- 2adb3069b0e04-53da3545908so655178e87.1
- for <samba-technical@lists.samba.org>; Wed, 13 Nov 2024 09:05:56 -0800 (PST)
+ (Exim) id 1tCoNX-0008K9-Iw
+ for samba-technical@lists.samba.org; Sun, 17 Nov 2024 23:08:29 +0000
+Received: by mail-lf1-x12b.google.com with SMTP id
+ 2adb3069b0e04-53d9ff92b14so3678662e87.1
+ for <samba-technical@lists.samba.org>; Sun, 17 Nov 2024 15:08:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1731517556; x=1732122356; darn=lists.samba.org;
+ d=gmail.com; s=20230601; t=1731884906; x=1732489706; darn=lists.samba.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=zEep/OMfJyldzNvkNFDVhhiUsnQA3+XUm5BPLdUV5Uo=;
- b=SyWBj0iUHo4ABPcozASY0yYMQ08BulR/kUju/Qe0AYRJaKmieQgpFdb9OcDVXSerma
- EpeobLfRAi8j39dDBgaTQ4sVNxp0vYINxgcnO7vhOnySLycBmBtJMz4YtKnzR+LflZwB
- FKgtOPzGjX7TCjls0cBK+3alSkB+DfqBXZaXZTm/dRzOnd8M6g2QhJHCwR/UJ3+XKvqG
- jUlqFZBaJpi8AYahQTkSUIwj7d3LNjmNOTl1gTGFlzQAIDjPCMnjaQ5z5ijkuDni+yWk
- uQM5U0KlvdBfFSxXGA5WQMlKMgi9SveTKqzpGePfC6C0jjVqW5v0hPLSIcMwfjpOSpPs
- qh1w==
+ bh=MNN7ziIzHnkd18GYio7H3EiJ5Cg8s0kx1zTc8dpUr6c=;
+ b=Hi16y+mk+769utnx6ckbZv9zbWIiRdd1qiW4bUVQrZuJQA/3pWHsskJkngwy0b6Fh4
+ EMbRhfS/MDJ5/Ut4YVEJW7DsiYvAy8b4Naz0z+Bfs2fB72nQ9yskTLwNyXJBU/yxPrBh
+ JBjPFBDQPpTfj3jhGujG4wbukEiGfa9WKn5jYPVcDQswcGDbS/ZW3JfD0gCilpIxzFVc
+ Mos8Xoy4SmQ+538N1Z2XZn39sbGwTo8cyRzWGWb35C+iBey1hRpWSSItEryJPBs2RRex
+ oSV8d1YJhW9bqtPq3LCr6YtoKDesw5o1CeLvrDBz6zYSe9fI/QuVwne8VBQepIsVTden
+ Uwkg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731517556; x=1732122356;
+ d=1e100.net; s=20230601; t=1731884906; x=1732489706;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=zEep/OMfJyldzNvkNFDVhhiUsnQA3+XUm5BPLdUV5Uo=;
- b=DSiZ7V6duMBSPxbYnyMGoUrliy9dO3vFjnbgYr2Ob/6kixgFCUZpk3rjbFIpGM3dau
- 0y3MCFTSSdl+0ITK83krspHIeLtqZdxvOhKnxjnSqOx2D4qL4ekXTdQDuP09yrqLObup
- nmB3eUN8Pnd4TaQowrJ3gUX167+aQ/vNHCcJYkXei6adVcWehB8/xjzvywYsWwqzLBFh
- Lx4P/u+sckyeJM+Zu75KOCFujWGI4MzBVGOLqJ+qik3ZEVOTH3AvgQA4SLtrf2r0YhPC
- 85Jsqw0lehckAT2xY4y4sLY07fwEwJ/yG5jLtkUf6FyaiUZcsdEN+To5W0OKlcDYLRec
- BL1A==
+ bh=MNN7ziIzHnkd18GYio7H3EiJ5Cg8s0kx1zTc8dpUr6c=;
+ b=wVe/2/N6KUqzoXSl0uUjSETSJSdWXQspoRwsEFNdZJY6L/XDV1pNEtRdxZXoupRPUf
+ /x1v5odpKT6v99K9xj2at2mwN6UkkejJmyjTk5uKVk3gpNIVIl+/VM4Gqyr9rHCqiuoH
+ xvElnQqHmDFrvXmimtxo2Ytd05O2ryMpFsjLGKqdyLpypyio47TAsLnUnWUVSOkddBVv
+ tHdJmfydqlZX65Kyu6rqDSadiV+54UDVp56BHFt4ZJXw3osM2gQg4Z1GMKEYGcd87pfA
+ J33TM6yJjuESGXHvatSNf8mdVHB3uGfclwqhKdeRXaoGhlp6QVE5J61WhrLAKcdZDt3M
+ 2iGw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVSgySJxqOAiO/EdV1oTzNSFDLq0eZ8IPPP52K0JPxLuNZxEn9OZch5Zx/tydxT/ccCzYS2dMpN1Fd2SD9qwuI=@lists.samba.org
-X-Gm-Message-State: AOJu0YwFzpQK5s7ZUmLGokxB3gjmUMFPn3RrDF+BP9F0dy/Y+FqlPLdV
- 1yLIAY7HeQaj+bBIvhOuDZeeF122vD3qTav6EZXkVICQhI1+HQ20H1T2ZTBRJQcwcPXaLByPrWP
- 62Nxta7bYqukT0ZCXn3ycK1k+18U=
-X-Google-Smtp-Source: AGHT+IHklTE9+daZ5V6N7lYW+6/IbHQcQEhMqhqVGJ7scdARVw98D3T0fBcxFBULN/mfvPbKatFu8XWI1hgeC9KqiEw=
-X-Received: by 2002:ac2:4e13:0:b0:535:82eb:21d1 with SMTP id
- 2adb3069b0e04-53d8630341bmr9311605e87.57.1731517555466; Wed, 13 Nov 2024
- 09:05:55 -0800 (PST)
+ AJvYcCWpxOmLCs2DnrsSD3u9U5d+GaI6RNh6vwBzLoE2pQAMovu+qFJ28HR+RYRXd4kEmU5+dL2zxz79h47YefMbIPc=@lists.samba.org
+X-Gm-Message-State: AOJu0Yxe1/g1PoOVFEQdphiC6onxLCws2KTr2oJuanCxS7e5X4v/wrV1
+ aVmNXr6Otnn0b8hJKSk+Odj726zEDVtf5qAyiE4t+Yx64qavLJ4d5OiyGQ4iYQdu6RSASMQVeIk
+ jVPDAomPPIIQpqnhHMIzAlEZyZr0=
+X-Google-Smtp-Source: AGHT+IG/Q4t9zlJxo0SzEiq1OWyQAiH8D9mhKsLHtjK5w2rEQERHHK17Ean2SepEZ7MUtCVHaZhXmMnoKX3qNPyE0Gk=
+X-Received: by 2002:a05:6512:b83:b0:539:f9b9:e6d2 with SMTP id
+ 2adb3069b0e04-53dab3b126amr4424699e87.35.1731884905418; Sun, 17 Nov 2024
+ 15:08:25 -0800 (PST)
 MIME-Version: 1.0
-References: <20241112105837.166575-2-thorsten.blum@linux.dev>
-In-Reply-To: <20241112105837.166575-2-thorsten.blum@linux.dev>
-Date: Wed, 13 Nov 2024 11:05:44 -0600
-Message-ID: <CAH2r5mvUNiXVAVVmvt=W_RAVMCm5Fgs_=Etcme3uBZ8gKFK30w@mail.gmail.com>
-Subject: Re: [PATCH] smb: client: Use str_yes_no() helper function
-To: Thorsten Blum <thorsten.blum@linux.dev>
+References: <20241117113204.work.419-kees@kernel.org>
+ <bcd4fb0f-47ee-4676-8e71-6b06973e9b65@embeddedor.com>
+In-Reply-To: <bcd4fb0f-47ee-4676-8e71-6b06973e9b65@embeddedor.com>
+Date: Sun, 17 Nov 2024 17:08:14 -0600
+Message-ID: <CAH2r5msDZjC_iktAhCn6jxhUVQZ2sXrD8KpbCs-woDriZNDmXw@mail.gmail.com>
+Subject: Re: [PATCH] smb: client: memcpy() with surrounding object base address
+To: "Gustavo A. R. Silva" <gustavo@embeddedor.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
@@ -82,64 +83,77 @@ From: Steve French via samba-technical <samba-technical@lists.samba.org>
 Reply-To: Steve French <smfrench@gmail.com>
 Cc: Paulo Alcantara <pc@manguebit.com>, Tom Talpey <tom@talpey.com>,
  Shyam Prasad N <sprasad@microsoft.com>, linux-cifs@vger.kernel.org,
- samba-technical@lists.samba.org, linux-kernel@vger.kernel.org,
- Steve French <sfrench@samba.org>, Bharath SM <bharathsm@microsoft.com>
+ Kees Cook <kees@kernel.org>, samba-technical@lists.samba.org,
+ "Gustavo A. R. Silva" <gustavoars@kernel.org>, linux-kernel@vger.kernel.org,
+ Steve French <sfrench@samba.org>, Bharath SM <bharathsm@microsoft.com>,
+ linux-hardening@vger.kernel.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-tentatively merged into cifs-2.6.git for-next pending testing and
-additional review
+merged into cifs-2.6.git for-next
 
-On Tue, Nov 12, 2024 at 5:33=E2=80=AFAM Thorsten Blum <thorsten.blum@linux.=
-dev> wrote:
+On Sun, Nov 17, 2024 at 1:15=E2=80=AFPM Gustavo A. R. Silva
+<gustavo@embeddedor.com> wrote:
 >
-> Remove hard-coded strings by using the str_yes_no() helper function.
 >
-> Signed-off-by: Thorsten Blum <thorsten.blum@linux.dev>
-> ---
->  fs/smb/client/dfs_cache.c | 8 ++++----
->  1 file changed, 4 insertions(+), 4 deletions(-)
 >
-> diff --git a/fs/smb/client/dfs_cache.c b/fs/smb/client/dfs_cache.c
-> index 110f03df012a..00820f57b434 100644
-> --- a/fs/smb/client/dfs_cache.c
-> +++ b/fs/smb/client/dfs_cache.c
-> @@ -173,8 +173,8 @@ static int dfscache_proc_show(struct seq_file *m, voi=
-d *v)
->                                    "cache entry: path=3D%s,type=3D%s,ttl=
-=3D%d,etime=3D%ld,hdr_flags=3D0x%x,ref_flags=3D0x%x,interlink=3D%s,path_con=
-sumed=3D%d,expired=3D%s\n",
->                                    ce->path, ce->srvtype =3D=3D DFS_TYPE_=
-ROOT ? "root" : "link",
->                                    ce->ttl, ce->etime.tv_nsec, ce->hdr_fl=
-ags, ce->ref_flags,
-> -                                  DFS_INTERLINK(ce->hdr_flags) ? "yes" :=
- "no",
-> -                                  ce->path_consumed, cache_entry_expired=
-(ce) ? "yes" : "no");
-> +                                  str_yes_no(DFS_INTERLINK(ce->hdr_flags=
-)),
-> +                                  ce->path_consumed, str_yes_no(cache_en=
-try_expired(ce)));
+> On 17/11/24 05:32, Kees Cook wrote:
+> > Like commit f1f047bd7ce0 ("smb: client: Fix -Wstringop-overflow issues"=
+),
+> > adjust the memcpy() destination address to be based off the surrounding
+> > object rather than based off the 4-byte "Protocol" member. This avoids =
+a
+> > build-time warning when compiling under CONFIG_FORTIFY_SOURCE with GCC =
+15:
+> >
+> > In function 'fortify_memcpy_chk',
+> >      inlined from 'CIFSSMBSetPathInfo' at ../fs/smb/client/cifssmb.c:53=
+58:2:
+> > ../include/linux/fortify-string.h:571:25: error: call to '__write_overf=
+low_field' declared with attribute warning: detected write beyond size of f=
+ield (1st parameter); maybe use struct_group()? [-Werror=3Dattribute-warnin=
+g]
+> >    571 |                         __write_overflow_field(p_size_field, s=
+ize);
+> >        |                         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~=
+~~~~
+> >
+> > Signed-off-by: Kees Cook <kees@kernel.org>
 >
->                         list_for_each_entry(t, &ce->tlist, list) {
->                                 seq_printf(m, "  %s%s\n",
-> @@ -242,9 +242,9 @@ static inline void dump_ce(const struct cache_entry *=
-ce)
->                  ce->srvtype =3D=3D DFS_TYPE_ROOT ? "root" : "link", ce->=
-ttl,
->                  ce->etime.tv_nsec,
->                  ce->hdr_flags, ce->ref_flags,
-> -                DFS_INTERLINK(ce->hdr_flags) ? "yes" : "no",
-> +                str_yes_no(DFS_INTERLINK(ce->hdr_flags)),
->                  ce->path_consumed,
-> -                cache_entry_expired(ce) ? "yes" : "no");
-> +                str_yes_no(cache_entry_expired(ce)));
->         dump_tgts(ce);
->  }
+> Reviewed-by: Gustavo A. R. Silva <gustavoars@kernel.org>
 >
-> --
-> 2.47.0
+> Thanks!
+> -Gustavo
+>
+> > ---
+> > Cc: Steve French <sfrench@samba.org>
+> > Cc: "Gustavo A. R. Silva" <gustavoars@kernel.org>
+> > Cc: Paulo Alcantara <pc@manguebit.com>
+> > Cc: Ronnie Sahlberg <ronniesahlberg@gmail.com>
+> > Cc: Shyam Prasad N <sprasad@microsoft.com>
+> > Cc: Tom Talpey <tom@talpey.com>
+> > Cc: Bharath SM <bharathsm@microsoft.com>
+> > Cc: linux-cifs@vger.kernel.org
+> > Cc: samba-technical@lists.samba.org
+> > ---
+> >   fs/smb/client/cifssmb.c | 2 +-
+> >   1 file changed, 1 insertion(+), 1 deletion(-)
+> >
+> > diff --git a/fs/smb/client/cifssmb.c b/fs/smb/client/cifssmb.c
+> > index b96ca9be5352..026d6b5f23a9 100644
+> > --- a/fs/smb/client/cifssmb.c
+> > +++ b/fs/smb/client/cifssmb.c
+> > @@ -5337,7 +5337,7 @@ CIFSSMBSetPathInfo(const unsigned int xid, struct=
+ cifs_tcon *tcon,
+> >       param_offset =3D offsetof(struct smb_com_transaction2_spi_req,
+> >                               InformationLevel) - 4;
+> >       offset =3D param_offset + params;
+> > -     data_offset =3D (char *) (&pSMB->hdr.Protocol) + offset;
+> > +     data_offset =3D (char *)pSMB + offsetof(typeof(*pSMB), hdr.Protoc=
+ol) + offset;
+> >       pSMB->ParameterOffset =3D cpu_to_le16(param_offset);
+> >       pSMB->DataOffset =3D cpu_to_le16(offset);
+> >       pSMB->SetupCount =3D 1;
 >
 >
 
