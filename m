@@ -2,47 +2,48 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id BD6DB9D8941
-	for <lists+samba-technical@lfdr.de>; Mon, 25 Nov 2024 16:25:56 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id ED3AF9D894C
+	for <lists+samba-technical@lfdr.de>; Mon, 25 Nov 2024 16:27:08 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
-	bh=X21o0askVNhpHDyLETkz20Xwwsqx+5zagatW3E+3+cs=; b=MhjPmsAwnT2eU2N4JNYtyYRwPM
-	sUIv/UyqteX6RwLutgSlP35RcUhW7f5TSOny6kFbKjEn5txXE2jTlDc42tMYtQMvfsJ2kcH+zdlQW
-	/sFHI6Fn6yNIuV3POUup9N2zs9tMTeqy/DMtrNZ/Lonxmls9ZJR1nzRui/bOvGF3jlBE8wvVwLyzo
-	MhL+LLA/2bLwsOr+hnqyewgSy+nurlMm7g5cCQ2RZn8gIbyZFxyvQlA1QMjZ563lXXahI5vQayA3b
-	GgOS2HHbyhPotEX1oYKJJ5Mif6M9ppvVYHvmYz3m5CEVyHACmJ9DJAUnVL9laqGAppMkGmzNF0kDy
-	R0yWVI/w==;
-Received: from ip6-localhost ([::1]:46366 helo=hr1.samba.org) 
+	bh=WA77Ip6XU+Rbxsfbf6LbmqDo5QdzzxJFxucwSqO8cNo=; b=w+SfDOz/cbWBPsbnmookznh3y8
+	GYzYLeBwtiGfpWmWZMKVJEXgkO8OXvAOpGPCk1mXMHlQUhhSELoXm+c+1L2s/GJZz8DjtmC6eHd24
+	nynSVbpYTMp/QQruDU+yNMyV4y8wKulMXTtA3NapJwZ/AieaVk0S3Bzzqcdpe4t4XfGtj1bA9AFxH
+	zaWDSaarf6oE/oV+jJMV88fMgnoZx0U7bK5QxRN7DHW6K7u3mSpJR8/JMu/Vn1KlYEDawGwMCq6pL
+	016n2PGSDlSM33sUjyj3EcyJIT+RRi7Kpqbv1WuMzoQ7BeICmmUJy1mYTU7IgyoGy47EvlNfVnxpp
+	xtsMy6/g==;
+Received: from ip6-localhost ([::1]:18110 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1tFaxx-000kLT-7z; Mon, 25 Nov 2024 15:25:33 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:28338) 
+	id 1tFazJ-000kff-P4; Mon, 25 Nov 2024 15:26:58 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:12920) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1tFaxo-000kKm-Cy; Mon, 25 Nov 2024 15:25:27 +0000
+ (Exim) id 1tFaz3-000keU-K1
+ for samba-technical@lists.samba.org; Mon, 25 Nov 2024 15:26:46 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=From:To:Date:Message-ID:CC;
- bh=X21o0askVNhpHDyLETkz20Xwwsqx+5zagatW3E+3+cs=; b=zna1CFtygFJAtS+TVHyI/R5GLF
- Jg+P5nAijO/c+UYiEmvw+uUgJzdcckUjLiMJd+Mo7xslsFEuZY5U3nCQZz84zB3AcuEwlZQin6lSW
- a8VYPk7nedNV60jUJWaE0llX58+9hnMGudqE4HvsbMEfZ2e2f5qQNOKceT0f20jvuIsATVotIfH/6
- 3TBuV04XVXlDpmaJPoGf478pnVzt652uAkfn/syZL8ZKk019E0n0uumYR4ouel4WQWVGUxYD1cjJu
- wWkKW9bbIgk2T5lOv1rA+kRvb5IdHG15UKq8KjdPLTS45vcbVQyJfdi6dC5Wp7xOx8tC5MHmXlxBk
- LNeUTjO///hcTUZM+D73WcNTAo7W0XfuzhPE84xKQ8ZlTBbU8jSOVjkj3IwamMbxLTnlrxGfq3Wg1
- owypAiUQuLksQzAbRLjExWVV6Aia3KEEU2OnwtdAzEfjc2wRSVLrwedjTHk8h8ZSJj6TYY1iqmYPn
- B3NdsWCXuE2AOMVDv5s/Fggb;
+ bh=WA77Ip6XU+Rbxsfbf6LbmqDo5QdzzxJFxucwSqO8cNo=; b=H6PUMVDNolbBLABgWM9FpS0UvN
+ jC6X12KKbvmu2rVpwCktIKCheSfZf3Psf9nM3ViV8FnlGuaa1Z65zASGAV9dyQG0X8V+/J0IheDny
+ EgRW0d2Q2wxtCo0pXz7JtKb8AgTz/yVsJNJvinvNhf7Ry+gbiGfy3vrMG12/z/74Z4WQwmyjVgs9u
+ SCtu1rFgfKqjtl3Zpj+NFj1iIO50SeSsIptNxPZtlOmNXhinVUW4w6dsrtZfIPl+5De03KGxNcXjv
+ 9pE1dmhKbuex7BlKmqN4Ac5cfbeihEGMMbtii/Rm1Jv1dHgtR7u8k00h3NmYL68cVR8z3VvlCO8Vw
+ IqzAlyNxGoFC8s2Egnyp1WbqIwtVhjb6EMVmXD3b+nGhhpkiok4aCi5y5xxJN84ip3mnNliXAfsON
+ hweKNxlQM5lkf2PlqVCauR6UawExpXEEzJIbk3bt83zik9Px/jx9gK1PyVgvO0IwxoBkU+2amSeLz
+ CndvVbY9aWd9Te4atWkye/lS;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1tFaxn-001Onx-31; Mon, 25 Nov 2024 15:25:23 +0000
-Message-ID: <24350b0d-48c1-4a26-a47f-ac366ed53b8c@samba.org>
-Date: Mon, 25 Nov 2024 16:25:22 +0100
+ (Exim) id 1tFaz3-001OrZ-0M for samba-technical@lists.samba.org;
+ Mon, 25 Nov 2024 15:26:41 +0000
+Message-ID: <bf107b78-fd58-458f-a5cb-a28517437f43@samba.org>
+Date: Mon, 25 Nov 2024 16:26:40 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Content-Language: de-DE, en-US
-To: samba-announce@lists.samba.org, samba@lists.samba.org,
- samba-technical@lists.samba.org
-Subject: [Announce] Samba 4.21.2 Available for Download
+To: samba-technical@lists.samba.org
+Subject: [Release Planning 4.21] Samba 4.21.3
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -61,77 +62,19 @@ Reply-To: Jule Anger <janger@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Release Announcements
----------------------
+Hi,
 
-This is the latest stable release of the Samba 4.21 release series.
+Samba 4.21.3 is scheduled for Monday, January 6 2025.
 
-
-Changes since 4.21.1
---------------------
-
-o  Ralph Boehme <slow@samba.org>
-    * BUG 15732: smbd fails to correctly check sharemode against OVERWRITE
-      dispositions.
-    * BUG 15754: Panic in close_directory.
-
-o  Pavel Filipenský <pfilipensky@samba.org>
-    * BUG 15752: winexe no longer works with samba 4.21.
-
-o  Stefan Metzmacher <metze@samba.org>
-    * BUG 14356: protocol error - Unclear debug message "pad length 
-mismatch" for
-      invalid bind packet.
-    * BUG 15425: NetrGetLogonCapabilities QueryLevel 2 needs to be 
-implemented.
-    * BUG 15740: gss_accept_sec_context() from Heimdal does not imply
-      GSS_C_MUTUAL_FLAG with GSS_C_DCE_STYLE.
-    * BUG 15749: winbindd should call process_set_title() for locator child.
-
-o  Martin Schwenke <mschwenke@ddn.com>
-    * BUG 15320: Update CTDB to track all TCP connections to public IP 
-addresses.
+https://wiki.samba.org/index.php/Release_Planning_for_Samba_4.21
+has been updated accordingly.
 
 
-#######################################
-Reporting bugs & Development Discussion
-#######################################
+Jule
 
-Please discuss this release on the samba-technical mailing list or by
-joining the #samba-technical:matrix.org matrix room, or
-#samba-technical IRC channel on irc.libera.chat.
+-- 
+Jule Anger
+Release Manager Samba Team  samba.org
+SerNet Samba Team           sernet.de
 
-If you do report problems then please try to send high quality
-feedback. If you don't provide vital information to help us track down
-the problem then you will probably be ignored.  All bug reports should
-be filed under the Samba 4.1 and newer product in the project's Bugzilla
-database (https://bugzilla.samba.org/).
-
-
-======================================================================
-== Our Code, Our Bugs, Our Responsibility.
-== The Samba Team
-======================================================================
-
-
-
-================
-Download Details
-================
-
-The uncompressed tarballs and patch files have been signed
-using GnuPG (ID AA99442FB680B620).  The source code can be downloaded
-from:
-
-         https://download.samba.org/pub/samba/stable/
-
-The release notes are available online at:
-
-         https://www.samba.org/samba/history/samba-4.21.2.html
-
-Our Code, Our Bugs, Our Responsibility.
-(https://bugzilla.samba.org/)
-
-                         --Enjoy
-                         The Samba Team
 
