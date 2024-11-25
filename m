@@ -2,47 +2,48 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id ED3AF9D894C
-	for <lists+samba-technical@lfdr.de>; Mon, 25 Nov 2024 16:27:08 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id B8AE19D8D61
+	for <lists+samba-technical@lfdr.de>; Mon, 25 Nov 2024 21:25:27 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
-	bh=WA77Ip6XU+Rbxsfbf6LbmqDo5QdzzxJFxucwSqO8cNo=; b=w+SfDOz/cbWBPsbnmookznh3y8
-	GYzYLeBwtiGfpWmWZMKVJEXgkO8OXvAOpGPCk1mXMHlQUhhSELoXm+c+1L2s/GJZz8DjtmC6eHd24
-	nynSVbpYTMp/QQruDU+yNMyV4y8wKulMXTtA3NapJwZ/AieaVk0S3Bzzqcdpe4t4XfGtj1bA9AFxH
-	zaWDSaarf6oE/oV+jJMV88fMgnoZx0U7bK5QxRN7DHW6K7u3mSpJR8/JMu/Vn1KlYEDawGwMCq6pL
-	016n2PGSDlSM33sUjyj3EcyJIT+RRi7Kpqbv1WuMzoQ7BeICmmUJy1mYTU7IgyoGy47EvlNfVnxpp
-	xtsMy6/g==;
-Received: from ip6-localhost ([::1]:18110 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
+	bh=6w3PgWFgbWAfbWeOrczYHpSr6IwDMP5V/SHYBvOC5rk=; b=bLNuoOGJcT5PoF62/e9ZQeEA6O
+	CrT9qISCcZVBO9mrFub4YnD85ItaklMIc5bWXbqgPaIC9O2Bs8xpuwAbc+ih6n+i8r78SGoGPoyM4
+	XzFfTzHxsxb5tdyYL6SOjB7FhraEbFdwBYn/L9RddrbV1Zg9rDNu3VIRCxKFUZsmyG5ebkjeg0cXQ
+	EM+/NaphdLZVO+yUekgUKxKxG1r3kBMIKVTh3N8QKmUJ+Qoe1MrHvyIVi6r4B5pYxBGvSWuhNRQgJ
+	jE6nA53skrvV++RK55157Y5lSHvwzPEHDJGSAXU4IeDZxSMtL9BsARAvacqRoN5yNyJkxZaMl6G/x
+	XOq5bLtA==;
+Received: from ip6-localhost ([::1]:38116 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1tFazJ-000kff-P4; Mon, 25 Nov 2024 15:26:58 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:12920) 
+	id 1tFfdZ-000o6a-F9; Mon, 25 Nov 2024 20:24:49 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:11256) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1tFaz3-000keU-K1
- for samba-technical@lists.samba.org; Mon, 25 Nov 2024 15:26:46 +0000
+ (Exim) id 1tFfdU-000o6T-TF
+ for samba-technical@lists.samba.org; Mon, 25 Nov 2024 20:24:47 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=From:To:Date:Message-ID:CC;
- bh=WA77Ip6XU+Rbxsfbf6LbmqDo5QdzzxJFxucwSqO8cNo=; b=H6PUMVDNolbBLABgWM9FpS0UvN
- jC6X12KKbvmu2rVpwCktIKCheSfZf3Psf9nM3ViV8FnlGuaa1Z65zASGAV9dyQG0X8V+/J0IheDny
- EgRW0d2Q2wxtCo0pXz7JtKb8AgTz/yVsJNJvinvNhf7Ry+gbiGfy3vrMG12/z/74Z4WQwmyjVgs9u
- SCtu1rFgfKqjtl3Zpj+NFj1iIO50SeSsIptNxPZtlOmNXhinVUW4w6dsrtZfIPl+5De03KGxNcXjv
- 9pE1dmhKbuex7BlKmqN4Ac5cfbeihEGMMbtii/Rm1Jv1dHgtR7u8k00h3NmYL68cVR8z3VvlCO8Vw
- IqzAlyNxGoFC8s2Egnyp1WbqIwtVhjb6EMVmXD3b+nGhhpkiok4aCi5y5xxJN84ip3mnNliXAfsON
- hweKNxlQM5lkf2PlqVCauR6UawExpXEEzJIbk3bt83zik9Px/jx9gK1PyVgvO0IwxoBkU+2amSeLz
- CndvVbY9aWd9Te4atWkye/lS;
+ s=42; h=Date:Message-ID:From:To:CC;
+ bh=6w3PgWFgbWAfbWeOrczYHpSr6IwDMP5V/SHYBvOC5rk=; b=Ayvq3VBkRgnHTls+VLbudvHE5x
+ EsUP8YmQLJL1d740b0iu1t4AtysbnJxPcAjD2vPcFgYoxBy6D2Z9cJqdJfa4e0KrHUIixi7tuRReL
+ oh899viKx7rwWrPtjy7D6DEK2vgLj7icR56elWwDIQ81v6CY2oDmklPNDdh+wUEtkyjUi1o4OcPl+
+ bDA0qXEhuQymG7ViwPBEg7NR4HvAZeA23QF+VRCoZvSCjRpKj8Nd+hHOIHoZ5cAdHLcQK2I/GeRI8
+ M4YxHOt3sYE4WNz9GUGGktgZvUNcxQVDvUlhK/x67vAwwyNJXQSEZueifXdolLMIBLxS/2dxQF7ab
+ uEiHcJxFPpuaETnWCE8vRbAdh1ZeNF9W4UccErnVoLbl35oAu5jyopwn1sV84iethw+uUwOC8MDpC
+ C3sUG0jOco18d0Ed/mndzjWmaoeplvGQ78bhnMs7M76N+X3dIj3cSsDTXIBe/1/JXtQIXSzeEcahi
+ xatipOcFiFEPCQbCCRgazFH7;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1tFaz3-001OrZ-0M for samba-technical@lists.samba.org;
- Mon, 25 Nov 2024 15:26:41 +0000
-Message-ID: <bf107b78-fd58-458f-a5cb-a28517437f43@samba.org>
-Date: Mon, 25 Nov 2024 16:26:40 +0100
+ (TLS1.2:ECDHE_SECP256R1__ECDSA_SHA256__CHACHA20_POLY1305:256) (Exim)
+ id 1tFfdT-001QwY-2K for samba-technical@lists.samba.org;
+ Mon, 25 Nov 2024 20:24:43 +0000
+To: Samba Technical <samba-technical@lists.samba.org>
+Subject: Status query: SMB Direct in Samba
+Message-ID: <9365ea2b-762f-3523-69e5-a1aba8be1c54@samba.org>
+Date: Mon, 25 Nov 2024 14:24:41 -0600
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.6.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: de-DE, en-US
-To: samba-technical@lists.samba.org
-Subject: [Release Planning 4.21] Samba 4.21.3
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
 Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
@@ -57,24 +58,31 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jule Anger via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jule Anger <janger@samba.org>
+From: "Christopher R. Hertel via samba-technical"
+ <samba-technical@lists.samba.org>
+Reply-To: "Christopher R. Hertel" <crh@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi,
+Hi, all.
 
-Samba 4.21.3 is scheduled for Monday, January 6 2025.
+I received an inquiry from a commercial vendor regarding SMB Direct in
+Samba, so I went digging through the most recent documentation just to see
+where things stand.
 
-https://wiki.samba.org/index.php/Release_Planning_for_Samba_4.21
-has been updated accordingly.
+I know that Multichannel was moved from Experimental to Enabled-by-default
+back in 2021 (4.15 release), and that SMB Direct requires Multichannel.  I
+also found presentations from 2018 through 2020, all about implementation
+plans.  I didn't find a definitive "it works now" statement regarding SMB
+Direct, though I see that we detect/support RDMA in the interface code.
 
+I poked through the wiki...
 
-Jule
+Do we have an authoritative statement about support for SMB Direct and how
+it is implemented?  If we do, please hit me with the clue-bat and point me
+in the right direction.  I'd like to write it up if it hasn't been done already.
 
--- 
-Jule Anger
-Release Manager Samba Team  samba.org
-SerNet Samba Team           sernet.de
+Thanks!
 
+Chris -)-----
 
