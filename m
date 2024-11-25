@@ -2,49 +2,50 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id B8AE19D8D61
-	for <lists+samba-technical@lfdr.de>; Mon, 25 Nov 2024 21:25:27 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id F0F3F9D8E24
+	for <lists+samba-technical@lfdr.de>; Mon, 25 Nov 2024 22:41:55 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
-	bh=6w3PgWFgbWAfbWeOrczYHpSr6IwDMP5V/SHYBvOC5rk=; b=bLNuoOGJcT5PoF62/e9ZQeEA6O
-	CrT9qISCcZVBO9mrFub4YnD85ItaklMIc5bWXbqgPaIC9O2Bs8xpuwAbc+ih6n+i8r78SGoGPoyM4
-	XzFfTzHxsxb5tdyYL6SOjB7FhraEbFdwBYn/L9RddrbV1Zg9rDNu3VIRCxKFUZsmyG5ebkjeg0cXQ
-	EM+/NaphdLZVO+yUekgUKxKxG1r3kBMIKVTh3N8QKmUJ+Qoe1MrHvyIVi6r4B5pYxBGvSWuhNRQgJ
-	jE6nA53skrvV++RK55157Y5lSHvwzPEHDJGSAXU4IeDZxSMtL9BsARAvacqRoN5yNyJkxZaMl6G/x
-	XOq5bLtA==;
-Received: from ip6-localhost ([::1]:38116 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
+	bh=f7C0yZRnQXT/E/C63iHachaCa1Qg6OZno+FiTC+wEiQ=; b=Y8SEC9GzJ1DMuo3XAOhcjyxVgc
+	49GPfJyhWEgNrZct/r5x0hcWJSPtyVmd7ezb1yxq2DLGI0wls0+1z8+fMrjWJSAvNaXtuqwZkoovM
+	/3M7day97ok5pKGVYJsJA5tgXL6a65g1exV8+Uw87tJmX5EMqFTHaI0FPeoUYcSq1n5/GTQZ5IsBa
+	PtctDwVc+89pUwni+sEjCH2kTn/gOlzAEI3SnaTNsGSSP1FPZDXjiuM1dL5nGSg8NyY+IsxLg33up
+	T8JUw5vn6DEOQ/WjL3ntz+Mn2QBcREqTiPvUF99ysKDp11/F71PM/Xj5sBakKllWqWDUx4Q3P7UMI
+	ox+DBlJg==;
+Received: from ip6-localhost ([::1]:53956 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1tFfdZ-000o6a-F9; Mon, 25 Nov 2024 20:24:49 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:11256) 
+	id 1tFgpf-000oJW-68; Mon, 25 Nov 2024 21:41:23 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:32256) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1tFfdU-000o6T-TF
- for samba-technical@lists.samba.org; Mon, 25 Nov 2024 20:24:47 +0000
+ (Exim) id 1tFgpa-000oJP-5A
+ for samba-technical@lists.samba.org; Mon, 25 Nov 2024 21:41:20 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Message-ID:From:To:CC;
- bh=6w3PgWFgbWAfbWeOrczYHpSr6IwDMP5V/SHYBvOC5rk=; b=Ayvq3VBkRgnHTls+VLbudvHE5x
- EsUP8YmQLJL1d740b0iu1t4AtysbnJxPcAjD2vPcFgYoxBy6D2Z9cJqdJfa4e0KrHUIixi7tuRReL
- oh899viKx7rwWrPtjy7D6DEK2vgLj7icR56elWwDIQ81v6CY2oDmklPNDdh+wUEtkyjUi1o4OcPl+
- bDA0qXEhuQymG7ViwPBEg7NR4HvAZeA23QF+VRCoZvSCjRpKj8Nd+hHOIHoZ5cAdHLcQK2I/GeRI8
- M4YxHOt3sYE4WNz9GUGGktgZvUNcxQVDvUlhK/x67vAwwyNJXQSEZueifXdolLMIBLxS/2dxQF7ab
- uEiHcJxFPpuaETnWCE8vRbAdh1ZeNF9W4UccErnVoLbl35oAu5jyopwn1sV84iethw+uUwOC8MDpC
- C3sUG0jOco18d0Ed/mndzjWmaoeplvGQ78bhnMs7M76N+X3dIj3cSsDTXIBe/1/JXtQIXSzeEcahi
- xatipOcFiFEPCQbCCRgazFH7;
+ s=42; h=Date:Cc:To:From:Message-ID;
+ bh=WIHdGNq35PSXiFAlB18ghb5eEmvnD+JWew7YdOgaUkk=; b=lYEJvyFgE+DXyyP0u9mkiiMrEB
+ ++j4jPbpkiMgqmZO7xCiwQVL4VaOaiwZmuXlrNVlcnBGsEbTf/KXnZ2QTgeXGWCXH+X0B13VgWoON
+ HdbYGH7LT8Xnc4V0q4of6JkFcPwddPCYOeEnRA3lcFZvTZAQ33E8e6la3RjGoVQEhxlQAyl0XYgrq
+ WyTIUuaPPNyMK6g46Vi72A/he0bqlQlzYJH+2yLOTFRcj+zh8U51zQc+KsDOzQUM7SlmfrIeAJIE+
+ XfooPOoYp1GX+kdVR6YkFUIMpTD5Ng4fKh5q7SAQUpUL6vgFp7PKXyIfCOkZI8SNWBW1Q8R4H7ZM3
+ 1WuC6rmTNrOF2IPMnhAGtkidtLcpkid27HQV9dpGGmhDDB8m8CVlUTVI6XWEX5hPJDDk0MIO2ElfK
+ Q/AwdmWxCmCD3DxpDPCaCMUEovBpxHqFr4IC0fUxfo3fP792O6JegPd9KneUk69vq95JDrR/COROJ
+ bawSfg3u+8/oJd0/ItwNNRz0;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
- (TLS1.2:ECDHE_SECP256R1__ECDSA_SHA256__CHACHA20_POLY1305:256) (Exim)
- id 1tFfdT-001QwY-2K for samba-technical@lists.samba.org;
- Mon, 25 Nov 2024 20:24:43 +0000
-To: Samba Technical <samba-technical@lists.samba.org>
-Subject: Status query: SMB Direct in Samba
-Message-ID: <9365ea2b-762f-3523-69e5-a1aba8be1c54@samba.org>
-Date: Mon, 25 Nov 2024 14:24:41 -0600
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.6.1
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1tFgpY-001RSC-21; Mon, 25 Nov 2024 21:41:17 +0000
+Message-ID: <99f968a92a7fd8de4a93bc0ee2ed8ffcd2208b3b.camel@samba.org>
+Subject: Re: heimdal 7.8 crash (in OpenLDAP) with spnego/ntlm, is this
+ familiar?
+To: Nadezhda Ivanova <nivanova@samba.org>, samba-technical@lists.samba.org
+Date: Tue, 26 Nov 2024 10:41:12 +1300
+In-Reply-To: <55aec456-0370-426a-b143-a59acddba5b1@samba.org>
+References: <55aec456-0370-426a-b143-a59acddba5b1@samba.org>
+User-Agent: Evolution 3.36.5-0ubuntu1 
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
+X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,31 +59,34 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: "Christopher R. Hertel via samba-technical"
- <samba-technical@lists.samba.org>
-Reply-To: "Christopher R. Hertel" <crh@samba.org>
+From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andrew Bartlett <abartlet@samba.org>
+Cc: metze@samba.org, okuznik@symas.com
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi, all.
+On Mon, 2024-11-25 at 16:08 +0200, Nadezhda Ivanova via samba-technical 
+wrote:
+> Hi team,
+> An OpenLDAP user encountered this issue, and since Samba also uses
+> Heimdal too, we were wondering if maybe it has happened in Samba as
+> well and was fixed? Do you think it is something that can affect
+> Samba? There are back traces in the issue but no steps to reproduce,
+> it seems to happen randomly in their environment, and we haven't had
+> any feedback from the Heimdal team yet.
+> I could not find a relevant issue in the Samba bugzilla or the
+> commits, but perhaps one of you remembers something?
+> https://github.com/heimdal/heimdal/issues/1189
 
-I received an inquiry from a commercial vendor regarding SMB Direct in
-Samba, so I went digging through the most recent documentation just to see
-where things stand.
+Samba strictly avoids using the Heimdal SPENGO and NTLM layers, only
+selecting the GSS-Krb5 mech to use our more mature internal
+implementation and so avoid this kind of issue
+Sorry,
+Andrew Bartlett
 
-I know that Multichannel was moved from Experimental to Enabled-by-default
-back in 2021 (4.15 release), and that SMB Direct requires Multichannel.  I
-also found presentations from 2018 through 2020, all about implementation
-plans.  I didn't find a definitive "it works now" statement regarding SMB
-Direct, though I see that we detect/support RDMA in the interface code.
-
-I poked through the wiki...
-
-Do we have an authoritative statement about support for SMB Direct and how
-it is implemented?  If we do, please hit me with the clue-bat and point me
-in the right direction.  I'd like to write it up if it hasn't been done already.
-
-Thanks!
-
-Chris -)-----
-
+-- 
+Andrew Bartlett (he/him)       https://samba.org/~abartlet/Samba Team Member (since 2001) https://samba.orgSamba Team Lead                https://catalyst.net.nz/services/sambaCatalyst.Net Ltd
+Proudly developing Samba for Catalyst.Net Ltd - a Catalyst IT group
+company
+Samba Development and Support: https://catalyst.net.nz/services/samba
+Catalyst IT - Expert Open Source Solutions
