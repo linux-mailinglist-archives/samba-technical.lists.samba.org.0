@@ -2,50 +2,51 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 836B69D95E3
-	for <lists+samba-technical@lfdr.de>; Tue, 26 Nov 2024 11:57:59 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id DAA3C9D95EB
+	for <lists+samba-technical@lfdr.de>; Tue, 26 Nov 2024 12:01:44 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=8rkym8L2sES8DkWQ3DvEVoeXz3NfNVVDK7wJoKQrXNY=; b=bcBJGZsqWwunWmfGWsk3CtPyxC
-	95bIKrJ6tEaAg9cBHw78QhtMChiBecOLh0pjj3yx6pUkWGeL559yFrr2Osyuh6kjC4m1HT6F75tMY
-	vDXPDyZH3r2/rQct5/UcoXhqbCdd3DT5556/I+xTUv5OZDb/zuKngsAShWNE7TLKv52R3ySHSlYuB
-	E31YhOqG3UqqSHAbGmtOCiHYSCIM/H5RHSHiQqAouBP+0DUugaTJgyKeWuEHXj6PecX2v++kx19Rz
-	ddBsqIXOINLOT8F0DNrz68af3rcVzZyh/N9jckMInEbm/EvFpAvv+WWBIiD9ry8lKCf86do4oyptR
-	2wx2TP9w==;
-Received: from ip6-localhost ([::1]:30628 helo=hr1.samba.org) 
+	bh=TeM3lZhnfYIhwuiYW+7WcbmTjr16RK1nshp/+toGSZU=; b=WWubRSTSApoO/K1Q3r3ZjI6NcD
+	w750ktA/UbZE30sjBYuVKr8fnJxIRRydcNSRJo9s1QUv9cLxTL5SlzWil1oZ2ya8zz7HeYLVBDroV
+	oO+gZ7aV7uSkKlJcpqQxZl+KfvXB24CeIES20B7shCJBFCX7t6YwOd0e4cLGNGL1+gvCvyNuKXEK5
+	J0DS4FmPuGxTWiP7ydvFoANJJSnW8Ivq+28xBwWnjwjzwVs0mtpLqH4TBgX34do4QpwF+6jV5bULz
+	/3/BDm7a0R5fHyvJYQ2PQjG4qh/1cK4umhXjcoPORkPtgxdOh7nnnRZqbyHnbjUYc/H6UByYxIJSo
+	JkBCswPQ==;
+Received: from ip6-localhost ([::1]:22338 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1tFtG4-000rU5-36; Tue, 26 Nov 2024 10:57:28 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:61786) 
+	id 1tFtJu-000raU-6M; Tue, 26 Nov 2024 11:01:26 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:48304) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1tFtFz-000rTy-HC
- for samba-technical@lists.samba.org; Tue, 26 Nov 2024 10:57:25 +0000
+ (Exim) id 1tFtJp-000raN-Fz
+ for samba-technical@lists.samba.org; Tue, 26 Nov 2024 11:01:23 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=From:To:Date:Message-ID:CC;
- bh=8rkym8L2sES8DkWQ3DvEVoeXz3NfNVVDK7wJoKQrXNY=; b=t0ZQhaMQtTP+z5dcKJYF8RztgJ
- m6hL510Jpfu2jDcMbmqbQ8XppzC5+zAQ9A+MUOSLfVIjJvZdEVyckXud/YfCXHCKzgXoPIPHqR3Jc
- pPG96LT1eO2OktkFq5ZWQmmrla63kvxMiGzycsg6g1Td6ZXP3oSe8iGqfqTo0h+4QS/5XXzamu2p+
- KhrZKoHifX1guY940b0BobuPm3SvfdZupO+vW0kQOyXX/hqgbumHf2duMgyGZRuRWHgG7zJ4g9n0H
- /rVmwxxI6Mcnl+/KhKzUsPJgONPQc8wsddK7EQlBpN9XX2jWw8+ztD9r7B2EsHyzAC0kYK6S29oed
- 5cGzG4qWzGrjVLm8kJTxT1Nor4/0XnTK2+s872/wsoE/G0T60OEEnJxm2wSMWt/XY/by0sD4UGmwH
- xCyYciNi7aR7EhBmtFMoJPZT9n3poiU91byxW2gWA0AQTI+SWaXbbJ4tw8mo7syo98oGPn2TNMMUK
- rrlHY/JLvcK15cX5/sy0alc5;
+ bh=TeM3lZhnfYIhwuiYW+7WcbmTjr16RK1nshp/+toGSZU=; b=ZQCVNeCH+SpE03xZuSiFoYfFm3
+ NJOXQAPKop5jkIIiHz/gs1OJyOEftaH/sZgHz37yjVgO4GWQQ3KPOEqk0LxYn/FeCjBzXSWTtdCXt
+ Sy4RZp6hA5d5m9UOW8Y6C5gpez8um64VsddIlxj5nSJqFfHf0107yuYXJeVIZ5Ux35maea91HFY2S
+ yM8PDhwM9BDsSwgpb/Hm3xp++jfEdyu/CDd57YizfKJvZN3AE85PEDIOtB17aG52ZGnZBXmZIw7T1
+ zkkxKdaWXpefuWOWtYGHood5/J+6/80Emd0Ym+NIH5+AB0/RpC9XMGaxPVl/Jsr62QlW1eguG56GX
+ itnYHEeXB1xUm3AAeU0ULz0WlkrtwaEAOJ2NxgKxiuxbtYjSnKcooEzg1uNT/gOqeCbU2cJyZ3FS9
+ ZIyslI9FGWLfiCtMRDqQ/mZXuxHEXs2GWwuZD89y45V+sSSUVEe/kjio5CPRbkqBBQO0W7fDhalOZ
+ Ji6jPGP06CPj1IwtkI9DZj57;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1tFtFy-001WnR-3B for samba-technical@lists.samba.org;
- Tue, 26 Nov 2024 10:57:23 +0000
-Message-ID: <d3b29e55-6ed8-4049-a2aa-9198735ac7a8@samba.org>
-Date: Tue, 26 Nov 2024 11:57:22 +0100
+ (Exim) id 1tFtJp-001WqU-0B; Tue, 26 Nov 2024 11:01:21 +0000
+Message-ID: <e9d93df3-b31d-473a-bd22-e5b81df1ccc1@samba.org>
+Date: Tue, 26 Nov 2024 12:01:18 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: Status query: SMB Direct in Samba
-To: samba-technical@lists.samba.org
+To: "Christopher R. Hertel" <crh@samba.org>,
+ Samba Technical <samba-technical@lists.samba.org>
 References: <9365ea2b-762f-3523-69e5-a1aba8be1c54@samba.org>
-Content-Language: en-US
+Content-Language: en-US, de-DE
 In-Reply-To: <9365ea2b-762f-3523-69e5-a1aba8be1c54@samba.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------jxHxKm2Zfeaoq1ZSPDrHu0z0"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,48 +60,70 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: =?utf-8?q?G=C3=BCnther_Deschner_via_samba-technical?=
- <samba-technical@lists.samba.org>
-Reply-To: =?UTF-8?Q?G=C3=BCnther_Deschner?= <gd@samba.org>
+From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Ralph Boehme <slow@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi Chris,
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------jxHxKm2Zfeaoq1ZSPDrHu0z0
+Content-Type: multipart/mixed; boundary="------------eq10X6ecEsBNk982Pmlqw9tF";
+ protected-headers="v1"
+From: Ralph Boehme <slow@samba.org>
+To: "Christopher R. Hertel" <crh@samba.org>,
+ Samba Technical <samba-technical@lists.samba.org>
+Message-ID: <e9d93df3-b31d-473a-bd22-e5b81df1ccc1@samba.org>
+Subject: Re: Status query: SMB Direct in Samba
+References: <9365ea2b-762f-3523-69e5-a1aba8be1c54@samba.org>
+In-Reply-To: <9365ea2b-762f-3523-69e5-a1aba8be1c54@samba.org>
 
-take a look at https://samba.plus/stf-project, there is a whole section 
-on "Milestone Group 6: SMB direct" what AFAICT is the current roadmap 
-for SMB Direct availability in Samba.
+--------------eq10X6ecEsBNk982Pmlqw9tF
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
 
-Hope that helps,
-Guenther
+SGkgQ2hyaXMsDQoNCmNmIGh0dHBzOi8vc2FtYmEucGx1cy9zdGYtcHJvamVjdA0KDQpDaGVl
+cnMhDQotc2xvdw0KDQpPbiAxMS8yNS8yNCA5OjI0IFBNLCBDaHJpc3RvcGhlciBSLiBIZXJ0
+ZWwgdmlhIHNhbWJhLXRlY2huaWNhbCB3cm90ZToNCj4gSGksIGFsbC4NCj4gDQo+IEkgcmVj
+ZWl2ZWQgYW4gaW5xdWlyeSBmcm9tIGEgY29tbWVyY2lhbCB2ZW5kb3IgcmVnYXJkaW5nIFNN
+QiBEaXJlY3QgaW4NCj4gU2FtYmEsIHNvIEkgd2VudCBkaWdnaW5nIHRocm91Z2ggdGhlIG1v
+c3QgcmVjZW50IGRvY3VtZW50YXRpb24ganVzdCB0byBzZWUNCj4gd2hlcmUgdGhpbmdzIHN0
+YW5kLg0KPiANCj4gSSBrbm93IHRoYXQgTXVsdGljaGFubmVsIHdhcyBtb3ZlZCBmcm9tIEV4
+cGVyaW1lbnRhbCB0byBFbmFibGVkLWJ5LWRlZmF1bHQNCj4gYmFjayBpbiAyMDIxICg0LjE1
+IHJlbGVhc2UpLCBhbmQgdGhhdCBTTUIgRGlyZWN0IHJlcXVpcmVzIE11bHRpY2hhbm5lbC4g
+IEkNCj4gYWxzbyBmb3VuZCBwcmVzZW50YXRpb25zIGZyb20gMjAxOCB0aHJvdWdoIDIwMjAs
+IGFsbCBhYm91dCBpbXBsZW1lbnRhdGlvbg0KPiBwbGFucy4gIEkgZGlkbid0IGZpbmQgYSBk
+ZWZpbml0aXZlICJpdCB3b3JrcyBub3ciIHN0YXRlbWVudCByZWdhcmRpbmcgU01CDQo+IERp
+cmVjdCwgdGhvdWdoIEkgc2VlIHRoYXQgd2UgZGV0ZWN0L3N1cHBvcnQgUkRNQSBpbiB0aGUg
+aW50ZXJmYWNlIGNvZGUuDQo+IA0KPiBJIHBva2VkIHRocm91Z2ggdGhlIHdpa2kuLi4NCj4g
+DQo+IERvIHdlIGhhdmUgYW4gYXV0aG9yaXRhdGl2ZSBzdGF0ZW1lbnQgYWJvdXQgc3VwcG9y
+dCBmb3IgU01CIERpcmVjdCBhbmQgaG93DQo+IGl0IGlzIGltcGxlbWVudGVkPyAgSWYgd2Ug
+ZG8sIHBsZWFzZSBoaXQgbWUgd2l0aCB0aGUgY2x1ZS1iYXQgYW5kIHBvaW50IG1lDQo+IGlu
+IHRoZSByaWdodCBkaXJlY3Rpb24uICBJJ2QgbGlrZSB0byB3cml0ZSBpdCB1cCBpZiBpdCBo
+YXNuJ3QgYmVlbiBkb25lIGFscmVhZHkuDQo+IA0KPiBUaGFua3MhDQo+IA0KPiBDaHJpcyAt
+KS0tLS0tDQo+IA0KDQo=
 
-On 25/11/2024 21:24, Christopher R. Hertel via samba-technical wrote:
-> Hi, all.
-> 
-> I received an inquiry from a commercial vendor regarding SMB Direct in
-> Samba, so I went digging through the most recent documentation just to see
-> where things stand.
-> 
-> I know that Multichannel was moved from Experimental to Enabled-by-default
-> back in 2021 (4.15 release), and that SMB Direct requires Multichannel.  I
-> also found presentations from 2018 through 2020, all about implementation
-> plans.  I didn't find a definitive "it works now" statement regarding SMB
-> Direct, though I see that we detect/support RDMA in the interface code.
-> 
-> I poked through the wiki...
-> 
-> Do we have an authoritative statement about support for SMB Direct and how
-> it is implemented?  If we do, please hit me with the clue-bat and point me
-> in the right direction.  I'd like to write it up if it hasn't been done already.
-> 
-> Thanks!
-> 
-> Chris -)-----
-> 
+--------------eq10X6ecEsBNk982Pmlqw9tF--
 
+--------------jxHxKm2Zfeaoq1ZSPDrHu0z0
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature.asc"
 
--- 
-Günther Deschner                    GPG-ID: 8EE11688
-Red Hat                         gdeschner@redhat.com
-Samba Team                              gd@samba.org
+-----BEGIN PGP SIGNATURE-----
+
+wsF5BAABCAAjFiEE+uLGCIokJSBRxVnkqh6bcSY5nkYFAmdFqn4FAwAAAAAACgkQqh6bcSY5nkYk
+Qw/6Av+G41n3jgK5bXdq3iQglwQYByK5ZwTc80NLIzmqEUrzcph5ZTQPXGnsDeNEK71O3ulFR9Bx
+96JsqPLX/MBmR+vQQk6RQ+7rrQ0LJJGvhuvKS7KUu1qwJRTc8DyluLancGOimcvBepWo3VKucJQU
+1Aku8LLYlf/dxZ/7eXngvOZ60sg5H99eyac3gs8Ss6H8YkJcWK31W5+HPyO/scCDaGIeku/FXsPT
+6sZB3Hh98PnSz7mW2qGZyLSLcd12AQQiJyFsRuCytJRyoxwQUbvW20LlrXosEh4J7xw0YEnmQFFy
+x3TYCTQ8xfwGKodrtQaX7Hta4RsRMG8Ur2pwgr3VB/bOLS0MRRrE/IvJIjoDQtuAxwjSFBEqyn+4
+TnYHLk1GUgiT3ttOrer21K9HD8LVUDQcaU6mDXo+ATZmb8tEmkcTYbuMG+HFATe8OqTiDF7GrE2j
+tszH/SxQ3tRRmUBdBstfymw3kt45OfO565ua2gyDdpAUqksa2ew4kshhfoNU3rT82gPFZiBNmmRk
+XkJfklVDAN9ImaXZ1qBoyH+54E8eI8YJtyHSLdnpwO9lBtYzZKHy5GiDVdtOHWMTWSFvkYBQ+P3R
+91RGDsTHwW6s9gwTQhxKspHdYzPEA5C6/6a1g5yGj2n0ndOHMbVTX2kQKZoC8g9Adv4gXJKQUnln
+CIg=
+=/Lvq
+-----END PGP SIGNATURE-----
+
+--------------jxHxKm2Zfeaoq1ZSPDrHu0z0--
 
