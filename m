@@ -2,45 +2,53 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id AE61B9DA1F7
-	for <lists+samba-technical@lfdr.de>; Wed, 27 Nov 2024 07:05:19 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8CEE79DA4BE
+	for <lists+samba-technical@lfdr.de>; Wed, 27 Nov 2024 10:26:28 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=apBW39xsLKZWkTSu5q07v5FVZD3bxyPSgRjCMKylQpE=; b=3cUn2teYa4yBp6+Zgx6l0udOPz
-	gSa1C4BHvuMbla+jxo5vGYBQJ+w8TABq5lqwDdlQZEzoD6q3hLmVML/f+wbSNiKvxWOpTnTY2yttm
-	o8a6+BHxE9lwxgYznAXC3RFEstKL32gnPD7YKT+2mGccGOQKMO6yp5yeADz2yl5JpqyRwZ+35+FI9
-	QztpFXCYFlkktNjQG4NmFJa3L9zDwKsQLcvtpDNfnRYzoYf3M63f4+mY/aBsvkIsGoT2KEm3Bfkwv
-	3t7pKcoEk6KI8M0ZtDOT1/zZ8+p2Iw7W4Z2/fCVbbApA6JbrcuRwSUYSJRZEs/8LSRmmF8+avetKe
-	+eehaJcQ==;
-Received: from ip6-localhost ([::1]:26486 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=lVnUAO+Gotd4JGypBQSz3h24e622tVop2j8QWEpWv3c=; b=bzITiZvzEJVFYSLKtiJXTWGjlo
+	gx75uIrpqD2faGk41L6z0wQhfJmTx0h6E0M/iTIQUf7+/X3MyMOb33QUnJpTv4uljVaVU168FoOne
+	vGSS781ihvmC35dx3LnoDIa/bI5GdDa5mR2ahI7gZxNtdHo978aEcZo1lr4NgGdm1X76ss7EQ2luR
+	rHr5IKhKoqFRhmcdMhPRtsL+rikNusx+kxFjyi0u31oTF2c3fpty4Povgktl1VehtVQbIgU5DiLhj
+	ekxCtcOsUWrDKw4TrNQCrWppxyLmL8MmYN7UH+nBaMxEhDFeUj6KoTid3L0sDXlXdAvuTSpmlJWL8
+	Ur7NcdOA==;
+Received: from ip6-localhost ([::1]:23786 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1tGBAZ-000wtB-Pl; Wed, 27 Nov 2024 06:04:59 +0000
-Received: from isrv.corpit.ru ([86.62.121.231]:46629) 
+	id 1tGEIy-000xPL-OO; Wed, 27 Nov 2024 09:25:52 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:25222) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1tGBAV-000wt4-Ma
- for samba-technical@lists.samba.org; Wed, 27 Nov 2024 06:04:58 +0000
-Received: from tsrv.corpit.ru (tsrv.tls.msk.ru [192.168.177.2])
- by isrv.corpit.ru (Postfix) with ESMTP id AF957B5283;
- Wed, 27 Nov 2024 09:04:35 +0300 (MSK)
-Received: from [192.168.177.130] (mjt.wg.tls.msk.ru [192.168.177.130])
- by tsrv.corpit.ru (Postfix) with ESMTP id 84B0017AFD7;
- Wed, 27 Nov 2024 09:04:52 +0300 (MSK)
-Message-ID: <01fd1b4b-41f0-4248-b3a2-e3842bc22a78@tls.msk.ru>
-Date: Wed, 27 Nov 2024 09:04:52 +0300
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: missing rpath [was: building bundled talloc/tevent/tdb libs out of
- main samba sources]
-To: Andrew Bartlett <abartlet@samba.org>, samba-technical@lists.samba.org
+ (Exim) id 1tGEIq-000xPE-Mm
+ for samba-technical@lists.samba.org; Wed, 27 Nov 2024 09:25:50 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Date:To:From:Message-ID:CC;
+ bh=lVnUAO+Gotd4JGypBQSz3h24e622tVop2j8QWEpWv3c=; b=YZIlu3SerOF7IBZK4oGnodk6PT
+ 5yptA+ej/kPxePawr/6T+tn6ImwY0WWif0N9rhu5BwOSbEr5jagftLIQAqhrseJdsQe5ijEC1pWyh
+ XcJTxVUWEImoFi/QL9J94Xuh6Dmhkr3w2X2+8Vk82w+B1vaCDJPzzfvCHZR+AJFB42mluvCFdrblt
+ lZHuW6y+QG291z1SfhVJXAbOOO+s6ia8R6I8xdgH9ko2zKYFX9VlF19dT9DzcB0yJ+rlJ7R0TXLov
+ +URoWbXnp8TskXxk4ld5cqLg21495hEbOUW/KPut7Kp6NUmM24Ke8YK0G2lNfgJmlDPCWxAPAyU4n
+ Zglw2sMVsGJ4s0yU3FWdymEZ+8VKiXpYy6FB0RiuzpuQePlZbyrFGg0NPUQKktlxcCJ7S+fD64c8V
+ lHJbrmllf88u/zaGbgEZUCj5BErKCDOL6+EWj7EuLMI1QwlW5GWRsO/OigsyxpSe1kgqLFPsSn2+q
+ AAaK6EPWJg9KeZ2VSOaT/OOZ;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1tGEIo-001gJP-30; Wed, 27 Nov 2024 09:25:43 +0000
+Message-ID: <73535b3d7f205b4dd52a18a04ec8af0b4b547329.camel@samba.org>
+Subject: Re: missing rpath [was: building bundled talloc/tevent/tdb libs out
+ of main samba sources]
+To: Michael Tokarev <mjt@tls.msk.ru>, samba-technical@lists.samba.org
+Date: Wed, 27 Nov 2024 22:25:39 +1300
+In-Reply-To: <01fd1b4b-41f0-4248-b3a2-e3842bc22a78@tls.msk.ru>
 References: <d033ddfb-9e93-4bdf-8cbb-ec8d0ace7702@tls.msk.ru>
  <f6a0c35c4b22bfc273b812fabdaa65e80991c3b5.camel@samba.org>
  <548706c7-22f9-4715-8fb9-90aed04b8c54@tls.msk.ru>
  <71cfea1803e9e86dad4734dc28ea992e4d74db80.camel@samba.org>
-Content-Language: en-US, ru-RU
-In-Reply-To: <71cfea1803e9e86dad4734dc28ea992e4d74db80.camel@samba.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+ <01fd1b4b-41f0-4248-b3a2-e3842bc22a78@tls.msk.ru>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.54.1 (3.54.1-1.fc41) 
+MIME-Version: 1.0
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -54,89 +62,35 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Michael Tokarev via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Michael Tokarev <mjt@tls.msk.ru>
+From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andrew Bartlett <abartlet@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-27.11.2024 08:26, Andrew Bartlett via samba-technical wrote:
-> On Wed, 2024-11-27 at 08:12 +0300, Michael Tokarev via samba-technical
-...>> But my attempt were unsuccessful so far, as it turned out.
->>
->> Once I arrange to build all 3 libs out of samba, the build system
->> suddenly stops embedding rpath-private into all binaries, so the
->> resulting thing, while having the same set of files, actually does
->> not work, - not finding samba private libraries in libdir/samba.
->> I'm investigating it now, - but again, the build system is just too
->> complex and very difficult to debug, so it might take some time.
->> It's something I didn't expect at all, as all other changes are
->> rather simple.
-> 
-> That is why I'm suggesting looking at what I did for ldb, and trying to
-> make that more general, because we worked on some of those details.
+On Wed, 2024-11-27 at 09:04 +0300, Michael Tokarev wrote:
+>=20
+> FWIW, I already submitted another similar fix for a missing
+> dependency, - it's in my (largeish) MR which is stalled due
+> to another issue somewhere in wafsamba/wscripts which I'm
+> having hard time to debug - probably I should drop that one
+> change from the MR and keep it debian-only for now.
 
-This issue at hand has nothing to do with the actual way to build
-libtdb &Co.  It's just a consequence of too complex build system.
+A well used approach in Samba is to have a tree, which you can have in
+the shared devel repo and get CI on, and then to split off patches that
+you are pretty sure will get a positive review and pass tests a few at
+at time into a MR. =C2=A0Because we mostly tend to accept/reject a whole MR=
+,
+that gets things moving. =C2=A0Then submit another, possibly in parallel
+while you wait (eg !3 depends on !2).=C2=A0
 
-Here's what I've found, using param.cpython as a starting point:
+Certainly folks generally find that momentum of small sets of changes
+drip-fed is better than large sets that stall.
 
-$ fgrep param.cpython build.* | grep rpath
-build.bad:runner [..samba/samba3/param.cpython-312-x86_64-linux-gnu.so..
-build.good:runner [..samba/param.cpython-312-x86_64-linux-gnu.so..
-build.good:runner [..samba/samba3/param.cpython-312-x86_64-linux-gnu.so..
+Andrew Bartlett
 
-as we can see, param.cpython-312.. is missing in the 'bad' case, -
-it is built without private rpath.
+--=20
+Andrew Bartlett (he/him)        https://samba.org/~abartlet/
+Samba Team Member (since 2001)  https://samba.org
+Samba Developer, Catalyst IT    https://catalyst.net.nz/services/samba
 
-Looking at the definition of param.cpython, in source3/samba/wscript_build:
-
-bld.SAMBA3_SUBSYSTEM(pyparam_util,
-                 source='pyparam_util.c',
-                 deps='%s samba-hostconfig %s' % (libpython, pytalloc_util),
-                 pyext=True,
-                 enabled=bld.PYTHON_BUILD_IS_ENABLED()
-                 )
-
-so only samba-hostconfig is referenced as a dependency from the list
-of samba libs.  However:
-
-$ patchelf --print-needed python3-samba/usr/lib/python3/dist-packages/samba/param.cpython-312-x86_64-linux-gnu.so
-libsamba-hostconfig.so.0
-libserver-role-private-samba.so.0
-libsamba-util.so.0
-libsamba-debug-private-samba.so.0
-libtalloc.so.2
-libpytalloc-util.cpython-312-x86-64-linux-gnu.so.2
-libc.so.6
-
-so besides samba-hostconfig, it also needs stuff - DIRECTLY - from
-a lot of other samba libraries, including some private ones.  But
-none of these are specified as deps.
-
-And in wafsamba code which decides when to embed rpath, we see it
-looks for deps and if none are in private, skips adding it.
-
-Now,
-
-$ fgrep -c Wl,-rpath,/usr/lib/x86_64-linux-gnu/samba build.*
-build.bad:466
-build.good:491
-
-so there are 25 such libs with missing deps JUST IN THIS CASE.
-
-I guess all of them were receiving one or more private libs
-indirectly - probably though pytalloc-util or something.
-
-Finding and patching all 25 cases is not realistic.  But I'll
-try to see what's the root of the tree here.
-
-FWIW, I already submitted another similar fix for a missing
-dependency, - it's in my (largeish) MR which is stalled due
-to another issue somewhere in wafsamba/wscripts which I'm
-having hard time to debug - probably I should drop that one
-change from the MR and keep it debian-only for now.
-
-Thanks,
-
-/mjt
 
