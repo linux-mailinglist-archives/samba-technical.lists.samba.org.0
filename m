@@ -2,51 +2,72 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 02D9A9E5ED4
-	for <lists+samba-technical@lfdr.de>; Thu,  5 Dec 2024 20:35:32 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 172099EA13B
+	for <lists+samba-technical@lfdr.de>; Mon,  9 Dec 2024 22:26:36 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=JL9cP1C0PtmOAm61cOgZ3AttE8JMwrWxnHgDcGq/aSY=; b=0n9NXLDZBQD9CZijHqLBSotC2t
-	OgARgu2uoRsrZKZxroIwMylJS8iPtTqaCsr73mey/NeN8PI7J0I0JADccpkd+eO/FBqkrg+D70qKX
-	4GMqkb3+ih9p66M5R1skrLCQ6FAf5/CymO6npWRUg6ErRYnYRdB2oMCBPRWJbSYnqWhD80mUNmq3Y
-	9UUTlkqw5I8XZFdwIhpXvBEICl4rf5Dk+xazr7vquI/SpPKz1GfQfC7usR/H1up2OpdALb4PUshrJ
-	U+QTJrhTyAcIY7+STQfYrmy6+Wlj63a9PvSdwHXVBoXpAKe/ywgoPHIw/hZorVyq5WdLJ2d2dr92P
-	ZY1/IVGA==;
-Received: from ip6-localhost ([::1]:61412 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=53NmjpME1xHX7DX/jgKMbQey7g7GeYI01hf4hjnj9q4=; b=t+NzyWDifyiWOaC/PMv+qQmfvH
+	r7l7IH8P/FfD7CouX0+LBoRD/yP27JS5zs0g0HKYo1MlHNyxdjLxMZiRGeP2G4QLd/6ArY+C8smis
+	lbS0wUTJtM70JUO7w1SPEpNP4dg0d94c+pJ6piAnbTqBnUwusTvmNF044N5er9GdmSJUA0KghDBbT
+	TrAO6E2wkJ+jgF0PYRdhsP85k+ql/atMorcIstDUcDFSXoGteK82/zSYY8J9GoQSeXehaoXLJrjDe
+	WnVkxOdCSGjxZtbGSBaJ8XAeEG75YMKYD/mQ5KPagOwetDOXBpr7rYgAr4+IKxVrq1HFYhunIPhSM
+	hxK/djrg==;
+Received: from ip6-localhost ([::1]:62250 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1tJHcj-003Ycv-QC; Thu, 05 Dec 2024 19:34:53 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:21286) 
+	id 1tKlGK-003n84-Jm; Mon, 09 Dec 2024 21:25:52 +0000
+Received: from mail-lf1-x130.google.com ([2a00:1450:4864:20::130]:61618) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1tJHcY-003Ycm-1F
- for samba-technical@lists.samba.org; Thu, 05 Dec 2024 19:34:52 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:To:From:Message-ID:CC;
- bh=KJR47U9isGq5R4s6GAsG+aXpDgB5J2BljsP2LS+ngAM=; b=PZb8jyUmThu+q3O25M67wZ1O66
- Bc1hwLBeF27A9/LDx/LXddZ5qWcvRszw2hOucgYMpsiV3GIkER1Fhhog5gl+pP6ac5/UnY+tFnmKU
- 9sZ0BarH9TLot4wMTaQFlf2o21XsqoBywI7rsIRvoiOvahtY1BK0VQq32PjPsjnSRP17kR2suf6fl
- 0JNNMzZkfjv4Mj34ilv7za5JLfbLAxFWWzPB2x5srXGQ69EZEhKSCsNargI1bt9zbcWE9QCHifxHJ
- W63Qo1jsap10oP+1h9yi8FqKqWs90WE/Io8jGMghUfXdmrC7YDhFlSDuuXtLFOdo9eAKjcse1ugY2
- aqVmEE2d4Vql6sG3N6vWp+H9qmmtpBH1kQPW7rSNM2gmjUEJUVxTPy/m6d8f1Lju4b+X/4/J2WaN4
- qLeMr2/lkY4BtMmG8ouC0phyqNzq7HEkWhj1DIBLKuQSdv3aUQ38KqMRtZv7PJWmKDiNxz8OoTO9L
- icyTTJcAbKHD+d8SAaItgw4T;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1tJHcW-0010Sj-14; Thu, 05 Dec 2024 19:34:40 +0000
-Message-ID: <3cd8d2c57173a78464568022d6fdc9907648b5c3.camel@samba.org>
-Subject: Re: script enablerecyclebin
-To: Stefan Kania <stefan@kania-online.de>, samba-technical@lists.samba.org
-Date: Fri, 06 Dec 2024 08:34:36 +1300
-In-Reply-To: <0d73fa11-3e41-4125-99c3-b84bc07e527f@kania-online.de>
-References: <da0dbae1-2fde-45ad-97b7-3b92a48dd9f3@kania-online.de>
- <20241205110511.13446bae@devstation.samdom.example.com>
- <0d73fa11-3e41-4125-99c3-b84bc07e527f@kania-online.de>
-User-Agent: Evolution 3.36.5-0ubuntu1 
+ (Exim) id 1tKlGE-003n7x-V8
+ for samba-technical@lists.samba.org; Mon, 09 Dec 2024 21:25:49 +0000
+Received: by mail-lf1-x130.google.com with SMTP id
+ 2adb3069b0e04-53f22fd6887so2203660e87.2
+ for <samba-technical@lists.samba.org>; Mon, 09 Dec 2024 13:25:46 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1733779544; x=1734384344; darn=lists.samba.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=53NmjpME1xHX7DX/jgKMbQey7g7GeYI01hf4hjnj9q4=;
+ b=ALWIY9iX9c56xh2hxV/pJfS83uIQYIMO23siwbzt+h1QoJFxKLy7pV3OK9VDMCPCfd
+ LLFu/YCzQv4RWPpvY5SHAN+fB25g7ZIMxNhGU6wz3EK+NCcgmkXRKkkSHKXMVv1TGPoA
+ xS4g/KAngShzUYaCuMnhgOXP22HiKzOiTCp4XKRzFF/VPwQ81HJpsIkxlGqYr/b+r/Tc
+ NBjJ15Ulm9S3aliAO2pPQ2karV/Co2XsOo+OKJfbOblhR302d6iBtBXTZcMTf2dLEMbG
+ Rc9yv3ORJz+pkdYFuvF0toWvDE/yTeRptwMgHpDjJDte5kY4iYme4xM+b0ZqVnw+e9LZ
+ Y5Gw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1733779544; x=1734384344;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=53NmjpME1xHX7DX/jgKMbQey7g7GeYI01hf4hjnj9q4=;
+ b=JWmBO5HP8ZxxY9Vyh5UQqauRCvR1j34yEwzmdZpxub+qXzXwqMJ9tkcxHs/x+pbGhS
+ SZxJN+PXKf19md2x+qtFO4j5Zhe3cxluwebxg/lj5s5+P4RemrDKTJhfOMses94dmiUG
+ NmZdYjLK0wrAo62iPfyCqdAH9+KlHt3bIObsy/zRBmhg0q0rBWPlnNgPG7DlswBi5+zN
+ Z2lG7hEwW0KMIaWT2D55MIo4aaPhnBB5HX4IVr8Mqc7ejMVUuqcYD9yOPLh3GPiJnY9O
+ vqzD52dHGLkptmKuN3XKLhhbcSnod7AJMrxAiIeMXMXBR8Gb3WLXYC5K7GnWjEuP1IW/
+ phrw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVeArX0pt5vDsLIF+WNcNL/yJ+RRc0Yz6mDJj4Ho2EJh4J/AoCGaud1LYIoFJIpJcfD9z2ioGeH8vTT3o5PVR0=@lists.samba.org
+X-Gm-Message-State: AOJu0YzsOkR4E8FK5iKER0GKtKxS7w2/SAOVrr38m/L3WGesS0Vqtksm
+ WrFLp3BauFCrzakfXFJ+sPBThQMx5YD3KBeu9xPs/Ur1B6+YUeIg2rCxqo1pMOYqmh8oOz6UfI3
+ lTEUAUq8AIQpAM/RTrxtS1aicQfg=
+X-Gm-Gg: ASbGncsnRuCbl+2zOBuzRfZlz8qlfvXi19iS/iVzg1PIUPjljxwtA9yVlQGmD8FnHXg
+ 7YVwov1khISTg12pLlc0g5oYMLEMJ2M7IBxjNafLDgl9wGEvXpEJZCsJZcd557v8m
+X-Google-Smtp-Source: AGHT+IHTDwqErjmIWofxz5/aGKnw+3l4AJ7nvW1mEqhxbKvkpvWY4PENkEagDjvrMk9CtW+nkydmoJbaUqhQmqrjCNY=
+X-Received: by 2002:a05:6512:39c8:b0:53e:3804:579f with SMTP id
+ 2adb3069b0e04-53e38045800mr5583727e87.47.1733779542767; Mon, 09 Dec 2024
+ 13:25:42 -0800 (PST)
 MIME-Version: 1.0
+References: <20241209110708.40045-2-thorsten.blum@linux.dev>
+In-Reply-To: <20241209110708.40045-2-thorsten.blum@linux.dev>
+Date: Mon, 9 Dec 2024 15:25:31 -0600
+Message-ID: <CAH2r5mvDEcu_-QkS=e-sUx3-_OAbz93P=pO7M-7B_aatKfRbrw@mail.gmail.com>
+Subject: Re: [RESEND PATCH] cifs: Use str_yes_no() helper in
+ cifs_ses_add_channel()
+To: Thorsten Blum <thorsten.blum@linux.dev>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,51 +81,59 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
+From: Steve French via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Steve French <smfrench@gmail.com>
+Cc: Paulo Alcantara <pc@manguebit.com>, Tom Talpey <tom@talpey.com>,
+ Shyam Prasad N <sprasad@microsoft.com>, linux-cifs@vger.kernel.org,
+ samba-technical@lists.samba.org, linux-kernel@vger.kernel.org,
+ Steve French <sfrench@samba.org>, Bharath SM <bharathsm@microsoft.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Thu, 2024-12-05 at 16:46 +0100, Stefan Kania via samba-technical
-wrote:
-> Am 05.12.24 um 12:05 schrieb Rowland Penny via samba-technical:
-> > On Thu, 5 Dec 2024 11:19:02 +0100Stefan Kania via samba-technical <
-> > samba-technical@lists.samba.org>wrote:
-> > > Hi,
-> > > after enabling recyclebin with the script enablerecyclebin from
-> > > thesources, there are no more deleted object in "cn=deleted
-> > > objects" itlook like the objects will be deleted immediately.I'm
-> > > using Samba 4.21.1 from the Debian bookworm-backports and
-> > > thescript from the sources of Samba 4.21.1.
-> > > Any known issue?
-> > > Stefan
-> > 
-> > Unless something has changed and I missed it, the recycle bin in
-> > SambaAD does not work, there is a bug about it here:
-> > https://bugzilla.samba.org/show_bug.cgi?id=10403
-> > 
-> > Rowland
-> 
-> That's bad. After trying to activate the recyclebin, deleted objects
-> are no longer stored in "cn=deleted objects" that's very bad. So
-> either it should be fixed very  quick, or the script should be
-> removed.For me it's just a test, so I don't care to reinstall my AD.
-> Is there a way to remove it? So that could help.
+merged into cifs-2.6.git for-next
 
-An MR to remove/neuter the script would be a sensible thing to propose.
- https://wiki.samba.org/index.php/Contribute has the process.
-Funding to implement the functionality correctly would be awesome as
-well, if you know an organisation/sovereign nation with budget.  
-Your friendly local Samba commercial support provider could be worth a
-call in that case.
-(To be clear, given the spectacular failure mode, it won't be a quick
-fix due to the tests needed and proper tooling required for it to be a
-production-ready feature). 
-Andrew Bartlett
+On Mon, Dec 9, 2024 at 5:10=E2=80=AFAM Thorsten Blum <thorsten.blum@linux.d=
+ev> wrote:
+>
+> Remove hard-coded strings by using the str_yes_no() helper function.
+>
+> Signed-off-by: Thorsten Blum <thorsten.blum@linux.dev>
+> ---
+>  fs/smb/client/sess.c | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>
+> diff --git a/fs/smb/client/sess.c b/fs/smb/client/sess.c
+> index 0bb77f9ec686..3306fb655136 100644
+> --- a/fs/smb/client/sess.c
+> +++ b/fs/smb/client/sess.c
+> @@ -488,11 +488,11 @@ cifs_ses_add_channel(struct cifs_ses *ses,
+>
+>         if (iface->sockaddr.ss_family =3D=3D AF_INET)
+>                 cifs_dbg(FYI, "adding channel to ses %p (speed:%zu bps rd=
+ma:%s ip:%pI4)\n",
+> -                        ses, iface->speed, iface->rdma_capable ? "yes" :=
+ "no",
+> +                        ses, iface->speed, str_yes_no(iface->rdma_capabl=
+e),
+>                          &ipv4->sin_addr);
+>         else
+>                 cifs_dbg(FYI, "adding channel to ses %p (speed:%zu bps rd=
+ma:%s ip:%pI6)\n",
+> -                        ses, iface->speed, iface->rdma_capable ? "yes" :=
+ "no",
+> +                        ses, iface->speed, str_yes_no(iface->rdma_capabl=
+e),
+>                          &ipv6->sin6_addr);
+>
+>         /*
+> --
+> 2.47.1
+>
+>
 
--- 
-Andrew Bartlett (he/him)       https://samba.org/~abartlet/Samba Team Member (since 2001) https://samba.orgSamba Team Lead                https://catalyst.net.nz/services/sambaCatalyst.Net Ltd
-Proudly developing Samba for Catalyst.Net Ltd - a Catalyst IT group
-company
-Samba Development and Support: https://catalyst.net.nz/services/samba
-Catalyst IT - Expert Open Source Solutions
+
+--=20
+Thanks,
+
+Steve
+
