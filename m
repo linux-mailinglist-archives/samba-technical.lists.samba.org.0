@@ -2,72 +2,47 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 172099EA13B
-	for <lists+samba-technical@lfdr.de>; Mon,  9 Dec 2024 22:26:36 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2FB119EA675
+	for <lists+samba-technical@lfdr.de>; Tue, 10 Dec 2024 04:17:43 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=53NmjpME1xHX7DX/jgKMbQey7g7GeYI01hf4hjnj9q4=; b=t+NzyWDifyiWOaC/PMv+qQmfvH
-	r7l7IH8P/FfD7CouX0+LBoRD/yP27JS5zs0g0HKYo1MlHNyxdjLxMZiRGeP2G4QLd/6ArY+C8smis
-	lbS0wUTJtM70JUO7w1SPEpNP4dg0d94c+pJ6piAnbTqBnUwusTvmNF044N5er9GdmSJUA0KghDBbT
-	TrAO6E2wkJ+jgF0PYRdhsP85k+ql/atMorcIstDUcDFSXoGteK82/zSYY8J9GoQSeXehaoXLJrjDe
-	WnVkxOdCSGjxZtbGSBaJ8XAeEG75YMKYD/mQ5KPagOwetDOXBpr7rYgAr4+IKxVrq1HFYhunIPhSM
-	hxK/djrg==;
-Received: from ip6-localhost ([::1]:62250 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=a+3UNZ2Nos7GwTeV0stOOopWGRR/YeQzZEUwVuMASqk=; b=6Mp3UtbO0DHnIYZ7Emu4z72noC
+	Y/oSlIJm+CJ9MGbxEFllURiuoB9TXPvULnYvSNbNBH80up51r3g5f4wczjPclMds3v5qonQ2s1ECE
+	wbGwyJ6aRFXml6faMA5IOrQDaIdFKsuRlHQiEYQ3s2S/PI/uvnnkZW639FITzotC+v3uTOCdJv4YB
+	GqM1VIxCEjrO5gM2ohHBdwQxUWzlAidm/NdSxzWl6tkeVqPMjzOhya1GH/V4t9DBelCOdsuMkoD4a
+	ZDEnj1hHfFA6ASItHNFhdOiluCvV7viyTb0jSQmTav52PIg6knqqYjqbb4mrtrKRQXqykMO7kTh6i
+	ucLyChfA==;
+Received: from ip6-localhost ([::1]:24150 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1tKlGK-003n84-Jm; Mon, 09 Dec 2024 21:25:52 +0000
-Received: from mail-lf1-x130.google.com ([2a00:1450:4864:20::130]:61618) 
+	id 1tKqkH-003nyG-5E; Tue, 10 Dec 2024 03:17:09 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:30740) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1tKlGE-003n7x-V8
- for samba-technical@lists.samba.org; Mon, 09 Dec 2024 21:25:49 +0000
-Received: by mail-lf1-x130.google.com with SMTP id
- 2adb3069b0e04-53f22fd6887so2203660e87.2
- for <samba-technical@lists.samba.org>; Mon, 09 Dec 2024 13:25:46 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1733779544; x=1734384344; darn=lists.samba.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=53NmjpME1xHX7DX/jgKMbQey7g7GeYI01hf4hjnj9q4=;
- b=ALWIY9iX9c56xh2hxV/pJfS83uIQYIMO23siwbzt+h1QoJFxKLy7pV3OK9VDMCPCfd
- LLFu/YCzQv4RWPpvY5SHAN+fB25g7ZIMxNhGU6wz3EK+NCcgmkXRKkkSHKXMVv1TGPoA
- xS4g/KAngShzUYaCuMnhgOXP22HiKzOiTCp4XKRzFF/VPwQ81HJpsIkxlGqYr/b+r/Tc
- NBjJ15Ulm9S3aliAO2pPQ2karV/Co2XsOo+OKJfbOblhR302d6iBtBXTZcMTf2dLEMbG
- Rc9yv3ORJz+pkdYFuvF0toWvDE/yTeRptwMgHpDjJDte5kY4iYme4xM+b0ZqVnw+e9LZ
- Y5Gw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733779544; x=1734384344;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=53NmjpME1xHX7DX/jgKMbQey7g7GeYI01hf4hjnj9q4=;
- b=JWmBO5HP8ZxxY9Vyh5UQqauRCvR1j34yEwzmdZpxub+qXzXwqMJ9tkcxHs/x+pbGhS
- SZxJN+PXKf19md2x+qtFO4j5Zhe3cxluwebxg/lj5s5+P4RemrDKTJhfOMses94dmiUG
- NmZdYjLK0wrAo62iPfyCqdAH9+KlHt3bIObsy/zRBmhg0q0rBWPlnNgPG7DlswBi5+zN
- Z2lG7hEwW0KMIaWT2D55MIo4aaPhnBB5HX4IVr8Mqc7ejMVUuqcYD9yOPLh3GPiJnY9O
- vqzD52dHGLkptmKuN3XKLhhbcSnod7AJMrxAiIeMXMXBR8Gb3WLXYC5K7GnWjEuP1IW/
- phrw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVeArX0pt5vDsLIF+WNcNL/yJ+RRc0Yz6mDJj4Ho2EJh4J/AoCGaud1LYIoFJIpJcfD9z2ioGeH8vTT3o5PVR0=@lists.samba.org
-X-Gm-Message-State: AOJu0YzsOkR4E8FK5iKER0GKtKxS7w2/SAOVrr38m/L3WGesS0Vqtksm
- WrFLp3BauFCrzakfXFJ+sPBThQMx5YD3KBeu9xPs/Ur1B6+YUeIg2rCxqo1pMOYqmh8oOz6UfI3
- lTEUAUq8AIQpAM/RTrxtS1aicQfg=
-X-Gm-Gg: ASbGncsnRuCbl+2zOBuzRfZlz8qlfvXi19iS/iVzg1PIUPjljxwtA9yVlQGmD8FnHXg
- 7YVwov1khISTg12pLlc0g5oYMLEMJ2M7IBxjNafLDgl9wGEvXpEJZCsJZcd557v8m
-X-Google-Smtp-Source: AGHT+IHTDwqErjmIWofxz5/aGKnw+3l4AJ7nvW1mEqhxbKvkpvWY4PENkEagDjvrMk9CtW+nkydmoJbaUqhQmqrjCNY=
-X-Received: by 2002:a05:6512:39c8:b0:53e:3804:579f with SMTP id
- 2adb3069b0e04-53e38045800mr5583727e87.47.1733779542767; Mon, 09 Dec 2024
- 13:25:42 -0800 (PST)
+ (Exim) id 1tKqkA-003nxp-Ku; Tue, 10 Dec 2024 03:17:05 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Message-ID:Cc:To:From:Date;
+ bh=a+3UNZ2Nos7GwTeV0stOOopWGRR/YeQzZEUwVuMASqk=; b=aSfh0p+/OkCT1oXmVXMT5MPuYV
+ iROT/MJ24Cb2zKOk+BVaazWNMADGuiOMPhVgiSDxulb80fmPde0p/FzG3JtZwk9RsUNxhly3pUBl3
+ NI3pZMI8fcWcpQadzZjgk3Fa/YdOa0YfY/0BYmrcxQru2KPvw5KusszNizeYzIVfiGQ8taJBlOato
+ ML9ib8XYgAObM9Z0l4RquRig+TrzuzZage9Av2JEBe+wnE+pYdmbxrQ9eu4B5+/X4arRp+6rxWk4x
+ 1583en8j2dnZT/DBWejlBLlWFVI2GlbxxLAsTboaiM16gbJtEZ9Ren7HBt4a7dL8a1B8g4hFkK6zT
+ scbISvx+NVut6kZaO+uwIldU96bOoDr83kjMd8jQVbXzlT+oF2uoxRioeY9QkcbACkTuRdU99HhOs
+ BlRjjaQYhUhvCPBfYleY7PrJMpgptUCUTCAOmxPi4Qk1pHouAjto94HGXm9iYV0URoMZD6r6pR+No
+ OpXW+CnLARYgVQp8mHPSTVxZ;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1tKqk9-001njG-0t; Tue, 10 Dec 2024 03:17:01 +0000
+Date: Tue, 10 Dec 2024 14:16:53 +1100
+To: Peter Koch <sambamailinglist@gmail.com>
+Subject: Re: [Samba] TOO MANY OPEN FILES when adding printer driver
+Message-ID: <20241210141653.1d1269da.ddiss@samba.org>
+In-Reply-To: <CAPcm_1wHWy7JBznag7n984M6MwHA2HxGk3a6O1bWKqi_1dBFog@mail.gmail.com>
+References: <CAPcm_1xbTu5udHnxEADw8Es_eBbMTBS3EAKUm4ow06zNLd_UrA@mail.gmail.com>
+ <CAPcm_1wHWy7JBznag7n984M6MwHA2HxGk3a6O1bWKqi_1dBFog@mail.gmail.com>
 MIME-Version: 1.0
-References: <20241209110708.40045-2-thorsten.blum@linux.dev>
-In-Reply-To: <20241209110708.40045-2-thorsten.blum@linux.dev>
-Date: Mon, 9 Dec 2024 15:25:31 -0600
-Message-ID: <CAH2r5mvDEcu_-QkS=e-sUx3-_OAbz93P=pO7M-7B_aatKfRbrw@mail.gmail.com>
-Subject: Re: [RESEND PATCH] cifs: Use str_yes_no() helper in
- cifs_ses_add_channel()
-To: Thorsten Blum <thorsten.blum@linux.dev>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -81,59 +56,89 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
-Cc: Paulo Alcantara <pc@manguebit.com>, Tom Talpey <tom@talpey.com>,
- Shyam Prasad N <sprasad@microsoft.com>, linux-cifs@vger.kernel.org,
- samba-technical@lists.samba.org, linux-kernel@vger.kernel.org,
- Steve French <sfrench@samba.org>, Bharath SM <bharathsm@microsoft.com>
+From: David Disseldorp via samba-technical <samba-technical@lists.samba.org>
+Reply-To: David Disseldorp <ddiss@samba.org>
+Cc: samba@lists.samba.org, Samba Technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-merged into cifs-2.6.git for-next
+[cc'ing samba-technical list]
 
-On Mon, Dec 9, 2024 at 5:10=E2=80=AFAM Thorsten Blum <thorsten.blum@linux.d=
-ev> wrote:
->
-> Remove hard-coded strings by using the str_yes_no() helper function.
->
-> Signed-off-by: Thorsten Blum <thorsten.blum@linux.dev>
-> ---
->  fs/smb/client/sess.c | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
->
-> diff --git a/fs/smb/client/sess.c b/fs/smb/client/sess.c
-> index 0bb77f9ec686..3306fb655136 100644
-> --- a/fs/smb/client/sess.c
-> +++ b/fs/smb/client/sess.c
-> @@ -488,11 +488,11 @@ cifs_ses_add_channel(struct cifs_ses *ses,
->
->         if (iface->sockaddr.ss_family =3D=3D AF_INET)
->                 cifs_dbg(FYI, "adding channel to ses %p (speed:%zu bps rd=
-ma:%s ip:%pI4)\n",
-> -                        ses, iface->speed, iface->rdma_capable ? "yes" :=
- "no",
-> +                        ses, iface->speed, str_yes_no(iface->rdma_capabl=
-e),
->                          &ipv4->sin_addr);
->         else
->                 cifs_dbg(FYI, "adding channel to ses %p (speed:%zu bps rd=
-ma:%s ip:%pI6)\n",
-> -                        ses, iface->speed, iface->rdma_capable ? "yes" :=
- "no",
-> +                        ses, iface->speed, str_yes_no(iface->rdma_capabl=
-e),
->                          &ipv6->sin6_addr);
->
->         /*
-> --
-> 2.47.1
->
->
+Hi Peter,
+
+On Sun, 8 Dec 2024 21:33:53 +0100, Peter Koch via samba wrote:
+
+> Dear Samba experts,
+> 
+> I have 10 rpcd_spoolss processes running. Here's the
+> output o prlimit for one of them:
+> 
+> # prlimit -p628
+...
+> NOFILE     max number of open files                 270     16384 files
+...
+> NOFILE has a soft limit of 270 - seems very low to me.
+> 
+> I changed the NOFILE-value for all of my rpcd_spoolss-processes:
+> 
+> # prlimit -n500:16384 -p<pid>
+> 
+> And this fixed my problem.
+
+Thanks a lot for your report and follow-up.
+smbd and winbindd already attempt to manually set RLIMIT_NOFILE limits
+based on configuration of "max open files" and "winbind max domain
+connections" respectively. I think it'd make sense to also attempt to
+raise the limit for Samba rpc daemons.
+Would you be able to raise a bugzilla.samba.org ticket for this? That
+should ensure that we don't forget about it.
+
+Cheers, David
 
 
---=20
-Thanks,
+> 
+> Kind regards
+> 
+> Peter
+> 
+> Am So., 8. Dez. 2024 um 19:30 Uhr schrieb Peter Koch
+> <sambamailinglist@gmail.com>:
+> 
+> > Dear Samba experts,
+> >
+> > I'm trying to add a printer driver for a Canaon TM-255 plotter
+> > to out samba4 machine.
+> >
+> > While most printer drivers consist of a handful of files, this plotter
+> > requires 149 driver files.
+> >
+> > I'm adding the driver via:
+> >
+> > FILES="CNWT10GM.UPD,,CNWUO411.DLL,.... 142 more files"
+> > rpcclient -U Administrator%nav852 SERV00 -c "adddriver \"Windows x64\"
+> > \"Canon TM-255:CNWUOM.DLL:CNWT10GM.XPD:CNWUOMUI.DLL:NULL:NULL:$FILES\""
+> >
+> > And this fails with WERR_APP_INIT_FAILURE
+> >
+> > If I reduce the list of extra files to 116 files everything works fine.
+> > If the list of extra files has >=117 files the following messages
+> > show up in /var/samba/log.rpcd_spoolss
+> >
+> > [2024/12/08 19:25:42.072125,  0]
+> > ../../source3/printing/nt_printing.c:1482(move_driver_file_to_download_area)
+> >   move_driver_file_to_download_area: Unable to rename
+> > [x64/CPC1RUW1.DLL] to [x64/3/CPC1RUW1.DLL]:
+> > NT_STATUS_TOO_MANY_OPENED_FILES
+> > [2024/12/08 19:25:42.073567,  0]
+> > ../../source3/rpc_server/spoolss/srv_spoolss_nt.c:8716(_spoolss_AddPrinterDriverEx)
+> >   _spoolss_AddPrinterDriverEx: move_driver_to_download_area failed -
+> > WERR_APP_INIT_FAILURE
+> >
+> > How do I increase the max number of open files for rpcd_spoolss
+> >
+> > Kind regards
+> >
+> > Peter  
+> 
 
-Steve
 
