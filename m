@@ -2,47 +2,71 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2FB119EA675
-	for <lists+samba-technical@lfdr.de>; Tue, 10 Dec 2024 04:17:43 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 47FF09F56FF
+	for <lists+samba-technical@lfdr.de>; Tue, 17 Dec 2024 20:41:40 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=a+3UNZ2Nos7GwTeV0stOOopWGRR/YeQzZEUwVuMASqk=; b=6Mp3UtbO0DHnIYZ7Emu4z72noC
-	Y/oSlIJm+CJ9MGbxEFllURiuoB9TXPvULnYvSNbNBH80up51r3g5f4wczjPclMds3v5qonQ2s1ECE
-	wbGwyJ6aRFXml6faMA5IOrQDaIdFKsuRlHQiEYQ3s2S/PI/uvnnkZW639FITzotC+v3uTOCdJv4YB
-	GqM1VIxCEjrO5gM2ohHBdwQxUWzlAidm/NdSxzWl6tkeVqPMjzOhya1GH/V4t9DBelCOdsuMkoD4a
-	ZDEnj1hHfFA6ASItHNFhdOiluCvV7viyTb0jSQmTav52PIg6knqqYjqbb4mrtrKRQXqykMO7kTh6i
-	ucLyChfA==;
-Received: from ip6-localhost ([::1]:24150 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=U2GacLjc8FX3B74AudZ8c6vsq8B7+/8+n4FnAcM4NZ8=; b=lFmIJsY5Xf5UT3l2UFs3SGtZSh
+	u4OYzFx5ScfbUNHJUt77aBUveI59opH/maVyzOV8xDEqLrJNNQCxVIez2+kNix/uJt7uJXhRjmuAT
+	PqWtbTvISfWQ0klFXVr9/yyGcII16bnaZ2eFgZFhAZHWHt0qNTz19mPmLWK7pB9H585fKKAz+dajN
+	4biBsnAxD1O3PH/EcVeyM+JNedqA+Pf8zKdmhWI7J0zIZbSUJNRUDQApnEjTtf9mIpkH/J2z+97SW
+	w+RSvczi00MevdUMvsmQ7Cz5kLo2UxpG92t6H0qnOzWiM7Jbw0buJRoWyTcfeHavcLYNtJ2HzBj5H
+	FcyGKEgQ==;
+Received: from ip6-localhost ([::1]:61474 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1tKqkH-003nyG-5E; Tue, 10 Dec 2024 03:17:09 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:30740) 
+	id 1tNdRG-004Um6-8B; Tue, 17 Dec 2024 19:41:02 +0000
+Received: from mail-lf1-x136.google.com ([2a00:1450:4864:20::136]:57549) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1tKqkA-003nxp-Ku; Tue, 10 Dec 2024 03:17:05 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Cc:To:From:Date;
- bh=a+3UNZ2Nos7GwTeV0stOOopWGRR/YeQzZEUwVuMASqk=; b=aSfh0p+/OkCT1oXmVXMT5MPuYV
- iROT/MJ24Cb2zKOk+BVaazWNMADGuiOMPhVgiSDxulb80fmPde0p/FzG3JtZwk9RsUNxhly3pUBl3
- NI3pZMI8fcWcpQadzZjgk3Fa/YdOa0YfY/0BYmrcxQru2KPvw5KusszNizeYzIVfiGQ8taJBlOato
- ML9ib8XYgAObM9Z0l4RquRig+TrzuzZage9Av2JEBe+wnE+pYdmbxrQ9eu4B5+/X4arRp+6rxWk4x
- 1583en8j2dnZT/DBWejlBLlWFVI2GlbxxLAsTboaiM16gbJtEZ9Ren7HBt4a7dL8a1B8g4hFkK6zT
- scbISvx+NVut6kZaO+uwIldU96bOoDr83kjMd8jQVbXzlT+oF2uoxRioeY9QkcbACkTuRdU99HhOs
- BlRjjaQYhUhvCPBfYleY7PrJMpgptUCUTCAOmxPi4Qk1pHouAjto94HGXm9iYV0URoMZD6r6pR+No
- OpXW+CnLARYgVQp8mHPSTVxZ;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1tKqk9-001njG-0t; Tue, 10 Dec 2024 03:17:01 +0000
-Date: Tue, 10 Dec 2024 14:16:53 +1100
-To: Peter Koch <sambamailinglist@gmail.com>
-Subject: Re: [Samba] TOO MANY OPEN FILES when adding printer driver
-Message-ID: <20241210141653.1d1269da.ddiss@samba.org>
-In-Reply-To: <CAPcm_1wHWy7JBznag7n984M6MwHA2HxGk3a6O1bWKqi_1dBFog@mail.gmail.com>
-References: <CAPcm_1xbTu5udHnxEADw8Es_eBbMTBS3EAKUm4ow06zNLd_UrA@mail.gmail.com>
- <CAPcm_1wHWy7JBznag7n984M6MwHA2HxGk3a6O1bWKqi_1dBFog@mail.gmail.com>
+ (Exim) id 1tNdRB-004Ulz-Po
+ for samba-technical@lists.samba.org; Tue, 17 Dec 2024 19:41:00 +0000
+Received: by mail-lf1-x136.google.com with SMTP id
+ 2adb3069b0e04-5401bd6cdb7so5752854e87.2
+ for <samba-technical@lists.samba.org>; Tue, 17 Dec 2024 11:40:56 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1734464455; x=1735069255; darn=lists.samba.org;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=3X8IEkoXe3b715VYGF9ZQCq4bYE/OmXoGy0qO9sTq8U=;
+ b=ehHDovNFX07dUSQ00hDiVjdGFTVqTBjS0v0cbtfzS/Q9r0ECI9oEGV08Oao3b96lI6
+ qmf8ChaJsJw8Zas1stuKEtKO6zy3Y8Zx0n9KfRdsHKa6Oft0o/U/j/9xkedJ7WHvDYia
+ JPuxEaX+83JyLD2n1n8Un6ivZ0y32X+21ktwdfL84l10zJ4nUnAVt7+FdHlCTXzmBrCW
+ P/m/iSUisBPdRUAxyslaEfDrcxMKghniDtFBAid2OiLnrlsmm24zWn4op8RNfS+R8A28
+ 2uvlQTsd5+6BFad4JNGvxLehj80xAwS3KPSwsaweW5mmOazKUxVPn163qqHtX639rd87
+ 5XhQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1734464455; x=1735069255;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=3X8IEkoXe3b715VYGF9ZQCq4bYE/OmXoGy0qO9sTq8U=;
+ b=FQ8uj1InkEHxQseYKjvEUAJqvrksZEVe5nkUg91XmrY/0pz0FEdxLNs3g707o0Qe9q
+ LTVXaiYAZe7Gw+ZLz7VfUQEOKPrIHPfi1Tf68b0jAolItyMTeX5DKPUVusZ6efVyest8
+ IkQ2l4COpSqs5YADYfOHlkd8LMe9FdbnMedwcFFHCNo8xEVEtLL0yg6lgGnBA2jVQml9
+ Ftd3itYuP9XzCTPp7wrtRHJ9KTzvrruTCvOfWQzLBF/wtAlfi/yOuuvAktXL47ssOZWQ
+ B+MbwAozw7gO5/Yst2vfWNboY2BniY2Yhc1ePzxdC7/PBCb2CzL7xdzstYO5HZq637LW
+ L4Mw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWjYW1kfu6JNPScaRlc8+LwLbPxjUEiyFNnrBqPSGg2l0C2o/R3l2Ia60hcK7ZCJ34N/0VxpRsUeBscC1d0vpQ=@lists.samba.org
+X-Gm-Message-State: AOJu0YwSod6kpGYqgtOKsw9ka3xN9EfLYpvidr13fyuM0n4ML15VRYmJ
+ BS5IHsDUXu55H/TlEdAu7AmwdLrWVhN57ZFgM9Yz3zsSY9Vd20GNDjusmppHSb2RuPT5UTROG0n
+ nShvMuwvc081Jp10noXS9kJ3NblE=
+X-Gm-Gg: ASbGncsT1QVlmGCAtCvYMPDhhEwpBzZKtx4BN0/7tquje9h5xO3T0LYHSMd2nxzNnn3
+ lQIxtaoHZ/sWjvDih+3kCl6FMnDVZmttBdv5P85ygT9Bozd0KWsq+9GXbtWcEGC2G2hBQHPrU
+X-Google-Smtp-Source: AGHT+IEUoal6u81q+PaMZo7ewS58cvZcTR4plu2PbEY1N2Ol9awvTAG6tQvgN7aBDYSzuGToKq+fzCABiigg9AnkE9E=
+X-Received: by 2002:a05:6512:6c2:b0:540:75d3:95c0 with SMTP id
+ 2adb3069b0e04-541ed907261mr94223e87.47.1734464454939; Tue, 17 Dec 2024
+ 11:40:54 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+References: <011da8e5ae7537ad188cc49cee6f96e09eb1b8db.1734427173.git.dsimic@manjaro.org>
+In-Reply-To: <011da8e5ae7537ad188cc49cee6f96e09eb1b8db.1734427173.git.dsimic@manjaro.org>
+Date: Tue, 17 Dec 2024 13:40:43 -0600
+Message-ID: <CAH2r5mt61UvqdE-15ndegOHROObk0CfcZxMnTZeSn9oJymY=YA@mail.gmail.com>
+Subject: Re: [PATCH] smb: client: Deduplicate "select NETFS_SUPPORT" in Kconfig
+To: Dragan Simic <dsimic@manjaro.org>, David Howells <dhowells@redhat.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -56,89 +80,45 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: David Disseldorp via samba-technical <samba-technical@lists.samba.org>
-Reply-To: David Disseldorp <ddiss@samba.org>
-Cc: samba@lists.samba.org, Samba Technical <samba-technical@lists.samba.org>
+From: Steve French via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Steve French <smfrench@gmail.com>
+Cc: pc@manguebit.com, linux-cifs@vger.kernel.org, sprasad@microsoft.com,
+ samba-technical@lists.samba.org, linux-kernel@vger.kernel.org, tom@talpey.com,
+ bharathsm@microsoft.com
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-[cc'ing samba-technical list]
+merged into cifs-2.6.git for-next
 
-Hi Peter,
+On Tue, Dec 17, 2024 at 3:26=E2=80=AFAM Dragan Simic <dsimic@manjaro.org> w=
+rote:
 
-On Sun, 8 Dec 2024 21:33:53 +0100, Peter Koch via samba wrote:
+> Repeating automatically selected options in Kconfig files is redundant, s=
+o
+> let's delete repeated "select NETFS_SUPPORT" that was added accidentally.
+>
+> Fixes: 69c3c023af25 ("cifs: Implement netfslib hooks")
+> Signed-off-by: Dragan Simic <dsimic@manjaro.org>
+> ---
+>  fs/smb/client/Kconfig | 1 -
+>  1 file changed, 1 deletion(-)
+>
+> diff --git a/fs/smb/client/Kconfig b/fs/smb/client/Kconfig
+> index 2aff6d1395ce..9f05f94e265a 100644
+> --- a/fs/smb/client/Kconfig
+> +++ b/fs/smb/client/Kconfig
+> @@ -2,7 +2,6 @@
+>  config CIFS
+>         tristate "SMB3 and CIFS support (advanced network filesystem)"
+>         depends on INET
+> -       select NETFS_SUPPORT
+>         select NLS
+>         select NLS_UCS2_UTILS
+>         select CRYPTO
+>
+>
 
-> Dear Samba experts,
-> 
-> I have 10 rpcd_spoolss processes running. Here's the
-> output o prlimit for one of them:
-> 
-> # prlimit -p628
-...
-> NOFILE     max number of open files                 270     16384 files
-...
-> NOFILE has a soft limit of 270 - seems very low to me.
-> 
-> I changed the NOFILE-value for all of my rpcd_spoolss-processes:
-> 
-> # prlimit -n500:16384 -p<pid>
-> 
-> And this fixed my problem.
+--=20
+Thanks,
 
-Thanks a lot for your report and follow-up.
-smbd and winbindd already attempt to manually set RLIMIT_NOFILE limits
-based on configuration of "max open files" and "winbind max domain
-connections" respectively. I think it'd make sense to also attempt to
-raise the limit for Samba rpc daemons.
-Would you be able to raise a bugzilla.samba.org ticket for this? That
-should ensure that we don't forget about it.
-
-Cheers, David
-
-
-> 
-> Kind regards
-> 
-> Peter
-> 
-> Am So., 8. Dez. 2024 um 19:30 Uhr schrieb Peter Koch
-> <sambamailinglist@gmail.com>:
-> 
-> > Dear Samba experts,
-> >
-> > I'm trying to add a printer driver for a Canaon TM-255 plotter
-> > to out samba4 machine.
-> >
-> > While most printer drivers consist of a handful of files, this plotter
-> > requires 149 driver files.
-> >
-> > I'm adding the driver via:
-> >
-> > FILES="CNWT10GM.UPD,,CNWUO411.DLL,.... 142 more files"
-> > rpcclient -U Administrator%nav852 SERV00 -c "adddriver \"Windows x64\"
-> > \"Canon TM-255:CNWUOM.DLL:CNWT10GM.XPD:CNWUOMUI.DLL:NULL:NULL:$FILES\""
-> >
-> > And this fails with WERR_APP_INIT_FAILURE
-> >
-> > If I reduce the list of extra files to 116 files everything works fine.
-> > If the list of extra files has >=117 files the following messages
-> > show up in /var/samba/log.rpcd_spoolss
-> >
-> > [2024/12/08 19:25:42.072125,  0]
-> > ../../source3/printing/nt_printing.c:1482(move_driver_file_to_download_area)
-> >   move_driver_file_to_download_area: Unable to rename
-> > [x64/CPC1RUW1.DLL] to [x64/3/CPC1RUW1.DLL]:
-> > NT_STATUS_TOO_MANY_OPENED_FILES
-> > [2024/12/08 19:25:42.073567,  0]
-> > ../../source3/rpc_server/spoolss/srv_spoolss_nt.c:8716(_spoolss_AddPrinterDriverEx)
-> >   _spoolss_AddPrinterDriverEx: move_driver_to_download_area failed -
-> > WERR_APP_INIT_FAILURE
-> >
-> > How do I increase the max number of open files for rpcd_spoolss
-> >
-> > Kind regards
-> >
-> > Peter  
-> 
-
-
+Steve
