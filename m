@@ -2,74 +2,45 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 47AC59F5715
-	for <lists+samba-technical@lfdr.de>; Tue, 17 Dec 2024 20:45:09 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 55CBD9F90BB
+	for <lists+samba-technical@lfdr.de>; Fri, 20 Dec 2024 11:51:58 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=f22HL5gpkon9dTeKpgexWS/AAUlUTb2ka1v0JukniNo=; b=PVaqzhCtYSiGuDuMRim1t4o8mk
-	nuqAN1oRJFlMtuIMbC0YIcbGRthfSalL3/V+h6AU479JIVNFld2KoekD5sGpZOb7TpXNacK4sJ1ns
-	YOtB0BMLA6kr3dO9T+IUNtrlXiUnRZvFwZ0TojtwsY+wRJO7c4gLAg8snfyRsbalAV4OWg70XSu63
-	OK/PBgBsY0+gvgm0cuIKgoEASxbap2MusKdk2jnF0VlW+FRB56b1TMiRLs1ZO1buzGWBd/2ifqfr1
-	ZUdtVhDJJu5R1FS+m7bleUVNOo+7y0GX8LI/np0RH/htWb7VNbgMuMUDA2uJWWa+InsDxsDUdRjUJ
-	IYXWRMng==;
-Received: from ip6-localhost ([::1]:42586 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
+	bh=Hx+x78J3CDjf0WvmvepdKflFFAQd4THGMbiQ+d9i768=; b=DjrjQzvRGGEvS1lND2mbQq8/Ga
+	UDssI+9y/j4h0ZJzA508XgOFQImuczd2/7OgbO1A+hyCgTtCcG00hCGXVNt3Edq0aVBtIV8Vl2rzj
+	CKRQBlAncl+bx55JIyX1jci5nUZ0xwimmMBR/034UDI2Y6a4SZ+8bhhcqPYMl9bje0/9fhZXppph/
+	SDKGzefiPK9GaOMZRxPWDfeC0+cKxEs7b9AuG1nP5uk/P7m5w3syUmvDZKlfqoabsrp0UcCXVVM0n
+	ycM6bivP+hoRj/8Lc9e0dk4DgK+6vASBB+it4m5yz4+RSs/MpBq9987abxokep5yJIPJNwHDyODae
+	eSkVz1lQ==;
+Received: from ip6-localhost ([::1]:45928 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1tNdVA-004Uzg-Vq; Tue, 17 Dec 2024 19:45:05 +0000
-Received: from mail-lf1-x12f.google.com ([2a00:1450:4864:20::12f]:48218) 
+	id 1tOabH-004die-2h; Fri, 20 Dec 2024 10:51:19 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:28522) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1tNdV5-004UzC-TL
- for samba-technical@lists.samba.org; Tue, 17 Dec 2024 19:45:02 +0000
-Received: by mail-lf1-x12f.google.com with SMTP id
- 2adb3069b0e04-54024ecc33dso6169248e87.0
- for <samba-technical@lists.samba.org>; Tue, 17 Dec 2024 11:44:59 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1734464698; x=1735069498; darn=lists.samba.org;
- h=content-transfer-encoding:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=f22HL5gpkon9dTeKpgexWS/AAUlUTb2ka1v0JukniNo=;
- b=LESPYw5zceH2nGb08a6TU1RtMQMW2gKGAtsXPayWxwtuGvXswc15TLAQwzu7Y+Ejym
- AfUarpCe8LY7S5m9JDyTJwlAxwzaZkum46MHBByMYomaYBry0NbLNwozx7HCZ+smVpM6
- ivZuM6rtFdwG7iIOAYyMgw8DwWNBPYV/ogiEEPOKLpQYT0I66LZPwvJ1ZHgMx6Gginl8
- y63AfpbzNAz3MCBKVw0crpJqsxoLvQJKHS4oS2cGJRxNOiF74ux3w1FHuxfTpljD45bv
- gvv4rrS6VB1S0nCeX6qcgZ1y65mPqeRw1saBf12cDcGwiyO2DzhrbYWoe1S0iCRcQaFQ
- DiJQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734464698; x=1735069498;
- h=content-transfer-encoding:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=f22HL5gpkon9dTeKpgexWS/AAUlUTb2ka1v0JukniNo=;
- b=lpVt53DFrcwGDgoVIgENpJM/LnPH85q5IeVxzWkU4CLMU+7xdulwqMFrQ4TNN883q1
- 4lzLCt7kjn+Hzjx+3+tFF2zcTCRVJbiRTM3BrwBMvKnxbzO02TjEAqlMzbClmdCxv9pR
- EqQ9B0QSdPmtX8Y3ffTNWlMMumWp3SVq+d1d8AfsbyZzh4CfYZGLbiRJrdXNdHEMQH4T
- e78zmAOClmzbVbJOHiT690aXggkki9RWiKeo7wNHFyiKkAJA9fmA3PvFVSvBQeoAsgMf
- JZ0mnI6Y7vHfxpa0TUqaih2QXwiUbUjOcqtVgd71ltaYJMJd4fcOrof3WYz81vop56R7
- CW/Q==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXfaga6tng7zq0bHq0Ee/4gdOSb/BoMoLgsJkZ5utYSQ6bvuzsoNGJ5lGdE3JfCbbOuedLMg/qSF9mJhr9oa28=@lists.samba.org
-X-Gm-Message-State: AOJu0Yzuguss4SFOKcRZ9yyEi2J+VT8QOT2BEjSMZ00wsgJimC8KHNWh
- CBw9fMNW4Pju12RtHVlhbEcwOKXXC/qnWjr6bMbmLE2JJOUr3n4/JiFgyI9rrtbzIFLKxn1ajel
- 9Y/BvoVu40F3Jm8eXjOLFMPoBWLmZPw==
-X-Gm-Gg: ASbGncsGPJBz9sDtHLznvxXODipbvJP95MNLp53dnMqiKX9msXy0nk1PMYAR6Gp1O4m
- d4Mvsiy9OwRoEqgkbVWeXXNXE/MgeDDhFc0CRQ4LPr2Ufst3b8CsTFoF+N3xS+qS9FDZmi1TY
-X-Google-Smtp-Source: AGHT+IF1nXqvs58oTofaVWDDwLovRaku8gSvBcTPCFZXJbG01IddUoietGed7rjgiN70w/10suvRe1C+OZrNvbiuo7w=
-X-Received: by 2002:a05:6512:b97:b0:541:d287:a53b with SMTP id
- 2adb3069b0e04-541e67473c6mr90611e87.19.1734464698185; Tue, 17 Dec 2024
- 11:44:58 -0800 (PST)
+ (Exim) id 1tOabC-004diW-3A
+ for samba-technical@lists.samba.org; Fri, 20 Dec 2024 10:51:16 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Message-ID:Date:To:From:CC;
+ bh=Hx+x78J3CDjf0WvmvepdKflFFAQd4THGMbiQ+d9i768=; b=FqRTaB08LQViVx9XPRMrrnOZmb
+ BV2uCDIUJ/4LTwTgjcxLjtvIo1080fyMt+KVaadcWwORceCZ5MrQHwwp/dz/lsBYPIhl7kfnTArAC
+ XzGKo978GNpa1Vr2adn9qPfLQ86hRP0JM/HEsYTVqiEhzgp3l2Eva/l+mrRxE+2/HgCaoT4QcBv7m
+ ttezdElXY56Hy08lKUECRtwPzQdAEnGciC9UDhNa2Wee9y8a3c3dt+NTtR5IVOvItJdC2Bfq8vEfh
+ BtPaYQP/zh/HwywcI/J/JYVFYz+6DNz3TxNr+D3zetuRmLGdAQl3gLpIgT+7PKuyTIiCXfXDEOiiB
+ iPz4K1hd/vYIt59PHaEByYe8l+HG+cjdQQvACaYGKBx9xruIFNzR633TQOq65Ua1BOVCT0DzKH/X7
+ Ls6ZPUEgJkE94Uv+DAo03Rf0CuRKRY4X2sHRhR7O76Mn+Z7q1wuo22cPqVkQCi13OE8yzICvrozVU
+ lLA+YjTYzhyvpSYGTjJWYy27;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1tOabB-003SmP-1R; Fri, 20 Dec 2024 10:51:13 +0000
+To: samba-technical@lists.samba.org, jra@samba.org
+Subject: opendir()/readdir() bug in smbd
+Date: Fri, 20 Dec 2024 11:51:12 +0100
+Message-ID: <9807376.eNJFYEL58v@magrathea>
 MIME-Version: 1.0
-References: <011da8e5ae7537ad188cc49cee6f96e09eb1b8db.1734427173.git.dsimic@manjaro.org>
- <CAH2r5mt61UvqdE-15ndegOHROObk0CfcZxMnTZeSn9oJymY=YA@mail.gmail.com>
-In-Reply-To: <CAH2r5mt61UvqdE-15ndegOHROObk0CfcZxMnTZeSn9oJymY=YA@mail.gmail.com>
-Date: Tue, 17 Dec 2024 13:44:46 -0600
-Message-ID: <CAH2r5mvyCvu+bjak7abXiBxK2k-a8AOJFNnD6tDx3k0BN3XrVA@mail.gmail.com>
-Subject: Fwd: [PATCH] smb: client: Deduplicate "select NETFS_SUPPORT" in
- Kconfig
-To: LKML <linux-kernel@vger.kernel.org>, 
- samba-technical <samba-technical@lists.samba.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="utf-8"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -83,49 +54,89 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
+From: Andreas Schneider via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andreas Schneider <asn@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-merged into cifs-2.6.git for-next
+Hi,
 
-On Tue, Dec 17, 2024 at 3:26=E2=80=AFAM Dragan Simic <dsimic@manjaro.org> w=
-rote:
->
-> Repeating automatically selected options in Kconfig files is redundant, s=
-o
-> let's delete repeated "select NETFS_SUPPORT" that was added accidentally.
->
-> Fixes: 69c3c023af25 ("cifs: Implement netfslib hooks")
-> Signed-off-by: Dragan Simic <dsimic@manjaro.org>
-> ---
->  fs/smb/client/Kconfig | 1 -
->  1 file changed, 1 deletion(-)
->
-> diff --git a/fs/smb/client/Kconfig b/fs/smb/client/Kconfig
-> index 2aff6d1395ce..9f05f94e265a 100644
-> --- a/fs/smb/client/Kconfig
-> +++ b/fs/smb/client/Kconfig
-> @@ -2,7 +2,6 @@
->  config CIFS
->         tristate "SMB3 and CIFS support (advanced network filesystem)"
->         depends on INET
-> -       select NETFS_SUPPORT
->         select NLS
->         select NLS_UCS2_UTILS
->         select CRYPTO
->
+we have a bug in Samba which I discovered by running tests on btrfs.
+
+The POSIX specification for readdir/opendir is the following:
+
+  If a file is removed from or added to the directory after the most recent
+  call to opendir() or rewinddir(), whether a subsequent call to readdir()
+  returns an entry for that file is **unspecified**.
+
+See https://pubs.opengroup.org/onlinepubs/9799919799/functions/readdir.html
+
+ext4:
+
+$ ./repro
+opendir(foo)
+creat(foo/bar)
+readdir() loop
+  readdir entry: .
+  readdir entry: ..
+  readdir entry: bar
+readdir() detected the newly created file foo/bar
 
 
---=20
-Thanks,
+btrfs:
 
-Steve
+$ ./repro           
+opendir(foo)
+creat(foo/bar)
+readdir() loop
+  readdir entry: .
+  readdir entry: ..
+readdir() did NOT detect the newly created file foo/bar
 
 
---=20
-Thanks,
+I've discussed this with our Kernel people and it is a bug in Samba, we have 
+to call rewinddir().
 
-Steve
+
+btrfs:
+
+$ ./repro rewind
+opendir(foo)
+creat(foo/bar)
+rewinddir(foo)
+readdir() loop
+  readdir entry: .
+  readdir entry: ..
+  readdir entry: bar
+readdir() detected the newly created file foo/bar
+
+
+I'm not a file server expert, so I would appreciate if someone could look into 
+that.
+
+Either we call rewinddir() after a file has been created or deleted, or we 
+call it before a directory traversal is started. rewinddir() is actually doing 
+an lseek().
+
+The following commits should be reverted once we have a fix:
+
+fe96aa111cdcc0f753075cccb8f1fd44791abaab
+38b8a4f2232ca3e8dc4596c080df770f07fa49a8
+
+
+
+Best regards
+
+
+	Andreas
+
+P.S. tmpfs also behaves like btrfs
+
+
+-- 
+Andreas Schneider                      asn@samba.org
+Samba Team                             www.samba.org
+GPG-ID:     8DFF53E18F2ABC8D8F3C92237EE0FC4DCC014E3D
+
+
 
