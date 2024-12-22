@@ -2,53 +2,84 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id DEC1D9FA07C
-	for <lists+samba-technical@lfdr.de>; Sat, 21 Dec 2024 12:54:37 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id DEAF19FA7D6
+	for <lists+samba-technical@lfdr.de>; Sun, 22 Dec 2024 20:52:38 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=Vt4ipczDPX096XDmlV71f32hmQEh3Wkm5jcbS36r2LI=; b=Eoy41DXO7A89lI4RzyY5N3nWHu
-	hxZR4E6OC7ZRIV8Ah1fBUDbAXGKONr4I8M9yzAbe52CVCwU7Jgw/QvvxFO755C084uMLJu793oUPJ
-	wgyAx96K1PMzVjLjYDB99qlt2G1O36OkhpNGb/R4UWYIHGg38fr+uST/Z7q7CBGotAGF8AQLfjm/6
-	9bDqIVUge6YI3IyVpVEElz7Uch/4lpGNfYD9XiKjLwTEXa6nSMwtd5A4QznBE2/XkZqT8KXl7f0BR
-	rX7dcwErC9JeV6VgwQTsmTfSRzJ+YQOx9XaMedFgxY7+B8E9C4Cyd/x3krBRJEBp1yJZRKEUatSFj
-	b3JGOq/A==;
-Received: from ip6-localhost ([::1]:62608 helo=hr1.samba.org) 
+	bh=SKenyS7EAQtWOWPtb1I3FWjNdfzsbzxJB8YZkPuEuG0=; b=xpPtg5Pwg8G2AxJnbRfizhg6nL
+	dCulOFnhAGOH0Szz0eqBSJyLt1CjCP6W0Zlbgd6d4Qr3mPk2qMwTZHBV0YjfXUZ84wTeaHspOVqFk
+	0JexNL2a8QZQsvZlaLKPF94ve3FNgCeWx+9Sb4gdHhWHUxgMPGjSkI6hIPfUOaIuxP4m/k6NmxqjY
+	1CPSHcCixODvgVzI7xMC6wR1eZshM+6aTfjQ0rL/CPuSqBUvfPFt0Wgct++B+IFkIo588Jjy9RHhm
+	VPOE3WQHAQ4FqVZbyevr9K5x6HOjobipNQIuBLoFRtwSbDobSWSaXQCjcdFqRn68swoHszPF1czlq
+	emzuW9Yw==;
+Received: from ip6-localhost ([::1]:54302 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1tOy3V-004hqQ-H8; Sat, 21 Dec 2024 11:54:01 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:22576) 
+	id 1tPRzb-004ke6-8t; Sun, 22 Dec 2024 19:51:59 +0000
+Received: from mail-pf1-x430.google.com ([2607:f8b0:4864:20::430]:57397) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1tOy3R-004hqI-C1
- for samba-technical@lists.samba.org; Sat, 21 Dec 2024 11:53:59 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=From:Cc:To:Date:Message-ID;
- bh=Vt4ipczDPX096XDmlV71f32hmQEh3Wkm5jcbS36r2LI=; b=honYvNYMLPdrHRE2cwA/maRWnj
- bh38aJrzJjJNtJgczD6Gti9D4mYl32VauHqfGfU7FtPxFdNOwYRYHjMI3xbcT61YphfRFVBwLa9gv
- kb3uLVlTa1il4I+vMQTC52HvpcpH/bbUGgyVVzenjIK64IM0Kc+AeJChKYP5UeFrIBYBQhHwhtWKD
- A1fE8VHCCebk6O4vcSRzSbnzgCxjDWHOooYJ6M2pSBIh/C3EgXa+1euohYZL6+mUY+d4WVSlMbI7i
- 0Z5Utm33AfhrveREgAObthBOBaWOc4HIgyk+3fnQPNmTnZxsznMjscqfXHV/7A0dBBBQUYLMpQmDK
- TwmjflR1LmG24kSRaEIC3sPNwoq7T0HOjwQyTX9VynOsOWR/nxopdxHRko6M1jhnA1VTiY/YkXMNb
- YPmzF/9TelEsrOhufC5N2a9l8prl53y7N/ZQJSbQihEsEQ+RizC+P0sem0mdDSR0fAZLBzNrWBIpV
- SkwTMqKsy7m3APNUffclWN7K;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1tOy3P-003bkp-1L; Sat, 21 Dec 2024 11:53:55 +0000
-Message-ID: <e283dd4c-8fb9-4912-b5c9-2da171c92e1a@samba.org>
-Date: Sat, 21 Dec 2024 12:53:54 +0100
+ (Exim) id 1tPRzU-004kdz-Vw
+ for samba-technical@lists.samba.org; Sun, 22 Dec 2024 19:51:56 +0000
+Received: by mail-pf1-x430.google.com with SMTP id
+ d2e1a72fcca58-725ef0397aeso2780441b3a.2
+ for <samba-technical@lists.samba.org>; Sun, 22 Dec 2024 11:51:51 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=mattgrant-net-nz.20230601.gappssmtp.com; s=20230601; t=1734897110;
+ x=1735501910; darn=lists.samba.org; 
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=SKenyS7EAQtWOWPtb1I3FWjNdfzsbzxJB8YZkPuEuG0=;
+ b=avmGlOFYMeVBhyl2j82LKpIc8kxoN7BoQaRIvJ3XbefjdbJN4Zzn6WwNqf7CC81PLT
+ jEx0Mv3YWFZYYYylq6MR8yTseK3LdZA39kvRSQdXcvKau1CGKe5iIEUTsOsJXyKJdK+Y
+ JELtBKtBE89voQJxV/GR8T1DHwXy5aojhg/n24N/WlHOQb2R10LZC4gIf7xruxchpxp7
+ 5xexwfvuoqtDhvkoWLpNgY0QHMFVz6YD4vdtMyfGmOvtpo3pW2QIPz9HJ8Db3E7u9oKl
+ MZImx5JTQGJVJdftUcygyaqM7Um4emQ6adQmRF71FZ84pJOAmRQtPFDvoIATFqvjI3YC
+ R2wQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1734897110; x=1735501910;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=SKenyS7EAQtWOWPtb1I3FWjNdfzsbzxJB8YZkPuEuG0=;
+ b=IbZpn2XRZDCTnGn4vr2FelZ3zdLi01zWjnozi6Mxt2wD9ns444aMXWXwBUUDzUPs7w
+ g0aIz/qcHl8MbqeBwqKJgK6D8mvPhgTM5jIMYkmjCuog3UkshuFBlyvb/KBoiZdi5Wjx
+ B1rLjizgbBeRZnHZpAP6WyPd8OqoR7ZQ3DY3Yqj1sJ646zAVKLNc71PJpgxpaaYf2KOX
+ h9o2mgVITrGMcjMpvbdAV7JRjM8H1D6N7Oh69tvPsNWmWhgHOa4gSmtkjyn6gvuwE6Qt
+ OYnfE+jbecw4/YEOw9BRuxfAh9sX0aVtG3dwiRLqyrX3whcFKaltlYiQ47RWqPTyL+GS
+ wOJA==
+X-Gm-Message-State: AOJu0YxITcVsAPS++/4GMlEQ3DZ1PaBt/rSRZpmTHw7zDIwFmx9B4EOr
+ lqK1ACKswckbaJ3aDn+LnNmB7LcdkDfCx2pC+Nhq6BQcT8puRPOL61U1g7pk1vs=
+X-Gm-Gg: ASbGncso9UfHH/lz/iOaFaWTAIvHxha0SbWoPCOrMOdcmJ7A0+jDEp79CZMW4Sj8A6B
+ ryveMCX+1n2TWmZ9GIfyg/7rJFsk/Vrrze9eyC1uCGWAaFLJVHudHEdNEou3C0tQU5hol9ZDnYK
+ Fan8de4KvgeYDJ4QxDasjB58Gh3e2+dZKxxkJJBMSZLd5sBhfxfKVkflMlE7WUS8Ebo2zWrGhRJ
+ PTRlaLJkrTCgwRC29HMMR7SkQlO4Ut2oeKBjJWZkHFXFjMCktSlzv5bnLgjLr8vxXwkN1D4ozJl
+ /VDf+VWrorRYUdA1ygbhnoudUhfH
+X-Google-Smtp-Source: AGHT+IF9MwobMhT1nEPfxZOGZ3JjHS3DFV4c++z3gF1z15zkyROE+7N0kzekFheCA8lZIXpqLtUQXg==
+X-Received: by 2002:a05:6a00:21c2:b0:728:e9d1:218a with SMTP id
+ d2e1a72fcca58-72abdeaaa3fmr14871877b3a.17.1734897109797; 
+ Sun, 22 Dec 2024 11:51:49 -0800 (PST)
+Received: from ?IPV6:2407:7000:96d8:f484:913:59c2:a63:6e42?
+ ([2407:7000:96d8:f484:913:59c2:a63:6e42])
+ by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-72aad90c1b1sm6695651b3a.185.2024.12.22.11.51.47
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sun, 22 Dec 2024 11:51:49 -0800 (PST)
+Message-ID: <dae5a566-a8ed-4861-a68a-acd44deecb40@mattgrant.net.nz>
+Date: Mon, 23 Dec 2024 08:51:43 +1300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: Open SSH kerberos auth not working with 4.21.x keytabs as server
  principals are in caps/mixed case - keytab breaks RFS 4120,
  section 6.2.1, fix for 4.21.3 please?
-To: Matt Grant <matt@mattgrant.net.nz>,
- =?UTF-8?Q?Pavel_Filipensk=C3=BD?= <pfilipensky@samba.org>
+To: Ralph Boehme <slow@samba.org>, =?UTF-8?Q?Pavel_Filipensk=C3=BD?=
+ <pfilipensky@samba.org>
 References: <06ffa961-fc2f-4d22-9e47-e2c007e62b3e@mattgrant.net.nz>
-Content-Language: en-US, de-DE
-In-Reply-To: <06ffa961-fc2f-4d22-9e47-e2c007e62b3e@mattgrant.net.nz>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------7q7I4lrT4GK7y4FNEQhd3ihq"
+ <e283dd4c-8fb9-4912-b5c9-2da171c92e1a@samba.org>
+Content-Language: en-US
+In-Reply-To: <e283dd4c-8fb9-4912-b5c9-2da171c92e1a@samba.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -62,67 +93,62 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Ralph Boehme <slow@samba.org>
+From: Matt Grant via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Matt Grant <matt@mattgrant.net.nz>
 Cc: samba-technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------7q7I4lrT4GK7y4FNEQhd3ihq
-Content-Type: multipart/mixed; boundary="------------KEUp62BOtDL88wFRqExZWbsr";
- protected-headers="v1"
-From: Ralph Boehme <slow@samba.org>
-To: Matt Grant <matt@mattgrant.net.nz>,
- =?UTF-8?Q?Pavel_Filipensk=C3=BD?= <pfilipensky@samba.org>
-Cc: samba-technical <samba-technical@lists.samba.org>
-Message-ID: <e283dd4c-8fb9-4912-b5c9-2da171c92e1a@samba.org>
-Subject: Re: Open SSH kerberos auth not working with 4.21.x keytabs as server
- principals are in caps/mixed case - keytab breaks RFS 4120, section 6.2.1,
- fix for 4.21.3 please?
-References: <06ffa961-fc2f-4d22-9e47-e2c007e62b3e@mattgrant.net.nz>
-In-Reply-To: <06ffa961-fc2f-4d22-9e47-e2c007e62b3e@mattgrant.net.nz>
+Hi!
 
---------------KEUp62BOtDL88wFRqExZWbsr
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
 
-SGkgTWF0dCwNCg0KdGhhbmtzIGZvciBicmluZ2luZyB0aGlzIHVwISBCZXNpZGVzIGEgYmVo
-YXZpb3VyIGNoYW5nZSB3ZSdsbCBhbHNvIG5lZWQgDQp0ZXN0cyB0byBjb3ZlciB0aGlzLg0K
-DQpAUGF2ZWw6IGlpcmMgeW91J3ZlIHdlZW4gd29ya2luZyBvbiB0aGUga2V5dGFiIGdlbmVy
-YXRpb24gY29kZSByZWNlbnRseS4gDQpXb3VsZCB5b3UgYmUgYWJsZSB0byBsb29rIGludG8g
-dGhpcz8NCg0KVGhhbmtzIQ0KLXNsb3cNCg0KT24gMTIvMjEvMjQgODowMyBBTSwgTWF0dCBH
-cmFudCB2aWEgc2FtYmEtdGVjaG5pY2FsIHdyb3RlOg0KPiBIaSENCj4gDQo+IA0KPiBBbnkg
-dGhvdWdodHMgb24gaW5jbHVkaW5nIGZpeCBmb3IgQnVnICMxNTc1OSBmb3IgNC4yMS4zIHBs
-ZWFzZT8gJ3N5bmMgDQo+IG1hY2hpbmUgcGFzc3dvcmQgdG8ga2V5dGFiJyBzeW5jX3NwbnMg
-aXMgcHJvZHVjaW5nIG5vbiBmdW5jdGlvbmFsIGtleSANCj4gdGFicyAtIHBhdGNoIGJlbG93
-IHRvIGxvd2VyIGNhc2UgZGVmYXVsdCBnZW5lcmF0ZWQgcGFydHMgb2Ygc2VydmljZSANCj4g
-cHJpbmNpcGFsIG5hbWVzIGluIFVuaXgga2V5dGFicw0KPiANCj4gDQo+IEl0cyBhIG1ham9y
-IGZ1bmN0aW9uYWxpdHkgYnJlYWtlci4NCj4gDQo+IA0KPiBUaGFuayB5b3UhDQo+IA0KPiAN
-Cj4gTWF0dCBHcmFudA0KPiANCj4gDQo+IA0KPiANCj4gDQoNCg==
+Thank you!
 
---------------KEUp62BOtDL88wFRqExZWbsr--
 
---------------7q7I4lrT4GK7y4FNEQhd3ihq
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature.asc"
+Ill keep you informed about how I'm doing with this patch.  I've got 
+OpenSSH working with sync_spns setting using the patch, and sssd by 
+creating a special  principal account_name machine keytab and setting 
+ldap_krb5_keytab in sssd.conf
 
------BEGIN PGP SIGNATURE-----
 
-wsF5BAABCAAjFiEE+uLGCIokJSBRxVnkqh6bcSY5nkYFAmdmrFIFAwAAAAAACgkQqh6bcSY5nkYV
-Cw/8DEuCcMGvvdyPm2PL/1EcYD5uNeCozwABVDPI4nfUE1p+yN9FwRa7593uhRYd+WkaUj6GWUrA
-XZq/Y4pSa5NSNsuC4pmuu25EFatnyQWJaO6LZCbbvX5tGt7yIKPTzk3oNwjVJ4yHzD65YC9OIMDY
-B/cFquQIjRscuB53tMLUqXqBkqCm31tOyxHnv+l5T16O76wSlXrlBp5LeTt5lCGpNSBIhCp0Qa83
-yIUAev71nmFU8HSOpm5UaGCKlM+sLYmHuJcRURfi3WMZirAwvW8G7PndUddWzCQy5UEetbvUH1Wv
-Nkge2c5M6ZQHN+VqRnUEm8QBZyrTpkkXk0o0/btsugZyLBUUxUZM1v7xSb8YAgvneoFKb0ZZeAQ+
-VTwJFP2BFKLitS4Sn4B1FAoAauK23gzrbyA3X1qj27cv55gXpbq8fj75Kq3QTpvIJdHUYb92ZMpo
-B0Gi2jVrRAX47gB3gG631TXXN3jpDwQWSW9vuD6NEzhNUwWndArZM5o9ngl1jiJOuXqhIbrDK+SZ
-lZ2BoZ9DobfGo6lE/Zwsnom1mJeqaXh4nKtssZVshEbadHEzGaYIzqlDRjrFsWl3rIsdGCHEesIU
-oE7ExdI1OO0l5zfgJ8YGk8Z4b88R71II3rPLPGPeykSdcFHD5qvLtQBbQOb6fH4nyPW41Qhzf6GJ
-ku8=
-=5XxM
------END PGP SIGNATURE-----
+Regards,
 
---------------7q7I4lrT4GK7y4FNEQhd3ihq--
+
+Matt Grant
+
+On 22/12/24 00:53, Ralph Boehme wrote:
+> Hi Matt,
+>
+> thanks for bringing this up! Besides a behaviour change we'll also 
+> need tests to cover this.
+>
+> @Pavel: iirc you've ween working on the keytab generation code 
+> recently. Would you be able to look into this?
+>
+> Thanks!
+> -slow
+>
+> On 12/21/24 8:03 AM, Matt Grant via samba-technical wrote:
+>> Hi!
+>>
+>>
+>> Any thoughts on including fix for Bug #15759 for 4.21.3 please? 'sync 
+>> machine password to keytab' sync_spns is producing non functional key 
+>> tabs - patch below to lower case default generated parts of service 
+>> principal names in Unix keytabs
+>>
+>>
+>> Its a major functionality breaker.
+>>
+>>
+>> Thank you!
+>>
+>>
+>> Matt Grant
+>>
+>>
+>>
+>>
+>>
+>
 
