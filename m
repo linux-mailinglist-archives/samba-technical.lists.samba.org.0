@@ -2,50 +2,58 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6FFFE9FABB7
-	for <lists+samba-technical@lfdr.de>; Mon, 23 Dec 2024 10:00:12 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 64402A015D0
+	for <lists+samba-technical@lfdr.de>; Sat,  4 Jan 2025 17:35:57 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
-	bh=g5V4xS0OBFfUGGJMmP9jqXv7nSuVVcrxRRkLHl77lP8=; b=ZBJ7QZYh6bw5wywkO6GY2zjlIQ
-	9H7NRHRflv+eqHWKM46togy5qSJ4mDc90wyYPLune6ofTjHAyjbg5YzR/VnS5HU/VYWQthviY/8UZ
-	UlodhfWCqlywXZKqKjw/NoCyAW3pVzeDiYdLTEeVhkZC2r1KKH0wRfEA6fLbCgbf0GrHVWnFLcP5H
-	wMsxmXgGZd9dG+AylBUzZIGi5qwr3Hz6LinfG+YYr30vN4QZycQJklhZ1hec1Mel83Eal4GnVJ4oo
-	8phMLgyDtxrEDiXeYGb5OITMpEYgbaFnjyxj4RBGecwzI2onpSvWxc7MLZxTmv7n3zwE2OEdAbtcr
-	1Jn6U6tw==;
-Received: from ip6-localhost ([::1]:34060 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
+	bh=ufO+ZnSxxTMQH/3L1D4+/GvaNywS66Zd1H+0NuTF1Is=; b=B3Dd1jGzOHaQzJILYrxxiqdYsq
+	2MaVmL6KfcEzBy/8S6db3uBSFkWM6jQ+ZucvLdeP7LoZvS5U8U6Jq6A+9YV1RT3w25GIS7eu+At5I
+	svoruliEnYk5ONgt4RInicJH2XoVRaF2gLoEwQXhUxZmDMekY1ubenZ84nt5/NX/Z+uwHZK7/5Ty7
+	6+wcxFY8gLQyFJjbzQs8bPo6LoZUp8B8s5bQGl84OpNqqcUqj9Hx58GKWkaf4/LYgueXOS+nTh+YV
+	2m3WnMNq0HKSTbOaj6ZcYwbb1UlNwN//BXRr9k4MPueA0d0cMMRak5FQPvwOQRY55XehmEslP90lK
+	5vDY/NhQ==;
+Received: from ip6-localhost ([::1]:54966 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1tPeHk-004lsz-Bk; Mon, 23 Dec 2024 08:59:32 +0000
-Received: from vps.smedley.id.au ([2607:f130:0:ee:ff:ff:4980:9538]:45432) 
+	id 1tU77S-007HAr-Fp; Sat, 04 Jan 2025 16:35:22 +0000
+Received: from relay4.ptmail.sapo.pt ([212.55.154.24]:60756) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1tPeHe-004lss-U5
- for samba-technical@lists.samba.org; Mon, 23 Dec 2024 08:59:30 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=smedley.id.au;
- s=default; t=1734942891;
- bh=NHXkKcrRFLdFxtqyw8SoX2zxXWiI06n7/Kmg3vmBwfs=;
- h=Date:To:From:Subject:From;
- b=iuWW8wzQOdPuyvukyVp32uvYJYyCecqpeYLWRsukq5PhqY2v0z+V3RKUUwUCWJsEQ
- 4X0wIw2UTzdZ0WV3tnVw6tU0WFadGJrmGUSlmTxmWlclVMVFA3kT/GdAFthMgb3NUI
- bIxvhL4NMGgVt/FuAYi1bwNr5DZCdHMD5xHSN8UpzbtjnB81DtkGz5mDLHwX6CikwT
- YIC/Mlnsr+E9pPNLKtrum62TInB8mz2M2YfYdwFiKkFSS2OZANErL2u2lgMLUxwRld
- AdyvwuvRWCWK3UE+F1ymsfn4HSbrnl2VRetGmzYhjcBg317TkEfg9ylocd8VAihASE
- 4PceXc4o+qdQA==
-Received: from [IPV6:2400:a848:4041:0:ddee:5b8a:a17a:3ca0] (unknown
- [IPv6:2400:a848:4041:0:ddee:5b8a:a17a:3ca0])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
- key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
- (No client certificate requested)
- by vps.smedley.id.au (Postfix) with ESMTPSA id 22E642014C
- for <samba-technical@lists.samba.org>; Mon, 23 Dec 2024 19:04:50 +1030 (ACDT)
-Message-ID: <a5e738a0-7e3f-4fda-bb69-8027016bb5ac@smedley.id.au>
-Date: Mon, 23 Dec 2024 19:04:40 +1030
+ (Exim) id 1tU77J-007HAj-TY
+ for samba-technical@lists.samba.org; Sat, 04 Jan 2025 16:35:16 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sapo.pt;
+ s=sapo20240325; t=1736007547;
+ bh=ufO+ZnSxxTMQH/3L1D4+/GvaNywS66Zd1H+0NuTF1Is=;
+ h=From:To:Subject:Date:From;
+ b=oPvc1wHSPxLt6g/PaDV4ge7VbXECSQz3Xs4violKNMsuOp1LSHFfpbc3w1ZXH+iIF
+ +eNSQq8gFSy1G9jDNB8o6czjr9Y9aSkFByMHYEbIYRvFGRM80dMldAKl3rHi5O7LY7
+ O2n6uqs+PdF2nn+D/y3tzzu5WPh/ZOsEhi3WYn2bBoBjkpgPvyz38NlUvbLIXKS4Xo
+ 6l4SUGT+tUldX0R9KlBzfSTJkG2XGXyl9Hds7NG8UbmB3SRd/VRbBigpE04ysXU99W
+ G9khH8K00rd53zXb6mVDUZ3fZ5s6fhlMD1yWxcIH5Zb5mqRiWoTSpDrxfe3iPpRlDY
+ IxYIjJeYo9SdA==
+Received: from sapo.pt (unknown [10.134.36.75])
+ by relay4.ptmail.sapo.pt (Postfix) with ESMTPS id 4772FB55CD2
+ for <samba-technical@lists.samba.org>; Sat,  4 Jan 2025 16:19:07 +0000 (WET)
+Received: (qmail 27275 invoked from network); 4 Jan 2025 16:19:08 -0000
+Received: from Sepher3 (unknown medalist@sapo.pt@[85.245.190.191])
+ (envelope-sender <medalist@sapo.pt>)
+ by ptmail-mta-auth01 (qmail-ptmail-1.0.0) with ESMTPSA;
+ 4 Jan 2025 16:19:08 -0000
+X-PTMail-RemoteIP: 85.245.190.191
+X-PTMail-AllowedSender-Action: 
+X-PTMail-Service: default
+To: <samba-technical@lists.samba.org>,
+	<samba@lists.samba.org>
+Subject: Upcoming discontinuation of Samba 4.19.x (creation of new GPOs
+ impossible with versions 4.20.x and 4.21.x)
+Date: Sat, 4 Jan 2025 16:19:08 -0000
+Message-ID: <0a6801db5ec4$61f552b0$25dff810$@sapo.pt>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: samba-technical@lists.samba.org
-Content-Language: en-US
-Subject: Problems on OS/2 since 4.20
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain;
+	charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+X-Mailer: Microsoft Outlook 15.0
+thread-index: AdtexD70iMH9RTcMRCupE/m/gAODGA==
+Content-Language: pt
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,32 +67,25 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Paul Smedley via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Paul Smedley <paul@smedley.id.au>
+From: miguel medalha via samba-technical <samba-technical@lists.samba.org>
+Reply-To: miguel medalha <medalist@sapo.pt>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi All,
+Are Samba developers aware that the only way to create usable GPOs (which
+are arguably one of the most important features of an AD environment) is to
+use a Samba version (4.19.x) that is two versions behind the current one and
+that, according to "Samba Release Planning and Supported Release Lifetime",
+is scheduled for discontinuation in March 2025?
 
-As I've posted previously, I'm maintaining a port of Samba for an OS/2 
-derivative (ArcaOS) for some years now, predominantly for the client, 
-but I'm also trying to get the current server running.
+https://wiki.samba.org/index.php/Samba_Release_Planning
 
-Versions of the server up to 4.19 are working ok, but 4.20+ break during 
-protocol negotiation, and I'm struggling to see why.
+Please note that I am not bitching or demanding anything, I am grateful for
+what we have and I truly appreciate the hard work of the Samba team members.
+I am just calling attention to this fact. I really wish I could help, but
+unfortunately I am just a sysadmin, not a developer.
 
-A pastebin log of a login attempt is at https://pastebin.com/FNxUpuK7
+https://bugzilla.samba.org/show_bug.cgi?id=15738
 
-Looking at previous logs (from 4.19) the problem appears to be at line 
-3570 where NT_STATUS_INVALID_PARAMETER is reported. However at line 3568 
-NT_STATUS_OK is reported. Tracking through the code, I can't see how/why 
-the return code changes from NT_STATUS_OK to 
-NT_STATUS_INVALID_PARAMETER. Any suggestions?
-
-My source is at https://github.com/psmedley/samba-os2/tree/samba-os2-4.21.x
-
-Cheers,
-
-Paul
 
 
