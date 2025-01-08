@@ -2,73 +2,52 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1E2F6A051CE
-	for <lists+samba-technical@lfdr.de>; Wed,  8 Jan 2025 04:58:25 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9EF4DA0616C
+	for <lists+samba-technical@lfdr.de>; Wed,  8 Jan 2025 17:16:13 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=ju19JtvXWMoUigY13sgj2e0U0AxGuzEgIfxtimE+HZk=; b=Z2bAmPTtsGXXTITPxuElRY5HBx
-	CnI8gW968fJsFcoGWgtxZwI+fcRnJuCKUDgMwIEKTip0OdWt2ECITtRYa6UWfSZ6/nDxdjsDt3vs3
-	XD4SuEll7vcXpyZW7JvI2yOrilMrWibR1EuR3YKUNekOc1IhRasbu587h139iPicupvPAesC/YVas
-	ao42RVcgj7ZJPAnC/LWaWa6dMh5GX34QhbZaQ2KZVhUsZ4HyHjDNgGg9t5JSs4SGfhE+1mPfMkUa5
-	Vl8vw1Z5DF45cq1PxGvj1b8dQRTis/nt+qhbXCCDqwCI1jl0cH/nBnJu1hVzmf6lG067Lxnn3dIls
-	bYsdc56Q==;
-Received: from ip6-localhost ([::1]:27930 helo=hr1.samba.org) 
+	bh=w8lmu4nYTfUaaSfjNUWF0Sb23cGQE80dFwL7CqueDyw=; b=UH/aO5yDEt+vF+Mm7bIq52lzr6
+	6T1ghwZ0xWI9NWYCJxarDkcB0H7OmkLqsmKyWvOgfK4hGfmGcPlJlMnGHWUxIzzzuhmD37Mkj0Tpy
+	WF+IJe0ttFz7s1oLZCtDqUNBaZVMlRRSjtfHeKDfGTVp8XWITcgxtOWMWZ6Hd40svEQEcUGjPGL7K
+	cpir+pa9FYfY3c6WLASdR40ZEk+LcER5J1+uUNCpj7cAGKSTZdOwyX0hkRQWp+yo//UebVQ3Pi/o2
+	bDxHmS9ydbqHjbFyMop3NgIbskxMU9UJAm92Sj1Y0WE/4OAAX0fQppiUw3Bw1f/jAkQjKHhRB2aQs
+	J7gRKgtQ==;
+Received: from ip6-localhost ([::1]:48720 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1tVNCV-007a1m-0F; Wed, 08 Jan 2025 03:57:47 +0000
-Received: from mail-ej1-x632.google.com ([2a00:1450:4864:20::632]:42285) 
+	id 1tVYia-007c9Q-6j; Wed, 08 Jan 2025 16:15:40 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:42330) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1tVNCP-007a1f-UD
- for samba-technical@lists.samba.org; Wed, 08 Jan 2025 03:57:44 +0000
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-aa692211331so88879066b.1
- for <samba-technical@lists.samba.org>; Tue, 07 Jan 2025 19:57:41 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1736308660; x=1736913460; darn=lists.samba.org;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=koch/yMa8/5zy83OPMgN0G/sbVZEsA9o3PSBl7y0qRI=;
- b=cqKscYR/u6RTxAFNPvCLKXJObVAQM+xCravtSoYKyAd265u8cQMMslx8a+/m6wdcza
- TQErEqHq6yO6kvC7Gq/7pP17G/vXvMc7yl/G8RXmw7JZ+VPzvQ+FPPcEbeAXvbAJUjiS
- XbcfAMyc6WzWG50ktMRYqhDyEGUES9evoHD5DFeLUI4wgniC3rGPHsJW7je9m0VvATOA
- wfX6Xs2Oqhu8pJJ7oj33Q/3/A/40eID5VdHMczNv+PzKLPXhfUcDB/f4SxbuTj0h/cBY
- YvD7lNfGTXZCBp4u9p0k4JigvyhPnCBx3VTE9SxbyG8MP61MdACBQQZ2/bw5FvI5eVLC
- Acig==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736308660; x=1736913460;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=koch/yMa8/5zy83OPMgN0G/sbVZEsA9o3PSBl7y0qRI=;
- b=vis/wYUlvcdxuFuhanxGgAHh9uWMcOR3JACeHDRTvYI3MJH2+huNDKQZz9l8fXVCB6
- NJP70ra4n4Un0YmCgNGHCX9y2OW58J9w+98i2tzjS9a63aAZGt0jBEYZt/o6em7wGBqL
- Mi0jJVYTztP+WQaSinVWJ2QGXizJ0gJSvem2q0gPsWDRDYrNXZyvwVtfXUWKVUni+2j3
- IDkqDaup9xGjOlO8c1NC7oAClgkec14XvR8DFIfvDJste23rn4lMI3trWFAFA1fifSu8
- DJb/mK2dSR1P3aDmtPqtOlyKI+/B2AazxC60XZB/i0dAamcBKbABf5PR9cFGyy6cnjG+
- hX9g==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUwo0QBgyG1jVETGYjQGAOXeg3f8HL9b3SlkTB0ZNTKVEfItls8KP6Le70BtmzBFTM9WVd/9l88gs6BRq18KwY=@lists.samba.org
-X-Gm-Message-State: AOJu0Yz4A2HjEGTI6YLC81vXtWN9YAB8IbRXkC4B7ubx8a4DHt+WyVM6
- iLj3JkwMFuhYg5GB6OQ1xoGHcnTXyrjMQ+fuUKjMNiJJfRZM/o7w6DorWe/YIO6hg0bW9Z6Xvwl
- mb2Ki+cS8p4qwYmGhAsvG+8ExjHY=
-X-Gm-Gg: ASbGnculJgkfr3VNkQj5UhakMpbKbt1n0xv8qVzHv4/8bHpbUVwoF4sXTHPhfJqm9od
- udybBuTEFASWRlwjOECESNRlDzkEZJseVP8B67w==
-X-Google-Smtp-Source: AGHT+IHjxeFi7kjk/VxLdBErKxA8EPMG+fIN6+yGRLtUGnrdjSSMc9U1fTmicX+w/WS3quA/lYEwn7e3jAa8Z548+Kk=
-X-Received: by 2002:a17:907:9802:b0:aae:f029:c2ec with SMTP id
- a640c23a62f3a-ab2a79f3143mr117288766b.12.1736308659892; Tue, 07 Jan 2025
- 19:57:39 -0800 (PST)
+ (Exim) id 1tVYiV-007c9J-Ru
+ for samba-technical@lists.samba.org; Wed, 08 Jan 2025 16:15:38 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=From:Cc:To:Date:Message-ID;
+ bh=w8lmu4nYTfUaaSfjNUWF0Sb23cGQE80dFwL7CqueDyw=; b=Q/sfbFAbHX8bsSN/EHBb6OEnf7
+ Xdw+lYKUvJSIOfe3SPFD1M/KbQHVqw2h87Qz6FONTlaAQa/z6TPG0rYEWPkJxANeldgooj7Z0SJ5f
+ L6lA8wVfftXzmMqE1icOSn1S2zFGYyvriEIKxAEe9bvx5lzePzhUlL5n+E3+yGw6pHzvesTGVO5XC
+ mslo15vn6UvvoQYF9Bg5v+SbPW2l1Kb8kTjbSg/vWV5gbPPf0OiFm80/KRyDa6dAKggOK2zxLmsrl
+ 4BrSXFCwdFccCpHInGAlT5E2Qu9gHNyF1nDSNHpl6xjWmptSDJZku2qMfl1dLP+5tiEOdO7gUY74y
+ A7exuhcnqEUDzFpo8tF79zxZoLDYbnCnSZCyA6WAcy5uqT7B8/C7+sRdop90NF8gr/PrMBeAuuMYX
+ 8VMsXlsRXiBApc97ML8xkWz09ZAdc4gIqVorxX5iTl74VRTbkfKu3Kb2DcsaLKiSumUTCYw8yeJO2
+ YmrPYDjh3DeXvs11dmruOhlz;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1tVYiU-005tuv-3C; Wed, 08 Jan 2025 16:15:35 +0000
+Message-ID: <0e9252d9-8dd0-45f6-b9fb-0fc083dd0253@samba.org>
+Date: Wed, 8 Jan 2025 17:15:34 +0100
 MIME-Version: 1.0
-References: <tc6xfz3it47oxa224ert4fs2u36h3qefm2elc64kugofrujk4t@vh2wevz6y6qc>
- <ZseZLpuINSxGdIJZ@jeremy-HP-Z840-Workstation>
-In-Reply-To: <ZseZLpuINSxGdIJZ@jeremy-HP-Z840-Workstation>
-Date: Wed, 8 Jan 2025 09:27:28 +0530
-X-Gm-Features: AbW1kvYrql6-WBB_ePX6q1BTr94XD1azvuXJKxow9DACk4hZLer6RxOlJrMr6K8
-Message-ID: <CAP4uAdrsMCM5veupRcNgUXSt+LG0TwawqP6xYA2ws2jNkkpZbg@mail.gmail.com>
-Subject: Re: Helping to improve FreeBSD support
-To: Jeremy Allison <jra@samba.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
+User-Agent: Mozilla Thunderbird
+Subject: Re: Open SSH kerberos auth not working with 4.21.x keytabs as server
+ principals are in caps/mixed case - keytab breaks RFS 4120,
+ section 6.2.1, fix for 4.21.3 please?
+To: Ralph Boehme <slow@samba.org>, Matt Grant <matt@mattgrant.net.nz>
+References: <06ffa961-fc2f-4d22-9e47-e2c007e62b3e@mattgrant.net.nz>
+ <e283dd4c-8fb9-4912-b5c9-2da171c92e1a@samba.org>
+Content-Language: en-US
+In-Reply-To: <e283dd4c-8fb9-4912-b5c9-2da171c92e1a@samba.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -82,40 +61,55 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: sandeep nag via samba-technical <samba-technical@lists.samba.org>
-Reply-To: sandeep nag <sandeepnagamalli@gmail.com>
-Cc: John Hixson <jhixson@freebsd.org>, samba-technical@lists.samba.org
+From: pfilipensky--- via samba-technical <samba-technical@lists.samba.org>
+Reply-To: pfilipensky@samba.org
+Cc: samba-technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-@John Hixson <jhixson@freebsd.org>
-Me too looking for Samba 4.21 to be build on FreeBSD 13.*
-Let me know, samba side of the things to be done for this and I can work on
-them.
+Hi Matt,
 
-Thanks,
-Sandeep
+I am sorry, I have missed this mail. I will look at it now and if needed 
+I will add the fix to samba-4.21.4.
+
+Thank you!
+
+Pavel
 
 
-On Fri, Aug 23, 2024 at 1:33=E2=80=AFAM Jeremy Allison via samba-technical =
-<
-samba-technical@lists.samba.org> wrote:
-
-> On Wed, Jul 17, 2024 at 08:54:20PM -0700, John Hixson via samba-technical
-> wrote:
-> >Howdy!
-> >
-> >Would Samba be interested in better FreeBSD support? I am reaching out
-> >on behalf of the FreeBSD Foundation. We would like to help improve
-> >support in whatever way we can. What needs to happen?
-> >
-> >For starters, I would like to help get as many of our port patches
-> >upstreamed as possible. I would also be interested in helping out in
-> >areas that are specific to FreeBSD. It would also be nice to have some
-> >CI setup.
-> >
-> >Interested? Where to go from here?
+On 12/21/24 12:53 PM, Ralph Boehme via samba-technical wrote:
+> Hi Matt,
 >
-> Very interested. Please send the port patches upstream !
+> thanks for bringing this up! Besides a behaviour change we'll also 
+> need tests to cover this.
 >
+> @Pavel: iirc you've ween working on the keytab generation code 
+> recently. Would you be able to look into this?
 >
+> Thanks!
+> -slow
+>
+> On 12/21/24 8:03 AM, Matt Grant via samba-technical wrote:
+>> Hi!
+>>
+>>
+>> Any thoughts on including fix for Bug #15759 for 4.21.3 please? 'sync 
+>> machine password to keytab' sync_spns is producing non functional key 
+>> tabs - patch below to lower case default generated parts of service 
+>> principal names in Unix keytabs
+>>
+>>
+>> Its a major functionality breaker.
+>>
+>>
+>> Thank you!
+>>
+>>
+>> Matt Grant
+>>
+>>
+>>
+>>
+>>
+>
+
