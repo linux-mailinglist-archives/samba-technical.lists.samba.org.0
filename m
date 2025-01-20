@@ -2,74 +2,69 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id BB845A15E9A
-	for <lists+samba-technical@lfdr.de>; Sat, 18 Jan 2025 20:34:07 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0D91AA16534
+	for <lists+samba-technical@lfdr.de>; Mon, 20 Jan 2025 02:49:36 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=W7Oyn69SMQEPAtr/12a6Ym0htpFikla3Rih6I5+rYZ0=; b=Ol4kTDqo/pM2spmOmXLftZkWWg
-	Lvhl57rvu63RLyB6991mKsFhUpI3tpy91ZZRsPy/x9TaAPXO85d4U61mTGcUh8vQuhBfqgEQrLdny
-	locjhLgpSHB8Fbt/b5PsxwvrEwneBUHvqpPpsNfTZf/FXRiottxNqBAK6hf/KmDciVdRoW3Djsjqp
-	gfVhkUZqSq297bu+Wm/sFKGgzMezo/XUltk52OdcAgU+HiAe7b9tT8nPpSdL7YahgcwywJ/GC+E8E
-	SKHh66tntVTy5HTKZKEnaXwvWBfEwNQ+9AyGl+g6YMihBuoW9pjpv0uUoAysFqXOY6Wskeg1Ut46r
-	oJDc6HfA==;
-Received: from ip6-localhost ([::1]:44016 helo=hr1.samba.org) 
+	bh=Xf98GyAdie4SfKgORppb7AAbGu2pyVw7mK348IGm1GY=; b=O18HyeDQUT1DOGHRE55JF9T5rJ
+	RGdHAWfQf3nyRROsozqfUE2WiVj5ceQrF5H+cAjWxYhvU9aLIBeOyaq/w4iAq0bR+PLZdVXwJOtjl
+	g0LbTdzMeZyoC4JxxKA0h/HVUWuLDkrXAvzAgwdDdRqrdy26asyXGathL0gxDGH4D56jNIqzAAtO5
+	pd+mkOB6C5YGHqfHvoQu66eOm+CbO7ddD13QDVMwpjwSPSZMVJHnHb4GjfwNlBtLtLoXzQfWc5WoI
+	fbLtTunCvNXlKCZIbLasFoLIbO44VTrTCNPIGP8fmz1EqW2LR9E5ri1ecoJ1AlDpHXiERKtt4mS2U
+	9c9sn9bw==;
+Received: from ip6-localhost ([::1]:46462 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1tZEZS-008Z2X-VF; Sat, 18 Jan 2025 19:33:27 +0000
-Received: from mail-lf1-x131.google.com ([2a00:1450:4864:20::131]:46250) 
+	id 1tZguP-008gIY-U7; Mon, 20 Jan 2025 01:48:57 +0000
+Received: from mail-lf1-x134.google.com ([2a00:1450:4864:20::134]:56709) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1tZEZN-008Z2Q-U8
- for samba-technical@lists.samba.org; Sat, 18 Jan 2025 19:33:25 +0000
-Received: by mail-lf1-x131.google.com with SMTP id
- 2adb3069b0e04-54021daa6cbso3461070e87.0
- for <samba-technical@lists.samba.org>; Sat, 18 Jan 2025 11:33:21 -0800 (PST)
+ (Exim) id 1tZguL-008gIR-1c
+ for samba-technical@lists.samba.org; Mon, 20 Jan 2025 01:48:55 +0000
+Received: by mail-lf1-x134.google.com with SMTP id
+ 2adb3069b0e04-53e399e3310so4128330e87.1
+ for <samba-technical@lists.samba.org>; Sun, 19 Jan 2025 17:48:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1737228800; x=1737833600; darn=lists.samba.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=W7Oyn69SMQEPAtr/12a6Ym0htpFikla3Rih6I5+rYZ0=;
- b=MUqoKN0a0zG5sZ/8OzvZ/Dlh+dEKxdwGWW9Z4Ak9udDqcLOvOVv5PwPyXfZeBs+FYP
- T2Kedqra5s+UYxjzorP+cnSve/vfJaF0BIKk26SIv/CVHxOgZRZGfG3nh9RWhptuZDsr
- djmk9Z4fiDyKTjld+vTXGfoT/X7m/dCBwO3i6Blktt9AK7kjN5kJ8y6ToCeodIpBFtMl
- T3iMoCoGUkSBJ/xQ86EVaMVc3K1lhIFrRR/GyWeDzIP9ar2VY5NDLbBNJ2LI1ulE/Abw
- gIvMKrTXn+xdUhRFqzeavgM2O7Fu0NbC6SpLnKEaidmqb/He8oS93GuEm2IWqVJRE4Z5
- XvJA==
+ d=gmail.com; s=20230601; t=1737337731; x=1737942531; darn=lists.samba.org;
+ h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=Xf98GyAdie4SfKgORppb7AAbGu2pyVw7mK348IGm1GY=;
+ b=ZAj8pnDj6GFzO/OkPm6D0oPVvdGF5ylygcXQWhknIIXHzX+J8ThpZbZTmHddQUV9XR
+ zHHgH+AqKANnsanTqZBUWA/td3Wpizl9XGbV87PFyrpf6DpGIakLL6VA6lo03EY1jSRZ
+ 7BAgnJEy4ZyHmpfOvnuXl2G0v4thmimgBykDsPfkNJY/htbhW5ARUb6qGNq0ImlTnjsB
+ SXuZrrodgrnP+7+ToA53kJYb5tJRxav0bEurS3RcL9kwxaRtGTlLR6eTZ43V4z3LemM3
+ H7UprKGm8SyIZPn6c5722iO7uK2mj/0lNxFFqwjf4WMrbdswBSYqmWc+S9NGW6BSFdUC
+ uBDg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737228800; x=1737833600;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=W7Oyn69SMQEPAtr/12a6Ym0htpFikla3Rih6I5+rYZ0=;
- b=EZo9uyj0RBjw8nvF8IFkscqJlk1IFus9otU7pewwidYndcrSuwh1EbSwQPY5Bszlv4
- OvvssT9tDah1aNHTHJB5B1S2Vtb/4Xg5igMfUU0Xjn5N1cdCJ3KE2WwEFxPS7RSbMjky
- WLwDLDkTdaLijGk8tjnOBh1bbiko4l3dESnoL7ijLbwWJ/Yi9Lnb7fu67VRGlGy0oQ9k
- QJqJUXyESvDGJhA/0J+LnVIqXylJNWmk7c3rUQhk+gLVYHl48Q37okEP3HgEyYFOCnP/
- jghQ8VMlWBa9nLVf2IUJKXn4xw5KJ2KfzdDDE6UBfEFNth2d+tqxjh6eDzj1CXA2mSV3
- MukQ==
+ d=1e100.net; s=20230601; t=1737337731; x=1737942531;
+ h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=Xf98GyAdie4SfKgORppb7AAbGu2pyVw7mK348IGm1GY=;
+ b=o8Ah5rahAyTdlDZl8rjZWMhUaz+cYytOA3A/rpPeJcdCnBpECzgP2X6SQpDgqrFA/A
+ x/p4x2P7ePV4s+vXEzSaiFKC2zh/b2keLNVw8OPsJU3J0jSzt65rRtYG1fsugg/AbU80
+ r6qtbJp2pDoPYoLrD0XT7D9gUZzOOAniaNw+d2Pn0NjHkJPZUsegGIbgIt6S+e3BnY4H
+ LKH0CM09nr8GRnVOjJvluH1PUySdC4MbajfeoxsZ/qLNM4yfvWEeymTBa3BRgfDtWF7U
+ 2MBro806gKNnjF1EJsYzuaBo1mAfAxg3B6oVGZCWsMm1ndy1fQU8luFr5C8nEJzk/eMA
+ qrMQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU4OIbe+dL8CCitPPhITmtqXFlkZv2zterA3AZZ1i/Vpdj2gT6MpqZW8gswXL/ge5jIgWobWVjzvfZHL7UjteM=@lists.samba.org
-X-Gm-Message-State: AOJu0YzbWWuseBvc5RA13cxEUN86GsLEqgZU/Yv5FYTHD08d8J6EoWTu
- rWvQOnBVWQ6Orbszm0r72UGdBBHjihOA3ZYqqcw5qlr22czxpDVshhxA08nVP/jvhbtGM29fAQm
- 49CTirXeRnvfkwr8Dp1jQh+jSbG4=
-X-Gm-Gg: ASbGncsiVuZaSeMZnGQd48adaUkASD5gHDXXhu6ZPYGDBYf5Zw9enClKWKMB1cD6Oqj
- +STdmaJeyqgg+kkOKHB2se2fsf0WNcjwN4Uz3NtkYCNsQ81NMYdWqELB3AkVC2bFwoidsB+LGC3
- rmFSU2SVpPjQ==
-X-Google-Smtp-Source: AGHT+IHJ6JyE2OP7a6OtC0Dftnxkf2oOPfTsXgGG6YaJAXL6ZXgHC9MMSBipkVIRmXQRU5RSL+9XvXY/4Rj+DU85MBI=
-X-Received: by 2002:a05:6512:b94:b0:542:7217:361a with SMTP id
- 2adb3069b0e04-5439c22c3bemr2154552e87.10.1737228799599; Sat, 18 Jan 2025
- 11:33:19 -0800 (PST)
+ AJvYcCWLZqugMVRe1O02oainIVwIl2PKtD5KHOWfvwTzyfQQRf41oNEmfkyvHtM/jSmzZZzlOgy1w5sF/MfdmFQPwRc=@lists.samba.org
+X-Gm-Message-State: AOJu0Yzto+vrP0TfANhpri7Oiuf517p8jLcr+j75EcjXZsgZv1b0zVX5
+ wMX/Sm3A1HmezysrAT+5Fnjzk8m796I1yQuaKdAHY0n85ZQ7ONKlR+Bu5U6v4RztHNE4uC7J2g6
+ MZ5hL4lrOARa+PgorAN9hXnFn5lfx7y5A
+X-Gm-Gg: ASbGncuLo2UL2AbsTcN4fzIl5ZnUNSl56yRn05vCwmYUFi/blQ1J+OzJoxexNF1BNC7
+ 1WVid8/L1iY+h9lJo158G+o/PTtLi0pVKsoG00UZjAqWIwNt65F+pRwQ6Moq2sd3ecBvyn53D1q
+ 06FF81MT7WVw==
+X-Google-Smtp-Source: AGHT+IGhzzP4UeBXT/UJ94U+n35AkpNQwT4Noc9VZmppWWbMvGX8wcZZxe6rwLgwn7aLKUIrbQaWsMpTwCW38Oj2540=
+X-Received: by 2002:a05:6512:b99:b0:53e:94f9:8c86 with SMTP id
+ 2adb3069b0e04-5439c269828mr4346250e87.35.1737337731029; Sun, 19 Jan 2025
+ 17:48:51 -0800 (PST)
 MIME-Version: 1.0
-References: <20250118123528.3342182-1-buaajxlj@163.com>
-In-Reply-To: <20250118123528.3342182-1-buaajxlj@163.com>
-Date: Sat, 18 Jan 2025 13:33:07 -0600
-X-Gm-Features: AbW1kvYHBHgsZWI7BzBH9WuuK9Af-17TbFKMiC9niwz7OStv8ibFhtcy--ryEUQ
-Message-ID: <CAH2r5muQG67z3MEh2gp_Ww=yv1AAZxHORydR9x0ABCeufUjfWQ@mail.gmail.com>
-Subject: Re: [PATCH v2] smb: client: correctly handle ErrorContextData as a
- flexible array
-To: Liang Jie <buaajxlj@163.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Date: Sun, 19 Jan 2025 19:48:39 -0600
+X-Gm-Features: AbW1kvalQ7S0BwkX_MDoPIG6gfucAW2tRl1os7vF-9fgMOfCVSnQda0-OfFSwd8
+Message-ID: <CAH2r5msUp2xqY062MRRXkNApwekZ_CJYL3q_J0boGFPzw4W1LQ@mail.gmail.com>
+Subject: [PATCH] cifs: Fix printing Status code into dmesg
+To: CIFS <linux-cifs@vger.kernel.org>, 
+ samba-technical <samba-technical@lists.samba.org>
+Content-Type: multipart/mixed; boundary="0000000000005043ce062c1976bc"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -85,101 +80,71 @@ List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
 From: Steve French via samba-technical <samba-technical@lists.samba.org>
 Reply-To: Steve French <smfrench@gmail.com>
-Cc: pc@manguebit.com, tom@talpey.com, sprasad@microsoft.com,
- linux-cifs@vger.kernel.org, Liang Jie <liangjie@lixiang.com>,
- samba-technical@lists.samba.org, linux-kernel@vger.kernel.org,
- fanggeng@lixiang.com, sfrench@samba.org, bharathsm@microsoft.com,
- yangchen11@lixiang.com
+Cc: =?UTF-8?Q?Pali_Roh=C3=A1r?= <pali@kernel.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-updated patch in for-next now
+--0000000000005043ce062c1976bc
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+Any thoughts on the attached patch (which is tentatively in
+cifs-2.6.git for-next)?
+
+NT Status code is 32-bit number, so for comparing two NT Status codes is
+needed to check all 32 bits, and not just low 24 bits.
+
+Before this change kernel printed message:
+"Status code returned 0x8000002d NT_STATUS_NOT_COMMITTED"
+
+It was incorrect as because NT_STATUS_NOT_COMMITTED is defined as
+0xC000002d and 0x8000002d has defined name NT_STATUS_STOPPED_ON_SYMLINK.
+
+With this change kernel prints message:
+"Status code returned 0x8000002d NT_STATUS_STOPPED_ON_SYMLINK"
+
+Signed-off-by: Pali Roh=C3=A1r <pali@kernel.org>
 
 
-On Sat, Jan 18, 2025 at 6:37=E2=80=AFAM Liang Jie <buaajxlj@163.com> wrote:
->
-> From: Liang Jie <liangjie@lixiang.com>
->
-> The `smb2_symlink_err_rsp` structure was previously defined with
-> `ErrorContextData` as a single `__u8` byte. However, the `ErrorContextDat=
-a`
-> field is intended to be a variable-length array based on `ErrorDataLength=
-`.
-> This mismatch leads to incorrect pointer arithmetic and potential memory
-> access issues when processing error contexts.
->
-> Updates the `ErrorContextData` field to be a flexible array
-> (`__u8 ErrorContextData[]`). Additionally, it modifies the corresponding
-> casts in the `symlink_data()` function to properly handle the flexible
-> array, ensuring correct memory calculations and data handling.
->
-> These changes improve the robustness of SMB2 symlink error processing.
->
-> Signed-off-by: Liang Jie <liangjie@lixiang.com>
-> Suggested-by: Tom Talpey <tom@talpey.com>
-> ---
->
-> Changes in v2:
-> - Add the __counted_by_le attribute to reference the ErrorDataLength prot=
-ocol field.
-> - Link to v1: https://lore.kernel.org/all/20250116072948.682402-1-buaajxl=
-j@163.com/
->
->  fs/smb/client/smb2file.c | 4 ++--
->  fs/smb/client/smb2pdu.h  | 2 +-
->  2 files changed, 3 insertions(+), 3 deletions(-)
->
-> diff --git a/fs/smb/client/smb2file.c b/fs/smb/client/smb2file.c
-> index e836bc2193dd..9ec44eab8dbc 100644
-> --- a/fs/smb/client/smb2file.c
-> +++ b/fs/smb/client/smb2file.c
-> @@ -42,14 +42,14 @@ static struct smb2_symlink_err_rsp *symlink_data(cons=
-t struct kvec *iov)
->                 end =3D (struct smb2_error_context_rsp *)((u8 *)err + iov=
-->iov_len);
->                 do {
->                         if (le32_to_cpu(p->ErrorId) =3D=3D SMB2_ERROR_ID_=
-DEFAULT) {
-> -                               sym =3D (struct smb2_symlink_err_rsp *)&p=
-->ErrorContextData;
-> +                               sym =3D (struct smb2_symlink_err_rsp *)p-=
->ErrorContextData;
->                                 break;
->                         }
->                         cifs_dbg(FYI, "%s: skipping unhandled error conte=
-xt: 0x%x\n",
->                                  __func__, le32_to_cpu(p->ErrorId));
->
->                         len =3D ALIGN(le32_to_cpu(p->ErrorDataLength), 8)=
-;
-> -                       p =3D (struct smb2_error_context_rsp *)((u8 *)&p-=
->ErrorContextData + len);
-> +                       p =3D (struct smb2_error_context_rsp *)(p->ErrorC=
-ontextData + len);
->                 } while (p < end);
->         } else if (le32_to_cpu(err->ByteCount) >=3D sizeof(*sym) &&
->                    iov->iov_len >=3D SMB2_SYMLINK_STRUCT_SIZE) {
-> diff --git a/fs/smb/client/smb2pdu.h b/fs/smb/client/smb2pdu.h
-> index 076d9e83e1a0..3c09a58dfd07 100644
-> --- a/fs/smb/client/smb2pdu.h
-> +++ b/fs/smb/client/smb2pdu.h
-> @@ -79,7 +79,7 @@ struct smb2_symlink_err_rsp {
->  struct smb2_error_context_rsp {
->         __le32 ErrorDataLength;
->         __le32 ErrorId;
-> -       __u8  ErrorContextData; /* ErrorDataLength long array */
-> +       __u8  ErrorContextData[] __counted_by_le(ErrorDataLength);
->  } __packed;
->
->  /* ErrorId values */
-> --
-> 2.25.1
->
->
-
-
---
+--=20
 Thanks,
 
 Steve
+
+--0000000000005043ce062c1976bc
+Content-Type: text/x-patch; charset="UTF-8"; 
+	name="0042-cifs-Fix-printing-Status-code-into-dmesg.patch"
+Content-Disposition: attachment; 
+	filename="0042-cifs-Fix-printing-Status-code-into-dmesg.patch"
+Content-Transfer-Encoding: base64
+Content-ID: <f_m64e02zn0>
+X-Attachment-Id: f_m64e02zn0
+
+RnJvbSA2ZmE5ZDhhM2NiMjFmZjIxZGJmYTU3NTU1ZjZhNDE2MTViODI5NTI1IE1vbiBTZXAgMTcg
+MDA6MDA6MDAgMjAwMQpGcm9tOiA9P1VURi04P3E/UGFsaT0yMFJvaD1DMz1BMXI/PSA8cGFsaUBr
+ZXJuZWwub3JnPgpEYXRlOiBUaHUsIDI2IERlYyAyMDI0IDE0OjI3OjE2ICswMTAwClN1YmplY3Q6
+IFtQQVRDSCA0Mi83MV0gY2lmczogRml4IHByaW50aW5nIFN0YXR1cyBjb2RlIGludG8gZG1lc2cK
+TUlNRS1WZXJzaW9uOiAxLjAKQ29udGVudC1UeXBlOiB0ZXh0L3BsYWluOyBjaGFyc2V0PVVURi04
+CkNvbnRlbnQtVHJhbnNmZXItRW5jb2Rpbmc6IDhiaXQKCk5UIFN0YXR1cyBjb2RlIGlzIDMyLWJp
+dCBudW1iZXIsIHNvIGZvciBjb21wYXJpbmcgdHdvIE5UIFN0YXR1cyBjb2RlcyBpcwpuZWVkZWQg
+dG8gY2hlY2sgYWxsIDMyIGJpdHMsIGFuZCBub3QganVzdCBsb3cgMjQgYml0cy4KCkJlZm9yZSB0
+aGlzIGNoYW5nZSBrZXJuZWwgcHJpbnRlZCBtZXNzYWdlOgoiU3RhdHVzIGNvZGUgcmV0dXJuZWQg
+MHg4MDAwMDAyZCBOVF9TVEFUVVNfTk9UX0NPTU1JVFRFRCIKCkl0IHdhcyBpbmNvcnJlY3QgYXMg
+YmVjYXVzZSBOVF9TVEFUVVNfTk9UX0NPTU1JVFRFRCBpcyBkZWZpbmVkIGFzCjB4QzAwMDAwMmQg
+YW5kIDB4ODAwMDAwMmQgaGFzIGRlZmluZWQgbmFtZSBOVF9TVEFUVVNfU1RPUFBFRF9PTl9TWU1M
+SU5LLgoKV2l0aCB0aGlzIGNoYW5nZSBrZXJuZWwgcHJpbnRzIG1lc3NhZ2U6CiJTdGF0dXMgY29k
+ZSByZXR1cm5lZCAweDgwMDAwMDJkIE5UX1NUQVRVU19TVE9QUEVEX09OX1NZTUxJTksiCgpTaWdu
+ZWQtb2ZmLWJ5OiBQYWxpIFJvaMOhciA8cGFsaUBrZXJuZWwub3JnPgotLS0KIGZzL3NtYi9jbGll
+bnQvbmV0bWlzYy5jIHwgNCArKy0tCiAxIGZpbGUgY2hhbmdlZCwgMiBpbnNlcnRpb25zKCspLCAy
+IGRlbGV0aW9ucygtKQoKZGlmZiAtLWdpdCBhL2ZzL3NtYi9jbGllbnQvbmV0bWlzYy5jIGIvZnMv
+c21iL2NsaWVudC9uZXRtaXNjLmMKaW5kZXggMGZmM2NjYzdhMzU2Li40ODMyYmM5ZGE1OTggMTAw
+NjQ0Ci0tLSBhL2ZzL3NtYi9jbGllbnQvbmV0bWlzYy5jCisrKyBiL2ZzL3NtYi9jbGllbnQvbmV0
+bWlzYy5jCkBAIC03NzUsMTAgKzc3NSwxMCBAQCBjaWZzX3ByaW50X3N0YXR1cyhfX3UzMiBzdGF0
+dXNfY29kZSkKIAlpbnQgaWR4ID0gMDsKIAogCXdoaWxlIChudF9lcnJzW2lkeF0ubnRfZXJyc3Ry
+ICE9IE5VTEwpIHsKLQkJaWYgKCgobnRfZXJyc1tpZHhdLm50X2VycmNvZGUpICYgMHhGRkZGRkYp
+ID09Ci0JCSAgICAoc3RhdHVzX2NvZGUgJiAweEZGRkZGRikpIHsKKwkJaWYgKG50X2VycnNbaWR4
+XS5udF9lcnJjb2RlID09IHN0YXR1c19jb2RlKSB7CiAJCQlwcl9ub3RpY2UoIlN0YXR1cyBjb2Rl
+IHJldHVybmVkIDB4JTA4eCAlc1xuIiwKIAkJCQkgIHN0YXR1c19jb2RlLCBudF9lcnJzW2lkeF0u
+bnRfZXJyc3RyKTsKKwkJCXJldHVybjsKIAkJfQogCQlpZHgrKzsKIAl9Ci0tIAoyLjQzLjAKCg==
+--0000000000005043ce062c1976bc--
 
