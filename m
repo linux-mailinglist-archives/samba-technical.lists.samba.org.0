@@ -2,69 +2,66 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0D91AA16534
-	for <lists+samba-technical@lfdr.de>; Mon, 20 Jan 2025 02:49:36 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5505AA1662A
+	for <lists+samba-technical@lfdr.de>; Mon, 20 Jan 2025 05:50:17 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=Xf98GyAdie4SfKgORppb7AAbGu2pyVw7mK348IGm1GY=; b=O18HyeDQUT1DOGHRE55JF9T5rJ
-	RGdHAWfQf3nyRROsozqfUE2WiVj5ceQrF5H+cAjWxYhvU9aLIBeOyaq/w4iAq0bR+PLZdVXwJOtjl
-	g0LbTdzMeZyoC4JxxKA0h/HVUWuLDkrXAvzAgwdDdRqrdy26asyXGathL0gxDGH4D56jNIqzAAtO5
-	pd+mkOB6C5YGHqfHvoQu66eOm+CbO7ddD13QDVMwpjwSPSZMVJHnHb4GjfwNlBtLtLoXzQfWc5WoI
-	fbLtTunCvNXlKCZIbLasFoLIbO44VTrTCNPIGP8fmz1EqW2LR9E5ri1ecoJ1AlDpHXiERKtt4mS2U
-	9c9sn9bw==;
-Received: from ip6-localhost ([::1]:46462 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=Ht/7JrZvNU8ftTsPo36AkZgE+47tm3VX+1z5S9frgHc=; b=SCoP3RCi02m6EeCE/Ov6oYwxFq
+	dibuhOpgigvH8xhjECLcx2K2V/onv+nzafjhydAEHb4O3QWPPbMQWDlneauvTUfd63oDs2jJ40Wsf
+	QMI3JjFZ2JfM14Sju7AptCRO05LWg64dDAZP+jlPwSfJcAz1pHvYjI/gaBGSkvmBrF/N3aQJp8eWK
+	/EsoBD3u0oSVjDEVeJJnWV8hFgKuTySbxmIbgeYl2yfTu/5N4YVIw0KXTvBYvkmvAuVOcXuX5hHY8
+	ed4Nx1cYjwmq2DLQ69UynLyRtX6+PCJpyyVfPM68QR222GMg+Ut3BRte2kPu0HmWATzEqp9siDoYI
+	9vLsMH/Q==;
+Received: from ip6-localhost ([::1]:63220 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1tZguP-008gIY-U7; Mon, 20 Jan 2025 01:48:57 +0000
-Received: from mail-lf1-x134.google.com ([2a00:1450:4864:20::134]:56709) 
+	id 1tZjjK-008gju-8L; Mon, 20 Jan 2025 04:49:42 +0000
+Received: from mail-lf1-x132.google.com ([2a00:1450:4864:20::132]:53550) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1tZguL-008gIR-1c
- for samba-technical@lists.samba.org; Mon, 20 Jan 2025 01:48:55 +0000
-Received: by mail-lf1-x134.google.com with SMTP id
- 2adb3069b0e04-53e399e3310so4128330e87.1
- for <samba-technical@lists.samba.org>; Sun, 19 Jan 2025 17:48:52 -0800 (PST)
+ (Exim) id 1tZjjE-008gjn-PM
+ for samba-technical@lists.samba.org; Mon, 20 Jan 2025 04:49:40 +0000
+Received: by mail-lf1-x132.google.com with SMTP id
+ 2adb3069b0e04-5401e6efffcso4462570e87.3
+ for <samba-technical@lists.samba.org>; Sun, 19 Jan 2025 20:49:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1737337731; x=1737942531; darn=lists.samba.org;
- h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ d=gmail.com; s=20230601; t=1737348574; x=1737953374; darn=lists.samba.org;
+ h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
  :date:message-id:reply-to;
- bh=Xf98GyAdie4SfKgORppb7AAbGu2pyVw7mK348IGm1GY=;
- b=ZAj8pnDj6GFzO/OkPm6D0oPVvdGF5ylygcXQWhknIIXHzX+J8ThpZbZTmHddQUV9XR
- zHHgH+AqKANnsanTqZBUWA/td3Wpizl9XGbV87PFyrpf6DpGIakLL6VA6lo03EY1jSRZ
- 7BAgnJEy4ZyHmpfOvnuXl2G0v4thmimgBykDsPfkNJY/htbhW5ARUb6qGNq0ImlTnjsB
- SXuZrrodgrnP+7+ToA53kJYb5tJRxav0bEurS3RcL9kwxaRtGTlLR6eTZ43V4z3LemM3
- H7UprKGm8SyIZPn6c5722iO7uK2mj/0lNxFFqwjf4WMrbdswBSYqmWc+S9NGW6BSFdUC
- uBDg==
+ bh=Ht/7JrZvNU8ftTsPo36AkZgE+47tm3VX+1z5S9frgHc=;
+ b=GjoyadNleb/Aaaz/Gm26NK5qCiXN2BgeztdvSTe3EQrAPg5lMXjPAxQGd4MF87YPeo
+ 8bzDVN9Wqwn5KMDMJW4DiMAJeScfyqpiV5xyp3KnMwRIrkE2HLDuvl9+jaWM1hUClW0u
+ TV1NeDBUmXAnIZw2QnaCy683/54dw5gvc+k1lPKsfVuTgoNcUN2t9vwTcPr99WUtqVHS
+ Q6UIalusbBofIVXM2yTmf8gGdG63nLIm7yD6YSww9/dZE58zgyhDgCsAllYYenq+B3so
+ tOktPV78g5o/kQJJW8dRWd15T7jL23ToWzbX295FF1mL2+Oresp/jCIS5A2IDju8rDy5
+ v37w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737337731; x=1737942531;
- h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
+ d=1e100.net; s=20230601; t=1737348574; x=1737953374;
+ h=to:subject:message-id:date:from:mime-version:x-gm-message-state
  :from:to:cc:subject:date:message-id:reply-to;
- bh=Xf98GyAdie4SfKgORppb7AAbGu2pyVw7mK348IGm1GY=;
- b=o8Ah5rahAyTdlDZl8rjZWMhUaz+cYytOA3A/rpPeJcdCnBpECzgP2X6SQpDgqrFA/A
- x/p4x2P7ePV4s+vXEzSaiFKC2zh/b2keLNVw8OPsJU3J0jSzt65rRtYG1fsugg/AbU80
- r6qtbJp2pDoPYoLrD0XT7D9gUZzOOAniaNw+d2Pn0NjHkJPZUsegGIbgIt6S+e3BnY4H
- LKH0CM09nr8GRnVOjJvluH1PUySdC4MbajfeoxsZ/qLNM4yfvWEeymTBa3BRgfDtWF7U
- 2MBro806gKNnjF1EJsYzuaBo1mAfAxg3B6oVGZCWsMm1ndy1fQU8luFr5C8nEJzk/eMA
- qrMQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWLZqugMVRe1O02oainIVwIl2PKtD5KHOWfvwTzyfQQRf41oNEmfkyvHtM/jSmzZZzlOgy1w5sF/MfdmFQPwRc=@lists.samba.org
-X-Gm-Message-State: AOJu0Yzto+vrP0TfANhpri7Oiuf517p8jLcr+j75EcjXZsgZv1b0zVX5
- wMX/Sm3A1HmezysrAT+5Fnjzk8m796I1yQuaKdAHY0n85ZQ7ONKlR+Bu5U6v4RztHNE4uC7J2g6
- MZ5hL4lrOARa+PgorAN9hXnFn5lfx7y5A
-X-Gm-Gg: ASbGncuLo2UL2AbsTcN4fzIl5ZnUNSl56yRn05vCwmYUFi/blQ1J+OzJoxexNF1BNC7
- 1WVid8/L1iY+h9lJo158G+o/PTtLi0pVKsoG00UZjAqWIwNt65F+pRwQ6Moq2sd3ecBvyn53D1q
- 06FF81MT7WVw==
-X-Google-Smtp-Source: AGHT+IGhzzP4UeBXT/UJ94U+n35AkpNQwT4Noc9VZmppWWbMvGX8wcZZxe6rwLgwn7aLKUIrbQaWsMpTwCW38Oj2540=
-X-Received: by 2002:a05:6512:b99:b0:53e:94f9:8c86 with SMTP id
- 2adb3069b0e04-5439c269828mr4346250e87.35.1737337731029; Sun, 19 Jan 2025
- 17:48:51 -0800 (PST)
+ bh=Ht/7JrZvNU8ftTsPo36AkZgE+47tm3VX+1z5S9frgHc=;
+ b=a7i4Tesz45cF//ILEywzGWLt4uWabysR0hnecOLwtnLukw54ImzsGKFVJ1tZUhgxTm
+ imINw6cPagoUZCByJLQh59T7Ws7N8vra9xbyrK7ZXViAHlrqRbGGwlXHjgIhfmbwSOfS
+ jlnZDUUAns2M7iDRNfFcZ5xqsR/and0FkCR2v0iUprBiAaMeCmKu+sUHslAFoJdc6K78
+ 2LWfQK7mnjvnbj7eO24IMNi02goyeFxCO6kzcZGEgTFez5BSk2lVdzFiuQC12g73zree
+ ph2C0HHNJ4D1T/BYII4glSZAlWVHCo529aH/U/1PdTNUzaiPJT4bduEF3UgzLrEZY7ZF
+ /yYQ==
+X-Gm-Message-State: AOJu0YzlG6OJ7RiBZolZURgBw7bnJPHIpnZNjG0zzTvtD5sAQo/VSOmm
+ yoT0u4IU8ho2Ppgd6WGAKBhTIkFUPokVHXZd8cj5km3SsV34XrN2UQmDr5ulYbSI0p2/KBVSI89
+ r2t5pC5JU1A3nsEJA04pa5RJprXzgxg==
+X-Gm-Gg: ASbGncuyhCU8fBnYlL6k++q0SOjwEsCLmtbdkDjqi5CCOO5e8chnPF3wp6AweAX5QLl
+ y/pppNRzWxrEJFaIGqimzMBkNM+anYcrVUdB43GJesYVdCX6nGcs=
+X-Google-Smtp-Source: AGHT+IH7bndLjqFb7y6TlaBQRvnCn1qPpDGR4y6OhBdS2cF8PFuvaaytI3fE0UcOx+igLuPEkn+6PD/FZ8kb8VFFb2M=
+X-Received: by 2002:a05:6512:124e:b0:540:1c16:f2f7 with SMTP id
+ 2adb3069b0e04-5439c2478cfmr3628527e87.14.1737348574339; Sun, 19 Jan 2025
+ 20:49:34 -0800 (PST)
 MIME-Version: 1.0
-Date: Sun, 19 Jan 2025 19:48:39 -0600
-X-Gm-Features: AbW1kvalQ7S0BwkX_MDoPIG6gfucAW2tRl1os7vF-9fgMOfCVSnQda0-OfFSwd8
-Message-ID: <CAH2r5msUp2xqY062MRRXkNApwekZ_CJYL3q_J0boGFPzw4W1LQ@mail.gmail.com>
-Subject: [PATCH] cifs: Fix printing Status code into dmesg
-To: CIFS <linux-cifs@vger.kernel.org>, 
- samba-technical <samba-technical@lists.samba.org>
-Content-Type: multipart/mixed; boundary="0000000000005043ce062c1976bc"
+Date: Sun, 19 Jan 2025 22:49:23 -0600
+X-Gm-Features: AbW1kvZ3EWMHSb7gZWHficEWG4ZAhVNOm8yYF5LD7HeuU0jUBqYsMS4WSMz2TRU
+Message-ID: <CAH2r5mvZkLmkmR+faL2gepGkhMg1tGgW1wt+tFr9NvW2ihK+3Q@mail.gmail.com>
+Subject: Local KDC and Samba
+To: samba-technical <samba-technical@lists.samba.org>,
+ Alexander Bokovoy <ab@samba.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -80,71 +77,18 @@ List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
 From: Steve French via samba-technical <samba-technical@lists.samba.org>
 Reply-To: Steve French <smfrench@gmail.com>
-Cc: =?UTF-8?Q?Pali_Roh=C3=A1r?= <pali@kernel.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
---0000000000005043ce062c1976bc
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Is there documentation (or example howto, walkthrough etc.) on how to
+setup the new Local KDC features of Samba server?
 
-Any thoughts on the attached patch (which is tentatively in
-cifs-2.6.git for-next)?
+I wanted to try some experiments with the Linux client to make sure
+the new type of krb5 mounts work fine.  For the server I am using
+current Samba master branch on Ubuntu.
 
-NT Status code is 32-bit number, so for comparing two NT Status codes is
-needed to check all 32 bits, and not just low 24 bits.
-
-Before this change kernel printed message:
-"Status code returned 0x8000002d NT_STATUS_NOT_COMMITTED"
-
-It was incorrect as because NT_STATUS_NOT_COMMITTED is defined as
-0xC000002d and 0x8000002d has defined name NT_STATUS_STOPPED_ON_SYMLINK.
-
-With this change kernel prints message:
-"Status code returned 0x8000002d NT_STATUS_STOPPED_ON_SYMLINK"
-
-Signed-off-by: Pali Roh=C3=A1r <pali@kernel.org>
-
-
---=20
+-- 
 Thanks,
 
 Steve
-
---0000000000005043ce062c1976bc
-Content-Type: text/x-patch; charset="UTF-8"; 
-	name="0042-cifs-Fix-printing-Status-code-into-dmesg.patch"
-Content-Disposition: attachment; 
-	filename="0042-cifs-Fix-printing-Status-code-into-dmesg.patch"
-Content-Transfer-Encoding: base64
-Content-ID: <f_m64e02zn0>
-X-Attachment-Id: f_m64e02zn0
-
-RnJvbSA2ZmE5ZDhhM2NiMjFmZjIxZGJmYTU3NTU1ZjZhNDE2MTViODI5NTI1IE1vbiBTZXAgMTcg
-MDA6MDA6MDAgMjAwMQpGcm9tOiA9P1VURi04P3E/UGFsaT0yMFJvaD1DMz1BMXI/PSA8cGFsaUBr
-ZXJuZWwub3JnPgpEYXRlOiBUaHUsIDI2IERlYyAyMDI0IDE0OjI3OjE2ICswMTAwClN1YmplY3Q6
-IFtQQVRDSCA0Mi83MV0gY2lmczogRml4IHByaW50aW5nIFN0YXR1cyBjb2RlIGludG8gZG1lc2cK
-TUlNRS1WZXJzaW9uOiAxLjAKQ29udGVudC1UeXBlOiB0ZXh0L3BsYWluOyBjaGFyc2V0PVVURi04
-CkNvbnRlbnQtVHJhbnNmZXItRW5jb2Rpbmc6IDhiaXQKCk5UIFN0YXR1cyBjb2RlIGlzIDMyLWJp
-dCBudW1iZXIsIHNvIGZvciBjb21wYXJpbmcgdHdvIE5UIFN0YXR1cyBjb2RlcyBpcwpuZWVkZWQg
-dG8gY2hlY2sgYWxsIDMyIGJpdHMsIGFuZCBub3QganVzdCBsb3cgMjQgYml0cy4KCkJlZm9yZSB0
-aGlzIGNoYW5nZSBrZXJuZWwgcHJpbnRlZCBtZXNzYWdlOgoiU3RhdHVzIGNvZGUgcmV0dXJuZWQg
-MHg4MDAwMDAyZCBOVF9TVEFUVVNfTk9UX0NPTU1JVFRFRCIKCkl0IHdhcyBpbmNvcnJlY3QgYXMg
-YmVjYXVzZSBOVF9TVEFUVVNfTk9UX0NPTU1JVFRFRCBpcyBkZWZpbmVkIGFzCjB4QzAwMDAwMmQg
-YW5kIDB4ODAwMDAwMmQgaGFzIGRlZmluZWQgbmFtZSBOVF9TVEFUVVNfU1RPUFBFRF9PTl9TWU1M
-SU5LLgoKV2l0aCB0aGlzIGNoYW5nZSBrZXJuZWwgcHJpbnRzIG1lc3NhZ2U6CiJTdGF0dXMgY29k
-ZSByZXR1cm5lZCAweDgwMDAwMDJkIE5UX1NUQVRVU19TVE9QUEVEX09OX1NZTUxJTksiCgpTaWdu
-ZWQtb2ZmLWJ5OiBQYWxpIFJvaMOhciA8cGFsaUBrZXJuZWwub3JnPgotLS0KIGZzL3NtYi9jbGll
-bnQvbmV0bWlzYy5jIHwgNCArKy0tCiAxIGZpbGUgY2hhbmdlZCwgMiBpbnNlcnRpb25zKCspLCAy
-IGRlbGV0aW9ucygtKQoKZGlmZiAtLWdpdCBhL2ZzL3NtYi9jbGllbnQvbmV0bWlzYy5jIGIvZnMv
-c21iL2NsaWVudC9uZXRtaXNjLmMKaW5kZXggMGZmM2NjYzdhMzU2Li40ODMyYmM5ZGE1OTggMTAw
-NjQ0Ci0tLSBhL2ZzL3NtYi9jbGllbnQvbmV0bWlzYy5jCisrKyBiL2ZzL3NtYi9jbGllbnQvbmV0
-bWlzYy5jCkBAIC03NzUsMTAgKzc3NSwxMCBAQCBjaWZzX3ByaW50X3N0YXR1cyhfX3UzMiBzdGF0
-dXNfY29kZSkKIAlpbnQgaWR4ID0gMDsKIAogCXdoaWxlIChudF9lcnJzW2lkeF0ubnRfZXJyc3Ry
-ICE9IE5VTEwpIHsKLQkJaWYgKCgobnRfZXJyc1tpZHhdLm50X2VycmNvZGUpICYgMHhGRkZGRkYp
-ID09Ci0JCSAgICAoc3RhdHVzX2NvZGUgJiAweEZGRkZGRikpIHsKKwkJaWYgKG50X2VycnNbaWR4
-XS5udF9lcnJjb2RlID09IHN0YXR1c19jb2RlKSB7CiAJCQlwcl9ub3RpY2UoIlN0YXR1cyBjb2Rl
-IHJldHVybmVkIDB4JTA4eCAlc1xuIiwKIAkJCQkgIHN0YXR1c19jb2RlLCBudF9lcnJzW2lkeF0u
-bnRfZXJyc3RyKTsKKwkJCXJldHVybjsKIAkJfQogCQlpZHgrKzsKIAl9Ci0tIAoyLjQzLjAKCg==
---0000000000005043ce062c1976bc--
 
