@@ -2,69 +2,71 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id B8EDBA175CF
-	for <lists+samba-technical@lfdr.de>; Tue, 21 Jan 2025 02:35:10 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id CE2ACA1771C
+	for <lists+samba-technical@lfdr.de>; Tue, 21 Jan 2025 06:46:15 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=jK35yDxIz+c7/usfyvLhaGYjtNUGmHkOltTDIjdcUQ4=; b=Vuy+21RpPFEWt6YHGz+34ZwBrR
-	CYO9s/iUlvy9zbL/51WUXm+kC+deyKYFTTssPc10ANXfs74FfbldHMXk5FPYQ4m5XEeAUITbx7dOe
-	YPMqDEgP4JDliBQcPV/NDsmD8oEYq+ElmU5VDRHKxHaoYJTlSddJu92bSfJ6Cs6anZpMtGL1gCqyB
-	7xeu2bbJUh/L6GVi2FamUL8mSbGm8c/TImnr8lgj2DDfZScPzhDLxRtTfK9EgN3WzdTlcBmfu2pry
-	wbzF/k587X4Eu7MULZp+jyJfj+xhdCzC2MOMMoD8uWbtliG42Gvi3Ld/xBu6QHcP4SZDug9NW8GOu
-	/IBFyO1g==;
-Received: from ip6-localhost ([::1]:36976 helo=hr1.samba.org) 
+	bh=1emtGIJjsXXT4jXkcQoW5DktvPVbnE323nc2yWXIp18=; b=GAyXeSwb62FD2cAgxDaIsXXQ7T
+	5PeBOt7VHjCeYHnYr97lMq/7ilBnPQONmZnvwYoY9qAaOMgICdxqi/ggre++KGhoXIU/7s42bVtwI
+	6P2w8dQx5j40AMknagpKTPpyI0BmfczPM98wly+UBRsEDySpVDXi7OK+LjxV/YnDwUDwrHPQ+DT5b
+	HMlgQjVRK5QUz90+h4BfSu9aewPz8ZAo6AYwnRyeCwqbneDwJ5lUogEnfjnM4gqvFYE+vI9nT5Cf6
+	TOjQV5d+s76IUQSZ91aihCQy7slc/MeynmoGvfhRd7SXQc+97XW8ku1ik7Y4YXC4FjMY8HxMsI/vN
+	79I/YL+A==;
+Received: from ip6-localhost ([::1]:51124 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1ta3AH-008sDC-Us; Tue, 21 Jan 2025 01:34:50 +0000
-Received: from mail-lf1-x12a.google.com ([2a00:1450:4864:20::12a]:61611) 
+	id 1ta74y-008ssZ-UP; Tue, 21 Jan 2025 05:45:36 +0000
+Received: from mail-lf1-x131.google.com ([2a00:1450:4864:20::131]:56471) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1ta3AD-008sD5-2F
- for samba-technical@lists.samba.org; Tue, 21 Jan 2025 01:34:47 +0000
-Received: by mail-lf1-x12a.google.com with SMTP id
- 2adb3069b0e04-53f22fd6887so5070683e87.2
- for <samba-technical@lists.samba.org>; Mon, 20 Jan 2025 17:34:44 -0800 (PST)
+ (Exim) id 1ta74t-008ssS-Pq
+ for samba-technical@lists.samba.org; Tue, 21 Jan 2025 05:45:34 +0000
+Received: by mail-lf1-x131.google.com with SMTP id
+ 2adb3069b0e04-53e3a227b82so4775534e87.0
+ for <samba-technical@lists.samba.org>; Mon, 20 Jan 2025 21:45:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1737423283; x=1738028083; darn=lists.samba.org;
+ d=gmail.com; s=20230601; t=1737438330; x=1738043130; darn=lists.samba.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=jK35yDxIz+c7/usfyvLhaGYjtNUGmHkOltTDIjdcUQ4=;
- b=euECSDCxiSU3AJ/gQYDGK4Mh3SiyxnQR6cGK7T+ugXq/xduY8cR1PjpB/WbmVpNO5T
- EI2V2UwAMmeWc4AkJSwWTdlaWO4oMdEBQ6T1bVVlzf6hmMCmq/t9zacLdQdyByl6y/Fd
- XwmAZlr1uphpiOEOwS0Glaz3ICCdApiAf2r78MNP9Vtc3zFNHNKPIgoGAvJlvCwykA6X
- 1CUVbVunZNxUIAL/s+S6sqvLNudKf1zw7vdnUhORVRH+hbW6aePRZFXTnlsjWlD56Qcw
- aRd490NzXUQOTxmmeA9p/fowW/aqCWeOhGn63UIFusrq3ToT9F9K2xsiHJyvQJbE0H2E
- rPDg==
+ bh=1emtGIJjsXXT4jXkcQoW5DktvPVbnE323nc2yWXIp18=;
+ b=hyNyX+5ghR9bnCB0WYiqwmeTGAm8ATe0VBZi75jehc6P+E7HcwcfVM7tkZApUOe5sO
+ V9zmaAeLQbRNdwPnUeAQDFGC88Ny0hvUMxEOOqZCmgHVE72EvtYtB48J6y74psDWd81l
+ DSWQmS9SWI9AncBAuIIN27yqUaClrKGvDCGsd2+yvizh45CS5zCtbOjD8jg/aej9kwdr
+ bcFBCoJYwy8YMkYOP1O/gHWIxd3MKAmDvxpsWov5PgsRCNTRNqFnywk/sSHvSy1Tqg4/
+ uAaB0mLg01cjFnDImzNgffeiEP0sV7qd8EOAuzN/xvueWGl7of4ii7v1BMohe86cJLGT
+ 6dHA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737423283; x=1738028083;
+ d=1e100.net; s=20230601; t=1737438330; x=1738043130;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=jK35yDxIz+c7/usfyvLhaGYjtNUGmHkOltTDIjdcUQ4=;
- b=TAvpqHjkFB5Sqi8ZmG2SpcDUP9Km2mYgj2E1/4m9+QVaEUDNWsJsAxSpAitoEvyOBW
- AmbjI0Ub+0kaqmrum3vCAm0JzgymxAqHk4fIdXJg9VioBbNIuj7ke+epr8Id2rLAkkxp
- 5ujv/5dWyFIBEIRShW4IWIgD0fttr2zK4wHULRVCvxTvzcL3hXf6mjurWv9giQiogVZs
- GB+mk4HxkST8ZVs3M7eSa8MHTdxWwM//pDk9+fFSvtWJM28xSpbsJ6Lgewl3F3+CwdPA
- KjT8rDPgbrR8Q5bIZGEHqyxt8Z8pG4kosW8dvcWimABUAo2jSWimccxfDbWyWOSo/fk5
- Yjdw==
-X-Gm-Message-State: AOJu0Yx8W+rU8JxsN7h+9Wrn/FAc/Fm+noX/4+sRYJ15rmpsL+yHYH4K
- BSKuCTSnNp+HJh30h0oyEBRMtViKYrqfLoGVqMU4/oUc3MHBRBq5HYQzdJ6+waAKdadVMxnFrcU
- ULJ19wNv5hyrYOd38UZkFSPPMTYfepw==
-X-Gm-Gg: ASbGncsGr5KYJHWvNcVhFzM8hnl6qTtPE4v+BlVKJx20TAMWUH7IWkg1m3ZbM1BCCZt
- 8wdwHvoym5P8nhd+hEpXN4D4PgdRuHGdHLh8Gm1hseKNU9BycD18=
-X-Google-Smtp-Source: AGHT+IGVgi4qCDavwU3kE6VKQA6KIov/gw3E1mNS+i91n7r02cjbD7PLz6BrkxkXpuMmS3POUkt0Crx8MGQg2CKoPcI=
-X-Received: by 2002:a05:6512:130b:b0:540:2542:6081 with SMTP id
- 2adb3069b0e04-5439c250eefmr6115052e87.23.1737423283097; Mon, 20 Jan 2025
- 17:34:43 -0800 (PST)
+ bh=1emtGIJjsXXT4jXkcQoW5DktvPVbnE323nc2yWXIp18=;
+ b=QucVj+qD/ba4o/14ksA0wvdfVyltBmfZqRvtN5TkqKfsFq0/o4INT8SGPnizWf/P4t
+ nneya+qT6wywWQXayvlHSsC2z3NJgrcsqnoU32a/uTub22pvMhuyNt6y8i13/V5gkKhr
+ 5D8bbOhCACrfUQb03JasydWI8rsFGevD+hooXrJznbS/3TosWVLgfgIbVqX7T+7dCap8
+ lsLdOXum2XJFMZcOSg8ZNiYVw6bswny+tjUu17RHjTPYdtOza+/XF0g2KHTHcQATEpQU
+ duSo9lC33bSrttgGfV7z/GX4s6kj9KOShM06ZbKXOCxOi8/tIitYhZm/+RKFCFcgIWUR
+ VW5g==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWx9sGBneklbY/9bRyl6XuIjnAe+a5gatzbC5EgutplZwUsGZCWX//R6J7DKZJJd1KylxYY57+9KrhLlvPaRkM=@lists.samba.org
+X-Gm-Message-State: AOJu0YyyNzsiT5R8xYXLxyzjWbPL+pWX6NTsus3fImCbSqwbOIOs9ncP
+ VJ4zTzJMaypj/ZUvMQdH3K+ugZKjVS+aT2mia+PlKxIIc9g3Yhuq0kUv72qktClhZCblbhgSKOw
+ FmV58186U4Y/EDld2SCKo4iBMRss=
+X-Gm-Gg: ASbGncsxEe9UdDW+yj7E++hpUrrozfTsrPykNnD1v3bj6HFfyK9GHwl0cxBAUf4C9Qx
+ uX7ZN0aLf852ToT7T2hmBduDpWmOFD2/cCrb273y3ITcDCl5d2g4=
+X-Google-Smtp-Source: AGHT+IHzjonUFdcFdFs7Rl8BrB9pAE24eGvGf8jYAqqe6SSNXkzwA+0MojiSNZZAsrSa2p4Whub77pw2XBn4po/0euw=
+X-Received: by 2002:a05:6512:24d:b0:53e:39c2:f026 with SMTP id
+ 2adb3069b0e04-5439c229109mr4072679e87.14.1737438329959; Mon, 20 Jan 2025
+ 21:45:29 -0800 (PST)
 MIME-Version: 1.0
-References: <CAH2r5mvZkLmkmR+faL2gepGkhMg1tGgW1wt+tFr9NvW2ihK+3Q@mail.gmail.com>
- <Z43pEk7WDs6dTQ1M@toolbox> <4942506.OV4Wx5bFTl@magrathea>
-In-Reply-To: <4942506.OV4Wx5bFTl@magrathea>
-Date: Mon, 20 Jan 2025 19:34:31 -0600
-X-Gm-Features: AbW1kvaxp7g9sWO-NRWECYMh50VC-RrWfHnQGR3SjrxWeiYEAsN6w9mog2O_mtg
-Message-ID: <CAH2r5mtDJ2avG3Z=-pMSO33GNqjSyw6qbMATLJFLx_pVBiSasA@mail.gmail.com>
-Subject: Re: Local KDC and Samba
-To: Andreas Schneider <asn@samba.org>
+References: <CAH2r5msUp2xqY062MRRXkNApwekZ_CJYL3q_J0boGFPzw4W1LQ@mail.gmail.com>
+ <20250120175449.5i2a3bdd7xk2xjm3@pali>
+In-Reply-To: <20250120175449.5i2a3bdd7xk2xjm3@pali>
+Date: Mon, 20 Jan 2025 23:45:18 -0600
+X-Gm-Features: AbW1kvZqljgd4pIQw24dylfsEMyMfhxrmJaTSUiETe2mIw0Wanm6vQ9uOQERsdM
+Message-ID: <CAH2r5mtA4Xr-tkNgjLpGqbOn60Rms2=52AfrLG-F6RwqVJfbsg@mail.gmail.com>
+Subject: Re: [PATCH] cifs: Fix printing Status code into dmesg
+To: =?UTF-8?Q?Pali_Roh=C3=A1r?= <pali@kernel.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
@@ -82,72 +84,49 @@ List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
 From: Steve French via samba-technical <samba-technical@lists.samba.org>
 Reply-To: Steve French <smfrench@gmail.com>
-Cc: Alexander Bokovoy <ab@samba.org>, samba-technical@lists.samba.org
+Cc: CIFS <linux-cifs@vger.kernel.org>,
+ samba-technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-have you done any experiments with cifs-utils and cifs.ko?
+On Mon, Jan 20, 2025 at 11:55=E2=80=AFAM Pali Roh=C3=A1r <pali@kernel.org> =
+wrote:
+>
+> Just to note that I have sent this patch in series with "cifs: Add
+> missing NT_STATUS_* codes from nterr.h to nterr.c" patch which is adding
+> also NT_STATUS_STOPPED_ON_SYMLINK (mentioned in commit message):
+>
+> https://lore.kernel.org/linux-cifs/20241227173709.22892-1-pali@kernel.org=
+/t/#u
 
-On Mon, Jan 20, 2025 at 2:33=E2=80=AFAM Andreas Schneider <asn@samba.org> w=
-rote:
->
-> On Monday, 20 January 2025 07:11:30 CET Alexander Bokovoy via samba-techn=
-ical
-> wrote:
-> > On =D0=9D=D1=8F=D0=B4, 19 =D1=81=D1=82=D1=83 2025, Steve French wrote:
-> > > Is there documentation (or example howto, walkthrough etc.) on how to
-> > > setup the new Local KDC features of Samba server?
-> > >
-> > > I wanted to try some experiments with the Linux client to make sure
-> > > the new type of krb5 mounts work fine.  For the server I am using
-> > > current Samba master branch on Ubuntu.
+Both of these are in for-next
+
+> On Sunday 19 January 2025 19:48:39 Steve French wrote:
+> > Any thoughts on the attached patch (which is tentatively in
+> > cifs-2.6.git for-next)?
 > >
-> > There are bits and pieces which aren't merged yet in both MIT Kerberos
-> > and Samba.
+> > NT Status code is 32-bit number, so for comparing two NT Status codes i=
+s
+> > needed to check all 32 bits, and not just low 24 bits.
 > >
-> > Your best way of testing is by using COPR repository Andreas created fo=
-r
-> > Fedora as it includes prepared packages.
+> > Before this change kernel printed message:
+> > "Status code returned 0x8000002d NT_STATUS_NOT_COMMITTED"
 > >
-> > See https://gitlab.com/cryptomilk/localkdc and
-> > https://copr.fedorainfracloud.org/coprs/asn/localkdc/
+> > It was incorrect as because NT_STATUS_NOT_COMMITTED is defined as
+> > 0xC000002d and 0x8000002d has defined name NT_STATUS_STOPPED_ON_SYMLINK=
+.
 > >
-> > Andreas gave some insstructions in this comment:
-> > https://github.com/SSSD/sssd/issues/7723#issuecomment-2597864370
->
-> For using IAKerb you need smbd and smbclient built from:
->
-> https://git.samba.org/?p=3Dasn/samba.git;a=3Dshortlog;h=3Drefs/heads/asn-=
-iakerb
->
->
-> Edit the smb.conf and add:
->
-> include /etc/samba/localkdc.conf
->
-> at the end of the [global] section after you ran localkdc-setup!
->
-> You can then connect to smbd using the mdns name of the machine
-> (<hostname>.local).
->
-> Example:
->
-> smbclient //samba-iakerb.local//share -Uasn@SAMBA-IAKERB.LOCALKDC.SITE --=
-use-
-> kerberos=3Drequired
->
->
-> Best regards
->
->
->         Andreas
->
-> --
-> Andreas Schneider                      asn@samba.org
-> Samba Team                             www.samba.org
-> GPG-ID:     8DFF53E18F2ABC8D8F3C92237EE0FC4DCC014E3D
->
->
+> > With this change kernel prints message:
+> > "Status code returned 0x8000002d NT_STATUS_STOPPED_ON_SYMLINK"
+> >
+> > Signed-off-by: Pali Roh=C3=A1r <pali@kernel.org>
+> >
+> >
+> > --
+> > Thanks,
+> >
+> > Steve
+
 
 
 --=20
