@@ -2,50 +2,49 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 99AD6A178CE
-	for <lists+samba-technical@lfdr.de>; Tue, 21 Jan 2025 08:52:45 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id DDD38A17946
+	for <lists+samba-technical@lfdr.de>; Tue, 21 Jan 2025 09:30:43 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=gBUGOWx0dA1erUkhzVO+6Li6v5+nh1tXUAjECiCTLEU=; b=YptTKR72CXk5thsnyHH/X7qfu1
-	KTSPaoSwTvSZMiq/OptYX2bW0hk3DtY/P5n6STkX5lZ9Rz+PlnKPKtnGZto/vDTNIKlUBAjVQ2kgZ
-	jKEiJFLd6DtDCe3ivoF97SQhMHE9IQV6EhIXv2jlOW/7/rEJJ30PyD3mS63AVnOLGYy5+J7fz3ovG
-	fg/112YdYNNg+aPhtLyrlLEe6A21UbvxlTh7c5ToplR3GZ6JtcYpbbK8SBQuBNdGvxvkGE1+PhB0d
-	/9pwTRcfpw4pTEQwhEq8HJS2VrAtWIlB99chgYkreRTQGn53Au8uT+0s3cgvxQwH2ouwiB4C6aaw1
-	Z1O83fnQ==;
-Received: from ip6-localhost ([::1]:55760 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=bDxiUpooTdmTGruBAfaoZogAJQGM0Egaju8234TYOeU=; b=0xMQnByKru6IF2p4G90ZFwsnNK
+	i0OYRWrmC1la5c3/+imY5Zx/ssDpHmX2BaOb7E+VqfdeNg8jK3Np86MsVddK9lVXPD2RRO1YmL5yF
+	qfTwewKw+CE8vriRtqo8TTBFVOiJBnKj66omvZpRZ/X0hEffVjQbeE8XTUbIHdJylikVJcBp9ETd0
+	98Mn9cUDDFoNfRT2vZ5XafQi85x3flM4a2M9iIYGyT1buEWmQGlgf6mkOgwiF+ZvkLHbwzBlAo0wz
+	RS4LVzgP75MkY+DSV/1w8brfGEBytPvyTCg7ADKaqJpzvd2+YdwrrxIUMAvfld4f5SAvqFUrItf6+
+	7O6g4JlQ==;
+Received: from ip6-localhost ([::1]:43790 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1ta93U-008tT2-Io; Tue, 21 Jan 2025 07:52:12 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:35412) 
+	id 1ta9eS-008tdI-SF; Tue, 21 Jan 2025 08:30:24 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:35036) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1ta93O-008tSv-N5
- for samba-technical@lists.samba.org; Tue, 21 Jan 2025 07:52:09 +0000
+ (Exim) id 1ta9eM-008tdB-8r
+ for samba-technical@lists.samba.org; Tue, 21 Jan 2025 08:30:21 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Cc:To:From:Date;
- bh=gBUGOWx0dA1erUkhzVO+6Li6v5+nh1tXUAjECiCTLEU=; b=VBKg3IItnZb4+vr8ktbdmwo8r1
- pO8VORL9dkbRm0ORnkuiVZnOxSFPKGnT/13N8m2BVSqFOPLypLQvpedSJF0v4DL/F51KvQ3BPFM+q
- mBqu1Z+d+4HtNPekCR+JbJebTTYMauG5LQCo+sRvhJ79FwLZNXPmVlcJHqhpD51AyaDPipe2Dh2x2
- lGsnmgc3eerAyEEhRHpmNgW7iB/Lul/U+6vFc85lVYM4kqbVAE5xpVSOoXx0nPDnWwXVAMx/gA/QC
- JCeNdrmNQiDSUtN+JG+3I98NtX+WjWvBFcg6b4QHGPOGYrGXaRFWNChYrVyrc0lD/oL47wYrInAQO
- 5U/in1bPkVpDxzmLcMb945N13fF9UJMiT3hDUN09w+iecZ+/9p6qY6PFkdBngG7CKtVcIAUDzlyJq
- TxHBUvQZ0tibAVKIxmCH99HR87q1vuOEhxFMqj7JmGyoaH09uEhWhWBBFEMYpebPWxR0CAF8jhd8h
- +wg+8b57coy6bGUSCYhlLYOO;
+ s=42; h=Message-ID:Date:Cc:To:From;
+ bh=bDxiUpooTdmTGruBAfaoZogAJQGM0Egaju8234TYOeU=; b=H9O9/GnSMAhzQw6uHSgHEna78r
+ tLdJ9DvJFGbrrk0rmQ+3S+7YWzrxjvNmqwnNpi0CcWo8BBDp1jSjN7xrK0Wm0v+cDiVTQ3Cms6s+T
+ JTtmKX8cPw7hB5avzPvGA44wx8fdCJHX/SxECb1uZK8A04xnMM2As1uwpToCI0Y6t56STJgAtSeaR
+ J+9kYU2m4JPYdH7g5B36xRGPM2Mod3V7tQY7SB2dlJI5YxawDQly1PuAloDmqCWTbU+5vbxZzYan1
+ c3wlbZz28tu2RH/dCKHByw1mF4tMc2TjntPUUqXDTu7anEwcsKFWNtOPfCbua7FLWBXmlMvWJwvZA
+ Tz/cDLNxNUGVgDMC440ovjmzxLI9BZY0UaqoRm3MGZcPuAgdeSzxoyKx7r9gx3h07BYfNaoQVbuFL
+ zfyVGW5BPRvyYcooNMPYRHApX0j1OZlG47N7MvEoEMPCUv+b/jU5UlxXxpOfb8LRSsIRhZywFF5Jg
+ luVhTGFrBLY0lnp7dwPBmdSS;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1ta93N-001CoD-0o; Tue, 21 Jan 2025 07:52:05 +0000
-Date: Tue, 21 Jan 2025 09:50:57 +0200
+ (Exim) id 1ta9eJ-001D7g-1m; Tue, 21 Jan 2025 08:30:15 +0000
 To: Steve French <smfrench@gmail.com>
 Subject: Re: Local KDC and Samba
-Message-ID: <Z49R4dLTkUwrhKG1@toolbox>
+Date: Tue, 21 Jan 2025 09:30:14 +0100
+Message-ID: <19764530.fSG56mABFh@magrathea>
+In-Reply-To: <CAH2r5mts9UoESoG-NMf8jWobVtd+ym+ujoHpxpVFf0CT2vwGWA@mail.gmail.com>
 References: <CAH2r5mvZkLmkmR+faL2gepGkhMg1tGgW1wt+tFr9NvW2ihK+3Q@mail.gmail.com>
- <Z43pEk7WDs6dTQ1M@toolbox> <4942506.OV4Wx5bFTl@magrathea>
- <CAH2r5mtDJ2avG3Z=-pMSO33GNqjSyw6qbMATLJFLx_pVBiSasA@mail.gmail.com>
+ <4942506.OV4Wx5bFTl@magrathea>
+ <CAH2r5mts9UoESoG-NMf8jWobVtd+ym+ujoHpxpVFf0CT2vwGWA@mail.gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <CAH2r5mtDJ2avG3Z=-pMSO33GNqjSyw6qbMATLJFLx_pVBiSasA@mail.gmail.com>
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="utf-8"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,102 +58,32 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Alexander Bokovoy via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Alexander Bokovoy <ab@samba.org>
-Cc: Andreas Schneider <asn@samba.org>, samba-technical@lists.samba.org
+From: Andreas Schneider via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andreas Schneider <asn@samba.org>
+Cc: Alexander Bokovoy <ab@samba.org>, samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Пан, 20 сту 2025, Steve French wrote:
-> have you done any experiments with cifs-utils and cifs.ko?
+On Tuesday, 21 January 2025 06:59:25 CET Steve French wrote:
+> Do you have a sample wireshark trace of SMB3.1.1 connection to Samba
+> with the new peer-to-peer Kerbeors and/or IAKERB?
 
-No, we haven't yet. 
+Yes, I do. You can find it here:
 
-cifs.upcall.c needs a bit of a rewrite. Right now it forces krb5 mech in
-GSSAPI calls, that needs to be changed to use iakerb or krb5 depending
-on configuration. Also, currently cifs.upcall.c does not always go
-through GSSAPI and rather chooses raw kerberos API in some cases which
-arguably should not be done this way if we ever want to support IAKerb
-proxying.
+https://xor.cryptomilk.org/samba/iakerb/
 
-The logic right now is the following:
+However that wont help you. See Alexander his reply. You need to use GSSAPI 
+instead of raw Kerberos in cifs utils. You should try to do IAKerb first and 
+fall back to KRB5 mech otherwise.
 
- - if we have no credentials identified by cifs.upcall, use GSSAPI, in a
-   hope that GSSAPI would pull a credential somehow
+What I haven't implemented yet. If we get a krbtgt via IAKerb we should allow 
+to store that in a user specified ccache or the default one.
 
- - otherwise, pull creds manually and construct a GSSAPI-like exchange
-   manually
-
-The latter will not work because it assumes you direct line of sight to
-KDC which is not the case with IAKerb: you only have line of sight to
-SMB server and SMB server has line of sight to the KDC (be it local or
-remote, doesn't matter).
-
-
-
-> 
-> On Mon, Jan 20, 2025 at 2:33 AM Andreas Schneider <asn@samba.org> wrote:
-> >
-> > On Monday, 20 January 2025 07:11:30 CET Alexander Bokovoy via samba-technical
-> > wrote:
-> > > On Няд, 19 сту 2025, Steve French wrote:
-> > > > Is there documentation (or example howto, walkthrough etc.) on how to
-> > > > setup the new Local KDC features of Samba server?
-> > > >
-> > > > I wanted to try some experiments with the Linux client to make sure
-> > > > the new type of krb5 mounts work fine.  For the server I am using
-> > > > current Samba master branch on Ubuntu.
-> > >
-> > > There are bits and pieces which aren't merged yet in both MIT Kerberos
-> > > and Samba.
-> > >
-> > > Your best way of testing is by using COPR repository Andreas created for
-> > > Fedora as it includes prepared packages.
-> > >
-> > > See https://gitlab.com/cryptomilk/localkdc and
-> > > https://copr.fedorainfracloud.org/coprs/asn/localkdc/
-> > >
-> > > Andreas gave some insstructions in this comment:
-> > > https://github.com/SSSD/sssd/issues/7723#issuecomment-2597864370
-> >
-> > For using IAKerb you need smbd and smbclient built from:
-> >
-> > https://git.samba.org/?p=asn/samba.git;a=shortlog;h=refs/heads/asn-iakerb
-> >
-> >
-> > Edit the smb.conf and add:
-> >
-> > include /etc/samba/localkdc.conf
-> >
-> > at the end of the [global] section after you ran localkdc-setup!
-> >
-> > You can then connect to smbd using the mdns name of the machine
-> > (<hostname>.local).
-> >
-> > Example:
-> >
-> > smbclient //samba-iakerb.local//share -Uasn@SAMBA-IAKERB.LOCALKDC.SITE --use-
-> > kerberos=required
-> >
-> >
-> > Best regards
-> >
-> >
-> >         Andreas
-> >
-> > --
-> > Andreas Schneider                      asn@samba.org
-> > Samba Team                             www.samba.org
-> > GPG-ID:     8DFF53E18F2ABC8D8F3C92237EE0FC4DCC014E3D
-> >
-> >
-> 
-> 
-> -- 
-> Thanks,
-> 
-> Steve
 
 -- 
-/ Alexander Bokovoy
+Andreas Schneider                      asn@samba.org
+Samba Team                             www.samba.org
+GPG-ID:     8DFF53E18F2ABC8D8F3C92237EE0FC4DCC014E3D
+
+
 
