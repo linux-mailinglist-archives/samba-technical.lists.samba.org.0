@@ -2,75 +2,68 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1D8C0A19D28
-	for <lists+samba-technical@lfdr.de>; Thu, 23 Jan 2025 04:15:10 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 33EE5A19ECE
+	for <lists+samba-technical@lfdr.de>; Thu, 23 Jan 2025 08:23:09 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=w5kzfd7gI5abEY9u/jfYt1ZUK0uZwZTNzVYap+eYtzg=; b=rzSy/8q8w51qFP2ztErLe2ctBq
-	RycbBaWvaWKEF0zcVji4hDKk/+d75yrBQZykQpN3dEbV3rsCS/tPG780yD4XhDTjBVjoEHTr/zJw6
-	7J3ge7cMXngA81Zcgo4uwWw7uird8Ul/jR5Rd5/iShyYZocPCqwtSnDkTQF+zfcBu/g3iq5c7X5fK
-	fzDJ0veK9/qTk4bTfReLPiWp3OP1gf3wPRNBD/RXMt4z04O9CGnBzG5mVMgHDyKj/Veo0+rO+a9Gu
-	xcHlarCl6wt25kc5Z7N8iJ7aRxZnPRLKwdHHG0E/mSLV3g6Vhi48ydKXPEUyLVoifHEAFYlwkpSGs
-	rqzB/OBg==;
-Received: from ip6-localhost ([::1]:26164 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=/rbQpm9Jy7IybTEigTwL39Sgkr2FI7rHzAu1DibH0+E=; b=EghjfJP60umZBH+3pQ9WiSEGeJ
+	/JIxu9YOUROsZuP7QEXTWhG052mPmOs2Pp/gpfyCYQwNgkl/cWPJPqdWPrX7rEKmqxhKp4Q7w07lj
+	rGQnddqAr1Khympok3g90OD6iQwlTFeOJ35eveUfzWufd2RcfIoq8y2+RAhT9jkw2B1HT4Tisa1Yx
+	ZMAh3zKLxi1zMt/vM/YBY+5cx7K1rjCqI4XB4TqhOAhuH2GVOXLkc/jUZd1+Z8JN8d5uK64Ar3W2K
+	k/8Rl2ciyTJMEwlSQACqbwG3UwZpUZUr0mik9Q0eHwzxfP67JH/lFr71qmI8IAKXDUUhemMSkA4QX
+	PPhIm6fQ==;
+Received: from ip6-localhost ([::1]:60918 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1tanfq-009H3Y-Hl; Thu, 23 Jan 2025 03:14:30 +0000
-Received: from mail-lf1-x131.google.com ([2a00:1450:4864:20::131]:45302) 
+	id 1tarXm-009I5h-Kd; Thu, 23 Jan 2025 07:22:26 +0000
+Received: from mail-ed1-x535.google.com ([2a00:1450:4864:20::535]:56376) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1tanfm-009H3R-99
- for samba-technical@lists.samba.org; Thu, 23 Jan 2025 03:14:28 +0000
-Received: by mail-lf1-x131.google.com with SMTP id
- 2adb3069b0e04-53f757134cdso510368e87.2
- for <samba-technical@lists.samba.org>; Wed, 22 Jan 2025 19:14:25 -0800 (PST)
+ (Exim) id 1tarXe-009I5a-OG
+ for samba-technical@lists.samba.org; Thu, 23 Jan 2025 07:22:22 +0000
+Received: by mail-ed1-x535.google.com with SMTP id
+ 4fb4d7f45d1cf-5d3f65844deso1077325a12.0
+ for <samba-technical@lists.samba.org>; Wed, 22 Jan 2025 23:22:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1737602064; x=1738206864; darn=lists.samba.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=w5kzfd7gI5abEY9u/jfYt1ZUK0uZwZTNzVYap+eYtzg=;
- b=dB5XtZp8+BeAOuPCFWIe+OZk/26gPWlKjlWdg1GMi7YwWwk9zmKEcCDlALJgZPoQnC
- sN2OHqa5c79yLXYNeohbE4RI5rGdBy/fZlJBHP5XLo6Asgqv4ExnqH+86Rq6541HjWQU
- GHWGaTuT9nw1kzzuignpHtyVt4jazQ33ev+yl5JVG+SnH1PEHE4WPk9Xm5NpHdVIhBm1
- U91jQfHeMYYIIAyta1JZ7+b+5lsxixtsStHrSxoaTzWQqZD1siPm9NQPBpLBI5YIRaAJ
- LjpCwpBKkQochWpS8OezCWV96V/2hGs7T0kms+oJOVkkCuTNXucSQw0R/58n5cxoZJV5
- Ny2A==
+ d=gmail.com; s=20230601; t=1737616937; x=1738221737; darn=lists.samba.org;
+ h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=Q/Q5RIUDZKHOtknpAzqSm6+6LnWcY5XN7V1yv8OAUbk=;
+ b=NQ6RZJ7NgQMTVbk6Mnb6BolWcMxJa/MX+pNZvGI1uBFtkwIOsp5Be0MQpSzPOR/gQ7
+ +PAtto1kN1hzHUFkW+O1KTUf1lPE+04hgm6L07V8wllEVdwBpLyN134ZLl075IF+ggMV
+ lcBHuA2egMJ50cmJdoUwUvmGFhHiVpBrjqCKDgFbhsKC5Y8j5Bncq3CerPlWPDaWq4SB
+ 0HmckwZJkx/oW3zljtdAAsjwGlswxSHERzhmTFf94WVKhP6Jzo/IAV9kPFQfwj35qYtW
+ Ow9eKgu78c7eVUMLvf+o/HZonkhK2JvknWD7wtKbCs4+8ZMQErZQGQ0BxAgrpZaFIsps
+ aPXw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737602064; x=1738206864;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=w5kzfd7gI5abEY9u/jfYt1ZUK0uZwZTNzVYap+eYtzg=;
- b=mRITifidxGOlvRMoRycWlZvFTWHZ91eUsoMFIy4Fkeh9VVSmGBr23R1oSRNmzyJggH
- UCsWr/RNM6JnRA+GEn5jxOOqPbET+evqtvl0eCUWCPDu4AuEuVjtvoqgZZbIL44y6TWR
- Epv3aiseuPzOF9/0gFyxnD+p75oNsYKW4sqRr6REl6+o63sVkOQlmUkScxfOHyciLA8o
- GXrQy/aDK7GFqbshsselizA/DHfH8RR5ACxtZSIejW5Q9d3/v/S+Z1SF2TG4ZWmN+Yku
- WNnJ8OiknTPQt2iLjvONrARfvlZZrGPHrn9UvovGjy5tnlHXNALRmVVOtx9Ivczg8DVU
- YzYg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCX4iPH1rasoM2bP7YAvCE04ky+wqtpFSwHdD2DripBj3hI+pl2PRiBupZT1BIDvB6Mrdmrr6k+lFVLODF/MoJk=@lists.samba.org
-X-Gm-Message-State: AOJu0YztSlTRbQQWYH4SIf+x5JJ1dxeSoWKDKp6LiwTPcr0jSQYCr6WT
- tsHVDMOQ7RT7a4kVne3Qz4Bo7n2mx4alQArhL+ktVKExTDmKQW8P0NiSskZKVCCsn8jicikJb8K
- J0E0Mns1resEqJpHeTT0mMRwdQnc=
-X-Gm-Gg: ASbGncsVYGVRGLMs7CKc6J9crnD7VJ+2dYH6R0g6YbtzbX5U9NjPJweUTB/kyeXxPt1
- urlINpIFJv3UL0MEfuTG3V3cJycXUJ4S2rmQbsutUrmW92foJcrTF3M+8ROM0TQ==
-X-Google-Smtp-Source: AGHT+IG+OtE0UdWI8FRrZC5NH3rowiCHIhfosq9WDlxGiwZ0BAwScGeNY6jvvwo+nvGkutB4sSrTMIxD38sm3S7Z56s=
-X-Received: by 2002:a05:6512:32c7:b0:540:3566:5760 with SMTP id
- 2adb3069b0e04-5439c265ce7mr7974526e87.35.1737602064287; Wed, 22 Jan 2025
- 19:14:24 -0800 (PST)
+ d=1e100.net; s=20230601; t=1737616937; x=1738221737;
+ h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=Q/Q5RIUDZKHOtknpAzqSm6+6LnWcY5XN7V1yv8OAUbk=;
+ b=o9XcjiAY8JVGQM0p0waPoCFr9OKimDr6ncw+Sa1rwodWFQ5+kQlt1OeHK4jIuAQCUS
+ 7Vu1c1fRcJFyAhOga7XAwoc97PKvxwRpQrq+WezJDM1bgbB/sRu41lr9fI5iWMhdZork
+ 6fU/LVeLNNA1nBxQao8pLrgBrqYkadre8oAAsFmzHfz339ce33kI4crGorAB6LWyeE14
+ SgxynWRQ9TQAH53UsbbJTQS+b+XVfaLwLbFxqJCDFT5ZA3wErAZjWX7qr9PMf9KofrJA
+ XAqrImLdtNfgQurMa/IOG7/ARbgdLg3qEgwV6Xsvf1NLx0omytZzcsCerntOxArvqwhA
+ G6UA==
+X-Gm-Message-State: AOJu0Yx7pijsMI5mdvUlO3fEkQwEl0Z/+6e93PAN9OUCxVi81v+YnG63
+ 3SY0pEoG1jjAabsIlHjIBvQwpf5ka6d/sXDV3ZrxHZrfojDFcqiHjGGRDdV5n9eK+aRV3k8pYIP
+ 8lidvC+15+ZwiEy1X5YOclcDAFQ6oawXL
+X-Gm-Gg: ASbGncuqBKCi4+EpKnNBE3KzzexNc3Ff75dUHu+xspTippADZmLFS36IocIRaxmFqq7
+ h3BrUn1uD/4wX4XBY230XiLgRPxTkAF5ws5awcYP+P9O7dZTsu5/ER3bmy26VuiSnxosXMRXJB3
+ faBoyackh9uPiGhctB4UI=
+X-Google-Smtp-Source: AGHT+IEDuqddNDThoc5gSqUIoNxtmd7Y9s0+SgCpWv93uSJ51tcgmrFwp76CT/7effiCAYNMqZY876xZybOPcXxJmwA=
+X-Received: by 2002:a05:6402:2554:b0:5d9:f8d3:6e6b with SMTP id
+ 4fb4d7f45d1cf-5db7d3550e0mr21529402a12.22.1737616936569; Wed, 22 Jan 2025
+ 23:22:16 -0800 (PST)
 MIME-Version: 1.0
-References: <CAH2r5mvZkLmkmR+faL2gepGkhMg1tGgW1wt+tFr9NvW2ihK+3Q@mail.gmail.com>
- <Z43pEk7WDs6dTQ1M@toolbox> <4942506.OV4Wx5bFTl@magrathea>
- <CAH2r5mvy2b35BAaUnqHdO7dLb9pRHy=LXv7YMBhCc76fUst05Q@mail.gmail.com>
- <Z5CbjKR8Fl5dgx6e@toolbox>
-In-Reply-To: <Z5CbjKR8Fl5dgx6e@toolbox>
-Date: Wed, 22 Jan 2025 19:14:13 -0800
-X-Gm-Features: AWEUYZkKLhL0pAEYWbYyiKdX64HwgpkwGGi8e-eYTQzm1A-klRBhd1JbeznB8BI
-Message-ID: <CAH2r5mvPQu8B05pbgnAqjdyFNO48pAgZAeYtXKWhvz2g+WjR2w@mail.gmail.com>
-Subject: Re: Local KDC and Samba
-To: Alexander Bokovoy <ab@samba.org>
+Date: Wed, 22 Jan 2025 23:22:05 -0800
+X-Gm-Features: AbW1kvbupxdTT02d-EmPfRwGqEx-tBtFW_Kgph9-ok_pWYdQ8ekAo4t5IBsbQY4
+Message-ID: <CAOGdD2rEGmhH4rJRsgQbgU7Wu=kg3_poTLUUr7MMjuJkAHM8eg@mail.gmail.com>
+Subject: PANIC Bad talloc magic value - unknown value during disconnect.
+To: samba-technical <samba-technical@lists.samba.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -84,142 +77,220 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
-Cc: Andreas Schneider <asn@samba.org>, samba-technical@lists.samba.org
+From: Yogesh Kulkarni via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Yogesh Kulkarni <yoknfs@gmail.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Wed, Jan 22, 2025 at 1:18=E2=80=AFAM Alexander Bokovoy <ab@samba.org> wr=
-ote:
->
-> On =D0=90=D1=9E=D1=82, 21 =D1=81=D1=82=D1=83 2025, Steve French wrote:
-> > Although install of the localkdc seemed to work, running setup on it fa=
-iled:
-> > root@localhost-live:/home/smfrench# dnf install localkdc
-> > Updating and loading repositories:
-> > Repositories loaded.
-> > Package                   Arch   Version                   Repository
-> >              Size
-> > Installing:
-> >  localkdc                 x86_64 0.0.1-14.fc41
-> > copr:copr.fedorainf  30.4 KiB
-> > Installing dependencies:
-> >  certmonger               x86_64 0.79.20-2.fc41            fedora
-> >           2.5 MiB
-> >  krb5-pkinit              x86_64 1.21.3-121.fc41
-> > copr:copr.fedorainf 121.2 KiB
-> >  krb5-server              x86_64 1.21.3-121.fc41
-> > copr:copr.fedorainf 784.6 KiB
-> >  libkadm5                 x86_64 1.21.3-121.fc41
-> > copr:copr.fedorainf 218.2 KiB
-> >  localkdc-selinux         x86_64 0.0.1-14.fc41
-> > copr:copr.fedorainf  10.1 KiB
-> >
-> > Transaction Summary:
-> >  Installing:         6 packages
-> >
-> > Total size of inbound packages is 1 MiB. Need to download 1 MiB.
-> > After this operation, 4 MiB extra will be used (install 4 MiB, remove 0=
- B).
-> > Is this ok [y/N]: y
-> > [1/6] localkdc-0:0.0.1-14.fc41.x86_64           100% |  28.8 KiB/s |
-> > 18.2 KiB |  00m01s
-> > [2/6] certmonger-0:0.79.20-2.fc41.x86_64        100% | 824.8 KiB/s |
-> > 602.1 KiB |  00m01s
-> > [3/6] krb5-server-0:1.21.3-121.fc41.x86_64      100% | 376.8 KiB/s |
-> > 300.0 KiB |  00m01s
-> > [4/6] krb5-pkinit-0:1.21.3-121.fc41.x86_64      100% | 319.9 KiB/s |
-> > 59.8 KiB |  00m00s
-> > [5/6] libkadm5-0:1.21.3-121.fc41.x86_64         100% | 330.6 KiB/s |
-> > 77.7 KiB |  00m00s
-> > [6/6] localkdc-selinux-0:0.0.1-14.fc41.x86_64   100% |  81.7 KiB/s |
-> > 19.9 KiB |  00m00s
-> > -----------------------------------------------------------------------=
------------------
-> > [6/6] Total                                     100% | 678.3 KiB/s |
-> > 1.1 MiB |  00m02s
-> >
-> >
-> > root@localhost-live:~# localkdc-setup
-> > The parent of location "/var/kerberos/localkdc/kdc.crt" could not be
-> > accessed due to insufficient permissions.
-> > /usr/bin/local-getcert: Failed to create pkinit certificates
-> >
-> > But it looks like it has sufficient permissions:
-> >
-> > root@localhost-live:~# stat /var/kerberos/localkdc
-> >   File: /var/kerberos/localkdc
-> >   Size: 16            Blocks: 0          IO Block: 4096   directory
-> > Device: 0,42    Inode: 367888      Links: 1
-> > Access: (0755/drwxr-xr-x)  Uid: (    0/    root)   Gid: (    0/    root=
+Hi, I am looking for help in getting RCA on this issue.
+
+A Panic with bad talloc magic value is seen during disconnect.
+
+Samba version : 4.13.13 ( Debian 11 - 4.13.13+dfsg-1~deb11u5 )
+
+Environment :
+
+Samba is deployed on a debian VM and is being mounted on a terminal server
+( MSFT remote desktop ).
+
+smbstatus output has confirmed that the same smb connection is serving
+multiple tcon=E2=80=99s.
+
+There are about 10 users connected to the system from the terminal server.
+
+Modules - Propriety module, fruit, catia, streams_xattr, however the same
+dumps are seen for IPC$.
+
+Stack trace from log.smbd ( truncated for ease of reading )
+
+[2025/01/14 21:04:00.354782,  4, pid=3D3759694, effective(35049, 0),
+real(35049, 0), class=3Dvfs] ../../source3/smbd/vfs.c:939(vfs_ChDir)
+
+  vfs_ChDir to /tmp
+
+[2025/01/14 21:04:00.354840,  5, pid=3D3759694, effective(35049, 0),
+real(35049, 0), class=3Dvfs] ../../source3/smbd/vfs.c:1001(vfs_ChDir)
+
+  vfs_ChDir: vfs_ChDir got /tmp
+
+[2025/01/14 21:04:00.354873,  2]
+../../source3/smbd/close.c:824(close_normal_file)
+
+  USER closed file /tmp (numopen=3D-1) NT_STATUS_INVALID_HANDLE
+  <=E2=80=94=E2=80=94=E2=80=94=E2=80=94=E2=80=94=E2=80=94=E2=80=94=E2=80=94=
+=E2=80=94=E2=80=94=E2=80=94 why is close_normal_file being called on a dire=
+ctory ?
+
+[2025/01/14 21:04:00.354884,  3]
+../../source3/smbd/service.c:1123(close_cnum)
+
+  dl-rds-02 (ipv4:172.29.6.13:49523) closed connection to service IPC$
+
+[2025/01/14 21:04:00.354893,  4, pid=3D3759694, effective(0, 0), real(0, 0)=
+,
+class=3Dvfs] ../../source3/smbd/vfs.c:939(vfs_ChDir)
+
+  vfs_ChDir to /
+
+[2025/01/14 21:04:00.354913,  0]
+../../source3/lib/popt_common.c:68(popt_s3_talloc_log_fn)
+
+  Bad talloc magic value - unknown value
+
+[2025/01/14 21:04:00.354942,  0] ../../lib/util/fault.c:159(smb_panic_log)
+
+  =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+[2025/01/14 21:04:00.354951,  0] ../../lib/util/fault.c:160(smb_panic_log)
+
+  INTERNAL ERROR: Bad talloc magic value - unknown value in pid 3759694
+(4.13.13-Debian)
+
+[2025/01/14 21:04:00.354966,  0] ../../lib/util/fault.c:164(smb_panic_log)
+
+  If you are running a recent Samba version, and if you think this problem
+is not yet fixed in the latest versions, please consider reporting this
+bug, see https://wiki.samba.org/index.php/Bug_Reporting
+
+[2025/01/14 21:04:00.354976,  0] ../../lib/util/fault.c:169(smb_panic_log)
+
+  =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+[2025/01/14 21:04:00.354983,  0] ../../lib/util/fault.c:170(smb_panic_log)
+
+  PANIC (pid 3759694): Bad talloc magic value - unknown value in
+4.13.13-Debian
+
+[2025/01/14 21:04:00.355314,  0] ../../lib/util/fault.c:274(log_stack_trace=
 )
-> > Context: system_u:object_r:var_t:s0
-> > Access: 2025-01-21 19:42:50.669926708 -0800
-> > Modify: 2025-01-21 19:42:22.342659428 -0800
-> > Change: 2025-01-21 19:42:22.342659428 -0800
-> >  Birth: 2025-01-21 19:41:03.323891871 -0800
-> >
-> > Any ideas why this would fail?
->
-> There is incomplete SELinux policy yet. Please run in permissive for
-> time being, we need to fix the policy.
 
-Disabling selinux did help and fixed the localkdc-setup setup
+  BACKTRACE: 26 stack frames:
 
-The last step of his instructions says to do kinit, but kinit is not
-installed in his image,
-or as a dependency of "dnf install localkdc" so I had to reboot the
-workstation and
-then do "dnf install krb5-workstation" (hopefully doesn't need a
-special version of kinit?!)
+   #0 /lib/x86_64-linux-gnu/libsamba-util.so.0(log_stack_trace+0x30)
+[0x7efe9419f220]
 
-After rebooting the localkdc was not available so couldn't do kinit.  How d=
-o you
-restart it?   What I tried is below:
+   #1 /lib/x86_64-linux-gnu/libsamba-util.so.0(smb_panic+0x26)
+[0x7efe9419f486]
 
-root@fedora:/home/smfrench# systemctl start localkdc
-Job for localkdc.service failed because the control process exited
-with error code.
-See "systemctl status localkdc.service" and "journalctl -xeu
-localkdc.service" for details.
-root@fedora:/home/smfrench# systemctl status localkdc.service
-=C3=97 localkdc.service - Local Kerberos KDC
-     Loaded: loaded (/usr/lib/systemd/system/localkdc.service; static)
-    Drop-In: /usr/lib/systemd/system/service.d
-             =E2=94=94=E2=94=8010-timeout-abort.conf, 50-keep-warm.conf
-     Active: failed (Result: exit-code) since Wed 2025-01-22 19:09:26
-PST; 13s ago
- Invocation: 1996ca595fe74329882d55bc94779265
-TriggeredBy: =E2=97=8F localkdc.socket
-    Process: 5066 ExecStart=3D/usr/sbin/krb5kdc -P /run/localkdc/kdc.pid
--w 1 (code=3Dexited, status=3D1/FAILURE)
-   Mem peak: 9.3M
-        CPU: 23ms
+   #2 /lib/x86_64-linux-gnu/libtalloc.so.2(+0x6ae7) [0x7efe93ac5ae7]
 
-Jan 22 19:09:26 fedora.local systemd[1]: Starting localkdc.service -
-Local Kerberos KDC...
-Jan 22 19:09:26 fedora.local krb5kdc[5066]: krb5kdc: cannot initialize
-realm FEDORA.LOCALKDC.SITE - see log file >
-Jan 22 19:09:26 fedora.local systemd[1]: localkdc.service: Control
-process exited, code=3Dexited, status=3D1/FAILURE
-Jan 22 19:09:26 fedora.local systemd[1]: localkdc.service: Failed with
-result 'exit-code'.
-Jan 22 19:09:26 fedora.local systemd[1]: Failed to start
-localkdc.service - Local Kerberos KDC.
-root@fedora:/home/smfrench# exit
-exit
+   #3 /lib/x86_64-linux-gnu/libtalloc.so.2(_talloc_move+0x13)
+[0x7efe93ac5d43]
+
+   #4 /usr/lib/x86_64-linux-gnu/samba/libsmbd-base.so.0(vfs_ChDir+0xe7)
+[0x7efe940048c7]
+
+   #5 /usr/lib/x86_64-linux-gnu/samba/libsmbd-base.so.0(close_cnum+0x96)
+[0x7efe9401c3b6]
+
+   #6
+/usr/lib/x86_64-linux-gnu/samba/libsmbd-base.so.0(smbXsrv_tcon_disconnect+0=
+x4b)
+[0x7efe9404ae1b]
+
+   #7 /usr/lib/x86_64-linux-gnu/samba/libsmbd-base.so.0(+0x1eb111)
+[0x7efe94031111]
 
 
-smfrench@fedora:~$ kinit asn@SAMBAKDC.LOCALKDC.SITE
-kinit: Cannot find KDC for realm "SAMBAKDC.LOCALKDC.SITE" while
-getting initial credentials
+
+By reading the code, I am able to conclude  -
+
+   -
+
+   Server receives a disconnect
+   -
+
+   The process chdir=E2=80=99s to the shares root dir ( for IPC it is /tmp =
+)
+   -
+
+   Iterate over the open files to check all the files open for this
+   connection file_close_conn()
+   -
+
+   Close the open files/directories for this connection, but skip conn->cwd
+   ( But during the close, logs show the message which comes from
+   close_normal_file()
+
+USER closed file /tmp (numopen=3D-1) NT_STATUS_INVALID_HANDLE
+Close of a directory coming from close_normal_file() seems to be an issue.
+
+   -
+
+   Once all the files/directories are closed, change dir to /
+   -
+
+   PANIC always observed at this point, in the following line of code -
+   conn->cwd_fsp->fsp_name =3D talloc_move(conn->cwd_fsp, &cwd);
+   the error comes from talloc_chunk_from_ptr() when the magic is not
+   correct.
 
 
-Ideas how to restart the local KDC?
+From the dump, I see that the line where the
 
---
-Thanks,
+ 0x00007efe940048c7 in vfs_ChDir (conn=3Dconn@entry=3D0x563eed964ce0,
+smb_fname=3Dsmb_fname@entry=3D0x7ffcc176e130)
 
-Steve
+    at ../../source3/smbd/vfs.c:998
 
+I have calculated the magic value as TALLOC_MAGIC =3D 0xea17ed70 and SIZEOF
+talloc_chunk =3D 88
+
+I am trying to figure out the talloc chunk magic from the header, using 96
+since the header is rounded off to the nearest multiple of 16.
+
+(gdb) x /12gx ((char *)cwd - 96)
+
+0x563eed819050: 0x00000000e0c1a8f4 0x0000563eed95d5a0
+
+0x563eed819060: 0x0000000000000000 0x0000563eed964c80
+
+0x563eed819070: 0x0000563eed819180 0x0000000000000000
+
+0x563eed819080: 0x0000000000000000 0x00007efe9407080e
+
+0x563eed819090: 0x00000000000000c8 0x0000000000000000
+
+0x563eed8190a0: 0x0000000000000000 0x0000000000000000
+
+(gdb) x /12gx ((char *)conn->cwd_fsp - 96)
+
+0x563eed952f70: 0x0000563eed90e6b0 0x0000563eed7e9010
+
+0x563eed952f80: 0x0000000000000000 0x0000000000000000
+
+0x563eed952f90: 0x0000000000000000 0x0000000000000000
+
+0x563eed952fa0: 0x0000000000000000 0x00007efe940df340
+
+0x563eed952fb0: 0x00000000000001a0 0x0000000000000000
+
+0x563eed952fc0: 0x0000000000000000 0x0000000000000000
+
+No magic seen here ?? I might be missing something ?
+
+(gdb) p *conn->cwd_fsp
+
+shows everything zeroed out.
+
+I looked at the code, but I am not able to point anything specific in the
+code that causes this issue.
+
+Based on the error line about the directory being closed in
+close_normal_file() might be an issue. But I am not able to reproduce this.
+
+The PANIC happens both for the shares exposed by our product as well as
+IPC$.
+
+Note that this does not happen on 4.9.5 ( Debian 10 distribution.) However,
+there are code changes to the chdir itself that I have not looked into.
+There are changes to the vfs_ChDir() code with hash 75f98a19537c
+
+
+Thanks and regards,
+
+Yogesh.
