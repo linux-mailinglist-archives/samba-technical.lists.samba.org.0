@@ -2,70 +2,73 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id D025EA18E76
-	for <lists+samba-technical@lfdr.de>; Wed, 22 Jan 2025 10:34:48 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1D8C0A19D28
+	for <lists+samba-technical@lfdr.de>; Thu, 23 Jan 2025 04:15:10 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=5QIsBAwP8k3rVSff01/p1/7nWWbCnzWPU+0ZOSqzIlU=; b=zRkYy9+CrGihNl81LgF7uX9Qfq
-	E2Gd7QKPaEAEVgLEtRTLHWSuadzSaff3joND326JKPZE9tf4nLb5jn0E4WftsEq4LdkURu0Ao3j8G
-	WWKg0kTjUn4XssdKkjfB2W/gymOuk0iLs5xVJsjNACNe4revAOZPzsk8D6i87Osz4PB8hkE6MZc2g
-	6nie0A6I8kRIL/WO933KFVDLk5uCaInvtzDChpnjdaUzRXOKXQeL2eZ8wNCr3dXkopVDKS9oM+UlP
-	ZSyyuC5dYRma2IDG/Gx5PfVb0qehNEgKgBij46TG+LShgCJXoM3ug9GJgb24T0gICvr2fhPZT4bzJ
-	hTMaS9lg==;
-Received: from ip6-localhost ([::1]:34296 helo=hr1.samba.org) 
+	bh=w5kzfd7gI5abEY9u/jfYt1ZUK0uZwZTNzVYap+eYtzg=; b=rzSy/8q8w51qFP2ztErLe2ctBq
+	RycbBaWvaWKEF0zcVji4hDKk/+d75yrBQZykQpN3dEbV3rsCS/tPG780yD4XhDTjBVjoEHTr/zJw6
+	7J3ge7cMXngA81Zcgo4uwWw7uird8Ul/jR5Rd5/iShyYZocPCqwtSnDkTQF+zfcBu/g3iq5c7X5fK
+	fzDJ0veK9/qTk4bTfReLPiWp3OP1gf3wPRNBD/RXMt4z04O9CGnBzG5mVMgHDyKj/Veo0+rO+a9Gu
+	xcHlarCl6wt25kc5Z7N8iJ7aRxZnPRLKwdHHG0E/mSLV3g6Vhi48ydKXPEUyLVoifHEAFYlwkpSGs
+	rqzB/OBg==;
+Received: from ip6-localhost ([::1]:26164 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1taX7o-00955M-Gw; Wed, 22 Jan 2025 09:34:16 +0000
-Received: from mail-ej1-x62e.google.com ([2a00:1450:4864:20::62e]:43142) 
+	id 1tanfq-009H3Y-Hl; Thu, 23 Jan 2025 03:14:30 +0000
+Received: from mail-lf1-x131.google.com ([2a00:1450:4864:20::131]:45302) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1taX7k-00955E-9Y
- for samba-technical@lists.samba.org; Wed, 22 Jan 2025 09:34:14 +0000
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-aa679ad4265so146797466b.0
- for <samba-technical@lists.samba.org>; Wed, 22 Jan 2025 01:34:11 -0800 (PST)
+ (Exim) id 1tanfm-009H3R-99
+ for samba-technical@lists.samba.org; Thu, 23 Jan 2025 03:14:28 +0000
+Received: by mail-lf1-x131.google.com with SMTP id
+ 2adb3069b0e04-53f757134cdso510368e87.2
+ for <samba-technical@lists.samba.org>; Wed, 22 Jan 2025 19:14:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1737538451; x=1738143251; darn=lists.samba.org;
+ d=gmail.com; s=20230601; t=1737602064; x=1738206864; darn=lists.samba.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=5QIsBAwP8k3rVSff01/p1/7nWWbCnzWPU+0ZOSqzIlU=;
- b=jiFjkYxK7oVT2gdnKJqudva1dVI6FHyikW1uEvOgHUUQ0EAn7Iztu19bxPZ68V9dd7
- 7Y/R2VHsrQ2oHpa1jBBJWTH0HzPwBkkdPbjnRlbkZpG77+GA9+oxdGmf+brDYxWrH7JK
- FMi8mquoGuI1+EUVEfBwvJJVEUJ9poO/q9OyBKQfM8Q/J3iF+5siXzrKVQ2jw9Y0XM2m
- l3YQ5rEU4ZlXFRFgr7ZM2FUxRBk5ZjaekBflwyutSFWnQ3ZUzRcapRGRWIqNKsI08utp
- vOFzDE6n3ci6K4kYWcgSdXxSEQclCWsbxFgsDHgOMRGMbsGBkE+HX6fkEIVntw4EXAlh
- bDDw==
+ bh=w5kzfd7gI5abEY9u/jfYt1ZUK0uZwZTNzVYap+eYtzg=;
+ b=dB5XtZp8+BeAOuPCFWIe+OZk/26gPWlKjlWdg1GMi7YwWwk9zmKEcCDlALJgZPoQnC
+ sN2OHqa5c79yLXYNeohbE4RI5rGdBy/fZlJBHP5XLo6Asgqv4ExnqH+86Rq6541HjWQU
+ GHWGaTuT9nw1kzzuignpHtyVt4jazQ33ev+yl5JVG+SnH1PEHE4WPk9Xm5NpHdVIhBm1
+ U91jQfHeMYYIIAyta1JZ7+b+5lsxixtsStHrSxoaTzWQqZD1siPm9NQPBpLBI5YIRaAJ
+ LjpCwpBKkQochWpS8OezCWV96V/2hGs7T0kms+oJOVkkCuTNXucSQw0R/58n5cxoZJV5
+ Ny2A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737538451; x=1738143251;
+ d=1e100.net; s=20230601; t=1737602064; x=1738206864;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=5QIsBAwP8k3rVSff01/p1/7nWWbCnzWPU+0ZOSqzIlU=;
- b=wKXYsw6LjbmuMSF5NOvhKMwls7e8Q2jFCg7Kyywk1ycAfdIsGSUp5Tzir7RxOH2RRZ
- ZLHPrwa8+ywwwwhXl+XJ6RTnR64AuPHm7ru5NzbhsfxRRZOqS1gFpoK20ZZQEuGqi24d
- 16KbOn6q/iunNG2iVoyZIbN1UHkN1eKYiWhRGp6m+wKR8kq73ZBgLAQGlApLJqmzhhRP
- /h6Onqj4tdT7sZ1i/ROb97CONO21aiC7lvA48WaMaG4VXhoo8d0VgWjeFAKDO+qYaXhl
- T0+r0gVAxUIxrnVdZ2TuWwssoBWzCaILzD+wNZOJhRG+lC7M3ey6W/3eYY70GMbmVBTR
- mV5w==
+ bh=w5kzfd7gI5abEY9u/jfYt1ZUK0uZwZTNzVYap+eYtzg=;
+ b=mRITifidxGOlvRMoRycWlZvFTWHZ91eUsoMFIy4Fkeh9VVSmGBr23R1oSRNmzyJggH
+ UCsWr/RNM6JnRA+GEn5jxOOqPbET+evqtvl0eCUWCPDu4AuEuVjtvoqgZZbIL44y6TWR
+ Epv3aiseuPzOF9/0gFyxnD+p75oNsYKW4sqRr6REl6+o63sVkOQlmUkScxfOHyciLA8o
+ GXrQy/aDK7GFqbshsselizA/DHfH8RR5ACxtZSIejW5Q9d3/v/S+Z1SF2TG4ZWmN+Yku
+ WNnJ8OiknTPQt2iLjvONrARfvlZZrGPHrn9UvovGjy5tnlHXNALRmVVOtx9Ivczg8DVU
+ YzYg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWgPwhsbJA6HORsnaxqb7s5j+FLGbNVS6rEQK68vYAG9qaALLDM9f0vdVhhllkpmb7zixxwAwLKsFoFKNLOCgg=@lists.samba.org
-X-Gm-Message-State: AOJu0YyBjtzdE0di5HOvqsFAK9Z86bTS3DiGZgS/wGx8/t8NEVyQ8np3
- 40sDsuyRuXQ1ybZjYp5Y0LQ3h4BQwLjGGcnUmawjCfOqrZJh6UKE5c4sxdmT+jIF0QexNVem9Td
- 6ItUDufSRNxlih/ncjzxD78qENOI=
-X-Gm-Gg: ASbGnctM4Uqc4/XYXa5a94gxGtY1GaQeuKWVCSp7YO3DUTlsnuMPRGlIakvZEE3Zogb
- jbrXTPUtLEfpng0lPnOCKt26POtpM1DGq0AmJQsdBI0X7LKf42T+p
-X-Google-Smtp-Source: AGHT+IE1BW3bXlBCaaFaJcoTYFvp1+Y8ocVvyW8JelStjrfP0+Sb6k6lXe6D7tokuyixq2EfztLBysLLyXXpcFmwBps=
-X-Received: by 2002:a17:907:3685:b0:ab2:c0b0:3109 with SMTP id
- a640c23a62f3a-ab36e4069c4mr2112523466b.21.1737538450730; Wed, 22 Jan 2025
- 01:34:10 -0800 (PST)
+ AJvYcCX4iPH1rasoM2bP7YAvCE04ky+wqtpFSwHdD2DripBj3hI+pl2PRiBupZT1BIDvB6Mrdmrr6k+lFVLODF/MoJk=@lists.samba.org
+X-Gm-Message-State: AOJu0YztSlTRbQQWYH4SIf+x5JJ1dxeSoWKDKp6LiwTPcr0jSQYCr6WT
+ tsHVDMOQ7RT7a4kVne3Qz4Bo7n2mx4alQArhL+ktVKExTDmKQW8P0NiSskZKVCCsn8jicikJb8K
+ J0E0Mns1resEqJpHeTT0mMRwdQnc=
+X-Gm-Gg: ASbGncsVYGVRGLMs7CKc6J9crnD7VJ+2dYH6R0g6YbtzbX5U9NjPJweUTB/kyeXxPt1
+ urlINpIFJv3UL0MEfuTG3V3cJycXUJ4S2rmQbsutUrmW92foJcrTF3M+8ROM0TQ==
+X-Google-Smtp-Source: AGHT+IG+OtE0UdWI8FRrZC5NH3rowiCHIhfosq9WDlxGiwZ0BAwScGeNY6jvvwo+nvGkutB4sSrTMIxD38sm3S7Z56s=
+X-Received: by 2002:a05:6512:32c7:b0:540:3566:5760 with SMTP id
+ 2adb3069b0e04-5439c265ce7mr7974526e87.35.1737602064287; Wed, 22 Jan 2025
+ 19:14:24 -0800 (PST)
 MIME-Version: 1.0
-References: <CAH2r5mscBfMimoxO8yYQAB1SEdDhdjpwQxkw-45+tWL5tcsqZQ@mail.gmail.com>
-In-Reply-To: <CAH2r5mscBfMimoxO8yYQAB1SEdDhdjpwQxkw-45+tWL5tcsqZQ@mail.gmail.com>
-Date: Wed, 22 Jan 2025 15:03:59 +0530
-X-Gm-Features: AbW1kvY50JvfEFOgxg_KSTL-3Rx_39NSpzkFWzbN0k4Gyld1jC604MSPXsjb6xA
-Message-ID: <CANT5p=qqP2MpoG0mUmjaXaFdU81NwFaJGsD00vEjUiPdsLcrYw@mail.gmail.com>
-Subject: Re: [PATCH][cifs-utils] avoid using mktemp when updating mtab
-To: Steve French <smfrench@gmail.com>
+References: <CAH2r5mvZkLmkmR+faL2gepGkhMg1tGgW1wt+tFr9NvW2ihK+3Q@mail.gmail.com>
+ <Z43pEk7WDs6dTQ1M@toolbox> <4942506.OV4Wx5bFTl@magrathea>
+ <CAH2r5mvy2b35BAaUnqHdO7dLb9pRHy=LXv7YMBhCc76fUst05Q@mail.gmail.com>
+ <Z5CbjKR8Fl5dgx6e@toolbox>
+In-Reply-To: <Z5CbjKR8Fl5dgx6e@toolbox>
+Date: Wed, 22 Jan 2025 19:14:13 -0800
+X-Gm-Features: AWEUYZkKLhL0pAEYWbYyiKdX64HwgpkwGGi8e-eYTQzm1A-klRBhd1JbeznB8BI
+Message-ID: <CAH2r5mvPQu8B05pbgnAqjdyFNO48pAgZAeYtXKWhvz2g+WjR2w@mail.gmail.com>
+Subject: Re: Local KDC and Samba
+To: Alexander Bokovoy <ab@samba.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
@@ -81,37 +84,142 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Shyam Prasad N via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Shyam Prasad N <nspmangalore@gmail.com>
-Cc: CIFS <linux-cifs@vger.kernel.org>,
- samba-technical <samba-technical@lists.samba.org>,
- Carlos Maiolino <cmaiolino@redhat.com>
+From: Steve French via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Steve French <smfrench@gmail.com>
+Cc: Andreas Schneider <asn@samba.org>, samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Tue, Jan 21, 2025 at 6:19=E2=80=AFAM Steve French <smfrench@gmail.com> w=
-rote:
+On Wed, Jan 22, 2025 at 1:18=E2=80=AFAM Alexander Bokovoy <ab@samba.org> wr=
+ote:
 >
-> Attached patch to  Fix build warning: cifs-utils/mount.cifs.c:1726:
->     warning: the use of `mktemp' is dangerous, better use `mkstemp' or `m=
-kdtemp'
+> On =D0=90=D1=9E=D1=82, 21 =D1=81=D1=82=D1=83 2025, Steve French wrote:
+> > Although install of the localkdc seemed to work, running setup on it fa=
+iled:
+> > root@localhost-live:/home/smfrench# dnf install localkdc
+> > Updating and loading repositories:
+> > Repositories loaded.
+> > Package                   Arch   Version                   Repository
+> >              Size
+> > Installing:
+> >  localkdc                 x86_64 0.0.1-14.fc41
+> > copr:copr.fedorainf  30.4 KiB
+> > Installing dependencies:
+> >  certmonger               x86_64 0.79.20-2.fc41            fedora
+> >           2.5 MiB
+> >  krb5-pkinit              x86_64 1.21.3-121.fc41
+> > copr:copr.fedorainf 121.2 KiB
+> >  krb5-server              x86_64 1.21.3-121.fc41
+> > copr:copr.fedorainf 784.6 KiB
+> >  libkadm5                 x86_64 1.21.3-121.fc41
+> > copr:copr.fedorainf 218.2 KiB
+> >  localkdc-selinux         x86_64 0.0.1-14.fc41
+> > copr:copr.fedorainf  10.1 KiB
+> >
+> > Transaction Summary:
+> >  Installing:         6 packages
+> >
+> > Total size of inbound packages is 1 MiB. Need to download 1 MiB.
+> > After this operation, 4 MiB extra will be used (install 4 MiB, remove 0=
+ B).
+> > Is this ok [y/N]: y
+> > [1/6] localkdc-0:0.0.1-14.fc41.x86_64           100% |  28.8 KiB/s |
+> > 18.2 KiB |  00m01s
+> > [2/6] certmonger-0:0.79.20-2.fc41.x86_64        100% | 824.8 KiB/s |
+> > 602.1 KiB |  00m01s
+> > [3/6] krb5-server-0:1.21.3-121.fc41.x86_64      100% | 376.8 KiB/s |
+> > 300.0 KiB |  00m01s
+> > [4/6] krb5-pkinit-0:1.21.3-121.fc41.x86_64      100% | 319.9 KiB/s |
+> > 59.8 KiB |  00m00s
+> > [5/6] libkadm5-0:1.21.3-121.fc41.x86_64         100% | 330.6 KiB/s |
+> > 77.7 KiB |  00m00s
+> > [6/6] localkdc-selinux-0:0.0.1-14.fc41.x86_64   100% |  81.7 KiB/s |
+> > 19.9 KiB |  00m00s
+> > -----------------------------------------------------------------------=
+-----------------
+> > [6/6] Total                                     100% | 678.3 KiB/s |
+> > 1.1 MiB |  00m02s
+> >
+> >
+> > root@localhost-live:~# localkdc-setup
+> > The parent of location "/var/kerberos/localkdc/kdc.crt" could not be
+> > accessed due to insufficient permissions.
+> > /usr/bin/local-getcert: Failed to create pkinit certificates
+> >
+> > But it looks like it has sufficient permissions:
+> >
+> > root@localhost-live:~# stat /var/kerberos/localkdc
+> >   File: /var/kerberos/localkdc
+> >   Size: 16            Blocks: 0          IO Block: 4096   directory
+> > Device: 0,42    Inode: 367888      Links: 1
+> > Access: (0755/drwxr-xr-x)  Uid: (    0/    root)   Gid: (    0/    root=
+)
+> > Context: system_u:object_r:var_t:s0
+> > Access: 2025-01-21 19:42:50.669926708 -0800
+> > Modify: 2025-01-21 19:42:22.342659428 -0800
+> > Change: 2025-01-21 19:42:22.342659428 -0800
+> >  Birth: 2025-01-21 19:41:03.323891871 -0800
+> >
+> > Any ideas why this would fail?
 >
-> Use of mktemp() has been deprecated (e.g. due to security issues with
-> symlink races), and instead mkstemp is often recommended.  Change
-> the use of mktemp to mkstemp in del_mtab in cifs-utils
->
-> Fixes: f46dd7661cfb ("mount.cifs: Properly update mtab during remount")
->
-> Opinions? Better way to address it?
->
-> --
-> Thanks,
->
-> Steve
+> There is incomplete SELinux policy yet. Please run in permissive for
+> time being, we need to fix the policy.
 
-Seems like a reasonable change. RB
+Disabling selinux did help and fixed the localkdc-setup setup
 
---=20
-Regards,
-Shyam
+The last step of his instructions says to do kinit, but kinit is not
+installed in his image,
+or as a dependency of "dnf install localkdc" so I had to reboot the
+workstation and
+then do "dnf install krb5-workstation" (hopefully doesn't need a
+special version of kinit?!)
+
+After rebooting the localkdc was not available so couldn't do kinit.  How d=
+o you
+restart it?   What I tried is below:
+
+root@fedora:/home/smfrench# systemctl start localkdc
+Job for localkdc.service failed because the control process exited
+with error code.
+See "systemctl status localkdc.service" and "journalctl -xeu
+localkdc.service" for details.
+root@fedora:/home/smfrench# systemctl status localkdc.service
+=C3=97 localkdc.service - Local Kerberos KDC
+     Loaded: loaded (/usr/lib/systemd/system/localkdc.service; static)
+    Drop-In: /usr/lib/systemd/system/service.d
+             =E2=94=94=E2=94=8010-timeout-abort.conf, 50-keep-warm.conf
+     Active: failed (Result: exit-code) since Wed 2025-01-22 19:09:26
+PST; 13s ago
+ Invocation: 1996ca595fe74329882d55bc94779265
+TriggeredBy: =E2=97=8F localkdc.socket
+    Process: 5066 ExecStart=3D/usr/sbin/krb5kdc -P /run/localkdc/kdc.pid
+-w 1 (code=3Dexited, status=3D1/FAILURE)
+   Mem peak: 9.3M
+        CPU: 23ms
+
+Jan 22 19:09:26 fedora.local systemd[1]: Starting localkdc.service -
+Local Kerberos KDC...
+Jan 22 19:09:26 fedora.local krb5kdc[5066]: krb5kdc: cannot initialize
+realm FEDORA.LOCALKDC.SITE - see log file >
+Jan 22 19:09:26 fedora.local systemd[1]: localkdc.service: Control
+process exited, code=3Dexited, status=3D1/FAILURE
+Jan 22 19:09:26 fedora.local systemd[1]: localkdc.service: Failed with
+result 'exit-code'.
+Jan 22 19:09:26 fedora.local systemd[1]: Failed to start
+localkdc.service - Local Kerberos KDC.
+root@fedora:/home/smfrench# exit
+exit
+
+
+smfrench@fedora:~$ kinit asn@SAMBAKDC.LOCALKDC.SITE
+kinit: Cannot find KDC for realm "SAMBAKDC.LOCALKDC.SITE" while
+getting initial credentials
+
+
+Ideas how to restart the local KDC?
+
+--
+Thanks,
+
+Steve
 
