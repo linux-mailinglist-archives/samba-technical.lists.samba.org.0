@@ -2,72 +2,54 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 10522A1A7F8
-	for <lists+samba-technical@lfdr.de>; Thu, 23 Jan 2025 17:39:05 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6D597A1AF30
+	for <lists+samba-technical@lfdr.de>; Fri, 24 Jan 2025 04:56:01 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=1nhrsmA6C5aw+JFWKzwP0lJtMptkew+qKX8lCD94xKU=; b=sb0gGcAJXiF2ZiJfkgjbW9EXP8
-	QutXyqdAWbxZGj3RU3A6rZJXBNcEFMXwiOAzfpNpToTCAXO5+hRRpkIEn8q8swwh+rqBRWx56DqPP
-	idR0dsx4No4xLI7v/EZ2hykWNAdbMMmVuU5bZ6nOm0JjkyI3PPPAxHb+qlLIBnMQde8LfDTApPAgn
-	eOTTryy9DbkZD0hasV8pYSODmyTqM9QzBke5O70nCQ4XX4f85+UO2OZUS5WqRaOAiIjTB/3lN9SAX
-	u1kRkTjoG/ZWt6H92y/JnvksRj0Gkc6X9YuzpjTaYvGL7WmOXUOb1QT9FZp1mqROE5kaGGRZsUBr5
-	9RfaSjMg==;
-Received: from ip6-localhost ([::1]:31062 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=bSv1XtTknb2wNfaK+rBnVLPi2jbhhcvCUDAQZxSQJ5Q=; b=SZNFl8s921CuDbPOMaM7mtuzFN
+	IPRUIfbKb5CglIBdesC+8Gib6KNFKg3klN3flKJ341DcSk5HD/IewufwxRRGWMwAw5VQnw5Hph7DH
+	qReoBOPjZEte+8am/JM9ys7vpoJlEjvbBQJQS7+hY5Lj9QZR0NhQR7XF86YMo2+AX79Nl+zztEal/
+	XQR597l2Tr/IS5aKpxS5rBgnIf2lIZmWfrtzR9K8/SRIe4Fo3iHrKW3trmSGHIXTBFNqafsjhalFA
+	OvQfXQYkgkJjGY99kSKEg9jJP66f9HYHhWg5/Fsu+dBHjQr7EUwjqnW4vpI8PtKXrc2xfq7DI4BHC
+	2gG2SBXg==;
+Received: from ip6-localhost ([::1]:56782 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1tb0Dp-009M6G-8v; Thu, 23 Jan 2025 16:38:25 +0000
-Received: from mail-ej1-x62b.google.com ([2a00:1450:4864:20::62b]:43473) 
+	id 1tbAmw-009Pim-Np; Fri, 24 Jan 2025 03:55:22 +0000
+Received: from cat-porwal-prod-mail11.catalyst.net.nz ([202.49.243.52]:53694) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1tb0Dk-009M69-Kc
- for samba-technical@lists.samba.org; Thu, 23 Jan 2025 16:38:22 +0000
-Received: by mail-ej1-x62b.google.com with SMTP id
- a640c23a62f3a-aaf6b1a5f2bso457674266b.1
- for <samba-technical@lists.samba.org>; Thu, 23 Jan 2025 08:38:19 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1737650299; x=1738255099; darn=lists.samba.org;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=h2xILTVAL1/hlXLHEyHnCI7r9g9q1k/Owo9hzgtvfSE=;
- b=XBV/Z8BmAwLSnBMOkSDyvqxsCvTDrNOn0uZqgvMcs4CA6uck3S7/wr7ZRgaCjRw71A
- xGng921lHgklY001Gh1z7zHk7xonR1OyuBh44GLfkG3gCabWYjIYbBdwoNeJclVWq6a+
- u6QT3d1U1AkPQ1emDGtFRia+Gi0Yvu2fRL9uL9Ql0GQzUUceRdf/RuoXBTg12bdXU4Eg
- vj9z5idWKEK8XDTWCsKPPD1rGNAojHLaJR0DIUIFd1BpVlryJT3tSzFXvlGFvqjDVLl4
- JI6Amjh6iBSuT+cgFZ9WWKUHyu+cgL6LXg4L1uYxBT2ZZ8ljNAli6mQdS6yH1HfvrChw
- utkw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737650299; x=1738255099;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=h2xILTVAL1/hlXLHEyHnCI7r9g9q1k/Owo9hzgtvfSE=;
- b=DF6AZNI/vLGasd1voI/iOrRJQe+A+gapSFqcRgQq+mJPoxaV5aSa30q5Lr8dUb0pis
- H84GJkWqXCPqgpiYbUabTWn5LwLtViVACQ1S/27DXnw5mXIkx+9CxtK2clS+34Kfxs7b
- Svj8s1urmg/5/CFHvVPUftGRi0HeRjjNfH6WstVk+NOnbrPk/n6A/vzK3YAkumk44zqU
- 78MRfW1Bt2+xnxGl3vlfHjDIeA5jWGITlxP91m/hTNhNiYpfPwLoIuFyDbDgV0Tzg0+Z
- g05jyuNJDdoufqpdHI9bvXp/S0ZpjNgqagdDebGOunlZsklqntTmP6Pp4wQBv7sqQ3vz
- kSPA==
-X-Gm-Message-State: AOJu0Yz/uh4VdKNcZ/W3nYr+SGN/cXj+skKMjDwuD1vLPmolYNyq3rvs
- BSXtNSRZWYWEkm5XgQkUq+22nKgOtsm9B6E8jO6Az8wYz1D9Mugk2aNyiQPPyo2pH0XSRV8CFJk
- hSipw5QMynhl1FrMLtFF8lxbCKnVZSA==
-X-Gm-Gg: ASbGnctLGO5BnMaIv5NUJj1WgYnxrioYfRIJpOyPQ8bVMlOWguaycvSJ56so84D6VaC
- BO6k9nrxDwM9V51106DWGRyBmMqfcyzFecayu4x1oKMgpXKczJbpIygUy+CJB0yBgGzNsJNBpIT
- nCle2HBHffl9frlgbDrHo=
-X-Google-Smtp-Source: AGHT+IFvCHlZjd8lYEX+SdkQ1ewLh3SjSCPJN2xw5k42tf7qxh4ktB/wZ4B8BEYPADZh7o9vnpy2C58x/cAjGGlKvUI=
-X-Received: by 2002:a17:907:97d1:b0:aa6:7c8e:808c with SMTP id
- a640c23a62f3a-ab6629cce12mr308555866b.17.1737650298583; Thu, 23 Jan 2025
- 08:38:18 -0800 (PST)
+ (Exim) id 1tbAml-009Pie-O1
+ for samba-technical@lists.samba.org; Fri, 24 Jan 2025 03:55:16 +0000
+Received: from [192.168.192.96] (wlgwil-nat-office.catalyst.net.nz
+ [202.78.240.7])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (Client did not present a certificate)
+ (Authenticated sender: douglasb@catalyst.net.nz)
+ by cat-porwal-prod-mail11.catalyst.net.nz (Postfix) with ESMTPSA id DD0EA1D6; 
+ Fri, 24 Jan 2025 16:36:39 +1300 (NZDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=catalyst.net.nz;
+ s=default; t=1737689799;
+ bh=mFggACDGau+sj8JvT9BenbQ8PuYU81KAO31zEXFeivM=;
+ h=Date:Subject:To:References:From:In-Reply-To:From;
+ b=GXJ8PQC45eTGlCwv2MyzYvhziSYk6U83QLz4uqOyKh9qxvxTKrXA8OVIL5GDuS7Fj
+ SbSeC6DUuFSPNkTodZw2rbk9lTC1RQPO5hLi7vDk8+3OkbRICa5+yPbp5oKx/4FymW
+ 9FQCC1v3wdiDjKosZcOtTj1vW6QCYXtzP3FVTp23ppqqnPEBkbwjMcMicOonIKVkTJ
+ BNoAEj633P6DoiMFN+kSLZu9pbqCMXBr5fN0cJDGwyO/vKf38Ol31v4/BLIL8idRc9
+ N2wc6RsoGE9q4AXRx9mEtVg5S0kB4CYNZubvHttFP1C3MZt6hAmN58IkhpKQKzSToj
+ nWMa/Jcuy//SQ==
+Message-ID: <c7183eb7-dd94-44e0-aab7-0dd11f093090@catalyst.net.nz>
+Date: Fri, 24 Jan 2025 16:36:39 +1300
 MIME-Version: 1.0
-References: <CAOGdD2rEGmhH4rJRsgQbgU7Wu=kg3_poTLUUr7MMjuJkAHM8eg@mail.gmail.com>
- <db1bddd1-4a9d-4f0c-af3d-5f43332be5b0@tls.msk.ru>
-In-Reply-To: <db1bddd1-4a9d-4f0c-af3d-5f43332be5b0@tls.msk.ru>
-Date: Thu, 23 Jan 2025 08:38:07 -0800
-X-Gm-Features: AWEUYZnFPi8Bda_E7pXNab1_furxq6nLiIxzDFEmIGRt8n-MyifuU_C0_mzOeiE
-Message-ID: <CAOGdD2pZ+vPOWQ2Z3TH0R6UFB6anrrsYvQZuVkMG8Ss7v9SxKA@mail.gmail.com>
-Subject: Re: PANIC Bad talloc magic value - unknown value during disconnect.
-To: mjt@tls.msk.ru
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
+User-Agent: Mozilla Thunderbird
+Subject: Re: Need Security Descriptor in SDDL Format (using libsmbclient.so)
+To: Nirmit Kansal <nirmit.kansal@veritas.com>,
+ "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>
+References: <IA1PR20MB5052B5C1BC44A6A0F6B4F107EA132@IA1PR20MB5052.namprd20.prod.outlook.com>
+Content-Language: en-US
+In-Reply-To: <IA1PR20MB5052B5C1BC44A6A0F6B4F107EA132@IA1PR20MB5052.namprd20.prod.outlook.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -81,47 +63,36 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Yogesh Kulkarni via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Yogesh Kulkarni <yoknfs@gmail.com>
-Cc: samba-technical <samba-technical@lists.samba.org>
+From: Douglas Bagnall via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Douglas Bagnall <douglas.bagnall@catalyst.net.nz>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Thanks Mjt.
-Unfortunately, upgrading to the latest samba is not an easy option for us.
-Whenever I do get the RCA / fix I am more than happy to help you update
-4.13.
+On 9/01/25 19:19, Nirmit Kansal via samba-technical wrote:
+> I am using the smbc_getxattr() function (from libsmbclient.so) with the system.nt_sec_desc attribute to retrieve the security descriptor. However, the retrieved descriptor is in binary format, not in SDDL. Additionally, I couldn't find any attribute in smbc_getxattr() that directly provides the security descriptor in SDDL format.
+> I need the ACL information in SDDL format to use with Windows SDK APIs like ConvertStringSecurityDescriptorToSecurityDescriptorW() or ConvertStringSecurityDescriptorToSecurityDescriptorA(), which require SDDL as input.
+> Is there a way to obtain the security descriptor in SDDL format using libsmbclient.so, or an API available in Samba to convert the binary descriptor retrieved by smbc_getxattr() into SDDL format?
+> Any guidance would be greatly appreciated.
 
-Regards,
-Yogesh
+OK, it seems like we don't offer that in a public library, which is sort 
+of a shame, because we have by far the most complete SDDL encoder and 
+compiler outside of Windows. (OTOH, I am happy, because maintaining 
+public APIs is a real nuisance).
 
-On Thu, Jan 23, 2025 at 12:19=E2=80=AFAM Michael Tokarev <mjt@tls.msk.ru> w=
-rote:
+We do export it in Python however, using `sd.as_sddl(domain_sid)`, as 
+seen in this context:
 
-> 23.01.2025 10:22, Yogesh Kulkarni via samba-technical wrote:
-> > Hi, I am looking for help in getting RCA on this issue.
-> >
-> > A Panic with bad talloc magic value is seen during disconnect.
-> >
-> > Samba version : 4.13.13 ( Debian 11 - 4.13.13+dfsg-1~deb11u5 )
->
-> Hi!
->
-> You collected an excellent bug report with good data.
->
-> However, version 4.13 of samba is completely end-of-line from the
-> Samba Project point of view.  And on debian, we mostly rely on the
-> upstream support for all this stuff.
->
-> I'd suggest you to upgrade to a current version of samba, which is
-> available in bookworm-backports.
->
-> Note: I'm not a member of the samba project.  Maybe it will be possible
-> to easily identify a change which is required to fix this particular
-> issue in 4.13, - in this case I'll be glad to update 4.13 in debian.
-> I keep samba current in backports.
->
-> Thanks,
->
-> /mjt
->
+https://gitlab.com/samba-team/devel/samba/-/blob/master/python/samba/tests/sddl.py?ref_type=heads#L75
+
+In an earlier message I wrote:
+
+>> It should also be possible to cast a Samba security descriptor to a Windows
+>> one using the NDR wire format rather than SDDL.
+
+I still think this might be the way to go. It isn't common to transfer 
+security descriptors as SDDL. Usually Windows and Samba just pass the 
+bytes back and forth.
+
+Douglas
+
+
