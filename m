@@ -2,48 +2,66 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id A1F44A2A91F
-	for <lists+samba-technical@lfdr.de>; Thu,  6 Feb 2025 14:09:42 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D2CE3A2AD21
+	for <lists+samba-technical@lfdr.de>; Thu,  6 Feb 2025 16:57:22 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
-	bh=RII9YRaqWISs4CKYXq3HQglD8wVUInxXOB+cY9FcQYA=; b=TGfzqSYip5WTJaKK2S25+9HXGk
-	EbqAgvStQy3kYGWFzbYXUoVvjDRTF16VtvaM4TuYb7vlyjBwOuB3e+B7oaujsQFJxISavenvBHR52
-	bxx368aw9lDiammefjg8cZ/+2hsTlWzEWUCNiR/EspC9UbIZUG4MBl841Ak6NvaVzrDAJ9ol6kAmY
-	xo0JbKUZYNbIhnI3m8JonHDpUhNm/q/JtgqMebmY/tNoGCQ8PSXV7njt5WigacbzznXgS1TSwphzk
-	UiT41WPUs8EYVLFX37yIkHNAIA8T8324mEv5QWNKSQpoRPEvp8+u9GR6dV1L4iaycbiWCJHcgV6lz
-	q2KjQ1Yw==;
-Received: from ip6-localhost ([::1]:35016 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=F/oKhfXWhBGs/6hrl9D0bbd7SvyuWL+6gTeLuBa+fDU=; b=YCQyRg/i1M4N5nYMjLX4B/4Gs8
+	NcrP5EQZHAvefA4KEO8xS96Sit8fWhA7qguaQqfSWgkIs0W+lkyq4+ltIY1D/5hVVlt1r31owHrQe
+	uCiGy7qYrWctER0TY0L0OldYxDgkjkytdWy1q26wfYojDkxDkN86ONr9Ccw4u0HFqAPFEbg/lHIKZ
+	NJbO+5W85LZFecxVA21GcL2Jtsu1dtlcN0teAEqOw76D9GYjiZ0sXC0N2cjCFLevu2qbYW4qiXM7T
+	SYyn3XGDWK61yHy5/4u4ZiOht0mcnJLgy6WXSFaMKBZpPHvGoRFfmnc08tEU6LX/imvfZB5CFxe6i
+	DOtJkHRA==;
+Received: from ip6-localhost ([::1]:42576 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1tg1dS-00Bu7B-RC; Thu, 06 Feb 2025 13:09:38 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:49562) 
+	id 1tg4FN-00BvVC-E2; Thu, 06 Feb 2025 15:56:57 +0000
+Received: from mail-lj1-x22b.google.com ([2a00:1450:4864:20::22b]:57463) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1tg1dN-00Bu6k-VH
- for samba-technical@lists.samba.org; Thu, 06 Feb 2025 13:09:36 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=From:To:Date:Message-ID:CC;
- bh=RII9YRaqWISs4CKYXq3HQglD8wVUInxXOB+cY9FcQYA=; b=GGoyBKRY7nEm2bdlOzNwu9duo/
- ZqaDTxt277qlKLX8UgPUfpjml4ErR0b6ge1PQQaXd0MAVWMq0T5xtFBpDO/qjpzayKEgrXgAzC1Dg
- iFGECI9Bh9zhg/D6J5/X2DVJQ1sLnpZYiNlZVGCtrAt8wJHRb4omWIGw2fMM5a11v/r8VQqD7O2iA
- GtF0oxIyXJmJGOL9jnIsIq+Fy9O746MaaOpv4JKWa31xtpeA6UvOfoiv0zdfi5IBObLidYIiv4GCd
- jGN/lb+GV0s/HU4NMy4uuj5peTzfPZFbxfiBOv33Hc252VdjtSOo5TSV214PZholH6EwDod5Yn6Fc
- 6PztAci2qBT5v+EhGtMVyEIlG4HH3FRg1XSP21VmaNF0nkkgcMkgsthtNF+PSf4Nzpc+lyv4P5Bf1
- gkkim8/px2DxE5kaub0MJhXwOUmY2XlQ7bGX4MhdZSUCTaAX8WRuPgvm3jKfzoW4V7v5rBybuFSI7
- kxgbA28Tvlgx1Q01RAPOMAn4;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1tg1dN-001MEg-2J for samba-technical@lists.samba.org;
- Thu, 06 Feb 2025 13:09:33 +0000
-Message-ID: <47a09e41-2a09-41fd-a313-b6249fd29b24@samba.org>
-Date: Thu, 6 Feb 2025 14:09:33 +0100
+ (Exim) id 1tg4FI-00BvV5-QB
+ for samba-technical@lists.samba.org; Thu, 06 Feb 2025 15:56:55 +0000
+Received: by mail-lj1-x22b.google.com with SMTP id
+ 38308e7fff4ca-30761be8fa7so10237711fa.2
+ for <samba-technical@lists.samba.org>; Thu, 06 Feb 2025 07:56:52 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1738857410; x=1739462210; darn=lists.samba.org;
+ h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=2UyyqsTlV1iWojRK08HDRL0D5tFhY69e7+hUX/A19nc=;
+ b=I+3vgxCQu8b4+4+ST7+90V5FICx0rjFyoS2OHXQ6HQXbJ0Gtv7kgMslEvq+jPMqoF3
+ sbFbcj61efehWd/u8k3zPZ1QlHMnDMydo1eEwgKzdNwQwi/oUm+rhc9gK1Ed+zMc4bg+
+ Nq8OWTUDnOWByWMBbtMzSXoacpcdIr8aPIE1GAjJokBVeaWYeFVSBsrqPgaKLp9/HIAq
+ T3oF1HOLFcqE7wPwyUD2R0QPIMXW3yKwRkMbEhdZ3aCXria305vhFMlkJaR7irCJks5S
+ pD6JJc7HbtkngyoQ+0I65QnDsVxvhDMuq0GZ3NwJkt1y9xXVqDwMJZ9Jdsvrkwc5xJVd
+ eA6A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1738857410; x=1739462210;
+ h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=2UyyqsTlV1iWojRK08HDRL0D5tFhY69e7+hUX/A19nc=;
+ b=eRzC/6NEEoN/hfBU8g21VsOrsbSMEoS5ojmHv+D4q+f/+I4OyMHMBivRuar0NLNhGe
+ aMGchXKkvtanRoVIU0f1KydTUqjmMZQ2D/XGVnOwbZkgxSCAe6VX+taG37Y8wjoDBvuQ
+ KdQu8y1WrdfBIIbOyYocTW242D3rsvEEx7PeyiE43MBa3FTam+By/yPMflvKAC+nNnq4
+ qz/xze4lBWZ2Ywqs9GzCt7m70Qi/v/OvXmww8R4sI5xMOh/Muu7iN7BNvjOp+Z3Qfzk8
+ EiDDgsJ+jRNlb3ha3MRwaWq8vH14GTv9v09tdY7jkhrD2Eyx61T/Hat4cGFXNnYCI3qv
+ Xl2Q==
+X-Gm-Message-State: AOJu0Yzu2xjYMkFV8QgVmxerhmUxJrcmOrVLFkfrEo8Gx0L32f/JbO7w
+ wVTWr6sUAnKi5yCxedGolVgUaYb8MP+G5zTmPCcT1BHe3UzEZvyIDasePJBSGVjWgUv7WWjYlza
+ beKvYnv9u3Eh57OtiOVu99ZL2kmsFOh3+
+X-Gm-Gg: ASbGnct+DGLs1JPAOXcdIk/12c8HCw4s6JYJweI4zPHbM/hfTRMyh1TV+5qpEMkN1Ut
+ JsuFD5QoUevZEoCWGqh9dtl4THd/m6oaEDfVKzAf6aC/in1bO+jUbXAeZ6bnajUoGCSnWjITh
+X-Google-Smtp-Source: AGHT+IEXmc6FfqbL9W/46tALMCDaYjNIZ1kywMb5akWW0RwqUSGVcKHGUNRiwVBUUH25LUVzVkPThZUrl4sGnX1YkQ4=
+X-Received: by 2002:a05:6512:1253:b0:540:2fbb:476c with SMTP id
+ 2adb3069b0e04-54405a17a51mr2905981e87.15.1738857410087; Thu, 06 Feb 2025
+ 07:56:50 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: de-DE, en-US
+Date: Thu, 6 Feb 2025 12:56:14 -0300
+X-Gm-Features: AWEUYZnoJXkwHz_x6Szr_5H-OzWZA1VnWqHmGIB0Xe53cHYPx3xiPLPK8g99bC0
+Message-ID: <CAHdxDAEJ+qG8TqtxokyCtwxAgnZAZ54Hzob8HeNuUJvvk-7MfQ@mail.gmail.com>
+Subject: error accessing the wiki
 To: samba-technical@lists.samba.org
-Subject: [Release Planning 4.22] Samba 4.22.0rc2
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -57,24 +75,74 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jule Anger via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jule Anger <janger@samba.org>
+From: Elias Pereira via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Elias Pereira <empbilly@gmail.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi,
+hello,
 
-Samba 4.22.0rc2 is scheduled for Thursday, February 13 2025.
+The wiki is returning the error below:
 
-https://wiki.samba.org/index.php/Release_Planning_for_Samba_4.22
-has been updated accordingly.
+Sorry! This site is experiencing technical difficulties.
+
+Try waiting a few minutes and reloading.
+
+(Cannot access the database)
+
+Backtrace:
+
+#0 /usr/share/mediawiki/includes/libs/rdbms/loadbalancer/LoadBalancer.php(972):
+Wikimedia\Rdbms\LoadBalancer->reportConnectionError()
+#1 /usr/share/mediawiki/includes/libs/rdbms/loadbalancer/LoadBalancer.php(944):
+Wikimedia\Rdbms\LoadBalancer->getServerConnection()
+#2 /usr/share/mediawiki/includes/libs/rdbms/database/DBConnRef.php(95):
+Wikimedia\Rdbms\LoadBalancer->getConnectionInternal()
+#3 /usr/share/mediawiki/includes/libs/rdbms/database/DBConnRef.php(101):
+Wikimedia\Rdbms\DBConnRef->ensureConnection()
+#4 /usr/share/mediawiki/includes/libs/rdbms/database/DBConnRef.php(313):
+Wikimedia\Rdbms\DBConnRef->__call()
+#5 /usr/share/mediawiki/includes/language/LCStoreDB.php(61):
+Wikimedia\Rdbms\DBConnRef->selectField()
+#6 /usr/share/mediawiki/includes/language/LocalisationCache.php(496):
+LCStoreDB->get()
+#7 /usr/share/mediawiki/includes/language/LocalisationCache.php(542):
+LocalisationCache->isExpired()
+#8 /usr/share/mediawiki/includes/language/LocalisationCache.php(453):
+LocalisationCache->initLanguage()
+#9 /usr/share/mediawiki/includes/language/LocalisationCache.php(352):
+LocalisationCache->loadSubitem()
+#10 /usr/share/mediawiki/includes/language/LocalisationCache.php(368):
+LocalisationCache->getSubitem()
+#11 /usr/share/mediawiki/includes/language/MessageCache.php(1147):
+LocalisationCache->getSubitemWithSource()
+#12 /usr/share/mediawiki/includes/language/MessageCache.php(1097):
+MessageCache->getMessageForLang()
+#13 /usr/share/mediawiki/includes/language/MessageCache.php(1036):
+MessageCache->getMessageFromFallbackChain()
+#14 /usr/share/mediawiki/includes/language/Message.php(1473):
+MessageCache->get()
+#15 /usr/share/mediawiki/includes/language/Message.php(970):
+Message->fetchMessage()
+#16 /usr/share/mediawiki/includes/language/Message.php(1053): Message->format()
+#17 /usr/share/mediawiki/includes/title/MalformedTitleException.php(55):
+Message->text()
+#18 /usr/share/mediawiki/includes/title/MediaWikiTitleCodec.php(92):
+MalformedTitleException->__construct()
+#19 /usr/share/mediawiki/includes/title/MediaWikiTitleCodec.php(405):
+MediaWikiTitleCodec::{closure}()
+#20 /usr/share/mediawiki/includes/Title.php(2984):
+MediaWikiTitleCodec->splitTitleString()
+#21 /usr/share/mediawiki/includes/Title.php(480): Title->secureAndSplit()
+#22 /usr/share/mediawiki/includes/MediaWiki.php(89): Title::newFromURL()
+#23 /usr/share/mediawiki/includes/MediaWiki.php(162): MediaWiki->parseTitle()
+#24 /usr/share/mediawiki/includes/MediaWiki.php(860): MediaWiki->getTitle()
+#25 /usr/share/mediawiki/includes/MediaWiki.php(562): MediaWiki->main()
+#26 /usr/share/mediawiki/index.php(50): MediaWiki->run()
+#27 /usr/share/mediawiki/index.php(46): wfIndexMain()
+#28 {main}
 
 
-Jule
 
 -- 
-Jule Anger
-Release Manager Samba Team  samba.org
-SerNet Samba Team           sernet.de
-
-
+Elias Pereira
