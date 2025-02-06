@@ -2,47 +2,48 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id AC784A2A91C
-	for <lists+samba-technical@lfdr.de>; Thu,  6 Feb 2025 14:09:14 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A1F44A2A91F
+	for <lists+samba-technical@lfdr.de>; Thu,  6 Feb 2025 14:09:42 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
-	bh=MO6mLrLoDzJtXDnDvuKSkq88A4LMs8YS8qsBRTh9U+I=; b=YJ5KAwWNWbLKlR6/cTSwn3GtKG
-	OREVvp/NcmwJLmN9cajEZR4kzBK8rLQX1paVREa1zWFvncuvhm4OPCDJPUpj/JJLNsxsQp2npUaZB
-	n52gw1KzQtqMAbvL1Dfix1MYcGC6+Kh2Ud+xdsGmjyPogOW2qnG4pjl/HJoEdRtsOkfWszY1KAWHY
-	182WqHjaKtV6VwhIFWv9WMUpOsV7AsC432eA0hV5VKQtdBOOuQ0eW7VEP/XI+fXhwkit4KL4QCEyP
-	Ehmt6s4K/VY1pDwGUuert+J3mYwEE1LkOjibZ6izvCMfQ6Qtf2QbTySxHc6w/pJtOqZSCPhpzZidf
-	rmGMK5fA==;
-Received: from ip6-localhost ([::1]:53818 helo=hr1.samba.org) 
+	bh=RII9YRaqWISs4CKYXq3HQglD8wVUInxXOB+cY9FcQYA=; b=TGfzqSYip5WTJaKK2S25+9HXGk
+	EbqAgvStQy3kYGWFzbYXUoVvjDRTF16VtvaM4TuYb7vlyjBwOuB3e+B7oaujsQFJxISavenvBHR52
+	bxx368aw9lDiammefjg8cZ/+2hsTlWzEWUCNiR/EspC9UbIZUG4MBl841Ak6NvaVzrDAJ9ol6kAmY
+	xo0JbKUZYNbIhnI3m8JonHDpUhNm/q/JtgqMebmY/tNoGCQ8PSXV7njt5WigacbzznXgS1TSwphzk
+	UiT41WPUs8EYVLFX37yIkHNAIA8T8324mEv5QWNKSQpoRPEvp8+u9GR6dV1L4iaycbiWCJHcgV6lz
+	q2KjQ1Yw==;
+Received: from ip6-localhost ([::1]:35016 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1tg1cS-00BtpA-7a; Thu, 06 Feb 2025 13:08:36 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:57928) 
+	id 1tg1dS-00Bu7B-RC; Thu, 06 Feb 2025 13:09:38 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:49562) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1tg1cJ-00BtoQ-KB; Thu, 06 Feb 2025 13:08:30 +0000
+ (Exim) id 1tg1dN-00Bu6k-VH
+ for samba-technical@lists.samba.org; Thu, 06 Feb 2025 13:09:36 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=From:To:Date:Message-ID:CC;
- bh=MO6mLrLoDzJtXDnDvuKSkq88A4LMs8YS8qsBRTh9U+I=; b=B766CnjQRuNIx6n9dzv1dO4vCQ
- ojCNrugSnIv9LwSxQ8dKE2hQEgZFSun1SOoNl2kXvg6RkJnQbKWOWAH1wErqYqSZIKbBaUkj9aprG
- FzEMwsBY5qagkyrFYeaoNOBBwTPO1jSTbz+wgRTc45Xh0DEHFI0wOAa3ev0ogenZrfZS/Xw5GSovw
- pqLYsq/V5BfY61ZaWc6uWH4gr2lTITuIpnEeFiz0LsoJMw0KSbiO4ZObIeAIGYJCuZ5OsvYcSvpL9
- FFlpEFt9ooDwJqlrjfmaYG4Ta4f7j0ZPfxjW+BTKdnjOhzYkNuHkwoHc1GPYcRl3Tz8ATm0rL9sfd
- D7bABC8fNicMT3pCDsfGlbIf30LCggep3HwqOHqf2zhr0li8MsQVPubvglOmlJ2zE+5t2jf8ceRWz
- xserAff3DuJRicgdc5YBB5RDbxk0rE5btnaowsHcboPHdAYbI+pTAI2L2iIyX1vGhIlMAzcFnCEzi
- ZjlRI8Y4KbImmoCli4lK8QPy;
+ bh=RII9YRaqWISs4CKYXq3HQglD8wVUInxXOB+cY9FcQYA=; b=GGoyBKRY7nEm2bdlOzNwu9duo/
+ ZqaDTxt277qlKLX8UgPUfpjml4ErR0b6ge1PQQaXd0MAVWMq0T5xtFBpDO/qjpzayKEgrXgAzC1Dg
+ iFGECI9Bh9zhg/D6J5/X2DVJQ1sLnpZYiNlZVGCtrAt8wJHRb4omWIGw2fMM5a11v/r8VQqD7O2iA
+ GtF0oxIyXJmJGOL9jnIsIq+Fy9O746MaaOpv4JKWa31xtpeA6UvOfoiv0zdfi5IBObLidYIiv4GCd
+ jGN/lb+GV0s/HU4NMy4uuj5peTzfPZFbxfiBOv33Hc252VdjtSOo5TSV214PZholH6EwDod5Yn6Fc
+ 6PztAci2qBT5v+EhGtMVyEIlG4HH3FRg1XSP21VmaNF0nkkgcMkgsthtNF+PSf4Nzpc+lyv4P5Bf1
+ gkkim8/px2DxE5kaub0MJhXwOUmY2XlQ7bGX4MhdZSUCTaAX8WRuPgvm3jKfzoW4V7v5rBybuFSI7
+ kxgbA28Tvlgx1Q01RAPOMAn4;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1tg1cJ-001MBS-0B; Thu, 06 Feb 2025 13:08:27 +0000
-Message-ID: <5f8a1298-bf5b-4d41-a7f5-5c298944d41b@samba.org>
-Date: Thu, 6 Feb 2025 14:08:26 +0100
+ (Exim) id 1tg1dN-001MEg-2J for samba-technical@lists.samba.org;
+ Thu, 06 Feb 2025 13:09:33 +0000
+Message-ID: <47a09e41-2a09-41fd-a313-b6249fd29b24@samba.org>
+Date: Thu, 6 Feb 2025 14:09:33 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Content-Language: de-DE
-To: samba-announce@lists.samba.org, samba@lists.samba.org,
- samba-technical@lists.samba.org
-Subject: [Announce] Samba 4.22.0rc1 Available for Download
+Content-Language: de-DE, en-US
+To: samba-technical@lists.samba.org
+Subject: [Release Planning 4.22] Samba 4.22.0rc2
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -61,134 +62,19 @@ Reply-To: Jule Anger <janger@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Release Announcements
-=====================
+Hi,
 
-This is the first release candidate of Samba 4.22.  This is *not*
-intended for production environments and is designed for testing
-purposes only.  Please report any defects via the Samba bug reporting
-system at https://bugzilla.samba.org/.
+Samba 4.22.0rc2 is scheduled for Thursday, February 13 2025.
 
-Samba 4.22 will be the next version of the Samba suite.
+https://wiki.samba.org/index.php/Release_Planning_for_Samba_4.22
+has been updated accordingly.
 
 
-UPGRADING
-=========
+Jule
 
+-- 
+Jule Anger
+Release Manager Samba Team  samba.org
+SerNet Samba Team           sernet.de
 
-NEW FEATURES/CHANGES
-====================
-
-SMB3 Directory Leases
----------------------
-
-Starting with Samba 4.22 SMB3 Directory Leases are supported. The new global
-option "smb3 directory leases" controls whether the feature is enabled or
-not. By default, SMB3 Directory Leases are enabled on non-clustered 
-Samba and
-disabled on clustered Samba, based on the "clustering" option. See man 
-smb.conf
-for more details.
-
-SMB3 Directory Leases allow clients to cache directory listings and, 
-depending
-on the workload, result in a decent reduction in SMB requests from clients.
-
-Netlogon Ping over LDAP and LDAPS
----------------------------------
-
-Samba must query domain controller information via simple queries on
-the AD rootdse's netlogon attribute. Typically this is done via
-connectionless LDAP, using UDP on port 389. The same information is
-also available via classic LDAP rootdse queries over TCP. Samba can
-now be configured to use TCP via the new "client netlogon ping
-protocol" parameter to enable running in environments where firewalls
-completely block port 389 or UDP traffic to domain controllers.
-
-REMOVED FEATURES
-================
-
-The "nmbd proxy logon" feature was removed. This was used before
-Samba4 acquired a NBT server.
-
-The parameter "cldap port" has been removed. CLDAP runs over UDP port
-389, we don't see a reason why this should ever be changed to a
-different port. Moreover, we had several places in the code where
-Samba did not respect this parameter, so the behaviour was at least
-inconsistent.
-
-fruit:posix_rename
-------------------
-
-This option of the vfs_fruit VFS module that could be used to enable POSIX
-directory rename behaviour for OS X clients has been removed as it could 
-result
-in severe problems for Windows clients.
-
-As a possible workaround it is possible to prevent creation of .DS_Store 
-files
-(a Finder thingy to store directory view settings) on network mounts by 
-running
-
-   $ defaults write com.apple.desktopservices DSDontWriteNetworkStores true
-
-on the Mac.
-
-
-smb.conf changes
-================
-
-   Parameter Name                          Description     Default
-   --------------                          -----------     -------
-   smb3 directory leases                   New             Auto
-   vfs mkdir use tmp name                  New             Auto
-   client netlogon ping protocol           New             cldap
-   fruit:posix_rename                      Removed
-   cldap port                              Removed
-
-KNOWN ISSUES
-============
-
-https://wiki.samba.org/index.php/Release_Planning_for_Samba_4.22#Release_blocking_bugs
-
-
-#######################################
-Reporting bugs & Development Discussion
-#######################################
-
-Please discuss this release on the samba-technical mailing list or by
-joining the #samba-technical:matrix.org matrix room, or
-#samba-technical IRC channel on irc.libera.chat
-
-If you do report problems then please try to send high quality
-feedback. If you don't provide vital information to help us track down
-the problem then you will probably be ignored.  All bug reports should
-be filed under the Samba 4.1 and newer product in the project's Bugzilla
-database (https://bugzilla.samba.org/).
-
-
-======================================================================
-== Our Code, Our Bugs, Our Responsibility.
-== The Samba Team
-======================================================================
-
-================
-Download Details
-================
-
-The uncompressed tarballs and patch files have been signed
-using GnuPG (ID AA99442FB680B620).  The source code can be downloaded
-from:
-
-         https://download.samba.org/pub/samba/rc/
-
-The release notes are available online at:
-
-https://download.samba.org/pub/samba/rc/samba-4.22.0rc1.WHATSNEW.txt
-
-Our Code, Our Bugs, Our Responsibility.
-(https://bugzilla.samba.org/)
-
-                         --Enjoy
-                         The Samba Team
 
