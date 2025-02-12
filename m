@@ -2,49 +2,48 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5DDA9A32A8B
-	for <lists+samba-technical@lfdr.de>; Wed, 12 Feb 2025 16:49:42 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 80AFBA32B3E
+	for <lists+samba-technical@lfdr.de>; Wed, 12 Feb 2025 17:11:58 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
-	bh=kF21zVj7Uzknj9Y5xZTuCLbWTB4AvYjrLybh5BqiGx0=; b=N+7RXcHapynRzcuyomOC7ZEtcx
-	ycKlXnlc+32hdc/I6ZbdA0ciz8Z2ecimDNLoUbaqxTJ1NynFdlKvsawCO2lACoSMCruDnHTwVTe+X
-	uize7MElghKKAMcMUhGN9eWbkG8B2xaEsn5nT7S7XfUtR4dBTCd2sU4ypdrriWQZ9KNa2LAtCuwuj
-	bwSelA8ZPiy3/iTnbAGKXk5XGw99FTs6lNfKgn30Tcc5KBjqQOHg+mlJyvAUl5Z4XTTSCKz1I1nZ3
-	vw2uBjj3oNmmyzdkNaSlz80HsT87fkhZSWF7c7dCPUf3fD2WuMCRBh5dshZM2lSyrikIQgRPfuIDb
-	un5zX8lg==;
-Received: from ip6-localhost ([::1]:54622 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=BH/XkGxN7mMzX73bgA4AAPw1JElmOxb09kcTFkcHzyA=; b=ShQEUYtLqemNMhLV83OrKT4sDi
+	mh3bgb3oQh+BXMwJwvJw+zkYYdUsMFKO/PEt6L4V+CQqW7PSloz9w3LOusFyGos+OVJlBryiQ4zbf
+	EfWem9pyJm4FBIpcLS1x7uJ+zqd0c30xtjRjy/GkzgCxv+yETL++ogmbU4ho3+nc6ROLQd2LDYfaa
+	QwMoPQer0HTVFsEp5ITOj5TmNDrjyUGI2oA8BlMsgLv2BtDRC/kyeg1NsLLUN8TQGJ0n1fggG7gQm
+	8Jns8DGGrt3m8uWQEJGhd+zT3v9vAfoTXbVpm8QSt9UKJmAIdusppvPdmWsYKL+093xxf5aB5/6MR
+	ieovg8yQ==;
+Received: from ip6-localhost ([::1]:47966 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1tiEz2-00CGwJ-9Y; Wed, 12 Feb 2025 15:49:04 +0000
-Received: from zucker.schokokeks.org ([2a01:4f8:121:1ffe:1::2]:37105) 
+	id 1tiFKx-00CH2W-PB; Wed, 12 Feb 2025 16:11:43 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:63350) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1tiEyy-00CGwC-Bm
- for samba-technical@lists.samba.org; Wed, 12 Feb 2025 15:49:02 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Arkthis.com; s=key1;
- t=1739374721; bh=kF21zVj7Uzknj9Y5xZTuCLbWTB4AvYjrLybh5BqiGx0=;
- h=Message-ID:Date:MIME-Version:To:From:Subject:Content-Type:
- Content-Transfer-Encoding;
- b=iLdSdVlgZfQa99cFqEjWwXh0ic4yZKhXIfWnwHY+jBMGPaF7xU+w7OmY5pueqM5Az
- xxioOnq2tTEnWRz3Q8B5nhApkZbpfJVNNslvGPVJUss1+LzgmNoV0M7nM1Y/FJaUfa
- 5rcP6nAeDkxrVfcqkxJhaIoPF3Nvckc63ygthp+ATNaJxvzY+Tw0M1+GYU6uDBhbPu
- DU7AO0xsSOnxE7i/qOELilkS5ylJA99HfF2dAbARhIdRwlctJjhX9y++rWdZAsPu6E
- BX/JKUR8KyKe/GS9jyCs5043HgNQYYIiYKPnfUVQxs6LdwQIQ9VIAH8RXSARVnX/FP
- yDGL6ASmQGiRg==
-Original-Content-Transfer-Encoding: 7bit
-Original-Subject: Reading >4kB xattrs (from ZFS) = input/output error
-Author: pb+samba@Arkthis.com
-Authentication-Results: zucker.schokokeks.org;
- dnswl=pass dns.zone=list.dnswl.org
- policy.ip=127.0.0.255
-Message-ID: <71282fd4-3da7-4176-badf-66bcd478e609@Arkthis.com>
-Date: Wed, 12 Feb 2025 16:38:40 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: en-US
+ (Exim) id 1tiFKu-00CH2P-3S
+ for samba-technical@lists.samba.org; Wed, 12 Feb 2025 16:11:42 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Message-ID:To:From:Date:CC;
+ bh=BH/XkGxN7mMzX73bgA4AAPw1JElmOxb09kcTFkcHzyA=; b=rjWXsjKICSIFGU8rA11gwJIGyB
+ eMIgPswKn1/JB8cuaX/lJwQzqNiGSceygQVSiTPi9fpiL5g+pcH1gUv8md3QL6+3/IEoVLBCiWTFZ
+ eNnxUc6+iGbgrWj5exiFMxkhs6LnKKuA7bhi195ALU8whgwzwqwRn+Tm7ynTzc9Au9zYoDE3kM2g/
+ 4Szwb6/TQaQ+sVpMOY/SNS88y7lLYfYrTlI0P5lSDqSK57VXHKBTi15Yq5twrcXIuDlm6SbCNMQjt
+ J7zVngETHaE9GXD003Cz7Nrw/HnQolnykEc9x3AZyT00GN2Jx0NZ73bqE34cvBExdc7oLmWXu7MEm
+ s4cZ8F9Nvag7vpY/lh/TWA2oq9r89b7OFZ87J+axdW3tjhYM/kGCZWfQHr7r01mqh4L++536Pv1mY
+ zsD8Hs71eD4bmmzbTF6TfnFHu49eoekrlBfb4XqE3FzXVo2SrRf1L2Igc1WRbexnqjk0U1NqTddPE
+ tMbCeg3rk0K3GcLOhMsC/f57;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1tiFKs-002EEI-2q for samba-technical@lists.samba.org;
+ Wed, 12 Feb 2025 16:11:39 +0000
+Date: Wed, 12 Feb 2025 16:11:36 +0000
 To: samba-technical@lists.samba.org
-Subject: Reading >4kB xattrs (from ZFS) = input/output error
-Organization: ArkThis AV-RD (AudioVisual Research & Development)
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Subject: Re: Reading >4kB xattrs (from ZFS) = input/output error
+Message-ID: <20250212161136.5c2f5d22@devstation.samdom.example.com>
+In-Reply-To: <71282fd4-3da7-4176-badf-66bcd478e609@Arkthis.com>
+References: <71282fd4-3da7-4176-badf-66bcd478e609@Arkthis.com>
+X-Mailer: Claws Mail 4.1.1 (GTK 3.24.38; x86_64-pc-linux-gnu)
+MIME-Version: 1.0
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
@@ -59,35 +58,47 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: "Peter B. via samba-technical" <samba-technical@lists.samba.org>
-Reply-To: pb+samba@Arkthis.com
+From: Rowland Penny via samba-technical <samba-technical@lists.samba.org>
+Reply-To: "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>
+Cc: Rowland Penny <rpenny@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi everyone :)
+On Wed, 12 Feb 2025 16:38:40 +0100
+"Peter B. via samba-technical" <samba-technical@lists.samba.org> wrote:
 
-I've recently set a >40kB binary metadata as xattrs on ZFS, using 
-`setfattr` locally.
-Works fine, and I can read/write data like that without issues.
+> Hi everyone :)
+> 
+> I've recently set a >40kB binary metadata as xattrs on ZFS, using 
+> `setfattr` locally.
+> Works fine, and I can read/write data like that without issues.
+> 
+> But when I try to access such "larger" xattrs over Samba using 
+> `getfattr`, I get the following error:
+> 
+> `getfattr: bigdata.test: Input/output error`
+> 
+> I've tried increasing the log-level on the server's smb.conf, but I 
+> couldn't make out relevant information telling me more about this.
+> 
+> 
+> The server's running Samba packed from Ubuntu (18.04): 
+> 2:4.7.6+dfsg~ubuntu-0ubuntu2.29
+> 
+> I know that version's ancient, but it's a stable (in-house)
+> production server.
 
-But when I try to access such "larger" xattrs over Samba using 
-`getfattr`, I get the following error:
+Ancient, well that is one word for it ;-)
 
-`getfattr: bigdata.test: Input/output error`
+Being 18.04, that will mean Samba 4.7.6 and the latest version of Samba
+is 4.21.3, quite a difference, I would imagine that there is a similar
+difference in ZOL packages.
 
-I've tried increasing the log-level on the server's smb.conf, but I 
-couldn't make out relevant information telling me more about this.
+Now your problem may be a bug somewhere, but who knows where ? What is
+certain, if there is a bug, you have no chance of getting it fixed with
+your current setup and you may find that your problem doesn't exist on
+current packages.
 
+Rowland
 
-The server's running Samba packed from Ubuntu (18.04): 
-2:4.7.6+dfsg~ubuntu-0ubuntu2.29
-
-I know that version's ancient, but it's a stable (in-house) production 
-server.
-What is the limit of Samba's support for xattrs, and is there anything I 
-can do about this? (I've read all I could find on xattrs and smb.conf)
-
-
-Thank you very much in advance for any insights :)
-Peter
 
