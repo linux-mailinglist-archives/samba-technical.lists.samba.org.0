@@ -2,48 +2,74 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 90B01A3B1F1
-	for <lists+samba-technical@lfdr.de>; Wed, 19 Feb 2025 08:04:37 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7EC97A3B2C6
+	for <lists+samba-technical@lfdr.de>; Wed, 19 Feb 2025 08:45:49 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=iiSrrcg4Te9Fis5n2NmIny+W6rTA9xbYSd0dfxCN948=; b=B6jmP8qAWZsgUq5EhYTlv44lUn
-	jO4cLAuAlONwSJasE8AONStAzfE6ABbfpaiWnaGvCImFrOYeeHuh02GpBsVj5Jt0H2fIIHar9oiOZ
-	ktkIMUmJFuerau5B9Nsg5n6IM9DW1kajbNiaI0O3Fet0BJ0qKAw/JCt8Vg6qQh5mK48h+S7goYIvX
-	wa43uuRQ2H7jQSSxVX9XWJZm/ZHLTkCf+VWEYT4BXGxC8TUqKhGUDTFvBqO5D/bdv8kLYkOR4Vi5k
-	rpbIuo7NFCbgpbuz+KsPOA9XGv04saL/htCPSQBduuTk1cIM9rd7eSMzKmw8mn3MQgdY3T1GjmgTW
-	PNEGfhaQ==;
-Received: from ip6-localhost ([::1]:19656 helo=hr1.samba.org) 
+	bh=Ke/r7wlG5SzWLddOKbPGoZqsvXNddJvFKoWINavThs4=; b=xlIAY9QJyk3kA080tZeVF18+iP
+	6EQ4rxLh2pMyWM10HEUrLhWp1bl4NAhEBadhNDm4PlRBDmem0pgpTYv7PuTojDRs2ceCqySMvvyT4
+	00f8nT+/2s4YYlsdPmZy+U/ZJ8UvsrRJO3xhvpNMHsF4iuAbmiciJZEdzTpbRGDwMBjbINH1EMuFW
+	5EzvC1tMnmGlfS3pGwD4gpQRTChgPoDmpvZ2CqqHfsgCQVFZK39gIErT3iK+nACfkILq6epVTZLEr
+	+wDvpu7ZFRqj8SGdpnerWdeTyn+J1Gh5Z607MqOsWXqfLeqhSSXwnlM5LDQivdJ4K4dmYstZ30o6m
+	Dm4mSxFQ==;
+Received: from ip6-localhost ([::1]:61430 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1tke8G-00CnjD-Pj; Wed, 19 Feb 2025 07:04:33 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:29014) 
+	id 1tkelr-00Cnta-If; Wed, 19 Feb 2025 07:45:27 +0000
+Received: from fallback25.i.mail.ru ([79.137.243.79]:55012) 
  by hr1.samba.org with esmtps
- (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1tke88-00Cnj6-FT
- for samba-technical@lists.samba.org; Wed, 19 Feb 2025 07:04:26 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Date:Cc:To:From;
- bh=iiSrrcg4Te9Fis5n2NmIny+W6rTA9xbYSd0dfxCN948=; b=dygrMmxLoli2yrqdKE18kMi4+2
- ewV+bHflow8arLw80vq/S+EvE4qgqgY3y7xB4iZs7JRaR8UqhSnLEbICiaj0P3cfBMv0R3pd4vJNF
- 25hoxR4cB3rTs0yv8hb35r3hDJ5QAMqzos+8hyNBVvBYz/in7NnbkmVsYxEbzUDWLPlKJCB75bKnG
- 6FTnen+yaCnsDdQSMr1BKRug0JvxXvxzAzjWMUFBpugNF1nLU+0QfzD/QSRnq3+TLQmgQVYbt5JTM
- UagYekGaFmkybo11l2bWdhdRyHcEY5SgeEwJjSB/0CaCDBbavVtZwz7I2GMxyeKh+y/4/8BxKD4Yv
- ir5MhQUmHrAQ5h67gY2KpiJE51xAidzY8pINcrVb7LrkD3tJqQz/yjyi87hdmsrODvCEFKBH8EeUW
- cYNbi+LLiJwWV0NkPXHxRhPiaKG4G/UIMAxjsFyO1esaA13nubnVQVj6+nnJCoZPMKr19PKz8KcYP
- IMYrUaqqUAa7jboh8R0ddq5a;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1tke7v-0013SS-0d; Wed, 19 Feb 2025 07:04:11 +0000
-To: samba-technical <samba-technical@lists.samba.org>
-Subject: Re: get upn from winbindd
-Date: Wed, 19 Feb 2025 08:04:10 +0100
-Message-ID: <6081286.vXUDI8C0e8@magrathea>
-In-Reply-To: <6771289.rdbgypaU67@magrathea>
-References: <1739859798.356583592@f141.i.mail.ru>
- <6771289.rdbgypaU67@magrathea>
+ (TLS1.2:ECDHE_SECP256R1__RSA_SHA512__AES_256_GCM:256) (Exim)
+ id 1tkell-00CntQ-4t
+ for samba-technical@lists.samba.org; Wed, 19 Feb 2025 07:45:24 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mail.ru;
+ s=mail4; 
+ h=References:In-Reply-To:Content-Type:Reply-To:Message-ID:Date:MIME-Version:Subject:Cc:To:From:From:Subject:Content-Type:Content-Transfer-Encoding:To:Cc;
+ bh=QRvTwvTa+las4hIIMsBrnb+9DjxNHUaVo82WBIgdVWA=; 
+ t=1739951121;x=1740041121; 
+ b=hIUd6xEt9BKKIevEmERP+DI01UqM3eFI4WKPBKxsrr6QH4r7hF8OEPN+hhMusIJH5w+XwwShsNG6N0/1mSHLB6gcztzGjYtOX4dAHpMA/i+rypfUgDPxDwaete85t96jQbd9GxuaNXzqsI1s4d4L+921iD+FmI/X0rM36QksIGp0LHGX8Tc04W0+oID2Gkuq9uGSwJSvXqLWkegMaVZoCUvKBG2Yax5V5kDIrpJ/rSbhdXbf/Ry/6k6XvpUNgPRoce9ANEUY0pFLEAsMWfJzQddsAST3/hNtuBZ15T9u4WjhPfsp32b8mhJqM58phxqfcx9PGYGGzPe3KeQ4IMmUvg==;
+Received: from [10.14.54.147] (port=55314 helo=f334.i.mail.ru)
+ by fallback25.i.mail.ru with esmtp (envelope-from <usoltsev05@mail.ru>)
+ id 1tkelV-002uMH-FK; Wed, 19 Feb 2025 10:45:05 +0300
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mail.ru;
+ s=mail4; 
+ h=References:In-Reply-To:Content-Type:Reply-To:Message-ID:Date:MIME-Version:Subject:Cc:To:From:From:Subject:Content-Type:Content-Transfer-Encoding:To:Cc;
+ bh=QRvTwvTa+las4hIIMsBrnb+9DjxNHUaVo82WBIgdVWA=; 
+ t=1739951105;x=1740041105; 
+ b=h1DRLpMnh8LBR5TQtxaIiQjlknK5DsEIilC0Om/ZLfVLu3oRnGqipFCHHQ/orfq+r1V550xtu2j6REA9nEjj6f5IfdCX6bulpNPDGdIjPmqdR076Iraz5PHKPhjj04TizcDU1IDlG9UsGNIH7cX58l8JPyrSWlYuHXkoAR3aSgdSmoEdRD9nfJY6XAg2ZOYD5E5K9h4uFoUFiii8Petvz9FAdS3wBrRicIhtStIto622ASgjINT59YxV9GifOfJGbphi8ZpHoeS9LKkVYrNogtacwiRUwy6dIn05FkZQAxvCJUWwHfYXgw0JsDDB1ulrMCuBHXsbhbO9CVanqMtlrw==;
+Received: by f334.i.mail.ru with local (envelope-from <usoltsev05@mail.ru>)
+ id 1tkel9-0003IV-3P; Wed, 19 Feb 2025 10:44:43 +0300
+Received: by e.mail.ru with HTTP;
+	Wed, 19 Feb 2025 10:44:42 +0300
+To: =?UTF-8?B?QW5kcmVhcyBTY2huZWlkZXI=?= <asn@samba.org>
+Subject: =?UTF-8?B?UmU6IGdldCB1cG4gZnJvbSB3aW5iaW5kZA==?=
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="utf-8"
+X-Mailer: Mail.Ru Mailer 1.0
+X-SenderField-ReMsg: 17399486862055507685
+X-SenderField-Remind: 0
+Date: Wed, 19 Feb 2025 10:44:42 +0300
+X-Priority: 3 (Normal)
+Message-ID: <1739951082.605468428@f462.i.mail.ru>
+In-Reply-To: <6081286.vXUDI8C0e8@magrathea>
+References: <1739859798.356583592@f141.i.mail.ru>
+ <6771289.rdbgypaU67@magrathea> <6081286.vXUDI8C0e8@magrathea>
+X-Mailru-Src: fe
+X-7564579A: B8F34718100C35BD
+X-77F55803: 119C1F4DF6A9251C70D51F98913C02AFE3A05ADD02321F9CFE077A878AC241CC8FD872164937FA4C4563868BA430319A4C35C626B1C2FDB25068970DEDC82CCDB4C79C3FA166ABA8
+X-7FA49CB5: 70AAF3C13DB70168C09775C1D3CA48CFCF72DD04787CEB0DB2086D80B0504778CF19DD082D7633A0587C8798DFFB2F5764CD17681C2FEB7A176DF2183F8FC7C07D3D92443D23A869C4224003CC83647688BEEADF207C7462BFD28B28ED4578739E625A9149C048EEB1593CA6EC85F86DAC83A81C8FD4AD23E2E44EFD321A7F275571747095F342E85644E22E05AA81AEE6DE07D961CB05C241BF15D38FB6CB3A29508FF2E8683A3E52120BFB3F63BC185F65E78799B30205C33C3ADAEA971F8E611E41BBFE2FEB2B7BEA665167F7B0B697406BD6AFF7F04DD841D2703AA3E7958EEF46B7454FC60B9742502CCDD46D0DE753FA5741D1AD02F6B57BC7E64490618DEB871D839B73339E8FC8737B5C22496EA1BA7CA28B4A74CC7F00164DA146DAFE8445B8C89999729449624AB7ADAF37F6B57BC7E64490611E7FA7ABCAF51C92176DF2183F8FC7C07734D68A6916D8318941B15DA834481F9449624AB7ADAF372E808ACE2090B5E14AD6D5ED66289B5259CC434672EE63711DD303D21008E298D5E8D9A59859A8B6B372FE9A2E580EFC725E5C173C3A84C3727597FF642BA4D735872C767BF85DA2F004C90652538430E4A6367B16DE6309
+X-C1DE0DAB: 0D63561A33F958A5C8713D1EEF5F8BA195F300D0867C0873BB9A46D81596EA86F87CCE6106E1FC07E67D4AC08A07B9B064A52DF3AE21010FCB5012B2E24CD356
+X-C8649E89: 1C3962B70DF3F0AD75DCE07D45A7499577DD89D51EBB7742DC8270968E61249B1004E42C50DC4CA955A7F0CF078B5EC49A30900B95165D345DB600F8E858000FA887BACE6EEECB0623BD09A4055638748F36BD49F898FA874EB9689B3F045DE31D7E09C32AA3244C4E7C3DC2F961789E25A17CFAADDE02FB51E887DA02A9F7BF3A1A83191EB2B8F05DA084F8E80FEBD3D00FC40FD8DA07260578AE0F1F9FF8BE37E69C174A41D00C
+X-D57D3AED: 3ZO7eAau8CL7WIMRKs4sN3D3tLDjz0dLbV79QFUyzQ2Ujvy7cMT6pYYqY16iZVKkSc3dCLJ7zSJH7+u4VD18S7Vl4ZUrpaVfd2+vE6kuoey4m4VkSEu53w8ahmwBjZKM/YPHZyZHvz5uv+WouB9+Od3uM/CLT152eL7j4ZacoUSF0MSa0v5VBmEtSutdC50BIKdL3VIRlkt/X9Gr7QWYXucPUinHATAeHXorM+S1NQOd7Dfgh+EySSeC00zrPo2FJKQm04qSoIo=
+X-Mailru-Sender: 9422C5FC7C00AE698ADF76B97E6CFFADFDB7DE8C1FDE01BF6B3973D4122FB6382A254BB7568ACD93335C735EA447B7F30F8176837CC66F10E37ABE797E9D67565956C2355C927B12CC69B2B56F8879792CE91937965AD82C3DDE9B364B0DF289AE208404248635DF
+X-Mras: Ok
+X-Spam: undefined
+X-7564579A: 78E4E2B564C1792B
+X-77F55803: 6242723A09DB00B460759F99F06F60E30139815E92C936615B99A5C555A5A3F8049FFFDB7839CE9E3D3BB30DB6F99D609C9763612BC6DDBAB3EB73B105CC348B9B87AD255A7B7BA7
+X-7FA49CB5: 0D63561A33F958A54AC84306D81A884BE44788180FBA366B3F31C2D280BF9ECACACD7DF95DA8FC8BD5E8D9A59859A8B65887671095D9A168
+X-D57D3AED: 3ZO7eAau8CL7WIMRKs4sN3D3tLDjz0dLbV79QFUyzQ2Ujvy7cMT6pYYqY16iZVKkSc3dCLJ7zSJH7+u4VD18S7Vl4ZUrpaVfd2+vE6kuoey4m4VkSEu53w8ahmwBjZKM/YPHZyZHvz5uv+WouB9+OaV3B3Rpvb3IyiXXMwFJo09san95P+a5Oa5uShcC7g4OtI3uJQvhm049DPCm86TpoLAe8GD+p53pfMHxB0ImQHosz9QwHIciS0D975QpttheJAqHBNWCBNQ=
+X-Mailru-MI: C000000000000800
+X-Mras: Ok
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: base64
+X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -57,61 +83,41 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andreas Schneider via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andreas Schneider <asn@samba.org>
-Cc: Andreas Schneider <asn@samba.org>,
- =?UTF-8?B?0KPRgdC+0LvRjNGG0LXQsiDQn9GR0YLRgA==?= <usoltsev05@mail.ru>
+From: =?utf-8?b?0KPRgdC+0LvRjNGG0LXQsiDQn9GR0YLRgCB2aWEgc2FtYmEtdGVjaG5pY2Fs?=
+ <samba-technical@lists.samba.org>
+Reply-To: =?UTF-8?B?0KPRgdC+0LvRjNGG0LXQsiDQn9GR0YLRgA==?= <usoltsev05@mail.ru>
+Cc: =?UTF-8?B?c2FtYmEtdGVjaG5pY2Fs?= <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Wednesday, 19 February 2025 08:02:23 CET Andreas Schneider via samba-
-technical wrote:
-> On Tuesday, 18 February 2025 07:23:18 CET =D0=A3=D1=81=D0=BE=D0=BB=D1=8C=
-=D1=86=D0=B5=D0=B2 =D0=9F=D1=91=D1=82=D1=80 via samba-technical
->=20
-> wrote:
-> > Hi!
->=20
-> Hello,
->=20
-> > I want to receive upn in winbindd, but I don't know how to do it
-> > correctly=E2=80=A6
-> > *  The first option is to make edits to the SAMR protocol. It works, but
-> > it
-> > breaks the protocol itself.(samba_fix_1_samr.patch) *  the second option
-> > is
-> > to receive upn via a direct ldap request. It only works on samba DC, wh=
-ere
-> > there is a sam.ldb database. Winbind does not work on
-> > clients (samba_fix_2_only_winbind.patch) I made patches for the
-> > commit a814f5d90a3fb85a94c9516dba224037e8fd76f1(Stefan Metzmacher Feb 1=
-7,
-> > 2025) on master branch.
-> > My config  /etc/nsswitch.conf:
-> > passwd:     files winbind systemd
-> > shadow:     tcb files winbind
-> > group:      files winbind systemd role
-> >=20
-> > Test:
-> > id   user1@test.abc
->=20
-> I think this is the wrong approach. We should actually rewrite winbind to
-> not pass `struct winbind_pw` around, we need `struct winbind_user_record`
-> and convert from `struct winbind_user_record` to `struct winbind_pw`. See
-> the discussions in:
->=20
-> https://gitlab.com/samba-team/samba/-/merge_requests/3805
-
-Wrong MR sorry.
-
-This one:
-https://gitlab.com/samba-team/samba/-/merge_requests/2928
-
-
-=2D-=20
-Andreas Schneider                      asn@samba.org
-Samba Team                             www.samba.org
-GPG-ID:     8DFF53E18F2ABC8D8F3C92237EE0FC4DCC014E3D
-
-
-
+ClRoYW5rIHlvdSwgdGhpcyBpcyB2ZXJ5IHZhbHVhYmxlIGluZm9ybWF0aW9uIQoKwqAgCj7QodGA
+0LXQtNCwLCAxOSDRhNC10LLRgNCw0LvRjyAyMDI1LCAxNTowNCArMDg6MDAg0L7RgiBBbmRyZWFz
+IFNjaG5laWRlciB2aWEgc2FtYmEtdGVjaG5pY2FsIDxzYW1iYS10ZWNobmljYWxAbGlzdHMuc2Ft
+YmEub3JnPjoKPsKgCj5PbiBXZWRuZXNkYXksIDE5IEZlYnJ1YXJ5IDIwMjUgMDg6MDI6MjMgQ0VU
+IEFuZHJlYXMgU2NobmVpZGVyIHZpYSBzYW1iYS0KPnRlY2huaWNhbCB3cm90ZToKPj4gT24gVHVl
+c2RheSwgMTggRmVicnVhcnkgMjAyNSAwNzoyMzoxOCBDRVQg0KPRgdC+0LvRjNGG0LXQsiDQn9GR
+0YLRgCB2aWEgc2FtYmEtdGVjaG5pY2FsCj4+Cj4+IHdyb3RlOgo+PiA+IEhpIQo+Pgo+PiBIZWxs
+bywKPj4KPj4gPiBJIHdhbnQgdG8gcmVjZWl2ZSB1cG4gaW4gd2luYmluZGQsIGJ1dCBJIGRvbid0
+IGtub3cgaG93IHRvIGRvIGl0Cj4+ID4gY29ycmVjdGx54oCmCj4+ID4gKiBUaGUgZmlyc3Qgb3B0
+aW9uIGlzIHRvIG1ha2UgZWRpdHMgdG8gdGhlIFNBTVIgcHJvdG9jb2wuIEl0IHdvcmtzLCBidXQK
+Pj4gPiBpdAo+PiA+IGJyZWFrcyB0aGUgcHJvdG9jb2wgaXRzZWxmLihzYW1iYV9maXhfMV9zYW1y
+LnBhdGNoKSAqIHRoZSBzZWNvbmQgb3B0aW9uCj4+ID4gaXMKPj4gPiB0byByZWNlaXZlIHVwbiB2
+aWEgYSBkaXJlY3QgbGRhcCByZXF1ZXN0LiBJdCBvbmx5IHdvcmtzIG9uIHNhbWJhIERDLCB3aGVy
+ZQo+PiA+IHRoZXJlIGlzIGEgc2FtLmxkYiBkYXRhYmFzZS4gV2luYmluZCBkb2VzIG5vdCB3b3Jr
+IG9uCj4+ID4gY2xpZW50cyAoc2FtYmFfZml4XzJfb25seV93aW5iaW5kLnBhdGNoKSBJIG1hZGUg
+cGF0Y2hlcyBmb3IgdGhlCj4+ID4gY29tbWl0IGE4MTRmNWQ5MGEzZmI4NWE5NGM5NTE2ZGJhMjI0
+MDM3ZThmZDc2ZjEoU3RlZmFuIE1ldHptYWNoZXIgRmViIDE3LAo+PiA+IDIwMjUpIG9uIG1hc3Rl
+ciBicmFuY2guCj4+ID4gTXkgY29uZmlnIC9ldGMvbnNzd2l0Y2guY29uZjoKPj4gPiBwYXNzd2Q6
+IGZpbGVzIHdpbmJpbmQgc3lzdGVtZAo+PiA+IHNoYWRvdzogdGNiIGZpbGVzIHdpbmJpbmQKPj4g
+PiBncm91cDogZmlsZXMgd2luYmluZCBzeXN0ZW1kIHJvbGUKPj4gPgo+PiA+IFRlc3Q6Cj4+ID4g
+aWQgIHVzZXIxQHRlc3QuYWJjCj4+Cj4+IEkgdGhpbmsgdGhpcyBpcyB0aGUgd3JvbmcgYXBwcm9h
+Y2guIFdlIHNob3VsZCBhY3R1YWxseSByZXdyaXRlIHdpbmJpbmQgdG8KPj4gbm90IHBhc3MgYHN0
+cnVjdCB3aW5iaW5kX3B3YCBhcm91bmQsIHdlIG5lZWQgYHN0cnVjdCB3aW5iaW5kX3VzZXJfcmVj
+b3JkYAo+PiBhbmQgY29udmVydCBmcm9tIGBzdHJ1Y3Qgd2luYmluZF91c2VyX3JlY29yZGAgdG8g
+YHN0cnVjdCB3aW5iaW5kX3B3YC4gU2VlCj4+IHRoZSBkaXNjdXNzaW9ucyBpbjoKPj4KPj4gIGh0
+dHBzOi8vZ2l0bGFiLmNvbS9zYW1iYS10ZWFtL3NhbWJhLy0vbWVyZ2VfcmVxdWVzdHMvMzgwNQo+
+V3JvbmcgTVIgc29ycnkuCj4KPlRoaXMgb25lOgo+aHR0cHM6Ly9naXRsYWIuY29tL3NhbWJhLXRl
+YW0vc2FtYmEvLS9tZXJnZV9yZXF1ZXN0cy8yOTI4Cj4KPgo+LS0KPkFuZHJlYXMgU2NobmVpZGVy
+ICBhc25Ac2FtYmEub3JnCj5TYW1iYSBUZWFtIHd3dy5zYW1iYS5vcmcKPkdQRy1JRDogOERGRjUz
+RTE4RjJBQkM4RDhGM0M5MjIzN0VFMEZDNERDQzAxNEUzRAo+Cj7CoCAKwqAKwqAK0KPRgdC+0LvR
+jNGG0LXQsiDQn9GR0YLRgC4KwqA=
