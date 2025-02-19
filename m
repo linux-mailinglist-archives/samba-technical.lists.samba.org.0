@@ -2,73 +2,73 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 742DAA3936C
-	for <lists+samba-technical@lfdr.de>; Tue, 18 Feb 2025 07:29:53 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0A998A3AFFA
+	for <lists+samba-technical@lfdr.de>; Wed, 19 Feb 2025 04:18:21 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
-	bh=IOdAP5FSjqBwkuSJNYFzpQPBFlygZLtME/jX6VINeXM=; b=NdREAhD+fN8GMGwDzymbpRpfJZ
-	wTfMKN3QnTjOdYy3UCK9lAdbln/nNp23MiQAH+7bXma+3pwffyO3sCvkmGWlPomr+1K4bY7lsWNFE
-	k4IYlSYhPITrUCocNhGX1Px15sHMKNmq9MnCSL3lVJXnVVg74XGF69VgeXm6DCFXNPJTCtzBZvjWe
-	NqlDm18VRbYfx6Dl/dUyP94kEBvmQXWRLzpgNjgsO5YRnEuWTXVnEkApmEORpFdO6EzUICBI2Xx88
-	gQSjeDKw5dau3+7s9ko937uL3iwqaZkw+QtWyO93aJD0WOpUhj5Wh2wDaRWprTG1pjp8IZsz5qnuu
-	PWkcmMmQ==;
-Received: from ip6-localhost ([::1]:39670 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=jc4SK/ypNCa99TVOhf7iBOOIGMc5Da5lSQe8phr48Xs=; b=AoGXchJ70raoUx0xXuAQiJpfau
+	goJ6up6ULZ0IaDtCkhVchj8x1U4Wv0fml2bVzrzk3NmKrysMs9ovvCY4XM/DBfIN5M6h++ZLKP25Q
+	RUDkjWfLRyThV1Hi7AdETr0hKpIkCEu0pvCAMC3QVhV3Gxx41CPCpCQzpAFXZWR7Jf7U+7R2xutA+
+	Zgqku0EWN4J7Qk459EhXtMN4WiTOGCuY14MEoKVe6CW/ClSP9UfvIkPv6WxNO6my6iqPzOP3TSlB6
+	6NXTuKGP94hRjwNa7BCQIGv64I9GF7F3dvvjyMY749eJyulMB9l0XBwTD0ff9tmbBTItmoe/0SZOy
+	uQyo9lIw==;
+Received: from ip6-localhost ([::1]:25014 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1tkH6l-00Ch82-1C; Tue, 18 Feb 2025 06:29:27 +0000
-Received: from fallback13.i.mail.ru ([79.137.243.65]:60854) 
+	id 1tkaan-00Cmpo-UA; Wed, 19 Feb 2025 03:17:46 +0000
+Received: from mail-lf1-x12d.google.com ([2a00:1450:4864:20::12d]:50538) 
  by hr1.samba.org with esmtps
- (TLS1.2:ECDHE_SECP256R1__RSA_SHA512__AES_256_GCM:256) (Exim)
- id 1tkH6g-00Ch7u-Hu
- for samba-technical@lists.samba.org; Tue, 18 Feb 2025 06:29:25 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mail.ru;
- s=mail4; 
- h=Content-Type:Message-ID:Reply-To:Date:MIME-Version:Subject:To:From:From:Subject:Content-Type:Content-Transfer-Encoding:To:Cc;
- bh=4DSHBEr2GYEItoiA0dCt+K2U7mmxb+kNf7U44epUOGo=; 
- t=1739860162;x=1739950162; 
- b=TFL6mXVxi4z4A8VftNaS+cN3e1fXd/td8xV7TV2UuxulPWzX1FdaywWJbbUSjyxiEDX0d48/W3qffjMmS44S0qH71H6hNTp70QTV5lU8W1GUST5KNeD74j23Fbic8kI4UdF6ZZyY7SJwY4eQg4vz8R6Gll5VuZgo6e1J5qvBHOm6k1CLlcZeX5jf9JmCa4Oo7XxQGem7UkIDp0fqcNFuDhzWmRE8mzm4PVPppBqjRChfAqkQCUy7S9o3t2aVcpUdxm9cqWbwYjZx6FCm3MaAQNxPLY/fMN6yLpiy76RAk/EnMQSzBi3vo+OOP26Yq6xkVppP26Ei/tRYLXxsILZpDQ==;
-Received: from [10.14.55.121] (port=52920 helo=f750.i.mail.ru)
- by fallback13.i.mail.ru with esmtp (envelope-from <usoltsev05@mail.ru>)
- id 1tkH1B-00B008-DE
- for samba-technical@lists.samba.org; Tue, 18 Feb 2025 09:23:41 +0300
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mail.ru;
- s=mail4; 
- h=Content-Type:Message-ID:Reply-To:Date:MIME-Version:Subject:To:From:From:Subject:Content-Type:Content-Transfer-Encoding:To:Cc;
- bh=4DSHBEr2GYEItoiA0dCt+K2U7mmxb+kNf7U44epUOGo=; 
- t=1739859821;x=1739949821; 
- b=mJBhSDtT2r7jzJRk4kOuWS5IhWTwvsdh6s7G3m23SYPPj+z1FCLnuNxwA+3AD6F6pJcG5YdutHsnPfZROf94Dh16QfHoKYZyluXxth5miM71CHGg11vrMrZlD/G+N1VXsp7/tiRDbI82HKjBRWilqIn/ecqX39/q6ghg6Tue+Whie8hR1dgaT7+wMIZjszm/ghjMEb2HXlxoD/WIR9r+kdOQCwNxhsYT2OhKyBqr013bvYxi8wAQJB3tZCVCO2EVTSW22H0kZfhIKzh87AP3G/H2gvCxgYLquXw7MEWZxaVS5gkc+0fbCZp+vLMqmWk8SbgEog/w3OWNjZSdjohDCg==;
-Received: by f750.i.mail.ru with local (envelope-from <usoltsev05@mail.ru>)
- id 1tkH0o-0001Hm-NL
- for samba-technical@lists.samba.org; Tue, 18 Feb 2025 09:23:19 +0300
-Received: by e.mail.ru with HTTP;
-	Tue, 18 Feb 2025 09:23:18 +0300
-To: =?UTF-8?B?c2FtYmEtdGVjaG5pY2Fs?= <samba-technical@lists.samba.org>
-Subject: =?UTF-8?B?Z2V0IHVwbiBmcm9tIHdpbmJpbmRk?=
+ (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1tkaaj-00Cmph-CS
+ for samba-technical@lists.samba.org; Wed, 19 Feb 2025 03:17:44 +0000
+Received: by mail-lf1-x12d.google.com with SMTP id
+ 2adb3069b0e04-543cc81ddebso6494421e87.1
+ for <samba-technical@lists.samba.org>; Tue, 18 Feb 2025 19:17:28 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1739935047; x=1740539847; darn=lists.samba.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=jc4SK/ypNCa99TVOhf7iBOOIGMc5Da5lSQe8phr48Xs=;
+ b=XiE5GJ6UKLoHErzP7tpt2tQPsGa6VhMLwY1CArj1q0D+zwkToY9cnMyBE9kF0SEvYc
+ hR9TxMkEgwzTuoANH35DKkJYyJpDzdPGeSD3y8KSWu1sRB2/Pt8P4ee+R50NXr+FV7qh
+ E83TX4QBGgI7H6IAhJUn6zAVrUgDZYdso0Ll4aMSCAM9fHxtIgXDuQ5Z/XJMkKdEETyb
+ dbiK4xCgToTsLZH9iMiiqFUiaLjKqobi+r+KEMgticPmbnaoC/j+YwcSwMtaSvhpN53v
+ ztXtGwzw5M5dSiHaEmHQyOJvCBy4zTrsN/mI/jKlHQYPbP52ndfvLzz2WRdC9+hvZVPQ
+ gWlw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1739935047; x=1740539847;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=jc4SK/ypNCa99TVOhf7iBOOIGMc5Da5lSQe8phr48Xs=;
+ b=K+f4uFlgbxkyegF7NynzA6/QlCtX1WF1hFgTh05H5Vl7ZGcN0T5Ih37U4Q+7b5wYmV
+ lW/DfeF0Jptog+nDIRV4HHmMR/XDEVCvvmol6Rv6wjVVnReW8rq7Rc8PjBrQYJaZwznj
+ MZ7L4pCfRAnv2sUfw7s+BC3W7SD1fCDCHwa9mxe74oRKDdWr0/cO7lLb9PAtCB6p7F+Y
+ GGV0XA7kUg/siOczHE99wSZHvuRNuixzIkREfZKRExyrlfqSRMaQYoOdoguVG7ha9qmP
+ i9hyyI2AHfB7aaQoOIFDVIRHflG3FcOblKyeX6VPL7wh3Pwo7TcyHeCZ25NBryxtr0Qk
+ Kopg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWEmJpsrtk3IUjixfGHmYLfZ1rwj5NvfRon46fI0VYiLCBV4lEmNE7Cg1PKXYpx5xIlVSZZX5pbEYyFookFQqQ=@lists.samba.org
+X-Gm-Message-State: AOJu0Yxic9Y+6BjbihsjEldwKW0sGRh+qiKxgWqqIjOxA8gNTzZzszcw
+ ipnS8CFfgqwQx7CxIGtns9aOEw1/aKtfOBuny2LVBM6y03bCKuRJALw+dVLLL9Uu9sK8QUjqEU0
+ rP34m8XVrwplsdWz8inddhmYSq8s=
+X-Gm-Gg: ASbGncuBOUZYuALvJe60ovnImTeboJFUZAhiB0fZJegVlf9mu6mqKHkwk0EEKKvX6KU
+ vfVJwKHGem60ODZpC4RLxo5hhSqSB4AzkyKowp6fc+gnm9TcrYwKV+DdPPm8ENf98XTBMeIP4
+X-Google-Smtp-Source: AGHT+IFxJKGoclyOJjJQxX5v3qAXVEZ4JcKs4mqMuZtRGmhXeYroTfnfqhFdOjjnfblR/oqQiOeSRw5To3nWTm10HdU=
+X-Received: by 2002:a05:6512:3990:b0:545:1d04:5dfc with SMTP id
+ 2adb3069b0e04-5452fe90435mr4628863e87.38.1739935047105; Tue, 18 Feb 2025
+ 19:17:27 -0800 (PST)
 MIME-Version: 1.0
-X-Mailer: Mail.Ru Mailer 1.0
-X-SenderField-Remind: 0
-Date: Tue, 18 Feb 2025 09:23:18 +0300
-X-Priority: 3 (Normal)
-Message-ID: <1739859798.356583592@f141.i.mail.ru>
-Content-Type: multipart/mixed;
- boundary="----46fDb5F3E1b654e7718e9459a600EaC1-ktf0y56dMzyFvOxf-1739859798"
-X-Mailru-Src: fe
-X-4EC0790: 10
-X-7564579A: 646B95376F6C166E
-X-77F55803: 119C1F4DF6A9251C1D520C334EBBA19AEEBF5182FC33A84A1F8354A99588004B8FD872164937FA4C94B1725AA04DF07D4ED9490C7F8146B2C59B740CABA5EE580B71A31F8CC4626F
-X-7FA49CB5: 70AAF3C13DB70168C09775C1D3CA48CFD62C683386200383B2086D80B0504778CF19DD082D7633A0587C8798DFFB2F5764CD17681C2FEB7A176DF2183F8FC7C07F50E896A5E8A5CCC4224003CC83647688BEEADF207C7462BFD28B28ED4578739E625A9149C048EE26055571C92BF10F5644E22E05AA81AEB287FD4696A6DC2FA8DF7F3B2552694A4E2F5AFA99E116B42401471946AA11AF7680F9384605B9035644E22E05AA81AE52120BFB3F63BC185F65E78799B30205C33C3ADAEA971F8E611E41BBFE2FEB2BBC05D223D4F3F53334834E21440DC660F9CA8FDCCC4496078EEF46B7454FC60B9742502CCDD46D0D4B3849D6E5CCBAFD117882F4460429724CE54428C33FAD305F5C1EE8F4F765FCECADA55FE5B58BB7A471835C12D1D9774AD6D5ED66289B52BA9C0B312567BB23117882F44604297287769387670735201E561CDFBCA1751FF6B57BC7E6449061A352F6E88A58FB86F5D81C698A659EA7E827F84554CEF5019E625A9149C048EE9ECD01F8117BC8BEE2021AF6380DFAD18AA50765F790063735872C767BF85DA227C277FBC8AE2E8BDC0F6C5B2EEF3D0C75ECD9A6C639B01B4E70A05D1297E1BBCB5012B2E24CD356
-X-C1DE0DAB: 0D63561A33F958A51DB0FB8300D5BA8462CF1B7CA9C09380E78ED8BAF04FC359F87CCE6106E1FC07E67D4AC08A07B9B0C11B1E8D35EB7500CB5012B2E24CD356
-X-C8649E89: 1C3962B70DF3F0AD75DCE07D45A7499577DD89D51EBB7742424CF958EAFF5D571004E42C50DC4CA955A7F0CF078B5EC49A30900B95165D34B8CF715B894FC7113FBFB24E1D398F31F7ADF42647F5ECE27F8B7A88901FCD021D2B839567ABDC001D7E09C32AA3244C4B067DECCFF5C41F020856C5A8E776F924AF4FAF06DA24FDBC4AF6B5DE6957CB5DA084F8E80FEBD3D00FC40FD8DA07260578AE0F1F9FF8BE37E69C174A41D00C
-X-D57D3AED: 3ZO7eAau8CL7WIMRKs4sN3D3tLDjz0dLbV79QFUyzQ2Ujvy7cMT6pYYqY16iZVKkSc3dCLJ7zSJH7+u4VD18S7Vl4ZUrpaVfd2+vE6kuoey4m4VkSEu53w8ahmwBjZKM/YPHZyZHvz5uv+WouB9+Od3uM/CLT152eL7j4ZacoUSF0MSa0v5VBmEtSutdC50BIKdL3VIRlkt/X9Gr7QWYXucPUinHATAeHXorM+S1NQM9ei17MB5JTVYAWTswAGI0fjIzKC3Z3tBi8N0Vl0Zq4g==
-X-Mailru-Sender: 9422C5FC7C00AE698ADF76B97E6CFFAD714E17C901BEBE8C3A6160822CEFF0D916C60360909AFD69F7026DE1D14B993A0F8176837CC66F10E37ABE797E9D67565956C2355C927B12CC69B2B56F8879792CE91937965AD82C3DDE9B364B0DF289AE208404248635DF
-X-Mras: Ok
-X-Spam: undefined
-X-7564579A: 646B95376F6C166E
-X-77F55803: 6242723A09DB00B4BA09097AEF4FF40FD82BE83A5A2F87B7300789548EA619A7049FFFDB7839CE9E3D3BB30DB6F99D60D60A2F7904E09323FD872880477D4E107040A21CF876B1FA
-X-7FA49CB5: 0D63561A33F958A5D0ABF66985C832711C5CC5A2A63069D542DF28AA08BA7243CACD7DF95DA8FC8BD5E8D9A59859A8B6A096F61ED9298604
-X-D57D3AED: 3ZO7eAau8CL7WIMRKs4sN3D3tLDjz0dLbV79QFUyzQ2Ujvy7cMT6pYYqY16iZVKkSc3dCLJ7zSJH7+u4VD18S7Vl4ZUrpaVfd2+vE6kuoey4m4VkSEu53w8ahmwBjZKM/YPHZyZHvz5uv+WouB9+OaV3B3Rpvb3IyiXXMwFJo09san95P+a5Oa5uShcC7g4OtI3uJQvhm049DPCm86TpoLAe8GD+p53pfMHxB0ImQHosz9QwHIciS0D975Qptthed3ocJI4jMlk=
-X-Mailru-MI: C000000000601000
-X-Mras: Ok
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
+References: <20250218143005.1318886-1-wangzhaolong1@huawei.com>
+In-Reply-To: <20250218143005.1318886-1-wangzhaolong1@huawei.com>
+Date: Tue, 18 Feb 2025 21:17:15 -0600
+X-Gm-Features: AWEUYZmHf1Ug11Hrb9rbPCwDczurfuOKWwK8qHukZXVFHorFtEfwStWz1SD7sbE
+Message-ID: <CAH2r5muqxgPy=n4Aks_k-2goEZmmD10Dx3u3jgOk-LZ=-CHU9Q@mail.gmail.com>
+Subject: Re: [PATCH] smb: client: Fix netns refcount imbalance causing leaks
+ and use-after-free
+To: Wang Zhaolong <wangzhaolong1@huawei.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -82,221 +82,195 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: =?utf-8?b?0KPRgdC+0LvRjNGG0LXQsiDQn9GR0YLRgCB2aWEgc2FtYmEtdGVjaG5pY2Fs?=
- <samba-technical@lists.samba.org>
-Reply-To: =?UTF-8?B?0KPRgdC+0LvRjNGG0LXQsiDQn9GR0YLRgA==?= <usoltsev05@mail.ru>
+From: Steve French via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Steve French <smfrench@gmail.com>
+Cc: tom@talpey.com, linux-cifs@vger.kernel.org, ematsumiya@suse.de,
+ yi.zhang@huawei.com, samba-technical@lists.samba.org,
+ linux-kernel@vger.kernel.org, sfrench@samba.org, kuniyu@amazon.com
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
+tentatively merged into cifs-2.6.git for-next pending more review and testi=
+ng
 
-------46fDb5F3E1b654e7718e9459a600EaC1-ktf0y56dMzyFvOxf-1739859798
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: base64
+On Tue, Feb 18, 2025 at 8:34=E2=80=AFAM Wang Zhaolong <wangzhaolong1@huawei=
+.com> wrote:
+>
+> Commit ef7134c7fc48 ("smb: client: Fix use-after-free of network
+> namespace.") attempted to fix a netns use-after-free issue by manually
+> adjusting reference counts via sk->sk_net_refcnt and sock_inuse_add().
+>
+> However, a later commit e9f2517a3e18 ("smb: client: fix TCP timers deadlo=
+ck
+> after rmmod") pointed out that the approach of manually setting
+> sk->sk_net_refcnt in the first commit was technically incorrect, as
+> sk->sk_net_refcnt should only be set for user sockets. It led to issues
+> like TCP timers not being cleared properly on close. The second commit
+> moved to a model of just holding an extra netns reference for
+> server->ssocket using get_net(), and dropping it when the server is torn
+> down.
+>
+> But there remain some gaps in the get_net()/put_net() balancing added by
+> these commits. The incomplete reference handling in these fixes results
+> in two issues:
+>
+> 1. Netns refcount leaks[1]
+>
+> The problem process is as follows:
+>
+> ```
+> mount.cifs                        cifsd
+>
+> cifs_do_mount
+>   cifs_mount
+>     cifs_mount_get_session
+>       cifs_get_tcp_session
+>         get_net()  /* First get net. */
+>         ip_connect
+>           generic_ip_connect /* Try port 445 */
+>             get_net()
+>             ->connect() /* Failed */
+>             put_net()
+>           generic_ip_connect /* Try port 139 */
+>             get_net() /* Missing matching put_net() for this get_net().*/
+>       cifs_get_smb_ses
+>         cifs_negotiate_protocol
+>           smb2_negotiate
+>             SMB2_negotiate
+>               cifs_send_recv
+>                 wait_for_response
+>                                  cifs_demultiplex_thread
+>                                    cifs_read_from_socket
+>                                      cifs_readv_from_socket
+>                                        cifs_reconnect
+>                                          cifs_abort_connection
+>                                            sock_release();
+>                                            server->ssocket =3D NULL;
+>                                            /* Missing put_net() here. */
+>                                            generic_ip_connect
+>                                              get_net()
+>                                              ->connect() /* Failed */
+>                                              put_net()
+>                                              sock_release();
+>                                              server->ssocket =3D NULL;
+>           free_rsp_buf
+>     ...
+>                                    clean_demultiplex_info
+>                                      /* It's only called once here. */
+>                                      put_net()
+> ```
+>
+> When cifs_reconnect() is triggered, the server->ssocket is released
+> without a corresponding put_net() for the reference acquired in
+> generic_ip_connect() before. it ends up calling generic_ip_connect()
+> again to retry get_net(). After that, server->ssocket is set to NULL
+> in the error path of generic_ip_connect(), and the net count cannot be
+> released in the final clean_demultiplex_info() function.
+>
+> 2. Potential use-after-free
+>
+> The current refcounting scheme can lead to a potential use-after-free iss=
+ue
+> in the following scenario:
+>
+> ```
+>  cifs_do_mount
+>    cifs_mount
+>      cifs_mount_get_session
+>        cifs_get_tcp_session
+>          get_net()  /* First get net */
+>            ip_connect
+>              generic_ip_connect
+>                get_net()
+>                bind_socket
+>                  kernel_bind /* failed */
+>                put_net()
+>          /* after out_err_crypto_release label */
+>          put_net()
+>          /* after out_err label */
+>          put_net()
+> ```
+>
+> In the exception handling process where binding the socket fails, the
+> get_net() and put_net() calls are unbalanced, which may cause the
+> server->net reference count to drop to zero and be prematurely released.
+>
+> To address both issues, this patch ties the netns reference counting to
+> the server->ssocket and server lifecycles. The extra reference is now
+> acquired when the server or socket is created, and released when the
+> socket is destroyed or the server is torn down.
+>
+> [1]: https://bugzilla.kernel.org/show_bug.cgi?id=3D219792
+>
+> Fixes: ef7134c7fc48 ("smb: client: Fix use-after-free of network namespac=
+e.")
+> Fixes: e9f2517a3e18 ("smb: client: fix TCP timers deadlock after rmmod")
+> Signed-off-by: Wang Zhaolong <wangzhaolong1@huawei.com>
+> ---
+>  fs/smb/client/connect.c | 16 ++++++++--------
+>  1 file changed, 8 insertions(+), 8 deletions(-)
+>
+> diff --git a/fs/smb/client/connect.c b/fs/smb/client/connect.c
+> index f917de020dd5..0d454149f3b4 100644
+> --- a/fs/smb/client/connect.c
+> +++ b/fs/smb/client/connect.c
+> @@ -300,6 +300,7 @@ cifs_abort_connection(struct TCP_Server_Info *server)
+>                          server->ssocket->flags);
+>                 sock_release(server->ssocket);
+>                 server->ssocket =3D NULL;
+> +               put_net(cifs_net_ns(server));
+>         }
+>         server->sequence_number =3D 0;
+>         server->session_estab =3D false;
+> @@ -3115,8 +3116,12 @@ generic_ip_connect(struct TCP_Server_Info *server)
+>                 /*
+>                  * Grab netns reference for the socket.
+>                  *
+> -                * It'll be released here, on error, or in clean_demultip=
+lex_info() upon server
+> -                * teardown.
+> +                * This reference will be released in several situations:
+> +                * - In the failure path before the cifsd thread is start=
+ed.
+> +                * - In the all place where server->socket is released, i=
+t is
+> +                *   also set to NULL.
+> +                * - Ultimately in clean_demultiplex_info(), during the f=
+inal
+> +                *   teardown.
+>                  */
+>                 get_net(net);
+>
+> @@ -3132,10 +3137,8 @@ generic_ip_connect(struct TCP_Server_Info *server)
+>         }
+>
+>         rc =3D bind_socket(server);
+> -       if (rc < 0) {
+> -               put_net(cifs_net_ns(server));
+> +       if (rc < 0)
+>                 return rc;
+> -       }
+>
+>         /*
+>          * Eventually check for other socket options to change from
+> @@ -3181,9 +3184,6 @@ generic_ip_connect(struct TCP_Server_Info *server)
+>         if (sport =3D=3D htons(RFC1001_PORT))
+>                 rc =3D ip_rfc1001_connect(server);
+>
+> -       if (rc < 0)
+> -               put_net(cifs_net_ns(server));
+> -
+>         return rc;
+>  }
+>
+> --
+> 2.34.3
+>
+>
 
-CkhpIQpJIHdhbnQgdG8gcmVjZWl2ZSB1cG4gaW4gd2luYmluZGQsIGJ1dCBJIGRvbid0IGtub3cg
-aG93IHRvIGRvIGl0IGNvcnJlY3RseeKApgoqICBUaGUgZmlyc3Qgb3B0aW9uIGlzIHRvIG1ha2Ug
-ZWRpdHMgdG8gdGhlIFNBTVIgcHJvdG9jb2wuIEl0IHdvcmtzLCBidXQgaXQgYnJlYWtzIHRoZSBw
-cm90b2NvbCBpdHNlbGYuKHNhbWJhX2ZpeF8xX3NhbXIucGF0Y2gpCiogIHRoZSBzZWNvbmQgb3B0
-aW9uIGlzIHRvIHJlY2VpdmUgdXBuIHZpYSBhIGRpcmVjdCBsZGFwIHJlcXVlc3QuIEl0IG9ubHkg
-d29ya3Mgb24gc2FtYmEgREMswqB3aGVyZSB0aGVyZSBpcyBhIHNhbS5sZGIgZGF0YWJhc2UuIFdp
-bmJpbmQgZG9lcyBub3Qgd29yayBvbiBjbGllbnRzwqAoc2FtYmFfZml4XzJfb25seV93aW5iaW5k
-LnBhdGNoKQpJIG1hZGUgcGF0Y2hlcyBmb3IgdGhlIGNvbW1pdMKgYTgxNGY1ZDkwYTNmYjg1YTk0
-Yzk1MTZkYmEyMjQwMzdlOGZkNzZmMShTdGVmYW4gTWV0em1hY2hlcsKgRmViIDE3LCAyMDI1KSBv
-biBtYXN0ZXIgYnJhbmNoLgrCoApNeSBjb25maWfCoCAvZXRjL25zc3dpdGNoLmNvbmY6CnBhc3N3
-ZDogwqAgwqAgZmlsZXMgd2luYmluZCBzeXN0ZW1kCnNoYWRvdzogwqAgwqAgdGNiIGZpbGVzIHdp
-bmJpbmQKZ3JvdXA6IMKgIMKgIMKgZmlsZXMgd2luYmluZCBzeXN0ZW1kIHJvbGUKwqAKVGVzdDoK
-aWQgwqAgdXNlcjFAdGVzdC5hYmMKwqAKVXNvbHRzZXYgUGV0ci4=
 
-------46fDb5F3E1b654e7718e9459a600EaC1-ktf0y56dMzyFvOxf-1739859798
-Content-Type: text/x-diff; name="=?UTF-8?B?c2FtYmFfZml4XzJfb25seV93aW5iaW5kLnBhdGNo?="
-Content-Disposition: attachment; filename="=?UTF-8?B?c2FtYmFfZml4XzJfb25seV93aW5iaW5kLnBhdGNo?="
-Content-Transfer-Encoding: base64
+--=20
+Thanks,
 
-ZGlmZiAtcnVOIC4vc2FtYmEvZG9jcy14bWwvc21iZG90Y29uZi93aW5iaW5kL3dpbmJpbmR1c2V1
-cG4ueG1sIC4vc2FtYmFfZml4X29ubHlfd2luYmluZC9kb2NzLXhtbC9zbWJkb3Rjb25mL3dpbmJp
-bmQvd2luYmluZHVzZXVwbi54bWwKLS0tIC4vc2FtYmEvZG9jcy14bWwvc21iZG90Y29uZi93aW5i
-aW5kL3dpbmJpbmR1c2V1cG4ueG1sCTE5NzAtMDEtMDEgMDg6MDA6MDAuMDAwMDAwMDAwICswODAw
-CisrKyAuL3NhbWJhX2ZpeF9vbmx5X3dpbmJpbmQvZG9jcy14bWwvc21iZG90Y29uZi93aW5iaW5k
-L3dpbmJpbmR1c2V1cG4ueG1sCTIwMjUtMDItMTggMTM6MzY6NDcuOTEwNjM3ODYyICswODAwCkBA
-IC0wLDAgKzEsMTIgQEAKKzxzYW1iYTpwYXJhbWV0ZXIgbmFtZT0id2luYmluZCB1c2UgdXBuIgor
-ICAgICAgICAgICAgICAgICBjb250ZXh0PSJHIgorICAgICAgICAgICAgICAgICB0eXBlPSJib29s
-ZWFuIgorICAgICAgICAgICAgICAgICB4bWxuczpzYW1iYT0iaHR0cDovL3d3dy5zYW1iYS5vcmcv
-c2FtYmEvRFREL3NhbWJhLWRvYyI+Cis8ZGVzY3JpcHRpb24+CisJPHBhcmE+VGhlCisJIDxjaXRl
-cmVmZW50cnk+PHJlZmVudHJ5dGl0bGU+d2luYmluZGQ8L3JlZmVudHJ5dGl0bGU+IAorCQkgPG1h
-bnZvbG51bT44PC9tYW52b2xudW0+PC9jaXRlcmVmZW50cnk+IHBhcmFtZXRlciwgd2hpY2ggYWxs
-b3dzIFVQTiBhdXRoZW50aWNhdGlvbi4KKwkgPC9wYXJhPgorPC9kZXNjcmlwdGlvbj4KKzx2YWx1
-ZSB0eXBlPSJkZWZhdWx0Ij5ubzwvdmFsdWU+Cis8L3NhbWJhOnBhcmFtZXRlcj4KQmluYXJ5IGZp
-bGVzIC4vc2FtYmEvLmdpdC9pbmRleCBhbmQgLi9zYW1iYV9maXhfb25seV93aW5iaW5kLy5naXQv
-aW5kZXggZGlmZmVyCmRpZmYgLXJ1TiAuL3NhbWJhL3NvdXJjZTMvd2luYmluZGQvd2JfZ2V0cHdz
-aWQuYyAuL3NhbWJhX2ZpeF9vbmx5X3dpbmJpbmQvc291cmNlMy93aW5iaW5kZC93Yl9nZXRwd3Np
-ZC5jCi0tLSAuL3NhbWJhL3NvdXJjZTMvd2luYmluZGQvd2JfZ2V0cHdzaWQuYwkyMDI1LTAyLTE4
-IDEzOjIzOjUxLjY1MjY3NjAyNyArMDgwMAorKysgLi9zYW1iYV9maXhfb25seV93aW5iaW5kL3Nv
-dXJjZTMvd2luYmluZGQvd2JfZ2V0cHdzaWQuYwkyMDI1LTAyLTE4IDEzOjQwOjA2LjAwNjkwNDA4
-NyArMDgwMApAQCAtMTE4LDYgKzExOCwxMiBAQAogCQlyZXR1cm47CiAJfQogCisJaWYgKGxwX3dp
-bmJpbmRfdXNlX3VwbigpKSB7CisJICAgICAgICBjb25zdCBjaGFyKiB1cG5fYnlfc2lkID0gd2lu
-YmluZF9sZGJfc2VhcmNoKHN0YXRlLCAmc3RhdGUtPnNpZCwgTlVMTCk7CisgICAgICAgICAgICAg
-ICAgaWYgKHVwbl9ieV9zaWQgIT0gTlVMTCkKKyAgICAgICAgICAgICAgICAgICAgICAgIG91dHB1
-dF91c2VybmFtZSA9IHVwbl9ieV9zaWQ7CisgICAgICAgIH0KKwogCXN0cmxjcHkocHctPnB3X25h
-bWUsIG91dHB1dF91c2VybmFtZSwgc2l6ZW9mKHB3LT5wd19uYW1lKSk7CiAKIAlzdHJsY3B5KHB3
-LT5wd19nZWNvcywgaW5mby0+ZnVsbF9uYW1lID8gaW5mby0+ZnVsbF9uYW1lIDogIiIsCmRpZmYg
-LXJ1TiAuL3NhbWJhL3NvdXJjZTMvd2luYmluZGQvd2luYmluZGRfcHJvdG8uaCAuL3NhbWJhX2Zp
-eF9vbmx5X3dpbmJpbmQvc291cmNlMy93aW5iaW5kZC93aW5iaW5kZF9wcm90by5oCi0tLSAuL3Nh
-bWJhL3NvdXJjZTMvd2luYmluZGQvd2luYmluZGRfcHJvdG8uaAkyMDI1LTAyLTE4IDEzOjIzOjUx
-LjY2MjY3NjA5MSArMDgwMAorKysgLi9zYW1iYV9maXhfb25seV93aW5iaW5kL3NvdXJjZTMvd2lu
-YmluZGQvd2luYmluZGRfcHJvdG8uaAkyMDI1LTAyLTE4IDEzOjQxOjAwLjM5ODI1MTc1NiArMDgw
-MApAQCAtMTA0Myw1ICsxMDQzLDYgQEAKIGJvb2wgcmVzZXRfY21fY29ubmVjdGlvbl9vbl9lcnJv
-cihzdHJ1Y3Qgd2luYmluZGRfZG9tYWluICpkb21haW4sCiAJCQkJICBzdHJ1Y3QgZGNlcnBjX2Jp
-bmRpbmdfaGFuZGxlICpiLAogCQkJCSAgTlRTVEFUVVMgc3RhdHVzKTsKK2NvbnN0IGNoYXIqIHdp
-bmJpbmRfbGRiX3NlYXJjaChUQUxMT0NfQ1RYICptZW1fY3R4LCBzdHJ1Y3QgZG9tX3NpZCAqc2lk
-LCBjb25zdCBjaGFyKiB1cG4pOwogCiAjZW5kaWYgLyogIF9XSU5CSU5ERF9QUk9UT19IXyAgKi8K
-ZGlmZiAtcnVOIC4vc2FtYmEvc291cmNlMy93aW5iaW5kZC93aW5iaW5kZF91dGlsLmMgLi9zYW1i
-YV9maXhfb25seV93aW5iaW5kL3NvdXJjZTMvd2luYmluZGQvd2luYmluZGRfdXRpbC5jCi0tLSAu
-L3NhbWJhL3NvdXJjZTMvd2luYmluZGQvd2luYmluZGRfdXRpbC5jCTIwMjUtMDItMTggMTM6MjM6
-NTEuNjYzNjc2MDk3ICswODAwCisrKyAuL3NhbWJhX2ZpeF9vbmx5X3dpbmJpbmQvc291cmNlMy93
-aW5iaW5kZC93aW5iaW5kZF91dGlsLmMJMjAyNS0wMi0xOCAxMzo1MTo0OS4zNTUzOTk4OTEgKzA4
-MDAKQEAgLTM4LDYgKzM4LDEyIEBACiAjaW5jbHVkZSAibGliL2dsb2JhbF9jb250ZXh0cy5oIgog
-I2luY2x1ZGUgImxpYnJwYy9nZW5fbmRyL25kcl93aW5iaW5kX2MuaCIKIAorI2luY2x1ZGUgInNv
-dXJjZTQvbGliL2V2ZW50cy9ldmVudHMuaCIKKyNpbmNsdWRlICJzb3VyY2U0L2F1dGgvc2Vzc2lv
-bi5oIgorI2luY2x1ZGUgImxpYi9wYXJhbS9wYXJhbS5oIgorI2luY2x1ZGUgInNvdXJjZTQvZHNk
-Yi9zYW1kYi9zYW1kYi5oIgorI2luY2x1ZGUgImxpYi91dGlsL3V0aWxfbGRiLmgiCisKICN1bmRl
-ZiBEQkdDX0NMQVNTCiAjZGVmaW5lIERCR0NfQ0xBU1MgREJHQ19XSU5CSU5ECiAKQEAgLTE5MTcs
-MTUgKzE5MjMsMjUgQEAKIAkJfQogCQlwID0gc3RyY2hyKGRvbXVzZXIsICdAJyk7CiAJCWlmIChw
-ICE9IE5VTEwpIHsKKyAgICAgICAgICAgICAgICAgICAgICAgIGlmIChscF93aW5iaW5kX3VzZV91
-cG4oKSkgeworICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBjb25zdCBjaGFyKiBuYW1l
-X2J5X3VwbiA9IHdpbmJpbmRfbGRiX3NlYXJjaCh0YWxsb2NfdG9zKCksIE5VTEwsIGRvbXVzZXIp
-OworICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBpZiAobmFtZV9ieV91cG4gIT0gTlVM
-TCl7CisJCQkJCXVzZXIgPSB0YWxsb2Nfc3RyZHVwKGN0eCwgbmFtZV9ieV91cG4pOworCQkJCQlk
-b21haW4gPSB0YWxsb2Nfc3RyZHVwKGN0eCwgbHBfcmVhbG0oKSk7CisgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgIH0KKyAgICAgICAgICAgICAgICAgICAgICAgIH0KKwogCQkJLyogdXBu
-ICovCiAJCQluYW1lc3BhY2UgPSB0YWxsb2Nfc3RyZHVwKGN0eCwgcCArIDEpOwogCQkJaWYgKG5h
-bWVzcGFjZSA9PSBOVUxMKSB7CiAJCQkJZ290byBmYWlsOwogCQkJfQorCQkJaWYgKGRvbWFpbiA9
-PSBOVUxMKSB7CiAJCQlkb21haW4gPSB0YWxsb2Nfc3RyZHVwKGN0eCwgIiIpOwogCQkJaWYgKGRv
-bWFpbiA9PSBOVUxMKSB7CiAJCQkJZ290byBmYWlsOwogCQkJfQorCQkJfQogCiAJCX0gZWxzZSBp
-ZiAoYXNzdW1lX2RvbWFpbihscF93b3JrZ3JvdXAoKSkpIHsKIAkJCWRvbWFpbiA9IHRhbGxvY19z
-dHJkdXAoY3R4LCBscF93b3JrZ3JvdXAoKSk7CkBAIC0yNTc1LDMgKzI1OTEsNjYgQEAKIAlUQUxM
-T0NfRlJFRSh4aWRzKTsKIAlyZXR1cm4gZmFsc2U7CiB9CisKK2NvbnN0IGNoYXIqIHdpbmJpbmRf
-bGRiX3NlYXJjaChUQUxMT0NfQ1RYICptZW1fY3R4LCBzdHJ1Y3QgZG9tX3NpZCAqc2lkLCBjb25z
-dCBjaGFyKiB1cG4peworCisgICAgICAgIGNvbnN0IGNoYXIqIHJldF92YWwgPSBOVUxMOworIAor
-ICAgICAgICBzdHJ1Y3QgdGV2ZW50X2NvbnRleHQgKnNhbV9ldiA9IE5VTEw7CisgICAgICAgIHNh
-bV9ldiA9IHM0X2V2ZW50X2NvbnRleHRfaW5pdChtZW1fY3R4KTsKKworICAgICAgICAgaWYgKHNh
-bV9ldiA9PSBOVUxMKSB7CisgICAgICAgICAgICAgICAgIERFQlVHKDAsICgiczRfZXZlbnRfY29u
-dGV4dF9pbml0IGZhaWxlZFxuIikpOworICAgICAgICAgICAgICAgIGdvdG8gZW5kOworICAgICAg
-ICB9CisKKyAgICAgICAgc3RydWN0IGxvYWRwYXJtX2NvbnRleHQgKiBscF9jdHggPSBOVUxMOwor
-ICAgICAgICBscF9jdHggPSBsb2FkcGFybV9pbml0X3MzKG1lbV9jdHgsIGxvYWRwYXJtX3MzX2hl
-bHBlcnMoKSk7CisgICAgICAgIGlmIChscF9jdHggPT0gTlVMTCkgeworICAgICAgICAgICAgICAg
-IERFQlVHKDAsICgibG9hZHBhcm1faW5pdF9zMyBmYWlsZWRcbiIpKTsKKyAgICAgICAgICAgICAg
-IGdvdG8gZW5kOworICAgICAgICB9CisKKyAgICAgICAgc3RydWN0IGxkYl9jb250ZXh0ICpsZGIg
-PSBOVUxMOworICAgICAgICBsZGIgPSBzYW1kYl9jb25uZWN0KG1lbV9jdHgsCisgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgc2FtX2V2LAorICAgICAgICAgICAgICAgICAgICAgICAgICAgIGxw
-X2N0eCwKKyAgICAgICAgICAgICAgICAgICAgICAgICAgICBzeXN0ZW1fc2Vzc2lvbihscF9jdHgp
-LAorICAgICAgICAgICAgICAgICAgICAgICAgICAgIE5VTEwsCisgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgMCk7CisKKyAgICAgICAgaWYgKGxkYiA9PSBOVUxMKSB7CisgICAgICAgICAgICAg
-ICAgREVCVUcoMCwgKCJzYW1kYl9jb25uZWN0IGZhaWxlZFxuIikpOworICAgICAgICAgICAgICAg
-Z290byBlbmQ7CisgICAgICAgIH0KKworICAgICAgICBjb25zdCBjaGFyICphdHRyc1tdID0geyAi
-c0FNQWNjb3VudE5hbWUiLCAidXNlclByaW5jaXBhbE5hbWUiLCBOVUxMIH07CisgICAgICAgc3Ry
-dWN0IGxkYl9tZXNzYWdlICoqcmVzID0gTlVMTDsKKyAgICAgICBpbnQgcmV0OworICAgICAgICBj
-b25zdCBjaGFyKiBuYW1lID0gTlVMTDsKKworICAgICAgIGlmICh1cG4gIT0gTlVMTCl7CisgICAg
-ICAgICAgICAgICByZXQgPSBnZW5kYl9zZWFyY2gobGRiLCBtZW1fY3R4LCBOVUxMLCAmcmVzLCBh
-dHRycywgInVzZXJQcmluY2lwYWxOYW1lPSVzIiwgdXBuKTsKKyAgICAgICAgICAgICAgIGlmIChy
-ZXQgIT0gMSkKKyAgICAgICAgICAgICAgICAgICAgICAgZ290byBlbmQ7IC8vIG5vdCBhbiBlcnJv
-ciB0byBub3QgbWF0Y2gKKworICAgICAgICAgICAgICAgbmFtZSA9IGxkYl9tc2dfZmluZF9hdHRy
-X2FzX3N0cmluZyhyZXNbMF0sICJzQU1BY2NvdW50TmFtZSIsIE5VTEwpOworICAgICAgIH0gZWxz
-ZSB7CisgICAgICAgICAgICAgICBzdHJ1Y3QgZG9tX3NpZF9idWYgYnVmOworICAgICAgICAgICAg
-ICAgcmV0ID0gZ2VuZGJfc2VhcmNoKGxkYiwgbWVtX2N0eCwgTlVMTCwgJnJlcywgYXR0cnMsICJv
-YmplY3RTaWQ9JXMiLCBkb21fc2lkX3N0cl9idWYoc2lkLCAmYnVmKSk7CisgICAgICAgICAgICAg
-ICBpZiAocmV0ICE9IDEpCisgICAgICAgICAgICAgICAgICAgICAgIGdvdG8gZW5kOyAvLyBub3Qg
-YW4gZXJyb3IgdG8gbm90IG1hdGNoCisKKyAgICAgICAgICAgICAgIG5hbWUgPSBsZGJfbXNnX2Zp
-bmRfYXR0cl9hc19zdHJpbmcocmVzWzBdLCAidXNlclByaW5jaXBhbE5hbWUiLCBOVUxMKTsKKyAg
-ICAgICB9CisKKyAgICAgICAgaWYgKG5hbWUgIT0gTlVMTCl7CisgICAgICAgICAgICAgICByZXRf
-dmFsID0gdGFsbG9jX3N0cmR1cChtZW1fY3R4LCBuYW1lKTsKKyAgICAgICAgfQorCitlbmQ6CisK
-KyAgICAgICByZXR1cm4gcmV0X3ZhbDsKKworfQorCg==
-
-------46fDb5F3E1b654e7718e9459a600EaC1-ktf0y56dMzyFvOxf-1739859798
-Content-Type: text/x-diff; name="=?UTF-8?B?c2FtYmFfZml4XzFfc2Ftci5wYXRjaA==?="
-Content-Disposition: attachment; filename="=?UTF-8?B?c2FtYmFfZml4XzFfc2Ftci5wYXRjaA==?="
-Content-Transfer-Encoding: base64
-
-ZGlmZiAtcnVOIC4vc2FtYmEvZG9jcy14bWwvc21iZG90Y29uZi93aW5iaW5kL3dpbmJpbmR1c2V1
-cG4ueG1sIC4vc2FtYmFfZml4X3NhbXIvZG9jcy14bWwvc21iZG90Y29uZi93aW5iaW5kL3dpbmJp
-bmR1c2V1cG4ueG1sCi0tLSAuL3NhbWJhL2RvY3MteG1sL3NtYmRvdGNvbmYvd2luYmluZC93aW5i
-aW5kdXNldXBuLnhtbAkxOTcwLTAxLTAxIDA4OjAwOjAwLjAwMDAwMDAwMCArMDgwMAorKysgLi9z
-YW1iYV9maXhfc2Ftci9kb2NzLXhtbC9zbWJkb3Rjb25mL3dpbmJpbmQvd2luYmluZHVzZXVwbi54
-bWwJMjAyNS0wMi0xOCAxMzoyNToxOC4yOTQyMjk4NDkgKzA4MDAKQEAgLTAsMCArMSwxNCBAQAor
-PHNhbWJhOnBhcmFtZXRlciBuYW1lPSJ3aW5iaW5kIHVzZSB1cG4iCisgICAgICAgICAgICAgICAg
-IGNvbnRleHQ9IkciCisgICAgICAgICAgICAgICAgIHR5cGU9ImJvb2xlYW4iCisgICAgICAgICAg
-ICAgICAgIHhtbG5zOnNhbWJhPSJodHRwOi8vd3d3LnNhbWJhLm9yZy9zYW1iYS9EVEQvc2FtYmEt
-ZG9jIj4KKzxkZXNjcmlwdGlvbj4KKwk8cGFyYT5UaGUKKwkgPGNpdGVyZWZlbnRyeT48cmVmZW50
-cnl0aXRsZT53aW5iaW5kZDwvcmVmZW50cnl0aXRsZT4gCisJCSA8bWFudm9sbnVtPjg8L21hbnZv
-bG51bT48L2NpdGVyZWZlbnRyeT4gcGFyYW1ldGVyLCB3aGljaCBhbGxvd3MgVVBOIGF1dGhlbnRp
-Y2F0aW9uLgorCSA8L3BhcmE+Cis8L2Rlc2NyaXB0aW9uPgorCis8dmFsdWUgdHlwZT0iZGVmYXVs
-dCI+bm88L3ZhbHVlPgorPHZhbHVlIHR5cGU9ImV4YW1wbGUiPnllczwvdmFsdWU+Cis8L3NhbWJh
-OnBhcmFtZXRlcj4KZGlmZiAtcnVOIC4vc2FtYmEvc291cmNlMy93aW5iaW5kZC93aW5iaW5kZF91
-dGlsLmMgLi9zYW1iYV9maXhfc2Ftci9zb3VyY2UzL3dpbmJpbmRkL3dpbmJpbmRkX3V0aWwuYwot
-LS0gLi9zYW1iYS9zb3VyY2UzL3dpbmJpbmRkL3dpbmJpbmRkX3V0aWwuYwkyMDI1LTAyLTE4IDEz
-OjIzOjUxLjY2MzY3NjA5NyArMDgwMAorKysgLi9zYW1iYV9maXhfc2Ftci9zb3VyY2UzL3dpbmJp
-bmRkL3dpbmJpbmRkX3V0aWwuYwkyMDI1LTAyLTE4IDEzOjM0OjUxLjczMDg5NTI0NyArMDgwMApA
-QCAtMjA0OCwxMCArMjA0OCwxNCBAQAogCWlmIChjYW5fYXNzdW1lICYmIGFzc3VtZV9kb21haW4o
-ZG9tYWluKSkgewogCQluYW1lID0gdG1wX3VzZXI7CiAJfSBlbHNlIHsKKwkJaWYgKGxwX3dpbmJp
-bmRfdXNlX3VwbigpICYmIHN0cmNocih0bXBfdXNlciwgJ0AnKSAhPSBOVUxMKSB7CisgICAgICAg
-ICAgICAgICAgbmFtZSA9IHRhbGxvY19hc3ByaW50ZihtZW1fY3R4LCAiJXMiLCB0bXBfdXNlcik7
-CisgICAgICAgICAgICAgICAgfSBlbHNlIHsKIAkJbmFtZSA9IHRhbGxvY19hc3ByaW50ZihtZW1f
-Y3R4LCAiJXMlYyVzIiwKIAkJCQkgICAgICAgZG9tYWluLAogCQkJCSAgICAgICAqbHBfd2luYmlu
-ZF9zZXBhcmF0b3IoKSwKIAkJCQkgICAgICAgdG1wX3VzZXIpOworCQl9CiAJCVRBTExPQ19GUkVF
-KHRtcF91c2VyKTsKIAl9CiAKZGlmZiAtcnVOIC4vc2FtYmEvc291cmNlNC9kc2RiL2NvbW1vbi91
-dGlsX3NhbXIuYyAuL3NhbWJhX2ZpeF9zYW1yL3NvdXJjZTQvZHNkYi9jb21tb24vdXRpbF9zYW1y
-LmMKLS0tIC4vc2FtYmEvc291cmNlNC9kc2RiL2NvbW1vbi91dGlsX3NhbXIuYwkyMDI1LTAyLTE4
-IDEzOjIzOjUxLjY4MjY3NjIxOSArMDgwMAorKysgLi9zYW1iYV9maXhfc2Ftci9zb3VyY2U0L2Rz
-ZGIvY29tbW9uL3V0aWxfc2Ftci5jCTIwMjUtMDItMTggMTM6MzE6NDEuMjE5Njc3NTA5ICswODAw
-CkBAIC0yOCw2ICsyOCw3IEBACiAjaW5jbHVkZSAiLi4vbGliZHMvY29tbW9uL2ZsYWdzLmgiCiAj
-aW5jbHVkZSAibGliY2xpL3NlY3VyaXR5L3NlY3VyaXR5LmgiCiAKKyNpbmNsdWRlICJwYXJhbS9w
-YXJhbS5oIgogI2luY2x1ZGUgImxpYmRzL2NvbW1vbi9mbGFnX21hcHBpbmcuaCIKIAogLyogQWRk
-IGEgdXNlciwgU0FNUiBzdHlsZSwgaW5jbHVkaW5nIHRoZSBjb3JyZWN0IHRyYW5zYWN0aW9uCkBA
-IC01MzUsNyArNTM2LDcgQEAKIAkJCSAgY29uc3QgY2hhciAqKm5hbWVzLAogCQkJICBlbnVtIGxz
-YV9TaWRUeXBlICpsc2FfYXR0cnMpCiB7Ci0JY29uc3QgY2hhciAqYXR0cnNbXSA9IHsgInNBTUFj
-Y291bnRUeXBlIiwgInNBTUFjY291bnROYW1lIiwgTlVMTCB9OworCWNvbnN0IGNoYXIgKmF0dHJz
-W10gPSB7ICJzQU1BY2NvdW50VHlwZSIsICJzQU1BY2NvdW50TmFtZSIsICJ1c2VyUHJpbmNpcGFs
-TmFtZSIsIE5VTEwgfTsKIAl1bnNpZ25lZCBpbnQgaSwgbnVtX21hcHBlZDsKIAogCVRBTExPQ19D
-VFggKnRtcF9jdHggPSB0YWxsb2NfbmV3KG1lbV9jdHgpOwpAQCAtNTY3LDExICs1NjgsMjYgQEAK
-IAkJCXJldHVybiBOVF9TVEFUVVNfSU5URVJOQUxfREJfQ09SUlVQVElPTjsKIAkJfQogCisKKyAg
-ICAgICAgICAgICAgICBzdHJ1Y3QgbG9hZHBhcm1fY29udGV4dCAqbHBfY3R4ID0gTlVMTDsKKyAg
-ICAgICAgICAgICAgICBscF9jdHggPSB0YWxsb2NfZ2V0X3R5cGUobGRiX2dldF9vcGFxdWUobGRi
-LCAibG9hZHBhcm0iKSwKKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBz
-dHJ1Y3QgbG9hZHBhcm1fY29udGV4dCk7CisgICAgICAgICAgICAgICAgaWYgKGxwY2ZnX3dpbmJp
-bmRfdXNlX3VwbihscF9jdHgpKXsKKyAgICAgICAgICAgICAgICAgICAgICAgIG5hbWVzW2ldID0g
-bGRiX21zZ19maW5kX2F0dHJfYXNfc3RyaW5nKG1zZywgInVzZXJQcmluY2lwYWxOYW1lIiwgTlVM
-TCk7CisgICAgICAgICAgICAgICAgICAgICAgICBpZiAobmFtZXNbaV0gPT0gTlVMTCkgeworICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICBuYW1lc1tpXSA9IGxkYl9tc2dfZmluZF9hdHRy
-X2FzX3N0cmluZyhtc2csICJzYW1BY2NvdW50TmFtZSIsIE5VTEwpOworICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICBpZiAobmFtZXNbaV0gPT0gTlVMTCkgeworICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgIERFQlVHKDEwLCAoIm5vIHNhbUFjY291bnROYW1lXG4i
-KSk7CisgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgY29udGludWU7Cisg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIH0KKyAgICAgICAgICAgICAgICAgICAgICAg
-IH0KKyAgICAgICAgICAgICAgICB9IGVsc2UgewogCQluYW1lc1tpXSA9IGxkYl9tc2dfZmluZF9h
-dHRyX2FzX3N0cmluZyhtc2csICJzQU1BY2NvdW50TmFtZSIsIE5VTEwpOwogCQlpZiAobmFtZXNb
-aV0gPT0gTlVMTCkgewogCQkJREVCVUcoMTAsICgibm8gc2FtQWNjb3VudE5hbWVcbiIpKTsKIAkJ
-CWNvbnRpbnVlOwogCQl9CisJICAgICAgICB9CiAJCXRhbGxvY19zdGVhbChuYW1lcywgbmFtZXNb
-aV0pOwogCQlhdHRyID0gbGRiX21zZ19maW5kX2F0dHJfYXNfdWludChtc2csICJzYW1BY2NvdW50
-VHlwZSIsIDApOwogCQlsc2FfYXR0cnNbaV0gPSBkc19hdHlwZV9tYXAoYXR0cik7CmRpZmYgLXJ1
-TiAuL3NhbWJhL3NvdXJjZTQvcnBjX3NlcnZlci9zYW1yL2RjZXNydl9zYW1yLmMgLi9zYW1iYV9m
-aXhfc2Ftci9zb3VyY2U0L3JwY19zZXJ2ZXIvc2Ftci9kY2VzcnZfc2Ftci5jCi0tLSAuL3NhbWJh
-L3NvdXJjZTQvcnBjX3NlcnZlci9zYW1yL2RjZXNydl9zYW1yLmMJMjAyNS0wMi0xOCAxMzoyMzo1
-MS44MDI2NzY5ODYgKzA4MDAKKysrIC4vc2FtYmFfZml4X3NhbXIvc291cmNlNC9ycGNfc2VydmVy
-L3NhbXIvZGNlc3J2X3NhbXIuYwkyMDI1LTAyLTE4IDEzOjI4OjIyLjEzMjQwNDkzNCArMDgwMApA
-QCAtMjE1Miw5ICsyMTUyLDE1IEBACiAJCXItPm91dC5yaWRzLT5pZHNbaV0gPSAwOwogCQlyLT5v
-dXQudHlwZXMtPmlkc1tpXSA9IFNJRF9OQU1FX1VOS05PV047CiAKKyAgICAgICAgICAgICAgICBp
-ZiAobHBjZmdfd2luYmluZF91c2VfdXBuKGRjZV9jYWxsLT5jb25uLT5kY2VfY3R4LT5scF9jdHgp
-ICYmIHN0cmNocihsZGJfYmluYXJ5X2VuY29kZV9zdHJpbmcobWVtX2N0eCwgci0+aW4ubmFtZXNb
-aV0uc3RyaW5nKSwgJ0AnKSAhPSBOVUxMKXsKKyAgICAgICAgICAgICAgICBjb3VudCA9IGdlbmRi
-X3NlYXJjaChkX3N0YXRlLT5zYW1fY3R4LCBtZW1fY3R4LCBkX3N0YXRlLT5kb21haW5fZG4sICZy
-ZXMsIGF0dHJzLAorICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgInVzZXJQcmlu
-Y2lwYWxOYW1lPSVzIiwKKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGxkYl9i
-aW5hcnlfZW5jb2RlX3N0cmluZyhtZW1fY3R4LCByLT5pbi5uYW1lc1tpXS5zdHJpbmcpKTsKKyAg
-ICAgICAgICAgICAgICB9IGVsc2UgewogCQljb3VudCA9IGdlbmRiX3NlYXJjaChkX3N0YXRlLT5z
-YW1fY3R4LCBtZW1fY3R4LCBkX3N0YXRlLT5kb21haW5fZG4sICZyZXMsIGF0dHJzLAogCQkJCSAg
-ICAgInNBTUFjY291bnROYW1lPSVzIiwKIAkJCQkgICAgIGxkYl9iaW5hcnlfZW5jb2RlX3N0cmlu
-ZyhtZW1fY3R4LCByLT5pbi5uYW1lc1tpXS5zdHJpbmcpKTsKKwkgICAgICAgCX0KIAkJaWYgKGNv
-dW50ICE9IDEpIHsKIAkJCXN0YXR1cyA9IFNUQVRVU19TT01FX1VOTUFQUEVEOwogCQkJY29udGlu
-dWU7Cg==
-
-------46fDb5F3E1b654e7718e9459a600EaC1-ktf0y56dMzyFvOxf-1739859798--
+Steve
 
