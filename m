@@ -2,74 +2,73 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7EC97A3B2C6
-	for <lists+samba-technical@lfdr.de>; Wed, 19 Feb 2025 08:45:49 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2EECFA3D0D3
+	for <lists+samba-technical@lfdr.de>; Thu, 20 Feb 2025 06:35:37 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=Ke/r7wlG5SzWLddOKbPGoZqsvXNddJvFKoWINavThs4=; b=xlIAY9QJyk3kA080tZeVF18+iP
-	6EQ4rxLh2pMyWM10HEUrLhWp1bl4NAhEBadhNDm4PlRBDmem0pgpTYv7PuTojDRs2ceCqySMvvyT4
-	00f8nT+/2s4YYlsdPmZy+U/ZJ8UvsrRJO3xhvpNMHsF4iuAbmiciJZEdzTpbRGDwMBjbINH1EMuFW
-	5EzvC1tMnmGlfS3pGwD4gpQRTChgPoDmpvZ2CqqHfsgCQVFZK39gIErT3iK+nACfkILq6epVTZLEr
-	+wDvpu7ZFRqj8SGdpnerWdeTyn+J1Gh5Z607MqOsWXqfLeqhSSXwnlM5LDQivdJ4K4dmYstZ30o6m
-	Dm4mSxFQ==;
-Received: from ip6-localhost ([::1]:61430 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=nxHO5xks8df2tnW/6a5XWxo3H0le3C1ZTdsmsLIpQ+c=; b=CcnjH4KR8bx6i5aDCWTgsTtVIm
+	/OdbA4ClHg+RwHQN1Q66EBxuzUh5ugQjfbThf/axI/tDb+ZD0j+2y+eHbb+AOFvuRtYNzj4rNVgAW
+	pHViZYpmEz4SWPtApQxVZWnakHv55Gxx+DHqXKZeV/TEb08uU5PMR2wi8EfEBCtR9V31OD9FQyX3J
+	Gop9kKNxzLu5C7Xgd7JrcBuwkqt50RDy3UMRsCEkFUNX4vnJfyIL7g18hfHYOBosyswsTS0J4W1E2
+	d2rSJKAv4osiMyNiM5rOXarb27xLMjNzYAdsVo1M/dLmCbBZtthAt7wmccsptAsewUE2KCBKUPV1m
+	gkq53tlA==;
+Received: from ip6-localhost ([::1]:59416 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1tkelr-00Cnta-If; Wed, 19 Feb 2025 07:45:27 +0000
-Received: from fallback25.i.mail.ru ([79.137.243.79]:55012) 
+	id 1tkzCw-00Cwzr-UJ; Thu, 20 Feb 2025 05:34:47 +0000
+Received: from mail-lf1-x12e.google.com ([2a00:1450:4864:20::12e]:60859) 
  by hr1.samba.org with esmtps
- (TLS1.2:ECDHE_SECP256R1__RSA_SHA512__AES_256_GCM:256) (Exim)
- id 1tkell-00CntQ-4t
- for samba-technical@lists.samba.org; Wed, 19 Feb 2025 07:45:24 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mail.ru;
- s=mail4; 
- h=References:In-Reply-To:Content-Type:Reply-To:Message-ID:Date:MIME-Version:Subject:Cc:To:From:From:Subject:Content-Type:Content-Transfer-Encoding:To:Cc;
- bh=QRvTwvTa+las4hIIMsBrnb+9DjxNHUaVo82WBIgdVWA=; 
- t=1739951121;x=1740041121; 
- b=hIUd6xEt9BKKIevEmERP+DI01UqM3eFI4WKPBKxsrr6QH4r7hF8OEPN+hhMusIJH5w+XwwShsNG6N0/1mSHLB6gcztzGjYtOX4dAHpMA/i+rypfUgDPxDwaete85t96jQbd9GxuaNXzqsI1s4d4L+921iD+FmI/X0rM36QksIGp0LHGX8Tc04W0+oID2Gkuq9uGSwJSvXqLWkegMaVZoCUvKBG2Yax5V5kDIrpJ/rSbhdXbf/Ry/6k6XvpUNgPRoce9ANEUY0pFLEAsMWfJzQddsAST3/hNtuBZ15T9u4WjhPfsp32b8mhJqM58phxqfcx9PGYGGzPe3KeQ4IMmUvg==;
-Received: from [10.14.54.147] (port=55314 helo=f334.i.mail.ru)
- by fallback25.i.mail.ru with esmtp (envelope-from <usoltsev05@mail.ru>)
- id 1tkelV-002uMH-FK; Wed, 19 Feb 2025 10:45:05 +0300
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mail.ru;
- s=mail4; 
- h=References:In-Reply-To:Content-Type:Reply-To:Message-ID:Date:MIME-Version:Subject:Cc:To:From:From:Subject:Content-Type:Content-Transfer-Encoding:To:Cc;
- bh=QRvTwvTa+las4hIIMsBrnb+9DjxNHUaVo82WBIgdVWA=; 
- t=1739951105;x=1740041105; 
- b=h1DRLpMnh8LBR5TQtxaIiQjlknK5DsEIilC0Om/ZLfVLu3oRnGqipFCHHQ/orfq+r1V550xtu2j6REA9nEjj6f5IfdCX6bulpNPDGdIjPmqdR076Iraz5PHKPhjj04TizcDU1IDlG9UsGNIH7cX58l8JPyrSWlYuHXkoAR3aSgdSmoEdRD9nfJY6XAg2ZOYD5E5K9h4uFoUFiii8Petvz9FAdS3wBrRicIhtStIto622ASgjINT59YxV9GifOfJGbphi8ZpHoeS9LKkVYrNogtacwiRUwy6dIn05FkZQAxvCJUWwHfYXgw0JsDDB1ulrMCuBHXsbhbO9CVanqMtlrw==;
-Received: by f334.i.mail.ru with local (envelope-from <usoltsev05@mail.ru>)
- id 1tkel9-0003IV-3P; Wed, 19 Feb 2025 10:44:43 +0300
-Received: by e.mail.ru with HTTP;
-	Wed, 19 Feb 2025 10:44:42 +0300
-To: =?UTF-8?B?QW5kcmVhcyBTY2huZWlkZXI=?= <asn@samba.org>
-Subject: =?UTF-8?B?UmU6IGdldCB1cG4gZnJvbSB3aW5iaW5kZA==?=
+ (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1tkzCr-00Cwzk-Ef
+ for samba-technical@lists.samba.org; Thu, 20 Feb 2025 05:34:44 +0000
+Received: by mail-lf1-x12e.google.com with SMTP id
+ 2adb3069b0e04-5452d9d0d47so466145e87.1
+ for <samba-technical@lists.samba.org>; Wed, 19 Feb 2025 21:34:28 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1740029668; x=1740634468; darn=lists.samba.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=nxHO5xks8df2tnW/6a5XWxo3H0le3C1ZTdsmsLIpQ+c=;
+ b=VAHmMUDk7EtCtSrEaGXfzbbNYtU1+xuKFGK8EIWUFHve/vmrdBuCH/h6DaN3jwWYc1
+ h9pZl4ZK0wdvjdKWTOA67y1bWmVsGPbb3I32c810XAAfamc3pKVw5VKzlgYff10PchZC
+ 80bZfwjtewwx8wr/TW2qJHtt97GRnDwk/6dplaNuaZX3HrQK2zKJffvAX7fxsSwcUi0Y
+ k8Gggij9zgLrlWsCe5WUAPnA64qMvDGFj+ls7e32lNQBiQXnyW/42GEe/ZiDQMb3kN3T
+ ec1lLEGLSzudnxVwSmLe+2CrYdtWCGheKOSddUqtCIMWg7zrsIWZNff1+Fvig0iQSkNo
+ GDmw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1740029668; x=1740634468;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=nxHO5xks8df2tnW/6a5XWxo3H0le3C1ZTdsmsLIpQ+c=;
+ b=wX1lV7frFhJwuzJC5JYviqUsVkIOprCM9fMVL8D0PBNup8r3jzLrOPn7WcxexYQwhL
+ 8bMVOed41XYInngZUmS7tvpDOleSm0de9ApFPsTQKqOBABtqWRTBDqqAYNgiV/EDxEeZ
+ cxcmorpuyCy93RoV169TE93znIvDRIIN/oBNbY6grloWqxDCrL9rvlzgISa+NUlYEUot
+ bfWJ8TxwVywFXFxK1NMoTUGSGQrVDjjI/ld+aDMUkWo7XBQ0a20IXNxH5gCGBh3zoPrg
+ LDu1hBUc+s+dDIyqebng5/JBKNz0ShDo5PcI7m8T6R5Wv6NOICwzP97ywfVPumANm4bU
+ 6s8Q==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUzCJIYCn4pID/dOzHqf8gyxvz6MSvn+U4KJYfsHYLF1nNJsrrvhEkxkiU/Oy8N4Om5WFxNOYI0ZEADfj84aQE=@lists.samba.org
+X-Gm-Message-State: AOJu0YyH8K3aJDdeIDvBwHMvh5Rfa/9Sk5ubupHOFGk8Eseprwhtxfhj
+ vj+A5MkiSqcwSOfOXkFDbCkOeKmKa8+fUaGmyIFMEXpSjPaohVz8EmoFCGALbIMrW0mtMeV35Hx
+ /c7QXMAUWIsJW1PHOKe3yKTIbBSk=
+X-Gm-Gg: ASbGncvlaEclNYPm0bm5D52w9xTCHFVbHdLKqkXlP/2/Olzo/Kp6/+mPRHlE74NsF59
+ rSqbF6SZ4jIbNqdtZQPgByOCqr8Ep3p7rVW+HqJVPzcgQ8KVCzpId3L4atVRZ8bM0bsBFnw==
+X-Google-Smtp-Source: AGHT+IGcwv22gm4Mb8LSCO0ab7eCHF5tc0t/ohjExzT5CdWz31S37WwgbeeCiWbF1KwTW1ILNSfNLynudHkKGUbUWr0=
+X-Received: by 2002:a05:6512:2353:b0:544:ead:e1d6 with SMTP id
+ 2adb3069b0e04-5462ef1989fmr2398730e87.38.1740029667698; Wed, 19 Feb 2025
+ 21:34:27 -0800 (PST)
 MIME-Version: 1.0
-X-Mailer: Mail.Ru Mailer 1.0
-X-SenderField-ReMsg: 17399486862055507685
-X-SenderField-Remind: 0
-Date: Wed, 19 Feb 2025 10:44:42 +0300
-X-Priority: 3 (Normal)
-Message-ID: <1739951082.605468428@f462.i.mail.ru>
-In-Reply-To: <6081286.vXUDI8C0e8@magrathea>
-References: <1739859798.356583592@f141.i.mail.ru>
- <6771289.rdbgypaU67@magrathea> <6081286.vXUDI8C0e8@magrathea>
-X-Mailru-Src: fe
-X-7564579A: B8F34718100C35BD
-X-77F55803: 119C1F4DF6A9251C70D51F98913C02AFE3A05ADD02321F9CFE077A878AC241CC8FD872164937FA4C4563868BA430319A4C35C626B1C2FDB25068970DEDC82CCDB4C79C3FA166ABA8
-X-7FA49CB5: 70AAF3C13DB70168C09775C1D3CA48CFCF72DD04787CEB0DB2086D80B0504778CF19DD082D7633A0587C8798DFFB2F5764CD17681C2FEB7A176DF2183F8FC7C07D3D92443D23A869C4224003CC83647688BEEADF207C7462BFD28B28ED4578739E625A9149C048EEB1593CA6EC85F86DAC83A81C8FD4AD23E2E44EFD321A7F275571747095F342E85644E22E05AA81AEE6DE07D961CB05C241BF15D38FB6CB3A29508FF2E8683A3E52120BFB3F63BC185F65E78799B30205C33C3ADAEA971F8E611E41BBFE2FEB2B7BEA665167F7B0B697406BD6AFF7F04DD841D2703AA3E7958EEF46B7454FC60B9742502CCDD46D0DE753FA5741D1AD02F6B57BC7E64490618DEB871D839B73339E8FC8737B5C22496EA1BA7CA28B4A74CC7F00164DA146DAFE8445B8C89999729449624AB7ADAF37F6B57BC7E64490611E7FA7ABCAF51C92176DF2183F8FC7C07734D68A6916D8318941B15DA834481F9449624AB7ADAF372E808ACE2090B5E14AD6D5ED66289B5259CC434672EE63711DD303D21008E298D5E8D9A59859A8B6B372FE9A2E580EFC725E5C173C3A84C3727597FF642BA4D735872C767BF85DA2F004C90652538430E4A6367B16DE6309
-X-C1DE0DAB: 0D63561A33F958A5C8713D1EEF5F8BA195F300D0867C0873BB9A46D81596EA86F87CCE6106E1FC07E67D4AC08A07B9B064A52DF3AE21010FCB5012B2E24CD356
-X-C8649E89: 1C3962B70DF3F0AD75DCE07D45A7499577DD89D51EBB7742DC8270968E61249B1004E42C50DC4CA955A7F0CF078B5EC49A30900B95165D345DB600F8E858000FA887BACE6EEECB0623BD09A4055638748F36BD49F898FA874EB9689B3F045DE31D7E09C32AA3244C4E7C3DC2F961789E25A17CFAADDE02FB51E887DA02A9F7BF3A1A83191EB2B8F05DA084F8E80FEBD3D00FC40FD8DA07260578AE0F1F9FF8BE37E69C174A41D00C
-X-D57D3AED: 3ZO7eAau8CL7WIMRKs4sN3D3tLDjz0dLbV79QFUyzQ2Ujvy7cMT6pYYqY16iZVKkSc3dCLJ7zSJH7+u4VD18S7Vl4ZUrpaVfd2+vE6kuoey4m4VkSEu53w8ahmwBjZKM/YPHZyZHvz5uv+WouB9+Od3uM/CLT152eL7j4ZacoUSF0MSa0v5VBmEtSutdC50BIKdL3VIRlkt/X9Gr7QWYXucPUinHATAeHXorM+S1NQOd7Dfgh+EySSeC00zrPo2FJKQm04qSoIo=
-X-Mailru-Sender: 9422C5FC7C00AE698ADF76B97E6CFFADFDB7DE8C1FDE01BF6B3973D4122FB6382A254BB7568ACD93335C735EA447B7F30F8176837CC66F10E37ABE797E9D67565956C2355C927B12CC69B2B56F8879792CE91937965AD82C3DDE9B364B0DF289AE208404248635DF
-X-Mras: Ok
-X-Spam: undefined
-X-7564579A: 78E4E2B564C1792B
-X-77F55803: 6242723A09DB00B460759F99F06F60E30139815E92C936615B99A5C555A5A3F8049FFFDB7839CE9E3D3BB30DB6F99D609C9763612BC6DDBAB3EB73B105CC348B9B87AD255A7B7BA7
-X-7FA49CB5: 0D63561A33F958A54AC84306D81A884BE44788180FBA366B3F31C2D280BF9ECACACD7DF95DA8FC8BD5E8D9A59859A8B65887671095D9A168
-X-D57D3AED: 3ZO7eAau8CL7WIMRKs4sN3D3tLDjz0dLbV79QFUyzQ2Ujvy7cMT6pYYqY16iZVKkSc3dCLJ7zSJH7+u4VD18S7Vl4ZUrpaVfd2+vE6kuoey4m4VkSEu53w8ahmwBjZKM/YPHZyZHvz5uv+WouB9+OaV3B3Rpvb3IyiXXMwFJo09san95P+a5Oa5uShcC7g4OtI3uJQvhm049DPCm86TpoLAe8GD+p53pfMHxB0ImQHosz9QwHIciS0D975QpttheJAqHBNWCBNQ=
-X-Mailru-MI: C000000000000800
-X-Mras: Ok
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: base64
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
+References: <20250217072038.2311858-1-haoxiang_li2024@163.com>
+In-Reply-To: <20250217072038.2311858-1-haoxiang_li2024@163.com>
+Date: Wed, 19 Feb 2025 23:34:13 -0600
+X-Gm-Features: AWEUYZkFuWr5xR08Vj1lDihLjqWdTIC-eMaZC12VdwrjG3APe4AqM6C5ntJ07xE
+Message-ID: <CAH2r5mt=oHJRjB6Mo_fE46yB-bkXgc2J-cq-eWv1OKPo3z5z3g@mail.gmail.com>
+Subject: Re: [PATCH] smb: client: Add check for next_buffer in
+ receive_encrypted_standard()
+To: Haoxiang Li <haoxiang_li2024@163.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -83,41 +82,57 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: =?utf-8?b?0KPRgdC+0LvRjNGG0LXQsiDQn9GR0YLRgCB2aWEgc2FtYmEtdGVjaG5pY2Fs?=
- <samba-technical@lists.samba.org>
-Reply-To: =?UTF-8?B?0KPRgdC+0LvRjNGG0LXQsiDQn9GR0YLRgA==?= <usoltsev05@mail.ru>
-Cc: =?UTF-8?B?c2FtYmEtdGVjaG5pY2Fs?= <samba-technical@lists.samba.org>
+From: Steve French via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Steve French <smfrench@gmail.com>
+Cc: pc@manguebit.com, tom@talpey.com, sprasad@microsoft.com,
+ linux-cifs@vger.kernel.org, samba-technical@lists.samba.org,
+ linux-kernel@vger.kernel.org, stable@vger.kernel.org, sfrench@samba.org,
+ bharathsm@microsoft.com
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-ClRoYW5rIHlvdSwgdGhpcyBpcyB2ZXJ5IHZhbHVhYmxlIGluZm9ybWF0aW9uIQoKwqAgCj7QodGA
-0LXQtNCwLCAxOSDRhNC10LLRgNCw0LvRjyAyMDI1LCAxNTowNCArMDg6MDAg0L7RgiBBbmRyZWFz
-IFNjaG5laWRlciB2aWEgc2FtYmEtdGVjaG5pY2FsIDxzYW1iYS10ZWNobmljYWxAbGlzdHMuc2Ft
-YmEub3JnPjoKPsKgCj5PbiBXZWRuZXNkYXksIDE5IEZlYnJ1YXJ5IDIwMjUgMDg6MDI6MjMgQ0VU
-IEFuZHJlYXMgU2NobmVpZGVyIHZpYSBzYW1iYS0KPnRlY2huaWNhbCB3cm90ZToKPj4gT24gVHVl
-c2RheSwgMTggRmVicnVhcnkgMjAyNSAwNzoyMzoxOCBDRVQg0KPRgdC+0LvRjNGG0LXQsiDQn9GR
-0YLRgCB2aWEgc2FtYmEtdGVjaG5pY2FsCj4+Cj4+IHdyb3RlOgo+PiA+IEhpIQo+Pgo+PiBIZWxs
-bywKPj4KPj4gPiBJIHdhbnQgdG8gcmVjZWl2ZSB1cG4gaW4gd2luYmluZGQsIGJ1dCBJIGRvbid0
-IGtub3cgaG93IHRvIGRvIGl0Cj4+ID4gY29ycmVjdGx54oCmCj4+ID4gKiBUaGUgZmlyc3Qgb3B0
-aW9uIGlzIHRvIG1ha2UgZWRpdHMgdG8gdGhlIFNBTVIgcHJvdG9jb2wuIEl0IHdvcmtzLCBidXQK
-Pj4gPiBpdAo+PiA+IGJyZWFrcyB0aGUgcHJvdG9jb2wgaXRzZWxmLihzYW1iYV9maXhfMV9zYW1y
-LnBhdGNoKSAqIHRoZSBzZWNvbmQgb3B0aW9uCj4+ID4gaXMKPj4gPiB0byByZWNlaXZlIHVwbiB2
-aWEgYSBkaXJlY3QgbGRhcCByZXF1ZXN0LiBJdCBvbmx5IHdvcmtzIG9uIHNhbWJhIERDLCB3aGVy
-ZQo+PiA+IHRoZXJlIGlzIGEgc2FtLmxkYiBkYXRhYmFzZS4gV2luYmluZCBkb2VzIG5vdCB3b3Jr
-IG9uCj4+ID4gY2xpZW50cyAoc2FtYmFfZml4XzJfb25seV93aW5iaW5kLnBhdGNoKSBJIG1hZGUg
-cGF0Y2hlcyBmb3IgdGhlCj4+ID4gY29tbWl0IGE4MTRmNWQ5MGEzZmI4NWE5NGM5NTE2ZGJhMjI0
-MDM3ZThmZDc2ZjEoU3RlZmFuIE1ldHptYWNoZXIgRmViIDE3LAo+PiA+IDIwMjUpIG9uIG1hc3Rl
-ciBicmFuY2guCj4+ID4gTXkgY29uZmlnIC9ldGMvbnNzd2l0Y2guY29uZjoKPj4gPiBwYXNzd2Q6
-IGZpbGVzIHdpbmJpbmQgc3lzdGVtZAo+PiA+IHNoYWRvdzogdGNiIGZpbGVzIHdpbmJpbmQKPj4g
-PiBncm91cDogZmlsZXMgd2luYmluZCBzeXN0ZW1kIHJvbGUKPj4gPgo+PiA+IFRlc3Q6Cj4+ID4g
-aWQgIHVzZXIxQHRlc3QuYWJjCj4+Cj4+IEkgdGhpbmsgdGhpcyBpcyB0aGUgd3JvbmcgYXBwcm9h
-Y2guIFdlIHNob3VsZCBhY3R1YWxseSByZXdyaXRlIHdpbmJpbmQgdG8KPj4gbm90IHBhc3MgYHN0
-cnVjdCB3aW5iaW5kX3B3YCBhcm91bmQsIHdlIG5lZWQgYHN0cnVjdCB3aW5iaW5kX3VzZXJfcmVj
-b3JkYAo+PiBhbmQgY29udmVydCBmcm9tIGBzdHJ1Y3Qgd2luYmluZF91c2VyX3JlY29yZGAgdG8g
-YHN0cnVjdCB3aW5iaW5kX3B3YC4gU2VlCj4+IHRoZSBkaXNjdXNzaW9ucyBpbjoKPj4KPj4gIGh0
-dHBzOi8vZ2l0bGFiLmNvbS9zYW1iYS10ZWFtL3NhbWJhLy0vbWVyZ2VfcmVxdWVzdHMvMzgwNQo+
-V3JvbmcgTVIgc29ycnkuCj4KPlRoaXMgb25lOgo+aHR0cHM6Ly9naXRsYWIuY29tL3NhbWJhLXRl
-YW0vc2FtYmEvLS9tZXJnZV9yZXF1ZXN0cy8yOTI4Cj4KPgo+LS0KPkFuZHJlYXMgU2NobmVpZGVy
-ICBhc25Ac2FtYmEub3JnCj5TYW1iYSBUZWFtIHd3dy5zYW1iYS5vcmcKPkdQRy1JRDogOERGRjUz
-RTE4RjJBQkM4RDhGM0M5MjIzN0VFMEZDNERDQzAxNEUzRAo+Cj7CoCAKwqAKwqAK0KPRgdC+0LvR
-jNGG0LXQsiDQn9GR0YLRgC4KwqA=
+merged into cifs-2.6.git for-next pending additional review and testing
+
+On Mon, Feb 17, 2025 at 1:22=E2=80=AFAM Haoxiang Li <haoxiang_li2024@163.co=
+m> wrote:
+>
+> Add check for the return value of cifs_buf_get() and cifs_small_buf_get()
+> in receive_encrypted_standard() to prevent null pointer dereference.
+>
+> Fixes: eec04ea11969 ("smb: client: fix OOB in receive_encrypted_standard(=
+)")
+> Cc: stable@vger.kernel.org
+> Signed-off-by: Haoxiang Li <haoxiang_li2024@163.com>
+> ---
+>  fs/smb/client/smb2ops.c | 4 ++++
+>  1 file changed, 4 insertions(+)
+>
+> diff --git a/fs/smb/client/smb2ops.c b/fs/smb/client/smb2ops.c
+> index ec36bed54b0b..2ca8fe196051 100644
+> --- a/fs/smb/client/smb2ops.c
+> +++ b/fs/smb/client/smb2ops.c
+> @@ -4964,6 +4964,10 @@ receive_encrypted_standard(struct TCP_Server_Info =
+*server,
+>                         next_buffer =3D (char *)cifs_buf_get();
+>                 else
+>                         next_buffer =3D (char *)cifs_small_buf_get();
+> +               if (!next_buffer) {
+> +                       cifs_server_dbg(VFS, "No memory for (large) SMB r=
+esponse\n");
+> +                       return -1;
+> +               }
+>                 memcpy(next_buffer, buf + next_cmd, pdu_length - next_cmd=
+);
+>         }
+>
+> --
+> 2.25.1
+>
+>
+
+
+--=20
+Thanks,
+
+Steve
+
