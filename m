@@ -2,47 +2,74 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4AFBDA47EBB
-	for <lists+samba-technical@lfdr.de>; Thu, 27 Feb 2025 14:16:21 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1035BA4AE7A
+	for <lists+samba-technical@lfdr.de>; Sun,  2 Mar 2025 00:47:32 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
-	bh=o6oMtjhMbabzUYyGs0JTUPUpmxHq+G01S0IiCYUi+Hg=; b=Bij48S21vfhKSeJJeL2AZsT77R
-	r7GsvoNJazHJpaSNSUShijy8ljRpgSvJVpZ0UU8rHHUPE/KHNEK//uhhJA4DW/SZXkchTOETH2M3x
-	cIueWPdWvelaxfa2/mvUmTKpxjv4zhr+xq8pQQLVM+Iufsm3OsMCtJNHpc5cT43oFu/jY/PMeyXZ4
-	Hu083fumdb7o8WdMvhcTZOErCta7ZSgWza0wPXkgCOlkEaM5LF5PvWrA80kvyytB5ZIH91Nxhi3+W
-	Ha/3r13qJKWX5MvYIzQkenGTDjgbe2xPe+BosmG/7S+ObNK4QU34bCNg+XqlHsdZm2IbBcr8YwMV9
-	75asLubw==;
-Received: from ip6-localhost ([::1]:30762 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=MEt2k7989x5yE6ObIXJKt9GP7mYl/bSZRL2jBwszNcI=; b=GIiYiUiVU5Qgml4lwrjq4S63H1
+	Br6RqUsFQ+YdkN2/MAfSX0fWQ/YpVaECs9MQQ4LT5YYTukP1X0v1kjQPH6z/5UnWVp7NOQOLWZ/iy
+	dqU7/IK2khphYEy9yoj9EBLJIU9nxRe58+AbxibhCLhDu28aKE1VFBqFljPyUlupZafZwiLO7Lqnf
+	kTBpHQ3v+2/wBm5O/dBeMtHxOXncLIFpZzJneyo3HsmjmO+yoz1S8BIYIbiQ3JYvqm0uJUHJ9J/AX
+	JOOGtsuT+hyuKvTcBNAzuIkw/PDoxCfF03HxwydaPo27LetfI2aAlGhHCfTSRTath06O20f5pfYvQ
+	1jntNSWQ==;
+Received: from ip6-localhost ([::1]:55224 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1tndjn-00DNJi-R5; Thu, 27 Feb 2025 13:15:39 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:28558) 
+	id 1toWXe-00FOqm-UP; Sat, 01 Mar 2025 23:46:47 +0000
+Received: from mail-lj1-x235.google.com ([2a00:1450:4864:20::235]:55518) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1tndjf-00DNJ2-0z; Thu, 27 Feb 2025 13:15:33 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=From:To:Date:Message-ID:CC;
- bh=o6oMtjhMbabzUYyGs0JTUPUpmxHq+G01S0IiCYUi+Hg=; b=Bito/JkPChXTZBxJo0UHdx07+W
- DSVkHwQsIS5yN+FmXogPrdfNA95xojcxDX2Q6gNXEwVRAp5PEqLgmQBnGWQpx5M5Boa8cSnHvwFX+
- 3NynBB/0YUgL91hrEkYBDJSuqkLLsaAim/CjxuP67FbHDNgBTAakg9HGvG9Rantlu0fa/ka3c8yoc
- r4/bTjcxBGgyJ4PEb2Hfo4LIrj1NjMy3QnHZnPRTzCKhKK3caYiY8fKWQky2JdD4TkxxMQr0j4JZi
- S/0hOvCI50LUMxhezqw9qiTeHp9kfOfO/++xV74Z0LYPOFxpZD/qBQ/c0s3e7u/EwRSKKh17SqjN9
- t/biI5jAzQyt3baUxDBtXTZYQYRi+o2BjfVI6k9RqES4p2R4Q7RAck4VS0zj+3KO2Xf4QDZYKDIDb
- /+e1E1PCgpktv/6IBBVSRTWrdgM5/oNwHirxY87SuRQuow+8jDBsC3IrTarpFnxqt1HISnUnnM7Hw
- ue7+LrAnJ5UlgcCdacB/R5yy;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1tndje-002Tpk-1n; Thu, 27 Feb 2025 13:15:30 +0000
-Message-ID: <7bb81b7e-2c2a-45a2-b49f-2cd02abeaf63@samba.org>
-Date: Thu, 27 Feb 2025 14:15:30 +0100
+ (Exim) id 1toWXZ-00FOqf-Qx
+ for samba-technical@lists.samba.org; Sat, 01 Mar 2025 23:46:44 +0000
+Received: by mail-lj1-x235.google.com with SMTP id
+ 38308e7fff4ca-30b936ffc51so16603791fa.2
+ for <samba-technical@lists.samba.org>; Sat, 01 Mar 2025 15:46:40 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1740872800; x=1741477600; darn=lists.samba.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=MEt2k7989x5yE6ObIXJKt9GP7mYl/bSZRL2jBwszNcI=;
+ b=S0pH7G2Ko9XeS5iZc1vajhG2PwEeS6otUuB/4DlX2gKD3CTL2u4GF9wRZTUaLDHB17
+ HGiiGv5z1NIguk1JDjO3uUPs7ewDOqtxAPmdZSIuVCFZpZ8KJ8P+p6NAcyPE+KVtFbHk
+ a04AiBxww+splxl+kPPZyyf26q58TtUNa2fx9Whb/wmgwwvPSGWcMSMtj/a4CeOpHA/v
+ z9uiw+55IZ7i8gN3eM0wd91OhBDy+BGif37aJy6A9Tq2bhwiOrzGFwUfUS17zlztjz9X
+ uP0/cgBfHdsmqukmFWXIlYMhuPIbgoB1h6o3NJl5s+a90/cqEO6DCfjVjkOyx4BN9Z0j
+ D7yQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1740872800; x=1741477600;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=MEt2k7989x5yE6ObIXJKt9GP7mYl/bSZRL2jBwszNcI=;
+ b=dvOSL/epuICyl5k4ufvaHFE22er3Lhc2rARUN4GOFIt0fuGOiVarvX5p10MI5PWSbn
+ ciCyMAjLYpwPaLdVbiVGa5u4Cgk99SM3G5LrS11mrLj50NN8hhmYFcuW2cRzXGoTgiwF
+ YgxYC5vpm6wDUf+JXQ2IdS3N28CUw7peV73frL6bqzPJtM3Ra64YvuWUmpKHKtYtBbmR
+ WpSluNIeyuiisW6gQup68MP701Sxo/U+kd5ObUNEM3Hq9di5FaihRaRr8X1OLDEI6t9A
+ /2AmS0P3sLbNtjdUpeqt7SbitCkWM5ZaMQ/LYhfF2X+0n4I2NdiNRUxi6Hw/5KXOMLzG
+ hxnA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWx/alCfPlqb6wXqubRD33+Um1IZIe3nMUT5JqmCwJ1fBsNv+LJ72eQJnsvupjFYxWtMWNrcwlxChEByK67eqo=@lists.samba.org
+X-Gm-Message-State: AOJu0YyNr6+yrXYK+PLxCQJdKZiUwr2KpcicIYkrzBXvEJrey6EhjUuZ
+ oz/FubjXe1uqMLk5EytLHxhMOjGEZK8gALGQ4H56s/WvdqEs2zpGhzADmgwsJU5vGFt6rHwt0aG
+ 5MPqWzlhdetgt1MFXx2Lb/+bDvb8=
+X-Gm-Gg: ASbGnctNdUXo1d37U2nwFRBvkT87MMscdfbPYUv5i6vrLO+r1IZKt1H1E2OCIo9NGeO
+ WBBnREbQTDi0w7ZdzYfZiqcWoF8NLug7dX/+6cSdISqRQcqi03VCozSja+beoYXyceA0xrD4ARU
+ XAqmFWLoltyybwrROjvUkmhI/E+c7gnZ2qRQlzoX4moF7LEEYxBcIl7ZKv+dZA
+X-Google-Smtp-Source: AGHT+IH6zu7Liq6af25Lvda/e90+Z+oabnotgxoE4Iy77QomhdmjoGpy4haMQrKCrdKzihm2Rn2Ftpv8gaB8oIu5WK0=
+X-Received: by 2002:a05:6512:3b0c:b0:549:39ca:13fc with SMTP id
+ 2adb3069b0e04-5494c39011amr3475943e87.49.1740872799297; Sat, 01 Mar 2025
+ 15:46:39 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: de-DE
-To: samba-announce@lists.samba.org, samba@lists.samba.org,
- samba-technical@lists.samba.org
-Subject: [Announce] Samba 4.22.0rc4 Available for Download
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+References: <20250218143005.1318886-1-wangzhaolong1@huawei.com>
+In-Reply-To: <20250218143005.1318886-1-wangzhaolong1@huawei.com>
+Date: Sat, 1 Mar 2025 17:46:27 -0600
+X-Gm-Features: AQ5f1Jo-TcMpCDd1mt5gInAtB8m-Aq_V5ESxjl_nKowzPsnPgKcByHT332S7fgM
+Message-ID: <CAH2r5mstBkj5-aHcXLpb8YzrDHS+nWhW+i_Kf8eJK15sFmJx8A@mail.gmail.com>
+Subject: Re: [PATCH] smb: client: Fix netns refcount imbalance causing leaks
+ and use-after-free
+To: Wang Zhaolong <wangzhaolong1@huawei.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -56,213 +83,234 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jule Anger via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jule Anger <janger@samba.org>
+From: Steve French via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Steve French <smfrench@gmail.com>
+Cc: linux-cifs@vger.kernel.org, yi.zhang@huawei.com, ematsumiya@suse.de,
+ samba-technical@lists.samba.org, linux-kernel@vger.kernel.org, tom@talpey.com,
+ kuniyu@amazon.com
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Release Announcements
-=====================
+I was looking at this patch in more detail, and it does look important
+but I wanted to clarify a few things.  In your detailed description
+you mention that the retry on port 139 is missing a call put_net(0
 
-This is the fourth release candidate of Samba 4.22.  This is *not*
-intended for production environments and is designed for testing
-purposes only.  Please report any defects via the Samba bug reporting
-system at https://bugzilla.samba.org/.
+>         ip_connect
+>           generic_ip_connect /* Try port 445 */
+>             get_net()
+>             ->connect() /* Failed */
+>             put_net()
+>           generic_ip_connect /* Try port 139 */
+>             get_net() /* Missing matching put_net() for this get_net().*/
 
-Samba 4.22 will be the next version of the Samba suite.
+but I found this confusing because generic_ip_connect() doesn't seem
+to treat the port 445 vs. port 139 differently (there are only two
+places the function does put_net() and the latter on line 3421 looks
+like the only one that matters for your example).  Here is the snippet
+from generic_ip_connect().  Could you explain why the retry on port
+139 example is different here?
 
-
-UPGRADING
-=========
-
-
-NEW FEATURES/CHANGES
-====================
-
-SMB3 Directory Leases
----------------------
-
-Starting with Samba 4.22 SMB3 Directory Leases are supported. The new global
-option "smb3 directory leases" controls whether the feature is enabled or
-not. By default, SMB3 Directory Leases are enabled on non-clustered 
-Samba and
-disabled on clustered Samba, based on the "clustering" option. See man 
-smb.conf
-for more details.
-
-SMB3 Directory Leases allow clients to cache directory listings and, 
-depending
-on the workload, result in a decent reduction in SMB requests from clients.
-
-Netlogon Ping over LDAP and LDAPS
----------------------------------
-
-Samba must query domain controller information via simple queries on
-the AD rootdse's netlogon attribute. Typically this is done via
-connectionless LDAP, using UDP on port 389. The same information is
-also available via classic LDAP rootdse queries over TCP. Samba can
-now be configured to use TCP via the new "client netlogon ping
-protocol" parameter to enable running in environments where firewalls
-completely block port 389 or UDP traffic to domain controllers.
-
-Experimental Himmelblaud Authentication in Samba
-------------------------------------------------
-
-Samba now includes experimental support for Azure Entra ID 
-authentication via
-`himmelblaud`, located in the `rust/` directory. This implementation 
-provides
-basic authentication and is configured through `smb.conf`, utilizing options
-such as `realm`, `winbindd_socket_directory`, and `template_homedir`. 
-New global
-parameters include `himmelblaud_sfa_fallback`, 
-`himmelblaud_hello_enabled`, and
-`himmelblaud_hsm_pin_path`.
-To enable, configure Samba with `--enable-rust --with-himmelblau`.
-
-REMOVED FEATURES
-================
-
-The "nmbd proxy logon" feature was removed. This was used before
-Samba4 acquired a NBT server.
-
-The parameter "cldap port" has been removed. CLDAP runs over UDP port
-389, we don't see a reason why this should ever be changed to a
-different port. Moreover, we had several places in the code where
-Samba did not respect this parameter, so the behaviour was at least
-inconsistent.
-
-fruit:posix_rename
-------------------
-
-This option of the vfs_fruit VFS module that could be used to enable POSIX
-directory rename behaviour for OS X clients has been removed as it could 
-result
-in severe problems for Windows clients.
-
-As a possible workaround it is possible to prevent creation of .DS_Store 
-files
-(a Finder thingy to store directory view settings) on network mounts by 
-running
-
-   $ defaults write com.apple.desktopservices DSDontWriteNetworkStores true
-
-on the Mac.
+        rc =3D kernel_connect(socket, saddr, slen,
+                            server->noblockcnt ? O_NONBLOCK : 0);
+        /*
+         * When mounting SMB root file systems, we do not want to block in
+         * connect. Otherwise bail out and then let cifs_reconnect() perfor=
+m
+         * reconnect failover - if possible.
+         */
+        if (server->noblockcnt && rc =3D=3D -EINPROGRESS)
+                rc =3D 0;
+        if (rc < 0) {
+                cifs_dbg(FYI, "Error %d connecting to server\n", rc);
+                trace_smb3_connect_err(server->hostname,
+server->conn_id, &server->dstaddr, rc);
+                put_net(cifs_net_ns(server));
+                sock_release(socket);
+                server->ssocket =3D NULL;
+                return rc;
+        }
 
 
-smb.conf changes
-================
-
-   Parameter Name                          Description     Default
-   --------------                          -----------     -------
-   smb3 directory leases                   New             Auto
-   vfs mkdir use tmp name                  New             Auto
-   client netlogon ping protocol           New             cldap
-   himmelblaud hello enabled               New             no
-   himmelblaud hsm pin path                New             default hsm 
-pin path
-   himmelblaud sfa fallback                New             no
-   client use krb5 netlogon                Experimental    no
-   reject aes netlogon servers             Experimental    no
-   server reject aes schannel              Experimental    no
-   server support krb5 netlogon            Experimental    no
-   fruit:posix_rename                      Removed
-   cldap port                              Removed
 
 
-CHANGES SINCE 4.22.0rc3
-=======================
+On Tue, Feb 18, 2025 at 8:34=E2=80=AFAM Wang Zhaolong <wangzhaolong1@huawei=
+.com> wrote:
+>
+> Commit ef7134c7fc48 ("smb: client: Fix use-after-free of network
+> namespace.") attempted to fix a netns use-after-free issue by manually
+> adjusting reference counts via sk->sk_net_refcnt and sock_inuse_add().
+>
+> However, a later commit e9f2517a3e18 ("smb: client: fix TCP timers deadlo=
+ck
+> after rmmod") pointed out that the approach of manually setting
+> sk->sk_net_refcnt in the first commit was technically incorrect, as
+> sk->sk_net_refcnt should only be set for user sockets. It led to issues
+> like TCP timers not being cleared properly on close. The second commit
+> moved to a model of just holding an extra netns reference for
+> server->ssocket using get_net(), and dropping it when the server is torn
+> down.
+>
+> But there remain some gaps in the get_net()/put_net() balancing added by
+> these commits. The incomplete reference handling in these fixes results
+> in two issues:
+>
+> 1. Netns refcount leaks[1]
+>
+> The problem process is as follows:
+>
+> ```
+> mount.cifs                        cifsd
+>
+> cifs_do_mount
+>   cifs_mount
+>     cifs_mount_get_session
+>       cifs_get_tcp_session
+>         get_net()  /* First get net. */
+>         ip_connect
+>           generic_ip_connect /* Try port 445 */
+>             get_net()
+>             ->connect() /* Failed */
+>             put_net()
+>           generic_ip_connect /* Try port 139 */
+>             get_net() /* Missing matching put_net() for this get_net().*/
+>       cifs_get_smb_ses
+>         cifs_negotiate_protocol
+>           smb2_negotiate
+>             SMB2_negotiate
+>               cifs_send_recv
+>                 wait_for_response
+>                                  cifs_demultiplex_thread
+>                                    cifs_read_from_socket
+>                                      cifs_readv_from_socket
+>                                        cifs_reconnect
+>                                          cifs_abort_connection
+>                                            sock_release();
+>                                            server->ssocket =3D NULL;
+>                                            /* Missing put_net() here. */
+>                                            generic_ip_connect
+>                                              get_net()
+>                                              ->connect() /* Failed */
+>                                              put_net()
+>                                              sock_release();
+>                                              server->ssocket =3D NULL;
+>           free_rsp_buf
+>     ...
+>                                    clean_demultiplex_info
+>                                      /* It's only called once here. */
+>                                      put_net()
+> ```
+>
+> When cifs_reconnect() is triggered, the server->ssocket is released
+> without a corresponding put_net() for the reference acquired in
+> generic_ip_connect() before. it ends up calling generic_ip_connect()
+> again to retry get_net(). After that, server->ssocket is set to NULL
+> in the error path of generic_ip_connect(), and the net count cannot be
+> released in the final clean_demultiplex_info() function.
+>
+> 2. Potential use-after-free
+>
+> The current refcounting scheme can lead to a potential use-after-free iss=
+ue
+> in the following scenario:
+>
+> ```
+>  cifs_do_mount
+>    cifs_mount
+>      cifs_mount_get_session
+>        cifs_get_tcp_session
+>          get_net()  /* First get net */
+>            ip_connect
+>              generic_ip_connect
+>                get_net()
+>                bind_socket
+>                  kernel_bind /* failed */
+>                put_net()
+>          /* after out_err_crypto_release label */
+>          put_net()
+>          /* after out_err label */
+>          put_net()
+> ```
+>
+> In the exception handling process where binding the socket fails, the
+> get_net() and put_net() calls are unbalanced, which may cause the
+> server->net reference count to drop to zero and be prematurely released.
+>
+> To address both issues, this patch ties the netns reference counting to
+> the server->ssocket and server lifecycles. The extra reference is now
+> acquired when the server or socket is created, and released when the
+> socket is destroyed or the server is torn down.
+>
+> [1]: https://bugzilla.kernel.org/show_bug.cgi?id=3D219792
+>
+> Fixes: ef7134c7fc48 ("smb: client: Fix use-after-free of network namespac=
+e.")
+> Fixes: e9f2517a3e18 ("smb: client: fix TCP timers deadlock after rmmod")
+> Signed-off-by: Wang Zhaolong <wangzhaolong1@huawei.com>
+> ---
+>  fs/smb/client/connect.c | 16 ++++++++--------
+>  1 file changed, 8 insertions(+), 8 deletions(-)
+>
+> diff --git a/fs/smb/client/connect.c b/fs/smb/client/connect.c
+> index f917de020dd5..0d454149f3b4 100644
+> --- a/fs/smb/client/connect.c
+> +++ b/fs/smb/client/connect.c
+> @@ -300,6 +300,7 @@ cifs_abort_connection(struct TCP_Server_Info *server)
+>                          server->ssocket->flags);
+>                 sock_release(server->ssocket);
+>                 server->ssocket =3D NULL;
+> +               put_net(cifs_net_ns(server));
+>         }
+>         server->sequence_number =3D 0;
+>         server->session_estab =3D false;
+> @@ -3115,8 +3116,12 @@ generic_ip_connect(struct TCP_Server_Info *server)
+>                 /*
+>                  * Grab netns reference for the socket.
+>                  *
+> -                * It'll be released here, on error, or in clean_demultip=
+lex_info() upon server
+> -                * teardown.
+> +                * This reference will be released in several situations:
+> +                * - In the failure path before the cifsd thread is start=
+ed.
+> +                * - In the all place where server->socket is released, i=
+t is
+> +                *   also set to NULL.
+> +                * - Ultimately in clean_demultiplex_info(), during the f=
+inal
+> +                *   teardown.
+>                  */
+>                 get_net(net);
+>
+> @@ -3132,10 +3137,8 @@ generic_ip_connect(struct TCP_Server_Info *server)
+>         }
+>
+>         rc =3D bind_socket(server);
+> -       if (rc < 0) {
+> -               put_net(cifs_net_ns(server));
+> +       if (rc < 0)
+>                 return rc;
+> -       }
+>
+>         /*
+>          * Eventually check for other socket options to change from
+> @@ -3181,9 +3184,6 @@ generic_ip_connect(struct TCP_Server_Info *server)
+>         if (sport =3D=3D htons(RFC1001_PORT))
+>                 rc =3D ip_rfc1001_connect(server);
+>
+> -       if (rc < 0)
+> -               put_net(cifs_net_ns(server));
+> -
+>         return rc;
+>  }
+>
+> --
+> 2.34.3
+>
+>
 
-o  Stefan Metzmacher <metze@samba.org>
-    * BUG 15815: client use krb5 netlogon is experimental and should not 
-be used
-      in production.
 
+--=20
+Thanks,
 
-CHANGES SINCE 4.22.0rc2
-=======================
-
-o  Douglas Bagnall <douglas.bagnall@catalyst.net.nz>
-    * BUG 15738: Creation of GPOs applicable to more than one group is 
-impossible
-      with Samba 4.20.0 and later.
-
-o  Björn Baumbach <bb@sernet.de>
-    * BUG 15806: samba-tool acl commands broken for relative path names
-    * BUG 15807: pysmbd seg faults when file is not found.
-
-o  Ralph Boehme <slow@samba.org>
-    * BUG 15796: Spotlight search results don't show file size and 
-creation date.
-
-o  Pavel Filipenský <pfilipensky@samba.org>
-    * BUG 15759: net ads create/join/winbind producing unix dysfunctional
-      keytabs.
-
-o  Volker Lendecke <vl@samba.org>
-    * BUG 15806: samba-tool acl commands broken for relative path names.
-    * BUG 15807: pysmbd seg faults when file is not found.
-
-o  Stefan Metzmacher <metze@samba.org>
-    * BUG 15680: Trust domains are not created.
-
-o  Andreas Schneider <asn@samba.org>
-    * BUG 15680: Trust domains are not created.
-
-o  Shweta Sodani <ssodani@redhat.com>
-    * BUG 15703: General improvements for vfs_ceph_new module.
-
-
-CHANGES SINCE 4.21.0rc1
-=======================
-
-o  Björn Baumbach <bb@sernet.de>
-    * BUG 15798: libnet4: seg fault after dc lookup failure
-
-
-KNOWN ISSUES
-============
-
-https://wiki.samba.org/index.php/Release_Planning_for_Samba_4.22#Release_blocking_bugs
-
-
-#######################################
-Reporting bugs & Development Discussion
-#######################################
-
-Please discuss this release on the samba-technical mailing list or by
-joining the #samba-technical:matrix.org matrix room, or
-#samba-technical IRC channel on irc.libera.chat
-
-If you do report problems then please try to send high quality
-feedback. If you don't provide vital information to help us track down
-the problem then you will probably be ignored.  All bug reports should
-be filed under the Samba 4.1 and newer product in the project's Bugzilla
-database (https://bugzilla.samba.org/).
-
-
-======================================================================
-== Our Code, Our Bugs, Our Responsibility.
-== The Samba Team
-======================================================================
-
-================
-Download Details
-================
-
-The uncompressed tarballs and patch files have been signed
-using GnuPG (ID AA99442FB680B620).  The source code can be downloaded
-from:
-
-         https://download.samba.org/pub/samba/rc/
-
-The release notes are available online at:
-
-https://download.samba.org/pub/samba/rc/samba-4.22.0rc4.WHATSNEW.txt
-
-Our Code, Our Bugs, Our Responsibility.
-(https://bugzilla.samba.org/)
-
-                         --Enjoy
-                         The Samba Team
+Steve
 
