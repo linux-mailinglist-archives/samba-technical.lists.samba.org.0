@@ -2,50 +2,49 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4A95AA4B581
-	for <lists+samba-technical@lfdr.de>; Mon,  3 Mar 2025 00:36:21 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6819AA4B58C
+	for <lists+samba-technical@lfdr.de>; Mon,  3 Mar 2025 01:03:29 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=JKWzAPGdSXhV4Gu1MBho+zFn5xI5F/+k2Lv44sab8lM=; b=EPsynCaHuKLU5u8QH2XaS5FI28
-	pdSMF/X0p3bnuG4tMaBVu2TkyTI+o5+Ov7sR+rAqdTYuRq942PRvCH5V/SXw0fbRW1b7+clGBbey0
-	EMZQEftCdsSnmYuY3BWRuB5HsvQfnZqA8MQBYCcsT6TfpZSNQG1stfDr8q1wr4KeIDUSkmVnFbuAq
-	gMgBANm7rYHwr//LPy6tD2MObrKnOPZIsHgXrjxMEGSG2OjL2HQ4fgbeWyJkydcB2G2o2XTCqNbzq
-	oeIcWxoBUppDqfzh5FyqjhIiK+FUGLuv6CWJJL91vO9DJzxUhq75kc0s5PwEDzoJlnKsELnEb7pnq
-	DyQWygUg==;
-Received: from ip6-localhost ([::1]:24834 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=Iuff80Tl3Kul5nuhD9wDj6kP1OZOnGuD1I+h4SNFFyg=; b=wngt19HDERz1n5EWPYeHuu6yR9
+	bZ9TdYtCOfWF7Po5dvRMhvVaw1nTEdTp/aD5IMIU9heA+K4RdiLf9iScSAjG1VFMtx561IGzHJSml
+	P33x4gC9DQTS0WQMDLA4W1k37ZksseI29yGrpUPUomoDvWaRN0L8DoNM9rOxxk7h6U9/Td4yy/KFZ
+	GPcI7IXxLLPzVwKXR8scYacqqjFoLi2NJbG4ZdEPgsb2k1h3p6D1wXso1nwCv0eTsPoV+sn1lMosl
+	rcFGsAcFE7lrJc+kfL9FD32uUprso8UY/iaUylVIR9FuV6hu6Iv7vFcNQO+QpBHr+Penff4biAPxf
+	KhdBO0gA==;
+Received: from ip6-localhost ([::1]:32630 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1tosqI-00FS4T-MN; Sun, 02 Mar 2025 23:35:30 +0000
-Received: from cat-porwal-prod-mail11.catalyst.net.nz ([202.49.243.52]:55096) 
+	id 1totH5-00FSDi-ST; Mon, 03 Mar 2025 00:03:11 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:11074) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1tosq9-00FS4L-34
- for samba-technical@lists.samba.org; Sun, 02 Mar 2025 23:35:26 +0000
-Received: from [192.168.1.219] (unknown [114.23.142.188])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (Client did not present a certificate)
- (Authenticated sender: douglasb@catalyst.net.nz)
- by cat-porwal-prod-mail11.catalyst.net.nz (Postfix) with ESMTPSA id 0EACC2F0
- for <samba-technical@lists.samba.org>; Mon,  3 Mar 2025 12:35:11 +1300 (NZDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=catalyst.net.nz;
- s=default; t=1740958511;
- bh=JKWzAPGdSXhV4Gu1MBho+zFn5xI5F/+k2Lv44sab8lM=;
- h=Date:From:Subject:To:From;
- b=uB5BavJASER7n3hD8bVHRS8iHpM/skIp+gq2Pv0lrKvemIl/9YpRfmQ7dVp/9ey3E
- AXRpuPxpT9MrxGendtx9xQVTtW8BwLJyZtO1JZq2ZGD6KQ6knLm2yct2NNFwXkk3Yf
- lPKs5Eladk88EdZyfjauYPj1GuikJIt8cE3YUWy2yr64vYpToidIjv/VeA8b+hEms6
- SZngDFEvm+4cCacHEF662FHrtQwg9cxiCI/U6VsN5VYWJMtxXO7AmmPP8SNKn+gwnC
- V+jfFA+kAHT91ZHuyWLKulNVj3VANq28m+/YqJZpNKvxLvFUXcqpWXHRQbggmM+dDW
- sELNodOEIKt9w==
-Message-ID: <e21773e7-9e6f-4b1c-af21-73e52566de91@catalyst.net.nz>
-Date: Mon, 3 Mar 2025 12:35:09 +1300
+ (Exim) id 1totH0-00FSDb-Pl
+ for samba-technical@lists.samba.org; Mon, 03 Mar 2025 00:03:09 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Date:To:From:Message-ID:CC;
+ bh=Iuff80Tl3Kul5nuhD9wDj6kP1OZOnGuD1I+h4SNFFyg=; b=rB30Gfwad6+7tT7XAUs4O4sH3D
+ 1V5nJPrnwWwOM9BnvAzTBDPMprT4zZpEGcRvNWOwu77ir08WwpXSG4jYm1uK6zr66YFC8bj1hf8Gw
+ BJZ6z5eRP4uPZ4UcpMBZn2V8KNT6MEph1+wb2kWb5O2VGDqUHrmQrwE9rObyTS1gp8HNckqEE5gMa
+ VxUoC4m8uN6AzZlj6wVMKapY1R0na9z+/Qp3HFFD6QX+rTO1xmrbIg3b7T7EoJpIxjXlX//nrcp6B
+ ZiI5xE45fzl3jYft6fZ8veS1ULQasznn+5qqRISj2gC/HCIeLebf8zscNOI4Z2CliIR4dVR9ij/kK
+ qG4sbEO8NxLTN9YBHyuHBLUTX268Gu2OOehID2XdKM+R7QW/tCpBPhVutveLnw3E2HAQrftxuDkUZ
+ uLbRvFpK8EcSV9p2diYYA7Cqfjas3uYcmk8ou1cCRT3u8nZK602cSuyMNBH6ZWVTVSRz5ShqOZ00o
+ rDqjvkk1rBki42FfSoaCACiw;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1totGy-002z9s-2g; Mon, 03 Mar 2025 00:03:05 +0000
+Message-ID: <2f7c5128a9b562a3b79011c74303a9e3415bf6e9.camel@samba.org>
+Subject: Re: ldb sqlite backend
+To: Douglas Bagnall <douglas.bagnall@catalyst.net.nz>, samba-technical
+ <samba-technical@lists.samba.org>
+Date: Mon, 03 Mar 2025 13:03:01 +1300
+In-Reply-To: <e21773e7-9e6f-4b1c-af21-73e52566de91@catalyst.net.nz>
+References: <e21773e7-9e6f-4b1c-af21-73e52566de91@catalyst.net.nz>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.52.3-0ubuntu1 
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: ldb sqlite backend
-To: samba-technical <samba-technical@lists.samba.org>
-Content-Language: en-NZ
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,27 +58,49 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Douglas Bagnall via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Douglas Bagnall <douglas.bagnall@catalyst.net.nz>
+From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andrew Bartlett <abartlet@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-I quite like the idea of the ldb sqlite backend, even though I don't
-exactly know what the idea is.
+On Mon, 2025-03-03 at 12:35 +1300, Douglas Bagnall via samba-technical
+wrote:
+> I quite like the idea of the ldb sqlite backend, even though I don't
+> exactly know what the idea is.
+>=20
+> But it is very dormant. The ldbedit man page says we can use
+>=20
+> =C2=A0ldbedit -H sqlite://filename
+>=20
+> but as far as I can tell this has never actually been true.
+>=20
+> We have been dutifully maintaining it, but it seems to be over
+> 15 years since we made any effort to actually improve it.
+>=20
+> Should we perhaps just delete it?
+>=20
+> Maybe this is a dangerous road to start on.
 
-But it is very dormant. The ldbedit man page says we can use
+The primary reason it existed was because at the time TDB did not have
+transactions, but SQLite did.=20
 
- ldbedit -H sqlite://filename
+I think it can be removed.=20
 
-but as far as I can tell this has never actually been true.
+Andrew Bartlett
 
-We have been dutifully maintaining it, but it seems to be over
-15 years since we made any effort to actually improve it.
 
-Should we perhaps just delete it?
+--=20
+Andrew Bartlett (he/him)=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0https://s=
+amba.org/~abartlet/
+Samba Team Member (since 2001) https://samba.org
+Samba Team Lead=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0https://catalyst.net.nz/services/samba
+Catalyst.Net Ltd
 
-Maybe this is a dangerous road to start on.
+Proudly developing Samba for Catalyst.Net Ltd - a Catalyst IT group
+company
 
-cheers,
-Douglas
+Samba Development and Support: https://catalyst.net.nz/services/samba
+
+Catalyst IT - Expert Open Source Solutions
 
