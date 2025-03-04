@@ -2,50 +2,47 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1B33AA4CDA8
-	for <lists+samba-technical@lfdr.de>; Mon,  3 Mar 2025 22:48:22 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D5DA7A4D846
+	for <lists+samba-technical@lfdr.de>; Tue,  4 Mar 2025 10:29:22 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
-	bh=XoAFjXzsMVtP1kxaSqD9k1THmemSEY3FqXMhWpBgFSM=; b=UWDWc8GOHjNmMv47v5odOC2suD
-	747IUd8AR+2Zrv1uCycmCq/YFHaZyAAngsUyoWOz9rep0k9Gt324zG3VAhl/+6TQB8nNEuyzzW0Hi
-	psFvHgGNfOqtabguBQqR+84xNVQriMtv68HRefHCrvZMEVB3D8jvACK7zqSdk8cnZQkBlU8RpTtOX
-	d9Wdad1PEh7QpBlZFqazS8hDEog6CGU7A8TQCy0yGuPLyH02uML+vzLEY+UMbGMeTxMLGvYKmEwS5
-	N54w0hWmmZgwYR0nDu2v/U4QpBt4Uo6UwXjwBXOKNIoY4VugI1i1gHuuEZ/U2T4OMF4ciYYLZEyDw
-	5l+aRVMg==;
-Received: from ip6-localhost ([::1]:41632 helo=hr1.samba.org) 
+	bh=3IDGy2zTdrOpT5Jzc7klTEbzTRNBgPER2t4EJMg7A8A=; b=TfmARu+S58HQFud0tqjmqItIus
+	WzLNppP5f4xSa2p1x5SrWcY09dyfCW5yE4bvGE68s74XCabpZlpi02Uu4GtLeKL4E6mx0I08qJb7u
+	H4+TcIS4I70picwyX3go5ep4qRXnQSmf0sgl69CwIYXsuE+RV1vahxbSoRJjtZpK6lCKDQi5gQMeM
+	wPOdw+pZA1+irbeq0Wa68nAiqI2/t7wCB50+dsxVsW/ObYG7n3eFjsm4QYKvHVPEsqlHAA/O3awQK
+	ELUBoZBs6uNmgRUyJy1c5piprCWoGenvGIWs/yp0CU3rSSaaWr/G92W0c4Tt9IeZ6ueRc8BlETrY7
+	9SwViSxA==;
+Received: from ip6-localhost ([::1]:49390 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1tpDdW-00FW2a-G2; Mon, 03 Mar 2025 21:47:42 +0000
-Received: from cat-porwal-prod-mail11.catalyst.net.nz ([202.49.243.52]:39156) 
+	id 1tpOZv-00FXTK-4Z; Tue, 04 Mar 2025 09:28:43 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:33112) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1tpDdQ-00FW2R-VK
- for samba-technical@lists.samba.org; Mon, 03 Mar 2025 21:47:40 +0000
-Received: from [192.168.1.219] (unknown [114.23.142.188])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (Client did not present a certificate)
- (Authenticated sender: douglasb@catalyst.net.nz)
- by cat-porwal-prod-mail11.catalyst.net.nz (Postfix) with ESMTPSA id EAD74363
- for <samba-technical@lists.samba.org>; Tue,  4 Mar 2025 10:47:29 +1300 (NZDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=catalyst.net.nz;
- s=default; t=1741038450;
- bh=XoAFjXzsMVtP1kxaSqD9k1THmemSEY3FqXMhWpBgFSM=;
- h=Date:To:From:Subject:From;
- b=foYqBNQoHTNOjnsRQbSkdRobFuNDQdjAodAiZt0dbxRE/6H89B+EkXkrEdkvdC/Lo
- 17GJHeURsGgU5uInWNCpniLMHfETGFwFVJ8Z83cvV90EmSMmJeUoPx/L6r9SwkFq33
- hUlaxnfjkgmBGkgw8l6l2DUNQ40NwAS56FX9M4kihPiXRxqeGzMthYuVO7j3E52mdI
- IylgGEdqjYCgesNtpXFiYi8PhSJwCMOnDBCWPwIPx0PrT0eeI2NpNjIKFFc9FNAYay
- UFLMjV5Dk7XN4RECp4P3bXSrrvnU7MnM3xb6BWhFEotaJomrmWJ8Y+x6aTbQXMRNDL
- aSHwfDipqqYAg==
-Message-ID: <196948d3-d3f1-47b0-9ac8-8c96e3594b28@catalyst.net.nz>
-Date: Tue, 4 Mar 2025 10:47:28 +1300
+ (Exim) id 1tpOZn-00FXSu-T5; Tue, 04 Mar 2025 09:28:38 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=From:To:Date:Message-ID:CC;
+ bh=3IDGy2zTdrOpT5Jzc7klTEbzTRNBgPER2t4EJMg7A8A=; b=MvhE3a/MOUixrKjhV5L1x33nYi
+ Mxg5DZVUC26LgjDPf0O4d6N83LvKcwtJ5/DilC/qIxtpK+xR+WhRHPYeqcdrvTHO1ZbHk6ibTXHjF
+ h4ism9hv+pr2yPP7WSW/kJeiXMHXVXWmvmAZm/1qNXMBEbrQLJqBbreNPdZwNcIPNk5hD2osnXlaf
+ xWwaoMgrKqaZ2aXYhIzoYJiRZFxhlefESmqXaOpP5+UfN5rnxfKTYj9T7+Y6PVOio5y2GOv+S18we
+ VcGCrsHPYzLrG4NPzx2F5spgMXWaIt6QTMzJ6DbvKEudFFPpz2nQvyihBB2NrVuHeEkEUtmPPZ9Hm
+ grtSgEiBKfl6KQgmTk+hCOVvxwgOx7tAdPY+8HICXAwgT1twjbQcKo/73vWPjbtOfiL/X3iIiidSx
+ dkozYlnOWLfnD7xohPWWVP9FvWFYurdtJ1cgnCok3s026G6AxXAu/zDDoYJLp7IkQU+6dD6yFJPJo
+ u1fIkY0THkPLiObxVJPUEkJ5;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1tpOZn-003HjM-0F; Tue, 04 Mar 2025 09:28:35 +0000
+Message-ID: <0f913f56-25f4-4ed0-b608-68dfe4762bd3@samba.org>
+Date: Tue, 4 Mar 2025 10:28:34 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-To: samba-technical <samba-technical@lists.samba.org>
-Content-Language: en-NZ
-Subject: removing /lib/ldb/nssldb
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Language: en-US, de-DE
+To: "samba@lists.samba.org" <samba@lists.samba.org>,
+ samba-technical <samba-technical@lists.samba.org>
+Subject: SambaXP 2025: Agenda Now Live!
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,22 +56,70 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Douglas Bagnall via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Douglas Bagnall <douglas.bagnall@catalyst.net.nz>
+From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Ralph Boehme <slow@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-It doesn't look like /lib/ldb/nsslib/* is built.
+Dear Samba users and developers!
 
-Maybe it was until we dropped autoconf in 2010 (fc336590dc35f1737ddc74333b959bdd32ee22d3).
+The detailed program for this year’s sambaXP on April 7–8, 2025 is now 
+available! Visit sambaxp.org for all details. Look forward to a packed 
+two-day schedule full of expert sessions, technical deep dives, and 
+invaluable networking opportunities – once again held on-site at the 
+Hotel Freizeit In in Goettingen, Germany.
 
-It was added in 803a6dbaca408ea424fe6969c31460c3b6c4979c
-("r19456: Add an example application for ldb using the tdb backend", 2006).
+Highlights at a Glance
+----------------------
 
-Maybe it contains the early seeds of FreeIPA.
+* Keynote by Mirko Swillus (Sovereign Tech Agency): Get inspired right 
+from the start as we kick off with exciting insights into the 
+open-source and tech funding landscape.
 
-In any case, I propose we remove it, unless someone objects.
+* SMB3 POSIX Extensions in Samba (current status) – Volker Lendecke
+Azure Entra ID Auth in Samba: Introducing the Himmelblaud Daemon – David 
+Mulder
 
-Douglas
+* localkdc – A general local authentication hub – Andreas Schneider, 
+Alexander Bokovoy
 
+* SMB in Windows Server 2025 and Beyond – Raymond Wang, Genghis Karimov, 
+Dan Cuomo
+
+* The Rocky Road to SMB3 Directory Leases – Ralph Böhme
+
+* Unleashing authentication for the Linux CIFS client with gssproxy – 
+Daniel Kobras, Michael Weiser
+
+* New keytab generation – Pavel Filipenský
+
+* SID-Filtering, Claims Transformation and Selective-Authentication – 
+Stefan Metzmacher
+
+* A Deep Dive Into OAuth 2.0 – William Brown (pre-recorded), David Mulder
+
+* The CTDB Report 2025 – Martin Schwenke
+
+* Accessing remote storage better from Linux – Steve French
+
+Looking Beyond: SMB3 IO Lab
+---------------------------
+
+Immediately following sambaXP, from April 8–10, SNIA will host the SMB3 
+Interoperability Lab EMEA, an exclusive testing and collaboration 
+opportunity that perfectly complements the conference program. Don’t 
+miss the chance to link theory to practice and enhance your SMB3 
+implementations on the spot. (Additional registration 
+needed:https://www.snia.org/smb3iolabemea)
+
+Register Now!
+-------------
+
+Ready to dive in? Visit sambaxp.org to view the full agenda, secure your 
+ticket, and find more details on both sambaXP and the SMB3 IO Lab. We 
+look forward to welcoming you in Goettingen for an event packed with 
+open-source tech, cutting-edge developments, and a vibrant community spirit!
+
+See you there!
+-Ralph
 
