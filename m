@@ -2,47 +2,47 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id D5DA7A4D846
-	for <lists+samba-technical@lfdr.de>; Tue,  4 Mar 2025 10:29:22 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8F72FA5465A
+	for <lists+samba-technical@lfdr.de>; Thu,  6 Mar 2025 10:30:59 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
-	bh=3IDGy2zTdrOpT5Jzc7klTEbzTRNBgPER2t4EJMg7A8A=; b=TfmARu+S58HQFud0tqjmqItIus
-	WzLNppP5f4xSa2p1x5SrWcY09dyfCW5yE4bvGE68s74XCabpZlpi02Uu4GtLeKL4E6mx0I08qJb7u
-	H4+TcIS4I70picwyX3go5ep4qRXnQSmf0sgl69CwIYXsuE+RV1vahxbSoRJjtZpK6lCKDQi5gQMeM
-	wPOdw+pZA1+irbeq0Wa68nAiqI2/t7wCB50+dsxVsW/ObYG7n3eFjsm4QYKvHVPEsqlHAA/O3awQK
-	ELUBoZBs6uNmgRUyJy1c5piprCWoGenvGIWs/yp0CU3rSSaaWr/G92W0c4Tt9IeZ6ueRc8BlETrY7
-	9SwViSxA==;
-Received: from ip6-localhost ([::1]:49390 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=K1I7oj/krDaIbUY/1/D6VYfmnkiXUCBusPUQLGtKGiY=; b=qSUjhIKKhuQzxyc4ldS30j+6e1
+	0gC5Ik/8XQcbZ4NYby+QQKBCTW2GX6YMvPEfgkTs5Edw+HBOyKckRXOhjQdJy3fbAYc/1YiudHxn+
+	awsSBEJEyXz7JcGo2LCo4RsdDtt38/SAPf5nBE8YVM4kjXw9OuavDuqRAnZ3ix8D4mqtSBD+L3S2K
+	aZqsW5bqKW8Qa7uw6C3k4KVmwWdD0HGpJ8oL6jzAUDN5qTk0md/ipDfL71ifnEbxd4+XHcwGcy5Mr
+	mw51AA9uJBuxbqQ7brFRjZTKcvtp8+FnFdWiVjPFZVutCBwLSSDxXsoW8p8PApaAusNnwE+LRgUix
+	kZ20UT7Q==;
+Received: from ip6-localhost ([::1]:59874 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1tpOZv-00FXTK-4Z; Tue, 04 Mar 2025 09:28:43 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:33112) 
+	id 1tq7YU-00Fe3J-MW; Thu, 06 Mar 2025 09:30:14 +0000
+Received: from air.basealt.ru ([193.43.8.18]:42332) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1tpOZn-00FXSu-T5; Tue, 04 Mar 2025 09:28:38 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=From:To:Date:Message-ID:CC;
- bh=3IDGy2zTdrOpT5Jzc7klTEbzTRNBgPER2t4EJMg7A8A=; b=MvhE3a/MOUixrKjhV5L1x33nYi
- Mxg5DZVUC26LgjDPf0O4d6N83LvKcwtJ5/DilC/qIxtpK+xR+WhRHPYeqcdrvTHO1ZbHk6ibTXHjF
- h4ism9hv+pr2yPP7WSW/kJeiXMHXVXWmvmAZm/1qNXMBEbrQLJqBbreNPdZwNcIPNk5hD2osnXlaf
- xWwaoMgrKqaZ2aXYhIzoYJiRZFxhlefESmqXaOpP5+UfN5rnxfKTYj9T7+Y6PVOio5y2GOv+S18we
- VcGCrsHPYzLrG4NPzx2F5spgMXWaIt6QTMzJ6DbvKEudFFPpz2nQvyihBB2NrVuHeEkEUtmPPZ9Hm
- grtSgEiBKfl6KQgmTk+hCOVvxwgOx7tAdPY+8HICXAwgT1twjbQcKo/73vWPjbtOfiL/X3iIiidSx
- dkozYlnOWLfnD7xohPWWVP9FvWFYurdtJ1cgnCok3s026G6AxXAu/zDDoYJLp7IkQU+6dD6yFJPJo
- u1fIkY0THkPLiObxVJPUEkJ5;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1tpOZn-003HjM-0F; Tue, 04 Mar 2025 09:28:35 +0000
-Message-ID: <0f913f56-25f4-4ed0-b608-68dfe4762bd3@samba.org>
-Date: Tue, 4 Mar 2025 10:28:34 +0100
+ (Exim) id 1tq7YM-00Fe3C-3T
+ for samba-technical@lists.samba.org; Thu, 06 Mar 2025 09:30:08 +0000
+Received: from kip-nb.smb.basealt.ru (unknown [178.69.201.215])
+ (Authenticated sender: korytovip)
+ by air.basealt.ru (Postfix) with ESMTPSA id 77F3123392
+ for <samba-technical@lists.samba.org>; Thu,  6 Mar 2025 12:14:30 +0300 (MSK)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=basealt.ru; s=dkim;
+ t=1741252470;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=K1I7oj/krDaIbUY/1/D6VYfmnkiXUCBusPUQLGtKGiY=;
+ b=mpTf2uxQgzmM1lmWNXAW1vwHB5irMRq5jK+w4yHsq24K94+LFeqAO8ZQfeIpEGkgCZ9B34
+ 00COW441xFgEG1TnMgQFMrRo7KsPEx7vZIVLgj1g+KRhuMc7jOlnn0QzhxBZ0lRvmZNZKi
+ 9ZcbBvvNxj9K96/aCwrL8M3ltFLO1jrH3/NTm+AR1SPCSV3Mj7tXI4EMOwlbtX025ZXodE
+ vV+/lY0bqxA1JUV4HE00Ds70Ci8wwL8aMaWPco+OLEHrzERoRCscEu5r4vQRpPgys+AikL
+ NuOQzgINN8H6PCDG/gbJ2yC+ADqPOgmwcUefjNq78hrXtTMD/TcOLXxmNomkeQ==
+Message-ID: <5244db2120303ad890f362503240c359f5edcb3a.camel@basealt.ru>
+Subject: Accessing shared folders in trusted domains
+To: samba-technical <samba-technical@lists.samba.org>
+Date: Thu, 06 Mar 2025 12:14:29 +0300
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.44.0-alt1 
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: en-US, de-DE
-To: "samba@lists.samba.org" <samba@lists.samba.org>,
- samba-technical <samba-technical@lists.samba.org>
-Subject: SambaXP 2025: Agenda Now Live!
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -56,70 +56,85 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Ralph Boehme <slow@samba.org>
+From: Ivan Korytov via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Ivan Korytov <korytovip@basealt.ru>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Dear Samba users and developers!
+Hi!
 
-The detailed program for this year’s sambaXP on April 7–8, 2025 is now 
-available! Visit sambaxp.org for all details. Look forward to a packed 
-two-day schedule full of expert sessions, technical deep dives, and 
-invaluable networking opportunities – once again held on-site at the 
-Hotel Freizeit In in Goettingen, Germany.
+There was a change in libmsmbclient that enabled default Kerberos
+ccache in cli_session_creds_init when no password is supplied.
 
-Highlights at a Glance
-----------------------
+https://gitlab.com/samba-team/samba/-/commit/fb7e19826afab4fce33769eb7aef16=
+a1c650b23a
 
-* Keynote by Mirko Swillus (Sovereign Tech Agency): Get inspired right 
-from the start as we kick off with exciting insights into the 
-open-source and tech funding landscape.
+Why we need a check that there is no fallback set? Why can't
+libsmbclient always set ccache?
 
-* SMB3 POSIX Extensions in Samba (current status) – Volker Lendecke
-Azure Entra ID Auth in Samba: Introducing the Himmelblaud Daemon – David 
-Mulder
+I'm mentioning this because there is a problem when accessing shared
+folders in trusted domains with Kerberos.
 
-* localkdc – A general local authentication hub – Andreas Schneider, 
-Alexander Bokovoy
+It affects clients that use libsmbclient, like GIO/GVFS and KIO.
 
-* SMB in Windows Server 2025 and Beyond – Raymond Wang, Genghis Karimov, 
-Dan Cuomo
+In GIO fallback is enabled when username is not empty (almost always)
+and in KIO fallback is always enabled. If the fallback is set then
+there is no way that libsmbclient will get the correct Kerberos
+credentials.
 
-* The Rocky Road to SMB3 Directory Leases – Ralph Böhme
+Here is what I've found (when the fallback is set, so that ccache is
+not configured):
 
-* Unleashing authentication for the Linux CIFS client with gssproxy – 
-Daniel Kobras, Michael Weiser
+When SMBC_server (SMBC_server_internal) is called following
+authentication functions in order are used:
 
-* New keytab generation – Pavel Filipenský
+- SMBC_auth_credentials
+    - cli_session_creds_init
+- cli_session_setup_creds
+    - cli_session_setup_gensec_send
+        - auth_generic_client_prepare
+            - cli_credentials_guess
+            - auth_generic_set_creds
 
-* SID-Filtering, Claims Transformation and Selective-Authentication – 
-Stefan Metzmacher
+cli_session_setup_creds uses the same credentials variable as
+SMBC_auth_credentials does.
 
-* A Deep Dive Into OAuth 2.0 – William Brown (pre-recorded), David Mulder
+Function auth_generic_client_prepare obtains correct credentials with
+cli_credentials_guess (it is also used in libcli that used in all Samba
+utilities, like smbclient).
 
-* The CTDB Report 2025 – Martin Schwenke
+But aferwards auth_generic_set_creds is called and it copies
+credentials passed as an argument to auth_generic_client_prepare and
+discards previously acquired credentials by cli_credentials_guess.
 
-* Accessing remote storage better from Linux – Steve French
+So, correct credentials are lost and credentials from
+cli_session_creds_init are used, which can't be used to authenticate
+with Kerberos.
 
-Looking Beyond: SMB3 IO Lab
----------------------------
+Example of a correct request (not using libsmbclient):
+$ KRB5_TRACE=3D/dev/stdout smbclient -k //dc1.trust.alt/sysvol
+WARNING: The option -k|--kerberos is deprecated!
+[5695] 1733747978.787075: Getting credentials Administrator@TRUST.ALT -
+> cifs/dc1.trust.alt@TRUST.ALT using ccache
+KEYRING:persistent:10002:10002
 
-Immediately following sambaXP, from April 8–10, SNIA will host the SMB3 
-Interoperability Lab EMEA, an exclusive testing and collaboration 
-opportunity that perfectly complements the conference program. Don’t 
-miss the chance to link theory to practice and enhance your SMB3 
-implementations on the spot. (Additional registration 
-needed:https://www.snia.org/smb3iolabemea)
+Example of a incorrect request:
+$ KRB5_TRACE=3D/dev/stdout dolphin smb://dc1.trust.alt/sysvol
+[5724] 1733748053.579586: Getting credentials Administrator@TRUST.ALT -
+> cifs/dc1.trust.alt@TEST.ALT using ccache
+KEYRING:persistent:10002:10002
 
-Register Now!
--------------
+Trust is a two-way, so everyone can access everything everywhere.
+Computer is joined to TEST.ALT domain.
 
-Ready to dive in? Visit sambaxp.org to view the full agenda, secure your 
-ticket, and find more details on both sambaXP and the SMB3 IO Lab. We 
-look forward to welcoming you in Goettingen for an event packed with 
-open-source tech, cutting-edge developments, and a vibrant community spirit!
+When I discovered this change in newer versions of Samba, I've disabled
+the fallback check and creds returned from cli_session_creds_init are
+correct and can be used to try Kerberos authentication, even when
+fallback is set.
 
-See you there!
--Ralph
+--=20
+Ivan Korytov
+
+korytovip@basealt.ru
+
 
