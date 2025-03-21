@@ -2,78 +2,72 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3AA24A6AF62
-	for <lists+samba-technical@lfdr.de>; Thu, 20 Mar 2025 21:49:05 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 162D2A6B3C2
+	for <lists+samba-technical@lfdr.de>; Fri, 21 Mar 2025 05:42:24 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
-	bh=6Pg0yMQvEUbwsVwGIOfYXyDbiJntQEcUbugX/+LZLgo=; b=abZSEl/oX+pWol7Lbfr1Ry4crQ
-	al2yQbNHUB5DKqjz3xz7I+JLFcOZxoA4mffAmTmDZTXmk1cauHFh5asyKY9UmsWqlT2BPEsjBqOug
-	7iKoBycN2IdeHulntHnbHcL0adsmBNZwtfLi5wL3egVCaV7G/SFdUzzfpqZnaAoAvCJizO0/1lSWF
-	7LMKYT/gn+oReraeivdtIQVSEZXSGtpaT+wJ6JyI3v1ZmnaW7aS5ax+FFmEod3A6n7Wj2IV211IWT
-	Wq1271QZrlvc0U794jBvu+AjjYVxI+EYSbD5jWwB8WkRJnhCxIKWikDJmZgGaJBtPJ4iVq+BIt05x
-	tj31OAkA==;
-Received: from ip6-localhost ([::1]:25796 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=dqqlOuwgDqZzp9bz5GBCwhxF+fXIVL65riJZdwC7+6Y=; b=RHJLxdugDYOoxf2e+SER4JrBC/
+	ugwEEvay76/nTSTEhOLFlRAyhH89VP/whLBCsQBLrYAuycZnPqyGqFRA9iH6uQDkbs4zst6xxY3vf
+	1Lv7w7mGonWsqdWo8duWHgS0dRUDQQIBKT9Tj1cj6QqgLNg1wJLmhRKrMjhya4ic3zD1zCJhSePQ0
+	AofLtnC6vBAsRMAv66lplHc5677j1aDYsf1Sds4TZl/mghOSWAT2ux/UwUascHfvESeoCqAFnYfOP
+	siulDsF/DGvcPt+SNxrElact14NReLrcFsvK30HYCOcTI6Z8vxW6FumAMTS1EFInojaG1qThEiJkY
+	4jMzMyQg==;
+Received: from ip6-localhost ([::1]:63086 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1tvMoQ-00Gcoo-MX; Thu, 20 Mar 2025 20:48:22 +0000
-Received: from mail-wr1-x436.google.com ([2a00:1450:4864:20::436]:45307) 
+	id 1tvUCW-00GdJS-1H; Fri, 21 Mar 2025 04:41:44 +0000
+Received: from mail-lf1-x129.google.com ([2a00:1450:4864:20::129]:59722) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1tvMoL-00Gcoh-Ps
- for samba-technical@lists.samba.org; Thu, 20 Mar 2025 20:48:20 +0000
-Received: by mail-wr1-x436.google.com with SMTP id
- ffacd0b85a97d-391342fc148so802148f8f.2
- for <samba-technical@lists.samba.org>; Thu, 20 Mar 2025 13:48:05 -0700 (PDT)
+ (Exim) id 1tvUCR-00GdJL-B7
+ for samba-technical@lists.samba.org; Fri, 21 Mar 2025 04:41:41 +0000
+Received: by mail-lf1-x129.google.com with SMTP id
+ 2adb3069b0e04-5499614d3d2so1808023e87.3
+ for <samba-technical@lists.samba.org>; Thu, 20 Mar 2025 21:41:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=suse.com; s=google; t=1742503684; x=1743108484; darn=lists.samba.org;
- h=content-transfer-encoding:subject:from:to:content-language
- :user-agent:mime-version:date:message-id:from:to:cc:subject:date
- :message-id:reply-to;
- bh=6Pg0yMQvEUbwsVwGIOfYXyDbiJntQEcUbugX/+LZLgo=;
- b=VpjD8bH4zSsIV4BF5MxHgFCberVOCFRd/Nc26O+jNKKbufKjvGID0vKoqcB3ScUUjf
- 104QViivrIyCFJ9JCiHUgrdd41RXkkYST3+fW4HuB6T95qjgBvoK2fTRtyVj0ELI/ryk
- XCO26WTKd88KymRYHfJWIFzxq9xjXlxHM4u0yI99dOpoPOxj7Q4LOeHL+ayLhzBRc3xx
- pBEjLn1altMkv+Ild9DbLpdq+XTk7oMQexp9MdD4PVl8+fb4sb4DEdWcHTl0xxXxz9iV
- uB2jkqRO8PE8BYP8MsuOlGXv/4qRl49LtUrD7dM+vUGKu/HunS0VVJBSp413yLwZzKcS
- YljQ==
+ d=gmail.com; s=20230601; t=1742532085; x=1743136885; darn=lists.samba.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=dqqlOuwgDqZzp9bz5GBCwhxF+fXIVL65riJZdwC7+6Y=;
+ b=F3/ClwrrUkApU6jX8bfjxOuaxI0vVJdxBwo08EuaL+DeG27PB3/rNwqpWYvmxJcCjm
+ TYwyHlG/XooWnBYyivJvPWQJ1VYqRnbVkRwy5uoZ7Y0kVZg8LGIIqV33li/TqtZRxqHM
+ eXEDEE+wrw2VQsjinRxK5T79+ApvOyqOc7R1HV1ynXmca+kDc6u93gdBgU7lUtwoLuMG
+ J0seELowrF1hrt6+eyh7ss3UhPd5tH/ObLFY1xJK0tc8q9n5yYvw56dFvlo1e35Bswc+
+ jgotWIWCS9Kyk7nfzRYfsBjHHq9KIR9WbqxUdKAlJdeZ9zx8KatuAvSxYC5F9gO/9sPp
+ mGGg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742503684; x=1743108484;
- h=content-transfer-encoding:subject:from:to:content-language
- :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=6Pg0yMQvEUbwsVwGIOfYXyDbiJntQEcUbugX/+LZLgo=;
- b=Tmp67qWiH5w6MO8X9JE9lgUvVVDrX9mMoBQFZtUDWXb6yW9Wz0FO4l8t/4EBSmhWA2
- ZO0ey9WUvNSAQktGnhlsBwtrd+sm0tOqHVEri7C+z2J846jqZkiynLNA8ExyDl3uge+H
- CK/dxuUCB6NlI2lKPvjaga5DMvqgoraBPsihYlfhxX9B5pXPhx8OV3DIp2sFxD9osj6W
- sMVYyzPcaCNP2TcWvLtBU90CYxxvK63ABoGVnioGc0g+YaFbXuAPQeeC4aZcrNflZjf7
- lCmg17S1l2aeX29ax0cO35wpAzE9Q3ChVESvcuog/8R0lTQyxFSgx10+IwExO35vdvh+
- CrQQ==
-X-Gm-Message-State: AOJu0YyM3L0IcAWe4KswP4Ab+B1wQ2yvBC4v6WLMMLoK86nWj5T/QQ+h
- 3/drAGW4RdYyl1+DnKUL4igwtmv+aymbHlcOfL4YPBzsXIpzlkmbGj+sgTrP3d7QrjphxtfhaFr
- p
-X-Gm-Gg: ASbGncuzbClutvY+H0b6I69FG9JDLYWWHOh06blzcCcC/AjS8misshtCsRYm3BT5pTg
- rERAvbJc+wYq6IYI0G2OdtmZTggXRQjwjLfzJoTr86juvvSmUbc8iCEFaPQHAJF6Z9Z9Gu3EBv8
- t53vo3zNvQpd9W+Mi6kHwCuYmnqIDpPdgR6n1v2LPkX/2tgBT2eHtm/57mcCBGX1BQbeDevwfTd
- eD8TTyHPMrXGuWZ62iP78tiMUSryZRlXAepss/IUOhqD6Xg1UoMINmbJiZPMPoctCvo2IfUjS7l
- gwqvVQaPL5NcfYUkD6kJ9QscqQie7PgQzx2tEvmbXRokVaFbqG9Nd+vmbzR1Yf8iXsAM
-X-Google-Smtp-Source: AGHT+IHWdOFnm35nH7nWyjd3jg8DfF4P63D0GtI2wfaMvUwiHnd39sjnDH7EeJSqxK4WUPiGt+P9/g==
-X-Received: by 2002:a05:6000:2801:b0:391:4231:40a with SMTP id
- ffacd0b85a97d-3997f90f67bmr782222f8f.33.1742503684315; 
- Thu, 20 Mar 2025 13:48:04 -0700 (PDT)
-Received: from [192.168.1.8] (33bad791.skybroadband.com. [51.186.215.145])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43d43f556a4sm58680695e9.22.2025.03.20.13.48.03
- for <samba-technical@lists.samba.org>
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 20 Mar 2025 13:48:04 -0700 (PDT)
-Message-ID: <08637347-ceb3-4389-ae5f-bfc97fdea72a@suse.com>
-Date: Thu, 20 Mar 2025 20:48:03 +0000
+ d=1e100.net; s=20230601; t=1742532085; x=1743136885;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=dqqlOuwgDqZzp9bz5GBCwhxF+fXIVL65riJZdwC7+6Y=;
+ b=c3MZDPYUaV1OV3T3NJQM2rNYNbA71yvvhU1pO2XQlZd/WGxlTRSnQ7o9uyqeTLtYbV
+ +5SdlFI4FK/8EHys7m/R+TSn6K9DU/89HTlO9fueCu1BbJhSr1oDNOuP5xpH6DXjGC1/
+ aSzxnJWu23nTtBXpI3G20jnrCxDgubvR/IBulxPWJI5j9H+/Gi/jfopUy55rpU2bygsR
+ bq9DgOr6ZRfa8tbPRjkQY+RjxCsgspmEsbh/o1lOQhhxJduuF1BYGyvnmkBxQELjcsaj
+ liPbLOBhe7RYR1YAtw/3ZJxskHXZaCUsnN+9oinO6aUDfqrEMt1kk8BlWur9B+Cz85bR
+ 54rg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCV3YGxYgJr3vUWU32S+SiO0oxpMdX5YFJQjGztUmWjcEs3KHUTdWNnbuRpQPX2ZgPe/FdzlqjKjIiyVSWW4hrk=@lists.samba.org
+X-Gm-Message-State: AOJu0YwxC6Jfm2Bd3lqRAlgoLBtR7pZ1aME3t3+bryldzK40/P8ho/om
+ VdS93EbaVzCl3W+3oZVQm1WIWhpE5MgVa7BdUwA8JFgDSE4SkdsyK8RuqCPhuAiZOn/gKZaGIQU
+ lWWlTpcAknZkeeX9wdtmza/TxS/o=
+X-Gm-Gg: ASbGncvwVt7o74pY5gxWO9S5tlKCGyiJTWK4u5rqNs0DhCou1nHABxlR75cyUUNkIXW
+ TWC3Q19ZkHVRS17V5fn09Wp60nKUlwMAoo1kHXnLfM4jhxV2OdtfLSpvBJc8KcoXW3NHanL2NgZ
+ JISbjDG77UgJQ956+vrxmCp2AcBl1rUr+/V6jnFXbN83MJyXajICm0PVdFQnZU
+X-Google-Smtp-Source: AGHT+IH9Ctb8My0VZ3PKZcoJ3VCVnG95JCkGLLFwePI/PfbhY9yjdHxpreHd3SgkxzXTJUzjVG0OiwqWXBgVO3Q+odA=
+X-Received: by 2002:a05:6512:12cb:b0:54a:c4af:29 with SMTP id
+ 2adb3069b0e04-54ad650348fmr674536e87.52.1742532085157; Thu, 20 Mar 2025
+ 21:41:25 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: en-GB
-To: samba-technical <samba-technical@lists.samba.org>
-Subject: Windows Search Protocol Update
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Date: Thu, 20 Mar 2025 23:41:13 -0500
+X-Gm-Features: AQ5f1JoP4_OIOZBwzf7C-v4c73Qz62SPygr11gWZ1F6iL8usKWg0jUqOex5kbJU
+Message-ID: <CAH2r5ms4nV+_+L_o8rhiAMhkF4u+SEThEQn5yfDn2fiLvXc_5w@mail.gmail.com>
+Subject: [ANNOUNCE] cifs-utils release 7.3
+To: CIFS <linux-cifs@vger.kernel.org>, 
+ samba-technical <samba-technical@lists.samba.org>,
+ LKML <linux-kernel@vger.kernel.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -87,75 +81,39 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Noel Power via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Noel Power <nopower@suse.com>
+From: Steve French via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Steve French <smfrench@gmail.com>
+Cc: Meetakshi Setiya <meetakshisetiyaoss@gmail.com>,
+ =?UTF-8?Q?Pavel_Filipensk=C3=BD?= <pfilipensky@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi all,
+A new update, version 7.3, of cifs-utils has been released today.
+Users of cifs-utils version 7.2 are encouraged to update to 7.3
+since it includes a fix for a problem with "guest" mounts that
+was introduced by cifs-utils version 7.2
 
-Every now and again I get people contacting me asking about progress 
-with the Windows Search Protocol server work that I started (a long time 
-ago now) and also how to get a hold of the not yet integrated code to 
-test. With that in mind I'd like to introduce you to a a new docker 
-compose project.
+Links:
 
-So, if you would ever wanted to try setting up the experimental Windows 
-Search Protocol server and have been intimidated by the the prospect of
-   o downloading and building a custom version of samba with the windows 
-search protocol from source
-   o downloading and setting up and configuring either opensearch or 
-elasticsearch
-   o downloading and setting up fscrawler to index a share location
-   o configuring samba and ensuring the opesearch/elasticsearch, samba 
-and fscrawler all play together nicely
-
-then https://gitlab.com/npower/wsp-container can help you out.
-
-You can run a test setup (complete with a small set of test files) with 
-practically zero configuration see. 
-https://gitlab.com/npower/wsp-container#quick-start---test-mode There is 
-also has a fuller demo mode with some more advanced configuration examples.
-
-Please try it out :-)
-
-Most of the above was prompted by a more focussed attempt to provide 
-some documentation around the WSP server and setting things up (and 
-realising it is a bit tricky). Please see. 
-https://wiki.samba.org/index.php/WSP
-
-Regarding progress of integration of this feature I have recently 
-updated all the associated merge requests to do with the windows search 
-protocol server support
-
-There are now 3 merge requests
-
-a) A merge request for the base async SMB named pipe based (but NOT 
-dcerpc) infrastructure to create the WSP service (or a service that uses 
-SMB named pipes in the same way). This replaces various other merge 
-requests which attempted to integrate with the existing dcerpc micro 
-service infrastructure which I have abandoned.
-
-see. https://gitlab.com/samba-team/samba/-/merge_requests/4008
-
-b) A merge request for some usabilty improvements for 
-elasticsearch/opensearch (These patches are also relevant for 
-spotlight/mdssvc)
-   o allow the share config elsaticsearch:index config to use 
-substitutions (e.g. form indexname based on authenticated user)
-   o allow elasticsearch/opensearch in additiona to anonymous 
-authentication use a either use configured username/password or an 
-apikey (elasticsearch only).
-   o moves some code to a new subsystem so that code can be shared 
-between the wsp and spotlight/mdssvc.
-
-see. https://gitlab.com/samba-team/samba/-/merge_requests/3720
-
-c) The Windows Search Protocol server itself, the changes here include 
-the other merge requests mentioned above
-see. https://gitlab.com/samba-team/samba/-/merge_requests/371
+webpage: https://wiki.samba.org/index.php/LinuxCIFS_utils
+tarball: https://download.samba.org/pub/linux-cifs/cifs-utils/
+git: git://git.samba.org/cifs-utils.git
+gitweb: http://git.samba.org/?p=3Dcifs-utils.git;a=3Dsummary
 
 
-Noel
+Detailed list of changes since version 7.1 was released
 
+Meetakshi Setiya (1):
+      Fix regression in mount.cifs with guest mount option
+
+Pavel Filipensk=C3=BD (2):
+      cldap_ping: Fix socket fd leak
+      resolve_host.c: Initialize site_name
+
+Pavel Shilovsky (1):
+      cifs-utils: bump version to 7.3
+--=20
+Thanks,
+
+Steve
 
