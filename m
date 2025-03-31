@@ -2,47 +2,48 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8A55DA76936
-	for <lists+samba-technical@lfdr.de>; Mon, 31 Mar 2025 17:05:35 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BAA42A76942
+	for <lists+samba-technical@lfdr.de>; Mon, 31 Mar 2025 17:06:40 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
-	bh=2SHkW09+B8CMRg+2G5KGtKT2zNs6isBGndyEMo6bwPE=; b=Zg2e86YKGMXK1jQHBXdSGsPj8R
-	/8eWgXWM2HJxlnCpDHFJMdcpnRur4rn5I2+NsNIgY7RmWKeBUbHGmU5acAsQRnQECz8s4RVktv0sN
-	kK5+bvPe5qb1ZXSa1BaqCbPPnitQG3Hte7tfe8MTjGf0gL59+baSsfEulIEheNJSpQfav87EDyHq2
-	Fzd+0uHmPByvnwcD6q7BOVuj2BqrEqh8nNv4l5+DaGZJvgjNz5j4JOeNm2bk48bmY9iP4825GwsG1
-	GT2LYCS2TMneNaD8SL5UZO4Yzb32EfbR/hcU5Q6lAllwVbqup4KhsaFXPLUI33DJ3gJg4Qp5QBo6Q
-	Kfy86Xmg==;
-Received: from ip6-localhost ([::1]:37804 helo=hr1.samba.org) 
+	bh=kf39RGJZPGbvEIW9xnBAVFinc4tThnLv5uAdN85ppsc=; b=xdkaAY+JaiU7Jl7/NZ/CZy0Qkn
+	wbSi9LO9YZ7nJXNx3114/LlBLfSHvGq9N7+aFi52Cu3csM7puIrvN011TEjGkQXY3VLP7ckwfNP4L
+	ZEY3Ucwl2oeHg3Bjf4SSGL/jT65+uj49EVbV6VI6ah8xyZ5z5rLW/b7XmExBBvLB7HegiRrs+GKTv
+	DQb4MHH++2A3bnJ//05gFqX05VF8+s5GjlKHa+tYlt0WL4+ZetO+KG5XPGL/wRfZVjIN5LhnQp7bb
+	h1/x7uETwWX2K0uVh4mVtiVpMWCI+wUTZp10fxSEoShksAx9pHLYGqaGg3m2oKwXwzhwZAK1vT7oU
+	Lyq7PIvA==;
+Received: from ip6-localhost ([::1]:18974 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1tzGhC-00HCt4-Mw; Mon, 31 Mar 2025 15:05:02 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:58136) 
+	id 1tzGie-00HDDQ-6z; Mon, 31 Mar 2025 15:06:32 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:52164) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1tzGh3-00HCrz-Je; Mon, 31 Mar 2025 15:04:56 +0000
+ (Exim) id 1tzGiS-00HDAR-Vt
+ for samba-technical@lists.samba.org; Mon, 31 Mar 2025 15:06:25 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=From:To:Date:Message-ID:CC;
- bh=2SHkW09+B8CMRg+2G5KGtKT2zNs6isBGndyEMo6bwPE=; b=S+8ZFb4cKjqLJw8nQKW6sb5MPV
- 7ohpHoxbUit3UO2iqhxGPGzLE2775x7CEs23P0vEMCxnPpJ60QJ9UpvlvbrHh/qJYxbPrSXR/nHdl
- ldkPdOJ/FxymrYJ45i8TYZUMcEHZcQpBMrunwyQsc6drxzikqx3HpMOoSLd/0aK08HlLZWw9lVKuh
- jSpA66cwkpzs9a17v3dejvZizo1srqGpaZqJUBGw04D+uWsKSItCNr04eOnjRYBcm2JxuMVjr02Jk
- cGOHAz/UTG5oBT7nYeskRi0iZct+n394PjRPEnIJhF3iY0IDTc3X5abVB2w8y0zjcEGhH1mviKoLR
- eP7Yiqa0e6NH7Rn+sCqcW70QJJqfqMkuO5WZji1NR6si66BaFlvt6+ADL08UZO8CIDF5+xAgMXAVz
- z4BxDrjBwToF7+95BQoPa7BlpPLq0aZjkEm7YPSPMzpLKXuUscYuzVrnjypFVdpqIV9xKArPxNadi
- PgM2ItS5hEArOJ1kBguFFvgd;
+ bh=kf39RGJZPGbvEIW9xnBAVFinc4tThnLv5uAdN85ppsc=; b=aRq3Q19XhGyI3v4fK6LCyoozor
+ YMijUArCDpDETE6GL8zx+3iXmJ/pxPM8WGQPxyQVThJzJV8GmghktaMRcwr/ceWppRxfDolEOtdVY
+ 0yqyk/w3gWDVLDu0Suj9hfnpSxRYtTEF4OvjwXbpfVn9fRb/oEC4pPCHdpSV+yCaZp2bSM+ykxK1c
+ OmHaD770oz9y6GRc14hki3fCHbQ+G8pl2a7uf+TaGp3RIHqpvHjUvMyfheStYoglcte4gMWEJFDJM
+ UrdRbYD2C+ys40aifE5ytepqXmK6t3E5llEeGP2VugFHrEUzSLQ4YEg8lWHaK5256J23TDUuesIii
+ lVqCpw6hKX74iU6vtyFg4El1Y3aCLhmX7XSYr2a5W6Q/AnNdESDtEUlttU23Cw5FRgWTnqMQqMEjc
+ i1zoWBkYz+YikAERnzFnhh2GwY35J78t1FCWOxX1ZLoXMHUFvkgXzjKxFtcnZ2hyAcG5a/cEPfyO4
+ fd8SYm4EDMsFSn6bva0Jxo5k;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1tzGgr-007W21-06; Mon, 31 Mar 2025 15:04:41 +0000
-Message-ID: <289c4143-7fac-4d93-8d5d-5d0ee8772af6@samba.org>
-Date: Mon, 31 Mar 2025 17:04:40 +0200
+ (Exim) id 1tzGiG-007W5b-1V for samba-technical@lists.samba.org;
+ Mon, 31 Mar 2025 15:06:08 +0000
+Message-ID: <088da2bb-ea3d-4788-8c53-86b334c16c48@samba.org>
+Date: Mon, 31 Mar 2025 17:06:08 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Content-Language: de-DE
-To: samba-announce@lists.samba.org, samba@lists.samba.org,
- samba-technical@lists.samba.org
-Subject: [Announce] Samba 4.21.5 Available for Download
+To: samba-technical@lists.samba.org
+Subject: [Release Planning 4.21] Samba 4.21.6
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -61,99 +62,19 @@ Reply-To: Jule Anger <janger@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Release Announcements
----------------------
+Hi,
 
-This is the latest stable release of the Samba 4.21 release series.
+Samba 4.21.6 is scheduled for Monday, June 2 2025.
 
-
-Changes since 4.21.4
---------------------
-
-o  Douglas Bagnall <douglas.bagnall@catalyst.net.nz>
-    * BUG 15795: ldb index cache is too small on known large transactions
-      (schemaupgrade, provision).
-
-o  Ralph Boehme <slow@samba.org>
-    * BUG 15822: Enable support for cephfs case insensitive behavior.
-    * BUG 15823: Subnet based interfaces definition not listening on all 
-covered
-      IP addresses.
-
-o  Pavel Filipenský <pfilipensky@samba.org>
-    * BUG 15727: net ad join fails with "Failed to join domain: failed 
-to create
-      kerberos keytab".
-
-o  Xavi Hernandez <xhernandez@redhat.com>
-    * BUG 15822: Enable support for cephfs case insensitive behavior.
-
-o  Volker Lendecke <vl@samba.org>
-    * BUG 15791: Remove of file or directory not possible with vfs_acl_tdb.
-
-o  Andréas Leroux <aleroux@tranquil.it>
-    * BUG 15795: ldb index cache is too small on known large transactions
-      (schemaupgrade, provision).
-
-o  Anoop C S <anoopcs@samba.org>
-    * BUG 15797: Unable to connect to CephFS subvolume shares with
-      vfs_shadow_copy2.
-    * BUG 15810: Add async io API from libcephfs to ceph_new VFS module.
-    * BUG 15818: vfs_ceph_new module does not work with other modules for
-      snapshot management.
-    * BUG 15822: Enable support for cephfs case insensitive behavior.
-    * BUG 15834: vfs_ceph_new: Add path based fallback for SMB_VFS_FCHOWN,
-      SMB_VFS_FCHMOD and SMB_VFS_FNTIMES.
-
-o  Martin Schwenke <mschwenke@ddn.com>
-    * BUG 15820: Incorrect FSF address in ctdb pcp scripts.
-
-o  Shachar Sharon <ssharon@redhat.com>
-    * BUG 15810: Add async io API from libcephfs to ceph_new VFS module.
-
-o  Andrea Venturoli <ml@netfence.it>
-    * BUG 15804: "samba-tool domain backup offline" hangs.
+https://wiki.samba.org/index.php/Release_Planning_for_Samba_4.21
+has been updated accordingly.
 
 
-#######################################
-Reporting bugs & Development Discussion
-#######################################
+Jule
 
-Please discuss this release on the samba-technical mailing list or by
-joining the #samba-technical:matrix.org matrix room, or
-#samba-technical IRC channel on irc.libera.chat.
+-- 
+Jule Anger
+Release Manager Samba Team  samba.org
+SerNet Samba Team           sernet.de
 
-If you do report problems then please try to send high quality
-feedback. If you don't provide vital information to help us track down
-the problem then you will probably be ignored.  All bug reports should
-be filed under the Samba 4.1 and newer product in the project's Bugzilla
-database (https://bugzilla.samba.org/).
-
-
-======================================================================
-== Our Code, Our Bugs, Our Responsibility.
-== The Samba Team
-======================================================================
-
-
-
-================
-Download Details
-================
-
-The uncompressed tarballs and patch files have been signed
-using GnuPG (ID AA99442FB680B620).  The source code can be downloaded
-from:
-
-         https://download.samba.org/pub/samba/stable/
-
-The release notes are available online at:
-
-         https://www.samba.org/samba/history/samba-4.21.5.html
-
-Our Code, Our Bugs, Our Responsibility.
-(https://bugzilla.samba.org/)
-
-                         --Enjoy
-                         The Samba Team
 
