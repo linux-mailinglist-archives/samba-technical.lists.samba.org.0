@@ -2,74 +2,49 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1076FA7998E
-	for <lists+samba-technical@lfdr.de>; Thu,  3 Apr 2025 03:14:44 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id F16F9A799FF
+	for <lists+samba-technical@lfdr.de>; Thu,  3 Apr 2025 04:36:37 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=hohzDYZ6FlI+cb3uFQ5CJ3xazJWQcQVGVVZ8oxro6eI=; b=gjZY7j4/ADHCug6VDxlEEuxbDf
-	MvqNhEuoCTa82SZbXq+NA06itbjsgPc4TwVNemkIU6ql4nudci4iaoIQgtw3Z8RoS0oPP11Hv0xya
-	/DzFvur/mnikULrDKGep6vRj23l6C/m6ICB9U8axRGq9UyzK66HHWQYKKPWa8gDs7WkmHTpzQUJ5l
-	kHvzJoX4MQmLOAtIssWz+bMhvMzsAuXy2eES/L2BjB6jYp+ITPNl6YY+y/PnBgV2H5kk4UUOFgGC9
-	DXwFlQgRq4UZU/ZQEWE93lKssHQS7h4Bzhz5cZW2rlXO/XoxatZQ7YYJepgUB1Is0T4g+r9vbT1T1
-	UGhgsCMw==;
-Received: from ip6-localhost ([::1]:59088 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=uOvwj1XRbt8WgkfBRKSAwS+uUhnvxAwgKnGjvATOiIU=; b=lRr6Qm0okMkkoB4DDHDOUvL7PE
+	zN4cKaus9efRfH0jEDMHBOdhHrsiCO1rZEaONzaN945zZttj9o4hOVLZ1L5IhPyEew0BG20s3rp3c
+	G3B6W/ehBV9N0zX59neVtx2FWWQzcdbiN4qxI00jh1eB8ADVLmx0nQZCCjRGdTRJAhrdAzK2Rm0Gv
+	N379sBYELniM7Ph3Xwpc1nTX+yRYeP12VdXKCLh5iHI2dAHik6odhzczW191StEluqPxEjKVTXA/6
+	KqOqaGfscSKXPu0lS3y5o9j0tuDGa4DnGpGudd2s0DWQVtapRjlNixD06OGPKrPzddsgMnHcoQKYP
+	OFYysqIA==;
+Received: from ip6-localhost ([::1]:49980 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1u09A9-001c4s-Lk; Thu, 03 Apr 2025 01:14:33 +0000
-Received: from mail-lf1-x136.google.com ([2a00:1450:4864:20::136]:43128) 
+	id 1u0AR5-001cCf-11; Thu, 03 Apr 2025 02:36:07 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:30576) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1u09A5-001c4l-39
- for samba-technical@lists.samba.org; Thu, 03 Apr 2025 01:14:31 +0000
-Received: by mail-lf1-x136.google.com with SMTP id
- 2adb3069b0e04-54ac9d57173so1585070e87.0
- for <samba-technical@lists.samba.org>; Wed, 02 Apr 2025 18:14:16 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1743642855; x=1744247655; darn=lists.samba.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=hohzDYZ6FlI+cb3uFQ5CJ3xazJWQcQVGVVZ8oxro6eI=;
- b=hQg72aunCFFNkJ2QGj249kg4DY+/UMv0FdQ2xSirDiefrB++6gPdmT3IrqLefwPZRR
- wP2F7q6Y7UlD6GXLhbfY4+oFlEF1AWuTOPmmaM6J6pT0GxM8Mkmvpkp5RJ0iqh6Rie9J
- pP5KDN843R4mfuKBxCiJg/gxr/oDObv7en6ZWWNHT+ZLGVLIFNT2znBHAjbk5vGz6qjY
- cM9kTOV6VH56Ds8qII3cpXfDhK9IXu8qiJatOgTLOQd0j4PYQOHe/SHy/fW6GNInDIWM
- LopLzEpXrJvjMoKndg3YXun/DlAfkOhNENPMPzJQIY0q53Fg9Poxyl16XY1AVM5rHkEz
- L+Bg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743642855; x=1744247655;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=hohzDYZ6FlI+cb3uFQ5CJ3xazJWQcQVGVVZ8oxro6eI=;
- b=lwPv5mjdtyWipJ26QaIBJ+P/cN1EDQ8GCq/7vALMbp7hnShv7sYxg1AjS6lKnBCGHx
- +Bkr4H+Odfh7s8LwxyKDU/3yPWe0Lw/mC7RLxtshtsv/DZ91M+BZCpSgdpm3h7aQFDWr
- XOA0YD7mdjxLanQ2Uyrzs+zHHM4+anwRIES46RGWnbWzqb/mjlHGTuL0p59q8vtm38Ld
- wPdgGsxPLlBIGCiXHxBgwqWE8nDZoV8eSZo33qIsOvx6lgcfJ7d8Nb+/ldYs/iSU1WqL
- 6zu5WU21pQkxzIuO32a57pZ6NB3Yh3glLnFuUbKM6rgWkitd4ocONz+jogXQC09bWR8r
- 6e+g==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWoP6UlwRfil9yFrClL/7ZtY9KxpMWMbcuSSUbEK5mGTr9RP4ZdrkF/I59rLWYdd1sgPQJACKZj3Y3NoyLp51U=@lists.samba.org
-X-Gm-Message-State: AOJu0YzpYommOXX/yUwGOIvsU0g7loZKZpRvtapt9uC2VT0+R04+s/G7
- TJYay5u/+Ao++cXAeYSwu3DDV2lNbc9qbtr5oPESn0vXt98zQjzIv1DSESBGiECLKQTDQJuwyIU
- Cq4xIq4bPAmfLFOYpTheRg/o3XFc=
-X-Gm-Gg: ASbGncu4kvcy8dcAg36bWr9WqzZOhJpa1IJJ3aXxDsXVPB6+5iF4dqgtbJ/Zs601j1S
- osNt0jdi3/M0QBKv0Lu01TUKp8e5zrIZ3Er+L/Mg5Q7Rv1/7i6gROKmNUgSCcV4U4kbuqrrT7f/
- rp0DzF9ZYArNynrfjdxZ6gENJKF4BtK+UtcbHt3/ta9oZSMwb4c541RA306TSGP9E1OWXLtg==
-X-Google-Smtp-Source: AGHT+IGuljGeIJ8V+UnF5jeVqiCJaHoqTcV9VjMiV89lFThrlMNWp5FWVsSlRnwQFFKIgzfsXe7cWnV0yKQGQAvRCmg=
-X-Received: by 2002:a05:6512:2c06:b0:549:5dcf:a5b with SMTP id
- 2adb3069b0e04-54c1ca56dcamr510439e87.4.1743642855318; Wed, 02 Apr 2025
- 18:14:15 -0700 (PDT)
+ (Exim) id 1u0AR0-001cCX-1g
+ for samba-technical@lists.samba.org; Thu, 03 Apr 2025 02:36:04 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Message-ID:Cc:To:From:Date;
+ bh=uOvwj1XRbt8WgkfBRKSAwS+uUhnvxAwgKnGjvATOiIU=; b=SY81pDkgUSArYa0jEoIKvam7m1
+ li8ZRudavdNXd9hoO0YtYzT8YlfmB62+yMysEjIDw4zLuzmipyig1J52zM9yEoMAhbYR2pLKl4qvu
+ 1MjwUXmeO1yfGJuk/hAV7HgCdKRLk83/Uxkf7jObevp2mQsgCIpK/SVkodA5AJEDtfJ9Z5c7hztZf
+ 7soT8VSBlBkbCkVwLJOkk9bf+/sssgFbZ6ujbAxZBEBfhdSm9wobEeIAAfspDsnJxyDl1qE/Y1SYL
+ 8JlKLs684PCbXKBSqxlfy9Y5w6U6JK/QBkXenhV4rOgsCnKt2gjk1ZXVf13fHd1SMKnFx98f+9FKn
+ qXyppPfroqu6DMpqc55CH0KTzLid6OX3tt88mu0l7ybZ/1orIx/DxgMH7ST867ijrxKf7O7lGHSkw
+ vPqAqk00pm5Aam2N+aIm20FSHQtqYJRPINOk2ZXcZToairBXUWPPJRl0An8HC+RMPV7jGtZ78EZxs
+ aWPn8Np8uP6gVain+ZksHBCi;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1u0AQm-007uTH-1E; Thu, 03 Apr 2025 02:35:49 +0000
+Date: Thu, 3 Apr 2025 13:35:41 +1100
+To: Shachar Sharon via samba-technical <samba-technical@lists.samba.org>
+Subject: Re: I/O-stat module for Samba
+Message-ID: <20250403133541.29ad321c.ddiss@samba.org>
+In-Reply-To: <CAF8sLVVfQdp-q6U5u2iWUgR5nJ4-gGNuCDL1FAgbiztpnB0jkQ@mail.gmail.com>
+References: <CAF8sLVX=j571xk8Z10WRinb=tb4OjJNgcQ+vm-eO8SR6C0XU=A@mail.gmail.com>
+ <37c06470-57fa-47b4-9aa8-50f1cefa713f@samba.org>
+ <CAF8sLVVfQdp-q6U5u2iWUgR5nJ4-gGNuCDL1FAgbiztpnB0jkQ@mail.gmail.com>
 MIME-Version: 1.0
-References: <20250402200319.2834-1-kuniyu@amazon.com>
-In-Reply-To: <20250402200319.2834-1-kuniyu@amazon.com>
-Date: Wed, 2 Apr 2025 20:14:03 -0500
-X-Gm-Features: AQ5f1JpOfPXmxLBAK2JBQEl3k57ch86u5v63Nw177_ohPVCem745BX31RIrob7w
-Message-ID: <CAH2r5mt68AFyJGdBcPB+eqzdAdbx=0QXC_U8MY-te26Wb0ye5w@mail.gmail.com>
-Subject: Re: [PATCH 0/2] cifs: Revert bogus fix for CVE-2024-54680 and its
- followup commit.
-To: Kuniyuki Iwashima <kuniyu@amazon.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -83,50 +58,24 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
-Cc: Paulo Alcantara <pc@manguebit.com>, linux-cifs@vger.kernel.org,
- Shyam Prasad N <sprasad@microsoft.com>, Enzo Matsumiya <ematsumiya@suse.de>,
- samba-technical@lists.samba.org, Tom Talpey <tom@talpey.com>,
- Bharath SM <bharathsm@microsoft.com>, Wang Zhaolong <wangzhaolong1@huawei.com>,
- Kuniyuki Iwashima <kuni1840@gmail.com>
+From: David Disseldorp via samba-technical <samba-technical@lists.samba.org>
+Reply-To: David Disseldorp <ddiss@samba.org>
+Cc: Shachar Sharon <ssharon@redhat.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-might be helpful if there were eBPF tracepoints for some of this that
-would be able to log warnings optionally if refcount issue on
-sock_release and/or rmmod
+On Wed, 2 Apr 2025 17:53:16 +0300, Shachar Sharon via samba-technical wrote:
 
+> The devil is in the details ;)
+> As far a I can say from reading the profile code, extending it to have
+> per-share metrics is doable, but far from trivial. I will try to make
+> a similar POC by extending profile infra so we can compare the two
+> options.
 
-On Wed, Apr 2, 2025 at 3:03=E2=80=AFPM Kuniyuki Iwashima <kuniyu@amazon.com=
-> wrote:
->
-> Commit e9f2517a3e18 ("smb: client: fix TCP timers deadlock after
-> rmmod") was not only a bogus fix for the LOCKDEP issue but also
-> introduced a real TCP socket leak.
->
-> I'm working on the LOCKDEP fix on the networking side, so let's
-> revert the commit and its followup fix.
->
-> For details, please see each commit.
->
->
-> Kuniyuki Iwashima (2):
->   Revert "smb: client: Fix netns refcount imbalance causing leaks and
->     use-after-free"
->   Revert "smb: client: fix TCP timers deadlock after rmmod"
->
->  fs/smb/client/connect.c | 34 +++++++++-------------------------
->  1 file changed, 9 insertions(+), 25 deletions(-)
->
-> --
-> 2.48.1
->
->
+SGI had a bunch of patches for that long ago. There should still be some
+patches floating around in the archives somewhere, but all I could find
+with a quick search was:
+https://samba-technical.samba.narkive.com/J3LkHAoP/samba-profiling-and-pcp-pmda#post1
 
-
---=20
-Thanks,
-
-Steve
+Cheers, David
 
