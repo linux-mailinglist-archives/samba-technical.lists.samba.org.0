@@ -2,73 +2,71 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id F076BA7A8A2
-	for <lists+samba-technical@lfdr.de>; Thu,  3 Apr 2025 19:33:43 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 56A8AA7CABC
+	for <lists+samba-technical@lfdr.de>; Sat,  5 Apr 2025 19:17:43 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=GcsoXF35i/+hSpm25m6CjBETnlGwcsMcAt4eR6+93r8=; b=BGzS2c3bCmYjPl8aIBteWnql9+
-	6lTO79wdMG4HSbbzDPPc9mYSa3NQs621QR4w6hJdupTxEIoQpaWQ/Dl3S/1xKiXlnsE/aCyAaEXx3
-	WMuBKoMEnHreEZNHtrKvn0dz9ixTYg8rry7EKXCURUz2rMZlS+lY7hDVkPex2IkMAmiCkLPZH2U6i
-	hylSGJuSZiib1mMzQoQv0rjUHbqqZD2/WbW3nHIR2cOdAbTUvXGsUB7jWxeGk5uTU/mIatu81gBWO
-	Z3cT/wiDeTXDSOWXfhFd3TNv/pFoDIgJTdnftxryR3ifNVztcfBf8Df3koF29oBlru2VIDdp5i/8Z
-	aR7e8fKg==;
-Received: from ip6-localhost ([::1]:58528 helo=hr1.samba.org) 
+	bh=ghjQpHKusYxyadXLhZmBSkUSYQTR32eq6vdcMhfyIjQ=; b=Jb4I2Y0vxS38JwdRn+44Y6Q0X9
+	50PDkhPGrw4DC7vBq0WiI+PaYuQPAIe0NhhF6OM+RwZzT8mcgfzl6a3569KeLF78vuX4JU0cJBKI0
+	8UcVRafUp3SRC3pxJBmJE3ecitmUiPSC4liYtru94lEdUi2KJPuuNGUYjzaHuKw/shQRFhH+k4k0B
+	CfSXZBamBx4s3KBhDvs9haHdzZL8XghBBY66XCQtKcPXYnT573JYmF4SNSKh+L526k2j2AXXrFORj
+	SRQZJMTX+H6KpeSCRmBAv4skfPr8ZYkuKNsvDORaVophu0TOmdzAuymAIzewADOwI9HPdrr5QqkMn
+	VQLx7aZg==;
+Received: from ip6-localhost ([::1]:26438 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1u0OR7-001f1l-8m; Thu, 03 Apr 2025 17:33:05 +0000
-Received: from mail-lf1-x12f.google.com ([2a00:1450:4864:20::12f]:46293) 
+	id 1u178b-001lBk-N6; Sat, 05 Apr 2025 17:16:57 +0000
+Received: from mail-lf1-x12b.google.com ([2a00:1450:4864:20::12b]:42428) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1u0OR2-001f1c-UL
- for samba-technical@lists.samba.org; Thu, 03 Apr 2025 17:33:03 +0000
-Received: by mail-lf1-x12f.google.com with SMTP id
- 2adb3069b0e04-54acc0cd458so1446950e87.0
- for <samba-technical@lists.samba.org>; Thu, 03 Apr 2025 10:32:48 -0700 (PDT)
+ (Exim) id 1u178X-001lBd-3l
+ for samba-technical@lists.samba.org; Sat, 05 Apr 2025 17:16:55 +0000
+Received: by mail-lf1-x12b.google.com with SMTP id
+ 2adb3069b0e04-54af20849adso2940587e87.1
+ for <samba-technical@lists.samba.org>; Sat, 05 Apr 2025 10:16:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1743701567; x=1744306367; darn=lists.samba.org;
+ d=gmail.com; s=20230601; t=1743873399; x=1744478199; darn=lists.samba.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=GcsoXF35i/+hSpm25m6CjBETnlGwcsMcAt4eR6+93r8=;
- b=YCsTnBDmOGLlOmq99CRUdIJauijYBkT6t8vf6sMPExm6z7rMguiZkQGog/lZ960HNb
- 26BWhrVwUzWM5GOYcoIFdOSq20ldPsoe587FaovYIfr+K4WSWNI77kadxUHXcunHYZHL
- jfUevZ1eIgCQZ1oP6MeQhnpJp612bTBvwrEOKY4jSpQX+RuOfTAsZsUs7o/5mrHtWiFB
- Tb201/79GNL07UX3oy3bNkrdMZppSKEQRpcpUlsSvdBjagyDgWG1IodebO+sfDbBI6PI
- FVNaE4prUY0bY1AyMNyLl/KcBRceG6ewN9UxQOpEZZ7QNYzz6gsUOcsTgE58BmwIoVhZ
- vn1A==
+ bh=ghjQpHKusYxyadXLhZmBSkUSYQTR32eq6vdcMhfyIjQ=;
+ b=dFShQgcrlN/b6Z2E+HKmvTfXH73lpDMmvMcL+/U5qUGqRIP3gmdtA3TmMCNak1iMu2
+ WBkFJ+hjhlKaKqEGLNVFqaG8+8yApoTVhHB2LY+1uty8iwxixk9C1PdC73WjRkteIDHA
+ 7uulcaWak9X4LUvxDmh05rq63zgyJe0vTUjAKk87D0s0qAx3aUEFxPn5HkiparsLVWHl
+ zKnnzBaGj8JDi5oY3ZHfKwHhp2hhDqiwPVYWkDaz8xV86Puh3uLqXyw6VWHHqHePl3mr
+ cmZ8hyOEA/hul4zpXGURvxaYNbCfaAjjx0BDiZdgDjFAyLZZWGWhfAod1Fz8g3kOWlTe
+ uHPA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743701567; x=1744306367;
+ d=1e100.net; s=20230601; t=1743873399; x=1744478199;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=GcsoXF35i/+hSpm25m6CjBETnlGwcsMcAt4eR6+93r8=;
- b=V2MwDSPcMNCcsAe6lSnohJqbSN8deQNhM8FeWpHr2rcA9D4gJGGyPqK3+ZJ9mNdd6R
- SnSIJmieNJRA6eH7f63nBRELs3k8vC1q3xQW0CVmoqRDAJb3eMgxARgQwK/4ACFa3FNj
- aWXyDHoNTJjv9YOakeeaoFNdnG74XWz9Q1GTUOhnijGkQL4g5YKVjLmglORN120OZS2X
- kCyrZPtGiH2Mfr8fYc6dIPpTymzRU1QZah8tnMZvmx30VP8xJpJdUna4sWsmuQmchdJa
- xmqMkD/014dfZnvEiJbSLoSSr5aeWm9fCNEA+Sv7jWVrqr/vhtbza/fPJ2LSgBFrtySo
- XCJQ==
+ bh=ghjQpHKusYxyadXLhZmBSkUSYQTR32eq6vdcMhfyIjQ=;
+ b=aqm2blIF0xNOoZCb7jtkHpMtQbwXRMJ12SctXzuoxpM2h6rS4rowP19C6ec+029fbX
+ hFuohmeK5cbJnBLRAwIANNBq2N+YKEWMxEZGk24HG1HwGiiLpt3fI7XyUsCt6XHakyc7
+ DpNbjVUi1Df29trDbTTOdbgJbQXeziiF6sV2aavFJjo9Wty6sHWMyCWgEOKRZFh8gLkv
+ r8fzO/GUsdeGfWgY8W417eS+N/tFvyuC/1TSIGKuuhEnDJ/WC2AG4tULbS5fF4zjhrA+
+ W57GXNCDItyAQglHVt+Q2EZtB7wBNzcsP2rbH0hDMQvy5AePmdRO6qznsoADkRTgsid3
+ nGGQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXTR/85D5pThMeYS5ahW9/6n+xLTV11B1YVAVcXQuti3ValapDhnBGKAGdl3kWx4X/8r/VBT96zsfdkK1m1Xt8=@lists.samba.org
-X-Gm-Message-State: AOJu0Ywi4TpEk5Twa3E2480pDI8Xfa4yljXJtNaahoIwbyGs0f7nNTsj
- dhrFPGB+YkVb5wTwuABnQURXho8Xh0GUUVAtVnntg2AVapNLwSXow4cgHtvkJauMv1hN9GzGF5s
- 9Au9bs5EPkBIMf2t2/juonOO0kxg=
-X-Gm-Gg: ASbGncstyLBk/pryNzJqNZ6yyhs9a3CxugOO6NT50nt2kgpDVXqYPnPtNr/lBqwlqwM
- 8pOQCL7Tvl2McgcpwKPPHB4K6lbn3/Ah32iK1VX+ojvBXgrWUb5Ays/ZOalalOyFLjxWHZxZUpm
- 2KF2mcbQkLbMLkEYI/45puPr6LtALsN3tKZf7Vwe+Br7TS+eDwpNV8pufNH1kB
-X-Google-Smtp-Source: AGHT+IHEe+uYv1jyrX50uRJRoS27zS+oZLgCijcqp496hedWd3XtoUrXrhlietwX3sqHe/edm9HqLxcqsCYQE1SC6PE=
-X-Received: by 2002:a05:6512:39c3:b0:549:4d7d:b61b with SMTP id
- 2adb3069b0e04-54c227dc60emr17560e87.35.1743701567095; Thu, 03 Apr 2025
- 10:32:47 -0700 (PDT)
+ AJvYcCXAlnLkmotrP25EobHxj1AQvqEKmXKVI1ZsqTEXob9Xl3aodQ2TuYNlNx3eeTJnS3ZETOWlqD//WWyOE8wCUFE=@lists.samba.org
+X-Gm-Message-State: AOJu0YxGq80JosTw43kNupi0O/5nuevdhHdh0cdqZ1D+HUb8rOSBJcvv
+ m6TIfTp0WBXkSxMItNLO5UOcP9+0+iFaZxcOm7up7i74Hquks2pu17WbluHP18NxH9XtrDlsjzs
+ nR3Ttm2ZwAHYhr0nBpnLcCo0qmtY=
+X-Gm-Gg: ASbGncuGdvDbsvSJr9nSNsM1ta7togBmiramt5wsl4zYRmfrHOBk/8TRGqGGJiUMc5K
+ Vj29qvOdp8o2Ukcq2WrLkontAmRXKON4rl+mXVDYd5Ccu87iIlCcggylBnvJGXJgP8Cx24p2P3R
+ /gpQJAv8Fdem5Cfw/R6s0QmNAcH7Io4DdxLE+Psc5m98xOnjUzSfHXv79363he
+X-Google-Smtp-Source: AGHT+IG4/SsIy6Bz2/iK9JWB5DA5CYEZS2mOTNnhljcm6kX7i4N7N2r0sZflPJm0A+pI/ki6KhcoiQ3+LBIhIrB9ue0=
+X-Received: by 2002:ac2:4f14:0:b0:545:3035:f0bb with SMTP id
+ 2adb3069b0e04-54c1ca866d9mr4778947e87.22.1743873399144; Sat, 05 Apr 2025
+ 10:16:39 -0700 (PDT)
 MIME-Version: 1.0
-References: <1e95b93f-7632-441a-a4ba-aecd7e640383@huawei.com>
- <20250403172709.92329-1-kuniyu@amazon.com>
-In-Reply-To: <20250403172709.92329-1-kuniyu@amazon.com>
-Date: Thu, 3 Apr 2025 12:32:35 -0500
-X-Gm-Features: ATxdqUEdkwlaOmIye7bwHb04zWJ1D1SxMn4NKhEDaZnPhFwGHdMaEUROeE9PlVA
-Message-ID: <CAH2r5mtvkAAEur6_jPMtvpKa8q9fWufwV7VG+fXkATXs_jZv0w@mail.gmail.com>
-Subject: Re: [PATCH 1/2] Revert "smb: client: Fix netns refcount imbalance
- causing leaks and use-after-free"
-To: Kuniyuki Iwashima <kuniyu@amazon.com>
+References: <CAJXSQBms+s2Whk7SfugzQ1kby-xyJ62aVLVvM05rPtFAo7247Q@mail.gmail.com>
+In-Reply-To: <CAJXSQBms+s2Whk7SfugzQ1kby-xyJ62aVLVvM05rPtFAo7247Q@mail.gmail.com>
+Date: Sat, 5 Apr 2025 12:16:27 -0500
+X-Gm-Features: ATxdqUFd80OcBQkNwifuudccY6nfsd-84_NAujyDftFJe7Utl7_4sp5kgNzyHJ4
+Message-ID: <CAH2r5ms2=o4baY-6_aLmHpJhBYwvaWXUKwZufKs-iT3vsEg_hA@mail.gmail.com>
+Subject: Re: Issue with kernel 6.8.0-40-generic?
+To: Junwen Sun <sunjw8888@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
@@ -86,82 +84,53 @@ List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
 From: Steve French via samba-technical <samba-technical@lists.samba.org>
 Reply-To: Steve French <smfrench@gmail.com>
-Cc: pc@manguebit.com, linux-cifs@vger.kernel.org, sprasad@microsoft.com,
- ematsumiya@suse.de, samba-technical@lists.samba.org, sfrench@samba.org,
- bharathsm@microsoft.com, wangzhaolong1@huawei.com, tom@talpey.com,
- kuni1840@gmail.com
+Cc: pc@manguebit.com, linux-cifs@vger.kernel.org, profnandaa@gmail.com,
+ samba-technical <samba-technical@lists.samba.org>, 1marc1@gmail.com,
+ =?UTF-8?Q?Pali_Roh=C3=A1r?= <pali@kernel.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-> What branch should be used to send reverts for -rcX ?
+Good catch - it does look like a regression introduced by:
 
-cifs-2.6.git for-next
+        cad3fc0a4c8c ("cifs: Throw -EOPNOTSUPP error on unsupported
+reparse point type from parse_reparse_point()")
 
-But probably won't be an issue in a few days (since mainline then will
-likely include the conflicting patch - which fortunately is unrelated
-to this discussion, just fixes an RFC1001 bug)
+The "unhandled reparse tag: 0x9000701a" looks like (based on MS-FSCC
+document) refers to
 
-On Thu, Apr 3, 2025 at 12:27=E2=80=AFPM Kuniyuki Iwashima <kuniyu@amazon.co=
-m> wrote:
+    "IO_REPARSE_TAG_CLOUD_7   0x9000701A  Used by the Cloud Files
+filter, for files managed by a sync engine such as OneDrive"
+
+Will need to revert that as it looks like there are multiple reparse
+tags that it will break not just the onedrive one above
+
+
+On Fri, Apr 4, 2025 at 10:24=E2=80=AFPM Junwen Sun <sunjw8888@gmail.com> wr=
+ote:
 >
-> From: Wang Zhaolong <wangzhaolong1@huawei.com>
-> Date: Thu, 3 Apr 2025 17:59:20 +0800
-> > Hi Kuniyuki,
-> >
-> > When testing this patch on the latest mainline, I found that the follow=
-ing
-> > snippet has a conflict:
+> Dear all,
 >
-> I guess it's because I used for-next branch of the cifs.git.
+> This is my first time submit an issue about kernel, if I am doing this
+> wrong, please correct me.
 >
-> Steve:
+> I'm using Debian testing amd64 as a home server. Recently, it updated
+> to linux-image-6.12.20-amd64 and I found that it couldn't mount
+> OneDrive shared folder using cifs. If I boot the system with 6.12.19,
+> then there is no such problem.
 >
-> What branch should be used to send reverts for -rcX ?
+> It just likes the issue Marc encountered in this thread. And the issue
+> was fixed by commit 'ec686804117a0421cf31d54427768aaf93aa0069'. So,
+> I've done some research and found that in 6.12.20, there is a new
+> commit 'fef9d44b24be9b6e3350b1ac47ff266bd9808246' in cifs which almost
+> revert the commit 'ec686804117a0421cf31d54427768aaf93aa0069'. I guess
+> it brings the same issue back to 6.12.20.
 >
+> Thanks very much in advance if someone can have a look into this issue ag=
+ain.
 >
-> >
-> >
-> > > @@ -3444,6 +3441,9 @@ generic_ip_connect(struct TCP_Server_Info *serv=
-er)
-> > >         (server->rfc1001_sessinit =3D=3D -1 && sport =3D=3D htons(RFC=
-1001_PORT)))
-> > >             rc =3D ip_rfc1001_connect(server);
-> > >
-> > > +   if (rc < 0)
-> > > +           put_net(cifs_net_ns(server));
-> > > +
-> > >     return rc;
-> > >   }
-> > >
-> >
-> > Specifically, it is this line:
-> >
-> > >         (server->rfc1001_sessinit =3D=3D -1 && sport =3D=3D htons(RFC=
-1001_PORT)))
-> >
-> > In my code, it corresponds to the following snippet:
-> >
-> > ```
-> > @@ -3333,10 +3330,13 @@ generic_ip_connect(struct TCP_Server_Info *serv=
-er)
-> >       }
-> >       trace_smb3_connect_done(server->hostname, server->conn_id, &serve=
-r->dstaddr);
-> >       if (sport =3D=3D htons(RFC1001_PORT))
-> >               rc =3D ip_rfc1001_connect(server);
-> >
-> > +     if (rc < 0)
-> > +             put_net(cifs_net_ns(server));
-> > +
-> >       return rc;
-> >   }
-> > ```
-> >
-> > Looks like V3 needs to be sent?
-> >
-> > Best regards,
-> > Wang Zhaolong
->
+> =E5=AD=99=E5=B3=BB=E6=96=87
+> Sun Junwen
+
 
 
 --=20
