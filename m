@@ -2,77 +2,53 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 16E87A84C31
-	for <lists+samba-technical@lfdr.de>; Thu, 10 Apr 2025 20:38:52 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3B8EAA84CF6
+	for <lists+samba-technical@lfdr.de>; Thu, 10 Apr 2025 21:27:26 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=Y3GAObyOFGSDS+Xw4GgXyeEFbO2rwufo1uCKvwkNg80=; b=BYzfaarj62favt0J2nfGX4heIm
-	9pOF+o6Q2yWgifAizwIv3KDMuRiG2QXw0qvQEOaPROKsZ03ABBaB8q+o6k2R+QGC3MKRvAAr7tN6H
-	ZBdsHMQpIW+I3DGd8BKtQ6mJiO4M2XG7Kd8fy6jdvdwUtA0eVmONw2ZqyQ2/YP9bS4fYcoUfBgbj+
-	Zl5bfvHjroC1PTJZY6Vv0Ns+9T/FQ9nslVFQXW7HAFDewxnOyqjwjzWCgQO3jm/I6JCg4pPGFxjBt
-	WUmbCIbLlJ9j6pJ1KWg/yRyES4mjbClt6K1z3Y6zrsjDNdod36HvM6ceBmA9rfxDm7PAKW8yY68D+
-	2NsyXcQg==;
-Received: from ip6-localhost ([::1]:29974 helo=hr1.samba.org) 
+	bh=DFZsSjGTmNtZjBJwUF48LQpn1+gf4oNmep4zO1aZNQU=; b=uDsy+xda+O3STDu26LqpGheJZv
+	hhwhfkbgvjGjCz4E7RHsjLCBU0GZ9U65QRZiKzMxIpE1lk2C5gh7dFJCqnmirFp7axs1I3i4qveGV
+	1Yp10BxtHMDdqOtPya4xOdwR1RtHWL+aHEbKz446/4pKSuaoimuZQa6V2f0MBhOYmq6e7srneNfjD
+	tgDGVyM83OVMN5lulhwdudMnh5bbgI5CBMqtXg8O2PzLmpOD2XwDgjGs9AEXIlOq5VifZ/TpvZbW3
+	zsRKjkho7I7kOzyTtuqa3Kv8mJHpjVIbIMrW2RA3GlPlv6TEV1Eob/vQluS5CYlJRelVSY69csjHb
+	ckxUuLGw==;
+Received: from ip6-localhost ([::1]:45384 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1u2wmz-002Aiq-TQ; Thu, 10 Apr 2025 18:38:14 +0000
-Received: from mail-lf1-x12e.google.com ([2a00:1450:4864:20::12e]:61603) 
+	id 1u2xYH-002Ats-OW; Thu, 10 Apr 2025 19:27:05 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:29858) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1u2wmw-002Aii-3G
- for samba-technical@lists.samba.org; Thu, 10 Apr 2025 18:38:12 +0000
-Received: by mail-lf1-x12e.google.com with SMTP id
- 2adb3069b0e04-54c090fc7adso1289244e87.2
- for <samba-technical@lists.samba.org>; Thu, 10 Apr 2025 11:37:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1744310276; x=1744915076; darn=lists.samba.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Y3GAObyOFGSDS+Xw4GgXyeEFbO2rwufo1uCKvwkNg80=;
- b=Oh23RG5CJyW9pBdyO6NlL8a1SzCUmN3ogrpK6eX+VYVbgDnxJ13Nn9fAtX6c5Wycuo
- 6fY/5khMDExEmuPFnM78TI+Dt8iTaoUPnT8paLZIf1fzSFyj9KjmNTfynQWZZEVpl6Cj
- bW0GVnC2W3ZOPuIXQMwRn3toYxVFa2q4xU8P8vYjt6ZFO6SxKkQT3t1gOjxApWSWjqsx
- Eqa4nU8+XuqoGjqACAwkqshfU9KAVz47mFAssVzKo1jS6ReEBL/WYHLsBfPISpHZoUs8
- xyjz8uxSdZE0Jq7IXvWLmYbW0VBqnZ/kX4btkCnu/Drlz2Q9lJ9ekeckk/TMEc3maqTu
- xtbA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744310276; x=1744915076;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Y3GAObyOFGSDS+Xw4GgXyeEFbO2rwufo1uCKvwkNg80=;
- b=JCC4l8d6i8f6S8MM8png/7u8YUNMV1NfK9sWOHbhGo3MexB7b9C2rucIJG/04Kv3ht
- EBI+v3Bts5pckITYqYT9T4VYi4QYc4G0SZAV4Ujqlj9xGl2jTNzzOJAjvMyqmlVjJi7E
- zpyXHW84xGK0sijtW1xq61bEOEJ9OtvENjbcXi380bh0PUkR8IiQZV7vEMEvCmFLlN0Z
- fq/vvrl/RsxZtBoDdSV5b8kDHq6IezJVpVD+QMKgeXI6TaWPNDjlTUq7KRzn94YHdSLp
- d96KbSAqVRlNwzrLJpn6ACnHisfkuWQ8vUgEpO2E33cO/eS484jjFuTSqJcL0RLpZU5h
- 18og==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWW+5ZYKAsMiQ4YXErHkT7/cdZEPnN3Lxuo+Ssm1HX3wDi355Rtwy8KOPfFGDYdyGfItEIzg412HYq93j8xZQ0=@lists.samba.org
-X-Gm-Message-State: AOJu0Yyu1Nq51jMi80+Esp71jUt7Mesow3SPqQTV2HQozmr7hdrfXIyo
- IAX/spghyAuPjoz2+s7N583RPuNQ49al/v/EBDuw/bmRas6QK/cyDdJIgi1sjml2uSQjCH6zPVX
- ztkvTU7Iua+veFJbvKPqNoxTIefo=
-X-Gm-Gg: ASbGncvOcaB/szwhHrcEQUwIdPQIlYC+X0yHmOGQHQfsMh7wQpNecje/FjrSXrrgZco
- HAziTxiaelS/S02A4/BDfgsu7Kb5UCcfGZiSKzaRJdVnfMfWSs+DKK2pBRwEdCvCpUZe75/+ZkV
- idvUDoaAsYQC6uaJNuixEJf00N3FSim0sqoqOhl+4/H0bD8HxpCbYjLr5z
-X-Google-Smtp-Source: AGHT+IGIPyKwAAreodyN6vVGJbh2ZobqpBvExETMq6i7L79uNw7TvmIO5fbwHo/74cz3OO8kQs6+n54d1Qm16vW7re0=
-X-Received: by 2002:a05:6512:3f05:b0:545:f0a:bf50 with SMTP id
- 2adb3069b0e04-54d3c62ef13mr1371323e87.35.1744310275992; Thu, 10 Apr 2025
- 11:37:55 -0700 (PDT)
+ (Exim) id 1u2xYC-002Atl-R9
+ for samba-technical@lists.samba.org; Thu, 10 Apr 2025 19:27:03 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=From:Cc:To:Date:Message-ID;
+ bh=DFZsSjGTmNtZjBJwUF48LQpn1+gf4oNmep4zO1aZNQU=; b=EBsFXisD2lqPXrOZF7A/oBc8Tf
+ CuVATmgJxAtDYdaqgYOW8KB6eZjp+doPMuFaL8Sz/LyznCsN41/qGxGLFmEmeoixXiuQ8szvnelJF
+ Xzf9xVqewAOuVcaxY1h3j4dtwgBFdrTTT5PiCVVII6XxTThhG+FgitGg7JYSQdLTwWFGAPpRvmIi4
+ Ot4E9fhXpF6pSIq9/1KtoAajNGvgok+qWzC9ykOs0usOenX0ej2G7eglY+fWWc/14HfqtGAC3Usra
+ PF2EsWQn0iR8CaBPKYXS/rAu87mVj8fLFnrtd8cdKFGsZqx4IkiHwI9p2uOLjYR2mKJ31MYdqfk/D
+ Xgb6EVFgW+eXgbwqUo4PX5zDfRleO0294T0yqtxfaq3Zmlk+2pYIWeoCXvdijoJYKZaHOfBUPHQLT
+ FOLjPuju8wElxjmqwz0beg64zQwVNzNkB+srxMXGvZ0H81OG2TfnNmQrPOGMv1j17jfOrmmZ16mdB
+ pRAREr6Gf+8RTQE/6T4bZJZm;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1u2xXz-009AYD-00; Thu, 10 Apr 2025 19:26:47 +0000
+Message-ID: <6707c2c4-3677-4705-8f0c-86d572ed1810@samba.org>
+Date: Thu, 10 Apr 2025 21:26:46 +0200
 MIME-Version: 1.0
-References: <32f7a0c2-32cd-4ccd-b471-7cba98cc30f3@samba.org>
- <CAH2r5mt2032HC_yLrqGoAY-J6JZfP_2zjOjoKiY92YUrxBiqnA@mail.gmail.com>
- <a5c81acc-1e85-463d-925e-eb5b05af9ee7@samba.org>
- <a60852f5-cb90-4614-b35c-91d6507aee0a@talpey.com>
- <085204d2-22e6-4de6-aeec-620dba38280b@samba.org>
-In-Reply-To: <085204d2-22e6-4de6-aeec-620dba38280b@samba.org>
-Date: Thu, 10 Apr 2025 13:37:44 -0500
-X-Gm-Features: ATxdqUGBKtzTsQKqy3ci9KeEdCz0oDkmM3tAH_MMGshL-7BoNDKgnFu-dS5gBl4
-Message-ID: <CAH2r5msKR+CGgOHxCU+TfYPakQxbQJQnsVPyq6ANhSnON+vSWQ@mail.gmail.com>
+User-Agent: Mozilla Thunderbird
 Subject: Re: SMB3 POSIX and deleting files with FILE_ATTRIBUTE_READONLY
-To: Ralph Boehme <slow@samba.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+To: Jeremy Allison <jra@samba.org>
+References: <32f7a0c2-32cd-4ccd-b471-7cba98cc30f3@samba.org>
+ <Z_b4DS3kOpbCI4pG@jeremy-HP-Z840-Workstation>
+ <9f7da486-5d85-4ef3-8fcf-14b408d78700@samba.org>
+ <Z_fdfszysLKt4Xij@jeremy-HP-Z840-Workstation>
+Content-Language: en-US, de-DE
+In-Reply-To: <Z_fdfszysLKt4Xij@jeremy-HP-Z840-Workstation>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------w2n6Q8QNBUoPdxxoZza1ImX0"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -86,51 +62,91 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
+From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Ralph Boehme <slow@samba.org>
 Cc: CIFS <linux-cifs@vger.kernel.org>, Stefan Metzmacher <metze@samba.org>,
  Steven French <Steven.French@microsoft.com>,
  samba-technical <samba-technical@lists.samba.org>, Tom Talpey <tom@talpey.com>,
- "vl@samba.org" <vl@samba.org>, Jeremy Allison <jra@samba.org>
+ "vl@samba.org" <vl@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Thu, Apr 10, 2025 at 3:32=E2=80=AFAM Ralph Boehme <slow@samba.org> wrote=
-:
->
-> On 4/10/25 7:23 AM, Tom Talpey wrote:
-> > On 4/9/2025 9:06 PM, Ralph Boehme wrote:
-> >> On 4/9/25 8:43 PM, Steve French wrote:
-> >>> On Wed, Apr 9, 2025 at 1:18=E2=80=AFPM Ralph Boehme <slow@samba.org> =
-wrote:
-> >>>> what should be the behavior with SMB3 POSIX when a POSIX client
-> >>>> tries to
-> >>>> delete a file that has FILE_ATTRIBUTE_READONLY set?
-> >>>>
-> >>>> The major question that we must answer is, if this we would want to
-> >>>> allow for POSIX clients to ignore this in some way: either completel=
-y
-> >>>> ignore it on POSIX handles or first check if the handle has requeste=
-d
-> >>>> and been granted WRITE_ATTRIBUTES access.
-> >>>
-> >>> I agree that to delete a file with READ_ONLY set should by default
-> >>> require
-> >>> WRITE_ATTRIBUTES (and delete)
-> >
-> > Since when does Posix require this??
->
-> Obviously it doesn't.
->
-> Let me try to ask it differently: do we want to relax Windows security
-> model on a POSIX handle for this operation, even if we can build sane
-> semantics into the protocol that doesn't require this?
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------w2n6Q8QNBUoPdxxoZza1ImX0
+Content-Type: multipart/mixed; boundary="------------mzfdtiiLdin1uzzaHdSomZ00";
+ protected-headers="v1"
+From: Ralph Boehme <slow@samba.org>
+To: Jeremy Allison <jra@samba.org>
+Cc: CIFS <linux-cifs@vger.kernel.org>,
+ samba-technical <samba-technical@lists.samba.org>,
+ Tom Talpey <tom@talpey.com>, Steven French <Steven.French@microsoft.com>,
+ "vl@samba.org" <vl@samba.org>, Stefan Metzmacher <metze@samba.org>
+Message-ID: <6707c2c4-3677-4705-8f0c-86d572ed1810@samba.org>
+Subject: Re: SMB3 POSIX and deleting files with FILE_ATTRIBUTE_READONLY
+References: <32f7a0c2-32cd-4ccd-b471-7cba98cc30f3@samba.org>
+ <Z_b4DS3kOpbCI4pG@jeremy-HP-Z840-Workstation>
+ <9f7da486-5d85-4ef3-8fcf-14b408d78700@samba.org>
+ <Z_fdfszysLKt4Xij@jeremy-HP-Z840-Workstation>
+In-Reply-To: <Z_fdfszysLKt4Xij@jeremy-HP-Z840-Workstation>
+Autocrypt-Gossip: addr=jra@samba.org; keydata=
+ xsDiBDxEcLsRBADMQzpWoVuu4oiq23q5AfZDbakENMP/8ZU+AnzqzGr70lIEJb2jfcudViUT
+ 97+RmXptlnDmE4/ILOf6w0udMlQ9Jpm+iqxbr35D/6qvFgrgE+PnNAPlKSlI2fyGuLhpv1QP
+ forHV13gB3B6S/ZWHpf/owKnJMwu8ozQpjnMnqOiVwCg8QnSX2AFCMd3HLQsqVaMdlO+jBEE
+ AKrMu2Pavmyc/eoNfrjgeRoNRkwHCINWO5u93o92dngWK/hN1QOOCQfAzqZ1JwS5Q+E2gGug
+ 4OVaZI1vZGsAzb06TSnS4fmrOfwHqltSDsCHhwd+pyWkIvi96Swx00e1NEwNExEBo5NrGunf
+ fONGlfRc+WhMLIk0u2e2V14R+ebDA/42T+cQZtUR6EdBReHVpmckQXXcE8cIqsu6UpZCsdEP
+ N6YjxQKgTKWQWoxE2k4lYl9KsDK1BaF6rLNz/yt2RAVb1qZVaOqpITZWwzykzH60dMaX/G1S
+ GWuN28by9ghI2LIsxcXHiDhG2CZxyfogBDDXoTPXlVMdk55IwAJny8Wj4s0eSmVyZW15IEFs
+ bGlzb24gPGpyYUBzYW1iYS5vcmc+wlcEExECABcFAjxEcLsFCwcKAwQDFQMCAxYCAQIXgAAK
+ CRCl3XhJ1sA2rDHZAKDwxfxpGuCOAuDHaN3ULDrIzKw9DQCdHb3Sq5WKfeqeaY2ZKXT3AmXl
+ Fq7OwE0EPERwvhAEAIY1K5TICtxmFOeoRMW39jtF8DNSXl/se6HBe3Wy5Cz43lMZ6NvjDATa
+ 1w3JlkmjUyIDP29ApqmMu78Tv4UUxAh1PhyTttX1/aorTlIdVYFjey/yW4mSDXUBhPvMpq52
+ TncLRmK9HC6mIxJqS0vi6W9IqGOqDRZph3GzVzJN7WvLAAMGA/sGAyg2rVsBzs77WH0jPO+A
+ QZDj+Hf/RFHOwmcyG7/XgmV6LOcQP4HfQHH3DGYihu5cZj3BeWKPDJnjOjB2qmr+FTjYEsjw
+ LDBNG7rjRye412rUbNwmEtcD2/dw4xNyu5h2u+1++KVBPf4SqG/a10gDqGJXDHA1Os5MmnQl
+ 3CTq9sJGBBgRAgAGBQI8RHC+AAoJEKXdeEnWwDasbeIAoL6+EsZKAYrZ2w22A6V67tRNGOIe
+ AJ0cV9+pk/vqEgbv8ipKU4iniZclhg==
 
-If in doubt, better to be "more secure" unless case is very strong to relax
-this check.
+--------------mzfdtiiLdin1uzzaHdSomZ00
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
 
---=20
-Thanks,
+T24gNC8xMC8yNSA1OjAyIFBNLCBKZXJlbXkgQWxsaXNvbiB3cm90ZToNCj4gT24gVGh1LCBB
+cHIgMTAsIDIwMjUgYXQgMTA6MzM6NTRBTSArMDIwMCwgUmFscGggQm9laG1lIHdyb3RlOg0K
+Pj4gT24gNC8xMC8yNSAxMjo0MyBBTSwgSmVyZW15IEFsbGlzb24gd3JvdGU6DQo+Pj4gRG9l
+cyBXaW5kb3dzIGV2ZXIgc2VuZCBGSUxFX0RJU1BPU0lUSU9OX0lHTk9SRV9SRUFET05MWV9B
+VFRSSUJVVEUgb3Zlcg0KPj4+IHRoZSB3aXJlID8NCj4+DQo+PiBObywgaXQncyBsb2NhbCBv
+bmx5LCBjZiBNUy1GU0NDIGFuZCB0aGUgdGhyZWFkICJTTUIyIERFTEVURSB2cyBVTkxJTksi
+IA0KPj4gb24gdGhlIExpbnV4IGNpZnMgbWFpbGluZyBsaXN0Lg0KPj4NCj4+IDxodHRwczov
+L2xlYXJuLm1pY3Jvc29mdC5jb20vZW4tdXMvb3BlbnNwZWNzL3dpbmRvd3NfcHJvdG9jb2xz
+L21zLSANCj4+IGZzY2MvNDcxOGZjNDAtZTUzOS00MDE0LThlMzMtYjY3NWFmNzRlM2UxPg0K
+PiANCj4gT0ssIGJ1dCBkb2VzIHRoZSBXaW5kb3dzIFNNQjMgc2VydmVyIGZpbHRlciBpdCBv
+dXQgPw0KDQp5ZXMuDQoNCj4gQ2FuIGEgTGludXggY2xpZW50IHNlbmQgaXQgb3ZlciB0aGUg
+d2lyZSBhbmQgZG9lcw0KPiBpdCBoYXZlIHRoZSBkZXNpcmVkIGVmZmVjdCA/DQoNCm5vLiAg
+Q2YgdGhlIHRocmVhZCBJIG1lbnRpb25lZC4NCg0KVGhhbmtzIQ0KLXNsb3cNCg==
 
-Steve
+--------------mzfdtiiLdin1uzzaHdSomZ00--
+
+--------------w2n6Q8QNBUoPdxxoZza1ImX0
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+wsF5BAABCAAjFiEE+uLGCIokJSBRxVnkqh6bcSY5nkYFAmf4G3YFAwAAAAAACgkQqh6bcSY5nkYF
+hA/+KzvTZlFr7UwElEbL8PgNOtyGdkDodqOCzLc/82Ob/rWbpJU4e5zBAyJ9CRXu2NlDZJGteW7L
+IKL1acCUm9nk0wlmdN4rd2K9/htwvBSkE4F79xmztkVDGKhytAjARbY/MhxcFznM++/0wBtEb3qi
+De5a31q8VCIHqhY+LgtbLAzsqwHTi0fQPkyoej8sZVb5nWiuI4NVlmeu8EDDhVrKk6xI4Dw4ZN9p
+nUrryzHzlECuqdLCfQQ6OreI9O7EYSrWVPNufv3vr+v8rr1mZBz0mm4MtQbulzXVOGv3tQQCos2E
+D+Xxngl2la/sShXM6GGnFhKqzUP9BBcnLiqdhTVsukcMTEK/6Kk+A26L09F/EbtSJBGVianyb3bF
+0ygD53UQzgXzZ3hNKb/4Wkjo86qU9JHs8fBWKy61q/5gK0yKn8ypWyvS5bOsYT+jJ6d2MrxweyrM
+xi6kcGNBw8NbtHfhfuP8UJgJ/x5xYwWTLygflWO67h1cDqpe18V2bBMpsls4ltI74Jw9dip8iRAj
+vvgib7K4dHwpJ33eVXuj0HmXYkZXQ1BBBRmnpbVuAgpotpq8momZjlKi/TRvloxaqKMgas+MjW/7
+1N9CHWTtSvEd50330OMZoZAqAcdy1Y7fc2C2FC6B9oyl0KJC+76hsFbeh1TfyuZNUXcHOXIxrUTR
+ORk=
+=HE8e
+-----END PGP SIGNATURE-----
+
+--------------w2n6Q8QNBUoPdxxoZza1ImX0--
 
