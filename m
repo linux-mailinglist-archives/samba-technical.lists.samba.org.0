@@ -2,75 +2,72 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id D7FD2A86E6C
-	for <lists+samba-technical@lfdr.de>; Sat, 12 Apr 2025 19:30:24 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 05C33A87072
+	for <lists+samba-technical@lfdr.de>; Sun, 13 Apr 2025 04:36:02 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=MDiG+6xdqRbUOLVmNuhQUP52newOAwJWhhpLEwuQ91c=; b=s/nLrWAem+EqQIhbUU7pQjsPFk
-	AN+5jzXDoi21Mt1MB6G9sZO7eTzGPlHAe9Kytpgmu6IEAxn/SBWFJ4Y42jpo3syo0DudkuOwSSEXR
-	aud/rUVEhCUL7CvCVikQ1wG2Ny5IbT8gyk25mr8BX7MWsrgZh0mEi8yrcgGm5f/H6wKCepPuswiOf
-	AVIrrqobpntpkIEE187HAcxnzqAAaGAmBREIRBcW5SFO2YkbZKqUuOHT9ffzT6UkuOHxN0Qzew94J
-	uVRKA6PXEqpKgmCpxrLAfu7SWZqtF/3t6jBg5CIqu5UO2Trq0raDicxptcyMy73lu1YxIH9zw7NUn
-	ykxFOQnw==;
-Received: from ip6-localhost ([::1]:29492 helo=hr1.samba.org) 
+	bh=voNzLC5BpZqgahsmn4i6sfJIo0eN2XsIk1qhy/YQ5C4=; b=rhVPsixZRBhMgjbdMULYWx8pAQ
+	qHFvXN0gW48yfqhx/AfSYVF0Y8ADxElwMrVvWOPjDxnULuC5f3YwMBBVZTdV+Rair34U35RM3Z3l0
+	yuZBIPXpSxnvKZpykNe6ahAik314AFU61irMEuyClXDedRM+smYGIhnAiUzG5Bxhm6yjmbWqyScUA
+	s7wAkA1o/prLiPv10q2iJEKekAVrrThOb93BA8wnqxAKmDROTZCwxBluQnN5ffIPgda/HyGFBFJKz
+	mrVBlKf6/aKd0+VIgOWk6IHcjSYxQl9CGXbQKpjTydxTqa3eNqWZBp6Wz5MR9HRaSwkUzLyxOF74+
+	bMXwr/cw==;
+Received: from ip6-localhost ([::1]:30930 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1u3efP-002J28-SG; Sat, 12 Apr 2025 17:29:19 +0000
-Received: from mail-lj1-x22c.google.com ([2a00:1450:4864:20::22c]:44063) 
+	id 1u3nBp-002Jyy-Ki; Sun, 13 Apr 2025 02:35:21 +0000
+Received: from mail-lf1-x129.google.com ([2a00:1450:4864:20::129]:60821) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1u3efK-002J1z-9r
- for samba-technical@lists.samba.org; Sat, 12 Apr 2025 17:29:17 +0000
-Received: by mail-lj1-x22c.google.com with SMTP id
- 38308e7fff4ca-30c2d427194so28214321fa.0
- for <samba-technical@lists.samba.org>; Sat, 12 Apr 2025 10:29:01 -0700 (PDT)
+ (Exim) id 1u3nBk-002Jyr-S5
+ for samba-technical@lists.samba.org; Sun, 13 Apr 2025 02:35:19 +0000
+Received: by mail-lf1-x129.google.com with SMTP id
+ 2adb3069b0e04-5497590ffbbso3307451e87.1
+ for <samba-technical@lists.samba.org>; Sat, 12 Apr 2025 19:35:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1744478939; x=1745083739; darn=lists.samba.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=MDiG+6xdqRbUOLVmNuhQUP52newOAwJWhhpLEwuQ91c=;
- b=LYZxCqp4RcmTedpdhpLOZROe7fIkBMM6WSwqrzaRdf5K3IkpKULaAI/pO1IW1UKm/o
- 0iQ9HeNfgAZtvrFXPjEH4XXn/e+j0r5Jt/gk8BRQjq/Vth9TdWxLf/5h2quFveE/i1jX
- JIv4+yD2jnJ3B1Q2UrYUtKEdER4noQNG5enuHNeIo5LH/LU4fsZGtczaIQbr1b9yUkCR
- 2qWuKLjt69dTg9nAQKLUddYIPZo6B4iQw5Z1oddf2BFbWJxCPH1Z3dBc76o1MQLGqngv
- 85v3K4kVm8mCBqNUwvMYnjucFf88Gzr2l0tY8t9Jmxdyw55CmnDIRZnGUcjSsItrScPu
- 2+HA==
+ d=gmail.com; s=20230601; t=1744511703; x=1745116503; darn=lists.samba.org;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=voNzLC5BpZqgahsmn4i6sfJIo0eN2XsIk1qhy/YQ5C4=;
+ b=Mor/L1VCBTcTSQq8gPtqeEbwGmORboHuX0GroW5y1Mi1d/XjrwBkMu6lrDGZ91g/Nu
+ eTtZ4jeUOMG4fr8d7wQe1hiZefqBUtnimRhDx7VU1V1YENIZygpet/ymX+jH+RmLNpC+
+ GtcBHZAxX0nU9sRpKNo7vpajokQxD9+DImV45TgO4E/9Jcf8bS/UtRnL0AiW5rxousIj
+ NarQUlRpf1/ZzihSvuN+cRthAaAT6gI8awa5S/ni2znB+Kd4x17AXiNU2LbJtdu5L1P5
+ Q9fFD6b4cZ2roADRrcwYiQQRMa6cNdqreqCXWpk6RKH2YdYiYp5CPES5Iar2XKc2iyIZ
+ gJbQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744478939; x=1745083739;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=MDiG+6xdqRbUOLVmNuhQUP52newOAwJWhhpLEwuQ91c=;
- b=UHdMnu/zORzrpUl08f/kB52ge3g1YoMNH367A7aGcpK6u+RLKfraVVjCZaDgU2f0A9
- bqtiOmCsUiStlJ15FPPeqlUirqxkWdfizQ6GWAdykbo9cIz3Whlr2HWvdJOyUjG3ZKQq
- 1nfgobcwDCVpzCBgnVdRlK1h5TPzahDzvtwgCmoDCb9GGih8XAOYoYVnrnzLSG/o8dnj
- 8a/uyGwlWc9STSEUclkdr3AUVHHTustKoJJeJcqIGht/+nEjJMTT7jmfHaSKFXYBj88T
- +jWEgqE5IgUS9m7hZ4YLGgw+fjU8aiZe6hSOyD7dn5sBqjPmL6vYFT0XjlgLaGOOE/JD
- czMA==
+ d=1e100.net; s=20230601; t=1744511703; x=1745116503;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=voNzLC5BpZqgahsmn4i6sfJIo0eN2XsIk1qhy/YQ5C4=;
+ b=Zkpw4K+IvB2zJvslI2P4OrnBQSFmJG4lKlP7KId+VNq4gSZZULuyUfKtUPXXSgeDx6
+ 6AF7rk+C1dMhUfxS0HRlTaSP3lsNRmMCOS9paOLsdzCePxqAHYf4M/HfbY0BNXdgXvGE
+ 3OTTszXK8gPIbV9HVRO0h9nFpP/qHW9CumPRVdccqPERiKCn/RtgE4uQY/ZdJpG6zmuD
+ YUJRRyGdhu7syPyCOTOsfKFNmdBkWdo1czm5NQGSHrDGCXHFP3z3QaGjDoUfFUNgz9Hp
+ 07jv04vByesMPPXVv4qmTyi5kNpo2PDAvB9Dg6kaEgRknz8ekiLsH62Wqf2SEWd2ByY7
+ yIqA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUbeqEwy2BNvz8XsGUJT02O4xU/98TypzsTekVY7v1Ftr8q+Jfgia8qUPNvTwVb6fnD0V5840CbPGevx21dDZs=@lists.samba.org
-X-Gm-Message-State: AOJu0YxLcgFKw7S2ey3gWk2DB8+UKEzrHV42SaJAGb2bGdLrQ+VXhEhX
- Xd9+OujQIpwctc2RweDtHtB7r2ldRVzUlR/ryJQVfHehR0cj5PcDbXbUK2DpxEkV+LUlYe53bBL
- GzvWYAjsR959z10UicL/dm7TC07w=
-X-Gm-Gg: ASbGncttrDRhLDH5oNVLWXk9tAdLOl8SIRMvkTd1AkxO27UPA7/RHHGqemZR7Q4DpW5
- 6LzA8sYDyBqqsllmA0VZthgPBeLPiV43Aeb0N/hNh8wKSLHyYg/0qPAb5W6WEPh14XWWvC7tNVS
- k05KBLP8CH09LhR4HnNNMHr7HKDZSYQmwACX9kFMhTd1tHJShzO3jG4NkX
-X-Google-Smtp-Source: AGHT+IFVggQxTTXpC7zivVqxEk6y33BjyM3QBWZBfrp373JRrkJwyYiFaYuiO/rTPSf8IEKCAE1jenNJvHCgwUvAGp0=
-X-Received: by 2002:a2e:a815:0:b0:30b:b908:ce06 with SMTP id
- 38308e7fff4ca-31049a1a6bfmr23257451fa.19.1744478938598; Sat, 12 Apr 2025
- 10:28:58 -0700 (PDT)
+ AJvYcCWC83LYJtOdJcD+HNEDSeh7FdClTt88sXs3c5ARu7DPBdgP6XX+VLB16ToC0lrF3za0HgqIcMtnV7J5CgyCa+g=@lists.samba.org
+X-Gm-Message-State: AOJu0YwVb7tL5mLOFAbn/rqWE+Ib5j7Zk8Qgl7noBn1muD/BZD+ndess
+ xopUYJbqUQ+bsy5gY2owyBQpirURH8gtnbs/PCeZt+5iGn8QLHEg+pl6siu7e8olCfn5vGssdQG
+ eV71VVjn484GcPsrSfgEsXzItHOA=
+X-Gm-Gg: ASbGncuJkZwdPxJu5Sj3+pwgxYz5CW0T45Y535K9gZ5ouK5W70wcBsrhkT5OXtqhSxS
+ SgM0uRTiAl2eddRZY6XzLoKDk7zb/HvER3m37ibDlsHe5PMEGZQOdAs4uoX/Rt+keDIRPdgVhIe
+ zxgVFWQBMPla5DFzan2ZWlm/q7WME0DWMgixITqdUO4bs4ayZGSZx606M=
+X-Google-Smtp-Source: AGHT+IFkJMuhscB0t/wGepHGii7v7OeOBtSZxU89B87lbuDOvCgRZij9Gr+S7P9UDXybO/4ymG/oBqZ0sZif/8kVZoI=
+X-Received: by 2002:a05:6512:2242:b0:549:8f06:8229 with SMTP id
+ 2adb3069b0e04-54d452d7a45mr1891146e87.49.1744511702719; Sat, 12 Apr 2025
+ 19:35:02 -0700 (PDT)
 MIME-Version: 1.0
-References: <CAH2r5mu7Wf0n9ZmnhAAWetKRiUczHv+odYHj5bBg6a=G1y2kcQ@mail.gmail.com>
- <20250411070724.13959-1-kuniyu@amazon.com>
-In-Reply-To: <20250411070724.13959-1-kuniyu@amazon.com>
-Date: Sat, 12 Apr 2025 12:28:46 -0500
-X-Gm-Features: ATxdqUHtM3Ytv5cuRYdq4XKxpQ3YkROQffJy0mEtBNkLxhrlCVW2skBqW_fkPa8
-Message-ID: <CAH2r5msMZ9j2Uugjex8DzT+uQWsoj5Q0NECMgx3wJFpCEaeo8w@mail.gmail.com>
-Subject: Re: [PATCH 0/2] cifs: Revert bogus fix for CVE-2024-54680 and its
- followup commit.
-To: Kuniyuki Iwashima <kuniyu@amazon.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+References: <CAH2r5mv27yTcE3wjSOj1vQ8S1Lgbw3LdAevNtB5UiAF24yWoaw@mail.gmail.com>
+ <20250411061201.122232-1-chunjie.zhu@cloud.com>
+In-Reply-To: <20250411061201.122232-1-chunjie.zhu@cloud.com>
+Date: Sat, 12 Apr 2025 21:34:50 -0500
+X-Gm-Features: ATxdqUHQWRjO7jiNBLCPvnF3OMl-DM6VczQEEdoPcqMjASxibFa5B04LYDCsgUs
+Message-ID: <CAH2r5muisewc_rrW0Z-teq9eJS2xE+82cUyR9sBSUkPF8yOHAQ@mail.gmail.com>
+Subject: Re: [PATCH v2] fix open hardlink on deferred close file error
+To: Chunjie Zhu <chunjie.zhu@cloud.com>
+Content-Type: multipart/mixed; boundary="0000000000005904d106329fc850"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -86,502 +83,223 @@ List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
 From: Steve French via samba-technical <samba-technical@lists.samba.org>
 Reply-To: Steve French <smfrench@gmail.com>
-Cc: pc@manguebit.com, linux-cifs@vger.kernel.org, sprasad@microsoft.com,
- ematsumiya@suse.de, samba-technical@lists.samba.org,
- linux-kernel@vger.kernel.org, tom@talpey.com, bharathsm@microsoft.com,
- wangzhaolong1@huawei.com, linux-net@vger.kernel.org, kuni1840@gmail.com
+Cc: Paulo Alcantara <pc@manguebit.com>, Tom Talpey <tom@talpey.com>,
+ Shyam Prasad N <sprasad@microsoft.com>, linux-cifs@vger.kernel.org,
+ Enzo Matsumiya <ematsumiya@suse.de>, samba-technical@lists.samba.org,
+ linux-kernel@vger.kernel.org, Ronnie Sahlberg <lsahlber@redhat.com>,
+ Steve French <sfrench@samba.org>, ross.lagerwall@cloud.com
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-I have tentatively merged the two revert patches into cifs-2.6.git
-for-next but still hoping for any review comments for those more
-expert in the network lockdep code.
+--0000000000005904d106329fc850
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Let me know when the fix to core/sock.c is upstream
+Have rebased the patch so it would merge onto current for-next
+(6.15-rc1+), and cleanup a checkpatch warning and added Cc:stable
 
-On Fri, Apr 11, 2025 at 2:07=E2=80=AFAM Kuniyuki Iwashima <kuniyu@amazon.co=
-m> wrote:
->
-> From: Steve French <smfrench@gmail.com>
-> Date: Wed, 2 Apr 2025 22:19:36 -0500
-> > I can run some regression tests with these two patches, but it would
-> > be very helpful if the original patch authors could comment (Wang and
-> > Enzo), and since this apparently relies on a fix to the network stack
-> > (the LOCKDEP fix) it would be helpful if any opinions from the network
-> > devs.
-> >
-> > For a complex issue like this it is important to have at least some
-> > Tested-by or Reviewed-by for these two, because I was having trouble
-> > reproducing the various reported problems on Ubuntu (or our Fedora
-> > test VMs), and the refcount issues are more complicated they seem.
-> > Let me know if anyone has reviewed these two patches or tested them.
->
-> Hi Steve,
->
-> The lockdep fix was merged on the networking side and will be sent to
-> the mainline this week.
-> https://git.kernel.org/pub/scm/linux/kernel/git/netdev/net.git/commit/?id=
-=3D0bb2f7a1ad1f
->
-> As you mentioned Fedora, I tried ksmbd and created a repro script that
-> works on a single host.
->
-> On my Fedora VM, I ran the prep & reproducer scripts and successfully
-> triggered the issue on cifs-2.6.git/for-next with/without reverts.
->
-> I hope this helps you reproduce the issue and verify the patch on your
-> Fedora test VM.
->
-> Please let me know if there's anything I can help.
->
-> Thanks!
->
->
-> Prerequisite:
->
-> 1. On VM, the user is expected to be root
-> 2. ffa1e7ada456 needs to be reverted (as it stopped lockdep during
->    boot on my VM)
-> 3. .config is created based on x86_64_defconfig
->
-> ---8<---
-> make defconfig
-> ./scripts/config -m CONFIG_CIFS -m CONFIG_SMB_SERVER -e CONFIG_PROVE_LOCK=
-ING
-> make olddefconfig
-> make -j $(nproc)
-> ---8<---
->
->
-> Prep:
->
-> This script builds ksmbd-tools and installs it and cifs-utils,
-> iproute (for ss), and iptables-legacy (for iptables).
->
-> ---8<---
-> #!/bin/bash
->
-> #
-> # Build and install ksmbd-tools
-> # See https://github.com/cifsd-team/ksmbd-tools?tab=3Dreadme-ov-file#buil=
-ding-and-installing
-> #
-> dnf install -y git gcc pkgconf autoconf automake libtool make meson ninja=
--build gawk libnl3-devel glib2-devel
-> git clone https://github.com/cifsd-team/ksmbd-tools.git
-> cd ksmbd-tools
-> ./autogen.sh
-> ./configure --with-rundir=3D/run
-> make
-> make install
-> cd ~/
->
->
-> #
-> # CIFS client
-> #
-> dnf install -y cifs-utils
->
->
-> #
-> # Networking utilities
-> #
-> dnf install -y iproute iptables-legacy
-> ---8<---
->
->
-> Reproducer:
->
-> ---8<----
-> #!/bin/bash
->
-> function show_sk_mod_ref()
-> {
->     ss -tan | grep 445
->     lsmod | grep cifs
-> }
->
-> set -x
->
->
-> #
-> # Share /root/server
-> #
-> mkdir server
-> touch server/a.txt
-> ksmbd.addshare --add --option "path =3D /root/server" --option 'read only=
- =3D no' server
-> ksmbd.adduser --password test root
-> modprobe ksmbd
-> ksmbd.mountd
->
->
-> #
-> # Mount /root/server as /root/client
-> #
-> mkdir client
-> mount -t cifs -o vers=3D3.0,echo_interval=3D1,user=3Droot,password=3Dtest=
- //127.0.0.1/server /root/client
->
->
-> #
-> # Drop FIN packet from CIFS client
-> #
-> iptables -A OUTPUT -p tcp --dport 445 -j DROP
->
->
-> show_sk_mod_ref
->
->
-> #
-> # Unmount /root/client
-> #
-> until umount client; do
->     sleep 1
-> done
->
-> show_sk_mod_ref
->
->
-> #
-> # Unload module, and then lockdep will complain.
-> #
-> until rmmod cifs; do
->     show_sk_mod_ref
->     sleep 3
-> done
->
->
-> show_sk_mod_ref
-> ---8<---
->
->
-> FWIW, here's output of the repro including console output.
->
-> ---8<---
-> Fedora Linux 41 (Container Image)
-> Kernel 6.15.0-rc1-00011-gf78f3365efed on an x86_64 (console)
->
-> fedora login: root
-> Last login: Fri Apr 11 06:20:39 on console
-> [root@fedora ~]# ./repro.sh
-> + mkdir server
-> + touch server/a.txt
-> + ksmbd.addshare --add --option 'path =3D /root/server' --option 'read on=
-ly =3D no' server
-> [ksmbd.addshare/831]: INFO: No user database
-> [ksmbd.addshare/831]: INFO: Wrote `/usr/local/etc/ksmbd/ksmbd.conf'
-> [ksmbd.addshare/831]: INFO: Wrote `/usr/local/etc/ksmbd/ksmbd.conf'
-> [ksmbd.addshare/831]: INFO: Added share `server'
-> [ksmbd.addshare/831]: INFO: Ignored lock file
-> + ksmbd.adduser --password test root
-> [ksmbd.adduser/832]: INFO: Wrote `/usr/local/etc/ksmbd/ksmbdpwd.db'
-> [ksmbd.adduser/832]: INFO: Wrote `/usr/local/etc/ksmbd/ksmbdpwd.db'
-> [ksmbd.adduser/832]: INFO: Added user `root'
-> [ksmbd.adduser/832]: INFO: Ignored lock file
-> + modprobe ksmbd
-> + ksmbd.mountd
-> [ksmbd.mountd/835]: INFO: Started manager
-> + mkdir client
-> + mount -t cifs -o vers=3D3.0,echo_interval=3D1,user=3Droot,password=3Dte=
-st //127.0.0.1/server /root/client
-> [  113.929225] Key type cifs.idmap registered
-> [  113.930423] CIFS: Attempting to mount //127.0.0.1/server
-> [  113.993548] mount.cifs (843) used greatest stack depth: 11208 bytes le=
-ft
-> + iptables -A OUTPUT -p tcp --dport 445 -j DROP
-> + show_sk_mod_ref
-> + ss -tan
-> + grep 445
-> ESTAB  0      0               127.0.0.1:34814          127.0.0.1:445
-> LISTEN 0      0                       *:445                    *:*
-> LISTEN 0      0                       *:445                    *:*
-> ESTAB  0      516    [::ffff:127.0.0.1]:445   [::ffff:127.0.0.1]:34814
-> + lsmod
-> + grep cifs
-> cifs                 1175552  2
-> cifs_md4               12288  1 cifs
-> cifs_arc4              12288  2 cifs,ksmbd
-> nls_ucs2_utils          8192  2 cifs,ksmbd
-> + umount client
-> [  121.064583] CIFS: VFS: \\127.0.0.1 has not responded in 3 seconds. Rec=
-onnecting...
-> + show_sk_mod_ref
-> + ss -tan
-> + grep 445
-> FIN-WAIT-1 0      145             127.0.0.1:34814          127.0.0.1:445
-> LISTEN     0      0                       *:445                    *:*
-> LISTEN     0      0                       *:445                    *:*
-> ESTAB      0      516    [::ffff:127.0.0.1]:445   [::ffff:127.0.0.1]:3481=
-4
-> + lsmod
-> + grep cifs
-> cifs                 1175552  1
-> cifs_md4               12288  1 cifs
-> cifs_arc4              12288  2 cifs,ksmbd
-> nls_ucs2_utils          8192  2 cifs,ksmbd
-> + rmmod cifs
-> rmmod: ERROR: Module cifs is in use
-> + show_sk_mod_ref
-> + ss -tan
-> + grep 445
-> FIN-WAIT-1 0      145             127.0.0.1:34814          127.0.0.1:445
-> LISTEN     0      0                       *:445                    *:*
-> LISTEN     0      0                       *:445                    *:*
-> ESTAB      0      516    [::ffff:127.0.0.1]:445   [::ffff:127.0.0.1]:3481=
-4
-> + lsmod
-> + grep cifs
-> cifs                 1175552  1
-> cifs_md4               12288  1 cifs
-> cifs_arc4              12288  2 cifs,ksmbd
-> nls_ucs2_utils          8192  2 cifs,ksmbd
-> + sleep 3
-> + rmmod cifs
-> [  127.142558] Key type cifs.idmap unregistered
-> + show_sk_mod_ref
-> + ss -tan
-> + grep 445
-> FIN-WAIT-1 0      145             127.0.0.1:34814          127.0.0.1:445
-> LISTEN     0      0                       *:445                    *:*
-> LISTEN     0      0                       *:445                    *:*
-> ESTAB      0      516    [::ffff:127.0.0.1]:445   [::ffff:127.0.0.1]:3481=
-4
-> + lsmod
-> + grep cifs
-> cifs_md4               12288  0
-> cifs_arc4              12288  1 ksmbd
-> [root@fedora ~]# [  127.414391] ------------[ cut here ]------------
-> [  127.414940] DEBUG_LOCKS_WARN_ON(1)
-> [  127.414950] WARNING: CPU: 62 PID: 0 at kernel/locking/lockdep.c:237 hl=
-ock_class+0x5f/0x70
-> [  127.416185] Modules linked in: cifs_md4 ksmbd cifs_arc4 nls_ucs2_utils=
- [last unloaded: cifs]
-> [  127.417066] CPU: 62 UID: 0 PID: 0 Comm: swapper/62 Not tainted 6.15.0-=
-rc1-00011-gf78f3365efed #3 PREEMPT(voluntary)
-> [  127.418158] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIO=
-S rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/2014
-> [  127.419312] RIP: 0010:hlock_class+0x5f/0x70
-> [  127.419745] Code: ef 90 e8 c4 8f 4d 00 85 c0 74 23 8b 05 ba 8c bf 01 8=
-5 c0 75 19 90 48 c7 c6 13 fb a1 82 48 c7 c7 cc 76 a0 82 e8 92 b4 f7 ff 90 <=
-0f> 0b 90 90 90 31 c0 c3 cc cc cc cc 0f 1f 44 00 00 90 90 90 90 90
-> [  127.421622] RSP: 0018:ffa0000000d60c20 EFLAGS: 00010086
-> [  127.422146] RAX: 0000000000000000 RBX: ff11000100b12b38 RCX: 000000000=
-0000027
-> [  127.422890] RDX: ff1100081fd97c08 RSI: 0000000000000001 RDI: ff1100081=
-fd97c00
-> [  127.423624] RBP: ff11000100b12100 R08: ff1100083fe6e0e8 R09: 00000000f=
-fffbfff
-> [  127.424365] R10: ff1100081eca0000 R11: ff1100083fe10cf8 R12: ff1100010=
-0b12b60
-> [  127.425099] R13: 0000000000000001 R14: 0000000000000000 R15: 000000000=
-00424ac
-> [  127.425827] FS:  0000000000000000(0000) GS:ff1100089c5bb000(0000) knlG=
-S:0000000000000000
-> [  127.426657] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
-> [  127.427259] CR2: 00007f714e3ab0d8 CR3: 0000000002c4c006 CR4: 000000000=
-0771ef0
-> [  127.428004] DR0: 0000000000000000 DR1: 0000000000000000 DR2: 000000000=
-0000000
-> [  127.428738] DR3: 0000000000000000 DR6: 00000000fffe07f0 DR7: 000000000=
-0000400
-> [  127.429465] PKRU: 55555554
-> [  127.429753] Call Trace:
-> [  127.430012]  <IRQ>
-> [  127.430231]  __lock_acquire+0x21d/0x1730
-> [  127.430631]  ? __lock_acquire+0xa4f/0x1730
-> [  127.431054]  lock_acquire+0xbd/0x2d0
-> [  127.431427]  ? tcp_write_timer+0x5a/0x120
-> [  127.431846]  ? lock_acquire+0xbd/0x2d0
-> [  127.432244]  ? call_timer_fn+0x71/0x260
-> [  127.432651]  ? __pfx_tcp_write_timer+0x10/0x10
-> [  127.433116]  _raw_spin_lock+0x2b/0x40
-> [  127.433506]  ? tcp_write_timer+0x5a/0x120
-> [  127.433915]  tcp_write_timer+0x5a/0x120
-> [  127.434317]  ? __pfx_tcp_write_timer+0x10/0x10
-> [  127.434776]  call_timer_fn+0x9d/0x260
-> [  127.435154]  __run_timers+0x1f9/0x300
-> [  127.435538]  ? find_held_lock+0x2b/0x80
-> [  127.435933]  ? tmigr_handle_remote_up+0x1a6/0x370
-> [  127.436422]  timer_expire_remote+0x36/0x50
-> [  127.436852]  tmigr_handle_remote_up+0x2a5/0x370
-> [  127.437327]  ? find_held_lock+0x2b/0x80
-> [  127.437726]  ? tmigr_handle_remote+0x88/0xd0
-> [  127.438157]  ? lock_release+0xc6/0x290
-> [  127.438530]  ? __pfx_tmigr_handle_remote_up+0x10/0x10
-> [  127.439037]  __walk_groups.isra.0+0x1a/0x70
-> [  127.439464]  tmigr_handle_remote+0xa0/0xd0
-> [  127.439892]  ? kvm_clock_get_cycles+0x18/0x30
-> [  127.440343]  handle_softirqs+0xbd/0x3b0
-> [  127.440738]  __irq_exit_rcu+0xa1/0xc0
-> [  127.441111]  irq_exit_rcu+0x9/0x20
-> [  127.441469]  sysvec_apic_timer_interrupt+0x6f/0x80
-> [  127.441968]  </IRQ>
-> [  127.442198]  <TASK>
-> [  127.442428]  asm_sysvec_apic_timer_interrupt+0x1a/0x20
-> [  127.442965] RIP: 0010:pv_native_safe_halt+0xf/0x20
-> [  127.443469] Code: 56 7a 00 c3 cc cc cc cc 0f 1f 00 90 90 90 90 90 90 9=
-0 90 90 90 90 90 90 90 90 90 f3 0f 1e fa eb 07 0f 00 2d c5 af 12 00 fb f4 <=
-c3> cc cc cc cc 66 2e 0f 1f 84 00 00 00 00 00 66 90 90 90 90 90 90
-> [  127.445348] RSP: 0018:ffa000000028fee0 EFLAGS: 00000206
-> [  127.445882] RAX: 0000000000004e63 RBX: ff11000100b12100 RCX: 000000000=
-0000000
-> [  127.446619] RDX: 0000000000000000 RSI: 0000000000000000 RDI: ffffffff8=
-12f81df
-> [  127.447348] RBP: 000000000000003e R08: 0000000000000001 R09: 000000000=
-0000000
-> [  127.448077] R10: 0000000000000001 R11: 0000000000000080 R12: 000000000=
-0000000
-> [  127.448805] R13: 0000000000000000 R14: 0000000000000000 R15: 000000000=
-0000000
-> [  127.449541]  ? do_idle+0x1df/0x250
-> [  127.449905]  default_idle+0x9/0x10
-> [  127.450266]  default_idle_call+0x85/0x1e0
-> [  127.450687]  do_idle+0x1df/0x250
-> [  127.451032]  cpu_startup_entry+0x24/0x30
-> [  127.451441]  start_secondary+0xf8/0x100
-> [  127.451846]  common_startup_64+0x13e/0x148
-> [  127.452276]  </TASK>
-> [  127.452516] irq event stamp: 20078
-> [  127.452869] hardirqs last  enabled at (20078): [<ffffffff822ef523>] _r=
-aw_spin_unlock_irq+0x23/0x40
-> [  127.453787] hardirqs last disabled at (20077): [<ffffffff822ef262>] _r=
-aw_spin_lock_irq+0x42/0x50
-> [  127.454659] softirqs last  enabled at (20062): [<ffffffff8129b31e>] ha=
-ndle_softirqs+0x2ee/0x3b0
-> [  127.455536] softirqs last disabled at (20069): [<ffffffff8129b541>] __=
-irq_exit_rcu+0xa1/0xc0
-> [  127.456394] ---[ end trace 0000000000000000 ]---
-> [  127.456858] BUG: kernel NULL pointer dereference, address: 00000000000=
-000c4
-> [  127.457553] #PF: supervisor read access in kernel mode
-> [  127.458069] #PF: error_code(0x0000) - not-present page
-> [  127.458584] PGD 0
-> [  127.458802] Oops: Oops: 0000 [#1] SMP NOPTI
-> [  127.459231] CPU: 62 UID: 0 PID: 0 Comm: swapper/62 Tainted: G        W=
-           6.15.0-rc1-00011-gf78f3365efed #3 PREEMPT(voluntary)
-> [  127.460448] Tainted: [W]=3DWARN
-> [  127.460754] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIO=
-S rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/2014
-> [  127.461924] RIP: 0010:__lock_acquire+0x220/0x1730
-> [  127.462393] Code: 15 41 09 c7 41 8b 44 24 20 25 ff 1f 00 00 41 09 c7 8=
-b 84 24 a0 00 00 00 45 89 7c 24 20 41 89 44 24 24 e8 03 b9 ff ff 4c 89 e7 <=
-44> 0f b6 b8 c4 00 00 00 e8 f3 b8 ff ff 0f b6 80 c5 00 00 00 88 44
-> [  127.464288] RSP: 0018:ffa0000000d60c28 EFLAGS: 00010046
-> [  127.464825] RAX: 0000000000000000 RBX: ff11000100b12b38 RCX: 000000000=
-0000027
-> [  127.465538] RDX: ff1100081fd97c08 RSI: 0000000000000001 RDI: ff1100010=
-0b12b60
-> [  127.466245] RBP: ff11000100b12100 R08: ff1100083fe6e0e8 R09: 00000000f=
-fffbfff
-> [  127.466964] R10: ff1100081eca0000 R11: ff1100083fe10cf8 R12: ff1100010=
-0b12b60
-> [  127.467689] R13: 0000000000000001 R14: 0000000000000000 R15: 000000000=
-00424ac
-> [  127.468415] FS:  0000000000000000(0000) GS:ff1100089c5bb000(0000) knlG=
-S:0000000000000000
-> [  127.469228] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
-> [  127.469810] CR2: 00000000000000c4 CR3: 0000000002c4c006 CR4: 000000000=
-0771ef0
-> [  127.470530] DR0: 0000000000000000 DR1: 0000000000000000 DR2: 000000000=
-0000000
-> [  127.471249] DR3: 0000000000000000 DR6: 00000000fffe07f0 DR7: 000000000=
-0000400
-> [  127.471968] PKRU: 55555554
-> [  127.472248] Call Trace:
-> [  127.472505]  <IRQ>
-> [  127.472723]  ? __lock_acquire+0xa4f/0x1730
-> [  127.473144]  lock_acquire+0xbd/0x2d0
-> [  127.473510]  ? tcp_write_timer+0x5a/0x120
-> [  127.473920]  ? lock_acquire+0xbd/0x2d0
-> [  127.474306]  ? call_timer_fn+0x71/0x260
-> [  127.474714]  ? __pfx_tcp_write_timer+0x10/0x10
-> [  127.475182]  _raw_spin_lock+0x2b/0x40
-> [  127.475568]  ? tcp_write_timer+0x5a/0x120
-> [  127.475987]  tcp_write_timer+0x5a/0x120
-> [  127.476391]  ? __pfx_tcp_write_timer+0x10/0x10
-> [  127.476850]  call_timer_fn+0x9d/0x260
-> [  127.477231]  __run_timers+0x1f9/0x300
-> [  127.477614]  ? find_held_lock+0x2b/0x80
-> [  127.478017]  ? tmigr_handle_remote_up+0x1a6/0x370
-> [  127.478511]  timer_expire_remote+0x36/0x50
-> [  127.478937]  tmigr_handle_remote_up+0x2a5/0x370
-> [  127.479406]  ? find_held_lock+0x2b/0x80
-> [  127.479795]  ? tmigr_handle_remote+0x88/0xd0
-> [  127.480238]  ? lock_release+0xc6/0x290
-> [  127.480628]  ? __pfx_tmigr_handle_remote_up+0x10/0x10
-> [  127.481146]  __walk_groups.isra.0+0x1a/0x70
-> [  127.481575]  tmigr_handle_remote+0xa0/0xd0
-> [  127.481994]  ? kvm_clock_get_cycles+0x18/0x30
-> [  127.482441]  handle_softirqs+0xbd/0x3b0
-> [  127.482837]  __irq_exit_rcu+0xa1/0xc0
-> [  127.483217]  irq_exit_rcu+0x9/0x20
-> [  127.483569]  sysvec_apic_timer_interrupt+0x6f/0x80
-> [  127.484054]  </IRQ>
-> [  127.484282]  <TASK>
-> [  127.484506]  asm_sysvec_apic_timer_interrupt+0x1a/0x20
-> [  127.485032] RIP: 0010:pv_native_safe_halt+0xf/0x20
-> [  127.485525] Code: 56 7a 00 c3 cc cc cc cc 0f 1f 00 90 90 90 90 90 90 9=
-0 90 90 90 90 90 90 90 90 90 f3 0f 1e fa eb 07 0f 00 2d c5 af 12 00 fb f4 <=
-c3> cc cc cc cc 66 2e 0f 1f 84 00 00 00 00 00 66 90 90 90 90 90 90
-> [  127.487401] RSP: 0018:ffa000000028fee0 EFLAGS: 00000206
-> [  127.487939] RAX: 0000000000004e63 RBX: ff11000100b12100 RCX: 000000000=
-0000000
-> [  127.488671] RDX: 0000000000000000 RSI: 0000000000000000 RDI: ffffffff8=
-12f81df
-> [  127.489399] RBP: 000000000000003e R08: 0000000000000001 R09: 000000000=
-0000000
-> [  127.490120] R10: 0000000000000001 R11: 0000000000000080 R12: 000000000=
-0000000
-> [  127.490846] R13: 0000000000000000 R14: 0000000000000000 R15: 000000000=
-0000000
-> [  127.491570]  ? do_idle+0x1df/0x250
-> [  127.491926]  default_idle+0x9/0x10
-> [  127.492272]  default_idle_call+0x85/0x1e0
-> [  127.492687]  do_idle+0x1df/0x250
-> [  127.493028]  cpu_startup_entry+0x24/0x30
-> [  127.493437]  start_secondary+0xf8/0x100
-> [  127.493830]  common_startup_64+0x13e/0x148
-> [  127.494257]  </TASK>
-> [  127.494494] Modules linked in: cifs_md4 ksmbd cifs_arc4 nls_ucs2_utils=
- [last unloaded: cifs]
-> [  127.495352] CR2: 00000000000000c4
-> [  127.495697] ---[ end trace 0000000000000000 ]---
-> [  127.496168] RIP: 0010:__lock_acquire+0x220/0x1730
-> [  127.496635] Code: 15 41 09 c7 41 8b 44 24 20 25 ff 1f 00 00 41 09 c7 8=
-b 84 24 a0 00 00 00 45 89 7c 24 20 41 89 44 24 24 e8 03 b9 ff ff 4c 89 e7 <=
-44> 0f b6 b8 c4 00 00 00 e8 f3 b8 ff ff 0f b6 80 c5 00 00 00 88 44
-> [  127.498505] RSP: 0018:ffa0000000d60c28 EFLAGS: 00010046
-> [  127.499036] RAX: 0000000000000000 RBX: ff11000100b12b38 RCX: 000000000=
-0000027
-> [  127.499755] RDX: ff1100081fd97c08 RSI: 0000000000000001 RDI: ff1100010=
-0b12b60
-> [  127.500478] RBP: ff11000100b12100 R08: ff1100083fe6e0e8 R09: 00000000f=
-fffbfff
-> [  127.501203] R10: ff1100081eca0000 R11: ff1100083fe10cf8 R12: ff1100010=
-0b12b60
-> [  127.501901] R13: 0000000000000001 R14: 0000000000000000 R15: 000000000=
-00424ac
-> [  127.502617] FS:  0000000000000000(0000) GS:ff1100089c5bb000(0000) knlG=
-S:0000000000000000
-> [  127.503433] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
-> [  127.504012] CR2: 00000000000000c4 CR3: 0000000002c4c006 CR4: 000000000=
-0771ef0
-> [  127.504741] DR0: 0000000000000000 DR1: 0000000000000000 DR2: 000000000=
-0000000
-> [  127.505464] DR3: 0000000000000000 DR6: 00000000fffe07f0 DR7: 000000000=
-0000400
-> [  127.506182] PKRU: 55555554
-> [  127.506467] Kernel panic - not syncing: Fatal exception in interrupt
-> [  127.508092] Kernel Offset: disabled
-> [  127.508527] ---[ end Kernel panic - not syncing: Fatal exception in in=
-terrupt ]---
-> ---8<---
+Have tentatively merged the updated patch (see attached) into cifs-2.6.git
+Although I tested that it does fix the problem described in the commit
+description, additional review/testing would be welcome.
 
+On Fri, Apr 11, 2025 at 1:13=E2=80=AFAM Chunjie Zhu <chunjie.zhu@cloud.com>=
+ wrote:
+>
+> The following Python script results in unexpected behaviour when run on
+> a CIFS filesystem against a Windows Server:
+>
+>     # Create file
+>     fd =3D os.open('test', os.O_WRONLY|os.O_CREAT)
+>     os.write(fd, b'foo')
+>     os.close(fd)
+>
+>     # Open and close the file to leave a pending deferred close
+>     fd =3D os.open('test', os.O_RDONLY|os.O_DIRECT)
+>     os.close(fd)
+>
+>     # Try to open the file via a hard link
+>     os.link('test', 'new')
+>     newfd =3D os.open('new', os.O_RDONLY|os.O_DIRECT)
+>
+> The final open returns EINVAL due to the server returning
+> STATUS_INVALID_PARAMETER. The root cause of this is that the client
+> caches lease keys per inode, but the spec requires them to be related to
+> the filename which causes problems when hard links are involved:
+>
+> From MS-SMB2 section 3.3.5.9.11:
+>
+> "The server MUST attempt to locate a Lease by performing a lookup in the
+> LeaseTable.LeaseList using the LeaseKey in the
+> SMB2_CREATE_REQUEST_LEASE_V2 as the lookup key. If a lease is found,
+> Lease.FileDeleteOnClose is FALSE, and Lease.Filename does not match the
+> file name for the incoming request, the request MUST be failed with
+> STATUS_INVALID_PARAMETER"
+>
+> On client side, we first check the context of file open, if it hits above
+> conditions, we first close all opening files which are belong to the same
+> inode, then we do open the hard link file.
+>
+> Signed-off-by: Chunjie Zhu <chunjie.zhu@cloud.com>
+> ---
+>
+> v2: if error, first close inode opening files and then open hard link
+>
+>  fs/smb/client/cifsproto.h |  2 ++
+>  fs/smb/client/file.c      | 29 +++++++++++++++++++++++++++++
+>  2 files changed, 31 insertions(+)
+>
+> diff --git a/fs/smb/client/cifsproto.h b/fs/smb/client/cifsproto.h
+> index 260a6299bddb..b563c227792e 100644
+> --- a/fs/smb/client/cifsproto.h
+> +++ b/fs/smb/client/cifsproto.h
+> @@ -157,6 +157,8 @@ extern int cifs_get_writable_path(struct cifs_tcon *t=
+con, const char *name,
+>  extern struct cifsFileInfo *find_readable_file(struct cifsInodeInfo *, b=
+ool);
+>  extern int cifs_get_readable_path(struct cifs_tcon *tcon, const char *na=
+me,
+>                                   struct cifsFileInfo **ret_file);
+> +extern int cifs_get_hardlink_path(struct cifs_tcon *tcon, struct inode *=
+inode,
+> +                                 struct file *file);
+>  extern unsigned int smbCalcSize(void *buf);
+>  extern int decode_negTokenInit(unsigned char *security_blob, int length,
+>                         struct TCP_Server_Info *server);
+> diff --git a/fs/smb/client/file.c b/fs/smb/client/file.c
+> index 4cbb5487bd8d..8e9582ff70f3 100644
+> --- a/fs/smb/client/file.c
+> +++ b/fs/smb/client/file.c
+> @@ -751,6 +751,12 @@ int cifs_open(struct inode *inode, struct file *file=
+)
+>                 } else {
+>                         _cifsFileInfo_put(cfile, true, false);
+>                 }
+> +       } else {
+> +               /* hard link on the defeered close file */
+> +               rc =3D cifs_get_hardlink_path(tcon, inode, file);
+> +               if (rc) {
+> +                       cifs_close_deferred_file(CIFS_I(inode));
+> +               }
+>         }
+>
+>         if (server->oplocks)
+> @@ -2413,6 +2419,29 @@ cifs_get_readable_path(struct cifs_tcon *tcon, con=
+st char *name,
+>         return -ENOENT;
+>  }
+>
+> +int
+> +cifs_get_hardlink_path(struct cifs_tcon *tcon, struct inode *inode,
+> +                               struct file *file)
+> +{
+> +       struct cifsFileInfo *open_file =3D NULL;
+> +       struct cifsInodeInfo *cinode =3D CIFS_I(inode);
+> +       int rc =3D 0;
+> +
+> +       spin_lock(&tcon->open_file_lock);
+> +       spin_lock(&cinode->open_file_lock);
+> +
+> +       list_for_each_entry(open_file, &cinode->openFileList, flist) {
+> +               if (file->f_flags =3D=3D open_file->f_flags) {
+> +                       rc =3D -EINVAL;
+> +                       break;
+> +               }
+> +       }
+> +
+> +       spin_unlock(&cinode->open_file_lock);
+> +       spin_unlock(&tcon->open_file_lock);
+> +       return rc;
+> +}
+> +
+>  void
+>  cifs_writedata_release(struct kref *refcount)
+>  {
+> --
+> 2.34.1
+>
 
 
 --=20
 Thanks,
 
 Steve
+
+--0000000000005904d106329fc850
+Content-Type: text/x-patch; charset="US-ASCII"; 
+	name="0002-smb3-client-fix-open-hardlink-on-deferred-close-file.patch"
+Content-Disposition: attachment; 
+	filename="0002-smb3-client-fix-open-hardlink-on-deferred-close-file.patch"
+Content-Transfer-Encoding: base64
+Content-ID: <f_m9f16ukj0>
+X-Attachment-Id: f_m9f16ukj0
+
+RnJvbSBiNWU5MDllZDgzNWM5NmIzNmQ1MzZiNjZlODc2N2YyMGRmYjEzNTU5IE1vbiBTZXAgMTcg
+MDA6MDA6MDAgMjAwMQpGcm9tOiBDaHVuamllIFpodSA8Y2h1bmppZS56aHVAY2xvdWQuY29tPgpE
+YXRlOiBTYXQsIDEyIEFwciAyMDI1IDIxOjE1OjU1IC0wNTAwClN1YmplY3Q6IFtQQVRDSCAyLzJd
+IHNtYjMgY2xpZW50OiBmaXggb3BlbiBoYXJkbGluayBvbiBkZWZlcnJlZCBjbG9zZSBmaWxlCiBl
+cnJvcgoKVGhlIGZvbGxvd2luZyBQeXRob24gc2NyaXB0IHJlc3VsdHMgaW4gdW5leHBlY3RlZCBi
+ZWhhdmlvdXIgd2hlbiBydW4gb24KYSBDSUZTIGZpbGVzeXN0ZW0gYWdhaW5zdCBhIFdpbmRvd3Mg
+U2VydmVyOgoKICAgICMgQ3JlYXRlIGZpbGUKICAgIGZkID0gb3Mub3BlbigndGVzdCcsIG9zLk9f
+V1JPTkxZfG9zLk9fQ1JFQVQpCiAgICBvcy53cml0ZShmZCwgYidmb28nKQogICAgb3MuY2xvc2Uo
+ZmQpCgogICAgIyBPcGVuIGFuZCBjbG9zZSB0aGUgZmlsZSB0byBsZWF2ZSBhIHBlbmRpbmcgZGVm
+ZXJyZWQgY2xvc2UKICAgIGZkID0gb3Mub3BlbigndGVzdCcsIG9zLk9fUkRPTkxZfG9zLk9fRElS
+RUNUKQogICAgb3MuY2xvc2UoZmQpCgogICAgIyBUcnkgdG8gb3BlbiB0aGUgZmlsZSB2aWEgYSBo
+YXJkIGxpbmsKICAgIG9zLmxpbmsoJ3Rlc3QnLCAnbmV3JykKICAgIG5ld2ZkID0gb3Mub3Blbign
+bmV3Jywgb3MuT19SRE9OTFl8b3MuT19ESVJFQ1QpCgpUaGUgZmluYWwgb3BlbiByZXR1cm5zIEVJ
+TlZBTCBkdWUgdG8gdGhlIHNlcnZlciByZXR1cm5pbmcKU1RBVFVTX0lOVkFMSURfUEFSQU1FVEVS
+LiBUaGUgcm9vdCBjYXVzZSBvZiB0aGlzIGlzIHRoYXQgdGhlIGNsaWVudApjYWNoZXMgbGVhc2Ug
+a2V5cyBwZXIgaW5vZGUsIGJ1dCB0aGUgc3BlYyByZXF1aXJlcyB0aGVtIHRvIGJlIHJlbGF0ZWQg
+dG8KdGhlIGZpbGVuYW1lIHdoaWNoIGNhdXNlcyBwcm9ibGVtcyB3aGVuIGhhcmQgbGlua3MgYXJl
+IGludm9sdmVkOgoKRnJvbSBNUy1TTUIyIHNlY3Rpb24gMy4zLjUuOS4xMToKCiJUaGUgc2VydmVy
+IE1VU1QgYXR0ZW1wdCB0byBsb2NhdGUgYSBMZWFzZSBieSBwZXJmb3JtaW5nIGEgbG9va3VwIGlu
+IHRoZQpMZWFzZVRhYmxlLkxlYXNlTGlzdCB1c2luZyB0aGUgTGVhc2VLZXkgaW4gdGhlClNNQjJf
+Q1JFQVRFX1JFUVVFU1RfTEVBU0VfVjIgYXMgdGhlIGxvb2t1cCBrZXkuIElmIGEgbGVhc2UgaXMg
+Zm91bmQsCkxlYXNlLkZpbGVEZWxldGVPbkNsb3NlIGlzIEZBTFNFLCBhbmQgTGVhc2UuRmlsZW5h
+bWUgZG9lcyBub3QgbWF0Y2ggdGhlCmZpbGUgbmFtZSBmb3IgdGhlIGluY29taW5nIHJlcXVlc3Qs
+IHRoZSByZXF1ZXN0IE1VU1QgYmUgZmFpbGVkIHdpdGgKU1RBVFVTX0lOVkFMSURfUEFSQU1FVEVS
+IgoKT24gY2xpZW50IHNpZGUsIHdlIGZpcnN0IGNoZWNrIHRoZSBjb250ZXh0IG9mIGZpbGUgb3Bl
+biwgaWYgaXQgaGl0cyBhYm92ZQpjb25kaXRpb25zLCB3ZSBmaXJzdCBjbG9zZSBhbGwgb3Blbmlu
+ZyBmaWxlcyB3aGljaCBhcmUgYmVsb25nIHRvIHRoZSBzYW1lCmlub2RlLCB0aGVuIHdlIGRvIG9w
+ZW4gdGhlIGhhcmQgbGluayBmaWxlLgoKQ2M6IHN0YWJsZUB2Z2VyLmtlcm5lbC5vcmcKU2lnbmVk
+LW9mZi1ieTogQ2h1bmppZSBaaHUgPGNodW5qaWUuemh1QGNsb3VkLmNvbT4KU2lnbmVkLW9mZi1i
+eTogU3RldmUgRnJlbmNoIDxzdGZyZW5jaEBtaWNyb3NvZnQuY29tPgotLS0KCnYyOiBpZiBlcnJv
+ciwgZmlyc3QgY2xvc2UgaW5vZGUgb3BlbmluZyBmaWxlcyBhbmQgdGhlbiBvcGVuIGhhcmQgbGlu
+awotLS0KIGZzL3NtYi9jbGllbnQvY2lmc3Byb3RvLmggfCAgMiArKwogZnMvc21iL2NsaWVudC9m
+aWxlLmMgICAgICB8IDI4ICsrKysrKysrKysrKysrKysrKysrKysrKysrKysKIDIgZmlsZXMgY2hh
+bmdlZCwgMzAgaW5zZXJ0aW9ucygrKQoKZGlmZiAtLWdpdCBhL2ZzL3NtYi9jbGllbnQvY2lmc3By
+b3RvLmggYi9mcy9zbWIvY2xpZW50L2NpZnNwcm90by5oCmluZGV4IGNmY2MwNzkwNWJkZi4uNTlm
+NmZkZmU1NjBlIDEwMDY0NAotLS0gYS9mcy9zbWIvY2xpZW50L2NpZnNwcm90by5oCisrKyBiL2Zz
+L3NtYi9jbGllbnQvY2lmc3Byb3RvLmgKQEAgLTE2Myw2ICsxNjMsOCBAQCBleHRlcm4gaW50IGNp
+ZnNfZ2V0X3dyaXRhYmxlX3BhdGgoc3RydWN0IGNpZnNfdGNvbiAqdGNvbiwgY29uc3QgY2hhciAq
+bmFtZSwKIGV4dGVybiBzdHJ1Y3QgY2lmc0ZpbGVJbmZvICpmaW5kX3JlYWRhYmxlX2ZpbGUoc3Ry
+dWN0IGNpZnNJbm9kZUluZm8gKiwgYm9vbCk7CiBleHRlcm4gaW50IGNpZnNfZ2V0X3JlYWRhYmxl
+X3BhdGgoc3RydWN0IGNpZnNfdGNvbiAqdGNvbiwgY29uc3QgY2hhciAqbmFtZSwKIAkJCQkgIHN0
+cnVjdCBjaWZzRmlsZUluZm8gKipyZXRfZmlsZSk7CitleHRlcm4gaW50IGNpZnNfZ2V0X2hhcmRs
+aW5rX3BhdGgoc3RydWN0IGNpZnNfdGNvbiAqdGNvbiwgc3RydWN0IGlub2RlICppbm9kZSwKKwkJ
+CQkgIHN0cnVjdCBmaWxlICpmaWxlKTsKIGV4dGVybiB1bnNpZ25lZCBpbnQgc21iQ2FsY1NpemUo
+dm9pZCAqYnVmKTsKIGV4dGVybiBpbnQgZGVjb2RlX25lZ1Rva2VuSW5pdCh1bnNpZ25lZCBjaGFy
+ICpzZWN1cml0eV9ibG9iLCBpbnQgbGVuZ3RoLAogCQkJc3RydWN0IFRDUF9TZXJ2ZXJfSW5mbyAq
+c2VydmVyKTsKZGlmZiAtLWdpdCBhL2ZzL3NtYi9jbGllbnQvZmlsZS5jIGIvZnMvc21iL2NsaWVu
+dC9maWxlLmMKaW5kZXggODQwN2ZiMTA4NjY0Li45ZThmNDA0YjllNTYgMTAwNjQ0Ci0tLSBhL2Zz
+L3NtYi9jbGllbnQvZmlsZS5jCisrKyBiL2ZzL3NtYi9jbGllbnQvZmlsZS5jCkBAIC0xMDA3LDYg
+KzEwMDcsMTEgQEAgaW50IGNpZnNfb3BlbihzdHJ1Y3QgaW5vZGUgKmlub2RlLCBzdHJ1Y3QgZmls
+ZSAqZmlsZSkKIAkJfSBlbHNlIHsKIAkJCV9jaWZzRmlsZUluZm9fcHV0KGNmaWxlLCB0cnVlLCBm
+YWxzZSk7CiAJCX0KKwl9IGVsc2UgeworCQkvKiBoYXJkIGxpbmsgb24gdGhlIGRlZmVlcmVkIGNs
+b3NlIGZpbGUgKi8KKwkJcmMgPSBjaWZzX2dldF9oYXJkbGlua19wYXRoKHRjb24sIGlub2RlLCBm
+aWxlKTsKKwkJaWYgKHJjKQorCQkJY2lmc19jbG9zZV9kZWZlcnJlZF9maWxlKENJRlNfSShpbm9k
+ZSkpOwogCX0KIAogCWlmIChzZXJ2ZXItPm9wbG9ja3MpCkBAIC0yMDcxLDYgKzIwNzYsMjkgQEAg
+Y2lmc19tb3ZlX2xsaXN0KHN0cnVjdCBsaXN0X2hlYWQgKnNvdXJjZSwgc3RydWN0IGxpc3RfaGVh
+ZCAqZGVzdCkKIAkJbGlzdF9tb3ZlKGxpLCBkZXN0KTsKIH0KIAoraW50CitjaWZzX2dldF9oYXJk
+bGlua19wYXRoKHN0cnVjdCBjaWZzX3Rjb24gKnRjb24sIHN0cnVjdCBpbm9kZSAqaW5vZGUsCisJ
+CQkJc3RydWN0IGZpbGUgKmZpbGUpCit7CisJc3RydWN0IGNpZnNGaWxlSW5mbyAqb3Blbl9maWxl
+ID0gTlVMTDsKKwlzdHJ1Y3QgY2lmc0lub2RlSW5mbyAqY2lub2RlID0gQ0lGU19JKGlub2RlKTsK
+KwlpbnQgcmMgPSAwOworCisJc3Bpbl9sb2NrKCZ0Y29uLT5vcGVuX2ZpbGVfbG9jayk7CisJc3Bp
+bl9sb2NrKCZjaW5vZGUtPm9wZW5fZmlsZV9sb2NrKTsKKworCWxpc3RfZm9yX2VhY2hfZW50cnko
+b3Blbl9maWxlLCAmY2lub2RlLT5vcGVuRmlsZUxpc3QsIGZsaXN0KSB7CisJCWlmIChmaWxlLT5m
+X2ZsYWdzID09IG9wZW5fZmlsZS0+Zl9mbGFncykgeworCQkJcmMgPSAtRUlOVkFMOworCQkJYnJl
+YWs7CisJCX0KKwl9CisKKwlzcGluX3VubG9jaygmY2lub2RlLT5vcGVuX2ZpbGVfbG9jayk7CisJ
+c3Bpbl91bmxvY2soJnRjb24tPm9wZW5fZmlsZV9sb2NrKTsKKwlyZXR1cm4gcmM7Cit9CisKIHZv
+aWQKIGNpZnNfZnJlZV9sbGlzdChzdHJ1Y3QgbGlzdF9oZWFkICpsbGlzdCkKIHsKLS0gCjIuNDMu
+MAoK
+--0000000000005904d106329fc850--
 
