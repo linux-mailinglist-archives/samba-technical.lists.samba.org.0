@@ -2,74 +2,47 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 25EAAA88C07
-	for <lists+samba-technical@lfdr.de>; Mon, 14 Apr 2025 21:16:44 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1AB36A92410
+	for <lists+samba-technical@lfdr.de>; Thu, 17 Apr 2025 19:31:58 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=wTy0hufwaKzH8e6rbLpI8eQ1C2L9E/6pu+YXhbo4w6I=; b=x9hj29SOgZLwVgwGyqQ42KWfcG
-	DnI5eZNLYXdCgWRjDLp+/H3GQz/M/04hWgR91E7tMaYx1O+bPQO+VMubGqyPlzQL1c7fiILc++Znn
-	k6dq5ycNjNAVm8u4ytX8rlgskf7LQ3ZlSUBkqUfB9nuQZPFK3J4s0MhYEI22XpJ69EaDsepDwYzLg
-	Y56FtYxiUvO7GQT1Cgb4KzepCyBah19h8Nf6WTiwMiamroVelR/Mpoz0318S6I4JDQrKWdoGp7dyG
-	OfODAOeZDW3XQZzxVyTG+LO5nMnOSYq25u6RuBpiS7UNoeAlf9ZFQJzkTQ6QtYKYCoeVesuZ+yRGa
-	aOPyJHrw==;
-Received: from ip6-localhost ([::1]:30708 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
+	bh=ceu91s9wwPgg3/e6kjJKu33O4qijsvI9wH8L+qDQVbs=; b=ykkxaqGs0Z4VJFxHhBLUGsBf9S
+	D0u6wQ9SqsLpWzucu5XstovoFrnsaVEqgEAfatiScDEgQ+dtEz6xpIzMq2c7pmU6BoOU7ccPiOSol
+	JykuRSFhx6xoQ5L6XpphNyhJRKljTZe5mFZcAeHmVsKJuZzl/DkECDbo2TWHVU8ZdG6sOW3NwRbMj
+	q9lFzBEKyzJqkNrPlUMVZ+soa0br4BfEhNiVi8ga3TCuOCgFrfS1g4UTtqISdwTH1Yh2Klzm9YpTH
+	OyMsQpXuzGj0KV+65zXKirH2d7SmnPDAMmgmioKbZnS3raiQzW+YKoLsMyjol7+aHB1rSxx6Qy+3f
+	4ioRWPlQ==;
+Received: from ip6-localhost ([::1]:41400 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1u4PIJ-002Ot5-T5; Mon, 14 Apr 2025 19:16:35 +0000
-Received: from mail-lf1-x12a.google.com ([2a00:1450:4864:20::12a]:53312) 
+	id 1u5T4n-00092h-EI; Thu, 17 Apr 2025 17:31:01 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:34290) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1u4PID-002Osx-B0
- for samba-technical@lists.samba.org; Mon, 14 Apr 2025 19:16:32 +0000
-Received: by mail-lf1-x12a.google.com with SMTP id
- 2adb3069b0e04-54996d30bfbso4201615e87.2
- for <samba-technical@lists.samba.org>; Mon, 14 Apr 2025 12:16:16 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1744658175; x=1745262975; darn=lists.samba.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=wTy0hufwaKzH8e6rbLpI8eQ1C2L9E/6pu+YXhbo4w6I=;
- b=UNBScwr+oQ6VvbJ4x/lSpJ7cNr/ZQZmbqtPp7/nVcKUVFi53UL+x6W13O/AF7fpFD+
- BgZX5zEDTC34n/BmrTBURNiKIINOjAxq+WqmaddUXkCK/UKGBeHqxu85GV1GCfMeaqad
- 91UmFMIU3cUUp1UPVKGtR8xjMdrGXZFcA+1GmlTpvS3gszyE1aENsbztszV6ic8PPdEX
- qSB4L0m1ZRcDWoE2KU0vrTmyApm9vk7rubfR+5A+PZPRXU9rGlTvZLQCaCMVVm4/eSz1
- 7jx0jz//7AjmhP4BkgEsUCzERX3hADXVUfWFAF8pVUiV4WQyglUrCG+glVTlXNetkPaN
- qq/w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744658175; x=1745262975;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=wTy0hufwaKzH8e6rbLpI8eQ1C2L9E/6pu+YXhbo4w6I=;
- b=wecOotx7yGLIY3dhdW+v2kU7gA3PcP81vxFdWh3VgohvBPjyxWAOrL39L0hZ4jDw28
- KywCNAf74QHb88gAbGUSX/KKzh0rh8Sty7FEzFXF9X3hVocZ8l/48lwxchES0jJV2FHg
- kRGLu2xOwgDUZ8UBRSkTdDe3kMhXxh0AogSQ772KTMwgqYl6WJif45+RJowBCgli0NTJ
- TNbXGASDdTZfh41GDiSkc8AC4UwjXFM6kbawZKccStT8L3a2/5vcKiclQffxMLvQIEBB
- Xtdfd/GngoI6nrImpwVMRG1RVGWqr2W2qgwQlDu6p4hAfZGQxeKWD7S17cJEIT5cmF11
- L4Nw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW0JBhLqqcpzKGpVVKfSGBRO7NJII1caOI5bg8kUU4lLSsLMopSX97AGTGNpaeGp73VopudPphGtRzfiRLQxkU=@lists.samba.org
-X-Gm-Message-State: AOJu0Yy4BFx5UxDH0yKsqsTeDrLg1Szx02kF9ZUO5Rgv64Ae/XSXqHGn
- vwpGllxurY9q4b4L2p/wWMhUFNZRaKfkjp2IQp1r6G7ff2YqRwW0nfhHv41gvLCCEiHtA2cucn8
- 6gpyOh601G/1X/Th9Oo83WUD3OqSsmg==
-X-Gm-Gg: ASbGncsex1uikUgb8qupweaxNWLxZEm3gzbC0xhQZhomrlxNcQf8aNKF8ioVysQzNas
- tn1ZC/+4oK5kSRbj01LfghK1OJWUVifPaPjCLR5xXTgp/ZfuO+NSdYZtnweWaUehJgjlo8H1Pex
- Ky4Geb7fJPGYyIfrPlbkDTZQRJSbUbfKEHA7jkp8RN5A7n0A0NeeTSMa5ikuW1WhfX6Q==
-X-Google-Smtp-Source: AGHT+IFjEWDG1eENnZoy+8gcW96gdUQ7ayMhUYTIjxD8Kde43Cp9n2w5iQJB+LKOKNn9bSjxIAyRlchVZO2LFyoucCk=
-X-Received: by 2002:a05:6512:308d:b0:549:4e88:2e6a with SMTP id
- 2adb3069b0e04-54d4528bae9mr3195487e87.6.1744658175096; Mon, 14 Apr 2025
- 12:16:15 -0700 (PDT)
+ (Exim) id 1u5T4f-000920-4n; Thu, 17 Apr 2025 17:30:55 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=From:To:Date:Message-ID:CC;
+ bh=ceu91s9wwPgg3/e6kjJKu33O4qijsvI9wH8L+qDQVbs=; b=CGFfwXOc/WoORsjgVZcek9V2Q6
+ GBbu4vWdnjrKJSRqhLt08wGyI3EKiCPYm4uPsERagMKlvB8Cr/UljIfsfjrsBpYlqDx8Vq58L2Xwa
+ e87Ap4XYyHzuqZjPN5O17jwmzmj3A/H63JzC0wMbyCSXyg2Swy9B5otUuzl1tsu3NBTRvA4bIEyRN
+ sE/7pn35ojqdvsdpcMxHgvKcFIYcAchnruAjpoyxFHDnrXP1oKjE27CFrL+7OwWGsq4zdlEah/B1p
+ CxbRoafdwXtttybuIpDfXhZN770A+OP8gCgXQVTO9ZkoYRRsbt+S+r9dypZtVoWS4k8lf/rH3URUU
+ CId3m77J7px97wxylhDSYIuT6lOJuOiOp1Qr750qmiUDvUXw8oKdujfJpsOiS6Achpdv8eTU9Kj3/
+ gAuECKvSC8nSQlyBGxESAoWbP21m1HJ8Y85V2Mxh5XFHdR4t8yaxa00qcCW/0jyBxH7iGJn2pJdXs
+ wQgQz3skUTJin+CLn/GurOEz;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1u5T4S-000OZT-1g; Thu, 17 Apr 2025 17:30:40 +0000
+Message-ID: <76603547-77af-4fad-854a-2c46a83ccf16@samba.org>
+Date: Thu, 17 Apr 2025 19:30:39 +0200
 MIME-Version: 1.0
-References: <32f7a0c2-32cd-4ccd-b471-7cba98cc30f3@samba.org>
- <bfe46e3d-5c7c-42ec-987d-d70b4f513e85@samba.org>
-In-Reply-To: <bfe46e3d-5c7c-42ec-987d-d70b4f513e85@samba.org>
-Date: Mon, 14 Apr 2025 14:16:03 -0500
-X-Gm-Features: ATxdqUHLvw5QfwYJbQUy5KoEoX5aswH1BLVBqTNzBFdyVXs6uKZosRyPhAXZc3g
-Message-ID: <CAH2r5mu+sYcx6rtoq=P_b+0_rSoRsoUCrUrfaAjfOFvswuGtqQ@mail.gmail.com>
-Subject: Re: SMB3 POSIX and deleting files with FILE_ATTRIBUTE_READONLY
-To: Ralph Boehme <slow@samba.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Content-Language: de-DE
+To: samba-announce@lists.samba.org, samba@lists.samba.org,
+ samba-technical@lists.samba.org
+Subject: [Announce] Samba 4.22.1 Available for Download
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -83,56 +56,111 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
-Cc: CIFS <linux-cifs@vger.kernel.org>, Stefan Metzmacher <metze@samba.org>,
- Steven French <Steven.French@microsoft.com>,
- samba-technical <samba-technical@lists.samba.org>, Tom Talpey <tom@talpey.com>,
- "vl@samba.org" <vl@samba.org>, Jeremy Allison <jra@samba.org>
+From: Jule Anger via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jule Anger <janger@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Looks fine to me
+Release Announcements
+---------------------
 
-On Mon, Apr 14, 2025 at 2:03=E2=80=AFPM Ralph Boehme <slow@samba.org> wrote=
-:
->
-> As discussed at SambaXP, what about this?
->
-> https://gitlab.com/samba-team/smb3-posix-spec/-/merge_requests/6/diffs
->
-> On 4/9/25 8:18 PM, Ralph Boehme via samba-technical wrote:
-> > Hi folks,
-> >
-> > what should be the behavior with SMB3 POSIX when a POSIX client tries t=
-o
-> > delete a file that has FILE_ATTRIBUTE_READONLY set?
-> >
-> > The major question that we must answer is, if this we would want to
-> > allow for POSIX clients to ignore this in some way: either completely
-> > ignore it on POSIX handles or first check if the handle has requested
-> > and been granted WRITE_ATTRIBUTES access.
-> >
-> > Checking WRITE_ATTRIBUTES first means we would correctly honor
-> > permissions and the client could have removed FILE_ATTRIBUTE_READONLY
-> > anyway to then remove the file.
-> >
-> > Windows has some new bits FILE_DISPOSITION_IGNORE_READONLY_ATTRIBUTE to
-> > handle this locally (!) and it seems to be doing it without checking
-> > WRITE_ATTRIBUTES on the server.
-> >
-> > <https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-
-> > fscc/2e860264-018a-47b3-8555-565a13b35a45>
-> >
-> > Thoughts?
-> >
-> > Thanks!
-> > -slow
->
+This is the latest stable release of the Samba 4.22 release series.
 
 
---=20
-Thanks,
+Changes since 4.22.0
+--------------------
 
-Steve
+o  Douglas Bagnall <douglas.bagnall@catalyst.net.nz>
+    * BUG 15774: Running "gpo manage motd set" twice fails with backtrace.
+    * BUG 15829: samba-tool gpo backup creates entity backups it can't read.
+    * BUG 15839: gp_cert_auto_enroll_ext.py has problem unpacking GUIDs with
+      prepended 0's.
+
+o  Ralph Boehme <slow@samba.org>
+    * BUG 15767: Deadlock between two smbd processes.
+    * BUG 15823: Subnet based interfaces definition not listening on all 
+covered
+      IP addresses.
+    * BUG 15836: PANIC: assert failed at source3/smbd/smb2_oplock.c(156):
+      sconn->oplocks.exclusive_open>=0.
+
+o  Pavel Filipenský <pfilipensky@samba.org>
+    * BUG 15727: net ad join fails with "Failed to join domain: failed 
+to create
+      kerberos keytab".
+
+o  Andreas Hasenack <andreas.hasenack@canonical.com>
+    * BUG 15774: Running "gpo manage motd set" twice fails with backtrace.
+
+o  Xavi Hernandez <xhernandez@redhat.com>
+    * BUG 15822: Enable support for cephfs case insensitive behavior.
+
+o  Volker Lendecke <vl@samba.org>
+    * BUG 15791: Remove of file or directory not possible with vfs_acl_tdb.
+    * BUG 15841: Wide link issue in samba 4.22.
+
+o  Stefan Metzmacher <metze@samba.org>
+    * BUG 15767: Deadlock between two smbd processes.
+    * BUG 15845: NT_STATUS_INVALID_PARAMETER: Can't create folders on 
+share of an
+      exfat file system.
+    * BUG 15849: Lease code is not endian-safe.
+
+o  Anoop C S <anoopcs@samba.org>
+    * BUG 15818: vfs_ceph_new module does not work with other modules for
+      snapshot management.
+    * BUG 15834: vfs_ceph_new: Add path based fallback for SMB_VFS_FCHOWN,
+      SMB_VFS_FCHMOD and SMB_VFS_FNTIMES.
+
+o  Shachar Sharon <ssharon@redhat.com>
+    * BUG 15810: Add async io API from libcephfs to ceph_new VFS module.
+
+
+#######################################
+Reporting bugs & Development Discussion
+#######################################
+
+Please discuss this release on the samba-technical mailing list or by
+joining the #samba-technical:matrix.org matrix room, or
+#samba-technical IRC channel on irc.libera.chat.
+
+If you do report problems then please try to send high quality
+feedback. If you don't provide vital information to help us track down
+the problem then you will probably be ignored.  All bug reports should
+be filed under the Samba 4.1 and newer product in the project's Bugzilla
+database (https://bugzilla.samba.org/).
+
+
+======================================================================
+== Our Code, Our Bugs, Our Responsibility.
+== The Samba Team
+======================================================================
+
+
+
+================
+Download Details
+================
+
+The uncompressed tarballs and patch files have been signed
+using GnuPG (ID AA99442FB680B620).  The source code can be downloaded
+from:
+
+         https://download.samba.org/pub/samba/stable/
+
+The release notes are available online at:
+
+         https://www.samba.org/samba/history/samba-4.22.1.html
+
+Our Code, Our Bugs, Our Responsibility.
+(https://bugzilla.samba.org/)
+
+                         --Enjoy
+                         The Samba Team
+
+-- 
+Jule Anger
+Release Manager Samba Team  samba.org
+SerNet Samba Team           sernet.de
+
 
