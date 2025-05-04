@@ -2,49 +2,73 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 95C01AA4347
-	for <lists+samba-technical@lfdr.de>; Wed, 30 Apr 2025 08:45:01 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 27398AA8389
+	for <lists+samba-technical@lfdr.de>; Sun,  4 May 2025 03:46:45 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=7LsOhU1Anrr8kAA3Nw7HpYJMtWhJ4ZlQ87phyQ3lTEM=; b=vrCxwjPNifREsMeT833AtFKZmz
-	bY/nLqYwXAZwsqQAsR+dxE4fHMDMRYDage+oXmdolJEzroPw8bBQdwQ1yBhHZhi3v3xGEp4zSdf5P
-	t0avmqkzXbjRJSpkbcL7PUUi3WRJj8MrB54RQx47OkqqVaFggkWVcTSGm9922jvI8LekW2OMJRLfF
-	Pfpz8o1XeLZ/ki1GsV2LiYzCSOTALtiHeRLHS9pTDqfKTA6I1172SX6/b10ET8XvjMmg/zowqIhSz
-	EoX/nSISkg9O6rCfHARB3fMlKHtM8ohgun0zba4r9UoAsVU01iDiLVa4AwL6w7q1Ngrq9wsg5Qw7B
-	T8GqDtYg==;
-Received: from ip6-localhost ([::1]:57666 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=B7lnzCOHIwkizy9wWqNhagK46sAvR2JhHgjOg7AFEkU=; b=BmhOf5ZABXZcdrSmsdI6WTf1rM
+	ZC5aXHQtLj4Vy2fmpK16orf714tiMxdxKHi2lTXq/xBkKc5ZPcFhJld0gy7t8STDiZiSP1jXpxOow
+	tflUOVwF4uVERBbPHkcmlJlaaF9j6VL5arI+oVYc/21QFHftyHn6aDTG/6lzqMxmbyvxCJysF4GKr
+	oijIN/Vpv4tpdlMW5yy8PJ9k3ItmXG6z+YQHT2ZgHporR1B+kqFGhPjxZt6Mj4riCxtDt5Vo0i0mN
+	s2wEQf2pfNFevOMjS0bG09D2+bHEb0EUXcdOHjvMwdR37F6CwMKNeo04W5JFtmGP4gQSdVxNdF79N
+	kEFuYEpw==;
+Received: from ip6-localhost ([::1]:46578 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1uA1BA-0011Se-Nr; Wed, 30 Apr 2025 06:44:24 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:40526) 
+	id 1uBOQc-0034nT-CG; Sun, 04 May 2025 01:46:02 +0000
+Received: from mail-lj1-x22b.google.com ([2a00:1450:4864:20::22b]:57646) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uA1B4-0011SX-Ud
- for samba-technical@lists.samba.org; Wed, 30 Apr 2025 06:44:21 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:To:From:Date:CC;
- bh=7LsOhU1Anrr8kAA3Nw7HpYJMtWhJ4ZlQ87phyQ3lTEM=; b=YidtfoQ+bBxgtZzbjWryE2ASsC
- 03rAmc4PJugGuKQt2YP//6nHMcj5bkznpSnmBu98zj3sJ7+sr0e/sAdxrUD2zemYmbaFz3K3bHOmC
- 5fxVZMG6Vn/z5D8p1btwgecuqBDfPvLM/Ky20P1gqh9xlCSc/zuLYYOOzM/fu5VQ9cxa3n91GFGtD
- jcDf6rTGNQeEqNAPjHEh+lGx31sxRSvfRILqaTPiyIuWtdEGXnMrOPTYSbaw/jucGfNSjIGJ70daW
- FbLwRzRtUEy4ptYJABNPmcGpcnyARe9y9CQQr9OknVvBrhN9J4L//TzVoLJX+2ClHRBkPa7hcKywx
- JWNuWRsh1EQOyrSGSb55iqYST0h/4mQhFFuPxhtLY2nApEhcaJqTHm1lIxrD/fndIUDZt5qMjgZXw
- 5xYQ+79q3tjHT/3h29joOJICoLqnWUs2Ur7BYTTxdyYkWqFYBv/LZywj+hU6INBYACp6uxyYdqeeX
- u9ZRH7RdrjKL/j7g/NGnaUA1;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uA1B3-002ioh-2s for samba-technical@lists.samba.org;
- Wed, 30 Apr 2025 06:44:18 +0000
-Date: Wed, 30 Apr 2025 07:44:15 +0100
-To: samba-technical@lists.samba.org
-Subject: Re: restoring winbindd_idmap.tdb file
-Message-ID: <20250430074415.19f2431f@devstation.samdom.example.com>
-In-Reply-To: <CAJQD4dc=sLoPhVkUqSauJ+bZhKh9Dpb6b1qAdbH1HavNYMqiAw@mail.gmail.com>
-References: <CAJQD4dc=sLoPhVkUqSauJ+bZhKh9Dpb6b1qAdbH1HavNYMqiAw@mail.gmail.com>
-X-Mailer: Claws Mail 4.1.1 (GTK 3.24.38; x86_64-pc-linux-gnu)
+ (Exim) id 1uBOQX-0034mv-Ao
+ for samba-technical@lists.samba.org; Sun, 04 May 2025 01:46:00 +0000
+Received: by mail-lj1-x22b.google.com with SMTP id
+ 38308e7fff4ca-30bfe0d2b6dso30431161fa.3
+ for <samba-technical@lists.samba.org>; Sat, 03 May 2025 18:45:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1746323155; x=1746927955; darn=lists.samba.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=B7lnzCOHIwkizy9wWqNhagK46sAvR2JhHgjOg7AFEkU=;
+ b=eSCuV6VbApU9BhTtwHMgjlhZuIw+kbTC1Bo9f8EyBRRreu1jOke5l+lCfHheWj30Xi
+ Lc2JkUvHApWdMLi9VdaFBljS1pd6IokrAIa0KzLjAuCwSvyLfT5pfr1TFPqrXSKvgu0N
+ NGliX3ZzxsFkfMccCr4hT0aEwH5RqZgJIM7yhdRdConlRe2ueMyAh5hcZYlbAHfXBBDX
+ zwR7lM7XsSZ3RhkfVNJ9OEhmUyyrlGJd3ioq46uodxFUefdC5A428XX5XoANcBINdC+t
+ xdAxp4jZ7Ek3bWWxRj560RgnvZ+kL7jC0P1AhO6xsQFS+yeAn92xNyTDXPBGyZpIF9rV
+ Nh3Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1746323155; x=1746927955;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=B7lnzCOHIwkizy9wWqNhagK46sAvR2JhHgjOg7AFEkU=;
+ b=vp4B6c4DwrRCRkENBfr6gCMWZN4ymF5mPwri8bQg3FOUJwWOH24QWNKfqyzb3Ens9o
+ njT3nCnwTXwGtFawaHNrjPIgd/hMdsUK0sxeFGoVRi7EBd2hm8JjevsmZZx3kc/akwW8
+ RXjXxUoZL4kWUDLfKpazeLSoSRbqAD4k97Y557Y8+uWg4+z3UvezAU2eKX6EI6AkNfqt
+ e/Q46g4N4Ax/SorklEYDNdClYRdyFodSm14d+S33dT8627Ay0MEyj6XIsiI2R63kRt6L
+ D7ySCqOQl7OfmAHFldb8+VTHOLZv9qRBZxFtxg9x20hZnbY9jRBAe04kWU9Uuv1C+IpH
+ CuFQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWHzRLuhhyFKgU0mfxN+veKDmJuUmwaXnpo8F6QDiATQz0cBFPetvY4UVjkDvwkHDstx9A9RF7dru/IGX7VlKU=@lists.samba.org
+X-Gm-Message-State: AOJu0YxFkWGFb5c/HdztTo3MmAu79XsDD7MsCj3mcjbAu/Akqlnp1v0U
+ 26q96ZHJcRsoEivd/Og+tGdXpmYhNbZ5npzAGBHLGH2KxsFHSJeL+guU+xPoXXLHre6Bv0/ZuhB
+ NSbmfyN/wHEJfnkUHZd3ou3s9z4A=
+X-Gm-Gg: ASbGncu8DLW07IZGpRWmDoO823+2ay0DEuh3Yv91u+/+BvU2lBx4f7f5U42JmHDsntV
+ l+Jo0E3/Tsc7Uh9K7LPu0+gUKczySRTZHpk5PHghDFeXWumsUWcMzZ5hq9PI3qqPBwbUAAsu4Sq
+ 7cBbeEPUt87BQB8oxxwHifATs=
+X-Google-Smtp-Source: AGHT+IG4qF3iVI5uWcYBZcuo9Y/YT1JDNmGSRnwvpFqRu8CNxzzYJpMUSlIaKXPHHmx3mvmbXuVDMwt5Pq6PShRcZVQ=
+X-Received: by 2002:a2e:be0d:0:b0:30d:e104:b67c with SMTP id
+ 38308e7fff4ca-32352607341mr6769451fa.39.1746323155173; Sat, 03 May 2025
+ 18:45:55 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+References: <20250503234030.130605-1-linux@treblig.org>
+In-Reply-To: <20250503234030.130605-1-linux@treblig.org>
+Date: Sat, 3 May 2025 20:45:43 -0500
+X-Gm-Features: ATxdqUEAZB9i7S5uPsM1MexTMN1OssUOvRay6NTBCvtlxfTs81yFYFIHOqDPCAE
+Message-ID: <CAH2r5mtCa3W1t_RBwPQDoHKb14JHydmP3CdmjoF5BNfkTn5ing@mail.gmail.com>
+Subject: Re: [PATCH] smb: client: Remove an unused function and variable
+To: linux@treblig.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,60 +82,153 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Rowland Penny via samba-technical <samba-technical@lists.samba.org>
-Reply-To: "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>
-Cc: Rowland Penny <rpenny@samba.org>
+From: Steve French via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Steve French <smfrench@gmail.com>
+Cc: pc@manguebit.com, tom@talpey.com, sprasad@microsoft.com,
+ linux-cifs@vger.kernel.org, samba-technical@lists.samba.org,
+ linux-kernel@vger.kernel.org, sfrench@samba.org, bharathsm@microsoft.com
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Tue, 29 Apr 2025 22:17:38 -0400
-Chris Chupela via samba-technical <samba-technical@lists.samba.org>
-wrote:
+This looks fine as something for 6.16-rc next month.
 
-This isn't really the place for this, in my opinion you should have
-posted to the samba mailing list, but you are here now.
+On Sat, May 3, 2025 at 6:40=E2=80=AFPM <linux@treblig.org> wrote:
+>
+> From: "Dr. David Alan Gilbert" <linux@treblig.org>
+>
+> SMB2_QFS_info() has been unused since 2018's
+> commit 730928c8f4be ("cifs: update smb2_queryfs() to use compounding")
+>
+> sign_CIFS_PDUs has been unused since 2009's
+> commit 2edd6c5b0517 ("[CIFS] NTLMSSP support moving into new file, old de=
+ad
+> code removed")
+>
+> Remove them.
+>
+> Signed-off-by: Dr. David Alan Gilbert <linux@treblig.org>
+> ---
+>  fs/smb/client/cifsfs.c    |  1 -
+>  fs/smb/client/smb2pdu.c   | 65 ---------------------------------------
+>  fs/smb/client/smb2proto.h |  3 --
+>  3 files changed, 69 deletions(-)
+>
+> diff --git a/fs/smb/client/cifsfs.c b/fs/smb/client/cifsfs.c
+> index a08c42363ffc..d192a19bd761 100644
+> --- a/fs/smb/client/cifsfs.c
+> +++ b/fs/smb/client/cifsfs.c
+> @@ -70,7 +70,6 @@ bool require_gcm_256; /* false by default */
+>  bool enable_negotiate_signing; /* false by default */
+>  unsigned int global_secflags =3D CIFSSEC_DEF;
+>  /* unsigned int ntlmv2_support =3D 0; */
+> -unsigned int sign_CIFS_PDUs =3D 1;
+>
+>  /*
+>   * Global transaction id (XID) information
+> diff --git a/fs/smb/client/smb2pdu.c b/fs/smb/client/smb2pdu.c
+> index c4d52bebd37d..eef971509589 100644
+> --- a/fs/smb/client/smb2pdu.c
+> +++ b/fs/smb/client/smb2pdu.c
+> @@ -5919,71 +5919,6 @@ SMB311_posix_qfs_info(const unsigned int xid, stru=
+ct cifs_tcon *tcon,
+>         return rc;
+>  }
+>
+> -int
+> -SMB2_QFS_info(const unsigned int xid, struct cifs_tcon *tcon,
+> -             u64 persistent_fid, u64 volatile_fid, struct kstatfs *fsdat=
+a)
+> -{
+> -       struct smb_rqst rqst;
+> -       struct smb2_query_info_rsp *rsp =3D NULL;
+> -       struct kvec iov;
+> -       struct kvec rsp_iov;
+> -       int rc =3D 0;
+> -       int resp_buftype;
+> -       struct cifs_ses *ses =3D tcon->ses;
+> -       struct TCP_Server_Info *server;
+> -       struct smb2_fs_full_size_info *info =3D NULL;
+> -       int flags =3D 0;
+> -       int retries =3D 0, cur_sleep =3D 1;
+> -
+> -replay_again:
+> -       /* reinitialize for possible replay */
+> -       flags =3D 0;
+> -       server =3D cifs_pick_channel(ses);
+> -
+> -       rc =3D build_qfs_info_req(&iov, tcon, server,
+> -                               FS_FULL_SIZE_INFORMATION,
+> -                               sizeof(struct smb2_fs_full_size_info),
+> -                               persistent_fid, volatile_fid);
+> -       if (rc)
+> -               return rc;
+> -
+> -       if (smb3_encryption_required(tcon))
+> -               flags |=3D CIFS_TRANSFORM_REQ;
+> -
+> -       memset(&rqst, 0, sizeof(struct smb_rqst));
+> -       rqst.rq_iov =3D &iov;
+> -       rqst.rq_nvec =3D 1;
+> -
+> -       if (retries)
+> -               smb2_set_replay(server, &rqst);
+> -
+> -       rc =3D cifs_send_recv(xid, ses, server,
+> -                           &rqst, &resp_buftype, flags, &rsp_iov);
+> -       free_qfs_info_req(&iov);
+> -       if (rc) {
+> -               cifs_stats_fail_inc(tcon, SMB2_QUERY_INFO_HE);
+> -               goto qfsinf_exit;
+> -       }
+> -       rsp =3D (struct smb2_query_info_rsp *)rsp_iov.iov_base;
+> -
+> -       info =3D (struct smb2_fs_full_size_info *)(
+> -               le16_to_cpu(rsp->OutputBufferOffset) + (char *)rsp);
+> -       rc =3D smb2_validate_iov(le16_to_cpu(rsp->OutputBufferOffset),
+> -                              le32_to_cpu(rsp->OutputBufferLength), &rsp=
+_iov,
+> -                              sizeof(struct smb2_fs_full_size_info));
+> -       if (!rc)
+> -               smb2_copy_fs_info_to_kstatfs(info, fsdata);
+> -
+> -qfsinf_exit:
+> -       free_rsp_buf(resp_buftype, rsp_iov.iov_base);
+> -
+> -       if (is_replayable_error(rc) &&
+> -           smb2_should_replay(tcon, &retries, &cur_sleep))
+> -               goto replay_again;
+> -
+> -       return rc;
+> -}
+> -
+>  int
+>  SMB2_QFS_attr(const unsigned int xid, struct cifs_tcon *tcon,
+>               u64 persistent_fid, u64 volatile_fid, int level)
+> diff --git a/fs/smb/client/smb2proto.h b/fs/smb/client/smb2proto.h
+> index 4662c7e2d259..035aa1624053 100644
+> --- a/fs/smb/client/smb2proto.h
+> +++ b/fs/smb/client/smb2proto.h
+> @@ -259,9 +259,6 @@ extern int smb2_handle_cancelled_close(struct cifs_tc=
+on *tcon,
+>                                        __u64 volatile_fid);
+>  extern int smb2_handle_cancelled_mid(struct mid_q_entry *mid, struct TCP=
+_Server_Info *server);
+>  void smb2_cancelled_close_fid(struct work_struct *work);
+> -extern int SMB2_QFS_info(const unsigned int xid, struct cifs_tcon *tcon,
+> -                        u64 persistent_file_id, u64 volatile_file_id,
+> -                        struct kstatfs *FSData);
+>  extern int SMB311_posix_qfs_info(const unsigned int xid, struct cifs_tco=
+n *tcon,
+>                          u64 persistent_file_id, u64 volatile_file_id,
+>                          struct kstatfs *FSData);
+> --
+> 2.49.0
+>
+>
 
-> I recently had to remove and re-add a RH 6.10 server 
 
-You have re-added a dead distro (presumably with an equally dead
-version of Samba) ?
- 
-> (ad domain
-> joined with winbind), due to a failed server replacement. Problem I
-> ran into is that domain accounts that had permissions on the file
-> system (home directories) were assigned new UID/GID's when I rejoined
-> the domain, thus blocking access to files/dirs they previously had
-> access to.
+--=20
+Thanks,
 
-This shouldn't have happened, provided that the smb.conf file was setup
-correctly, the only users & groups that could have got different IDs
-would be ones from the BUILTIN domain.
-
-> 
-> (did not make any changes to the smb.conf file during all of this).
-> 
-> I did copy /var/lib/samba/*.tdb to a backup directory, and cleared the
-> cache prior to re-adding the server back to the domain.  If I was to
-> do the following:
-> 
-> 1. stop winbind and smb
-> 2.  dump the contents of the old winbindd_idmap.tdb file to a text
-> file 3.  make another backup of /var/lib/samba
-> 4. delete the existing winbindd_idmap.tdb file from /var/lib/samba
-> 5.  start winbind and smb back up
-> 6. restore the dump file created in step 2 with net idmap restore
-> (feeding it the dump file)
-
-Why did you do that, there is no need and it probably has something to
-do with your problem, winbind would have created it again.
-
-> 
-> Could I expect that this will restore access to the homedirs/files
-> with the correct UID/GID's from the copy of winbindd_idmap.tdb that I
-> made? Thx.
-
-I have no idea, I haven't seen your smb.conf , so have no idea just how
-you are running Samba. I suggest you post your smb.conf (preferably to
-the samba mailing list) and lets take it from there.
-
+Steve
 
