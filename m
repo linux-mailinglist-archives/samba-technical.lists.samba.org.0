@@ -2,59 +2,49 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id C91BBAB87E3
-	for <lists+samba-technical@lfdr.de>; Thu, 15 May 2025 15:28:00 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E95D4AB89B1
+	for <lists+samba-technical@lfdr.de>; Thu, 15 May 2025 16:44:38 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
-	bh=tFQVgemxlguMsLyfkT7jwmOizaH5IapZZM7FdmSDgWw=; b=HHvbgVWohraSKkVq4pod44NnD6
-	KNtFVEhNbo1N0d34HxjIkQ6RY+ktaS7spwzitkeoxjMJbP+bFTQt5mYK4+3GrzI4wB2ha2oihtNTZ
-	s/5l31yLBk9l9ltoF4Wl1wsI7p8GSK0Bjn8ZGupuukqhlU2suRtimcWJ/yG6FWZjUMBMNjXkkRMpw
-	XwhxY0kcw/5NjXk7/NcNdXySFR7GnGtuNNelLmSOCLBdAl7Xe6kHrZPtjcYh06Qw1T0YqCurXIKBv
-	EdUTP9dfHmuA5OZy0yvm7D95i5CqxugPu+CCumWiGGUxa+FPy+Qb/yN1sTfHX7loRInTIoCm7/qyW
-	LIULDUoA==;
-Received: from ip6-localhost ([::1]:42250 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=JJfM8nFiWoccd/V6D90WFnzlzW/xnJkWL3VfI0apQ0g=; b=KF9tKT8tIn1uHcEbqk4FW028vF
+	Ah4fHpGFnL/DqhugACC//GJFmGWUPYqvlH6M8xKPW2ALfxoksrfQHciNtKd/I2ApFnBGlAoeYwh4a
+	ZPudh7uIBlW/xhloOxRCjqNdNTd7twpv4AkgT1z50dpKYf2B6XXAmS0voCUk1FOx/43SD2IE4B6Oz
+	0pBHcHCwS4IJyzl54dlmOG/h1GQO1lMjLMsRZWiGmUr6kofzi8RmO9rrvyETPCDgEontCnt5tWpNM
+	wt9AXnXjCXl1q3giIbCGbnbHT+TSGJe1EAPsDnuRs49G0nRzSwSYKqzL5cM9x60o6WcdIObjvam2T
+	x9uj3KCg==;
+Received: from ip6-localhost ([::1]:50540 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1uFYct-003ca1-JY; Thu, 15 May 2025 13:27:55 +0000
-Received: from relay3.ptmail.sapo.pt ([212.55.154.23]:46844) 
+	id 1uFZoa-003czX-7z; Thu, 15 May 2025 14:44:04 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:54178) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uFYcm-003cYv-2b
- for samba-technical@lists.samba.org; Thu, 15 May 2025 13:27:51 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sapo.pt;
- s=sapo20240325; t=1747315736;
- bh=tFQVgemxlguMsLyfkT7jwmOizaH5IapZZM7FdmSDgWw=;
- h=From:To:References:In-Reply-To:Subject:Date:From;
- b=D+QciaQYUC6eRm8jM2CMArIyNWUAbyg90WTLjUMlX9RjrUFv6wf4kpzsJkL6hVEvx
- DNVDFtyqIQ7nE/p8Vl5/2CRG49iNcVaIw2pVqnF0/a9OpFQXcBhd+MnLiPHlFwZmik
- JK+2cZQydygkPTm0+b0cEaSMEVfCLn8gx6ZHBVALr9ZokfPD/7kNzuUbte6MPZ+pay
- Z9WbkShifG3lT3ZMKhv5g5pKniFXUEY610wYieObLGflpdP3rNP0U14epknRTi2JsL
- ePnFDyHgvFEKDrMIQ2tBW9Ffg/zUcsvsdncIbOB7ul6pV4JHS55wmgTMpBEo0yhEoC
- kuzhUyENOn3zQ==
-Received: from sapo.pt (unknown [10.134.36.75])
- by relay3.ptmail.sapo.pt (Postfix) with ESMTP id D0F13B561AB
- for <samba-technical@lists.samba.org>; Thu, 15 May 2025 14:28:56 +0100 (WEST)
-Received: (qmail 3412755 invoked from network); 15 May 2025 13:27:45 -0000
-Received: from Sepher3 (unknown medalist@sapo.pt@[85.245.190.191])
- (envelope-sender <medalist@sapo.pt>)
- by ptmail-mta-auth01 (qmail-ptmail-1.0.0) with ESMTPSA;
- 15 May 2025 13:27:45 -0000
-X-PTMail-RemoteIP: 85.245.190.191
-X-PTMail-AllowedSender-Action: 
-X-PTMail-Service: default
-To: <samba-technical@lists.samba.org>,
-	<samba@lists.samba.org>
-References: <00a801dbc59a$3f93d510$bebb7f30$@sapo.pt>
+ (Exim) id 1uFZoU-003czP-L5
+ for samba-technical@lists.samba.org; Thu, 15 May 2025 14:44:03 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Message-ID:To:From:Date:CC;
+ bh=JJfM8nFiWoccd/V6D90WFnzlzW/xnJkWL3VfI0apQ0g=; b=qqiC7bwA6+39h/gwVBgkCwNb1J
+ E28ULhzAwHWTTq/2bmRvxolDhtv8eM0dlIqUlJBo1o4VT3zpljbSJEAUY2yKgT3OrYdnfq6zKSc0l
+ rMIRDbqatDAgSbalZQPcCOvstDcprljvEyK/Q6/1X0cDdMFN8JOosDX8PoI87YBXF/E14blBbw7Is
+ k9VLg1PFp9Xy14o4M7vA6UxcjuytSrBM6fZAuQ5pG0i8n++zD2dFm0tbx24nXEF+BcaUn9usX34WS
+ TyF951SB+Il4x0X+Xt3AO/jbJjTsTlEH9tfpZVFUGnkDcGNe4+RuJ94dyY3scwoialmNm1UubT2iy
+ a2IlvHALu81lEmGPJXXJHcBaCLpNoJ2oUF/ZgaWgKYJtgepkkA5beXqmHr1y47COX0Q2YcS5yefYt
+ KNlyKAafwBXs1lmYS6h0PmGQdA2iFZaq3DkFgNcVUa8KrbwO9b4RlKW2gnUUokHK1nmYRdhXPIlKL
+ OV968KO806Q1o3lLuglA1bf3;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1uFZoT-005hw6-31 for samba-technical@lists.samba.org;
+ Thu, 15 May 2025 14:43:58 +0000
+Date: Thu, 15 May 2025 15:43:55 +0100
+To: samba-technical@lists.samba.org
+Subject: Re: "netbios name" parameter
+Message-ID: <20250515154355.212243b9@devstation.samdom.example.com>
 In-Reply-To: <00a801dbc59a$3f93d510$bebb7f30$@sapo.pt>
-Subject: RE: "netbios name" parameter
-Date: Thu, 15 May 2025 14:27:38 +0100
-Message-ID: <000101dbc59d$20eb9910$62c2cb30$@sapo.pt>
+References: <00a801dbc59a$3f93d510$bebb7f30$@sapo.pt>
+X-Mailer: Claws Mail 4.1.1 (GTK 3.24.38; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-Content-Type: text/plain;
-	charset="us-ascii"
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
-X-Mailer: Microsoft Outlook 15.0
-Content-Language: pt
-Thread-Index: AQIvbtuLrozxWnzXqj7Ii0BjkuFic7MsXAJA
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -68,23 +58,52 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: miguel medalha via samba-technical <samba-technical@lists.samba.org>
-Reply-To: miguel medalha <medalist@sapo.pt>
+From: Rowland Penny via samba-technical <samba-technical@lists.samba.org>
+Reply-To: "samba@lists.samba.org" <samba@lists.samba.org>
+Cc: Rowland Penny <rpenny@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-> With the obsolescence of NetBIOS, maybe it's time, for the sake of clarity
-> and precision, to introduce a synonym like "short host name" to the
-"netbios
-> name" parameter, which would eventually be phased out in the future.
+On Thu, 15 May 2025 14:07:01 +0100
+miguel medalha via samba-technical <samba-technical@lists.samba.org>
+wrote:
 
-> As it is now, the "netbios name" parameter is the only way to refer to the
-> short form of the host name, which doesn't seem to be very accurate
-> nowadays...
+> 
+> With the obsolescence of NetBIOS,
 
+It isn't actually obsolete yet, NetBIOS is deprecated, there is
+a difference and as much as Samba (and Microsoft) say not to use it,
+there are people out there who are still using it.
+
+> maybe it's time, for the sake of
+> clarity and precision, to introduce a synonym like "short host name"
+> to the "netbios name" parameter, which would eventually be phased out
+> in the future.
+
+Problem is, it would then have to be 'short hostname in uppercase'
+
+> 
+> As it is now, the "netbios name" parameter is the only way to refer
+> to the short form of the host name, which doesn't seem to be very
+> accurate nowadays...
+
+I would hope that people would know what is meant by 'netbios name' and
+you do not really need to actually set it in smb.conf, Samba will do it
+for you.
+
+> 
 > Lots of other Samba parameters have synonyms, so why not this one?
 
-In the same manner, for the sake of consistency, maybe the "workgroup"
-parameter could have a "domain name" synonym.
+In my opinion, mainly because there should be no reason for any
+synonyms, they can lead to confusion, for instance, how many smb.conf
+files have you seen with these two lines in a share:
+
+read only = no
+writeable = yes
+
+They both mean the same and worse 'writeable' has its own synonym
+'writable'
+
+Rowland
 
 
