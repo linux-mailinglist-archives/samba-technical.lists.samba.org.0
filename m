@@ -2,45 +2,46 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id E95D4AB89B1
-	for <lists+samba-technical@lfdr.de>; Thu, 15 May 2025 16:44:38 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 786C8AB89DA
+	for <lists+samba-technical@lfdr.de>; Thu, 15 May 2025 16:50:33 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=JJfM8nFiWoccd/V6D90WFnzlzW/xnJkWL3VfI0apQ0g=; b=KF9tKT8tIn1uHcEbqk4FW028vF
-	Ah4fHpGFnL/DqhugACC//GJFmGWUPYqvlH6M8xKPW2ALfxoksrfQHciNtKd/I2ApFnBGlAoeYwh4a
-	ZPudh7uIBlW/xhloOxRCjqNdNTd7twpv4AkgT1z50dpKYf2B6XXAmS0voCUk1FOx/43SD2IE4B6Oz
-	0pBHcHCwS4IJyzl54dlmOG/h1GQO1lMjLMsRZWiGmUr6kofzi8RmO9rrvyETPCDgEontCnt5tWpNM
-	wt9AXnXjCXl1q3giIbCGbnbHT+TSGJe1EAPsDnuRs49G0nRzSwSYKqzL5cM9x60o6WcdIObjvam2T
-	x9uj3KCg==;
-Received: from ip6-localhost ([::1]:50540 helo=hr1.samba.org) 
+	bh=4d7AZj6ig/hmIuiflaHcwMCHGBz2otJDG4xkwsY5yA0=; b=bWq4LZBBiLS7g4OZ/K1N/VPIv4
+	ufd+spN/WvQ8jxg4yGBWr42Il7gxNkAyGWn/2Vw0WnBC/ZIeKgkAomAx4xZYHZuOwMoZf2e2zV1fR
+	BXQFRd7vcH8QXnN5SqbcUNv8cSOIdqxa+7fI6ideu9m5UWi3UDPkugstgmZq8VKD/LC7RQMTQUL8f
+	ibkGtgGfDz4+tM+MnR8J2GTqKOTStt4MshGMEYWJiV8dkhJZEPwtGVlC4KIr2aA/XzWAhoRksCDSy
+	aK19KOc4C/ocqdcQ3K8uFpwsLluIntWLTYS8+ovuF3QDSG/6RRaL1UlyAZ2aqjTZ46g5bffT0LAvM
+	PVXrFPdw==;
+Received: from ip6-localhost ([::1]:55634 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1uFZoa-003czX-7z; Thu, 15 May 2025 14:44:04 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:54178) 
+	id 1uFZuk-003d4t-Gl; Thu, 15 May 2025 14:50:26 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:45690) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uFZoU-003czP-L5
- for samba-technical@lists.samba.org; Thu, 15 May 2025 14:44:03 +0000
+ (Exim) id 1uFZuf-003d4m-Qz
+ for samba-technical@lists.samba.org; Thu, 15 May 2025 14:50:24 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Message-ID:To:From:Date:CC;
- bh=JJfM8nFiWoccd/V6D90WFnzlzW/xnJkWL3VfI0apQ0g=; b=qqiC7bwA6+39h/gwVBgkCwNb1J
- E28ULhzAwHWTTq/2bmRvxolDhtv8eM0dlIqUlJBo1o4VT3zpljbSJEAUY2yKgT3OrYdnfq6zKSc0l
- rMIRDbqatDAgSbalZQPcCOvstDcprljvEyK/Q6/1X0cDdMFN8JOosDX8PoI87YBXF/E14blBbw7Is
- k9VLg1PFp9Xy14o4M7vA6UxcjuytSrBM6fZAuQ5pG0i8n++zD2dFm0tbx24nXEF+BcaUn9usX34WS
- TyF951SB+Il4x0X+Xt3AO/jbJjTsTlEH9tfpZVFUGnkDcGNe4+RuJ94dyY3scwoialmNm1UubT2iy
- a2IlvHALu81lEmGPJXXJHcBaCLpNoJ2oUF/ZgaWgKYJtgepkkA5beXqmHr1y47COX0Q2YcS5yefYt
- KNlyKAafwBXs1lmYS6h0PmGQdA2iFZaq3DkFgNcVUa8KrbwO9b4RlKW2gnUUokHK1nmYRdhXPIlKL
- OV968KO806Q1o3lLuglA1bf3;
+ bh=4d7AZj6ig/hmIuiflaHcwMCHGBz2otJDG4xkwsY5yA0=; b=B0giIIQws0vXHLwvAw03C5lg5V
+ 3CvxyhPp8ReSqeFpEvuHY53WNZLHHjWoJx7uljMAvF9AZk3Ityyz8F6i8vAofTJNqMwXklpfYvPil
+ 7Zyb8KK2BrBnSifTRNZziDue5ZTIWQ5s0T317jigaPOIE7qLg77d9mLb+WdvadHklAws3IfxdFW+L
+ 0Ht0kgYVlXz320Eicmy+fKqu7mugtkSNFxQrd72cL0BDavYL7QQ15WgXj6n2LFrQ0ISsP8K9JvT1i
+ v2YaQE8/h/QAn6wvZodvDG8dvN4LTK5wA0hJC/FHOxLbh1WYxxpNtyGRyeff+5RxzttHB6Rf4Hjk4
+ Jy6bC7nn3+ogUyUtQ+8HsB4tXbiTYNZS4OeISOx34utmFts8MVrCc8pFaO1D6SsXM/CKkOun5/Wqy
+ D8BjMS+wP5D2GHWFZ8QHS6Jq9PRMgN7Wl+vZzkXJigaIsGq4MUXl+5koZBqeUcFytem+C6lVOCoNX
+ n0Yv8uGC169mss03RBR39ux0;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uFZoT-005hw6-31 for samba-technical@lists.samba.org;
- Thu, 15 May 2025 14:43:58 +0000
-Date: Thu, 15 May 2025 15:43:55 +0100
+ (Exim) id 1uFZuf-005i3L-0M for samba-technical@lists.samba.org;
+ Thu, 15 May 2025 14:50:21 +0000
+Date: Thu, 15 May 2025 15:50:18 +0100
 To: samba-technical@lists.samba.org
 Subject: Re: "netbios name" parameter
-Message-ID: <20250515154355.212243b9@devstation.samdom.example.com>
-In-Reply-To: <00a801dbc59a$3f93d510$bebb7f30$@sapo.pt>
+Message-ID: <20250515155018.072004cb@devstation.samdom.example.com>
+In-Reply-To: <000101dbc59d$20eb9910$62c2cb30$@sapo.pt>
 References: <00a801dbc59a$3f93d510$bebb7f30$@sapo.pt>
+ <000101dbc59d$20eb9910$62c2cb30$@sapo.pt>
 X-Mailer: Claws Mail 4.1.1 (GTK 3.24.38; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
 Content-Type: text/plain; charset=US-ASCII
@@ -64,46 +65,29 @@ Cc: Rowland Penny <rpenny@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Thu, 15 May 2025 14:07:01 +0100
+On Thu, 15 May 2025 14:27:38 +0100
 miguel medalha via samba-technical <samba-technical@lists.samba.org>
 wrote:
 
+> > With the obsolescence of NetBIOS, maybe it's time, for the sake of
+> > clarity and precision, to introduce a synonym like "short host
+> > name" to the
+> "netbios
+> > name" parameter, which would eventually be phased out in the future.
 > 
-> With the obsolescence of NetBIOS,
-
-It isn't actually obsolete yet, NetBIOS is deprecated, there is
-a difference and as much as Samba (and Microsoft) say not to use it,
-there are people out there who are still using it.
-
-> maybe it's time, for the sake of
-> clarity and precision, to introduce a synonym like "short host name"
-> to the "netbios name" parameter, which would eventually be phased out
-> in the future.
-
-Problem is, it would then have to be 'short hostname in uppercase'
-
+> > As it is now, the "netbios name" parameter is the only way to refer
+> > to the short form of the host name, which doesn't seem to be very
+> > accurate nowadays...
 > 
-> As it is now, the "netbios name" parameter is the only way to refer
-> to the short form of the host name, which doesn't seem to be very
-> accurate nowadays...
-
-I would hope that people would know what is meant by 'netbios name' and
-you do not really need to actually set it in smb.conf, Samba will do it
-for you.
-
+> > Lots of other Samba parameters have synonyms, so why not this one?
 > 
-> Lots of other Samba parameters have synonyms, so why not this one?
+> In the same manner, for the sake of consistency, maybe the "workgroup"
+> parameter could have a "domain name" synonym.
 
-In my opinion, mainly because there should be no reason for any
-synonyms, they can lead to confusion, for instance, how many smb.conf
-files have you seen with these two lines in a share:
-
-read only = no
-writeable = yes
-
-They both mean the same and worse 'writeable' has its own synonym
-'writable'
+But then it really should be 'NetBIOS domain name' or 'pre-windows 2000
+domain name.
 
 Rowland
+ 
 
 
