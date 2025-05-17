@@ -2,37 +2,74 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id EC57DABA016
-	for <lists+samba-technical@lfdr.de>; Fri, 16 May 2025 17:40:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 82D05ABAC5A
+	for <lists+samba-technical@lfdr.de>; Sat, 17 May 2025 22:20:01 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=uOXM4wYepKWr6GAzN+NcWyHrI8bcHR4h9mv3PnT9ByU=; b=YaN2lFY8moa4bJ+kL6QRBSTx03
-	4UywBUQ2xvkYuaDRYoFIHtKjaUYEAWRGphMI+H7gFYnGYFZMamg4EZyGRKUofQ/QK9UB5mi4djtPy
-	kOUzRCEu79yLDl4bKCL2Aaz8rsezlCmVoWZ3KFNSlFJGYDpNkTmhR+dOKpxp0QbMVRC6o3FX2fZMC
-	94o12DexxBgkWtzuIMJycVluQVFohqT0ysdMe13hi+NzxbG4Fi2X7fuSZwuIUyI8txRrz74yJcxzI
-	LwU3ZMz7O84HRSWYiYRU0v7/rc20xCes4CAqsjfyWFBP9Lg/o39nEOrYKHCz7c4LuHHkvh30JjyQi
-	/PMR85Mw==;
-Received: from ip6-localhost ([::1]:64994 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=Bxe9LQxmBejqhUnY/9oT1NUiY/3f8IH0qnoMafyHVxE=; b=EAIZq26mkCWhVQ7sds4n5w5GJT
+	c7eTfr1Nnirxjt2nWvO17OwKfBxVjXyNapmomeFZ/TKQgeiX1kLfeBJLbMfin5hgqlHFN8tdh/kiN
+	ku43YcQrktGwHTg3jUSugj+fxm9V7jlcUurDA4ZAnHM4bRdQjmKibDBWWspWhaHqoHgXCwh++dc6L
+	lqCI6YBBackCtLoyCyJreSS55AaWv5HDqO4kJqFpsRfEob8nfij9csakbZEfSyuRteyBJYvIlLudp
+	hHqX20irOQSmhAP7lNEzUTkCuj5W3HSFfey/h354mpo2J9iyVoA/V97+H4JoaDtJZTs7eWu5VWNxa
+	TYre747w==;
+Received: from ip6-localhost ([::1]:58644 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1uFxAT-003gaQ-AS; Fri, 16 May 2025 15:40:13 +0000
-Received: from air.basealt.ru ([193.43.8.18]:59302) 
+	id 1uGNzz-003kOL-GI; Sat, 17 May 2025 20:19:11 +0000
+Received: from mail-lj1-x232.google.com ([2a00:1450:4864:20::232]:43305) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uFxAL-003gaH-G6
- for samba-technical@lists.samba.org; Fri, 16 May 2025 15:40:07 +0000
-Received: from lenovo-93812.smb.basealt.ru (unknown [193.43.9.250])
- (Authenticated sender: alekseevamo)
- by air.basealt.ru (Postfix) with ESMTPSA id 3CDF22337B;
- Fri, 16 May 2025 18:22:32 +0300 (MSK)
-To: linux-cifs@vger.kernel.org, samba-technical@lists.samba.org,
- sfrench@samba.org, pc@manguebit.com
-Subject: [PATCH] fs/smb/client/fs_context: Add hostname option for CIFS module
- to work with domain-based dfs resources with Kerberos authentication
-Date: Fri, 16 May 2025 19:22:01 +0400
-Message-ID: <20250516152201.201385-1-alxvmr@altlinux.org>
-X-Mailer: git-send-email 2.42.2
+ (Exim) id 1uGNzt-003kOE-2e
+ for samba-technical@lists.samba.org; Sat, 17 May 2025 20:19:09 +0000
+Received: by mail-lj1-x232.google.com with SMTP id
+ 38308e7fff4ca-32805a565e6so27338481fa.1
+ for <samba-technical@lists.samba.org>; Sat, 17 May 2025 13:19:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1747513143; x=1748117943; darn=lists.samba.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Bxe9LQxmBejqhUnY/9oT1NUiY/3f8IH0qnoMafyHVxE=;
+ b=OpkXDbhCbF5EU/7auGxJPdOO2NBkYYqngIHzf/GoH8lgu8Ae491b0S6iXneL5Z9/vs
+ Xx/uUvB7uYROiAlTIaHi+EFTMA/sMGhLBvh6ltwSZkE/qu7QRJKVBgnqkV/NFcm1sfy/
+ WRueOAyDfoLD24z8evbHrPyDYN+y/mCpeg4n9HdErvNzvbwmoaEhwItHCX+OrSuGq84R
+ U5sIy8ikK/sqrJpGOu8966JRAhWFRqfYLXQ03kfIC/E6JidWTW8hl7RtgqyuYj0T4oxx
+ 84wGP4QT24KzBzxX+lJklXAAnXK1x6XKWn7P5DVwr49u9rLeOCl+MJmFfwNfctVj6e5a
+ 5/eA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1747513143; x=1748117943;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=Bxe9LQxmBejqhUnY/9oT1NUiY/3f8IH0qnoMafyHVxE=;
+ b=ZPzpInT1hQmPHPcb/GVm8QXd0I8VOv7noslrrV3cJAW0qzv5IlRVzSjQ4e+KsexdTW
+ pD+GK4SyrLBLkx5pGhf4umWDXza9QlmI8Sbo0Oeji4y4pCtGp1eUHUTT1e03p8x0tyRr
+ CADvrD7BF+BEtKfRMKoT69CjjgJD+mqITkQfKaQAiUg/+6ZVEzHA2ohl0tLoM1FIHL5m
+ tdAEJS6O3RncJimU2xxpRNjnuFDV6MnlRw/WD7UZaS8L9O8yR42xDqJXslZD3mXe2+E1
+ xEyxKbCMIKgjxPV1RiDNDFRkT5R0Mz9HcDkVC6uvqV6fU05WIDgihChomsqEgL+vrO/3
+ Y81g==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXAxg6iH/8zyNXBo3POhLXNlmwkmfOS7HDLydyOaoP39OvfzjZbHroC+DwW9wSv4JGaygY+50S9CkBcv4PKGBY=@lists.samba.org
+X-Gm-Message-State: AOJu0YzMgk30UKILtZH+sdz2tL0MIVhyYq2MFGNcaAgGZM8Bf1gPURu9
+ snTH30uc4bIyVnpJFi71wlfJE4TvzYaZLuNF8cz/bBJIwpFLl4JZ1osgl6WquBiUTKxH5QjPCTO
+ cn+s08pzW1sIfqhV8/9ge/oSBN0v9D18=
+X-Gm-Gg: ASbGncug6CMy5bcMHAwbCoGM+Fsa9MfbhI4Ygrk09vrjd9b31v/0WcFsnoJZeVfjQEL
+ 1WvWWxwzCzJH8PtBkHlVLuJgXw4ArgVJD1VPNPqXzl7RtIY62a1UJh1WvqTocqtYcXAIRfUQyEd
+ x9MhdsEBClKaHCUas5WlXoIzIGzslAaKo=
+X-Google-Smtp-Source: AGHT+IEkothdgJXqrPQfNYqU/Rd588XJkNSYCLUChzj98bM0OsY/FhsdrgrpGpGUyHmz8F0GnnbR23CFlAKHqPg30iY=
+X-Received: by 2002:a2e:bea2:0:b0:30b:fc16:d482 with SMTP id
+ 38308e7fff4ca-327f8415242mr43463481fa.3.1747513143148; Sat, 17 May 2025
+ 13:19:03 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20250516091256.2756826-1-wangzhaolong1@huawei.com>
+ <860a4f7600814b17e48dbabe1ae19f68@manguebit.com>
+In-Reply-To: <860a4f7600814b17e48dbabe1ae19f68@manguebit.com>
+Date: Sat, 17 May 2025 15:18:51 -0500
+X-Gm-Features: AX0GCFuAICdLPBTAXpZ0wq1jvW_7ke3xHmJajyqQ5qd3QP6gU3K9bSgYRhEi8nU
+Message-ID: <CAH2r5mvo1e3034LpCWUAuE0=dDBb7R0bMCmt80dGRWKMegRV+Q@mail.gmail.com>
+Subject: Re: [PATCH V2 0/2] smb: client: Fix use-after-free in readdir
+To: Paulo Alcantara <pc@manguebit.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -46,128 +83,67 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Maria Alexeeva via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Maria Alexeeva <alxvmr@altlinux.org>
-Cc: Ivan Volchenko <ivolchenko86@gmail.com>,
- Maria Alexeeva <alxvmr@altlinux.org>
+From: Steve French via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Steve French <smfrench@gmail.com>
+Cc: linux-cifs@vger.kernel.org, yi.zhang@huawei.com, yangerkun@huawei.com,
+ samba-technical@lists.samba.org, linux-kernel@vger.kernel.org,
+ sfrench@us.ibm.com, Wang Zhaolong <wangzhaolong1@huawei.com>,
+ chengzhihao1@huawei.com
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Paths to domain-based dfs resources are defined using the domain name
-of the server in the format:
-\\DOMAIN.NAME>\<dfsroot>\<path>
+Merged into cifs-2.6.git for-next
 
-The CIFS module, when requesting a TGS, uses the server name
-(<DOMAIN.NAME>) it obtained from the UNC for the initial connection.
-It then composes an SPN that does not match any entities
-in the domain because it is the domain name itself.
+I was only able to reproduce the rmmod problem once though (without
+the patch) so been tricky to test.  What server were you testing
+against (I tried current Samba and ksmbd)?
 
-To eliminate this behavior, a hostname option is added, which is
-the name of the server to connect to and is used in composing the SPN.
-In the future this option will be used in the cifs-utils development.
+On Fri, May 16, 2025 at 8:50=E2=80=AFAM Paulo Alcantara <pc@manguebit.com> =
+wrote:
+>
+> Wang Zhaolong <wangzhaolong1@huawei.com> writes:
+>
+> > V2:
+> >   - Correct spelling mistakes in the commit message, such as 'lopp' -> =
+'loop'.
+> >   - The titles of patches follow the same style.
+> >
+> > This patch series addresses a use-after-free vulnerability in the SMB/C=
+IFS
+> > client readdir implementation that can be triggered during concurrent
+> > directory reads when a signal interrupts directory enumeration.
+> >
+> > The root cause is in the operation sequence in find_cifs_entry():
+> > 1. When query_dir_next() fails due to signal interruption (ERESTARTSYS)
+> > 2. The code continues to access last_entry pointer before checking the =
+return code
+> > 3. This can access freed memory since the buffer may have been released
+> >
+> > The race condition can be triggered by processes accessing the same dir=
+ectory
+> > with concurrent readdir operations, especially when signals are involve=
+d.
+> >
+> > The fix is straightforward:
+> > 1. First patch ensures we check the return code before using any pointe=
+rs
+> > 2. Second patch improves defensiveness by resetting all related buffer =
+pointers
+> >    when freeing the network buffer
+> >
+> > Wang Zhaolong (2):
+> >   smb: client: Fix use-after-free in cifs_fill_dirent
+> >   smb: client: Reset all search buffer pointers when releasing buffer
+> >
+> >  fs/smb/client/readdir.c | 7 +++++--
+> >  1 file changed, 5 insertions(+), 2 deletions(-)
+>
+> Reviewed-by: Paulo Alcantara (Red Hat) <pc@manguebit.com>
+>
 
-Suggested-by: Ivan Volchenko <ivolchenko86@gmail.com>
-Signed-off-by: Maria Alexeeva <alxvmr@altlinux.org>
----
- fs/smb/client/fs_context.c | 35 +++++++++++++++++++++++++++++------
- fs/smb/client/fs_context.h |  3 +++
- 2 files changed, 32 insertions(+), 6 deletions(-)
 
-diff --git a/fs/smb/client/fs_context.c b/fs/smb/client/fs_context.c
-index a634a34d4086..74de0a9de664 100644
---- a/fs/smb/client/fs_context.c
-+++ b/fs/smb/client/fs_context.c
-@@ -177,6 +177,7 @@ const struct fs_parameter_spec smb3_fs_parameters[] = {
- 	fsparam_string("password2", Opt_pass2),
- 	fsparam_string("ip", Opt_ip),
- 	fsparam_string("addr", Opt_ip),
-+	fsparam_string("hostname", Opt_hostname),
- 	fsparam_string("domain", Opt_domain),
- 	fsparam_string("dom", Opt_domain),
- 	fsparam_string("srcaddr", Opt_srcaddr),
-@@ -825,16 +826,23 @@ static int smb3_fs_context_validate(struct fs_context *fc)
- 		return -ENOENT;
- 	}
- 
-+	if (ctx->got_opt_hostname) {
-+		kfree(ctx->server_hostname);
-+		ctx->server_hostname = ctx->opt_hostname;
-+		pr_notice("changing server hostname to name provided in hostname= option\n");
-+	}
-+
- 	if (!ctx->got_ip) {
- 		int len;
--		const char *slash;
- 
--		/* No ip= option specified? Try to get it from UNC */
--		/* Use the address part of the UNC. */
--		slash = strchr(&ctx->UNC[2], '\\');
--		len = slash - &ctx->UNC[2];
-+		/*
-+		 * No ip= option specified? Try to get it from server_hostname
-+		 * Use the address part of the UNC parsed into server_hostname
-+		 * or hostname= option if specified.
-+		 */
-+		len = strlen(ctx->server_hostname);
- 		if (!cifs_convert_address((struct sockaddr *)&ctx->dstaddr,
--					  &ctx->UNC[2], len)) {
-+					  ctx->server_hostname, len)) {
- 			pr_err("Unable to determine destination address\n");
- 			return -EHOSTUNREACH;
- 		}
-@@ -1518,6 +1526,21 @@ static int smb3_fs_context_parse_param(struct fs_context *fc,
- 		}
- 		ctx->got_ip = true;
- 		break;
-+	case Opt_hostname:
-+		if (strnlen(param->string, CIFS_NI_MAXHOST) == CIFS_NI_MAXHOST) {
-+			pr_warn("host name too long\n");
-+			goto cifs_parse_mount_err;
-+		}
-+
-+		kfree(ctx->opt_hostname);
-+		ctx->opt_hostname = kstrdup(param->string, GFP_KERNEL);
-+		if (ctx->opt_hostname == NULL) {
-+			cifs_errorf(fc, "OOM when copying hostname string\n");
-+			goto cifs_parse_mount_err;
-+		}
-+		cifs_dbg(FYI, "Host name set\n");
-+		ctx->got_opt_hostname = true;
-+		break;
- 	case Opt_domain:
- 		if (strnlen(param->string, CIFS_MAX_DOMAINNAME_LEN)
- 				== CIFS_MAX_DOMAINNAME_LEN) {
-diff --git a/fs/smb/client/fs_context.h b/fs/smb/client/fs_context.h
-index 9e83302ce4b8..cf0478b1eff9 100644
---- a/fs/smb/client/fs_context.h
-+++ b/fs/smb/client/fs_context.h
-@@ -184,6 +184,7 @@ enum cifs_param {
- 	Opt_pass,
- 	Opt_pass2,
- 	Opt_ip,
-+	Opt_hostname,
- 	Opt_domain,
- 	Opt_srcaddr,
- 	Opt_iocharset,
-@@ -214,6 +215,7 @@ struct smb3_fs_context {
- 	bool gid_specified;
- 	bool sloppy;
- 	bool got_ip;
-+	bool got_opt_hostname;
- 	bool got_version;
- 	bool got_rsize;
- 	bool got_wsize;
-@@ -226,6 +228,7 @@ struct smb3_fs_context {
- 	char *domainname;
- 	char *source;
- 	char *server_hostname;
-+	char *opt_hostname;
- 	char *UNC;
- 	char *nodename;
- 	char workstation_name[CIFS_MAX_WORKSTATION_LEN];
+--=20
+Thanks,
 
-base-commit: bec6f00f120ea68ba584def5b7416287e7dd29a7
--- 
-2.42.2
-
+Steve
 
