@@ -2,73 +2,72 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 944C7AC385B
-	for <lists+samba-technical@lfdr.de>; Mon, 26 May 2025 05:58:05 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 35914AC3D37
+	for <lists+samba-technical@lfdr.de>; Mon, 26 May 2025 11:47:09 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=zFYKaF5MdOzMoUJdYK+pJqy+h1cRWqDSmXlmSKPedVg=; b=jDLeGeS+OXO50MxRHYtEgxGZgT
-	qR/Nq7UjIWvzZu4gOC3ramAezmyb716iEFQ+axlGLOWOO2A8nkpVnLG0LOnsMuG6mSQjVeWk1KA7l
-	rNTT1phwOKvm99j722aTrU6L/Qoqh0kp+norq8qbS590XdWsmUJvOtcaZQhxtozduGeqM6T+HEM9W
-	GbYF45ImXK+jHMmYV4TG3fWwNP9k5gx/Yb0xu43uNVSaxCFAWDu8qfOMeDqcMBnt86qQ7U2SUtcTU
-	4aZ/ISmToBmdQz+nIDa9iZGZvM4qgAFSMTwzMWP5FNZkSQ2+BpZ/+QDxWNi0e5aSrCNofsrY7f+Cl
-	vFj2LAZQ==;
-Received: from ip6-localhost ([::1]:25672 helo=hr1.samba.org) 
+	bh=C+Lhcmvg+c8DuVexeX9GrNWeSXuSPNOQauhybTDN0cc=; b=XC0+C2E4zVOpidEiRPx4yLWkQY
+	WePK8mRLPz1E/HeaTlaaTLOCu6LJTr38dV473vnAJcm57XUSfmtKo2scwlPCl0XHNVyMC7xmrYHJj
+	DDHZZDpliH1s2fwI8FqGXscKg3/rjLPombOX6gT6bqzMudCnbeA5i9gsatEHKJYqZ3/MEwIhCq1R7
+	zVYR7qvf4gMqn5+R3zBlWRiV/OLSa7EtA7im+0tCaiQ1oDLXmG6KvA4tJ7HfpqmavberP3x4dM9tR
+	lcSpKg4NEFRn4zaLwurNbPO8wD+R4LDhR5Q+mAeEwTo+U0SmAYziNqkF+i35/sICGgInaMPhM2/9d
+	MVmCKZOA==;
+Received: from ip6-localhost ([::1]:29310 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1uJOxs-004DLs-T3; Mon, 26 May 2025 03:57:28 +0000
-Received: from mail-lj1-x229.google.com ([2a00:1450:4864:20::229]:46375) 
+	id 1uJUPY-004E71-0D; Mon, 26 May 2025 09:46:24 +0000
+Received: from mail-vk1-xa29.google.com ([2607:f8b0:4864:20::a29]:59781) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uJOxm-004DLl-2M
- for samba-technical@lists.samba.org; Mon, 26 May 2025 03:57:25 +0000
-Received: by mail-lj1-x229.google.com with SMTP id
- 38308e7fff4ca-32909637624so22215581fa.1
- for <samba-technical@lists.samba.org>; Sun, 25 May 2025 20:57:21 -0700 (PDT)
+ (Exim) id 1uJUPS-004E6u-Tp
+ for samba-technical@lists.samba.org; Mon, 26 May 2025 09:46:22 +0000
+Received: by mail-vk1-xa29.google.com with SMTP id
+ 71dfb90a1353d-527b70bd90dso502890e0c.3
+ for <samba-technical@lists.samba.org>; Mon, 26 May 2025 02:46:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1748231840; x=1748836640; darn=lists.samba.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=zFYKaF5MdOzMoUJdYK+pJqy+h1cRWqDSmXlmSKPedVg=;
- b=eruXOcOj6hcLNFmbYNMVHNWkF3zLVxstsiEWcn3i7sTak9ohjNOL4SiJo83v6/YoxR
- 6aJp508jyGq7doCc55nUaxaRyQ60tjIpZoJVFBfyfcz2Q0HLpfpiNgwcBUKwmnFcoPNB
- iSY9OeLCdlMviiEW/axW7p5oROsSv4FUbeqi2ygF1Zc3omQUnsTtSnwwSK+RvHjVgFaa
- RtTblgton+VpWggAsycgMuLSbwA620MjYZ+4Agl7a1pqv3xy+eoWvNI3lqBw1ph7RK8I
- AyF0rbR1A1hS+G9fR6vBn33SgYGqXYqhD6LdKqKjJSrM4CRoKaWBQ/6ek0JGdEGdZWCn
- 89jg==
+ d=gmail.com; s=20230601; t=1748252777; x=1748857577; darn=lists.samba.org;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=5L8m1guBREndO5RpaZBvVhGorSKuSDZZE/eex40MP14=;
+ b=hzxVe3L7GK7LBjuKLS4w17ke9XKX+aWkiC2cO5x6v24TWhC2aaV/ndNsZbCanQQaSX
+ BYtn2Gbe+N0NOxO9whRpLSLFN0WILWjJP7DZ+oGESOfCt/bErLADsiUkPkIGOT6R25EI
+ mGIfSVhFLvYkkNq7w2lB/RzZnM5QGpKspKgPgQWVxaXOfHGho9yXpGFG9QmP4wXw7moq
+ l6A3t7EnpYP2EzafeCDlkMVjPxabtvxGbnxEdnPt4ui3tSkjQBenolUZTKfb10EtZE9p
+ CH6OW/dGFrG7E54oJuKQC8lS2l8djqaa4GjK40KcwDX2kTO2lvMxnCmavtOV0Qz1jQUG
+ LaQw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748231840; x=1748836640;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=zFYKaF5MdOzMoUJdYK+pJqy+h1cRWqDSmXlmSKPedVg=;
- b=Lp/5jefx2nS5GzWN645mbweYWeyafyDZITEEyNO+2rmlObAGhkAwK3XG6t1WvKxBPA
- rR1+SG1NLA8JPysdLUKKx1NqTX0j5/yMT/rvlroExWDKGVHmjdnV/U/4niESmQ0FWWFP
- XC6EaGVPE5pWB2Lq5KGOJj/pQOd79zE9xcdCHaLq1GzpCQawleTaioQ0XLmVggCRtipg
- Exr5I1g3q8MWo5Zy7WfFOHQgpB/GXEQwVvD4ReVoWHhdcKkzGbUU7VY2aHheOvr6KNxf
- ackJ2ohCOCugK4qULS/xWm/DdzKR7YE/zdeS1QhsNeUl2vgfNwvqIGdY4wj/CY0W1HRg
- nUiA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW2UuKUzGejE2+p6yKcq8OsZ1L8Pf5Ovcz9JTwbKsNwCSe5uXt7d5YfIhD0efL9Qelyn9RftEQNgCjWlO4CRyY=@lists.samba.org
-X-Gm-Message-State: AOJu0YxA53ub8vw9tYy3jMoaDQOQb820rUF2UUX6+g0NgcpT5LJdLPxw
- A4HmpLQkEw5gJHBxXUABalIc/UvjeZG3sHJsWa1jzoHfGM9v6Vrx1wnOjG2FTk3CrPxooOOA5Ft
- 5KQu5j1sZ7kdJN2ADHtvWyRmSmqaC3R4=
-X-Gm-Gg: ASbGncvWCc+MSbK2oXVXE6JyDSzFCc7QpvmpFl0dIooagm2woRybwvGWhtISNwC1oW9
- i7W636efcBO9aldxsmgZJYZY2Du5VWkXatggcrGP+11m+bT0ruQH31/ZFcruvzln6Koi99xiNnU
- D0/C6oh6nSXw2yIT/dtAfLAiz+19EF5mieWR01TZNHPC/U0aDxfxZbErBp5wE6pVzctTc=
-X-Google-Smtp-Source: AGHT+IFglGOFvc94hDJJ+iVTcL3H6Lguo5HUhsNTeHxD1snKYkGJepa0VX6LderHITQpczdb+2Xp4I0HIVJ8Ctj4OUQ=
-X-Received: by 2002:a05:651c:b25:b0:30b:cb10:3a20 with SMTP id
- 38308e7fff4ca-3295ba791e0mr21311351fa.32.1748231840130; Sun, 25 May 2025
- 20:57:20 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1748252777; x=1748857577;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=5L8m1guBREndO5RpaZBvVhGorSKuSDZZE/eex40MP14=;
+ b=kh8IKANjx0/2fRlMmlkem6dMdEwXGJ3c5XhD9J2vX5XO8m8289p0WYr3FBscTKR+Pi
+ jupOjhsTngLalBvJSYIS7eeZ+s1ZjW0wKZrc3p3iMC6hm1zRZgPRQWuKB1ySwovjOxsE
+ DNxOBT+zlJqpqySHUiOwgZxvVLuJl2EVhLUhKLe7vmPJzb+4virVX++gfnoMflj8/oy0
+ yPVH9yYvk6Xq/FZ4Le63QuZ1gKIoLTHRNhr/e1JyJKWgNUprt+ozuUNuGhdMvPLpEfJm
+ Xm+zoFHpTv9zEZ8jfoWq+RNXMAFwfuIvuZLuli4WNkrldj9DYReqcwV4lEfswo8HeopG
+ NwUw==
+X-Gm-Message-State: AOJu0YzcylqeMtNLAkX3cNb9zONpSl06aZBY6ty1KEtrCEcsEw5c2ckK
+ FLVppT5LFFvju4/1GsLHLrRYdfO6hliXm56jOxq1J5ZZHg4gR3G8QkXW90a6gRb6Tve8TX09q/I
+ QS8jw8wAoseL2JNGZ889fzhuSetm99YU=
+X-Gm-Gg: ASbGncu4ydUIXMw2YNoyKUvcrnAsLbX5oPHzyMHIxMx0G2G1lXGb0sy1G+P5Z+RokqZ
+ eBEjwL8sWw9eUfonAo3S3sfWuSt00sUFTqTuCnfmY0Z3ue791jYLXY1I3/s/kv0ASbrMo9sIbBp
+ A1EMYQQqanPBcxRtboo3Re0ivR56DxembB
+X-Google-Smtp-Source: AGHT+IFNftme6RKHq8ZEfzbQx4Q1pjXT9hD4KS7fFAPOraoXuc/HkqOjU2MEzjRH6OK4yRnoGdRcSG4HBN3MdS7p3b8=
+X-Received: by 2002:a05:6122:81d4:b0:530:5082:7266 with SMTP id
+ 71dfb90a1353d-53050827339mr23022e0c.3.1748252776547; Mon, 26 May 2025
+ 02:46:16 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250503234030.130605-1-linux@treblig.org>
-In-Reply-To: <20250503234030.130605-1-linux@treblig.org>
-Date: Sun, 25 May 2025 22:57:08 -0500
-X-Gm-Features: AX0GCFvPd0Adolnn1ZM7I39tciaAPW3DaBAHk6K8jPSv5S55usBDLzH4A01Y66g
-Message-ID: <CAH2r5mvG_y6-z618TyHnNVf9ueS3hrWP8NPP_HJOTCxAnBvYKQ@mail.gmail.com>
-Subject: Re: [PATCH] smb: client: Remove an unused function and variable
-To: linux@treblig.org
+References: <CAO9H7P8386LOjJPbxSicuDFO-yQ+ofZyFv+Vz_28JnntkMrkcQ@mail.gmail.com>
+ <20250525145257.1ff80548@martins.ozlabs.org>
+In-Reply-To: <20250525145257.1ff80548@martins.ozlabs.org>
+Date: Mon, 26 May 2025 11:46:05 +0200
+X-Gm-Features: AX0GCFsS6H_34Y82B5M06SwsdV4fbbSuKFHlX-BRtIQMdDiwREW6KC3kjjHXmGk
+Message-ID: <CAO9H7P8ix7ntc2Xtdowyv5mvBCKAZp+gOsCRdMoMAZqhnCH2tQ@mail.gmail.com>
+Subject: Re: CTDB performance issue
+To: Martin Schwenke <martin@meltin.net>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -82,153 +81,229 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
-Cc: pc@manguebit.com, tom@talpey.com, sprasad@microsoft.com,
- linux-cifs@vger.kernel.org, samba-technical@lists.samba.org,
- linux-kernel@vger.kernel.org, sfrench@samba.org, bharathsm@microsoft.com
+From: Xavi Hernandez via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Xavi Hernandez <xhernandez@gmail.com>
+Cc: gd@samba.org, Samba Technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-merged into cifs-2.6.git for-next
+Hi Martin,
 
-On Sat, May 3, 2025 at 6:40=E2=80=AFPM <linux@treblig.org> wrote:
+Thanks for your comments.
+
+On Sun, May 25, 2025 at 6:52=E2=80=AFAM Martin Schwenke <martin@meltin.net>=
+ wrote:
+
+> Hi Xavi,
 >
-> From: "Dr. David Alan Gilbert" <linux@treblig.org>
+> On Wed, 21 May 2025 13:14:24 +0200, Xavi Hernandez
+> <xhernandez@gmail.com> wrote:
 >
-> SMB2_QFS_info() has been unused since 2018's
-> commit 730928c8f4be ("cifs: update smb2_queryfs() to use compounding")
+> > I've been analyzing a problem where CTDB does many leader reelections
+> > because it loses the leader broadcast messages.
+> >
+> > It's not always the same node that loses the broadcast, and it has been
+> > confirmed with a network capture that the leader is actually sending th=
+e
+> > broadcasts, and the nodes are receiving them.
+> >
+> > Based on the data we have collected, I think the problem is caused by t=
+he
+> > lock helper processes that CTDB starts to wait for a mutex in case of
+> > contention. The data shows that there's a lot of requests requiring TDB
+> > access (mostly create and close), in the order of 1000 per second.
+> However
+> > we have seen that under normal circumstances, very few lock helpers are
+> > started, which means that there's little contention and most of the
+> mutexes
+> > can be acquired immediately.
+> >
+> > The problem starts when a global operation, like vacuuming, is started.
+> It
+> > acquires the global lock of the TDB, causing all requests to contend.
+> This
+> > triggers the execution of many lock helpers, which get blocked. When 20=
+0
+> > (default value for tunable LockProcessesPerDB) lock helpers are started=
+,
+> > CTDB stops creating new processes, but queues them in a list.
+> >
+> > Meanwhile the vacuuming operation is running. It could take a few
+> seconds,
+> > but every second ~1000 new requests are queued to run a lock helper. On=
+ce
+> > vacuuming completes, the global lock is released and all 200 lock helpe=
+rs
+> > are unblocked at the same time.
+> >
+> > This seems to cause a lot of context switches. CTDB needs to handle the
+> > termination of each process and starting a new one from the queue.
+> > Additionally, there are many smbd processes doing work. During this tim=
+e,
+> > it looks like CTDB is not able to process the incoming queue fast enoug=
+h,
+> > and even though the leader broadcast message is present in the socket's
+> > kernel buffer, CTDB doesn't see it for several seconds. This triggers t=
+he
+> > timeout and forces a reelection. The reelection itself also takes the
+> > global lock (TDBs are frozen), which could cause the problem to repeat.
+> >
+> > We are still collecting data to try to find more evidence, but right no=
+w
+> > this seems to be what's happening.
+> >
+> > Does this make sense ?
+> > Any recommendations to fix (or at least minimize) this problem in the
+> > short-term ?
 >
-> sign_CIFS_PDUs has been unused since 2009's
-> commit 2edd6c5b0517 ("[CIFS] NTLMSSP support moving into new file, old de=
-ad
-> code removed")
+> It makes excellent sense.  Thanks for the excellent analysis!
 >
-> Remove them.
+> The best change I can think of would be to not start a recovery at the
+> beginning of an election and to not bother with a recovery at the end
+> of an election if the leader is unchanged.
 >
-> Signed-off-by: Dr. David Alan Gilbert <linux@treblig.org>
-> ---
->  fs/smb/client/cifsfs.c    |  1 -
->  fs/smb/client/smb2pdu.c   | 65 ---------------------------------------
->  fs/smb/client/smb2proto.h |  3 --
->  3 files changed, 69 deletions(-)
+> Basically, a recovery isn't needed unless the set of active nodes
+> changes.  It is nice to have a leader, but in CTDB the leader is only
+> really needed to do the things that a leader needs to do (recovery,
+> failover, ...).
 >
-> diff --git a/fs/smb/client/cifsfs.c b/fs/smb/client/cifsfs.c
-> index a08c42363ffc..d192a19bd761 100644
-> --- a/fs/smb/client/cifsfs.c
-> +++ b/fs/smb/client/cifsfs.c
-> @@ -70,7 +70,6 @@ bool require_gcm_256; /* false by default */
->  bool enable_negotiate_signing; /* false by default */
->  unsigned int global_secflags =3D CIFSSEC_DEF;
->  /* unsigned int ntlmv2_support =3D 0; */
-> -unsigned int sign_CIFS_PDUs =3D 1;
->
->  /*
->   * Global transaction id (XID) information
-> diff --git a/fs/smb/client/smb2pdu.c b/fs/smb/client/smb2pdu.c
-> index c4d52bebd37d..eef971509589 100644
-> --- a/fs/smb/client/smb2pdu.c
-> +++ b/fs/smb/client/smb2pdu.c
-> @@ -5919,71 +5919,6 @@ SMB311_posix_qfs_info(const unsigned int xid, stru=
-ct cifs_tcon *tcon,
->         return rc;
->  }
->
-> -int
-> -SMB2_QFS_info(const unsigned int xid, struct cifs_tcon *tcon,
-> -             u64 persistent_fid, u64 volatile_fid, struct kstatfs *fsdat=
-a)
-> -{
-> -       struct smb_rqst rqst;
-> -       struct smb2_query_info_rsp *rsp =3D NULL;
-> -       struct kvec iov;
-> -       struct kvec rsp_iov;
-> -       int rc =3D 0;
-> -       int resp_buftype;
-> -       struct cifs_ses *ses =3D tcon->ses;
-> -       struct TCP_Server_Info *server;
-> -       struct smb2_fs_full_size_info *info =3D NULL;
-> -       int flags =3D 0;
-> -       int retries =3D 0, cur_sleep =3D 1;
-> -
-> -replay_again:
-> -       /* reinitialize for possible replay */
-> -       flags =3D 0;
-> -       server =3D cifs_pick_channel(ses);
-> -
-> -       rc =3D build_qfs_info_req(&iov, tcon, server,
-> -                               FS_FULL_SIZE_INFORMATION,
-> -                               sizeof(struct smb2_fs_full_size_info),
-> -                               persistent_fid, volatile_fid);
-> -       if (rc)
-> -               return rc;
-> -
-> -       if (smb3_encryption_required(tcon))
-> -               flags |=3D CIFS_TRANSFORM_REQ;
-> -
-> -       memset(&rqst, 0, sizeof(struct smb_rqst));
-> -       rqst.rq_iov =3D &iov;
-> -       rqst.rq_nvec =3D 1;
-> -
-> -       if (retries)
-> -               smb2_set_replay(server, &rqst);
-> -
-> -       rc =3D cifs_send_recv(xid, ses, server,
-> -                           &rqst, &resp_buftype, flags, &rsp_iov);
-> -       free_qfs_info_req(&iov);
-> -       if (rc) {
-> -               cifs_stats_fail_inc(tcon, SMB2_QUERY_INFO_HE);
-> -               goto qfsinf_exit;
-> -       }
-> -       rsp =3D (struct smb2_query_info_rsp *)rsp_iov.iov_base;
-> -
-> -       info =3D (struct smb2_fs_full_size_info *)(
-> -               le16_to_cpu(rsp->OutputBufferOffset) + (char *)rsp);
-> -       rc =3D smb2_validate_iov(le16_to_cpu(rsp->OutputBufferOffset),
-> -                              le32_to_cpu(rsp->OutputBufferLength), &rsp=
-_iov,
-> -                              sizeof(struct smb2_fs_full_size_info));
-> -       if (!rc)
-> -               smb2_copy_fs_info_to_kstatfs(info, fsdata);
-> -
-> -qfsinf_exit:
-> -       free_rsp_buf(resp_buftype, rsp_iov.iov_base);
-> -
-> -       if (is_replayable_error(rc) &&
-> -           smb2_should_replay(tcon, &retries, &cur_sleep))
-> -               goto replay_again;
-> -
-> -       return rc;
-> -}
-> -
->  int
->  SMB2_QFS_attr(const unsigned int xid, struct cifs_tcon *tcon,
->               u64 persistent_fid, u64 volatile_fid, int level)
-> diff --git a/fs/smb/client/smb2proto.h b/fs/smb/client/smb2proto.h
-> index 4662c7e2d259..035aa1624053 100644
-> --- a/fs/smb/client/smb2proto.h
-> +++ b/fs/smb/client/smb2proto.h
-> @@ -259,9 +259,6 @@ extern int smb2_handle_cancelled_close(struct cifs_tc=
-on *tcon,
->                                        __u64 volatile_fid);
->  extern int smb2_handle_cancelled_mid(struct mid_q_entry *mid, struct TCP=
-_Server_Info *server);
->  void smb2_cancelled_close_fid(struct work_struct *work);
-> -extern int SMB2_QFS_info(const unsigned int xid, struct cifs_tcon *tcon,
-> -                        u64 persistent_file_id, u64 volatile_file_id,
-> -                        struct kstatfs *FSData);
->  extern int SMB311_posix_qfs_info(const unsigned int xid, struct cifs_tco=
-n *tcon,
->                          u64 persistent_file_id, u64 volatile_file_id,
->                          struct kstatfs *FSData);
-> --
-> 2.49.0
->
+> I started some work in this area a few years ago but got spooked when I
+> saw unexpected behaviour.  I need to take another look.
 >
 
+The recovery process can only make the problem worse, but it's not what
+initially triggers the problem itself. Even without the recovery in the
+picture, CTDB is already running slowly and requests accumulate big delays
+(including the leader broadcast which arrives too late). I also think that
+a workload where there's a lot of lock contention (forcing CTDB to start
+the lock helper processes even in normal cases without vacuuming or other
+operations) will make CTDB go slower and accumulate latencies. In any case
+that's another issue and I don't have conclusive data yet.
 
---=20
-Thanks,
+Probably avoiding recovery would help, but I think we should try to
+understand and fix the initial issue.
 
-Steve
 
+
+> However, I'm not sure this is short-term enough for you.  :-(
+>
+> I'm interested in a couple of things:
+>
+> * What sort of workload hammers CTDB hard enough that this problem
+>   occurs?  Can you please give me some idea of the scale here?
+>
+
+I can't tell for sure what the users are doing, but from a network traffic
+analysis, I can say that there are many open/close requests (in the order
+of 1000 per second), and read and write operations mostly. The open/close
+requests need to check/update the share mode, which requires TDB locked
+access.
+
+This happens on a 3 node CTDB cluster.
+
+
+
+> * Apart from this, how stable is the cluster?  Is it a static group of
+>   nodes that is generally rock solid?  In that case, you could just try
+>   increasing the leader broadcast timeout.  However, if it were that
+>   easy, I'm guessing you wouldn't have needed to do all of this
+>   analysis.  ;-)
+>
+
+I would say that without these issues, nodes are pretty stable. We thought
+about increasing the leader broadcast timeout, but without understanding
+exactly why the broadcast was lost in the first place, it was not so clear
+it could help (we thought that the broadcast was actually lost, not just
+delayed).
+
+
+
+>
+> > Besides tweaking some parameters to reduce the frequency of operations
+> that
+> > require the global lock, could it help to reduce the LockProcessesPerDB=
+ ?
+> > It looks like less processes would cause less context switches and less
+> > overhead to ctdb, so it would be able to process the queue faster. Does
+> > that make sense or this could cause slowness in other cases ?
+>
+> The current defaults are based on some performance work that was
+> done >10 years ago.  If you have a test setup where you can generate
+> similar load to your productions setup, then I would encourage you to
+> try things out and report back.  Reducing the size of a thundering herd
+> might be good.  However, I wonder if reducing LockProcessesPerDB means
+> you might increase the latency for taking lock.
+>
+
+Yes, we will definitely try to reproduce it, but from past experience,
+sometimes it's hard to generate the same load from a limited test
+environment. We'll try it anyway and experiment with other values for the
+tunable.
+
+
+
+>
+> Sorry, I'm having trouble swapping all of this back into my brain
+> today.  :-(
+>
+> > If this issue is really caused by the execution of the lock helpers, I'=
+m
+> > wondering if we couldn't get rid of them. I have an idea on that side,
+> but
+> > first I prefer to be sure that what we have seen is valid and I haven't
+> > missed something else that could explain the problem.
+>
+> Just out of interest, do you have the "realtime scheduling" option
+> switched off?  That would certainly impact on ctdbd's ability to stay
+> ahead of other processes.  If this is the case, and you have a good
+> reason for doing this, then perhaps we need to look at finishing and
+> merging some patches to use regular scheduling priorities instead of
+> real-time.  Those have been around for a long time - we were
+> experimenting with this 10 years ago but never had the courage to
+> listen to our test results and just go with it...
+>
+
+"realtime scheduling" is enabled, but note that even with this, all lock
+helpers started by CTDB also have the same priority. So, even if running
+with high priority, the main CTDB process is just one of many competing for
+CPU.
+
+I think it's also important to note that, in this particular case, lock
+contention seems very low before the global lock is taken, so I expect that
+most of the helpers will run without actually waiting for the mutex (it
+will be granted immediately).
+
+
+
+>
+> Also interested in your idea for getting rid of lock helpers...
+>
+
+My idea is a bit more radical. The motivation is that starting a new
+process and communicating with it asynchronously is in the order of a few
+milliseconds (even tens or hundreds of milliseconds if we have a high
+number of context switches and CPU competition). On the other hand, trying
+to acquire a mutex is in the order of a few nanoseconds. This means a
+difference of at least 6 orders of magnitude. So my raw idea is based on:
+
+1. Add support in tevent to manage locks.
+2. Instead of spawning a lock helper, just send a lock attempt to tevent,
+with a callback that will be executed when the lock is acquired.
+3. If the lock cannot be acquired immediately, it will be added to the
+pending list.
+4. In each loop, and before handling immediates, tevent will check the list
+of pending locks and will try to acquire them.
+5. If a lock is acquired, post its callback as an immediate.
+6. When tevent processes the immediates, the callbacks of all acquired
+locks will be executed.
+
+This is a very high level idea. This will be faster as long as we don't
+attempt to get each lock a million times. I'm also thinking about how to
+prevent having to check each single pending lock in each iteration, which
+will heavily reduce the overhead, and how to prevent starvation in the
+worst case. I think there are ways to avoid these problems, but first I
+need to know if this idea makes sense to you.
+
+Best regards,
+
+Xavi
