@@ -2,51 +2,52 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6B719AC5B20
-	for <lists+samba-technical@lfdr.de>; Tue, 27 May 2025 22:00:04 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E8763AC5DD6
+	for <lists+samba-technical@lfdr.de>; Wed, 28 May 2025 01:45:05 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=nGfY8tZRHN8kmr7rkbb4nmZDOtvAvf9s+b7sb4fOiuo=; b=W0nF/FwUjYJmyCL0iP68JLArbX
-	rG+NnXHREaoIpumPIvyHpg0dbAkNNrhZa2ZWOzIaYhvWDzdYkjBT27pL5LdMsBXVp+DSrw18LN/ch
-	b6dPE/ywE6EUcke4oMq5rwyfuaAwv26RQ/SA6v/Kpy8uiGUUcFB4ct/XrXZJwaToOkZH5q15MQEVK
-	3FLvfcN2TDm5RFGzUo/0pFbZ923FdZq+HcbCe638TNm84HUpFlvIyTDfyC/t9NQsuR17UNOr51R61
-	LjksdrHc/yuiqsNA4XMYgZjN+qDdJNErCl7qwYEiTY6fsTjTXGe2TTPY0Xvzsdwcw8jcNVvPUIgL8
-	eH4r7SFw==;
-Received: from ip6-localhost ([::1]:47430 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
+	bh=UX20xQTrImlwybXfTP/2xpsHknIaM2u13/UJBP+Asl4=; b=FFKiDuHb2FNr4TN4Oo2vahGcgP
+	XTA+qB6o/DYdq3CZfD+A1FdK3k1p6SFMZaNYv1cB2VHYcfRIpqTCV4EqAAE7tm0mRTGE2nkSVu6GP
+	YNCfzpDYslCVKDOOEaCRO5FQLfCz9bhexCYpDwi4MpOKE/xbasHEkit+MNm+gPq60WCvUEvmN3mIe
+	Sa1cmCm6w8WT7oaFxUni48fk48un3hBTMEydUwgBig3cyV3OTB62IHIE5LqsuqUeN/OxVmPpEMq1J
+	D1v9YKM/IR9HMcjMsNKE23R+MOsOue6YVCbgbVAL8K3n5Md770JhH0Opy99I7dZ86z8xtKlyp+ZSx
+	cGIgWvSQ==;
+Received: from ip6-localhost ([::1]:45426 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1uK0SR-004Ihf-4v; Tue, 27 May 2025 19:59:31 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:11022) 
- by hr1.samba.org with esmtps
+	id 1uK3y2-004Ivn-3l; Tue, 27 May 2025 23:44:22 +0000
+Received: from cat-hlzsim-prod-mail21.catalyst.net.nz
+ ([103.250.241.204]:49878) by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uK0SM-004IhX-U6
- for samba-technical@lists.samba.org; Tue, 27 May 2025 19:59:29 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=From:Cc:To:Date:Message-ID;
- bh=nGfY8tZRHN8kmr7rkbb4nmZDOtvAvf9s+b7sb4fOiuo=; b=TS2LKZrhpc7NHSz+/bqc+Ush4T
- /cxoc2CMWJAbIExvEoJTfI284Hnqxb/63qb7loBB4chC8SO72R2cZgocFOaoENYnPx1XxdQcaJHIi
- ishRtMemVkOhkCC3BxXj5id9FQc8082ud22EeAFoGXVVU1wxbmjKrE9tP9MwF6Chv5DtARY18WWnV
- UAX+6C3bSrAV4N5fiZVr0xdgJOP/4sBQOGzx6aSdtZOEs7zrdOp6Qq4UoljhoDMwTfy+BLzifcE43
- ywr+Ry6hpRZrnezOR1QMeEIAoDh16ACQ7KWfWd0dHFbFCST2226uC0fcTjfqb8+o4DpRjQ4PeOQbS
- OATijEKuAnJxDZLBtQZqx61SQtXskYwBzNlFQ6sJ4GA1SJdov/5xxFNo0Z65vzPVIKGuhOx7Mm8EC
- 1UYVMSrbGHZQCvml39kY6lEYgx1J3LQ9C+50l7WSqgrXp61CH9Hjfm7SsQwaLZ1EYfc6KvO/IISDI
- wmgrTh2NbBZtatsum52vAOi/;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uK0SL-007XSv-1U; Tue, 27 May 2025 19:59:25 +0000
-Message-ID: <8afdbc0b-30f9-4e17-bd34-bc807ce3883f@samba.org>
-Date: Tue, 27 May 2025 21:59:25 +0200
+ (Exim) id 1uK3xv-004Ivg-V1
+ for samba-technical@lists.samba.org; Tue, 27 May 2025 23:44:19 +0000
+Received: from [192.168.192.96] (wlgwil-nat-office.catalyst.net.nz
+ [202.78.240.7])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (Client did not present a certificate)
+ (Authenticated sender: douglasb@catalyst.net.nz)
+ by cat-hlzsim-prod-mail21.catalyst.net.nz (Postfix) with ESMTPSA id 97AFCD1
+ for <samba-technical@lists.samba.org>; Wed, 28 May 2025 11:34:04 +1200 (NZST)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=catalyst.net.nz;
+ s=default; t=1748388844;
+ bh=UX20xQTrImlwybXfTP/2xpsHknIaM2u13/UJBP+Asl4=;
+ h=Date:To:From:Subject:From;
+ b=xDw21pa9E96C7OecIlwhxIktWVWrLU1h5iIeEYKbDow4Z7HHQ5lFRb0h5Ucg9sjZ+
+ spmvD/OerLy8Z39X6zIL0r0Xxh+XZ3Rv/uuqKXwlRgWIli//9GAZnirjKtiyixXiSA
+ nV/Iju9L7U75+HD1Ti5LbmKxtpQ3mGMmdkwsHgsmB7oPpAcenl9/esbJDmQ0Rnaccj
+ qqhWGogjGuiNwqKahIo5oUSzbJ8f0iR5/F1lAbsOXyjYuOC8T+visaQOFaHoA3Fdce
+ RO4UtMjRJHqRaWtjTz1nrezMvTB2afuCyYb4OHTnIWxFmSr7QIyk4XlBbyJ37Nl6cc
+ F+HgtVJpeMOgg==
+Message-ID: <90d57927-1b1d-49bb-8f76-d3b6c04f4414@catalyst.net.nz>
+Date: Wed, 28 May 2025 11:34:03 +1200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/5] smb: common: split out smb_direct related header files
-To: Tom Talpey <tom@talpey.com>
-References: <cover.1748362221.git.metze@samba.org>
- <31f6e853d60ec99136f3855acb3447d36fa0fc82.1748362221.git.metze@samba.org>
- <ace9b692-3a0d-4a47-b74b-c350a72efdf1@talpey.com>
-Content-Language: en-US
-In-Reply-To: <ace9b692-3a0d-4a47-b74b-c350a72efdf1@talpey.com>
+Content-Language: en-NZ
+To: samba-technical <samba-technical@lists.samba.org>
+Subject: Samba KDC support for key-based trusts and strong and weak mappings
+ (+ further kerberos hardening)
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,74 +61,33 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Stefan Metzmacher <metze@samba.org>
-Cc: linux-cifs@vger.kernel.org, samba-technical@lists.samba.org,
- Hyunchul Lee <hyc.lee@gmail.com>, Steve French <smfrench@gmail.com>,
- Namjae Jeon <linkinjeon@kernel.org>
+From: Douglas Bagnall via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Douglas Bagnall <douglas.bagnall@catalyst.net.nz>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Am 27.05.25 um 20:50 schrieb Tom Talpey:
-> I love the idea. Couple of questions on the pathnames...
-> 
-> On 5/27/2025 12:12 PM, Stefan Metzmacher wrote:
->> This is just a start moving into a common smb_direct layer.
->>
->> Cc: Steve French <smfrench@gmail.com>
->> Cc: Tom Talpey <tom@talpey.com>
->> Cc: Long Li <longli@microsoft.com>
->> Cc: Namjae Jeon <linkinjeon@kernel.org>
->> Cc: Hyunchul Lee <hyc.lee@gmail.com>
->> Cc: linux-cifs@vger.kernel.org
->> Cc: samba-technical@lists.samba.org
->> Signed-off-by: Stefan Metzmacher <metze@samba.org>
->> ---
->>   fs/smb/common/smb_direct/smb_direct.h     | 11 +++++
->>   fs/smb/common/smb_direct/smb_direct_pdu.h | 51 +++++++++++++++++++++++
-> 
-> Why the underscore in "smb_direct", in both components? The protocol
-> doesn't use this, and it seems awkward and search-unfriendly.
+hi all,
 
-Yes, I'd also prefer smbdirect and I just used it because I had
-my existing wip driver under that name, but that should not matter.
+We at Catalyst are likely to be working on features that allow tight
+mappings between AD users and certificates. This is getting towards
+"Windows Hello for Business" support, which essentially uses your laptop
+as a hardware security token.
 
-The other reason was that the existing structures used smb_direct_
-as prefix, but I'll also change that.
+The msDS-KeyCredentialLink attribute in the AD database indicates
+eligible certificates, while a "SID extension" in a certificate
+indicates the user the certificate expects. We are going to work on those.
 
->>   fs/smb/server/transport_rdma.h            | 43 +------------------
->>   3 files changed, 64 insertions(+), 41 deletions(-)
->>   create mode 100644 fs/smb/common/smb_direct/smb_direct.h
->>   create mode 100644 fs/smb/common/smb_direct/smb_direct_pdu.h
->>
->> diff --git a/fs/smb/common/smb_direct/smb_direct.h b/fs/smb/common/smb_direct/smb_direct.h
->> new file mode 100644
->> index 000000000000..c745c37a3fea
->> --- /dev/null
->> +++ b/fs/smb/common/smb_direct/smb_direct.h
->> @@ -0,0 +1,11 @@
->> +/* SPDX-License-Identifier: GPL-2.0-or-later */
->> +/*
->> + *   Copyright (C) 2025, Stefan Metzmacher <metze@samba.org>
->> + */
->> +
->> +#ifndef __FS_SMB_COMMON_SMB_DIRECT_SMB_DIRECT_H__
->> +#define __FS_SMB_COMMON_SMB_DIRECT_SMB_DIRECT_H__
->> +
->> +#include "smb_direct_pdu.h"
-> 
-> And, why the empty redirection? It seems unnecessary, do I assume it
-> will later contain API signatures for the planned common layer? Perhaps
-> it should say this, to avoid confusion while that work is being done.
+Another thing we are going to implement are the strong and weak mappings
+using altSecurityIdentities to address the "Certifried" exploit. This
+will matter a lot more for Samba once people start using certificates.
 
-I'll think about it maybe I'll remove the redirection.
+Also we want to add options to tighten up Kerberos security beyond that
+of Microsoft AD. These are ideas that arose from the CVE cluster known
+as "Andrew's Kerberos Concerns". We want to be able to force the PAC to
+be sent to the target service, and to check the canonicalised usernames
+against cnames. Optionally forcing the PAC will require upstream
+Kerberos changes, so we'll need to see about that.
 
-In the end the pdu definitions belong only in a single common .c files,
-but it will take a lot of steps to get there.
-
-I'll post a v2 tomorrow or next week.
-
-Thanks!
-metze
-
+cheers,
+Douglas
 
