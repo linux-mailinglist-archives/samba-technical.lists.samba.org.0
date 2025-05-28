@@ -2,43 +2,42 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5F902AC6D64
-	for <lists+samba-technical@lfdr.de>; Wed, 28 May 2025 18:03:06 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2D102AC6D67
+	for <lists+samba-technical@lfdr.de>; Wed, 28 May 2025 18:03:18 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=z1fJ12rWt3TQejq1CmnFHtLiSd925QY4ykMI/MKfrjw=; b=ml7D/6C8vBqQBwVh9JNYtCfF/M
-	MKAix6kuzZ7I5wr002w8pjw777OI2RAE2chKxOrpigzDkBmwQ7TP+cC0174YLzsr+Kv4H5yihv1SA
-	GHSu4oNbXalvSFg0MHxM4qaWf/HubCeZ23Gq6Sm3GG3I2KjnXdzkIhGEWRJZ++frD43mHhc8mDM+q
-	7jABqU+ua22hJ2WaXksJyYvoCDuUAzj9rWGrsSx/9F8cGFZodrzD+hmV1fP2rsr5HXtxXkkPQ99s8
-	hfaaNKog8Acu0ijItYm5HIlLZ8EgClTVyutqLrWmXsFAPgzcY7L8u1WxoJi1JJjPfDRV5EQN00yUv
-	EalZhuqg==;
-Received: from ip6-localhost ([::1]:30072 helo=hr1.samba.org) 
+	bh=/jmE3OrOek0uyTvGELgfC3Erx3e9sATf5y9xZJo9UcM=; b=uRAw+X0maGPsctBVhFVWE4Ach8
+	NO7QvFh+rc4IS7o/EG+KevgBz07Yv4o2tOTbfJCVEw+yGRvrWTYB8xDz/t793Z4RiwsVUIlQ2//l3
+	L0J1ImJI7JCsrNOM2uDRBde+6FwPAKHJj5TsZtX7F0yteENi4QXCaOuW+00MJObtqb/do90lmhuEm
+	VsW/w+Z22nwA/2tY4bfYWgWrePrzx0B0SYfKrrh6sKy3+GRtjATtFPaBhTJMNyW4lhexHIxZH3yfg
+	jTOhpxq3/spldBspSvqvhviggmreg7ZbBUiuLO8WOsHPN0grexv3OJwpgv7RIhUli/J4p4owAFWCj
+	+/307/1g==;
+Received: from ip6-localhost ([::1]:42270 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1uKJF2-004M0D-ME; Wed, 28 May 2025 16:02:56 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:48222) 
+	id 1uKJFF-004MA6-ID; Wed, 28 May 2025 16:03:10 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:58918) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uKJEb-004LvX-KA
- for samba-technical@lists.samba.org; Wed, 28 May 2025 16:02:33 +0000
+ (Exim) id 1uKJEo-004M0p-IZ
+ for samba-technical@lists.samba.org; Wed, 28 May 2025 16:02:56 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Message-Id:Date:Cc:To:From;
- bh=z1fJ12rWt3TQejq1CmnFHtLiSd925QY4ykMI/MKfrjw=; b=Wp770G36lHHYEKtURZV50/XLmd
- TsVVH1Xoto5ajRXK+D5VBagex7hbxku7+ionQPovpk0bFXfrxr11i6GG7qMEtzqOLs4wKAHyM1KV4
- Xym+M2Y4ZEG3Pwcj5XlGT9JxD0jU8hzHMslTQlY23gePI7CQUv29zcWk6/huI2pMvGeEU0WbIremv
- ArvZ3+cFq4nU7KD5oSiwkHpSCX8qFfYuj2cTny6zp+l5ROJHHMmlPO1KKVF3/E3yyMW+aMGuRzxif
- Xct760EKN76r45awkQsfF7g3AnBJ9qj7T5IB7mvwkmLnPI8td/ALVh16RxhhrI76yh7XtmDbeg1i9
- ZxMwnbHo85TWPKgIFgkRHknGvcBDRUfqnlR4djImyvfNKV9ABfR2Oik9kvT1QbuTMsyyJRxQntKr5
- 2itrSaEcDr8jFWa92DoCsM7mlIizGG5GpFJVXTfh9HJvzppqJYo4bvGAf26fT8BZ8l7KZ/4biVazM
- vDOfercPY5LM4GELGih3nl1d;
+ bh=/jmE3OrOek0uyTvGELgfC3Erx3e9sATf5y9xZJo9UcM=; b=OHDS8/uyMwpWoeq1CRLNuh8n8X
+ GeC1RzcZXZjIuWsxEsKrg2cmVozKg9rmpgKDTFL5lJYVH7ghaAyHca8N4liHg8+BQS2EqcMqjWWDh
+ nZTwA2/opr5dKFCs4jpafmy7tKLb26dgXGdFITu7WQHG49RnoqSR0OUxMHm3dmvYNrXGLgnGMgGKH
+ CxkdjzEFy9e9o7u/4N7gDb6YsHKritIsKq897qFUDz4srRRKTuuPJ6XuvUY3CWolvrqZIX3r/voQO
+ sMCtHcXI7rxdze7ougMAW9jXUw9utbdS/AxHZIANsgfQzJGdbz+2i9KEJZ/LLDbmbxv2G5TaLQ9XI
+ HWfBTJoP/0PUiFeACJIrJ10R9WtmZp4tuBNOvtxMo6u1Sp7McI+l9162CSpd8/K4uBtC0u3kL3RLD
+ dXwMWJ+Wz9fRCoSSxl7jfbBuVDo9ZlYM+b+5ZlqIKb4NVqcJwJoT5VbxAtR8srLM9juz2MmYhCCo1
+ DN19NxJgWmvqOqlkkLgAXOPc;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uKJEZ-007hIg-03; Wed, 28 May 2025 16:02:27 +0000
+ (Exim) id 1uKJEi-007hKU-12; Wed, 28 May 2025 16:02:36 +0000
 To: linux-cifs@vger.kernel.org
-Subject: [PATCH v2 04/12] smb: smbdirect: add smbdirect.h with public
- structures
-Date: Wed, 28 May 2025 18:01:33 +0200
-Message-Id: <87a6dc3d48366845b646651b80e9687dfc9c7236.1748446473.git.metze@samba.org>
+Subject: [PATCH v2 05/12] smb: client: make use of common smbdirect.h
+Date: Wed, 28 May 2025 18:01:34 +0200
+Message-Id: <cd1351a794c6af9c2a7f6f0820bb266df3f9cf40.1748446473.git.metze@samba.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1748446473.git.metze@samba.org>
 References: <cover.1748446473.git.metze@samba.org>
@@ -66,45 +65,98 @@ Cc: Meetakshi Setiya <meetakshisetiyaoss@gmail.com>,
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Will be used in client and server in the next commits.
-
 Cc: Steve French <smfrench@gmail.com>
 Cc: Tom Talpey <tom@talpey.com>
 Cc: Long Li <longli@microsoft.com>
 Cc: Namjae Jeon <linkinjeon@kernel.org>
 Cc: Hyunchul Lee <hyc.lee@gmail.com>
-CC: Meetakshi Setiya <meetakshisetiyaoss@gmail.com>
+Cc: Meetakshi Setiya <meetakshisetiyaoss@gmail.com>
 Cc: linux-cifs@vger.kernel.org
 Cc: samba-technical@lists.samba.org
 Signed-off-by: Stefan Metzmacher <metze@samba.org>
 ---
- fs/smb/common/smbdirect/smbdirect.h | 17 +++++++++++++++++
- 1 file changed, 17 insertions(+)
- create mode 100644 fs/smb/common/smbdirect/smbdirect.h
+ fs/smb/client/smb2pdu.c   | 17 +++++++++--------
+ fs/smb/client/smbdirect.h |  7 -------
+ 2 files changed, 9 insertions(+), 15 deletions(-)
 
-diff --git a/fs/smb/common/smbdirect/smbdirect.h b/fs/smb/common/smbdirect/smbdirect.h
-new file mode 100644
-index 000000000000..eedbdf0d0433
---- /dev/null
-+++ b/fs/smb/common/smbdirect/smbdirect.h
-@@ -0,0 +1,17 @@
-+/* SPDX-License-Identifier: GPL-2.0-or-later */
-+/*
-+ *   Copyright (C) 2017, Microsoft Corporation.
-+ *   Copyright (C) 2018, LG Electronics.
-+ */
-+
-+#ifndef __FS_SMB_COMMON_SMBDIRECT_SMBDIRECT_H__
-+#define __FS_SMB_COMMON_SMBDIRECT_SMBDIRECT_H__
-+
-+/* SMB-DIRECT buffer descriptor V1 structure [MS-SMBD] 2.2.3.1 */
-+struct smbdirect_buffer_descriptor_v1 {
-+	__le64 offset;
-+	__le32 token;
-+	__le32 length;
-+} __packed;
-+
-+#endif /* __FS_SMB_COMMON_SMBDIRECT_SMBDIRECT_H__ */
+diff --git a/fs/smb/client/smb2pdu.c b/fs/smb/client/smb2pdu.c
+index 701a138b82c8..3529b829cda7 100644
+--- a/fs/smb/client/smb2pdu.c
++++ b/fs/smb/client/smb2pdu.c
+@@ -36,6 +36,7 @@
+ #include "smb2glob.h"
+ #include "cifspdu.h"
+ #include "cifs_spnego.h"
++#include "../common/smbdirect/smbdirect.h"
+ #include "smbdirect.h"
+ #include "trace.h"
+ #ifdef CONFIG_CIFS_DFS_UPCALL
+@@ -4442,10 +4443,10 @@ smb2_new_read_req(void **buf, unsigned int *total_len,
+ #ifdef CONFIG_CIFS_SMB_DIRECT
+ 	/*
+ 	 * If we want to do a RDMA write, fill in and append
+-	 * smbd_buffer_descriptor_v1 to the end of read request
++	 * smbdirect_buffer_descriptor_v1 to the end of read request
+ 	 */
+ 	if (rdata && smb3_use_rdma_offload(io_parms)) {
+-		struct smbd_buffer_descriptor_v1 *v1;
++		struct smbdirect_buffer_descriptor_v1 *v1;
+ 		bool need_invalidate = server->dialect == SMB30_PROT_ID;
+ 
+ 		rdata->mr = smbd_register_mr(server->smbd_conn, &rdata->subreq.io_iter,
+@@ -4459,8 +4460,8 @@ smb2_new_read_req(void **buf, unsigned int *total_len,
+ 		req->ReadChannelInfoOffset =
+ 			cpu_to_le16(offsetof(struct smb2_read_req, Buffer));
+ 		req->ReadChannelInfoLength =
+-			cpu_to_le16(sizeof(struct smbd_buffer_descriptor_v1));
+-		v1 = (struct smbd_buffer_descriptor_v1 *) &req->Buffer[0];
++			cpu_to_le16(sizeof(struct smbdirect_buffer_descriptor_v1));
++		v1 = (struct smbdirect_buffer_descriptor_v1 *) &req->Buffer[0];
+ 		v1->offset = cpu_to_le64(rdata->mr->mr->iova);
+ 		v1->token = cpu_to_le32(rdata->mr->mr->rkey);
+ 		v1->length = cpu_to_le32(rdata->mr->mr->length);
+@@ -4968,10 +4969,10 @@ smb2_async_writev(struct cifs_io_subrequest *wdata)
+ #ifdef CONFIG_CIFS_SMB_DIRECT
+ 	/*
+ 	 * If we want to do a server RDMA read, fill in and append
+-	 * smbd_buffer_descriptor_v1 to the end of write request
++	 * smbdirect_buffer_descriptor_v1 to the end of write request
+ 	 */
+ 	if (smb3_use_rdma_offload(io_parms)) {
+-		struct smbd_buffer_descriptor_v1 *v1;
++		struct smbdirect_buffer_descriptor_v1 *v1;
+ 		bool need_invalidate = server->dialect == SMB30_PROT_ID;
+ 
+ 		wdata->mr = smbd_register_mr(server->smbd_conn, &wdata->subreq.io_iter,
+@@ -4990,8 +4991,8 @@ smb2_async_writev(struct cifs_io_subrequest *wdata)
+ 		req->WriteChannelInfoOffset =
+ 			cpu_to_le16(offsetof(struct smb2_write_req, Buffer));
+ 		req->WriteChannelInfoLength =
+-			cpu_to_le16(sizeof(struct smbd_buffer_descriptor_v1));
+-		v1 = (struct smbd_buffer_descriptor_v1 *) &req->Buffer[0];
++			cpu_to_le16(sizeof(struct smbdirect_buffer_descriptor_v1));
++		v1 = (struct smbdirect_buffer_descriptor_v1 *) &req->Buffer[0];
+ 		v1->offset = cpu_to_le64(wdata->mr->mr->iova);
+ 		v1->token = cpu_to_le32(wdata->mr->mr->rkey);
+ 		v1->length = cpu_to_le32(wdata->mr->mr->length);
+diff --git a/fs/smb/client/smbdirect.h b/fs/smb/client/smbdirect.h
+index 4da0974ce730..8561e19a23a3 100644
+--- a/fs/smb/client/smbdirect.h
++++ b/fs/smb/client/smbdirect.h
+@@ -177,13 +177,6 @@ enum smbd_message_type {
+ 	SMBD_TRANSFER_DATA,
+ };
+ 
+-/* The packet fields for a registered RDMA buffer */
+-struct smbd_buffer_descriptor_v1 {
+-	__le64 offset;
+-	__le32 token;
+-	__le32 length;
+-} __packed;
+-
+ /* Maximum number of SGEs used by smbdirect.c in any send work request */
+ #define SMBDIRECT_MAX_SEND_SGE	6
+ 
 -- 
 2.34.1
 
