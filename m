@@ -2,42 +2,42 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2D102AC6D67
-	for <lists+samba-technical@lfdr.de>; Wed, 28 May 2025 18:03:18 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2802CAC6D6A
+	for <lists+samba-technical@lfdr.de>; Wed, 28 May 2025 18:03:28 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=/jmE3OrOek0uyTvGELgfC3Erx3e9sATf5y9xZJo9UcM=; b=uRAw+X0maGPsctBVhFVWE4Ach8
-	NO7QvFh+rc4IS7o/EG+KevgBz07Yv4o2tOTbfJCVEw+yGRvrWTYB8xDz/t793Z4RiwsVUIlQ2//l3
-	L0J1ImJI7JCsrNOM2uDRBde+6FwPAKHJj5TsZtX7F0yteENi4QXCaOuW+00MJObtqb/do90lmhuEm
-	VsW/w+Z22nwA/2tY4bfYWgWrePrzx0B0SYfKrrh6sKy3+GRtjATtFPaBhTJMNyW4lhexHIxZH3yfg
-	jTOhpxq3/spldBspSvqvhviggmreg7ZbBUiuLO8WOsHPN0grexv3OJwpgv7RIhUli/J4p4owAFWCj
-	+/307/1g==;
-Received: from ip6-localhost ([::1]:42270 helo=hr1.samba.org) 
+	bh=4ooRWdjNozhLp5m5+ekeKM5KHHFY+pUa4ke1MjKgp9I=; b=TeuuVDc6zok8lSR97dsz49Acez
+	UhFM0di77hovxyzXsLYNQ6e8AsbLUIOWWycNJsl9YcVKDNBUvbrI6Xdqwk6riulLX8JB1mt8rqLki
+	8xW1a+xXI8Zgr2kMS5ndHRJz6TUe/q9385NlqGITjpOrNrdaMAQ8AulXWqKUgQR07u/izE6bgVX5X
+	4snnvxjZVckH6qBrR4yNmnchWqZtm72kA691wPZ+SRWEylxb2b+cmlmN7mclEYhMvffOtCUYzerG5
+	dJPpHSnzwj0QBsZ3s2cgN2kS++MBI4QROP9/x2ddRZKrG2bkhUDVd3wnOMgpcdc4u6cl7aUGiVeJc
+	wrl47onw==;
+Received: from ip6-localhost ([::1]:52432 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1uKJFF-004MA6-ID; Wed, 28 May 2025 16:03:10 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:58918) 
+	id 1uKJFQ-004MCu-Pq; Wed, 28 May 2025 16:03:21 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:50894) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uKJEo-004M0p-IZ
- for samba-technical@lists.samba.org; Wed, 28 May 2025 16:02:56 +0000
+ (Exim) id 1uKJEt-004M3R-O7
+ for samba-technical@lists.samba.org; Wed, 28 May 2025 16:03:00 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Message-Id:Date:Cc:To:From;
- bh=/jmE3OrOek0uyTvGELgfC3Erx3e9sATf5y9xZJo9UcM=; b=OHDS8/uyMwpWoeq1CRLNuh8n8X
- GeC1RzcZXZjIuWsxEsKrg2cmVozKg9rmpgKDTFL5lJYVH7ghaAyHca8N4liHg8+BQS2EqcMqjWWDh
- nZTwA2/opr5dKFCs4jpafmy7tKLb26dgXGdFITu7WQHG49RnoqSR0OUxMHm3dmvYNrXGLgnGMgGKH
- CxkdjzEFy9e9o7u/4N7gDb6YsHKritIsKq897qFUDz4srRRKTuuPJ6XuvUY3CWolvrqZIX3r/voQO
- sMCtHcXI7rxdze7ougMAW9jXUw9utbdS/AxHZIANsgfQzJGdbz+2i9KEJZ/LLDbmbxv2G5TaLQ9XI
- HWfBTJoP/0PUiFeACJIrJ10R9WtmZp4tuBNOvtxMo6u1Sp7McI+l9162CSpd8/K4uBtC0u3kL3RLD
- dXwMWJ+Wz9fRCoSSxl7jfbBuVDo9ZlYM+b+5ZlqIKb4NVqcJwJoT5VbxAtR8srLM9juz2MmYhCCo1
- DN19NxJgWmvqOqlkkLgAXOPc;
+ bh=4ooRWdjNozhLp5m5+ekeKM5KHHFY+pUa4ke1MjKgp9I=; b=dHInQV75XsrK5BbCaFq1Lmq4J6
+ vZ0/VAA2qXCHfodRuuMFwbhm/fYb6/4Lp3LEHaUU+6eKf95/5BhPWnSPiQX8X/IS2ahjxCWhpYutF
+ RWBrQVYlKTTJTjSo+TBZ9e7rAXDzaOaArFkpBa50QXNcGAq5J7rA7b9o4UoekJGdgwH/hLo6e+gD5
+ oES/vM4M4qfDrEiuM+qufpwVh5N9lX4K3fuMGrzZcWtqQVDM5kYJTEgYObxUNAaxIw8qexmgESsoO
+ 1I7waW1G9EuH2V6kb14HCUhUUpjXSsvp6XG9fD1LpXIK86GLtMSgAzgMmapBueUTKmm1wFj/Wh2V4
+ zL7nLSaZJjC6A+RR8bbj9h82T5gDFGWHuuD+U53ZaxXTnEj2WpWJdF4EzRV+0tZIDxg6xEUbcVV3P
+ yNemMquIRtWuJB75xegbbPRnrHEMNyN1grjnVrmGlbVzE6wDh2K9AH+K+HtjZ7hFl9o9tAGi+0McA
+ /1+wKt30GqHS3d8by4jYI1YE;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uKJEi-007hKU-12; Wed, 28 May 2025 16:02:36 +0000
+ (Exim) id 1uKJEq-007hLy-0p; Wed, 28 May 2025 16:02:44 +0000
 To: linux-cifs@vger.kernel.org
-Subject: [PATCH v2 05/12] smb: client: make use of common smbdirect.h
-Date: Wed, 28 May 2025 18:01:34 +0200
-Message-Id: <cd1351a794c6af9c2a7f6f0820bb266df3f9cf40.1748446473.git.metze@samba.org>
+Subject: [PATCH v2 06/12] smb: server: make use of common smbdirect.h
+Date: Wed, 28 May 2025 18:01:35 +0200
+Message-Id: <ecbcf78d7b5817e6bf421c917c7b5b20ed3c27fe.1748446473.git.metze@samba.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1748446473.git.metze@samba.org>
 References: <cover.1748446473.git.metze@samba.org>
@@ -75,88 +75,189 @@ Cc: linux-cifs@vger.kernel.org
 Cc: samba-technical@lists.samba.org
 Signed-off-by: Stefan Metzmacher <metze@samba.org>
 ---
- fs/smb/client/smb2pdu.c   | 17 +++++++++--------
- fs/smb/client/smbdirect.h |  7 -------
- 2 files changed, 9 insertions(+), 15 deletions(-)
+ fs/smb/server/connection.c     |  4 ++--
+ fs/smb/server/connection.h     | 10 ++++++----
+ fs/smb/server/smb2pdu.c        | 11 ++++++-----
+ fs/smb/server/smb2pdu.h        |  6 ------
+ fs/smb/server/transport_rdma.c |  7 ++++---
+ 5 files changed, 18 insertions(+), 20 deletions(-)
 
-diff --git a/fs/smb/client/smb2pdu.c b/fs/smb/client/smb2pdu.c
-index 701a138b82c8..3529b829cda7 100644
---- a/fs/smb/client/smb2pdu.c
-+++ b/fs/smb/client/smb2pdu.c
-@@ -36,6 +36,7 @@
- #include "smb2glob.h"
- #include "cifspdu.h"
- #include "cifs_spnego.h"
-+#include "../common/smbdirect/smbdirect.h"
- #include "smbdirect.h"
- #include "trace.h"
- #ifdef CONFIG_CIFS_DFS_UPCALL
-@@ -4442,10 +4443,10 @@ smb2_new_read_req(void **buf, unsigned int *total_len,
- #ifdef CONFIG_CIFS_SMB_DIRECT
- 	/*
- 	 * If we want to do a RDMA write, fill in and append
--	 * smbd_buffer_descriptor_v1 to the end of read request
-+	 * smbdirect_buffer_descriptor_v1 to the end of read request
- 	 */
- 	if (rdata && smb3_use_rdma_offload(io_parms)) {
--		struct smbd_buffer_descriptor_v1 *v1;
-+		struct smbdirect_buffer_descriptor_v1 *v1;
- 		bool need_invalidate = server->dialect == SMB30_PROT_ID;
+diff --git a/fs/smb/server/connection.c b/fs/smb/server/connection.c
+index 83764c230e9d..2e7515e57117 100644
+--- a/fs/smb/server/connection.c
++++ b/fs/smb/server/connection.c
+@@ -243,7 +243,7 @@ int ksmbd_conn_write(struct ksmbd_work *work)
  
- 		rdata->mr = smbd_register_mr(server->smbd_conn, &rdata->subreq.io_iter,
-@@ -4459,8 +4460,8 @@ smb2_new_read_req(void **buf, unsigned int *total_len,
- 		req->ReadChannelInfoOffset =
- 			cpu_to_le16(offsetof(struct smb2_read_req, Buffer));
- 		req->ReadChannelInfoLength =
--			cpu_to_le16(sizeof(struct smbd_buffer_descriptor_v1));
--		v1 = (struct smbd_buffer_descriptor_v1 *) &req->Buffer[0];
-+			cpu_to_le16(sizeof(struct smbdirect_buffer_descriptor_v1));
-+		v1 = (struct smbdirect_buffer_descriptor_v1 *) &req->Buffer[0];
- 		v1->offset = cpu_to_le64(rdata->mr->mr->iova);
- 		v1->token = cpu_to_le32(rdata->mr->mr->rkey);
- 		v1->length = cpu_to_le32(rdata->mr->mr->length);
-@@ -4968,10 +4969,10 @@ smb2_async_writev(struct cifs_io_subrequest *wdata)
- #ifdef CONFIG_CIFS_SMB_DIRECT
- 	/*
- 	 * If we want to do a server RDMA read, fill in and append
--	 * smbd_buffer_descriptor_v1 to the end of write request
-+	 * smbdirect_buffer_descriptor_v1 to the end of write request
- 	 */
- 	if (smb3_use_rdma_offload(io_parms)) {
--		struct smbd_buffer_descriptor_v1 *v1;
-+		struct smbdirect_buffer_descriptor_v1 *v1;
- 		bool need_invalidate = server->dialect == SMB30_PROT_ID;
+ int ksmbd_conn_rdma_read(struct ksmbd_conn *conn,
+ 			 void *buf, unsigned int buflen,
+-			 struct smb2_buffer_desc_v1 *desc,
++			 struct smbdirect_buffer_descriptor_v1 *desc,
+ 			 unsigned int desc_len)
+ {
+ 	int ret = -EINVAL;
+@@ -257,7 +257,7 @@ int ksmbd_conn_rdma_read(struct ksmbd_conn *conn,
  
- 		wdata->mr = smbd_register_mr(server->smbd_conn, &wdata->subreq.io_iter,
-@@ -4990,8 +4991,8 @@ smb2_async_writev(struct cifs_io_subrequest *wdata)
- 		req->WriteChannelInfoOffset =
- 			cpu_to_le16(offsetof(struct smb2_write_req, Buffer));
- 		req->WriteChannelInfoLength =
--			cpu_to_le16(sizeof(struct smbd_buffer_descriptor_v1));
--		v1 = (struct smbd_buffer_descriptor_v1 *) &req->Buffer[0];
-+			cpu_to_le16(sizeof(struct smbdirect_buffer_descriptor_v1));
-+		v1 = (struct smbdirect_buffer_descriptor_v1 *) &req->Buffer[0];
- 		v1->offset = cpu_to_le64(wdata->mr->mr->iova);
- 		v1->token = cpu_to_le32(wdata->mr->mr->rkey);
- 		v1->length = cpu_to_le32(wdata->mr->mr->length);
-diff --git a/fs/smb/client/smbdirect.h b/fs/smb/client/smbdirect.h
-index 4da0974ce730..8561e19a23a3 100644
---- a/fs/smb/client/smbdirect.h
-+++ b/fs/smb/client/smbdirect.h
-@@ -177,13 +177,6 @@ enum smbd_message_type {
- 	SMBD_TRANSFER_DATA,
+ int ksmbd_conn_rdma_write(struct ksmbd_conn *conn,
+ 			  void *buf, unsigned int buflen,
+-			  struct smb2_buffer_desc_v1 *desc,
++			  struct smbdirect_buffer_descriptor_v1 *desc,
+ 			  unsigned int desc_len)
+ {
+ 	int ret = -EINVAL;
+diff --git a/fs/smb/server/connection.h b/fs/smb/server/connection.h
+index 14620e147dda..3821f0f53d3d 100644
+--- a/fs/smb/server/connection.h
++++ b/fs/smb/server/connection.h
+@@ -19,6 +19,8 @@
+ #include "smb_common.h"
+ #include "ksmbd_work.h"
+ 
++struct smbdirect_buffer_descriptor_v1;
++
+ #define KSMBD_SOCKET_BACKLOG		16
+ 
+ enum {
+@@ -126,11 +128,11 @@ struct ksmbd_transport_ops {
+ 		      unsigned int remote_key);
+ 	int (*rdma_read)(struct ksmbd_transport *t,
+ 			 void *buf, unsigned int len,
+-			 struct smb2_buffer_desc_v1 *desc,
++			 struct smbdirect_buffer_descriptor_v1 *desc,
+ 			 unsigned int desc_len);
+ 	int (*rdma_write)(struct ksmbd_transport *t,
+ 			  void *buf, unsigned int len,
+-			  struct smb2_buffer_desc_v1 *desc,
++			  struct smbdirect_buffer_descriptor_v1 *desc,
+ 			  unsigned int desc_len);
  };
  
--/* The packet fields for a registered RDMA buffer */
--struct smbd_buffer_descriptor_v1 {
+@@ -155,11 +157,11 @@ bool ksmbd_conn_lookup_dialect(struct ksmbd_conn *c);
+ int ksmbd_conn_write(struct ksmbd_work *work);
+ int ksmbd_conn_rdma_read(struct ksmbd_conn *conn,
+ 			 void *buf, unsigned int buflen,
+-			 struct smb2_buffer_desc_v1 *desc,
++			 struct smbdirect_buffer_descriptor_v1 *desc,
+ 			 unsigned int desc_len);
+ int ksmbd_conn_rdma_write(struct ksmbd_conn *conn,
+ 			  void *buf, unsigned int buflen,
+-			  struct smb2_buffer_desc_v1 *desc,
++			  struct smbdirect_buffer_descriptor_v1 *desc,
+ 			  unsigned int desc_len);
+ void ksmbd_conn_enqueue_request(struct ksmbd_work *work);
+ void ksmbd_conn_try_dequeue_request(struct ksmbd_work *work);
+diff --git a/fs/smb/server/smb2pdu.c b/fs/smb/server/smb2pdu.c
+index 8d414239b3fe..7ddc69fe6320 100644
+--- a/fs/smb/server/smb2pdu.c
++++ b/fs/smb/server/smb2pdu.c
+@@ -23,6 +23,7 @@
+ #include "asn1.h"
+ #include "connection.h"
+ #include "transport_ipc.h"
++#include "../common/smbdirect/smbdirect.h"
+ #include "transport_rdma.h"
+ #include "vfs.h"
+ #include "vfs_cache.h"
+@@ -6617,7 +6618,7 @@ static noinline int smb2_read_pipe(struct ksmbd_work *work)
+ }
+ 
+ static int smb2_set_remote_key_for_rdma(struct ksmbd_work *work,
+-					struct smb2_buffer_desc_v1 *desc,
++					struct smbdirect_buffer_descriptor_v1 *desc,
+ 					__le32 Channel,
+ 					__le16 ChannelInfoLength)
+ {
+@@ -6653,7 +6654,7 @@ static ssize_t smb2_read_rdma_channel(struct ksmbd_work *work,
+ 	int err;
+ 
+ 	err = ksmbd_conn_rdma_write(work->conn, data_buf, length,
+-				    (struct smb2_buffer_desc_v1 *)
++				    (struct smbdirect_buffer_descriptor_v1 *)
+ 				    ((char *)req + le16_to_cpu(req->ReadChannelInfoOffset)),
+ 				    le16_to_cpu(req->ReadChannelInfoLength));
+ 	if (err)
+@@ -6724,7 +6725,7 @@ int smb2_read(struct ksmbd_work *work)
+ 			goto out;
+ 		}
+ 		err = smb2_set_remote_key_for_rdma(work,
+-						   (struct smb2_buffer_desc_v1 *)
++						   (struct smbdirect_buffer_descriptor_v1 *)
+ 						   ((char *)req + ch_offset),
+ 						   req->Channel,
+ 						   req->ReadChannelInfoLength);
+@@ -6919,7 +6920,7 @@ static ssize_t smb2_write_rdma_channel(struct ksmbd_work *work,
+ 		return -ENOMEM;
+ 
+ 	ret = ksmbd_conn_rdma_read(work->conn, data_buf, length,
+-				   (struct smb2_buffer_desc_v1 *)
++				   (struct smbdirect_buffer_descriptor_v1 *)
+ 				   ((char *)req + le16_to_cpu(req->WriteChannelInfoOffset)),
+ 				   le16_to_cpu(req->WriteChannelInfoLength));
+ 	if (ret < 0) {
+@@ -6984,7 +6985,7 @@ int smb2_write(struct ksmbd_work *work)
+ 			goto out;
+ 		}
+ 		err = smb2_set_remote_key_for_rdma(work,
+-						   (struct smb2_buffer_desc_v1 *)
++						   (struct smbdirect_buffer_descriptor_v1 *)
+ 						   ((char *)req + ch_offset),
+ 						   req->Channel,
+ 						   req->WriteChannelInfoLength);
+diff --git a/fs/smb/server/smb2pdu.h b/fs/smb/server/smb2pdu.h
+index 17a0b18a8406..1b940cedb22f 100644
+--- a/fs/smb/server/smb2pdu.h
++++ b/fs/smb/server/smb2pdu.h
+@@ -133,12 +133,6 @@ struct create_posix_rsp {
+ 	u8 SidBuffer[44];
+ } __packed;
+ 
+-struct smb2_buffer_desc_v1 {
 -	__le64 offset;
 -	__le32 token;
 -	__le32 length;
 -} __packed;
 -
- /* Maximum number of SGEs used by smbdirect.c in any send work request */
- #define SMBDIRECT_MAX_SEND_SGE	6
+ #define SMB2_0_IOCTL_IS_FSCTL 0x00000001
  
+ struct smb_sockaddr_in {
+diff --git a/fs/smb/server/transport_rdma.c b/fs/smb/server/transport_rdma.c
+index 55fda2585583..99ceef3d83ba 100644
+--- a/fs/smb/server/transport_rdma.c
++++ b/fs/smb/server/transport_rdma.c
+@@ -23,6 +23,7 @@
+ #include "connection.h"
+ #include "smb_common.h"
+ #include "../common/smb2status.h"
++#include "../common/smbdirect/smbdirect.h"
+ #include "../common/smbdirect/smbdirect_pdu.h"
+ #include "transport_rdma.h"
+ 
+@@ -1355,7 +1356,7 @@ static void write_done(struct ib_cq *cq, struct ib_wc *wc)
+ 
+ static int smb_direct_rdma_xmit(struct smb_direct_transport *t,
+ 				void *buf, int buf_len,
+-				struct smb2_buffer_desc_v1 *desc,
++				struct smbdirect_buffer_descriptor_v1 *desc,
+ 				unsigned int desc_len,
+ 				bool is_read)
+ {
+@@ -1485,7 +1486,7 @@ static int smb_direct_rdma_xmit(struct smb_direct_transport *t,
+ 
+ static int smb_direct_rdma_write(struct ksmbd_transport *t,
+ 				 void *buf, unsigned int buflen,
+-				 struct smb2_buffer_desc_v1 *desc,
++				 struct smbdirect_buffer_descriptor_v1 *desc,
+ 				 unsigned int desc_len)
+ {
+ 	return smb_direct_rdma_xmit(smb_trans_direct_transfort(t), buf, buflen,
+@@ -1494,7 +1495,7 @@ static int smb_direct_rdma_write(struct ksmbd_transport *t,
+ 
+ static int smb_direct_rdma_read(struct ksmbd_transport *t,
+ 				void *buf, unsigned int buflen,
+-				struct smb2_buffer_desc_v1 *desc,
++				struct smbdirect_buffer_descriptor_v1 *desc,
+ 				unsigned int desc_len)
+ {
+ 	return smb_direct_rdma_xmit(smb_trans_direct_transfort(t), buf, buflen,
 -- 
 2.34.1
 
