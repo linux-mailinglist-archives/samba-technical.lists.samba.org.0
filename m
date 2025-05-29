@@ -2,74 +2,52 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8DA63AC767D
-	for <lists+samba-technical@lfdr.de>; Thu, 29 May 2025 05:34:56 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id F011FAC77B2
+	for <lists+samba-technical@lfdr.de>; Thu, 29 May 2025 07:32:57 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=xkfXESif56vvqQqcslrIjI82IZMQiKHq9r0decJLSis=; b=EqfWKp2Px+ck0pQLl5m/zseL9g
-	khD3pcgKoHtb6EJ6bhhn/bSGtHPoPQjcrV00Ov0uPbfjpho1lQpQBut1rqLCEvlLEXl3iZqjvOExQ
-	45JRj3kWQXCOhVl0GcIBoqA2yY9+Dq8S0uzrpCjoUUg5fwCH6XFNVl77XOWxrgxXbZb9wikmHcsYs
-	hBWkpoLg7rYDl+/lh+J26X8xCtXqFz1hcYnkdc7XSZUexvIvhvSzfSPNrszTXCMDVekaU8NTIziQW
-	YqDxSiddGDSnlwcOPdMxhJGW46vMAmpgorc06pWDsSH09R5WefhbIplUOdQgNQ6au927XMoDb/SNf
-	U/MrWfHw==;
-Received: from ip6-localhost ([::1]:57444 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=cLQWvwU19bA2cts+TOjg/oWDLFosaQTOb+qAS0BIjbI=; b=3TjFTmwCQ/m6hYo9pvC8+no54D
+	LDaTV8I2LTqNwqbYkU1CKjbuVXYZwqGecPPoMS8C6RJWqTPYbIHSxL6YDICRLPKnEvSL3Lh4kPtXr
+	czCMclysBhiZisDcqmtpZ6mjOHinI6LiDhArulxyk8Y90qwq1WEuFVZHQX0AQDShoGZxHkEs87LbO
+	6f3PleFPk1L2YVWL4P3bNp2wUE/dM5WyptIxmIuLTgHcXnSsrgpSjSZzSJlpYWCrizK43rbOjFmpO
+	7NKTDujPjRFfNW6BuZ4dfaRo3fJ1U8eLOkGqmC9lNLP+vnjJlQ4kW5Zc87c9mHFe+0KYs/7DzgQIx
+	lDQOdz2A==;
+Received: from ip6-localhost ([::1]:39152 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1uKU24-004PTU-CY; Thu, 29 May 2025 03:34:16 +0000
-Received: from mail-lj1-x22f.google.com ([2a00:1450:4864:20::22f]:45148) 
+	id 1uKVsP-004Ppb-7z; Thu, 29 May 2025 05:32:25 +0000
+Received: from gandalf.ozlabs.org ([150.107.74.76]:56501 helo=mail.ozlabs.org)
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uKU1z-004PTJ-EW
- for samba-technical@lists.samba.org; Thu, 29 May 2025 03:34:13 +0000
-Received: by mail-lj1-x22f.google.com with SMTP id
- 38308e7fff4ca-32a826ad3e0so4413821fa.2
- for <samba-technical@lists.samba.org>; Wed, 28 May 2025 20:34:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1748489649; x=1749094449; darn=lists.samba.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=xkfXESif56vvqQqcslrIjI82IZMQiKHq9r0decJLSis=;
- b=fFYlzf/vV6oJ3h/mknvk+aq+I54uYAJxXRBN01DVUWEUiHqvE/wl1gnUOjk12B/QEK
- Lpud2434UjYFNqCAiJPKccaLfYietIZLWSz4Fa6BAW1jGW1sRf0j2Kh5J2h9VuTQJu/+
- 4ioBtxMUDX71L5dyu2ZwrqBH689ooJ/G/8UHXMRa0oYd+wkofTD6/a9MX9+gT7ZJIbzU
- 5Q8fO0FgbpGbdgtgZk6eitNazjG3B8R/1sHkwl8PAqBgpXzvDD2l02oiF+dqM2WLi2YK
- o1EZG3yzJejX/IE+OH47tC/VVJSJC8OLFijI78bIEn7n63MkHfp8QJJvTEjvSwcAfw0x
- DNtA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748489649; x=1749094449;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=xkfXESif56vvqQqcslrIjI82IZMQiKHq9r0decJLSis=;
- b=Zcvipb5HYUopip2/qDHi1v/E0Rbf0EMdcgjEYhD4cPpUO2ZI30dWP9KAShgFGoYwXj
- 6sU7avyGL+T2l36R4zVrApIyf3Uvk+ExUPzBxld+e8eWBQBnsNgSc8HKsOVXQ/cpK3Ew
- wCkBxkR2L1g6KH/WrcF5oAkymiUqLcFWHnvYlqLmQE1qdM9ug8efy0M3NhyK3n2rBC2z
- S1bi2EKCkauSaFDKSnZgnobIHsdX7pcexGp/uLDthMAutd0Rd74CCc5/jB8vEQWbXyLd
- TTcyj/5YtlDDL5UZeEGO5TUB6vOwV/6/oc7FZl7WUN73DTblh5+xWg20wgpbDOL0qhvB
- LR4A==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXfog3FZu6EkiH7XUPyuS4bgWJ7uIBTI+exVGyv0Ar5BLfXJ5jPb2pvlU6wxI3WRSOk/ISBkmORdG3h9HR/cDI=@lists.samba.org
-X-Gm-Message-State: AOJu0Yy/hfMWtTF95NjEEu+nXTVQjDNZuZ94FP0MIgE+VOiVjxsuUXLy
- Ofp2RA9Mo8gH1cOZZ/3jMSyknAKlT2oG7XGzzsbXndPMnryteW3z08fT7ftLmjZMlr25E1zY7AT
- q5jxZcif2N2UBsrHg1CfSKmOmU3tS5rM=
-X-Gm-Gg: ASbGncsftsqtxFFJh9GnxcT2ESNjRm7r71uGpQbys83Gn1+7ClSBtzQL0hY2kGyyARZ
- hxmyPUQ20BPvPbSgVkV72sS+nzHKk5P1z+auNvkBRno9ZNCf+P2QTSYTdIhGbgX2yArzHU+VAp+
- NfD9G8zIo8y40jwQFifFb1moDI4xDCWiTzQ7mZplAxZgcuXySRNKHju1UWMniQDuHO
-X-Google-Smtp-Source: AGHT+IH+SWHYnNXb3f5p3Bicnn2gUrbUiW0eJ1b/HX1BoIKPTe4GgK5YkckqLNsitW592BxTGzFf5if5iZgseg7A3/M=
-X-Received: by 2002:a2e:a98a:0:b0:30c:50fd:9afe with SMTP id
- 38308e7fff4ca-32a79aa8d49mr15748641fa.9.1748489648913; Wed, 28 May 2025
- 20:34:08 -0700 (PDT)
+ (Exim) id 1uKVsJ-004PpU-Pf
+ for samba-technical@lists.samba.org; Thu, 29 May 2025 05:32:23 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=meltin.net;
+ s=202409; t=1748496733;
+ bh=cLQWvwU19bA2cts+TOjg/oWDLFosaQTOb+qAS0BIjbI=;
+ h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+ b=cOtyNq7mJxwWPcw8/tubvpOADKhG5PiJydaqWGSk3Tuc/Eev4/qB+M7ity6VvsHqX
+ IWKQ+Hg2hmSocrhnsfn10TxjH9FCAiAeDtjMSOc7hysF+z3e2lmFYgV0t+yaS0CKvB
+ XEc26CP5usDM6973sGB8wuOLA/8dlybSQ+kOig9X4HyGa1EOsyhRarUAGxk//IRYRx
+ a2RO5QC1U7B6SqmxW3RY/l2hHWxooB+kDeEPM49wlNwdo7x5FhJQepMWwwqIx77Qf4
+ IQptYboyzggAgrubUf8TWE0Don2UzaKk2RRSi5ERssX/uSYFzd+A1rDT6J6+BqxdHE
+ 8/JqH2opDHnkg==
+Received: from authenticated.ozlabs.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange ECDHE (prime256v1) server-signature RSA-PSS (4096 bits)
+ server-digest SHA256) (Client did not present a certificate)
+ by mail.ozlabs.org (Postfix) with ESMTPSA id 4b7FP92gDPz4x8P;
+ Thu, 29 May 2025 15:32:13 +1000 (AEST)
+Date: Thu, 29 May 2025 15:32:18 +1000
+To: Xavi Hernandez <xhernandez@gmail.com>
+Subject: Re: CTDB performance issue
+Message-ID: <20250529153218.3d7ac905@martins.ozlabs.org>
+In-Reply-To: <CAO9H7P8ix7ntc2Xtdowyv5mvBCKAZp+gOsCRdMoMAZqhnCH2tQ@mail.gmail.com>
+References: <CAO9H7P8386LOjJPbxSicuDFO-yQ+ofZyFv+Vz_28JnntkMrkcQ@mail.gmail.com>
+ <20250525145257.1ff80548@martins.ozlabs.org>
+ <CAO9H7P8ix7ntc2Xtdowyv5mvBCKAZp+gOsCRdMoMAZqhnCH2tQ@mail.gmail.com>
+X-Mailer: Claws Mail 4.3.1 (GTK 3.24.49; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-References: <cover.1748446473.git.metze@samba.org>
-In-Reply-To: <cover.1748446473.git.metze@samba.org>
-Date: Wed, 28 May 2025 22:33:56 -0500
-X-Gm-Features: AX0GCFuKQP-6XOoz-IabLf2aZDvsYk6ZUPTtm1sbwxMjioVbUKU6GJr-JcQaDUw
-Message-ID: <CAH2r5muwNi1Negnt=wmRYkHZxAHDzP_Wxxhbjj6_T-P3ZTjciw@mail.gmail.com>
-Subject: Re: [PATCH v2 00/12] smb:common: introduce and use common smbdirect
- headers/structures (step1)
-To: Stefan Metzmacher <metze@samba.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -83,83 +61,148 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
-Cc: Meetakshi Setiya <meetakshisetiyaoss@gmail.com>, linux-cifs@vger.kernel.org,
- samba-technical@lists.samba.org, Hyunchul Lee <hyc.lee@gmail.com>,
- Tom Talpey <tom@talpey.com>, Namjae Jeon <linkinjeon@kernel.org>
+From: Martin Schwenke via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Martin Schwenke <martin@meltin.net>
+Cc: gd@samba.org, Samba Technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-So far not seeing any issues testing (non-smbdirect tests) with this
-patch series, but would love feedback on any smbdirect testing with
-the series
+Hi Xavi,
 
-On Wed, May 28, 2025 at 11:01=E2=80=AFAM Stefan Metzmacher <metze@samba.org=
-> wrote:
->
-> Hi,
->
-> in preparation of a having a common smb_direct layer I started
-> to move things into common header files and added the first
-> step in using shared structues like struct smbdirect_socket.
->
-> Currently only simple things are shared and there is no
-> intended behaviour change (even if I found some things
-> I'd like to change, but I'll defer them in order to
-> make the review easier).
->
-> I'll work on this the next few months in order to
-> unify the in kernel client and server layers
-> and expose the result to userspace too.
-> So that Samba can also use it.
->
-> v2:
->   - change smb_direct into smbdirect
->   - make usage of header files just as needed
->   - also introduce struct smbdirect_socket[_parameters]
->     as shared structures
->
-> Stefan Metzmacher (12):
->   smb: smbdirect: add smbdirect_pdu.h with protocol definitions
->   smb: client: make use of common smbdirect_pdu.h
->   smb: server: make use of common smbdirect_pdu.h
->   smb: smbdirect: add smbdirect.h with public structures
->   smb: client: make use of common smbdirect.h
->   smb: server: make use of common smbdirect.h
->   smb: smbdirect: add smbdirect_socket.h
->   smb: client: make use of common smbdirect_socket
->   smb: server: make use of common smbdirect_socket
->   smb: smbdirect: introduce smbdirect_socket_parameters
->   smb: client: make use of common smbdirect_socket_parameters
->   smb: server: make use of common smbdirect_socket_parameters
->
->  fs/smb/client/cifs_debug.c                 |  23 +-
->  fs/smb/client/smb2ops.c                    |  14 +-
->  fs/smb/client/smb2pdu.c                    |  17 +-
->  fs/smb/client/smbdirect.c                  | 389 +++++++++++----------
->  fs/smb/client/smbdirect.h                  |  71 +---
->  fs/smb/common/smbdirect/smbdirect.h        |  37 ++
->  fs/smb/common/smbdirect/smbdirect_pdu.h    |  55 +++
->  fs/smb/common/smbdirect/smbdirect_socket.h |  43 +++
->  fs/smb/server/connection.c                 |   4 +-
->  fs/smb/server/connection.h                 |  10 +-
->  fs/smb/server/smb2pdu.c                    |  11 +-
->  fs/smb/server/smb2pdu.h                    |   6 -
->  fs/smb/server/transport_rdma.c             | 385 +++++++++++---------
->  fs/smb/server/transport_rdma.h             |  41 ---
->  14 files changed, 613 insertions(+), 493 deletions(-)
->  create mode 100644 fs/smb/common/smbdirect/smbdirect.h
->  create mode 100644 fs/smb/common/smbdirect/smbdirect_pdu.h
->  create mode 100644 fs/smb/common/smbdirect/smbdirect_socket.h
->
-> --
-> 2.34.1
->
+On Mon, 26 May 2025 11:46:05 +0200, Xavi Hernandez
+<xhernandez@gmail.com> wrote:
+
+> The recovery process can only make the problem worse, but it's not what
+> initially triggers the problem itself. Even without the recovery in the
+> picture, CTDB is already running slowly and requests accumulate big delays
+> (including the leader broadcast which arrives too late). I also think that
+> a workload where there's a lot of lock contention (forcing CTDB to start
+> the lock helper processes even in normal cases without vacuuming or other
+> operations) will make CTDB go slower and accumulate latencies. In any case
+> that's another issue and I don't have conclusive data yet.
+> 
+> Probably avoiding recovery would help, but I think we should try to
+> understand and fix the initial issue.
+
+Definitely true.
+
+> I can't tell for sure what the users are doing, but from a network traffic
+> analysis, I can say that there are many open/close requests (in the order
+> of 1000 per second), and read and write operations mostly. The open/close
+> requests need to check/update the share mode, which requires TDB locked
+> access.
+> 
+> This happens on a 3 node CTDB cluster.
+
+Is ctdbd logging any messages like the following?
+
+  WARNING: CPU utilisation X% >= threshold (90%)
+
+I know a lot of the load seems to be coming from lock helpers.
+However, when there is a lot of lock contention then ctdbd sometimes
+gets close to saturation.
+
+Also, there is always the possibility that some directories, usually at
+the top of a share, are generating a lot of lock contention, because
+they are common to a lot of users.  One simple example is a share that
+contains home directories under /home.  Although none of the users are
+able to modify /home, there is still a lot of locking.tdb traffic
+related to this directory.  To work around this you can break lock
+coherency in this directory using features of:
+
+  https://www.samba.org/samba/docs/current/man-html/vfs_fileid.8.html
+
+In particular, see the fileid:nolock_paths option.  This can have a
+surprising effect on overall lock contention.
+
+If admins use SMB clients to create directories for users then you can
+always have them use an admin version of the share that has lock
+coherency.
+
+Yes, more workarounds, no really addressing the underlying problem.  :-)
 
 
---=20
-Thanks,
+> I would say that without these issues, nodes are pretty stable. We thought
+> about increasing the leader broadcast timeout, but without understanding
+> exactly why the broadcast was lost in the first place, it was not so clear
+> it could help (we thought that the broadcast was actually lost, not just
+> delayed).
 
-Steve
+Makes sense.
+
+> [...]
+
+> Yes, we will definitely try to reproduce it, but from past experience,
+> sometimes it's hard to generate the same load from a limited test
+> environment. We'll try it anyway and experiment with other values for the
+> tunable.
+
+> [...]
+
+> "realtime scheduling" is enabled, but note that even with this, all lock
+> helpers started by CTDB also have the same priority. So, even if running
+> with high priority, the main CTDB process is just one of many competing for
+> CPU.
+
+The WIP patches include an option to run the lock helpers at a lower
+priority than ctdbd.  Could help...
+
+> I think it's also important to note that, in this particular case, lock
+> contention seems very low before the global lock is taken, so I expect that
+> most of the helpers will run without actually waiting for the mutex (it
+> will be granted immediately).
+
+Hmmm... OK.
+
+> My idea is a bit more radical. The motivation is that starting a new
+> process and communicating with it asynchronously is in the order of a few
+> milliseconds (even tens or hundreds of milliseconds if we have a high
+> number of context switches and CPU competition). On the other hand, trying
+> to acquire a mutex is in the order of a few nanoseconds. This means a
+> difference of at least 6 orders of magnitude. So my raw idea is based on:
+> 
+> 1. Add support in tevent to manage locks.
+> 2. Instead of spawning a lock helper, just send a lock attempt to tevent,
+> with a callback that will be executed when the lock is acquired.
+> 3. If the lock cannot be acquired immediately, it will be added to the
+> pending list.
+> 4. In each loop, and before handling immediates, tevent will check the list
+> of pending locks and will try to acquire them.
+> 5. If a lock is acquired, post its callback as an immediate.
+> 6. When tevent processes the immediates, the callbacks of all acquired
+> locks will be executed.
+> 
+> This is a very high level idea. This will be faster as long as we don't
+> attempt to get each lock a million times. I'm also thinking about how to
+> prevent having to check each single pending lock in each iteration, which
+> will heavily reduce the overhead, and how to prevent starvation in the
+> worst case. I think there are ways to avoid these problems, but first I
+> need to know if this idea makes sense to you.
+
+I doubt that support for locks will be added to tevent - ctdbd would be
+the only user.
+
+However, you could do something very similar by using tevent to process
+a queue when you add to it and also on a timer.  The only problem is,
+as you say, "as long as we don't attempt to get each lock a million
+times".  You end up with a queue that you need to manage.  You might
+place a limit on the number of locks you retry in each run.  Then you
+need to decide whether you're doing to be fair and always retry the
+oldest queue members first (and they might be stubborn), or move those
+that have been tried to the end of the queue, since others may be more
+likely.  So, it is likely to get complicated.
+
+At the moment, by using blocking locks, we're delegating the queuing
+to the kernel.
+
+Quite a few years ago TDB switched from fcntl() locks to mutexes, due
+to the thundering herd problem.  Now, the fcntl() lock thundering herd
+problem seems to be elegantly solved in the Linux kernel.  I don't know
+what else we would lose, but perhaps it is time to try fcntl() lock
+again?
+
+Interesting problems... good times...  :-)
+
+peace & happiness,
+martin
 
