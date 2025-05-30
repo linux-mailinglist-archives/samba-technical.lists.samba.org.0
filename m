@@ -2,71 +2,72 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2DE7BAC933C
-	for <lists+samba-technical@lfdr.de>; Fri, 30 May 2025 18:15:49 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E18EDAC93F2
+	for <lists+samba-technical@lfdr.de>; Fri, 30 May 2025 18:52:02 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=6UTq5HkLhV23M0xz/nleVLoMMJCEzvqCvQMrpj98LYs=; b=NVO1Q80c/8GXgBR+haTBhBlURu
-	5oJmhGbjI4pGupf81695oOo/r++lTK6MdC+0Tdr1r4FlIqxlVpC4n1bafcgSXSydoDKWy8Plb/QgO
-	2rK5FVm6GGe6jbaQK4RQnqRQ1xIp9bVlQLBtf1Dq0lj1WnBFhCG5bsypV3xnycH75CTxruveKAX6c
-	D4kNZ7EeOvCcvWos8F8iGVq9sRzfbVyJgrGoFophOoxsTTUB9jRmMpEspdd3PWkRHc0ZpT9eNQJI8
-	rgB6SN1mcsnuL7U6UJH0eBqDUYhkxNON1tB3PnjV0Av+nVYJ3Mmji0QD+730fTkFbFxmu9CBdJ8LX
-	qNDjR6mQ==;
-Received: from ip6-localhost ([::1]:55850 helo=hr1.samba.org) 
+	bh=aD91Az4ovD/Hq9SUuO38K5KgatmnklatOhykQqdmrQI=; b=UrBTF+uqHDupqIeN3DRZ1tjC1B
+	GfqxiNQdOtG4Xs2yVi23uXNzoDb9a+D7gjmuwp84NCqwZYyZKNSYD+lHmJFWLO8FhjSLe+LWdFeHk
+	CJPNiQWluZt/PJUog0E3TefTHrPZngp/ly7NtPEVjI3sdKFizaiIeEApCNTknwcqHFQbC0closzBM
+	39mx0LOMSpbbGOjGfM/DVB3AJQqD1SZfK5JdBAjm4Gf7tebIJ8pyElDEuORR9GD8GlOdVD2UZLtMs
+	+Wuf4UWghiVZDe/2r/CzSfJ6nMRL0RWNgQy4PIl2JeqfOWnc9gSaWicZS8wMx/gjEP4zyXylWolSf
+	Ozo970NQ==;
+Received: from ip6-localhost ([::1]:58306 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1uL2Ns-004TvO-EO; Fri, 30 May 2025 16:15:04 +0000
-Received: from mail-lj1-x231.google.com ([2a00:1450:4864:20::231]:55405) 
+	id 1uL2xK-004U1w-5B; Fri, 30 May 2025 16:51:42 +0000
+Received: from mail-lj1-x22b.google.com ([2a00:1450:4864:20::22b]:55670) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uL2No-004TvE-5I
- for samba-technical@lists.samba.org; Fri, 30 May 2025 16:15:02 +0000
-Received: by mail-lj1-x231.google.com with SMTP id
- 38308e7fff4ca-32a6083ef65so20303711fa.2
- for <samba-technical@lists.samba.org>; Fri, 30 May 2025 09:14:59 -0700 (PDT)
+ (Exim) id 1uL2xF-004U1p-Kc
+ for samba-technical@lists.samba.org; Fri, 30 May 2025 16:51:40 +0000
+Received: by mail-lj1-x22b.google.com with SMTP id
+ 38308e7fff4ca-30db1bd3bddso20602041fa.3
+ for <samba-technical@lists.samba.org>; Fri, 30 May 2025 09:51:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1748621698; x=1749226498; darn=lists.samba.org;
+ d=gmail.com; s=20230601; t=1748623896; x=1749228696; darn=lists.samba.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=6UTq5HkLhV23M0xz/nleVLoMMJCEzvqCvQMrpj98LYs=;
- b=QfxWPheMP3m+GXTL+YScEM0TSyv1dk8jqyM/WuzFW4zKtVUcRlmGUSCxU3OKsjATfE
- 76T/1PvBVy19FR7Zof5m6KNatxvn4ejrN1Uduk4LgOUubHbo2ZfWdM/RXnMsuDhMBW+y
- 52bjeXrciEXv24v65fULnMSeR8/xP9/jCZukuJ+0PD1bc9aYaV6cv5hS3yFJ0Rz4ynUN
- vP8nFlR4jvsKNMoXBpm/63G1pGS1OqKEnRpiPQRgb1MYsQoyg2qzIBvVxxf/VNKunyZq
- WIP7LAsORQfBDAulXRPuHmzRw/h5ArwHIfbaLAZOR+d2/QrkRT4IFYty9A0ilvUtlnnb
- LXLg==
+ bh=aD91Az4ovD/Hq9SUuO38K5KgatmnklatOhykQqdmrQI=;
+ b=VgYbd1cuyGLAZqE7dyexg99g+wN/CpX5WPyRq3KSg4AmdC7f+arpGlM4kqCAwY5oJQ
+ jGPhZ92Rp7/IudGdMfrwL/pjPl7w0162X3HGrONeMaAbhEojDv4JDVGKW3vkFMYuUB/z
+ JNLPrDjnX2TIqeVFtAt7nkwSYkC/jeeznB/CWbb2YWH0G7dW5UItpPQ267M/JXfktmx2
+ sV/t4ZsrGJmwV81KB6zaO1RGBv8/nQm2tqOX9Rqg6Vb1AImaPcX8XnyIcKvVhp71kh7B
+ 9VQKwCfypF6UPGUmDQDTaxrcHq6a1vznFnSMvi4aSt6uCPxQE7Sew4sx10szcmyB6lbS
+ iAcw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748621698; x=1749226498;
+ d=1e100.net; s=20230601; t=1748623896; x=1749228696;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=6UTq5HkLhV23M0xz/nleVLoMMJCEzvqCvQMrpj98LYs=;
- b=XYWjg1K4g0TGI5gWhUIBQRyG66PHyuOQOyZXjrnU4b4mhU+jXM3dfaiUJsrw21nsIM
- dW7XNNjFKG7T12k/dRV8HU7izxz7UJoD1bY2XkMQgBheMQYxlN0jrtEAnuyJZb/WLig6
- OCX8TON9oIA8tX1E5KzW2m1PIrV1xoxHfo5P+qguQ/lXq+FWaasewEvVAPVw6Iny8IQe
- F1EArApCG4xJGivNRL5kL1bvSxdxh7aHMasPpCgIEtur07Cdp4NNx05tWCY4XwTTOpKD
- stsDKe7Vmv3FahW0zWI4YQwRpU+lrMMKOHpz9oj/ezkml5OwgnEP3DqyXZ0UXBCx8+1K
- IErA==
+ bh=aD91Az4ovD/Hq9SUuO38K5KgatmnklatOhykQqdmrQI=;
+ b=j3Ym89ADN6q2l+WO9FQ6iois06zd0bW2LnMr2Ack+z7Ue4F5MQpStQUe7AguEDJeat
+ F8DXFMA3CGbiVBwiufDSM83F6okn3Tx/J2/lkEaXutPj0nGZzuGIxbveRBKxK+sGN5RU
+ 7iFqtr9In1Duho2tChVl2cnKny05v5aovXIOTdsLBss6i+5snCZK6FK3ztIJ1YlvgTQR
+ NcW3KJwPgUbDYzc5DQDMsfrrBqMwzLpRik7UouGezJnhOLbFp5RtBp7u8EUlX73SFL8A
+ ktNritkOVCQWa4gk1CMpZwOL+cKJB/alK7U/rpjGj/CNAbD4eGFBIqhe1jHcDK7ZX1Cy
+ Nwxg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUsio2o44cBKmXtvT+Lfu+UscLxjRDNF7Hytgk0vF/UVRRh6isIzlqHeMbbVTn8yXhW86DSl5RJJb9ZlQXFFh8=@lists.samba.org
-X-Gm-Message-State: AOJu0Yw74WUnjLN7mxywY4wN8pIIxt3/pWGTixsNoNufFZCkNrPqaHYm
- LeIM7w55jsbu0chIvVgjxpSwxmuyUyfxsNpNQLDAC7fiXtQgNrrEn4qTl0cPJ5Wd1YKFvCn6xuf
- xgT24OBozI4DsdlYnMhlnm/5RwESyuiE=
-X-Gm-Gg: ASbGncsePctU9M+7DATocLLnyzl8usgSJB5cfRpFUWTQGZ47OwBAEqsDKQ8c970libr
- Zv5cHWVSupW//Iewuy1+J3HMoC5x8zNb1x9QsiErvos7onPfnDFyGmx9e89MM5On1dfzXb7CAI1
- asSBB1QkD9AhAvpobN6KCvrTetQHyKSZ37VcTbvIVZ0eWIj0ob9E1fspwx+FBB+7jpAHs=
-X-Google-Smtp-Source: AGHT+IG/NJcvokzMVAfgAUULPo5AHEfz55/2Xhz/gGIFl6PSQ86+UbqO3pGexblTmnbk2F682gpMuOlFZAHMLwVuv8c=
-X-Received: by 2002:a05:651c:509:b0:32a:8062:69b1 with SMTP id
- 38308e7fff4ca-32a9068a6f6mr12904441fa.8.1748621697994; Fri, 30 May 2025
- 09:14:57 -0700 (PDT)
+ AJvYcCW5Ev4yEawYEPauPnIWd03P0IrfgRFS6yBB0C9KEEd/PRwLuDCq80q5HmogqOLrCsotVqmauTFXWISoXxAH1XI=@lists.samba.org
+X-Gm-Message-State: AOJu0YwfTYlluLMWlw3syTOevzAd4BCvQYMG3+ECcwMA8ghd+/nhehW2
+ Fhzp0z5w1OT4i8bett9EZ9GKoTXq/JSGX0mkHJCaeUVQ0VhJp7xxp5zsscsOEvGw35i5cK88WEC
+ 1vvqeH7ffSinyBDC2/hyCDdQG55PUVgI=
+X-Gm-Gg: ASbGncsSc7N3UF+aFdKGF7y2lLnpKj6ngRTljLwaDyzaMd5de4vZMAnEgqT5s5TFzYb
+ RxT79fnl3nX8MBT+G2lS6dJWCD3ToQYrpbD4nJ31AH0gDHg9/5yjiVleUNfSnAHDbfKOX97+QSm
+ OZ7UFbRyYu8iIHfn1pmAPy76YjRr+9ZBBJHvg78wcO4Bo5yRyQ9vukpbqZxeVlZddgvQE=
+X-Google-Smtp-Source: AGHT+IEmGp/73upRLBSPJDdH4fvclKv0UFFY2j1RZTdBMU5LzO1n2h8rQSJ3Ktq3gSJS2RlsSFPwPd24obrFzNUakL4=
+X-Received: by 2002:a05:651c:30c6:b0:32a:8101:bc00 with SMTP id
+ 38308e7fff4ca-32a906cb2f0mr10530601fa.9.1748623895744; Fri, 30 May 2025
+ 09:51:35 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250530084614.2434467-1-frank.li@vivo.com>
-In-Reply-To: <20250530084614.2434467-1-frank.li@vivo.com>
-Date: Fri, 30 May 2025 11:14:45 -0500
-X-Gm-Features: AX0GCFtGHmv3izUG2w7WT1FVlkS5ZFbMOTfhnGBK58yTeSsKAU5O4zE_8tf3tkU
-Message-ID: <CAH2r5msAq6Kq4R0euj+y526imrsGWcXLa_LCJ9T+8G2-9PJx6A@mail.gmail.com>
-Subject: Re: [PATCH] cifs: correct superblock flags
-To: Yangtao Li <frank.li@vivo.com>
+References: <cover.1748446473.git.metze@samba.org>
+In-Reply-To: <cover.1748446473.git.metze@samba.org>
+Date: Fri, 30 May 2025 11:51:23 -0500
+X-Gm-Features: AX0GCFuub8-4Mm3_qDqd0azzM6HNDxaHfzR_MpygQ8Slq4FTtDpKPe2RmsVjCP8
+Message-ID: <CAH2r5msi+4kUx37dkCCdz=YD8bGK64cTZqAujuh3nJh1+gj62A@mail.gmail.com>
+Subject: Re: [PATCH v2 00/12] smb:common: introduce and use common smbdirect
+ headers/structures (step1)
+To: Stefan Metzmacher <metze@samba.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
@@ -84,62 +85,95 @@ List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
 From: Steve French via samba-technical <samba-technical@lists.samba.org>
 Reply-To: Steve French <smfrench@gmail.com>
-Cc: pc@manguebit.com, linux-cifs@vger.kernel.org, sprasad@microsoft.com,
- samba-technical@lists.samba.org, linux-kernel@vger.kernel.org, tom@talpey.com,
- bharathsm@microsoft.com, linux-fsdevel <linux-fsdevel@vger.kernel.org>
+Cc: Meetakshi Setiya <meetakshisetiyaoss@gmail.com>, linux-cifs@vger.kernel.org,
+ samba-technical@lists.samba.org, Hyunchul Lee <hyc.lee@gmail.com>,
+ Tom Talpey <tom@talpey.com>, Namjae Jeon <linkinjeon@kernel.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-> SB_NOATIME includes SB_NODIRATIME as a subset. Therefore, setting SB_NOAT=
-IME is sufficient
+I have temporarily removed that patches which touch the server, ie
+updated for-next with only the client and common patches, pending
+answer to one of Namjae's questions about the ksmbd changes.
 
-Although technically the flag is not a subset, with current code in
-atime_needs_update() setting SB_NODIRATIME is not needed if SB_NOATIME
-is already set (see below), but it could be argued that the code is
-clearer (easier to understand) to set both flags (especially as it has
-no performance hit), and multiple other fs also do this. Any
-additional thoughts?
+4e89b3b35e98 (HEAD -> for-next, origin/for-next) smb: client: make use
+of common smbdirect_socket_parameters
+34399d47fa28 smb: smbdirect: introduce smbdirect_socket_parameters
+39bfc4a85f60 smb: client: make use of common smbdirect_socket
+8ed057da2a21 smb: smbdirect: add smbdirect_socket.h
+3173f315fa92 smb: client: make use of common smbdirect.h
+c54ba448cb35 smb: smbdirect: add smbdirect.h with public structures
+2119e7ed45d1 smb: client: make use of common smbdirect_pdu.h
+0aad6cf27293 smb: smbdirect: add smbdirect_pdu.h with protocol definitions
+bc01b00a6ca2 smb: client: use ParentLeaseKey in cifs_do_create
+0e441841edfa smb: client: use ParentLeaseKey in open_cached_dir
+5015217979ad smb: client: add ParentLeaseKey support
+55423e9c534d smb: client: Remove an unused function and variable
+0ff41df1cb26 (tag: v6.15) Linux 6.15
 
-        if (IS_NOATIME(inode))
-                return false;
-        if ((inode->i_sb->s_flags & SB_NODIRATIME) && S_ISDIR(inode->i_mode=
-))
-                return false;h
-
-
-On Fri, May 30, 2025 at 3:25=E2=80=AFAM Yangtao Li <frank.li@vivo.com> wrot=
-e:
+On Wed, May 28, 2025 at 11:01=E2=80=AFAM Stefan Metzmacher <metze@samba.org=
+> wrote:
 >
-> SB_NOATIME includes SB_NODIRATIME as a subset. Therefore,
-> setting SB_NOATIME is sufficient to disable atime updates
-> for all files and directories.
+> Hi,
 >
-> Signed-off-by: Yangtao Li <frank.li@vivo.com>
-> ---
->  fs/smb/client/cifsfs.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+> in preparation of a having a common smb_direct layer I started
+> to move things into common header files and added the first
+> step in using shared structues like struct smbdirect_socket.
 >
-> diff --git a/fs/smb/client/cifsfs.c b/fs/smb/client/cifsfs.c
-> index a08c42363ffc..b4bc15ea33bf 100644
-> --- a/fs/smb/client/cifsfs.c
-> +++ b/fs/smb/client/cifsfs.c
-> @@ -996,7 +996,7 @@ cifs_smb3_do_mount(struct file_system_type *fs_type,
->         mnt_data.flags =3D flags;
+> Currently only simple things are shared and there is no
+> intended behaviour change (even if I found some things
+> I'd like to change, but I'll defer them in order to
+> make the review easier).
 >
->         /* BB should we make this contingent on mount parm? */
-> -       flags |=3D SB_NODIRATIME | SB_NOATIME;
-> +       flags |=3D SB_NOATIME;
+> I'll work on this the next few months in order to
+> unify the in kernel client and server layers
+> and expose the result to userspace too.
+> So that Samba can also use it.
 >
->         sb =3D sget(fs_type, cifs_match_super, cifs_set_super, flags, &mn=
-t_data);
->         if (IS_ERR(sb)) {
+> v2:
+>   - change smb_direct into smbdirect
+>   - make usage of header files just as needed
+>   - also introduce struct smbdirect_socket[_parameters]
+>     as shared structures
+>
+> Stefan Metzmacher (12):
+>   smb: smbdirect: add smbdirect_pdu.h with protocol definitions
+>   smb: client: make use of common smbdirect_pdu.h
+>   smb: server: make use of common smbdirect_pdu.h
+>   smb: smbdirect: add smbdirect.h with public structures
+>   smb: client: make use of common smbdirect.h
+>   smb: server: make use of common smbdirect.h
+>   smb: smbdirect: add smbdirect_socket.h
+>   smb: client: make use of common smbdirect_socket
+>   smb: server: make use of common smbdirect_socket
+>   smb: smbdirect: introduce smbdirect_socket_parameters
+>   smb: client: make use of common smbdirect_socket_parameters
+>   smb: server: make use of common smbdirect_socket_parameters
+>
+>  fs/smb/client/cifs_debug.c                 |  23 +-
+>  fs/smb/client/smb2ops.c                    |  14 +-
+>  fs/smb/client/smb2pdu.c                    |  17 +-
+>  fs/smb/client/smbdirect.c                  | 389 +++++++++++----------
+>  fs/smb/client/smbdirect.h                  |  71 +---
+>  fs/smb/common/smbdirect/smbdirect.h        |  37 ++
+>  fs/smb/common/smbdirect/smbdirect_pdu.h    |  55 +++
+>  fs/smb/common/smbdirect/smbdirect_socket.h |  43 +++
+>  fs/smb/server/connection.c                 |   4 +-
+>  fs/smb/server/connection.h                 |  10 +-
+>  fs/smb/server/smb2pdu.c                    |  11 +-
+>  fs/smb/server/smb2pdu.h                    |   6 -
+>  fs/smb/server/transport_rdma.c             | 385 +++++++++++---------
+>  fs/smb/server/transport_rdma.h             |  41 ---
+>  14 files changed, 613 insertions(+), 493 deletions(-)
+>  create mode 100644 fs/smb/common/smbdirect/smbdirect.h
+>  create mode 100644 fs/smb/common/smbdirect/smbdirect_pdu.h
+>  create mode 100644 fs/smb/common/smbdirect/smbdirect_socket.h
+>
 > --
-> 2.48.1
->
+> 2.34.1
 >
 
 
---
+--=20
 Thanks,
 
 Steve
