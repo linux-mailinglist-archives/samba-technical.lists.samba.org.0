@@ -2,102 +2,47 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 462FFACD95F
-	for <lists+samba-technical@lfdr.de>; Wed,  4 Jun 2025 10:11:43 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2F078ACF370
+	for <lists+samba-technical@lfdr.de>; Thu,  5 Jun 2025 17:52:26 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=tWmBnvptzNYs4R0MZ3Uo0OTy6lzicOFPfnKUeZLec7k=; b=uKx3Mcs4qckkug7ix5jLfFlj83
-	NQHgGuwi3kgA+QENZO+iymVWD+pi1sqJ3IYqPPBYjAZMJUoCcdiGICXEGoCd8pXr+8qnBMfVTA+1U
-	aZfQYfJw+174RIlca9WcOn+9Swnb2+i6UyMCQdEG5LN/YvQASgWUsNJWmnAzFnttW0Y5qWlcD+kUJ
-	VRe/DaSZQmb6Vor+BM2UHLM57L9HNE6WxwkhjCMLR3KFOGWdceTavo/O7hQCtlxZspsjdzq0YX9fB
-	NCIgbTGw7FDsYXd0EvHLCCUTYOEKpuK352lNjkqJdNaiVOqJzzQ4JE+UoDTIi9EifIHQyyStbCTMR
-	tf1jy59Q==;
-Received: from ip6-localhost ([::1]:64352 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
+	bh=7EoJ3iVjwii2uzzBoSo129UQlES173OYziLSKz3Sw5E=; b=kf5JXNzPzwNWKy0YpExMmiC/B0
+	JbQ5WKNV28cH8399UcsS2XVNK8iSzSorIYB45O9MCDcOfzAuYEa4xQwWy3o1tb9W482f7HxlkGqU/
+	l1azlMlZRgulqOpudQrXM8KStoGqCaUZGNZ/yMtLKRQahn7sg17kwmbdlQ73vrfV4ldZfj4cOCMXV
+	n31+TKwSyIMNZ/8jjYxJRpNzS1lWKQq5Zr5T6eJBcomdaZqoNJ0PqsgWLs67BCCfbOuhGpeXpCAGE
+	3p39MVkHkG3uKYQfusuW5EatMKQRG7B6BcR0xpisuVVkw49RAeoppGSM+XXkJnXWTL2LRghq0dIr3
+	0fA/erTQ==;
+Received: from ip6-localhost ([::1]:35854 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1uMjD9-006a0v-9u; Wed, 04 Jun 2025 08:10:59 +0000
-Received: from smtp-out2.suse.de ([195.135.223.131]:43564) 
+	id 1uNCsg-006gEX-59; Thu, 05 Jun 2025 15:51:50 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:52658) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uMYFc-006Ym8-Eh
- for samba-technical@lists.samba.org; Tue, 03 Jun 2025 20:28:51 +0000
-Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 0A09B1F443;
- Tue,  3 Jun 2025 20:14:02 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
- t=1748981642; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=tWmBnvptzNYs4R0MZ3Uo0OTy6lzicOFPfnKUeZLec7k=;
- b=N9Kbvcl1o+W8mnAV52zBhxxyYHA97Cb9y96xWViRy3Yzan5mZrTcZW4eDHM+PDAJTz6E6N
- qoYcq5rOWPG+jlGqOMtgP4auf8TMckeLsezSaiWM+dn3D02fPUEyzQI3AS8wZGeQh0sTqW
- wVVj71wp9xcn1BGy/t0w8V9bMx0wFsk=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
- s=susede2_ed25519; t=1748981642;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=tWmBnvptzNYs4R0MZ3Uo0OTy6lzicOFPfnKUeZLec7k=;
- b=BB4lK6RIU1ic1WRsD45tpMjFD1GpBqLcSKDtMJp9C60Whrnl6cXeo9AGiXcRfjhu8+mWDV
- KFXHeyv2/WXiGLDQ==
-Authentication-Results: smtp-out2.suse.de;
-	none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
- t=1748981642; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=tWmBnvptzNYs4R0MZ3Uo0OTy6lzicOFPfnKUeZLec7k=;
- b=N9Kbvcl1o+W8mnAV52zBhxxyYHA97Cb9y96xWViRy3Yzan5mZrTcZW4eDHM+PDAJTz6E6N
- qoYcq5rOWPG+jlGqOMtgP4auf8TMckeLsezSaiWM+dn3D02fPUEyzQI3AS8wZGeQh0sTqW
- wVVj71wp9xcn1BGy/t0w8V9bMx0wFsk=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
- s=susede2_ed25519; t=1748981642;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=tWmBnvptzNYs4R0MZ3Uo0OTy6lzicOFPfnKUeZLec7k=;
- b=BB4lK6RIU1ic1WRsD45tpMjFD1GpBqLcSKDtMJp9C60Whrnl6cXeo9AGiXcRfjhu8+mWDV
- KFXHeyv2/WXiGLDQ==
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id E7FFB13A92;
- Tue,  3 Jun 2025 20:14:01 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id TamiOIlXP2itDgAAD6G6ig
- (envelope-from <jack@suse.cz>); Tue, 03 Jun 2025 20:14:01 +0000
-Received: by quack3.suse.cz (Postfix, from userid 1000)
- id 89AB6A08DD; Tue,  3 Jun 2025 22:13:53 +0200 (CEST)
-Date: Tue, 3 Jun 2025 22:13:53 +0200
-To: Jeff Layton <jlayton@kernel.org>
-Subject: Re: [PATCH RFC v2 21/28] fsnotify: export fsnotify_recalc_mask()
-Message-ID: <ssbrsekgkssixxq4wiybw6k7n24efg64ozh6vrzxuft2sdz2w7@3tfmzfnqdwbu>
-References: <20250602-dir-deleg-v2-0-a7919700de86@kernel.org>
- <20250602-dir-deleg-v2-21-a7919700de86@kernel.org>
+ (Exim) id 1uNCsX-006gDp-IG; Thu, 05 Jun 2025 15:51:44 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=From:To:Date:Message-ID:CC;
+ bh=7EoJ3iVjwii2uzzBoSo129UQlES173OYziLSKz3Sw5E=; b=mEBlFeG9Sv+yWyb5e06FXIl6Ls
+ CUesWifeRluJSbNUag5tE847KukYFJ+31ENbWx4+X2HIXVC59g/aEQlVR6Y1LeWAfQJ6fJwehL6H2
+ 19Frb7sfBHws03Wn4GcsZYqlrmsXt+IUFVfbuXmH2gcHEkkPWeXRvysaADGbWAej6XIMVKSKtJyjT
+ nV8ERJa0kHM72jEE6wqYPKtK3HgfpUmhNe3mu+ERqwImYYcJ+kbEUUmvZ53m4sY392RwGiQRSu8UY
+ sPP4+fZt60EVRU1uBiVy8Wi/KhXzWh88sS9gEPAe5859z5WVZDJxtyJPBhdo2rmCc16sZNLYK+1Ho
+ Tv9cVccY36tn/k+wfzQn5Hh2VMh1ys+4OxdBmOPJNwGgK0LnaRC5nsKWBlY7thNwvK5mBvzQdhJgI
+ HAptBtTxtR9po1jSJf++Z39dQuR4DN5DyM5oiw1/RKuHJwo6a/iFFzk3nb8cfIuGnGE70ZZ7QRG8i
+ 1zP2UdDhXWseX6TvO6dFKUFP;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1uNCsW-009BU8-39; Thu, 05 Jun 2025 15:51:41 +0000
+Message-ID: <9aa176d3-3864-4451-952d-ab1b5ed9d2c3@samba.org>
+Date: Thu, 5 Jun 2025 17:51:40 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20250602-dir-deleg-v2-21-a7919700de86@kernel.org>
-X-Spam-Flag: NO
-X-Spam-Score: -2.30
-X-Spamd-Result: default: False [-2.30 / 50.00]; BAYES_HAM(-3.00)[99.99%];
- SUSPICIOUS_RECIPS(1.50)[]; NEURAL_HAM_LONG(-1.00)[-1.000];
- MID_RHS_NOT_FQDN(0.50)[]; NEURAL_HAM_SHORT(-0.20)[-1.000];
- MIME_GOOD(-0.10)[text/plain]; RCPT_COUNT_TWELVE(0.00)[26];
- RCVD_VIA_SMTP_AUTH(0.00)[]; MIME_TRACE(0.00)[0:+];
- ARC_NA(0.00)[]; MISSING_XM_UA(0.00)[]; TO_DN_SOME(0.00)[];
- TAGGED_RCPT(0.00)[]; FREEMAIL_ENVRCPT(0.00)[gmail.com];
- R_RATELIMIT(0.00)[to_ip_from(RL63fqwwx8ot6gmekemcs76f9d)];
- FROM_EQ_ENVFROM(0.00)[]; FROM_HAS_DN(0.00)[];
- FREEMAIL_CC(0.00)[zeniv.linux.org.uk,kernel.org,suse.cz,oracle.com,gmail.com,samba.org,manguebit.com,microsoft.com,talpey.com,brown.name,redhat.com,lwn.net,szeredi.hu,vger.kernel.org,lists.samba.org];
- RCVD_COUNT_THREE(0.00)[3]; TO_MATCH_ENVRCPT_ALL(0.00)[];
- FUZZY_BLOCKED(0.00)[rspamd.com]; RCVD_TLS_LAST(0.00)[];
- DKIM_SIGNED(0.00)[suse.cz:s=susede2_rsa,suse.cz:s=susede2_ed25519];
- DBL_BLOCKED_OPENRESOLVER(0.00)[suse.com:email,imap1.dmz-prg2.suse.org:helo]
-X-Mailman-Approved-At: Wed, 04 Jun 2025 08:10:58 +0000
+User-Agent: Mozilla Thunderbird
+Content-Language: de-DE
+To: samba-announce@lists.samba.org, samba@lists.samba.org,
+ samba-technical@lists.samba.org
+Subject: [Announce] Samba 4.22.2 Available for Download
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -111,67 +56,112 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jan Kara via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jan Kara <jack@suse.cz>
-Cc: Alexander Aring <alex.aring@gmail.com>, Jan Kara <jack@suse.cz>,
- linux-doc@vger.kernel.org, Amir Goldstein <amir73il@gmail.com>,
- Paulo Alcantara <pc@manguebit.com>, linux-cifs@vger.kernel.org,
- Jonathan Corbet <corbet@lwn.net>, Dai Ngo <Dai.Ngo@oracle.com>,
- NeilBrown <neil@brown.name>, Shyam Prasad N <sprasad@microsoft.com>,
- Olga Kornievskaia <okorniev@redhat.com>, linux-nfs@vger.kernel.org,
- Tom Talpey <tom@talpey.com>, Bharath SM <bharathsm@microsoft.com>,
- Alexander Viro <viro@zeniv.linux.org.uk>,
- Christian Brauner <brauner@kernel.org>, Miklos Szeredi <miklos@szeredi.hu>,
- samba-technical@lists.samba.org, linux-kernel@vger.kernel.org,
- Steve French <sfrench@samba.org>, Chuck Lever <chuck.lever@oracle.com>,
- Anna Schumaker <anna@kernel.org>, linux-fsdevel@vger.kernel.org,
- Trond Myklebust <trondmy@kernel.org>
+From: Jule Anger via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jule Anger <janger@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Mon 02-06-25 10:02:04, Jeff Layton wrote:
-> nfsd needs to call this when new directory delegations are set or unset.
-> 
-> Signed-off-by: Jeff Layton <jlayton@kernel.org>
+Release Announcements
+---------------------
 
-So fsnotify_recalc_mask() is not a great API to export because it depends
-on lifetime rules of mark connector - in particular the caller has to make
-sure the connector stays alive while fsnotify_recalc_mask() is running. So
-far the knowledge was internal in fsnotify subsystem but now NFSD needs to
-know as well.
+This is the latest stable release of the Samba 4.22 release series.
+It contains the security-relevant bugfix CVE-2025-0620:
 
-Generally you need to recalculate the mask when you modify events you
-listen to in a mark. So perhaps we should provide an API like:
+     smbd doesn't pick up group membership changes
+     when re-authenticating an expired SMB session
+     https://www.samba.org/samba/security/CVE-2025-0620.html
 
-int fsnotify_modify_mark_mask(struct fsnotify_mark *mark, __u32 mask_clear,
-			      __u32 mask_set);
 
-which could be used to modify mark mask without having to care about
-details like cached masks and connector locking rules?
+Description of CVE-2025-0620
+-----------------------------
 
-								Honza
+     With Kerberos authentication SMB sessions typically have an
+     associated lifetime, requiring re-authentication by the
+     client when the session expires. As part of the
+     re-authentication, Samba receives the current group
+     membership information and is expected to reflect this
+     change in further SMB request processing.
 
-> ---
->  fs/notify/mark.c | 1 +
->  1 file changed, 1 insertion(+)
-> 
-> diff --git a/fs/notify/mark.c b/fs/notify/mark.c
-> index 798340db69d761dd05c1b361c251818dee89b9cf..ff21409c3ca3ad948557225afc586da3728f7cbe 100644
-> --- a/fs/notify/mark.c
-> +++ b/fs/notify/mark.c
-> @@ -308,6 +308,7 @@ void fsnotify_recalc_mask(struct fsnotify_mark_connector *conn)
->  	if (update_children)
->  		fsnotify_conn_set_children_dentry_flags(conn);
->  }
-> +EXPORT_SYMBOL_GPL(fsnotify_recalc_mask);
->  
->  /* Free all connectors queued for freeing once SRCU period ends */
->  static void fsnotify_connector_destroy_workfn(struct work_struct *work)
-> 
-> -- 
-> 2.49.0
-> 
--- 
-Jan Kara <jack@suse.com>
-SUSE Labs, CR
+     For historic reasons, Samba maintains a cache of
+     associations between a user's impersonation information and
+     connected shares. A recent change in this cache caused Samba
+     to not reflect group membership changes from session
+     re-authentication when processing further SMB requests.
+
+     As a result, when an administrator removes a user from a
+     particular group in Active Directory, this change will not
+     become effective unless the user disconnects from the server
+     and establishes a new connection.
+
+
+Changes since 4.22.1
+--------------------
+
+o  Ralph Boehme <slow@samba.org>
+    * BUG 15707: (CVE-2025-0620) [SECURITY] CVE-2025-0620: smbd doesn't 
+pick up
+      group membership changes when re-authenticating an expired SMB
+      session.
+    * BUG 15861: Profile sync fails due to Directory Leases.
+
+o  Pavel Filipenský <pfilipensky@samba.org>
+    * BUG 15727: net ad join fails with "Failed to join domain: failed 
+to create
+      kerberos keytab".
+
+o  Stefan Metzmacher <metze@samba.org>
+    * BUG 15851: dcerpcd not able to bind to listening port.
+
+o  Anoop C S <anoopcs@samba.org>
+    * BUG 15819: vfs_ceph_snapshots fails to list snapshots for entries 
+at any
+      level beyond share root.
+
+o  Martin Schwenke <mschwenke@ddn.com>
+    * BUG 15858: CTDB does not put nodes running NFS into grace on graceful
+      shutdown.
+
+
+#######################################
+Reporting bugs & Development Discussion
+#######################################
+
+Please discuss this release on the samba-technical mailing list or by
+joining the #samba-technical:matrix.org matrix room, or
+#samba-technical IRC channel on irc.libera.chat.
+
+If you do report problems then please try to send high quality
+feedback. If you don't provide vital information to help us track down
+the problem then you will probably be ignored.  All bug reports should
+be filed under the Samba 4.1 and newer product in the project's Bugzilla
+database (https://bugzilla.samba.org/).
+
+
+======================================================================
+== Our Code, Our Bugs, Our Responsibility.
+== The Samba Team
+======================================================================
+
+
+
+================
+Download Details
+================
+
+The uncompressed tarballs and patch files have been signed
+using GnuPG (ID AA99442FB680B620).  The source code can be downloaded
+from:
+
+         https://download.samba.org/pub/samba/stable/
+
+The release notes are available online at:
+
+         https://www.samba.org/samba/history/samba-4.22.2.html
+
+Our Code, Our Bugs, Our Responsibility.
+(https://bugzilla.samba.org/)
+
+                         --Enjoy
+                         The Samba Team
+
 
