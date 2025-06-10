@@ -2,75 +2,59 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 61915AD2864
-	for <lists+samba-technical@lfdr.de>; Mon,  9 Jun 2025 23:02:36 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3071FAD3B12
+	for <lists+samba-technical@lfdr.de>; Tue, 10 Jun 2025 16:24:28 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=J4DkXTYwW5Ep8DUHJ5uF89cdrUl3k3cbZQbOzQO0YiM=; b=xszN0I5UQrOw1gGJt0vLsnPzeN
-	S0s4vYFVENjy4onxmUTjGS5mDc/E3Mg28uO8VoU6YOpRXIwXSe8YWf4n7yB/Hzx8hNO0aC9fc35r6
-	vg2lE+FnoyiKPGdymsw7e8jyFftxLIF7uSfhB2OjsHymf6vAHMik4IObW5k18+AfOffwJf6TlDW+I
-	w8imc4lYuZlg0j7UzMqo7lu0Us9AcAG/ta7lWWIxZ5kP7gRxXezuzLAu3a+mjFoSzWFMD9D6v/Gms
-	E/VwEZA7hZ2NZQcEBw1y/qb3wmdYlDu/PXcXMnTIgQXMT/mcOb/fSGo9PLSVCuczEeOLHKsqVInO5
-	uboJDU9w==;
-Received: from ip6-localhost ([::1]:60330 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
+	bh=1SPAyIZ1Lk9M4AuVLSIHmuPrSLWmT8GABw+Ss4e+sF0=; b=wWI6ZyAvCIw3V4XwfqSZeiGtQh
+	iSKxDIi8ym1gQrxB2nzY9JCZNmY189A6IehL2K6QIqQBvE/0N5hJXRo3k6DsmmQTg4bxePsabm3gh
+	FJqD891OhWAYOUalKHomKUt/oryQpUaeNLdeBLzh+CnJ+RNAiAjEVofvMyhMSFaTPM+6TLaS2D5d7
+	aaLkr7wQk76EWFFq53Tk3c/TafDINydyI7ODJ/oECisD5L4Xr8o9jMb7nFfhUEjJvRO4ERUKR7I8Y
+	x8Xa54kEnvJisfDC5HTVbaFHcqyWbCiFuXAjLwdyYvEd75PFqiyMh/rJuP/hBKpxpJQO5wz516stI
+	s2YSGWRw==;
+Received: from ip6-localhost ([::1]:54712 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1uOjd2-006uSQ-73; Mon, 09 Jun 2025 21:02:00 +0000
-Received: from mail-lj1-x234.google.com ([2a00:1450:4864:20::234]:55665) 
+	id 1uOztB-006xIs-6L; Tue, 10 Jun 2025 14:23:45 +0000
+Received: from plasma4.jpberlin.de ([80.241.57.33]:34371) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uOjcy-006uSJ-9m
- for samba-technical@lists.samba.org; Mon, 09 Jun 2025 21:01:58 +0000
-Received: by mail-lj1-x234.google.com with SMTP id
- 38308e7fff4ca-32aabfd3813so38937061fa.3
- for <samba-technical@lists.samba.org>; Mon, 09 Jun 2025 14:01:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1749502915; x=1750107715; darn=lists.samba.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=J4DkXTYwW5Ep8DUHJ5uF89cdrUl3k3cbZQbOzQO0YiM=;
- b=FA0Vbz3G75XoOXsIwVReQYnBPTE65YvzCleCjI4l8eCELeyap1SVkS671yDYkv7JcI
- NSVzrIdAaO4IwT36DAYSQ+v2NbAeBej8qcuusgSe5p0TU6eOoSZGC7XIS2EiAzYgipuo
- r6PQbz0J6CBfu1lFHZyEkzjt9c6AOrXHjZ7w7Hnr9SN7lsuAeK/tzHMwOXC21DzvVNXH
- QsrrjMc+5yWxPjW/LJPlmOSj9CXGkyc/dR8Ln9nk1KRPYp6oqZyajQDYEKd2MxOuKeWg
- 11UOzEpUA9lo58Te24JTEjQcLwO2rP8ftJIJ/WZ2WcFmOe7njkMnXt24nmx0M71vmt2M
- F8Ug==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749502915; x=1750107715;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=J4DkXTYwW5Ep8DUHJ5uF89cdrUl3k3cbZQbOzQO0YiM=;
- b=AaGf7zdT2Lker3ko5fQb98EX3vJ5oq6axyM1eR+MLnpvNaKZniRuItfUDzsZU6+3Ie
- iIov2MW5ktNm6y+LERwx9B+i0zDjnaYMwcFtQ9Q/ryJP8MQ50NmAyMx2cld51WH8//uK
- /mHL2Z/8w5CpHPv5ok5GBuuA0aaYa/69CQXwuxwGZlRNeraae/5Gwp+RPIkn1EjbB/ib
- YOjY5rTXSKLBw4f2oWr/6g+jP9j1UewEK5dSXMUSjvaFNcXIDvO9SDdL7ODgCkIn9M5z
- 9d0EDvZoWYyh9N2HlR/BoBTWvnE76zu8hlAjv91jMx4vyZPIOFNWeEcGgP/dFH8qTpg1
- ufoQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVenMQixoUEnm62dPCiI2BkmmIxyx8iB7cAiBFk/hauEuymmnR9gQKgSbbOwUXyJcUi8DvwcB8zTSs4Yo3hCco=@lists.samba.org
-X-Gm-Message-State: AOJu0YzIrwaKLSQy0RQof/WS8ip6s8vfSNUA1Xn8EwNnaPCijI2Ejj4I
- 2esrpyZvzgxoj2sVPxXOrpVDAn3b9lpJJfAw+zp4d70GBJxGQdYbJszh2oAGTPMC9ztBE7uTeAC
- /c6HNwI9InPLQK39wI5N7wcmAY8UIr5w=
-X-Gm-Gg: ASbGncvx1lD4npdhw0eskayGIUbV/mh/wCQjFqMVr/y8mquyclnoR+pN4f7HoWaPdNm
- ll/20hccpOMc3FaMUrsaw2oXfqJGG8cSz77utG081R00tOlZpqSBwHeNyftNlLAihUyMob3agWN
- w5HmH01WeB+1ViyhAjwgkYPd3LY4DNQGSpBJThv1WUrAsqmEF3aKisIFay6oIERV8TL4uU5GiK/
- ls9wBNbBYotw1Hp
-X-Google-Smtp-Source: AGHT+IHsCNHegqYNX+NPCF7HkCmAPSw+rq6dTGq/CFkeKLnS5BehJ6U+698wb4S2U1xIj2rKm2kqH5fsLFXEE+/PhoM=
-X-Received: by 2002:a05:651c:108:b0:32a:66f7:8a15 with SMTP id
- 38308e7fff4ca-32adfed5cd4mr27233801fa.39.1749502914351; Mon, 09 Jun 2025
- 14:01:54 -0700 (PDT)
+ (Exim) id 1uOzt6-006xIl-3b
+ for samba-technical@lists.samba.org; Tue, 10 Jun 2025 14:23:43 +0000
+Received: from spamfilter04.heinlein-hosting.de
+ (spamfilter04.heinlein-hosting.de [80.241.56.122])
+ by plasma.jpberlin.de (Postfix) with ESMTP id 00527C0F57;
+ Tue, 10 Jun 2025 16:07:25 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kania-online.de;
+ s=MBO0001; t=1749564446;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:mime-version:mime-version:content-type:content-type:autocrypt:autocrypt;
+ bh=1SPAyIZ1Lk9M4AuVLSIHmuPrSLWmT8GABw+Ss4e+sF0=;
+ b=ncvdAhADtzh+xm7NK1VO9k8mYbCjNdzuxjH1Qej6ZebwwdJPK0Z/99g+fBmp0jG1juVdKe
+ mfFvdb49jo5yl+7q0KP0QXnwvgYtdZCeZQpfYROg9lkB55yXmB3UuprqgHg2q9qrhPiXwN
+ VJA0L4WF4vP9Zfl6XegY9C1/PdOxNtZRUAWIN0Z/PsZDqtX7ry3j90FgkA/G/HnKZWcY0M
+ BME2pkUUVvNaVHd3UMVGMJgfYszVSXVbctrLSvXvfGAGSXY3ag6MrmEb49/YixFvHl41ou
+ EGllxdwCiMVXCdzXPzExZAraOrZP+JEUV2HcGGl+C0t25ff6YreQI65mxwB3jw==
+Received: from plasma.jpberlin.de ([80.241.56.68])
+ by spamfilter04.heinlein-hosting.de (spamfilter04.heinlein-hosting.de
+ [80.241.56.122]) (amavisd-new, port 10030)
+ with ESMTP id 43rQerOvMTsw; Tue, 10 Jun 2025 16:07:17 +0200 (CEST)
+Received: from [192.168.123.203] (p5b240cb2.dip0.t-ipconnect.de [91.36.12.178])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (Client did not present a certificate)
+ (Authenticated sender: stefan@kania-online.de)
+ by plasma.jpberlin.de (Postfix) with ESMTPSA id 2FE95C14AC
+ for <samba-technical@lists.samba.org>; Tue, 10 Jun 2025 16:07:15 +0200 (CEST)
+Message-ID: <e7ab3d5b-bc7d-4ac7-b9ac-da587c9e4fd2@kania-online.de>
+Date: Tue, 10 Jun 2025 16:07:14 +0200
 MIME-Version: 1.0
-References: <20250608185900.439023-1-pkerling@rx2.rx-server.de>
- <CAKYAXd-SjnnTtYp2NNvRuMWp39-MhcPa-+8xVCYKxDpGHLGsCQ@mail.gmail.com>
-In-Reply-To: <CAKYAXd-SjnnTtYp2NNvRuMWp39-MhcPa-+8xVCYKxDpGHLGsCQ@mail.gmail.com>
-Date: Mon, 9 Jun 2025 16:01:42 -0500
-X-Gm-Features: AX0GCFu2a_Ne83XmZE7MAd372CX3Rsa0q3FW0YPqFq5S-WkG8GWgwsyOi4GGSgo
-Message-ID: <CAH2r5mv+3xhiD+CdKOdnSNSz_TuR4i=9s0rViHm_ObhxDyd50w@mail.gmail.com>
-Subject: Re: [PATCH] smb: client: disable path remapping with POSIX extensions
-To: Namjae Jeon <linkinjeon@kernel.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+To: samba-technical@lists.samba.org
+Content-Language: en-US, de-DE
+Organization: Stefan Kania
+Subject: Authentication Policies in Sambs 4.22
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------pqPJI66DsfvrltKnBLOR0mrZ"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -84,40 +68,79 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
-Cc: Philipp Kerling <pkerling@casix.org>, linux-cifs@vger.kernel.org,
- samba-technical <samba-technical@lists.samba.org>
+From: Stefan Kania via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Stefan Kania <stefan@kania-online.de>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-tentatively merged into cifs-2.6.git for-next pending additional
-testing and review
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------pqPJI66DsfvrltKnBLOR0mrZ
+Content-Type: multipart/mixed; boundary="------------PYAKII5Z5Qy9RHcT9WzbQn5w";
+ protected-headers="v1"
+From: Stefan Kania <stefan@kania-online.de>
+To: samba-technical@lists.samba.org
+Message-ID: <e7ab3d5b-bc7d-4ac7-b9ac-da587c9e4fd2@kania-online.de>
+Subject: Authentication Policies in Sambs 4.22
 
-On Mon, Jun 9, 2025 at 12:51=E2=80=AFAM Namjae Jeon <linkinjeon@kernel.org>=
- wrote:
->
-> On Mon, Jun 9, 2025 at 3:59=E2=80=AFAM Philipp Kerling <pkerling@casix.or=
-g> wrote:
-> >
-> > If SMB 3.1.1 POSIX Extensions are available and negotiated, the client
-> > should be able to use all characters and not remap anything. Currently,=
- the
-> > user has to explicitly request this behavior by specifying the "nomappo=
-six"
-> > mount option.
-> >
-> > Link: https://lore.kernel.org/4195bb677b33d680e77549890a4f4dd3b474ceaf.=
-camel@rx2.rx-server.de
-> > Signed-off-by: Philipp Kerling <pkerling@casix.org>
-> Reviewed-by: Namjae Jeon <linkinjeon@kernel.org>
->
-> Thanks.
+--------------PYAKII5Z5Qy9RHcT9WzbQn5w
+Content-Type: multipart/mixed; boundary="------------DPko6e1WK6n5RTxvFOuVyXP8"
 
+--------------DPko6e1WK6n5RTxvFOuVyXP8
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
 
+DQpJIG5vdyBoYWQgdGhlIHRpbWUgdG8gKGFnYWluKSB0ZXN0IGF1dGhlbnRpY2F0aW9uLXBv
+bGljaWVzIGFuZCBzaWxvcy4gSXQncyBzdGlsbCBOT1Qgd29ya2luZy4gSW4gTERBUCBJIHNl
+ZSB0aGUgc2FtZSBlbnRyaWVzIGFzIEkgc2VlIHdoZW4gY29uZmlndXJpbmcgcG9saWNpZXMg
+YW5kIHNpbG9zIGluIFdpbmRvd3MgYnV0IHRoZXJlIGl0J3Mgd29ya2luZy4NCg0KSSB0aGlu
+ayB0aGVyZSBhcmUgb25seSB0aHJlZSBwb3NzaWJpbGl0aWVzIGxlZnQ6DQoNCjEuIFlPVSBh
+cyBkZXZlbG9wZXIgb2YgdGhlIGZ1bmN0aW9uLCB3cml0ZSBhIGdvb2Qgd29ya2luZyBkb2N1
+bWVudGF0aW9uLiBUZXN0IHRoZSBkb2N1bWVudGF0aW9uIHdpdGggU2FtYmEgRENzIGFuZCBX
+aW5kb3dzIGNsaWVudHMhIFRoYXQncyBieSB0aGUgd2F5IEkgZXhwZWN0IGZvciBBTlkgbmV3
+IGZ1bmN0aW9uLg0KMi4gRml4IGl0IGlmIGl0J3MgYnJva2VuIGFuZCB0aGVuIHdyaXRlIHRo
+ZSBkb2N1bWVudGF0aW9uLg0KMy4gVGVsbCB0aGUgd29ybGQgaXQncyBub3QgcG9zc2libGUg
+dG8gZ2V0IGl0IHdvcmtpbmcgYW5kIHRha2UgaXQgb3V0Lg0KDQpBYm91dCB0aGUgZG9jdW1l
+bnRhdGlvbjogRm9yIHRoZSBmb2xsb3dpbmcgbmV3IGZlYXR1cmVzIEknbSBtaXNzaW5nIGEg
+d29ya2luZyBkb2N1bWVudGF0aW9uOg0KDQotIEdyb3VwIE1hbmFnZWQgc2VydmljZSBhY2Nv
+dW50DQotIEtlcmJlcm9zIEFybW9yaW5nIHdpdGggRkFTVA0KLSBMaW51eCBHUE9zIChTdGls
+bCBub3Qgd29ya2luZykNCi0gSW1wcm92ZWQgS0RDIEF1ZGl0aW5nDQoNCg0KQlRXIFRoZSBz
+b3VyY2UtY29kZSBpc3Qgbm8gZG9jdW1lbnRhdGlvbi4NCg0KDQo=
+--------------DPko6e1WK6n5RTxvFOuVyXP8
+Content-Type: application/pgp-keys; name="OpenPGP_0x52F6D4DD1BB68AB5.asc"
+Content-Disposition: attachment; filename="OpenPGP_0x52F6D4DD1BB68AB5.asc"
+Content-Description: OpenPGP public key
+Content-Transfer-Encoding: quoted-printable
 
---=20
-Thanks,
+-----BEGIN PGP PUBLIC KEY BLOCK-----
 
-Steve
+xjMEZD5zHxYJKwYBBAHaRw8BAQdAMVmXn59f0nkYv5WMsQq+KrcYCsNfaUj/WZtg
+zdF72yDNJVN0ZWZhbiBLYW5pYSA8c3RlZmFuQGthbmlhLW9ubGluZS5kZT7CiQQT
+FggAMRYhBGxP1rNZHkCiVplAgVL21N0btoq1BQJkPnNQAhsDBAsJCAcFFQgJCgsF
+FgIDAQAACgkQUvbU3Ru2irXx0QEAtwVwH3XaKI4V5K8xNBFjLCvNHZsOBiF1zXRe
+V3+ocvcA/i+HTEj2s+Xw0AdOCzTKpUetOkifYMHmRdzoRdjItaUIzjgEZD5zHxIK
+KwYBBAGXVQEFAQEHQLCpLYCfOAWfcF2Za/K3FymUQPfyIZ/eupKMlQrGRJUhAwEI
+B8J4BBgWCAAgFiEEbE/Ws1keQKJWmUCBUvbU3Ru2irUFAmQ+c1ACGwwACgkQUvbU
+3Ru2irV69QEAxwzfX/shQahBfmica2GbWv7hytmlnu/QFNP2WNDb/9MA/133+PWv
+q8PePaEGS4s2tRUd8ktDKmVYz7EnJwaCyqcH
+=3Dxppn
+-----END PGP PUBLIC KEY BLOCK-----
+
+--------------DPko6e1WK6n5RTxvFOuVyXP8--
+
+--------------PYAKII5Z5Qy9RHcT9WzbQn5w--
+
+--------------pqPJI66DsfvrltKnBLOR0mrZ
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+wnsEABYIACMWIQRsT9azWR5AolaZQIFS9tTdG7aKtQUCaEg8EgUDAAAAAAAKCRBS9tTdG7aKtfBu
+AP0SCmWxUEyfiaQPWIcHAPAIf3qhGDpzRpCg7u0ZikcM/AEAiA0ohfSVytvs4byrJ8Khg+CFbV2w
+MdrSy6uHJFsN6gY=
+=1HG2
+-----END PGP SIGNATURE-----
+
+--------------pqPJI66DsfvrltKnBLOR0mrZ--
 
