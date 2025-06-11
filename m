@@ -2,74 +2,50 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3B538AD59F2
-	for <lists+samba-technical@lfdr.de>; Wed, 11 Jun 2025 17:13:05 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A2E10AD61F4
+	for <lists+samba-technical@lfdr.de>; Wed, 11 Jun 2025 23:58:14 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=5d4rQ7j/tpr5QKroSCDl0E2qZSLxiAsShxNtEN6jKek=; b=N6yDXWz457M4D6qwFQpdxAMy7C
-	MLQG64r+FVZGHzgkAyA1eUjgwIJKMDSQIOo6gPfhn3Pe1DojhcJrhN9bGzSJzz/QXobSlz3+STw0s
-	ymbPd4l5czzE0lCLGRZCgUvrYxHDYhGkrNpoOenvaYyreLa/yVBlEWzsdLcmKJzyasBAWQLlTzhsM
-	HL+ySF6URCY5DgNS3YsU3lGdrn/dNGt+0RrnmY5zYLtDWqBgMN1RQDb2FZz+DlA4XTYeEm/hkVOAC
-	MwdyreVdN7Koh8uPJt4WohL9kEdXxoBi6RIc/BV2tIAyfdZMWwfgreTQxtn37sqXTYxeGQoWkDe7c
-	keCVpW6w==;
-Received: from ip6-localhost ([::1]:54420 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=0PIRnGNf19sOt2olNzTzCCAYfSLB/1mhv7xShvTB39s=; b=depbkWo1lk4Cw1MJZeNwCvel6d
+	fpy5e4j2Bt089icwF/uTW+MsebOlYVXApo7ukJe/blMsdFmifsjdDujL1EXDxn/9qzkA9fw+N+g0R
+	rxkkyf3//REDy/Wn1KPcS9SdmD2i/m8k1xORYbmzYczvdCq9C8dU5JsFYyeloGNR0hz9UZM1lSi41
+	8YNPzH6+HEJcAW6ymbOtYZd+ocVnD3koC3bBIWvjNY+vOE0v3hSblPzekNBkLJFVTszMd4WqvuJvJ
+	+TbgB4KHsoYPX42IPh+dP+PjaALuB7Fmk6XMQbc+nt8cFu5zYL3dQjVbAe7qTwOaJJByANnZEj0qn
+	wl2WS60Q==;
+Received: from ip6-localhost ([::1]:31636 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1uPN7p-0070tc-5u; Wed, 11 Jun 2025 15:12:25 +0000
-Received: from mail-lj1-x234.google.com ([2a00:1450:4864:20::234]:52553) 
+	id 1uPTS4-0071eL-GM; Wed, 11 Jun 2025 21:57:44 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:24434) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uPN7k-0070tV-KL
- for samba-technical@lists.samba.org; Wed, 11 Jun 2025 15:12:23 +0000
-Received: by mail-lj1-x234.google.com with SMTP id
- 38308e7fff4ca-32ae3e94e57so45688811fa.1
- for <samba-technical@lists.samba.org>; Wed, 11 Jun 2025 08:12:20 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1749654739; x=1750259539; darn=lists.samba.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=5d4rQ7j/tpr5QKroSCDl0E2qZSLxiAsShxNtEN6jKek=;
- b=XvRzBjVIO9ip2O6F7fNL4RzC2jfo2KTcm4tiNG6zEMEzcFMVn1RUm+sJ9TPlBQ/KlJ
- k5axkqmcIpWKC4cXjK13y0sf9DQfLD0zQNzlOfxHyZYlvWmgDPyvthual3h+tF+9ndZz
- LrmbO9OcSIZfG9B4kpjuoeE5cIBvEt2R5MRp/ZADPhWWdiEaGQ7X/CKFeZ0wwfYY1Zu8
- cChAgjFeTNYifJIryJkEydMaTBQdWCFus3gWl8FPC6LcqqBrrY25YStLig4+W4Tejapt
- vTyPxns+q1Bf6DvMz4kzEcXIk16gxO+Vv615IsBDYFSwkHLsJqUyxGqhQAAbvO4WAO0v
- 2htQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749654739; x=1750259539;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=5d4rQ7j/tpr5QKroSCDl0E2qZSLxiAsShxNtEN6jKek=;
- b=U5emF/VA90ZFmkbPawzLLpO4F6hoy385VOZTVUpVZ+e7UsKd6PkpRbOQKFajuRL2lX
- nPJN+nk6afh1+HKt/O9JeF+vG4YFgoVETWaw4G4alOfCW0RSvYWXAKUnd7rp7I/yy+uu
- oIUd9xaz73zS4O32uRqvLWMKhsOuYFuGhR0CIFy/M/YRC3IUUZTSyKa/nBYDjkKUlRMr
- fxBNkBDaA84J/1GNIL5JlkLjqQlmXL/Sm1n4zyXZejPF0H+O6i8GGXCt5kXgZVxj+h42
- y5oAdlsikyeRudaX+TvkGpFS50ThobFUovSuHz4axUG/NcOOrAGYRsQ7GqlUO+BRN02w
- GTIg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUyt7aXoezqe7GDb9vezRX6t8JFRETVy04knUqbjA/icHIQ0ywGk+UxQA2TdXctIFAWcf1DXKmB737NusuB3cI=@lists.samba.org
-X-Gm-Message-State: AOJu0Yxo/PAMiIDpgLCpII3e41+uAtSvD4AqRwjQHF/bWlTE6fIrz65a
- yUURFxrELhKB5LxPPuKaqzupYoQdcKvc7wbvgRlZ7eJ9MfxvRPmr2D9kgo8dk2vnnPSrk2AWkNn
- SJJrG8/4Aexs/VeW2yV28bGs1ncFh1nY=
-X-Gm-Gg: ASbGncsCHQYCRQDSaaQCwW8i25SNIxdzY8YLaCf4ozRx2aRZppZO51W2d/4QzMVfwQr
- sBMFC69KticQ8El3Pj21BTOoTi3CiBce6bLqg4v8NgySEl7EkP5p6fpVkHV/Cc1oqTWSR799cJE
- 1AYyPApk4FZ1WSp+GcJy5FYWKdsgw3nkl3scUJeYNsCPys2Modf3rfDjB8QYS10XAT+aPAKBtal
- xFTWg==
-X-Google-Smtp-Source: AGHT+IFszMwNbQOCxLYs447Esu6qG70KcmNWlNBnyPZ1yAO4cpvg7wgpGE8lTuKNZIyYQGWkQcLuCCxfOrwW4HkGyK4=
-X-Received: by 2002:a05:651c:1548:b0:32a:710f:5a0 with SMTP id
- 38308e7fff4ca-32b222c7d03mr10075481fa.11.1749654738677; Wed, 11 Jun 2025
- 08:12:18 -0700 (PDT)
+ (Exim) id 1uPTS0-0071eE-C6
+ for samba-technical@lists.samba.org; Wed, 11 Jun 2025 21:57:42 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=From:To:Date:Message-ID:CC;
+ bh=0PIRnGNf19sOt2olNzTzCCAYfSLB/1mhv7xShvTB39s=; b=cUzylHl9ucs9exzNa/Jb9sVCMi
+ kjrqJwTt1VisdFG7/fVlSCir3zatyOeFlMMrEr2OCJJeD+48AbKqKtNlcEicq2EAMiFf2B/bXQmo9
+ N8PpR7vuBzj/lsVDZTYFF/hK9UQCFBxBFpF44QA3+dQ605blknEaKXMXQW0UTCNzAlnlzT7AeuNl8
+ VBM0ELOFLA8E+Mjgrmx3DBHEct33foUxdU8i8SPCIDGZVr3fFJO4BOuLw6ZopTIcYYOa3e6BtF1Ze
+ aUA8J9WplTdwOTnEjm1GfvqWZCDFy8tt7KUNvU16cfsR3IoGkWUXDcEVgRNh26LROXZ9aWtLuQd7W
+ Nm2W/7Tz6nziS8Tm92u0xgwo3dNLewB0vwpPKegawJ/WO1vHq09sKyl6ui+CWYFPhgBRT1tihwKUS
+ Iwkj93aSf1kxPXoOpiFv8XjzaPtKM+ILVgl/aCweFy9/XDpvpWhMyN5bK1UA/3Ys0aee362PcAFo1
+ dt6AT9jgLKW16KrKcDChjtBQ;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1uPTRz-00ADAH-0w for samba-technical@lists.samba.org;
+ Wed, 11 Jun 2025 21:57:39 +0000
+Message-ID: <5918664e-54cd-42e7-a872-659f63604b17@samba.org>
+Date: Thu, 12 Jun 2025 09:57:34 +1200
 MIME-Version: 1.0
-References: <20250611112902.60071-1-bharathsm@microsoft.com>
-In-Reply-To: <20250611112902.60071-1-bharathsm@microsoft.com>
-Date: Wed, 11 Jun 2025 10:12:07 -0500
-X-Gm-Features: AX0GCFtw4ZL5H3ESFLIgEc4QBM2Y_lSXiLUunkjaEMIXSJz4XxyRURpq4BmwYyc
-Message-ID: <CAH2r5munktDK1VstQRZ6VcRWyYMasHnR53VM+3i=cz1JYpcpaA@mail.gmail.com>
-Subject: Re: [PATCH] smb: improve directory cache reuse for readdir operations
-To: Bharath SM <bharathsm.hsk@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: Authentication Policies in Sambs 4.22
+To: samba-technical@lists.samba.org
+References: <e7ab3d5b-bc7d-4ac7-b9ac-da587c9e4fd2@kania-online.de>
+Content-Language: en-US
+In-Reply-To: <e7ab3d5b-bc7d-4ac7-b9ac-da587c9e4fd2@kania-online.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -83,190 +59,43 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
-Cc: pc@manguebit.com, linux-cifs@vger.kernel.org, sprasad@microsoft.com,
- samba-technical <samba-technical@lists.samba.org>,
- Bharath SM <bharathsm@microsoft.com>, paul@darkrain42.org
+From: Jennifer Sutton via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jennifer Sutton <jsutton@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-merged this updated patch into cifs-2.6.git for-next, running xfstests
-on it now.
+On 11/06/25 2:07 am, Stefan Kania via samba-technical wrote:
+> 
+> I now had the time to (again) test authentication-policies and silos. 
+> It's still NOT working. In LDAP I see the same entries as I see when 
+> configuring policies and silos in Windows but there it's working.
+> 
+> I think there are only three possibilities left:
+> 
+> 1. YOU as developer of the function, write a good working documentation. 
+> Test the documentation with Samba DCs and Windows clients! That's by the 
+> way I expect for ANY new function.
+> 2. Fix it if it's broken and then write the documentation.
+> 3. Tell the world it's not possible to get it working and take it out.
+> 
+> About the documentation: For the following new features I'm missing a 
+> working documentation:
+> 
+> - Group Managed service account
+> - Kerberos Armoring with FAST
+> - Linux GPOs (Still not working)
+> - Improved KDC Auditing
+> 
+> 
+> BTW The source-code ist no documentation.
+> 
+> 
 
-Looks very promising, and we have a couple more dir lease
-optimizations to try out that should also help a lot with perf, and
-reducing load on servers by sending fewer metadata ops over the wire
+We do our best to make things work identically to Windows, but we can 
+only fix problems that we can reproduce. If you could provide me 
+(off‐list) with a lab domain backup exhibiting your problem, that would 
+be very helpful.
 
-On Wed, Jun 11, 2025 at 6:29=E2=80=AFAM Bharath SM <bharathsm.hsk@gmail.com=
-> wrote:
->
-> Currently, cached directory contents were not reused across subsequent
-> 'ls' operations because the cache validity check relied on comparing
-> the ctx pointer, which changes with each readdir invocation. As a
-> result, the cached dir entries was not marked as valid and the cache was
-> not utilized for subsequent 'ls' operations.
->
-> This change uses the file pointer, which remains consistent across all
-> readdir calls for a given directory instance, to associate and validate
-> the cache. As a result, cached directory contents can now be
-> correctly reused, improving performance for repeated directory listings.
->
-> Performance gains with local windows SMB server:
->
-> Without the patch and default actimeo=3D1:
->  1000 directory enumeration operations on dir with 10k files took 135.0s
->
-> With this patch and actimeo=3D0:
->  1000 directory enumeration operations on dir with 10k files took just 5.=
-1s
->
-> Signed-off-by: Bharath SM <bharathsm@microsoft.com>
-> ---
->  fs/smb/client/cached_dir.h |  8 ++++----
->  fs/smb/client/readdir.c    | 28 +++++++++++++++-------------
->  2 files changed, 19 insertions(+), 17 deletions(-)
->
-> diff --git a/fs/smb/client/cached_dir.h b/fs/smb/client/cached_dir.h
-> index 1dfe79d947a6..bc8a812ff95f 100644
-> --- a/fs/smb/client/cached_dir.h
-> +++ b/fs/smb/client/cached_dir.h
-> @@ -21,10 +21,10 @@ struct cached_dirent {
->  struct cached_dirents {
->         bool is_valid:1;
->         bool is_failed:1;
-> -       struct dir_context *ctx; /*
-> -                                 * Only used to make sure we only take e=
-ntries
-> -                                 * from a single context. Never derefere=
-nced.
-> -                                 */
-> +       struct file *file; /*
-> +                           * Used to associate the cache with a single
-> +                           * open file instance.
-> +                           */
->         struct mutex de_mutex;
->         int pos;                 /* Expected ctx->pos */
->         struct list_head entries;
-> diff --git a/fs/smb/client/readdir.c b/fs/smb/client/readdir.c
-> index f9f11cbf89be..ba0193cf9033 100644
-> --- a/fs/smb/client/readdir.c
-> +++ b/fs/smb/client/readdir.c
-> @@ -851,9 +851,9 @@ static bool emit_cached_dirents(struct cached_dirents=
- *cde,
->  }
->
->  static void update_cached_dirents_count(struct cached_dirents *cde,
-> -                                       struct dir_context *ctx)
-> +                                       struct file *file)
->  {
-> -       if (cde->ctx !=3D ctx)
-> +       if (cde->file !=3D file)
->                 return;
->         if (cde->is_valid || cde->is_failed)
->                 return;
-> @@ -862,9 +862,9 @@ static void update_cached_dirents_count(struct cached=
-_dirents *cde,
->  }
->
->  static void finished_cached_dirents_count(struct cached_dirents *cde,
-> -                                       struct dir_context *ctx)
-> +                                       struct dir_context *ctx, struct f=
-ile *file)
->  {
-> -       if (cde->ctx !=3D ctx)
-> +       if (cde->file !=3D file)
->                 return;
->         if (cde->is_valid || cde->is_failed)
->                 return;
-> @@ -877,11 +877,12 @@ static void finished_cached_dirents_count(struct ca=
-ched_dirents *cde,
->  static void add_cached_dirent(struct cached_dirents *cde,
->                               struct dir_context *ctx,
->                               const char *name, int namelen,
-> -                             struct cifs_fattr *fattr)
-> +                             struct cifs_fattr *fattr,
-> +                                 struct file *file)
->  {
->         struct cached_dirent *de;
->
-> -       if (cde->ctx !=3D ctx)
-> +       if (cde->file !=3D file)
->                 return;
->         if (cde->is_valid || cde->is_failed)
->                 return;
-> @@ -911,7 +912,8 @@ static void add_cached_dirent(struct cached_dirents *=
-cde,
->  static bool cifs_dir_emit(struct dir_context *ctx,
->                           const char *name, int namelen,
->                           struct cifs_fattr *fattr,
-> -                         struct cached_fid *cfid)
-> +                         struct cached_fid *cfid,
-> +                         struct file *file)
->  {
->         bool rc;
->         ino_t ino =3D cifs_uniqueid_to_ino_t(fattr->cf_uniqueid);
-> @@ -923,7 +925,7 @@ static bool cifs_dir_emit(struct dir_context *ctx,
->         if (cfid) {
->                 mutex_lock(&cfid->dirents.de_mutex);
->                 add_cached_dirent(&cfid->dirents, ctx, name, namelen,
-> -                                 fattr);
-> +                                 fattr, file);
->                 mutex_unlock(&cfid->dirents.de_mutex);
->         }
->
-> @@ -1023,7 +1025,7 @@ static int cifs_filldir(char *find_entry, struct fi=
-le *file,
->         cifs_prime_dcache(file_dentry(file), &name, &fattr);
->
->         return !cifs_dir_emit(ctx, name.name, name.len,
-> -                             &fattr, cfid);
-> +                             &fattr, cfid, file);
->  }
->
->
-> @@ -1074,8 +1076,8 @@ int cifs_readdir(struct file *file, struct dir_cont=
-ext *ctx)
->          * we need to initialize scanning and storing the
->          * directory content.
->          */
-> -       if (ctx->pos =3D=3D 0 && cfid->dirents.ctx =3D=3D NULL) {
-> -               cfid->dirents.ctx =3D ctx;
-> +       if (ctx->pos =3D=3D 0 && cfid->dirents.file =3D=3D NULL) {
-> +               cfid->dirents.file =3D file;
->                 cfid->dirents.pos =3D 2;
->         }
->         /*
-> @@ -1143,7 +1145,7 @@ int cifs_readdir(struct file *file, struct dir_cont=
-ext *ctx)
->         } else {
->                 if (cfid) {
->                         mutex_lock(&cfid->dirents.de_mutex);
-> -                       finished_cached_dirents_count(&cfid->dirents, ctx=
-);
-> +                       finished_cached_dirents_count(&cfid->dirents, ctx=
-, file);
->                         mutex_unlock(&cfid->dirents.de_mutex);
->                 }
->                 cifs_dbg(FYI, "Could not find entry\n");
-> @@ -1184,7 +1186,7 @@ int cifs_readdir(struct file *file, struct dir_cont=
-ext *ctx)
->                 ctx->pos++;
->                 if (cfid) {
->                         mutex_lock(&cfid->dirents.de_mutex);
-> -                       update_cached_dirents_count(&cfid->dirents, ctx);
-> +                       update_cached_dirents_count(&cfid->dirents, file)=
-;
->                         mutex_unlock(&cfid->dirents.de_mutex);
->                 }
->
-> --
-> 2.43.0
->
-
-
---=20
-Thanks,
-
-Steve
+Cheers,
+Jennifer (she/her)
 
