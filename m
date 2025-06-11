@@ -2,59 +2,70 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3071FAD3B12
-	for <lists+samba-technical@lfdr.de>; Tue, 10 Jun 2025 16:24:28 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D8BD0AD47E2
+	for <lists+samba-technical@lfdr.de>; Wed, 11 Jun 2025 03:32:16 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
-	bh=1SPAyIZ1Lk9M4AuVLSIHmuPrSLWmT8GABw+Ss4e+sF0=; b=wWI6ZyAvCIw3V4XwfqSZeiGtQh
-	iSKxDIi8ym1gQrxB2nzY9JCZNmY189A6IehL2K6QIqQBvE/0N5hJXRo3k6DsmmQTg4bxePsabm3gh
-	FJqD891OhWAYOUalKHomKUt/oryQpUaeNLdeBLzh+CnJ+RNAiAjEVofvMyhMSFaTPM+6TLaS2D5d7
-	aaLkr7wQk76EWFFq53Tk3c/TafDINydyI7ODJ/oECisD5L4Xr8o9jMb7nFfhUEjJvRO4ERUKR7I8Y
-	x8Xa54kEnvJisfDC5HTVbaFHcqyWbCiFuXAjLwdyYvEd75PFqiyMh/rJuP/hBKpxpJQO5wz516stI
-	s2YSGWRw==;
-Received: from ip6-localhost ([::1]:54712 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=vraTKiNI8477CY05dFluHmdT9xg40IS+eMCdDurmLVQ=; b=0ImPsZSa2ecYUsAvmIFAjPNOgJ
+	gZhj4oGhDkdYVt5gfSMOun+57x+oM7p1anAjV6vM+y3svwFqQ1jTMH1Rfp1Kj3S5XC+kjiXOo/Np5
+	1vUr5sf/cXY/JOsFrqkRuq7JQ6uNQKpVZk+FgDPLhDFQ2xSrnmi1NRE4HtpbmWsPl1Rl59O+o+pzo
+	SR/QFMgIi3fQ/znqGQz7lcRdSKmO/1LfzKPoYhHaYmGOk819xh4xLo9yy4IH2Dov9aeCI2QLIDJhq
+	USP4pT/WtcPfTXJJVN2ropEmltf7Aqeaq0YMZqB+5lxL065HwvjvQteXoryHKadpmfVb3Cjja0Y51
+	bvF2bYIw==;
+Received: from ip6-localhost ([::1]:40922 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1uOztB-006xIs-6L; Tue, 10 Jun 2025 14:23:45 +0000
-Received: from plasma4.jpberlin.de ([80.241.57.33]:34371) 
+	id 1uPAJX-006y7S-VL; Wed, 11 Jun 2025 01:31:40 +0000
+Received: from mail-lj1-x233.google.com ([2a00:1450:4864:20::233]:54302) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uOzt6-006xIl-3b
- for samba-technical@lists.samba.org; Tue, 10 Jun 2025 14:23:43 +0000
-Received: from spamfilter04.heinlein-hosting.de
- (spamfilter04.heinlein-hosting.de [80.241.56.122])
- by plasma.jpberlin.de (Postfix) with ESMTP id 00527C0F57;
- Tue, 10 Jun 2025 16:07:25 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kania-online.de;
- s=MBO0001; t=1749564446;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:mime-version:mime-version:content-type:content-type:autocrypt:autocrypt;
- bh=1SPAyIZ1Lk9M4AuVLSIHmuPrSLWmT8GABw+Ss4e+sF0=;
- b=ncvdAhADtzh+xm7NK1VO9k8mYbCjNdzuxjH1Qej6ZebwwdJPK0Z/99g+fBmp0jG1juVdKe
- mfFvdb49jo5yl+7q0KP0QXnwvgYtdZCeZQpfYROg9lkB55yXmB3UuprqgHg2q9qrhPiXwN
- VJA0L4WF4vP9Zfl6XegY9C1/PdOxNtZRUAWIN0Z/PsZDqtX7ry3j90FgkA/G/HnKZWcY0M
- BME2pkUUVvNaVHd3UMVGMJgfYszVSXVbctrLSvXvfGAGSXY3ag6MrmEb49/YixFvHl41ou
- EGllxdwCiMVXCdzXPzExZAraOrZP+JEUV2HcGGl+C0t25ff6YreQI65mxwB3jw==
-Received: from plasma.jpberlin.de ([80.241.56.68])
- by spamfilter04.heinlein-hosting.de (spamfilter04.heinlein-hosting.de
- [80.241.56.122]) (amavisd-new, port 10030)
- with ESMTP id 43rQerOvMTsw; Tue, 10 Jun 2025 16:07:17 +0200 (CEST)
-Received: from [192.168.123.203] (p5b240cb2.dip0.t-ipconnect.de [91.36.12.178])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (Client did not present a certificate)
- (Authenticated sender: stefan@kania-online.de)
- by plasma.jpberlin.de (Postfix) with ESMTPSA id 2FE95C14AC
- for <samba-technical@lists.samba.org>; Tue, 10 Jun 2025 16:07:15 +0200 (CEST)
-Message-ID: <e7ab3d5b-bc7d-4ac7-b9ac-da587c9e4fd2@kania-online.de>
-Date: Tue, 10 Jun 2025 16:07:14 +0200
+ (Exim) id 1uPAJT-006y68-CF
+ for samba-technical@lists.samba.org; Wed, 11 Jun 2025 01:31:37 +0000
+Received: by mail-lj1-x233.google.com with SMTP id
+ 38308e7fff4ca-32a6a91f0easo22541321fa.0
+ for <samba-technical@lists.samba.org>; Tue, 10 Jun 2025 18:31:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1749605494; x=1750210294; darn=lists.samba.org;
+ h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=vraTKiNI8477CY05dFluHmdT9xg40IS+eMCdDurmLVQ=;
+ b=JjtZhYiMQl6ylBSwNnUVyhpIXooNg453jMcA1BuVJLHyUQzDoDzl5MkYYVL5PSJyXE
+ bfQwq1iKwvZI3W6bkvACFNapjYm1G8Vu0xQkV0TXN5BYr9VoDAmBL14o84W8dapJBfR1
+ KVl0YKfoAqIBoQn0rnYDPkMRWS6iCjNQ0649aXWSoon0IpeZZgNnuSZtaoi39d/eUQ7E
+ pwfm4hRsmOytgPkBEnvxg91HatQgsQd7yky08RVLJttFEy1gwty/GfF3gV3w3paMJOA6
+ zSrUlQEw669aiGLkQ7/ts/RnClRQ2lTDNSdjrPIU8BVsMBiowh/WiHEL5sVGfTDNvqme
+ pZqQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1749605494; x=1750210294;
+ h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=vraTKiNI8477CY05dFluHmdT9xg40IS+eMCdDurmLVQ=;
+ b=iXcwdeICkIZ8/n1hLo7kpbEtUVlOnelguWKSdUAjmoqxtAicl4NFpWNucWDXDC0DOv
+ /PrB775UM9a8Z7XDY5e4b3KWOaTMDRpDdyeMYD5zBnImdy5QwoO07/0QlkIyNE1+H1Uy
+ gSDBer65+3uX41lr6UIQJxlV9BZ8DtJ9SKcu7OXYkKkdnx3NVTNboh+gI23EqhkemI8C
+ rRdxrt0fMYQW42BmjhI1yZQO9PcT6y3QCpIjXTkZCm17K6m/E63PhOXOiZa2V1DoZC8y
+ bCyl6Xr53TO7O+FXXEpQpKkcmeV9y1SQzn9BuOFat1ixOUQo+vyzGHGQnDMbtwai4Svc
+ ieFQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVDE9MVYhGtfaSxi3qlm/53d22mNmYVjbVmuZN5LVM08tl+pypHLTtRXLSMDnvs3SHdckAAy9YSu8+0dGQsd68=@lists.samba.org
+X-Gm-Message-State: AOJu0YxKfTgHwF4QZiXT7n3jQPvpTWoMc1L+npxEFT20sTjhJJSz8g68
+ p9WUNAS1YL0aldnaOclpJI3QahrU3p4yaZhaGbPZmf2OoN9+s7r46t+4Z9GIA1wE1tUx4GppekV
+ 6iliZXnCDy3sLE8rWgZkv7o0lwgegRGg=
+X-Gm-Gg: ASbGncvlLGduQDFR5Git0j8uqVD7m+reyiKbMyMlLp9/ENXugpu56hjCr272WVYtV39
+ TCXeDvx8c36FRggn8RmGlM2mt2Vyi4fm/GId5p9gV2Fu6AZmXeRV+ZH9FfACcRMLi55uY5dAxUH
+ D/TWPPpmejfwv7Ckdldhsv34rpWZ+jYWI9uM61RQJhfMtnnxrZkzCudSLTPvykllJS9aqvEnZ0e
+ NJQ0w==
+X-Google-Smtp-Source: AGHT+IE4rW7D/o8QA3IDLlv5DmCcDPwX0EnbcKt6buiNsiHyuUDZPtlMGLIrt5C7qvE23puW3c5nLgzUJcd/ebf9X7I=
+X-Received: by 2002:a2e:bc11:0:b0:32a:8bf4:3a81 with SMTP id
+ 38308e7fff4ca-32b22285b8dmr2578301fa.5.1749605493624; Tue, 10 Jun 2025
+ 18:31:33 -0700 (PDT)
 MIME-Version: 1.0
-To: samba-technical@lists.samba.org
-Content-Language: en-US, de-DE
-Organization: Stefan Kania
-Subject: Authentication Policies in Sambs 4.22
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------pqPJI66DsfvrltKnBLOR0mrZ"
+Date: Tue, 10 Jun 2025 20:31:22 -0500
+X-Gm-Features: AX0GCFtn3fjSd3bm0PUue66pR4M9D8LAwg1yDVZX5nsDQ7DwECVdOQclinbY2h4
+Message-ID: <CAH2r5mt_wPk99ns95oV1tjo62VEmw+zCkoxY=8otNNhV=pnX1A@mail.gmail.com>
+Subject: [ANNOUNCE] cifs-utils release 7.4
+To: CIFS <linux-cifs@vger.kernel.org>, 
+ samba-technical <samba-technical@lists.samba.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -68,79 +79,47 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Stefan Kania via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Stefan Kania <stefan@kania-online.de>
+From: Steve French via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Steve French <smfrench@gmail.com>
+Cc: LKML <linux-kernel@vger.kernel.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------pqPJI66DsfvrltKnBLOR0mrZ
-Content-Type: multipart/mixed; boundary="------------PYAKII5Z5Qy9RHcT9WzbQn5w";
- protected-headers="v1"
-From: Stefan Kania <stefan@kania-online.de>
-To: samba-technical@lists.samba.org
-Message-ID: <e7ab3d5b-bc7d-4ac7-b9ac-da587c9e4fd2@kania-online.de>
-Subject: Authentication Policies in Sambs 4.22
+A new update, version 7.4, of cifs-utils has been released today.
+Users of cifs-utils version 7.3 on older kernels are encouraged to
+update to 7.4 since it includes a fix for a mount problem with version
+7.3 of cifs-utils on older kernels when using namespaces.
 
---------------PYAKII5Z5Qy9RHcT9WzbQn5w
-Content-Type: multipart/mixed; boundary="------------DPko6e1WK6n5RTxvFOuVyXP8"
+Links:
 
---------------DPko6e1WK6n5RTxvFOuVyXP8
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
+webpage: https://wiki.samba.org/index.php/LinuxCIFS_utils
+tarball: https://download.samba.org/pub/linux-cifs/cifs-utils/
+git: git://git.samba.org/cifs-utils.git
+gitweb: http://git.samba.org/?p=cifs-utils.git;a=summary
 
-DQpJIG5vdyBoYWQgdGhlIHRpbWUgdG8gKGFnYWluKSB0ZXN0IGF1dGhlbnRpY2F0aW9uLXBv
-bGljaWVzIGFuZCBzaWxvcy4gSXQncyBzdGlsbCBOT1Qgd29ya2luZy4gSW4gTERBUCBJIHNl
-ZSB0aGUgc2FtZSBlbnRyaWVzIGFzIEkgc2VlIHdoZW4gY29uZmlndXJpbmcgcG9saWNpZXMg
-YW5kIHNpbG9zIGluIFdpbmRvd3MgYnV0IHRoZXJlIGl0J3Mgd29ya2luZy4NCg0KSSB0aGlu
-ayB0aGVyZSBhcmUgb25seSB0aHJlZSBwb3NzaWJpbGl0aWVzIGxlZnQ6DQoNCjEuIFlPVSBh
-cyBkZXZlbG9wZXIgb2YgdGhlIGZ1bmN0aW9uLCB3cml0ZSBhIGdvb2Qgd29ya2luZyBkb2N1
-bWVudGF0aW9uLiBUZXN0IHRoZSBkb2N1bWVudGF0aW9uIHdpdGggU2FtYmEgRENzIGFuZCBX
-aW5kb3dzIGNsaWVudHMhIFRoYXQncyBieSB0aGUgd2F5IEkgZXhwZWN0IGZvciBBTlkgbmV3
-IGZ1bmN0aW9uLg0KMi4gRml4IGl0IGlmIGl0J3MgYnJva2VuIGFuZCB0aGVuIHdyaXRlIHRo
-ZSBkb2N1bWVudGF0aW9uLg0KMy4gVGVsbCB0aGUgd29ybGQgaXQncyBub3QgcG9zc2libGUg
-dG8gZ2V0IGl0IHdvcmtpbmcgYW5kIHRha2UgaXQgb3V0Lg0KDQpBYm91dCB0aGUgZG9jdW1l
-bnRhdGlvbjogRm9yIHRoZSBmb2xsb3dpbmcgbmV3IGZlYXR1cmVzIEknbSBtaXNzaW5nIGEg
-d29ya2luZyBkb2N1bWVudGF0aW9uOg0KDQotIEdyb3VwIE1hbmFnZWQgc2VydmljZSBhY2Nv
-dW50DQotIEtlcmJlcm9zIEFybW9yaW5nIHdpdGggRkFTVA0KLSBMaW51eCBHUE9zIChTdGls
-bCBub3Qgd29ya2luZykNCi0gSW1wcm92ZWQgS0RDIEF1ZGl0aW5nDQoNCg0KQlRXIFRoZSBz
-b3VyY2UtY29kZSBpc3Qgbm8gZG9jdW1lbnRhdGlvbi4NCg0KDQo=
---------------DPko6e1WK6n5RTxvFOuVyXP8
-Content-Type: application/pgp-keys; name="OpenPGP_0x52F6D4DD1BB68AB5.asc"
-Content-Disposition: attachment; filename="OpenPGP_0x52F6D4DD1BB68AB5.asc"
-Content-Description: OpenPGP public key
-Content-Transfer-Encoding: quoted-printable
 
------BEGIN PGP PUBLIC KEY BLOCK-----
+Detailed list of changes since version 7.3 was released
+----------------------------------------------------------------
+Enzo Matsumiya (1):
+      mount.cifs: retry mount on -EINPROGRESS
 
-xjMEZD5zHxYJKwYBBAHaRw8BAQdAMVmXn59f0nkYv5WMsQq+KrcYCsNfaUj/WZtg
-zdF72yDNJVN0ZWZhbiBLYW5pYSA8c3RlZmFuQGthbmlhLW9ubGluZS5kZT7CiQQT
-FggAMRYhBGxP1rNZHkCiVplAgVL21N0btoq1BQJkPnNQAhsDBAsJCAcFFQgJCgsF
-FgIDAQAACgkQUvbU3Ru2irXx0QEAtwVwH3XaKI4V5K8xNBFjLCvNHZsOBiF1zXRe
-V3+ocvcA/i+HTEj2s+Xw0AdOCzTKpUetOkifYMHmRdzoRdjItaUIzjgEZD5zHxIK
-KwYBBAGXVQEFAQEHQLCpLYCfOAWfcF2Za/K3FymUQPfyIZ/eupKMlQrGRJUhAwEI
-B8J4BBgWCAAgFiEEbE/Ws1keQKJWmUCBUvbU3Ru2irUFAmQ+c1ACGwwACgkQUvbU
-3Ru2irV69QEAxwzfX/shQahBfmica2GbWv7hytmlnu/QFNP2WNDb/9MA/133+PWv
-q8PePaEGS4s2tRUd8ktDKmVYz7EnJwaCyqcH
-=3Dxppn
------END PGP PUBLIC KEY BLOCK-----
+Henrique Carvalho (1):
+      cifs.upcall: correctly treat UPTARGET_UNSPECIFIED as UPTARGET_APP
 
---------------DPko6e1WK6n5RTxvFOuVyXP8--
+Paulo Alcantara (1):
+      cifs.upcall: fix memory leaks in check_service_ticket_exits()
 
---------------PYAKII5Z5Qy9RHcT9WzbQn5w--
+Pavel Shilovsky (1):
+      cifs-utils: bump version to 7.4
 
---------------pqPJI66DsfvrltKnBLOR0mrZ
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature.asc"
+Z. Liu (2):
+      getcifsacl, setcifsacl: use <libgen.h> for basename
+      cifscreds: use <libgen.h> for basename
 
------BEGIN PGP SIGNATURE-----
 
-wnsEABYIACMWIQRsT9azWR5AolaZQIFS9tTdG7aKtQUCaEg8EgUDAAAAAAAKCRBS9tTdG7aKtfBu
-AP0SCmWxUEyfiaQPWIcHAPAIf3qhGDpzRpCg7u0ZikcM/AEAiA0ohfSVytvs4byrJ8Khg+CFbV2w
-MdrSy6uHJFsN6gY=
-=1HG2
------END PGP SIGNATURE-----
 
---------------pqPJI66DsfvrltKnBLOR0mrZ--
+-- 
+Thanks,
+
+Steve
 
