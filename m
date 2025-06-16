@@ -2,46 +2,47 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id D1DC8ADC452
-	for <lists+samba-technical@lfdr.de>; Tue, 17 Jun 2025 10:14:22 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9EA79ADC43E
+	for <lists+samba-technical@lfdr.de>; Tue, 17 Jun 2025 10:13:12 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=alq/Pjol9hRHmsoK4W/c2CtmXHL3bnmjTRKmw+CMrtk=; b=DM+bk9IqImMIF8w9EOf+UzDRaH
-	hE+c7EVVPVCLCWdlkVWdms8KtNxQddPlZ1nKv4QW5+ISHfVE6lmLI5z1rW0hkw1HOIlznLgBjAaF0
-	tyowT6C4nAulHfW96TQlzQuS9rMcidfQxuUfKDuDnaz7xLi3qxoPbQACFT7prdFwoMYm4CqX9wJ1V
-	WuI1xUVUTZYw6pOgIL+AVTTunSrau03f10mAxWF/265RU2tDnIAwAXJUUf0rRPuqZsHJniUjfcBDZ
-	YYXM0J0IG/ck5t96VOpl4AzGibI/SmYP+b2vlObGrmzXOs7bNafREl/aWKB+wnMGk3ArYHFDuxfxh
-	QraJzKeQ==;
-Received: from ip6-localhost ([::1]:56396 helo=hr1.samba.org) 
+	bh=WbjyFa1lEmpjeO0fSo1gdi8l5MsWaLjra/L669ygfQY=; b=ayxgTi8ZuPCWv3RZ6h9iY/1u02
+	51bBCDOn9AN7Hbv7j3IflQRtzSYoK9mV7qduVMGfLKVWkcO28AFGUApprMsuC6nvsSTmVYt+fBXCs
+	onpFOOOAHn/J1oDYd5tQtg5SysYyPf9VioDvGMeLGVRfPjyplpVALKRx8Rn4PNiIki4gkvaHJTZse
+	zbyjafzBKJW+WltZC4hiUWIQyC4JszWvuvahISF8E7rxiQ14OWt3cpZnRobdxMepUHl2t/hNDSr1Y
+	B75r+H3F1CWq6xU4ulBGjHrHqfG2B6q/X9YWNpP/ybeOLJZzNHD5VZLQxEsjUVhJbLuFpZYDm0rui
+	P7opz0og==;
+Received: from ip6-localhost ([::1]:20718 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1uRRSQ-007HGE-JG; Tue, 17 Jun 2025 08:14:14 +0000
-Received: from zeniv.linux.org.uk ([2a03:a000:7:0:5054:ff:fe1c:15ff]:36210) 
+	id 1uRRQV-007GqB-CL; Tue, 17 Jun 2025 08:12:15 +0000
+Received: from sea.source.kernel.org ([172.234.252.31]:40128) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uRGxW-007Fjo-Hl
- for samba-technical@lists.samba.org; Mon, 16 Jun 2025 21:01:40 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=linux.org.uk; s=zeniv-20220401; h=Sender:In-Reply-To:Content-Type:
- MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:Reply-To:
- Content-Transfer-Encoding:Content-ID:Content-Description;
- bh=alq/Pjol9hRHmsoK4W/c2CtmXHL3bnmjTRKmw+CMrtk=; b=A7p+Acvn5uycXyz3kLo38iW9Ad
- D+bYigpKSwXx9Qqj1iM2cauc4vJVM5S4cn4cbXzLSyPr5aCY6CT2OVFHXSo8Ysd1LMe4PIHVof75s
- 4ixGU0gXpw9fxNXo/FZ31klq9ihs5qru2SnNaJuY3SsfiDVgdbRXOX9BVI2VDLVAd+vUo1oJFU8Te
- frcwrPbBPewoCrxwD5QpKNqhm3CGjwSVicr7Dykb5NZb2DUD7NyCDlrCYxIHPR3p2qtE9G2el/ykq
- A/AlxzwslpPcDC/i4wy3o5P2e7I9G86mm6pGM50kd8VFzxMarLvEuy3Rg4LaGo1AqBnz7BuHEsWZB
- PDLsSc+w==;
-Received: from viro by zeniv.linux.org.uk with local (Exim 4.98.2 #2 (Red Hat
- Linux)) id 1uRGeL-00000002Qr4-0IjJ; Mon, 16 Jun 2025 20:41:49 +0000
-Date: Mon, 16 Jun 2025 21:41:49 +0100
+ (Exim) id 1uRJ8p-007Frq-MK
+ for samba-technical@lists.samba.org; Mon, 16 Jun 2025 23:21:30 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sea.source.kernel.org (Postfix) with ESMTP id A3062447EE;
+ Mon, 16 Jun 2025 23:11:15 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 210E3C4CEEA;
+ Mon, 16 Jun 2025 23:11:12 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linux-foundation.org;
+ s=korg; t=1750115475;
+ bh=f92kylcTcgjxPjPuigrD0gWIhxIBT4jMyjAYbJx2fgU=;
+ h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+ b=ZWFIShO/XryFzSpjTSsOpPReKk7MGg3LaJS+8VXbd/Sv0l3pkMferPDaEDw5h7t/5
+ TXCAWyMhImwvLfVbY+RFN3BVnPd8HICJ3ykvMXc1pH9OWRmJr7YNN1rWZZcClmJua5
+ wc8/ODhsb5I7ekSoYglMpTbL4//+BGhwsrmpxvDU=
+Date: Mon, 16 Jun 2025 16:11:11 -0700
 To: Lorenzo Stoakes <lorenzo.stoakes@oracle.com>
 Subject: Re: [PATCH 00/10] convert the majority of file systems to mmap_prepare
-Message-ID: <20250616204149.GK1880847@ZenIV>
-References: <cover.1750099179.git.lorenzo.stoakes@oracle.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+Message-Id: <20250616161111.74e10321c4c421674f78d689@linux-foundation.org>
 In-Reply-To: <cover.1750099179.git.lorenzo.stoakes@oracle.com>
-X-Mailman-Approved-At: Tue, 17 Jun 2025 08:13:59 +0000
+References: <cover.1750099179.git.lorenzo.stoakes@oracle.com>
+X-Mailer: Sylpheed 3.8.0beta1 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
+Mime-Version: 1.0
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
+X-Mailman-Approved-At: Tue, 17 Jun 2025 08:12:12 +0000
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -55,8 +56,8 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Al Viro via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Al Viro <viro@zeniv.linux.org.uk>
+From: Andrew Morton via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andrew Morton <akpm@linux-foundation.org>
 Cc: Latchesar Ionkov <lucho@ionkov.net>, nvdimm@lists.linux.dev,
  Paulo Alcantara <pc@manguebit.org>, dri-devel@lists.freedesktop.org,
  ceph-devel@vger.kernel.org, Mike Marshall <hubcap@omnibond.com>,
@@ -68,7 +69,6 @@ Cc: Latchesar Ionkov <lucho@ionkov.net>, nvdimm@lists.linux.dev,
  Eric Van Hensbergen <ericvh@kernel.org>,
  Zhihao Cheng <chengzhihao1@huawei.com>, Christian Brauner <brauner@kernel.org>,
  linux-kernel@vger.kernel.org, linux-fsdevel@vger.kernel.org,
- Andrew Morton <akpm@linux-foundation.org>,
  Trond Myklebust <trondmy@kernel.org>, Dave Kleikamp <shaggy@kernel.org>,
  Sandeep Dhavale <dhavale@google.com>, Simona Vetter <simona@ffwll.ch>,
  linux-cifs@vger.kernel.org, linux-nilfs@vger.kernel.org,
@@ -119,25 +119,22 @@ Cc: Latchesar Ionkov <lucho@ionkov.net>, nvdimm@lists.linux.dev,
  Jeffle Xu <jefflexu@linux.alibaba.com>,
  Johannes Berg <johannes@sipsolutions.net>, Johannes Thumshirn <jth@kernel.org>,
  David Woodhouse <dwmw2@infradead.org>, linux-karma-devel@lists.sourceforge.net,
- linux-btrfs@vger.kernel.org
+ linux-btrfs@vger.kernel.org, Alexander Viro <viro@zeniv.linux.org.uk>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Mon, Jun 16, 2025 at 08:33:19PM +0100, Lorenzo Stoakes wrote:
-> REVIEWER'S NOTES
-> ================
-> 
+On Mon, 16 Jun 2025 20:33:19 +0100 Lorenzo Stoakes <lorenzo.stoakes@oracle.com> wrote:
+
 > I am basing this on the mm-new branch in Andrew's tree, so let me know if I
 > should rebase anything here. Given the mm bits touched I did think perhaps
 > we should take it through the mm tree, however it may be more sensible to
 > take it through an fs tree - let me know!
-> 
-> Apologies for the noise/churn, but there are some prerequisite steps here
-> that inform an ordering - "fs: consistently use file_has_valid_mmap_hooks()
-> helper" being especially critical, and so I put the bulk of the work in the
-> same series.
-> 
-> Let me know if there's anything I can do to make life easier here.
 
-Documentation/filesystems/porting.rst?
+It's more fs/ than mm/ purely from a footprint point of view.  But is
+there any expectation that there will be additional patches which build
+on this?
+
+I'll scoop it into mm-new for now, see what happens.
+
+Minus all the cc's.  Sorry ;)
 
