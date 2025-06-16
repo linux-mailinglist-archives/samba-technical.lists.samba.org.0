@@ -2,49 +2,46 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id A6E6BADC44E
-	for <lists+samba-technical@lfdr.de>; Tue, 17 Jun 2025 10:14:07 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D1DC8ADC452
+	for <lists+samba-technical@lfdr.de>; Tue, 17 Jun 2025 10:14:22 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=rMTsK0YsjlB18wsT75a6evHrM3XMSVJTrFI3gzXouMw=; b=TYblFD9RYrX8FzQ84/tttsbNJg
-	xwFn3XJr5Axy6ht5NCwx9d6DfAwIplVKQTsFKJJDVYbWn35lS4kp+vsg2bHrG1C5IzSAS/qMv+jpQ
-	qTZAiyj0P5LmuwfRyJ+DFPouVQx3KAoLgzwq9qdrBqm33+/IVU7h/gzcWNMRvSSRh0SVoqsVLEhSa
-	pLTcVlYluWDfXm3Wu0dd8GIExxkg2Jz93L/S7VFDOl1ACG0/RV6y9gcEz8fiaCRUREe2m4+Rba6QV
-	Xuh/igGkZduBFUPAbnPhoXgbpCm01jsZ/bij0nOc43JBuljU2Q6RhTHI3N9HBn65Y8g67HgUOC2Ls
-	1QUfYYNw==;
-Received: from ip6-localhost ([::1]:44802 helo=hr1.samba.org) 
+	bh=alq/Pjol9hRHmsoK4W/c2CtmXHL3bnmjTRKmw+CMrtk=; b=DM+bk9IqImMIF8w9EOf+UzDRaH
+	hE+c7EVVPVCLCWdlkVWdms8KtNxQddPlZ1nKv4QW5+ISHfVE6lmLI5z1rW0hkw1HOIlznLgBjAaF0
+	tyowT6C4nAulHfW96TQlzQuS9rMcidfQxuUfKDuDnaz7xLi3qxoPbQACFT7prdFwoMYm4CqX9wJ1V
+	WuI1xUVUTZYw6pOgIL+AVTTunSrau03f10mAxWF/265RU2tDnIAwAXJUUf0rRPuqZsHJniUjfcBDZ
+	YYXM0J0IG/ck5t96VOpl4AzGibI/SmYP+b2vlObGrmzXOs7bNafREl/aWKB+wnMGk3ArYHFDuxfxh
+	QraJzKeQ==;
+Received: from ip6-localhost ([::1]:56396 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1uRRS9-007HCL-H9; Tue, 17 Jun 2025 08:13:57 +0000
-Received: from casper.infradead.org ([2001:8b0:10b:1236::1]:43202) 
+	id 1uRRSQ-007HGE-JG; Tue, 17 Jun 2025 08:14:14 +0000
+Received: from zeniv.linux.org.uk ([2a03:a000:7:0:5054:ff:fe1c:15ff]:36210) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uRGr3-007FjD-0M
- for samba-technical@lists.samba.org; Mon, 16 Jun 2025 20:54:59 +0000
+ (Exim) id 1uRGxW-007Fjo-Hl
+ for samba-technical@lists.samba.org; Mon, 16 Jun 2025 21:01:40 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=casper.20170209; h=In-Reply-To:Content-Type:MIME-Version:
- References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ d=linux.org.uk; s=zeniv-20220401; h=Sender:In-Reply-To:Content-Type:
+ MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:Reply-To:
  Content-Transfer-Encoding:Content-ID:Content-Description;
- bh=rMTsK0YsjlB18wsT75a6evHrM3XMSVJTrFI3gzXouMw=; b=XSnCmY0Ml7NLCrMRP4OfNwKCxm
- t3knyrRU4umUwqGsAQ78VDJwhklMHyppjzgkgSiDjEr1eDLbkdmMI1Ud09tK10NOTGSkVr9OAVdA5
- yeDW00x8GaS/9hTn/5iTIiI7ZEmOX2IYVaYsUKHT/a7Sh9XTAvxkYrLcfI6adjZOgVZ/EQ8izXpRS
- N7CyfmoYNKAXSZWjXkcw7dH2WIhiyXqdB2rcIWxw4KPMz9e5BecjG1NA5nrYsPuYwy5tj/ShXnUjZ
- Hx7i1JazW+vFcm5JpzfYFwz2+TREcWXzGJRoblKfrG12x8d/ZXuZZBMy93UQ4ahuLIE/06ESgJ7x2
- dKaQyh9w==;
-Received: from willy by casper.infradead.org with local (Exim 4.98.2 #2 (Red
- Hat Linux)) id 1uRGPu-0000000GKxl-3X50;
- Mon, 16 Jun 2025 20:26:54 +0000
-Date: Mon, 16 Jun 2025 21:26:54 +0100
+ bh=alq/Pjol9hRHmsoK4W/c2CtmXHL3bnmjTRKmw+CMrtk=; b=A7p+Acvn5uycXyz3kLo38iW9Ad
+ D+bYigpKSwXx9Qqj1iM2cauc4vJVM5S4cn4cbXzLSyPr5aCY6CT2OVFHXSo8Ysd1LMe4PIHVof75s
+ 4ixGU0gXpw9fxNXo/FZ31klq9ihs5qru2SnNaJuY3SsfiDVgdbRXOX9BVI2VDLVAd+vUo1oJFU8Te
+ frcwrPbBPewoCrxwD5QpKNqhm3CGjwSVicr7Dykb5NZb2DUD7NyCDlrCYxIHPR3p2qtE9G2el/ykq
+ A/AlxzwslpPcDC/i4wy3o5P2e7I9G86mm6pGM50kd8VFzxMarLvEuy3Rg4LaGo1AqBnz7BuHEsWZB
+ PDLsSc+w==;
+Received: from viro by zeniv.linux.org.uk with local (Exim 4.98.2 #2 (Red Hat
+ Linux)) id 1uRGeL-00000002Qr4-0IjJ; Mon, 16 Jun 2025 20:41:49 +0000
+Date: Mon, 16 Jun 2025 21:41:49 +0100
 To: Lorenzo Stoakes <lorenzo.stoakes@oracle.com>
-Subject: Re: [PATCH 04/10] fs/dax: make it possible to check dev dax support
- without a VMA
-Message-ID: <aFB-Do9FE6H9SsGY@casper.infradead.org>
+Subject: Re: [PATCH 00/10] convert the majority of file systems to mmap_prepare
+Message-ID: <20250616204149.GK1880847@ZenIV>
 References: <cover.1750099179.git.lorenzo.stoakes@oracle.com>
- <b09de1e8544384074165d92d048e80058d971286.1750099179.git.lorenzo.stoakes@oracle.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <b09de1e8544384074165d92d048e80058d971286.1750099179.git.lorenzo.stoakes@oracle.com>
-X-Mailman-Approved-At: Tue, 17 Jun 2025 08:13:43 +0000
+In-Reply-To: <cover.1750099179.git.lorenzo.stoakes@oracle.com>
+X-Mailman-Approved-At: Tue, 17 Jun 2025 08:13:59 +0000
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,8 +55,8 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Matthew Wilcox via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Matthew Wilcox <willy@infradead.org>
+From: Al Viro via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Al Viro <viro@zeniv.linux.org.uk>
 Cc: Latchesar Ionkov <lucho@ionkov.net>, nvdimm@lists.linux.dev,
  Paulo Alcantara <pc@manguebit.org>, dri-devel@lists.freedesktop.org,
  ceph-devel@vger.kernel.org, Mike Marshall <hubcap@omnibond.com>,
@@ -88,13 +85,14 @@ Cc: Latchesar Ionkov <lucho@ionkov.net>, nvdimm@lists.linux.dev,
  linux-mtd@lists.infradead.org, Jaegeuk Kim <jaegeuk@kernel.org>,
  Marc Dionne <marc.dionne@auristor.com>, Tvrtko Ursulin <tursulin@ursulin.net>,
  linux-afs@lists.infradead.org, Naohiro Aota <naohiro.aota@wdc.com>,
- Miklos Szeredi <miklos@szeredi.hu>, coda@cs.cmu.edu,
- Viacheslav Dubeyko <slava@dubeyko.com>, Ilya Dryomov <idryomov@gmail.com>,
- linux-ext4@vger.kernel.org, Amir Goldstein <amir73il@gmail.com>,
- intel-gfx@lists.freedesktop.org, Damien Le Moal <dlemoal@kernel.org>,
- Rodrigo Vivi <rodrigo.vivi@intel.com>, Dan Williams <dan.j.williams@intel.com>,
- Gao Xiang <xiang@kernel.org>, David Howells <dhowells@redhat.com>,
- linux-nfs@vger.kernel.org, linux-mm@kvack.org, samba-technical@lists.samba.org,
+ Miklos Szeredi <miklos@szeredi.hu>, Matthew Wilcox <willy@infradead.org>,
+ coda@cs.cmu.edu, Viacheslav Dubeyko <slava@dubeyko.com>,
+ Ilya Dryomov <idryomov@gmail.com>, linux-ext4@vger.kernel.org,
+ Amir Goldstein <amir73il@gmail.com>, intel-gfx@lists.freedesktop.org,
+ Damien Le Moal <dlemoal@kernel.org>, Rodrigo Vivi <rodrigo.vivi@intel.com>,
+ Dan Williams <dan.j.williams@intel.com>, Gao Xiang <xiang@kernel.org>,
+ David Howells <dhowells@redhat.com>, linux-nfs@vger.kernel.org,
+ linux-mm@kvack.org, samba-technical@lists.samba.org,
  Steve French <sfrench@samba.org>, ntfs3@lists.linux.dev,
  linux-erofs@lists.ozlabs.org, jfs-discussion@lists.sourceforge.net,
  Jan Kara <jack@suse.cz>, linux-aio@kvack.org,
@@ -121,29 +119,25 @@ Cc: Latchesar Ionkov <lucho@ionkov.net>, nvdimm@lists.linux.dev,
  Jeffle Xu <jefflexu@linux.alibaba.com>,
  Johannes Berg <johannes@sipsolutions.net>, Johannes Thumshirn <jth@kernel.org>,
  David Woodhouse <dwmw2@infradead.org>, linux-karma-devel@lists.sourceforge.net,
- linux-btrfs@vger.kernel.org, Alexander Viro <viro@zeniv.linux.org.uk>
+ linux-btrfs@vger.kernel.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Mon, Jun 16, 2025 at 08:33:23PM +0100, Lorenzo Stoakes wrote:
->  fs/ext4/file.c      |  2 +-
->  fs/xfs/xfs_file.c   |  3 ++-
+On Mon, Jun 16, 2025 at 08:33:19PM +0100, Lorenzo Stoakes wrote:
+> REVIEWER'S NOTES
+> ================
+> 
+> I am basing this on the mm-new branch in Andrew's tree, so let me know if I
+> should rebase anything here. Given the mm bits touched I did think perhaps
+> we should take it through the mm tree, however it may be more sensible to
+> take it through an fs tree - let me know!
+> 
+> Apologies for the noise/churn, but there are some prerequisite steps here
+> that inform an ordering - "fs: consistently use file_has_valid_mmap_hooks()
+> helper" being especially critical, and so I put the bulk of the work in the
+> same series.
+> 
+> Let me know if there's anything I can do to make life easier here.
 
-Both of these already have the inode from the file ...
-
-> +static inline bool daxdev_mapping_supported(vm_flags_t vm_flags,
-> +					    struct file *file,
-> +					    struct dax_device *dax_dev)
->  {
-> -	if (!(vma->vm_flags & VM_SYNC))
-> +	if (!(vm_flags & VM_SYNC))
->  		return true;
-> -	if (!IS_DAX(file_inode(vma->vm_file)))
-> +	if (!IS_DAX(file_inode(file)))
->  		return false;
->  	return dax_synchronous(dax_dev);
-
-... and the only thing this function uses from the file is the inode.
-So maybe pass in the inode rather than the file?
-
+Documentation/filesystems/porting.rst?
 
