@@ -2,74 +2,49 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 81B78AD7900
-	for <lists+samba-technical@lfdr.de>; Thu, 12 Jun 2025 19:29:52 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A6E6BADC44E
+	for <lists+samba-technical@lfdr.de>; Tue, 17 Jun 2025 10:14:07 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=dI1SbB8e38knDmJ+zxjruGIp/w/QqIYx1kxMBUPFR3I=; b=J53UdqjtOB6fccT6HbWOj/c142
-	SWkSCMhkGCT73VtVT3pbjlgBvUmbjgUdngVOI/S31CZmDStoPBUQS4hXAwd4wADh5K6cWAbMgRqcp
-	PjitZ77CJWPhE7XMIe6tQY8wRm7E75PqjFhs/d5BDgw8fXGNVyQDbU/GVrbH9650qcikW6dF3PmGA
-	2V/x2YlFjPMil6EvXvlQOQNKezrKLSXsaH+sNKzNs/G56c+U00F0cXhLjL6+OYTWzYXahVkP3wd9s
-	NXhLNH+ZwDLsGX6WvJEJEs2G2Q6E/uxRMmVIT17UHn13tAW/9i/phmEFCkvSXPfUXODC5CbozjOS3
-	9DRKxFhg==;
-Received: from ip6-localhost ([::1]:25762 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=rMTsK0YsjlB18wsT75a6evHrM3XMSVJTrFI3gzXouMw=; b=TYblFD9RYrX8FzQ84/tttsbNJg
+	xwFn3XJr5Axy6ht5NCwx9d6DfAwIplVKQTsFKJJDVYbWn35lS4kp+vsg2bHrG1C5IzSAS/qMv+jpQ
+	qTZAiyj0P5LmuwfRyJ+DFPouVQx3KAoLgzwq9qdrBqm33+/IVU7h/gzcWNMRvSSRh0SVoqsVLEhSa
+	pLTcVlYluWDfXm3Wu0dd8GIExxkg2Jz93L/S7VFDOl1ACG0/RV6y9gcEz8fiaCRUREe2m4+Rba6QV
+	Xuh/igGkZduBFUPAbnPhoXgbpCm01jsZ/bij0nOc43JBuljU2Q6RhTHI3N9HBn65Y8g67HgUOC2Ls
+	1QUfYYNw==;
+Received: from ip6-localhost ([::1]:44802 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1uPlji-0074Jq-3J; Thu, 12 Jun 2025 17:29:10 +0000
-Received: from mail-ed1-x52f.google.com ([2a00:1450:4864:20::52f]:59434) 
+	id 1uRRS9-007HCL-H9; Tue, 17 Jun 2025 08:13:57 +0000
+Received: from casper.infradead.org ([2001:8b0:10b:1236::1]:43202) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uPlje-0074Jj-54
- for samba-technical@lists.samba.org; Thu, 12 Jun 2025 17:29:08 +0000
-Received: by mail-ed1-x52f.google.com with SMTP id
- 4fb4d7f45d1cf-606c5c9438fso2650178a12.2
- for <samba-technical@lists.samba.org>; Thu, 12 Jun 2025 10:29:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1749749345; x=1750354145; darn=lists.samba.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=dI1SbB8e38knDmJ+zxjruGIp/w/QqIYx1kxMBUPFR3I=;
- b=L8Cgmj0/MQ8IIddNvb1K1JBZ54hIyA27Gk4KLK5TY/j42GmTp8DdOO0Q3uy0H9ceyw
- fTrum8VufXhzTGSHkLXchnGVOcGtrHoQkYGrjrceNUP0nIK53L5jkvM3lVuqbSIL7yyN
- ZRPxEuA/UAC/rqcG8a8mLFpjbSd0ebt4QAt7wdYZetBV/KfydqrmJb08QhfICqzp1rgp
- wf9v8RoXmBUCblnjv5TT1j6qTI/aaZEsKzcAOlXjj99/QHGno5QTI1Cm5+mgJsNCtaxB
- B7wP6443ao0Q4WzONvCY7KL5Hy8Z/H5QPSWIt0zWrp0wIHVkcarNFIKaO+7mRqy9VCfX
- CxmA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749749345; x=1750354145;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=dI1SbB8e38knDmJ+zxjruGIp/w/QqIYx1kxMBUPFR3I=;
- b=I57myV25t6S/QRqpqwZO/J6v1a1jtU3tV6KC7b685K5K1krijTRFLEeQEoA7MlWgkX
- GK5MuKpTDoAzSObNKhgEZxrFBPuvPMNbQ1fbpSMMLEQus2ELhStX6jdVv6sCovvDoWJc
- gfAMLWPkqeuzyXm3CRTU+ZGMge5HRrl4aT4NX9O8CF8BGFsiZsO+EputXuvUiiWZ2USa
- vam5oPcNO+UWcOrNJYJxdWAYA2/7hZIbmSYERHMKKxOrxT8JZuu+9SHddsCWYugupxZH
- VSaQGDjxcwLtg/iV4iC/aanJZuIhHzpwDl6bilM5pxfe7FymPFiSA24WllAiNT5zUsv7
- HG5w==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUuOoJ5GQU1IoqbRbgJ5mbhHm3YmAUOwhlsHtwKEx46uO/VHx7q69oVnJYXGi9d4ZIZ4LCC18YyVYBnWqJ0WZU=@lists.samba.org
-X-Gm-Message-State: AOJu0YywHEXmzaAE8vOCRV+o6ew49WuLWykgQVQB1yQr+H3D1Hj9Ipez
- aN3MBIKziw4wQfpr+RUFgLvCDd+gi8ubBEXifgaMDTyqhezQZObAxp3MmkVUEFeLRg6lj1sP32q
- B9wLjFJLeNvoxYGWT+XkzIx5QXPg3pIM=
-X-Gm-Gg: ASbGncsvGE+Lu8Xd/t0xcdiOZOSHLRC4c/D7Ll8eXpfpO5cYLHDYyZKSbnyn/sZ7DNs
- eko7CCho93Lq8I7fpPlLvh6c90mtG51KECdwO3hzWkCwTjTbBVv57z61UqcVwP06R1t66fj41DP
- RiTly/LQ3CAsqfVkgwSPQsgjoLth8qwMxoAZG9GxI/yQ==
-X-Google-Smtp-Source: AGHT+IE01VyG/r4ztHCMbfZbcP4Zx1hdy7s2/j98R3aBn83AnEw7gEzw+XPgoM3qCwxtlhFFqEaDYzL7kVVRG1jEPeg=
-X-Received: by 2002:a05:6402:4408:b0:607:2417:6d04 with SMTP id
- 4fb4d7f45d1cf-608af55d1c7mr688968a12.14.1749749345009; Thu, 12 Jun 2025
- 10:29:05 -0700 (PDT)
+ (Exim) id 1uRGr3-007FjD-0M
+ for samba-technical@lists.samba.org; Mon, 16 Jun 2025 20:54:59 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=infradead.org; s=casper.20170209; h=In-Reply-To:Content-Type:MIME-Version:
+ References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ Content-Transfer-Encoding:Content-ID:Content-Description;
+ bh=rMTsK0YsjlB18wsT75a6evHrM3XMSVJTrFI3gzXouMw=; b=XSnCmY0Ml7NLCrMRP4OfNwKCxm
+ t3knyrRU4umUwqGsAQ78VDJwhklMHyppjzgkgSiDjEr1eDLbkdmMI1Ud09tK10NOTGSkVr9OAVdA5
+ yeDW00x8GaS/9hTn/5iTIiI7ZEmOX2IYVaYsUKHT/a7Sh9XTAvxkYrLcfI6adjZOgVZ/EQ8izXpRS
+ N7CyfmoYNKAXSZWjXkcw7dH2WIhiyXqdB2rcIWxw4KPMz9e5BecjG1NA5nrYsPuYwy5tj/ShXnUjZ
+ Hx7i1JazW+vFcm5JpzfYFwz2+TREcWXzGJRoblKfrG12x8d/ZXuZZBMy93UQ4ahuLIE/06ESgJ7x2
+ dKaQyh9w==;
+Received: from willy by casper.infradead.org with local (Exim 4.98.2 #2 (Red
+ Hat Linux)) id 1uRGPu-0000000GKxl-3X50;
+ Mon, 16 Jun 2025 20:26:54 +0000
+Date: Mon, 16 Jun 2025 21:26:54 +0100
+To: Lorenzo Stoakes <lorenzo.stoakes@oracle.com>
+Subject: Re: [PATCH 04/10] fs/dax: make it possible to check dev dax support
+ without a VMA
+Message-ID: <aFB-Do9FE6H9SsGY@casper.infradead.org>
+References: <cover.1750099179.git.lorenzo.stoakes@oracle.com>
+ <b09de1e8544384074165d92d048e80058d971286.1750099179.git.lorenzo.stoakes@oracle.com>
 MIME-Version: 1.0
-References: <20250611112902.60071-1-bharathsm@microsoft.com>
- <CAH2r5munktDK1VstQRZ6VcRWyYMasHnR53VM+3i=cz1JYpcpaA@mail.gmail.com>
-In-Reply-To: <CAH2r5munktDK1VstQRZ6VcRWyYMasHnR53VM+3i=cz1JYpcpaA@mail.gmail.com>
-Date: Thu, 12 Jun 2025 22:58:53 +0530
-X-Gm-Features: AX0GCFt_Ub0YNDlpxqAexc0F6OnHyGsxQv8Q3adoiYKFYuoD6ZwoTWSX-NTi9DU
-Message-ID: <CANT5p=rC2gd6aD4On4HkojHFz4-547v12Cu1oUBOOzNCMuANFQ@mail.gmail.com>
-Subject: Re: [PATCH] smb: improve directory cache reuse for readdir operations
-To: Steve French <smfrench@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <b09de1e8544384074165d92d048e80058d971286.1750099179.git.lorenzo.stoakes@oracle.com>
+X-Mailman-Approved-At: Tue, 17 Jun 2025 08:13:43 +0000
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -83,204 +58,92 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Shyam Prasad N via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Shyam Prasad N <nspmangalore@gmail.com>
-Cc: pc@manguebit.com, linux-cifs@vger.kernel.org, sprasad@microsoft.com,
- samba-technical <samba-technical@lists.samba.org>,
- Bharath SM <bharathsm@microsoft.com>, paul@darkrain42.org,
- Bharath SM <bharathsm.hsk@gmail.com>
+From: Matthew Wilcox via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Matthew Wilcox <willy@infradead.org>
+Cc: Latchesar Ionkov <lucho@ionkov.net>, nvdimm@lists.linux.dev,
+ Paulo Alcantara <pc@manguebit.org>, dri-devel@lists.freedesktop.org,
+ ceph-devel@vger.kernel.org, Mike Marshall <hubcap@omnibond.com>,
+ linux-xfs@vger.kernel.org, Tyler Hicks <code@tyhicks.com>,
+ devel@lists.orangefs.org, Shyam Prasad N <sprasad@microsoft.com>,
+ Jan Harkes <jaharkes@cs.cmu.edu>, linux-um@lists.infradead.org,
+ Joel Becker <jlbec@evilplan.org>,
+ John Paul Adrian Glaubitz <glaubitz@physik.fu-berlin.de>,
+ Eric Van Hensbergen <ericvh@kernel.org>,
+ Zhihao Cheng <chengzhihao1@huawei.com>, Christian Brauner <brauner@kernel.org>,
+ linux-kernel@vger.kernel.org, linux-fsdevel@vger.kernel.org,
+ Andrew Morton <akpm@linux-foundation.org>,
+ Trond Myklebust <trondmy@kernel.org>, Dave Kleikamp <shaggy@kernel.org>,
+ Sandeep Dhavale <dhavale@google.com>, Simona Vetter <simona@ffwll.ch>,
+ linux-cifs@vger.kernel.org, linux-nilfs@vger.kernel.org,
+ codalist@coda.cs.cmu.edu, Namjae Jeon <linkinjeon@kernel.org>,
+ ecryptfs@vger.kernel.org, Yangtao Li <frank.li@vivo.com>,
+ Jani Nikula <jani.nikula@linux.intel.com>, ocfs2-devel@lists.linux.dev,
+ Pedro Falcato <pfalcato@suse.de>, OGAWA Hirofumi <hirofumi@mail.parknet.co.jp>,
+ linux-block@vger.kernel.org, Theodore Ts'o <tytso@mit.edu>,
+ linux-f2fs-devel@lists.sourceforge.net, Hongbo Li <lihongbo22@huawei.com>,
+ Anna Schumaker <anna@kernel.org>, Martin Brandenburg <martin@omnibond.com>,
+ Kees Cook <kees@kernel.org>, Yuezhang Mo <yuezhang.mo@sony.com>,
+ Carlos Maiolino <cem@kernel.org>,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>, Chris Mason <clm@fb.com>,
+ linux-mtd@lists.infradead.org, Jaegeuk Kim <jaegeuk@kernel.org>,
+ Marc Dionne <marc.dionne@auristor.com>, Tvrtko Ursulin <tursulin@ursulin.net>,
+ linux-afs@lists.infradead.org, Naohiro Aota <naohiro.aota@wdc.com>,
+ Miklos Szeredi <miklos@szeredi.hu>, coda@cs.cmu.edu,
+ Viacheslav Dubeyko <slava@dubeyko.com>, Ilya Dryomov <idryomov@gmail.com>,
+ linux-ext4@vger.kernel.org, Amir Goldstein <amir73il@gmail.com>,
+ intel-gfx@lists.freedesktop.org, Damien Le Moal <dlemoal@kernel.org>,
+ Rodrigo Vivi <rodrigo.vivi@intel.com>, Dan Williams <dan.j.williams@intel.com>,
+ Gao Xiang <xiang@kernel.org>, David Howells <dhowells@redhat.com>,
+ linux-nfs@vger.kernel.org, linux-mm@kvack.org, samba-technical@lists.samba.org,
+ Steve French <sfrench@samba.org>, ntfs3@lists.linux.dev,
+ linux-erofs@lists.ozlabs.org, jfs-discussion@lists.sourceforge.net,
+ Jan Kara <jack@suse.cz>, linux-aio@kvack.org,
+ Dominique Martinet <asmadeus@codewreck.org>,
+ Christian Schoenebeck <linux_oss@crudebyte.com>,
+ Bob Copeland <me@bobcopeland.com>,
+ Konstantin Komarov <almaz.alexandrovich@paragon-software.com>,
+ Joseph Qi <joseph.qi@linux.alibaba.com>,
+ Andreas Dilger <adilger.kernel@dilger.ca>,
+ Mikulas Patocka <mikulas@artax.karlin.mff.cuni.cz>,
+ David Airlie <airlied@gmail.com>,
+ Anton Ivanov <anton.ivanov@cambridgegreys.com>, Yue Hu <zbestahu@gmail.com>,
+ Richard Weinberger <richard@nod.at>, Mark Fasheh <mark@fasheh.com>,
+ linux-bcachefs@vger.kernel.org, Jann Horn <jannh@google.com>,
+ Chao Yu <chao@kernel.org>, Josef Bacik <josef@toxicpanda.com>,
+ "Liam R . Howlett" <Liam.Howlett@oracle.com>, Tom Talpey <tom@talpey.com>,
+ Hans de Goede <hdegoede@redhat.com>, Bharath SM <bharathsm@microsoft.com>,
+ "Tigran A . Aivazian" <aivazian.tigran@gmail.com>,
+ David Sterba <dsterba@suse.com>, Xiubo Li <xiubli@redhat.com>,
+ Ryusuke Konishi <konishi.ryusuke@gmail.com>, Vlastimil Babka <vbabka@suse.cz>,
+ Jens Axboe <axboe@kernel.dk>, Sungjong Seo <sj1557.seo@samsung.com>,
+ v9fs@lists.linux.dev, Kent Overstreet <kent.overstreet@linux.dev>,
+ linux-unionfs@vger.kernel.org, Benjamin LaHaise <bcrl@kvack.org>,
+ Jeffle Xu <jefflexu@linux.alibaba.com>,
+ Johannes Berg <johannes@sipsolutions.net>, Johannes Thumshirn <jth@kernel.org>,
+ David Woodhouse <dwmw2@infradead.org>, linux-karma-devel@lists.sourceforge.net,
+ linux-btrfs@vger.kernel.org, Alexander Viro <viro@zeniv.linux.org.uk>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Wed, Jun 11, 2025 at 8:45=E2=80=AFPM Steve French <smfrench@gmail.com> w=
-rote:
->
-> merged this updated patch into cifs-2.6.git for-next, running xfstests
-> on it now.
->
-> Looks very promising, and we have a couple more dir lease
-> optimizations to try out that should also help a lot with perf, and
-> reducing load on servers by sending fewer metadata ops over the wire
->
-> On Wed, Jun 11, 2025 at 6:29=E2=80=AFAM Bharath SM <bharathsm.hsk@gmail.c=
-om> wrote:
-> >
-> > Currently, cached directory contents were not reused across subsequent
-> > 'ls' operations because the cache validity check relied on comparing
-> > the ctx pointer, which changes with each readdir invocation. As a
-> > result, the cached dir entries was not marked as valid and the cache wa=
-s
-> > not utilized for subsequent 'ls' operations.
-> >
-> > This change uses the file pointer, which remains consistent across all
-> > readdir calls for a given directory instance, to associate and validate
-> > the cache. As a result, cached directory contents can now be
-> > correctly reused, improving performance for repeated directory listings=
-.
-> >
-> > Performance gains with local windows SMB server:
-> >
-> > Without the patch and default actimeo=3D1:
-> >  1000 directory enumeration operations on dir with 10k files took 135.0=
-s
-> >
-> > With this patch and actimeo=3D0:
-> >  1000 directory enumeration operations on dir with 10k files took just =
-5.1s
-> >
-> > Signed-off-by: Bharath SM <bharathsm@microsoft.com>
-> > ---
-> >  fs/smb/client/cached_dir.h |  8 ++++----
-> >  fs/smb/client/readdir.c    | 28 +++++++++++++++-------------
-> >  2 files changed, 19 insertions(+), 17 deletions(-)
-> >
-> > diff --git a/fs/smb/client/cached_dir.h b/fs/smb/client/cached_dir.h
-> > index 1dfe79d947a6..bc8a812ff95f 100644
-> > --- a/fs/smb/client/cached_dir.h
-> > +++ b/fs/smb/client/cached_dir.h
-> > @@ -21,10 +21,10 @@ struct cached_dirent {
-> >  struct cached_dirents {
-> >         bool is_valid:1;
-> >         bool is_failed:1;
-> > -       struct dir_context *ctx; /*
-> > -                                 * Only used to make sure we only take=
- entries
-> > -                                 * from a single context. Never derefe=
-renced.
-> > -                                 */
-> > +       struct file *file; /*
-> > +                           * Used to associate the cache with a single
-> > +                           * open file instance.
-> > +                           */
-> >         struct mutex de_mutex;
-> >         int pos;                 /* Expected ctx->pos */
-> >         struct list_head entries;
-> > diff --git a/fs/smb/client/readdir.c b/fs/smb/client/readdir.c
-> > index f9f11cbf89be..ba0193cf9033 100644
-> > --- a/fs/smb/client/readdir.c
-> > +++ b/fs/smb/client/readdir.c
-> > @@ -851,9 +851,9 @@ static bool emit_cached_dirents(struct cached_diren=
-ts *cde,
-> >  }
-> >
-> >  static void update_cached_dirents_count(struct cached_dirents *cde,
-> > -                                       struct dir_context *ctx)
-> > +                                       struct file *file)
-> >  {
-> > -       if (cde->ctx !=3D ctx)
-> > +       if (cde->file !=3D file)
-> >                 return;
-> >         if (cde->is_valid || cde->is_failed)
-> >                 return;
-> > @@ -862,9 +862,9 @@ static void update_cached_dirents_count(struct cach=
-ed_dirents *cde,
-> >  }
-> >
-> >  static void finished_cached_dirents_count(struct cached_dirents *cde,
-> > -                                       struct dir_context *ctx)
-> > +                                       struct dir_context *ctx, struct=
- file *file)
-> >  {
-> > -       if (cde->ctx !=3D ctx)
-> > +       if (cde->file !=3D file)
-> >                 return;
-> >         if (cde->is_valid || cde->is_failed)
-> >                 return;
-> > @@ -877,11 +877,12 @@ static void finished_cached_dirents_count(struct =
-cached_dirents *cde,
-> >  static void add_cached_dirent(struct cached_dirents *cde,
-> >                               struct dir_context *ctx,
-> >                               const char *name, int namelen,
-> > -                             struct cifs_fattr *fattr)
-> > +                             struct cifs_fattr *fattr,
-> > +                                 struct file *file)
-> >  {
-> >         struct cached_dirent *de;
-> >
-> > -       if (cde->ctx !=3D ctx)
-> > +       if (cde->file !=3D file)
-> >                 return;
-> >         if (cde->is_valid || cde->is_failed)
-> >                 return;
-> > @@ -911,7 +912,8 @@ static void add_cached_dirent(struct cached_dirents=
- *cde,
-> >  static bool cifs_dir_emit(struct dir_context *ctx,
-> >                           const char *name, int namelen,
-> >                           struct cifs_fattr *fattr,
-> > -                         struct cached_fid *cfid)
-> > +                         struct cached_fid *cfid,
-> > +                         struct file *file)
-> >  {
-> >         bool rc;
-> >         ino_t ino =3D cifs_uniqueid_to_ino_t(fattr->cf_uniqueid);
-> > @@ -923,7 +925,7 @@ static bool cifs_dir_emit(struct dir_context *ctx,
-> >         if (cfid) {
-> >                 mutex_lock(&cfid->dirents.de_mutex);
-> >                 add_cached_dirent(&cfid->dirents, ctx, name, namelen,
-> > -                                 fattr);
-> > +                                 fattr, file);
-> >                 mutex_unlock(&cfid->dirents.de_mutex);
-> >         }
-> >
-> > @@ -1023,7 +1025,7 @@ static int cifs_filldir(char *find_entry, struct =
-file *file,
-> >         cifs_prime_dcache(file_dentry(file), &name, &fattr);
-> >
-> >         return !cifs_dir_emit(ctx, name.name, name.len,
-> > -                             &fattr, cfid);
-> > +                             &fattr, cfid, file);
-> >  }
-> >
-> >
-> > @@ -1074,8 +1076,8 @@ int cifs_readdir(struct file *file, struct dir_co=
-ntext *ctx)
-> >          * we need to initialize scanning and storing the
-> >          * directory content.
-> >          */
-> > -       if (ctx->pos =3D=3D 0 && cfid->dirents.ctx =3D=3D NULL) {
-> > -               cfid->dirents.ctx =3D ctx;
-> > +       if (ctx->pos =3D=3D 0 && cfid->dirents.file =3D=3D NULL) {
-> > +               cfid->dirents.file =3D file;
-> >                 cfid->dirents.pos =3D 2;
-> >         }
-> >         /*
-> > @@ -1143,7 +1145,7 @@ int cifs_readdir(struct file *file, struct dir_co=
-ntext *ctx)
-> >         } else {
-> >                 if (cfid) {
-> >                         mutex_lock(&cfid->dirents.de_mutex);
-> > -                       finished_cached_dirents_count(&cfid->dirents, c=
-tx);
-> > +                       finished_cached_dirents_count(&cfid->dirents, c=
-tx, file);
-> >                         mutex_unlock(&cfid->dirents.de_mutex);
-> >                 }
-> >                 cifs_dbg(FYI, "Could not find entry\n");
-> > @@ -1184,7 +1186,7 @@ int cifs_readdir(struct file *file, struct dir_co=
-ntext *ctx)
-> >                 ctx->pos++;
-> >                 if (cfid) {
-> >                         mutex_lock(&cfid->dirents.de_mutex);
-> > -                       update_cached_dirents_count(&cfid->dirents, ctx=
-);
-> > +                       update_cached_dirents_count(&cfid->dirents, fil=
-e);
-> >                         mutex_unlock(&cfid->dirents.de_mutex);
-> >                 }
-> >
-> > --
-> > 2.43.0
-> >
->
->
-> --
-> Thanks,
->
-> Steve
->
-Looks good to me. You can add my RB.
+On Mon, Jun 16, 2025 at 08:33:23PM +0100, Lorenzo Stoakes wrote:
+>  fs/ext4/file.c      |  2 +-
+>  fs/xfs/xfs_file.c   |  3 ++-
 
---=20
-Regards,
-Shyam
+Both of these already have the inode from the file ...
+
+> +static inline bool daxdev_mapping_supported(vm_flags_t vm_flags,
+> +					    struct file *file,
+> +					    struct dax_device *dax_dev)
+>  {
+> -	if (!(vma->vm_flags & VM_SYNC))
+> +	if (!(vm_flags & VM_SYNC))
+>  		return true;
+> -	if (!IS_DAX(file_inode(vma->vm_file)))
+> +	if (!IS_DAX(file_inode(file)))
+>  		return false;
+>  	return dax_synchronous(dax_dev);
+
+... and the only thing this function uses from the file is the inode.
+So maybe pass in the inode rather than the file?
+
 
