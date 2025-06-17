@@ -2,51 +2,51 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 688A6ADC444
-	for <lists+samba-technical@lfdr.de>; Tue, 17 Jun 2025 10:13:38 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C9492ADC43F
+	for <lists+samba-technical@lfdr.de>; Tue, 17 Jun 2025 10:13:12 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=7hewv5VaHf/nCFVYzE18Jb3sDfwjWx9bJqENJtpan9o=; b=TTUXpDml4+2esN8s93dm5qHFVj
-	6tzJQOz5SD4AntBGRXtaASLFnqUfT2AfZQt4hoCR2OubDIs1Cb/xsaW4/m3HeTZ+ImQw24Xp/T3QT
-	7/A94GzaBl1GVf/rOenncWAPC+xXt0AQsCSLSqMEE3pL3eawhUcPFFYA6b/nbg56mocRPtZT9b6JV
-	jpJoNPNensctKg9iUYJ0kttRREu61cte3u8Z73rfrw9HYjRcReu+1iar0Z0ABx6eshSUUdjHSO4Xe
-	1sPxp0B1NJENKaSY5CYIq4cyQdinG/LA7y6g7feCfLPthqxItMLp0pc7Ivc/kht9aKZWXX67rWc8h
-	I+a9YL1g==;
-Received: from ip6-localhost ([::1]:37262 helo=hr1.samba.org) 
+	bh=WPsxJQ/JXacvbaipg//fOLi1s4GO46A+9y4pCE6t2y4=; b=FMkdsAwRu5zb1aUmnppLLYUXAN
+	wLFgmCyhi2XgQI0qrjEpdHxG5bOWlFoHdLW9gYS1o9Y5VlW+b9xo16XQH8Itsm2X68TbZZ5bGJTT0
+	b10KOvlJBtoKZM+t8rKywfrr9ZJ4n5kGwjCsZE/kkTe2qYmZVl3TDiKVnreVtcxAw0PnmtdWV+M+P
+	R07QxEH4OXh0vGLgu0k72Cf3QZX75LNNPim78xU3wQhoCfvpkH5IvtxoqG9UM6PFt/VVEXLF90oWB
+	SdMhcwuTmVDYULKUA5CDp3rtDx1TO2lMGfsZAB6xnbwcmH8vjiCB6moq2vdHVoFbG0F5Xv0KYtyQn
+	6JZpv+9A==;
+Received: from ip6-localhost ([::1]:23114 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1uRRRa-007H07-Bd; Tue, 17 Jun 2025 08:13:23 +0000
-Received: from bombadil.infradead.org ([2607:7c80:54:3::133]:35110) 
+	id 1uRRQj-007Gr7-6D; Tue, 17 Jun 2025 08:12:29 +0000
+Received: from bombadil.infradead.org ([2607:7c80:54:3::133]:52114) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uRPA3-007GRr-Pz
- for samba-technical@lists.samba.org; Tue, 17 Jun 2025 05:47:11 +0000
+ (Exim) id 1uRP97-007GRX-FV
+ for samba-technical@lists.samba.org; Tue, 17 Jun 2025 05:46:12 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=bombadil.20210309; h=In-Reply-To:Content-Type:MIME-Version
  :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
  Content-Transfer-Encoding:Content-ID:Content-Description;
- bh=7hewv5VaHf/nCFVYzE18Jb3sDfwjWx9bJqENJtpan9o=; b=JLzFVcD4P4hX82nyMOI+BRPTFS
- 9m9nUf8QSnN3KcOf1hfPPNg8SY5CD8KGmTwZG9p42mwem0h3+g+jr8vmH1IdJ03DA5flPOfwfb8Kb
- 2p/Z3NPif2HWA7V7Zh1b/Hzs0cuKS7D2jEWqmC6rRRVe5v+D58zBUGfE4pJ1gAH0HUd1EKkuocvQE
- /AS7xYTlLDrNF7H7t6M6DnRrb6AncDawE5sQF8d0UGBLNipdl/wWjLzy7Aye1Ze+VzA+g0jzxlIg8
- VUglo0acb2sgxrdZjdYWcBo4907Ol02gnYVbwtHB4bd+XE+ZjOsUlox9yo8MazTrsTyF2g2LImZhO
- mwKximfw==;
+ bh=WPsxJQ/JXacvbaipg//fOLi1s4GO46A+9y4pCE6t2y4=; b=xCxiDspWK79oWST3sh2t7cjJwF
+ 3VtKzrTMd1ZyyEY3Yl1sQsmN0c46B/BWpmLx7GLhCFM16aw7g83BPPAETUVk7GelPlveK5I6sQ8E5
+ ZxtytrGUEhUU9WZrIuJuMFvFwuFp4vj1nvN+EaRMqHi+KIfudASk+LhjQu9+lmF+F3IZYi7Ydf/Wk
+ JTa1n3Fl61HKkjYiCIqjoqvwn7L3e/9n7XP0zshPQ9POdY/W9y4mdeV8e8mm04X6AEWaAswnDA8V3
+ ZzeHtQqEnK2Y08dx0p/c6HZZCAPv4hvcg6CW2TmaFuNbCfjDhPGzoMVT4DrV3ggoDKSwdUATpVwPQ
+ nIJAAeQw==;
 Received: from hch by bombadil.infradead.org with local (Exim 4.98.2 #2 (Red
- Hat Linux)) id 1uROac-00000006E8g-3Ody;
- Tue, 17 Jun 2025 05:10:30 +0000
-Date: Mon, 16 Jun 2025 22:10:30 -0700
+ Hat Linux)) id 1uRObY-00000006ERs-1HY9;
+ Tue, 17 Jun 2025 05:11:28 +0000
+Date: Mon, 16 Jun 2025 22:11:28 -0700
 To: Lorenzo Stoakes <lorenzo.stoakes@oracle.com>
-Subject: Re: [PATCH 01/10] mm: rename call_mmap/mmap_prepare to
- vfs_mmap/mmap_prepare
-Message-ID: <aFD4xtpot22xvTEq@infradead.org>
+Subject: Re: [PATCH 03/10] fs: consistently use file_has_valid_mmap_hooks()
+ helper
+Message-ID: <aFD5AP7B80np-Szz@infradead.org>
 References: <cover.1750099179.git.lorenzo.stoakes@oracle.com>
- <8d389f4994fa736aa8f9172bef8533c10a9e9011.1750099179.git.lorenzo.stoakes@oracle.com>
+ <b68145b609532e62bab603dd9686faa6562046ec.1750099179.git.lorenzo.stoakes@oracle.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <8d389f4994fa736aa8f9172bef8533c10a9e9011.1750099179.git.lorenzo.stoakes@oracle.com>
+In-Reply-To: <b68145b609532e62bab603dd9686faa6562046ec.1750099179.git.lorenzo.stoakes@oracle.com>
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
  bombadil.infradead.org. See http://www.infradead.org/rpr.html
-X-Mailman-Approved-At: Tue, 17 Jun 2025 08:12:55 +0000
+X-Mailman-Approved-At: Tue, 17 Jun 2025 08:12:27 +0000
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -128,20 +128,24 @@ Cc: Latchesar Ionkov <lucho@ionkov.net>, nvdimm@lists.linux.dev,
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Mon, Jun 16, 2025 at 08:33:20PM +0100, Lorenzo Stoakes wrote:
-> The call_mmap() function violates the existing convention in
-> include/linux/fs.h whereby invocations of virtual file system hooks is
-> performed by functions prefixed with vfs_xxx().
+On Mon, Jun 16, 2025 at 08:33:22PM +0100, Lorenzo Stoakes wrote:
+> Since commit c84bf6dd2b83 ("mm: introduce new .mmap_prepare() file
+> callback"), the f_op->mmap() hook has been deprecated in favour of
+> f_op->mmap_prepare().
 > 
-> Correct this by renaming call_mmap() to vfs_mmap(). This also avoids
-> confusion as to the fact that f_op->mmap_prepare may be invoked here.
+> Additionally, commit bb666b7c2707 ("mm: add mmap_prepare() compatibility
+> layer for nested file systems") permits the use of the .mmap_prepare() hook
+> even in nested filesystems like overlayfs.
 > 
-> Also rename __call_mmap_prepare() function to vfs_mmap_prepare() and adjust
-> to accept a file parameter, this is useful later for nested file systems.
+> There are a number of places where we check only for f_op->mmap - this is
+> incorrect now mmap_prepare exists, so update all of these to use the
+> general helper file_has_valid_mmap_hooks().
 > 
-> Finally, fix up the VMA userland tests and ensure the mmap_prepare -> mmap
-> shim is implemented there.
+> Most notably, this updates the elf logic to allow for the ability to
+> execute binaries on filesystems which have the .mmap_prepare hook, but
+> additionally we update nested filesystems.
 
-Can we please just kill these silly call_* helpers instead?
+Can you please give the function a better name before spreading it?
+file operations aren't hooks by any classic definition.
 
 
