@@ -2,51 +2,51 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id A785FADC440
-	for <lists+samba-technical@lfdr.de>; Tue, 17 Jun 2025 10:13:13 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 688A6ADC444
+	for <lists+samba-technical@lfdr.de>; Tue, 17 Jun 2025 10:13:38 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=MnSFdd8xjqrBRMNrjDtPx5JnmQica7Kdjxsp8Q9K/Q4=; b=nXG7cs38eYK2o5DFtg2KeO7wex
-	R8wjgzPlv+jRNIAbu3EFNOQ0ujlvZVfG9eLVst5/dhCVyry11YHVnOMcb4SKG7vuy9LfvcRrals2B
-	2HJOr1vJpIapltmTv2KZorO1kjKHCQ65KoEilkrZl7ZDNffcj5cr+PeQSENb33zKNanyiB6zjBFDD
-	EvSjtPqU2JB8duucBxO9oGpvgfv4d+0Lez3pAsaPZHMvhRVNfNefB3Yj6dMsUV2PHTliQ3Ygmx+dj
-	nbK2waOvBpdgJ72rpqm2sLpKK5jarwkM6j2o6X2z0mzQmQpEx7aMSq/k9R3Am/+TYBJhwRjUKZWo+
-	oZV7vgrA==;
-Received: from ip6-localhost ([::1]:48642 helo=hr1.samba.org) 
+	bh=7hewv5VaHf/nCFVYzE18Jb3sDfwjWx9bJqENJtpan9o=; b=TTUXpDml4+2esN8s93dm5qHFVj
+	6tzJQOz5SD4AntBGRXtaASLFnqUfT2AfZQt4hoCR2OubDIs1Cb/xsaW4/m3HeTZ+ImQw24Xp/T3QT
+	7/A94GzaBl1GVf/rOenncWAPC+xXt0AQsCSLSqMEE3pL3eawhUcPFFYA6b/nbg56mocRPtZT9b6JV
+	jpJoNPNensctKg9iUYJ0kttRREu61cte3u8Z73rfrw9HYjRcReu+1iar0Z0ABx6eshSUUdjHSO4Xe
+	1sPxp0B1NJENKaSY5CYIq4cyQdinG/LA7y6g7feCfLPthqxItMLp0pc7Ivc/kht9aKZWXX67rWc8h
+	I+a9YL1g==;
+Received: from ip6-localhost ([::1]:37262 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1uRRR6-007GwG-2S; Tue, 17 Jun 2025 08:12:52 +0000
-Received: from bombadil.infradead.org ([2607:7c80:54:3::133]:59800) 
+	id 1uRRRa-007H07-Bd; Tue, 17 Jun 2025 08:13:23 +0000
+Received: from bombadil.infradead.org ([2607:7c80:54:3::133]:35110) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uRP9Q-007GRk-M8
- for samba-technical@lists.samba.org; Tue, 17 Jun 2025 05:46:31 +0000
+ (Exim) id 1uRPA3-007GRr-Pz
+ for samba-technical@lists.samba.org; Tue, 17 Jun 2025 05:47:11 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=bombadil.20210309; h=In-Reply-To:Content-Type:MIME-Version
  :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
  Content-Transfer-Encoding:Content-ID:Content-Description;
- bh=MnSFdd8xjqrBRMNrjDtPx5JnmQica7Kdjxsp8Q9K/Q4=; b=QNDoywVGRFryPFg2RDAGbDqnER
- kMwwVaNvmdaPWaUdYiw4uVs1cwpES6Y1BZK6zmz6epnmQf/31dqrJ33hky4AO7LYDYrEmHWzT5Bgg
- VyfgKX5JeKt2VwytR3aURQTHJg+QRiPTD7MQPSSkuL5gSVT+THSOdd4vmpMu97aV9REIFv8EPvGoL
- F3fP2a1meh2mhDu+1cb3aNJjUMgJcQcJkdsXsvzXczzr8NFZjGt/s0pWBSaW/4wNY4j8IybNcONJm
- YgcOcrsyjgwc13MQm/OFO8/8KkG1q6x4Z+oB+mDwuoX4JPhpMCDIGJM1OzS7S4z578+cbogTh+9t6
- xs0eBXpg==;
+ bh=7hewv5VaHf/nCFVYzE18Jb3sDfwjWx9bJqENJtpan9o=; b=JLzFVcD4P4hX82nyMOI+BRPTFS
+ 9m9nUf8QSnN3KcOf1hfPPNg8SY5CD8KGmTwZG9p42mwem0h3+g+jr8vmH1IdJ03DA5flPOfwfb8Kb
+ 2p/Z3NPif2HWA7V7Zh1b/Hzs0cuKS7D2jEWqmC6rRRVe5v+D58zBUGfE4pJ1gAH0HUd1EKkuocvQE
+ /AS7xYTlLDrNF7H7t6M6DnRrb6AncDawE5sQF8d0UGBLNipdl/wWjLzy7Aye1Ze+VzA+g0jzxlIg8
+ VUglo0acb2sgxrdZjdYWcBo4907Ol02gnYVbwtHB4bd+XE+ZjOsUlox9yo8MazTrsTyF2g2LImZhO
+ mwKximfw==;
 Received: from hch by bombadil.infradead.org with local (Exim 4.98.2 #2 (Red
- Hat Linux)) id 1uROYF-00000006DYq-2nid;
- Tue, 17 Jun 2025 05:08:03 +0000
-Date: Mon, 16 Jun 2025 22:08:03 -0700
+ Hat Linux)) id 1uROac-00000006E8g-3Ody;
+ Tue, 17 Jun 2025 05:10:30 +0000
+Date: Mon, 16 Jun 2025 22:10:30 -0700
 To: Lorenzo Stoakes <lorenzo.stoakes@oracle.com>
-Subject: Re: [PATCH 06/10] fs/xfs: transition from deprecated .mmap hook to
- .mmap_prepare
-Message-ID: <aFD4M48RMZB0Hj-f@infradead.org>
+Subject: Re: [PATCH 01/10] mm: rename call_mmap/mmap_prepare to
+ vfs_mmap/mmap_prepare
+Message-ID: <aFD4xtpot22xvTEq@infradead.org>
 References: <cover.1750099179.git.lorenzo.stoakes@oracle.com>
- <cba8b29ba5f225df8f63f50182d5f6e0fcf94456.1750099179.git.lorenzo.stoakes@oracle.com>
+ <8d389f4994fa736aa8f9172bef8533c10a9e9011.1750099179.git.lorenzo.stoakes@oracle.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <cba8b29ba5f225df8f63f50182d5f6e0fcf94456.1750099179.git.lorenzo.stoakes@oracle.com>
+In-Reply-To: <8d389f4994fa736aa8f9172bef8533c10a9e9011.1750099179.git.lorenzo.stoakes@oracle.com>
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
  bombadil.infradead.org. See http://www.infradead.org/rpr.html
-X-Mailman-Approved-At: Tue, 17 Jun 2025 08:12:42 +0000
+X-Mailman-Approved-At: Tue, 17 Jun 2025 08:12:55 +0000
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -128,15 +128,20 @@ Cc: Latchesar Ionkov <lucho@ionkov.net>, nvdimm@lists.linux.dev,
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Mon, Jun 16, 2025 at 08:33:25PM +0100, Lorenzo Stoakes wrote:
->  STATIC int
-> -xfs_file_mmap(
-> -	struct file		*file,
-> -	struct vm_area_struct	*vma)
-> +xfs_file_mmap_prepare(
-> +	struct vm_area_desc *desc)
+On Mon, Jun 16, 2025 at 08:33:20PM +0100, Lorenzo Stoakes wrote:
+> The call_mmap() function violates the existing convention in
+> include/linux/fs.h whereby invocations of virtual file system hooks is
+> performed by functions prefixed with vfs_xxx().
+> 
+> Correct this by renaming call_mmap() to vfs_mmap(). This also avoids
+> confusion as to the fact that f_op->mmap_prepare may be invoked here.
+> 
+> Also rename __call_mmap_prepare() function to vfs_mmap_prepare() and adjust
+> to accept a file parameter, this is useful later for nested file systems.
+> 
+> Finally, fix up the VMA userland tests and ensure the mmap_prepare -> mmap
+> shim is implemented there.
 
-Please stick to the existing alignment for the declarations.
+Can we please just kill these silly call_* helpers instead?
 
-Otherwise this looks good.
 
