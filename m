@@ -2,51 +2,53 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id C9492ADC43F
-	for <lists+samba-technical@lfdr.de>; Tue, 17 Jun 2025 10:13:12 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A98FFADC441
+	for <lists+samba-technical@lfdr.de>; Tue, 17 Jun 2025 10:13:14 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=WPsxJQ/JXacvbaipg//fOLi1s4GO46A+9y4pCE6t2y4=; b=FMkdsAwRu5zb1aUmnppLLYUXAN
-	wLFgmCyhi2XgQI0qrjEpdHxG5bOWlFoHdLW9gYS1o9Y5VlW+b9xo16XQH8Itsm2X68TbZZ5bGJTT0
-	b10KOvlJBtoKZM+t8rKywfrr9ZJ4n5kGwjCsZE/kkTe2qYmZVl3TDiKVnreVtcxAw0PnmtdWV+M+P
-	R07QxEH4OXh0vGLgu0k72Cf3QZX75LNNPim78xU3wQhoCfvpkH5IvtxoqG9UM6PFt/VVEXLF90oWB
-	SdMhcwuTmVDYULKUA5CDp3rtDx1TO2lMGfsZAB6xnbwcmH8vjiCB6moq2vdHVoFbG0F5Xv0KYtyQn
-	6JZpv+9A==;
-Received: from ip6-localhost ([::1]:23114 helo=hr1.samba.org) 
+	bh=WZqvZdf+IZijbqhRUtEFRIRbPppvWHBM72Lcj7YrYLo=; b=ByuYIbc/4HsWwlZY03MRf/zYQp
+	38G92TnjWFrfnMZ/wMnyj+Qt6CKwUdhAiGEvafi8EvVY8m+uuIxHKGzWGkJLitv79ss6kd5ulLLk+
+	/00KTmvdEkOs8MICuj9yKmtusltLsX3zuhn2fI4dbKqpHebq0WIAEMF2ubdLcP8IpL3MNSlyQfBew
+	T/bg8jtXg8xI9T+6ipoHITFQuTXakwkGgfBN1w3rS3HE7mmbtH+AVOE4R0vKocvbJCAL6wxQwnyKQ
+	XBnKrBn7yOxEM78n7RLpjHMD7NgqT1l8Y5Q3ntsOIorXtP66NwKAk+wNNXa5vmMdMVK8vmflIqb8o
+	o9AN4rvg==;
+Received: from ip6-localhost ([::1]:27636 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1uRRQj-007Gr7-6D; Tue, 17 Jun 2025 08:12:29 +0000
-Received: from bombadil.infradead.org ([2607:7c80:54:3::133]:52114) 
+	id 1uRRQe-007Gqe-C0; Tue, 17 Jun 2025 08:12:24 +0000
+Received: from bombadil.infradead.org ([2607:7c80:54:3::133]:56372) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uRP97-007GRX-FV
- for samba-technical@lists.samba.org; Tue, 17 Jun 2025 05:46:12 +0000
+ (Exim) id 1uROtt-007GQZ-O2
+ for samba-technical@lists.samba.org; Tue, 17 Jun 2025 05:30:28 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=bombadil.20210309; h=In-Reply-To:Content-Type:MIME-Version
  :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
  Content-Transfer-Encoding:Content-ID:Content-Description;
- bh=WPsxJQ/JXacvbaipg//fOLi1s4GO46A+9y4pCE6t2y4=; b=xCxiDspWK79oWST3sh2t7cjJwF
- 3VtKzrTMd1ZyyEY3Yl1sQsmN0c46B/BWpmLx7GLhCFM16aw7g83BPPAETUVk7GelPlveK5I6sQ8E5
- ZxtytrGUEhUU9WZrIuJuMFvFwuFp4vj1nvN+EaRMqHi+KIfudASk+LhjQu9+lmF+F3IZYi7Ydf/Wk
- JTa1n3Fl61HKkjYiCIqjoqvwn7L3e/9n7XP0zshPQ9POdY/W9y4mdeV8e8mm04X6AEWaAswnDA8V3
- ZzeHtQqEnK2Y08dx0p/c6HZZCAPv4hvcg6CW2TmaFuNbCfjDhPGzoMVT4DrV3ggoDKSwdUATpVwPQ
- nIJAAeQw==;
+ bh=WZqvZdf+IZijbqhRUtEFRIRbPppvWHBM72Lcj7YrYLo=; b=XKElvTOpmuszk9VAFn9HgkecJM
+ 6IAMkL5kZMnt8MjfJ1vEjVj9R5k8ljvXtW+YOI/m2edGELJCrcMgGBduoaMYBeg7G05BznhBLoX1d
+ 0+sjC6CrRtar/13YnEZ7ojmdIvzTqG0vrsEaVHIdNS3S8RLEUQ8NfgMzeEVvr/NdCU+0MqzI/08Qs
+ eqF9MUEWApONmkeFyH9gcOKcOLTSRuO4ITmkyjCk7uTIITEEODimR08aqVL3k19XYNVQA+9g15vli
+ bDzJwWh1cQ8xVe4iWHcZSFe6rLm14eHrz7y9Xt3JYHTI9rryCSovcoiJGylwN91N9l5MOZHE3Cs70
+ w6WBhyfQ==;
 Received: from hch by bombadil.infradead.org with local (Exim 4.98.2 #2 (Red
- Hat Linux)) id 1uRObY-00000006ERs-1HY9;
- Tue, 17 Jun 2025 05:11:28 +0000
-Date: Mon, 16 Jun 2025 22:11:28 -0700
+ Hat Linux)) id 1uROtD-00000006GHz-1YxH;
+ Tue, 17 Jun 2025 05:29:43 +0000
+Date: Mon, 16 Jun 2025 22:29:43 -0700
 To: Lorenzo Stoakes <lorenzo.stoakes@oracle.com>
 Subject: Re: [PATCH 03/10] fs: consistently use file_has_valid_mmap_hooks()
  helper
-Message-ID: <aFD5AP7B80np-Szz@infradead.org>
+Message-ID: <aFD9R2Ax3wIuNe2a@infradead.org>
 References: <cover.1750099179.git.lorenzo.stoakes@oracle.com>
  <b68145b609532e62bab603dd9686faa6562046ec.1750099179.git.lorenzo.stoakes@oracle.com>
+ <aFD5AP7B80np-Szz@infradead.org>
+ <b91c387e-5226-4c5e-94c3-04e80409ed62@lucifer.local>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <b68145b609532e62bab603dd9686faa6562046ec.1750099179.git.lorenzo.stoakes@oracle.com>
+In-Reply-To: <b91c387e-5226-4c5e-94c3-04e80409ed62@lucifer.local>
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
  bombadil.infradead.org. See http://www.infradead.org/rpr.html
-X-Mailman-Approved-At: Tue, 17 Jun 2025 08:12:27 +0000
+X-Mailman-Approved-At: Tue, 17 Jun 2025 08:12:21 +0000
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -128,24 +130,16 @@ Cc: Latchesar Ionkov <lucho@ionkov.net>, nvdimm@lists.linux.dev,
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Mon, Jun 16, 2025 at 08:33:22PM +0100, Lorenzo Stoakes wrote:
-> Since commit c84bf6dd2b83 ("mm: introduce new .mmap_prepare() file
-> callback"), the f_op->mmap() hook has been deprecated in favour of
-> f_op->mmap_prepare().
+On Tue, Jun 17, 2025 at 06:25:34AM +0100, Lorenzo Stoakes wrote:
+> > > Most notably, this updates the elf logic to allow for the ability to
+> > > execute binaries on filesystems which have the .mmap_prepare hook, but
+> > > additionally we update nested filesystems.
+> >
+> > Can you please give the function a better name before spreading it?
+> > file operations aren't hooks by any classic definition.
+> >
 > 
-> Additionally, commit bb666b7c2707 ("mm: add mmap_prepare() compatibility
-> layer for nested file systems") permits the use of the .mmap_prepare() hook
-> even in nested filesystems like overlayfs.
-> 
-> There are a number of places where we check only for f_op->mmap - this is
-> incorrect now mmap_prepare exists, so update all of these to use the
-> general helper file_has_valid_mmap_hooks().
-> 
-> Most notably, this updates the elf logic to allow for the ability to
-> execute binaries on filesystems which have the .mmap_prepare hook, but
-> additionally we update nested filesystems.
+> can_mmap_file()?
 
-Can you please give the function a better name before spreading it?
-file operations aren't hooks by any classic definition.
-
+Sounds reasonable.
 
