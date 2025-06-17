@@ -2,53 +2,68 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id A98FFADC441
-	for <lists+samba-technical@lfdr.de>; Tue, 17 Jun 2025 10:13:14 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D68ABADDDE1
+	for <lists+samba-technical@lfdr.de>; Tue, 17 Jun 2025 23:25:18 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=WZqvZdf+IZijbqhRUtEFRIRbPppvWHBM72Lcj7YrYLo=; b=ByuYIbc/4HsWwlZY03MRf/zYQp
-	38G92TnjWFrfnMZ/wMnyj+Qt6CKwUdhAiGEvafi8EvVY8m+uuIxHKGzWGkJLitv79ss6kd5ulLLk+
-	/00KTmvdEkOs8MICuj9yKmtusltLsX3zuhn2fI4dbKqpHebq0WIAEMF2ubdLcP8IpL3MNSlyQfBew
-	T/bg8jtXg8xI9T+6ipoHITFQuTXakwkGgfBN1w3rS3HE7mmbtH+AVOE4R0vKocvbJCAL6wxQwnyKQ
-	XBnKrBn7yOxEM78n7RLpjHMD7NgqT1l8Y5Q3ntsOIorXtP66NwKAk+wNNXa5vmMdMVK8vmflIqb8o
-	o9AN4rvg==;
-Received: from ip6-localhost ([::1]:27636 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=JuLt0GGKgFyX2XRmAg725NFu0qIHEn0MTXrZHQEojQ4=; b=fWpkdniIZ5fZN6o0GPvbCVw5w6
+	UnwXp7ehVnIKkUlVKAS9fHg1eKgkxMn4XoAWm3bveizgkfdQIq+v+O3G0LH7IBnbK5kjFHn++GKMl
+	GVH5bPBI8sJYfwxLl5eTRolWeBLBtr9eOx6aqwivNaLa62BWf58r2GlAqJ1bnrPC1VLvl71qsWb3S
+	BQzyoqSIiILkzzoUtbVNzTQ2fDXFjRPPRkZ1gkqP2Cgjo9CHjgG7TYMRUuYOXj5Bz3IIC9na4ibWp
+	3hSeUDsGyZu4fZifN73mEZO9TZMOchiU0x05CiaRlupQi6DRKoL/vransYqIHxl4Vruf+0ZxkPg3w
+	OAt8wGhA==;
+Received: from ip6-localhost ([::1]:24296 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1uRRQe-007Gqe-C0; Tue, 17 Jun 2025 08:12:24 +0000
-Received: from bombadil.infradead.org ([2607:7c80:54:3::133]:56372) 
+	id 1uRdnC-007J9K-JA; Tue, 17 Jun 2025 21:24:30 +0000
+Received: from mail-lj1-x236.google.com ([2a00:1450:4864:20::236]:46575) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uROtt-007GQZ-O2
- for samba-technical@lists.samba.org; Tue, 17 Jun 2025 05:30:28 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=bombadil.20210309; h=In-Reply-To:Content-Type:MIME-Version
- :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
- Content-Transfer-Encoding:Content-ID:Content-Description;
- bh=WZqvZdf+IZijbqhRUtEFRIRbPppvWHBM72Lcj7YrYLo=; b=XKElvTOpmuszk9VAFn9HgkecJM
- 6IAMkL5kZMnt8MjfJ1vEjVj9R5k8ljvXtW+YOI/m2edGELJCrcMgGBduoaMYBeg7G05BznhBLoX1d
- 0+sjC6CrRtar/13YnEZ7ojmdIvzTqG0vrsEaVHIdNS3S8RLEUQ8NfgMzeEVvr/NdCU+0MqzI/08Qs
- eqF9MUEWApONmkeFyH9gcOKcOLTSRuO4ITmkyjCk7uTIITEEODimR08aqVL3k19XYNVQA+9g15vli
- bDzJwWh1cQ8xVe4iWHcZSFe6rLm14eHrz7y9Xt3JYHTI9rryCSovcoiJGylwN91N9l5MOZHE3Cs70
- w6WBhyfQ==;
-Received: from hch by bombadil.infradead.org with local (Exim 4.98.2 #2 (Red
- Hat Linux)) id 1uROtD-00000006GHz-1YxH;
- Tue, 17 Jun 2025 05:29:43 +0000
-Date: Mon, 16 Jun 2025 22:29:43 -0700
-To: Lorenzo Stoakes <lorenzo.stoakes@oracle.com>
-Subject: Re: [PATCH 03/10] fs: consistently use file_has_valid_mmap_hooks()
- helper
-Message-ID: <aFD9R2Ax3wIuNe2a@infradead.org>
-References: <cover.1750099179.git.lorenzo.stoakes@oracle.com>
- <b68145b609532e62bab603dd9686faa6562046ec.1750099179.git.lorenzo.stoakes@oracle.com>
- <aFD5AP7B80np-Szz@infradead.org>
- <b91c387e-5226-4c5e-94c3-04e80409ed62@lucifer.local>
+ (Exim) id 1uRdn8-007J9D-4z
+ for samba-technical@lists.samba.org; Tue, 17 Jun 2025 21:24:28 +0000
+Received: by mail-lj1-x236.google.com with SMTP id
+ 38308e7fff4ca-32b3c292bb4so49714691fa.1
+ for <samba-technical@lists.samba.org>; Tue, 17 Jun 2025 14:24:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1750195464; x=1750800264; darn=lists.samba.org;
+ h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=JuLt0GGKgFyX2XRmAg725NFu0qIHEn0MTXrZHQEojQ4=;
+ b=DmCDVZzWHJruoCjqy6wtEiGm6Enjn0wK2yqve2CkrekwfnQ27sbP1FwW+g8mC+D2yS
+ cf298u5r99C5xxCgP2rkePYlpvyXgHA1BY9tCNL0YIMNTGrB2pH8VZJXi/hesNtZ2Zp8
+ lzkn32X46BnvIsZrjVrr4HlP4Gs6LMt7AxiQITb9UI1diEGSMrdhThcm/gxc5ALNZJDI
+ OVHch0FfBi9aWv8aFz/fvQH23xE50brY+SNajKDDjpI4Xi+I5xweLqU1B5hu4WzsZq9m
+ GSNZTd3UXqIsAvlhvMfmlGXm7SHRRUXJJaML04WNwEdpDtDXPcNLabraIU8Bx2YdzB9Q
+ p/Og==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1750195464; x=1750800264;
+ h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=JuLt0GGKgFyX2XRmAg725NFu0qIHEn0MTXrZHQEojQ4=;
+ b=WxzQHScKOsqLZN8cUxqZLu9WNM0zkQJD1Qq50ICyA9WqNX4FdQPWlgts/G6FljgEez
+ cATBCipMBfatiCqfyt3x+oGGzXH8BL0A2f++DyqS97+89qltYJLT4VAoce9bYh+b68uu
+ ZGxRY78MacmLq5fLICGkHFlqr0BroKjmYg8ECQo0YyWUrN5NRuU+gAJ5ypRSKqP8dYMd
+ 4MuUIE5i/jvIsFA+e5D3Z7G6O90H7sSGNom2oNjTh0FBK2T3II9Rb60NZhEGziR8Ip32
+ 0yCg7wI7T+MfaEoCBLKrbmJ+ASVI3oGJI+MoKjtnvH3yw+nbbNuG2/QGZ4rnbhNMwmM5
+ X6aQ==
+X-Gm-Message-State: AOJu0YzxGEWzubiOHTmGnzcp28Ch/JorfrTd6ZCtLes0pkMZtin23M+c
+ jJE/E59cukjS6RpjtABDPy5Ehlo8IlYfZqLztkM3qRuNlKcGQXuXRLth85gjpzMVYK4mrF3cKzd
+ o/qnV7009U+4k8T9Ex/7FeNPeAzazVe4=
+X-Gm-Gg: ASbGncvodKVibx0xFr+NwxKat6h8SP1VJ5R1Z875X8Dg5goVAIc6vCvAvenl99F3F5a
+ 41vNqA6NmjdCmTZ26sWJP/6SR4lMrew1dPWxEvbLrEfCd2q6PqTw0UPk+jNEZ9p+Pn3GCnHSS0M
+ Ki9C+z2rJfmNnop4AYV9G2Gy8adT4ViW8UTRhxbUfhKl5ZWxUsGzPu/VaTrKuXYTERqUtEhSKtU
+ aU=
+X-Google-Smtp-Source: AGHT+IGtS53+vo6DKNQkHrBa42D4sXeg19XeHIwHWRMRoUUK2qaBeFAvkzGhN7Bl7zuvJscUU2h6nSVps78X4Tn4O5M=
+X-Received: by 2002:a2e:be83:0:b0:32b:3689:8d80 with SMTP id
+ 38308e7fff4ca-32b4a2ddceemr34242211fa.18.1750195463713; Tue, 17 Jun 2025
+ 14:24:23 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <b91c387e-5226-4c5e-94c3-04e80409ed62@lucifer.local>
-X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
- bombadil.infradead.org. See http://www.infradead.org/rpr.html
-X-Mailman-Approved-At: Tue, 17 Jun 2025 08:12:21 +0000
+Date: Tue, 17 Jun 2025 16:24:10 -0500
+X-Gm-Features: AX0GCFvzH0ZKK4BzcANpfjAREEc8Srr3CpFEgEuBpNlzDHWEmjSDM2-Yieq4Adg
+Message-ID: <CAH2r5mvc1A-3Ph1GKdffpRMc6BpDXMqpK7NrvR8ThW0Lc2chbg@mail.gmail.com>
+Subject: [PATCH][SMB3 client] cifs: Show reason why autodisabling serverino
+ support
+To: CIFS <linux-cifs@vger.kernel.org>
+Content-Type: multipart/mixed; boundary="000000000000e7493d0637cb2293"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -62,84 +77,170 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Christoph Hellwig via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Christoph Hellwig <hch@infradead.org>
-Cc: Latchesar Ionkov <lucho@ionkov.net>, nvdimm@lists.linux.dev,
- Paulo Alcantara <pc@manguebit.org>, dri-devel@lists.freedesktop.org,
- ceph-devel@vger.kernel.org, Mike Marshall <hubcap@omnibond.com>,
- linux-xfs@vger.kernel.org, Tyler Hicks <code@tyhicks.com>,
- devel@lists.orangefs.org, Shyam Prasad N <sprasad@microsoft.com>,
- Jan Harkes <jaharkes@cs.cmu.edu>, linux-um@lists.infradead.org,
- Joel Becker <jlbec@evilplan.org>,
- John Paul Adrian Glaubitz <glaubitz@physik.fu-berlin.de>,
- Eric Van Hensbergen <ericvh@kernel.org>,
- Zhihao Cheng <chengzhihao1@huawei.com>, Christian Brauner <brauner@kernel.org>,
- linux-kernel@vger.kernel.org, linux-fsdevel@vger.kernel.org,
- Andrew Morton <akpm@linux-foundation.org>,
- Trond Myklebust <trondmy@kernel.org>, Dave Kleikamp <shaggy@kernel.org>,
- Sandeep Dhavale <dhavale@google.com>, Simona Vetter <simona@ffwll.ch>,
- linux-cifs@vger.kernel.org, linux-nilfs@vger.kernel.org,
- codalist@coda.cs.cmu.edu, Namjae Jeon <linkinjeon@kernel.org>,
- ecryptfs@vger.kernel.org, Yangtao Li <frank.li@vivo.com>,
- Jani Nikula <jani.nikula@linux.intel.com>, ocfs2-devel@lists.linux.dev,
- Pedro Falcato <pfalcato@suse.de>, OGAWA Hirofumi <hirofumi@mail.parknet.co.jp>,
- linux-block@vger.kernel.org, Theodore Ts'o <tytso@mit.edu>,
- linux-f2fs-devel@lists.sourceforge.net, Hongbo Li <lihongbo22@huawei.com>,
- Anna Schumaker <anna@kernel.org>, Martin Brandenburg <martin@omnibond.com>,
- Kees Cook <kees@kernel.org>, Yuezhang Mo <yuezhang.mo@sony.com>,
- Carlos Maiolino <cem@kernel.org>,
- Joonas Lahtinen <joonas.lahtinen@linux.intel.com>, Chris Mason <clm@fb.com>,
- linux-mtd@lists.infradead.org, Jaegeuk Kim <jaegeuk@kernel.org>,
- Marc Dionne <marc.dionne@auristor.com>, Tvrtko Ursulin <tursulin@ursulin.net>,
- linux-afs@lists.infradead.org, Naohiro Aota <naohiro.aota@wdc.com>,
- Miklos Szeredi <miklos@szeredi.hu>, Matthew Wilcox <willy@infradead.org>,
- coda@cs.cmu.edu, Viacheslav Dubeyko <slava@dubeyko.com>,
- Ilya Dryomov <idryomov@gmail.com>, linux-ext4@vger.kernel.org,
- Amir Goldstein <amir73il@gmail.com>, intel-gfx@lists.freedesktop.org,
- Damien Le Moal <dlemoal@kernel.org>, Rodrigo Vivi <rodrigo.vivi@intel.com>,
- Dan Williams <dan.j.williams@intel.com>, Gao Xiang <xiang@kernel.org>,
- David Howells <dhowells@redhat.com>, linux-nfs@vger.kernel.org,
- linux-mm@kvack.org, samba-technical@lists.samba.org,
- Steve French <sfrench@samba.org>, ntfs3@lists.linux.dev,
- linux-erofs@lists.ozlabs.org, jfs-discussion@lists.sourceforge.net,
- Jan Kara <jack@suse.cz>, linux-aio@kvack.org,
- Dominique Martinet <asmadeus@codewreck.org>,
- Christian Schoenebeck <linux_oss@crudebyte.com>,
- Bob Copeland <me@bobcopeland.com>,
- Konstantin Komarov <almaz.alexandrovich@paragon-software.com>,
- Joseph Qi <joseph.qi@linux.alibaba.com>,
- Andreas Dilger <adilger.kernel@dilger.ca>,
- Mikulas Patocka <mikulas@artax.karlin.mff.cuni.cz>,
- David Airlie <airlied@gmail.com>,
- Anton Ivanov <anton.ivanov@cambridgegreys.com>, Yue Hu <zbestahu@gmail.com>,
- Richard Weinberger <richard@nod.at>, Mark Fasheh <mark@fasheh.com>,
- linux-bcachefs@vger.kernel.org, Jann Horn <jannh@google.com>,
- Chao Yu <chao@kernel.org>, Josef Bacik <josef@toxicpanda.com>,
- "Liam R . Howlett" <Liam.Howlett@oracle.com>, Tom Talpey <tom@talpey.com>,
- Hans de Goede <hdegoede@redhat.com>, Bharath SM <bharathsm@microsoft.com>,
- "Tigran A . Aivazian" <aivazian.tigran@gmail.com>,
- David Sterba <dsterba@suse.com>, Xiubo Li <xiubli@redhat.com>,
- Ryusuke Konishi <konishi.ryusuke@gmail.com>, Vlastimil Babka <vbabka@suse.cz>,
- Jens Axboe <axboe@kernel.dk>, Sungjong Seo <sj1557.seo@samsung.com>,
- v9fs@lists.linux.dev, Kent Overstreet <kent.overstreet@linux.dev>,
- linux-unionfs@vger.kernel.org, Benjamin LaHaise <bcrl@kvack.org>,
- Jeffle Xu <jefflexu@linux.alibaba.com>,
- Johannes Berg <johannes@sipsolutions.net>, Johannes Thumshirn <jth@kernel.org>,
- David Woodhouse <dwmw2@infradead.org>, linux-karma-devel@lists.sourceforge.net,
- linux-btrfs@vger.kernel.org, Alexander Viro <viro@zeniv.linux.org.uk>
+From: Steve French via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Steve French <smfrench@gmail.com>
+Cc: =?UTF-8?Q?Pali_Roh=C3=A1r?= <pali@kernel.org>,
+ samba-technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Tue, Jun 17, 2025 at 06:25:34AM +0100, Lorenzo Stoakes wrote:
-> > > Most notably, this updates the elf logic to allow for the ability to
-> > > execute binaries on filesystems which have the .mmap_prepare hook, but
-> > > additionally we update nested filesystems.
-> >
-> > Can you please give the function a better name before spreading it?
-> > file operations aren't hooks by any classic definition.
-> >
-> 
-> can_mmap_file()?
+--000000000000e7493d0637cb2293
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Sounds reasonable.
+Looks like Pali's updated patch (see attached) addressed the concerns
+brought up by Tom and Paulo, and does not result in logging any extra
+messages, just improving what is logged.   Let me know if any
+objections (or acked-by etc. that you want me to add).  Merged into
+cifs-2.6.git for-next pending additional testing.
+
+    Extend cifs_autodisable_serverino() function to print also text message=
+ why
+    the function was called.
+
+    The text message is printed just once for mount then autodisabling
+    serverino support. Once the serverino support is disabled for mount it =
+will
+    not be re-enabled. So those text messages do not cause flooding logs.
+
+    This change allows to debug issues why cifs.ko decide to turn off serve=
+r
+    inode number support and hence disable support for detection of hardlin=
+ks.
+
+    Signed-off-by: Pali Roh=C3=A1r <pali@kernel.org>
+
+
+
+--=20
+Thanks,
+
+Steve
+
+--000000000000e7493d0637cb2293
+Content-Type: text/x-patch; charset="UTF-8"; 
+	name="0001-cifs-Show-reason-why-autodisabling-serverino-support.patch"
+Content-Disposition: attachment; 
+	filename="0001-cifs-Show-reason-why-autodisabling-serverino-support.patch"
+Content-Transfer-Encoding: base64
+Content-ID: <f_mc1163xc0>
+X-Attachment-Id: f_mc1163xc0
+
+RnJvbSA0YjdkYjYzZWQ3YWEwZjBkOGU0NmRiYjA3MTU3MjJiYWZlZDY4ZTdkIE1vbiBTZXAgMTcg
+MDA6MDA6MDAgMjAwMQpGcm9tOiA9P1VURi04P3E/UGFsaT0yMFJvaD1DMz1BMXI/PSA8cGFsaUBr
+ZXJuZWwub3JnPgpEYXRlOiBTYXQsIDcgSnVuIDIwMjUgMTg6MTc6MTUgKzAyMDAKU3ViamVjdDog
+W1BBVENIXSBjaWZzOiBTaG93IHJlYXNvbiB3aHkgYXV0b2Rpc2FibGluZyBzZXJ2ZXJpbm8gc3Vw
+cG9ydApNSU1FLVZlcnNpb246IDEuMApDb250ZW50LVR5cGU6IHRleHQvcGxhaW47IGNoYXJzZXQ9
+VVRGLTgKQ29udGVudC1UcmFuc2Zlci1FbmNvZGluZzogOGJpdAoKRXh0ZW5kIGNpZnNfYXV0b2Rp
+c2FibGVfc2VydmVyaW5vKCkgZnVuY3Rpb24gdG8gcHJpbnQgYWxzbyB0ZXh0IG1lc3NhZ2Ugd2h5
+CnRoZSBmdW5jdGlvbiB3YXMgY2FsbGVkLgoKVGhlIHRleHQgbWVzc2FnZSBpcyBwcmludGVkIGp1
+c3Qgb25jZSBmb3IgbW91bnQgdGhlbiBhdXRvZGlzYWJsaW5nCnNlcnZlcmlubyBzdXBwb3J0LiBP
+bmNlIHRoZSBzZXJ2ZXJpbm8gc3VwcG9ydCBpcyBkaXNhYmxlZCBmb3IgbW91bnQgaXQgd2lsbApu
+b3QgYmUgcmUtZW5hYmxlZC4gU28gdGhvc2UgdGV4dCBtZXNzYWdlcyBkbyBub3QgY2F1c2UgZmxv
+b2RpbmcgbG9ncy4KClRoaXMgY2hhbmdlIGFsbG93cyB0byBkZWJ1ZyBpc3N1ZXMgd2h5IGNpZnMu
+a28gZGVjaWRlIHRvIHR1cm4gb2ZmIHNlcnZlcgppbm9kZSBudW1iZXIgc3VwcG9ydCBhbmQgaGVu
+Y2UgZGlzYWJsZSBzdXBwb3J0IGZvciBkZXRlY3Rpb24gb2YgaGFyZGxpbmtzLgoKU2lnbmVkLW9m
+Zi1ieTogUGFsaSBSb2jDoXIgPHBhbGlAa2VybmVsLm9yZz4KU2lnbmVkLW9mZi1ieTogU3RldmUg
+RnJlbmNoIDxzdGZyZW5jaEBtaWNyb3NvZnQuY29tPgotLS0KIGZzL3NtYi9jbGllbnQvY2lmc3By
+b3RvLmggfCAyICstCiBmcy9zbWIvY2xpZW50L2Nvbm5lY3QuYyAgIHwgMiArLQogZnMvc21iL2Ns
+aWVudC9kZnNfY2FjaGUuYyB8IDIgKy0KIGZzL3NtYi9jbGllbnQvaW5vZGUuYyAgICAgfCA2ICsr
+Ky0tLQogZnMvc21iL2NsaWVudC9taXNjLmMgICAgICB8IDYgKysrKystCiBmcy9zbWIvY2xpZW50
+L3JlYWRkaXIuYyAgIHwgNCArKy0tCiA2IGZpbGVzIGNoYW5nZWQsIDEzIGluc2VydGlvbnMoKyks
+IDkgZGVsZXRpb25zKC0pCgpkaWZmIC0tZ2l0IGEvZnMvc21iL2NsaWVudC9jaWZzcHJvdG8uaCBi
+L2ZzL3NtYi9jbGllbnQvY2lmc3Byb3RvLmgKaW5kZXggNjYwOTNmYTc4YWVkLi5jY2Q0MmI4MmM3
+MTEgMTAwNjQ0Ci0tLSBhL2ZzL3NtYi9jbGllbnQvY2lmc3Byb3RvLmgKKysrIGIvZnMvc21iL2Ns
+aWVudC9jaWZzcHJvdG8uaApAQCAtNTc5LDcgKzU3OSw3IEBAIGV4dGVybiBpbnQgY2lmc19kb19z
+ZXRfYWNsKGNvbnN0IHVuc2lnbmVkIGludCB4aWQsIHN0cnVjdCBjaWZzX3Rjb24gKnRjb24sCiBl
+eHRlcm4gaW50IENJRlNHZXRFeHRBdHRyKGNvbnN0IHVuc2lnbmVkIGludCB4aWQsIHN0cnVjdCBj
+aWZzX3Rjb24gKnRjb24sCiAJCQljb25zdCBpbnQgbmV0ZmlkLCBfX3U2NCAqcEV4dEF0dHJCaXRz
+LCBfX3U2NCAqcE1hc2spOwogI2VuZGlmIC8qIENJRlNfQUxMT1dfSU5TRUNVUkVfTEVHQUNZICov
+Ci1leHRlcm4gdm9pZCBjaWZzX2F1dG9kaXNhYmxlX3NlcnZlcmlubyhzdHJ1Y3QgY2lmc19zYl9p
+bmZvICpjaWZzX3NiKTsKK2V4dGVybiB2b2lkIGNpZnNfYXV0b2Rpc2FibGVfc2VydmVyaW5vKHN0
+cnVjdCBjaWZzX3NiX2luZm8gKmNpZnNfc2IsIGNvbnN0IGNoYXIgKnJlYXNvbiwgaW50IHJjKTsK
+IGV4dGVybiBib29sIGNvdWxkYmVfbWZfc3ltbGluayhjb25zdCBzdHJ1Y3QgY2lmc19mYXR0ciAq
+ZmF0dHIpOwogZXh0ZXJuIGludCBjaGVja19tZl9zeW1saW5rKHVuc2lnbmVkIGludCB4aWQsIHN0
+cnVjdCBjaWZzX3Rjb24gKnRjb24sCiAJCQkgICAgICBzdHJ1Y3QgY2lmc19zYl9pbmZvICpjaWZz
+X3NiLApkaWZmIC0tZ2l0IGEvZnMvc21iL2NsaWVudC9jb25uZWN0LmMgYi9mcy9zbWIvY2xpZW50
+L2Nvbm5lY3QuYwppbmRleCBjNDg4NjljMjllMTUuLmNlMmM0Y2Y5ODI2ZSAxMDA2NDQKLS0tIGEv
+ZnMvc21iL2NsaWVudC9jb25uZWN0LmMKKysrIGIvZnMvc21iL2NsaWVudC9jb25uZWN0LmMKQEAg
+LTM5MTgsNyArMzkxOCw3IEBAIGludCBjaWZzX21vdW50KHN0cnVjdCBjaWZzX3NiX2luZm8gKmNp
+ZnNfc2IsIHN0cnVjdCBzbWIzX2ZzX2NvbnRleHQgKmN0eCkKIAkgKiBBZnRlciByZWNvbm5lY3Rp
+bmcgdG8gYSBkaWZmZXJlbnQgc2VydmVyLCB1bmlxdWUgaWRzIHdvbid0IG1hdGNoIGFueW1vcmUs
+IHNvIHdlIGRpc2FibGUKIAkgKiBzZXJ2ZXJpbm8uIFRoaXMgcHJldmVudHMgZGVudHJ5IHJldmFs
+aWRhdGlvbiB0byB0aGluayB0aGUgZGVudHJ5IGFyZSBzdGFsZSAoRVNUQUxFKS4KIAkgKi8KLQlj
+aWZzX2F1dG9kaXNhYmxlX3NlcnZlcmlubyhjaWZzX3NiKTsKKwljaWZzX2F1dG9kaXNhYmxlX3Nl
+cnZlcmlubyhjaWZzX3NiLCAiUmVjb25uZWN0aW5nIHRvIGRpZmZlcmVudCBzZXJ2ZXIsIGlub2Rl
+IG51bWJlcnMgd29uJ3QgbWF0Y2ggYW55bW9yZSIsIDApOwogCS8qCiAJICogRm9yY2UgdGhlIHVz
+ZSBvZiBwcmVmaXggcGF0aCB0byBzdXBwb3J0IGZhaWxvdmVyIG9uIERGUyBwYXRocyB0aGF0IHJl
+c29sdmUgdG8gdGFyZ2V0cwogCSAqIHRoYXQgaGF2ZSBkaWZmZXJlbnQgcHJlZml4IHBhdGhzLgpk
+aWZmIC0tZ2l0IGEvZnMvc21iL2NsaWVudC9kZnNfY2FjaGUuYyBiL2ZzL3NtYi9jbGllbnQvZGZz
+X2NhY2hlLmMKaW5kZXggNGRhZGEyNmQ1NmI1Li5jM2ZlODVjMzFlMmIgMTAwNjQ0Ci0tLSBhL2Zz
+L3NtYi9jbGllbnQvZGZzX2NhY2hlLmMKKysrIGIvZnMvc21iL2NsaWVudC9kZnNfY2FjaGUuYwpA
+QCAtMTI4OSw3ICsxMjg5LDcgQEAgaW50IGRmc19jYWNoZV9yZW1vdW50X2ZzKHN0cnVjdCBjaWZz
+X3NiX2luZm8gKmNpZnNfc2IpCiAJICogQWZ0ZXIgcmVjb25uZWN0aW5nIHRvIGEgZGlmZmVyZW50
+IHNlcnZlciwgdW5pcXVlIGlkcyB3b24ndCBtYXRjaCBhbnltb3JlLCBzbyB3ZSBkaXNhYmxlCiAJ
+ICogc2VydmVyaW5vLiBUaGlzIHByZXZlbnRzIGRlbnRyeSByZXZhbGlkYXRpb24gdG8gdGhpbmsg
+dGhlIGRlbnRyeSBhcmUgc3RhbGUgKEVTVEFMRSkuCiAJICovCi0JY2lmc19hdXRvZGlzYWJsZV9z
+ZXJ2ZXJpbm8oY2lmc19zYik7CisJY2lmc19hdXRvZGlzYWJsZV9zZXJ2ZXJpbm8oY2lmc19zYiwg
+IlJlY29ubmVjdGluZyB0byBkaWZmZXJlbnQgc2VydmVyLCBpbm9kZSBudW1iZXJzIHdvbid0IG1h
+dGNoIGFueW1vcmUiLCAwKTsKIAkvKgogCSAqIEZvcmNlIHRoZSB1c2Ugb2YgcHJlZml4IHBhdGgg
+dG8gc3VwcG9ydCBmYWlsb3ZlciBvbiBERlMgcGF0aHMgdGhhdCByZXNvbHZlIHRvIHRhcmdldHMK
+IAkgKiB0aGF0IGhhdmUgZGlmZmVyZW50IHByZWZpeCBwYXRocy4KZGlmZiAtLWdpdCBhL2ZzL3Nt
+Yi9jbGllbnQvaW5vZGUuYyBiL2ZzL3NtYi9jbGllbnQvaW5vZGUuYwppbmRleCA3NWJlNGI0NmJj
+NmYuLmVhZDFiZTg3MTJmNCAxMDA2NDQKLS0tIGEvZnMvc21iL2NsaWVudC9pbm9kZS5jCisrKyBi
+L2ZzL3NtYi9jbGllbnQvaW5vZGUuYwpAQCAtMTEzMiw3ICsxMTMyLDcgQEAgc3RhdGljIHZvaWQg
+Y2lmc19zZXRfZmF0dHJfaW5vKGludCB4aWQsIHN0cnVjdCBjaWZzX3Rjb24gKnRjb24sIHN0cnVj
+dCBzdXBlcl9ibG8KIAkJCWZhdHRyLT5jZl91bmlxdWVpZCA9IENJRlNfSSgqaW5vZGUpLT51bmlx
+dWVpZDsKIAkJZWxzZSB7CiAJCQlmYXR0ci0+Y2ZfdW5pcXVlaWQgPSBpdW5pcXVlKHNiLCBST09U
+X0kpOwotCQkJY2lmc19hdXRvZGlzYWJsZV9zZXJ2ZXJpbm8oY2lmc19zYik7CisJCQljaWZzX2F1
+dG9kaXNhYmxlX3NlcnZlcmlubyhjaWZzX3NiLCAiQ2Fubm90IHJldHJpZXZlIGlub2RlIG51bWJl
+ciB2aWEgZ2V0X3Nydl9pbnVtIiwgcmMpOwogCQl9CiAJCXJldHVybjsKIAl9CkBAIC0xNjI3LDcg
+KzE2MjcsNyBAQCBjaWZzX2lnZXQoc3RydWN0IHN1cGVyX2Jsb2NrICpzYiwgc3RydWN0IGNpZnNf
+ZmF0dHIgKmZhdHRyKQogCQkJZmF0dHItPmNmX2ZsYWdzICY9IH5DSUZTX0ZBVFRSX0lOT19DT0xM
+SVNJT047CiAKIAkJCWlmIChpbm9kZV9oYXNfaGFzaGVkX2RlbnRyaWVzKGlub2RlKSkgewotCQkJ
+CWNpZnNfYXV0b2Rpc2FibGVfc2VydmVyaW5vKENJRlNfU0Ioc2IpKTsKKwkJCQljaWZzX2F1dG9k
+aXNhYmxlX3NlcnZlcmlubyhDSUZTX1NCKHNiKSwgIklub2RlIG51bWJlciBjb2xsaXNpb24gZGV0
+ZWN0ZWQiLCAwKTsKIAkJCQlpcHV0KGlub2RlKTsKIAkJCQlmYXR0ci0+Y2ZfdW5pcXVlaWQgPSBp
+dW5pcXVlKHNiLCBST09UX0kpOwogCQkJCWdvdG8gcmV0cnlfaWdldDVfbG9ja2VkOwpAQCAtMTY5
+NCw3ICsxNjk0LDcgQEAgc3RydWN0IGlub2RlICpjaWZzX3Jvb3RfaWdldChzdHJ1Y3Qgc3VwZXJf
+YmxvY2sgKnNiKQogCWlmICghcmMpIHsKIAkJaWYgKGZhdHRyLmNmX2ZsYWdzICYgQ0lGU19GQVRU
+Ul9KVU5DVElPTikgewogCQkJZmF0dHIuY2ZfZmxhZ3MgJj0gfkNJRlNfRkFUVFJfSlVOQ1RJT047
+Ci0JCQljaWZzX2F1dG9kaXNhYmxlX3NlcnZlcmlubyhjaWZzX3NiKTsKKwkJCWNpZnNfYXV0b2Rp
+c2FibGVfc2VydmVyaW5vKGNpZnNfc2IsICJDYW5ub3QgcmV0cmlldmUgYXR0cmlidXRlcyBmb3Ig
+anVuY3Rpb24gcG9pbnQiLCByYyk7CiAJCX0KIAkJaW5vZGUgPSBjaWZzX2lnZXQoc2IsICZmYXR0
+cik7CiAJfQpkaWZmIC0tZ2l0IGEvZnMvc21iL2NsaWVudC9taXNjLmMgYi9mcy9zbWIvY2xpZW50
+L21pc2MuYwppbmRleCBlNzcwMTdmNDcwODQuLjQwOTI3Nzg4M2U4YSAxMDA2NDQKLS0tIGEvZnMv
+c21iL2NsaWVudC9taXNjLmMKKysrIGIvZnMvc21iL2NsaWVudC9taXNjLmMKQEAgLTU1Miw3ICs1
+NTIsNyBAQCBkdW1wX3NtYih2b2lkICpidWYsIGludCBzbWJfYnVmX2xlbmd0aCkKIH0KIAogdm9p
+ZAotY2lmc19hdXRvZGlzYWJsZV9zZXJ2ZXJpbm8oc3RydWN0IGNpZnNfc2JfaW5mbyAqY2lmc19z
+YikKK2NpZnNfYXV0b2Rpc2FibGVfc2VydmVyaW5vKHN0cnVjdCBjaWZzX3NiX2luZm8gKmNpZnNf
+c2IsIGNvbnN0IGNoYXIgKnJlYXNvbiwgaW50IHJjKQogewogCWlmIChjaWZzX3NiLT5tbnRfY2lm
+c19mbGFncyAmIENJRlNfTU9VTlRfU0VSVkVSX0lOVU0pIHsKIAkJc3RydWN0IGNpZnNfdGNvbiAq
+dGNvbiA9IE5VTEw7CkBAIC01NjIsNiArNTYyLDEwIEBAIGNpZnNfYXV0b2Rpc2FibGVfc2VydmVy
+aW5vKHN0cnVjdCBjaWZzX3NiX2luZm8gKmNpZnNfc2IpCiAKIAkJY2lmc19zYi0+bW50X2NpZnNf
+ZmxhZ3MgJj0gfkNJRlNfTU9VTlRfU0VSVkVSX0lOVU07CiAJCWNpZnNfc2ItPm1udF9jaWZzX3Nl
+cnZlcmlub19hdXRvZGlzYWJsZWQgPSB0cnVlOworCQlpZiAocmMpCisJCQljaWZzX2RiZyhWRlMs
+ICIlczogJWRcbiIsIHJlYXNvbiwgcmMpOworCQllbHNlCisJCQljaWZzX2RiZyhWRlMsICIlc1xu
+IiwgcmVhc29uKTsKIAkJY2lmc19kYmcoVkZTLCAiQXV0b2Rpc2FibGluZyB0aGUgdXNlIG9mIHNl
+cnZlciBpbm9kZSBudW1iZXJzIG9uICVzXG4iLAogCQkJIHRjb24gPyB0Y29uLT50cmVlX25hbWUg
+OiAibmV3IHNlcnZlciIpOwogCQljaWZzX2RiZyhWRlMsICJUaGUgc2VydmVyIGRvZXNuJ3Qgc2Vl
+bSB0byBzdXBwb3J0IHRoZW0gcHJvcGVybHkgb3IgdGhlIGZpbGVzIG1pZ2h0IGJlIG9uIGRpZmZl
+cmVudCBzZXJ2ZXJzIChERlMpXG4iKTsKZGlmZiAtLWdpdCBhL2ZzL3NtYi9jbGllbnQvcmVhZGRp
+ci5jIGIvZnMvc21iL2NsaWVudC9yZWFkZGlyLmMKaW5kZXggYmEwMTkzY2Y5MDMzLi5lNWYxMjcz
+OWVlMTQgMTAwNjQ0Ci0tLSBhL2ZzL3NtYi9jbGllbnQvcmVhZGRpci5jCisrKyBiL2ZzL3NtYi9j
+bGllbnQvcmVhZGRpci5jCkBAIC00MTQsNyArNDE0LDcgQEAgX2luaXRpYXRlX2NpZnNfc2VhcmNo
+KGNvbnN0IHVuc2lnbmVkIGludCB4aWQsIHN0cnVjdCBmaWxlICpmaWxlLAogCQljaWZzRmlsZS0+
+aW52YWxpZEhhbmRsZSA9IGZhbHNlOwogCX0gZWxzZSBpZiAoKHJjID09IC1FT1BOT1RTVVBQKSAm
+JgogCQkgICAoY2lmc19zYi0+bW50X2NpZnNfZmxhZ3MgJiBDSUZTX01PVU5UX1NFUlZFUl9JTlVN
+KSkgewotCQljaWZzX2F1dG9kaXNhYmxlX3NlcnZlcmlubyhjaWZzX3NiKTsKKwkJY2lmc19hdXRv
+ZGlzYWJsZV9zZXJ2ZXJpbm8oY2lmc19zYiwgIkNhbm5vdCByZXRyaWV2ZSBpbm9kZSBudW1iZXIg
+dmlhIHF1ZXJ5X2Rpcl9maXJzdCIsIHJjKTsKIAkJZ290byBmZmlyc3RfcmV0cnk7CiAJfQogZXJy
+b3JfZXhpdDoKQEAgLTEwMTAsNyArMTAxMCw3IEBAIHN0YXRpYyBpbnQgY2lmc19maWxsZGlyKGNo
+YXIgKmZpbmRfZW50cnksIHN0cnVjdCBmaWxlICpmaWxlLAogCQlmYXR0ci5jZl91bmlxdWVpZCA9
+IGRlLmlubzsKIAl9IGVsc2UgewogCQlmYXR0ci5jZl91bmlxdWVpZCA9IGl1bmlxdWUoc2IsIFJP
+T1RfSSk7Ci0JCWNpZnNfYXV0b2Rpc2FibGVfc2VydmVyaW5vKGNpZnNfc2IpOworCQljaWZzX2F1
+dG9kaXNhYmxlX3NlcnZlcmlubyhjaWZzX3NiLCAiQ2Fubm90IHJldHJpZXZlIGlub2RlIG51bWJl
+ciIsIDApOwogCX0KIAogCWlmICgoY2lmc19zYi0+bW50X2NpZnNfZmxhZ3MgJiBDSUZTX01PVU5U
+X01GX1NZTUxJTktTKSAmJgotLSAKMi40My4wCgo=
+--000000000000e7493d0637cb2293--
 
