@@ -2,74 +2,62 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4C588ADE540
-	for <lists+samba-technical@lfdr.de>; Wed, 18 Jun 2025 10:10:12 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4092FADF5D9
+	for <lists+samba-technical@lfdr.de>; Wed, 18 Jun 2025 20:29:57 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=lh4Wu179zCLjOtNueJK/Sz96qfLF/PqNel8O0RNTt9E=; b=x3+QEBeYG9DWHrJnirTmiLPUKS
-	RFznu4QhaS8o7jU31JlkTFrp+y6Hj1hMLUIEBb4l9zQOIxupxFcXNPpwYe6vDIRMJiDIJZ1cG8nie
-	ywfrA60FEhY4qUr6leRSspMQDubbmHVZzLUJlgFHNpzSRQhmF9ZlOVI9jq1GUy8ZlpTUzEyTmqU5M
-	O+Dd5RHkUld05D/hkZlClpWdM3Ftw0M5WzUmjgA5Wv5eKUbpHf8vamn8IlMz9/CPQlftKnxm23P+Y
-	dMm7hcg+F0827nfJmBKVzwBTKgEv7Ug6ld5IEsuSaJIQYeSkYZsG9SDvdYzBAVZheK3WyRqLXNkHQ
-	uYM26KQQ==;
-Received: from ip6-localhost ([::1]:22700 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=xVrAej1HO4rIp+9HMYLOlUEw4rdVkRglzBob+SF7+68=; b=XysU5Ye29/Xd1FonutLs+G1U+j
+	T7uU8RhF0yygmDFXT03YXJAvJSfDJUwzth0vy7eNMoKhzRlNuvT+nP6D7B5X9kK4D+MTTJSGnteHh
+	/SqQm+pMxtlha/b5ZMlkgYD9J/Hf6ciS2wgiLiIPpBAJVw/lYZ0aL7eN499/DcVNjyQi1c1BHT2Ef
+	NhJZtzCbFSOrzctvUwSFupbBbr5jNDrC/Pt8WLOE9aw4vRGgphuZS8lOxthkdGz7FYSSqV/OM5j38
+	ESRZCG/IHp/9gTf8oFdccrJUqXuk9/xSS+qImVQvZpppYuBkq83qLtLZMZZkldR5hfBG6oPe6+Rb9
+	cdDNT+Hw==;
+Received: from ip6-localhost ([::1]:47726 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1uRnqf-007KfU-HT; Wed, 18 Jun 2025 08:08:45 +0000
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124]:39469) 
+	id 1uRxXD-007OVk-Ob; Wed, 18 Jun 2025 18:29:19 +0000
+Received: from plasma4.jpberlin.de ([80.241.57.33]:55515) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uRXD7-007IDG-7V
- for samba-technical@lists.samba.org; Tue, 17 Jun 2025 14:22:51 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1750170165;
+ (Exim) id 1uRxX7-007OVd-La
+ for samba-technical@lists.samba.org; Wed, 18 Jun 2025 18:29:17 +0000
+Received: from spamfilter01.heinlein-hosting.de
+ (spamfilter01.heinlein-hosting.de [80.241.56.115])
+ by plasma.jpberlin.de (Postfix) with ESMTP id D18CCC089C;
+ Wed, 18 Jun 2025 20:29:07 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kania-online.de;
+ s=MBO0001; t=1750271348;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ to:to:cc:mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=lh4Wu179zCLjOtNueJK/Sz96qfLF/PqNel8O0RNTt9E=;
- b=Ulmmy3s00Y02rlVcUclnoN8pFZ7fNlTLHYcKDFn9aUs1yeCCdrAs7ZwCZVvORwUg0L8qJt
- hTrSdJDv1eSAs+97zl9JuJtyOwkWPQPTWqob3VZ77/bByqhwqG58iikU0+1jA0JsMBhHGr
- s1J2MVCF6ekhACfjl4CxQl+rIFOax5Y=
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1750170165;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=lh4Wu179zCLjOtNueJK/Sz96qfLF/PqNel8O0RNTt9E=;
- b=Ulmmy3s00Y02rlVcUclnoN8pFZ7fNlTLHYcKDFn9aUs1yeCCdrAs7ZwCZVvORwUg0L8qJt
- hTrSdJDv1eSAs+97zl9JuJtyOwkWPQPTWqob3VZ77/bByqhwqG58iikU0+1jA0JsMBhHGr
- s1J2MVCF6ekhACfjl4CxQl+rIFOax5Y=
-Received: from mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-526-TESfps40ObWOGtY2RnRx3A-1; Tue,
- 17 Jun 2025 10:07:07 -0400
-X-MC-Unique: TESfps40ObWOGtY2RnRx3A-1
-X-Mimecast-MFC-AGG-ID: TESfps40ObWOGtY2RnRx3A_1750169217
-Received: from mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.12])
+ bh=xVrAej1HO4rIp+9HMYLOlUEw4rdVkRglzBob+SF7+68=;
+ b=q2i2tYcZC4OLimtRiOgNUOgC7YhB1CbaP9gsZz8VFMdu6/YS5aHM/Lv/b5Qh8hnvGvDI8D
+ 0Sf9VPNvy0fafPkmEUYON9VMN+8O1XB8FYOTGUe35sMj9TIkHJu15oKK3fVluMUdLqlFHW
+ YUuHM+hXDb1W39aD8eYXg54qi1mYnngAitGj0eHhucHFmlm1peqwD+tWVjUUoIlC84220k
+ RlMtRNSYDrQUCBOg0kkA6RSykEN9UD0SjJRw/DeEeiv8ucK6P6nYvZjJmkvnShUeDj9tJZ
+ 2jBQSEeD2woAZIh9NKqgghKnTsjelZCHM+E0agOlVzcH3z9Kq8C7CmRParzYsg==
+Received: from plasma.jpberlin.de ([80.241.56.68])
+ by spamfilter01.heinlein-hosting.de (spamfilter01.heinlein-hosting.de
+ [80.241.56.115]) (amavisd-new, port 10030)
+ with ESMTP id s2RD3WOcjV8C; Wed, 18 Jun 2025 20:29:01 +0200 (CEST)
+Received: from [192.168.123.225] (p5b240cb2.dip0.t-ipconnect.de [91.36.12.178])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 9793B1809C9B; Tue, 17 Jun 2025 14:06:54 +0000 (UTC)
-Received: from warthog.procyon.org.uk (unknown [10.42.28.18])
- by mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id 5C81A19560B0; Tue, 17 Jun 2025 14:06:01 +0000 (UTC)
-Organization: Red Hat UK Ltd. Registered Address: Red Hat UK Ltd, Amberley
- Place, 107-111 Peascod Street, Windsor, Berkshire, SI4 1TE, United
- Kingdom.
- Registered in England and Wales under Company Registration No. 3798903
-In-Reply-To: <cover.1750099179.git.lorenzo.stoakes@oracle.com>
-References: <cover.1750099179.git.lorenzo.stoakes@oracle.com>
-To: Lorenzo Stoakes <lorenzo.stoakes@oracle.com>
-Subject: Re: [PATCH 00/10] convert the majority of file systems to mmap_prepare
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (Client did not present a certificate)
+ (Authenticated sender: stefan@kania-online.de)
+ by plasma.jpberlin.de (Postfix) with ESMTPSA id C2AD4C085A
+ for <samba-technical@lists.samba.org>; Wed, 18 Jun 2025 20:29:00 +0200 (CEST)
+Message-ID: <89d888ea-0817-4a99-af2e-f3c2eacc8c2d@kania-online.de>
+Date: Wed, 18 Jun 2025 20:29:00 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-ID: <644215.1750169159.1@warthog.procyon.org.uk>
-Date: Tue, 17 Jun 2025 15:05:59 +0100
-Message-ID: <644216.1750169159@warthog.procyon.org.uk>
-X-Scanned-By: MIMEDefang 3.0 on 10.30.177.12
-X-Mailman-Approved-At: Wed, 18 Jun 2025 08:08:37 +0000
+Subject: Re: Authentication Policies in Sambs 4.22
+To: samba-technical@lists.samba.org
+References: <e7ab3d5b-bc7d-4ac7-b9ac-da587c9e4fd2@kania-online.de>
+ <5918664e-54cd-42e7-a872-659f63604b17@samba.org>
+Content-Language: en-US, de-DE
+Organization: Stefan Kania
+In-Reply-To: <5918664e-54cd-42e7-a872-659f63604b17@samba.org>
+Content-Type: multipart/signed; protocol="application/pkcs7-signature";
+ micalg=sha-256; boundary="------------ms080408060702070805040108"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -83,81 +71,131 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: David Howells via samba-technical <samba-technical@lists.samba.org>
-Reply-To: David Howells <dhowells@redhat.com>
-Cc: Latchesar Ionkov <lucho@ionkov.net>, nvdimm@lists.linux.dev,
- Paulo Alcantara <pc@manguebit.org>, dri-devel@lists.freedesktop.org,
- ceph-devel@vger.kernel.org, Mike Marshall <hubcap@omnibond.com>,
- linux-xfs@vger.kernel.org, Tyler Hicks <code@tyhicks.com>,
- devel@lists.orangefs.org, Shyam Prasad N <sprasad@microsoft.com>,
- Jan Harkes <jaharkes@cs.cmu.edu>, linux-um@lists.infradead.org,
- Joel Becker <jlbec@evilplan.org>,
- John Paul Adrian Glaubitz <glaubitz@physik.fu-berlin.de>,
- Eric Van Hensbergen <ericvh@kernel.org>,
- Zhihao Cheng <chengzhihao1@huawei.com>, Christian Brauner <brauner@kernel.org>,
- linux-kernel@vger.kernel.org, linux-fsdevel@vger.kernel.org,
- Andrew Morton <akpm@linux-foundation.org>,
- Trond Myklebust <trondmy@kernel.org>, Dave Kleikamp <shaggy@kernel.org>,
- Sandeep Dhavale <dhavale@google.com>, Simona Vetter <simona@ffwll.ch>,
- linux-cifs@vger.kernel.org, linux-nilfs@vger.kernel.org,
- codalist@coda.cs.cmu.edu, Namjae Jeon <linkinjeon@kernel.org>,
- ecryptfs@vger.kernel.org, Yangtao Li <frank.li@vivo.com>,
- Jani Nikula <jani.nikula@linux.intel.com>, ocfs2-devel@lists.linux.dev,
- Pedro Falcato <pfalcato@suse.de>, OGAWA Hirofumi <hirofumi@mail.parknet.co.jp>,
- linux-block@vger.kernel.org, Theodore Ts'o <tytso@mit.edu>,
- linux-f2fs-devel@lists.sourceforge.net, Hongbo Li <lihongbo22@huawei.com>,
- Anna Schumaker <anna@kernel.org>, Martin Brandenburg <martin@omnibond.com>,
- Kees Cook <kees@kernel.org>, Yuezhang Mo <yuezhang.mo@sony.com>,
- Carlos Maiolino <cem@kernel.org>,
- Joonas Lahtinen <joonas.lahtinen@linux.intel.com>, Chris Mason <clm@fb.com>,
- linux-mtd@lists.infradead.org, Jaegeuk Kim <jaegeuk@kernel.org>,
- Marc Dionne <marc.dionne@auristor.com>, Tvrtko Ursulin <tursulin@ursulin.net>,
- linux-afs@lists.infradead.org, Naohiro Aota <naohiro.aota@wdc.com>,
- Miklos Szeredi <miklos@szeredi.hu>, Matthew Wilcox <willy@infradead.org>,
- coda@cs.cmu.edu, Viacheslav Dubeyko <slava@dubeyko.com>,
- Ilya Dryomov <idryomov@gmail.com>, linux-ext4@vger.kernel.org,
- Amir Goldstein <amir73il@gmail.com>, intel-gfx@lists.freedesktop.org,
- Damien Le Moal <dlemoal@kernel.org>, Rodrigo Vivi <rodrigo.vivi@intel.com>,
- Dan Williams <dan.j.williams@intel.com>, Gao Xiang <xiang@kernel.org>,
- David Howells <dhowells@redhat.com>, linux-nfs@vger.kernel.org,
- linux-mm@kvack.org, samba-technical@lists.samba.org,
- Steve French <sfrench@samba.org>, ntfs3@lists.linux.dev,
- linux-erofs@lists.ozlabs.org, jfs-discussion@lists.sourceforge.net,
- Jan Kara <jack@suse.cz>, linux-aio@kvack.org,
- Dominique Martinet <asmadeus@codewreck.org>,
- Christian Schoenebeck <linux_oss@crudebyte.com>,
- Bob Copeland <me@bobcopeland.com>,
- Konstantin Komarov <almaz.alexandrovich@paragon-software.com>,
- Joseph Qi <joseph.qi@linux.alibaba.com>,
- Andreas Dilger <adilger.kernel@dilger.ca>,
- Mikulas Patocka <mikulas@artax.karlin.mff.cuni.cz>,
- David Airlie <airlied@gmail.com>,
- Anton Ivanov <anton.ivanov@cambridgegreys.com>, Yue Hu <zbestahu@gmail.com>,
- Richard Weinberger <richard@nod.at>, Mark Fasheh <mark@fasheh.com>,
- linux-bcachefs@vger.kernel.org, Jann Horn <jannh@google.com>,
- Chao Yu <chao@kernel.org>, Josef Bacik <josef@toxicpanda.com>,
- "Liam R . Howlett" <Liam.Howlett@oracle.com>, Tom Talpey <tom@talpey.com>,
- Hans de Goede <hdegoede@redhat.com>, Bharath SM <bharathsm@microsoft.com>,
- "Tigran A
- . Aivazian" <aivazian.tigran@gmail.com>, David Sterba <dsterba@suse.com>,
- Xiubo Li <xiubli@redhat.com>, Ryusuke Konishi <konishi.ryusuke@gmail.com>,
- Vlastimil Babka <vbabka@suse.cz>, Jens Axboe <axboe@kernel.dk>,
- Sungjong Seo <sj1557.seo@samsung.com>, v9fs@lists.linux.dev,
- Kent Overstreet <kent.overstreet@linux.dev>, linux-unionfs@vger.kernel.org,
- Benjamin LaHaise <bcrl@kvack.org>, Jeffle Xu <jefflexu@linux.alibaba.com>,
- Johannes Berg <johannes@sipsolutions.net>, Johannes Thumshirn <jth@kernel.org>,
- David Woodhouse <dwmw2@infradead.org>, linux-karma-devel@lists.sourceforge.net,
- linux-btrfs@vger.kernel.org, Alexander Viro <viro@zeniv.linux.org.uk>
+From: Stefan Kania via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Stefan Kania <stefan@kania-online.de>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Lorenzo Stoakes <lorenzo.stoakes@oracle.com> wrote:
+This is a cryptographically signed message in MIME format.
 
-> This is preferred to the existing f_op->mmap() hook as it does require a
-> VMA to be established yet,
+--------------ms080408060702070805040108
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
 
-Did you mean ".. doesn't require a VMA to be established yet, ..."
+U3RhcnRpbmcgd2l0aCBTYW1iYSA0LjIyLjIgaXQncyB3b3JraW5nLiBJIHdpbGwgYWRkIGEg
+bGl0dGxlIGhvd3RvIG5leHQNCg0KDQpBbSAxMS4wNi4yNSB1bSAyMzo1NyBzY2hyaWViIEpl
+bm5pZmVyIFN1dHRvbiB2aWEgc2FtYmEtdGVjaG5pY2FsOg0KPiBPbiAxMS8wNi8yNSAyOjA3
+IGFtLCBTdGVmYW4gS2FuaWEgdmlhIHNhbWJhLXRlY2huaWNhbCB3cm90ZToNCj4+DQo+PiBJ
+IG5vdyBoYWQgdGhlIHRpbWUgdG8gKGFnYWluKSB0ZXN0IGF1dGhlbnRpY2F0aW9uLXBvbGlj
+aWVzIGFuZCBzaWxvcy4gSXQncyBzdGlsbCBOT1Qgd29ya2luZy4gSW4gTERBUCBJIHNlZSB0
+aGUgc2FtZSBlbnRyaWVzIGFzIEkgc2VlIHdoZW4gY29uZmlndXJpbmcgcG9saWNpZXMgYW5k
+IHNpbG9zIGluIFdpbmRvd3MgYnV0IHRoZXJlIGl0J3Mgd29ya2luZy4NCj4+DQo+PiBJIHRo
+aW5rIHRoZXJlIGFyZSBvbmx5IHRocmVlIHBvc3NpYmlsaXRpZXMgbGVmdDoNCj4+DQo+PiAx
+LiBZT1UgYXMgZGV2ZWxvcGVyIG9mIHRoZSBmdW5jdGlvbiwgd3JpdGUgYSBnb29kIHdvcmtp
+bmcgZG9jdW1lbnRhdGlvbi4gVGVzdCB0aGUgZG9jdW1lbnRhdGlvbiB3aXRoIFNhbWJhIERD
+cyBhbmQgV2luZG93cyBjbGllbnRzISBUaGF0J3MgYnkgdGhlIHdheSBJIGV4cGVjdCBmb3Ig
+QU5ZIG5ldyBmdW5jdGlvbi4NCj4+IDIuIEZpeCBpdCBpZiBpdCdzIGJyb2tlbiBhbmQgdGhl
+biB3cml0ZSB0aGUgZG9jdW1lbnRhdGlvbi4NCj4+IDMuIFRlbGwgdGhlIHdvcmxkIGl0J3Mg
+bm90IHBvc3NpYmxlIHRvIGdldCBpdCB3b3JraW5nIGFuZCB0YWtlIGl0IG91dC4NCj4+DQo+
+PiBBYm91dCB0aGUgZG9jdW1lbnRhdGlvbjogRm9yIHRoZSBmb2xsb3dpbmcgbmV3IGZlYXR1
+cmVzIEknbSBtaXNzaW5nIGEgd29ya2luZyBkb2N1bWVudGF0aW9uOg0KPj4NCj4+IC0gR3Jv
+dXAgTWFuYWdlZCBzZXJ2aWNlIGFjY291bnQNCj4+IC0gS2VyYmVyb3MgQXJtb3Jpbmcgd2l0
+aCBGQVNUDQo+PiAtIExpbnV4IEdQT3MgKFN0aWxsIG5vdCB3b3JraW5nKQ0KPj4gLSBJbXBy
+b3ZlZCBLREMgQXVkaXRpbmcNCj4+DQo+Pg0KPj4gQlRXIFRoZSBzb3VyY2UtY29kZSBpc3Qg
+bm8gZG9jdW1lbnRhdGlvbi4NCj4+DQo+Pg0KPiANCj4gV2UgZG8gb3VyIGJlc3QgdG8gbWFr
+ZSB0aGluZ3Mgd29yayBpZGVudGljYWxseSB0byBXaW5kb3dzLCBidXQgd2UgY2FuIG9ubHkg
+Zml4IHByb2JsZW1zIHRoYXQgd2UgY2FuIHJlcHJvZHVjZS4gSWYgeW91IGNvdWxkIHByb3Zp
+ZGUgbWUgKG9mZuKAkGxpc3QpIHdpdGggYSBsYWIgZG9tYWluIGJhY2t1cCBleGhpYml0aW5n
+IHlvdXIgcHJvYmxlbSwgdGhhdCB3b3VsZCBiZSB2ZXJ5IGhlbHBmdWwuDQo+IA0KPiBDaGVl
+cnMsDQo+IEplbm5pZmVyIChzaGUvaGVyKQ0KPiANCg0KDQoNCg0K
 
-David
+--------------ms080408060702070805040108
+Content-Type: application/pkcs7-signature; name="smime.p7s"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="smime.p7s"
+Content-Description: Kryptografische S/MIME-Signatur
 
+MIAGCSqGSIb3DQEHAqCAMIACAQExDzANBglghkgBZQMEAgEFADCABgkqhkiG9w0BBwEAAKCC
+DLMwggYDMIID66ADAgECAgwEaYxY0V6t5+cpnHAwDQYJKoZIhvcNAQELBQAwUjELMAkGA1UE
+BhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24g
+R0NDIFI2IFNNSU1FIENBIDIwMjMwHhcNMjQwOTI3MjAwMTE2WhcNMjcwOTI4MjAwMTE2WjBI
+MR8wHQYDVQQDDBZzdGVmYW5Aa2FuaWEtb25saW5lLmRlMSUwIwYJKoZIhvcNAQkBFhZzdGVm
+YW5Aa2FuaWEtb25saW5lLmRlMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAk1Wp
+pY9PMd6TNd+nUvWJ3RkA7fXwaZYBPlz+HyIh43KCUohVW0dweP44qfMBHjlVrAsgC6+VI+bd
+EWjvF9ZcWLHIj/IxonVe1HnN1DfYwp7/1qigJBjmfNwcdqlHHgRJ/WW8TblYLshwB94c+b5L
+J6ScRf4KCLYgTjmX/+/OpV9Zfzn0NvGNfyakUpeEz/36Mr1UPtWVchsGpuCsoGbylE0AOZug
+z2yOoLxAmd5YYLVI0uZ3IM1iGZPVcN0P9r9F1Gap4Vm9mi6+chx+ScAu/WfdzaBVlFoXA7w6
+X/QxpQXtnifpKxqE5qqrPqCCo9sXLLgD3yW1iFcBVTgzNyZQRwIDAQABo4IB4TCCAd0wDgYD
+VR0PAQH/BAQDAgWgMIGTBggrBgEFBQcBAQSBhjCBgzBGBggrBgEFBQcwAoY6aHR0cDovL3Nl
+Y3VyZS5nbG9iYWxzaWduLmNvbS9jYWNlcnQvZ3NnY2NyNnNtaW1lY2EyMDIzLmNydDA5Bggr
+BgEFBQcwAYYtaHR0cDovL29jc3AuZ2xvYmFsc2lnbi5jb20vZ3NnY2NyNnNtaW1lY2EyMDIz
+MGUGA1UdIAReMFwwCQYHZ4EMAQUBATALBgkrBgEEAaAyASgwQgYKKwYBBAGgMgoDAzA0MDIG
+CCsGAQUFBwIBFiZodHRwczovL3d3dy5nbG9iYWxzaWduLmNvbS9yZXBvc2l0b3J5LzAJBgNV
+HRMEAjAAMEEGA1UdHwQ6MDgwNqA0oDKGMGh0dHA6Ly9jcmwuZ2xvYmFsc2lnbi5jb20vZ3Nn
+Y2NyNnNtaW1lY2EyMDIzLmNybDAhBgNVHREEGjAYgRZzdGVmYW5Aa2FuaWEtb25saW5lLmRl
+MB0GA1UdJQQWMBQGCCsGAQUFBwMCBggrBgEFBQcDBDAfBgNVHSMEGDAWgBQAKTaeXHq6D68t
+UC3boCOFGLCgkjAdBgNVHQ4EFgQU0kHF9fFBXygVDjwNe5DkaSxVk3cwDQYJKoZIhvcNAQEL
+BQADggIBAL0WoW7dCmTQxxo1dMGyld5LLS9wCa7goc07GplzOsEJ5GmfeNGapy+dP2NfmenH
+XYKPnP/8hosTk6GDgck1HaP4wP5RvZ4ALVraLs4XSQiENz9954Sim3YzjFbG2aoqXpv/C0ha
+MwzR7LBCa/OwUJot5wO7R++6SE98/ZeYUqGDIgVcmH+UOYE/5yxM+M4aDXFUR2LCQO2ejPcZ
+a3QzlnMJUYPPw3U4Udbs9MRy40FunbmWUzu4yEddlo9GikG5NEI6wC7hFEpC4joYmvEZXRlT
+UqS8wug7QKRLyeLhXw04h0GYL0mrx1yj7x4CXqRjjRpterRlAkgFj2zEEpQ4DMiVcl8fZZ7T
+xkQGlbfa+HEp9y9/NluiNeoqAMF/lzS8haLHDXLdrdWPitBQazmcsyQ3LlcmeAMjchOIcUWt
+EKxIRCoedt6xbuIX5D2ul0H6rPE2BrimedwF6AZFPFk3/KHAbjhfkAElHiNjgg4uwUji+d9q
+zIR6Di3W2WdTCCwzp/6V2eEWdlQ8z8U4v3aF80fwzp6dOuFmti/mOayUrAYCUC6DBLjkA4EY
+MS6Nc1dr4f4dffnOceF4deCDN3nH8bRPEXs+kvnA91vw008dvJ+Df7jcJmDrt2tmzZPDTV6l
+neB5rj7E+6Qcvadj6c5hl7L5Tc/v6LZx6DCVX0BA2KpPMIIGqDCCBJCgAwIBAgIQfofDCS7X
+Zu8vIeKo0KeY9DANBgkqhkiG9w0BAQwFADBMMSAwHgYDVQQLExdHbG9iYWxTaWduIFJvb3Qg
+Q0EgLSBSNjETMBEGA1UEChMKR2xvYmFsU2lnbjETMBEGA1UEAxMKR2xvYmFsU2lnbjAeFw0y
+MzA0MTkwMzUzNTNaFw0yOTA0MTkwMDAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQKExBH
+bG9iYWxTaWduIG52LXNhMSgwJgYDVQQDEx9HbG9iYWxTaWduIEdDQyBSNiBTTUlNRSBDQSAy
+MDIzMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAwjAEbSkPcSyn26Zn9VtoE/xB
+vzYmNW29bW1pJZ7jrzKwPJm/GakCvy0IIgObMsx9bpFaq30X1kEJZnLUzuE1/hlchatYqyOR
+VBeHlv5V0QRSXY4faR0dCkIhXhoGknZ2O0bUJithcN1IsEADNizZ1AJIaWsWbQ4tYEYjytEd
+vfkxz1WtX3SjtecZR+9wLJLt6HNa4sC//QKdjyfr/NhDCzYrdIzAssoXFnp4t+HcMyQTrj0r
+pD8KkPj96sy9axzegLbzte7wgTHbWBeJGp0sKg7BAu+G0Rk6teO1yPd75arbCvfY/NaRRQHk
+6tmG71gpLdB1ZhP9IcNYyeTKXIgfMh2tVK9DnXGaksYCyi6WisJa1Oa+poUroX2ESXO6o03l
+VxiA1xyfG8lUzpUNZonGVrUjhG5+MdY16/6b0uKejZCLbgu6HLPvIyqdTb9XqF4XWWKu+OMD
+s/rWyQ64v3mvSa0te5Q5tchm4m9K0Pe9LlIKBk/gsgfaOHJDp4hYx4wocDr8DeCZe5d5wCFk
+xoGc1ckM8ZoMgpUc4pgkQE5ShxYMmKbPvNRPa5YFzbFtcFn5RMr1Mju8gt8J0c+dxYco2hi7
+dEW391KKxGhv7MJBcc+0x3FFTnmhU+5t6+CnkKMlrmzyaoeVryRTvOiH4FnTNHtVKUYDsCM0
+CLDdMNgoxgkCAwEAAaOCAX4wggF6MA4GA1UdDwEB/wQEAwIBhjBMBgNVHSUERTBDBggrBgEF
+BQcDAgYIKwYBBQUHAwQGCisGAQQBgjcUAgIGCisGAQQBgjcKAwwGCisGAQQBgjcKAwQGCSsG
+AQQBgjcVBjASBgNVHRMBAf8ECDAGAQH/AgEAMB0GA1UdDgQWBBQAKTaeXHq6D68tUC3boCOF
+GLCgkjAfBgNVHSMEGDAWgBSubAWjkxPioufi1xzWx/B/yGdToDB7BggrBgEFBQcBAQRvMG0w
+LgYIKwYBBQUHMAGGImh0dHA6Ly9vY3NwMi5nbG9iYWxzaWduLmNvbS9yb290cjYwOwYIKwYB
+BQUHMAKGL2h0dHA6Ly9zZWN1cmUuZ2xvYmFsc2lnbi5jb20vY2FjZXJ0L3Jvb3QtcjYuY3J0
+MDYGA1UdHwQvMC0wK6ApoCeGJWh0dHA6Ly9jcmwuZ2xvYmFsc2lnbi5jb20vcm9vdC1yNi5j
+cmwwEQYDVR0gBAowCDAGBgRVHSAAMA0GCSqGSIb3DQEBDAUAA4ICAQCRkUdr1aIDRmkNI5jx
+5ggapGUThq0KcM2dzpMu314mJne8yKVXwzfKBtqbBjbUNMODnBkhvZcnbHUStur2/nt1tP3e
+e8KyNhYxzv4DkI0NbV93JChXipfsan7YjdfEk5vI2Fq+wpbGALyyWBgfy79YIgbYWATB158t
+vEh5UO8kpGpjY95xv+070X3FYuGyeZyIvao26mN872FuxRxYhNLwGHIy38N9ASa1Q3BTNKSr
+HrZngadofHglG5W3TMFR11JOEOAUHhUgpbVVvgCYgGA6dSX0y5z7k3rXVyjFOs7KBSXrdJPK
+adpl4vqYphH7+P40nzBRcxJHrv5FeXlTrb+drjyXNjZSCmzfkOuCqPspBuJ7vab0/9oeNERg
+nz6SLCjLKcDXbMbKcRXgNhFBlzN4OUBqieSBXk80w2Nzx12KvNj758WavxOsXIbX0Zxwo1h3
+uw75AI2v8qwFWXNclO8qW2VXoq6kihWpeiuvDmFfSAwRLxwwIjgUuzG9SaQ+pOomuaC7QTKW
+MI0hL0b4mEPq9GsPPQq1UmwkcYFJ/Z4I93DZuKcXmKMmuANTS6wxwIEw8Q5MQ6y9fbJxGEOg
+OgYL4QIqNULb5CYPnt2LeiIiEnh8Uuh8tawqSjnR0h7Bv5q4mgo3L1Z9QQuexUntWD96t4o0
+q1jXWLyrpgP7ZcnuCzGCBD0wggQ5AgEBMGIwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEds
+b2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gR0NDIFI2IFNNSU1FIENBIDIw
+MjMCDARpjFjRXq3n5ymccDANBglghkgBZQMEAgEFAKCCAqwwGAYJKoZIhvcNAQkDMQsGCSqG
+SIb3DQEHATAcBgkqhkiG9w0BCQUxDxcNMjUwNjE4MTgyOTAwWjAvBgkqhkiG9w0BCQQxIgQg
+TMjf5thBpruQs+yjdb8EBCfWlFFHHq+hE0/vueThYpgwcQYJKwYBBAGCNxAEMWQwYjBSMQsw
+CQYDVQQGEwJCRTEZMBcGA1UEChMQR2xvYmFsU2lnbiBudi1zYTEoMCYGA1UEAxMfR2xvYmFs
+U2lnbiBHQ0MgUjYgU01JTUUgQ0EgMjAyMwIMBGmMWNFerefnKZxwMHMGCyqGSIb3DQEJEAIL
+MWSgYjBSMQswCQYDVQQGEwJCRTEZMBcGA1UEChMQR2xvYmFsU2lnbiBudi1zYTEoMCYGA1UE
+AxMfR2xvYmFsU2lnbiBHQ0MgUjYgU01JTUUgQ0EgMjAyMwIMBGmMWNFerefnKZxwMIIBVwYJ
+KoZIhvcNAQkPMYIBSDCCAUQwCwYJYIZIAWUDBAEqMAsGCWCGSAFlAwQBAjAKBggqhkiG9w0D
+BzANBggqhkiG9w0DAgIBBTANBggqhkiG9w0DAgIBBTAHBgUrDgMCBzANBggqhkiG9w0DAgIB
+BTAHBgUrDgMCGjALBglghkgBZQMEAgEwCwYJYIZIAWUDBAICMAsGCWCGSAFlAwQCAzALBglg
+hkgBZQMEAgQwCwYJYIZIAWUDBAIHMAsGCWCGSAFlAwQCCDALBglghkgBZQMEAgkwCwYJYIZI
+AWUDBAIKMAsGCSqGSIb3DQEBATALBgkrgQUQhkg/AAIwCAYGK4EEAQsAMAgGBiuBBAELATAI
+BgYrgQQBCwIwCAYGK4EEAQsDMAsGCSuBBRCGSD8AAzAIBgYrgQQBDgAwCAYGK4EEAQ4BMAgG
+BiuBBAEOAjAIBgYrgQQBDgMwDQYJKoZIhvcNAQEBBQAEggEAQk7nytgtDD2kGP1TOfrizHII
+zLH8oGcBbT2S0/KQG6Dow015OnOBCk/vj0rjyDovTicF0QJUXY8vfVvpNcMvpFtpz1TMd3bZ
+yI7dOT/cjjOKNRQMCcKH/mnL3MqCqmmtnAQ75ogdJttgyvbZ9YscnX8Wg0wM5yatHylTjsgw
+5u9IlblY3/Os9z/+VnB3C3K1bdYVUnLJ9j8a9ZBfSWpzhlfA/P4od7dnnEHC4nqsXrUX7Fxh
+LOxR8HuR4luejpfHyJ6KUWUoQLnH9UAOCnSqe4va2h9LbqmcoaZpU03q4hLowJl9xdNrqikv
+Ilt/9pADiDTvlVPauaAgfYJg1OgfwgAAAAAAAA==
+--------------ms080408060702070805040108--
 
