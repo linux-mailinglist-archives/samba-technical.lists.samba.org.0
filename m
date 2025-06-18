@@ -2,62 +2,71 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4092FADF5D9
-	for <lists+samba-technical@lfdr.de>; Wed, 18 Jun 2025 20:29:57 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B3747ADF964
+	for <lists+samba-technical@lfdr.de>; Thu, 19 Jun 2025 00:25:28 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=xVrAej1HO4rIp+9HMYLOlUEw4rdVkRglzBob+SF7+68=; b=XysU5Ye29/Xd1FonutLs+G1U+j
-	T7uU8RhF0yygmDFXT03YXJAvJSfDJUwzth0vy7eNMoKhzRlNuvT+nP6D7B5X9kK4D+MTTJSGnteHh
-	/SqQm+pMxtlha/b5ZMlkgYD9J/Hf6ciS2wgiLiIPpBAJVw/lYZ0aL7eN499/DcVNjyQi1c1BHT2Ef
-	NhJZtzCbFSOrzctvUwSFupbBbr5jNDrC/Pt8WLOE9aw4vRGgphuZS8lOxthkdGz7FYSSqV/OM5j38
-	ESRZCG/IHp/9gTf8oFdccrJUqXuk9/xSS+qImVQvZpppYuBkq83qLtLZMZZkldR5hfBG6oPe6+Rb9
-	cdDNT+Hw==;
-Received: from ip6-localhost ([::1]:47726 helo=hr1.samba.org) 
+	bh=KxQhDubABj6uaLJxZ4q28EQg9L/Fekhes499ywIf55U=; b=4EQzrZVkHlSU0hoe/Zz2I9/OJb
+	1enG54kpYNag2qUnSEYSsQuTbLNm9xfDcrKlsiJ7W1m7PwCXQteFVPAyeQIRgXX+suoN7QS1RJ4ge
+	Ih5nGsO3pYlJdqtjFifh01XyvZwBd3cfNDpjw2OpO+zUwsS4wLXyQ3zmA3s4h1K5ZMMDVrP2Y1az0
+	2Oxfs+ek105svZPqXVRjb06JwNoB4ptv0yPy9f/ZoOEYmiXJ2vIrHK8GpIFJNhL2CdJFNgiqPimIx
+	TRT6v+8JKOhD67tC55KgFHA/p1WNEVxcYvgN33UZrAyVB9jIc6oYoPd+94ShCzF07VP/x3C2ZcT4I
+	71wpqCBQ==;
+Received: from ip6-localhost ([::1]:62728 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1uRxXD-007OVk-Ob; Wed, 18 Jun 2025 18:29:19 +0000
-Received: from plasma4.jpberlin.de ([80.241.57.33]:55515) 
+	id 1uS1D7-007PLF-0d; Wed, 18 Jun 2025 22:24:49 +0000
+Received: from mail-lf1-x12b.google.com ([2a00:1450:4864:20::12b]:53616) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uRxX7-007OVd-La
- for samba-technical@lists.samba.org; Wed, 18 Jun 2025 18:29:17 +0000
-Received: from spamfilter01.heinlein-hosting.de
- (spamfilter01.heinlein-hosting.de [80.241.56.115])
- by plasma.jpberlin.de (Postfix) with ESMTP id D18CCC089C;
- Wed, 18 Jun 2025 20:29:07 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kania-online.de;
- s=MBO0001; t=1750271348;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=xVrAej1HO4rIp+9HMYLOlUEw4rdVkRglzBob+SF7+68=;
- b=q2i2tYcZC4OLimtRiOgNUOgC7YhB1CbaP9gsZz8VFMdu6/YS5aHM/Lv/b5Qh8hnvGvDI8D
- 0Sf9VPNvy0fafPkmEUYON9VMN+8O1XB8FYOTGUe35sMj9TIkHJu15oKK3fVluMUdLqlFHW
- YUuHM+hXDb1W39aD8eYXg54qi1mYnngAitGj0eHhucHFmlm1peqwD+tWVjUUoIlC84220k
- RlMtRNSYDrQUCBOg0kkA6RSykEN9UD0SjJRw/DeEeiv8ucK6P6nYvZjJmkvnShUeDj9tJZ
- 2jBQSEeD2woAZIh9NKqgghKnTsjelZCHM+E0agOlVzcH3z9Kq8C7CmRParzYsg==
-Received: from plasma.jpberlin.de ([80.241.56.68])
- by spamfilter01.heinlein-hosting.de (spamfilter01.heinlein-hosting.de
- [80.241.56.115]) (amavisd-new, port 10030)
- with ESMTP id s2RD3WOcjV8C; Wed, 18 Jun 2025 20:29:01 +0200 (CEST)
-Received: from [192.168.123.225] (p5b240cb2.dip0.t-ipconnect.de [91.36.12.178])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (Client did not present a certificate)
- (Authenticated sender: stefan@kania-online.de)
- by plasma.jpberlin.de (Postfix) with ESMTPSA id C2AD4C085A
- for <samba-technical@lists.samba.org>; Wed, 18 Jun 2025 20:29:00 +0200 (CEST)
-Message-ID: <89d888ea-0817-4a99-af2e-f3c2eacc8c2d@kania-online.de>
-Date: Wed, 18 Jun 2025 20:29:00 +0200
+ (Exim) id 1uS1D2-007PL8-Ul
+ for samba-technical@lists.samba.org; Wed, 18 Jun 2025 22:24:47 +0000
+Received: by mail-lf1-x12b.google.com with SMTP id
+ 2adb3069b0e04-553b60de463so104385e87.3
+ for <samba-technical@lists.samba.org>; Wed, 18 Jun 2025 15:24:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1750285484; x=1750890284; darn=lists.samba.org;
+ h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=KxQhDubABj6uaLJxZ4q28EQg9L/Fekhes499ywIf55U=;
+ b=l/RcvjG/Kt6mtIKx7ZMZcDCgnsS5eh+Va/UV7LkQPexOjIXWc9vBRr0gWXJsy2GOxh
+ 1neD4MsPA7x1ugh6ymOFe0hD2/zUALHDKxYebcTSgAZaI42cyM/96h/htBym4X2dfiUY
+ vaKib1rraJx4JS4FLA2TOtpVLtDM58CitxfjBQmf78We27XG4z+eD/m4Z8AeG9UHMcxp
+ QPMwoS7IuvDsDKqk5bb46w51T8J4jKpi0R0htphp969Q9SJQDJ6ep/q6XrAw+eCk+ubt
+ hoRg5W4Br/R/och1hspdlR2zhi4VmdaVcLa8+di+Rd4IpEpuq4nNplmsO1D6Pnrx5xeQ
+ 9WyA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1750285484; x=1750890284;
+ h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=KxQhDubABj6uaLJxZ4q28EQg9L/Fekhes499ywIf55U=;
+ b=oYzE/5p1IP13FXAJJSBAiMauvkz8lyqueQxUvZol6JJirkcRilbkEh6e6T1nnL0BLF
+ h5gJPZQnvoa8+uW2z4eJBGWPQAxnCPnpg+RXFfRqX2MiE4vZ5xfOQjy62liDxFW4Wa1N
+ JgQiIbZQD49L50Ll46xhP8S+jhFgNUPcloIBpgVNRWhvkioblzhAlHgUR0dldyhNYNmP
+ GtWTBow4q6Kp9K3WAwjRlmJ1HynmFIqLPl4d4T4hdtDlqg7NndD63nZrPRVKwpZmp4zs
+ XOgiuSTZXV/GiczzMtz7Axax43Mbe5sf+I/+abMEa75IuvaR6X+nijo+Nem4r5HQ74cB
+ 1lTg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXEcug7HY08atK09+gyOjhNtE1FnyfPslZrwQD4PhlvkyIXaFL3GgwoK+IrGeOQfas3wyP0fbHDD6vmHIWgIfs=@lists.samba.org
+X-Gm-Message-State: AOJu0Yw19l/blusrcs/oDw58ShQJ9/R+ChItpihZdB4XWSDVPnx6yxs1
+ py2+xp6VP26Ja6cykJJSOEEd9+3BjCfDeGXLXAG70RpYQBoH9++h/ko0KDJ7nhgCalontniSG+d
+ cd5v7EmwBadycEMlJD9OrswPSLdfTI8k=
+X-Gm-Gg: ASbGncvOk9tFadDvfKRq09XEO4Wdib1RNv2gaKZ0+b3EfeW5sN1u9BW8KMff9lXzWfo
+ kxjEnuZEQnTsotTcHT9pjVmkOqSFca0k83x28uh8lo7xbAAHuG2i6vfhtN04S5lIrjK5t8WIJjO
+ k7LTaMdSE0oRbdxazZoqXthqqkuPG66UYQja6b6XzVL3m2IG6Pk2v/zuqfST6LFSMWmItuFlDeu
+ fRG5A==
+X-Google-Smtp-Source: AGHT+IFKWkYleReGlaDeMZSGoeOcdHTZI6FuBSdm7IoLx/5YW/44/CL3YqGcIw2DYFpNrlozaeE4fxezGa538frgb8E=
+X-Received: by 2002:a05:6512:3b13:b0:553:d573:cd6b with SMTP id
+ 2adb3069b0e04-553d573d055mr980556e87.10.1750285483500; Wed, 18 Jun 2025
+ 15:24:43 -0700 (PDT)
 MIME-Version: 1.0
-Subject: Re: Authentication Policies in Sambs 4.22
-To: samba-technical@lists.samba.org
-References: <e7ab3d5b-bc7d-4ac7-b9ac-da587c9e4fd2@kania-online.de>
- <5918664e-54cd-42e7-a872-659f63604b17@samba.org>
-Content-Language: en-US, de-DE
-Organization: Stefan Kania
-In-Reply-To: <5918664e-54cd-42e7-a872-659f63604b17@samba.org>
-Content-Type: multipart/signed; protocol="application/pkcs7-signature";
- micalg=sha-256; boundary="------------ms080408060702070805040108"
+Date: Wed, 18 Jun 2025 17:24:31 -0500
+X-Gm-Features: AX0GCFsVWtBmDqxDregn5D43skKGu3Get2qHilpdUKL1gYfeC-e0WYlzVJdgdmI
+Message-ID: <CAH2r5mtipm8KB+FwzYKAvNqH4ECAv+1+SUqyZ0ur6k6Sy8KoAA@mail.gmail.com>
+Subject: smb 3.1.1 client dir lease performance
+To: CIFS <linux-cifs@vger.kernel.org>, 
+ samba-technical <samba-technical@lists.samba.org>,
+ Bharath S M <bharathsm@microsoft.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -71,131 +80,33 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Stefan Kania via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Stefan Kania <stefan@kania-online.de>
+From: Steve French via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Steve French <smfrench@gmail.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is a cryptographically signed message in MIME format.
+Bharath,
+I noticed that with your patch we are caching directories (when server
+supports directory leases) well for successive readdirs which is a
+great perf improvement but I also noticed that they time out at 30
+seconds from when the first readdir was issued (when the dir lease was
+first acquired) and not delayed if the directory is requeried every
+few seconds.
 
---------------ms080408060702070805040108
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
+Thoughts about bumping the timeout on a directory lease
+experimentation to when it was last accessed instead of when it was
+acquired?
 
-U3RhcnRpbmcgd2l0aCBTYW1iYSA0LjIyLjIgaXQncyB3b3JraW5nLiBJIHdpbGwgYWRkIGEg
-bGl0dGxlIGhvd3RvIG5leHQNCg0KDQpBbSAxMS4wNi4yNSB1bSAyMzo1NyBzY2hyaWViIEpl
-bm5pZmVyIFN1dHRvbiB2aWEgc2FtYmEtdGVjaG5pY2FsOg0KPiBPbiAxMS8wNi8yNSAyOjA3
-IGFtLCBTdGVmYW4gS2FuaWEgdmlhIHNhbWJhLXRlY2huaWNhbCB3cm90ZToNCj4+DQo+PiBJ
-IG5vdyBoYWQgdGhlIHRpbWUgdG8gKGFnYWluKSB0ZXN0IGF1dGhlbnRpY2F0aW9uLXBvbGlj
-aWVzIGFuZCBzaWxvcy4gSXQncyBzdGlsbCBOT1Qgd29ya2luZy4gSW4gTERBUCBJIHNlZSB0
-aGUgc2FtZSBlbnRyaWVzIGFzIEkgc2VlIHdoZW4gY29uZmlndXJpbmcgcG9saWNpZXMgYW5k
-IHNpbG9zIGluIFdpbmRvd3MgYnV0IHRoZXJlIGl0J3Mgd29ya2luZy4NCj4+DQo+PiBJIHRo
-aW5rIHRoZXJlIGFyZSBvbmx5IHRocmVlIHBvc3NpYmlsaXRpZXMgbGVmdDoNCj4+DQo+PiAx
-LiBZT1UgYXMgZGV2ZWxvcGVyIG9mIHRoZSBmdW5jdGlvbiwgd3JpdGUgYSBnb29kIHdvcmtp
-bmcgZG9jdW1lbnRhdGlvbi4gVGVzdCB0aGUgZG9jdW1lbnRhdGlvbiB3aXRoIFNhbWJhIERD
-cyBhbmQgV2luZG93cyBjbGllbnRzISBUaGF0J3MgYnkgdGhlIHdheSBJIGV4cGVjdCBmb3Ig
-QU5ZIG5ldyBmdW5jdGlvbi4NCj4+IDIuIEZpeCBpdCBpZiBpdCdzIGJyb2tlbiBhbmQgdGhl
-biB3cml0ZSB0aGUgZG9jdW1lbnRhdGlvbi4NCj4+IDMuIFRlbGwgdGhlIHdvcmxkIGl0J3Mg
-bm90IHBvc3NpYmxlIHRvIGdldCBpdCB3b3JraW5nIGFuZCB0YWtlIGl0IG91dC4NCj4+DQo+
-PiBBYm91dCB0aGUgZG9jdW1lbnRhdGlvbjogRm9yIHRoZSBmb2xsb3dpbmcgbmV3IGZlYXR1
-cmVzIEknbSBtaXNzaW5nIGEgd29ya2luZyBkb2N1bWVudGF0aW9uOg0KPj4NCj4+IC0gR3Jv
-dXAgTWFuYWdlZCBzZXJ2aWNlIGFjY291bnQNCj4+IC0gS2VyYmVyb3MgQXJtb3Jpbmcgd2l0
-aCBGQVNUDQo+PiAtIExpbnV4IEdQT3MgKFN0aWxsIG5vdCB3b3JraW5nKQ0KPj4gLSBJbXBy
-b3ZlZCBLREMgQXVkaXRpbmcNCj4+DQo+Pg0KPj4gQlRXIFRoZSBzb3VyY2UtY29kZSBpc3Qg
-bm8gZG9jdW1lbnRhdGlvbi4NCj4+DQo+Pg0KPiANCj4gV2UgZG8gb3VyIGJlc3QgdG8gbWFr
-ZSB0aGluZ3Mgd29yayBpZGVudGljYWxseSB0byBXaW5kb3dzLCBidXQgd2UgY2FuIG9ubHkg
-Zml4IHByb2JsZW1zIHRoYXQgd2UgY2FuIHJlcHJvZHVjZS4gSWYgeW91IGNvdWxkIHByb3Zp
-ZGUgbWUgKG9mZuKAkGxpc3QpIHdpdGggYSBsYWIgZG9tYWluIGJhY2t1cCBleGhpYml0aW5n
-IHlvdXIgcHJvYmxlbSwgdGhhdCB3b3VsZCBiZSB2ZXJ5IGhlbHBmdWwuDQo+IA0KPiBDaGVl
-cnMsDQo+IEplbm5pZmVyIChzaGUvaGVyKQ0KPiANCg0KDQoNCg0K
+I also noticed that when we hit the limit on max_cached_dirs (16 by
+default) instead of evicting the oldest entries in the cache to use
+the newest dir leases we give up adding cached_dir for that
+when we hit the limit, even though some of the older dir leases in the
+cache may be about to expire?  Maybe we should replace the oldest
+entry in dir cache with one from newest dir lease
 
---------------ms080408060702070805040108
-Content-Type: application/pkcs7-signature; name="smime.p7s"
-Content-Transfer-Encoding: base64
-Content-Disposition: attachment; filename="smime.p7s"
-Content-Description: Kryptografische S/MIME-Signatur
+Thoughts?
+-- 
+Thanks,
 
-MIAGCSqGSIb3DQEHAqCAMIACAQExDzANBglghkgBZQMEAgEFADCABgkqhkiG9w0BBwEAAKCC
-DLMwggYDMIID66ADAgECAgwEaYxY0V6t5+cpnHAwDQYJKoZIhvcNAQELBQAwUjELMAkGA1UE
-BhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24g
-R0NDIFI2IFNNSU1FIENBIDIwMjMwHhcNMjQwOTI3MjAwMTE2WhcNMjcwOTI4MjAwMTE2WjBI
-MR8wHQYDVQQDDBZzdGVmYW5Aa2FuaWEtb25saW5lLmRlMSUwIwYJKoZIhvcNAQkBFhZzdGVm
-YW5Aa2FuaWEtb25saW5lLmRlMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAk1Wp
-pY9PMd6TNd+nUvWJ3RkA7fXwaZYBPlz+HyIh43KCUohVW0dweP44qfMBHjlVrAsgC6+VI+bd
-EWjvF9ZcWLHIj/IxonVe1HnN1DfYwp7/1qigJBjmfNwcdqlHHgRJ/WW8TblYLshwB94c+b5L
-J6ScRf4KCLYgTjmX/+/OpV9Zfzn0NvGNfyakUpeEz/36Mr1UPtWVchsGpuCsoGbylE0AOZug
-z2yOoLxAmd5YYLVI0uZ3IM1iGZPVcN0P9r9F1Gap4Vm9mi6+chx+ScAu/WfdzaBVlFoXA7w6
-X/QxpQXtnifpKxqE5qqrPqCCo9sXLLgD3yW1iFcBVTgzNyZQRwIDAQABo4IB4TCCAd0wDgYD
-VR0PAQH/BAQDAgWgMIGTBggrBgEFBQcBAQSBhjCBgzBGBggrBgEFBQcwAoY6aHR0cDovL3Nl
-Y3VyZS5nbG9iYWxzaWduLmNvbS9jYWNlcnQvZ3NnY2NyNnNtaW1lY2EyMDIzLmNydDA5Bggr
-BgEFBQcwAYYtaHR0cDovL29jc3AuZ2xvYmFsc2lnbi5jb20vZ3NnY2NyNnNtaW1lY2EyMDIz
-MGUGA1UdIAReMFwwCQYHZ4EMAQUBATALBgkrBgEEAaAyASgwQgYKKwYBBAGgMgoDAzA0MDIG
-CCsGAQUFBwIBFiZodHRwczovL3d3dy5nbG9iYWxzaWduLmNvbS9yZXBvc2l0b3J5LzAJBgNV
-HRMEAjAAMEEGA1UdHwQ6MDgwNqA0oDKGMGh0dHA6Ly9jcmwuZ2xvYmFsc2lnbi5jb20vZ3Nn
-Y2NyNnNtaW1lY2EyMDIzLmNybDAhBgNVHREEGjAYgRZzdGVmYW5Aa2FuaWEtb25saW5lLmRl
-MB0GA1UdJQQWMBQGCCsGAQUFBwMCBggrBgEFBQcDBDAfBgNVHSMEGDAWgBQAKTaeXHq6D68t
-UC3boCOFGLCgkjAdBgNVHQ4EFgQU0kHF9fFBXygVDjwNe5DkaSxVk3cwDQYJKoZIhvcNAQEL
-BQADggIBAL0WoW7dCmTQxxo1dMGyld5LLS9wCa7goc07GplzOsEJ5GmfeNGapy+dP2NfmenH
-XYKPnP/8hosTk6GDgck1HaP4wP5RvZ4ALVraLs4XSQiENz9954Sim3YzjFbG2aoqXpv/C0ha
-MwzR7LBCa/OwUJot5wO7R++6SE98/ZeYUqGDIgVcmH+UOYE/5yxM+M4aDXFUR2LCQO2ejPcZ
-a3QzlnMJUYPPw3U4Udbs9MRy40FunbmWUzu4yEddlo9GikG5NEI6wC7hFEpC4joYmvEZXRlT
-UqS8wug7QKRLyeLhXw04h0GYL0mrx1yj7x4CXqRjjRpterRlAkgFj2zEEpQ4DMiVcl8fZZ7T
-xkQGlbfa+HEp9y9/NluiNeoqAMF/lzS8haLHDXLdrdWPitBQazmcsyQ3LlcmeAMjchOIcUWt
-EKxIRCoedt6xbuIX5D2ul0H6rPE2BrimedwF6AZFPFk3/KHAbjhfkAElHiNjgg4uwUji+d9q
-zIR6Di3W2WdTCCwzp/6V2eEWdlQ8z8U4v3aF80fwzp6dOuFmti/mOayUrAYCUC6DBLjkA4EY
-MS6Nc1dr4f4dffnOceF4deCDN3nH8bRPEXs+kvnA91vw008dvJ+Df7jcJmDrt2tmzZPDTV6l
-neB5rj7E+6Qcvadj6c5hl7L5Tc/v6LZx6DCVX0BA2KpPMIIGqDCCBJCgAwIBAgIQfofDCS7X
-Zu8vIeKo0KeY9DANBgkqhkiG9w0BAQwFADBMMSAwHgYDVQQLExdHbG9iYWxTaWduIFJvb3Qg
-Q0EgLSBSNjETMBEGA1UEChMKR2xvYmFsU2lnbjETMBEGA1UEAxMKR2xvYmFsU2lnbjAeFw0y
-MzA0MTkwMzUzNTNaFw0yOTA0MTkwMDAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQKExBH
-bG9iYWxTaWduIG52LXNhMSgwJgYDVQQDEx9HbG9iYWxTaWduIEdDQyBSNiBTTUlNRSBDQSAy
-MDIzMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAwjAEbSkPcSyn26Zn9VtoE/xB
-vzYmNW29bW1pJZ7jrzKwPJm/GakCvy0IIgObMsx9bpFaq30X1kEJZnLUzuE1/hlchatYqyOR
-VBeHlv5V0QRSXY4faR0dCkIhXhoGknZ2O0bUJithcN1IsEADNizZ1AJIaWsWbQ4tYEYjytEd
-vfkxz1WtX3SjtecZR+9wLJLt6HNa4sC//QKdjyfr/NhDCzYrdIzAssoXFnp4t+HcMyQTrj0r
-pD8KkPj96sy9axzegLbzte7wgTHbWBeJGp0sKg7BAu+G0Rk6teO1yPd75arbCvfY/NaRRQHk
-6tmG71gpLdB1ZhP9IcNYyeTKXIgfMh2tVK9DnXGaksYCyi6WisJa1Oa+poUroX2ESXO6o03l
-VxiA1xyfG8lUzpUNZonGVrUjhG5+MdY16/6b0uKejZCLbgu6HLPvIyqdTb9XqF4XWWKu+OMD
-s/rWyQ64v3mvSa0te5Q5tchm4m9K0Pe9LlIKBk/gsgfaOHJDp4hYx4wocDr8DeCZe5d5wCFk
-xoGc1ckM8ZoMgpUc4pgkQE5ShxYMmKbPvNRPa5YFzbFtcFn5RMr1Mju8gt8J0c+dxYco2hi7
-dEW391KKxGhv7MJBcc+0x3FFTnmhU+5t6+CnkKMlrmzyaoeVryRTvOiH4FnTNHtVKUYDsCM0
-CLDdMNgoxgkCAwEAAaOCAX4wggF6MA4GA1UdDwEB/wQEAwIBhjBMBgNVHSUERTBDBggrBgEF
-BQcDAgYIKwYBBQUHAwQGCisGAQQBgjcUAgIGCisGAQQBgjcKAwwGCisGAQQBgjcKAwQGCSsG
-AQQBgjcVBjASBgNVHRMBAf8ECDAGAQH/AgEAMB0GA1UdDgQWBBQAKTaeXHq6D68tUC3boCOF
-GLCgkjAfBgNVHSMEGDAWgBSubAWjkxPioufi1xzWx/B/yGdToDB7BggrBgEFBQcBAQRvMG0w
-LgYIKwYBBQUHMAGGImh0dHA6Ly9vY3NwMi5nbG9iYWxzaWduLmNvbS9yb290cjYwOwYIKwYB
-BQUHMAKGL2h0dHA6Ly9zZWN1cmUuZ2xvYmFsc2lnbi5jb20vY2FjZXJ0L3Jvb3QtcjYuY3J0
-MDYGA1UdHwQvMC0wK6ApoCeGJWh0dHA6Ly9jcmwuZ2xvYmFsc2lnbi5jb20vcm9vdC1yNi5j
-cmwwEQYDVR0gBAowCDAGBgRVHSAAMA0GCSqGSIb3DQEBDAUAA4ICAQCRkUdr1aIDRmkNI5jx
-5ggapGUThq0KcM2dzpMu314mJne8yKVXwzfKBtqbBjbUNMODnBkhvZcnbHUStur2/nt1tP3e
-e8KyNhYxzv4DkI0NbV93JChXipfsan7YjdfEk5vI2Fq+wpbGALyyWBgfy79YIgbYWATB158t
-vEh5UO8kpGpjY95xv+070X3FYuGyeZyIvao26mN872FuxRxYhNLwGHIy38N9ASa1Q3BTNKSr
-HrZngadofHglG5W3TMFR11JOEOAUHhUgpbVVvgCYgGA6dSX0y5z7k3rXVyjFOs7KBSXrdJPK
-adpl4vqYphH7+P40nzBRcxJHrv5FeXlTrb+drjyXNjZSCmzfkOuCqPspBuJ7vab0/9oeNERg
-nz6SLCjLKcDXbMbKcRXgNhFBlzN4OUBqieSBXk80w2Nzx12KvNj758WavxOsXIbX0Zxwo1h3
-uw75AI2v8qwFWXNclO8qW2VXoq6kihWpeiuvDmFfSAwRLxwwIjgUuzG9SaQ+pOomuaC7QTKW
-MI0hL0b4mEPq9GsPPQq1UmwkcYFJ/Z4I93DZuKcXmKMmuANTS6wxwIEw8Q5MQ6y9fbJxGEOg
-OgYL4QIqNULb5CYPnt2LeiIiEnh8Uuh8tawqSjnR0h7Bv5q4mgo3L1Z9QQuexUntWD96t4o0
-q1jXWLyrpgP7ZcnuCzGCBD0wggQ5AgEBMGIwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEds
-b2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gR0NDIFI2IFNNSU1FIENBIDIw
-MjMCDARpjFjRXq3n5ymccDANBglghkgBZQMEAgEFAKCCAqwwGAYJKoZIhvcNAQkDMQsGCSqG
-SIb3DQEHATAcBgkqhkiG9w0BCQUxDxcNMjUwNjE4MTgyOTAwWjAvBgkqhkiG9w0BCQQxIgQg
-TMjf5thBpruQs+yjdb8EBCfWlFFHHq+hE0/vueThYpgwcQYJKwYBBAGCNxAEMWQwYjBSMQsw
-CQYDVQQGEwJCRTEZMBcGA1UEChMQR2xvYmFsU2lnbiBudi1zYTEoMCYGA1UEAxMfR2xvYmFs
-U2lnbiBHQ0MgUjYgU01JTUUgQ0EgMjAyMwIMBGmMWNFerefnKZxwMHMGCyqGSIb3DQEJEAIL
-MWSgYjBSMQswCQYDVQQGEwJCRTEZMBcGA1UEChMQR2xvYmFsU2lnbiBudi1zYTEoMCYGA1UE
-AxMfR2xvYmFsU2lnbiBHQ0MgUjYgU01JTUUgQ0EgMjAyMwIMBGmMWNFerefnKZxwMIIBVwYJ
-KoZIhvcNAQkPMYIBSDCCAUQwCwYJYIZIAWUDBAEqMAsGCWCGSAFlAwQBAjAKBggqhkiG9w0D
-BzANBggqhkiG9w0DAgIBBTANBggqhkiG9w0DAgIBBTAHBgUrDgMCBzANBggqhkiG9w0DAgIB
-BTAHBgUrDgMCGjALBglghkgBZQMEAgEwCwYJYIZIAWUDBAICMAsGCWCGSAFlAwQCAzALBglg
-hkgBZQMEAgQwCwYJYIZIAWUDBAIHMAsGCWCGSAFlAwQCCDALBglghkgBZQMEAgkwCwYJYIZI
-AWUDBAIKMAsGCSqGSIb3DQEBATALBgkrgQUQhkg/AAIwCAYGK4EEAQsAMAgGBiuBBAELATAI
-BgYrgQQBCwIwCAYGK4EEAQsDMAsGCSuBBRCGSD8AAzAIBgYrgQQBDgAwCAYGK4EEAQ4BMAgG
-BiuBBAEOAjAIBgYrgQQBDgMwDQYJKoZIhvcNAQEBBQAEggEAQk7nytgtDD2kGP1TOfrizHII
-zLH8oGcBbT2S0/KQG6Dow015OnOBCk/vj0rjyDovTicF0QJUXY8vfVvpNcMvpFtpz1TMd3bZ
-yI7dOT/cjjOKNRQMCcKH/mnL3MqCqmmtnAQ75ogdJttgyvbZ9YscnX8Wg0wM5yatHylTjsgw
-5u9IlblY3/Os9z/+VnB3C3K1bdYVUnLJ9j8a9ZBfSWpzhlfA/P4od7dnnEHC4nqsXrUX7Fxh
-LOxR8HuR4luejpfHyJ6KUWUoQLnH9UAOCnSqe4va2h9LbqmcoaZpU03q4hLowJl9xdNrqikv
-Ilt/9pADiDTvlVPauaAgfYJg1OgfwgAAAAAAAA==
---------------ms080408060702070805040108--
+Steve
 
