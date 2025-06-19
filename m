@@ -2,71 +2,73 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id B3747ADF964
-	for <lists+samba-technical@lfdr.de>; Thu, 19 Jun 2025 00:25:28 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 86113AE0911
+	for <lists+samba-technical@lfdr.de>; Thu, 19 Jun 2025 16:49:02 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=KxQhDubABj6uaLJxZ4q28EQg9L/Fekhes499ywIf55U=; b=4EQzrZVkHlSU0hoe/Zz2I9/OJb
-	1enG54kpYNag2qUnSEYSsQuTbLNm9xfDcrKlsiJ7W1m7PwCXQteFVPAyeQIRgXX+suoN7QS1RJ4ge
-	Ih5nGsO3pYlJdqtjFifh01XyvZwBd3cfNDpjw2OpO+zUwsS4wLXyQ3zmA3s4h1K5ZMMDVrP2Y1az0
-	2Oxfs+ek105svZPqXVRjb06JwNoB4ptv0yPy9f/ZoOEYmiXJ2vIrHK8GpIFJNhL2CdJFNgiqPimIx
-	TRT6v+8JKOhD67tC55KgFHA/p1WNEVxcYvgN33UZrAyVB9jIc6oYoPd+94ShCzF07VP/x3C2ZcT4I
-	71wpqCBQ==;
-Received: from ip6-localhost ([::1]:62728 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=PR4RLj7FKG0s4cyX+tIn3hojW7WYNdrQ2Wg7KolPbE4=; b=yPPBH7IB0nRo6Bczl2q9UgNbSU
+	0Onjg5/Tp6/6ORQB87KGXgEPpTyQPR9Sho0KDNDvgWjS/+gw0q37GTKFEOX3QYpRUpCua0apDS/30
+	Dz5QqTdgT5M93uo7tIYiQ2uIRo+wlqHJoxdmrfmiY8wHLgwx6rKqXPS+hQHrcgQ1+00yUY14O/FOE
+	EeNBqcfxy7qdtB4uhRs8RoDcFfwURKeMSsKbutFyofQm4V7oVtIVRqSnk0G3ArCuvuIWglVYoGXfg
+	NtKENGEnqK7947+8f3rCEoNnqO1tY1U4IBLr51DEPFU6dDJDfT7ieGd7XGLg1w1xVUzUNVZ3fduqk
+	rrtKwJZg==;
+Received: from ip6-localhost ([::1]:33576 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1uS1D7-007PLF-0d; Wed, 18 Jun 2025 22:24:49 +0000
-Received: from mail-lf1-x12b.google.com ([2a00:1450:4864:20::12b]:53616) 
+	id 1uSGZB-007S1k-LF; Thu, 19 Jun 2025 14:48:37 +0000
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124]:36893) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uS1D2-007PL8-Ul
- for samba-technical@lists.samba.org; Wed, 18 Jun 2025 22:24:47 +0000
-Received: by mail-lf1-x12b.google.com with SMTP id
- 2adb3069b0e04-553b60de463so104385e87.3
- for <samba-technical@lists.samba.org>; Wed, 18 Jun 2025 15:24:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1750285484; x=1750890284; darn=lists.samba.org;
- h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=KxQhDubABj6uaLJxZ4q28EQg9L/Fekhes499ywIf55U=;
- b=l/RcvjG/Kt6mtIKx7ZMZcDCgnsS5eh+Va/UV7LkQPexOjIXWc9vBRr0gWXJsy2GOxh
- 1neD4MsPA7x1ugh6ymOFe0hD2/zUALHDKxYebcTSgAZaI42cyM/96h/htBym4X2dfiUY
- vaKib1rraJx4JS4FLA2TOtpVLtDM58CitxfjBQmf78We27XG4z+eD/m4Z8AeG9UHMcxp
- QPMwoS7IuvDsDKqk5bb46w51T8J4jKpi0R0htphp969Q9SJQDJ6ep/q6XrAw+eCk+ubt
- hoRg5W4Br/R/och1hspdlR2zhi4VmdaVcLa8+di+Rd4IpEpuq4nNplmsO1D6Pnrx5xeQ
- 9WyA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750285484; x=1750890284;
- h=to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=KxQhDubABj6uaLJxZ4q28EQg9L/Fekhes499ywIf55U=;
- b=oYzE/5p1IP13FXAJJSBAiMauvkz8lyqueQxUvZol6JJirkcRilbkEh6e6T1nnL0BLF
- h5gJPZQnvoa8+uW2z4eJBGWPQAxnCPnpg+RXFfRqX2MiE4vZ5xfOQjy62liDxFW4Wa1N
- JgQiIbZQD49L50Ll46xhP8S+jhFgNUPcloIBpgVNRWhvkioblzhAlHgUR0dldyhNYNmP
- GtWTBow4q6Kp9K3WAwjRlmJ1HynmFIqLPl4d4T4hdtDlqg7NndD63nZrPRVKwpZmp4zs
- XOgiuSTZXV/GiczzMtz7Axax43Mbe5sf+I/+abMEa75IuvaR6X+nijo+Nem4r5HQ74cB
- 1lTg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXEcug7HY08atK09+gyOjhNtE1FnyfPslZrwQD4PhlvkyIXaFL3GgwoK+IrGeOQfas3wyP0fbHDD6vmHIWgIfs=@lists.samba.org
-X-Gm-Message-State: AOJu0Yw19l/blusrcs/oDw58ShQJ9/R+ChItpihZdB4XWSDVPnx6yxs1
- py2+xp6VP26Ja6cykJJSOEEd9+3BjCfDeGXLXAG70RpYQBoH9++h/ko0KDJ7nhgCalontniSG+d
- cd5v7EmwBadycEMlJD9OrswPSLdfTI8k=
-X-Gm-Gg: ASbGncvOk9tFadDvfKRq09XEO4Wdib1RNv2gaKZ0+b3EfeW5sN1u9BW8KMff9lXzWfo
- kxjEnuZEQnTsotTcHT9pjVmkOqSFca0k83x28uh8lo7xbAAHuG2i6vfhtN04S5lIrjK5t8WIJjO
- k7LTaMdSE0oRbdxazZoqXthqqkuPG66UYQja6b6XzVL3m2IG6Pk2v/zuqfST6LFSMWmItuFlDeu
- fRG5A==
-X-Google-Smtp-Source: AGHT+IFKWkYleReGlaDeMZSGoeOcdHTZI6FuBSdm7IoLx/5YW/44/CL3YqGcIw2DYFpNrlozaeE4fxezGa538frgb8E=
-X-Received: by 2002:a05:6512:3b13:b0:553:d573:cd6b with SMTP id
- 2adb3069b0e04-553d573d055mr980556e87.10.1750285483500; Wed, 18 Jun 2025
- 15:24:43 -0700 (PDT)
+ (Exim) id 1uSGZ5-007S0y-9J
+ for samba-technical@lists.samba.org; Thu, 19 Jun 2025 14:48:35 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1750344507;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=PR4RLj7FKG0s4cyX+tIn3hojW7WYNdrQ2Wg7KolPbE4=;
+ b=Q6/Swn5xJ5Yn3mswE0qdu53iKI21+rchd0iPPguvtK1ejfc7+Uj9v8mh0Ydn7gFXKAlhTu
+ dEHR3gLFJYSnH40vKK4aJs8tLsBj0Ik0tQb1FCe7s++vl7zaLONhE0zF22qa/57q9Wn8mc
+ D/icZiaVfLcX6QQ+Ggme2dha0Co/zzw=
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1750344507;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=PR4RLj7FKG0s4cyX+tIn3hojW7WYNdrQ2Wg7KolPbE4=;
+ b=Q6/Swn5xJ5Yn3mswE0qdu53iKI21+rchd0iPPguvtK1ejfc7+Uj9v8mh0Ydn7gFXKAlhTu
+ dEHR3gLFJYSnH40vKK4aJs8tLsBj0Ik0tQb1FCe7s++vl7zaLONhE0zF22qa/57q9Wn8mc
+ D/icZiaVfLcX6QQ+Ggme2dha0Co/zzw=
+Received: from mx-prod-mc-02.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-466-WVlipm3GPJOwm6GRdDsWbw-1; Thu,
+ 19 Jun 2025 10:47:15 -0400
+X-MC-Unique: WVlipm3GPJOwm6GRdDsWbw-1
+X-Mimecast-MFC-AGG-ID: WVlipm3GPJOwm6GRdDsWbw_1750344434
+Received: from mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.4])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mx-prod-mc-02.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 3EB84195608A; Thu, 19 Jun 2025 14:47:14 +0000 (UTC)
+Received: from warthog.procyon.org.uk (unknown [10.42.28.18])
+ by mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
+ id 584E830001A1; Thu, 19 Jun 2025 14:47:12 +0000 (UTC)
+Organization: Red Hat UK Ltd. Registered Address: Red Hat UK Ltd, Amberley
+ Place, 107-111 Peascod Street, Windsor, Berkshire, SI4 1TE, United
+ Kingdom.
+ Registered in England and Wales under Company Registration No. 3798903
+To: Jeremy Allison <jra@samba.org>, Steve French <sfrench@samba.org>,
+ samba-technical@lists.samba.org
+Subject: Seeing lots of coredumps from samba when using upstream cifs
 MIME-Version: 1.0
-Date: Wed, 18 Jun 2025 17:24:31 -0500
-X-Gm-Features: AX0GCFsVWtBmDqxDregn5D43skKGu3Get2qHilpdUKL1gYfeC-e0WYlzVJdgdmI
-Message-ID: <CAH2r5mtipm8KB+FwzYKAvNqH4ECAv+1+SUqyZ0ur6k6Sy8KoAA@mail.gmail.com>
-Subject: smb 3.1.1 client dir lease performance
-To: CIFS <linux-cifs@vger.kernel.org>, 
- samba-technical <samba-technical@lists.samba.org>,
- Bharath S M <bharathsm@microsoft.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset="us-ascii"
+Content-ID: <869960.1750344431.1@warthog.procyon.org.uk>
+Content-Transfer-Encoding: quoted-printable
+Date: Thu, 19 Jun 2025 15:47:11 +0100
+Message-ID: <869961.1750344431@warthog.procyon.org.uk>
+X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.4
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -80,33 +82,188 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
+From: David Howells via samba-technical <samba-technical@lists.samba.org>
+Reply-To: David Howells <dhowells@redhat.com>
+Cc: dhowells@redhat.com, linux-cifs@vger.kernel.org, paalcant@redhat.com
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Bharath,
-I noticed that with your patch we are caching directories (when server
-supports directory leases) well for successive readdirs which is a
-great perf improvement but I also noticed that they time out at 30
-seconds from when the first readdir was issued (when the dir lease was
-first acquired) and not delayed if the directory is requeried every
-few seconds.
+Hi Jeremy, Steve,
 
-Thoughts about bumping the timeout on a directory lease
-experimentation to when it was last accessed instead of when it was
-acquired?
+I've been trying to investigate all the reconnection issues cifs is seeing=
+ in
+the currently upstream kernel from running the generic/013 xfstest against=
+ it,
+and I've realised Samba is coredumping a lot (attached is one example, at
+lease several others look similar).
 
-I also noticed that when we hit the limit on max_cached_dirs (16 by
-default) instead of evicting the oldest entries in the cache to use
-the newest dir leases we give up adding cached_dir for that
-when we hit the limit, even though some of the older dir leases in the
-cache may be about to expire?  Maybe we should replace the oldest
-entry in dir cache with one from newest dir lease
+The version of the Fedora Samba RPM I'm using is: samba-4.21.4-1.fc41.x86_=
+64
 
-Thoughts?
--- 
-Thanks,
+In smb2_lease_key_equal (frame #10), k1 is 0x18 - which is presumably the =
+root
+of the SEGV.
 
-Steve
+Going up to frame #12 (delay_rename_lease_break_fn), fsp->lease is NULL.
+
+(gdb) p *fsp
+$5 =3D {next =3D 0x558d634a1520, prev =3D 0x558d6345f130, fnum =3D 5666103=
+66, op =3D 0x558d63537b20, conn =3D 0x558d63414680, fh =3D 0x558d635182c0,=
+ num_smb_operations =3D 0, =
+
+  file_id =3D {devid =3D 48, inode =3D 1875968, extid =3D 0}, initial_allo=
+cation_size =3D 0, file_pid =3D 52138, vuid =3D 3019447861, open_time =3D =
+{tv_sec =3D 1750343292, =
+
+    tv_usec =3D 868402}, access_mask =3D 65536, fsp_flags =3D {is_pathref =
+=3D true, is_fsa =3D true, have_proc_fds =3D true, kernel_share_modes_take=
+n =3D false, =
+
+    update_write_time_triggered =3D false, update_write_time_on_close =3D =
+false, write_time_forced =3D false, can_lock =3D true, can_read =3D false,=
+ can_write =3D false, =
+
+    modified =3D false, is_directory =3D false, is_dirfsp =3D false, aio_w=
+rite_behind =3D false, initial_delete_on_close =3D false, delete_on_close =
+=3D false, =
+
+    is_sparse =3D true, backup_intent =3D false, use_ofd_locks =3D true, c=
+losing =3D false, lock_failure_seen =3D false, encryption_required =3D fal=
+se, =
+
+    fstat_before_close =3D false}, update_write_time_event =3D 0x0, close_=
+write_time =3D {tv_sec =3D 0, tv_nsec =3D 1073741822}, oplock_type =3D 0, =
+leases_db_seqnum =3D 0, =
+
+  lease_type =3D 0, lease =3D 0x0, sent_oplock_break =3D 0, oplock_timeout=
+ =3D 0x0, current_lock_count =3D 0, posix_flags =3D 0, fsp_name =3D 0x558d=
+63566550, =
+
+  name_hash =3D 3474280865, mid =3D 1043, vfs_extension =3D 0x0, fake_file=
+_handle =3D 0x0, notify =3D 0x0, base_fsp =3D 0x0, stream_fsp =3D 0x0, sha=
+re_mode_flags_seqnum =3D 0, =
+
+  share_mode_flags =3D 0, brlock_seqnum =3D 0, brlock_rec =3D 0x558d635182=
+20, dptr =3D 0x0, print_file =3D 0x0, num_aio_requests =3D 0, aio_requests=
+ =3D 0x0, =
+
+  blocked_smb1_lock_reqs =3D 0x0, lock_failure_offset =3D 0}
+
+David
+---
+#0  __pthread_kill_implementation (threadid=3D<optimized out>, signo=3Dsig=
+no@entry=3D6, no_tid=3Dno_tid@entry=3D0) at pthread_kill.c:44
+#1  0x00007f44435dcbc3 in __pthread_kill_internal (threadid=3D<optimized o=
+ut>, signo=3D6) at pthread_kill.c:78
+#2  0x00007f4443583f9e in __GI_raise (sig=3Dsig@entry=3D6) at ../sysdeps/p=
+osix/raise.c:26
+#3  0x00007f444356b942 in __GI_abort () at abort.c:79
+#4  0x00007f4443ac26dc in dump_core () at ../../source3/lib/dumpcore.c:339
+#5  0x00007f4443ac2734 in smb_panic_s3 (why=3D<optimized out>) at ../../so=
+urce3/lib/util.c:716
+#6  0x00007f44437c56b6 in smb_panic (why=3Dwhy@entry=3D0x7ffcde469310 "Sig=
+nal 11: Segmentation fault") at ../../lib/util/fault.c:209
+#7  0x00007f44437c575d in fault_report (sig=3D11) at ../../lib/util/fault.=
+c:83
+#8  sig_fault (sig=3D11) at ../../lib/util/fault.c:94
+#9  <signal handler called>
+#10 0x00007f44429acbf9 in smb2_lease_key_equal (k1=3Dk1@entry=3D0x18, k2=3D=
+k2@entry=3D0x7ffcde469b98) at ../../libcli/smb/smb2_lease.c:93
+#11 0x00007f44429acc47 in smb2_lease_equal (g1=3D<optimized out>, k1=3Dk1@=
+entry=3D0x18, g2=3Dg2@entry=3D0x7ffcde469b84, k2=3Dk2@entry=3D0x7ffcde469b=
+98)
+    at ../../libcli/smb/smb2_lease.c:101
+#12 0x00007f4443c61c5f in delay_rename_lease_break_fn (e=3D0x7ffcde469b60,=
+ private_data=3D0x7ffcde469cb0) at ../../source3/smbd/smb2_setinfo.c:202
+#13 0x00007f4443cdcb8f in share_mode_for_one_entry (fn=3D<optimized out>, =
+private_data=3D<optimized out>, i=3D<synthetic pointer>, data=3D0x558d6359=
+20ad "\025\262\021", =
+
+    num_share_modes=3D<synthetic pointer>, writeback=3D<synthetic pointer>=
+) at ../../source3/locking/share_mode_lock.c:2161
+#14 share_mode_forall_entries (lck=3D<optimized out>, fn=3D0x7f4443ccdf40 =
+<share_mode_forall_leases_fn>, private_data=3D0x7ffcde469c30)
+    at ../../source3/locking/share_mode_lock.c:2265
+#15 0x00007f4443cd4556 in share_mode_forall_leases (lck=3D0x558d635b2b80, =
+fn=3D0x7f4443c61c20 <delay_rename_lease_break_fn>, private_data=3D0x7ffcde=
+469cb0)
+    at ../../source3/locking/locking.c:1349
+#16 0x00007f4443c61d42 in delay_rename_for_lease_break (req=3Dreq@entry=3D=
+0x558d635b2850, smb2req=3Dsmb2req@entry=3D0x558d635b10b0, ev=3Dev@entry=3D=
+0x558d63425d80, =
+
+    fsp=3Dfsp@entry=3D0x558d6357a960, lck=3Dlck@entry=3D0x558d635b2b80, da=
+ta=3Ddata@entry=3D0x558d6349da00 "\001", data_size=3D116) at ../../source3=
+/smbd/smb2_setinfo.c:245
+#17 0x00007f4443c62721 in smbd_smb2_setinfo_send (mem_ctx=3D0x558d635b10b0=
+, ev=3D0x558d63425d80, smb2req=3D0x558d635b10b0, fsp=3D0x558d6357a960, =
+
+--Type <RET> for more, q to quit, c to continue without paging--
+    in_info_type=3D<optimized out>, in_file_info_class=3D<optimized out>, =
+in_input_buffer=3D..., in_additional_information=3D<optimized out>)
+    at ../../source3/smbd/smb2_setinfo.c:491
+#18 smbd_smb2_request_process_setinfo (req=3D0x558d635b10b0) at ../../sour=
+ce3/smbd/smb2_setinfo.c:112
+#19 0x00007f4443c476d4 in smbd_smb2_request_dispatch (req=3D0x558d635b10b0=
+) at ../../source3/smbd/smb2_server.c:3582
+#20 0x00007f4443c48f99 in smbd_smb2_request_dispatch_immediate (ctx=3Dctx@=
+entry=3D0x558d63425d80, im=3D<optimized out>, im@entry=3D0x558d635b2760, =
+
+    private_data=3Dprivate_data@entry=3D0x558d635b10b0) at ../../source3/s=
+mbd/smb2_server.c:3910
+#21 0x00007f4443769a50 in tevent_common_invoke_immediate_handler (im=3D0x5=
+58d635b2760, removed=3Dremoved@entry=3D0x0) at ../../tevent_immediate.c:19=
+0
+#22 0x00007f4443769ab2 in tevent_common_loop_immediate (ev=3Dev@entry=3D0x=
+558d63425d80) at ../../tevent_immediate.c:236
+#23 0x00007f444376d750 in epoll_event_loop_once (ev=3D0x558d63425d80, loca=
+tion=3D<optimized out>) at ../../tevent_epoll.c:905
+#24 0x00007f44437648e4 in std_event_loop_once (ev=3D0x558d63425d80, locati=
+on=3D0x7f4443bae1c8 "../../source3/smbd/smb2_process.c:2163")
+    at ../../tevent_standard.c:110
+#25 0x00007f4443766499 in _tevent_loop_once (ev=3Dev@entry=3D0x558d63425d8=
+0, location=3Dlocation@entry=3D0x7f4443bae1c8 "../../source3/smbd/smb2_pro=
+cess.c:2163")
+    at ../../tevent.c:820
+#26 0x00007f44437665cb in tevent_common_loop_wait (ev=3D0x558d63425d80, lo=
+cation=3D0x7f4443bae1c8 "../../source3/smbd/smb2_process.c:2163") at ../..=
+/tevent.c:949
+#27 0x00007f4443764964 in std_event_loop_wait (ev=3D0x558d63425d80, locati=
+on=3D0x7f4443bae1c8 "../../source3/smbd/smb2_process.c:2163")
+    at ../../tevent_standard.c:141
+#28 0x00007f4443c38fa3 in smbd_process (ev_ctx=3Dev_ctx@entry=3D0x558d6342=
+5d80, msg_ctx=3Dmsg_ctx@entry=3D0x558d63420a50, sock_fd=3Dsock_fd@entry=3D=
+35, =
+
+    interactive=3Dinteractive@entry=3Dfalse) at ../../source3/smbd/smb2_pr=
+ocess.c:2163
+#29 0x0000558d47185606 in smbd_accept_connection (ev=3D0x558d63425d80, fde=
+=3D<optimized out>, flags=3D<optimized out>, private_data=3D<optimized out=
+>)
+    at ../../source3/smbd/server.c:1033
+#30 0x00007f4443769818 in tevent_common_invoke_fd_handler (fde=3D0x558d634=
+39fe0, flags=3D1, removed=3Dremoved@entry=3D0x0) at ../../tevent_fd.c:174
+#31 0x00007f444376da56 in epoll_event_loop (epoll_ev=3D0x558d63425fb0, tva=
+lp=3D0x7ffcde46a380) at ../../tevent_epoll.c:696
+#32 epoll_event_loop_once (ev=3D<optimized out>, location=3D<optimized out=
+>) at ../../tevent_epoll.c:926
+--Type <RET> for more, q to quit, c to continue without paging--
+#33 0x00007f44437648e4 in std_event_loop_once (ev=3D0x558d63425d80, locati=
+on=3D0x558d4717fbd0 "../../source3/smbd/server.c:1382") at ../../tevent_st=
+andard.c:110
+#34 0x00007f4443766499 in _tevent_loop_once (ev=3Dev@entry=3D0x558d63425d8=
+0, location=3Dlocation@entry=3D0x558d4717fbd0 "../../source3/smbd/server.c=
+:1382")
+    at ../../tevent.c:820
+#35 0x00007f44437665cb in tevent_common_loop_wait (ev=3D0x558d63425d80, lo=
+cation=3D0x558d4717fbd0 "../../source3/smbd/server.c:1382") at ../../teven=
+t.c:949
+#36 0x00007f4443764964 in std_event_loop_wait (ev=3D0x558d63425d80, locati=
+on=3D0x558d4717fbd0 "../../source3/smbd/server.c:1382") at ../../tevent_st=
+andard.c:141
+#37 0x0000558d47188acf in smbd_parent_loop (parent=3D0x558d6340e270, ev_ct=
+x=3D0x558d63425d80) at ../../source3/smbd/server.c:1382
+#38 main (argc=3D<optimized out>, argv=3D<optimized out>) at ../../source3=
+/smbd/server.c:2354
+
 
