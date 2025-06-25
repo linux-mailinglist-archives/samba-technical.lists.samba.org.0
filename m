@@ -2,43 +2,44 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 024FDAE8F52
-	for <lists+samba-technical@lfdr.de>; Wed, 25 Jun 2025 22:19:27 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6DE6FAE8F5A
+	for <lists+samba-technical@lfdr.de>; Wed, 25 Jun 2025 22:20:31 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=CBZb5cDGLg5Cpz5eR4nb4ApAgqbN2A3G1lLtKu1Ecio=; b=UFH0yR5OVCpS0v2SurlNWsERP4
-	ScnBZKFSjy8pvUG1KUtc1jt7hDsj0a1AIdIolSpwu/TP1Tay5LrlwLfhuEGMqHSlZjFD3gnpCylpz
-	ng1VdZndtJcdnWxbLIp+AcHk2XBzeo6A+pzC9QH5aGaQmKoL58GKI/qAf6T+dHnOCpExGsO5jugVt
-	QhEC65C+UXg68FlZyqDJhwhuzVdoCzpWMPaHkZwtUDItRSVCA9JLTGKQSE9l852sN1digPyLMyRpB
-	StSHGkKTuWkvOt4DxM2x/dNkG5kH5XoyQ8j5l93yJIinAnfG2kKw4ENM9y8iYOsAfgAdaQAtvBRGB
-	rjs0+zyw==;
-Received: from ip6-localhost ([::1]:29602 helo=hr1.samba.org) 
+	bh=GXNhUz7dkesmKFXVgfaZQO3otUQc051IhBmmn+n6xag=; b=GOEMhjWb40ytabUJcFm/3H9juv
+	XiqeQH3PEaKC/fhWxtBIifV3jyZx9S3ocilrawhLvfcaV2dfmtD/5TdhYRmrsASeLsfBDJ090LHD+
+	WC5qqjr/c03FDjj4TE5y4iDlBZe26C79M5Fcbf2aW53/CmHT0iRD1QvxpsZ3TLA/rw5qVaHXNtmlW
+	ut1Z6wwAECf1sL2AN/ZsxmQJsxkS2oa2eE65mxw1mmnwjkqurI4Najy/TRNisi1fINWFnOzb8M+c1
+	I3Y2g2mPixPv0dk5zxXPCYZS+ci5BiqlgEFI0SpbE3GCeb1Z/3Hq7QqOfrxcotebEwtXDLqZsrVp1
+	pYcsdObw==;
+Received: from ip6-localhost ([::1]:33604 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1uUWaA-007scL-Rb; Wed, 25 Jun 2025 20:19:00 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:15204) 
+	id 1uUWbH-007snz-HJ; Wed, 25 Jun 2025 20:20:08 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:44704) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uULFv-007pnj-B5
- for samba-technical@lists.samba.org; Wed, 25 Jun 2025 08:13:21 +0000
+ (Exim) id 1uULJK-007pny-Op
+ for samba-technical@lists.samba.org; Wed, 25 Jun 2025 08:16:53 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Message-Id:Date:Cc:To:From;
- bh=CBZb5cDGLg5Cpz5eR4nb4ApAgqbN2A3G1lLtKu1Ecio=; b=tz1JFH2x5/xHuvBFVTe1GgoD12
- s7qAKYSNBhchEXF+k9ePAs+HPZZk9/y8zRWchw2dIQ6KYKp8+IR1krCtRiGJJYHxOcemVdgAWXFyo
- 2/CvpWCBAxtyi7SpP9egHI/i/5VuQ7V1nTVMYosyf5TBDLO8JWeb6PCqAM4JQwqSMzS9yrJfFFrnx
- OGnwejB9ceQkx0v5H7yVuGV/Fgy20JfpacEcYyIqQYm4XnO5iuyaEmzAfUXlQ7YhW8XPzth787U0j
- 0t16IKe/dMbWvWEpyD+qWgJiR5l8IaaqOG9UFeepxVFowTp3d9a6BnZyQ5Ne7qo7T/QoUxtkr8rpl
- mYGAekvT8BUBeoNajRNowjDtoB/Rd9pwo3FnfpT8D0bp46t3y+Gk9A6Tf6eu/1+5AweBpgx+Z6EOC
- idpFdt8OdfOLcgVAnAMSwlqvSojW5eNjpAR0J1B1i/8QnCHrKJfXpWsaPm2M5IUXo7KB7XOE9YdJi
- nsxVUt9RhyhztGh4nEpcGlTI;
+ bh=GXNhUz7dkesmKFXVgfaZQO3otUQc051IhBmmn+n6xag=; b=UkVv2Idc2R3yueHPCMMYlKUQxP
+ ksufF2n2tVZc0OVLS/CGOZfU9z2BFgP4NWXI1bwF/657TiUs+ggFr22YtBZUsXpsK117yS1jdxOtc
+ /DgcQRHtZMEij3RqmCH4xEhpqsB/IKxiTSZGIMiRlkQzDqCO1er3uPX9lUCqWxKKc3Hc39VqlcmJd
+ TCaSb3+OyvANPemJ2dVsUclpKgWXSBTNOUfjhrePFaBnSfJjyMLHkEeRdPsHjT/NicQwGySVBJFOW
+ g1RCSDbcccv/nyvwRwUbQRAgJAENlfPvkrQM/rS31UmjWQstYkqyVEfiNHxysmr3tHej1W/f1ihsG
+ E4uFXPOqfwjL6DM0iLK0O95ROebE5L2qgFvivONZanThT9vpXZpBWgKLixWGEb8D31bR87BIpBm0t
+ DEdgWB3wdGzifoMZ8FBjyPwPYuTVJ/ZFw38NXVFUtaGdfI/caIg97gKISJPowwooh9Ci4Nk8BaSZS
+ Y0lfH037TQnC2VU5u5/6w/Lb;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uULFu-00CNwO-1b; Wed, 25 Jun 2025 08:13:18 +0000
+ (Exim) id 1uULJJ-00CNyz-2T; Wed, 25 Jun 2025 08:16:49 +0000
 To: linux-cifs@vger.kernel.org,
 	samba-technical@lists.samba.org
-Subject: [PATCH] smb: client: remove \t from TP_printk statements
-Date: Wed, 25 Jun 2025 10:13:04 +0200
-Message-Id: <20250625081304.943870-1-metze@samba.org>
+Subject: [PATCH v2] smb: client: let smbd_post_send_iter() respect the peers
+ max_send_size and transmit all data
+Date: Wed, 25 Jun 2025 10:16:38 +0200
+Message-Id: <20250625081638.944583-1-metze@samba.org>
 X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -57,138 +58,134 @@ List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
 From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
 Reply-To: Stefan Metzmacher <metze@samba.org>
-Cc: metze@samba.org, stable@vger.kernel.org
+Cc: metze@samba.org, Steve French <sfrench@samba.org>,
+ David Howells <dhowells@redhat.com>, Tom Talpey <tom@talpey.com>,
+ stable+noautosel@kernel.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-The generate '[FAILED TO PARSE]' strings in trace-cmd report output like this:
+We should not send smbdirect_data_transfer messages larger than
+the negotiated max_send_size, typically 1364 bytes, which means
+24 bytes of the smbdirect_data_transfer header + 1340 payload bytes.
 
-  rm-5298  [001]  6084.533748493: smb3_exit_err:        [FAILED TO PARSE] xid=972 func_name=cifs_rmdir rc=-39
-  rm-5298  [001]  6084.533959234: smb3_enter:           [FAILED TO PARSE] xid=973 func_name=cifs_closedir
-  rm-5298  [001]  6084.533967630: smb3_close_enter:     [FAILED TO PARSE] xid=973 fid=94489281833 tid=1 sesid=96758029877361
-  rm-5298  [001]  6084.534004008: smb3_cmd_enter:       [FAILED TO PARSE] tid=1 sesid=96758029877361 cmd=6 mid=566
-  rm-5298  [001]  6084.552248232: smb3_cmd_done:        [FAILED TO PARSE] tid=1 sesid=96758029877361 cmd=6 mid=566
-  rm-5298  [001]  6084.552280542: smb3_close_done:      [FAILED TO PARSE] xid=973 fid=94489281833 tid=1 sesid=96758029877361
-  rm-5298  [001]  6084.552316034: smb3_exit_done:       [FAILED TO PARSE] xid=973 func_name=cifs_closedir
+This happened when doing an SMB2 write with more than 1340 bytes
+(which is done inline as it's below rdma_readwrite_threshold).
 
-Cc: stable@vger.kernel.org
+It means the peer resets the connection.
+
+When testing between cifs.ko and ksmbd.ko something like this
+is logged:
+
+client:
+
+    CIFS: VFS: RDMA transport re-established
+    siw: got TERMINATE. layer 1, type 2, code 2
+    siw: got TERMINATE. layer 1, type 2, code 2
+    siw: got TERMINATE. layer 1, type 2, code 2
+    siw: got TERMINATE. layer 1, type 2, code 2
+    siw: got TERMINATE. layer 1, type 2, code 2
+    siw: got TERMINATE. layer 1, type 2, code 2
+    siw: got TERMINATE. layer 1, type 2, code 2
+    siw: got TERMINATE. layer 1, type 2, code 2
+    siw: got TERMINATE. layer 1, type 2, code 2
+    CIFS: VFS: \\carina Send error in SessSetup = -11
+    smb2_reconnect: 12 callbacks suppressed
+    CIFS: VFS: reconnect tcon failed rc = -11
+    CIFS: VFS: reconnect tcon failed rc = -11
+    CIFS: VFS: reconnect tcon failed rc = -11
+    CIFS: VFS: SMB: Zero rsize calculated, using minimum value 65536
+
+and:
+
+    CIFS: VFS: RDMA transport re-established
+    siw: got TERMINATE. layer 1, type 2, code 2
+    CIFS: VFS: smbd_recv:1894 disconnected
+    siw: got TERMINATE. layer 1, type 2, code 2
+
+The ksmbd dmesg is showing things like:
+
+    smb_direct: Recv error. status='local length error (1)' opcode=128
+    smb_direct: disconnected
+    smb_direct: Recv error. status='local length error (1)' opcode=128
+    ksmbd: smb_direct: disconnected
+    ksmbd: sock_read failed: -107
+
+As smbd_post_send_iter() limits the transmitted number of bytes
+we need loop over it in order to transmit the whole iter.
+
+Cc: Steve French <sfrench@samba.org>
+Cc: David Howells <dhowells@redhat.com>
+Cc: Tom Talpey <tom@talpey.com>
+Cc: linux-cifs@vger.kernel.org
+Cc: <stable+noautosel@kernel.org> # sp->max_send_size should be info->max_send_size in backports
+Fixes: 3d78fe73fa12 ("cifs: Build the RDMA SGE list directly from an iterator")
 Signed-off-by: Stefan Metzmacher <metze@samba.org>
 ---
- fs/smb/client/trace.h | 24 ++++++++++++------------
- 1 file changed, 12 insertions(+), 12 deletions(-)
+ fs/smb/client/smbdirect.c | 31 +++++++++++++++++++++++++++----
+ 1 file changed, 27 insertions(+), 4 deletions(-)
 
-diff --git a/fs/smb/client/trace.h b/fs/smb/client/trace.h
-index 52bcb55d9952..93e5b2bb9f28 100644
---- a/fs/smb/client/trace.h
-+++ b/fs/smb/client/trace.h
-@@ -140,7 +140,7 @@ DECLARE_EVENT_CLASS(smb3_rw_err_class,
- 		__entry->len = len;
- 		__entry->rc = rc;
- 	),
--	TP_printk("\tR=%08x[%x] xid=%u sid=0x%llx tid=0x%x fid=0x%llx offset=0x%llx len=0x%x rc=%d",
-+	TP_printk("R=%08x[%x] xid=%u sid=0x%llx tid=0x%x fid=0x%llx offset=0x%llx len=0x%x rc=%d",
- 		  __entry->rreq_debug_id, __entry->rreq_debug_index,
- 		  __entry->xid, __entry->sesid, __entry->tid, __entry->fid,
- 		  __entry->offset, __entry->len, __entry->rc)
-@@ -190,7 +190,7 @@ DECLARE_EVENT_CLASS(smb3_other_err_class,
- 		__entry->len = len;
- 		__entry->rc = rc;
- 	),
--	TP_printk("\txid=%u sid=0x%llx tid=0x%x fid=0x%llx offset=0x%llx len=0x%x rc=%d",
-+	TP_printk("xid=%u sid=0x%llx tid=0x%x fid=0x%llx offset=0x%llx len=0x%x rc=%d",
- 		__entry->xid, __entry->sesid, __entry->tid, __entry->fid,
- 		__entry->offset, __entry->len, __entry->rc)
- )
-@@ -247,7 +247,7 @@ DECLARE_EVENT_CLASS(smb3_copy_range_err_class,
- 		__entry->len = len;
- 		__entry->rc = rc;
- 	),
--	TP_printk("\txid=%u sid=0x%llx tid=0x%x source fid=0x%llx source offset=0x%llx target fid=0x%llx target offset=0x%llx len=0x%x rc=%d",
-+	TP_printk("xid=%u sid=0x%llx tid=0x%x source fid=0x%llx source offset=0x%llx target fid=0x%llx target offset=0x%llx len=0x%x rc=%d",
- 		__entry->xid, __entry->sesid, __entry->tid, __entry->target_fid,
- 		__entry->src_offset, __entry->target_fid, __entry->target_offset, __entry->len, __entry->rc)
- )
-@@ -298,7 +298,7 @@ DECLARE_EVENT_CLASS(smb3_copy_range_done_class,
- 		__entry->target_offset = target_offset;
- 		__entry->len = len;
- 	),
--	TP_printk("\txid=%u sid=0x%llx tid=0x%x source fid=0x%llx source offset=0x%llx target fid=0x%llx target offset=0x%llx len=0x%x",
-+	TP_printk("xid=%u sid=0x%llx tid=0x%x source fid=0x%llx source offset=0x%llx target fid=0x%llx target offset=0x%llx len=0x%x",
- 		__entry->xid, __entry->sesid, __entry->tid, __entry->target_fid,
- 		__entry->src_offset, __entry->target_fid, __entry->target_offset, __entry->len)
- )
-@@ -482,7 +482,7 @@ DECLARE_EVENT_CLASS(smb3_fd_class,
- 		__entry->tid = tid;
- 		__entry->sesid = sesid;
- 	),
--	TP_printk("\txid=%u sid=0x%llx tid=0x%x fid=0x%llx",
-+	TP_printk("xid=%u sid=0x%llx tid=0x%x fid=0x%llx",
- 		__entry->xid, __entry->sesid, __entry->tid, __entry->fid)
- )
+diff --git a/fs/smb/client/smbdirect.c b/fs/smb/client/smbdirect.c
+index d00adce37f09..7162c0e3acb1 100644
+--- a/fs/smb/client/smbdirect.c
++++ b/fs/smb/client/smbdirect.c
+@@ -907,8 +907,10 @@ static int smbd_post_send_iter(struct smbd_connection *info,
+ 			.local_dma_lkey	= sc->ib.pd->local_dma_lkey,
+ 			.direction	= DMA_TO_DEVICE,
+ 		};
++		size_t payload_len = umin(*_remaining_data_length,
++					  sp->max_send_size - sizeof(*packet));
  
-@@ -521,7 +521,7 @@ DECLARE_EVENT_CLASS(smb3_fd_err_class,
- 		__entry->sesid = sesid;
- 		__entry->rc = rc;
- 	),
--	TP_printk("\txid=%u sid=0x%llx tid=0x%x fid=0x%llx rc=%d",
-+	TP_printk("xid=%u sid=0x%llx tid=0x%x fid=0x%llx rc=%d",
- 		__entry->xid, __entry->sesid, __entry->tid, __entry->fid,
- 		__entry->rc)
- )
-@@ -794,7 +794,7 @@ DECLARE_EVENT_CLASS(smb3_cmd_err_class,
- 		__entry->status = status;
- 		__entry->rc = rc;
- 	),
--	TP_printk("\tsid=0x%llx tid=0x%x cmd=%u mid=%llu status=0x%x rc=%d",
-+	TP_printk("sid=0x%llx tid=0x%x cmd=%u mid=%llu status=0x%x rc=%d",
- 		__entry->sesid, __entry->tid, __entry->cmd, __entry->mid,
- 		__entry->status, __entry->rc)
- )
-@@ -829,7 +829,7 @@ DECLARE_EVENT_CLASS(smb3_cmd_done_class,
- 		__entry->cmd = cmd;
- 		__entry->mid = mid;
- 	),
--	TP_printk("\tsid=0x%llx tid=0x%x cmd=%u mid=%llu",
-+	TP_printk("sid=0x%llx tid=0x%x cmd=%u mid=%llu",
- 		__entry->sesid, __entry->tid,
- 		__entry->cmd, __entry->mid)
- )
-@@ -867,7 +867,7 @@ DECLARE_EVENT_CLASS(smb3_mid_class,
- 		__entry->when_sent = when_sent;
- 		__entry->when_received = when_received;
- 	),
--	TP_printk("\tcmd=%u mid=%llu pid=%u, when_sent=%lu when_rcv=%lu",
-+	TP_printk("cmd=%u mid=%llu pid=%u, when_sent=%lu when_rcv=%lu",
- 		__entry->cmd, __entry->mid, __entry->pid, __entry->when_sent,
- 		__entry->when_received)
- )
-@@ -898,7 +898,7 @@ DECLARE_EVENT_CLASS(smb3_exit_err_class,
- 		__assign_str(func_name);
- 		__entry->rc = rc;
- 	),
--	TP_printk("\t%s: xid=%u rc=%d",
-+	TP_printk("%s: xid=%u rc=%d",
- 		__get_str(func_name), __entry->xid, __entry->rc)
- )
+-		rc = smb_extract_iter_to_rdma(iter, *_remaining_data_length,
++		rc = smb_extract_iter_to_rdma(iter, payload_len,
+ 					      &extract);
+ 		if (rc < 0)
+ 			goto err_dma;
+@@ -1013,6 +1015,27 @@ static int smbd_post_send_empty(struct smbd_connection *info)
+ 	return smbd_post_send_iter(info, NULL, &remaining_data_length);
+ }
  
-@@ -924,7 +924,7 @@ DECLARE_EVENT_CLASS(smb3_sync_err_class,
- 		__entry->ino = ino;
- 		__entry->rc = rc;
- 	),
--	TP_printk("\tino=%lu rc=%d",
-+	TP_printk("ino=%lu rc=%d",
- 		__entry->ino, __entry->rc)
- )
++static int smbd_post_send_full_iter(struct smbd_connection *info,
++				    struct iov_iter *iter,
++				    int *_remaining_data_length)
++{
++	int rc = 0;
++
++	/*
++	 * smbd_post_send_iter() respects the
++	 * negotiated max_send_size, so we need to
++	 * loop until the full iter is posted
++	 */
++
++	while (iov_iter_count(iter) > 0) {
++		rc = smbd_post_send_iter(info, iter, _remaining_data_length);
++		if (rc < 0)
++			break;
++	}
++
++	return rc;
++}
++
+ /*
+  * Post a receive request to the transport
+  * The remote peer can only send data when a receive request is posted
+@@ -1956,14 +1979,14 @@ int smbd_send(struct TCP_Server_Info *server,
+ 			klen += rqst->rq_iov[i].iov_len;
+ 		iov_iter_kvec(&iter, ITER_SOURCE, rqst->rq_iov, rqst->rq_nvec, klen);
  
-@@ -950,7 +950,7 @@ DECLARE_EVENT_CLASS(smb3_enter_exit_class,
- 		__entry->xid = xid;
- 		__assign_str(func_name);
- 	),
--	TP_printk("\t%s: xid=%u",
-+	TP_printk("%s: xid=%u",
- 		__get_str(func_name), __entry->xid)
- )
+-		rc = smbd_post_send_iter(info, &iter, &remaining_data_length);
++		rc = smbd_post_send_full_iter(info, &iter, &remaining_data_length);
+ 		if (rc < 0)
+ 			break;
  
+ 		if (iov_iter_count(&rqst->rq_iter) > 0) {
+ 			/* And then the data pages if there are any */
+-			rc = smbd_post_send_iter(info, &rqst->rq_iter,
+-						 &remaining_data_length);
++			rc = smbd_post_send_full_iter(info, &rqst->rq_iter,
++						      &remaining_data_length);
+ 			if (rc < 0)
+ 				break;
+ 		}
 -- 
 2.34.1
 
