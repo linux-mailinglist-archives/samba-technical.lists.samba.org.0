@@ -2,148 +2,67 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 09D6BAE8F46
-	for <lists+samba-technical@lfdr.de>; Wed, 25 Jun 2025 22:14:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id ABE9BAEE6CD
+	for <lists+samba-technical@lfdr.de>; Mon, 30 Jun 2025 20:33:43 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=pfhXerauO0lVYzKVyh+xIJmQ1vPGhSE0yvjyIZ7PWv4=; b=IdUsrjFcaa7GCzaCFndfsI9hop
-	NUpbPKeO4AuFC+q/Wk91amMLIdJEPCQq/VW4EaQpjzjKwdbongQ8igIRohPBgk+pb9ZuOYJF7Ioh8
-	5rWrFuXrajm5Nw98Sl2p6YzkX5gahX3StbcocxPDq/203pew4SRXjhZCr/7JvjZqppAs9euuJUBAI
-	SvXPSCp3KKZOxYTkOie1z1Qp2aSeL5sU9jHvNYotXGIzeJmBs/v1T0bPMjvYojhAQ5JQkYukjv5b1
-	2aERplo+YkVtTEkBPa6fFiZ2/DRl86acErcH6vtsF5M81YTqyMH9MNs6U2pWKmI37ice1qACrf1jH
-	t9uGIgHg==;
-Received: from ip6-localhost ([::1]:40192 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=f3srtDiH3sXCMP1u1xYPQ/1kwBejqflWVnbGqG+XZec=; b=RK39b/lfOspZKNy4zFHmomMBhl
+	fg0wbvKZtN9vZka/NChVsbUibfsZ2GqSEhohYmRn6w6/NImpnY47bl5pzg21w46PdJqgErYAD8U8y
+	THmJGYKXG7Kxp1p29w11iFvYLK65mDrqkwIMLMFqLN92ORsrjJpOUsovPCy6U74oZVYdmtDiRqK4a
+	zm5PYMxfpkTE/zCDrVyMBrKf6vR6kvBPvjyBafHzKvmw92dgOUa6k+zKOdmceC7QTNqF+EpXVqLYO
+	rIm5xvwBDoziwdI4T8HxbmoLgUvLb3u1lsz6F+qk5Q1m2ZWGaBS7uirj35gVSj6IbpADGnhoN5iuI
+	ljJI5L2Q==;
+Received: from ip6-localhost ([::1]:34686 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1uUWVs-007rgN-2g; Wed, 25 Jun 2025 20:14:32 +0000
-Received: from mail-dm6nam12on20730.outbound.protection.outlook.com
- ([2a01:111:f403:2417::730]:51297
- helo=NAM12-DM6-obe.outbound.protection.outlook.com) 
+	id 1uWJJL-008HhW-9i; Mon, 30 Jun 2025 18:32:59 +0000
+Received: from mail-qv1-xf34.google.com ([2607:f8b0:4864:20::f34]:47392) 
  by hr1.samba.org with esmtps
- (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__AES_256_GCM:256) (Exim)
- id 1uUTN5-007qS1-Ox
- for samba-technical@lists.samba.org; Wed, 25 Jun 2025 16:53:18 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=J6uPzMVId9Es75jALnjhxwEe+k195UkQAdNZ4l8BUHZvw1ai2R+Y/gm277w/NIbLUFPi3YpAqG8O5ixVjoHNNJNcB3U5TQkF6rCF+FkT+51WoCbIrIeQYT/6/+XHBWqGt1NPkGaCS0TPy+YeLO41T/2a0IssWurOvy9E1Uhcp6j1hUvJ/3dVl7iCL19rn9UUa8CA0dgrHY9gJ2Ns2i5FUkv6KRr/gAXE1W3zPFOQSx7GwfHqnhEGTuQdzEScHRPPIDldFdOCZEuGQmehl7snlOUijhLYPmpmh/PMu14otiAUmITnemHWKDutX9GpvqGMKT0JTWDTl49cZweJamiOEQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=pfhXerauO0lVYzKVyh+xIJmQ1vPGhSE0yvjyIZ7PWv4=;
- b=yIsZAQVEGF9O+mRQG4GahQyKcZZ5BsJz2qZYaOY7gxqF+TH1+mdtFc8DlHxefWFCK8+zLw/HAZr5KCOBJLUZ5L0Peh8yUeRNKQ4GSQ4vRtbty463RGfqAK52DYQ1bheIbCiMRKXKQi/rF1xn1JMYklfMp4gebix81kw3OK7J8OoqceClSU0XdeeD3HPC0CYcJe7qQbQJ5szHoVifxi3WqM9uqtR3ZZiNXZsUSPrYjeFJMXbp3LNjQyj9qTxSMiK+sjJ3GJUM4QwQE5VWNhCZjU1LttXLsnxRK8mU/0GQLhO2kJl+8E3aaxFUEJwEhiqJJ5+HE9FDoTVYaMfp+X93Aw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=talpey.com; dmarc=pass action=none header.from=talpey.com;
- dkim=pass header.d=talpey.com; arc=none
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=talpey.com;
-Received: from BL3PR01MB7099.prod.exchangelabs.com (2603:10b6:208:33a::10) by
- BN3PR01MB9234.prod.exchangelabs.com (2603:10b6:408:2ca::15) with
- Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.8857.29; Wed, 25 Jun 2025 16:53:00 +0000
-Received: from BL3PR01MB7099.prod.exchangelabs.com
- ([fe80::e81a:4618:5784:7106]) by BL3PR01MB7099.prod.exchangelabs.com
- ([fe80::e81a:4618:5784:7106%5]) with mapi id 15.20.8880.015; Wed, 25 Jun 2025
- 16:53:00 +0000
-Message-ID: <31a6b9ce-9839-41d4-8b22-3d3c4db95e2c@talpey.com>
-Date: Wed, 25 Jun 2025 12:53:01 -0400
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] smb: client: let smbd_post_send_iter() respect the
- peers max_send_size and transmit all data
-To: Steve French <smfrench@gmail.com>, David Howells <dhowells@redhat.com>
-References: <20250625081638.944583-1-metze@samba.org>
- <1288833.1750842098@warthog.procyon.org.uk>
- <CAH2r5mutiF0D6_SGSguYD2zbJCtZj454DQQMGO8JmJ9VtyqSmA@mail.gmail.com>
-Content-Language: en-US
-In-Reply-To: <CAH2r5mutiF0D6_SGSguYD2zbJCtZj454DQQMGO8JmJ9VtyqSmA@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+ (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1uWJJF-008HhP-L4
+ for samba-technical@lists.samba.org; Mon, 30 Jun 2025 18:32:56 +0000
+Received: by mail-qv1-xf34.google.com with SMTP id
+ 6a1803df08f44-6fae04a3795so53050326d6.3
+ for <samba-technical@lists.samba.org>; Mon, 30 Jun 2025 11:32:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1751308371; x=1751913171; darn=lists.samba.org;
+ h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=f3srtDiH3sXCMP1u1xYPQ/1kwBejqflWVnbGqG+XZec=;
+ b=OD8nFw1zxzDJHo9F1Jz9z6AJUqIYwAH2YS1v2/vTLZIyO7wfiOVOtW48kwUVuMSddl
+ NDcR5ZysYlEaHKf7HfMPiUFV1Y6ZpJx42GTT1tH9dkpCbSyUi+dSWgllZku6VeX8RSa3
+ xIAgIIWhQW2ybQo34PWrb6SF+PeQ3MvCUy4xpVB4sABtjav8bnbVya8k+EZUm9vm4u7k
+ K3rrBcueiK3jjAZRmgUv0gWPc2ocMoLSFYXqFkQVzHtusdER7su3UxFUpiROp6HgqARY
+ XCTRvOWQEQA64zO5H5gxDQL8Uvall7xOZLJVSu4TIzjalvSzUwZ8+CcDfyjUpbOJKKbc
+ lH1Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1751308371; x=1751913171;
+ h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=f3srtDiH3sXCMP1u1xYPQ/1kwBejqflWVnbGqG+XZec=;
+ b=ly+y6WI61tf5O/G42SbiG30WV1vOUzJL1QrWdWFDQ/IpFd3RYBLY57p319qGxI56Fk
+ 7EaMTQHBLX3W/bCvyKXuemrxZj+XXkLbhCRXIPNP/LMb141eI8krvmS8jvgUYe/ohpGN
+ OntbBM3X/zTuRfPkyuJT9HLizlC+7ShchSOQUjUTF1zd5jSKOcWDEPhaVMOOO2WX8WiU
+ mdpGynvKBBfuBtv3yIjX6XeqDPPJqPkBhkiBbJINc/4GNJ5r8+0r0fW4/KmTFG7LfqRa
+ Xhnu4jjINHIShRsQI//4eCMnb+mIxjW6bUhZMvG27AoGf9NGg4dvfibRW17pLycitaJ/
+ EuHA==
+X-Gm-Message-State: AOJu0Yx2kU4H2p1RgRtJxtzwHqzyOQG7x+iilJbsCHphqbaGcJurjbYX
+ e4rf/8T5n824Lcj983MLthY3VRYTstdpRHUz95kgkAjLXHc20QuhytiY4Dw4c4jqVz8sMKGU5nb
+ 8sJHAYcXBj0mw4W/8QnIlZ5pGANixXJUV1NkD
+X-Gm-Gg: ASbGncuXYHNuuM1NjKe/890mOJYjA+vea2kOZMXYcdU4r1g899qBJsWgH/OozEZzR++
+ 4DXoF49RRd3a1qHOq6siEbP0S6HR73qgP/alDlLcpko6OnrxDfgWYcK3EQCkdQvug3PUDlwpVQT
+ Sh73SAN51EZs00Uq42Z5ez3GSPsf2/0TQAHPnnxrt4Au/gTT/ZEC5DDmJhHaWmX74C+/sAklQXe
+ rJNzQ==
+X-Google-Smtp-Source: AGHT+IEsSUKNkE8ZgmlQJ8xR7k1ys4Ez0abiH+KSHy1OKxjTSNJJPCjsk0oy5ivtLELpnNn8XFUrCrTJpRaq73AnekI=
+X-Received: by 2002:a05:6214:262f:b0:6fa:c55e:869 with SMTP id
+ 6a1803df08f44-70002ee7d42mr281068426d6.23.1751308370868; Mon, 30 Jun 2025
+ 11:32:50 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BL3PR01MB7099:EE_|BN3PR01MB9234:EE_
-X-MS-Office365-Filtering-Correlation-Id: 6c8e4a0b-b744-4dcd-ff9f-08ddb408be73
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?V3I4ZytJN1hjZEw1RmVzZk9RWC9BMThVS2JmY1drWFJwSWNUOG5Ec2tROG1Q?=
- =?utf-8?B?dUdpYThBKzJOQko5R3JWVnNGTTQ0cTE3bFRzWkRuYS9RRUQxUnN3ZjludHIy?=
- =?utf-8?B?anhodWhOYmFGcERjVTV4YzdEVTVMb2RCaGNIem9YV0kvRUZWcmxJVXlmUHlj?=
- =?utf-8?B?WlJNTU1oWjM4NGt0YnExSWRqZ0tkcklscUtXYVJCM05yb3RTalFiQlhCUThK?=
- =?utf-8?B?Uy9xRVk0aUF6cW94dG5HcW5qdlc5amRpbFNpRit4dGczYXBYeTZTelYrdXBT?=
- =?utf-8?B?ODdncmkwZGtOQXBySnhOUVFJUXBpNHVGd1Q4MDBkZDVLTy94ZDhtZGMwVXhj?=
- =?utf-8?B?dCtyUnN0MEIvMjg0U1p4UGhOMlQyclZvSnpyZzg3SkZQeWkyVDdaOWVxZnlI?=
- =?utf-8?B?T2xQVjNmM0R6dTAyN01SV2FCejhTaEt2dnFIVTlkSnFBcGYxbDVpSW5VSUFO?=
- =?utf-8?B?TXdmWGtCNUhLRGxpbTNYclkwZmF2czV5bVdvWmg1K05XZEFyNklmVHBrVmoz?=
- =?utf-8?B?ZXpOYm5CeTBROEZhQzlqUXMxMEtNTHpRQm9XUUpmbUpGOVhTTHRYUHh0dlFS?=
- =?utf-8?B?MjE5ZkFwcVZKMlkwZlgxWjF3bGIyUUdBSmNYUkhVRy9tL1l4WVI1WlBlVHZn?=
- =?utf-8?B?WUppOTFDdCtwTC9FN1R0WExacDJ2TFBhYVNNT1JzNG84aGF0TXVHZzhDaFAv?=
- =?utf-8?B?R1MwWGNCUVZ3QTU5WnVBTmEyS3Btc3NDZjBpSTZvNnBOYmpHZ0VNV3NNSGcw?=
- =?utf-8?B?cEZOUUVjbHU3STB1WktNTjAwS0FyRUxqa0swOXBnSGtmWFpVZHMvejdnMTVj?=
- =?utf-8?B?VzNSZHJDNWlPTndreTlTeVA4dFJHRndNK2hYUWtrMzdob3RVZlNadjBobm12?=
- =?utf-8?B?TnU1c05wUFlCSm1RZXRtR0JpL213ZUdqS1hoUXh6b2FOemhiVFVhYi84R1Za?=
- =?utf-8?B?OUh6YUxZVkR4UzVST1VwTXA3bEZhRkYyNkkwaEJDcGVHY2ZlZy9EbEFMN2Fo?=
- =?utf-8?B?eW1QMkw1RE1WRzFnS0U0VW9hVjYrZmZyY2lpTDF2SEl5bUw5Q1dERGFRV1JY?=
- =?utf-8?B?SVdVeDVYc3lBTDFLWXdxbjRYeG5UNUNKdEVPNFZUTk1Pd05xUWZJL3Z3UTdh?=
- =?utf-8?B?VVZKbzRTRDlYZHRGa1YrZE9jOXpXZ0IrTWQrN05Ic05aSUlUZ2xuUHR5THlR?=
- =?utf-8?B?ZnIyRTdlK0xnK1J0VDhGcElSNEJlTDB2K1NTNW5IMEEyOTd5Z2JFdUg2T2k0?=
- =?utf-8?B?MmpNM1E3c2N4TzRwcDhhRFFkU2pxSk4vaGs5bTFFZDVXaU5CS0RNSk84MGhZ?=
- =?utf-8?B?NElWOE1MbWc1WkRJNVpvRkhkK2wxaDQ2NXBQOVMwRWY1a0h0MGk2di93SFRQ?=
- =?utf-8?B?OVhMSk9iVzNZZ3BZL2RSdEVReDFzd3lIS2RtcDNlbG9TeWs4cS9kTEx5VDdS?=
- =?utf-8?B?cUpKNW8xbi8weDVWWmx3ZEF2L2x6aDVuVktFQkhMbUIzZHdIcU8rUFBWbWVO?=
- =?utf-8?B?Y1JINUtUNEdWMUMxYjB5SjMyOW9PVm9KQVQ5cFRsTHFZakdJWFd1QTNCMll5?=
- =?utf-8?B?SjdLdXhvMk5RbGx5R3FzMGl6TkJpSkpsYi9JWTBVY2I1ZDlGaGt2VE5uWTVF?=
- =?utf-8?B?WlI1WE94Q1pxbzZ0YzhJN0MrQWpBM1NRTTJ3Qk9MNjBiNUQ1bmViV3pzc1NI?=
- =?utf-8?B?NHMwVW1CU1JCOTh1T2N6Y3dSUE1vUy9RbWIxMmdhYVZyNTZGVG1qU0w0SFZH?=
- =?utf-8?B?M0RBY0g2UysrcytSZTlrQWJSUGZ4bHM3L3R3VXlSYTVlVVVpcjZ0Y09PTlFF?=
- =?utf-8?B?VVZrSGJoRFBjeWx6NHBKbFhsRWJFNGR1THZMUVdBV1RUdm1vTHFCS3hjdEM4?=
- =?utf-8?B?UWNNSTNBU3lYSzdocW1sVklQcjRLWm1aLzdDdkdSMWFXU1R2RWVKUFk4SmRK?=
- =?utf-8?Q?KcWxxJ9UYqU=3D?=
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?c2tNWENieU0wSWJ3K0E4ZzBMcmhqOXU1Y3FFQWdBWUNQR2prUnNUNnY0OEZ1?=
- =?utf-8?B?SlJ4dUM0dHIwOU0vVlUrRHAwUnBPNkJDRU5KaGpjenNXWXhleURuOExlL0dY?=
- =?utf-8?B?T0RQVHdxUEdCNDIxTDdMck5xUjFPV21FNndkb21tSUdabmt1c1FlWXBsZTlI?=
- =?utf-8?B?b1JwYngyTVY2YWZLWDJOcWFIOTYvdmxjeVNzaytBNnFnTVBFR1Z1ejBKV0F4?=
- =?utf-8?B?SEx2MCtTMmJZQUt4U1lyOHlLWThjaXN2bjRGcHc4eWxJakFwcnR6bDIrVkJl?=
- =?utf-8?B?TmIyMkxZb2hTaGpMUjUrRGRRMXU1Tk1FYThoTzVBL3NySnVDcWJ4N2Mvc3lY?=
- =?utf-8?B?L3Yydmc2UHdlVDBJVENScG1wNktGdGZ3ZllzSm9PRkhSOHVtaktraS9vV1Zx?=
- =?utf-8?B?bkQwQWRsMXV0cUplSDZIRGJxNHJqSExFZ0xrdDNwY0UzeEV4ZmluN1FBTDFS?=
- =?utf-8?B?UU10YXMxRzBZOWZYcUR5V2VxY3BvWElNS1JqekxuM1dUb0VnaEN0VzNMRlpK?=
- =?utf-8?B?eUx6TVU4SlJvYVhtWVV3MURTTURVM284Q3huSVVjSERmRlR0a2xsQlFJZHYr?=
- =?utf-8?B?NCtEbSttUUMrNHR3bk5OOVBjQWZCWU13dzVqTTdWeFVvNnRyanI4K29yWWpK?=
- =?utf-8?B?TE5oRkU5UXE1WEw4RjM2Y2F3QmNOaUJZYzdRVUYwMlNPbHI2Z3N6aVRkTEZp?=
- =?utf-8?B?UHQwSHNzbFNtMUxjSmFhZlVqa1NvQnR5azZUdktySzloc1NZYWFYNEo3VitP?=
- =?utf-8?B?NGRsSHdRc1JaM2xPY1hzYTd5b0cxSjk3RlRmZWxxMW13WG04WjFkZTZWOUVJ?=
- =?utf-8?B?T1QzNGdNVVVlTHZrMHdPRWsrWFlqWUh2SDN3VStXZnczSm1EbWh3aFhJUTZX?=
- =?utf-8?B?TTZVbzVvRGVqYTV6RWtGUm52Z3dheXQ3UnFFTlM5aTVoV0tkVVk5YlcxVWlo?=
- =?utf-8?B?alA1TC8rM0owQVJiUUJxYVhXeXJlY2RIcGpXdWZSaFR3L3Vwb1daalBTUTEr?=
- =?utf-8?B?ZkZPR2I5TldiSllzZE5BRHVYb0plM1lJalhWdVAvR3MxS2UrSUJwajNOaFZm?=
- =?utf-8?B?WlZPUWhmZWRVZTd1NGhlSThaN2llZm1LS3dPQStzTnhNLzlxYzk2ZmZhemV1?=
- =?utf-8?B?NFhybXgwcXlDU0RMbExscXJ6NFhLSGw1S0dGS1BHNkhtSmtPK3B3S3AvN3BC?=
- =?utf-8?B?M0k4YmpTUWx2bFozQ3A5WjRwMlVaMk1ST0h4QzFheTJkSnJ5MmsrQVA1SFQy?=
- =?utf-8?B?ZVNQWWY4MXRWTXRQekMvWUE0UTJEN24ySEUvcU5ZWVJzYlNKd0R0WUpvYTJB?=
- =?utf-8?B?VjlQUDJoZEo5ckZaOXE2WG5jOFVJcWczMGJ6S1ArMmg3VDlvTE5vQ1ZNTGJs?=
- =?utf-8?B?dFJyUUNsNFQyUlVHcEdSejZrWi9JVmNFTnNic0NGY1kzNTRjcysvU0NKUGRh?=
- =?utf-8?B?cDZKZjlJTlZrZk9YdVBEdUV2c0VtTkJyYjZBT3Q1S2tpblUwRVZwRHM5TURI?=
- =?utf-8?B?Y20vYjFybzUyQVFaam50N1JmZzNnUk5xWmc1d0hMSlFoRm5yQ0k3bmd2eWRy?=
- =?utf-8?B?Rzh5b0FFQldKcWVWbDQxd2d6YTR4bmxNaitIL2tDT0dIL0pRdWdaMDFtTys5?=
- =?utf-8?B?YmhDeXRtZ05yWFMxalkzVjBhNW9tRUZ5TWdWWnZhekpFTnN1OE1vVEJ4ZU1F?=
- =?utf-8?B?d2tRU2JqVllJREdyMFRSSGh1dTdGZXJKaEVqRFdzbzlqRnpIRHVzMkJFM1ZR?=
- =?utf-8?B?blBLUmpBbWhEMUlCYm9BcFM3QkRDd0EyYTBTS2R5bXUwS2ljV1N3alg4MVdv?=
- =?utf-8?B?K1U1WUx5WEgrTWdYQ3RXWDRnb3RDWUlGU3BHeW44OXltd2pjRW1XWVdPMXlw?=
- =?utf-8?B?bGRmU3lscVZZb0k3MTZXL1pOYlo2Ty9JUXJrdTVyb2d4UnlrS25FeDZsS2Za?=
- =?utf-8?B?RkJoM1p4VEMzYU0rRCtsTExpL2pSTUJaZ3RIVDB2YWpSTWdLdWJyN0dDZExJ?=
- =?utf-8?B?bWdFeGExQXNoOXRyUThwZFdHTWVNSVRvUDl0WURwVEI5Uk83SGdhOEliclVx?=
- =?utf-8?B?Y2pZcjNhN2huanlEbHlXQWp3cEZ2ZDV1ekFMR3VQaFA0WVZlcGQxTzRoMmNk?=
- =?utf-8?Q?oYK8=3D?=
-X-OriginatorOrg: talpey.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 6c8e4a0b-b744-4dcd-ff9f-08ddb408be73
-X-MS-Exchange-CrossTenant-AuthSource: BL3PR01MB7099.prod.exchangelabs.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 2b2dcae7-2555-4add-bc80-48756da031d5
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: Cfz6sbDKz8Ors7j747JZYYnICvMd+8cOQIEnGEuC7WZpMYHP1HAIQn1S3yesY/L6
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN3PR01MB9234
-X-Warn: EHLO/HELO not verified: Remote host 2a01:111:f403:2417::730
- (mail-dm6nam12on20730.outbound.protection.outlook.com) incorrectly presented
- itself as NAM12-DM6-obe.outbound.protection.outlook.com
+Date: Mon, 30 Jun 2025 13:32:39 -0500
+X-Gm-Features: Ac12FXyCj-jUOXzmBRhofigyUINQdMyCyY9q9IcDm7plkIW54b3Jt7t_Dg2TQTE
+Message-ID: <CAH2r5mt70hsY_i6xBNX27p5EEHnJEnfUi2Sk2mZmhvchxepcxg@mail.gmail.com>
+Subject: Samba current master branch server crash
+To: samba-technical <samba-technical@lists.samba.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -157,100 +76,182 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Tom Talpey via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Tom Talpey <tom@talpey.com>
-Cc: Stefan Metzmacher <metze@samba.org>, linux-cifs@vger.kernel.org,
- stable+noautosel@kernel.org, Meetakshi Setiya <meetakshisetiyaoss@gmail.com>,
- samba-technical@lists.samba.org
+From: Steve French via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Steve French <smfrench@gmail.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-LGTM
+Running generic/013 with the SMB3.1.1 POSIX Extensions enabled to
+current Samba server, I see Samba server crash with (and it is
+reproducible every time I have tried it):
 
-Reviewed-by: Tom Talpey <tom@talpey.com>
 
+[2025/06/30 16:42:00.127238,  0]
+../../source3/smbd/smb2_ioctl_filesys.c:221(fsctl_dup_extents_send)
+  fsctl_dup_extents_send: skipping zero length dup extents
+[2025/06/30 16:42:00.492253,  0] ../../lib/util/fault.c:178(smb_panic_log)
+  ===============================================================
+[2025/06/30 16:42:00.505777,  0] ../../lib/util/fault.c:186(smb_panic_log)
+  If you are running a recent Samba version, and if you think this
+problem is not yet fixed in the latest versions, please consider
+reporting this bug, see https://wiki.samba.org/index.php/Bug_Reporting
+[2025/06/30 16:42:00.513839,  0] ../../lib/util/fault.c:192(smb_panic_log)
+  PANIC (pid 1066): Signal 7: Bus error in 4.23.0pre1-GIT-5b9492ada40
+   #0 /usr/local/samba/lib/private/libgenrand-private-samba.so(log_stack_trace+0x32)
+[0x77a32f504c16]
+   #2 /usr/local/samba/lib/private/libgenrand-private-samba.so(smb_panic+0x1c)
+[0x77a32f504bb2]
+   #4 /usr/local/samba/lib/private/libgenrand-private-samba.so(+0x264f)
+[0x77a32f50464f]
+   #6 /lib/x86_64-linux-gnu/libc.so.6(+0x9f98c) [0x77a32f29f98c]
+   #8 /usr/local/samba/lib/private/libtdb-private-samba.so(+0x14581)
+[0x77a32f1c6581]
+   #10 /usr/local/samba/lib/private/libtdb-private-samba.so(+0x84ff)
+[0x77a32f1ba4ff]
+   #11 /usr/local/samba/lib/private/libtdb-private-samba.so(+0x8af0)
+[0x77a32f1baaf0]
+   #13 /usr/local/samba/lib/private/libtdb-private-samba.so(+0x8def)
+[0x77a32f1badef]
+   #15 /usr/local/samba/lib/private/libdbwrap-private-samba.so(+0x9280)
+[0x77a32f41f280]
+   #16 /usr/local/samba/lib/private/libdbwrap-private-samba.so(dbwrap_do_locked+0x8c)
+[0x77a32f41b391]
+   #18 /usr/local/samba/lib/private/libdbwrap-private-samba.so(dbwrap_do_locked+0x8c)
+[0x77a32f41b391]
+   #20 /usr/local/samba/lib/private/libsmbd-base-private-samba.so(_share_mode_entry_prepare_lock+0x213)
+[0x77a32f9bae28]
+   #22 /usr/local/samba/lib/private/libsmbd-base-private-samba.so(+0xa6bc8)
+[0x77a32f8a6bc8]
+   #24 /usr/local/samba/lib/private/libsmbd-base-private-samba.so(+0xfd436)
+[0x77a32f8fd436]
+  #26 /usr/local/samba/lib/private/libsmbd-base-private-samba.so(smbd_smb2_request_process_close+0x259)
+[0x77a32f8fcb84]
+   #28 /usr/local/samba/lib/private/libsmbd-base-private-samba.so(smbd_smb2_request_dispatch_immediate+0xfc)
+[0x77a32f8e758f]
+   #30 /usr/local/samba/lib/private/libtevent-private-samba.so(tevent_common_loop_immediate+0x3b)
+[0x77a32f67915b]
+   #32 /usr/local/samba/lib/private/libtevent-private-samba.so(+0x11ed9)
+[0x77a32f680ed9]
+   #34 /usr/local/samba/lib/private/libtevent-private-samba.so(tevent_common_loop_wait+0x29)
+[0x77a32f677023]
+   #36 /usr/local/samba/lib/private/libtevent-private-samba.so(_tevent_loop_wait+0x2f)
+[0x77a32f6770ca]
+   #38 smbd: client [192.168.122.12](+0xa145) [0x5897f941a145]
 
-It appears that the "type 2 code 2" terminate packet the client is
-receiving is actually incorrect, it should be a "type 2 code 5" to
-properly indicate the length error. The siw maintainer suggests I
-send a patch, which I'll do.
+       #40 /usr/local/samba/lib/private/libtevent-private-samba.so(+0x1648e)
+[0x77a32f68548e]
+   #42 /usr/local/samba/lib/private/libtevent-private-samba.so(+0x11ed9)
+[0x77a32f680ed9]
+   #44 /usr/local/samba/lib/private/libtevent-private-samba.so(tevent_common_loop_wait+0x29)
+[0x77a32f677023]
+   #45 /usr/local/samba/lib/private/libtevent-private-samba.so(+0x11f82)
+[0x77a32f680f82]
+     #46 /usr/local/samba/lib/private/libtevent-private-samba.so(_tevent_loop_wait+0x2f)
+[0x77a32f6770ca]
+   #48 smbd: client [192.168.122.12](main+0x1ba6) [0x5897f941e1ed]
 
-Metze - the samba.org server is rejecting me as a spammer based on
-some sort of IP address blacklist. I don't have any way to fix that,
-so I'm sorry if you only see my replies on the list.
+       #50 /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0x8b)
+[0x77a32f22a28b]
+            [2025/06/30 16:42:00.712449,  0]
+../../source3/lib/dumpcore.c:318(dump_core)
+                                            coredump is handled by
+helper binary specified at /proc/sys/kernel/core_pattern
+[2025/06/30 16:42:01.967738,  0]
+../../source3/locking/share_mode_lock.c:523(locking_tdb_data_store)
+  locking_tdb_data_store: share_mode_g_lock_writev(NULL) failed:
+NT_STATUS_NOT_LOCKED
+[2025/06/30 16:42:01.967868,  0]
+../../source3/locking/share_mode_lock.c:660(share_mode_data_ltdb_store)
+  share_mode_data_ltdb_store: locking_tdb_data_store failed:
+NT_STATUS_NOT_LOCKED
+[2025/06/30 16:42:01.967886,  0]
+../../source3/locking/share_mode_lock.c:2356(share_mode_forall_entries)
+  share_mode_forall_entries: share_mode_data_ltdb_store failed:
+NT_STATUS_NOT_LOCKED
+[2025/06/30 16:42:01.967900,  0]
+../../source3/locking/share_mode_lock.c:1908(share_entry_rw_traverse_fn)
+  share_entry_rw_traverse_fn: share_mode_forall_entries failed
+[2025/06/30 16:42:02.683465,  0]
+../../source3/smbd/smb2_ioctl_network_fs.c:229(fsctl_srv_copychunk_vfs_done)
+  fsctl_srv_copychunk_vfs_done: copy chunk failed
+[NT_STATUS_DISK_FULL] chunk [0] of [1]
+[2025/06/30 16:42:02.706145,  0] ../../lib/util/fault.c:178(smb_panic_log)
+  ===============================================================
+[2025/06/30 16:42:02.712428,  0] ../../lib/util/fault.c:179(smb_panic_log)
+  INTERNAL ERROR: Signal 7: Bus error in smbd (smbd[192.168.12)
+(client [192.168.122.12]) pid 1133 (4.23.0pre1-GIT-5b9492ada40)
+[2025/06/30 16:42:02.728066,  0] ../../lib/util/fault.c:191(smb_panic_log)
+  ===============================================================
+[2025/06/30 16:42:02.728107,  0] ../../lib/util/fault.c:192(smb_panic_log)
+  PANIC (pid 1133): Signal 7: Bus error in 4.23.0pre1-GIT-5b9492ada40
+[2025/06/30 16:42:02.737474,  0] ../../lib/util/fault.c:303(log_stack_trace)
+  BACKTRACE: 44 stack frames:
+   #1 /usr/local/samba/lib/private/libgenrand-private-samba.so(smb_panic_log+0x213)
+[0x77a32f504b93]
+   #2 /usr/local/samba/lib/private/libgenrand-private-samba.so(smb_panic+0x1c)
+[0x77a32f504bb2]
+   #3 /usr/local/samba/lib/private/libgenrand-private-samba.so(+0x2636)
+[0x77a32f504636]
+   #4 /usr/local/samba/lib/private/libgenrand-private-samba.so(+0x264f)
+[0x77a32f50464f]
+   #5 /lib/x86_64-linux-gnu/libc.so.6(+0x45330) [0x77a32f245330]
+   #6 /lib/x86_64-linux-gnu/libc.so.6(+0xa160b) [0x77a32f2a160b]
+   #7 /usr/local/samba/lib/private/libtdb-private-samba.so(+0x14835)
+[0x77a32f1c6835]
+   #8 /usr/local/samba/lib/private/libtdb-private-samba.so(+0x83e7)
+[0x77a32f1ba3e7]
+   #9 /usr/local/samba/lib/private/libtdb-private-samba.so(+0x860a)
+[0x77a32f1ba60a]
+   #10 /usr/local/samba/lib/private/libtdb-private-samba.so(+0x8fa1)
+[0x77a32f1bafa1]
+   #11 /usr/local/samba/lib/private/libtdb-private-samba.so(tdb_unlock+0x54)
+[0x77a32f1bb06c]
+   #12 /usr/local/samba/lib/private/libtdb-private-samba.so(tdb_chainunlock+0x5f)
+[0x77a32f1bb9eb]
+   #13 /usr/local/samba/lib/private/libdbwrap-private-samba.so(+0x950f)
+[0x77a32f41f50f]
+   #14 /usr/local/samba/lib/private/libdbwrap-private-samba.so(dbwrap_do_locked+0x8c)
+[0x77a32f41b391]
+   #15 /usr/local/samba/lib/private/libsmbd-base-private-samba.so(smbXsrv_open_update+0x8d)
+[0x77a32f929a7f]
+   #16 /usr/local/samba/lib/private/libsmbd-base-private-samba.so(+0xe484c)
+[0x77a32f8e484c]
+   #18 /usr/local/samba/lib/private/libsmbd-base-private-samba.so(+0xeb14e)
+[0x77a32f8eb14e]
+   #19 /usr/local/samba/lib/private/libsmbd-base-private-samba.so(+0xeb53a)
+[0x77a32f8eb53a]
+   #21 /usr/local/samba/lib/private/libtevent-private-samba.so(tevent_common_invoke_fd_handler+0x125)
+[0x77a32f67847c]
+   #22 /usr/local/samba/lib/private/libtevent-private-samba.so(+0x1648e)
+[0x77a32f68548e]
+   #24 /usr/local/samba/lib/private/libtevent-private-samba.so(+0x11ed9)
+[0x77a32f680ed9]
+   #25 /usr/local/samba/lib/private/libtevent-private-samba.so(_tevent_loop_once+0x126)
+[0x77a32f676c9b]
+   #26 /usr/local/samba/lib/private/libtevent-private-samba.so(tevent_common_loop_wait+0x29)
+[0x77a32f677023]
+   #28 /usr/local/samba/lib/private/libtevent-private-samba.so(_tevent_loop_wait+0x2f)
+[0x77a32f6770ca]
+   #29 /usr/local/samba/lib/private/libsmbd-base-private-samba.so(smbd_process+0xfaa)
+[0x77a32f8cb716]
+   #30 smbd: client [192.168.122.12](+0xa145) [0x5897f941a145]
+   #33 /usr/local/samba/lib/private/libtevent-private-samba.so(+0x16c2b)
+[0x77a32f685c2b]
+   #36 /usr/local/samba/lib/private/libtevent-private-samba.so(tevent_common_loop_wait+0x29)
+[0x77a32f677023]
+   #37 /usr/local/samba/lib/private/libtevent-private-samba.so(+0x11f82)
+[0x77a32f680f82]
+   #38 /usr/local/samba/lib/private/libtevent-private-samba.so(_tevent_loop_wait+0x2f)
+[0x77a32f6770ca]
+   #39 smbd: client [192.168.122.12](+0xae96) [0x5897f941ae96]
+   #40 smbd: client [192.168.122.12](main+0x1ba6) [0x5897f941e1ed]
+[2025/06/30 16:42:03.359226,  0] ../../lib/util/fault.c:178(smb_panic_log)
+  ===============================================================
+   #3 /usr/local/samba/lib/private/libgenrand-private-samba.so(+0x2636)
+[0x77a32f504636]
 
-Tom.
+-- 
+Thanks,
 
-On 6/25/2025 12:17 PM, Steve French wrote:
-> Added to cifs-2.6.git for-next and updated with rb and tested-by from
-> David and tested-by from Meetakshi
-> 
-> On Wed, Jun 25, 2025 at 4:03 AM David Howells <dhowells@redhat.com> wrote:
->>
->> Stefan Metzmacher <metze@samba.org> wrote:
->>
->>> We should not send smbdirect_data_transfer messages larger than
->>> the negotiated max_send_size, typically 1364 bytes, which means
->>> 24 bytes of the smbdirect_data_transfer header + 1340 payload bytes.
->>>
->>> This happened when doing an SMB2 write with more than 1340 bytes
->>> (which is done inline as it's below rdma_readwrite_threshold).
->>>
->>> It means the peer resets the connection.
->>>
->>> When testing between cifs.ko and ksmbd.ko something like this
->>> is logged:
->>>
->>> client:
->>>
->>>      CIFS: VFS: RDMA transport re-established
->>>      siw: got TERMINATE. layer 1, type 2, code 2
->>>      siw: got TERMINATE. layer 1, type 2, code 2
->>>      siw: got TERMINATE. layer 1, type 2, code 2
->>>      siw: got TERMINATE. layer 1, type 2, code 2
->>>      siw: got TERMINATE. layer 1, type 2, code 2
->>>      siw: got TERMINATE. layer 1, type 2, code 2
->>>      siw: got TERMINATE. layer 1, type 2, code 2
->>>      siw: got TERMINATE. layer 1, type 2, code 2
->>>      siw: got TERMINATE. layer 1, type 2, code 2
->>>      CIFS: VFS: \\carina Send error in SessSetup = -11
->>>      smb2_reconnect: 12 callbacks suppressed
->>>      CIFS: VFS: reconnect tcon failed rc = -11
->>>      CIFS: VFS: reconnect tcon failed rc = -11
->>>      CIFS: VFS: reconnect tcon failed rc = -11
->>>      CIFS: VFS: SMB: Zero rsize calculated, using minimum value 65536
->>>
->>> and:
->>>
->>>      CIFS: VFS: RDMA transport re-established
->>>      siw: got TERMINATE. layer 1, type 2, code 2
->>>      CIFS: VFS: smbd_recv:1894 disconnected
->>>      siw: got TERMINATE. layer 1, type 2, code 2
->>>
->>> The ksmbd dmesg is showing things like:
->>>
->>>      smb_direct: Recv error. status='local length error (1)' opcode=128
->>>      smb_direct: disconnected
->>>      smb_direct: Recv error. status='local length error (1)' opcode=128
->>>      ksmbd: smb_direct: disconnected
->>>      ksmbd: sock_read failed: -107
->>>
->>> As smbd_post_send_iter() limits the transmitted number of bytes
->>> we need loop over it in order to transmit the whole iter.
->>>
->>> Cc: Steve French <sfrench@samba.org>
->>> Cc: David Howells <dhowells@redhat.com>
->>> Cc: Tom Talpey <tom@talpey.com>
->>> Cc: linux-cifs@vger.kernel.org
->>> Cc: <stable+noautosel@kernel.org> # sp->max_send_size should be info->max_send_size in backports
->>> Fixes: 3d78fe73fa12 ("cifs: Build the RDMA SGE list directly from an iterator")
->>> Signed-off-by: Stefan Metzmacher <metze@samba.org>
->>
->> Reviewed-by: David Howells <dhowells@redhat.com>
->> Tested-by: David Howells <dhowells@redhat.com>
->>
->>
-> 
-> 
-
+Steve
 
