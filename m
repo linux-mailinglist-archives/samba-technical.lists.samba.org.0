@@ -2,59 +2,41 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id D9DD3AF74D1
-	for <lists+samba-technical@lfdr.de>; Thu,  3 Jul 2025 14:58:27 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3B5CCAF74D9
+	for <lists+samba-technical@lfdr.de>; Thu,  3 Jul 2025 14:59:50 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
-	bh=9tQAGp5g3aDSGnDHJrkguYJUFsFzTcUBiqTR9o1I5yk=; b=UoFmpALiB4tY2FdCEcu3Aect+K
-	1iQKks7wXDfx7jXHSesvrU5Q7+3GU0zhlf55xfW+oGPnXAgQF6oAt7tHoLtHmubFiUtzjeFVOg+2t
-	SSAJJgKToH1W5aWnzIYYdWuhabmnBFIZcWISqtnScUWbXzPbQ1aCXVmSI+4fQ2Z5dUsrfK4926SAA
-	MkaEfyENn+SJx7gYbWh/I8RYz6lDrAlZ2Q+jQ+tzGeHlD41fEKErgVQ+IJBlJLtZ4Fd3GWQPwXjGi
-	7z4tYmg6Jksn9b+heqnf5dgnOozbdsy83pFwSaMp4O/8RPiKXTjxJUswtRJNGMU3aK/7t7OOZnGgn
-	dw2eqi3Q==;
-Received: from ip6-localhost ([::1]:50346 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=RijAPlftSl8caGsZM3+9vNMXJsZtu4unWCVzeTZzzwM=; b=185QtKQgLqp0ckt2w1ZFtqGibG
+	cbSPBhna2gmj1SvXwN6cnbR2M6RrojQrmqqs5YdKjqv7vB/fa/s+F4d6LHRds6WHKkOd/mUnHZnEd
+	L4jtPv1htOi8pdn2ffiL5uOzVh0gfnQV2ieIyyJ+vPpqUQyEIn0vP+5M9caOMoTX0PaqBLCb0QMpx
+	dRX03Sd5a1pNSCyMNZM5d19kUtFGLh9gxsM1HfGGibSAO/pp/aw8puTkNQMkXEu6eeFkt/WTbFN7K
+	ZOxfAc3vSAVJaKkl0YNhpE0EVtQD68BshTnlzpifYgKJoA3FANK9BBcvxYnBuGifiqn7BatBiMVrm
+	rg/mOo/g==;
+Received: from ip6-localhost ([::1]:32892 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1uXJVd-00ATFu-Ds; Thu, 03 Jul 2025 12:57:49 +0000
-Received: from plasma4.jpberlin.de ([80.241.57.33]:58745) 
+	id 1uXJXU-00ATOi-3w; Thu, 03 Jul 2025 12:59:44 +0000
+Received: from air.basealt.ru ([193.43.8.18]:42266) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uXJVW-00ATFm-9X
- for samba-technical@lists.samba.org; Thu, 03 Jul 2025 12:57:47 +0000
-Received: from spamfilter06.heinlein-hosting.de
- (spamfilter06.heinlein-hosting.de [80.241.56.125])
- by plasma.jpberlin.de (Postfix) with ESMTP id BED76C087D;
- Thu,  3 Jul 2025 14:57:36 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kania-online.de;
- s=MBO0001; t=1751547457;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:mime-version:mime-version:content-type:content-type:autocrypt:autocrypt;
- bh=9tQAGp5g3aDSGnDHJrkguYJUFsFzTcUBiqTR9o1I5yk=;
- b=oI+vbfJOwho6hj8QOHkj4DqNB05/rgbAwIN0IJOssnyNemqRgGyNMvv0ww1RSZdH68fj4W
- 3Sfp6mQ5Li9hcVlnP3m4TdLQY6V/U0vENdzqCsAkZymAO5J867Rb1ceOyIFEPJM31hVlu3
- 3xlPpXJawy9k/41wf8uphA4EkpfXKlyblUPzppaphdOxmjN2YtGBbeh02DNeejmNGDBw53
- +MmsPcnDzTtsiXu101NvmnituB0wuTX4OWzw59U03Rw2sQikk3wMoJ0bd9HMxpDgusX6sI
- cztGZ7XMq45WP2WZ0RjTBC05r0pn0VkA02G53xtgELLFxHSzSL/CpFPC86hxLg==
-Received: from plasma.jpberlin.de ([80.241.56.68])
- by spamfilter06.heinlein-hosting.de (spamfilter06.heinlein-hosting.de
- [80.241.56.125]) (amavisd-new, port 10030)
- with ESMTP id f8aUZ7zb89bY; Thu,  3 Jul 2025 14:57:28 +0200 (CEST)
-Received: from [192.168.123.203] (p5b240cb2.dip0.t-ipconnect.de [91.36.12.178])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (Client did not present a certificate)
- (Authenticated sender: stefan@kania-online.de)
- by plasma.jpberlin.de (Postfix) with ESMTPSA id E0BD6C1595
- for <samba-technical@lists.samba.org>; Thu,  3 Jul 2025 14:57:27 +0200 (CEST)
-Message-ID: <d31afc27-b3a4-4bc2-bcbf-b5265e878cad@kania-online.de>
-Date: Thu, 3 Jul 2025 14:57:26 +0200
+ (Exim) id 1uXJXM-00ATMI-G2
+ for samba-technical@lists.samba.org; Thu, 03 Jul 2025 12:59:39 +0000
+Received: from [10.64.129.108] (unknown [193.43.9.250])
+ (Authenticated sender: alekseevamo)
+ by air.basealt.ru (Postfix) with ESMTPSA id 86EA8233B3;
+ Thu,  3 Jul 2025 15:59:32 +0300 (MSK)
+Message-ID: <3d3160fd-e29d-495d-a02e-e28558cfec1a@altlinux.org>
+Date: Thu, 3 Jul 2025 16:59:32 +0400
 MIME-Version: 1.0
-To: samba-technical@lists.samba.org
-Content-Language: en-US, de-DE
-Organization: Stefan Kania
-Subject: Questions about gMSA
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------b0QSvxNzJb0PO2PR0MmQ8IN8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] fs/smb/client/fs_context: Add hostname option for CIFS
+ module to work with domain-based dfs resources with Kerberos authentication
+To: Vitaly Chikunov <vt@altlinux.org>
+References: <20250516152201.201385-1-alxvmr@altlinux.org>
+ <43os6kphihnry2wggqykiwmusz@pony.office.basealt.ru>
+Content-Language: en-US, ru
+In-Reply-To: <43os6kphihnry2wggqykiwmusz@pony.office.basealt.ru>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -68,90 +50,183 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Stefan Kania via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Stefan Kania <stefan@kania-online.de>
+From: Maria Alexeeva via samba-technical <samba-technical@lists.samba.org>
+Reply-To: alxvmr@altlinux.org
+Cc: sfrench@samba.org, linux-cifs@vger.kernel.org,
+ Ivan Volchenko <ivolchenko86@gmail.com>, samba-technical@lists.samba.org,
+ pc@manguebit.com
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------b0QSvxNzJb0PO2PR0MmQ8IN8
-Content-Type: multipart/mixed; boundary="------------T9uAQGzIhMrpa1vjnbcOmf0X";
- protected-headers="v1"
-From: Stefan Kania <stefan@kania-online.de>
-To: samba-technical@lists.samba.org
-Message-ID: <d31afc27-b3a4-4bc2-bcbf-b5265e878cad@kania-online.de>
-Subject: Questions about gMSA
+On 6/14/25 07:42, Vitaly Chikunov wrote:
+> Maria,
+>
+> On Fri, May 16, 2025 at 07:22:01PM +0400, Maria Alexeeva wrote:
+>> Paths to domain-based dfs resources are defined using the domain name
+>> of the server in the format:
+>> \\DOMAIN.NAME>\<dfsroot>\<path>
+>>
+>> The CIFS module, when requesting a TGS, uses the server name
+>> (<DOMAIN.NAME>) it obtained from the UNC for the initial connection.
+>> It then composes an SPN that does not match any entities
+>> in the domain because it is the domain name itself.
+> For a casual reader like me it's hard to understand (this abbreviation
+> filled message) what it's all about. And why we can't just change system
+> hostname for example.
 
---------------T9uAQGzIhMrpa1vjnbcOmf0X
-Content-Type: multipart/mixed; boundary="------------inv1wrEZJU0pm7dDJ6VIY87i"
+This option is needed to transfer the real name of the server to which 
+the connection is taking place,
+when using the UNC path in the form of domain-based DFS. The system 
+hostname has nothing to do with it.
 
---------------inv1wrEZJU0pm7dDJ6VIY87i
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
+> Also, the summary (subject) message is 180 character which is way above
+> 75 characters suggested in submitting-patches.rst.
+>
+>> To eliminate this behavior, a hostname option is added, which is
+>> the name of the server to connect to and is used in composing the SPN.
+>> In the future this option will be used in the cifs-utils development.
+>>
+>> Suggested-by: Ivan Volchenko <ivolchenko86@gmail.com>
+>> Signed-off-by: Maria Alexeeva <alxvmr@altlinux.org>
+>> ---
+>>   fs/smb/client/fs_context.c | 35 +++++++++++++++++++++++++++++------
+>>   fs/smb/client/fs_context.h |  3 +++
+>>   2 files changed, 32 insertions(+), 6 deletions(-)
+>>
+>> diff --git a/fs/smb/client/fs_context.c b/fs/smb/client/fs_context.c
+>> index a634a34d4086..74de0a9de664 100644
+>> --- a/fs/smb/client/fs_context.c
+>> +++ b/fs/smb/client/fs_context.c
+>> @@ -177,6 +177,7 @@ const struct fs_parameter_spec smb3_fs_parameters[] = {
+>>   	fsparam_string("password2", Opt_pass2),
+>>   	fsparam_string("ip", Opt_ip),
+>>   	fsparam_string("addr", Opt_ip),
+>> +	fsparam_string("hostname", Opt_hostname),
+>>   	fsparam_string("domain", Opt_domain),
+>>   	fsparam_string("dom", Opt_domain),
+>>   	fsparam_string("srcaddr", Opt_srcaddr),
+>> @@ -825,16 +826,23 @@ static int smb3_fs_context_validate(struct fs_context *fc)
+>>   		return -ENOENT;
+>>   	}
+>>   
+>> +	if (ctx->got_opt_hostname) {
+>> +		kfree(ctx->server_hostname);
+>> +		ctx->server_hostname = ctx->opt_hostname;
+> I am not familiar with the smb codebase but are you sure this will not
+> cause a race?
 
-SGVsbG8gdG8gYWxsLA0KDQpGaXJzdCBvZiBhbGwsIHllcyBJIGNyZWF0ZWQgdGhlIHJvb3Qt
-a2V5IGFuZCBJIHdhaXRlZCAxMCBob3VycyB0byBtYWtlIHRoZSBrZXkgdmFsaWRlLiBJdCdz
-IHdoYXQgdG8gZG8gaW4gYSBXaW5kb3dzLWVudmlyb25tZW50Og0KLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLQ0KWW91IG11c3Qgbm93IHdhaXQgMTAgaG91cnMgYmVmb3JlIHRoZSBmaXJzdCBh
-Y2NvdW50cyBjYW4gYmUgY3JlYXRlZC4gVGhpcyBpcyBhIGZ1bmN0aW9uIHRvIGVuc3VyZSB0
-aGF0IGFsbCBkb21haW4gY29udHJvbGxlcnMgaGF2ZSBjb21wbGV0ZWQgcmVwbGljYXRpb24g
-YmVmb3JlIHRoZSBmaXJzdCBnTVNBIGFjY291bnRzIGFyZSBjcmVhdGVkLg0KLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLQ0KDQpJIHRyeSB0byBzZXR1cCB0aGUgZ01TQSBidXQgdHdvIHRoaW5n
-cyBhcmUgbm90IHJlbGF5IGNsZWFyIHRvIG1lOg0KDQpJIGNyZWF0ZWQgdGhlIGFjY291bnQg
-d2l0aDoNCi0tLS0tLS0tDQpzYW1iYS10b29sIHNlcnZpY2UtYWNjb3VudCBjcmVhdGUgLS1u
-YW1lIG1zYSAtLWRucy1ob3N0LW5hbWUgbXNhLmV4YW1wbGUubmV0IC0tbWFuYWdlZC1wYXNz
-d29yZC1pbnRlcnZhbCAzMA0KLS0tLS0tLS0NCkJ1dCBpZiBJIGNvbXBhcmUgdGhlIGNyZWF0
-aW9uIG9mIHRoZSBnTVNBIHdpdGggV2luZG93cyBJJ20gbWlzc2luZyB0aGUgUHJpbmNpcGFs
-c0FsbG93ZWRUb1JldHJpZXZlTWFuYWdlZFBhc3N3b3JkIHBhcmFtZXRlci4gVGhpcyBwYXJh
-bWV0ZXIgaXMgdGhlIGNvbXB1dGVyIGFjY291bnRuYW1lIGxpa2Ugc2VydmVyMDEkIGFuZCBj
-YW4gaGF2ZSBhIGNvbW1hIHNlcGFyYXRlZCBsaXN0IG9mIGhvc3RuYW1lcy4NCg0KVGhlIC0t
-ZG5zLWhvc3QtbmFtZSBpcyBqdXN0IGNyZWF0aW5nIGEgRE5TLW5hbWUgZm9yIHRoZSBnTVNB
-IGFuZCBoYXMgbm90IGJlZW4gY3JlYXRlZCBpbiBETlMuDQoNClNvIGhvdyBkbyBJIGFzc2ln
-biB0aGUgSG9zdG5hbWVzIHRvIHRoZSBnTVNBPw0KDQpTZWNvbmQgcXVlc3Rpb246DQpMb29r
-aW5nIGF0IHRoZSAtLWhlbHAgSSBzZWU6DQpzYW1iYS10b29sIHNlcnZpY2UtYWNjb3VudCBj
-cmVhdGUgLS1oZWxwDQouLi4NCi0tZ3JvdXAtbXNhLW1lbWJlcnNoaXA9R1JPVVBfTVNBX01F
-TUJFUlNISVANCiAgICAgICAgICAgICBQcm92aWRlIG9wdGlvbmFsIEdyb3VwIE1TQSBNZW1i
-ZXJzaGlwIFNEREwuDQouLi4NCg0KQnV0IGl0J3Mgbm90IGV4cGxhaW5lZCBob3cgdG8gc2V0
-IHRoaXMgcGFyYW1ldGVyIGFuZCB3aGF0IGl0IGlzIG5lZWRlZCBmb3IuIEEgZ3Vlc3M6IElz
-IHRoaXMgdGhlIGxpc3Qgb2YgaG9zdG5hbWVzIHVuZGVyIFdpbmRvd3MgcHJvdmlkZWQgYnkg
-UHJpbmNpcGFsc0FsbG93ZWRUb1JldHJpZXZlTWFuYWdlZFBhc3N3b3JkPw0KDQoNCg0KDQo=
+The race condition will not occur.
+ctx->server_hostname is also used in smb3_parse_devname inside 
+smb3_fs_context_parse_param.
+smb3_fs_context_parse_param is called earlier than the updated 
+smb3_fs_context_validate, which is called inside smb3_get_tree:
 
---------------inv1wrEZJU0pm7dDJ6VIY87i
-Content-Type: application/pgp-keys; name="OpenPGP_0x52F6D4DD1BB68AB5.asc"
-Content-Disposition: attachment; filename="OpenPGP_0x52F6D4DD1BB68AB5.asc"
-Content-Description: OpenPGP public key
-Content-Transfer-Encoding: quoted-printable
+static const struct fs_context_operations smb3_fs_context_ops = {
+  .free   = smb3_fs_context_free,
+  .parse_param  = smb3_fs_context_parse_param,
+  .parse_monolithic = smb3_fs_context_parse_monolithic,
+  .get_tree  = smb3_get_tree,
+  .reconfigure  = smb3_reconfigure,
+};
 
------BEGIN PGP PUBLIC KEY BLOCK-----
+>> +		pr_notice("changing server hostname to name provided in hostname= option\n");
+>> +	}
+>> +
+>>   	if (!ctx->got_ip) {
+>>   		int len;
+>> -		const char *slash;
+>>   
+>> -		/* No ip= option specified? Try to get it from UNC */
+>> -		/* Use the address part of the UNC. */
+>> -		slash = strchr(&ctx->UNC[2], '\\');
+>> -		len = slash - &ctx->UNC[2];
+>> +		/*
+>> +		 * No ip= option specified? Try to get it from server_hostname
+>> +		 * Use the address part of the UNC parsed into server_hostname
+>> +		 * or hostname= option if specified.
+>> +		 */
+>> +		len = strlen(ctx->server_hostname);
+>>   		if (!cifs_convert_address((struct sockaddr *)&ctx->dstaddr,
+>> -					  &ctx->UNC[2], len)) {
+>> +					  ctx->server_hostname, len)) {
+>>   			pr_err("Unable to determine destination address\n");
+>>   			return -EHOSTUNREACH;
+>>   		}
+>> @@ -1518,6 +1526,21 @@ static int smb3_fs_context_parse_param(struct fs_context *fc,
+>>   		}
+>>   		ctx->got_ip = true;
+>>   		break;
+>> +	case Opt_hostname:
+>> +		if (strnlen(param->string, CIFS_NI_MAXHOST) == CIFS_NI_MAXHOST) {
+>> +			pr_warn("host name too long\n");
+>> +			goto cifs_parse_mount_err;
+>> +		}
+>> +
+>> +		kfree(ctx->opt_hostname);
+>> +		ctx->opt_hostname = kstrdup(param->string, GFP_KERNEL);
+>> +		if (ctx->opt_hostname == NULL) {
+>> +			cifs_errorf(fc, "OOM when copying hostname string\n");
+>> +			goto cifs_parse_mount_err;
+>> +		}
+>> +		cifs_dbg(FYI, "Host name set\n");
+>> +		ctx->got_opt_hostname = true;
+>> +		break;
+>>   	case Opt_domain:
+>>   		if (strnlen(param->string, CIFS_MAX_DOMAINNAME_LEN)
+>>   				== CIFS_MAX_DOMAINNAME_LEN) {
+>> diff --git a/fs/smb/client/fs_context.h b/fs/smb/client/fs_context.h
+>> index 9e83302ce4b8..cf0478b1eff9 100644
+>> --- a/fs/smb/client/fs_context.h
+>> +++ b/fs/smb/client/fs_context.h
+>> @@ -184,6 +184,7 @@ enum cifs_param {
+>>   	Opt_pass,
+>>   	Opt_pass2,
+>>   	Opt_ip,
+>> +	Opt_hostname,
+>>   	Opt_domain,
+>>   	Opt_srcaddr,
+>>   	Opt_iocharset,
+>> @@ -214,6 +215,7 @@ struct smb3_fs_context {
+>>   	bool gid_specified;
+>>   	bool sloppy;
+>>   	bool got_ip;
+>> +	bool got_opt_hostname;
+>>   	bool got_version;
+>>   	bool got_rsize;
+>>   	bool got_wsize;
+>> @@ -226,6 +228,7 @@ struct smb3_fs_context {
+>>   	char *domainname;
+>>   	char *source;
+>>   	char *server_hostname;
+>> +	char *opt_hostname;
+> Perhaps, smb3_fs_context_dup and smb3_cleanup_fs_context_contents should
+> be aware of these new fields too.
 
-xjMEZD5zHxYJKwYBBAHaRw8BAQdAMVmXn59f0nkYv5WMsQq+KrcYCsNfaUj/WZtg
-zdF72yDNJVN0ZWZhbiBLYW5pYSA8c3RlZmFuQGthbmlhLW9ubGluZS5kZT7CiQQT
-FggAMRYhBGxP1rNZHkCiVplAgVL21N0btoq1BQJkPnNQAhsDBAsJCAcFFQgJCgsF
-FgIDAQAACgkQUvbU3Ru2irXx0QEAtwVwH3XaKI4V5K8xNBFjLCvNHZsOBiF1zXRe
-V3+ocvcA/i+HTEj2s+Xw0AdOCzTKpUetOkifYMHmRdzoRdjItaUIzjgEZD5zHxIK
-KwYBBAGXVQEFAQEHQLCpLYCfOAWfcF2Za/K3FymUQPfyIZ/eupKMlQrGRJUhAwEI
-B8J4BBgWCAAgFiEEbE/Ws1keQKJWmUCBUvbU3Ru2irUFAmQ+c1ACGwwACgkQUvbU
-3Ru2irV69QEAxwzfX/shQahBfmica2GbWv7hytmlnu/QFNP2WNDb/9MA/133+PWv
-q8PePaEGS4s2tRUd8ktDKmVYz7EnJwaCyqcH
-=3Dxppn
------END PGP PUBLIC KEY BLOCK-----
+smb3_cleanup_fs_context_contents should be aware of these new fields too.
 
---------------inv1wrEZJU0pm7dDJ6VIY87i--
+Clearing in smb3_cleanup_fs_context_contents is not necessary, because 
+if opt_hostname != NULL,
+then the pointer in server_hostname is replaced (it is pre-cleared by 
+kfree), respectively, everything
+will be cleared by itself with the current code.
 
---------------T9uAQGzIhMrpa1vjnbcOmf0X--
+In smb3_fs_context_dup, opt_hostname does not need to be processed, 
+since this variable is
+essentially temporary. Immediately after parsing with the parameter, its 
+value goes to
+server_hostname and it is no longer needed by itself.
 
---------------b0QSvxNzJb0PO2PR0MmQ8IN8
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature.asc"
+> Thanks,
+>
+>>   	char *UNC;
+>>   	char *nodename;
+>>   	char workstation_name[CIFS_MAX_WORKSTATION_LEN];
+>>
+>> base-commit: bec6f00f120ea68ba584def5b7416287e7dd29a7
+>> -- 
+>> 2.42.2
+>>
 
------BEGIN PGP SIGNATURE-----
-
-wnsEABYIACMWIQRsT9azWR5AolaZQIFS9tTdG7aKtQUCaGZ+NgUDAAAAAAAKCRBS9tTdG7aKtYKy
-AP95bCTMR956wvcEx9vvdEYOYxhG/zeeLynzP0z3QOsonAEAkqQziBKWQQFUrTil8DnOxTrGXNFZ
-CMRDSx0HJxifuQg=
-=1GKj
------END PGP SIGNATURE-----
-
---------------b0QSvxNzJb0PO2PR0MmQ8IN8--
+Apologies for the overly long subject line and unclear description.
+Thanks.
 
