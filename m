@@ -2,62 +2,49 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7F2A5AF7509
-	for <lists+samba-technical@lfdr.de>; Thu,  3 Jul 2025 15:07:38 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 39A79AFA4CB
+	for <lists+samba-technical@lfdr.de>; Sun,  6 Jul 2025 13:41:02 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=I9qvYNtJGcWBon1rWdz4FMytJziodb0+3w7ups6EUbo=; b=nYsASzHZk6OEFryPOR3EgGcdWr
-	ieQYRE6TUpfD7IsOASN3KKIbrJTR4/zcszodzzYYCLuZMTzqWg9sO4qNL8b9IWPyikyWP/XDYSVhT
-	wxDLUZQTbn6ZaTpInkAwkvBfWdppoDOwnpY0GppTryc/zEgWUNyMo2ePkwUu7aep3bzg5I6O62Djh
-	BmJfuBaocsD6LlGgOtE/epa11aMzO24OmWW6O1PnYwts9gJQsiMQtnKO15rpmq6dAUtPC2i+F6CZ5
-	pRv32oskBMDTkXv1JkBDv0rze41BcDZSCwp7CBjtz0q74GSWn9m5XJS1stjsEy9vJmpW8QyXmTplq
-	Dsi2Bvhw==;
-Received: from ip6-localhost ([::1]:34602 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
+	bh=yXZ1QwtyXWpYw+cNhAnQXu4pFrkdP2ZFzsO4kqzmNj0=; b=tq+sW6KAcnsSw1s/1EYTNACiNu
+	OMA1s1ygwL2RXXQEly+q/uqVpOO7tinDIywO4XD9ojysV80FMtOPRbY1SUn8y+QTLi1VopOYUcRVO
+	+1btLb7OIFsQj0kOjP76aZ4zGdaEkxhAqrSibwVMGyjz7fAepATaaNtOxpnDbZUQB0xoSAZyFKrox
+	Do2YTzSaTG0H35w++5sv9QmgnbvkxAwVyZZ2egw3wQiPx05qOlsjAjl+nVANKI/0ZtaGUzgEoExto
+	qosvqBFl1XqKJYMVdZMBZ46qSSO5JoRlVAHpqMbhcdNUDcfOcxDaHikdIs9DbIw7Qh+D+0We40G1T
+	1PZvqfuA==;
+Received: from ip6-localhost ([::1]:44452 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1uXJes-00ATz8-AN; Thu, 03 Jul 2025 13:07:22 +0000
-Received: from tor.source.kernel.org ([2600:3c04:e001:324:0:1991:8:25]:54594) 
+	id 1uYNjH-00Aegv-Ie; Sun, 06 Jul 2025 11:40:19 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:51864) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uXJea-00ATyi-P0
- for samba-technical@lists.samba.org; Thu, 03 Jul 2025 13:07:11 +0000
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 2E1846113B
- for <samba-technical@lists.samba.org>; Thu,  3 Jul 2025 13:07:00 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D7570C4AF0B
- for <samba-technical@lists.samba.org>; Thu,  3 Jul 2025 13:06:59 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1751548019;
- bh=Z4w5m5CpgHFF6Tkqd9q7I7U3lx/nZIgUpB3h4mvQxNU=;
- h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
- b=U2NuhnTDicer7wc5fwHHe2J+HiSWBwmyQ3nw95GM/LmRgIRPCkFq/VwXKH+5jqWZl
- 6CveNIsQwUYQztslBy0OAuO3j7UIXA7Y6AsdT6WtkwI+/y9TzO3mfEiY3pyw8dWOGT
- zShu7zm5xg71UnW/t50id4cDqq3hhDTxBO4F80FhLe6DqWn4g4j/Y9rfGPNPOa7v65
- e1Ud9yiwUh7yY5g03lUd41iVlH6Yzx2/SUfFp9Sb2nJuuMIED1HC16o4228MWpKcbL
- VWUtqDhhPNX+vQW+9cNqFgnjLp2fKOmF/tWmH8IQ1FfAYyQEtDDn8hGFB+LGmt2SzM
- ii75oLhniSbAw==
-Received: by mail-ed1-f47.google.com with SMTP id
- 4fb4d7f45d1cf-6097b404f58so12909217a12.3
- for <samba-technical@lists.samba.org>; Thu, 03 Jul 2025 06:06:59 -0700 (PDT)
-X-Forwarded-Encrypted: i=1;
- AJvYcCVW19o7f1/CMclc3taeBm1TUbZlTT/LLOhba1x/RNxypivpdjTPRKnYLw09QxRZja5wePKC9dnktZfr14AyXR8=@lists.samba.org
-X-Gm-Message-State: AOJu0YxY4FCHXnK3GiS+CAIBGBjMFAmWmTSWTsjj1mMoymQKG2HaJ5ib
- bh5Repl1u3VA4662bn7QkRRGYano+sh9UXu2ZyH8dglFYSm2UiMrEl11VXqtpZwniXxzIZTIvvW
- YPSGcq5885HZAxMpEuVUx5h8evzngGGU=
-X-Google-Smtp-Source: AGHT+IE3D9KLkoCi8UAoCLGcElF1OMy8eyJvYPFsLyKB1+RZTcGKRRnlAb+qEZ8UReMSgYiAfduEIoS1QOjdQUZeSCc=
-X-Received: by 2002:a05:6402:1e8c:b0:608:64ef:3807 with SMTP id
- 4fb4d7f45d1cf-60e6ca8f86bmr3149298a12.0.1751548018392; Thu, 03 Jul 2025
- 06:06:58 -0700 (PDT)
+ (Exim) id 1uYNj3-00AegT-8R; Sun, 06 Jul 2025 11:40:08 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=From:To:Date:Message-ID:CC;
+ bh=yXZ1QwtyXWpYw+cNhAnQXu4pFrkdP2ZFzsO4kqzmNj0=; b=QqihfUj3QPbyRySGbvOT/UiHaY
+ Cjjf6u1wEfcEalQ6CqeYTRXRfPn2MtjrLkmp8uesoRwIhv48kVx7XU2gCxadF0aILv1q19P2KFQp9
+ ukzQ0bwQHPfH4hUiZn1/e+/Onriu+8QER6n6+YlVRYs+pINQca7RhVP/Ll1xNFsb6VG1x5K5JKJJf
+ hNlPzGwFWgDHFsy7qSAMj30QsCD2TUKdO2tq900BUKWiAIMCr5lB69ROv4v5Cqv436pj9z5Ezd/Dy
+ uV1DaRDXMveKHl52a7A1O6M0bazRozO0uFGdd/ApDkDUSE+mm14oCe5hvWAoq/IoOuObftgliadhv
+ vqI4oPKUl6bVHWo63/aCT3bq9yC2E0F6f5IABNCAh2yK6RdptfpMtCRfW79lZBe0UBs0XYDveaR+Y
+ pEHG86VRmf8+3Wi/s8GDzf8XY6AqXC3Pa0BlKJaBvZEiS/iGTGvrcWnG0ISDU9Uy8fNLnuJm+v5az
+ yLNr3cTIXsEsmg0jqz+t0haO;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1uYNj1-00EATg-3A; Sun, 06 Jul 2025 11:40:04 +0000
+Message-ID: <f8071770-dc50-49c0-80fe-b98c95ea207a@samba.org>
+Date: Sun, 6 Jul 2025 13:40:01 +0200
 MIME-Version: 1.0
-References: <20250702071805.2540741-1-metze@samba.org>
-In-Reply-To: <20250702071805.2540741-1-metze@samba.org>
-Date: Thu, 3 Jul 2025 22:06:45 +0900
-X-Gmail-Original-Message-ID: <CAKYAXd_KjT5qd3amwKr3p6v0nC2wURdODqHSyS6AY=KXeaR93w@mail.gmail.com>
-X-Gm-Features: Ac12FXyT9zgAz8TIEGHjE4HVyLzYvH2IZvEQO7uDNJ5bIZDJeOmBtbsn2WtIpYc
-Message-ID: <CAKYAXd_KjT5qd3amwKr3p6v0nC2wURdODqHSyS6AY=KXeaR93w@mail.gmail.com>
-Subject: Re: [PATCH] smb: server: make use of rdma_destroy_qp()
-To: Stefan Metzmacher <metze@samba.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US, de-DE
+To: "samba@lists.samba.org" <samba@lists.samba.org>,
+ samba-technical <samba-technical@lists.samba.org>,
+ samba-announce@lists.samba.org
+Subject: Important Change in Upcoming Microsoft Update
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------hfAM0ib8BWRVnzk10ZixhykE"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -71,50 +58,86 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Namjae Jeon via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Namjae Jeon <linkinjeon@kernel.org>
-Cc: linux-cifs@vger.kernel.org, samba-technical@lists.samba.org,
- Hyunchul Lee <hyc.lee@gmail.com>, Tom Talpey <tom@talpey.com>,
- Sergey Senozhatsky <sergey.senozhatsky@gmail.com>,
- Steve French <stfrench@microsoft.com>
+From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Ralph Boehme <slow@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Wed, Jul 2, 2025 at 4:18=E2=80=AFPM Stefan Metzmacher <metze@samba.org> =
-wrote:
->
-> The qp is created by rdma_create_qp() as t->cm_id->qp
-> and t->qp is just a shortcut.
->
-> rdma_destroy_qp() also calls ib_destroy_qp(cm_id->qp) internally,
-> but it is protected by a mutex, clears the cm_id and also calls
-> trace_cm_qp_destroy().
->
-> This should make the tracing more useful as both
-> rdma_create_qp() and rdma_destroy_qp() are traces and it makes
-> the code look more sane as functions from the same layer are used
-> for the specific qp object.
->
-> trace-cmd stream -e rdma_cma:cm_qp_create -e rdma_cma:cm_qp_destroy
-> shows this now while doing a mount and unmount from a client:
->
->   <...>-80   [002] 378.514182: cm_qp_create:  cm.id=3D1 src=3D172.31.9.16=
-7:5445 dst=3D172.31.9.166:37113 tos=3D0 pd.id=3D0 qp_type=3DRC send_wr=3D86=
-7 recv_wr=3D255 qp_num=3D1 rc=3D0
->   <...>-6283 [001] 381.686172: cm_qp_destroy: cm.id=3D1 src=3D172.31.9.16=
-7:5445 dst=3D172.31.9.166:37113 tos=3D0 qp_num=3D1
->
-> Before we only saw the first line.
->
-> Cc: Namjae Jeon <linkinjeon@kernel.org>
-> Cc: Steve French <stfrench@microsoft.com>
-> Cc: Sergey Senozhatsky <sergey.senozhatsky@gmail.com>
-> Cc: Hyunchul Lee <hyc.lee@gmail.com>
-> Cc: Tom Talpey <tom@talpey.com>
-> Cc: linux-cifs@vger.kernel.org
-> Fixes: 0626e6641f6b ("cifsd: add server handler for central processing an=
-d tranport layers")
-> Signed-off-by: Stefan Metzmacher <metze@samba.org>
-Applied it to #ksmbd-for-next-next.
-Thanks!
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------hfAM0ib8BWRVnzk10ZixhykE
+Content-Type: multipart/mixed; boundary="------------YG0S5chCRrWbgb5V5xSNYP6B";
+ protected-headers="v1"
+From: Ralph Boehme <slow@samba.org>
+To: "samba@lists.samba.org" <samba@lists.samba.org>,
+ samba-technical <samba-technical@lists.samba.org>,
+ samba-announce@lists.samba.org
+Message-ID: <f8071770-dc50-49c0-80fe-b98c95ea207a@samba.org>
+Subject: Important Change in Upcoming Microsoft Update
+
+--------------YG0S5chCRrWbgb5V5xSNYP6B
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
+
+SGkgYWxsIQ0KDQpPbiA4dGggb2YgSnVseSwgTWljcm9zb2Z0IHdpbGwgcmVsZWFzZSBhbiBp
+bXBvcnRhbnQgc2VjdXJpdHkgdXBkYXRlIGZvciANCkFjdGl2ZSBEaXJlY3RvcnkgRG9tYWlu
+IENvbnRyb2xsZXJzIGZvciBXaW5kb3dzIFNlcnZlciB2ZXJzaW9ucyBwcmlvciB0byANCjIw
+MjUuDQoNClRoaXMgdXBkYXRlIGluY2x1ZGVzIGEgY2hhbmdlIHRvIHRoZSBNaWNyb3NvZnQg
+UlBDIE5ldGxvZ29uIHByb3RvY29sLCANCndoaWNoIGltcHJvdmVzIHNlY3VyaXR5IGJ5IHRp
+Z2h0ZW5pbmcgYWNjZXNzIGNoZWNrcyBmb3IgYSBzZXQgb2YgUlBDIA0KcmVxdWVzdHMuIFNh
+bWJhIHJ1bm5pbmcgYXMgZG9tYWluIG1lbWJlcnMgaW4gdGhlc2UgZW52aXJvbm1lbnRzIHdp
+bGwgYmUgDQppbXBhY3RlZCBieSB0aGlzIGNoYW5nZSBpZiBhIHNwZWNpZmljIGNvbmZpZ3Vy
+YXRpb24gaXMgdXNlZCwgc2VlIGJlbG93IA0KZm9yIHdoaWNoIGNvbmZpZ3VyYXRpb24gaXMg
+YWZmZWN0ZWQuDQoNCldpbmRvd3MgU2VydmVyIHZlcnNpb24gMjAyNSBpcyBhbHJlYWR5IGVx
+dWlwcGVkIHdpdGggdGhlc2Ugc3BlY2lmaWMgDQpzZWN1cml0eSBoYXJkZW5pbmdzLCBhbmQg
+TWljcm9zb2Z0IGlzIG5vdyBwbGFubmluZyB0byBkZXBsb3kgdGhlbSB0byBhbGwgDQpzdXBw
+b3J0ZWQgV2luZG93cyBTZXJ2ZXIgdmVyc2lvbnMgZG93biB0byBXaW5kb3dzIFNlcnZlciAy
+MDA4Lg0KDQoNCldobyBpcyBhZmZlY3RlZD8NCg0KU2FtYmEgaW5zdGFsbGF0aW9ucyBhY3Rp
+bmcgYXMgbWVtYmVyIHNlcnZlcnMgaW4gV2luZG93cyBBRCBkb21haW5zIHdpbGwgDQpiZSBh
+ZmZlY3RlZCBpZiB0aGV5IGFyZSBjb25maWd1cmVkIHRvIHVzZSB0aGUgJ2FkJyBpZG1hcHBp
+bmcgYmFja2VuZC4gDQpTYW1iYSBzZXJ2ZXJzIG5vdCB1c2luZyB0aGlzIGNvbmZpZ3VyYXRp
+b24gd2lsbCBub3QgYmUgYWZmZWN0ZWQgYnkgdGhlIA0KY2hhbmdlIOKAkyBhdCBsZWFzdCB0
+byBvdXIgY3VycmVudCBrbm93bGVkZ2UgYW5kIHVuZGVyc3RhbmRpbmcgb2YgdGhlIA0KY2hh
+bmdlIOKAkyBhbmQgbm8gZnVydGhlciBhY3Rpb24gaXMgcmVxdWlyZWQuDQoNCkN1cnJlbnQg
+dmVyc2lvbnMgb2YgU2FtYmEgd2l0aCB0aGUgYWZmZWN0ZWQgY29uZmlndXJhdGlvbiB3aWxs
+IG5vIGxvbmdlciANCmZ1bmN0aW9uIGNvcnJlY3RseSBvbmNlIHRoZSBNaWNyb3NvZnQgdXBk
+YXRlIGhhcyBiZWVuIGFwcGxpZWQuIFVzZXJzIA0Kd2lsbCBub3QgYmUgYWJsZSB0byBjb25u
+ZWN0IHRvIHRoZSBTTUIgc2VydmljZSBwcm92aWRlZCBieSBTYW1iYSBmb3IgYW55IA0KZG9t
+YWluIGNvbmZpZ3VyZWQgdG8gdXNlIHRoZSAnYWQnIGlkbWFwcGluZyBiYWNrZW5kLg0KDQoN
+CldoYXQgdGhlIFNhbWJhIFRlYW0gaXMgZG9pbmcgYW5kIHdoYXQgeW91IHNob3VsZCBkbw0K
+DQpNZW1iZXJzIG9mIHRoZSBTYW1iYSB0ZWFtIGhhdmUgYmVlbiBjb2xsYWJvcmF0aW5nIHdp
+dGggTWljcm9zb2Z0IGFuZCANCmNoYW5nZXMgdG8gU2FtYmEgYXJlIGN1cnJlbnRseSBiZWlu
+ZyBkZXZlbG9wZWQgYW5kIHRlc3RlZCB0byBlbnN1cmUgZnVsbCANCmNvbXBhdGliaWxpdHkg
+YmV0d2VlbiBTYW1iYSBhbmQgTWljcm9zb2Z0IHByb2R1Y3RzLiBUaGUgU2FtYmEgdGVhbSBp
+cyANCmFpbWluZyB0byBwcm92aWRlIHVwZGF0ZWQgU2FtYmEgcmVsZWFzZXMgb24gTW9uZGF5
+IGV2ZW5pbmcgKFVUQysyKS4NCg0KDQpXaGF0IHlvdSBzaG91bGQgZG86DQoNCklmIHlvdeKA
+mXJlIHJ1bm5pbmcgU2FtYmEgaW4gYSBXaW5kb3dzIEFEIGVudmlyb25tZW50LCBjaGVjayB5
+b3VyIA0KY29uZmlndXJhdGlvbi4gS2VlcCBhbiBleWUgb3V0IGZvciBuZXcgU2FtYmEgcGFj
+a2FnZSB1cGRhdGVzIGVhcmx5IG5leHQgDQp3ZWVrIChzdGFydGluZyA3IEp1bHkpLg0KDQoN
+ClJlZmVyZW5jZXMNCg0KaHR0cHM6Ly9idWd6aWxsYS5zYW1iYS5vcmcvc2hvd19idWcuY2dp
+P2lkPTE1ODc2DQoNCg0KT24gYmVoYWxmIG9mIHRoZSBTYW1iYSB0ZWFtDQotc2xvdw0K
+
+--------------YG0S5chCRrWbgb5V5xSNYP6B--
+
+--------------hfAM0ib8BWRVnzk10ZixhykE
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+wsF5BAABCAAjFiEE+uLGCIokJSBRxVnkqh6bcSY5nkYFAmhqYJEFAwAAAAAACgkQqh6bcSY5nkYg
+7BAArVRXfEkldJ6ZfxGWxYsJ8aOxOUk7bqFizFJMQWFZXgT++ic6o1+tmcJAzS+XfG9bZkduTXJG
+jTUlBuw/+F5OoZoBRqQKPq9hNbl2pZIxTKBXKLWDpNwzEKyu+tCUvbVEF/ETflRBlA1kEg2TjQ7Q
+4iXC2+tny2DN6qKgCAIAS49HHPO4Xvs3HqfWOLVykUR1PlRkNP1OyJFthHNFbhalnE5uwTv1nHdN
+vfRZMx7XNL13P0dF3Vgcv+THkLtyYKKX1Dq7AP5Z6i/rJcLMCuv0SskHi7eNicF0zvz7/lALiADI
+OkjjOn7UDMwj4YbYgPZ25D7PeC/FZz/QetiXu1J6+/dDJtsVh9MvjVv9ysA70enSWhcpin40Ot0M
+gbi8QZpykARxURrnYEuPeFddMlKqFJPQBs8cXe3NwHtDFt16HO4Rpc5Mz+eT5i1JfDS4x0OWO3dw
+m92zm1pPiT7Y8sEDixZYq8/ShnQOt8sEsATMpcN9GLqVQO3axTwwIABBZvr2DWSF2n1p4Hsw7sLb
+oJ66957hDCKCmcxnjnqGfZiuGbnirxoti7PhsuJxRyPYcRHk1zM7a32ZBS1+96gTiCJbmakdc+hi
+08O2gYt+aXRz55orJymnTzhUtNfJqSWaR80+yumZKkS4nJRke0G2Z2PHLoKSh4mSdbjyhcGlXDGs
+c8M=
+=ryWo
+-----END PGP SIGNATURE-----
+
+--------------hfAM0ib8BWRVnzk10ZixhykE--
 
