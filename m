@@ -2,45 +2,45 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 74762AFB8DF
-	for <lists+samba-technical@lfdr.de>; Mon,  7 Jul 2025 18:44:54 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6343CAFB8E0
+	for <lists+samba-technical@lfdr.de>; Mon,  7 Jul 2025 18:46:17 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
-	bh=+Oon4MQMu7Fl3y3Ma9nCYQ2ZryhRY8rNAcfdU2Fq7Pc=; b=Y3L/OfNIEdsTBMaQrwV7+1IHKC
-	s3rkSafaYBtmoHrLXMcTnWgVth/71O+ZzLkdRKfhk3uEL9tnz3SIqGlx3yACUr8AjRV1dMcZkiSYE
-	0jaz2Hi0Dwt3hA7dJvVE/mqnCusMTXB9fumCrKzNDTJ5fVr1wOTb5q701UC3ABZh+7pKDvgbUhEo+
-	K50brzwH3zzeT40FoQRWRF1GBjvcotN+42nIgjS0mhKfrsr9/lMSodhjdJidPF1F1L/fC9T/SE7oG
-	w0W/ByvG3kvblJ/g3uTj0cDAi12gsy+NKuBczi2gfqouJ8FWtfAB2c3XMlUmZCy/ZyKIcPin62CN+
-	WrbJ5rPQ==;
-Received: from ip6-localhost ([::1]:18046 helo=hr1.samba.org) 
+	bh=y16w85xMnQSH4AegtVUsfuGfG/cXhRP7DFBAXhYNHo0=; b=yChX1Sklslxb41qTnKBRUE5B+o
+	KcYZUk699DhJ3iAtFRt/DhB1d6wIcMPYI9+G2Y7l8wwHfg/c9syHyVkxyTZQowUduIdCrp38vKhjs
+	SncD/w5KDOgR68ug0eMqbOUdKXWAupoCQQVqdkNlarQULcCANkVHF1vhl8YXNXLaYrPkVOZTVW2eV
+	cCeYEQKVmy1Gnnv0Q3EldxSOq10VeqhcS/3jb+L/5rUJmVDuqFTFPGeFXsZpwqoW+TE2YHuceVFRP
+	w6MNG/YQ5uUfUiNAQ8WSTGc0jUvj35oDP2WCJcNpd/NlRuX/heWRjxEuSJdriQV3iPUTwjaCvAAqv
+	sxrqwGCA==;
+Received: from ip6-localhost ([::1]:20038 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1uYowz-00Akb2-97; Mon, 07 Jul 2025 16:44:17 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:48782) 
+	id 1uYoye-00Al73-NO; Mon, 07 Jul 2025 16:46:01 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:13522) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uYowp-00AkaM-As; Mon, 07 Jul 2025 16:44:10 +0000
+ (Exim) id 1uYoxA-00Akd3-AD; Mon, 07 Jul 2025 16:44:31 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=From:To:Date:Message-ID:CC;
- bh=+Oon4MQMu7Fl3y3Ma9nCYQ2ZryhRY8rNAcfdU2Fq7Pc=; b=YvLK1Bn5b0DN04vYt9O+I7Fb9h
- nNBKKOcEQkQ2lRs/ayNUpQvB8VeYxTuVwZskD0qudCpt2f96X0yJ69G+0kS9X4Yl9eH8gUA6zMsUd
- d9gWVBOhytgsL3IOP3kX0ZyQVtyFDUqKRetg7WdrlbCIH+N7n1Hlf+i53cGQStB9G9xJmjb+KczEn
- ZUMcGm6rbfFptTjfuJr+ESoA+yoYDNIy0y8dJo7Ei2uYLsRwbHWtChlk+77nU/P7Jx4vjFFLyUKAD
- GWbQBfMmk0YmyMqP1/zOm7qG5mNBHJ9zK9ajKacEfGlHB2P0CCOTcWvIKgt0OgFE9s8HcEcw8ZjWJ
- seSON432Pvd9srXMp5KH0RtoIttLWd0VAHaGrO2TAQ9MhS2ZIoynEBJ3MqgO11xGQF94gBXLbHYuq
- LRrJ4FW+3gZv2Az4B6qT0u0uJ8RXuSqyfFtRvkLcH9rqrjvHADdIuh4k6REyXWmKude8NvHLIqpE/
- 71XyUovj34/+xiMeR51u02SM;
+ bh=y16w85xMnQSH4AegtVUsfuGfG/cXhRP7DFBAXhYNHo0=; b=KU+5qfl0L8yV8C8Gw69kz7+jNJ
+ wesKn+fTGbWM+A8E/ULahfd4Ity1TMlBZTVYuMLsyf050Yo8lkaCgOf8CSTVAM5GCa0Jb83zWhXj0
+ VAwNEL7PAb1/FhDXKoZf7pafM+b5MX0bsJj8ewmKiB/WUnmYwzfrzcNlS0V6mWl/6N7DVwAG1VHUP
+ cq0DGpN6Gu+6+Q/OMmRZx8aViwG1s5ES0/3Q5ATEghpL2DXIIQ4nv6ul8bRnIgGxwkHPhh0EkVk3T
+ 64dvnYdJ/PZqo4xtVAJsZRJtiRIAjkLts4Js7+nQ/lko5cSkF+bhoxhQXN9R9U8Pc4cSj6HJNa/v3
+ TNmh8qL2N5AcTg6+UD6FxyThXUyBR5zRRwNCv5rDF8LA/fmYUxZPZEeRHThee6cCkukhBkmPw0qHw
+ L7NORlHBC+AiMWbr2AQPl09GIbdI2a6+Eyfm6rq+RUDXwSzh79s5c3JNYeuovBob4nRywr0sCrNYQ
+ wcmWbi9NdY/W6Fzst3VHL1fC;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uYowo-00EM4K-2N; Mon, 07 Jul 2025 16:44:06 +0000
-Message-ID: <fb23a966-3367-40c6-857b-0db5b548071c@samba.org>
-Date: Mon, 7 Jul 2025 18:44:05 +0200
+ (Exim) id 1uYoxA-00EM4f-0D; Mon, 07 Jul 2025 16:44:28 +0000
+Message-ID: <c3ffe117-e527-4741-ba54-a51a73de9967@samba.org>
+Date: Mon, 7 Jul 2025 18:44:27 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Content-Language: de-DE
 To: samba-announce@lists.samba.org, samba@lists.samba.org,
  samba-technical@lists.samba.org
-Subject: [Announce] Samba 4.21.7 Available for Download
+Subject: [Announce] Samba 4.22.3 Available for Download
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-BeenThere: samba-technical@lists.samba.org
@@ -64,7 +64,7 @@ Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 Release Announcements
 ---------------------
 
-This is the latest stable release of the Samba 4.21 release series.
+This is the latest stable release of the Samba 4.22 release series.
 
 
 Important Change in Upcoming Microsoft Update
@@ -100,8 +100,14 @@ domain configured to use the 'ad' idmapping backend.
 
 See https://bugzilla.samba.org/show_bug.cgi?id=15876.
 
-Changes since 4.21.6
+
+Changes since 4.22.2
 --------------------
+
+o  Douglas Bagnall <douglas.bagnall@catalyst.net.nz>
+    * BUG 15854: samba-tool cannot add user to group whose name is 
+exactly 16
+      characters long.
 
 o  Günther Deschner <gd@samba.org>
     * BUG 15876: Windows security hardening locks out schannel'ed 
@@ -109,13 +115,11 @@ netlogon dc
       calls like netr_DsRGetDCName.
 
 o  Stefan Metzmacher <metze@samba.org>
-    * BUG 15680: Trust domains are not created.
     * BUG 15876: Windows security hardening locks out schannel'ed 
 netlogon dc
       calls like netr_DsRGetDCName.
 
 o  Andreas Schneider <asn@samba.org>
-    * BUG 15680: Trust domains are not created.
     * BUG 15869: Startup messages of rpc deamons fills /var/log/messages.
 
 
@@ -153,7 +157,7 @@ from:
 
 The release notes are available online at:
 
-         https://www.samba.org/samba/history/samba-4.21.7.html
+         https://www.samba.org/samba/history/samba-4.22.3.html
 
 Our Code, Our Bugs, Our Responsibility.
 (https://bugzilla.samba.org/)
