@@ -2,48 +2,64 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id D2F31AFB8E5
-	for <lists+samba-technical@lfdr.de>; Mon,  7 Jul 2025 18:46:44 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E04BAAFBE81
+	for <lists+samba-technical@lfdr.de>; Tue,  8 Jul 2025 01:09:08 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
-	bh=SrGblwY5m7Gy2Ayw0WQ2R8ivUFCbsmSxtRWwTRTRjUI=; b=3FGy7DYEQyL2uodzXcvMk+HAhI
-	dpzL58RtmUxerEG5NrzDQ/zfDQYd7E6guJoyn6YoXFWCeG35TqSo4elkUzowklfAd9FYwswhBS3An
-	934mZ7+alT9aMUUbU/MqQUlEfbBP5kbGndsEbfcswUgyGRgggyyO8x4kJqg/5QT85o/3btxFX4KJn
-	hqp8l49Ja/YJ2sO89WwBf4ku0LjPiOpcBKWGng7LPtLLbRlSaM06Hxmk/IpubPKBunk82d6BxVqe/
-	QXbCQuNBZxf+b8NFX3eYaxBTGIkleeZoFW913cW5UrbUWimXbkfzaK717uAko7e7uxraStjelce7G
-	fhz6jfDA==;
-Received: from ip6-localhost ([::1]:29478 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=dXVbgNizpNSGYv7kTYaETc4B6Nre0sX1C1bWdly+H14=; b=dpguXZF8PofeiukvMmeoxO3sbx
+	BTQLop4ktQF/9J8qtF8cBRhfV1hsAGtqLJmotQJu2fxjannBKK/x+E+eGbqVhN+deJnk1IbCli+VD
+	u3kWAkDxgKvvw7avB5FT8I0Sek/YHStnvoU3+cIj6TuPlYmgiZE+sOc0T4mS2D5hdWsmZt4pOEFz/
+	/wsWDa8QfywVPl0fGCGCFOCyA6Zdh/zAliu0I/qeIL/BC/obv1CniuEwTEy5Iw6d99YyV9SJAHKDs
+	48mCDQVJ5FHz6BNuglcKJEdlqPjafA5DYm2PErUd6bX1Woort6l18uSQ0JEmXLyiE3fgoHH0gLzOn
+	6KVRB7cw==;
+Received: from ip6-localhost ([::1]:43650 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1uYoyt-00Al9x-EA; Mon, 07 Jul 2025 16:46:16 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:19908) 
+	id 1uYuwm-00AnGn-Qz; Mon, 07 Jul 2025 23:08:28 +0000
+Received: from sea.source.kernel.org ([172.234.252.31]:49950) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uYoxf-00Akr3-D2
- for samba-technical@lists.samba.org; Mon, 07 Jul 2025 16:45:46 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=From:To:Date:Message-ID:CC;
- bh=SrGblwY5m7Gy2Ayw0WQ2R8ivUFCbsmSxtRWwTRTRjUI=; b=sGQwmOhczpAvXvZExrjDOu2C1i
- zRWm77P0omkCTZ4P0ijgp2PPAMQOSm76vOE5RneAZVQnEG5TKvKm8UpTPaDaxsOo2pivhYyeTE6jM
- tVZUdnkGBg8LKT1/izok3DYefGPQBO9JHFTefCA8GAanoRrPYyPft3eZSXiudWD5vMHpV/L/ITbES
- iDVZrz75cVtP/5JqQUW30xalkhcneteFOebB66N5eEzFzif3jSPVkziTURL/Su5P6QAeFw24mU7HN
- 78duYZVPwYWrywELd/8ZRpfJwHASr5RxD3VvXTWKkFyEqL5CywQBC5bN91MzZOSh0qb5NcCaK5GwU
- U0+EaBu7NppyJgVCPXhsiY41Q1LC0Fn9JgwGiPTvPjayakOYuyiXB4YOZRf1oxLHGSbvo1SXjKEUD
- OCi8fQvLBmibA4otg72voJ7cc1RmKMjwX/frSc4d68XakFf3XQRHCtn5d9/fQjpwt4QqR4PrVcalU
- 4xGO1ugVzJznhBGxJ3Gn1A2A;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uYoxc-00EM6h-2w for samba-technical@lists.samba.org;
- Mon, 07 Jul 2025 16:44:57 +0000
-Message-ID: <4c7df413-a652-4e77-8ed8-97e7d06ac702@samba.org>
-Date: Mon, 7 Jul 2025 18:44:56 +0200
+ (Exim) id 1uYuwh-00AnGg-JX
+ for samba-technical@lists.samba.org; Mon, 07 Jul 2025 23:08:26 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sea.source.kernel.org (Postfix) with ESMTP id F2FE94462F
+ for <samba-technical@lists.samba.org>; Mon,  7 Jul 2025 22:51:47 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D49A9C4CEF1
+ for <samba-technical@lists.samba.org>; Mon,  7 Jul 2025 22:51:47 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1751928707;
+ bh=U5bTWCbakcVF83IumN8o0uiE9sZYfwr9aPaej40PLh8=;
+ h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
+ b=goxPYjmHrGcUh2vOx5LVeCuAmjoaIGvidBzoXhd9dpYJRgBVs8soU2GMcp1QRMCoV
+ 7thQqPJpAuJUkNi994pwxTPZRpQl0sJzldRzjiIg5JUlL450m8MJVrnj8YmEeE8afB
+ KBXgeYSPg/skHA+NMnO+1d+Ut8jsM+lCqWhMD7mS4xer/58Age+Wf0jYkdCjwAYETD
+ GxDnIAVIQr2ioMjeNr+GDXBO6FgmOQQHmqxCUIIjHA8Nhb1tlOF+r+yXu4vniupANU
+ zAm78pEdAn9+bt897GdSaLW3ImxxYrPeglVrRTHHtxnvR19ehh2/gZVSbAsKljPCvC
+ T+DeDTPR3sMfg==
+Received: by mail-ej1-f43.google.com with SMTP id
+ a640c23a62f3a-ae361e8ec32so750125466b.3
+ for <samba-technical@lists.samba.org>; Mon, 07 Jul 2025 15:51:47 -0700 (PDT)
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUbM9lgvYxMSLJcYyha2UWowmIpTd7GTzjp1pRSLwshK2ICNwV73PSGLHO85unQmaKk1klwQ4ZTnqIG7+2Gnk0=@lists.samba.org
+X-Gm-Message-State: AOJu0YwDLeH6WGfDD+9XZE6kl+No5iECcUaBk1n1GgXkgQ7bXMG5k3mG
+ kioD8d+R/lAizCN5+wqODwXag8jbztlhm7mvrYYBgjy/j8VMxk5JYsqWLpMOlsUWhvzcAZlfGCX
+ kNeI5gqa9CmsyhRfuKJV86/70YCo1ctM=
+X-Google-Smtp-Source: AGHT+IHwOb1WLnlcpTnYdhBN+BS3RRLvNiM/gLCpSNeRpZSSmPGtDRIEPzEyTexxvVZ80B1xeOKk/z4FbEOuqpTUs1k=
+X-Received: by 2002:a17:907:7e88:b0:ada:6adb:cca with SMTP id
+ a640c23a62f3a-ae6b0b1f788mr77945866b.6.1751928706460; Mon, 07 Jul 2025
+ 15:51:46 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: de-DE
-To: samba-technical@lists.samba.org
-Subject: [Release Planning 4.22 and 4.21] Samba 4.22.4 and 4.21.8
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+References: <20250702071805.2540741-1-metze@samba.org>
+ <CAKYAXd_KjT5qd3amwKr3p6v0nC2wURdODqHSyS6AY=KXeaR93w@mail.gmail.com>
+ <f5c5155c-e53b-465d-a1e5-659ce513d87b@talpey.com>
+In-Reply-To: <f5c5155c-e53b-465d-a1e5-659ce513d87b@talpey.com>
+Date: Tue, 8 Jul 2025 07:51:35 +0900
+X-Gmail-Original-Message-ID: <CAKYAXd8XnbiqutNfzmbbvGOu9dmn+kAmrHqH3ppCMZ0DuHeo4w@mail.gmail.com>
+X-Gm-Features: Ac12FXyVozb40tmTv_-dCqohg-YF6MPPVJQoB9FuHEg-XLMIc3ytGh8NpCDZsZk
+Message-ID: <CAKYAXd8XnbiqutNfzmbbvGOu9dmn+kAmrHqH3ppCMZ0DuHeo4w@mail.gmail.com>
+Subject: Re: [PATCH] smb: server: make use of rdma_destroy_qp()
+To: Tom Talpey <tom@talpey.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -57,31 +73,61 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jule Anger via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jule Anger <janger@samba.org>
+From: Namjae Jeon via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Namjae Jeon <linkinjeon@kernel.org>
+Cc: linux-cifs@vger.kernel.org, samba-technical@lists.samba.org,
+ Hyunchul Lee <hyc.lee@gmail.com>, Stefan Metzmacher <metze@samba.org>,
+ Sergey Senozhatsky <sergey.senozhatsky@gmail.com>,
+ Steve French <stfrench@microsoft.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi,
-
-Samba 4.22.4 is scheduled for Thursday, August 21 2025.
-
-https://wiki.samba.org/index.php/Release_Planning_for_Samba_4.22
-has been updated accordingly.
-
-
-Samba 4.21.8 is scheduled for Tuesday, September 9 2025.
-
-https://wiki.samba.org/index.php/Release_Planning_for_Samba_4.21
-has been updated accordingly.
-
-
-
-Jule
-
--- 
-Jule Anger
-Release Manager Samba Team  samba.org
-SerNet Samba Team           sernet.de
-
+On Tue, Jul 8, 2025 at 12:03=E2=80=AFAM Tom Talpey <tom@talpey.com> wrote:
+>
+> Definitely better and safer.
+>
+> Reviewed-by: Tom Talpey <tom@talpey.com>
+Added reviewed-by tag now.
+Thanks!
+>
+> On 7/3/2025 9:06 AM, Namjae Jeon wrote:
+> > On Wed, Jul 2, 2025 at 4:18=E2=80=AFPM Stefan Metzmacher <metze@samba.o=
+rg> wrote:
+> >>
+> >> The qp is created by rdma_create_qp() as t->cm_id->qp
+> >> and t->qp is just a shortcut.
+> >>
+> >> rdma_destroy_qp() also calls ib_destroy_qp(cm_id->qp) internally,
+> >> but it is protected by a mutex, clears the cm_id and also calls
+> >> trace_cm_qp_destroy().
+> >>
+> >> This should make the tracing more useful as both
+> >> rdma_create_qp() and rdma_destroy_qp() are traces and it makes
+> >> the code look more sane as functions from the same layer are used
+> >> for the specific qp object.
+> >>
+> >> trace-cmd stream -e rdma_cma:cm_qp_create -e rdma_cma:cm_qp_destroy
+> >> shows this now while doing a mount and unmount from a client:
+> >>
+> >>    <...>-80   [002] 378.514182: cm_qp_create:  cm.id=3D1 src=3D172.31.=
+9.167:5445 dst=3D172.31.9.166:37113 tos=3D0 pd.id=3D0 qp_type=3DRC send_wr=
+=3D867 recv_wr=3D255 qp_num=3D1 rc=3D0
+> >>    <...>-6283 [001] 381.686172: cm_qp_destroy: cm.id=3D1 src=3D172.31.=
+9.167:5445 dst=3D172.31.9.166:37113 tos=3D0 qp_num=3D1
+> >>
+> >> Before we only saw the first line.
+> >>
+> >> Cc: Namjae Jeon <linkinjeon@kernel.org>
+> >> Cc: Steve French <stfrench@microsoft.com>
+> >> Cc: Sergey Senozhatsky <sergey.senozhatsky@gmail.com>
+> >> Cc: Hyunchul Lee <hyc.lee@gmail.com>
+> >> Cc: Tom Talpey <tom@talpey.com>
+> >> Cc: linux-cifs@vger.kernel.org
+> >> Fixes: 0626e6641f6b ("cifsd: add server handler for central processing=
+ and tranport layers")
+> >> Signed-off-by: Stefan Metzmacher <metze@samba.org>
+> > Applied it to #ksmbd-for-next-next.
+> > Thanks!
+> >
+>
 
