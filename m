@@ -2,64 +2,70 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id E04BAAFBE81
-	for <lists+samba-technical@lfdr.de>; Tue,  8 Jul 2025 01:09:08 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 751EEAFF7E1
+	for <lists+samba-technical@lfdr.de>; Thu, 10 Jul 2025 06:18:25 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=dXVbgNizpNSGYv7kTYaETc4B6Nre0sX1C1bWdly+H14=; b=dpguXZF8PofeiukvMmeoxO3sbx
-	BTQLop4ktQF/9J8qtF8cBRhfV1hsAGtqLJmotQJu2fxjannBKK/x+E+eGbqVhN+deJnk1IbCli+VD
-	u3kWAkDxgKvvw7avB5FT8I0Sek/YHStnvoU3+cIj6TuPlYmgiZE+sOc0T4mS2D5hdWsmZt4pOEFz/
-	/wsWDa8QfywVPl0fGCGCFOCyA6Zdh/zAliu0I/qeIL/BC/obv1CniuEwTEy5Iw6d99YyV9SJAHKDs
-	48mCDQVJ5FHz6BNuglcKJEdlqPjafA5DYm2PErUd6bX1Woort6l18uSQ0JEmXLyiE3fgoHH0gLzOn
-	6KVRB7cw==;
-Received: from ip6-localhost ([::1]:43650 helo=hr1.samba.org) 
+	bh=8bCtkpW+iq79PPcECpcYI0zfM6pAKFYYwYNRsdMC30Q=; b=1qNHZjgWU6Zt5Jgs3qHxhHIMy2
+	sI7hRnYcOON5wMt2HkYEk3XhBiz/B4/FtwoM+G5T7OoAfLZZuY7/2DiBxSEuoRBuExdbryOZLbkPH
+	4wnJMSLI6NHeXjOGOE4JMWY4/0PARYxt71+dyxrNxD4sjAcAdv6QgSCWXAKV2Oq/bgk3h0ZpVlgPz
+	rQk2+YKX/m13dpKVnr3nOnB018JKOi3W+EnkefDVDs4dLDqcYo2+7kQsPYb+HtM7WmZ98+3AiwMjE
+	EgERjTf8vqQdGH2LiJQg360h/8CuwbnWmiIymKw9ZUlWX3H4EbkNEgksHYAga1+I/XaUjKkIKq6Nq
+	iZkSHGEg==;
+Received: from ip6-localhost ([::1]:26788 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1uYuwm-00AnGn-Qz; Mon, 07 Jul 2025 23:08:28 +0000
-Received: from sea.source.kernel.org ([172.234.252.31]:49950) 
+	id 1uZij8-00AuZx-HX; Thu, 10 Jul 2025 04:17:42 +0000
+Received: from mail-qt1-x82f.google.com ([2607:f8b0:4864:20::82f]:53510) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uYuwh-00AnGg-JX
- for samba-technical@lists.samba.org; Mon, 07 Jul 2025 23:08:26 +0000
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id F2FE94462F
- for <samba-technical@lists.samba.org>; Mon,  7 Jul 2025 22:51:47 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D49A9C4CEF1
- for <samba-technical@lists.samba.org>; Mon,  7 Jul 2025 22:51:47 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1751928707;
- bh=U5bTWCbakcVF83IumN8o0uiE9sZYfwr9aPaej40PLh8=;
- h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
- b=goxPYjmHrGcUh2vOx5LVeCuAmjoaIGvidBzoXhd9dpYJRgBVs8soU2GMcp1QRMCoV
- 7thQqPJpAuJUkNi994pwxTPZRpQl0sJzldRzjiIg5JUlL450m8MJVrnj8YmEeE8afB
- KBXgeYSPg/skHA+NMnO+1d+Ut8jsM+lCqWhMD7mS4xer/58Age+Wf0jYkdCjwAYETD
- GxDnIAVIQr2ioMjeNr+GDXBO6FgmOQQHmqxCUIIjHA8Nhb1tlOF+r+yXu4vniupANU
- zAm78pEdAn9+bt897GdSaLW3ImxxYrPeglVrRTHHtxnvR19ehh2/gZVSbAsKljPCvC
- T+DeDTPR3sMfg==
-Received: by mail-ej1-f43.google.com with SMTP id
- a640c23a62f3a-ae361e8ec32so750125466b.3
- for <samba-technical@lists.samba.org>; Mon, 07 Jul 2025 15:51:47 -0700 (PDT)
+ (Exim) id 1uZij0-00AuZq-1F
+ for samba-technical@lists.samba.org; Thu, 10 Jul 2025 04:17:38 +0000
+Received: by mail-qt1-x82f.google.com with SMTP id
+ d75a77b69052e-4a44b0ed780so6685311cf.3
+ for <samba-technical@lists.samba.org>; Wed, 09 Jul 2025 21:17:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1752121052; x=1752725852; darn=lists.samba.org;
+ h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=8bCtkpW+iq79PPcECpcYI0zfM6pAKFYYwYNRsdMC30Q=;
+ b=Aag0eMndmwLFpGw4T0r5dcXsWu2y3PYrQ21zH2mfYHE68LwlmvWFDe7G8KAvH5K+2p
+ ocx7hYSSY8KRH/kj0uKLF1VXHrEeAD0FCErljA2jOC1C5GEjj/7Qihpkac3s4LDzjsGG
+ YkUjbXfvJZmoJsb5ENf2oaeVwAk6K76SEQw87p6IEooRDUjKg/EH6yYVO55T0MWaW7lz
+ IHpHJbcsteepM1quzts/CKpLP6eAzsHzMf2Df8vRV73qr4omx+YfCGsthFNRMlhAbFiO
+ hK0QbNzOXf6+zrMVkdTQaZTZKfav46qUsjmGZe6NKgDJQgKPacmjKi4guAFdzjL6mxG0
+ m4wQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1752121052; x=1752725852;
+ h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=8bCtkpW+iq79PPcECpcYI0zfM6pAKFYYwYNRsdMC30Q=;
+ b=nZzXT2DER/9NGzIJ7KTiZWutBQK2+92Mma2o98nJh1gQUpuuc/I8uzYgTdE3gnJKzm
+ KZiCi0E2723ADarGQLBw39KRryvoZuXnyqoYTdmgwMszNBVFgLrKYhlSLScUu44xHcTL
+ Wfsm2zAHBHQ5XLYNfeILCLKYJtRsQbBFyfMDjnxKAA6Wm3GwyufxCZxX6SdpAnmw2nQS
+ cWr3FsnBsra9Ge7JyhdnWaSNM/+xbfye+wUeQTiNrmt3Ia8thgUIKhPsbqd3Udd0fD2v
+ zecmHk1W5RXkT2ybTbKQBgSAZ41tzKLNWGL4SO4BQ3EoO4Q8y8KXc9z6XBwHTToDw33F
+ k92w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUbM9lgvYxMSLJcYyha2UWowmIpTd7GTzjp1pRSLwshK2ICNwV73PSGLHO85unQmaKk1klwQ4ZTnqIG7+2Gnk0=@lists.samba.org
-X-Gm-Message-State: AOJu0YwDLeH6WGfDD+9XZE6kl+No5iECcUaBk1n1GgXkgQ7bXMG5k3mG
- kioD8d+R/lAizCN5+wqODwXag8jbztlhm7mvrYYBgjy/j8VMxk5JYsqWLpMOlsUWhvzcAZlfGCX
- kNeI5gqa9CmsyhRfuKJV86/70YCo1ctM=
-X-Google-Smtp-Source: AGHT+IHwOb1WLnlcpTnYdhBN+BS3RRLvNiM/gLCpSNeRpZSSmPGtDRIEPzEyTexxvVZ80B1xeOKk/z4FbEOuqpTUs1k=
-X-Received: by 2002:a17:907:7e88:b0:ada:6adb:cca with SMTP id
- a640c23a62f3a-ae6b0b1f788mr77945866b.6.1751928706460; Mon, 07 Jul 2025
- 15:51:46 -0700 (PDT)
+ AJvYcCW3/PeYoexfR+veCPzlq2z44ouen51XHFyJU9onwPe6pSrWzElxQqRxwXtIA17ImUDjvv9p29JHlKIwcU0cTyQ=@lists.samba.org
+X-Gm-Message-State: AOJu0YzcSLiwV/ynMbH/wYIED9AFQa7vYgsEjCPyhTC6p7xM6Yx7VVdD
+ zoIlxcgyB3EKLMsmZx76qaGqT9VA6AVuArDZyI3bnH+5ZtB8kOY2aDoNGFY+ggv+kQojVJKdkAy
+ yq06BT1QNBkGbmVlYPEZEwKH5M1gkWSE=
+X-Gm-Gg: ASbGncvcuOj5csv6w87T3V55ZxZDJl5kkfDbLJFla8Al8UhC9y8iRW9jquMtOkW6PCB
+ BPs+Rxy8kSKpguD4uZkU+iz8DpnLvZ5rJHmUulnHePp+FJ5sSDzwArDeswt1XSWHVwAs7+NAwgW
+ AvuNthmY4PvtVmNy1Dr3g8+o3dia9aVJ2dZ6MHqCwV8hAb34ZXRJoSPmOw57J7PSxteDFLjq35W
+ vmoSQsUuqPWx+8=
+X-Google-Smtp-Source: AGHT+IFNFzV4xwnvdI/o6DEIOt5bGXzLum1q0WMR0we2wqWqz+wzD24rk+rWBaiwfcHV76jkOe/UaQwmIZGnTzDmuKA=
+X-Received: by 2002:a05:620a:1a81:b0:7d3:8dc9:f438 with SMTP id
+ af79cd13be357-7dc92c84c2amr316563485a.17.1752121051663; Wed, 09 Jul 2025
+ 21:17:31 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250702071805.2540741-1-metze@samba.org>
- <CAKYAXd_KjT5qd3amwKr3p6v0nC2wURdODqHSyS6AY=KXeaR93w@mail.gmail.com>
- <f5c5155c-e53b-465d-a1e5-659ce513d87b@talpey.com>
-In-Reply-To: <f5c5155c-e53b-465d-a1e5-659ce513d87b@talpey.com>
-Date: Tue, 8 Jul 2025 07:51:35 +0900
-X-Gmail-Original-Message-ID: <CAKYAXd8XnbiqutNfzmbbvGOu9dmn+kAmrHqH3ppCMZ0DuHeo4w@mail.gmail.com>
-X-Gm-Features: Ac12FXyVozb40tmTv_-dCqohg-YF6MPPVJQoB9FuHEg-XLMIc3ytGh8NpCDZsZk
-Message-ID: <CAKYAXd8XnbiqutNfzmbbvGOu9dmn+kAmrHqH3ppCMZ0DuHeo4w@mail.gmail.com>
-Subject: Re: [PATCH] smb: server: make use of rdma_destroy_qp()
-To: Tom Talpey <tom@talpey.com>
+Date: Wed, 9 Jul 2025 23:17:20 -0500
+X-Gm-Features: Ac12FXzd95UuYiaKQXt7Zf3mDVwLbHSfIvMggnvdcSLPbLWHoNEQ09TkItvxWGo
+Message-ID: <CAH2r5mvKXfktSaikDTAspOTvOitpP0BDL6+GdVvptjSsKoZUNg@mail.gmail.com>
+Subject: directory lease bug where newly created files are ignored till lease
+ times out
+To: Bharath S M <bharathsm@microsoft.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -73,61 +79,91 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Namjae Jeon via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Namjae Jeon <linkinjeon@kernel.org>
-Cc: linux-cifs@vger.kernel.org, samba-technical@lists.samba.org,
- Hyunchul Lee <hyc.lee@gmail.com>, Stefan Metzmacher <metze@samba.org>,
- Sergey Senozhatsky <sergey.senozhatsky@gmail.com>,
- Steve French <stfrench@microsoft.com>
+From: Steve French via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Steve French <smfrench@gmail.com>
+Cc: Henrique Carvalho <henrique.carvalho@suse.com>,
+ CIFS <linux-cifs@vger.kernel.org>,
+ samba-technical <samba-technical@lists.samba.org>,
+ Shyam Prasad <nspmangalore@gmail.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Tue, Jul 8, 2025 at 12:03=E2=80=AFAM Tom Talpey <tom@talpey.com> wrote:
->
-> Definitely better and safer.
->
-> Reviewed-by: Tom Talpey <tom@talpey.com>
-Added reviewed-by tag now.
-Thanks!
->
-> On 7/3/2025 9:06 AM, Namjae Jeon wrote:
-> > On Wed, Jul 2, 2025 at 4:18=E2=80=AFPM Stefan Metzmacher <metze@samba.o=
-rg> wrote:
-> >>
-> >> The qp is created by rdma_create_qp() as t->cm_id->qp
-> >> and t->qp is just a shortcut.
-> >>
-> >> rdma_destroy_qp() also calls ib_destroy_qp(cm_id->qp) internally,
-> >> but it is protected by a mutex, clears the cm_id and also calls
-> >> trace_cm_qp_destroy().
-> >>
-> >> This should make the tracing more useful as both
-> >> rdma_create_qp() and rdma_destroy_qp() are traces and it makes
-> >> the code look more sane as functions from the same layer are used
-> >> for the specific qp object.
-> >>
-> >> trace-cmd stream -e rdma_cma:cm_qp_create -e rdma_cma:cm_qp_destroy
-> >> shows this now while doing a mount and unmount from a client:
-> >>
-> >>    <...>-80   [002] 378.514182: cm_qp_create:  cm.id=3D1 src=3D172.31.=
-9.167:5445 dst=3D172.31.9.166:37113 tos=3D0 pd.id=3D0 qp_type=3DRC send_wr=
-=3D867 recv_wr=3D255 qp_num=3D1 rc=3D0
-> >>    <...>-6283 [001] 381.686172: cm_qp_destroy: cm.id=3D1 src=3D172.31.=
-9.167:5445 dst=3D172.31.9.166:37113 tos=3D0 qp_num=3D1
-> >>
-> >> Before we only saw the first line.
-> >>
-> >> Cc: Namjae Jeon <linkinjeon@kernel.org>
-> >> Cc: Steve French <stfrench@microsoft.com>
-> >> Cc: Sergey Senozhatsky <sergey.senozhatsky@gmail.com>
-> >> Cc: Hyunchul Lee <hyc.lee@gmail.com>
-> >> Cc: Tom Talpey <tom@talpey.com>
-> >> Cc: linux-cifs@vger.kernel.org
-> >> Fixes: 0626e6641f6b ("cifsd: add server handler for central processing=
- and tranport layers")
-> >> Signed-off-by: Stefan Metzmacher <metze@samba.org>
-> > Applied it to #ksmbd-for-next-next.
-> > Thanks!
-> >
->
+I did some additional experiments with the scenarios we were
+discussing (eg.  "ls /mnt/ ; touch /mnt/newfile ; ls /mnt") and
+although your fix addresses the problem it seems more performance
+regressive than needed.   A smaller version of it that I tried worked
+fine.   See below (removes the apparently unneededd
+"close_cached_dir")
+
+diff --git a/fs/smb/client/dir.c b/fs/smb/client/dir.c
+index 1c6e5389c51f..fc5a2d7ec4f6 100644
+--- a/fs/smb/client/dir.c
++++ b/fs/smb/client/dir.c
+@@ -190,6 +190,7 @@ static int cifs_do_create(struct inode *inode,
+struct dentry *direntry, unsigned
+        int disposition;
+        struct TCP_Server_Info *server = tcon->ses->server;
+        struct cifs_open_parms oparms;
++       struct cached_fid *parent_cfid = NULL;
+        int rdwr_for_fscache = 0;
+        __le32 lease_flags = 0;
+
+@@ -313,10 +314,10 @@ static int cifs_do_create(struct inode *inode,
+struct dentry *direntry, unsigned
+        if (!tcon->unix_ext && (mode & S_IWUGO) == 0)
+                create_options |= CREATE_OPTION_READONLY;
+
++
+ retry_open:
+        if (tcon->cfids && direntry->d_parent && server->dialect >=
+SMB30_PROT_ID) {
+-               struct cached_fid *parent_cfid;
+-
++               parent_cfid = NULL;
+                spin_lock(&tcon->cfids->cfid_list_lock);
+                list_for_each_entry(parent_cfid, &tcon->cfids->entries, entry) {
+                        if (parent_cfid->dentry == direntry->d_parent) {
+@@ -327,6 +328,7 @@ static int cifs_do_create(struct inode *inode,
+struct dentry *direntry, unsigned
+                                        memcpy(fid->parent_lease_key,
+                                               parent_cfid->fid.lease_key,
+                                               SMB2_LEASE_KEY_SIZE);
++                                       parent_cfid->dirents.is_valid = false;
+                                }
+                                break;
+                        }
+@@ -355,6 +357,10 @@ static int cifs_do_create(struct inode *inode,
+struct dentry *direntry, unsigned
+                }
+                goto out;
+        }
++
++       /* if (parent_cfid && !parent_cfid->dirents.is_valid)
++               close_cached_dir(parent_cfid); */
++
+        if (rdwr_for_fscache == 2)
+                cifs_invalidate_cache(inode, FSCACHE_INVAL_DIO_WRITE);
+
+
+I also noticed that this does relate to an xfstest (that should have
+caught it if we were running) generic/637 which seems to test exactly
+this scenario.  I will add generic/637 to our regression test
+('buildbot', and have already added it for tests to Samba since it now
+has dir lease support) so we won't miss regressions like this in the
+future.
+
+Also another unrelated thing I noticed, probably server bug in Samba,
+was that the scenario   "ls /mnt ; (go to server) create file1 ; (go
+back to client) "ls /mnt"   was also not showing the new file (and
+clearly should have) due to Samba server not sending a lease break on
+local file creation - so Samba server has a directory lease bug (not
+hanging an inotify on the directory to note new files being added
+locally).
+
+
+
+-- 
+Thanks,
+
+Steve
 
