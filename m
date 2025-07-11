@@ -2,76 +2,75 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 18056B01006
-	for <lists+samba-technical@lfdr.de>; Fri, 11 Jul 2025 02:02:21 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BA78EB02625
+	for <lists+samba-technical@lfdr.de>; Fri, 11 Jul 2025 23:11:13 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=D2Vjdv6qb/yD7HIfMrxbOy5cqFeySwJ2HZWcVIx+IOA=; b=GSnygM5zwhcM9hE4uFGVMH0qfr
-	Rt1DXN2LyLeaxWbby+yaZ6dAToDnQPLiJqS7Z4R43B7NxNCTfsTXPzH3Xb2U0lmWXNxbDOEKVnMO/
-	GfYLdqUXH6aY82dDNGVbud+TkBXsjyJU1Ac4f4/3/yDfZITQgWLeYJbXYsNalzpiVLmnylGjjeGS+
-	eKtsxHmy4AIsATv5JYsgwX1i9C3iqdy3m+jiRKPX4Jaw0wf1SFI4KHommypXJfhwf3Ja1wJ4/PhEE
-	TAqbwvR4d3k0+dYKSLm8n96G35R7rcSh7drLSiU36SubAEFWB8tfUtakY9mtjd9AheAWzBDsprsWl
-	l0I4jaJg==;
-Received: from ip6-localhost ([::1]:45172 helo=hr1.samba.org) 
+	bh=xLDzATH4FKHBUEL/4pNBiM+c+Pl7nhhwFN3kf38HDms=; b=OIQ5AAbaJxl23txfFRQ9+Nqgsy
+	NmNRd6SM1Z3hUe7Jo6j4HN03P1YSGiwhX87izRcGzmdRmYVg6MNjfLCm+QtvKUBsaO7bSwH30tPkg
+	7QEHlm6oNBk/UsONiTramF6xdNYfI/Vgfh7t2w7YOGZwxqQ2+W7y6VNqCOoiod2VfXglIOstA/ucU
+	5UY7qE2caisS2vED2DDQq1PTvHMKUSvK57J4LszXkuRhUzZ+Grs0xFQXMKF1niXzIUaXR8/GOr49x
+	9nF0LOof2aUnZXnILOVhvi0P+2mqzgnEp+aMaU/xKlVrBcO7Cj0ioITHIxNkjsB+TlVM7fDJC5LIU
+	++KSM2bg==;
+Received: from ip6-localhost ([::1]:56142 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1ua1Cy-00AxVw-3j; Fri, 11 Jul 2025 00:01:44 +0000
-Received: from mail-oa1-x30.google.com ([2001:4860:4864:20::30]:59547) 
+	id 1uaL0q-00B0WM-Od; Fri, 11 Jul 2025 21:10:32 +0000
+Received: from mail-qv1-xf2a.google.com ([2607:f8b0:4864:20::f2a]:56583) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1ua1Cs-00AxVp-MS
- for samba-technical@lists.samba.org; Fri, 11 Jul 2025 00:01:41 +0000
-Received: by mail-oa1-x30.google.com with SMTP id
- 586e51a60fabf-2eff5d1c7efso977618fac.2
- for <samba-technical@lists.samba.org>; Thu, 10 Jul 2025 17:01:38 -0700 (PDT)
+ (Exim) id 1uaL0k-00B0WF-Vf
+ for samba-technical@lists.samba.org; Fri, 11 Jul 2025 21:10:30 +0000
+Received: by mail-qv1-xf2a.google.com with SMTP id
+ 6a1803df08f44-6facf4d8e9eso23178696d6.1
+ for <samba-technical@lists.samba.org>; Fri, 11 Jul 2025 14:10:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1752192094; x=1752796894; darn=lists.samba.org;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=UOlgRew0JxYvvkq1FH7VOS2J6OyoGpuXhptV8QxCyLA=;
- b=jw1DJeuBKRDNBWgXpoUfNnuToftaQzxfNwbGlUsCuSGq0/U/XRbCqF5BNPXHL2RRb1
- XwehfU2zRzStp3rnI3itp9Zqfn7IIAXXEWfaSEJzyu4iwbHbjxthioYLWS2YNAcv2IWU
- dMjhuXl6jTYpYVc9TCnUaQhlaRc2OYDN3aMT2M8vI1UMB0J9zgKYhcOxX/6tZ0HojIy1
- t5YBoL2JE4omgr12wv2GYq6gZXvqCc+PFSPgnpEpjkfeqYOp3nBOuDY2ukf5f5b5CR7s
- nRaXI6ui9saXgeEF6JYNNarhGznrfSFvjXrUSwSxnE9trcma8Jga+dnPQSnCUvO0Tpbk
- zL2A==
+ d=gmail.com; s=20230601; t=1752268225; x=1752873025; darn=lists.samba.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=xLDzATH4FKHBUEL/4pNBiM+c+Pl7nhhwFN3kf38HDms=;
+ b=neiFHfggBwhGqeQSVRPjNd60oV4eFCumXLFA6QZ8cDHgHMcey3WzE8RCscj2m4kWfj
+ EBdUwXESfuWR0TQCkL5kOs3mupoHzXc6qSCvcYhGv3KFpUNeLxbFrzd53eTGmwVhdj6b
+ iR6A3dn4uCawraP5QIBN5MXk2DLm7VBNSzhoO20xsO0A4PxplSX2wRmdLftnMEBmRnwe
+ YK4cXiYZISP206XEyMHTjEopZFJy9Emdu9v68/U4jmBG4MGkhTG4svIx3OFkT01NJxvC
+ Ums6HA2eIVdVnIj80txdn+GJeuPEL7oMpxEd1RRPE1jxT0GbLnwRJYWbfLnWOHLUFn7B
+ 4nNQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1752192094; x=1752796894;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=UOlgRew0JxYvvkq1FH7VOS2J6OyoGpuXhptV8QxCyLA=;
- b=QFNqn23YBlz1PAcaUZ7mugIQRkWtikzY6P7I7b0w19LK8d6tD9wpe6rUle9LB2WT4i
- bB5rG3PI7bUp8PrJlr4ztZN+5yBuZLqUj4cKWkBDQj5DEDBFmYAFKpEpTupRacXyPdDs
- BvYksnOBPlpia1eTsW9UzM8mYA0wnwyl4d/G3lN71VCRx/zdD2BTqk+uMdlkxbf8T1Mr
- sjuk9e+k2sbH1aYqTmWwWFHBd7O5oe4mlFj7ziceQzhV3qT0p8dq4OE/MYCgLtOQnQjQ
- McuFB8iSf1yt3ha76/dDNtQ6TsnZQKA7tFF3ClhvrUlV7+719C8kSn37DwTNpyJITh3o
- KjbQ==
+ d=1e100.net; s=20230601; t=1752268225; x=1752873025;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=xLDzATH4FKHBUEL/4pNBiM+c+Pl7nhhwFN3kf38HDms=;
+ b=LebWTN+mNm/yGtR8nFIxYMowq9T0BuQcMg/88Ng61YuiawgeXGb2LAoCXD7apti155
+ qCWqB+AoH+FLtVbmRkMwA80w52Z8QroDdJeUhmq5nby5/9C00B3ONNhk0Z6csduQx7nO
+ k4se5PGMhj9TSMLp2zhr79fo1bwuplHkY3kn3XdhXOcF7nJAaRuVj+3v1Q0Tr6UeuS3y
+ nlz6beX8LIwwVZXmE0Ea+mnP5xsc82qtcAFyPar4hOBsyyJQ8lMZjotcCuUBRLI0W6oL
+ aTpyZOA11gmXqrcBSq6yMaFiMQvIsNEf+AJePJuFwsvI2Z1y8ArHe2ZT+V10XBXnZ4b2
+ fRkg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW0q7R06ImqPFxQuv91sS2xDicSg7WFy1CiLV8uCIpK5deYUX8QPMIMIFdcRl7tGNrfmAV6Q/La2biEb2vEuBM=@lists.samba.org
-X-Gm-Message-State: AOJu0YyTKxFkezA2pW19vNg/0Ai3dBWWMhgpnqZt5SOGFH+mFGIk7nuy
- cuHB7+7dDLQSvBvVVqcY76qn7YqU2599OwBh8j2QhQvFWvvYL9WHErp0v5jwJb0hdZV3D+WIWCq
- OabuhhmLXwD3dkCw1ITaZ8D19IP7wUgE=
-X-Gm-Gg: ASbGncsUw8QWtmyAPliKpme+l6YE5jGgDU8kJaJt66itw3fX5FuhQqoDCWX+ALcgV98
- +Zxd1AV0ATEVnEKEfdgzLG7FZl6x9lurvECVYNEAHzlidb/hEiTLA46Pw2ASL+BYenlKPU8RGzn
- mR0XWguR15oW46C3C71Mx9TM4ZUlTSagbn1rGLM+e0pUk+7UHC7f2tAtV9V6Y43gLHexO1IPbcn
- oqtDLUa5kPG4ZyEfyh/OHS3WkUIrqpY/yLJyO8=
-X-Google-Smtp-Source: AGHT+IHy5Of0Q0N8K/o/1xqMf6hAkfmIroTlna2a3sHaEsOuQS7zTbJpw0IQ8jk58gIVzt9BMdKMrBgKYKuJqPJM0SA=
-X-Received: by 2002:a05:6870:bb16:b0:2c1:6948:d57c with SMTP id
- 586e51a60fabf-2ff270740a5mr885059fac.28.1752192093981; Thu, 10 Jul 2025
- 17:01:33 -0700 (PDT)
+ AJvYcCVQcoOziHKbczp7YmuHaNeLrHj3Qk5Z1JGImvDcomreCP917R76mXXjYbjRtRzaNJzI+56jEfjkI2wiKpbPrDg=@lists.samba.org
+X-Gm-Message-State: AOJu0Yxp8YomRn17is48kzCueB0lwQL5X6R0gZXtMlvCSTiQgII57sbJ
+ 9Sr/JG2K4+HhqAsmVoJzWkq36H81QNPO9bEoen4Aj5iRp9GBbfWs5My25rLAYUTG2Wh4YPl+M1P
+ 0svsNKEo8cXxtUCHHFMFByx4RRi5oAQY=
+X-Gm-Gg: ASbGncvMbK0lkciTiI9uTSCDKTVkKDU8gIjqBOy7HOS98Xj7SAzaffDZ135bDeE8uAv
+ ps+2UoYp1tuomrMjHNi78dPSX6OENrx+pC1LtOpn8tcgtZZKliGgjtwRajGuzB91kAnf23PuuCF
+ aBY6+Zn65Umg6JlO94S7sWyOP1ZIRzwx0JyKTxMiybgUuuOPGBNVZNGKMcxzEZwBnnWSW6uUfHC
+ zqJm6SO1xNjS0oPm1RETgDVCxqck+d8h5QAE0ugLCQcCHpr2A==
+X-Google-Smtp-Source: AGHT+IGaCiQ/rNrz/LTBHwnUjiK0A45Q2lEw4u3i7emCz70wt24LnSCWlVSIxry4sdILfJa0MeDniDQMMJEm/jOlAP0=
+X-Received: by 2002:a05:6214:2c08:b0:704:9077:e0c8 with SMTP id
+ 6a1803df08f44-704a4083edemr98468236d6.3.1752268224779; Fri, 11 Jul 2025
+ 14:10:24 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250705025118.48080-1-wangzhaolong@huaweicloud.com>
- <bb5dba5b431172ae8b268470d6e37419@manguebit.org>
-In-Reply-To: <bb5dba5b431172ae8b268470d6e37419@manguebit.org>
-Date: Thu, 10 Jul 2025 19:01:21 -0500
-X-Gm-Features: Ac12FXz95EOcjBNe65Q2YRjuVNVHyWG8MIyRH_tlHeKdsd-2fwByFxVDDjNpNOs
-Message-ID: <CAH2r5mtF8WNQbZqg+f1AB_2CiuK1-U3e65v8RnYJMNMAPFX+hg@mail.gmail.com>
-Subject: Re: [PATCH] smb: client: fix use-after-free in crypt_message when
- using async crypto
+References: <20250707010926.31623-1-wangzhaolong@huaweicloud.com>
+ <aa4ecd85deb859ad32ba7f649321084b@manguebit.org>
+In-Reply-To: <aa4ecd85deb859ad32ba7f649321084b@manguebit.org>
+Date: Fri, 11 Jul 2025 16:10:13 -0500
+X-Gm-Features: Ac12FXyAPNKfVjaJoQLVk1wqbZqeW-9qtvUVFWqZQkbPbxcmN6B9JWqQFqrRpM8
+Message-ID: <CAH2r5mukjH30zhxGTiJmvfRYJEFgsTd-U+CpwmYs=7aUJPS1=g@mail.gmail.com>
+Subject: Re: [PATCH V2] smb: client: fix use-after-free in cifs_oplock_break
 To: Paulo Alcantara <pc@manguebit.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -87,73 +86,70 @@ List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
 From: Steve French via samba-technical <samba-technical@lists.samba.org>
 Reply-To: Steve French <smfrench@gmail.com>
-Cc: linux-cifs@vger.kernel.org, yi.zhang@huawei.com, ematsumiya@suse.de,
- Wang Zhaolong <wangzhaolong@huaweicloud.com>, samba-technical@lists.samba.org,
- linux-kernel@vger.kernel.org, sfrench@samba.org, wangzhaolong1@huawei.com,
- chengzhihao1@huawei.com, yangerkun@huawei.com
+Cc: linux-cifs@vger.kernel.org, Wang Zhaolong <wangzhaolong@huaweicloud.com>,
+ samba-technical@lists.samba.org, aaptel@suse.com, linux-kernel@vger.kernel.org,
+ sfrench@samba.org, pshilov@microsoft.com
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-merged into cifs-2.6.git for-next pending more testing
+Good catch.  I had missed the patch because it was tagged by gmail as 'spam=
+'
 
-On Thu, Jul 10, 2025 at 6:19=E2=80=AFPM Paulo Alcantara <pc@manguebit.org> =
+Merged into cifs-2.6.git for-next
+
+
+On Fri, Jul 11, 2025 at 9:50=E2=80=AFAM Paulo Alcantara <pc@manguebit.org> =
 wrote:
-
+>
 > Wang Zhaolong <wangzhaolong@huaweicloud.com> writes:
 >
-> > The CVE-2024-50047 fix removed asynchronous crypto handling from
-> > crypt_message(), assuming all crypto operations are synchronous.
-> > However, when hardware crypto accelerators are used, this can cause
-> > use-after-free crashes:
+> > A race condition can occur in cifs_oplock_break() leading to a
+> > use-after-free of the cinode structure when unmounting:
 > >
-> >   crypt_message()
-> >     // Allocate the creq buffer containing the req
-> >     creq =3D smb2_get_aead_req(..., &req);
+> >   cifs_oplock_break()
+> >     _cifsFileInfo_put(cfile)
+> >       cifsFileInfo_put_final()
+> >         cifs_sb_deactive()
+> >           [last ref, start releasing sb]
+> >             kill_sb()
+> >               kill_anon_super()
+> >                 generic_shutdown_super()
+> >                   evict_inodes()
+> >                     dispose_list()
+> >                       evict()
+> >                         destroy_inode()
+> >                           call_rcu(&inode->i_rcu, i_callback)
+> >     spin_lock(&cinode->open_file_lock)  <- OK
+> >                             [later] i_callback()
+> >                               cifs_free_inode()
+> >                                 kmem_cache_free(cinode)
+> >     spin_unlock(&cinode->open_file_lock)  <- UAF
+> >     cifs_done_oplock_break(cinode)       <- UAF
 > >
-> >     // Async encryption returns -EINPROGRESS immediately
-> >     rc =3D enc ? crypto_aead_encrypt(req) : crypto_aead_decrypt(req);
+> > The issue occurs when umount has already released its reference to the
+> > superblock. When _cifsFileInfo_put() calls cifs_sb_deactive(), this
+> > releases the last reference, triggering the immediate cleanup of all
+> > inodes under RCU. However, cifs_oplock_break() continues to access the
+> > cinode after this point, resulting in use-after-free.
 > >
-> >     // Free creq while async operation is still in progress
-> >     kvfree_sensitive(creq, ...);
+> > Fix this by holding an extra reference to the superblock during the
+> > entire oplock break operation. This ensures that the superblock and
+> > its inodes remain valid until the oplock break completes.
 > >
-> > Hardware crypto modules often implement async AEAD operations for
-> > performance. When crypto_aead_encrypt/decrypt() returns -EINPROGRESS,
-> > the operation completes asynchronously. Without crypto_wait_req(),
-> > the function immediately frees the request buffer, leading to crashes
-> > when the driver later accesses the freed memory.
-> >
-> > This results in a use-after-free condition when the hardware crypto
-> > driver later accesses the freed request structure, leading to kernel
-> > crashes with NULL pointer dereferences.
-> >
-> > The issue occurs because crypto_alloc_aead() with mask=3D0 doesn't
-> > guarantee synchronous operation. Even without CRYPTO_ALG_ASYNC in
-> > the mask, async implementations can be selected.
-> >
-> > Fix by restoring the async crypto handling:
-> > - DECLARE_CRYPTO_WAIT(wait) for completion tracking
-> > - aead_request_set_callback() for async completion notification
-> > - crypto_wait_req() to wait for operation completion
-> >
-> > This ensures the request buffer isn't freed until the crypto operation
-> > completes, whether synchronous or asynchronous, while preserving the
-> > CVE-2024-50047 fix.
-> >
-> > Fixes: b0abcd65ec54 ("smb: client: fix UAF in async decryption")
-> > Link:
-> https://lore.kernel.org/all/8b784a13-87b0-4131-9ff9-7a8993538749@huaweicl=
-oud.com/
-> > Cc: stable@vger.kernel.org
+> > Link: https://bugzilla.kernel.org/show_bug.cgi?id=3D220309
+> > Fixes: b98749cac4a6 ("CIFS: keep FileInfo handle live during oplock bre=
+ak")
 > > Signed-off-by: Wang Zhaolong <wangzhaolong@huaweicloud.com>
 > > ---
-> >  fs/smb/client/smb2ops.c | 7 ++++++-
-> >  1 file changed, 6 insertions(+), 1 deletion(-)
+> >  fs/smb/client/file.c | 10 +++++++++-
+> >  1 file changed, 9 insertions(+), 1 deletion(-)
 >
 > Reviewed-by: Paulo Alcantara (Red Hat) <pc@manguebit.org>
 >
->
+
 
 --=20
 Thanks,
 
 Steve
+
