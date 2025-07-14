@@ -2,40 +2,40 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 47C30B03678
-	for <lists+samba-technical@lfdr.de>; Mon, 14 Jul 2025 08:02:30 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DB173B03957
+	for <lists+samba-technical@lfdr.de>; Mon, 14 Jul 2025 10:23:58 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=AqpX7lN/Shu69jCJQIRcNfuz3xVwedws5uKQ2Zo9uqA=; b=V2XnQiFYTm0TDCCgmt1oANzPvy
-	UOTVDHcLlelJcrBx06ezpkXX/r2UpZUY3UGm4nDLhXQbJQ7uHNs0wl0j5WZD75x1S5PfmOLINfG9x
-	BVDKSXuEoeD/r1Lrzei1a09w9D9yxA6uJXJY5JH6wW/VUpYrenRPPZIZCOERM72nnkU9tomc2Nwr9
-	+Y/2mbn3r+fAyJyWrTfNJFiSKLtwVGwNEzI1cXR5DRnuwuXf4BNljU6xMkNZlHdF0b1NuGhfqhrQ5
-	SPu6ohalrot896PDZLPLdz07hHqwRDiDt3Bv9JQEQ/Ye/nT9GR4YeVlGFdhc+btp9M2DEzYGhy4P0
-	wEKPaujA==;
-Received: from ip6-localhost ([::1]:59602 helo=hr1.samba.org) 
+	bh=x4YzWj4GqVdDA0sKrEqc2L64WaPLS/TaCaQCEn1PqHA=; b=tZPD8mWEbLyjcP2BRWocf1rfCr
+	ZcI0A3/GJ0sY3ccerPeXrOqSPy79UHH6QaFE7Vg44go7x6JxhcaLBKRhoY/GtR0pM+k61DsuJN0Yt
+	pXWAkQIX0/jcS6vVP23waXSvkx6YF3KHUwi3YjkHSKHA96OLdbfcP2vXhXlAce89z0sQkBtzYP8UD
+	sNWFIEFArP3BMOKeHYUFDyMqGBasMkv5xmzowEMqkjpefvkyAB7dL4va0ipQXgj9zjX3O+DOr2/Rg
+	Ce1WVZ4BoVTO/ekZvpNCamyoklkdchzjbfjsUOg6YkTYD3J9+vZDd44F7Ntuh9J5ekMG/FRZxyvcx
+	PkFtyv4w==;
+Received: from ip6-localhost ([::1]:52064 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1ubCG5-00B6hs-81; Mon, 14 Jul 2025 06:01:49 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:20720) 
+	id 1ubET6-00B7BL-NS; Mon, 14 Jul 2025 08:23:25 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:32110) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1ubCG0-00B6hl-TU
- for samba-technical@lists.samba.org; Mon, 14 Jul 2025 06:01:47 +0000
+ (Exim) id 1ubET2-00B7BE-2b
+ for samba-technical@lists.samba.org; Mon, 14 Jul 2025 08:23:22 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=From:Cc:To:Date:Message-ID;
- bh=AqpX7lN/Shu69jCJQIRcNfuz3xVwedws5uKQ2Zo9uqA=; b=Q/+8+H2zluNbRGYD0YVB9CkVDZ
- pSM1vxvLjz9KAnVK1r783975PyAKxDlUxzXxBkxm611FqmxpCgJS9qRPehAt/hV/FuSR1ydI1XPJq
- ftM0P2A05MTIHxRQcsw00dd1PFtxHRNAqg1dh3JaStW800SWhk7rEJ1OonlgyKoyKN7N36e20pyEl
- fDZr0M+MGKFmKa8YAnz9Q5Quqcyvb8m+ISY7PBXEM5nQfc2psBV4+XEDU9AhVw9NaEHQANVbPZ1oQ
- Ox5hf/tmWWyf30MEQ3Ow8hvc9m2D3Dr7GqD7XoJLlkVMwJKBG4W2+RwQG/BJJcZwCS2KyI8YHpmFn
- R6ZRUorwOP7dozYiAgOKfAsU+6U2KHO7Mq/IcX8af335Vxw0LacKIM8n9rn3ofMK2UTM0uGOx+n2g
- bw+kdq+Vq2tQapIuaeoNBvSkK0d6t6PpJfbnudRAmBPVmymPi0vxAl3HOCD3ZiUSzB2VO/MCXl+0m
- FCw4WvdsMh6fv5MHWaNrnao4;
+ s=42; h=Cc:To:From:Date:Message-ID;
+ bh=x4YzWj4GqVdDA0sKrEqc2L64WaPLS/TaCaQCEn1PqHA=; b=fMrcMHYws1P00w4C2BKDQQJ89r
+ oqT2GnL9dA2l46c7gWF+gmo7RuEX5GNvJEe+Jl25GQhjLlZhET8mHKOg0d/p4mz9WmsEXi6Gq1Or4
+ otVc33nW0jX4cQvGUrPxUNFElfGUwoR53gJTzYAhFMHp2ufYAw2PBpyTq/1Cc1VwBlFC4Kzo+Akw6
+ wJGYoXk/+3RrRF9n0PHAPD3rhZ6TqzjeVRQKAY3gjr/SeU1/KpPEsFrYPfwCDiaWRGGzIuXwPsJk9
+ DZKGN6ZYhpXZUosTB9GofiuNqA/0Qsg42EwvO1yd50FexeEkevoQhzNh8WVrlWU3bK0tQyMNcIk5m
+ NrN/f1y42QdncGC94km4xP31yHkdubZPzBRUZRSp/4o6m2w8atZfbsKUFxax1/J+iXvLx62fSfBge
+ hjTkU7RH4oDyTngWloJl4UyL8oDNwn2T/NAV76e6QngdOtjvDtVFeg9tHwluqAeQ7rxmTZ1nmJUPk
+ A+NgquMDJsnDjnPu9qJruuW2;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1ubCFy-00FGSt-2F; Mon, 14 Jul 2025 06:01:42 +0000
-Message-ID: <42e549c1-0f92-4b95-b62b-3e0efab9aa10@samba.org>
-Date: Mon, 14 Jul 2025 08:01:40 +0200
+ (Exim) id 1ubET0-00FHte-2D; Mon, 14 Jul 2025 08:23:18 +0000
+Message-ID: <5519b2d9-600c-4a3f-b44f-594877417df7@samba.org>
+Date: Mon, 14 Jul 2025 10:23:17 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: Samba support for creating special files (via reparse points)
@@ -44,11 +44,12 @@ To: Jeremy Allison <jra@samba.org>, Steve French <smfrench@gmail.com>,
 References: <CAH2r5muQGDkaHL78JOcgsfjL_=A64Xm9CrCBSKgOMABOjcg44w@mail.gmail.com>
  <CAH2r5msdLbvGMARXJ=V9wt0pvXJOrc=zh3eUfeF9AXEeshtByg@mail.gmail.com>
  <aHRo9VfMDIfK5MR6@jeremy-HP-Z840-Workstation>
+ <42e549c1-0f92-4b95-b62b-3e0efab9aa10@samba.org>
 Content-Language: en-US, de-DE
-In-Reply-To: <aHRo9VfMDIfK5MR6@jeremy-HP-Z840-Workstation>
+In-Reply-To: <42e549c1-0f92-4b95-b62b-3e0efab9aa10@samba.org>
 Content-Type: multipart/signed; micalg=pgp-sha256;
  protocol="application/pgp-signature";
- boundary="------------0qp0LvcipNDGpKGzY0hDN7v0"
+ boundary="------------0Y1Q7M3zbH6bM0Gmi9RkPc1V"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -71,8 +72,8 @@ Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
 This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------0qp0LvcipNDGpKGzY0hDN7v0
-Content-Type: multipart/mixed; boundary="------------4Vk7oR8trxPVmUfrc0Oa0UR0";
+--------------0Y1Q7M3zbH6bM0Gmi9RkPc1V
+Content-Type: multipart/mixed; boundary="------------PULKC1GUuxdIF2FZOcmCoZCN";
  protected-headers="v1"
 From: Ralph Boehme <slow@samba.org>
 To: Jeremy Allison <jra@samba.org>, Steve French <smfrench@gmail.com>,
@@ -80,12 +81,13 @@ To: Jeremy Allison <jra@samba.org>, Steve French <smfrench@gmail.com>,
 Cc: samba-technical <samba-technical@lists.samba.org>,
  =?UTF-8?Q?Pali_Roh=C3=A1r?= <pali@kernel.org>,
  Paulo Alcantara <pc@manguebit.org>, CIFS <linux-cifs@vger.kernel.org>
-Message-ID: <42e549c1-0f92-4b95-b62b-3e0efab9aa10@samba.org>
+Message-ID: <5519b2d9-600c-4a3f-b44f-594877417df7@samba.org>
 Subject: Re: Samba support for creating special files (via reparse points)
 References: <CAH2r5muQGDkaHL78JOcgsfjL_=A64Xm9CrCBSKgOMABOjcg44w@mail.gmail.com>
  <CAH2r5msdLbvGMARXJ=V9wt0pvXJOrc=zh3eUfeF9AXEeshtByg@mail.gmail.com>
  <aHRo9VfMDIfK5MR6@jeremy-HP-Z840-Workstation>
-In-Reply-To: <aHRo9VfMDIfK5MR6@jeremy-HP-Z840-Workstation>
+ <42e549c1-0f92-4b95-b62b-3e0efab9aa10@samba.org>
+In-Reply-To: <42e549c1-0f92-4b95-b62b-3e0efab9aa10@samba.org>
 Autocrypt-Gossip: addr=jra@samba.org; keydata=
  xsDiBDxEcLsRBADMQzpWoVuu4oiq23q5AfZDbakENMP/8ZU+AnzqzGr70lIEJb2jfcudViUT
  97+RmXptlnDmE4/ILOf6w0udMlQ9Jpm+iqxbr35D/6qvFgrgE+PnNAPlKSlI2fyGuLhpv1QP
@@ -105,40 +107,65 @@ Autocrypt-Gossip: addr=jra@samba.org; keydata=
  3CTq9sJGBBgRAgAGBQI8RHC+AAoJEKXdeEnWwDasbeIAoL6+EsZKAYrZ2w22A6V67tRNGOIe
  AJ0cV9+pk/vqEgbv8ipKU4iniZclhg==
 
---------------4Vk7oR8trxPVmUfrc0Oa0UR0
+--------------PULKC1GUuxdIF2FZOcmCoZCN
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: base64
 
-T24gNy8xNC8yNSA0OjE4IEFNLCBKZXJlbXkgQWxsaXNvbiB3cm90ZToNCj4gSXQncyBhbiBv
-dmVyc2lnaHQgSSdtIGFmcmFpZC4NCg0KaG0uLi4gaXQgc2VlbXMgcmVwYXJzZSBwb2ludHMg
-c3VwcG9ydCBpcyBtYW5kYXRvcnkgZm9yIFNNQjMgUE9TSVggc28gSSANCndvbmRlciB3aGF0
-IHRoaXMgYWRkaXRpb25hbCBjaGVja3MgYnV5cyB1cy4NCg0KV2hpbGUgSSBhZ3JlZSB0aGF0
-IGdlbmVyYWxseSB3ZSBzaG91bGQgbGlrZWx5IHNldCB0aGlzLCBmb3IgU01CMyBQT1NJWCAN
-CnRoZSBjbGllbnQgc2hvdWxkIHByb2JhYmx5IG5vdCBjaGVjayB0aGlzIGFuZCB3ZSBzaG91
-bGQga2VlcCBpdCBvdXQgb2YgDQp0aGUgc3BlYy4NCg0KVGhvdWdodHM/DQo=
+T24gNy8xNC8yNSA4OjAxIEFNLCBSYWxwaCBCb2VobWUgdmlhIHNhbWJhLXRlY2huaWNhbCB3
+cm90ZToNCj4gT24gNy8xNC8yNSA0OjE4IEFNLCBKZXJlbXkgQWxsaXNvbiB3cm90ZToNCj4+
+IEl0J3MgYW4gb3ZlcnNpZ2h0IEknbSBhZnJhaWQuDQo+IA0KPiBobS4uLiBpdCBzZWVtcyBy
+ZXBhcnNlIHBvaW50cyBzdXBwb3J0IGlzIG1hbmRhdG9yeSBmb3IgU01CMyBQT1NJWCBzbyBJ
+IA0KPiB3b25kZXIgd2hhdCB0aGlzIGFkZGl0aW9uYWwgY2hlY2tzIGJ1eXMgdXMuDQo+IA0K
+PiBXaGlsZSBJIGFncmVlIHRoYXQgZ2VuZXJhbGx5IHdlIHNob3VsZCBsaWtlbHkgc2V0IHRo
+aXMsIGZvciBTTUIzIFBPU0lYIA0KPiB0aGUgY2xpZW50IHNob3VsZCBwcm9iYWJseSBub3Qg
+Y2hlY2sgdGhpcyBhbmQgd2Ugc2hvdWxkIGtlZXAgaXQgb3V0IG9mIA0KPiB0aGUgc3BlYy4N
+Cg0Kb25lIGFkZGl0aW9uYWwgdGhvdWdodDogaXQgc2VlbXMgbGlrZSBhIHZhbGlkIHNjZW5h
+cmlvIHRvIGJlIGFibGUgdG8gDQpzdXBwb3J0IFNNQjMgUE9TSVggb24gYSBzZXJ2ZXIgdGhh
+dCBkb2VzIG5vdCBzdXBwb3J0IHhhdHRycyBvbiB0aGUgDQpiYWNraW5nIGZpbGVzeXN0ZW0g
+YW5kIGhlbmNlIG1heSBub3QgaGF2ZSBhIHdheSBvZiBzdG9yaW5nIGFyYml0cmFyeSANCnJl
+cGFyc2UgcG9pbnRzLg0KDQpJbiBTTUIzIFBPU0lYIHdlJ3JlIGp1c3QgdXNpbmcgdGhlbSBh
+cyBhIHdpcmUgdHJhbnNwb3J0LCBub3QgbmVjZXNzYXJpbHkgDQpleHBlY3RpbmcgZnVsbCBz
+dXBwb3J0IGZyb20gdGhlIHNlcnZlci4NCg0KSGVuY2UsIGZvciBTYW1iYSBJIHNlZSB0aGUg
+Zm9sbG93aW5nIGNoYW5nZQ0KDQogICAgIHNtYmQ6IGFubm91bmNlIHN1cHBvcnQgZm9yIEZJ
+TEVfU1VQUE9SVFNfUkVQQVJTRV9QT0lOVFMgaWYgdGhlIA0Kc2hhcmUgc3VwcG9ydHMgRUFz
+DQotLS0NCiAgc291cmNlMy9zbWJkL3Zmcy5jIHwgMyArKysNCiAgMSBmaWxlIGNoYW5nZWQs
+IDMgaW5zZXJ0aW9ucygrKQ0KDQpkaWZmIC0tZ2l0IGEvc291cmNlMy9zbWJkL3Zmcy5jIGIv
+c291cmNlMy9zbWJkL3Zmcy5jDQppbmRleCA3Njg5NWY1MmUwMzkuLmVhM2ZhNGM4Nzg0ZiAx
+MDA2NDQNCi0tLSBhL3NvdXJjZTMvc21iZC92ZnMuYw0KKysrIGIvc291cmNlMy9zbWJkL3Zm
+cy5jDQpAQCAtMTM0NSw2ICsxMzQ1LDkgQEAgdWludDMyX3QgdmZzX2dldF9mc19jYXBhYmls
+aXRpZXMoc3RydWN0IA0KY29ubmVjdGlvbl9zdHJ1Y3QgKmNvbm4sDQogICAgICAgICBpZiAo
+bHBfbnRfYWNsX3N1cHBvcnQoU05VTShjb25uKSkpIHsNCiAgICAgICAgICAgICAgICAgY2Fw
+cyB8PSBGSUxFX1BFUlNJU1RFTlRfQUNMUzsNCiAgICAgICAgIH0NCisgICAgICAgaWYgKGxw
+X2VhX3N1cHBvcnQoU05VTShjb25uKSkpIHsNCisgICAgICAgICAgICAgICBjYXBzIHw9IEZJ
+TEVfU1VQUE9SVFNfUkVQQVJTRV9QT0lOVFM7DQorICAgICAgIH0NCg0KICAgICAgICAgY2Fw
+cyB8PSBscF9wYXJtX2ludChTTlVNKGNvbm4pLCAic2hhcmUiLCAiZmFrZV9mc2NhcHMiLCAw
+KTsNCg0KaHR0cHM6Ly9naXRsYWIuY29tL3NhbWJhLXRlYW0vc2FtYmEvLS9tZXJnZV9yZXF1
+ZXN0cy80MTA0DQoNCkZvciB0aGUgY2xpZW50IHRoaXMgd291bGQgbWVhbiwgaXQgbXVzdCBh
+bGxvdyByZXBhcnNlIHBvaW50cyBmb3IgdGhlIA0Kc3BlY2lhbCBmaWxlcyBpZiBTTUIzIFBP
+U0lYIGlzIG5lZ290aWF0ZWQuDQoNCk1ha2VzIHNlbnNlPw0KDQotc2xvdw0K
 
---------------4Vk7oR8trxPVmUfrc0Oa0UR0--
+--------------PULKC1GUuxdIF2FZOcmCoZCN--
 
---------------0qp0LvcipNDGpKGzY0hDN7v0
+--------------0Y1Q7M3zbH6bM0Gmi9RkPc1V
 Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
 Content-Description: OpenPGP digital signature
 Content-Disposition: attachment; filename="OpenPGP_signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-wsF5BAABCAAjFiEE+uLGCIokJSBRxVnkqh6bcSY5nkYFAmh0nUUFAwAAAAAACgkQqh6bcSY5nkZL
-9Q/9FCx+iZfnDpv4adAZUhhcQLWQf7jzJgALlNXDNQDjDprKNLIs8GCeAn1GbQYN3f/nvw5zryYp
-T85betNYc9Sbq3F5hzFycZD1tj+vRo0VPLBxrjlqVnWl4zjj7XCeYQSd6D4FRaxlYKGE9EKW6vsQ
-FoQGwO1pVOiwZLAQvrTn7c7n0G+aaQPJLjgwkuPoXqCcIBZM0JmG7N1SM9OI7UHSFaKHsjLcfvKq
-ggFkzN8or3XlQ+1+mYffdwb1qfYQm3WCvT3QV09sdBmMhqvnf4uUvL5rvuJDUC6zENXWNWfBfVta
-LbQgj0VUJzYmLZ9+RAu34PbJ8iUZJPY1Jferh565iRtLZBDSRDhLstQ955mwA/dRCGdliTVdFaVN
-o1XJdHAw9+29TWpCe16wzV+yBaSAJ7T1kz/PWwxZiUCyuEZdIYSz082nNS6AwK3N+Pou/m+tJRlT
-bjGgTTRkYv/zlZnEthvX6q2qZDnfwCOnBm4L+e6URSGBzcFJrV0wbnIX/KDgRHvQ3xYre3Hf1DE0
-8NFdblEiQl90+aLZp5n/uYYFvc6WRGbZfY6RNaCiY0mD2tjeB+Xrnkc3uB3S8tyL8yXN+lv1y7af
-ye1dOu7TGQMPKabFZf1PBbJ6sgUk5c1+rk1iIA+h/1Amd5wz4OvGXTSrRZW8cCvMrto9wLaywqXT
-OWA=
-=WI+0
+wsF5BAABCAAjFiEE+uLGCIokJSBRxVnkqh6bcSY5nkYFAmh0vnUFAwAAAAAACgkQqh6bcSY5nkb4
+hQ/+OwWJv4tQ2E72XPRbiPw+Gn8eXRg+sPTqE0nonBgCBBcITdauDiQ1N7RXun91gHbhYuCit6IH
+TKmR8OLSbZKhUw0vIQDApFxPykS3lalhjw4ZYN9AogpFw2HtGtt4/JqIBkSfJHgov2oQ94XW5BTi
+s6c1uoE++p05vzxjY6Mk1Pbwpea708mEmUALnFf2PLwoUgvq8KG92ZM2JglGjsynoW/E7ymvMSwV
+L9L7yH4vJZkaMF2XNrBI1flLvAaSszHNG3XFRuKJ3h8q493uXcrMkg81CwmmLIx4/2IoKVeZdsrf
+SXRYOVPlsxMadLVwBsAi/XawfAfjHripQ2TN0Y4a2RXICceqk+RxzjcpQcjKzCXRENP7014e93XU
+1MMGwfo7eoQd+ir3NB8LWSaHLDRKm1gXoGDlwcg8sx6Kf0mbYULFdyaEJiv7kfamEMI3KV9imyYf
+FCFfkxzlg2gl8oGDydVGvKOvVAg4+O8d6XJzlwIe71Sp1a4HqoPK0ye5mAaBx5jIh+SIXXFan74a
+OnZPuih+dUSaDl+WhW4CLBGo/fwHThIpZbyOYgT13iR7p8CnrpVV6pID9J9nns6GtLU47IrCp1Vp
+iKI1okU5L8UhIPLVVDS73v864jCsAwa500Di/iSPdy2dd8DKd8yZHAkJ4govtIfM5v5a6i92/EKV
+bb0=
+=j+L6
 -----END PGP SIGNATURE-----
 
---------------0qp0LvcipNDGpKGzY0hDN7v0--
+--------------0Y1Q7M3zbH6bM0Gmi9RkPc1V--
 
