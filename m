@@ -2,83 +2,68 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6C6ECB04EE7
-	for <lists+samba-technical@lfdr.de>; Tue, 15 Jul 2025 05:29:50 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C74F7B04F10
+	for <lists+samba-technical@lfdr.de>; Tue, 15 Jul 2025 05:32:18 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=mqEzZsmsg62sBSnAiJWNpUEjORuCe45Qu4nfZgH58IM=; b=wzM5IHiQJtrd2Id3+L2OLogyUU
-	4ONWwhzK4lJe7Dl+ZO79NiWrWZxBCjgXsgvH3Rlyg7H4WJONaQGgt1LiNA+YUHVlrELolYPAriG/V
-	3WxipySOEvQUhvI/LTmxov5xnNub1PbICT7Hs+ezlTn7jppv4F1cuTKFuCLFQwZuKWz/jvDr4mYr9
-	EF12+xmXAr7VmilyhLWOSS1h25u573sIf5CwncoN+skglO4HAQbSc8sR3oSrnWhFQYcQQtYADJWTy
-	9+7OL3o85SufTzhRfa7lP4JzD5016pWSHPInjYL0i8PrT6OlU1xi9Gsx636moZhNN8ly9dKZ5fWGw
-	z/00d8gA==;
-Received: from ip6-localhost ([::1]:51828 helo=hr1.samba.org) 
+	bh=GFmgWQvpMxPBtBq1ucsn2DJRdhKAVc7fWWLoKmb9WvQ=; b=eD5LWWhdSi931z4yZInB6ksKuy
+	NaphtTApD7AJtmkKGnNRhXvpaaOi7Qo5G4a4r4D+nHIoXeU0whjLGEFhed0baRh5K2TVldGIuYyyA
+	CPntieLtGTGs9CPwEqKTkTnVV8yhzj7NfeyStvM2QPM6vSm06wrfw4dF9QHj4lHIK8NVyL2WC5HG7
+	lR3+Y2Vm/2Ffqmf4TJipdDd7/wTqQSu6ACifEjl2GEkiMo5mJRH9utrok61ZCYEhfWp8F2tCUd9VB
+	xGegFFr63TR61Fxk8wNO1YbpkePxdGQI6fl3RKwuY7/610NKEiLzfQutaf2KlMu/IqziVUND50PSk
+	a98oWiKw==;
+Received: from ip6-localhost ([::1]:60974 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1ubWLq-00BELe-Ur; Tue, 15 Jul 2025 03:29:07 +0000
-Received: from mail-qv1-xf31.google.com ([2607:f8b0:4864:20::f31]:49449) 
+	id 1ubWOs-00BER4-4G; Tue, 15 Jul 2025 03:32:14 +0000
+Received: from mail-qk1-x736.google.com ([2607:f8b0:4864:20::736]:49469) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1ubWLj-00BELX-Ub
- for samba-technical@lists.samba.org; Tue, 15 Jul 2025 03:29:04 +0000
-Received: by mail-qv1-xf31.google.com with SMTP id
- 6a1803df08f44-6facacf521eso42882556d6.3
- for <samba-technical@lists.samba.org>; Mon, 14 Jul 2025 20:28:59 -0700 (PDT)
+ (Exim) id 1ubWOo-00BEQx-0w
+ for samba-technical@lists.samba.org; Tue, 15 Jul 2025 03:32:12 +0000
+Received: by mail-qk1-x736.google.com with SMTP id
+ af79cd13be357-7d9eac11358so494540885a.3
+ for <samba-technical@lists.samba.org>; Mon, 14 Jul 2025 20:32:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1752550137; x=1753154937; darn=lists.samba.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=mqEzZsmsg62sBSnAiJWNpUEjORuCe45Qu4nfZgH58IM=;
- b=H4DIm0+DxV42BeIOAJ2/1nYKU9x7Co+kaPuAKFt5neHreOg5aTBUfe9cZxjC1p/8CV
- C2WC66EuSpj718hhwHHmUNtwC4iZQaB+yzzJyd8CZjpnCOdhV61W0b3P5Q80rVlsXhEJ
- dFg6nzUwmTQt1WrtcdtgNvPp9R9oepCrtuhQlhJA+4zh7cubUGCbwBL5ZlMSLz6Bhjta
- hoCP6r644KnJ141IQdplHvwlEZeMFoTKCbHQ/yEXU6w38q2dE4/eJYxGBKxOG4+Q39id
- dzzc4Z9o4txh8XEUSMirPROygilVIEGjCxPgaR3dka5fLGceiEJdgpJAcZxtwAeq0qDW
- yr5w==
+ d=gmail.com; s=20230601; t=1752550328; x=1753155128; darn=lists.samba.org;
+ h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=GFmgWQvpMxPBtBq1ucsn2DJRdhKAVc7fWWLoKmb9WvQ=;
+ b=H8OaXip2fsgVAkMzm0GqrIW6gbWPQnSeklkXXzJoNOwsC3uBl3dGIf/d4YqMGNT1V3
+ yx3p0mzcHNTJsTYtVLnTo9vSy9Rp736SXChvhyhRVUnYF4nWB7SbgsiDctZTRrM9eth0
+ 5VkXhND3ma/E/bPzos3qoZ5csFUk97y3/2fdObnYZpbkbPC5/JNimq8zBIbDRIhWX6HF
+ 0WcMf9oQoHgu2Q12R9xlsCrsXJBR2gW1vXY7D8HrkhjVZoXJdsetAkac9PG4yVYXidIu
+ vazjVjq5YpJ0MmNa915v0RWMrLPOaKE75AoPOhit6Kwplcl7koomK3PiaEKGkC+yrhlC
+ dFJQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1752550137; x=1753154937;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=mqEzZsmsg62sBSnAiJWNpUEjORuCe45Qu4nfZgH58IM=;
- b=qXDVZgzc7yf9muI5qqruskELcNFMHuScxTNtRqyVi5cabAd0GbuULFi5XPQfsd9CvO
- gPsFPZLk2E3YJ9ZEKH/+xeeHb56d5E5mfGea9Q+MiPjUWD4EA26mOp+1myRWR3IiAeXW
- 1Zk/vVYBXkX3lt1SOhIua56C9lPkzTRocms96v+eaOxcTEEV2sdVVydhKiejUYRrQSc7
- 4eSOjlx7hiQVUz0LEkDZCuDih53eApONHD/xPMwX9k6HfP6r+b9CRLgDqZPlwUe/3kd1
- Fr86YwvrQySEyQ64ypwyypkS8MHxzkMuScFnfTrKa7UdB1/61dg6Sx2Yafjc4Grv7G2R
- /gTw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUDEJRkfA4KLqWAuXvCjl55v8TpC/KmWoGwj/GXcqWNosr4Odliv0DJ70bUtLxcVoLrtrcYbPAlUz2voUEw+hE=@lists.samba.org
-X-Gm-Message-State: AOJu0YzOE2QX1lWNUGmpIxG1KGkTXycM/ztYw0M5rtx3N2B8gT6D4t7X
- Ibuf04cjXKkorqGL97Y+j/vk+NBRH9fjcQ0gQTiB/ajFZmLflI80nRdEOxPtWIqzqJYsJOQgAyk
- 6MJHpOh1NSx6Y/c3LO565V+v8lbu0PuXNej9H
-X-Gm-Gg: ASbGnctOFmKYFu+9fxWsYT6+vuSsuaON4CZJ/JeigvMLTjxAPSAZvjjSGD55Rdew5K8
- z/j6RzCuA4Ey3XqlvmHSZC2rTvP7WZRWwHugDqi4wiLW6R0of9raytRonjGHJQp3W1ZvhsSDzlE
- Gza0E2Z0FwRD43xF/8R2KYZbQFNJEk1Xl+2GLDnyQlMrXvuGGUdcvc88h+AreYh69oHozVpkMKW
- flAz3bx1BAFSSnvLcS0cbmcYlunaPvq3Yg0w7fkKA==
-X-Google-Smtp-Source: AGHT+IF0Rn3q1simPIvhbc0vnwA4w5RWqXVNYySOA+fEZKvC427+ra0q/RqsKx1LlesxbDASpcGCRQNR+1Vwd2A95IA=
-X-Received: by 2002:a05:6214:4886:b0:704:89cd:c43d with SMTP id
- 6a1803df08f44-704a3540f3fmr253276826d6.3.1752550136986; Mon, 14 Jul 2025
- 20:28:56 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1752550328; x=1753155128;
+ h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=GFmgWQvpMxPBtBq1ucsn2DJRdhKAVc7fWWLoKmb9WvQ=;
+ b=o/3aaMy+zP4PS3s6tOqlg36bcYtmOnGNlCijQyeidIuRcS6i/DoeDWTuQiDGinPi4V
+ qdOtG9Q37dUtGxAbVZcmtLn9pqoXKhl73/hdWBga3PVCbu2zv5M3mkmUskKjI0iITosC
+ 31tpDoW2qQRUN2T9BDr3uzGZprszqUcM/ZpKiovseCbJCEY2S8HU0t8yilyB4N0Vo9M0
+ US9VO9JzYgvQ+kamnZUt6uHHUGHkj8L0VQqE1lRl86lvF/0wpHkq8fEkxiwo7MO2/xdP
+ f9CVM+iw178rBeTkPXlIAkyFLS3S5EBGiK3/D8hj4Le78yNMBP658suiMiA7KC2Z0AWW
+ 7l0A==
+X-Gm-Message-State: AOJu0YzJ1lRN0SCzlDPXItsA7LQeQvYKYXiv7Tkjvwj25rVHLhP0xLKP
+ v3nwHAkm9KrF5wvQwohCUtZVxPILYXOxKgAPPkLuazreAgy4DU38FRaPzboqHBYbSo+g0g383aT
+ 0in/nQQEyrGRfttZH2/LhTQ8Qskyh6DY=
+X-Gm-Gg: ASbGncv0CL4ne2Vy87n8vGN8T9S6VefDLxUR1VzIlEX1MiOOP91z1Iqn6r6eCdLD8DK
+ j1GDYl1GI9EmZd3pN/3itTD36x8rcctOZZ7pkREj+G8NpCBa7ts8lzGxy43RH9lSjRUuuMfPGiL
+ 213SoLgXWd4GcZdQJSJvoD7b3BooblMeTKEQZVeVrRX4degxE3reP5AHDHj13LR9oegeBo6tf95
+ mioSup8ckfOl1fVks2zlt3cZM8YdPSLDEcyC+lFtg==
+X-Google-Smtp-Source: AGHT+IGQ5BHrkgFepzjYp8mbMNtIeAqn2WTYFkhaulaKCik4qxPc1MCd4Z9Rx/r3PX1ClwHSUqEicDhYskcA9Yc3DaQ=
+X-Received: by 2002:a05:620a:4549:b0:7e2:a47:e50e with SMTP id
+ af79cd13be357-7e20a47e7cdmr1158579185a.30.1752550327833; Mon, 14 Jul 2025
+ 20:32:07 -0700 (PDT)
 MIME-Version: 1.0
-References: <CAH2r5muQGDkaHL78JOcgsfjL_=A64Xm9CrCBSKgOMABOjcg44w@mail.gmail.com>
- <CAH2r5msdLbvGMARXJ=V9wt0pvXJOrc=zh3eUfeF9AXEeshtByg@mail.gmail.com>
- <aHRo9VfMDIfK5MR6@jeremy-HP-Z840-Workstation>
- <42e549c1-0f92-4b95-b62b-3e0efab9aa10@samba.org>
- <5519b2d9-600c-4a3f-b44f-594877417df7@samba.org>
- <20250714165844.4hctlrwegfspiius@pali>
- <CAH2r5ms9Lt3h9q2B6VsbhkoM=_yEdpFXguiHRrrkbsrbkp6j=Q@mail.gmail.com>
- <20250714192404.j3dw6l3afgm2voe6@pali>
- <CAH2r5msRGGHyy0GdNgVYBVN+8NzfevDS-wtzr9TO5jF5NmoxHQ@mail.gmail.com>
- <20250714211016.zqddwjdvybeplgdf@pali>
-In-Reply-To: <20250714211016.zqddwjdvybeplgdf@pali>
-Date: Mon, 14 Jul 2025 22:28:45 -0500
-X-Gm-Features: Ac12FXzeMo16oQKxlQC3WIW26V776b5SlQIrn8XsokXtUJ90Q_6Vt8qypRQ8jXk
-Message-ID: <CAH2r5mumdvhWTNOCEGV-dT8aQVJrUQEDep0GEBn_CbKF+o3kjQ@mail.gmail.com>
-Subject: Re: Samba support for creating special files (via reparse points)
-To: =?UTF-8?Q?Pali_Roh=C3=A1r?= <pali@kernel.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Date: Mon, 14 Jul 2025 22:31:56 -0500
+X-Gm-Features: Ac12FXzrmLboga7OWI2YMuucTsXiG3AXGz7CTDK1uPmxzV-1mpI-ggSRZkqiFq8
+Message-ID: <CAH2r5mvA3NQp8BDj_v-k3YRUR9Xe7u5XmaM_XQBP4xJts0R6bA@mail.gmail.com>
+Subject: [PATCH][SMB3 client] Fix SMB311 posix special file creation to
+ servers which do not advertise reparse support
+To: CIFS <linux-cifs@vger.kernel.org>
+Content-Type: multipart/mixed; boundary="000000000000bdf9050639ef6b0b"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -94,247 +79,101 @@ List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
 From: Steve French via samba-technical <samba-technical@lists.samba.org>
 Reply-To: Steve French <smfrench@gmail.com>
-Cc: CIFS <linux-cifs@vger.kernel.org>, Paulo Alcantara <pc@manguebit.org>,
- samba-technical <samba-technical@lists.samba.org>,
- "vl@samba.org" <vl@samba.org>, Jeremy Allison <jra@samba.org>
+Cc: samba-technical <samba-technical@lists.samba.org>,
+ Paulo Alcantara <pc@manguebit.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Mon, Jul 14, 2025 at 4:10=E2=80=AFPM Pali Roh=C3=A1r <pali@kernel.org> w=
-rote:
->
-> On Monday 14 July 2025 15:30:26 Steve French wrote:
-> > > But generally this is not Linux centric, but rather generic to any ot=
-her
-> > implementations.
-> >
-> >
-> > If they are supporting the SMB311 Linux Extensions why wouldn't they wa=
-nt
-> > to support special files? All of the servers which currently support th=
-e
-> > extensions do
-> > Thanks,
->
-> Because of that possible filesystem limitation (like fat or proc or fuse)=
-.
+--000000000000bdf9050639ef6b0b
+Content-Type: text/plain; charset="UTF-8"
 
-That is a moot point because even if the mount has FAT or FUSE mounts
-under it, the server can still support reparse points on that share.  A sha=
-re
-often crosses fs type boundaries, so it is always going to be possible to
-setup a share where creating special files will work for only some of the
-subdirectories - but at least for those cases with the suggested change
-we will return a more accurate return code (e.g. EACCES in some cases)
+Some servers (including Samba), support the SMB3.1.1 POSIX Extensions
+(which use reparse
+points for handling special files) but do not properly advertise file
+system attribute
+FILE_SUPPORTS_REPARSE_POINTS.  Although we don't check for this
+attribute flag when
+querying special file information, we do check it when creating
+special files which
+causes them to fail unnecessarily.   If we have negotiated SMB3.1.1
+POSIX Extensions
+with the server we can expect the server to support creating special files via
+reparse points, and even if the server fails the operation due to
+really forbidding
+creating special files, then it should be no problem and is more
+likely to return a
+more accurate rc in any case (e.g. EACCES instead of EOPNOTSUPP).
 
+Allow creating special files as long as the server supports either
+reparse points
+or the SMB3.1.1 POSIX Extensions (note that if the "sfu" mount option
+is specified
+it uses a different way of storing special files that does not rely on
+reparse points).
 
-> > Steve
-> >
-> > On Mon, Jul 14, 2025, 2:24=E2=80=AFPM Pali Roh=C3=A1r <pali@kernel.org>=
- wrote:
-> >
-> > > On Monday 14 July 2025 12:31:03 Steve French wrote:
-> > > > > It does not matter if the client or server is POSIX or not. Also =
-on
-> > > > > POSIX systems there are filesystems without the support for speci=
-al
-> > > > > files and it is common scenario on more UNIX systems that for
-> > > particular
-> > > > > mount are special files completely disabled for security reasons.
-> > > >
-> > > > If it is disabled for security reasons, then probably better to sti=
-ll
-> > > > send the request and let the server return the correct return code
-> > > > (e.g. access denied rather than "not supported").   But for Linux f=
-s
-> > > > the only examples I can think of where all special files are disabl=
-ed
-> > > > are VFAT and some pseudo-filesystems like /proc
-> > >
-> > > In case it is disabled for security reasons and server wants to annou=
-nce
-> > > that it is "available but disabled for security reasons" rather than
-> > > "not support at all", then yes it makes sense to send the request and
-> > > let it fail with ACCESS error with all those cleanup related issues.
-> > > But in this case server should announce the support that it is availa=
-ble
-> > > for clients.
-> > >
-> > > In Linux it is not only VFAT. It is also slightly modern exfat. And a=
-lso
-> > > whatever is connected over fuse to userspace.
-> > >
-> > > But generally this is not Linux centric, but rather generic to any ot=
-her
-> > > implementations.
-> > >
-> > > > On Mon, Jul 14, 2025 at 11:58=E2=80=AFAM Pali Roh=C3=A1r <pali@kern=
-el.org> wrote:
-> > > > >
-> > > > > On Monday 14 July 2025 10:23:17 Ralph Boehme wrote:
-> > > > > > On 7/14/25 8:01 AM, Ralph Boehme via samba-technical wrote:
-> > > > > > > On 7/14/25 4:18 AM, Jeremy Allison wrote:
-> > > > > > > > It's an oversight I'm afraid.
-> > > > > > >
-> > > > > > > hm... it seems reparse points support is mandatory for SMB3 P=
-OSIX
-> > > so I
-> > > > > > > wonder what this additional checks buys us.
-> > > > >
-> > > > > No. It is not mandatory. Getting or setting of reparse points is =
-done
-> > > > > via IOCTLs which are optional. Also fs attribute for reparse poin=
-ts is
-> > > > > optional.
-> > > > >
-> > > > > And that make sense as there are still lot of filesystems which d=
-o not
-> > > > > support reparse points (e.g. FAT) and this fs attribute is exactl=
-y what
-> > > > > server announce for clients and applications to tell feature supp=
-ort.
-> > > > > So application would know what features are provided and which no=
-t on
-> > > > > particular share. Server can support reparse points on share A bu=
-t does
-> > > > > not have to support it on share B. E.g. when A is NTFS and B is F=
-AT.
-> > > > >
-> > > > > > > While I agree that generally we should likely set this, for S=
-MB3
-> > > POSIX
-> > > > > > > the client should probably not check this and we should keep =
-it
-> > > out of
-> > > > > > > the spec.
-> > > > > >
-> > > > > > one additional thought: it seems like a valid scenario to be ab=
-le to
-> > > support
-> > > > > > SMB3 POSIX on a server that does not support xattrs on the back=
-ing
-> > > > > > filesystem and hence may not have a way of storing arbitrary re=
-parse
-> > > points.
-> > > > >
-> > > > > xattrs and reparse points are two completely different things, an=
-d they
-> > > > > should not be mixed or exchanged.
-> > > > >
-> > > > > For example FAT on older Windows versions supported xattrs (I'm n=
-ot
-> > > sure
-> > > > > if recent Windows version still support them), but does not and n=
-ever
-> > > > > supported reparse points.
-> > > > >
-> > > > > For checking if xattrs (in MS terminology called Extended Attribu=
-tes or
-> > > > > abbrev EAs) there is a fs attribute FILE_SUPPORTS_EXTENDED_ATTRIB=
-UTES.
-> > > > >
-> > > > > Again, application can check if server share supports xattrs by t=
-his
-> > > > > fs attribute and decide what to do next.
-> > > > >
-> > > > > > In SMB3 POSIX we're just using them as a wire transport, not
-> > > necessarily
-> > > > > > expecting full support from the server.
-> > > > > >
-> > > > > > Hence, for Samba I see the following change
-> > > > > >
-> > > > > >     smbd: announce support for FILE_SUPPORTS_REPARSE_POINTS if =
-the
-> > > share
-> > > > > > supports EAs
-> > > > >
-> > > > > FILE_SUPPORTS_EXTENDED_ATTRIBUTES (0x00800000) !=3D
-> > > FILE_SUPPORTS_REPARSE_POINTS (0x80)
-> > > > >
-> > > > > > ---
-> > > > > >  source3/smbd/vfs.c | 3 +++
-> > > > > >  1 file changed, 3 insertions(+)
-> > > > > >
-> > > > > > diff --git a/source3/smbd/vfs.c b/source3/smbd/vfs.c
-> > > > > > index 76895f52e039..ea3fa4c8784f 100644
-> > > > > > --- a/source3/smbd/vfs.c
-> > > > > > +++ b/source3/smbd/vfs.c
-> > > > > > @@ -1345,6 +1345,9 @@ uint32_t vfs_get_fs_capabilities(struct
-> > > > > > connection_struct *conn,
-> > > > > >         if (lp_nt_acl_support(SNUM(conn))) {
-> > > > > >                 caps |=3D FILE_PERSISTENT_ACLS;
-> > > > > >         }
-> > > > > > +       if (lp_ea_support(SNUM(conn))) {
-> > > > > > +               caps |=3D FILE_SUPPORTS_REPARSE_POINTS;
-> > > > > > +       }
-> > > > > >
-> > > > > >         caps |=3D lp_parm_int(SNUM(conn), "share", "fake_fscaps=
-", 0);
-> > > > > >
-> > > > > > https://gitlab.com/samba-team/samba/-/merge_requests/4104
-> > > > > >
-> > > > > > For the client this would mean, it must allow reparse points fo=
-r the
-> > > special
-> > > > > > files if SMB3 POSIX is negotiated.
-> > > > > >
-> > > > > > Makes sense?
-> > > > > >
-> > > > > > -slow
-> > > > >
-> > > > > I do not think that this is a good idea at all. It would just
-> > > complicate
-> > > > > things, make more incompatibilities and prevent using FAT or any =
-other
-> > > > > filesystem without mknod support, including cases when server its=
-elf is
-> > > > > configured to not support mknod for e.g. security reasons.
-> > > > >
-> > > > > FILE_SUPPORTS_REPARSE_POINTS is per-share fs attribute which says=
- if
-> > > the
-> > > > > reparse point of any type are supported. If it was decided that s=
-pecial
-> > > > > files, like fifos or character devices are represented as reparse
-> > > points
-> > > > > then for share/filesystem on which are special files supported, s=
-erver
-> > > > > has to announce the FILE_SUPPORTS_REPARSE_POINTS fs attribute.
-> > > > >
-> > > > > And if the server itself supports special files, but particular
-> > > > > filesystem like FAT does not support it, then server should not
-> > > announce
-> > > > > the FILE_SUPPORTS_REPARSE_POINTS fs attribute.
-> > > > >
-> > > > > This is how it was designed and how it is used.
-> > > > >
-> > > > > It does not matter if the client or server is POSIX or not. Also =
-on
-> > > > > POSIX systems there are filesystems without the support for speci=
-al
-> > > > > files and it is common scenario on more UNIX systems that for
-> > > particular
-> > > > > mount are special files completely disabled for security reasons.
-> > > > >
-> > > > >
-> > > > > So the result is that also when POSIX extensions are negotiated, =
-it is
-> > > > > important and required to know by POSIX client whether particular
-> > > > > exported share supports reparse points / special files or not.
-> > > > > And FILE_SUPPORTS_REPARSE_POINTS is already there for it.
-> > > >
-> > > >
-> > > >
-> > > > --
-> > > > Thanks,
-> > > >
-> > > > Steve
-> > >
+See attached patch
 
-
-
---=20
+-- 
 Thanks,
 
 Steve
+
+--000000000000bdf9050639ef6b0b
+Content-Type: text/x-patch; charset="US-ASCII"; 
+	name="0001-Fix-SMB311-posix-special-file-creation-to-servers-wh.patch"
+Content-Disposition: attachment; 
+	filename="0001-Fix-SMB311-posix-special-file-creation-to-servers-wh.patch"
+Content-Transfer-Encoding: base64
+Content-ID: <f_md3z6nfo0>
+X-Attachment-Id: f_md3z6nfo0
+
+RnJvbSA0ZTFjOTExOGVhNjJjNTJmNzBjYTJjMzk0OWQwOTUwOTZjNGViNjY2IE1vbiBTZXAgMTcg
+MDA6MDA6MDAgMjAwMQpGcm9tOiBTdGV2ZSBGcmVuY2ggPHN0ZnJlbmNoQG1pY3Jvc29mdC5jb20+
+CkRhdGU6IE1vbiwgMTQgSnVsIDIwMjUgMjI6MTY6MTkgLTA1MDAKU3ViamVjdDogW1BBVENIXSBG
+aXggU01CMzExIHBvc2l4IHNwZWNpYWwgZmlsZSBjcmVhdGlvbiB0byBzZXJ2ZXJzIHdoaWNoIGRv
+CiBub3QgYWR2ZXJ0aXNlIHJlcGFyc2Ugc3VwcG9ydAoKU29tZSBzZXJ2ZXJzIChpbmNsdWRpbmcg
+U2FtYmEpLCBzdXBwb3J0IHRoZSBTTUIzLjEuMSBQT1NJWCBFeHRlbnNpb25zICh3aGljaCB1c2Ug
+cmVwYXJzZQpwb2ludHMgZm9yIGhhbmRsaW5nIHNwZWNpYWwgZmlsZXMpIGJ1dCBkbyBub3QgcHJv
+cGVybHkgYWR2ZXJ0aXNlIGZpbGUgc3lzdGVtIGF0dHJpYnV0ZQpGSUxFX1NVUFBPUlRTX1JFUEFS
+U0VfUE9JTlRTLiAgQWx0aG91Z2ggd2UgZG9uJ3QgY2hlY2sgZm9yIHRoaXMgYXR0cmlidXRlIGZs
+YWcgd2hlbgpxdWVyeWluZyBzcGVjaWFsIGZpbGUgaW5mb3JtYXRpb24sIHdlIGRvIGNoZWNrIGl0
+IHdoZW4gY3JlYXRpbmcgc3BlY2lhbCBmaWxlcyB3aGljaApjYXVzZXMgdGhlbSB0byBmYWlsIHVu
+bmVjZXNzYXJpbHkuICAgSWYgd2UgaGF2ZSBuZWdvdGlhdGVkIFNNQjMuMS4xIFBPU0lYIEV4dGVu
+c2lvbnMKd2l0aCB0aGUgc2VydmVyIHdlIGNhbiBleHBlY3QgdGhlIHNlcnZlciB0byBzdXBwb3J0
+IGNyZWF0aW5nIHNwZWNpYWwgZmlsZXMgdmlhCnJlcGFyc2UgcG9pbnRzLCBhbmQgZXZlbiBpZiB0
+aGUgc2VydmVyIGZhaWxzIHRoZSBvcGVyYXRpb24gZHVlIHRvIHJlYWxseSBmb3JiaWRkaW5nCmNy
+ZWF0aW5nIHNwZWNpYWwgZmlsZXMsIHRoZW4gaXQgc2hvdWxkIGJlIG5vIHByb2JsZW0gYW5kIGlz
+IG1vcmUgbGlrZWx5IHRvIHJldHVybiBhCm1vcmUgYWNjdXJhdGUgcmMgaW4gYW55IGNhc2UgKGUu
+Zy4gRUFDQ0VTIGluc3RlYWQgb2YgRU9QTk9UU1VQUCkuCgpBbGxvdyBjcmVhdGluZyBzcGVjaWFs
+IGZpbGVzIGFzIGxvbmcgYXMgdGhlIHNlcnZlciBzdXBwb3J0cyBlaXRoZXIgcmVwYXJzZSBwb2lu
+dHMKb3IgdGhlIFNNQjMuMS4xIFBPU0lYIEV4dGVuc2lvbnMgKG5vdGUgdGhhdCBpZiB0aGUgInNm
+dSIgbW91bnQgb3B0aW9uIGlzIHNwZWNpZmllZAppdCB1c2VzIGEgZGlmZmVyZW50IHdheSBvZiBz
+dG9yaW5nIHNwZWNpYWwgZmlsZXMgdGhhdCBkb2VzIG5vdCByZWx5IG9uIHJlcGFyc2UgcG9pbnRz
+KS4KCkNjOiA8c3RhYmxlQHZnZXIua2VybmVsLm9yZz4KU2lnbmVkLW9mZi1ieTogU3RldmUgRnJl
+bmNoIDxzdGZyZW5jaEBtaWNyb3NvZnQuY29tPgotLS0KIGZzL3NtYi9jbGllbnQvc21iMmlub2Rl
+LmMgfCAzICsrLQogZnMvc21iL2NsaWVudC9zbWIyb3BzLmMgICB8IDMgKystCiAyIGZpbGVzIGNo
+YW5nZWQsIDQgaW5zZXJ0aW9ucygrKSwgMiBkZWxldGlvbnMoLSkKCmRpZmYgLS1naXQgYS9mcy9z
+bWIvY2xpZW50L3NtYjJpbm9kZS5jIGIvZnMvc21iL2NsaWVudC9zbWIyaW5vZGUuYwppbmRleCAy
+YTNlNDZiOGUxNWEuLmExMWEyYTY5M2M1MSAxMDA2NDQKLS0tIGEvZnMvc21iL2NsaWVudC9zbWIy
+aW5vZGUuYworKysgYi9mcy9zbWIvY2xpZW50L3NtYjJpbm9kZS5jCkBAIC0xMzQ2LDcgKzEzNDYs
+OCBAQCBzdHJ1Y3QgaW5vZGUgKnNtYjJfZ2V0X3JlcGFyc2VfaW5vZGUoc3RydWN0IGNpZnNfb3Bl
+bl9pbmZvX2RhdGEgKmRhdGEsCiAJICogZW1wdHkgb2JqZWN0IG9uIHRoZSBzZXJ2ZXIuCiAJICov
+CiAJaWYgKCEobGUzMl90b19jcHUodGNvbi0+ZnNBdHRySW5mby5BdHRyaWJ1dGVzKSAmIEZJTEVf
+U1VQUE9SVFNfUkVQQVJTRV9QT0lOVFMpKQotCQlyZXR1cm4gRVJSX1BUUigtRU9QTk9UU1VQUCk7
+CisJCWlmICghdGNvbi0+cG9zaXhfZXh0ZW5zaW9ucykKKwkJCXJldHVybiBFUlJfUFRSKC1FT1BO
+T1RTVVBQKTsKIAogCW9wYXJtcyA9IENJRlNfT1BBUk1TKGNpZnNfc2IsIHRjb24sIGZ1bGxfcGF0
+aCwKIAkJCSAgICAgU1lOQ0hST05JWkUgfCBERUxFVEUgfApkaWZmIC0tZ2l0IGEvZnMvc21iL2Ns
+aWVudC9zbWIyb3BzLmMgYi9mcy9zbWIvY2xpZW50L3NtYjJvcHMuYwppbmRleCBjYjY1OTI1NmQy
+MTkuLjkzOGE4YTdjNWQyMSAxMDA2NDQKLS0tIGEvZnMvc21iL2NsaWVudC9zbWIyb3BzLmMKKysr
+IGIvZnMvc21iL2NsaWVudC9zbWIyb3BzLmMKQEAgLTUyNjAsNyArNTI2MCw4IEBAIHN0YXRpYyBp
+bnQgc21iMl9tYWtlX25vZGUodW5zaWduZWQgaW50IHhpZCwgc3RydWN0IGlub2RlICppbm9kZSwK
+IAlpZiAoY2lmc19zYi0+bW50X2NpZnNfZmxhZ3MgJiBDSUZTX01PVU5UX1VOWF9FTVVMKSB7CiAJ
+CXJjID0gY2lmc19zZnVfbWFrZV9ub2RlKHhpZCwgaW5vZGUsIGRlbnRyeSwgdGNvbiwKIAkJCQkJ
+ZnVsbF9wYXRoLCBtb2RlLCBkZXYpOwotCX0gZWxzZSBpZiAobGUzMl90b19jcHUodGNvbi0+ZnNB
+dHRySW5mby5BdHRyaWJ1dGVzKSAmIEZJTEVfU1VQUE9SVFNfUkVQQVJTRV9QT0lOVFMpIHsKKwl9
+IGVsc2UgaWYgKChsZTMyX3RvX2NwdSh0Y29uLT5mc0F0dHJJbmZvLkF0dHJpYnV0ZXMpICYgRklM
+RV9TVVBQT1JUU19SRVBBUlNFX1BPSU5UUykKKwkJfHwgKHRjb24tPnBvc2l4X2V4dGVuc2lvbnMp
+KSB7CiAJCXJjID0gc21iMl9ta25vZF9yZXBhcnNlKHhpZCwgaW5vZGUsIGRlbnRyeSwgdGNvbiwK
+IAkJCQkJZnVsbF9wYXRoLCBtb2RlLCBkZXYpOwogCX0KLS0gCjIuNDMuMAoK
+--000000000000bdf9050639ef6b0b--
 
