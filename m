@@ -2,51 +2,49 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id B4867B050D0
-	for <lists+samba-technical@lfdr.de>; Tue, 15 Jul 2025 07:19:05 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 95481B05165
+	for <lists+samba-technical@lfdr.de>; Tue, 15 Jul 2025 08:00:04 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=PbP2GN4qJMHbZFPap5fEa9/a3tNi7tUkHera2I51/TU=; b=tJM1BlHk0OVvPogBw2rD1cZs6l
-	JjWaQVebf3peGRgq18w+wZBDvQvYNnKkygIhsepoUDcwAlXYQlVsuIsPBRPgmSgFk1MQGpOd7dqlM
-	EGSwH96lT5HbHR85V3xTT9iReTc/pl22OfcnSHhwJEXfXVEr7DbGkJ+uNUyhMeKgV7104p9RLQyv7
-	jdXfv1uLIi2nv4Pkt160abuwYJ3TgpXpIjR/64G9NNzHje8ycqEw5xkeGhne0QPAl4QlHFMuUOt4m
-	Oi9drZ5Ynz9NOaUf+I6bJ371oOb7qALm3z6NSCiD5Tjoka1gx79RQ+A51yRvdf0dnsz/BEMimYxCj
-	BBm1sidw==;
-Received: from ip6-localhost ([::1]:28420 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=wbtJQLUmjDvGH6xHsbQvld5DzXzF7ewDLkWTSGus4cI=; b=ivqZbx4kfWIvdvy38N8r+hE9Fs
+	5oWs5sTC8tQT/m92DljtvjtKrNwgYSZ5qGj1gThtQDPZFbx7LoSQIqJZSZrEsAa3SwxhsaWuOkWrg
+	UiEnzkjVbIGvIRwgzt3w7tZU+SAlyknmpYGeDDNEUqSwVPVlP2NNqB789gyhHRyXRXOyazvliOF/r
+	8zfZ1KaepA+D+LL0jGJrLdOjFDSxWrCU3Pctl+ehZhBeHXd7Vy1KSLLP/ofCgrSurYTQV3RxFKVCw
+	n9h0eJB0fN9dxd/RcTsE9SXa0hrWoIZM2Ecsc0X4P4qdeeLWZYbsN0n+ybEOul458QxXVtB3cBDPd
+	O7pr2REg==;
+Received: from ip6-localhost ([::1]:56008 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1ubY3p-00BEnB-4u; Tue, 15 Jul 2025 05:18:37 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:31188) 
+	id 1ubYhd-00BEv1-2x; Tue, 15 Jul 2025 05:59:45 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:14576) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1ubY3k-00BEn4-Fe
- for samba-technical@lists.samba.org; Tue, 15 Jul 2025 05:18:34 +0000
+ (Exim) id 1ubYhY-00BEuu-AU
+ for samba-technical@lists.samba.org; Tue, 15 Jul 2025 05:59:42 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=From:Cc:To:Date:Message-ID;
- bh=PbP2GN4qJMHbZFPap5fEa9/a3tNi7tUkHera2I51/TU=; b=Gk1TkwrUxPZCjWzBppW2fmDzcO
- 1Km9bmR89Eigx8zfj8abXsWpmJ3yFarSX/sw/ndK9jx2q/cCOsI3zROsGpRCb7DywA5qU75yawMfY
- jPECQnN1caIlVU4JuHI7YMy3glOe0BvnvKfx21wLdpNTSO5a8DU444/U1p38DmmqXaWMlJbo/NniT
- I7YEiR/Wy31VKSk+38/EMJV8+o5gEqZ7IV2XvQrSUQPMhQhiycvZsc3DA3l6iQJ2X+sgPirsjDdF4
- 4G79TAGFv5hfQ7QA3KfdEo1zMCX8dhSdKKzprQ9KpfJtjAAIlVeBAaoe415nbJnw4OeuCSvzExlsS
- +wZE6Tff28iaeD/quxjTpf5qBpznvZEPtFqj0oaj5n2pp+l1285iEbEZNPIIGfgkIO5IULeCdeJMn
- vr+UTjga6oXIrvG72hnTEqPzX2o6oJ5xdLk/Nakft+G8uwIuCtGoJ7hV0LCxrTNG1KCq0W8y31sFY
- Ss0lywN1I23AZg5NmZ5wfZ3e;
+ s=42; h=Message-ID:Cc:To:From:Date;
+ bh=wbtJQLUmjDvGH6xHsbQvld5DzXzF7ewDLkWTSGus4cI=; b=0j7J67SzkR2h0CXdTA1CCU8MQn
+ MYdzMbVn4TxxTM1VqkVX+57dw/K6mu5UV7+RzM8VmihSXhuGeQdNrHqigxBp98TKGQBiEgB1+Zb4W
+ cIusNWqq9p90vzfVXSPL+Stha1NMRSfFFWa9hi3ZgWYKA+yG7MyeMZ5H5J/I2QCyv2VTfdA4JU49V
+ Uc8js2luf90/ojS7byIfkB1/stoKT5d/Bk0/WoNHKs7FY/+tZH2XsPn2KMxh2LLJDv7fpGq8KsG9I
+ XDJ4QwmH0nAupm709kkSGDhYvz0r/yR26DisiKNBk3ypQ6vmjdouxlhgsnvKXEFPoiXRQzILR94bu
+ nMfa7Ari3Rd1JDCchLAV8ZcwTUAJl0mCkHdsV8OJRoXM8UINs6X6lBgmglX7SpgLUN+NshAiPQ2yB
+ dxzh2fTPyH2iftxBt0lduJPyZf7IAyD4AtGGseauxcJ1JhgNT6el58NXuedJ5Hl/olNvH0tdT6LM9
+ PTWU4SaRpJO0tBXR+OafFRMM;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1ubY3j-00FOzm-1y; Tue, 15 Jul 2025 05:18:31 +0000
-Message-ID: <f0fa321e-921f-40f5-b202-9cc751f2268f@samba.org>
-Date: Tue, 15 Jul 2025 07:18:30 +0200
+ (Exim) id 1ubYhX-00FPF2-1T; Tue, 15 Jul 2025 05:59:39 +0000
+Date: Tue, 15 Jul 2025 08:59:36 +0300
+To: Steve French <smfrench@gmail.com>
+Subject: Re: Using UPN with mount.cifs?
+Message-ID: <aHXuSKMsQsPWd5NC@toolbx>
+References: <a97b22e8-144e-45ed-8850-c3fd18769a6c@pre-sense.de>
+ <CAH2r5mtgWfxQtoy2gwnMiWM3HXno2icuWmiuhMJ64yTAi_jsyQ@mail.gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH][SMB3 client] Fix SMB311 posix special file creation to
- servers which do not advertise reparse support
-To: Steve French <smfrench@gmail.com>, CIFS <linux-cifs@vger.kernel.org>
-References: <CAH2r5mvA3NQp8BDj_v-k3YRUR9Xe7u5XmaM_XQBP4xJts0R6bA@mail.gmail.com>
-Content-Language: en-US, de-DE
-In-Reply-To: <CAH2r5mvA3NQp8BDj_v-k3YRUR9Xe7u5XmaM_XQBP4xJts0R6bA@mail.gmail.com>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------8fp6l08Q2ug7TRK0IgoZDlQi"
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <CAH2r5mtgWfxQtoy2gwnMiWM3HXno2icuWmiuhMJ64yTAi_jsyQ@mail.gmail.com>
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,56 +58,100 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Ralph Boehme <slow@samba.org>
-Cc: samba-technical <samba-technical@lists.samba.org>,
- Paulo Alcantara <pc@manguebit.org>
+From: Alexander Bokovoy via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Alexander Bokovoy <ab@samba.org>
+Cc: linux-cifs <linux-cifs@vger.kernel.org>,
+ samba-technical <samba-technical@lists.samba.org>,
+ Till =?iso-8859-1?Q?D=F6rges?= <doerges@pre-sense.de>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------8fp6l08Q2ug7TRK0IgoZDlQi
-Content-Type: multipart/mixed; boundary="------------sLdlVrOgOPr2QQRPYaiE2r40";
- protected-headers="v1"
-From: Ralph Boehme <slow@samba.org>
-To: Steve French <smfrench@gmail.com>, CIFS <linux-cifs@vger.kernel.org>
-Cc: samba-technical <samba-technical@lists.samba.org>,
- Paulo Alcantara <pc@manguebit.org>
-Message-ID: <f0fa321e-921f-40f5-b202-9cc751f2268f@samba.org>
-Subject: Re: [PATCH][SMB3 client] Fix SMB311 posix special file creation to
- servers which do not advertise reparse support
-References: <CAH2r5mvA3NQp8BDj_v-k3YRUR9Xe7u5XmaM_XQBP4xJts0R6bA@mail.gmail.com>
-In-Reply-To: <CAH2r5mvA3NQp8BDj_v-k3YRUR9Xe7u5XmaM_XQBP4xJts0R6bA@mail.gmail.com>
+On Пан, 14 ліп 2025, Steve French via samba-technical wrote:
+> This is an interesting question.
+> 
+> mount.cifs will pass it (the UPN) down to cifs.ko so it will get sent
+> on the wire, so behavior will vary by server.
 
---------------sLdlVrOgOPr2QQRPYaiE2r40
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
+Is this with GSSAPI krb5 or NTLMSSP?
 
-T24gNy8xNS8yNSA1OjMxIEFNLCBTdGV2ZSBGcmVuY2ggd3JvdGU6DQo+IFNlZSBhdHRhY2hl
-ZCBwYXRjaA0KDQphY2tlZCBieSBtZS4NCg0KVGhhbmtzIQ0KLXNsb3cNCg==
+For GSSAPI we either expect already existing credential or initialize it
+from a keytab. In the first case cifs.upcall is not doing anything to
+enable enteprise principal because it is not handling the initial ticket
+acquisition. In the second case it doesn't do anything to mark the
+client principal as an enteprise one.
 
---------------sLdlVrOgOPr2QQRPYaiE2r40--
+The difference is by how that client principal is marked down in GSSAPI
+negotiation. It needs two parts:
 
---------------8fp6l08Q2ug7TRK0IgoZDlQi
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature.asc"
+ - a client name should be an enterprise principal,
+ - client code should make sure it sets a flag to accept rewrites of
+   its own client principal name by the KDC in the returned ticket
+   (principal canonicalization).
 
------BEGIN PGP SIGNATURE-----
+Neither is done by the cifs.upcall. More to that, for GSSAPI krb5 the
+username passed to the cifs.upcall is pretty much ignored except for the
+keytab initialization.
 
-wsF5BAABCAAjFiEE+uLGCIokJSBRxVnkqh6bcSY5nkYFAmh15KYFAwAAAAAACgkQqh6bcSY5nka+
-rBAAm3DEnr/Lwi9bPx08E0+adlnisXoEzBGnUzREzpy0AggC3ZlhgKAz+/16uUUmyv5DjphG0bHY
-Z8zIyfsUTTNm0SQre2eofydzxYNZG2/fNlGRq1LmOD3COcGvjUI3Qiy9ZhfOuqmEYcmny70G+yob
-UJ5WycPLbTxN3Vpx0RgEOmTy8ePR6RaKfLhSqVlTMXcpebU3XRRCb145cP/2JInhu/VpBFPYbOtt
-idCz+Xxe6hNRKQfCqsCkgDXuLMEwNO07cvwFVbqS61QEroUFhCT9RuEMvPD1cnOVZjQasJx/c5t6
-r6fSaXAoIfFjRBRnmyLOdJBuEjQYeaOvdOR09cC3q9n75rRnuWQ7tF8jRXvKiEaNhb5be54vssbE
-hsjJYIs+DqtRobw4+zZlqKQxuDWSVaCcb7d2T9aSYvcIJS94vb2ozBApInAPcIQAGkvxbEey59pg
-2uRIMBpP7aKtpc1Tt7T+xykOGS5nLCJ7utcNrLed4rIl+8M0CktdhBQf1lTDnvwCi9L5jn5sQWf0
-7FQj4VB7tjaXqzPttkGJC8i1uKlNOAfr0dTI05SfevUbIz7hgR+yLLpBeZonFzJfYSO+iS6kT0td
-iIn/lkG92iTSUo+fKfjkLFxTmFMcGfsbu7Q0IqWVq8a3H4jq6teXDegVmz4TJk3zo760iHVx+GCH
-Nrg=
-=RjSN
------END PGP SIGNATURE-----
+With NTLMSSP you don't really have 'enterprise principals', as it is up
+to the SMB server to interpret the name you passed.
 
---------------8fp6l08Q2ug7TRK0IgoZDlQi--
+The client has nothing to indicate that. A server may consider
+interpreting it as a local machine-provided one (username=testuser), or
+consider to map it into the local one even if it has domain name
+explicitly set (such as with IAKERB case on a standalone Windows).
+
+> 
+> I tried it to current Samba (passing "username=testuser" and also
+> "username=testuser@somedomain" and also for
+> "username=testuser,domain=somedomain") and it worked fine for all
+> three cases (with and without UPN, with and without "domain=").
+> 
+> Trying it to Windows though:
+> 1) "username=testuser" worked
+> 2) "username=testuser,domain=somedomain"  worked
+> 3) "username=testuser@somedomain"  did not work to Windows server
+> 
+> So looks like the behavior varies by server, but safest way is to
+> specify the UPN as "username=" and "domain=" rather than
+> username=someuser@somedomain
+> 
+> On Mon, Jul 14, 2025 at 7:44 AM Till Dörges <doerges@pre-sense.de> wrote:
+> >
+> > Hello everyone,
+> >
+> >
+> > I'm wondering whether it is possible to use User Principal Names (UPN) instead of
+> > accountnames + workgroup/domain, when mounting a share with mount.cifs?
+> >
+> >
+> > The man page for mount.cifs does not mention UPN. A quick grep through the latest
+> > sources (cifs-utils-7.4) doesn't mention UPN either.
+> >
+> > Searching the ML in particular and the web in general came up emtpy, too.
+> >
+> >
+> > So, is there a way to do it?
+> >
+> >
+> > Thanks and regards -- Till
+> >
+> > --
+> > Dipl.-Inform. Till Dörges                  doerges@pre-sense.de
+> >
+> >                                          www.pre-sense.de/fcknzs
+> >
+> > PRESENSE Technologies GmbH             Nagelsweg 41, D-20097 HH
+> > Geschäftsführer/Managing Director        AG Hamburg, HRB 107844
+> > Till Dörges                              USt-IdNr.: DE263765024
+> >
+> 
+> 
+> -- 
+> Thanks,
+> 
+> Steve
+> 
+
+-- 
+/ Alexander Bokovoy
 
