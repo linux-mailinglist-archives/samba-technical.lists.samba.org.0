@@ -2,84 +2,76 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1F541B0674B
-	for <lists+samba-technical@lfdr.de>; Tue, 15 Jul 2025 21:55:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8E6A0B07C00
+	for <lists+samba-technical@lfdr.de>; Wed, 16 Jul 2025 19:29:07 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=8qzRlcwXYg6AwwPiXWehxsYQ3+UfrM1J6NX9J6Fau04=; b=vEsxQwXnVpTqKmRd1AaANE9LAh
-	zHm9B6rsduRa697ILaGI3R/Pn1OnOi7etS6SUOv6lic7iwa/f628jJSHA7xGh+xAI667gcyJ0J18q
-	ihuMov0MH1DiVcGWYQxbMh4/dsyume3v3y5Qb/S2lfgqqJLByBnCN2H5I+dabtGVp+g+I7FmdDseV
-	BO3426krbUj8HEX7XDj7an0com5Fxxcs17GwAGosiKzFfvQraXf0CdlCWkSSElnUHEBPSJWR2byY5
-	r0kknqdZNE7XEsszcb8rqdvSQi12CG1WzPY96M8HerH67OL9dnU2ZZlHE2fTa6UIkbzqlksk7uICC
-	ZoJ4wVpg==;
-Received: from ip6-localhost ([::1]:38332 helo=hr1.samba.org) 
+	bh=V7hbZC0Hh0Gq7KvB0tTmk/BvZ226VSNRGPWRnPQOlHU=; b=I6HYIdcJp+nIklxMtioB6laBbI
+	CoDmUAcI6rEyH06KqQ3lemYQvmchIobmkIpYel39tlkiLRkfjmu0QaOBXOgxwQhRsa1cTX7fYtoxX
+	H++4rz+Fo191Z8DTzWZ30yOsYisreKjcy8FYR/9Xn4qVRvQLNCPoV8q1GJjSdMEnWIv4aeIrxliAu
+	WYffI0djm1rVhU3an8QWk3fVqeNIqQdi+i+A4iz0zNRRJUs3vIEkMxEPQgQ1PVBPkdHS9IhjEjQLF
+	ORo6o5HAPQ8s0zRoOXK4/JVAo4BIYuMjQCXWKXjId59y9eiQQkPWK66EsIUaiLqBLVcX6dPMzQUUQ
+	HZJ2+jag==;
+Received: from ip6-localhost ([::1]:20688 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1ubljo-00BGzp-18; Tue, 15 Jul 2025 19:54:52 +0000
-Received: from mail-qv1-xf34.google.com ([2607:f8b0:4864:20::f34]:44249) 
+	id 1uc5vg-00BKBr-NU; Wed, 16 Jul 2025 17:28:28 +0000
+Received: from mail-qt1-x835.google.com ([2607:f8b0:4864:20::835]:58436) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1ubljh-00BGzi-Dz
- for samba-technical@lists.samba.org; Tue, 15 Jul 2025 19:54:49 +0000
-Received: by mail-qv1-xf34.google.com with SMTP id
- 6a1803df08f44-6facf4d8ea8so45750336d6.0
- for <samba-technical@lists.samba.org>; Tue, 15 Jul 2025 12:54:44 -0700 (PDT)
+ (Exim) id 1uc5va-00BKBk-MF
+ for samba-technical@lists.samba.org; Wed, 16 Jul 2025 17:28:26 +0000
+Received: by mail-qt1-x835.google.com with SMTP id
+ d75a77b69052e-4ab63f8fb91so1475861cf.0
+ for <samba-technical@lists.samba.org>; Wed, 16 Jul 2025 10:28:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1752609283; x=1753214083; darn=lists.samba.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=8qzRlcwXYg6AwwPiXWehxsYQ3+UfrM1J6NX9J6Fau04=;
- b=bO7l0bq9G8x9nrIzo7fRs9L0K4W/jaF11BdK7u9uJ9VFaP1WXY4KuyEypSMrzWrYcC
- Ee8Zn1kPxj4Eo9gG7v0wAKtoo0iWn2+plx6u5Z2efgayLsxtdI4Qu7RoW6lzHaky9xzF
- HOMBk2sgG5exa2KpeJJ/DOeQPaYRs2ilUUpNU348VoOYoztdeqNx/YUcO1QOn8W6VgtP
- nNFWVXkiY4qXxFA6RQibK9Qg2Kfg+V+xdn8lBe9QX1IZHaD8ozS20TKYMdGaPS2S1zYR
- WWahfrqGMFXbmPRotn5gPyLclXgkh/d1Uu445nCnGT/kgZ6egXXVBdWH6NxPC4JAbji9
- 6F2w==
+ d=gmail.com; s=20230601; t=1752686901; x=1753291701; darn=lists.samba.org;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=yM+2Rk98GcMdnL2hNUE9/nTPg1oY1rqjDF3GfdJhsy0=;
+ b=nYYje1uMCO2RINNax3kApqQWKcgxcltfkn9qtx2QPIALvhyJqZ3NloJtac1Qep5k3h
+ irYFXEovOadDe/iKIBj1Z0Dp/ydu8VCVYRHK6va/kU9w0uftnSBAzn1Bsu/rY030+mfW
+ jcDLMvuNyRQ/0bGscofJ2dbA4qg39Fy8Ctd8fvFONoKqo10QGkB9B136JQ4kcujVXxfm
+ W42+UK03rAPwdZVVIBF0LX9yB56MZFCSSNDdNGZDYFDoX62RvAHPMOKpqX1p9i0Rr+b1
+ KztpUGIDSFkVkRZmgQ62Bzu1v0zMJDvgMOy7fzKeRjdFNlfaWgGXnSMQ4gFwJSbJfdZM
+ +F8g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1752609283; x=1753214083;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=8qzRlcwXYg6AwwPiXWehxsYQ3+UfrM1J6NX9J6Fau04=;
- b=w1eetlSm7Mo22laIL6kNtPWN4jUsmzPDv3YWcKGnCpBM6Su3duDYIi5Fa1eoUbyrPI
- AdctajuaX4dKbNr5ssP0C3SmGVU9g+NsWF2stN/yT711rhoR6ftQk7ai0jfw5GdlQ+J1
- jYr6XzSjHI0ixM9eCPQmar63XlWPfYQBv7+WQTlUhJXoAx+48BbqECDvT3gL9IPc2QUD
- pJKwuZISH8n00Ti3V+uP49w/lWzAozhv1+u9HO3ti8Q/03Qs6nLKzl+A4oHDHVIjtkBq
- dUuDsDxwsMUb3lnj/06J/R+3Tx0t436HxofyCCuEm8NoQh0O8GKMHMcFc3PvZiROsKNU
- YzIg==
+ d=1e100.net; s=20230601; t=1752686901; x=1753291701;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=yM+2Rk98GcMdnL2hNUE9/nTPg1oY1rqjDF3GfdJhsy0=;
+ b=vkhsYTDYrA5JC8p6mODpmFG/XDC+pexor2F3dRXQrxcWIByOgFU5HeGIggFumPqX2A
+ O9e0GD4uV4Sh79ISmkp1feQEZWCYnmGUx+nbBhVSzlimjC3V6jYXxLT2+33itiKaieaQ
+ 3XQNco2rbBJtWayfOAsyDLaTOGmqvpd9JUOK4Dfq/HPn1eegKO4nBWdvFscMGrIHK7UQ
+ /RBm9R5TqheNMwuPQfLz384SdzNnhlono7p5jsYEubCHyIMQq7S4EFheCh5I+MEcTTn5
+ bnbxIPsfMulaPyALcERsu2qhJkmFoVBfWhaBgF1nqxiNrLER+MY2zZPcQiIrpiDhHJ97
+ bMVg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWKNUj7hOahJJKV9JtbJ/FTBhMTFdsQMHsntz7r/MGtUXRT2G3pHoHD5wvcxT5znI67Fo32kQUNO4u9fYjkWzM=@lists.samba.org
-X-Gm-Message-State: AOJu0YxDlTOwRSu84U++Y5tuTW3r4vQUkx64QmzU8OP6mBI23UJDSAOU
- WR9qoA+HoFwccakYrNMQ68fXhsU47Ik24DanhxUnk3TC8hjOlbNYDd0VTS4aUoPqcsUiKaqxHZt
- RK/ljUW5gENo8uU0lXoH+68PrBejOe+X1Ez/D
-X-Gm-Gg: ASbGncsQlSJenN83j2kGINOc7JpE2LC9HoMsZnA+rj2YYCvzEg46y08CyfOTBi2UBvw
- ocIj39fAgsfdKZyzpyBTOn2jjJTzVhGgdtr13w2Y3h4VrN1URPXDEzRQS1QEPbowemdbtzvNu5H
- u/qRgvDDZv88WtSJp/+Z+IUdMkwtTu7MYMYd9S+ntXnFre4JvVm3kiOweT46Wec0hZ3xd4ID2+y
- jUVmw==
-X-Google-Smtp-Source: AGHT+IHe7gptNDXi9S0Ng4lUVo454Eurvj64qo/EpwernIpoMPhGGO8IhMleD+PDaRInXr9gA/AKjGpM5e3pXS7L5iA=
-X-Received: by 2002:a05:6214:19cc:b0:701:9d0:1408 with SMTP id
- 6a1803df08f44-704f4aac139mr9554436d6.20.1752609282320; Tue, 15 Jul 2025
- 12:54:42 -0700 (PDT)
+ AJvYcCWyuKnxf8kviAhYeVp6E/UiVjGOdSgvcv38O7BJXwdH6sqoU9jCfF4Zp+Bi12ic5c6vpHADn2e4K4eWHWYmhks=@lists.samba.org
+X-Gm-Message-State: AOJu0YzIGW92O3EqwHdBXoEWBaSeLLB+dAiGljmHRGGTrCOOeX6YG8pZ
+ E+NOFhLYXiZyUzkY0rZLLS3Dw0ThAGyS5bSVj7qAdAURtb6/LRvc7PoqT8SXAYyasyGB9aPjnS3
+ IOtzVyF8vcDqHi3WtO3sqZ9rWgSKBNJE=
+X-Gm-Gg: ASbGncsnu23P+NgohE5LaOCpPCkMJosp8YzePGIimkOFT5vrNaxKXnAXKUFpW1vO/tp
+ ieMc6d9DgNnEBWUKLvlIPFWaDtgQZtNt8w5rttnFClq34aFuBvna7SSsTMX5Uj2vLCsYskLr8tN
+ kBzbMFERfKB6CyyAeCfOVvrotKjOIgxrWrGwLML7vqn/MHTcyZBHyKJgCcn3WU9RRqzVvXQRL7L
+ 7TIZz1jx5iNXaYmBwJF5xZoU1X/tbm8+9XtUbensg==
+X-Google-Smtp-Source: AGHT+IFCbUbzHDYVKoMjO3PnsLoBWmTeky+oAVRMgWPdBCIc9ch2/VHO0y28bpLsn8J5wIrICyj2r7EoQVVX6ulc9B0=
+X-Received: by 2002:a05:622a:588:b0:4ab:41a2:b980 with SMTP id
+ d75a77b69052e-4ab93d492aamr45680081cf.33.1752686900334; Wed, 16 Jul 2025
+ 10:28:20 -0700 (PDT)
 MIME-Version: 1.0
-References: <42e549c1-0f92-4b95-b62b-3e0efab9aa10@samba.org>
- <5519b2d9-600c-4a3f-b44f-594877417df7@samba.org>
- <20250714165844.4hctlrwegfspiius@pali>
- <CAH2r5ms9Lt3h9q2B6VsbhkoM=_yEdpFXguiHRrrkbsrbkp6j=Q@mail.gmail.com>
- <20250714192404.j3dw6l3afgm2voe6@pali>
- <CAH2r5msRGGHyy0GdNgVYBVN+8NzfevDS-wtzr9TO5jF5NmoxHQ@mail.gmail.com>
- <20250714211016.zqddwjdvybeplgdf@pali>
- <CAH2r5mumdvhWTNOCEGV-dT8aQVJrUQEDep0GEBn_CbKF+o3kjQ@mail.gmail.com>
- <20250715080911.julhkkcf7an56q4w@pali>
- <CAH2r5mvAuffmNwgJZ=n3m4aj4Xn45unK1ENPEdL_=pG-S3XHCw@mail.gmail.com>
- <20250715174321.7xko6gtmmlfsrjze@pali>
-In-Reply-To: <20250715174321.7xko6gtmmlfsrjze@pali>
-Date: Tue, 15 Jul 2025 14:54:31 -0500
-X-Gm-Features: Ac12FXxBPQm4VZa0owHddwyJD8Q9oSmIJzSDTS5AcY5a_H7OLOSFh7NOBQcGY4k
-Message-ID: <CAH2r5muQPRjpzWFLNJirhNjJ=DyJNusg-oNYOtQdxc2d-A7Hog@mail.gmail.com>
-Subject: Re: Samba support for creating special files (via reparse points)
-To: =?UTF-8?Q?Pali_Roh=C3=A1r?= <pali@kernel.org>
+References: <a97b22e8-144e-45ed-8850-c3fd18769a6c@pre-sense.de>
+ <CAH2r5mtgWfxQtoy2gwnMiWM3HXno2icuWmiuhMJ64yTAi_jsyQ@mail.gmail.com>
+ <aHXuSKMsQsPWd5NC@toolbx> <26a52d1e-f829-4264-a39b-a9591a5d9eb1@pre-sense.de>
+In-Reply-To: <26a52d1e-f829-4264-a39b-a9591a5d9eb1@pre-sense.de>
+Date: Wed, 16 Jul 2025 12:28:08 -0500
+X-Gm-Features: Ac12FXywd3InPgCIle30W-6TxWL1M-CX0UwWxyQANmun1lgsfEvVCMk21W_zfZc
+Message-ID: <CAH2r5mvSEv1RGyjpsPg9s8auS5hb9sF4xVNUsetKf1ZkEXJnfA@mail.gmail.com>
+Subject: Re: Using UPN with mount.cifs?
+To: =?UTF-8?B?VGlsbCBEw7ZyZ2Vz?= <doerges@pre-sense.de>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -95,327 +87,157 @@ List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
 From: Steve French via samba-technical <samba-technical@lists.samba.org>
 Reply-To: Steve French <smfrench@gmail.com>
-Cc: CIFS <linux-cifs@vger.kernel.org>, Paulo Alcantara <pc@manguebit.org>,
- samba-technical <samba-technical@lists.samba.org>,
- "vl@samba.org" <vl@samba.org>, Jeremy Allison <jra@samba.org>
+Cc: linux-cifs <linux-cifs@vger.kernel.org>, Alexander Bokovoy <ab@samba.org>,
+ samba-technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Tue, Jul 15, 2025 at 12:43=E2=80=AFPM Pali Roh=C3=A1r <pali@kernel.org> =
-wrote:
->
-> On Tuesday 15 July 2025 12:07:50 Steve French wrote:
-> > On Tue, Jul 15, 2025 at 3:09=E2=80=AFAM Pali Roh=C3=A1r <pali@kernel.or=
-g> wrote:
-> > >
-> > > On Monday 14 July 2025 22:28:45 Steve French wrote:
-> > > > On Mon, Jul 14, 2025 at 4:10=E2=80=AFPM Pali Roh=C3=A1r <pali@kerne=
-l.org> wrote:
-> > > > >
-> > > > > On Monday 14 July 2025 15:30:26 Steve French wrote:
-> > > > > > > But generally this is not Linux centric, but rather generic t=
-o any other
-> > > > > > implementations.
-> > > > > >
-> > > > > >
-> > > > > > If they are supporting the SMB311 Linux Extensions why wouldn't=
- they want
-> > > > > > to support special files? All of the servers which currently su=
-pport the
-> > > > > > extensions do
-> > > > > > Thanks,
-> > > > >
-> > > > > Because of that possible filesystem limitation (like fat or proc =
-or fuse).
-> > > >
-> > > > That is a moot point because even if the mount has FAT or FUSE moun=
-ts
-> > > > under it, the server can still support reparse points on that share=
-.  A share
-> > > > often crosses fs type boundaries, so it is always going to be possi=
-ble to
-> > > > setup a share where creating special files will work for only some =
-of the
-> > > > subdirectories - but at least for those cases with the suggested ch=
-ange
-> > > > we will return a more accurate return code (e.g. EACCES in some cas=
-es)
-> > >
-> > > That is not fully truth. Crossing a mount point in mounted SMB share =
-is
-> > > signaled by the new mount point over SMB and so the SMB client is
-> > > interpreting it like a new share and reading fs attributes for that
-> >
-> > That does not look correct.
-> > I just tried this to Samba (mounting to the root of my laptop, and cd i=
-nto
-> > various subdirectories on various mounts with fs) and none of them trig=
-gered
-> > query fs information.
->
-> I have tried it more times against Windows SMB server and it worked
-> fine. I created mount point on SMB share, which is pointing to different
-> filesystem on external disk with FAT and it is working fine on recent
-> Windows Server 2022 and is working fine also on old Windows 2000. So
-> seems that this is working fine for at least 25 years.
->
-> I tried creating mount point via both GUI "diskmgmt.msc" tool (which
-> allows to choose disk and then select mount point where to mount it on
-> other disk e.g. C drive) and also via CLI "mountvol" command in cmd.exe,
-> similar to UNIX mount command.
->
-> If it does not work against Samba then it looks like Samba issue.
+> I understand you correctly, mount.cifs basically cannot use the UPN to
+authenticate
 
-Not necessarily, but in any case until Windows supports SMB3.1.1 POSIX
-extensions
-it is moot point for the change to correctly check if SMB3.1.1 POSIX Extens=
-ions
-(not just check if the fsattr for supporting reparse points) is set.
-Obviously a server
-can (and will) support special files with SMB3.1.1 POSIX (emulating
-them as reparse points over
-the wire, but storing them however the server thinks is best) but some
-will not support reparse points
-generally (just in the narrow case for SMB3.1.1 POSIX Extensions)
+It is really up to the server if it has special case code to handle
+user@domain (instead of just sending user) sent as username in ntlmssp
+auth. For Kerberos auth (peer to peer Kerberos will also become more common
+soon instead of ntlmssp even when not domain joined) that is different
+story as previous email explained.
 
-> > > crossed path. Linux SMB client is already doing it and correctly hand=
-les
-> > > crossed mount points. It also shows crosses in the "mount" output.
-> >
-> > Looking at mount output I see no difference after crossing multiple
-> > mount points under the same share, no automounts were created eg
-> > and nothing new shows up in /proc/fs/cifs/DebugData or /proc/mounts
->
-> When I accessed the mount point then I see a new line appeared in /proc/m=
-ounts.
->
-> And shell "stat" correctly shows different Device major/minor numbers
-> for files inside the mount point and on the main share.
+Since upn would be sent to the server for ntlmssp case it is really up to
+the server, but obviously it is better to resolve the upn to the correct
+domain and pass in the domain
 
-That is not the case to Samba (and presumably to some other servers as
-well) although
-it may be for Windows.   Windows handles junctions/links pointing to
-different drives much
-differently than Linux so am not surprised that the behavior differs.
-> > > > > > Steve
-> > > > > >
-> > > > > > On Mon, Jul 14, 2025, 2:24=E2=80=AFPM Pali Roh=C3=A1r <pali@ker=
-nel.org> wrote:
-> > > > > >
-> > > > > > > On Monday 14 July 2025 12:31:03 Steve French wrote:
-> > > > > > > > > It does not matter if the client or server is POSIX or no=
-t. Also on
-> > > > > > > > > POSIX systems there are filesystems without the support f=
-or special
-> > > > > > > > > files and it is common scenario on more UNIX systems that=
- for
-> > > > > > > particular
-> > > > > > > > > mount are special files completely disabled for security =
-reasons.
-> > > > > > > >
-> > > > > > > > If it is disabled for security reasons, then probably bette=
-r to still
-> > > > > > > > send the request and let the server return the correct retu=
-rn code
-> > > > > > > > (e.g. access denied rather than "not supported").   But for=
- Linux fs
-> > > > > > > > the only examples I can think of where all special files ar=
-e disabled
-> > > > > > > > are VFAT and some pseudo-filesystems like /proc
-> > > > > > >
-> > > > > > > In case it is disabled for security reasons and server wants =
-to announce
-> > > > > > > that it is "available but disabled for security reasons" rath=
-er than
-> > > > > > > "not support at all", then yes it makes sense to send the req=
-uest and
-> > > > > > > let it fail with ACCESS error with all those cleanup related =
-issues.
-> > > > > > > But in this case server should announce the support that it i=
-s available
-> > > > > > > for clients.
-> > > > > > >
-> > > > > > > In Linux it is not only VFAT. It is also slightly modern exfa=
-t. And also
-> > > > > > > whatever is connected over fuse to userspace.
-> > > > > > >
-> > > > > > > But generally this is not Linux centric, but rather generic t=
-o any other
-> > > > > > > implementations.
-> > > > > > >
-> > > > > > > > On Mon, Jul 14, 2025 at 11:58=E2=80=AFAM Pali Roh=C3=A1r <p=
-ali@kernel.org> wrote:
-> > > > > > > > >
-> > > > > > > > > On Monday 14 July 2025 10:23:17 Ralph Boehme wrote:
-> > > > > > > > > > On 7/14/25 8:01 AM, Ralph Boehme via samba-technical wr=
-ote:
-> > > > > > > > > > > On 7/14/25 4:18 AM, Jeremy Allison wrote:
-> > > > > > > > > > > > It's an oversight I'm afraid.
-> > > > > > > > > > >
-> > > > > > > > > > > hm... it seems reparse points support is mandatory fo=
-r SMB3 POSIX
-> > > > > > > so I
-> > > > > > > > > > > wonder what this additional checks buys us.
-> > > > > > > > >
-> > > > > > > > > No. It is not mandatory. Getting or setting of reparse po=
-ints is done
-> > > > > > > > > via IOCTLs which are optional. Also fs attribute for repa=
-rse points is
-> > > > > > > > > optional.
-> > > > > > > > >
-> > > > > > > > > And that make sense as there are still lot of filesystems=
- which do not
-> > > > > > > > > support reparse points (e.g. FAT) and this fs attribute i=
-s exactly what
-> > > > > > > > > server announce for clients and applications to tell feat=
-ure support.
-> > > > > > > > > So application would know what features are provided and =
-which not on
-> > > > > > > > > particular share. Server can support reparse points on sh=
-are A but does
-> > > > > > > > > not have to support it on share B. E.g. when A is NTFS an=
-d B is FAT.
-> > > > > > > > >
-> > > > > > > > > > > While I agree that generally we should likely set thi=
-s, for SMB3
-> > > > > > > POSIX
-> > > > > > > > > > > the client should probably not check this and we shou=
-ld keep it
-> > > > > > > out of
-> > > > > > > > > > > the spec.
-> > > > > > > > > >
-> > > > > > > > > > one additional thought: it seems like a valid scenario =
-to be able to
-> > > > > > > support
-> > > > > > > > > > SMB3 POSIX on a server that does not support xattrs on =
-the backing
-> > > > > > > > > > filesystem and hence may not have a way of storing arbi=
-trary reparse
-> > > > > > > points.
-> > > > > > > > >
-> > > > > > > > > xattrs and reparse points are two completely different th=
-ings, and they
-> > > > > > > > > should not be mixed or exchanged.
-> > > > > > > > >
-> > > > > > > > > For example FAT on older Windows versions supported xattr=
-s (I'm not
-> > > > > > > sure
-> > > > > > > > > if recent Windows version still support them), but does n=
-ot and never
-> > > > > > > > > supported reparse points.
-> > > > > > > > >
-> > > > > > > > > For checking if xattrs (in MS terminology called Extended=
- Attributes or
-> > > > > > > > > abbrev EAs) there is a fs attribute FILE_SUPPORTS_EXTENDE=
-D_ATTRIBUTES.
-> > > > > > > > >
-> > > > > > > > > Again, application can check if server share supports xat=
-trs by this
-> > > > > > > > > fs attribute and decide what to do next.
-> > > > > > > > >
-> > > > > > > > > > In SMB3 POSIX we're just using them as a wire transport=
-, not
-> > > > > > > necessarily
-> > > > > > > > > > expecting full support from the server.
-> > > > > > > > > >
-> > > > > > > > > > Hence, for Samba I see the following change
-> > > > > > > > > >
-> > > > > > > > > >     smbd: announce support for FILE_SUPPORTS_REPARSE_PO=
-INTS if the
-> > > > > > > share
-> > > > > > > > > > supports EAs
-> > > > > > > > >
-> > > > > > > > > FILE_SUPPORTS_EXTENDED_ATTRIBUTES (0x00800000) !=3D
-> > > > > > > FILE_SUPPORTS_REPARSE_POINTS (0x80)
-> > > > > > > > >
-> > > > > > > > > > ---
-> > > > > > > > > >  source3/smbd/vfs.c | 3 +++
-> > > > > > > > > >  1 file changed, 3 insertions(+)
-> > > > > > > > > >
-> > > > > > > > > > diff --git a/source3/smbd/vfs.c b/source3/smbd/vfs.c
-> > > > > > > > > > index 76895f52e039..ea3fa4c8784f 100644
-> > > > > > > > > > --- a/source3/smbd/vfs.c
-> > > > > > > > > > +++ b/source3/smbd/vfs.c
-> > > > > > > > > > @@ -1345,6 +1345,9 @@ uint32_t vfs_get_fs_capabilities(=
-struct
-> > > > > > > > > > connection_struct *conn,
-> > > > > > > > > >         if (lp_nt_acl_support(SNUM(conn))) {
-> > > > > > > > > >                 caps |=3D FILE_PERSISTENT_ACLS;
-> > > > > > > > > >         }
-> > > > > > > > > > +       if (lp_ea_support(SNUM(conn))) {
-> > > > > > > > > > +               caps |=3D FILE_SUPPORTS_REPARSE_POINTS;
-> > > > > > > > > > +       }
-> > > > > > > > > >
-> > > > > > > > > >         caps |=3D lp_parm_int(SNUM(conn), "share", "fak=
-e_fscaps", 0);
-> > > > > > > > > >
-> > > > > > > > > > https://gitlab.com/samba-team/samba/-/merge_requests/41=
-04
-> > > > > > > > > >
-> > > > > > > > > > For the client this would mean, it must allow reparse p=
-oints for the
-> > > > > > > special
-> > > > > > > > > > files if SMB3 POSIX is negotiated.
-> > > > > > > > > >
-> > > > > > > > > > Makes sense?
-> > > > > > > > > >
-> > > > > > > > > > -slow
-> > > > > > > > >
-> > > > > > > > > I do not think that this is a good idea at all. It would =
-just
-> > > > > > > complicate
-> > > > > > > > > things, make more incompatibilities and prevent using FAT=
- or any other
-> > > > > > > > > filesystem without mknod support, including cases when se=
-rver itself is
-> > > > > > > > > configured to not support mknod for e.g. security reasons=
-.
-> > > > > > > > >
-> > > > > > > > > FILE_SUPPORTS_REPARSE_POINTS is per-share fs attribute wh=
-ich says if
-> > > > > > > the
-> > > > > > > > > reparse point of any type are supported. If it was decide=
-d that special
-> > > > > > > > > files, like fifos or character devices are represented as=
- reparse
-> > > > > > > points
-> > > > > > > > > then for share/filesystem on which are special files supp=
-orted, server
-> > > > > > > > > has to announce the FILE_SUPPORTS_REPARSE_POINTS fs attri=
-bute.
-> > > > > > > > >
-> > > > > > > > > And if the server itself supports special files, but part=
-icular
-> > > > > > > > > filesystem like FAT does not support it, then server shou=
-ld not
-> > > > > > > announce
-> > > > > > > > > the FILE_SUPPORTS_REPARSE_POINTS fs attribute.
-> > > > > > > > >
-> > > > > > > > > This is how it was designed and how it is used.
-> > > > > > > > >
-> > > > > > > > > It does not matter if the client or server is POSIX or no=
-t. Also on
-> > > > > > > > > POSIX systems there are filesystems without the support f=
-or special
-> > > > > > > > > files and it is common scenario on more UNIX systems that=
- for
-> > > > > > > particular
-> > > > > > > > > mount are special files completely disabled for security =
-reasons.
-> > > > > > > > >
-> > > > > > > > >
-> > > > > > > > > So the result is that also when POSIX extensions are nego=
-tiated, it is
-> > > > > > > > > important and required to know by POSIX client whether pa=
-rticular
-> > > > > > > > > exported share supports reparse points / special files or=
- not.
-> > > > > > > > > And FILE_SUPPORTS_REPARSE_POINTS is already there for it.
-
-
-
---=20
 Thanks,
 
 Steve
 
+On Wed, Jul 16, 2025, 1:45=E2=80=AFAM Till D=C3=B6rges <doerges@pre-sense.d=
+e> wrote:
+
+> Hello,
+>
+> thanks for your answers.
+>
+> In our setup we use NTLMSSP and a NetApp.
+>
+> If I understand you correctly, mount.cifs basically cannot use the UPN to
+> authenticate - or at least not reliably.
+>
+> Simply splitting up the UPN (<user>@<domain>) for mount.cifs doesn't work
+> either,
+> because the SAM account name has a different domain and also a different
+> username scheme.
+>
+> Is there a canonical way (with Linux) to map a given UPN to its SAM
+> account name?
+>
+> Thanks -- Till
+>
+>
+> On 15.07.25 07:59, Alexander Bokovoy wrote:
+> > On =D0=9F=D0=B0=D0=BD, 14 =D0=BB=D1=96=D0=BF 2025, Steve French via sam=
+ba-technical wrote:
+> >> This is an interesting question.
+> >>
+> >> mount.cifs will pass it (the UPN) down to cifs.ko so it will get sent
+> >> on the wire, so behavior will vary by server.
+> >
+> > Is this with GSSAPI krb5 or NTLMSSP?
+> >
+> > For GSSAPI we either expect already existing credential or initialize i=
+t
+> > from a keytab. In the first case cifs.upcall is not doing anything to
+> > enable enteprise principal because it is not handling the initial ticke=
+t
+> > acquisition. In the second case it doesn't do anything to mark the
+> > client principal as an enteprise one.
+> >
+> > The difference is by how that client principal is marked down in GSSAPI
+> > negotiation. It needs two parts:
+> >
+> >   - a client name should be an enterprise principal,
+> >   - client code should make sure it sets a flag to accept rewrites of
+> >     its own client principal name by the KDC in the returned ticket
+> >     (principal canonicalization).
+> >
+> > Neither is done by the cifs.upcall. More to that, for GSSAPI krb5 the
+> > username passed to the cifs.upcall is pretty much ignored except for th=
+e
+> > keytab initialization.
+> >
+> > With NTLMSSP you don't really have 'enterprise principals', as it is up
+> > to the SMB server to interpret the name you passed.
+> >
+> > The client has nothing to indicate that. A server may consider
+> > interpreting it as a local machine-provided one (username=3Dtestuser), =
+or
+> > consider to map it into the local one even if it has domain name
+> > explicitly set (such as with IAKERB case on a standalone Windows).
+> >
+> >>
+> >> I tried it to current Samba (passing "username=3Dtestuser" and also
+> >> "username=3Dtestuser@somedomain" and also for
+> >> "username=3Dtestuser,domain=3Dsomedomain") and it worked fine for all
+> >> three cases (with and without UPN, with and without "domain=3D").
+> >>
+> >> Trying it to Windows though:
+> >> 1) "username=3Dtestuser" worked
+> >> 2) "username=3Dtestuser,domain=3Dsomedomain"  worked
+> >> 3) "username=3Dtestuser@somedomain"  did not work to Windows server
+> >>
+> >> So looks like the behavior varies by server, but safest way is to
+> >> specify the UPN as "username=3D" and "domain=3D" rather than
+> >> username=3Dsomeuser@somedomain
+> >>
+> >> On Mon, Jul 14, 2025 at 7:44=E2=80=AFAM Till D=C3=B6rges <doerges@pre-=
+sense.de>
+> wrote:
+> >>>
+> >>> Hello everyone,
+> >>>
+> >>>
+> >>> I'm wondering whether it is possible to use User Principal Names (UPN=
+)
+> instead of
+> >>> accountnames + workgroup/domain, when mounting a share with mount.cif=
+s?
+> >>>
+> >>>
+> >>> The man page for mount.cifs does not mention UPN. A quick grep throug=
+h
+> the latest
+> >>> sources (cifs-utils-7.4) doesn't mention UPN either.
+> >>>
+> >>> Searching the ML in particular and the web in general came up emtpy,
+> too.
+> >>>
+> >>>
+> >>> So, is there a way to
+> <https://www.google.com/maps/search/o,+is+there+a+way+to+?entry=3Dgmail&s=
+ource=3Dg>do
+> it?
+> >>>
+> >>>
+> >>> Thanks and regards -- Till
+> >>>
+> >>> --
+> >>>                                           www.pre-sense.de/fcknzs
+> >>>
+> >>> PRESENSE Technologies GmbH             Nagelsweg 41, D-20097 HH
+> >>> Gesch=C3=A4ftsf=C3=BChrer/Managing Director        AG Hamburg, HRB 10=
+7844
+> >>> Till D=C3=B6rges                              USt-IdNr.: DE263765024
+> >>>
+> >>
+> >>
+> >> --
+> >> Thanks,
+> >>
+> >> Steve
+> >>
+> >
+> --
+>                                          www.pre-sense.de/fcknzs
+>
+> PRESENSE Technologies GmbH             Nagelsweg 41, D-20097 HH
+> Gesch=C3=A4ftsf=C3=BChrer/Managing Director        AG Hamburg, HRB 107844
+> Till D=C3=B6rges                              USt-IdNr.: DE263765024
+>
