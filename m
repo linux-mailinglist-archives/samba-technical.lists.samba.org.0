@@ -2,67 +2,47 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id B7D3AB0E5C1
-	for <lists+samba-technical@lfdr.de>; Tue, 22 Jul 2025 23:55:31 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3E6D1B0E8CF
+	for <lists+samba-technical@lfdr.de>; Wed, 23 Jul 2025 04:53:34 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=yMX7vsD2YWgK0ICuo6AfqWvaZtUErY6SgEQTXqK/5fY=; b=PmdsEopyRe0lZht0MXAbUrhfrt
-	NwfaoNiQi9VqhU7h3CGm6l4Kim8UvPlg8eKmvLV1J8AfF95G4i9EIoMHFpbJlnz2mEJTR/ipaqQyl
-	aBfA8DCS1bw3oaWzQ2ngzDzvi5FzHE7t+FLyRMMW2lWbZaFT39T1M/uoCTeDGzI4FO/8HKPsZwk+z
-	JLkkyxtFBPrENOkPQc5USbDT+61pbS+eBNq5m7D5lgZ2nC9T8zyShDRuXhtkONddfTvEER0VbqAJ3
-	aZaFCj0/haARgBngboO3af5KI4ADb/GAI0T+vUOPxxZSpMRSKk4mLBZIu9hGD7dQmP8i/ft+YdLX0
-	oPHV4fHw==;
-Received: from ip6-localhost ([::1]:33046 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=shJZgOfH/10SANSprYFG3VEZ73EdfNorxXuJDwiCffM=; b=ddkY5riwrLPqJSUL495UXRqBsQ
+	UqgIBo4sTuB3OlBwXIyMGj2fQAY+gw8kqMM9BiJGmGOdzwI4ZrGDuQXhEpCu9QGTTz8dzfk4s+yPC
+	yeBcf25p6LeKECZOS/jdC3Vk9mXkvioZ7keRbUbMZd9N727MjE6TRPuxcwofa0+GJZVSXmkWLsG4t
+	7JoQM2nF9vPiiiDkldDRmPoofpykSsQsi3hw1AXzipJudC2hz8xD945qOo5zLTfpN20sinJ/MBY9w
+	DmI1Ui5Ge7rmDE4iraW33x8X/ZhjZwe2X8XdaWDeqMC4sqC/pwOXOlDkDIu8Proy95q1VEzmk40sZ
+	zGzYr9Wg==;
+Received: from ip6-localhost ([::1]:55320 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1ueKwh-00BdWi-BV; Tue, 22 Jul 2025 21:54:47 +0000
-Received: from mail-qk1-x733.google.com ([2607:f8b0:4864:20::733]:61479) 
+	id 1uePbC-00Bdzu-B9; Wed, 23 Jul 2025 02:52:54 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:56504) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1ueKwc-00BdWb-RV
- for samba-technical@lists.samba.org; Tue, 22 Jul 2025 21:54:45 +0000
-Received: by mail-qk1-x733.google.com with SMTP id
- af79cd13be357-7d5d1feca18so564118485a.2
- for <samba-technical@lists.samba.org>; Tue, 22 Jul 2025 14:54:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1753221281; x=1753826081; darn=lists.samba.org;
- h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=yMX7vsD2YWgK0ICuo6AfqWvaZtUErY6SgEQTXqK/5fY=;
- b=epxEGE+x9VQ5YppKOEOOkROmQI8h7tRVzZ4Env6xvJEeDYPuxtcIl7JAkup4+j2VKW
- OSFPCkXnnHHzR0AMiVBqkNf6cnOC9MercBCWqwbkDddQSv1C1E7ImtZQQnnzlCvWozRz
- TfYyaMC/4pWefV971e40FUFhqGJMVWop6wehgucIPmFX2BVPnhNakPkWZzE8NFVFqnhx
- dk6QPBk7+bAu7m/HYTyXn3dDS2GaXFkrtZJaIFJHj8nYOoQ8jpNiPJUI/c+0voCv0+3b
- RmOJtJGD1r4fzU83YNXrNKGEB8rXaaoQy3IeDc2DDICQLVNdhMeBFd/9sMdUTUus47Qp
- uPMg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1753221281; x=1753826081;
- h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=yMX7vsD2YWgK0ICuo6AfqWvaZtUErY6SgEQTXqK/5fY=;
- b=aORVNXLCe1fYyfuSal+QdYc+kosha7+jgL6WVNKkuEa1K4PkSmi2ZhN0rDsE+gtG0z
- Tkl/U10mwFZ8jITvmZB5kq2I7rgEzgbFX2cOLdd1fNHeJfRSjVoyihaND2G5cCk/OmYi
- 5ONC1rbpQZE+La7DmRLW/rENNiuTVI2/aTiaO0Zljwy+1Yyhfm/f0auI/zVs3tFpeSj9
- R/n/f9T6FH36ThU/zIndEreul9UeosFvEHTkcgINwZEYxU24tAxpsPuIOfK3zSSEYbg1
- l7h+Z15KOD02QgZ6FDrlNqHxQMLJpFPos7yGz9tpljYsBmIyexUgkNIet1A9XZuoT4jP
- e+kw==
-X-Gm-Message-State: AOJu0YwRc5+fd/8A/Es3iAlcBqboaxHKo7mQ9tahJfhUGUa8UkmULL07
- 8ZiVzqBgzDmaBb4hKqmp4hq+s/US/dKbyGP1Odm6SqoGu3bavLC7VtJA33BU3aoeAjEcStekmdk
- CbMSS0FqskNRG4FCZC/jPxFgFEYeX8xWuhrXog0o=
-X-Gm-Gg: ASbGncsrFVxsUS47PCsJAts3ysvnNgMWvXSqzOGC6vaEe4VqQ55BQlMaw/MVp/9RvTi
- eWlHzWJAeS+qTIygB6JQS6CCtX8jPmxHL0PMIrW3FD9H6lQj2YrO+qRyGuQTkVyIvIS3Kh4cQbF
- WOnsMhE9w/MHxOWm59hb0Kt8/M1v0cWk5yLPs+OApYFxBTY+MF+oL4DLM7ZWMpdX2HTtOuEwIgg
- zAAzx0N8J9PDREre9akYBZTMyQuzPL2LsoKt/Jmaw==
-X-Google-Smtp-Source: AGHT+IE1KyNAX06AucOGxHNEiCRimBCVTY8EkEwYnNZPwQQD7FSbzJVzP0oNsyrZQ99j7pyOijeJZJWgh8Y+qmr1aSI=
-X-Received: by 2002:a05:6214:4105:b0:704:f952:3d6a with SMTP id
- 6a1803df08f44-707006e0b0amr9792606d6.51.1753221280729; Tue, 22 Jul 2025
- 14:54:40 -0700 (PDT)
+ (Exim) id 1uePb7-00Bdzn-Os
+ for samba-technical@lists.samba.org; Wed, 23 Jul 2025 02:52:52 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Message-ID:Cc:To:From:Date;
+ bh=shJZgOfH/10SANSprYFG3VEZ73EdfNorxXuJDwiCffM=; b=hgNOvYzOWYOgTEWRAK8Njb7ESt
+ 8Y1r5EyNKsh5l3IEgmzwjVjZm8rCeUdUKO4/gCQS9ntZbAgbD+h2cPXX+CUfPNOSEOSneRlriLMR8
+ diaTJVqwtupPpOEoemaRBn/gNVt+hGv4JI5Nwmj/hpGl5+mAR6l86JARDSiNu23spJmUz7Q28YcCF
+ cIhqwq0+QGgoIGaFz6N92VUrNJbvfK2jViH2C75c4uC2ahfUC5mhCJFfdcAIrXf8ovxyPcWS+3vXY
+ DtNdeoCfYxscpqoQr2/TNKwqCbQTM4Qm7flw9RwsDcohPMNeNUQMUFBD4Ln16t4YIjtHtNAyrqnN5
+ EM+gKnNUVMqmoDafGOI2hp2pyLz5c+vCe7HGfjGArN45jEHyED3lDWh21OlI8/jtmhiCnddQX0wKd
+ EpMLZgeBERjsUnA6FED8aZtSlL/MZpdCL70paFtXM0mnhqwBTvjnN+OuXLr7nWqloObujaMJIXy/1
+ NXTpYDq6oho/9B1QsIczDRrm;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1uePb6-00GXLu-22; Wed, 23 Jul 2025 02:52:49 +0000
+Date: Tue, 22 Jul 2025 19:52:46 -0700
+To: Steve French <smfrench@gmail.com>
+Subject: Re: smbclient posix_mkdir over SMB3.1.1
+Message-ID: <aIBOfm6OKYlATpAs@jeremy-HP-Z840-Workstation>
+References: <CAH2r5mvaM2Fuytp9DH3RahQ-W_mQPpi=GBuKET6do1pmyiWT4w@mail.gmail.com>
 MIME-Version: 1.0
-Date: Tue, 22 Jul 2025 16:54:29 -0500
-X-Gm-Features: Ac12FXyVbP6QqlmAufKTicJL5Gy3Z0axbMClGOVrqp1E5e24VivZrMOyN4qolG0
-Message-ID: <CAH2r5mvaM2Fuytp9DH3RahQ-W_mQPpi=GBuKET6do1pmyiWT4w@mail.gmail.com>
-Subject: smbclient posix_mkdir over SMB3.1.1
-To: samba-technical <samba-technical@lists.samba.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=us-ascii; format=flowed
+Content-Disposition: inline
+In-Reply-To: <CAH2r5mvaM2Fuytp9DH3RahQ-W_mQPpi=GBuKET6do1pmyiWT4w@mail.gmail.com>
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -76,27 +56,40 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
+From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jeremy Allison <jra@samba.org>
+Cc: samba-technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-I was noticing that with current smbclient (master branch) most POSIX
-commands don't work when connected to current Samba.  I see the
-SMB3.1.1 POSIX Extensions negotiated, and in some commands I see the
-SMB3.1.1 POSIX create context sent, but none of the posix commands
-(e.g. posix_mkdir and chmod and chown) work. After connecting to
-Samba, issuing the command "posix" succeeds (but doesn't send anything
-on the wire).   All of them fail with the following:
+On Tue, Jul 22, 2025 at 04:54:29PM -0500, Steve French via samba-technical wrote:
+>I was noticing that with current smbclient (master branch) most POSIX
+>commands don't work when connected to current Samba.  I see the
+>SMB3.1.1 POSIX Extensions negotiated, and in some commands I see the
+>SMB3.1.1 POSIX create context sent, but none of the posix commands
+>(e.g. posix_mkdir and chmod and chown) work. After connecting to
+>Samba, issuing the command "posix" succeeds (but doesn't send anything
+>on the wire).   All of them fail with the following:
+>
+>smb: \> posix
+>smb: \> posix_mkdir 0755 dir
+>Command "posix" must be issued before the "posix_mkdir" command can be used.
+>
+>Is there a trick to turn on smbclient allowing SMB3.1.1 POSIX/LInux Extensions?
 
-smb: \> posix
-smb: \> posix_mkdir 0755 dir
-Command "posix" must be issued before the "posix_mkdir" command can be used.
+Try this (completely untested :-) patch.
 
-Is there a trick to turn on smbclient allowing SMB3.1.1 POSIX/LInux Extensions?
-
--- 
-Thanks,
-
-Steve
+diff --git a/source3/client/client.c b/source3/client/client.c
+index e96efb9ea23..d0ea3a12667 100644
+--- a/source3/client/client.c
++++ b/source3/client/client.c
+@@ -3173,6 +3173,9 @@ static int cmd_posix(void)
+  
+  	if (smbXcli_conn_protocol(cli->conn) >= PROTOCOL_SMB3_11) {
+  		cli->smb2.client_smb311_posix = true;
++		CLI_DIRSEP_CHAR = '/';
++		*CLI_DIRSEP_STR = '/';
++		client_set_cur_dir(CLI_DIRSEP_STR);
+  		return 0;
+  	}
 
