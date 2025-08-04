@@ -2,47 +2,44 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id A611DB1A0F1
-	for <lists+samba-technical@lfdr.de>; Mon,  4 Aug 2025 14:12:39 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 79F2DB1A106
+	for <lists+samba-technical@lfdr.de>; Mon,  4 Aug 2025 14:16:25 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=86PQTTD/8vIal3LVRgKzMafkOkFA0tsZeqaHvjLdiYg=; b=oQKS9Jq7K+kh6RQ6nq86xrtJXg
-	pWTurBSRduQGcTtZyCZEabKl7G9UMkAQAloZ+9Tvx3j0vwWPQ0VTdt+pWlz744x13crpV2yVz7khB
-	At/ahuwTnJjs6Mp7mAwfVx9H4bslxaxeWWBFt4m1xhS67TMYHzOa/ARQlIr/c1qJcHMeUUGK2Hlpb
-	Rqf2euwMU1anzVMkwfZnXozhqLh4Z5q8J/SaDXSUxRfJI7eeyYAJHI437zOJhvB5035QLWriNOanr
-	gctMPhyMjo/rMuKLTItxQzZ/QOb7jwD/yYzf4xyOGW9gbG7Y0rxzd0TObWWp7ZFo7e4x1Qe9awpsJ
-	G6HEeJpg==;
-Received: from ip6-localhost ([::1]:50744 helo=hr1.samba.org) 
+	bh=eora2fqI5chQvxkEuD6zk0R5R0d8Ri8Smny+KGFtbIU=; b=bY16SRpmtW02Qpl0JVZ1xKML8Y
+	ZvYcJZCYH10yQrXGmg8T3rCOohazFicoR5rXoW9y1C9z6YfvBnH6ijfvjdo70XhgpWqMpbEovvZ9D
+	6cu4Kg5kJGC1C3s2NCe9p2tOHfIanCXPbXkwdOlnUBHH6dnrMaaqZiluC4xy+zHflofT3Dm5GQDF8
+	VyMRQk3qaA31nQvfN3oGrvR8dKQaMm4VyZHU+SSGXvi1QZpRFTRr12kZyWVFpbn9ByHmpd/x9YneG
+	JTQuNGSh6a2vXAlg+D8ghOlBmvRIC6TpLJZWyTtpY1KJ/ECMldY0orw+qoqF0Z62WTPA8ByJBgcrF
+	BNFPh7fQ==;
+Received: from ip6-localhost ([::1]:23218 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1uiu3L-00EHvI-6g; Mon, 04 Aug 2025 12:12:32 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:48786) 
+	id 1uiu71-00EI5Y-Bz; Mon, 04 Aug 2025 12:16:19 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:49040) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uiu2z-00EHqB-Rs
- for samba-technical@lists.samba.org; Mon, 04 Aug 2025 12:12:15 +0000
+ (Exim) id 1uiu6x-00EI5L-Ih
+ for samba-technical@lists.samba.org; Mon, 04 Aug 2025 12:16:17 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Message-ID:Date:Cc:To:From;
- bh=86PQTTD/8vIal3LVRgKzMafkOkFA0tsZeqaHvjLdiYg=; b=bdf0vcbNuGYj5WTKZrDm0nQl+G
- Nm98iy+NBCMwRcNiZAT7NI8WEapLlSdIeEKPtcb4lClpCfAdJRoujcrYcpdvw/xzPpKyGqLQMtXPj
- +o/QBclTTaeeriBWCn8G1VtNLZhDWxRdHwIgZOkXcXtebiNCb6UFQcn/A2mVIoNOPHfdhbAi7PIAS
- yT7YCs5w636nmSGviVCspdHnB3hdzsQoh57iVvPwSU0qQ080wdazA5RY6v8FMDlzpoGh6FKjB09mz
- iKgcJKCLCNUGu8bDTCxHZ+0ML/rkS/HVyZRbDZQz3xpwzsRevQ5YSeUsSauSsRWqaBcsYMJZnAUdV
- OC8otxckEmycHXjfTF+Bqxi5/Z+biR/WoUrhRLBv6tr/G6R5YteMaz77bB/Z5DNKVLLE3gzTWqYeB
- G7aSGF40NkcZO/XxChhffa+yn/aYPyXCMJMvL0VSIqjzy2HlK+RSGpn8JdBqqimzljkld5OLbylUL
- 93wlr9uVO9+k24gXo+hhWsOU;
+ bh=eora2fqI5chQvxkEuD6zk0R5R0d8Ri8Smny+KGFtbIU=; b=uLTYsGOmYLRuZA7FakALmPNLCE
+ zVWatNwIMhoyhk1spc1ijad6MWJOB+clHCCNe32NtUZdrvY9cpmULfrghG7VGg/aASP+85iuyXgEm
+ 3W6zLJ+BiOuZ6t/kFRstehfLZ2YufRs2fiQvsSbbIwGD74c+AOALyL79FH5pMSmJ3Pkff19zz8N7c
+ csHA4wDORk3RF/FNwNOLNKgYeTtELUnyHwXaKGWNqyKImvGQcNG0GzpA1Y8C6Hx830CVVfU2koOY9
+ x8pk4wwpFKqN12Gp0KlHzzW0iqtBBfmLPqVKwQIKp6VEAYb1691ANirwYx0RV3k8H69Xl+a7ng4VT
+ +0UH1eH4F/rS48JHwvXml6Pf+08VT/hX0nuoyqdLby4N1I6yNNlLqaoFGWPB9t1uW2YA8bgec6Q2T
+ Qfu/tZyFl5s9IXvnql5uanJE9PCtjbqQVah96RSfdnsGSERaEiQX4mxoC6CfNZnY74uPQCy2qABL7
+ 3E9ttXKhX2+93vmPn7FN0+c5;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uiu2x-000vyn-1H; Mon, 04 Aug 2025 12:12:07 +0000
+ (Exim) id 1uiu6w-000wCL-2P; Mon, 04 Aug 2025 12:16:14 +0000
 To: linux-cifs@vger.kernel.org,
 	samba-technical@lists.samba.org
-Subject: [PATCH 5/5] smb: client: let recv_done() avoid touching data_transfer
- after cleanup/move
-Date: Mon,  4 Aug 2025 14:10:16 +0200
-Message-ID: <64cb50961182cd17ac9bdda2913986f322a5acac.1754308712.git.metze@samba.org>
+Subject: [PATCH 0/4] smb:server: fix possible use after free problems
+Date: Mon,  4 Aug 2025 14:15:49 +0200
+Message-ID: <cover.1754309565.git.metze@samba.org>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <cover.1754308712.git.metze@samba.org>
-References: <cover.1754308712.git.metze@samba.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: samba-technical@lists.samba.org
@@ -61,76 +58,32 @@ List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
 From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
 Reply-To: Stefan Metzmacher <metze@samba.org>
 Cc: metze@samba.org, Steve French <smfrench@gmail.com>,
- Tom Talpey <tom@talpey.com>
+ Tom Talpey <tom@talpey.com>, Namjae Jeon <linkinjeon@kernel.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Calling enqueue_reassembly() and wake_up_interruptible(&info->wait_reassembly_queue)
-or put_receive_buffer() means the reponse/data_transfer pointer might
-get re-used by another thread, which means these should be
-the last operations before calling return.
+While refactoring the client and server smbdirect code I
+noticed a few problems where we might hit use after free
+style problems.
 
-Cc: Steve French <smfrench@gmail.com>
-Cc: Tom Talpey <tom@talpey.com>
-Cc: Long Li <longli@microsoft.com>
-Cc: linux-cifs@vger.kernel.org
-Cc: samba-technical@lists.samba.org
-Fixes: f198186aa9bb ("CIFS: SMBD: Establish SMB Direct connection")
-Signed-off-by: Stefan Metzmacher <metze@samba.org>
----
- fs/smb/client/smbdirect.c | 25 +++++++++++--------------
- 1 file changed, 11 insertions(+), 14 deletions(-)
+In order to allow backports I decided to fix the problems
+before trying to move things to common code.
 
-diff --git a/fs/smb/client/smbdirect.c b/fs/smb/client/smbdirect.c
-index 21a12e08082f..58321e483a1a 100644
---- a/fs/smb/client/smbdirect.c
-+++ b/fs/smb/client/smbdirect.c
-@@ -479,10 +479,6 @@ static void recv_done(struct ib_cq *cq, struct ib_wc *wc)
- 		data_transfer = smbd_response_payload(response);
- 		data_length = le32_to_cpu(data_transfer->data_length);
- 
--		/*
--		 * If this is a packet with data playload place the data in
--		 * reassembly queue and wake up the reading thread
--		 */
- 		if (data_length) {
- 			if (info->full_packet_received)
- 				response->first_segment = true;
-@@ -491,16 +487,7 @@ static void recv_done(struct ib_cq *cq, struct ib_wc *wc)
- 				info->full_packet_received = false;
- 			else
- 				info->full_packet_received = true;
--
--			enqueue_reassembly(
--				info,
--				response,
--				data_length);
--		} else
--			put_receive_buffer(info, response);
--
--		if (data_length)
--			wake_up_interruptible(&info->wait_reassembly_queue);
-+		}
- 
- 		atomic_dec(&info->receive_credits);
- 		info->receive_credit_target =
-@@ -528,6 +515,16 @@ static void recv_done(struct ib_cq *cq, struct ib_wc *wc)
- 			info->keep_alive_requested = KEEP_ALIVE_PENDING;
- 		}
- 
-+		/*
-+		 * If this is a packet with data playload place the data in
-+		 * reassembly queue and wake up the reading thread
-+		 */
-+		if (data_length) {
-+			enqueue_reassembly(info, response, data_length);
-+			wake_up_interruptible(&info->wait_reassembly_queue);
-+		} else
-+			put_receive_buffer(info, response);
-+
- 		return;
- 	}
- 
+The client has similar problems, I've sent a separate
+patchset for the client already.
+
+Stefan Metzmacher (4):
+  smb: server: remove separate empty_recvmsg_queue
+  smb: server: make sure we call ib_dma_unmap_single() only if we called
+    ib_dma_map_single already
+  smb: server: let recv_done() consitently call
+    put_recvmsg/smb_direct_disconnect_rdma_connection
+  smb: server: let recv_done() avoid touching data_transfer after
+    cleanup/move
+
+ fs/smb/server/transport_rdma.c | 97 ++++++++++++----------------------
+ 1 file changed, 35 insertions(+), 62 deletions(-)
+
 -- 
 2.43.0
 
