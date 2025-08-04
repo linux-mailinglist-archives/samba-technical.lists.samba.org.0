@@ -2,44 +2,43 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 62429B1A0EB
-	for <lists+samba-technical@lfdr.de>; Mon,  4 Aug 2025 14:12:01 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9FE92B1A0EA
+	for <lists+samba-technical@lfdr.de>; Mon,  4 Aug 2025 14:12:00 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=to7ZLsOwz04pZ3TzBcfuBH6LG/57UBcjbzWF3eZFcFg=; b=kiVnrm7yEMjJuAIygbWXpFmYez
-	qwDYrX65Mkk21ritq7W4lR/YO9lX0qPrTJy30lvU/De0C7sDWE3+D3MT4DiZc0EuEdwyLEiJSbM8U
-	7RBuE2W+LLl19XlkoRZQPCSd5ubVeg+TQj2dNlCU6Y30TB79asHAzyRN3GY23JIesfU90O64pkuFF
-	bFKMqIcf0zxVIAUlTI7gEE94Db9Mj+uUMYGnYhB7mfP6L8P4iX0pC4uU7TIPued1lpViROEyYrDMZ
-	4l7so2KNoJ9r6p6QXX47gNM4+hzFpkp+Hp2rXEok+5xdSr6/Vh/itWw8uqc8NDQNCX2C5/KNeyDd7
-	BVE/8Duw==;
-Received: from ip6-localhost ([::1]:27142 helo=hr1.samba.org) 
+	bh=2AfOgfm+5DEpiimicaqLy6hJIKmn3TMWbQ1JNi3c/4A=; b=rJhaTV+QhjHr2/o65dNtkm9slS
+	QzAGsv2WgO+95Vf9Wk8F9OUv6ynrwE+q5cwiM2tchlQpbRxx3aiTzOxrIs6o/emLrO9a0uxoIFoSU
+	ShicUEA+T5Kl4+Pw/PzSMq8dqgMBGhOcHBDdRVAiZG/Iayk3HTKXBfJi693WJnyzzz6sGPABqeg1b
+	3F/7CerHGN31IHmGI1FTARuXLV7lrYYl2Vu0wVfSYdDiyEYhrYrwz5Z/twRsOmqjjEeRzYGdp9FKQ
+	BvmVlDpf2nk5m2/MAEc7eFg7ayszMMc8iANi8AEf7/l+tYssMfOkFu8A3uCm+ngtgeStOEof3RLQI
+	jGBDNPHA==;
+Received: from ip6-localhost ([::1]:64150 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1uiu2S-00EHdO-4k; Mon, 04 Aug 2025 12:11:36 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:27494) 
+	id 1uiu2e-00EHfj-2x; Mon, 04 Aug 2025 12:11:49 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:21490) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uiu2N-00EHdH-4g
- for samba-technical@lists.samba.org; Mon, 04 Aug 2025 12:11:33 +0000
+ (Exim) id 1uiu2W-00EHf7-Cn
+ for samba-technical@lists.samba.org; Mon, 04 Aug 2025 12:11:43 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Message-ID:Date:Cc:To:From;
- bh=to7ZLsOwz04pZ3TzBcfuBH6LG/57UBcjbzWF3eZFcFg=; b=F1tk5pWEWxuoCvJ+tNUMm7htWX
- Mloe3ECE7svfVkqKitfl5rBkGwBGP5L+feLCYuy8bhDr7gXzYrOqkJVfyOHdldnFIhAE9C/dPGox3
- 1UTSMhNR/QWvsicAxZwoBZ5FhceyhRQKSiZ+Gim+Jy61r4HE/sDLCFi5a34n8oEs2+/j+mfkrUk51
- 0/pHs5cH8mO9dX3Q0jWxPu5S6o+TzyvVm1WNcom6lBt7Q/00QABmYBVgKkmVqThwCuWVZ9QkwATcc
- os7ke9CfVbZsHanx2gGGL96ijb8RCVWB5ZJLyY/Y1mVzRmzvlaFrH9WmKKXP7gy0lYYnWp9H+a/Md
- 2j0uxGfe9YfGEPHq2q3s5g34nwNkw62dgxlhzSt+mQA5giNgPPDULUVMg6mCLa72H9NkSotMIQAIb
- KQx3gB7ZpLHvFL6R3YW52O/wXdqscRpMxDF2/iah8WL3R2Ip5TFEwa3H+SmXPYsce8o/STRXW0KYR
- C8ynqkM3QRYA9lvPUQ/hmrM3;
+ bh=2AfOgfm+5DEpiimicaqLy6hJIKmn3TMWbQ1JNi3c/4A=; b=bXFUXg1uVJOmGpSQL5zfgJjM7J
+ bu3pUqgJIKJ5vHa9A6KTvReIWzaEaFaYxsdR5RcSCQPn41Os5E7vmbADzcUh7/ivb3l15p7HyzaIf
+ Q6XGE7qujycR8UlRzJM0u6+A7VcxZdOiDiOqHtsDBIAKCVt8wtCr6QzBGeZHnfkYrp/pGlUMTusef
+ zGc5MqRRuc51oOBcHiQjloTb/CA+KzDRWRdPPFZU9iw/1UaS2gIHl9HQb8783nHZjFEe8f5If6NWO
+ b3xOPVmXQIPepriskC1u4qx9uAiFTSQp7uSwFUhKNumsISOqV5+KU1/3aHakW/0tO332HYA5osY8f
+ k1pX6A2pbC6ToGzTBrz/XZtUO+SEp259w21AzVpVZfc7an3dHsm1fE+a/tmr0Hmc+OtnwGQD3szTd
+ rTPgjJCUSp1HDemkWmYTc3jbURpHJsgZUvOAiJp4ZoBqtKm4kaYj88Gucy09MzFA8fgs++mqBGAaM
+ 4ih8EgJXv+ydY0eQeCcFCaEh;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uiu2M-000vts-13; Mon, 04 Aug 2025 12:11:30 +0000
+ (Exim) id 1uiu2V-000vuF-2H; Mon, 04 Aug 2025 12:11:39 +0000
 To: linux-cifs@vger.kernel.org,
 	samba-technical@lists.samba.org
-Subject: [PATCH 1/5] smb: client: let send_done() cleanup before calling
- smbd_disconnect_rdma_connection()
-Date: Mon,  4 Aug 2025 14:10:12 +0200
-Message-ID: <0b80cf1a140280ca75ac21d5577a141e433d35f7.1754308712.git.metze@samba.org>
+Subject: [PATCH 2/5] smb: client: remove separate empty_packet_queue
+Date: Mon,  4 Aug 2025 14:10:13 +0200
+Message-ID: <5224ccec9a6da059b38e6bc317ab9ea720de0b91.1754308712.git.metze@samba.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1754308712.git.metze@samba.org>
 References: <cover.1754308712.git.metze@samba.org>
@@ -65,11 +64,12 @@ Cc: metze@samba.org, Steve French <smfrench@gmail.com>,
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-We should call ib_dma_unmap_single() and mempool_free() before calling
-smbd_disconnect_rdma_connection().
+There's no need to maintain two lists, we can just
+have a single list of receive buffers, which are free to use.
 
-And smbd_disconnect_rdma_connection() needs to be the last function to
-call as all other state might already be gone after it returns.
+It just added unneeded complexity and resulted in
+ib_dma_unmap_single() not being called from recv_done()
+for empty keepalive packets.
 
 Cc: Steve French <smfrench@gmail.com>
 Cc: Tom Talpey <tom@talpey.com>
@@ -79,40 +79,179 @@ Cc: samba-technical@lists.samba.org
 Fixes: f198186aa9bb ("CIFS: SMBD: Establish SMB Direct connection")
 Signed-off-by: Stefan Metzmacher <metze@samba.org>
 ---
- fs/smb/client/smbdirect.c | 14 ++++++++------
- 1 file changed, 8 insertions(+), 6 deletions(-)
+ fs/smb/client/cifs_debug.c |  6 ++--
+ fs/smb/client/smbdirect.c  | 62 +++-----------------------------------
+ fs/smb/client/smbdirect.h  |  4 ---
+ 3 files changed, 7 insertions(+), 65 deletions(-)
 
+diff --git a/fs/smb/client/cifs_debug.c b/fs/smb/client/cifs_debug.c
+index f1cea365b6f1..ca7c2265c25f 100644
+--- a/fs/smb/client/cifs_debug.c
++++ b/fs/smb/client/cifs_debug.c
+@@ -481,10 +481,8 @@ static int cifs_debug_data_proc_show(struct seq_file *m, void *v)
+ 			server->smbd_conn->receive_credit_target);
+ 		seq_printf(m, "\nPending send_pending: %x ",
+ 			atomic_read(&server->smbd_conn->send_pending));
+-		seq_printf(m, "\nReceive buffers count_receive_queue: %x "
+-			"count_empty_packet_queue: %x",
+-			server->smbd_conn->count_receive_queue,
+-			server->smbd_conn->count_empty_packet_queue);
++		seq_printf(m, "\nReceive buffers count_receive_queue: %x ",
++			server->smbd_conn->count_receive_queue);
+ 		seq_printf(m, "\nMR responder_resources: %x "
+ 			"max_frmr_depth: %x mr_type: %x",
+ 			server->smbd_conn->responder_resources,
 diff --git a/fs/smb/client/smbdirect.c b/fs/smb/client/smbdirect.c
-index 754e94a0e07f..b6c369088479 100644
+index b6c369088479..b18e2bc6c8ed 100644
 --- a/fs/smb/client/smbdirect.c
 +++ b/fs/smb/client/smbdirect.c
-@@ -281,18 +281,20 @@ static void send_done(struct ib_cq *cq, struct ib_wc *wc)
- 	log_rdma_send(INFO, "smbd_request 0x%p completed wc->status=%d\n",
- 		request, wc->status);
+@@ -13,8 +13,6 @@
+ #include "cifsproto.h"
+ #include "smb2proto.h"
  
--	if (wc->status != IB_WC_SUCCESS || wc->opcode != IB_WC_SEND) {
--		log_rdma_send(ERR, "wc->status=%d wc->opcode=%d\n",
--			wc->status, wc->opcode);
--		smbd_disconnect_rdma_connection(request->info);
--	}
+-static struct smbd_response *get_empty_queue_buffer(
+-		struct smbd_connection *info);
+ static struct smbd_response *get_receive_buffer(
+ 		struct smbd_connection *info);
+ static void put_receive_buffer(
+@@ -23,8 +21,6 @@ static void put_receive_buffer(
+ static int allocate_receive_buffers(struct smbd_connection *info, int num_buf);
+ static void destroy_receive_buffers(struct smbd_connection *info);
+ 
+-static void put_empty_packet(
+-		struct smbd_connection *info, struct smbd_response *response);
+ static void enqueue_reassembly(
+ 		struct smbd_connection *info,
+ 		struct smbd_response *response, int data_length);
+@@ -393,7 +389,6 @@ static bool process_negotiation_response(
+ static void smbd_post_send_credits(struct work_struct *work)
+ {
+ 	int ret = 0;
+-	int use_receive_queue = 1;
+ 	int rc;
+ 	struct smbd_response *response;
+ 	struct smbd_connection *info =
+@@ -409,18 +404,9 @@ static void smbd_post_send_credits(struct work_struct *work)
+ 	if (info->receive_credit_target >
+ 		atomic_read(&info->receive_credits)) {
+ 		while (true) {
+-			if (use_receive_queue)
+-				response = get_receive_buffer(info);
+-			else
+-				response = get_empty_queue_buffer(info);
+-			if (!response) {
+-				/* now switch to empty packet queue */
+-				if (use_receive_queue) {
+-					use_receive_queue = 0;
+-					continue;
+-				} else
+-					break;
+-			}
++			response = get_receive_buffer(info);
++			if (!response)
++				break;
+ 
+ 			response->type = SMBD_TRANSFER_DATA;
+ 			response->first_segment = false;
+@@ -511,7 +497,7 @@ static void recv_done(struct ib_cq *cq, struct ib_wc *wc)
+ 				response,
+ 				data_length);
+ 		} else
+-			put_empty_packet(info, response);
++			put_receive_buffer(info, response);
+ 
+ 		if (data_length)
+ 			wake_up_interruptible(&info->wait_reassembly_queue);
+@@ -1115,17 +1101,6 @@ static int smbd_negotiate(struct smbd_connection *info)
+ 	return rc;
+ }
+ 
+-static void put_empty_packet(
+-		struct smbd_connection *info, struct smbd_response *response)
+-{
+-	spin_lock(&info->empty_packet_queue_lock);
+-	list_add_tail(&response->list, &info->empty_packet_queue);
+-	info->count_empty_packet_queue++;
+-	spin_unlock(&info->empty_packet_queue_lock);
 -
- 	for (i = 0; i < request->num_sge; i++)
- 		ib_dma_unmap_single(sc->ib.dev,
- 			request->sge[i].addr,
- 			request->sge[i].length,
- 			DMA_TO_DEVICE);
+-	queue_work(info->workqueue, &info->post_send_credits_work);
+-}
+-
+ /*
+  * Implement Connection.FragmentReassemblyBuffer defined in [MS-SMBD] 3.1.1.1
+  * This is a queue for reassembling upper layer payload and present to upper
+@@ -1174,25 +1149,6 @@ static struct smbd_response *_get_first_reassembly(struct smbd_connection *info)
+ 	return ret;
+ }
  
-+	if (wc->status != IB_WC_SUCCESS || wc->opcode != IB_WC_SEND) {
-+		log_rdma_send(ERR, "wc->status=%d wc->opcode=%d\n",
-+			wc->status, wc->opcode);
-+		mempool_free(request, request->info->request_mempool);
-+		smbd_disconnect_rdma_connection(request->info);
-+		return;
-+	}
-+
- 	if (atomic_dec_and_test(&request->info->send_pending))
- 		wake_up(&request->info->wait_send_pending);
+-static struct smbd_response *get_empty_queue_buffer(
+-		struct smbd_connection *info)
+-{
+-	struct smbd_response *ret = NULL;
+-	unsigned long flags;
+-
+-	spin_lock_irqsave(&info->empty_packet_queue_lock, flags);
+-	if (!list_empty(&info->empty_packet_queue)) {
+-		ret = list_first_entry(
+-			&info->empty_packet_queue,
+-			struct smbd_response, list);
+-		list_del(&ret->list);
+-		info->count_empty_packet_queue--;
+-	}
+-	spin_unlock_irqrestore(&info->empty_packet_queue_lock, flags);
+-
+-	return ret;
+-}
+-
+ /*
+  * Get a receive buffer
+  * For each remote send, we need to post a receive. The receive buffers are
+@@ -1257,10 +1213,6 @@ static int allocate_receive_buffers(struct smbd_connection *info, int num_buf)
+ 	spin_lock_init(&info->receive_queue_lock);
+ 	info->count_receive_queue = 0;
  
+-	INIT_LIST_HEAD(&info->empty_packet_queue);
+-	spin_lock_init(&info->empty_packet_queue_lock);
+-	info->count_empty_packet_queue = 0;
+-
+ 	init_waitqueue_head(&info->wait_receive_queues);
+ 
+ 	for (i = 0; i < num_buf; i++) {
+@@ -1294,9 +1246,6 @@ static void destroy_receive_buffers(struct smbd_connection *info)
+ 
+ 	while ((response = get_receive_buffer(info)))
+ 		mempool_free(response, info->response_mempool);
+-
+-	while ((response = get_empty_queue_buffer(info)))
+-		mempool_free(response, info->response_mempool);
+ }
+ 
+ /* Implement idle connection timer [MS-SMBD] 3.1.6.2 */
+@@ -1383,8 +1332,7 @@ void smbd_destroy(struct TCP_Server_Info *server)
+ 
+ 	log_rdma_event(INFO, "free receive buffers\n");
+ 	wait_event(info->wait_receive_queues,
+-		info->count_receive_queue + info->count_empty_packet_queue
+-			== sp->recv_credit_max);
++		info->count_receive_queue == sp->recv_credit_max);
+ 	destroy_receive_buffers(info);
+ 
+ 	/*
+diff --git a/fs/smb/client/smbdirect.h b/fs/smb/client/smbdirect.h
+index 75b3f491c3ad..ea04ce8a9763 100644
+--- a/fs/smb/client/smbdirect.h
++++ b/fs/smb/client/smbdirect.h
+@@ -110,10 +110,6 @@ struct smbd_connection {
+ 	int count_receive_queue;
+ 	spinlock_t receive_queue_lock;
+ 
+-	struct list_head empty_packet_queue;
+-	int count_empty_packet_queue;
+-	spinlock_t empty_packet_queue_lock;
+-
+ 	wait_queue_head_t wait_receive_queues;
+ 
+ 	/* Reassembly queue */
 -- 
 2.43.0
 
