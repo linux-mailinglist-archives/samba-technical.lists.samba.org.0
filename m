@@ -2,116 +2,76 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 64F50B1BAD4
-	for <lists+samba-technical@lfdr.de>; Tue,  5 Aug 2025 21:18:44 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5F6FEB1BE3F
+	for <lists+samba-technical@lfdr.de>; Wed,  6 Aug 2025 03:23:19 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=trucfmteZD8Y8Zd+VB8DTRVXjQ9/V2q0joIlqM6a9hY=; b=Ty6ULkcXoMKQOcNbvEvTgsC4p/
-	y4V9T8SD6l6OH2T6p6gaMeiQoJXJRqRrnbeOreJpZ0+wnc1Weov6AlhfTupZc7h8Snh2TZRZm0Yaw
-	JUiUNtrZo4YxYlXhHijJZCsHHBGfJYKVykIcpisplmwQDkJeVyo9TxV134rMcVBA8d0V5j4DUDWrh
-	yLkWA467trGI8z+WhL69GHLZph+HVujDEr5+DH1l9rRbcTaWXdfdE6mQgKd/Q0fmFLbBtPCNKzA9c
-	1fRTBndEciqQTkPPIH5Fp8PeWpgIYNfo82elJpbmAE5d8oYCTMq496vpwkvu9HjCzRiwzvci+U2Eh
-	pf9YjKzw==;
-Received: from ip6-localhost ([::1]:35866 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=Rr6NuTeg7dw2/kHUIC6O4P1nbotXNaEjStftoUWMav4=; b=qe+3u4FFzVlrWfDcPNhJ3qYDG/
+	/r9yyCqtyawveq1WK5XbjM/ATTEp8rXkrOIq85FW9K5cS170rNDuWbc33gRIv1uMFIZQhdD0I7llJ
+	GpRZ1gFXr2ppnf0HX2vtSHQX1Gpfcd9mlrmaXIdcyD3ngQSqp8U3lISuok8Z7R4D4kU/f5uRxtV0b
+	3SF5xDQythMRDOm/ffPusaQr8iU9Kk2Dk3GRJq0sbXfv/9e2gzYs5mS4pyPF6l67VkJkRnrW15KV1
+	NQm1pVqNebYlV19Ldwaz9GV9DDtddFMJl8Ap4pmekoeodM5IxbkTXCoeb3ELgUFbc/9OaQDW4DM8N
+	rbNVxJAA==;
+Received: from ip6-localhost ([::1]:59618 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1ujNAn-00EOfc-7p; Tue, 05 Aug 2025 19:18:09 +0000
-Received: from smtp-out2.suse.de ([195.135.223.131]:42418) 
+	id 1ujSrb-00EP65-5Q; Wed, 06 Aug 2025 01:22:43 +0000
+Received: from mail-qt1-x82e.google.com ([2607:f8b0:4864:20::82e]:49474) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1ujNAh-00EOfV-Gu
- for samba-technical@lists.samba.org; Tue, 05 Aug 2025 19:18:06 +0000
-Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
- [IPv6:2a07:de40:b281:104:10:150:64:97])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id E8E711F38E;
- Tue,  5 Aug 2025 19:17:58 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1754421480; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=trucfmteZD8Y8Zd+VB8DTRVXjQ9/V2q0joIlqM6a9hY=;
- b=o8VOdWi7U3Gdlf1V5G//brSnOJnfs8qTf6kgLnfxQu2evLd30cTuzbG5nZ1Uyg1R6zes6j
- JVrC0MnYqtYZub2LtkN+2Nxx+mhYbKEtYMmze+r4aoiCXzapdlWf/q8U98US/exqdVAoUT
- f0WTjZs3mnQrwePhg16PMhgEuKpRuvk=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1754421480;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=trucfmteZD8Y8Zd+VB8DTRVXjQ9/V2q0joIlqM6a9hY=;
- b=m6PEN5kCmGOzKd9EtZA7evqHBsGFRsK37ZbD0VpvfYTN9451+9U+gDQ3o/wcZLJ2ABA+uE
- TKq6c748SS5DDGAQ==
-Authentication-Results: smtp-out2.suse.de;
- dkim=pass header.d=suse.de header.s=susede2_rsa header.b=gxyWZio3;
- dkim=pass header.d=suse.de header.s=susede2_ed25519 header.b=u+pRenbT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1754421478; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=trucfmteZD8Y8Zd+VB8DTRVXjQ9/V2q0joIlqM6a9hY=;
- b=gxyWZio3oXanaqnLCSOF201kPok7fzIoNOwiuAA3O9JXUiGYhBLzbsgtDDQmAS3FCx7KSZ
- z/S8liP7G2658Xp/e891XkrPJ4IHNwGJx1s2o+nnjG1dEEVUrVHYH2lTIiSIxB1eMDUwB+
- Td1/TjSzL59N3Ryewzb/tfwk9wMFr6o=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1754421478;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=trucfmteZD8Y8Zd+VB8DTRVXjQ9/V2q0joIlqM6a9hY=;
- b=u+pRenbTSIWLuh1m8sWU4qzyWFiTTb2d20MDINnyRXZekobOkVEXCitB7H3zWD6Lat5D50
- tB1C9LuPmEPQKrCA==
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 726FC13AA8;
- Tue,  5 Aug 2025 19:17:58 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id wqarDuZYkmgIMAAAD6G6ig
- (envelope-from <ematsumiya@suse.de>); Tue, 05 Aug 2025 19:17:58 +0000
-Date: Tue, 5 Aug 2025 16:17:56 -0300
-To: Wang Zhaolong <wangzhaolong@huaweicloud.com>
-Subject: Re: [PATCH V2 0/4] Fix mid_q_entry memory leaks in SMB client
-Message-ID: <xpsxam3vodt52ryiu44ojdgoj6moet3rysdsmafuruo6y3pnws@pc5tnqnsao7f>
+ (Exim) id 1ujSrV-00EP5y-WE
+ for samba-technical@lists.samba.org; Wed, 06 Aug 2025 01:22:41 +0000
+Received: by mail-qt1-x82e.google.com with SMTP id
+ d75a77b69052e-4b07275e0a4so30139821cf.3
+ for <samba-technical@lists.samba.org>; Tue, 05 Aug 2025 18:22:37 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1754443356; x=1755048156; darn=lists.samba.org;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=Zco5tyUck3BGVt/oKi3ee27TlAHHUHY7O+i0qmj2cCs=;
+ b=WT8tXMVD2pHZV2W9xELqLcHGEapOH+7f6JjojOztTEcT4H3OMVvauSKWyv27Sqtuxy
+ ns1EClmNPDSjUTZwxpnYMR8uLzmgVIpN8YEFYGdqjWAFI5k+Wbe+yvXcbk5xAAt26kru
+ 6IolrqpppyUbI52NEfeBX6KHIrNe5Cy9O3jfQSGhZnDFPbGNMM3dv3/uyJj6GnyUF53N
+ 71pjaQ9Dk79/WoFlsLVpvxiwHE2e7QMdCI+juBwPoSahBnoSI0/PcOXwAk2cnY8L3GBb
+ V8B2oq/jQOY8iYzwhEIejf2wAsUJ/oXvHCAKiP80wuWwpbB43rkKlzkkNnHSpgvPj2yh
+ 7pxA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1754443356; x=1755048156;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Zco5tyUck3BGVt/oKi3ee27TlAHHUHY7O+i0qmj2cCs=;
+ b=kGMEkV2yGYt52ZHwM1Vg3dHMfFf8M2rr69CbrHU9BWpld5MLOhjxBCjcEZSTHZjQ5R
+ fBOGciIsukGIuyhvmlYLSuXUoHW0229dq+l8gskG9wtDQqV0InlTsAiiFzRa/NlvQ0e5
+ N0FAIo0N1cwi43x2rFhkJXidOhHQMZ7e7K9VC3gltqwJeF2CdKorUm7dsV2/3jlfpTeU
+ pdUnaU1rm73JRZXmP68qwl6yKsnqt0p8xU975OVqTCgVAW9SRFXkwgW5ejA3vd8DTGsk
+ mlv4EwHkvUebkiMO2NeRpODlxvZT74QM6Ipt+u4wFaD/GJFpm6oLVjsriAbz7ayBeWkC
+ Z7NQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWsT3FbYk1PUPovOd2ff2otH60TPNjqqHIHt8fOwRr7ZCVlrOv1gZ4TbCI7fIE3QPsKFxzR04DWO2VZYDTLPsM=@lists.samba.org
+X-Gm-Message-State: AOJu0YzgBxHvjQ7/avH8dO4yP8bGkytAVyE6CrmrUU3aD35Lda9ZSwAY
+ nESDPovWYdJnOiwzki9cCPhpEoenDmkXsLjnx34es7XJ5pt0YzO7n6cviCH7YQZWwmaMLzXfmvz
+ RfKCmdMr59KKBGw7dd+d4ibSDKG1sARg=
+X-Gm-Gg: ASbGncuMCz2SPgq5pbnUCydDI8AKoS/xQBYBIXsRicmI/CRMJPeXHjZKtQU0Yn+VLgU
+ cJjQCu0jLNqN8OwkDOHHcmeOy/qqSpn7sl+hknEITusmK+BpkAGJ5r8wh9xzpe4OGA1zyQWxvxk
+ Qosgf34Axl2Dwju1T6dOgZ+DiTNl3NrRqdiyAURXeH2v5COYm6VkKOBfCjChmHcQLgmQYZ0QlCy
+ BwAp5Ak+iyY/GUk69gQO72r8do15AmXZf994Vri
+X-Google-Smtp-Source: AGHT+IENoLdt645Po9MYQ29jPv/XvMJFeUHnPew/0VeuyNlio+Kq7jZQJCrYWlrCCeaPk6hRptmL+pD+s/Sf4OccWLM=
+X-Received: by 2002:a05:622a:2618:b0:4b0:77e4:bd with SMTP id
+ d75a77b69052e-4b091619b5fmr14460421cf.57.1754443355826; Tue, 05 Aug 2025
+ 18:22:35 -0700 (PDT)
+MIME-Version: 1.0
 References: <20250805064708.332465-1-wangzhaolong@huaweicloud.com>
  <CAH2r5mssz19Qr+fmY62BnHOzwjQmWWU=wHXEVFkyTRGaWn-t0g@mail.gmail.com>
- <wsdy24ihyizjw5ce4jnomhos3zwnbzdjx63qxywv5ud6kekcf5@ocqq2p6qobu3>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Disposition: inline
+ <c980644d-0be1-4a88-890d-349b44ada024@huaweicloud.com>
+In-Reply-To: <c980644d-0be1-4a88-890d-349b44ada024@huaweicloud.com>
+Date: Tue, 5 Aug 2025 20:22:23 -0500
+X-Gm-Features: Ac12FXwQNsxTefxEoCYx4gfglZMs0hL39KYLF_gtFCMrMoa7vGLo7kRzfMK5RJg
+Message-ID: <CAH2r5mt2p6V_=BGGVeVMNmFWvaJ+sxodFxjr_ZDsDkXqtA9nGg@mail.gmail.com>
+Subject: Re: [PATCH V2 0/4] Fix mid_q_entry memory leaks in SMB client
+To: Wang Zhaolong <wangzhaolong@huaweicloud.com>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-In-Reply-To: <wsdy24ihyizjw5ce4jnomhos3zwnbzdjx63qxywv5ud6kekcf5@ocqq2p6qobu3>
-X-Spam-Flag: NO
-X-Rspamd-Queue-Id: E8E711F38E
-X-Rspamd-Action: no action
-X-Rspamd-Server: rspamd1.dmz-prg2.suse.org
-X-Spamd-Result: default: False [-4.01 / 50.00]; BAYES_HAM(-3.00)[100.00%];
- NEURAL_HAM_LONG(-1.00)[-1.000]; MID_RHS_NOT_FQDN(0.50)[];
- R_DKIM_ALLOW(-0.20)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
- NEURAL_HAM_SHORT(-0.20)[-1.000]; MIME_GOOD(-0.10)[text/plain];
- MX_GOOD(-0.01)[];
- DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
- FUZZY_RATELIMITED(0.00)[rspamd.com];
- RBL_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:104:10:150:64:97:from]; 
- TO_DN_SOME(0.00)[]; TO_MATCH_ENVRCPT_ALL(0.00)[];
- MIME_TRACE(0.00)[0:+]; ARC_NA(0.00)[];
- FREEMAIL_ENVRCPT(0.00)[gmail.com];
- FREEMAIL_CC(0.00)[gmail.com,vger.kernel.org,lists.samba.org,huawei.com];
- RCVD_TLS_ALL(0.00)[]; RCVD_COUNT_TWO(0.00)[2];
- FROM_EQ_ENVFROM(0.00)[]; FROM_HAS_DN(0.00)[];
- SPAMHAUS_XBL(0.00)[2a07:de40:b281:104:10:150:64:97:from];
- RCPT_COUNT_SEVEN(0.00)[8]; RCVD_VIA_SMTP_AUTH(0.00)[];
- RECEIVED_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:106:10:150:64:167:received];
- DKIM_TRACE(0.00)[suse.de:+]; MISSING_XM_UA(0.00)[];
- DBL_BLOCKED_OPENRESOLVER(0.00)[azure.com:url, imap1.dmz-prg2.suse.org:rdns,
- imap1.dmz-prg2.suse.org:helo, huaweicloud.com:email]
-X-Spam-Score: -4.01
+X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -125,272 +85,175 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Enzo Matsumiya via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Enzo Matsumiya <ematsumiya@suse.de>
-Cc: linux-cifs@vger.kernel.org, yi.zhang@huawei.com, yangerkun@huawei.com,
- samba-technical@lists.samba.org, linux-kernel@vger.kernel.org,
- Steve French <smfrench@gmail.com>, chengzhihao1@huawei.com
+From: Steve French via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Steve French <smfrench@gmail.com>
+Cc: CIFS <linux-cifs@vger.kernel.org>, "zhangyi \(F\)" <yi.zhang@huawei.com>,
+ Enzo Matsumiya <ematsumiya@suse.de>, yangerkun <yangerkun@huawei.com>,
+ samba-technical <samba-technical@lists.samba.org>,
+ LKML <linux-kernel@vger.kernel.org>, chengzhihao1@huawei.com,
+ Pavel Shilovskiy <pshilov@microsoft.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi Wang,
+Those links are visible to anyone but the server which hosts it will
+sometimes auto shutdown depending on load in the region so is sometimes
+down for a few hours
 
-On 08/05, Enzo Matsumiya wrote:
->On 08/05, Steve French wrote:
->>The first three patches (cleanup) look fine and have added to
->>cifs-2.6.git for-next (also added Enzo Acked-by) but the fourth patch
->>("smb: client: fix mid_q_entry memleak leak with per-mid locking")
->>causes xfstest generic/001 to fail with signing enabled.  See
->>http://smb311-linux-testing.southcentralus.cloudapp.azure.com/#/builders/=
+Thanks,
+
+Steve
+
+On Tue, Aug 5, 2025, 7:55=E2=80=AFPM Wang Zhaolong <wangzhaolong@huaweiclou=
+d.com>
+wrote:
+
+>
+>
+>
+>
+> > The first three patches (cleanup) look fine and have added to
+> > cifs-2.6.git for-next (also added Enzo Acked-by) but the fourth patch
+> > ("smb: client: fix mid_q_entry memleak leak with per-mid locking")
+> > causes xfstest generic/001 to fail with signing enabled.  See
+> >
+> http://smb311-linux-testing.southcentralus.cloudapp.azure.com/#/builders/=
 5/builds/58/steps/34/logs/stdio
->>and http://smb311-linux-testing.southcentralus.cloudapp.azure.com/#/build=
-ers/5/builds/59/steps/34/logs/stdio
+> > and
+> http://smb311-linux-testing.southcentralus.cloudapp.azure.com/#/builders/=
+5/builds/59/steps/34/logs/stdio
+> >
 >
->Was about to reply here as I was testing (an unrelated patch) with generic=
-/100
->and got the same backtrace.
+> I am unable to view any information in the link above. Is this informatio=
+n
+> only visible to logged-in users?
 >
->@Wang btw sorry I missed your reproducer in the bugzilla link, I'll take
->a look.  Thanks!
-
-So, strangely, your poc.c doesn't give that backtrace (invalid wait
-context) that Steve mentions.
-
-And while I could confirm the original mid leak and that your fix works,
-now I get this in kmemleak:
-
-=2E..
-unreferenced object 0xffff8881064edf00 (size 192):
-   comm "poc", pid 36032, jiffies 4294813121
-   hex dump (first 32 bytes):
-     00 df 4e 06 81 88 ff ff 00 df 4e 06 81 88 ff ff  ..N.......N.....
-     01 00 00 00 00 00 00 00 00 50 6d 03 81 88 ff ff  .........Pm.....
-   backtrace (crc fc0a60b2):
-     kmem_cache_alloc_noprof+0x2f4/0x3f0
-     mempool_alloc_noprof+0x6e/0x1c0
-     generate_smb3signingkey+0x17f/0x2c0 [cifs]
-     smb2_verify_signature+0x110/0x170 [cifs]
-     compound_send_recv+0x11/0xb90 [cifs]
-     compound_send_recv+0x983/0xb90 [cifs]
-     SMB2_close_init+0x9f/0xc0 [cifs]
-     cifs_readdir+0x44/0x1450 [cifs]
-     iterate_dir+0x8a/0x160
-     __x64_sys_getdents+0x7b/0x120
-     do_syscall_64+0x6a/0x2d0
-     entry_SYSCALL_64_after_hwframe+0x76/0x7e
-
-
- From a quick look at the code, I couldn't make sense of it, and even
-less so _how_ your patch could be causing this.  But it's certainly
-doing something that is impacting the signing crypto TFM.
-
-
-Cheers,
-
-Enzo
-
->>[Tue Aug 5 11:03:32 2025] run fstests generic/001 at 2025-08-05 11:03:32
->>[Tue Aug 5 11:03:33 2025] =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+>
+> >
+> > [Tue Aug 5 11:03:32 2025] run fstests generic/001 at 2025-08-05 11:03:3=
+2
+> > [Tue Aug 5 11:03:33 2025] =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
 =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
->>[Tue Aug 5 11:03:33 2025] [ BUG: Invalid wait context ]
->>[Tue Aug 5 11:03:33 2025] 6.16.0 #1 Tainted: G E
->>[Tue Aug 5 11:03:33 2025] -----------------------------
->>[Tue Aug 5 11:03:33 2025] cifsd/24912 is trying to lock:
->>[Tue Aug 5 11:03:33 2025] ffffffffafc14630
->>(crypto_alg_sem){++++}-{4:4}, at: crypto_alg_lookup+0x40/0x120
->>[Tue Aug 5 11:03:33 2025] other info that might help us debug this:
->>[Tue Aug 5 11:03:33 2025] context-{5:5}
->>[Tue Aug 5 11:03:33 2025] 1 lock held by cifsd/24912:
->>[Tue Aug 5 11:03:33 2025] #0: ff11000134c25870
->>(&temp->mid_lock){+.+.}-{3:3}, at: mid_execute_callback+0x19/0x40
->>[cifs]
->>[Tue Aug 5 11:03:33 2025] stack backtrace:
->>[Tue Aug 5 11:03:33 2025] CPU: 1 UID: 0 PID: 24912 Comm: cifsd
->>Tainted: G E 6.16.0 #1 PREEMPT(voluntary)
->>[Tue Aug 5 11:03:33 2025] Tainted: [E]=3DUNSIGNED_MODULE
->>[Tue Aug 5 11:03:33 2025] Hardware name: Red Hat KVM, BIOS
->>1.16.3-4.el9 04/01/2014
->>[Tue Aug 5 11:03:33 2025] Call Trace:
->>[Tue Aug 5 11:03:33 2025] <TASK>
->>[Tue Aug 5 11:03:33 2025] dump_stack_lvl+0x79/0xb0
->>[Tue Aug 5 11:03:33 2025] __lock_acquire+0xace/0x21c0
->>[Tue Aug 5 11:03:33 2025] ? check_irq_usage+0xa4/0xa80
->>[Tue Aug 5 11:03:33 2025] lock_acquire+0x143/0x2d0
->>[Tue Aug 5 11:03:33 2025] ? crypto_alg_lookup+0x40/0x120
->>[Tue Aug 5 11:03:33 2025] ? check_noncircular+0x71/0x120
->>[Tue Aug 5 11:03:33 2025] down_read+0x7c/0x2e0
->>[Tue Aug 5 11:03:33 2025] ? crypto_alg_lookup+0x40/0x120
->>[Tue Aug 5 11:03:33 2025] ? __pfx_down_read+0x10/0x10
->>[Tue Aug 5 11:03:33 2025] ? lockdep_unlock+0x51/0xc0
->>[Tue Aug 5 11:03:33 2025] ? __lock_acquire+0x11ee/0x21c0
->>[Tue Aug 5 11:03:33 2025] crypto_alg_lookup+0x40/0x120
->>[Tue Aug 5 11:03:33 2025] crypto_alg_mod_lookup+0x53/0x2b0
->>[Tue Aug 5 11:03:33 2025] crypto_alloc_tfm_node+0x76/0x130
->>[Tue Aug 5 11:03:33 2025] cifs_alloc_hash+0x44/0x130 [cifs]
->>[Tue Aug 5 11:03:33 2025] smb3_calc_signature+0x4f0/0x7b0 [cifs]
->>[Tue Aug 5 11:03:33 2025] ? __pfx_smb3_calc_signature+0x10/0x10 [cifs]
->>[Tue Aug 5 11:03:33 2025] ? find_held_lock+0x2b/0x80
->>[Tue Aug 5 11:03:33 2025] ? tcp_recvmsg+0xc9/0x2d0
->>[Tue Aug 5 11:03:33 2025] ? rcu_is_watching+0x20/0x50
->>[Tue Aug 5 11:03:33 2025] ? trace_irq_enable.constprop.0+0xac/0xe0
->>[Tue Aug 5 11:03:33 2025] ? tcp_recvmsg+0xc9/0x2d0
->>[Tue Aug 5 11:03:33 2025] ? __local_bh_enable_ip+0x90/0xf0
->>[Tue Aug 5 11:03:33 2025] ? sock_has_perm+0x97/0x1a0
->>[Tue Aug 5 11:03:33 2025] smb2_verify_signature+0x178/0x290 [cifs]
->>[Tue Aug 5 11:03:33 2025] ? __pfx_smb2_verify_signature+0x10/0x10 [cifs]
->>[Tue Aug 5 11:03:33 2025] ? look_up_lock_class+0x5d/0x140
->>[Tue Aug 5 11:03:33 2025] smb2_check_receive+0x154/0x1c0 [cifs]
->>[Tue Aug 5 11:03:33 2025] ? __pfx_smb2_check_receive+0x10/0x10 [cifs]
->>[Tue Aug 5 11:03:33 2025] ? __lock_acquire+0x3f1/0x21c0
->>[Tue Aug 5 11:03:33 2025] ? __lock_acquire+0x3f1/0x21c0
->>[Tue Aug 5 11:03:33 2025] smb2_writev_callback+0x1f2/0x870 [cifs]
->>[Tue Aug 5 11:03:33 2025] ? lock_acquire+0x143/0x2d0
->>[Tue Aug 5 11:03:33 2025] ? mid_execute_callback+0x19/0x40 [cifs]
->>[Tue Aug 5 11:03:33 2025] ? __pfx_smb2_writev_callback+0x10/0x10 [cifs]
->>[Tue Aug 5 11:03:33 2025] ? do_raw_spin_lock+0x10c/0x190
->>[Tue Aug 5 11:03:33 2025] ? __pfx_do_raw_spin_lock+0x10/0x10
->>[Tue Aug 5 11:03:33 2025] ? _raw_spin_unlock+0x23/0x40
->>[Tue Aug 5 11:03:33 2025] mid_execute_callback+0x33/0x40 [cifs]
->>[Tue Aug 5 11:03:33 2025] cifs_demultiplex_thread+0xc95/0x15e0 [cifs]
->>[Tue Aug 5 11:03:33 2025] ? __pfx_cifs_demultiplex_thread+0x10/0x10 [cifs]
->>[Tue Aug 5 11:03:33 2025] ? find_held_lock+0x2b/0x80
->>[Tue Aug 5 11:03:33 2025] ? __kthread_parkme+0x4b/0xd0
->>[Tue Aug 5 11:03:33 2025] ? __pfx_cifs_demultiplex_thread+0x10/0x10 [cifs]
->>[Tue Aug 5 11:03:33 2025] kthread+0x216/0x3e0
->>[Tue Aug 5 11:03:33 2025] ? __pfx_kthread+0x10/0x10
->>[Tue Aug 5 11:03:33 2025] ? __pfx_kthread+0x10/0x10
->>[Tue Aug 5 11:03:33 2025] ? lock_release+0xc4/0x270
->>[Tue Aug 5 11:03:33 2025] ? rcu_is_watching+0x20/0x50
->>[Tue Aug 5 11:03:33 2025] ? __pfx_kthread+0x10/0x10
->>[Tue Aug 5 11:03:33 2025] ret_from_fork+0x23a/0x2e0
->>[Tue Aug 5 11:03:33 2025] ? __pfx_kthread+0x10/0x10
->>[Tue Aug 5 11:03:33 2025] ret_from_fork_asm+0x1a/0x30
->>[Tue Aug 5 11:03:33 2025] </TASK>
->>
->>(it worked without the patch see e.g.
->>http://smb311-linux-testing.southcentralus.cloudapp.azure.com/#/builders/=
+> > [Tue Aug 5 11:03:33 2025] [ BUG: Invalid wait context ]
+> > [Tue Aug 5 11:03:33 2025] 6.16.0 #1 Tainted: G E
+> > [Tue Aug 5 11:03:33 2025] -----------------------------
+> > [Tue Aug 5 11:03:33 2025] cifsd/24912 is trying to lock:
+> > [Tue Aug 5 11:03:33 2025] ffffffffafc14630
+> > (crypto_alg_sem){++++}-{4:4}, at: crypto_alg_lookup+0x40/0x120
+> > [Tue Aug 5 11:03:33 2025] other info that might help us debug this:
+> > [Tue Aug 5 11:03:33 2025] context-{5:5}
+> > [Tue Aug 5 11:03:33 2025] 1 lock held by cifsd/24912:
+> > [Tue Aug 5 11:03:33 2025] #0: ff11000134c25870
+> > (&temp->mid_lock){+.+.}-{3:3}, at: mid_execute_callback+0x19/0x40
+> > [cifs]
+> > [Tue Aug 5 11:03:33 2025] stack backtrace:
+> > [Tue Aug 5 11:03:33 2025] CPU: 1 UID: 0 PID: 24912 Comm: cifsd
+> > Tainted: G E 6.16.0 #1 PREEMPT(voluntary)
+> > [Tue Aug 5 11:03:33 2025] Tainted: [E]=3DUNSIGNED_MODULE
+> > [Tue Aug 5 11:03:33 2025] Hardware name: Red Hat KVM, BIOS
+> > 1.16.3-4.el9 04/01/2014
+> > [Tue Aug 5 11:03:33 2025] Call Trace:
+> > [Tue Aug 5 11:03:33 2025] <TASK>
+> > [Tue Aug 5 11:03:33 2025] dump_stack_lvl+0x79/0xb0
+> > [Tue Aug 5 11:03:33 2025] __lock_acquire+0xace/0x21c0
+> > [Tue Aug 5 11:03:33 2025] ? check_irq_usage+0xa4/0xa80
+> > [Tue Aug 5 11:03:33 2025] lock_acquire+0x143/0x2d0
+> > [Tue Aug 5 11:03:33 2025] ? crypto_alg_lookup+0x40/0x120
+> > [Tue Aug 5 11:03:33 2025] ? check_noncircular+0x71/0x120
+> > [Tue Aug 5 11:03:33 2025] down_read+0x7c/0x2e0
+> > [Tue Aug 5 11:03:33 2025] ? crypto_alg_lookup+0x40/0x120
+> > [Tue Aug 5 11:03:33 2025] ? __pfx_down_read+0x10/0x10
+> > [Tue Aug 5 11:03:33 2025] ? lockdep_unlock+0x51/0xc0
+> > [Tue Aug 5 11:03:33 2025] ? __lock_acquire+0x11ee/0x21c0
+> > [Tue Aug 5 11:03:33 2025] crypto_alg_lookup+0x40/0x120
+> > [Tue Aug 5 11:03:33 2025] crypto_alg_mod_lookup+0x53/0x2b0
+> > [Tue Aug 5 11:03:33 2025] crypto_alloc_tfm_node+0x76/0x130
+> > [Tue Aug 5 11:03:33 2025] cifs_alloc_hash+0x44/0x130 [cifs]
+> > [Tue Aug 5 11:03:33 2025] smb3_calc_signature+0x4f0/0x7b0 [cifs]
+> > [Tue Aug 5 11:03:33 2025] ? __pfx_smb3_calc_signature+0x10/0x10 [cifs]
+> > [Tue Aug 5 11:03:33 2025] ? find_held_lock+0x2b/0x80
+> > [Tue Aug 5 11:03:33 2025] ? tcp_recvmsg+0xc9/0x2d0
+> > [Tue Aug 5 11:03:33 2025] ? rcu_is_watching+0x20/0x50
+> > [Tue Aug 5 11:03:33 2025] ? trace_irq_enable.constprop.0+0xac/0xe0
+> > [Tue Aug 5 11:03:33 2025] ? tcp_recvmsg+0xc9/0x2d0
+> > [Tue Aug 5 11:03:33 2025] ? __local_bh_enable_ip+0x90/0xf0
+> > [Tue Aug 5 11:03:33 2025] ? sock_has_perm+0x97/0x1a0
+> > [Tue Aug 5 11:03:33 2025] smb2_verify_signature+0x178/0x290 [cifs]
+> > [Tue Aug 5 11:03:33 2025] ? __pfx_smb2_verify_signature+0x10/0x10 [cifs=
+]
+> > [Tue Aug 5 11:03:33 2025] ? look_up_lock_class+0x5d/0x140
+> > [Tue Aug 5 11:03:33 2025] smb2_check_receive+0x154/0x1c0 [cifs]
+> > [Tue Aug 5 11:03:33 2025] ? __pfx_smb2_check_receive+0x10/0x10 [cifs]
+> > [Tue Aug 5 11:03:33 2025] ? __lock_acquire+0x3f1/0x21c0
+> > [Tue Aug 5 11:03:33 2025] ? __lock_acquire+0x3f1/0x21c0
+> > [Tue Aug 5 11:03:33 2025] smb2_writev_callback+0x1f2/0x870 [cifs]
+> > [Tue Aug 5 11:03:33 2025] ? lock_acquire+0x143/0x2d0
+> > [Tue Aug 5 11:03:33 2025] ? mid_execute_callback+0x19/0x40 [cifs]
+> > [Tue Aug 5 11:03:33 2025] ? __pfx_smb2_writev_callback+0x10/0x10 [cifs]
+> > [Tue Aug 5 11:03:33 2025] ? do_raw_spin_lock+0x10c/0x190
+> > [Tue Aug 5 11:03:33 2025] ? __pfx_do_raw_spin_lock+0x10/0x10
+> > [Tue Aug 5 11:03:33 2025] ? _raw_spin_unlock+0x23/0x40
+> > [Tue Aug 5 11:03:33 2025] mid_execute_callback+0x33/0x40 [cifs]
+> > [Tue Aug 5 11:03:33 2025] cifs_demultiplex_thread+0xc95/0x15e0 [cifs]
+> > [Tue Aug 5 11:03:33 2025] ? __pfx_cifs_demultiplex_thread+0x10/0x10
+> [cifs]
+> > [Tue Aug 5 11:03:33 2025] ? find_held_lock+0x2b/0x80
+> > [Tue Aug 5 11:03:33 2025] ? __kthread_parkme+0x4b/0xd0
+> > [Tue Aug 5 11:03:33 2025] ? __pfx_cifs_demultiplex_thread+0x10/0x10
+> [cifs]
+> > [Tue Aug 5 11:03:33 2025] kthread+0x216/0x3e0
+> > [Tue Aug 5 11:03:33 2025] ? __pfx_kthread+0x10/0x10
+> > [Tue Aug 5 11:03:33 2025] ? __pfx_kthread+0x10/0x10
+> > [Tue Aug 5 11:03:33 2025] ? lock_release+0xc4/0x270
+> > [Tue Aug 5 11:03:33 2025] ? rcu_is_watching+0x20/0x50
+> > [Tue Aug 5 11:03:33 2025] ? __pfx_kthread+0x10/0x10
+> > [Tue Aug 5 11:03:33 2025] ret_from_fork+0x23a/0x2e0
+> > [Tue Aug 5 11:03:33 2025] ? __pfx_kthread+0x10/0x10
+> > [Tue Aug 5 11:03:33 2025] ret_from_fork_asm+0x1a/0x30
+> > [Tue Aug 5 11:03:33 2025] </TASK>
+> >
+> > (it worked without the patch see e.g.
+> >
+> http://smb311-linux-testing.southcentralus.cloudapp.azure.com/#/builders/=
 5/builds/60
->>and http://smb311-linux-testing.southcentralus.cloudapp.azure.com/#/build=
-ers/5/builds/56)
->>
->>On Tue, Aug 5, 2025 at 1:54=E2=80=AFAM Wang Zhaolong
->><wangzhaolong@huaweicloud.com> wrote:
->>>
->>>I've been investigating a pretty nasty memory leak in the SMB client. Wh=
-en
->>>compound requests get interrupted by signals, we end up with mid_q_entry
->>>structures and server buffers that never get freed[1].
->>>
->>>User foreground process                    cifsd
->>>cifs_readdir
->>> open_cached_dir
->>>  cifs_send_recv
->>>   compound_send_recv
->>>    smb2_setup_request
->>>     smb2_mid_entry_alloc
->>>      smb2_get_mid_entry
->>>       smb2_mid_entry_alloc
->>>        mempool_alloc // alloc mid
->>>        kref_init(&temp->refcount); // refcount =3D 1
->>>     mid[0]->callback =3D cifs_compound_callback;
->>>     mid[1]->callback =3D cifs_compound_last_callback;
->>>     smb_send_rqst
->>>     rc =3D wait_for_response
->>>      wait_event_state TASK_KILLABLE
->>>                                  cifs_demultiplex_thread
->>>                                    allocate_buffers
->>>                                      server->bigbuf =3D cifs_buf_get()
->>>                                    standard_receive3
->>>                                      ->find_mid()
->>>                                        smb2_find_mid
->>>                                          __smb2_find_mid
->>>                                           kref_get(&mid->refcount) // +1
->>>                                      cifs_handle_standard
->>>                                        handle_mid
->>>                                         /* bigbuf will also leak */
->>>                                         mid->resp_buf =3D server->bigbuf
->>>                                         server->bigbuf =3D NULL;
->>>                                         dequeue_mid
->>>                                     /* in for loop */
->>>                                    mids[0]->callback
->>>                                      cifs_compound_callback
->>>    /* Signal interrupts wait: rc =3D -ERESTARTSYS */
->>>    /* if (... || midQ[i]->mid_state =3D=3D MID_RESPONSE_RECEIVED) *?
->>>    midQ[0]->callback =3D cifs_cancelled_callback;
->>>    cancelled_mid[i] =3D true;
->>>                                       /* The change comes too late */
->>>                                       mid->mid_state =3D MID_RESPONSE_R=
-EADY
->>>                                    release_mid  // -1
->>>    /* cancelled_mid[i] =3D=3D true causes mid won't be released
->>>       in compound_send_recv cleanup */
->>>    /* cifs_cancelled_callback won't executed to release mid */
->>>
->>>The core issue is a race condition where cifs_cancelled_callback never
->>>gets a chance to run, so cleanup never happens. I've spent quite a bit
->>>of time trying to understand how to fix this safely.
->>>
->>>Honestly, my first instinct was to just patch the callback assignment
->>>logic directly. But the more I dug into it, the more I realized that
->>>the current locking scheme makes this really tricky to do safely. We
->>>have one big lock protecting multiple different things, and trying to
->>>fix the race condition directly felt like playing with fire.
->>>
->>>I kept running into scenarios where a "simple" fix could introduce
->>>deadlocks or new race conditions. After looking at this from different
->>>angles, I came to the conclusion that I needed to refactor the locking
->>>first to create a safe foundation for the actual fix.
->>>
->>>Patches 1-3 are foundational refactoring. These three patches rename
->>>locks for clarity, separate counter protection from queue operations,
->>>and replace the confusing mid_flags bitmask with explicit boolean
->>>fields. Basically, they untangle the current locking mess so I can
->>>implement the real fix without breaking anything.
->>>
->>>The 4th patch in the series is where the real fix happens. With
->>>the previous refactoring in place, I could safely add a lock to each
->>>mid_q_entry and implement atomic callback execution. This eliminates
->>>the race condition that was causing the leaks.
->>>
->>>In summary, my approach to the fix is to use smaller-grained locking to
->>>avoid race conditions. However, during the implementation process,
->>>this approach involves more changes than I initially hoped for. If
->>>there's a simpler or more elegant way to fix this race condition that
->>>I've missed, I'd love to hear about it. I've tried to be thorough in
->>>my analysis, but I know there are folks with more experience in this
->>>codebase who might see a better path.
->>>
->>>V1 -> V2:
->>>  - Inline the mid_execute_callback() in the smb2ops.c to eliminate
->>>    the sparse warning.
->>>
->>>Link: https://bugzilla.kernel.org/show_bug.cgi?id=3D220404 [1]
->>>
->>>Wang Zhaolong (4):
->>>  smb: client: rename server mid_lock to mid_queue_lock
->>>  smb: client: add mid_counter_lock to protect the mid counter counter
->>>  smb: client: smb: client: eliminate mid_flags field
->>>  smb: client: fix mid_q_entry memleak leak with per-mid locking
->>>
->>> fs/smb/client/cifs_debug.c    | 12 ++++--
->>> fs/smb/client/cifsglob.h      | 22 ++++++-----
->>> fs/smb/client/connect.c       | 57 +++++++++++++++++----------
->>> fs/smb/client/smb1ops.c       | 23 +++++++----
->>> fs/smb/client/smb2ops.c       | 72 +++++++++++++++++++----------------
->>> fs/smb/client/smb2transport.c |  5 ++-
->>> fs/smb/client/transport.c     | 71 ++++++++++++++++++----------------
->>> 7 files changed, 152 insertions(+), 110 deletions(-)
->>>
->>>--
->>>2.39.2
->>>
->>>
->>
->>
->>--=20
->>Thanks,
->>
->>Steve
->>
+> > and
+> http://smb311-linux-testing.southcentralus.cloudapp.azure.com/#/builders/=
+5/builds/56
+> )
+> >
+> > On Tue, Aug 5, 2025 at 1:54=E2=80=AFAM Wang Zhaolong
+> > <wangzhaolong@huaweicloud.com> wrote:
 >
-
+>
+> It's quite strange that the lock reported in the stack trace is an intern=
+al
+> lock of the crypto module, which only protects the internal logic of
+> crypto.
+> Moreover, I have not yet found a path where the callback for cifs
+> registration
+> is executed within the scope of this lock.
+>
+> ```c
+> // crypto/api.c
+> static struct crypto_alg *crypto_alg_lookup(const char *name, u32 type,
+>                                             u32 mask)
+> {
+>         const u32 fips =3D CRYPTO_ALG_FIPS_INTERNAL;
+>         struct crypto_alg *alg;
+>         u32 test =3D 0;
+>
+>         if (!((type | mask) & CRYPTO_ALG_TESTED))
+>                 test |=3D CRYPTO_ALG_TESTED;
+>
+>         down_read(&crypto_alg_sem);
+>         ...
+>         up_read(&crypto_alg_sem);
+>         return alg;
+> ```
+> More information is needed to confirm this issue. Could you please provid=
+e
+> it?
+>
+> Best regards,
+> Wang Zhaolong
+>
+>
