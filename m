@@ -2,44 +2,43 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id B4CE2B1CB13
-	for <lists+samba-technical@lfdr.de>; Wed,  6 Aug 2025 19:38:11 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8B351B1CB19
+	for <lists+samba-technical@lfdr.de>; Wed,  6 Aug 2025 19:38:23 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=1PPWjrYFTLsld5sE8/MKRK4qiXb1yzN770qkq1yTsYw=; b=i505bT5A4Qx9gk8//xUSkHEI8o
-	LvaqjEKv8rJFsdND06uD9e4FA9Y0K56tSUb7b2jLKiXolw2xrnlTSAzbx4NMM5Deu2S3DguzdGxM3
-	7j8hTETpXtRzQn9jftmOPlaDxryw5YbyKeKtcOlNKQk9roTKr9Gbwr1UkIZ3EiuxQu832htmZJvz+
-	LihpF11xK7aOLaf5ownXMdykMS83aY6DlYbhu1IlNGqwSLxqJC3Qik8wYuKIBfRCyJxUVgDo1QlnX
-	1kvMQnQu2iJFFnFp6NA1XTMc+lQlsv9IavnIHQdHkXYJhcZUM4u8DePR4mkTz/fqrYYFuGZWSzgZd
-	dxp+dK9A==;
-Received: from ip6-localhost ([::1]:56190 helo=hr1.samba.org) 
+	bh=dK+MiFqt5N590uxFDPWT0nZR11NnDQWgIRSkEK+GCbo=; b=fQtiz4ca69Q90b4PSUNJHRyxQJ
+	g6itl6MJJ1l4mTxVhpiSgl7pORrNHmb8KQ0UGqs4Qok4NXT2SgViPl+D9RTHKAqW79sDR8wm56uBY
+	7iAMktEXavmcT7rd8jY95JKOzaEIiCpvUqbfpFr85PHdVC7ZrWdf6aSba/gdS98tCpUhDGyBPrHD1
+	YSrSSicwbOOGYQ3EJgEMymYbXqcI7kTJwk2UZk365zFyUtYjWWCF0YQuOWFInsatiZwwLgcUQ+3sT
+	Kf2lma0RsrF9IvvNL7ra1TdFngJIk608nv7th+hYZ2cASG8XoTdFq5eELq+D3u4n3VavsXIvmpBKu
+	1IsTftvQ==;
+Received: from ip6-localhost ([::1]:26842 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1uji5Q-00ERu5-Jq; Wed, 06 Aug 2025 17:38:01 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:65404) 
+	id 1uji5f-00ERzP-KX; Wed, 06 Aug 2025 17:38:15 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:65418) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uji4b-00ERcQ-1A
- for samba-technical@lists.samba.org; Wed, 06 Aug 2025 17:37:33 +0000
+ (Exim) id 1uji4g-00EReV-7P
+ for samba-technical@lists.samba.org; Wed, 06 Aug 2025 17:37:36 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Message-ID:Date:Cc:To:From;
- bh=1PPWjrYFTLsld5sE8/MKRK4qiXb1yzN770qkq1yTsYw=; b=1IWCfcBGIvvUSUdomlz6o7HNVj
- xAK9OPM0aZeCyMWxYLgFG85R53leU6E8eaTk9emAN9CsB6tlpfn3nvZ6euw2QMNfA8x+wLF0FerOa
- NG8A48HeJp/3GYaXyW9ETLaCNjkC35QDM2zH9VdrARVkih+C4+xc0FOYU6ywvS+WdR81Kgj3DpDvk
- NjD1S+jpSTULz+qgPYYtxxHbRU+pB8gp3tu16o3CNR1kOGGj/6zBWd8oa6vj2sBDoTbfYm646IhDp
- +W0Om0YIhYrdSkjbOdGJOWuQ22uJiKY9WJz4iIy/0HmBzOuz8yBIXBjFAE4UGsf/Eq667uQSv3DPb
- yhsa+351638+QKm5nBh2v/WlNrvhWRDUHm6Td1UoNMs9zSAcGSkzDUEHDVcNfdKRZgP9o0jc9MJLR
- 1A59ZtqPzZXjvSQ2Mb1qXPfbdpYxOrNeB5sNVx3512rV1bC9aZdVJ62wtSFYG/+8MOBhHVbrlH/C+
- Xwk5h2emjDoXXOdVjJLAuzf0;
+ bh=dK+MiFqt5N590uxFDPWT0nZR11NnDQWgIRSkEK+GCbo=; b=1pPX9NREjLn/WY+AgwutruWD96
+ KsUh5WXH7oqYyv2ALzoquhb65fp1DzFG6zFWLAxmNOB1G/UeEo2MLmKGILzignIolj0g8n5B58irG
+ iAzKqi1CS/K7L9clfnOc4vZtIB8TpZq6IzhKKvXjTfjEp+5StDFUvSaOUJ8bzlDh1IOn5dVypfVQ1
+ TRXg85L/8kD+PpJ21NBXMgXyMEwWMloIetNB8gb8MGyTkwhtjTjjBGa1AmSsSxXsJIf6BbMS2bQk1
+ JU4Lka1IXNHcXA6AHNWbyFlk4pVh7MQblkd3KVH+kYiGZGieJ16Bh/Xx0ZeepqNZPsfuFt2YFvxyb
+ NT28DJSlDmZqOmq9YODXqLgQi6+Gf1hbbymlccq6HdkIoG9dxnt5yu+gOdPRrlyImYDUD4oSEB5rB
+ ln3UpcjTsFkeejXu2Ij+Fdwxeqo4Pnqiv7dddfodPOPg2oc4ooRYh12l0ZtDPD5kvJ6ZHE8hRhRd3
+ 7ksaOQ34Nz6YYztz/hmzS2tI;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uji4V-001Obh-2l; Wed, 06 Aug 2025 17:37:04 +0000
+ (Exim) id 1uji4d-001Odm-11; Wed, 06 Aug 2025 17:37:11 +0000
 To: linux-cifs@vger.kernel.org,
 	samba-technical@lists.samba.org
-Subject: [PATCH 07/18] smb: client: make use of smbdirect_socket.{send,
- recv}_io.mem.{cache, pool}
-Date: Wed,  6 Aug 2025 19:35:53 +0200
-Message-ID: <c7c6de9412731dc23685a22790bb551a56f8c196.1754501401.git.metze@samba.org>
+Subject: [PATCH 08/18] smb: server: make use of common smbdirect_pdu.h
+Date: Wed,  6 Aug 2025 19:35:54 +0200
+Message-ID: <098bd91b7e846cb20305a6d1b4005abf10cd5db8.1754501401.git.metze@samba.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1754501401.git.metze@samba.org>
 References: <cover.1754501401.git.metze@samba.org>
@@ -60,233 +59,263 @@ List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
 From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
 Reply-To: Stefan Metzmacher <metze@samba.org>
-Cc: metze@samba.org, Steve French <smfrench@gmail.com>,
- Tom Talpey <tom@talpey.com>
+Cc: Meetakshi Setiya <meetakshisetiyaoss@gmail.com>,
+ Tom Talpey <tom@talpey.com>, Hyunchul Lee <hyc.lee@gmail.com>, metze@samba.org,
+ Steve French <smfrench@gmail.com>, Namjae Jeon <linkinjeon@kernel.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
-
-This will allow common helper functions to be created later.
 
 Cc: Steve French <smfrench@gmail.com>
 Cc: Tom Talpey <tom@talpey.com>
 Cc: Long Li <longli@microsoft.com>
+Cc: Namjae Jeon <linkinjeon@kernel.org>
+Cc: Hyunchul Lee <hyc.lee@gmail.com>
+Cc: Meetakshi Setiya <meetakshisetiyaoss@gmail.com>
 Cc: linux-cifs@vger.kernel.org
 Cc: samba-technical@lists.samba.org
 Signed-off-by: Stefan Metzmacher <metze@samba.org>
 ---
- fs/smb/client/smbdirect.c | 65 ++++++++++++++++++++-------------------
- fs/smb/client/smbdirect.h |  9 ------
- 2 files changed, 34 insertions(+), 40 deletions(-)
+ fs/smb/server/transport_rdma.c | 49 +++++++++++++++++-----------------
+ fs/smb/server/transport_rdma.h | 41 ----------------------------
+ 2 files changed, 25 insertions(+), 65 deletions(-)
 
-diff --git a/fs/smb/client/smbdirect.c b/fs/smb/client/smbdirect.c
-index c367efef8c7a..6c2af00be44c 100644
---- a/fs/smb/client/smbdirect.c
-+++ b/fs/smb/client/smbdirect.c
-@@ -287,7 +287,7 @@ static void send_done(struct ib_cq *cq, struct ib_wc *wc)
- 	if (wc->status != IB_WC_SUCCESS || wc->opcode != IB_WC_SEND) {
- 		log_rdma_send(ERR, "wc->status=%d wc->opcode=%d\n",
- 			wc->status, wc->opcode);
--		mempool_free(request, info->request_mempool);
-+		mempool_free(request, sc->send_io.mem.pool);
- 		smbd_disconnect_rdma_connection(info);
+diff --git a/fs/smb/server/transport_rdma.c b/fs/smb/server/transport_rdma.c
+index 8d366db5f605..275199fef4e5 100644
+--- a/fs/smb/server/transport_rdma.c
++++ b/fs/smb/server/transport_rdma.c
+@@ -23,12 +23,13 @@
+ #include "connection.h"
+ #include "smb_common.h"
+ #include "../common/smb2status.h"
++#include "../common/smbdirect/smbdirect_pdu.h"
+ #include "transport_rdma.h"
+ 
+ #define SMB_DIRECT_PORT_IWARP		5445
+ #define SMB_DIRECT_PORT_INFINIBAND	445
+ 
+-#define SMB_DIRECT_VERSION_LE		cpu_to_le16(0x0100)
++#define SMB_DIRECT_VERSION_LE		cpu_to_le16(SMBDIRECT_V1)
+ 
+ /* SMB_DIRECT negotiation timeout in seconds */
+ #define SMB_DIRECT_NEGOTIATE_TIMEOUT		120
+@@ -472,8 +473,8 @@ static int smb_direct_check_recvmsg(struct smb_direct_recvmsg *recvmsg)
+ {
+ 	switch (recvmsg->type) {
+ 	case SMB_DIRECT_MSG_DATA_TRANSFER: {
+-		struct smb_direct_data_transfer *req =
+-			(struct smb_direct_data_transfer *)recvmsg->packet;
++		struct smbdirect_data_transfer *req =
++			(struct smbdirect_data_transfer *)recvmsg->packet;
+ 		struct smb2_hdr *hdr = (struct smb2_hdr *)(recvmsg->packet
+ 				+ le32_to_cpu(req->data_offset));
+ 		ksmbd_debug(RDMA,
+@@ -485,8 +486,8 @@ static int smb_direct_check_recvmsg(struct smb_direct_recvmsg *recvmsg)
+ 		break;
+ 	}
+ 	case SMB_DIRECT_MSG_NEGOTIATE_REQ: {
+-		struct smb_direct_negotiate_req *req =
+-			(struct smb_direct_negotiate_req *)recvmsg->packet;
++		struct smbdirect_negotiate_req *req =
++			(struct smbdirect_negotiate_req *)recvmsg->packet;
+ 		ksmbd_debug(RDMA,
+ 			    "MinVersion: %u, MaxVersion: %u, CreditRequested: %u, MaxSendSize: %u, MaxRecvSize: %u, MaxFragmentedSize: %u\n",
+ 			    le16_to_cpu(req->min_version),
+@@ -540,7 +541,7 @@ static void recv_done(struct ib_cq *cq, struct ib_wc *wc)
+ 
+ 	switch (recvmsg->type) {
+ 	case SMB_DIRECT_MSG_NEGOTIATE_REQ:
+-		if (wc->byte_len < sizeof(struct smb_direct_negotiate_req)) {
++		if (wc->byte_len < sizeof(struct smbdirect_negotiate_req)) {
+ 			put_recvmsg(t, recvmsg);
+ 			smb_direct_disconnect_rdma_connection(t);
+ 			return;
+@@ -552,13 +553,13 @@ static void recv_done(struct ib_cq *cq, struct ib_wc *wc)
+ 		wake_up_interruptible(&t->wait_status);
  		return;
- 	}
-@@ -297,7 +297,7 @@ static void send_done(struct ib_cq *cq, struct ib_wc *wc)
+ 	case SMB_DIRECT_MSG_DATA_TRANSFER: {
+-		struct smb_direct_data_transfer *data_transfer =
+-			(struct smb_direct_data_transfer *)recvmsg->packet;
++		struct smbdirect_data_transfer *data_transfer =
++			(struct smbdirect_data_transfer *)recvmsg->packet;
+ 		unsigned int data_length;
+ 		int avail_recvmsg_count, receive_credits;
  
- 	wake_up(&info->wait_post_send);
+ 		if (wc->byte_len <
+-		    offsetof(struct smb_direct_data_transfer, padding)) {
++		    offsetof(struct smbdirect_data_transfer, padding)) {
+ 			put_recvmsg(t, recvmsg);
+ 			smb_direct_disconnect_rdma_connection(t);
+ 			return;
+@@ -566,7 +567,7 @@ static void recv_done(struct ib_cq *cq, struct ib_wc *wc)
  
--	mempool_free(request, info->request_mempool);
-+	mempool_free(request, sc->send_io.mem.pool);
- }
+ 		data_length = le32_to_cpu(data_transfer->data_length);
+ 		if (data_length) {
+-			if (wc->byte_len < sizeof(struct smb_direct_data_transfer) +
++			if (wc->byte_len < sizeof(struct smbdirect_data_transfer) +
+ 			    (u64)data_length) {
+ 				put_recvmsg(t, recvmsg);
+ 				smb_direct_disconnect_rdma_connection(t);
+@@ -598,7 +599,7 @@ static void recv_done(struct ib_cq *cq, struct ib_wc *wc)
+ 			   &t->send_credits);
  
- static void dump_smbdirect_negotiate_resp(struct smbdirect_negotiate_resp *resp)
-@@ -692,7 +692,7 @@ static int smbd_post_send_negotiate_req(struct smbd_connection *info)
- 	struct smbdirect_send_io *request;
- 	struct smbdirect_negotiate_req *packet;
+ 		if (le16_to_cpu(data_transfer->flags) &
+-		    SMB_DIRECT_RESPONSE_REQUESTED)
++		    SMBDIRECT_FLAG_RESPONSE_REQUESTED)
+ 			queue_work(smb_direct_wq, &t->send_immediate_work);
  
--	request = mempool_alloc(info->request_mempool, GFP_KERNEL);
-+	request = mempool_alloc(sc->send_io.mem.pool, GFP_KERNEL);
- 	if (!request)
- 		return rc;
- 
-@@ -751,7 +751,7 @@ static int smbd_post_send_negotiate_req(struct smbd_connection *info)
- 	smbd_disconnect_rdma_connection(info);
- 
- dma_mapping_failed:
--	mempool_free(request, info->request_mempool);
-+	mempool_free(request, sc->send_io.mem.pool);
- 	return rc;
- }
- 
-@@ -883,7 +883,7 @@ static int smbd_post_send_iter(struct smbd_connection *info,
- 		goto wait_send_queue;
- 	}
- 
--	request = mempool_alloc(info->request_mempool, GFP_KERNEL);
-+	request = mempool_alloc(sc->send_io.mem.pool, GFP_KERNEL);
- 	if (!request) {
- 		rc = -ENOMEM;
- 		goto err_alloc;
-@@ -977,7 +977,7 @@ static int smbd_post_send_iter(struct smbd_connection *info,
- 					    request->sge[i].addr,
- 					    request->sge[i].length,
- 					    DMA_TO_DEVICE);
--	mempool_free(request, info->request_mempool);
-+	mempool_free(request, sc->send_io.mem.pool);
- 
- 	/* roll back receive credits and credits to be offered */
- 	spin_lock(&info->lock_new_credits_offered);
-@@ -1235,7 +1235,7 @@ static int allocate_receive_buffers(struct smbd_connection *info, int num_buf)
- 	init_waitqueue_head(&info->wait_receive_queues);
- 
- 	for (i = 0; i < num_buf; i++) {
--		response = mempool_alloc(info->response_mempool, GFP_KERNEL);
-+		response = mempool_alloc(sc->recv_io.mem.pool, GFP_KERNEL);
- 		if (!response)
- 			goto allocate_failed;
- 
-@@ -1255,17 +1255,18 @@ static int allocate_receive_buffers(struct smbd_connection *info, int num_buf)
- 		list_del(&response->list);
- 		info->count_receive_queue--;
- 
--		mempool_free(response, info->response_mempool);
-+		mempool_free(response, sc->recv_io.mem.pool);
- 	}
- 	return -ENOMEM;
- }
- 
- static void destroy_receive_buffers(struct smbd_connection *info)
+ 		if (atomic_read(&t->send_credits) > 0)
+@@ -664,7 +665,7 @@ static int smb_direct_read(struct ksmbd_transport *t, char *buf,
+ 			   unsigned int size, int unused)
  {
-+	struct smbdirect_socket *sc = &info->socket;
- 	struct smbdirect_recv_io *response;
- 
- 	while ((response = get_receive_buffer(info)))
--		mempool_free(response, info->response_mempool);
-+		mempool_free(response, sc->recv_io.mem.pool);
- }
- 
- /* Implement idle connection timer [MS-SMBD] 3.1.6.2 */
-@@ -1377,11 +1378,11 @@ void smbd_destroy(struct TCP_Server_Info *server)
- 	rdma_destroy_id(sc->rdma.cm_id);
- 
- 	/* free mempools */
--	mempool_destroy(info->request_mempool);
--	kmem_cache_destroy(info->request_cache);
-+	mempool_destroy(sc->send_io.mem.pool);
-+	kmem_cache_destroy(sc->send_io.mem.cache);
- 
--	mempool_destroy(info->response_mempool);
--	kmem_cache_destroy(info->response_cache);
-+	mempool_destroy(sc->recv_io.mem.pool);
-+	kmem_cache_destroy(sc->recv_io.mem.cache);
- 
- 	sc->status = SMBDIRECT_SOCKET_DESTROYED;
- 
-@@ -1429,12 +1430,14 @@ int smbd_reconnect(struct TCP_Server_Info *server)
- 
- static void destroy_caches_and_workqueue(struct smbd_connection *info)
+ 	struct smb_direct_recvmsg *recvmsg;
+-	struct smb_direct_data_transfer *data_transfer;
++	struct smbdirect_data_transfer *data_transfer;
+ 	int to_copy, to_read, data_read, offset;
+ 	u32 data_length, remaining_data_length, data_offset;
+ 	int rc;
+@@ -1001,7 +1002,7 @@ static int smb_direct_create_header(struct smb_direct_transport *t,
+ 				    struct smb_direct_sendmsg **sendmsg_out)
  {
-+	struct smbdirect_socket *sc = &info->socket;
-+
- 	destroy_receive_buffers(info);
- 	destroy_workqueue(info->workqueue);
--	mempool_destroy(info->response_mempool);
--	kmem_cache_destroy(info->response_cache);
--	mempool_destroy(info->request_mempool);
--	kmem_cache_destroy(info->request_cache);
-+	mempool_destroy(sc->recv_io.mem.pool);
-+	kmem_cache_destroy(sc->recv_io.mem.cache);
-+	mempool_destroy(sc->send_io.mem.pool);
-+	kmem_cache_destroy(sc->send_io.mem.cache);
- }
+ 	struct smb_direct_sendmsg *sendmsg;
+-	struct smb_direct_data_transfer *packet;
++	struct smbdirect_data_transfer *packet;
+ 	int header_length;
+ 	int ret;
  
- #define MAX_NAME_LEN	80
-@@ -1449,19 +1452,19 @@ static int allocate_caches_and_workqueue(struct smbd_connection *info)
+@@ -1010,7 +1011,7 @@ static int smb_direct_create_header(struct smb_direct_transport *t,
+ 		return PTR_ERR(sendmsg);
+ 
+ 	/* Fill in the packet header */
+-	packet = (struct smb_direct_data_transfer *)sendmsg->packet;
++	packet = (struct smbdirect_data_transfer *)sendmsg->packet;
+ 	packet->credits_requested = cpu_to_le16(t->send_credit_target);
+ 	packet->credits_granted = cpu_to_le16(manage_credits_prior_sending(t));
+ 
+@@ -1033,11 +1034,11 @@ static int smb_direct_create_header(struct smb_direct_transport *t,
+ 		    le32_to_cpu(packet->remaining_data_length));
+ 
+ 	/* Map the packet to DMA */
+-	header_length = sizeof(struct smb_direct_data_transfer);
++	header_length = sizeof(struct smbdirect_data_transfer);
+ 	/* If this is a packet without payload, don't send padding */
+ 	if (!size)
+ 		header_length =
+-			offsetof(struct smb_direct_data_transfer, padding);
++			offsetof(struct smbdirect_data_transfer, padding);
+ 
+ 	sendmsg->sge[0].addr = ib_dma_map_single(t->cm_id->device,
+ 						 (void *)packet,
+@@ -1212,7 +1213,7 @@ static int smb_direct_writev(struct ksmbd_transport *t,
+ 	int remaining_data_length;
+ 	int start, i, j;
+ 	int max_iov_size = st->max_send_size -
+-			sizeof(struct smb_direct_data_transfer);
++			sizeof(struct smbdirect_data_transfer);
+ 	int ret;
+ 	struct kvec vec;
+ 	struct smb_direct_send_ctx send_ctx;
+@@ -1560,18 +1561,18 @@ static int smb_direct_send_negotiate_response(struct smb_direct_transport *t,
+ 					      int failed)
+ {
+ 	struct smb_direct_sendmsg *sendmsg;
+-	struct smb_direct_negotiate_resp *resp;
++	struct smbdirect_negotiate_resp *resp;
+ 	int ret;
+ 
+ 	sendmsg = smb_direct_alloc_sendmsg(t);
+ 	if (IS_ERR(sendmsg))
  		return -ENOMEM;
  
- 	scnprintf(name, MAX_NAME_LEN, "smbdirect_send_io_%p", info);
--	info->request_cache =
-+	sc->send_io.mem.cache =
- 		kmem_cache_create(
- 			name,
- 			sizeof(struct smbdirect_send_io) +
- 				sizeof(struct smbdirect_data_transfer),
- 			0, SLAB_HWCACHE_ALIGN, NULL);
--	if (!info->request_cache)
-+	if (!sc->send_io.mem.cache)
+-	resp = (struct smb_direct_negotiate_resp *)sendmsg->packet;
++	resp = (struct smbdirect_negotiate_resp *)sendmsg->packet;
+ 	if (failed) {
+ 		memset(resp, 0, sizeof(*resp));
+-		resp->min_version = cpu_to_le16(0x0100);
+-		resp->max_version = cpu_to_le16(0x0100);
++		resp->min_version = SMB_DIRECT_VERSION_LE;
++		resp->max_version = SMB_DIRECT_VERSION_LE;
+ 		resp->status = STATUS_NOT_SUPPORTED;
+ 	} else {
+ 		resp->status = STATUS_SUCCESS;
+@@ -1803,7 +1804,7 @@ static int smb_direct_create_pools(struct smb_direct_transport *t)
+ 	snprintf(name, sizeof(name), "smb_direct_rqst_pool_%p", t);
+ 	t->sendmsg_cache = kmem_cache_create(name,
+ 					     sizeof(struct smb_direct_sendmsg) +
+-					      sizeof(struct smb_direct_negotiate_resp),
++					      sizeof(struct smbdirect_negotiate_resp),
+ 					     0, SLAB_HWCACHE_ALIGN, NULL);
+ 	if (!t->sendmsg_cache)
  		return -ENOMEM;
+@@ -1936,7 +1937,7 @@ static int smb_direct_prepare(struct ksmbd_transport *t)
+ {
+ 	struct smb_direct_transport *st = smb_trans_direct_transfort(t);
+ 	struct smb_direct_recvmsg *recvmsg;
+-	struct smb_direct_negotiate_req *req;
++	struct smbdirect_negotiate_req *req;
+ 	int ret;
  
--	info->request_mempool =
-+	sc->send_io.mem.pool =
- 		mempool_create(sp->send_credit_target, mempool_alloc_slab,
--			mempool_free_slab, info->request_cache);
--	if (!info->request_mempool)
-+			mempool_free_slab, sc->send_io.mem.cache);
-+	if (!sc->send_io.mem.pool)
- 		goto out1;
+ 	ksmbd_debug(RDMA, "Waiting for SMB_DIRECT negotiate request\n");
+@@ -1955,7 +1956,7 @@ static int smb_direct_prepare(struct ksmbd_transport *t)
+ 	if (ret == -ECONNABORTED)
+ 		goto out;
  
- 	scnprintf(name, MAX_NAME_LEN, "smbdirect_recv_io_%p", info);
-@@ -1472,17 +1475,17 @@ static int allocate_caches_and_workqueue(struct smbd_connection *info)
- 				   sizeof(struct smbdirect_data_transfer)),
- 		.usersize	= sp->max_recv_size - sizeof(struct smbdirect_data_transfer),
- 	};
--	info->response_cache =
-+	sc->recv_io.mem.cache =
- 		kmem_cache_create(name,
- 				  sizeof(struct smbdirect_recv_io) + sp->max_recv_size,
- 				  &response_args, SLAB_HWCACHE_ALIGN);
--	if (!info->response_cache)
-+	if (!sc->recv_io.mem.cache)
- 		goto out2;
+-	req = (struct smb_direct_negotiate_req *)recvmsg->packet;
++	req = (struct smbdirect_negotiate_req *)recvmsg->packet;
+ 	st->max_recv_size = min_t(int, st->max_recv_size,
+ 				  le32_to_cpu(req->preferred_send_size));
+ 	st->max_send_size = min_t(int, st->max_send_size,
+diff --git a/fs/smb/server/transport_rdma.h b/fs/smb/server/transport_rdma.h
+index 77aee4e5c9dc..0fb692c40e21 100644
+--- a/fs/smb/server/transport_rdma.h
++++ b/fs/smb/server/transport_rdma.h
+@@ -11,47 +11,6 @@
+ #define SMBD_MIN_IOSIZE (512 * 1024)
+ #define SMBD_MAX_IOSIZE (16 * 1024 * 1024)
  
--	info->response_mempool =
-+	sc->recv_io.mem.pool =
- 		mempool_create(sp->recv_credit_max, mempool_alloc_slab,
--		       mempool_free_slab, info->response_cache);
--	if (!info->response_mempool)
-+		       mempool_free_slab, sc->recv_io.mem.cache);
-+	if (!sc->recv_io.mem.pool)
- 		goto out3;
- 
- 	scnprintf(name, MAX_NAME_LEN, "smbd_%p", info);
-@@ -1501,13 +1504,13 @@ static int allocate_caches_and_workqueue(struct smbd_connection *info)
- out5:
- 	destroy_workqueue(info->workqueue);
- out4:
--	mempool_destroy(info->response_mempool);
-+	mempool_destroy(sc->recv_io.mem.pool);
- out3:
--	kmem_cache_destroy(info->response_cache);
-+	kmem_cache_destroy(sc->recv_io.mem.cache);
- out2:
--	mempool_destroy(info->request_mempool);
-+	mempool_destroy(sc->send_io.mem.pool);
- out1:
--	kmem_cache_destroy(info->request_cache);
-+	kmem_cache_destroy(sc->send_io.mem.cache);
- 	return -ENOMEM;
- }
- 
-diff --git a/fs/smb/client/smbdirect.h b/fs/smb/client/smbdirect.h
-index a8380bccf623..0d4d45428c85 100644
---- a/fs/smb/client/smbdirect.h
-+++ b/fs/smb/client/smbdirect.h
-@@ -105,15 +105,6 @@ struct smbd_connection {
- 	struct workqueue_struct *workqueue;
- 	struct delayed_work idle_timer_work;
- 
--	/* Memory pool for preallocating buffers */
--	/* request pool for RDMA send */
--	struct kmem_cache *request_cache;
--	mempool_t *request_mempool;
+-/* SMB DIRECT negotiation request packet [MS-SMBD] 2.2.1 */
+-struct smb_direct_negotiate_req {
+-	__le16 min_version;
+-	__le16 max_version;
+-	__le16 reserved;
+-	__le16 credits_requested;
+-	__le32 preferred_send_size;
+-	__le32 max_receive_size;
+-	__le32 max_fragmented_size;
+-} __packed;
 -
--	/* response pool for RDMA receive */
--	struct kmem_cache *response_cache;
--	mempool_t *response_mempool;
+-/* SMB DIRECT negotiation response packet [MS-SMBD] 2.2.2 */
+-struct smb_direct_negotiate_resp {
+-	__le16 min_version;
+-	__le16 max_version;
+-	__le16 negotiated_version;
+-	__le16 reserved;
+-	__le16 credits_requested;
+-	__le16 credits_granted;
+-	__le32 status;
+-	__le32 max_readwrite_size;
+-	__le32 preferred_send_size;
+-	__le32 max_receive_size;
+-	__le32 max_fragmented_size;
+-} __packed;
 -
- 	/* for debug purposes */
- 	unsigned int count_get_receive_buffer;
- 	unsigned int count_put_receive_buffer;
+-#define SMB_DIRECT_RESPONSE_REQUESTED 0x0001
+-
+-/* SMB DIRECT data transfer packet with payload [MS-SMBD] 2.2.3 */
+-struct smb_direct_data_transfer {
+-	__le16 credits_requested;
+-	__le16 credits_granted;
+-	__le16 flags;
+-	__le16 reserved;
+-	__le32 remaining_data_length;
+-	__le32 data_offset;
+-	__le32 data_length;
+-	__le32 padding;
+-	__u8 buffer[];
+-} __packed;
+-
+ #ifdef CONFIG_SMB_SERVER_SMBDIRECT
+ int ksmbd_rdma_init(void);
+ void ksmbd_rdma_destroy(void);
 -- 
 2.43.0
 
