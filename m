@@ -2,51 +2,59 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 70888B1C782
-	for <lists+samba-technical@lfdr.de>; Wed,  6 Aug 2025 16:18:20 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D4251B1C959
+	for <lists+samba-technical@lfdr.de>; Wed,  6 Aug 2025 17:52:59 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=CvozvUvb2mLHLQoVpvw783zCOBflJqrngDv1NwUXoAs=; b=K+2Yf/AN92MsiaR1evM2l2LgOf
-	clDYUTWq3tjjzGin/O0cVZo+rxqF7iv2RPZ7Q2xLfnhmG6zJDcPPyKM4Q2BrhjmqJ8VOTJRNBejXm
-	03M50ITQdBwxqApQbKVyHJ8vWr6QHK70u8HfG+eOaeeiSPTIHZYVy6c77OJJZh6hzpBha7cZEQGKY
-	OfU6xYtu5vHl3F3kubDCFjfNxoegiwZPvvJH8TavPyzoLzXNyWA7lE+zuPStwyJrnMRpI7UeVyNux
-	3U7qIAJmJXSfUaha4KZvP7Afup3VrVLcBuFCGFNz4g8gq07Ljabof43TO816F22PNyYbPhJgEXndH
-	fwW/z/dg==;
-Received: from ip6-localhost ([::1]:54996 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
+	bh=/ApoWVTSci8E4yNRCwXuKeEJEYoIgtG+UcwYQj+OW38=; b=faZ3d9Y9EkLC+PCQJDMpZOPEYv
+	PXxKSkRpb+S2rMSADVJg8HZRf1k6ZK2Ac5Zm2+hCc/NOM4Uc8ToiaXxCQ3v+sQT14yaSP7vgkXQo8
+	xwEqfDsLUsTGN6rfC10nWu4aR+ah3AK7169AujXNJOVEiw4Rl2nAeMgdJskm8mAqNP+tZh7zYxRUb
+	5Wxvc0LTx4CdewKx4pCQzBBU4eKdVIO+yOOLiYefChyiRR7tqvWUy9fjbhej/Z2gD0LTkbL5o7j3t
+	X+taXT0skKjEzOYjJpwaxN0aoTjrpJxXCpixKCsceSBvbWGivG6BK1eDPq8ElKCsyXlS1QMILGy6r
+	tOs/Ajyg==;
+Received: from ip6-localhost ([::1]:53646 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1ujexg-00EQnL-08; Wed, 06 Aug 2025 14:17:48 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:58694) 
+	id 1ujgRA-00EQwo-2J; Wed, 06 Aug 2025 15:52:20 +0000
+Received: from plasma4.jpberlin.de ([80.241.57.33]:44013) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1ujexb-00EQnE-4s
- for samba-technical@lists.samba.org; Wed, 06 Aug 2025 14:17:45 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=From:Cc:To:Date:Message-ID;
- bh=CvozvUvb2mLHLQoVpvw783zCOBflJqrngDv1NwUXoAs=; b=t+TFmpEop/qSe2NZe4S50iZ+W+
- nWgMdh/C173rax/xvJ/aC+EePCbkgwPdr8XMtckQU4WzRNCO4qFRdn3Y6mBys6Z9mQOHMmLWHPhT+
- rJ+MuOYvShJXJfncSop2CcdUbNhufbMHEPWJnb0ShZ4Rkc3FtV591zUVXHFnb74m70oppGaMpybnp
- 7+0Z5zsmJi9E8OA1rGliL3hFpAsNK7R54KQ/5MlC+rgpPEza/WTZ1arc3EgODoisDaKNVDO3/2Jkf
- 81oi3xat+alh1fRcxDNvddwTAHeh54BrUBOAYAFMh+IwRw4t7NTbHYgpGcu+huGtaxOYhaC5IJYTR
- kVREPtWDDfKdaAaXXwPpYBKTv7tvZvxjXVW84tICvqcJFgRViDwcP345x1vQU59f+Yyal9aVf/uwW
- yBweZI0LFjtBuh0IzFz3+9Oibht4ZM3b3ZyrxoGDNvp3xDPfyjmhJfXa+1JVobXcIZQCt4s2lzBAI
- FPI0lzWkJadreHtKz5Cu4JNb;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1ujexa-001MkB-06; Wed, 06 Aug 2025 14:17:42 +0000
-Message-ID: <e291d925-bfd9-4202-b5d4-de5bf30ab870@samba.org>
-Date: Wed, 6 Aug 2025 16:17:41 +0200
+ (Exim) id 1ujgR4-00EQwf-VD; Wed, 06 Aug 2025 15:52:18 +0000
+Received: from spamfilter06.heinlein-hosting.de
+ (spamfilter06.heinlein-hosting.de [80.241.56.125])
+ by plasma.jpberlin.de (Postfix) with ESMTP id D202AC1089;
+ Wed,  6 Aug 2025 17:52:09 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kania-online.de;
+ s=MBO0001; t=1754495530;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:mime-version:mime-version:content-type:content-type:autocrypt:autocrypt;
+ bh=/ApoWVTSci8E4yNRCwXuKeEJEYoIgtG+UcwYQj+OW38=;
+ b=H+sfGTzzQYw5m8l2rt+60PREyyQZrI1jxLcZF6C3C7XM6naBtWYAkfVOuerjVrBhFxMJPz
+ XvrgU2Tg6n+PRBYSp/nib1GmqdimBsf0Ng+XXTuseAHqqNqDMfdbuiNjVKHMTTcpKT91T9
+ QMzsnz0gwWGKA1Dlp54s3dXyCAHqtqgeEl+hfGUfnHjBFFdbCbLy8Z/k+K48RobhaN2OHA
+ 8j0y+0H6tpi1tkJt4KiwYpUdGLVGpeLGrDLSK6imYz6WKxTKMEWJCIDsGeCzxgWffS/8Gz
+ ybwQTIm1mQmKJ8STdoniglZvtAuLRGjh/IH/XkkDNGxvmbwerrANLEFjyvACMw==
+Received: from plasma.jpberlin.de ([80.241.56.68])
+ by spamfilter06.heinlein-hosting.de (spamfilter06.heinlein-hosting.de
+ [80.241.56.125]) (amavisd-new, port 10030)
+ with ESMTP id 98ieMP3S4O3r; Wed,  6 Aug 2025 17:52:03 +0200 (CEST)
+Received: from [192.168.123.203] (p5b240f5b.dip0.t-ipconnect.de [91.36.15.91])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (Client did not present a certificate)
+ (Authenticated sender: stefan@kania-online.de)
+ by plasma.jpberlin.de (Postfix) with ESMTPSA id 038E7C1147;
+ Wed,  6 Aug 2025 17:52:02 +0200 (CEST)
+Message-ID: <34b25add-522d-407c-b06c-836396b441c3@kania-online.de>
+Date: Wed, 6 Aug 2025 17:52:02 +0200
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH next] smb: client: Fix use after free in send_done()
-To: Dan Carpenter <dan.carpenter@linaro.org>
-References: <aJNASZzOWtg8aljM@stanley.mountain>
- <ad2e9d94-2d95-4351-b800-627f20672209@samba.org>
- <87646c67-78b8-41c5-9b72-361cb3b733d1@suswa.mountain>
-Content-Language: en-US
-In-Reply-To: <87646c67-78b8-41c5-9b72-361cb3b733d1@suswa.mountain>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+To: "samba@lists.samba.org" <samba@lists.samba.org>,
+ samba-technical@lists.samba.org
+Content-Language: en-US, de-DE
+Subject: English version of my Samba-book
+Organization: Stefan Kania
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------kSh6L0Rtt5uTDXwIGOJKuVCh"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,74 +68,92 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Stefan Metzmacher <metze@samba.org>
-Cc: Tom Talpey <tom@talpey.com>, Shyam Prasad N <sprasad@microsoft.com>,
- Paulo Alcantara <pc@manguebit.org>, linux-cifs@vger.kernel.org,
- kernel-janitors@vger.kernel.org, samba-technical@lists.samba.org,
- linux-kernel@vger.kernel.org, Steve French <sfrench@samba.org>,
- Bharath SM <bharathsm@microsoft.com>
+From: Stefan Kania via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Stefan Kania <stefan@kania-online.de>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Am 06.08.25 um 14:48 schrieb Dan Carpenter:
-> On Wed, Aug 06, 2025 at 02:20:56PM +0200, Stefan Metzmacher wrote:
->> Hi Dan,
->>
->>> The mempool_free() function frees "request".  Don't free the request
->>> until after smbd_disconnect_rdma_connection() to avoid a use after free
->>> bug.
->>>
->>> Fixes: 5e65668c75c0 ("smb: client: let send_done() cleanup before calling smbd_disconnect_rdma_connection()")
->>> Signed-off-by: Dan Carpenter <dan.carpenter@linaro.org>
->>> ---
->>>    fs/smb/client/smbdirect.c | 2 +-
->>>    1 file changed, 1 insertion(+), 1 deletion(-)
->>>
->>> diff --git a/fs/smb/client/smbdirect.c b/fs/smb/client/smbdirect.c
->>> index 58321e483a1a..162f8d1c548a 100644
->>> --- a/fs/smb/client/smbdirect.c
->>> +++ b/fs/smb/client/smbdirect.c
->>> @@ -286,8 +286,8 @@ static void send_done(struct ib_cq *cq, struct ib_wc *wc)
->>>    	if (wc->status != IB_WC_SUCCESS || wc->opcode != IB_WC_SEND) {
->>>    		log_rdma_send(ERR, "wc->status=%d wc->opcode=%d\n",
->>>    			wc->status, wc->opcode);
->>> -		mempool_free(request, request->info->request_mempool);
->>>    		smbd_disconnect_rdma_connection(request->info);
->>> +		mempool_free(request, request->info->request_mempool);
->>
->> The correct fix is to use 'info' instead of 'request->info'
->> other than that the order needs to stay that way.
->>
->> I already asked Steve to squash such a change into the
->> original commit (which is not yet upstream).
->>
->> See:
->> https://lore.kernel.org/linux-cifs/cover.1754308712.git.metze@samba.org/T/#m98a8607d7b83a11fd78547306836a872a2a27192
->>
->> What was the test that triggered the problem?
->> Or did you only noticed it by looking at the code?
-> 
-> This was a Smatch static checker warning.  You need to have the cross
-> function DB to detect it.
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------kSh6L0Rtt5uTDXwIGOJKuVCh
+Content-Type: multipart/mixed; boundary="------------I1DpmpeenMwpcaBcTqXm6bUQ";
+ protected-headers="v1"
+From: Stefan Kania <stefan@kania-online.de>
+To: "samba@lists.samba.org" <samba@lists.samba.org>,
+ samba-technical@lists.samba.org
+Message-ID: <34b25add-522d-407c-b06c-836396b441c3@kania-online.de>
+Subject: English version of my Samba-book
 
-Ok, I'll try to integrate it into my build flow...
+--------------I1DpmpeenMwpcaBcTqXm6bUQ
+Content-Type: multipart/mixed; boundary="------------pnEv0wkxybVrZtnilzghgpyl"
 
-Does it replace sparse or does it run in addition?
-If it replaces sparse I guess a small script would
-run them both?
+--------------pnEv0wkxybVrZtnilzghgpyl
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
 
-$ cat mychecker.sh:
-#!/bin/bash
-set -e
-sparse $@
-smatch $@
+QWZ0ZXIgcHVibGlzaGluZyBmaXZlIGVkaXRpb25zIG9mIG15IHNhbWJhIGJvb2sgaW4gR2Vy
+bWFuLCB0aGUgdGltZSBoYXMgZmluYWxseSBjb21lIGZvciBhbiBFbmdsaXNoIGVkaXRpb24u
+IEZvciBhIGxvbmcgdGltZSwgaXQgd2FzIGRpZmZpY3VsdCB0byBmaW5kIHBlb3BsZSB0byBo
+ZWxwIG1lIHdpdGggdGhlIHRyYW5zbGF0aW9uLiBJdCBuZXZlciB3b3JrZWQgb3V0IGZvciB0
+aGUgbGFzdCB0aHJlZSBlZGl0aW9ucy4gSXQncyBzaW1wbHkgYSBsb3Qgb2Ygd29yayB0byBj
+cmVhdGUgYSBib29rIGxpa2UgdGhpcywgZXZlbiBpZiB0aGVyZSBpcyBhbHJlYWR5IGEgR2Vy
+bWFuIGVkaXRpb24gdG8gc2VydmUgYXMgYSBiYXNpcy4gTm93LCB0d28gY2lyY3Vtc3RhbmNl
+cyBoYXZlIGVuc3VyZWQgdGhhdCBpdCBoYXMgZmluYWxseSB3b3JrZWQgb3V0LiBGaXJzdCwg
+RGVlcGwgY2FuIHRyYW5zbGF0ZSBMYVRlWCBkb2N1bWVudHMgY29tcGxldGVseSBjb3JyZWN0
+bHkgd2l0aG91dCBtZXNzaW5nIHVwIHRoZSBmb3JtYXR0aW5nLiBTZWNvbmQsIHRoZSB0cmFu
+c2xhdGlvbnMgYXJlIG5vdyByZWFzb25hYmx5IGdvb2QuDQoNCiAgVGhlIHNlY29uZCBjaXJj
+dW1zdGFuY2UgaXMgdGhhdCBvbmUgb2YgbXkgY3VzdG9tZXJzIGhhcyBjb3ZlcmVkIHRoZSBj
+b3N0cyBvZiB0aGUgRW5nbGlzaCBlZGl0aW5nLiBUaGUgYm9vayB3aWxsIGJlIGF2YWlsYWJs
+ZSBkaXJlY3RseSBmcm9tIEFtYXpvbiAoSSBwdWJsaXNoZWQgdGhlIGJvb2sgbXlzZWxmIHZp
+YSBBbWF6b24ncyBLRFAgcHJvZ3JhbSkgYXQgdGhlIGJlZ2lubmluZyBvZiBTZXB0ZW1iZXIu
+IFRoaXMgaXMgYW5vdGhlciBmYWN0b3IgdGhhdCBoYXMgY29udHJpYnV0ZWQgdG8gaXQgZmlu
+YWxseSBoYXBwZW5pbmcuIEkgdHlwZXNldCB0aGUgYm9vayBlbnRpcmVseSBteXNlbGYgYW5k
+IGRpZCB0aGUgZmlyc3QgcHJvb2ZyZWFkaW5nLg0KDQogIE9mIGNvdXJzZSwgSSByZWRpZCBh
+bGwgdGhlIHNjcmVlbnNob3RzLCB0aGlzIHRpbWUgd2l0aCBhbiBFbmdsaXNoIHZlcnNpb24g
+b2YgV2luZG93cy4gQWxsIGxpc3RpbmdzIGFyZSBjb21wbGV0ZWx5IGluIEVuZ2xpc2guIFRo
+ZSBib29rIGlzIGJhc2VkIChqdXN0IGxpa2UgdGhlIEdlcm1hbiB2ZXJzaW9uIGFscmVhZHkg
+cHVibGlzaGVkKSBvbiBTYW1iYSA0LjIxLiBEdWUgdG8gdGhlIGFtb3VudCBvZiB3b3JrIGlu
+dm9sdmVkLCBhIG1vcmUgcmVjZW50IHZlcnNpb24gaXMgbm90IHBvc3NpYmxlLiBJdCB3YXMg
+YWxzbyBpbXBvcnRhbnQgdG8gbWUgdGhhdCB0aGUgR2VybWFuIGFuZCBFbmdsaXNoIHZlcnNp
+b25zIG9mIHRoZSBib29rIGFyZSBpZGVudGljYWwuDQoNCklmIHlvdSB3b3VsZCBsaWtlIHRv
+IHRha2UgYSBsb29rIGF0IHRoZSBjb250ZW50cyBhbmQgdGhlIGNvdmVyLCB5b3UgY2FuIGRv
+IHNvIGF0IHd3dy5zYW1iYS1ib29rLmNvbS4NCg0KVGhlIGJvb2sgd2lsbCBwcm9iYWJseSBi
+ZSBwdWJsaXNoZWQgYXMgYSBwYXBlcmJhY2sgYW5kIGUtYm9vay4NCg0K
+--------------pnEv0wkxybVrZtnilzghgpyl
+Content-Type: application/pgp-keys; name="OpenPGP_0x52F6D4DD1BB68AB5.asc"
+Content-Disposition: attachment; filename="OpenPGP_0x52F6D4DD1BB68AB5.asc"
+Content-Description: OpenPGP public key
+Content-Transfer-Encoding: quoted-printable
 
-And maybe all others from
-https://gautammenghani.com/linux,/c/2022/05/19/static-analysis-tools-linux-kernel.html
+-----BEGIN PGP PUBLIC KEY BLOCK-----
 
-How often do I need to run smatch_scripts/build_kernel_data.sh on the whole kernel?
+xjMEZD5zHxYJKwYBBAHaRw8BAQdAMVmXn59f0nkYv5WMsQq+KrcYCsNfaUj/WZtg
+zdF72yDNJVN0ZWZhbiBLYW5pYSA8c3RlZmFuQGthbmlhLW9ubGluZS5kZT7CiQQT
+FggAMRYhBGxP1rNZHkCiVplAgVL21N0btoq1BQJkPnNQAhsDBAsJCAcFFQgJCgsF
+FgIDAQAACgkQUvbU3Ru2irXx0QEAtwVwH3XaKI4V5K8xNBFjLCvNHZsOBiF1zXRe
+V3+ocvcA/i+HTEj2s+Xw0AdOCzTKpUetOkifYMHmRdzoRdjItaUIzjgEZD5zHxIK
+KwYBBAGXVQEFAQEHQLCpLYCfOAWfcF2Za/K3FymUQPfyIZ/eupKMlQrGRJUhAwEI
+B8J4BBgWCAAgFiEEbE/Ws1keQKJWmUCBUvbU3Ru2irUFAmQ+c1ACGwwACgkQUvbU
+3Ru2irV69QEAxwzfX/shQahBfmica2GbWv7hytmlnu/QFNP2WNDb/9MA/133+PWv
+q8PePaEGS4s2tRUd8ktDKmVYz7EnJwaCyqcH
+=3Dxppn
+-----END PGP PUBLIC KEY BLOCK-----
 
-Thanks!
-metze
+--------------pnEv0wkxybVrZtnilzghgpyl--
+
+--------------I1DpmpeenMwpcaBcTqXm6bUQ--
+
+--------------kSh6L0Rtt5uTDXwIGOJKuVCh
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+wnsEABYIACMWIQRsT9azWR5AolaZQIFS9tTdG7aKtQUCaJN6IgUDAAAAAAAKCRBS9tTdG7aKteXg
+AP44PEiwut1rIwn9bXnyPQwiKqiv+duEGuURwHRJlUZb2AD/aPbW0WuWyuHKNtTQzIALPRMQtmEC
+AFsK0y7RHR33KAk=
+=LJBF
+-----END PGP SIGNATURE-----
+
+--------------kSh6L0Rtt5uTDXwIGOJKuVCh--
 
