@@ -2,45 +2,46 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id CC492B1CB03
-	for <lists+samba-technical@lfdr.de>; Wed,  6 Aug 2025 19:37:04 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C8B45B1CB04
+	for <lists+samba-technical@lfdr.de>; Wed,  6 Aug 2025 19:37:05 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=NGUczztnA5N8zdxeKC70fijwcwkKlzvVZOfwmMQ1OL4=; b=ZJ1jVPoRiBI4Da5B34q8u5qSut
-	MyITLb3P+xgM1Esf/21htHcIbbbHsEk+PWN3NJTmB1S3L8FTYPkWX9+FjhOpW0s0VEq3T3cdneMKq
-	LM/Qaa5/zCYLfjV4wqOXYXkxcM9oBFLKidqty5tQOrFICgo8tXK2SXLLpAIghyTOFMe2039eTnrfh
-	56RjarOA8SWHQm63P5MQUZr99qrFgTkB8aAgBcIvckHBtArJ98US5vmy712up4ia7NeMiWtbObdfA
-	hRUr04C92vTm0eiHh2BQ5XQHGJq0iJ4HM18lcW6RQOSXS6Jaus1HKUGPizXUVvvuy7JT4uwpB/Vpg
-	/YCkK1Mg==;
-Received: from ip6-localhost ([::1]:55004 helo=hr1.samba.org) 
+	bh=3Xh0XxQgw+1/sCdwmmCbDEz41xc3QfXDqGMzKOA3EFU=; b=5kt6yfZi4u/h2+vavzwCVky8EG
+	DFLD1oOxx261vsRvRDM2G0jlgdI1J2k70uTy7BOwl7iAqtARhAAwBt8y6eQMEWzmPlEjDhEje7R0O
+	pBnN1jKi6SV1KqFzmc4G3E1i0uG3qNc03HaeTOOFLEF1edqNoVAqew2LEWjEXSle+a1A/wYGMJ2sw
+	EfcyrwtoSdwqv+DCrqp3wgfO45JgRobzxtClfLjooZLzE5oMz4u1c2Voe5vjR4yuw+X4TnkU8muIf
+	akAozO29gczm9mk/sxOLFEveoxaiECEKVVGRawLkaMnc2lxWojPpmqjqy4I9kHbPnUoBygVSOxEH5
+	OVQZbyBw==;
+Received: from ip6-localhost ([::1]:52636 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1uji3p-00ERMm-Ab; Wed, 06 Aug 2025 17:36:21 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:64638) 
+	id 1uji3w-00ERNL-5o; Wed, 06 Aug 2025 17:36:28 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:55518) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uji3k-00ERMa-Pr
- for samba-technical@lists.samba.org; Wed, 06 Aug 2025 17:36:18 +0000
+ (Exim) id 1uji3s-00ERMv-7x
+ for samba-technical@lists.samba.org; Wed, 06 Aug 2025 17:36:26 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Message-ID:Date:Cc:To:From;
- bh=NGUczztnA5N8zdxeKC70fijwcwkKlzvVZOfwmMQ1OL4=; b=hHjO/E9NV7OKNOyvXxw/7Z8l/j
- 97oI+DpM2u3Y+3EYynCJj/HltvSFv6cg7EzhPKVVRp1XcslyeN85sWdoyeFDDHTufyKd6hhgw2zFN
- ftQS9Mlif9PHPrnNJybybchtOic3t/HSt7wzbRy/w1ppbS8TdVBFZh5i7/9+qrCMLEO8WpO+ihCBu
- +galiPSBZYZRN9vRIUHzeWbv1H7QpQZh15Fh6nAai3hVJRek0l5UHfBx80SK9NjDZKXUa5Ql8cSHC
- SzkAvcSpnfEv3ZCf22SUVqwl0I8pC8V2Ti/8sa5ePK35Tv08Ppd4zlQMkwZhsBqNboP5REVXbQURJ
- BxDnVmWIStTqa8oAtN6ggb+hd1nkV3ZoJmFuTJnZT6RlZKcjSyaXOaGoBq4i4e4F44svfy1mCGJg5
- TFi051ZANyqLqbNtMSmne5WCSCplSuEi+i7vlP3jwU0jKTM7v5gBBf+xtnQBU/8W4x1W44QIr/QZS
- 67A5lD/E0rQv3KnT1i6yPiaD;
+ bh=3Xh0XxQgw+1/sCdwmmCbDEz41xc3QfXDqGMzKOA3EFU=; b=fSy7bkl/xafKM6u/cceCsiiUMU
+ jBFbgerzvd4eTiMtjAbqoj9+pph/BXhr9YiPNEVAA8O6rT61SQYHB58TFs7YbN9nVfRVg4p9swDmG
+ NY1sDrTtv5lp+g7CdUpBxeWVLBdzr1nk2d8emnbf+H11OF578K+9nFJpJ63rMQ2jwrzDoW58ESTQ0
+ Xcmg3bLLQAfd8Ez8qlTx1b/WwDaWqxd3EsrFfXTkteAyZtCgt5YCecW27GvQSo/7cLDzMCAPUkyP6
+ ahQ42kiuFbcNxfnd+mSyyj5jBtVegh2eE1gBcyZ1acOWjDwpEuMlhT0bPYaTUlK6aIOpUzY77WY57
+ HGo3qEuqkoWPF39dH4YmWQAOuawh9TstSZDBMJl0q6LvJEPzHTPvWopVwtWBI8IzNGYRck1BXpM99
+ WW4n4SiuBuwrUfQOV1EX0MzJzmrtf59Rz2zFN3Bk9rKoDzMYT/eC5l2/sWVIw5odZB54jS4b7I3FW
+ 1Rl8QqF530quMUQOAM79H97k;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uji3i-001OWh-1b; Wed, 06 Aug 2025 17:36:14 +0000
+ (Exim) id 1uji3r-001OWu-28; Wed, 06 Aug 2025 17:36:23 +0000
 To: linux-cifs@vger.kernel.org,
 	samba-technical@lists.samba.org
-Subject: [PATCH 00/18] smb: smbdirect: more use of common structures e.g.
- smbdirect_send_io
-Date: Wed,  6 Aug 2025 19:35:46 +0200
-Message-ID: <cover.1754501401.git.metze@samba.org>
+Subject: [PATCH 01/18] smb: client: remove unused enum smbd_connection_status
+Date: Wed,  6 Aug 2025 19:35:47 +0200
+Message-ID: <5a513c72a3ccbb3bd493b42d1912d5288693c165.1754501401.git.metze@samba.org>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <cover.1754501401.git.metze@samba.org>
+References: <cover.1754501401.git.metze@samba.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: samba-technical@lists.samba.org
@@ -59,62 +60,41 @@ List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
 From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
 Reply-To: Stefan Metzmacher <metze@samba.org>
 Cc: metze@samba.org, Steve French <smfrench@gmail.com>,
- Tom Talpey <tom@talpey.com>, Namjae Jeon <linkinjeon@kernel.org>
+ Tom Talpey <tom@talpey.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi,
+Cc: Steve French <smfrench@gmail.com>
+Cc: Tom Talpey <tom@talpey.com>
+Cc: Long Li <longli@microsoft.com>
+Cc: linux-cifs@vger.kernel.org
+Cc: samba-technical@lists.samba.org
+Signed-off-by: Stefan Metzmacher <metze@samba.org>
+---
+ fs/smb/client/smbdirect.h | 10 ----------
+ 1 file changed, 10 deletions(-)
 
-this is the next step towards a common smbdirect layer
-between cifs.ko and ksmbd.ko, with the aim to provide
-a socket layer for userspace usage at the end of the road.
-
-This patchset focuses on the usage of a common
-smbdirect_send_io and related structures in smbdirect_socket.send_io.
-
-Note only patches 01-08 are intended to be merged soon,
-while the ksmbd patches 09-18 are only posted for
-completeness (as discussed with Namjae) to get early feedback.
-
-I used the following xfstests as regression tests:
-cifs/001 generic/001 generic/002 generic/005 generic/006 generic/007 generic/010 generic/011
-
-Between cifs.ko against ksmbd.ko via siw.ko in all combinations
-with and without the patchset on each side.
-
-Stefan Metzmacher (18):
-  smb: client: remove unused enum smbd_connection_status
-  smb: smbdirect: add SMBDIRECT_RECV_IO_MAX_SGE
-  smb: client: make use of SMBDIRECT_RECV_IO_MAX_SGE
-  smb: smbdirect: introduce struct smbdirect_send_io
-  smb: client: make use of struct smbdirect_send_io
-  smb: smbdirect: add smbdirect_socket.{send,recv}_io.mem.{cache,pool}
-  smb: client: make use of
-    smbdirect_socket.{send,recv}_io.mem.{cache,pool}
-  smb: server: make use of common smbdirect_pdu.h
-  smb: server: make use of common smbdirect.h
-  smb: server: make use of common smbdirect_socket
-  smb: server: make use of common smbdirect_socket_parameters
-  smb: server: make use of smbdirect_socket->recv_io.expected
-  smb: server: make use of struct smbdirect_recv_io
-  smb: server: make use of smbdirect_socket.recv_io.free.{list,lock}
-  smb: server: make use of smbdirect_socket.recv_io.reassembly.*
-  smb: server: make use of SMBDIRECT_RECV_IO_MAX_SGE
-  smb: server: make use of struct smbdirect_send_io
-  smb: server: make use of
-    smbdirect_socket.{send,recv}_io.mem.{cache,pool}
-
- fs/smb/client/smbdirect.c                  | 112 ++--
- fs/smb/client/smbdirect.h                  |  38 --
- fs/smb/common/smbdirect/smbdirect_socket.h |  54 ++
- fs/smb/server/connection.c                 |   4 +-
- fs/smb/server/connection.h                 |  10 +-
- fs/smb/server/smb2pdu.c                    |  11 +-
- fs/smb/server/smb2pdu.h                    |   6 -
- fs/smb/server/transport_rdma.c             | 742 +++++++++++----------
- fs/smb/server/transport_rdma.h             |  41 --
- 9 files changed, 500 insertions(+), 518 deletions(-)
-
+diff --git a/fs/smb/client/smbdirect.h b/fs/smb/client/smbdirect.h
+index 9df434f6bb8c..0463fde1bf26 100644
+--- a/fs/smb/client/smbdirect.h
++++ b/fs/smb/client/smbdirect.h
+@@ -33,16 +33,6 @@ enum keep_alive_status {
+ 	KEEP_ALIVE_SENT,
+ };
+ 
+-enum smbd_connection_status {
+-	SMBD_CREATED,
+-	SMBD_CONNECTING,
+-	SMBD_CONNECTED,
+-	SMBD_NEGOTIATE_FAILED,
+-	SMBD_DISCONNECTING,
+-	SMBD_DISCONNECTED,
+-	SMBD_DESTROYED
+-};
+-
+ /*
+  * The context for the SMBDirect transport
+  * Everything related to the transport is here. It has several logical parts
 -- 
 2.43.0
 
