@@ -2,51 +2,77 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 74B5FB1DAFC
-	for <lists+samba-technical@lfdr.de>; Thu,  7 Aug 2025 17:47:25 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E41EAB1DB3B
+	for <lists+samba-technical@lfdr.de>; Thu,  7 Aug 2025 18:03:10 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=XOTQkDBfV+CzJliTOrtQlztZUCVe4eInKfUezRYU1V0=; b=YNsFFpnoxPp76NcLICOMQUWOhr
-	5wmzp/0Lbz08G/cq163Jx/FAbtNktKPPt7XxQe9vWVSAdO21cRPmqifXrYdFW/8PGsYs+QQ0AuJZ8
-	veEmMqA8uIIjF71I6V5FAC5Y+EF0u0WOFr2IC5BSTZpFC8iMpB182ZCff190WdCXvvYHjT4OEPUK4
-	aR5+DMtnZ/RpIMCSOzXYN/IbS31/8IIUlUG6TKly9Fod4rY+0qJcw8551Ko74QoESFHuyV+M5ud8p
-	GBVhDNXxUH46FQFGZeIfCM/X5/g/XHRLLFPR1DbhMqn8sErDESY4Z5dy3So8mow4DncqtnLDpCbDO
-	PeXy5/3g==;
-Received: from ip6-localhost ([::1]:57550 helo=hr1.samba.org) 
+	bh=VwQu0/D6m0UDV0CRsFb/BkiCr1jp/Q0C0jJDQue2He4=; b=Wd56gHfvhFbTmK5mMHBOuCT2fY
+	9USJQkbQXvnTPGDeQK4A/R1DV9njtUVEzqdwmyjmPoS2uxBytofYV2FtE1LoLirrDrFOdd2timmSa
+	NdErIV+jNY4HbpsQtydGdwN8oapVU6Nf7ThE68MTuUaBajUjme21PLTEDB5U/tP9XjjanjpSnkhbw
+	bX64OiA4pSanSF/F+vn+G0KXGGJwVVAYXA4MFFizytCkPymvANSlSmesxHbPefzTTLsjGWdV17L/o
+	GVRbElcJ1QcNEe6y66CzgXnkN+FJjV87SdNKLQGkWRW1vD7b8gigEKdmRsbBvkD8vBE07s3fN60x9
+	8ylSCL2w==;
+Received: from ip6-localhost ([::1]:25116 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1uk2pk-00EZ2B-Dy; Thu, 07 Aug 2025 15:47:12 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:64374) 
+	id 1uk34v-00EZOW-Pz; Thu, 07 Aug 2025 16:02:53 +0000
+Received: from mail-qv1-xf2c.google.com ([2607:f8b0:4864:20::f2c]:55345) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uk2pf-00EZ23-Rv
- for samba-technical@lists.samba.org; Thu, 07 Aug 2025 15:47:10 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=From:Cc:To:Date:Message-ID;
- bh=XOTQkDBfV+CzJliTOrtQlztZUCVe4eInKfUezRYU1V0=; b=rpiizz6+yjNZPnMuuggMns8yDu
- 9fOP8FtZzpzM/A/oyqv2Q1ogP/0Anua3CkVohZ6Rf26rvkl6xQ5kkbRYctY5Dhh0Yp+2yR13dVWwE
- mJO2fVRRAUDST+E7QDQBIsglkm4B0YPUuBfB1ZNKh1bxtEddGrTk/THrnLuFkQ6BVVMu7MId7fCW4
- gGBOZhKORpJJCnQcD4QB1JrZ8i3W2R1FBfmemJjS0/lA8Fu4KgRjwgbzrMHmm20B29ghy6IQPA1/Z
- oNbH0yXhakDxYWqacoSXVYXgeOmEDNXBX/rnKTGZGchE33oQjuG4CkkrHRJ78bz8gdRHvq95GcxDO
- 9VcPc29p0QAvgPeBFhM05wjHET2hW9lFc/xysuq6sLKJfjlz6GIinTJuBBrSAGKYktDc33f9N46Iy
- 7q/a9X0iapXASewQPnnwq9Banr3TUqVLGOme0ovsMi497Hrzs2N/FfXjbMSY3mSuYl68Y40ZJIoaN
- kfgF0U1rq5GM+Y9GkJq8Q5Db;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uk2pf-001cGi-0K; Thu, 07 Aug 2025 15:47:07 +0000
-Message-ID: <6dd6bec0-cfac-414d-8c3b-a7ec91be657e@samba.org>
-Date: Thu, 7 Aug 2025 17:47:06 +0200
+ (Exim) id 1uk34r-00EZOP-5Y
+ for samba-technical@lists.samba.org; Thu, 07 Aug 2025 16:02:51 +0000
+Received: by mail-qv1-xf2c.google.com with SMTP id
+ 6a1803df08f44-70927868edeso15779676d6.2
+ for <samba-technical@lists.samba.org>; Thu, 07 Aug 2025 09:02:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1754582567; x=1755187367; darn=lists.samba.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=VwQu0/D6m0UDV0CRsFb/BkiCr1jp/Q0C0jJDQue2He4=;
+ b=jhVDoA28mI0LGhZDq/74Dae/oPC0QE4x8SvbG5KDZpgAMAxagSpYd5OxYmiUaEIOph
+ bN8PLSbUQQz+AFCA0UIqv9VcwtYQBqRoT3U2YEtHB+zJfVqFroGV1Hp7FNYvb6fISeq4
+ GnnSwROEkvz3eKpgPZiRaos5zvLeuvdLx8gUQ9BvczPtrscqntqRI2N83xJiA6w6/DEa
+ X/XIzo5URJIRjD5egeo78xjO94DvloSDwtT083LRjhPDzhD9LBtzDzxt5fzmx77LZz7D
+ un0ojShpWzYIGb2VqtjfMRRIYuYAYBgEhIc4Qt4+5VnzY77VuEdSTwKdhFn5iMv5uhF8
+ /nMA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1754582567; x=1755187367;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=VwQu0/D6m0UDV0CRsFb/BkiCr1jp/Q0C0jJDQue2He4=;
+ b=Yp+w1LsG6cWOG94iB9MbndoKKxUy6a1JO5zWglJsHMXobbc1lMDD797XfW7amlqOyw
+ 3gnulqfVemG0H6QraVUbrmpyNFDaay62QWKDTINhIyQ43ri+rJDbEXYmVUhzaMFcYVK4
+ rd8HrLhuulKb+qR68t3atpAaZoTgj9XcQsnKu1nxuw6/0VBMJxZjBuvafFnJg7e+6gL5
+ nkIEVKa49a2HkiAyIAtypbX7VkYY20fyu+N7PKZBv1LFU2AU1W4ObT2k3zB8K8yitj5I
+ YAI8Gi+8QatLTCkIMjG4FKGpm1I8kIaAGndiLz380yt3wLYo/xlqMJSAedt+q1vsJn+b
+ +rkw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCU4+R2yqbfIuI9MEW34SuMMIaQ3oegwCmBHJ8vQxaA8m4w7h8xU/2rhxiYM7gq/s+cF9+4S9nd9VQ2Ur0TuenY=@lists.samba.org
+X-Gm-Message-State: AOJu0YxckCEP+kqnSGK88L4BHkxv8V4xVaMs7L1azuEzR4YfH97bpVAo
+ R2nvYr7BbsBsnDUkQ7HWYCRyUJKQEnm/Xd9xDB4J45Z6IRmcr9ogWWinSBIZO7kO0q7IVW4nHIB
+ pFAG61QP+AxTH8W89/7wRcuE40XJa4KhIWQ==
+X-Gm-Gg: ASbGncvAT7w3CkaJaMySmRas3zp3lRi32CqliBPOTbovwv3SMzNRzp3X7MbvYeJ84DF
+ 3VsOZOEO48XKFlyWstQ3UBk8t7Sn4tCBWy6pHqJ7wUbhKaPeOTyxtQpcHiJ2IAsTyJeY+qawrjC
+ sl15n5mC6OFtW7o/04P3kb7Bi6kfb3XRzWxjb1e9hoc9fLmx2FNHrPY+jam1DC81DA4JcY86gjO
+ bgfME/jc+qP//GJ/uOF+UfE3YMWC5dUTxJ2LzkZ
+X-Google-Smtp-Source: AGHT+IF+K0U+t1yOJyyd8NnabYBte1Vl/Rersze3x6tcq6Dn8dX1IwJe4XtuPvkzTFkOyVP3t5iNtMP46HlViETvYIo=
+X-Received: by 2002:a05:6214:1bca:b0:707:51a6:184f with SMTP id
+ 6a1803df08f44-70979667ddfmr96617956d6.48.1754582566397; Thu, 07 Aug 2025
+ 09:02:46 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: ksmbd common smbdirect headers for 6.17-rc1? (Re: [PATCH 08/18] smb:
- server: make use of common smbdirect_pdu.h)
-To: Namjae Jeon <linkinjeon@kernel.org>, Steve French <stfrench@microsoft.com>
-References: <cover.1754501401.git.metze@samba.org>
- <098bd91b7e846cb20305a6d1b4005abf10cd5db8.1754501401.git.metze@samba.org>
-Content-Language: en-US
-In-Reply-To: <098bd91b7e846cb20305a6d1b4005abf10cd5db8.1754501401.git.metze@samba.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+References: <20250805064708.332465-1-wangzhaolong@huaweicloud.com>
+ <CAH2r5mssz19Qr+fmY62BnHOzwjQmWWU=wHXEVFkyTRGaWn-t0g@mail.gmail.com>
+ <c980644d-0be1-4a88-890d-349b44ada024@huaweicloud.com>
+ <a07e0802-da13-4ae4-b932-1560eb33129d@huaweicloud.com>
+In-Reply-To: <a07e0802-da13-4ae4-b932-1560eb33129d@huaweicloud.com>
+Date: Thu, 7 Aug 2025 11:02:34 -0500
+X-Gm-Features: Ac12FXwKUV-u-5TqbsZUSsx8Dcq6IW6izVNh1jlCsw7YTuA85-TRG_qYWhPQqUI
+Message-ID: <CAH2r5mtdCb501g=rehRRwcYnGiWOZjmKX16c+Vd1EYOsfeC3Pw@mail.gmail.com>
+Subject: Re: [PATCH V2 0/4] Fix mid_q_entry memory leaks in SMB client
+To: Wang Zhaolong <wangzhaolong@huaweicloud.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,283 +86,188 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Stefan Metzmacher <metze@samba.org>
-Cc: Meetakshi Setiya <meetakshisetiyaoss@gmail.com>, linux-cifs@vger.kernel.org,
- samba-technical@lists.samba.org, Hyunchul Lee <hyc.lee@gmail.com>,
- Tom Talpey <tom@talpey.com>, Steve French <smfrench@gmail.com>
+From: Steve French via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Steve French <smfrench@gmail.com>
+Cc: linux-cifs@vger.kernel.org, yi.zhang@huawei.com,
+ Enzo Matsumiya <ematsumiya@suse.de>, yangerkun@huawei.com,
+ samba-technical@lists.samba.org, linux-kernel@vger.kernel.org,
+ chengzhihao1@huawei.com, pshilov@microsoft.com
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi Namjae,
+presumably the first three cleanup are ok - but if objections let me know
 
-maybe I'm able to get to a point where we just have this:
+On Thu, Aug 7, 2025 at 9:43=E2=80=AFAM Wang Zhaolong
+<wangzhaolong@huaweicloud.com> wrote:
+>
+>
+> Sorry for the delayed response. I can see exactly what went wrong now.
+>
+> The issue is that my implementation holds a spinlock (mid_lock) while
+> executing the callback, but the callback path can eventually lead to
+> crypto_alg_lookup() which tries to acquire a semaphore. This violates
+> the kernel's locking rules - we cannot sleep while holding a spinlock.
+>
+> Perhaps I should consider a more ingenious solution that can safely
+> handle these cross-subsystem interactions.
+>
+> I'll rework the patch to fix this locking issue and send a v3. I'll
+> probably need to rethink the whole locking strategy to be more aware
+> of what the callbacks actually do and what they might need to sleep for.
+>
+> Best regards,
+> Wang Zhaolong
+>
+>
+> >
+> >> The first three patches (cleanup) look fine and have added to
+> >> cifs-2.6.git for-next (also added Enzo Acked-by) but the fourth patch
+> >> ("smb: client: fix mid_q_entry memleak leak with per-mid locking")
+> >> causes xfstest generic/001 to fail with signing enabled.  See
+> >> http://smb311-linux-testing.southcentralus.cloudapp.azure.com/#/builde=
+rs/5/builds/58/steps/34/logs/stdio
+> >> and http://smb311-linux-testing.southcentralus.cloudapp.azure.com/#/bu=
+ilders/5/builds/59/steps/34/logs/stdio
+> >>
+> >
+> > I am unable to view any information in the link above. Is this informat=
+ion
+> > only visible to logged-in users?
+> >
+> >
+> >>
+> >> [Tue Aug 5 11:03:32 2025] run fstests generic/001 at 2025-08-05 11:03:=
+32
+> >> [Tue Aug 5 11:03:33 2025] =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> >> [Tue Aug 5 11:03:33 2025] [ BUG: Invalid wait context ]
+> >> [Tue Aug 5 11:03:33 2025] 6.16.0 #1 Tainted: G E
+> >> [Tue Aug 5 11:03:33 2025] -----------------------------
+> >> [Tue Aug 5 11:03:33 2025] cifsd/24912 is trying to lock:
+> >> [Tue Aug 5 11:03:33 2025] ffffffffafc14630
+> >> (crypto_alg_sem){++++}-{4:4}, at: crypto_alg_lookup+0x40/0x120
+> >> [Tue Aug 5 11:03:33 2025] other info that might help us debug this:
+> >> [Tue Aug 5 11:03:33 2025] context-{5:5}
+> >> [Tue Aug 5 11:03:33 2025] 1 lock held by cifsd/24912:
+> >> [Tue Aug 5 11:03:33 2025] #0: ff11000134c25870
+> >> (&temp->mid_lock){+.+.}-{3:3}, at: mid_execute_callback+0x19/0x40
+> >> [cifs]
+> >> [Tue Aug 5 11:03:33 2025] stack backtrace:
+> >> [Tue Aug 5 11:03:33 2025] CPU: 1 UID: 0 PID: 24912 Comm: cifsd
+> >> Tainted: G E 6.16.0 #1 PREEMPT(voluntary)
+> >> [Tue Aug 5 11:03:33 2025] Tainted: [E]=3DUNSIGNED_MODULE
+> >> [Tue Aug 5 11:03:33 2025] Hardware name: Red Hat KVM, BIOS
+> >> 1.16.3-4.el9 04/01/2014
+> >> [Tue Aug 5 11:03:33 2025] Call Trace:
+> >> [Tue Aug 5 11:03:33 2025] <TASK>
+> >> [Tue Aug 5 11:03:33 2025] dump_stack_lvl+0x79/0xb0
+> >> [Tue Aug 5 11:03:33 2025] __lock_acquire+0xace/0x21c0
+> >> [Tue Aug 5 11:03:33 2025] ? check_irq_usage+0xa4/0xa80
+> >> [Tue Aug 5 11:03:33 2025] lock_acquire+0x143/0x2d0
+> >> [Tue Aug 5 11:03:33 2025] ? crypto_alg_lookup+0x40/0x120
+> >> [Tue Aug 5 11:03:33 2025] ? check_noncircular+0x71/0x120
+> >> [Tue Aug 5 11:03:33 2025] down_read+0x7c/0x2e0
+> >> [Tue Aug 5 11:03:33 2025] ? crypto_alg_lookup+0x40/0x120
+> >> [Tue Aug 5 11:03:33 2025] ? __pfx_down_read+0x10/0x10
+> >> [Tue Aug 5 11:03:33 2025] ? lockdep_unlock+0x51/0xc0
+> >> [Tue Aug 5 11:03:33 2025] ? __lock_acquire+0x11ee/0x21c0
+> >> [Tue Aug 5 11:03:33 2025] crypto_alg_lookup+0x40/0x120
+> >> [Tue Aug 5 11:03:33 2025] crypto_alg_mod_lookup+0x53/0x2b0
+> >> [Tue Aug 5 11:03:33 2025] crypto_alloc_tfm_node+0x76/0x130
+> >> [Tue Aug 5 11:03:33 2025] cifs_alloc_hash+0x44/0x130 [cifs]
+> >> [Tue Aug 5 11:03:33 2025] smb3_calc_signature+0x4f0/0x7b0 [cifs]
+> >> [Tue Aug 5 11:03:33 2025] ? __pfx_smb3_calc_signature+0x10/0x10 [cifs]
+> >> [Tue Aug 5 11:03:33 2025] ? find_held_lock+0x2b/0x80
+> >> [Tue Aug 5 11:03:33 2025] ? tcp_recvmsg+0xc9/0x2d0
+> >> [Tue Aug 5 11:03:33 2025] ? rcu_is_watching+0x20/0x50
+> >> [Tue Aug 5 11:03:33 2025] ? trace_irq_enable.constprop.0+0xac/0xe0
+> >> [Tue Aug 5 11:03:33 2025] ? tcp_recvmsg+0xc9/0x2d0
+> >> [Tue Aug 5 11:03:33 2025] ? __local_bh_enable_ip+0x90/0xf0
+> >> [Tue Aug 5 11:03:33 2025] ? sock_has_perm+0x97/0x1a0
+> >> [Tue Aug 5 11:03:33 2025] smb2_verify_signature+0x178/0x290 [cifs]
+> >> [Tue Aug 5 11:03:33 2025] ? __pfx_smb2_verify_signature+0x10/0x10 [cif=
+s]
+> >> [Tue Aug 5 11:03:33 2025] ? look_up_lock_class+0x5d/0x140
+> >> [Tue Aug 5 11:03:33 2025] smb2_check_receive+0x154/0x1c0 [cifs]
+> >> [Tue Aug 5 11:03:33 2025] ? __pfx_smb2_check_receive+0x10/0x10 [cifs]
+> >> [Tue Aug 5 11:03:33 2025] ? __lock_acquire+0x3f1/0x21c0
+> >> [Tue Aug 5 11:03:33 2025] ? __lock_acquire+0x3f1/0x21c0
+> >> [Tue Aug 5 11:03:33 2025] smb2_writev_callback+0x1f2/0x870 [cifs]
+> >> [Tue Aug 5 11:03:33 2025] ? lock_acquire+0x143/0x2d0
+> >> [Tue Aug 5 11:03:33 2025] ? mid_execute_callback+0x19/0x40 [cifs]
+> >> [Tue Aug 5 11:03:33 2025] ? __pfx_smb2_writev_callback+0x10/0x10 [cifs=
+]
+> >> [Tue Aug 5 11:03:33 2025] ? do_raw_spin_lock+0x10c/0x190
+> >> [Tue Aug 5 11:03:33 2025] ? __pfx_do_raw_spin_lock+0x10/0x10
+> >> [Tue Aug 5 11:03:33 2025] ? _raw_spin_unlock+0x23/0x40
+> >> [Tue Aug 5 11:03:33 2025] mid_execute_callback+0x33/0x40 [cifs]
+> >> [Tue Aug 5 11:03:33 2025] cifs_demultiplex_thread+0xc95/0x15e0 [cifs]
+> >> [Tue Aug 5 11:03:33 2025] ? __pfx_cifs_demultiplex_thread+0x10/0x10 [c=
+ifs]
+> >> [Tue Aug 5 11:03:33 2025] ? find_held_lock+0x2b/0x80
+> >> [Tue Aug 5 11:03:33 2025] ? __kthread_parkme+0x4b/0xd0
+> >> [Tue Aug 5 11:03:33 2025] ? __pfx_cifs_demultiplex_thread+0x10/0x10 [c=
+ifs]
+> >> [Tue Aug 5 11:03:33 2025] kthread+0x216/0x3e0
+> >> [Tue Aug 5 11:03:33 2025] ? __pfx_kthread+0x10/0x10
+> >> [Tue Aug 5 11:03:33 2025] ? __pfx_kthread+0x10/0x10
+> >> [Tue Aug 5 11:03:33 2025] ? lock_release+0xc4/0x270
+> >> [Tue Aug 5 11:03:33 2025] ? rcu_is_watching+0x20/0x50
+> >> [Tue Aug 5 11:03:33 2025] ? __pfx_kthread+0x10/0x10
+> >> [Tue Aug 5 11:03:33 2025] ret_from_fork+0x23a/0x2e0
+> >> [Tue Aug 5 11:03:33 2025] ? __pfx_kthread+0x10/0x10
+> >> [Tue Aug 5 11:03:33 2025] ret_from_fork_asm+0x1a/0x30
+> >> [Tue Aug 5 11:03:33 2025] </TASK>
+> >>
+> >> (it worked without the patch see e.g.
+> >> http://smb311-linux-testing.southcentralus.cloudapp.azure.com/#/builde=
+rs/5/builds/60
+> >> and http://smb311-linux-testing.southcentralus.cloudapp.azure.com/#/bu=
+ilders/5/builds/56)
+> >>
+> >> On Tue, Aug 5, 2025 at 1:54=E2=80=AFAM Wang Zhaolong
+> >> <wangzhaolong@huaweicloud.com> wrote:
+> >
+> >
+> > It's quite strange that the lock reported in the stack trace is an inte=
+rnal
+> > lock of the crypto module, which only protects the internal logic of cr=
+ypto.
+> > Moreover, I have not yet found a path where the callback for cifs regis=
+tration
+> > is executed within the scope of this lock.
+> >
+> > ```c
+> > // crypto/api.c
+> > static struct crypto_alg *crypto_alg_lookup(const char *name, u32 type,
+> >                          u32 mask)
+> > {
+> >      const u32 fips =3D CRYPTO_ALG_FIPS_INTERNAL;
+> >      struct crypto_alg *alg;
+> >      u32 test =3D 0;
+> >
+> >      if (!((type | mask) & CRYPTO_ALG_TESTED))
+> >          test |=3D CRYPTO_ALG_TESTED;
+> >
+> >      down_read(&crypto_alg_sem);
+> >      ...
+> >      up_read(&crypto_alg_sem);
+> >      return alg;
+> > ```
+> > More information is needed to confirm this issue. Could you please prov=
+ide it?
+> >
+> > Best regards,
+> > Wang Zhaolong
+> >
+>
+>
+>
+>
 
-struct smb_direct_transport {
-         struct ksmbd_transport  transport;
 
-         struct smbdirect_socket socket;
-};
+--=20
+Thanks,
 
-If I get there tomorrow evening I'm wondering if I should also post that
-patchset for inclusion into 6.17-rc1.
-
-Should I try that or would this be for 6.18 anyway?
-
-What do you think?
-metze
-
-Am 06.08.25 um 19:35 schrieb Stefan Metzmacher via samba-technical:
-> Cc: Steve French <smfrench@gmail.com>
-> Cc: Tom Talpey <tom@talpey.com>
-> Cc: Long Li <longli@microsoft.com>
-> Cc: Namjae Jeon <linkinjeon@kernel.org>
-> Cc: Hyunchul Lee <hyc.lee@gmail.com>
-> Cc: Meetakshi Setiya <meetakshisetiyaoss@gmail.com>
-> Cc: linux-cifs@vger.kernel.org
-> Cc: samba-technical@lists.samba.org
-> Signed-off-by: Stefan Metzmacher <metze@samba.org>
-> ---
->   fs/smb/server/transport_rdma.c | 49 +++++++++++++++++-----------------
->   fs/smb/server/transport_rdma.h | 41 ----------------------------
->   2 files changed, 25 insertions(+), 65 deletions(-)
-> 
-> diff --git a/fs/smb/server/transport_rdma.c b/fs/smb/server/transport_rdma.c
-> index 8d366db5f605..275199fef4e5 100644
-> --- a/fs/smb/server/transport_rdma.c
-> +++ b/fs/smb/server/transport_rdma.c
-> @@ -23,12 +23,13 @@
->   #include "connection.h"
->   #include "smb_common.h"
->   #include "../common/smb2status.h"
-> +#include "../common/smbdirect/smbdirect_pdu.h"
->   #include "transport_rdma.h"
->   
->   #define SMB_DIRECT_PORT_IWARP		5445
->   #define SMB_DIRECT_PORT_INFINIBAND	445
->   
-> -#define SMB_DIRECT_VERSION_LE		cpu_to_le16(0x0100)
-> +#define SMB_DIRECT_VERSION_LE		cpu_to_le16(SMBDIRECT_V1)
->   
->   /* SMB_DIRECT negotiation timeout in seconds */
->   #define SMB_DIRECT_NEGOTIATE_TIMEOUT		120
-> @@ -472,8 +473,8 @@ static int smb_direct_check_recvmsg(struct smb_direct_recvmsg *recvmsg)
->   {
->   	switch (recvmsg->type) {
->   	case SMB_DIRECT_MSG_DATA_TRANSFER: {
-> -		struct smb_direct_data_transfer *req =
-> -			(struct smb_direct_data_transfer *)recvmsg->packet;
-> +		struct smbdirect_data_transfer *req =
-> +			(struct smbdirect_data_transfer *)recvmsg->packet;
->   		struct smb2_hdr *hdr = (struct smb2_hdr *)(recvmsg->packet
->   				+ le32_to_cpu(req->data_offset));
->   		ksmbd_debug(RDMA,
-> @@ -485,8 +486,8 @@ static int smb_direct_check_recvmsg(struct smb_direct_recvmsg *recvmsg)
->   		break;
->   	}
->   	case SMB_DIRECT_MSG_NEGOTIATE_REQ: {
-> -		struct smb_direct_negotiate_req *req =
-> -			(struct smb_direct_negotiate_req *)recvmsg->packet;
-> +		struct smbdirect_negotiate_req *req =
-> +			(struct smbdirect_negotiate_req *)recvmsg->packet;
->   		ksmbd_debug(RDMA,
->   			    "MinVersion: %u, MaxVersion: %u, CreditRequested: %u, MaxSendSize: %u, MaxRecvSize: %u, MaxFragmentedSize: %u\n",
->   			    le16_to_cpu(req->min_version),
-> @@ -540,7 +541,7 @@ static void recv_done(struct ib_cq *cq, struct ib_wc *wc)
->   
->   	switch (recvmsg->type) {
->   	case SMB_DIRECT_MSG_NEGOTIATE_REQ:
-> -		if (wc->byte_len < sizeof(struct smb_direct_negotiate_req)) {
-> +		if (wc->byte_len < sizeof(struct smbdirect_negotiate_req)) {
->   			put_recvmsg(t, recvmsg);
->   			smb_direct_disconnect_rdma_connection(t);
->   			return;
-> @@ -552,13 +553,13 @@ static void recv_done(struct ib_cq *cq, struct ib_wc *wc)
->   		wake_up_interruptible(&t->wait_status);
->   		return;
->   	case SMB_DIRECT_MSG_DATA_TRANSFER: {
-> -		struct smb_direct_data_transfer *data_transfer =
-> -			(struct smb_direct_data_transfer *)recvmsg->packet;
-> +		struct smbdirect_data_transfer *data_transfer =
-> +			(struct smbdirect_data_transfer *)recvmsg->packet;
->   		unsigned int data_length;
->   		int avail_recvmsg_count, receive_credits;
->   
->   		if (wc->byte_len <
-> -		    offsetof(struct smb_direct_data_transfer, padding)) {
-> +		    offsetof(struct smbdirect_data_transfer, padding)) {
->   			put_recvmsg(t, recvmsg);
->   			smb_direct_disconnect_rdma_connection(t);
->   			return;
-> @@ -566,7 +567,7 @@ static void recv_done(struct ib_cq *cq, struct ib_wc *wc)
->   
->   		data_length = le32_to_cpu(data_transfer->data_length);
->   		if (data_length) {
-> -			if (wc->byte_len < sizeof(struct smb_direct_data_transfer) +
-> +			if (wc->byte_len < sizeof(struct smbdirect_data_transfer) +
->   			    (u64)data_length) {
->   				put_recvmsg(t, recvmsg);
->   				smb_direct_disconnect_rdma_connection(t);
-> @@ -598,7 +599,7 @@ static void recv_done(struct ib_cq *cq, struct ib_wc *wc)
->   			   &t->send_credits);
->   
->   		if (le16_to_cpu(data_transfer->flags) &
-> -		    SMB_DIRECT_RESPONSE_REQUESTED)
-> +		    SMBDIRECT_FLAG_RESPONSE_REQUESTED)
->   			queue_work(smb_direct_wq, &t->send_immediate_work);
->   
->   		if (atomic_read(&t->send_credits) > 0)
-> @@ -664,7 +665,7 @@ static int smb_direct_read(struct ksmbd_transport *t, char *buf,
->   			   unsigned int size, int unused)
->   {
->   	struct smb_direct_recvmsg *recvmsg;
-> -	struct smb_direct_data_transfer *data_transfer;
-> +	struct smbdirect_data_transfer *data_transfer;
->   	int to_copy, to_read, data_read, offset;
->   	u32 data_length, remaining_data_length, data_offset;
->   	int rc;
-> @@ -1001,7 +1002,7 @@ static int smb_direct_create_header(struct smb_direct_transport *t,
->   				    struct smb_direct_sendmsg **sendmsg_out)
->   {
->   	struct smb_direct_sendmsg *sendmsg;
-> -	struct smb_direct_data_transfer *packet;
-> +	struct smbdirect_data_transfer *packet;
->   	int header_length;
->   	int ret;
->   
-> @@ -1010,7 +1011,7 @@ static int smb_direct_create_header(struct smb_direct_transport *t,
->   		return PTR_ERR(sendmsg);
->   
->   	/* Fill in the packet header */
-> -	packet = (struct smb_direct_data_transfer *)sendmsg->packet;
-> +	packet = (struct smbdirect_data_transfer *)sendmsg->packet;
->   	packet->credits_requested = cpu_to_le16(t->send_credit_target);
->   	packet->credits_granted = cpu_to_le16(manage_credits_prior_sending(t));
->   
-> @@ -1033,11 +1034,11 @@ static int smb_direct_create_header(struct smb_direct_transport *t,
->   		    le32_to_cpu(packet->remaining_data_length));
->   
->   	/* Map the packet to DMA */
-> -	header_length = sizeof(struct smb_direct_data_transfer);
-> +	header_length = sizeof(struct smbdirect_data_transfer);
->   	/* If this is a packet without payload, don't send padding */
->   	if (!size)
->   		header_length =
-> -			offsetof(struct smb_direct_data_transfer, padding);
-> +			offsetof(struct smbdirect_data_transfer, padding);
->   
->   	sendmsg->sge[0].addr = ib_dma_map_single(t->cm_id->device,
->   						 (void *)packet,
-> @@ -1212,7 +1213,7 @@ static int smb_direct_writev(struct ksmbd_transport *t,
->   	int remaining_data_length;
->   	int start, i, j;
->   	int max_iov_size = st->max_send_size -
-> -			sizeof(struct smb_direct_data_transfer);
-> +			sizeof(struct smbdirect_data_transfer);
->   	int ret;
->   	struct kvec vec;
->   	struct smb_direct_send_ctx send_ctx;
-> @@ -1560,18 +1561,18 @@ static int smb_direct_send_negotiate_response(struct smb_direct_transport *t,
->   					      int failed)
->   {
->   	struct smb_direct_sendmsg *sendmsg;
-> -	struct smb_direct_negotiate_resp *resp;
-> +	struct smbdirect_negotiate_resp *resp;
->   	int ret;
->   
->   	sendmsg = smb_direct_alloc_sendmsg(t);
->   	if (IS_ERR(sendmsg))
->   		return -ENOMEM;
->   
-> -	resp = (struct smb_direct_negotiate_resp *)sendmsg->packet;
-> +	resp = (struct smbdirect_negotiate_resp *)sendmsg->packet;
->   	if (failed) {
->   		memset(resp, 0, sizeof(*resp));
-> -		resp->min_version = cpu_to_le16(0x0100);
-> -		resp->max_version = cpu_to_le16(0x0100);
-> +		resp->min_version = SMB_DIRECT_VERSION_LE;
-> +		resp->max_version = SMB_DIRECT_VERSION_LE;
->   		resp->status = STATUS_NOT_SUPPORTED;
->   	} else {
->   		resp->status = STATUS_SUCCESS;
-> @@ -1803,7 +1804,7 @@ static int smb_direct_create_pools(struct smb_direct_transport *t)
->   	snprintf(name, sizeof(name), "smb_direct_rqst_pool_%p", t);
->   	t->sendmsg_cache = kmem_cache_create(name,
->   					     sizeof(struct smb_direct_sendmsg) +
-> -					      sizeof(struct smb_direct_negotiate_resp),
-> +					      sizeof(struct smbdirect_negotiate_resp),
->   					     0, SLAB_HWCACHE_ALIGN, NULL);
->   	if (!t->sendmsg_cache)
->   		return -ENOMEM;
-> @@ -1936,7 +1937,7 @@ static int smb_direct_prepare(struct ksmbd_transport *t)
->   {
->   	struct smb_direct_transport *st = smb_trans_direct_transfort(t);
->   	struct smb_direct_recvmsg *recvmsg;
-> -	struct smb_direct_negotiate_req *req;
-> +	struct smbdirect_negotiate_req *req;
->   	int ret;
->   
->   	ksmbd_debug(RDMA, "Waiting for SMB_DIRECT negotiate request\n");
-> @@ -1955,7 +1956,7 @@ static int smb_direct_prepare(struct ksmbd_transport *t)
->   	if (ret == -ECONNABORTED)
->   		goto out;
->   
-> -	req = (struct smb_direct_negotiate_req *)recvmsg->packet;
-> +	req = (struct smbdirect_negotiate_req *)recvmsg->packet;
->   	st->max_recv_size = min_t(int, st->max_recv_size,
->   				  le32_to_cpu(req->preferred_send_size));
->   	st->max_send_size = min_t(int, st->max_send_size,
-> diff --git a/fs/smb/server/transport_rdma.h b/fs/smb/server/transport_rdma.h
-> index 77aee4e5c9dc..0fb692c40e21 100644
-> --- a/fs/smb/server/transport_rdma.h
-> +++ b/fs/smb/server/transport_rdma.h
-> @@ -11,47 +11,6 @@
->   #define SMBD_MIN_IOSIZE (512 * 1024)
->   #define SMBD_MAX_IOSIZE (16 * 1024 * 1024)
->   
-> -/* SMB DIRECT negotiation request packet [MS-SMBD] 2.2.1 */
-> -struct smb_direct_negotiate_req {
-> -	__le16 min_version;
-> -	__le16 max_version;
-> -	__le16 reserved;
-> -	__le16 credits_requested;
-> -	__le32 preferred_send_size;
-> -	__le32 max_receive_size;
-> -	__le32 max_fragmented_size;
-> -} __packed;
-> -
-> -/* SMB DIRECT negotiation response packet [MS-SMBD] 2.2.2 */
-> -struct smb_direct_negotiate_resp {
-> -	__le16 min_version;
-> -	__le16 max_version;
-> -	__le16 negotiated_version;
-> -	__le16 reserved;
-> -	__le16 credits_requested;
-> -	__le16 credits_granted;
-> -	__le32 status;
-> -	__le32 max_readwrite_size;
-> -	__le32 preferred_send_size;
-> -	__le32 max_receive_size;
-> -	__le32 max_fragmented_size;
-> -} __packed;
-> -
-> -#define SMB_DIRECT_RESPONSE_REQUESTED 0x0001
-> -
-> -/* SMB DIRECT data transfer packet with payload [MS-SMBD] 2.2.3 */
-> -struct smb_direct_data_transfer {
-> -	__le16 credits_requested;
-> -	__le16 credits_granted;
-> -	__le16 flags;
-> -	__le16 reserved;
-> -	__le32 remaining_data_length;
-> -	__le32 data_offset;
-> -	__le32 data_length;
-> -	__le32 padding;
-> -	__u8 buffer[];
-> -} __packed;
-> -
->   #ifdef CONFIG_SMB_SERVER_SMBDIRECT
->   int ksmbd_rdma_init(void);
->   void ksmbd_rdma_destroy(void);
-
+Steve
 
