@@ -2,46 +2,46 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id B7CA8B1DADA
-	for <lists+samba-technical@lfdr.de>; Thu,  7 Aug 2025 17:32:51 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6BC89B1DADC
+	for <lists+samba-technical@lfdr.de>; Thu,  7 Aug 2025 17:34:31 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
-	bh=xFKP7gQqrpuA71MFNgVajs56MVoex3Vh7wUUKQhuh/Y=; b=JY/MhPnEHYTgc5pea9U7pmForu
-	aJ6xwSeifsDd+DCX8nJnWgO1jRwIsk1mYO5wGM/XXOfPZRlzAnFNFEF1JhTiFK1q33KKgDjDpAxV1
-	x29sQfLqwuNx3odkC0Uu0bSEMtqeZXknnnEgOHsIAqzwgt2lUhGequKioGzxC0wjZpT612YcEn91g
-	2jTciNuEJCYX2EhAQnJ309BZ3FcnkYs1WWi/ShAyeTECK5uMX67LTNdegW6FpiA3pk5NmbIuiWQGS
-	9OwzOVLRKUeKifPDX4OxY6+fiIvYyaKZjphDpS1TeKwkkteJw6VXCsOfM2Gh90j/mmbsWW3gnoeoC
-	2uL8w8xQ==;
-Received: from ip6-localhost ([::1]:50470 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=K4GAzzhGAOHyx9Cg4muadiyRecm/atXJL/PNE4TsmSY=; b=xu8QqdRqchoP/fXVGbsW9rn18K
+	h+RAboZQ5izlTZQDNM2MKlyDch4wEWrvQ+fwyDGzvpA89tVTOpWAwRlpsBWTpPVkmTUI9vbxXS/B4
+	Krpv+U94JzV1JEtZHqMg+qeB9GwsQjMa51GCXIbka2LFEaZDbLvm/y67oh96daxQ+UnffpzjlUEjZ
+	KJmiIuUwmC/hBFkg5k1/4/RuP10au/beMaQsGonq37fW4jCY/H9TjgNF6xOUrQH7E1dQii7GiViEP
+	FQ227oINVQOmTWE+2qA4bK2WK3Vq1eeH4Z5OuxadHxYPyg74Wa77BZP3sy0gbu7Q0ujzpFOhQkF4b
+	PP/jJeAw==;
+Received: from ip6-localhost ([::1]:32022 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1uk2bY-00EY7G-RN; Thu, 07 Aug 2025 15:32:34 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:15710) 
+	id 1uk2dJ-00EYWH-2r; Thu, 07 Aug 2025 15:34:21 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:42494) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uk2bC-00EY4i-JW
- for samba-technical@lists.samba.org; Thu, 07 Aug 2025 15:32:13 +0000
+ (Exim) id 1uk2d1-00EYVF-Sn
+ for samba-technical@lists.samba.org; Thu, 07 Aug 2025 15:34:09 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=From:To:Date:Message-ID:CC;
- bh=xFKP7gQqrpuA71MFNgVajs56MVoex3Vh7wUUKQhuh/Y=; b=00ZpkwZ9pBCNJTiqxTo8pwAkQw
- Mmpw2I1Vi0bFfu+SczCrBjWaCwZZKeTJGrb9XtYZRNyHGNCsFcFSAe1uDKIX38giluoC9Re46a0vW
- UspCFnVepMh8RilHNgRpdDWHnl/Axtz83kfdIc0WtOAHKZJZZ8jpkTiA4v22X3sCzHOf1FYJvROTV
- ZDfVG2oRJ2drzEr2h+8QtIJf4p2G9hIGDXSXuAVnQUJ2xO0tZUe4vMQdm+peECPxvT5mtdw6ywLcU
- SU+Bff+pVpRCgMu1DhUCkGJVlr91YVhF4BeXsaBQcWrmPb7ryBp1a6Aw/EOYkF7/BOv72oYsvP+Jl
- BAe4XUV1b6ASYQPE/5qeIdNmhTA29LoCV+cxo+UM6wmptqWYGsR3G7GC2h+fjcum6Dh/VxSegMXKA
- q7rUtarvEBejRJtdkYnMSpeHJYgPgvx6nLAnnTsAPAX4LKGzEW6e3fnv+kNUYP/pAGpv9saJiCisp
- O4doq1jGAbuyrLzxeUSnF1kr;
+ s=42; h=To:From:Date:Message-ID:CC;
+ bh=K4GAzzhGAOHyx9Cg4muadiyRecm/atXJL/PNE4TsmSY=; b=LIFvcDyaI2pjXwDdmjrg2ixaK3
+ nnFgHNBus8+tztxuuIZFdlh0sWnHvzOrCZ4Fsp1ia9jF/EldZLB/E4/m4+1nWd6bnNBXNcY893Jaa
+ dNeMxmI2STCNEYttSL7azdI5Aij1hPX+hvvewX6U2xPQ6IhuJ6fmvbHRAceMFiMWtqEAUafYQlLJe
+ CR+LdC2HLdAzelQ06suWXhFwXXuat3uf+y+E67ay6azrhErzrYaXP9BrfbBtyhg9UkQzh99clcPZX
+ Hv0qunwFSqSMq+0nN572uq3nvqOvIfYuEa8eLxriy88rSiWfHI4G6xnVPxhxMSTjYj5tfrgCN74MR
+ gbBBhRn6MFx6l2t4xcyNfYycEoNFeE1Zqb8RQSItcj/56qPcBM261V672dL5ayDJ+Kh/afjDMmvnY
+ x6iM+emU3FYnc4+ADgz6Rl+V2dVY9Hap6sU6MEGobJPNZCet8YmKZA6QM1UCK3E3QBTp4V/64VGRc
+ Z1vRSOsAYj1luMUO6CVJ7wg1;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uk2bC-001bzE-0x for samba-technical@lists.samba.org;
- Thu, 07 Aug 2025 15:32:10 +0000
-Message-ID: <bb3a06b5-0ec5-4c97-b276-3acd6a85caa5@samba.org>
-Date: Thu, 7 Aug 2025 17:32:10 +0200
+ (Exim) id 1uk2d1-001c61-0M for samba-technical@lists.samba.org;
+ Thu, 07 Aug 2025 15:34:03 +0000
+Message-ID: <60902b9c-3b00-4f23-a590-68651036243c@samba.org>
+Date: Thu, 7 Aug 2025 17:34:02 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Content-Language: de-DE
+Content-Language: de-DE, en-US
+Subject: 4.23.0 WHATSNEW entries missing
 To: samba-technical@lists.samba.org
-Subject: [Release Planning 4.23] Samba 4.23.0rc2
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
@@ -64,11 +64,11 @@ Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
 Hi,
 
-Samba 4.23.0rc2 is scheduled for Thursday, August 14 2025.
+the WHATSNEW for 4.23 looks pretty empty so far.
+If you have added or deleted a feature in the last six months, please 
+send me a description to be added to WHATSNEW.
 
-https://wiki.samba.org/index.php/Release_Planning_for_Samba_4.23
-has been updated accordingly.
-
+Thanks!
 
 Jule
 
