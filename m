@@ -2,76 +2,54 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8F6F1B1D26F
-	for <lists+samba-technical@lfdr.de>; Thu,  7 Aug 2025 08:22:49 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7704BB1D282
+	for <lists+samba-technical@lfdr.de>; Thu,  7 Aug 2025 08:34:28 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=3ktbyr9SzycNcU3hnEzNp337kzitNq3svuSJ+tfB4O4=; b=QBxMzCHHw7tgjSWWoHJBOVGglo
-	ff1z7lMh6RVcpRKWNFkwsip47N72Y3Cd5eHhZn6KZzkiKSsfSUlPbKOVZVH0Vd3JiAYHmjx6qZSv8
-	/7tpxbyogPYo8w9Q07zPLv5E/Cuuu9gWvtW5cNTsJv4aU7e7Tey/Wn/yj7C4KlGgeEoTm75xJhsFQ
-	CWykPK9NdGZc/LMuz3ucTDwg8/ITQhcis5gs0/LjZ7IffGxry4USheX5V9Fn4EiMv9Ihf/O8yhzGq
-	zPeYS8E/SrnQ0KwRGAEkztlDkBTexX3JhkY1rDcLQUazFBveG96fLlqHcqxJ+2e6nhtAC4wXqNH8p
-	MxXpevLg==;
-Received: from ip6-localhost ([::1]:38730 helo=hr1.samba.org) 
+	bh=4PYhJMOgL7UT34jKf7wQ9jfZ7uVU4Nj0jCuf6TOrS74=; b=zqgZG6KpgS3j7oAIPo3pKMTfv1
+	6Cx4dEBlcPjp4q45WY5hY7BRGgqVKtxUy7ydbI4P/ogaKWQmV0Zq8v1MCsfdpwZOG3TOayKhGkpCM
+	0nKXO/Xk7w74KtX+TX1N0zbPALO8V5r5Hn2uoiWZGKzzdoDZQfoJJ4dQPC4L1VLeLhA0u5aDPL2L5
+	mApZ4KW/7HFxQNAfgHS+eYbduf9WvLaEyTtxBFJPMJgkOK+9fEQ7BEb5cEWAqcRAXzFwAHQLRWNwp
+	bvS/nc1vukmc+UtJGUWHZCqrFFKv/wZXitRvPDa/liBxv6oXD99LTJUXgJVF22h6+RcevdE+qiZVl
+	YceWB9/Q==;
+Received: from ip6-localhost ([::1]:37118 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1uju10-00EUne-Ih; Thu, 07 Aug 2025 06:22:14 +0000
-Received: from mail-ed1-x52f.google.com ([2a00:1450:4864:20::52f]:54456) 
+	id 1ujuCe-00EV0n-EO; Thu, 07 Aug 2025 06:34:16 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:58906) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uju0u-00EUnX-Mq
- for samba-technical@lists.samba.org; Thu, 07 Aug 2025 06:22:11 +0000
-Received: by mail-ed1-x52f.google.com with SMTP id
- 4fb4d7f45d1cf-6155e75a9acso1061198a12.0
- for <samba-technical@lists.samba.org>; Wed, 06 Aug 2025 23:22:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1754547727; x=1755152527; darn=lists.samba.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=3ktbyr9SzycNcU3hnEzNp337kzitNq3svuSJ+tfB4O4=;
- b=GiIJ6nQF8MUzJa7Cwa17q3itVKA/KazVxvjCPrYudbfANrukHBdP6mxvd1DstbixCx
- 5Q8NzbTwlWYVeP2oLwPDrvJxI2abYOw6XBs78Pta7DEfaFZ6I0svgN0qCUvRNuA/xKz6
- w/i/iDguzBsghI8TXXha6UJCoDAL9BvYR0SUAoDprhnqErw8t3ohBZYAIZ5OiJbDTZv7
- prY6DMQLC5Yi/TPosOvGyJGaVMVrX1ayqvEaCZgoaWR8KICfu6HOHugeZxfOOU7fxKGb
- 4uydD3OSYC2/s23xFyx/cKhvA1DEMoTotr0b8ur9e5e0lzqLCWyf8mX9HfOaj0ZD7VCk
- Hnkg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754547727; x=1755152527;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=3ktbyr9SzycNcU3hnEzNp337kzitNq3svuSJ+tfB4O4=;
- b=grho8AgQH2GZiBybV9FnrxRrH/TURt8wXBD1VMpDq22kSC3d8aE+QT3wVmCBgcaIN4
- oHZb+mIEjrtZdGqDEy7Dw0TU2UKOAYff52jE4QThYcgBqHfYkB42zfSmr4FatO0pnqMA
- pPmuacNL/emU9ik5280BVb37OfJruON8mtiTDqlzzTa67534k2vAQ0zdCEBD8swZncVD
- VcwfKUp1uKJSRyg8iUzPhnYwqceTfwQ4olmpPoHnIgGZpFoxSGva6XMps4Z30vJr1BFS
- 3VJSpErxtS0EMaWU46QW14Py6WEEbS3XZe8WED8jx4dmjmjw6fTKZa89h2ps8cWtXGzA
- +PgA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXMLOwSYr7idPIXpr29PuHD39KNg+GcC5sZE1xrVihlS1ikdzqP5Ryx0aAYPG4xAKq3JpCIEGx8jolH2FQycuU=@lists.samba.org
-X-Gm-Message-State: AOJu0YyqeiS6ArZvgpZ9ES5aYeDmgeaywFEMF7+4kyckLDnxKO1I61+e
- a25keCBa0xoYBtfOArLoGuIBkVjuQAsSfDDKKxo11EMF5eOx9mEQNLjNrKysfvqOPjAqOb981MI
- r0pYomPXlVwMmjfR935Up+GAgBNpicXN3mw==
-X-Gm-Gg: ASbGncu/MH3WEDGhDnZEOcxphS+USmQQ9JyZicv11BCTgJbOglmrCOneO/hRsqleELe
- xVJWkHmpHfiNZGM2J3kuy8Ot6AjYabMmrxls9grLnVrUyDh2s2m+7mVjLD6xlGAPFpaeL/z0e5f
- zXCxUkvyDr1CZCRuC+hBr/pHCV9KGtYyTBxxpkdUIdQchPn6gyPA5+jyfwzKTiwpEitWrqlI4e+
- 9ZhqA==
-X-Google-Smtp-Source: AGHT+IGtyMCANSoiLMOF/IIteuE7iwefk4ZGp11or1k1vGqtVJL/BQwhSDgSaVpXdy8jhiEdCUzZxU9t5Mg5Ti4BG0s=
-X-Received: by 2002:a05:6402:5106:b0:615:80eb:76ba with SMTP id
- 4fb4d7f45d1cf-61796141a85mr4669366a12.17.1754547727161; Wed, 06 Aug 2025
- 23:22:07 -0700 (PDT)
+ (Exim) id 1ujuCY-00EV0g-V2
+ for samba-technical@lists.samba.org; Thu, 07 Aug 2025 06:34:14 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=From:Cc:To:Date:Message-ID;
+ bh=4PYhJMOgL7UT34jKf7wQ9jfZ7uVU4Nj0jCuf6TOrS74=; b=mKOysCdZeZWTNWqLf+Bzadz+LE
+ hdmbiLb63rsYliFWxPtKDoUUg6CcLLEWaSuDAu2YSMWmCuv1jkj3Gb+hPepJqDkGPXXJBJX/9z/Sw
+ hoK4ukr1QftYWALNwtqTlFqPP8AbsjFeE/BSN2fp3ZOO6UsQkLZCcQsgo7O+2HI7I/rkidPzN0Or6
+ H+UIzYyIxT8LlG5uItHzfTCnqbODRWOIXmnOq6EFXC+zuyuFwzUEqsPvX5t/mO+XHqZky725Chrjk
+ D69wqPxo7Xm3iKxAIRWgU/8yD/NNOwIPJ/VGeDFzhYHQxXlnGNoeADpK3DmxIDYQ7yZvjpQXsvcSR
+ B/MfOVWoZS+ZE+7/YxVNiXeU3+G+oerk+i6zBHY9hwt4abM5tC0PlsKqISq0wbeQr5ZrD7sk+eNiq
+ u/5FJ/lAvsdOOj1aLtmcfoZAlqYgWgIaieLsS9Q3UFPLvJA6AeIJdnzP9PUqXr/voemVIXvISguAO
+ xI+M4mrE4SHponVJAgdmBWRx;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1ujuCX-001Vb4-1w; Thu, 07 Aug 2025 06:34:09 +0000
+Message-ID: <df4905fb-933e-4055-8363-d6427515773b@samba.org>
+Date: Thu, 7 Aug 2025 08:34:09 +0200
 MIME-Version: 1.0
-References: <20250806132211.94686-2-ysk@kzalloc.com>
- <CAH2r5mt97q_jtjtAT0DVDySU0jnk9=KeTDYha-KgOip_CAT_iw@mail.gmail.com>
-In-Reply-To: <CAH2r5mt97q_jtjtAT0DVDySU0jnk9=KeTDYha-KgOip_CAT_iw@mail.gmail.com>
-Date: Thu, 7 Aug 2025 11:51:55 +0530
-X-Gm-Features: Ac12FXwD7pQ3n-0mANzi1TD_ZDrU4JcAARE48kDt7Tfj-YuFN3HIKcB-7hMpqHE
-Message-ID: <CANT5p=qiuF0=PZaN9eCzrps=azamWjkh9U19zu2B5dRADUrP1g@mail.gmail.com>
-Subject: Re: [PATCH] cifs: Fix null-ptr-deref by static initializing global
- lock
-To: Steve French <smfrench@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Using smatch and sparse together (Re: [PATCH next] smb: client: Fix
+ use after free in send_done())
+To: Dan Carpenter <dan.carpenter@linaro.org>
+References: <aJNASZzOWtg8aljM@stanley.mountain>
+ <ad2e9d94-2d95-4351-b800-627f20672209@samba.org>
+ <87646c67-78b8-41c5-9b72-361cb3b733d1@suswa.mountain>
+ <e291d925-bfd9-4202-b5d4-de5bf30ab870@samba.org>
+ <a1a0046c-f47f-4e8a-ae3c-85db58a6cb2f@suswa.mountain>
+Content-Language: en-US
+In-Reply-To: <a1a0046c-f47f-4e8a-ae3c-85db58a6cb2f@suswa.mountain>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -85,160 +63,124 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Shyam Prasad N via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Shyam Prasad N <nspmangalore@gmail.com>
+From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Stefan Metzmacher <metze@samba.org>
 Cc: Tom Talpey <tom@talpey.com>, Shyam Prasad N <sprasad@microsoft.com>,
  Paulo Alcantara <pc@manguebit.org>, linux-cifs@vger.kernel.org,
- samba-technical@lists.samba.org, linux-kernel@vger.kernel.org,
- Steve French <sfrench@samba.org>, Bharath SM <bharathsm@microsoft.com>,
- Namjae Jeon <linkinjeon@kernel.org>, Yunseong Kim <ysk@kzalloc.com>
+ kernel-janitors@vger.kernel.org, samba-technical@lists.samba.org,
+ linux-kernel@vger.kernel.org, Steve French <sfrench@samba.org>,
+ Bharath SM <bharathsm@microsoft.com>, Namjae Jeon <linkinjeon@kernel.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Thu, Aug 7, 2025 at 1:44=E2=80=AFAM Steve French <smfrench@gmail.com> wr=
-ote:
->
-> merged into cifs-2.6.git for-next
->
-> On Wed, Aug 6, 2025 at 8:23=E2=80=AFAM Yunseong Kim <ysk@kzalloc.com> wro=
-te:
-> >
-> > A kernel panic can be triggered by reading /proc/fs/cifs/debug_dirs.
-> > The crash is a null-ptr-deref inside spin_lock(), caused by the use of =
-the
-> > uninitialized global spinlock cifs_tcp_ses_lock.
-> >
-> > init_cifs()
-> >  =E2=94=94=E2=94=80=E2=94=80 cifs_proc_init()
-> >       =E2=94=94=E2=94=80=E2=94=80 // User can access /proc/fs/cifs/debu=
-g_dirs here
-> >            =E2=94=94=E2=94=80=E2=94=80 cifs_debug_dirs_proc_show()
-> >                 =E2=94=94=E2=94=80=E2=94=80 spin_lock(&cifs_tcp_ses_loc=
-k); // Uninitialized!
-> >
-> > KASAN: null-ptr-deref in range [0x0000000000000000-0x0000000000000007]
-> > Mem abort info:
-> > ESR =3D 0x0000000096000005
-> > EC =3D 0x25: DABT (current EL), IL =3D 32 bits
-> > SET =3D 0, FnV =3D 0
-> > EA =3D 0, S1PTW =3D 0
-> > FSC =3D 0x05: level 1 translation fault
-> > Data abort info:
-> > ISV =3D 0, ISS =3D 0x00000005, ISS2 =3D 0x00000000
-> > CM =3D 0, WnR =3D 0, TnD =3D 0, TagAccess =3D 0
-> > GCS =3D 0, Overlay =3D 0, DirtyBit =3D 0, Xs =3D 0
-> > [dfff800000000000] address between user and kernel address ranges
-> > Internal error: Oops: 0000000096000005 [#1] SMP
-> > Modules linked in:
-> > CPU: 3 UID: 0 PID: 16435 Comm: stress-ng-procf Not tainted 6.16.0-10385=
--g79f14b5d84c6 #37 PREEMPT
-> > Hardware name: QEMU KVM Virtual Machine, BIOS 2025.02-8ubuntu1 06/11/20=
-25
-> > pstate: 23400005 (nzCv daif +PAN -UAO +TCO +DIT -SSBS BTYPE=3D--)
-> > pc : do_raw_spin_lock+0x84/0x2cc
-> > lr : _raw_spin_lock+0x24/0x34
-> > sp : ffff8000966477e0
-> > x29: ffff800096647860 x28: ffff800096647b88 x27: ffff0001c0c22070
-> > x26: ffff0003eb2b60c8 x25: ffff0001c0c22018 x24: dfff800000000000
-> > x23: ffff0000f624e000 x22: ffff0003eb2b6020 x21: ffff0000f624e768
-> > x20: 0000000000000004 x19: 0000000000000000 x18: 0000000000000000
-> > x17: 0000000000000000 x16: ffff8000804b9600 x15: ffff700012cc8f04
-> > x14: 1ffff00012cc8f04 x13: 0000000000000004 x12: ffffffffffffffff
-> > x11: 1ffff00012cc8f00 x10: ffff80008d9af0d2 x9 : f3f3f304f1f1f1f1
-> > x8 : 0000000000000000 x7 : 7365733c203e6469 x6 : 20656572743c2023
-> > x5 : ffff0000e0ce0044 x4 : ffff80008a4deb6e x3 : ffff8000804b9718
-> > x2 : 0000000000000001 x1 : 0000000000000000 x0 : 0000000000000000
-> > Call trace:
-> > do_raw_spin_lock+0x84/0x2cc (P)
-> > _raw_spin_lock+0x24/0x34
-> > cifs_debug_dirs_proc_show+0x1ac/0x4c0
-> > seq_read_iter+0x3b0/0xc28
-> > proc_reg_read_iter+0x178/0x2a8
-> > vfs_read+0x5f8/0x88c
-> > ksys_read+0x120/0x210
-> > __arm64_sys_read+0x7c/0x90
-> > invoke_syscall+0x98/0x2b8
-> > el0_svc_common+0x130/0x23c
-> > do_el0_svc+0x48/0x58
-> > el0_svc+0x40/0x140
-> > el0t_64_sync_handler+0x84/0x12c
-> > el0t_64_sync+0x1ac/0x1b0
-> > Code: aa0003f3 f9000feb f2fe7e69 f8386969 (38f86908)
-> > ---[ end trace 0000000000000000 ]---
-> >
-> > The root cause is an initialization order problem. The lock is declared
-> > as a global variable and intended to be initialized during module start=
-up.
-> > However, the procfs entry that uses this lock can be accessed by usersp=
-ace
-> > before the spin_lock_init() call has run. This creates a race window wh=
-ere
-> > reading the proc file will attempt to use the lock before it is
-> > initialized, leading to the crash.
-> >
-> > For a global lock with a static lifetime, the correct and robust approa=
-ch
-> > is to use compile-time initialization.
-> >
-> > Fixes: 844e5c0eb176 ("smb3 client: add way to show directory leases for=
- improved debugging")
-> > Signed-off-by: Yunseong Kim <ysk@kzalloc.com>
-> > ---
-> >  fs/smb/client/cifsfs.c | 6 ++----
-> >  1 file changed, 2 insertions(+), 4 deletions(-)
-> >
-> > diff --git a/fs/smb/client/cifsfs.c b/fs/smb/client/cifsfs.c
-> > index 31930b7266db..3bd85ab2deb1 100644
-> > --- a/fs/smb/client/cifsfs.c
-> > +++ b/fs/smb/client/cifsfs.c
-> > @@ -77,7 +77,7 @@ unsigned int global_secflags =3D CIFSSEC_DEF;
-> >  unsigned int GlobalCurrentXid; /* protected by GlobalMid_Lock */
-> >  unsigned int GlobalTotalActiveXid; /* prot by GlobalMid_Lock */
-> >  unsigned int GlobalMaxActiveXid;       /* prot by GlobalMid_Lock */
-> > -spinlock_t GlobalMid_Lock; /* protects above & list operations on midQ=
- entries */
-> > +DEFINE_SPINLOCK(GlobalMid_Lock); /* protects above & list operations o=
-n midQ entries */
-> >
-> >  /*
-> >   *  Global counters, updated atomically
-> > @@ -97,7 +97,7 @@ atomic_t total_buf_alloc_count;
-> >  atomic_t total_small_buf_alloc_count;
-> >  #endif/* STATS2 */
-> >  struct list_head       cifs_tcp_ses_list;
-> > -spinlock_t             cifs_tcp_ses_lock;
-> > +DEFINE_SPINLOCK(cifs_tcp_ses_lock);
-> >  static const struct super_operations cifs_super_ops;
-> >  unsigned int CIFSMaxBufSize =3D CIFS_MAX_MSGSIZE;
-> >  module_param(CIFSMaxBufSize, uint, 0444);
-> > @@ -1863,8 +1863,6 @@ init_cifs(void)
-> >         GlobalCurrentXid =3D 0;
-> >         GlobalTotalActiveXid =3D 0;
-> >         GlobalMaxActiveXid =3D 0;
-> > -       spin_lock_init(&cifs_tcp_ses_lock);
-> > -       spin_lock_init(&GlobalMid_Lock);
-> >
-> >         cifs_lock_secret =3D get_random_u32();
-> >
-> > --
-> > 2.50.0
-> >
-> >
->
->
-> --
-> Thanks,
->
-> Steve
->
+Am 06.08.25 um 16:39 schrieb Dan Carpenter:
+> On Wed, Aug 06, 2025 at 04:17:41PM +0200, Stefan Metzmacher wrote:
+>>>> What was the test that triggered the problem?
+>>>> Or did you only noticed it by looking at the code?
+>>>
+>>> This was a Smatch static checker warning.  You need to have the cross
+>>> function DB to detect it.
+>>
+>> Ok, I'll try to integrate it into my build flow...
+>>
+>> Does it replace sparse or does it run in addition?
+> 
+> In addition.  I find the Sparse endianness checks especially useful.
+> 
+>> If it replaces sparse I guess a small script would
+>> run them both?
+>>
+>> $ cat mychecker.sh:
+>> #!/bin/bash
+>> set -e
+>> sparse $@
+>> smatch $@
+>>
+>> And maybe all others from
+>> https://gautammenghani.com/linux,/c/2022/05/19/static-analysis-tools-linux-kernel.html
 
-Good catch.
-But the problem is that cifs_proc_init gets called very early on in init_ci=
-fs.
-That call should be moved to just before (or possibly after)
-registering the filesystem.
+I'm using this now:
 
---=20
-Regards,
-Shyam
+$ cat custom-checker.sh
+#!/bin/bash
+
+set -e
+
+which sparse > /dev/null 2>&1 && {
+         sparse -Winit-cstring -Wsparse-error $@
+}
+
+which smatch > /dev/null 2>&1 && {
+         smatch -p=kernel --fatal-checks $@
+}
+
+$ cat build-fs-smb.sh
+make modules_prepare
+make -j16 M=fs/smb CF=-D__CHECK_ENDIAN__ W=1ce C=1 KBUILD_MODPOST_WARN=1 KCFLAGS="-Wfatal-errors" CHECK="$(pwd)/custom-checker.sh" $@
+
+
+I'm currently getting these warnings:
+
+client/sess.c:436 cifs_chan_update_iface() warn: iterator used outside loop: 'iface'
+client/sess.c:444 cifs_chan_update_iface() warn: iterator used outside loop: 'iface'
+client/inode.c:1703 cifs_root_iget() warn: passing zero to 'ERR_PTR'
+client/inode.c:2295 cifs_mkdir() warn: passing zero to 'ERR_PTR'
+server/smb2pdu.c:3754 smb2_open() warn: Function too hairy.  No more merges.
+server/smb2pdu.c:3754 smb2_open() parse error: Function too hairy.  Giving up. 18 seconds
+
+Is there a way to use --fatal-checks but turn the 'too hairy' and maybe others into a warning only?
+Something like -Wno-error=... in gcc.
+
+Or at least turn this into an error:
+client/smbdirect.c:292 send_done() error: dereferencing freed memory 'request' (line 290)
+Without --fatal-checks smatch still returns 0.
+
+While this returns an error (without --fatal-checks):
+server/smb2pdu.c:3754 smb2_open() warn: Function too hairy.  No more merges.
+server/smb2pdu.c:3754 smb2_open() parse error: Function too hairy.  Giving up. 8 seconds
+
+Currently I typically use git rebase -i and then have some like this
+
+exec bash build-fs-smb.sh C=0
+pick 123456 my first patch
+exec bash build-fs-smb.sh
+pick 654321 my 2nd patch
+exec bash build-fs-smb.sh
+
+So I force C=0 on the initial run in order to avoid hitting the fatal Function too hairy
+and it then works with my default of C=1 if I don't change fs/smb/server/smb2pdu.c
+(or with --fatal-checks and other file that has a warning)
+
+I'd actually prefer to use --fatal-checks and C=1 in all cases
+in order to notice problems I'm introducing...
+
+>> How often do I need to run smatch_scripts/build_kernel_data.sh on the whole kernel?
+> 
+> The cross function database is really useful for just information
+> purposes and looking at how functions are called.  You probably
+> would need to rebuild it four or five times to get useful
+> information, unfortunately.  I rebuild my every night on the latest
+> linux-next.
+
+I have the following files generated on a fast machine:
+
+$ ls -alrt smatch_*
+-rw-r----- 1 metze metze     303104 Aug  6 15:42 smatch_db.sqlite.new
+-rw-rw-r-- 1 metze metze    3107065 Aug  6 16:37 smatch_compile.warns
+-rw-rw-r-- 1 metze metze 2848012813 Aug  6 16:37 smatch_warns.txt
+-rw-rw-r-- 1 metze metze 6016192672 Aug  6 16:38 smatch_warns.txt.sql
+-rw-rw-r-- 1 metze metze 4202917492 Aug  6 16:39 smatch_warns.txt.caller_info
+-rw-r--r-- 1 metze metze 8757637120 Aug  6 16:57 smatch_db.sqlite
+
+I copied them all to my laptop where I develop my patches
+and was able to reproduce the error :-)
+
+Do I need copy all of these or is smatch_db.sqlite enough?
+
+Would it be possible that you share your generated file(s)
+via a download, that might be useful for a lot of people.
+
+Anyway thanks for all the hints so far:-)
+metze
+
 
