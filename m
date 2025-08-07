@@ -2,42 +2,65 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 11FDFB1DD97
-	for <lists+samba-technical@lfdr.de>; Thu,  7 Aug 2025 21:40:56 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7AF88B1DFC8
+	for <lists+samba-technical@lfdr.de>; Fri,  8 Aug 2025 01:22:06 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=HkxY7xSOK7i+2SiLHuWaVpYaJMiL3q0SIUeU9LkQBy0=; b=acik9Ax1cFi2w4uF6kyYfdW2PZ
-	C4l+QyOCxVmP57CLDomv4yIeaHApXT/ARbybpocuVni0cT/8olacW40MDJO4l3Nx1VQ6CCUNUkiKd
-	oWBT+siCwBf6dyLPT4CnensIPvKp/X9enmDD+Tbl5274JPNwqeAEVuyAyTbjgbfnzxeaZsQ0BocgR
-	VXJ4HFGFT/IaOHjleFVtZ24ZtB4hVSFXVLZydgrk8yLXFmdv9ANEObBJnwwdjnpPtp8Yi8ZUA/cZc
-	WeZruJmhUvCmjMP7vyNLELHY+npLgcOckTVtpmgUi4fMOJQWJaTJonvhkKERv0tLU5vQR/2vxYMPw
-	/FSM/TUg==;
-Received: from ip6-localhost ([::1]:54608 helo=hr1.samba.org) 
+	bh=CbY4WZ+7o9lSfwvHTfItfVyp4xvraMt9Ugx5QarC7xU=; b=GRZDmEMKHcqfJwGa0SLWcB14rR
+	dqt3FkvIfgFn6N42i1/o+iiivXm+f1dsoEQJGgODJ7kI4uNfECGhZUNA2T4h7dEJvxjphKjeLzLwf
+	UGOj5RaG3+nugypA/94zNX/TLoiSwT29aP+TxTE5Zh/X9Q6RQK96lZ/PPy7emd7NhFw4KlSLXyMZ2
+	1OKJC+zlwjZcC/ThR9JPJSte6Gc7HGKmPpY4LH929eVi0eRN/ZMSfrTbto2ZO68bc2Q7nPUhaDtj+
+	G3lDPqPFueqgK/TijojdJiOiBXkDp+9UEhZvw2drEGGw+LRSq+G+1i+YES/UNiR2AnlivdwFTUPci
+	S2wz4YmQ==;
+Received: from ip6-localhost ([::1]:41018 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1uk6Tg-00EcRO-F9; Thu, 07 Aug 2025 19:40:40 +0000
-Received: from isrv.corpit.ru ([212.248.84.144]:57859) 
+	id 1uk9vP-00Eczt-BY; Thu, 07 Aug 2025 23:21:31 +0000
+Received: from sea.source.kernel.org ([172.234.252.31]:48200) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uk6Ta-00EcRG-SB
- for samba-technical@lists.samba.org; Thu, 07 Aug 2025 19:40:38 +0000
-Received: from tsrv.corpit.ru (tsrv.tls.msk.ru [192.168.177.2])
- by isrv.corpit.ru (Postfix) with ESMTP id EBAD213F346;
- Thu, 07 Aug 2025 22:40:05 +0300 (MSK)
-Received: from [192.168.177.146] (mjtthink.wg.tls.msk.ru [192.168.177.146])
- by tsrv.corpit.ru (Postfix) with ESMTP id AAEAA259FC8;
- Thu,  7 Aug 2025 22:40:31 +0300 (MSK)
-Message-ID: <0d31a90b-c86a-4d82-9241-159d90d3c6d9@tls.msk.ru>
-Date: Thu, 7 Aug 2025 22:40:31 +0300
+ (Exim) id 1uk9vL-00Eczm-O8
+ for samba-technical@lists.samba.org; Thu, 07 Aug 2025 23:21:30 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sea.source.kernel.org (Postfix) with ESMTP id 5301C41937
+ for <samba-technical@lists.samba.org>; Thu,  7 Aug 2025 23:21:22 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 332E9C4CEEB
+ for <samba-technical@lists.samba.org>; Thu,  7 Aug 2025 23:21:22 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1754608882;
+ bh=CbY4WZ+7o9lSfwvHTfItfVyp4xvraMt9Ugx5QarC7xU=;
+ h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
+ b=WbdbtJQxPYro7btYQqtsdLT03q4AdFutNlquP3le/wUfrX2/UyC78Eywua04EcaLB
+ bM2PMbPIbqjyUqH7s8DfRpeqEgTLx6yP07VJr1GZOYUarS/yStZixTJdOMb0WHlY9l
+ DCJzrTRaR3q/5kXMJy5wTBeqN24zrfM7ojjTBAbpeLHeLpkKLrzFmhjgnfU961MLwO
+ l+uX9HrGvKtCy2rPcCkSYbDdK+qsnP95ybj749N8mc9iUSC75rAqfYKEdOWUTW2HVX
+ j0XoFThi1nnHzEn0k86ThCS2yQD9oFoDup0Oz2bR+xwgQeVq1Sc5KRVhpTzW0bC6by
+ VhFi1wTIv+85A==
+Received: by mail-ej1-f53.google.com with SMTP id
+ a640c23a62f3a-af96d097df5so291853866b.3
+ for <samba-technical@lists.samba.org>; Thu, 07 Aug 2025 16:21:22 -0700 (PDT)
+X-Forwarded-Encrypted: i=1;
+ AJvYcCV9RCt3aqBfvxyuXWsPYs/nFQhG5RdPw+JlrvSX5hRV/bXpC0xT/bosUElV8SvwfH/Qwc+hfpJN0F5zBCkzQfk=@lists.samba.org
+X-Gm-Message-State: AOJu0Yy9bdwoMX1Yz/Sudqo2gQ5SZff4pUqekAuxL79GSZISVOLEaP7l
+ c7aJVXaVGrEot7ghZGyn11Qt0RDutQI6PPRMjadibp4aca9pZ25jfh5MgqP6Ae/vaTVg05XDDPi
+ 9sRMaGMX/oFQbYQBqVqgKamOHmCP9feg=
+X-Google-Smtp-Source: AGHT+IG+9rdH+c8Ws1CrtllYip+mf38sZjiJ4K2/UsYa3tzgrKexpidjUlURX2/WEaS/Grpex/1kOVrIEs1aC3d3EWM=
+X-Received: by 2002:a17:907:7f9e:b0:af9:5e9a:b6a with SMTP id
+ a640c23a62f3a-af9c65b04eamr55544466b.42.1754608880767; Thu, 07 Aug 2025
+ 16:21:20 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: libreplace and deps (was: new deps for new ldb module (in 4.23))
-To: Alexander Bokovoy <ab@samba.org>
-References: <732bd60b-7df6-49bb-84da-cabd30e7ccaf@tls.msk.ru>
- <aJT8ai6VN_iLNoTS@toolbx>
-Content-Language: en-US, ru-RU
-In-Reply-To: <aJT8ai6VN_iLNoTS@toolbx>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+References: <cover.1754501401.git.metze@samba.org>
+ <ea27f558-ab35-4607-b8a3-480c9ca4c6c3@samba.org>
+ <CAH2r5mvA7CWGR0cDn0DrxvMXdcmcJru1nOKPr1FD=rANPyYTHA@mail.gmail.com>
+In-Reply-To: <CAH2r5mvA7CWGR0cDn0DrxvMXdcmcJru1nOKPr1FD=rANPyYTHA@mail.gmail.com>
+Date: Fri, 8 Aug 2025 08:21:09 +0900
+X-Gmail-Original-Message-ID: <CAKYAXd_j475c5Njw2BQpLaKwJrgmM7QuE1tswCKJiRaRNBQUqg@mail.gmail.com>
+X-Gm-Features: Ac12FXwVmJk-GeEA671vNc7xAqRnwQWlRTFBWpFyP3qI45IZ8p4txOtHogzXmfk
+Message-ID: <CAKYAXd_j475c5Njw2BQpLaKwJrgmM7QuE1tswCKJiRaRNBQUqg@mail.gmail.com>
+Subject: Re: [PATCH 00/18] smb: smbdirect: more use of common structures e.g.
+ smbdirect_send_io
+To: Steve French <smfrench@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -51,93 +74,46 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Michael Tokarev via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Michael Tokarev <mjt@tls.msk.ru>
-Cc: samba-technical@lists.samba.org
+From: Namjae Jeon via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Namjae Jeon <linkinjeon@kernel.org>
+Cc: Stefan Metzmacher <metze@samba.org>, linux-cifs@vger.kernel.org,
+ Tom Talpey <tom@talpey.com>, Meetakshi Setiya <meetakshisetiyaoss@gmail.com>,
+ samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On 07.08.2025 22:20, Alexander Bokovoy wrote:
-> On Thu, 07 Aug 2025, Michael Tokarev via samba-technical wrote:
-
->> (*) in 4.22, I had to revert one commit for this to work, -
->> 542cf01bfe530 "ldb: User hexchars_upper from replace.h".
->> It would be great if this commit is reverted upstream too, --
->> if it is somehow desirable to keep libldb usable separately.
-> 
-> I did additional investigation and I don't see linking change for
-> libreplace. Here is F42:
-...
-> $ ldd bin/default/lib/ldb/libldb-samba4.so
->          linux-vdso.so.1 (0x00007f13f84ad000)
->          libreplace-samba4.so => /path/to/src/samba/bin/shared/private/libreplace-samba4.so (0x00007f13f845e000)
->          libtalloc.so.2 => /lib64/libtalloc.so.2 (0x00007f13f8444000)
->          libtevent.so.0 => /lib64/libtevent.so.0 (0x00007f13f842d000)
->          libc.so.6 => /lib64/libc.so.6 (0x00007f13f823c000)
->          /lib64/ld-linux-x86-64.so.2 (0x00007f13f84af000)
-> 
-> Use of talloc and tevent is expected, libreplace linked from them as
-> well but nothing else beyond libc.
-> 
-> Maybe you have some other issue in Debian's build?
-
-Well, things are a bit more tricky here.
-
-In debian we have a single large package named samba-libs, where
-all "other" samba libraries are kept.  Most of them, actually.
-Some select separately packaged ones are libsmbclient & libwbclient
-(these depends on samba-libs), and libldb.
-
-libreplace is a part of samba-libs.  Maybe this is the key point,
-and I should stop fighting and just package libreplace separately.
-
-Multiple times I tried to get rid of this dependency of various
-separately-used samba libs on large and messy samba-libs package.
-And so far, I was successful, but it took me quite some efforts.
-
-For example, one of the very first things I had to address is the
-usage of memset_s(), which is used everywhere in samba and is almost
-always implemented in libreplace.  I used explicit_bzero() instead,
-which don't need to be replaced by libreplace, - this gave me
-ability to break the dependency of everything on libreplace (and
-hence on samba-libs package), - in particular, this freed libtalloc/
-libtevent/libtdb from this dependency.
-
-Next, there's xpg_strerror(), expected by samba variant of which
-actually exists in glibc but is named differently (and is aliased
-at compile time with the right #defines).
-
-I also had to remove 'replace' from ldb deps in lib/ldb/wscript,
-or else wafsamba adds rpath to libldb (I don't remember why this is
-not good).
-
-This worked until 4.22 with commit 542cf01bfe530a83df, which started
-to use samba-specific symbol from libreplace (as opposed to replacing
-some system symbol).  I reverted this commit, and it works so far,
-including the first RC of 4.23.
-
-Overall, besides heimdal code, samba can be rather trivially switched
-to using a more well-defined explicit_bzero (which I really recommend
-to do), - because memset_s has a confusing interface (which is not
-actually used anywhere in samba or heimdal), and at the same time has
-an often-misunderstood return, - so we had a check for memset_s
-returning success and aborted if it didn't, which is kind of absurd.
-
-But this is a diffrent topic entirely.
-
-The patches I use in debian which are relevant here:
-https://salsa.debian.org/samba-team/samba/-/blob/master/debian/patches/use-bzero-instead-of-memset_s.diff
-https://salsa.debian.org/samba-team/samba/-/blob/master/debian/patches/ldb-no-replace.diff
-https://salsa.debian.org/samba-team/samba/-/blob/master/debian/patches/replace-xpg-strerror.patch
-https://salsa.debian.org/samba-team/samba/-/blob/master/debian/patches/revert-ldb-use-hexchars_upper-from-replace.h.patch
-https://salsa.debian.org/samba-team/samba/-/blob/master/debian/patches/talloc-standalone.diff
-https://salsa.debian.org/samba-team/samba/-/blob/master/debian/patches/tdb-standalone.diff
-https://salsa.debian.org/samba-team/samba/-/blob/master/debian/patches/tevent-standalone.diff
-
-Thanks,
-
-/mjt
-
-> Apologies to Volker for jumping the gun so fast!
-
+On Thu, Aug 7, 2025 at 5:21=E2=80=AFAM Steve French <smfrench@gmail.com> wr=
+ote:
+>
+> tentatively merged those 7 additional small patches into cifs-2.6.git
+> for-next pending more review and testing.
+Could you apply ksmbd smbdirect patches from Metze to for-next branch also =
+?
+Thanks.
+>
+> On Wed, Aug 6, 2025 at 12:41=E2=80=AFPM Stefan Metzmacher <metze@samba.or=
+g> wrote:
+> >
+> > Am 06.08.25 um 19:35 schrieb Stefan Metzmacher via samba-technical:
+> > > Hi,
+> > >
+> > > this is the next step towards a common smbdirect layer
+> > > between cifs.ko and ksmbd.ko, with the aim to provide
+> > > a socket layer for userspace usage at the end of the road.
+> > >
+> > > This patchset focuses on the usage of a common
+> > > smbdirect_send_io and related structures in smbdirect_socket.send_io.
+> > >
+> > > Note only patches 01-08 are intended to be merged soon,
+> >
+> > Sorry it's just 01-07.
+> >
+> > metze
+>
+>
+>
+> --
+> Thanks,
+>
+> Steve
 
