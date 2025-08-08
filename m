@@ -2,45 +2,47 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8AC54B1EBE6
+	by mail.lfdr.de (Postfix) with ESMTPS id CB17CB1EBE7
 	for <lists+samba-technical@lfdr.de>; Fri,  8 Aug 2025 17:29:04 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=ZalSMCbOeBGEO/cAqDXW0q/oqDdJ/qs2lM9C6VfUB/w=; b=c2eJdwGnYuZC/imEOvkcBLnwuN
-	8N8hBRXNUkNjyyNwJ3iz2udLwNbWgX8xKmz3fQcki0stpVu4qpOSGJs8+8uO+QqMe8MVux5bZDdqk
-	xlhdQ4eHraAzo+/rOQuPo0poqfnLzrzFhfcsNR4GvLtni69AwzfaGPfXzXxWU1Dmu0ieMGMgmJfV3
-	SHv9PZ3PEkrO2HvqzDaGvwaAWhPwaH9A/+pTVsqSRjRkf9zAgATcqYoUXLGYGVfZCLrZ9vi63FtkX
-	1dexF6FbxAq/c/oPLWxxssfiyuuODZJR3iGa0aJGdNf8VSUpYO0XPD3kJqUnpaLf7B6M+Cr+G4DYR
-	ImDai68Q==;
-Received: from ip6-localhost ([::1]:63290 helo=hr1.samba.org) 
+	bh=TpE2TzPqL1qNot0BgtzwshC+rsQCLDpwLvbzx3G+x1k=; b=ZHKTv6vUQ1sEgOI+nzDOohho4h
+	FbkKxnas4kNJ5QTm0AkmBYTp9aQunFgk2ltAeebJDmLvSJR8wiIRaTedoh3cmoOgUR8tKw7GG0Fs6
+	dm6QxAHuVQxBuY/aOqmgkBbwkJ0sSvGSlnfGVgHPyLwks3lt/NW0L+K4y7YvD3BqiyIGbM/Jak+ko
+	OcjT+2q5FVVI3BXdVs3sJTJmEgEP9ALtmaS19NaLBAiuPFQCqcbRDPR5qrzhAtE9y/ckt4TwGtiPi
+	FoxcRKE600XqF0j03MeIaRn9w4TAKZ2m+QAZ+6vX/dUtBRZlVCSnUZb7dOGSc5ye1t5uX9tmHD8Uz
+	tzLAMc3g==;
+Received: from ip6-localhost ([::1]:63306 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1ukP10-00EgD8-Bh; Fri, 08 Aug 2025 15:28:18 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:15202) 
+	id 1ukP18-00EgDg-8B; Fri, 08 Aug 2025 15:28:26 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:15208) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1ukP0w-00EgD1-JD
- for samba-technical@lists.samba.org; Fri, 08 Aug 2025 15:28:16 +0000
+ (Exim) id 1ukP13-00EgDH-S3
+ for samba-technical@lists.samba.org; Fri, 08 Aug 2025 15:28:24 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Message-ID:Date:Cc:To:From;
- bh=ZalSMCbOeBGEO/cAqDXW0q/oqDdJ/qs2lM9C6VfUB/w=; b=cwt6TqDZ8o5QXJmaaNuJxlJX4U
- 4/sw0MSdKtrXzh3eRVyFqnuCV5eiyTxSOYp5KSDYAXRerwLxQne9V4qYd5X6xLKKhx4EoVP+7HjTg
- +9DTCRjAgs8agYNSt3lxAXlqJN/gxSxqlZ8vft8lRQZvyP1twRbjs0ggImd0/+CqZ3eNK7Z+lybn2
- gb+iIqrUfxU7tHzVZCcZbm6/spRz9jgRy2bX+EKx/YSh3KINt/MIXfaeF/e4mPm/G9ciBgt7IU5DM
- w2/hC2bflhvk95DlTANqvnJCIJY4ADcqdMNbsf4Zl4Ve8InC3J8hDnoQDV5kvrC9ntmWj7HoA8SCK
- BQu831tBLgZ/UoRkss+ZhK7+ZoRjoAcWyTYaxiRxWL421PKUC0DwAZvuv9dddVL3w0eka/EODl6bM
- aQiT10fJrtxxVsqT5X9/ijEAL7w0r0Zg6C5A+ufV9J1Thg6dKmDeHVprGlV+ISzNxZELAmpIFiIlv
- CXuxbYrd/McuL+ZuY9PLw4j6;
+ bh=TpE2TzPqL1qNot0BgtzwshC+rsQCLDpwLvbzx3G+x1k=; b=y5c/5ZR3qANRHgHPxkFbrH8l+j
+ zCKwwjDT6tADUVSF7h/E/JvikO+dyKCHmnypfDCi911Kn3YXQUAaKbl6vYctStKEXMhRBx2dCQi+6
+ mzWzo3DimotL335UozCEu3FqBP9N6inQyboed2mAcPhc7O2IdsjeRVyv6iWw8r8tVpdMP21NUrCoE
+ xnmVyKda12L0onyXeKGK+oPr6f88glOJFxCKDY6SVFPGJTcZK/Ij95UH8uhhkIHN2F8JjNO+FBNdK
+ 1kcwkwXSTI8jNssB0FSIt744vxQm5TTEN1ze6BbtOoJ3rMsE2c0GWT5nXLr5CNo4pvOhYml04dMKQ
+ 8aIa73sAiBaS+I3Dmlq+YWts1vOy3OaUkKjkQGzVuM5a1gLO7ssBoGv7hOYhW0Csp5KqQDF0Ufoga
+ cw4INOZuj72TCyZouSxlcQMwVbSoucjxjtKF8w5JKTdYwMa8fPGcyNwWbznGBhJ2PQ+vGOjizFNDF
+ KZiSMjRDX8UxXmTIkVJuCPJC;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1ukP0v-001pNf-0g; Fri, 08 Aug 2025 15:28:13 +0000
+ (Exim) id 1ukP13-001pNw-0E; Fri, 08 Aug 2025 15:28:21 +0000
 To: linux-cifs@vger.kernel.org,
 	samba-technical@lists.samba.org
-Subject: [PATCH v2 0/9] smb: client/smbdirect: connect bug fixes/cleanups and
- smbdirect_socket.status_wait
-Date: Fri,  8 Aug 2025 17:27:58 +0200
-Message-ID: <cover.1754666549.git.metze@samba.org>
+Subject: [PATCH v2 1/9] smb: client: return an error if rdma_connect does not
+ return within 5 seconds
+Date: Fri,  8 Aug 2025 17:27:59 +0200
+Message-ID: <2f31432cef778fbe2418fef7a76df811c464432f.1754666549.git.metze@samba.org>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <cover.1754666549.git.metze@samba.org>
+References: <cover.1754666549.git.metze@samba.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: samba-technical@lists.samba.org
@@ -59,64 +61,41 @@ List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
 From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
 Reply-To: Stefan Metzmacher <metze@samba.org>
 Cc: metze@samba.org, Steve French <smfrench@gmail.com>,
- Tom Talpey <tom@talpey.com>, Namjae Jeon <linkinjeon@kernel.org>
+ Tom Talpey <tom@talpey.com>, Steve French <stfrench@microsoft.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi,
+This matches the timeout for tcp connections.
 
-this is the next step towards a common smbdirect layer
-between cifs.ko and ksmbd.ko, with the aim to provide
-a socket layer for userspace usage at the end of the road.
+Cc: Steve French <smfrench@gmail.com>
+Cc: Tom Talpey <tom@talpey.com>
+Cc: Long Li <longli@microsoft.com>
+Cc: linux-cifs@vger.kernel.org
+Cc: samba-technical@lists.samba.org
+Fixes: f198186aa9bb ("CIFS: SMBD: Establish SMB Direct connection")
+Signed-off-by: Stefan Metzmacher <metze@samba.org>
+Signed-off-by: Steve French <stfrench@microsoft.com>
+---
+ fs/smb/client/smbdirect.c | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
 
-This patchset focuses on the client side.
-
-The first one is a fix for very long timeouts against
-unreachable servers.
-
-The others prepare the use of a single wait_queue for state
-changes. This removes a lot of special handling during
-the connect and negotiate phases.
-
-The last two move the state_wait queue into the common
-smbdirect_socket.status_wait.
-
-For the server I have only a single patch that also
-uses smbdirect_socket.status_wait, but I'm skipping
-the server patches today.
-
-I used the following xfstests as regression tests:
-cifs/001 generic/001 generic/002 generic/005 generic/006 generic/007 generic/010 generic/011
-
-Between cifs.ko against ksmbd.ko via siw.ko.
-
-V2:
-init_waitqueue_head(&info->status_wait); was moved
-to the beginning so that it is correctly initialized
-in smbd_create_id().
-
-Stefan Metzmacher (9):
-  smb: client: return an error if rdma_connect does not return within 5
-    seconds
-  smb: client: improve logging in smbd_conn_upcall()
-  smb: client: don't call init_waitqueue_head(&info->conn_wait) twice in
-    _smbd_get_connection
-  smb: client: only use a single wait_queue to monitor smbdirect
-    connection status
-  smb: client/smbdirect: replace SMBDIRECT_SOCKET_CONNECTING with more
-    detailed states
-  smb: client: use status_wait and SMBDIRECT_SOCKET_NEGOTIATE_RUNNING
-    for completion
-  smb: client: use status_wait and
-    SMBDIRECT_SOCKET_RESOLVE_{ADDR,ROUTE}_RUNNING for completion
-  smb: smbdirect: introduce smbdirect_socket.status_wait
-  smb: client: make use of smbdirect_socket.status_wait
-
- fs/smb/client/smbdirect.c                  | 138 ++++++++++++++-------
- fs/smb/client/smbdirect.h                  |   8 --
- fs/smb/common/smbdirect/smbdirect_socket.h |  15 ++-
- 3 files changed, 106 insertions(+), 55 deletions(-)
-
+diff --git a/fs/smb/client/smbdirect.c b/fs/smb/client/smbdirect.c
+index 6c2af00be44c..181349eda7a3 100644
+--- a/fs/smb/client/smbdirect.c
++++ b/fs/smb/client/smbdirect.c
+@@ -1653,8 +1653,10 @@ static struct smbd_connection *_smbd_get_connection(
+ 		goto rdma_connect_failed;
+ 	}
+ 
+-	wait_event_interruptible(
+-		info->conn_wait, sc->status != SMBDIRECT_SOCKET_CONNECTING);
++	wait_event_interruptible_timeout(
++		info->conn_wait,
++		sc->status != SMBDIRECT_SOCKET_CONNECTING,
++		msecs_to_jiffies(RDMA_RESOLVE_TIMEOUT));
+ 
+ 	if (sc->status != SMBDIRECT_SOCKET_CONNECTED) {
+ 		log_rdma_event(ERR, "rdma_connect failed port=%d\n", port);
 -- 
 2.43.0
 
