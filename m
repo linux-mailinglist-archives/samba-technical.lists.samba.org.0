@@ -2,50 +2,63 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 26EB2B1F7FF
-	for <lists+samba-technical@lfdr.de>; Sun, 10 Aug 2025 04:03:03 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 751C5B1FD43
+	for <lists+samba-technical@lfdr.de>; Mon, 11 Aug 2025 02:24:52 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=hs00WR3WvCAPbQKsJo4JYqVzi/fOoSYjnmzb3uBJUks=; b=MBYmFBmiT3ypr3O92U50vEcGAV
-	iW+jNVVRlnY2fi2/zpjDx0CC62m4KUuMKubG9P7CMiLUNe01fYJWBbE/GcXmmeJNaEppXX6xMF7EM
-	Onn+aZlBhxIqJt/QDmknQ/op2mfikh0qBYPlbb/Wq4qdpqFVB15GNWZakIHb74e7ms9ih4N3LWDYB
-	DM1uzWwbqsIorAaW0EyTuyugKqB+qxRAq0XTQjyW2FWsM8BTpMlU6ty6BjQkiRK0OJIeGQSJaRPrE
-	AqlgOTK1wHM4Wq8f1OiL9wk8d+b2qAd8eYFCZFhY+LEAsU1cf+J+4mLSVUZg54/oe//uvLfVtyYco
-	Qk2W19/A==;
-Received: from ip6-localhost ([::1]:44618 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=Gzgc7DqDapYpEyfiZUzkArU07bCibsi6wSxdlaAA6xE=; b=Q+C8AxXe1eBBS/JC7WrTBbttOD
+	UTsBTJaWuie7co5IZrNNmZKwNyGUUN2qjCU8esY19pMk7BnoX5QC/3UCVMGpts1+ePRyVKYXL6esa
+	G5cwCVys9vAML+OEy1QEcSN/32eD20t3JrqLF422UVc7DcSoN8JyyVdMv2uexvU2Im0oyvVAgjEL/
+	nZSIRmUfn6vXWfJzM7JLLRCZYTnVyVJ4Dg3Fv3lqDjK3RNdpQMO4ia5StxQ1k7veeVraSWoH6upaG
+	3IyFAFvCzygu9o3N9DrubUir4qBbJiFB1e2ne+gpB3IrPuB3mhrahzcQkazwWoBLLS7XevWsOCul8
+	jX0XabFg==;
+Received: from ip6-localhost ([::1]:55396 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1ukvOH-00Env9-SY; Sun, 10 Aug 2025 02:02:29 +0000
-Received: from mail.ozlabs.org ([2404:9400:2221:ea00::3]:50257) 
+	id 1ulGKj-00Epnu-Ar; Mon, 11 Aug 2025 00:24:13 +0000
+Received: from nyc.source.kernel.org ([2604:1380:45d1:ec00::3]:40220) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1ukvOC-00Env2-NG
- for samba-technical@lists.samba.org; Sun, 10 Aug 2025 02:02:27 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=meltin.net;
- s=202409; t=1754791336;
- bh=hs00WR3WvCAPbQKsJo4JYqVzi/fOoSYjnmzb3uBJUks=;
- h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
- b=jjjCRIm0LPSFeB7uh33ikG6BFB3TDJ1QPpUVxf4c+/XYekXU6vwiZUmwTAKV71XnP
- otqft2GKVlYVkOMAZ6iMnXTDsbqy6Y2Z64BDNlaWG5jOqLvWsJW6K7ufgvey88JYFk
- dmzGMs03cIi1WIOeNRHzFLA6c5Sr18bLtHzxqCxKs2XTYdpaoujPcaeum5WmN2Kw++
- 6NNQCsCZWcoujHuQvBHCtJw5aK0kdZdNiP5F/03bm1/+MWK2+NhNmi5Gd2E5HJUp0D
- jmMvaRONyCG2HHvrMIVA8Ua/Zns9g96OPrdEUYgmlizbF7nw/L2qIcx87+pkZU8CKK
- sUZuMoAxnVN2A==
-Received: from authenticated.ozlabs.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange ECDHE (prime256v1) server-signature RSA-PSS (4096 bits)
- server-digest SHA256) (Client did not present a certificate)
- by mail.ozlabs.org (Postfix) with ESMTPSA id 4c01HD5pHwz4x3q;
- Sun, 10 Aug 2025 12:02:16 +1000 (AEST)
-Date: Sun, 10 Aug 2025 12:02:14 +1000
-To: Jule Anger <janger@samba.org>
-Subject: Re: 4.23.0 WHATSNEW entries missing
-Message-ID: <20250810120214.40858ef2@martins.ozlabs.org>
-In-Reply-To: <60902b9c-3b00-4f23-a590-68651036243c@samba.org>
-References: <60902b9c-3b00-4f23-a590-68651036243c@samba.org>
-X-Mailer: Claws Mail 4.3.1 (GTK 3.24.49; x86_64-pc-linux-gnu)
+ (Exim) id 1ulGKd-00Epnn-9H
+ for samba-technical@lists.samba.org; Mon, 11 Aug 2025 00:24:10 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by nyc.source.kernel.org (Postfix) with ESMTP id 10CA9A569A8
+ for <samba-technical@lists.samba.org>; Mon, 11 Aug 2025 00:06:52 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B6922C4CEF8
+ for <samba-technical@lists.samba.org>; Mon, 11 Aug 2025 00:06:51 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1754870811;
+ bh=nPB5zoVvK40cjsWU9LJykUfhIO4fsAqjAOUt1KqqH2M=;
+ h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
+ b=casjGMxd50wGYa3b0Cli9gdX7i3rh882xJcRRg344KLC7/CefWO8S2N+gABlmMte7
+ KRiOh/h0ohqrEhKYS0gpQAkgJqLuhlMTLZG9vFG0CNfmSo2B/Aq4DzQhYVeUgqENqF
+ phgPRZDtBWi1RUVuoFpet3aTUv+TmaHW78rIbk5U6KrFTGLbCJ9tkqN+czWu4rzQTT
+ 4LKDGznol6vcEk7N3dJd04got38BldlF6GhxAtsaUiGEvbMFiFBNv0vJDK7GQewjEZ
+ bFqFexWjhmlAJCFJeVZjH3K+a0KQu60EPNkk9ViylxJzr318u0VmYqYYw8NGR5Jqeb
+ y07S2rifgH4zA==
+Received: by mail-ej1-f45.google.com with SMTP id
+ a640c23a62f3a-af66f444488so541203766b.0
+ for <samba-technical@lists.samba.org>; Sun, 10 Aug 2025 17:06:51 -0700 (PDT)
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUz7tNIpowgr03okICigmsuNi8H58mNPAG0o+lZhm+nFwIKnVdQYQI3QbJgr0Dz7NYXmD3rZ7qnd2JB3aTW+2w=@lists.samba.org
+X-Gm-Message-State: AOJu0YzZ57Rgcd8MiOe1ejQNCQd8X5QuQU2gqWR/cpmjgpfpYgY6og5k
+ LdkPpHD1DxwO8DBcNFM6Trkn/KHu8NuVFjk1qOKUJkdvXkku6Gr5nKisfcgKaozPvBYjfGn9Dm3
+ ioT0KGP7eP6xqSdu5fMv+rp+6a3k8JPE=
+X-Google-Smtp-Source: AGHT+IGPZDmnJpCWDvKjuIfa5VvIshe4edNgsJ2MzHYxfc53NGYbswXpNtd/jBroCefzygcJGQEAYPL4XuSS8ITFq58=
+X-Received: by 2002:a17:907:96a9:b0:ae3:7c8c:351d with SMTP id
+ a640c23a62f3a-af9c6542d3amr864656366b.56.1754870810285; Sun, 10 Aug 2025
+ 17:06:50 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+References: <cover.1754501401.git.metze@samba.org>
+In-Reply-To: <cover.1754501401.git.metze@samba.org>
+Date: Mon, 11 Aug 2025 09:06:38 +0900
+X-Gmail-Original-Message-ID: <CAKYAXd8s_fLFc1i2oNcGZV2guwCAiC1-+b_5s7r-HCOOC7eH1g@mail.gmail.com>
+X-Gm-Features: Ac12FXzJQRqid5vA2XfXKteoYQl6jOWJUNyId3bmyy1qGFbXw5eqG_xj1XvY0RA
+Message-ID: <CAKYAXd8s_fLFc1i2oNcGZV2guwCAiC1-+b_5s7r-HCOOC7eH1g@mail.gmail.com>
+Subject: Re: [PATCH 00/18] smb: smbdirect: more use of common structures e.g.
+ smbdirect_send_io
+To: Stefan Metzmacher <metze@samba.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,47 +72,72 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Martin Schwenke via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Martin Schwenke <martin@meltin.net>
-Cc: samba-technical@lists.samba.org
+From: Namjae Jeon via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Namjae Jeon <linkinjeon@kernel.org>
+Cc: Tom Talpey <tom@talpey.com>, linux-cifs@vger.kernel.org,
+ samba-technical@lists.samba.org, Steve French <smfrench@gmail.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi Jule,
-
-On Thu, 7 Aug 2025 17:34:02 +0200, Jule Anger via samba-technical
-<samba-technical@lists.samba.org> wrote:
-
-> the WHATSNEW for 4.23 looks pretty empty so far.
-> If you have added or deleted a feature in the last six months, please 
-> send me a description to be added to WHATSNEW.
-
-Thanks for offering to do this via email!
-
-NEW FEATURES/CHANGES
-====================
-
-...
-
-CTDB changes
-------------
-
-* CTDB now supports loading tunables from
-  /etc/ctdb/tunables.d/*.tunables, in addition to the standard
-  /etc/ctdb/tunables.conf.  See the ctdb-tunables(7) manual page for
-  more details.  Note that the above locations are examples - the
-  actual location of these files will depend on compile time
-  configuration.
-
-  It isn't expected that many users will require a directory of tunables
-  files, since most users do not need to change tunables from their
-  default values.  However, this allows vendors to ship their required
-  tunables settings (for example, in one or more files marked "do not
-  edit") while still allowing local administrators to add their own
-  tunables settings (in one or more separate files).
-
-Thanks again!
-
-peace & happiness,
-martin
+On Thu, Aug 7, 2025 at 2:36=E2=80=AFAM Stefan Metzmacher <metze@samba.org> =
+wrote:
+>
+> Hi,
+>
+> this is the next step towards a common smbdirect layer
+> between cifs.ko and ksmbd.ko, with the aim to provide
+> a socket layer for userspace usage at the end of the road.
+>
+> This patchset focuses on the usage of a common
+> smbdirect_send_io and related structures in smbdirect_socket.send_io.
+>
+> Note only patches 01-08 are intended to be merged soon,
+> while the ksmbd patches 09-18 are only posted for
+> completeness (as discussed with Namjae) to get early feedback.
+>
+> I used the following xfstests as regression tests:
+> cifs/001 generic/001 generic/002 generic/005 generic/006 generic/007 gene=
+ric/010 generic/011
+>
+> Between cifs.ko against ksmbd.ko via siw.ko in all combinations
+> with and without the patchset on each side.
+>
+> Stefan Metzmacher (18):
+>   smb: client: remove unused enum smbd_connection_status
+>   smb: smbdirect: add SMBDIRECT_RECV_IO_MAX_SGE
+>   smb: client: make use of SMBDIRECT_RECV_IO_MAX_SGE
+>   smb: smbdirect: introduce struct smbdirect_send_io
+>   smb: client: make use of struct smbdirect_send_io
+>   smb: smbdirect: add smbdirect_socket.{send,recv}_io.mem.{cache,pool}
+>   smb: client: make use of
+>     smbdirect_socket.{send,recv}_io.mem.{cache,pool}
+>   smb: server: make use of common smbdirect_pdu.h
+>   smb: server: make use of common smbdirect.h
+>   smb: server: make use of common smbdirect_socket
+>   smb: server: make use of common smbdirect_socket_parameters
+>   smb: server: make use of smbdirect_socket->recv_io.expected
+>   smb: server: make use of struct smbdirect_recv_io
+>   smb: server: make use of smbdirect_socket.recv_io.free.{list,lock}
+>   smb: server: make use of smbdirect_socket.recv_io.reassembly.*
+>   smb: server: make use of SMBDIRECT_RECV_IO_MAX_SGE
+>   smb: server: make use of struct smbdirect_send_io
+>   smb: server: make use of
+>     smbdirect_socket.{send,recv}_io.mem.{cache,pool}
+Applied ksmbd's patches to #ksmbd-for-next-next.
+Thanks!
+>
+>  fs/smb/client/smbdirect.c                  | 112 ++--
+>  fs/smb/client/smbdirect.h                  |  38 --
+>  fs/smb/common/smbdirect/smbdirect_socket.h |  54 ++
+>  fs/smb/server/connection.c                 |   4 +-
+>  fs/smb/server/connection.h                 |  10 +-
+>  fs/smb/server/smb2pdu.c                    |  11 +-
+>  fs/smb/server/smb2pdu.h                    |   6 -
+>  fs/smb/server/transport_rdma.c             | 742 +++++++++++----------
+>  fs/smb/server/transport_rdma.h             |  41 --
+>  9 files changed, 500 insertions(+), 518 deletions(-)
+>
+> --
+> 2.43.0
+>
 
