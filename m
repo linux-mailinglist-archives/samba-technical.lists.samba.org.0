@@ -2,67 +2,92 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 99B8BB21C0F
-	for <lists+samba-technical@lfdr.de>; Tue, 12 Aug 2025 06:18:36 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BBF98B22C71
+	for <lists+samba-technical@lfdr.de>; Tue, 12 Aug 2025 17:59:28 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=BRBE98POvm3y1OXAISByb05MPTLMuNS4snXh7kL3Tyg=; b=vVma3PmccIs62knjr4qtmNBC3f
-	bO3d+jebAMdJaEqScbBBqJJyzT+mLILz26m+KJw1zfI/mj4kCCTBrrxQmks4vybxOBb7IX2Vanivj
-	Y3rqcseuOpJaaQNPKmFR8BaU4UH8gqq/bBLGdkFG8YjWi/XYEgLs98X+2gqthmkXVu1vPG0aSquXI
-	Wuvqj/bisHkrNftU+v6kn7EAzxd5Nq8YtERry/DFRgY0HflsHaznlIefqinLo9tQJSGL9WSV81bp9
-	wmFsXbnmYvDVVaeDB5q0uTejhwtSgzkAv52u6mecjoUeTozror76qSdm+u3FVM0sQ8pee37hRWkrd
-	7lpPonfg==;
-Received: from ip6-localhost ([::1]:20548 helo=hr1.samba.org) 
+	bh=zBNBPeWmdTUj9AyUwwQGngZgGPDwfIOqizQOa8aOPE8=; b=vMlA8Q7Y2uN2nK/8OTHjfwY3CO
+	MvyGnBSQFDi5uw9hPN4HTeh8ilesuXbl5XV2He9+UC3HNAa/kxNIv3qnqDzRGit/Us/HsLANOFlnG
+	XgAWN3Pf/zBusRdi2Sb7VpjKr1LdT3PSp6AbDUMyIwGgn5iTjzngqc7ASyL6C5vtzT6z2bWkAFI6J
+	4no95fJ1ve9fWdv9dLf6LRpHcnSUrWeOv+l2MD/ULwpF/MfXr5q8Ud/PeZEBXpHtPl5G80dgxDN8u
+	O4/PJyDJEZoA+FgqBhVUGYiS2cDZLWHWsxBCa6O/Q1LmqwfUNvkQIN2Xx7n9D7CuXgMrjDrry8mtt
+	FqD5gyYw==;
+Received: from ip6-localhost ([::1]:37674 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1ulgSS-00Etfa-Hj; Tue, 12 Aug 2025 04:17:56 +0000
-Received: from mail-qv1-xf2d.google.com ([2607:f8b0:4864:20::f2d]:57785) 
+	id 1ulrOm-00Eusn-6J; Tue, 12 Aug 2025 15:58:52 +0000
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124]:31669) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1ulgSN-00EtfS-EH
- for samba-technical@lists.samba.org; Tue, 12 Aug 2025 04:17:54 +0000
-Received: by mail-qv1-xf2d.google.com with SMTP id
- 6a1803df08f44-70884da4b55so53278746d6.3
- for <samba-technical@lists.samba.org>; Mon, 11 Aug 2025 21:17:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1754972269; x=1755577069; darn=lists.samba.org;
- h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=BRBE98POvm3y1OXAISByb05MPTLMuNS4snXh7kL3Tyg=;
- b=S2ZHosi35UbCGGcQiRONF/aCTRTlvoPBFaCPSTMzdro6kTZ/w3D+mYeucZ7kYuNj2A
- f3Aq5jggAYW1fBCbmOxo3wG0lsiXmTKo4i8xfAaibB8CJ+z57rbATN1TDFqNY6/xcCiN
- GtrYB+p/XxtAzb95Vvshg/EK+p4K4q44yOU57UcImXNyFt6B30LHLElpaI//2OBifH+f
- 7f2yJC5vT4qhpaVrsWK+k5k2+c+Lde9O7k2mlQuv69bgxa8cJGFWHdECvARwc5W14khi
- h6EYU8zUQNNSY0tVCPXJ8qtSMJ/06o2X7RCxL9t3xOJtKQbEFxuUufmTQoEEIMtdnomR
- cPqg==
+ (Exim) id 1ulrOg-00Eusg-CL
+ for samba-technical@lists.samba.org; Tue, 12 Aug 2025 15:58:49 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1755014322;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=zBNBPeWmdTUj9AyUwwQGngZgGPDwfIOqizQOa8aOPE8=;
+ b=Qifd9NIsa7mHsMxne8Cz4il7n8RtA2KACbISYdjJ6ckp4b/R0GoSmZLPq49KNLVEkYhUQ/
+ 3O1nQeoYJAoq0KgfxFDFK96Zh4OCnF96VXt8ekKKOyTnQGj4F8xZ4F/PNxqgRr3NY75LXs
+ pD/B3dLMCw1KlDkqxLIxfZySrGZxEuY=
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1755014323;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=zBNBPeWmdTUj9AyUwwQGngZgGPDwfIOqizQOa8aOPE8=;
+ b=AhKwiRSZNIBA2DV7Pql0i68bgQG9NJlmhn9R1lqetOKtoB9SQZribKPLHjsqRWg13qpDMz
+ oguqa8ifY0RL9KYEqRgtHOuFJOBso29ITDXus08S/liblMKKw76HpQqw1GzKQ9kVBIgWHr
+ BLtrEOHT+/kjEKCcSEppu/QHPjoyAas=
+Received: from mail-qt1-f200.google.com (mail-qt1-f200.google.com
+ [209.85.160.200]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-138-Ry-QD18-PwGLSLRfVWOxNg-1; Tue, 12 Aug 2025 11:43:06 -0400
+X-MC-Unique: Ry-QD18-PwGLSLRfVWOxNg-1
+X-Mimecast-MFC-AGG-ID: Ry-QD18-PwGLSLRfVWOxNg_1755013386
+Received: by mail-qt1-f200.google.com with SMTP id
+ d75a77b69052e-4b07b90d5cdso70651971cf.2
+ for <samba-technical@lists.samba.org>; Tue, 12 Aug 2025 08:43:06 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1754972269; x=1755577069;
- h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=BRBE98POvm3y1OXAISByb05MPTLMuNS4snXh7kL3Tyg=;
- b=uWNg7sawMOaZ//bg8ib9Lud+xPSOxrG1Cir0pFUs2KkvZCpaX/rhgdFidhoPo2d/kk
- HSvUtsK//BMHzbLwyP8nk8Kc2jQWCWNT6nx/URzUOIfpihhVY8UZgqfdqh9OyizKGk09
- 34LNrlRIIyjcuJQJdaKUVfuyDG2GREkn2la5qlPxpDcETWyljLVnERjwL+xyyaHadp6k
- 7sE87L8DVEZMGoMflcl0VRy1rYl4Kb+P/QyMbRTmTj5swsZsNFJixRRoBthqDfPYeVQ6
- bIABH2jr6UUDBoahJ0t2vszdGv6YxTRQCTZ8NZ8QESUS4y4xM8nouvUr7P81BFuKIgVH
- VM+g==
-X-Gm-Message-State: AOJu0Yys/CphekHtnhMdPvPhgJ5JrMzuFMRQObtkr3o8nlfn7+ZwLzjC
- DuCkn5TLxjf+yauZ0IX/9uIj85vqVnror9E/GuqS75ZCTc2i849TZ6kAuTgdVDISF1BlOxcI3se
- tjH03zkMwv9dbkldpi/eJBV+ZU9RgfxM=
-X-Gm-Gg: ASbGncvr0yBo5EmFgXOkjx9YqxRvwyGSgNJdPwh0BV2MKVkXoETQps/T4/rFxvHZlbd
- Ct8NwMaeEF8Tw1vS4jnclSz6BiyLQVbf8pDVxz4WLlIZH/xPwm1psCcNO4UOQx9eO0rw4N0K44B
- QQyAMZ4mX+KfV0rrxJL2myGM8B8HAT6fmfl6L3LKLi9P01ppV5VKJLTh1JlxcSY5ixlnYmJ7mUA
- nmg51zltPPTLBoGi3jzSJ013EhvqOWVsB7wnezbvjuNwnn0IkXv
-X-Google-Smtp-Source: AGHT+IFZg5h3gPGj0bDCCeBKUqsI68/fATToWXzteGu6B/C4BErOV98+oU1O6Oj4fh+TmIXIQGU08zX5uc7owcGaFBw=
-X-Received: by 2002:a05:6214:2aad:b0:709:e095:128f with SMTP id
- 6a1803df08f44-709e09536a3mr528716d6.25.1754972269334; Mon, 11 Aug 2025
- 21:17:49 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1755013386; x=1755618186;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=zBNBPeWmdTUj9AyUwwQGngZgGPDwfIOqizQOa8aOPE8=;
+ b=dLRkQ/AhquV5rMhYRKucuuCegoRoE/WAdE8VIk1di3HqvavldHjKkqu3G+7etnEEcx
+ 3RgkMr7WQUqfT/jDiseM10eQfjUGnNm6yProH2G5ZQT12kHL4g1HDWJpjkasRCZeY7TE
+ BnLpBiYcZ5OfHROgzeKMrKvPOsfe5jDsZWrzCe0/D5JuiaELh8ai9fxoMWRhcSTU/tpt
+ fYxN6tlQt6hymPGawIqY3Z76xK+gJ5lqlCUKhOoZ7pEgCiQIeaREKDmFnHfU3mRYXs1s
+ k3VGobqgYko+LoG10Xqc3fDiYHZNXEWWp3MR6medCIlXEYygJTF90j8RunDTyPSt4ZPY
+ TezA==
+X-Gm-Message-State: AOJu0Yzvhal106jHMRuN2tgaibSnvCabfQhmge5+rkl7t646WQ/7V/Xk
+ MfKuSaizq8EIrR5LXNahlwBtPU0BcNXPXMeQSqgCLzzpY8uSGOVBKmNdtGWofYRsb2ts7DCNzKU
+ nZ73GcexBH+gYusgpIc5DBLykzTcTV8GE39RMHMKlsPMgIZA9M4s90bciieXi0wLXYSHdna8k63
+ 56MKqeieNcD6wDaVu9xOoiiB/y1hYb+nXtiAU+4LW/o3IT
+X-Gm-Gg: ASbGncvQyhcdVPkmuwPbvZU2ZO0WLFzrc7sJ5604WblGDgVt37/QuLHSZDHUMDttNf9
+ /S6VlJf2273PFN8AsCc6aSnhmNc12j+mT1XId8CPj0+Bki00K5b6A07vb/578iWtKih+U14tURq
+ UQQ6AmdBakklwuazsWz9HNQdWww0qvwIZ3rNXqEmD3SQvNZIKVsudX
+X-Received: by 2002:a05:622a:59c7:b0:4a9:ab9b:65da with SMTP id
+ d75a77b69052e-4b0fa7cb355mr1061011cf.13.1755013386121; 
+ Tue, 12 Aug 2025 08:43:06 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IEM2vam+ATel29LtRq3EOGhbtsq5JO5stshIhN4oabvNepAaWpkZ5Y5y7P2QLsu3dJ2lW9uoZ8GxWDbDJv1eD0=
+X-Received: by 2002:a05:622a:59c7:b0:4a9:ab9b:65da with SMTP id
+ d75a77b69052e-4b0fa7cb355mr1060461cf.13.1755013385590; Tue, 12 Aug 2025
+ 08:43:05 -0700 (PDT)
 MIME-Version: 1.0
-Date: Mon, 11 Aug 2025 23:17:37 -0500
-X-Gm-Features: Ac12FXzBDaFBO5kjoLovPIpMy18Rz9iHv72fzhkfQ17S8HQbJSqxfVq1U1IDV5Q
-Message-ID: <CAH2r5muN4QgGt1ZrOFkWFaqwM0V2HBWZn0OGNgZzPHJOTPjxjw@mail.gmail.com>
-Subject: [PATCH][SMB3 client] fix for slab out of bound on mount to ksmbd
-To: CIFS <linux-cifs@vger.kernel.org>
-Content-Type: multipart/mixed; boundary="000000000000b46cbb063c235244"
+References: <60902b9c-3b00-4f23-a590-68651036243c@samba.org>
+In-Reply-To: <60902b9c-3b00-4f23-a590-68651036243c@samba.org>
+Date: Tue, 12 Aug 2025 18:42:54 +0300
+X-Gm-Features: Ac12FXxw2VoLmFXyICqI8FlShJNNMX_CluMcZOUuqW5ConBcNWr4vxyxEpzK8NE
+Message-ID: <CAF8sLVUU2S1i0H4xj-ruUN1njoHgNZOW17U6WW1g3B-FksZ3aw@mail.gmail.com>
+Subject: Re: 4.23.0 WHATSNEW entries missing
+To: Jule Anger <janger@samba.org>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-MFC-PROC-ID: UOWc0oyDm_qMRq8WJY7_MWyZ8YHxRX1fdAxGLa2Hd_g_1755013386
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -76,148 +101,60 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
-Cc: samba-technical <samba-technical@lists.samba.org>,
- Namjae Jeon <linkinjeon@kernel.org>
+From: Shachar Sharon via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Shachar Sharon <ssharon@redhat.com>
+Cc: samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
---000000000000b46cbb063c235244
-Content-Type: text/plain; charset="UTF-8"
+Hi Jule,
 
-smb3: fix for slab out of bounds on mount to ksmbd
 
-With KASAN enabled, it is possible to get a slab out of bounds
-during mount to ksmbd due to missing check in parse_server_interfaces()
-(see below):
+NEW FEATURES/CHANGES
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
 
- BUG: KASAN: slab-out-of-bounds in
- parse_server_interfaces+0x14ee/0x1880 [cifs]
- Read of size 4 at addr ffff8881433dba98 by task mount/9827
+Per-share profiling stats
+-------------------------
+Starting with Samba 4.23, users can collect profile counters at a
+per-share level. This feature requires building Samba with profiling
+data enabled and adding an appropriate `smb.conf` parameter for
+specific shares. It's particularly useful for deployments with a large
+number of active shares, allowing administrators to monitor individual
+share activity and identify potential bottlenecks or hot-spots. When
+enabled, users can inspect current per-share profile information
+("Extended Profile") using the standard `smbstatus` utility.
 
- CPU: 5 UID: 0 PID: 9827 Comm: mount Tainted: G
- OE       6.16.0-rc2-kasan #2 PREEMPT(voluntary)
- Tainted: [O]=OOT_MODULE, [E]=UNSIGNED_MODULE
- Hardware name: Dell Inc. Precision Tower 3620/0MWYPT,
- BIOS 2.13.1 06/14/2019
- Call Trace:
-  <TASK>
- dump_stack_lvl+0x9f/0xf0
- print_report+0xd1/0x670
- __virt_addr_valid+0x22c/0x430
- ? parse_server_interfaces+0x14ee/0x1880 [cifs]
- ? kasan_complete_mode_report_info+0x2a/0x1f0
- ? parse_server_interfaces+0x14ee/0x1880 [cifs]
-   kasan_report+0xd6/0x110
-   parse_server_interfaces+0x14ee/0x1880 [cifs]
-   __asan_report_load_n_noabort+0x13/0x20
-   parse_server_interfaces+0x14ee/0x1880 [cifs]
- ? __pfx_parse_server_interfaces+0x10/0x10 [cifs]
- ? trace_hardirqs_on+0x51/0x60
- SMB3_request_interfaces+0x1ad/0x3f0 [cifs]
- ? __pfx_SMB3_request_interfaces+0x10/0x10 [cifs]
- ? SMB2_tcon+0x23c/0x15d0 [cifs]
- smb3_qfs_tcon+0x173/0x2b0 [cifs]
- ? __pfx_smb3_qfs_tcon+0x10/0x10 [cifs]
- ? cifs_get_tcon+0x105d/0x2120 [cifs]
- ? do_raw_spin_unlock+0x5d/0x200
- ? cifs_get_tcon+0x105d/0x2120 [cifs]
- ? __pfx_smb3_qfs_tcon+0x10/0x10 [cifs]
- cifs_mount_get_tcon+0x369/0xb90 [cifs]
- ? dfs_cache_find+0xe7/0x150 [cifs]
- dfs_mount_share+0x985/0x2970 [cifs]
- ? check_path.constprop.0+0x28/0x50
- ? save_trace+0x54/0x370
- ? __pfx_dfs_mount_share+0x10/0x10 [cifs]
- ? __lock_acquire+0xb82/0x2ba0
- ? __kasan_check_write+0x18/0x20
- cifs_mount+0xbc/0x9e0 [cifs]
- ? __pfx_cifs_mount+0x10/0x10 [cifs]
- ? do_raw_spin_unlock+0x5d/0x200
- ? cifs_setup_cifs_sb+0x29d/0x810 [cifs]
- cifs_smb3_do_mount+0x263/0x1990 [cifs]
+Currently, this functionality is supported only by the default and
+`ceph_new` VFS modules.
 
-Reported-by: Namjae Jeon <linkinjeon@kernel.org>
-Tested-by: Namjae Jeon <linkinjeon@kernel.org>
-Cc: stable@vger.kernel.org
-Signed-off-by: Steve French <stfrench@microsoft.com>
+smb.conf changes
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
 
-See attached
+Parameter Name        Description  Default
+--------------                   -----------       -------
+smbd profiling share   New             no
 
--- 
 Thanks,
+Shachar
 
-Steve
+On Thu, Aug 7, 2025 at 6:34=E2=80=AFPM Jule Anger via samba-technical
+<samba-technical@lists.samba.org> wrote:
+>
+> Hi,
+>
+> the WHATSNEW for 4.23 looks pretty empty so far.
+> If you have added or deleted a feature in the last six months, please
+> send me a description to be added to WHATSNEW.
+>
+> Thanks!
+>
+> Jule
+>
+> --
+> Jule Anger
+> Release Manager Samba Team  samba.org
+> SerNet Samba Team           sernet.de
+>
+>
 
---000000000000b46cbb063c235244
-Content-Type: text/x-patch; charset="US-ASCII"; 
-	name="0001-smb3-fix-for-slab-out-of-bounds-on-mount-to-ksmbd.patch"
-Content-Disposition: attachment; 
-	filename="0001-smb3-fix-for-slab-out-of-bounds-on-mount-to-ksmbd.patch"
-Content-Transfer-Encoding: base64
-Content-ID: <f_me8161290>
-X-Attachment-Id: f_me8161290
-
-RnJvbSBjNjJjNTEyNTI5YjA3NTRjYmRlZjQ5MmVmOTI3OTdiOWNiNTU0YTU2IE1vbiBTZXAgMTcg
-MDA6MDA6MDAgMjAwMQpGcm9tOiBTdGV2ZSBGcmVuY2ggPHN0ZnJlbmNoQG1pY3Jvc29mdC5jb20+
-CkRhdGU6IE1vbiwgMTEgQXVnIDIwMjUgMjM6MTQ6NTUgLTA1MDAKU3ViamVjdDogW1BBVENIXSBz
-bWIzOiBmaXggZm9yIHNsYWIgb3V0IG9mIGJvdW5kcyBvbiBtb3VudCB0byBrc21iZAoKV2l0aCBL
-QVNBTiBlbmFibGVkLCBpdCBpcyBwb3NzaWJsZSB0byBnZXQgYSBzbGFiIG91dCBvZiBib3VuZHMK
-ZHVyaW5nIG1vdW50IHRvIGtzbWJkIGR1ZSB0byBtaXNzaW5nIGNoZWNrIGluIHBhcnNlX3NlcnZl
-cl9pbnRlcmZhY2VzKCkKKHNlZSBiZWxvdyk6CgogQlVHOiBLQVNBTjogc2xhYi1vdXQtb2YtYm91
-bmRzIGluCiBwYXJzZV9zZXJ2ZXJfaW50ZXJmYWNlcysweDE0ZWUvMHgxODgwIFtjaWZzXQogUmVh
-ZCBvZiBzaXplIDQgYXQgYWRkciBmZmZmODg4MTQzM2RiYTk4IGJ5IHRhc2sgbW91bnQvOTgyNwoK
-IENQVTogNSBVSUQ6IDAgUElEOiA5ODI3IENvbW06IG1vdW50IFRhaW50ZWQ6IEcKIE9FICAgICAg
-IDYuMTYuMC1yYzIta2FzYW4gIzIgUFJFRU1QVCh2b2x1bnRhcnkpCiBUYWludGVkOiBbT109T09U
-X01PRFVMRSwgW0VdPVVOU0lHTkVEX01PRFVMRQogSGFyZHdhcmUgbmFtZTogRGVsbCBJbmMuIFBy
-ZWNpc2lvbiBUb3dlciAzNjIwLzBNV1lQVCwKIEJJT1MgMi4xMy4xIDA2LzE0LzIwMTkKIENhbGwg
-VHJhY2U6CiAgPFRBU0s+CiBkdW1wX3N0YWNrX2x2bCsweDlmLzB4ZjAKIHByaW50X3JlcG9ydCsw
-eGQxLzB4NjcwCiBfX3ZpcnRfYWRkcl92YWxpZCsweDIyYy8weDQzMAogPyBwYXJzZV9zZXJ2ZXJf
-aW50ZXJmYWNlcysweDE0ZWUvMHgxODgwIFtjaWZzXQogPyBrYXNhbl9jb21wbGV0ZV9tb2RlX3Jl
-cG9ydF9pbmZvKzB4MmEvMHgxZjAKID8gcGFyc2Vfc2VydmVyX2ludGVyZmFjZXMrMHgxNGVlLzB4
-MTg4MCBbY2lmc10KICAga2FzYW5fcmVwb3J0KzB4ZDYvMHgxMTAKICAgcGFyc2Vfc2VydmVyX2lu
-dGVyZmFjZXMrMHgxNGVlLzB4MTg4MCBbY2lmc10KICAgX19hc2FuX3JlcG9ydF9sb2FkX25fbm9h
-Ym9ydCsweDEzLzB4MjAKICAgcGFyc2Vfc2VydmVyX2ludGVyZmFjZXMrMHgxNGVlLzB4MTg4MCBb
-Y2lmc10KID8gX19wZnhfcGFyc2Vfc2VydmVyX2ludGVyZmFjZXMrMHgxMC8weDEwIFtjaWZzXQog
-PyB0cmFjZV9oYXJkaXJxc19vbisweDUxLzB4NjAKIFNNQjNfcmVxdWVzdF9pbnRlcmZhY2VzKzB4
-MWFkLzB4M2YwIFtjaWZzXQogPyBfX3BmeF9TTUIzX3JlcXVlc3RfaW50ZXJmYWNlcysweDEwLzB4
-MTAgW2NpZnNdCiA/IFNNQjJfdGNvbisweDIzYy8weDE1ZDAgW2NpZnNdCiBzbWIzX3Fmc190Y29u
-KzB4MTczLzB4MmIwIFtjaWZzXQogPyBfX3BmeF9zbWIzX3Fmc190Y29uKzB4MTAvMHgxMCBbY2lm
-c10KID8gY2lmc19nZXRfdGNvbisweDEwNWQvMHgyMTIwIFtjaWZzXQogPyBkb19yYXdfc3Bpbl91
-bmxvY2srMHg1ZC8weDIwMAogPyBjaWZzX2dldF90Y29uKzB4MTA1ZC8weDIxMjAgW2NpZnNdCiA/
-IF9fcGZ4X3NtYjNfcWZzX3Rjb24rMHgxMC8weDEwIFtjaWZzXQogY2lmc19tb3VudF9nZXRfdGNv
-bisweDM2OS8weGI5MCBbY2lmc10KID8gZGZzX2NhY2hlX2ZpbmQrMHhlNy8weDE1MCBbY2lmc10K
-IGRmc19tb3VudF9zaGFyZSsweDk4NS8weDI5NzAgW2NpZnNdCiA/IGNoZWNrX3BhdGguY29uc3Rw
-cm9wLjArMHgyOC8weDUwCiA/IHNhdmVfdHJhY2UrMHg1NC8weDM3MAogPyBfX3BmeF9kZnNfbW91
-bnRfc2hhcmUrMHgxMC8weDEwIFtjaWZzXQogPyBfX2xvY2tfYWNxdWlyZSsweGI4Mi8weDJiYTAK
-ID8gX19rYXNhbl9jaGVja193cml0ZSsweDE4LzB4MjAKIGNpZnNfbW91bnQrMHhiYy8weDllMCBb
-Y2lmc10KID8gX19wZnhfY2lmc19tb3VudCsweDEwLzB4MTAgW2NpZnNdCiA/IGRvX3Jhd19zcGlu
-X3VubG9jaysweDVkLzB4MjAwCiA/IGNpZnNfc2V0dXBfY2lmc19zYisweDI5ZC8weDgxMCBbY2lm
-c10KIGNpZnNfc21iM19kb19tb3VudCsweDI2My8weDE5OTAgW2NpZnNdCgpSZXBvcnRlZC1ieTog
-TmFtamFlIEplb24gPGxpbmtpbmplb25Aa2VybmVsLm9yZz4KVGVzdGVkLWJ5OiBOYW1qYWUgSmVv
-biA8bGlua2luamVvbkBrZXJuZWwub3JnPgpDYzogc3RhYmxlQHZnZXIua2VybmVsLm9yZwpTaWdu
-ZWQtb2ZmLWJ5OiBTdGV2ZSBGcmVuY2ggPHN0ZnJlbmNoQG1pY3Jvc29mdC5jb20+Ci0tLQogZnMv
-c21iL2NsaWVudC9zbWIyb3BzLmMgfCAxMSArKysrKysrKysrLQogMSBmaWxlIGNoYW5nZWQsIDEw
-IGluc2VydGlvbnMoKyksIDEgZGVsZXRpb24oLSkKCmRpZmYgLS1naXQgYS9mcy9zbWIvY2xpZW50
-L3NtYjJvcHMuYyBiL2ZzL3NtYi9jbGllbnQvc21iMm9wcy5jCmluZGV4IGY3YTBmMWM4MWI0My4u
-ZjM3M2M4Nzc0NjY5IDEwMDY0NAotLS0gYS9mcy9zbWIvY2xpZW50L3NtYjJvcHMuYworKysgYi9m
-cy9zbWIvY2xpZW50L3NtYjJvcHMuYwpAQCAtNzcyLDYgKzc3MiwxMyBAQCBwYXJzZV9zZXJ2ZXJf
-aW50ZXJmYWNlcyhzdHJ1Y3QgbmV0d29ya19pbnRlcmZhY2VfaW5mb19pb2N0bF9yc3AgKmJ1ZiwK
-IAkJCWJ5dGVzX2xlZnQgLT0gc2l6ZW9mKCpwKTsKIAkJCWJyZWFrOwogCQl9CisJCS8qIFZhbGlk
-YXRlIHRoYXQgTmV4dCBkb2Vzbid0IHBvaW50IGJleW9uZCB0aGUgYnVmZmVyICovCisJCWlmIChu
-ZXh0ID4gYnl0ZXNfbGVmdCkgeworCQkJY2lmc19kYmcoVkZTLCAiJXM6IGludmFsaWQgTmV4dCBw
-b2ludGVyICVsdSA+ICV6ZFxuIiwKKwkJCQkgX19mdW5jX18sIG5leHQsIGJ5dGVzX2xlZnQpOwor
-CQkJcmMgPSAtRUlOVkFMOworCQkJZ290byBvdXQ7CisJCX0KIAkJcCA9IChzdHJ1Y3QgbmV0d29y
-a19pbnRlcmZhY2VfaW5mb19pb2N0bF9yc3AgKikoKHU4ICopcCtuZXh0KTsKIAkJYnl0ZXNfbGVm
-dCAtPSBuZXh0OwogCX0KQEAgLTc4Myw3ICs3OTAsOSBAQCBwYXJzZV9zZXJ2ZXJfaW50ZXJmYWNl
-cyhzdHJ1Y3QgbmV0d29ya19pbnRlcmZhY2VfaW5mb19pb2N0bF9yc3AgKmJ1ZiwKIAl9CiAKIAkv
-KiBBenVyZSByb3VuZHMgdGhlIGJ1ZmZlciBzaXplIHVwIDgsIHRvIGEgMTYgYnl0ZSBib3VuZGFy
-eSAqLwotCWlmICgoYnl0ZXNfbGVmdCA+IDgpIHx8IHAtPk5leHQpCisJaWYgKChieXRlc19sZWZ0
-ID4gOCkgfHwKKwkgICAgKGJ5dGVzX2xlZnQgPj0gb2Zmc2V0b2Yoc3RydWN0IG5ldHdvcmtfaW50
-ZXJmYWNlX2luZm9faW9jdGxfcnNwLCBOZXh0KQorCSAgICAgKyBzaXplb2YocC0+TmV4dCkgJiYg
-cC0+TmV4dCkpCiAJCWNpZnNfZGJnKFZGUywgIiVzOiBpbmNvbXBsZXRlIGludGVyZmFjZSBpbmZv
-XG4iLCBfX2Z1bmNfXyk7CiAKIAlzZXMtPmlmYWNlX2xhc3RfdXBkYXRlID0gamlmZmllczsKLS0g
-CjIuNDMuMAoK
---000000000000b46cbb063c235244--
 
