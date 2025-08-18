@@ -2,72 +2,74 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 24783B2B37D
-	for <lists+samba-technical@lfdr.de>; Mon, 18 Aug 2025 23:36:36 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 24900B2B392
+	for <lists+samba-technical@lfdr.de>; Mon, 18 Aug 2025 23:42:24 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=G5mC/vEOmShR27O6wi76fydoZyaSh4/O0s70DRwKZfc=; b=ooDziihqHyY8+RoaDzTJeUolfI
-	N8BP3vaVYyOSBJBaHjlHrPToav/kbmBk1dsBsXT86z6ftfX24X6hf/AlqHM816hqyA2EUYH74dCPx
-	D4s737Z2h+vktgYuQD6pPWB0y3koa0kibDDW/NE9CcMbb3Mg9GGKCY5xJM8Zk1KCMxw2AelPXHqPq
-	2G3XOMschoaMnYmky+jmqTQkICzbp1Jbhes/SVZ+OIwI8EPQA//lD6JL+HaOBRLHsJjpuKsSjqiSw
-	xDHZwm2LtaRiWjfKcQgfSQvHft6cYDWM+Y72bQNmGcVt+Lf4CN/3YIw/LM3WRs54kvLt2yHbatqF1
-	vWtLjgZQ==;
-Received: from ip6-localhost ([::1]:40980 helo=hr1.samba.org) 
+	bh=xVrApoP14f9caj21OlfYIfBa76LwsWl3k/rrsNeI8aU=; b=uysJQerFjmdFDIwcL/YTJCucB3
+	7EymMmy76W1EkPuCtzBxUn0FbZh9fPm73BtI85jo/SrpA9IuGeQ3HfCKOTlQPdT66OJT3VTkdxJ8z
+	+Iwf7O09BUh0SuR84x1PgEapDYFGRCZzOxLZ+XwjfZxBCpLUqScMkHWAnptWJwAQGnShxExPgh3Tm
+	RKp0I53/AmpTO/FbvqZ+S8iduzjyfiuJPSdoCJC97CkddB6BVquuPZZRxQO6HhUK94Mg8/O7xZjpi
+	Gu6o88Frj7uAmOUYiR3VvrepkkiqK2jBFw4AK8DIlTf6GImF5uCliqyxrrXdIGawwsk26PgWvAwwo
+	lSAmEAlw==;
+Received: from ip6-localhost ([::1]:49810 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1uo7WW-00FH4o-Vz; Mon, 18 Aug 2025 21:36:13 +0000
-Received: from mail-qk1-x731.google.com ([2607:f8b0:4864:20::731]:45504) 
+	id 1uo7cK-00FH9n-9t; Mon, 18 Aug 2025 21:42:12 +0000
+Received: from mail-qk1-x72c.google.com ([2607:f8b0:4864:20::72c]:56568) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uo7WS-00FH4h-He
- for samba-technical@lists.samba.org; Mon, 18 Aug 2025 21:36:11 +0000
-Received: by mail-qk1-x731.google.com with SMTP id
- af79cd13be357-7e8706856e0so487209085a.3
- for <samba-technical@lists.samba.org>; Mon, 18 Aug 2025 14:36:07 -0700 (PDT)
+ (Exim) id 1uo7cE-00FH9g-Dl
+ for samba-technical@lists.samba.org; Mon, 18 Aug 2025 21:42:10 +0000
+Received: by mail-qk1-x72c.google.com with SMTP id
+ af79cd13be357-7e8702fd3b2so462895185a.0
+ for <samba-technical@lists.samba.org>; Mon, 18 Aug 2025 14:42:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1755552966; x=1756157766; darn=lists.samba.org;
+ d=gmail.com; s=20230601; t=1755553324; x=1756158124; darn=lists.samba.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=G5mC/vEOmShR27O6wi76fydoZyaSh4/O0s70DRwKZfc=;
- b=SPq4KsAroQUxZa8wCze471RBL43/KXtoM7cfznasScfMFGFxS+FWBOGVMdGsf/LQ2M
- Btoch55TAPMhj7fVB1C2uiNeL2efwy9xiRb4PFPK2zFgHs805glpVNgXpgvJ7hbnxb6A
- NET7jQ/oFLSJn9rFGnhdY+YNq4u7Ph2e1YyP9lV8+TBmBRaurh9XbWI+nJ0HaUXKtcdd
- lrItaYZ0IWvTmGvLODnZe3UV3FsbuSEu7jkUtUs/nJdct01tpriqMWudlyckZxbwPZyz
- zzhw10+XsLQw+QRcnUW7q50VL7K8Fdn6Qu/0wPaPZ4pHL4x3XYM2Ht0Vaf6sNL7dC70D
- CMbw==
+ bh=xVrApoP14f9caj21OlfYIfBa76LwsWl3k/rrsNeI8aU=;
+ b=Hnne+9Z7i54w+wH1NiHqf95uw9gKewvi538/3RkvLJfVgwCeM50AFWOgqpL6hrJKAR
+ CSNHzXjfKBv6DvFw+p9Swctfcxh6Tmt/ZIyJJLf276fqy/rydi8VNn3WSFGQ5NeTEbLr
+ LPoUpx4j1/JdWiRmd55qSoQ7hlO3Cs8PY/uGPQQLpRtj6NzTYGcLSNNb2rCafKnMfes3
+ kDOnemMvGRU8CbL/9twjkT7uZg5x3wGnT8DrAty38IcDLJa6ZgRlecXPFYlUugAdmci7
+ eMinCQzj+vmqB0MenMFPynsvuQTRvIvCapD6QTB2qRQpIsuQ8/60HxdjzxWaDRB3kDgj
+ RzZA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1755552966; x=1756157766;
+ d=1e100.net; s=20230601; t=1755553324; x=1756158124;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=G5mC/vEOmShR27O6wi76fydoZyaSh4/O0s70DRwKZfc=;
- b=Y2nqJ/SS9Ym5G1boz6MV22DuzJmwllLK+djbZUKS+6YFE79XsXvg/Oh8OAwIfJ4tPS
- 3N6oSonWtMZz7C1pP41mVpl++5iKHXxg3PmiEaetAr5gUXKSb7nRFcLNsjNsR+LqC/0+
- MQGy3S47CxOjWMaD5RDvE4jtmopDWYDizSN/zWlrAluBiu7IqPF2CPZhptad0rR+c53F
- aKiNdy4hot7l1GUAQRkGv3FbT4fBwxi6nBbpsuxQBENm7G86bCLv2PgvojclLxvEG4ou
- X4XhWae93VrcjvwspPPPgxiG0K90YsFHoSRbLwoUGYSCccJaKXhUaBv5BYKTPWQ7H0Yd
- oE+g==
+ bh=xVrApoP14f9caj21OlfYIfBa76LwsWl3k/rrsNeI8aU=;
+ b=qdpLhYFwjEpvr7gVVQQshP+8qnamxY8o99GSTsSWGsl4GwNbU7qoi8/RPg67k7nHrZ
+ lnB/OfyDjMEc281BEyzFdp1M4uugAerMPbXYq5gsMUdvQLWJTQ9SzUxdC+7a5qZxAIrC
+ /uIXX+1w9PFSyhlb44YEaDdaHIniOTJrxA1cnMMKOr3xq6bawyadXNy7f53htCe4FOjE
+ 9SISzxbFjzdycuPst86PapEpYE5wSYHxn84BZHLRCz+w11w9ohbxbEiyEc0jtsJeshCR
+ eSYs77ova6IBWvj413nECRW4JeUY4GDSeG7nYydN6GgSjlGC+3F9aI2FCl7OADyC3TNr
+ RlLw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXJGXVfEwMowStZYstDMsL68F63OnpOgNHdrQCHmgD4jQ1ntpozCPcl+Ixs/8BE5uqo4Pa4VuHXs3uty98f5EI=@lists.samba.org
-X-Gm-Message-State: AOJu0YzY2lZ+6Kr8rno8YeFgEf/dX4w2WBrh7w+qvZWiLeTcfZCnv83Q
- 7i8H+MjvbzTm6AjYbrnRiLUzImhSbcGIOuYvLuj1sZ9Sg25P/2XHFJfa4+OvsFxDn8QbxJ468LH
- zR/z0iF8hB9almwyV2GcAkXEvxlNeBLaVZQ==
-X-Gm-Gg: ASbGnctE5Kz1gnByz0aLHUDeT7jFjKIb9fdTz5CFbokDJ7pAzWGL5vhblijxY1C7Ybb
- 5WlehtaKueOZNfHERAn4L3ObQ+R6jIIoQxeyDJ2w0u9xOAV5AoLVzGVlszm7+bk/LeAWR7fSrVQ
- qfbd09kJ1WZX1eus0j60sLJy16TLBzpjCU369438fzyQBXoNKmwG2mzZK+3C2B2s9fkQawtdbKY
- 5WeUJZ1NPuhIv0/5z1Lfaid0p5igLwXqoBzdGaYTLzCdWnXGbc=
-X-Google-Smtp-Source: AGHT+IFCD3fWR6YXHpR5xA57y6bIdD9fhdz9RgOmb8Z6skSFYDLwFSNjuIkAJ87UjM5aKAWJSNhWFgEp2B4u2BOAPCw=
-X-Received: by 2002:a05:620a:4611:b0:7e3:495a:2982 with SMTP id
- af79cd13be357-7e9f3203f7fmr63800285a.0.1755552966242; Mon, 18 Aug 2025
- 14:36:06 -0700 (PDT)
+ AJvYcCXwmh1ibjPq39lxJ4W8Pqb7g/PdjYlG03cGJiEeiu5WI31h++4zUMiNnbJ5LRzcc2D7LnmbSDGNSptRtDtMtcY=@lists.samba.org
+X-Gm-Message-State: AOJu0Ywdq4vvsEmjlI8WOmtLCpE6o3+xDZI5yi+nrQaCAqbTb3Ur4sLm
+ CBOmhqnUyAYUMxhSTc6LupoYSDBXQSrmbZTPqkopICip6tvEtRKVJuRcdLN9KpDUg/peep19uVL
+ Go8uKDGI7dbNrRdd3Hq6BiGOBv9DVr5s=
+X-Gm-Gg: ASbGncsbvBGBQ1TqcdIeNSQ3QI6MENODtsUrrtbtYrYOkRHfbQPm+j68Wh+GfgU7TjQ
+ YnkSSX0vJHicggDgGfpRpKfuukOSlO+N9OUJLCAnizeh34tnDQZ+rYzZy28608xyujJLPyGnwus
+ KesQ5iQ5b5tYVuEB/KwR2XZB8rBpUdqQgVoBC1TXRQ8nWDGTJseUeC6+AkUiKpLwIH8o8ViD9Q8
+ qNiFGZtbEs8zqX3PDYOH5Xmerj2SGFmWmBVMItZbgqO0DGSHgeztYWctEUSiQ==
+X-Google-Smtp-Source: AGHT+IFjMAkT1mpPySflC+bP9ZHS64EiNo5JBjZgoMeWA3kK3ZsMgAjLbou5MIdDwNmOYm9WYdTpVGUD2Bs1b4gT8I0=
+X-Received: by 2002:a05:620a:4686:b0:7e6:9644:c993 with SMTP id
+ af79cd13be357-7e9f331f874mr67836285a.15.1755553323896; Mon, 18 Aug 2025
+ 14:42:03 -0700 (PDT)
 MIME-Version: 1.0
-References: <05881546-b505-4c0e-8d95-ee1c24f01fc8@samba.org>
-In-Reply-To: <05881546-b505-4c0e-8d95-ee1c24f01fc8@samba.org>
-Date: Mon, 18 Aug 2025 16:35:54 -0500
-X-Gm-Features: Ac12FXzK3WWfQv2gjrTiA0fcG00Vz4ufIVuhRMAmLI28fp22yC7mEdm-rlI9xWE
-Message-ID: <CAH2r5mtkB_Tbb4Pzba_msMfPs-Tz3ff4udKBRiR1d=f0TTC-PQ@mail.gmail.com>
-Subject: Re: Common smbdirect debugging/loggin/tracing...
-To: Stefan Metzmacher <metze@samba.org>
+References: <aKL5dUyf7UWcQNvW@stanley.mountain>
+ <89a2023c-e383-4780-83e3-ba8f9e44c015@huaweicloud.com>
+In-Reply-To: <89a2023c-e383-4780-83e3-ba8f9e44c015@huaweicloud.com>
+Date: Mon, 18 Aug 2025 16:41:52 -0500
+X-Gm-Features: Ac12FXwxzyYRFXGH5ZrXXAIDEefWWgUFghEhiymRb0KWanoatFRoAiMK5AWyNkk
+Message-ID: <CAH2r5muVjS+Y_NFSWwYoisPGfynyTkmynjpQHi2_Kk6Z8AiG0w@mail.gmail.com>
+Subject: Re: [PATCH next] smb: client: Fix NULL vs ERR_PTR() returns in
+ cifs_get_tcon_super()
+To: Wang Zhaolong <wangzhaolong@huaweicloud.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
@@ -85,76 +87,92 @@ List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
 From: Steve French via samba-technical <samba-technical@lists.samba.org>
 Reply-To: Steve French <smfrench@gmail.com>
-Cc: Tom Talpey <tom@talpey.com>,
- "linux-cifs@vger.kernel.org" <linux-cifs@vger.kernel.org>,
- Samba Technical <samba-technical@lists.samba.org>,
- Namjae Jeon <linkinjeon@kernel.org>
+Cc: Tom Talpey <tom@talpey.com>, Shyam Prasad N <sprasad@microsoft.com>,
+ Paulo Alcantara <pc@manguebit.org>, linux-cifs@vger.kernel.org,
+ kernel-janitors@vger.kernel.org, samba-technical@lists.samba.org,
+ linux-kernel@vger.kernel.org, Steve French <sfrench@samba.org>,
+ Bharath SM <bharathsm@microsoft.com>, Dan Carpenter <dan.carpenter@linaro.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Mon, Aug 18, 2025 at 3:31=E2=80=AFPM Stefan Metzmacher <metze@samba.org>=
- wrote:
+Since Paulo pointed out a problem with v4 of this patch, an obvious
+question is Dan's patch "independent enough" to take or would it make
+the v5 of your patch harder.  Let me know when there is a v5 of the
+patch so we can do more testing and review
+
+On Mon, Aug 18, 2025 at 8:30=E2=80=AFAM Wang Zhaolong
+<wangzhaolong@huaweicloud.com> wrote:
 >
-> Hi,
 >
-> after the move to common smbdirect structures I'm wondering
-> what I have to keep related to the debug counters on the
-> client side, e.g.
 >
->          /* for debug purposes */
->          unsigned int count_get_receive_buffer;
->          unsigned int count_put_receive_buffer;
->          unsigned int count_reassembly_queue;
->          unsigned int count_enqueue_reassembly_queue;
->          unsigned int count_dequeue_reassembly_queue;
->          unsigned int count_send_empty;
+> > The cifs_get_tcon_super() function returns NULL on error but the caller
+> > expect it to return error pointers instead.  Change it to return error
+> > pointers.  Otherwise it results in a NULL pointer dereference.
+> >
+> > Fixes: 0938b093b1ae ("smb: client: Fix mount deadlock by avoiding super=
+ block iteration in DFS reconnect")
+> > Signed-off-by: Dan Carpenter <dan.carpenter@linaro.org>
 >
-> And the their use (and more) in cifs_debug_data_proc_show().
+> Hi Dan,
 >
-> I'd suggest to remove this stuff and later add some tracepoints
-> instead or if really needed some stuff under smbdirect_socket.statistics.
-
-I lean toward keeping the smbdirect debug info that is already shown
-in /proc/fs/cifs/DebugData,
-it doesn't have a performance penalty, and "if it was useful before"
-for debugging
-to display smbdirect related info for a mount, it is it is likely
-going to be useful in the future.
-I don't mind changing this in the future, after there is more
-information about what
-additional smbdirect info would be most useful to add to display for
-the client mounts.
-
-> Also do we need to keep the log_rdma() based message in the client
-> and the ksmbd_debug(RDMA) messages on the server as is?
-> I guess we want some basic logging for the connect/disconnect handling
-> and the rest should be tracepoints...
-
-I am not a big fan of old style (static) kernel debug messages but it
-is probably fine to keep
-the existing ones (unless code changes that would remove a few of them,
-that is fine), but typically the only ones that are 'required' are
-cases that are always on
-logged (for connection errors e.g. that the user needs the additional
-info in dmesg to understand).
-
-And yes, the majority of logging should be eBPF friendly dynamic
-tracepoints (Meetakshi may
-have some ideas on tooling that she can extend to make them easier to colle=
-ct)
-
-> Is something like logging module parameters and output
-> written in stone or can this be changed to be more useful
-> and in common between kernel client, kernel server and later
-> userspace?
-
-They can be changed (logging module parms) in this example, but I
-wouldn't be in a huge
-hurry to ditch it, since there are VERY likely things that are client
-specific logging
-for smbdirect that we would not want to to turn on for both client and serv=
-er.
-
+> Thank you for your patch and for taking the time to address this issue.
+>
+> I would like to mention that I have recently sent out the V4 version of
+> the patch series, which addresses the issues related to `cifs_get_tcon_su=
+per()`.
+> In the latest version, the issue of NULL pointer dereference has already
+> been resolved.
+>
+> https://lore.kernel.org/all/CAH2r5msLMNdqdo6EBuTvrQ0hwrqSRC-LSZuN2WpwV+Pk=
+DwsCOw@mail.gmail.com/
+>
+> I avoid null pointer dereferencing by performing a null pointer check on
+> the return value of cifs_get_dfs_tcon_super().
+>
+>
+> > ---
+> >   fs/smb/client/misc.c | 4 ++--
+> >   1 file changed, 2 insertions(+), 2 deletions(-)
+> >
+> > diff --git a/fs/smb/client/misc.c b/fs/smb/client/misc.c
+> > index 3b6920a52daa..d73c36862e97 100644
+> > --- a/fs/smb/client/misc.c
+> > +++ b/fs/smb/client/misc.c
+> > @@ -1116,7 +1116,7 @@ static struct super_block *cifs_get_tcon_super(st=
+ruct cifs_tcon *tcon)
+> >       struct cifs_sb_info *cifs_sb;
+> >
+> >       if (!tcon)
+> > -             return NULL;
+> > +             return ERR_PTR(-EINVAL);
+> >
+> >       spin_lock(&tcon->sb_list_lock);
+> >       list_for_each_entry(cifs_sb, &tcon->cifs_sb_list, tcon_sb_link) {
+> > @@ -1141,7 +1141,7 @@ static struct super_block *cifs_get_tcon_super(st=
+ruct cifs_tcon *tcon)
+> >       }
+> >       spin_unlock(&tcon->sb_list_lock);
+> >
+> > -     return NULL;
+> > +     return ERR_PTR(-ENOENT);
+> >   }
+> >
+> >   struct super_block *cifs_get_dfs_tcon_super(struct cifs_tcon *tcon)
+>
+> Additionally, I think it somewhat peculiar that in the current
+> implementation, cifs_get_tcon_super() returns -EINVAL.
+>
+> I would greatly appreciate it if you could review my latest patch series =
+to
+> confirm if it resolves the concerns. If there are any additional improvem=
+ents, I
+> would be happy to collaborate further to ensure the best possible solutio=
+n.
+>
+> Best regards,
+> Wang Zhaolong
+>
+>
 
 
 --=20
