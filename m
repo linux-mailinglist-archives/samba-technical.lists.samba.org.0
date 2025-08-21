@@ -2,43 +2,43 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id E9413B2F3CC
-	for <lists+samba-technical@lfdr.de>; Thu, 21 Aug 2025 11:25:34 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8DDAFB2F3E3
+	for <lists+samba-technical@lfdr.de>; Thu, 21 Aug 2025 11:28:16 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=gVg57MG7EfHADLIgfauckXcgeTFmxDFiDyqpHAzKoeg=; b=xpMUXjzHNN/gvYpGulR7zFSmJ4
-	9XnnIHkC9MdjmAqyDXa4bvWumHmJ6M9YpeW/xvmiROMXm6mBrxfmglcUJfBJcaCW6rCT1cW8UnUDG
-	qBv1RHg4XRHboM0b3Vn/Dg1KjDnd5vc+ykj+vJx/DG4JbvjYdF+BD2dJko93EndwQeUgAfakzVn/l
-	SL2YoehJbbmTgKW4PE7OPkeIQE2ucZl5DkvIQNerbG18kZ0e9xP8cbltpa+tv2+2o4jZs0W9Y4IFc
-	kdfwg4Y+atMQhq16itsoKdAIoJDvDiQAYhBC6r5p8gVH0RBTunyYnzNypYSBOUwQD1/7JpxmyyMXu
-	QoOJGdvw==;
-Received: from ip6-localhost ([::1]:59892 helo=hr1.samba.org) 
+	bh=gVg57MG7EfHADLIgfauckXcgeTFmxDFiDyqpHAzKoeg=; b=fisYgONv7eR5Mectah2DMmInTk
+	H8RSz/0n1hV6lc1EbAkeqh0pdxGcIgOwWtE0P4AIPpnU159NOf1KVFfD6oAiveU7VJmgPEozdb+gx
+	nDa6EHpYJagt+JAump2bgG1+607sxzo9rcpNu7RH4WDsD96HEH6ZAoLSZYmM9AqqQuiaqrsKgkGEA
+	/Vv7Etfu8n+6Ghvsi8lg3gWypi1xuPNgmOGocosRVXYpT9NMeLdcFnsx5AsR1VzwM5haXvtkkCmyD
+	OY3LgbUXI6Sc0pc2bCpI9lDJtoJ6C+wIJTbBAAaYMH0PvuVsFPi9c9xFiv2p5wLzL+Z9k4CFidAFy
+	oNb2Am3g==;
+Received: from ip6-localhost ([::1]:46836 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1up1XZ-0001Cs-61; Thu, 21 Aug 2025 09:25:01 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:44096) 
+	id 1up1ae-0001I0-9g; Thu, 21 Aug 2025 09:28:12 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:28668) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1up1XU-0001Cl-Qs
- for samba-technical@lists.samba.org; Thu, 21 Aug 2025 09:24:59 +0000
+ (Exim) id 1up1aZ-0001Ht-MR
+ for samba-technical@lists.samba.org; Thu, 21 Aug 2025 09:28:10 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Message-ID:Date:Cc:To:From;
- bh=gVg57MG7EfHADLIgfauckXcgeTFmxDFiDyqpHAzKoeg=; b=Rwv9t2ORaZgE3DmnEjXe2oOK7p
- Ldmqm7ennnTS3+t2YU568rmr/fGEj9pdPrRS8JPQk8zgPsWVIoFYtzAvQ3VQwAdccHHCdGVY+3nLK
- tjrp2hiSnFjxVKdvHa4I3tVfY3t/GnNFcAvGdT7jqCpgItrO7LmcOdt2Ue7WzY2clM2jm3O5iqmWx
- gJ97Kc+TKIkfKzX8OQD6eVVYkUdAT4uoXXnWGUg7vihr55Aru9EiVLflAhWj9GrIvAslBtzru26Wp
- oUBcoFJs2uxEg73Z/zRMcDwKBay8RQtzwOQmqqzjHtx7vtcGBLm3SSe7dOeksblpNeltMNbaUmW1M
- F+gcuazY3LGBiqDzO6Rzbp15ubUDkmV/BO1OrxJQcpstDYArCCF6X/JjPfR/MTeS+r44PHlHJJNRU
- lIN9XPfsq9sHlWSi2F2pQF+wywALt7uwDC17Fxxe8vHStHObc7CMqDFMNJX/koFUNxsPHbgUSeyon
- 9zBvDbPbBNT8DzRs6aYZQ/20;
+ bh=gVg57MG7EfHADLIgfauckXcgeTFmxDFiDyqpHAzKoeg=; b=rdvXOaHcax4CoqR3vRi5ziiBpq
+ KIdAiSJpebYFVt7r3l5tdDCNjz3PvRwyvRMA6eBCpLmT+XJRoh+DcZtrcNeTSFSqK8qnxQ5TPyRDb
+ Z8Li6X8ygfCnMrOIBtzVMoGw7TfG0AL1JK282TqIAU7HSAGD3BIIf3og62s7TTQEt8jabdqluuGPm
+ sm42x+FPYzCd1HGBEP1TbEMjCaOUPosRvDDtyIM+dz8GNGChp46/cmb+kKkN2PLkg+fHIIhLBn6VH
+ d1F2nl+g58zcbPpqmeUnplycZt8zOu+wWaFiw2l0nzMQ5jjdto+rX+ZoixhepxMqbFKvoWL20/NIF
+ a6KoqAelQ7XMpw5T5chAV2XaF9rDFDnqQ8wG3mp6ca0/5aMmOJL5H+xHf5yiRU+RPgDkTvedk7wwf
+ aP1UiWfS0W+mn+YnFCE1HaD+wuzivvrTaLKg4SvtEXDPrcn2BLlwTPAeM0ashQFUUfRTBePdLuHPO
+ /j1PzovVbtgbatjIBAyjVddA;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1up1XT-0002vW-2E; Thu, 21 Aug 2025 09:24:55 +0000
+ (Exim) id 1up1aY-0002z8-2S; Thu, 21 Aug 2025 09:28:06 +0000
 To: linux-cifs@vger.kernel.org,
 	samba-technical@lists.samba.org
-Subject: [PATCH 1/4] smb: server: fix IRD/ORD negotiation with the client
-Date: Thu, 21 Aug 2025 11:24:35 +0200
-Message-ID: <20250821092439.35478-1-metze@samba.org>
+Subject: [PATCH v2] smb: server: fix IRD/ORD negotiation with the client
+Date: Thu, 21 Aug 2025 11:27:51 +0200
+Message-ID: <20250821092751.35815-1-metze@samba.org>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
