@@ -2,44 +2,44 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id ED730B34D64
-	for <lists+samba-technical@lfdr.de>; Mon, 25 Aug 2025 23:03:26 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id AEFC8B34D67
+	for <lists+samba-technical@lfdr.de>; Mon, 25 Aug 2025 23:03:36 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=cR9tHGIE29IQFSOemmoLUrCck/+6lNzf8sYYuhklJoA=; b=LqhCgO7koinZRKkipSvSJIO8W9
-	emnnySslOWQ/6kJXx9rKVIQEEEQFrJgRYWM8013lv4qWIK97oHrFzOgcMYMQrwMyBLjhf6KMis58v
-	rSoU5lspWLOFNKV7iEseuYfoFfbToRnwN6mGehUBMI/l8H6Ay0t7ROgcftEzmKeX9ocTZOr28pduj
-	d7Ex47hoFgtEw1WH3a5EMES8OTOcm8cDCjn4HP/ChQ93Ag5BqQnPVgznN+Vh2sMBoWFJHBXpnsIr4
-	XA39ThggtL+BbbJ15hiHgdtI3vLMJJqLnQr2Vmi00qWTOJqVCZxDUn0uIHmGGpTZFUNsc4+AcOduS
-	XftH96yQ==;
-Received: from ip6-localhost ([::1]:26654 helo=hr1.samba.org) 
+	bh=hRxFCJPpGB81lvE+ezUgzu2WpU3h0/B5ZXLey/HLKog=; b=RYQdc0nTpDR/eUWJkqQ0JeImuo
+	JgmDmoaz7yqT+nLdSRcRIcf8lEYCpUlSKpZER28rKUJb6o+gpupYqJa+Dv0MoXNbJWkbIDLLs8vUJ
+	vICx8GIXcvMye+L/Bw9hQ4zRlDG/uw00Qukc0KdOiDUYrjC4uHxEG68SnmtIB+hEIPNmFRstXZOON
+	4hvNEdT54ir6vX4ROdECNSmp0ZR4DNh3YvBNmxk89ehpQKtHYL+JFIw+pKmJppztINIkFgykvNbmT
+	Kfuuu3UUaOFDnhwkeh9OBZoTOwg+m6CU+67PC0/Y/sh8GIzVXf1yfZxDmtVV6LwfBoBwkjMhqiMvv
+	Od5ntUcA==;
+Received: from ip6-localhost ([::1]:48924 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1uqeLW-000TUc-Cp; Mon, 25 Aug 2025 21:03:19 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:16964) 
+	id 1uqeLg-000Tcu-DX; Mon, 25 Aug 2025 21:03:28 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:63492) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uqeHF-000Rnw-RW
- for samba-technical@lists.samba.org; Mon, 25 Aug 2025 20:59:00 +0000
+ (Exim) id 1uqeHU-000Ru8-Kx
+ for samba-technical@lists.samba.org; Mon, 25 Aug 2025 20:59:19 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Message-ID:Date:Cc:To:From;
- bh=cR9tHGIE29IQFSOemmoLUrCck/+6lNzf8sYYuhklJoA=; b=lXA6hKLG5Y4knVME1+BBuY8Gx7
- 9Se3jztSBgdQk3C2mwlJ1RINGUHpDw2hgaHtJClixTG1B1ePpzfQxfmPjdQ3PyO8nyVzjef/uosME
- WPYvCQrmEjH8DIw4nFCyp799v3NrXmPFuUcNSilU+6563o8HKG2Uw77MB8FQbD52mc/KFemZM68IA
- o7D7uBoJ93VXfsnaKXPfsas2rHcSSkirGbfVe7HA1VJdLwXsIkuz9GU6lA+H14DX5COK4hoMtBFYR
- wJU07XfQD/bOQnkrEPyPms2O1tkbkfXtMuMqJWkMOhxH3c5baAoPqPLtGy31SqMbQ/ThESrr2CKQR
- 4oX2pUFGF7Gs2nt8kdvZMqgrEAgdvId5OsiHn5otJouXi/ej8yZOBIgIvfGqowCL7CXbrQfH/VMrG
- 4wgGMkS7QglTHJjqSNijOQaKpl6FElIm/JsZmXKyyzYL0QJYPCIFsMGxaNHqWZ3uLXoly0afRoVGP
- 4hGlpvjMb5axq2sAGRB70DHA;
+ bh=hRxFCJPpGB81lvE+ezUgzu2WpU3h0/B5ZXLey/HLKog=; b=pFzDsiP5j8Y7FBvlHR0iXsPYnp
+ NBSqY6fy6BWvAC25y5FlfLjgb9+5Uhk4ASGfSZO8R5dG56knHwUsNV2LQ2oQNUjqSWWUyBJUkX7hI
+ NJm+XcHel6kjM+Cw/peQYYOMo3xY+ylfLuEQP+3sFsjH9bHC0UMlKkFboHnJB9gBY2jg6KMR28Iti
+ tzusCfIc+aWQ2nrh3tor4zfoZrpmaCeBhkNuAYDUYAwVWXHjLP4H0YZGlQ8DIVcxqCNwlDHbz4rhw
+ d8kzWQArQxFmFgN6N0pIr2gxkt5SYg7mVUp92UPXzdYkjKpeGWccuMW6b+XcgSszEOdDY3RCR6Nb8
+ /EK4gXSQImdfkPqmQqSL8t/5h+25EkYjtqFv0RODsYHvwGsDQAlsZD1dtqZ/50tL/50MPP7RNeX4y
+ NJH3O1oMGpSR9aS2+BCWTOgTG/z4ZBtcbEHyYav64mhwZzYQeUCWBcoZ7eSHcVbgNwx1wABOhmT5t
+ f8U/i1Xl28JlQQ4tUJmzqh6V;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uqeHD-000mdG-1j; Mon, 25 Aug 2025 20:58:51 +0000
+ (Exim) id 1uqeHQ-000mfT-0g; Mon, 25 Aug 2025 20:59:05 +0000
 To: linux-cifs@vger.kernel.org,
 	samba-technical@lists.samba.org
-Subject: [PATCH v4 103/142] smb: server: take the recv_credit_target from the
- negotiate req and always limit the range
-Date: Mon, 25 Aug 2025 22:41:04 +0200
-Message-ID: <16aa56f3e75fe239cfbecb22a522acbf00d50be0.1756139607.git.metze@samba.org>
+Subject: [PATCH v4 104/142] smb: server: manage recv credits by counting
+ posted recv_io and granted credits
+Date: Mon, 25 Aug 2025 22:41:05 +0200
+Message-ID: <78f83ad8cdca8588cbb8afdac38679671c278a50.1756139607.git.metze@samba.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1756139607.git.metze@samba.org>
 References: <cover.1756139607.git.metze@samba.org>
@@ -65,11 +65,15 @@ Cc: metze@samba.org, Steve French <smfrench@gmail.com>,
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-The clients sends the initial recv_credit_target in the negotiate req,
-so we should use that.
+(At least for me) the logic maintaining the count of posted
+recv_io messages and the count of granted credits is much
+easier to understand.
 
-We also limit the range between 1 and our local defined
-sp->recv_credit_max. This will simplify further logic changes.
+From there we can easily calculate the number of new_credits we'll
+grant to the peer in outgoing send_io messages.
+
+This will simplify the move to common logic that can be
+shared between client and server in the following patches.
 
 Cc: Namjae Jeon <linkinjeon@kernel.org>
 Cc: Steve French <smfrench@gmail.com>
@@ -78,73 +82,125 @@ Cc: linux-cifs@vger.kernel.org
 Cc: samba-technical@lists.samba.org
 Signed-off-by: Stefan Metzmacher <metze@samba.org>
 ---
- fs/smb/server/transport_rdma.c | 15 ++++++++++++---
- 1 file changed, 12 insertions(+), 3 deletions(-)
+ fs/smb/server/transport_rdma.c | 53 ++++++++++++++--------------------
+ 1 file changed, 21 insertions(+), 32 deletions(-)
 
 diff --git a/fs/smb/server/transport_rdma.c b/fs/smb/server/transport_rdma.c
-index 3a0244943dc7..6046ebdc1317 100644
+index 6046ebdc1317..2bbf18e0906d 100644
 --- a/fs/smb/server/transport_rdma.c
 +++ b/fs/smb/server/transport_rdma.c
-@@ -94,7 +94,7 @@ struct smb_direct_transport {
+@@ -92,13 +92,10 @@ struct smb_direct_transport {
  
- 	spinlock_t		receive_credit_lock;
- 	int			recv_credits;
--	int			recv_credit_target;
-+	u16			recv_credit_target;
+ 	struct smbdirect_socket socket;
  
- 	spinlock_t		lock_new_recv_credits;
- 	int			new_recv_credits;
-@@ -472,9 +472,11 @@ static void recv_done(struct ib_cq *cq, struct ib_wc *wc)
- 	struct smbdirect_recv_io *recvmsg;
- 	struct smb_direct_transport *t;
- 	struct smbdirect_socket *sc;
-+	struct smbdirect_socket_parameters *sp;
+-	spinlock_t		receive_credit_lock;
+-	int			recv_credits;
++	atomic_t		recv_credits;
+ 	u16			recv_credit_target;
  
- 	recvmsg = container_of(wc->wr_cqe, struct smbdirect_recv_io, cqe);
- 	sc = recvmsg->socket;
-+	sp = &sc->parameters;
- 	t = container_of(sc, struct smb_direct_transport, socket);
+-	spinlock_t		lock_new_recv_credits;
+-	int			new_recv_credits;
+-
++	atomic_t		recv_posted;
+ 	struct work_struct	post_recv_credits_work;
+ 	struct work_struct	send_immediate_work;
  
- 	if (wc->status != IB_WC_SUCCESS || wc->opcode != IB_WC_RECV) {
-@@ -512,7 +514,7 @@ static void recv_done(struct ib_cq *cq, struct ib_wc *wc)
- 		struct smbdirect_data_transfer *data_transfer =
- 			(struct smbdirect_data_transfer *)recvmsg->packet;
- 		unsigned int data_length;
--		int old_recv_credit_target;
-+		u16 old_recv_credit_target;
+@@ -308,9 +305,8 @@ static struct smb_direct_transport *alloc_transport(struct rdma_cm_id *cm_id)
  
- 		if (wc->byte_len <
- 		    offsetof(struct smbdirect_data_transfer, padding)) {
-@@ -546,6 +548,10 @@ static void recv_done(struct ib_cq *cq, struct ib_wc *wc)
+ 	sc->ib.dev = sc->rdma.cm_id->device;
+ 
+-	spin_lock_init(&t->receive_credit_lock);
+-
+-	spin_lock_init(&t->lock_new_recv_credits);
++	atomic_set(&t->recv_posted, 0);
++	atomic_set(&t->recv_credits, 0);
+ 
+ 	INIT_WORK(&t->post_recv_credits_work,
+ 		  smb_direct_post_recv_credits);
+@@ -541,9 +537,8 @@ static void recv_done(struct ib_cq *cq, struct ib_wc *wc)
+ 				sc->recv_io.reassembly.full_packet_received = true;
+ 		}
+ 
+-		spin_lock(&t->receive_credit_lock);
+-		t->recv_credits -= 1;
+-		spin_unlock(&t->receive_credit_lock);
++		atomic_dec(&t->recv_posted);
++		atomic_dec(&t->recv_credits);
+ 
  		old_recv_credit_target = t->recv_credit_target;
  		t->recv_credit_target =
- 				le16_to_cpu(data_transfer->credits_requested);
-+		t->recv_credit_target =
-+			min_t(u16, t->recv_credit_target, sp->recv_credit_max);
-+		t->recv_credit_target =
-+			max_t(u16, t->recv_credit_target, 1);
- 		atomic_add(le16_to_cpu(data_transfer->credits_granted),
- 			   &sc->send_io.credits.count);
+@@ -747,14 +742,10 @@ static void smb_direct_post_recv_credits(struct work_struct *work)
+ 	struct smb_direct_transport *t = container_of(work,
+ 		struct smb_direct_transport, post_recv_credits_work);
+ 	struct smbdirect_recv_io *recvmsg;
+-	int receive_credits, credits = 0;
++	int credits = 0;
+ 	int ret;
  
-@@ -1753,7 +1759,7 @@ static int smb_direct_init_params(struct smb_direct_transport *t,
- 	t->recv_credits = 0;
+-	spin_lock(&t->receive_credit_lock);
+-	receive_credits = t->recv_credits;
+-	spin_unlock(&t->receive_credit_lock);
+-
+-	if (receive_credits < t->recv_credit_target) {
++	if (atomic_read(&t->recv_credits) < t->recv_credit_target) {
+ 		while (true) {
+ 			recvmsg = get_free_recvmsg(t);
+ 			if (!recvmsg)
+@@ -769,17 +760,11 @@ static void smb_direct_post_recv_credits(struct work_struct *work)
+ 				break;
+ 			}
+ 			credits++;
++
++			atomic_inc(&t->recv_posted);
+ 		}
+ 	}
  
+-	spin_lock(&t->receive_credit_lock);
+-	t->recv_credits += credits;
+-	spin_unlock(&t->receive_credit_lock);
+-
+-	spin_lock(&t->lock_new_recv_credits);
+-	t->new_recv_credits += credits;
+-	spin_unlock(&t->lock_new_recv_credits);
+-
+ 	if (credits)
+ 		queue_work(smb_direct_wq, &t->send_immediate_work);
+ }
+@@ -826,11 +811,18 @@ static int manage_credits_prior_sending(struct smb_direct_transport *t)
+ {
+ 	int new_credits;
+ 
+-	spin_lock(&t->lock_new_recv_credits);
+-	new_credits = t->new_recv_credits;
+-	t->new_recv_credits = 0;
+-	spin_unlock(&t->lock_new_recv_credits);
++	if (atomic_read(&t->recv_credits) >= t->recv_credit_target)
++		return 0;
++
++	new_credits = atomic_read(&t->recv_posted);
++	if (new_credits == 0)
++		return 0;
+ 
++	new_credits -= atomic_read(&t->recv_credits);
++	if (new_credits <= 0)
++		return 0;
++
++	atomic_add(new_credits, &t->recv_credits);
+ 	return new_credits;
+ }
+ 
+@@ -1756,11 +1748,8 @@ static int smb_direct_init_params(struct smb_direct_transport *t,
+ 		return -EINVAL;
+ 	}
+ 
+-	t->recv_credits = 0;
+-
  	sp->recv_credit_max = smb_direct_receive_credit_max;
--	t->recv_credit_target = 10;
-+	t->recv_credit_target = 1;
- 	t->new_recv_credits = 0;
+ 	t->recv_credit_target = 1;
+-	t->new_recv_credits = 0;
  
  	sp->send_credit_target = smb_direct_send_credit_target;
-@@ -1979,6 +1985,9 @@ static int smb_direct_prepare(struct ksmbd_transport *t)
- 		le32_to_cpu(req->max_fragmented_size);
- 	sp->max_fragmented_recv_size =
- 		(sp->recv_credit_max * sp->max_recv_size) / 2;
-+	st->recv_credit_target = le16_to_cpu(req->credits_requested);
-+	st->recv_credit_target = min_t(u16, st->recv_credit_target, sp->recv_credit_max);
-+	st->recv_credit_target = max_t(u16, st->recv_credit_target, 1);
- 
- 	ret = smb_direct_send_negotiate_response(st, ret);
- out:
+ 	atomic_set(&sc->rw_io.credits.count, sc->rw_io.credits.max);
 -- 
 2.43.0
 
