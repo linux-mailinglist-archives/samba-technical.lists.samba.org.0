@@ -2,44 +2,44 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 29FC6B34D08
-	for <lists+samba-technical@lfdr.de>; Mon, 25 Aug 2025 22:57:37 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 63A28B34D0B
+	for <lists+samba-technical@lfdr.de>; Mon, 25 Aug 2025 22:57:55 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=Qye+0QmLAvFWq1VgYHM/0X2DGFzZNINKYU6v7i08nwQ=; b=bcvMCWTvc+VZSKy2lGBlOFKaIi
-	fpsyjSemwPvbK/hDRFCvY7EA2UgFnvhftDBK8swN0TtXhiOZOlvbgdbxDkEs27JFucunovbqDRxQ9
-	eYDYMXZy2E9V/HqvzmPZaMAySKNGX3jzCB4e1dRCh8W1VpLyTwOtOdKOl6wKRVcuFi/IGwwN9eIsm
-	n4REMkLCqJ2VZY8UOLDHcy2G9rAxURelfkCHkqt1SRKXlZoQtJCJI0/MbUOX8LpoQQt6/VQ44q//q
-	Qv1cgAl8pm7wbFlH26MSqzj5ZNUsUp7TcxV58azLaE2tdufe9IQTiVopancLAFaEwBOAENW4Xb1e4
-	N6mji1AQ==;
-Received: from ip6-localhost ([::1]:46386 helo=hr1.samba.org) 
+	bh=x8OsJE/W1lEUAFXssSWU3xsHKu/axgP/3qd1XffcU+Y=; b=abxFnvmerQupeSOS66x7iuu04q
+	n1a6bRzv7weYHvHNa5PkrQrkOl8mM4y09dqEpxnEBwQFCqXg3O4HjtG5XxLksS5zYNZK1/AzZL0Ca
+	Qx9QQcLC0NMK/W4Z/FPvqDo0aEjIXTLd+eQG98OCY/LBPsGMfR1J6y8EiAzGX9N/2NBpSP0BDu3Rr
+	ARMNToj/0Lb++YjXFHrUxKEXyu3yciAmIDUUX1xs5L8GmLIY3K0iYdfBfmga0AdYvtS9Adb3V6eqw
+	LhhM44kwyQiSF2Ji6DZxs4qFYkEndQaezBO6kD9UX8rqKa8IuVdU8X6PpCWGWe1HjbUofkxNsOXGN
+	GuZ6WJxQ==;
+Received: from ip6-localhost ([::1]:49158 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1uqeFs-000RAX-Mo; Mon, 25 Aug 2025 20:57:29 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:49608) 
+	id 1uqeGA-000RFY-FT; Mon, 25 Aug 2025 20:57:46 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:47834) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uqeCg-000Pxr-2Z
- for samba-technical@lists.samba.org; Mon, 25 Aug 2025 20:54:15 +0000
+ (Exim) id 1uqeCp-000Q1y-Gi
+ for samba-technical@lists.samba.org; Mon, 25 Aug 2025 20:54:31 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Message-ID:Date:Cc:To:From;
- bh=Qye+0QmLAvFWq1VgYHM/0X2DGFzZNINKYU6v7i08nwQ=; b=BHGio5iPbrGwtIK6CMZlxdw+Ea
- nTfCCtS8b6yKp2KNsBGEeZ+u/bQjygf+Qs2C5SsF4UeDscV5SbdLujGJ8o4oI2o1iyh1LJ0N7orI0
- QJrBoshNaLzO0x+L5SEadC8ZpB+lSq2i1P9Ydxf8YVtSngB1eCAb47Fz6derzlKmU0Mmm24zkXqn3
- 2fJvHo55Rv8ZqNC5H0qfBFlVpYHOvXO8purqc+/rwofI4x+aPf9Hf9Xp6TuXPegucYvRtiVjE7WkO
- ipAZcWiqQqMEYXaz1rkc15WkbtCR0Vh6oZxMl/W3Ct1peaUBnX1dzrDZA5mjxBLSWb+bzQND8Kjfj
- /ZU1EKH2ox+ZLj+2l7+YQLTYqhOpjRZ6fvQmgP+JZOND5gpuKHXaTakxo0p/Etot40DX0PIaQ8Cqq
- eoiVvxRCt+8c45dewJI/5TMqcq9fzeSdwglgIZ4ZDqXkGrsLKLWkeneOyiRELAlwLAapYYwGf1AVe
- EZl9UwxRFukAgm0cDhCk5HoS;
+ bh=x8OsJE/W1lEUAFXssSWU3xsHKu/axgP/3qd1XffcU+Y=; b=enfKGYRpV/pQcwVjZbSjXOWdDx
+ CyaDL8Cb8XbwN7yw9gRNHZXjisatjSH4jEqPlKmMJLL2NQsEluYnBWqa19lXVNxNx+yqeQDtMdsaQ
+ GwZBBere4qEi7z7bQbD2+zqKtCY62c8vb+UQofa7VBcTvNJwK2TYu9UsoRlilgdPP0wUOdF5GqrEl
+ 4FZHeCYpr2+Dyl4RUQr+yGPDCgSFbupDfChd/YZ94x3MaZdr+U1zXOH4/GngMwe4sT5ZKpsYAJmfh
+ iqbFLsvgy0KS+e/6yc2XpmPqbmrIqZps6ic9tFOxWxVvq5OpQqPytrUBktcjWziJUlqgGP0bjEqZi
+ W00pRjXEYMCKG+Lz4XO8EKGIIb5Z0IYIuKFKMexe1bs45yONkWEqYKjliZPd40YIpdgqpIwFSrYw7
+ 0g2xczG/vy4KwF1oMOMRhg42j1X7j9tDii7F2Qvyp246obq2a4HXdvwwlAAav3tYNhLrGglzBygPY
+ U3rJ8qSYQiGhbMADDprS3emE;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uqeCd-000lhF-0t; Mon, 25 Aug 2025 20:54:07 +0000
+ (Exim) id 1uqeCm-000liw-24; Mon, 25 Aug 2025 20:54:16 +0000
 To: linux-cifs@vger.kernel.org,
 	samba-technical@lists.samba.org
-Subject: [PATCH v4 074/142] smb: client: pass struct smbdirect_socket to
- get_mr()
-Date: Mon, 25 Aug 2025 22:40:35 +0200
-Message-ID: <a681d33b42355a4246fe60d0b2d809e91762b914.1756139607.git.metze@samba.org>
+Subject: [PATCH v4 075/142] smb: client: remove unused struct smbdirect_socket
+ argument of smbd_iter_to_mr()
+Date: Mon, 25 Aug 2025 22:40:36 +0200
+Message-ID: <9cfd603f478d090bb4d2099e34d754917e0aca5a.1756139607.git.metze@samba.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1756139607.git.metze@samba.org>
 References: <cover.1756139607.git.metze@samba.org>
@@ -79,29 +79,28 @@ Signed-off-by: Stefan Metzmacher <metze@samba.org>
  1 file changed, 2 insertions(+), 3 deletions(-)
 
 diff --git a/fs/smb/client/smbdirect.c b/fs/smb/client/smbdirect.c
-index 04f86fde11fe..8033be07bc77 100644
+index 8033be07bc77..d3cd89bd2cc7 100644
 --- a/fs/smb/client/smbdirect.c
 +++ b/fs/smb/client/smbdirect.c
-@@ -2281,9 +2281,8 @@ static int allocate_mr_list(struct smbdirect_socket *sc)
-  * issuing I/O trying to get MR at the same time, mr_list_lock is used to
-  * protect this situation.
+@@ -2321,8 +2321,7 @@ static struct smbdirect_mr_io *get_mr(struct smbdirect_socket *sc)
+ /*
+  * Transcribe the pages from an iterator into an MR scatterlist.
   */
--static struct smbdirect_mr_io *get_mr(struct smbd_connection *info)
-+static struct smbdirect_mr_io *get_mr(struct smbdirect_socket *sc)
+-static int smbd_iter_to_mr(struct smbd_connection *info,
+-			   struct iov_iter *iter,
++static int smbd_iter_to_mr(struct iov_iter *iter,
+ 			   struct sg_table *sgt,
+ 			   unsigned int max_sg)
  {
--	struct smbdirect_socket *sc = &info->socket;
- 	struct smbdirect_mr_io *ret;
- 	int rc;
- again:
-@@ -2364,7 +2363,7 @@ struct smbdirect_mr_io *smbd_register_mr(struct smbd_connection *info,
- 		return NULL;
- 	}
+@@ -2377,7 +2376,7 @@ struct smbdirect_mr_io *smbd_register_mr(struct smbd_connection *info,
  
--	smbdirect_mr = get_mr(info);
-+	smbdirect_mr = get_mr(sc);
- 	if (!smbdirect_mr) {
- 		log_rdma_mr(ERR, "get_mr returning NULL\n");
- 		return NULL;
+ 	log_rdma_mr(INFO, "num_pages=0x%x count=0x%zx depth=%u\n",
+ 		    num_pages, iov_iter_count(iter), sp->max_frmr_depth);
+-	smbd_iter_to_mr(info, iter, &smbdirect_mr->sgt, sp->max_frmr_depth);
++	smbd_iter_to_mr(iter, &smbdirect_mr->sgt, sp->max_frmr_depth);
+ 
+ 	rc = ib_dma_map_sg(sc->ib.dev, smbdirect_mr->sgt.sgl,
+ 			   smbdirect_mr->sgt.nents, dir);
 -- 
 2.43.0
 
