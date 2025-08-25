@@ -2,44 +2,43 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8C9D9B34CC7
-	for <lists+samba-technical@lfdr.de>; Mon, 25 Aug 2025 22:52:29 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E7C15B34CCA
+	for <lists+samba-technical@lfdr.de>; Mon, 25 Aug 2025 22:52:46 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=+BkAtarVbo/Pg7POrei8KmWlwGi/T9mvQ78+nC2JiIw=; b=SXxuLlAKzxL8GBD6v6sMdVfLER
-	AvM0riU1OCAicu5mAXYmPINGaE9TnPXMvL+doL0HpXsmPrFPWM9ZFFJ12I64wNmTNRZfbLsQFLUF1
-	rQ6xV/lbZ8+4emMwGeg95hxaH+bUHz8Yzt0hNfCKKezRxdrqBsIfFvnhkC/cfqVBqT6/3bhusUYZ0
-	o4s4MVoKPUJmUs9/md17aSRa9gr4iq1K1xjzBohGZFv4BMSSmu6BJ2d8ZfDaUBWbc7HOfqNfkKQa9
-	SWlqaFg1ZAs8PDN7wY4MgHCW1fl46qLs8YnbUD0h5GCy4cmE6KEiRrWjs9nJfOJL54GfwJllIYCjG
-	yTDO/QEQ==;
-Received: from ip6-localhost ([::1]:45810 helo=hr1.samba.org) 
+	bh=LinTH5BttFwCFem9G0PzrmJZSv58dqkniZCX+50n7UM=; b=YpMbj17aM9qXqkxOVtb2LObw6j
+	nnCrjj1z5doGgtdpIqVtFLqUMRsfUtqoKyV2z2G71SQrkiOut8HzWEiL9TEiNainQ54unrNlWpRF3
+	guNgLGNlIHpuPjU3TQoSrFneu2FoZtF6cNqZID7g/GDwLdTydeVCiCWqLQX6AHyPqus/NGbedNRVh
+	nnwhksGCiK2Icp1nUaEEZ6we7diCXwq42/KKV+ODtojI5nRuRtXoOjeaTUeg260JNunfp1E4FZ1HL
+	HXlkyX2u90B6St1ajGU1fmCwTNgKQgMo6m6A0xZAa5P/qIx4jxRvFWglQ9GkGmwIDqQ1upNfIPUlD
+	5Wj7NibA==;
+Received: from ip6-localhost ([::1]:62900 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1uqeAs-000P8e-NP; Mon, 25 Aug 2025 20:52:20 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:62466) 
+	id 1uqeB7-000PCi-GZ; Mon, 25 Aug 2025 20:52:34 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:62370) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uqe8Y-000OGG-Eb
- for samba-technical@lists.samba.org; Mon, 25 Aug 2025 20:50:28 +0000
+ (Exim) id 1uqe8l-000OKk-E6
+ for samba-technical@lists.samba.org; Mon, 25 Aug 2025 20:50:33 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Message-ID:Date:Cc:To:From;
- bh=+BkAtarVbo/Pg7POrei8KmWlwGi/T9mvQ78+nC2JiIw=; b=MunEwPXDt3bJVpMVvxHOUw4CQi
- iTvr57SMs6VyWfD7/03WOaSJv5t1/JlKVPvJd7gH3wSQx5U0SL9tgvRHQ/fX+jTc7CIWarTrmJ1Fp
- C59UopBg9MAJe6hylTS0hQYVBcBGYtrJmjvl0J68QPMPv55aSSNfjsNDcylwErSSOKo/P90tC2dVd
- TaOIm3l+Pzl0TRGfXrE8tSVpv2wGf2HL7KG/7lmL16SjVBZj+TQqLo7CUvuwlPvhlaPgKWwW56NRd
- MFE14gwrzfJupcbVvOKWYpDgF8ItpEwGmhOOHa3CKwnSM2/bEEd/N+6FR9KpHGFtHNpdMzW5gXlsW
- qnhO0Nhq34B+p3qK5knX4D1WbsjheV3BoDf/ZBDwfNjottOaIWR991ejLSA2yh7U42cxpK3jzRNDD
- /5EGe87J8eTmjG0tZAHhbog/jEzxTbPnVfuhkLqc+uSn/MS8Uq/gjdPnDJlE+vKX1PHTLuHys0xzd
- 5DS/nAcIrBAAyFbkjihS4CV4;
+ bh=LinTH5BttFwCFem9G0PzrmJZSv58dqkniZCX+50n7UM=; b=OwjJ/vleLiCd37CKljToReE3fT
+ 6NuY3Rqe0j3aZcQ5npGnPGBlHKBY/vTo+gXYaKQnVgr+yw2oKMCYEfgtidIMbnMcqX+PHTdyQr1Pa
+ drmoJ4iwMhzA9SLmpUpn9kET5ncfgybqZ4WQWfleGcZHMEHJhCVrPqId0ekD5Gvgq/It2op/i7xPT
+ sQOFWOo3MxpWu2AR4QA4dN6KRf1w6FDu94F8mc5Ygsvut4UTVsbCyWubfgCoyPI/hwxraGxmQ5FnL
+ W+2vfQUrmxbXGl5HQXeeeQqPqgRGEg7kfE0rSmbPOpqWVBsN8FKuwrasrjgW3N3cDTya0H506Z1ue
+ iTMxl3QJ4EpdHQV1wbQ/Apkvk54HzLFteMGlZjIVuqwx7ASSBH7wdNbhWKnWUMSZgyO9ljUYzmoSe
+ TOfjYJS7TIoioRY2NhtqJVZxUF3nYx4QCjESf7c5tbyS8FghokJwRXR/kbUz8vXFkSNOBq37jyNeX
+ Z/qpT/vm07o2r3ql+El9yugd;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uqe8V-000kpe-39; Mon, 25 Aug 2025 20:49:52 +0000
+ (Exim) id 1uqe8h-000kss-0r; Mon, 25 Aug 2025 20:50:03 +0000
 To: linux-cifs@vger.kernel.org,
 	samba-technical@lists.samba.org
-Subject: [PATCH v4 049/142] smb: client: move rdma_readwrite_threshold from
- smbd_connection to TCP_Server_Info
-Date: Mon, 25 Aug 2025 22:40:10 +0200
-Message-ID: <1e537c128aa175137fd2cb69bd11f4eef0745f6a.1756139607.git.metze@samba.org>
+Subject: [PATCH v4 050/142] smb: client: make use of smbdirect_socket.workqueue
+Date: Mon, 25 Aug 2025 22:40:11 +0200
+Message-ID: <bb93b3bb3be8a5fd8e986f235bc5ffdfbabda6c3.1756139607.git.metze@samba.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1756139607.git.metze@samba.org>
 References: <cover.1756139607.git.metze@samba.org>
@@ -65,9 +64,7 @@ Cc: metze@samba.org, Steve French <smfrench@gmail.com>,
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This belongs to the SMB layer not to the transport layer, it
-just uses the negotiated transport parameters to adjust the
-value if needed.
+This will simplify the move to common code...
 
 Cc: Steve French <smfrench@gmail.com>
 Cc: Tom Talpey <tom@talpey.com>
@@ -76,115 +73,159 @@ Cc: linux-cifs@vger.kernel.org
 Cc: samba-technical@lists.samba.org
 Signed-off-by: Stefan Metzmacher <metze@samba.org>
 ---
- fs/smb/client/cifs_debug.c |  2 +-
- fs/smb/client/cifsglob.h   |  7 +++++++
- fs/smb/client/smb2pdu.c    |  2 +-
- fs/smb/client/smbdirect.c  | 15 +++++++++++----
- fs/smb/client/smbdirect.h  |  7 -------
- 5 files changed, 20 insertions(+), 13 deletions(-)
+ fs/smb/client/smbdirect.c | 32 ++++++++++++++++----------------
+ fs/smb/client/smbdirect.h |  2 --
+ 2 files changed, 16 insertions(+), 18 deletions(-)
 
-diff --git a/fs/smb/client/cifs_debug.c b/fs/smb/client/cifs_debug.c
-index bb6bb1e3b723..eca7bd0df7d3 100644
---- a/fs/smb/client/cifs_debug.c
-+++ b/fs/smb/client/cifs_debug.c
-@@ -459,7 +459,7 @@ static int cifs_debug_data_proc_show(struct seq_file *m, void *v)
- 			"max_readwrite_size: %x rdma_readwrite_threshold: %x",
- 			sp->keepalive_interval_msec * 1000,
- 			sp->max_read_write_size,
--			server->smbd_conn->rdma_readwrite_threshold);
-+			server->rdma_readwrite_threshold);
- 		seq_printf(m, "\nDebug count_get_receive_buffer: %llx "
- 			"count_put_receive_buffer: %llx count_send_empty: %llx",
- 			sc->statistics.get_receive_buffer,
-diff --git a/fs/smb/client/cifsglob.h b/fs/smb/client/cifsglob.h
-index 1e64a4fb6af0..f87a1ca33592 100644
---- a/fs/smb/client/cifsglob.h
-+++ b/fs/smb/client/cifsglob.h
-@@ -814,6 +814,13 @@ struct TCP_Server_Info {
- 	unsigned int	max_read;
- 	unsigned int	max_write;
- 	unsigned int	min_offload;
-+	/*
-+	 * If payload is less than or equal to the threshold,
-+	 * use RDMA send/recv to send upper layer I/O.
-+	 * If payload is more than the threshold,
-+	 * use RDMA read/write through memory registration for I/O.
-+	 */
-+	unsigned int	rdma_readwrite_threshold;
- 	unsigned int	retrans;
- 	struct {
- 		bool requested; /* "compress" mount option set*/
-diff --git a/fs/smb/client/smb2pdu.c b/fs/smb/client/smb2pdu.c
-index 2df93a75e3b8..0dedea47bf96 100644
---- a/fs/smb/client/smb2pdu.c
-+++ b/fs/smb/client/smb2pdu.c
-@@ -4411,7 +4411,7 @@ static inline bool smb3_use_rdma_offload(struct cifs_io_parms *io_parms)
- 		return false;
- 
- 	/* offload also has its overhead, so only do it if desired */
--	if (io_parms->length < server->smbd_conn->rdma_readwrite_threshold)
-+	if (io_parms->length < server->rdma_readwrite_threshold)
- 		return false;
- 
- 	return true;
 diff --git a/fs/smb/client/smbdirect.c b/fs/smb/client/smbdirect.c
-index 220ebd00a9d7..0eb46b01da32 100644
+index 0eb46b01da32..7a1ae4704ab0 100644
 --- a/fs/smb/client/smbdirect.c
 +++ b/fs/smb/client/smbdirect.c
-@@ -489,10 +489,6 @@ static bool process_negotiation_response(
- 	}
- 	sp->max_fragmented_send_size =
- 		le32_to_cpu(packet->max_fragmented_size);
--	info->rdma_readwrite_threshold =
--		rdma_readwrite_threshold > sp->max_fragmented_send_size ?
--		sp->max_fragmented_send_size :
--		rdma_readwrite_threshold;
- 
- 
- 	sp->max_read_write_size = min_t(u32,
-@@ -1898,6 +1894,7 @@ struct smbd_connection *smbd_get_connection(
- 	struct TCP_Server_Info *server, struct sockaddr *dstaddr)
+@@ -213,7 +213,7 @@ static void smbd_disconnect_rdma_connection(struct smbd_connection *info)
  {
- 	struct smbd_connection *ret;
-+	const struct smbdirect_socket_parameters *sp;
- 	int port = SMBD_PORT;
+ 	struct smbdirect_socket *sc = &info->socket;
  
- try_again:
-@@ -1908,6 +1905,16 @@ struct smbd_connection *smbd_get_connection(
- 		port = SMB_PORT;
- 		goto try_again;
- 	}
-+	if (!ret)
-+		return NULL;
-+
-+	sp = &ret->socket.parameters;
-+
-+	server->rdma_readwrite_threshold =
-+		rdma_readwrite_threshold > sp->max_fragmented_send_size ?
-+		sp->max_fragmented_send_size :
-+		rdma_readwrite_threshold;
-+
- 	return ret;
+-	queue_work(info->workqueue, &sc->disconnect_work);
++	queue_work(sc->workqueue, &sc->disconnect_work);
  }
  
+ /* Upcall from RDMA CM */
+@@ -537,7 +537,7 @@ static void smbd_post_send_credits(struct work_struct *work)
+ 	if (atomic_read(&sc->recv_io.credits.count) <
+ 		sc->recv_io.credits.target - 1) {
+ 		log_keep_alive(INFO, "schedule send of an empty message\n");
+-		queue_work(info->workqueue, &sc->idle.immediate_work);
++		queue_work(sc->workqueue, &sc->idle.immediate_work);
+ 	}
+ }
+ 
+@@ -579,7 +579,7 @@ static void recv_done(struct ib_cq *cq, struct ib_wc *wc)
+ 	 * order to trigger our next keepalive message.
+ 	 */
+ 	sc->idle.keepalive = SMBDIRECT_KEEPALIVE_NONE;
+-	mod_delayed_work(info->workqueue, &sc->idle.timer_work,
++	mod_delayed_work(sc->workqueue, &sc->idle.timer_work,
+ 			 msecs_to_jiffies(sp->keepalive_interval_msec));
+ 
+ 	switch (sc->recv_io.expected) {
+@@ -645,7 +645,7 @@ static void recv_done(struct ib_cq *cq, struct ib_wc *wc)
+ 		if (le16_to_cpu(data_transfer->flags) &
+ 				SMBDIRECT_FLAG_RESPONSE_REQUESTED) {
+ 			log_keep_alive(INFO, "schedule send of immediate response\n");
+-			queue_work(info->workqueue, &sc->idle.immediate_work);
++			queue_work(sc->workqueue, &sc->idle.immediate_work);
+ 		}
+ 
+ 		/*
+@@ -654,7 +654,7 @@ static void recv_done(struct ib_cq *cq, struct ib_wc *wc)
+ 		 */
+ 		if (data_length) {
+ 			if (sc->recv_io.credits.target > old_recv_credit_target)
+-				queue_work(info->workqueue, &sc->recv_io.posted.refill_work);
++				queue_work(sc->workqueue, &sc->recv_io.posted.refill_work);
+ 
+ 			enqueue_reassembly(info, response, data_length);
+ 			wake_up(&sc->recv_io.reassembly.wait_queue);
+@@ -953,7 +953,7 @@ static int manage_keep_alive_before_sending(struct smbd_connection *info)
+ 		 * Now use the keepalive timeout (instead of keepalive interval)
+ 		 * in order to wait for a response
+ 		 */
+-		mod_delayed_work(info->workqueue, &sc->idle.timer_work,
++		mod_delayed_work(sc->workqueue, &sc->idle.timer_work,
+ 				 msecs_to_jiffies(sp->keepalive_timeout_msec));
+ 		return 1;
+ 	}
+@@ -1357,7 +1357,7 @@ static void put_receive_buffer(
+ 	sc->statistics.put_receive_buffer++;
+ 	spin_unlock_irqrestore(&sc->recv_io.free.lock, flags);
+ 
+-	queue_work(info->workqueue, &sc->recv_io.posted.refill_work);
++	queue_work(sc->workqueue, &sc->recv_io.posted.refill_work);
+ }
+ 
+ /* Preallocate all receive buffer on transport establishment */
+@@ -1439,10 +1439,10 @@ static void idle_connection_timer(struct work_struct *work)
+ 	 * in order to wait for a response
+ 	 */
+ 	sc->idle.keepalive = SMBDIRECT_KEEPALIVE_PENDING;
+-	mod_delayed_work(info->workqueue, &sc->idle.timer_work,
++	mod_delayed_work(sc->workqueue, &sc->idle.timer_work,
+ 			 msecs_to_jiffies(sp->keepalive_timeout_msec));
+ 	log_keep_alive(INFO, "schedule send of empty idle message\n");
+-	queue_work(info->workqueue, &sc->idle.immediate_work);
++	queue_work(sc->workqueue, &sc->idle.immediate_work);
+ }
+ 
+ /*
+@@ -1537,7 +1537,7 @@ void smbd_destroy(struct TCP_Server_Info *server)
+ 
+ 	sc->status = SMBDIRECT_SOCKET_DESTROYED;
+ 
+-	destroy_workqueue(info->workqueue);
++	destroy_workqueue(sc->workqueue);
+ 	log_rdma_event(INFO,  "rdma session destroyed\n");
+ 	kfree(info);
+ 	server->smbd_conn = NULL;
+@@ -1584,7 +1584,7 @@ static void destroy_caches_and_workqueue(struct smbd_connection *info)
+ 	struct smbdirect_socket *sc = &info->socket;
+ 
+ 	destroy_receive_buffers(info);
+-	destroy_workqueue(info->workqueue);
++	destroy_workqueue(sc->workqueue);
+ 	mempool_destroy(sc->recv_io.mem.pool);
+ 	kmem_cache_destroy(sc->recv_io.mem.cache);
+ 	mempool_destroy(sc->send_io.mem.pool);
+@@ -1640,8 +1640,8 @@ static int allocate_caches_and_workqueue(struct smbd_connection *info)
+ 		goto out3;
+ 
+ 	scnprintf(name, MAX_NAME_LEN, "smbd_%p", info);
+-	info->workqueue = create_workqueue(name);
+-	if (!info->workqueue)
++	sc->workqueue = create_workqueue(name);
++	if (!sc->workqueue)
+ 		goto out4;
+ 
+ 	rc = allocate_receive_buffers(info, sp->recv_credit_max);
+@@ -1653,7 +1653,7 @@ static int allocate_caches_and_workqueue(struct smbd_connection *info)
+ 	return 0;
+ 
+ out5:
+-	destroy_workqueue(info->workqueue);
++	destroy_workqueue(sc->workqueue);
+ out4:
+ 	mempool_destroy(sc->recv_io.mem.pool);
+ out3:
+@@ -1837,7 +1837,7 @@ static struct smbd_connection *_smbd_get_connection(
+ 	 * so that the timer will cause a disconnect.
+ 	 */
+ 	sc->idle.keepalive = SMBDIRECT_KEEPALIVE_PENDING;
+-	mod_delayed_work(info->workqueue, &sc->idle.timer_work,
++	mod_delayed_work(sc->workqueue, &sc->idle.timer_work,
+ 			 msecs_to_jiffies(sp->negotiate_timeout_msec));
+ 
+ 	INIT_WORK(&sc->recv_io.posted.refill_work, smbd_post_send_credits);
+@@ -2541,7 +2541,7 @@ int smbd_deregister_mr(struct smbd_mr *smbdirect_mr)
+ 		 * Schedule the work to do MR recovery for future I/Os MR
+ 		 * recovery is slow and don't want it to block current I/O
+ 		 */
+-		queue_work(info->workqueue, &info->mr_recovery_work);
++		queue_work(sc->workqueue, &info->mr_recovery_work);
+ 
+ done:
+ 	if (atomic_dec_and_test(&info->mr_used_count))
 diff --git a/fs/smb/client/smbdirect.h b/fs/smb/client/smbdirect.h
-index 8ebbbc0b0499..4eec2ac4ba80 100644
+index 4eec2ac4ba80..455618e676f5 100644
 --- a/fs/smb/client/smbdirect.h
 +++ b/fs/smb/client/smbdirect.h
-@@ -43,13 +43,6 @@ struct smbd_connection {
- 	/* Memory registrations */
- 	/* Maximum number of pages in a single RDMA write/read on this connection */
- 	int max_frmr_depth;
--	/*
--	 * If payload is less than or equal to the threshold,
--	 * use RDMA send/recv to send upper layer I/O.
--	 * If payload is more than the threshold,
--	 * use RDMA read/write through memory registration for I/O.
--	 */
--	int rdma_readwrite_threshold;
- 	enum ib_mr_type mr_type;
- 	struct list_head mr_list;
- 	spinlock_t mr_list_lock;
+@@ -53,8 +53,6 @@ struct smbd_connection {
+ 	struct work_struct mr_recovery_work;
+ 	/* Used by transport to wait until all MRs are returned */
+ 	wait_queue_head_t wait_for_mr_cleanup;
+-
+-	struct workqueue_struct *workqueue;
+ };
+ 
+ /* Create a SMBDirect session */
 -- 
 2.43.0
 
