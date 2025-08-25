@@ -2,44 +2,44 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id D510AB34C72
-	for <lists+samba-technical@lfdr.de>; Mon, 25 Aug 2025 22:46:31 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D4520B34C74
+	for <lists+samba-technical@lfdr.de>; Mon, 25 Aug 2025 22:46:39 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=v+Lya7NIpF+8E0GuwpzCf9CsxPYx2ccrTfVnonl25UA=; b=qIrXlmB7TLJ67nsK9izHXTfyhK
-	tLyzogf27fbPIlhOHdXEKi25FXdoz3TPbbYBAOfl6JUYYWww37U58AYs+QE7+E/GOhoJnMWN5IPnu
-	obiRd0v9/Rqqto+XKJvF81xxPtojRBU2L/XgKA2D0MF6KhJQXHN5Kvr+R2z9WE8OJtJQKi1oflBCE
-	v1xZkzkJcmxJz9R59nLvpPWIkm+7sV+tVmQ2rVWyCVc7yVD+Bq4NLzQHRlnsrK8+WnH6e49YGazFU
-	af19L73s7A7QYVSzi6nbwgjdJvuYZ/TG5Bj18yA1Hk1Dxn7Lq6WInE4yHiQTftetiQ1GSPj/rxOoC
-	qWZ5qrmw==;
-Received: from ip6-localhost ([::1]:43030 helo=hr1.samba.org) 
+	bh=VcNkH8FpkCWOrLZAhWj0KooWen/Zr5IRwqFZK++aEQg=; b=OYvnpLHoofLfalf0uEeCcNrkBq
+	GOdFSkGc41XZHmcweKQxxaxfslo2JoY1GTNT9lF9eRmgu2tlCWxmbCA8eICIeB2yOfaImnqy+DTqF
+	iSxGP7UKVJL6hwOiYUlSRHBkKyNLhUGOcUiVrPeRV5YYQszYncyYxcNUYvzHKsBuPwPA+BoS6rUik
+	L/c4UPkaW+O5u46EZ/JccR7ZVYFKdkvtoJED3YMaHlEqw/R8ambHH0QwKwBcFzFC9WFKnNQZkGtEm
+	69M/DarHgUvvZrb8CDUqZKVkPHLY80kAZZAbCGOYIJ3Rd3fI4Bc7ihm8f9dJ8m7jzgUqf37OFPj6r
+	SG84betA==;
+Received: from ip6-localhost ([::1]:31194 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1uqe59-000Mkt-R8; Mon, 25 Aug 2025 20:46:24 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:14394) 
+	id 1uqe5H-000Mrp-D0; Mon, 25 Aug 2025 20:46:31 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:50390) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uqe44-000MPM-Vy
- for samba-technical@lists.samba.org; Mon, 25 Aug 2025 20:45:24 +0000
+ (Exim) id 1uqe4D-000MSa-G3
+ for samba-technical@lists.samba.org; Mon, 25 Aug 2025 20:45:32 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Message-ID:Date:Cc:To:From;
- bh=v+Lya7NIpF+8E0GuwpzCf9CsxPYx2ccrTfVnonl25UA=; b=GNZUeuzC2/kBeUz9PmSwwxkEm8
- 2Nyob0tuyqINq/fPHFoiVP8o1vl3TspEMkB2LYiozyjh86WyZ+5Pprp+VW8ysJaTHDyWsQCLO3tut
- 0wKbPbLAyi6Pdan5JAlm2c/R0QXOAE9D00w/6n4S0+6Jyb2KVfyVr/9yj/46Y84Q5aWplwvLwOY9R
- SVJU9Zssfvc0EZfWXuiDcgXq4HyVL0lzV/WBV4ghurIdyEQ3gfhOsB11A8W/3eLCJxgpx1UOBcPbJ
- j4AgPzxiSS8YDD42IpnJsRTCJPEyGAVqG8xW23OQ3GZomsyfG0s9zCPqjiS3Kutb/Y9gr0zI1SeVq
- wIzkoVany3vYp0RXSXcisvmUbi/i1YK3Wk9qqDVxMHCE8ikfwxXIOtdkvC/qXNg4Cp/2lNCqUUe+Q
- K3JKBkM8tIVQtilTo/1p/xL/TIBGLH/nNB2ZXXIrbJBdynn9SS3DoOJ8VETxb7t5JJgJcGzHA1lK/
- mnxffWZC2xokc1Qphq6JBXJX;
+ bh=VcNkH8FpkCWOrLZAhWj0KooWen/Zr5IRwqFZK++aEQg=; b=mx3uJuHIXj6A76q65p9rIJCTuW
+ LDPHGu1tOBYkwiPOjbwjm9EBtoc+p57wYEO2oVO2gh+ARhuzpmgfjySyX5za6fKWfBYyQVEFgp5ns
+ 4zMoSG2UTRnDSfsX7OkkkI63bMArWgjdniNyD/HqVUXd2T/TNxKV9X71lJldP9ckTjMdQ8DvYJAjf
+ 9omvUEmJ6rVJYEjr4ryYbxbhUw9iQj5sC4bgjwb+74yMyTSmqJrcwg+ENa2rl4OgQryHMZurU/Wzr
+ hsbMGlnqlU7jdc6ieIfF/fQDtJOqL57T7eDL21DgiV7Hv+MUR8GLomuhaooPyIhwBId3AIRA2Sqqd
+ kvoElBS3MWxgAZxJ4zet6GPw/gYvT0i3BO9Rs73Kv/FT2MNj4Z61oHJwBM1MtkLzrCJcCSzf+uwOx
+ 2XJV58Wma3Wn6CJCK6QFuVRB58LchW5LWPlgMwKyA9mqje6wD/3wWPz0O5PoHWEfWv9PDtT92tKfx
+ kgjbasgzSxrn9sYn0VS1qjaO;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uqe3z-000jqg-0k; Mon, 25 Aug 2025 20:45:11 +0000
+ (Exim) id 1uqe48-000jsR-2V; Mon, 25 Aug 2025 20:45:21 +0000
 To: linux-cifs@vger.kernel.org,
 	samba-technical@lists.samba.org
-Subject: [PATCH v4 020/142] smb: client: use status_wait and
- SMBDIRECT_SOCKET_NEGOTIATE_RUNNING for completion
-Date: Mon, 25 Aug 2025 22:39:41 +0200
-Message-ID: <b2b7c222dc0f4ca8d100a36669eb994415dbf0ae.1756139607.git.metze@samba.org>
+Subject: [PATCH v4 021/142] smb: client: use status_wait and
+ SMBDIRECT_SOCKET_RESOLVE_{ADDR, ROUTE}_RUNNING for completion
+Date: Mon, 25 Aug 2025 22:39:42 +0200
+Message-ID: <9c2c8dd0d75007515c4ad096df16e3d2d5bd4b04.1756139607.git.metze@samba.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1756139607.git.metze@samba.org>
 References: <cover.1756139607.git.metze@samba.org>
@@ -65,9 +65,9 @@ Cc: metze@samba.org, Steve French <smfrench@gmail.com>,
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-We can use the state change from SMBDIRECT_SOCKET_NEGOTIATE_RUNNING to
-SMBDIRECT_SOCKET_CONNECTED or SMBDIRECT_SOCKET_NEGOTIATE_FAILED in order
-to notify the caller if the negotiation is over.
+We can use the state change from
+SMBDIRECT_SOCKET_RESOLVE_{ADDR,ROUTE}_RUNNING
+to the next state in order to wake the caller to do the next step.
 
 Cc: Steve French <smfrench@gmail.com>
 Cc: Tom Talpey <tom@talpey.com>
@@ -77,80 +77,149 @@ Cc: samba-technical@lists.samba.org
 Signed-off-by: Stefan Metzmacher <metze@samba.org>
 Signed-off-by: Steve French <stfrench@microsoft.com>
 ---
- fs/smb/client/smbdirect.c | 19 ++++++++++---------
- fs/smb/client/smbdirect.h |  3 ---
- 2 files changed, 10 insertions(+), 12 deletions(-)
+ fs/smb/client/smbdirect.c | 49 ++++++++++++++++++++++-----------------
+ fs/smb/client/smbdirect.h |  2 --
+ 2 files changed, 28 insertions(+), 23 deletions(-)
 
 diff --git a/fs/smb/client/smbdirect.c b/fs/smb/client/smbdirect.c
-index cfc5e17bc055..c94b7d4f2dc2 100644
+index c94b7d4f2dc2..8d1b6e36412c 100644
 --- a/fs/smb/client/smbdirect.c
 +++ b/fs/smb/client/smbdirect.c
-@@ -552,6 +552,7 @@ static void recv_done(struct ib_cq *cq, struct ib_wc *wc)
- 	struct smbd_connection *info =
- 		container_of(sc, struct smbd_connection, socket);
- 	int data_length = 0;
-+	bool negotiate_done = false;
- 
- 	log_rdma_recv(INFO, "response=0x%p type=%d wc status=%d wc opcode %d byte_len=%d pkey_index=%u\n",
- 		      response, sc->recv_io.expected, wc->status, wc->opcode,
-@@ -574,16 +575,16 @@ static void recv_done(struct ib_cq *cq, struct ib_wc *wc)
- 	case SMBDIRECT_EXPECT_NEGOTIATE_REP:
- 		dump_smbdirect_negotiate_resp(smbdirect_recv_io_payload(response));
- 		sc->recv_io.reassembly.full_packet_received = true;
--		info->negotiate_done =
-+		negotiate_done =
- 			process_negotiation_response(response, wc->byte_len);
- 		put_receive_buffer(info, response);
- 		WARN_ON_ONCE(sc->status != SMBDIRECT_SOCKET_NEGOTIATE_RUNNING);
--		if (!info->negotiate_done)
-+		if (!negotiate_done)
- 			sc->status = SMBDIRECT_SOCKET_NEGOTIATE_FAILED;
- 		else
- 			sc->status = SMBDIRECT_SOCKET_CONNECTED;
- 
--		complete(&info->negotiate_completion);
+@@ -216,31 +216,27 @@ static int smbd_conn_upcall(
+ 	case RDMA_CM_EVENT_ADDR_RESOLVED:
+ 		WARN_ON_ONCE(sc->status != SMBDIRECT_SOCKET_RESOLVE_ADDR_RUNNING);
+ 		sc->status = SMBDIRECT_SOCKET_RESOLVE_ROUTE_NEEDED;
+-		info->ri_rc = 0;
+-		complete(&info->ri_done);
 +		wake_up_interruptible(&info->status_wait);
- 		return;
+ 		break;
  
- 	/* SMBD data transfer packet */
-@@ -1206,17 +1207,17 @@ static int smbd_negotiate(struct smbd_connection *info)
- 	if (rc)
- 		return rc;
+ 	case RDMA_CM_EVENT_ROUTE_RESOLVED:
+ 		WARN_ON_ONCE(sc->status != SMBDIRECT_SOCKET_RESOLVE_ROUTE_RUNNING);
+ 		sc->status = SMBDIRECT_SOCKET_RDMA_CONNECT_NEEDED;
+-		info->ri_rc = 0;
+-		complete(&info->ri_done);
++		wake_up_interruptible(&info->status_wait);
+ 		break;
  
--	init_completion(&info->negotiate_completion);
--	info->negotiate_done = false;
- 	rc = smbd_post_send_negotiate_req(info);
- 	if (rc)
- 		return rc;
+ 	case RDMA_CM_EVENT_ADDR_ERROR:
+ 		log_rdma_event(ERR, "connecting failed event=%s\n", event_name);
+ 		WARN_ON_ONCE(sc->status != SMBDIRECT_SOCKET_RESOLVE_ADDR_RUNNING);
+ 		sc->status = SMBDIRECT_SOCKET_RESOLVE_ADDR_FAILED;
+-		info->ri_rc = -EHOSTUNREACH;
+-		complete(&info->ri_done);
++		wake_up_interruptible(&info->status_wait);
+ 		break;
  
+ 	case RDMA_CM_EVENT_ROUTE_ERROR:
+ 		log_rdma_event(ERR, "connecting failed event=%s\n", event_name);
+ 		WARN_ON_ONCE(sc->status != SMBDIRECT_SOCKET_RESOLVE_ROUTE_RUNNING);
+ 		sc->status = SMBDIRECT_SOCKET_RESOLVE_ROUTE_FAILED;
+-		info->ri_rc = -ENETUNREACH;
+-		complete(&info->ri_done);
++		wake_up_interruptible(&info->status_wait);
+ 		break;
+ 
+ 	case RDMA_CM_EVENT_ESTABLISHED:
+@@ -679,9 +675,6 @@ static struct rdma_cm_id *smbd_create_id(
+ 
+ 	*sport = htons(port);
+ 
+-	init_completion(&info->ri_done);
+-	info->ri_rc = -ETIMEDOUT;
+-
+ 	WARN_ON_ONCE(sc->status != SMBDIRECT_SOCKET_RESOLVE_ADDR_NEEDED);
+ 	sc->status = SMBDIRECT_SOCKET_RESOLVE_ADDR_RUNNING;
+ 	rc = rdma_resolve_addr(id, NULL, (struct sockaddr *)dstaddr,
+@@ -690,20 +683,26 @@ static struct rdma_cm_id *smbd_create_id(
+ 		log_rdma_event(ERR, "rdma_resolve_addr() failed %i\n", rc);
+ 		goto out;
+ 	}
 -	rc = wait_for_completion_interruptible_timeout(
--		&info->negotiate_completion, SMBD_NEGOTIATE_TIMEOUT * HZ);
--	log_rdma_event(INFO, "wait_for_completion_timeout rc=%d\n", rc);
+-		&info->ri_done, msecs_to_jiffies(RDMA_RESOLVE_TIMEOUT));
 +	rc = wait_event_interruptible_timeout(
 +		info->status_wait,
-+		sc->status != SMBDIRECT_SOCKET_NEGOTIATE_RUNNING,
-+		secs_to_jiffies(SMBD_NEGOTIATE_TIMEOUT));
-+	log_rdma_event(INFO, "wait_event_interruptible_timeout rc=%d\n", rc);
++		sc->status != SMBDIRECT_SOCKET_RESOLVE_ADDR_RUNNING,
++		msecs_to_jiffies(RDMA_RESOLVE_TIMEOUT));
+ 	/* e.g. if interrupted returns -ERESTARTSYS */
+ 	if (rc < 0) {
+ 		log_rdma_event(ERR, "rdma_resolve_addr timeout rc: %i\n", rc);
+ 		goto out;
+ 	}
+-	rc = info->ri_rc;
+-	if (rc) {
++	if (sc->status == SMBDIRECT_SOCKET_RESOLVE_ADDR_RUNNING) {
++		rc = -ETIMEDOUT;
++		log_rdma_event(ERR, "rdma_resolve_addr() completed %i\n", rc);
++		goto out;
++	}
++	if (sc->status != SMBDIRECT_SOCKET_RESOLVE_ROUTE_NEEDED) {
++		rc = -EHOSTUNREACH;
+ 		log_rdma_event(ERR, "rdma_resolve_addr() completed %i\n", rc);
+ 		goto out;
+ 	}
  
--	if (info->negotiate_done)
-+	if (sc->status == SMBDIRECT_SOCKET_CONNECTED)
- 		return 0;
+-	info->ri_rc = -ETIMEDOUT;
+ 	WARN_ON_ONCE(sc->status != SMBDIRECT_SOCKET_RESOLVE_ROUTE_NEEDED);
+ 	sc->status = SMBDIRECT_SOCKET_RESOLVE_ROUTE_RUNNING;
+ 	rc = rdma_resolve_route(id, RDMA_RESOLVE_TIMEOUT);
+@@ -711,15 +710,22 @@ static struct rdma_cm_id *smbd_create_id(
+ 		log_rdma_event(ERR, "rdma_resolve_route() failed %i\n", rc);
+ 		goto out;
+ 	}
+-	rc = wait_for_completion_interruptible_timeout(
+-		&info->ri_done, msecs_to_jiffies(RDMA_RESOLVE_TIMEOUT));
++	rc = wait_event_interruptible_timeout(
++		info->status_wait,
++		sc->status != SMBDIRECT_SOCKET_RESOLVE_ROUTE_RUNNING,
++		msecs_to_jiffies(RDMA_RESOLVE_TIMEOUT));
+ 	/* e.g. if interrupted returns -ERESTARTSYS */
+ 	if (rc < 0)  {
+ 		log_rdma_event(ERR, "rdma_resolve_addr timeout rc: %i\n", rc);
+ 		goto out;
+ 	}
+-	rc = info->ri_rc;
+-	if (rc) {
++	if (sc->status == SMBDIRECT_SOCKET_RESOLVE_ROUTE_RUNNING) {
++		rc = -ETIMEDOUT;
++		log_rdma_event(ERR, "rdma_resolve_route() completed %i\n", rc);
++		goto out;
++	}
++	if (sc->status != SMBDIRECT_SOCKET_RDMA_CONNECT_NEEDED) {
++		rc = -ENETUNREACH;
+ 		log_rdma_event(ERR, "rdma_resolve_route() completed %i\n", rc);
+ 		goto out;
+ 	}
+@@ -1653,6 +1659,8 @@ static struct smbd_connection *_smbd_get_connection(
+ 	info->initiator_depth = 1;
+ 	info->responder_resources = SMBD_CM_RESPONDER_RESOURCES;
  
- 	if (rc == 0)
++	init_waitqueue_head(&info->status_wait);
++
+ 	sc->status = SMBDIRECT_SOCKET_CREATED;
+ 	rc = smbd_ia_open(info, dstaddr, port);
+ 	if (rc) {
+@@ -1763,7 +1771,6 @@ static struct smbd_connection *_smbd_get_connection(
+ 	log_rdma_event(INFO, "connecting to IP %pI4 port %d\n",
+ 		&addr_in->sin_addr, port);
+ 
+-	init_waitqueue_head(&info->status_wait);
+ 	init_waitqueue_head(&sc->recv_io.reassembly.wait_queue);
+ 
+ 	WARN_ON_ONCE(sc->status != SMBDIRECT_SOCKET_RDMA_CONNECT_NEEDED);
 diff --git a/fs/smb/client/smbdirect.h b/fs/smb/client/smbdirect.h
-index 4ca9b2b2c57f..c9b0c6b61e7e 100644
+index c9b0c6b61e7e..82b1d936e800 100644
 --- a/fs/smb/client/smbdirect.h
 +++ b/fs/smb/client/smbdirect.h
-@@ -49,9 +49,6 @@ struct smbd_connection {
- 	struct completion ri_done;
+@@ -45,8 +45,6 @@ enum keep_alive_status {
+ struct smbd_connection {
+ 	struct smbdirect_socket socket;
+ 
+-	int ri_rc;
+-	struct completion ri_done;
  	wait_queue_head_t status_wait;
  
--	struct completion negotiate_completion;
--	bool negotiate_done;
--
  	struct work_struct disconnect_work;
- 	struct work_struct post_send_credits_work;
- 
 -- 
 2.43.0
 
