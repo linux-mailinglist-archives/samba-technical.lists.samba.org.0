@@ -2,44 +2,44 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5678FB34D5C
-	for <lists+samba-technical@lfdr.de>; Mon, 25 Aug 2025 23:02:39 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 810FCB34D5E
+	for <lists+samba-technical@lfdr.de>; Mon, 25 Aug 2025 23:02:51 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=FF0dShBbvsjPDlcPDR6Wwlqj+ow6c7vZbr1r9B7wfFk=; b=5tMM5kGjdF4vM6WqrU0hNADmmk
-	cZUlJF97NQuWARKiYjD9KwZy9TrHIfFSDBMQp7QdJ1sJuKqGvP+uMQ+t2P9IuwiYNp4o2U8dk9Xny
-	CgzQOgRZbfJzDX5Bwg78ZEc+73z1k5rMOWyEfQfi7cdaQrs2c+jaZ7JKjbqCY8lN2NGDCTH/zmWY5
-	35P2A5IBtxIQeRcMDFbP9e1MuFcnGm54hmtnnbw3rTwa7hMg4wrQFGgepgiSpEAgUIVfYPpDzQadN
-	OYidcO7eXUkMBm8LKfbETy9HvKM990jc21UzvtaLGHvJBq6uibqZp9bU+CCOg7jUoM9u2n3lKbFG/
-	XLhBAOtw==;
-Received: from ip6-localhost ([::1]:28168 helo=hr1.samba.org) 
+	bh=O+3cR0T6UYcy1n3Z2L6sQzAUxjptaLR5kw5+vtodiSo=; b=JsNRlNozpBz3flcqp+8ramVpNK
+	uZSpDhOeadm0X+7GKUGx9q0akBVCUc1YKsNndfH4+x8g8ShpU1ljdRRqI/dX7VUHZAa6T77U/bXQr
+	8XfrtzKYEaTj2qVpRl1w2XiRa8JO3j2OVoGuq6zA7IjuuEprw/PUaa059pRJX4W2zXGtBQqXlzE8t
+	SfHxbpf4XPXIwQVdMR/5nv5t3/f3o1ytYsaiOdUoTrt8Pk0STNEkUA9LOEgbkL0NwOhYTcKxqRMDB
+	PmYuHvZ+ndhhirKtwWKMYUvsuufoc/EKCIttgj73exK2711HtEfuJVjzhdbighPlyWNOClPIVlwH9
+	A9Ot7sDg==;
+Received: from ip6-localhost ([::1]:32956 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1uqeKl-000TBx-El; Mon, 25 Aug 2025 21:02:31 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:33220) 
+	id 1uqeKu-000THz-VO; Mon, 25 Aug 2025 21:02:41 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:12148) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uqeGf-000RXu-BQ
- for samba-technical@lists.samba.org; Mon, 25 Aug 2025 20:58:24 +0000
+ (Exim) id 1uqeGn-000Rbs-HS
+ for samba-technical@lists.samba.org; Mon, 25 Aug 2025 20:58:34 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Message-ID:Date:Cc:To:From;
- bh=FF0dShBbvsjPDlcPDR6Wwlqj+ow6c7vZbr1r9B7wfFk=; b=Go6e+nOu5QIZnRXfJKxDM85LW9
- VK4BvQ1qoLDN/H9iumkbCyblUT69L1VwVDT3dwHAUR+Yv/JvK9OT7UdnGGjiwRlUEoP+WAp02x1yl
- 6uWKABphY7uD6eJiyVW9ksEkNxfQ+gj1ZxhfsRyQx/kstwv7xhojkjgMtF8Lgn8rlqqO+UOCuG8HG
- dCrf8vrhr4H/aeJgmOL4vZnfrzYu8thm4NaMGh7q0AyzWz8wEYxnUl8de1w+QeGkkxBkWFFiSTH0U
- fIkBiCA1rKzUAHWiYwaQw+vB/5VaGa8Zfy5QzZigH4ILh6AoCdyKbu9r9jecIdRGE8CI0GSkdL5a4
- jX6Q4vJgXDljBZY9XZvBCrPMQ2KfW3YZPDbREwTMG5en2aEoIhZvNQORtTrs1MzS8Wziew11TT24E
- 3DH97sZ4u0kpFxJjsl4WD3RwAdPm4UsEqCR2LkSQVXDYUzc0TRsnva0QLa5RbpMxyUeMRtr2r2L8Y
- PbIxrUA+MPmbWmvw1vdkPS6E;
+ bh=O+3cR0T6UYcy1n3Z2L6sQzAUxjptaLR5kw5+vtodiSo=; b=rb9ULTS0xf4ED7lDUXxuwlCgoX
+ P3HtQDExGOc21AvteY4vZJVotvr6Nye3BZjzg5o9PPK5sDiEP+btrQ+p150J/0LQtLPP1rrCTZ1Xt
+ rD/SRf0B03WcJs8tlfvIPUeGjkUQ0fW1VbVJQ8WwYVDWvXTth1hz2WSmQQapga91icnIsLl33hPiw
+ 0MbSX/i2b8h526hxhvC1mvpWdG2Heov6hoxM8tGvNyFNuY1kYxutg+DPJhVqjv8jppfGvcEBoLM0/
+ oGlpnp34kFqMdF5q8F6GYPvoaMkCpWxSo0VkKl70tJS4ulMlSRgcxcVYjODvK7IBG1pokArlRjZh3
+ rIapQdmE3beSOmRZb8fIvqk1u1/SFhs9jHcQNs6OCV/ikxHC606TsCHTQzjKtJtLotO7kJSPc6T+v
+ SIPob4mbQAT+eeV2lTvyZsPjSjJSi+xBD/L1EPFIKW1hDm5cyL4NmZk/9naiRcCzpUFbIkaQ0WDou
+ UJ4XZmPEAUih346VjocWBuls;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uqeGb-000mVp-2u; Mon, 25 Aug 2025 20:58:14 +0000
+ (Exim) id 1uqeGl-000mXX-1L; Mon, 25 Aug 2025 20:58:23 +0000
 To: linux-cifs@vger.kernel.org,
 	samba-technical@lists.samba.org
-Subject: [PATCH v4 099/142] smb: server: make use of
- smbdirect_socket.send_io.credits.{count, wait_queue}
-Date: Mon, 25 Aug 2025 22:41:00 +0200
-Message-ID: <5db92cf696d9a779f9c88acf31e94ce3644d8ff2.1756139607.git.metze@samba.org>
+Subject: [PATCH v4 100/142] smb: server: make use of struct
+ smbdirect_send_batch
+Date: Mon, 25 Aug 2025 22:41:01 +0200
+Message-ID: <372ca7c624c39510dc9eadf835bfe744c036c5d8.1756139607.git.metze@samba.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1756139607.git.metze@samba.org>
 References: <cover.1756139607.git.metze@samba.org>
@@ -65,8 +65,8 @@ Cc: metze@samba.org, Steve French <smfrench@gmail.com>,
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This will is used by the client already and will allow to create
-common helper functions.
+This makes it easier to move functions to the common
+smbdirect code in future.
 
 Cc: Namjae Jeon <linkinjeon@kernel.org>
 Cc: Steve French <smfrench@gmail.com>
@@ -75,137 +75,90 @@ Cc: linux-cifs@vger.kernel.org
 Cc: samba-technical@lists.samba.org
 Signed-off-by: Stefan Metzmacher <metze@samba.org>
 ---
- fs/smb/server/transport_rdma.c | 28 +++++++++++++---------------
- 1 file changed, 13 insertions(+), 15 deletions(-)
+ fs/smb/server/transport_rdma.c | 21 +++++++--------------
+ 1 file changed, 7 insertions(+), 14 deletions(-)
 
 diff --git a/fs/smb/server/transport_rdma.c b/fs/smb/server/transport_rdma.c
-index fd8d3fbdfa6c..d4bc737a9882 100644
+index d4bc737a9882..cca926ad2677 100644
 --- a/fs/smb/server/transport_rdma.c
 +++ b/fs/smb/server/transport_rdma.c
-@@ -96,14 +96,12 @@ struct smb_direct_transport {
- 	int			recv_credits;
- 	int			recv_credit_target;
+@@ -118,13 +118,6 @@ struct smb_direct_transport {
  
--	atomic_t		send_credits;
- 	spinlock_t		lock_new_recv_credits;
- 	int			new_recv_credits;
- 	int			max_rw_credits;
- 	int			pages_per_rw_credit;
- 	atomic_t		rw_credits;
+ static const struct ksmbd_transport_ops ksmbd_smb_direct_transport_ops;
  
--	wait_queue_head_t	wait_send_credits;
- 	wait_queue_head_t	wait_rw_credits;
+-struct smb_direct_send_ctx {
+-	struct list_head	msg_list;
+-	int			wr_cnt;
+-	bool			need_invalidate_rkey;
+-	unsigned int		remote_key;
+-};
+-
+ struct smb_direct_rdma_rw_msg {
+ 	struct smb_direct_transport	*t;
+ 	struct ib_cqe		cqe;
+@@ -156,7 +149,7 @@ static inline int get_buf_page_count(void *buf, int size)
+ static void smb_direct_destroy_pools(struct smb_direct_transport *transport);
+ static void smb_direct_post_recv_credits(struct work_struct *work);
+ static int smb_direct_post_send_data(struct smb_direct_transport *t,
+-				     struct smb_direct_send_ctx *send_ctx,
++				     struct smbdirect_send_batch *send_ctx,
+ 				     struct kvec *iov, int niov,
+ 				     int remaining_data_length);
  
- 	struct work_struct	post_recv_credits_work;
-@@ -333,7 +331,6 @@ static struct smb_direct_transport *alloc_transport(struct rdma_cm_id *cm_id)
+@@ -871,7 +864,7 @@ static int smb_direct_post_send(struct smb_direct_transport *t,
+ }
  
- 	sc->ib.dev = sc->rdma.cm_id->device;
+ static void smb_direct_send_ctx_init(struct smb_direct_transport *t,
+-				     struct smb_direct_send_ctx *send_ctx,
++				     struct smbdirect_send_batch *send_ctx,
+ 				     bool need_invalidate_rkey,
+ 				     unsigned int remote_key)
+ {
+@@ -882,7 +875,7 @@ static void smb_direct_send_ctx_init(struct smb_direct_transport *t,
+ }
  
--	init_waitqueue_head(&t->wait_send_credits);
- 	init_waitqueue_head(&t->wait_rw_credits);
- 
- 	spin_lock_init(&t->receive_credit_lock);
-@@ -373,7 +370,7 @@ static void free_transport(struct smb_direct_transport *t)
- 					 sc->status == SMBDIRECT_SOCKET_DISCONNECTED);
- 	}
- 
--	wake_up_all(&t->wait_send_credits);
-+	wake_up_all(&sc->send_io.credits.wait_queue);
- 	wake_up_all(&sc->send_io.pending.wait_queue);
- 
- 	disable_work_sync(&t->post_recv_credits_work);
-@@ -575,14 +572,14 @@ static void recv_done(struct ib_cq *cq, struct ib_wc *wc)
- 		t->recv_credit_target =
- 				le16_to_cpu(data_transfer->credits_requested);
- 		atomic_add(le16_to_cpu(data_transfer->credits_granted),
--			   &t->send_credits);
-+			   &sc->send_io.credits.count);
- 
- 		if (le16_to_cpu(data_transfer->flags) &
- 		    SMBDIRECT_FLAG_RESPONSE_REQUESTED)
- 			queue_work(smb_direct_wq, &t->send_immediate_work);
- 
--		if (atomic_read(&t->send_credits) > 0)
--			wake_up(&t->wait_send_credits);
-+		if (atomic_read(&sc->send_io.credits.count) > 0)
-+			wake_up(&sc->send_io.credits.wait_queue);
- 
- 		if (data_length) {
- 			if (t->recv_credit_target > old_recv_credit_target)
-@@ -888,6 +885,7 @@ static int smb_direct_flush_send_list(struct smb_direct_transport *t,
- 				      struct smb_direct_send_ctx *send_ctx,
+ static int smb_direct_flush_send_list(struct smb_direct_transport *t,
+-				      struct smb_direct_send_ctx *send_ctx,
++				      struct smbdirect_send_batch *send_ctx,
  				      bool is_last)
  {
-+	struct smbdirect_socket *sc = &t->socket;
- 	struct smbdirect_send_io *first, *last;
- 	int ret;
+ 	struct smbdirect_socket *sc = &t->socket;
+@@ -946,7 +939,7 @@ static int wait_for_credits(struct smb_direct_transport *t,
+ }
  
-@@ -914,8 +912,8 @@ static int smb_direct_flush_send_list(struct smb_direct_transport *t,
- 					 send_ctx->need_invalidate_rkey,
- 					 send_ctx->remote_key);
- 	} else {
--		atomic_add(send_ctx->wr_cnt, &t->send_credits);
--		wake_up(&t->wait_send_credits);
-+		atomic_add(send_ctx->wr_cnt, &sc->send_io.credits.count);
-+		wake_up(&sc->send_io.credits.wait_queue);
- 		list_for_each_entry_safe(first, last, &send_ctx->msg_list,
- 					 sibling_list) {
- 			smb_direct_free_sendmsg(t, first);
-@@ -950,16 +948,17 @@ static int wait_for_credits(struct smb_direct_transport *t,
  static int wait_for_send_credits(struct smb_direct_transport *t,
- 				 struct smb_direct_send_ctx *send_ctx)
+-				 struct smb_direct_send_ctx *send_ctx)
++				 struct smbdirect_send_batch *send_ctx)
  {
-+	struct smbdirect_socket *sc = &t->socket;
+ 	struct smbdirect_socket *sc = &t->socket;
  	int ret;
- 
- 	if (send_ctx &&
--	    (send_ctx->wr_cnt >= 16 || atomic_read(&t->send_credits) <= 1)) {
-+	    (send_ctx->wr_cnt >= 16 || atomic_read(&sc->send_io.credits.count) <= 1)) {
- 		ret = smb_direct_flush_send_list(t, send_ctx, false);
- 		if (ret)
- 			return ret;
- 	}
- 
--	return wait_for_credits(t, &t->wait_send_credits, &t->send_credits, 1);
-+	return wait_for_credits(t, &sc->send_io.credits.wait_queue, &sc->send_io.credits.count, 1);
+@@ -1081,7 +1074,7 @@ static int get_mapped_sg_list(struct ib_device *device, void *buf, int size,
  }
  
- static int wait_for_rw_credits(struct smb_direct_transport *t, int credits)
-@@ -1142,7 +1141,7 @@ static int smb_direct_post_send_data(struct smb_direct_transport *t,
- 	ret = smb_direct_create_header(t, data_length, remaining_data_length,
- 				       &msg);
- 	if (ret) {
--		atomic_inc(&t->send_credits);
-+		atomic_inc(&sc->send_io.credits.count);
- 		return ret;
- 	}
- 
-@@ -1182,7 +1181,7 @@ static int smb_direct_post_send_data(struct smb_direct_transport *t,
- 	return 0;
- err:
- 	smb_direct_free_sendmsg(t, msg);
--	atomic_inc(&t->send_credits);
-+	atomic_inc(&sc->send_io.credits.count);
- 	return ret;
+ static int post_sendmsg(struct smb_direct_transport *t,
+-			struct smb_direct_send_ctx *send_ctx,
++			struct smbdirect_send_batch *send_ctx,
+ 			struct smbdirect_send_io *msg)
+ {
+ 	struct smbdirect_socket *sc = &t->socket;
+@@ -1120,7 +1113,7 @@ static int post_sendmsg(struct smb_direct_transport *t,
  }
  
-@@ -1516,7 +1515,7 @@ static int smb_direct_cm_handler(struct rdma_cm_id *cm_id,
- 		smb_direct_disconnect_rdma_work(&sc->disconnect_work);
- 		wake_up_all(&sc->status_wait);
- 		wake_up_all(&sc->recv_io.reassembly.wait_queue);
--		wake_up_all(&t->wait_send_credits);
-+		wake_up_all(&sc->send_io.credits.wait_queue);
- 		break;
- 	}
- 	case RDMA_CM_EVENT_CONNECT_ERROR: {
-@@ -1774,7 +1773,6 @@ static int smb_direct_init_params(struct smb_direct_transport *t,
- 	t->new_recv_credits = 0;
+ static int smb_direct_post_send_data(struct smb_direct_transport *t,
+-				     struct smb_direct_send_ctx *send_ctx,
++				     struct smbdirect_send_batch *send_ctx,
+ 				     struct kvec *iov, int niov,
+ 				     int remaining_data_length)
+ {
+@@ -1198,7 +1191,7 @@ static int smb_direct_writev(struct ksmbd_transport *t,
+ 			sizeof(struct smbdirect_data_transfer);
+ 	int ret;
+ 	struct kvec vec;
+-	struct smb_direct_send_ctx send_ctx;
++	struct smbdirect_send_batch send_ctx;
  
- 	sp->send_credit_target = smb_direct_send_credit_target;
--	atomic_set(&t->send_credits, 0);
- 	atomic_set(&t->rw_credits, t->max_rw_credits);
- 
- 	sp->max_send_size = smb_direct_max_send_size;
+ 	if (sc->status != SMBDIRECT_SOCKET_CONNECTED)
+ 		return -ENOTCONN;
 -- 
 2.43.0
 
