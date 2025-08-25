@@ -2,44 +2,44 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id A515AB34C61
-	for <lists+samba-technical@lfdr.de>; Mon, 25 Aug 2025 22:44:56 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BBD68B34C65
+	for <lists+samba-technical@lfdr.de>; Mon, 25 Aug 2025 22:45:21 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=ZffG182R1r9Ny2Y/EqPIvW9iN+OdUAFdhj4/4je5/+E=; b=qVGtnMYbbOdn409pH3l8885qB5
-	cxi4JZBz4pO1p16d483jQUpRpmUIrfO06TKc8SFbEVsMxQ5zUqCASn8IVlc+jxKGo/pTgRSawXgAd
-	rI3lZyHIp8WbMJg74moHRJooh/LbDCmLywWLmVODrs6Sh2k87oZGhR2nnia2mw0z0fMXzXclMezrR
-	SBlYf50OsN8vdaKRVPvFOnVucVslp8dWrw2KgB3ysW6Bo56ua9A5uyl6/LG9olfQRG3y08ubhAe/g
-	gokhIbfeN8zMZ01g79mbJysK4ZQ9bwyg0p15AeTnwc6beimUiZjE6zyMgqXpCfFhHI6J4THp1++4J
-	Py/Hv8PA==;
-Received: from ip6-localhost ([::1]:43080 helo=hr1.samba.org) 
+	bh=D245HkVB6YKsiXq7EM6IE/uFcsoP0ia5JlprlPOigmI=; b=nnkfdKdAlU58TQbtxR7WI7XX1H
+	U2/+lD7JXt0Z5YBmlrtpdkhaKFOs8hfi6fm4DAeHU3grCapNIcIqFu8t0ubt1HCLdFu7TxFxiZplP
+	oEym3T/wh3v3rWLinmCUyh92vUQjVDWISAJWRtKHWuzOQBpOFkZDQk738I7fzw0pP4xc2C7MaA0Q2
+	EiLrRLqBIM/CWL6g6le7pQWZ3DdYzZBkvQ7608fsrtNaxLgeiEZ55lTo3JATECCh3awGxZS0SvuWA
+	NgstgEXBwsQ2BdFnd8pcl1Gv+C+XBbEuX+jA0lD36brua+z4tzhPq7pBE2doo4/OhijvAbMpsP8A0
+	/aB+CcMw==;
+Received: from ip6-localhost ([::1]:30898 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1uqe3c-000M9T-K3; Mon, 25 Aug 2025 20:44:48 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:64318) 
+	id 1uqe40-000MIz-9A; Mon, 25 Aug 2025 20:45:12 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:45716) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uqe2q-000Ltw-2L
- for samba-technical@lists.samba.org; Mon, 25 Aug 2025 20:44:07 +0000
+ (Exim) id 1uqe3A-000M3T-LI
+ for samba-technical@lists.samba.org; Mon, 25 Aug 2025 20:44:26 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Message-ID:Date:Cc:To:From;
- bh=ZffG182R1r9Ny2Y/EqPIvW9iN+OdUAFdhj4/4je5/+E=; b=CMvuGSZvB1LQoG5w4pL434/Lct
- sncVZhvhJ+qCKoFySu5DmJpamojq5nt03z/UsUJzYsuOHyE17BOjSHPUC+o248/vwetDdF+F5c/KS
- 2Y4jG0A63s2VGvdcUhAeHMRwP6savXzF9wLIZ5bH+pcJAr9elPSgh7J1wvL4bgXUBjJS78FVqc/4F
- 23Rje6eIm7YAe4CI0qJzmDcAKKGpOsAKHMa2j44re4MbDNk6xAfXY8TLSLNtaArniamLvAIid5XBj
- fMLj2jll56P43fLfpFlKDtFaY1FfQVKsroDDoX8g0b0XQrGsdsQ+QQGOk1B6UsAgysMcr5pzFgg59
- YUG97dH2pNDhxfIe97g9BY9xSftpWEeN9pjpjUC11RVIsVPcFyYFXXKGCbcJHQjRcxlF411ydGQgn
- /7RdfQiVd9lnmhgymRu3CGY017MX9VBVKVkYUe5u4gV8y5yk6W0XWyUIh8qDAV4H9pcaA3kQlD/Zs
- 2sXuVnkqeQbDzM3C9fVitJSs;
+ bh=D245HkVB6YKsiXq7EM6IE/uFcsoP0ia5JlprlPOigmI=; b=PMM0GtAofowaRpZCUz3UWgjH9B
+ R97F06fSCjhYTtnUwck0HmDLUS2NBO107Jij+cmqbmmq78QbnG8Q0jVVmbVjotRAaPrZAk1zuWcej
+ 5bRmwJH2K2mUR5/MXjmvSq3h4GKoXI5zkwj4kylnK6ulbyTwdYr984tY2Uu4tMDO91wpFIdW+djH/
+ NdyuCq3Z3IIFo9O85ajJU3trC1d9LjgZBkfEdqvehqslxwtH2X7ulGuki+lOQnUIU4RzYZZGOsk5z
+ UUnC2vgbLzWuqtigunXK8f60ajmgyKSShjqx6PWzhuCmA7McAEZIQDPp33ktum+fV1/gKA6bFKIZS
+ m9msz4sJ7hfB6Q88iLGbeKy2/h64oxjGBMV3JsgmJYqfheqBaaaX8NjuI/cMILqx4kisz9fA46mBq
+ kohfm7ZegTkVcYCT+BZK3xlplUfnMk2CFpqLeafF3VxiO8+NOAlPGR6m8MRHKdPIZSz+0RM3qKDIz
+ sYxX1DD5kPS1XGWqrkqvg0ws;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uqe2k-000jZg-2w; Mon, 25 Aug 2025 20:43:55 +0000
+ (Exim) id 1uqe2w-000jbq-1F; Mon, 25 Aug 2025 20:44:06 +0000
 To: linux-cifs@vger.kernel.org,
 	samba-technical@lists.samba.org
-Subject: [PATCH v4 012/142] smb: smbdirect: introduce
- smbdirect_socket.rdma.legacy_iwarp
-Date: Mon, 25 Aug 2025 22:39:33 +0200
-Message-ID: <48bcd83eab19ef812d192cbc743657fc814612b7.1756139607.git.metze@samba.org>
+Subject: [PATCH v4 013/142] smb: smbdirect: introduce
+ smbdirect_socket.idle.{keepalive, immediate_work, timer_work}
+Date: Mon, 25 Aug 2025 22:39:34 +0200
+Message-ID: <a0bf68cc3a37e128fe4d98f0fae19fc2fbff1f2f.1756139607.git.metze@samba.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1756139607.git.metze@samba.org>
 References: <cover.1756139607.git.metze@samba.org>
@@ -65,7 +65,8 @@ Cc: metze@samba.org, Steve French <smfrench@gmail.com>,
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This will be used by client and server soon.
+This will allow client and server to use the common structures in order
+to share common functions later.
 
 Cc: Steve French <smfrench@gmail.com>
 Cc: Tom Talpey <tom@talpey.com>
@@ -75,24 +76,42 @@ Cc: linux-cifs@vger.kernel.org
 Cc: samba-technical@lists.samba.org
 Signed-off-by: Stefan Metzmacher <metze@samba.org>
 ---
- fs/smb/common/smbdirect/smbdirect_socket.h | 4 ++++
- 1 file changed, 4 insertions(+)
+ fs/smb/common/smbdirect/smbdirect_socket.h | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
 
 diff --git a/fs/smb/common/smbdirect/smbdirect_socket.h b/fs/smb/common/smbdirect/smbdirect_socket.h
-index 09834e8db853..11f43a501c33 100644
+index 11f43a501c33..fade09dfc63d 100644
 --- a/fs/smb/common/smbdirect/smbdirect_socket.h
 +++ b/fs/smb/common/smbdirect/smbdirect_socket.h
-@@ -27,6 +27,10 @@ struct smbdirect_socket {
- 	/* RDMA related */
- 	struct {
- 		struct rdma_cm_id *cm_id;
-+		/*
-+		 * This is for iWarp MPA v1
-+		 */
-+		bool legacy_iwarp;
- 	} rdma;
+@@ -18,6 +18,12 @@ enum smbdirect_socket_status {
+ 	SMBDIRECT_SOCKET_DESTROYED
+ };
  
- 	/* IB verbs related */
++enum smbdirect_keepalive_status {
++	SMBDIRECT_KEEPALIVE_NONE,
++	SMBDIRECT_KEEPALIVE_PENDING,
++	SMBDIRECT_KEEPALIVE_SENT
++};
++
+ struct smbdirect_socket {
+ 	enum smbdirect_socket_status status;
+ 	wait_queue_head_t status_wait;
+@@ -48,6 +54,15 @@ struct smbdirect_socket {
+ 
+ 	struct smbdirect_socket_parameters parameters;
+ 
++	/*
++	 * The state for keepalive and timeout handling
++	 */
++	struct {
++		enum smbdirect_keepalive_status keepalive;
++		struct work_struct immediate_work;
++		struct delayed_work timer_work;
++	} idle;
++
+ 	/*
+ 	 * The state for posted send buffers
+ 	 */
 -- 
 2.43.0
 
