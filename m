@@ -2,44 +2,44 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2BFCFB34D02
-	for <lists+samba-technical@lfdr.de>; Mon, 25 Aug 2025 22:57:05 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 24141B34D04
+	for <lists+samba-technical@lfdr.de>; Mon, 25 Aug 2025 22:57:15 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=G+tc5uI0jjTHMPWSxNgRwZV8XtjK0x/UIA1B314cIRE=; b=Oo5nqm0QzdATAMxZENmUvYJMSW
-	6wvGPaRpNt7LoyU7eeUZRK+0/qOHaeAJ+z2JXWXrVkdFLOw+7dLd1+AtbI7zaNtKUsTe8Bc6tNvnt
-	KP0VJpk8j+I9bLEWXXXKN8Dktu+bwEHf3I22rhBqccxMPO2SpLPJnC9MOyW000GecLNX5mNurZDUb
-	c7pLRYf+Qup7hzrrPCZT6ggj5BHRiJQi3mpNHEHzlhcBvjpsSdXay/8UOBdaUTqmLfbXyfSr9X+d3
-	MVqnp7Wpq07zdkVkpYbLeYSPBf6OLTAln5iKNM6gxrP7WtIWhB9Wwlzs/aEd8yd5TLf1ugzvbFcQT
-	UulIJlRg==;
-Received: from ip6-localhost ([::1]:42260 helo=hr1.samba.org) 
+	bh=nlWuKhq9gXfsfec/4CdlOEgLoUCFJj2XM3EMbBn+44w=; b=Syw1+92fO1FRr1A1dZp4+GFvp2
+	lRdzQwsNeBXuUza6Wc5FIWM2FG1pT7J/41kYLKdwhZ2ut/AX8z9u5Bbb782we2WKpkXo4VsIchYPn
+	KBQc+jk7tlu8biPhgO14aBOvCzOEukjF+bqtFlKxW5pYiBuDQefzDIyGZPU3HAFCZbxVlOsVeK3if
+	FlwkniNwDoqCJUfQc0eWZ8F0IB+/WbVN3ffXuaTGqxiA1xq6N4mFOr95FV6lLTTMV92m9VGP6OoXW
+	nGblqD6s8bs/6iCgXksBqEO38vNCgsD3b7SNMp7ZJfEUkr3O+Q6OflzoXils9psrURqKSo9A51HsF
+	MFcZj1uQ==;
+Received: from ip6-localhost ([::1]:30992 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1uqeFM-000Qwi-KZ; Mon, 25 Aug 2025 20:56:57 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:30996) 
+	id 1uqeFY-000R1t-KY; Mon, 25 Aug 2025 20:57:09 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:14350) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uqeCD-000PmA-GA
- for samba-technical@lists.samba.org; Mon, 25 Aug 2025 20:53:53 +0000
+ (Exim) id 1uqeCQ-000PrW-5a
+ for samba-technical@lists.samba.org; Mon, 25 Aug 2025 20:54:01 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Message-ID:Date:Cc:To:From;
- bh=G+tc5uI0jjTHMPWSxNgRwZV8XtjK0x/UIA1B314cIRE=; b=fsTTkMXQV6Wkoxt2HkDtwk7Yff
- 83pAHxSlIZW1ElV2fah7/DFG8ykWaNScGJWy4xB6mD+6R6YCzFuAGc0bi+AygCm6dXfWHZBqwfeKM
- LZvdZmZTopUXLYoSuJm/O4raK16l4gT5gYyaid5CewSKRtAiT+eCfTD51wGdpkGdV2X/JCZPM+3b/
- IdTCshrsaKy0fO5NtM4LLVlFA5ztoQ4/mtynkjABXQ+E9heX1Q+IqfnGaJWpKHahVNenE1BmdA8C/
- L6IXf4zrEIEuAq0gvvcB/rf7/g1+JfSDtjbFQNluYEWFxnIVoCwx9MqfG5Fm/dTWUCgOKl99IezEt
- Bf+K0ETCp6f7useV3bFzfk85pXb0sh8OpgcH+3jYfpQc8q3jJaWctNAV/z7SRLWt6rv+B85F1J30h
- j52cprva0cHKZUA1wgzfHkRDk9LurGa+yZI/EHFm6w13Cw3l4lCRwH9vGjrP7vRQec1V01exLPvaI
- CD48dsvbCU/CWyuNWl+C++We;
+ bh=nlWuKhq9gXfsfec/4CdlOEgLoUCFJj2XM3EMbBn+44w=; b=QohTBFxOKmPqyFJ/63voGDtbhI
+ TldYhz09LGmv0KP108cDPuzuBBeNmOhSMsvoFV3HLf3163cmUGKXbn6m6FwJIOqvooccrnTuSWXSS
+ Qfg9bdvr+3kFVXlLoB5Dplo/6UkKCMOPjuZPbs2+Mdouq9R4EyD5ffAG6SuYsecBbUagOBORlOUSz
+ I7W2UmgEpMJx2nKa/J1tn8sSHLs5btLmJnw+K/Hu8XEtmzw7e3p7Ylx0A7keCu59upkZY9rNwwkCk
+ CQLqvQGnYZCdTGxEG63jbOuhF5fiqwcVeVABGE9nr0AkhsfcWhWPQkjw4pEy4uLCVARf5JImDhOdB
+ EQKYqSZ90NqAwRBP+C4JBwdLkYDL/bBpf+RLlMxupvpa5y+RWOuUgC8mRDNv7vno9kach3AejtpKX
+ bhCPKDxYRoLPPe0yexznnddskXJiHQbnbhC/uqIuMhw2BVv8Hcje1QuS+a9k9dMteS9tIYdiqsOUr
+ Lq/hLW1g++Dyfm4vAkRBpyCT;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uqeCA-000lZJ-2H; Mon, 25 Aug 2025 20:53:39 +0000
+ (Exim) id 1uqeCJ-000lci-2Z; Mon, 25 Aug 2025 20:53:48 +0000
 To: linux-cifs@vger.kernel.org,
 	samba-technical@lists.samba.org
-Subject: [PATCH v4 071/142] smb: client: pass struct smbdirect_socket to
- smbd_ia_open()
-Date: Mon, 25 Aug 2025 22:40:32 +0200
-Message-ID: <db1174ac0241ca8556abcb128325dc2adb4c24e6.1756139607.git.metze@samba.org>
+Subject: [PATCH v4 072/142] smb: client: pass struct smbdirect_socket to
+ smbd_post_send_negotiate_req()
+Date: Mon, 25 Aug 2025 22:40:33 +0200
+Message-ID: <80ba0e1085e96f93af1150de163598d5055c2475.1756139607.git.metze@samba.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1756139607.git.metze@samba.org>
 References: <cover.1756139607.git.metze@samba.org>
@@ -79,30 +79,29 @@ Signed-off-by: Stefan Metzmacher <metze@samba.org>
  1 file changed, 2 insertions(+), 3 deletions(-)
 
 diff --git a/fs/smb/client/smbdirect.c b/fs/smb/client/smbdirect.c
-index 3a0b5e3d3142..9fef01ed6320 100644
+index 9fef01ed6320..e5219b9c0c8a 100644
 --- a/fs/smb/client/smbdirect.c
 +++ b/fs/smb/client/smbdirect.c
-@@ -773,10 +773,9 @@ static bool frwr_is_supported(struct ib_device_attr *attrs)
- }
- 
- static int smbd_ia_open(
--		struct smbd_connection *info,
-+		struct smbdirect_socket *sc,
- 		struct sockaddr *dstaddr, int port)
+@@ -827,9 +827,8 @@ static int smbd_ia_open(
+  * After negotiation, the transport is connected and ready for
+  * carrying upper layer SMB payload
+  */
+-static int smbd_post_send_negotiate_req(struct smbd_connection *info)
++static int smbd_post_send_negotiate_req(struct smbdirect_socket *sc)
  {
 -	struct smbdirect_socket *sc = &info->socket;
  	struct smbdirect_socket_parameters *sp = &sc->parameters;
- 	int rc;
+ 	struct ib_send_wr send_wr;
+ 	int rc = -ENOMEM;
+@@ -1221,7 +1220,7 @@ static int smbd_negotiate(struct smbd_connection *info)
+ 	if (rc)
+ 		return rc;
  
-@@ -1677,7 +1676,7 @@ static struct smbd_connection *_smbd_get_connection(
- 	sp->keepalive_interval_msec = smbd_keep_alive_interval * 1000;
- 	sp->keepalive_timeout_msec = KEEPALIVE_RECV_TIMEOUT * 1000;
+-	rc = smbd_post_send_negotiate_req(info);
++	rc = smbd_post_send_negotiate_req(sc);
+ 	if (rc)
+ 		return rc;
  
--	rc = smbd_ia_open(info, dstaddr, port);
-+	rc = smbd_ia_open(sc, dstaddr, port);
- 	if (rc) {
- 		log_rdma_event(INFO, "smbd_ia_open rc=%d\n", rc);
- 		goto create_id_failed;
 -- 
 2.43.0
 
