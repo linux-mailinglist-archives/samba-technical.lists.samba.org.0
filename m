@@ -2,44 +2,44 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 14A02B34D4F
-	for <lists+samba-technical@lfdr.de>; Mon, 25 Aug 2025 23:01:53 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7161BB34D4B
+	for <lists+samba-technical@lfdr.de>; Mon, 25 Aug 2025 23:01:43 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=QpsyYYVWqluMLty6/9UAIxU+hwXsAEXMA9savJJBiJg=; b=NqAVCxxyJKA8E1WTjjvUN1uoss
-	2qVPtfL950B0ZWkVxzaARfmsL7LHH4FZU6GTzUwU7uRjrixdJ4cxaIM2IjBKHYZtHzFPVDio7wmxA
-	QJPOL/QzQE2xKxeJTkxyqN/PRga+hu3Z2F9LNfqURv3ioEJjIIfdZnFyfw//BclL7xCAnFDruvLx9
-	lfxREnqvypU5EKwN76y2vHCRIOs5p4nUZVnqxItgdlRWQRKgVbsRRb+ET3Yt3E8ECNmmSgH8b3zxx
-	oZ+gcsxzXrWfA3oMTOqmVfn3Pxz2F6gVubhmD3zgu54oSUWGgELvtPdWGT3x6IcfmjF/5zq6KwFi8
-	MzwQLp4g==;
-Received: from ip6-localhost ([::1]:63990 helo=hr1.samba.org) 
+	bh=WOK7z6VcMh0Q6V3Wcyr0oxJOvqrXge65v8FPbcuga2s=; b=41ujwhHgn3nKQxDpj+q1heLTqE
+	8zRw4eG5NsI+gYJVPRpy4RO5ukpwQOjmqDQeQb9SBj65yhKgnkoGWdfeV3fATcxGn/gdDbpwQlQ3l
+	SsgwO1zWNkT1KustzGV6ptdF7TPspAl4dqM86UGB/SjpEqzfqf4IsORfXajQq3yD4MERXc9gufL9t
+	i1er2HeMFGBRjA1IhA7SCdXVYXhqu9jfFkmvdsD3bT5/Edth6UMIrOZYQW2AmBvTRKiDAmQA3jPYB
+	1PiTP3nCI3mw6okqj8fu8yxONq/ZctGuQeZFHzq/tIDmu9Ad0nJ4ff3MBsykSkozkxbkgQH9jXcVx
+	bYKGRimA==;
+Received: from ip6-localhost ([::1]:33140 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1uqeK1-000StO-Vj; Mon, 25 Aug 2025 21:01:46 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:41216) 
+	id 1uqeJq-000SoN-0R; Mon, 25 Aug 2025 21:01:34 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:37500) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uqeFw-000RFV-E8
- for samba-technical@lists.samba.org; Mon, 25 Aug 2025 20:57:48 +0000
+ (Exim) id 1uqeG3-000RIt-Fc
+ for samba-technical@lists.samba.org; Mon, 25 Aug 2025 20:57:46 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Message-ID:Date:Cc:To:From;
- bh=QpsyYYVWqluMLty6/9UAIxU+hwXsAEXMA9savJJBiJg=; b=Y0FAp3FN2uQ8goK7lrROtUVWWz
- 78tTVQQm9X4o0//OKsyJKY9i/Tm7AEFwanMqLJ/2vyjpPP/TbGxAZmYw6Y0EIrVwZ5p/ME83fy6ZD
- OnwWLTC9CNk//Y2YBWy6Z7PnW6XPrGTrTznWnF+CmrgcfM4gYhkcA68ufSvXSd9lySyYWrzgAmXgO
- 6wkpDCuTxOtNRn/2gd5ezytIUcAQTmXr6srJnhyQnDIsn5AdPqRH9S/am9CWi6NGijcBQkPvJUsIy
- thdIhh/KPf2n2pyhhZ9x4YsY+7z4vCTDm7Goks6uLvkSG0ttdHRyW7eCyr0PfFnsBdQTtkuxhjGFQ
- s6UAlDfc02WXAORL3+bTUbEJt18AX1vBQ402PPgTUa2l2KCm9lG6oLLccbp4jmYsCKPC2zeqLb2cg
- mVR0kpzNeBtH50+GyFQuAYV0M9tRiFr1fYZNzFl1mV2mHfDPJzOWOBFYTu6vOiaj24PCpuiJFpNrs
- UaArpnB7c+K3cShPtR1vMKDY;
+ bh=WOK7z6VcMh0Q6V3Wcyr0oxJOvqrXge65v8FPbcuga2s=; b=R8VQ7PLgaGeNC2VCLgcTt+UCZ6
+ e87LmmNHVIGMk2lEOpSy84noEYdbcsDnU8AVy8lqSAtmgYfpzCZQrDCS7ctnahoijqrJ41j032CG7
+ Pp/sLQ0PqkjoUE/8M8RtgcU0RnjfHjk+3scbtw+VqiIdP8OIaJhYj2ZvGfK37wkIGT0EZwOiJfUFT
+ gWn15Un5W/MYIy7CZWUAFn27h8QoFA/KoIQ9iYsk2PdDV8J1U4XXkgW/aAdSCGABK6Wl5oaVTZtnI
+ AsYwZ3ekvY8ozon1CmVsGPe1HwGSGKX1lslEXNq/UPWtJ7bqMpPCDBnOmINShRZbkeWSVLJAzzVwz
+ D7Ir7FgK0FGreCzBD92/jSxrLlIniOJf2QnL12gSBYfln34erV69rOSOsQR7qMthKk36VGn9kc6gU
+ wh4CeVV6EeUMVdO6KxHwtpnmaLTcOeBMXe3w5lDQDeGkVyXXid8LYRSZdCA7Lfget9yP0b6dFtpY/
+ 3btoHdwiJwLb7xMHx0c9TL+9;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uqeFs-000mLx-06; Mon, 25 Aug 2025 20:57:28 +0000
+ (Exim) id 1uqeG1-000mNZ-0v; Mon, 25 Aug 2025 20:57:37 +0000
 To: linux-cifs@vger.kernel.org,
 	samba-technical@lists.samba.org
-Subject: [PATCH v4 094/142] smb: server: move
- smb_direct_disconnect_rdma_work() into free_transport()
-Date: Mon, 25 Aug 2025 22:40:55 +0200
-Message-ID: <149659aad412ffd0b1ea0a61349c01044b9066a2.1756139607.git.metze@samba.org>
+Subject: [PATCH v4 095/142] smb: server: don't wait for info->send_pending ==
+ 0 on error
+Date: Mon, 25 Aug 2025 22:40:56 +0200
+Message-ID: <f786b32c48c2296ada72f3e49394d9f965f44f36.1756139607.git.metze@samba.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1756139607.git.metze@samba.org>
 References: <cover.1756139607.git.metze@samba.org>
@@ -65,9 +65,7 @@ Cc: metze@samba.org, Steve French <smfrench@gmail.com>,
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-The logic is also needed when smb_direct_handle_connect_request()
-calls free_transport(), because rdma_accept() and RDMA_CM_EVENT_ESTABLISHED
-could already be reached.
+Instead we just wake up the waiters and let them return -ENOTCONN.
 
 Cc: Namjae Jeon <linkinjeon@kernel.org>
 Cc: Steve French <smfrench@gmail.com>
@@ -76,42 +74,49 @@ Cc: linux-cifs@vger.kernel.org
 Cc: samba-technical@lists.samba.org
 Signed-off-by: Stefan Metzmacher <metze@samba.org>
 ---
- fs/smb/server/transport_rdma.c | 11 +++++++----
- 1 file changed, 7 insertions(+), 4 deletions(-)
+ fs/smb/server/transport_rdma.c | 17 +++++++++++------
+ 1 file changed, 11 insertions(+), 6 deletions(-)
 
 diff --git a/fs/smb/server/transport_rdma.c b/fs/smb/server/transport_rdma.c
-index fdcf53856665..741b5b62b7d6 100644
+index 741b5b62b7d6..d5b01748f0c4 100644
 --- a/fs/smb/server/transport_rdma.c
 +++ b/fs/smb/server/transport_rdma.c
-@@ -380,13 +380,19 @@ static void free_transport(struct smb_direct_transport *t)
- 	struct smbdirect_socket *sc = &t->socket;
- 	struct smbdirect_recv_io *recvmsg;
+@@ -388,10 +388,7 @@ static void free_transport(struct smb_direct_transport *t)
+ 	}
  
-+	disable_work_sync(&t->disconnect_work);
-+	if (sc->status < SMBDIRECT_SOCKET_DISCONNECTING) {
-+		smb_direct_disconnect_rdma_work(&t->disconnect_work);
-+		wait_event_interruptible(sc->status_wait,
-+					 sc->status == SMBDIRECT_SOCKET_DISCONNECTED);
-+	}
-+
  	wake_up_all(&t->wait_send_credits);
+-
+-	ksmbd_debug(RDMA, "wait for all send posted to IB to finish\n");
+-	wait_event(t->wait_send_pending,
+-		   atomic_read(&t->send_pending) == 0);
++	wake_up_all(&t->wait_send_pending);
  
- 	ksmbd_debug(RDMA, "wait for all send posted to IB to finish\n");
- 	wait_event(t->wait_send_pending,
- 		   atomic_read(&t->send_pending) == 0);
- 
--	disable_work_sync(&t->disconnect_work);
  	disable_work_sync(&t->post_recv_credits_work);
  	disable_work_sync(&t->send_immediate_work);
+@@ -1291,7 +1288,11 @@ static int smb_direct_writev(struct ksmbd_transport *t,
+ 	 */
  
-@@ -1486,9 +1492,6 @@ static void smb_direct_disconnect(struct ksmbd_transport *t)
+ 	wait_event(st->wait_send_pending,
+-		   atomic_read(&st->send_pending) == 0);
++		   atomic_read(&st->send_pending) == 0 ||
++		   sc->status != SMBDIRECT_SOCKET_CONNECTED);
++	if (sc->status != SMBDIRECT_SOCKET_CONNECTED && ret == 0)
++		ret = -ENOTCONN;
++
+ 	return ret;
+ }
  
- 	ksmbd_debug(RDMA, "Disconnecting cm_id=%p\n", sc->rdma.cm_id);
+@@ -1624,7 +1625,11 @@ static int smb_direct_send_negotiate_response(struct smb_direct_transport *t,
+ 	}
  
--	smb_direct_disconnect_rdma_work(&st->disconnect_work);
--	wait_event_interruptible(sc->status_wait,
--				 sc->status == SMBDIRECT_SOCKET_DISCONNECTED);
- 	free_transport(st);
+ 	wait_event(t->wait_send_pending,
+-		   atomic_read(&t->send_pending) == 0);
++		   atomic_read(&t->send_pending) == 0 ||
++		   sc->status != SMBDIRECT_SOCKET_CONNECTED);
++	if (sc->status != SMBDIRECT_SOCKET_CONNECTED)
++		return -ENOTCONN;
++
+ 	return 0;
  }
  
 -- 
