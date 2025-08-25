@@ -2,44 +2,44 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 34EAFB34DAA
-	for <lists+samba-technical@lfdr.de>; Mon, 25 Aug 2025 23:09:22 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9244DB34DAB
+	for <lists+samba-technical@lfdr.de>; Mon, 25 Aug 2025 23:09:35 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=pynBxh7fLsoz3of4JiCxtBBCus5L7YjnDUff3N5qq5M=; b=uAlpgcQqn6CqtAP4AHfWCAC7CP
-	Ca6ShXeP0iKkxlfScK9XiMiT6HwIr5Z4LHYXvJWLxhwAvDlyY3ZDwipE2EvJkS54N0Ey46+pquc98
-	WkzPFAyopvW4HfOW/ZpP0etvALpXPv2H8xnOQjpVBmJW1I8l3rT/crofoLzV+Yskcb86mC2rRR9+P
-	Zf1FZotjyoCypBbP+LaP9FVZG+nXSegGaBqWbyJaj4G9sVVxok/PaqBWf9iHpnHcZ551TeEVQ6yM5
-	6uqAgl9gFbVd1dtEi6pTYQ2nYoRqt+VfqBwbttICur9+YEOh01Getu/CGdAmEPS4kwUmdL/s01tCe
-	Bkq3jPyg==;
-Received: from ip6-localhost ([::1]:62612 helo=hr1.samba.org) 
+	bh=QexmNMLtnlGcc9C4ck7Aqqf2yrsrvnd0shGljvLndPo=; b=ltfkdcEePgrB3B/jgKwraKWxzH
+	jB6tNCXFSOskv/PKTRIGPcQ4W5L5M6MHaVtfFOh6GJjuTlwgKscPYMe3NLXhQK5VRROMSw+zpuE9g
+	siBLUTqGVOKL0mvcN32ufffUaGxgOFWRXqSMyiY9+xwX03ILhnaQGzFKcqFNN0kIpYIUU3+xX3onJ
+	AZXPoBVj6kTYKArVP43/0HDp2OHunMT+hErv+fAtTrcC9WFPqvmFmlM1lE4a/ZFR4Qr5e2CgBxPBe
+	+LR2S5t2EJ+lf+DebFiMAA2Tz+FLTcTduah9rjaPjvtcUwnyjkcaVVQtHxVzHuibP9fVv/2J2ZHGL
+	ZM4pI4WQ==;
+Received: from ip6-localhost ([::1]:27236 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1uqeRH-000WED-7e; Mon, 25 Aug 2025 21:09:15 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:19776) 
+	id 1uqeRS-000WIf-RL; Mon, 25 Aug 2025 21:09:27 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:49086) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uqeMl-000UA4-JD
- for samba-technical@lists.samba.org; Mon, 25 Aug 2025 21:04:47 +0000
+ (Exim) id 1uqeMu-000UDW-Rl
+ for samba-technical@lists.samba.org; Mon, 25 Aug 2025 21:04:53 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Message-ID:Date:Cc:To:From;
- bh=pynBxh7fLsoz3of4JiCxtBBCus5L7YjnDUff3N5qq5M=; b=qDFtjq9UIljzYv6JDr6f1+JNS/
- sUpkLMMNBAfdqBYEgQ8NDEuFYx082lVGuNlfSBblUT/m+4Q6/LD5kpHxjcFehi7lqB/ZIFwaUd+rr
- 4k6HbLWqWUKpTxEh1VQNkRHLOspnUXr/nrJ8hWkSGgNwJYduLkI3CyHNuY9iEKKHUYQk+x7YPXzx3
- UfgsW8KtteHojqs4LPWVGluKbg8kstxOEodpZ6QSs9fXBBU/y1LZlSs+4IN9jKzJ6lfWVf5Y1eNh0
- 8JMVIeRaaw5hKAmSACuacTq5JnY64rH9ngE9jpDXzXxXONQFVo38RBuxb+Du2dRUFQjUi/MwklETe
- 6q9zittPOAH8VDuoAvgLqIywFdFzQS0Jp/6pbsKg1JUqfRUWLDQMDBEJvmCkGwSI8rTCv7o9nYNNW
- IKmbFWpB5o1v4jMZYSWmKGKcSzHKqUjaR9Iz5QCtVoRoFV1Sjac1YA1zagqNIHyBWkQQi+GoO9WXW
- PbLCq5bHcnjD8xsYsY1ctPXT;
+ bh=QexmNMLtnlGcc9C4ck7Aqqf2yrsrvnd0shGljvLndPo=; b=aHVZSIsSuxoSAARHnx4TOj4ukF
+ NPTv5RuaM+oPcFL7/TJZuHJhY9bYGm0H2YQqIownwo9Sh7TjuBrCoQtfLSbD1wNPzrNhhb2LgiJ5M
+ yiVJSIoFvDYBckdw4t+Eg+WOp3A34H9qvxN2Ti5bXiGxicTKgOKN3Excr/ZvxJp0JQd7PeMOPvJxd
+ +qjSEizS7dKU4gvAMqRp7K/n7MsbM33vuqzcRbevQb+4iPoaKb7VBxQcfHxIEGMNs+BiUfFYTkINK
+ TAmE6m4jBW4L6o66BLUQgbMG8+EVd5ZniHgCMUUFk/iZ0s1E93nTJ9TpWnIfqBFKlp8iKtSO5g1Lh
+ WbV7VXPs791UIT99WQXOYoRalRZ2O5C8TViWqA7/sXs6SP2kJT7H4/2XZtpgnovl5FcbxQkIMteaj
+ HXpPKRt3y4c7yX29Pe7wc88OdXdjuV2/rVoTAN4Gu+E9lLDOGKJ+fItSrqwNb8lV1O9RyqJ2kiP18
+ EOZcf1uJM9SSJd0HkEmH9qfM;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uqeMh-000nku-0b; Mon, 25 Aug 2025 21:04:31 +0000
+ (Exim) id 1uqeMs-000nno-13; Mon, 25 Aug 2025 21:04:42 +0000
 To: linux-cifs@vger.kernel.org,
 	samba-technical@lists.samba.org
-Subject: [PATCH v4 136/142] smb: server: pass struct smbdirect_socket to
- manage_credits_prior_sending()
-Date: Mon, 25 Aug 2025 22:41:37 +0200
-Message-ID: <f993a7b5d2160f96e0d08d780386e7d42a787435.1756139608.git.metze@samba.org>
+Subject: [PATCH v4 137/142] smb: server: pass struct smbdirect_socket to
+ manage_keep_alive_before_sending()
+Date: Mon, 25 Aug 2025 22:41:38 +0200
+Message-ID: <5b574c6912b0de66687a06077ea41803ba632814.1756139608.git.metze@samba.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1756139607.git.metze@samba.org>
 References: <cover.1756139607.git.metze@samba.org>
@@ -75,42 +75,33 @@ Cc: linux-cifs@vger.kernel.org
 Cc: samba-technical@lists.samba.org
 Signed-off-by: Stefan Metzmacher <metze@samba.org>
 ---
- fs/smb/server/transport_rdma.c | 7 +++----
- 1 file changed, 3 insertions(+), 4 deletions(-)
+ fs/smb/server/transport_rdma.c | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
 
 diff --git a/fs/smb/server/transport_rdma.c b/fs/smb/server/transport_rdma.c
-index da48b2ec6dd3..8a57da09091c 100644
+index 8a57da09091c..600c541a919b 100644
 --- a/fs/smb/server/transport_rdma.c
 +++ b/fs/smb/server/transport_rdma.c
-@@ -841,9 +841,8 @@ static void send_done(struct ib_cq *cq, struct ib_wc *wc)
- 	smb_direct_free_sendmsg(sc, sibling);
+@@ -860,9 +860,8 @@ static int manage_credits_prior_sending(struct smbdirect_socket *sc)
+ 	return new_credits;
  }
  
--static int manage_credits_prior_sending(struct smb_direct_transport *t)
-+static int manage_credits_prior_sending(struct smbdirect_socket *sc)
+-static int manage_keep_alive_before_sending(struct smb_direct_transport *t)
++static int manage_keep_alive_before_sending(struct smbdirect_socket *sc)
  {
 -	struct smbdirect_socket *sc = &t->socket;
- 	int new_credits;
+ 	struct smbdirect_socket_parameters *sp = &sc->parameters;
  
- 	if (atomic_read(&sc->recv_io.credits.count) >= sc->recv_io.credits.target)
-@@ -1015,7 +1014,7 @@ static int smb_direct_create_header(struct smb_direct_transport *t,
- 	/* Fill in the packet header */
- 	packet = (struct smbdirect_data_transfer *)sendmsg->packet;
- 	packet->credits_requested = cpu_to_le16(sp->send_credit_target);
--	packet->credits_granted = cpu_to_le16(manage_credits_prior_sending(t));
-+	packet->credits_granted = cpu_to_le16(manage_credits_prior_sending(sc));
+ 	if (sc->idle.keepalive == SMBDIRECT_KEEPALIVE_PENDING) {
+@@ -1017,7 +1016,7 @@ static int smb_direct_create_header(struct smb_direct_transport *t,
+ 	packet->credits_granted = cpu_to_le16(manage_credits_prior_sending(sc));
  
  	packet->flags = 0;
- 	if (manage_keep_alive_before_sending(t))
-@@ -1604,7 +1603,7 @@ static int smb_direct_send_negotiate_response(struct smb_direct_transport *t,
- 		resp->reserved = 0;
- 		resp->credits_requested =
- 				cpu_to_le16(sp->send_credit_target);
--		resp->credits_granted = cpu_to_le16(manage_credits_prior_sending(t));
-+		resp->credits_granted = cpu_to_le16(manage_credits_prior_sending(sc));
- 		resp->max_readwrite_size = cpu_to_le32(sp->max_read_write_size);
- 		resp->preferred_send_size = cpu_to_le32(sp->max_send_size);
- 		resp->max_receive_size = cpu_to_le32(sp->max_recv_size);
+-	if (manage_keep_alive_before_sending(t))
++	if (manage_keep_alive_before_sending(sc))
+ 		packet->flags |= cpu_to_le16(SMBDIRECT_FLAG_RESPONSE_REQUESTED);
+ 
+ 	packet->reserved = 0;
 -- 
 2.43.0
 
