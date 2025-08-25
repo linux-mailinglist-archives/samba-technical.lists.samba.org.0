@@ -2,44 +2,44 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 60A51B34D70
-	for <lists+samba-technical@lfdr.de>; Mon, 25 Aug 2025 23:04:24 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 78229B34D72
+	for <lists+samba-technical@lfdr.de>; Mon, 25 Aug 2025 23:04:33 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=/RudlnxUmyv6elk/2DrnFDeTcQ6ZWQqtoAd5KhuXTEk=; b=reLd/GfV2jWli8vMFuinAHY71F
-	wgSzwsUi4fvcDyLua0s8lI144pqYdHfWJTYrQ1UGpf97ASOPKqzIWK8HDiNGAOtb9HwSXOQSClXMK
-	budjGTeukWEs6DkJES2KImwecoOPKL4+GhR603HJzll3MRZm3wHPOKatUnati3+1yDznaI2+alT+9
-	nX7NaDjpz8Wd9dnPcIaF5V071dCNkJI5JVucE0DSH2pNrnp4Qg2bmz6wtcxrCyBrPMv8u+mgljSlh
-	JljwMXrzcaDvQuSzh4AfnoJRG9+4xs20HrXqWja41KWGX0svVOsjbqxOBosJrIZ0MOJQwRQOXxnoM
-	8ZxxfsQw==;
-Received: from ip6-localhost ([::1]:41688 helo=hr1.samba.org) 
+	bh=nOW0lQkolZ9ttiBZo3H3jq1hdd72asDVQvtMra/Zgqw=; b=sxwHzuBRGE3ccQfgndI4tbcBf/
+	Gy0gLsFzXdgXegn8XynG4fqV2x6zfXLXCpTMAx3PywZ1UHmBm0/HEb/wjus4qLqROtevVIdY3lnuM
+	dtj3MajfptZOJxxyHClMA4Kg/ujWHsJEVKTEQfufHBA40KKpc3DlJM6SsOV+dkU9u1kYed4SpPSGq
+	BQskq1EZbk3KYgTVJntMQrK/XodYbeYxb6wRPzi+m+Fx5tt6e+JMAW+jyZdlzeLnIjoeFNmzxLEva
+	cRmhhEBuPYBHTSx7FWNLRibhhEQDt+LC/1Ptg/Jq7Ig2vLPs9avyblq9gswqVPmDVbb+KsEX68qEf
+	azC06YjQ==;
+Received: from ip6-localhost ([::1]:43862 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1uqeMS-000TwB-3H; Mon, 25 Aug 2025 21:04:16 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:34540) 
+	id 1uqeMd-000U1R-J6; Mon, 25 Aug 2025 21:04:27 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:41620) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uqeI7-000S9E-0l
- for samba-technical@lists.samba.org; Mon, 25 Aug 2025 20:59:56 +0000
+ (Exim) id 1uqeIG-000SDb-6o
+ for samba-technical@lists.samba.org; Mon, 25 Aug 2025 21:00:07 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Message-ID:Date:Cc:To:From;
- bh=/RudlnxUmyv6elk/2DrnFDeTcQ6ZWQqtoAd5KhuXTEk=; b=nPNbd66J9A6Hbv2Gs7EntCrhty
- bAjPEhDoauuwWYa0uOHiKcSbYi5GYYITKB7/n22lgH/9/zCVb0z4R34yUgp81qdr+cy0WDQjqozMP
- Djz6DQpB4+O2wbp3k65XiNadefMJG7ktTUUD11fh4vtQFEaLUoyu5OkeQRXfIv1e1Zyd0UEkUZUkK
- 4uGIkMaLvYVuumpe2JjeHSYvlS9VbOZV5HT3hnGHzjNugrL7yIuF6VsbX/K/Ciu/PdK+wb6wkaYyD
- 166pJrKSblMn1HeiADF1VdOONn/bjFcKaDX6weCXA/JiR0i8TzbzTz1sPbBatWYzBieRQkAAzWDX8
- Gy/qzm9HOkSjb/7NI2weRw+Pc2vevpGQL/22m+U2hZ+qd8enALk2Y8rMnPkkm8hGJojbkMW3pGcPq
- bq7750PIOOMlCzGBidwztkfy3+IULrOBHcTPZN7dREJg4uWcrLP8tEAy0vLcv6hlmZJK6qyHwdHdh
- 1ky/zRJVt3zn5qau/4uG+Syy;
+ bh=nOW0lQkolZ9ttiBZo3H3jq1hdd72asDVQvtMra/Zgqw=; b=m6nTAUBMsnJIzG2GdI2mtf60lD
+ voBsSQp4HQWXWTCJQBVArHdcVcffUr4jeovIOmQnNiUDjAwmcx+nlGqdjA3N7121adUNLZ0h0v82G
+ wXvpr/bY2BH8aCiDxY5BDYEAb9n+sbpcZFSI/kERvjEP3TpawVsOZSFqIGA/hWVaaIP93oq0JLMwp
+ HYWDOVS509F5OcGBqob9yC6s+P6dxmZeFgx/9Gf29XG8atwNkefC8v6ruvlUzYX0qDvN2QrL+o/sK
+ 721J2UKu/ICV3yVt1fcpSU0wEGMBnarXD1JFGft2Ubr6ugrRYf5G1Y5P0RLEJwGtkFwxpWIeuOnUW
+ hJYaNbIWDL+0yZ0mv8OwG6zJEMabpzGe79IbZF0MGADW5SjeFqOhG156qO6ngr0YtbWORLVSjXReh
+ ri/7Aq8JBXO3w54+jgRrJnWhNqBqZCv8/dO1whOgLx9qqx3J9iNA2CzwFLzP1ACmTrgrEAoGkwaTw
+ eFnaHsKsZ/9BAX4OGCt1fykM;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uqeI3-000mno-2s; Mon, 25 Aug 2025 20:59:44 +0000
+ (Exim) id 1uqeID-000mpc-1E; Mon, 25 Aug 2025 20:59:53 +0000
 To: linux-cifs@vger.kernel.org,
 	samba-technical@lists.samba.org
-Subject: [PATCH v4 108/142] smb: server: pass ksmbd_transport to
- get_smbd_max_read_write_size()
-Date: Mon, 25 Aug 2025 22:41:09 +0200
-Message-ID: <0c4b9bfb8da62e004e578e485b8b3a2557e5524c.1756139607.git.metze@samba.org>
+Subject: [PATCH v4 109/142] smb: server: fill smbdirect_socket_parameters at
+ the beginning and use the values from there
+Date: Mon, 25 Aug 2025 22:41:10 +0200
+Message-ID: <033ac1f719517e335fade90b7c6bc476ce259651.1756139607.git.metze@samba.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1756139607.git.metze@samba.org>
 References: <cover.1756139607.git.metze@samba.org>
@@ -65,10 +65,7 @@ Cc: metze@samba.org, Steve French <smfrench@gmail.com>,
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-We should use the per connection value.
-
-And for TCP return NT_STATUS_INVALID_PARAMETER if any
-SMB2_CHANNEL_RDMA_V1* is used.
+This is what we should do and it also simplifies the following changes.
 
 Cc: Namjae Jeon <linkinjeon@kernel.org>
 Cc: Steve French <smfrench@gmail.com>
@@ -77,89 +74,107 @@ Cc: linux-cifs@vger.kernel.org
 Cc: samba-technical@lists.samba.org
 Signed-off-by: Stefan Metzmacher <metze@samba.org>
 ---
- fs/smb/server/smb2pdu.c        | 12 ++++++++++--
- fs/smb/server/transport_rdma.c | 15 +++++++++++++--
- fs/smb/server/transport_rdma.h |  4 ++--
- 3 files changed, 25 insertions(+), 6 deletions(-)
+ fs/smb/server/transport_rdma.c | 29 +++++++++++++++--------------
+ 1 file changed, 15 insertions(+), 14 deletions(-)
 
-diff --git a/fs/smb/server/smb2pdu.c b/fs/smb/server/smb2pdu.c
-index a0ffd49d611a..8cc747a4c6c6 100644
---- a/fs/smb/server/smb2pdu.c
-+++ b/fs/smb/server/smb2pdu.c
-@@ -6759,7 +6759,11 @@ int smb2_read(struct ksmbd_work *work)
- 	if (req->Channel == SMB2_CHANNEL_RDMA_V1_INVALIDATE ||
- 	    req->Channel == SMB2_CHANNEL_RDMA_V1) {
- 		is_rdma_channel = true;
--		max_read_size = get_smbd_max_read_write_size();
-+		max_read_size = get_smbd_max_read_write_size(work->conn->transport);
-+		if (max_read_size == 0) {
-+			err = -EINVAL;
-+			goto out;
-+		}
- 	}
- 
- 	if (is_rdma_channel == true) {
-@@ -7017,7 +7021,11 @@ int smb2_write(struct ksmbd_work *work)
- 	if (req->Channel == SMB2_CHANNEL_RDMA_V1 ||
- 	    req->Channel == SMB2_CHANNEL_RDMA_V1_INVALIDATE) {
- 		is_rdma_channel = true;
--		max_write_size = get_smbd_max_read_write_size();
-+		max_write_size = get_smbd_max_read_write_size(work->conn->transport);
-+		if (max_write_size == 0) {
-+			err = -EINVAL;
-+			goto out;
-+		}
- 		length = le32_to_cpu(req->RemainingBytes);
- 	}
- 
 diff --git a/fs/smb/server/transport_rdma.c b/fs/smb/server/transport_rdma.c
-index 09838efa12bd..b65215b4dd76 100644
+index b65215b4dd76..dfafb4f2218e 100644
 --- a/fs/smb/server/transport_rdma.c
 +++ b/fs/smb/server/transport_rdma.c
-@@ -111,9 +111,20 @@ void init_smbd_max_io_size(unsigned int sz)
- 	smb_direct_max_read_write_size = sz;
- }
- 
--unsigned int get_smbd_max_read_write_size(void)
-+unsigned int get_smbd_max_read_write_size(struct ksmbd_transport *kt)
+@@ -287,6 +287,7 @@ static struct smb_direct_transport *alloc_transport(struct rdma_cm_id *cm_id)
  {
--	return smb_direct_max_read_write_size;
-+	struct smb_direct_transport *t;
-+	struct smbdirect_socket *sc;
+ 	struct smb_direct_transport *t;
+ 	struct smbdirect_socket *sc;
 +	struct smbdirect_socket_parameters *sp;
-+
-+	if (kt->ops != &ksmbd_smb_direct_transport_ops)
-+		return 0;
-+
-+	t = SMBD_TRANS(kt);
-+	sc = &t->socket;
+ 	struct ksmbd_conn *conn;
+ 
+ 	t = kzalloc(sizeof(*t), KSMBD_DEFAULT_GFP);
+@@ -294,9 +295,17 @@ static struct smb_direct_transport *alloc_transport(struct rdma_cm_id *cm_id)
+ 		return NULL;
+ 	sc = &t->socket;
+ 	smbdirect_socket_init(sc);
 +	sp = &sc->parameters;
+ 
+ 	INIT_WORK(&sc->disconnect_work, smb_direct_disconnect_rdma_work);
+ 
++	sp->recv_credit_max = smb_direct_receive_credit_max;
++	sp->send_credit_target = smb_direct_send_credit_target;
++	sp->max_send_size = smb_direct_max_send_size;
++	sp->max_fragmented_recv_size = smb_direct_max_fragmented_recv_size;
++	sp->max_recv_size = smb_direct_max_receive_size;
++	sp->max_read_write_size = smb_direct_max_read_write_size;
 +
-+	return sp->max_read_write_size;
- }
+ 	sc->rdma.cm_id = cm_id;
+ 	cm_id->context = t;
  
- static inline int get_buf_page_count(void *buf, int size)
-diff --git a/fs/smb/server/transport_rdma.h b/fs/smb/server/transport_rdma.h
-index 63eab9f8f13d..3f93c6a9f7e4 100644
---- a/fs/smb/server/transport_rdma.h
-+++ b/fs/smb/server/transport_rdma.h
-@@ -17,14 +17,14 @@ void ksmbd_rdma_stop_listening(void);
- void ksmbd_rdma_destroy(void);
- bool ksmbd_rdma_capable_netdev(struct net_device *netdev);
- void init_smbd_max_io_size(unsigned int sz);
--unsigned int get_smbd_max_read_write_size(void);
-+unsigned int get_smbd_max_read_write_size(struct ksmbd_transport *kt);
- #else
- static inline int ksmbd_rdma_init(void) { return 0; }
- static inline void ksmbd_rdma_stop_listening(void) { }
- static inline void ksmbd_rdma_destroy(void) { }
- static inline bool ksmbd_rdma_capable_netdev(struct net_device *netdev) { return false; }
- static inline void init_smbd_max_io_size(unsigned int sz) { }
--static inline unsigned int get_smbd_max_read_write_size(void) { return 0; }
-+static inline unsigned int get_smbd_max_read_write_size(struct ksmbd_transport *kt) { return 0; }
- #endif
+@@ -1694,7 +1703,6 @@ static int smb_direct_init_params(struct smb_direct_transport *t,
+ 	/* need 3 more sge. because a SMB_DIRECT header, SMB2 header,
+ 	 * SMB2 response could be mapped.
+ 	 */
+-	sp->max_send_size = smb_direct_max_send_size;
+ 	max_send_sges = DIV_ROUND_UP(sp->max_send_size, PAGE_SIZE) + 3;
+ 	if (max_send_sges > SMBDIRECT_SEND_IO_MAX_SGE) {
+ 		pr_err("max_send_size %d is too large\n", sp->max_send_size);
+@@ -1708,7 +1716,6 @@ static int smb_direct_init_params(struct smb_direct_transport *t,
+ 	 * are needed for MR registration, RDMA R/W, local & remote
+ 	 * MR invalidation.
+ 	 */
+-	sp->max_read_write_size = smb_direct_max_read_write_size;
+ 	sc->rw_io.credits.num_pages = smb_direct_get_max_fr_pages(t);
+ 	sc->rw_io.credits.max = DIV_ROUND_UP(sp->max_read_write_size,
+ 					 (sc->rw_io.credits.num_pages - 1) *
+@@ -1723,20 +1730,20 @@ static int smb_direct_init_params(struct smb_direct_transport *t,
+ 					    max_sge_per_wr) + 1);
+ 	max_rw_wrs = sc->rw_io.credits.max * wrs_per_credit;
  
- #endif /* __KSMBD_TRANSPORT_RDMA_H__ */
+-	max_send_wrs = smb_direct_send_credit_target + max_rw_wrs;
++	max_send_wrs = sp->send_credit_target + max_rw_wrs;
+ 	if (max_send_wrs > device->attrs.max_cqe ||
+ 	    max_send_wrs > device->attrs.max_qp_wr) {
+ 		pr_err("consider lowering send_credit_target = %d\n",
+-		       smb_direct_send_credit_target);
++		       sp->send_credit_target);
+ 		pr_err("Possible CQE overrun, device reporting max_cqe %d max_qp_wr %d\n",
+ 		       device->attrs.max_cqe, device->attrs.max_qp_wr);
+ 		return -EINVAL;
+ 	}
+ 
+-	if (smb_direct_receive_credit_max > device->attrs.max_cqe ||
+-	    smb_direct_receive_credit_max > device->attrs.max_qp_wr) {
++	if (sp->recv_credit_max > device->attrs.max_cqe ||
++	    sp->recv_credit_max > device->attrs.max_qp_wr) {
+ 		pr_err("consider lowering receive_credit_max = %d\n",
+-		       smb_direct_receive_credit_max);
++		       sp->recv_credit_max);
+ 		pr_err("Possible CQE overrun, device reporting max_cpe %d max_qp_wr %d\n",
+ 		       device->attrs.max_cqe, device->attrs.max_qp_wr);
+ 		return -EINVAL;
+@@ -1748,16 +1755,10 @@ static int smb_direct_init_params(struct smb_direct_transport *t,
+ 		return -EINVAL;
+ 	}
+ 
+-	sp->recv_credit_max = smb_direct_receive_credit_max;
+ 	sc->recv_io.credits.target = 1;
+ 
+-	sp->send_credit_target = smb_direct_send_credit_target;
+ 	atomic_set(&sc->rw_io.credits.count, sc->rw_io.credits.max);
+ 
+-	sp->max_send_size = smb_direct_max_send_size;
+-	sp->max_recv_size = smb_direct_max_receive_size;
+-	sp->max_fragmented_recv_size = smb_direct_max_fragmented_recv_size;
+-
+ 	cap->max_send_wr = max_send_wrs;
+ 	cap->max_recv_wr = sp->recv_credit_max;
+ 	cap->max_send_sge = max_sge_per_wr;
+@@ -1857,7 +1858,7 @@ static int smb_direct_create_qpair(struct smb_direct_transport *t,
+ 	}
+ 
+ 	sc->ib.send_cq = ib_alloc_cq(sc->ib.dev, t,
+-				 smb_direct_send_credit_target + cap->max_rdma_ctxs,
++				 sp->send_credit_target + cap->max_rdma_ctxs,
+ 				 0, IB_POLL_WORKQUEUE);
+ 	if (IS_ERR(sc->ib.send_cq)) {
+ 		pr_err("Can't create RDMA send CQ\n");
 -- 
 2.43.0
 
