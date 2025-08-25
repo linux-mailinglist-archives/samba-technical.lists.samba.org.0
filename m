@@ -2,44 +2,45 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 89B80B34CA5
-	for <lists+samba-technical@lfdr.de>; Mon, 25 Aug 2025 22:50:09 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 70E7EB34CA8
+	for <lists+samba-technical@lfdr.de>; Mon, 25 Aug 2025 22:50:23 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=uad7l+iLLaR0+CGoyI7eJ2vgNTCv4TZJu8oLnT9f8/c=; b=dEDNRPsl4v0QPw99Nn9zJzE2WN
-	sf5wwWqgHjsKwQ5QE60ibgTnLdR0JxzmHLPvEcmXeSJcEaNBdB8tqCVJfyBbce+dj2r2uZYeua2P8
-	IVlzMeSRGQoWmBL+PZYZ6uqJkjjA+TufYgfeCdJj9wXceSle3ifTYXODkajmwws5nxmPhwhoJwEhw
-	NAGtwdT5vQEyWY6C18kJ6v+lKzRxAZjYgRcDjsxC/rsWEO5HwJ+Yrdc9vJYZMW1p/s0vOPk//QVwL
-	d1lHgBNiuI6PvJj8lVZjia9ictR4TKSeFuSqKIXqfxjW08wpQ39N/MoQveyMgCf24614J79Yph9/0
-	j46bQ3VA==;
-Received: from ip6-localhost ([::1]:54444 helo=hr1.samba.org) 
+	bh=iQ7dPcLn9KMzc14gXzguNMAH82MrCskw7TCNH4Z0UiY=; b=EXdcTTfliqWSbo33pBxxG0uB0N
+	BWzzE/qquzr0yZQZUCfjcLoPbCmzmAPdMz1NgdO/laAR6ylulbglLREG7w/QCvEg6k1aX/lqWLdM8
+	ilt9ck5CRjPsmN5V+levXyHjgwcN/R4jBIv0yLdpcn6RVUJGJbbF8G3p2XsxMquvYq8WXc63B2y4v
+	7vuxpDv2z0NXfYfjVAUsEbjAcSLDwhIpLRZR2pa/WPCDfplYYhlo607+91PYfXD0AJgA4IrJGEG9s
+	TkFgdWExyJVc6+qiZ673jQyImzFBSXxBOQoPM+TwMyciUEVccMHa58j3cRbxvvNP1k427euKLDV8Z
+	Asupwd0w==;
+Received: from ip6-localhost ([::1]:56124 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1uqe8W-000OCR-Bm; Mon, 25 Aug 2025 20:49:53 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:19326) 
+	id 1uqe8r-000OGj-Hs; Mon, 25 Aug 2025 20:50:14 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:45940) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uqe6s-000NaB-EK
- for samba-technical@lists.samba.org; Mon, 25 Aug 2025 20:48:20 +0000
+ (Exim) id 1uqe72-000Ne4-Ia
+ for samba-technical@lists.samba.org; Mon, 25 Aug 2025 20:48:29 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Message-ID:Date:Cc:To:From;
- bh=uad7l+iLLaR0+CGoyI7eJ2vgNTCv4TZJu8oLnT9f8/c=; b=CqQkxELyyfzIvakxAbbhuA5zTR
- GM2x3UId+9hywgd7ZmVJMVq8oDidm9by2YIRzQLLA6QHSKgy5LKIg4kjz+8IbaIaTD8YRVc/nndX/
- MBG/Jw64bb+5BME9qxWxyBmhpYZc5M7FJxuWkYclmxmPhBb2uZ8DuSsGOftYf/a8WO22NbFhdPfby
- bhS038eWmxxy/Pu8pR8Muq9okvrPhabpkpZX7x6/pk0Bw2GqsNl1MRA9eduzR4O2z7LYFN7peW4SR
- hu5J78QqvOPTbDQWBD8olsKtMma4IuXo26pxiT4cW1ixmeB7DIOWK6RcV8gGLeTY1QFzLviuLOYHw
- l6MEdMDH0GFrC0ZuQ0h6Cyg/mY1GkZ3AtpqmSKcVknprPNdcKavZPz6jyJQIOF93C5w3JeDKjlWr4
- lYbp2+XihXv4P04K4fiHQgPIm1MGXZddpEgl34JNAs2AviKoTJWhsFs5EmDcS/ZZZwcAcb5K2cwTR
- 0atkLMrhoyJlP9nnrYgCc6Rs;
+ bh=iQ7dPcLn9KMzc14gXzguNMAH82MrCskw7TCNH4Z0UiY=; b=pu5HZVdpmQOFQIhexl4DO5yX7G
+ ARhnsaXgJK7vwCIxgYjTtniIFsQFiG8LmkaSs3Y3qll5z5yFaNbIPFzXTxm06IG4r2evWyHDthxYk
+ 3nZAAFRuwPIuWTSoA73hZhVEiuCCSxIEhh/mbv7BQgYavuDWTjRmqqKjMMxP46fXx0+Od7Dr0e61k
+ qFNcSD1+bHr00wAmlYpA//weLpiRFObCaWbWRWy6oyIv0DMkrAlZvESOAXyzIhmjyG8WHL1R1YoxS
+ iOhsodnDdPvv4c6ivt2ntA3BhkitZ30buEMoWwVdWYi28M779G/sMsVYSAsEf93RTe1QKxUYeQe3q
+ HJtteWSBkAg6zntTvVzvYbYaEybuWyCCN9rvVmbl/SRV9JHaz/YEmQWfuJuSc9GvPJb+OrwnOl3Tt
+ 3UUq33sgPyR21E0HTG4nD//SSXLi2T1zfCJMOQA8tJRtS/v7cSeXu3UPzv9xgpov3JbBWkGoAx0YD
+ fexqd54Tl94bR8+QIdvEWwky;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uqe6q-000kTZ-1b; Mon, 25 Aug 2025 20:48:08 +0000
+ (Exim) id 1uqe6z-000kVe-25; Mon, 25 Aug 2025 20:48:17 +0000
 To: linux-cifs@vger.kernel.org,
 	samba-technical@lists.samba.org
-Subject: [PATCH v4 038/142] smb: client: fill smbdirect_socket_parameters at
- the beginning and use the values from there
-Date: Mon, 25 Aug 2025 22:39:59 +0200
-Message-ID: <92fd044cebdd5b24d3824110fee3cfeafeefd8cc.1756139607.git.metze@samba.org>
+Subject: [PATCH v4 039/142] smb: client: make use of
+ smbdirect_socket_parameters.{resolve_{addr, route}, rdma_connect,
+ negotiate}_timeout_msec
+Date: Mon, 25 Aug 2025 22:40:00 +0200
+Message-ID: <c291b3020791c599cb944cc1e3e0aea5541a3d07.1756139607.git.metze@samba.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1756139607.git.metze@samba.org>
 References: <cover.1756139607.git.metze@samba.org>
@@ -65,7 +66,7 @@ Cc: metze@samba.org, Steve French <smfrench@gmail.com>,
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is what we should do and it also simplifies the following changes.
+This will make future changes to these values much saner.
 
 Cc: Steve French <smfrench@gmail.com>
 Cc: Tom Talpey <tom@talpey.com>
@@ -74,64 +75,111 @@ Cc: linux-cifs@vger.kernel.org
 Cc: samba-technical@lists.samba.org
 Signed-off-by: Stefan Metzmacher <metze@samba.org>
 ---
- fs/smb/client/smbdirect.c | 26 +++++++++++++-------------
- 1 file changed, 13 insertions(+), 13 deletions(-)
+ fs/smb/client/smbdirect.c | 22 ++++++++++++++++------
+ 1 file changed, 16 insertions(+), 6 deletions(-)
 
 diff --git a/fs/smb/client/smbdirect.c b/fs/smb/client/smbdirect.c
-index a65c3a841985..a1ca18dbb758 100644
+index a1ca18dbb758..80d5ca0f10c2 100644
 --- a/fs/smb/client/smbdirect.c
 +++ b/fs/smb/client/smbdirect.c
-@@ -1672,37 +1672,37 @@ static struct smbd_connection *_smbd_get_connection(
+@@ -57,6 +57,9 @@ static ssize_t smb_extract_iter_to_rdma(struct iov_iter *iter, size_t len,
+ /* SMBD negotiation timeout in seconds */
+ #define SMBD_NEGOTIATE_TIMEOUT	120
+ 
++/* The timeout to wait for a keepalive message from peer in seconds */
++#define KEEPALIVE_RECV_TIMEOUT 5
++
+ /* SMBD minimum receive size and fragmented sized defined in [MS-SMBD] */
+ #define SMBD_MIN_RECEIVE_SIZE		128
+ #define SMBD_MIN_FRAGMENTED_SIZE	131072
+@@ -677,6 +680,7 @@ static struct rdma_cm_id *smbd_create_id(
+ 		struct sockaddr *dstaddr, int port)
+ {
+ 	struct smbdirect_socket *sc = &info->socket;
++	struct smbdirect_socket_parameters *sp = &sc->parameters;
+ 	struct rdma_cm_id *id;
+ 	int rc;
+ 	__be16 *sport;
+@@ -699,7 +703,7 @@ static struct rdma_cm_id *smbd_create_id(
+ 	WARN_ON_ONCE(sc->status != SMBDIRECT_SOCKET_RESOLVE_ADDR_NEEDED);
+ 	sc->status = SMBDIRECT_SOCKET_RESOLVE_ADDR_RUNNING;
+ 	rc = rdma_resolve_addr(id, NULL, (struct sockaddr *)dstaddr,
+-		RDMA_RESOLVE_TIMEOUT);
++		sp->resolve_addr_timeout_msec);
+ 	if (rc) {
+ 		log_rdma_event(ERR, "rdma_resolve_addr() failed %i\n", rc);
+ 		goto out;
+@@ -707,7 +711,7 @@ static struct rdma_cm_id *smbd_create_id(
+ 	rc = wait_event_interruptible_timeout(
+ 		sc->status_wait,
+ 		sc->status != SMBDIRECT_SOCKET_RESOLVE_ADDR_RUNNING,
+-		msecs_to_jiffies(RDMA_RESOLVE_TIMEOUT));
++		msecs_to_jiffies(sp->resolve_addr_timeout_msec));
+ 	/* e.g. if interrupted returns -ERESTARTSYS */
+ 	if (rc < 0) {
+ 		log_rdma_event(ERR, "rdma_resolve_addr timeout rc: %i\n", rc);
+@@ -726,7 +730,7 @@ static struct rdma_cm_id *smbd_create_id(
+ 
+ 	WARN_ON_ONCE(sc->status != SMBDIRECT_SOCKET_RESOLVE_ROUTE_NEEDED);
+ 	sc->status = SMBDIRECT_SOCKET_RESOLVE_ROUTE_RUNNING;
+-	rc = rdma_resolve_route(id, RDMA_RESOLVE_TIMEOUT);
++	rc = rdma_resolve_route(id, sp->resolve_route_timeout_msec);
+ 	if (rc) {
+ 		log_rdma_event(ERR, "rdma_resolve_route() failed %i\n", rc);
+ 		goto out;
+@@ -734,7 +738,7 @@ static struct rdma_cm_id *smbd_create_id(
+ 	rc = wait_event_interruptible_timeout(
+ 		sc->status_wait,
+ 		sc->status != SMBDIRECT_SOCKET_RESOLVE_ROUTE_RUNNING,
+-		msecs_to_jiffies(RDMA_RESOLVE_TIMEOUT));
++		msecs_to_jiffies(sp->resolve_route_timeout_msec));
+ 	/* e.g. if interrupted returns -ERESTARTSYS */
+ 	if (rc < 0)  {
+ 		log_rdma_event(ERR, "rdma_resolve_addr timeout rc: %i\n", rc);
+@@ -1222,6 +1226,7 @@ static int smbd_post_recv(
+ static int smbd_negotiate(struct smbd_connection *info)
+ {
+ 	struct smbdirect_socket *sc = &info->socket;
++	struct smbdirect_socket_parameters *sp = &sc->parameters;
+ 	int rc;
+ 	struct smbdirect_recv_io *response = get_receive_buffer(info);
+ 
+@@ -1243,7 +1248,7 @@ static int smbd_negotiate(struct smbd_connection *info)
+ 	rc = wait_event_interruptible_timeout(
+ 		sc->status_wait,
+ 		sc->status != SMBDIRECT_SOCKET_NEGOTIATE_RUNNING,
+-		secs_to_jiffies(SMBD_NEGOTIATE_TIMEOUT));
++		msecs_to_jiffies(sp->negotiate_timeout_msec));
+ 	log_rdma_event(INFO, "wait_event_interruptible_timeout rc=%d\n", rc);
+ 
+ 	if (sc->status == SMBDIRECT_SOCKET_CONNECTED)
+@@ -1672,12 +1677,17 @@ static struct smbd_connection *_smbd_get_connection(
  
  	INIT_WORK(&sc->disconnect_work, smbd_disconnect_rdma_work);
  
-+	sp->recv_credit_max = smbd_receive_credit_max;
-+	sp->send_credit_target = smbd_send_credit_target;
-+	sp->max_send_size = smbd_max_send_size;
-+	sp->max_fragmented_recv_size = smbd_max_fragmented_recv_size;
-+	sp->max_recv_size = smbd_max_receive_size;
-+	sp->keepalive_interval_msec = smbd_keep_alive_interval * 1000;
-+
++	sp->resolve_addr_timeout_msec = RDMA_RESOLVE_TIMEOUT;
++	sp->resolve_route_timeout_msec = RDMA_RESOLVE_TIMEOUT;
++	sp->rdma_connect_timeout_msec = RDMA_RESOLVE_TIMEOUT;
++	sp->negotiate_timeout_msec = SMBD_NEGOTIATE_TIMEOUT * 1000;
+ 	sp->recv_credit_max = smbd_receive_credit_max;
+ 	sp->send_credit_target = smbd_send_credit_target;
+ 	sp->max_send_size = smbd_max_send_size;
+ 	sp->max_fragmented_recv_size = smbd_max_fragmented_recv_size;
+ 	sp->max_recv_size = smbd_max_receive_size;
+ 	sp->keepalive_interval_msec = smbd_keep_alive_interval * 1000;
++	sp->keepalive_timeout_msec = KEEPALIVE_RECV_TIMEOUT * 1000;
+ 
  	rc = smbd_ia_open(info, dstaddr, port);
  	if (rc) {
- 		log_rdma_event(INFO, "smbd_ia_open rc=%d\n", rc);
- 		goto create_id_failed;
- 	}
+@@ -1792,7 +1802,7 @@ static struct smbd_connection *_smbd_get_connection(
+ 	wait_event_interruptible_timeout(
+ 		sc->status_wait,
+ 		sc->status != SMBDIRECT_SOCKET_RDMA_CONNECT_RUNNING,
+-		msecs_to_jiffies(RDMA_RESOLVE_TIMEOUT));
++		msecs_to_jiffies(sp->rdma_connect_timeout_msec));
  
--	if (smbd_send_credit_target > sc->ib.dev->attrs.max_cqe ||
--	    smbd_send_credit_target > sc->ib.dev->attrs.max_qp_wr) {
-+	if (sp->send_credit_target > sc->ib.dev->attrs.max_cqe ||
-+	    sp->send_credit_target > sc->ib.dev->attrs.max_qp_wr) {
- 		log_rdma_event(ERR, "consider lowering send_credit_target = %d. Possible CQE overrun, device reporting max_cqe %d max_qp_wr %d\n",
--			       smbd_send_credit_target,
-+			       sp->send_credit_target,
- 			       sc->ib.dev->attrs.max_cqe,
- 			       sc->ib.dev->attrs.max_qp_wr);
- 		goto config_failed;
- 	}
- 
--	if (smbd_receive_credit_max > sc->ib.dev->attrs.max_cqe ||
--	    smbd_receive_credit_max > sc->ib.dev->attrs.max_qp_wr) {
-+	if (sp->recv_credit_max > sc->ib.dev->attrs.max_cqe ||
-+	    sp->recv_credit_max > sc->ib.dev->attrs.max_qp_wr) {
- 		log_rdma_event(ERR, "consider lowering receive_credit_max = %d. Possible CQE overrun, device reporting max_cqe %d max_qp_wr %d\n",
--			       smbd_receive_credit_max,
-+			       sp->recv_credit_max,
- 			       sc->ib.dev->attrs.max_cqe,
- 			       sc->ib.dev->attrs.max_qp_wr);
- 		goto config_failed;
- 	}
- 
--	sp->recv_credit_max = smbd_receive_credit_max;
--	sp->send_credit_target = smbd_send_credit_target;
--	sp->max_send_size = smbd_max_send_size;
--	sp->max_fragmented_recv_size = smbd_max_fragmented_recv_size;
--	sp->max_recv_size = smbd_max_receive_size;
--	sp->keepalive_interval_msec = smbd_keep_alive_interval * 1000;
--
- 	if (sc->ib.dev->attrs.max_send_sge < SMBDIRECT_SEND_IO_MAX_SGE ||
- 	    sc->ib.dev->attrs.max_recv_sge < SMBDIRECT_RECV_IO_MAX_SGE) {
- 		log_rdma_event(ERR,
+ 	if (sc->status != SMBDIRECT_SOCKET_NEGOTIATE_NEEDED) {
+ 		log_rdma_event(ERR, "rdma_connect failed port=%d\n", port);
 -- 
 2.43.0
 
