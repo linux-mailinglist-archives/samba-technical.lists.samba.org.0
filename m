@@ -2,44 +2,44 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8AEF6B34DA6
-	for <lists+samba-technical@lfdr.de>; Mon, 25 Aug 2025 23:09:01 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id CB06BB34DA7
+	for <lists+samba-technical@lfdr.de>; Mon, 25 Aug 2025 23:09:12 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=JSK+riPPPf08vYfT1RBtQsvn92r3VHjyW5AHCdAF5AY=; b=gZtfdyU7nerMaQTZcc7JlNHKht
-	+BoiOYmNln91sv8qehrsfwDMjqOPRZfpvL+8fcTAONYfKUVVYSLg6jKME93+FstIdqWeSg6NAukki
-	B5SlY3DNexnETJo09/ldHRxGCgTgOnkCDzqctQ+Sm1wr/b1R4O4e4UuhEb9zC0F+/y1BJQ7MRPce9
-	Ftny1rDKW8sP0MTwG/bwRSera38wrCdw3dr6l+FsIuhp6IccqixjLgaYiABEAUty4cO898h51RmuU
-	UDG5AcWh+CHoiATi6NeF6d0Mp3OzdVCFTeFlWHtTjur5T0LHAPsB3QRnWV59Le/kfYVEHEaGijA/N
-	RfhytBRA==;
-Received: from ip6-localhost ([::1]:26406 helo=hr1.samba.org) 
+	bh=NwE3A7aTkkt91vL+xNeS400xd5NA6hbVr1fqdCj41oo=; b=sF9mQ6s4ec6rV0rLqGCY/kK3NA
+	SwX5X/MdpeQTjNqKuIUMV/6UJoawx270qJj1YDyVU95wVuVuDkx0+HIoQ+iDVwXgbygXeuo7bDHaR
+	pORoGebExdjagA+ESqF+Vpb3wAnURGofbOlRrCLET3m1UgCdYiLNvZYkVQq2TAawhm3paARuHO6P5
+	0flpeiQtPBTR9g1HKcP7cbmIIRraM1MFdNlobYI2eRAEqDglZMiv0VWPJ4b4kVdPv4GeGTO8ebPYb
+	p3Vbg8OIIlM39ueIalVU0hD691RAGz2y0nIgD5IjBz7BKxcZYfKzqBD3YExIiW6iA7XBlke5EQz3/
+	MkoVffUg==;
+Received: from ip6-localhost ([::1]:50650 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1uqeQw-000W47-Cx; Mon, 25 Aug 2025 21:08:54 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:47168) 
+	id 1uqeR7-000W8c-LX; Mon, 25 Aug 2025 21:09:06 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:59602) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uqeMN-000Tyq-FF
- for samba-technical@lists.samba.org; Mon, 25 Aug 2025 21:04:18 +0000
+ (Exim) id 1uqeMW-000U2t-Kg
+ for samba-technical@lists.samba.org; Mon, 25 Aug 2025 21:04:28 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Message-ID:Date:Cc:To:From;
- bh=JSK+riPPPf08vYfT1RBtQsvn92r3VHjyW5AHCdAF5AY=; b=3cjsD/zznwqKL+0TSSE6iU3mnM
- D2WGCuHCapm7JjHtTfCOdFa+b/znVTmUwmYAgi2wQYYRhqUfQ/Ckstcc/KYMzll1JCp1zp8JtRrLm
- iqkVVbQlxaZ8bdm/mgmQN7ky7FSkmgfn3ksEZeZbQtts6esBtYbgDcps91T/tGOJIPkM/IC7w+7yM
- eLQ2iGIeBeh8P9N2inTsb2H2WtREN2j5fIFogE7fqb2GCC6NWh4Kxw3JxrcBA2/k4DRPfBW0qgDzf
- DPzA4CJiNyjEAv/MzOoGswJFhHEcmNld0mYhHDbwNMZUV9b2dU2vtBlf61LFZEx0bt31SiaJZpjTk
- f9f/1u/+VMID6Lk50wpwk/PhEIHhNuDZdTBEXJ2hYRyWHWaseHLxqInpiib5EUy4g6P2kClItcxnP
- XcCd6j+TzmJnDcGfeMKtzAuBxWaQSR9Nz7w4Sxr6WIF4ywr6/tNvCaFuHrigBWOrmfZlhVhbABI81
- tIg98u7uLWsItVLqGwLn/0lc;
+ bh=NwE3A7aTkkt91vL+xNeS400xd5NA6hbVr1fqdCj41oo=; b=pzYokjg1qNKSFdj9XiqfitMavR
+ t+BniILcLjBy0wtlHeb44oiZfRKTmJQqs3/48ZSXNtb9rAbcJA4TPCaFCS4Ze0gybz9tAmg/wfUiJ
+ hdlRSDW7nwndmI64I/9hkrkgNmlRaRO0ptp/g7/ffDvhO42u9d+FotCpW31X4klXy830+OYsishXb
+ 76OgF0bi7apVvWTTaNoXZ6HwBMVEUcjen0ShqEODjElfVujHUmhyXh/Fbn/0YxmL70BDNQHMdauA/
+ Ul5CaKJ0p8w5LVNbEU+WDIkO45WthklwbAXWsDwunamtqoFzjmoJC3fsylIVsRY/3J5RSc6XhrTrU
+ /vMG8QFL7sSYqCBMSUOz5kGJPV8r3CaB5os33jJwdW25JRayF83orJ1dScOIXrSJUOR5Ch26RGy+/
+ McPwrAypauQ5TnCaM/8ePEOilVNEHLCH5+zqxdGOApAflYC+b9+7o8P5CuyoQTkWSsc3MNqNnTNaS
+ BJKODLkcEZ59xG7Wdxl9w52M;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uqeMK-000ngc-2j; Mon, 25 Aug 2025 21:04:08 +0000
+ (Exim) id 1uqeMU-000niP-0S; Mon, 25 Aug 2025 21:04:18 +0000
 To: linux-cifs@vger.kernel.org,
 	samba-technical@lists.samba.org
-Subject: [PATCH v4 134/142] smb: server: pass struct smbdirect_socket to
- wait_for_rw_credits()
-Date: Mon, 25 Aug 2025 22:41:35 +0200
-Message-ID: <568abc598637207c7dae45cc46b2c5b927c90b32.1756139608.git.metze@samba.org>
+Subject: [PATCH v4 135/142] smb: server: pass struct smbdirect_socket to
+ calc_rw_credits()
+Date: Mon, 25 Aug 2025 22:41:36 +0200
+Message-ID: <3270445e0b43942129516dd8f52543cb530a46ec.1756139608.git.metze@samba.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1756139607.git.metze@samba.org>
 References: <cover.1756139607.git.metze@samba.org>
@@ -79,30 +79,31 @@ Signed-off-by: Stefan Metzmacher <metze@samba.org>
  1 file changed, 2 insertions(+), 4 deletions(-)
 
 diff --git a/fs/smb/server/transport_rdma.c b/fs/smb/server/transport_rdma.c
-index defebe773b8a..e47ff55af2e0 100644
+index e47ff55af2e0..da48b2ec6dd3 100644
 --- a/fs/smb/server/transport_rdma.c
 +++ b/fs/smb/server/transport_rdma.c
-@@ -982,10 +982,8 @@ static int wait_for_send_credits(struct smbdirect_socket *sc,
- 	return wait_for_credits(sc, &sc->send_io.credits.wait_queue, &sc->send_io.credits.count, 1);
+@@ -990,11 +990,9 @@ static int wait_for_rw_credits(struct smbdirect_socket *sc, int credits)
+ 				credits);
  }
  
--static int wait_for_rw_credits(struct smb_direct_transport *t, int credits)
-+static int wait_for_rw_credits(struct smbdirect_socket *sc, int credits)
+-static int calc_rw_credits(struct smb_direct_transport *t,
++static int calc_rw_credits(struct smbdirect_socket *sc,
+ 			   char *buf, unsigned int len)
  {
 -	struct smbdirect_socket *sc = &t->socket;
 -
- 	return wait_for_credits(sc,
- 				&sc->rw_io.credits.wait_queue,
- 				&sc->rw_io.credits.count,
-@@ -1401,7 +1399,7 @@ static int smb_direct_rdma_xmit(struct smb_direct_transport *t,
- 	ksmbd_debug(RDMA, "RDMA %s, len %#x, needed credits %#x\n",
- 		    str_read_write(is_read), buf_len, credits_needed);
+ 	return DIV_ROUND_UP(get_buf_page_count(buf, len),
+ 			    sc->rw_io.credits.num_pages);
+ }
+@@ -1390,7 +1388,7 @@ static int smb_direct_rdma_xmit(struct smb_direct_transport *t,
+ 			buf_len = 0;
+ 		}
  
--	ret = wait_for_rw_credits(t, credits_needed);
-+	ret = wait_for_rw_credits(sc, credits_needed);
- 	if (ret < 0)
- 		return ret;
- 
+-		credits_needed += calc_rw_credits(t, desc_buf, desc_buf_len);
++		credits_needed += calc_rw_credits(sc, desc_buf, desc_buf_len);
+ 		desc_buf += desc_buf_len;
+ 		buf_len -= desc_buf_len;
+ 		desc_num++;
 -- 
 2.43.0
 
