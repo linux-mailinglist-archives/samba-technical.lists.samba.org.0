@@ -2,44 +2,44 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0D26CB34D6E
-	for <lists+samba-technical@lfdr.de>; Mon, 25 Aug 2025 23:04:13 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 60A51B34D70
+	for <lists+samba-technical@lfdr.de>; Mon, 25 Aug 2025 23:04:24 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=79n6oU4o6fuFIfZ6VlNDRIbfI47efxK3S4Xd/LWOWdA=; b=0/YDyNtzz+kgvbVY2V5RLeEIVG
-	Gda2gPAx8pHxNQ7BEAjrC4bHvykU/IJvtKRPSc6tOrC4kki1CW79R+EvYvki4x+oO0o06onk+9zA8
-	IF18uBEFJtj/2fhAY1/x1twN0ql1N9bjD6s1HvR05P3HeH5dp2XcFSjP787/2+HSVD6WUev31LpOh
-	5JXO2thJnP+6KQ+f7ecwy9tz5p8RdZm9UdNby4Ua5NvwFVzETvmVowBpm2H9AkhJdm9FuXywpb9C8
-	Zw96vibmtdSNysf8LKYBUuckjdkrMDwJJCq4htC//ThxA2kRaROfyvWEE/eREKuChblMtjvoQbdrh
-	qaOQTI5w==;
-Received: from ip6-localhost ([::1]:22790 helo=hr1.samba.org) 
+	bh=/RudlnxUmyv6elk/2DrnFDeTcQ6ZWQqtoAd5KhuXTEk=; b=reLd/GfV2jWli8vMFuinAHY71F
+	wgSzwsUi4fvcDyLua0s8lI144pqYdHfWJTYrQ1UGpf97ASOPKqzIWK8HDiNGAOtb9HwSXOQSClXMK
+	budjGTeukWEs6DkJES2KImwecoOPKL4+GhR603HJzll3MRZm3wHPOKatUnati3+1yDznaI2+alT+9
+	nX7NaDjpz8Wd9dnPcIaF5V071dCNkJI5JVucE0DSH2pNrnp4Qg2bmz6wtcxrCyBrPMv8u+mgljSlh
+	JljwMXrzcaDvQuSzh4AfnoJRG9+4xs20HrXqWja41KWGX0svVOsjbqxOBosJrIZ0MOJQwRQOXxnoM
+	8ZxxfsQw==;
+Received: from ip6-localhost ([::1]:41688 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1uqeMG-000TrR-UV; Mon, 25 Aug 2025 21:04:05 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:64302) 
+	id 1uqeMS-000TwB-3H; Mon, 25 Aug 2025 21:04:16 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:34540) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uqeHx-000S68-Ul
- for samba-technical@lists.samba.org; Mon, 25 Aug 2025 20:59:45 +0000
+ (Exim) id 1uqeI7-000S9E-0l
+ for samba-technical@lists.samba.org; Mon, 25 Aug 2025 20:59:56 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Message-ID:Date:Cc:To:From;
- bh=79n6oU4o6fuFIfZ6VlNDRIbfI47efxK3S4Xd/LWOWdA=; b=jsxwxpDFXSDGcsPkNDIQgCUx6w
- Ygvif2JB7sZ8OUbwosE0CH0gGr/hvQ1DzAQK36/fECMeJ0PtTFqBG0Qyn4hF2/oqTtxG5VpMmfb2t
- b5ZiwUOg0iLC66AL98UeRtd2W7F+q3MBJp1CXuqtdbIdRzX5cDGW/V5d2fCLjDbXKjuxNvGqve/z9
- QwFgGUV0bA+AsETuIW0gtiU+Fn/WKxPfWa7EP9Ws4oWysejRBqFqC5IA/FszOFYLwaZsyu1CgVB97
- EczVcO6yF24Ii0F9oKBxX7FL2/kKuIPX/QagkB4JzrgXZ6ZVWzSMjpAfDp5aj8FG9BdN+HuO4pMmO
- 9jcxLcZ3kaGRnbR8hlqG+mOlxn9cXlV7hlJdUO9YppavBmz3udMctVNusk0evDMcBN8HGfEJB/5sS
- piKgUcHx6iUDlrzsMK/JBI6SOha7+1xlMmBIlBxNur8v/FMFr/VbKRX2IUQCBApe97TfgkE/Kzz8t
- qOIVKRzqcviQyqFVHic8hZnR;
+ bh=/RudlnxUmyv6elk/2DrnFDeTcQ6ZWQqtoAd5KhuXTEk=; b=nPNbd66J9A6Hbv2Gs7EntCrhty
+ bAjPEhDoauuwWYa0uOHiKcSbYi5GYYITKB7/n22lgH/9/zCVb0z4R34yUgp81qdr+cy0WDQjqozMP
+ Djz6DQpB4+O2wbp3k65XiNadefMJG7ktTUUD11fh4vtQFEaLUoyu5OkeQRXfIv1e1Zyd0UEkUZUkK
+ 4uGIkMaLvYVuumpe2JjeHSYvlS9VbOZV5HT3hnGHzjNugrL7yIuF6VsbX/K/Ciu/PdK+wb6wkaYyD
+ 166pJrKSblMn1HeiADF1VdOONn/bjFcKaDX6weCXA/JiR0i8TzbzTz1sPbBatWYzBieRQkAAzWDX8
+ Gy/qzm9HOkSjb/7NI2weRw+Pc2vevpGQL/22m+U2hZ+qd8enALk2Y8rMnPkkm8hGJojbkMW3pGcPq
+ bq7750PIOOMlCzGBidwztkfy3+IULrOBHcTPZN7dREJg4uWcrLP8tEAy0vLcv6hlmZJK6qyHwdHdh
+ 1ky/zRJVt3zn5qau/4uG+Syy;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uqeHu-000mlL-2V; Mon, 25 Aug 2025 20:59:35 +0000
+ (Exim) id 1uqeI3-000mno-2s; Mon, 25 Aug 2025 20:59:44 +0000
 To: linux-cifs@vger.kernel.org,
 	samba-technical@lists.samba.org
-Subject: [PATCH v4 107/142] smb: server: remove useless casts from
- KSMBD_TRANS/SMBD_TRANS
-Date: Mon, 25 Aug 2025 22:41:08 +0200
-Message-ID: <67fe9152f886014715eeda774c7c5e7267be4158.1756139607.git.metze@samba.org>
+Subject: [PATCH v4 108/142] smb: server: pass ksmbd_transport to
+ get_smbd_max_read_write_size()
+Date: Mon, 25 Aug 2025 22:41:09 +0200
+Message-ID: <0c4b9bfb8da62e004e578e485b8b3a2557e5524c.1756139607.git.metze@samba.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1756139607.git.metze@samba.org>
 References: <cover.1756139607.git.metze@samba.org>
@@ -65,9 +65,10 @@ Cc: metze@samba.org, Steve French <smfrench@gmail.com>,
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-At best they gain nothing, at worst we procude real bugs.
-Note container_of() already casts to a pointer of the
-given type.
+We should use the per connection value.
+
+And for TCP return NT_STATUS_INVALID_PARAMETER if any
+SMB2_CHANNEL_RDMA_V1* is used.
 
 Cc: Namjae Jeon <linkinjeon@kernel.org>
 Cc: Steve French <smfrench@gmail.com>
@@ -76,24 +77,89 @@ Cc: linux-cifs@vger.kernel.org
 Cc: samba-technical@lists.samba.org
 Signed-off-by: Stefan Metzmacher <metze@samba.org>
 ---
- fs/smb/server/transport_rdma.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ fs/smb/server/smb2pdu.c        | 12 ++++++++++--
+ fs/smb/server/transport_rdma.c | 15 +++++++++++++--
+ fs/smb/server/transport_rdma.h |  4 ++--
+ 3 files changed, 25 insertions(+), 6 deletions(-)
 
+diff --git a/fs/smb/server/smb2pdu.c b/fs/smb/server/smb2pdu.c
+index a0ffd49d611a..8cc747a4c6c6 100644
+--- a/fs/smb/server/smb2pdu.c
++++ b/fs/smb/server/smb2pdu.c
+@@ -6759,7 +6759,11 @@ int smb2_read(struct ksmbd_work *work)
+ 	if (req->Channel == SMB2_CHANNEL_RDMA_V1_INVALIDATE ||
+ 	    req->Channel == SMB2_CHANNEL_RDMA_V1) {
+ 		is_rdma_channel = true;
+-		max_read_size = get_smbd_max_read_write_size();
++		max_read_size = get_smbd_max_read_write_size(work->conn->transport);
++		if (max_read_size == 0) {
++			err = -EINVAL;
++			goto out;
++		}
+ 	}
+ 
+ 	if (is_rdma_channel == true) {
+@@ -7017,7 +7021,11 @@ int smb2_write(struct ksmbd_work *work)
+ 	if (req->Channel == SMB2_CHANNEL_RDMA_V1 ||
+ 	    req->Channel == SMB2_CHANNEL_RDMA_V1_INVALIDATE) {
+ 		is_rdma_channel = true;
+-		max_write_size = get_smbd_max_read_write_size();
++		max_write_size = get_smbd_max_read_write_size(work->conn->transport);
++		if (max_write_size == 0) {
++			err = -EINVAL;
++			goto out;
++		}
+ 		length = le32_to_cpu(req->RemainingBytes);
+ 	}
+ 
 diff --git a/fs/smb/server/transport_rdma.c b/fs/smb/server/transport_rdma.c
-index 133898b0cd08..09838efa12bd 100644
+index 09838efa12bd..b65215b4dd76 100644
 --- a/fs/smb/server/transport_rdma.c
 +++ b/fs/smb/server/transport_rdma.c
-@@ -99,8 +99,8 @@ struct smb_direct_transport {
- 	u8			responder_resources;
- };
+@@ -111,9 +111,20 @@ void init_smbd_max_io_size(unsigned int sz)
+ 	smb_direct_max_read_write_size = sz;
+ }
  
--#define KSMBD_TRANS(t) ((struct ksmbd_transport *)&((t)->transport))
--#define SMBD_TRANS(t)	((struct smb_direct_transport *)container_of(t, \
-+#define KSMBD_TRANS(t) (&(t)->transport)
-+#define SMBD_TRANS(t)	(container_of(t, \
- 				struct smb_direct_transport, transport))
+-unsigned int get_smbd_max_read_write_size(void)
++unsigned int get_smbd_max_read_write_size(struct ksmbd_transport *kt)
+ {
+-	return smb_direct_max_read_write_size;
++	struct smb_direct_transport *t;
++	struct smbdirect_socket *sc;
++	struct smbdirect_socket_parameters *sp;
++
++	if (kt->ops != &ksmbd_smb_direct_transport_ops)
++		return 0;
++
++	t = SMBD_TRANS(kt);
++	sc = &t->socket;
++	sp = &sc->parameters;
++
++	return sp->max_read_write_size;
+ }
  
- static const struct ksmbd_transport_ops ksmbd_smb_direct_transport_ops;
+ static inline int get_buf_page_count(void *buf, int size)
+diff --git a/fs/smb/server/transport_rdma.h b/fs/smb/server/transport_rdma.h
+index 63eab9f8f13d..3f93c6a9f7e4 100644
+--- a/fs/smb/server/transport_rdma.h
++++ b/fs/smb/server/transport_rdma.h
+@@ -17,14 +17,14 @@ void ksmbd_rdma_stop_listening(void);
+ void ksmbd_rdma_destroy(void);
+ bool ksmbd_rdma_capable_netdev(struct net_device *netdev);
+ void init_smbd_max_io_size(unsigned int sz);
+-unsigned int get_smbd_max_read_write_size(void);
++unsigned int get_smbd_max_read_write_size(struct ksmbd_transport *kt);
+ #else
+ static inline int ksmbd_rdma_init(void) { return 0; }
+ static inline void ksmbd_rdma_stop_listening(void) { }
+ static inline void ksmbd_rdma_destroy(void) { }
+ static inline bool ksmbd_rdma_capable_netdev(struct net_device *netdev) { return false; }
+ static inline void init_smbd_max_io_size(unsigned int sz) { }
+-static inline unsigned int get_smbd_max_read_write_size(void) { return 0; }
++static inline unsigned int get_smbd_max_read_write_size(struct ksmbd_transport *kt) { return 0; }
+ #endif
+ 
+ #endif /* __KSMBD_TRANSPORT_RDMA_H__ */
 -- 
 2.43.0
 
