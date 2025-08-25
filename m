@@ -2,43 +2,44 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id F270DB34C52
-	for <lists+samba-technical@lfdr.de>; Mon, 25 Aug 2025 22:44:05 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A3E7BB34C55
+	for <lists+samba-technical@lfdr.de>; Mon, 25 Aug 2025 22:44:16 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=e2QtsBQivXyb9VR8yXdGyIyFQL8dQvU+87VcXRmP61Y=; b=5hrRvIj7Hy8jmjqckP7NIBxyJI
-	oWMaeZvCUE7KtR0Pl90tLuXn06S+kYQWP6HhUxO/q4BmJF7+IxArRYeQYjBSfhxFRqDNUJVf4mdDb
-	EIFLZIRnjTeJeES9hJCiH5Dzjw1pTz2UuOErBBiKPf+J6kEYlvH3hnlcIxU510IRArz3uxmCGjPCT
-	bUQvGLaHlSZOgPybD7qDZ9Ozs5GhojTDmrJ3Vi3JEMcjwsuLuTLgTX5tILdKzNobsspRY0brFIU8x
-	1ITIJho6nYYT/6+pwXbohx8cITd/PshzWjiru9OqruGLZVk4g8UIhhJEnpgUEKhp5N05/8jsz7QUP
-	v6Y0OiaQ==;
-Received: from ip6-localhost ([::1]:53538 helo=hr1.samba.org) 
+	bh=avpXg+3zxWxFK1KwidziCd4CJjjfXRYVUt4jeexiKW4=; b=tml1DCbkxQ9puBY9KRgoOtHTFm
+	SVxkZiKTOQH6OaiJ8W+wgsvjyThOdZ9IqrOxlzQRZDx/JquJn8IaaORMxmgZfnaQTlaydwbXzqzsh
+	XLhHHHqH0jsp+9DX9Pgbf1aXTa7z0jGAvFzmWmjtOoBiBRaDytzjKRNJH/qHBRSRZo+aJOVP+YE80
+	97eg7b2D3pcEtXTp2OUxCBgzM3CbYhzBOgC4oRSwaV7/FBOdYg6PYRBQEg4h1yjqhzVpeujqM9KPU
+	0uajhxQdP2ZMXQCQplxK2a3NkluRRbM6DpXJA81oAghCIsw6gRqq/5fJjH2jVciNjkVRU0hzlq0LV
+	jFJuwB6Q==;
+Received: from ip6-localhost ([::1]:36670 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1uqe2p-000LpO-9K; Mon, 25 Aug 2025 20:43:59 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:43304) 
+	id 1uqe30-000Lu9-E7; Mon, 25 Aug 2025 20:44:11 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:43312) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uqe2J-000Lh5-WA
- for samba-technical@lists.samba.org; Mon, 25 Aug 2025 20:43:37 +0000
+ (Exim) id 1uqe2M-000Lhz-Cv
+ for samba-technical@lists.samba.org; Mon, 25 Aug 2025 20:43:39 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Message-ID:Date:Cc:To:From;
- bh=e2QtsBQivXyb9VR8yXdGyIyFQL8dQvU+87VcXRmP61Y=; b=PeBuhJ/av4P8/IJYyJGt8gzly5
- t43WO25ZoInx7TmofVXm/qf/w3KyabiF+5DWsqO8Qb3fO5MRbAMjENDpigIL11SaNX54iHwGf8dL/
- 58qIY5/6OY3/mIMhdBJW8lIX/IWQywhxLiIsX9awTw8OJ2UK61nC+olpuRSKx+6f8FUIoq1QCKUYP
- Bsf6cLhm5Mfz27vjm1ATI8v0IfQ3fsvK6WFZZU6SydIU+o8U5GpJOA2Dihfhn5ik1qpiTqrpgMRWM
- NFqJ/4d+0lLd4BvIwxS2NZVInf/8WrUO59BpxcsGelME8fW6T3bjDBaSssACVbJs3hFG8mNdQletE
- /roYX2eZl2SEvniUyUK7AyLlg/d1ek86TOI+4hiaHdzTqJpPk/OCw1tk/6/01tKvMOYoTs7MnYuiX
- bTA/HFaBHV1FVHp03b0LABZu/7zDzqxmUagoIyVlPX2GsDaiQM0sJAGYjiDv5xMDjqj7P753BLRyH
- 5IhM0+OQDlvH4lyWK5VZAt53;
+ bh=avpXg+3zxWxFK1KwidziCd4CJjjfXRYVUt4jeexiKW4=; b=nG2Lx/8Pm5Vw38M6w5JdBkIWQ3
+ dOibJJTYsg4mL4HJrlKpHeM1sZRbCnNCTX7ZFaigCGSheT19ufryrBnkrMyoHL6pmDsY9gnfd3brg
+ Wi3z0S91ZyZ0rDeyglQohcPK95usjrpfzT69BlRDGUDgaYdBM/yCCBAUojS4Rbdwf2YLJUEgXbVZ7
+ QTA7ATICEi/UZU4FUDGKfhr2h1oUO5Ro9HhGxX36ubX/nsVIM4XqaUmXGQQ3pRObGMwLHN+gyII2/
+ 7JZoRfVVBlPu9OijRmrHc5HxGYycIYGKKv+4xhQ2NckXg1x+PKoCwCvDShOYpBbRu57MGI/7ZJ2Ax
+ qwqBAGYoSnJq2vvx+AS/AztbztG4z/x3m5nOrHYckokgntM1e7bv1fx0kqTauqJPvvD43bjS8FN1o
+ +sMSJQacR0bKDJ8A7ZmGCZc3wQU6yffsCUzAGgy1UwaSM3ClDR6E/Ce0gr/ke7Yab6mIf2H9/ZKZ3
+ 3MafPQQl9vrvoi1erfziGQ1z;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uqe2A-000jSq-0U; Mon, 25 Aug 2025 20:43:18 +0000
+ (Exim) id 1uqe2K-000jTu-0o; Mon, 25 Aug 2025 20:43:28 +0000
 To: linux-cifs@vger.kernel.org,
 	samba-technical@lists.samba.org
-Subject: [PATCH v4 008/142] smb: smbdirect: introduce struct smbdirect_rw_io
-Date: Mon, 25 Aug 2025 22:39:29 +0200
-Message-ID: <b1cff4d04be83c9ac89f97612ade9e1c39f12272.1756139607.git.metze@samba.org>
+Subject: [PATCH v4 009/142] smb: smbdirect: introduce
+ smbdirect_socket.recv_io.{posted, credits}
+Date: Mon, 25 Aug 2025 22:39:30 +0200
+Message-ID: <c21ba1ceab590332c45898ebddeae31b8ca5b1fa.1756139607.git.metze@samba.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1756139607.git.metze@samba.org>
 References: <cover.1756139607.git.metze@samba.org>
@@ -64,8 +65,8 @@ Cc: metze@samba.org, Steve French <smfrench@gmail.com>,
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This will be used by the server in order to manage
-RDMA reads and writes.
+This will be used by client and server soon in order to maintain
+the state of posted recv_io messages and granted credits.
 
 Cc: Steve French <smfrench@gmail.com>
 Cc: Tom Talpey <tom@talpey.com>
@@ -75,41 +76,48 @@ Cc: linux-cifs@vger.kernel.org
 Cc: samba-technical@lists.samba.org
 Signed-off-by: Stefan Metzmacher <metze@samba.org>
 ---
- fs/smb/common/smbdirect/smbdirect_socket.h | 16 ++++++++++++++++
- 1 file changed, 16 insertions(+)
+ fs/smb/common/smbdirect/smbdirect_socket.h | 21 +++++++++++++++++++++
+ 1 file changed, 21 insertions(+)
 
 diff --git a/fs/smb/common/smbdirect/smbdirect_socket.h b/fs/smb/common/smbdirect/smbdirect_socket.h
-index 001193799e16..ff7b9f20b1ac 100644
+index ff7b9f20b1ac..09834e8db853 100644
 --- a/fs/smb/common/smbdirect/smbdirect_socket.h
 +++ b/fs/smb/common/smbdirect/smbdirect_socket.h
-@@ -6,6 +6,8 @@
- #ifndef __FS_SMB_COMMON_SMBDIRECT_SMBDIRECT_SOCKET_H__
- #define __FS_SMB_COMMON_SMBDIRECT_SMBDIRECT_SOCKET_H__
+@@ -105,6 +105,23 @@ struct smbdirect_socket {
+ 			spinlock_t lock;
+ 		} free;
  
-+#include <rdma/rw.h>
++		/*
++		 * The state for posted recv_io messages
++		 * and the refill work struct.
++		 */
++		struct {
++			atomic_t count;
++			struct work_struct refill_work;
++		} posted;
 +
- enum smbdirect_socket_status {
- 	SMBDIRECT_SOCKET_CREATED,
- 	SMBDIRECT_SOCKET_CONNECTING,
-@@ -240,4 +242,18 @@ struct smbdirect_recv_io {
- 	u8 packet[];
- };
++		/*
++		 * The credit state for the recv side
++		 */
++		struct {
++			u16 target;
++			atomic_t count;
++		} credits;
++
+ 		/*
+ 		 * The list of arrived non-empty smbdirect_recv_io
+ 		 * structures
+@@ -171,6 +188,10 @@ static __always_inline void smbdirect_socket_init(struct smbdirect_socket *sc)
+ 	INIT_LIST_HEAD(&sc->recv_io.free.list);
+ 	spin_lock_init(&sc->recv_io.free.lock);
  
-+struct smbdirect_rw_io {
-+	struct smbdirect_socket *socket;
-+	struct ib_cqe cqe;
++	atomic_set(&sc->recv_io.posted.count, 0);
 +
-+	struct list_head list;
++	atomic_set(&sc->recv_io.credits.count, 0);
 +
-+	int error;
-+	struct completion *completion;
-+
-+	struct rdma_rw_ctx rdma_ctx;
-+	struct sg_table sgt;
-+	struct scatterlist sg_list[];
-+};
-+
- #endif /* __FS_SMB_COMMON_SMBDIRECT_SMBDIRECT_SOCKET_H__ */
+ 	INIT_LIST_HEAD(&sc->recv_io.reassembly.list);
+ 	spin_lock_init(&sc->recv_io.reassembly.lock);
+ 	init_waitqueue_head(&sc->recv_io.reassembly.wait_queue);
 -- 
 2.43.0
 
