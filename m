@@ -2,44 +2,44 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 560ADB34D8A
-	for <lists+samba-technical@lfdr.de>; Mon, 25 Aug 2025 23:05:57 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 70167B34D8B
+	for <lists+samba-technical@lfdr.de>; Mon, 25 Aug 2025 23:06:10 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=3G7XCdpsL1EQY/JbwmBENrACCdbV+agokUoY6nISiFU=; b=zNOIEz3kaNyEFTNxmEkYJX6GAe
-	XSSrFzfB1Kj6qOz263upJl8mO2/PX9TFXTkfKX9+kvBaJNrrXgPhiaWB4XRv0S45itpzJ0+hd3G0x
-	vuvfHivSbqhfjuCjqrxVbc5Aw+D70jN/SJaZe/DJIF3BLdJPfCzDfOb+p/YjRs7TeGXFZmXbnaTi8
-	eU487Jpfm4s5gHc8LM/UjZtm7OxN4kYreZEkXauht9r4kSKiruZv7PehopPastyVKK9cxAfmFce5c
-	QnvVw4zdO6EzN4o+FsREcm8nkABz7hH5GfvBbu9DJ8Scj8wpmKVKZcHjHBv3bokNF96mLWWWthY2C
-	CgWE5IDw==;
-Received: from ip6-localhost ([::1]:43498 helo=hr1.samba.org) 
+	bh=+yutqYzfF3Lt8v1a3G4Z5pG3D461I4SJlOrP8aeosCE=; b=ht40TqWg4MCveOVjvDOJemVZuJ
+	JMjX7tfWoFBfsrjfxqBTfuCt6TRHEJI1LSCIlZ1FwcbJBvFl2U9v7eC1P2hthIneEhvZA3fQDuzPW
+	BpbgEqxpU1K5dGgoENPwFHavT5Ci6Wiv1eaoDQX79UFJJR0W+Bje4osxmdzcRBfWUUDJRL40T3KpH
+	MYs827y3GJnpn9ni5Xgy7PvmJrstfPgp3j1fP68SpPvHEDEYIIYjH0J3EpaHYNjHsqtx8/nuahReP
+	dPia35SIfU17QnV5W8r3V2nRbrZ12YDWG5g7aorxC7yUiCCnI5RuDZGql/P8r52o3pp3rJUdDLq0J
+	SIh1B0tA==;
+Received: from ip6-localhost ([::1]:55330 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1uqeNv-000UbP-VD; Mon, 25 Aug 2025 21:05:48 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:23414) 
+	id 1uqeO9-000Uff-O5; Mon, 25 Aug 2025 21:06:02 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:49196) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uqeJT-000Sj8-Ml
- for samba-technical@lists.samba.org; Mon, 25 Aug 2025 21:01:18 +0000
+ (Exim) id 1uqeJd-000SnG-LM
+ for samba-technical@lists.samba.org; Mon, 25 Aug 2025 21:01:32 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Message-ID:Date:Cc:To:From;
- bh=3G7XCdpsL1EQY/JbwmBENrACCdbV+agokUoY6nISiFU=; b=HccPsm50jyplwY8dLmFkqwzuID
- KW4gX0jlN82NtaU1hdcakTh6XGvrzOIrrRKu5orQJvD9Zh3NST1NjqJcAHRxcOlETGLE7bGDAvkUf
- iPrTQfaIwP6AypTTTHC7nTbkTDHcS52s2ElCht7PRjA/3mHbJbF+DIUwUoS/hLbgMTaDOpuM+tqe9
- eu1fzLGlqGjbmNxT3ZfofCrE6/kAsKl3+5T90WqLeRFyWqfnnss7Mlf4tcSmYNpIbDsPFkpRNTLEY
- 2WGW7JB2gE9HDAgrbCf6THmAh83cddH36V2HKGHXQXxq506yki8I5gnrVl9DGH6bnXq11TF9sAfce
- uu+w3pGET4B0eSHKVS7qZMCU3A1PYD4MWgAIBr7ARAjDKJseN12yGDPgszf1CLlZF2cL9iJRduQua
- UyPcGt6nYiYHO0yjPIEkwzTzJ5VCUCoOm9cEjTgtjSaTl/HjDWUxqWI4589Vj+d/2oxEsGjhFowG/
- 9sI7nNZ69fjGtfYI7VFsf7Mx;
+ bh=+yutqYzfF3Lt8v1a3G4Z5pG3D461I4SJlOrP8aeosCE=; b=agdmsyM5qGhi5d72KkLPpJUsB8
+ XZhHXnNOL8zV8PLYcX9rnkn8JrEb4M7Au+NBTrXYQFtOfApGb+WFy9XyDmAxB9bM/gyXaVMSoWnXG
+ ntJ5uYPi98EyT6JWeV/E9u5hNAJMfNXsz6I5bDAP91QEnaYkr8a3QoJU5Uk01MagfDCbrp62/xG6+
+ S57cmrb/mlr1BkrXt2yL4uMm+NwIFgMrb3993RB89PqOT0V3h+vsBGSc6yD+0pM/IddHPDopyYxZK
+ gnPi2D1ZDHdC4jRCszCPMXrFV42YtZcUY5/FtYPG5bdcdopbsJMxl8ofVw/7OVxOkArmKauYBwU/s
+ HxreqcKrOkhJQQOmbgUaOEDKfe/XCMt3K3B3HrdFmT+Y6rhgl+zk0TXEl0xRqaD5hhL8whAdbVkS4
+ KDQn159+KKY/+jBDYE1VC48CmHbYTKD469IPtrcjqIzY4QLSDRSyd5irnTemnYM1MDRMHOmW8AjU8
+ WVqVxy0HEr+vePgEBeM8q/lA;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uqeJP-000n4J-1u; Mon, 25 Aug 2025 21:01:07 +0000
+ (Exim) id 1uqeJY-000n6W-2d; Mon, 25 Aug 2025 21:01:18 +0000
 To: linux-cifs@vger.kernel.org,
 	samba-technical@lists.samba.org
-Subject: [PATCH v4 116/142] smb: server: pass struct smbdirect_socket to
- {get_free, put}_recvmsg()
-Date: Mon, 25 Aug 2025 22:41:17 +0200
-Message-ID: <a58799772bfbc4236359b35c4abdff1e0d37e529.1756139607.git.metze@samba.org>
+Subject: [PATCH v4 117/142] smb: server: pass struct smbdirect_socket to
+ smb_direct_{create, destroy}_pools()
+Date: Mon, 25 Aug 2025 22:41:18 +0200
+Message-ID: <57eaa0bb38e89012940583dbc607ffc41c1cc15c.1756139607.git.metze@samba.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1756139607.git.metze@samba.org>
 References: <cover.1756139607.git.metze@samba.org>
@@ -75,163 +75,95 @@ Cc: linux-cifs@vger.kernel.org
 Cc: samba-technical@lists.samba.org
 Signed-off-by: Stefan Metzmacher <metze@samba.org>
 ---
- fs/smb/server/transport_rdma.c | 35 ++++++++++++++++------------------
- 1 file changed, 16 insertions(+), 19 deletions(-)
+ fs/smb/server/transport_rdma.c | 19 +++++++++----------
+ 1 file changed, 9 insertions(+), 10 deletions(-)
 
 diff --git a/fs/smb/server/transport_rdma.c b/fs/smb/server/transport_rdma.c
-index 9c2f0edab604..a998f6c04aab 100644
+index a998f6c04aab..1aabd617c6ec 100644
 --- a/fs/smb/server/transport_rdma.c
 +++ b/fs/smb/server/transport_rdma.c
-@@ -147,9 +147,8 @@ static inline void
+@@ -133,7 +133,7 @@ static inline int get_buf_page_count(void *buf, int size)
+ 		(uintptr_t)buf / PAGE_SIZE;
  }
  
- static struct
--smbdirect_recv_io *get_free_recvmsg(struct smb_direct_transport *t)
-+smbdirect_recv_io *get_free_recvmsg(struct smbdirect_socket *sc)
- {
--	struct smbdirect_socket *sc = &t->socket;
- 	struct smbdirect_recv_io *recvmsg = NULL;
+-static void smb_direct_destroy_pools(struct smb_direct_transport *transport);
++static void smb_direct_destroy_pools(struct smbdirect_socket *sc);
+ static void smb_direct_post_recv_credits(struct work_struct *work);
+ static int smb_direct_post_send_data(struct smb_direct_transport *t,
+ 				     struct smbdirect_send_batch *send_ctx,
+@@ -412,7 +412,7 @@ static void free_transport(struct smb_direct_transport *t)
+ 	if (sc->rdma.cm_id)
+ 		rdma_destroy_id(sc->rdma.cm_id);
  
- 	spin_lock(&sc->recv_io.free.lock);
-@@ -163,11 +162,9 @@ smbdirect_recv_io *get_free_recvmsg(struct smb_direct_transport *t)
- 	return recvmsg;
+-	smb_direct_destroy_pools(t);
++	smb_direct_destroy_pools(sc);
+ 	ksmbd_conn_free(KSMBD_TRANS(t)->conn);
  }
  
--static void put_recvmsg(struct smb_direct_transport *t,
-+static void put_recvmsg(struct smbdirect_socket *sc,
- 			struct smbdirect_recv_io *recvmsg)
- {
--	struct smbdirect_socket *sc = &t->socket;
--
- 	if (likely(recvmsg->sge.length != 0)) {
- 		ib_dma_unmap_single(sc->ib.dev,
- 				    recvmsg->sge.addr,
-@@ -399,7 +396,7 @@ static void free_transport(struct smb_direct_transport *t)
- 		if (recvmsg) {
- 			list_del(&recvmsg->list);
- 			spin_unlock(&sc->recv_io.reassembly.lock);
--			put_recvmsg(t, recvmsg);
-+			put_recvmsg(sc, recvmsg);
- 		} else {
- 			spin_unlock(&sc->recv_io.reassembly.lock);
- 		}
-@@ -514,7 +511,7 @@ static void recv_done(struct ib_cq *cq, struct ib_wc *wc)
- 	t = container_of(sc, struct smb_direct_transport, socket);
- 
- 	if (wc->status != IB_WC_SUCCESS || wc->opcode != IB_WC_RECV) {
--		put_recvmsg(t, recvmsg);
-+		put_recvmsg(sc, recvmsg);
- 		if (wc->status != IB_WC_WR_FLUSH_ERR) {
- 			pr_err("Recv error. status='%s (%d)' opcode=%d\n",
- 			       ib_wc_status_msg(wc->status), wc->status,
-@@ -542,7 +539,7 @@ static void recv_done(struct ib_cq *cq, struct ib_wc *wc)
- 	switch (sc->recv_io.expected) {
- 	case SMBDIRECT_EXPECT_NEGOTIATE_REQ:
- 		if (wc->byte_len < sizeof(struct smbdirect_negotiate_req)) {
--			put_recvmsg(t, recvmsg);
-+			put_recvmsg(sc, recvmsg);
- 			smb_direct_disconnect_rdma_connection(t);
- 			return;
- 		}
-@@ -560,7 +557,7 @@ static void recv_done(struct ib_cq *cq, struct ib_wc *wc)
- 
- 		if (wc->byte_len <
- 		    offsetof(struct smbdirect_data_transfer, padding)) {
--			put_recvmsg(t, recvmsg);
-+			put_recvmsg(sc, recvmsg);
- 			smb_direct_disconnect_rdma_connection(t);
- 			return;
- 		}
-@@ -569,7 +566,7 @@ static void recv_done(struct ib_cq *cq, struct ib_wc *wc)
- 		if (data_length) {
- 			if (wc->byte_len < sizeof(struct smbdirect_data_transfer) +
- 			    (u64)data_length) {
--				put_recvmsg(t, recvmsg);
-+				put_recvmsg(sc, recvmsg);
- 				smb_direct_disconnect_rdma_connection(t);
- 				return;
- 			}
-@@ -610,7 +607,7 @@ static void recv_done(struct ib_cq *cq, struct ib_wc *wc)
- 			enqueue_reassembly(t, recvmsg, (int)data_length);
- 			wake_up(&sc->recv_io.reassembly.wait_queue);
- 		} else
--			put_recvmsg(t, recvmsg);
-+			put_recvmsg(sc, recvmsg);
- 
- 		return;
- 	}
-@@ -623,7 +620,7 @@ static void recv_done(struct ib_cq *cq, struct ib_wc *wc)
- 	 * This is an internal error!
- 	 */
- 	WARN_ON_ONCE(sc->recv_io.expected != SMBDIRECT_EXPECT_DATA_TRANSFER);
--	put_recvmsg(t, recvmsg);
-+	put_recvmsg(sc, recvmsg);
- 	smb_direct_disconnect_rdma_connection(t);
- }
- 
-@@ -749,7 +746,7 @@ static int smb_direct_read(struct ksmbd_transport *t, char *buf,
- 					spin_unlock_irq(&sc->recv_io.reassembly.lock);
- 				}
- 				queue_removed++;
--				put_recvmsg(st, recvmsg);
-+				put_recvmsg(sc, recvmsg);
- 				offset = 0;
- 			} else {
- 				offset += to_copy;
-@@ -795,7 +792,7 @@ static void smb_direct_post_recv_credits(struct work_struct *work)
- 
- 	if (atomic_read(&sc->recv_io.credits.count) < sc->recv_io.credits.target) {
- 		while (true) {
--			recvmsg = get_free_recvmsg(t);
-+			recvmsg = get_free_recvmsg(sc);
- 			if (!recvmsg)
- 				break;
- 
-@@ -804,7 +801,7 @@ static void smb_direct_post_recv_credits(struct work_struct *work)
- 			ret = smb_direct_post_recv(t, recvmsg);
- 			if (ret) {
- 				pr_err("Can't post recv: %d\n", ret);
--				put_recvmsg(t, recvmsg);
-+				put_recvmsg(sc, recvmsg);
- 				break;
- 			}
- 			credits++;
-@@ -1729,7 +1726,7 @@ static int smb_direct_prepare_negotiation(struct smb_direct_transport *t)
- 
- 	sc->recv_io.expected = SMBDIRECT_EXPECT_NEGOTIATE_REQ;
- 
--	recvmsg = get_free_recvmsg(t);
-+	recvmsg = get_free_recvmsg(sc);
- 	if (!recvmsg)
- 		return -ENOMEM;
- 
-@@ -1748,7 +1745,7 @@ static int smb_direct_prepare_negotiation(struct smb_direct_transport *t)
- 	smb_direct_post_recv_credits(&sc->recv_io.posted.refill_work);
+@@ -1835,9 +1835,8 @@ static int smb_direct_init_params(struct smb_direct_transport *t,
  	return 0;
- out_err:
--	put_recvmsg(t, recvmsg);
-+	put_recvmsg(sc, recvmsg);
- 	return ret;
  }
  
-@@ -1843,7 +1840,7 @@ static void smb_direct_destroy_pools(struct smb_direct_transport *t)
- 	struct smbdirect_socket *sc = &t->socket;
+-static void smb_direct_destroy_pools(struct smb_direct_transport *t)
++static void smb_direct_destroy_pools(struct smbdirect_socket *sc)
+ {
+-	struct smbdirect_socket *sc = &t->socket;
  	struct smbdirect_recv_io *recvmsg;
  
--	while ((recvmsg = get_free_recvmsg(t)))
-+	while ((recvmsg = get_free_recvmsg(sc)))
- 		mempool_free(recvmsg, sc->recv_io.mem.pool);
- 
- 	mempool_destroy(sc->recv_io.mem.pool);
-@@ -2055,7 +2052,7 @@ static int smb_direct_prepare(struct ksmbd_transport *t)
- 	sc->recv_io.reassembly.queue_length--;
- 	list_del(&recvmsg->list);
- 	spin_unlock_irq(&sc->recv_io.reassembly.lock);
--	put_recvmsg(st, recvmsg);
-+	put_recvmsg(sc, recvmsg);
- 
- 	return ret;
+ 	while ((recvmsg = get_free_recvmsg(sc)))
+@@ -1856,15 +1855,14 @@ static void smb_direct_destroy_pools(struct smb_direct_transport *t)
+ 	sc->send_io.mem.cache = NULL;
  }
+ 
+-static int smb_direct_create_pools(struct smb_direct_transport *t)
++static int smb_direct_create_pools(struct smbdirect_socket *sc)
+ {
+-	struct smbdirect_socket *sc = &t->socket;
+ 	struct smbdirect_socket_parameters *sp = &sc->parameters;
+ 	char name[80];
+ 	int i;
+ 	struct smbdirect_recv_io *recvmsg;
+ 
+-	snprintf(name, sizeof(name), "smbdirect_send_io_pool_%p", t);
++	snprintf(name, sizeof(name), "smbdirect_send_io_pool_%p", sc);
+ 	sc->send_io.mem.cache = kmem_cache_create(name,
+ 					     sizeof(struct smbdirect_send_io) +
+ 					      sizeof(struct smbdirect_negotiate_resp),
+@@ -1878,7 +1876,7 @@ static int smb_direct_create_pools(struct smb_direct_transport *t)
+ 	if (!sc->send_io.mem.pool)
+ 		goto err;
+ 
+-	snprintf(name, sizeof(name), "smbdirect_recv_io_pool_%p", t);
++	snprintf(name, sizeof(name), "smbdirect_recv_io_pool_%p", sc);
+ 	sc->recv_io.mem.cache = kmem_cache_create(name,
+ 					     sizeof(struct smbdirect_recv_io) +
+ 					     sp->max_recv_size,
+@@ -1903,7 +1901,7 @@ static int smb_direct_create_pools(struct smb_direct_transport *t)
+ 
+ 	return 0;
+ err:
+-	smb_direct_destroy_pools(t);
++	smb_direct_destroy_pools(sc);
+ 	return -ENOMEM;
+ }
+ 
+@@ -2059,6 +2057,7 @@ static int smb_direct_prepare(struct ksmbd_transport *t)
+ 
+ static int smb_direct_connect(struct smb_direct_transport *st)
+ {
++	struct smbdirect_socket *sc = &st->socket;
+ 	int ret;
+ 	struct ib_qp_cap qp_cap;
+ 
+@@ -2068,7 +2067,7 @@ static int smb_direct_connect(struct smb_direct_transport *st)
+ 		return ret;
+ 	}
+ 
+-	ret = smb_direct_create_pools(st);
++	ret = smb_direct_create_pools(sc);
+ 	if (ret) {
+ 		pr_err("Can't init RDMA pool: %d\n", ret);
+ 		return ret;
 -- 
 2.43.0
 
