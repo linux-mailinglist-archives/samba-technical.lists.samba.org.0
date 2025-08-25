@@ -2,44 +2,44 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id D0B86B34CF6
-	for <lists+samba-technical@lfdr.de>; Mon, 25 Aug 2025 22:56:02 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id CA6BEB34CF8
+	for <lists+samba-technical@lfdr.de>; Mon, 25 Aug 2025 22:56:12 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=tMx5Ah+SuJ38Wcv2vHqUr6QFUs4jhB41lsRYxeWB10A=; b=1oHPiqbbyoV6rFODQN7oeUMcTS
-	SLhc5V/Xf4q2s/ZhNSOSSzHcmWvnUbbeDnsOqpawd2PPr0bei84pI2DymU1rDdzZIE15zs1ms0HuR
-	gkBZqhBs8U+95jvrQN3mQAfFFHp6dwV1t1lEPWYR/kflWPv8YZ437YHduii06yWy8sxfsSis8usBe
-	63YIYnzKIfg7N/87k1m3TMJwpGYbhrlpUUs246Vp35lAXPvniDHhDbNuDrAMbyzNa5EsqAgefjfCj
-	ZrRi5iPVKLULYSmp+iwywDvJL6k/6beSKcWuukVkLAfzSGAW9QsSjKgAUndm4BFzH4LPUxDyiksXv
-	P0NJiTVA==;
-Received: from ip6-localhost ([::1]:20086 helo=hr1.samba.org) 
+	bh=FI+qEL5myJk6s0GuUe2FtCh+ykqBZBfnhHlRKn1q1XA=; b=mAJJ3rBqdSF4OQkiuDjPZY7+YG
+	vfYasB+zZ4Y/EqryFsgoMDAr4A31v9vkY4DKjS9j5+bvkgKROdw3r2kqpybRjXgq8cVYo12n4Z4y9
+	oQ3yqDDGq/9Af5YFJX74wJr7G/gONoO5murpDxjGSsIVlh3vsrBT/n2cEyfz7UH5qF2+64J+JjihF
+	4umRwhgXxB/NQq6mG+KQmH9L0488Xt0L0JHLj9865cyTKMOjnAhc8DueWMKAgOzn2NngApsBukUCk
+	wdhO3Gr/wHecpMAusYmYSaGSiF6Kt1Yj00FF8SGxvhpqjlnc2yqczA7LIz/gBLT+oG2VT9nzMP4r3
+	Woc4HmVw==;
+Received: from ip6-localhost ([::1]:20100 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1uqeEN-000Qbl-FH; Mon, 25 Aug 2025 20:55:55 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:28536) 
+	id 1uqeEU-000Qe0-IY; Mon, 25 Aug 2025 20:56:03 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:42296) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uqeBO-000POr-Hb
- for samba-technical@lists.samba.org; Mon, 25 Aug 2025 20:53:02 +0000
+ (Exim) id 1uqeBZ-000PTM-PA
+ for samba-technical@lists.samba.org; Mon, 25 Aug 2025 20:53:13 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Message-ID:Date:Cc:To:From;
- bh=tMx5Ah+SuJ38Wcv2vHqUr6QFUs4jhB41lsRYxeWB10A=; b=nAQXHIaNEQd74PwyDKdgi4tHpp
- flHCCdVFWRvJaZHA7dzCWOrZOgGv1oryPOOWqxm73zbme5my6RvY9dNfxRjOryBCPY3I2Tz6gmwDi
- BiI1lPAiYC2hGovz7BW770St4QdCPsFj98ExruujyJ9E4dgOXlGonSJ4nwru+xQbqmRq/936MgG3C
- fluksIxEhK9nbgXRkhD/V9jct3ShERN33swn6Y2lfSoW8KyPt0GRk9ermTN2KEjS89PvuJDz/HpTS
- cqD1tiyBlk5MjzlKwwN4jCr8VXplSPTD+liTZIhlbnkqWUnppV3l0tHKX1G4fFoxpcpfrhyuzBJju
- e6Rv0QQy52djfw39Khxlot7B9J9E2IJZn+MKdrhJupkExmC0YEca08rYU+UIS3ru83leF1fZhOpXJ
- ikwyq9pOuRWI/6o47ZCwsyfbcQCNjuYDgp83BIj0LocMR8igSZMl5C75Njj2V4mRoTkONbDTe3Dgo
- XUKgHODrgzL5RgExYxrwSMda;
+ bh=FI+qEL5myJk6s0GuUe2FtCh+ykqBZBfnhHlRKn1q1XA=; b=IkIF80jgAwdT9F2vAktZdMAtbP
+ IAv2P2gVCseiXI8L1r16Yw647bjXu2WeClAPCP+laMN+SSnFffemmZn/HppUGWajemiz/TI52jKJw
+ b/Ty9w16ErImqXhEOdE1XhEJriQJSqsHVF5OXj8zPGt9A+vW2k1QjQW7vCKnbq4v3sZrJnVL3WOBk
+ /TriWvbhhVTy8UMiWcwwhk7YXweF2zqgrzMrEP0UcNQkc33u+ACK9GKiQPSncpa9O7Gs/REzl/z8j
+ JevnzstHSrV2frm1uRX0L0ALxdGrciu1c7VoeGYvAD99U0fm3mBixn//gdZa/RQWnsuHE5VchpG4B
+ LA/bFkYz2zrNT2kf7y7J/aEwTW35J2x2X2LUwyZgo145+G9xJz5U1cPfAuJ1Mn7pnFlRRQOFdAByT
+ yNw+1k1KOwiCB31dSOGUcb/XMKkCgEUjjfmse+W0vvNL0GVtEgNiQx/dgRmUrPxWhptsH1587YGRV
+ eLQSQTam5Sg2Q3Ajd5BzRuEQ;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uqeBM-000lR1-0r; Mon, 25 Aug 2025 20:52:48 +0000
+ (Exim) id 1uqeBW-000lTE-0I; Mon, 25 Aug 2025 20:52:58 +0000
 To: linux-cifs@vger.kernel.org,
 	samba-technical@lists.samba.org
-Subject: [PATCH v4 066/142] smb: client: pass struct smbdirect_socket to
- smbd_post_send_empty()
-Date: Mon, 25 Aug 2025 22:40:27 +0200
-Message-ID: <f35d07ab7d5d622b3ce13767a466b0f9b96d6bb0.1756139607.git.metze@samba.org>
+Subject: [PATCH v4 067/142] smb: client: pass struct smbdirect_socket to
+ smbd_post_send_full_iter()
+Date: Mon, 25 Aug 2025 22:40:28 +0200
+Message-ID: <a0c9463c4be4f91a9ad0fc49f7c99d2b5e534788.1756139607.git.metze@samba.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1756139607.git.metze@samba.org>
 References: <cover.1756139607.git.metze@samba.org>
@@ -75,49 +75,42 @@ Cc: linux-cifs@vger.kernel.org
 Cc: samba-technical@lists.samba.org
 Signed-off-by: Stefan Metzmacher <metze@samba.org>
 ---
- fs/smb/client/smbdirect.c | 9 +++------
- 1 file changed, 3 insertions(+), 6 deletions(-)
+ fs/smb/client/smbdirect.c | 7 +++----
+ 1 file changed, 3 insertions(+), 4 deletions(-)
 
 diff --git a/fs/smb/client/smbdirect.c b/fs/smb/client/smbdirect.c
-index 40d0233f41df..b9ea58e8db46 100644
+index b9ea58e8db46..baeda2192a27 100644
 --- a/fs/smb/client/smbdirect.c
 +++ b/fs/smb/client/smbdirect.c
-@@ -38,7 +38,7 @@ static int smbd_post_recv(
- 		struct smbdirect_socket *sc,
- 		struct smbdirect_recv_io *response);
- 
--static int smbd_post_send_empty(struct smbd_connection *info);
-+static int smbd_post_send_empty(struct smbdirect_socket *sc);
- 
- static void destroy_mr_list(struct smbdirect_socket *sc);
- static int allocate_mr_list(struct smbdirect_socket *sc);
-@@ -1137,9 +1137,8 @@ static int smbd_post_send_iter(struct smbdirect_socket *sc,
-  * Empty message is used to extend credits to peer to for keep live
-  * while there is no upper layer payload to send at the time
-  */
--static int smbd_post_send_empty(struct smbd_connection *info)
-+static int smbd_post_send_empty(struct smbdirect_socket *sc)
- {
--	struct smbdirect_socket *sc = &info->socket;
- 	int remaining_data_length = 0;
- 
- 	sc->statistics.send_empty++;
-@@ -1390,14 +1389,12 @@ static void send_immediate_empty_message(struct work_struct *work)
- {
- 	struct smbdirect_socket *sc =
- 		container_of(work, struct smbdirect_socket, idle.immediate_work);
--	struct smbd_connection *info =
--		container_of(sc, struct smbd_connection, socket);
- 
- 	if (sc->status != SMBDIRECT_SOCKET_CONNECTED)
- 		return;
- 
- 	log_keep_alive(INFO, "send an empty message\n");
--	smbd_post_send_empty(info);
-+	smbd_post_send_empty(sc);
+@@ -1145,11 +1145,10 @@ static int smbd_post_send_empty(struct smbdirect_socket *sc)
+ 	return smbd_post_send_iter(sc, NULL, &remaining_data_length);
  }
  
- /* Implement idle connection timer [MS-SMBD] 3.1.6.2 */
+-static int smbd_post_send_full_iter(struct smbd_connection *info,
++static int smbd_post_send_full_iter(struct smbdirect_socket *sc,
+ 				    struct iov_iter *iter,
+ 				    int *_remaining_data_length)
+ {
+-	struct smbdirect_socket *sc = &info->socket;
+ 	int rc = 0;
+ 
+ 	/*
+@@ -2104,13 +2103,13 @@ int smbd_send(struct TCP_Server_Info *server,
+ 			klen += rqst->rq_iov[i].iov_len;
+ 		iov_iter_kvec(&iter, ITER_SOURCE, rqst->rq_iov, rqst->rq_nvec, klen);
+ 
+-		rc = smbd_post_send_full_iter(info, &iter, &remaining_data_length);
++		rc = smbd_post_send_full_iter(sc, &iter, &remaining_data_length);
+ 		if (rc < 0)
+ 			break;
+ 
+ 		if (iov_iter_count(&rqst->rq_iter) > 0) {
+ 			/* And then the data pages if there are any */
+-			rc = smbd_post_send_full_iter(info, &rqst->rq_iter,
++			rc = smbd_post_send_full_iter(sc, &rqst->rq_iter,
+ 						      &remaining_data_length);
+ 			if (rc < 0)
+ 				break;
 -- 
 2.43.0
 
