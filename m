@@ -2,44 +2,44 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 053D6B34CB9
-	for <lists+samba-technical@lfdr.de>; Mon, 25 Aug 2025 22:51:28 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 55FA9B34CBC
+	for <lists+samba-technical@lfdr.de>; Mon, 25 Aug 2025 22:51:57 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=pJ79xbc4WZ7mqYEznHD8Pr1giGvza9I7WhZe9hCzhVQ=; b=Vn0Cznxn9tA+PXssfUpenk7m+B
-	zjc7FiNAnQ2kabZEX0I0zAdORMVpcbNY4kER4vjLokYXLgxr5HRXn+0nocOziFqc+Sh/xS53WbKT6
-	n185lA4djx8q7uITI0ztiFiOkFaQZ/Tup0XRK8OjzDCQZDEpYQ8FM+4EGnCJPbPeR3U8KBF7TmoAy
-	coPzLLhgN7fJqiflGcUDKE05BpYLlebiZpb+RGzPXoH/MxfEfAwvhEoGtcDFW48e4POKK5JkKEJpE
-	bTKRG34MSR7WDLDbuJNu0VfO4gz5trCnhDcBI2X7hlWc/1iZcvTYeoJ7sHrcnfF/4nWYVpHPvk1uk
-	riR/MJEA==;
-Received: from ip6-localhost ([::1]:38450 helo=hr1.samba.org) 
+	bh=uRXglccDxx3/AZsZFE1LCTE+r12kACEO3iBf19LjDKU=; b=5ruMXFr9agGeGFkJ9RpsaZtE+0
+	fywelArQlEwY9QnzRVAig/OEA2PPkxshh1WdwTdhmYFOcBY1rfPGOQUuUywXrloAMZcqWj7vC7Ts0
+	7A0Ly1cB1IebB4ASFa7LCyDIWSgbb8GkivW4a18eaQYfEf3gzylnNyUDZUtRQQYY0z1L/LiN1R+iN
+	W2rAVJ3snaJtu9REdvcrXzS3lIjsWIn/9Fv8BFjotACb8BYdxtFahgInTNmK14OlUSHbOaFqmn1Jk
+	kP0S0eXA6Wfu2nyjLSkKI1eJ6MgRseC7IGsITl1SIgxHbyoXIshPjwBp1XYJb4GXHnq5/gQFwMUsI
+	1pHWmAMw==;
+Received: from ip6-localhost ([::1]:23254 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1uqe9w-000Oio-Jc; Mon, 25 Aug 2025 20:51:20 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:13270) 
+	id 1uqeA7-000Onx-0V; Mon, 25 Aug 2025 20:51:31 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:22520) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uqe7n-000NxJ-Ea
- for samba-technical@lists.samba.org; Mon, 25 Aug 2025 20:49:16 +0000
+ (Exim) id 1uqe7y-000O1Z-S4
+ for samba-technical@lists.samba.org; Mon, 25 Aug 2025 20:50:17 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Message-ID:Date:Cc:To:From;
- bh=pJ79xbc4WZ7mqYEznHD8Pr1giGvza9I7WhZe9hCzhVQ=; b=XZ+rc3d+6/vhOpxhwCIadoigYN
- muX8ePsjq5/V4DW6kUBuw1EvuLOkSYeJOVcBvQipY55jQ9kbSxIQGAEnGzhF0gP8rM8Tg9NJVpATf
- m2iAq+qdH8XLJg1AaEb5jY2e3/PnHpvoMMNddzdQOhA0vWcEZQrCE/oablkE1tqVE79TOOKybLfJs
- obpL23vJ8CbclLYEdEBpjdUBRwkIr6jiBWQR1diIKqeUp6tLSxZ1bU7pnhRwG+kO8z+r0JyGFRx3I
- e0rcjs5FmzJ/qCIKObB6oGtMXWU7Vh+NjazPC3gr/xSxUY5NfX0e5jeC9LQTNBf6Ia4yS5tplhO6O
- GKacyHy/6glm0SxZ6FRRYFi9I1jOLmsF9yT8n9eM5a4tX2vpi1Ox90TksQgaOv4pJHLAwBCUIsQiC
- uiXCyB7zXMIwHsc1QtKKkeZ7OwM3yPEFw2z2XpHLROLxgXeqzMpOllqZpEuKIXC8YLyBa2TQkjaLv
- YLXHaZZJRxslUXzLcn9QY/I0;
+ bh=uRXglccDxx3/AZsZFE1LCTE+r12kACEO3iBf19LjDKU=; b=wl4MWHGqtwEYGILBxQJkFugJ4z
+ cxbpaA/Cc7BcsbYo0vErESmdWdKPmvBaIgBSgeYkNFVfUsX9xKilZTYUtDkkre2jWZ2tiKTSzWp/j
+ MT923YKaciNZuBd/dtboYGvi6D/oov87a4jkMm0a/UXql69ZAYiBOS+lI9a9HPAoA3CezWUd2wKR+
+ 9iDwCF4O7TBIAx6AdueBlxemiMGdkAohA/lHFZtPy06WBUpvCw1Vg9RVhsLbXMV60sxzFcLVd/9ey
+ WcrMcF+S7/2dku7+OrojLXZuJRtul8+779tkfXmGzmDPSfNuhhkR2ylXYgKEjBE4CHbZqivTr1o4f
+ rJAeAQMwKb6XfQI3oM8jO8afQHlI2Nb92fuWjd47XqE3D+euN4m6aiyLUCKMAW2kxk8OA40Tp87Fh
+ GI+FLjHaH1+G/qBfnxg+o5ZBELtkIKdT+fDQstoW0gOhsq5Ck2WUqwyJtczibGvgrHa+O0Fy7Yyqk
+ wR1cyNIlA1N+K1rY9Igf2QJQ;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uqe7k-000kgV-0t; Mon, 25 Aug 2025 20:49:04 +0000
+ (Exim) id 1uqe7t-000kiV-0n; Mon, 25 Aug 2025 20:49:14 +0000
 To: linux-cifs@vger.kernel.org,
 	samba-technical@lists.samba.org
-Subject: [PATCH v4 044/142] smb: client: make use of
- smbdirect_socket.idle.{keepalive, immediate_work, timer_work}
-Date: Mon, 25 Aug 2025 22:40:05 +0200
-Message-ID: <e9a91f95c92d491ac778a03f198ee0857109d6ea.1756139607.git.metze@samba.org>
+Subject: [PATCH v4 045/142] smb: client: remove unused
+ smbd_connection->protocol
+Date: Mon, 25 Aug 2025 22:40:06 +0200
+Message-ID: <6ee43343a299728f5328858774dcc57e09a5a045.1756139607.git.metze@samba.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1756139607.git.metze@samba.org>
 References: <cover.1756139607.git.metze@samba.org>
@@ -65,8 +65,8 @@ Cc: metze@samba.org, Steve French <smfrench@gmail.com>,
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This will allow client and server to use the common structures in order
-to share common functions later.
+There is only one protocol version for smbdirect yet and
+this variable is write only.
 
 Cc: Steve French <smfrench@gmail.com>
 Cc: Tom Talpey <tom@talpey.com>
@@ -75,198 +75,59 @@ Cc: linux-cifs@vger.kernel.org
 Cc: samba-technical@lists.samba.org
 Signed-off-by: Stefan Metzmacher <metze@samba.org>
 ---
- fs/smb/client/smbdirect.c | 59 ++++++++++++++++++++-------------------
- fs/smb/client/smbdirect.h |  9 ------
- 2 files changed, 30 insertions(+), 38 deletions(-)
+ fs/smb/client/cifs_debug.c | 5 +++--
+ fs/smb/client/smbdirect.c  | 1 -
+ fs/smb/client/smbdirect.h  | 2 --
+ 3 files changed, 3 insertions(+), 5 deletions(-)
 
+diff --git a/fs/smb/client/cifs_debug.c b/fs/smb/client/cifs_debug.c
+index 9dadf04508ac..8f1ad9cb6208 100644
+--- a/fs/smb/client/cifs_debug.c
++++ b/fs/smb/client/cifs_debug.c
+@@ -24,6 +24,7 @@
+ #endif
+ #ifdef CONFIG_CIFS_SMB_DIRECT
+ #include "smbdirect.h"
++#include "../common/smbdirect/smbdirect_pdu.h"
+ #endif
+ #include "cifs_swn.h"
+ #include "cached_dir.h"
+@@ -442,8 +443,8 @@ static int cifs_debug_data_proc_show(struct seq_file *m, void *v)
+ 
+ 		seq_printf(m, "\nSMBDirect (in hex) protocol version: %x "
+ 			"transport status: %x",
+-			server->smbd_conn->protocol,
+-			server->smbd_conn->socket.status);
++			SMBDIRECT_V1,
++			sc->status);
+ 		seq_printf(m, "\nConn receive_credit_max: %x "
+ 			"send_credit_target: %x max_send_size: %x",
+ 			sp->recv_credit_max,
 diff --git a/fs/smb/client/smbdirect.c b/fs/smb/client/smbdirect.c
-index cd00b4801795..450e43f1fe39 100644
+index 450e43f1fe39..68450489c5d1 100644
 --- a/fs/smb/client/smbdirect.c
 +++ b/fs/smb/client/smbdirect.c
-@@ -173,8 +173,8 @@ static void smbd_disconnect_rdma_work(struct work_struct *work)
- 	disable_work(&sc->disconnect_work);
- 	disable_work(&sc->recv_io.posted.refill_work);
- 	disable_work(&info->mr_recovery_work);
--	disable_work(&info->send_immediate_work);
--	disable_delayed_work(&info->idle_timer_work);
-+	disable_work(&sc->idle.immediate_work);
-+	disable_delayed_work(&sc->idle.timer_work);
- 
- 	switch (sc->status) {
- 	case SMBDIRECT_SOCKET_NEGOTIATE_NEEDED:
-@@ -544,7 +544,7 @@ static void smbd_post_send_credits(struct work_struct *work)
- 	if (atomic_read(&sc->recv_io.credits.count) <
- 		sc->recv_io.credits.target - 1) {
- 		log_keep_alive(INFO, "schedule send of an empty message\n");
--		queue_work(info->workqueue, &info->send_immediate_work);
-+		queue_work(info->workqueue, &sc->idle.immediate_work);
+@@ -454,7 +454,6 @@ static bool process_negotiation_response(
+ 			le16_to_cpu(packet->negotiated_version));
+ 		return false;
  	}
- }
+-	info->protocol = le16_to_cpu(packet->negotiated_version);
  
-@@ -585,8 +585,8 @@ static void recv_done(struct ib_cq *cq, struct ib_wc *wc)
- 	 * Reset timer to the keepalive interval in
- 	 * order to trigger our next keepalive message.
- 	 */
--	info->keep_alive_requested = KEEP_ALIVE_NONE;
--	mod_delayed_work(info->workqueue, &info->idle_timer_work,
-+	sc->idle.keepalive = SMBDIRECT_KEEPALIVE_NONE;
-+	mod_delayed_work(info->workqueue, &sc->idle.timer_work,
- 			 msecs_to_jiffies(sp->keepalive_interval_msec));
- 
- 	switch (sc->recv_io.expected) {
-@@ -652,7 +652,7 @@ static void recv_done(struct ib_cq *cq, struct ib_wc *wc)
- 		if (le16_to_cpu(data_transfer->flags) &
- 				SMBDIRECT_FLAG_RESPONSE_REQUESTED) {
- 			log_keep_alive(INFO, "schedule send of immediate response\n");
--			queue_work(info->workqueue, &info->send_immediate_work);
-+			queue_work(info->workqueue, &sc->idle.immediate_work);
- 		}
- 
- 		/*
-@@ -954,13 +954,13 @@ static int manage_keep_alive_before_sending(struct smbd_connection *info)
- 	struct smbdirect_socket *sc = &info->socket;
- 	struct smbdirect_socket_parameters *sp = &sc->parameters;
- 
--	if (info->keep_alive_requested == KEEP_ALIVE_PENDING) {
--		info->keep_alive_requested = KEEP_ALIVE_SENT;
-+	if (sc->idle.keepalive == SMBDIRECT_KEEPALIVE_PENDING) {
-+		sc->idle.keepalive = SMBDIRECT_KEEPALIVE_SENT;
- 		/*
- 		 * Now use the keepalive timeout (instead of keepalive interval)
- 		 * in order to wait for a response
- 		 */
--		mod_delayed_work(info->workqueue, &info->idle_timer_work,
-+		mod_delayed_work(info->workqueue, &sc->idle.timer_work,
- 				 msecs_to_jiffies(sp->keepalive_timeout_msec));
- 		return 1;
- 	}
-@@ -1425,9 +1425,10 @@ static void destroy_receive_buffers(struct smbd_connection *info)
- 
- static void send_immediate_empty_message(struct work_struct *work)
- {
-+	struct smbdirect_socket *sc =
-+		container_of(work, struct smbdirect_socket, idle.immediate_work);
- 	struct smbd_connection *info =
--		container_of(work, struct smbd_connection, send_immediate_work);
--	struct smbdirect_socket *sc = &info->socket;
-+		container_of(sc, struct smbd_connection, socket);
- 
- 	if (sc->status != SMBDIRECT_SOCKET_CONNECTED)
- 		return;
-@@ -1439,16 +1440,16 @@ static void send_immediate_empty_message(struct work_struct *work)
- /* Implement idle connection timer [MS-SMBD] 3.1.6.2 */
- static void idle_connection_timer(struct work_struct *work)
- {
--	struct smbd_connection *info = container_of(
--					work, struct smbd_connection,
--					idle_timer_work.work);
--	struct smbdirect_socket *sc = &info->socket;
-+	struct smbdirect_socket *sc =
-+		container_of(work, struct smbdirect_socket, idle.timer_work.work);
- 	struct smbdirect_socket_parameters *sp = &sc->parameters;
-+	struct smbd_connection *info =
-+		container_of(sc, struct smbd_connection, socket);
- 
--	if (info->keep_alive_requested != KEEP_ALIVE_NONE) {
-+	if (sc->idle.keepalive != SMBDIRECT_KEEPALIVE_NONE) {
- 		log_keep_alive(ERR,
--			"error status info->keep_alive_requested=%d\n",
--			info->keep_alive_requested);
-+			"error status sc->idle.keepalive=%d\n",
-+			sc->idle.keepalive);
- 		smbd_disconnect_rdma_connection(info);
- 		return;
- 	}
-@@ -1460,11 +1461,11 @@ static void idle_connection_timer(struct work_struct *work)
- 	 * Now use the keepalive timeout (instead of keepalive interval)
- 	 * in order to wait for a response
- 	 */
--	info->keep_alive_requested = KEEP_ALIVE_PENDING;
--	mod_delayed_work(info->workqueue, &info->idle_timer_work,
-+	sc->idle.keepalive = SMBDIRECT_KEEPALIVE_PENDING;
-+	mod_delayed_work(info->workqueue, &sc->idle.timer_work,
- 			 msecs_to_jiffies(sp->keepalive_timeout_msec));
- 	log_keep_alive(INFO, "schedule send of empty idle message\n");
--	queue_work(info->workqueue, &info->send_immediate_work);
-+	queue_work(info->workqueue, &sc->idle.immediate_work);
- }
- 
- /*
-@@ -1506,9 +1507,9 @@ void smbd_destroy(struct TCP_Server_Info *server)
- 	sc->ib.qp = NULL;
- 
- 	log_rdma_event(INFO, "cancelling idle timer\n");
--	disable_delayed_work_sync(&info->idle_timer_work);
-+	disable_delayed_work_sync(&sc->idle.timer_work);
- 	log_rdma_event(INFO, "cancelling send immediate work\n");
--	disable_work_sync(&info->send_immediate_work);
-+	disable_work_sync(&sc->idle.immediate_work);
- 
- 	/* It's not possible for upper layer to get to reassembly */
- 	log_rdma_event(INFO, "drain the reassembly queue\n");
-@@ -1852,14 +1853,14 @@ static struct smbd_connection *_smbd_get_connection(
- 		goto allocate_cache_failed;
- 	}
- 
--	INIT_WORK(&info->send_immediate_work, send_immediate_empty_message);
--	INIT_DELAYED_WORK(&info->idle_timer_work, idle_connection_timer);
-+	INIT_WORK(&sc->idle.immediate_work, send_immediate_empty_message);
-+	INIT_DELAYED_WORK(&sc->idle.timer_work, idle_connection_timer);
- 	/*
--	 * start with the negotiate timeout and KEEP_ALIVE_PENDING
-+	 * start with the negotiate timeout and SMBDIRECT_KEEPALIVE_PENDING
- 	 * so that the timer will cause a disconnect.
- 	 */
--	info->keep_alive_requested = KEEP_ALIVE_PENDING;
--	mod_delayed_work(info->workqueue, &info->idle_timer_work,
-+	sc->idle.keepalive = SMBDIRECT_KEEPALIVE_PENDING;
-+	mod_delayed_work(info->workqueue, &sc->idle.timer_work,
- 			 msecs_to_jiffies(sp->negotiate_timeout_msec));
- 
- 	init_waitqueue_head(&info->wait_post_send);
-@@ -1887,7 +1888,7 @@ static struct smbd_connection *_smbd_get_connection(
- 	return NULL;
- 
- negotiation_failed:
--	disable_delayed_work_sync(&info->idle_timer_work);
-+	disable_delayed_work_sync(&sc->idle.timer_work);
- 	destroy_caches_and_workqueue(info);
- 	sc->status = SMBDIRECT_SOCKET_NEGOTIATE_FAILED;
- 	rdma_disconnect(sc->rdma.cm_id);
+ 	if (packet->credits_requested == 0) {
+ 		log_rdma_event(ERR, "error: credits_requested==0\n");
 diff --git a/fs/smb/client/smbdirect.h b/fs/smb/client/smbdirect.h
-index d51ec4d01be7..0197a9da294e 100644
+index 0197a9da294e..3963fd27d8b6 100644
 --- a/fs/smb/client/smbdirect.h
 +++ b/fs/smb/client/smbdirect.h
-@@ -27,12 +27,6 @@ extern int smbd_max_send_size;
- extern int smbd_send_credit_target;
- extern int smbd_receive_credit_max;
- 
--enum keep_alive_status {
--	KEEP_ALIVE_NONE,
--	KEEP_ALIVE_PENDING,
--	KEEP_ALIVE_SENT,
--};
--
- /*
-  * The context for the SMBDirect transport
-  * Everything related to the transport is here. It has several logical parts
-@@ -46,7 +40,6 @@ struct smbd_connection {
+@@ -39,8 +39,6 @@ extern int smbd_receive_credit_max;
+ struct smbd_connection {
  	struct smbdirect_socket socket;
  
- 	/* dynamic connection parameters defined in [MS-SMBD] 3.1.1.1 */
--	enum keep_alive_status keep_alive_requested;
- 	int protocol;
+-	/* dynamic connection parameters defined in [MS-SMBD] 3.1.1.1 */
+-	int protocol;
  
  	/* Memory registrations */
-@@ -74,8 +67,6 @@ struct smbd_connection {
- 	wait_queue_head_t wait_post_send;
- 
- 	struct workqueue_struct *workqueue;
--	struct work_struct send_immediate_work;
--	struct delayed_work idle_timer_work;
- 
- 	/* for debug purposes */
- 	unsigned int count_get_receive_buffer;
+ 	/* Maximum number of pages in a single RDMA write/read on this connection */
 -- 
 2.43.0
 
