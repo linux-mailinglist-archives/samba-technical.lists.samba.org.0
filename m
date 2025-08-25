@@ -2,44 +2,44 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1D65EB34DAE
-	for <lists+samba-technical@lfdr.de>; Mon, 25 Aug 2025 23:09:54 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0464EB34DB0
+	for <lists+samba-technical@lfdr.de>; Mon, 25 Aug 2025 23:10:07 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=RJ8ch65eUboITu5ixn4t4Z+9kEC41oIacj4i7Z+Jjbw=; b=4E2TcGJ18qLn0sAz4e1N1mvF1g
-	+pxQv13tPK9+uUw8U9XIrID9x2rYud+5zcG2MEdfivS8QJg1GCypBfb0PtpcIaV+NKMrn5JsXA3og
-	OReVGH82CG3pxKc8aMfAH5pkyRJ8GQCcPEwYV+XxRanmK6xDz5pyHR+0icpfgJ+orRUg0/R2cAPyJ
-	3ZfmOOo4mYFIlAljtMkvqmYDa4sItWEGsukhzOrBVPBTbVGj6YG9TgJV5l3ongHSDEjSrHoiEmRqz
-	SEIJa4IWNF2wgbvNgfy1ZWyrCYSkt/a6PWkFdEr3vT4wbseISh3jEuzYmRH1usk9eS0CYXj2IZZAE
-	8voA48sw==;
-Received: from ip6-localhost ([::1]:61366 helo=hr1.samba.org) 
+	bh=ZvZ9nYGC0Z7vo2Ez/qv/mhp8FFPaQPquVU1UHY94L4c=; b=wv6CTVBtKQG4pkcNlZBfLNoPo8
+	ay4VgDdpkHCC2LHS8Ytcyv8OVtvDb/gJ8mORFVjJD8hiXJSl+UC3lEKdYUmvc0/f80lSJva8q9iE+
+	Z83YW/97eZsoJ1JquyZ9RtKo50Ves+fBB5FW64qXjl1r35YGeCNtK4JR4lDBmxPpQy7RGr9XfZUDm
+	d7ZvGA8mrn3yHr6tXxXBhhE9CRZxpegtVAqgwEr9wYykSvPLiwuxf4JWv5MpoQYeiYs20+rCi2O3/
+	oS/LOqii27frPvfq/POe75qazB7qrMoCixjOwd2UEkmU1i6g/oSbIG5Zc+rZIvqC3T5+0nr9BABwA
+	OAc29Cfg==;
+Received: from ip6-localhost ([::1]:28128 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1uqeRn-000WSn-Ty; Mon, 25 Aug 2025 21:09:48 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:10380) 
+	id 1uqeRy-000WXm-KN; Mon, 25 Aug 2025 21:09:59 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:35292) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uqeND-000ULT-RV
- for samba-technical@lists.samba.org; Mon, 25 Aug 2025 21:05:13 +0000
+ (Exim) id 1uqeNP-000UQE-3V
+ for samba-technical@lists.samba.org; Mon, 25 Aug 2025 21:05:21 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Message-ID:Date:Cc:To:From;
- bh=RJ8ch65eUboITu5ixn4t4Z+9kEC41oIacj4i7Z+Jjbw=; b=gcp3yE98tSkxswMqFd+13e297N
- wLCiYwxtHCIvmg7I5fnKTyzqi5iMO7pwfiCo4Aq6iKOArQ8j14QXTudVGSKhEnJGbV/vtdWdyRf8V
- ICriqj3zIuwTgNjSe0aL3JZJQfKLEhn43gBFlnuyLgYP3r5A+KMiN5AnxjqbdghKQoDeGSjUtxvJs
- TJBBcOTcQ9uf+5RQLC0B6PNrCbR2MzmEaLdUSwcvkTlPjks+j+9qZ86BcbGJ6wlVRuVnLuqzDC0/a
- TGo8QLypMhPsJ/RcYmjQqMRHxyLnAmrfyve3s1bdXmMhPBmYvkcMh72lujun91UmJ5M56oRa8ERrT
- 4QBlhwmjg3f0MyZxgeT1uuewRepfl2WrUbl3l3VB9pTQ1LT7+YDx+gEfwYcA0p1jdUH5+9tpPEGyd
- zxbpbDMf5dRdEUNthCxU1H2Fn4OolwpA/ilyTzX88PMi5GDjctf/tRbKFBWpl3eryOfa+X05lliyp
- u7qaJOBySVKc8wmo4aJdBeUT;
+ bh=ZvZ9nYGC0Z7vo2Ez/qv/mhp8FFPaQPquVU1UHY94L4c=; b=O0hNVgu0sobCpeM0ShLVrAHHic
+ x85D1nbTy+yGMIui+n/MuAnlMfs9YYiqwpP+LqhocwTWj8QX+nf4WFBDG6xxWeVJ2hHsb2y2ExEDd
+ FfembwCvP6aWMYjvfVt4IUCfSdbh4bfNQGUUwft8a+0BTAqgbZjNXdMFVCGLtj6BZ1bvsnCB7dTlP
+ 8pgymlS6pVgBZCY4l3jn8tA/3/8/LSMsEdAhuc7aO+EuYzoS1TGGYYJ/Hzgr5tXcpsZA+MBmkVcRP
+ 8iuEDO0lye764uhRG1SjPQZXB7nkd+EvIoP9IwT33j+wT/y4WpvMb54bYLr4IfqLq2gVF+mzU8HNL
+ YKDMzIF/69sAq95GLFWJwhYI1KZYgqT/80Vg2/WLM866IQMEr3sqXQ8FyJWsWdlPzYo58cbYASEqQ
+ etWFJRP7L2ODj11Ja8LBjLCYnim4yhunLBzBaO/QDexjEiIl6Vsi1s1a3LTvJD1pQzXv3fGbzsHI3
+ m2CdQAcQZFFC7xwHvhWFENEN;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uqeNB-000nrJ-0N; Mon, 25 Aug 2025 21:05:01 +0000
+ (Exim) id 1uqeNK-000ntB-1Z; Mon, 25 Aug 2025 21:05:10 +0000
 To: linux-cifs@vger.kernel.org,
 	samba-technical@lists.samba.org
-Subject: [PATCH v4 139/142] smb: server: pass struct smbdirect_socket to
- post_sendmsg()
-Date: Mon, 25 Aug 2025 22:41:40 +0200
-Message-ID: <47101bb14a30c9d368d00c1edda236c83333f52e.1756139608.git.metze@samba.org>
+Subject: [PATCH v4 140/142] smb: server: pass struct smbdirect_socket to
+ smb_direct_post_send_data()
+Date: Mon, 25 Aug 2025 22:41:41 +0200
+Message-ID: <d7ee120110dbd9a2830808babdb2468299f0ed54.1756139608.git.metze@samba.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1756139607.git.metze@samba.org>
 References: <cover.1756139607.git.metze@samba.org>
@@ -75,44 +75,78 @@ Cc: linux-cifs@vger.kernel.org
 Cc: samba-technical@lists.samba.org
 Signed-off-by: Stefan Metzmacher <metze@samba.org>
 ---
- fs/smb/server/transport_rdma.c | 7 +++----
- 1 file changed, 3 insertions(+), 4 deletions(-)
+ fs/smb/server/transport_rdma.c | 15 ++++++---------
+ 1 file changed, 6 insertions(+), 9 deletions(-)
 
 diff --git a/fs/smb/server/transport_rdma.c b/fs/smb/server/transport_rdma.c
-index 0c11855a2a8a..289325640a04 100644
+index 289325640a04..7f7c31326226 100644
 --- a/fs/smb/server/transport_rdma.c
 +++ b/fs/smb/server/transport_rdma.c
-@@ -1104,11 +1104,10 @@ static int get_mapped_sg_list(struct ib_device *device, void *buf, int size,
- 	return ib_dma_map_sg(device, sg_list, npages, dir);
+@@ -135,7 +135,7 @@ static inline int get_buf_page_count(void *buf, int size)
+ 
+ static void smb_direct_destroy_pools(struct smbdirect_socket *sc);
+ static void smb_direct_post_recv_credits(struct work_struct *work);
+-static int smb_direct_post_send_data(struct smb_direct_transport *t,
++static int smb_direct_post_send_data(struct smbdirect_socket *sc,
+ 				     struct smbdirect_send_batch *send_ctx,
+ 				     struct kvec *iov, int niov,
+ 				     int remaining_data_length);
+@@ -269,13 +269,11 @@ static void smb_direct_send_immediate_work(struct work_struct *work)
+ {
+ 	struct smbdirect_socket *sc =
+ 		container_of(work, struct smbdirect_socket, idle.immediate_work);
+-	struct smb_direct_transport *t =
+-		container_of(sc, struct smb_direct_transport, socket);
+ 
+ 	if (sc->status != SMBDIRECT_SOCKET_CONNECTED)
+ 		return;
+ 
+-	smb_direct_post_send_data(t, NULL, NULL, 0, 0);
++	smb_direct_post_send_data(sc, NULL, NULL, 0, 0);
  }
  
--static int post_sendmsg(struct smb_direct_transport *t,
-+static int post_sendmsg(struct smbdirect_socket *sc,
- 			struct smbdirect_send_batch *send_ctx,
- 			struct smbdirect_send_io *msg)
+ static void smb_direct_idle_connection_timer(struct work_struct *work)
+@@ -1142,12 +1140,11 @@ static int post_sendmsg(struct smbdirect_socket *sc,
+ 	return smb_direct_post_send(sc, &msg->wr);
+ }
+ 
+-static int smb_direct_post_send_data(struct smb_direct_transport *t,
++static int smb_direct_post_send_data(struct smbdirect_socket *sc,
+ 				     struct smbdirect_send_batch *send_ctx,
+ 				     struct kvec *iov, int niov,
+ 				     int remaining_data_length)
  {
 -	struct smbdirect_socket *sc = &t->socket;
- 	int i;
- 
- 	for (i = 0; i < msg->num_sge; i++)
-@@ -1199,7 +1198,7 @@ static int smb_direct_post_send_data(struct smb_direct_transport *t,
- 		}
- 	}
- 
--	ret = post_sendmsg(t, send_ctx, msg);
-+	ret = post_sendmsg(sc, send_ctx, msg);
- 	if (ret)
- 		goto err;
- 	return 0;
-@@ -1625,7 +1624,7 @@ static int smb_direct_send_negotiate_response(struct smb_direct_transport *t,
- 	sendmsg->sge[0].length = sizeof(*resp);
- 	sendmsg->sge[0].lkey = sc->ib.pd->local_dma_lkey;
- 
--	ret = post_sendmsg(t, NULL, sendmsg);
-+	ret = post_sendmsg(sc, NULL, sendmsg);
- 	if (ret) {
- 		smb_direct_free_sendmsg(sc, sendmsg);
- 		return ret;
+ 	int i, j, ret;
+ 	struct smbdirect_send_io *msg;
+ 	int data_length;
+@@ -1241,7 +1238,7 @@ static int smb_direct_writev(struct ksmbd_transport *t,
+ 			if (i > start) {
+ 				remaining_data_length -=
+ 					(buflen - iov[i].iov_len);
+-				ret = smb_direct_post_send_data(st, &send_ctx,
++				ret = smb_direct_post_send_data(sc, &send_ctx,
+ 								&iov[start], i - start,
+ 								remaining_data_length);
+ 				if (ret)
+@@ -1259,7 +1256,7 @@ static int smb_direct_writev(struct ksmbd_transport *t,
+ 						min_t(int, max_iov_size,
+ 						      buflen - max_iov_size * j);
+ 					remaining_data_length -= vec.iov_len;
+-					ret = smb_direct_post_send_data(st, &send_ctx, &vec, 1,
++					ret = smb_direct_post_send_data(sc, &send_ctx, &vec, 1,
+ 									remaining_data_length);
+ 					if (ret)
+ 						goto done;
+@@ -1275,7 +1272,7 @@ static int smb_direct_writev(struct ksmbd_transport *t,
+ 			if (i == niovs) {
+ 				/* send out all remaining vecs */
+ 				remaining_data_length -= buflen;
+-				ret = smb_direct_post_send_data(st, &send_ctx,
++				ret = smb_direct_post_send_data(sc, &send_ctx,
+ 								&iov[start], i - start,
+ 								remaining_data_length);
+ 				if (ret)
 -- 
 2.43.0
 
