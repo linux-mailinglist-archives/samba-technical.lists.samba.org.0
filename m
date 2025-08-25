@@ -2,44 +2,44 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2E3A1B34C88
-	for <lists+samba-technical@lfdr.de>; Mon, 25 Aug 2025 22:48:27 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 51474B34C92
+	for <lists+samba-technical@lfdr.de>; Mon, 25 Aug 2025 22:48:38 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=UW6eS9CxDHobELUIPmZRpu4OxqzdfIyO+N6wYgdZ6+A=; b=Z814/vWboHTzJGSzn+QVqHio6/
-	1xtn/+amY3aeId59DtlLswWqBmdCCahE1b+t3tkSNdTdzqRVmkFpgN4gewsvU8QkghPq0C4cMJ1yc
-	tXTn2OTTo0z+CDuZXZ43TClV873scqFCNibJX6A96FE/ugDX3DUXSppCZwEBgn4b4yNX2IjCu0NJM
-	iIqrlrTa4bng47+kXZ/Spnmm5eMCxknkAzkVcUUHsuPcMtifTeXuO7fyGomxSJ/gUiEbEmzfIcfQa
-	G/FnT74udRxJjvx/iih0paaQnICcJamxExoj689dUFKZUVwUPUE0vvvuf23wM/U983riB/JEYW2xm
-	0ancSB3g==;
-Received: from ip6-localhost ([::1]:50476 helo=hr1.samba.org) 
+	bh=vR/GIUyuVHiWlyyPDjuauznDoHjd/N2hSnjPlBVcY1U=; b=jFxn1+sshbMdDN/W9i2g8nB7tg
+	eHS/tYre29DPFCjrvUkIQPHuI9X1tEVpwwFWZzOgvZsurjUCDA8Lz28UMsOyAaBfw0hRYw4E9zd2/
+	hVUIByTaRrS/XMK9DOugZLh4IX34oub9f6L+7stMYLzQcywGxLIldJcK6JvtvaUYgU9ox97EcYPuM
+	dfOoKPXZL0tqn4tMSIzRJadux/Dxps9TpSgJfACXS5wN4POgazaWL6lj4u6AjabwiVkZ+IlsNNlCS
+	xmJIC4mTCdG6P4lbbA0GQrsiPKy/VGVy+no9aY2cUEYXX7dXN8NKNGA5EVSWAt39z9np3rJ2OUUC4
+	f0ZbrGHg==;
+Received: from ip6-localhost ([::1]:19738 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1uqe72-000Na5-DK; Mon, 25 Aug 2025 20:48:20 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:63878) 
+	id 1uqe7C-000NeZ-EU; Mon, 25 Aug 2025 20:48:31 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:44128) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uqe5b-000N2n-W5
- for samba-technical@lists.samba.org; Mon, 25 Aug 2025 20:46:59 +0000
+ (Exim) id 1uqe5l-000N6K-3A
+ for samba-technical@lists.samba.org; Mon, 25 Aug 2025 20:47:10 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Message-ID:Date:Cc:To:From;
- bh=UW6eS9CxDHobELUIPmZRpu4OxqzdfIyO+N6wYgdZ6+A=; b=JZTrjb6HBGQtHY8/1QcK4BEwki
- ZT1yStJVYuT3OLk1zau5qIWTkOsq6IuE4q0S3fkLFqbNWfUQ1sr21+3rNlPKMFwOtSQt29d0tK4pp
- oSSQzFv6E15iyaVUGuK0s+3zWctSHd1iZk6kdtAI2jM+V2PBw3/PwMSaC7ubf03YUx9W9l3yiyQPd
- 5Cw143orsyrc7P8an7FatpoW8c6x+mHxklVPBooBCDrzd+Ly9LjOvsCIrIPVWjzHqJGkfrNIHj2xJ
- NlSSeSVhlqduAmal8y72ELvmkC3ciW1Kwt/dxe4frfYBsfyAC3cYNMcAlbemEpa9Y5P67qbEug9Nf
- ZQAJfFA66rn6mDPcv2sNuQzTgGcmoux3682vygiYgGLy6gnbq2uMQECqwm1eVDb0YxwzCfZoaS7v9
- 4+fzdVgofNQRTcauj422jnKUO+CPPNQBlbMPoe9L2CeWgH7O8cqjK1UnfGVruggmts0QfoE02c74a
- UVWpoi/IIi0TTvQJ3WUeAAQy;
+ bh=vR/GIUyuVHiWlyyPDjuauznDoHjd/N2hSnjPlBVcY1U=; b=UiP3Kuz1FYQgLT39F9EwqhskpL
+ onh7nQnom0ibA/2CNLJ18qOpFTiTTPEkQgHCs2KJRta0tbZaci5i8o1/tJAwXlDQQSXS93Ms678OE
+ onoUoayDONxW3n1vVTPZJBrTTRJthAUEWFlFiohHjdIZO+m6tUrSr455jmfLqxJ/AGTSx5oB/y7T+
+ qwmjpehlu4bXrk9+lgKw5xhWVmXDsNsJq+EHmGMJdVI0wEY9WKXjFhJWSWzShyI2xKZKke847nsj7
+ rt3mgH7W7aYMumUAU4RagS9h3znNO97Tk/1dGsPq3cXhP8WG689xuPSX1PZ6ESi688A9YBiC1mOct
+ YpToLehDRGPaJ7PAtTAKF2yEVLrOl3Og59d3gCnKFD/phu3/O2a6d5hV6vIFdn65lxuVkYVZtI3YX
+ lvfsr1hyvzPiHYdCQDHl1vE22+JBHmtQ1KXbSlO22CGqq9rIhEArrvW0/2axhx9zOhninSkeZpwLL
+ l+U9I8VRU4cFIh3NMPuKU3h3;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uqe5Z-000kA7-2x; Mon, 25 Aug 2025 20:46:50 +0000
+ (Exim) id 1uqe5j-000kDs-0V; Mon, 25 Aug 2025 20:46:59 +0000
 To: linux-cifs@vger.kernel.org,
 	samba-technical@lists.samba.org
-Subject: [PATCH v4 030/142] smb: client: let smbd_destroy() call
- disable_work_sync(&info->post_send_credits_work)
-Date: Mon, 25 Aug 2025 22:39:51 +0200
-Message-ID: <1aa2d877d2a9b6549fc1bd4aa78d980928788ef5.1756139607.git.metze@samba.org>
+Subject: [PATCH v4 031/142] smb: client: queue post_recv_credits_work also if
+ the peer raises the credit target
+Date: Mon, 25 Aug 2025 22:39:52 +0200
+Message-ID: <207f19af6a22d271101dd91e446a344623518608.1756139607.git.metze@samba.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1756139607.git.metze@samba.org>
 References: <cover.1756139607.git.metze@samba.org>
@@ -65,11 +65,11 @@ Cc: metze@samba.org, Steve French <smfrench@gmail.com>,
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-We already called disable_work(&info->post_send_credits_work) in
-smbd_disconnect_rdma_work().
+This is already handled in the server, but currently it done
+in a very complex way there. So we do it much simpler.
 
-But in smbd_destroy() we may destroy the memory so we better
-wait until post_send_credits_work is no longer pending.
+Note that put_receive_buffer() will take care of it
+in case data_length is 0.
 
 Cc: Steve French <smfrench@gmail.com>
 Cc: Tom Talpey <tom@talpey.com>
@@ -78,23 +78,39 @@ Cc: linux-cifs@vger.kernel.org
 Cc: samba-technical@lists.samba.org
 Signed-off-by: Stefan Metzmacher <metze@samba.org>
 ---
- fs/smb/client/smbdirect.c | 3 +++
- 1 file changed, 3 insertions(+)
+ fs/smb/client/smbdirect.c | 5 +++++
+ 1 file changed, 5 insertions(+)
 
 diff --git a/fs/smb/client/smbdirect.c b/fs/smb/client/smbdirect.c
-index d36556fab357..a61c7d2afbdf 100644
+index a61c7d2afbdf..40aafc606ac8 100644
 --- a/fs/smb/client/smbdirect.c
 +++ b/fs/smb/client/smbdirect.c
-@@ -1462,6 +1462,9 @@ void smbd_destroy(struct TCP_Server_Info *server)
- 			sc->status == SMBDIRECT_SOCKET_DISCONNECTED);
- 	}
+@@ -562,6 +562,7 @@ static void recv_done(struct ib_cq *cq, struct ib_wc *wc)
+ 	struct smbdirect_socket *sc = response->socket;
+ 	struct smbd_connection *info =
+ 		container_of(sc, struct smbd_connection, socket);
++	int old_recv_credit_target;
+ 	int data_length = 0;
+ 	bool negotiate_done = false;
  
-+	log_rdma_event(INFO, "cancelling post_send_credits_work\n");
-+	disable_work_sync(&info->post_send_credits_work);
+@@ -616,6 +617,7 @@ static void recv_done(struct ib_cq *cq, struct ib_wc *wc)
+ 		}
+ 
+ 		atomic_dec(&info->receive_credits);
++		old_recv_credit_target = info->receive_credit_target;
+ 		info->receive_credit_target =
+ 			le16_to_cpu(data_transfer->credits_requested);
+ 		if (le16_to_cpu(data_transfer->credits_granted)) {
+@@ -646,6 +648,9 @@ static void recv_done(struct ib_cq *cq, struct ib_wc *wc)
+ 		 * reassembly queue and wake up the reading thread
+ 		 */
+ 		if (data_length) {
++			if (info->receive_credit_target > old_recv_credit_target)
++				queue_work(info->workqueue, &info->post_send_credits_work);
 +
- 	log_rdma_event(INFO, "destroying qp\n");
- 	ib_drain_qp(sc->ib.qp);
- 	rdma_destroy_qp(sc->rdma.cm_id);
+ 			enqueue_reassembly(info, response, data_length);
+ 			wake_up(&sc->recv_io.reassembly.wait_queue);
+ 		} else
 -- 
 2.43.0
 
