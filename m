@@ -2,44 +2,44 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4C983B34D8C
-	for <lists+samba-technical@lfdr.de>; Mon, 25 Aug 2025 23:06:19 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 358D8B34D8D
+	for <lists+samba-technical@lfdr.de>; Mon, 25 Aug 2025 23:06:31 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=vj8FPEHoTwHX2uOxr7ww/agmAMJWfZnIq6G/jKoRBGI=; b=OAyijS9fIEqvmTFGztJGTH9Dss
-	hqyTaztFPRIToRspmYIR+hz4DpE7MelCe+KKzAUPpfD/zBR8GNRFqA4D03iaXkNi9JXCMYdT0lZBK
-	OnoGMWQ5M/ZQYoHomBt+n48G2xlwTxRncmT8ZzPIlxrS5jlwLErL8JcMMu7VufursSPRR0ohB6pJd
-	d6EZx/gNsnHrd7QU/78Lj8WyO3gL53U+CM46lK+quptJoR3IVKWn8uHv2JBFyDnINzE15/1qeCbmq
-	KcSa0m51nfFVug11JV6vQNVp/sfs4kcLlYRL3X69Ve2e+0ViGIkD+q8y594Nr2SWfFTYYDqr5A8gI
-	SA60H7mQ==;
-Received: from ip6-localhost ([::1]:23326 helo=hr1.samba.org) 
+	bh=tMWGZkN/PbaU4m2MFYuigvG7W/x4WH+HCJ9x27lTSGU=; b=MwRes6wTaphKKDhzY+rje/yvbj
+	iYwwdlO8NJLi/WtnoQU1M0Xyarrr+bvnSAd65Go/W/TjpREdwFLDGGjfAvSwE8qyVF5zvQtCn7cbW
+	ZI2NkvpC40S+uyOckqov22K1BE/Aqv2veCQH4EvT1KjzMHKuWyrPJfo/jKu1TLULbDncAV7E4s4lP
+	QrrOA1N/pyXW4Df2ZCGss8qHKuo9SVlMIKgEFsS+bxNrWoCEj2CIq6ds+6821iSd55rv53+n6C+Uj
+	EX4I2db8Z7qrqTxXkPMnUr57SGcVWwhdb1zhIQVh/eNJF5jgaSIo9NLRwdX5J+okeVezvIGfbP9ws
+	b+GRe20w==;
+Received: from ip6-localhost ([::1]:19254 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1uqeOJ-000Ulf-PP; Mon, 25 Aug 2025 21:06:12 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:50740) 
+	id 1uqeOW-000UqA-QL; Mon, 25 Aug 2025 21:06:25 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:25706) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uqeJn-000Srq-EY
- for samba-technical@lists.samba.org; Mon, 25 Aug 2025 21:01:37 +0000
+ (Exim) id 1uqeJz-000Swu-5f
+ for samba-technical@lists.samba.org; Mon, 25 Aug 2025 21:01:47 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Message-ID:Date:Cc:To:From;
- bh=vj8FPEHoTwHX2uOxr7ww/agmAMJWfZnIq6G/jKoRBGI=; b=ueZRU0RXpzsr+nT37s3uRdjCEc
- cmCttACNAlTHNOOvYP4ZCrsEOSAWrXzMzTpp62/M/n4t+YOQpLRib/GIUP935GLqKM4O7z6PV0RP3
- 8ViWk9It2PKVVvPBYGUMjz01vs/Ayx2PXRRuKgZuL2YxfMxuGndrBDewqvqumb3jBIt1aNQyd3HzO
- K5kn9+wWOJ6lrTxicLFOfIc+YGxSJ5SL7FxIyMWVsEjVWz0pWVUhf0nK5YOuEP1O4n1O9u1X5ICE6
- KgmpwQCBprD1klIXDQ0Gti4jF17QFHN8Jidva/3ugimWXw2XLXA5XUfgJEtzE/GUt8o9JzxfBvpxt
- RkgvLbiaBTEDmcN4QcK27YyZvoiORhn8FuW09oqrKwGEf6COEANYsJue5loWX6EI4ovXzkK/V2Lyc
- IgBTdIKToMorUVs4EbxRX3kp58PZysF53qJEdv+Wb05NFgnjnAQWareodM5UGxb6HRiuTVJyCFW3u
- qw/bsNRL1LK6IKkrsWNztvlK;
+ bh=tMWGZkN/PbaU4m2MFYuigvG7W/x4WH+HCJ9x27lTSGU=; b=d3qF8p31N6uaQiVMA+m77KD9qI
+ KmtR6y7lNJ6aMApBJAsmAr7/ZrPRD7AniBHBDO967xrRSv++l3QXlKzv9SvhsADaqOWlZF7dHdM04
+ 3JVBwkrsglcefhx/tHuDYBrBOb4RSUY4/xroGcMl05MMvTakY/e1VAUukiqGPxWT8x98J39s0vm9a
+ 1cBT0lPthnhhzZq2bvY17BSoeryJ//9HwblRQ6kDmdCTdWrQcBaZyaI7dWb1Kw5IjSqloxhmB+x21
+ vND792YGYeePAuNx7TE7AP/+lLsA5YJb6z+F5wViro8hnhnWvoCjWcvBYie/6/AG98YCDshhmoQEQ
+ 74ssyuUH84FdU2Th0UAE1On6vwehHug00eVMl/MysaV6mxORbmX6cV8vH/0oyJE1/h5nOh1trDl73
+ 9M3NgbC4eI4p+eL2nELgduKOIXdZS1hPaDO8buajbPBvDSYc2TvGFrCx8R21ojYwEzVeWpKU9vFCp
+ SLmp/mednIQxNGnXTOwO4fpl;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uqeJk-000n9G-27; Mon, 25 Aug 2025 21:01:28 +0000
+ (Exim) id 1uqeJt-000nBJ-2t; Mon, 25 Aug 2025 21:01:38 +0000
 To: linux-cifs@vger.kernel.org,
 	samba-technical@lists.samba.org
-Subject: [PATCH v4 118/142] smb: server: pass struct smbdirect_socket to
- smb_direct_get_max_fr_pages()
-Date: Mon, 25 Aug 2025 22:41:19 +0200
-Message-ID: <78953f40483affa55c3a85daffb4e60b74a59d69.1756139607.git.metze@samba.org>
+Subject: [PATCH v4 119/142] smb: server: pass struct smbdirect_socket to
+ smb_direct_init_params()
+Date: Mon, 25 Aug 2025 22:41:20 +0200
+Message-ID: <4911df95f1dab48b26becb8dd19b8c027ee8503f.1756139607.git.metze@samba.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1756139607.git.metze@samba.org>
 References: <cover.1756139607.git.metze@samba.org>
@@ -75,34 +75,34 @@ Cc: linux-cifs@vger.kernel.org
 Cc: samba-technical@lists.samba.org
 Signed-off-by: Stefan Metzmacher <metze@samba.org>
 ---
- fs/smb/server/transport_rdma.c | 6 ++----
- 1 file changed, 2 insertions(+), 4 deletions(-)
+ fs/smb/server/transport_rdma.c | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
 
 diff --git a/fs/smb/server/transport_rdma.c b/fs/smb/server/transport_rdma.c
-index 1aabd617c6ec..08f0128c804c 100644
+index 08f0128c804c..64af3e3b373a 100644
 --- a/fs/smb/server/transport_rdma.c
 +++ b/fs/smb/server/transport_rdma.c
-@@ -1749,10 +1749,8 @@ static int smb_direct_prepare_negotiation(struct smb_direct_transport *t)
- 	return ret;
+@@ -1756,10 +1756,9 @@ static unsigned int smb_direct_get_max_fr_pages(struct smbdirect_socket *sc)
+ 		     256);
  }
  
--static unsigned int smb_direct_get_max_fr_pages(struct smb_direct_transport *t)
-+static unsigned int smb_direct_get_max_fr_pages(struct smbdirect_socket *sc)
+-static int smb_direct_init_params(struct smb_direct_transport *t,
++static int smb_direct_init_params(struct smbdirect_socket *sc,
+ 				  struct ib_qp_cap *cap)
  {
 -	struct smbdirect_socket *sc = &t->socket;
--
- 	return min_t(unsigned int,
- 		     sc->ib.dev->attrs.max_fast_reg_page_list_len,
- 		     256);
-@@ -1783,7 +1781,7 @@ static int smb_direct_init_params(struct smb_direct_transport *t,
- 	 * are needed for MR registration, RDMA R/W, local & remote
- 	 * MR invalidation.
- 	 */
--	sc->rw_io.credits.num_pages = smb_direct_get_max_fr_pages(t);
-+	sc->rw_io.credits.num_pages = smb_direct_get_max_fr_pages(sc);
- 	sc->rw_io.credits.max = DIV_ROUND_UP(sp->max_read_write_size,
- 					 (sc->rw_io.credits.num_pages - 1) *
- 					 PAGE_SIZE);
+ 	struct smbdirect_socket_parameters *sp = &sc->parameters;
+ 	struct ib_device *device = sc->ib.dev;
+ 	int max_send_sges, max_rw_wrs, max_send_wrs;
+@@ -2059,7 +2058,7 @@ static int smb_direct_connect(struct smb_direct_transport *st)
+ 	int ret;
+ 	struct ib_qp_cap qp_cap;
+ 
+-	ret = smb_direct_init_params(st, &qp_cap);
++	ret = smb_direct_init_params(sc, &qp_cap);
+ 	if (ret) {
+ 		pr_err("Can't configure RDMA parameters\n");
+ 		return ret;
 -- 
 2.43.0
 
