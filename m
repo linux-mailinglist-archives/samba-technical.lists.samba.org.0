@@ -2,49 +2,75 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1B8AFB357BE
-	for <lists+samba-technical@lfdr.de>; Tue, 26 Aug 2025 10:58:24 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id EA782B38AA0
+	for <lists+samba-technical@lfdr.de>; Wed, 27 Aug 2025 22:04:13 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=mVN2K8uxhY9+5ApShLTTN14yBvTHyBQXog3Fkzrmpmc=; b=KoHOUAVuIp/ezlQdhXsrVT0HuE
-	niAAhvjVkkNVLyKeMOTbxED4prOOp6TNFQdDkAOe/aPCrgwmW07sbIeANhVuB4TuwlD6LY2ZQPVMa
-	Mv7K1Ab4b2MT4NY4eskKQPDqHu8dbI0MQk2zI3Tvb9L1sgXt4gIMQUwDnwuWCdNZ0ZAvVtt+8QULb
-	HepvjZUMl3hIhfXtVH4/0v2TPIxc3WdGEvhuJXO5JWy5j/B17+4F8bAIlzBSf2H1gMvUVwIT80w+t
-	GETHcvX8tfAbzsA6xHhRU/qd3BCoJKq6LkGdxaYVnCqAkkgOTltNj7vzE8Vwsm1A0dX8yLYPyXFv3
-	CjnzYvSQ==;
-Received: from ip6-localhost ([::1]:34520 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=PbMg2iZBF50w9bvltl4tIdLeh/aZoJYuThqFn7NRr7U=; b=47tPC+Tfcx4/niDBmn9pg2f7c3
+	TgCTdF5d2yqLSQXHDWRJ2YUvIW4VH38ioLZDEXZWmMZh+EJY6tMR647P2K3hPCe/wlKtJ3TYLFukv
+	6olLRZ8bGf2Ol3oHyp730T58odM86L5buClTH2X2Yw6ofyy6F3KWTxNHdePF/ccTN3XTUQ1fOwWQW
+	/zl+DlVoeihactKbqCjh2Y6FjVNwj4VW70Mq2LZSt66z+LKZBrwZONPGUeeJQb57aTSgNZLCKyGoI
+	K1zSk3OVsy7NfeYMmfsOEThIWUSlm486PW/VgWR/ttra2VmDSCgpEwWisoyDIiF9XYwOxcTU7tNpR
+	aecXBdQA==;
+Received: from ip6-localhost ([::1]:40980 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1uqpUy-000ZTj-Qj; Tue, 26 Aug 2025 08:57:48 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:11122) 
+	id 1urMMv-000eLq-Ab; Wed, 27 Aug 2025 20:03:41 +0000
+Received: from mail-qt1-x831.google.com ([2607:f8b0:4864:20::831]:56564) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uqpUt-000ZTb-Am
- for samba-technical@lists.samba.org; Tue, 26 Aug 2025 08:57:46 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=From:To:Date:Message-ID:CC;
- bh=mVN2K8uxhY9+5ApShLTTN14yBvTHyBQXog3Fkzrmpmc=; b=u7nv1DV7mpjVpwbFmk7rSk97sO
- tycibwnXhYHJ1fItbS7BcUZ+MO3Wa1Y3PvmAX/+1akz1TW/Dd/ym4EsjTConSyaLZgpOZL+sDqC15
- aI90Fj7wY1xFrzDzdqoZUiZIbkdg+Q0V+3wQOszVl7KqFMldxpG+ZZ7IuLSORlmBQUCdhhd5zC99p
- Apl3eaKy/8jMO6vOJvigo1Gwxjl3LNyxIR6CZdTmYEs6Zhvrtx4Cel47tDs2+22G6FlK9WhpxItrK
- D3U+dh4EzHTxBEOQYRR4kk+thJEIkF947TpUTer/t3z4kaeLjJZrkm7D6Wuk+2vVipU+dI5tyDVJS
- fqQIhj/AnLq0ad+PUT+r6pjZ3bxmXP30je4an8+L2vrEDPqlGtaVyvBvC/4+F8Cer8ZLsgvkQO4sk
- 4h0Y5nPZ6N4KpLM8AMsO+1+FvfJ+29ES2LB7pcYfao5GS/ZfdYRVDpFOpwFIj8nTIbY6AqAi0eeT3
- T3pAmwv3X8//QwhNew4crUy9;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uqpUs-000tr3-1g; Tue, 26 Aug 2025 08:57:42 +0000
-Message-ID: <1e5ef18c-061c-4b36-ad55-7e63b444e3e1@samba.org>
-Date: Tue, 26 Aug 2025 10:57:42 +0200
+ (Exim) id 1urMMq-000eLj-Pr
+ for samba-technical@lists.samba.org; Wed, 27 Aug 2025 20:03:39 +0000
+Received: by mail-qt1-x831.google.com with SMTP id
+ d75a77b69052e-4b109914034so3373301cf.0
+ for <samba-technical@lists.samba.org>; Wed, 27 Aug 2025 13:03:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1756325015; x=1756929815; darn=lists.samba.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=PbMg2iZBF50w9bvltl4tIdLeh/aZoJYuThqFn7NRr7U=;
+ b=kpd11vAa70Pr/Jag1Pvyv9DPNPemCslPBCTL3rvawDI+HQx62mplXzS9ehT11wumY0
+ a7glkHtyPIaLMiyzxVFxy+5nUvV48wxacnBwz7OsxAUa29Jq5fpbpkoBefOlTDd/EHWQ
+ 5oVkemsMUdsQMQTDH1wwDQmj2eqCs+L0QVKp96D1Xx6tvzXhJWxKvJT3NF7bfmhmOYmA
+ QmrhJhtWjxEF/dFDthQK31NOdjJvjtncmU6MCQhlzUGy5ybDGc8+ash662Pz0Reb0JuE
+ BOOfYsqDdewMhWLfrF4x8mNYLwBuiRPJyP5RIA4Pf47gz23mYn8Ltl09Amy8es1pK449
+ y3Iw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1756325015; x=1756929815;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=PbMg2iZBF50w9bvltl4tIdLeh/aZoJYuThqFn7NRr7U=;
+ b=WWnrEmcfFRkKgup9f4g0G+9VL9mK51Yyztvy/Lyc3m1abPkDbKWqAHgrTaa3AELaPH
+ PPckaph5WawgF3ZSCp2YWhz3uWtKdMkzf8WjQ2RUDFNrjo+C3bqRDwzNBcJE3tuI3a9X
+ Q3uqCOy4XylXYmVFQvOf/sP326krzWpx1LF+1KcgB05G7lJgit8k1y/Q0RP28esg1bWv
+ 5q18kSxPOce3pnX7f/aJCWNF7305PLCFnH9nzqBxdUE01D6OQ+L1loU6UUikX4OGYtjc
+ C801WwIDGmv8KHNgloIp9upuCY5bHnAqslGuScrKnhylebacM1d3fpW8vobk6MpK0ekJ
+ Hs7Q==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCW5+aYzna5f+cMIaL8lKsUA9T5z6Nw0cshtB445Rgxip4nncEAFPQDWZBZ41nmY/8itr9X6qC51bQ2tZzCbsDo=@lists.samba.org
+X-Gm-Message-State: AOJu0YyCrHijKaWtdZc7KwlWYwgcIM9Jk5eKcNQg8Sw3XJWSnhAVVqEu
+ 7dV6kvESkh8JvxuVyUFhkfgesnTne8eo6Fm4M1cmvdBZ/DNvRdn0H9jUQn3vuQ3gkPXd/jaLP8Q
+ 12XFivCA/SRkRl1TkBeAzqpnzD17Xt40=
+X-Gm-Gg: ASbGncuoOz5QD7uIBKaYB+vDJZPNxKcg0hxOAUt7/rBRCjA0wLtfvHZEbJ6Zukm9Sa+
+ yZmRjusGr+kYY9lQoUlrlO4hrsbF/wUzEnUCNEvqy6QRbRXRJ8WkhrY/4RkM0aYgy4zOFjmBSB0
+ xkUP2HtJxMYYcTNKqAogPoIsprnx3z4ZFxH4ShTVMfRGPzrrls5t7CPElHG+fpAlncA08yzxNIe
+ iqdeFHcpm2JCHmSuKoBdWN00E44gFH1ExuuK1d7EfXjZLz+E+2HaKeDDDRAPtPVkVY7fC/WgxDs
+ rHBSdZZFfN6GPbIc7F6S1g==
+X-Google-Smtp-Source: AGHT+IGvR9Gopsnrfnv3RsqoGfwVXlA895U4Bna9kgMu39ZeDGlbhCSyjzjh40Dwdu8dELMXQbQY/g9N4Qw8chD4d1o=
+X-Received: by 2002:a05:6214:1cc1:b0:70d:a94f:eb47 with SMTP id
+ 6a1803df08f44-70da94ff287mr163620996d6.11.1756325013863; Wed, 27 Aug 2025
+ 13:03:33 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: 4.23.0 WHATSNEW entries missing
-To: Jule Anger <janger@samba.org>, samba-technical@lists.samba.org
-References: <60902b9c-3b00-4f23-a590-68651036243c@samba.org>
-Content-Language: en-US
-In-Reply-To: <60902b9c-3b00-4f23-a590-68651036243c@samba.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+References: <aK9NPzbY9M_9eKuv@homelab>
+In-Reply-To: <aK9NPzbY9M_9eKuv@homelab>
+Date: Wed, 27 Aug 2025 15:03:22 -0500
+X-Gm-Features: Ac12FXzT5j85uvaUwuToH9BZp8ybhHwDmgslW2zYSlEpHJUVxteHmRT4WIfmndU
+Message-ID: <CAH2r5mvKJyf9JtRRCRB6Y+9y9RDUpoJW9Cgar7Fs9dgO-zwhLg@mail.gmail.com>
+Subject: Re: [PATCH] fs/smb: Fix inconsistent refcnt update
+To: Shuhao Fu <sfual@cse.ust.hk>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,41 +84,81 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Stefan Metzmacher <metze@samba.org>
+From: Steve French via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Steve French <smfrench@gmail.com>
+Cc: Tom Talpey <tom@talpey.com>, Shyam Prasad N <sprasad@microsoft.com>,
+ Paulo Alcantara <pc@manguebit.org>, linux-cifs@vger.kernel.org,
+ samba-technical@lists.samba.org, Steve French <sfrench@samba.org>,
+ Bharath SM <bharathsm@microsoft.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi Jule,
+merged into cifs-2.6.git pending testing (and added Cc:stable and
+Acked-by from Paulo)
 
-here the section about QUIC:
+Let me know if any objections etc
 
-Add support for SMB3 over QUIC
-------------------------------
+On Wed, Aug 27, 2025 at 1:33=E2=80=AFPM Shuhao Fu <sfual@cse.ust.hk> wrote:
+>
+> A possible inconsistent update of refcount was identified in `smb2_compou=
+nd_op`.
+> Such inconsistent update could lead to possible resource leaks.
+>
+> Why it is a possible bug:
+> 1. In the comment section of the function, it clearly states that the
+> reference to `cfile` should be dropped after calling this function.
+> 2. Every control flow path would check and drop the reference to
+> `cfile`, except the patched one.
+> 3. Existing callers would not handle refcount update of `cfile` if
+> -ENOMEM is returned.
+>
+> To fix the bug, an extra goto label "out" is added, to make sure that the
+> cleanup logic would always be respected. As the problem is caused by the
+> allocation failure of `vars`, the cleanup logic between label "finished"
+> and "out" can be safely ignored. According to the definition of function
+> `is_replayable_error`, the error code of "-ENOMEM" is not recoverable.
+> Therefore, the replay logic also gets ignored.
+>
+> Signed-off-by: Shuhao Fu <sfual@cse.ust.hk>
+> ---
+>  fs/smb/client/smb2inode.c | 7 +++++--
+>  1 file changed, 5 insertions(+), 2 deletions(-)
+>
+> diff --git a/fs/smb/client/smb2inode.c b/fs/smb/client/smb2inode.c
+> index 2a0316c51..31c13fb5b 100644
+> --- a/fs/smb/client/smb2inode.c
+> +++ b/fs/smb/client/smb2inode.c
+> @@ -207,8 +207,10 @@ static int smb2_compound_op(const unsigned int xid, =
+struct cifs_tcon *tcon,
+>         server =3D cifs_pick_channel(ses);
+>
+>         vars =3D kzalloc(sizeof(*vars), GFP_ATOMIC);
+> -       if (vars =3D=3D NULL)
+> -               return -ENOMEM;
+> +       if (vars =3D=3D NULL) {
+> +               rc =3D -ENOMEM;
+> +               goto out;
+> +       }
+>         rqst =3D &vars->rqst[0];
+>         rsp_iov =3D &vars->rsp_iov[0];
+>
+> @@ -864,6 +866,7 @@ static int smb2_compound_op(const unsigned int xid, s=
+truct cifs_tcon *tcon,
+>             smb2_should_replay(tcon, &retries, &cur_sleep))
+>                 goto replay_again;
+>
+> +out:
+>         if (cfile)
+>                 cifsFileInfo_put(cfile);
+>
+> --
+> 2.39.5
+>
+>
 
-The new "client smb transports" and "server smb transport"
-allow a more flexible configuration for the used tcp
-sockets.
 
-It also got the ability specify "quic" as possible transport.
-If quic should be used in addition to the defaults something
-like "server smb transports = +quic" can be used.
+--=20
+Thanks,
 
-For the client quic only works with name based uncs,
-ip address based uncs are not supported.
-
-Note for the server 'quic' requires the quic.ko kernel module
-for Linux from https://github.com/lxin/quic (tested with Linux 6.14).
-Future Linux versions may support it natively, here's the
-branch that will hopefully accepted upstream soon:
-https://github.com/lxin/net-next/commits/quic/
-
-For the client side there's a fallback to the userspace ngtcp2
-library if the quic kernel module is not available.
-
-Check the smb.conf manpage for additional hints
-about the "client smb transports" and "server smb transport"
-options and interactions with tls related options.
-
-metze
+Steve
 
