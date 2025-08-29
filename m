@@ -2,73 +2,62 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id EA782B38AA0
-	for <lists+samba-technical@lfdr.de>; Wed, 27 Aug 2025 22:04:13 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 70274B3B062
+	for <lists+samba-technical@lfdr.de>; Fri, 29 Aug 2025 03:23:34 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=PbMg2iZBF50w9bvltl4tIdLeh/aZoJYuThqFn7NRr7U=; b=47tPC+Tfcx4/niDBmn9pg2f7c3
-	TgCTdF5d2yqLSQXHDWRJ2YUvIW4VH38ioLZDEXZWmMZh+EJY6tMR647P2K3hPCe/wlKtJ3TYLFukv
-	6olLRZ8bGf2Ol3oHyp730T58odM86L5buClTH2X2Yw6ofyy6F3KWTxNHdePF/ccTN3XTUQ1fOwWQW
-	/zl+DlVoeihactKbqCjh2Y6FjVNwj4VW70Mq2LZSt66z+LKZBrwZONPGUeeJQb57aTSgNZLCKyGoI
-	K1zSk3OVsy7NfeYMmfsOEThIWUSlm486PW/VgWR/ttra2VmDSCgpEwWisoyDIiF9XYwOxcTU7tNpR
-	aecXBdQA==;
-Received: from ip6-localhost ([::1]:40980 helo=hr1.samba.org) 
+	bh=qqP5CDhXCb3ftYNxpwkwkKBdJvB6qPfRjc3g5Hj9v5k=; b=2jfp9CLnM/12x1kubboT2H6CS3
+	2uhji3RMIdfARyxVygxJwrt85xkviVPGB00o2shY/XRhkL/9n/iuKveo5dJr4N5aZcjXvq7G5YBtN
+	SvGJQu/bfjcYkx0lVwzEqk/Z42dwIdIxdpzHZX+08AhI58ny1RaISybNrNmuUZSIG3A0Ii/eDfR1t
+	vbqobHbCXnwgpp6vRJaw5eIvSwx2XGt4Ls2Li7f4Jg1AWh6gpG/L1LUqrmAUDJAhP2ELQSua1dgy9
+	NXIqaxw138ZLVr4jZEOtwnWCqZ0fQ4FTIe8upp3NSTZEk8QYIVRCD+hXtbQIT1otJZ2rnI5l4UWKZ
+	qLVzDZAg==;
+Received: from ip6-localhost ([::1]:21074 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1urMMv-000eLq-Ab; Wed, 27 Aug 2025 20:03:41 +0000
-Received: from mail-qt1-x831.google.com ([2607:f8b0:4864:20::831]:56564) 
+	id 1urnpP-000j3v-9R; Fri, 29 Aug 2025 01:22:55 +0000
+Received: from tor.source.kernel.org ([2600:3c04:e001:324:0:1991:8:25]:52042) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1urMMq-000eLj-Pr
- for samba-technical@lists.samba.org; Wed, 27 Aug 2025 20:03:39 +0000
-Received: by mail-qt1-x831.google.com with SMTP id
- d75a77b69052e-4b109914034so3373301cf.0
- for <samba-technical@lists.samba.org>; Wed, 27 Aug 2025 13:03:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1756325015; x=1756929815; darn=lists.samba.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=PbMg2iZBF50w9bvltl4tIdLeh/aZoJYuThqFn7NRr7U=;
- b=kpd11vAa70Pr/Jag1Pvyv9DPNPemCslPBCTL3rvawDI+HQx62mplXzS9ehT11wumY0
- a7glkHtyPIaLMiyzxVFxy+5nUvV48wxacnBwz7OsxAUa29Jq5fpbpkoBefOlTDd/EHWQ
- 5oVkemsMUdsQMQTDH1wwDQmj2eqCs+L0QVKp96D1Xx6tvzXhJWxKvJT3NF7bfmhmOYmA
- QmrhJhtWjxEF/dFDthQK31NOdjJvjtncmU6MCQhlzUGy5ybDGc8+ash662Pz0Reb0JuE
- BOOfYsqDdewMhWLfrF4x8mNYLwBuiRPJyP5RIA4Pf47gz23mYn8Ltl09Amy8es1pK449
- y3Iw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1756325015; x=1756929815;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=PbMg2iZBF50w9bvltl4tIdLeh/aZoJYuThqFn7NRr7U=;
- b=WWnrEmcfFRkKgup9f4g0G+9VL9mK51Yyztvy/Lyc3m1abPkDbKWqAHgrTaa3AELaPH
- PPckaph5WawgF3ZSCp2YWhz3uWtKdMkzf8WjQ2RUDFNrjo+C3bqRDwzNBcJE3tuI3a9X
- Q3uqCOy4XylXYmVFQvOf/sP326krzWpx1LF+1KcgB05G7lJgit8k1y/Q0RP28esg1bWv
- 5q18kSxPOce3pnX7f/aJCWNF7305PLCFnH9nzqBxdUE01D6OQ+L1loU6UUikX4OGYtjc
- C801WwIDGmv8KHNgloIp9upuCY5bHnAqslGuScrKnhylebacM1d3fpW8vobk6MpK0ekJ
- Hs7Q==
+ (Exim) id 1urnpL-000j3n-FC
+ for samba-technical@lists.samba.org; Fri, 29 Aug 2025 01:22:54 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by tor.source.kernel.org (Postfix) with ESMTP id 7971560141
+ for <samba-technical@lists.samba.org>; Fri, 29 Aug 2025 01:03:31 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2B0ADC4CEF8
+ for <samba-technical@lists.samba.org>; Fri, 29 Aug 2025 01:03:31 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1756429411;
+ bh=JnjTHc4tN+fj7bTEL4vaeVKqTaIJBWp8jzHXrTlqc6o=;
+ h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
+ b=J3fVGpMgabd0xHSNkOU7/Glp23pcZHxo4B0/Z2eXh3M08w24rnhzn/kCh53F2efwy
+ qURAQZE9LKq4K2bioGolyZHbI+mj9FQ6imO1ZPCed42Vqn9bwzxVjOD0LjfhNTlM/6
+ hqj8QjsCmTcs60wgMTkmI3U4o16STA0luobBtNuGUpAl8XHyI1IBPSzPuSIqoopR3I
+ UtLbQYStZNzvVNLdjXtPKThSFW5vhQZSXYtJCgC9KAr4ndgNPDY6IkFftm+I2Pu0Fx
+ GKMZTQXsbZGGTaaYzxVXESYef+qIEBij+LhRT4MFGMTrWbp7dMDJdoJv7vro1DvkTE
+ 4xREp4xA2h7NQ==
+Received: by mail-ed1-f54.google.com with SMTP id
+ 4fb4d7f45d1cf-61cf0901a72so1285907a12.1
+ for <samba-technical@lists.samba.org>; Thu, 28 Aug 2025 18:03:31 -0700 (PDT)
 X-Forwarded-Encrypted: i=1;
- AJvYcCW5+aYzna5f+cMIaL8lKsUA9T5z6Nw0cshtB445Rgxip4nncEAFPQDWZBZ41nmY/8itr9X6qC51bQ2tZzCbsDo=@lists.samba.org
-X-Gm-Message-State: AOJu0YyCrHijKaWtdZc7KwlWYwgcIM9Jk5eKcNQg8Sw3XJWSnhAVVqEu
- 7dV6kvESkh8JvxuVyUFhkfgesnTne8eo6Fm4M1cmvdBZ/DNvRdn0H9jUQn3vuQ3gkPXd/jaLP8Q
- 12XFivCA/SRkRl1TkBeAzqpnzD17Xt40=
-X-Gm-Gg: ASbGncuoOz5QD7uIBKaYB+vDJZPNxKcg0hxOAUt7/rBRCjA0wLtfvHZEbJ6Zukm9Sa+
- yZmRjusGr+kYY9lQoUlrlO4hrsbF/wUzEnUCNEvqy6QRbRXRJ8WkhrY/4RkM0aYgy4zOFjmBSB0
- xkUP2HtJxMYYcTNKqAogPoIsprnx3z4ZFxH4ShTVMfRGPzrrls5t7CPElHG+fpAlncA08yzxNIe
- iqdeFHcpm2JCHmSuKoBdWN00E44gFH1ExuuK1d7EfXjZLz+E+2HaKeDDDRAPtPVkVY7fC/WgxDs
- rHBSdZZFfN6GPbIc7F6S1g==
-X-Google-Smtp-Source: AGHT+IGvR9Gopsnrfnv3RsqoGfwVXlA895U4Bna9kgMu39ZeDGlbhCSyjzjh40Dwdu8dELMXQbQY/g9N4Qw8chD4d1o=
-X-Received: by 2002:a05:6214:1cc1:b0:70d:a94f:eb47 with SMTP id
- 6a1803df08f44-70da94ff287mr163620996d6.11.1756325013863; Wed, 27 Aug 2025
- 13:03:33 -0700 (PDT)
+ AJvYcCVdDfYCBerH1I07i9lV0PUGBAybTw93uBkFZKo1G0PHmg7Z7foNj6n1AcJSi5p37pryhg/qqrKngaLYTGqqeNo=@lists.samba.org
+X-Gm-Message-State: AOJu0YxVvHeXOCn7BEWruzyOEYK+4zrw3e1GqiIBySMoohOPUA52RC2L
+ ZNA/ujGFYKhruVt5YQCaQbD07HVT6/vPFgnHuPuoWxQhQvk7j3m4QFsY8g8vDkmMWTQzGlIUUvR
+ KB40sSCEOZDhK/A+9H2mLqxy1efHZSSg=
+X-Google-Smtp-Source: AGHT+IEC3tzEBZVMFFl1IVXgtix0fY5IP99nyNrSk50T1sy3myoDXtbVpBcpWYLdNJsJljRKWhOMMIEUMhJmKMOqcvo=
+X-Received: by 2002:a05:6402:5107:b0:61c:9970:a86a with SMTP id
+ 4fb4d7f45d1cf-61c9970ad16mr8655627a12.34.1756429409703; Thu, 28 Aug 2025
+ 18:03:29 -0700 (PDT)
 MIME-Version: 1.0
-References: <aK9NPzbY9M_9eKuv@homelab>
-In-Reply-To: <aK9NPzbY9M_9eKuv@homelab>
-Date: Wed, 27 Aug 2025 15:03:22 -0500
-X-Gm-Features: Ac12FXzT5j85uvaUwuToH9BZp8ybhHwDmgslW2zYSlEpHJUVxteHmRT4WIfmndU
-Message-ID: <CAH2r5mvKJyf9JtRRCRB6Y+9y9RDUpoJW9Cgar7Fs9dgO-zwhLg@mail.gmail.com>
-Subject: Re: [PATCH] fs/smb: Fix inconsistent refcnt update
-To: Shuhao Fu <sfual@cse.ust.hk>
+References: <8c6027ac-09dc-4ee6-ba82-4afd897dabf6@samba.org>
+In-Reply-To: <8c6027ac-09dc-4ee6-ba82-4afd897dabf6@samba.org>
+Date: Fri, 29 Aug 2025 10:03:17 +0900
+X-Gmail-Original-Message-ID: <CAKYAXd-TNCOd04Nw+FYhWT3inPCpQU0scT91FuM-SbahX3cRwQ@mail.gmail.com>
+X-Gm-Features: Ac12FXwgjPnR8HAbaB9WFamRg7luu63RqUjZlEtl70_jCyn-9Os0DdZAWIdluog
+Message-ID: <CAKYAXd-TNCOd04Nw+FYhWT3inPCpQU0scT91FuM-SbahX3cRwQ@mail.gmail.com>
+Subject: Re: struct rdma_conn_param uses u8 for responder_resources,
+ initiator_depth and private_data_len
+To: Stefan Metzmacher <metze@samba.org>, Jason Gunthorpe <jgg@nvidia.com>,
+ Leon Romanovsky <leonro@nvidia.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
@@ -84,81 +73,55 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
-Cc: Tom Talpey <tom@talpey.com>, Shyam Prasad N <sprasad@microsoft.com>,
- Paulo Alcantara <pc@manguebit.org>, linux-cifs@vger.kernel.org,
- samba-technical@lists.samba.org, Steve French <sfrench@samba.org>,
- Bharath SM <bharathsm@microsoft.com>
+From: Namjae Jeon via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Namjae Jeon <linkinjeon@kernel.org>
+Cc: "linux-rdma@vger.kernel.org" <linux-rdma@vger.kernel.org>,
+ "linux-cifs@vger.kernel.org" <linux-cifs@vger.kernel.org>,
+ Tom Talpey <tom@talpey.com>, Samba Technical <samba-technical@lists.samba.org>,
+ Steve French <smfrench@gmail.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-merged into cifs-2.6.git pending testing (and added Cc:stable and
-Acked-by from Paulo)
-
-Let me know if any objections etc
-
-On Wed, Aug 27, 2025 at 1:33=E2=80=AFPM Shuhao Fu <sfual@cse.ust.hk> wrote:
+On Fri, Aug 22, 2025 at 6:04=E2=80=AFAM Stefan Metzmacher <metze@samba.org>=
+ wrote:
 >
-> A possible inconsistent update of refcount was identified in `smb2_compou=
-nd_op`.
-> Such inconsistent update could lead to possible resource leaks.
+> Hi,
+CC: Jason and Leon.
 >
-> Why it is a possible bug:
-> 1. In the comment section of the function, it clearly states that the
-> reference to `cfile` should be dropped after calling this function.
-> 2. Every control flow path would check and drop the reference to
-> `cfile`, except the patched one.
-> 3. Existing callers would not handle refcount update of `cfile` if
-> -ENOMEM is returned.
+> this mail is triggered by the discussion in this thread on
+> linux-cifs:
+> https://lore.kernel.org/linux-cifs/f551bf7f-697a-4298-a62c-74da18992204@s=
+amba.org/T/#t
 >
-> To fix the bug, an extra goto label "out" is added, to make sure that the
-> cleanup logic would always be respected. As the problem is caused by the
-> allocation failure of `vars`, the cleanup logic between label "finished"
-> and "out" can be safely ignored. According to the definition of function
-> `is_replayable_error`, the error code of "-ENOMEM" is not recoverable.
-> Therefore, the replay logic also gets ignored.
+> In include/rdma/rdma_cm.h we have this:
 >
-> Signed-off-by: Shuhao Fu <sfual@cse.ust.hk>
-> ---
->  fs/smb/client/smb2inode.c | 7 +++++--
->  1 file changed, 5 insertions(+), 2 deletions(-)
+> struct rdma_conn_param {
+>          const void *private_data;
+>          u8 private_data_len;
+>          u8 responder_resources;
+>          u8 initiator_depth;
+>          u8 flow_control;
+>          u8 retry_count;         /* ignored when accepting */
+>          u8 rnr_retry_count;
+>          /* Fields below ignored if a QP is created on the rdma_cm_id. */
+>          u8 srq;
+>          u32 qp_num;
+>          u32 qkey;
+> };
 >
-> diff --git a/fs/smb/client/smb2inode.c b/fs/smb/client/smb2inode.c
-> index 2a0316c51..31c13fb5b 100644
-> --- a/fs/smb/client/smb2inode.c
-> +++ b/fs/smb/client/smb2inode.c
-> @@ -207,8 +207,10 @@ static int smb2_compound_op(const unsigned int xid, =
-struct cifs_tcon *tcon,
->         server =3D cifs_pick_channel(ses);
+> The iwarp MPA v2 negotiation can handle values up to
+> 0x3fff for responder_resources and initiator_depth.
+> And private_data_len can be 0xffff for MPA v1 and
+> 0xffff - 4 for MPA v2.
 >
->         vars =3D kzalloc(sizeof(*vars), GFP_ATOMIC);
-> -       if (vars =3D=3D NULL)
-> -               return -ENOMEM;
-> +       if (vars =3D=3D NULL) {
-> +               rc =3D -ENOMEM;
-> +               goto out;
-> +       }
->         rqst =3D &vars->rqst[0];
->         rsp_iov =3D &vars->rsp_iov[0];
+> I just found that ROCE only supports u8 in the CM ConnectRequest
+> (and I guess it's ROCE v1 and v2 as well as Infiniband,
+> but I've only every seen ROCE v2 captures).
 >
-> @@ -864,6 +866,7 @@ static int smb2_compound_op(const unsigned int xid, s=
-truct cifs_tcon *tcon,
->             smb2_should_replay(tcon, &retries, &cur_sleep))
->                 goto replay_again;
+> BTW: does ROCE also support private data and if how much?
 >
-> +out:
->         if (cfile)
->                 cifsFileInfo_put(cfile);
+> So is it desired to limit iwarp to u8 values too?
 >
-> --
-> 2.39.5
->
->
-
-
---=20
-Thanks,
-
-Steve
+> Thanks!
+> metze
 
