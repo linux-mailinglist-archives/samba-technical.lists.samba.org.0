@@ -2,51 +2,47 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id EFFFBB3BA10
-	for <lists+samba-technical@lfdr.de>; Fri, 29 Aug 2025 13:42:43 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7A1F6B3BB45
+	for <lists+samba-technical@lfdr.de>; Fri, 29 Aug 2025 14:26:55 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=lA+5nGJAjx3gqbvnBYhwThLNYsg3mRmlH7d2M7OsnuU=; b=URwU07DECrpzN2+4I9SO/nS4eR
-	KPR34CSXRNuVIz5tmVivb/WTXgELdpcQI1nkA0mN7GnRfg/hMkTkWdMAWIoNK6Qsah8h+a68zW0d4
-	Zan5d2OD9EHc5RKyrLo8o+VGrdP9WfWw9hQjWx8tBsKz4JEGA9E4GRbNkC6l01P2/IXCTFooJKX4V
-	J98nc7Wof2jiT3Jcbc3kHH6151/3uluLwogHFGEuxsMD7eI99BgpALpeRXXip/6c16u5KYPIimm2c
-	2LBHNZxyfdFrB6spJYHeOGg02MT7z8o3vTOWjhwAK9EQ0DZzYVv+/8uno/6NCGNVkekWBsCigQ3EW
-	U0qnjfUg==;
-Received: from ip6-localhost ([::1]:49600 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
+	bh=t+is5lGuzQNxUMLuuJnR+FzllRZfHIxxXuNyMJDsdBA=; b=FbsydzUVo4Y4Dka4lGzSRKRcxV
+	sytpJvxESEY4Ug1zMnPuMrcGfibLKSyL973btsRlkRFEC3IqkS7YSvkjAHZKdHNyL0SIQQyE/MeBW
+	Enjln7tg9Arscoc8EAXuGAoVz0lZfBZeftvRxb0lGvvDKqQnH0R7vHNrpIcLYejUqkTtMrTRoLIpd
+	/Cx8RW2ubDDBJ+9GhiVcsnLN6zZTezOjHuIifoJ6uXLfyaIcYLGcT6xaPEHaijspyIDNrXDPg/Esv
+	b+HjSC5TbCodhHtSszwsYsEWodjnMgbsfc/wZPz5lOuTe3qshSsEs6lzTv0eP0UTHE0O98l3t3Qhx
+	rIUhOW5w==;
+Received: from ip6-localhost ([::1]:45948 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1urxUD-000kde-NU; Fri, 29 Aug 2025 11:41:41 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:27416) 
+	id 1uryBh-000kzQ-Hv; Fri, 29 Aug 2025 12:26:37 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:35622) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1urxU8-000kdX-Rn
- for samba-technical@lists.samba.org; Fri, 29 Aug 2025 11:41:39 +0000
+ (Exim) id 1uryBY-000kyf-Go; Fri, 29 Aug 2025 12:26:31 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=From:Cc:To:Date:Message-ID;
- bh=lA+5nGJAjx3gqbvnBYhwThLNYsg3mRmlH7d2M7OsnuU=; b=1FFJS1PfdPZZQdcKLsKEEWVmHZ
- 54RJs4WWFDq/LTvCqt6pH4QhBqVRab21hdi0IjsXT3aBh86QBoSFN19rxXGoNG7AYvYmfy5fHCQUu
- j1mZ9vnPh5xt3vum3i1+omDI+o1yXGzDjlbiQY8Vf8qlwkmsHb+9y3/Akd65/eQQzZwQWFC9ROC0L
- UNUv7F1MqrpwlB7SJJYF/+8yO61MtNURxV+G/LstplMBjKe+Qq16Xc9Bh8PnOtu15lKlmAubH6bxn
- nU7DX0meNm6yo8xfeCouq1MWglvmiHXFSc0SKpyqhcoHWw74+BOq9J/wkvfsmX4FfSx4+yfDYGKAl
- Ay+IM5N+htWxxX77z9hx31EPJQjB6oREjLRRC9kWLLcjM2JJvH+0mZu39/rICtNpjfwCvBcxLvA4y
- RjTABoD5Xk+SQDIOzDpgS468lU8Lq36K7plpG6Jg8Zm0bZ0jTEgIYQ0QNky8BkVEREL3wdqO6urHL
- UJ1fuMKorb8HDGfdj6y7m5r4;
+ s=42; h=From:To:Date:Message-ID:CC;
+ bh=t+is5lGuzQNxUMLuuJnR+FzllRZfHIxxXuNyMJDsdBA=; b=LPlfZRbSaZBlmGAoc4cRgoR2X1
+ tVXcm0vZdXj0qUj/4NUfuFZa3eganS6QJ286gBw83hEQPmmVfX1vzbeDoFSfOuIrxPov2EvXPjFbc
+ 1LEs/Qg97dqt7+0kq0fboRyoA8H1Ca+OMgaivEDPAg7JgAT/CjP8jcgyK0K5FX2FLIGSRsI4pZTEA
+ 4TZZRkkH/Q682hqcrvw9CVBqHPRlODc6fseT59kOBuwLNMW64v5pMhzxv401+Wk2TsPrGn/B+yKHQ
+ qv5fjzcN6a/UFbeKn+rldxvYZ+/FxOhr4zW6Vv+kjvANThIb0AAwfawwFfM7CdU2vIIksBsVRwz+S
+ NVJas71KxkaAvYusBaXwD0PrlR8eSp6tLySYxFIq1ApXGF/UN165b67+UnJ5ei/ASms9tvx5rgreI
+ pO0t9UuEJqAit5l0VUC/oJbpyEBAa8SQAAetmUwBgBkWYY4syydEnoZr3eWbI/n/FR5AmrDjyeis8
+ pwG354expfCmu3z26/2IW70g;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1urxU7-001Q6C-1R; Fri, 29 Aug 2025 11:41:35 +0000
-Message-ID: <c18ba6b4-847e-4470-bd0e-9e5232add730@samba.org>
-Date: Fri, 29 Aug 2025 13:41:34 +0200
+ (Exim) id 1uryBY-001Qi2-0F; Fri, 29 Aug 2025 12:26:28 +0000
+Message-ID: <f41e190b-a5b0-4455-a7e7-cf99dea32251@samba.org>
+Date: Fri, 29 Aug 2025 14:26:26 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [cifs:for-next-next 28/146] fs/smb/client/smbdirect.c:1856:25:
- warning: stack frame size (1272) exceeds limit (1024) in
- 'smbd_get_connection'
-To: Steve French <smfrench@gmail.com>
-References: <202508291432.M5gWPqJX-lkp@intel.com>
-Content-Language: en-US
-In-Reply-To: <202508291432.M5gWPqJX-lkp@intel.com>
+Content-Language: de-DE
+To: samba-announce@lists.samba.org, samba@lists.samba.org,
+ samba-technical@lists.samba.org
+Subject: [Announce] Samba 4.23.0rc3 Available for Download
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,97 +56,213 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Stefan Metzmacher <metze@samba.org>
-Cc: linux-cifs@vger.kernel.org, kernel test robot <lkp@intel.com>,
- llvm@lists.linux.dev, samba-technical@lists.samba.org,
- oe-kbuild-all@lists.linux.dev, Steve French <stfrench@microsoft.com>
+From: Jule Anger via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jule Anger <janger@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi Steve,
+Release Announcements
+=====================
 
-this is strange, but the following should fix the problem:
+This is the third release candidate release of Samba 4.23.  This is *not*
+intended for production environments and is designed for testing
+purposes only.  Please report any defects via the Samba bug reporting
+system at https://bugzilla.samba.org/.
 
---- a/fs/smb/common/smbdirect/smbdirect_socket.h
-+++ b/fs/smb/common/smbdirect/smbdirect_socket.h
-@@ -259,9 +259,11 @@ struct smbdirect_socket {
-
-  static __always_inline void smbdirect_socket_init(struct smbdirect_socket *sc)
-  {
--       *sc = (struct smbdirect_socket) {
--               .status = SMBDIRECT_SOCKET_CREATED,
--       };
-+       /*
-+        * This also sets status = SMBDIRECT_SOCKET_CREATED
-+        */
-+       BUILD_BUG_ON(SMBDIRECT_SOCKET_CREATED != 0);
-+       memset(sc, 0, sizeof(*sc));
-
-         init_waitqueue_head(&sc->status_wait);
+Samba 4.23 will be the next version of the Samba suite.
 
 
-It needs to be squashed into this commit:
-f2e2769275f4aa6e4d5fa98004301e91282a094a smb: smbdirect: introduce smbdirect_socket_init()
-
-Can you do that?
-
-I'm not sure if the following should be added
-Reported-by: kernel test robot <lkp@intel.com>
-Closes: https://lore.kernel.org/oe-kbuild-all/202508291432.M5gWPqJX-lkp@intel.com/
-Closes: https://lore.kernel.org/oe-kbuild-all/202508291615.Mxyg9D9N-lkp@intel.com/
-
-Thanks!
-metze
-
-Am 29.08.25 um 09:06 schrieb kernel test robot:
-> tree:   git://git.samba.org/sfrench/cifs-2.6.git for-next-next
-> head:   b79712ce1752aa38da9553b06767f68367b0d7ff
-> commit: 36d70a0c8405556dea3d4e9beef708d7ed3c2b07 [28/146] smb: client: make use of smbdirect_socket_init()
-> config: hexagon-allmodconfig (https://download.01.org/0day-ci/archive/20250829/202508291432.M5gWPqJX-lkp@intel.com/config)
-> compiler: clang version 17.0.6 (https://github.com/llvm/llvm-project 6009708b4367171ccdbf4b5905cb6a803753fe18)
-> reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20250829/202508291432.M5gWPqJX-lkp@intel.com/reproduce)
-> 
-> If you fix the issue in a separate patch/commit (i.e. not just a new version of
-> the same patch/commit), kindly add following tags
-> | Reported-by: kernel test robot <lkp@intel.com>
-> | Closes: https://lore.kernel.org/oe-kbuild-all/202508291432.M5gWPqJX-lkp@intel.com/
+UPGRADING
+=========
 
 
-> All warnings (new ones prefixed by >>):
-> 
->>> fs/smb/client/smbdirect.c:1856:25: warning: stack frame size (1272) exceeds limit (1024) in 'smbd_get_connection' [-Wframe-larger-than]
->      1856 | struct smbd_connection *smbd_get_connection(
->           |                         ^
->     1 warning generated.
+NEW FEATURES/CHANGES
+====================
 
-> 
-> vim +/smbd_get_connection +1856 fs/smb/client/smbdirect.c
-> 
-> 399f9539d951adf fs/cifs/smbdirect.c Long Li 2017-11-17  1855
-> 399f9539d951adf fs/cifs/smbdirect.c Long Li 2017-11-17 @1856  struct smbd_connection *smbd_get_connection(
-> 399f9539d951adf fs/cifs/smbdirect.c Long Li 2017-11-17  1857  	struct TCP_Server_Info *server, struct sockaddr *dstaddr)
-> 399f9539d951adf fs/cifs/smbdirect.c Long Li 2017-11-17  1858  {
-> 399f9539d951adf fs/cifs/smbdirect.c Long Li 2017-11-17  1859  	struct smbd_connection *ret;
-> 399f9539d951adf fs/cifs/smbdirect.c Long Li 2017-11-17  1860  	int port = SMBD_PORT;
-> 399f9539d951adf fs/cifs/smbdirect.c Long Li 2017-11-17  1861
-> 399f9539d951adf fs/cifs/smbdirect.c Long Li 2017-11-17  1862  try_again:
-> 399f9539d951adf fs/cifs/smbdirect.c Long Li 2017-11-17  1863  	ret = _smbd_get_connection(server, dstaddr, port);
-> 399f9539d951adf fs/cifs/smbdirect.c Long Li 2017-11-17  1864
-> 399f9539d951adf fs/cifs/smbdirect.c Long Li 2017-11-17  1865  	/* Try SMB_PORT if SMBD_PORT doesn't work */
-> 399f9539d951adf fs/cifs/smbdirect.c Long Li 2017-11-17  1866  	if (!ret && port == SMBD_PORT) {
-> 399f9539d951adf fs/cifs/smbdirect.c Long Li 2017-11-17  1867  		port = SMB_PORT;
-> 399f9539d951adf fs/cifs/smbdirect.c Long Li 2017-11-17  1868  		goto try_again;
-> 399f9539d951adf fs/cifs/smbdirect.c Long Li 2017-11-17  1869  	}
-> 399f9539d951adf fs/cifs/smbdirect.c Long Li 2017-11-17  1870  	return ret;
-> 399f9539d951adf fs/cifs/smbdirect.c Long Li 2017-11-17  1871  }
-> f64b78fd1835d1d fs/cifs/smbdirect.c Long Li 2017-11-22  1872
-> 
-> :::::: The code at line 1856 was first introduced by commit
-> :::::: 399f9539d951adf26a1078e38c1b0f10cf6c3e71 CIFS: SMBD: Implement function to create a SMB Direct connection
-> 
-> :::::: TO: Long Li <longli@microsoft.com>
-> :::::: CC: Steve French <smfrench@gmail.com>
-> 
+Enable SMB3 Unix Extensions by default
+--------------------------------------
+Starting with Samba 4.23, the SMB3 UNIX Extensions are enabled by
+default. These extensions provide first-class support for POSIX semantics
+over SMB3, allowing UNIX and Linux clients to access file services with
+features such as proper POSIX permissions, symlink handling, hardlinks,
+and special file types.
 
+Enabling this feature by default improves interoperability for UNIX/Linux
+clients without requiring additional configuration. Windows clients that
+do not support the extensions will continue to function normally, by
+using standard SMB3 behavior.
+
+Add support for SMB3 over QUIC
+------------------------------
+The new "client smb transports" and "server smb transport"
+allow a more flexible configuration for the used tcp
+sockets.
+
+It also got the ability specify "quic" as possible transport.
+If quic should be used in addition to the defaults something
+like "server smb transports = +quic" can be used.
+
+For the client quic only works with name based uncs,
+ip address based uncs are not supported.
+
+Note for the server 'quic' requires the quic.ko kernel module
+for Linux from https://github.com/lxin/quic (tested with Linux 6.14).
+Future Linux versions may support it natively, here's the
+branch that will hopefully accepted upstream soon:
+https://github.com/lxin/net-next/commits/quic/
+
+For the client side there's a fallback to the userspace ngtcp2
+library if the quic kernel module is not available.
+
+Check the smb.conf manpage for additional hints
+about the "client smb transports" and "server smb transport"
+options and interactions with tls related options.
+
+Modern write time update logic
+------------------------------
+Samba 4.23 changes file timestamp handling to match modern Windows servers.
+Earlier releases used delayed write time updates, where last_write_time was
+only refreshed after a short idle period. Now Samba applies immediate
+timestamp updates consistent with modern Windows 10/Server 2016 or newer.
+
+Initial version of smb_prometheus_endpoint
+------------------------------------------
+Samba 4.23 introduces the smb_prometheus_endpoint utility, which exports
+Samba server metrics in Prometheus-compatible format. This enables seamless
+integration of Samba performance and status monitoring into existing
+Prometheus and Grafana environments. For usage and configuration details,
+refer to the new smb_prometheus_endpoint man page.
+
+samba-tool domain backup --no-secrets avoids confidential attributes
+--------------------------------------------------------------------
+The --no-secrets option creates a back-up without secret attributes
+(e.g. passwords), suitable for use in a lab domain. Until now it could
+still contain confidential attributes, including BitLocker recovery
+data and KDS root keys. Objects in the classes msKds-ProvRootKey,
+msFVE-RecoveryInformation, and msTPM-InformationObject will now be
+entirely removed from the backup, as these objects are required by
+schema to have confidential attributes and are no use without them.
+
+CTDB changes
+------------
+CTDB now supports loading tunables from
+/etc/ctdb/tunables.d/*.tunables, in addition to the standard
+/etc/ctdb/tunables.conf.  See the ctdb-tunables(7) manual page for
+more details.  Note that the above locations are examples - the
+actual location of these files will depend on compile time
+configuration.
+
+It isn't expected that many users will require a directory of tunables
+files, since most users do not need to change tunables from their
+default values.  However, this allows vendors to ship their required
+tunables settings (for example, in one or more files marked "do not
+edit") while still allowing local administrators to add their own
+tunables settings (in one or more separate files).
+
+Per-share profiling stats
+-------------------------
+Starting with Samba 4.23, users can collect profile counters at a
+per-share level. This feature requires building Samba with profiling
+data enabled and adding an appropriate `smb.conf` parameter for
+specific shares. It's particularly useful for deployments with a large
+number of active shares, allowing administrators to monitor individual
+share activity and identify potential bottlenecks or hot-spots. When
+enabled, users can inspect current per-share profile information
+("Extended Profile") using the standard `smbstatus` utility.
+
+Currently, this functionality is supported only by the default and
+`ceph_new` VFS modules.
+
+
+REMOVED FEATURES
+================
+
+
+smb.conf changes
+================
+
+   Parameter Name                          Description     Default
+   --------------                          -----------     -------
+   smbd profiling share                    New             no
+   client smb transports                   New             tcp, nbt
+   server smb transports                   New             tcp, nbt
+   winbind varlink service                 New             no
+
+
+CHANGES SINCE 4.23.0rc2
+=======================
+
+o  Ralph Boehme <slow@samba.org>
+    * BUG 15843: macOS Finder client DFS broken on 4.22.0.
+
+o  Stefan Metzmacher <metze@samba.org>
+    * BUG 15899: Self-signed certificates don't have X509v3 Subject 
+Alternative
+      Name for DNS.
+
+o  Andreas Schneider <asn@samba.org>
+    * BUG 15893: Improve handling of principals and realms in client tools.
+
+
+CHANGES SINCE 4.23.0rc1
+=======================
+
+o  Björn Baumbach <bb@sernet.de>
+    * BUG 15896: libquic build fixes.
+
+o  Ralph Boehme <slow@samba.org>
+    * BUG 15844: getpwuid does not shift to new DC when current DC is down.
+    * BUG 15876: Windows security hardening locks out schannel'ed 
+netlogon dc
+      calls like netr_DsRGetDCName.
+
+o  Gary Lockyer <gary@catalyst.net.nz>
+    * BUG 15896: libquic build fixes.
+
+
+KNOWN ISSUES
+============
+
+https://wiki.samba.org/index.php/Release_Planning_for_Samba_4.23#Release_blocking_bugs
+
+
+#######################################
+Reporting bugs & Development Discussion
+#######################################
+
+Please discuss this release on the samba-technical mailing list or by
+joining the #samba-technical:matrix.org matrix room, or
+#samba-technical IRC channel on irc.libera.chat
+
+If you do report problems then please try to send high quality
+feedback. If you don't provide vital information to help us track down
+the problem then you will probably be ignored.  All bug reports should
+be filed under the Samba 4.1 and newer product in the project's Bugzilla
+database (https://bugzilla.samba.org/).
+
+
+======================================================================
+== Our Code, Our Bugs, Our Responsibility.
+== The Samba Team
+======================================================================
+
+================
+Download Details
+================
+
+The uncompressed tarballs and patch files have been signed
+using GnuPG (ID AA99442FB680B620).  The source code can be downloaded
+from:
+
+         https://download.samba.org/pub/samba/rc/
+
+The release notes are available online at:
+
+https://download.samba.org/pub/samba/rc/samba-4.23.0rc3.WHATSNEW.txt
+
+Our Code, Our Bugs, Our Responsibility.
+(https://bugzilla.samba.org/)
+
+                         --Enjoy
+                         The Samba Team
 
