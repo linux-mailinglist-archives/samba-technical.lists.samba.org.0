@@ -2,87 +2,47 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id C7360B44C88
-	for <lists+samba-technical@lfdr.de>; Fri,  5 Sep 2025 06:00:50 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id AAF4EB4563E
+	for <lists+samba-technical@lfdr.de>; Fri,  5 Sep 2025 13:24:01 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
-	bh=7zGXhOqRTLGUQ3sMmPYrJRbtPpDzkzDDCbKwXVCcgRY=; b=nRBwoGH5x2I3JXiBHPVP9ciX/l
-	pl9fNkRIelsqJlH/pDk8dlWyNuuw1oBiqq8NLQzrMdabO7qbjcFT+Hez2Lqz4mPrpiX75sxNCzKfo
-	PVn/0Z/Lbot7SlYBkkUksp6qI7ZmLMRhH1aBUlY6cFv4A05XjDh5FLQQVOBRkyaty2cf6plrJxzkd
-	ylRthPSsZ20OwcdHheyhJnVW9lRKKNtLjbJr9anB6R5NUB1QNwnNPrgdKuoRCAu4DZLF5JviHxCzG
-	fJu/edgmTAbr/ZY92Cgp+VbXhseiZQEgorn/M5JghQKlysTo1zXn3x5s9ve3cbXL/hA8g8kQ0fHWE
-	x5hxbN6g==;
-Received: from ip6-localhost ([::1]:44982 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
+	bh=0OgInf7Se6Swu0nBdo/FN6zfH/VIJCMAbT0ThPK6WQM=; b=jdh19C5FgJbgZ8xq6M6MvEWrN5
+	a3S4WerQn58c7NLvMLwazRHzLZpA9HQA8uSqXeMbj66KNtrQnV031u0LvtcdarSNvcIizudvSKlWB
+	xE/1hKUiUla7lgU7I4TFBCn650mNoNNdUitBs8L2Wz169zjTeHITfoKTAuRuLcnXU/YbUfMjYZZsE
+	5fMZZQCn542Q98SDZfCl56LfJYxtioasUE60LB8wb/R0U5pa0uVqMb9ASCMEI+5x1sz3UfDjKDcJo
+	La/lN68/0aZEDjpnYAkTrkfSjfD8kOQxSXa/GLJdID1mUD7nZJ7YvLgqsRxx6VOnGhU8hF8QaytvA
+	olTj4glA==;
+Received: from ip6-localhost ([::1]:24276 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1uuNcV-0035Zd-Lo; Fri, 05 Sep 2025 04:00:15 +0000
-Received: from send124.i.mail.ru ([89.221.237.219]:56956) 
+	id 1uuUXL-0036kD-Sm; Fri, 05 Sep 2025 11:23:23 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:50030) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uuNcN-0035ZT-Tp
- for samba-technical@lists.samba.org; Fri, 05 Sep 2025 04:00:11 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mail.ru;
- s=mail4; h=Content-Type:Message-ID:Reply-To:Date:MIME-Version:Subject:To:From
- :Sender:Cc:Content-Transfer-Encoding:Content-ID:Content-Description:
- Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
- In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive:X-Cloud-Ids;
- bh=GuSW6KgQEF82gnzQTc4YGlq1r3LfHYKJ7ovjJuXXPE8=; t=1757044807; x=1757134807; 
- b=E/+L76SynOiBr/HUYJ+DfgvnJw4TU1y4uehvW/YVXmZVBb1DpEz8/C1VV3uiZkCzmQHZLYMqfup
- JGReqNYcMKTe1nE7vo6DvMddN7dKBd3ESoxdbNd1FUoEcsTiF2PvidyxJS+gEMJEOC851mPX3ACSn
- JoqcI3ninktb2kIsPJr0snrYnczEaLz9WmNYEODIW9a8hfcG7oO+0FVWiOg/XYfnU6qYiCpqoT5RP
- 8MUt6yFodvkEYJFvOo+QX9VJHmc22SI4XgVh7dq5oPLrnF3vLlDJGm3wOOyGneK/u5YDYx+M6tf0P
- O1ezn8R1TraXBOQ3j7tOiXQ/tHlfwpvZGA8g==;
-Received: from [10.113.17.177] (port=40542 helo=send65.i.mail.ru)
- by exim-fallback-c6c945d5d-qpllb with esmtp (envelope-from
- <usoltsev05@mail.ru>) id 1uuNNX-000000005lr-1X1e
- for samba-technical@lists.samba.org; Fri, 05 Sep 2025 06:44:47 +0300
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mail.ru;
- s=mail4; h=Content-Type:Message-ID:Reply-To:Date:MIME-Version:Subject:To:From
- :From:Sender:Subject:To:Cc:Content-Type:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive:X-Cloud-Ids;
- bh=GuSW6KgQEF82gnzQTc4YGlq1r3LfHYKJ7ovjJuXXPE8=; t=1757043887; x=1757133887; 
- b=Q9qbEMe3kVykOzHg00r4l7r8Dc68cloURj1ewtrCya6IL1V+FBOouSJgHoXlo7eB02OMfNlVa/5
- d4fhrl/IbAD9q1JVjqiWy/Vhao3PaSHoMd8IHSk3IEP2xiXLwelxGBp6CcKySJsTEzGrQb8958pVM
- q2cEDayvgqAYBokonVQp6vhW43p5/azkWFBrv3QomtwoLqq/jfamWHkICtvE3uZwtLCZbFQSD2aTu
- wIEYMNQypAP03kpvaOJCceC3nO8BN05KRlaogQhDBzFTCSHjYgMaf+XVxRVil+WSCH/ivR/j86j+u
- XWzaSM1sJxGsRn90Qj00kJOvidrpgr4E6cng==;
-Received: by exim-f-55cb59c988-qhgvn with local (envelope-from
- <usoltsev05@mail.ru>) id 1uuNNJ-00000000JL6-1jZ0
- for samba-technical@lists.samba.org; Fri, 05 Sep 2025 06:44:35 +0300
-Received: by e.mail.ru with HTTP;
-	Fri, 05 Sep 2025 06:44:33 +0300
-To: samba-technical@lists.samba.org
-Subject: =?UTF-8?B?ZXh0cmEgY29kZSBzb3VyY2UzL2xpYnNtYi9kc2dldGRjbmFtZS5jOmRzZ2V0?=
- =?UTF-8?B?ZGNuYW1lX2NhY2hlZA==?=
+ (Exim) id 1uuUXC-0036jQ-QZ; Fri, 05 Sep 2025 11:23:17 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=From:To:Date:Message-ID:CC;
+ bh=0OgInf7Se6Swu0nBdo/FN6zfH/VIJCMAbT0ThPK6WQM=; b=VW58Q31UJdO/Rz7KI1SI31vrn+
+ THeM6Q3E8wM4+0myt3aTAFPnSfuQQma+VkPYp6JyHnRi3VsBTd8MiONMpzXYDBBTN+S50hM2jtfh5
+ UOVJfy73eCHXyHBhsQofofPtzz946iMB/9Ib0XvHYKi88GvHunlFj8W3cgcF4jex6NZGEdZUrSwh3
+ n7JZg3yPWPCslj7h/0QzzX9+aQRn6opUMumnZcleUp7z7sE82rX0KVVZ4FGvXJqFvWACI60EFSxaH
+ s8hU0ReIP0cE0zj8AtLaKpd4rBRzZBE/nqRYv045a6kHyG4bYq0Q3EfS7Zs55BgxxdKFu2ByvdwbY
+ 5024sjtRp7sG9vjEPP6AP2YOGCbyE+aezO5u/TyDmajMsZhyLPIhrZ0tpjr4yP5gH0Q+lkVnBOnHa
+ zYj+v7JyVJMAbTKQEsPnRVALBpyzWsEiIvXybkzfa/V6kfO0u4ZBNWT9dv5Uabz3ALGR8zjuMVURS
+ GcXl1erg1+QeaPWN5XnJ7eeZ;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1uuUXC-002Ygh-17; Fri, 05 Sep 2025 11:23:14 +0000
+Message-ID: <3677bffd-df6c-4074-9278-bbc11e8fb786@samba.org>
+Date: Fri, 5 Sep 2025 13:23:13 +0200
 MIME-Version: 1.0
-X-Mailer: Mail.Ru Mailer 1.0
-X-SenderField-Remind: 0
-Date: Fri, 05 Sep 2025 06:44:33 +0300
-X-Priority: 3 (Normal)
-Message-ID: <1757043873.835540098@f525.i.mail.ru>
-X-Mailru-Src: fe
-X-4EC0790: 10
-X-7564579A: B8F34718100C35BD
-X-77F55803: 119C1F4DF6A9251C840BF8CF5C662E21CD86DBACD3EC49B3DA47252976C91765ABF6EAE57C0FACE9F5BB77C7C67A3E538E7FD94675F3356592C525342C80D134FA22359A668FFFCFE1C7414A75FA687D
-X-7FA49CB5: 70AAF3C13DB70168C09775C1D3CA48CFA3CEAC4B15732FE4B2086D80B0504778CF19DD082D7633A0587C8798DFFB2F5764CD17681C2FEB7A176DF2183F8FC7C07D3D92443D23A869C4224003CC836476B18DACCF872F85DEBFD28B28ED4578739E625A9149C048EE1E561CDFBCA1751F0F8483684B69468CB287FD4696A6DC2FA8DF7F3B2552694A4E2F5AFA99E116B42401471946AA11AFA417C69337E82CC2BCF491FFA38154B6B5C8C57E37DE458B543C44CD4AFD0029C6CDE5D1141D2B1C495464B5AD9E5325ABC7C08D2F5E9560D0816ED2AC71D80796D7AA704DB6600ECACD7DF95DA8FC8BD5E8D9A59859A8B6A70DDFFB3186CBC5CC7F00164DA146DAFE8445B8C89999728AA50765F790063783E00425F71A4181389733CBF5DBD5E9C8A9BA7A39EFB766F5D81C698A659EA7CC7F00164DA146DA9985D098DBDEAEC8EDCF5861DED71B2F389733CBF5DBD5E9B5C8C57E37DE458B9E9CE733340B9D5F3BBE47FD9DD3FB595F5C1EE8F4F765FC72CEEB2601E22B093A03B725D353964B0B7D0EA88DDEDAC722CA9DD8327EE4930A3850AC1BE2E7354E672349037D5FA5C4224003CC83647689D4C264860C145E
-X-C1DE0DAB: 0D63561A33F958A5F2BF11B648A5F4A65002B1117B3ED696E6C1A1F89D5BC79D4869453249F34FA4823CB91A9FED034534781492E4B8EEAD76D9D2CEBF986909BDAD6C7F3747799A
-X-C8649E89: 1C3962B70DF3F0AD75DCE07D45A7499577DD89D51EBB7742424CF958EAFF5D571004E42C50DC4CA955A7F0CF078B5EC49A30900B95165D34D8C933888226C841BB7749EEFA8E239172B06D1226CC7178961FEB865B5D7F8C61BCF7B8E5267D841D7E09C32AA3244C26BB37E40A40C19C77DD89D51EBB77429A5130A4B5E88AC7EA455F16B58544A2C99F59F2F009F096A77869C8948D001D7C9C0C0317F3B229C21DF4734205F61383DB18EBE73F7D69
-X-D57D3AED: 3ZO7eAau8CL7WIMRKs4sN3D3tLDjz0dLbV79QFUyzQ2Ujvy7cMT6pYYqY16iZVKkSc3dCLJ7zSJH7+u4VD18S7Vl4ZUrpaVfd2+vE6kuoey4m4VkSEu53w8ahmwBjZKM/YPHZyZHvz5uv+WouB9+Od3uM/CLT152eL7j4ZacoUSF0MSa0v5VBmEtSutdC50BIKdL3VIRlkt/X9Gr7QWYXucPUinHATAeHXorM+S1NQOd7Dfgh+EySdSUtlMuommrgpKzETiR/mU=
-X-Mailru-Sender: 9422C5FC7C00AE69756BF80F31465B10F5BB77C7C67A3E538E7FD94675F335659F64C18282C79ACB45772512148A02ECF400C9AF6389409DDE4447A96FAFB180DABB0D1090351AE2A1ECF5DE1755B44AD2CF849BCB211376F7136742BC9A22995FEEDEB644C299C0ED14614B50AE0675
-X-Mras: Ok
-X-Spam: undefined
-X-Mailru-Src: fallback
-X-7564579A: 646B95376F6C166E
-X-77F55803: 6242723A09DB00B47C3C2959FC77D8BF06A418AAFCA9AA69B3563A7885FEA099049FFFDB7839CE9E5A0567079EB5975137AF793F9029D64E2E9CD864B15769D231AFC4E2059D3E6F39FA1C167E356FFE
-X-7FA49CB5: 0D63561A33F958A56329A52B43FDE8255002B1117B3ED6967B0095C6EAE5255DE409568A2FDEBC0902ED4CEA229C1FA827C277FBC8AE2E8B54F520D093A0DF28
-X-D57D3AED: 3ZO7eAau8CL7WIMRKs4sN3D3tLDjz0dLbV79QFUyzQ2Ujvy7cMT6pYYqY16iZVKkSc3dCLJ7zSJH7+u4VD18S7Vl4ZUrpaVfd2+vE6kuoey4m4VkSEu53w8ahmwBjZKM/YPHZyZHvz5uv+WouB9+OYcBso8Zm+oliTz8oZwnDrFsY77LZRcHyw5ht0smWrfSeTW5FiI8avd9v29gUBslpEZ9wIMwqVP4jLQVQ+dVm7x9BpDHadBV9RMjI809PraZRkZ+4Qq7d7EtxikWRYSTag==
-X-Mailru-MI: 20000000000601000
-X-Mras: Ok
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: base64
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
+User-Agent: Mozilla Thunderbird
+Content-Language: de-DE
+To: samba-announce@lists.samba.org, samba@lists.samba.org,
+ samba-technical@lists.samba.org
+Subject: [Announce] Samba 4.23.0rc4 Available for Download
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -96,18 +56,224 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: =?utf-8?b?0KPRgdC+0LvRjNGG0LXQsiDQn9GR0YLRgCB2aWEgc2FtYmEtdGVjaG5pY2Fs?=
- <samba-technical@lists.samba.org>
-Reply-To: =?UTF-8?B?0KPRgdC+0LvRjNGG0LXQsiDQn9GR0YLRgA==?= <usoltsev05@mail.ru>
+From: Jule Anger via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jule Anger <janger@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-CkhpLgpleHRyYSBmdW5jdGlvbjoKaHR0cHM6Ly9naXRsYWIuY29tL3NhbWJhLXRlYW0vc2FtYmEv
-LS9ibG9iL21hc3Rlci9zb3VyY2UzL2xpYnNtYi9kc2dldGRjbmFtZS5jP3JlZl90eXBlPWhlYWRz
-I0wzMzMKwqAKVGhlIGNhbGxpbmcgY29kZSBvbmx5IGNoZWNrcyB0aGUgc3VjY2VzcyBvZiB0aGUg
-ZnVuY3Rpb24uIEluIGZ1bmN0aW9uICJkc2dldGRjbmFtZV9jYWNoZWQiwqByZWN1cnNpdmUgY2Fs
-bCB0byB0aGUgImRzZ2V0ZGNuYW1lIiBmdW5jdGlvbiB3aXRoIGZsYWdzIChmbGFncyB8IERTX0ZP
-UkNFX1JFRElTQ09WRVJZKSBzdGlsbCBhcnJpdmVzIGF0IHRoZSBsYWJlbCAiIHJlZGlzY292ZXIg
-OiIuCsKgClRoZSAiZHNnZXRkY25hbWVfY2FjaGVkIiBmdW5jdGlvbiBjYW4gYmUgIHNhZmVseSBk
-ZWxldGVkIGFuZCAiZHNnZXRkY25hbWVfY2FjaGVfZmV0Y2giIGNhbiBiZSAgY2FsbGVkIGRpcmVj
-dGx5IC4KwqAKVXNvbHRzZXYgUGV0ci4=
+Release Announcements
+=====================
+
+This is the fourth release candidate release of Samba 4.23.  This is *not*
+intended for production environments and is designed for testing
+purposes only.  Please report any defects via the Samba bug reporting
+system at https://bugzilla.samba.org/.
+
+Samba 4.23 will be the next version of the Samba suite.
+
+
+UPGRADING
+=========
+
+
+NEW FEATURES/CHANGES
+====================
+
+Enable SMB3 Unix Extensions by default
+--------------------------------------
+Starting with Samba 4.23, the SMB3 UNIX Extensions are enabled by
+default. These extensions provide first-class support for POSIX semantics
+over SMB3, allowing UNIX and Linux clients to access file services with
+features such as proper POSIX permissions, symlink handling, hardlinks,
+and special file types.
+
+Enabling this feature by default improves interoperability for UNIX/Linux
+clients without requiring additional configuration. Windows clients that
+do not support the extensions will continue to function normally, by
+using standard SMB3 behavior.
+
+Add support for SMB3 over QUIC
+------------------------------
+The new "client smb transports" and "server smb transport"
+allow a more flexible configuration for the used tcp
+sockets.
+
+It also got the ability specify "quic" as possible transport.
+If quic should be used in addition to the defaults something
+like "server smb transports = +quic" can be used.
+
+For the client quic only works with name based uncs,
+ip address based uncs are not supported.
+
+Note for the server 'quic' requires the quic.ko kernel module
+for Linux from https://github.com/lxin/quic (tested with Linux 6.14).
+Future Linux versions may support it natively, here's the
+branch that will hopefully accepted upstream soon:
+https://github.com/lxin/net-next/commits/quic/
+
+For the client side there's a fallback to the userspace ngtcp2
+library if the quic kernel module is not available.
+
+Check the smb.conf manpage for additional hints
+about the "client smb transports" and "server smb transport"
+options and interactions with tls related options.
+
+Modern write time update logic
+------------------------------
+Samba 4.23 changes file timestamp handling to match modern Windows servers.
+Earlier releases used delayed write time updates, where last_write_time was
+only refreshed after a short idle period. Now Samba applies immediate
+timestamp updates consistent with modern Windows 10/Server 2016 or newer.
+
+Initial version of smb_prometheus_endpoint
+------------------------------------------
+Samba 4.23 introduces the smb_prometheus_endpoint utility, which exports
+Samba server metrics in Prometheus-compatible format. This enables seamless
+integration of Samba performance and status monitoring into existing
+Prometheus and Grafana environments. For usage and configuration details,
+refer to the new smb_prometheus_endpoint man page.
+
+samba-tool domain backup --no-secrets avoids confidential attributes
+--------------------------------------------------------------------
+The --no-secrets option creates a back-up without secret attributes
+(e.g. passwords), suitable for use in a lab domain. Until now it could
+still contain confidential attributes, including BitLocker recovery
+data and KDS root keys. Objects in the classes msKds-ProvRootKey,
+msFVE-RecoveryInformation, and msTPM-InformationObject will now be
+entirely removed from the backup, as these objects are required by
+schema to have confidential attributes and are no use without them.
+
+CTDB changes
+------------
+CTDB now supports loading tunables from
+/etc/ctdb/tunables.d/*.tunables, in addition to the standard
+/etc/ctdb/tunables.conf.  See the ctdb-tunables(7) manual page for
+more details.  Note that the above locations are examples - the
+actual location of these files will depend on compile time
+configuration.
+
+It isn't expected that many users will require a directory of tunables
+files, since most users do not need to change tunables from their
+default values.  However, this allows vendors to ship their required
+tunables settings (for example, in one or more files marked "do not
+edit") while still allowing local administrators to add their own
+tunables settings (in one or more separate files).
+
+Per-share profiling stats
+-------------------------
+Starting with Samba 4.23, users can collect profile counters at a
+per-share level. This feature requires building Samba with profiling
+data enabled and adding an appropriate `smb.conf` parameter for
+specific shares. It's particularly useful for deployments with a large
+number of active shares, allowing administrators to monitor individual
+share activity and identify potential bottlenecks or hot-spots. When
+enabled, users can inspect current per-share profile information
+("Extended Profile") using the standard `smbstatus` utility.
+
+Currently, this functionality is supported only by the default and
+`ceph_new` VFS modules.
+
+
+REMOVED FEATURES
+================
+
+
+smb.conf changes
+================
+
+   Parameter Name                          Description     Default
+   --------------                          -----------     -------
+   smbd profiling share                    New             no
+   client smb transports                   New             tcp, nbt
+   server smb transports                   New             tcp, nbt
+   winbind varlink service                 New             no
+
+
+CHANGES SINCE 4.23.0rc3
+=======================
+
+o  Alexander Bokovoy <ab@samba.org>
+    * BUG 15902: Regression in gssproxy support in 4.23.rc1+.
+
+o  MikeLiu <mikeliu@qnap.com>
+    * BUG 15900: 'net ads group' failed to list domain groups.
+
+
+CHANGES SINCE 4.23.0rc2
+=======================
+
+o  Ralph Boehme <slow@samba.org>
+    * BUG 15843: macOS Finder client DFS broken on 4.22.0.
+
+o  Stefan Metzmacher <metze@samba.org>
+    * BUG 15899: Self-signed certificates don't have X509v3 Subject 
+Alternative
+      Name for DNS.
+
+o  Andreas Schneider <asn@samba.org>
+    * BUG 15893: Improve handling of principals and realms in client tools.
+
+
+CHANGES SINCE 4.23.0rc1
+=======================
+
+o  Björn Baumbach <bb@sernet.de>
+    * BUG 15896: libquic build fixes.
+
+o  Ralph Boehme <slow@samba.org>
+    * BUG 15844: getpwuid does not shift to new DC when current DC is down.
+    * BUG 15876: Windows security hardening locks out schannel'ed 
+netlogon dc
+      calls like netr_DsRGetDCName.
+
+o  Gary Lockyer <gary@catalyst.net.nz>
+    * BUG 15896: libquic build fixes.
+
+
+KNOWN ISSUES
+============
+
+https://wiki.samba.org/index.php/Release_Planning_for_Samba_4.23#Release_blocking_bugs
+
+
+#######################################
+Reporting bugs & Development Discussion
+#######################################
+
+Please discuss this release on the samba-technical mailing list or by
+joining the #samba-technical:matrix.org matrix room, or
+#samba-technical IRC channel on irc.libera.chat
+
+If you do report problems then please try to send high quality
+feedback. If you don't provide vital information to help us track down
+the problem then you will probably be ignored.  All bug reports should
+be filed under the Samba 4.1 and newer product in the project's Bugzilla
+database (https://bugzilla.samba.org/).
+
+
+======================================================================
+== Our Code, Our Bugs, Our Responsibility.
+== The Samba Team
+======================================================================
+
+================
+Download Details
+================
+
+The uncompressed tarballs and patch files have been signed
+using GnuPG (ID AA99442FB680B620).  The source code can be downloaded
+from:
+
+         https://download.samba.org/pub/samba/rc/
+
+The release notes are available online at:
+
+https://download.samba.org/pub/samba/rc/samba-4.23.0rc4.WHATSNEW.txt
+
+Our Code, Our Bugs, Our Responsibility.
+(https://bugzilla.samba.org/)
+
+                         --Enjoy
+                         The Samba Team
+
+
