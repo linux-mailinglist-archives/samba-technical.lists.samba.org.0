@@ -2,59 +2,72 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 48868B49DC9
-	for <lists+samba-technical@lfdr.de>; Tue,  9 Sep 2025 02:01:27 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C75B5B4A009
+	for <lists+samba-technical@lfdr.de>; Tue,  9 Sep 2025 05:27:06 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=GJJn5kSfYjoRyHXDiKRhT3Bp++WcWLKip13wVE61DTQ=; b=vQpoqhNT09k9oAfwhx5utvbIKN
-	1AkntGWQnw1omhE3uXGInkhR8klY2E+SyNc0AsZaF04DlbX7h0o13/NaQh3rAtj3/P8Uqf9tbk778
-	qbWihzSTvoRHdwmLDKP11M6vY2X45Lse65lxAmwHbIFMi6qdBGcdX+dq348SdkwDN3XW0H+pG4fa6
-	0uBfv7a2o5penkyqmLjFwOtXM5OPPqxNi2ldHtzchNFGyMiG5Rhn39HHcmPWqQbDUklbuMGEhhI0m
-	HFhK+BXFCR1sWiiRyuO1X6yQpxobxn8PfdsCgVkTXXlDODdwRFRIG3y9gRaYSzt1sX9Mp6D3MWqaE
-	W31knTfw==;
-Received: from ip6-localhost ([::1]:28562 helo=hr1.samba.org) 
+	bh=NrRZcA7T5Q23T4iCMrmMww9RWtuPeotrxYYsxOvCX/A=; b=pDIS7BTrirPZ9QNlzTaWemo30Q
+	8SJ4xQxzq0ueMuuBFJqooZZq4wpAC8EEYifuGWQeDzR/++1e57qOlFnLp261oAF5w7+gZ+tHfu3zc
+	2QU2Cam6578Jvjb0We08y5iY9mUnHOaokwzh8pBP17QpN8v9nq6R/8fh1Hr0GX+4fldGe/4oU+Bec
+	i746JJYgKsJcz3AO21Gprs6oYvXIGDnyvvwrVP9qpHCQ36iiotuQnOQTaYYAO2/cozME9MyXCHTah
+	tk2YQM2tYL2MKWvr/2rw8mGobTPWqyZ1sQ2xB7RIdrvq3jVIOCfdqdBO2wuTOIFBXU3ANbi3dPKJF
+	byVf3SuQ==;
+Received: from ip6-localhost ([::1]:44036 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1uvlnS-003L9z-EA; Tue, 09 Sep 2025 00:01:18 +0000
-Received: from sea.source.kernel.org ([172.234.252.31]:53414) 
+	id 1uvp02-003LWk-EW; Tue, 09 Sep 2025 03:26:30 +0000
+Received: from mail-qv1-xf34.google.com ([2607:f8b0:4864:20::f34]:61565) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uvlnM-003L9r-2B
- for samba-technical@lists.samba.org; Tue, 09 Sep 2025 00:01:15 +0000
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 263C944C14
- for <samba-technical@lists.samba.org>; Tue,  9 Sep 2025 00:01:07 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id DA42AC4AF09
- for <samba-technical@lists.samba.org>; Tue,  9 Sep 2025 00:01:06 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1757376067;
- bh=7KAOacfH+SbFHRuxV0J6XvKQa/Clv5OzYetLHeA9JBQ=;
- h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
- b=FPEN0uppZveKnOIGD/9Fbyxwn1V18VkrTLtTEW/W7HjtkHW9TngepYOV9zmB2t9Lc
- V8/eMpbEXsWNZJwuiT7lcAJEIyMYsWXVk+AhL/xQYyOc6YuaLWLY4mBK32vxK13M6n
- GiQQjfPI+CziWenBCrlBitFNgiHI8dPJ0T9DNtjju0HhTdzRGXzVfpHTjAjGSXFUR/
- aBHi0wO467WChbJjnKNLUxwQgUr0EWMDxIbsjlueFUQDqKiSbSxeXtEutUyZb7z99F
- xB2EC0SXRARg5FdhKh0sRsF7c7bn9rHx+shJqm+CCV5NxkdJrFxCN7reh58PEhZSye
- HyS2lQDsZ6DKQ==
-Received: by mail-ej1-f49.google.com with SMTP id
- a640c23a62f3a-b0431c12df3so860803666b.1
- for <samba-technical@lists.samba.org>; Mon, 08 Sep 2025 17:01:06 -0700 (PDT)
+ (Exim) id 1uvozw-003LWd-IN
+ for samba-technical@lists.samba.org; Tue, 09 Sep 2025 03:26:28 +0000
+Received: by mail-qv1-xf34.google.com with SMTP id
+ 6a1803df08f44-75512f5a75cso4161766d6.2
+ for <samba-technical@lists.samba.org>; Mon, 08 Sep 2025 20:26:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1757388382; x=1757993182; darn=lists.samba.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=NrRZcA7T5Q23T4iCMrmMww9RWtuPeotrxYYsxOvCX/A=;
+ b=MgeXn98i5P57EB5uSO8H1A45yiy9erlDxEXonJgbjIwO4HwcREFIMgOjXT85lQ9eNU
+ 51wP/spDZrlvrzhiOJaH1YQwX1Ckf/0xj370K7lPyCzmX3YT1ea0Js79yURj6N67UxOv
+ VoLss24sUWjWUKMmuTuA70MsTClLfdqBNmHOTo2KvJ690v0B8xuv9qbLO2mhVADojAZX
+ BwYWy/uG1i1ci0yqtPetiQmnTpJ0aOkXWZKNRZQpEY5E1xhNuvepAkTiyytEaF0Ng5ey
+ iPmErmL4Fn5cjWWAeqK/ZCXz/HnjYp8dzf8obyG6P+hG1CcosKw8TuvDrGnCOiqzYUkN
+ r8QA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1757388382; x=1757993182;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=NrRZcA7T5Q23T4iCMrmMww9RWtuPeotrxYYsxOvCX/A=;
+ b=B5iaVhiw7kl/2d1cfyDnBHQH5uziaumnIkuhviXDADk3jriuwCWyI4t0uTpGndZiFR
+ c/Lqsp//4k6M2QBDLv5s3NZQWa077c9S4anNIx64UbvhDomTeg2f1xy9/BM07NFmPB7/
+ rCv8hGxndLWvNuoc1J79ZxkqiPNIMn/ds8jpcCN5+O23CaNK+prxmV+zQ2cQXlijD2iX
+ jSf3Dc19Vwe28mphq3labdZvt6IjzXbQkI9T1B8bG8qJPBB3IHaCb/3FlvYcMPZsB0yd
+ AemOGkocO4N46QqtTiGuzrV+z9tnHMAQpt2g7gb5Dx4HaYK7oDpvh+jc755jKUkm7y9S
+ Zp6A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUs7EOqQPT/N5lT/CjvHCXGloANi+9qp8WNH5A40Laff0rPqSZfjGZUZLNrqD/hKu/VKe8sJuDSa5Y7FpJK5y4=@lists.samba.org
-X-Gm-Message-State: AOJu0YzDmSuqP52PXLgfYDhMNMAOUevvkow3gqwK3BLTHC0E5h4B6Xke
- pf3QaEN4apEW1lPmFXPrhBMwN4ttdVCGQ8RBnQx3BWmm2g/IsrTixIOC29wzPi2ZcrIScC2ZVpJ
- 9f7uf6PnaT7Qda7MJ+SMYkKh37s0xgfc=
-X-Google-Smtp-Source: AGHT+IHMG87rWhKPRxgR3criSOV0YPnuu+DkddMargIGsGCIKqq7yCAdVrjyDI0qfUzHheRjWySJMuiGg/uLv35Kjuc=
-X-Received: by 2002:a17:906:6a17:b0:b04:25e6:2dc7 with SMTP id
- a640c23a62f3a-b04b140a60dmr927063066b.18.1757376065169; Mon, 08 Sep 2025
- 17:01:05 -0700 (PDT)
+ AJvYcCWw00E4KdZ1AsfmRB0wj0vR/g+eQL4NesyiZiqxrzxUT5UDAq1ZXr1KJXLtXGUD/VYveuKSp7tQAA6IDa9wkfU=@lists.samba.org
+X-Gm-Message-State: AOJu0YwdgulBC7qQ62mHPRQI3Zu95lPzn/8nFxspXl6dxVsja7G66rwc
+ uysqelz9PjM7v3gndZLi3R1wJr7zb69r8g3w3KvMkd27MtLQeixkb/aI8ATN+oeAJdpNMXpXiWh
+ LSUjYbYUGY9dNQygJe/oC3AlzJYekGtY=
+X-Gm-Gg: ASbGnctiWtlMca9jK1lTyRsXCcrBfVBw70SzmcfPzmcRsyI6LAeGllfIGIsj/vkgLX5
+ G3R8Zrc+RZ4wba/G466DSQgbuF3OjRFaCtdLmWs8PpaNMGNbNAaneEaCAMYWbmfG5yWwAgkQuJn
+ qaYzfqaAMkdTH2tdA/oDRklby5LN9deqH0Ze1s2WWpCeibz+D7yPLhUUfb8B+InxQleFLtJgBLx
+ UV7doBSE8YNrznVrtPUHWObcQnDJ8rauJVVCG3jIWfB/gBffve2DzC61Sp0y3+gSD45MUX+oi/0
+ xiHZ8Ch+h95MerEdyJxdFrKXJsWyBYxkO19mplnsJMJLrnBrxE+rVgrQCn/ZqE7P6Q==
+X-Google-Smtp-Source: AGHT+IHm8S6J2Ip+H+fitEdaUfSjvHnzgB77fTeXtZJGvTTYjeFTS6fy9TrASjLTSSH7pspglJZO36BXp6KMTDtV720=
+X-Received: by 2002:a05:6214:b6a:b0:70d:b15e:e8ea with SMTP id
+ 6a1803df08f44-739494b62c2mr120499516d6.66.1757388382417; Mon, 08 Sep 2025
+ 20:26:22 -0700 (PDT)
 MIME-Version: 1.0
 References: <cover.1756139607.git.metze@samba.org>
  <e6c0ddfe-8942-47a0-8277-b4176a5918e0@samba.org>
 In-Reply-To: <e6c0ddfe-8942-47a0-8277-b4176a5918e0@samba.org>
-Date: Tue, 9 Sep 2025 09:00:53 +0900
-X-Gmail-Original-Message-ID: <CAKYAXd_-WG6cn8Ab-sR6A-j++HNEeSiB2qB7qX4U6RZQ3SGOfg@mail.gmail.com>
-X-Gm-Features: AS18NWClXcZCYg97uzTRs5Tl-e0NS2rS3CahW_hLdJqwKDB2oDI7lC36qScr2Lc
-Message-ID: <CAKYAXd_-WG6cn8Ab-sR6A-j++HNEeSiB2qB7qX4U6RZQ3SGOfg@mail.gmail.com>
+Date: Mon, 8 Sep 2025 22:26:10 -0500
+X-Gm-Features: AS18NWD_FfJfyZQ1uG1qXtSqFjF_RqpHhyZy1GxMbsOpBp15OXUZcoBn7PJHpm8
+Message-ID: <CAH2r5msKSbUfOVXUabNQep3s2H4kW0AMnDh0XA68Pk3_oqaHCQ@mail.gmail.com>
 Subject: Re: replace for-next-next... Re: [PATCH v4 000/142] smb:
  smbdirect/client/server: make use of common structures
 To: Stefan Metzmacher <metze@samba.org>
@@ -73,15 +86,19 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Namjae Jeon via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Namjae Jeon <linkinjeon@kernel.org>
+From: Steve French via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Steve French <smfrench@gmail.com>
 Cc: Tom Talpey <tom@talpey.com>, linux-cifs@vger.kernel.org,
- samba-technical@lists.samba.org, Steve French <smfrench@gmail.com>
+ samba-technical@lists.samba.org, Namjae Jeon <linkinjeon@kernel.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Tue, Sep 9, 2025 at 1:08=E2=80=AFAM Stefan Metzmacher <metze@samba.org> =
-wrote:
+updated for-next-next
+
+Let me know if any problems, or if note any client patches to send for rc6
+
+On Mon, Sep 8, 2025 at 11:08=E2=80=AFAM Stefan Metzmacher <metze@samba.org>=
+ wrote:
 >
 > Hi Steve,
 >
@@ -94,9 +111,6 @@ wrote:
 >
 > https://git.samba.org/?p=3Dmetze/linux/wip.git;a=3Dshortlog;h=3Drefs/head=
 s/for-6.18/fs-smb-20250908-v5
-Very nice. It will make it easier to review your patches also.
-And please Cc me on your smb client patches too.
-Thanks.
 >
 > The first 3 patches are the main reason why the rebase is needed.
 > 7a9cd9e986c1f6ce3a64f4329b2e795bf24752ae smb: server: let smb_direct_writ=
@@ -674,4 +688,10 @@ socket *sc,
 >         cap->max_rdma_ctxs =3D sc->rw_io.credits.max;
 >
 >
+
+
+--=20
+Thanks,
+
+Steve
 
