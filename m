@@ -2,48 +2,33 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2434BB53BBB
-	for <lists+samba-technical@lfdr.de>; Thu, 11 Sep 2025 20:41:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 48721B53F01
+	for <lists+samba-technical@lfdr.de>; Fri, 12 Sep 2025 01:14:56 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=WFUCNCHe+0otnnl9WC8jbDApQRqhgsqIqvfkYyj6Vek=; b=LQvJCQPiQ2hPl50qux5cTq5mL/
-	9k8rsavNQk0tkF6/xg9yfs4RvHTcGhVwiBBnuuf2Gt2jsenBzHmtjSbyue04RiQhqoT8shEvgkicJ
-	cqA1gVg6Cbn4w+Kl+Rv/Yu6WK5aW59xbziXeOh9C4FiL3tgn0HzsZPbdKqNAa2hac53CytTHpTF2G
-	h7LZx1i1KOKd8Qz/3qvjRp+SRFcVAIpcJZMFkGnhRue3YGq1FFfK7mntCMEjCZzasoIjeV+qm5VjH
-	56xgirHurX/POUp5njdmp03DBU+AN725nzM5BlLA1N3eBBPda1Q200nApU/mWA6S0J4q8LIRzjhOD
-	HP01eimQ==;
-Received: from ip6-localhost ([::1]:64088 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
+	bh=rbsEEvA4bZ+RW6DnyZMamBAgFxHA0hUvKFfz0jQ1ap8=; b=t8zT2aCFk4pikJbpMjc2fYFHON
+	uS4ZlsC8HWHi7UkhCATRxw1LS+U4zLwyXTIYuQ6KWcZSTv0nRC/nLCujU51hXzPA9YOcL4Fy02Gw4
+	+ULVuQ0kqtRa4FltA2HDnIdrGTZnGICrT/4R/qRaIvtMM49mPytAtqAO7llhFcIymvKUJXUnBJNwb
+	hNJ65k05qVvdIgXzWzUxk/OQit+P+MqnugU3EXMd9Sw9JaGT4QQxL7SRw4KyFcnZeWiEJ71VnY9Ab
+	DCHmG8VYZC9JTcmDuyBxFp+3XrwCXtfBKvXRiieHnhEVrhfG+JjjHi1bh8y+0EDmCsTLSjJns9KGa
+	cHceGEOw==;
+Received: from ip6-localhost ([::1]:63236 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1uwmEb-003ZdS-AT; Thu, 11 Sep 2025 18:41:29 +0000
-Received: from casper.infradead.org ([2001:8b0:10b:1236::1]:41274) 
- by hr1.samba.org with esmtps
- (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uwmEW-003ZdL-6J
- for samba-technical@lists.samba.org; Thu, 11 Sep 2025 18:41:26 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=casper.20170209; h=In-Reply-To:Content-Type:MIME-Version:
- References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
- Content-Transfer-Encoding:Content-ID:Content-Description;
- bh=WFUCNCHe+0otnnl9WC8jbDApQRqhgsqIqvfkYyj6Vek=; b=ADPKr9URaaRaESn89LiXR/cWpP
- Gt0M7rdMfL/ggm/57JdYMbFg2lLII6JKFnx5+nT0csgyti4Fg8la9bOEklyDagn+2MZ0Ter8tXOmw
- bsTGd7FgrF8AF5vD5HubfKn48PXVj0C6Auv85BF+5+4SPqrQSdcvYYxX3wwfoWMYjouqtHX+/xH2f
- vgGlndErUzB8bqPN3rOBWB7jYP2k3KdWqPN3778gem7xmWErGmcpVyI9aaOxcig5xwrK5QbUyW2SA
- DPZ6NkSOiG5Ji2zx8cc6vK+8FYoVSWtg/TB7WVQEyyC+QLz1d1N34pXBFrl2RcfnHrFjz0rfM8Dkh
- 8HUusGYw==;
-Received: from willy by casper.infradead.org with local (Exim 4.98.2 #2 (Red
- Hat Linux)) id 1uwlrK-0000000Fm9W-1UIm;
- Thu, 11 Sep 2025 18:17:26 +0000
-Date: Thu, 11 Sep 2025 19:17:26 +0100
-To: David Howells <dhowells@redhat.com>
-Subject: Re: [PATCH v3] cifs: fix pagecache leak when do writepages
-Message-ID: <aMMSNnJA6VknuVMB@casper.infradead.org>
-References: <2780505c-b531-7731-3c3d-910a22bf0802@huawei.com>
- <20250911030120.1076413-1-yangerkun@huawei.com>
- <1955609.1757607906@warthog.procyon.org.uk>
+	id 1uwqUh-003aDh-Dn; Thu, 11 Sep 2025 23:14:23 +0000
+Received: from li777-160.members.linode.com ([104.200.28.160]:56816
+ helo=dup2.asynchrono.us) by hr1.samba.org with esmtp (Exim)
+ id 1uwqUd-003aDY-Nm; Thu, 11 Sep 2025 23:14:22 +0000
+Received: from edfu.localnet (c-73-186-160-43.hsd1.ma.comcast.net
+ [73.186.160.43])
+ by dup2.asynchrono.us (Postfix) with ESMTPSA id 217FE150D;
+ Thu, 11 Sep 2025 22:54:53 +0000 (UTC)
+To: samba-technical@lists.samba.org, samba@lists.samba.org
+Subject: Samba in Kubernetes / Containers - Release v0.7
+Date: Thu, 11 Sep 2025 18:54:52 -0400
+Message-ID: <7112930.vXUDI8C0e8@edfu>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <1955609.1757607906@warthog.procyon.org.uk>
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="utf-8"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -57,31 +42,52 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Matthew Wilcox via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Matthew Wilcox <willy@infradead.org>
-Cc: pc@manguebit.com, tom@talpey.com, sprasad@microsoft.com,
- linux-cifs@vger.kernel.org, ematsumiya@suse.de, gregkh@linuxfoundation.org,
- yangerkun <yangerkun@huawei.com>, samba-technical@lists.samba.org,
- yangerkun@huaweicloud.com, lsahlber@redhat.com, sfrench@samba.org,
- nspmangalore@gmail.com, stable@kernel.org
+From: John Mulligan via samba-technical <samba-technical@lists.samba.org>
+Reply-To: John Mulligan <phlogistonjohn@asynchrono.us>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Thu, Sep 11, 2025 at 05:25:06PM +0100, David Howells wrote:
-> yangerkun <yangerkun@huawei.com> wrote:
-> 
-> > >     	if (folio->mapping != mapping ||
-> > >   	    !folio_test_dirty(folio)) {
-> > >   		start += folio_size(folio);
-> > > +		folio_put(folio);
-> > >   		folio_unlock(folio);
-> > >   		goto search_again;
-> 
-> I wonder if the put should be prior to the unlock.  It probably doesn't matter
-> as we keep control of the folio until both have happened.
+The team behind the "Samba in Kubernetes" organization is happy to announce 
+our third batch of releases. Release v0.7  includes both features and fixes 
+across three of our five publicly-consumable projects. These are the samba-
+container smbmetrics, and sambacc projects. These releases were unfortunately 
+delayed, but we finally managed to get them done.
 
-Well, folio->mapping != mapping is the condition for 'this folio has
-been truncated', so this folio_put() may well be the last one.  I'd
-put it after the folio_unlock() for safety.
-> 
+Our little organization may be called "Samba in Kubernetes" but the projects 
+go beyond just Kubernetes. The images built using the samba-container project 
+are standard OCI container images, so they can work just as well on Docker or 
+Podman as on Kubernetes or another compatible container orchestration system. 
+The smbmetrics project can export Samba metrics as a Prometheus 
+endpoint even if you don't have a container in sight.  In fact, our continued 
+focus during this cycle was integrating with the Ceph project and using 
+container images produced by the samba-container project within Ceph 
+orchestration.
+
+As previously mentioned, this is a batch of related projects. URLs for each 
+new release are available below:
+
+* https://github.com/samba-in-kubernetes/samba-container/releases/tag/v0.7
+* https://github.com/samba-in-kubernetes/smbmetrics/releases/tag/v0.7
+* https://github.com/samba-in-kubernetes/sambacc/releases/tag/v0.7
+
+
+Making these releases was a group effort and I'm pleased to thank everyone who 
+helped make these releases happen!
+
+Other projects in our organization either had little-to-no changes since the 
+last release or are not ready/intended for wide consumption.
+
+We'd love to hear your feedback. We have the github discussions (web-forum 
+style) feature enabled on many of the repos. We also routinely read the Samba 
+project mailing lists, so feel free to reply here as well.
+
+
+Thank you for your time.
+
+
+
+
+
+
+
 
