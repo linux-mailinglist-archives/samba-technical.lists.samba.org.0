@@ -2,64 +2,77 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id A4E5BB524BF
-	for <lists+samba-technical@lfdr.de>; Thu, 11 Sep 2025 01:36:54 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E9896B530FB
+	for <lists+samba-technical@lfdr.de>; Thu, 11 Sep 2025 13:41:03 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=ZpB8Fog8ynXB+04Vt5s2Mg7EcGOyMN/vYrOQv03eDEk=; b=QxR3lZ4o6AyjdAZRrLWG+ZxCzG
-	RvWjaX28m69LoU109ZeI8jN5qsiA7+8ofvZ/hjEK9rUEUPDIztP73chpootGfSY+7RWOfU/c/47ta
-	0FCJVRxMu0zfrMmP/6D0N3El22edb9wS4ZyGZu+81cp1eTOjMqBP2vpkn/LTV68/+IGyTCBESHL17
-	dZyp+U3G1S0KnI3KPupRDX1IyLuaLNyomCotIcR49Vpl6Kh4rAcMVsLSPX3/Y1qkqZdfIUJAUv9Iu
-	l2BtC3Ol46RkLtBW0XtduQ7spmTnVZiI0hzlD+iYcEw53YYHkKJMM9Qb+1rpGpoIaokgSJE6OVoNq
-	+mVM5VdA==;
-Received: from ip6-localhost ([::1]:57256 helo=hr1.samba.org) 
+	bh=J/buQccK88AayBkZLdHTD8rL7PNnaYcuDyk+/ec5h/8=; b=HtN6OF+by/JVAn+g3n6xPfrSgv
+	WotC8J7Wf82dyeICbOlgbeou9YW69LPT+Pgoz21s2kvkUYymxxlUO74ZULYVERM5dGtOWtz11IOYt
+	hrboGDBPXr6IVMG80p8LMLR1JsUehGnGZAsm4ByM6gl2fkHhq5bRLgsvtkKTwtEvqtBFz+pusuR5r
+	nSLbcgC62Smy3zmzS5Ufg829G+nkUWDeCV0Owtok41I3KUHuoBSH3IcFO3Uxgc2rld763llw8i+pO
+	9Ge3XBmbyi8UeonyR3C8YpXnRBH3A4nN8oRlC012iln0ac7ThXtLIYbc3llhAIFPANM0JNUxVSALw
+	Vk+pstvA==;
+Received: from ip6-localhost ([::1]:65248 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1uwUMN-003VCH-CW; Wed, 10 Sep 2025 23:36:19 +0000
-Received: from sea.source.kernel.org ([172.234.252.31]:43026) 
+	id 1uwff6-003YB4-9D; Thu, 11 Sep 2025 11:40:24 +0000
+Received: from mail-ej1-x62b.google.com ([2a00:1450:4864:20::62b]:42456) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uwUMG-003VC8-T6
- for samba-technical@lists.samba.org; Wed, 10 Sep 2025 23:36:16 +0000
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 773B9446A4
- for <samba-technical@lists.samba.org>; Wed, 10 Sep 2025 23:36:07 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 573BDC4CEEB
- for <samba-technical@lists.samba.org>; Wed, 10 Sep 2025 23:36:07 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1757547367;
- bh=i9leR6L+WicB6x8WhQZe7wlsxarJX0GqvR0t/Hg5zDQ=;
- h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
- b=WUh1kPiFrL2COTHahviWy6/+8K/dw7ITJfuALg8YKZZlNIcdyaC2wC5Ui5PlNc0Xr
- 7wgVVdJWr89lOWgI+abF1U3R4dITdRyr3JNrfdLDoHgyd60cngH1uxYolfv+cZQe2o
- UZyWC+tJeWE3uwtE9tW5JMjXR5uK5qfRUXS20ZxUAmBv6neX0pglAetr9COkiqq1HF
- lCvomgc2T9hO8+h7JfG+OhR5OQRRJ9zElaRa0j7gySlNttv9Dx1P8PWaE0GAoMsNCH
- wxBdPW0vgsBX0yHOb+vN5qA9e5DY7zNHA7kAyJIh7f7QSgLSREVopagGl2IKeYdcpW
- C41QLRHdWzUIg==
-Received: by mail-ed1-f49.google.com with SMTP id
- 4fb4d7f45d1cf-627b85e4c0fso244988a12.1
- for <samba-technical@lists.samba.org>; Wed, 10 Sep 2025 16:36:07 -0700 (PDT)
+ (Exim) id 1uwff0-003YAv-C2
+ for samba-technical@lists.samba.org; Thu, 11 Sep 2025 11:40:21 +0000
+Received: by mail-ej1-x62b.google.com with SMTP id
+ a640c23a62f3a-b046f6fb230so119940366b.1
+ for <samba-technical@lists.samba.org>; Thu, 11 Sep 2025 04:40:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1757590817; x=1758195617; darn=lists.samba.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=J/buQccK88AayBkZLdHTD8rL7PNnaYcuDyk+/ec5h/8=;
+ b=aOvkPNiC9qh8p33evGqT9R6BkJIYSiB6nNLvSEZQSxong3VX67unMOc1i4CFChf7un
+ nvyMZTywj7EfWyRI/gAjfjCYJjyWBniaxSLjOVkQb5IZJfVB88xnrEkI7qBdTaGvGfFe
+ hYv22NxswV/d/gL7uYIefdcT29yvr97wvozMK+b5uF4oXS0eG5sP/oEkN20EGyCrnpu/
+ CMwQKtzIOjMk07SL2OG9ci1aV0K4ZuvVZ5Cb6lBmxS0axhJUSV1oWn/t+m7xQxeCs3L8
+ T/ZDVzQOWcuAzd8MULujJVl9vbZ7zj6paFR+DtqCzpuf9DnfMMqvnnQ3N7b57BLR0H/4
+ NQaA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1757590817; x=1758195617;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=J/buQccK88AayBkZLdHTD8rL7PNnaYcuDyk+/ec5h/8=;
+ b=EHWv1uquFpdiPm+5fMvGR3/0FPgGklDglnJsRuRfigGqlvQjHcubhhdl3d8pR9rD77
+ +yOjYtLI8KImyh337ATf3HeRKdN0cOUom/jYbVn1vnC2yejz9XleokACez4u6p/gEIMA
+ PQiMiFfpW20SloltnD/Pot1zi8tkWBmewOYDN3u16WtQ2UVHY0m/KnNVfXvASkWcbFZk
+ QTLKRk61RG6eBJat1xnc/Rs+Ttz6hGRwsZLxlsvIzm69/H2LeTI4aLhbY+sIpx51ESEs
+ qmm6ROVHvaheOvoJEFIB4AGeGw0orPujRJTHChmP6A6fuWWwBFaCjMTlIfJOwpOdWHRW
+ ne8g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWKRhw6wFQrrKHO++zVpdUKiZe3GqJgDng9LbrXcYPeIc3hqJjFtDcIL3d+/+MTrHLb03nVdzRgIALNlYEYESM=@lists.samba.org
-X-Gm-Message-State: AOJu0YzWHRu8gtLKPOReABfM0SA16+Pe9HTg8NxHbwHLBIW4z6c2oGTj
- UV+/si08c6EhpVQt3QX1ubCcZicL7eKBJxj8ekg2OuJ67mC4/9VK9vRaxmN3QGc/8GFKYuD61wo
- 1QnwHjM7OO4MAV2PJDi/Tx51vVhKLtAA=
-X-Google-Smtp-Source: AGHT+IH9ABmYs11y8MjsI68VnD3LYgM2hqYpmp6tEZr0C9c02Tas4nbKcLrWKy8I09b9mbc5ZsWz4q0DNu9j8mryMng=
-X-Received: by 2002:a50:99d4:0:b0:61c:1d41:41bb with SMTP id
- 4fb4d7f45d1cf-62e7b7c0b71mr925044a12.16.1757547365945; Wed, 10 Sep 2025
- 16:36:05 -0700 (PDT)
+ AJvYcCUHOIE05/p6KbwViizM32qSJhOPsq3pX6r5xBaTt9gho9Jo9YZ4pGKwGTFFKIg+Pyw7f281rJSk9Pwxa5xJvwA=@lists.samba.org
+X-Gm-Message-State: AOJu0Yy72vUkYGK6pthTcOGLq4YvcrPBHoV0aR7UkbHC9t+giBm20fko
+ I4e+eNw8nkOSjH7vhXuKni8zZrKNBaR1Twr/sWUQo/knk3LVWH/owxd8ao0eKLZRRhnvhshRP5J
+ 6+Vf8jD68EmWIFSJnX22KvwiH4+SvBBw=
+X-Gm-Gg: ASbGncu5oXaQ+acI6q5Qu+i/XL5gvaRziYUAd7Y8tZyvtCg+2FniUvWmaoVNlQ5mf5E
+ 8v2pbFKtBUwkaHj7d5Sz8jrDI8tRQgZeiiaWvsXwJgLpNJjy0Nxo8rz9tUaqMEaqCp6C+9ZZ77L
+ 2TZNX700TEVqc7zW076i3enX71A4gsv/JuszVMvaY4E41AHn6C3ogoPhWic8XpGv/1ItGU9B0LT
+ G1bhg==
+X-Google-Smtp-Source: AGHT+IEAc+suiNpxsaxTVE3JcGvm1yFRs9zplv7RA6o4nBsX4YPEhrbynV7aXjNM8Ha/ZQ2Tm/hltcx7EhAS+r7vEDg=
+X-Received: by 2002:a17:907:3da0:b0:b04:46df:5cb6 with SMTP id
+ a640c23a62f3a-b07a62910c5mr336372566b.1.1757590817068; Thu, 11 Sep 2025
+ 04:40:17 -0700 (PDT)
 MIME-Version: 1.0
-References: <cover.1756139607.git.metze@samba.org>
- <e6c0ddfe-8942-47a0-8277-b4176a5918e0@samba.org>
- <CAH2r5msKSbUfOVXUabNQep3s2H4kW0AMnDh0XA68Pk3_oqaHCQ@mail.gmail.com>
- <642872f4-e076-4588-b011-920479b06949@samba.org>
-In-Reply-To: <642872f4-e076-4588-b011-920479b06949@samba.org>
-Date: Thu, 11 Sep 2025 08:35:53 +0900
-X-Gmail-Original-Message-ID: <CAKYAXd8fJtjESeMiNmAACw8jGkEU_JWCQd3=9XFf_rdx6TxqUw@mail.gmail.com>
-X-Gm-Features: AS18NWAb9I02lNZVlKVNYxAQYQ96tj62pHFyLDpvONfTffNv2iRnFFcHwn9iGCs
-Message-ID: <CAKYAXd8fJtjESeMiNmAACw8jGkEU_JWCQd3=9XFf_rdx6TxqUw@mail.gmail.com>
-Subject: Re: replace for-next-next... Re: [PATCH v4 000/142] smb:
- smbdirect/client/server: make use of common structures
-To: Stefan Metzmacher <metze@samba.org>
+References: <20250911030120.1076413-1-yangerkun@huawei.com>
+ <2780505c-b531-7731-3c3d-910a22bf0802@huawei.com>
+ <2025091109-happiness-cussed-d869@gregkh>
+ <ff670765-d3e2-bc0a-5cef-c18757fe3ee0@huawei.com>
+ <2025091157-imply-dugout-3b39@gregkh>
+ <95935128-69fa-2641-c2a7-9d9660e2f9ba@huawei.com>
+In-Reply-To: <95935128-69fa-2641-c2a7-9d9660e2f9ba@huawei.com>
+Date: Thu, 11 Sep 2025 17:10:05 +0530
+X-Gm-Features: Ac12FXz3BiUAfn24EQJMYs0OoXCzIGFjpCrrcdfX5wINxcOzJGdakBPduJhBPyk
+Message-ID: <CANT5p=rE+=g7KA0RKOxs2UCnMEKfr3cm2V_+mwdb1g7+yV8NtA@mail.gmail.com>
+Subject: Re: [PATCH v3] cifs: fix pagecache leak when do writepages
+To: yangerkun <yangerkun@huawei.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
@@ -75,185 +88,105 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Namjae Jeon via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Namjae Jeon <linkinjeon@kernel.org>
-Cc: Tom Talpey <tom@talpey.com>, Steve French <smfrench@gmail.com>,
- samba-technical@lists.samba.org, linux-cifs@vger.kernel.org
+From: Shyam Prasad N via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Shyam Prasad N <nspmangalore@gmail.com>
+Cc: pc@manguebit.com, tom@talpey.com, sprasad@microsoft.com,
+ linux-cifs@vger.kernel.org, ematsumiya@suse.de,
+ Greg KH <gregkh@linuxfoundation.org>, samba-technical@lists.samba.org,
+ yangerkun@huaweicloud.com, lsahlber@redhat.com, sfrench@samba.org,
+ dhowells@redhat.com, stable@kernel.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Thu, Sep 11, 2025 at 4:05=E2=80=AFAM Stefan Metzmacher <metze@samba.org>=
- wrote:
+On Thu, Sep 11, 2025 at 4:55=E2=80=AFPM yangerkun <yangerkun@huawei.com> wr=
+ote:
 >
-> Hi Steve, hi Namjae,
-Hi Metze,
 >
-> I found "ksmbd: smbdirect: validate data_offset and data_length field of =
-smb_direct_data_transfer"
-> https://git.samba.org/?p=3Dksmbd.git;a=3Dcommitdiff;h=3D927f8fe05e334d016=
-c598d2cc965161c2808d9ba
-> in ksmbd-for-next-next.
 >
-> I added a Fixes and Reviewed-by tag
-> https://git.samba.org/?p=3Dmetze/linux/wip.git;a=3Dcommitdiff;h=3Dfa36db4=
-e8d62aa9c3ba1200323d8e01e4eb88b19
-> and two additional patches:
-I will update it with your tags.
-> ksmbd: smbdirect: verify remaining_data_length respects max_fragmented_re=
-cv_size
-> https://git.samba.org/?p=3Dmetze/linux/wip.git;a=3Dcommitdiff;h=3D9e88117=
-4900e53dd2b17c0c0933cc4395ceb47a6
-Looks good to me. I will apply it to #ksmbd-for-next-next.
+> =E5=9C=A8 2025/9/11 19:17, Greg KH =E5=86=99=E9=81=93:
+> > On Thu, Sep 11, 2025 at 07:09:30PM +0800, yangerkun wrote:
+> >>
+> >>
+> >> =E5=9C=A8 2025/9/11 18:53, Greg KH =E5=86=99=E9=81=93:
+> >>> On Thu, Sep 11, 2025 at 11:22:57AM +0800, yangerkun wrote:
+> >>>> Hello,
+> >>>>
+> >>>> In stable version 6.6, IO operations for CIFS cause system memory le=
+aks
+> >>>> shortly after starting; our test case triggers this issue, and other=
+ users
+> >>>> have reported it as well [1].
+> >>>>
+> >>>> This problem does not occur in the mainline kernel after commit 3ee1=
+a1fc3981
+> >>>> ("cifs: Cut over to using netfslib") (v6.10-rc1), but backporting th=
+is fix
+> >>>> to stable versions 6.6 through 6.9 is challenging. Therefore, I have=
+ decided
+> >>>> to address the issue with a separate patch.
+> >>>>
+> >>>> Hi Greg,
+> >>>>
+> >>>> I have reviewed [2] to understand the process for submitting patches=
+ to
+> >>>> stable branches. However, this patch may not fit their criteria sinc=
+e it is
+> >>>> not a backport from mainline. Is there anything else I should do to =
+make
+> >>>> this patch appear more formal?
+> >>>
+> >>> Yes, please include the info as to why this is not a backport from
+> >>> upstream, and why it can only go into this one specific tree and get =
+the
+> >>> developers involved to agree with this.
+> >>
+> >> Alright, the reason I favor this single patch is that the mainline sol=
+ution
+> >> involves a major refactor [1] to change the I/O path to netfslib.
+> >> Backporting it would cause many conflicts, and such a large patch set =
+would
+> >> introduce numerous KABI changes. Therefore, this single patch is provi=
+ded
+> >> here instead...
+> >
+> > There is no stable kernel api, sorry, that is not a valid reason.  And
+> > we've taken large patch sets in the past.
+> >
+> > But if you can get the maintainers of the code to agree that this is th=
+e
+> > best solution, we'll be glad to take it.
+>
+> OK, Steve, can you help give a feedback for this patch?
+>
+> Thanks,
+> Yang Erkun.
+>
+> >
+> > thanks,
+> >
+> > greg k-h
+> >
 
-> smb: client: let recv_done verify data_offset, data_length and remaining_=
-data_length
-> https://git.samba.org/?p=3Dmetze/linux/wip.git;a=3Dcommitdiff;h=3D174faee=
-a9ee496b724206d405b74db8b05729f11
-Looks good to me. Reviewed-by: Namjae Jeon <linkinjeon@kernel.org> for
-this client patch.
+Hi Greg,
 
-Thanks!
->
-> I think these should go into 6.17.
->
-> As there as conflicts with for-next-next I rebased it again
-> and made sure each commit compiles and the result still passes
-> the tests I made last time.
->
-> The result can be found under
-> git fetch https://git.samba.org/metze/linux/wip.git for-6.18/fs-smb-20250=
-910-v6
-> https://git.samba.org/?p=3Dmetze/linux/wip.git;a=3Dshortlog;h=3Drefs/head=
-s/for-6.18/fs-smb-20250910-v6
->
-> Please have a look and replace for-next-next again...
-> The diff against the current for-next-next (e2e99af785ee91ce20c6d583e3966=
-60494db77a2)
-> and for-6.18/fs-smb-20250910-v6 (1fb2a52741e836f54a4691cbd74d9d70d736e506=
-) follows below.
->
-> Thanks!
-> metze
->
->   fs/smb/client/smbdirect.c                  | 19 ++++++++++++++++++-
->   fs/smb/common/smbdirect/smbdirect_socket.h |  2 +-
->   fs/smb/server/transport_rdma.c             | 25 +++++++++++++++++------=
---
->   3 files changed, 36 insertions(+), 10 deletions(-)
->
-> diff --git a/fs/smb/client/smbdirect.c b/fs/smb/client/smbdirect.c
-> index 322334097e30..6215a6e91c67 100644
-> --- a/fs/smb/client/smbdirect.c
-> +++ b/fs/smb/client/smbdirect.c
-> @@ -548,7 +548,9 @@ static void recv_done(struct ib_cq *cq, struct ib_wc =
-*wc)
->         struct smbdirect_socket *sc =3D response->socket;
->         struct smbdirect_socket_parameters *sp =3D &sc->parameters;
->         u16 old_recv_credit_target;
-> -       int data_length =3D 0;
-> +       u32 data_offset =3D 0;
-> +       u32 data_length =3D 0;
-> +       u32 remaining_data_length =3D 0;
->         bool negotiate_done =3D false;
->
->         log_rdma_recv(INFO,
-> @@ -600,7 +602,22 @@ static void recv_done(struct ib_cq *cq, struct ib_wc=
- *wc)
->         /* SMBD data transfer packet */
->         case SMBDIRECT_EXPECT_DATA_TRANSFER:
->                 data_transfer =3D smbdirect_recv_io_payload(response);
-> +
-> +               if (wc->byte_len <
-> +                   offsetof(struct smbdirect_data_transfer, padding))
-> +                       goto error;
-> +
-> +               remaining_data_length =3D le32_to_cpu(data_transfer->rema=
-ining_data_length);
-> +               data_offset =3D le32_to_cpu(data_transfer->data_offset);
->                 data_length =3D le32_to_cpu(data_transfer->data_length);
-> +               if (wc->byte_len < data_offset ||
-> +                   wc->byte_len < (u64)data_offset + data_length)
-> +                       goto error;
-> +
-> +               if (remaining_data_length > sp->max_fragmented_recv_size =
-||
-> +                   data_length > sp->max_fragmented_recv_size ||
-> +                   (u64)remaining_data_length + (u64)data_length > (u64)=
-sp->max_fragmented_recv_size)
-> +                       goto error;
->
->                 if (data_length) {
->                         if (sc->recv_io.reassembly.full_packet_received)
-> diff --git a/fs/smb/common/smbdirect/smbdirect_socket.h b/fs/smb/common/s=
-mbdirect/smbdirect_socket.h
-> index 8542de12002a..91eb02fb1600 100644
-> --- a/fs/smb/common/smbdirect/smbdirect_socket.h
-> +++ b/fs/smb/common/smbdirect/smbdirect_socket.h
-> @@ -63,7 +63,7 @@ const char *smbdirect_socket_status_string(enum smbdire=
-ct_socket_status status)
->         case SMBDIRECT_SOCKET_DISCONNECTING:
->                 return "DISCONNECTING";
->         case SMBDIRECT_SOCKET_DISCONNECTED:
-> -               return "DISCONNECTED,";
-> +               return "DISCONNECTED";
->         case SMBDIRECT_SOCKET_DESTROYED:
->                 return "DESTROYED";
->         }
-> diff --git a/fs/smb/server/transport_rdma.c b/fs/smb/server/transport_rdm=
-a.c
-> index 33d2f5bdb827..e371d8f4c80b 100644
-> --- a/fs/smb/server/transport_rdma.c
-> +++ b/fs/smb/server/transport_rdma.c
-> @@ -538,7 +538,7 @@ static void recv_done(struct ib_cq *cq, struct ib_wc =
-*wc)
->         case SMBDIRECT_EXPECT_DATA_TRANSFER: {
->                 struct smbdirect_data_transfer *data_transfer =3D
->                         (struct smbdirect_data_transfer *)recvmsg->packet=
-;
-> -               unsigned int data_length;
-> +               u32 remaining_data_length, data_offset, data_length;
->                 u16 old_recv_credit_target;
->
->                 if (wc->byte_len <
-> @@ -548,15 +548,24 @@ static void recv_done(struct ib_cq *cq, struct ib_w=
-c *wc)
->                         return;
->                 }
->
-> +               remaining_data_length =3D le32_to_cpu(data_transfer->rema=
-ining_data_length);
->                 data_length =3D le32_to_cpu(data_transfer->data_length);
-> -               if (data_length) {
-> -                       if (wc->byte_len < sizeof(struct smbdirect_data_t=
-ransfer) +
-> -                           (u64)data_length) {
-> -                               put_recvmsg(sc, recvmsg);
-> -                               smb_direct_disconnect_rdma_connection(sc)=
-;
-> -                               return;
-> -                       }
-> +               data_offset =3D le32_to_cpu(data_transfer->data_offset);
-> +               if (wc->byte_len < data_offset ||
-> +                   wc->byte_len < (u64)data_offset + data_length) {
-> +                       put_recvmsg(sc, recvmsg);
-> +                       smb_direct_disconnect_rdma_connection(sc);
-> +                       return;
-> +               }
-> +               if (remaining_data_length > sp->max_fragmented_recv_size =
-||
-> +                   data_length > sp->max_fragmented_recv_size ||
-> +                   (u64)remaining_data_length + (u64)data_length > (u64)=
-sp->max_fragmented_recv_size) {
-> +                       put_recvmsg(sc, recvmsg);
-> +                       smb_direct_disconnect_rdma_connection(sc);
-> +                       return;
-> +               }
->
-> +               if (data_length) {
->                         if (sc->recv_io.reassembly.full_packet_received)
->                                 recvmsg->first_segment =3D true;
->
->
->
->
+Steve can give you the final confirmation, but I can add some context here.
+
+This bug was never fixed upstream since the write/read code path was
+entirely refactored (with most of the folio maintenance
+responsibilities offloaded to netfs).
+We've recently had at least a couple of customers complaining about
+this in Microsoft, following which we've been able to repro the
+growing memory usage with a certain type of application workload.
+We've also been able to verify that the issue does not reproduce when
+cifs.ko was built with this patch against the 6.6 kernel of Azure
+Linux (and that kernel is mostly equivalent to stable 6.6). If you
+need a confirmation that this patch fixes the issue even on stable
+6.6, we can do that check.
+
+Additionally @Enzo Matsumiya also mentioned that SLES had to backport
+this change to their v6.4 kernel to fix this folio leak.
+
+--=20
+Regards,
+Shyam
 
