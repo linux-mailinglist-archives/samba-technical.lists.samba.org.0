@@ -2,81 +2,47 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6C864B55A82
-	for <lists+samba-technical@lfdr.de>; Sat, 13 Sep 2025 02:03:54 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 51F73B85921
+	for <lists+samba-technical@lfdr.de>; Thu, 18 Sep 2025 17:26:49 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=+KW5G3MXY/0pVf8/DjV6yOsnsMGNgnj9XmP/64EtE3w=; b=cMeMLK3s36eZqLyU3gWXSoJrTp
-	44y57C2dfxcvcnO8Sp3+jtqnD87SJ7jsKn6aw15gDRwJyCNnmVEoYQNrrom0SC9oIFVkdxxpVBxII
-	B9Q1AocLED97exskCAdsGk3vW51AsMTFJ6/DVmfoZv9GVd8RvE/DrAJ1GFFfQu2Exkoh40VoxU2AD
-	hU8puy+s3k9vLzlJwZ3P4Qna8atRNtxmEQ7iG3h6W4vs9FfSlXjX0pbDl4Q0mwEXHUEZW4VDbSxxu
-	2/zT2o/h4RafG34+CHyxIfImNiTChHDaogtVCV0JT9zfh/bGiKfs9UGdq0PFg9HetlHjxolZZlh52
-	25iRWBVA==;
-Received: from ip6-localhost ([::1]:21748 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=ROEeV6/bs53twvM5/USaWrqxnj7hhOA4GFldd0FLYdE=; b=UsJe5JEym+SeD7J0/E8gsLGGNN
+	zvvFTgKJj2jRfHUMZo3l7G0Z5S5TFPobOjWODwoXeBxfV4FlcaK4TUFypKHK/JtgkM5dE1B0MgN7M
+	8Oo2PrHybOKf1oS36K+52q5MMHiSCbZa4elbWdVOdDLP8ts1mwRkSogWzaeyfBJBk3H6iqL+2xkJL
+	OvoLjyGFLjELzxxqfMAMCb1cxJrPuaupVpkfkvCmRB1P7RIPdU9jujWKCbxl9uNwXg4kfvVhvuysk
+	ddlrNJzEk0U+tdDChjrW6AiGauC+XrHxZBX8MQZpTqteZz7SVmtRzi5GBVgbMTMuo3a9AYFNG1/sj
+	eMmIxUMw==;
+Received: from ip6-localhost ([::1]:39340 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1uxDjc-003ftc-CW; Sat, 13 Sep 2025 00:03:20 +0000
-Received: from mail-qv1-xf2b.google.com ([2607:f8b0:4864:20::f2b]:58625) 
+	id 1uzGWQ-004DBj-KV; Thu, 18 Sep 2025 15:26:10 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:24160) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uxDjX-003ftU-4r
- for samba-technical@lists.samba.org; Sat, 13 Sep 2025 00:03:18 +0000
-Received: by mail-qv1-xf2b.google.com with SMTP id
- 6a1803df08f44-7251e6b2f9eso13885416d6.1
- for <samba-technical@lists.samba.org>; Fri, 12 Sep 2025 17:03:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1757721793; x=1758326593; darn=lists.samba.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=+KW5G3MXY/0pVf8/DjV6yOsnsMGNgnj9XmP/64EtE3w=;
- b=NPp2uLxSfO724LrsWHMmEecRCO5M7h2DKzQF4BhgVICefmPnTwnlYom6U2b5ctol65
- N6LA5NsepJ8XsRZ3xLjHZQQnvyuOxJmNDaCXh2vgAhOMth0KCv+rc1Jglkh0UVVqf6wb
- quAKAWPURmgymtcWmGKDb8X92NXkpI2sE/LsY+LUkLLyop3QQNbwv1j3EilT1+8pVcCZ
- gJqwX+Sr4VWa5W2uKwFkBXyfy6QsS5DU1DmOs1I90BuEcjcGm8nraenUWVMGvUga4Uf4
- V8SKNgREGRuav6puwWlLFh/m8XUvByh6TMaNZehAkIrQXxsMSfhoYm/kfk4abKG28zNY
- 9yPg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1757721793; x=1758326593;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=+KW5G3MXY/0pVf8/DjV6yOsnsMGNgnj9XmP/64EtE3w=;
- b=ZTQsP2ffVZjIL4l9Ek8/t/oD9GzLp51hlWdbNeqOHxiklRPwMskVJMi2DuTaoS/STo
- Ku+r/x8ISelDIvtK4xR1BOR39dRvoCHm3TRKVY3hT29mzqXEb2Qmt2Yi3wbvHAKqQwOf
- z/hQjlYR1gOVrlVoPC1jsRNyf2o2+Czz1aYpuFzsUxRqWs8vh4yQAc+T8Y7p/vhLuavB
- +yn1iqKgeK9/HYC/iwY+5kTJFVR9Lh1VnXQHkIi0y6iLB+TtDePz4zedlecUkmKWrg74
- 0ucgQ5EGIMwmvQ4bdzyjS0rCfGWYpP4qTSBLg6yK0Y77Xmk9r+N3+qAWUd92FbfTguOr
- C2zg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVqkfYHkoy1UUUnR7fcNMY8OpAm0gMU0EHLq/Kbx3yFXHO4w0+zrYPrYK+2pS/606oLUv5ITWwrkjOoRuonmbE=@lists.samba.org
-X-Gm-Message-State: AOJu0Yzvb2m0uL7him3VGb71c9h0krvHnM2P5GocJAg/DrSRV1T5oXR5
- 53jMH5Jj3U2luliqCAbwXiMUuotto04A2xDHxtBxbeJhB4R5wEufAwqrjDvElwuDdkiPmVUjYew
- mqRdU4ChdipJsjtdws/tDaN0yF7emoSc=
-X-Gm-Gg: ASbGnctEWmGzqbCGIDKQMOPNhrrQG+0+Y0aIfKdtGqSs1CaQJTnlb/BBajliZiSy9U5
- xEyaICaQrFZYAJO2TW79no/bDpraypEZ1bV6H0Jm94TW2YDFtTFXDpZ0fksVuhtsov1ySca4vcE
- WOssrTo0cJ1ly8ttIVKi4ATVfxmWIYUwsqfJ52sJhXjz5DTMhP1354USGcbvHBeGvpfZcx0vVhX
- qXHvtjiqB+MmgbThGQxAHTIudsjJeHxYG851z8RCFwhJt5d0VCmMAkOO0dwgayydIdC82p6g+Qr
- 77GN7ZTPVzVw6hL/WWfs1QY5BbG0/VsJBvdaNpQQyCqjlXHv+3WmTJ8/ppX28lzy2a5h2wOCpdV
- G
-X-Google-Smtp-Source: AGHT+IGVQviI3GUKab3s7x7KIHH/QqolYWI5+Clhn+dSVA9v6GWnOzJzvX+IxR3a6HD2AZYZqI8qRD4qZn3a+JLfc0s=
-X-Received: by 2002:a05:6214:29c2:b0:722:3a59:fd9c with SMTP id
- 6a1803df08f44-767bc9e3085mr69038776d6.23.1757721792895; Fri, 12 Sep 2025
- 17:03:12 -0700 (PDT)
+ (Exim) id 1uzGWI-004DBb-RQ
+ for samba-technical@lists.samba.org; Thu, 18 Sep 2025 15:26:08 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Message-ID:Date:Cc:To:From;
+ bh=ROEeV6/bs53twvM5/USaWrqxnj7hhOA4GFldd0FLYdE=; b=3bXl+Z+FLnQL7aD7MzEwCYa0es
+ r9ShVTHl0CXLnxfolFUduZB+NeZ8AshpVJ6wo6jk8EuaWBVSnruciq9Hc9aaQi+6Fint6EkNVmLrG
+ wbMmjR1XiZ07iWJoXiMwdgUFq54ZX7dihaKjVfzXCihl8px22drVb2Rx7tO3VVLmx6gTdD2t9SCRp
+ R9VG+R/8erbriKfu0d34ov17tgvGLrbCag1Cuqaz+zA+bCbYAVLPjEg30i9IWdC/hYDoyL4dYh1gg
+ pX129PIEJtJANBIq7qrqEr+BNWzt18WPD1f0fC6EkRbFKvu3PNCQgte496KDTcmhGHS4SRifysiz3
+ zUrICPMrFCOhkog/P25VwhEax8ENLTqicDq1YBbzBVhxrPamnAC8AuOGO7Nt0aiVjqOMIR/+iq82A
+ 8o3v/mgWMoWMwnHyyX+MIj4pJ3OjuBwaNyLDMlPy4prZsiP0H1Ki7buYSXr3iQwRKl8yDr5022GKp
+ gQ0FGkPO3dClgn5Ta8R4T+ER;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1uzGWH-004mWv-0a; Thu, 18 Sep 2025 15:26:01 +0000
+To: linux-cifs@vger.kernel.org,
+	samba-technical@lists.samba.org
+Subject: [PATCH v2] smb: client: fix sending the iwrap custom IRD/ORD
+ negotiation messages
+Date: Thu, 18 Sep 2025 17:25:00 +0200
+Message-ID: <20250918152459.1244824-2-metze@samba.org>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <cover.1756139607.git.metze@samba.org>
- <e6c0ddfe-8942-47a0-8277-b4176a5918e0@samba.org>
- <CAH2r5msKSbUfOVXUabNQep3s2H4kW0AMnDh0XA68Pk3_oqaHCQ@mail.gmail.com>
- <642872f4-e076-4588-b011-920479b06949@samba.org>
- <CAKYAXd8fJtjESeMiNmAACw8jGkEU_JWCQd3=9XFf_rdx6TxqUw@mail.gmail.com>
-In-Reply-To: <CAKYAXd8fJtjESeMiNmAACw8jGkEU_JWCQd3=9XFf_rdx6TxqUw@mail.gmail.com>
-Date: Fri, 12 Sep 2025 19:03:01 -0500
-X-Gm-Features: AS18NWCUhPcdoIClDu4V14I2QLHpssKx13x_q7WjKfy2acnhuMBRLtZrfpa7f2A
-Message-ID: <CAH2r5ms8JUL+R8zDVa4L2=ydESUFjvPPLdJxHTeOWPFmwCBHQQ@mail.gmail.com>
-Subject: Re: replace for-next-next... Re: [PATCH v4 000/142] smb:
- smbdirect/client/server: make use of common structures
-To: Namjae Jeon <linkinjeon@kernel.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -90,203 +56,228 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
-Cc: Stefan Metzmacher <metze@samba.org>, Tom Talpey <tom@talpey.com>,
- samba-technical@lists.samba.org, linux-cifs@vger.kernel.org
+From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Stefan Metzmacher <metze@samba.org>
+Cc: Tom Talpey <tom@talpey.com>, linux-rdma@vger.kernel.org, metze@samba.org,
+ Steve French <smfrench@gmail.com>, Namjae Jeon <linkinjeon@kernel.org>,
+ Steve French <stfrench@microsoft.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-updated cifs-2.6.git for-next with the client patch
+Do a real negotiation and check the servers initiator_depth and responder_resources.
 
-On Wed, Sep 10, 2025 at 6:36=E2=80=AFPM Namjae Jeon <linkinjeon@kernel.org>=
- wrote:
->
-> On Thu, Sep 11, 2025 at 4:05=E2=80=AFAM Stefan Metzmacher <metze@samba.or=
-g> wrote:
-> >
-> > Hi Steve, hi Namjae,
-> Hi Metze,
-> >
-> > I found "ksmbd: smbdirect: validate data_offset and data_length field o=
-f smb_direct_data_transfer"
-> > https://git.samba.org/?p=3Dksmbd.git;a=3Dcommitdiff;h=3D927f8fe05e334d0=
-16c598d2cc965161c2808d9ba
-> > in ksmbd-for-next-next.
-> >
-> > I added a Fixes and Reviewed-by tag
-> > https://git.samba.org/?p=3Dmetze/linux/wip.git;a=3Dcommitdiff;h=3Dfa36d=
-b4e8d62aa9c3ba1200323d8e01e4eb88b19
-> > and two additional patches:
-> I will update it with your tags.
-> > ksmbd: smbdirect: verify remaining_data_length respects max_fragmented_=
-recv_size
-> > https://git.samba.org/?p=3Dmetze/linux/wip.git;a=3Dcommitdiff;h=3D9e881=
-174900e53dd2b17c0c0933cc4395ceb47a6
-> Looks good to me. I will apply it to #ksmbd-for-next-next.
->
-> > smb: client: let recv_done verify data_offset, data_length and remainin=
-g_data_length
-> > https://git.samba.org/?p=3Dmetze/linux/wip.git;a=3Dcommitdiff;h=3D174fa=
-eea9ee496b724206d405b74db8b05729f11
-> Looks good to me. Reviewed-by: Namjae Jeon <linkinjeon@kernel.org> for
-> this client patch.
->
-> Thanks!
-> >
-> > I think these should go into 6.17.
-> >
-> > As there as conflicts with for-next-next I rebased it again
-> > and made sure each commit compiles and the result still passes
-> > the tests I made last time.
-> >
-> > The result can be found under
-> > git fetch https://git.samba.org/metze/linux/wip.git for-6.18/fs-smb-202=
-50910-v6
-> > https://git.samba.org/?p=3Dmetze/linux/wip.git;a=3Dshortlog;h=3Drefs/he=
-ads/for-6.18/fs-smb-20250910-v6
-> >
-> > Please have a look and replace for-next-next again...
-> > The diff against the current for-next-next (e2e99af785ee91ce20c6d583e39=
-6660494db77a2)
-> > and for-6.18/fs-smb-20250910-v6 (1fb2a52741e836f54a4691cbd74d9d70d736e5=
-06) follows below.
-> >
-> > Thanks!
-> > metze
-> >
-> >   fs/smb/client/smbdirect.c                  | 19 ++++++++++++++++++-
-> >   fs/smb/common/smbdirect/smbdirect_socket.h |  2 +-
-> >   fs/smb/server/transport_rdma.c             | 25 +++++++++++++++++----=
-----
-> >   3 files changed, 36 insertions(+), 10 deletions(-)
-> >
-> > diff --git a/fs/smb/client/smbdirect.c b/fs/smb/client/smbdirect.c
-> > index 322334097e30..6215a6e91c67 100644
-> > --- a/fs/smb/client/smbdirect.c
-> > +++ b/fs/smb/client/smbdirect.c
-> > @@ -548,7 +548,9 @@ static void recv_done(struct ib_cq *cq, struct ib_w=
-c *wc)
-> >         struct smbdirect_socket *sc =3D response->socket;
-> >         struct smbdirect_socket_parameters *sp =3D &sc->parameters;
-> >         u16 old_recv_credit_target;
-> > -       int data_length =3D 0;
-> > +       u32 data_offset =3D 0;
-> > +       u32 data_length =3D 0;
-> > +       u32 remaining_data_length =3D 0;
-> >         bool negotiate_done =3D false;
-> >
-> >         log_rdma_recv(INFO,
-> > @@ -600,7 +602,22 @@ static void recv_done(struct ib_cq *cq, struct ib_=
-wc *wc)
-> >         /* SMBD data transfer packet */
-> >         case SMBDIRECT_EXPECT_DATA_TRANSFER:
-> >                 data_transfer =3D smbdirect_recv_io_payload(response);
-> > +
-> > +               if (wc->byte_len <
-> > +                   offsetof(struct smbdirect_data_transfer, padding))
-> > +                       goto error;
-> > +
-> > +               remaining_data_length =3D le32_to_cpu(data_transfer->re=
-maining_data_length);
-> > +               data_offset =3D le32_to_cpu(data_transfer->data_offset)=
-;
-> >                 data_length =3D le32_to_cpu(data_transfer->data_length)=
-;
-> > +               if (wc->byte_len < data_offset ||
-> > +                   wc->byte_len < (u64)data_offset + data_length)
-> > +                       goto error;
-> > +
-> > +               if (remaining_data_length > sp->max_fragmented_recv_siz=
-e ||
-> > +                   data_length > sp->max_fragmented_recv_size ||
-> > +                   (u64)remaining_data_length + (u64)data_length > (u6=
-4)sp->max_fragmented_recv_size)
-> > +                       goto error;
-> >
-> >                 if (data_length) {
-> >                         if (sc->recv_io.reassembly.full_packet_received=
-)
-> > diff --git a/fs/smb/common/smbdirect/smbdirect_socket.h b/fs/smb/common=
-/smbdirect/smbdirect_socket.h
-> > index 8542de12002a..91eb02fb1600 100644
-> > --- a/fs/smb/common/smbdirect/smbdirect_socket.h
-> > +++ b/fs/smb/common/smbdirect/smbdirect_socket.h
-> > @@ -63,7 +63,7 @@ const char *smbdirect_socket_status_string(enum smbdi=
-rect_socket_status status)
-> >         case SMBDIRECT_SOCKET_DISCONNECTING:
-> >                 return "DISCONNECTING";
-> >         case SMBDIRECT_SOCKET_DISCONNECTED:
-> > -               return "DISCONNECTED,";
-> > +               return "DISCONNECTED";
-> >         case SMBDIRECT_SOCKET_DESTROYED:
-> >                 return "DESTROYED";
-> >         }
-> > diff --git a/fs/smb/server/transport_rdma.c b/fs/smb/server/transport_r=
-dma.c
-> > index 33d2f5bdb827..e371d8f4c80b 100644
-> > --- a/fs/smb/server/transport_rdma.c
-> > +++ b/fs/smb/server/transport_rdma.c
-> > @@ -538,7 +538,7 @@ static void recv_done(struct ib_cq *cq, struct ib_w=
-c *wc)
-> >         case SMBDIRECT_EXPECT_DATA_TRANSFER: {
-> >                 struct smbdirect_data_transfer *data_transfer =3D
-> >                         (struct smbdirect_data_transfer *)recvmsg->pack=
-et;
-> > -               unsigned int data_length;
-> > +               u32 remaining_data_length, data_offset, data_length;
-> >                 u16 old_recv_credit_target;
-> >
-> >                 if (wc->byte_len <
-> > @@ -548,15 +548,24 @@ static void recv_done(struct ib_cq *cq, struct ib=
-_wc *wc)
-> >                         return;
-> >                 }
-> >
-> > +               remaining_data_length =3D le32_to_cpu(data_transfer->re=
-maining_data_length);
-> >                 data_length =3D le32_to_cpu(data_transfer->data_length)=
-;
-> > -               if (data_length) {
-> > -                       if (wc->byte_len < sizeof(struct smbdirect_data=
-_transfer) +
-> > -                           (u64)data_length) {
-> > -                               put_recvmsg(sc, recvmsg);
-> > -                               smb_direct_disconnect_rdma_connection(s=
-c);
-> > -                               return;
-> > -                       }
-> > +               data_offset =3D le32_to_cpu(data_transfer->data_offset)=
-;
-> > +               if (wc->byte_len < data_offset ||
-> > +                   wc->byte_len < (u64)data_offset + data_length) {
-> > +                       put_recvmsg(sc, recvmsg);
-> > +                       smb_direct_disconnect_rdma_connection(sc);
-> > +                       return;
-> > +               }
-> > +               if (remaining_data_length > sp->max_fragmented_recv_siz=
-e ||
-> > +                   data_length > sp->max_fragmented_recv_size ||
-> > +                   (u64)remaining_data_length + (u64)data_length > (u6=
-4)sp->max_fragmented_recv_size) {
-> > +                       put_recvmsg(sc, recvmsg);
-> > +                       smb_direct_disconnect_rdma_connection(sc);
-> > +                       return;
-> > +               }
-> >
-> > +               if (data_length) {
-> >                         if (sc->recv_io.reassembly.full_packet_received=
-)
-> >                                 recvmsg->first_segment =3D true;
-> >
-> >
-> >
-> >
+This should use big endian in order to be useful.
+I have captures of windows clients showing this.
 
+The fact that we used little endian up to now
+means that we sent very large numbers and the
+negotiation with the server truncated them to the
+server limits.
 
+Note the reason why this uses u8 for
+initiator_depth and responder_resources is
+that the rdma layer also uses it.
 
---=20
-Thanks,
+The inconsitency regarding the initiator_depth
+and responder_resources values being reversed
+for iwarp devices in RDMA_CM_EVENT_ESTABLISHED
+should also be fixed later, but for now we should
+fix it.
 
-Steve
+Cc: Steve French <smfrench@gmail.com>
+Cc: Tom Talpey <tom@talpey.com>
+Cc: Long Li <longli@microsoft.com>
+Cc: Namjae Jeon <linkinjeon@kernel.org>
+Cc: linux-cifs@vger.kernel.org
+Cc: samba-technical@lists.samba.org
+Cc: linux-rdma@vger.kernel.org
+Fixes: c7398583340a ("CIFS: SMBD: Implement RDMA memory registration")
+Signed-off-by: Stefan Metzmacher <metze@samba.org>
+Signed-off-by: Steve French <stfrench@microsoft.com>
+---
+ fs/smb/client/smbdirect.c | 110 ++++++++++++++++++++++++++++++++++----
+ fs/smb/client/smbdirect.h |   4 +-
+ 2 files changed, 103 insertions(+), 11 deletions(-)
+
+diff --git a/fs/smb/client/smbdirect.c b/fs/smb/client/smbdirect.c
+index a26f677e7adb..30c3ff034816 100644
+--- a/fs/smb/client/smbdirect.c
++++ b/fs/smb/client/smbdirect.c
+@@ -179,6 +179,8 @@ static int smbd_conn_upcall(
+ 	struct smbd_connection *info = id->context;
+ 	struct smbdirect_socket *sc = &info->socket;
+ 	const char *event_name = rdma_event_msg(event->event);
++	u8 peer_initiator_depth;
++	u8 peer_responder_resources;
+ 
+ 	log_rdma_event(INFO, "event=%s status=%d\n",
+ 		event_name, event->status);
+@@ -204,6 +206,85 @@ static int smbd_conn_upcall(
+ 
+ 	case RDMA_CM_EVENT_ESTABLISHED:
+ 		log_rdma_event(INFO, "connected event=%s\n", event_name);
++
++		/*
++		 * Here we work around an inconsistency between
++		 * iWarp and other devices (at least rxe and irdma using RoCEv2)
++		 */
++		if (rdma_protocol_iwarp(id->device, id->port_num)) {
++			/*
++			 * iWarp devices report the peer's values
++			 * with the perspective of the peer here.
++			 * Tested with siw and irdma (in iwarp mode)
++			 * We need to change to our perspective here,
++			 * so we need to switch the values.
++			 */
++			peer_initiator_depth = event->param.conn.responder_resources;
++			peer_responder_resources = event->param.conn.initiator_depth;
++		} else {
++			/*
++			 * Non iWarp devices report the peer's values
++			 * already changed to our perspective here.
++			 * Tested with rxe and irdma (in roce mode).
++			 */
++			peer_initiator_depth = event->param.conn.initiator_depth;
++			peer_responder_resources = event->param.conn.responder_resources;
++		}
++		if (rdma_protocol_iwarp(id->device, id->port_num) &&
++		    event->param.conn.private_data_len == 8) {
++			/*
++			 * Legacy clients with only iWarp MPA v1 support
++			 * need a private blob in order to negotiate
++			 * the IRD/ORD values.
++			 */
++			const __be32 *ird_ord_hdr = event->param.conn.private_data;
++			u32 ird32 = be32_to_cpu(ird_ord_hdr[0]);
++			u32 ord32 = be32_to_cpu(ird_ord_hdr[1]);
++
++			/*
++			 * cifs.ko sends the legacy IRD/ORD negotiation
++			 * event if iWarp MPA v2 was used.
++			 *
++			 * Here we check that the values match and only
++			 * mark the client as legacy if they don't match.
++			 */
++			if ((u32)event->param.conn.initiator_depth != ird32 ||
++			    (u32)event->param.conn.responder_resources != ord32) {
++				/*
++				 * There are broken clients (old cifs.ko)
++				 * using little endian and also
++				 * struct rdma_conn_param only uses u8
++				 * for initiator_depth and responder_resources,
++				 * so we truncate the value to U8_MAX.
++				 *
++				 * smb_direct_accept_client() will then
++				 * do the real negotiation in order to
++				 * select the minimum between client and
++				 * server.
++				 */
++				ird32 = min_t(u32, ird32, U8_MAX);
++				ord32 = min_t(u32, ord32, U8_MAX);
++
++				info->legacy_iwarp = true;
++				peer_initiator_depth = (u8)ird32;
++				peer_responder_resources = (u8)ord32;
++			}
++		}
++
++		/*
++		 * negotiate the value by using the minimum
++		 * between client and server if the client provided
++		 * non 0 values.
++		 */
++		if (peer_initiator_depth != 0)
++			info->initiator_depth =
++					min_t(u8, info->initiator_depth,
++					      peer_initiator_depth);
++		if (peer_responder_resources != 0)
++			info->responder_resources =
++					min_t(u8, info->responder_resources,
++					      peer_responder_resources);
++
+ 		sc->status = SMBDIRECT_SOCKET_CONNECTED;
+ 		wake_up_interruptible(&info->status_wait);
+ 		break;
+@@ -1549,7 +1630,7 @@ static struct smbd_connection *_smbd_get_connection(
+ 	struct ib_qp_init_attr qp_attr;
+ 	struct sockaddr_in *addr_in = (struct sockaddr_in *) dstaddr;
+ 	struct ib_port_immutable port_immutable;
+-	u32 ird_ord_hdr[2];
++	__be32 ird_ord_hdr[2];
+ 
+ 	info = kzalloc(sizeof(struct smbd_connection), GFP_KERNEL);
+ 	if (!info)
+@@ -1557,6 +1638,9 @@ static struct smbd_connection *_smbd_get_connection(
+ 	sc = &info->socket;
+ 	sp = &sc->parameters;
+ 
++	info->initiator_depth = 1;
++	info->responder_resources = SMBD_CM_RESPONDER_RESOURCES;
++
+ 	sc->status = SMBDIRECT_SOCKET_CONNECTING;
+ 	rc = smbd_ia_open(info, dstaddr, port);
+ 	if (rc) {
+@@ -1637,22 +1721,22 @@ static struct smbd_connection *_smbd_get_connection(
+ 	}
+ 	sc->ib.qp = sc->rdma.cm_id->qp;
+ 
+-	memset(&conn_param, 0, sizeof(conn_param));
+-	conn_param.initiator_depth = 0;
+-
+-	conn_param.responder_resources =
+-		min(sc->ib.dev->attrs.max_qp_rd_atom,
+-		    SMBD_CM_RESPONDER_RESOURCES);
+-	info->responder_resources = conn_param.responder_resources;
++	info->responder_resources =
++		min_t(u8, info->responder_resources,
++		      sc->ib.dev->attrs.max_qp_rd_atom);
+ 	log_rdma_mr(INFO, "responder_resources=%d\n",
+ 		info->responder_resources);
+ 
++	memset(&conn_param, 0, sizeof(conn_param));
++	conn_param.initiator_depth = info->initiator_depth;
++	conn_param.responder_resources = info->responder_resources;
++
+ 	/* Need to send IRD/ORD in private data for iWARP */
+ 	sc->ib.dev->ops.get_port_immutable(
+ 		sc->ib.dev, sc->rdma.cm_id->port_num, &port_immutable);
+ 	if (port_immutable.core_cap_flags & RDMA_CORE_PORT_IWARP) {
+-		ird_ord_hdr[0] = info->responder_resources;
+-		ird_ord_hdr[1] = 1;
++		ird_ord_hdr[0] = cpu_to_be32(conn_param.responder_resources);
++		ird_ord_hdr[1] = cpu_to_be32(conn_param.initiator_depth);
+ 		conn_param.private_data = ird_ord_hdr;
+ 		conn_param.private_data_len = sizeof(ird_ord_hdr);
+ 	} else {
+@@ -2119,6 +2203,12 @@ static int allocate_mr_list(struct smbd_connection *info)
+ 	atomic_set(&info->mr_used_count, 0);
+ 	init_waitqueue_head(&info->wait_for_mr_cleanup);
+ 	INIT_WORK(&info->mr_recovery_work, smbd_mr_recovery_work);
++
++	if (info->responder_resources == 0) {
++		log_rdma_mr(ERR, "responder_resources negotiated as 0\n");
++		return -EINVAL;
++	}
++
+ 	/* Allocate more MRs (2x) than hardware responder_resources */
+ 	for (i = 0; i < info->responder_resources * 2; i++) {
+ 		smbdirect_mr = kzalloc(sizeof(*smbdirect_mr), GFP_KERNEL);
+diff --git a/fs/smb/client/smbdirect.h b/fs/smb/client/smbdirect.h
+index e45aa9ddd71d..4ca9b2b2c57f 100644
+--- a/fs/smb/client/smbdirect.h
++++ b/fs/smb/client/smbdirect.h
+@@ -67,7 +67,9 @@ struct smbd_connection {
+ 
+ 	/* Memory registrations */
+ 	/* Maximum number of RDMA read/write outstanding on this connection */
+-	int responder_resources;
++	bool legacy_iwarp;
++	u8 initiator_depth;
++	u8 responder_resources;
+ 	/* Maximum number of pages in a single RDMA write/read on this connection */
+ 	int max_frmr_depth;
+ 	/*
+-- 
+2.43.0
+
 
