@@ -2,62 +2,69 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 809A8B8785A
-	for <lists+samba-technical@lfdr.de>; Fri, 19 Sep 2025 02:42:41 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5B868B89575
+	for <lists+samba-technical@lfdr.de>; Fri, 19 Sep 2025 14:03:41 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=b3Koa84Sqg7Vzrvj1FW0/AYhqspEsBMTPOZnuTagtQw=; b=wi6BoFwgsaeVfjUKYKpi9Skulq
-	VT0x84QcT/ou99TcBCioOUluGvA0FBnLnGXiGTrMH/6DcGiwhb8oL/fZOmuY44iWv0RJQZUiK2Q/Z
-	pGTJoEhXdYSTx2gqZJErdPm7L2xGGCt+/aYk2tkc7/aWt31p9S/Aeo1MG+EACM47W+T0veJbDTiNT
-	euiwBmVShuZMa03AtSeTtB5jU7pSyIdYpSxs3mBJGZecG62OFvozoo21+zW+llV7OFOZxv/bQ6qws
-	Hd4O5E7fpE77ezo0PcmporidI4mEbzmygB+fcQby3TtdR/dmu2SainX5C8iVUlQdud1jZvvFAB6VB
-	qqib+xSA==;
-Received: from ip6-localhost ([::1]:54308 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=+Ai7HUg6Gj2Tz4YC0IHl1ASOu3DN42G2mgnc1yHtjyI=; b=bX0WMEgNx0iOHBu6vk+Q4DgbwI
+	DcXbHdV3tP5AMMgn1fzTd7rlPOhWppsqPco8kzlDMaKynmY+GVXqasuQoDFg9oLLSAcH+B+0L9kaH
+	WcBiDYn/RoOd93I22vVTfE+wPlmfgkrgU0XH66lWr0QISjXA6FDsVHF8fuOMlDqARnH3MElDBeMJz
+	Nvd3rexyK61rmdKhjT72MA40AGHe4n0qdgZyMbInkl0mDATX+D7yItmpMuMdJt/qgIN19UXNYUVxR
+	1TEUTc/QrI6VJ4c4zkwNu5tvbllJxssPecK1JI6xR+fxYs2dLWcxXCtdhRuURWwnxBuJvjplIBtIt
+	dfsSSDcw==;
+Received: from ip6-localhost ([::1]:40208 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1uzPCR-004FIL-3c; Fri, 19 Sep 2025 00:42:07 +0000
-Received: from tor.source.kernel.org ([2600:3c04:e001:324:0:1991:8:25]:41904) 
+	id 1uzZpS-004HvB-9o; Fri, 19 Sep 2025 12:03:06 +0000
+Received: from mail-qv1-xf35.google.com ([2607:f8b0:4864:20::f35]:41329) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uzPCM-004FID-Gf
- for samba-technical@lists.samba.org; Fri, 19 Sep 2025 00:42:04 +0000
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 0C3B060220
- for <samba-technical@lists.samba.org>; Fri, 19 Sep 2025 00:41:50 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9EE75C4AF0B
- for <samba-technical@lists.samba.org>; Fri, 19 Sep 2025 00:41:49 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1758242509;
- bh=b3Koa84Sqg7Vzrvj1FW0/AYhqspEsBMTPOZnuTagtQw=;
- h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
- b=WDR3x2QaaLzcSAYGLXd4vzPFmM3M9+2dfJ6fubtD5PQMrOnVM0MIqorcJ+9fpvaJ8
- hgZMbIxGf48l9eJAWwmJiAIb0xGclBg6Bj8qf+AJuUk0FPHoQArieey/vBrdhVwvgD
- iSgylbRIIFj1vaH4KtSvTmpv02MqfEztbZgi6C/QvyQimSCMe6UBrSi966IPDMs8Ke
- kvslH4DKk17PQ3OgnorzY8g/brKboWP2fLUciDU8ACp+c+zqoQKo1olmHmcKtvopf+
- ZDlG/1l079ru9DZ5AXNl/y4EramCVbb/q/FzSnkgftIn1Sx8uxGDuAuqEapesLCjcl
- naOrBP7MV0Prg==
-Received: by mail-ed1-f45.google.com with SMTP id
- 4fb4d7f45d1cf-62fc14af3fbso574013a12.3
- for <samba-technical@lists.samba.org>; Thu, 18 Sep 2025 17:41:49 -0700 (PDT)
-X-Forwarded-Encrypted: i=1;
- AJvYcCUhf0kQ98Wv6AG7+lwV44tQvynClI7rw75omkH+Z11pvx4UitvpIpBeE7PLKruvOSL7RU5KESIWfVpy75uGEOg=@lists.samba.org
-X-Gm-Message-State: AOJu0YwsnD+nvuWw+3UGxMZ9GoIK8zytH64mF+K/AkBjWbpKkhtNuwAf
- aDK6afbl7l9FW4ywaujUWvTG6A1nbNqATUMslZH4DG1ZfTYdGp5g8tW2VWuhB/TtG9xIridWhO9
- K6Skm2ujSdzM8380vjD/ZCtBAF3ldvsg=
-X-Google-Smtp-Source: AGHT+IGB6E2+3TfBy5R8J+GmoRVyU8wDVB8w+Gi0nRE0tAVlr/D6tOnqwSS+SWOtopx1szu2rQXgqwVPPQm2oVE3Q9w=
-X-Received: by 2002:a05:6402:21da:b0:628:410f:4978 with SMTP id
- 4fb4d7f45d1cf-62fc0ace301mr966836a12.31.1758242508181; Thu, 18 Sep 2025
- 17:41:48 -0700 (PDT)
+ (Exim) id 1uzZpN-004Hv4-V0
+ for samba-technical@lists.samba.org; Fri, 19 Sep 2025 12:03:04 +0000
+Received: by mail-qv1-xf35.google.com with SMTP id
+ 6a1803df08f44-79523f3f925so2405676d6.1
+ for <samba-technical@lists.samba.org>; Fri, 19 Sep 2025 05:03:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1758283380; x=1758888180; darn=lists.samba.org;
+ h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=t+uPkJtMflUttQ13FSlO2qL5WEHUhjxURaN8p7im2L8=;
+ b=NjKu3meRmd64o3SCbI5NO+CFxlX1yNKFs9boqH0h4aqgtQXzlYhHqpG3/ZUXekS+W0
+ YChhDPlpmqjeJobJgpmiRboIyOXezS2mXYI5tfNkhlKmq4/W9iHLEBZcxatVp2NoCpky
+ DBDAG38GhWuFhqPjU52oTIG/k4MISqD1UMU6rieUN4UaNmNYRe2ihTyS0cBO+QP0wiso
+ EnRnP3f+WaD8OdhSYpLPvFaoozIffQCWIbWxcDZAJE91wdb2chOBXT0QW1+b6plH3zAx
+ Ea+spwUmZeL2rxrgH3So9Do88MLdpcyH7KEKWpIqD638bf48bX0P/HycJ0OJDOkA+R/m
+ kpaA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1758283380; x=1758888180;
+ h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=t+uPkJtMflUttQ13FSlO2qL5WEHUhjxURaN8p7im2L8=;
+ b=EDV5zHQRXLTcMCO+icOBm/OHbQzHa1wXXX1zs/8Nromcr6+goTuQ/aNdmcxMfkGuyI
+ QoHzGdzqvNI7AvDrkOM794gfXs09K5APX6A0UtL1LQi58sGiEwakvYqeoqHOtyqMwdC3
+ hlsk2Bfy/Vbbs+1Ijtv82JrhBTuN7x3dacLwJ/ddbgdGXvu0XJWzqJztwtLcQWZbnPUS
+ qJwHPj4wJbpb4wXk1OH9W0cP3yb6FS6fBTzlKQbdYv4VGoY6mFdF5VUSgCmqinyz2mPS
+ T1IpA5vpRfILXPxErJjJU017U91INLtT53AvEa7vljX3z5EbNI3NBBxnPrAZt4U5VsBT
+ Aaxg==
+X-Gm-Message-State: AOJu0YxkGqh1Gs7frEJKskLN4nhlpevyYTYZV8iK1EvslmMQ4Qr7ItOT
+ xjgEBHV2iKrMzXcMJKNb1RFGUTlJP4X6AuOpJWRYyBu9lRvaNVvCDLXgvNLTltnHPSSAn1Dq/WM
+ X+lBJkaAzhcwmAZtH26iV6CwwO9YIUzLOg5tP
+X-Gm-Gg: ASbGnctTJaM6XzI6p0D6p3dPJ/tGytYSe6jYN5YY82Gin6sh58b7WEXai0opj3ExBel
+ g+q0o0MF9V5D/91C5VLZZtmkp94U6uDmE4QhlY7dlgzFoCsfN4rpPoGdIpe0QbpW9GbB1x0h1O4
+ FFeG13JSpX1HoGK8md+rhbQIu6nm3XCQwiy228oc4VsdKTBqtayg2XUog2EmPEoeLR/LZkc01gS
+ jF29zm6Yw==
+X-Google-Smtp-Source: AGHT+IFyY+AdaOd0RZjt8TXY7Nf3XsvVFubWXTxQyEZJX15CW2z4Vx9tIAbJeoZUsFinCF9zACcBJgGTlx0kWmEP3rY=
+X-Received: by 2002:a05:6214:260b:b0:797:da24:b27c with SMTP id
+ 6a1803df08f44-799023efe60mr18562396d6.0.1758283379437; Fri, 19 Sep 2025
+ 05:02:59 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250918152644.1245030-1-metze@samba.org>
-In-Reply-To: <20250918152644.1245030-1-metze@samba.org>
-Date: Fri, 19 Sep 2025 09:41:36 +0900
-X-Gmail-Original-Message-ID: <CAKYAXd8wojz_==YTumm=yS9=QsS2fBAifhv17LcXLyRuaE-bKQ@mail.gmail.com>
-X-Gm-Features: AS18NWAv2YtXjDqYYnVSMZiCpl-KzafCkajoYmeeMLGMDr6ywius2NcmlteAs0E
-Message-ID: <CAKYAXd8wojz_==YTumm=yS9=QsS2fBAifhv17LcXLyRuaE-bKQ@mail.gmail.com>
-Subject: Re: [PATCH v3] smb: server: fix IRD/ORD negotiation with the client
-To: Stefan Metzmacher <metze@samba.org>
+Date: Fri, 19 Sep 2025 17:32:39 +0530
+X-Gm-Features: AS18NWD_Yj3dKohQZDuJlhgvYTNGojsV4Yyc2-XmP4_wtoHsHJHbL5OOOi6Ql8k
+Message-ID: <CADrT-m+CZf3_pzAkKXB0UVHkd1o6NJR2bN+udTf-PCEdvSS-eQ@mail.gmail.com>
+Subject: Proposal to change smbpasswd file format to address Y2K38 coverity
+ issue.
+To: samba-technical@lists.samba.org
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -71,42 +78,39 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Namjae Jeon via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Namjae Jeon <linkinjeon@kernel.org>
-Cc: linux-cifs@vger.kernel.org, linux-rdma@vger.kernel.org,
- samba-technical@lists.samba.org, Tom Talpey <tom@talpey.com>,
- Steve French <smfrench@gmail.com>, Steve French <stfrench@microsoft.com>
+From: Vinit Agnihotri via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Vinit Agnihotri <vinit.agnihotri@gmail.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Fri, Sep 19, 2025 at 12:27=E2=80=AFAM Stefan Metzmacher <metze@samba.org=
-> wrote:
->
-> Already do real negotiation in smb_direct_handle_connect_request()
-> where we see the requested initiator_depth and responder_resources
-> from the client.
->
-> We should should detect legacy iwarp clients using MPA v1
-> with the custom IRD/ORD negotiation.
->
-> We need to send the custom IRD/ORD in big endian,
-> but we need to try to let clients with broken requests
-> using little endian (older cifs.ko) to work.
->
-> Note the reason why this uses u8 for
-> initiator_depth and responder_resources is
-> that the rdma layer also uses it.
->
-> Cc: Namjae Jeon <linkinjeon@kernel.org>
-> Cc: Steve French <smfrench@gmail.com>
-> Cc: Tom Talpey <tom@talpey.com>
-> Cc: linux-cifs@vger.kernel.org
-> Cc: samba-technical@lists.samba.org
-> Cc: linux-rdma@vger.kernel.org
-> Fixes: 0626e6641f6b ("cifsd: add server handler for central processing an=
-d tranport layers")
-> Signed-off-by: Stefan Metzmacher <metze@samba.org>
-> Signed-off-by: Steve French <stfrench@microsoft.com>
-Applied it to #ksmbd-for-next-next.
-Thanks!
+Hello,
 
+Coverity Id#1509031 and 1509040, reports Y2K38_SAFETY issue for
+'pass_last_set_time' in file "source3/passdb/pdb_smbpasswd.c".
+https://scan5.scan.coverity.com/#/project-view/64750/10100?selectedIssue=1509031
+https://scan5.scan.coverity.com/#/project-view/64750/10100?selectedIssue=1509040
+
+Although this is defined as time_t, we are storing it in file as a hex
+string of 8 bytes(uint32_t)as opposed to a hex string of 16 bytes
+(uint64_t/intmax_t)
+Existing entry looks like:
+xyz:0:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX:8846F7EAEE8FB117AD06BDD830B7586C:[U]:LCT-ABCDABCD
+
+Main crux is to ensure conversion of existing entries so that new changes
+won't break older file.
+I'd like to propose an approach to deal with this issue.
+
+Proposal states that on opening this password file, we check the hex string
+which represents "pass_last_set_time". If this string comes out to be 8
+bytes, then we flag this as old format and then we read every record one by
+one and convert it into a 16 byte hex-string and write it back to file.
+New entry would look like:
+xyz:0:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX:8846F7EAEE8FB117AD06BDD830B7586C:[U]:LCT-ABCDABCDABCDABCD
+
+Along with the above mentioned change, we make necessary changes to
+add/delete/modify entries according to the new format.
+
+Please kindly provide comments/suggestions/improvements for the same.
+
+Thanks & Regards,
+Vinit.
