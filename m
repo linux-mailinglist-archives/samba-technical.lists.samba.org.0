@@ -2,47 +2,62 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2931CB86ED0
-	for <lists+samba-technical@lfdr.de>; Thu, 18 Sep 2025 22:37:22 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 809A8B8785A
+	for <lists+samba-technical@lfdr.de>; Fri, 19 Sep 2025 02:42:41 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=Ywm9q/Q8tEjjpzE6rv35qhNDMxqqhYr7kn0Jp3aYSYM=; b=VkR10utgL/iZPLFLHDWJ5Od1uT
-	MusjSDBjHjW0yM/uhZKvXua3vvhmynWyXxqj+LnhdTf35ucGB0CiYJQ0/aVhWjB5x4flnvaM3oW3h
-	09vGmyYBLZ3GLNBFcM7imraNirzSbuk819tStLXC2mGCWLNnUxmiLUJd1A+e2PJDUNHIytRw1SpTy
-	27RSASD+h9ChRxBXAAbY5DlkYLgJ8bzS6Yh6G7lnyMcnXCmVc4nK8ZPMomyMdYbmzl/dsb66n9UPM
-	mj6QkAHNcc9fzrLH81rnMsZLTo5cdNBuyFD6brYCHrlwqhRBoRim9nFgd+i1hACothdIFY9J6S5sF
-	4PzGhA1Q==;
-Received: from ip6-localhost ([::1]:44830 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=b3Koa84Sqg7Vzrvj1FW0/AYhqspEsBMTPOZnuTagtQw=; b=wi6BoFwgsaeVfjUKYKpi9Skulq
+	VT0x84QcT/ou99TcBCioOUluGvA0FBnLnGXiGTrMH/6DcGiwhb8oL/fZOmuY44iWv0RJQZUiK2Q/Z
+	pGTJoEhXdYSTx2gqZJErdPm7L2xGGCt+/aYk2tkc7/aWt31p9S/Aeo1MG+EACM47W+T0veJbDTiNT
+	euiwBmVShuZMa03AtSeTtB5jU7pSyIdYpSxs3mBJGZecG62OFvozoo21+zW+llV7OFOZxv/bQ6qws
+	Hd4O5E7fpE77ezo0PcmporidI4mEbzmygB+fcQby3TtdR/dmu2SainX5C8iVUlQdud1jZvvFAB6VB
+	qqib+xSA==;
+Received: from ip6-localhost ([::1]:54308 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1uzLMx-004EU5-N6; Thu, 18 Sep 2025 20:36:43 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:12116) 
+	id 1uzPCR-004FIL-3c; Fri, 19 Sep 2025 00:42:07 +0000
+Received: from tor.source.kernel.org ([2600:3c04:e001:324:0:1991:8:25]:41904) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uzLMt-004ETy-NU
- for samba-technical@lists.samba.org; Thu, 18 Sep 2025 20:36:42 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Date:Cc:To:From;
- bh=Ywm9q/Q8tEjjpzE6rv35qhNDMxqqhYr7kn0Jp3aYSYM=; b=E1fF4Ly7ZoLhxpzKUH12dKjvCM
- kqQaWjMqrxAEXwbPrQLsLl5zWNGn3lfbb/E5+8ow3IopRw2vOBv+h9DmG6Qwxc5bbMREj0p/5DbQz
- YP1hQ97iqAudtTkiK1dSx6V52tk35C4p3idHRGyE9lm/jcguRfsRtWkXbAcciJ58BzLkTv5QKnlSO
- viOyYXn0JLi20PTH7YPjjo6o3OGCAsvVRgvDVuBA95Mcgl7F2ucsSJKgG1j69EqwqG4PZBOBXbqwq
- z0Ej8DqER/O27tFl84NLsNOrU8C69y/LL+y8yorawP5jOEmm/IuMUF9YoysSSlSoYboSsKMXMuxfU
- nGU2uI7d4ndrGgTbUAv1GeBpiC9ZYpfrnMLbZQDKLC6ALmYIYIE1wVGSwZGcy5KE9PFgYtrKGxO+Y
- I79UtwUxREtKLPgJJnPrdGVsV2gEKG7A7vjN5rU/B+131NhHC0ReQ50o31+ey37RivN8PWxBZNS8V
- 4Vvj2ZfCoz3VKCdAUWRQQDyb;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1uzLMs-004okF-0T; Thu, 18 Sep 2025 20:36:38 +0000
-To: linux-cifs@vger.kernel.org,
-	samba-technical@lists.samba.org
-Subject: [PATCH] smb: client: fix smbdirect_recv_io leak in smbd_negotiate()
- error path
-Date: Thu, 18 Sep 2025 22:36:30 +0200
-Message-ID: <20250918203630.1390057-1-metze@samba.org>
-X-Mailer: git-send-email 2.43.0
+ (Exim) id 1uzPCM-004FID-Gf
+ for samba-technical@lists.samba.org; Fri, 19 Sep 2025 00:42:04 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by tor.source.kernel.org (Postfix) with ESMTP id 0C3B060220
+ for <samba-technical@lists.samba.org>; Fri, 19 Sep 2025 00:41:50 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9EE75C4AF0B
+ for <samba-technical@lists.samba.org>; Fri, 19 Sep 2025 00:41:49 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1758242509;
+ bh=b3Koa84Sqg7Vzrvj1FW0/AYhqspEsBMTPOZnuTagtQw=;
+ h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
+ b=WDR3x2QaaLzcSAYGLXd4vzPFmM3M9+2dfJ6fubtD5PQMrOnVM0MIqorcJ+9fpvaJ8
+ hgZMbIxGf48l9eJAWwmJiAIb0xGclBg6Bj8qf+AJuUk0FPHoQArieey/vBrdhVwvgD
+ iSgylbRIIFj1vaH4KtSvTmpv02MqfEztbZgi6C/QvyQimSCMe6UBrSi966IPDMs8Ke
+ kvslH4DKk17PQ3OgnorzY8g/brKboWP2fLUciDU8ACp+c+zqoQKo1olmHmcKtvopf+
+ ZDlG/1l079ru9DZ5AXNl/y4EramCVbb/q/FzSnkgftIn1Sx8uxGDuAuqEapesLCjcl
+ naOrBP7MV0Prg==
+Received: by mail-ed1-f45.google.com with SMTP id
+ 4fb4d7f45d1cf-62fc14af3fbso574013a12.3
+ for <samba-technical@lists.samba.org>; Thu, 18 Sep 2025 17:41:49 -0700 (PDT)
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUhf0kQ98Wv6AG7+lwV44tQvynClI7rw75omkH+Z11pvx4UitvpIpBeE7PLKruvOSL7RU5KESIWfVpy75uGEOg=@lists.samba.org
+X-Gm-Message-State: AOJu0YwsnD+nvuWw+3UGxMZ9GoIK8zytH64mF+K/AkBjWbpKkhtNuwAf
+ aDK6afbl7l9FW4ywaujUWvTG6A1nbNqATUMslZH4DG1ZfTYdGp5g8tW2VWuhB/TtG9xIridWhO9
+ K6Skm2ujSdzM8380vjD/ZCtBAF3ldvsg=
+X-Google-Smtp-Source: AGHT+IGB6E2+3TfBy5R8J+GmoRVyU8wDVB8w+Gi0nRE0tAVlr/D6tOnqwSS+SWOtopx1szu2rQXgqwVPPQm2oVE3Q9w=
+X-Received: by 2002:a05:6402:21da:b0:628:410f:4978 with SMTP id
+ 4fb4d7f45d1cf-62fc0ace301mr966836a12.31.1758242508181; Thu, 18 Sep 2025
+ 17:41:48 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20250918152644.1245030-1-metze@samba.org>
+In-Reply-To: <20250918152644.1245030-1-metze@samba.org>
+Date: Fri, 19 Sep 2025 09:41:36 +0900
+X-Gmail-Original-Message-ID: <CAKYAXd8wojz_==YTumm=yS9=QsS2fBAifhv17LcXLyRuaE-bKQ@mail.gmail.com>
+X-Gm-Features: AS18NWAv2YtXjDqYYnVSMZiCpl-KzafCkajoYmeeMLGMDr6ywius2NcmlteAs0E
+Message-ID: <CAKYAXd8wojz_==YTumm=yS9=QsS2fBAifhv17LcXLyRuaE-bKQ@mail.gmail.com>
+Subject: Re: [PATCH v3] smb: server: fix IRD/ORD negotiation with the client
+To: Stefan Metzmacher <metze@samba.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -56,45 +71,42 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Stefan Metzmacher <metze@samba.org>
-Cc: metze@samba.org, Steve French <smfrench@gmail.com>,
- Tom Talpey <tom@talpey.com>, Namjae Jeon <linkinjeon@kernel.org>
+From: Namjae Jeon via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Namjae Jeon <linkinjeon@kernel.org>
+Cc: linux-cifs@vger.kernel.org, linux-rdma@vger.kernel.org,
+ samba-technical@lists.samba.org, Tom Talpey <tom@talpey.com>,
+ Steve French <smfrench@gmail.com>, Steve French <stfrench@microsoft.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-During tests of another unrelated patch I was able to trigger this
-error: Objects remaining on __kmem_cache_shutdown()
-
-Cc: Steve French <smfrench@gmail.com>
-Cc: Tom Talpey <tom@talpey.com>
-Cc: Long Li <longli@microsoft.com>
-Cc: Namjae Jeon <linkinjeon@kernel.org>
-Cc: linux-cifs@vger.kernel.org
-Cc: samba-technical@lists.samba.org
-Fixes: f198186aa9bb ("CIFS: SMBD: Establish SMB Direct connection")
-Signed-off-by: Stefan Metzmacher <metze@samba.org>
----
- fs/smb/client/smbdirect.c | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
-
-diff --git a/fs/smb/client/smbdirect.c b/fs/smb/client/smbdirect.c
-index 001224d31e0c..6480945c2459 100644
---- a/fs/smb/client/smbdirect.c
-+++ b/fs/smb/client/smbdirect.c
-@@ -1189,8 +1189,10 @@ static int smbd_negotiate(struct smbd_connection *info)
- 	log_rdma_event(INFO, "smbd_post_recv rc=%d iov.addr=0x%llx iov.length=%u iov.lkey=0x%x\n",
- 		       rc, response->sge.addr,
- 		       response->sge.length, response->sge.lkey);
--	if (rc)
-+	if (rc) {
-+		put_receive_buffer(info, response);
- 		return rc;
-+	}
- 
- 	init_completion(&info->negotiate_completion);
- 	info->negotiate_done = false;
--- 
-2.43.0
-
+On Fri, Sep 19, 2025 at 12:27=E2=80=AFAM Stefan Metzmacher <metze@samba.org=
+> wrote:
+>
+> Already do real negotiation in smb_direct_handle_connect_request()
+> where we see the requested initiator_depth and responder_resources
+> from the client.
+>
+> We should should detect legacy iwarp clients using MPA v1
+> with the custom IRD/ORD negotiation.
+>
+> We need to send the custom IRD/ORD in big endian,
+> but we need to try to let clients with broken requests
+> using little endian (older cifs.ko) to work.
+>
+> Note the reason why this uses u8 for
+> initiator_depth and responder_resources is
+> that the rdma layer also uses it.
+>
+> Cc: Namjae Jeon <linkinjeon@kernel.org>
+> Cc: Steve French <smfrench@gmail.com>
+> Cc: Tom Talpey <tom@talpey.com>
+> Cc: linux-cifs@vger.kernel.org
+> Cc: samba-technical@lists.samba.org
+> Cc: linux-rdma@vger.kernel.org
+> Fixes: 0626e6641f6b ("cifsd: add server handler for central processing an=
+d tranport layers")
+> Signed-off-by: Stefan Metzmacher <metze@samba.org>
+> Signed-off-by: Steve French <stfrench@microsoft.com>
+Applied it to #ksmbd-for-next-next.
+Thanks!
 
