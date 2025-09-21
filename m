@@ -2,72 +2,47 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 67BC4B8DF5C
-	for <lists+samba-technical@lfdr.de>; Sun, 21 Sep 2025 18:20:20 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id AB042B8E6FF
+	for <lists+samba-technical@lfdr.de>; Sun, 21 Sep 2025 23:46:15 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=dEnkljSgZBBWEx29iqqKKjBka0JdK7b/IEnZNvSJ0AI=; b=de9TJfXHa7Aglj19lDV/th8xiP
-	68SCw0dSOJLDyPagbP5hYTqF79gFf4VL1FzTTGu8Zoi1qK8QEONu82LniurwtrEP6G00JnAALzJMj
-	JsMvpC11Inzhte3AqN60ry6ZQ9bF3fNPCUW/jKG/b41rldgEU6Vn/UoDULmnSMeajcqiZCLkEswot
-	jhqVK4hgxO5Clzdb2Xs2fbmxxgRd7x4bCf1uD4mj43z+p+X7AFqEnXAXlugO+ylTYx9sijycCF/KF
-	C4Ydgg2qQnU/r1KqzKuevkAp9Co28p9ekSgBASh8jWsU8vJIWwOCT7ZIepU33WOMtcGQfGyCNbMZu
-	jFIBABGg==;
-Received: from ip6-localhost ([::1]:31358 helo=hr1.samba.org) 
+	bh=rz1x2p+kZcks6PcfkDJEI4VuC2ZiaeIdhVgUw0SbpIs=; b=WG7jXmQgJau2w4e4cCQwDcc785
+	b9iTQj21xoy85ytaBR3hu3g86WQVOilTjYAr/X5w6uru0sqw0bFs28WcO+DV45KFLDY4lcgwMY82l
+	4iCZ6hlxHMuyn6oHUYEAIdnOZPbpyiNvpWCzVYkV1Yzdw4Tl3sjJ8DG/UyZj8E8ZICv9uEm8KIFtI
+	Q5rt8+sx8etw8ju7SOGR6CquM+oXoRJG4fL1QcqYUlCEeBSBswROaCU9/ORKnBYDxJ2mPq6FM/viP
+	b+r7mR/M0TJN3t28YO9q0mYD3snJ7v46queJUyJE5OuNuJxeGJ3txsnyxK6WpWJEQIhkvvubz2h+k
+	78M+NiNA==;
+Received: from ip6-localhost ([::1]:51086 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1v0Mmm-004S9K-Q7; Sun, 21 Sep 2025 16:19:36 +0000
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124]:36731) 
+	id 1v0Rs8-004SwS-K9; Sun, 21 Sep 2025 21:45:28 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:20616) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1v0Mmh-004S9C-D8
- for samba-technical@lists.samba.org; Sun, 21 Sep 2025 16:19:33 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1758471568;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type;
- bh=dEnkljSgZBBWEx29iqqKKjBka0JdK7b/IEnZNvSJ0AI=;
- b=IAfQ80JmVRiWDRqp7sCw3JkjYvdkYHy3aENTQ6HvwjUhNemez3+yVv5U7d6Ts+zVZCFvrs
- MBtgUzOh8E15foiS6j5NaCBSW3tvg+++eB5vHpRSqyImlgF7GCmACCa+aEFp8STWyERngp
- h0k9EUGl6ExfjWOoecx9vWAcIeXDi6g=
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1758471568;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type;
- bh=dEnkljSgZBBWEx29iqqKKjBka0JdK7b/IEnZNvSJ0AI=;
- b=IAfQ80JmVRiWDRqp7sCw3JkjYvdkYHy3aENTQ6HvwjUhNemez3+yVv5U7d6Ts+zVZCFvrs
- MBtgUzOh8E15foiS6j5NaCBSW3tvg+++eB5vHpRSqyImlgF7GCmACCa+aEFp8STWyERngp
- h0k9EUGl6ExfjWOoecx9vWAcIeXDi6g=
-Received: from mx-prod-mc-02.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-44-AwuUUHwHPzOYlcS3Muy7_Q-1; Sun,
- 21 Sep 2025 12:19:24 -0400
-X-MC-Unique: AwuUUHwHPzOYlcS3Muy7_Q-1
-X-Mimecast-MFC-AGG-ID: AwuUUHwHPzOYlcS3Muy7_Q_1758471563
-Received: from mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.12])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mx-prod-mc-02.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 884F81956089; Sun, 21 Sep 2025 16:19:23 +0000 (UTC)
-Received: from warthog.procyon.org.uk (unknown [10.42.28.155])
- by mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id 0C6D319560BB; Sun, 21 Sep 2025 16:19:21 +0000 (UTC)
-Organization: Red Hat UK Ltd. Registered Address: Red Hat UK Ltd, Amberley
- Place, 107-111 Peascod Street, Windsor, Berkshire, SI4 1TE, United
- Kingdom.
- Registered in England and Wales under Company Registration No. 3798903
-To: Jeremy Allison <jra@samba.org>, Steve French <sfrench@samba.org>
-Subject: How to cause a multipart SMB1 Trans2 PDU to occur
+ (Exim) id 1v0Rs4-004SwL-MY
+ for samba-technical@lists.samba.org; Sun, 21 Sep 2025 21:45:27 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Message-ID:Date:Cc:To:From;
+ bh=rz1x2p+kZcks6PcfkDJEI4VuC2ZiaeIdhVgUw0SbpIs=; b=ebYcaTkHtIGJxit7ELdsPFMTMD
+ E/EfFXmfZBNAIDwkcCIuawdqz+l6KtWhw4cYT+b7D6QWH+wCGY5rY3vcwpUlOpRWWlzhsZHz4WstE
+ RM6SJrzGeCFUniyEK/hEQobmwxM2GUmFlmcuXLx11Vu6cnKTIqkptp5Py6HMgyFLzQYFs+lDE8C+X
+ boGjmtIQTC9hCuquBOS26ijA0tiN9o4D/lp5Xn5RACRx5aNoJhUCkrLVJRTZGkGyCaFM6Jc4WuJgZ
+ jxf6Eyarv4ZQqYKlXjXUtKcO5Z3NNdnpDhyKUsl2CJ4RKFkh1I/j34js9M77LZN/6faFxSbyTI2gv
+ swomwpIcBlSuJPjYgHhX7y2MHWQSblBkFAAf5F+VO9/cneCsAFPeU7PmBbbbjTbkBrBG4ZEMU+CiO
+ 0cP5tGNUtnBZPhNcnLltpuQoVZzyoKR8tjhDFHDESuN60F1RjZShfUDBtNlzTyF/OVAoVtEwkx99/
+ Z/o9oJEgvtKgzsOI5zeb0S1c;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1v0Rs3-005GM3-0U; Sun, 21 Sep 2025 21:45:23 +0000
+To: linux-cifs@vger.kernel.org,
+	samba-technical@lists.samba.org
+Subject: [PATCH 00/18] smbdirect/client/server: improved error handling and
+ other small improvements
+Date: Sun, 21 Sep 2025 23:44:47 +0200
+Message-ID: <cover.1758489988.git.metze@samba.org>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Date: Sun, 21 Sep 2025 17:19:20 +0100
-Message-ID: <12788.1758471560@warthog.procyon.org.uk>
-X-Scanned-By: MIMEDefang 3.0 on 10.30.177.12
-X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: 8Cyb4gt1wMcxChwYCI1Dj-zudWq0SSX8rB_mkwjSaPU_1758471563
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset="us-ascii"
-Content-ID: <12787.1758471560.1@warthog.procyon.org.uk>
+Content-Transfer-Encoding: 8bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -81,21 +56,81 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: David Howells via samba-technical <samba-technical@lists.samba.org>
-Reply-To: David Howells <dhowells@redhat.com>
-Cc: dhowells@redhat.com, samba-technical@lists.samba.org
+From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Stefan Metzmacher <metze@samba.org>
+Cc: metze@samba.org, Steve French <smfrench@gmail.com>,
+ Tom Talpey <tom@talpey.com>, Namjae Jeon <linkinjeon@kernel.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi Jeremy, Steve,
+Hi,
 
-Do you know if there's a way to cause Samba to generate a multipart SMB1
-Transaction2 PDU?  I'm trying to test my revised reassembly code - but I think
-there's a bug in the Linux cifs filesystem here with respect to signature
-checking in such a case.
+here are some patches basically on top of the other
+smbdirect patches, which let us use common structures, see:
+https://lore.kernel.org/linux-cifs/cover.1756139607.git.metze@samba.org/
 
-Note that QueryDir just splits across multiple RPCs.
+They improve the error handling in all kind of situations,
+we now consistently reset SMBDIRECT_SOCKET_CONNECTED on
+the first error and wake up all waiters to notice
+the state change.
 
-David
+We also disable all work consistently on error.
+
+We consistently use spin_lock_irq{save,restore}() now.
+
+There are also some improvements in order to make
+further refactoring easier:
+ - E.g. move ib_alloc_pd() and ib_dma_map_single() on the client.
+ - On the server use ib_alloc_cq_any()
+ - let smb_direct_flush_send_list() invalidate a remote key in
+   the first message
+
+Some of these are already in Steve's for-next-next branch.
+I'll soon provide a branch that can replace for-next-next,
+as some of these patches should be moved before some existing
+patches, while dropping some of the patches from for-next-next.
+So that we only have patches for 6.18 included, the rest will
+be deferred to 6.19.
+
+Stefan Metzmacher (18):
+  smb: smbdirect/client: introduce SMBDIRECT_SOCKET_ERROR
+  smb: smbdirect: let smbdirect_socket_init() initialize all
+    [delayed_]work_structs as disabled
+  smb: smbdirect: introduce smbdirect_socket.first_error
+  smb: client: let smbd_disconnect_rdma_connection() set
+    SMBDIRECT_SOCKET_ERROR...
+  smb: client: fill in smbdirect_socket.first_error on error
+  smb: client: let smbd_disconnect_rdma_connection() disable all work
+    but disconnect_work
+  smb: client: let smbd_{destroy,disconnect_rdma_{work,connection}}()
+    wake up all wait queues
+  smb: client: make consitent use of spin_lock_irq{save,restore}() in
+    smbdirect.c
+  smb: client: allocate smbdirect workqueue at the beginning of
+    _smbd_get_connection()
+  smb: client: defer calling ib_alloc_pd() after we are connected
+  smb: client: let smbd_post_send_iter() call ib_dma_map_single() for
+    the header first
+  smb: server: let smb_direct_disconnect_rdma_connection() set
+    SMBDIRECT_SOCKET_ERROR...
+  smb: server: fill in smbdirect_socket.first_error on error
+  smb: server: let smb_direct_disconnect_rdma_connection() disable all
+    work but disconnect_work
+  smb: server: let
+    {free_transport,smb_direct_disconnect_rdma_{work,connection}}() wake
+    up all wait queues
+  smb: server: make consitent use of spin_lock_irq{save,restore}() in
+    transport_rdma.c
+  smb: server: make use of ib_alloc_cq_any() instead of ib_alloc_cq()
+  smb: server: let smb_direct_flush_send_list() invalidate a remote key
+    first
+
+ fs/smb/client/smbdirect.c                  | 224 +++++++++++++++------
+ fs/smb/common/smbdirect/smbdirect_socket.h |  24 +++
+ fs/smb/server/transport_rdma.c             | 157 ++++++++++++---
+ 3 files changed, 309 insertions(+), 96 deletions(-)
+
+-- 
+2.43.0
 
 
