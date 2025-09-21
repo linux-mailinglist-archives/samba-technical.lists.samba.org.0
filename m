@@ -2,44 +2,44 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7BFCCB8E763
-	for <lists+samba-technical@lfdr.de>; Sun, 21 Sep 2025 23:47:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0C527B8E766
+	for <lists+samba-technical@lfdr.de>; Sun, 21 Sep 2025 23:48:11 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=FKCaanVH/HKvXnWdBLFPgsTvOJnaQFL3U6ZUGyyEI1c=; b=JbSDUkFzYFqpCR3PO1OKqQsDy5
-	ARLuyCvHauvnh/j9I10oinSyceWaeQowj79iRmvVe5mOZY7wDWJKOOH0+1b5RssNc+f6CLDY3Mwf3
-	Q+WD0Pwa5PqN6TVLMK3e1NO8gOHlkqwEUUCXzxARRx75V4dF1W76aNamVQQ1sHSNz63KBiZuJ9JKt
-	ZgDp7dG3C0eBloQrMDw6fuac7BKv2Iu1oMsBaUXxPsE7OaVsfRQC6FEwwk05+IZxvM/zUSza6nBMb
-	BjHwyeSytveuhQIw1cU3v5b+vcr9jbzxvXehSqwI/qHc7lwAoDQqekSy4k6wYGl1nXT8gBuuhzCJz
-	rDhINSzQ==;
-Received: from ip6-localhost ([::1]:64610 helo=hr1.samba.org) 
+	bh=wTnV7jAgVv6lcJdvr93g7Sd19rPW5MwD5qULp3J9V5g=; b=cC77qFrEwNZNlzAtxe2lFZGWtj
+	SaafwlX+rIblHCALSDrwMu+w2m5ULhlbLTNwFDawvsdEn+FnOtwjaZ0gQ9+zxk1FZ5ETIbOYMFoHz
+	0Of97fxnVQofxPznyEYb1xgyefaSN0Gzlus54JVqebjQcM8rxzaXqkgiZNLsFP9gjk8nqH7UfAtwR
+	Mzo/2oI2G/IsavU2Vv0bJovakEoCKq2uoLmlxfRTSeCz2MAlgNXDg7m3WCTd4Wny0+YMfXMEFeYf7
+	uj11FrH8VnLuqOwTch0pI0ovUZAduUUCRCyjvQJdCS3MFTaEzMMLvqwh7c84i8HxU0OWDJl0ezms+
+	eDGEwv+g==;
+Received: from ip6-localhost ([::1]:23322 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1v0RuR-004Tf9-Rb; Sun, 21 Sep 2025 21:47:52 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:35442) 
+	id 1v0Ruf-004TjX-R8; Sun, 21 Sep 2025 21:48:06 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:33670) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1v0RtO-004TLj-6H
- for samba-technical@lists.samba.org; Sun, 21 Sep 2025 21:46:52 +0000
+ (Exim) id 1v0RtX-004TPG-E8
+ for samba-technical@lists.samba.org; Sun, 21 Sep 2025 21:47:13 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Message-ID:Date:Cc:To:From;
- bh=FKCaanVH/HKvXnWdBLFPgsTvOJnaQFL3U6ZUGyyEI1c=; b=yp/vTsbdKDeGg4q4tZVSrQlVnw
- wB3B4wEGXnqxmWeyJOWVqPhEtCCwgWU75Uk6Apo+7LFs5gevw9+NW54lG/gTADGFlscIoNPIcE6YY
- UfgCLSD2CT8wrODWHL/cfhuvaVkRu5jpHk5DMG3qIaXg12svbdM/3g+YtNqXJ+v9ASfbCHWpNCHRi
- xP3N/HMq+/Aoog7YV1RwR/BsASvd2JzU/2Qlxo6XZafguYAwtj+nA1f/z7x75En77BTvyfbbYBLOU
- GjPO3omNml9/Y8fx1jOlUgdtBTrGMJ7Qbl/WjoW2SpkhP+ivJ3FOjymaBz2DgN94xEY4PZnnd/xVY
- eLWjTVvZWX/2g3c8pHeXcg7Sl7AP9wkgx7IByas/ABEERySbjC4KjLdRFXEcokfQGmW7oGLPJjp2U
- BDsvuxoLTdQgXGVXI65MD/VC3I7nItgi9rV43wuJLKxdCoE12gPGQehcaIQuekpCvSFwVI1RatxFt
- bvinik/gQjFsacc4SVX0bmoJ;
+ bh=wTnV7jAgVv6lcJdvr93g7Sd19rPW5MwD5qULp3J9V5g=; b=nLo4qGrMmZyyk1j5bgmfOzdFl9
+ gIs5mXpkpAtqC7DnbNxB/PitB89CDk77IQsvSoADGqaO8xxzuFwH2NMphqRk8WIHQzGb2Sxo15B5s
+ v6e2TwEdca9Ca9z/uY1nzBAK0Q58YlIwk+vV+K+2I2Tpj0tptG5uuDl026YImPhUjXvd4Ac77y1WC
+ Oe0Sv6wanBALNRgRDp4dIIxioLgDq3ejGDa2sWnj2ngkOjaMm5w1Ia0eghzZj0ST4HZFrsKi1I7eL
+ MuHhjM5C4Kf0lHSpV6hwcyejGosNW4UmDABCvaVDgGpnxQ7rNUSQQ7HFjTxTvy419bmlI1YgWegMf
+ Ogs8Cug12HBXaHsWNxf1ju4xWIcNee0BNRgVO/3y1zgld95Z6oUC8tZo1w80XZpkQq7Bi9Wig9cfq
+ A2woPyKG5rvibIHbh2yf9wP/uSlH89ybIlbvOvqORwpn9d693Gks3uj37bZpLSEFlpcL0LD6i2kN5
+ 8+DBam3z2M5TePhV0jrTm83v;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1v0RtL-005GXJ-0y; Sun, 21 Sep 2025 21:46:44 +0000
+ (Exim) id 1v0RtT-005GYF-2c; Sun, 21 Sep 2025 21:46:52 +0000
 To: linux-cifs@vger.kernel.org,
 	samba-technical@lists.samba.org
-Subject: [PATCH 10/18] smb: client: defer calling ib_alloc_pd() after we are
- connected
-Date: Sun, 21 Sep 2025 23:44:57 +0200
-Message-ID: <cc7324dd64bc7267a21b2dec956448f32d10d315.1758489989.git.metze@samba.org>
+Subject: [PATCH 11/18] smb: client: let smbd_post_send_iter() call
+ ib_dma_map_single() for the header first
+Date: Sun, 21 Sep 2025 23:44:58 +0200
+Message-ID: <5e543bae44011403245877cb42503a04934e5cf8.1758489989.git.metze@samba.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1758489988.git.metze@samba.org>
 References: <cover.1758489988.git.metze@samba.org>
@@ -66,9 +66,13 @@ Cc: Tom Talpey <tom@talpey.com>, metze@samba.org,
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-The protection domain is not needed until we're connected.
+This will simplify further changes, the important part is that
+request->num_sge >= 1 is only set if request->sge[0].* is valid.
 
-This makes further changes easier to follow...
+Note that ib_dma_sync_single_for_device() is called in
+smbd_post_send() for each sge, so the device will still
+see the packet header even if it's modified after calling
+ib_dma_map_single().
 
 Cc: Steve French <smfrench@gmail.com>
 Cc: Tom Talpey <tom@talpey.com>
@@ -79,54 +83,83 @@ Cc: samba-technical@lists.samba.org
 Signed-off-by: Stefan Metzmacher <metze@samba.org>
 Signed-off-by: Steve French <stfrench@microsoft.com>
 ---
- fs/smb/client/smbdirect.c | 19 +++++++++++--------
- 1 file changed, 11 insertions(+), 8 deletions(-)
+ fs/smb/client/smbdirect.c | 43 +++++++++++++++++++--------------------
+ 1 file changed, 21 insertions(+), 22 deletions(-)
 
 diff --git a/fs/smb/client/smbdirect.c b/fs/smb/client/smbdirect.c
-index e6012523e422..d5e2b3009294 100644
+index d5e2b3009294..0b93e54565f6 100644
 --- a/fs/smb/client/smbdirect.c
 +++ b/fs/smb/client/smbdirect.c
-@@ -926,13 +926,6 @@ static int smbd_ia_open(
- 	if (sc->ib.dev->attrs.kernel_cap_flags & IBK_SG_GAPS_REG)
- 		sc->mr_io.type = IB_MR_TYPE_SG_GAPS;
+@@ -1158,10 +1158,30 @@ static int smbd_post_send_iter(struct smbdirect_socket *sc,
+ 	request->socket = sc;
+ 	memset(request->sge, 0, sizeof(request->sge));
  
--	sc->ib.pd = ib_alloc_pd(sc->ib.dev, 0);
--	if (IS_ERR(sc->ib.pd)) {
--		rc = PTR_ERR(sc->ib.pd);
--		log_rdma_event(ERR, "ib_alloc_pd() returned %d\n", rc);
--		goto out2;
--	}
--
- 	return 0;
- 
- out2:
-@@ -1858,6 +1851,14 @@ static struct smbd_connection *_smbd_get_connection(
- 		goto config_failed;
- 	}
- 
-+	sc->ib.pd = ib_alloc_pd(sc->ib.dev, 0);
-+	if (IS_ERR(sc->ib.pd)) {
-+		rc = PTR_ERR(sc->ib.pd);
-+		sc->ib.pd = NULL;
-+		log_rdma_event(ERR, "ib_alloc_pd() returned %d\n", rc);
-+		goto alloc_pd_failed;
++	/* Map the packet to DMA */
++	header_length = sizeof(struct smbdirect_data_transfer);
++	/* If this is a packet without payload, don't send padding */
++	if (!iter)
++		header_length = offsetof(struct smbdirect_data_transfer, padding);
++
++	packet = smbdirect_send_io_payload(request);
++	request->sge[0].addr = ib_dma_map_single(sc->ib.dev,
++						 (void *)packet,
++						 header_length,
++						 DMA_TO_DEVICE);
++	if (ib_dma_mapping_error(sc->ib.dev, request->sge[0].addr)) {
++		rc = -EIO;
++		goto err_dma;
 +	}
 +
- 	sc->ib.send_cq =
- 		ib_alloc_cq_any(sc->ib.dev, sc,
- 				sp->send_credit_target, IB_POLL_SOFTIRQ);
-@@ -2002,8 +2003,10 @@ static struct smbd_connection *_smbd_get_connection(
- 	if (sc->ib.recv_cq)
- 		ib_free_cq(sc->ib.recv_cq);
- 
--config_failed:
- 	ib_dealloc_pd(sc->ib.pd);
++	request->sge[0].length = header_length;
++	request->sge[0].lkey = sc->ib.pd->local_dma_lkey;
++	request->num_sge = 1;
 +
-+alloc_pd_failed:
-+config_failed:
- 	rdma_destroy_id(sc->rdma.cm_id);
+ 	/* Fill in the data payload to find out how much data we can add */
+ 	if (iter) {
+ 		struct smb_extract_to_rdma extract = {
+-			.nr_sge		= 1,
++			.nr_sge		= request->num_sge,
+ 			.max_sge	= SMBDIRECT_SEND_IO_MAX_SGE,
+ 			.sge		= request->sge,
+ 			.device		= sc->ib.dev,
+@@ -1180,11 +1200,9 @@ static int smbd_post_send_iter(struct smbdirect_socket *sc,
+ 		*_remaining_data_length -= data_length;
+ 	} else {
+ 		data_length = 0;
+-		request->num_sge = 1;
+ 	}
  
- create_id_failed:
+ 	/* Fill in the packet header */
+-	packet = smbdirect_send_io_payload(request);
+ 	packet->credits_requested = cpu_to_le16(sp->send_credit_target);
+ 
+ 	new_credits = manage_credits_prior_sending(sc);
+@@ -1211,25 +1229,6 @@ static int smbd_post_send_iter(struct smbdirect_socket *sc,
+ 		     le32_to_cpu(packet->data_length),
+ 		     le32_to_cpu(packet->remaining_data_length));
+ 
+-	/* Map the packet to DMA */
+-	header_length = sizeof(struct smbdirect_data_transfer);
+-	/* If this is a packet without payload, don't send padding */
+-	if (!data_length)
+-		header_length = offsetof(struct smbdirect_data_transfer, padding);
+-
+-	request->sge[0].addr = ib_dma_map_single(sc->ib.dev,
+-						 (void *)packet,
+-						 header_length,
+-						 DMA_TO_DEVICE);
+-	if (ib_dma_mapping_error(sc->ib.dev, request->sge[0].addr)) {
+-		rc = -EIO;
+-		request->sge[0].addr = 0;
+-		goto err_dma;
+-	}
+-
+-	request->sge[0].length = header_length;
+-	request->sge[0].lkey = sc->ib.pd->local_dma_lkey;
+-
+ 	rc = smbd_post_send(sc, request);
+ 	if (!rc)
+ 		return 0;
 -- 
 2.43.0
 
