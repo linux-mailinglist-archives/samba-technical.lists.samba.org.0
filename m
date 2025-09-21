@@ -2,44 +2,44 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 41764B8E75A
-	for <lists+samba-technical@lfdr.de>; Sun, 21 Sep 2025 23:47:47 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7BFCCB8E763
+	for <lists+samba-technical@lfdr.de>; Sun, 21 Sep 2025 23:47:59 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=QAgou3ftDUWmD4kZL5Jx3dhyC0z8+wfb9pgA7mCZHWs=; b=4I/wX1ivb2Z84zdJGmOFzl8xqW
-	3lp6EnJVBNFsVSnXJkewigDb/OI8DwUh98WL/rHQrWTai8bX1/pO+PEanENfzhmX0XZUt7XrHMBwL
-	LRPmqt77QnRe5YJo8YpuevehQ5flB5ZBHDDxrH0pO8c2AFg1ZG7nZWZBGKX/py2k7SkbzYYDhvAo/
-	3Tnf4vTkoiHJgcr/aksaQ3VCyavZa6DtJ2LXUYdhm1FlBsRgOH8cROkHB6BtWFfiEXwHpssTgNd1O
-	EJg6z/GvdeVb80c2OG2jf5+AZaJa4DS5gtk8J64vXA8XQ5muC1wJG6sLxtOFG3ht2t1AIBsVm1mMN
-	QsAg5HeA==;
-Received: from ip6-localhost ([::1]:28490 helo=hr1.samba.org) 
+	bh=FKCaanVH/HKvXnWdBLFPgsTvOJnaQFL3U6ZUGyyEI1c=; b=JbSDUkFzYFqpCR3PO1OKqQsDy5
+	ARLuyCvHauvnh/j9I10oinSyceWaeQowj79iRmvVe5mOZY7wDWJKOOH0+1b5RssNc+f6CLDY3Mwf3
+	Q+WD0Pwa5PqN6TVLMK3e1NO8gOHlkqwEUUCXzxARRx75V4dF1W76aNamVQQ1sHSNz63KBiZuJ9JKt
+	ZgDp7dG3C0eBloQrMDw6fuac7BKv2Iu1oMsBaUXxPsE7OaVsfRQC6FEwwk05+IZxvM/zUSza6nBMb
+	BjHwyeSytveuhQIw1cU3v5b+vcr9jbzxvXehSqwI/qHc7lwAoDQqekSy4k6wYGl1nXT8gBuuhzCJz
+	rDhINSzQ==;
+Received: from ip6-localhost ([::1]:64610 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1v0RuG-004TZP-Bf; Sun, 21 Sep 2025 21:47:40 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:38010) 
+	id 1v0RuR-004Tf9-Rb; Sun, 21 Sep 2025 21:47:52 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:35442) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1v0RtJ-004TJe-DS
- for samba-technical@lists.samba.org; Sun, 21 Sep 2025 21:46:50 +0000
+ (Exim) id 1v0RtO-004TLj-6H
+ for samba-technical@lists.samba.org; Sun, 21 Sep 2025 21:46:52 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Message-ID:Date:Cc:To:From;
- bh=QAgou3ftDUWmD4kZL5Jx3dhyC0z8+wfb9pgA7mCZHWs=; b=wy9KfWizES3S7+2U/xZzbTON4p
- HKQDp9XdFURvFJsewXPhOYEMRPrcw64M1IxYfqwUXZgZzbl35J4hCUZoqZKzwNHln0IqK/AWWkp2X
- 9dqMa+NccS/vK0xlSjt8+PU8JCYjSEcWg91D3REYWdBciwrg+O7/Y/aMOZ1OhsGIfUZl8sz9Yyb8O
- tNPL5/XlzetX/G4uuMb0dv5oMwMLjEKmQUk0Jg+e3JipQksrrOHtkI0h/GLmQ0ulDsXxtW9bonT84
- pcVKjjfxwhTj0pR9n9M427lezZMJw4J2eYGV9l+3bkrLlnDCf+Z7m+7own04SN93UjFZuamHWhMVE
- HAVoe3LaW4nHFx5MXoRkYRaCtEvlBReXR+etayWa5L7+hBOgnoiXU/EmrzbainUCyPLJwGlxODe0t
- FgMagYO1IdQyCr5y+Px8dcH/2MJK6VhLz/G5qeFe84qZKKcHEb5QZgBF/mPGVvPMJUw62fkrW+Bt8
- Wo+H2/Rr/sKVmSco5/0CWtG2;
+ bh=FKCaanVH/HKvXnWdBLFPgsTvOJnaQFL3U6ZUGyyEI1c=; b=yp/vTsbdKDeGg4q4tZVSrQlVnw
+ wB3B4wEGXnqxmWeyJOWVqPhEtCCwgWU75Uk6Apo+7LFs5gevw9+NW54lG/gTADGFlscIoNPIcE6YY
+ UfgCLSD2CT8wrODWHL/cfhuvaVkRu5jpHk5DMG3qIaXg12svbdM/3g+YtNqXJ+v9ASfbCHWpNCHRi
+ xP3N/HMq+/Aoog7YV1RwR/BsASvd2JzU/2Qlxo6XZafguYAwtj+nA1f/z7x75En77BTvyfbbYBLOU
+ GjPO3omNml9/Y8fx1jOlUgdtBTrGMJ7Qbl/WjoW2SpkhP+ivJ3FOjymaBz2DgN94xEY4PZnnd/xVY
+ eLWjTVvZWX/2g3c8pHeXcg7Sl7AP9wkgx7IByas/ABEERySbjC4KjLdRFXEcokfQGmW7oGLPJjp2U
+ BDsvuxoLTdQgXGVXI65MD/VC3I7nItgi9rV43wuJLKxdCoE12gPGQehcaIQuekpCvSFwVI1RatxFt
+ bvinik/gQjFsacc4SVX0bmoJ;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1v0RtD-005GWZ-1e; Sun, 21 Sep 2025 21:46:35 +0000
+ (Exim) id 1v0RtL-005GXJ-0y; Sun, 21 Sep 2025 21:46:44 +0000
 To: linux-cifs@vger.kernel.org,
 	samba-technical@lists.samba.org
-Subject: [PATCH 09/18] smb: client: allocate smbdirect workqueue at the
- beginning of _smbd_get_connection()
-Date: Sun, 21 Sep 2025 23:44:56 +0200
-Message-ID: <05f221d13c02e1b6a9aa5a116f9d704ae9f74591.1758489989.git.metze@samba.org>
+Subject: [PATCH 10/18] smb: client: defer calling ib_alloc_pd() after we are
+ connected
+Date: Sun, 21 Sep 2025 23:44:57 +0200
+Message-ID: <cc7324dd64bc7267a21b2dec956448f32d10d315.1758489989.git.metze@samba.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1758489988.git.metze@samba.org>
 References: <cover.1758489988.git.metze@samba.org>
@@ -66,7 +66,9 @@ Cc: Tom Talpey <tom@talpey.com>, metze@samba.org,
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This will simplify further changes when moving to common code.
+The protection domain is not needed until we're connected.
+
+This makes further changes easier to follow...
 
 Cc: Steve French <smfrench@gmail.com>
 Cc: Tom Talpey <tom@talpey.com>
@@ -77,104 +79,54 @@ Cc: samba-technical@lists.samba.org
 Signed-off-by: Stefan Metzmacher <metze@samba.org>
 Signed-off-by: Steve French <stfrench@microsoft.com>
 ---
- fs/smb/client/smbdirect.c | 27 ++++++++++++++-------------
- 1 file changed, 14 insertions(+), 13 deletions(-)
+ fs/smb/client/smbdirect.c | 19 +++++++++++--------
+ 1 file changed, 11 insertions(+), 8 deletions(-)
 
 diff --git a/fs/smb/client/smbdirect.c b/fs/smb/client/smbdirect.c
-index 5bc316248058..e6012523e422 100644
+index e6012523e422..d5e2b3009294 100644
 --- a/fs/smb/client/smbdirect.c
 +++ b/fs/smb/client/smbdirect.c
-@@ -1703,10 +1703,9 @@ int smbd_reconnect(struct TCP_Server_Info *server)
- 	return -ENOENT;
- }
+@@ -926,13 +926,6 @@ static int smbd_ia_open(
+ 	if (sc->ib.dev->attrs.kernel_cap_flags & IBK_SG_GAPS_REG)
+ 		sc->mr_io.type = IB_MR_TYPE_SG_GAPS;
  
--static void destroy_caches_and_workqueue(struct smbdirect_socket *sc)
-+static void destroy_caches(struct smbdirect_socket *sc)
- {
- 	destroy_receive_buffers(sc);
--	destroy_workqueue(sc->workqueue);
- 	mempool_destroy(sc->recv_io.mem.pool);
- 	kmem_cache_destroy(sc->recv_io.mem.cache);
- 	mempool_destroy(sc->send_io.mem.pool);
-@@ -1714,7 +1713,7 @@ static void destroy_caches_and_workqueue(struct smbdirect_socket *sc)
- }
- 
- #define MAX_NAME_LEN	80
--static int allocate_caches_and_workqueue(struct smbdirect_socket *sc)
-+static int allocate_caches(struct smbdirect_socket *sc)
- {
- 	struct smbdirect_socket_parameters *sp = &sc->parameters;
- 	char name[MAX_NAME_LEN];
-@@ -1760,21 +1759,14 @@ static int allocate_caches_and_workqueue(struct smbdirect_socket *sc)
- 	if (!sc->recv_io.mem.pool)
- 		goto out3;
- 
--	scnprintf(name, MAX_NAME_LEN, "smbd_%p", sc);
--	sc->workqueue = create_workqueue(name);
--	if (!sc->workqueue)
--		goto out4;
+-	sc->ib.pd = ib_alloc_pd(sc->ib.dev, 0);
+-	if (IS_ERR(sc->ib.pd)) {
+-		rc = PTR_ERR(sc->ib.pd);
+-		log_rdma_event(ERR, "ib_alloc_pd() returned %d\n", rc);
+-		goto out2;
+-	}
 -
- 	rc = allocate_receive_buffers(sc, sp->recv_credit_max);
- 	if (rc) {
- 		log_rdma_event(ERR, "failed to allocate receive buffers\n");
--		goto out5;
-+		goto out4;
- 	}
- 
  	return 0;
  
--out5:
--	destroy_workqueue(sc->workqueue);
- out4:
- 	mempool_destroy(sc->recv_io.mem.pool);
- out3:
-@@ -1799,12 +1791,19 @@ static struct smbd_connection *_smbd_get_connection(
- 	struct sockaddr_in *addr_in = (struct sockaddr_in *) dstaddr;
- 	struct ib_port_immutable port_immutable;
- 	__be32 ird_ord_hdr[2];
-+	char wq_name[80];
-+	struct workqueue_struct *workqueue;
+ out2:
+@@ -1858,6 +1851,14 @@ static struct smbd_connection *_smbd_get_connection(
+ 		goto config_failed;
+ 	}
  
- 	info = kzalloc(sizeof(struct smbd_connection), GFP_KERNEL);
- 	if (!info)
- 		return NULL;
- 	sc = &info->socket;
-+	scnprintf(wq_name, ARRAY_SIZE(wq_name), "smbd_%p", sc);
-+	workqueue = create_workqueue(wq_name);
-+	if (!workqueue)
-+		goto create_wq_failed;
- 	smbdirect_socket_init(sc);
-+	sc->workqueue = workqueue;
- 	sp = &sc->parameters;
++	sc->ib.pd = ib_alloc_pd(sc->ib.dev, 0);
++	if (IS_ERR(sc->ib.pd)) {
++		rc = PTR_ERR(sc->ib.pd);
++		sc->ib.pd = NULL;
++		log_rdma_event(ERR, "ib_alloc_pd() returned %d\n", rc);
++		goto alloc_pd_failed;
++	}
++
+ 	sc->ib.send_cq =
+ 		ib_alloc_cq_any(sc->ib.dev, sc,
+ 				sp->send_credit_target, IB_POLL_SOFTIRQ);
+@@ -2002,8 +2003,10 @@ static struct smbd_connection *_smbd_get_connection(
+ 	if (sc->ib.recv_cq)
+ 		ib_free_cq(sc->ib.recv_cq);
  
- 	INIT_WORK(&sc->disconnect_work, smbd_disconnect_rdma_work);
-@@ -1946,7 +1945,7 @@ static struct smbd_connection *_smbd_get_connection(
- 
- 	log_rdma_event(INFO, "rdma_connect connected\n");
- 
--	rc = allocate_caches_and_workqueue(sc);
-+	rc = allocate_caches(sc);
- 	if (rc) {
- 		log_rdma_event(ERR, "cache allocation failed\n");
- 		goto allocate_cache_failed;
-@@ -1986,7 +1985,7 @@ static struct smbd_connection *_smbd_get_connection(
- 
- negotiation_failed:
- 	disable_delayed_work_sync(&sc->idle.timer_work);
--	destroy_caches_and_workqueue(sc);
-+	destroy_caches(sc);
- 	sc->status = SMBDIRECT_SOCKET_NEGOTIATE_FAILED;
- 	rdma_disconnect(sc->rdma.cm_id);
- 	wait_event(sc->status_wait,
-@@ -2008,6 +2007,8 @@ static struct smbd_connection *_smbd_get_connection(
+-config_failed:
+ 	ib_dealloc_pd(sc->ib.pd);
++
++alloc_pd_failed:
++config_failed:
  	rdma_destroy_id(sc->rdma.cm_id);
  
  create_id_failed:
-+	destroy_workqueue(sc->workqueue);
-+create_wq_failed:
- 	kfree(info);
- 	return NULL;
- }
 -- 
 2.43.0
 
