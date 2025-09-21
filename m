@@ -2,45 +2,46 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id AB042B8E6FF
+	by mail.lfdr.de (Postfix) with ESMTPS id AFEFFB8E700
 	for <lists+samba-technical@lfdr.de>; Sun, 21 Sep 2025 23:46:15 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=rz1x2p+kZcks6PcfkDJEI4VuC2ZiaeIdhVgUw0SbpIs=; b=WG7jXmQgJau2w4e4cCQwDcc785
-	b9iTQj21xoy85ytaBR3hu3g86WQVOilTjYAr/X5w6uru0sqw0bFs28WcO+DV45KFLDY4lcgwMY82l
-	4iCZ6hlxHMuyn6oHUYEAIdnOZPbpyiNvpWCzVYkV1Yzdw4Tl3sjJ8DG/UyZj8E8ZICv9uEm8KIFtI
-	Q5rt8+sx8etw8ju7SOGR6CquM+oXoRJG4fL1QcqYUlCEeBSBswROaCU9/ORKnBYDxJ2mPq6FM/viP
-	b+r7mR/M0TJN3t28YO9q0mYD3snJ7v46queJUyJE5OuNuJxeGJ3txsnyxK6WpWJEQIhkvvubz2h+k
-	78M+NiNA==;
-Received: from ip6-localhost ([::1]:51086 helo=hr1.samba.org) 
+	bh=8s1yRJzHYcj0JSI7+0RPoZkcz2/6cNfm7A6Be5Nm0Q8=; b=2F0cDlDcoNpFL0zVJ5NYVZl4Gl
+	Wes4gTxFKUYwMq8huSbCzcj8p8lqoW3rmlVzxEAE1lzS5s3iXaj9ix5Ydtj/TK97S19Ed9phetrfq
+	/Qzp+urkSMmaLLyHMMw3Gw8uemuZcvTMuZmb/nLxQz0KvGZlWUH8eBhf4WxKFmVkm4NNm6/MXF35H
+	GRcK981v7+48HX15XltXJV1j2NAp97Lvg1RgYFiYk2m2wD1UXLfcXpOVTj1suiPcF/+9WmwgiknWK
+	G9ki/d9Hp1oRZ1SnJRdidpMu3QuOSzu6ZmqgOEggZ5CP+tVily88Bslzx2zvBV8DsM6Jjt/v91w0h
+	VKkKhLXg==;
+Received: from ip6-localhost ([::1]:56464 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1v0Rs8-004SwS-K9; Sun, 21 Sep 2025 21:45:28 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:20616) 
+	id 1v0RsG-004Sx0-HX; Sun, 21 Sep 2025 21:45:36 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:20628) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1v0Rs4-004SwL-MY
- for samba-technical@lists.samba.org; Sun, 21 Sep 2025 21:45:27 +0000
+ (Exim) id 1v0RsC-004Swb-Nn
+ for samba-technical@lists.samba.org; Sun, 21 Sep 2025 21:45:34 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Message-ID:Date:Cc:To:From;
- bh=rz1x2p+kZcks6PcfkDJEI4VuC2ZiaeIdhVgUw0SbpIs=; b=ebYcaTkHtIGJxit7ELdsPFMTMD
- E/EfFXmfZBNAIDwkcCIuawdqz+l6KtWhw4cYT+b7D6QWH+wCGY5rY3vcwpUlOpRWWlzhsZHz4WstE
- RM6SJrzGeCFUniyEK/hEQobmwxM2GUmFlmcuXLx11Vu6cnKTIqkptp5Py6HMgyFLzQYFs+lDE8C+X
- boGjmtIQTC9hCuquBOS26ijA0tiN9o4D/lp5Xn5RACRx5aNoJhUCkrLVJRTZGkGyCaFM6Jc4WuJgZ
- jxf6Eyarv4ZQqYKlXjXUtKcO5Z3NNdnpDhyKUsl2CJ4RKFkh1I/j34js9M77LZN/6faFxSbyTI2gv
- swomwpIcBlSuJPjYgHhX7y2MHWQSblBkFAAf5F+VO9/cneCsAFPeU7PmBbbbjTbkBrBG4ZEMU+CiO
- 0cP5tGNUtnBZPhNcnLltpuQoVZzyoKR8tjhDFHDESuN60F1RjZShfUDBtNlzTyF/OVAoVtEwkx99/
- Z/o9oJEgvtKgzsOI5zeb0S1c;
+ bh=8s1yRJzHYcj0JSI7+0RPoZkcz2/6cNfm7A6Be5Nm0Q8=; b=jqPIxR8Cx1FIITApZGHVqHQjCU
+ yaPP7zJPYGxBCWrjLl/fdckj3guzf4W6u7WO7spwyGxPsVLmjkEsJeSS0Eat4PsVef4sMxkUlnKGl
+ 6D49z6+RbLNUOZgBA0EsIXL9w46HpCQmYTXk+jW+0bYR2hUE5wDWbG2RNJp3ASQKa803w01Lc4Uol
+ B9BTwXeRN58HijMN9h1xYV68qsV+g/jD4FRsnLsrl6bMNRQMpV3hnpwsshlOcyzXNGuDYOcDKySdV
+ 6XxNu6JRwoDiqxB//YFraF9NsDDcZPOleTJCQxAyzHwX1XpL/hYPQDPmnJHkW5s5OGvdKUPoI7qhZ
+ 5lfEFfUyPaPhRcxFeXvjD+gpF6k8t/+sgaQPNncUT6yax6fuPp4PKcm8mNRG0WE+3GfH+HuTLT5aM
+ brbRG/S3RJZdYNWg5sOa67Hml376RRjoyhtgjo1brlk60Epn3vsPLWtPpOfqY0PDfys4P47cZsA8q
+ uu4ymq/WxTAAxNQK+IrTI9+O;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1v0Rs3-005GM3-0U; Sun, 21 Sep 2025 21:45:23 +0000
+ (Exim) id 1v0RsB-005GMF-1m; Sun, 21 Sep 2025 21:45:31 +0000
 To: linux-cifs@vger.kernel.org,
 	samba-technical@lists.samba.org
-Subject: [PATCH 00/18] smbdirect/client/server: improved error handling and
- other small improvements
-Date: Sun, 21 Sep 2025 23:44:47 +0200
-Message-ID: <cover.1758489988.git.metze@samba.org>
+Subject: [PATCH 01/18] smb: smbdirect/client: introduce SMBDIRECT_SOCKET_ERROR
+Date: Sun, 21 Sep 2025 23:44:48 +0200
+Message-ID: <09b17a8a4e32d4360b4e554b032179aa96cf70f4.1758489988.git.metze@samba.org>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <cover.1758489988.git.metze@samba.org>
+References: <cover.1758489988.git.metze@samba.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: samba-technical@lists.samba.org
@@ -58,78 +59,66 @@ List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
 From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
 Reply-To: Stefan Metzmacher <metze@samba.org>
-Cc: metze@samba.org, Steve French <smfrench@gmail.com>,
- Tom Talpey <tom@talpey.com>, Namjae Jeon <linkinjeon@kernel.org>
+Cc: Tom Talpey <tom@talpey.com>, metze@samba.org,
+ Steve French <smfrench@gmail.com>, Namjae Jeon <linkinjeon@kernel.org>,
+ Steve French <stfrench@microsoft.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi,
+This will be used to turn SMBDIRECT_SOCKET_CONNECTED into an
+error within smbd_disconnect_rdma_connection() on the client
+and smb_direct_disconnect_rdma_connection() on the server.
 
-here are some patches basically on top of the other
-smbdirect patches, which let us use common structures, see:
-https://lore.kernel.org/linux-cifs/cover.1756139607.git.metze@samba.org/
+We do this in a single commit with the client as otherwise it
+won't build because the enum value is not handled in the
+switch statement.
 
-They improve the error handling in all kind of situations,
-we now consistently reset SMBDIRECT_SOCKET_CONNECTED on
-the first error and wake up all waiters to notice
-the state change.
+Cc: Steve French <smfrench@gmail.com>
+Cc: Tom Talpey <tom@talpey.com>
+Cc: Long Li <longli@microsoft.com>
+Cc: Namjae Jeon <linkinjeon@kernel.org>
+Cc: linux-cifs@vger.kernel.org
+Cc: samba-technical@lists.samba.org
+Signed-off-by: Stefan Metzmacher <metze@samba.org>
+Signed-off-by: Steve French <stfrench@microsoft.com>
+---
+ fs/smb/client/smbdirect.c                  | 1 +
+ fs/smb/common/smbdirect/smbdirect_socket.h | 3 +++
+ 2 files changed, 4 insertions(+)
 
-We also disable all work consistently on error.
-
-We consistently use spin_lock_irq{save,restore}() now.
-
-There are also some improvements in order to make
-further refactoring easier:
- - E.g. move ib_alloc_pd() and ib_dma_map_single() on the client.
- - On the server use ib_alloc_cq_any()
- - let smb_direct_flush_send_list() invalidate a remote key in
-   the first message
-
-Some of these are already in Steve's for-next-next branch.
-I'll soon provide a branch that can replace for-next-next,
-as some of these patches should be moved before some existing
-patches, while dropping some of the patches from for-next-next.
-So that we only have patches for 6.18 included, the rest will
-be deferred to 6.19.
-
-Stefan Metzmacher (18):
-  smb: smbdirect/client: introduce SMBDIRECT_SOCKET_ERROR
-  smb: smbdirect: let smbdirect_socket_init() initialize all
-    [delayed_]work_structs as disabled
-  smb: smbdirect: introduce smbdirect_socket.first_error
-  smb: client: let smbd_disconnect_rdma_connection() set
-    SMBDIRECT_SOCKET_ERROR...
-  smb: client: fill in smbdirect_socket.first_error on error
-  smb: client: let smbd_disconnect_rdma_connection() disable all work
-    but disconnect_work
-  smb: client: let smbd_{destroy,disconnect_rdma_{work,connection}}()
-    wake up all wait queues
-  smb: client: make consitent use of spin_lock_irq{save,restore}() in
-    smbdirect.c
-  smb: client: allocate smbdirect workqueue at the beginning of
-    _smbd_get_connection()
-  smb: client: defer calling ib_alloc_pd() after we are connected
-  smb: client: let smbd_post_send_iter() call ib_dma_map_single() for
-    the header first
-  smb: server: let smb_direct_disconnect_rdma_connection() set
-    SMBDIRECT_SOCKET_ERROR...
-  smb: server: fill in smbdirect_socket.first_error on error
-  smb: server: let smb_direct_disconnect_rdma_connection() disable all
-    work but disconnect_work
-  smb: server: let
-    {free_transport,smb_direct_disconnect_rdma_{work,connection}}() wake
-    up all wait queues
-  smb: server: make consitent use of spin_lock_irq{save,restore}() in
-    transport_rdma.c
-  smb: server: make use of ib_alloc_cq_any() instead of ib_alloc_cq()
-  smb: server: let smb_direct_flush_send_list() invalidate a remote key
-    first
-
- fs/smb/client/smbdirect.c                  | 224 +++++++++++++++------
- fs/smb/common/smbdirect/smbdirect_socket.h |  24 +++
- fs/smb/server/transport_rdma.c             | 157 ++++++++++++---
- 3 files changed, 309 insertions(+), 96 deletions(-)
-
+diff --git a/fs/smb/client/smbdirect.c b/fs/smb/client/smbdirect.c
+index e0a01b3b396a..7e0d2ecaa37e 100644
+--- a/fs/smb/client/smbdirect.c
++++ b/fs/smb/client/smbdirect.c
+@@ -186,6 +186,7 @@ static void smbd_disconnect_rdma_work(struct work_struct *work)
+ 	case SMBDIRECT_SOCKET_NEGOTIATE_RUNNING:
+ 	case SMBDIRECT_SOCKET_NEGOTIATE_FAILED:
+ 	case SMBDIRECT_SOCKET_CONNECTED:
++	case SMBDIRECT_SOCKET_ERROR:
+ 		sc->status = SMBDIRECT_SOCKET_DISCONNECTING;
+ 		rdma_disconnect(sc->rdma.cm_id);
+ 		break;
+diff --git a/fs/smb/common/smbdirect/smbdirect_socket.h b/fs/smb/common/smbdirect/smbdirect_socket.h
+index 91eb02fb1600..b4970d7e42ad 100644
+--- a/fs/smb/common/smbdirect/smbdirect_socket.h
++++ b/fs/smb/common/smbdirect/smbdirect_socket.h
+@@ -23,6 +23,7 @@ enum smbdirect_socket_status {
+ 	SMBDIRECT_SOCKET_NEGOTIATE_RUNNING,
+ 	SMBDIRECT_SOCKET_NEGOTIATE_FAILED,
+ 	SMBDIRECT_SOCKET_CONNECTED,
++	SMBDIRECT_SOCKET_ERROR,
+ 	SMBDIRECT_SOCKET_DISCONNECTING,
+ 	SMBDIRECT_SOCKET_DISCONNECTED,
+ 	SMBDIRECT_SOCKET_DESTROYED
+@@ -60,6 +61,8 @@ const char *smbdirect_socket_status_string(enum smbdirect_socket_status status)
+ 		return "NEGOTIATE_FAILED";
+ 	case SMBDIRECT_SOCKET_CONNECTED:
+ 		return "CONNECTED";
++	case SMBDIRECT_SOCKET_ERROR:
++		return "ERROR";
+ 	case SMBDIRECT_SOCKET_DISCONNECTING:
+ 		return "DISCONNECTING";
+ 	case SMBDIRECT_SOCKET_DISCONNECTED:
 -- 
 2.43.0
 
