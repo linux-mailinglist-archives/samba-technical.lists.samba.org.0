@@ -2,44 +2,44 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id A157BB8E72E
-	for <lists+samba-technical@lfdr.de>; Sun, 21 Sep 2025 23:46:52 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2C6E2B8E73F
+	for <lists+samba-technical@lfdr.de>; Sun, 21 Sep 2025 23:47:03 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=mRaIcOrMnhZdNxDb84SGNbrVD7QuJfIGQvd9MyLo8Ic=; b=ziiOxvae2aM69UGu3u3EtdtKo7
-	EPvA6c1ue7k9OkLT82qFNelDlMe8sMOdHB28zP0S5ymxokoYX1BWIPwX3FY9vU2aNI0mi4mqW+v7T
-	LhqCKrXo8JJYg2U01y8+mHgx4wHMG9zrUqwjAEZ6XMjgheJT15s/S9xZA81JMHDtMa7IO+ZkGGsYh
-	KeDO4jOEydshFDfASWPOJHAH4x6xpdbLnqQ8ZuN3w1ajdfa60QMEwCmtrRWuVitAdQrwhBGCwqMPw
-	o2tdWKv5aMN7G+vB97VXH0A+xo1xcrUhK0TrDcpUtpduxvi3j1zgDZfn0pp3PD/5QqZ8M8YL94AzZ
-	VNqGINIA==;
-Received: from ip6-localhost ([::1]:25378 helo=hr1.samba.org) 
+	bh=IfEoqN+k/tgJdLVGN3c3Tn/VEWus/DrRES0UThRwqRE=; b=J01fnvNi9fWMgDR8yVsmXpI5pX
+	Nh/atC095KqI58ZMvpyFXZElr1GwmU2MMpkW3skD9bFMha/3JM9FLFHbsLnXpJx3I11GMUrtuJ/1T
+	MHvWjlq82P+3DJ/pqdmU3RBwS3ev2bF4gIEDSZTNOSl0L2U2PA0wXr6aqkUon1suJA9hTA7AtwMSc
+	KPftCIv4edld+aOYG8wwrPFlpbiRY1jyhnFc+97EYc2P8ZYAO8ADpB0GUl+g7a+PdDGPBiagLlsEP
+	qwAQeYKsGOv6AWqJ0hOQ77dCp6oLZPY9h730zlIbJh9BUwNjtGhMVts//sjLYmq4g5sdfmwEAXB5J
+	Kpq1IMHA==;
+Received: from ip6-localhost ([::1]:20056 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1v0RtM-004TEi-JS; Sun, 21 Sep 2025 21:46:45 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:12514) 
+	id 1v0RtV-004TLZ-CZ; Sun, 21 Sep 2025 21:46:53 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:12526) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1v0Rsi-004T6j-TI
- for samba-technical@lists.samba.org; Sun, 21 Sep 2025 21:46:20 +0000
+ (Exim) id 1v0Rst-004TAa-Dj
+ for samba-technical@lists.samba.org; Sun, 21 Sep 2025 21:46:37 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Message-ID:Date:Cc:To:From;
- bh=mRaIcOrMnhZdNxDb84SGNbrVD7QuJfIGQvd9MyLo8Ic=; b=PMvu8V5FxVVWZ+wHbY5rvJBm4O
- mfVDrsulcMSwDhy98fuAJ6kr0/lSowXR9EDfXkHmoeBag9SzjON3CxFHKQKWHPVssOFALlAcVy0xf
- 8hvFyX0RmFThyYqx15F10TItbp5CmwpUG6nZQGXxtKPA+5wJC3QL/vp2TsClOPLM/k9cwzebCCJ5U
- Lc4+qL7EAPwJ8SNsuaT/nYfQH7GqMGoYbj9JJhTSX7VghTfmK+qCGhYfX/rgxR9I5MdzcypT+xd41
- dHZooImMRUrMyFm1gfVKfLLPFbssDf6Ch97Bt9BDYljEKntrgTqgFc1kXuNZwlkcIrks7fWXVysqk
- hzo+p9MgGVlPLAccRyDFyFOfO4qh4ojEgyptCQ2QSZ6AM1YqasBVfzj6GwvNijkb43aeY3lFEsYxo
- aGJNRxuVBxe3aCuBY23ZY14WRZSi1ZVYK6ukn1MSIYkECwIhpo/sH6XScowDCTf3o1d5D6LWnYTPN
- GIHekT1Bz/DZEWu5SdgLCWSW;
+ bh=IfEoqN+k/tgJdLVGN3c3Tn/VEWus/DrRES0UThRwqRE=; b=eUxAX2beBaIw8g+0fmA9o7FMjL
+ k0TB0aqxRvILLZ53Jp/sq5dLtsS4tz5hW3A6BI3//U9qiAObx6IxmQbc+2iCY/WEUV00e0L4pfgar
+ nYQXRZUMW9PMlVsJuAcIeWl33s4J3w3deyzczjxSVTPkCdZq9Q+xDf712NdC2Py0Zt0PSSgD9HG4D
+ UyHjYftBdzZJm5JlnGb1YVWWkCKxo4Dg2BgUnAg1GpJWZHH7KHorB0P0DzrPsYfZhZn6rFObSknjo
+ IqLXRlqR2/sPqOcSuj3Hd17CY5mhRrNtz0QDX6vFVCnQNvv52cxGmD+lV+GmN/raJ5yN9hh1HZ4xa
+ az0pO97P9CmA3jjHl5FO+A943j+UEeYJGOR0DW56PCs8hbenNItF2wxDGc/9pjBoa9PBJ9AXt0cpI
+ Wi9pSU7og8//YRMPR8d6eNg7OLQ50kzRVArB6iq9iLjsClVhwxvSqdf2OOcvCaj/owdfvlUODczNu
+ Czlmu5cm8mWLWDzOYhHKOOwB;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1v0Rsg-005GPu-1R; Sun, 21 Sep 2025 21:46:02 +0000
+ (Exim) id 1v0Rso-005GRS-0E; Sun, 21 Sep 2025 21:46:10 +0000
 To: linux-cifs@vger.kernel.org,
 	samba-technical@lists.samba.org
-Subject: [PATCH 05/18] smb: client: fill in smbdirect_socket.first_error on
- error
-Date: Sun, 21 Sep 2025 23:44:52 +0200
-Message-ID: <16af61b4118ddb1c674f1f77405ee9d0ba146959.1758489989.git.metze@samba.org>
+Subject: [PATCH 06/18] smb: client: let smbd_disconnect_rdma_connection()
+ disable all work but disconnect_work
+Date: Sun, 21 Sep 2025 23:44:53 +0200
+Message-ID: <00ade01b51673817ba5500444756d7882314c4ef.1758489989.git.metze@samba.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1758489988.git.metze@samba.org>
 References: <cover.1758489988.git.metze@samba.org>
@@ -66,8 +66,8 @@ Cc: Tom Talpey <tom@talpey.com>, metze@samba.org,
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-For now we just use -ECONNABORTED, but it will get more detailed
-later.
+There's no point run these if we already know the connection
+is broken.
 
 Cc: Steve French <smfrench@gmail.com>
 Cc: Tom Talpey <tom@talpey.com>
@@ -78,33 +78,30 @@ Cc: samba-technical@lists.samba.org
 Signed-off-by: Stefan Metzmacher <metze@samba.org>
 Signed-off-by: Steve French <stfrench@microsoft.com>
 ---
- fs/smb/client/smbdirect.c | 6 ++++++
- 1 file changed, 6 insertions(+)
+ fs/smb/client/smbdirect.c | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
 
 diff --git a/fs/smb/client/smbdirect.c b/fs/smb/client/smbdirect.c
-index 38934e330096..73beb681ac0b 100644
+index 73beb681ac0b..b39e60086c6a 100644
 --- a/fs/smb/client/smbdirect.c
 +++ b/fs/smb/client/smbdirect.c
-@@ -181,6 +181,9 @@ static void smbd_disconnect_rdma_work(struct work_struct *work)
- 	disable_work(&sc->idle.immediate_work);
- 	disable_delayed_work(&sc->idle.timer_work);
- 
-+	if (sc->first_error == 0)
-+		sc->first_error = -ECONNABORTED;
-+
- 	switch (sc->status) {
- 	case SMBDIRECT_SOCKET_NEGOTIATE_NEEDED:
- 	case SMBDIRECT_SOCKET_NEGOTIATE_RUNNING:
-@@ -217,6 +220,9 @@ static void smbd_disconnect_rdma_work(struct work_struct *work)
+@@ -220,6 +220,16 @@ static void smbd_disconnect_rdma_work(struct work_struct *work)
  
  static void smbd_disconnect_rdma_connection(struct smbdirect_socket *sc)
  {
-+	if (sc->first_error == 0)
-+		sc->first_error = -ECONNABORTED;
++	/*
++	 * make sure other work (than disconnect_work) is
++	 * not queued again but here we don't block and avoid
++	 * disable[_delayed]_work_sync()
++	 */
++	disable_work(&sc->recv_io.posted.refill_work);
++	disable_work(&sc->mr_io.recovery_work);
++	disable_work(&sc->idle.immediate_work);
++	disable_delayed_work(&sc->idle.timer_work);
 +
- 	switch (sc->status) {
- 	case SMBDIRECT_SOCKET_RESOLVE_ADDR_FAILED:
- 	case SMBDIRECT_SOCKET_RESOLVE_ROUTE_FAILED:
+ 	if (sc->first_error == 0)
+ 		sc->first_error = -ECONNABORTED;
+ 
 -- 
 2.43.0
 
