@@ -2,44 +2,44 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 74951B8E74B
-	for <lists+samba-technical@lfdr.de>; Sun, 21 Sep 2025 23:47:22 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id CD9D1B8E754
+	for <lists+samba-technical@lfdr.de>; Sun, 21 Sep 2025 23:47:32 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=cqNNOMho8SV1atOpkRN++KJYsALCgtilk2qHYxIbGu8=; b=QYGkiI16/LpDCJUAUjvRMUlEou
-	uEQvTN2it4DyYkWscYJjV+3NQtXDSAHQAP/8WI5N0MXrhZlJjHOXG1429RPOvGxQsVXfMHCZT/xMy
-	X4DZ8iJSx7Muac0T+3P/zupSmDSZ95wijigsGPCyyjPIBub1OXlr3JJI/JSlYCuhK8IUBJRHSIUmp
-	KPuY3wYohBAwbNKytsb1BsfpwJRr2oXbiZXS2X51NwdwtR4UCVrUAin5yKhbiNgNWLfB7GB5j7vhk
-	vKx9FeUinWvRiDb3WjfmLZOyRhtA3jRDR3KPbzyiRukJb0R3qxxBB4ZNE+/VS9DqtfczMMaYEMXBg
-	B//5l2Yw==;
-Received: from ip6-localhost ([::1]:56818 helo=hr1.samba.org) 
+	bh=BZw0zlfZiC+R/2KXHccTA/BR5XGESSFqlGhN7zcFztM=; b=5pRXU3yuCNA3PnuhlmlJ/Nik+J
+	t3bLAQLcmr/6HkmBofV7SrKJOVhVdposro7BbcXzE4uW7K5+R30UFF7TkGzPBKx1NvNzNj2HX/swL
+	Hb4xWekqk/B4b0ESGuURDhRArkRlrFSkogzgOqPsnz2psZrSSTN/5Q6meHTsz3n6E7fU5rf4uWwAB
+	H+sMwrGxc+dTtE1Fsnk9mMrjxwlHstXvtcBf+AksNn4TRXy7RKJS/8nvfckuFnDR1O2GIDghuyr29
+	bJq9yPWaYKjGnEIvYJr774CRLgzgnXNOai2tlyJRDnOHnNgeE45cNAO8pF9xmoz/vh1S1HZK3pa0Z
+	9Vb/94gg==;
+Received: from ip6-localhost ([::1]:27326 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1v0Rtp-004TPN-Lb; Sun, 21 Sep 2025 21:47:14 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:40598) 
+	id 1v0Ru0-004TVm-Ki; Sun, 21 Sep 2025 21:47:24 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:21492) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1v0Rt1-004TCy-02
- for samba-technical@lists.samba.org; Sun, 21 Sep 2025 21:46:46 +0000
+ (Exim) id 1v0RtA-004TGV-Fc
+ for samba-technical@lists.samba.org; Sun, 21 Sep 2025 21:46:48 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Message-ID:Date:Cc:To:From;
- bh=cqNNOMho8SV1atOpkRN++KJYsALCgtilk2qHYxIbGu8=; b=2YaBsuw18KBpuKCifnEvYBE/Ve
- yQ6247iRbBRupF6wyopIYBdzU/nFnGzpwT7zLPfIeeT7NLyu8Ta3Yr2AURWWYhdNx1bY0j6i2ax1f
- +v1OnXtBYnMpVfM0TjwxB3XEtIzJVpboITefnLRR+TGzOhjnxo+pwpNqGFAMWiP+GEp3p9LkWnGk7
- bnIfo6Qezo9BlHT7SynRemCG7D5suQpiDjOMZndGUV4mGu+QDADupyMmXkfkhHMF6tzzXJB5AwQ4k
- +oqlL0E50LCbz9g6GU6vZaa6hPzYKN/NMpvudN9aHi1nTUlFXBnfczwJ9nZ/V4prOiZlBCOjE6cBn
- wpUIl86An3WzuEqWzdg2Mt51wETYhAOHSKQtzEznyJPYeah0kzKmUdnAN5o1leYN92RLmk6PGGE5a
- +T5UHkH56ejAKogRpPrlLeZBDz029U6qxYmO44VYIG0UibcmIt5MrHTZe5exXMoSNt5rH6ySGKXIU
- 19jPFSF1AxHbq9QFaBg7wS2A;
+ bh=BZw0zlfZiC+R/2KXHccTA/BR5XGESSFqlGhN7zcFztM=; b=NYYsIUROwOURmV/H2PYBwz6V1i
+ +FV2WcgDd49RFQyyGhnk0eQ14zwrHlzriyZVR0eycd5B6DwfGA0becF/1hRHseWgu1x0Zqc92yN4x
+ V77FyXlHyyGaWvcXH+ZIMzL2YXxl99+oJ6gkbEuQFE2sfck6VMfFfRWSyggxCCNKtJn0Zkv+2/BDS
+ sWMCoqmUn6sawLEEwuXifZqpUAXQ8pZHY2EtMSqkk4kzvPsnzJs+Csz5TDyi+lf5z0LMq1m7AH471
+ yUvTZJG6C2furn3y66cvjykRG6M41A0GaWjk5VlzV+8DUjeZAI+1SbNSE8Zq/uDOCNCdz4kA3Aqmy
+ +jNPy4BPPZ5VsD4ojOylPe56lnw0eCukwbkolAvrypKSkjDp/lz2WJiBKDIpQ/DsqoPKBUluLy4bg
+ gvCvurZdL02DXvwAdVJqSJdG77rK3YhFARxtBrHCT9CMLYnjER06bQYzw/MlQf1IxvzOmbZWXm7cE
+ Cspn5yOh1053TaRW1JymgckI;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1v0Rsw-005GTz-1u; Sun, 21 Sep 2025 21:46:18 +0000
+ (Exim) id 1v0Rt4-005GVh-2c; Sun, 21 Sep 2025 21:46:27 +0000
 To: linux-cifs@vger.kernel.org,
 	samba-technical@lists.samba.org
-Subject: [PATCH 07/18] smb: client: let smbd_{destroy, disconnect_rdma_{work,
- connection}}() wake up all wait queues
-Date: Sun, 21 Sep 2025 23:44:54 +0200
-Message-ID: <55c4a9d9357cf4c67fdd6c8e4a465d4b06f05e26.1758489989.git.metze@samba.org>
+Subject: [PATCH 08/18] smb: client: make consitent use of spin_lock_irq{save,
+ restore}() in smbdirect.c
+Date: Sun, 21 Sep 2025 23:44:55 +0200
+Message-ID: <d9a5ff5a66b4e27ed2ef903965bebe313c362fe9.1758489989.git.metze@samba.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1758489988.git.metze@samba.org>
 References: <cover.1758489988.git.metze@samba.org>
@@ -66,10 +66,21 @@ Cc: Tom Talpey <tom@talpey.com>, metze@samba.org,
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is important in order to let all waiters notice a broken connection.
+There is a mix of using spin_lock(), spin_lock_irq() and
+spin_lock_irqsave() and it seems at least enqueue_reassembly() was wrong
+in using just spin_lock() as it's called via recv_done() from a SOFTIRQ
+as we're using IB_POLL_SOFTIRQ.
 
-We also go via smbd_disconnect_rdma_{work,connection}() for broken
-connections.
+And Documentation/kernel-hacking/locking.rst section
+"Cheat Sheet For Locking" says:
+
+-  Otherwise (== data can be touched in an interrupt), use
+   spin_lock_irqsave() and
+   spin_unlock_irqrestore().
+
+So in order to keep it simple and safe we use that version
+now. It will help merging functions into common code and
+have consistent locking in all cases.
 
 Cc: Steve French <smfrench@gmail.com>
 Cc: Tom Talpey <tom@talpey.com>
@@ -80,138 +91,100 @@ Cc: samba-technical@lists.samba.org
 Signed-off-by: Stefan Metzmacher <metze@samba.org>
 Signed-off-by: Steve French <stfrench@microsoft.com>
 ---
- fs/smb/client/smbdirect.c | 52 ++++++++++++++++++++++++++++++---------
- 1 file changed, 40 insertions(+), 12 deletions(-)
+ fs/smb/client/smbdirect.c | 26 +++++++++++++++-----------
+ 1 file changed, 15 insertions(+), 11 deletions(-)
 
 diff --git a/fs/smb/client/smbdirect.c b/fs/smb/client/smbdirect.c
-index b39e60086c6a..00be4afaee52 100644
+index 00be4afaee52..5bc316248058 100644
 --- a/fs/smb/client/smbdirect.c
 +++ b/fs/smb/client/smbdirect.c
-@@ -165,6 +165,21 @@ do {									\
- #define log_rdma_mr(level, fmt, args...) \
- 		log_rdma(level, LOG_RDMA_MR, fmt, ##args)
- 
-+static void smbd_disconnect_wake_up_all(struct smbdirect_socket *sc)
-+{
-+	/*
-+	 * Wake up all waiters in all wait queues
-+	 * in order to notice the broken connection.
-+	 */
-+	wake_up_all(&sc->status_wait);
-+	wake_up_all(&sc->send_io.credits.wait_queue);
-+	wake_up_all(&sc->send_io.pending.dec_wait_queue);
-+	wake_up_all(&sc->send_io.pending.zero_wait_queue);
-+	wake_up_all(&sc->recv_io.reassembly.wait_queue);
-+	wake_up_all(&sc->mr_io.ready.wait_queue);
-+	wake_up_all(&sc->mr_io.cleanup.wait_queue);
-+}
-+
- static void smbd_disconnect_rdma_work(struct work_struct *work)
+@@ -1397,7 +1397,9 @@ static void enqueue_reassembly(
+ 	struct smbdirect_recv_io *response,
+ 	int data_length)
  {
- 	struct smbdirect_socket *sc =
-@@ -216,6 +231,12 @@ static void smbd_disconnect_rdma_work(struct work_struct *work)
- 	case SMBDIRECT_SOCKET_DESTROYED:
- 		break;
- 	}
+-	spin_lock(&sc->recv_io.reassembly.lock);
++	unsigned long flags;
 +
-+	/*
-+	 * Wake up all waiters in all wait queues
-+	 * in order to notice the broken connection.
-+	 */
-+	smbd_disconnect_wake_up_all(sc);
++	spin_lock_irqsave(&sc->recv_io.reassembly.lock, flags);
+ 	list_add_tail(&response->list, &sc->recv_io.reassembly.list);
+ 	sc->recv_io.reassembly.queue_length++;
+ 	/*
+@@ -1408,7 +1410,7 @@ static void enqueue_reassembly(
+ 	 */
+ 	virt_wmb();
+ 	sc->recv_io.reassembly.data_length += data_length;
+-	spin_unlock(&sc->recv_io.reassembly.lock);
++	spin_unlock_irqrestore(&sc->recv_io.reassembly.lock, flags);
+ 	sc->statistics.enqueue_reassembly_queue++;
  }
  
- static void smbd_disconnect_rdma_connection(struct smbdirect_socket *sc)
-@@ -273,6 +294,12 @@ static void smbd_disconnect_rdma_connection(struct smbdirect_socket *sc)
- 		break;
- 	}
+@@ -2076,6 +2078,7 @@ int smbd_recv(struct smbd_connection *info, struct msghdr *msg)
+ 	if (sc->recv_io.reassembly.data_length >= size) {
+ 		int queue_length;
+ 		int queue_removed = 0;
++		unsigned long flags;
  
-+	/*
-+	 * Wake up all waiters in all wait queues
-+	 * in order to notice the broken connection.
-+	 */
-+	smbd_disconnect_wake_up_all(sc);
-+
- 	queue_work(sc->workqueue, &sc->disconnect_work);
- }
- 
-@@ -306,14 +333,14 @@ static int smbd_conn_upcall(
- 		log_rdma_event(ERR, "connecting failed event=%s\n", event_name);
- 		WARN_ON_ONCE(sc->status != SMBDIRECT_SOCKET_RESOLVE_ADDR_RUNNING);
- 		sc->status = SMBDIRECT_SOCKET_RESOLVE_ADDR_FAILED;
--		wake_up_all(&sc->status_wait);
-+		smbd_disconnect_rdma_work(&sc->disconnect_work);
- 		break;
- 
- 	case RDMA_CM_EVENT_ROUTE_ERROR:
- 		log_rdma_event(ERR, "connecting failed event=%s\n", event_name);
- 		WARN_ON_ONCE(sc->status != SMBDIRECT_SOCKET_RESOLVE_ROUTE_RUNNING);
- 		sc->status = SMBDIRECT_SOCKET_RESOLVE_ROUTE_FAILED;
--		wake_up_all(&sc->status_wait);
-+		smbd_disconnect_rdma_work(&sc->disconnect_work);
- 		break;
- 
- 	case RDMA_CM_EVENT_ESTABLISHED:
-@@ -408,7 +435,7 @@ static int smbd_conn_upcall(
- 		log_rdma_event(ERR, "connecting failed event=%s\n", event_name);
- 		WARN_ON_ONCE(sc->status != SMBDIRECT_SOCKET_RDMA_CONNECT_RUNNING);
- 		sc->status = SMBDIRECT_SOCKET_RDMA_CONNECT_FAILED;
--		wake_up_all(&sc->status_wait);
-+		smbd_disconnect_rdma_work(&sc->disconnect_work);
- 		break;
- 
- 	case RDMA_CM_EVENT_DEVICE_REMOVAL:
-@@ -416,17 +443,10 @@ static int smbd_conn_upcall(
- 		/* This happens when we fail the negotiation */
- 		if (sc->status == SMBDIRECT_SOCKET_NEGOTIATE_FAILED) {
- 			log_rdma_event(ERR, "event=%s during negotiation\n", event_name);
--			sc->status = SMBDIRECT_SOCKET_DISCONNECTED;
--			smbd_disconnect_rdma_work(&sc->disconnect_work);
--			wake_up_all(&sc->status_wait);
--			break;
+ 		/*
+ 		 * Need to make sure reassembly_data_length is read before
+@@ -2135,11 +2138,11 @@ int smbd_recv(struct smbd_connection *info, struct msghdr *msg)
+ 				if (queue_length)
+ 					list_del(&response->list);
+ 				else {
+-					spin_lock_irq(
+-						&sc->recv_io.reassembly.lock);
++					spin_lock_irqsave(
++						&sc->recv_io.reassembly.lock, flags);
+ 					list_del(&response->list);
+-					spin_unlock_irq(
+-						&sc->recv_io.reassembly.lock);
++					spin_unlock_irqrestore(
++						&sc->recv_io.reassembly.lock, flags);
+ 				}
+ 				queue_removed++;
+ 				sc->statistics.dequeue_reassembly_queue++;
+@@ -2157,10 +2160,10 @@ int smbd_recv(struct smbd_connection *info, struct msghdr *msg)
+ 				 to_read, data_read, offset);
  		}
  
- 		sc->status = SMBDIRECT_SOCKET_DISCONNECTED;
- 		smbd_disconnect_rdma_work(&sc->disconnect_work);
--		wake_up_all(&sc->status_wait);
--		wake_up_all(&sc->recv_io.reassembly.wait_queue);
--		wake_up_all(&sc->send_io.credits.wait_queue);
- 		break;
+-		spin_lock_irq(&sc->recv_io.reassembly.lock);
++		spin_lock_irqsave(&sc->recv_io.reassembly.lock, flags);
+ 		sc->recv_io.reassembly.data_length -= data_read;
+ 		sc->recv_io.reassembly.queue_length -= queue_removed;
+-		spin_unlock_irq(&sc->recv_io.reassembly.lock);
++		spin_unlock_irqrestore(&sc->recv_io.reassembly.lock, flags);
  
- 	default:
-@@ -674,7 +694,7 @@ static void recv_done(struct ib_cq *cq, struct ib_wc *wc)
- 		WARN_ON_ONCE(sc->status != SMBDIRECT_SOCKET_NEGOTIATE_RUNNING);
- 		if (!negotiate_done) {
- 			sc->status = SMBDIRECT_SOCKET_NEGOTIATE_FAILED;
--			wake_up_all(&sc->status_wait);
-+			smbd_disconnect_rdma_connection(sc);
- 		} else {
- 			sc->status = SMBDIRECT_SOCKET_CONNECTED;
- 			wake_up(&sc->status_wait);
-@@ -1569,6 +1589,15 @@ void smbd_destroy(struct TCP_Server_Info *server)
- 			sc->status == SMBDIRECT_SOCKET_DISCONNECTED);
+ 		sc->recv_io.reassembly.first_entry_offset = offset;
+ 		log_read(INFO, "returning to thread data_read=%d reassembly_data_length=%d first_entry_offset=%d\n",
+@@ -2432,6 +2435,7 @@ static int allocate_mr_list(struct smbdirect_socket *sc)
+ static struct smbdirect_mr_io *get_mr(struct smbdirect_socket *sc)
+ {
+ 	struct smbdirect_mr_io *ret;
++	unsigned long flags;
+ 	int rc;
+ again:
+ 	rc = wait_event_interruptible(sc->mr_io.ready.wait_queue,
+@@ -2447,18 +2451,18 @@ static struct smbdirect_mr_io *get_mr(struct smbdirect_socket *sc)
+ 		return NULL;
  	}
  
-+	/*
-+	 * Wake up all waiters in all wait queues
-+	 * in order to notice the broken connection.
-+	 *
-+	 * Most likely this was already called via
-+	 * smbd_disconnect_rdma_work(), but call it again...
-+	 */
-+	smbd_disconnect_wake_up_all(sc);
-+
- 	log_rdma_event(INFO, "cancelling recv_io.posted.refill_work\n");
- 	disable_work_sync(&sc->recv_io.posted.refill_work);
+-	spin_lock(&sc->mr_io.all.lock);
++	spin_lock_irqsave(&sc->mr_io.all.lock, flags);
+ 	list_for_each_entry(ret, &sc->mr_io.all.list, list) {
+ 		if (ret->state == SMBDIRECT_MR_READY) {
+ 			ret->state = SMBDIRECT_MR_REGISTERED;
+-			spin_unlock(&sc->mr_io.all.lock);
++			spin_unlock_irqrestore(&sc->mr_io.all.lock, flags);
+ 			atomic_dec(&sc->mr_io.ready.count);
+ 			atomic_inc(&sc->mr_io.used.count);
+ 			return ret;
+ 		}
+ 	}
  
-@@ -1609,7 +1638,6 @@ void smbd_destroy(struct TCP_Server_Info *server)
- 	 * path when sending data, and then release memory registrations.
- 	 */
- 	log_rdma_event(INFO, "freeing mr list\n");
--	wake_up_all(&sc->mr_io.ready.wait_queue);
- 	while (atomic_read(&sc->mr_io.used.count)) {
- 		cifs_server_unlock(server);
- 		msleep(1000);
+-	spin_unlock(&sc->mr_io.all.lock);
++	spin_unlock_irqrestore(&sc->mr_io.all.lock, flags);
+ 	/*
+ 	 * It is possible that we could fail to get MR because other processes may
+ 	 * try to acquire a MR at the same time. If this is the case, retry it.
 -- 
 2.43.0
 
