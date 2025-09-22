@@ -2,81 +2,49 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2A0A7B914C6
-	for <lists+samba-technical@lfdr.de>; Mon, 22 Sep 2025 15:09:01 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 17752B91BED
+	for <lists+samba-technical@lfdr.de>; Mon, 22 Sep 2025 16:34:35 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=/3JEh6YXMBsRukh5SpZ48nFA6vSS7cRxhs+mBDe2TYc=; b=iz3x4wrAAOKgIoxo96V0E3M+o/
-	QbZKQmoBcEp0dhjp6mg75FWpfBKS68d23+0tqr8WEJe8HSawwZuYsGAc/ne9b2OfkuPnWlSXUaXYy
-	1kOtpTWvP83ewSoglLZWLbqBedDyVz9ROWbyEkrAq8oZGkXtA6HJ3tLHaftLF0d+cxQx7s//Oo4a+
-	b/duC36xZ7HSRxIdAoVnK6hrQy6yBt6+F2r3paakqk6fkJR++7A9qB3122SdlNuVG55FKH5fZWvsc
-	SDb+7oX6VSNABcBUJubziOdx/JKmxfGeEtJe5bJxZbYJgY56nhqQOd2z0G/ZEnxoahkepMBQE3GDP
-	2ys3XUuw==;
-Received: from ip6-localhost ([::1]:46290 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=oXK1MJCQ4lMNwfpSbAHI98C6i/h6o7PhoBquE2wHadQ=; b=zU9CLsUE18auFfaXq4R7N3AEFg
+	+Gqz2MYjSpLJpjAfouNNebFFCJ3l9KG3hw+eMQhL/nZ2VK8oFn3r92nXb4Q1Hm2c/nBCVRSrtKlU9
+	676ryUQwZ8kEpEITvQcu6+7k21VBy3gnakRjtyScwlagNLz4Eu9QHCXMMfezXoh6IIn0CIWOpuCsD
+	ewmWC8ON+ke3Oqux0znafbiVBvN+Wi3Zx8d+Z+D4+t6+YzP1DKzvzuhTBhbmenSUs+FjQKP6pAnMU
+	rlpHOtt83E5Hic3QTFluvDIJAxGD6/ZnUd3QBOZQZO1XWws16XItDidoW9bYZz9/Hi28eksLl/C0N
+	OFdp/g/A==;
+Received: from ip6-localhost ([::1]:28392 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1v0gHR-004Xoo-CQ; Mon, 22 Sep 2025 13:08:33 +0000
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124]:25495) 
+	id 1v0hcE-004Y4y-11; Mon, 22 Sep 2025 14:34:06 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:38258) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1v0gHL-004Xoh-AS
- for samba-technical@lists.samba.org; Mon, 22 Sep 2025 13:08:30 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1758546503;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=/3JEh6YXMBsRukh5SpZ48nFA6vSS7cRxhs+mBDe2TYc=;
- b=Neu+HJO27x+FrfQjBbSmBKCU5A5tBpepMsqgVcViuAmmiw/NxPbSOTtsHudHSGLRb+ywrW
- FoYckNKGKQVge5bJrlR2yuU6n40oQXKfuwAPr32YzyQKwK7AIgQTrhe6fUb3ah8KJ7K1fn
- pTJhI4ZhfiWDQLn3x3u0Zbf9H7wg2WY=
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1758546503;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=/3JEh6YXMBsRukh5SpZ48nFA6vSS7cRxhs+mBDe2TYc=;
- b=Neu+HJO27x+FrfQjBbSmBKCU5A5tBpepMsqgVcViuAmmiw/NxPbSOTtsHudHSGLRb+ywrW
- FoYckNKGKQVge5bJrlR2yuU6n40oQXKfuwAPr32YzyQKwK7AIgQTrhe6fUb3ah8KJ7K1fn
- pTJhI4ZhfiWDQLn3x3u0Zbf9H7wg2WY=
-Received: from mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-645-9b29mZvSN4e2G7Vzv44vhQ-1; Mon,
- 22 Sep 2025 09:08:22 -0400
-X-MC-Unique: 9b29mZvSN4e2G7Vzv44vhQ-1
-X-Mimecast-MFC-AGG-ID: 9b29mZvSN4e2G7Vzv44vhQ_1758546501
-Received: from mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.17])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id CDDF01955E70; Mon, 22 Sep 2025 13:08:20 +0000 (UTC)
-Received: from warthog.procyon.org.uk (unknown [10.42.28.155])
- by mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id 41E831956056; Mon, 22 Sep 2025 13:08:19 +0000 (UTC)
-Organization: Red Hat UK Ltd. Registered Address: Red Hat UK Ltd, Amberley
- Place, 107-111 Peascod Street, Windsor, Berkshire, SI4 1TE, United
- Kingdom.
- Registered in England and Wales under Company Registration No. 3798903
-In-Reply-To: <CAN05THR3YQZ5sd7DOBo11kK=NaxFqr+X_fKjGt-8OXEkM4ShWw@mail.gmail.com>
-References: <CAN05THR3YQZ5sd7DOBo11kK=NaxFqr+X_fKjGt-8OXEkM4ShWw@mail.gmail.com>
- <80395.1758522267@warthog.procyon.org.uk>
- <aNCOOS9GArQyf6Kb@jeremy-HP-Z840-Workstation>
- <12788.1758471560@warthog.procyon.org.uk>
- <98570.1758528576@warthog.procyon.org.uk>
- <101171.1758528778@warthog.procyon.org.uk>
-To: ronnie sahlberg <ronniesahlberg@gmail.com>
+ (Exim) id 1v0hcA-004Y4r-Cw
+ for samba-technical@lists.samba.org; Mon, 22 Sep 2025 14:34:04 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Message-ID:Cc:To:From:Date;
+ bh=oXK1MJCQ4lMNwfpSbAHI98C6i/h6o7PhoBquE2wHadQ=; b=PnOPOspFbtcDsvf79i0E3TTBN6
+ KnhTbEHqFFLIrWNvfj7xU2sueRFP8ctXU6eNw9dKNyhrUm0NAOnnO7HWv6uS53pkJAGErCO+OY9mU
+ tRg133Pz48zpw93vwlj9MHox8zEOJBqW+qnA3UAMFteSs5riDg4J75/5vAq4xyHCQofH0GOMPdhTb
+ rg5M5oENa8LgEDEa/14DLYo7hCMa1okdl+bct2FL1OzhQbUVv8msJWkyIh0pOZkIUlDH8iA735icW
+ 48crPVB0axmDVJ5mHa64GHbdAqeWl85I1FJmkvdgxx6gyuLPuEyCp4DYdHhqrc4R7S0o0tc30BM+b
+ QShyBLIyNGquIlHjg+paiNdZ2cLxF1UHF1257ylmZjWGoZmsAWt032CqBGJyYAU+ZgAGmjANX35Zj
+ r7grbg6WChS5Yf2F8vcZPLNuMbqYRKtKj6J0avDGR46UoFKNtM0+dCOwyqZNtATkfjEEjj+HngLdO
+ 5a6Rhei+dABWXlxRfZ+V/BU1;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1v0hc8-005P8Y-3C; Mon, 22 Sep 2025 14:34:01 +0000
+Date: Mon, 22 Sep 2025 07:33:58 -0700
+To: David Howells <dhowells@redhat.com>
 Subject: Re: How to cause a multipart SMB1 Trans2 PDU to occur
+Message-ID: <aNFeVoo2r5yj2LQH@jeremy-HP-Z840-Workstation>
+References: <aNCOOS9GArQyf6Kb@jeremy-HP-Z840-Workstation>
+ <12788.1758471560@warthog.procyon.org.uk>
+ <80395.1758522267@warthog.procyon.org.uk>
 MIME-Version: 1.0
-Date: Mon, 22 Sep 2025 14:08:17 +0100
-Message-ID: <184886.1758546497@warthog.procyon.org.uk>
-X-Scanned-By: MIMEDefang 3.0 on 10.30.177.17
-X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: RnwiYnmjQpYjd8ov5imCeXh_0OqcfOKS7dKeOyM_o-0_1758546501
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset="us-ascii"
-Content-ID: <184885.1758546497.1@warthog.procyon.org.uk>
+Content-Type: text/plain; charset=us-ascii; format=flowed
+Content-Disposition: inline
+In-Reply-To: <80395.1758522267@warthog.procyon.org.uk>
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -90,33 +58,33 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: David Howells via samba-technical <samba-technical@lists.samba.org>
-Reply-To: David Howells <dhowells@redhat.com>
-Cc: dhowells@redhat.com, Steve French <sfrench@samba.org>,
- samba-technical@lists.samba.org, Jeremy Allison <jra@samba.org>
+From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jeremy Allison <jra@samba.org>
+Cc: Steve French <sfrench@samba.org>, samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-ronnie sahlberg <ronniesahlberg@gmail.com> wrote:
+On Mon, Sep 22, 2025 at 07:24:27AM +0100, David Howells via samba-technical wrote:
+>Jeremy Allison <jra@samba.org> wrote:
+>
+>> Samba client code smb1cli_trans_format() will do this.
+>>
+>> You can get to this via:
+>>
+>> cli_trans_send() called by many functions inside source3/libsmb/clifile.c.
+>>
+>> You might have to tweak the sent state->param or state->data sizes
+>> to cause it to generate the multipart SMB1trans2s call, but it's capable of
+>> doing so.
+>
+>That's the client side, though, isn't it?  I was hoping to get the server to
+>respond with a multipart Trans2 response.
 
-> Can you check that "Preferences/Protocols/SMB/Reassemble SMB
-> Transaction payload" is enabled?
+Well that's what I thought you were asking for. You weren't exactly
+clear.
 
-It is.
-
-> Packets 46,47,49 show up in the packet pane as "Trans2
-> response<unknown>"     I will fix this and remove the "<unknown>" tag.
-
-Actually, I think it is working.  The first packet shows a "Reassembled SMB
-(16234 bytes)" tab with the data in it.  It's just that the follow on packets
-say:
-
-	Subcommand: <UNKNOWN> since request packet wasn't seen
-
-> It should probably say "fragment" or something instead.
-
-Perhaps "fragment 4032-8065/16232"?
-
-David
-
+Server is easier, you can just hack the max allowed value internally so
+that the amount returned is bigger than the max allowed. That
+should cause it to split into one SMBtrans2 reply followed by
+multiple SMBtranss2..SMBtranss2 nreplies.
 
