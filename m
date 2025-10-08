@@ -2,145 +2,89 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id ECCB8BC2778
-	for <lists+samba-technical@lfdr.de>; Tue, 07 Oct 2025 21:04:18 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id EF82BBC622E
+	for <lists+samba-technical@lfdr.de>; Wed, 08 Oct 2025 19:20:19 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=Ye3JBMC3Wk3/Kb3rfJ1rK+uwzIEyf5FYs2NA6LOSUqc=; b=EZkhFic8jdtq5ULwjYncJqAZrx
-	/t6q23qiPTwQ00w5tzBMbvFDQemmjeflWO03LmYJpwLBHO7ckdU+2RTIVhMOh7uVWpeWurJIUXrIr
-	joI5zDiAQkbeO88t6RPyRl/7BHrmlY6BJ10zq1M/cko4QPYbCMO1AgN/8E50FcKTNFrxlRXVKqNmy
-	RSESULnsH6F/4sgdKCT13p7Z0TEWU1mTiQv2gRN7u4kIPYRUkr17enrtpI6JIwXknWXCbwPHbaG92
-	47TKN4Kv/CG6v8fG0nEZBWC3WF8QmE7RNKystYfarNUYexQc0ob6dbVbsKFz10OXFO/fOk5avTJPa
-	Wny1XnKQ==;
-Received: from ip6-localhost ([::1]:21872 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=7pyuxM1qJujrcTe93h+cZ4UxFH6Em2UfoKr73Xc2DaU=; b=d2s6HSNUONEJqmJjvwzxF/rNOm
+	lwxXSLMZR/BqZZY6zQl7UuvpOqRhmEalLMTyfvEPg5yBI57xeFMa63J5m/l1UpML2bf6i2yJc1O34
+	bhX66v9Pgb/IL7Bhnd6NFHV4+Ad78qDbdeSYgWZLkCuHZjoBBeWCWXq7J2Xxlh/lvbMxjngCIGhvJ
+	AM+zIMPaXrp0O/CRM3AySrgS5WvSt7BstoQpkTTOhuaW7MCsY/oVH8By0FuRay2F/a0+HUjjisCMj
+	GFawsx+xsOK0cKqBnMhfLWaNRpwCFI565MD8ikZkRAK7H+ZfI6xbfBVTq7BU0AytCpVX6IFP7fRbO
+	1DHbw02Q==;
+Received: from ip6-localhost ([::1]:38054 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1v6Cyh-007G5z-35; Tue, 07 Oct 2025 19:04:03 +0000
-Received: from mail-westusazon11022107.outbound.protection.outlook.com
- ([52.101.43.107]:48948 helo=SJ2PR03CU001.outbound.protection.outlook.com) 
+	id 1v6XpH-007JSg-Mp; Wed, 08 Oct 2025 17:19:43 +0000
+Received: from mail-wr1-x433.google.com ([2a00:1450:4864:20::433]:59551) 
  by hr1.samba.org with esmtps
- (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__AES_256_GCM:256) (Exim)
- id 1v6Cyc-007G5s-EK
- for samba-technical@lists.samba.org; Tue, 07 Oct 2025 19:04:01 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ledzN7qonPh6fFJE/16slcXpLkbl7ioQkxDMfXpp12HqsGhi3BUKP5lbDQ4Vmq0N7xxrQzLlzn2mrqraplMBW3zCp81/qhEKuRhWIy8xnZ5XtNFGJgfuSxLlqDJp5Th4fzBlY42o7iEOPJPayJqgZAZWNJFcnDy9SPM07W9D56S4diInSFhdE2VhY5ovMb2x4RlFHLtqmGCCXw+UDWXo9e+4do95ukDfkqh/ftVLdL0vZR3R5+oZGP7wTSMEqoFOmtVLnoueHZmLJESnVJSFd/aQjNEWf+FmyOJFBXlHknx17er+JhvIDeNYWwul0greoREosQpeWA5R1aYdApPyLg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Ye3JBMC3Wk3/Kb3rfJ1rK+uwzIEyf5FYs2NA6LOSUqc=;
- b=wBKezFxqVb3k9osKkceQDOYF8fgAxj4FRv0ucGgCOx/W1d2YXmuVCHWKMayg/YQB/i43PJ6XNWTBb9h5MGd8hB2yp7s/H4YXHqmgR2XeXTfQS9bCjHSVolLmV0SkjELVZspIMxcBE7QS4p4nvBIwlQnCRSd3067R0Ll4d9xv8ZjeDxlIMhkDRtU1/RHHnIgcnkMbr76F6DrzfnL1X6IcVv4WytgcRIgqxvuoVD2Pn1wetaqSGNuTiFSasxdyFSh498fShopIvwWYR6IWx9b5lT0bcwu6MdgEcRy1px4kEUeo4hcKPpx90YBSHb9v+bX7b1TV4AspK9a5c6AfFk1L3w==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=talpey.com; dmarc=pass action=none header.from=talpey.com;
- dkim=pass header.d=talpey.com; arc=none
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=talpey.com;
-Received: from CY3PR01MB9193.prod.exchangelabs.com (2603:10b6:930:109::5) by
- PH0PR01MB8096.prod.exchangelabs.com (2603:10b6:510:290::22) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9203.9; Tue, 7 Oct 2025 19:03:37 +0000
-Received: from CY3PR01MB9193.prod.exchangelabs.com
- ([fe80::5818:cc62:988f:8908]) by CY3PR01MB9193.prod.exchangelabs.com
- ([fe80::5818:cc62:988f:8908%4]) with mapi id 15.20.9182.017; Tue, 7 Oct 2025
- 19:03:37 +0000
-Date: Tue, 7 Oct 2025 15:03:27 -0400 (EDT)
-To: Steve French <smfrench@gmail.com>
-Message-ID: <a22c8ce5-da8f-42d9-a02e-5cfe048b514b@talpey.com>
-In-Reply-To: <CAH2r5mvws19ho44YJDROdNUy3FtWfxyVE8QcbCTbFJ_VWYNQ9Q@mail.gmail.com>
-References: <20251007082603.16174-1-wangfushuai@baidu.com>
- <CAH2r5mvws19ho44YJDROdNUy3FtWfxyVE8QcbCTbFJ_VWYNQ9Q@mail.gmail.com>
-Subject: Re: [PATCH v5] cifs: Fix copy_to_iter return value check
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-X-Correlation-ID: <a22c8ce5-da8f-42d9-a02e-5cfe048b514b@talpey.com>
+ (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1v6XpC-007JSZ-11
+ for samba-technical@lists.samba.org; Wed, 08 Oct 2025 17:19:41 +0000
+Received: by mail-wr1-x433.google.com with SMTP id
+ ffacd0b85a97d-421851bcb25so85621f8f.2
+ for <samba-technical@lists.samba.org>; Wed, 08 Oct 2025 10:19:37 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=suse.com; s=google; t=1759943977; x=1760548777; darn=lists.samba.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=7pyuxM1qJujrcTe93h+cZ4UxFH6Em2UfoKr73Xc2DaU=;
+ b=ZAw9U++nEeHUvXRdkG5LHRQDpyFF4kdLXxnvOSWN2W5y+M4xChkV8WF5//kp2Dat4c
+ ujaLdgVL+AxZTfnTWYOU+xaODVlrIaYKv74a9Da46P5OXULH6Bp81+io0KhDnsT/tFAr
+ WJgSOpkpLxmgHxo4vJfm1M2yGzQLsh/IxxAEzeatSu553H9tTJRp/+0xjlRDKgLjk9j1
+ DYwshcMThTo60S9QuMuXK43XX1nCYrZ5x+hnWMJVGrtPxS9Obt04qL7qfi9aVdC2WYZ2
+ D1sLwYRE/c12ukPxaQoTdZvY4nvBLwKSiN3pT73iqbSg3KKdjjbSNdkJUenSjVOGzVDb
+ MUmQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1759943977; x=1760548777;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=7pyuxM1qJujrcTe93h+cZ4UxFH6Em2UfoKr73Xc2DaU=;
+ b=U74e1qiKgNnO+b/bRMCm2cIIJd+XoPVdQM+h3UqQGbXVY0sEHZEHdK1eQBaMYxnWVe
+ /2JYYmck5iBSL0nkK9xO8GP7WSxI3HpwmIDgICRBLjly539A+zBvZ3In3nyOJgAFNTjQ
+ e6yRtGz6b8zBfeBfOQyooyDbt3pJn1EW6zz5AaWIj7CftMuK8+UuS7H6HXQj1yPJLn1P
+ Ey+0Ku+RN586dndX4XtOYU4dJQshMQKQuHpLFUiyW/a3jv7YaB/O3R6/3XfToaiAfLnr
+ ktPIlYiXy3jS6SO9EbjxF1TIfLmCm4qu4sz64q3jdRJ/ZoC4+1E8oDxAITLByE58VzU7
+ AATw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVq+U0tLCK3ehjK4nmJuWlBsKegpw+BWMi0GJ+N0ULFryvkJfdW72x9IPH35mG2hSaPdJYEy8jm+9/B2ZueXLw=@lists.samba.org
+X-Gm-Message-State: AOJu0Yy/a4yktU6SDYDeHIEykQh0mjS4Kk4vB+R4iRtcjvx4spobWOQk
+ paT8OgRbB5nIA6oqWPXoQJDMD4Qu9NKOmexzl3kYgbaaz6mO3/UFGxZuYy3HU2NUt9k=
+X-Gm-Gg: ASbGncukbx5MgA1yDXwbDtLnpNPdzJW4XFBzu49ZO+RzbXiG+etP78pJBzb92BxicsF
+ /g4LC/DacznVXXTECjdzVNQ/EtgW/uckp5AGUu0GtXIguY2hAgdKl5Yofo3KLcX5yAIHewRK2sa
+ VZClcYVn/8N+tYVWReAKqjildugJeHlMuGKjkS1eXTnLG8T80Ewz7TWjlLqXxMRywZbiDSW3p8M
+ pm7XOguj1ojYhqe7KSxDmP/AIHhStLAWXmg3lnpoWY201j3hQ36YKMex2q2Fgqn+7fwMGgtdEMo
+ ejVq5Q1zICVSh+cSYffr1nUW9WUke+XofOANNQTZLZA4gk5114MVOzCW57N6WoVNfS/AUPpXfrO
+ Uc2t6XGFDRzFqMMea8tWNNWkTTPGNvdOTcmZxGatPbjB5+bBrzca8aa4Op9yyrAufLxtBNlytmj
+ 5kCO2kQdG3rJe+gBJ2eAwgwQQ7BtoGu4oD9aBNEQ==
+X-Google-Smtp-Source: AGHT+IGwV2IWGY48tJXj7XfE/oEPofnleR/8SAfmD8lIPiCmMhG9ARmAgggLfTSsGqYs0jA4TvwNxg==
+X-Received: by 2002:a05:6000:40ca:b0:3f1:2671:6d9e with SMTP id
+ ffacd0b85a97d-42666ac61a1mr2539280f8f.1.1759943976607; 
+ Wed, 08 Oct 2025 10:19:36 -0700 (PDT)
+Received: from ?IPV6:2804:7f0:bc01:231a:9f96:9bda:3734:ea43?
+ ([2804:7f0:bc01:231a:9f96:9bda:3734:ea43])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-29034e1cc8bsm2913235ad.38.2025.10.08.10.19.33
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 08 Oct 2025 10:19:36 -0700 (PDT)
+Message-ID: <5bd37df6-1743-4b9c-a83a-a811e221489b@suse.com>
+Date: Wed, 8 Oct 2025 14:17:24 -0300
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CY3PR01MB9193:EE_|PH0PR01MB8096:EE_
-X-MS-Office365-Filtering-Correlation-Id: f5432c41-527d-4121-943a-08de05d4385c
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?Ky83dHZRY3UwMVlTZVJLM1NvTWZRZmpRb3AxcExadmZvdGdMQXpoVHF5TUQ1?=
- =?utf-8?B?dWovVDlYZWJlZU4yRTZ1YmVuZjRCNzlMNmQ1R3puWmY1TzdvMEdWeU43MEVt?=
- =?utf-8?B?cG1kMWpBK01iQ2hSbmRwWVQrV3Zjbi9YK21DOEIxS2hHam9jdndQQURQSzh6?=
- =?utf-8?B?S0loa1AyU0EwNjFmdzVjamtoeldBeGQwQ2llZ0plY0xDbmd4Q2lSMVh4RGtI?=
- =?utf-8?B?akZlTFhjajU3NkV4RFpuamgyT0R6NEFCREZqTTM4T1EzbWdiYUVjUUsrM3Nu?=
- =?utf-8?B?VUFuUGt4MTI2d2tHcDhGUEtjLzQzc2RsWkN2bXptSmt3dFRGUVRPN3E4d2Nk?=
- =?utf-8?B?bU01bEN6VTdSbWc3cWsxbGE3amhBSVE2M1NONk9lbTl1WDdUSkhpbkVLbXpL?=
- =?utf-8?B?OTlLanBHRC9naFVSbmdIanJDanhISEw5ekJkRS9FUXI2ZWc0cUpQSWVkemY1?=
- =?utf-8?B?KzJFbXFVWjdZUUNVaGxNQ0ZiaVNMY282SWdGaGZiWDJXU0JNcS9nbzFkTE11?=
- =?utf-8?B?Wkl1K1JtdUdsNW1oZ3g1S2lXQTlxQ3VML3Y5Z0tBbHdZVndXQnpMcW9JaFZo?=
- =?utf-8?B?Mk5RRnpObkxJNXpDN0lIWkFXejhXSUd3TDd4cVRuNTh4eXlNbnlpN2ZWSkZR?=
- =?utf-8?B?TzBrOGlpNGFSc3NBd2ozVHRqK1cybXpwNDlXNGRiUURPZ2lIcm44dHcrdTRX?=
- =?utf-8?B?b1lQWmxlQ2tZc211bkVUZFQ1QjVnSXkybkpXTmNCYy9kTE1pazJrZ1p1NXpS?=
- =?utf-8?B?S2lGdnFBN0hnSmtBWGtWRi9TQm5lR201aHNrZ25udm8rejk5Z0liamZHbjY2?=
- =?utf-8?B?d0YyZEdaTFJwb2xYZjUvaExYaEZnNkxXcG85MFJ1MTJYdi9PNmZKekhlSjVx?=
- =?utf-8?B?ZzU5TmI4Y0NuNEgvWXR0ek5kZVdrUkpVVFFubzRoSFBnKzNzYWxUaFFPcW9I?=
- =?utf-8?B?RVlZakhhWTN4SEdiRkgwWW9PQ1plUytYOEUvOUtXRlNpN0Npd3FWVGphMXBu?=
- =?utf-8?B?V0ZGTlJHVWtGRXAvYnphWDVJNFhoVlV6Mnd5WnFSY0FLcFFIN0dlMzJrWjcr?=
- =?utf-8?B?Q2VKMmRZK1Q3djlkQXBnUXJEb3RrbFpxQ1gxQjNROW9aRktHNC9DazMwR3dL?=
- =?utf-8?B?M3dBRHFwSjJHQmNIWUhKUzJNaWZ1WTV4T045UFEwM3lJajJKbTVYaCt2ZDF2?=
- =?utf-8?B?V2JwZEhhamoxZk8reUVjTC9GSGp2U2Y0NDJHaXRna1MxeFVGSVRhUnJHelJV?=
- =?utf-8?B?VVRCdnF3dkFHZk9kampQTlU0RVUyekU2OXBidCttamh3S1kxd0FDTjU2aitH?=
- =?utf-8?B?dVY4NGxrdXJYb3Y5dVdidEt2V1lGd01lSGFwMURqY29sNmRHYTNDeFlzZXdK?=
- =?utf-8?B?bTZvazVIZTkwVFJySXBOUHd6STVFQTFOcHF4RnhRd2l1bUhwUXJySnhPSkpx?=
- =?utf-8?B?M0VsRHZLRWR4K0wzWGs3RHNyeSs3S3NKTS9ET0RQcjU0YW9iUzVSV3ppdzEx?=
- =?utf-8?B?WGlPQU1JZ0NTc1RKUzl5MTBON1llLzVTbmlQTU5BVlhNSE9rZG5ZRHFTMUR4?=
- =?utf-8?B?T2wxaEFxUUZIL1hkYTl2ZW5sZnhRTlpJOU9rbU4zVnJIQVA3djRrWWxQUjdu?=
- =?utf-8?B?d0tvWHgvemlyemRqZVg1ZnIxVmhaV1hiMUhoMDJGQjJZckpQOTUwRlYvcFF1?=
- =?utf-8?B?ZzFRZ09CT21PcEVGSlVnQmdHOXZuTEVXSE85QVBNd1dnOEpPM053cytzVGMr?=
- =?utf-8?B?ZmFpbDFzcitPLytuRGQ4RFJyNHg5M1lSdVpyR0tweTZTV1JyaHJIY2QxeGlm?=
- =?utf-8?B?Z1hYMUdQWGxCb2JDNkw1NWYyMGtQU2o3eHVHWjVsWmowODdNMTVOR2o4Q2NU?=
- =?utf-8?B?TnJIeGRFQVNlRTZyK0ErY2J1NFZTRUVDSTJwcnRhYXlhbEhtUEVZQnBwc0RO?=
- =?utf-8?B?b0J5aENjdk5ydDR3MlU1QVlxSjlZRUJ0UlU2dVdVbzYwTDdCVnMvdWNmbnRQ?=
- =?utf-8?B?bFdDS2dsQ0gxTnIrdWFjQTNaRkdGSVZoUk90S1dLaWxxSVdKSnFYVm1reHFX?=
- =?utf-8?Q?OQarYU?=
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?VEhEaGN4bjlvY2ZWays0L3BBV056c2dDRHpvdno5MDc0eEVVOHdvSENPelBp?=
- =?utf-8?B?VHF2MjEwQnR2Tkp3b2ZWSERneUV3bUVTZ0dBS3N0b3JxVHpWd3l4Z1I2WEVI?=
- =?utf-8?B?Y1NDM2U4dVFGaDg3V05DUHg3T3didEc0M0NkVVcycHR5cmRiM1FJd21kMk1h?=
- =?utf-8?B?dTVWMFVzbUtlRzJMRUhQMThkbENhZXBzbzQwVll0R0srdTAzaHdkMkVxK1Zs?=
- =?utf-8?B?TTZ3RnVvUnFaRFh0NngyRE5wTnVSRE9jM24vVEVucE5nd3pNUWw1bDJyT2Jm?=
- =?utf-8?B?aGhoNjVaWndMeEg1OWFNa2JtSmdxQ3J0Wmt3SUhQSnBLVHNZakMxdWlmTkJa?=
- =?utf-8?B?aXJ6SElQcUlnUmRRTjk0d09JS1g3bG9vYWl3aEkrSk8wdGQ1ckFhRWZWUS9w?=
- =?utf-8?B?YWpPc2U3OTRWa2ZVcnFnNE1PRWJReXA2ZFhFMEdxY2paS3VGdVBySWlZUEw5?=
- =?utf-8?B?QUpkU1JGd2orWGZOeXoyS0lWMlpFZUU0aVYvd3NQTjFhMEJzL1hWL08vbU1Q?=
- =?utf-8?B?QllyZHpCTXRKRGxWM3VvQ3praDNiVUVzeTdEcXd5VmFYcVRJTG8yQUdISGUr?=
- =?utf-8?B?QnJQNU1oL0xPUnhiYWRWd01UVFBJTzd3eUFkMENVZlVyK1hlaEZZUmhzWk56?=
- =?utf-8?B?Mk5IQjhRUEhTdHowWDlqQ3BKd2FNTGp3SGRXL0FrK0V3SWNNZWlwbEwwWm4z?=
- =?utf-8?B?ZUJpUEErL0VhWmhaS2o0NXZGak5mNjdoTXlIVkp2bVBIdGZhaUhkR0Vvb25r?=
- =?utf-8?B?T1hiM1VxTXhUbEcrTzdvbktGY2JjVUtLcDhxSCtBQ2JYaklzOTlmZkJzUHhP?=
- =?utf-8?B?Qzkvc0RSQjV4SU1EcE84NmN3RmExU1pDTEgrQW0xZ1c5QlcrbEhXTXVXMTgz?=
- =?utf-8?B?UjZ1ZFRvb2g4bUEwZmJTU1N5WWtaK3MwUEpBZXBGeXpaRndUNm5zSjZmWkox?=
- =?utf-8?B?a0dzL3dQdW9PTVplZk53dmFOZEVsTGpxNmQvbUhINU4vVk1JYVZvQ0c4TkFI?=
- =?utf-8?B?TGs5NVpNVmRYbWxRYmVFZk43K3FhS2VodlJUbjJpNnFjazQrU2ozdmtVWngv?=
- =?utf-8?B?VjJsSmxUMEdqN05TdUtXNkRaV29WYWM0ZnhnTmdwaDBjQ3JpWUg4L1RWRVB0?=
- =?utf-8?B?VUhPSmRuSUc5SVdMVXRkZGx5VG1sNE1NTElUUlBMSjFUU2FWeUNUNGJXQXJD?=
- =?utf-8?B?SldTYVVKaUZIaFp1dStSbEVad0dkd0JMblh0Y0dhcklWRU5Mcms4Q1BDT2ph?=
- =?utf-8?B?ejlvTGlETmNwS1gvNWhsa1FxMkcxaDlZQlE5c0lHSWlCRVlKNXhZSjlwOEFv?=
- =?utf-8?B?NUVaVnZwTlVWZG5GSHplc2ZLZmlpaEpIM1BCeHc2cmJZVXJqQjMyeW4yZ1Fx?=
- =?utf-8?B?VWdJSXNwZE0xblVTRDVaNlJMeUI2VitkTHBiM01zaENWa3VPVGVZYjB0eXA2?=
- =?utf-8?B?U0JmV0VaUHQzSEt3Njg1TWdhcTZYYWxDWWRzV2JyMklXWUVLaytQekJGOWRz?=
- =?utf-8?B?bXh0TDg2L1c2OEtuejkxNFM3UXBYemdNYkdqT0h4clhHM1J0QklRWGRHbTFp?=
- =?utf-8?B?YXVXYkkwWTgxT0lCUmFVNzZIWHlFUmFPWm9UMWN4T2hnOWt2VlloZi9aV0JG?=
- =?utf-8?B?SWU2d0x3blBWWjc1RkFjbUFJaU9yMlhBR0NJKytLK2t5V0Z1RHFtUUJISnll?=
- =?utf-8?B?OHJld0svRlBOcWRrSmRVd2NRRGZZS0pxSHNKeExMM0dIbmtjdWdlUlRoN3Rl?=
- =?utf-8?B?UWRtc2xQRzJEVE5MYWhTcXg4dzlkYitOSnhOWHZnZm4xZndvdXVoUU1ibnZt?=
- =?utf-8?B?bHhuSmRySk9CdGxzZXkwWk54REF0ckpIb3R3N2V4b3JsL0Ywam1CWmZ4RTFj?=
- =?utf-8?B?Q3dsZjJsQ1JrU2ZOenpCNEQ4QmRXTE54ZGRwNGNoajZaRWQra3lRTUZMeFQ3?=
- =?utf-8?B?Z3c0Wnl6SG1Tb0xmMXpuZlplRW84bjFjeGdNYUZmUkRKRHFUVnZ6UmpNdEY0?=
- =?utf-8?B?SnE2dWpwNnJ3MDZpMncxSjB2clI1NEEzZzFqVVBiWGZ3M2paeVZubWlUWHhX?=
- =?utf-8?B?R3RLdFVReXBmSERqckdlQk1JcmNLcXV0QnhPL3RnT3RlZjBtTlpwemtlUk1p?=
- =?utf-8?Q?JJwjAxtwcapBjZ1QqZM2BKz07?=
-X-OriginatorOrg: talpey.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: f5432c41-527d-4121-943a-08de05d4385c
-X-MS-Exchange-CrossTenant-AuthSource: CY3PR01MB9193.prod.exchangelabs.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 2b2dcae7-2555-4add-bc80-48756da031d5
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: tl3B6W2XLGSJ+RAJfF0BiIHjwh0LfTMwXdKvv2Lv6VPclb9ZLgRVt6G23roIO2zr
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0PR01MB8096
-X-Warn: EHLO/HELO not verified: Remote host 52.101.43.107
- (mail-westusazon11022107.outbound.protection.outlook.com) incorrectly
- presented itself as SJ2PR03CU001.outbound.protection.outlook.com
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] smb: client: Move an error code assignment in
+ smb3_init_transform_rq()
+To: Markus Elfring <Markus.Elfring@web.de>, linux-cifs@vger.kernel.org,
+ samba-technical@lists.samba.org, Bharath SM <bharathsm@microsoft.com>,
+ Paulo Alcantara <pc@manguebit.org>, Pavel Shilovsky <pshilov@microsoft.com>,
+ Ronnie Sahlberg <ronniesahlberg@gmail.com>,
+ Shyam Prasad N <sprasad@microsoft.com>, Steve French <sfrench@samba.org>,
+ Tom Talpey <tom@talpey.com>
+References: <02627021-da2f-41f8-9ea7-fd2da96e0503@web.de>
+Content-Language: en-US
+In-Reply-To: <02627021-da2f-41f8-9ea7-fd2da96e0503@web.de>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -154,115 +98,67 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Tom Talpey via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Tom Talpey <tom@talpey.com>
-Cc: linux-cifs@vger.kernel.org, sprasad@microsoft.com, pc@manguebit.org,
- samba-technical@lists.samba.org, linux-kernel@vger.kernel.org,
- David Howells <dhowells@redhat.com>, bharathsm@microsoft.com,
- Markus.Elfring@web.de, Fushuai Wang <wangfushuai@baidu.com>
+From: Henrique Carvalho via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Henrique Carvalho <henrique.carvalho@suse.com>
+Cc: kernel-janitors@vger.kernel.org, LKML <linux-kernel@vger.kernel.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-I like it. For v5 feel free to add my Reviewed-by and ack.
+Hi Markus,
 
-Tom.
+On 10/8/25 2:04 PM, Markus Elfring wrote:
+> From: Markus Elfring <elfring@users.sourceforge.net>
+> Date: Wed, 8 Oct 2025 18:48:28 +0200
+> 
+> Convert an initialisation for the variable “rc” into an error code
+> assignment at the end of this function implementation.
+> 
+> Signed-off-by: Markus Elfring <elfring@users.sourceforge.net>
+> ---
+>  fs/smb/client/smb2ops.c | 6 ++++--
+>  1 file changed, 4 insertions(+), 2 deletions(-)
+> 
+> diff --git a/fs/smb/client/smb2ops.c b/fs/smb/client/smb2ops.c
+> index 7c3e96260fd4..2513270ac596 100644
+> --- a/fs/smb/client/smb2ops.c
+> +++ b/fs/smb/client/smb2ops.c
+> @@ -4596,7 +4596,7 @@ smb3_init_transform_rq(struct TCP_Server_Info *server, int num_rqst,
+>  {
+>  	struct smb2_transform_hdr *tr_hdr = new_rq[0].rq_iov[0].iov_base;
+>  	unsigned int orig_len = 0;
+> -	int rc = -ENOMEM;
+> +	int rc;
+>  
+>  	for (int i = 1; i < num_rqst; i++) {
+>  		struct smb_rqst *old = &old_rq[i - 1];
+> @@ -4611,7 +4611,7 @@ smb3_init_transform_rq(struct TCP_Server_Info *server, int num_rqst,
+>  		if (size > 0) {
+>  			buffer = cifs_alloc_folioq_buffer(size);
+>  			if (!buffer)
+> -				goto err_free;
+> +				goto e_nomem;
+>  
+>  			new->rq_buffer = buffer;
+>  			iov_iter_folio_queue(&new->rq_iter, ITER_SOURCE,
+> @@ -4634,6 +4634,8 @@ smb3_init_transform_rq(struct TCP_Server_Info *server, int num_rqst,
+>  
+>  	return rc;
+>  
+> +e_nomem:
+> +	rc = -ENOMEM;
+>  err_free:
+>  	smb3_free_compound_rqst(num_rqst - 1, &new_rq[1]);
+>  	return rc;
 
-Oct 7, 2025 2:45:33 PM Steve French <smfrench@gmail.com>:
+I don't think this change improves readability.
 
-> David suggested fixing this line:
->=20
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 return -1;
->=20
-> to
->=20
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 return -EIO;
->=20
-> which makes sense to me since returning -1 could be confusing.
->=20
-> On Tue, Oct 7, 2025 at 3:27=E2=80=AFAM Fushuai Wang <wangfushuai@baidu.co=
-m> wrote:
->>=20
->> The return value of copy_to_iter() function will never be negative,
->> it is the number of bytes copied, or zero if nothing was copied.
->> Update the check to treat 0 as an error, and return -1 in that case.
->>=20
->> Fixes: d08089f649a0 ("cifs: Change the I/O paths to use an iterator rath=
-er than a page list")
->> Signed-off-by: Fushuai Wang <wangfushuai@baidu.com>
->> ---
->> v5: no code changes, only improve commit format
->> v4: no code changes, only add version description
->> v3: use size_t type for (copied) and check for (copied =3D=3D 0) as erro=
-r.
->> v2: use (!length) check for error condition.
->> v1: use (length <=3D 0) check for error condition.
->>=20
->> fs/smb/client/smb2ops.c | 10 +++++-----
->> 1 file changed, 5 insertions(+), 5 deletions(-)
->>=20
->> diff --git a/fs/smb/client/smb2ops.c b/fs/smb/client/smb2ops.c
->> index 058050f744c0..ac8a5bd6aec4 100644
->> --- a/fs/smb/client/smb2ops.c
->> +++ b/fs/smb/client/smb2ops.c
->> @@ -4650,7 +4650,7 @@ handle_read_data(struct TCP_Server_Info *server, s=
-truct mid_q_entry *mid,
->> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 unsigned int pad_len;
->> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 struct cifs_io_subrequest *rd=
-ata =3D mid->callback_data;
->> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 struct smb2_hdr *shdr =3D (st=
-ruct smb2_hdr *)buf;
->> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 int length;
->> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 size_t copied;
->> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 bool use_rdma_mr =3D false;
->>=20
->> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 if (shdr->Command !=3D SMB2_R=
-EAD) {
->> @@ -4763,10 +4763,10 @@ handle_read_data(struct TCP_Server_Info *server,=
- struct mid_q_entry *mid,
->> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 } else if (buf_len >=3D data_=
-offset + data_len) {
->> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0 /* read response payload is in buf */
->> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0 WARN_ONCE(buffer, "read data can be either in buf or in =
-buffer");
->> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0 length =3D copy_to_iter(buf + data_offset, data_len, &rdata=
-->subreq.io_iter);
->> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0 if (length < 0)
->> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 return leng=
-th;
->> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0 rdata->got_bytes =3D data_len;
->> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0 copied =3D copy_to_iter(buf + data_offset, data_len, &rdata=
-->subreq.io_iter);
->> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0 if (copied =3D=3D 0)
->> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 return -1;
->> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0 rdata->got_bytes =3D copied;
->> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 } else {
->> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0 /* read response payload cannot be in both buf and pages=
- */
->> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0 WARN_ONCE(1, "buf can not contain only a part of read da=
-ta");
->=20
->> --=20
->> 2.36.1
->>=20
->>=20
->=20
->=20
-> --=20
-> Thanks,
->=20
-> Steve
+I understand that making the assignment explicit is good, but why not
+simply set rc to -ENOMEM if !buffer and then goto err_free?
+
+Also, I think its a bit confusing having inconsistent naming styles `e_`
+`err_`...
+
+-- 
+Henrique
+SUSE Labs
 
