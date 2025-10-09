@@ -2,74 +2,73 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id E5E06BC9CCC
-	for <lists+samba-technical@lfdr.de>; Thu, 09 Oct 2025 17:30:50 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 781EABC9D60
+	for <lists+samba-technical@lfdr.de>; Thu, 09 Oct 2025 17:43:58 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=3K/OkTfxaQVQjtAI923mEKQkdyC4/Ch4flZGg5G+nto=; b=qUY3MogbAC2/pJQjvf+RGR7N87
-	dKNunSR14lvNFPmJChIkevni2xuc47l1YsWIn/Q5ql3TpJFFYJksfnqnCIq+EWziUQnFldYrtKRV1
-	VPt/tuhZaAliu+QQT3G9NlB1PpM7UMSiCC6Xj2Fdzmi+Ito5/gszv42P+VipwdjFOAAt0lwKuYMU7
-	7QgSWtoSWEGw7FZRYwd0U0jtDGON+R/cHjp88SVY83YaQMIwVillk0M3aZPW9mEUNpHK2NTy6OfkZ
-	w0leZgFeT+x2KqccjZENX2wBKg1M/wiHpkSTc2C9HbDK/At8MsL6lIMvhZLwETHlgjoIyEjK/qlLr
-	jJQzCqRw==;
-Received: from ip6-localhost ([::1]:31930 helo=hr1.samba.org) 
+	bh=uNVjPOkZQ4/5TQpLx5EDj6qV7WJ4xTniFhtjleJ40Ko=; b=vBbWEG9PG/WxW5qLprkSSTWXYN
+	Mz9TiT23xr7ipLgbQuqe+r3WUrBOUwtj2/8T5CqnB9abvjiJ/2oO2LcmAAAPmHJFhdS6DC7X+lh//
+	IpBFQR1xMVtjQa+bIoeRe58S8TbisrkiOgiV5amHfZ2I4FAPX0Bd0KUa0nBQaO/LqUsgXrW9g93q5
+	GVXz9P54umup42M/7EfQHPxB98kaBiDu8K4BRKyBLEIt34S/888HLxW0RDkrDUaEKZJVX1tYlSjDk
+	TgaDG5WYgoDFXZMMFsrsttzWUT7cu6K7XG6Sku/RGjJLOgXBpVlLxsjToGSWtOJNYURDFa7S22PAO
+	P/h1ZmTg==;
+Received: from ip6-localhost ([::1]:56336 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1v6saw-007REv-8t; Thu, 09 Oct 2025 15:30:18 +0000
-Received: from mail-qv1-xf36.google.com ([2607:f8b0:4864:20::f36]:48563) 
+	id 1v6sng-007RKt-Sa; Thu, 09 Oct 2025 15:43:28 +0000
+Received: from mail-qv1-xf2a.google.com ([2607:f8b0:4864:20::f2a]:49589) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1v6saq-007REl-1h
- for samba-technical@lists.samba.org; Thu, 09 Oct 2025 15:30:15 +0000
-Received: by mail-qv1-xf36.google.com with SMTP id
- 6a1803df08f44-795773ac2a2so9243126d6.1
- for <samba-technical@lists.samba.org>; Thu, 09 Oct 2025 08:30:11 -0700 (PDT)
+ (Exim) id 1v6snb-007RKm-8V
+ for samba-technical@lists.samba.org; Thu, 09 Oct 2025 15:43:26 +0000
+Received: by mail-qv1-xf2a.google.com with SMTP id
+ 6a1803df08f44-799572d92b0so10885936d6.3
+ for <samba-technical@lists.samba.org>; Thu, 09 Oct 2025 08:43:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1760023810; x=1760628610; darn=lists.samba.org;
+ d=gmail.com; s=20230601; t=1760024601; x=1760629401; darn=lists.samba.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=3K/OkTfxaQVQjtAI923mEKQkdyC4/Ch4flZGg5G+nto=;
- b=UXTedhxOYimvvct1awyG/71cV6ES9TIqsx3Fa0t9oQT35oQ/gK4Rw9Qw0LV+cuFBa2
- n+yU09Lf0+cGqha6m+I5wIkjhTa7Qk4b+IDRT/CHTT5JILlzXRQyBmspAmB+hICvZ+KS
- v3ukHcRT2vIDcR5ZmDtsMXn8PpWIyuwipoBOJqTgVLTBG7efKDG0U68fnhJCCzhe/ROQ
- zGZLqud6SDHu/jGvhm8xK7hlsnT2CUPwKQw2cd+Wg+C1LHlr6MwOw18ujcTLI+whmSUy
- NaPVXFc8xIIPv5sGGqun3CW765nBohTs4ADbBHgNMbNnG/CdLPQBnYKMkicba1xuDpP5
- 84Qg==
+ bh=uNVjPOkZQ4/5TQpLx5EDj6qV7WJ4xTniFhtjleJ40Ko=;
+ b=ZYM7EQQzACdxuw3X3VM10hrN2+htWvWOud/514DnUeSIkThKpByYtXotsDobJNkbf+
+ +YjPoZbRcXi5cjPM6F8zyCvpNLkK9ZWhoJ3fMpj8SnrgyDasskl8UYHt/WcuebaBCtp4
+ Ss9Okl49bKCuGugx9MomZS8bZzZfXLX2KOnsummgDSFgeJP78fDq7FU/+nmolzK4/w7v
+ Wqf3Nz2Sp2FUU8VXrTc26tNBIJNMB/N5fhcpy/MZIuhnKau1JpQQPHFYXJnh09tg32t3
+ 3WeXIFUY8lS0v9+Cka82GpcX2s0mLcleBDOVh109lFg+sHA6oO4uKwwzf+JyQbWcZcZF
+ OxOQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760023810; x=1760628610;
+ d=1e100.net; s=20230601; t=1760024601; x=1760629401;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=3K/OkTfxaQVQjtAI923mEKQkdyC4/Ch4flZGg5G+nto=;
- b=qgNoYG0ycihCv91rvYZIsOhtDnL+px1h03L2xJ/l7w/UXdAuvEBBNsG+OYOcGC4PrB
- +HqcpBI8kuh+rmyrdsW5ECZj2hVy2/4/AjmKdetEmSzKutOhNIkXFMto+0th4OEayGSV
- RvMLa3nDp10v9PMps43fD9Sui6lej+f+ZQRfR3IHAY4yDyyX4N2wDkbD+NSHQ2GFZX9Z
- VfvViUrk884slJBmT+C8Vm0jaLz9QbquPu/UTQWcCij4sf1LDLXUoAkffeOn0ssBQPEZ
- QJCbKftBJSBbLF5RPlekpdANjkLW/6EU9TwtoJ4K4c75DiMWcSaJhpXshIcGxhB4fxWT
- PweA==
+ bh=uNVjPOkZQ4/5TQpLx5EDj6qV7WJ4xTniFhtjleJ40Ko=;
+ b=Ze+nYRMKtXOwxWBfUWmeZL1q7Jmd6bzGLd97MyEOyNKakfGm37ccglSuqhlI+WgN6m
+ PbhWiTOcY1SkcTSJEtZcfVOSUKxb6JcZgplheZ7xZZNNLOX0jGyA7qW48a+2lkla9h/H
+ zzW4ntSDoOjgyd/5jRDFUkOxG1cXOIZhnl1GtY6MO7uHdmykrOgtY+BmKiL9lmPaxcK7
+ 61ENTrf1LX2k49wEnD8EqSESasIzM4jyxmGlXSDXCy8G7FaaafnudB6SjeOcN3+afaev
+ UElC6wA+FKIy/TPr2AVl+4Tk0wV4Vujc+XI+ImuRV8pe5tM1c4xMG4pnzNtfrfJfBMt6
+ 0chw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWWAALpQdhdnz6w3DbNHaz7IvdWqEqyxbT0iiaGv4u+vUa7VCGswJijVr+DY8knYDLj0NCmcMPOExm9Za5ryKY=@lists.samba.org
-X-Gm-Message-State: AOJu0YxyhTlcaStNuka+9w/FBUprO7qQ6RJ5CkLnPuInN1EhEvu40tAb
- +OH+fCTAUUPIUOZOLBBMMQ4WecD5jUhKjyxdSoY9MW66YCJxbRCzQijvE9tHTzYywtZAgoPOJx2
- g3Np68u+jCHbvJUW99auLe//yeMA1ig8=
-X-Gm-Gg: ASbGncuqTs/XZ/nvmBeCKyNMLkIfhEJKhSWyBuAFGYgb+/aXd/nnVORX2AKh50mbF+z
- 3q93hhpHlEXvTFs5NFWTal3n5GVMGXPvKIN80ay/ensGufA5Oekgjn1a9KzmEPl2/3YDNm37evc
- ynApHe3TBjohKAEmFcQqy4Yxw8YQF30mWJN/45Ai9+/PJmUFe6DPZQ26yLFKJ+ty+ZHpBKXkESE
- JxptKMVFo+52gL63do+fdHbNSaTWNT7JfPyfJoaNFVpJ1fLMtNTf+l5gTBETEOZVVTwYQ4hoe/1
- ZuP6DUR/JkUoYP/PAE7eyZ9AIxf88RqewluaVRSsxJxZMrbirto4SCpB18WbkEEPU75pEIBLCeD
- 55fkZBkufa79g82EPbCTzajg7EFop4yaV4zgSVvTClCdZ5SmKF+MpY6Va
-X-Google-Smtp-Source: AGHT+IGJdcJchywsY80gAXJqF2Dh5hkmMc+nT1QmiKbYTO/FxvtFxR8ICSKzlj+TOaws0AV2aAY8SzOBjdCxSsbgzqY=
-X-Received: by 2002:a05:6214:484:b0:7cd:91ff:6215 with SMTP id
- 6a1803df08f44-87b2efc2c6dmr99245676d6.61.1760023809944; Thu, 09 Oct 2025
- 08:30:09 -0700 (PDT)
+ AJvYcCUm6MthaBu/qf/kabkYJsgU6Dk7boJTxqNTP6XM1WfWFX/l82rjCw0sJYmjqnZiTG36HsdO7xBpUzT9Kf2c498=@lists.samba.org
+X-Gm-Message-State: AOJu0YyS6IMV6bD6rKDaG3SXO3Uyd5AXHqLn2AlA2bXkGVlLggwr/4YJ
+ I+HHAxkRZOjoeWIyp3B65spjb16HQ2S0fbejXWZ7fK5ExLUyY4m3io2esPBFVBdFq46d0BFJVnf
+ usNxTCwUE4Ts0+uA9nz3NNP/wOLS9ZOk=
+X-Gm-Gg: ASbGncukcwCtQp/UVEsNfNmiCaBvZF/3wGFixmrzfp/OkYuF/+wpj3rFLuzFeL2Awmd
+ mWwAFnTo961piSf//C1mCUVLHjhqWMHRHTMDbQkQXpRLrLLWt9+h3h3EoGKX5FLRCumo7ErAKB2
+ 8pOrb8MgThqgSn4M/9Rbwl65FtDIw6kijGURDCNZwfGZ6DksKEPp5NcMdexYhB0RJ4P7UaVEx/w
+ OwLYFVdFAAd15uVk9sMQGjVV13o3Vht8j3E8s2vh0DCf1ihGvhYpLUNGRl+2PHA3QMFPcWN7jov
+ G7QF1fCEzoMLKOypQQE40+KgXA9+rd9xCfO0M4DU1A0jQXfJzwi8YbgUC9lZpneQxUZ+xUZhPMF
+ lus7IJBKpN+cWIox0d5ABZx1Z4h1FBLSA6UkOQLKP7Q4LxGTec8NZMMMw
+X-Google-Smtp-Source: AGHT+IEYrpzc6SMoRQfsWO3qThn+WGHDuSzBgj5HClu2LTLami2LK2vOG7hA85WdSkdDUqm3JQ980vltGEZBu587cu8=
+X-Received: by 2002:ad4:5c83:0:b0:79e:88e2:1e60 with SMTP id
+ 6a1803df08f44-87b2108abedmr105123276d6.29.1760024601139; Thu, 09 Oct 2025
+ 08:43:21 -0700 (PDT)
 MIME-Version: 1.0
-References: <5b95806a-e72e-4d05-9db8-104be645e6e5@web.de>
-In-Reply-To: <5b95806a-e72e-4d05-9db8-104be645e6e5@web.de>
-Date: Thu, 9 Oct 2025 10:29:57 -0500
-X-Gm-Features: AS18NWC3ORxIiPJ-wdFN48myFn8Rs2UbLqRS_MIq9LzeT2xWYlDBUeIINdVmdKk
-Message-ID: <CAH2r5mvg=kqPyA2nYF=Nhjr3vkt4dT1R4p-Bk_MBQtddjx_EhA@mail.gmail.com>
-Subject: Re: [PATCH] smb: client: Simplify a return statement in
- get_smb2_acl_by_path()
+References: <7a5c4b6d-f15e-4071-8a82-dca6b71b6b4b@web.de>
+In-Reply-To: <7a5c4b6d-f15e-4071-8a82-dca6b71b6b4b@web.de>
+Date: Thu, 9 Oct 2025 10:43:09 -0500
+X-Gm-Features: AS18NWBOW4IMP5XCqIx3vf6oRH0bz8isK0u_b-ctyASqmWxzGVwLMu3pjongCW0
+Message-ID: <CAH2r5ms+S+G-wjB1MPTp1G6MyVLf+yzq6r+_Yg9PLb6HmDCtYw@mail.gmail.com>
+Subject: Re: [PATCH] smb: client: Omit an if branch in smb2_find_smb_tcon()
 To: Markus Elfring <Markus.Elfring@web.de>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -89,47 +88,49 @@ List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
 From: Steve French via samba-technical <samba-technical@lists.samba.org>
 Reply-To: Steve French <smfrench@gmail.com>
 Cc: linux-cifs@vger.kernel.org, Shyam Prasad N <sprasad@microsoft.com>,
- Paulo Alcantara <pc@manguebit.org>, kernel-janitors@vger.kernel.org,
- samba-technical@lists.samba.org, LKML <linux-kernel@vger.kernel.org>,
- Steve French <sfrench@samba.org>, Bharath SM <bharathsm@microsoft.com>,
- Tom Talpey <tom@talpey.com>
+ Paulo Alcantara <pc@manguebit.org>, Enzo Matsumiya <ematsumiya@suse.de>,
+ kernel-janitors@vger.kernel.org, samba-technical@lists.samba.org,
+ LKML <linux-kernel@vger.kernel.org>, Steve French <sfrench@samba.org>,
+ Bharath SM <bharathsm@microsoft.com>, Tom Talpey <tom@talpey.com>,
+ Pavel Shilovsky <pshilov@microsoft.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-As pointed out by the kernel test robot a few minutes ago, this patch
-would introduce a regression (uninitialized rc variable in free_xid
-macro), so will remove this patch from for-next.
+merged into cifs-2.6.git for-next
 
-
-On Wed, Oct 8, 2025 at 3:02=E2=80=AFPM Markus Elfring <Markus.Elfring@web.d=
-e> wrote:
+On Thu, Oct 9, 2025 at 10:12=E2=80=AFAM Markus Elfring <Markus.Elfring@web.=
+de> wrote:
 >
 > From: Markus Elfring <elfring@users.sourceforge.net>
-> Date: Wed, 8 Oct 2025 21:56:34 +0200
+> Date: Thu, 9 Oct 2025 17:00:13 +0200
 >
-> Return an error pointer without referencing another local variable
-> in an if branch of this function implementation.
+> Statements from an if branch and the end of this function implementation
+> were equivalent.
+> Thus delete duplicate source code.
 >
 > Signed-off-by: Markus Elfring <elfring@users.sourceforge.net>
 > ---
->  fs/smb/client/smb2ops.c | 3 +--
->  1 file changed, 1 insertion(+), 2 deletions(-)
+>  fs/smb/client/smb2transport.c | 5 -----
+>  1 file changed, 5 deletions(-)
 >
-> diff --git a/fs/smb/client/smb2ops.c b/fs/smb/client/smb2ops.c
-> index 7c3e96260fd4..bb5eda032aa4 100644
-> --- a/fs/smb/client/smb2ops.c
-> +++ b/fs/smb/client/smb2ops.c
-> @@ -3216,9 +3216,8 @@ get_smb2_acl_by_path(struct cifs_sb_info *cifs_sb,
->
->         utf16_path =3D cifs_convert_path_to_utf16(path, cifs_sb);
->         if (!utf16_path) {
-> -               rc =3D -ENOMEM;
->                 free_xid(xid);
-> -               return ERR_PTR(rc);
-> +               return ERR_PTR(-ENOMEM);
+> diff --git a/fs/smb/client/smb2transport.c b/fs/smb/client/smb2transport.=
+c
+> index bc0e92eb2b64..33f33013b392 100644
+> --- a/fs/smb/client/smb2transport.c
+> +++ b/fs/smb/client/smb2transport.c
+> @@ -240,11 +240,6 @@ smb2_find_smb_tcon(struct TCP_Server_Info *server, _=
+_u64 ses_id, __u32  tid)
+>                 return NULL;
 >         }
->
->         oparms =3D (struct cifs_open_parms) {
+>         tcon =3D smb2_find_smb_sess_tcon_unlocked(ses, tid);
+> -       if (!tcon) {
+> -               spin_unlock(&cifs_tcp_ses_lock);
+> -               cifs_put_smb_ses(ses);
+> -               return NULL;
+> -       }
+>         spin_unlock(&cifs_tcp_ses_lock);
+>         /* tcon already has a ref to ses, so we don't need ses anymore */
+>         cifs_put_smb_ses(ses);
 > --
 > 2.51.0
 >
