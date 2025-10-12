@@ -2,44 +2,47 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id F16A1BD0A8C
+	by mail.lfdr.de (Postfix) with ESMTPS id C1D19BD0A8B
 	for <lists+samba-technical@lfdr.de>; Sun, 12 Oct 2025 21:11:28 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=C3xK4o2im5CSEngKJSj5dBitw+XSS8ccMgiHuGRZ1JU=; b=dBkBkVK5rg/OxD773SSA6Dj6zC
-	Wwf7xjt6t3MP0YitFwPCELZTHFZ7rGw04W1d+RkCO3jzFvxKjVoHiZYb63WWvB8tZu4gHU5GYqQM+
-	5bvAFxE1qmePkiv870JSV3rHWz1zf2UjOPrxeiVMhV6W+7oTudk3T15l30sTTIFzj4e6IDqIDwZje
-	a5rErK8uu3ymDYE9NlaH86u13+ACAAcDhJHrv3gFyihDNXBJwScqF3EV+mcyme182oIF52oJ3xjsh
-	z6/tB/xnfD0T5TAp8VzkVkpUl0zkp8sMH92rup5k+g5Bfts4fneL9aJA+l5LbJ0wie9JhXotBMquw
-	+NxkT8mQ==;
-Received: from ip6-localhost ([::1]:34918 helo=hr1.samba.org) 
+	bh=2IY+UvlfeOluyTVIvEJK1FsjZyuU9vFWeuHWuf/B6Cc=; b=bDcJ3MQZIYaHXpZ3pavNwVdhgE
+	OQ7a8mwdcXcrrN0hCQNTyApBCHYnC9EExViXTbYN2LK8wSeUIf5vPtMyWrY9IaBW7BXj9H1Y6OjX0
+	c4Bypq6poqh/CIOLi+OlCfpz/lRhULKPh9HgMb3chYtDx2lO2TvsF50X6+D6Aepezdkxxelr5qJ1i
+	zI6z2f2gF9WXmyP9SDxERQoUY1nzG2JJH1D30r+df2aozbxm7iUzu3gCOVE3927fCc2fNkpmM+kgH
+	nBvUZLXGbxh8+gSATPGRLlxMtl1/JitNx6xeKHEoiqxWxXikX0qbXHECmrHFuahEMoUrodRF3CD3z
+	3MBnNNPQ==;
+Received: from ip6-localhost ([::1]:57850 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1v81Sy-007cIK-1J; Sun, 12 Oct 2025 19:10:48 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:11622) 
+	id 1v81T4-007cIs-36; Sun, 12 Oct 2025 19:10:54 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:22504) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1v81Ss-007cID-Vu
- for samba-technical@lists.samba.org; Sun, 12 Oct 2025 19:10:45 +0000
+ (Exim) id 1v81Sz-007cIT-3T
+ for samba-technical@lists.samba.org; Sun, 12 Oct 2025 19:10:51 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Message-ID:Date:Cc:To:From;
- bh=C3xK4o2im5CSEngKJSj5dBitw+XSS8ccMgiHuGRZ1JU=; b=yM4ZEo3+pVYeLy5IHReaJ0P3Xl
- EWB//7MgQsH7F72DKlAVGQwCqMoT/4FCpLpUNZp4DRSLX+7WV639rpwdPxb6EU70kn+hG/E4CWWvZ
- AtpR3Z69WqprS3R+t4KZum8lvAViwlNkNgN6LeHzQqbX0N1m3ZEkaThQ0dOy9yP3htebkbcf2w0ed
- Hj2fL/OIfSquaMlFo+3nm/p0+GvEvVc/63cTPp7uvVYILLjPCoFoSa06HxZupTiAk0QehMWSQLUdj
- MguilAml+QQr16q0ryjFHnJUg343VShrTAPi4r9un6kjTlLHIs5iMEPtkLNftWdBvZ0+UljdH1vXR
- omyRrNLW8izEOhy7hdyUpbwj32lJrWbdtTEp0zYmQJUz9OMhJcY9ZYXApgjuwn78cD0YDST67RENg
- MFQNBR/+qj6CV9Q7NqkyzUOYvgcWWggZ0uaAw5Q+v0ix9HiBbKRqu2sytyAODPyX6tzz4efS8n9jy
- he6VAdalxiJvmMw/wnOk8q0X;
+ bh=2IY+UvlfeOluyTVIvEJK1FsjZyuU9vFWeuHWuf/B6Cc=; b=XPixa6zglg66FFktIg9JxmbX1E
+ MC61PiciDOAUt0HFruY1usNl//M11flktCjAPswmJU+DsgNTu5AwWviAERVX/dLSk9doILn9gLn+p
+ sL4h17yyS5YYqs14UB+F9PdPMwqptjpJRu6bS3SpLTXCSzyPAZxRkmnqu2Cx9j1NEYqrDEKozaNAI
+ AF3mKita+OJhybNj0vw/tmbas8pT+IUCPvrvkm17o7J5LO2GDVAoGAbl70UxOXZXpdH3mk4EGs79C
+ yUR7CGJxoY10ikUboIdO5oUdDvKziu/4XHb7DH1fM4D1a+EEf5gPSW4W/3Eq2q8e8Xg2Kaq41nG5V
+ wDrZ+GtQ/v+hulvemm37RzSoTRA7mhvIlCDc0poZWMbQ9IitelFU3Gw/PWoNIzOagjR/24g/wKEeR
+ 75TdNn8kytQwxB+2XiZlh/uHFXxrylZ+wJxM8zsQehSy3Xk8ZVOdRVEvR2S6M2X5m9YNhMWlfoFGE
+ b+6Wy8O/keDSowj7NJGWpfoZ;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1v81Sr-008nzT-1L; Sun, 12 Oct 2025 19:10:41 +0000
+ (Exim) id 1v81Sy-008nzg-10; Sun, 12 Oct 2025 19:10:48 +0000
 To: linux-cifs@vger.kernel.org,
 	samba-technical@lists.samba.org
-Subject: [PATCH 00/10] improve smbdirect_mr_io lifetime
-Date: Sun, 12 Oct 2025 21:10:20 +0200
-Message-ID: <cover.1760295528.git.metze@samba.org>
+Subject: [PATCH 01/10] smb: smbdirect: introduce smbdirect_mr_io.{kref,
+ mutex} and SMBDIRECT_MR_DISABLED
+Date: Sun, 12 Oct 2025 21:10:21 +0200
+Message-ID: <6e733a250194e07943238c8318880231e3803760.1760295528.git.metze@samba.org>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <cover.1760295528.git.metze@samba.org>
+References: <cover.1760295528.git.metze@samba.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: samba-technical@lists.samba.org
@@ -62,53 +65,51 @@ Cc: metze@samba.org, Steve French <smfrench@gmail.com>,
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi,
+This will be used in the next commits in order to improve the
+client code.
 
-these patches improve and simplify our handling of
-smbdirect_mr_io structures and their lifetime.
+A broken connection can just disable the smbdirect_mr_io while
+keeping the memory arround for the caller.
 
-smbd_register_mr() returns a pointer to struct smbdirect_mr_io
-and smbd_deregister_mr() gives the pointer back.
+Cc: Steve French <smfrench@gmail.com>
+Cc: Tom Talpey <tom@talpey.com>
+Cc: Long Li <longli@microsoft.com>
+Cc: Namjae Jeon <linkinjeon@kernel.org>
+Cc: linux-cifs@vger.kernel.org
+Cc: samba-technical@lists.samba.org
+Signed-off-by: Stefan Metzmacher <metze@samba.org>
+---
+ fs/smb/common/smbdirect/smbdirect_socket.h | 11 ++++++++++-
+ 1 file changed, 10 insertions(+), 1 deletion(-)
 
-But currently the memory itself is managed by the connection
-(struct smbdirect_socket) and smbd_destroy() has a strange
-wait loop in order to wait for smbd_deregister_mr() being
-called. It means code in smbd_destroy() is aware of
-the server mutex in the generic smb client handling above
-the transport layer.
-
-These patches do some cleanups and fixes before changing
-the logic to use a kref and a mutex in order to allow
-smbd_deregister_mr() being called after smbd_destroy()
-as the memory of smbdirect_mr_io will stay in memory
-but will be detached from the connection.
-
-This makes the code independent of cifs_server_[un]lock()
-and will allow us to move more smbdirect code into common
-functions (shared between client and server).
-
-I think these should go into 6.18.
-
-Stefan Metzmacher (10):
-  smb: smbdirect: introduce smbdirect_mr_io.{kref,mutex} and
-    SMBDIRECT_MR_DISABLED
-  smb: client: change smbd_deregister_mr() to return void
-  smb: client: let destroy_mr_list() call list_del(&mr->list)
-  smb: client: let destroy_mr_list() remove locked from the list
-  smb: client: improve logic in allocate_mr_list()
-  smb: client: improve logic in smbd_register_mr()
-  smb: client: improve logic in smbd_deregister_mr()
-  smb: client: call ib_dma_unmap_sg if mr->sgt.nents is not 0
-  smb: client: let destroy_mr_list() call ib_dereg_mr() before
-    ib_dma_unmap_sg()
-  smb: client: let destroy_mr_list() keep smbdirect_mr_io memory if
-    registered
-
- fs/smb/client/smbdirect.c                  | 312 ++++++++++++++-------
- fs/smb/client/smbdirect.h                  |   2 +-
- fs/smb/common/smbdirect/smbdirect_socket.h |  11 +-
- 3 files changed, 224 insertions(+), 101 deletions(-)
-
+diff --git a/fs/smb/common/smbdirect/smbdirect_socket.h b/fs/smb/common/smbdirect/smbdirect_socket.h
+index db22a1d0546b..361db7f9f623 100644
+--- a/fs/smb/common/smbdirect/smbdirect_socket.h
++++ b/fs/smb/common/smbdirect/smbdirect_socket.h
+@@ -437,13 +437,22 @@ enum smbdirect_mr_state {
+ 	SMBDIRECT_MR_READY,
+ 	SMBDIRECT_MR_REGISTERED,
+ 	SMBDIRECT_MR_INVALIDATED,
+-	SMBDIRECT_MR_ERROR
++	SMBDIRECT_MR_ERROR,
++	SMBDIRECT_MR_DISABLED
+ };
+ 
+ struct smbdirect_mr_io {
+ 	struct smbdirect_socket *socket;
+ 	struct ib_cqe cqe;
+ 
++	/*
++	 * We can have up to two references:
++	 * 1. by the connection
++	 * 2. by the registration
++	 */
++	struct kref kref;
++	struct mutex mutex;
++
+ 	struct list_head list;
+ 
+ 	enum smbdirect_mr_state state;
 -- 
 2.43.0
 
