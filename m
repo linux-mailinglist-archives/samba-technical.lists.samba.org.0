@@ -2,44 +2,44 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 67180BD0A8A
-	for <lists+samba-technical@lfdr.de>; Sun, 12 Oct 2025 21:11:28 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7FE77BD0A9F
+	for <lists+samba-technical@lfdr.de>; Sun, 12 Oct 2025 21:11:52 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=SDybIPq8SOlNbvN/Gg6Tj5xcXCIHombJl3CYZPtQvoA=; b=nXFaxjHmj04lECi+vbIPgw46D4
-	yalEURJU0V5vMjpaEvsXZ7LXmzQrsRty1VP5MtM3JhJoFO7UGWaYg9xVlqYUJcgtRAyBC//hx/03+
-	P4jVpRqiIDaov2JYn2OF8emFRCFNWBj5QJXHggCpwClLMoLQ/PXTjx6MiVXSb0j9Lu5OTWS/O/M3F
-	6V0WY4XvubzRTPhZbLov0AISTx5Km2coiweZ3nJdMjOMwnXxvhbLZ+4BrhhXy7Ot6HuVV3UjCgA3M
-	8Ce4kHjRxbHBuhAs0dL77UaGnfnjNUtg5DnAOkDUmiGHz9Fl6oJXp4OSBb+flsIUGzfjk+64QEesZ
-	TP523rcQ==;
-Received: from ip6-localhost ([::1]:56840 helo=hr1.samba.org) 
+	bh=hRIn8/fTMfm2RzHetMjt3FbglELaW9ofsowj6oUWlJs=; b=xl3ivFn/PnYHVfSRHy6bVb9Hv1
+	RbmFQoAtMbgYkWmuTFnLUuyc7xFufs4iNSQWQRehCKJw0eSrJtVElgieLbMpy6RS5/vzDQ8GmLmfT
+	jot3eBPdznCWJcPehC7kT0ilUPjX9N3Fygm4XjYHcrnefbvRzXT2IfzFXLhHUoV0SB5E6XHgLinLz
+	fh+/qStPUiQ8PIz/xMgqeSbwahE1oeYZWVQfyWLo/sjjvykkduU8L3RSqxLkK8G8StrdAagWTdMe7
+	w7XQrno1QhM+9sobupVXOTsTAWD37yV1Hgn2vRlEQgcUFZSWul3vGRBYLZmhmrU+SHo158eyxwX0W
+	DIUwMoWA==;
+Received: from ip6-localhost ([::1]:28764 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1v81TR-007cNM-2b; Sun, 12 Oct 2025 19:11:17 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:17172) 
+	id 1v81Tr-007cVs-0S; Sun, 12 Oct 2025 19:11:44 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:17184) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1v81TD-007cJr-G6
- for samba-technical@lists.samba.org; Sun, 12 Oct 2025 19:11:06 +0000
+ (Exim) id 1v81TM-007cP6-VO
+ for samba-technical@lists.samba.org; Sun, 12 Oct 2025 19:11:21 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Message-ID:Date:Cc:To:From;
- bh=SDybIPq8SOlNbvN/Gg6Tj5xcXCIHombJl3CYZPtQvoA=; b=Vh2CEsVGt7hb06a1e10W0NaRqt
- rpgljH3Uh/bYo+3f0mC9/Nfy960I4SiRGfRDpp36NHqdwgLONdU32zgvaDWU6nVXsm9h+6UZfwpWr
- pQ2a/1vNNQ0LOO/0QV3CLIIE2rU5f3YS/MZzYdm8aA//Hs+K7IxDf7b9Y97No5NvUr2iQrk0fLaO+
- Sp1Gr5MkFN/+EmN85fkPVTPNmWH1Oit7VZkZ9hieHrMwoeiyTfpQDSCrW3TNMrWfVlm7qu40dpfxY
- Lev96pTh7LYMz1hD28eBxeijER1CldyWbWMpyralyM25guFob9wYscDC2DvD3LTnmrCaF4/uhRks4
- CaSx0NxMXldiGP8AOTvsbSHK86S7y+rvuc7TDR50p/V1NjGL5bDh57O8FpTWD1dRAovBMP+l+2EpG
- M/zd2cn6M4M44Su0QsH6v0CYoqN78xA+tSRWp0BW9MpQN79+PXlLScKXtWC38fscrACRqhCyXvha0
- FyyQYjD1pPMIdxEs4x5SW/rD;
+ bh=hRIn8/fTMfm2RzHetMjt3FbglELaW9ofsowj6oUWlJs=; b=ulvfB/4+conEd9n/7EWytsdgYw
+ w77c/TWmRjX5Jjb+avww7BYI3Axg2I6sPJ5lVDGTuTCAv4rZiU8DCU8md6/Ny3roE+8lJZeVT+CuR
+ tqH5XG8gVCLy/j8D5Llt576VN5BPyV4NvShTtx9OFfic6ZkV/5RW+3T/+egGIjluNNUufg/xNKuNz
+ dmjluJD3BBAqVXPAOCwnzzlZNs/cDH9UfZHBb+omIklVKblOw3xgESyRuwnNOlXM3JpLARUxgG/tf
+ NL0w2ipUOf+5XOAssaUhFVKxLTNeBeXow8+n70Oo2fcINeDeZRQe2eCYqGywwtEfw6GeCF3Ox/LhJ
+ 5H+EIqLWjcR2bQw1MftmAAecLQ7h/+hPDFJ51IZ63qRIJ5cd25XP6ryJFvGgLxOTtah6IwwGG68GS
+ nI4EHVhucuPCjkq322jad+zEJLnq3EkefRQ6IctK4yBhFK5q7sb6QvBQVkM1paEjNOlIjeSpckTvd
+ XQvF4A83xcCfkNH1tdm4l2KL;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1v81TC-008o0A-2I; Sun, 12 Oct 2025 19:11:02 +0000
+ (Exim) id 1v81TK-008o0z-0J; Sun, 12 Oct 2025 19:11:10 +0000
 To: linux-cifs@vger.kernel.org,
 	samba-technical@lists.samba.org
-Subject: [PATCH 03/10] smb: client: let destroy_mr_list() call
- list_del(&mr->list)
-Date: Sun, 12 Oct 2025 21:10:23 +0200
-Message-ID: <59a58f3a53ccc1d0ac732d3a98986b995fc8e32a.1760295528.git.metze@samba.org>
+Subject: [PATCH 04/10] smb: client: let destroy_mr_list() remove locked from
+ the list
+Date: Sun, 12 Oct 2025 21:10:24 +0200
+Message-ID: <52d3cc6ab2a0d454b6db4a8a6fbc4d586d371f5e.1760295528.git.metze@samba.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1760295528.git.metze@samba.org>
 References: <cover.1760295528.git.metze@samba.org>
@@ -65,7 +65,7 @@ Cc: metze@samba.org, Steve French <smfrench@gmail.com>,
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This makes the code clearer and will make further changes easier.
+This should make sure get_mr() can't see the removed entries.
 
 Cc: Steve French <smfrench@gmail.com>
 Cc: Tom Talpey <tom@talpey.com>
@@ -75,21 +75,31 @@ Cc: linux-cifs@vger.kernel.org
 Cc: samba-technical@lists.samba.org
 Signed-off-by: Stefan Metzmacher <metze@samba.org>
 ---
- fs/smb/client/smbdirect.c | 1 +
- 1 file changed, 1 insertion(+)
+ fs/smb/client/smbdirect.c | 9 ++++++++-
+ 1 file changed, 8 insertions(+), 1 deletion(-)
 
 diff --git a/fs/smb/client/smbdirect.c b/fs/smb/client/smbdirect.c
-index a20aa2ddf57d..b7be67dacd09 100644
+index b7be67dacd09..b974ca4e0b2e 100644
 --- a/fs/smb/client/smbdirect.c
 +++ b/fs/smb/client/smbdirect.c
-@@ -2363,6 +2363,7 @@ static void destroy_mr_list(struct smbdirect_socket *sc)
+@@ -2355,9 +2355,16 @@ static void smbd_mr_recovery_work(struct work_struct *work)
+ static void destroy_mr_list(struct smbdirect_socket *sc)
+ {
+ 	struct smbdirect_mr_io *mr, *tmp;
++	LIST_HEAD(all_list);
++	unsigned long flags;
+ 
+ 	disable_work_sync(&sc->mr_io.recovery_work);
+-	list_for_each_entry_safe(mr, tmp, &sc->mr_io.all.list, list) {
++
++	spin_lock_irqsave(&sc->mr_io.all.lock, flags);
++	list_splice_tail_init(&sc->mr_io.all.list, &all_list);
++	spin_unlock_irqrestore(&sc->mr_io.all.lock, flags);
++
++	list_for_each_entry_safe(mr, tmp, &all_list, list) {
+ 		if (mr->state == SMBDIRECT_MR_INVALIDATED)
+ 			ib_dma_unmap_sg(sc->ib.dev, mr->sgt.sgl,
  				mr->sgt.nents, mr->dir);
- 		ib_dereg_mr(mr->mr);
- 		kfree(mr->sgt.sgl);
-+		list_del(&mr->list);
- 		kfree(mr);
- 	}
- }
 -- 
 2.43.0
 
