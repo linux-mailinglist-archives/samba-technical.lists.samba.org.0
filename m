@@ -2,49 +2,76 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0EE20BD0AC3
-	for <lists+samba-technical@lfdr.de>; Sun, 12 Oct 2025 21:12:54 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 84C53BD14F6
+	for <lists+samba-technical@lfdr.de>; Mon, 13 Oct 2025 05:06:01 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=oFz5rVaNpm4DcEGKDv7UcJ3oBDSSjzJ0I7IiLqz6Axk=; b=3EF8+y0cz+iCQtPtso5mKm3MBE
-	YeOYw1DqwRsYOq9ioexP85xv1fd/Wm+KKM8/BTyGqv4zhhmTQlwU9+iHzeIfCqrpQmBaFGt5WPOeI
-	JtstHNHppW4kxK5dTJq0oNVqXYUjnKQ+45Z9/RBbMJs7r/qGxoAaBDvuKakJl/iyXEk0RcY3tzydv
-	DRK3ZbZr+3ajbu4MBFjG8QB7vZ6lOzS6BE8HR6bLxeQYYGFO325z5TEV5kX8/5lQXT8ZJzcvTM1sn
-	dzie91/1yAQMT4FZFKapUi9hZ9IdxCytZu4Xuv+WeoyGYh4zBiJKJf7V1Fqs/dm2cz3dYiGuqi9Ol
-	i62S7xcw==;
-Received: from ip6-localhost ([::1]:52592 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=qHAqGhh/ixHW+v9mccbsdYXuyyKdgiAAP3DIPnvHpvs=; b=k1vCEY/PRMKmHeYKIo8FQgdWPO
+	TXmbz5IwAv8+zeoJ/h/XjzmFrUPAQida6C5d5teXZ2EA19T2ZO6lm+Y00aq7qORbZU20M0SJeQyKp
+	ZBXUVfkOfFIRsTqQuvfdgcJW1kHS/rEUPGfKrGy28I3fcZjJ19QpZcY82bfwPNwIrvBS0Z57XEs4y
+	LeSZXWYZD3cBpInH2xGA0PYmzMXIiPFVbxGlW1zdAJXSefq1IcJNnv+FGT+ZFTHNBxu+nXw76GvRp
+	idPdeN0ikD/MGSDJaIEmBDnG52sP/+eg5izPXhuCtp9FRZh3Uu5QqqRskXbqy30yccRaXZjWUGIXn
+	nM2cDrkw==;
+Received: from ip6-localhost ([::1]:26138 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1v81Us-007d0b-3O; Sun, 12 Oct 2025 19:12:46 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:56708) 
+	id 1v88sL-007e0p-If; Mon, 13 Oct 2025 03:05:29 +0000
+Received: from mail-qv1-xf32.google.com ([2607:f8b0:4864:20::f32]:51476) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1v81UR-007crN-DN
- for samba-technical@lists.samba.org; Sun, 12 Oct 2025 19:12:37 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Date:Cc:To:From;
- bh=oFz5rVaNpm4DcEGKDv7UcJ3oBDSSjzJ0I7IiLqz6Axk=; b=XK9OxcD6cfzYK1ZWCGjSZ1iugT
- 0n37UoFQ+it/jnk2ve9M3acVO1m1GdAKCegTMp+xH4ms6psK22MB6N9Y8vl4m4hp1kpiQvraKBZZf
- dhiLpXIQO5h0mLz4PkKbkh9T4bg+eVQ9xunPket9JFap2VJvowSzaeHg9hL4eEgKFBR4EoX9KQOcr
- OSlTP/a0bOpiNrJwjtAe8fIaXfatRnlxkAq17R4P1SkPjqjRKpm7pprYDlQSAMYdBBtWPCXIwmJ9U
- nx1gWLWbsVJ5CnIsy3uZVfkonJYQ0nCEjdSyfnwMERaVjni5QgEsPjHvHrAUcyHQjTJS47kEZXhK3
- L3I4CvronxZpi3qhuiIBwvA6asDHyzYfCg4u2xRMl1OWIWzTNs0F+ZaULbRHaU5lrC54sTEqfkrV9
- gc+Uri9pZ2CNtm7QC7znaOS7+J0fh4ahlvOJW7rYmiB5lPt1aGGNB9fMI4RWYkFChJ9TB9WWXnGmG
- pYTJB7dGVo7CtLcixGzZaSCj;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1v81UP-008oGt-0d; Sun, 12 Oct 2025 19:12:17 +0000
-To: linux-cifs@vger.kernel.org,
-	samba-technical@lists.samba.org
-Subject: [PATCH 10/10] smb: client: let destroy_mr_list() keep smbdirect_mr_io
- memory if registered
-Date: Sun, 12 Oct 2025 21:10:30 +0200
-Message-ID: <6d275bab3ee66cf653c9e1e242a0a87efa352063.1760295528.git.metze@samba.org>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <cover.1760295528.git.metze@samba.org>
-References: <cover.1760295528.git.metze@samba.org>
+ (Exim) id 1v88sH-007e0h-2p
+ for samba-technical@lists.samba.org; Mon, 13 Oct 2025 03:05:27 +0000
+Received: by mail-qv1-xf32.google.com with SMTP id
+ 6a1803df08f44-791fd6bffbaso59084456d6.3
+ for <samba-technical@lists.samba.org>; Sun, 12 Oct 2025 20:05:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1760324723; x=1760929523; darn=lists.samba.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=qHAqGhh/ixHW+v9mccbsdYXuyyKdgiAAP3DIPnvHpvs=;
+ b=aF0ggupmmHQthOvmXUfjW/jC3CPok9kYyZdxeLFRmpLTaDqr4MY/nVFwiay4iNt8Uw
+ NFW0wGglcTKFCZ6zshWH6ucbv4RlbIKCN0K0OPBy8hCRFsB7YDEyc4+E02jIsRVrYw7E
+ jzD7gmSvc7kigCvAVDJXbyngUQMlGQHSdwqYVJ5QxqvAX9/vCmlbMW+H2et+AYcomHrU
+ 5fHnldnVmfpFBLeqn4miNSN6NSyP3X8H/tm13yZh4LVpYyKiK4//SmPGLvCn+Ta9rf+R
+ nhXtpkOXU9Z4rMS29p8g06d4jx01ExI4kBD+c1PqTX8GkbYo5RR1lC00Bsb3dT0G3nv3
+ /ChQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1760324723; x=1760929523;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=qHAqGhh/ixHW+v9mccbsdYXuyyKdgiAAP3DIPnvHpvs=;
+ b=RMuYbDZDbDL+MEIf375mysHwz9jVXL3Wk4dlgfYUja6mxOCOjs+k5wVFUH8tqTgLN+
+ IVDK1DLh12iZUPcAvXiOAfc8ch4COeA4uxwidDT4k7V0QblQwruAVsTucRSLxJMZWWkw
+ j2T7VHdP8F/DZ12hqZv40oFWlj48Zy1hh0C5qWipQSTvneucBIDFz3ympR+ZRjAehj68
+ 1Kb1gzRpIHroAyYRvyJrjfQCIW2BwisIG6NAiNV4yY5kpk3y9d9Sd2Rud/lyahz8syDU
+ AMG/o2gTbZI3TpnqprXUZiaEQU9e0rvsOaqAzPwDqm6umidJSndUQJ89EA9JLdr4XDgz
+ xfCA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCX3wRlr4279f2K8+OfqdydR5zTOA9kijFc7vr0sx2TdQChiPt+/NTYuhX1buZqzz+xQ5bMHrwekOSP7+/M0pjg=@lists.samba.org
+X-Gm-Message-State: AOJu0Yw6Iwdh7vOLpBsf/HFAgwqrBlxnlzU4tsYZOrlU562q6FOFJWlo
+ NJpkyCJAGEhKJ55Jrf1RwOEvsdTrAwQeDqy4k6Vk8WLreh0t55YNeAeP2WB0Kq3GHUruMNx1gMN
+ 8Ig6cngSPBPSF2UnA7iiohDuc11KIsPo=
+X-Gm-Gg: ASbGncuZLMJvaAIYoDHfayHpLRnlVE/q0e2R64POROdTZJ1G7lGccbQG6QkfEs+d8MW
+ TYuAJck2TY6eAsKvYuw5UdZ0HhGkyh/RhJ5A7GiGgD2kqez289HTCPmtBn/+wEtG9Zaw3yDfbRv
+ A+0vD9yvD/9B/VDJQDKXvGiC1JooGApar/I3ofOow0HjgD5uSqbTm7H/vQG9N8U8bFS5gxzukeT
+ htEIJSlKGgBonIF2mMfUf1e5dpCbc1c2xnbZMMfCtd2K4VtXWx9EHf3g/r3GfgorEaw679PQQsA
+ MVP1E/a+sb/GEiub1RMl+eNFCOiMFtpLgunvJRTnorMEOGMX1E6UVwV6/UKNBggOzMxoXh2EUum
+ kXidCGz0i0vbsycNQWEIXtnvGrSNRwntRCAPstDi9
+X-Google-Smtp-Source: AGHT+IGDwTSeSw8sMShsBfmLNXRL+l5FjSlGRN765Q6/KfQ0u9Esino45KVYsQZMHmm3/nGdQnVEF8SEli+vXx+F6YM=
+X-Received: by 2002:ad4:5c8b:0:b0:782:f478:8ef6 with SMTP id
+ 6a1803df08f44-87b2ef3fd05mr271912316d6.53.1760324722984; Sun, 12 Oct 2025
+ 20:05:22 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <cover.1760295528.git.metze@samba.org>
+In-Reply-To: <cover.1760295528.git.metze@samba.org>
+Date: Sun, 12 Oct 2025 22:05:11 -0500
+X-Gm-Features: AS18NWBXSKZ22IKuewh1gVJmA-cWkMqgUW3PAEIT_pZFb0XSxNvkXaBGJYNOaDg
+Message-ID: <CAH2r5mt=6mwgy=d6kmB--V0f8GbxWooBH4pD56bDUouMOaDXrQ@mail.gmail.com>
+Subject: Re: [PATCH 00/10] improve smbdirect_mr_io lifetime
+To: Stefan Metzmacher <metze@samba.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,270 +85,72 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Stefan Metzmacher <metze@samba.org>
-Cc: metze@samba.org, Steve French <smfrench@gmail.com>,
- Tom Talpey <tom@talpey.com>, Namjae Jeon <linkinjeon@kernel.org>
+From: Steve French via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Steve French <smfrench@gmail.com>
+Cc: Tom Talpey <tom@talpey.com>, linux-cifs@vger.kernel.org,
+ samba-technical@lists.samba.org, Namjae Jeon <linkinjeon@kernel.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-If a smbdirect_mr_io structure if still visible to callers of
-smbd_register_mr() we can't free the related memory when the
-connection is disconnected! Otherwise smbd_deregister_mr()
-will crash.
+merged into cifs-2.6.git for-next pending more testing
 
-Now we use a mutex and refcounting in order to keep the
-memory around if the connection is disconnected.
+On Sun, Oct 12, 2025 at 2:10=E2=80=AFPM Stefan Metzmacher <metze@samba.org>=
+ wrote:
+>
+> Hi,
+>
+> these patches improve and simplify our handling of
+> smbdirect_mr_io structures and their lifetime.
+>
+> smbd_register_mr() returns a pointer to struct smbdirect_mr_io
+> and smbd_deregister_mr() gives the pointer back.
+>
+> But currently the memory itself is managed by the connection
+> (struct smbdirect_socket) and smbd_destroy() has a strange
+> wait loop in order to wait for smbd_deregister_mr() being
+> called. It means code in smbd_destroy() is aware of
+> the server mutex in the generic smb client handling above
+> the transport layer.
+>
+> These patches do some cleanups and fixes before changing
+> the logic to use a kref and a mutex in order to allow
+> smbd_deregister_mr() being called after smbd_destroy()
+> as the memory of smbdirect_mr_io will stay in memory
+> but will be detached from the connection.
+>
+> This makes the code independent of cifs_server_[un]lock()
+> and will allow us to move more smbdirect code into common
+> functions (shared between client and server).
+>
+> I think these should go into 6.18.
+>
+> Stefan Metzmacher (10):
+>   smb: smbdirect: introduce smbdirect_mr_io.{kref,mutex} and
+>     SMBDIRECT_MR_DISABLED
+>   smb: client: change smbd_deregister_mr() to return void
+>   smb: client: let destroy_mr_list() call list_del(&mr->list)
+>   smb: client: let destroy_mr_list() remove locked from the list
+>   smb: client: improve logic in allocate_mr_list()
+>   smb: client: improve logic in smbd_register_mr()
+>   smb: client: improve logic in smbd_deregister_mr()
+>   smb: client: call ib_dma_unmap_sg if mr->sgt.nents is not 0
+>   smb: client: let destroy_mr_list() call ib_dereg_mr() before
+>     ib_dma_unmap_sg()
+>   smb: client: let destroy_mr_list() keep smbdirect_mr_io memory if
+>     registered
+>
+>  fs/smb/client/smbdirect.c                  | 312 ++++++++++++++-------
+>  fs/smb/client/smbdirect.h                  |   2 +-
+>  fs/smb/common/smbdirect/smbdirect_socket.h |  11 +-
+>  3 files changed, 224 insertions(+), 101 deletions(-)
+>
+> --
+> 2.43.0
+>
 
-It means smbd_deregister_mr() can be called at any later time to free
-the memory, which is no longer referenced by nor referencing the
-connection.
 
-It also means smbd_destroy() no longer needs to wait for
-mr_io.used.count to become 0.
+--=20
+Thanks,
 
-Fixes: 050b8c374019 ("smbd: Make upper layer decide when to destroy the transport")
-Cc: Steve French <smfrench@gmail.com>
-Cc: Tom Talpey <tom@talpey.com>
-Cc: Long Li <longli@microsoft.com>
-Cc: Namjae Jeon <linkinjeon@kernel.org>
-Cc: linux-cifs@vger.kernel.org
-Cc: samba-technical@lists.samba.org
-Signed-off-by: Stefan Metzmacher <metze@samba.org>
----
- fs/smb/client/smbdirect.c | 145 +++++++++++++++++++++++++++++++++-----
- 1 file changed, 126 insertions(+), 19 deletions(-)
-
-diff --git a/fs/smb/client/smbdirect.c b/fs/smb/client/smbdirect.c
-index c3330e43488f..e78b4ceb6d32 100644
---- a/fs/smb/client/smbdirect.c
-+++ b/fs/smb/client/smbdirect.c
-@@ -1624,19 +1624,7 @@ void smbd_destroy(struct TCP_Server_Info *server)
- 	log_rdma_event(INFO, "free receive buffers\n");
- 	destroy_receive_buffers(sc);
- 
--	/*
--	 * For performance reasons, memory registration and deregistration
--	 * are not locked by srv_mutex. It is possible some processes are
--	 * blocked on transport srv_mutex while holding memory registration.
--	 * Release the transport srv_mutex to allow them to hit the failure
--	 * path when sending data, and then release memory registrations.
--	 */
- 	log_rdma_event(INFO, "freeing mr list\n");
--	while (atomic_read(&sc->mr_io.used.count)) {
--		cifs_server_unlock(server);
--		msleep(1000);
--		cifs_server_lock(server);
--	}
- 	destroy_mr_list(sc);
- 
- 	ib_free_cq(sc->ib.send_cq);
-@@ -2352,6 +2340,46 @@ static void smbd_mr_recovery_work(struct work_struct *work)
- 	}
- }
- 
-+static void smbd_mr_disable_locked(struct smbdirect_mr_io *mr)
-+{
-+	struct smbdirect_socket *sc = mr->socket;
-+
-+	lockdep_assert_held(&mr->mutex);
-+
-+	if (mr->state == SMBDIRECT_MR_DISABLED)
-+		return;
-+
-+	if (mr->mr)
-+		ib_dereg_mr(mr->mr);
-+	if (mr->sgt.nents)
-+		ib_dma_unmap_sg(sc->ib.dev, mr->sgt.sgl, mr->sgt.nents, mr->dir);
-+	kfree(mr->sgt.sgl);
-+
-+	mr->mr = NULL;
-+	mr->sgt.sgl = NULL;
-+	mr->sgt.nents = 0;
-+
-+	mr->state = SMBDIRECT_MR_DISABLED;
-+}
-+
-+static void smbd_mr_free_locked(struct kref *kref)
-+{
-+	struct smbdirect_mr_io *mr =
-+		container_of(kref, struct smbdirect_mr_io, kref);
-+
-+	lockdep_assert_held(&mr->mutex);
-+
-+	/*
-+	 * smbd_mr_disable_locked() should already be called!
-+	 */
-+	if (WARN_ON_ONCE(mr->state != SMBDIRECT_MR_DISABLED))
-+		smbd_mr_disable_locked(mr);
-+
-+	mutex_unlock(&mr->mutex);
-+	mutex_destroy(&mr->mutex);
-+	kfree(mr);
-+}
-+
- static void destroy_mr_list(struct smbdirect_socket *sc)
- {
- 	struct smbdirect_mr_io *mr, *tmp;
-@@ -2365,13 +2393,31 @@ static void destroy_mr_list(struct smbdirect_socket *sc)
- 	spin_unlock_irqrestore(&sc->mr_io.all.lock, flags);
- 
- 	list_for_each_entry_safe(mr, tmp, &all_list, list) {
--		if (mr->mr)
--			ib_dereg_mr(mr->mr);
--		if (mr->sgt.nents)
--			ib_dma_unmap_sg(sc->ib.dev, mr->sgt.sgl, mr->sgt.nents, mr->dir);
--		kfree(mr->sgt.sgl);
-+		mutex_lock(&mr->mutex);
-+
-+		smbd_mr_disable_locked(mr);
- 		list_del(&mr->list);
--		kfree(mr);
-+		mr->socket = NULL;
-+
-+		/*
-+		 * No kref_put_mutex() as it's already locked.
-+		 *
-+		 * If smbd_mr_free_locked() is called
-+		 * and the mutex is unlocked and mr is gone,
-+		 * in that case kref_put() returned 1.
-+		 *
-+		 * If kref_put() returned 0 we know that
-+		 * smbd_mr_free_locked() didn't
-+		 * run. Not by us nor by anyone else, as we
-+		 * still hold the mutex, so we need to unlock.
-+		 *
-+		 * If the mr is still registered it will
-+		 * be dangling (detached from the connection
-+		 * waiting for smbd_deregister_mr() to be
-+		 * called in order to free the memory.
-+		 */
-+		if (!kref_put(&mr->kref, smbd_mr_free_locked))
-+			mutex_unlock(&mr->mutex);
- 	}
- }
- 
-@@ -2402,6 +2448,9 @@ static int allocate_mr_list(struct smbdirect_socket *sc)
- 			goto kzalloc_mr_failed;
- 		}
- 
-+		kref_init(&mr->kref);
-+		mutex_init(&mr->mutex);
-+
- 		mr->mr = ib_alloc_mr(sc->ib.pd,
- 				     sc->mr_io.type,
- 				     sp->max_frmr_depth);
-@@ -2471,6 +2520,7 @@ static struct smbdirect_mr_io *get_mr(struct smbdirect_socket *sc)
- 	list_for_each_entry(ret, &sc->mr_io.all.list, list) {
- 		if (ret->state == SMBDIRECT_MR_READY) {
- 			ret->state = SMBDIRECT_MR_REGISTERED;
-+			kref_get(&ret->kref);
- 			spin_unlock_irqrestore(&sc->mr_io.all.lock, flags);
- 			atomic_dec(&sc->mr_io.ready.count);
- 			atomic_inc(&sc->mr_io.used.count);
-@@ -2535,6 +2585,8 @@ struct smbdirect_mr_io *smbd_register_mr(struct smbd_connection *info,
- 		return NULL;
- 	}
- 
-+	mutex_lock(&mr->mutex);
-+
- 	mr->dir = writing ? DMA_FROM_DEVICE : DMA_TO_DEVICE;
- 	mr->need_invalidate = need_invalidate;
- 	mr->sgt.nents = 0;
-@@ -2578,8 +2630,16 @@ struct smbdirect_mr_io *smbd_register_mr(struct smbd_connection *info,
- 	 * on the next ib_post_send when we actually send I/O to remote peer
- 	 */
- 	rc = ib_post_send(sc->ib.qp, &reg_wr->wr, NULL);
--	if (!rc)
-+	if (!rc) {
-+		/*
-+		 * get_mr() gave us a reference
-+		 * via kref_get(&mr->kref), we keep that and let
-+		 * the caller use smbd_deregister_mr()
-+		 * to remove it again.
-+		 */
-+		mutex_unlock(&mr->mutex);
- 		return mr;
-+	}
- 
- 	log_rdma_mr(ERR, "ib_post_send failed rc=%x reg_wr->key=%x\n",
- 		rc, reg_wr->key);
-@@ -2596,6 +2656,25 @@ struct smbdirect_mr_io *smbd_register_mr(struct smbd_connection *info,
- 
- 	smbd_disconnect_rdma_connection(sc);
- 
-+	/*
-+	 * get_mr() gave us a reference
-+	 * via kref_get(&mr->kref), we need to remove it again
-+	 * on error.
-+	 *
-+	 * No kref_put_mutex() as it's already locked.
-+	 *
-+	 * If smbd_mr_free_locked() is called
-+	 * and the mutex is unlocked and mr is gone,
-+	 * in that case kref_put() returned 1.
-+	 *
-+	 * If kref_put() returned 0 we know that
-+	 * smbd_mr_free_locked() didn't
-+	 * run. Not by us nor by anyone else, as we
-+	 * still hold the mutex, so we need to unlock.
-+	 */
-+	if (!kref_put(&mr->kref, smbd_mr_free_locked))
-+		mutex_unlock(&mr->mutex);
-+
- 	return NULL;
- }
- 
-@@ -2624,6 +2703,15 @@ void smbd_deregister_mr(struct smbdirect_mr_io *mr)
- {
- 	struct smbdirect_socket *sc = mr->socket;
- 
-+	mutex_lock(&mr->mutex);
-+	if (mr->state == SMBDIRECT_MR_DISABLED)
-+		goto put_kref;
-+
-+	if (sc->status != SMBDIRECT_SOCKET_CONNECTED) {
-+		smbd_mr_disable_locked(mr);
-+		goto put_kref;
-+	}
-+
- 	if (mr->need_invalidate) {
- 		struct ib_send_wr *wr = &mr->inv_wr;
- 		int rc;
-@@ -2640,6 +2728,7 @@ void smbd_deregister_mr(struct smbdirect_mr_io *mr)
- 		rc = ib_post_send(sc->ib.qp, wr, NULL);
- 		if (rc) {
- 			log_rdma_mr(ERR, "ib_post_send failed rc=%x\n", rc);
-+			smbd_mr_disable_locked(mr);
- 			smbd_disconnect_rdma_connection(sc);
- 			goto done;
- 		}
-@@ -2671,6 +2760,24 @@ void smbd_deregister_mr(struct smbdirect_mr_io *mr)
- done:
- 	if (atomic_dec_and_test(&sc->mr_io.used.count))
- 		wake_up(&sc->mr_io.cleanup.wait_queue);
-+
-+put_kref:
-+	/*
-+	 * No kref_put_mutex() as it's already locked.
-+	 *
-+	 * If smbd_mr_free_locked() is called
-+	 * and the mutex is unlocked and mr is gone,
-+	 * in that case kref_put() returned 1.
-+	 *
-+	 * If kref_put() returned 0 we know that
-+	 * smbd_mr_free_locked() didn't
-+	 * run. Not by us nor by anyone else, as we
-+	 * still hold the mutex, so we need to unlock
-+	 * and keep the mr in SMBDIRECT_MR_READY or
-+	 * SMBDIRECT_MR_ERROR state.
-+	 */
-+	if (!kref_put(&mr->kref, smbd_mr_free_locked))
-+		mutex_unlock(&mr->mutex);
- }
- 
- static bool smb_set_sge(struct smb_extract_to_rdma *rdma,
--- 
-2.43.0
-
+Steve
 
