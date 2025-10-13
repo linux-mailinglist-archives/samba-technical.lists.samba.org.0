@@ -2,109 +2,79 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4EB3DBD3A47
-	for <lists+samba-technical@lfdr.de>; Mon, 13 Oct 2025 16:45:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3FAA7BD5FFC
+	for <lists+samba-technical@lfdr.de>; Mon, 13 Oct 2025 21:46:21 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=K+B3cRhWFJTukv1G4BnYWSSIGt6ZCh6nUUGxVgo8uAQ=; b=kcsBP/As0tzGwRAGvnrtS4vzcG
-	QBIqM9UDLHsLfTgUF74zCETKPMSdJXiX6hr3viaCbHEIRt/nhxNMuyVVjATfyic1bLVKFo+/THWQL
-	K8XyE+/aE77832vvc+sf71O92v6yt/UK230SWCpAB6dREC37pc9QWlw50+SapHBl+euNAJt74Fihz
-	zXy0poJEopFywF/DsS1zqrvBOqbbr+kkvnKpDFT9tifttMOPQEy4t/q7bmNUDqS1vE7g6bPFg5t3D
-	lE81mzoP80GtNgzk6WSpDKfvpQzZD587yVo/Oemi+i9qJgEKwPghT2stBEpW8CU54+DsJxURdgYMK
-	mUkpqUFw==;
-Received: from ip6-localhost ([::1]:63750 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=GcmZEKTNBTIPCp8q96eFzSv9hIg6mWUgJbBgwmUh3jc=; b=wkKKa1AHfFTWXqQViOjMfyGaSM
+	xjR1/z8lIRpcdYQLF+7NzuC8V6oG5Ft1gDaHPJi1j5OtCM9JfLrwvQHP62Gf2bxO41loT2mUjXcUE
+	upch8ncPzgeY3h6UN7H0ud36V1HyJlVHAeIfpXvtguPn9oPrCKC6VqJIBgg5LrBWk8Erpa3ZCGZUw
+	lQ0BkaPCPC8HMj0BimxHp+CcySz0S4BC17/7Gmyy4C6g7GHaL+1l5iD8dKgf/9mexmkNWMaQVBNDW
+	JN5lEvVp6GMnhHyxDj4GgJ3ssbB60iMSztfyVOoiIL6tg5su4aQkez3W32RUOUPpgooXvz9YkYbTv
+	9w1msYig==;
+Received: from ip6-localhost ([::1]:29708 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1v8JnE-007gc2-FX; Mon, 13 Oct 2025 14:44:56 +0000
-Received: from smtp-out1.suse.de ([195.135.223.130]:37860) 
+	id 1v8OUM-007iBq-BJ; Mon, 13 Oct 2025 19:45:46 +0000
+Received: from mail-qk1-x72f.google.com ([2607:f8b0:4864:20::72f]:61673) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1v8JnA-007gbv-4l
- for samba-technical@lists.samba.org; Mon, 13 Oct 2025 14:44:54 +0000
-Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
- [IPv6:2a07:de40:b281:104:10:150:64:97])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 9512521905;
- Mon, 13 Oct 2025 14:44:40 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1760366681; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=K+B3cRhWFJTukv1G4BnYWSSIGt6ZCh6nUUGxVgo8uAQ=;
- b=VK+1EE4j3M6zBqUyqwsfJPZ7wNYbNuR1eUYpArR9NC5nxT0JEYhfCqG3l/1UbRM8XVeAgD
- OP0ejKQsBj5T8f9bIQnjWVkcKyFcX8n6r7VgwfemCk5Xer8TbVvXtU1PO6ufXcSm+jf7I7
- 0qcZxo/SElX6uWKsTJCbr/DdMo7uR+0=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1760366681;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=K+B3cRhWFJTukv1G4BnYWSSIGt6ZCh6nUUGxVgo8uAQ=;
- b=H+Z+hlMPXqFqLSc2kVG/rLS0qhGuA8ExX3p3hiaPm4lBldtXUsA9IZ5fg0XElV5gpVt8mp
- TA9WceHuz9oKuUCw==
-Authentication-Results: smtp-out1.suse.de;
- dkim=pass header.d=suse.de header.s=susede2_rsa header.b=hkN0EgMX;
- dkim=pass header.d=suse.de header.s=susede2_ed25519 header.b=FHAP454y
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1760366680; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=K+B3cRhWFJTukv1G4BnYWSSIGt6ZCh6nUUGxVgo8uAQ=;
- b=hkN0EgMXB8IgYv43vMMrxEPUrwlVUpg7/bsuVp035BGXrnqO2UTWc9/uGV0Y/B2ihoI0TF
- UfiYAbs6vrdVLfBdsWUUqMvC/1w863h6ipglsyft76uCD275x9BlmpoHMSXnVNQB7Hb8/j
- JNqGyyE8fu1nTh7W6JPQvPTs7IfIHT4=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1760366680;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=K+B3cRhWFJTukv1G4BnYWSSIGt6ZCh6nUUGxVgo8uAQ=;
- b=FHAP454y4M6+ghCQIv03zw8w029neiqKz5sutpVNxnz92au7q04wTGUqqbMW0bPmU9qH0Q
- yaMIuKKvyDU9IXAg==
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 1852A13874;
- Mon, 13 Oct 2025 14:44:39 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id jQVKNFcQ7Wh4KQAAD6G6ig
- (envelope-from <ematsumiya@suse.de>); Mon, 13 Oct 2025 14:44:39 +0000
-Date: Mon, 13 Oct 2025 11:44:37 -0300
-To: Eric Biggers <ebiggers@kernel.org>
-Subject: Re: [PATCH 0/8] smb: client: More crypto library conversions
-Message-ID: <ihoaj3ymhuesevdb7k2kg2a2axdkishrrrjr2teigelhkxmt4s@do2n6pkdmaas>
-References: <20251012015738.244315-1-ebiggers@kernel.org>
+ (Exim) id 1v8OUH-007iBj-Op
+ for samba-technical@lists.samba.org; Mon, 13 Oct 2025 19:45:44 +0000
+Received: by mail-qk1-x72f.google.com with SMTP id
+ af79cd13be357-875d55217a5so632988485a.2
+ for <samba-technical@lists.samba.org>; Mon, 13 Oct 2025 12:45:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1760384740; x=1760989540; darn=lists.samba.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=GcmZEKTNBTIPCp8q96eFzSv9hIg6mWUgJbBgwmUh3jc=;
+ b=ftE5oMeQT6xYbHHA63dkgyxvAwlVPEePcA5oYXxI6SzFk4l9tm9rLoXJEeyZpb8ZGj
+ zrPH4iovdD42XMJAtRrFVd1nPDWSVCqcz636AuEZ2cH4bj449kRNuXbCA0OGAVn2fbFu
+ IT6qYxZ0+4OkDuw/0VrJ40VpFB1sbwB8OBwjybtEk2g88X/mwiAWYULB9dHi/wdqftKU
+ mmZoGIvOgb59TVPdifDURCuYU6lMdLxU6YXDuB3mjqEGqIqS4k/kzHJXcu23vtytF5Z6
+ rC0wy+su4jYM9tULzDfKty9eYMD086mzX92ClIO7KAgGNxjL4RLeMAbiT7VFx1vwXB2D
+ Dt7g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1760384740; x=1760989540;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=GcmZEKTNBTIPCp8q96eFzSv9hIg6mWUgJbBgwmUh3jc=;
+ b=xEf+UlAHWYOSZnnsoUh9RhpQDw+9g5m53aHas4aORP58I9iu2sxjWd9cYVKIEU87vm
+ IwvSrAcZk84x9erf5+oWDeBHGAyx551fAi4BrCijrgHJtoMcNsqnJSTKYMhhnYuuPPd1
+ 6i8E4MTRgxGDv4eQwwf36IJzBEWVhcj5DOAti9Dfmgoyrv5tAPSIGSyQTqElbPV9EH9G
+ hU9wwadejC+Xyf0HsDDYhlFpAnNItimjh48Ggn1RtvXL0AjCMgBfKiHk3DVHDDqRteCS
+ ZVF1dkrZDRqpTmAQq5hb0b2zwG680OyI1csbZ1IBNkAbnXhAdM6mlX7iJSAERAf2jS4Z
+ Y3DQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUFmgCj6NLGU0vdT5lDFq8K29Vsiyda9VMd1GqE0hYY/HfnxoS8cgFklnyTHWgr2FHcRwwqqZ0uMrw3lS9bMXE=@lists.samba.org
+X-Gm-Message-State: AOJu0YyzYbOqDS20MatP88p2aPyJOTW4nP/qS+k5dgFvIz3TYKehcJ+Q
+ RzrmbC9wVtFPyzmVCfDP3hHiMq9AIECKDiL2rcPhpBDwY7GdnMztDMUiy0VVG9YdmZnvPsYvjXt
+ rsikqxIIQcNYi//7XbGoHTMwvFgBt5Qw=
+X-Gm-Gg: ASbGncuCBTsVcSA+Z9IcCG4gf1Pwkk/1Evu/Jp/G5WcBu8uLUVeXnVqPUTfA0JoGXaf
+ v0MMcfZUSl9QAr+eH9Bizal3GK6mVH0HQZSKp9l8Ai0Z+PSuxbdnCuvqq6jwY3u3h/iOPIFw6SS
+ La9pRJwctVVgduq9Y+f+diU+RaAALFG4tUkOdbwPpslas92yTWwYG7SG/DeoxE8BQ77M12UzKBt
+ Qrz+f7jbiOYvddfrIFSq1XNAZeMjjOopc2aFxC1NMx3ZwLvkZ3EtgMyFX8UoEH1auAaeko1/3qK
+ iKnpl+pj0xCe30tUmpgJcttEU29sTgh6BbCOyVNmxDAdf4eYjrB0B4Fa7TTQdpSLRN9hheOEcXN
+ dhPXW3XkcaQZRbmgbgvtE9AIWUyY/0VDzc3nDwhzgU54mRepjn9s=
+X-Google-Smtp-Source: AGHT+IF9sCYKN0g9TVqil8pUkwyUn+jjklPZeGO8CcLdwB2We9WKmu9BxTJaYyjQC5nrE6Edju/O9ncg/zr0gPWjkuo=
+X-Received: by 2002:a05:622a:2cf:b0:4b4:9522:67a with SMTP id
+ d75a77b69052e-4e6ead12f0amr281990381cf.33.1760384739785; Mon, 13 Oct 2025
+ 12:45:39 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii; format=flowed
-Content-Disposition: inline
-In-Reply-To: <20251012015738.244315-1-ebiggers@kernel.org>
-X-Spam-Flag: NO
-X-Rspamd-Queue-Id: 9512521905
-X-Rspamd-Action: no action
-X-Rspamd-Server: rspamd1.dmz-prg2.suse.org
-X-Spamd-Result: default: False [-4.01 / 50.00]; BAYES_HAM(-3.00)[100.00%];
- NEURAL_HAM_LONG(-1.00)[-1.000]; MID_RHS_NOT_FQDN(0.50)[];
- R_DKIM_ALLOW(-0.20)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
- NEURAL_HAM_SHORT(-0.20)[-1.000]; MIME_GOOD(-0.10)[text/plain];
- MX_GOOD(-0.01)[]; TO_MATCH_ENVRCPT_ALL(0.00)[];
- DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
- FREEMAIL_ENVRCPT(0.00)[gmail.com];
- RBL_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:104:10:150:64:97:from]; 
- FUZZY_RATELIMITED(0.00)[rspamd.com]; MIME_TRACE(0.00)[0:+];
- ARC_NA(0.00)[];
- FREEMAIL_CC(0.00)[vger.kernel.org,samba.org,lists.samba.org,manguebit.org,gmail.com,microsoft.com,talpey.com];
- RCVD_TLS_ALL(0.00)[]; DKIM_TRACE(0.00)[suse.de:+];
- RCVD_COUNT_TWO(0.00)[2]; FROM_EQ_ENVFROM(0.00)[];
- FROM_HAS_DN(0.00)[]; TO_DN_SOME(0.00)[];
- DNSWL_BLOCKED(0.00)[2a07:de40:b281:104:10:150:64:97:from,2a07:de40:b281:106:10:150:64:167:received];
- RECEIVED_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:106:10:150:64:167:received];
- RCPT_COUNT_SEVEN(0.00)[11]; MISSING_XM_UA(0.00)[];
- RCVD_VIA_SMTP_AUTH(0.00)[];
- DBL_BLOCKED_OPENRESOLVER(0.00)[suse.de:dkim, imap1.dmz-prg2.suse.org:rdns,
- imap1.dmz-prg2.suse.org:helo]
-X-Spam-Score: -4.01
+References: <e8a44f5e-0f29-40ab-a6a3-74802cd970aa@web.de>
+ <8f7ac740-e6a8-4c37-a0aa-e0572c87fe9e@web.de>
+ <CAH2r5msRAejKX=vo7xGxMZDG_s++zZyHTazoFomd6GKOSt1XQA@mail.gmail.com>
+In-Reply-To: <CAH2r5msRAejKX=vo7xGxMZDG_s++zZyHTazoFomd6GKOSt1XQA@mail.gmail.com>
+Date: Mon, 13 Oct 2025 14:45:28 -0500
+X-Gm-Features: AS18NWCd3IA-GCOJgEu5wU-1WGwlNGLY2Cee4sZPgpXfTbOgHjuM5rizQnQvuHk
+Message-ID: <CAH2r5mv46wgNC5E=y+0hU9u2SWBreBOU_=F9Y_UxYFRwo_Z-wQ@mail.gmail.com>
+Subject: Re: [PATCH 3/3] smb: client: Omit a variable initialisation in
+ smb311_crypto_shash_allocate()
+To: Markus Elfring <Markus.Elfring@web.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -118,75 +88,76 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Enzo Matsumiya via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Enzo Matsumiya <ematsumiya@suse.de>
-Cc: linux-cifs@vger.kernel.org, Shyam Prasad N <sprasad@microsoft.com>,
- Paulo Alcantara <pc@manguebit.org>, samba-technical@lists.samba.org,
- linux-kernel@vger.kernel.org, Steve French <sfrench@samba.org>,
- Bharath SM <bharathsm@microsoft.com>, Tom Talpey <tom@talpey.com>,
- linux-crypto@vger.kernel.org
+From: Steve French via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Steve French <smfrench@gmail.com>
+Cc: linux-cifs@vger.kernel.org, Paulo Alcantara <pc@manguebit.org>,
+ Eric Biggers <ebiggers@kernel.org>, samba-technical@lists.samba.org,
+ kernel-janitors@vger.kernel.org,
+ "Stefan \(metze\) Metzmacher" <metze@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi Eric,
+Removed from cifs-2.6.git for-next, as it conflicts with Eric's recent
+patch series ("smb: client: More crypto library conversions").
 
-On 10/11, Eric Biggers wrote:
->This series converts fs/smb/client/ to access SHA-512, HMAC-SHA256, MD5,
->and HMAC-MD5 using the library APIs instead of crypto_shash.
->
->This simplifies the code significantly.  It also slightly improves
->performance, as it eliminates unnecessary overhead.
->
->Tested with Samba with all SMB versions, with mfsymlinks in the mount
->options, 'server min protocol = NT1' and 'server signing = required' in
->smb.conf, and doing a simple file data and symlink verification test.
->That seems to cover all the modified code paths.
->
->However, with SMB 1.0 I get "CIFS: VFS: SMB signature verification
->returned error = -13", regardless of whether this series is applied or
->not.  Presumably, testing that case requires some other setting I
->couldn't find.
->
->Regardless, these are straightforward conversions and all the actual
->crypto is exactly the same as before, as far as I can tell.
+Obviously one of the problems of minor cleanup patches, is they can
+cause noise like this
 
-I think the overall series looks good and do a great cleanup.
-
-Just a minor nit about fips_enabled: since it's now being handled
-explicitly (rather than an error on cifs_alloc_hash() currently), I
-think it makes sense to move the check to mount code path when
-'sectype == NTLMv2' (I don't particularly care about SMB1, but
-something similar can be done for 'smb1 && sign' cases I guess).
-
->Eric Biggers (8):
->  smb: client: Use SHA-512 library for SMB3.1.1 preauth hash
->  smb: client: Use HMAC-SHA256 library for key generation
->  smb: client: Use HMAC-SHA256 library for SMB2 signature calculation
->  smb: client: Use MD5 library for M-F symlink hashing
->  smb: client: Use MD5 library for SMB1 signature calculation
->  smb: client: Use HMAC-MD5 library for NTLMv2
->  smb: client: Remove obsolete crypto_shash allocations
->  smb: client: Consolidate cmac(aes) shash allocation
+On Fri, Oct 10, 2025 at 4:47=E2=80=AFPM Steve French <smfrench@gmail.com> w=
+rote:
 >
-> fs/smb/client/Kconfig         |   7 +-
-> fs/smb/client/cifsencrypt.c   | 201 +++++++++++++---------------------
-> fs/smb/client/cifsfs.c        |   4 -
-> fs/smb/client/cifsglob.h      |   3 -
-> fs/smb/client/cifsproto.h     |  10 +-
-> fs/smb/client/link.c          |  31 +-----
-> fs/smb/client/sess.c          |   2 +-
-> fs/smb/client/smb2misc.c      |  53 ++-------
-> fs/smb/client/smb2proto.h     |   8 +-
-> fs/smb/client/smb2transport.c | 164 +++++----------------------
-> 10 files changed, 131 insertions(+), 352 deletions(-)
+> merged into cifs-2.6.git for-next
+>
+> On Fri, Oct 10, 2025 at 1:52=E2=80=AFAM Markus Elfring <Markus.Elfring@we=
+b.de> wrote:
+> >
+> > From: Markus Elfring <elfring@users.sourceforge.net>
+> > Date: Fri, 10 Oct 2025 08:05:21 +0200
+> > Subject: [PATCH 3/3] smb: client: Omit a variable initialisation in smb=
+311_crypto_shash_allocate()
+> > MIME-Version: 1.0
+> > Content-Type: text/plain; charset=3DUTF-8
+> > Content-Transfer-Encoding: 8bit
+> >
+> > The local variable =E2=80=9Crc=E2=80=9D is immediately reassigned. Thus=
+ omit the explicit
+> > initialisation at the beginning.
+> >
+> > Signed-off-by: Markus Elfring <elfring@users.sourceforge.net>
+> > ---
+> >  fs/smb/client/smb2transport.c | 2 +-
+> >  1 file changed, 1 insertion(+), 1 deletion(-)
+> >
+> > diff --git a/fs/smb/client/smb2transport.c b/fs/smb/client/smb2transpor=
+t.c
+> > index b790f6b970a9..3f8b0509f8c8 100644
+> > --- a/fs/smb/client/smb2transport.c
+> > +++ b/fs/smb/client/smb2transport.c
+> > @@ -50,7 +50,7 @@ int
+> >  smb311_crypto_shash_allocate(struct TCP_Server_Info *server)
+> >  {
+> >         struct cifs_secmech *p =3D &server->secmech;
+> > -       int rc =3D 0;
+> > +       int rc;
+> >
+> >         rc =3D cifs_alloc_hash("hmac(sha256)", &p->hmacsha256);
+> >         if (rc)
+> > --
+> > 2.51.0
+> >
+> >
+> >
 >
 >
->base-commit: 67029a49db6c1f21106a1b5fcdd0ea234a6e0711
->-- 
->2.51.0
+> --
+> Thanks,
+>
+> Steve
 
 
-Cheers,
 
-Enzo
+--=20
+Thanks,
+
+Steve
 
