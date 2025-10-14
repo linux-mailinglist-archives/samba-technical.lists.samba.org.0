@@ -2,75 +2,74 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3BC6BBDB03E
-	for <lists+samba-technical@lfdr.de>; Tue, 14 Oct 2025 21:13:26 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 31E37BDBC9D
+	for <lists+samba-technical@lfdr.de>; Wed, 15 Oct 2025 01:25:59 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=Hj4KdecgoGHGYTc5Fn92jUDm+U1qN1I8QFfxys6tF+E=; b=ghg2YondPuxawt3BJCZpN7d7R+
-	gN8gzynAZrWL3xFIxy1IKja/ddGFDtN2M8Q778mt2+iYtsmd1Fxs/49kHjChcq68DbFLDuGw1ln7u
-	nJUyrKzu+Cfnf72OvARBU9wS8vJL0MwQ8KRZi3wOlrZ1nTjOibjuJ2QRnC/ucxbVB8YdpJ6/+DbVg
-	ZWVHJAwMjxUGeiJ8xKtClIePEVuDrsotsQEnOPu+59M2n9z6Vlk6DZfY02Pyn9g54vFFrApzkFbB+
-	QXcsH/BBYs1/vqk52rzAq4qEZwcrgwI4k5SM3oMxmlSQZOwUvVuO1G5aacnLLdSKF5t5zrxGQ/9Xp
-	tj5wZ3wg==;
-Received: from ip6-localhost ([::1]:51112 helo=hr1.samba.org) 
+	bh=kf2pDAfVjngTpkzODXnMwe0Da3237xRoCmOAzAJbeTc=; b=X+80u6lM9sfITTWhU9dIUv5dsn
+	gEjQOkc3RLsMpMKgkr2mCbQ29EXs0nAjjS85TYWM0W9wF5PS4tdRrUo9l0AsLTdNS3S1PfFWZT3O5
+	V057C/jeHgG/v3Fni18pjjdIkTGwDcZmyXtE5pOP5hFAeO/osktLHZhpmbp1XmZKesdl8ZxTwG/0I
+	q5IT5QcE2c6HHn3ITZHuh8TeNzjMhblP1zm2K0O9lYND4t8DpBCJTVqzAQJp0Y0VJGooOn1w257Qv
+	P5JeI3hweHLV3FdZfSCh+65S+OQsM0OgwyTBc29K2Zb+9tiKjkp6+mVSRiS19USdwW+bsTgiXIAWQ
+	F3nnzXVQ==;
+Received: from ip6-localhost ([::1]:44218 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1v8kS4-007m5X-A2; Tue, 14 Oct 2025 19:12:52 +0000
-Received: from mail-qv1-xf2d.google.com ([2607:f8b0:4864:20::f2d]:59430) 
+	id 1v8oOR-007mmf-Hs; Tue, 14 Oct 2025 23:25:23 +0000
+Received: from mail-qv1-xf34.google.com ([2607:f8b0:4864:20::f34]:42426) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1v8kRz-007m5Q-Hh
- for samba-technical@lists.samba.org; Tue, 14 Oct 2025 19:12:50 +0000
-Received: by mail-qv1-xf2d.google.com with SMTP id
- 6a1803df08f44-7960d69f14bso44480726d6.2
- for <samba-technical@lists.samba.org>; Tue, 14 Oct 2025 12:12:47 -0700 (PDT)
+ (Exim) id 1v8oOL-007mmX-HX
+ for samba-technical@lists.samba.org; Tue, 14 Oct 2025 23:25:20 +0000
+Received: by mail-qv1-xf34.google.com with SMTP id
+ 6a1803df08f44-8738c6fdbe8so6012726d6.1
+ for <samba-technical@lists.samba.org>; Tue, 14 Oct 2025 16:25:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1760469165; x=1761073965; darn=lists.samba.org;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Hj4KdecgoGHGYTc5Fn92jUDm+U1qN1I8QFfxys6tF+E=;
- b=ndMDgYaFrJAf5GUF3mxv5covyjxpSU7BOUniL1AfHH6gIiV3s2UWAFy5AB6UUxkCTn
- b68LUIsQdjrKbZmqSpg9JTS/E+GaYKS03pY3mfDlVv2hqxeBR+zKji6/nJ4zr+4A5jeB
- 9vjibP1IOUcD0gNKpT3n7zFt6fReabDCn9OnBWbk70Q1dGX4Mpbe33kw5pBNptujQ+sf
- SRTLRktgmpck4N9hNNdDvKceDYOts0j9TbpDMHH7wtXxynRDFPS9D9QdOh/UbuIbK+Gi
- Z6vjnicj7LtIOSVrdk0OMa+NNf1NTY6PZG9Z5P7/9k/MfVHXd6dG+z3qHLNnv7FixXy4
- /0OA==
+ d=gmail.com; s=20230601; t=1760484315; x=1761089115; darn=lists.samba.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=kf2pDAfVjngTpkzODXnMwe0Da3237xRoCmOAzAJbeTc=;
+ b=WGi/Xjcr3zSMIGn+97mjiWVF4c+Mg7MT7DAbuvf4LdCL84NAb/3rIbuGlJwwjUHPU3
+ Nh0LsAhV+ab4dMJpVPANXxQ0HiNYSgnc5HnnGBE8SEFr8c1RrQUPsEaI15pPg5bjf21i
+ byUMlwuGoJ//qvF4XnP5oNg5bVNJ0ToUvDop85hM9Nwap0Lgruj3mW+bm+YCJly+L0kQ
+ aOKyqPuWVt7GFwbGVG0FKVbzzYrYP+PtRavrC8pcqJNeyB+UAH4XU+R6HMmjkF301y5m
+ b1Zh76x9RlkRFpDPKnz9+luivtzkfFZGGCtZTtmMvizLboVK96RCc1P2cL/Nde+1TPWS
+ Y2vw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760469165; x=1761073965;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Hj4KdecgoGHGYTc5Fn92jUDm+U1qN1I8QFfxys6tF+E=;
- b=vTOX/wtsCCBLOxNsPsCgPJCxUECd7zZwMXqTtHZgffIMMUVchOSIH5YLoM8R0ylckY
- p1Bcnexf0cZw7TbrvdPbeMacrWZT7pfyIhkEy8JDBqHeaBsI2mmxf+zj8aaN/j5CDod+
- QsrZwl+f2w/8gAGRCZQ7D2i/Q6pcaqvOhj1aQvEBxLga8NWrZoo1x5Ej2rh4UKDL1bMr
- 2HKMPFlVHESY+FA1st9u93Kq2TSRaQlHM362byKHy/72ygiPU6NtupHEORaY5AuXvbh3
- pRGxH9Kz2rHmuf6pjgZNDLIll6zmkD4qKcsBITO8TTjU1l1ZyEkhOpYOJ8mu6OTeZin1
- rq2g==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUwdWTv979640GOXQ/J6As9aUOnMGZn7ARPIXTPAdsdzPIHiq4vdnExYbag/nAr2uUivArGq4LZr5JHNuGAdW0=@lists.samba.org
-X-Gm-Message-State: AOJu0YxHWDfMN1lg09hWfZ8/jWbBPP/d2/ASib2V9Jhn97yGKVr6SNpJ
- aTBk6GnkFaHZMwo3CrOIUxAVpZWyJ/UtFBjhIAGU9RLEI/YIPSVHOIQWKbQOynWdGg328CJLrUx
- k/3w7SvyndmFI1wtlrK4x0Yfcy8htrCE=
-X-Gm-Gg: ASbGncvPkd0fziuRK1SvALJto5Ljomn6PrVbRoLSdQtW+o4nyRki10N8NSVUu28dFlL
- wnU75wsH7BYMt+kQLXVq7O73DWw97T641s+Yzdsqqzd4TkKBMb89wORbmR40KqwqBCPCIv5Gcbj
- xW9FL3A0KABqifBzHluwr/kdTzZ84ypEFNFJi7zjvSnteCovFTZFvCqWqv6NDMyBL+BbXgvrnme
- 73AQjg91/gyyzVzHKpuGS2vfIUnH6plfGFvgrDcUNZmxYQoKBDC5bsz/2nV8UsEkKliU7NiWMv9
- dCu96pB4dI+mOgKoDU74QXFwfkFb830MoPs+qR5xFlnOZybfHWdBexBbRCcoKpGh5xEbE62YKmA
- s0YZjlFXwv9/cp6hIAqX7csceLb7zwUQI8BFKmpw=
-X-Google-Smtp-Source: AGHT+IGVnLqJpoAZcGkUlBY7oBpr7+xLff+kKqWhWi8JYLrzCEMQGNtSYRJnnKTVONKAwpF6Xdp30jZhS5ZxqaNWFFo=
-X-Received: by 2002:a05:6214:f6d:b0:70f:5a6d:a253 with SMTP id
- 6a1803df08f44-87b2ef44013mr355883666d6.49.1760469164911; Tue, 14 Oct 2025
- 12:12:44 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1760484315; x=1761089115;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=kf2pDAfVjngTpkzODXnMwe0Da3237xRoCmOAzAJbeTc=;
+ b=mCbWQ75EnOlSbHQ+5X1g+dkfCNQLsqBIvkMmcdVlFps4otXMmFeG8WV58BN5tqQdpG
+ V+zit08OUBl9sUMqmVdh98ksaB0rlAGrb+Ca178eJ/CsnLcNhmH2+GE3Z3w9kUFZJvAb
+ Bj+h5YFXQIty6vdnUqbBBo8J5G+8Ho+KF3tV46IPFPFgAv9OhXNpgtwtF4jb4ky12obv
+ b0F77xalW9n9WHfiUEt8faRUWkkRZXX5QuxmX+KrnmgoqiPn3VUNxrrkrxyerIEVaUK9
+ C2k8NUY8AkaXUme2JW/Z8Eol1uGRqVriEnFoxXOb/jI9jqvYHKdH/evCz7kVjNFuK1vv
+ RBiQ==
+X-Gm-Message-State: AOJu0YztjTW1M/8L0enLSu/mqAW6klXzrv3o1W1Bluw1Izq28aJg5SIN
+ 6+Fz8yX+AtnvytmXpm+6oFLKSm2dl5EAxmvBtONEAuUlCrInlvaHozyHCfRryI5a11qDdtVcmWc
+ 4uShpr9FjBnxCkiLO6SL0AKgs/BHSxlQPmg==
+X-Gm-Gg: ASbGncu6sIJYT+Kspmc10CrYwQ5O3T4ZkjUI+suldDwen3eRmE6g1fCjnMUoH3vTFhR
+ qDEFSQ8ZS6PiMwhkof+awiZjeGXXNTDLg8c48tAH0GB4WnRsv/f9G7Nmy+A9w5DMpyo1pH1iMHb
+ sSqqQ1G6wrxmGbSzklcQmrS/Qs1Ma21hd9vceVseb8OY3LiPPcIcFsU2jHuBK449tzODF0jaVBN
+ SxcQNxk0HO6vjJSlHQ2bfnRPXTJX18zoLIDaAtZcDV3A+SNQNTBu/YF387deGKAx7O6NUtNnbRg
+ +bY5zKQsLL/zj7bM98My6WBwSWNh1oZiAesGnMkyxMhNWD2bGb51vLuIfT3bpjphSexWOERqqPf
+ OC3xjmJ8TkHzpvItBnf+spHJMSe8Jj7arITKLG9ZAHGw2d74ubw==
+X-Google-Smtp-Source: AGHT+IGhOjo2tt/E54qCy7T45XT65HNL1+mWVXmj0qI/0XpYaTiuuMZ2Wznu7wTOpdkqZ5zJu8fHUjR4U3NVNcxxv/w=
+X-Received: by 2002:ad4:5ccd:0:b0:87b:b679:167b with SMTP id
+ 6a1803df08f44-87bb6791d98mr254917486d6.33.1760484315513; Tue, 14 Oct 2025
+ 16:25:15 -0700 (PDT)
 MIME-Version: 1.0
-References: <20251014-smb-client-fix-wformat-32b-parse_dfs_referrals-v1-1-47fa7db66b71@kernel.org>
-In-Reply-To: <20251014-smb-client-fix-wformat-32b-parse_dfs_referrals-v1-1-47fa7db66b71@kernel.org>
-Date: Tue, 14 Oct 2025 14:12:32 -0500
-X-Gm-Features: AS18NWA3bxi7uC4cjWWZ93Qyu_Sqb3TU4Fwo7i25Q_1DJKLVcEl20vSn3Vb4mSs
-Message-ID: <CAH2r5mtcJJ+_x2dQ3UkVFWd4+YapHXJFWFcxs5ErU+u8kncWsA@mail.gmail.com>
-Subject: Re: [PATCH] smb: client: Fix format specifiers for size_t in
- parse_dfs_referrals()
-To: Nathan Chancellor <nathan@kernel.org>
-Content-Type: multipart/mixed; boundary="000000000000369f240641232bf3"
+References: <20251014231759.136630-1-ebiggers@kernel.org>
+In-Reply-To: <20251014231759.136630-1-ebiggers@kernel.org>
+Date: Tue, 14 Oct 2025 18:25:04 -0500
+X-Gm-Features: AS18NWCwTXgSEy-D8Bgt4esOjJoQx31sKEYEozCJ_QKBcZVRkt2wPJhyVw-YdHs
+Message-ID: <CAH2r5mu6p+FGXb2aW2dkm2B9XOuSDnMc+eOMxtRV8JrYrd5X3g@mail.gmail.com>
+Subject: Fwd: [PATCH 0/3] ksmbd: More crypto library conversions
+To: CIFS <linux-cifs@vger.kernel.org>, Eric Biggers <ebiggers@kernel.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -86,163 +85,60 @@ List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
 From: Steve French via samba-technical <samba-technical@lists.samba.org>
 Reply-To: Steve French <smfrench@gmail.com>
-Cc: linux-cifs@vger.kernel.org, Shyam Prasad N <sprasad@microsoft.com>,
- Paulo Alcantara <pc@manguebit.org>, Eugene Korenevsky <ekorenevsky@aliyun.com>,
- samba-technical@lists.samba.org, patches@lists.linux.dev,
- stable@vger.kernel.org, Ccm Talpey <tom@talpey.com>,
- Bharath SM <bharathsm@microsoft.com>
+Cc: samba-technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
---000000000000369f240641232bf3
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Adding linux-cifs mailing lists for more visibility to these changes
 
-Nathan,
-Good catch.  Have updated the patch with your change (rather than
-having two patches) and added a Suggested-by.  If you want a
-Reviewed-by or Acked-by let me know.
+---------- Forwarded message ---------
+From: Eric Biggers <ebiggers@kernel.org>
+Date: Tue, Oct 14, 2025 at 6:18=E2=80=AFPM
+Subject: [PATCH 0/3] ksmbd: More crypto library conversions
+To: <linux-cifs@vger.kernel.org>, Namjae Jeon <linkinjeon@kernel.org>,
+Steve French <smfrench@gmail.com>
+Cc: Sergey Senozhatsky <senozhatsky@chromium.org>, Tom Talpey
+<tom@talpey.com>, <linux-crypto@vger.kernel.org>,
+<linux-kernel@vger.kernel.org>, Eric Biggers <ebiggers@kernel.org>
 
-Updated patch attached.
+
+This series converts fs/smb/server/ to access SHA-512, HMAC-SHA256, and
+HMAC-MD5 using the library APIs instead of crypto_shash.
+
+This simplifies the code significantly.  It also slightly improves
+performance, as it eliminates unnecessary overhead.  I haven't done
+server-specific benchmarks, but you can get an idea of what to expect by
+looking at the numbers I gave for the similar client-side series:
+https://lore.kernel.org/linux-cifs/20251014034230.GC2763@sol/
+
+No change in behavior intended.  All the crypto computations should be
+the same as before.  I haven't tested this series (I did test the
+similar client-side series), but everything should still work.
+
+Eric Biggers (3):
+  ksmbd: Use SHA-512 library for SMB3.1.1 preauth hash
+  ksmbd: Use HMAC-SHA256 library for message signing and key generation
+  ksmbd: Use HMAC-MD5 library for NTLMv2
+
+ fs/smb/server/Kconfig      |   6 +-
+ fs/smb/server/auth.c       | 390 +++++++------------------------------
+ fs/smb/server/auth.h       |  10 +-
+ fs/smb/server/crypto_ctx.c |  24 ---
+ fs/smb/server/crypto_ctx.h |  15 +-
+ fs/smb/server/server.c     |   4 -
+ fs/smb/server/smb2pdu.c    |  26 +--
+ fs/smb/server/smb_common.h |   2 +-
+ 8 files changed, 87 insertions(+), 390 deletions(-)
 
 
-On Tue, Oct 14, 2025 at 1:33=E2=80=AFPM Nathan Chancellor <nathan@kernel.or=
-g> wrote:
->
-> When building for 32-bit platforms, for which 'size_t' is
-> 'unsigned int', there are a couple instances of -Wformat:
->
->   fs/smb/client/misc.c:922:25: error: format specifies type 'unsigned lon=
-g' but the argument has type 'unsigned int' [-Werror,-Wformat]
->     921 |                          "%s: header is malformed (size is %u, =
-must be %lu)\n",
->         |                                                                =
-        ~~~
->         |                                                                =
-        %u
->     922 |                          __func__, rsp_size, sizeof(*rsp));
->         |                                              ^~~~~~~~~~~~
->   fs/smb/client/misc.c:940:5: error: format specifies type 'unsigned long=
-' but the argument has type 'unsigned int' [-Werror,-Wformat]
->     938 |                          "%s: malformed buffer (size is %u, mus=
-t be at least %lu)\n",
->         |                                                                =
-              ~~~
->         |                                                                =
-              %u
->     939 |                          __func__, rsp_size,
->     940 |                          sizeof(*rsp) + *num_of_nodes * sizeof(=
-REFERRAL3));
->         |                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~=
-~~~~~~~~~~
->
-> Use the proper 'size_t' format specifier, '%zu', to clear up these
-> warnings.
->
-> Cc: stable@vger.kernel.org
-> Fixes: c1047752ed9f ("cifs: parse_dfs_referrals: prevent oob on malformed=
- input")
-> Signed-off-by: Nathan Chancellor <nathan@kernel.org>
-> ---
-> Feel free to squash this into the original change to make backporting
-> easier. I included the tags in case rebasing was not an option.
-> ---
->  fs/smb/client/misc.c | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
->
-> diff --git a/fs/smb/client/misc.c b/fs/smb/client/misc.c
-> index 987f0ca73123..e10123d8cd7d 100644
-> --- a/fs/smb/client/misc.c
-> +++ b/fs/smb/client/misc.c
-> @@ -918,7 +918,7 @@ parse_dfs_referrals(struct get_dfs_referral_rsp *rsp,=
- u32 rsp_size,
->
->         if (rsp_size < sizeof(*rsp)) {
->                 cifs_dbg(VFS | ONCE,
-> -                        "%s: header is malformed (size is %u, must be %l=
-u)\n",
-> +                        "%s: header is malformed (size is %u, must be %z=
-u)\n",
->                          __func__, rsp_size, sizeof(*rsp));
->                 rc =3D -EINVAL;
->                 goto parse_DFS_referrals_exit;
-> @@ -935,7 +935,7 @@ parse_dfs_referrals(struct get_dfs_referral_rsp *rsp,=
- u32 rsp_size,
->
->         if (sizeof(*rsp) + *num_of_nodes * sizeof(REFERRAL3) > rsp_size) =
-{
->                 cifs_dbg(VFS | ONCE,
-> -                        "%s: malformed buffer (size is %u, must be at le=
-ast %lu)\n",
-> +                        "%s: malformed buffer (size is %u, must be at le=
-ast %zu)\n",
->                          __func__, rsp_size,
->                          sizeof(*rsp) + *num_of_nodes * sizeof(REFERRAL3)=
-);
->                 rc =3D -EINVAL;
->
-> ---
-> base-commit: 4e47319b091f90d5776efe96d6c198c139f34883
-> change-id: 20251014-smb-client-fix-wformat-32b-parse_dfs_referrals-189b8c=
-6fdf75
->
-> Best regards,
-> --
-> Nathan Chancellor <nathan@kernel.org>
->
->
+base-commit: 3a8660878839faadb4f1a6dd72c3179c1df56787
+--
+2.51.0
+
 
 
 --=20
 Thanks,
 
 Steve
-
---000000000000369f240641232bf3
-Content-Type: text/x-patch; charset="US-ASCII"; 
-	name="0001-cifs-parse_dfs_referrals-prevent-oob-on-malformed-in.patch"
-Content-Disposition: attachment; 
-	filename="0001-cifs-parse_dfs_referrals-prevent-oob-on-malformed-in.patch"
-Content-Transfer-Encoding: base64
-Content-ID: <f_mgqxvjv90>
-X-Attachment-Id: f_mgqxvjv90
-
-RnJvbSA3ZjBmNTRkZmMzMTA2M2E4ZWE4YzBkMTAzNGNjOTBhZTY2MTQwM2ZhIE1vbiBTZXAgMTcg
-MDA6MDA6MDAgMjAwMQpGcm9tOiBFdWdlbmUgS29yZW5ldnNreSA8ZWtvcmVuZXZza3lAYWxpeXVu
-LmNvbT4KRGF0ZTogTW9uLCAxMyBPY3QgMjAyNSAyMTozOTozMCArMDMwMApTdWJqZWN0OiBbUEFU
-Q0hdIGNpZnM6IHBhcnNlX2Rmc19yZWZlcnJhbHM6IHByZXZlbnQgb29iIG9uIG1hbGZvcm1lZCBp
-bnB1dAoKTWFsaWNpb3VzIFNNQiBzZXJ2ZXIgY2FuIHNlbmQgaW52YWxpZCByZXBseSB0byBGU0NU
-TF9ERlNfR0VUX1JFRkVSUkFMUwoKLSByZXBseSBzbWFsbGVyIHRoYW4gc2l6ZW9mKHN0cnVjdCBn
-ZXRfZGZzX3JlZmVycmFsX3JzcCkKLSByZXBseSB3aXRoIG51bWJlciBvZiByZWZlcnJhbHMgc21h
-bGxlciB0aGFuIE51bWJlck9mUmVmZXJyYWxzIGluIHRoZQpoZWFkZXIKClByb2Nlc3Npbmcgb2Yg
-c3VjaCByZXBsaWVzIHdpbGwgY2F1c2Ugb29iLgoKUmV0dXJuIC1FSU5WQUwgZXJyb3Igb24gc3Vj
-aCByZXBsaWVzIHRvIHByZXZlbnQgb29iLXMuCgpTaWduZWQtb2ZmLWJ5OiBFdWdlbmUgS29yZW5l
-dnNreSA8ZWtvcmVuZXZza3lAYWxpeXVuLmNvbT4KQ2M6IHN0YWJsZUB2Z2VyLmtlcm5lbC5vcmcK
-U3VnZ2VzdGVkLWJ5OiBOYXRoYW4gQ2hhbmNlbGxvciA8bmF0aGFuQGtlcm5lbC5vcmc+CkFja2Vk
-LWJ5OiBQYXVsbyBBbGNhbnRhcmEgKFJlZCBIYXQpIDxwY0BtYW5ndWViaXQub3JnPgpTaWduZWQt
-b2ZmLWJ5OiBTdGV2ZSBGcmVuY2ggPHN0ZnJlbmNoQG1pY3Jvc29mdC5jb20+Ci0tLQogZnMvc21i
-L2NsaWVudC9taXNjLmMgfCAxNyArKysrKysrKysrKysrKysrKwogMSBmaWxlIGNoYW5nZWQsIDE3
-IGluc2VydGlvbnMoKykKCmRpZmYgLS1naXQgYS9mcy9zbWIvY2xpZW50L21pc2MuYyBiL2ZzL3Nt
-Yi9jbGllbnQvbWlzYy5jCmluZGV4IGRkYTZkZWNlODAyYS4uZTEwMTIzZDhjZDdkIDEwMDY0NAot
-LS0gYS9mcy9zbWIvY2xpZW50L21pc2MuYworKysgYi9mcy9zbWIvY2xpZW50L21pc2MuYwpAQCAt
-OTE2LDYgKzkxNiwxNCBAQCBwYXJzZV9kZnNfcmVmZXJyYWxzKHN0cnVjdCBnZXRfZGZzX3JlZmVy
-cmFsX3JzcCAqcnNwLCB1MzIgcnNwX3NpemUsCiAJY2hhciAqZGF0YV9lbmQ7CiAJc3RydWN0IGRm
-c19yZWZlcnJhbF9sZXZlbF8zICpyZWY7CiAKKwlpZiAocnNwX3NpemUgPCBzaXplb2YoKnJzcCkp
-IHsKKwkJY2lmc19kYmcoVkZTIHwgT05DRSwKKwkJCSAiJXM6IGhlYWRlciBpcyBtYWxmb3JtZWQg
-KHNpemUgaXMgJXUsIG11c3QgYmUgJXp1KVxuIiwKKwkJCSBfX2Z1bmNfXywgcnNwX3NpemUsIHNp
-emVvZigqcnNwKSk7CisJCXJjID0gLUVJTlZBTDsKKwkJZ290byBwYXJzZV9ERlNfcmVmZXJyYWxz
-X2V4aXQ7CisJfQorCiAJKm51bV9vZl9ub2RlcyA9IGxlMTZfdG9fY3B1KHJzcC0+TnVtYmVyT2ZS
-ZWZlcnJhbHMpOwogCiAJaWYgKCpudW1fb2Zfbm9kZXMgPCAxKSB7CkBAIC05MjUsNiArOTMzLDE1
-IEBAIHBhcnNlX2Rmc19yZWZlcnJhbHMoc3RydWN0IGdldF9kZnNfcmVmZXJyYWxfcnNwICpyc3As
-IHUzMiByc3Bfc2l6ZSwKIAkJZ290byBwYXJzZV9ERlNfcmVmZXJyYWxzX2V4aXQ7CiAJfQogCisJ
-aWYgKHNpemVvZigqcnNwKSArICpudW1fb2Zfbm9kZXMgKiBzaXplb2YoUkVGRVJSQUwzKSA+IHJz
-cF9zaXplKSB7CisJCWNpZnNfZGJnKFZGUyB8IE9OQ0UsCisJCQkgIiVzOiBtYWxmb3JtZWQgYnVm
-ZmVyIChzaXplIGlzICV1LCBtdXN0IGJlIGF0IGxlYXN0ICV6dSlcbiIsCisJCQkgX19mdW5jX18s
-IHJzcF9zaXplLAorCQkJIHNpemVvZigqcnNwKSArICpudW1fb2Zfbm9kZXMgKiBzaXplb2YoUkVG
-RVJSQUwzKSk7CisJCXJjID0gLUVJTlZBTDsKKwkJZ290byBwYXJzZV9ERlNfcmVmZXJyYWxzX2V4
-aXQ7CisJfQorCiAJcmVmID0gKHN0cnVjdCBkZnNfcmVmZXJyYWxfbGV2ZWxfMyAqKSAmKHJzcC0+
-cmVmZXJyYWxzKTsKIAlpZiAocmVmLT5WZXJzaW9uTnVtYmVyICE9IGNwdV90b19sZTE2KDMpKSB7
-CiAJCWNpZnNfZGJnKFZGUywgIlJlZmVycmFscyBvZiBWJWQgdmVyc2lvbiBhcmUgbm90IHN1cHBv
-cnRlZCwgc2hvdWxkIGJlIFYzXG4iLAotLSAKMi40OC4xCgo=
---000000000000369f240641232bf3--
 
