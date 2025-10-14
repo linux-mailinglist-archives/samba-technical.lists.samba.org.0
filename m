@@ -2,79 +2,75 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3FAA7BD5FFC
-	for <lists+samba-technical@lfdr.de>; Mon, 13 Oct 2025 21:46:21 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3BC6BBDB03E
+	for <lists+samba-technical@lfdr.de>; Tue, 14 Oct 2025 21:13:26 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=GcmZEKTNBTIPCp8q96eFzSv9hIg6mWUgJbBgwmUh3jc=; b=wkKKa1AHfFTWXqQViOjMfyGaSM
-	xjR1/z8lIRpcdYQLF+7NzuC8V6oG5Ft1gDaHPJi1j5OtCM9JfLrwvQHP62Gf2bxO41loT2mUjXcUE
-	upch8ncPzgeY3h6UN7H0ud36V1HyJlVHAeIfpXvtguPn9oPrCKC6VqJIBgg5LrBWk8Erpa3ZCGZUw
-	lQ0BkaPCPC8HMj0BimxHp+CcySz0S4BC17/7Gmyy4C6g7GHaL+1l5iD8dKgf/9mexmkNWMaQVBNDW
-	JN5lEvVp6GMnhHyxDj4GgJ3ssbB60iMSztfyVOoiIL6tg5su4aQkez3W32RUOUPpgooXvz9YkYbTv
-	9w1msYig==;
-Received: from ip6-localhost ([::1]:29708 helo=hr1.samba.org) 
+	bh=Hj4KdecgoGHGYTc5Fn92jUDm+U1qN1I8QFfxys6tF+E=; b=ghg2YondPuxawt3BJCZpN7d7R+
+	gN8gzynAZrWL3xFIxy1IKja/ddGFDtN2M8Q778mt2+iYtsmd1Fxs/49kHjChcq68DbFLDuGw1ln7u
+	nJUyrKzu+Cfnf72OvARBU9wS8vJL0MwQ8KRZi3wOlrZ1nTjOibjuJ2QRnC/ucxbVB8YdpJ6/+DbVg
+	ZWVHJAwMjxUGeiJ8xKtClIePEVuDrsotsQEnOPu+59M2n9z6Vlk6DZfY02Pyn9g54vFFrApzkFbB+
+	QXcsH/BBYs1/vqk52rzAq4qEZwcrgwI4k5SM3oMxmlSQZOwUvVuO1G5aacnLLdSKF5t5zrxGQ/9Xp
+	tj5wZ3wg==;
+Received: from ip6-localhost ([::1]:51112 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1v8OUM-007iBq-BJ; Mon, 13 Oct 2025 19:45:46 +0000
-Received: from mail-qk1-x72f.google.com ([2607:f8b0:4864:20::72f]:61673) 
+	id 1v8kS4-007m5X-A2; Tue, 14 Oct 2025 19:12:52 +0000
+Received: from mail-qv1-xf2d.google.com ([2607:f8b0:4864:20::f2d]:59430) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1v8OUH-007iBj-Op
- for samba-technical@lists.samba.org; Mon, 13 Oct 2025 19:45:44 +0000
-Received: by mail-qk1-x72f.google.com with SMTP id
- af79cd13be357-875d55217a5so632988485a.2
- for <samba-technical@lists.samba.org>; Mon, 13 Oct 2025 12:45:41 -0700 (PDT)
+ (Exim) id 1v8kRz-007m5Q-Hh
+ for samba-technical@lists.samba.org; Tue, 14 Oct 2025 19:12:50 +0000
+Received: by mail-qv1-xf2d.google.com with SMTP id
+ 6a1803df08f44-7960d69f14bso44480726d6.2
+ for <samba-technical@lists.samba.org>; Tue, 14 Oct 2025 12:12:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1760384740; x=1760989540; darn=lists.samba.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=GcmZEKTNBTIPCp8q96eFzSv9hIg6mWUgJbBgwmUh3jc=;
- b=ftE5oMeQT6xYbHHA63dkgyxvAwlVPEePcA5oYXxI6SzFk4l9tm9rLoXJEeyZpb8ZGj
- zrPH4iovdD42XMJAtRrFVd1nPDWSVCqcz636AuEZ2cH4bj449kRNuXbCA0OGAVn2fbFu
- IT6qYxZ0+4OkDuw/0VrJ40VpFB1sbwB8OBwjybtEk2g88X/mwiAWYULB9dHi/wdqftKU
- mmZoGIvOgb59TVPdifDURCuYU6lMdLxU6YXDuB3mjqEGqIqS4k/kzHJXcu23vtytF5Z6
- rC0wy+su4jYM9tULzDfKty9eYMD086mzX92ClIO7KAgGNxjL4RLeMAbiT7VFx1vwXB2D
- Dt7g==
+ d=gmail.com; s=20230601; t=1760469165; x=1761073965; darn=lists.samba.org;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=Hj4KdecgoGHGYTc5Fn92jUDm+U1qN1I8QFfxys6tF+E=;
+ b=ndMDgYaFrJAf5GUF3mxv5covyjxpSU7BOUniL1AfHH6gIiV3s2UWAFy5AB6UUxkCTn
+ b68LUIsQdjrKbZmqSpg9JTS/E+GaYKS03pY3mfDlVv2hqxeBR+zKji6/nJ4zr+4A5jeB
+ 9vjibP1IOUcD0gNKpT3n7zFt6fReabDCn9OnBWbk70Q1dGX4Mpbe33kw5pBNptujQ+sf
+ SRTLRktgmpck4N9hNNdDvKceDYOts0j9TbpDMHH7wtXxynRDFPS9D9QdOh/UbuIbK+Gi
+ Z6vjnicj7LtIOSVrdk0OMa+NNf1NTY6PZG9Z5P7/9k/MfVHXd6dG+z3qHLNnv7FixXy4
+ /0OA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760384740; x=1760989540;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=GcmZEKTNBTIPCp8q96eFzSv9hIg6mWUgJbBgwmUh3jc=;
- b=xEf+UlAHWYOSZnnsoUh9RhpQDw+9g5m53aHas4aORP58I9iu2sxjWd9cYVKIEU87vm
- IwvSrAcZk84x9erf5+oWDeBHGAyx551fAi4BrCijrgHJtoMcNsqnJSTKYMhhnYuuPPd1
- 6i8E4MTRgxGDv4eQwwf36IJzBEWVhcj5DOAti9Dfmgoyrv5tAPSIGSyQTqElbPV9EH9G
- hU9wwadejC+Xyf0HsDDYhlFpAnNItimjh48Ggn1RtvXL0AjCMgBfKiHk3DVHDDqRteCS
- ZVF1dkrZDRqpTmAQq5hb0b2zwG680OyI1csbZ1IBNkAbnXhAdM6mlX7iJSAERAf2jS4Z
- Y3DQ==
+ d=1e100.net; s=20230601; t=1760469165; x=1761073965;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Hj4KdecgoGHGYTc5Fn92jUDm+U1qN1I8QFfxys6tF+E=;
+ b=vTOX/wtsCCBLOxNsPsCgPJCxUECd7zZwMXqTtHZgffIMMUVchOSIH5YLoM8R0ylckY
+ p1Bcnexf0cZw7TbrvdPbeMacrWZT7pfyIhkEy8JDBqHeaBsI2mmxf+zj8aaN/j5CDod+
+ QsrZwl+f2w/8gAGRCZQ7D2i/Q6pcaqvOhj1aQvEBxLga8NWrZoo1x5Ej2rh4UKDL1bMr
+ 2HKMPFlVHESY+FA1st9u93Kq2TSRaQlHM362byKHy/72ygiPU6NtupHEORaY5AuXvbh3
+ pRGxH9Kz2rHmuf6pjgZNDLIll6zmkD4qKcsBITO8TTjU1l1ZyEkhOpYOJ8mu6OTeZin1
+ rq2g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUFmgCj6NLGU0vdT5lDFq8K29Vsiyda9VMd1GqE0hYY/HfnxoS8cgFklnyTHWgr2FHcRwwqqZ0uMrw3lS9bMXE=@lists.samba.org
-X-Gm-Message-State: AOJu0YyzYbOqDS20MatP88p2aPyJOTW4nP/qS+k5dgFvIz3TYKehcJ+Q
- RzrmbC9wVtFPyzmVCfDP3hHiMq9AIECKDiL2rcPhpBDwY7GdnMztDMUiy0VVG9YdmZnvPsYvjXt
- rsikqxIIQcNYi//7XbGoHTMwvFgBt5Qw=
-X-Gm-Gg: ASbGncuCBTsVcSA+Z9IcCG4gf1Pwkk/1Evu/Jp/G5WcBu8uLUVeXnVqPUTfA0JoGXaf
- v0MMcfZUSl9QAr+eH9Bizal3GK6mVH0HQZSKp9l8Ai0Z+PSuxbdnCuvqq6jwY3u3h/iOPIFw6SS
- La9pRJwctVVgduq9Y+f+diU+RaAALFG4tUkOdbwPpslas92yTWwYG7SG/DeoxE8BQ77M12UzKBt
- Qrz+f7jbiOYvddfrIFSq1XNAZeMjjOopc2aFxC1NMx3ZwLvkZ3EtgMyFX8UoEH1auAaeko1/3qK
- iKnpl+pj0xCe30tUmpgJcttEU29sTgh6BbCOyVNmxDAdf4eYjrB0B4Fa7TTQdpSLRN9hheOEcXN
- dhPXW3XkcaQZRbmgbgvtE9AIWUyY/0VDzc3nDwhzgU54mRepjn9s=
-X-Google-Smtp-Source: AGHT+IF9sCYKN0g9TVqil8pUkwyUn+jjklPZeGO8CcLdwB2We9WKmu9BxTJaYyjQC5nrE6Edju/O9ncg/zr0gPWjkuo=
-X-Received: by 2002:a05:622a:2cf:b0:4b4:9522:67a with SMTP id
- d75a77b69052e-4e6ead12f0amr281990381cf.33.1760384739785; Mon, 13 Oct 2025
- 12:45:39 -0700 (PDT)
+ AJvYcCUwdWTv979640GOXQ/J6As9aUOnMGZn7ARPIXTPAdsdzPIHiq4vdnExYbag/nAr2uUivArGq4LZr5JHNuGAdW0=@lists.samba.org
+X-Gm-Message-State: AOJu0YxHWDfMN1lg09hWfZ8/jWbBPP/d2/ASib2V9Jhn97yGKVr6SNpJ
+ aTBk6GnkFaHZMwo3CrOIUxAVpZWyJ/UtFBjhIAGU9RLEI/YIPSVHOIQWKbQOynWdGg328CJLrUx
+ k/3w7SvyndmFI1wtlrK4x0Yfcy8htrCE=
+X-Gm-Gg: ASbGncvPkd0fziuRK1SvALJto5Ljomn6PrVbRoLSdQtW+o4nyRki10N8NSVUu28dFlL
+ wnU75wsH7BYMt+kQLXVq7O73DWw97T641s+Yzdsqqzd4TkKBMb89wORbmR40KqwqBCPCIv5Gcbj
+ xW9FL3A0KABqifBzHluwr/kdTzZ84ypEFNFJi7zjvSnteCovFTZFvCqWqv6NDMyBL+BbXgvrnme
+ 73AQjg91/gyyzVzHKpuGS2vfIUnH6plfGFvgrDcUNZmxYQoKBDC5bsz/2nV8UsEkKliU7NiWMv9
+ dCu96pB4dI+mOgKoDU74QXFwfkFb830MoPs+qR5xFlnOZybfHWdBexBbRCcoKpGh5xEbE62YKmA
+ s0YZjlFXwv9/cp6hIAqX7csceLb7zwUQI8BFKmpw=
+X-Google-Smtp-Source: AGHT+IGVnLqJpoAZcGkUlBY7oBpr7+xLff+kKqWhWi8JYLrzCEMQGNtSYRJnnKTVONKAwpF6Xdp30jZhS5ZxqaNWFFo=
+X-Received: by 2002:a05:6214:f6d:b0:70f:5a6d:a253 with SMTP id
+ 6a1803df08f44-87b2ef44013mr355883666d6.49.1760469164911; Tue, 14 Oct 2025
+ 12:12:44 -0700 (PDT)
 MIME-Version: 1.0
-References: <e8a44f5e-0f29-40ab-a6a3-74802cd970aa@web.de>
- <8f7ac740-e6a8-4c37-a0aa-e0572c87fe9e@web.de>
- <CAH2r5msRAejKX=vo7xGxMZDG_s++zZyHTazoFomd6GKOSt1XQA@mail.gmail.com>
-In-Reply-To: <CAH2r5msRAejKX=vo7xGxMZDG_s++zZyHTazoFomd6GKOSt1XQA@mail.gmail.com>
-Date: Mon, 13 Oct 2025 14:45:28 -0500
-X-Gm-Features: AS18NWCd3IA-GCOJgEu5wU-1WGwlNGLY2Cee4sZPgpXfTbOgHjuM5rizQnQvuHk
-Message-ID: <CAH2r5mv46wgNC5E=y+0hU9u2SWBreBOU_=F9Y_UxYFRwo_Z-wQ@mail.gmail.com>
-Subject: Re: [PATCH 3/3] smb: client: Omit a variable initialisation in
- smb311_crypto_shash_allocate()
-To: Markus Elfring <Markus.Elfring@web.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+References: <20251014-smb-client-fix-wformat-32b-parse_dfs_referrals-v1-1-47fa7db66b71@kernel.org>
+In-Reply-To: <20251014-smb-client-fix-wformat-32b-parse_dfs_referrals-v1-1-47fa7db66b71@kernel.org>
+Date: Tue, 14 Oct 2025 14:12:32 -0500
+X-Gm-Features: AS18NWA3bxi7uC4cjWWZ93Qyu_Sqb3TU4Fwo7i25Q_1DJKLVcEl20vSn3Vb4mSs
+Message-ID: <CAH2r5mtcJJ+_x2dQ3UkVFWd4+YapHXJFWFcxs5ErU+u8kncWsA@mail.gmail.com>
+Subject: Re: [PATCH] smb: client: Fix format specifiers for size_t in
+ parse_dfs_referrals()
+To: Nathan Chancellor <nathan@kernel.org>
+Content-Type: multipart/mixed; boundary="000000000000369f240641232bf3"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -90,74 +86,163 @@ List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
 From: Steve French via samba-technical <samba-technical@lists.samba.org>
 Reply-To: Steve French <smfrench@gmail.com>
-Cc: linux-cifs@vger.kernel.org, Paulo Alcantara <pc@manguebit.org>,
- Eric Biggers <ebiggers@kernel.org>, samba-technical@lists.samba.org,
- kernel-janitors@vger.kernel.org,
- "Stefan \(metze\) Metzmacher" <metze@samba.org>
+Cc: linux-cifs@vger.kernel.org, Shyam Prasad N <sprasad@microsoft.com>,
+ Paulo Alcantara <pc@manguebit.org>, Eugene Korenevsky <ekorenevsky@aliyun.com>,
+ samba-technical@lists.samba.org, patches@lists.linux.dev,
+ stable@vger.kernel.org, Ccm Talpey <tom@talpey.com>,
+ Bharath SM <bharathsm@microsoft.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Removed from cifs-2.6.git for-next, as it conflicts with Eric's recent
-patch series ("smb: client: More crypto library conversions").
+--000000000000369f240641232bf3
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Obviously one of the problems of minor cleanup patches, is they can
-cause noise like this
+Nathan,
+Good catch.  Have updated the patch with your change (rather than
+having two patches) and added a Suggested-by.  If you want a
+Reviewed-by or Acked-by let me know.
 
-On Fri, Oct 10, 2025 at 4:47=E2=80=AFPM Steve French <smfrench@gmail.com> w=
-rote:
+Updated patch attached.
+
+
+On Tue, Oct 14, 2025 at 1:33=E2=80=AFPM Nathan Chancellor <nathan@kernel.or=
+g> wrote:
 >
-> merged into cifs-2.6.git for-next
+> When building for 32-bit platforms, for which 'size_t' is
+> 'unsigned int', there are a couple instances of -Wformat:
 >
-> On Fri, Oct 10, 2025 at 1:52=E2=80=AFAM Markus Elfring <Markus.Elfring@we=
-b.de> wrote:
-> >
-> > From: Markus Elfring <elfring@users.sourceforge.net>
-> > Date: Fri, 10 Oct 2025 08:05:21 +0200
-> > Subject: [PATCH 3/3] smb: client: Omit a variable initialisation in smb=
-311_crypto_shash_allocate()
-> > MIME-Version: 1.0
-> > Content-Type: text/plain; charset=3DUTF-8
-> > Content-Transfer-Encoding: 8bit
-> >
-> > The local variable =E2=80=9Crc=E2=80=9D is immediately reassigned. Thus=
- omit the explicit
-> > initialisation at the beginning.
-> >
-> > Signed-off-by: Markus Elfring <elfring@users.sourceforge.net>
-> > ---
-> >  fs/smb/client/smb2transport.c | 2 +-
-> >  1 file changed, 1 insertion(+), 1 deletion(-)
-> >
-> > diff --git a/fs/smb/client/smb2transport.c b/fs/smb/client/smb2transpor=
-t.c
-> > index b790f6b970a9..3f8b0509f8c8 100644
-> > --- a/fs/smb/client/smb2transport.c
-> > +++ b/fs/smb/client/smb2transport.c
-> > @@ -50,7 +50,7 @@ int
-> >  smb311_crypto_shash_allocate(struct TCP_Server_Info *server)
-> >  {
-> >         struct cifs_secmech *p =3D &server->secmech;
-> > -       int rc =3D 0;
-> > +       int rc;
-> >
-> >         rc =3D cifs_alloc_hash("hmac(sha256)", &p->hmacsha256);
-> >         if (rc)
-> > --
-> > 2.51.0
-> >
-> >
-> >
+>   fs/smb/client/misc.c:922:25: error: format specifies type 'unsigned lon=
+g' but the argument has type 'unsigned int' [-Werror,-Wformat]
+>     921 |                          "%s: header is malformed (size is %u, =
+must be %lu)\n",
+>         |                                                                =
+        ~~~
+>         |                                                                =
+        %u
+>     922 |                          __func__, rsp_size, sizeof(*rsp));
+>         |                                              ^~~~~~~~~~~~
+>   fs/smb/client/misc.c:940:5: error: format specifies type 'unsigned long=
+' but the argument has type 'unsigned int' [-Werror,-Wformat]
+>     938 |                          "%s: malformed buffer (size is %u, mus=
+t be at least %lu)\n",
+>         |                                                                =
+              ~~~
+>         |                                                                =
+              %u
+>     939 |                          __func__, rsp_size,
+>     940 |                          sizeof(*rsp) + *num_of_nodes * sizeof(=
+REFERRAL3));
+>         |                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~=
+~~~~~~~~~~
 >
+> Use the proper 'size_t' format specifier, '%zu', to clear up these
+> warnings.
 >
+> Cc: stable@vger.kernel.org
+> Fixes: c1047752ed9f ("cifs: parse_dfs_referrals: prevent oob on malformed=
+ input")
+> Signed-off-by: Nathan Chancellor <nathan@kernel.org>
+> ---
+> Feel free to squash this into the original change to make backporting
+> easier. I included the tags in case rebasing was not an option.
+> ---
+>  fs/smb/client/misc.c | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>
+> diff --git a/fs/smb/client/misc.c b/fs/smb/client/misc.c
+> index 987f0ca73123..e10123d8cd7d 100644
+> --- a/fs/smb/client/misc.c
+> +++ b/fs/smb/client/misc.c
+> @@ -918,7 +918,7 @@ parse_dfs_referrals(struct get_dfs_referral_rsp *rsp,=
+ u32 rsp_size,
+>
+>         if (rsp_size < sizeof(*rsp)) {
+>                 cifs_dbg(VFS | ONCE,
+> -                        "%s: header is malformed (size is %u, must be %l=
+u)\n",
+> +                        "%s: header is malformed (size is %u, must be %z=
+u)\n",
+>                          __func__, rsp_size, sizeof(*rsp));
+>                 rc =3D -EINVAL;
+>                 goto parse_DFS_referrals_exit;
+> @@ -935,7 +935,7 @@ parse_dfs_referrals(struct get_dfs_referral_rsp *rsp,=
+ u32 rsp_size,
+>
+>         if (sizeof(*rsp) + *num_of_nodes * sizeof(REFERRAL3) > rsp_size) =
+{
+>                 cifs_dbg(VFS | ONCE,
+> -                        "%s: malformed buffer (size is %u, must be at le=
+ast %lu)\n",
+> +                        "%s: malformed buffer (size is %u, must be at le=
+ast %zu)\n",
+>                          __func__, rsp_size,
+>                          sizeof(*rsp) + *num_of_nodes * sizeof(REFERRAL3)=
+);
+>                 rc =3D -EINVAL;
+>
+> ---
+> base-commit: 4e47319b091f90d5776efe96d6c198c139f34883
+> change-id: 20251014-smb-client-fix-wformat-32b-parse_dfs_referrals-189b8c=
+6fdf75
+>
+> Best regards,
 > --
-> Thanks,
+> Nathan Chancellor <nathan@kernel.org>
 >
-> Steve
-
+>
 
 
 --=20
 Thanks,
 
 Steve
+
+--000000000000369f240641232bf3
+Content-Type: text/x-patch; charset="US-ASCII"; 
+	name="0001-cifs-parse_dfs_referrals-prevent-oob-on-malformed-in.patch"
+Content-Disposition: attachment; 
+	filename="0001-cifs-parse_dfs_referrals-prevent-oob-on-malformed-in.patch"
+Content-Transfer-Encoding: base64
+Content-ID: <f_mgqxvjv90>
+X-Attachment-Id: f_mgqxvjv90
+
+RnJvbSA3ZjBmNTRkZmMzMTA2M2E4ZWE4YzBkMTAzNGNjOTBhZTY2MTQwM2ZhIE1vbiBTZXAgMTcg
+MDA6MDA6MDAgMjAwMQpGcm9tOiBFdWdlbmUgS29yZW5ldnNreSA8ZWtvcmVuZXZza3lAYWxpeXVu
+LmNvbT4KRGF0ZTogTW9uLCAxMyBPY3QgMjAyNSAyMTozOTozMCArMDMwMApTdWJqZWN0OiBbUEFU
+Q0hdIGNpZnM6IHBhcnNlX2Rmc19yZWZlcnJhbHM6IHByZXZlbnQgb29iIG9uIG1hbGZvcm1lZCBp
+bnB1dAoKTWFsaWNpb3VzIFNNQiBzZXJ2ZXIgY2FuIHNlbmQgaW52YWxpZCByZXBseSB0byBGU0NU
+TF9ERlNfR0VUX1JFRkVSUkFMUwoKLSByZXBseSBzbWFsbGVyIHRoYW4gc2l6ZW9mKHN0cnVjdCBn
+ZXRfZGZzX3JlZmVycmFsX3JzcCkKLSByZXBseSB3aXRoIG51bWJlciBvZiByZWZlcnJhbHMgc21h
+bGxlciB0aGFuIE51bWJlck9mUmVmZXJyYWxzIGluIHRoZQpoZWFkZXIKClByb2Nlc3Npbmcgb2Yg
+c3VjaCByZXBsaWVzIHdpbGwgY2F1c2Ugb29iLgoKUmV0dXJuIC1FSU5WQUwgZXJyb3Igb24gc3Vj
+aCByZXBsaWVzIHRvIHByZXZlbnQgb29iLXMuCgpTaWduZWQtb2ZmLWJ5OiBFdWdlbmUgS29yZW5l
+dnNreSA8ZWtvcmVuZXZza3lAYWxpeXVuLmNvbT4KQ2M6IHN0YWJsZUB2Z2VyLmtlcm5lbC5vcmcK
+U3VnZ2VzdGVkLWJ5OiBOYXRoYW4gQ2hhbmNlbGxvciA8bmF0aGFuQGtlcm5lbC5vcmc+CkFja2Vk
+LWJ5OiBQYXVsbyBBbGNhbnRhcmEgKFJlZCBIYXQpIDxwY0BtYW5ndWViaXQub3JnPgpTaWduZWQt
+b2ZmLWJ5OiBTdGV2ZSBGcmVuY2ggPHN0ZnJlbmNoQG1pY3Jvc29mdC5jb20+Ci0tLQogZnMvc21i
+L2NsaWVudC9taXNjLmMgfCAxNyArKysrKysrKysrKysrKysrKwogMSBmaWxlIGNoYW5nZWQsIDE3
+IGluc2VydGlvbnMoKykKCmRpZmYgLS1naXQgYS9mcy9zbWIvY2xpZW50L21pc2MuYyBiL2ZzL3Nt
+Yi9jbGllbnQvbWlzYy5jCmluZGV4IGRkYTZkZWNlODAyYS4uZTEwMTIzZDhjZDdkIDEwMDY0NAot
+LS0gYS9mcy9zbWIvY2xpZW50L21pc2MuYworKysgYi9mcy9zbWIvY2xpZW50L21pc2MuYwpAQCAt
+OTE2LDYgKzkxNiwxNCBAQCBwYXJzZV9kZnNfcmVmZXJyYWxzKHN0cnVjdCBnZXRfZGZzX3JlZmVy
+cmFsX3JzcCAqcnNwLCB1MzIgcnNwX3NpemUsCiAJY2hhciAqZGF0YV9lbmQ7CiAJc3RydWN0IGRm
+c19yZWZlcnJhbF9sZXZlbF8zICpyZWY7CiAKKwlpZiAocnNwX3NpemUgPCBzaXplb2YoKnJzcCkp
+IHsKKwkJY2lmc19kYmcoVkZTIHwgT05DRSwKKwkJCSAiJXM6IGhlYWRlciBpcyBtYWxmb3JtZWQg
+KHNpemUgaXMgJXUsIG11c3QgYmUgJXp1KVxuIiwKKwkJCSBfX2Z1bmNfXywgcnNwX3NpemUsIHNp
+emVvZigqcnNwKSk7CisJCXJjID0gLUVJTlZBTDsKKwkJZ290byBwYXJzZV9ERlNfcmVmZXJyYWxz
+X2V4aXQ7CisJfQorCiAJKm51bV9vZl9ub2RlcyA9IGxlMTZfdG9fY3B1KHJzcC0+TnVtYmVyT2ZS
+ZWZlcnJhbHMpOwogCiAJaWYgKCpudW1fb2Zfbm9kZXMgPCAxKSB7CkBAIC05MjUsNiArOTMzLDE1
+IEBAIHBhcnNlX2Rmc19yZWZlcnJhbHMoc3RydWN0IGdldF9kZnNfcmVmZXJyYWxfcnNwICpyc3As
+IHUzMiByc3Bfc2l6ZSwKIAkJZ290byBwYXJzZV9ERlNfcmVmZXJyYWxzX2V4aXQ7CiAJfQogCisJ
+aWYgKHNpemVvZigqcnNwKSArICpudW1fb2Zfbm9kZXMgKiBzaXplb2YoUkVGRVJSQUwzKSA+IHJz
+cF9zaXplKSB7CisJCWNpZnNfZGJnKFZGUyB8IE9OQ0UsCisJCQkgIiVzOiBtYWxmb3JtZWQgYnVm
+ZmVyIChzaXplIGlzICV1LCBtdXN0IGJlIGF0IGxlYXN0ICV6dSlcbiIsCisJCQkgX19mdW5jX18s
+IHJzcF9zaXplLAorCQkJIHNpemVvZigqcnNwKSArICpudW1fb2Zfbm9kZXMgKiBzaXplb2YoUkVG
+RVJSQUwzKSk7CisJCXJjID0gLUVJTlZBTDsKKwkJZ290byBwYXJzZV9ERlNfcmVmZXJyYWxzX2V4
+aXQ7CisJfQorCiAJcmVmID0gKHN0cnVjdCBkZnNfcmVmZXJyYWxfbGV2ZWxfMyAqKSAmKHJzcC0+
+cmVmZXJyYWxzKTsKIAlpZiAocmVmLT5WZXJzaW9uTnVtYmVyICE9IGNwdV90b19sZTE2KDMpKSB7
+CiAJCWNpZnNfZGJnKFZGUywgIlJlZmVycmFscyBvZiBWJWQgdmVyc2lvbiBhcmUgbm90IHN1cHBv
+cnRlZCwgc2hvdWxkIGJlIFYzXG4iLAotLSAKMi40OC4xCgo=
+--000000000000369f240641232bf3--
 
