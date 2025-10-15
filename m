@@ -2,76 +2,76 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 50164BDFA8B
-	for <lists+samba-technical@lfdr.de>; Wed, 15 Oct 2025 18:30:14 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 74708BE003A
+	for <lists+samba-technical@lfdr.de>; Wed, 15 Oct 2025 20:11:26 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=/8GDrJ1rQnlamUx9lojh4fPxJBAOk9fRwuDS8zKFOtw=; b=58DXsHK0P6t1U4mla8ofeDmKNo
-	3C+XY6AEylx4UrZSLHZs6UJ4RHYrLs079SS05WBF4pvKTHHMfGAg0Ni3oSXudeb9muwC9+kEVkvir
-	j8Ow+8Obw2M1Jv7cxe7zdKd68gHmmBTLEgxGiruPAXhN5NJHMmgo/yD8SUxAKiMftJPspp6uyToia
-	JTOT1ezLxN5Fd0LSNvLDdGe2Em4lsOd/7sdh5xR/IiWAA5/q4uE5JaTdgMOuHcbspJ1X4Ka12HHhW
-	N7xNBfrKBOmIidFxOiQOu0Kl4jJ9r8ci19WOss3RPMZS9gzq9YoP4I8jX6sNk2CPURT6VRN2nEqDX
-	pQR/H3xw==;
-Received: from ip6-localhost ([::1]:31746 helo=hr1.samba.org) 
+	bh=nqA7k4UVVoz1WmvKpqEl1VWC0k/EIByv+fhLJjtIG9s=; b=4OpzvizIJAwkd7UbM8SHRuwNFc
+	psUN5JfE0aVkdOimyUdpe/v6/7FkBfsJA64k60NYIlIQwfh6pNSOivj4t9SDWe4DQ5QHBaEReAaD4
+	qdk1ZecuQufmuZVfG49YEmU8F772fihLC06d5cqRfn3RFiYrBsvhd87pcb2t3PAvaWHwg/eoeX6aQ
+	OlAr9e2jD3ttnrJgDXgzvWQrBlipdXvZda7dd6vozGP8Z5IulWSXKjqbieW9ABhRezsC2m5r2MCGD
+	T1o+3i1gqFcMnWcwCMDIHK9RH1hZGJwrgVFoSHyhyqWwNse4zUfTTwSmAvDqgpZjGCARZ0uGVZNzR
+	BU3uH4fQ==;
+Received: from ip6-localhost ([::1]:43446 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1v94O7-007sBj-TB; Wed, 15 Oct 2025 16:30:07 +0000
-Received: from mail-qv1-xf2c.google.com ([2607:f8b0:4864:20::f2c]:59534) 
+	id 1v95xh-007sV5-AL; Wed, 15 Oct 2025 18:10:57 +0000
+Received: from mail-qv1-xf35.google.com ([2607:f8b0:4864:20::f35]:53484) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1v94O2-007sBZ-9L
- for samba-technical@lists.samba.org; Wed, 15 Oct 2025 16:30:05 +0000
-Received: by mail-qv1-xf2c.google.com with SMTP id
- 6a1803df08f44-7960d69f14bso54117446d6.2
- for <samba-technical@lists.samba.org>; Wed, 15 Oct 2025 09:30:01 -0700 (PDT)
+ (Exim) id 1v95xc-007sUy-K2
+ for samba-technical@lists.samba.org; Wed, 15 Oct 2025 18:10:55 +0000
+Received: by mail-qv1-xf35.google.com with SMTP id
+ 6a1803df08f44-78e4056623fso93144326d6.2
+ for <samba-technical@lists.samba.org>; Wed, 15 Oct 2025 11:10:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1760545800; x=1761150600; darn=lists.samba.org;
+ d=gmail.com; s=20230601; t=1760551850; x=1761156650; darn=lists.samba.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=/8GDrJ1rQnlamUx9lojh4fPxJBAOk9fRwuDS8zKFOtw=;
- b=i+FedjsCrAp1R3CjYxCsmmeJvWelmmATcY23GG4wU1dfeVcSA9lsLEcPYz+hjlIL6t
- NdljqKn4ZxDTBFc38HYU2scLUHmMqO5ZoZtobwWLg0sIfqg/nKZ5xxytU4tiMoPFix/j
- vmmgYXavXibjPOAhN6bPU/nbaPaUPpu38CZVDvuqHird4odqT/5BfLfvQm4qXTieQFs8
- QtTYXJDrQZO3CBHmYaDH8Q3H6CGjRyJJEzC/LNYuoqD7c9O7BEUFSzTCc3b/WJavwN6D
- 9qzDqmHRFqgkcGQiedvUKSayqC3URK/Fq5TtskC8aAtCNr4Ey1N4nTlP30+5lYynCemV
- DDzA==
+ bh=nqA7k4UVVoz1WmvKpqEl1VWC0k/EIByv+fhLJjtIG9s=;
+ b=C3+iMwMLM8uOZSLNpLy9w2POfbpuAeI76d15ZSMnrFoNsQv8xSKIvjUYmMWiQQ+goU
+ lHd38FGqNoQAUpo6PMRfh3N+NBOmJX8SsoAyzWpevXQQ9l6TRDI6gpuit0fkYBL99vvn
+ Fiv5cjooOAlIG6S84Q8AZAvbFNOR6pXEOo29Y0uJCHs//ZX+0uYgHWLgdXrrn0w5Pp1B
+ G6g3zSFh/mXjECnSq0AXVSwVDiVPwTFOtau5lmpkLejOzwYpmIxNUCYOssHlGCNbkEHV
+ eLspVt7ZLzVb8bXFVoZVWIIyNN5CztUoFMggJE8PE2F01eSLWIIYlpjw4ZPgRAvIspjy
+ 0U9Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760545800; x=1761150600;
+ d=1e100.net; s=20230601; t=1760551850; x=1761156650;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=/8GDrJ1rQnlamUx9lojh4fPxJBAOk9fRwuDS8zKFOtw=;
- b=TpxX4HUBlrBTQnoxVrHRkG/XxA/hEanaW1R+jawka/gZHL9ihG3N4ojEEYDkbnapCt
- AACIrIGkrm2aiPJrKVEu14MwywDU9qY+tll0gbOEL4CuyMopaHfAznApYQmmfD2Ymf2r
- gxj2nswpZ2+VreO3osv/K3CorNhQe79RkLJb3WIe7zTGbELFOzLJcyNOU+eRvDgCNmsI
- kfkfW7kCeGIKehA5Rc5JSnhW/GDzzXHO2MOfRoyL4wSTaM5u9VhxvhlXuCJ4itN3z5rk
- X++siiaZO8mdmwnxDUR5pmCYNBrCyWQK+kxwiGOOHu5eg+lh1in3NQWKrbv4MrxCJ7wZ
- 8aqw==
+ bh=nqA7k4UVVoz1WmvKpqEl1VWC0k/EIByv+fhLJjtIG9s=;
+ b=xMppe49L8kDCm3nIyJmkDrZr0LanWHkRAXf9HxwOoNMr5HZSuniTcIwGtCrkMJ5sKb
+ bipUgp1RKc/F+9pzGhaj0Jsssw6zwFA3TjSLblDbZ1rEvikbjbwm84JipVw+yp33NMBP
+ JxKPoJ8m+GGeWol4YDa7xgBdE4qolYO6oHCy84ncw+SG4rNRQriW3hlfiJbD74o6mu4R
+ A7Ca/WG4/HZHrCe3f+DECG93vssuw2q5fbXLKFe5VBU7hvSYfl9BZ0gOd8XpZ8c3DQVw
+ U1IxmK4Pju8rEqqC3uWf/k4KqQuAmZqcNdkRq0vo3jYoLvYngIJlqOzPCJEqHjSLVaDj
+ uI2w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV+EDUXPIke+8FP6e7SNFFtdK4mcR/vMSWvnHo2cx348xQ4OO1TejqUzYQsI7kGxIJR2hLN9fI5JtLs0SqcFxk=@lists.samba.org
-X-Gm-Message-State: AOJu0YyA769lDahscXA9nt0ikZ4T9zb8gUBkqBPf1/gRAIYQmoeQj9M9
- 7+S8U2ArW4F5eAJ4cuyXQnDb30YEBx3HntT4HAyVjLY7wduus/bnGZtIXxpJGhD5F8Ff6sGxR4m
- roSvtcPCrPtIpfdvgVI7cn6HUqW+M/8o=
-X-Gm-Gg: ASbGncvzOyxodrQllTgoSC2hYttcaVsf6M6S2kNujBkjR4gGOMpvt5BMN5+30wSWTU2
- z/sUdveY1hyFfTNStO/n4UXyylwmfjSgwJKljh9NpXjhFZ6wi1qIJejYDWtt+GNpETsjnrt1bjM
- JHdbetLdtEJazu4SCnWBC/Z5FYJAbEO2mjTDxyDa0jhjpuZLqnnNTwvbkOJHZU+m2hGICjXaGQD
- zPn7TBUJwCm1nVsE14RDzCsdb2BDyQNvsVnLAexhN1JE1GAOuJ0QcjTFMQDHdbbPaDjLzqA4TlA
- 5zAKzoNv3uZvVU8SZsZePP/t5xGEKqX42D26KhCuyhQgnJqqN9uVKkbfsL0Wt0UUp9qlQzORAjD
- Qcc2Spu4yLLUoyLtuW6i9Wye2i4YCuue58W4C3Q==
-X-Google-Smtp-Source: AGHT+IGVISVKSMZGXKvoUfC3pFbB5+MNCgPpT6oFP0VzuN6FflZ2A58qUHZ/QKyXQmRk6Yh4FFnGDxift44mJ0jL8XA=
-X-Received: by 2002:a05:6214:6215:b0:87b:cc00:5de7 with SMTP id
- 6a1803df08f44-87bcc005e4fmr188945256d6.18.1760545800119; Wed, 15 Oct 2025
- 09:30:00 -0700 (PDT)
+ AJvYcCXKNpdQHTQ4/5U++HAoyjxhLr9tVF12f9GNobUv6vHsOflH/wsViHk0ifq5KpA6DUB0xXFerW4U9cGuEgAeJtA=@lists.samba.org
+X-Gm-Message-State: AOJu0YwU8zAXzc+2pmJ3j0E0qA5qlZxQnGqFVOhJs5HTDPzwHI/cSYx1
+ cPvqFx3a8r9MtNFe3/nwWnAg0uKA+V4cAMAjz8iODOjitcQG8t8X5oucp3L/HSQ6h/v7fi2DAqx
+ UhVMCBOBfcUwumfkxpDUGasPipFZ2Q+c=
+X-Gm-Gg: ASbGncvnPXtcI5y8Z6tW4wmB3O2Z6yOma0iViGH7uU7vSUHydkieDpvxGoN1ZJiRpWt
+ kBxDDAtoq+T88nvA5FXaDri7e+TesfWdVt5LqXmdN+INFW1gIT9aB2D9u+eDtpg4T0l9Jo0H/Ac
+ bkndmIxX2PMVEXEFfCjWY2YongizoPXv4HjKaBIILaM7+Im3jtpP2oH1Odw0pRvMqWTh5oRzh8f
+ rVYXuHuBqE2Btx8M/IfJnO2UYOeK88mAkmDOSMseU5ThjavJizQJ6aCJmgv4Tvy3Dhns6LRBIxp
+ E9tQjeHJ+HRJ2QQ08ltHKg6b+tyvFTpx+KluyjeqkDMOuMs8YlJwBKcBe5CYTY9FTMUxIJSzfuH
+ 4G5QzE9LFYDxNRGUtmkxNRsaY8E6r5g+zRJCNwe3C
+X-Google-Smtp-Source: AGHT+IHninkPESQS8dHVL1fQL53uOsfSc1mur/cEdxDh3bmiIBfWuhMXmHWs7FOB1Mg5kel/vGkCWetRJzQIDq/GUh0=
+X-Received: by 2002:ad4:5945:0:b0:78e:c8a6:e891 with SMTP id
+ 6a1803df08f44-87b2103f5c0mr366857086d6.24.1760551850329; Wed, 15 Oct 2025
+ 11:10:50 -0700 (PDT)
 MIME-Version: 1.0
 References: <aOzRF9JB9VkBKapw@osx.local>
  <6599bf31-1099-426d-a8e5-902c3d98e032@web.de>
- <aO/DLq/OtAjvkgcY@chcpu18>
-In-Reply-To: <aO/DLq/OtAjvkgcY@chcpu18>
-Date: Wed, 15 Oct 2025 11:29:46 -0500
-X-Gm-Features: AS18NWCziKfp_DI39cJxX3YKcNnedwhMB2N5vzWIwfO4Ia5b8m3SwzD1D2OHnU0
-Message-ID: <CAH2r5msK3SDhAM0_monUcNTrf5JCwydD+AJgARaiVziUUo0WmQ@mail.gmail.com>
+ <aO/DLq/OtAjvkgcY@chcpu18> <6eeec2b6-ef28-4280-a854-cc22d2df55ed@web.de>
+In-Reply-To: <6eeec2b6-ef28-4280-a854-cc22d2df55ed@web.de>
+Date: Wed, 15 Oct 2025 13:10:38 -0500
+X-Gm-Features: AS18NWBfaSIxv2RDHlnpAQo8uwRpyrQ2N8ndjpwz_0K_rEufX1VnmPESyUOVHfY
+Message-ID: <CAH2r5mvg2Ask8SXOQArDLnKOjHHSPKGwuHkYp9NuuzEqYcZNEQ@mail.gmail.com>
 Subject: Re: [PATCH] smb: Fix refcount leak for cifs_sb_tlink
-To: Shuhao Fu <sfual@cse.ust.hk>
+To: Markus Elfring <Markus.Elfring@web.de>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
@@ -93,110 +93,45 @@ Cc: linux-cifs@vger.kernel.org, Shyam Prasad N <sprasad@microsoft.com>,
  Paulo Alcantara <pc@manguebit.org>, kernel-janitors@vger.kernel.org,
  samba-technical@lists.samba.org, LKML <linux-kernel@vger.kernel.org>,
  Steve French <sfrench@samba.org>, Bharath SM <bharathsm@microsoft.com>,
- Markus Elfring <Markus.Elfring@web.de>, Tom Talpey <tom@talpey.com>
+ Tom Talpey <tom@talpey.com>, Shuhao Fu <sfual@cse.ust.hk>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-I don't think the title needs to be changed, it seems clear enough.
-The other changes are minor (changing goto label) and also probably
-not needed but ok if you have to update it for other reasons.
+I agree that "callsites" is incorrect, it should be "calls" e.g. but
+the others are very minor and I think the existing wording is fine for
+the others
 
-On Wed, Oct 15, 2025 at 10:52=E2=80=AFAM Shuhao Fu <sfual@cse.ust.hk> wrote=
-:
+On Wed, Oct 15, 2025 at 11:25=E2=80=AFAM Markus Elfring <Markus.Elfring@web=
+.de> wrote:
 >
-> On Wed, Oct 15, 2025 at 04:52:23PM +0200, Markus Elfring wrote:
-> > > This patch fixes =E2=80=A6
-> >
-> > * Will another imperative wording approach become more helpful for an i=
-mproved
-> >   change description?
-> >   https://apc01.safelinks.protection.outlook.com/?url=3Dhttps%3A%2F%2Fg=
-it.kernel.org%2Fpub%2Fscm%2Flinux%2Fkernel%2Fgit%2Ftorvalds%2Flinux.git%2Ft=
-ree%2FDocumentation%2Fprocess%2Fsubmitting-patches.rst%3Fh%3Dv6.17%23n94&da=
-ta=3D05%7C02%7Csfual%40connect.ust.hk%7Caffcb410915f4b4bc8f308de0bfa853c%7C=
-6c1d415239d044ca88d9b8d6ddca0708%7C1%7C0%7C638961367775911255%7CUnknown%7CT=
-WFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFO=
-IjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=3DbThHSbvjokcDU6hNpnYxt4%2B=
-lVyzlyxHl1JopGmCLY%2FQ%3D&reserved=3D0
-> >
-> > * Would it be more helpful to use the label =E2=80=9Cput_tlink=E2=80=9D=
- instead of =E2=80=9Cout=E2=80=9D?
-> >
-> > * Can a subject like =E2=80=9Csmb: client: Complete reference counting =
-in three functions=E2=80=9D
-> >   be nicer?
-> >
-> >
-> > Regards,
-> > Markus
+> > Fix three refcount inconsistency issues related to `cifs_sb_tlink`.
 >
-> Hi,
+> I suggest to omit this introduction.
 >
-> Thanks for the suggestions. My apologies for the inapproriate wording.
-> Here's my updates. Please do let me know if it still needs improvement.
-> I will definitely address these issues in patch v2.
 >
-> 1. An improved patch description
+> > Comments for `cifs_sb_tlink` state that `cifs_put_tlink()` needs to be
 >
-> Fix three refcount inconsistency issues related to `cifs_sb_tlink`.
+>                              ()?
 >
-> Comments for `cifs_sb_tlink` state that `cifs_put_tlink()` needs to be
-> called after successful calls to `cifs_sb_tlink`. Three callsites fail
-> to update refcount accordingly, leading to possible resource leaks.
 >
-> Fixes: 8ceb98437946 ("CIFS: Move rename to ops struct")
-> Fixes: 2f1afe25997f ("cifs: Use smb 2 - 3 and cifsacl mount options getac=
-l functions")
-> Fixes: 366ed846df60 ("cifs: Use smb 2 - 3 and cifsacl mount options setac=
-l function")
-> Signed-off-by: Shuhao Fu <sfual@cse.ust.hk>
+> > called after successful calls to `cifs_sb_tlink`. Three callsites fail
 >
-> 2. New subject: [PATCH v2] smb: client: Complete reference counting in th=
-ree functions
+>                                                           call sites?
 >
-> 3. Labels are changed accordingly
 >
-> @@ -3212,8 +3212,7 @@ get_smb2_acl_by_path(struct cifs_sb_info *cifs_sb,
->         utf16_path =3D cifs_convert_path_to_utf16(path, cifs_sb);
->         if (!utf16_path) {
->                 rc =3D -ENOMEM;
-> -               free_xid(xid);
-> -               return ERR_PTR(rc);
-> +               goto put_tlink;
->         }
+> > to update refcount accordingly, leading to possible resource leaks.
 >
->         oparms =3D (struct cifs_open_parms) {
-> @@ -3245,6 +3244,7 @@ get_smb2_acl_by_path(struct cifs_sb_info *cifs_sb,
->                 SMB2_close(xid, tcon, fid.persistent_fid, fid.volatile_fi=
-d);
->         }
+> * Do we prefer the term =E2=80=9Creference count=E2=80=9D?
 >
-> +put_tlink:
->         cifs_put_tlink(tlink);
->         free_xid(xid);
+> * Is the word =E2=80=9Cpossible=E2=80=9D really relevant here?
+>   (Would you find corresponding case distinctions more helpful?)
 >
-> @@ -3285,8 +3285,7 @@ set_smb2_acl(struct smb_ntsd *pnntsd, __u32 acllen,
->         utf16_path =3D cifs_convert_path_to_utf16(path, cifs_sb);
->         if (!utf16_path) {
->                 rc =3D -ENOMEM;
-> -               free_xid(xid);
-> -               return rc;
-> +               goto put_tlink;
->         }
+> * How do you think about to increase the application of scope-based resou=
+rce management?
 >
->         oparms =3D (struct cifs_open_parms) {
-> @@ -3307,6 +3306,7 @@ set_smb2_acl(struct smb_ntsd *pnntsd, __u32 acllen,
->                 SMB2_close(xid, tcon, fid.persistent_fid, fid.volatile_fi=
-d);
->         }
 >
-> +put_tlink:
->         cifs_put_tlink(tlink);
->         free_xid(xid);
->         return rc;
->
-> Thanks,
-> Shuhao
+> Regards,
+> Markus
 
 
 
