@@ -2,44 +2,44 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5318CBE3517
-	for <lists+samba-technical@lfdr.de>; Thu, 16 Oct 2025 14:19:36 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4E7BBBE3DEF
+	for <lists+samba-technical@lfdr.de>; Thu, 16 Oct 2025 16:21:52 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=NQXEjkuoqp7JdQLaiIvI5Inp/xHvVO+aU4PlHq2Ui8g=; b=ee2ozl3qxxuLluMJ49egyzTCbQ
-	Q3YXp+io8721+PbGgGIkaaunVy3UQoxBuZ5Jx5lgDwt8KP6HWIlfnXDgn6wsYVk1SOsZaT4U71umO
-	u+Zs64aTe8KzyNhfuBYFRGdt12yDPWdMiR+rOFGLW3dbQb1o9SVKlXAiwhpjl8qrkEtaPPqTrt1OC
-	C7xNTzWUbdxYTzytlwmWp5vFyyFVjZa0wLmISOCoSj2AYDx0Lh5ayCgdSXriAXrBFavJ6fW5zaoBD
-	Kp8dENh7JIc0IV8QzlaQNBsIAB4VrEgBCTiBzNH4xM+/f7LJxVF0DNakEynoD/PGGmcpKMJWVSHv/
-	AuCLPW2Q==;
-Received: from ip6-localhost ([::1]:59182 helo=hr1.samba.org) 
+	bh=4kxW6iXEA+6Bm35nxaH2T3qwkeuSGQKOBY0A8w8ARgQ=; b=LVN+7ftDjF0ND3Rl5S7D1RL24l
+	DXOhCzN0emZUfAUUFltKU7flWIApoJ2vjON4q7WLwuk0j0Nx/rICTzKDI7/cNQtNR8g6NXkvV0J8C
+	h9MPPywpHlkWvJtVGJL2WBrXS9oz7FyhYLKLnwocxxIlzqcZj/DcKdDvaCW9dbMmIO572eKNfizuV
+	8x2oM+hsIN/BbkubQfoljcEOJaUzPQPr8Rbokb3Hu3xNExEPFl2X9j12g/8Sr/4xvm6WE2ALjS48Y
+	Lj5XQrM8MWlO05mN+4SxvLKtUvIL+Nc9y0O6FKPeEQrGHwn4edgX7X0EnRa2VwEkMICKqYnM+r3Np
+	9o3Sjxgg==;
+Received: from ip6-localhost ([::1]:28278 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1v9MxA-007x4h-U0; Thu, 16 Oct 2025 12:19:33 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:64750) 
+	id 1v9Or5-007yKJ-PW; Thu, 16 Oct 2025 14:21:23 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:38992) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1v9Mx5-007x4Y-6W
- for samba-technical@lists.samba.org; Thu, 16 Oct 2025 12:19:30 +0000
+ (Exim) id 1v9Or1-007yKC-5p
+ for samba-technical@lists.samba.org; Thu, 16 Oct 2025 14:21:22 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Message-ID:Date:Cc:To:From;
- bh=NQXEjkuoqp7JdQLaiIvI5Inp/xHvVO+aU4PlHq2Ui8g=; b=0N2KZ71oWmTQ9jjffuHvLZ9M1J
- /1owHyqijwanztP2bd3bAV+RwmVbRIUd0Uj5N64vu55PIKaB9fAJ+K96Uhql58m18nZIgNqsLBzQ1
- SlNdMkH1BntJCz11wEL1U1yKl9dVqy1u3P+jztP1zfX36IzleZbOApEzXg0Lfsx9DWrdUEnefrr4n
- DUpEylE0VhI4ywaJeGpF8XUJ2LRb7FTKx1WOUR2BUx5Jr4xu3hWmPo3l9dBDXucbIQOuBHBu79nLc
- qf0xZ6XjLnLBMQ/VUsbxRW8dXIbKv/E4ndrAagaRVaObg180EuQidJia5VYapA4aKdx/wuAmgcs/B
- GXrUD94M+2koBgmra0uPP++akiaySYFqRGIFBavOTymNJjcyw8C0F1pB25fGZkoouVPKMkAFloDri
- CxloyKb3bSBdCPh1Zbxturd8ivglzjF+pRZHcL3X0M9OxMouSW1laFi74oECEYDTQsEMnRYTYUosk
- qxSsHrEB0EYYBw0B4Gp4sO8R;
+ bh=4kxW6iXEA+6Bm35nxaH2T3qwkeuSGQKOBY0A8w8ARgQ=; b=Ksme3R6S5hBnV53k71UACiNLKj
+ AM6gpaqTudM4KGPUEjfpEWOAbfatsG9Qc0oz4EXG/J0C2AeVAnARYOJQt/EyNj+zKBTLupSugWWzA
+ Ntoi0yKcdjI19MZS71FGIcT6E6s9IFOLcp3ZIWSJUGu+lDsuHiMrRFnQfWqWMNZGuXOaTXGGUMxIM
+ 6AzpFZn4k10dgc3g9gjKpp1YD2uJzEhtSlwi69v+AIvT21ynHk8fT5G90pDC66XnGNX8fyjW/Iv3F
+ 0WYBlkLbJpScIpRuOWDNu1bNSrxDDGwhBLSNAILR0WPaR9V/rB1kjaMONz42+Fffc4Cyqm6zKtypb
+ upOKYIcpqk6iM7eSXWYuNA0fyAqLyOoW3na3hN5kqMJ7mrRWE+PsAFvbQ9NXV3Kr5LgcBGlXavtIU
+ QQcjy1e+tnSTMLARczTsOMbVOZZaxH+zygwH1i91uqOWqxvkl7DC9vAym3aAiIE8cBl0YA5tJccFf
+ tgCao3g93mc+LY/85bNPOO2o;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1v9Mx4-009YDW-0q; Thu, 16 Oct 2025 12:19:26 +0000
+ (Exim) id 1v9Oqz-009ZMg-2W; Thu, 16 Oct 2025 14:21:17 +0000
 To: linux-cifs@vger.kernel.org,
 	samba-technical@lists.samba.org
-Subject: [PATCH v3] smb: server: allocate enough space for RW WRs and
+Subject: [PATCH v4] smb: server: allocate enough space for RW WRs and
  ib_drain_qp()
-Date: Thu, 16 Oct 2025 14:19:23 +0200
-Message-ID: <20251016121923.1252869-1-metze@samba.org>
+Date: Thu, 16 Oct 2025 16:21:09 +0200
+Message-ID: <20251016142109.1278810-1-metze@samba.org>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -121,7 +121,7 @@ ksmbd: New sc->rw_io.credits: max = 159, num_pages = 13, maxpages=2048
 ksmbd: rdma_send_wr 159 + max_send_wr 256 = 415
 
 And rely on rdma_rw_init_qp() to setup ib_mr_pool_init() for
-RW MRs.
+RW MRs. ib_mr_pool_destroy() will be called by rdma_rw_cleanup_mrs().
 
 It seems the code was implemented before the rdma_rw_* layer
 was fully established in the kernel.
@@ -142,14 +142,22 @@ Cc: linux-cifs@vger.kernel.org
 Cc: samba-technical@lists.samba.org
 Signed-off-by: Stefan Metzmacher <metze@samba.org>
 ---
- fs/smb/server/transport_rdma.c | 228 ++++++++++++++++++++-------------
- 1 file changed, 138 insertions(+), 90 deletions(-)
+ fs/smb/server/transport_rdma.c | 229 ++++++++++++++++++++-------------
+ 1 file changed, 138 insertions(+), 91 deletions(-)
 
 diff --git a/fs/smb/server/transport_rdma.c b/fs/smb/server/transport_rdma.c
-index 94851ff25a02..b2244ef7cd78 100644
+index 94851ff25a02..54427a6401e3 100644
 --- a/fs/smb/server/transport_rdma.c
 +++ b/fs/smb/server/transport_rdma.c
-@@ -1870,20 +1870,11 @@ static int smb_direct_prepare_negotiation(struct smbdirect_socket *sc)
+@@ -470,7 +470,6 @@ static void free_transport(struct smb_direct_transport *t)
+ 
+ 	if (sc->ib.qp) {
+ 		ib_drain_qp(sc->ib.qp);
+-		ib_mr_pool_destroy(sc->ib.qp, &sc->ib.qp->rdma_mrs);
+ 		sc->ib.qp = NULL;
+ 		rdma_destroy_qp(sc->rdma.cm_id);
+ 	}
+@@ -1870,20 +1869,11 @@ static int smb_direct_prepare_negotiation(struct smbdirect_socket *sc)
  	return ret;
  }
  
@@ -173,7 +181,7 @@ index 94851ff25a02..b2244ef7cd78 100644
  
  	/* need 3 more sge. because a SMB_DIRECT header, SMB2 header,
  	 * SMB2 response could be mapped.
-@@ -1894,67 +1885,18 @@ static int smb_direct_init_params(struct smbdirect_socket *sc,
+@@ -1894,67 +1884,18 @@ static int smb_direct_init_params(struct smbdirect_socket *sc,
  		return -EINVAL;
  	}
  
@@ -248,7 +256,7 @@ index 94851ff25a02..b2244ef7cd78 100644
  	return 0;
  }
  
-@@ -2028,13 +1970,125 @@ static int smb_direct_create_pools(struct smbdirect_socket *sc)
+@@ -2028,13 +1969,125 @@ static int smb_direct_create_pools(struct smbdirect_socket *sc)
  	return -ENOMEM;
  }
  
@@ -377,7 +385,7 @@ index 94851ff25a02..b2244ef7cd78 100644
  
  	sc->ib.pd = ib_alloc_pd(sc->ib.dev, 0);
  	if (IS_ERR(sc->ib.pd)) {
-@@ -2045,8 +2099,7 @@ static int smb_direct_create_qpair(struct smbdirect_socket *sc,
+@@ -2045,8 +2098,7 @@ static int smb_direct_create_qpair(struct smbdirect_socket *sc,
  	}
  
  	sc->ib.send_cq = ib_alloc_cq_any(sc->ib.dev, sc,
@@ -387,7 +395,7 @@ index 94851ff25a02..b2244ef7cd78 100644
  					 IB_POLL_WORKQUEUE);
  	if (IS_ERR(sc->ib.send_cq)) {
  		pr_err("Can't create RDMA send CQ\n");
-@@ -2056,7 +2109,7 @@ static int smb_direct_create_qpair(struct smbdirect_socket *sc,
+@@ -2056,7 +2108,7 @@ static int smb_direct_create_qpair(struct smbdirect_socket *sc,
  	}
  
  	sc->ib.recv_cq = ib_alloc_cq_any(sc->ib.dev, sc,
@@ -396,7 +404,7 @@ index 94851ff25a02..b2244ef7cd78 100644
  					 IB_POLL_WORKQUEUE);
  	if (IS_ERR(sc->ib.recv_cq)) {
  		pr_err("Can't create RDMA recv CQ\n");
-@@ -2065,10 +2118,18 @@ static int smb_direct_create_qpair(struct smbdirect_socket *sc,
+@@ -2065,10 +2117,18 @@ static int smb_direct_create_qpair(struct smbdirect_socket *sc,
  		goto err;
  	}
  
@@ -416,7 +424,7 @@ index 94851ff25a02..b2244ef7cd78 100644
  	qp_attr.sq_sig_type = IB_SIGNAL_REQ_WR;
  	qp_attr.qp_type = IB_QPT_RC;
  	qp_attr.send_cq = sc->ib.send_cq;
-@@ -2084,18 +2145,6 @@ static int smb_direct_create_qpair(struct smbdirect_socket *sc,
+@@ -2084,18 +2144,6 @@ static int smb_direct_create_qpair(struct smbdirect_socket *sc,
  	sc->ib.qp = sc->rdma.cm_id->qp;
  	sc->rdma.cm_id->event_handler = smb_direct_cm_handler;
  
@@ -435,7 +443,7 @@ index 94851ff25a02..b2244ef7cd78 100644
  	return 0;
  err:
  	if (sc->ib.qp) {
-@@ -2182,10 +2231,9 @@ static int smb_direct_prepare(struct ksmbd_transport *t)
+@@ -2182,10 +2230,9 @@ static int smb_direct_prepare(struct ksmbd_transport *t)
  
  static int smb_direct_connect(struct smbdirect_socket *sc)
  {
@@ -447,7 +455,7 @@ index 94851ff25a02..b2244ef7cd78 100644
  	if (ret) {
  		pr_err("Can't configure RDMA parameters\n");
  		return ret;
-@@ -2197,7 +2245,7 @@ static int smb_direct_connect(struct smbdirect_socket *sc)
+@@ -2197,7 +2244,7 @@ static int smb_direct_connect(struct smbdirect_socket *sc)
  		return ret;
  	}
  
