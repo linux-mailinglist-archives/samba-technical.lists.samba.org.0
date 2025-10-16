@@ -2,77 +2,47 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id DD026BE1558
-	for <lists+samba-technical@lfdr.de>; Thu, 16 Oct 2025 05:12:49 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2665FBE2F67
+	for <lists+samba-technical@lfdr.de>; Thu, 16 Oct 2025 12:55:03 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=KEQXE06caMZeo5HYZoW0oDsuziZc3EuBAg1B8KF+blo=; b=iIVwnESZsP/uEYiCFKK3lZwWuH
-	+lcNAOc2hFF1Uw42FIfRANQfTROZvLWz1wzfJpsyWmU+TA3AwF4YHgGWGk4E+vVs5xpB3IamT8B/G
-	wFgQGQUeM8gs4Ib85OK61q9sRl7zUZijZtb6BA/mwu85eEqMk8quSvfUnNG5e5ULSokncqylPsGY/
-	xhama6ed51AAdUHTe5Bui8eSBWi/h//chPG/S9YD5a0BGb/2JqALIDGTyRPxc5p8yYr2WAgOeOktj
-	mxwXQluMLUbXe7mi952wF3QtBguYakk4Omj76r19pEat21CcEqZPNph6ajYlqQ7827LCuqeST+VSk
-	kx1ru/AQ==;
-Received: from ip6-localhost ([::1]:41120 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=X2g54oWNDBGNparQs8hvoIBkeSqBxvx1vQ+f3Th9eE4=; b=FY2wkUcrpx957M2357or+H3R/X
+	SNXza/ZzDhF5RLFmgodwnppFDaEr8KcJlhEym3DWlbLmVYdm3XCB2vsCsrn3rmirz2Zl5akb0TigH
+	jKlsuZTGIpm6jOiEjaEXutIFhFVSPkAWTq4fd1AzAmJaORtPcuYeD5efg3U8Z+FsafR2SJOxaVLp9
+	4OyjRF1nQCoHOpdJ/OvoRFoyc5gKqitp/lCwz6RlvcWOXbymdW8IvZNNeHCoJrUsK7+SeBKul8g2m
+	S7GcT1YKdcdggXpCyw/a9oj9T6gWSkjfgdpYHNTA2hlNFfDx1fBlWJJFJ10uz2NXQBw9AP7VHxyq8
+	mDtwSUHg==;
+Received: from ip6-localhost ([::1]:37774 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1v9EPf-007u90-4g; Thu, 16 Oct 2025 03:12:23 +0000
-Received: from mail-qv1-xf2c.google.com ([2607:f8b0:4864:20::f2c]:52535) 
+	id 1v9Lct-007w4K-Ka; Thu, 16 Oct 2025 10:54:31 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:59900) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1v9EPa-007u8t-2v
- for samba-technical@lists.samba.org; Thu, 16 Oct 2025 03:12:20 +0000
-Received: by mail-qv1-xf2c.google.com with SMTP id
- 6a1803df08f44-796fe71deecso3867206d6.1
- for <samba-technical@lists.samba.org>; Wed, 15 Oct 2025 20:12:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1760584336; x=1761189136; darn=lists.samba.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=KEQXE06caMZeo5HYZoW0oDsuziZc3EuBAg1B8KF+blo=;
- b=CDf5fWcXc1ROQsJhuLdlqbgDIJb1GgkbmhgBTB3VrIdptXrwMpxmjEFXANN9p5sZYR
- Jjhc8Ij9+cfivQvI5l/JAD5o1VCum5eot8yI8YK0p2xdviSICZ6bq6s/5maznjzSJQ9+
- dOIUZBRHEsu1A8A15ssCq77FiQaTfqbuX5tNniZmmIipeIhLKeYCXRgP8SEdyWVrhGvc
- xGCCrHxP705KQEPhCz0kvFPDx2gJeSKMPC9sx1tQmhpzX+0DE/vHjc1N0kCBa1CURDdT
- 2ScVzvORwr6ghxeZM9YzyFwuZiqEoI+LvMZJJE1s402os3/NBol3ArVVGLjJ2R8kLgLA
- Qn4g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760584336; x=1761189136;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=KEQXE06caMZeo5HYZoW0oDsuziZc3EuBAg1B8KF+blo=;
- b=rx5UgayfC+AuRx2o5Gz2xAu0ySWHU9GPqNKqia/BshNGmCRfniog6D/I8VwGYOGh4K
- qsHzkdbUou7sM1nQ/RrIhQLruns1uNC0pVv9ZoTMsc1x6m41T6VjNWedBgtnQWrmdp78
- gFPrExgHcsZwYIunGKSRGyZzdVcPEalsYcjeDdEyshnkRKPXl+MRcR2+79dtfp0m2sa2
- UPDUOAvxdbPklNy5EQmRWR3b44izlF+QeX/+VncBsJl2AwzZERtRI0g80eO0OeO6+mRb
- AgN6dysH++ooU3+upYdtkYae382gquWOdyCHoGP5g7HmR703xaz8bdi0l4mPjUk9AE85
- uSgA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWl6+aVjNmL5gidAYf1LzIhTO9Q9J8qGDiVAH+ECmPP4X9RO1giB7M33knSrHoIqu4xiHPcAHALEDbCo0Y7HKA=@lists.samba.org
-X-Gm-Message-State: AOJu0Yxx59V/JDERF5dzY8nUKNY/lXkdU6QZRFl5/v6dE2UlEWeItVWO
- 59aLfZsRWpebEtLO6gqWJsC2gO7YYoGlGVusruNIOzDyZaFiOPTIKIHmGt0gTY7qscHCR3sKnt+
- vh+Kjsg90DoaWM+Czdn91pgCjuT34aNw=
-X-Gm-Gg: ASbGncvCmt81dG8d3rWSdNhVfGEGTJR/I4K+Km+K4YklEzNTDgCFU5GLNtmgoOC4whq
- +PL4yXO2LsXipWJXh/6FLPwfgpCL6MTRGV7BhYqEyMgdrqJd6OQSfqKGi+3tn6yNXC2lsEyeWuV
- XuOSX4kjtU8m3XXrQrIjBVoO3GSef+dA1rcLxj90yOQ9hWgrjYdjoFcEBZ1ci36nLmDJrUztAZr
- vr4nPlQDtsveswtwWqtf0kxxdREIMFRjTlzx1zyBDhkePfHcGZpvrW5Y+qOx0VVtCFzmZA4nxYo
- tCITyqgQPZ7/bdfjqhX4Q+oyqrmHiaoO1kTMNGOpHPCuU4XHfaM0x3evE/wlwedTPPxKv1VX5Tt
- LaNuVtHFrik6j4QhkP3F2pg0lEQcBPEY8ycLV4mFmACalc4qwKpfOa6ekaE9EkRPkZ411Mxk/wh
- Ulck+ta3aIgg==
-X-Google-Smtp-Source: AGHT+IGAmXUQRmwsgVDvQbYvXojEsX7CJBtDld+dU6Sg9MvBtBJilFj4HbmhNlkERWRbsuIYDiCI/jX/pZLNTYS90MU=
-X-Received: by 2002:ad4:5f89:0:b0:87c:b8f:f4f7 with SMTP id
- 6a1803df08f44-87c0b8ff74amr32437746d6.29.1760584335852; Wed, 15 Oct 2025
- 20:12:15 -0700 (PDT)
+ (Exim) id 1v9Lco-007w4D-Qz
+ for samba-technical@lists.samba.org; Thu, 16 Oct 2025 10:54:29 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Message-ID:Date:Cc:To:From;
+ bh=X2g54oWNDBGNparQs8hvoIBkeSqBxvx1vQ+f3Th9eE4=; b=eAPErlHiUPIit2WaJf0sJaoFDK
+ BCbu1H4hpIhdZLeU22w/RJStYOGAjB1tYpdgMJTu0e/R1eibByEmfzsZgQqFd7knN1GSwP7VJFUWG
+ hofn/KgxsTZWgDrt8N7giIfCO9tA0taK98WRCpBjGWJ+vjfVTCmYQA0fz3WWspXOKRMmJcYaDG3us
+ HkV7bLXiGGkh4mJltBhYb4AxQG9617Jg4DW4ATv4+9Icb7fo3VIfvL+8ourgxGrqRbBR7kmqMaWGF
+ zvOnCbXTkS0RGv8qumSCZQv45AcO0S1C/hhP7+T7rwumWaKOzhLVjYA08IKi0lFOWLEqQEKyPgw+y
+ D4PvGsvOhLgBPemJ893TML7kx0HT31A+zws5QtQ3LAuhYDSN2yEtAqDl0k+o3HVXV5fMqdNghz8Fo
+ qS6T5MgjB0tQURiFgtLgAVUIdeUFlT4Nok5cgEMi/F2Ty0ewaiaC9I4hLrvrUTs+Jq4lchyZz7uXZ
+ sSIWhBzm61VjspgmR7Tm3q3/;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1v9Lcn-009XFT-1K; Thu, 16 Oct 2025 10:54:25 +0000
+To: linux-cifs@vger.kernel.org,
+	samba-technical@lists.samba.org
+Subject: [PATCH] smb: client: allocate enough space for MR WRs and
+ ib_drain_qp()
+Date: Thu, 16 Oct 2025 12:54:21 +0200
+Message-ID: <20251016105421.1234955-1-metze@samba.org>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <aPBeBxTQLeyFl4mx@chcpu18>
-In-Reply-To: <aPBeBxTQLeyFl4mx@chcpu18>
-Date: Wed, 15 Oct 2025 22:12:03 -0500
-X-Gm-Features: AS18NWAEyWCeaVPeoVcoBEQpSJ9u0N2hnfc_WhSXLkxKfJqq1sbEBlBaJtOWFjY
-Message-ID: <CAH2r5mtNVsFcMsW+=jdw4=hc4rssca-0fWMg4uhipBbuHnQ9GQ@mail.gmail.com>
-Subject: Re: [PATCH v2] smb: client: Fix refcount leak for cifs_sb_tlink
-To: Shuhao Fu <sfual@cse.ust.hk>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -86,112 +56,119 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
-Cc: linux-cifs@vger.kernel.org, Shyam Prasad N <sprasad@microsoft.com>,
- Paulo Alcantara <pc@manguebit.org>, kernel-janitors@vger.kernel.org,
- samba-technical@lists.samba.org, LKML <linux-kernel@vger.kernel.org>,
- Steve French <sfrench@samba.org>, Bharath SM <bharathsm@microsoft.com>,
- Markus Elfring <Markus.Elfring@web.de>, Tom Talpey <tom@talpey.com>
+From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Stefan Metzmacher <metze@samba.org>
+Cc: metze@samba.org, Steve French <smfrench@gmail.com>,
+ Tom Talpey <tom@talpey.com>, Namjae Jeon <linkinjeon@kernel.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-updated the patch in cifs-2.6.git for-next
+The IB_WR_REG_MR and IB_WR_LOCAL_INV operations for smbdirect_mr_io
+structures should never fail because the submission or completion queues
+are too small. So we allocate more send_wr depending on the (local) max
+number of MRs.
 
-On Wed, Oct 15, 2025 at 9:53=E2=80=AFPM Shuhao Fu <sfual@cse.ust.hk> wrote:
->
-> Fix three refcount inconsistency issues related to `cifs_sb_tlink`.
->
-> Comments for `cifs_sb_tlink` state that `cifs_put_tlink()` needs to be
-> called after successful calls to `cifs_sb_tlink()`. Three calls fail to
-> update refcount accordingly, leading to possible resource leaks.
->
-> Fixes: 8ceb98437946 ("CIFS: Move rename to ops struct")
-> Fixes: 2f1afe25997f ("cifs: Use smb 2 - 3 and cifsacl mount options getac=
-l functions")
-> Fixes: 366ed846df60 ("cifs: Use smb 2 - 3 and cifsacl mount options setac=
-l function")
-> Signed-off-by: Shuhao Fu <sfual@cse.ust.hk>
-> ---
-> Change in v2:
-> 1. improved patch wording
-> 2. nicer goto label naming
->
-> Link to v1: https://lore.kernel.org/linux-cifs/aOzRF9JB9VkBKapw@osx.local=
-/
-> ---
->  fs/smb/client/inode.c   | 6 ++++--
->  fs/smb/client/smb2ops.c | 8 ++++----
->  2 files changed, 8 insertions(+), 6 deletions(-)
->
-> diff --git a/fs/smb/client/inode.c b/fs/smb/client/inode.c
-> index 239dd84a3..098a79b7a 100644
-> --- a/fs/smb/client/inode.c
-> +++ b/fs/smb/client/inode.c
-> @@ -2431,8 +2431,10 @@ cifs_do_rename(const unsigned int xid, struct dent=
-ry *from_dentry,
->         tcon =3D tlink_tcon(tlink);
->         server =3D tcon->ses->server;
->
-> -       if (!server->ops->rename)
-> -               return -ENOSYS;
-> +       if (!server->ops->rename) {
-> +               rc =3D -ENOSYS;
-> +               goto do_rename_exit;
-> +       }
->
->         /* try path-based rename first */
->         rc =3D server->ops->rename(xid, tcon, from_dentry,
-> diff --git a/fs/smb/client/smb2ops.c b/fs/smb/client/smb2ops.c
-> index 7c392cf59..00b3f769e 100644
-> --- a/fs/smb/client/smb2ops.c
-> +++ b/fs/smb/client/smb2ops.c
-> @@ -3212,8 +3212,7 @@ get_smb2_acl_by_path(struct cifs_sb_info *cifs_sb,
->         utf16_path =3D cifs_convert_path_to_utf16(path, cifs_sb);
->         if (!utf16_path) {
->                 rc =3D -ENOMEM;
-> -               free_xid(xid);
-> -               return ERR_PTR(rc);
-> +               goto put_tlink;
->         }
->
->         oparms =3D (struct cifs_open_parms) {
-> @@ -3245,6 +3244,7 @@ get_smb2_acl_by_path(struct cifs_sb_info *cifs_sb,
->                 SMB2_close(xid, tcon, fid.persistent_fid, fid.volatile_fi=
-d);
->         }
->
-> +put_tlink:
->         cifs_put_tlink(tlink);
->         free_xid(xid);
->
-> @@ -3285,8 +3285,7 @@ set_smb2_acl(struct smb_ntsd *pnntsd, __u32 acllen,
->         utf16_path =3D cifs_convert_path_to_utf16(path, cifs_sb);
->         if (!utf16_path) {
->                 rc =3D -ENOMEM;
-> -               free_xid(xid);
-> -               return rc;
-> +               goto put_tlink;
->         }
->
->         oparms =3D (struct cifs_open_parms) {
-> @@ -3307,6 +3306,7 @@ set_smb2_acl(struct smb_ntsd *pnntsd, __u32 acllen,
->                 SMB2_close(xid, tcon, fid.persistent_fid, fid.volatile_fi=
-d);
->         }
->
-> +put_tlink:
->         cifs_put_tlink(tlink);
->         free_xid(xid);
->         return rc;
-> --
-> 2.39.5 (Apple Git-154)
->
->
+While there also add additional space for ib_drain_qp().
 
+This should make sure ib_post_send() will never fail
+because the submission queue is full.
 
---=20
-Thanks,
+Fixes: f198186aa9bb ("CIFS: SMBD: Establish SMB Direct connection")
+Fixes: cc55f65dd352 ("smb: client: make use of common smbdirect_socket_parameters")
+Cc: Steve French <smfrench@gmail.com>
+Cc: Tom Talpey <tom@talpey.com>
+Cc: Long Li <longli@microsoft.com>
+Cc: Namjae Jeon <linkinjeon@kernel.org>
+Cc: linux-cifs@vger.kernel.org
+Cc: samba-technical@lists.samba.org
+Signed-off-by: Stefan Metzmacher <metze@samba.org>
+---
+ fs/smb/client/smbdirect.c | 36 +++++++++++++++++++++++-------------
+ 1 file changed, 23 insertions(+), 13 deletions(-)
 
-Steve
+diff --git a/fs/smb/client/smbdirect.c b/fs/smb/client/smbdirect.c
+index 49e2df3ad1f0..068e1069eca5 100644
+--- a/fs/smb/client/smbdirect.c
++++ b/fs/smb/client/smbdirect.c
+@@ -1767,6 +1767,7 @@ static struct smbd_connection *_smbd_get_connection(
+ 	struct smbdirect_socket *sc;
+ 	struct smbdirect_socket_parameters *sp;
+ 	struct rdma_conn_param conn_param;
++	struct ib_qp_cap qp_cap;
+ 	struct ib_qp_init_attr qp_attr;
+ 	struct sockaddr_in *addr_in = (struct sockaddr_in *) dstaddr;
+ 	struct ib_port_immutable port_immutable;
+@@ -1838,6 +1839,25 @@ static struct smbd_connection *_smbd_get_connection(
+ 		goto config_failed;
+ 	}
+ 
++	sp->responder_resources =
++		min_t(u8, sp->responder_resources,
++		      sc->ib.dev->attrs.max_qp_rd_atom);
++	log_rdma_mr(INFO, "responder_resources=%d\n",
++		sp->responder_resources);
++
++	/*
++	 * We use allocate sp->responder_resources * 2 MRs
++	 * and each MR needs WRs for REG and INV, so
++	 * we use '* 4'.
++	 *
++	 * +1 fot ib_drain_qp()
++	 */
++	memset(&qp_cap, 0, sizeof(qp_cap));
++	qp_cap.max_send_wr = sp->send_credit_target + sp->responder_resources * 4 + 1;
++	qp_cap.max_recv_wr = sp->recv_credit_max + 1;
++	qp_cap.max_send_sge = SMBDIRECT_SEND_IO_MAX_SGE;
++	qp_cap.max_recv_sge = SMBDIRECT_RECV_IO_MAX_SGE;
++
+ 	sc->ib.pd = ib_alloc_pd(sc->ib.dev, 0);
+ 	if (IS_ERR(sc->ib.pd)) {
+ 		rc = PTR_ERR(sc->ib.pd);
+@@ -1848,7 +1868,7 @@ static struct smbd_connection *_smbd_get_connection(
+ 
+ 	sc->ib.send_cq =
+ 		ib_alloc_cq_any(sc->ib.dev, sc,
+-				sp->send_credit_target, IB_POLL_SOFTIRQ);
++				qp_cap.max_send_wr, IB_POLL_SOFTIRQ);
+ 	if (IS_ERR(sc->ib.send_cq)) {
+ 		sc->ib.send_cq = NULL;
+ 		goto alloc_cq_failed;
+@@ -1856,7 +1876,7 @@ static struct smbd_connection *_smbd_get_connection(
+ 
+ 	sc->ib.recv_cq =
+ 		ib_alloc_cq_any(sc->ib.dev, sc,
+-				sp->recv_credit_max, IB_POLL_SOFTIRQ);
++				qp_cap.max_recv_wr, IB_POLL_SOFTIRQ);
+ 	if (IS_ERR(sc->ib.recv_cq)) {
+ 		sc->ib.recv_cq = NULL;
+ 		goto alloc_cq_failed;
+@@ -1865,11 +1885,7 @@ static struct smbd_connection *_smbd_get_connection(
+ 	memset(&qp_attr, 0, sizeof(qp_attr));
+ 	qp_attr.event_handler = smbd_qp_async_error_upcall;
+ 	qp_attr.qp_context = sc;
+-	qp_attr.cap.max_send_wr = sp->send_credit_target;
+-	qp_attr.cap.max_recv_wr = sp->recv_credit_max;
+-	qp_attr.cap.max_send_sge = SMBDIRECT_SEND_IO_MAX_SGE;
+-	qp_attr.cap.max_recv_sge = SMBDIRECT_RECV_IO_MAX_SGE;
+-	qp_attr.cap.max_inline_data = 0;
++	qp_attr.cap = qp_cap;
+ 	qp_attr.sq_sig_type = IB_SIGNAL_REQ_WR;
+ 	qp_attr.qp_type = IB_QPT_RC;
+ 	qp_attr.send_cq = sc->ib.send_cq;
+@@ -1883,12 +1899,6 @@ static struct smbd_connection *_smbd_get_connection(
+ 	}
+ 	sc->ib.qp = sc->rdma.cm_id->qp;
+ 
+-	sp->responder_resources =
+-		min_t(u8, sp->responder_resources,
+-		      sc->ib.dev->attrs.max_qp_rd_atom);
+-	log_rdma_mr(INFO, "responder_resources=%d\n",
+-		sp->responder_resources);
+-
+ 	memset(&conn_param, 0, sizeof(conn_param));
+ 	conn_param.initiator_depth = sp->initiator_depth;
+ 	conn_param.responder_resources = sp->responder_resources;
+-- 
+2.43.0
+
 
