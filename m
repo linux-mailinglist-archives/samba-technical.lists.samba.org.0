@@ -2,47 +2,70 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 198F4BE7E89
-	for <lists+samba-technical@lfdr.de>; Fri, 17 Oct 2025 11:56:04 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 65C8DBE8AFE
+	for <lists+samba-technical@lfdr.de>; Fri, 17 Oct 2025 15:02:00 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=5AWviQ4GrXO7mRCVMAFeRXYi/zv1elrrXNg4LPr23rU=; b=nYn0lOlGCTQJ/vrbSRxi4WiILX
-	RRotcEjiiAnVDDG39H9evP1LRnabh1AWjP55I2urkhJLb0Nglnv+e946t/VHFfuBuN2zgoHSaYNCV
-	we6+gcF44tpsX1Q3gg61WV12Z7xfmpYfQuv2D3x1wlWNo0109gWKJoGOWoawni9GxO3JwAoRrKLeu
-	hN46TuP2s9TSFJDEWFrdo/r/1NEXYfqeORVN5cjoYcl5sUKaqtk+fOpyfGXx9OFZB0XvydZBVTmeC
-	hZ9M0M0H0KbC11mI8+Z0SIlDUXMKw5dTKwDasdTnk4mvziQVjqYJNsdmSiPjm+KOLcsA+8gIKnh0L
-	mT4CA5yg==;
-Received: from ip6-localhost ([::1]:55780 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=3voXPutx/6DckXzQrVlMuqDlyV22H6tii8qgM+3hWfE=; b=hlNpi8hd0hjX1A36Z/XnTmJMFs
+	EbzOW4DLWOHYqoTH4YqJ4BAT/O/EEsQlKlI01ix/opZMPGjpTMMCZllBbPHdoBcytKSGSvsmH9mqW
+	Pf1+gLsC3Z/qwsWbMPtrC5OZNtYW0GGXNYUSdRcvc7kiYhZSRRsKoNosJ+Px5y4qFg2rNwrtEzOeJ
+	3SfN588nveI5pXVH0WXvL7+0La1jLb5kuvwPWU0+qVpUVitZFCkHmm7dGA8JyfxACz/DlQO/DJ5Ip
+	GV6/ctZW0rDeVaFONAIEqIDKo8hTls1q6USyel920l47gTC5t1WXX/TvVI1cVsK93S38Md7rKst/l
+	h2YTWmyg==;
+Received: from ip6-localhost ([::1]:55516 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1v9hBJ-008521-1x; Fri, 17 Oct 2025 09:55:29 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:39516) 
+	id 1v9k5H-0086Je-Gu; Fri, 17 Oct 2025 13:01:27 +0000
+Received: from mail-qk1-x72a.google.com ([2607:f8b0:4864:20::72a]:48218) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1v9hBC-00851t-U8
- for samba-technical@lists.samba.org; Fri, 17 Oct 2025 09:55:26 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Date:Cc:To:From;
- bh=5AWviQ4GrXO7mRCVMAFeRXYi/zv1elrrXNg4LPr23rU=; b=dgc2wzZkSXmMM8V5gFnOxpxGMz
- I3ifo4mmYr0Qv4U0Oe2wAI41vpb9dIOVSECHXqbcH6d0sOqqI0tjpFlbuSOGZe1/hFW5APAVa5QWw
- +Y2LLlFiQlSzHEjepfQbEzSN8rxjkOa3P2TawPWnDTKmyeMkxJZ2tho/0HTCXJQ4rEWlsPzVlsqaB
- ZcqVdB/9h1HYYslPzqkkoD+M0G2sp0EL13T0h2OTaTDlhr7WWMxcDlr/6daoyls+akFDAQRQPVmxA
- fdr4qz91caLIZOWYyS09Mr+r+tn1KTg2WEdETvv3v558D2c/Copt4HQZY+KZeJ82h/I8R+5FRNphm
- fUfMpmYBArE/CvklpNTqc6fwPR+MtLk2LDWRNgT+30jGBIWulC3EOYf9Tn8wEOPff06eogtr5UIyr
- brGvsrLquEdEAan432R97wIopObF+RT9gSZ9SjJfYx/a04ehaX5WkGvd1QhfKtjXjc6KfiO37rwnY
- aAfMFs+c55+YHxu94ArjtxCt;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1v9hBB-009irG-1E; Fri, 17 Oct 2025 09:55:21 +0000
-To: linux-cifs@vger.kernel.org,
-	samba-technical@lists.samba.org
-Subject: [PATCH v5] smb: server: allocate enough space for RW WRs and
- ib_drain_qp()
-Date: Fri, 17 Oct 2025 11:55:02 +0200
-Message-ID: <20251017095502.1532414-1-metze@samba.org>
-X-Mailer: git-send-email 2.43.0
+ (Exim) id 1v9k5D-0086JX-Aj
+ for samba-technical@lists.samba.org; Fri, 17 Oct 2025 13:01:26 +0000
+Received: by mail-qk1-x72a.google.com with SMTP id
+ af79cd13be357-88f27b67744so259892885a.0
+ for <samba-technical@lists.samba.org>; Fri, 17 Oct 2025 06:01:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=googlemail.com; s=20230601; t=1760706081; x=1761310881; darn=lists.samba.org;
+ h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=XsJxQRHkblBNdYNwV9Z7EgW9phErG6DBihiWxoLxQSU=;
+ b=Jv/gAzCCI4NMosy08IxT31hBrhXXsUJCTZOmQID6i20SWVv23Bz1Gsv+fmZ3VZmxsP
+ bLitPS5VU8+fkn/n22VsxR+1OaQzIdQUEt/oXOlv535SPKmVLTI3+nNxdp5lmlvW6Ttb
+ wnV59iiIIuiVglrEoEfksf7/VQ80PWeQNj0NFJwXkaI3IjSjdpdul41m5QOeqJmYhvsp
+ jz35cQfxcOSVjbCk01UyIlMBibE6RKxd+g5As8fd1vD5nfQMGnF4n8r38g/xQASo/ryH
+ XncK3rSylgTpt3ovJ3mSvZqzde+tQy6SuYBSQ4nznwTrrNnm6qVZBzbD83RrmxCpqume
+ 2pQw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1760706081; x=1761310881;
+ h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=XsJxQRHkblBNdYNwV9Z7EgW9phErG6DBihiWxoLxQSU=;
+ b=ptUTHCLKPldXfIwKV/PkJAWWwyE4LF7X+08NXJwro9dTmWJR7KVoudig8ZkFZ3wCip
+ T+d0ozWF+TkmPi61KDQ37uiFRZHKPUSvyNImtsd3b4e/Ja334tFyjzTmpkNqi7rGxbS2
+ fWqsAggVXVX6YR3j3V0qfsHi5MG/h6PodDZ6nulAZxS9bG8ZWGqplq6ux0gCrSt1E3Ym
+ nC1Ib3E8nqBUd9CT3G/MdjX7Mxpd/pAwojKWrcwulEluuUrhMVKzKGPEMYDlv+3SFxwQ
+ q5s5gAp6tg3tYWdmDgOxatRcQhpyFRd0xaZaotgc4p0pkcSX6TgmZHsR45VLb4OJvIe1
+ Nyqw==
+X-Gm-Message-State: AOJu0Yw/ksbeyGV7b7f0pLibpLpXXgIK21hJUHQc4/gEkfbEICFLi4Dk
+ oZNNcHlhYxT5gZhsC2x/YMVF3P+oJ5+1b+AWbnNGSIRPbbetajNYzFoT8woHDt5OsVBFGL2ERtP
+ yX+Axt4Qwh3EW+8rukvCHVATf5TdOhV7po+shGdc=
+X-Gm-Gg: ASbGncuSb/hEFj4UhlPR+FwgGkawVpEWDyYLZbz32JMEGJaxFmMlDtBkkvDTu+UxbmA
+ 8pa8pkJGiBeGbcqfdZsljo1YnA1xWde3RYVlkBRD9toCQskZfYdU/KRYO+zkuUORlxlxezORmhS
+ 7RmA3ICT18rxx8HBoq5u34PnU0v01zZpsxpn01EZTnqlnnq63l5CtrzmvJIvh2XGBSk0cdXHDzn
+ phxeAyjYaLrf5NCqypANtSdiyk2hjvhlUHLjhCRXL2htkisVrG1UrmXQHJivDcpBncU/Pc62QEC
+ ASI=
+X-Google-Smtp-Source: AGHT+IE5LSdbXb3roQWBy+/rDTr7r7Q+h7mknOuyQ3y/wkbTi1jFTv5FbC2ZS9Z4dwFuPW2GGFO4JiKntrkj2HbCXuI=
+X-Received: by 2002:a05:620a:1994:b0:862:79a9:eaf2 with SMTP id
+ af79cd13be357-8906e4c845cmr439723185a.20.1760706081021; Fri, 17 Oct 2025
+ 06:01:21 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Date: Fri, 17 Oct 2025 09:01:10 -0400
+X-Gm-Features: AS18NWDTI6QHikC6dvKGyzCSM-ePkyvn8iNX3K9bzv6r6nWrz5U6Q9BAdi-1MGM
+Message-ID: <CAHCztZtZZGnEUS11oDhmSdZ1er-4sXEAtb6mb+hcBYPXn4X0Dg@mail.gmail.com>
+Subject: Samba 4.22++ - RENAME_NOREPLACE w/o fallback?
+To: samba-technical@lists.samba.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -56,419 +79,83 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Stefan Metzmacher <metze@samba.org>
-Cc: metze@samba.org, Steve French <smfrench@gmail.com>,
- Tom Talpey <tom@talpey.com>, Namjae Jeon <linkinjeon@kernel.org>
+From: Heiner Lesaar via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Heiner Lesaar <heiner.lesaar@googlemail.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Make use of rdma_rw_mr_factor() to calculate the number of rw
-credits and the number of pages per RDMA RW operation.
+Dear samba-technical,
 
-We get the same numbers for iWarp connections, tested
-with siw.ko and irdma.ko (in iWarp mode).
+we noticed after upgrading from Samba 4.20 to 4.22.3 (and later), that
+directory creation on MacOS causes a weird folder creation "loop" when
+creating a new folder in MacOS Finder. Finder basically forever keeps
+creating new directories.
 
-siw:
+This is only when the underlying filesystem is BeeGFS, a parallel
+filesystem which does not support RENAME_NOREPLACE.
 
-CIFS: max_qp_rd_atom=128, max_fast_reg_page_list_len = 256
-CIFS: max_sgl_rd=0, max_sge_rd=1
-CIFS: responder_resources=32 max_frmr_depth=256 mr_io.type=0
-CIFS: max_send_wr 384, device reporting max_cqe 3276800 max_qp_wr 32768
-ksmbd: max_fast_reg_page_list_len = 256, max_sgl_rd=0, max_sge_rd=1
-ksmbd: device reporting max_cqe 3276800 max_qp_wr 32768
-ksmbd: Old sc->rw_io.credits: max = 9, num_pages = 256
-ksmbd: New sc->rw_io.credits: max = 9, num_pages = 256, maxpages=2048
-ksmbd: Info: rdma_send_wr 27 + max_send_wr 256 = 283
+My question: Is there a mechanism to tell Samba to revert to previous
+behaviour of not using RENAME_NOREPLACE if the underlying filesystem does
+not support it?
 
-irdma (in iWarp mode):
+I=C2=B4ll copy their analysis here, running strace on the smbd process:
 
-CIFS: max_qp_rd_atom=127, max_fast_reg_page_list_len = 262144
-CIFS: max_sgl_rd=0, max_sge_rd=13
-CIFS: responder_resources=32 max_frmr_depth=2048 mr_io.type=0
-CIFS: max_send_wr 384, device reporting max_cqe 1048574 max_qp_wr 4063
-ksmbd: max_fast_reg_page_list_len = 262144, max_sgl_rd=0, max_sge_rd=13
-ksmbd: device reporting max_cqe 1048574 max_qp_wr 4063
-ksmbd: Old sc->rw_io.credits: max = 9, num_pages = 256
-ksmbd: New sc->rw_io.credits: max = 9, num_pages = 256, maxpages=2048
-ksmbd: rdma_send_wr 27 + max_send_wr 256 = 283
+The problem seems to be at the end of this folder creation sequence:
 
-This means that we get the different correct numbers for ROCE,
-tested with rdma_rxe.ko and irdma.ko (in RoCEv2 mode).
+268306 10:18:32.645081 mkdirat(27,
+".::TMPNAME:D:268306%13947819943702811000:untitled folder 3", 0775) =3D 0
+<0.000574>
+268306 10:18:32.645728 openat(27,
+".::TMPNAME:D:268306%13947819943702811000:untitled folder 3",
+O_RDONLY|O_NOFOLLOW|O_PATH|O_DIRECTORY) =3D 31 <0.000026>
+268306 10:18:32.645805 fstat(31, {st_mode=3DS_IFDIR|S_ISGID|0775, st_size=
+=3D0,
+...}) =3D 0 <0.000034>
+268306 10:18:32.645899 fstat(31, {st_mode=3DS_IFDIR|S_ISGID|0775, st_size=
+=3D0,
+...}) =3D 0 <0.000022>
+268306 10:18:32.645974 getxattr("/proc/self/fd/31",
+"system.posix_acl_access", 0x7ffe67cad620, 132) =3D -1 EOPNOTSUPP (Operatio=
+n
+not supported) <0.000038>
+268306 10:18:32.646082 setxattr("/proc/self/fd/31", "user.DOSATTRIB",
+"\0\0\5\0\5\0\0\0\21\0\0\0\20\0\0\0\0\274(w\2769\334\1", 24, 0) =3D 0
+<0.000199>
+268306 10:18:32.646423 renameat2(27,
+".::TMPNAME:D:268306%13947819943702811000:untitled folder 3", 27, "untitled
+folder 3", RENAME_NOREPLACE) =3D -1 EINVAL (Invalid argument) <0.000167>
+268306 10:18:32.646656 mkdirat(27, "untitled folder 3", 000) =3D 0 <0.00063=
+7>
+268306 10:18:32.647406 renameat(27,
+".::TMPNAME:D:268306%13947819943702811000:untitled folder 3", 27, "untitled
+folder 3") =3D -1 EEXIST (File exists) <0.000211>
 
-rxe:
+Samba prepares the new directory in a temporary location that is probably
+hidden from the user to make the actual directory creation look atomic by
+renaming the temporary directory to the actual one in the end.
+There is an error with that renameat() which fails with EINVAL because
+RENAME_NOREPLACE is not supported in BeeGFS. This error is not communicated
+to the SMB client though.
 
-CIFS: max_qp_rd_atom=128, max_fast_reg_page_list_len = 512
-CIFS: max_sgl_rd=0, max_sge_rd=32
-CIFS: responder_resources=32 max_frmr_depth=512 mr_io.type=0
-CIFS: max_send_wr 384, device reporting max_cqe 32767 max_qp_wr 1048576
-ksmbd: max_fast_reg_page_list_len = 512, max_sgl_rd=0, max_sge_rd=32
-ksmbd: device reporting max_cqe 32767 max_qp_wr 1048576
-ksmbd: Old sc->rw_io.credits: max = 9, num_pages = 256
-ksmbd: New sc->rw_io.credits: max = 65, num_pages = 32, maxpages=2048
-ksmbd: rdma_send_wr 65 + max_send_wr 256 = 321
+Instead, and I don't understand why, it then continues with a mkdirat()
+(which succeeds) and then another renameat() to move the temporary
+directory over the just created directory. This combination of operations
+results in an exisiting directory (created by the mkdirat() syscall) and
+then an error to the application because of the second failed renameat().
 
-irdma (in RoCEv2 mode):
-
-CIFS: max_qp_rd_atom=127, max_fast_reg_page_list_len = 262144,
-CIFS: max_sgl_rd=0, max_sge_rd=13
-CIFS: responder_resources=32 max_frmr_depth=2048 mr_io.type=0
-CIFS: max_send_wr 384, device reporting max_cqe 1048574 max_qp_wr 4063
-ksmbd: max_fast_reg_page_list_len = 262144, max_sgl_rd=0, max_sge_rd=13
-ksmbd: device reporting max_cqe 1048574 max_qp_wr 4063
-ksmbd: Old sc->rw_io.credits: max = 9, num_pages = 256,
-ksmbd: New sc->rw_io.credits: max = 159, num_pages = 13, maxpages=2048
-ksmbd: rdma_send_wr 159 + max_send_wr 256 = 415
-
-And rely on rdma_rw_init_qp() to setup ib_mr_pool_init() for
-RW MRs. ib_mr_pool_destroy() will be called by rdma_rw_cleanup_mrs().
-
-It seems the code was implemented before the rdma_rw_* layer
-was fully established in the kernel.
-
-While there also add additional space for ib_drain_qp().
-
-This should make sure ib_post_send() will never fail
-because the submission queue is full.
-
-Fixes: ddbdc861e37c ("ksmbd: smbd: introduce read/write credits for RDMA read/write")
-Fixes: 4c564f03e23b ("smb: server: make use of common smbdirect_socket")
-Fixes: 177368b99243 ("smb: server: make use of common smbdirect_socket_parameters")
-Fixes: 95475d8886bd ("smb: server: make use smbdirect_socket.rw_io.credits")
-Cc: Namjae Jeon <linkinjeon@kernel.org>
-Cc: Steve French <smfrench@gmail.com>
-Cc: Tom Talpey <tom@talpey.com>
-Cc: linux-cifs@vger.kernel.org
-Cc: samba-technical@lists.samba.org
-Signed-off-by: Stefan Metzmacher <metze@samba.org>
----
- fs/smb/server/transport_rdma.c | 233 ++++++++++++++++++++-------------
- 1 file changed, 142 insertions(+), 91 deletions(-)
-
-diff --git a/fs/smb/server/transport_rdma.c b/fs/smb/server/transport_rdma.c
-index 94851ff25a02..90cf5ab36103 100644
---- a/fs/smb/server/transport_rdma.c
-+++ b/fs/smb/server/transport_rdma.c
-@@ -470,7 +470,6 @@ static void free_transport(struct smb_direct_transport *t)
- 
- 	if (sc->ib.qp) {
- 		ib_drain_qp(sc->ib.qp);
--		ib_mr_pool_destroy(sc->ib.qp, &sc->ib.qp->rdma_mrs);
- 		sc->ib.qp = NULL;
- 		rdma_destroy_qp(sc->rdma.cm_id);
- 	}
-@@ -1870,20 +1869,11 @@ static int smb_direct_prepare_negotiation(struct smbdirect_socket *sc)
- 	return ret;
- }
- 
--static unsigned int smb_direct_get_max_fr_pages(struct smbdirect_socket *sc)
--{
--	return min_t(unsigned int,
--		     sc->ib.dev->attrs.max_fast_reg_page_list_len,
--		     256);
--}
--
--static int smb_direct_init_params(struct smbdirect_socket *sc,
--				  struct ib_qp_cap *cap)
-+static int smb_direct_init_params(struct smbdirect_socket *sc)
- {
- 	struct smbdirect_socket_parameters *sp = &sc->parameters;
--	struct ib_device *device = sc->ib.dev;
--	int max_send_sges, max_rw_wrs, max_send_wrs;
--	unsigned int max_sge_per_wr, wrs_per_credit;
-+	int max_send_sges;
-+	unsigned int maxpages;
- 
- 	/* need 3 more sge. because a SMB_DIRECT header, SMB2 header,
- 	 * SMB2 response could be mapped.
-@@ -1894,67 +1884,18 @@ static int smb_direct_init_params(struct smbdirect_socket *sc,
- 		return -EINVAL;
- 	}
- 
--	/* Calculate the number of work requests for RDMA R/W.
--	 * The maximum number of pages which can be registered
--	 * with one Memory region can be transferred with one
--	 * R/W credit. And at least 4 work requests for each credit
--	 * are needed for MR registration, RDMA R/W, local & remote
--	 * MR invalidation.
--	 */
--	sc->rw_io.credits.num_pages = smb_direct_get_max_fr_pages(sc);
--	sc->rw_io.credits.max = DIV_ROUND_UP(sp->max_read_write_size,
--					 (sc->rw_io.credits.num_pages - 1) *
--					 PAGE_SIZE);
--
--	max_sge_per_wr = min_t(unsigned int, device->attrs.max_send_sge,
--			       device->attrs.max_sge_rd);
--	max_sge_per_wr = max_t(unsigned int, max_sge_per_wr,
--			       max_send_sges);
--	wrs_per_credit = max_t(unsigned int, 4,
--			       DIV_ROUND_UP(sc->rw_io.credits.num_pages,
--					    max_sge_per_wr) + 1);
--	max_rw_wrs = sc->rw_io.credits.max * wrs_per_credit;
--
--	max_send_wrs = sp->send_credit_target + max_rw_wrs;
--	if (max_send_wrs > device->attrs.max_cqe ||
--	    max_send_wrs > device->attrs.max_qp_wr) {
--		pr_err("consider lowering send_credit_target = %d\n",
--		       sp->send_credit_target);
--		pr_err("Possible CQE overrun, device reporting max_cqe %d max_qp_wr %d\n",
--		       device->attrs.max_cqe, device->attrs.max_qp_wr);
--		return -EINVAL;
--	}
--
--	if (sp->recv_credit_max > device->attrs.max_cqe ||
--	    sp->recv_credit_max > device->attrs.max_qp_wr) {
--		pr_err("consider lowering receive_credit_max = %d\n",
--		       sp->recv_credit_max);
--		pr_err("Possible CQE overrun, device reporting max_cpe %d max_qp_wr %d\n",
--		       device->attrs.max_cqe, device->attrs.max_qp_wr);
--		return -EINVAL;
--	}
--
--	if (device->attrs.max_send_sge < SMBDIRECT_SEND_IO_MAX_SGE) {
--		pr_err("warning: device max_send_sge = %d too small\n",
--		       device->attrs.max_send_sge);
--		return -EINVAL;
--	}
--	if (device->attrs.max_recv_sge < SMBDIRECT_RECV_IO_MAX_SGE) {
--		pr_err("warning: device max_recv_sge = %d too small\n",
--		       device->attrs.max_recv_sge);
--		return -EINVAL;
--	}
-+	maxpages = DIV_ROUND_UP(sp->max_read_write_size, PAGE_SIZE);
-+	sc->rw_io.credits.max = rdma_rw_mr_factor(sc->ib.dev,
-+						  sc->rdma.cm_id->port_num,
-+						  maxpages);
-+	sc->rw_io.credits.num_pages = DIV_ROUND_UP(maxpages, sc->rw_io.credits.max);
-+	/* add one extra in order to handle unaligned pages */
-+	sc->rw_io.credits.max += 1;
- 
- 	sc->recv_io.credits.target = 1;
- 
- 	atomic_set(&sc->rw_io.credits.count, sc->rw_io.credits.max);
- 
--	cap->max_send_wr = max_send_wrs;
--	cap->max_recv_wr = sp->recv_credit_max;
--	cap->max_send_sge = SMBDIRECT_SEND_IO_MAX_SGE;
--	cap->max_recv_sge = SMBDIRECT_RECV_IO_MAX_SGE;
--	cap->max_inline_data = 0;
--	cap->max_rdma_ctxs = sc->rw_io.credits.max;
- 	return 0;
- }
- 
-@@ -2028,13 +1969,129 @@ static int smb_direct_create_pools(struct smbdirect_socket *sc)
- 	return -ENOMEM;
- }
- 
--static int smb_direct_create_qpair(struct smbdirect_socket *sc,
--				   struct ib_qp_cap *cap)
-+static u32 smb_direct_rdma_rw_send_wrs(struct ib_device *dev, const struct ib_qp_init_attr *attr)
-+{
-+	/*
-+	 * This could be split out of rdma_rw_init_qp()
-+	 * and be a helper function next to rdma_rw_mr_factor()
-+	 *
-+	 * We can't check unlikely(rdma_rw_force_mr) here,
-+	 * but that is most likely 0 anyway.
-+	 */
-+	u32 factor;
-+
-+	WARN_ON_ONCE(attr->port_num == 0);
-+
-+	/*
-+	 * Each context needs at least one RDMA READ or WRITE WR.
-+	 *
-+	 * For some hardware we might need more, eventually we should ask the
-+	 * HCA driver for a multiplier here.
-+	 */
-+	factor = 1;
-+
-+	/*
-+	 * If the device needs MRs to perform RDMA READ or WRITE operations,
-+	 * we'll need two additional MRs for the registrations and the
-+	 * invalidation.
-+	 */
-+	if (rdma_protocol_iwarp(dev, attr->port_num) || dev->attrs.max_sgl_rd)
-+		factor += 2;	/* inv + reg */
-+
-+	return factor * attr->cap.max_rdma_ctxs;
-+}
-+
-+static int smb_direct_create_qpair(struct smbdirect_socket *sc)
- {
- 	struct smbdirect_socket_parameters *sp = &sc->parameters;
- 	int ret;
-+	struct ib_qp_cap qp_cap;
- 	struct ib_qp_init_attr qp_attr;
--	int pages_per_rw;
-+	u32 max_send_wr;
-+	u32 rdma_send_wr;
-+
-+	/*
-+	 * Note that {rdma,ib}_create_qp() will call
-+	 * rdma_rw_init_qp() if cap->max_rdma_ctxs is not 0.
-+	 * It will adjust cap->max_send_wr to the required
-+	 * number of additional WRs for the RDMA RW operations.
-+	 * It will cap cap->max_send_wr to the device limit.
-+	 *
-+	 * +1 for ib_drain_qp
-+	 */
-+	qp_cap.max_send_wr = sp->send_credit_target + 1;
-+	qp_cap.max_recv_wr = sp->recv_credit_max + 1;
-+	qp_cap.max_send_sge = SMBDIRECT_SEND_IO_MAX_SGE;
-+	qp_cap.max_recv_sge = SMBDIRECT_RECV_IO_MAX_SGE;
-+	qp_cap.max_inline_data = 0;
-+	qp_cap.max_rdma_ctxs = sc->rw_io.credits.max;
-+
-+	/*
-+	 * Find out the number of max_send_wr
-+	 * after rdma_rw_init_qp() adjusted it.
-+	 *
-+	 * We only do it on a temporary variable,
-+	 * as rdma_create_qp() will trigger
-+	 * rdma_rw_init_qp() again.
-+	 */
-+	memset(&qp_attr, 0, sizeof(qp_attr));
-+	qp_attr.cap = qp_cap;
-+	qp_attr.port_num = sc->rdma.cm_id->port_num;
-+	rdma_send_wr = smb_direct_rdma_rw_send_wrs(sc->ib.dev, &qp_attr);
-+	max_send_wr = qp_cap.max_send_wr + rdma_send_wr;
-+
-+	if (qp_cap.max_send_wr > sc->ib.dev->attrs.max_cqe ||
-+	    qp_cap.max_send_wr > sc->ib.dev->attrs.max_qp_wr) {
-+		pr_err("Possible CQE overrun: max_send_wr %d\n",
-+		       qp_cap.max_send_wr);
-+		pr_err("device %.*s reporting max_cqe %d max_qp_wr %d\n",
-+		       IB_DEVICE_NAME_MAX,
-+		       sc->ib.dev->name,
-+		       sc->ib.dev->attrs.max_cqe,
-+		       sc->ib.dev->attrs.max_qp_wr);
-+		pr_err("consider lowering send_credit_target = %d\n",
-+		       sp->send_credit_target);
-+		return -EINVAL;
-+	}
-+
-+	if (qp_cap.max_rdma_ctxs &&
-+	    (max_send_wr >= sc->ib.dev->attrs.max_cqe ||
-+	     max_send_wr >= sc->ib.dev->attrs.max_qp_wr)) {
-+		pr_err("Possible CQE overrun: rdma_send_wr %d + max_send_wr %d = %d\n",
-+		       rdma_send_wr, qp_cap.max_send_wr, max_send_wr);
-+		pr_err("device %.*s reporting max_cqe %d max_qp_wr %d\n",
-+		       IB_DEVICE_NAME_MAX,
-+		       sc->ib.dev->name,
-+		       sc->ib.dev->attrs.max_cqe,
-+		       sc->ib.dev->attrs.max_qp_wr);
-+		pr_err("consider lowering send_credit_target = %d, max_rdma_ctxs = %d\n",
-+		       sp->send_credit_target, qp_cap.max_rdma_ctxs);
-+		return -EINVAL;
-+	}
-+
-+	if (qp_cap.max_recv_wr > sc->ib.dev->attrs.max_cqe ||
-+	    qp_cap.max_recv_wr > sc->ib.dev->attrs.max_qp_wr) {
-+		pr_err("Possible CQE overrun: max_recv_wr %d\n",
-+		       qp_cap.max_recv_wr);
-+		pr_err("device %.*s reporting max_cqe %d max_qp_wr %d\n",
-+		       IB_DEVICE_NAME_MAX,
-+		       sc->ib.dev->name,
-+		       sc->ib.dev->attrs.max_cqe,
-+		       sc->ib.dev->attrs.max_qp_wr);
-+		pr_err("consider lowering receive_credit_max = %d\n",
-+		       sp->recv_credit_max);
-+		return -EINVAL;
-+	}
-+
-+	if (qp_cap.max_send_sge > sc->ib.dev->attrs.max_send_sge ||
-+	    qp_cap.max_recv_sge > sc->ib.dev->attrs.max_recv_sge) {
-+		pr_err("device %.*s max_send_sge/max_recv_sge = %d/%d too small\n",
-+		       IB_DEVICE_NAME_MAX,
-+		       sc->ib.dev->name,
-+		       sc->ib.dev->attrs.max_send_sge,
-+		       sc->ib.dev->attrs.max_recv_sge);
-+		return -EINVAL;
-+	}
- 
- 	sc->ib.pd = ib_alloc_pd(sc->ib.dev, 0);
- 	if (IS_ERR(sc->ib.pd)) {
-@@ -2045,8 +2102,7 @@ static int smb_direct_create_qpair(struct smbdirect_socket *sc,
- 	}
- 
- 	sc->ib.send_cq = ib_alloc_cq_any(sc->ib.dev, sc,
--					 sp->send_credit_target +
--					 cap->max_rdma_ctxs,
-+					 max_send_wr,
- 					 IB_POLL_WORKQUEUE);
- 	if (IS_ERR(sc->ib.send_cq)) {
- 		pr_err("Can't create RDMA send CQ\n");
-@@ -2056,7 +2112,7 @@ static int smb_direct_create_qpair(struct smbdirect_socket *sc,
- 	}
- 
- 	sc->ib.recv_cq = ib_alloc_cq_any(sc->ib.dev, sc,
--					 sp->recv_credit_max,
-+					 qp_cap.max_recv_wr,
- 					 IB_POLL_WORKQUEUE);
- 	if (IS_ERR(sc->ib.recv_cq)) {
- 		pr_err("Can't create RDMA recv CQ\n");
-@@ -2065,10 +2121,18 @@ static int smb_direct_create_qpair(struct smbdirect_socket *sc,
- 		goto err;
- 	}
- 
-+	/*
-+	 * We reset completely here!
-+	 * As the above use was just temporary
-+	 * to calc max_send_wr and rdma_send_wr.
-+	 *
-+	 * rdma_create_qp() will trigger rdma_rw_init_qp()
-+	 * again if max_rdma_ctxs is not 0.
-+	 */
- 	memset(&qp_attr, 0, sizeof(qp_attr));
- 	qp_attr.event_handler = smb_direct_qpair_handler;
- 	qp_attr.qp_context = sc;
--	qp_attr.cap = *cap;
-+	qp_attr.cap = qp_cap;
- 	qp_attr.sq_sig_type = IB_SIGNAL_REQ_WR;
- 	qp_attr.qp_type = IB_QPT_RC;
- 	qp_attr.send_cq = sc->ib.send_cq;
-@@ -2084,18 +2148,6 @@ static int smb_direct_create_qpair(struct smbdirect_socket *sc,
- 	sc->ib.qp = sc->rdma.cm_id->qp;
- 	sc->rdma.cm_id->event_handler = smb_direct_cm_handler;
- 
--	pages_per_rw = DIV_ROUND_UP(sp->max_read_write_size, PAGE_SIZE) + 1;
--	if (pages_per_rw > sc->ib.dev->attrs.max_sgl_rd) {
--		ret = ib_mr_pool_init(sc->ib.qp, &sc->ib.qp->rdma_mrs,
--				      sc->rw_io.credits.max, IB_MR_TYPE_MEM_REG,
--				      sc->rw_io.credits.num_pages, 0);
--		if (ret) {
--			pr_err("failed to init mr pool count %zu pages %zu\n",
--			       sc->rw_io.credits.max, sc->rw_io.credits.num_pages);
--			goto err;
--		}
--	}
--
- 	return 0;
- err:
- 	if (sc->ib.qp) {
-@@ -2182,10 +2234,9 @@ static int smb_direct_prepare(struct ksmbd_transport *t)
- 
- static int smb_direct_connect(struct smbdirect_socket *sc)
- {
--	struct ib_qp_cap qp_cap;
- 	int ret;
- 
--	ret = smb_direct_init_params(sc, &qp_cap);
-+	ret = smb_direct_init_params(sc);
- 	if (ret) {
- 		pr_err("Can't configure RDMA parameters\n");
- 		return ret;
-@@ -2197,7 +2248,7 @@ static int smb_direct_connect(struct smbdirect_socket *sc)
- 		return ret;
- 	}
- 
--	ret = smb_direct_create_qpair(sc, &qp_cap);
-+	ret = smb_direct_create_qpair(sc);
- 	if (ret) {
- 		pr_err("Can't accept RDMA client: %d\n", ret);
- 		return ret;
--- 
-2.43.0
+Because the second rename returns EEXIST instead of the original EINVAL
+(the actual error), the application then restarts the entire sequence with
+a new name (which also is an antipattern in my opinion).
 
 
+The same operation on Samba 4.20 just succeeds:
+
+311932 12:09:08.940014 mkdirat(25, "untitled folder", 0775) =3D 0 <0.001351=
+>
+
+Many thanks for your assistance! This issue is keeping us from updating
+Samba from 4.20, which is important due to the AD related security fixes
+introduced in Samba 4.22.3
+
+Kind regards,
+Heiner
