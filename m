@@ -2,62 +2,103 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9E48ABF4C05
-	for <lists+samba-technical@lfdr.de>; Tue, 21 Oct 2025 08:53:03 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B9639BF528F
+	for <lists+samba-technical@lfdr.de>; Tue, 21 Oct 2025 10:07:54 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=nt7hyyncho+qVQzOr1F3z+jC3PEq01hhyew9ppkTazk=; b=CqrrOd//Xbb/Xq2xQTy9GGvWpM
-	aiaHo1yyy+TJXd2sXKJO2PToAM4OxnWPVZPT7iGaX9t/r51hRhlk+cr43WiAmiAk1LJCROWV+0lXf
-	XSt3YZ8jpqnpYXWWwTawSAq1LxOHocAo+NjaQvJhMzjrbLUNaBEE6kZjO2rT4abK72123cjNhQycD
-	qff3/OIETy+1Dkd+mtmD9kjIHwFClqt1V7WvvL3YcjSMkEKvkPgkCsfs3O77WbcUZHvl70WUcO+dA
-	VmorxlnamaHK/21DhDplIk9OMYdPewaJXacpA/aH8ESha8N98uNatgh0POgT9L4baC1hYNacwElC7
-	+vuD/cZQ==;
-Received: from ip6-localhost ([::1]:49674 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=Z3Kd6mbbrPRG0zwXHtLEs9ID63+xl85WNbtfLvd00nw=; b=N+uWO4q3lFCxKGRVmsSUfQ4qye
+	MpgkZUntoDgAz/uwNyvXuDRqWjoBW2+bLsWYZiCZOQNYQfsVa1UtkKQsiI/P8YA3uI0czCVPAmU3f
+	Ei1DsVLX2TElvIp08yJnrsmF1axVF7vWmvAoogQ3mmComd9wtqVSuLA1GPzCChb93ds7UXgm+ijrF
+	OHxFolCbEncZO6uu2xs7FO8WwjnwnyaiLrUwu2S5iIqNL7vtA79TTT2/pw7/SK47P0U9ImQdELy9Z
+	97iSyH9wafoA7ElMkk9PAiNNKST3xHWLX3z/aYzCwErJeSKneOjoVm+b1zkiwRb+96noBQ6EjAB+k
+	v41dPycw==;
+Received: from ip6-localhost ([::1]:54440 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1vB6ER-008Pm9-Sx; Tue, 21 Oct 2025 06:52:31 +0000
-Received: from sea.source.kernel.org ([172.234.252.31]:36550) 
+	id 1vB7Or-008PzA-1i; Tue, 21 Oct 2025 08:07:21 +0000
+Received: from smtp-out1.suse.de ([2a07:de40:b251:101:10:150:64:1]:58148) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vB6EK-008Pm2-Ic
- for samba-technical@lists.samba.org; Tue, 21 Oct 2025 06:52:28 +0000
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id E810743B3C
- for <samba-technical@lists.samba.org>; Tue, 21 Oct 2025 06:52:09 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C9F86C4CEFD
- for <samba-technical@lists.samba.org>; Tue, 21 Oct 2025 06:52:09 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1761029529;
- bh=sn2oVwNS+TozRSZUOIzYvrxL5Ano16/PHHOHPc8rOcA=;
- h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
- b=bnej4HOwelhXTLL32Ygz2bYk2/QYpTl7sDs/x2ZvgN+erBRSwsN/juVJvVPUMTF8a
- Cuod+l+YB+NYl4jh+RLbb0vw2glEY+bPB3sGSizFUX4M2lSDCYciXQ0SjmBnYKocbE
- +U2aaTX7n3EGOvvyzsOsThip+PCQiT0/wA2rZOJJejaVeS9CC7ZKgbPjGLMnQ3Iaga
- 5kYkX39h0jcYTpGZkeKFavJ5s5oWFT4NYqHytv6ytl2Llz+fB4IoXFi8U5n8lsdfIe
- wZs6ET1LtF4P97YmDWVlwAA4LRzF9RInBPYAfFy4FUWsjZJsGpVhF7p5e23GIlruGt
- 5mFSxz2zfIHiQ==
-Received: by mail-ed1-f43.google.com with SMTP id
- 4fb4d7f45d1cf-63c3d7e2217so6712564a12.3
- for <samba-technical@lists.samba.org>; Mon, 20 Oct 2025 23:52:09 -0700 (PDT)
-X-Forwarded-Encrypted: i=1;
- AJvYcCUSNzEhsBRC9403llvc2qtmu0DGubPlUBG2So8xYgrRCwL3r9WDyWYam2puxdaP/WU/pb0eOwEKlb2ih0/RZUk=@lists.samba.org
-X-Gm-Message-State: AOJu0YxsbqqSs6ATj7iyGzuPd6LL3FzYVoHNC83j8qtx7Rih4La3+YEY
- oXnDxRi01a2NX8MChoQJuBNYBRvh0D0o7Ux2dB0Pts/5huP1zW8U/au0BDTZjxXOUv1E784DM4Y
- 3DAbpsryhj4kfMh/i1O1oQbdbJuH5Qvo=
-X-Google-Smtp-Source: AGHT+IFZNDKNWJa48C/FXExjke0/+yALeZkgGB9ynQVEz6IqFXNklSnl/HfM6TIrj1PZHpT8Uxy7FEc57DZ1+JBCd2o=
-X-Received: by 2002:a05:6402:5252:b0:63a:294:b034 with SMTP id
- 4fb4d7f45d1cf-63c1f634868mr15205207a12.13.1761029528359; Mon, 20 Oct 2025
- 23:52:08 -0700 (PDT)
+ (Exim) id 1vAmLO-008LeO-Oj
+ for samba-technical@lists.samba.org; Mon, 20 Oct 2025 09:38:25 +0000
+Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id B602B21182;
+ Mon, 20 Oct 2025 09:38:14 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
+ t=1760953094; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=Z3Kd6mbbrPRG0zwXHtLEs9ID63+xl85WNbtfLvd00nw=;
+ b=zxouHgNgKUzdOarvvgPHxxhBWfS94a/uSkfjawCnhR8cbzz69iJLdEIMLj+zu50BZJJba5
+ bUTYv7oaSLn8CNysGSrIzr02b4aqBS2pxKu3DHfqFRoON9pn+7ej6fZrScypIZq2azmnM9
+ x+TSTCq6IzdNyUQ8GrWILzHPDDFkhg0=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
+ s=susede2_ed25519; t=1760953094;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=Z3Kd6mbbrPRG0zwXHtLEs9ID63+xl85WNbtfLvd00nw=;
+ b=5lzRlQJqx8tIyzMXiqieG4GgqzCjJXMTESHJy83TMpTfVtscp3W2GniczNdnyGo/OW71MN
+ UX0rYu63KQ2G2IBQ==
+Authentication-Results: smtp-out1.suse.de;
+	none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
+ t=1760953094; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=Z3Kd6mbbrPRG0zwXHtLEs9ID63+xl85WNbtfLvd00nw=;
+ b=zxouHgNgKUzdOarvvgPHxxhBWfS94a/uSkfjawCnhR8cbzz69iJLdEIMLj+zu50BZJJba5
+ bUTYv7oaSLn8CNysGSrIzr02b4aqBS2pxKu3DHfqFRoON9pn+7ej6fZrScypIZq2azmnM9
+ x+TSTCq6IzdNyUQ8GrWILzHPDDFkhg0=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
+ s=susede2_ed25519; t=1760953094;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=Z3Kd6mbbrPRG0zwXHtLEs9ID63+xl85WNbtfLvd00nw=;
+ b=5lzRlQJqx8tIyzMXiqieG4GgqzCjJXMTESHJy83TMpTfVtscp3W2GniczNdnyGo/OW71MN
+ UX0rYu63KQ2G2IBQ==
+Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id A767513AAC;
+ Mon, 20 Oct 2025 09:38:14 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
+ by imap1.dmz-prg2.suse.org with ESMTPSA id urrbKAYD9mgtDwAAD6G6ig
+ (envelope-from <jack@suse.cz>); Mon, 20 Oct 2025 09:38:14 +0000
+Received: by quack3.suse.cz (Postfix, from userid 1000)
+ id 55C9AA0856; Mon, 20 Oct 2025 11:38:14 +0200 (CEST)
+Date: Mon, 20 Oct 2025 11:38:14 +0200
+To: Jeff Layton <jlayton@kernel.org>
+Subject: Re: [PATCH 03/13] vfs: add try_break_deleg calls for parents to
+ vfs_{link,rename,unlink}
+Message-ID: <n5ihwvsits3u7fwvzuk42vmqdv45ap6u4gh77diegtxik42emp@whyfqmynxnl2>
+References: <20251013-dir-deleg-ro-v1-0-406780a70e5e@kernel.org>
+ <20251013-dir-deleg-ro-v1-3-406780a70e5e@kernel.org>
 MIME-Version: 1.0
-References: <cover.1760984605.git.metze@samba.org>
-In-Reply-To: <cover.1760984605.git.metze@samba.org>
-Date: Tue, 21 Oct 2025 15:51:56 +0900
-X-Gmail-Original-Message-ID: <CAKYAXd8KQzA+0HoEFpfHj4rNRjkbhkUQn0P2dOgmr_bx_64XLg@mail.gmail.com>
-X-Gm-Features: AS18NWAgxtJNHqWVefs6e3Lo8TZ4yADtDXKQ6fcO_ZG8HqiIEATt5ATIWq5VxXY
-Message-ID: <CAKYAXd8KQzA+0HoEFpfHj4rNRjkbhkUQn0P2dOgmr_bx_64XLg@mail.gmail.com>
-Subject: Re: [PATCH 0/5] smb: smbdirect: introduce local send credits
-To: Stefan Metzmacher <metze@samba.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20251013-dir-deleg-ro-v1-3-406780a70e5e@kernel.org>
+X-Spamd-Result: default: False [-2.30 / 50.00]; BAYES_HAM(-3.00)[100.00%];
+ SUSPICIOUS_RECIPS(1.50)[]; NEURAL_HAM_LONG(-1.00)[-1.000];
+ MID_RHS_NOT_FQDN(0.50)[]; NEURAL_HAM_SHORT(-0.20)[-1.000];
+ MIME_GOOD(-0.10)[text/plain]; RCVD_VIA_SMTP_AUTH(0.00)[];
+ ARC_NA(0.00)[]; MIME_TRACE(0.00)[0:+]; TO_DN_SOME(0.00)[];
+ MISSING_XM_UA(0.00)[]; RCPT_COUNT_TWELVE(0.00)[44];
+ TAGGED_RCPT(0.00)[]; FREEMAIL_ENVRCPT(0.00)[gmail.com];
+ R_RATELIMIT(0.00)[to_ip_from(RL63fqwwx8ot6gmekemcs76f9d)];
+ FROM_HAS_DN(0.00)[];
+ FREEMAIL_CC(0.00)[szeredi.hu,zeniv.linux.org.uk,kernel.org,suse.cz,oracle.com,gmail.com,samba.org,manguebit.org,microsoft.com,talpey.com,linuxfoundation.org,redhat.com,tyhicks.com,brown.name,chromium.org,google.com,davemloft.net,vger.kernel.org,lists.samba.org,lists.linux.dev];
+ RCVD_COUNT_THREE(0.00)[3]; FROM_EQ_ENVFROM(0.00)[];
+ RCVD_TLS_LAST(0.00)[]; TO_MATCH_ENVRCPT_ALL(0.00)[];
+ DKIM_SIGNED(0.00)[suse.cz:s=susede2_rsa,suse.cz:s=susede2_ed25519];
+ DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:helo,suse.com:email]
+X-Spam-Flag: NO
+X-Spam-Score: -2.30
+X-Mailman-Approved-At: Tue, 21 Oct 2025 08:07:19 +0000
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -71,60 +112,100 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Namjae Jeon via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Namjae Jeon <linkinjeon@kernel.org>
-Cc: linux-cifs@vger.kernel.org, samba-technical@lists.samba.org
+From: Jan Kara via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jan Kara <jack@suse.cz>
+Cc: Alexander Aring <alex.aring@gmail.com>, Jan Kara <jack@suse.cz>,
+ Paulo Alcantara <pc@manguebit.org>, "Rafael J. Wysocki" <rafael@kernel.org>,
+ Carlos Maiolino <cem@kernel.org>, Amir Goldstein <amir73il@gmail.com>,
+ linux-unionfs@vger.kernel.org, David Howells <dhowells@redhat.com>,
+ Eric Dumazet <edumazet@google.com>, Danilo Krummrich <dakr@kernel.org>,
+ linux-cifs@vger.kernel.org, Kuniyuki Iwashima <kuniyu@google.com>,
+ Miklos Szeredi <miklos@szeredi.hu>, Dai Ngo <Dai.Ngo@oracle.com>,
+ Tyler Hicks <code@tyhicks.com>, Steve French <smfrench@gmail.com>,
+ NeilBrown <neil@brown.name>, Jakub Kicinski <kuba@kernel.org>,
+ Paolo Abeni <pabeni@redhat.com>, Namjae Jeon <linkinjeon@kernel.org>,
+ Shyam Prasad N <sprasad@microsoft.com>,
+ Olga Kornievskaia <okorniev@redhat.com>, Simon Horman <horms@kernel.org>,
+ ecryptfs@vger.kernel.org, linux-nfs@vger.kernel.org,
+ Tom Talpey <tom@talpey.com>, Bharath SM <bharathsm@microsoft.com>,
+ Alexander Viro <viro@zeniv.linux.org.uk>, linux-xfs@vger.kernel.org,
+ Christian Brauner <brauner@kernel.org>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ samba-technical@lists.samba.org, linux-kernel@vger.kernel.org,
+ Steve French <sfrench@samba.org>,
+ Sergey Senozhatsky <senozhatsky@chromium.org>,
+ Chuck Lever <chuck.lever@oracle.com>, Anna Schumaker <anna@kernel.org>,
+ netdev@vger.kernel.org, linux-fsdevel@vger.kernel.org, netfs@lists.linux.dev,
+ "David S. Miller" <davem@davemloft.net>, Trond Myklebust <trondmy@kernel.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Tue, Oct 21, 2025 at 3:36=E2=80=AFAM Stefan Metzmacher <metze@samba.org>=
- wrote:
->
-> Hi,
->
-> our client already has some logic to prevent overflows of
-> the local submission queue for ib_post_send(), if the peer
-> granted more credits than we asked for.
->
-> But it's not as easy as it could be.
->
-> I guess that won't happen against Windows, but our git
-> history indicates this could happen.
->
-> Now we have a loop of local credits based on our send_credit_target.
-> With that we always try to get a local credit first and then
-> get a remote credit. When we got both we are able to
-> mark the request as pending in order to keep the
-> existing logic based on the pending count working.
-> Removing or changing that is a task for another day,
-> when all code if in common between client and server.
->
-> For the server this is a real bug fix, as such a logic was missing
-> before.
->
-> For the client it's not strictly required for 6.18, but
-> I think we should keep things consistent, as it will reduce
-> churn on my 6.19 patchset, which already has about 100 patches
-> and brings things into common code. And more is comming there...
->
-> Stefan Metzmacher (5):
->   smb: smbdirect: introduce smbdirect_socket.send_io.lcredits.*
->   smb: server: smb_direct_disconnect_rdma_connection() already wakes all
->     waiters on error
->   smb: server: simplify sibling_list handling in
->     smb_direct_flush_send_list/send_done
->   smb: server: make use of smbdirect_socket.send_io.lcredits.*
->   smb: client: make use of smbdirect_socket.send_io.lcredits.*
-Applied them to #ksmbd-for-next-next.
-Thanks!
->
->  fs/smb/client/smbdirect.c                  |  67 ++++++++-----
->  fs/smb/common/smbdirect/smbdirect_socket.h |  13 ++-
->  fs/smb/server/transport_rdma.c             | 106 +++++++++++++++------
->  3 files changed, 129 insertions(+), 57 deletions(-)
->
-> --
-> 2.43.0
->
->
+On Mon 13-10-25 10:48:01, Jeff Layton wrote:
+> In order to add directory delegation support, we need to break
+> delegations on the parent whenever there is going to be a change in the
+> directory.
+> 
+> vfs_link, vfs_unlink, and vfs_rename all have existing delegation break
+> handling for the children in the rename. Add the necessary calls for
+> breaking delegations in the parent(s) as well.
+> 
+> Signed-off-by: Jeff Layton <jlayton@kernel.org>
+
+Looks good. Feel free to add:
+
+Reviewed-by: Jan Kara <jack@suse.cz>
+
+								Honza
+
+> ---
+>  fs/namei.c | 15 ++++++++++++++-
+>  1 file changed, 14 insertions(+), 1 deletion(-)
+> 
+> diff --git a/fs/namei.c b/fs/namei.c
+> index 7377020a2cba02501483020e0fc93c279fb38d3e..6e61e0215b34134b1690f864e2719e3f82cf71a8 100644
+> --- a/fs/namei.c
+> +++ b/fs/namei.c
+> @@ -4667,6 +4667,9 @@ int vfs_unlink(struct mnt_idmap *idmap, struct inode *dir,
+>  	else {
+>  		error = security_inode_unlink(dir, dentry);
+>  		if (!error) {
+> +			error = try_break_deleg(dir, delegated_inode);
+> +			if (error)
+> +				goto out;
+>  			error = try_break_deleg(target, delegated_inode);
+>  			if (error)
+>  				goto out;
+> @@ -4936,7 +4939,9 @@ int vfs_link(struct dentry *old_dentry, struct mnt_idmap *idmap,
+>  	else if (max_links && inode->i_nlink >= max_links)
+>  		error = -EMLINK;
+>  	else {
+> -		error = try_break_deleg(inode, delegated_inode);
+> +		error = try_break_deleg(dir, delegated_inode);
+> +		if (!error)
+> +			error = try_break_deleg(inode, delegated_inode);
+>  		if (!error)
+>  			error = dir->i_op->link(old_dentry, dir, new_dentry);
+>  	}
+> @@ -5203,6 +5208,14 @@ int vfs_rename(struct renamedata *rd)
+>  		    old_dir->i_nlink >= max_links)
+>  			goto out;
+>  	}
+> +	error = try_break_deleg(old_dir, delegated_inode);
+> +	if (error)
+> +		goto out;
+> +	if (new_dir != old_dir) {
+> +		error = try_break_deleg(new_dir, delegated_inode);
+> +		if (error)
+> +			goto out;
+> +	}
+>  	if (!is_dir) {
+>  		error = try_break_deleg(source, delegated_inode);
+>  		if (error)
+> 
+> -- 
+> 2.51.0
+> 
+-- 
+Jan Kara <jack@suse.com>
+SUSE Labs, CR
 
