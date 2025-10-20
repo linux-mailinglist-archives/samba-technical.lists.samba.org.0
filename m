@@ -2,44 +2,43 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id B6C98BF1BB1
-	for <lists+samba-technical@lfdr.de>; Mon, 20 Oct 2025 16:08:06 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7A0D7BF2F4C
+	for <lists+samba-technical@lfdr.de>; Mon, 20 Oct 2025 20:36:47 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=Ed4fK+ZnP6nEhONReVTtgBkffmW6wnsU1RMQraJBj68=; b=R8XKNiRmCacpyJRAyRUMzlvKjo
-	XUS+gjF3vQRSw1vX9Jwvo9JJ7sIm35ibjy+63XpS1sancIiR0B0qDDt0GyfnMYgPeS1K1jywJcTxg
-	Y7iTnHvgOZqFgOgVjyiNqCCC1Vt+Jn7kOCvSVwdO0ytmBgRehvEcDfrQaZ4A9otC6ZFpjM9Zy/H8X
-	wUyZlvQNTiCsxWwiUP6nhsRqf6+u5vhENGeqci1V2oBes5BeWFPlIdDJ/MzjOKdLmwT6tRf/yroeO
-	8tZZ8y3eY0pDWxSLFGcpfKIw2/sWzEIifdLZ9E/MrliDPtkeuf+5pF3m8quXhN5V/wMO/e0q9KltK
-	RFuLH/fw==;
-Received: from ip6-localhost ([::1]:41210 helo=hr1.samba.org) 
+	bh=KZq8yJS6P7GhtA6jAmeV72n9c7cr6e4dDAA8rc3T/rY=; b=4IlYsi4zYjqOmrsObkv0vYO6od
+	hyZDi6Eb+p6e6kLVAEyLhG36WqGa6HD+EtoQDSrT70eTPdTEdTuPUOY+NBIEyIF9w2/sVP29YNz9d
+	0xCgXasEHgN6ztis039HpkZ5V7/pUPsaaxhI4IhzSMdHXLU8dr0Dsd3vwmmK4PEWCWeUmcwDGsaDG
+	jQwfAr6g8Eq0wAvll06MoiEmx+3yaOj3yimWapX5OOvYNToEeBeBf3p60+3cijF+qumKlMbwibPJP
+	q89+qT49JgYP/ZNX3gFDXRqTrsAI1tLunadQwqvgPqkzVKnONRvf8eZUqLtz0YaFlrZmICkQUMT4S
+	/4n/J7Xg==;
+Received: from ip6-localhost ([::1]:39884 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1vAqYN-008MoS-4j; Mon, 20 Oct 2025 14:08:03 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:63304) 
+	id 1vAujv-008NIg-3d; Mon, 20 Oct 2025 18:36:15 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:60890) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vAqYH-008MnQ-OO
- for samba-technical@lists.samba.org; Mon, 20 Oct 2025 14:08:00 +0000
+ (Exim) id 1vAujq-008NIZ-RV
+ for samba-technical@lists.samba.org; Mon, 20 Oct 2025 18:36:13 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Message-ID:Date:Cc:To:From;
- bh=Ed4fK+ZnP6nEhONReVTtgBkffmW6wnsU1RMQraJBj68=; b=y0aKVQAsEyh/XBpYCaBN4HL+dH
- nVuugCGriBiJ6yE/8Tysgv7RqZFBEHr1pES6oZ8oWX9JLF3l7uj8JwmLYYPRkYujgZmeJmDWOE0zM
- V5FYoEDtoB/NnUABK/2kHmKauumhYNLq6FcsaA4wAlok1J+Y21YWhehg+1b0CxwkttKJ+9PRNgny8
- s72bvtXCMzPSAc3SMR5x5vwsN0msXZRWNugYdKMUhtTMp7/km2RBqqXPUFU9shuIG/MCNnfsJMzFJ
- xjcTo8o0zX07ffk2nWGrlomRoTVkRqWKosZ8wr99Zd70E6NLGfFkPmj/3GaMY1QSXZ3epcKBIJ0On
- RoovSgGc+54osy+o5alY0ZIslvWKShitcZyFyy8dl/TERZi5ypFlCQdv5sSawIm7VIJnu2RHp1zRd
- PI/ATF91N7W0IigjcvCuw+eUP91GgxEyLttD+2+XccqUAGAOPDdKcvAkmJbPZo2yfD0Ldxn+CW4qZ
- JDQ7rGqBFqAxjHLjG4AD598n;
+ bh=KZq8yJS6P7GhtA6jAmeV72n9c7cr6e4dDAA8rc3T/rY=; b=IY6D5MU4m8Kg24zE/5OSzUV3iG
+ E4FbbNa/8oyMZfNuDL4zQYl12DEhxigEB97c2w3VYZqhA6WwJWt62pIbNzfZcpVjxdMrA1DcWQ0ka
+ oJ3p6EQGqSvi0AGR9h3xeInT4hhk0SeUEQXjygZeFqXOWTewOH4yMr97JbGnGb8n9sYVgXMWKTKEv
+ rk1wrLRecZNrdm9MDoVfh3/q9s1Vf9RDqfdEFeWrYnn4TES8hlJSG3mPbPC/UifJWO0zGYzdECOo0
+ Tk2T0po2C2EB5/cBQRj+BWAlW0+n+9qTaCi/fS6cUOg1lgaGunXFyLG+qVqn4kvppYe+1PVF/HzDZ
+ /qnUTdU/WMmtBWdzLIFXCgU3FmSdhv2jmph0PKvJlRzdLfdZPUgkxMvtPehgAobUBkE96ZDZgdG7K
+ TjDDDPtULc9f49GNl8SZb+B/ciwVGso9fIEF6cKFZhxvdAkJ7N8ubZHXKLcW0FlXYMcl5b67ZWBP0
+ RVLVOc2Ilgb61yZhqqFNxFll;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vAqYG-00AATl-2J; Mon, 20 Oct 2025 14:07:56 +0000
+ (Exim) id 1vAujp-00ACN6-1d; Mon, 20 Oct 2025 18:36:09 +0000
 To: linux-cifs@vger.kernel.org,
 	samba-technical@lists.samba.org
-Subject: [PATCH] smb: server: let smb_direct_cm_handler() call ib_drain_qp()
- after smb_direct_disconnect_rdma_work()
-Date: Mon, 20 Oct 2025 16:07:53 +0200
-Message-ID: <20251020140753.155159-1-metze@samba.org>
+Subject: [PATCH 0/5] smb: smbdirect: introduce local send credits
+Date: Mon, 20 Oct 2025 20:35:57 +0200
+Message-ID: <cover.1760984605.git.metze@samba.org>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -58,79 +57,51 @@ List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
 From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
 Reply-To: Stefan Metzmacher <metze@samba.org>
-Cc: metze@samba.org, Steve French <smfrench@gmail.com>,
- Tom Talpey <tom@talpey.com>, Namjae Jeon <linkinjeon@kernel.org>
+Cc: metze@samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-All handlers triggered by ib_drain_qp() should already see the
-broken connection.
+Hi,
 
-smb_direct_cm_handler() is called under a mutex of the rdma_cm,
-we should make sure ib_drain_qp() and all rdma layer logic completes
-and unlocks the mutex.
+our client already has some logic to prevent overflows of
+the local submission queue for ib_post_send(), if the peer
+granted more credits than we asked for.
 
-It means free_transport() will also already see the connection
-as SMBDIRECT_SOCKET_DISCONNECTED, so we need to call
-crdma_[un]lock_handler(sc->rdma.cm_id) around
-ib_drain_qp(), rdma_destroy_qp(), ib_free_cq() and ib_dealloc_pd().
+But it's not as easy as it could be.
 
-Otherwise we free resources while the ib_drain_qp() within
-smb_direct_cm_handler() is still running.
+I guess that won't happen against Windows, but our git
+history indicates this could happen.
 
-We have to unlock before rdma_destroy_id() as it locks again.
+Now we have a loop of local credits based on our send_credit_target.
+With that we always try to get a local credit first and then
+get a remote credit. When we got both we are able to
+mark the request as pending in order to keep the
+existing logic based on the pending count working.
+Removing or changing that is a task for another day,
+when all code if in common between client and server.
 
-Fixes: 141fa9824c0f ("ksmbd: call ib_drain_qp when disconnected")
-Fixes: 4c564f03e23b ("smb: server: make use of common smbdirect_socket")
-Cc: Namjae Jeon <linkinjeon@kernel.org>
-Cc: Steve French <smfrench@gmail.com>
-Cc: Tom Talpey <tom@talpey.com>
-Cc: linux-cifs@vger.kernel.org
-Cc: samba-technical@lists.samba.org
-Signed-off-by: Stefan Metzmacher <metze@samba.org>
----
- fs/smb/server/transport_rdma.c | 11 ++++++++---
- 1 file changed, 8 insertions(+), 3 deletions(-)
+For the server this is a real bug fix, as such a logic was missing
+before.
 
-diff --git a/fs/smb/server/transport_rdma.c b/fs/smb/server/transport_rdma.c
-index 1b597f9f85e3..019e5f70d7b3 100644
---- a/fs/smb/server/transport_rdma.c
-+++ b/fs/smb/server/transport_rdma.c
-@@ -465,6 +465,9 @@ static void free_transport(struct smb_direct_transport *t)
- 	disable_delayed_work_sync(&sc->idle.timer_work);
- 	disable_work_sync(&sc->idle.immediate_work);
- 
-+	if (sc->rdma.cm_id)
-+		rdma_lock_handler(sc->rdma.cm_id);
-+
- 	if (sc->ib.qp) {
- 		ib_drain_qp(sc->ib.qp);
- 		sc->ib.qp = NULL;
-@@ -493,8 +496,10 @@ static void free_transport(struct smb_direct_transport *t)
- 		ib_free_cq(sc->ib.recv_cq);
- 	if (sc->ib.pd)
- 		ib_dealloc_pd(sc->ib.pd);
--	if (sc->rdma.cm_id)
-+	if (sc->rdma.cm_id) {
-+		rdma_unlock_handler(sc->rdma.cm_id);
- 		rdma_destroy_id(sc->rdma.cm_id);
-+	}
- 
- 	smb_direct_destroy_pools(sc);
- 	ksmbd_conn_free(KSMBD_TRANS(t)->conn);
-@@ -1682,10 +1687,10 @@ static int smb_direct_cm_handler(struct rdma_cm_id *cm_id,
- 	}
- 	case RDMA_CM_EVENT_DEVICE_REMOVAL:
- 	case RDMA_CM_EVENT_DISCONNECTED: {
--		ib_drain_qp(sc->ib.qp);
--
- 		sc->status = SMBDIRECT_SOCKET_DISCONNECTED;
- 		smb_direct_disconnect_rdma_work(&sc->disconnect_work);
-+		if (sc->ib.qp)
-+			ib_drain_qp(sc->ib.qp);
- 		break;
- 	}
- 	case RDMA_CM_EVENT_CONNECT_ERROR: {
+For the client it's not strictly required for 6.18, but
+I think we should keep things consistent, as it will reduce
+churn on my 6.19 patchset, which already has about 100 patches
+and brings things into common code. And more is comming there...
+
+Stefan Metzmacher (5):
+  smb: smbdirect: introduce smbdirect_socket.send_io.lcredits.*
+  smb: server: smb_direct_disconnect_rdma_connection() already wakes all
+    waiters on error
+  smb: server: simplify sibling_list handling in
+    smb_direct_flush_send_list/send_done
+  smb: server: make use of smbdirect_socket.send_io.lcredits.*
+  smb: client: make use of smbdirect_socket.send_io.lcredits.*
+
+ fs/smb/client/smbdirect.c                  |  67 ++++++++-----
+ fs/smb/common/smbdirect/smbdirect_socket.h |  13 ++-
+ fs/smb/server/transport_rdma.c             | 106 +++++++++++++++------
+ 3 files changed, 129 insertions(+), 57 deletions(-)
+
 -- 
 2.43.0
 
