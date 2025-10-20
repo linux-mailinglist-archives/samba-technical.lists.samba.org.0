@@ -2,89 +2,89 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6B1F7BF528E
-	for <lists+samba-technical@lfdr.de>; Tue, 21 Oct 2025 10:07:54 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4E6E1BF5294
+	for <lists+samba-technical@lfdr.de>; Tue, 21 Oct 2025 10:07:58 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=iusiOXx65QWEhBsxlp0QWw9n+ynsAMdO86FaydN8grw=; b=jHHeD+lGGuRBrBrkzbGq4pmet7
-	leWNvOCCQSLhPY8we68P0cJmLQ0w+Vg2fa5XPavOqOe05+PmYe38ELLBu/+jRaXuw63X9vtUt8/yy
-	UV4+KeG+1xlHZeUL68VADY1EcVQFCMnSSHVli7R1Mq1mm/9EF25L0peoNwInJyeZaegURPb5FCJ3L
-	XU1LvHpjlSqNlBiLdop/bEZ5Cd9n7uktJ+IFMaSvtLV+MN0jLZ9pPmXBW5ciNZt4xbqPrue6J3BGn
-	8cl4gC6zYPje/aNqKQ+errALPlWb1+BE2JquNyQSb/R/yrWvILnC4s/5K0FKLSvr2usoSt8/noL2b
-	1SjBJzGQ==;
-Received: from ip6-localhost ([::1]:54454 helo=hr1.samba.org) 
+	bh=wzwy5x2PYJ6Ji+N5DkWavBUtEqBNmQBy4TmNzsIyKBk=; b=EqfyHCGdmDdqKZBN9ViblZCyMP
+	wNIBwiRF/3+pVH33Bdw0WhGIVqYbkCl8NB0wI2dvkd1OpfWsfoCDSu2E/WjZEMqoBxhuV+NRLhIgM
+	wDrN8GxRVkGlsMrKYh51c17a1Bi/CI6lEgWLn11FwU3pBf0MyEILCyouv68kn+H0h6oLjX8iHLxuk
+	xOLkzh340yGkaCWeKx9dmRJfjQb4dOfIMjTMYwNLdFbKud153aACcrFnt1sgXbKyyK0iXzPXVPQkF
+	esOlEE2G600IKPHMIkzj3Kvkcf6CM2TI5ASOifqg886v1hr/58hYFytMN5sM3OuQ1aMHRZKvC708M
+	ZDSSDkjg==;
+Received: from ip6-localhost ([::1]:49076 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1vB7Ow-008Pzd-3q; Tue, 21 Oct 2025 08:07:26 +0000
-Received: from smtp-out2.suse.de ([2a07:de40:b251:101:10:150:64:2]:53668) 
+	id 1vB7P6-008Q0b-KW; Tue, 21 Oct 2025 08:07:36 +0000
+Received: from smtp-out2.suse.de ([195.135.223.131]:57568) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vAmLc-008LeX-9H
- for samba-technical@lists.samba.org; Mon, 20 Oct 2025 09:38:39 +0000
+ (Exim) id 1vAmLk-008Leg-F3
+ for samba-technical@lists.samba.org; Mon, 20 Oct 2025 09:38:47 +0000
 Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
  [IPv6:2a07:de40:b281:104:10:150:64:97])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 089251F385;
- Mon, 20 Oct 2025 09:38:25 +0000 (UTC)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 503481F387;
+ Mon, 20 Oct 2025 09:38:26 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
- t=1760953109; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ t=1760953110; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=iusiOXx65QWEhBsxlp0QWw9n+ynsAMdO86FaydN8grw=;
- b=g/FRmIih6dFhdnppxxoS6HVN4qDJ3UkOKwN8ZCbIYNt65E1unIfQ3fVG4myQ2m2L3fA9zV
- r/WCTGT6ggsEtAu4mas2aRNWRW6p2uw566Fq4P7+16NqD2BQgzhUMQ25Jt1rixyzczjSaf
- a0kZmWQW1MMgtSd9mIuKjXujttFV74A=
+ bh=wzwy5x2PYJ6Ji+N5DkWavBUtEqBNmQBy4TmNzsIyKBk=;
+ b=AbCokr9dcIh0NiCZ9cee7OmJq14x2+KI4TwurVPy4R5ubkZcSdypO8X3BCzPdoy7wY67RT
+ YicommI+KCLloL29wfNG3Zf4zVX/BnqgEWA0pRnazudCRSip0gnID1navjnzhcIbHLA3Uj
+ jFh8R6pXzlUVGDhnEgU50WWUHw3mL+A=
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
- s=susede2_ed25519; t=1760953109;
+ s=susede2_ed25519; t=1760953110;
  h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=iusiOXx65QWEhBsxlp0QWw9n+ynsAMdO86FaydN8grw=;
- b=lh1Sej065iGEf6nI6IkT+W2JmsZoWuW6Ci78m71zKo7/fkSBwWgsWCV3cPp9NY5r3MgV8y
- 5/1XDfETapzWbfAw==
+ bh=wzwy5x2PYJ6Ji+N5DkWavBUtEqBNmQBy4TmNzsIyKBk=;
+ b=htOJBh5DZ0E1gaAuVZMfUX4OaN1kpMQNAdjPYasYIn+FvlC7M3JEd20beZZqqTIvvpMzWc
+ /Mo6PJTk6e/fxWAQ==
 Authentication-Results: smtp-out2.suse.de;
- dkim=pass header.d=suse.cz header.s=susede2_rsa header.b=CU6trVZO;
- dkim=pass header.d=suse.cz header.s=susede2_ed25519 header.b=u3A+0Mft
+ dkim=pass header.d=suse.cz header.s=susede2_rsa header.b=lecXGC+s;
+ dkim=pass header.d=suse.cz header.s=susede2_ed25519 header.b=w+ROXWwa
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
- t=1760953105; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ t=1760953106; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=iusiOXx65QWEhBsxlp0QWw9n+ynsAMdO86FaydN8grw=;
- b=CU6trVZOwRmMATpE0IfIwWq7CN3EzD+9o7U9uxXFk2GaGlPM6FDcLf/ByR5GuhKUYEOGsH
- r5km9ay4JjmoNuNpSPliCAhk+esizVxJwNM4R/xS3jEqzTfzPUoTHy+jv2Z4rNNaODWwIF
- McRs0RsChYadzwz39jSy8UU6KXc6hCQ=
+ bh=wzwy5x2PYJ6Ji+N5DkWavBUtEqBNmQBy4TmNzsIyKBk=;
+ b=lecXGC+s4hN8o9BjaHzKAULEA5+P96smF+Nl8+Lf7OByLCrRbnQWa5lX39WGwc95ZNzr9X
+ EX/1hyQrEeovpaYVudpvdRDja2MbGT6veU7l+Fpc+r12TBbyPQ6VPMPRvBuw2Xz3Oc/0Tn
+ LFYWbh+95+aoa3DavjddggCaIGaoGj4=
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
- s=susede2_ed25519; t=1760953105;
+ s=susede2_ed25519; t=1760953106;
  h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=iusiOXx65QWEhBsxlp0QWw9n+ynsAMdO86FaydN8grw=;
- b=u3A+0MftxfZ10dLEU4yZQHjc4OxFw472C1bR1mXQiKz3HAWV9X75e0DFJ7fkei9iBF0+Km
- 08TyztXFmp/NMNBg==
+ bh=wzwy5x2PYJ6Ji+N5DkWavBUtEqBNmQBy4TmNzsIyKBk=;
+ b=w+ROXWwa1pt4+XUlIQ/mwD6xiZt1mj0tkgHedJ7Wv52zYHz8D56CvMcOYLhKY43veDzZQM
+ kpDN+Tdf8JzGiVBA==
 Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id EB1F513AAC;
- Mon, 20 Oct 2025 09:38:24 +0000 (UTC)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 4377013AAD;
+ Mon, 20 Oct 2025 09:38:26 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id t1dhORAD9mg5DwAAD6G6ig
- (envelope-from <jack@suse.cz>); Mon, 20 Oct 2025 09:38:24 +0000
+ by imap1.dmz-prg2.suse.org with ESMTPSA id CIZ4EBID9mg+DwAAD6G6ig
+ (envelope-from <jack@suse.cz>); Mon, 20 Oct 2025 09:38:26 +0000
 Received: by quack3.suse.cz (Postfix, from userid 1000)
- id A4D09A0856; Mon, 20 Oct 2025 11:38:20 +0200 (CEST)
-Date: Mon, 20 Oct 2025 11:38:20 +0200
+ id 04A47A0856; Mon, 20 Oct 2025 11:38:25 +0200 (CEST)
+Date: Mon, 20 Oct 2025 11:38:25 +0200
 To: Jeff Layton <jlayton@kernel.org>
-Subject: Re: [PATCH 04/13] vfs: allow mkdir to wait for delegation break on
+Subject: Re: [PATCH 05/13] vfs: allow rmdir to wait for delegation break on
  parent
-Message-ID: <wfsice3qjgzmfeibyuonhlur2sef65psoitir2irkfapekjdid@3egphok6hmaa>
+Message-ID: <dmixw6ybhw2bqfejcpd5xq6i6o77heuunhnezy3nwrgraw2fce@e7xhnz24u6yn>
 References: <20251013-dir-deleg-ro-v1-0-406780a70e5e@kernel.org>
- <20251013-dir-deleg-ro-v1-4-406780a70e5e@kernel.org>
+ <20251013-dir-deleg-ro-v1-5-406780a70e5e@kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20251013-dir-deleg-ro-v1-4-406780a70e5e@kernel.org>
-X-Rspamd-Queue-Id: 089251F385
+In-Reply-To: <20251013-dir-deleg-ro-v1-5-406780a70e5e@kernel.org>
+X-Rspamd-Queue-Id: 503481F387
 X-Rspamd-Server: rspamd2.dmz-prg2.suse.org
 X-Spamd-Result: default: False [-2.51 / 50.00]; BAYES_HAM(-3.00)[100.00%];
  SUSPICIOUS_RECIPS(1.50)[]; NEURAL_HAM_LONG(-1.00)[-1.000];
@@ -111,7 +111,7 @@ X-Spamd-Result: default: False [-2.51 / 50.00]; BAYES_HAM(-3.00)[100.00%];
 X-Rspamd-Action: no action
 X-Spam-Flag: NO
 X-Spam-Score: -2.51
-X-Mailman-Approved-At: Tue, 21 Oct 2025 08:07:24 +0000
+X-Mailman-Approved-At: Tue, 21 Oct 2025 08:07:34 +0000
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -153,14 +153,14 @@ Cc: Alexander Aring <alex.aring@gmail.com>, Jan Kara <jack@suse.cz>,
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Mon 13-10-25 10:48:02, Jeff Layton wrote:
+On Mon 13-10-25 10:48:03, Jeff Layton wrote:
 > In order to add directory delegation support, we need to break
 > delegations on the parent whenever there is going to be a change in the
 > directory.
 > 
-> Add a new delegated_inode parameter to vfs_mkdir. All of the existing
-> callers set that to NULL for now, except for do_mkdirat which will
-> properly block until the lease is gone.
+> Add a "delegated_inode" return pointer to vfs_rmdir() and populate that
+> pointer with the parent inode if it's non-NULL. Most existing in-kernel
+> callers pass in a NULL pointer.
 > 
 > Signed-off-by: Jeff Layton <jlayton@kernel.org>
 
@@ -172,129 +172,101 @@ Reviewed-by: Jan Kara <jack@suse.cz>
 
 > ---
 >  drivers/base/devtmpfs.c  |  2 +-
->  fs/cachefiles/namei.c    |  2 +-
 >  fs/ecryptfs/inode.c      |  2 +-
->  fs/init.c                |  2 +-
->  fs/namei.c               | 24 ++++++++++++++++++------
->  fs/nfsd/nfs4recover.c    |  2 +-
+>  fs/namei.c               | 22 +++++++++++++++++-----
+>  fs/nfsd/nfs4recover.c    |  4 ++--
 >  fs/nfsd/vfs.c            |  2 +-
 >  fs/overlayfs/overlayfs.h |  2 +-
->  fs/smb/server/vfs.c      |  2 +-
->  fs/xfs/scrub/orphanage.c |  2 +-
->  include/linux/fs.h       |  2 +-
->  11 files changed, 28 insertions(+), 16 deletions(-)
+>  fs/smb/server/vfs.c      |  4 ++--
+>  include/linux/fs.h       |  3 ++-
+>  8 files changed, 27 insertions(+), 14 deletions(-)
 > 
 > diff --git a/drivers/base/devtmpfs.c b/drivers/base/devtmpfs.c
-> index 9d4e46ad8352257a6a65d85526ebdbf9bf2d4b19..0e79621cb0f79870003b867ca384199171ded4e0 100644
+> index 0e79621cb0f79870003b867ca384199171ded4e0..104025104ef75381984fd94dfbd50feeaa8cdd22 100644
 > --- a/drivers/base/devtmpfs.c
 > +++ b/drivers/base/devtmpfs.c
-> @@ -180,7 +180,7 @@ static int dev_mkdir(const char *name, umode_t mode)
->  	if (IS_ERR(dentry))
+> @@ -261,7 +261,7 @@ static int dev_rmdir(const char *name)
 >  		return PTR_ERR(dentry);
+>  	if (d_inode(dentry)->i_private == &thread)
+>  		err = vfs_rmdir(&nop_mnt_idmap, d_inode(parent.dentry),
+> -				dentry);
+> +				dentry, NULL);
+>  	else
+>  		err = -EPERM;
 >  
-> -	dentry = vfs_mkdir(&nop_mnt_idmap, d_inode(path.dentry), dentry, mode);
-> +	dentry = vfs_mkdir(&nop_mnt_idmap, d_inode(path.dentry), dentry, mode, NULL);
->  	if (!IS_ERR(dentry))
->  		/* mark as kernel-created inode */
->  		d_inode(dentry)->i_private = &thread;
-> diff --git a/fs/cachefiles/namei.c b/fs/cachefiles/namei.c
-> index d1edb2ac38376c4f9d2a18026450bb3c774f7824..50c0f9c76d1fd4c05db90d7d0d1bad574523ead0 100644
-> --- a/fs/cachefiles/namei.c
-> +++ b/fs/cachefiles/namei.c
-> @@ -130,7 +130,7 @@ struct dentry *cachefiles_get_directory(struct cachefiles_cache *cache,
->  			goto mkdir_error;
->  		ret = cachefiles_inject_write_error();
->  		if (ret == 0)
-> -			subdir = vfs_mkdir(&nop_mnt_idmap, d_inode(dir), subdir, 0700);
-> +			subdir = vfs_mkdir(&nop_mnt_idmap, d_inode(dir), subdir, 0700, NULL);
->  		else
->  			subdir = ERR_PTR(ret);
->  		if (IS_ERR(subdir)) {
 > diff --git a/fs/ecryptfs/inode.c b/fs/ecryptfs/inode.c
-> index ed1394da8d6bd7065f2a074378331f13fcda17f9..35830b3144f8f71374a78b3e7463b864f4fc216e 100644
+> index 35830b3144f8f71374a78b3e7463b864f4fc216e..88631291b32535f623a3fbe4ea9b6ed48a306ca0 100644
 > --- a/fs/ecryptfs/inode.c
 > +++ b/fs/ecryptfs/inode.c
-> @@ -508,7 +508,7 @@ static struct dentry *ecryptfs_mkdir(struct mnt_idmap *idmap, struct inode *dir,
->  		goto out;
->  
->  	lower_dentry = vfs_mkdir(&nop_mnt_idmap, lower_dir,
-> -				 lower_dentry, mode);
-> +				 lower_dentry, mode, NULL);
->  	rc = PTR_ERR(lower_dentry);
->  	if (IS_ERR(lower_dentry))
->  		goto out;
-> diff --git a/fs/init.c b/fs/init.c
-> index 07f592ccdba868509d0f3aaf9936d8d890fdbec5..895f8a09a71acfd03e11164e3b441a7d4e2de146 100644
-> --- a/fs/init.c
-> +++ b/fs/init.c
-> @@ -233,7 +233,7 @@ int __init init_mkdir(const char *pathname, umode_t mode)
->  	error = security_path_mkdir(&path, dentry, mode);
->  	if (!error) {
->  		dentry = vfs_mkdir(mnt_idmap(path.mnt), path.dentry->d_inode,
-> -				  dentry, mode);
-> +				  dentry, mode, NULL);
->  		if (IS_ERR(dentry))
->  			error = PTR_ERR(dentry);
+> @@ -540,7 +540,7 @@ static int ecryptfs_rmdir(struct inode *dir, struct dentry *dentry)
+>  		if (d_unhashed(lower_dentry))
+>  			rc = -EINVAL;
+>  		else
+> -			rc = vfs_rmdir(&nop_mnt_idmap, lower_dir, lower_dentry);
+> +			rc = vfs_rmdir(&nop_mnt_idmap, lower_dir, lower_dentry, NULL);
 >  	}
+>  	if (!rc) {
+>  		clear_nlink(d_inode(dentry));
 > diff --git a/fs/namei.c b/fs/namei.c
-> index 6e61e0215b34134b1690f864e2719e3f82cf71a8..86cf6eca1f485361c6732974e4103cf5ea721539 100644
+> index 86cf6eca1f485361c6732974e4103cf5ea721539..4b5a99653c558397e592715d9d4663cd4a63ef86 100644
 > --- a/fs/namei.c
 > +++ b/fs/namei.c
-> @@ -4407,10 +4407,11 @@ SYSCALL_DEFINE3(mknod, const char __user *, filename, umode_t, mode, unsigned, d
+> @@ -4522,9 +4522,10 @@ SYSCALL_DEFINE2(mkdir, const char __user *, pathname, umode_t, mode)
 >  
 >  /**
->   * vfs_mkdir - create directory returning correct dentry if possible
+>   * vfs_rmdir - remove directory
 > - * @idmap:	idmap of the mount the inode was found from
 > - * @dir:	inode of the parent directory
 > - * @dentry:	dentry of the child directory
-> - * @mode:	mode of the child directory
 > + * @idmap:		idmap of the mount the inode was found from
 > + * @dir:		inode of the parent directory
 > + * @dentry:		dentry of the child directory
-> + * @mode:		mode of the child directory
-> + * @delegated_inode:	returns parent inode, if the inode is delegated.
+> + * @delegated_inode:	returns parent inode, if it's delegated.
 >   *
->   * Create a directory.
+>   * Remove a directory.
 >   *
-> @@ -4427,7 +4428,8 @@ SYSCALL_DEFINE3(mknod, const char __user *, filename, umode_t, mode, unsigned, d
->   * In case of an error the dentry is dput() and an ERR_PTR() is returned.
+> @@ -4535,7 +4536,7 @@ SYSCALL_DEFINE2(mkdir, const char __user *, pathname, umode_t, mode)
+>   * raw inode simply pass @nop_mnt_idmap.
 >   */
->  struct dentry *vfs_mkdir(struct mnt_idmap *idmap, struct inode *dir,
-> -			 struct dentry *dentry, umode_t mode)
-> +			 struct dentry *dentry, umode_t mode,
-> +			 struct inode **delegated_inode)
+>  int vfs_rmdir(struct mnt_idmap *idmap, struct inode *dir,
+> -		     struct dentry *dentry)
+> +	      struct dentry *dentry, struct inode **delegated_inode)
 >  {
->  	int error;
->  	unsigned max_links = dir->i_sb->s_max_links;
-> @@ -4450,6 +4452,10 @@ struct dentry *vfs_mkdir(struct mnt_idmap *idmap, struct inode *dir,
->  	if (max_links && dir->i_nlink >= max_links)
->  		goto err;
+>  	int error = may_delete(idmap, dir, dentry, 1);
+>  
+> @@ -4557,6 +4558,10 @@ int vfs_rmdir(struct mnt_idmap *idmap, struct inode *dir,
+>  	if (error)
+>  		goto out;
 >  
 > +	error = try_break_deleg(dir, delegated_inode);
 > +	if (error)
-> +		goto err;
+> +		goto out;
 > +
->  	de = dir->i_op->mkdir(idmap, dir, dentry, mode);
->  	error = PTR_ERR(de);
->  	if (IS_ERR(de))
-> @@ -4473,6 +4479,7 @@ int do_mkdirat(int dfd, struct filename *name, umode_t mode)
->  	struct path path;
->  	int error;
->  	unsigned int lookup_flags = LOOKUP_DIRECTORY;
+>  	error = dir->i_op->rmdir(dir, dentry);
+>  	if (error)
+>  		goto out;
+> @@ -4583,6 +4588,7 @@ int do_rmdir(int dfd, struct filename *name)
+>  	struct qstr last;
+>  	int type;
+>  	unsigned int lookup_flags = 0;
 > +	struct inode *delegated_inode = NULL;
->  
 >  retry:
->  	dentry = filename_create(dfd, name, &path, lookup_flags);
-> @@ -4484,11 +4491,16 @@ int do_mkdirat(int dfd, struct filename *name, umode_t mode)
->  			mode_strip_umask(path.dentry->d_inode, mode));
->  	if (!error) {
->  		dentry = vfs_mkdir(mnt_idmap(path.mnt), path.dentry->d_inode,
-> -				  dentry, mode);
-> +				   dentry, mode, &delegated_inode);
->  		if (IS_ERR(dentry))
->  			error = PTR_ERR(dentry);
->  	}
->  	end_creating_path(&path, dentry);
+>  	error = filename_parentat(dfd, name, lookup_flags, &path, &last, &type);
+>  	if (error)
+> @@ -4612,7 +4618,8 @@ int do_rmdir(int dfd, struct filename *name)
+>  	error = security_path_rmdir(&path, dentry);
+>  	if (error)
+>  		goto exit4;
+> -	error = vfs_rmdir(mnt_idmap(path.mnt), path.dentry->d_inode, dentry);
+> +	error = vfs_rmdir(mnt_idmap(path.mnt), path.dentry->d_inode,
+> +			  dentry, &delegated_inode);
+>  exit4:
+>  	dput(dentry);
+>  exit3:
+> @@ -4620,6 +4627,11 @@ int do_rmdir(int dfd, struct filename *name)
+>  	mnt_drop_write(path.mnt);
+>  exit2:
+>  	path_put(&path);
 > +	if (delegated_inode) {
 > +		error = break_deleg_wait(&delegated_inode);
 > +		if (!error)
@@ -304,83 +276,89 @@ Reviewed-by: Jan Kara <jack@suse.cz>
 >  		lookup_flags |= LOOKUP_REVAL;
 >  		goto retry;
 > diff --git a/fs/nfsd/nfs4recover.c b/fs/nfsd/nfs4recover.c
-> index c41bb85e06822a82c86e2a33bd9a91e978c75965..3dfbb85c9a1166b56e56eb9f1d6bfd140584730b 100644
+> index 3dfbb85c9a1166b56e56eb9f1d6bfd140584730b..ad3acbb956d90cac88f74e5f598719af6f1f8328 100644
 > --- a/fs/nfsd/nfs4recover.c
 > +++ b/fs/nfsd/nfs4recover.c
-> @@ -162,7 +162,7 @@ nfsd4_create_clid_dir(struct nfs4_client *clp)
->  		 * as well be forgiving and just succeed silently.
->  		 */
->  		goto out_put;
-> -	dentry = vfs_mkdir(&nop_mnt_idmap, d_inode(dir), dentry, S_IRWXU);
-> +	dentry = vfs_mkdir(&nop_mnt_idmap, d_inode(dir), dentry, 0700, NULL);
->  	if (IS_ERR(dentry))
->  		status = PTR_ERR(dentry);
->  out_put:
+> @@ -275,7 +275,7 @@ nfsd4_unlink_clid_dir(char *name, struct nfsd_net *nn)
+>  	status = -ENOENT;
+>  	if (d_really_is_negative(dentry))
+>  		goto out;
+> -	status = vfs_rmdir(&nop_mnt_idmap, d_inode(dir), dentry);
+> +	status = vfs_rmdir(&nop_mnt_idmap, d_inode(dir), dentry, NULL);
+>  out:
+>  	dput(dentry);
+>  out_unlock:
+> @@ -367,7 +367,7 @@ purge_old(struct dentry *parent, char *cname, struct nfsd_net *nn)
+>  	inode_lock_nested(d_inode(parent), I_MUTEX_PARENT);
+>  	child = lookup_one(&nop_mnt_idmap, &QSTR(cname), parent);
+>  	if (!IS_ERR(child)) {
+> -		status = vfs_rmdir(&nop_mnt_idmap, d_inode(parent), child);
+> +		status = vfs_rmdir(&nop_mnt_idmap, d_inode(parent), child, NULL);
+>  		if (status)
+>  			printk("failed to remove client recovery directory %pd\n",
+>  			       child);
 > diff --git a/fs/nfsd/vfs.c b/fs/nfsd/vfs.c
-> index f537a7b4ee01f49cfb864df9a92a9660b743a51e..447f5ab8e0b92288c9f220060ab15f32f2a84de9 100644
+> index 447f5ab8e0b92288c9f220060ab15f32f2a84de9..7d8cd2595f197be9741ee6320d43ed6651896647 100644
 > --- a/fs/nfsd/vfs.c
 > +++ b/fs/nfsd/vfs.c
-> @@ -1644,7 +1644,7 @@ nfsd_create_locked(struct svc_rqst *rqstp, struct svc_fh *fhp,
->  			nfsd_check_ignore_resizing(iap);
->  		break;
->  	case S_IFDIR:
-> -		dchild = vfs_mkdir(&nop_mnt_idmap, dirp, dchild, iap->ia_mode);
-> +		dchild = vfs_mkdir(&nop_mnt_idmap, dirp, dchild, iap->ia_mode, NULL);
->  		if (IS_ERR(dchild)) {
->  			host_err = PTR_ERR(dchild);
->  		} else if (d_is_negative(dchild)) {
+> @@ -2194,7 +2194,7 @@ nfsd_unlink(struct svc_rqst *rqstp, struct svc_fh *fhp, int type,
+>  				break;
+>  		}
+>  	} else {
+> -		host_err = vfs_rmdir(&nop_mnt_idmap, dirp, rdentry);
+> +		host_err = vfs_rmdir(&nop_mnt_idmap, dirp, rdentry, NULL);
+>  	}
+>  	fh_fill_post_attrs(fhp);
+>  
 > diff --git a/fs/overlayfs/overlayfs.h b/fs/overlayfs/overlayfs.h
-> index c8fd5951fc5ece1ae6b3e2a0801ca15f9faf7d72..0f65f9a5d54d4786b39e4f4f30f416d5b9016e70 100644
+> index 0f65f9a5d54d4786b39e4f4f30f416d5b9016e70..d215d7349489686b66bb66e939b27046f7d836f6 100644
 > --- a/fs/overlayfs/overlayfs.h
 > +++ b/fs/overlayfs/overlayfs.h
-> @@ -248,7 +248,7 @@ static inline struct dentry *ovl_do_mkdir(struct ovl_fs *ofs,
+> @@ -206,7 +206,7 @@ static inline int ovl_do_notify_change(struct ovl_fs *ofs,
+>  static inline int ovl_do_rmdir(struct ovl_fs *ofs,
+>  			       struct inode *dir, struct dentry *dentry)
 >  {
->  	struct dentry *ret;
+> -	int err = vfs_rmdir(ovl_upper_mnt_idmap(ofs), dir, dentry);
+> +	int err = vfs_rmdir(ovl_upper_mnt_idmap(ofs), dir, dentry, NULL);
 >  
-> -	ret = vfs_mkdir(ovl_upper_mnt_idmap(ofs), dir, dentry, mode);
-> +	ret = vfs_mkdir(ovl_upper_mnt_idmap(ofs), dir, dentry, mode, NULL);
->  	pr_debug("mkdir(%pd2, 0%o) = %i\n", dentry, mode, PTR_ERR_OR_ZERO(ret));
->  	return ret;
->  }
+>  	pr_debug("rmdir(%pd2) = %i\n", dentry, err);
+>  	return err;
 > diff --git a/fs/smb/server/vfs.c b/fs/smb/server/vfs.c
-> index 891ed2dc2b7351a5cb14a2241d71095ffdd03f08..3d2190f26623b23ea79c63410905a3c3ad684048 100644
+> index 3d2190f26623b23ea79c63410905a3c3ad684048..c5f0f3170d586cb2dc4d416b80948c642797fb82 100644
 > --- a/fs/smb/server/vfs.c
 > +++ b/fs/smb/server/vfs.c
-> @@ -230,7 +230,7 @@ int ksmbd_vfs_mkdir(struct ksmbd_work *work, const char *name, umode_t mode)
->  	idmap = mnt_idmap(path.mnt);
->  	mode |= S_IFDIR;
->  	d = dentry;
-> -	dentry = vfs_mkdir(idmap, d_inode(path.dentry), dentry, mode);
-> +	dentry = vfs_mkdir(idmap, d_inode(path.dentry), dentry, mode, NULL);
->  	if (IS_ERR(dentry))
->  		err = PTR_ERR(dentry);
->  	else if (d_is_negative(dentry))
-> diff --git a/fs/xfs/scrub/orphanage.c b/fs/xfs/scrub/orphanage.c
-> index 9c12cb8442311ca26b169e4d1567939ae44a5be0..91c9d07b97f306f57aebb9b69ba564b0c2cb8c17 100644
-> --- a/fs/xfs/scrub/orphanage.c
-> +++ b/fs/xfs/scrub/orphanage.c
-> @@ -167,7 +167,7 @@ xrep_orphanage_create(
->  	 */
->  	if (d_really_is_negative(orphanage_dentry)) {
->  		orphanage_dentry = vfs_mkdir(&nop_mnt_idmap, root_inode,
-> -					     orphanage_dentry, 0750);
-> +					     orphanage_dentry, 0750, NULL);
->  		error = PTR_ERR(orphanage_dentry);
->  		if (IS_ERR(orphanage_dentry))
->  			goto out_unlock_root;
+> @@ -609,7 +609,7 @@ int ksmbd_vfs_remove_file(struct ksmbd_work *work, const struct path *path)
+>  
+>  	idmap = mnt_idmap(path->mnt);
+>  	if (S_ISDIR(d_inode(path->dentry)->i_mode)) {
+> -		err = vfs_rmdir(idmap, d_inode(parent), path->dentry);
+> +		err = vfs_rmdir(idmap, d_inode(parent), path->dentry, NULL);
+>  		if (err && err != -ENOTEMPTY)
+>  			ksmbd_debug(VFS, "rmdir failed, err %d\n", err);
+>  	} else {
+> @@ -1090,7 +1090,7 @@ int ksmbd_vfs_unlink(struct file *filp)
+>  	dget(dentry);
+>  
+>  	if (S_ISDIR(d_inode(dentry)->i_mode))
+> -		err = vfs_rmdir(idmap, d_inode(dir), dentry);
+> +		err = vfs_rmdir(idmap, d_inode(dir), dentry, NULL);
+>  	else
+>  		err = vfs_unlink(idmap, d_inode(dir), dentry, NULL);
+>  
 > diff --git a/include/linux/fs.h b/include/linux/fs.h
-> index c895146c1444be36e0a779df55622cc38c9419ff..1040df3792794cd353b86558b41618294e25b8a6 100644
+> index 1040df3792794cd353b86558b41618294e25b8a6..d8bdaf7c87502ff17775602f5391d375738b4ed8 100644
 > --- a/include/linux/fs.h
 > +++ b/include/linux/fs.h
-> @@ -2113,7 +2113,7 @@ bool inode_owner_or_capable(struct mnt_idmap *idmap,
->  int vfs_create(struct mnt_idmap *, struct inode *,
->  	       struct dentry *, umode_t, bool);
->  struct dentry *vfs_mkdir(struct mnt_idmap *, struct inode *,
-> -			 struct dentry *, umode_t);
-> +			 struct dentry *, umode_t, struct inode **);
->  int vfs_mknod(struct mnt_idmap *, struct inode *, struct dentry *,
->                umode_t, dev_t);
->  int vfs_symlink(struct mnt_idmap *, struct inode *,
+> @@ -2120,7 +2120,8 @@ int vfs_symlink(struct mnt_idmap *, struct inode *,
+>  		struct dentry *, const char *);
+>  int vfs_link(struct dentry *, struct mnt_idmap *, struct inode *,
+>  	     struct dentry *, struct inode **);
+> -int vfs_rmdir(struct mnt_idmap *, struct inode *, struct dentry *);
+> +int vfs_rmdir(struct mnt_idmap *, struct inode *, struct dentry *,
+> +	      struct inode **);
+>  int vfs_unlink(struct mnt_idmap *, struct inode *, struct dentry *,
+>  	       struct inode **);
+>  
 > 
 > -- 
 > 2.51.0
