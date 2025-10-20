@@ -2,90 +2,92 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 46419BF5290
-	for <lists+samba-technical@lfdr.de>; Tue, 21 Oct 2025 10:07:56 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4CECEBF52D6
+	for <lists+samba-technical@lfdr.de>; Tue, 21 Oct 2025 10:09:07 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=bKbymr3jQEOCCpqmE9Vmgx8KF0rDhcumRs3XaWmxad0=; b=nB7ly3FgLGovVai4PiACs/EVxs
-	pEhrVA8rcOVZVT/QUVkH3ncrEeKfNJG8cO/SCgCmKJop1a0HiN+oVlP11E57oSePuJuk9CZ1ISBW7
-	IJP5tla0E0SQIbN6JJJX2gg7Zkqi8bjQIwHolZEI/iqqFHUZRa1o4uHYJbsA2SWteOgleTIp1uLkm
-	7JKaVJTviL2c7Z96XdMTWWbox2VZyP0hb9wh3e1VmW/N2XtK4zpfAQDnqOwmz9Xmi2yRjZTflAb1B
-	goI8TT5uMl8zyi2Qrg4hxMN/bzbi+292+UwsVVr20uaG2WGGHepDy49HM9ahb/5LqGIm4MfxJtcAw
-	QxuZb2jA==;
-Received: from ip6-localhost ([::1]:49070 helo=hr1.samba.org) 
+	bh=Q/D/kY+oah/j2+XAgwdrv68z8P/TYq7eOMrxdwF+Wbo=; b=FEfv8wweBkfN/a9bhbskcY3ABY
+	gs24YBoEQ5xngSDdYavh40+bR0H70kfwQthj7ctkBzQ6Q1yTJo2n+igxGej3hs3qPDhMAzkovjObR
+	/j/371GyaeXiqwuc0k4ZIqEto1WFTpnzbsUZ8rqI2gD5jczHXyEChR69S2fOM2ni95W55zRB7mVul
+	bOhWMW2pGoBPjG69RP7EFNvcchFnSCgBFh+DSYUr3J0W0bENJEN8c7rPIfDRYxRMY17WiS8wf/6dO
+	gAD36V79blAhfl4wDuYxbSWEWG6HjfUAyYkTaUvU3ZDmPZ0pC9VufAH3jRkKz9dTvIP1q05qOpNk4
+	+7NWllng==;
+Received: from ip6-localhost ([::1]:62656 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1vB7P1-008Q07-BC; Tue, 21 Oct 2025 08:07:31 +0000
-Received: from smtp-out1.suse.de ([2a07:de40:b251:101:10:150:64:1]:48308) 
+	id 1vB7Po-008Q3m-28; Tue, 21 Oct 2025 08:08:22 +0000
+Received: from smtp-out1.suse.de ([195.135.223.130]:58702) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vAmLi-008Lef-76
- for samba-technical@lists.samba.org; Mon, 20 Oct 2025 09:38:44 +0000
+ (Exim) id 1vAmLp-008Leu-Nu
+ for samba-technical@lists.samba.org; Mon, 20 Oct 2025 09:38:52 +0000
 Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
  [IPv6:2a07:de40:b281:104:10:150:64:97])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 72B9921174;
- Mon, 20 Oct 2025 09:38:31 +0000 (UTC)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 17B0321182;
+ Mon, 20 Oct 2025 09:38:41 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
- t=1760953115; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ t=1760953125; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=bKbymr3jQEOCCpqmE9Vmgx8KF0rDhcumRs3XaWmxad0=;
- b=fCKbPopGQvwUNY4o5FQ9GY052P0nmo1gHhjtXANE9C0mk66OgSjGNx/Vq5sCcVQIWtLbXG
- jTMWDOAVh+PQ/cgEsYSWMzXcBKVSDWjjGOtt5YkfW913YSdOquSr3B0L6jlXkwtlmY/dtL
- Itbvgsclz4r6GqfZAv/lX4VLXlu5OnA=
+ bh=Q/D/kY+oah/j2+XAgwdrv68z8P/TYq7eOMrxdwF+Wbo=;
+ b=bdZI3JD30Rx2nFDXMeyQZKsEw6aTxyfxrcRBn6HCUr+DdioLL63ZY1CyHciFi4Cl7K2129
+ igiVvPs/NVB2r1rEVRO588U3FwNI8NpnulDqu11Do4j9Yb0NCIh07MlX5SrNHgnfHcCL1N
+ es0tfL/Tf4H6M8vmXzQPB5YWSBDx+1c=
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
- s=susede2_ed25519; t=1760953115;
+ s=susede2_ed25519; t=1760953125;
  h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=bKbymr3jQEOCCpqmE9Vmgx8KF0rDhcumRs3XaWmxad0=;
- b=MBH6jdgOVdjCwhRUWwlqYesDxmAPDfZORnRUkwPsAm/D3xNC5QFveYzP8K5tcNNk83XbVH
- AvvkOacScpY4FiDg==
+ bh=Q/D/kY+oah/j2+XAgwdrv68z8P/TYq7eOMrxdwF+Wbo=;
+ b=Za8WiouBo0dZzlxGlTV60TN405gETwiVs76vC7J621CLihngINmRmRVLvXHIJlRLnqLcdq
+ awC3/3yi6rXe11AQ==
 Authentication-Results: smtp-out1.suse.de;
- dkim=pass header.d=suse.cz header.s=susede2_rsa header.b="nm/Ye4Iv";
- dkim=pass header.d=suse.cz header.s=susede2_ed25519 header.b=WxzPXaxR
+ dkim=pass header.d=suse.cz header.s=susede2_rsa header.b=gDTbR3kv;
+ dkim=pass header.d=suse.cz header.s=susede2_ed25519 header.b=lt2aQ39T
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
- t=1760953111; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ t=1760953121; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=bKbymr3jQEOCCpqmE9Vmgx8KF0rDhcumRs3XaWmxad0=;
- b=nm/Ye4Ivyo2PHjNc/kQiB9IKoMXi68/aFXoMXVINi6+vIn+F7Za1EtgZ2kVclDioWvpslf
- eSw54TdYxsqu6AnmXF/hLk8EjC1CgASxbY4YxJ0MXbr5G6BdCSa47mUz7wXqqqc26YIYtd
- 0kYTtZ/SQFqlsw4sB3lfuImZTUIQw3M=
+ bh=Q/D/kY+oah/j2+XAgwdrv68z8P/TYq7eOMrxdwF+Wbo=;
+ b=gDTbR3kvhKbCmUMDJ5Ws8EvdTOmX3aQmDr7Godb3ukbi/ynjIPdKv3RkgTzY8kUl8YolE6
+ bZ3IXXQfQix6Zx6J+hncavMTKDXnLxsDpwdnp/okynKuErRt97VcCtxRhiUzUWRx54Zj0T
+ JQr56loFZKt5X1eM2aQHliNwU94CoTU=
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
- s=susede2_ed25519; t=1760953111;
+ s=susede2_ed25519; t=1760953121;
  h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=bKbymr3jQEOCCpqmE9Vmgx8KF0rDhcumRs3XaWmxad0=;
- b=WxzPXaxRDG4GwjOXPRWGQ1zT2mNm+Kx8EtwyKMZrQDel2zD1Ln4QUzHr9DR1GfJc5HQhy9
- s4Flg2uA8W+DzHAA==
+ bh=Q/D/kY+oah/j2+XAgwdrv68z8P/TYq7eOMrxdwF+Wbo=;
+ b=lt2aQ39TXTomlkwoBCdUQpjn6Kxa+HSKOSUiO/DDozdAhC3i3mbpRNZhHJH21fcOWqbFw6
+ SeHbjjfux0VCvyDg==
 Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 6254113AD6;
- Mon, 20 Oct 2025 09:38:31 +0000 (UTC)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id E5A6C13AAC;
+ Mon, 20 Oct 2025 09:38:40 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id oiMAGBcD9mhGDwAAD6G6ig
- (envelope-from <jack@suse.cz>); Mon, 20 Oct 2025 09:38:31 +0000
+ by imap1.dmz-prg2.suse.org with ESMTPSA id BowMOCAD9mhfDwAAD6G6ig
+ (envelope-from <jack@suse.cz>); Mon, 20 Oct 2025 09:38:40 +0000
 Received: by quack3.suse.cz (Postfix, from userid 1000)
- id 1DE8CA0856; Mon, 20 Oct 2025 11:38:31 +0200 (CEST)
-Date: Mon, 20 Oct 2025 11:38:31 +0200
+ id A65F6A0856; Mon, 20 Oct 2025 11:38:36 +0200 (CEST)
+Date: Mon, 20 Oct 2025 11:38:36 +0200
 To: Jeff Layton <jlayton@kernel.org>
-Subject: Re: [PATCH 06/13] vfs: break parent dir delegations in open(...,
- O_CREAT) codepath
-Message-ID: <5fng2d6q5sacwca3un6r6ud7sreypmphei4xvfv4cp2romjdw6@pyes2nd3747m>
+Subject: Re: [PATCH 07/13] vfs: make vfs_create break delegations on parent
+ directory
+Message-ID: <psxxvdygi63345uyor76xs3jhzqjievrvg4meeabttitgtxdyd@pghojfcizltu>
 References: <20251013-dir-deleg-ro-v1-0-406780a70e5e@kernel.org>
- <20251013-dir-deleg-ro-v1-6-406780a70e5e@kernel.org>
+ <20251013-dir-deleg-ro-v1-7-406780a70e5e@kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20251013-dir-deleg-ro-v1-6-406780a70e5e@kernel.org>
-X-Rspamd-Queue-Id: 72B9921174
-X-Rspamd-Server: rspamd2.dmz-prg2.suse.org
+In-Reply-To: <20251013-dir-deleg-ro-v1-7-406780a70e5e@kernel.org>
+X-Spam-Flag: NO
+X-Rspamd-Queue-Id: 17B0321182
+X-Rspamd-Action: no action
+X-Rspamd-Server: rspamd1.dmz-prg2.suse.org
 X-Spamd-Result: default: False [-2.51 / 50.00]; BAYES_HAM(-3.00)[100.00%];
  SUSPICIOUS_RECIPS(1.50)[]; NEURAL_HAM_LONG(-1.00)[-1.000];
  MID_RHS_NOT_FQDN(0.50)[]; NEURAL_HAM_SHORT(-0.20)[-1.000];
@@ -106,12 +108,10 @@ X-Spamd-Result: default: False [-2.51 / 50.00]; BAYES_HAM(-3.00)[100.00%];
  MISSING_XM_UA(0.00)[];
  FREEMAIL_CC(0.00)[szeredi.hu,zeniv.linux.org.uk,kernel.org,suse.cz,oracle.com,gmail.com,samba.org,manguebit.org,microsoft.com,talpey.com,linuxfoundation.org,redhat.com,tyhicks.com,brown.name,chromium.org,google.com,davemloft.net,vger.kernel.org,lists.samba.org,lists.linux.dev];
  DKIM_TRACE(0.00)[suse.cz:+];
- DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:helo,
- imap1.dmz-prg2.suse.org:rdns, suse.com:email]
-X-Rspamd-Action: no action
-X-Spam-Flag: NO
+ DBL_BLOCKED_OPENRESOLVER(0.00)[suse.com:email, imap1.dmz-prg2.suse.org:rdns,
+ imap1.dmz-prg2.suse.org:helo]
 X-Spam-Score: -2.51
-X-Mailman-Approved-At: Tue, 21 Oct 2025 08:07:29 +0000
+X-Mailman-Approved-At: Tue, 21 Oct 2025 08:07:47 +0000
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -153,14 +153,15 @@ Cc: Alexander Aring <alex.aring@gmail.com>, Jan Kara <jack@suse.cz>,
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Mon 13-10-25 10:48:04, Jeff Layton wrote:
+On Mon 13-10-25 10:48:05, Jeff Layton wrote:
 > In order to add directory delegation support, we need to break
 > delegations on the parent whenever there is going to be a change in the
 > directory.
 > 
-> Add a delegated_inode parameter to lookup_open and have it break the
-> delegation. Then, open_last_lookups can wait for the delegation break
-> and retry the call to lookup_open once it's done.
+> Rename vfs_create as __vfs_create, make it static, and add a new
+> delegated_inode parameter. Fix do_mknodat to call __vfs_create and wait
+> for a delegation break if there is one. Add a new exported vfs_create
+> wrapper that passes in NULL for delegated_inode.
 > 
 > Signed-off-by: Jeff Layton <jlayton@kernel.org>
 
@@ -171,78 +172,103 @@ Reviewed-by: Jan Kara <jack@suse.cz>
 								Honza
 
 > ---
->  fs/namei.c | 22 ++++++++++++++++++----
->  1 file changed, 18 insertions(+), 4 deletions(-)
+>  fs/namei.c | 55 ++++++++++++++++++++++++++++++++++++-------------------
+>  1 file changed, 36 insertions(+), 19 deletions(-)
 > 
 > diff --git a/fs/namei.c b/fs/namei.c
-> index 4b5a99653c558397e592715d9d4663cd4a63ef86..786f42bd184b5dbf6d754fa1fb6c94c0f75429f2 100644
+> index 786f42bd184b5dbf6d754fa1fb6c94c0f75429f2..1427c53e13978e70adefdc572b71247536985430 100644
 > --- a/fs/namei.c
 > +++ b/fs/namei.c
-> @@ -3697,7 +3697,7 @@ static struct dentry *atomic_open(struct nameidata *nd, struct dentry *dentry,
->   */
->  static struct dentry *lookup_open(struct nameidata *nd, struct file *file,
->  				  const struct open_flags *op,
-> -				  bool got_write)
-> +				  bool got_write, struct inode **delegated_inode)
->  {
->  	struct mnt_idmap *idmap;
->  	struct dentry *dir = nd->path.dentry;
-> @@ -3786,6 +3786,11 @@ static struct dentry *lookup_open(struct nameidata *nd, struct file *file,
+> @@ -3458,6 +3458,32 @@ static inline umode_t vfs_prepare_mode(struct mnt_idmap *idmap,
+>  	return mode;
+>  }
 >  
->  	/* Negative dentry, just create the file */
->  	if (!dentry->d_inode && (open_flag & O_CREAT)) {
-> +		/* but break the directory lease first! */
-> +		error = try_break_deleg(dir_inode, delegated_inode);
-> +		if (error)
-> +			goto out_dput;
+> +static int __vfs_create(struct mnt_idmap *idmap, struct inode *dir,
+> +			struct dentry *dentry, umode_t mode, bool want_excl,
+> +			struct inode **delegated_inode)
+> +{
+> +	int error;
 > +
->  		file->f_mode |= FMODE_CREATED;
->  		audit_inode_child(dir_inode, dentry, AUDIT_TYPE_CHILD_CREATE);
->  		if (!dir_inode->i_op->create) {
-> @@ -3849,6 +3854,7 @@ static const char *open_last_lookups(struct nameidata *nd,
->  		   struct file *file, const struct open_flags *op)
+> +	error = may_create(idmap, dir, dentry);
+> +	if (error)
+> +		return error;
+> +
+> +	if (!dir->i_op->create)
+> +		return -EACCES;	/* shouldn't it be ENOSYS? */
+> +
+> +	mode = vfs_prepare_mode(idmap, dir, mode, S_IALLUGO, S_IFREG);
+> +	error = security_inode_create(dir, dentry, mode);
+> +	if (error)
+> +		return error;
+> +	error = try_break_deleg(dir, delegated_inode);
+> +	if (error)
+> +		return error;
+> +	error = dir->i_op->create(idmap, dir, dentry, mode, want_excl);
+> +	if (!error)
+> +		fsnotify_create(dir, dentry);
+> +	return error;
+> +}
+> +
+>  /**
+>   * vfs_create - create new file
+>   * @idmap:	idmap of the mount the inode was found from
+> @@ -3477,23 +3503,7 @@ static inline umode_t vfs_prepare_mode(struct mnt_idmap *idmap,
+>  int vfs_create(struct mnt_idmap *idmap, struct inode *dir,
+>  	       struct dentry *dentry, umode_t mode, bool want_excl)
 >  {
->  	struct dentry *dir = nd->path.dentry;
-> +	struct inode *delegated_inode = NULL;
->  	int open_flag = op->open_flag;
->  	bool got_write = false;
->  	struct dentry *dentry;
-> @@ -3879,7 +3885,7 @@ static const char *open_last_lookups(struct nameidata *nd,
->  				return ERR_PTR(-ECHILD);
->  		}
->  	}
+> -	int error;
 > -
-> +retry:
->  	if (open_flag & (O_CREAT | O_TRUNC | O_WRONLY | O_RDWR)) {
->  		got_write = !mnt_want_write(nd->path.mnt);
->  		/*
-> @@ -3892,7 +3898,7 @@ static const char *open_last_lookups(struct nameidata *nd,
->  		inode_lock(dir->d_inode);
->  	else
->  		inode_lock_shared(dir->d_inode);
-> -	dentry = lookup_open(nd, file, op, got_write);
-> +	dentry = lookup_open(nd, file, op, got_write, &delegated_inode);
->  	if (!IS_ERR(dentry)) {
->  		if (file->f_mode & FMODE_CREATED)
->  			fsnotify_create(dir->d_inode, dentry);
-> @@ -3907,8 +3913,16 @@ static const char *open_last_lookups(struct nameidata *nd,
->  	if (got_write)
->  		mnt_drop_write(nd->path.mnt);
+> -	error = may_create(idmap, dir, dentry);
+> -	if (error)
+> -		return error;
+> -
+> -	if (!dir->i_op->create)
+> -		return -EACCES;	/* shouldn't it be ENOSYS? */
+> -
+> -	mode = vfs_prepare_mode(idmap, dir, mode, S_IALLUGO, S_IFREG);
+> -	error = security_inode_create(dir, dentry, mode);
+> -	if (error)
+> -		return error;
+> -	error = dir->i_op->create(idmap, dir, dentry, mode, want_excl);
+> -	if (!error)
+> -		fsnotify_create(dir, dentry);
+> -	return error;
+> +	return __vfs_create(idmap, dir, dentry, mode, want_excl, NULL);
+>  }
+>  EXPORT_SYMBOL(vfs_create);
 >  
-> -	if (IS_ERR(dentry))
-> +	if (IS_ERR(dentry)) {
-> +		if (delegated_inode) {
-> +			int error = break_deleg_wait(&delegated_inode);
-> +
-> +			if (!error)
-> +				goto retry;
-> +			return ERR_PTR(error);
-> +		}
->  		return ERR_CAST(dentry);
+> @@ -4365,6 +4375,7 @@ static int do_mknodat(int dfd, struct filename *name, umode_t mode,
+>  	struct path path;
+>  	int error;
+>  	unsigned int lookup_flags = 0;
+> +	struct inode *delegated_inode = NULL;
+>  
+>  	error = may_mknod(mode);
+>  	if (error)
+> @@ -4383,8 +4394,9 @@ static int do_mknodat(int dfd, struct filename *name, umode_t mode,
+>  	idmap = mnt_idmap(path.mnt);
+>  	switch (mode & S_IFMT) {
+>  		case 0: case S_IFREG:
+> -			error = vfs_create(idmap, path.dentry->d_inode,
+> -					   dentry, mode, true);
+> +			error = __vfs_create(idmap, path.dentry->d_inode,
+> +					     dentry, mode, true,
+> +					     &delegated_inode);
+>  			if (!error)
+>  				security_path_post_mknod(idmap, dentry);
+>  			break;
+> @@ -4399,6 +4411,11 @@ static int do_mknodat(int dfd, struct filename *name, umode_t mode,
+>  	}
+>  out2:
+>  	end_creating_path(&path, dentry);
+> +	if (delegated_inode) {
+> +		error = break_deleg_wait(&delegated_inode);
+> +		if (!error)
+> +			goto retry;
 > +	}
->  
->  	if (file->f_mode & (FMODE_OPENED | FMODE_CREATED)) {
->  		dput(nd->path.dentry);
+>  	if (retry_estale(error, lookup_flags)) {
+>  		lookup_flags |= LOOKUP_REVAL;
+>  		goto retry;
 > 
 > -- 
 > 2.51.0
