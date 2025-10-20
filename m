@@ -2,63 +2,47 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9615ABEEFD3
-	for <lists+samba-technical@lfdr.de>; Mon, 20 Oct 2025 03:19:39 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 49BD0BF1BAB
+	for <lists+samba-technical@lfdr.de>; Mon, 20 Oct 2025 16:07:59 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=XV6atz4EwtITnFq29ESZy9zjh32cqDrsW6hrdVttNmc=; b=0tpA31Qq7PtGeV8Lzx12n7z1U8
-	rAu7BreBblCGGZBSNt5YFq+rP/pRKreso0y7fmBG5WuqoHYlbg03WSccKO+oib0bLY4KuNIJZK5sr
-	45W8Vfg4G6W0LlweMqhqD6nbo/kB8na0XCneLeVY77VlxvHNuYgVYrybQSeucxVgEIkcLFrduEFfs
-	6Hrk8SpCXODlCu4hgDM9kLf/Ip+fC6MaIsqpMYUW9sRsJsI+me94SXVHmIpyAUU8lbYUG9n5rgzhn
-	xF+GTEw9Jdplbullynh8O41N0utxV1iJDtyFZIyQrK/1ieUWnmBM7MVTXU5Lsbx+vyee9Q4/a468l
-	m6mSH9dw==;
-Received: from ip6-localhost ([::1]:61458 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=CKbs8F46hzWpAcLY1h695ycsojLGA5bkvcNuSHQPy5M=; b=qzeJZ5IIh9gGIC2am9OVcw/GSq
+	05AYtDhzVjBszd/9ouvI6qaPkhrzukfQP+GhFfwJpUg3CsWqVMvGyEigUm1lmd9Q/fa5iyhJOk2Nc
+	Ja2NyRf1K3zx6iuTrNiwGv5aMe0FuxdPhY1MfixUaKb25sH5T5Vanj8EF+Lh+yNIT/gQiEgUvL+cj
+	yXZDtaklg5b+FoPjNqkp13msprmTSBcH0L7ffWE66rTW75/GP/RxaV5UVvL2gXpYz2+h4WSMcAfcv
+	6RVusByCiVrqNMoH+X5EWqEBr3n+X/TQzPXmtfTJg55L85vREX0/6ji6QfMmYI1eQl/QcnBQmZuqC
+	/t0JwaAQ==;
+Received: from ip6-localhost ([::1]:63302 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1vAeY7-008JnD-90; Mon, 20 Oct 2025 01:18:59 +0000
-Received: from sea.source.kernel.org ([172.234.252.31]:59048) 
+	id 1vAqXl-008Mlv-DQ; Mon, 20 Oct 2025 14:07:25 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:37644) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vAeY1-008Jn6-Uv
- for samba-technical@lists.samba.org; Mon, 20 Oct 2025 01:18:57 +0000
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 39D5244F60
- for <samba-technical@lists.samba.org>; Mon, 20 Oct 2025 01:18:40 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 19818C116C6
- for <samba-technical@lists.samba.org>; Mon, 20 Oct 2025 01:18:40 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1760923120;
- bh=XV6atz4EwtITnFq29ESZy9zjh32cqDrsW6hrdVttNmc=;
- h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
- b=dDz8E82M5ZdAN8+UqRAH3ly6pJBHGavuRXFqq4aa9zq9MKR/3y3gQA5JgRBLrVxGo
- Fg/rlFMtAqoFRSVBn/kiTFsaW+tM0S1t0sruko054oTgxLXpiIm76G0osRodk3STEc
- Y3MiwuMmQrtY8J2nDE8nXFUUiZDLgHt+6C+/txMDMTiwEJqIvZaPXojth5BKO5pU8I
- BtoyTy5lbHTVgYZs1GjJl6C9R4JXccC7AcsgSSt604vGGhNZHjYgCjSULfHcnTmKYS
- v0DaZ053eUkWmdyzwkhU0KRNAwAprPFZCFWTCh61ajO4Q8ORTP4imBSk1Ez/IfzR8H
- UBAGqlGVkiG2g==
-Received: by mail-ed1-f43.google.com with SMTP id
- 4fb4d7f45d1cf-63c4b5a1b70so3478773a12.1
- for <samba-technical@lists.samba.org>; Sun, 19 Oct 2025 18:18:40 -0700 (PDT)
-X-Forwarded-Encrypted: i=1;
- AJvYcCUrc8ulq086NVs4vA1cwh2+nssTDK+vqU4Wuf+oYJIQpi15BptoTdaisqrJLyNQc0+oxLJst5yJUxqgWmcyUxI=@lists.samba.org
-X-Gm-Message-State: AOJu0Yz35BiNohR6U4b8h/H/VLeeLzUaun0PvCV0U8nlJrhamiaaaHgN
- VWjPvOx4HuBrCNyWiD8IXiAfRadytz6JknfyfSlL1BzXecOxkZ2JQfEbvxRZiNpkjxEr3KAbtco
- SkfbP76M5F98WdqLr5kv5i1Un1utKH/k=
-X-Google-Smtp-Source: AGHT+IE14oQqrNgjb6tAHMizeorwjtvCCmzGmbogDqECZTljTXIGFRJ1Vg7eiiyckQ1JZFTfxoObbt9lzLUSfn4r4tg=
-X-Received: by 2002:a05:6402:40c5:b0:63c:1e95:dd4c with SMTP id
- 4fb4d7f45d1cf-63c1f6cea34mr11370754a12.27.1760923118682; Sun, 19 Oct 2025
- 18:18:38 -0700 (PDT)
+ (Exim) id 1vAqXg-008Mlo-FG
+ for samba-technical@lists.samba.org; Mon, 20 Oct 2025 14:07:22 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Message-ID:Date:Cc:To:From;
+ bh=CKbs8F46hzWpAcLY1h695ycsojLGA5bkvcNuSHQPy5M=; b=jbIm4Hj0Hmjys4qMAGE61aUhF4
+ UYZlDDBIHirVdTVooTs84pMo2Chy3bA2iCme/E+brSpPQ3EK40B/qkQBxEKjNykWD0i/1tYrKw/OV
+ O4EgreN1c1gmTKEZ786umMGr48v0KKa/EXVygNqeQUqrxIddCDYyhuZIQafyT08HVXR31Ef8CZJJz
+ iYy9DXW8BH16v5Lg1D8TEwxjMrl63as7c9SQns9RO8fxkWhr5lWDzcw31uob49AXuuoL5FMRaDjkG
+ gn+Ncq3umFKe5xrhvOQr8yQ1Zti970MOxeF6fyhC8nTjxNnK8TXueuivKvI3auZUr1QDWZesHyzaM
+ 3qndarIRZ5fTpD7D/lRrNZZGDEQcpXX4hkpUz0xZnFqJ1N4YXPPciXBJF6QPdb9LdgglQizCp4Mrg
+ lOshACNeTLV48h7nv4SZ3EM4exKkJgR8xLVo+T3nejtzimxEWHftMCLH7wIICOF3roz5XQpsPL+XB
+ G71iDZ//DnmZyUlABpzZBin8;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1vAqXf-00AATL-0I; Mon, 20 Oct 2025 14:07:19 +0000
+To: linux-cifs@vger.kernel.org,
+	samba-technical@lists.samba.org
+Subject: [PATCH] smb: server: call smb_direct_post_recv_credits() when the
+ negotiation is done
+Date: Mon, 20 Oct 2025 16:07:13 +0200
+Message-ID: <20251020140713.155001-1-metze@samba.org>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20251017095502.1532414-1-metze@samba.org>
-In-Reply-To: <20251017095502.1532414-1-metze@samba.org>
-Date: Mon, 20 Oct 2025 10:18:25 +0900
-X-Gmail-Original-Message-ID: <CAKYAXd-v+LX4jED3taHgB=TkiBckipiHfcOysifgbJBCG3QEVg@mail.gmail.com>
-X-Gm-Features: AS18NWDHzk0KiQsmnXt-b4jlkcbxi1i1B2tWYfFtpWdHWaVziSa5ajLJ9kz9S4U
-Message-ID: <CAKYAXd-v+LX4jED3taHgB=TkiBckipiHfcOysifgbJBCG3QEVg@mail.gmail.com>
-Subject: Re: [PATCH v5] smb: server: allocate enough space for RW WRs and
- ib_drain_qp()
-To: Stefan Metzmacher <metze@samba.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -72,104 +56,115 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Namjae Jeon via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Namjae Jeon <linkinjeon@kernel.org>
-Cc: Tom Talpey <tom@talpey.com>, linux-cifs@vger.kernel.org,
- samba-technical@lists.samba.org, Steve French <smfrench@gmail.com>
+From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Stefan Metzmacher <metze@samba.org>
+Cc: metze@samba.org, Steve French <smfrench@gmail.com>,
+ Tom Talpey <tom@talpey.com>, Namjae Jeon <linkinjeon@kernel.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Fri, Oct 17, 2025 at 6:55=E2=80=AFPM Stefan Metzmacher <metze@samba.org>=
- wrote:
->
-> Make use of rdma_rw_mr_factor() to calculate the number of rw
-> credits and the number of pages per RDMA RW operation.
->
-> We get the same numbers for iWarp connections, tested
-> with siw.ko and irdma.ko (in iWarp mode).
->
-> siw:
->
-> CIFS: max_qp_rd_atom=3D128, max_fast_reg_page_list_len =3D 256
-> CIFS: max_sgl_rd=3D0, max_sge_rd=3D1
-> CIFS: responder_resources=3D32 max_frmr_depth=3D256 mr_io.type=3D0
-> CIFS: max_send_wr 384, device reporting max_cqe 3276800 max_qp_wr 32768
-> ksmbd: max_fast_reg_page_list_len =3D 256, max_sgl_rd=3D0, max_sge_rd=3D1
-> ksmbd: device reporting max_cqe 3276800 max_qp_wr 32768
-> ksmbd: Old sc->rw_io.credits: max =3D 9, num_pages =3D 256
-> ksmbd: New sc->rw_io.credits: max =3D 9, num_pages =3D 256, maxpages=3D20=
-48
-> ksmbd: Info: rdma_send_wr 27 + max_send_wr 256 =3D 283
->
-> irdma (in iWarp mode):
->
-> CIFS: max_qp_rd_atom=3D127, max_fast_reg_page_list_len =3D 262144
-> CIFS: max_sgl_rd=3D0, max_sge_rd=3D13
-> CIFS: responder_resources=3D32 max_frmr_depth=3D2048 mr_io.type=3D0
-> CIFS: max_send_wr 384, device reporting max_cqe 1048574 max_qp_wr 4063
-> ksmbd: max_fast_reg_page_list_len =3D 262144, max_sgl_rd=3D0, max_sge_rd=
-=3D13
-> ksmbd: device reporting max_cqe 1048574 max_qp_wr 4063
-> ksmbd: Old sc->rw_io.credits: max =3D 9, num_pages =3D 256
-> ksmbd: New sc->rw_io.credits: max =3D 9, num_pages =3D 256, maxpages=3D20=
-48
-> ksmbd: rdma_send_wr 27 + max_send_wr 256 =3D 283
->
-> This means that we get the different correct numbers for ROCE,
-> tested with rdma_rxe.ko and irdma.ko (in RoCEv2 mode).
->
-> rxe:
->
-> CIFS: max_qp_rd_atom=3D128, max_fast_reg_page_list_len =3D 512
-> CIFS: max_sgl_rd=3D0, max_sge_rd=3D32
-> CIFS: responder_resources=3D32 max_frmr_depth=3D512 mr_io.type=3D0
-> CIFS: max_send_wr 384, device reporting max_cqe 32767 max_qp_wr 1048576
-> ksmbd: max_fast_reg_page_list_len =3D 512, max_sgl_rd=3D0, max_sge_rd=3D3=
-2
-> ksmbd: device reporting max_cqe 32767 max_qp_wr 1048576
-> ksmbd: Old sc->rw_io.credits: max =3D 9, num_pages =3D 256
-> ksmbd: New sc->rw_io.credits: max =3D 65, num_pages =3D 32, maxpages=3D20=
-48
-> ksmbd: rdma_send_wr 65 + max_send_wr 256 =3D 321
->
-> irdma (in RoCEv2 mode):
->
-> CIFS: max_qp_rd_atom=3D127, max_fast_reg_page_list_len =3D 262144,
-> CIFS: max_sgl_rd=3D0, max_sge_rd=3D13
-> CIFS: responder_resources=3D32 max_frmr_depth=3D2048 mr_io.type=3D0
-> CIFS: max_send_wr 384, device reporting max_cqe 1048574 max_qp_wr 4063
-> ksmbd: max_fast_reg_page_list_len =3D 262144, max_sgl_rd=3D0, max_sge_rd=
-=3D13
-> ksmbd: device reporting max_cqe 1048574 max_qp_wr 4063
-> ksmbd: Old sc->rw_io.credits: max =3D 9, num_pages =3D 256,
-> ksmbd: New sc->rw_io.credits: max =3D 159, num_pages =3D 13, maxpages=3D2=
-048
-> ksmbd: rdma_send_wr 159 + max_send_wr 256 =3D 415
->
-> And rely on rdma_rw_init_qp() to setup ib_mr_pool_init() for
-> RW MRs. ib_mr_pool_destroy() will be called by rdma_rw_cleanup_mrs().
->
-> It seems the code was implemented before the rdma_rw_* layer
-> was fully established in the kernel.
->
-> While there also add additional space for ib_drain_qp().
->
-> This should make sure ib_post_send() will never fail
-> because the submission queue is full.
->
-> Fixes: ddbdc861e37c ("ksmbd: smbd: introduce read/write credits for RDMA =
-read/write")
-> Fixes: 4c564f03e23b ("smb: server: make use of common smbdirect_socket")
-> Fixes: 177368b99243 ("smb: server: make use of common smbdirect_socket_pa=
-rameters")
-> Fixes: 95475d8886bd ("smb: server: make use smbdirect_socket.rw_io.credit=
-s")
-> Cc: Namjae Jeon <linkinjeon@kernel.org>
-> Cc: Steve French <smfrench@gmail.com>
-> Cc: Tom Talpey <tom@talpey.com>
-> Cc: linux-cifs@vger.kernel.org
-> Cc: samba-technical@lists.samba.org
-> Signed-off-by: Stefan Metzmacher <metze@samba.org>
-Applied it to #ksmbd-for-next-next.
-Thanks!
+We now activate sc->recv_io.posted.refill_work and sc->idle.immediate_work
+only after a successful negotiation, before sending the negotiation
+response.
+
+It means the queue_work(sc->workqueue, &sc->recv_io.posted.refill_work)
+in put_recvmsg() of the negotiate request, is a no-op now.
+
+It also means our explicit smb_direct_post_recv_credits() will
+have queue_work(sc->workqueue, &sc->idle.immediate_work) as no-op.
+
+This should make sure we don't have races and post any immediate
+data_transfer message that tries to grant credits to the peer,
+before we send the negotiation response, as that will grant
+the initial credits to the peer.
+
+Fixes: 0626e6641f6b ("cifsd: add server handler for central processing and tranport layers")
+Fixes: 1cde0a74a7a8 ("smb: server: don't use delayed_work for post_recv_credits_work")
+Cc: Namjae Jeon <linkinjeon@kernel.org>
+Cc: Steve French <smfrench@gmail.com>
+Cc: Tom Talpey <tom@talpey.com>
+Cc: linux-cifs@vger.kernel.org
+Cc: samba-technical@lists.samba.org
+Signed-off-by: Stefan Metzmacher <metze@samba.org>
+---
+ fs/smb/server/transport_rdma.c | 36 ++++++++++++++++++++++++++--------
+ 1 file changed, 28 insertions(+), 8 deletions(-)
+
+diff --git a/fs/smb/server/transport_rdma.c b/fs/smb/server/transport_rdma.c
+index 90cf5ab36103..1b597f9f85e3 100644
+--- a/fs/smb/server/transport_rdma.c
++++ b/fs/smb/server/transport_rdma.c
+@@ -417,9 +417,6 @@ static struct smb_direct_transport *alloc_transport(struct rdma_cm_id *cm_id)
+ 
+ 	sc->ib.dev = sc->rdma.cm_id->device;
+ 
+-	INIT_WORK(&sc->recv_io.posted.refill_work,
+-		  smb_direct_post_recv_credits);
+-	INIT_WORK(&sc->idle.immediate_work, smb_direct_send_immediate_work);
+ 	INIT_DELAYED_WORK(&sc->idle.timer_work, smb_direct_idle_connection_timer);
+ 
+ 	conn = ksmbd_conn_alloc();
+@@ -1862,7 +1859,6 @@ static int smb_direct_prepare_negotiation(struct smbdirect_socket *sc)
+ 		goto out_err;
+ 	}
+ 
+-	smb_direct_post_recv_credits(&sc->recv_io.posted.refill_work);
+ 	return 0;
+ out_err:
+ 	put_recvmsg(sc, recvmsg);
+@@ -2205,8 +2201,8 @@ static int smb_direct_prepare(struct ksmbd_transport *t)
+ 		return -ECONNABORTED;
+ 
+ 	ret = smb_direct_check_recvmsg(recvmsg);
+-	if (ret == -ECONNABORTED)
+-		goto out;
++	if (ret)
++		goto put;
+ 
+ 	req = (struct smbdirect_negotiate_req *)recvmsg->packet;
+ 	sp->max_recv_size = min_t(int, sp->max_recv_size,
+@@ -2221,14 +2217,38 @@ static int smb_direct_prepare(struct ksmbd_transport *t)
+ 	sc->recv_io.credits.target = min_t(u16, sc->recv_io.credits.target, sp->recv_credit_max);
+ 	sc->recv_io.credits.target = max_t(u16, sc->recv_io.credits.target, 1);
+ 
+-	ret = smb_direct_send_negotiate_response(sc, ret);
+-out:
++put:
+ 	spin_lock_irqsave(&sc->recv_io.reassembly.lock, flags);
+ 	sc->recv_io.reassembly.queue_length--;
+ 	list_del(&recvmsg->list);
+ 	spin_unlock_irqrestore(&sc->recv_io.reassembly.lock, flags);
+ 	put_recvmsg(sc, recvmsg);
+ 
++	if (ret == -ECONNABORTED)
++		return ret;
++
++	if (ret)
++		goto respond;
++
++	/*
++	 * We negotiated with success, so we need to refill the recv queue.
++	 * We do that with sc->idle.immediate_work still being disabled
++	 * via smbdirect_socket_init(), so that queue_work(sc->workqueue,
++	 * &sc->idle.immediate_work) in smb_direct_post_recv_credits()
++	 * is a no-op.
++	 *
++	 * The message that grants the credits to the client is
++	 * the negotiate response.
++	 */
++	INIT_WORK(&sc->recv_io.posted.refill_work, smb_direct_post_recv_credits);
++	smb_direct_post_recv_credits(&sc->recv_io.posted.refill_work);
++	if (unlikely(sc->first_error))
++		return sc->first_error;
++	INIT_WORK(&sc->idle.immediate_work, smb_direct_send_immediate_work);
++
++respond:
++	ret = smb_direct_send_negotiate_response(sc, ret);
++
+ 	return ret;
+ }
+ 
+-- 
+2.43.0
+
 
