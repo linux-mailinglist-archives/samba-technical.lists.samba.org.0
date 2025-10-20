@@ -2,44 +2,44 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8C388BF2F4E
-	for <lists+samba-technical@lfdr.de>; Mon, 20 Oct 2025 20:36:47 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1844BBF2F61
+	for <lists+samba-technical@lfdr.de>; Mon, 20 Oct 2025 20:37:32 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=d+jnfWr2Lel3tWjcjOhIZ+FJyHVY7JNrtQclNWKs2EQ=; b=i1nqWkf5484WViz9tgL40mIwjj
-	uttpCFb/5p4glrdCd3Ak7egT68FhEoVpCmngLsEl68NivCXRV23GhB3ZDQt/ooDSvf5V2L9n+S3Mn
-	Y2MkffO8TbDgHst/QUUS+ZzahZ/b2mIH+V7Q/pSh55qbQay70zd21FmT97/E5FubVHUTa4oShaBpd
-	aFe8qrv17Fz+/LQjZn2cIt7KIzgC7A1+oGi2vOwbCjLhSf7Z9czUQt1lryZ8eEp8DH9wqhgLuTI4D
-	bYO9mx8014boCaAQTKxUvpPIH0O/0FetnbitDE1SGN/N2m2KTJ2WXOHTXYwTgme/o37YBSDAr0yAr
-	2itTtleQ==;
-Received: from ip6-localhost ([::1]:59828 helo=hr1.samba.org) 
+	bh=bKT/jLXyefae+ZUWasm33iQv809olK9DwbEhtIFD0xM=; b=4yU0zgOK49fUgdui3IPoKKnTWt
+	YnFC37ChraXeI1X/m25dQzA0EOuiTJFcHVVWjSkZu56PLcmcxMFRL1upzdSI6R+LxZbCwSi1N0lb+
+	zzuQu3kCCRHtR/kYAxiydEGfvJr6MHBs0YXS2+OjODWo6rFQabA+qfjYMMSjo27quAx2ZLcW7xCK1
+	oQLeAJn7h1NjdZhQyvvUO11wxKksiOpoHQezWIhpKwcIxTw60hydHUxhUr8EyE6YqTMPIu4HMRE+j
+	XWhcISumPWsSufmyZc2VhP3LA8pLylG1k8Psanz8rlf8/JntPFBDjWhCy+l0vTjD+NI6Z1jHYWeuC
+	RvpVAVTw==;
+Received: from ip6-localhost ([::1]:44906 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1vAukI-008NKP-4L; Mon, 20 Oct 2025 18:36:38 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:52434) 
+	id 1vAukw-008NXC-H5; Mon, 20 Oct 2025 18:37:18 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:12464) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vAukD-008NKI-EP
- for samba-technical@lists.samba.org; Mon, 20 Oct 2025 18:36:36 +0000
+ (Exim) id 1vAukQ-008NN9-7u
+ for samba-technical@lists.samba.org; Mon, 20 Oct 2025 18:37:11 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Message-ID:Date:Cc:To:From;
- bh=d+jnfWr2Lel3tWjcjOhIZ+FJyHVY7JNrtQclNWKs2EQ=; b=iFu7INZuwnzH5RW3NF0URr8YFW
- jvQNKNSsPj5j/04lHYrFmA4UkUCr2Rqs5WwfWfS+p8tPk7cmUetT8xjFy904ylEESzWZzh/W1Ridm
- N3rVVKqvTgntoLphAnrD3ZMw5QG7u2ratDRihyabsddJm7kLSXAzDrjKSKygnbQ10x+2Dd9M2Xhs5
- bWb4ZHUhMXPZ7qircQaOX+XBcCobv+JdtzHgu1fhWHn5WWKnvixC4oFm8t1yYYAe/Dg7BrgVyFfz2
- fQb9E2Npc9b1lmCm/QG0Z5hXotVsFU2rxbNX3BU/i7NMq5PNMfUkMr/4AofXsROC2dM8IjrtOlMZ2
- CeAnnMULkIeVfFj6HUfJxpGgVOeWdSt0tCcVxpnPQfiF/BomufjN48I/5r6m8OjdX+GrqYWmuxZ5H
- SXkWU/6jiTdQgpvJnkR6qV0qcb4oFQReO0t3ObAi7vqeGkGD474OTH/1+DX11HhML9HMimZiOm/D9
- jEfUCvT1F7pbIY9KoGFinDOG;
+ bh=bKT/jLXyefae+ZUWasm33iQv809olK9DwbEhtIFD0xM=; b=IbtZdUAGxAVnYwNdxyv/EC+mtd
+ BgeF6i5HaTkVV8Zl2lz0Sv/rYewXf9vJLCWCNtHcGmN65+yZyo5q1hp8SLTLksQEal/cHgf4fc+oo
+ uwsx4kJQxgU1EZwFW0g7yRommnZh/7uv9ywBgGw/SevgInvRBmLuOGSP1hJhKI+1lEpNm42qGWG0a
+ 23YcXgF0NURM4Q2956V1FlqWF1C+CJAID1yUO7vEnxoSumkuBgln8aEtQZelXRxGflStusCVcImch
+ P8UBbo6KJBK9y692yTwpXZV/PxkwadbvnyYoHhKNjoULbftsaQA1tMRKe+n67SmoDiKn/TxmC8aCv
+ KyYU57fpDwmDHhdTYb+dsB/nUjyjyj/z1f2vb725MThuNH5yjZbRhOo3fqGkdRUts+Ji1bCQQqmoN
+ IGnZ/CpA0r7TjAha4NTcSiNd6zsI1zE85Ic0ulyjqOG4TcXBZeTf9ZTWXIe1+etn8DOKsQt43Nomc
+ QiGrAWM9QToXm+LhBOMRRJdK;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vAukC-00ACOK-10; Mon, 20 Oct 2025 18:36:32 +0000
+ (Exim) id 1vAukO-00ACOx-0K; Mon, 20 Oct 2025 18:36:44 +0000
 To: linux-cifs@vger.kernel.org,
 	samba-technical@lists.samba.org
-Subject: [PATCH 3/5] smb: server: simplify sibling_list handling in
- smb_direct_flush_send_list/send_done
-Date: Mon, 20 Oct 2025 20:36:00 +0200
-Message-ID: <4de5385dc318ff44a391528a49e4fc8710ba4693.1760984605.git.metze@samba.org>
+Subject: [PATCH 4/5] smb: server: make use of
+ smbdirect_socket.send_io.lcredits.*
+Date: Mon, 20 Oct 2025 20:36:01 +0200
+Message-ID: <dfd0ee41de293120c45723e51feafaa021f33b64.1760984605.git.metze@samba.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1760984605.git.metze@samba.org>
 References: <cover.1760984605.git.metze@samba.org>
@@ -61,149 +61,152 @@ List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
 From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
 Reply-To: Stefan Metzmacher <metze@samba.org>
 Cc: metze@samba.org, Steve French <smfrench@gmail.com>,
- Tom Talpey <tom@talpey.com>, Namjae Jeon <linkinjeon@kernel.org>,
- Steve French <stfrench@microsoft.com>
+ Tom Talpey <tom@talpey.com>, Namjae Jeon <linkinjeon@kernel.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-We have a list handling that is much easier to understand:
+This introduces logic to prevent on overflow of
+the send submission queue with ib_post_send() easier.
 
-1. Before smb_direct_flush_send_list() is called all
-   struct smbdirect_send_io messages are part of
-   send_ctx->msg_list
+As we first get a local credit and then a remote credit
+before we mark us as pending.
 
-2. Before smb_direct_flush_send_list() calls
-   smb_direct_post_send() we remove the last
-   element in send_ctx->msg_list and move all
-   others into last->sibling_list. As only
-   last has IB_SEND_SIGNALED and gets a completion
-   vis send_done().
+From reading the git history of the linux smbdirect
+implementations in client and server) it was seen
+that a peer granted more credits than we requested.
+I guess that only happened because of bugs in our
+implementation which was active as client and server.
+I guess Windows won't do that.
 
-3. send_done() has an easy way to free all others
-   in sendmsg->sibling_list (if there are any).
-   And use list_for_each_entry_safe() instead of
-   a complex custom logic.
+So the local credits make sure we only use the amount
+of credits we asked for.
 
-This will help us to share send_done() in common
-code soon, as it will work fine for the client too,
-where last->sibling_list is currently always an empty list.
-
+Fixes: 0626e6641f6b ("cifsd: add server handler for central processing and tranport layers")
 Cc: Namjae Jeon <linkinjeon@kernel.org>
 Cc: Steve French <smfrench@gmail.com>
 Cc: Tom Talpey <tom@talpey.com>
 Cc: linux-cifs@vger.kernel.org
 Cc: samba-technical@lists.samba.org
 Signed-off-by: Stefan Metzmacher <metze@samba.org>
-Signed-off-by: Steve French <stfrench@microsoft.com>
 ---
- fs/smb/server/transport_rdma.c | 60 +++++++++++++++++++++-------------
- 1 file changed, 38 insertions(+), 22 deletions(-)
+ fs/smb/server/transport_rdma.c | 42 ++++++++++++++++++++++++++++++----
+ 1 file changed, 37 insertions(+), 5 deletions(-)
 
 diff --git a/fs/smb/server/transport_rdma.c b/fs/smb/server/transport_rdma.c
-index c4df1328342d..e7e2388c00c2 100644
+index e7e2388c00c2..7d86553fcc7c 100644
 --- a/fs/smb/server/transport_rdma.c
 +++ b/fs/smb/server/transport_rdma.c
-@@ -524,6 +524,12 @@ static void smb_direct_free_sendmsg(struct smbdirect_socket *sc,
+@@ -219,6 +219,7 @@ static void smb_direct_disconnect_wake_up_all(struct smbdirect_socket *sc)
+ 	 * in order to notice the broken connection.
+ 	 */
+ 	wake_up_all(&sc->status_wait);
++	wake_up_all(&sc->send_io.lcredits.wait_queue);
+ 	wake_up_all(&sc->send_io.credits.wait_queue);
+ 	wake_up_all(&sc->send_io.pending.zero_wait_queue);
+ 	wake_up_all(&sc->recv_io.reassembly.wait_queue);
+@@ -917,6 +918,7 @@ static void send_done(struct ib_cq *cq, struct ib_wc *wc)
  {
- 	int i;
- 
-+	/*
-+	 * The list needs to be empty!
-+	 * The caller should take care of it.
-+	 */
-+	WARN_ON_ONCE(!list_empty(&msg->sibling_list));
-+
- 	if (msg->num_sge > 0) {
- 		ib_dma_unmap_single(sc->ib.dev,
- 				    msg->sge[0].addr, msg->sge[0].length,
-@@ -909,9 +915,8 @@ static void smb_direct_post_recv_credits(struct work_struct *work)
- 
- static void send_done(struct ib_cq *cq, struct ib_wc *wc)
- {
--	struct smbdirect_send_io *sendmsg, *sibling;
-+	struct smbdirect_send_io *sendmsg, *sibling, *next;
+ 	struct smbdirect_send_io *sendmsg, *sibling, *next;
  	struct smbdirect_socket *sc;
--	struct list_head *pos, *prev, *end;
++	int lcredits = 0;
  
  	sendmsg = container_of(wc->wr_cqe, struct smbdirect_send_io, cqe);
  	sc = sendmsg->socket;
-@@ -920,27 +925,26 @@ static void send_done(struct ib_cq *cq, struct ib_wc *wc)
- 		    ib_wc_status_msg(wc->status), wc->status,
- 		    wc->opcode);
+@@ -931,9 +933,11 @@ static void send_done(struct ib_cq *cq, struct ib_wc *wc)
+ 	list_for_each_entry_safe(sibling, next, &sendmsg->sibling_list, sibling_list) {
+ 		list_del_init(&sibling->sibling_list);
+ 		smb_direct_free_sendmsg(sc, sibling);
++		lcredits += 1;
+ 	}
+ 	/* Note this frees wc->wr_cqe, but not wc */
+ 	smb_direct_free_sendmsg(sc, sendmsg);
++	lcredits += 1;
  
-+	/*
-+	 * Free possible siblings and then the main send_io
-+	 */
-+	list_for_each_entry_safe(sibling, next, &sendmsg->sibling_list, sibling_list) {
-+		list_del_init(&sibling->sibling_list);
-+		smb_direct_free_sendmsg(sc, sibling);
-+	}
-+	/* Note this frees wc->wr_cqe, but not wc */
-+	smb_direct_free_sendmsg(sc, sendmsg);
-+
  	if (wc->status != IB_WC_SUCCESS || wc->opcode != IB_WC_SEND) {
  		pr_err("Send error. status='%s (%d)', opcode=%d\n",
- 		       ib_wc_status_msg(wc->status), wc->status,
- 		       wc->opcode);
- 		smb_direct_disconnect_rdma_connection(sc);
-+		return;
+@@ -943,6 +947,9 @@ static void send_done(struct ib_cq *cq, struct ib_wc *wc)
+ 		return;
  	}
  
++	atomic_add(lcredits, &sc->send_io.lcredits.count);
++	wake_up(&sc->send_io.lcredits.wait_queue);
++
  	if (atomic_dec_and_test(&sc->send_io.pending.count))
  		wake_up(&sc->send_io.pending.zero_wait_queue);
--
--	/* iterate and free the list of messages in reverse. the list's head
--	 * is invalid.
--	 */
--	for (pos = &sendmsg->sibling_list, prev = pos->prev, end = sendmsg->sibling_list.next;
--	     prev != end; pos = prev, prev = prev->prev) {
--		sibling = container_of(pos, struct smbdirect_send_io, sibling_list);
--		smb_direct_free_sendmsg(sc, sibling);
--	}
--
--	sibling = container_of(pos, struct smbdirect_send_io, sibling_list);
--	smb_direct_free_sendmsg(sc, sibling);
+ }
+@@ -1082,6 +1089,23 @@ static int wait_for_credits(struct smbdirect_socket *sc,
+ 	} while (true);
  }
  
- static int manage_credits_prior_sending(struct smbdirect_socket *sc)
-@@ -1030,17 +1034,29 @@ static int smb_direct_flush_send_list(struct smbdirect_socket *sc,
- 	last->wr.send_flags = IB_SEND_SIGNALED;
- 	last->wr.wr_cqe = &last->cqe;
++static int wait_for_send_lcredit(struct smbdirect_socket *sc,
++				 struct smbdirect_send_batch *send_ctx)
++{
++	if (send_ctx && (atomic_read(&sc->send_io.lcredits.count) <= 1)) {
++		int ret;
++
++		ret = smb_direct_flush_send_list(sc, send_ctx, false);
++		if (ret)
++			return ret;
++	}
++
++	return wait_for_credits(sc,
++				&sc->send_io.lcredits.wait_queue,
++				&sc->send_io.lcredits.count,
++				1);
++}
++
+ static int wait_for_send_credits(struct smbdirect_socket *sc,
+ 				 struct smbdirect_send_batch *send_ctx)
+ {
+@@ -1269,9 +1293,13 @@ static int smb_direct_post_send_data(struct smbdirect_socket *sc,
+ 	int data_length;
+ 	struct scatterlist sg[SMBDIRECT_SEND_IO_MAX_SGE - 1];
  
-+	/*
-+	 * Remove last from send_ctx->msg_list
-+	 * and splice the rest of send_ctx->msg_list
-+	 * to last->sibling_list.
-+	 *
-+	 * send_ctx->msg_list is a valid empty list
-+	 * at the end.
-+	 */
-+	list_del_init(&last->sibling_list);
-+	list_splice_tail_init(&send_ctx->msg_list, &last->sibling_list);
-+	send_ctx->wr_cnt = 0;
++	ret = wait_for_send_lcredit(sc, send_ctx);
++	if (ret)
++		goto lcredit_failed;
 +
- 	ret = smb_direct_post_send(sc, &first->wr);
--	if (!ret) {
--		smb_direct_send_ctx_init(send_ctx,
--					 send_ctx->need_invalidate_rkey,
--					 send_ctx->remote_key);
--	} else {
--		list_for_each_entry_safe(first, last, &send_ctx->msg_list,
--					 sibling_list) {
--			smb_direct_free_sendmsg(sc, first);
-+	if (ret) {
-+		struct smbdirect_send_io *sibling, *next;
-+
-+		list_for_each_entry_safe(sibling, next, &last->sibling_list, sibling_list) {
-+			list_del_init(&sibling->sibling_list);
-+			smb_direct_free_sendmsg(sc, sibling);
- 		}
-+		smb_direct_free_sendmsg(sc, last);
- 	}
-+
+ 	ret = wait_for_send_credits(sc, send_ctx);
+ 	if (ret)
+-		return ret;
++		goto credit_failed;
+ 
+ 	data_length = 0;
+ 	for (i = 0; i < niov; i++)
+@@ -1279,10 +1307,8 @@ static int smb_direct_post_send_data(struct smbdirect_socket *sc,
+ 
+ 	ret = smb_direct_create_header(sc, data_length, remaining_data_length,
+ 				       &msg);
+-	if (ret) {
+-		atomic_inc(&sc->send_io.credits.count);
+-		return ret;
+-	}
++	if (ret)
++		goto header_failed;
+ 
+ 	for (i = 0; i < niov; i++) {
+ 		struct ib_sge *sge;
+@@ -1320,7 +1346,11 @@ static int smb_direct_post_send_data(struct smbdirect_socket *sc,
+ 	return 0;
+ err:
+ 	smb_direct_free_sendmsg(sc, msg);
++header_failed:
+ 	atomic_inc(&sc->send_io.credits.count);
++credit_failed:
++	atomic_inc(&sc->send_io.lcredits.count);
++lcredit_failed:
  	return ret;
  }
  
+@@ -1897,6 +1927,8 @@ static int smb_direct_init_params(struct smbdirect_socket *sc)
+ 		return -EINVAL;
+ 	}
+ 
++	atomic_set(&sc->send_io.lcredits.count, sp->send_credit_target);
++
+ 	maxpages = DIV_ROUND_UP(sp->max_read_write_size, PAGE_SIZE);
+ 	sc->rw_io.credits.max = rdma_rw_mr_factor(sc->ib.dev,
+ 						  sc->rdma.cm_id->port_num,
 -- 
 2.43.0
 
