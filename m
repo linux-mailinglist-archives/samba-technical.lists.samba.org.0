@@ -2,44 +2,44 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 49BD0BF1BAB
-	for <lists+samba-technical@lfdr.de>; Mon, 20 Oct 2025 16:07:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B6C98BF1BB1
+	for <lists+samba-technical@lfdr.de>; Mon, 20 Oct 2025 16:08:06 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=CKbs8F46hzWpAcLY1h695ycsojLGA5bkvcNuSHQPy5M=; b=qzeJZ5IIh9gGIC2am9OVcw/GSq
-	05AYtDhzVjBszd/9ouvI6qaPkhrzukfQP+GhFfwJpUg3CsWqVMvGyEigUm1lmd9Q/fa5iyhJOk2Nc
-	Ja2NyRf1K3zx6iuTrNiwGv5aMe0FuxdPhY1MfixUaKb25sH5T5Vanj8EF+Lh+yNIT/gQiEgUvL+cj
-	yXZDtaklg5b+FoPjNqkp13msprmTSBcH0L7ffWE66rTW75/GP/RxaV5UVvL2gXpYz2+h4WSMcAfcv
-	6RVusByCiVrqNMoH+X5EWqEBr3n+X/TQzPXmtfTJg55L85vREX0/6ji6QfMmYI1eQl/QcnBQmZuqC
-	/t0JwaAQ==;
-Received: from ip6-localhost ([::1]:63302 helo=hr1.samba.org) 
+	bh=Ed4fK+ZnP6nEhONReVTtgBkffmW6wnsU1RMQraJBj68=; b=R8XKNiRmCacpyJRAyRUMzlvKjo
+	XUS+gjF3vQRSw1vX9Jwvo9JJ7sIm35ibjy+63XpS1sancIiR0B0qDDt0GyfnMYgPeS1K1jywJcTxg
+	Y7iTnHvgOZqFgOgVjyiNqCCC1Vt+Jn7kOCvSVwdO0ytmBgRehvEcDfrQaZ4A9otC6ZFpjM9Zy/H8X
+	wUyZlvQNTiCsxWwiUP6nhsRqf6+u5vhENGeqci1V2oBes5BeWFPlIdDJ/MzjOKdLmwT6tRf/yroeO
+	8tZZ8y3eY0pDWxSLFGcpfKIw2/sWzEIifdLZ9E/MrliDPtkeuf+5pF3m8quXhN5V/wMO/e0q9KltK
+	RFuLH/fw==;
+Received: from ip6-localhost ([::1]:41210 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1vAqXl-008Mlv-DQ; Mon, 20 Oct 2025 14:07:25 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:37644) 
+	id 1vAqYN-008MoS-4j; Mon, 20 Oct 2025 14:08:03 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:63304) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vAqXg-008Mlo-FG
- for samba-technical@lists.samba.org; Mon, 20 Oct 2025 14:07:22 +0000
+ (Exim) id 1vAqYH-008MnQ-OO
+ for samba-technical@lists.samba.org; Mon, 20 Oct 2025 14:08:00 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Message-ID:Date:Cc:To:From;
- bh=CKbs8F46hzWpAcLY1h695ycsojLGA5bkvcNuSHQPy5M=; b=jbIm4Hj0Hmjys4qMAGE61aUhF4
- UYZlDDBIHirVdTVooTs84pMo2Chy3bA2iCme/E+brSpPQ3EK40B/qkQBxEKjNykWD0i/1tYrKw/OV
- O4EgreN1c1gmTKEZ786umMGr48v0KKa/EXVygNqeQUqrxIddCDYyhuZIQafyT08HVXR31Ef8CZJJz
- iYy9DXW8BH16v5Lg1D8TEwxjMrl63as7c9SQns9RO8fxkWhr5lWDzcw31uob49AXuuoL5FMRaDjkG
- gn+Ncq3umFKe5xrhvOQr8yQ1Zti970MOxeF6fyhC8nTjxNnK8TXueuivKvI3auZUr1QDWZesHyzaM
- 3qndarIRZ5fTpD7D/lRrNZZGDEQcpXX4hkpUz0xZnFqJ1N4YXPPciXBJF6QPdb9LdgglQizCp4Mrg
- lOshACNeTLV48h7nv4SZ3EM4exKkJgR8xLVo+T3nejtzimxEWHftMCLH7wIICOF3roz5XQpsPL+XB
- G71iDZ//DnmZyUlABpzZBin8;
+ bh=Ed4fK+ZnP6nEhONReVTtgBkffmW6wnsU1RMQraJBj68=; b=y0aKVQAsEyh/XBpYCaBN4HL+dH
+ nVuugCGriBiJ6yE/8Tysgv7RqZFBEHr1pES6oZ8oWX9JLF3l7uj8JwmLYYPRkYujgZmeJmDWOE0zM
+ V5FYoEDtoB/NnUABK/2kHmKauumhYNLq6FcsaA4wAlok1J+Y21YWhehg+1b0CxwkttKJ+9PRNgny8
+ s72bvtXCMzPSAc3SMR5x5vwsN0msXZRWNugYdKMUhtTMp7/km2RBqqXPUFU9shuIG/MCNnfsJMzFJ
+ xjcTo8o0zX07ffk2nWGrlomRoTVkRqWKosZ8wr99Zd70E6NLGfFkPmj/3GaMY1QSXZ3epcKBIJ0On
+ RoovSgGc+54osy+o5alY0ZIslvWKShitcZyFyy8dl/TERZi5ypFlCQdv5sSawIm7VIJnu2RHp1zRd
+ PI/ATF91N7W0IigjcvCuw+eUP91GgxEyLttD+2+XccqUAGAOPDdKcvAkmJbPZo2yfD0Ldxn+CW4qZ
+ JDQ7rGqBFqAxjHLjG4AD598n;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vAqXf-00AATL-0I; Mon, 20 Oct 2025 14:07:19 +0000
+ (Exim) id 1vAqYG-00AATl-2J; Mon, 20 Oct 2025 14:07:56 +0000
 To: linux-cifs@vger.kernel.org,
 	samba-technical@lists.samba.org
-Subject: [PATCH] smb: server: call smb_direct_post_recv_credits() when the
- negotiation is done
-Date: Mon, 20 Oct 2025 16:07:13 +0200
-Message-ID: <20251020140713.155001-1-metze@samba.org>
+Subject: [PATCH] smb: server: let smb_direct_cm_handler() call ib_drain_qp()
+ after smb_direct_disconnect_rdma_work()
+Date: Mon, 20 Oct 2025 16:07:53 +0200
+Message-ID: <20251020140753.155159-1-metze@samba.org>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -63,23 +63,25 @@ Cc: metze@samba.org, Steve French <smfrench@gmail.com>,
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-We now activate sc->recv_io.posted.refill_work and sc->idle.immediate_work
-only after a successful negotiation, before sending the negotiation
-response.
+All handlers triggered by ib_drain_qp() should already see the
+broken connection.
 
-It means the queue_work(sc->workqueue, &sc->recv_io.posted.refill_work)
-in put_recvmsg() of the negotiate request, is a no-op now.
+smb_direct_cm_handler() is called under a mutex of the rdma_cm,
+we should make sure ib_drain_qp() and all rdma layer logic completes
+and unlocks the mutex.
 
-It also means our explicit smb_direct_post_recv_credits() will
-have queue_work(sc->workqueue, &sc->idle.immediate_work) as no-op.
+It means free_transport() will also already see the connection
+as SMBDIRECT_SOCKET_DISCONNECTED, so we need to call
+crdma_[un]lock_handler(sc->rdma.cm_id) around
+ib_drain_qp(), rdma_destroy_qp(), ib_free_cq() and ib_dealloc_pd().
 
-This should make sure we don't have races and post any immediate
-data_transfer message that tries to grant credits to the peer,
-before we send the negotiation response, as that will grant
-the initial credits to the peer.
+Otherwise we free resources while the ib_drain_qp() within
+smb_direct_cm_handler() is still running.
 
-Fixes: 0626e6641f6b ("cifsd: add server handler for central processing and tranport layers")
-Fixes: 1cde0a74a7a8 ("smb: server: don't use delayed_work for post_recv_credits_work")
+We have to unlock before rdma_destroy_id() as it locks again.
+
+Fixes: 141fa9824c0f ("ksmbd: call ib_drain_qp when disconnected")
+Fixes: 4c564f03e23b ("smb: server: make use of common smbdirect_socket")
 Cc: Namjae Jeon <linkinjeon@kernel.org>
 Cc: Steve French <smfrench@gmail.com>
 Cc: Tom Talpey <tom@talpey.com>
@@ -87,83 +89,48 @@ Cc: linux-cifs@vger.kernel.org
 Cc: samba-technical@lists.samba.org
 Signed-off-by: Stefan Metzmacher <metze@samba.org>
 ---
- fs/smb/server/transport_rdma.c | 36 ++++++++++++++++++++++++++--------
- 1 file changed, 28 insertions(+), 8 deletions(-)
+ fs/smb/server/transport_rdma.c | 11 ++++++++---
+ 1 file changed, 8 insertions(+), 3 deletions(-)
 
 diff --git a/fs/smb/server/transport_rdma.c b/fs/smb/server/transport_rdma.c
-index 90cf5ab36103..1b597f9f85e3 100644
+index 1b597f9f85e3..019e5f70d7b3 100644
 --- a/fs/smb/server/transport_rdma.c
 +++ b/fs/smb/server/transport_rdma.c
-@@ -417,9 +417,6 @@ static struct smb_direct_transport *alloc_transport(struct rdma_cm_id *cm_id)
+@@ -465,6 +465,9 @@ static void free_transport(struct smb_direct_transport *t)
+ 	disable_delayed_work_sync(&sc->idle.timer_work);
+ 	disable_work_sync(&sc->idle.immediate_work);
  
- 	sc->ib.dev = sc->rdma.cm_id->device;
++	if (sc->rdma.cm_id)
++		rdma_lock_handler(sc->rdma.cm_id);
++
+ 	if (sc->ib.qp) {
+ 		ib_drain_qp(sc->ib.qp);
+ 		sc->ib.qp = NULL;
+@@ -493,8 +496,10 @@ static void free_transport(struct smb_direct_transport *t)
+ 		ib_free_cq(sc->ib.recv_cq);
+ 	if (sc->ib.pd)
+ 		ib_dealloc_pd(sc->ib.pd);
+-	if (sc->rdma.cm_id)
++	if (sc->rdma.cm_id) {
++		rdma_unlock_handler(sc->rdma.cm_id);
+ 		rdma_destroy_id(sc->rdma.cm_id);
++	}
  
--	INIT_WORK(&sc->recv_io.posted.refill_work,
--		  smb_direct_post_recv_credits);
--	INIT_WORK(&sc->idle.immediate_work, smb_direct_send_immediate_work);
- 	INIT_DELAYED_WORK(&sc->idle.timer_work, smb_direct_idle_connection_timer);
- 
- 	conn = ksmbd_conn_alloc();
-@@ -1862,7 +1859,6 @@ static int smb_direct_prepare_negotiation(struct smbdirect_socket *sc)
- 		goto out_err;
+ 	smb_direct_destroy_pools(sc);
+ 	ksmbd_conn_free(KSMBD_TRANS(t)->conn);
+@@ -1682,10 +1687,10 @@ static int smb_direct_cm_handler(struct rdma_cm_id *cm_id,
  	}
- 
--	smb_direct_post_recv_credits(&sc->recv_io.posted.refill_work);
- 	return 0;
- out_err:
- 	put_recvmsg(sc, recvmsg);
-@@ -2205,8 +2201,8 @@ static int smb_direct_prepare(struct ksmbd_transport *t)
- 		return -ECONNABORTED;
- 
- 	ret = smb_direct_check_recvmsg(recvmsg);
--	if (ret == -ECONNABORTED)
--		goto out;
-+	if (ret)
-+		goto put;
- 
- 	req = (struct smbdirect_negotiate_req *)recvmsg->packet;
- 	sp->max_recv_size = min_t(int, sp->max_recv_size,
-@@ -2221,14 +2217,38 @@ static int smb_direct_prepare(struct ksmbd_transport *t)
- 	sc->recv_io.credits.target = min_t(u16, sc->recv_io.credits.target, sp->recv_credit_max);
- 	sc->recv_io.credits.target = max_t(u16, sc->recv_io.credits.target, 1);
- 
--	ret = smb_direct_send_negotiate_response(sc, ret);
--out:
-+put:
- 	spin_lock_irqsave(&sc->recv_io.reassembly.lock, flags);
- 	sc->recv_io.reassembly.queue_length--;
- 	list_del(&recvmsg->list);
- 	spin_unlock_irqrestore(&sc->recv_io.reassembly.lock, flags);
- 	put_recvmsg(sc, recvmsg);
- 
-+	if (ret == -ECONNABORTED)
-+		return ret;
-+
-+	if (ret)
-+		goto respond;
-+
-+	/*
-+	 * We negotiated with success, so we need to refill the recv queue.
-+	 * We do that with sc->idle.immediate_work still being disabled
-+	 * via smbdirect_socket_init(), so that queue_work(sc->workqueue,
-+	 * &sc->idle.immediate_work) in smb_direct_post_recv_credits()
-+	 * is a no-op.
-+	 *
-+	 * The message that grants the credits to the client is
-+	 * the negotiate response.
-+	 */
-+	INIT_WORK(&sc->recv_io.posted.refill_work, smb_direct_post_recv_credits);
-+	smb_direct_post_recv_credits(&sc->recv_io.posted.refill_work);
-+	if (unlikely(sc->first_error))
-+		return sc->first_error;
-+	INIT_WORK(&sc->idle.immediate_work, smb_direct_send_immediate_work);
-+
-+respond:
-+	ret = smb_direct_send_negotiate_response(sc, ret);
-+
- 	return ret;
- }
- 
+ 	case RDMA_CM_EVENT_DEVICE_REMOVAL:
+ 	case RDMA_CM_EVENT_DISCONNECTED: {
+-		ib_drain_qp(sc->ib.qp);
+-
+ 		sc->status = SMBDIRECT_SOCKET_DISCONNECTED;
+ 		smb_direct_disconnect_rdma_work(&sc->disconnect_work);
++		if (sc->ib.qp)
++			ib_drain_qp(sc->ib.qp);
+ 		break;
+ 	}
+ 	case RDMA_CM_EVENT_CONNECT_ERROR: {
 -- 
 2.43.0
 
