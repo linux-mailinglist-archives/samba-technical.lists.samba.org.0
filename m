@@ -2,112 +2,113 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8ECF4BF8154
-	for <lists+samba-technical@lfdr.de>; Tue, 21 Oct 2025 20:31:36 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 13E96BF836C
+	for <lists+samba-technical@lfdr.de>; Tue, 21 Oct 2025 21:16:16 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=w4OPQpBnM9UbDEJOXWl1ciajNf+iPRNTQkoglGHDRe0=; b=a8W8N3qupUU+4xY7DHHvqAUa0b
-	JNTV40jct/AREsR2c+z03Lv2vyMekIaSJ9D4OmbMhCV+g312V2lWseiZUX/YU2vBgWLYMYsWYIwPI
-	fwjfiDG1zMs+3Yk5aqmEXxaQghsRq/XAQiNUJllf2gSAp3z0KUnBi+s+WreMW9PI7IVFSP5aj/8GV
-	fDp/EM3z6z8XaEfGKsAXxvt2wWYslRsnpaZLM4wy07kluX/PpeA3tBlqcL7qLjlqn5RGERnIIqKIb
-	3JbnOPQFXRiQ4SDQvMyoZqGA0ZZpmDSKhWlmuwQ66YIQ3efTZ8eZf2VjrbK3OJpJR571CK2jRXKby
-	oNmdk3pg==;
-Received: from ip6-localhost ([::1]:31320 helo=hr1.samba.org) 
+	bh=vqGj01DN27mHnPeSIAF/3BxVWcaGy6GuoNC93tL0ScQ=; b=tB6yN+kAECt9wrzD3tYYSIAzpp
+	wQbmbae8jr2ReZPJrn1XZrKhxHl+O1LgHpRAwa1CYk+9VnWfWG/lZAL5DqOCHGfHB2DMdSN2MYT7N
+	laTg9nMJOJI8mo7hCyJF1UkT9vNrFX9gLocdz86WDvcmNTcKSUogY7CX9NiWels8gYhlEwmsK692l
+	yRNOP7hrH8gygwwvnVXqpmKikTmV0bVAJ6vtPwBP50syH6ouMpDmVMTR6M7HAvREJTOZDeaAyFIb6
+	KQGZvOewVBbSsnR2DCHx8EzQyAiIDzFy17LKfccNFa7rVA1GBFNJwYJvJb3gsaPJy/Aft32TT6Bu+
+	RZsUD+Pw==;
+Received: from ip6-localhost ([::1]:30256 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1vBH8i-008SJk-D8; Tue, 21 Oct 2025 18:31:20 +0000
-Received: from smtp-out1.suse.de ([195.135.223.130]:37340) 
+	id 1vBHpl-008STQ-De; Tue, 21 Oct 2025 19:15:49 +0000
+Received: from smtp-out2.suse.de ([195.135.223.131]:33640) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vBH8d-008SJc-3Y
- for samba-technical@lists.samba.org; Tue, 21 Oct 2025 18:31:17 +0000
+ (Exim) id 1vBHpf-008STE-EE
+ for samba-technical@lists.samba.org; Tue, 21 Oct 2025 19:15:47 +0000
 Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
  [IPv6:2a07:de40:b281:104:10:150:64:97])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id CF18E2119B;
- Tue, 21 Oct 2025 18:31:03 +0000 (UTC)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 17A561F397;
+ Tue, 21 Oct 2025 19:15:23 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1761071468; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ t=1761074128; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=w4OPQpBnM9UbDEJOXWl1ciajNf+iPRNTQkoglGHDRe0=;
- b=Z9jYua8RM8+EUG/4OR/gNdPX4fL2zIiKkH8pBqnzCGXhSdZLgSpKBZj2t+PBEZhIYFzuMj
- dnoaTd/wMWCa+C+OICCbvlEHB6KM0rnYlnDpT7bfB+sRUqQhfWnoO0f2mPWYV9XzGj7y64
- mHOOoPh4ZKEmjUPo0L/RFDLQxSa0GBU=
+ bh=vqGj01DN27mHnPeSIAF/3BxVWcaGy6GuoNC93tL0ScQ=;
+ b=z9c6K2ttDFat2ZUXB3s6qspF3+1b6f72T6t4WrntUcykb4MoMgYBW0rmLTVa7PVBJ3hgOC
+ 4OdosfsuNlBmCBqffRwwEghC/4q/CxnZlmKWj79/+nj/y60TEWSsvLQaOKAfoqw8L2kUpm
+ 09Ah6/B+QmNPp2Iv9MxFwO4U90JHNKM=
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1761071468;
+ s=susede2_ed25519; t=1761074128;
  h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=w4OPQpBnM9UbDEJOXWl1ciajNf+iPRNTQkoglGHDRe0=;
- b=Mn8JeTb5EHBUNSHCpJ1tjmtwb0DoIcWUAMksjJyaUUkOUO/0hTeiQGVNMlHye4g7S1wpws
- sGUpf+mOW0iMAyCw==
-Authentication-Results: smtp-out1.suse.de;
- dkim=pass header.d=suse.de header.s=susede2_rsa header.b=cB0qYvwY;
- dkim=pass header.d=suse.de header.s=susede2_ed25519 header.b="WH/arlKf"
+ bh=vqGj01DN27mHnPeSIAF/3BxVWcaGy6GuoNC93tL0ScQ=;
+ b=r4PeKDROEg5JVPVBHWuP8m0pRae9yGpK+b3GBjbQ7qFCrEer1du95SAjqF8gf5i0Qk4s4/
+ Ciw76cxTZnQ24ADQ==
+Authentication-Results: smtp-out2.suse.de;
+ dkim=pass header.d=suse.de header.s=susede2_rsa header.b=dg2+NH2G;
+ dkim=pass header.d=suse.de header.s=susede2_ed25519 header.b=Su9DZB7F
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1761071463; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ t=1761074123; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=w4OPQpBnM9UbDEJOXWl1ciajNf+iPRNTQkoglGHDRe0=;
- b=cB0qYvwYpDfvA/BrJ/QdXljz4X4fojlYcGIujxW5K/+AOyuRlVI+J5Kbj0g0l1RImGK17l
- 363Ut3NsL2vDB1v88Rq72XXXIj5130PfeSNy1ZkcmjH6zwJ93zhybbAKTPBAUK1i4J/CvE
- PZ26Vcy/3MWT7Xi2geVSZ07JisXUH7I=
+ bh=vqGj01DN27mHnPeSIAF/3BxVWcaGy6GuoNC93tL0ScQ=;
+ b=dg2+NH2Gj7wSCpRDg5F7TC2p1Eq78w+LutqB4SFMzlSYXVBwa7PALKmIBOoWFGB0e+sUWs
+ cljtGUtXMyxod0/uXjFq4fGBWYJY+UmRbuuyLKUTLbyvsTmHcXE+7L4yU7bKPbBimKtPz/
+ 1k+cHREDLLFL+JRGt6Tlpi6ekLeOWNQ=
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1761071463;
+ s=susede2_ed25519; t=1761074123;
  h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=w4OPQpBnM9UbDEJOXWl1ciajNf+iPRNTQkoglGHDRe0=;
- b=WH/arlKf9vBsHSF4JyRqctA9o/5n7xDTlXYcJePzKPpn1xV0KYur6KIRspkpcabQOe9UWO
- eNZPBccJ2gweuxCA==
+ bh=vqGj01DN27mHnPeSIAF/3BxVWcaGy6GuoNC93tL0ScQ=;
+ b=Su9DZB7FD4/eKypSPhKgc0swLmoUMFq45UJc1JKAwkm0mkuRtuP2NHyt+WCVHjupKo7fb0
+ XaQ+beXNg/5UApAA==
 Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 5C834139B1;
- Tue, 21 Oct 2025 18:31:03 +0000 (UTC)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 8A9EC139D2;
+ Tue, 21 Oct 2025 19:15:22 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id +R9jCWfR92h9VQAAD6G6ig
- (envelope-from <ematsumiya@suse.de>); Tue, 21 Oct 2025 18:31:03 +0000
-Date: Tue, 21 Oct 2025 15:30:57 -0300
-To: Steve French <smfrench@gmail.com>
+ by imap1.dmz-prg2.suse.org with ESMTPSA id C2SaFMrb92j8fQAAD6G6ig
+ (envelope-from <ematsumiya@suse.de>); Tue, 21 Oct 2025 19:15:22 +0000
+Date: Tue, 21 Oct 2025 16:15:20 -0300
+To: Thomas Spear <speeddymon@gmail.com>
 Subject: Re: mount.cifs fails to negotiate AES-256-GCM but works when
  enforced via sysfs or modprobe options
-Message-ID: <eksh6mo4hhijkea2o3lalpbsoju7sp4nwwvo62l2fhs7hkvaid@6aisea5jt3f2>
+Message-ID: <rsmt3c27mnkm2nprau6waeexxpo3y3fg43rzxjj7gxbwor3mwh@6yppid4sbeej>
 References: <CAEAsNvQmV=xFsU-4jn9zC2DYoAUjXTS3qcsGNe7XUZEEXg1cLg@mail.gmail.com>
  <CAH2r5mtCjCvYphEAWir9PtxWQUy51jiir2Lk8erubUetX8TAbQ@mail.gmail.com>
+ <eksh6mo4hhijkea2o3lalpbsoju7sp4nwwvo62l2fhs7hkvaid@6aisea5jt3f2>
+ <CAEAsNvTNf14E8iVrtptzSqQ4Gq8QsM4sHpJ0tfTyt4mkFWCk7w@mail.gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Type: text/plain; charset=us-ascii; format=flowed
 Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-In-Reply-To: <CAH2r5mtCjCvYphEAWir9PtxWQUy51jiir2Lk8erubUetX8TAbQ@mail.gmail.com>
-X-Rspamd-Queue-Id: CF18E2119B
-X-Rspamd-Server: rspamd2.dmz-prg2.suse.org
+In-Reply-To: <CAEAsNvTNf14E8iVrtptzSqQ4Gq8QsM4sHpJ0tfTyt4mkFWCk7w@mail.gmail.com>
+X-Spam-Flag: NO
+X-Rspamd-Queue-Id: 17A561F397
+X-Rspamd-Action: no action
+X-Rspamd-Server: rspamd1.dmz-prg2.suse.org
 X-Spamd-Result: default: False [-4.01 / 50.00]; BAYES_HAM(-3.00)[99.99%];
  NEURAL_HAM_LONG(-1.00)[-1.000]; MID_RHS_NOT_FQDN(0.50)[];
  R_DKIM_ALLOW(-0.20)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
  NEURAL_HAM_SHORT(-0.20)[-1.000]; MIME_GOOD(-0.10)[text/plain];
  MX_GOOD(-0.01)[];
- RECEIVED_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:106:10:150:64:167:received];
- RCVD_TLS_ALL(0.00)[]; MIME_TRACE(0.00)[0:+]; ARC_NA(0.00)[];
- TO_DN_SOME(0.00)[]; RCVD_VIA_SMTP_AUTH(0.00)[];
- MISSING_XM_UA(0.00)[]; FREEMAIL_TO(0.00)[gmail.com];
- FREEMAIL_ENVRCPT(0.00)[gmail.com];
  DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
- FROM_HAS_DN(0.00)[];
+ TO_MATCH_ENVRCPT_ALL(0.00)[]; FREEMAIL_TO(0.00)[gmail.com];
+ ARC_NA(0.00)[];
+ RBL_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:104:10:150:64:97:from]; 
+ MIME_TRACE(0.00)[0:+];
+ SPAMHAUS_XBL(0.00)[2a07:de40:b281:104:10:150:64:97:from];
+ FREEMAIL_ENVRCPT(0.00)[gmail.com];
  FREEMAIL_CC(0.00)[gmail.com,lists.samba.org,vger.kernel.org];
- RCPT_COUNT_THREE(0.00)[4]; FROM_EQ_ENVFROM(0.00)[];
- DBL_BLOCKED_OPENRESOLVER(0.00)[suse.de:dkim,imap1.dmz-prg2.suse.org:helo,imap1.dmz-prg2.suse.org:rdns];
- RCVD_COUNT_TWO(0.00)[2]; TO_MATCH_ENVRCPT_ALL(0.00)[];
- DKIM_TRACE(0.00)[suse.de:+]
-X-Rspamd-Action: no action
-X-Spam-Flag: NO
+ RCVD_TLS_ALL(0.00)[]; RCVD_COUNT_TWO(0.00)[2];
+ FROM_EQ_ENVFROM(0.00)[]; FROM_HAS_DN(0.00)[];
+ TO_DN_SOME(0.00)[];
+ RECEIVED_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:106:10:150:64:167:received];
+ MISSING_XM_UA(0.00)[]; RCVD_VIA_SMTP_AUTH(0.00)[];
+ DKIM_TRACE(0.00)[suse.de:+]; RCPT_COUNT_THREE(0.00)[4];
+ DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:rdns,
+ imap1.dmz-prg2.suse.org:helo]
 X-Spam-Score: -4.01
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
@@ -124,89 +125,60 @@ List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
 From: Enzo Matsumiya via samba-technical <samba-technical@lists.samba.org>
 Reply-To: Enzo Matsumiya <ematsumiya@suse.de>
-Cc: linux-cifs@vger.kernel.org,
- samba-technical <samba-technical@lists.samba.org>,
- Thomas Spear <speeddymon@gmail.com>
+Cc: Steve French <smfrench@gmail.com>,
+ samba-technical <samba-technical@lists.samba.org>, linux-cifs@vger.kernel.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On 10/21, Steve French wrote:
->Good catch - this looks very important.
+On 10/21, Thomas Spear wrote:
+>This sort-of makes sense as to why it's happening. I can understand
+>some code so what I see here is:
 >
->Do you remember if Samba support gcm256 signing?
+>>  else if (enable_gcm_256) {
+>>                   pneg_ctxt->DataLength = cpu_to_le16(8); /* Cipher Count + 3 ciphers */
+>>                   pneg_ctxt->CipherCount = cpu_to_le16(3);
+>>                   pneg_ctxt->Ciphers[0] = SMB2_ENCRYPTION_AES128_GCM;
+>>                   pneg_ctxt->Ciphers[1] = SMB2_ENCRYPTION_AES256_GCM;
+>>                   pneg_ctxt->Ciphers[2] = SMB2_ENCRYPTION_AES128_CCM;
+>
+>Here, AES-256-GCM is second to AES-128-GCM when enable_gcm_256 is
+>true, but if AES-256-GCM is still present as one of the ciphers as per
+>this snipped, and the server doesn't support AES-128-GCM, shouldn't it
+>fall-forward to AES-256-GCM instead of causing an error?
 
-This is for encryption on Azure.
+That's correct.
 
->On Mon, Oct 20, 2025 at 3:52=E2=80=AFPM Thomas Spear <speeddymon@gmail.com=
-> wrote:
->>
->> First time emailing here, I hope I'm writing to the correct place.
->>
->> I have an Azure Storage account that has been configured with an Azure
->> Files share to allow only AES-256-GCM channel encryption with NTLMv2
->> authentication via SMB, and I have a linux client which is running
->> Ubuntu 24.04 and has the Ubuntu version of cifs-utils 7.0 installed,
->> however after looking at the release notes for the later upstream
->> releases I don't think this is specific to this version and rather it
->> is an issue in the upstream.
->>
->> When I try to mount an Azure Files share over SMB, I get a mount error
->> 13. However, if I do either of the following, I'm able to successfully
->> mount.
->>
->> 1. Enable AES-128-GCM on the storage account
->> 2. Keep AES-128-GCM disabled on the storage account, but enforce
->> AES-256-GCM on the client side by running 'echo 1 >
->> /sys/module/cifs/parameters/require_gcm_256' after loading the cifs
->> module with modprobe.
+But I also see it working fine against Windows Server 2022.
 
-@Thomas:
-Yes, that happens because cifs sends AES-128-GCM as the preferred
-algorithm:
+On server:
+   > Set-SmbServerConfiguration -EncryptionCiphers "AES_256_GCM"
 
-(you said you're not a developer, but this illustrates what happens)
+On client:
+   # mount.cifs -o ...,seal //srv/test /mnt/test
+   # cat /sys/module/cifs/parameters/require_gcm_256
+   N
+   # cat /sys/module/cifs/parameters/enable_gcm_256
+   Y
+   # grep Encryption /proc/fs/cifs/DebugData
+   Encryption: Negotiated cipher (AES256-GCM)
 
-   static void
-   build_encrypt_ctxt(struct smb2_encryption_neg_context *pneg_ctxt)
-   {
-           pneg_ctxt->ContextType =3D SMB2_ENCRYPTION_CAPABILITIES;
-           if (require_gcm_256) {
-                   pneg_ctxt->DataLength =3D cpu_to_le16(4); /* Cipher Coun=
-t + 1 cipher */
-                   pneg_ctxt->CipherCount =3D cpu_to_le16(1);
-                   pneg_ctxt->Ciphers[0] =3D SMB2_ENCRYPTION_AES256_GCM;
-           } else if (enable_gcm_256) {
-                   pneg_ctxt->DataLength =3D cpu_to_le16(8); /* Cipher Coun=
-t + 3 ciphers */
-                   pneg_ctxt->CipherCount =3D cpu_to_le16(3);
-                   pneg_ctxt->Ciphers[0] =3D SMB2_ENCRYPTION_AES128_GCM;
-                   pneg_ctxt->Ciphers[1] =3D SMB2_ENCRYPTION_AES256_GCM;
-                   pneg_ctxt->Ciphers[2] =3D SMB2_ENCRYPTION_AES128_CCM;
-           } else {
-                   pneg_ctxt->DataLength =3D cpu_to_le16(6); /* Cipher Coun=
-t + 2 ciphers */
-                   pneg_ctxt->CipherCount =3D cpu_to_le16(2);
-                   pneg_ctxt->Ciphers[0] =3D SMB2_ENCRYPTION_AES128_GCM;
-                   pneg_ctxt->Ciphers[1] =3D SMB2_ENCRYPTION_AES128_CCM;
-           }
-   }
+> IOW, I'm
+>wondering if there's an issue elsewhere that's preventing the
+>AES-256-GCM cipher from being used and reordering would simply
+>band-aid the issue.
+>
+>> so if the server supports AES-256-GCM, the only way to make cifs use it
+>> is with 'require_gcm_256', unless you disable AES-128-GCM on the server
+>> (as you have observed).
+>
+>Actually, the issue I'm observing is that _when_ we disable
+>AES-128-GCM on the server (Azure Files), mount.cifs on the client is
+>failing to mount the share completely _until_ I set require_gcm_256.
 
-so if the server supports AES-256-GCM, the only way to make cifs use it
-is with 'require_gcm_256', unless you disable AES-128-GCM on the server
-(as you have observed).
+Azure sometimes responds with unexpected (sometimes even out of spec)
+settings.
 
-I don't really know/understand the reasoning for this, but it's probably
-because Windows follows that order.  AFAIK the performance difference
-between AES-GCM 128 and 256 should be negligible (to the user) nowadays.
-
-IMO we should reorder this to prefer AES-256-GCM by default, hence drop
-the {require,enable}_gcm_256 parameters, and make it an opt-out thing
-instead (Steve?).
-
-
-* Also @Steve, I just noticed we handle AES-256-CCM everywhere else, but
-   never actually negotiate it.  Apparently nobody ever complained about
-   it not existing/working, so maybe just drop it?
+I'll setup an Azure Files instance to test this.
 
 
 Cheers,
