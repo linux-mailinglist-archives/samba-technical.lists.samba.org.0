@@ -2,80 +2,104 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id BC018BFB325
-	for <lists+samba-technical@lfdr.de>; Wed, 22 Oct 2025 11:40:28 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E40B4BFFD88
+	for <lists+samba-technical@lfdr.de>; Thu, 23 Oct 2025 10:20:51 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=8ukEQaq0c5jeyNX3v0TzyCmPMq7VD3+tVPGRvr+djkg=; b=q5Lx4Vsg9umo1fa8YQ7W1MD+AE
-	N3hBvjZh8rGZolS/59wddTJbV70i4/tTN/VbOsYM0BtLbaf/QtcJL2SH/uegYKTVZvWgSQvlIsVDl
-	eO+Wf+yAnsluBZ2ap4HRWV5ZyCO7jhmSc54y7zCUT3fyosGMzTnJrrJ9jaZR3Zop3HeqHwXrPEMjJ
-	79romYrCzSGYkDl2Y4KndELkIf8MDUX8NgN9tCvcjM0q7f37gHkh4yjwqLU93UoDiubiQTakS/law
-	Tup8Rr5R/HFmSi+XXZj0Ih+fd4dEf3TN1LOxdgxUl8PxtjgCq37hD9ttmPUno2BVZm5VEh29cEfkF
-	646YCCUA==;
-Received: from ip6-localhost ([::1]:59206 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=3ILnujSjCtzliBVQlHu/pU5YVaYGg09jhAWEZowBEYI=; b=o+yuoPblIgW0w8AAqLMgC865ex
+	HIHr3UB2T/O4dqZfZ8C56x6KPkUUTqU36qjsWdgkworuMD31XTB3zjzy7Rhs41TLtnlIuPb5tIxOV
+	CyqOOMgz5IsaxYeDgikqAA584t3NnydXNKq42wdCZ5oDyt9SQlmXs9LBahMIsN905EZeYrQpRWFX0
+	95FMDY93gyhWDKtgA4M4iqN4tSDm/Yy5gu0FFbL+zESaJwgPqOv2TDil6YqzKgOnP4INXHmAb9nps
+	Du7VYkksCChAYAon9b4NHu0kSLnR3WLwNOMrR9GHSLv/ABmzTr5eg9bFhgWZMz6JwQTWTTw8jpjOG
+	u8XSZzkA==;
+Received: from ip6-localhost ([::1]:37668 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1vBVKK-008Uh3-2e; Wed, 22 Oct 2025 09:40:16 +0000
-Received: from mail-qv1-xf29.google.com ([2607:f8b0:4864:20::f29]:43185) 
+	id 1vBqY8-008Yhb-Fw; Thu, 23 Oct 2025 08:19:56 +0000
+Received: from smtp-out2.suse.de ([2a07:de40:b251:101:10:150:64:2]:55800) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vBVKD-008Ugs-TO
- for samba-technical@lists.samba.org; Wed, 22 Oct 2025 09:40:13 +0000
-Received: by mail-qv1-xf29.google.com with SMTP id
- 6a1803df08f44-87a092251eeso10267906d6.0
- for <samba-technical@lists.samba.org>; Wed, 22 Oct 2025 02:40:09 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1761126008; x=1761730808; darn=lists.samba.org;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=B7XGUkoweaSg16Up6jjogdkIKMgWk1WC/X9yYJ/JPnw=;
- b=SGuW6pSWX0Da18jMnHJDlm4g8y3JQRJCTmyNvsag0Eu6wr9NALOh9pXW6e9vLYLU6M
- OiAmrN6PC/OnNYnXUXa3EuNw0t45B38d962k2iAP6rspWcVnIRkE9N71syWpA7V9VVLZ
- uqybAdm3QK09GfhlumcL3iWUd6Srn7UA0hAjVSdDRqeNHtB5qGi6EbRYzJUZP5+bfO/+
- u2uvedTRRXZFTx/NyPozh75c12sGQtD9WJcrYnwET6yEw8f4oPAwUtq9PObAS9egWKat
- XvBLu/rnEDcc1tnjOwgHdUJk1ND89yB6Ozto/pyLglit+QGkYZpl5XGUKIZcA72q4rKi
- +VTA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761126008; x=1761730808;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=B7XGUkoweaSg16Up6jjogdkIKMgWk1WC/X9yYJ/JPnw=;
- b=M1RcHkwWfy+w/xw2pRpLUwPgHnjrCmikUagM3BEuhewLqxBVrClqcLsOV4tdVnFcZj
- fjHl6cHB8KvUXb6nQAKO8sQ4vRCDuz6kQS3Ez9RGlbLt2e/fQQ78AiITBFE9YnwnbBF/
- QZvrHGwB6hFM3xuYLxR9wl88O4Oen4vPriIYbHmSytEgrONhORP/MM8hYkF1z2XTIJ2E
- AIMR0KI32mF0TEUiowAjJvl7INLDO0eCqtxdEZJkjJpXG4qEc41BfLdBgD7hLKxZGJD1
- B6Nq2kS2CA7sooEnblgBI1+J6T2ExwA9oOGfpSl4jTNghnJi4r6aub2RMn2E9AZSfv3z
- HJEQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW/eOZDVUjoc+apJ9INGrDYK1hT577cUUBk+Nmc+gSYznBh5oimg90LRKWTXK12ag79rxOCqKIzw5FlZHAM+wY=@lists.samba.org
-X-Gm-Message-State: AOJu0YyhaOujgunDE8qZ0jfRi73POhmcsdRKODZBujBrmV7D4gPvI3bF
- dNUiX4l2BvMS9IwyU0LDRtTZFHiyTTZhAMLT9oLOygyD/yPJpTn0SYvxEqOSvVBD3cV8q+VhSr+
- 1k0TYd+X3yFF4E56H4X8FIsMByEK9imo=
-X-Gm-Gg: ASbGncsX/YhPT3ZEirL5X1u3ZJdcgnnUujJcQA430A5trbIZXOcyP2Uo+GzIBYY5Uzk
- ggQP0W1GuLXvjxza6IG7Pbf9TVMMu37mhqD23M1aGGU2AN/4vFn6kNWyHbVYzVopJMpldxVxwI8
- Pm4gUpj4dI/IG1zR4gK9GKExBE8oybd8wu5wxChTE5ScAi3vrlpzbKWMRmM+TV9gFMxvBRJV8pU
- RaaC40HQushbPs4tGcBJzJnOucS4n/vdY3braDiRjT0VKVduqNZeQzJdTJFjr2DvpHScTI8D+Kw
- YK5liB6Qu3C9Stfm62XLs1uoMdfgyadbvet4AdfT2lB+AAVwtkabBAPX2Gx7TPkwwZW3mROjdzx
- MaJtXuMbRt5SbJUD0utXtb2GCO1wVn1COSc2bjncfvw7VD2V04RZcQEcXUhdnY3WkuXGLveqbd6
- cVJB8tHGo/
-X-Google-Smtp-Source: AGHT+IE5PAr/eOHHtDcl2NGpBfle/70/rxDCMRJvlwp+EvoZWMQ6xz+l4wmrUPDgFkCb+U+8enAXDKJdEXuZsBJiBDQ=
-X-Received: by 2002:ad4:5ced:0:b0:87d:fc0c:a62a with SMTP id
- 6a1803df08f44-87dfc0ca945mr10281396d6.18.1761126007956; Wed, 22 Oct 2025
- 02:40:07 -0700 (PDT)
+ (Exim) id 1vBUft-008US1-Al
+ for samba-technical@lists.samba.org; Wed, 22 Oct 2025 08:58:31 +0000
+Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 49AC71F769;
+ Wed, 22 Oct 2025 08:58:17 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
+ t=1761123501; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=3ILnujSjCtzliBVQlHu/pU5YVaYGg09jhAWEZowBEYI=;
+ b=INyd/zK+xbJrcBrQVb1B+Yzk4eqchns/Tixsdy/uw1Nvg4bMxgyr6lWwMItdZ99o+4Tuvf
+ OC0hU2cAhalh409HahdTDkVdMCCD7XyZKnP1jl1fjkN+k90WXWdqlzfuilU1SIDvaWhJnV
+ tOIwDSF4wAGfHlVHgE9+9WLnAlgRKZk=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
+ s=susede2_ed25519; t=1761123501;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=3ILnujSjCtzliBVQlHu/pU5YVaYGg09jhAWEZowBEYI=;
+ b=JHYByJ7ohXRRBYIT4/WvR7ocJK2/PS/xHMwzuH+PQEE5hE750Jc2Hy5mNhhsC0NAtZLpix
+ 5Y7fVY+g/1HMtgCw==
+Authentication-Results: smtp-out2.suse.de;
+	none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
+ t=1761123497; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=3ILnujSjCtzliBVQlHu/pU5YVaYGg09jhAWEZowBEYI=;
+ b=0CuB5OkPCWFD9UEYoTzMlzHLl+3oq9dfRcDjqZIMD9aromE7ewtK1hvwwfD4lKCvAcpuea
+ xo837RjPid/V6z3s7X46oFCDtfuX6lUjn5Pi/1Soy69AMixNZiC++5N1rG0SoFnY2kWQaJ
+ 2OgVFzyOWaRz3Jz7sbVXc6JNkbRexXE=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
+ s=susede2_ed25519; t=1761123497;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=3ILnujSjCtzliBVQlHu/pU5YVaYGg09jhAWEZowBEYI=;
+ b=58uCDXvn81FxryP0z2T8/eVDp8/QLdcE2k7txaL8huaOyvLzEn4iOUu913pIG1VGP1Sz0u
+ JhbWSOIRff+dmkAA==
+Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 3197813A29;
+ Wed, 22 Oct 2025 08:58:17 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
+ by imap1.dmz-prg2.suse.org with ESMTPSA id 31wSDKmc+Gg1aAAAD6G6ig
+ (envelope-from <jack@suse.cz>); Wed, 22 Oct 2025 08:58:17 +0000
+Received: by quack3.suse.cz (Postfix, from userid 1000)
+ id D0A3DA0990; Wed, 22 Oct 2025 10:58:16 +0200 (CEST)
+Date: Wed, 22 Oct 2025 10:58:16 +0200
+To: Jeff Layton <jlayton@kernel.org>
+Subject: Re: [PATCH v3 01/13] filelock: push the S_ISREG check down to
+ ->setlease handlers
+Message-ID: <vimhf2fgjnwcavlxevt5cnsfkgjdps6z545nb7cmknwodnewds@rtxxompo53xx>
+References: <20251021-dir-deleg-ro-v3-0-a08b1cde9f4c@kernel.org>
+ <20251021-dir-deleg-ro-v3-1-a08b1cde9f4c@kernel.org>
 MIME-Version: 1.0
-References: <CAEAsNvQmV=xFsU-4jn9zC2DYoAUjXTS3qcsGNe7XUZEEXg1cLg@mail.gmail.com>
- <CAH2r5mtCjCvYphEAWir9PtxWQUy51jiir2Lk8erubUetX8TAbQ@mail.gmail.com>
- <5023741.vXUDI8C0e8@magrathea>
-In-Reply-To: <5023741.vXUDI8C0e8@magrathea>
-Date: Wed, 22 Oct 2025 04:39:55 -0500
-X-Gm-Features: AS18NWBSurwtqfUT5MRdlQNoudWZSg9St-5Cjl-wlfvaSGHkr72JkBWmaBIZ7Xk
-Message-ID: <CAH2r5msCZJ5=QWJCZYSEw_AUL06a0=uguv1V=TcTGbVYLzJ4ZQ@mail.gmail.com>
-Subject: Re: mount.cifs fails to negotiate AES-256-GCM but works when enforced
- via sysfs or modprobe options
-To: Andreas Schneider <asn@samba.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20251021-dir-deleg-ro-v3-1-a08b1cde9f4c@kernel.org>
+X-Spamd-Result: default: False [-2.30 / 50.00]; BAYES_HAM(-3.00)[100.00%];
+ SUSPICIOUS_RECIPS(1.50)[]; NEURAL_HAM_LONG(-1.00)[-1.000];
+ MID_RHS_NOT_FQDN(0.50)[]; NEURAL_HAM_SHORT(-0.20)[-1.000];
+ MIME_GOOD(-0.10)[text/plain]; RCVD_VIA_SMTP_AUTH(0.00)[];
+ ARC_NA(0.00)[]; MIME_TRACE(0.00)[0:+]; TO_DN_SOME(0.00)[];
+ MISSING_XM_UA(0.00)[]; RCPT_COUNT_TWELVE(0.00)[44];
+ TAGGED_RCPT(0.00)[]; FREEMAIL_ENVRCPT(0.00)[gmail.com];
+ R_RATELIMIT(0.00)[to_ip_from(RL63fqwwx8ot6gmekemcs76f9d)];
+ FROM_HAS_DN(0.00)[];
+ FREEMAIL_CC(0.00)[szeredi.hu,zeniv.linux.org.uk,kernel.org,suse.cz,oracle.com,gmail.com,samba.org,manguebit.org,microsoft.com,talpey.com,linuxfoundation.org,redhat.com,tyhicks.com,brown.name,chromium.org,google.com,davemloft.net,vger.kernel.org,lists.samba.org,lists.linux.dev];
+ RCVD_COUNT_THREE(0.00)[3]; FROM_EQ_ENVFROM(0.00)[];
+ RCVD_TLS_LAST(0.00)[]; TO_MATCH_ENVRCPT_ALL(0.00)[];
+ DKIM_SIGNED(0.00)[suse.cz:s=susede2_rsa,suse.cz:s=susede2_ed25519];
+ DBL_BLOCKED_OPENRESOLVER(0.00)[suse.com:email, imap1.dmz-prg2.suse.org:helo,
+ suse.cz:email]
+X-Spam-Flag: NO
+X-Spam-Score: -2.30
+X-Mailman-Approved-At: Thu, 23 Oct 2025 08:19:54 +0000
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -89,38 +113,132 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
-Cc: CIFS <linux-cifs@vger.kernel.org>,
- samba-technical <samba-technical@lists.samba.org>,
- Thomas Spear <speeddymon@gmail.com>
+From: Jan Kara via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jan Kara <jack@suse.cz>
+Cc: Alexander Aring <alex.aring@gmail.com>, Jan Kara <jack@suse.cz>,
+ Paulo Alcantara <pc@manguebit.org>, "Rafael J. Wysocki" <rafael@kernel.org>,
+ Carlos Maiolino <cem@kernel.org>, Amir Goldstein <amir73il@gmail.com>,
+ linux-unionfs@vger.kernel.org, David Howells <dhowells@redhat.com>,
+ Eric Dumazet <edumazet@google.com>, Danilo Krummrich <dakr@kernel.org>,
+ linux-cifs@vger.kernel.org, Kuniyuki Iwashima <kuniyu@google.com>,
+ Miklos Szeredi <miklos@szeredi.hu>, Dai Ngo <Dai.Ngo@oracle.com>,
+ Tyler Hicks <code@tyhicks.com>, Steve French <smfrench@gmail.com>,
+ NeilBrown <neil@brown.name>, Jakub Kicinski <kuba@kernel.org>,
+ Paolo Abeni <pabeni@redhat.com>, Namjae Jeon <linkinjeon@kernel.org>,
+ Shyam Prasad N <sprasad@microsoft.com>,
+ Olga Kornievskaia <okorniev@redhat.com>, Simon Horman <horms@kernel.org>,
+ ecryptfs@vger.kernel.org, linux-nfs@vger.kernel.org,
+ Tom Talpey <tom@talpey.com>, Bharath SM <bharathsm@microsoft.com>,
+ Alexander Viro <viro@zeniv.linux.org.uk>, linux-xfs@vger.kernel.org,
+ Christian Brauner <brauner@kernel.org>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ samba-technical@lists.samba.org, linux-kernel@vger.kernel.org,
+ Steve French <sfrench@samba.org>,
+ Sergey Senozhatsky <senozhatsky@chromium.org>,
+ Chuck Lever <chuck.lever@oracle.com>, Anna Schumaker <anna@kernel.org>,
+ netdev@vger.kernel.org, linux-fsdevel@vger.kernel.org, netfs@lists.linux.dev,
+ "David S. Miller" <davem@davemloft.net>, Trond Myklebust <trondmy@kernel.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-That was a typo, I meant encryption
+On Tue 21-10-25 11:25:36, Jeff Layton wrote:
+> When nfsd starts requesting directory delegations, setlease handlers may
+> see requests for leases on directories. Push the !S_ISREG check down
+> into the non-trivial setlease handlers, so we can selectively enable
+> them where they're supported.
+> 
+> FUSE is special: It's the only filesystem that supports atomic_open and
+> allows kernel-internal leases. atomic_open is issued when the VFS
+> doesn't know the state of the dentry being opened. If the file doesn't
+> exist, it may be created, in which case the dir lease should be broken.
+> 
+> The existing kernel-internal lease implementation has no provision for
+> this. Ensure that we don't allow directory leases by default going
+> forward by explicitly disabling them there.
+> 
+> Reviewed-by: NeilBrown <neil@brown.name>
+> Signed-off-by: Jeff Layton <jlayton@kernel.org>
 
-Thanks,
+Looks good. Feel free to add:
 
-Steve
+Reviewed-by: Jan Kara <jack@suse.cz>
 
-On Wed, Oct 22, 2025, 2:02=E2=80=AFAM Andreas Schneider <asn@samba.org> wro=
-te:
+								Honza
 
-> On Tuesday, 21 October 2025 19:45:17 Central European Summer Time Steve
-> French
-> via samba-technical wrote:
-> > Good catch - this looks very important.
-> >
-> > Do you remember if Samba support gcm256 signing?
->
-> We support AES-128-GMAC signing.
->
-> AES256-GCM is for encryption not signing.
->
-> --
-> Andreas Schneider                      asn@samba.org
-> Samba Team                             www.samba.org
-> GPG-ID:     8DFF53E18F2ABC8D8F3C92237EE0FC4DCC014E3D
->
->
->
+> ---
+>  fs/fuse/dir.c          | 1 +
+>  fs/locks.c             | 5 +++--
+>  fs/nfs/nfs4file.c      | 2 ++
+>  fs/smb/client/cifsfs.c | 3 +++
+>  4 files changed, 9 insertions(+), 2 deletions(-)
+> 
+> diff --git a/fs/fuse/dir.c b/fs/fuse/dir.c
+> index ecaec0fea3a132e7cbb88121e7db7fb504d57d3c..667774cc72a1d49796f531fcb342d2e4878beb85 100644
+> --- a/fs/fuse/dir.c
+> +++ b/fs/fuse/dir.c
+> @@ -2230,6 +2230,7 @@ static const struct file_operations fuse_dir_operations = {
+>  	.fsync		= fuse_dir_fsync,
+>  	.unlocked_ioctl	= fuse_dir_ioctl,
+>  	.compat_ioctl	= fuse_dir_compat_ioctl,
+> +	.setlease	= simple_nosetlease,
+>  };
+>  
+>  static const struct inode_operations fuse_common_inode_operations = {
+> diff --git a/fs/locks.c b/fs/locks.c
+> index 04a3f0e2072461b6e2d3d1cd12f2b089d69a7db3..0b16921fb52e602ea2e0c3de39d9d772af98ba7d 100644
+> --- a/fs/locks.c
+> +++ b/fs/locks.c
+> @@ -1929,6 +1929,9 @@ static int generic_delete_lease(struct file *filp, void *owner)
+>  int generic_setlease(struct file *filp, int arg, struct file_lease **flp,
+>  			void **priv)
+>  {
+> +	if (!S_ISREG(file_inode(filp)->i_mode))
+> +		return -EINVAL;
+> +
+>  	switch (arg) {
+>  	case F_UNLCK:
+>  		return generic_delete_lease(filp, *priv);
+> @@ -2018,8 +2021,6 @@ vfs_setlease(struct file *filp, int arg, struct file_lease **lease, void **priv)
+>  
+>  	if ((!vfsuid_eq_kuid(vfsuid, current_fsuid())) && !capable(CAP_LEASE))
+>  		return -EACCES;
+> -	if (!S_ISREG(inode->i_mode))
+> -		return -EINVAL;
+>  	error = security_file_lock(filp, arg);
+>  	if (error)
+>  		return error;
+> diff --git a/fs/nfs/nfs4file.c b/fs/nfs/nfs4file.c
+> index 7f43e890d3564a000dab9365048a3e17dc96395c..7317f26892c5782a39660cae87ec1afea24e36c0 100644
+> --- a/fs/nfs/nfs4file.c
+> +++ b/fs/nfs/nfs4file.c
+> @@ -431,6 +431,8 @@ void nfs42_ssc_unregister_ops(void)
+>  static int nfs4_setlease(struct file *file, int arg, struct file_lease **lease,
+>  			 void **priv)
+>  {
+> +	if (!S_ISREG(file_inode(file)->i_mode))
+> +		return -EINVAL;
+>  	return nfs4_proc_setlease(file, arg, lease, priv);
+>  }
+>  
+> diff --git a/fs/smb/client/cifsfs.c b/fs/smb/client/cifsfs.c
+> index 4f959f1e08d235071a151c1438c753fcd05099e5..1522c6b61b48c05c93f2bedeab0d35b6d85378e2 100644
+> --- a/fs/smb/client/cifsfs.c
+> +++ b/fs/smb/client/cifsfs.c
+> @@ -1149,6 +1149,9 @@ cifs_setlease(struct file *file, int arg, struct file_lease **lease, void **priv
+>  	struct inode *inode = file_inode(file);
+>  	struct cifsFileInfo *cfile = file->private_data;
+>  
+> +	if (!S_ISREG(inode->i_mode))
+> +		return -EINVAL;
+> +
+>  	/* Check if file is oplocked if this is request for new lease */
+>  	if (arg == F_UNLCK ||
+>  	    ((arg == F_RDLCK) && CIFS_CACHE_READ(CIFS_I(inode))) ||
+> 
+> -- 
+> 2.51.0
+> 
+-- 
+Jan Kara <jack@suse.com>
+SUSE Labs, CR
+
