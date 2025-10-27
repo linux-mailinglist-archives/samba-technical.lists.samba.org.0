@@ -2,50 +2,50 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id D3773C0D36B
-	for <lists+samba-technical@lfdr.de>; Mon, 27 Oct 2025 12:44:52 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 15AFCC0FC19
+	for <lists+samba-technical@lfdr.de>; Mon, 27 Oct 2025 18:49:02 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=PJOO4AfyANZURNRp0pRyu9q8wMl4Gg6I4kzg/98CFbI=; b=QzR6sGsiAocddl8R0BKRfq7llP
-	TlV0qgjRhPSfMLH1RnMsP3NM9tikCgrvH0h4CCb8j4WWshqK0v9Ke97WdIL4lyXNpelAaw2I5Iu5+
-	wJaIXHX1LlCbPFNKT44+ukJiNFsySnac9PsQkI+Hv1nbupSthg1EBGqUYzgNZnjm9+hFpJI9yGa+N
-	/iamlSgV4+IalSZqtlisbjQk20mv3pAS9MGlpM9DwEgmP2GVzr7GSTDAzn6XJ6nNKXyE5m/DjPZo3
-	+RU9ul8QbEj7nBgfi7doF1pSrISGrOoK7AlBVJf6IqnnMocDMwcT5P32Y1gjqMLESdrhJlDF04ygP
-	gpsQAe9A==;
-Received: from ip6-localhost ([::1]:31646 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
+	bh=3302LF96y8uLodaxnzuiC744NXmHsYtqhVj55ZesNec=; b=VOZ8un6FSc1lFNSmNEbgL4nmBX
+	1RqlbMQW345EKr9a5RgbibeWeKt90RsqHAJx0xRNSN22DmZGMc57UQhGYm8NsUfErSoWVKnX0xJIk
+	anaIyKJij8YWwktgOdjseGzVorualRQLJ4IQcPHmE0ecAhV37++9+ys7gun8pv2dN6lU64uHS2e8j
+	UZCYO3ooD48Zhj82hZGOiV+YXxM/Pv4VmKF8PvIXkabzBbSk7p+7Mx80TO0oTggvbYFergwbdKjG3
+	vREccKgwx0QK2cNUGgADAHtS4gl4rzM1q9ECm5zorVKfIxxTEGNAy0ZaDzrSruAWrHNerjB4Q/FoS
+	ZaxP7PRw==;
+Received: from ip6-localhost ([::1]:39876 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1vDLdy-008twh-Lg; Mon, 27 Oct 2025 11:44:10 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:33206) 
+	id 1vDRKe-008uwE-Kl; Mon, 27 Oct 2025 17:48:36 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:49660) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vDLdu-008twa-2U
- for samba-technical@lists.samba.org; Mon, 27 Oct 2025 11:44:08 +0000
+ (Exim) id 1vDRKZ-008uw7-ID
+ for samba-technical@lists.samba.org; Mon, 27 Oct 2025 17:48:34 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=From:To:Date:Message-ID:CC;
- bh=PJOO4AfyANZURNRp0pRyu9q8wMl4Gg6I4kzg/98CFbI=; b=IbjXk5Mw65IxY1BbtR94uT2l2q
- hKpYKkralcZqjUtHl7P8ekQHQElqqZmkmqs8BmH4OecpD1/Ir+A75XmYlUkGxPUz3HJpbVCDV/hD7
- pTM3fhdWOfw+wuMd2QZzL6aRDA7HAE7e7zVtWNM2PnYfVTdOe6CEa4RQ7z5bWroAR6cNe+q/2PvQ9
- 26gr3X5UWVXwVmFi8uceISIu9W4/cZ5ZvRMuSI9wIKG+LW5lopXrKaW17txUfHnr3UgAir+uG9Ab4
- FM40ODNkix5NXXFQIvO21aH8kFc5JdNPc0t9QIAIHCZoShCtl40ZKgMHE09NHlQgrrKICr2xZdhu2
- G/HNz1lK2ZppenwBJSvR9UoZclPgfyoQ/ZzcuXw3vHBhKNY1jmL79pfsKR7BRsNKZs/WKaZOoJb9/
- HnEYmB+2/+lXRxyxXyQeLBmFUGGH0POL7lRVma8JfJPgSD3ToW2wMS/QkE9TNK4wv2Fem2gjtj5A4
- facRcZeAHefmngsrVrfE4KYO;
+ bh=3302LF96y8uLodaxnzuiC744NXmHsYtqhVj55ZesNec=; b=PukWBZVRQ94iZ5gBIAjJl0tX8A
+ gSeYsC0dVuHBo7JkEQFg0OUsv+kMhGRyaz7DZgEfWlZRLm3YW0n5tk4vAFVS/0Z18DnkpoZRm6lSo
+ 1v2rquGNmk3KE4qm5GPhF/iFUXq5cete5rYAiPhe4+00ITFmPAu4AKQg9AyL51NIUDJrVRIh2IFaO
+ ZN9cNqrV36viw7QoOVrYt6qJbm5txuIHTbFsfrslH7GjS3dsU1RCbw72ALr6oCP2VpIXDOSVHO7eI
+ YbY4Or4hOVLojNhViWUtbWguccBVG3EtfF0V5XSoyu1OGUS8uM5wvMDSzgR4t4le/zWI59/o+ULLv
+ iHKRF0H/yZSrzwsxs0Uqj+E0pMV4QcoLbo7ILPYePzV+kfm+NTx1kn9C6ezPYnQJ3BUdlYKSVXD24
+ zraBDlpt45333rlg4h88b439zyxLLg/map7eq5XFLaxBsMYsCGSwAwc1FNkVsVDRClrxHip9YxoFv
+ bO7/Dtu5GoBwna2pWM8In+3F;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vDLdt-00BFWZ-0m; Mon, 27 Oct 2025 11:44:05 +0000
-Message-ID: <fface8b7-9500-40c4-a4f4-c56b35179cd1@samba.org>
-Date: Mon, 27 Oct 2025 12:44:04 +0100
+ (Exim) id 1vDRKY-00BILf-2f for samba-technical@lists.samba.org;
+ Mon, 27 Oct 2025 17:48:30 +0000
+Message-ID: <77b153b3-94f1-4100-a51d-b32d05faae48@samba.org>
+Date: Mon, 27 Oct 2025 18:48:30 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: Samba 4.22++ - RENAME_NOREPLACE w/o fallback?
-To: Heiner Lesaar <heiner.lesaar@googlemail.com>,
- samba-technical@lists.samba.org
-References: <CAHCztZtZZGnEUS11oDhmSdZ1er-4sXEAtb6mb+hcBYPXn4X0Dg@mail.gmail.com>
-Content-Language: en-US
-In-Reply-To: <CAHCztZtZZGnEUS11oDhmSdZ1er-4sXEAtb6mb+hcBYPXn4X0Dg@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Language: en-US, de-DE
+To: samba-technical <samba-technical@lists.samba.org>
+Subject: =?UTF-8?Q?Invitation=3A_Samba_Developer_Online_Gathering_=E2=80=93_?=
+ =?UTF-8?Q?Tuesday=2C_November_4th?=
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------XfH1uht2rujrYyNlhNk2ZQvN"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,64 +59,67 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Stefan Metzmacher <metze@samba.org>
+From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Ralph Boehme <slow@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hello Heiner,
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------XfH1uht2rujrYyNlhNk2ZQvN
+Content-Type: multipart/mixed; boundary="------------aW7MsfPNRXwvwOmqURSoQCcg";
+ protected-headers="v1"
+From: Ralph Boehme <slow@samba.org>
+To: samba-technical <samba-technical@lists.samba.org>
+Message-ID: <77b153b3-94f1-4100-a51d-b32d05faae48@samba.org>
+Subject: =?UTF-8?Q?Invitation=3A_Samba_Developer_Online_Gathering_=E2=80=93_?=
+ =?UTF-8?Q?Tuesday=2C_November_4th?=
 
-> we noticed after upgrading from Samba 4.20 to 4.22.3 (and later), that
-> directory creation on MacOS causes a weird folder creation "loop" when
-> creating a new folder in MacOS Finder. Finder basically forever keeps
-> creating new directories.
-> 
-> This is only when the underlying filesystem is BeeGFS, a parallel
-> filesystem which does not support RENAME_NOREPLACE.
-> 
-> My question: Is there a mechanism to tell Samba to revert to previous
-> behaviour of not using RENAME_NOREPLACE if the underlying filesystem does
-> not support it?
-> 
-> I´ll copy their analysis here, running strace on the smbd process:
-> 
-> The problem seems to be at the end of this folder creation sequence:
-> 
-> 268306 10:18:32.645081 mkdirat(27,
-> ".::TMPNAME:D:268306%13947819943702811000:untitled folder 3", 0775) = 0
-> <0.000574>
-> 268306 10:18:32.645728 openat(27,
-> ".::TMPNAME:D:268306%13947819943702811000:untitled folder 3",
-> O_RDONLY|O_NOFOLLOW|O_PATH|O_DIRECTORY) = 31 <0.000026>
-> 268306 10:18:32.645805 fstat(31, {st_mode=S_IFDIR|S_ISGID|0775, st_size=0,
-> ...}) = 0 <0.000034>
-> 268306 10:18:32.645899 fstat(31, {st_mode=S_IFDIR|S_ISGID|0775, st_size=0,
-> ...}) = 0 <0.000022>
-> 268306 10:18:32.645974 getxattr("/proc/self/fd/31",
-> "system.posix_acl_access", 0x7ffe67cad620, 132) = -1 EOPNOTSUPP (Operation
-> not supported) <0.000038>
-> 268306 10:18:32.646082 setxattr("/proc/self/fd/31", "user.DOSATTRIB",
-> "\0\0\5\0\5\0\0\0\21\0\0\0\20\0\0\0\0\274(w\2769\334\1", 24, 0) = 0
-> <0.000199>
-> 268306 10:18:32.646423 renameat2(27,
-> ".::TMPNAME:D:268306%13947819943702811000:untitled folder 3", 27, "untitled
-> folder 3", RENAME_NOREPLACE) = -1 EINVAL (Invalid argument) <0.000167>
-> 268306 10:18:32.646656 mkdirat(27, "untitled folder 3", 000) = 0 <0.000637>
-> 268306 10:18:32.647406 renameat(27,
-> ".::TMPNAME:D:268306%13947819943702811000:untitled folder 3", 27, "untitled
-> folder 3") = -1 EEXIST (File exists) <0.000211>
-> 
-> Samba prepares the new directory in a temporary location that is probably
-> hidden from the user to make the actual directory creation look atomic by
-> renaming the temporary directory to the actual one in the end.
-> There is an error with that renameat() which fails with EINVAL because
-> RENAME_NOREPLACE is not supported in BeeGFS. This error is not communicated
-> to the SMB client though.
+--------------aW7MsfPNRXwvwOmqURSoQCcg
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
 
+SGkgYWxsLA0KDQpTYXZlIHRoZSBkYXRlIGZvciB0aGUgbmV4dCBTYW1iYSBEZXZlbG9wZXIg
+T25saW5lIEdhdGhlcmluZzoNCg0KRGF0ZTogVHVlc2RheSwgTm92ZW1iZXIgNHRoDQpUaW1l
+OiA2OjAwIEFNIFVUQw0KTGluazogaHR0cHM6Ly9iYmItbmV3LnNmY29uc2VydmFuY3kub3Jn
+L3Jvb21zL3g0cy13bjctbHR3LWwzYi9qb2luDQoNCkluIHRoZSBuYW1lIG9mIHRoZSBTYW1i
+YSBUZWFtLCBJ4oCZZCBsaWtlIHRvIGludml0ZSBldmVyeW9uZSBhY3RpdmVseSANCndvcmtp
+bmcgb24gb3IgY29udHJpYnV0aW5nIHRvIFNhbWJhIHRvIGpvaW4gdGhpcyBmaXJzdCBTYW1i
+YSBEZXZlbG9wZXIgDQpPbmxpbmUgR2F0aGVyaW5nLg0KDQpUaGUgZ29hbCBpcyB0byBjcmVh
+dGUgYW4gaW5mb3JtYWwgc3BhY2Ugd2hlcmUgZGV2ZWxvcGVycyBjYW4gZGlzY3VzcyANCmN1
+cnJlbnQgZGV2ZWxvcG1lbnQgdG9waWNzLCBvbmdvaW5nIHdvcmssIGFuZCBmdXR1cmUgcGxh
+bnMg4oCUIG11Y2ggbGlrZSANCm91ciBoYWxsd2F5IGNoYXRzIGF0IFNhbWJhWFAsIGJ1dCBp
+biBhbiBvbmxpbmUgZm9ybWF0Lg0KDQpJZiB5b3UgaGF2ZSB0b3BpY3MgeW914oCZZCBsaWtl
+IHRvIGRpc2N1c3Mgb3Igc2hvcnQgdXBkYXRlcyB5b3XigJlkIGxpa2UgdG8gDQpzaGFyZSwg
+cGxlYXNlIHNlbmQgdGhlbSB0byBtZSBkaXJlY3RseSBpbiBhZHZhbmNlIHNvIHdlIGNhbiBw
+cmVwYXJlIGEgDQpyb3VnaCBhZ2VuZGEuDQoNCkEgZmV3IGRldGFpbHM6DQoNCkR1cmF0aW9u
+OiB1cCB0byAyIGhvdXJzDQpSZWNvcmRpbmc6IHRoZSBtZWV0aW5nIHdpbGwgbm90IGJlIHJl
+Y29yZGVkDQpGb3JtYXQ6IG9wZW4gZGlzY3Vzc2lvbiDigJQgdGVjaG5pY2FsIGFuZCBpbmZv
+cm1hbA0KDQpXZeKAmXJlIGxvb2tpbmcgZm9yd2FyZCB0byBzZWVpbmcgbWFueSBvZiB5b3Ug
+dGhlcmUgYW5kIGhhdmluZyBhIA0KcHJvZHVjdGl2ZSBhbmQgZnJpZW5kbHkgZXhjaGFuZ2Uh
+DQoNClNlZSB5b3UgbmV4dCBUdWVzZGF5LA0KUmFscGgNCg==
 
-You can use "vfs mkdir use tmp name = no".
+--------------aW7MsfPNRXwvwOmqURSoQCcg--
 
-I hope that helps!
+--------------XfH1uht2rujrYyNlhNk2ZQvN
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature.asc"
 
-metze
+-----BEGIN PGP SIGNATURE-----
+
+wsF5BAABCAAjFiEE+uLGCIokJSBRxVnkqh6bcSY5nkYFAmj/sG4FAwAAAAAACgkQqh6bcSY5nkb8
+nhAAnElaP65V/5lw4hD6ATbLmdC042hhdSSiJbaIHXUkFLD2XonL4teFtUnIz5K2bSRKPCKv3oNS
+ZXQ/GlGM7z7xhSD7L+5lxrNQk8tc1IuKuz2JTmP3+TPiIn1x4b4lAdXvOnzP0vZAEHP9yjFMu3Vx
+yk2jmfoqN2W2Daa22bFAejIVciFftBjdhnOj3EEpFet20iGxmeB8CfSRZ0t5gpArnxtM7rhSnv9d
+ZPyfexb65mJwOeR6lGuAMpWe0IB3lUpQGzNrGT2pI/aqVkxaR6iKYBCvEd6FUO1subcBmn9/wuA7
+/XwwLPQFZ0+Zmif2B8A1H0tcidLnRMpjRka+vMX4OKy0BDAaQnsv+Fw9brXueRXI430WuKwsNPBD
+VH3MdEccKri98gyb0mIPGvwgIVyZ1CWQFW8z/8Me44igcLilrxTzC9ViOsU8U+RCy/DK4n96fADw
++JIvcp9VVXN+gynbHuxBpP2HChivg7gyWx6iYeSkOHf+UOoBdv+Qndct4VgW/NAaj7nnf1y6hziJ
+OWu1jS/XmBude+fMO1DMkXvpBH1oPAZMswXVbHwOfc7+7WzQi1lGARJfGfeeM8ONbpK613S4GiyY
+HpXBf03pX3u1nbr8cxeb9QE55zt//yFpayN5u5+zWQ4nT/AhF5q9XQFP1ch85ELm3vdEd4LAIJ6z
+z/w=
+=/gl2
+-----END PGP SIGNATURE-----
+
+--------------XfH1uht2rujrYyNlhNk2ZQvN--
 
