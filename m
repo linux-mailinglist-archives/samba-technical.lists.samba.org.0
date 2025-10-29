@@ -2,44 +2,44 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 04AC4C1AE9F
-	for <lists+samba-technical@lfdr.de>; Wed, 29 Oct 2025 14:49:06 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 81598C1AEA2
+	for <lists+samba-technical@lfdr.de>; Wed, 29 Oct 2025 14:49:17 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=xYLqMtiJaEyl40ynYo3GXRyJ4Z/DmCJcNoPUA+BC/6A=; b=bA8qIctD4RTKlp7/G+zu6f4LA3
-	fhcsp47FVZZi1bxynuP7vFmC5Xl195O1kHSQh6zgxEbw7tmhB5B0TxbrMM12eWQ4toTMTiKOvJTdC
-	oIm1cVef730S3WARGXda6OAMuZWtKaHa3XR08JFgUXYzuxjcx4plPgAhqoAU0BRjM0RJBxbBkT/Lc
-	wm4TRQtqe9gCxwXIW8gvay9FVfgCSoFfpDTTaVwAbpm9kK36RBwVTWZUh36SNb5JhEW1GR1JwFzOF
-	aGBGi9S2bC7hSJDfbjzR2BFZAnESBeRnvkYpTkZWWVwh+ipatz6mdTyHSlnqGcF5NAX4LaQQ18vQa
-	0vtjZcUg==;
-Received: from ip6-localhost ([::1]:59080 helo=hr1.samba.org) 
+	bh=CwbS/YDlAkblJiLqlWWZTEX6vo3TSIfWqh/ZIAFYDwc=; b=VhwK416U82EU/SQ/KErotueVKu
+	+LnUiPxuK0ciPKbVR6x7lwcxMKaV8z7/MTdLWCP+1XA4yEgK5BWDGLFC2TTPlheco/ADCTxEd/yac
+	btSNQpvnfQoSi+pnj3VxRmJt5NqAY7aSNdDjJNDO/F0U4DFWUnY/w1fYPe2nmfNeKds8xBBh+PvSu
+	k9wnfZkqLLg1uTYNBIje9eSoRLMGA91WF7+w0f5MnaoDJ9bKf7Hb+Vn72YJcf/ceHSXEROd5obpW6
+	W+kxiqrQYpqAQBfqpPDflHMfzx0Xp7fKsCDJjw+htjlCRDGyKZ80C5hglILQeclZ2UrpLoXzltdiM
+	LLdYcmtQ==;
+Received: from ip6-localhost ([::1]:61200 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1vE6Xq-009Dzw-HI; Wed, 29 Oct 2025 13:48:59 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:28086) 
+	id 1vE6Xz-009E4s-Us; Wed, 29 Oct 2025 13:49:08 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:28102) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vE6Iz-0098d2-Rz
- for samba-technical@lists.samba.org; Wed, 29 Oct 2025 13:33:50 +0000
+ (Exim) id 1vE6J3-0098em-FJ
+ for samba-technical@lists.samba.org; Wed, 29 Oct 2025 13:33:56 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Message-ID:Date:Cc:To:From;
- bh=xYLqMtiJaEyl40ynYo3GXRyJ4Z/DmCJcNoPUA+BC/6A=; b=Q1DCPJcJBYfVdB8iVm6hUA7qkj
- MgmsU3juj2kjVuXnAs5SvXHPJqV19vYeC6t+rgHFuvJVTRlo9CipZGN7dNpkidJPMrkVup+mY0Zzx
- tf5h1xChmbrrP5wAaexVla8QsG793JCo3PxNzvAITpGDjeur95LQv+6AOuYvKBX8rzqYmB6kwSH2Y
- 4u5jw8vUE85z77GIpml538c+tC7zrkmyHaJ6Mnhrst157ps31DG0KH+JxsKkiML5xVr59IywCu5Ih
- 13yAVDWKuqLtWGBNf/Z6LsCd3ifSE0ZkBc3SrUXpmbb+44muCKV0z1a7nJDJMjNNMysocucbqrj22
- J2mSmyfRI5kv+s+TZOqf3Ajib077UdJM5efcupW6oOTMXxZc+KICxwUuespNBSE3wVadd7flPTgew
- 8n81f0QErqOqW6+WRjq6hqQ1QEuhzTSvnodGH6lGr5zjAEKfF6qgtMH7+RBoH+8NiYUxhdSz20jRh
- KjRa7gnoij6OlNzBbKQXtuVR;
+ bh=CwbS/YDlAkblJiLqlWWZTEX6vo3TSIfWqh/ZIAFYDwc=; b=doas9AMnpeACmcRGPSLPWirzQL
+ ZkzGmKI0KR/l6pOwhJgrqB+tyem+9zVxDHjpNB2BsN+7A/7K9siTmzHssxVq/K13KF/QdLm2Oulzb
+ HIijPwF7hwyAGfZBtJz08ZqN+bDDE/Xx3v7SSIOste9zfClCq78Nqk6w1AQCFEJaq/g0CwTP7AtAW
+ 4zwV/WRnOh1rnf7T03iSURs3CNkWX9qvWYmRnfbt4TP42WWAiGBskef1Jksg1zly9rqIzNQ2MGXft
+ 5a++G125Q0rmOSdtF1TbnTfQAxfDT6g/bcZvCm3I/COliJOs84IOoN0/MQcw2kcsyIk9h1pcAf+Df
+ JzprmcTWnODi8KAfMuBG2YNTm8YKfM2Aeg7bF7FObChpfx7KohbmetZ0iHGCFu4HnB8YkEVloswp4
+ W9bMjpP/Di2HAryDf2Od17j9LekjWxABPc6JDu+kvypnY+QUlSQv5uY+/QqtUSFoNQI57rsja9ZBI
+ t/0yd3m4EJxwhA9G3xNkwA8q;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vE6Iv-00BcwV-1E; Wed, 29 Oct 2025 13:33:34 +0000
+ (Exim) id 1vE6J2-00Bcwg-01; Wed, 29 Oct 2025 13:33:40 +0000
 To: linux-cifs@vger.kernel.org,
 	samba-technical@lists.samba.org
-Subject: [PATCH v2 110/127] smb: server: make use of
- smbdirect_connection_recv_io_refill[_work]()
-Date: Wed, 29 Oct 2025 14:21:28 +0100
-Message-ID: <1707f35c930189212413116b933d345418bddc5b.1761742839.git.metze@samba.org>
+Subject: [PATCH v2 111/127] smb: server: make use of
+ smbdirect_get_buf_page_count()
+Date: Wed, 29 Oct 2025 14:21:29 +0100
+Message-ID: <9203393dba708100644f38c6d3fcddab5027b37f.1761742839.git.metze@samba.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1761742839.git.metze@samba.org>
 References: <cover.1761742839.git.metze@samba.org>
@@ -65,31 +65,8 @@ Cc: metze@samba.org, Steve French <smfrench@gmail.com>,
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is basically a copy of smb_direct_post_recv_credits(), but
-there are several improvements compared to the existing function:
-
-1. We calculate the number of missing posted buffers by getting the
-   difference between recv_io.credits.target and recv_io.posted.count.
-
-   Instead of the difference between recv_io.credits.target
-   and recv_io.credits.count, because recv_io.credits.count is
-   only updated once a message is send to the peer.
-
-   It was not really a problem before, because we have
-   a fixed number smbdirect_recv_io buffers, so the
-   loop terminated when smbdirect_connection_get_recv_io()
-   returns NULL.
-
-   But using recv_io.posted.count makes it easier to
-   understand.
-
-2. In order to tell the peer about the newly posted buffer
-   and grant the credits, we only trigger the send immediate
-   when we're not granting only the last possible credit.
-
-   This is mostly a difference relative to the servers
-   smb_direct_post_recv_credits() implementation,
-   which should avoid useless ping pong messages.
+This will allow us to move code into common code
+between client and server soon.
 
 Cc: Namjae Jeon <linkinjeon@kernel.org>
 Cc: Steve French <smfrench@gmail.com>
@@ -98,95 +75,80 @@ Cc: linux-cifs@vger.kernel.org
 Cc: samba-technical@lists.samba.org
 Signed-off-by: Stefan Metzmacher <metze@samba.org>
 ---
- fs/smb/server/transport_rdma.c | 53 +++++++---------------------------
- 1 file changed, 10 insertions(+), 43 deletions(-)
+ fs/smb/server/transport_rdma.c | 18 ++++++------------
+ 1 file changed, 6 insertions(+), 12 deletions(-)
 
 diff --git a/fs/smb/server/transport_rdma.c b/fs/smb/server/transport_rdma.c
-index 4acae8e43b76..9cc8cffcc6e9 100644
+index 9cc8cffcc6e9..d8829cb57270 100644
 --- a/fs/smb/server/transport_rdma.c
 +++ b/fs/smb/server/transport_rdma.c
-@@ -202,7 +202,6 @@ static inline int get_buf_page_count(void *buf, int size)
- 		(uintptr_t)buf / PAGE_SIZE;
+@@ -196,12 +196,6 @@ unsigned int get_smbd_max_read_write_size(struct ksmbd_transport *kt)
+ 	return sp->max_read_write_size;
  }
  
--static void smb_direct_post_recv_credits(struct work_struct *work);
+-static inline int get_buf_page_count(void *buf, int size)
+-{
+-	return DIV_ROUND_UP((uintptr_t)buf + size, PAGE_SIZE) -
+-		(uintptr_t)buf / PAGE_SIZE;
+-}
+-
  static int smb_direct_post_send_data(struct smbdirect_socket *sc,
  				     struct smbdirect_send_batch *send_ctx,
  				     struct kvec *iov, int niov,
-@@ -651,38 +650,6 @@ static int smb_direct_read(struct ksmbd_transport *t, char *buf,
- 	goto again;
- }
- 
--static void smb_direct_post_recv_credits(struct work_struct *work)
--{
--	struct smbdirect_socket *sc =
--		container_of(work, struct smbdirect_socket, recv_io.posted.refill_work);
--	struct smbdirect_recv_io *recvmsg;
--	int credits = 0;
--	int ret;
--
--	if (atomic_read(&sc->recv_io.credits.count) < sc->recv_io.credits.target) {
--		while (true) {
--			recvmsg = smbdirect_connection_get_recv_io(sc);
--			if (!recvmsg)
--				break;
--
--			recvmsg->first_segment = false;
--
--			ret = smbdirect_connection_post_recv_io(recvmsg);
--			if (ret) {
--				pr_err("Can't post recv: %d\n", ret);
--				smbdirect_connection_put_recv_io(recvmsg);
--				break;
--			}
--			credits++;
--
--			atomic_inc(&sc->recv_io.posted.count);
--		}
--	}
--
--	if (credits)
--		queue_work(sc->workqueue, &sc->idle.immediate_work);
--}
--
- static int manage_credits_prior_sending(struct smbdirect_socket *sc)
+@@ -828,7 +822,7 @@ static int wait_for_rw_credits(struct smbdirect_socket *sc, int credits)
+ static int calc_rw_credits(struct smbdirect_socket *sc,
+ 			   char *buf, unsigned int len)
  {
- 	int new_credits;
-@@ -1703,24 +1670,24 @@ static int smb_direct_prepare(struct ksmbd_transport *t)
- 
- 	/*
- 	 * We negotiated with success, so we need to refill the recv queue.
--	 * We do that with sc->idle.immediate_work still being disabled
--	 * via smbdirect_socket_init(), so that queue_work(sc->workqueue,
--	 * &sc->idle.immediate_work) in smb_direct_post_recv_credits()
--	 * is a no-op.
- 	 *
- 	 * The message that grants the credits to the client is
- 	 * the negotiate response.
- 	 */
--	INIT_WORK(&sc->recv_io.posted.refill_work, smb_direct_post_recv_credits);
--	smb_direct_post_recv_credits(&sc->recv_io.posted.refill_work);
--	if (unlikely(sc->first_error))
--		return sc->first_error;
--	INIT_WORK(&sc->idle.immediate_work, smb_direct_send_immediate_work);
-+	ret = smbdirect_connection_recv_io_refill(sc);
-+	if (ret < 0)
-+		return ret;
-+	ret = 0;
- 
- respond:
- 	ret = smb_direct_send_negotiate_response(sc, ret);
-+	if (ret)
-+		return ret;
- 
--	return ret;
-+	INIT_WORK(&sc->recv_io.posted.refill_work, smbdirect_connection_recv_io_refill_work);
-+	INIT_WORK(&sc->idle.immediate_work, smb_direct_send_immediate_work);
-+
-+	return 0;
+-	return DIV_ROUND_UP(get_buf_page_count(buf, len),
++	return DIV_ROUND_UP(smbdirect_get_buf_page_count(buf, len),
+ 			    sc->rw_io.credits.num_pages);
  }
  
- static int smb_direct_connect(struct smbdirect_socket *sc)
+@@ -904,7 +898,7 @@ static int get_sg_list(void *buf, int size, struct scatterlist *sg_list, int nen
+ 	int offset, len;
+ 	int i = 0;
+ 
+-	if (size <= 0 || nentries < get_buf_page_count(buf, size))
++	if (size <= 0 || nentries < smbdirect_get_buf_page_count(buf, size))
+ 		return -EINVAL;
+ 
+ 	offset = offset_in_page(buf);
+@@ -1095,7 +1089,7 @@ static int smb_direct_writev(struct ksmbd_transport *t,
+ 			v->iov_len = min_t(size_t,
+ 					   iov[iov_idx].iov_len - iov_ofs,
+ 					   possible_bytes);
+-			page_count = get_buf_page_count(v->iov_base, v->iov_len);
++			page_count = smbdirect_get_buf_page_count(v->iov_base, v->iov_len);
+ 			if (page_count > possible_vecs) {
+ 				/*
+ 				 * If the number of pages in the buffer
+@@ -1124,7 +1118,7 @@ static int smb_direct_writev(struct ksmbd_transport *t,
+ 				size_t elen = min_t(size_t, v->iov_len - fplen, epages*PAGE_SIZE);
+ 
+ 				v->iov_len = fplen + elen;
+-				page_count = get_buf_page_count(v->iov_base, v->iov_len);
++				page_count = smbdirect_get_buf_page_count(v->iov_base, v->iov_len);
+ 				if (WARN_ON_ONCE(page_count > possible_vecs)) {
+ 					/*
+ 					 * Something went wrong in the above
+@@ -1289,7 +1283,7 @@ static int smb_direct_rdma_xmit(struct smb_direct_transport *t,
+ 
+ 		msg->sgt.sgl = &msg->sg_list[0];
+ 		ret = sg_alloc_table_chained(&msg->sgt,
+-					     get_buf_page_count(desc_buf, desc_buf_len),
++					     smbdirect_get_buf_page_count(desc_buf, desc_buf_len),
+ 					     msg->sg_list, SG_CHUNK_SIZE);
+ 		if (ret) {
+ 			ret = -ENOMEM;
+@@ -1303,7 +1297,7 @@ static int smb_direct_rdma_xmit(struct smb_direct_transport *t,
+ 
+ 		ret = rdma_rw_ctx_init(&msg->rdma_ctx, sc->ib.qp, sc->ib.qp->port,
+ 				       msg->sgt.sgl,
+-				       get_buf_page_count(desc_buf, desc_buf_len),
++				       smbdirect_get_buf_page_count(desc_buf, desc_buf_len),
+ 				       0,
+ 				       le64_to_cpu(desc[i].offset),
+ 				       le32_to_cpu(desc[i].token),
 -- 
 2.43.0
 
