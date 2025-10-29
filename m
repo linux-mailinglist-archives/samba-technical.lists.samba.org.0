@@ -2,44 +2,44 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 87DAFC1AD63
+	by mail.lfdr.de (Postfix) with ESMTPS id 9B3B3C1AD69
 	for <lists+samba-technical@lfdr.de>; Wed, 29 Oct 2025 14:42:40 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=qYVFIP4D8wpWTdKmc06AXstkxo8olWxGnecaSifkGdc=; b=qUCF1yvidcGhGlYQlHZQ6r2sZv
-	wNiOPPsJwRodQ+anPieGJ5VvRjgJd0Ujhajbtw2YHLogEYwk8Xf7lKvrL7RxPQoQYzcBxB+9sB+Ms
-	M3f9BpQFdQQjChPObguRRkhRmf2ugJeZzAElY0Za27Op27HgTVio8iuZIeYGvIHuFI4SohUrY2nA/
-	8HQwYIvflcf0ZjcAifCIKMc8oDIqVffKGuzyCV6uUQJ8EBDIXacAJHymqocYNsPJalhgUL236SbGM
-	ktLo38AjRIxRdu4oggwWitwGyU4C5JwY+neXIJktzmmZHid1hnEuOrBTJtQx+S5P4JycuFkiBinud
-	ZQ3vrRPg==;
-Received: from ip6-localhost ([::1]:62264 helo=hr1.samba.org) 
+	bh=T7xlnEa4PhrAtzipy5xpLO6Xbg8QdMaauTa9svLYSeI=; b=CPj74bh2fyTvGgI602HV/6KOZt
+	evisSYaZ8fJHTMxjA+x2DJKF0M4cHBvTfDuhpRfpXGc0wPz6Yz1446z2Qnc6SM+hR41nLZkaeezou
+	MqoIiMYv0kpLi6itGCnK+29TcdS8y2g0xHGhmyazt2Cmg/YyfxSm3xvtRnkbMMUkqyk35G+vsedCq
+	zZGQrOD/X96StM+feLTSM+DSGzk19d8ofYhvGtMt3glJH1EbhOh+60H6cPYJpRljTEkC+yH/x92hm
+	kpaPHm8zBQvKPK9veqFPcJy3OvKu7jvhQCmS10Z+eFmDTiaFtWGr7ZER6qyjLQkpoSlfZnjHQme8i
+	M7v7DPsA==;
+Received: from ip6-localhost ([::1]:24208 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1vE6RK-009BZa-Rv; Wed, 29 Oct 2025 13:42:15 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:19698) 
+	id 1vE6RT-009Bf4-Bt; Wed, 29 Oct 2025 13:42:23 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:44006) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vE6Fr-0097ZA-8H
- for samba-technical@lists.samba.org; Wed, 29 Oct 2025 13:30:28 +0000
+ (Exim) id 1vE6Fy-0097bm-4I
+ for samba-technical@lists.samba.org; Wed, 29 Oct 2025 13:30:35 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Message-ID:Date:Cc:To:From;
- bh=qYVFIP4D8wpWTdKmc06AXstkxo8olWxGnecaSifkGdc=; b=EUIw0JrNNSxPXnNC1tgaDs+nO1
- BeJ9uTNJJ8Rs6tlbeIwOPH6JvYz5yN6pAnVNPNBxowSBy84xOM9iaEHr+7951IEj9WM7Vq5ZAqhML
- 2FlAkaJtJtlrSKS/WYr5IQdGfcqYM3652NpvC1LgHWRtUIaduNaRGAnPpt+6Q3VeJWNSQorxlnkZB
- xGVtf0OAayCBOPsA7oE47MLsHLH78s1mfAX/WRPHV/wdwRZefym9gjkNexL6xK16+R7TICvMNBNet
- nz+40cG9kpbKSw6C9dMF0xkyfo1VbobDVzJ3bw251kwFuk1u9USf7FdMebG3Me8d3q45kInAUJNIZ
- CFeebUndRaYxCfAORhq87rwXUw4CSjZPsjClQLDVWO5wZUlof4o5kiWEuOcnfZmNk9aVV4jOyeLbf
- c0xB9HERpL4WEpRd+GsqXCFK+7p/7RiyEokUwH/H5cOdX6csdAvQhGkucAxyvh+fU9tqd8uTpt/V9
- ImggF4I//SShdVsPE+tNYBB7;
+ bh=T7xlnEa4PhrAtzipy5xpLO6Xbg8QdMaauTa9svLYSeI=; b=m48SAipM9O2PpAOfh6w1j8MqGN
+ GQ7J0iZoGqbDA/PpEvNM2ZPXklKPnW8tJvX5hXyN5WstL9dLx2P7ev6q8G5k3nPlMInir/FY6FH1C
+ DreWnaDUHIeLKIlDhegR+NOQrQxue3pIlZk0FKNwzFkJxXp2pHo9oWc7tMkmTdNKY1J/gDsRSCpl+
+ m0vY+6ErglZMs5FVhCCVEIErp/6I8w1XkXQ8Oq7HUHcxl/9CFLmg/qWcPUHY0TLsV5JAVOEOY25Vr
+ ZTqqJhrV0IIKpvaC29MJ67T9Voj/tqUuHRBBPwt4Q9r4t34Pm79SoN7P3YirJ1BYtLtuSijWE388i
+ LqDzh123e9kzBuSMPFfojVxr7ZsM/eNG1gTg0faCqQMDxxzujv8dIYeuNojoE4k9inFrD8CPMshKM
+ rbGDe1/N7LJaThoim7m8RylLRzQ2GqFqXL83fuciiuzyKRCrTCsz3GaiopkgqvW70zgMP8/E+s2XS
+ dGbvk6ksK61zLMhfs0ICG/ru;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vE6Fk-00BcNe-33; Wed, 29 Oct 2025 13:30:17 +0000
+ (Exim) id 1vE6Fr-00BcOU-1A; Wed, 29 Oct 2025 13:30:23 +0000
 To: linux-cifs@vger.kernel.org,
 	samba-technical@lists.samba.org
-Subject: [PATCH v2 079/127] smb: client: let smbd_post_send() make use of
- request->wr
-Date: Wed, 29 Oct 2025 14:20:57 +0100
-Message-ID: <6464bc9d29a384891701c79c5ab4843e349da55f.1761742839.git.metze@samba.org>
+Subject: [PATCH v2 080/127] smb: client: make use of
+ smbdirect_connection_grant_recv_credits()
+Date: Wed, 29 Oct 2025 14:20:58 +0100
+Message-ID: <4c474fcfaa14b461edd8fccf31936a76005b5354.1761742839.git.metze@samba.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1761742839.git.metze@samba.org>
 References: <cover.1761742839.git.metze@samba.org>
@@ -65,7 +65,8 @@ Cc: metze@samba.org, Steve French <smfrench@gmail.com>,
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-We don't need a stack variable in addition.
+This already calls atomic_add(new_credits, &sc->recv_io.credits.count),
+so there's no need to do it in the caller anymore.
 
 Cc: Steve French <smfrench@gmail.com>
 Cc: Tom Talpey <tom@talpey.com>
@@ -75,43 +76,65 @@ Cc: linux-cifs@vger.kernel.org
 Cc: samba-technical@lists.samba.org
 Signed-off-by: Stefan Metzmacher <metze@samba.org>
 ---
- fs/smb/client/smbdirect.c | 15 +++++++--------
- 1 file changed, 7 insertions(+), 8 deletions(-)
+ fs/smb/client/smbdirect.c | 31 ++-----------------------------
+ 1 file changed, 2 insertions(+), 29 deletions(-)
 
 diff --git a/fs/smb/client/smbdirect.c b/fs/smb/client/smbdirect.c
-index 2860f9c5502c..e2f93d4af0a7 100644
+index e2f93d4af0a7..cb1e7dee9be7 100644
 --- a/fs/smb/client/smbdirect.c
 +++ b/fs/smb/client/smbdirect.c
-@@ -786,7 +786,6 @@ static int manage_keep_alive_before_sending(struct smbdirect_socket *sc)
- static int smbd_post_send(struct smbdirect_socket *sc,
- 		struct smbdirect_send_io *request)
- {
--	struct ib_send_wr send_wr;
- 	int rc, i;
+@@ -730,32 +730,6 @@ static int smbd_post_send_negotiate_req(struct smbdirect_socket *sc)
+ 	return rc;
+ }
  
- 	for (i = 0; i < request->num_sge; i++) {
-@@ -802,14 +801,14 @@ static int smbd_post_send(struct smbdirect_socket *sc,
+-/*
+- * Extend the credits to remote peer
+- * This implements [MS-SMBD] 3.1.5.9
+- * The idea is that we should extend credits to remote peer as quickly as
+- * it's allowed, to maintain data flow. We allocate as much receive
+- * buffer as possible, and extend the receive credits to remote peer
+- * return value: the new credtis being granted.
+- */
+-static int manage_credits_prior_sending(struct smbdirect_socket *sc)
+-{
+-	int new_credits;
+-
+-	if (atomic_read(&sc->recv_io.credits.count) >= sc->recv_io.credits.target)
+-		return 0;
+-
+-	new_credits = atomic_read(&sc->recv_io.posted.count);
+-	if (new_credits == 0)
+-		return 0;
+-
+-	new_credits -= atomic_read(&sc->recv_io.credits.count);
+-	if (new_credits <= 0)
+-		return 0;
+-
+-	return new_credits;
+-}
+-
+ /*
+  * Check if we need to send a KEEP_ALIVE message
+  * The idle connection timer triggers a KEEP_ALIVE message when expires
+@@ -828,7 +802,7 @@ static int smbd_post_send_iter(struct smbdirect_socket *sc,
+ 	int data_length;
+ 	struct smbdirect_send_io *request;
+ 	struct smbdirect_data_transfer *packet;
+-	int new_credits = 0;
++	u16 new_credits = 0;
  
- 	request->cqe.done = smbdirect_connection_send_io_done;
+ wait_lcredit:
+ 	/* Wait for local send credits */
+@@ -920,8 +894,7 @@ static int smbd_post_send_iter(struct smbdirect_socket *sc,
+ 	/* Fill in the packet header */
+ 	packet->credits_requested = cpu_to_le16(sp->send_credit_target);
  
--	send_wr.next = NULL;
--	send_wr.wr_cqe = &request->cqe;
--	send_wr.sg_list = request->sge;
--	send_wr.num_sge = request->num_sge;
--	send_wr.opcode = IB_WR_SEND;
--	send_wr.send_flags = IB_SEND_SIGNALED;
-+	request->wr.next = NULL;
-+	request->wr.wr_cqe = &request->cqe;
-+	request->wr.sg_list = request->sge;
-+	request->wr.num_sge = request->num_sge;
-+	request->wr.opcode = IB_WR_SEND;
-+	request->wr.send_flags = IB_SEND_SIGNALED;
+-	new_credits = manage_credits_prior_sending(sc);
+-	atomic_add(new_credits, &sc->recv_io.credits.count);
++	new_credits = smbdirect_connection_grant_recv_credits(sc);
+ 	packet->credits_granted = cpu_to_le16(new_credits);
  
--	rc = ib_post_send(sc->ib.qp, &send_wr, NULL);
-+	rc = ib_post_send(sc->ib.qp, &request->wr, NULL);
- 	if (rc) {
- 		log_rdma_send(ERR, "ib_post_send failed rc=%d\n", rc);
- 		smbdirect_connection_schedule_disconnect(sc, rc);
+ 	packet->flags = 0;
 -- 
 2.43.0
 
