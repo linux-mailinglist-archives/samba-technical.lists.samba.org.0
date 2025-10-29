@@ -2,44 +2,44 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3ECBCC1AB42
-	for <lists+samba-technical@lfdr.de>; Wed, 29 Oct 2025 14:31:47 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 73CB0C1AB30
+	for <lists+samba-technical@lfdr.de>; Wed, 29 Oct 2025 14:31:18 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=6ajYJYZhn54gmmGtB6NnAVMb7kn2cgOD94NG20/NY+s=; b=xgZkgovsLEq7D18okxaboVf6aK
-	Ws5LwdxoOksd+BmCKjxDqbuGMwSmVz4CSnlpHWVw2Y258IZ7lzIXQHJrhJVAU39rKdEEDvzbvqWYt
-	7wADhYPxAcMZnmsSLs2i/d6sP9fjmogd2+GINV1vwKjsFMgBUpOAW5e9oS4pzdJ4ONzd3HqIq+pnO
-	Rv2TwNZYJFAdJuJCZxukrRgrnNC2N3olCC1yi55oSaqEOjrSlf+qlKwuNdPrF49o2D/JTqYCGnW5c
-	6+cAEceaM1GGS0bzxKQaemLbi9iDcZyxSmjK54GqSxR/EoT9yAtg2TTOBouM9hr86UuG8QrzDBHC1
-	bz3a2GCA==;
-Received: from ip6-localhost ([::1]:63774 helo=hr1.samba.org) 
+	bh=pfC+cCjTHct7mk1V52JruYkp2LBY0zWVMoqgwj8Mnc8=; b=LTWfU8ogj4c/zMkVBO+pDqUjC6
+	aC+IR+xiPi61WvfjwQB0VfP2ua6djtEqHLeE+uJbeIrFe48ZfcQhuxeyJr7eIdwrD33zUOEfb8Mk1
+	hsQKzQhrIrd5jWtY/yRWis0mk2GziKIKEEcPZvE/aZ4R89mN+UfBugFJmAYKvJedNckwDdLC0+ULv
+	uA0LU9XVDonj28nRQtdPmWlwRbzTz0mf0BNI/CJPbACLINTZv02CXNTycEJyjpXc/gthjr2XPdd+J
+	IAH25HNxqsx/VGnSKyx2Ld9GtcAjsXs7Vs1aD6+lkWo39QMVtTLl6g8IwJxzKVYM9bdzgl0J/U+Zk
+	52aZEKGQ==;
+Received: from ip6-localhost ([::1]:46134 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1vE6H5-0097v1-0l; Wed, 29 Oct 2025 13:31:39 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:62870) 
+	id 1vE6Gb-0097kK-Eq; Wed, 29 Oct 2025 13:31:10 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:53190) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vE6BU-0096BF-Jg
- for samba-technical@lists.samba.org; Wed, 29 Oct 2025 13:26:15 +0000
+ (Exim) id 1vE6Ba-0096Cn-02
+ for samba-technical@lists.samba.org; Wed, 29 Oct 2025 13:26:17 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Message-ID:Date:Cc:To:From;
- bh=6ajYJYZhn54gmmGtB6NnAVMb7kn2cgOD94NG20/NY+s=; b=HlNnSlMKDhoja2FDuOpY2HxwC1
- UhQ9BAw8xncXWeA8nb0EhUhFm6T3IZAydE749Ygxc37xHnF6yD+MEho6wwnVF9T/dyAA8IvXs0Z+7
- iUU+E61Jm0yok164xQ2Lcc6WwkjawCWBjr8FTfxv9NVuqZD9C8UEjdP1TgDMgAM1dFgiX4gZLV61N
- x6JBTkWNyTA3gMp4RaTbyIRfTRfKexr1CgoWi5Vg+Bq2DYcGWbEKy5OjzGkAC5QYqP9ifQ0TT5O0a
- H9ozsiOaWduuiR3TXTyeD4ZRUTC8VCwW6cN5rlnxk7mlwVg5FkEYu7tn+p+L7culS4vmLHo6ZUkbq
- JVhHjVTGydxcNyYbuqzdWw6NfmyossaTeaqN5JFv1laDOxIK7eh5HrzI4Uo0SY1cWptpOzNLxWQvy
- nw66ZZqrwQ7MT7XV9Sdii8ruypSRXjqJPA5KR0dS2/eh3HD4RvdjI4Sn05rs2gvBOYbBE/rv3EH/N
- rz8TtapGylz83SyqG1Xp8peY;
+ bh=pfC+cCjTHct7mk1V52JruYkp2LBY0zWVMoqgwj8Mnc8=; b=QeHCZq7wI0UCEYFE5glOcpZgxf
+ 4eL5Z8LCfiKdYyhoQgvdzLq3+4PPq02kYN0nWlk30p1Un6moWE2752dhApB8QS3d84UlIglw5wVJo
+ G+aaVScbfFuZBU/nApn3ZuesRprO1IfUPta6rPXHuSuAGz3jrARbRnFzQ/RQUbrscW8qeqi1i2uV6
+ peXsQv8Ayyob45GFeEAbU+rIDQQoZgQ0VdC/9p2PjCBxiGOJDph0VnQGfGFhx/g8Tr1J8BJlInp54
+ Pn7tN1Jj3lhHMrc0t6nd1FguCm1+X3CWCfKMacbEUexSnMvhNnUa1HQNKLxZDt4hUQunCtSC8iqd3
+ OLBP2O3N/ssJNHJh2cQ33LhvHlSRVlM++GpyTkGRE6hLcJJRQMOxRAnjpFzHiyKL79xyuhejbwNnW
+ eZB5PSQT2AtV4x3aFne1Hm01Ie8pn34tWYGwQD9N4ynIOMWTCFqDUoQnfjagqFTa5a06q9pD11qCj
+ nq56N2WURAI8En7WzUHrUY8e;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vE6BR-00BbfZ-1v; Wed, 29 Oct 2025 13:25:49 +0000
+ (Exim) id 1vE6BX-00BbhG-1I; Wed, 29 Oct 2025 13:25:55 +0000
 To: linux-cifs@vger.kernel.org,
 	samba-technical@lists.samba.org
-Subject: [PATCH v2 033/127] smb: smbdirect: define SMBDIRECT_MIN_{RECEIVE,
- FRAGMENTED}_SIZE
-Date: Wed, 29 Oct 2025 14:20:11 +0100
-Message-ID: <02f575b80927faafd42b40531d26818c31e6cc32.1761742839.git.metze@samba.org>
+Subject: [PATCH v2 034/127] smb: smbdirect: define
+ SMBDIRECT_RDMA_CM_[RNR_]RETRY
+Date: Wed, 29 Oct 2025 14:20:12 +0100
+Message-ID: <389edffd757302120f2adb5a7385eb6d50d9a204.1761742839.git.metze@samba.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1761742839.git.metze@samba.org>
 References: <cover.1761742839.git.metze@samba.org>
@@ -65,7 +65,7 @@ Cc: metze@samba.org, Steve French <smfrench@gmail.com>,
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-These are specified in MS-SMBD...
+These are copies of {SMBD,SMB_DIRECT}_CM_[RNR_]RETRY.
 
 Cc: Steve French <smfrench@gmail.com>
 Cc: Tom Talpey <tom@talpey.com>
@@ -75,24 +75,27 @@ Cc: linux-cifs@vger.kernel.org
 Cc: samba-technical@lists.samba.org
 Signed-off-by: Stefan Metzmacher <metze@samba.org>
 ---
- fs/smb/common/smbdirect/smbdirect_pdu.h | 4 ++++
- 1 file changed, 4 insertions(+)
+ fs/smb/common/smbdirect/smbdirect_socket.h | 9 +++++++++
+ 1 file changed, 9 insertions(+)
 
-diff --git a/fs/smb/common/smbdirect/smbdirect_pdu.h b/fs/smb/common/smbdirect/smbdirect_pdu.h
-index ae9fdb05ce23..7693ba337873 100644
---- a/fs/smb/common/smbdirect/smbdirect_pdu.h
-+++ b/fs/smb/common/smbdirect/smbdirect_pdu.h
-@@ -8,6 +8,10 @@
+diff --git a/fs/smb/common/smbdirect/smbdirect_socket.h b/fs/smb/common/smbdirect/smbdirect_socket.h
+index 14c5d8503fca..795ce4b976ff 100644
+--- a/fs/smb/common/smbdirect/smbdirect_socket.h
++++ b/fs/smb/common/smbdirect/smbdirect_socket.h
+@@ -655,4 +655,13 @@ static inline size_t smbdirect_get_buf_page_count(const void *buf, size_t size)
+ 		(uintptr_t)buf / PAGE_SIZE;
+ }
  
- #define SMBDIRECT_V1 0x0100
- 
-+/* SMBD minimum receive size and fragmented sized defined in [MS-SMBD] */
-+#define SMBDIRECT_MIN_RECEIVE_SIZE		128
-+#define SMBDIRECT_MIN_FRAGMENTED_SIZE		131072
++/*
++ * Maximum number of retries on data transfer operations
++ */
++#define SMBDIRECT_RDMA_CM_RETRY 6
++/*
++ * No need to retry on Receiver Not Ready since SMB_DIRECT manages credits
++ */
++#define SMBDIRECT_RDMA_CM_RNR_RETRY 0
 +
- /* SMBD negotiation request packet [MS-SMBD] 2.2.1 */
- struct smbdirect_negotiate_req {
- 	__le16 min_version;
+ #endif /* __FS_SMB_COMMON_SMBDIRECT_SMBDIRECT_SOCKET_H__ */
 -- 
 2.43.0
 
