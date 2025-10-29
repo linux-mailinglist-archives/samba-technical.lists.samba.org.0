@@ -2,44 +2,44 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 29C98C1AACC
-	for <lists+samba-technical@lfdr.de>; Wed, 29 Oct 2025 14:28:51 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1C47CC1AAD8
+	for <lists+samba-technical@lfdr.de>; Wed, 29 Oct 2025 14:29:11 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=e32+HEKZsRvIZhe8SJt6PWjWzu0O/6ukW3cbEH/tlGc=; b=ZTTiEjCeWG5CVUAKywebSvdsBv
-	26zvm65IC/koRKfZ9dF/AhVoadvE42sel5DDdoNyy+0eYLmp2RMB7YQuOtKJIav7ZsY37H8TG2HGM
-	Twbx9t+6cBunQ5zQYMP4CY9Ky/VscntT7I2fzu5IJ1jaUaLzhhZ18PCU5GgQre8fr7Y9AoCz7fUz1
-	p2SQ3jjNIKl05wemXY6XZxViNFRo0caBf1JipQzQJ9nol+xeN4MmoArVPfFy62V4JfIaEs22q6D9u
-	A48mb57RmFEV4dCf77DwkiTMvBxCi31dJ4ACx03dYSPa0tiDElsTcXdaguvOD3hSRnYJ0XCfnIT67
-	EWOD9FoA==;
-Received: from ip6-localhost ([::1]:33680 helo=hr1.samba.org) 
+	bh=VJLjmfyDt5+9y4iItrcaTHh+lOOl9QB97ndegJs707E=; b=lpdHRzNct7jnoDWzioU3/t6/fA
+	t2EirBcFSfRNCHF1vktTeb2fh2qJ8hkwq+09j/Ivc9RmLQC/m4EaYF23yKT9e7ISQpULBvTZF1Dui
+	KQbDuPhHM//ZUnYRC10MJiiWZi06eucMERfUXcZrIII6MwWsUf5hNw1GUy9Kvw2KAfkSnSjzaZZ6C
+	Sd8IFq9wCqou5MjiHRvHx0vWxcB2PrHkIoY+ciZ8wcUu1zY7Tny6sdZ5YMj69mhOS6sWniKZf4pB/
+	NcE7HJhFJoaQnYR9FFkJg+a8AfjgCpYyl4mlzwePLOsDItaSBeBB4L+5VvT5gQfKyIKFwiV2BiEWo
+	jBslIHKg==;
+Received: from ip6-localhost ([::1]:49380 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1vE6EA-0096z9-5a; Wed, 29 Oct 2025 13:28:38 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:36788) 
+	id 1vE6EV-009738-Va; Wed, 29 Oct 2025 13:29:00 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:26376) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vE6AU-0095r5-D6
- for samba-technical@lists.samba.org; Wed, 29 Oct 2025 13:25:04 +0000
+ (Exim) id 1vE6Ab-0095sX-1c
+ for samba-technical@lists.samba.org; Wed, 29 Oct 2025 13:25:12 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Message-ID:Date:Cc:To:From;
- bh=e32+HEKZsRvIZhe8SJt6PWjWzu0O/6ukW3cbEH/tlGc=; b=gYLi09CSizA1UK7puNO46Q8DpG
- zYlK027IE66R6MWGVvalHhE+B/vtM4lhUyb+jvJ2ENfftnKnoRAQQPJOq2gt80vRHppNa0X2+fkj2
- 5G5GXYJsITC/6veNJhemrr3EPNh5Svz2snZ93O4uantTlxXyXD2PGDawlHLggozpivw4g9sqCGp05
- deolZkpc0ZSe7bEuS2FueSJTgy4Ykgr8KNXnuw1gSg+ZFHIxdJfGGecjBuNi8dVGnC/TUqxuz3/LI
- 7uglx06DOLYphqGH1wxn0ycmZ4mvNtGEgXgluvRHgNhUKCSmJtRUadj1LhGerOC3MX91Zp9s5aEvT
- eLVr3+eDifPcSp42INZ2DjNULG3o3j4QyR64Vw7B6EBVb/u62brUuKdvfil4Iaz5ZXwCl87+tmjD6
- Jr4FLZGiTQR1yEfpJPIwqV1v6IUaE9eN8TKFXBGcFv+bXm+mGw1Cx+i1bisrS53zYp7TXuUUQ4xwh
- WH35SVLFGVuErz4QI5j4+IpZ;
+ bh=VJLjmfyDt5+9y4iItrcaTHh+lOOl9QB97ndegJs707E=; b=YzLGu/9r6sRyRpCBfl9h/RZa3f
+ 5ZAgcEH1FXXAjVk7N/m+eH100UxMT7LADQSnEuW8OSEj48NIXvLwiEDdi8NyxNyATMeh27/XQJFtx
+ M2zUHu+OPbHLOjtbFhJa5+7oYB+9ElO7nIBC32VjbCg0UgU4ZiAD2njqY9124eJ6Ybahx2i1hHZpt
+ o9ONBQ8kfKqNtRb6eP+s7xSCJoOt9AX+TmYJwB9xlcECeBo0eMbSCkyn75kHfCNjJvjXWKinhYmxI
+ rysw75nMbeY8sZw0luxbgqMYjhTaycS56ixQUa9URM6ZAYcqWLDtRo6/NGfw3ANKjbGn2joJSu3iV
+ 8z/2Fkre0ONh1LMXYYIsde2j85paXMZKr8SQWwJpTPMJy4PLAFY0KXleCnkumjmc3OBvpSWI0eBLc
+ HqtLSlCjC3ZUmELwKD8YDqGEe9rdEePoqpdLl/hts51Tb4wku4Jsw64t3bzI/NIlNFTQHrTcK7jfs
+ /NEYaqPxVBg2mdtzpk7VVlJi;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vE6AR-00BbYJ-1J; Wed, 29 Oct 2025 13:24:47 +0000
+ (Exim) id 1vE6AX-00BbZS-0z; Wed, 29 Oct 2025 13:24:53 +0000
 To: linux-cifs@vger.kernel.org,
 	samba-technical@lists.samba.org
-Subject: [PATCH v2 023/127] smb: smbdirect: introduce
- smbdirect_connection_qp_event_handler()
-Date: Wed, 29 Oct 2025 14:20:01 +0100
-Message-ID: <0379d74442c68fbdb99fdd1d4f05cf01a77bf16c.1761742839.git.metze@samba.org>
+Subject: [PATCH v2 024/127] smb: smbdirect: introduce
+ smbdirect_connection_negotiate_rdma_resources()
+Date: Wed, 29 Oct 2025 14:20:02 +0100
+Message-ID: <80272a2f43e929e30b7d8e7e7b32a64332250ded.1761742839.git.metze@samba.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1761742839.git.metze@samba.org>
 References: <cover.1761742839.git.metze@samba.org>
@@ -66,10 +66,9 @@ Cc: Tom Talpey <tom@talpey.com>, metze@samba.org,
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is basically a copy of smbd_qp_async_error_upcall()
-in the client and smb_direct_qpair_handler() in the server.
-They will be replaced by the new common function soon,
-which will allow more code to be moved as well.
+This is a copy of the same logic used in client and server,
+it's inlined there, but they will use the new helper function
+soon.
 
 Cc: Steve French <smfrench@gmail.com>
 Cc: Tom Talpey <tom@talpey.com>
@@ -80,50 +79,79 @@ Cc: samba-technical@lists.samba.org
 Signed-off-by: Stefan Metzmacher <metze@samba.org>
 Signed-off-by: Steve French <stfrench@microsoft.com>
 ---
- .../common/smbdirect/smbdirect_connection.c   | 26 ++++++++++++++++++-
- 1 file changed, 25 insertions(+), 1 deletion(-)
+ .../common/smbdirect/smbdirect_connection.c   | 62 +++++++++++++++++++
+ 1 file changed, 62 insertions(+)
 
 diff --git a/fs/smb/common/smbdirect/smbdirect_connection.c b/fs/smb/common/smbdirect/smbdirect_connection.c
-index 1113a7e9d575..5afb27f790a5 100644
+index 5afb27f790a5..7a8a351d0484 100644
 --- a/fs/smb/common/smbdirect/smbdirect_connection.c
 +++ b/fs/smb/common/smbdirect/smbdirect_connection.c
-@@ -101,6 +101,31 @@ static void smbdirect_connection_wake_up_all(struct smbdirect_socket *sc)
- 	wake_up_all(&sc->mr_io.cleanup.wait_queue);
- }
- 
-+__maybe_unused /* this is temporary while this file is included in orders */
-+static void smbdirect_connection_qp_event_handler(struct ib_event *event, void *context)
-+{
-+	struct smbdirect_socket *sc = context;
-+
-+	smbdirect_log_rdma_event(sc, SMBDIRECT_LOG_ERR,
-+		"%s on device %.*s socket %p (cm_id=%p) status %s first_error %1pe\n",
-+		ib_event_msg(event->event),
-+		IB_DEVICE_NAME_MAX,
-+		event->device->name,
-+		sc, sc->rdma.cm_id,
-+		smbdirect_socket_status_string(sc->status),
-+		SMBDIRECT_DEBUG_ERR_PTR(sc->first_error));
-+
-+	switch (event->event) {
-+	case IB_EVENT_CQ_ERR:
-+	case IB_EVENT_QP_FATAL:
-+		smbdirect_connection_schedule_disconnect(sc, -ECONNABORTED);
-+		break;
-+
-+	default:
-+		break;
-+	}
-+}
-+
- static void smbdirect_connection_destroy_mem_pools(struct smbdirect_socket *sc);
- 
- __maybe_unused /* this is temporary while this file is included in orders */
-@@ -331,7 +356,6 @@ smbdirect_connection_reassembly_first_recv_io(struct smbdirect_socket *sc)
+@@ -356,6 +356,68 @@ smbdirect_connection_reassembly_first_recv_io(struct smbdirect_socket *sc)
  	return msg;
  }
  
--__maybe_unused /* this is temporary while this file is included in orders */
++__maybe_unused /* this is temporary while this file is included in orders */
++static void smbdirect_connection_negotiate_rdma_resources(struct smbdirect_socket *sc,
++							  u8 peer_initiator_depth,
++							  u8 peer_responder_resources,
++							  const struct rdma_conn_param *param)
++{
++	struct smbdirect_socket_parameters *sp = &sc->parameters;
++
++	if (rdma_protocol_iwarp(sc->ib.dev, sc->rdma.cm_id->port_num) &&
++	    param->private_data_len == 8) {
++		/*
++		 * Legacy clients with only iWarp MPA v1 support
++		 * need a private blob in order to negotiate
++		 * the IRD/ORD values.
++		 */
++		const __be32 *ird_ord_hdr = param->private_data;
++		u32 ird32 = be32_to_cpu(ird_ord_hdr[0]);
++		u32 ord32 = be32_to_cpu(ird_ord_hdr[1]);
++
++		/*
++		 * cifs.ko sends the legacy IRD/ORD negotiation
++		 * event if iWarp MPA v2 was used.
++		 *
++		 * Here we check that the values match and only
++		 * mark the client as legacy if they don't match.
++		 */
++		if ((u32)param->initiator_depth != ird32 ||
++		    (u32)param->responder_resources != ord32) {
++			/*
++			 * There are broken clients (old cifs.ko)
++			 * using little endian and also
++			 * struct rdma_conn_param only uses u8
++			 * for initiator_depth and responder_resources,
++			 * so we truncate the value to U8_MAX.
++			 *
++			 * smb_direct_accept_client() will then
++			 * do the real negotiation in order to
++			 * select the minimum between client and
++			 * server.
++			 */
++			ird32 = min_t(u32, ird32, U8_MAX);
++			ord32 = min_t(u32, ord32, U8_MAX);
++
++			sc->rdma.legacy_iwarp = true;
++			peer_initiator_depth = (u8)ird32;
++			peer_responder_resources = (u8)ord32;
++		}
++	}
++
++	/*
++	 * negotiate the value by using the minimum
++	 * between client and server if the client provided
++	 * non 0 values.
++	 */
++	if (peer_initiator_depth != 0)
++		sp->initiator_depth = min_t(u8, sp->initiator_depth,
++					    peer_initiator_depth);
++	if (peer_responder_resources != 0)
++		sp->responder_resources = min_t(u8, sp->responder_resources,
++						peer_responder_resources);
++}
++
  static void smbdirect_connection_schedule_disconnect(struct smbdirect_socket *sc,
  						     int error)
  {
