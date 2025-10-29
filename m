@@ -2,44 +2,44 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1FA82C1AF27
-	for <lists+samba-technical@lfdr.de>; Wed, 29 Oct 2025 14:51:30 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C1CBBC1AF2F
+	for <lists+samba-technical@lfdr.de>; Wed, 29 Oct 2025 14:51:42 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=WFmF5+Nt1NBCDo66N7R5SUSiASwFwn+Nbs5KdfV8Sx8=; b=3t+C9jmg/FZpLE+Lr/dJ/+GxG4
-	/cuKBRLkzL6G7caCXDuWWyAZp2AIDgu1eWLkGNtKBIIIQwVgCEsyMvs3uBjeUoNvKHw3jpj/0l6Dw
-	ZRbzwXd92vW8gRe0bTM+lH0cc1GS0vKycIvlnEjGm5rnx75CTEurNt1J/M5pMh0g3Cb7d/D8EVRNw
-	9VjWG6GyEBgSRPesDdeBnxYtLr/tk/ZVCoKUmNdVO4TCB9lBSBuh/tul7a3vheASJP+C/bqQR96Ec
-	9W49fHHf/Yib8Q8z4ApRT9J1FBHEkCl8ElEfiKr0olA/YrOKLFW0o1jwIdBnlJDRQDttJpdO6zMIe
-	8oo4Thgg==;
-Received: from ip6-localhost ([::1]:29478 helo=hr1.samba.org) 
+	bh=sMZ7fW9DbAWU81y4mz49GLom1R+WSFHnSMvDkKcbId4=; b=jmxx8Fvbk6D4EUbgYnQhfaVmOj
+	KKJNeGxCBHUFEhJX4rwJS38xt9MQnWU7x+EsVDrdMv7tj4Wzs0ZyFWb0TKd2AkYmWYQCYve7gXjX0
+	Q0Mi19QW+bOgJkCWb6AI4vUq6ulScdcKRY7JgKr+9REzVrZmAyT+UupIN8/8gb7T3zGkhf0sEnz04
+	+lzcPS4NgNI/VaIPkYeycW+7pNBphbDJD8NV/Ogx2iVO0OAfFHej84Kcuyirv4KD/SaDsHLX3duqW
+	mHmRMI32fBKIoMxe8iBr5yBAK5vO0Rnu6ysPn/XCGdMVgEHrDvZ+2wIbhvb3vUjgs8MQWMdBZh/k4
+	KXQFvzmg==;
+Received: from ip6-localhost ([::1]:34688 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1vE6a9-009Erc-85; Wed, 29 Oct 2025 13:51:21 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:44854) 
+	id 1vE6aL-009Ew0-GN; Wed, 29 Oct 2025 13:51:34 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:48382) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vE6Jy-0098yn-SI
- for samba-technical@lists.samba.org; Wed, 29 Oct 2025 13:34:49 +0000
+ (Exim) id 1vE6K5-00991A-GQ
+ for samba-technical@lists.samba.org; Wed, 29 Oct 2025 13:34:56 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Message-ID:Date:Cc:To:From;
- bh=WFmF5+Nt1NBCDo66N7R5SUSiASwFwn+Nbs5KdfV8Sx8=; b=dyDRVakfNY0eIxuzZn5uZT2LWh
- 9gJ51C9DR2QpyE1xmybRsZjWnk54yaEuPoEWv16FQbJ9X6GbVXM8PB70qbGnEKDRyDNUzVE32CHkf
- cV+HjVVun7b7M86YklU5xkb6xCU/ITSv4Sxir02TrBuGwNJj6h08uzpDqivCBF2F4qeRd7HU09eqG
- sRl1YVkPEcSphuMcCElZylVoZtMIDocBNx5JnxENz2lChbN3XuCYIQbHgpLKSJH2/AF9wVxRqb/l+
- otqRARAf+i58V6ZFcl+D1ObpagieB0VGzy76dt5d6YX0Danv9Gx6YOHQwQuB8kLL2kPR1WT8xztD3
- TRSjaEYuRDFxpzQLJBtu0Su+qr6yH6vEWqklryCmRe7Yg3YOtl8ZqMF+nMZv4d2NSzQVHfp4tmm7B
- /FIZ0rv+fmLbp9KzgrfQNl1I3hIDVhwf8ovO+tcMjYJZrE6x4DjicFFYxGNzPhkXhxh04516F7r08
- DKgOFzGFdR7W7Aj5d+U2fXXS;
+ bh=sMZ7fW9DbAWU81y4mz49GLom1R+WSFHnSMvDkKcbId4=; b=vZb2Xh9aZWUcqCYzkitHjgLtIZ
+ G6v7BHoF2uDE8YayjCgT/7GA8yrk2dw/uWMd+8DwsN5NXRuoW0LZgf+O+jaQCD/wWCxLqXBpjdVLe
+ i2LcxNW0If/B5EqHnOxNwvitWRAlsvDBJ2dpAon+QeJ56mSnO0ubZtSp4mGUmYOcTK2o6egvIrTuM
+ UeDRPsbImhEZrh2YClPB2flNKNdVJuTZJlLvWgoGwp4Jgx/jZ/A2tCYMEWuciMNdeNWd5P/M9yPVx
+ v7J4bpRlZq+sGxSqoyXyIGLUe6Alzr6+Nh49X9YWuk8aSI1HcAvN56dETYWI9Kib+/0cQXqORQ5fy
+ Ec2K9Y7I4ctS/pBHLkCMmx2JkFnlp43s/iRl3U38AV2o7taDZ0rJebqFr87V1MWHPpZ1QHdalvAd9
+ 6ZyyuwV6rrDQtuX6CoXKlqCLFtq1MYH72Dl7gPnKrG1HwuNNwYLsBmeQwQ3GRuWVdgxnqwO89dXir
+ mgCP+57NP/Rj8bYFLSWf/9kX;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vE6Jx-00Bd5p-0g; Wed, 29 Oct 2025 13:34:37 +0000
+ (Exim) id 1vE6K2-00Bd6U-2A; Wed, 29 Oct 2025 13:34:43 +0000
 To: linux-cifs@vger.kernel.org,
 	samba-technical@lists.samba.org
-Subject: [PATCH v2 121/127] smb: server: split out smb_direct_send_iter() out
- of smb_direct_writev()
-Date: Wed, 29 Oct 2025 14:21:39 +0100
-Message-ID: <ee587568b35f5bd2ae8580a4f29c843a09ddfe20.1761742839.git.metze@samba.org>
+Subject: [PATCH v2 122/127] smb: server: let smb_direct_post_send_data()
+ return data_length
+Date: Wed, 29 Oct 2025 14:21:40 +0100
+Message-ID: <68de896993e35b062dbe77bc86d4d56a2143f791.1761742839.git.metze@samba.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1761742839.git.metze@samba.org>
 References: <cover.1761742839.git.metze@samba.org>
@@ -65,7 +65,7 @@ Cc: metze@samba.org, Steve French <smfrench@gmail.com>,
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This will help to move to common code in future.
+This make it easier moving to common code shared with the client.
 
 Cc: Namjae Jeon <linkinjeon@kernel.org>
 Cc: Steve French <smfrench@gmail.com>
@@ -74,96 +74,31 @@ Cc: linux-cifs@vger.kernel.org
 Cc: samba-technical@lists.samba.org
 Signed-off-by: Stefan Metzmacher <metze@samba.org>
 ---
- fs/smb/server/transport_rdma.c | 47 +++++++++++++++++++++++-----------
- 1 file changed, 32 insertions(+), 15 deletions(-)
+ fs/smb/server/transport_rdma.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/fs/smb/server/transport_rdma.c b/fs/smb/server/transport_rdma.c
-index d888b5396cd6..8a5183426bbb 100644
+index 8a5183426bbb..070c386dd2ea 100644
 --- a/fs/smb/server/transport_rdma.c
 +++ b/fs/smb/server/transport_rdma.c
-@@ -757,43 +757,47 @@ static int smb_direct_post_send_data(struct smbdirect_socket *sc,
- 	return ret;
- }
- 
--static int smb_direct_writev(struct ksmbd_transport *t,
--			     struct kvec *iov, int niovs, int buflen,
--			     bool need_invalidate, unsigned int remote_key)
-+static int smb_direct_send_iter(struct smbdirect_socket *sc,
-+				struct iov_iter *iter,
-+				bool need_invalidate,
-+				unsigned int remote_key)
- {
--	struct smb_direct_transport *st = SMBD_TRANS(t);
--	struct smbdirect_socket *sc = &st->socket;
- 	struct smbdirect_socket_parameters *sp = &sc->parameters;
- 	int ret;
- 	struct smbdirect_send_batch send_ctx;
--	struct iov_iter iter;
- 	int error = 0;
-+	__be32 hdr;
- 
- 	if (sc->status != SMBDIRECT_SOCKET_CONNECTED)
- 		return -ENOTCONN;
- 
--	//FIXME: skip RFC1002 header..
--	if (WARN_ON_ONCE(niovs <= 1 || iov[0].iov_len != 4))
-+	/*
-+	 * For now we expect the iter to have the full
-+	 * message, including a 4 byte length header.
-+	 */
-+	if (iov_iter_count(iter) <= 4)
-+		return -EINVAL;
-+	if (!copy_from_iter_full(&hdr, sizeof(hdr), iter))
-+		return -EFAULT;
-+	if (iov_iter_count(iter) != be32_to_cpu(hdr))
- 		return -EINVAL;
--	iov_iter_kvec(&iter, ITER_SOURCE, iov, niovs, buflen);
--	iov_iter_advance(&iter, 4);
- 
- 	/*
- 	 * The size must fit into the negotiated
- 	 * fragmented send size.
- 	 */
--	if (iov_iter_count(&iter) > sp->max_fragmented_send_size)
-+	if (iov_iter_count(iter) > sp->max_fragmented_send_size)
- 		return -EMSGSIZE;
- 
- 	ksmbd_debug(RDMA, "Sending smb (RDMA): smb_len=%zu\n",
--		    iov_iter_count(&iter));
-+		    iov_iter_count(iter));
- 
- 	smb_direct_send_ctx_init(&send_ctx, need_invalidate, remote_key);
--	while (iov_iter_count(&iter)) {
-+	while (iov_iter_count(iter)) {
- 		ret = smb_direct_post_send_data(sc,
+@@ -746,7 +746,7 @@ static int smb_direct_post_send_data(struct smbdirect_socket *sc,
+ 	ret = post_sendmsg(sc, send_ctx, msg);
+ 	if (ret)
+ 		goto err;
+-	return 0;
++	return data_length;
+ err:
+ 	smbdirect_connection_free_send_io(msg);
+ alloc_failed:
+@@ -798,7 +798,7 @@ static int smb_direct_send_iter(struct smbdirect_socket *sc,
  						&send_ctx,
--						&iter,
--						iov_iter_count(&iter));
-+						iter,
-+						iov_iter_count(iter));
- 		if (unlikely(ret)) {
+ 						iter,
+ 						iov_iter_count(iter));
+-		if (unlikely(ret)) {
++		if (unlikely(ret < 0)) {
  			error = ret;
  			break;
-@@ -820,6 +824,19 @@ static int smb_direct_writev(struct ksmbd_transport *t,
- 	return ret;
- }
- 
-+static int smb_direct_writev(struct ksmbd_transport *t,
-+			     struct kvec *iov, int niovs, int buflen,
-+			     bool need_invalidate, unsigned int remote_key)
-+{
-+	struct smb_direct_transport *st = SMBD_TRANS(t);
-+	struct smbdirect_socket *sc = &st->socket;
-+	struct iov_iter iter;
-+
-+	iov_iter_kvec(&iter, ITER_SOURCE, iov, niovs, buflen);
-+
-+	return smb_direct_send_iter(sc, &iter, need_invalidate, remote_key);
-+}
-+
- static int smb_direct_rdma_write(struct ksmbd_transport *t,
- 				 void *buf, unsigned int buflen,
- 				 struct smbdirect_buffer_descriptor_v1 *desc,
+ 		}
 -- 
 2.43.0
 
