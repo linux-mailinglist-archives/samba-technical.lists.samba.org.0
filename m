@@ -2,44 +2,44 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7001AC1ABC0
-	for <lists+samba-technical@lfdr.de>; Wed, 29 Oct 2025 14:34:47 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 92AEEC1ABD2
+	for <lists+samba-technical@lfdr.de>; Wed, 29 Oct 2025 14:35:05 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=WNVoZ11kryC1OlFDyxOooBhkkCBKEAJd45gIaf8iGZM=; b=ys3sJId3Ijf6Uo8+pvA0tyOOVF
-	fV0J6MfLWxHc+IThcyxFePXjylgeh80HJY/TMFk66Tmo8UkocM4u2HIbJtD03PtYE/WmLqTh7z0NH
-	U5HRK3j3eKah2nxIekwTAb96HMrs8t3lS5EWenKQQGrBLsY4ov3mYYBeLWV7YIffsWkCxMGYsnbuq
-	tRO4ZhLDwQfiIvm5PcfUUixeUBZv+Vxvnhn74OpUNUeebiY9+bZhyPJ3B11RIJc8xzZus2SSu2ngu
-	r8h8TzkdyaKXTzUi7zjFMQLcpfA9+vTND9mFpC9OYQvIcz7wGXfEwyHzNjVvBrxtC/8pbT7/S9NEz
-	juPbVm5Q==;
-Received: from ip6-localhost ([::1]:23288 helo=hr1.samba.org) 
+	bh=5SnSj2eQcuRm+P36UsJW55o8k1/pIVpEPVCSUniMkoE=; b=Yx7tlKFr5i0MJtTowTxOujMNqg
+	k1YSNSGYmVDz2BuLQczT52Q9M/sZ0ks+zsIxXfLAaT2lAq0eLpFblM7cxkdSIITTrGPv5Iwi5aoPC
+	M8NystvFuCzalAQzLjfX9yz8QiySwFW7CkobmMbMp7gITeJoupV3Bo/pf9bLwMO2UD+A/T69KjoIs
+	WZfFjNpDI1gJegT/uUIZQV6/veq/x76UdWMdIT99vI6j7WjSLtI150lCs/Y/T+VHI9aMwRbB5GpjM
+	RxrHo+tQ73wO987zCYV5ecIpq2hF6clBiLga8jMUVblIfcVybg7zWhDw7XwDYgTB0MnO0IW0Xb4M5
+	FdwQec4g==;
+Received: from ip6-localhost ([::1]:26092 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1vE6Jz-0098ub-TS; Wed, 29 Oct 2025 13:34:40 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:50422) 
+	id 1vE6KG-0098zV-Qn; Wed, 29 Oct 2025 13:34:57 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:50426) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vE6Cf-0096XQ-LR
- for samba-technical@lists.samba.org; Wed, 29 Oct 2025 13:27:18 +0000
+ (Exim) id 1vE6Ck-0096Ys-JU
+ for samba-technical@lists.samba.org; Wed, 29 Oct 2025 13:27:21 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Message-ID:Date:Cc:To:From;
- bh=WNVoZ11kryC1OlFDyxOooBhkkCBKEAJd45gIaf8iGZM=; b=W8/aTlQbHhLtphYaJ9ExmVojaI
- c6oxVJ++6NntTuFf/p+OHa2LGriNo8E62zXOlaWJeJ5w/D1veIzFKN3D/RjopKn9uPw20l7pYzV/i
- jGWU60MkMP3FLFtJj3escCnsjLNNlUpaIk1ZkC4mUSO5FR0ep0tod93nImbRsg7knX29pFrE+f0Xh
- HaWci7Vch27HL27dhpbA6PwLMulJn5HwNY12SWOsURKaJUcEqxrr7veVIFnmiv5KFcGAXARTKJaqw
- nyzl4LrAULkh/7kTAdlAn4XgE7qq/6FtkWqxNZghhvLcp2crbO9ioWiQNlVEIuxs5bDWOxn0p/9qX
- AB5sRjacIvM9jxCaG0giolj/DlZMp6WHSuNu3d1HxaqcU0L+i8t9dYobDWBdxirYIuyqMrsD00/63
- ugDl5rF8Of64V/ujAd+V9Q6EVIAQZc6KX6kRZWyinnfqFV3MlqDM0rzX8L1JUwYYOawXSTZm1i10j
- w1plNlXWpV7wSGwgHdwrenSq;
+ bh=5SnSj2eQcuRm+P36UsJW55o8k1/pIVpEPVCSUniMkoE=; b=uzLCT5KOlSxl8xex2LIczxlqoh
+ qSNTvQG39dPwguPVEyu+8IqnpIzCaFfTI3QKjbifvmUrrurItOcwzAv1OhEQiKIDvIwhVNlHq/PSS
+ 86z9ffC0MrjlsMlYu7mlU4OeVZuOiCsgpp5TZL1UiNdCEdatfNCIurFIYPiI9Rkv1Jbx6oKZBQh4z
+ foFjCi9X8Q+d0hfO1oSqeJRlf9hul3YOggMGCtYN51oLBqSkNAie+fwCuqByxN574tgp1vrvAM+5q
+ W1P9Sj1UixcyFbIuUWOh3MD5vOSIXtg6EgbQCGpyPYkVccUQDPKD/Wo59cGG7Npynws40cjbHnexS
+ mX2J9+xRGmxNzSEscZ/fNkafbfKA/HxPTzERBvpf69hOG1akbRJoILJtTUpQ409Jzmzate3aaQhDN
+ LqA8ugITrkBn2iyE4/8EaJzpBOhFFB+ZY9NRPP38AhrOb9n92hpdp6AxtrtIWbhjIShuRPs8hMOID
+ miLlHg622Gr6H8inNFUJA2Fs;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vE6Cc-00Bbse-2v; Wed, 29 Oct 2025 13:27:03 +0000
+ (Exim) id 1vE6Ci-00BbtV-1X; Wed, 29 Oct 2025 13:27:08 +0000
 To: linux-cifs@vger.kernel.org,
 	samba-technical@lists.samba.org
-Subject: [PATCH v2 046/127] smb: smbdirect: introduce
- smbdirect_connection_wait_for_connected()
-Date: Wed, 29 Oct 2025 14:20:24 +0100
-Message-ID: <f399ee6b6a41ab4983c5ea5b6721174b4cb91565.1761742839.git.metze@samba.org>
+Subject: [PATCH v2 047/127] smb: smbdirect: introduce
+ smbdirect_connection_is_connected()
+Date: Wed, 29 Oct 2025 14:20:25 +0100
+Message-ID: <28f7953cda95a9162ec7ae7ac146959f77e103d4.1761742839.git.metze@samba.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1761742839.git.metze@samba.org>
 References: <cover.1761742839.git.metze@samba.org>
@@ -65,9 +65,8 @@ Cc: metze@samba.org, Steve French <smfrench@gmail.com>,
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This will be used by client and server in order to wait for
-the connect/negotiation to finish in order to get a usable
-connection.
+This is a simple way to check is the connection is still ok
+without the need to know internals of struct smbdirect_socket.
 
 Cc: Steve French <smfrench@gmail.com>
 Cc: Tom Talpey <tom@talpey.com>
@@ -77,88 +76,28 @@ Cc: linux-cifs@vger.kernel.org
 Cc: samba-technical@lists.samba.org
 Signed-off-by: Stefan Metzmacher <metze@samba.org>
 ---
- .../common/smbdirect/smbdirect_connection.c   | 68 +++++++++++++++++++
- 1 file changed, 68 insertions(+)
+ fs/smb/common/smbdirect/smbdirect_connection.c | 8 ++++++++
+ 1 file changed, 8 insertions(+)
 
 diff --git a/fs/smb/common/smbdirect/smbdirect_connection.c b/fs/smb/common/smbdirect/smbdirect_connection.c
-index daab8b5eba49..858b071ba1bb 100644
+index 858b071ba1bb..1487efbe7620 100644
 --- a/fs/smb/common/smbdirect/smbdirect_connection.c
 +++ b/fs/smb/common/smbdirect/smbdirect_connection.c
-@@ -900,6 +900,74 @@ static void smbdirect_connection_disconnect_work(struct work_struct *work)
+@@ -900,6 +900,14 @@ static void smbdirect_connection_disconnect_work(struct work_struct *work)
  	smbdirect_connection_wake_up_all(sc);
  }
  
 +__maybe_unused /* this is temporary while this file is included in orders */
-+static int smbdirect_connection_wait_for_connected(struct smbdirect_socket *sc)
++static bool smbdirect_connection_is_connected(struct smbdirect_socket *sc)
 +{
-+	struct smbdirect_socket_parameters *sp = &sc->parameters;
-+	union {
-+		struct sockaddr sa;
-+		struct sockaddr_storage ss;
-+	} src_addr, dst_addr;
-+	const struct sockaddr *src = NULL;
-+	const struct sockaddr *dst = NULL;
-+	char _devname[IB_DEVICE_NAME_MAX] = { 0, };
-+	const char *devname = NULL;
-+	int ret;
-+
-+	if (sc->rdma.cm_id) {
-+		src_addr.ss = sc->rdma.cm_id->route.addr.src_addr;
-+		if (src_addr.sa.sa_family != AF_UNSPEC)
-+			src = &src_addr.sa;
-+		dst_addr.ss = sc->rdma.cm_id->route.addr.dst_addr;
-+		if (dst_addr.sa.sa_family != AF_UNSPEC)
-+			dst = &dst_addr.sa;
-+
-+		if (sc->ib.dev) {
-+			memcpy(_devname, sc->ib.dev->name, IB_DEVICE_NAME_MAX);
-+			devname = _devname;
-+		}
-+	}
-+
-+	smbdirect_log_rdma_event(sc, SMBDIRECT_LOG_INFO,
-+		"waiting for connection: device: %.*s local: %pISpsfc remote: %pISpsfc\n",
-+		IB_DEVICE_NAME_MAX, devname, src, dst);
-+
-+	ret = wait_event_interruptible_timeout(sc->status_wait,
-+					       sc->status == SMBDIRECT_SOCKET_CONNECTED ||
-+					       sc->first_error,
-+					       msecs_to_jiffies(sp->negotiate_timeout_msec));
-+	if (sc->rdma.cm_id) {
-+		/*
-+		 * Maybe src and dev are updated in the meantime.
-+		 */
-+		src_addr.ss = sc->rdma.cm_id->route.addr.src_addr;
-+		if (src_addr.sa.sa_family != AF_UNSPEC)
-+			src = &src_addr.sa;
-+		dst_addr.ss = sc->rdma.cm_id->route.addr.dst_addr;
-+		if (dst_addr.sa.sa_family != AF_UNSPEC)
-+			dst = &dst_addr.sa;
-+
-+		if (sc->ib.dev) {
-+			memcpy(_devname, sc->ib.dev->name, IB_DEVICE_NAME_MAX);
-+			devname = _devname;
-+		}
-+	}
-+	if (ret == 0)
-+		ret = -ETIMEDOUT;
-+	if (ret < 0)
-+		smbdirect_connection_schedule_disconnect(sc, ret);
-+	if (sc->first_error) {
-+		ret = sc->first_error;
-+		smbdirect_log_rdma_event(sc, SMBDIRECT_LOG_ERR,
-+			"connection failed %1pe device: %.*s local: %pISpsfc remote: %pISpsfc\n",
-+			SMBDIRECT_DEBUG_ERR_PTR(ret),
-+			IB_DEVICE_NAME_MAX, devname, src, dst);
-+		return ret;
-+	}
-+
-+	return 0;
++	if (unlikely(!sc || sc->first_error || sc->status != SMBDIRECT_SOCKET_CONNECTED))
++		return false;
++	return true;
 +}
 +
- static void smbdirect_connection_destroy(struct smbdirect_socket *sc)
+ __maybe_unused /* this is temporary while this file is included in orders */
+ static int smbdirect_connection_wait_for_connected(struct smbdirect_socket *sc)
  {
- 	struct smbdirect_recv_io *recv_io;
 -- 
 2.43.0
 
