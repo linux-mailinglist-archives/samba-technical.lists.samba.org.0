@@ -2,44 +2,44 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id CCA3BC1AAA2
-	for <lists+samba-technical@lfdr.de>; Wed, 29 Oct 2025 14:27:31 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 29107C1AAAE
+	for <lists+samba-technical@lfdr.de>; Wed, 29 Oct 2025 14:27:51 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=K22/MaNUFQMtuynkcFYrSuOsdhjg8smb1dCQfW679i4=; b=FeEIpN+PW9qn29EzaZx2RXg0xz
-	nJZhMjxxjNHLa910CAUPprhxRiWMuWEnzXrapp+yj8P2vQCIX8LhGEkqUpbKsAc9Fhl3m61bMvlJa
-	VF6FBLsCSDSYiK9zZz6W9tl+pNU4pGQpBE3cd95/fk7/STDQX6GBHEQzdsl3efpKfo/JTz+YoaXEO
-	+tMfvX+5uYiEG5OGNpTKAixIrPwm72zVO76/QmE0GKWNWLOrYWBnBoe8duaqOrsh0iZzrbP2n5dFh
-	pntDLnjXkLVMWZXDCsr5NsxwzNrWrvkdQtWpjLG5y4XMxkylZmuXi6fHUmYqhehQU+MkL6Yzb+iGT
-	lH0iNRXA==;
-Received: from ip6-localhost ([::1]:23574 helo=hr1.samba.org) 
+	bh=cZk5aFXX5xXOW8YNodXNig7vV9ZrwNbfow1iOam+RsI=; b=mNXOwBynFC3bPYa+GKWP7tC1N6
+	K7om5nujcBh8X9e2p9cdcotovfpd6UtG5ytKpUSiwwEhEIcCI4wc5VWkCa0M+yTCjqTQy4t1XQFU0
+	wzMLRMOpvZiaNnT/2n3Bn0zQabCJ3Ua1g1PouCCroiU3c8PALDI3Qdz+VxlIunPeIGPxmxkvA4wF8
+	bnxt1EliRrco8YTAZFYPTjwQo3j9BtGu7FwNNQtQ8YaPWDKF592RjxnvLBpFfydlcxCZy7sRH7MU9
+	fRLDI7sJ2TDIO/dxKQRu/XMVkGcNyr4w08xVsCqvGpjEh5/mYa35yj2o/OtUvN1ZyWvQ8yNAhew0V
+	0HnoBxeA==;
+Received: from ip6-localhost ([::1]:29692 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1vE6Cx-0096ZA-Dq; Wed, 29 Oct 2025 13:27:23 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:31684) 
+	id 1vE6DB-0096dy-Bs; Wed, 29 Oct 2025 13:27:37 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:28770) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vE6A1-0095hx-Mv
- for samba-technical@lists.samba.org; Wed, 29 Oct 2025 13:24:30 +0000
+ (Exim) id 1vE6A7-0095jQ-AR
+ for samba-technical@lists.samba.org; Wed, 29 Oct 2025 13:24:36 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Message-ID:Date:Cc:To:From;
- bh=K22/MaNUFQMtuynkcFYrSuOsdhjg8smb1dCQfW679i4=; b=KWVwjW2P7QPGYdndXczp7YOH4T
- dHGhmV4PyNiJo29YyXteZnqqyYgg+VCIy9lVDjHXD0RfNNkfIxC5MFsmLXp+f2oUK2Yod/UDULjT8
- kMTStFyoRGKDn4FHdr9jCDuvJ4Uti271N/Hm/QRRkEnGiVMJVYBEMbR7S/kjHXAynIK+UG/siOsd7
- p/yHq+I71GCtsoeCUIHTu0/d866p6bzwm+1Kr77wjaygs3AN7YaKga3TvQc1OOcM5+2sVFzsrkogq
- JXiHwEuUXnRo0FOBhTtnd5X+tUJWCL1e5bokxO3b862QbrUEfVczWmcODWrF+joyMC5X3Kw3O2YRc
- kkA7Q+k0d1wvdxMcJpzKE551WTwezDopUAYZ4r2KqUcokCkdHJN/MkjH2gPSXTWu68YPMAVFys81F
- XfaI45LU0wb3YipcJ6kUuNgeHKkV8uIfD99y/0QPNmpP1DJTg4w6M5xfmLeoziGQD9PAdkMBeN171
- ShfYJMbpayXBj+eGbwj9npXe;
+ bh=cZk5aFXX5xXOW8YNodXNig7vV9ZrwNbfow1iOam+RsI=; b=b2vecFNWHfFXs+HBEeFSZpIf/e
+ Ns1QggHOX42JblsMtxJ3UNyziqLP8Sbrs7chDy07ZlIQIO5qe7cURjetr9BtAL79Qfqq9ay05caM+
+ /XXyR+p+q3duek5l8GVvAmcigbsXHDQdIVQoYrT72KgyE8SwDk5undDxAj700GsczF6Qcr8KAB8YA
+ Ma9quDk+Vr3OLRyVQ75dFldxBboU2NqzReJewcvXhj+ocCOxLnrIoEg9Zp4NDdV+49jx6zVxr/tkQ
+ 2T8QvRU1noSrv/D7wf6TdUk0ezAXQUUClyj+ZIbZtnP+lUAEIG0kaxvFUsuNxUwnj2OAvX6dmT123
+ a9N1I99nVsBkqF8qkEc8f1NbALbHSwuo3CkrTZcOvLA89hfafOnGXGrc9UKa8nu7sz7mN2FLLTZGZ
+ ++YZOqG9M5L4X8Yz5As28VVJe+9WUFZZ4RV7lpCdBG85wemMmz4yNudwcFxMasLXholGRGN8F0CEg
+ hJbi7cB7t5X117liwi5SFLr/;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vE69y-00BbTS-0n; Wed, 29 Oct 2025 13:24:18 +0000
+ (Exim) id 1vE6A3-00BbUf-39; Wed, 29 Oct 2025 13:24:24 +0000
 To: linux-cifs@vger.kernel.org,
 	samba-technical@lists.samba.org
-Subject: [PATCH v2 018/127] smb: smbdirect: introduce smbdirect_socket.{send,
- recv}_io.mem.gfp_mask
-Date: Wed, 29 Oct 2025 14:19:56 +0100
-Message-ID: <07585615abd50502f1ef6a21d2dac4c04f6026a6.1761742839.git.metze@samba.org>
+Subject: [PATCH v2 019/127] smb: smbdirect: introduce
+ smbdirect_connection_{alloc, free}_send_io()
+Date: Wed, 29 Oct 2025 14:19:57 +0100
+Message-ID: <39b84018bb623edc96b6f6b0fe943d1758d850ee.1761742839.git.metze@samba.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1761742839.git.metze@samba.org>
 References: <cover.1761742839.git.metze@samba.org>
@@ -66,8 +66,20 @@ Cc: Tom Talpey <tom@talpey.com>, metze@samba.org,
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This will allow common code to be split out while still using the
-gfp_mask currently used.
+These are more or less copies of smb_direct_{alloc,free}_sendmsg()
+in the server.
+
+The only difference is that we use ib_dma_unmap_page() for all sges,
+this simplifies the logic and doesn't matter as
+ib_dma_unmap_single() and ib_dma_unmap_page() both operate
+on dma_addr_t and dma_unmap_single_attrs() is just an
+alias for dma_unmap_page_attrs().
+We already have in inconsistency like that in the client
+code where we use ib_dma_unmap_single(), while we mapped
+using ib_dma_map_page().
+
+The new functions will replace the existing once in the next commits and
+will also be used in the client.
 
 Cc: Steve French <smfrench@gmail.com>
 Cc: Tom Talpey <tom@talpey.com>
@@ -78,55 +90,67 @@ Cc: samba-technical@lists.samba.org
 Signed-off-by: Stefan Metzmacher <metze@samba.org>
 Signed-off-by: Steve French <stfrench@microsoft.com>
 ---
- fs/smb/common/smbdirect/smbdirect_socket.h | 14 ++++++++++----
- 1 file changed, 10 insertions(+), 4 deletions(-)
+ .../common/smbdirect/smbdirect_connection.c   | 47 +++++++++++++++++++
+ 1 file changed, 47 insertions(+)
 
-diff --git a/fs/smb/common/smbdirect/smbdirect_socket.h b/fs/smb/common/smbdirect/smbdirect_socket.h
-index 65b21b65596f..a25bf92cfff7 100644
---- a/fs/smb/common/smbdirect/smbdirect_socket.h
-+++ b/fs/smb/common/smbdirect/smbdirect_socket.h
-@@ -150,8 +150,9 @@ struct smbdirect_socket {
- 		 * smbdirect_send_io buffers
- 		 */
- 		struct {
--			struct kmem_cache	*cache;
--			mempool_t		*pool;
-+			struct kmem_cache *cache;
-+			mempool_t *pool;
-+			gfp_t gfp_mask;
- 		} mem;
+diff --git a/fs/smb/common/smbdirect/smbdirect_connection.c b/fs/smb/common/smbdirect/smbdirect_connection.c
+index e90aa3b72b44..e5e8432f88e6 100644
+--- a/fs/smb/common/smbdirect/smbdirect_connection.c
++++ b/fs/smb/common/smbdirect/smbdirect_connection.c
+@@ -88,6 +88,53 @@ static void smbdirect_connection_wake_up_all(struct smbdirect_socket *sc)
+ 	wake_up_all(&sc->mr_io.cleanup.wait_queue);
+ }
  
- 		/*
-@@ -204,8 +205,9 @@ struct smbdirect_socket {
- 		 * smbdirect_recv_io buffers
- 		 */
- 		struct {
--			struct kmem_cache	*cache;
--			mempool_t		*pool;
-+			struct kmem_cache *cache;
-+			mempool_t *pool;
-+			gfp_t gfp_mask;
- 		} mem;
- 
- 		/*
-@@ -479,6 +481,8 @@ static __always_inline void smbdirect_socket_init(struct smbdirect_socket *sc)
- 	INIT_DELAYED_WORK(&sc->idle.timer_work, __smbdirect_socket_disabled_work);
- 	disable_delayed_work_sync(&sc->idle.timer_work);
- 
-+	sc->send_io.mem.gfp_mask = GFP_KERNEL;
++__maybe_unused /* this is temporary while this file is included in orders */
++static struct smbdirect_send_io *smbdirect_connection_alloc_send_io(struct smbdirect_socket *sc)
++{
++	struct smbdirect_send_io *msg;
 +
- 	atomic_set(&sc->send_io.lcredits.count, 0);
- 	init_waitqueue_head(&sc->send_io.lcredits.wait_queue);
- 
-@@ -489,6 +493,8 @@ static __always_inline void smbdirect_socket_init(struct smbdirect_socket *sc)
- 	init_waitqueue_head(&sc->send_io.pending.dec_wait_queue);
- 	init_waitqueue_head(&sc->send_io.pending.zero_wait_queue);
- 
-+	sc->recv_io.mem.gfp_mask = GFP_KERNEL;
++	msg = mempool_alloc(sc->send_io.mem.pool, sc->send_io.mem.gfp_mask);
++	if (!msg)
++		return ERR_PTR(-ENOMEM);
++	msg->socket = sc;
++	INIT_LIST_HEAD(&msg->sibling_list);
++	msg->num_sge = 0;
 +
- 	INIT_LIST_HEAD(&sc->recv_io.free.list);
- 	spin_lock_init(&sc->recv_io.free.lock);
- 
++	return msg;
++}
++
++__maybe_unused /* this is temporary while this file is included in orders */
++static void smbdirect_connection_free_send_io(struct smbdirect_send_io *msg)
++{
++	struct smbdirect_socket *sc = msg->socket;
++	size_t i;
++
++	/*
++	 * The list needs to be empty!
++	 * The caller should take care of it.
++	 */
++	WARN_ON_ONCE(!list_empty(&msg->sibling_list));
++
++	/*
++	 * Note we call ib_dma_unmap_page(), even if some sges are mapped using
++	 * ib_dma_map_single().
++	 *
++	 * The difference between _single() and _page() only matters for the
++	 * ib_dma_map_*() case.
++	 *
++	 * For the ib_dma_unmap_*() case it does not matter as both take the
++	 * dma_addr_t and dma_unmap_single_attrs() is just an alias to
++	 * dma_unmap_page_attrs().
++	 */
++	for (i = 0; i < msg->num_sge; i++)
++		ib_dma_unmap_page(sc->ib.dev,
++				  msg->sge[i].addr,
++				  msg->sge[i].length,
++				  DMA_TO_DEVICE);
++
++	mempool_free(msg, sc->send_io.mem.pool);
++}
++
+ __maybe_unused /* this is temporary while this file is included in orders */
+ static struct smbdirect_recv_io *smbdirect_connection_get_recv_io(struct smbdirect_socket *sc)
+ {
 -- 
 2.43.0
 
