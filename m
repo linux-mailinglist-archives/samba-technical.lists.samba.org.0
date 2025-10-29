@@ -2,44 +2,44 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 70009C1AAC0
-	for <lists+samba-technical@lfdr.de>; Wed, 29 Oct 2025 14:28:28 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9825CC1AAC3
+	for <lists+samba-technical@lfdr.de>; Wed, 29 Oct 2025 14:28:37 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=iLhQ1rVS4zBVrUO4h6jXSyy7sC7Q7umdC7HGDw2OaBc=; b=n6AEbg9z8dCyPOl3ZLprxKQyyu
-	0PuVltE7WU3VTSwk8Oys2N2My+WqcoizEEteQ8F+6vlOw1vBp5ciZk5w8/FTdQmcaY+OnWf/8M34G
-	iBvEGxBAITAvu64jPvZEfa/U/cp0IoXqGnMsSqcw1uVjdtihoVPwLO8Z6CNnVGdWm3Sz31BIUQjZz
-	7P8Lwa7Z1EC81ojDWZLWXQPJAA1wXWcVLF0zQzEzTlqbB2Jx/AYUQFfg8Q2Y5+FPonezDJgBBdfqi
-	xU0vom5SVTC9U+I4SFzc/8fDNEKupFDdGdPvmXd9mTQY8S9xe51fMGo6OviLI2+Zrn2D5GWm7g6nK
-	HzHoOELQ==;
-Received: from ip6-localhost ([::1]:32614 helo=hr1.samba.org) 
+	bh=DT/7e7WfE45l2kdVJz0AY3K1U8amTgllYg4kqgZWwZs=; b=N9mLID7lzUJzv+HsaP3QrWGQl/
+	uneb2t8S+n7MofIOtT52/knW6vt7RLuqaX2xI2kp6GqjmYQVCVz5OsqnJu8JQhsf+f3yAXRDMK2eT
+	ze8vtXtEu+4Zzke5I8FMgwZgi5rHxYr16qzeABmmKqv8slSDlFJ6O+GK7by5s7CQI6GNg/TbVJZbo
+	X/tygpyXGLPocSss5CPlTatVwvVgZ5dE1Epf66wfUPLl+zmkEp0mUhJ0ZnvB73/6MBK/GF7/POGpq
+	BxzJnY+GkLZChTL+S0AMy+nT7d7yKiMMYO4E8iouiLCEagdvPttr/L9drvCaJo2ln+aAMZcYTxs4H
+	+/4sgocQ==;
+Received: from ip6-localhost ([::1]:22098 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1vE6Dh-0096om-SS; Wed, 29 Oct 2025 13:28:10 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:19660) 
+	id 1vE6Dz-0096tH-J5; Wed, 29 Oct 2025 13:28:28 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:36772) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vE6AK-0095no-7m
- for samba-technical@lists.samba.org; Wed, 29 Oct 2025 13:24:52 +0000
+ (Exim) id 1vE6AO-0095oq-B8
+ for samba-technical@lists.samba.org; Wed, 29 Oct 2025 13:24:56 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Message-ID:Date:Cc:To:From;
- bh=iLhQ1rVS4zBVrUO4h6jXSyy7sC7Q7umdC7HGDw2OaBc=; b=wUyOnGsES+QZqq5YqyXQo3H/lV
- rQ4ipXnDXCICi8ILjuS6wDoY7en/xWSvfnoaKP7cj6lWLfkA7W2Iz18hw6eLxl+Nl9SI84+F79ku3
- E0c1YFHsth9JxQLyi49yPndICMnCSAd06xf3j6K8w4RJI8eisLVYmkXUh2wNwon2yCO45+Tz83hs7
- XQdpTooVT0HJ09eikzWkCox786Qqi+SE6FfDKDQLwqo1fgRi7PHY2UAzA6T4+XY52C5MNnKPTE/sA
- UZBjFoBpUWo8MOkZjMgwrOF/hbN90uUHLUaVjpn+7bWZ88vSjv8QYxCMsWzzSobYOma+Kh6qlQezM
- QaXiZ8ygLlzatKAQvTzeRRn4EGMtSlAIG37nGpOscjxUzeCZBq40sSsGqVPTcQFKzhe2uiMQOB9Cz
- imDRdjF5/hifsLpwohA/J8Ez9AUfkS4+pXx1YN4Mji+HnwB9Zwuf3g3Eti0HUualfQ/pwFDKB7Nhi
- PlOIz8agQSPQzrniv8bRH6mR;
+ bh=DT/7e7WfE45l2kdVJz0AY3K1U8amTgllYg4kqgZWwZs=; b=dtb+t6RPY2ZENfeVkiR2CvZVUB
+ RushGkvYGfRFujqkYzyxelQ+xjDNg3zd73YPPH18mgdE+GZlc/0v9OdvyofVD/+lpeBJCpLSAZdbf
+ QZww0AAAlf5O5AdlLHd7IhCTUPytEsomEwjhWW38QCT7JWPdW8okppCr4t8tLk7QEVnk2MRqZBcxF
+ CJOu6WiZvkUTDK+WRV5fG7KEz8LwqlBhc8O7O4GibIgnIXRrcrpZkPTHlfxPqV+RO0TQnXE1Y2kUF
+ WSbckpsNayVW/82eFPZ5htVqouiz0c40KAJ47JrDffHf+iN56+3zBam5u/mO21SFmz9KzMnNtb5ZM
+ lad3rgD1hVY/R7svSfZUAv5nYKAOD6HFj2ukAOKkIJ8pAOSpMHXLr1YEvI3uBcvyx/pzmqSzO3rYx
+ g5erDgumVkkKlG6K3kFchw+gMtU0eoezfWtw0SUH6NCAhwtj6cg/xYeN8m2lWynPpTARS7znbNjyh
+ 0nhguTxcks1zoiqbwfVpgCnL;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vE6AF-00BbWN-0i; Wed, 29 Oct 2025 13:24:36 +0000
+ (Exim) id 1vE6AL-00BbXN-2V; Wed, 29 Oct 2025 13:24:41 +0000
 To: linux-cifs@vger.kernel.org,
 	samba-technical@lists.samba.org
-Subject: [PATCH v2 021/127] smb: smbdirect: introduce
- smbdirect_connection_{create, destroy}_mem_pools()
-Date: Wed, 29 Oct 2025 14:19:59 +0100
-Message-ID: <48774548952e318fe7c920425702a6f1ae8e8558.1761742839.git.metze@samba.org>
+Subject: [PATCH v2 022/127] smb: smbdirect: introduce
+ smbdirect_map_sges_from_iter() and helper functions
+Date: Wed, 29 Oct 2025 14:20:00 +0100
+Message-ID: <1f3540d2048ec15e54b5c2a28eab416696ebd04b.1761742839.git.metze@samba.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1761742839.git.metze@samba.org>
 References: <cover.1761742839.git.metze@samba.org>
@@ -60,168 +60,300 @@ List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
 From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
 Reply-To: Stefan Metzmacher <metze@samba.org>
-Cc: Tom Talpey <tom@talpey.com>, metze@samba.org,
- Steve French <smfrench@gmail.com>, Namjae Jeon <linkinjeon@kernel.org>,
- Steve French <stfrench@microsoft.com>
+Cc: Tom Talpey <tom@talpey.com>, David Howells <dhowells@redhat.com>,
+ metze@samba.org, Steve French <smfrench@gmail.com>,
+ Namjae Jeon <linkinjeon@kernel.org>, Steve French <stfrench@microsoft.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is based on smb_direct_{create,destroy}_pools() in the server.
+These are basically copies of smb_extract_iter_to_rdma() and its helpers
+in the client, which will be replaced in the next steps.
 
-But it doesn't use smbdirect_connection_get_recv_io() on cleanup,
-instead it uses list_for_each_entry_safe()...
-
-It also keep some logic to allow userspace access to
-smbdirect_recv_io payload, which is needed for the client
-code. But it exposes the whole payload including the
-smbdirect_data_transfer header as documentation says
-data_offset = 0 and data_length != 0 would be valid,
-while the existing client code requires data_offset >= 24.
-
-This should replace the related server functions and also
-be used on the client.
-
-It also abstracts recv_io.mem.gfp_mask in order to
-allow server to keep using __GFP_RETRY_MAYFAIL.
-
-It also uses struct kmem_cache_args consistently
-as that's the currently preferred version of
-kmem_cache_create(). And it makes use of the
-mempool_create_slab_pool() helper.
-
-And it uses list_add_tail() just to let me feel
-better when looking at the code...
+The goal is to use them also in the server, which will simplify a lot.
 
 Cc: Steve French <smfrench@gmail.com>
 Cc: Tom Talpey <tom@talpey.com>
 Cc: Long Li <longli@microsoft.com>
 Cc: Namjae Jeon <linkinjeon@kernel.org>
+Cc: David Howells <dhowells@redhat.com>
 Cc: linux-cifs@vger.kernel.org
 Cc: samba-technical@lists.samba.org
 Signed-off-by: Stefan Metzmacher <metze@samba.org>
 Signed-off-by: Steve French <stfrench@microsoft.com>
 ---
- .../common/smbdirect/smbdirect_connection.c   | 107 ++++++++++++++++++
- 1 file changed, 107 insertions(+)
+ .../common/smbdirect/smbdirect_connection.c   | 255 ++++++++++++++++++
+ 1 file changed, 255 insertions(+)
 
 diff --git a/fs/smb/common/smbdirect/smbdirect_connection.c b/fs/smb/common/smbdirect/smbdirect_connection.c
-index 05a68991587c..dedc47916e0e 100644
+index dedc47916e0e..1113a7e9d575 100644
 --- a/fs/smb/common/smbdirect/smbdirect_connection.c
 +++ b/fs/smb/common/smbdirect/smbdirect_connection.c
-@@ -88,6 +88,113 @@ static void smbdirect_connection_wake_up_all(struct smbdirect_socket *sc)
- 	wake_up_all(&sc->mr_io.cleanup.wait_queue);
- }
+@@ -5,6 +5,19 @@
+  */
  
-+static void smbdirect_connection_destroy_mem_pools(struct smbdirect_socket *sc);
+ #include "smbdirect_internal.h"
++#include <linux/folio_queue.h>
 +
++struct smbdirect_map_sges {
++	struct ib_sge *sge;
++	size_t num_sge;
++	size_t max_sge;
++	struct ib_device *device;
++	u32 local_dma_lkey;
++	enum dma_data_direction direction;
++};
++
++static ssize_t smbdirect_map_sges_from_iter(struct iov_iter *iter, size_t len,
++					    struct smbdirect_map_sges *state);
+ 
+ static void smbdirect_connection_schedule_disconnect(struct smbdirect_socket *sc,
+ 						     int error);
+@@ -525,3 +538,245 @@ static void smbdirect_connection_send_io_done(struct ib_cq *cq, struct ib_wc *wc
+ 
+ 	wake_up(&sc->send_io.pending.dec_wait_queue);
+ }
++
++static bool smbdirect_map_sges_single_page(struct smbdirect_map_sges *state,
++					   struct page *page, size_t off, size_t len)
++{
++	struct ib_sge *sge;
++	u64 addr;
++
++	if (state->num_sge >= state->max_sge)
++		return false;
++
++	addr = ib_dma_map_page(state->device, page,
++			       off, len, state->direction);
++	if (ib_dma_mapping_error(state->device, addr))
++		return false;
++
++	sge = &state->sge[state->num_sge++];
++	sge->addr   = addr;
++	sge->length = len;
++	sge->lkey   = state->local_dma_lkey;
++
++	return true;
++}
++
++/*
++ * Extract page fragments from a BVEC-class iterator and add them to an ib_sge
++ * list.  The pages are not pinned.
++ */
++static ssize_t smbdirect_map_sges_from_bvec(struct iov_iter *iter,
++					    struct smbdirect_map_sges *state,
++					    ssize_t maxsize)
++{
++	const struct bio_vec *bv = iter->bvec;
++	unsigned long start = iter->iov_offset;
++	unsigned int i;
++	ssize_t ret = 0;
++
++	for (i = 0; i < iter->nr_segs; i++) {
++		size_t off, len;
++		bool ok;
++
++		len = bv[i].bv_len;
++		if (start >= len) {
++			start -= len;
++			continue;
++		}
++
++		len = min_t(size_t, maxsize, len - start);
++		off = bv[i].bv_offset + start;
++
++		ok = smbdirect_map_sges_single_page(state,
++						    bv[i].bv_page,
++						    off,
++						    len);
++		if (!ok)
++			return -EIO;
++
++		ret += len;
++		maxsize -= len;
++		if (state->num_sge >= state->max_sge || maxsize <= 0)
++			break;
++		start = 0;
++	}
++
++	if (ret > 0)
++		iov_iter_advance(iter, ret);
++	return ret;
++}
++
++/*
++ * Extract fragments from a KVEC-class iterator and add them to an ib_sge list.
++ * This can deal with vmalloc'd buffers as well as kmalloc'd or static buffers.
++ * The pages are not pinned.
++ */
++static ssize_t smbdirect_map_sges_from_kvec(struct iov_iter *iter,
++					    struct smbdirect_map_sges *state,
++					    ssize_t maxsize)
++{
++	const struct kvec *kv = iter->kvec;
++	unsigned long start = iter->iov_offset;
++	unsigned int i;
++	ssize_t ret = 0;
++
++	for (i = 0; i < iter->nr_segs; i++) {
++		struct page *page;
++		unsigned long kaddr;
++		size_t off, len, seg;
++
++		len = kv[i].iov_len;
++		if (start >= len) {
++			start -= len;
++			continue;
++		}
++
++		kaddr = (unsigned long)kv[i].iov_base + start;
++		off = kaddr & ~PAGE_MASK;
++		len = min_t(size_t, maxsize, len - start);
++		kaddr &= PAGE_MASK;
++
++		maxsize -= len;
++		do {
++			bool ok;
++
++			seg = min_t(size_t, len, PAGE_SIZE - off);
++
++			if (is_vmalloc_or_module_addr((void *)kaddr))
++				page = vmalloc_to_page((void *)kaddr);
++			else
++				page = virt_to_page((void *)kaddr);
++
++			ok = smbdirect_map_sges_single_page(state, page, off, seg);
++			if (!ok)
++				return -EIO;
++
++			ret += seg;
++			len -= seg;
++			kaddr += PAGE_SIZE;
++			off = 0;
++		} while (len > 0 && state->num_sge < state->max_sge);
++
++		if (state->num_sge >= state->max_sge || maxsize <= 0)
++			break;
++		start = 0;
++	}
++
++	if (ret > 0)
++		iov_iter_advance(iter, ret);
++	return ret;
++}
++
++/*
++ * Extract folio fragments from a FOLIOQ-class iterator and add them to an
++ * ib_sge list.  The folios are not pinned.
++ */
++static ssize_t smbdirect_map_sges_from_folioq(struct iov_iter *iter,
++					      struct smbdirect_map_sges *state,
++					      ssize_t maxsize)
++{
++	const struct folio_queue *folioq = iter->folioq;
++	unsigned int slot = iter->folioq_slot;
++	ssize_t ret = 0;
++	size_t offset = iter->iov_offset;
++
++	if (WARN_ON_ONCE(!folioq))
++		return -EIO;
++
++	if (slot >= folioq_nr_slots(folioq)) {
++		folioq = folioq->next;
++		if (WARN_ON_ONCE(!folioq))
++			return -EIO;
++		slot = 0;
++	}
++
++	do {
++		struct folio *folio = folioq_folio(folioq, slot);
++		size_t fsize = folioq_folio_size(folioq, slot);
++
++		if (offset < fsize) {
++			size_t part = umin(maxsize, fsize - offset);
++			bool ok;
++
++			ok = smbdirect_map_sges_single_page(state,
++							    folio_page(folio, 0),
++							    offset,
++							    part);
++			if (!ok)
++				return -EIO;
++
++			offset += part;
++			ret += part;
++			maxsize -= part;
++		}
++
++		if (offset >= fsize) {
++			offset = 0;
++			slot++;
++			if (slot >= folioq_nr_slots(folioq)) {
++				if (!folioq->next) {
++					WARN_ON_ONCE(ret < iter->count);
++					break;
++				}
++				folioq = folioq->next;
++				slot = 0;
++			}
++		}
++	} while (state->num_sge < state->max_sge && maxsize > 0);
++
++	iter->folioq = folioq;
++	iter->folioq_slot = slot;
++	iter->iov_offset = offset;
++	iter->count -= ret;
++	return ret;
++}
++
++/*
++ * Extract page fragments from up to the given amount of the source iterator
++ * and build up an ib_sge list that refers to all of those bits.  The ib_sge list
++ * is appended to, up to the maximum number of elements set in the parameter
++ * block.
++ *
++ * The extracted page fragments are not pinned or ref'd in any way; if an
++ * IOVEC/UBUF-type iterator is to be used, it should be converted to a
++ * BVEC-type iterator and the pages pinned, ref'd or otherwise held in some
++ * way.
++ */
 +__maybe_unused /* this is temporary while this file is included in orders */
-+static int smbdirect_connection_create_mem_pools(struct smbdirect_socket *sc)
++static ssize_t smbdirect_map_sges_from_iter(struct iov_iter *iter, size_t len,
++					    struct smbdirect_map_sges *state)
 +{
-+	struct smbdirect_socket_parameters *sp = &sc->parameters;
-+	char name[80];
-+	size_t i;
++	ssize_t ret;
++	size_t before = state->num_sge;
 +
-+	/*
-+	 * We use sizeof(struct smbdirect_negotiate_resp) for the
-+	 * payload size as it is larger as
-+	 * sizeof(struct smbdirect_data_transfer).
-+	 *
-+	 * This will fit client and server usage for now.
-+	 */
-+	snprintf(name, sizeof(name), "smbdirect_send_io_cache_%p", sc);
-+	struct kmem_cache_args send_io_args = {
-+		.align		= __alignof__(struct smbdirect_send_io),
-+	};
-+	sc->send_io.mem.cache = kmem_cache_create(name,
-+						  sizeof(struct smbdirect_send_io) +
-+						  sizeof(struct smbdirect_negotiate_resp),
-+						  &send_io_args,
-+						  SLAB_HWCACHE_ALIGN);
-+	if (!sc->send_io.mem.cache)
-+		goto err;
++	if (WARN_ON_ONCE(iov_iter_rw(iter) != ITER_SOURCE))
++		return -EIO;
 +
-+	sc->send_io.mem.pool = mempool_create_slab_pool(sp->send_credit_target,
-+							sc->send_io.mem.cache);
-+	if (!sc->send_io.mem.pool)
-+		goto err;
-+
-+	/*
-+	 * A payload size of sp->max_recv_size should fit
-+	 * any message.
-+	 *
-+	 * For smbdirect_data_transfer messages the whole
-+	 * buffer might be exposed to userspace
-+	 * (currently on the client side...)
-+	 * The documentation says data_offset = 0 would be
-+	 * strange but valid.
-+	 */
-+	snprintf(name, sizeof(name), "smbdirect_recv_io_cache_%p", sc);
-+	struct kmem_cache_args recv_io_args = {
-+		.align		= __alignof__(struct smbdirect_recv_io),
-+		.useroffset	= sizeof(struct smbdirect_recv_io),
-+		.usersize	= sp->max_recv_size,
-+	};
-+	sc->recv_io.mem.cache = kmem_cache_create(name,
-+						  sizeof(struct smbdirect_recv_io) +
-+						  sp->max_recv_size,
-+						  &recv_io_args,
-+						  SLAB_HWCACHE_ALIGN);
-+	if (!sc->recv_io.mem.cache)
-+		goto err;
-+
-+	sc->recv_io.mem.pool = mempool_create_slab_pool(sp->recv_credit_max,
-+							sc->recv_io.mem.cache);
-+	if (!sc->recv_io.mem.pool)
-+		goto err;
-+
-+	for (i = 0; i < sp->recv_credit_max; i++) {
-+		struct smbdirect_recv_io *recv_io;
-+
-+		recv_io = mempool_alloc(sc->recv_io.mem.pool,
-+					sc->recv_io.mem.gfp_mask);
-+		if (!recv_io)
-+			goto err;
-+		recv_io->socket = sc;
-+		recv_io->sge.length = 0;
-+		list_add_tail(&recv_io->list, &sc->recv_io.free.list);
++	switch (iov_iter_type(iter)) {
++	case ITER_BVEC:
++		ret = smbdirect_map_sges_from_bvec(iter, state, len);
++		break;
++	case ITER_KVEC:
++		ret = smbdirect_map_sges_from_kvec(iter, state, len);
++		break;
++	case ITER_FOLIOQ:
++		ret = smbdirect_map_sges_from_folioq(iter, state, len);
++		break;
++	default:
++		WARN_ON_ONCE(1);
++		return -EIO;
 +	}
 +
-+	return 0;
-+err:
-+	smbdirect_connection_destroy_mem_pools(sc);
-+	return -ENOMEM;
-+}
++	if (ret < 0) {
++		while (state->num_sge > before) {
++			struct ib_sge *sge = &state->sge[state->num_sge--];
 +
-+static void smbdirect_connection_destroy_mem_pools(struct smbdirect_socket *sc)
-+{
-+	struct smbdirect_recv_io *recv_io, *next_io;
-+
-+	list_for_each_entry_safe(recv_io, next_io, &sc->recv_io.free.list, list) {
-+		list_del(&recv_io->list);
-+		mempool_free(recv_io, sc->recv_io.mem.pool);
++			ib_dma_unmap_page(state->device,
++					  sge->addr,
++					  sge->length,
++					  state->direction);
++		}
 +	}
 +
-+	/*
-+	 * Note mempool_destroy() and kmem_cache_destroy()
-+	 * work fine with a NULL pointer
-+	 */
-+
-+	mempool_destroy(sc->recv_io.mem.pool);
-+	sc->recv_io.mem.pool = NULL;
-+
-+	kmem_cache_destroy(sc->recv_io.mem.cache);
-+	sc->recv_io.mem.cache = NULL;
-+
-+	mempool_destroy(sc->send_io.mem.pool);
-+	sc->send_io.mem.pool = NULL;
-+
-+	kmem_cache_destroy(sc->send_io.mem.cache);
-+	sc->send_io.mem.cache = NULL;
++	return ret;
 +}
-+
- __maybe_unused /* this is temporary while this file is included in orders */
- static struct smbdirect_send_io *smbdirect_connection_alloc_send_io(struct smbdirect_socket *sc)
- {
 -- 
 2.43.0
 
