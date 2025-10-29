@@ -2,44 +2,44 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id C1DA8C1AD16
-	for <lists+samba-technical@lfdr.de>; Wed, 29 Oct 2025 14:40:57 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id B6124C1AD22
+	for <lists+samba-technical@lfdr.de>; Wed, 29 Oct 2025 14:41:13 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=AMLNWWKURVS85TGG02f4PAk+Si3h7n55+l2qCtKWvcE=; b=0eoBbAAEj9iWyGs90qyqzGe1mz
-	xEt3Yho/evgJhbhtVwMhrNYpULEE7lFcoKyqTRAYbK25gKvEeAKNYNck/AKZxA8ECqyEPXptxy4G0
-	WoxP6l9OTXd/e0fXHCZFiT+ZXcvnw4ENwB3dep6MsA2LTUKt+I7aLbtVFGsmEP5vXwnZ444ErunOg
-	SxgsHIat4FneV5weA6J6W1iZv2psr1NGQ9sWGJfAcKL2V2CUDh5g8rKfjsI+2wSK2uD8bVP2+TGSO
-	91MEKLNi86U54rXr4WltDH+eP/6u/1vLY9hR+QVzv5ZCojHVxY6JNj+e5C/DshI1HGA/4+ZsUGbzb
-	uKYx7+lA==;
-Received: from ip6-localhost ([::1]:31036 helo=hr1.samba.org) 
+	bh=+hM/sxpj38gsUiEeGPnkyOdMsaYtPf4EJqmi+YW7ekg=; b=Wgj+v4jrYptw7ZEVcX6uDIpPOm
+	DJDXIorrKnWYz3vuZpArCxNXF/er4Q60NW3/j1CK5zs8cqOJfLcnSGoNvra+Qn1g8NbAmPAu2mAS2
+	MvP1JHFvmi+dDplp7pQXj7+VLLvZN0dmzbP7r5+5oyPJd9HM9VojrSsCzG20YfWbVq4VTZ3jqfkJN
+	baAnhYGCfwXgMNXlh9rWumB3gFEAku9glM/HiCxkC9g4aG878njFw5DNN1ev62As0CzRH0ecFr8xw
+	E5EeaSPbMUwqr40FH0YhIu0w8xyrO1SKOr+qUj/lTMXegs7djyOUYh3whxMCUUV/IWq4USuyrwfB0
+	w4JR/rVQ==;
+Received: from ip6-localhost ([::1]:35814 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1vE6Px-009B4R-5t; Wed, 29 Oct 2025 13:40:50 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:35146) 
+	id 1vE6QD-009B81-FG; Wed, 29 Oct 2025 13:41:06 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:36636) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vE6FD-0097Ng-9S
- for samba-technical@lists.samba.org; Wed, 29 Oct 2025 13:29:50 +0000
+ (Exim) id 1vE6FH-0097P4-RW
+ for samba-technical@lists.samba.org; Wed, 29 Oct 2025 13:29:57 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Message-ID:Date:Cc:To:From;
- bh=AMLNWWKURVS85TGG02f4PAk+Si3h7n55+l2qCtKWvcE=; b=EkqQsy4RcWC5uVDt68Qt6CpVzw
- vUcd9jmut+gyJj3keyooEipiwBsCa/6LUZjjEjw8IipUchsivdGwIkJ5ovMYMZArwiAFLu1RVafTT
- GTE13d1EosZCIfdSUzEWaAto8oVZwMRbSJugdrwpbABCJd9UP7OB4lcbimV6Y/orTSaLuYt5xLpJ0
- VyDAotKHLWZzDiClMs0EKMz6ZsVrnf26gzaWPehF/sTM0OyRaAWyIjVhk2h9kjs3u36aMMkuXvetw
- pmH/YLtAvOr/2ZE8R8UVBMNBYjnB1+SgllMavPKMCy4O9FBy6SWP8LjIMCHD9WSudKVkdfFZC3ok5
- 4f4I01IatozhPtll2KjI3ey1HZXzz6V2UYri+Ms/5cRV0b+AU2TPhQcISPuUlUrPyWyMWAgiFVemo
- wh6YULPgv9YsBgXXuvJAiiwLiQ9VPkDVIxsNi4IBc3H1wKGrADFddavztoF+GZeracBn6qW5u7lDr
- Y/Kk+WhxS7RAhgUEAYX+AGYO;
+ bh=+hM/sxpj38gsUiEeGPnkyOdMsaYtPf4EJqmi+YW7ekg=; b=pv5Hh79GhV8BdP7Pl1HafO/awU
+ 0drbef6HicSWZfSmA4s6iHDoL1l9i4sj86JbP0Xf1EGJzpRMx0g1FR7dclN4H0RI6qXHWS/d5QHMD
+ qwczIs6WWygw9HjvZpTP5SIt7GJ4mPOCvQwHYTleVZyiNW4i5wn6EaRog9ixavWxI3tQ+jO5sGTeC
+ PvRjyBeI8Nr/vuQlQibKRx4NEgIl4eiXowmqgdPDvoyaWkCRElj5TeCyF7+KMrJc37SYHBLewD8Ee
+ 8zrtBPtTOsF4/eCYiH4u+NYMvFBderEsyQHgJ/coadsTO6A49saWZryYtaaaYWgPkeQlbbv6Pxydm
+ YaSiL85Pk0E6GBa348kkCASAQ/Ab/VyAsUg3umy14Z9c/fQmIgF9YPikvW5msjno5DYerdLt8tX41
+ F+Tt8iBWMBDydaBa2W5g991M7xVUj5j94qCF/YaB8Agntld+jFudq9ZoW6kktOkQ8dbY8qprdDXhP
+ ZCOdqiR2cGDTcVirvqkfKLCT;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vE6F9-00BcHX-1Z; Wed, 29 Oct 2025 13:29:39 +0000
+ (Exim) id 1vE6FF-00BcIL-0i; Wed, 29 Oct 2025 13:29:45 +0000
 To: linux-cifs@vger.kernel.org,
 	samba-technical@lists.samba.org
-Subject: [PATCH v2 073/127] smb: client: initialize recv_io->cqe.done =
- recv_done just once
-Date: Wed, 29 Oct 2025 14:20:51 +0100
-Message-ID: <858013eba1c21c5913c21eff68efab9e9b66b94c.1761742839.git.metze@samba.org>
+Subject: [PATCH v2 074/127] smb: client: make use of
+ smbdirect_connection_post_recv_io()
+Date: Wed, 29 Oct 2025 14:20:52 +0100
+Message-ID: <26a2cb57eababef21fdfdce0bfa20f8a449a5c58.1761742839.git.metze@samba.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1761742839.git.metze@samba.org>
 References: <cover.1761742839.git.metze@samba.org>
@@ -66,11 +66,11 @@ Cc: Tom Talpey <tom@talpey.com>, metze@samba.org,
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-smbdirect_recv_io structures are pre-allocated so we can set the
-callback function just once.
+The only difference is that smbdirect_connection_post_recv_io()
+returns early if the connection is already broken.
 
-This will make it easy to move smbd_post_recv() to common code
-soon.
+And that the error code from ib_dma_mapping_error() (currently only -ENOMEM
+is possible) is returned instead of -EIO.
 
 Cc: Steve French <smfrench@gmail.com>
 Cc: Tom Talpey <tom@talpey.com>
@@ -81,40 +81,87 @@ Cc: samba-technical@lists.samba.org
 Signed-off-by: Stefan Metzmacher <metze@samba.org>
 Signed-off-by: Steve French <stfrench@microsoft.com>
 ---
- fs/smb/client/smbdirect.c | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
+ fs/smb/client/smbdirect.c | 46 ++-------------------------------------
+ 1 file changed, 2 insertions(+), 44 deletions(-)
 
 diff --git a/fs/smb/client/smbdirect.c b/fs/smb/client/smbdirect.c
-index 59ab8489ad9f..60582394ba29 100644
+index 60582394ba29..9dfee81396c7 100644
 --- a/fs/smb/client/smbdirect.c
 +++ b/fs/smb/client/smbdirect.c
-@@ -1079,8 +1079,6 @@ static int smbd_post_recv(
- 	response->sge.length = sp->max_recv_size;
- 	response->sge.lkey = sc->ib.pd->local_dma_lkey;
+@@ -23,10 +23,6 @@ const struct smbdirect_socket_parameters *smbd_get_parameters(struct smbd_connec
+ 	return &sc->parameters;
+ }
  
--	response->cqe.done = recv_done;
+-static int smbd_post_recv(
+-		struct smbdirect_socket *sc,
+-		struct smbdirect_recv_io *response);
 -
- 	recv_wr.wr_cqe = &response->cqe;
- 	recv_wr.next = NULL;
- 	recv_wr.sg_list = &response->sge;
-@@ -1288,6 +1286,7 @@ static struct smbd_connection *_smbd_get_connection(
- 	__be32 ird_ord_hdr[2];
- 	char wq_name[80];
- 	struct workqueue_struct *workqueue;
-+	struct smbdirect_recv_io *recv_io;
+ static int smbd_post_send_empty(struct smbdirect_socket *sc);
  
- 	/*
- 	 * Create the initial parameters
-@@ -1392,6 +1391,9 @@ static struct smbd_connection *_smbd_get_connection(
- 		goto allocate_cache_failed;
- 	}
+ static void destroy_mr_list(struct smbdirect_socket *sc);
+@@ -403,7 +399,7 @@ static void smbd_post_send_credits(struct work_struct *work)
+ 				break;
  
-+	list_for_each_entry(recv_io, &sc->recv_io.free.list, list)
-+		recv_io->cqe.done = recv_done;
-+
- 	INIT_WORK(&sc->idle.immediate_work, send_immediate_empty_message);
- 	/*
- 	 * start with the negotiate timeout and SMBDIRECT_KEEPALIVE_PENDING
+ 			response->first_segment = false;
+-			rc = smbd_post_recv(sc, response);
++			rc = smbdirect_connection_post_recv_io(response);
+ 			if (rc) {
+ 				log_rdma_recv(ERR,
+ 					"post_recv failed rc=%d\n", rc);
+@@ -1058,44 +1054,6 @@ static int smbd_post_send_full_iter(struct smbdirect_socket *sc,
+ 	return rc;
+ }
+ 
+-/*
+- * Post a receive request to the transport
+- * The remote peer can only send data when a receive request is posted
+- * The interaction is controlled by send/receive credit system
+- */
+-static int smbd_post_recv(
+-		struct smbdirect_socket *sc, struct smbdirect_recv_io *response)
+-{
+-	struct smbdirect_socket_parameters *sp = &sc->parameters;
+-	struct ib_recv_wr recv_wr;
+-	int rc = -EIO;
+-
+-	response->sge.addr = ib_dma_map_single(
+-				sc->ib.dev, response->packet,
+-				sp->max_recv_size, DMA_FROM_DEVICE);
+-	if (ib_dma_mapping_error(sc->ib.dev, response->sge.addr))
+-		return rc;
+-
+-	response->sge.length = sp->max_recv_size;
+-	response->sge.lkey = sc->ib.pd->local_dma_lkey;
+-
+-	recv_wr.wr_cqe = &response->cqe;
+-	recv_wr.next = NULL;
+-	recv_wr.sg_list = &response->sge;
+-	recv_wr.num_sge = 1;
+-
+-	rc = ib_post_recv(sc->ib.qp, &recv_wr, NULL);
+-	if (rc) {
+-		ib_dma_unmap_single(sc->ib.dev, response->sge.addr,
+-				    response->sge.length, DMA_FROM_DEVICE);
+-		response->sge.length = 0;
+-		smbdirect_connection_schedule_disconnect(sc, rc);
+-		log_rdma_recv(ERR, "ib_post_recv failed rc=%d\n", rc);
+-	}
+-
+-	return rc;
+-}
+-
+ /* Perform SMBD negotiate according to [MS-SMBD] 3.1.5.2 */
+ static int smbd_negotiate(struct smbdirect_socket *sc)
+ {
+@@ -1107,7 +1065,7 @@ static int smbd_negotiate(struct smbdirect_socket *sc)
+ 	sc->status = SMBDIRECT_SOCKET_NEGOTIATE_RUNNING;
+ 
+ 	sc->recv_io.expected = SMBDIRECT_EXPECT_NEGOTIATE_REP;
+-	rc = smbd_post_recv(sc, response);
++	rc = smbdirect_connection_post_recv_io(response);
+ 	log_rdma_event(INFO, "smbd_post_recv rc=%d iov.addr=0x%llx iov.length=%u iov.lkey=0x%x\n",
+ 		       rc, response->sge.addr,
+ 		       response->sge.length, response->sge.lkey);
 -- 
 2.43.0
 
