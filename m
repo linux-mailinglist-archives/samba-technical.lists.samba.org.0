@@ -2,44 +2,44 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0798FC1AA17
-	for <lists+samba-technical@lfdr.de>; Wed, 29 Oct 2025 14:23:21 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id B0A60C1AA16
+	for <lists+samba-technical@lfdr.de>; Wed, 29 Oct 2025 14:23:20 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=p4FLya2lUbbWJJUMa9Dm75Mm1rxCNDAGhrXanJ7pNlQ=; b=479Y4GY4RYfwp4aXhX8iwsfIeb
-	EpAuvk43ZwitpvsHIT5RAP7M5XY6eWgNiDfMD+D81fu5tddvPWMqEuXnUqMz4vkIiw4XfbXsaD34G
-	qtlJ0Oxvklwof02krKa7JhWvcyvEmNQQop+riGaM1VWLbYWe4YAtRE1CveixZ52ZIPcCEvtlePNlH
-	8ljJgtjCv0/e0Dm4E+m6Hns2CMuJN22ESlo9fvCThA6xN9o8AeJPf/bQgICp7Tkb149vZcSsHXQA/
-	j0sbFvsZCoSM9RuZBUc8a50XL3W4Z4CA35MLvT/3CoLplzgclUHIjaNJ3o1rIPrfG5Qi1dxm8LT4v
-	TjUovk6w==;
-Received: from ip6-localhost ([::1]:58658 helo=hr1.samba.org) 
+	bh=bHPRqpShbMsgYVZpmuIAVAaARgUCetwqD9ByYTtkEyo=; b=WUXQuM/gc9DPvQOcJpYI3q0Qxy
+	glCZWnYcAWEakypJo9211JKRH1bo5JJxTzncouucnhfaJro/p0rWrP9Wx4krg76DEZgWzPwQZ2g0O
+	1vSm6IJQOKKLScXWuI6prEb02JAKDY6DXnk5gGGwFiXVejY5EDpqAngkvxFem/EpGtO2uO0c1Jjh3
+	tMw0YhlHnSrGNcdJaichhrzpF8FiH4VkBPr07go+tR2fSCXqUi2kwKRNLZwLQyVp7SPTJbUJd9ZHt
+	fyBAqq5cfvaOLKa+rW0SO/KuUhRNnfjchMd1L9AC5VQ4miDMSZz0YXBtwGMEAze3zMPTqR4A9PNWu
+	pYM6ouPg==;
+Received: from ip6-localhost ([::1]:26430 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1vE68S-0095Cx-PK; Wed, 29 Oct 2025 13:22:44 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:47008) 
+	id 1vE68a-0095DV-FO; Wed, 29 Oct 2025 13:22:52 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:43640) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vE68O-0095CY-4H
- for samba-technical@lists.samba.org; Wed, 29 Oct 2025 13:22:42 +0000
+ (Exim) id 1vE68V-0095DO-1Q
+ for samba-technical@lists.samba.org; Wed, 29 Oct 2025 13:22:49 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Message-ID:Date:Cc:To:From;
- bh=p4FLya2lUbbWJJUMa9Dm75Mm1rxCNDAGhrXanJ7pNlQ=; b=thTlsYvx5Hl9JuEzrMwSAhln0k
- 7TnZPz/u19Huw9tiRj92SeQBc74z3zqsUkurJiSAwQox3PWkA56P4O2pDSOvh3K/G0wkOP9y1xYqQ
- iVLZdKIhlM2arKXxYIT06AKwkfueFJnuyotwpV1145UZOfLDRiPSIjqs6aoBzDoMg3OguCp5fmw1d
- LCAXy489FHAjOzk2YfOeNF2rixNWeulDxVG8H/B1dm+1NAO1Xrx8bEP0nQuDZsM0wYdx/HTANuWpf
- vrL/Xcl2dOppFs9S/rQ3pm7wge8KB+fjfdzg7qN7QVNDcdYliDSGYnFmB9Q/ZnJQ7yjEhjOJPxNd+
- LgcfJQZsnlPV1w/ds5EJ5xTUGK5f9ILnump3iCmO8WPARMMNUp1HPa/YG0AlTQHNIKFy0f0NjdnWk
- lKXtMlTxTLIRm6WLeS+5CNjxTTZyNF0Tw6YEC1LnCJ7sPJ3yv1Zq1M1zDQaRPXOGvQymEoH4ztoX+
- jbqPqStLAb9MxWc5sCKtR7gr;
+ bh=bHPRqpShbMsgYVZpmuIAVAaARgUCetwqD9ByYTtkEyo=; b=Ko41oHq8KxJHbmsHLcm3/sQRsR
+ oXdiXUH5eoUwBrk2rmz35gKDO0MmNoJRjWGoau9TfpIzZk5VWiL4yWfWgvzNvQSajuC0Uae9Z1y6q
+ mKOmrs9QrIucIBV3g4VSc5WsyurrFV2szWPQ1+SuJSAKxufBbmI9lCF5Yih3l9eIiHffPgQ4orDJi
+ k6lui/QMcIIU2fyjA5EtYdLQWf3pgU9aoANYKcIwsge6gaflFWsQ5R3G/B6kxvhD1Hz5yzDxNuLub
+ sQNSLHlKOkD6WUKZHELVWP/u5CV81ny8xmWBivUwk6on7+0QHv/fUZwlXYqMqDf2+gWMnT1OxQha8
+ U0DY0aX7vGQnES9F8GkfqJEf7X/TLFxToj4SdX7mTS+qH7Hr4nQC8OStNWPCW+0O7eEyCWVBCcAWC
+ zxMBc+Q+9PBdfa3NqZnuOv988qoBRSAngrQZQR8NCGV4HoXzEK1lGGNIKfprR4JDLxlU/217CZJsu
+ vJtDDkGHNb2KnCQMMx94h8SV;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vE68N-00BbES-1B; Wed, 29 Oct 2025 13:22:39 +0000
+ (Exim) id 1vE68U-00BbEi-0V; Wed, 29 Oct 2025 13:22:46 +0000
 To: linux-cifs@vger.kernel.org,
 	samba-technical@lists.samba.org
-Subject: [PATCH v2 001/127] smb: smbdirect: let smbdirect.h include #include
- <linux/types.h>
-Date: Wed, 29 Oct 2025 14:19:39 +0100
-Message-ID: <fa8747cfebde4621fc47b8a8b218961b94120db2.1761742839.git.metze@samba.org>
+Subject: [PATCH v2 002/127] smb: smbdirect: introduce
+ SMBDIRECT_DEBUG_ERR_PTR() helper
+Date: Wed, 29 Oct 2025 14:19:40 +0100
+Message-ID: <e3a67cdeb67f13bb80d5b04d1809fd3fd68fd9bb.1761742839.git.metze@samba.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1761742839.git.metze@samba.org>
 References: <cover.1761742839.git.metze@samba.org>
@@ -65,7 +65,10 @@ Cc: metze@samba.org, Steve French <smfrench@gmail.com>,
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This will make it easier to use.
+This can be used like this:
+
+  int err = somefunc();
+  pr_warn("err=%1pe\n", SMBDIRECT_DEBUG_ERR_PTR(err));
 
 Cc: Steve French <smfrench@gmail.com>
 Cc: Tom Talpey <tom@talpey.com>
@@ -75,22 +78,33 @@ Cc: linux-cifs@vger.kernel.org
 Cc: samba-technical@lists.samba.org
 Signed-off-by: Stefan Metzmacher <metze@samba.org>
 ---
- fs/smb/common/smbdirect/smbdirect.h | 2 ++
- 1 file changed, 2 insertions(+)
+ fs/smb/common/smbdirect/smbdirect_socket.h | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
 
-diff --git a/fs/smb/common/smbdirect/smbdirect.h b/fs/smb/common/smbdirect/smbdirect.h
-index 05cc6a9d0ccd..821a34c4cc47 100644
---- a/fs/smb/common/smbdirect/smbdirect.h
-+++ b/fs/smb/common/smbdirect/smbdirect.h
-@@ -7,6 +7,8 @@
- #ifndef __FS_SMB_COMMON_SMBDIRECT_SMBDIRECT_H__
- #define __FS_SMB_COMMON_SMBDIRECT_SMBDIRECT_H__
+diff --git a/fs/smb/common/smbdirect/smbdirect_socket.h b/fs/smb/common/smbdirect/smbdirect_socket.h
+index ee5a90d691c8..611986827a5e 100644
+--- a/fs/smb/common/smbdirect/smbdirect_socket.h
++++ b/fs/smb/common/smbdirect/smbdirect_socket.h
+@@ -74,6 +74,19 @@ const char *smbdirect_socket_status_string(enum smbdirect_socket_status status)
+ 	return "<unknown>";
+ }
  
-+#include <linux/types.h>
++/*
++ * This can be used with %1pe to print errors as strings or '0'
++ * And it avoids warnings like: warn: passing zero to 'ERR_PTR'
++ * from smatch -p=kernel --pedantic
++ */
++static __always_inline
++const void * __must_check SMBDIRECT_DEBUG_ERR_PTR(long error)
++{
++	if (error == 0)
++		return NULL;
++	return ERR_PTR(error);
++}
 +
- /* SMB-DIRECT buffer descriptor V1 structure [MS-SMBD] 2.2.3.1 */
- struct smbdirect_buffer_descriptor_v1 {
- 	__le64 offset;
+ enum smbdirect_keepalive_status {
+ 	SMBDIRECT_KEEPALIVE_NONE,
+ 	SMBDIRECT_KEEPALIVE_PENDING,
 -- 
 2.43.0
 
