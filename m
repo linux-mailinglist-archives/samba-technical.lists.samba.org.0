@@ -2,75 +2,52 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7911DC2C161
-	for <lists+samba-technical@lfdr.de>; Mon, 03 Nov 2025 14:30:05 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id AE5E5C2D9AD
+	for <lists+samba-technical@lfdr.de>; Mon, 03 Nov 2025 19:10:53 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=a21JbFZrSRmyl+TIWUp5y75+miyXDqyFyLKW07xgMRE=; b=PlgmFPgeG2XTYGzxUPAtnfaROG
-	u0xhw3Iwd/YkOMfZK/ExmbbXz+HDQmL4OykZkQCxyOteA6GwHbFsGRdF0ULmjXauigl6VRMb/PUn6
-	wrOHDmmrCsxR8JmUWoibwp5bGQ4sIFJ3z+8N7ginuGv1wvtCtsu/EHeJpDXQjy46ChLpbZh1bAUww
-	PGvDKbZhzZ4wAd0PUBbHX4WDhTi/Voocnh3lBlTvKS17o9oXwQYPDbyAQRNOnVO5YZKnmfOuCZlEl
-	bFHGYCcAfJS4B6xyXZ+AelQ2zyAr6iaMfvT77S/QVOMk6F4Id3TpIyDdG3hfJA9rRnMtdTG9bW8Nt
-	/B26h2uQ==;
-Received: from ip6-localhost ([::1]:50178 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=4FZM//nE+HUtkbRRPZMO20zJmbu83J8M2lwzroMyDBo=; b=gpnu9yiiZxSy+ttXTeMEu/lgND
+	dXDeyFOO+RA/gPfe1moUlxLneE7xUpoOClIT5s3NrB3IEuJDEUtKHG073/9TLLBDlfcxDEbbykjlt
+	nY9AutbGYgt+MKmr+ZyMzKkWY/UFr7OYn96TYaVujenMK7HOpnM9sqsrXLZnsKLrD3sl0wS5le8+h
+	INRFYVmVfhNB3eLmuhLLL7oi3Lw2jVKLdfY8rfGfTdgijJNLV94z1cQSKkm6hwT3IkZmkg6RVgVZ6
+	5EAetAsCURKD+fm6QY+HsX9iNytVvVUjD3ho7ivgk5dee/wo0nJTizERg3aOYmo8P8OSfrydS9hGu
+	ebppY4tA==;
+Received: from ip6-localhost ([::1]:40544 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1vFudC-00BLo8-7L; Mon, 03 Nov 2025 13:29:58 +0000
-Received: from mail-ed1-x52b.google.com ([2a00:1450:4864:20::52b]:44543) 
+	id 1vFz0X-00BNIE-AF; Mon, 03 Nov 2025 18:10:21 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:26650) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vFud7-00BLo1-Hy
- for samba-technical@lists.samba.org; Mon, 03 Nov 2025 13:29:55 +0000
-Received: by mail-ed1-x52b.google.com with SMTP id
- 4fb4d7f45d1cf-64091c2e520so3302139a12.1
- for <samba-technical@lists.samba.org>; Mon, 03 Nov 2025 05:29:53 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1762176593; x=1762781393; darn=lists.samba.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=a21JbFZrSRmyl+TIWUp5y75+miyXDqyFyLKW07xgMRE=;
- b=leAWB40Mmo04x75tSH29hHJHqdyjarsfExLNWnJ54Mv3UJSSgnq1IR8FYN7KyuB/Od
- cROzJJEgyps/L/W4otgZPjAzP/sHSkWsqSrRExkzbCJ2FRvrr7euZCcl8DZblS03qUrv
- 49OeFR40de7F6d+KZ2nE0r3RIHzPuutSdwZK5965rDJqFpkZrTvYx3eqYtkj3l1NmpGl
- Jd/tXZqfU1Jw3kjuPjYGyOWs7PqxG0npWomenP1yPwg0Ou2K7npI0WQ5MwFoC/iBGut1
- ybf1Rv9wWe9wgb0kHCpI5Uh5pATQkTFWZE0a8Rzk+89E9noGJm+e1/45d3IU0soJ9VKe
- 2zRQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762176593; x=1762781393;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=a21JbFZrSRmyl+TIWUp5y75+miyXDqyFyLKW07xgMRE=;
- b=XcLMDv2FigtG6+2JKTJ68VbmjxW/RXDc9DpUyj8gyiHs5Cse+Ev3D8TNHrtgLsPHWT
- SU8vBkgn5UByNIb8lF94TI7oFH3oReGgYzOJ0frTvvRIm7ar0vM69Uf6luxxJUOhbMaj
- Z1rva1CO/05a6IiVhuQcP9OguoHgX0KnsrAWJe2Cj1w2P1Fr30HJlpiPc/5IxVORYBtC
- WtleoM+3z232qlWZnpmi08WZ5rdweT5nikqVOnNWg17EVeKyFTBoYkFYK6dR4j+foqR2
- Hqqf2XQJc1HlipG3el0pd9XkgRrUbqxVkjlKw0Yb1wGXub9IP6mf9KGXEJSo96UtIDAt
- pbTg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXZhuAVDHIDGHHwDJN+rH3qTyttolFZardXEv410roVnBkrbTkIXMhIHfmIZa96IzrGMyvVgs/Lijt4Q1j9NGg=@lists.samba.org
-X-Gm-Message-State: AOJu0YySzpL310+HiAxrWzNgUroGvmt78mJ+U+EDEscX5VOnp/j7p8JC
- 7Tkr0mjd56l7Cysi+1Uz+zJS+rn5ezwB5Xxj62AbmrtRKVHBpjOldzeLtFlT/TOB3BAaMvKCfS0
- PpCpVmyQlb0gR7E8jZv5+t7u4C6xmzmg=
-X-Gm-Gg: ASbGncsDTfgt0eeMmcDIWvY/b0qxQuCxy7Ba7EGnD5n599JK3Iom28B49l4/fUN45/G
- z1fpe3drfIfQooSbWgMYeT1xf0J9XtxR6Kxpjk39oFALk6+oV4Axwolhi1eT5M/a2G6V91qlPMO
- hTh108KNBQTw/Ldh2AsO6iftpaaq9+MOQRfQ/56qclbkarhvlA9YFp97vkpVOe/AZNEiQF48PNI
- 4oRz3F9x+26jYteYZOoXr/g2gnWzKbEmZL2f3iFbfp+bWjpHNtpQdX3gwSMwrqOZXoJdPE0cjmb
- CdqSP8QVPzqb24rzJe04Ulat6ZUJrxz1xZLuCQIC
-X-Google-Smtp-Source: AGHT+IGWyTZduHZ2AUQOMuHAUDSKDxSYh2Boylo//kHY7uALzcMyPCHh3aobLMS0sfZ3SBLE+RqIGbSBBaWJY8VJe/k=
-X-Received: by 2002:a05:6402:5108:b0:640:aa67:2933 with SMTP id
- 4fb4d7f45d1cf-640aa672a40mr5173930a12.21.1762176592344; Mon, 03 Nov 2025
- 05:29:52 -0800 (PST)
+ (Exim) id 1vFz0O-00BNI5-Of
+ for samba-technical@lists.samba.org; Mon, 03 Nov 2025 18:10:15 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=From:To:Date:Message-ID:CC;
+ bh=4FZM//nE+HUtkbRRPZMO20zJmbu83J8M2lwzroMyDBo=; b=T8zNFH89nnfsqPkEYgCiKcECsq
+ vZTnD90HjMs1C40p8b7pIRRFN95fwNzuI5wvg2Uzvj4opCyPqHczZfFQgwtC4F6JzttDtNgBF/T/w
+ pJQF/FvP9foxDmkkofekiKMX893zTiAC1T+tmU2bsyfDxXagwm/txKBO6HsJIE+WTd3ppkdqXlWNs
+ FucquiunPHIRxD23cyUjr36OdjQTgBFbGwE5TAk4zpaszyAAmglzxvw5Z/GVGSIyh41Fmn0R3nNPG
+ jPxqItnv2qnIJ8Q3qKp13HhnU58yXE1TK+olaXMC7dgUI+SGBAdnCrSFS6ur5l8W7XC75qieTEGTK
+ rrkenr8n/ld+Z1tncp8y60tMGyTu3uMu9+vNszsQgzOstpWXFs8ZAZ/gFDKPsLLrNzIwivK7qPABX
+ VBAUHQB2gMuLM5Um8pKmHTNXaSUsEOhDvyJi2oAb14qP0TN9OgREDVza3LslHozIqLjjlQsRdjsgr
+ +0a1r+K++ppB/jsUDcCqaDMX;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1vFz0N-00CO6D-3D for samba-technical@lists.samba.org;
+ Mon, 03 Nov 2025 18:10:12 +0000
+Message-ID: <4da1127e-121e-499b-91ee-b8a9e4a3c4bd@samba.org>
+Date: Mon, 3 Nov 2025 19:10:11 +0100
 MIME-Version: 1.0
-References: <20251103-work-creds-guards-simple-v1-0-a3e156839e7f@kernel.org>
-In-Reply-To: <20251103-work-creds-guards-simple-v1-0-a3e156839e7f@kernel.org>
-Date: Mon, 3 Nov 2025 14:29:40 +0100
-X-Gm-Features: AWmQ_bmz-aFyM_2e0ocdnrdFR9IUaRm9-CuMDUtbkHwY8CVjQjk6nDFhXg5Zzks
-Message-ID: <CAOQ4uxgr33rf1tzjqdJex_tzNYDqj45=qLzi3BkMUaezgbJqoQ@mail.gmail.com>
-Subject: Re: [PATCH 00/16] credentials guards: the easy cases
-To: Christian Brauner <brauner@kernel.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: =?UTF-8?Q?Re=3A_Invitation=3A_Samba_Developer_Online_Gathering_?=
+ =?UTF-8?Q?=E2=80=93_Tuesday=2C_November_4th?=
+To: samba-technical <samba-technical@lists.samba.org>
+References: <77b153b3-94f1-4100-a51d-b32d05faae48@samba.org>
+Content-Language: en-US, de-DE
+In-Reply-To: <77b153b3-94f1-4100-a51d-b32d05faae48@samba.org>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------EnsyfwiLlqi2tjbAgESQNx00"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -84,76 +61,81 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Amir Goldstein via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Amir Goldstein <amir73il@gmail.com>
-Cc: linux-aio@kvack.org, linux-nfs@vger.kernel.org, linux-cifs@vger.kernel.org,
- Linus Torvalds <torvalds@linux-foundation.org>,
- samba-technical@lists.samba.org, linux-kernel@vger.kernel.org,
- linux-unionfs@vger.kernel.org, netdev@vger.kernel.org,
- linux-fsdevel@vger.kernel.org, cgroups@vger.kernel.org,
- linux-erofs@lists.ozlabs.org
+From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Ralph Boehme <slow@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Mon, Nov 3, 2025 at 12:28=E2=80=AFPM Christian Brauner <brauner@kernel.o=
-rg> wrote:
->
-> This converts all users of override_creds() to rely on credentials
-> guards. Leave all those that do the prepare_creds() + modify creds +
-> override_creds() dance alone for now. Some of them qualify for their own
-> variant.
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------EnsyfwiLlqi2tjbAgESQNx00
+Content-Type: multipart/mixed; boundary="------------w05C20AaPtsJHcGt14WhWZpH";
+ protected-headers="v1"
+From: Ralph Boehme <slow@samba.org>
+To: samba-technical <samba-technical@lists.samba.org>
+Message-ID: <4da1127e-121e-499b-91ee-b8a9e4a3c4bd@samba.org>
+Subject: =?UTF-8?Q?Re=3A_Invitation=3A_Samba_Developer_Online_Gathering_?=
+ =?UTF-8?Q?=E2=80=93_Tuesday=2C_November_4th?=
+References: <77b153b3-94f1-4100-a51d-b32d05faae48@samba.org>
+In-Reply-To: <77b153b3-94f1-4100-a51d-b32d05faae48@samba.org>
 
-Nice!
+--------------w05C20AaPtsJHcGt14WhWZpH
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
 
-What about with_ovl_creator_cred()/scoped_with_ovl_creator_cred()?
-Is there any reason not to do it as well?
+SGVyZSdzIHRoZSBjdXJyZW50IGFnZW5kYToNCg0KaHR0cHM6Ly9oYWNrbWQub2tmbi5kZS9F
+Y3VReHFHZVFVYU5Cd09TaVdwd1BnDQoNClNlZSB5b3UgdG9tb3Jyb3chDQotc2xvdw0KDQot
+LSANCkpvaW4gdXMgZm9yIHRoZSAyNXRoIHNhbWJhWFAgMjAyNiBjb25mZXJlbmNlDQpBcHJp
+bCAyMHRoICYgMjF0aCwgMjAyNiBhdCBIb3RlbCBGcmVpemVpdCBJbg0Kc3BvbnNvcmVkIGJ5
+IFRyYW5xdWlsSVQgJiBNaWNyb3NvZnQgJiBTZXJOZXQNClRpY2tldGluZyAmIG1vcmUgSW5m
+byBhdCBodHRwczovL3NhbWJheHAub3JnDQoNClNlck5ldCBTYW1iYSBUZWFtIExlYWQgaHR0
+cHM6Ly9zZXJuZXQuZGUvDQpTYW1iYSBUZWFtIE1lbWJlciAgICAgIGh0dHBzOi8vc2FtYmEu
+b3JnLw0KU2FtYmEgU3VwcG9ydCBhbmQgRGV2ICBodHRwczovL3NhbWJhLnBsdXMvc2Vydmlj
+ZXMvDQpTQU1CQSsgcGFja2FnZXMgICAgICAgIGh0dHBzOi8vc2FtYmEucGx1cy9wcm9kdWN0
+cy9zYW1iYQ0KDQpPbiAxMC8yNy8yNSA2OjQ4IFBNLCBSYWxwaCBCb2VobWUgdmlhIHNhbWJh
+LXRlY2huaWNhbCB3cm90ZToNCj4gSGkgYWxsLA0KPiANCj4gU2F2ZSB0aGUgZGF0ZSBmb3Ig
+dGhlIG5leHQgU2FtYmEgRGV2ZWxvcGVyIE9ubGluZSBHYXRoZXJpbmc6DQo+IA0KPiBEYXRl
+OiBUdWVzZGF5LCBOb3ZlbWJlciA0dGgNCj4gVGltZTogNjowMCBBTSBVVEMNCj4gTGluazog
+aHR0cHM6Ly9iYmItbmV3LnNmY29uc2VydmFuY3kub3JnL3Jvb21zL3g0cy13bjctbHR3LWwz
+Yi9qb2luDQo+IA0KPiBJbiB0aGUgbmFtZSBvZiB0aGUgU2FtYmEgVGVhbSwgSeKAmWQgbGlr
+ZSB0byBpbnZpdGUgZXZlcnlvbmUgYWN0aXZlbHkgDQo+IHdvcmtpbmcgb24gb3IgY29udHJp
+YnV0aW5nIHRvIFNhbWJhIHRvIGpvaW4gdGhpcyBmaXJzdCBTYW1iYSBEZXZlbG9wZXIgDQo+
+IE9ubGluZSBHYXRoZXJpbmcuDQo+IA0KPiBUaGUgZ29hbCBpcyB0byBjcmVhdGUgYW4gaW5m
+b3JtYWwgc3BhY2Ugd2hlcmUgZGV2ZWxvcGVycyBjYW4gZGlzY3VzcyANCj4gY3VycmVudCBk
+ZXZlbG9wbWVudCB0b3BpY3MsIG9uZ29pbmcgd29yaywgYW5kIGZ1dHVyZSBwbGFucyDigJQg
+bXVjaCBsaWtlIA0KPiBvdXIgaGFsbHdheSBjaGF0cyBhdCBTYW1iYVhQLCBidXQgaW4gYW4g
+b25saW5lIGZvcm1hdC4NCj4gDQo+IElmIHlvdSBoYXZlIHRvcGljcyB5b3XigJlkIGxpa2Ug
+dG8gZGlzY3VzcyBvciBzaG9ydCB1cGRhdGVzIHlvdeKAmWQgbGlrZSB0byANCj4gc2hhcmUs
+IHBsZWFzZSBzZW5kIHRoZW0gdG8gbWUgZGlyZWN0bHkgaW4gYWR2YW5jZSBzbyB3ZSBjYW4g
+cHJlcGFyZSBhIA0KPiByb3VnaCBhZ2VuZGEuDQo+IA0KPiBBIGZldyBkZXRhaWxzOg0KPiAN
+Cj4gRHVyYXRpb246IHVwIHRvIDIgaG91cnMNCj4gUmVjb3JkaW5nOiB0aGUgbWVldGluZyB3
+aWxsIG5vdCBiZSByZWNvcmRlZA0KPiBGb3JtYXQ6IG9wZW4gZGlzY3Vzc2lvbiDigJQgdGVj
+aG5pY2FsIGFuZCBpbmZvcm1hbA0KPiANCj4gV2XigJlyZSBsb29raW5nIGZvcndhcmQgdG8g
+c2VlaW5nIG1hbnkgb2YgeW91IHRoZXJlIGFuZCBoYXZpbmcgYSANCj4gcHJvZHVjdGl2ZSBh
+bmQgZnJpZW5kbHkgZXhjaGFuZ2UhDQo+IA0KPiBTZWUgeW91IG5leHQgVHVlc2RheSwNCj4g
+UmFscGgNCg0K
 
-I can try to clear some time for this cleanup.
+--------------w05C20AaPtsJHcGt14WhWZpH--
 
-For this series, feel free to add:
+--------------EnsyfwiLlqi2tjbAgESQNx00
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature.asc"
 
-Reviewed-by: Amir Goldstein <amir73il@gmail.com>
+-----BEGIN PGP SIGNATURE-----
 
-Thanks,
-Amir.
+wsF5BAABCAAjFiEE+uLGCIokJSBRxVnkqh6bcSY5nkYFAmkI8AMFAwAAAAAACgkQqh6bcSY5nkY6
+PhAAgEiPUu4SNoffO0tEvNv8YHMgIp6Qd1JocEs0Gi4PC5qnnT5bDScZIHb6hKu4602a5EI2SHiN
+wrB8RTeSpwh64GMsC4kaZCwwlOZgK/YqxTJ0Or/7r8wmAZ1o1A8sVJ6GHtnAvEmZCmF2dvMmkdR1
+rvXmFifTVQCFxQYWGhil0wbbd7q4W3tZl0skP+WHdGkJ0gWa+wTL4PQy0KBKOGY/TW3KXl2duWlH
+WUGfm9Bnuokz4s3yHvShxiYDuZGdI3m06CDF6xzIkzBrieRDPy7vRo577QxLf0dshDxqK5mjoP49
+E6yxO4v9RlcUEn5O4o2Fpk1XA0IEjeLHU7Z1XUBuIBz2zsajCUW/j+hRbzjcB7RY4+ZcOlT0qWIQ
+8dqVlcA1ANYhaJEJN4tzOWmEawxRIy1lzbTsQG0FvaHDJLHqRllTcJca2uinQc6Uglo4fELZdtF5
+XSAgaykgbgvXBT60E4QPkKOX7T2so/HXRZ1ww9Z3W0sRER35K/0Ck/7F9IVPrn7KT7tt+/gnrvHx
+wPZFKilrFI7Bq6Q1MI4W42uSmcdP8l+/inXyDv97Nul2wJ+jgHggh3aMQEt16YOJF9rRyMW+2H/4
+vyNzjyOQuOU8JCA1AOYrSv2Xv+OVTJwyiFV0WNBDQuW/UK44LBxbrCtKXtOZE0uQL/mV69fW77eo
++54=
+=1RZA
+-----END PGP SIGNATURE-----
 
->
-> Signed-off-by: Christian Brauner <brauner@kernel.org>
-> ---
-> Christian Brauner (16):
->       cred: add {scoped_}with_creds() guards
->       aio: use credential guards
->       backing-file: use credential guards for reads
->       backing-file: use credential guards for writes
->       backing-file: use credential guards for splice read
->       backing-file: use credential guards for splice write
->       backing-file: use credential guards for mmap
->       binfmt_misc: use credential guards
->       erofs: use credential guards
->       nfs: use credential guards in nfs_local_call_read()
->       nfs: use credential guards in nfs_local_call_write()
->       nfs: use credential guards in nfs_idmap_get_key()
->       smb: use credential guards in cifs_get_spnego_key()
->       act: use credential guards in acct_write_process()
->       cgroup: use credential guards in cgroup_attach_permissions()
->       net/dns_resolver: use credential guards in dns_query()
->
->  fs/aio.c                     |   6 +-
->  fs/backing-file.c            | 147 ++++++++++++++++++++++---------------=
-------
->  fs/binfmt_misc.c             |   7 +--
->  fs/erofs/fileio.c            |   6 +-
->  fs/nfs/localio.c             |  59 +++++++++--------
->  fs/nfs/nfs4idmap.c           |   7 +--
->  fs/smb/client/cifs_spnego.c  |   6 +-
->  include/linux/cred.h         |  12 ++--
->  kernel/acct.c                |   6 +-
->  kernel/cgroup/cgroup.c       |  10 ++-
->  net/dns_resolver/dns_query.c |   6 +-
->  11 files changed, 133 insertions(+), 139 deletions(-)
-> ---
-> base-commit: fea79c89ff947a69a55fed5ce86a70840e6d719c
-> change-id: 20251103-work-creds-guards-simple-619ef2200d22
->
->
+--------------EnsyfwiLlqi2tjbAgESQNx00--
 
