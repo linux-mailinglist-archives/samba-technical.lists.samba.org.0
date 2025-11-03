@@ -2,52 +2,89 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id AE5E5C2D9AD
-	for <lists+samba-technical@lfdr.de>; Mon, 03 Nov 2025 19:10:53 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A52AEC2E5EE
+	for <lists+samba-technical@lfdr.de>; Tue, 04 Nov 2025 00:05:16 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=4FZM//nE+HUtkbRRPZMO20zJmbu83J8M2lwzroMyDBo=; b=gpnu9yiiZxSy+ttXTeMEu/lgND
-	dXDeyFOO+RA/gPfe1moUlxLneE7xUpoOClIT5s3NrB3IEuJDEUtKHG073/9TLLBDlfcxDEbbykjlt
-	nY9AutbGYgt+MKmr+ZyMzKkWY/UFr7OYn96TYaVujenMK7HOpnM9sqsrXLZnsKLrD3sl0wS5le8+h
-	INRFYVmVfhNB3eLmuhLLL7oi3Lw2jVKLdfY8rfGfTdgijJNLV94z1cQSKkm6hwT3IkZmkg6RVgVZ6
-	5EAetAsCURKD+fm6QY+HsX9iNytVvVUjD3ho7ivgk5dee/wo0nJTizERg3aOYmo8P8OSfrydS9hGu
-	ebppY4tA==;
-Received: from ip6-localhost ([::1]:40544 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=ZH0fDpUKrbZ7Y4RH7y1khfYrGo0F4yDKdY+imctMyp4=; b=vnGo2+s83HII/TqLBhjjwBpTYK
+	GkQVfHDip9OC7TW0jzPc0/PuK6/lqef0SEOXiH4Fs8sfELB5IQivVFdND4jiz4Gf8zx1tbs7arGQz
+	dQn+y8rEkF9f94xiaq6dyxpSXXcVNQwIkIwmr7f++4r9hg2uB2rTGvzqZMGu8ksMRiLGjdxAZr79a
+	NyfoUDlFVHHXWKnrGvG9Pt1zv+UKg3+DZ8+WQc15L145BSBalYWtH5SZotef4C4Gj23NBZ+OBJZ4P
+	HXZ55cnt8jI4sDt4JWzENviuOPr02od3vkqV5D809K/B4dveT2a+QuCMM3TgORdfoKjvMESzenOR2
+	UtxJptgQ==;
+Received: from ip6-localhost ([::1]:43688 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1vFz0X-00BNIE-AF; Mon, 03 Nov 2025 18:10:21 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:26650) 
+	id 1vG3bX-00BOu7-1k; Mon, 03 Nov 2025 23:04:51 +0000
+Received: from mail-ej1-x630.google.com ([2a00:1450:4864:20::630]:50269) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vFz0O-00BNI5-Of
- for samba-technical@lists.samba.org; Mon, 03 Nov 2025 18:10:15 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=From:To:Date:Message-ID:CC;
- bh=4FZM//nE+HUtkbRRPZMO20zJmbu83J8M2lwzroMyDBo=; b=T8zNFH89nnfsqPkEYgCiKcECsq
- vZTnD90HjMs1C40p8b7pIRRFN95fwNzuI5wvg2Uzvj4opCyPqHczZfFQgwtC4F6JzttDtNgBF/T/w
- pJQF/FvP9foxDmkkofekiKMX893zTiAC1T+tmU2bsyfDxXagwm/txKBO6HsJIE+WTd3ppkdqXlWNs
- FucquiunPHIRxD23cyUjr36OdjQTgBFbGwE5TAk4zpaszyAAmglzxvw5Z/GVGSIyh41Fmn0R3nNPG
- jPxqItnv2qnIJ8Q3qKp13HhnU58yXE1TK+olaXMC7dgUI+SGBAdnCrSFS6ur5l8W7XC75qieTEGTK
- rrkenr8n/ld+Z1tncp8y60tMGyTu3uMu9+vNszsQgzOstpWXFs8ZAZ/gFDKPsLLrNzIwivK7qPABX
- VBAUHQB2gMuLM5Um8pKmHTNXaSUsEOhDvyJi2oAb14qP0TN9OgREDVza3LslHozIqLjjlQsRdjsgr
- +0a1r+K++ppB/jsUDcCqaDMX;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vFz0N-00CO6D-3D for samba-technical@lists.samba.org;
- Mon, 03 Nov 2025 18:10:12 +0000
-Message-ID: <4da1127e-121e-499b-91ee-b8a9e4a3c4bd@samba.org>
-Date: Mon, 3 Nov 2025 19:10:11 +0100
+ (Exim) id 1vG3bS-00BOu0-NN
+ for samba-technical@lists.samba.org; Mon, 03 Nov 2025 23:04:48 +0000
+Received: by mail-ej1-x630.google.com with SMTP id
+ a640c23a62f3a-b3e7cc84b82so989167266b.0
+ for <samba-technical@lists.samba.org>; Mon, 03 Nov 2025 15:04:46 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linux-foundation.org; s=google; t=1762211085; x=1762815885;
+ darn=lists.samba.org; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=ZH0fDpUKrbZ7Y4RH7y1khfYrGo0F4yDKdY+imctMyp4=;
+ b=SLoqTHJsfwuf/ioANPUxTDigQOddETKKb/DmL04CT5OIajoEER9v780L81slXNaZMO
+ KcCcNZELJwmGmpe8JYNIIPWf1i3Rpv0vZvZHt0Lq4ywiViOzrw/l84aoqu+VC4nomtGn
+ OEqzz2ygEsBleyuQzNg+4j/MHxeGEKks/Maao=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1762211085; x=1762815885;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=ZH0fDpUKrbZ7Y4RH7y1khfYrGo0F4yDKdY+imctMyp4=;
+ b=VVyQ/mgAUQNKhdIuzLYrXSMITDVj3qRgT0c9AVE8+rC2Jhp1X3Pn4vl//CotqypmX1
+ iTVc1UZq0A+Vq/dgJajM6v1ZDQStn/Tz/YcHkVyLYxtZ0BBT31khLV0zqF0FZ0LqYHH4
+ lIORKjsb2Rv2TliKwp6uxy+/wRbH4g+G8wDHHc5aidxkky+3JbWODhJJMW3MW9s9NWnL
+ Rfy2g5pDO6AUDSmEp5XDigPzaMuiVNa+xy5KgOz6L0NbtpDrqeuZ9oUp4wUWOPPouQ7t
+ r+YwZJ8wBWODDMBWV0a1+v/1fX1aGvJl80ZvvYK9l0o5Lec6iyhaM0zfeGVQbrZsnPx5
+ tQmQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVciH6Pr4TrnnP79bEE8AeK/DpLL3GQgl3ATETGnlVIpm7ETdsfc6/tZvsd21VcX5XJDQjV8mgwYOuTP1JW2No=@lists.samba.org
+X-Gm-Message-State: AOJu0YyRNepogGWgiQt/9ap0OGLOhLAOANuirlqcSt/R3op1x60hy+5U
+ ric3Y9yiH/W3Imuc6unVCKSsX/Q89dghJmokH4E55eIgFRYYdrCfry79HSexmhXW+7nGouGDx8v
+ rAf3/jhPbLA==
+X-Gm-Gg: ASbGnct0zSVDYJEWY9XLYUBIHLh+4IYe5bt2XwGHY7tRMIsMSmgdKOl9GI//OyGK6Za
+ bsVFW5Ea7FpH3RxT+M9ALC31wLBrrUeHld8n2/uUASY8eLY8tYSfogqMBuSSlbu2e/uzialj7kA
+ zltd/O3aRYxvGh8ivQht7XAuSBoH0HblFmw46piYblFGxfbZy2xvOpLsINiOz+fdD2jQrvjeCyf
+ MRLSaDSi7P+QDv0TejtIKN2yoe7ZYL2Rwzeh0w11Ca240PlrmrhJIpsexgFgf1sXx+L+//Ncl8m
+ zFjdMXQfuQulW/CQAEoQMrk9xNm2qdox8da6QuHzzmoqmtweYP0/n8h494/k74DmUGvwkwWJgva
+ erqn4HWXMoIfJbMre4louTum9AREQ2NBGqQjQ9iJ+VyPJD4PbXjt2cNPPbaO8vynlaBemlpzPoJ
+ IqCZNqfZAyJM3+cJzQ7xZazf0K9eZTtrixJBYNeJn7AaE2cXL/ETNeGYBqTUzu
+X-Google-Smtp-Source: AGHT+IGHsydTm4l8F4vi8hiTptapLS0nzZHXzHWTxfu9u8FikcxMtEafAASIniOR/2TJTn5H+ol+9g==
+X-Received: by 2002:a17:906:4791:b0:b57:2d81:41f with SMTP id
+ a640c23a62f3a-b70704bc3c2mr1710029666b.40.1762211085485; 
+ Mon, 03 Nov 2025 15:04:45 -0800 (PST)
+Received: from mail-ed1-f52.google.com (mail-ed1-f52.google.com.
+ [209.85.208.52]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-b723abdafa9sm35959066b.0.2025.11.03.15.04.44
+ for <samba-technical@lists.samba.org>
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 03 Nov 2025 15:04:44 -0800 (PST)
+Received: by mail-ed1-f52.google.com with SMTP id
+ 4fb4d7f45d1cf-640e9a53ff6so166768a12.0
+ for <samba-technical@lists.samba.org>; Mon, 03 Nov 2025 15:04:44 -0800 (PST)
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWWsgzObQRIKURsk/A4I40q47xYi74JYaM9x821FenxdRyXA5wyBOJqVO6CkAcXGml3z6cs6mWFYwgzIBVThW8=@lists.samba.org
+X-Received: by 2002:a17:907:1c28:b0:b71:854:4e49 with SMTP id
+ a640c23a62f3a-b710854688emr499540366b.56.1762211084280; Mon, 03 Nov 2025
+ 15:04:44 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: =?UTF-8?Q?Re=3A_Invitation=3A_Samba_Developer_Online_Gathering_?=
- =?UTF-8?Q?=E2=80=93_Tuesday=2C_November_4th?=
-To: samba-technical <samba-technical@lists.samba.org>
-References: <77b153b3-94f1-4100-a51d-b32d05faae48@samba.org>
-Content-Language: en-US, de-DE
-In-Reply-To: <77b153b3-94f1-4100-a51d-b32d05faae48@samba.org>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------EnsyfwiLlqi2tjbAgESQNx00"
+References: <20251103-work-creds-guards-simple-v1-0-a3e156839e7f@kernel.org>
+ <20251103-work-creds-guards-simple-v1-14-a3e156839e7f@kernel.org>
+In-Reply-To: <20251103-work-creds-guards-simple-v1-14-a3e156839e7f@kernel.org>
+Date: Tue, 4 Nov 2025 08:04:28 +0900
+X-Gmail-Original-Message-ID: <CAHk-=wiSmez2LFEpM05VUX=_GKJC8Ag68TJDByVPO=x4QwjyuA@mail.gmail.com>
+X-Gm-Features: AWmQ_bmQaBgs1Hs2Yx75LVx_L0plRwfdpBhmjm5wyWf-G7aoJOGX7gmwXWEf8f8
+Message-ID: <CAHk-=wiSmez2LFEpM05VUX=_GKJC8Ag68TJDByVPO=x4QwjyuA@mail.gmail.com>
+Subject: Re: [PATCH 14/16] act: use credential guards in acct_write_process()
+To: Christian Brauner <brauner@kernel.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -61,81 +98,34 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Ralph Boehme <slow@samba.org>
+From: Linus Torvalds via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Linus Torvalds <torvalds@linux-foundation.org>
+Cc: linux-aio@kvack.org, linux-nfs@vger.kernel.org, linux-cifs@vger.kernel.org,
+ netdev@vger.kernel.org, samba-technical@lists.samba.org,
+ linux-kernel@vger.kernel.org, linux-unionfs@vger.kernel.org,
+ linux-fsdevel@vger.kernel.org, cgroups@vger.kernel.org,
+ linux-erofs@lists.ozlabs.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------EnsyfwiLlqi2tjbAgESQNx00
-Content-Type: multipart/mixed; boundary="------------w05C20AaPtsJHcGt14WhWZpH";
- protected-headers="v1"
-From: Ralph Boehme <slow@samba.org>
-To: samba-technical <samba-technical@lists.samba.org>
-Message-ID: <4da1127e-121e-499b-91ee-b8a9e4a3c4bd@samba.org>
-Subject: =?UTF-8?Q?Re=3A_Invitation=3A_Samba_Developer_Online_Gathering_?=
- =?UTF-8?Q?=E2=80=93_Tuesday=2C_November_4th?=
-References: <77b153b3-94f1-4100-a51d-b32d05faae48@samba.org>
-In-Reply-To: <77b153b3-94f1-4100-a51d-b32d05faae48@samba.org>
+On Mon, 3 Nov 2025 at 20:27, Christian Brauner <brauner@kernel.org> wrote:
+>
+>         /* Perform file operations on behalf of whoever enabled accounting */
+> -       cred = override_creds(file->f_cred);
+> -
+> +       with_creds(file->f_cred);
 
---------------w05C20AaPtsJHcGt14WhWZpH
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
+I'd almost prefer if we *only* did "scoped_with_creds()" and didn't
+have this version at all.
 
-SGVyZSdzIHRoZSBjdXJyZW50IGFnZW5kYToNCg0KaHR0cHM6Ly9oYWNrbWQub2tmbi5kZS9F
-Y3VReHFHZVFVYU5Cd09TaVdwd1BnDQoNClNlZSB5b3UgdG9tb3Jyb3chDQotc2xvdw0KDQot
-LSANCkpvaW4gdXMgZm9yIHRoZSAyNXRoIHNhbWJhWFAgMjAyNiBjb25mZXJlbmNlDQpBcHJp
-bCAyMHRoICYgMjF0aCwgMjAyNiBhdCBIb3RlbCBGcmVpemVpdCBJbg0Kc3BvbnNvcmVkIGJ5
-IFRyYW5xdWlsSVQgJiBNaWNyb3NvZnQgJiBTZXJOZXQNClRpY2tldGluZyAmIG1vcmUgSW5m
-byBhdCBodHRwczovL3NhbWJheHAub3JnDQoNClNlck5ldCBTYW1iYSBUZWFtIExlYWQgaHR0
-cHM6Ly9zZXJuZXQuZGUvDQpTYW1iYSBUZWFtIE1lbWJlciAgICAgIGh0dHBzOi8vc2FtYmEu
-b3JnLw0KU2FtYmEgU3VwcG9ydCBhbmQgRGV2ICBodHRwczovL3NhbWJhLnBsdXMvc2Vydmlj
-ZXMvDQpTQU1CQSsgcGFja2FnZXMgICAgICAgIGh0dHBzOi8vc2FtYmEucGx1cy9wcm9kdWN0
-cy9zYW1iYQ0KDQpPbiAxMC8yNy8yNSA2OjQ4IFBNLCBSYWxwaCBCb2VobWUgdmlhIHNhbWJh
-LXRlY2huaWNhbCB3cm90ZToNCj4gSGkgYWxsLA0KPiANCj4gU2F2ZSB0aGUgZGF0ZSBmb3Ig
-dGhlIG5leHQgU2FtYmEgRGV2ZWxvcGVyIE9ubGluZSBHYXRoZXJpbmc6DQo+IA0KPiBEYXRl
-OiBUdWVzZGF5LCBOb3ZlbWJlciA0dGgNCj4gVGltZTogNjowMCBBTSBVVEMNCj4gTGluazog
-aHR0cHM6Ly9iYmItbmV3LnNmY29uc2VydmFuY3kub3JnL3Jvb21zL3g0cy13bjctbHR3LWwz
-Yi9qb2luDQo+IA0KPiBJbiB0aGUgbmFtZSBvZiB0aGUgU2FtYmEgVGVhbSwgSeKAmWQgbGlr
-ZSB0byBpbnZpdGUgZXZlcnlvbmUgYWN0aXZlbHkgDQo+IHdvcmtpbmcgb24gb3IgY29udHJp
-YnV0aW5nIHRvIFNhbWJhIHRvIGpvaW4gdGhpcyBmaXJzdCBTYW1iYSBEZXZlbG9wZXIgDQo+
-IE9ubGluZSBHYXRoZXJpbmcuDQo+IA0KPiBUaGUgZ29hbCBpcyB0byBjcmVhdGUgYW4gaW5m
-b3JtYWwgc3BhY2Ugd2hlcmUgZGV2ZWxvcGVycyBjYW4gZGlzY3VzcyANCj4gY3VycmVudCBk
-ZXZlbG9wbWVudCB0b3BpY3MsIG9uZ29pbmcgd29yaywgYW5kIGZ1dHVyZSBwbGFucyDigJQg
-bXVjaCBsaWtlIA0KPiBvdXIgaGFsbHdheSBjaGF0cyBhdCBTYW1iYVhQLCBidXQgaW4gYW4g
-b25saW5lIGZvcm1hdC4NCj4gDQo+IElmIHlvdSBoYXZlIHRvcGljcyB5b3XigJlkIGxpa2Ug
-dG8gZGlzY3VzcyBvciBzaG9ydCB1cGRhdGVzIHlvdeKAmWQgbGlrZSB0byANCj4gc2hhcmUs
-IHBsZWFzZSBzZW5kIHRoZW0gdG8gbWUgZGlyZWN0bHkgaW4gYWR2YW5jZSBzbyB3ZSBjYW4g
-cHJlcGFyZSBhIA0KPiByb3VnaCBhZ2VuZGEuDQo+IA0KPiBBIGZldyBkZXRhaWxzOg0KPiAN
-Cj4gRHVyYXRpb246IHVwIHRvIDIgaG91cnMNCj4gUmVjb3JkaW5nOiB0aGUgbWVldGluZyB3
-aWxsIG5vdCBiZSByZWNvcmRlZA0KPiBGb3JtYXQ6IG9wZW4gZGlzY3Vzc2lvbiDigJQgdGVj
-aG5pY2FsIGFuZCBpbmZvcm1hbA0KPiANCj4gV2XigJlyZSBsb29raW5nIGZvcndhcmQgdG8g
-c2VlaW5nIG1hbnkgb2YgeW91IHRoZXJlIGFuZCBoYXZpbmcgYSANCj4gcHJvZHVjdGl2ZSBh
-bmQgZnJpZW5kbHkgZXhjaGFuZ2UhDQo+IA0KPiBTZWUgeW91IG5leHQgVHVlc2RheSwNCj4g
-UmFscGgNCg0K
+Most of the cases want that anyway, and the couple of plain
+"with_creds()" cases look like they would only be cleaned up by making
+the cred scoping more explicit.
 
---------------w05C20AaPtsJHcGt14WhWZpH--
+What do you think?
 
---------------EnsyfwiLlqi2tjbAgESQNx00
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature.asc"
+Anyway, I approve of the whole series, obviously, I just suspect we
+could narrow down the new interface a bit more.
 
------BEGIN PGP SIGNATURE-----
-
-wsF5BAABCAAjFiEE+uLGCIokJSBRxVnkqh6bcSY5nkYFAmkI8AMFAwAAAAAACgkQqh6bcSY5nkY6
-PhAAgEiPUu4SNoffO0tEvNv8YHMgIp6Qd1JocEs0Gi4PC5qnnT5bDScZIHb6hKu4602a5EI2SHiN
-wrB8RTeSpwh64GMsC4kaZCwwlOZgK/YqxTJ0Or/7r8wmAZ1o1A8sVJ6GHtnAvEmZCmF2dvMmkdR1
-rvXmFifTVQCFxQYWGhil0wbbd7q4W3tZl0skP+WHdGkJ0gWa+wTL4PQy0KBKOGY/TW3KXl2duWlH
-WUGfm9Bnuokz4s3yHvShxiYDuZGdI3m06CDF6xzIkzBrieRDPy7vRo577QxLf0dshDxqK5mjoP49
-E6yxO4v9RlcUEn5O4o2Fpk1XA0IEjeLHU7Z1XUBuIBz2zsajCUW/j+hRbzjcB7RY4+ZcOlT0qWIQ
-8dqVlcA1ANYhaJEJN4tzOWmEawxRIy1lzbTsQG0FvaHDJLHqRllTcJca2uinQc6Uglo4fELZdtF5
-XSAgaykgbgvXBT60E4QPkKOX7T2so/HXRZ1ww9Z3W0sRER35K/0Ck/7F9IVPrn7KT7tt+/gnrvHx
-wPZFKilrFI7Bq6Q1MI4W42uSmcdP8l+/inXyDv97Nul2wJ+jgHggh3aMQEt16YOJF9rRyMW+2H/4
-vyNzjyOQuOU8JCA1AOYrSv2Xv+OVTJwyiFV0WNBDQuW/UK44LBxbrCtKXtOZE0uQL/mV69fW77eo
-+54=
-=1RZA
------END PGP SIGNATURE-----
-
---------------EnsyfwiLlqi2tjbAgESQNx00--
+                Linus
 
