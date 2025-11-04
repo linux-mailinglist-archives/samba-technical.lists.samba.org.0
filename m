@@ -2,46 +2,49 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id BEF80C3054A
-	for <lists+samba-technical@lfdr.de>; Tue, 04 Nov 2025 10:46:56 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 767F9C3058F
+	for <lists+samba-technical@lfdr.de>; Tue, 04 Nov 2025 10:52:28 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
-	bh=KAEya8zcnbW3cZkPzGhfVC/wrLHEvm8DWTh0Vs2+5FI=; b=pxk1BvpBE+iqMwUBj4WHddpsM7
-	6GCGtbDXV4Shi59WTJZZMCf5GB+9TT3ArCOI6dablUcmp+ZGKOuxg3p1NnK35rNmBl3qDScs1WS9V
-	oGw4X+6v/Mdju+hxIC/nx4xhfpoHaDGT3ClYsynPy49S1sbqrJTbBED7zchSm98cG+PYsN0tA2N1b
-	a1K9tgxKxHcae12AQCGFG/jaFQs0emtlsiAD2mBykujxXTYF/fnaLKNGclFTOZkhfTHD+87JubGtT
-	ArE4DVT/3ci/eKGzz7SaUe/AXJ5Pibf3PbRPYsChhmkW8u8bqRdInQAQ15DsFwh0//Wlvp2CXo63P
-	8N9GcDUQ==;
-Received: from ip6-localhost ([::1]:46362 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=DBveFsh41PrYMdJe3QhZW5VWXkGrtsmf1E7MedGEa0o=; b=XEDw4OrmhViotudALgwskHRDqY
+	pDXJBIayoE0PWrW4/9K5FWb8KgPXFMLHrtoaeficPw5oz/q4rGv7+BqIv9V6D4Fsier5RJwOmIuU0
+	kfbQUB93zi3+gFC2Q2Aw85w5thAkX7rTTOfk23uBsAz35oT79S1VcgJ3kTXOeUQx+egcXWHr9BZIS
+	Lujbe/vAMt793PkIfKApzqdW/r6oaMiVICQAcU9zbmE+4aSmtdnhjQPwTsi4me0EibSIYpi+L+wor
+	gBPrklES8bLD8nm2Gay4gJLEBPpR4nfS7ydX6E04v7ZLOecnfo/wwXHH464lMyNPRs1uj4cgjd1de
+	myaVy28g==;
+Received: from ip6-localhost ([::1]:54180 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1vGDcr-00BRYK-WB; Tue, 04 Nov 2025 09:46:54 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:24208) 
+	id 1vGDiA-00BRds-DX; Tue, 04 Nov 2025 09:52:22 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:37460) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vGDcn-00BRYD-CM
- for samba-technical@lists.samba.org; Tue, 04 Nov 2025 09:46:51 +0000
+ (Exim) id 1vGDi5-00BRdl-Pd
+ for samba-technical@lists.samba.org; Tue, 04 Nov 2025 09:52:20 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Date:To:From:CC;
- bh=KAEya8zcnbW3cZkPzGhfVC/wrLHEvm8DWTh0Vs2+5FI=; b=Klr6U97aSZAYYc/KxBAr3gmXJk
- TTRON7SD/ArxdXogM8BsECvUu0hESeu4A737TDFbfg2fLPDMaZ92OW+AkGQNyxjks9psbuchWOGeq
- 0nfaE24BUpXKCcdM2OY+7KenAffnp48W7nHcvls2LtsGd8BfcLFQgdYN/Wu/D+IQYp02odSePMYzE
- UpO7h87tNvwAlkqMHOwZDxa6YrIbG6HfwYT9Ovrm50u6rtLJzubbD6n5fI+JPR/hYiduVI5FLPlFA
- UpqhsADcEPcF/HcEHGAJ6caXHkdSjHYM4Q3Mkw3Wbu3We+RwZsSXVRq4EIgidTEkIwtvbpRv675IP
- YMDEnZ2U2+wcNAbsjX4W/wcwoFWSgUUumITO0Asgi2/F87okNeHDfH1h1sXnL0sxckCLchqkh1sEc
- Yc3QbOlx4b9expf8CzbnKCZYsKJpsrQ3NUH5vIjP9KgwlWYnD/ydqxnYQF5vu+t6/1nmtnhXh+UK6
- UXa0g27GCN2iU50l8vAqsHnv;
+ s=42; h=From:To:Date:Message-ID:CC;
+ bh=DBveFsh41PrYMdJe3QhZW5VWXkGrtsmf1E7MedGEa0o=; b=LprvGLOcuk7ddrQg//0Hblo1N8
+ Me0GaKXnDqJIdSjBYQcMz0YPGJ7gQUC5fZYg2bF4DMTf7f/qnZoVpSRhDVd2LokSAxxCn6XT03x9F
+ Tg3dbDiH0h694po/MvfwQzLmu6aRjZBh7mGXGNVIAj60x5PAk1zpCZDgbK3acwGH1tx3ZYCGbIquT
+ 21lgQb8FNvJGk5C6iPzMXEgZzWj1Bw5GLQNVrdKozicEMzF5kNbxXdKawb8YLEDTXudh8aZkCApD6
+ D/9Jg63shcMZeEyjbY3pye+mKW8BwaXFDRtqapL5be8ek2p1f/7lRKD7+KyL3EEHKrakVDHSTtLhp
+ wAawb6iMpJpUBDPUa/tZCovzxtgeU6M/oYQd/W2P8jciWyDhAvx7oP/WOt+6mpFUorqNqOM3UU4Bh
+ nHOxl+fM5mDj/bT80tXHSakByaJOZWdTBqOHMwqJVV0tE4o5aZZHJjAsYeOrgXMifax1U2uap4D64
+ j+928G59B2kJvZz/OQkWa9od;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vGDcm-00CVIb-2v for samba-technical@lists.samba.org;
- Tue, 04 Nov 2025 09:46:48 +0000
-To: samba-technical@lists.samba.org
-Subject: Top 20 developers with open Merge Requests
-Date: Tue, 04 Nov 2025 10:46:48 +0100
-Message-ID: <7684109.rdbgypaU67@magrathea>
+ (Exim) id 1vGDi4-00CVT7-3D; Tue, 04 Nov 2025 09:52:17 +0000
+Message-ID: <657cef07-c75c-43cb-99d7-78e7ee9bf955@samba.org>
+Date: Tue, 4 Nov 2025 10:52:16 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: Top 20 developers with open Merge Requests
+To: Andreas Schneider <asn@samba.org>, samba-technical@lists.samba.org
+References: <7684109.rdbgypaU67@magrathea>
+Content-Language: en-US
+In-Reply-To: <7684109.rdbgypaU67@magrathea>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -55,74 +58,59 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andreas Schneider via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andreas Schneider <asn@samba.org>
+From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Stefan Metzmacher <metze@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hey,
+Hi Andreas,
 
-together with Claude I wrote a little python script:
+> together with Claude I wrote a little python script:
+> 
+> python3 /home/asn/junk/gitlab_mr_counter.py --top 20
+> Fetching merge requests from samba-team/samba...
+>    Fetched page 1 (100 MRs)...
+>    Fetched page 2 (100 MRs)...
+>    Fetched page 3 (21 MRs)...
+> Total open merge requests fetched: 221
 
-python3 /home/asn/junk/gitlab_mr_counter.py --top 20
-=46etching merge requests from samba-team/samba...
-  Fetched page 1 (100 MRs)...
-  Fetched page 2 (100 MRs)...
-  Fetched page 3 (21 MRs)...
-Total open merge requests fetched: 221
+Is there a --no-draft or --only-draft option?
+> Showing top 20 of 88 developers:
+> 
+> ================================
+> | Developer         | Open MRs |
+> ================================
+> | David Mulder      |       25 |
+> | Andrew Walker     |       16 |
+> | Noel Power        |       11 |
+> | Jennifer Sutton   |       10 |
+> | Stefan Metzmacher |        9 |
+> | Björn Jacke       |        8 |
+> | Ralph Böhme       |        8 |
+> | amit kumar        |        7 |
+> | Andreas Schneider |        6 |
+> | Andrew Bartlett   |        6 |
+> | Alexander Klishin |        4 |
+> | Andréas Leroux    |        4 |
+> | Günther Deschner  |        4 |
+> | Pavel Filipenský  |        4 |
+> | ProhorP           |        4 |
+> | Shachar Sharon    |        4 |
+> | Oleg Kravtsov     |        3 |
+> | Peter Eriksson    |        3 |
+> | Vinit Agnihotri   |        3 |
+> | Anoop C S         |        2 |
+> ================================
+> | SUBTOTAL (Top 20) |      141 |
+> | TOTAL (All 88)    |      221 |
+> ================================
+> 
+> 
+> You might want to look into your MRs and make sure they are rebased on master
+> and find a reviewer for them ...
 
+Can you put the script somewhere?
 
-Showing top 20 of 88 developers:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D
-| Developer         | Open MRs |
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D
-| David Mulder      |       25 |
-| Andrew Walker     |       16 |
-| Noel Power        |       11 |
-| Jennifer Sutton   |       10 |
-| Stefan Metzmacher |        9 |
-| Bj=C3=B6rn Jacke       |        8 |
-| Ralph B=C3=B6hme       |        8 |
-| amit kumar        |        7 |
-| Andreas Schneider |        6 |
-| Andrew Bartlett   |        6 |
-| Alexander Klishin |        4 |
-| Andr=C3=A9as Leroux    |        4 |
-| G=C3=BCnther Deschner  |        4 |
-| Pavel Filipensk=C3=BD  |        4 |
-| ProhorP           |        4 |
-| Shachar Sharon    |        4 |
-| Oleg Kravtsov     |        3 |
-| Peter Eriksson    |        3 |
-| Vinit Agnihotri   |        3 |
-| Anoop C S         |        2 |
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D
-| SUBTOTAL (Top 20) |      141 |
-| TOTAL (All 88)    |      221 |
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D
-
-
-You might want to look into your MRs and make sure they are rebased on mast=
-er=20
-and find a reviewer for them ...
-
-
-Best regards
-
-
-	Andreas
-
-
-=2D-=20
-Andreas Schneider                      asn@samba.org
-Samba Team                             www.samba.org
-GPG-ID:     8DFF53E18F2ABC8D8F3C92237EE0FC4DCC014E3D
-
-
-
+Thanks!
+metze
 
