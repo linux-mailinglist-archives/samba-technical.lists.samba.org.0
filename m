@@ -2,50 +2,76 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 416C9C31D75
-	for <lists+samba-technical@lfdr.de>; Tue, 04 Nov 2025 16:30:57 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8497CC31FD4
+	for <lists+samba-technical@lfdr.de>; Tue, 04 Nov 2025 17:12:57 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=2Oh/WjvuENhyt2AbpEcOk7+ysW0l/7aHgPEtTllkPzM=; b=Rb+mEAYuGQrc0MJGl6DIrvH4c5
-	qhmCXbanGTudwV9+gmCU4tI8ZZPpiX5lgBcprt7ccFcfFfXXm2FuI/hEhDZuRB4cfCppBR7k7CBJz
-	Ynod9u5tyOTu52cnU/8iG1FoNoamOm2sqeRaA8hVavDva7r9XcpORKyxst/RAWKsobCQ/8dTHWwbd
-	eKMsObIEL3UBq3+KlNd1xtSs/OTy/WyNgWV5u6lp0ZRAdJnBio3QzA2OybuCaW+12kkuUjZc3wPUV
-	MiCAGQmgxekplq4nkzgEy9/BopolhLKcwU7vM0Ws7kyBjsPSPp5svUZRTE2kpHTsar5m45hBZOs7Q
-	lDUs1Pzg==;
-Received: from ip6-localhost ([::1]:48870 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=Gn2hwuUiPC8/Q2G266HcOJ5nNM1p+pgOQFA8M+yNExQ=; b=M8ZlV83RDWtCtCqRpTMAq9GGj6
+	ZLy7b1apIKAi7RsFRHHa+wQ52VhObL9gNmFflieOxqUY87Z3kBCxFXT2W+RFjwFH1aGqAPLxWg2ZU
+	0Zg65IGTiIhIfjtzNU9VXje2slkca6TgGVz4amYzWemAtDePIasfkOi9Q3ZyTM4hywun0XNW1qYG7
+	dRZQz9waxAHNXec0vA/J1W8W2sdV2YYj8WiY6OAg9yb2K62+C7QAEvtbhLFi6Y3fyv8KizrzdKlf/
+	AzDWpE+tt/IKF1d960Qu8ENI6c9kBEtXcvjAHr9tA5D7zbkRESexUmtI3ukpl9wtjws/2u4vU9r0Q
+	ANWjcKMA==;
+Received: from ip6-localhost ([::1]:25118 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1vGIzZ-00BTzi-Lt; Tue, 04 Nov 2025 15:30:41 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:54270) 
+	id 1vGJe3-00BUN2-Mi; Tue, 04 Nov 2025 16:12:31 +0000
+Received: from mail-qv1-xf2f.google.com ([2607:f8b0:4864:20::f2f]:53405) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vGIzV-00BTzb-2p
- for samba-technical@lists.samba.org; Tue, 04 Nov 2025 15:30:39 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=From:To:Date:Message-ID:CC;
- bh=2Oh/WjvuENhyt2AbpEcOk7+ysW0l/7aHgPEtTllkPzM=; b=psdypzBHfg5aL1QuSiXY3WipZa
- aiYtyjdJHD9/Oz3ebMdKEuoMGFZJu6oGYpi8khSUOTFVvyLPf61JZfLantsUimS4+tMp64nIqiKko
- fFpShPKSYajq0q6XDXleVLHA4buDXq61rnwWdUQEl003jeI6STjwbU61936355n1V0Vve71WmikFG
- l0r3pXxZw7chQPNu2ArZfvMlHAeh+27D+mtFtWB+/5gHg6vs/gm1z6BhaXgY/TqIWZ1h6mDtq6kpE
- 9rZeFO+myxY6oCrABhMMeFfoQKy3Qj2R/zh4OQjW/u8A9uywBAidiqOKy66e6T946/fWM5m/vGmjO
- I2QhwvSUCSxvGzTqMR2aAzVt8r5av4nDYB21oqgMe0lHqXLvhtkjTGzxxQVLOVryhEMSN+tQHM2Jv
- GvlzMHRsQmCzdDiIekN58JncRkIfFOXx82Z/RPBAooIQ3NotPXg0Dob5HFrbHfFHd1BM9M3RrdnlK
- 8IrK8/HWm6ThLA8eWvsXLj9G;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vGIzU-00CZ6a-16 for samba-technical@lists.samba.org;
- Tue, 04 Nov 2025 15:30:36 +0000
-Message-ID: <047e13d0-0720-4e49-b13a-bfd4124c4028@samba.org>
-Date: Tue, 4 Nov 2025 08:30:34 -0700
+ (Exim) id 1vGJdz-00BUMv-55
+ for samba-technical@lists.samba.org; Tue, 04 Nov 2025 16:12:30 +0000
+Received: by mail-qv1-xf2f.google.com with SMTP id
+ 6a1803df08f44-88025eb208bso49471696d6.2
+ for <samba-technical@lists.samba.org>; Tue, 04 Nov 2025 08:12:26 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1762272745; x=1762877545; darn=lists.samba.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Gn2hwuUiPC8/Q2G266HcOJ5nNM1p+pgOQFA8M+yNExQ=;
+ b=mPjHjHvXVHCT6YAymssYFRr4i1rG4tv+ppG1RHRMmtGBoKDCbDC+CZKEvgDu3+bzxO
+ hbaimnNONmSl3KuJtjqrSorqX2uEAMjB/a4yLbeuEj5Hgqcgx+i/Ynlfsnd9v+B5SLyl
+ BnJChUMP/daZlcs3ISeokCme95J8qrfK67KlrvjnF4e8VeElpTaLXF/NZXIIPLbpMuXj
+ Kng0lgz0XOV7IZZUjTKqHe7qWjfpiAMZ06ikoUN0lOo8aGX0a2Xb+ALM1P9lM6oLm+k6
+ Ynk4d5KhYRsxULLO9dSTwyX9eunpk503E0M4gkd9sOJjmO7sNUi+VOUfbHeuQLY1TZsf
+ O/VQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1762272745; x=1762877545;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=Gn2hwuUiPC8/Q2G266HcOJ5nNM1p+pgOQFA8M+yNExQ=;
+ b=X5+m4pgoB+ajGiW/dhrOCO+4QemCybDJAZSd6vr6h/vayM/UXwQRMjq5uZ2tSp6m+Q
+ GSMoWkfxCbsF+XKZvE6qhsNLXZPkG+6ak54wcRVwzOr5ybygVZ2wVKs6vedVeY+e9CKp
+ J0tXvaVEUcn/Ev+UOW/x6q/pCdIiMsLuYkrlpPIKfIzhgkmn8Az8ccgxHWeXpE+++2oG
+ ugv13leKQrBdw7wxm/HPyDf+bx01ASwQIYu0kQjZ0Mz0nqUm12dVaBAlcTWJU1VCg6b4
+ hQtv2riYUeKynGJFz0GBCfibPj/YbzeSHh9Cvf93FYKAIQmLi++DTBBaz3pFtDC6Plr2
+ cHkQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWoi3k3rzzlVUuIv5cZpB4PQfLtsNUT+iEy2suqlkPw0593NR2sGPGTGdJi2l8iiy64y4mVee90DAFsUqqFO+I=@lists.samba.org
+X-Gm-Message-State: AOJu0YyRxDfUSY722wTtOne04JXnETHB8VPRgP2Y4P7xu/tHxhftcOr6
+ SdkRPX09WicmNxQje2ceG52Ojm84v16Z9uu4a3eNqhHNBMlvWnfX5XXfnzY34y1hP22g3hbumFt
+ ot61K/xLpGVCziGEhVTFcyovW/Pt9GZw=
+X-Gm-Gg: ASbGncvhnXzoIFFlzJXHEju9XLEj2ZV346OqvL2SACPTGaai8GDkpdGoGUiu9JFc4t7
+ hR3hnPBfSfqF5TRFmOyZv4EnKZ45Ti5+aPrKJuaHEclQDVcwRH2OUoj11cJ35rQBkxQxSq/jRB8
+ BPPhmNVGZ+gxI7Uoikqp+EVnJwGe/6TWzMvzUy9+QBIFpv0Df6EneC+pouwWW3F9k7U+tWYH4Nd
+ iJ5vrb9EJIDZQLhktoX9H5M878QhlyjBafJVvfJCAhD3QYSKijcMP9pa/q5C+SiJWYOM7BM9uE1
+ 5YvD7zV6f7N/nLYckC2+h3RH8FAuzHT+PRMT1qbpnCK+ySpxSflgDB7xWIz+tUzoK4DAhSChQtK
+ Uum43340muAzVh8E+c6S6P1GNwHkzdXv3oShLdKw=
+X-Google-Smtp-Source: AGHT+IED+GjqaBe66KWozlF5qlUX46+UXTDSGyStL4Ec1xFghQ8tKmJeoeUM3fbVkK6cckiH8C39lCagfXCl3ojuYgM=
+X-Received: by 2002:a05:6214:d63:b0:880:5365:46f3 with SMTP id
+ 6a1803df08f44-88071190af1mr1980246d6.48.1762272745039; Tue, 04 Nov 2025
+ 08:12:25 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: Top 20 developers with open Merge Requests
-To: samba-technical@lists.samba.org
-References: <7684109.rdbgypaU67@magrathea>
-Content-Language: en-US
-In-Reply-To: <7684109.rdbgypaU67@magrathea>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+References: <aQoYCxKqMHwH4sOK@osx.local>
+In-Reply-To: <aQoYCxKqMHwH4sOK@osx.local>
+Date: Tue, 4 Nov 2025 10:12:13 -0600
+X-Gm-Features: AWmQ_bnENIVd9iuIwtt-CFvdgGVQlHaSwLipDA4bB04baKUxG5zWSRWEKYEzUVY
+Message-ID: <CAH2r5mu7s4p88RhUbCm5mqUvEVM60OOTTJOZ+rz09nFfc+t3mQ@mail.gmail.com>
+Subject: Re: [PATCH] smb: client: fix refcount leak in smb2_set_path_attr
+To: Shuhao Fu <sfual@cse.ust.hk>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,26 +85,58 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: David Mulder via samba-technical <samba-technical@lists.samba.org>
-Reply-To: David Mulder <dmulder@samba.org>
+From: Steve French via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Steve French <smfrench@gmail.com>
+Cc: Tom Talpey <tom@talpey.com>, Shyam Prasad N <sprasad@microsoft.com>,
+ Paulo Alcantara <pc@manguebit.org>, linux-cifs@vger.kernel.org,
+ samba-technical@lists.samba.org, linux-kernel@vger.kernel.org,
+ Steve French <sfrench@samba.org>, Bharath SM <bharathsm@microsoft.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
+There are multiple callers - are there callers that don't call
+"set_writeable_path()" ?    And so could cause the reverse refcount
+issue?
 
-On 11/4/25 02:46, Andreas Schneider via samba-technical wrote:
-> | David Mulder      |       25 |
-Those are primarily test conversions from SMB1 to SMB2. These are in 
-various stages. Some are potentially ready to merge with rebase. Others 
-still need a lot of work.
+On Tue, Nov 4, 2025 at 9:21=E2=80=AFAM Shuhao Fu <sfual@cse.ust.hk> wrote:
+>
+> Fix refcount leak in `smb2_set_path_attr` when path conversion fails.
+>
+> Function `cifs_get_writable_path` returns `cfile` with its reference
+> counter `cfile->count` increased on success. Function `smb2_compound_op`
+> would decrease the reference counter for `cfile`, as stated in its
+> comment. By calling `smb2_rename_path`, the reference counter of `cfile`
+> would leak if `cifs_convert_path_to_utf16` fails in `smb2_set_path_attr`.
+>
+> Fixes: 8de9e86c67ba ("cifs: create a helper to find a writeable handle by=
+ path name")
+> Signed-off-by: Shuhao Fu <sfual@cse.ust.hk>
+> ---
+>  fs/smb/client/smb2inode.c | 2 ++
+>  1 file changed, 2 insertions(+)
+>
+> diff --git a/fs/smb/client/smb2inode.c b/fs/smb/client/smb2inode.c
+> index 09e3fc81d..69cb81fa0 100644
+> --- a/fs/smb/client/smb2inode.c
+> +++ b/fs/smb/client/smb2inode.c
+> @@ -1294,6 +1294,8 @@ static int smb2_set_path_attr(const unsigned int xi=
+d, struct cifs_tcon *tcon,
+>         smb2_to_name =3D cifs_convert_path_to_utf16(to_name, cifs_sb);
+>         if (smb2_to_name =3D=3D NULL) {
+>                 rc =3D -ENOMEM;
+> +               if (cfile)
+> +                       cifsFileInfo_put(cfile);
+>                 goto smb2_rename_path;
+>         }
+>         in_iov.iov_base =3D smb2_to_name;
+> --
+> 2.39.5 (Apple Git-154)
+>
+>
 
--- 
-David Mulder
-Labs Software Engineer, Samba
-SUSE
-1221 S Valley Grove Way, Suite 500
-Pleasant Grove, UT 84062
-(P)+1 385.208.2989
-dmulder@suse.com
-http://www.suse.com
 
+--=20
+Thanks,
+
+Steve
 
