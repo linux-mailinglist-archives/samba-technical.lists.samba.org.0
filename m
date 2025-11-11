@@ -2,63 +2,47 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5885FC4B910
-	for <lists+samba-technical@lfdr.de>; Tue, 11 Nov 2025 06:47:19 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id EC518C4DD88
+	for <lists+samba-technical@lfdr.de>; Tue, 11 Nov 2025 13:48:41 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=88MA7FFfqsE2m/H01Z3+We2u+DvOXcJRGWjb+ba/aq0=; b=W2/QZEyC23MsDQJdN4sWZHdmIu
-	XrVOek8dphq3e5rZGp37eR2ltqBi1H8iPLffyg3W8OkYBMWJnDZSzWDGFnKUm78pJt3vwoZr6XyWo
-	Ea36hJr0cU3cmlRJ1dwk6p9aa0kSBCOqNOMi5bWNR/39EqPatI6fgLdvDTWPwAa78yxVFZjOCBGP+
-	LwPMR7dewhPO3vH9haDHZltU8COSX+Be1zeyG8PGxYDHQfVzhZROROf8AJeBbUrkfXIxmmm2gn3oF
-	z9bsiORruCOl9T5tMG5RYjmCEjpM0OqIevdEkr/a9J9V5tTICJPnyG4+2982UNMriizuGf9inXDcx
-	WwrDgdgQ==;
-Received: from ip6-localhost ([::1]:59194 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
+	bh=TsStE0UxM470U2BOGVNAe8qzXF2OndLZqM63rpZD7kc=; b=OlaA0QeBtBnHsr62hH+2GWCLIp
+	wxeIgrWk/2btjyrgAcAvinpNsAjKJ4m6Oquz12mAoMNwwIyMf90dfAia0dgRqTOp86s9L5TCxmUUJ
+	AiGPYnTDgR/lIoew8lCUpvacIqU2eF9GMY0ZtwyIoJIiHr0qEMIJ2ZsN9WKK9LqdQqA3Hs2ZefFgc
+	HXPsMvZU6LCUJWzfWS4jzMRlaPaVyHaFi0nR8PERIkhUnDISA3L7RdqQmSkhbJtnzB1CGxdfQl77/
+	7HIF3mkL8wAhdkpZyPEfOttg+Iz+CWhI/JHhP+lHcCt9ZTF244oXuzWGi+ZFwlzo9Xv7pRKteMNbg
+	OZFojXhA==;
+Received: from ip6-localhost ([::1]:25240 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1vIhDL-00ByPi-O5; Tue, 11 Nov 2025 05:46:47 +0000
-Received: from tor.source.kernel.org ([2600:3c04:e001:324:0:1991:8:25]:34706) 
+	id 1vInnA-00Bzgc-Pa; Tue, 11 Nov 2025 12:48:12 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:46480) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vIhDH-00ByPb-Nm
- for samba-technical@lists.samba.org; Tue, 11 Nov 2025 05:46:46 +0000
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id C1DB261908
- for <samba-technical@lists.samba.org>; Tue, 11 Nov 2025 05:46:39 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 67225C19421
- for <samba-technical@lists.samba.org>; Tue, 11 Nov 2025 05:46:39 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1762839999;
- bh=88MA7FFfqsE2m/H01Z3+We2u+DvOXcJRGWjb+ba/aq0=;
- h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
- b=FZwufzs1svcGhCfpLuQNqjnWtHM4V8hOrHKApdHZ0xX9tdOlR3jljP+OJufenNL6h
- 4OvKif3vLyl55Xnlk1LFXAnqWCILvNogQO8XFnESMWqvSFKY06fUHoPlHXMEVdCjQq
- qpBmvU/hBFjPuBLhiBRl9n7dkbG0fh6Mo1RvtRVlt5tagaVvgj0huDOcxajCZNvEh+
- PsT8XbB61VMrCnaL8DCvrk8nL4mEzQHz6h8dv9CzOuupzH0OWT0+j0SyTEyGWEJgDV
- zJeBYtDT1uUVeokS384gnyYNxmMZ87s8iPTaqNQWOptZqHVnun2L+JSKIME9xoq3ML
- XepzZOTL1wnxg==
-Received: by mail-ed1-f42.google.com with SMTP id
- 4fb4d7f45d1cf-640aaa89697so5593740a12.3
- for <samba-technical@lists.samba.org>; Mon, 10 Nov 2025 21:46:39 -0800 (PST)
-X-Forwarded-Encrypted: i=1;
- AJvYcCUigTSx4hsub9cdcAD0vS3uZbmtwc39zH5ipQvpvxhUS2QTrw+LvEprKmRDhP2isEC0Y5p4D1W3KZXth2y1loc=@lists.samba.org
-X-Gm-Message-State: AOJu0YwqyYgt1TjcCQJ4HNjoRRhWmpMfmwDOoalfF29Rvwbsb9uU38dP
- 91/4WgidSZYQqD1hTSDn+h7MfbrZTqwnLfX9w+d8aObiNnpXFDYNagoTQJJ50ffyaDc/O4wbaot
- cD8j3Mjl6kwpmRj7N9WSfhYbeOU29IqI=
-X-Google-Smtp-Source: AGHT+IGwEPdaSDYQbTScYkkptse9ATIhZO7TWXe/XoISjgO/uLNwm7phNBo2mRF7mkqD+QDGLEsI3q8e93DG9aSId+w=
-X-Received: by 2002:a17:907:7f0d:b0:b40:cfe9:ed2c with SMTP id
- a640c23a62f3a-b72e05c9530mr979626366b.64.1762839997984; Mon, 10 Nov 2025
- 21:46:37 -0800 (PST)
+ (Exim) id 1vInn1-00Bzfu-II; Tue, 11 Nov 2025 12:48:06 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=From:To:Date:Message-ID:CC;
+ bh=TsStE0UxM470U2BOGVNAe8qzXF2OndLZqM63rpZD7kc=; b=YulDgM+fzfU6Vh38xoJxbPSDH1
+ h8R+Gpy545PeOFU9YuBXYHX7YYrnBtQaU9yHx/CuWV3nEFLhaIUVc6Jky3szEYRWJX9r/yeLaxNcB
+ Cnw4Gc0mWlt/2y55GM8XG16MYxFuYsBCubJaNq31U8y9LhEANs7Lg5sEhtrLpQfjsYyAzNl06V663
+ Q6E0AdcPSTO3TFB+nwaqg+kr94VMOx5uAKEQwBwzEIbS/KHlrjXnHNDrC5xGlzO+GIzQDuIYQ8Mrn
+ ZG7FLecFi+fdmJ5v8PtM0hqn5Rq3HzrWxeyNpKcT+4bQ79INugXQqRN7soGWnscWZzcooA0IQzkeD
+ r0DoPF6tKm+GNZWv0TDRpNiNxXmDzg71JkT5r5RU11A9UFgKG987zCMyPlRYVhFgOtT0kDQnR/5jB
+ /9A6jS/u5Cm5cpKPY68jJx3XsfW/6sMLcyPuIbf+qrWmyjuBecI/k9vRrhfETvDaQMA+BzleboBmA
+ MCcuj+t57TUzq0PFbvvV8L6Y;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1vInn0-00DbmM-2n; Tue, 11 Nov 2025 12:48:03 +0000
+Message-ID: <3137ed6a-ee9a-4bf1-bba8-7d6882078f9a@samba.org>
+Date: Tue, 11 Nov 2025 13:48:02 +0100
 MIME-Version: 1.0
-References: <20251110152420.2889233-1-metze@samba.org>
-In-Reply-To: <20251110152420.2889233-1-metze@samba.org>
-Date: Tue, 11 Nov 2025 14:46:26 +0900
-X-Gmail-Original-Message-ID: <CAKYAXd9CMKMfMZGSL05fm9uE0FcdiSHRhMUcqVdxVfFv1mJFHg@mail.gmail.com>
-X-Gm-Features: AWmQ_bnWpKDAr3OvJboQXFJlGFZRaQQTIGqXGsox1QeN4YJHzwrvkRn6R9YCfn8
-Message-ID: <CAKYAXd9CMKMfMZGSL05fm9uE0FcdiSHRhMUcqVdxVfFv1mJFHg@mail.gmail.com>
-Subject: Re: [PATCH] smb: server: let smb_direct_disconnect_rdma_connection()
- turn CREATED into DISCONNECTED
-To: Stefan Metzmacher <metze@samba.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Content-Language: de-DE
+To: samba-announce@lists.samba.org, samba@lists.samba.org,
+ samba-technical@lists.samba.org
+Subject: [Announce] Samba 4.21.10 Available for Download
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -72,38 +56,84 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Namjae Jeon via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Namjae Jeon <linkinjeon@kernel.org>
-Cc: Tom Talpey <tom@talpey.com>, linux-cifs@vger.kernel.org,
- samba-technical@lists.samba.org, Steve French <smfrench@gmail.com>
+From: Jule Anger via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jule Anger <janger@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Tue, Nov 11, 2025 at 12:24=E2=80=AFAM Stefan Metzmacher <metze@samba.org=
-> wrote:
->
-> When smb_direct_disconnect_rdma_connection() turns SMBDIRECT_SOCKET_CREAT=
-ED
-> into SMBDIRECT_SOCKET_ERROR, we'll have the situation that
-> smb_direct_disconnect_rdma_work() will set SMBDIRECT_SOCKET_DISCONNECTING
-> and call rdma_disconnect(), which likely fails as we never reached
-> the RDMA_CM_EVENT_ESTABLISHED. it means that
-> wait_event(sc->status_wait, sc->status =3D=3D SMBDIRECT_SOCKET_DISCONNECT=
-ED)
-> in free_transport() will hang forever in SMBDIRECT_SOCKET_DISCONNECTING
-> never reaching SMBDIRECT_SOCKET_DISCONNECTED.
->
-> So we directly go from SMBDIRECT_SOCKET_CREATED to
-> SMBDIRECT_SOCKET_DISCONNECTED.
->
-> Fixes: b3fd52a0d85c ("smb: server: let smb_direct_disconnect_rdma_connect=
-ion() set SMBDIRECT_SOCKET_ERROR...")
-> Cc: Namjae Jeon <linkinjeon@kernel.org>
-> Cc: Steve French <smfrench@gmail.com>
-> Cc: Tom Talpey <tom@talpey.com>
-> Cc: linux-cifs@vger.kernel.org
-> Cc: samba-technical@lists.samba.org
-> Signed-off-by: Stefan Metzmacher <metze@samba.org>
-Applied it to #ksmbd-for-next-next.
-Thanks!
+Release Announcements
+---------------------
+
+This is the latest stable release of the Samba 4.21 release series.
+
+
+Changes since 4.21.9
+--------------------
+
+o  Bailey Allison <ballison@45drives.com>
+    * BUG 15935: Crash in ctdbd on failed updateip.
+
+o  Pavel Filipenský <pfilipensky@samba.org>
+    * BUG 15905: samba-4.21 fails to join AD when multiple DCs are returned.
+
+o  Anoop C S <anoopcs@samba.org>
+    * BUG 15919: vfs_ceph_new should not use 
+ceph_ll_nonblocking_readv_writev
+      for fsync_send.
+
+o  Andreas Schneider <asn@samba.org>
+    * BUG 15905: samba-4.21 fails to join AD when multiple DCs are returned.
+
+o  Shachar Sharon <ssharon@redhat.com>
+    * BUG 15919: vfs_ceph_new should not use 
+ceph_ll_nonblocking_readv_writev
+      for fsync_send.
+
+o  Martin Schwenke <mschwenke@ddn.com>
+    * BUG 15921: CTDB_SOCKET can be used even when CTDB_TEST_MODE is not 
+set.
+    * BUG 15935: Crash in ctdbd on failed updateip.
+
+
+#######################################
+Reporting bugs & Development Discussion
+#######################################
+
+Please discuss this release on the samba-technical mailing list or by
+joining the #samba-technical:matrix.org matrix room, or
+#samba-technical IRC channel on irc.libera.chat.
+
+If you do report problems then please try to send high quality
+feedback. If you don't provide vital information to help us track down
+the problem then you will probably be ignored.  All bug reports should
+be filed under the Samba 4.1 and newer product in the project's Bugzilla
+database (https://bugzilla.samba.org/).
+
+
+======================================================================
+== Our Code, Our Bugs, Our Responsibility.
+== The Samba Team
+======================================================================
+
+
+
+================
+Download Details
+================
+
+The uncompressed tarballs and patch files have been signed
+using GnuPG (ID AA99442FB680B620).  The source code can be downloaded
+from:
+
+         https://download.samba.org/pub/samba/stable/
+
+The release notes are available online at:
+
+         https://www.samba.org/samba/history/samba-4.21.10.html
+
+Our Code, Our Bugs, Our Responsibility.
+(https://bugzilla.samba.org/)
+
+                         --Enjoy
+                         The Samba Team
 
