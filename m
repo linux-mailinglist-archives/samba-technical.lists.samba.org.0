@@ -2,78 +2,74 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 89FBBC6B839
-	for <lists+samba-technical@lfdr.de>; Tue, 18 Nov 2025 21:01:22 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 54F9AC6C0B2
+	for <lists+samba-technical@lfdr.de>; Wed, 19 Nov 2025 00:47:21 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=SB7FwqNIKbZ7R+GS+j9DGZBpb2NO6ssSsIVjR5I+uyA=; b=GEW2qbUvfsaCH+jImGIkkFeAP9
-	IwUcfB9RtyBA7TAXY1v6C74FugPkSFkLv4KTieR9+NXslbZBIwdr7BQ6KLzFE0EUPAXmAFLsFblRv
-	RYh3exe9WRKyISVZa4/a4BwIiwgrZgWQcPFjTiOcWDpUFNmHrYRLd6s9R3q0kZuIjixgsb5jB54rF
-	ooJsilBZQD4e0KGHLwwkEoZrVweLcoRTN8dviRe/IwmgKSve+8Z+Eim0OCU5ksVy0Ac8JPG3G99Om
-	IKtSviQIcBEaeCxDKpqWSt7L8N/OLQNU4O35NdWOCnPNz+riLrmvLNqnBIMii7DZff6E+KzF88Ytt
-	7fqVoNOg==;
-Received: from ip6-localhost ([::1]:54390 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=O4Qy67r0WsvsoCb54DNk1kfuGqNvxmypCWDAzg4loaw=; b=Yke+3SC1RoLmwYbeOfTkS1zB0S
+	4o7dxfYG8/w/uRnLgZnqGbPxcPIsy2ISvd0oSNdllWyLfxKQD2gqzj85vPetf5pyVdVidWD6skvLM
+	/U0KA9xE1HSwxmzZwPTHB9TWvBylV8cIc6vr004ec5W4L82KEnieCClTi9fKWzBuGDYavPAH9qQwP
+	46SKEDmlQ+s2u5I3HONxLTSllXkTrePmKZ650ZBb3oK0PZpi2kniYFlSwKR7XiCBmuo/fumRnqyjE
+	hexDNMUr8rL9Vs/gYuuMlPfAK/UAf3QVzmoKNH1M1eowvlWQNlzMZ9rfi1vKrXMURot45fG28bX5M
+	cgJjlapw==;
+Received: from ip6-localhost ([::1]:32072 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1vLRsv-00CZqG-Lm; Tue, 18 Nov 2025 20:01:05 +0000
-Received: from mail-qv1-xf2f.google.com ([2607:f8b0:4864:20::f2f]:44487) 
+	id 1vLVPJ-00CbkA-OP; Tue, 18 Nov 2025 23:46:45 +0000
+Received: from mail-qv1-xf2f.google.com ([2607:f8b0:4864:20::f2f]:44199) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vLRsq-00CZq9-Im
- for samba-technical@lists.samba.org; Tue, 18 Nov 2025 20:01:04 +0000
+ (Exim) id 1vLVPE-00Cbk3-Hb
+ for samba-technical@lists.samba.org; Tue, 18 Nov 2025 23:46:43 +0000
 Received: by mail-qv1-xf2f.google.com with SMTP id
- 6a1803df08f44-88242fc32c9so65007216d6.1
- for <samba-technical@lists.samba.org>; Tue, 18 Nov 2025 12:01:00 -0800 (PST)
+ 6a1803df08f44-8804650ca32so56016996d6.0
+ for <samba-technical@lists.samba.org>; Tue, 18 Nov 2025 15:46:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1763496059; x=1764100859; darn=lists.samba.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=SB7FwqNIKbZ7R+GS+j9DGZBpb2NO6ssSsIVjR5I+uyA=;
- b=EDQxy3I28WDbL/KZOVRMrDZJCjkJnBKOZ1HrmuIWI2jjcvBw9SfH/4KYs0eKQczlPM
- DGf3sa6xCQelrGeF7Ogn+JWSyWeHhfCaukAwpkKk+LrzJDUSr8xIPwHQTW3BgWx1c2EA
- pUaql13N0MYMXDhl/2NF3u5FI7FAyJCU0ItgfMO+WeWKOsfSRRCJlIkA3pgkw55TBJ90
- 2oQI/a+NG6WC12YTHqcic0sA3LjK9DrMJTaedNoncycy27EIDufc5co8/73tSivPJkDW
- DqcOM9FrUntGpbIXE43vrmWcMNtj2FzG3m5Fd9YlKLKe/uTgWMRPk1Uy31TsBekcBlNE
- D7YA==
+ d=gmail.com; s=20230601; t=1763509598; x=1764114398; darn=lists.samba.org;
+ h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=O4Qy67r0WsvsoCb54DNk1kfuGqNvxmypCWDAzg4loaw=;
+ b=ITh/mCATOOXwm2loQqYCVdbpnzYL1TSMmhQtryBuO6sQdUOrRpnyPQqqXtX3VTBt2b
+ cin+KyC9/RAk0rk0bBUYct65Qg4/Ry3as5cf3fK0odgZ2b09jeU9huPpRcqnOaEExurX
+ opXb/eldqVEKR0Jl/cfXDI/1DECPNRmR/w9X95pinZxeyNa/+5dgbfGlLkx0oFX7fugG
+ eFP+vksowk+MIIK8vdaVATmb9E7bpzYbphmsDFLWCiln/JUkTD+V1yLr0LebYGob7FQ0
+ gXOQ3KQNo8KChBkNvL35EDLSqkADoxdEPmq54Q01WEyvRVTfq4ToiqPBDTJzH5/Uf3Gl
+ pxuw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763496059; x=1764100859;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=SB7FwqNIKbZ7R+GS+j9DGZBpb2NO6ssSsIVjR5I+uyA=;
- b=HSR6KCI1bvkAaAYLklKEbWOBtyRewuKs8CrrGybFg4JLgwgPb5yKIJX7SKVzLIwZ62
- mYsXsQCNWHdG/qsrizccoEBbQkOGZzVyJL1lhaOBXGAUPpV5aXx0WKVUF/4Q6Y0NPPOU
- K6ZSk74yl8b+yNndaQ8jBbbI6vK3HueCtDdtmR+chTHUJrSyHaMoje3bET+fgL2KxXVp
- mdkt1E6w7eFJkWGA9ZSahotoCYjHOhoKJWsm3WZFGMkrVdH2IstMQLKkWsbjePVCK98n
- O6NcYOTFYQ+juJ4nGvSHVV4axDnQVNM6uIUfYZnNEdEddAVVzKZZbK/oTZEx8HG3jdDT
- ZPWw==
+ d=1e100.net; s=20230601; t=1763509598; x=1764114398;
+ h=to:subject:message-id:date:from:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=O4Qy67r0WsvsoCb54DNk1kfuGqNvxmypCWDAzg4loaw=;
+ b=gg1OqI1l620qisqKanT6X2SbZkz1wS3QvA8Jhnky5SCOeWL5p3vhDbN/10qnx/TmZs
+ 8ITypPB3EyMScAyJWNPBqG/qjVzrA1rQ0criAodwz03P/t+sPclSxz+vFrRmn5MRI6MP
+ KvIu8iuuBjs3PRIUHa1chyKEbx0Bap3wbZA6SoKASmC2YumvUCBvYbUwlc48lMOmnR2c
+ x6xhvri34axlwWLJhWei99PwCd+hO4TNTju+TiVL4P+ShSHIMdfdRWgAlDlZ4l6LpSFF
+ eHtfoxCH3itc/npspFYeCGf9fplzZpKbcD0RUIWorG4W3ShUFjoAT7eDNnAoFsOQBvI+
+ PS2A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWaRWyTbl2X7LRvWLHhgZjIRHzZDMRLWDcfdetT00Pnj73PLaIwY8IDmHAv9iFnze5RXiTJOOjCys44C2LrQe8=@lists.samba.org
-X-Gm-Message-State: AOJu0YwJxjt7jH6IMzwwy2eiAun5kWXSVrcqbDmaYh44JSZjU6eM0Qv8
- 5rRzKt3nDESBBW98/rWhrtJIH1eu4b2azkCjh+lMhZBYPgB1APR0ZsFRvXuPX15mwHmlOAOgBNO
- Y3HHreNh2xq3y4H90sawDMYIwhGuYrWc=
-X-Gm-Gg: ASbGnctbfvcLmVIRGGmC9UApPzg9qRwWXMoIL6xAH4EOL7HT0OjigHvYskyrL9QcMqo
- y7wCpIWSJmEj/ojVUa+jmMKpn/Q9vf+XdDdy81zeDjXO/1ZpMX22U1F0pwPL6zPssSs0CAJYvRY
- nk2iR4bNaD1S168G8oognhDeB+m6CWw4uGyuhHhwBabrtrSDzZEvM3ltC99UPMPN8uFSLzPmnKf
- QJ0jMFT1XCyRpZn273g3TKppS7yaEYjPaXi4UstbBAlyNlhTbIyeVNCxZhF2jw1VYiWS4PFSske
- QrF91+PLz/yCST5chX2ZaiGUvO9jjq8AfREImpf2ULeZqJI6Ees0EnBnfCi8NsDa9n6MtWXLyPs
- DlP/hWfglRFb0COE7c5dODBaRzimIKspBnvlF1eddWWXn1nMITSb9kQzuw++OJIiIYk/OtP6/Kd
- 9epVrf4CEpxoGIpJgV4Io=
-X-Google-Smtp-Source: AGHT+IHhfzBJAEcCphFwzomj2W7zGvOCPeFDhl/lHKkpj3xi16n9G+ByWNLrLHv/3vIAjtNEDflU7OTWv23wgwwm1Ys=
-X-Received: by 2002:a05:6214:cae:b0:882:4901:e960 with SMTP id
- 6a1803df08f44-8829262506emr211040446d6.29.1763496058322; Tue, 18 Nov 2025
- 12:00:58 -0800 (PST)
+ AJvYcCWdxIYpshBSMqgFNr6OfjmB17mLgW9XHU2ZfjTAtUNMMtkIs1Q8UrdCedkj+C8TrdgCI2SrXnEgoiiJeiVhDZU=@lists.samba.org
+X-Gm-Message-State: AOJu0Yx7rphJRWLkkp6qvqLvILHX9WK8YoU9daYPJg/qAzBkfRsQT5zl
+ RvT/lcAhqHbbTQH+md7jdepm7JsJ/KsWN4V1KamFjOGYh3yH1xc0xPO2HRVZ1Ne2/oMN4lTaW78
+ rcY+h1YDBuQhSZOcxCQ/oJGTusX3iiZM=
+X-Gm-Gg: ASbGncvipAVGW6wIa0z2R15Icdwrk1cXvXVHLi7LNhfszYybe+hfxRgOITX0v5K/3v/
+ rBd78jSrHBpMYdb8qK6BgqZoKD330RP/9ZfHw/ZCCOpfgYEQ9YRIvqjLat4PXQ7yj/U7cb3oqiU
+ iAL8IMGjE8Vu2MhWeacQ6gPdjlZg5NkUAY/YxU3a/j7ZXBFUf14VSeYPSVEdIQKiu8IJvBUJEgc
+ t0+SMmNuvPM5JcGgTqupgFA+jR98YZJ5/FZhH+CAVPs4O0QypC4iaxE+nWgdwUDQIRO4jUqvzzq
+ 0GZPa/2vluxz/HWLGLmK7M/6UsGQapFLnxZRIaUeoxxeVJwzULXdS/QeH7B2nvsJegwFicoymib
+ aAASmpLXuNSLQUhikKUvBz3wuuZHB9Pb//Jsw/r4XUS3Y7j4SJP09WqRGkL1Le1kBhaCyFdyxDq
+ eJbVqpyOcIYw==
+X-Google-Smtp-Source: AGHT+IG1ybOUdC7NN5Ug1UYt3LymjIoXH27sZabYuk+bt5UoSaUVuB3KSoG3Fr2rH+PMf+JTR3LdGVMgzaN9/xcxqRE=
+X-Received: by 2002:a05:6214:1c0f:b0:880:42a7:772c with SMTP id
+ 6a1803df08f44-8845fd509b9mr8167666d6.54.1763509598402; Tue, 18 Nov 2025
+ 15:46:38 -0800 (PST)
 MIME-Version: 1.0
-References: <20251118150257.35455-1-ssranevjti@gmail.com>
-In-Reply-To: <20251118150257.35455-1-ssranevjti@gmail.com>
-Date: Tue, 18 Nov 2025 14:00:46 -0600
-X-Gm-Features: AWmQ_bk518tBwIwq4km9t_okTCnI85hG63NOZgFy5r88Hbvu-haY_fDOfVuyttk
-Message-ID: <CAH2r5mu72dDwVfnK1ffAELCa1iWa5b5XXwTY1+7CTsFvTnN7Bw@mail.gmail.com>
-Subject: Re: [PATCH] cifs: fix memory leak in smb3_fs_context_parse_param
- error path
-To: ssrane_b23@ee.vjti.ac.in
+Date: Tue, 18 Nov 2025 17:46:26 -0600
+X-Gm-Features: AWmQ_blhXXnq12LEDM8AAVYpXJJg1iJQCsyTVfTojMoJ-I7DESkhUkPL7KvhKXI
+Message-ID: <CAH2r5ms6CEykTOCFyJ4GVx2hBGX3EzrtNwgE4z+2_+LuYASRAg@mail.gmail.com>
+Subject: Multichannel mount failures to Samba depending on IP address (single
+ channel works)
+To: Shyam Prasad <nspmangalore@gmail.com>, CIFS <linux-cifs@vger.kernel.org>, 
+ samba-technical <samba-technical@lists.samba.org>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -89,80 +85,94 @@ List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
 From: Steve French via samba-technical <samba-technical@lists.samba.org>
 Reply-To: Steve French <smfrench@gmail.com>
-Cc: tom@talpey.com, sprasad@microsoft.com, pc@manguebit.org,
- linux-cifs@vger.kernel.org,
- syzbot+87be6809ed9bf6d718e3@syzkaller.appspotmail.com,
- samba-technical@lists.samba.org, linux-kernel@vger.kernel.org,
- sfrench@samba.org, bharathsm@microsoft.com, khalid@kernel.org,
- skhan@linuxfoundation.org, linux-kernel-mentees@lists.linux.dev,
- david.hunter.linux@gmail.com
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-merged into cifs-2.6.git for-next pending additional review
+Saw an interesting multichannel failure scenario to Samba today:
 
+Samba server smb.conf has
+   "server multi channel support = yes"
+in the [global] section but it does not include a line for
+"interfaces" (uses the default)
 
-On Tue, Nov 18, 2025 at 9:08=E2=80=AFAM <ssrane_b23@ee.vjti.ac.in> wrote:
->
-> From: Shaurya Rane <ssrane_b23@ee.vjti.ac.in>
->
-> Add proper cleanup of ctx->source and fc->source to the
-> cifs_parse_mount_err error handler. This ensures that memory allocated
-> for the source strings is correctly freed on all error paths, matching
-> the cleanup already performed in the success path by
-> smb3_cleanup_fs_context_contents().
-> Pointers are also set to NULL after freeing to prevent potential
-> double-free issues.
->
-> This change fixes a memory leak originally detected by syzbot. The
-> leak occurred when processing Opt_source mount options if an error
-> happened after ctx->source and fc->source were successfully
-> allocated but before the function completed.
->
-> The specific leak sequence was:
-> 1. ctx->source =3D smb3_fs_context_fullpath(ctx, '/') allocates memory
-> 2. fc->source =3D kstrdup(ctx->source, GFP_KERNEL) allocates more memory
-> 3. A subsequent error jumps to cifs_parse_mount_err
-> 4. The old error handler freed passwords but not the source strings,
-> causing the memory to leak.
->
-> This issue was not addressed by commit e8c73eb7db0a ("cifs: client:
-> fix memory leak in smb3_fs_context_parse_param"), which only fixed
-> leaks from repeated fsconfig() calls but not this error path.
->
-> Reported-by: syzbot+87be6809ed9bf6d718e3@syzkaller.appspotmail.com
-> Closes: https://syzkaller.appspot.com/bug?extid=3D87be6809ed9bf6d718e3
-> Fixes: 24e0a1eff9e2 ("cifs: switch to new mount api")
-> Signed-off-by: Shaurya Rane <ssrane_b23@ee.vjti.ac.in>
-> ---
->  fs/smb/client/fs_context.c | 6 ++++++
->  1 file changed, 6 insertions(+)
->
-> diff --git a/fs/smb/client/fs_context.c b/fs/smb/client/fs_context.c
-> index 0f894d09157b..975f1fa153fd 100644
-> --- a/fs/smb/client/fs_context.c
-> +++ b/fs/smb/client/fs_context.c
-> @@ -1834,6 +1834,12 @@ static int smb3_fs_context_parse_param(struct fs_c=
-ontext *fc,
->         ctx->password =3D NULL;
->         kfree_sensitive(ctx->password2);
->         ctx->password2 =3D NULL;
-> +       kfree(ctx->source);
-> +       ctx->source =3D NULL;
-> +       if (fc) {
-> +               kfree(fc->source);
-> +               fc->source =3D NULL;
-> +       }
->         return -EINVAL;
->  }
->
-> --
-> 2.34.1
->
->
+On localhost, mounting to current Samba from Linux (tried various
+versions of cifs.ko so does not appear to be a recent regression),
+noticed:
 
+1) mount -t cifs //locahost/share /mnt                                    worked
+2) mount -t cifs //localhost/share /mnt -o multichannel          failed
+3) mount -t cifs //127.0.0.1/share /mnt                                   worked
+4) mount -t cifs //127.0.0.1/share /mnt -o multichannel          failed
+5) mount -t cifs //192.168.1.190/share /mnt -o multichannel   worked
 
---=20
+When mounting with "localhost" or "127.0.0.1" as the server name (non
+multichannel) note that it does not show [CONNECTED] in
+/proc/fs/cifs/DebugData
+
+Server interfaces: 3 Last updated: 3 seconds ago
+1) Speed: 1Gbps
+Capabilities: None
+IPv4: 192.168.1.198
+Weight (cur,total): (0,1)
+Allocated channels: 0
+
+2) Speed: 1Gbps
+Capabilities: None
+IPv6: 2603:8080:2200:13fc:c82b:b16f:52c8:2329
+Weight (cur,total): (0,1)
+Allocated channels: 0
+
+3) Speed: 1Gbps
+Capabilities: None
+IPv6: 2603:8080:2200:13fc:5b60:a7d6:77d7:72cc
+Weight (cur,total): (0,1)
+Allocated channels: 0
+
+Note that when mounting to "192.168.1.190" (non-multichannel) it only
+shows two instead of three interfaces (not sure why it drops one of
+the IPv6 ones) but it does correctly show [CONNECTED]
+
+Server interfaces: 2 Last updated: 1 seconds ago
+1) Speed: 1Gbps
+Capabilities: None
+IPv4: 192.168.1.198
+Weight (cur,total): (1,1)
+Allocated channels: 1
+[CONNECTED]
+
+2) Speed: 1Gbps
+Capabilities: None
+IPv6: 2603:8080:2200:13fc:5b60:a7d6:77d7:72cc
+Weight (cur,total): (0,1)
+Allocated channels: 0
+
+The mount failures with multichannel to 127.0.0.1 are weird - the
+first negprot/sessionsetup/tcon works fine but the second negprot then
+sessionsetup fails with the server returning with
+"STATUS_SESSION_DELETED" which seems strange (since the session is
+valid, and channel one session setup worked fine).  Any idea if this
+is a Samba server bug?
+
+Presumably the workaround is to add an "interfaces" line to smb.conf
+to force it to return 127.0.0.1 as a valid interface, but this still
+seems like it could be a server bug.  And quite confusing to users (as
+"Resource temporarily unavailable" won't make sense to them since
+single channel works fine) Any thoughts?
+
+And log messages are unlikely to help the user figure out the server
+config (or bug) issue.
+
+[12421.964837] CIFS: Attempting to mount //localhost/test
+[12422.032199] CIFS: VFS: \\localhost Send error in SessSetup = -11
+[12422.032234] CIFS: VFS: failed to open extra channel on
+iface:192.168.1.198 rc=-11
+[12422.137163] CIFS: successfully opened new channel on
+iface:2603:8080:2200:13fc:c82b:b16f:52c8:2329
+[12422.137401] CIFS: VFS: reconnect tcon failed rc = -11
+
+Thoughts?
+
+-- 
 Thanks,
 
 Steve
