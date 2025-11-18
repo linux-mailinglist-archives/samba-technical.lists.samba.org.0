@@ -2,111 +2,78 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 61FCBC69C5D
-	for <lists+samba-technical@lfdr.de>; Tue, 18 Nov 2025 15:00:56 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 05F08C6B78B
+	for <lists+samba-technical@lfdr.de>; Tue, 18 Nov 2025 20:41:02 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=Y9LNzrVKF5jk5aYcNsFQe1Iz6TiHOuNsHq+z0Dhmpgg=; b=VJCJ9OiljedBedzIU3iYTmxgEy
-	trmfZTLkNhHLm004oxgZWcu4gNNGsypNuGfezJMrJPat+rIcN+o/s6o9W0+CjYKSZD9wTRlI3h5S7
-	UBnhe9aXAtO9ucaacrzSzsNEqgVe4lZSjIha/BWqhqlX5X1KuGzTjiZYCqMWgYxkp5607s7JabbPo
-	h9BvycYlMdM9jlHnmrM05w0Ius55KgYZ5+fNrTN3e7TQSxr8Lzesq1Ao3ckHMPFxXFm8uYdozqfkD
-	D6AXPAzilOAhU49qEjgVoOIJvopGJH0pc9uoKZ70tKvdzlRcaRCFSqqpPwnD46CYpVb3Z7SI/50Fb
-	Qf3dFbeQ==;
-Received: from ip6-localhost ([::1]:45420 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=yXHAzdSmOXVhWRC4vIo+f32gZc/kqOvBMxigKYi0DEQ=; b=hEBOO/cH5uO68KmjYiV6t8q9H3
+	TZ4v9hw1jm0JpZ92t089wLeA9GmpqJvT/mCbXo59SqCyfEIVDl+R7WMAfXVqhpnBBTpHcHPo2XkEh
+	7/7g7NqtRnSKtV8ZlN2vMWa03OlKPJqPQaJNh4+cs+N0pGaQ+3ieWFkesLdGnkffuPU309XWLTiN/
+	K05NnSq3boGpcAihAcdHKZPj4Q5zg/4vUCFsfmWMWclR7BXvkIY56d0TKimbCwbSVarz9Z7A8geN/
+	U477J+bnNOelyiW5Zk44GpPGOrzJ6R8VVdRoIhH31xlaVM/n+vY3kyf3RJDeOwPOHK081grCkqkZ+
+	SjyJcrqQ==;
+Received: from ip6-localhost ([::1]:26048 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1vLMFr-00CYcF-Al; Tue, 18 Nov 2025 14:00:23 +0000
-Received: from smtp-out2.suse.de ([195.135.223.131]:59966) 
+	id 1vLRZ1-00CZjO-5j; Tue, 18 Nov 2025 19:40:31 +0000
+Received: from mail-qt1-x82d.google.com ([2607:f8b0:4864:20::82d]:44461) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vLMFi-00CYc6-I8
- for samba-technical@lists.samba.org; Tue, 18 Nov 2025 14:00:18 +0000
-Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
- [IPv6:2a07:de40:b281:104:10:150:64:97])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 9E0581FED4;
- Tue, 18 Nov 2025 14:00:10 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1763474411; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=Y9LNzrVKF5jk5aYcNsFQe1Iz6TiHOuNsHq+z0Dhmpgg=;
- b=vT4nH4AwIO3ydxsSwcbeRHbqZGd6QXog9Kkr72s8y9lRdJ+nW0jepRdy+jpk05qdCxO3xl
- KV1KebwXF5/Z6Lx/8RbrqmKm9zUBOcB6wDalgZTu//T3YDlWvxGfn9dXeQkVvEJndzHbcz
- P5lYUQvdvZjjIKH+HObxm22o3L+KTnM=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1763474411;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=Y9LNzrVKF5jk5aYcNsFQe1Iz6TiHOuNsHq+z0Dhmpgg=;
- b=AdpLC7b+DDyRBww/PYZRXXX3tod3ly+e9hZjR64xkllvzO7Y4cQ+obvBxGsutO9sth7vQe
- YDQz8lNLCk6+qbCA==
-Authentication-Results: smtp-out2.suse.de;
- dkim=pass header.d=suse.de header.s=susede2_rsa header.b=r6SNmXpA;
- dkim=pass header.d=suse.de header.s=susede2_ed25519 header.b=v7vjtKnT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1763474410; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=Y9LNzrVKF5jk5aYcNsFQe1Iz6TiHOuNsHq+z0Dhmpgg=;
- b=r6SNmXpALbCV7oe+A5lwAmnm1ZgDigt5z6r1s+cbkGyUlhZIWMDqxYlhV+QAybSnADev+A
- 07ZQ2OCuvclBSM1AsGswW2GlTTP4VQcEKV164iSjw/Ndx9TpJQEaKAOps/w9kAw/XNhqNr
- ISqDge5vOPKEq7PLMnXXCh9+s8bbMx8=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1763474410;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=Y9LNzrVKF5jk5aYcNsFQe1Iz6TiHOuNsHq+z0Dhmpgg=;
- b=v7vjtKnTqcGmsLncWlTV5GGEwGUW7BjghecJcIiiEsqGkt2FTRresUjqL+yjzyQRbnPkow
- 0aEQmUPsZuQIfdDA==
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 1EBE43EA61;
- Tue, 18 Nov 2025 14:00:09 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id lQyzNel7HGmKZAAAD6G6ig
- (envelope-from <ematsumiya@suse.de>); Tue, 18 Nov 2025 14:00:09 +0000
-Date: Tue, 18 Nov 2025 11:00:07 -0300
-To: Rajasi Mandal <rajasimandalos@gmail.com>
-Subject: Re: [PATCH] cifs: client: enforce consistent handling of
- multichannel and max_channels
-Message-ID: <7mc3cpg6qojvq7hak6jvkud7xgynmaki554tgn2jic2y52onzm@ugw7wsq43wsp>
-References: <20251118022655.126994-1-rajasimandalos@gmail.com>
- <20251118022655.126994-2-rajasimandalos@gmail.com>
+ (Exim) id 1vLRYv-00CZjH-5r
+ for samba-technical@lists.samba.org; Tue, 18 Nov 2025 19:40:29 +0000
+Received: by mail-qt1-x82d.google.com with SMTP id
+ d75a77b69052e-4ed9c19248bso54740681cf.1
+ for <samba-technical@lists.samba.org>; Tue, 18 Nov 2025 11:40:24 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1763494823; x=1764099623; darn=lists.samba.org;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=uP/MfyD100ahkyh30CXitCbaIs2OTGjmWpxzNyNanb4=;
+ b=WdeTvf3ec+dnR5YqsvGqrXsJ5I4yvp3NxARJWew27zbgc+rEkmYsp9Pey3rRUlWNza
+ vkzDKN/sBVpVdxpSQ5bRUs+d3j6jqnfAfSREYFUw6MilNzSzi2n3O+u3Lyj9NPQJihys
+ f6il84+4GgG9ujFgGeJxsk3IK8poySyYwJrEEi8CD5x6ecKNUZ+qyg8t9xchQBHB8hkQ
+ LIF93J3AVX1KWJt66DDMj76Z/yDF/GR4BE23OxXxHOC3lvXzeX17UoweyoWbE1KzchDF
+ w1nywZ95Jt11Y+Dy1LyWpCHctfCqkgOjW55XkWSFi179O5sQ1jTwzyU6KHqEMCEBnoU2
+ QMBA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1763494823; x=1764099623;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=uP/MfyD100ahkyh30CXitCbaIs2OTGjmWpxzNyNanb4=;
+ b=DUN8WMaSyIenWk1CG0CK6RpAa7BLliKAPOwr1UoDmp5ezQlldlCCEDMwBjIDSzqzS3
+ eOz+VKVCVDR0bxx6cSMJJYhoT4xOLZq/tG8JJ/HagAxPOakKM5uSnu1WMpD5jfbYF6+P
+ t2gh7ukN7N0Hqj70UKGHtO26hzMpudD1Xx7etkA2RW0dQtO2jzdQWVm++vuFG28K4w7X
+ GBYcARigoS6c8OtP0ksBT+o/uBV8O3ABIRejDxDMGM1rgMG324jUm9pOA8ZlBzJtxN2e
+ 9YM4feM+U/DO+L2C1yriELCBMOGDCbuYreCrT9gaMS0r8Ov7iwd5iVFHedex6Si+GQCT
+ 5H0w==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCU0KTQa7v+Ca8ugo6HrAKTBl08+RdW2nTLyWcZqR3zzW2HUt8Mt2gKbragRkAAdhHauueFhPgKyB+a168yd9ZU=@lists.samba.org
+X-Gm-Message-State: AOJu0YxHuCxZeAMdPBujSfFeUsXa+3mspOtIj7PUhOMPEbj1mvz7yt7f
+ Udfgpheyg89iQeQWYtwTGmqMP594E6pn6JS20/IKFYop9TowmEbqv47V82nb+lF+Wcv//QALKg3
+ LjDZq/+6R2nbw4RaWwP+VZj/SWnImi/A=
+X-Gm-Gg: ASbGnctunNVNXyPDFdTcMiNQjxkeAEjYCVJx3XA1xAzBCF1mvjx73R2gzTh+royCa78
+ WGwYclHMZGwFjHlPG33vUl09NF2E8t7yCnQItfJTeM592n+XSDQJPi/jECwEsiAaCn2dE4QGa6G
+ aX8zK8lR7e+v3SqdQXm/XjkI3hTz7jhYE1G5cgKLXAOujHdwE/ISj60eV5a6YHPJmbhT1DoagI9
+ 8aKiUmH2NGS2ujc2vrhZr1Aj3aTk9WsSfIGS9QpYPKjnrQ5B8rg3QciNQ7P6d4jNMNDu54nbKl2
+ FEvwX2ljjIi406sLwUdWvhvAEQJYjRHByFKWw5lF+O1TIixhjF4v0EFo59pme42hfMAGxgCvEmZ
+ B4I+NScy612P7R3QkzAvR2RYso5kYusAanLgz+/3JAT2XUo8mM+hUeyP7zMLFQKdUJAnqLGNWqI
+ NMvS3Mne8c
+X-Google-Smtp-Source: AGHT+IF9Olz+04owc6pA8oO+QE5x1fnGLbX4xa6FSf47x+OoJFeDokGwKKYgz/a+gUZK0PGJkDwK5Dsn008Ktrgw/pA=
+X-Received: by 2002:ac8:5743:0:b0:4ee:24fc:be81 with SMTP id
+ d75a77b69052e-4ee24fcc1cfmr90001221cf.36.1763494823106; Tue, 18 Nov 2025
+ 11:40:23 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii; format=flowed
-Content-Disposition: inline
-In-Reply-To: <20251118022655.126994-2-rajasimandalos@gmail.com>
-X-Rspamd-Queue-Id: 9E0581FED4
-X-Rspamd-Server: rspamd2.dmz-prg2.suse.org
-X-Spamd-Result: default: False [-4.01 / 50.00]; BAYES_HAM(-3.00)[100.00%];
- NEURAL_HAM_LONG(-1.00)[-1.000]; MID_RHS_NOT_FQDN(0.50)[];
- NEURAL_HAM_SHORT(-0.20)[-1.000];
- R_DKIM_ALLOW(-0.20)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
- MIME_GOOD(-0.10)[text/plain]; MX_GOOD(-0.01)[];
- TO_MATCH_ENVRCPT_ALL(0.00)[];
- DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
- FREEMAIL_ENVRCPT(0.00)[gmail.com];
- FUZZY_RATELIMITED(0.00)[rspamd.com];
- FREEMAIL_TO(0.00)[gmail.com]; MIME_TRACE(0.00)[0:+];
- ARC_NA(0.00)[];
- FREEMAIL_CC(0.00)[samba.org,vger.kernel.org,manguebit.org,gmail.com,microsoft.com,talpey.com,lists.samba.org];
- RCVD_TLS_ALL(0.00)[]; DKIM_TRACE(0.00)[suse.de:+];
- RCVD_COUNT_TWO(0.00)[2]; FROM_EQ_ENVFROM(0.00)[];
- FROM_HAS_DN(0.00)[]; TO_DN_SOME(0.00)[];
- DNSWL_BLOCKED(0.00)[2a07:de40:b281:104:10:150:64:97:from,2a07:de40:b281:106:10:150:64:167:received];
- RECEIVED_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:106:10:150:64:167:received];
- RCPT_COUNT_SEVEN(0.00)[11]; MISSING_XM_UA(0.00)[];
- RCVD_VIA_SMTP_AUTH(0.00)[];
- DBL_BLOCKED_OPENRESOLVER(0.00)[suse.de:dkim]
-X-Rspamd-Action: no action
-X-Spam-Flag: NO
-X-Spam-Score: -4.01
+References: <20251118150257.35455-1-ssranevjti@gmail.com>
+In-Reply-To: <20251118150257.35455-1-ssranevjti@gmail.com>
+Date: Tue, 18 Nov 2025 13:40:11 -0600
+X-Gm-Features: AWmQ_bmB0MUuEWhAyOCDZ6bkCOmp1_rKuoSNZ_3xejkxgZLXrAdMbDAoLRFov7s
+Message-ID: <CAH2r5mtBUFXmYtU7itC+NKX5Qu9k=cjiRLfU00RFuy6RKS-yJA@mail.gmail.com>
+Subject: Re: [PATCH] cifs: fix memory leak in smb3_fs_context_parse_param
+ error path
+To: ssrane_b23@ee.vjti.ac.in
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -120,211 +87,81 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Enzo Matsumiya via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Enzo Matsumiya <ematsumiya@suse.de>
-Cc: Rajasi Mandal <rajasimandal@microsoft.com>, linux-cifs@vger.kernel.org,
- sprasad@microsoft.com, pc@manguebit.org, samba-technical@lists.samba.org,
- linux-kernel@vger.kernel.org, sfrench@samba.org, bharathsm@microsoft.com,
- tom@talpey.com
+From: Steve French via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Steve French <smfrench@gmail.com>
+Cc: tom@talpey.com, sprasad@microsoft.com, pc@manguebit.org,
+ linux-cifs@vger.kernel.org,
+ syzbot+87be6809ed9bf6d718e3@syzkaller.appspotmail.com,
+ samba-technical@lists.samba.org, linux-kernel@vger.kernel.org,
+ sfrench@samba.org, bharathsm@microsoft.com, khalid@kernel.org,
+ skhan@linuxfoundation.org, linux-kernel-mentees@lists.linux.dev,
+ david.hunter.linux@gmail.com
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On 11/18, Rajasi Mandal wrote:
->From: Rajasi Mandal <rajasimandal@microsoft.com>
->
->Previously, the behavior of the multichannel and max_channels mount
->options was inconsistent and order-dependent. For example, specifying
->"multichannel,max_channels=1" would result in 2 channels, while
->"max_channels=1,multichannel" would result in 1 channel. Additionally,
->conflicting combinations such as "nomultichannel,max_channels=3" or
->"multichannel,max_channels=1" did not produce errors and could lead to
->unexpected channel counts.
->
->This commit introduces two new fields in smb3_fs_context to explicitly
->track whether multichannel and max_channels were specified during
->mount. The option parsing and validation logic is updated to ensure:
->- The outcome is no longer dependent on the order of options.
->- Conflicting combinations (e.g., "nomultichannel,max_channels=3" or
->  "multichannel,max_channels=1") are detected and result in an error.
->- The number of channels created is consistent with the specified
->  options.
->
->This improves the reliability and predictability of mount option
->handling for SMB3 multichannel support.
->
->Reviewed-by: Shyam Prasad N <sprasad@microsoft.com>
->Signed-off-by: Rajasi Mandal <rajasimandal@microsoft.com>
+merged into cifs-2.6.git for-next pending additional review
 
-It's conflicting because it's already too complex for something that
-should've been simple.  This patch introduces a new field + unnecessary
-logic on top if it all.
+On Tue, Nov 18, 2025 at 9:08=E2=80=AFAM <ssrane_b23@ee.vjti.ac.in> wrote:
 
-cf. a PoC patch I sent a while ago, we can (ab)use fsparam with same key
-name, but different key types, so we could only deal with:
-
-'nomultichannel', 'multichannel={0,1,off,no}' as multichannel disabled
-'multichannel' as ctx->max_channels=2 (multichannel enabled, obviously)
-'multichannel=X' as ctx->max_channels=X (ditto)
-
-Makes 0 sense to have both multichannel and max_channels mount options.
-
->---
-> fs/smb/client/cifsfs.c     |  1 -
-> fs/smb/client/fs_context.c | 65 ++++++++++++++++++++++++++++----------
-> fs/smb/client/fs_context.h |  2 ++
-> 3 files changed, 50 insertions(+), 18 deletions(-)
+> From: Shaurya Rane <ssrane_b23@ee.vjti.ac.in>
 >
->diff --git a/fs/smb/client/cifsfs.c b/fs/smb/client/cifsfs.c
->index 185ac41bd7e9..4d53ec53d8db 100644
->--- a/fs/smb/client/cifsfs.c
->+++ b/fs/smb/client/cifsfs.c
->@@ -1016,7 +1016,6 @@ cifs_smb3_do_mount(struct file_system_type *fs_type,
-> 	} else {
-> 		cifs_info("Attempting to mount %s\n", old_ctx->source);
-> 	}
->-
-> 	cifs_sb = kzalloc(sizeof(*cifs_sb), GFP_KERNEL);
-> 	if (!cifs_sb)
-> 		return ERR_PTR(-ENOMEM);
->diff --git a/fs/smb/client/fs_context.c b/fs/smb/client/fs_context.c
->index 46d1eaae62da..1794a31541fe 100644
->--- a/fs/smb/client/fs_context.c
->+++ b/fs/smb/client/fs_context.c
->@@ -711,6 +711,47 @@ smb3_parse_devname(const char *devname, struct smb3_fs_context *ctx)
-> 	return 0;
-> }
+> Add proper cleanup of ctx->source and fc->source to the
+> cifs_parse_mount_err error handler. This ensures that memory allocated
+> for the source strings is correctly freed on all error paths, matching
+> the cleanup already performed in the success path by
+> smb3_cleanup_fs_context_contents().
+> Pointers are also set to NULL after freeing to prevent potential
+> double-free issues.
 >
->+static int smb3_handle_conflicting_options(struct fs_context *fc)
->+{
->+	struct smb3_fs_context *ctx = smb3_fc2context(fc);
->+
->+	if (ctx->multichannel_specified) {
->+		if (ctx->multichannel) {
->+			if (!ctx->max_channels_specified) {
->+				ctx->max_channels = 2;
->+			} else if (ctx->max_channels == 1) {
->+				cifs_errorf(fc,
->+					    "max_channels must be greater than 1 when multichannel is enabled\n");
->+				return -EINVAL;
->+			}
->+		} else {
->+			if (!ctx->max_channels_specified) {
->+				ctx->max_channels = 1;
->+			} else if (ctx->max_channels > 1) {
->+				cifs_errorf(fc,
->+					    "max_channels must be equal to 1 when multichannel is disabled\n");
->+				return -EINVAL;
->+			}
->+		}
->+	} else {
->+		if (ctx->max_channels_specified) {
->+			if (ctx->max_channels > 1)
->+				ctx->multichannel = true;
->+			else
->+				ctx->multichannel = false;
->+		} else {
->+			ctx->multichannel = false;
->+			ctx->max_channels = 1;
->+		}
->+	}
->+
->+	//resetting default values as remount doesn't initialize fs_context again
+> This change fixes a memory leak originally detected by syzbot. The
+> leak occurred when processing Opt_source mount options if an error
+> happened after ctx->source and fc->source were successfully
+> allocated but before the function completed.
+>
+> The specific leak sequence was:
+> 1. ctx->source =3D smb3_fs_context_fullpath(ctx, '/') allocates memory
+> 2. fc->source =3D kstrdup(ctx->source, GFP_KERNEL) allocates more memory
+> 3. A subsequent error jumps to cifs_parse_mount_err
+> 4. The old error handler freed passwords but not the source strings,
+> causing the memory to leak.
+>
+> This issue was not addressed by commit e8c73eb7db0a ("cifs: client:
+> fix memory leak in smb3_fs_context_parse_param"), which only fixed
+> leaks from repeated fsconfig() calls but not this error path.
+>
+> Reported-by: syzbot+87be6809ed9bf6d718e3@syzkaller.appspotmail.com
+> Closes: https://syzkaller.appspot.com/bug?extid=3D87be6809ed9bf6d718e3
+> Fixes: 24e0a1eff9e2 ("cifs: switch to new mount api")
+> Signed-off-by: Shaurya Rane <ssrane_b23@ee.vjti.ac.in>
+> ---
+>  fs/smb/client/fs_context.c | 6 ++++++
+>  1 file changed, 6 insertions(+)
+>
+> diff --git a/fs/smb/client/fs_context.c b/fs/smb/client/fs_context.c
+> index 0f894d09157b..975f1fa153fd 100644
+> --- a/fs/smb/client/fs_context.c
+> +++ b/fs/smb/client/fs_context.c
+> @@ -1834,6 +1834,12 @@ static int smb3_fs_context_parse_param(struct
+> fs_context *fc,
+>         ctx->password =3D NULL;
+>         kfree_sensitive(ctx->password2);
+>         ctx->password2 =3D NULL;
+> +       kfree(ctx->source);
+> +       ctx->source =3D NULL;
+> +       if (fc) {
+> +               kfree(fc->source);
+> +               fc->source =3D NULL;
+> +       }
+>         return -EINVAL;
+>  }
+>
+> --
+> 2.34.1
+>
+>
+>
 
-Please stick to /* ... */ comments style.
+--=20
+Thanks,
 
->+	ctx->multichannel_specified = false;
->+	ctx->max_channels_specified = false;
->+
->+	return 0;
->+}
->+
-> static void smb3_fs_context_free(struct fs_context *fc);
-> static int smb3_fs_context_parse_param(struct fs_context *fc,
-> 				       struct fs_parameter *param);
->@@ -785,6 +826,7 @@ static int smb3_fs_context_parse_monolithic(struct fs_context *fc,
-> 		if (ret < 0)
-> 			break;
-> 	}
->+	ret = smb3_handle_conflicting_options(fc);
->
-> 	return ret;
-> }
->@@ -1296,15 +1338,11 @@ static int smb3_fs_context_parse_param(struct fs_context *fc,
-> 		ctx->nodelete = 1;
-> 		break;
-> 	case Opt_multichannel:
->-		if (result.negated) {
->+		ctx->multichannel_specified = true;
->+		if (result.negated)
-> 			ctx->multichannel = false;
->-			ctx->max_channels = 1;
->-		} else {
->+		else
-> 			ctx->multichannel = true;
->-			/* if number of channels not specified, default to 2 */
->-			if (ctx->max_channels < 2)
->-				ctx->max_channels = 2;
->-		}
-> 		break;
-> 	case Opt_uid:
-> 		ctx->linux_uid = result.uid;
->@@ -1440,15 +1478,13 @@ static int smb3_fs_context_parse_param(struct fs_context *fc,
-> 		ctx->max_credits = result.uint_32;
-> 		break;
-> 	case Opt_max_channels:
->+		ctx->max_channels_specified = true;
-> 		if (result.uint_32 < 1 || result.uint_32 > CIFS_MAX_CHANNELS) {
-> 			cifs_errorf(fc, "%s: Invalid max_channels value, needs to be 1-%d\n",
-> 				 __func__, CIFS_MAX_CHANNELS);
-> 			goto cifs_parse_mount_err;
-> 		}
-> 		ctx->max_channels = result.uint_32;
->-		/* If more than one channel requested ... they want multichan */
->-		if (result.uint_32 > 1)
->-			ctx->multichannel = true;
-> 		break;
-> 	case Opt_max_cached_dirs:
-> 		if (result.uint_32 < 1) {
->@@ -1866,13 +1902,6 @@ static int smb3_fs_context_parse_param(struct fs_context *fc,
-> 		goto cifs_parse_mount_err;
-> 	}
->
->-	/*
->-	 * Multichannel is not meaningful if max_channels is 1.
->-	 * Force multichannel to false to ensure consistent configuration.
->-	 */
->-	if (ctx->multichannel && ctx->max_channels == 1)
->-		ctx->multichannel = false;
->-
-> 	return 0;
->
->  cifs_parse_mount_err:
->@@ -1955,6 +1984,8 @@ int smb3_init_fs_context(struct fs_context *fc)
->
-> 	/* default to no multichannel (single server connection) */
-> 	ctx->multichannel = false;
->+	ctx->multichannel_specified = false;
->+	ctx->max_channels_specified = false;
-> 	ctx->max_channels = 1;
->
-> 	ctx->backupuid_specified = false; /* no backup intent for a user */
->diff --git a/fs/smb/client/fs_context.h b/fs/smb/client/fs_context.h
->index b0fec6b9a23b..7af7cbbe4208 100644
->--- a/fs/smb/client/fs_context.h
->+++ b/fs/smb/client/fs_context.h
->@@ -294,6 +294,8 @@ struct smb3_fs_context {
-> 	bool domainauto:1;
-> 	bool rdma:1;
-> 	bool multichannel:1;
->+	bool multichannel_specified:1; /* true if user specified multichannel or nomultichannel */
->+	bool max_channels_specified:1; /* true if user specified max_channels */
-> 	bool use_client_guid:1;
-> 	/* reuse existing guid for multichannel */
-> 	u8 client_guid[SMB2_CLIENT_GUID_SIZE];
->-- 
->2.43.0
-
-Cheers,
-
-Enzo
-
+Steve
