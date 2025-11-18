@@ -2,78 +2,78 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 05F08C6B78B
-	for <lists+samba-technical@lfdr.de>; Tue, 18 Nov 2025 20:41:02 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 89FBBC6B839
+	for <lists+samba-technical@lfdr.de>; Tue, 18 Nov 2025 21:01:22 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=yXHAzdSmOXVhWRC4vIo+f32gZc/kqOvBMxigKYi0DEQ=; b=hEBOO/cH5uO68KmjYiV6t8q9H3
-	TZ4v9hw1jm0JpZ92t089wLeA9GmpqJvT/mCbXo59SqCyfEIVDl+R7WMAfXVqhpnBBTpHcHPo2XkEh
-	7/7g7NqtRnSKtV8ZlN2vMWa03OlKPJqPQaJNh4+cs+N0pGaQ+3ieWFkesLdGnkffuPU309XWLTiN/
-	K05NnSq3boGpcAihAcdHKZPj4Q5zg/4vUCFsfmWMWclR7BXvkIY56d0TKimbCwbSVarz9Z7A8geN/
-	U477J+bnNOelyiW5Zk44GpPGOrzJ6R8VVdRoIhH31xlaVM/n+vY3kyf3RJDeOwPOHK081grCkqkZ+
-	SjyJcrqQ==;
-Received: from ip6-localhost ([::1]:26048 helo=hr1.samba.org) 
+	bh=SB7FwqNIKbZ7R+GS+j9DGZBpb2NO6ssSsIVjR5I+uyA=; b=GEW2qbUvfsaCH+jImGIkkFeAP9
+	IwUcfB9RtyBA7TAXY1v6C74FugPkSFkLv4KTieR9+NXslbZBIwdr7BQ6KLzFE0EUPAXmAFLsFblRv
+	RYh3exe9WRKyISVZa4/a4BwIiwgrZgWQcPFjTiOcWDpUFNmHrYRLd6s9R3q0kZuIjixgsb5jB54rF
+	ooJsilBZQD4e0KGHLwwkEoZrVweLcoRTN8dviRe/IwmgKSve+8Z+Eim0OCU5ksVy0Ac8JPG3G99Om
+	IKtSviQIcBEaeCxDKpqWSt7L8N/OLQNU4O35NdWOCnPNz+riLrmvLNqnBIMii7DZff6E+KzF88Ytt
+	7fqVoNOg==;
+Received: from ip6-localhost ([::1]:54390 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1vLRZ1-00CZjO-5j; Tue, 18 Nov 2025 19:40:31 +0000
-Received: from mail-qt1-x82d.google.com ([2607:f8b0:4864:20::82d]:44461) 
+	id 1vLRsv-00CZqG-Lm; Tue, 18 Nov 2025 20:01:05 +0000
+Received: from mail-qv1-xf2f.google.com ([2607:f8b0:4864:20::f2f]:44487) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vLRYv-00CZjH-5r
- for samba-technical@lists.samba.org; Tue, 18 Nov 2025 19:40:29 +0000
-Received: by mail-qt1-x82d.google.com with SMTP id
- d75a77b69052e-4ed9c19248bso54740681cf.1
- for <samba-technical@lists.samba.org>; Tue, 18 Nov 2025 11:40:24 -0800 (PST)
+ (Exim) id 1vLRsq-00CZq9-Im
+ for samba-technical@lists.samba.org; Tue, 18 Nov 2025 20:01:04 +0000
+Received: by mail-qv1-xf2f.google.com with SMTP id
+ 6a1803df08f44-88242fc32c9so65007216d6.1
+ for <samba-technical@lists.samba.org>; Tue, 18 Nov 2025 12:01:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1763494823; x=1764099623; darn=lists.samba.org;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=uP/MfyD100ahkyh30CXitCbaIs2OTGjmWpxzNyNanb4=;
- b=WdeTvf3ec+dnR5YqsvGqrXsJ5I4yvp3NxARJWew27zbgc+rEkmYsp9Pey3rRUlWNza
- vkzDKN/sBVpVdxpSQ5bRUs+d3j6jqnfAfSREYFUw6MilNzSzi2n3O+u3Lyj9NPQJihys
- f6il84+4GgG9ujFgGeJxsk3IK8poySyYwJrEEi8CD5x6ecKNUZ+qyg8t9xchQBHB8hkQ
- LIF93J3AVX1KWJt66DDMj76Z/yDF/GR4BE23OxXxHOC3lvXzeX17UoweyoWbE1KzchDF
- w1nywZ95Jt11Y+Dy1LyWpCHctfCqkgOjW55XkWSFi179O5sQ1jTwzyU6KHqEMCEBnoU2
- QMBA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763494823; x=1764099623;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1763496059; x=1764100859; darn=lists.samba.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=uP/MfyD100ahkyh30CXitCbaIs2OTGjmWpxzNyNanb4=;
- b=DUN8WMaSyIenWk1CG0CK6RpAa7BLliKAPOwr1UoDmp5ezQlldlCCEDMwBjIDSzqzS3
- eOz+VKVCVDR0bxx6cSMJJYhoT4xOLZq/tG8JJ/HagAxPOakKM5uSnu1WMpD5jfbYF6+P
- t2gh7ukN7N0Hqj70UKGHtO26hzMpudD1Xx7etkA2RW0dQtO2jzdQWVm++vuFG28K4w7X
- GBYcARigoS6c8OtP0ksBT+o/uBV8O3ABIRejDxDMGM1rgMG324jUm9pOA8ZlBzJtxN2e
- 9YM4feM+U/DO+L2C1yriELCBMOGDCbuYreCrT9gaMS0r8Ov7iwd5iVFHedex6Si+GQCT
- 5H0w==
+ bh=SB7FwqNIKbZ7R+GS+j9DGZBpb2NO6ssSsIVjR5I+uyA=;
+ b=EDQxy3I28WDbL/KZOVRMrDZJCjkJnBKOZ1HrmuIWI2jjcvBw9SfH/4KYs0eKQczlPM
+ DGf3sa6xCQelrGeF7Ogn+JWSyWeHhfCaukAwpkKk+LrzJDUSr8xIPwHQTW3BgWx1c2EA
+ pUaql13N0MYMXDhl/2NF3u5FI7FAyJCU0ItgfMO+WeWKOsfSRRCJlIkA3pgkw55TBJ90
+ 2oQI/a+NG6WC12YTHqcic0sA3LjK9DrMJTaedNoncycy27EIDufc5co8/73tSivPJkDW
+ DqcOM9FrUntGpbIXE43vrmWcMNtj2FzG3m5Fd9YlKLKe/uTgWMRPk1Uy31TsBekcBlNE
+ D7YA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1763496059; x=1764100859;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=SB7FwqNIKbZ7R+GS+j9DGZBpb2NO6ssSsIVjR5I+uyA=;
+ b=HSR6KCI1bvkAaAYLklKEbWOBtyRewuKs8CrrGybFg4JLgwgPb5yKIJX7SKVzLIwZ62
+ mYsXsQCNWHdG/qsrizccoEBbQkOGZzVyJL1lhaOBXGAUPpV5aXx0WKVUF/4Q6Y0NPPOU
+ K6ZSk74yl8b+yNndaQ8jBbbI6vK3HueCtDdtmR+chTHUJrSyHaMoje3bET+fgL2KxXVp
+ mdkt1E6w7eFJkWGA9ZSahotoCYjHOhoKJWsm3WZFGMkrVdH2IstMQLKkWsbjePVCK98n
+ O6NcYOTFYQ+juJ4nGvSHVV4axDnQVNM6uIUfYZnNEdEddAVVzKZZbK/oTZEx8HG3jdDT
+ ZPWw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU0KTQa7v+Ca8ugo6HrAKTBl08+RdW2nTLyWcZqR3zzW2HUt8Mt2gKbragRkAAdhHauueFhPgKyB+a168yd9ZU=@lists.samba.org
-X-Gm-Message-State: AOJu0YxHuCxZeAMdPBujSfFeUsXa+3mspOtIj7PUhOMPEbj1mvz7yt7f
- Udfgpheyg89iQeQWYtwTGmqMP594E6pn6JS20/IKFYop9TowmEbqv47V82nb+lF+Wcv//QALKg3
- LjDZq/+6R2nbw4RaWwP+VZj/SWnImi/A=
-X-Gm-Gg: ASbGnctunNVNXyPDFdTcMiNQjxkeAEjYCVJx3XA1xAzBCF1mvjx73R2gzTh+royCa78
- WGwYclHMZGwFjHlPG33vUl09NF2E8t7yCnQItfJTeM592n+XSDQJPi/jECwEsiAaCn2dE4QGa6G
- aX8zK8lR7e+v3SqdQXm/XjkI3hTz7jhYE1G5cgKLXAOujHdwE/ISj60eV5a6YHPJmbhT1DoagI9
- 8aKiUmH2NGS2ujc2vrhZr1Aj3aTk9WsSfIGS9QpYPKjnrQ5B8rg3QciNQ7P6d4jNMNDu54nbKl2
- FEvwX2ljjIi406sLwUdWvhvAEQJYjRHByFKWw5lF+O1TIixhjF4v0EFo59pme42hfMAGxgCvEmZ
- B4I+NScy612P7R3QkzAvR2RYso5kYusAanLgz+/3JAT2XUo8mM+hUeyP7zMLFQKdUJAnqLGNWqI
- NMvS3Mne8c
-X-Google-Smtp-Source: AGHT+IF9Olz+04owc6pA8oO+QE5x1fnGLbX4xa6FSf47x+OoJFeDokGwKKYgz/a+gUZK0PGJkDwK5Dsn008Ktrgw/pA=
-X-Received: by 2002:ac8:5743:0:b0:4ee:24fc:be81 with SMTP id
- d75a77b69052e-4ee24fcc1cfmr90001221cf.36.1763494823106; Tue, 18 Nov 2025
- 11:40:23 -0800 (PST)
+ AJvYcCWaRWyTbl2X7LRvWLHhgZjIRHzZDMRLWDcfdetT00Pnj73PLaIwY8IDmHAv9iFnze5RXiTJOOjCys44C2LrQe8=@lists.samba.org
+X-Gm-Message-State: AOJu0YwJxjt7jH6IMzwwy2eiAun5kWXSVrcqbDmaYh44JSZjU6eM0Qv8
+ 5rRzKt3nDESBBW98/rWhrtJIH1eu4b2azkCjh+lMhZBYPgB1APR0ZsFRvXuPX15mwHmlOAOgBNO
+ Y3HHreNh2xq3y4H90sawDMYIwhGuYrWc=
+X-Gm-Gg: ASbGnctbfvcLmVIRGGmC9UApPzg9qRwWXMoIL6xAH4EOL7HT0OjigHvYskyrL9QcMqo
+ y7wCpIWSJmEj/ojVUa+jmMKpn/Q9vf+XdDdy81zeDjXO/1ZpMX22U1F0pwPL6zPssSs0CAJYvRY
+ nk2iR4bNaD1S168G8oognhDeB+m6CWw4uGyuhHhwBabrtrSDzZEvM3ltC99UPMPN8uFSLzPmnKf
+ QJ0jMFT1XCyRpZn273g3TKppS7yaEYjPaXi4UstbBAlyNlhTbIyeVNCxZhF2jw1VYiWS4PFSske
+ QrF91+PLz/yCST5chX2ZaiGUvO9jjq8AfREImpf2ULeZqJI6Ees0EnBnfCi8NsDa9n6MtWXLyPs
+ DlP/hWfglRFb0COE7c5dODBaRzimIKspBnvlF1eddWWXn1nMITSb9kQzuw++OJIiIYk/OtP6/Kd
+ 9epVrf4CEpxoGIpJgV4Io=
+X-Google-Smtp-Source: AGHT+IHhfzBJAEcCphFwzomj2W7zGvOCPeFDhl/lHKkpj3xi16n9G+ByWNLrLHv/3vIAjtNEDflU7OTWv23wgwwm1Ys=
+X-Received: by 2002:a05:6214:cae:b0:882:4901:e960 with SMTP id
+ 6a1803df08f44-8829262506emr211040446d6.29.1763496058322; Tue, 18 Nov 2025
+ 12:00:58 -0800 (PST)
 MIME-Version: 1.0
 References: <20251118150257.35455-1-ssranevjti@gmail.com>
 In-Reply-To: <20251118150257.35455-1-ssranevjti@gmail.com>
-Date: Tue, 18 Nov 2025 13:40:11 -0600
-X-Gm-Features: AWmQ_bmB0MUuEWhAyOCDZ6bkCOmp1_rKuoSNZ_3xejkxgZLXrAdMbDAoLRFov7s
-Message-ID: <CAH2r5mtBUFXmYtU7itC+NKX5Qu9k=cjiRLfU00RFuy6RKS-yJA@mail.gmail.com>
+Date: Tue, 18 Nov 2025 14:00:46 -0600
+X-Gm-Features: AWmQ_bk518tBwIwq4km9t_okTCnI85hG63NOZgFy5r88Hbvu-haY_fDOfVuyttk
+Message-ID: <CAH2r5mu72dDwVfnK1ffAELCa1iWa5b5XXwTY1+7CTsFvTnN7Bw@mail.gmail.com>
 Subject: Re: [PATCH] cifs: fix memory leak in smb3_fs_context_parse_param
  error path
 To: ssrane_b23@ee.vjti.ac.in
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -101,8 +101,9 @@ Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
 merged into cifs-2.6.git for-next pending additional review
 
-On Tue, Nov 18, 2025 at 9:08=E2=80=AFAM <ssrane_b23@ee.vjti.ac.in> wrote:
 
+On Tue, Nov 18, 2025 at 9:08=E2=80=AFAM <ssrane_b23@ee.vjti.ac.in> wrote:
+>
 > From: Shaurya Rane <ssrane_b23@ee.vjti.ac.in>
 >
 > Add proper cleanup of ctx->source and fc->source to the
@@ -141,8 +142,8 @@ On Tue, Nov 18, 2025 at 9:08=E2=80=AFAM <ssrane_b23@ee.vjti.ac.in> wrote:
 > index 0f894d09157b..975f1fa153fd 100644
 > --- a/fs/smb/client/fs_context.c
 > +++ b/fs/smb/client/fs_context.c
-> @@ -1834,6 +1834,12 @@ static int smb3_fs_context_parse_param(struct
-> fs_context *fc,
+> @@ -1834,6 +1834,12 @@ static int smb3_fs_context_parse_param(struct fs_c=
+ontext *fc,
 >         ctx->password =3D NULL;
 >         kfree_sensitive(ctx->password2);
 >         ctx->password2 =3D NULL;
@@ -159,9 +160,10 @@ On Tue, Nov 18, 2025 at 9:08=E2=80=AFAM <ssrane_b23@ee.vjti.ac.in> wrote:
 > 2.34.1
 >
 >
->
+
 
 --=20
 Thanks,
 
 Steve
+
