@@ -2,56 +2,80 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 61F5DC7366F
-	for <lists+samba-technical@lfdr.de>; Thu, 20 Nov 2025 11:12:43 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 35192C74BC1
+	for <lists+samba-technical@lfdr.de>; Thu, 20 Nov 2025 16:05:35 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=sBIbpy1Fif72LZQwlorDnGPhD1ipsN5eOzIr1zNflKI=; b=EMAAM+CG5gcFcIRa8R9xtKbH/b
-	RUkGbKuuD7JKBHfO13hMSj5XJk3mGqIOAqI05QWtcRCHiinEwZC/e4uD7j6QQnsNFgiWL0f6nGXPA
-	qaxRGaHjUhpOvcFQjBCaAjhj9MLlw5SKnbeCJVmcml5M1LonoEWzHCS/Si+btz/8Mj3rnQtj7j2MH
-	UrdefvZNDx7J3e2kajzjKIl0xNE7HvsKwzXhKjChqWfg4O8yliwGV5xcdoNm/ZhzMt4+9Ttw10cwj
-	mQ4lqalc15ME7zGLXWEhu2ZTV5GLThomQRrjQLJIMklKW75qyq4yz//EU8h7av/dLA/MtmzRCxs/N
-	jJ+hiCzA==;
-Received: from ip6-localhost ([::1]:29494 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=6kRFpPUlL1GMv8pTQgs/uuj/dHi7IU+YUX5w8tOzD2g=; b=tGYvCDChf9kSloYzuERe678fPb
+	HuJD/00/sC5jCLYI1OVL7N8wA4ISMNom8swFssxGzrwWYjJ3kRr5LRfdhdlc7gwpX6gFSlsSye73Z
+	6rr+Ey7Sy8aMseRT2EDKR8uz42GaS+0QoXLMjjCOHnOXrvl+3ueYY8tBxtIyNrMt5A1CBDNHjOoLU
+	a0qu5rDtyf+5iTUwpnz/9d7Fyoj8jdVrDasIvM82qdE7BVT+WpWAw2r85KMXFpPZnY4pEocX9rcIj
+	zWpWWPAQDJUbLXmSyAWrkYkgOf/Qf2Dpqk4pNN3lGQb0Dx/ptU7NoLq69YdmrJ+iUttsN7MzoBAS0
+	OKvcfqww==;
+Received: from ip6-localhost ([::1]:37780 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1vM1e7-00Cj0y-Qm; Thu, 20 Nov 2025 10:12:11 +0000
-Received: from fw2.atmos.eu ([31.41.205.71]:51096) 
+	id 1vM6DQ-00CmAA-NT; Thu, 20 Nov 2025 15:04:56 +0000
+Received: from mail-qv1-xf32.google.com ([2607:f8b0:4864:20::f32]:61761) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vM1e3-00Cj0r-ME
- for samba-technical@lists.samba.org; Thu, 20 Nov 2025 10:12:10 +0000
-Received: from localhost (localhost [127.0.0.1])
- by fw2.atmos.eu (Postfix) with ESMTP id 1BBD1E00EC
- for <samba-technical@lists.samba.org>; Thu, 20 Nov 2025 11:12:05 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=atmos.eu; h=
- organization:content-language:subject:subject:from:from
- :user-agent:mime-version:date:date:message-id:content-type
- :content-type:received:received; s=20180430; t=1763633523; x=
- 1765447924; bh=0kEezyseRrP2oWdXjFZW2zT2ii7E8PGyPlzBZkaqboQ=; b=r
- uF4EoVOvWmAFb9fVtc/8T45NQwvzbDUQnbM3xN0N3TtfmOEBMGk3GmCl/l/e6yPr
- RHpHb5I+YOXEyGe8nWaqDteZTYI5hzTSn6UZazr1wz1KJXpyHnyQfFIZGQcq0Uv8
- GyosgQG39x0XK0PsJH9bpTa3o8LRGcRPLryzbeUi+OS+Ec0tziiD/avA8pOfXML1
- yB6eRtToUPvy+on3MhdXpYoy4j0yZOGMRb8kDhPfYOL5yALwVyyaNJkBPrCucYJP
- 3nCjoOHrNFG3A0B7ijYqbSavho1xyZ85oSnDXREHIMRPs2te/PEN7Slj/Gt6PwSA
- C8wxYnbJc/ntit/Gt2qBg==
-Received: from fw2.atmos.eu ([127.0.0.1])
- by localhost (fw2.atmos.eu [127.0.0.1]) (amavis, port 10023) with LMTP
- id hADGfc1_HdWZ for <samba-technical@lists.samba.org>;
- Thu, 20 Nov 2025 11:12:03 +0100 (CET)
-Received: from [10.50.20.4] (unknown [10.50.20.4])
- by fw2.atmos.eu (Postfix) with ESMTP id 3FE79E047F
- for <samba-technical@lists.samba.org>; Thu, 20 Nov 2025 11:12:03 +0100 (CET)
-Message-ID: <249dd6a5-ca7e-453c-8c62-af1239cc6d08@atmos.eu>
-Date: Thu, 20 Nov 2025 11:12:03 +0100
+ (Exim) id 1vM6DK-00CmA3-CX
+ for samba-technical@lists.samba.org; Thu, 20 Nov 2025 15:04:53 +0000
+Received: by mail-qv1-xf32.google.com with SMTP id
+ 6a1803df08f44-880499b2bc7so8216696d6.3
+ for <samba-technical@lists.samba.org>; Thu, 20 Nov 2025 07:04:49 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1763651088; x=1764255888; darn=lists.samba.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=6kRFpPUlL1GMv8pTQgs/uuj/dHi7IU+YUX5w8tOzD2g=;
+ b=Gnd8U1uH6lTBOeIiPs+LtbNsKBgTwZ+CeWvYIlya+CG8gM/0E/1D4V0ndW/Qp/zDvM
+ UKvCw8cY3No99B2paKl4mDmtMWrh7tc87eZ6oodprP2CUfgeMQXp3cCipmeStoPQLgEA
+ 7BEnEaP8KuNWvZqlFWC0DIHt75jgm3MFN6q+tLUwWNfmndM3LYjhIRKJNzmlunI8+y7Q
+ sD2JWK9ug6E5W8AGX9q/D//krboJv6evUtLAibN1Z4C4qQTe4g19yuWRGU2X98DYBRZ6
+ iEPF6PWUL4W3Qy4CB1MM73BnlK/8ZYPCX0fR0SFFjWEx3yTl1tGEG9jrfExTZE2q3P8A
+ QKQA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1763651088; x=1764255888;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=6kRFpPUlL1GMv8pTQgs/uuj/dHi7IU+YUX5w8tOzD2g=;
+ b=DfLrLBpEdhfhGE0f5i3C1VodZbmmH81Wmydf1txTlPR5Hot4EOcq10aMGJ/VeWCZIc
+ buFUKM+SKckj8CajjekDxKKTotfj74wCTcZleNjcVtg7Us5sWuoqoWBEY1eIClj2Jg2/
+ vh9ejyQbcMrzt+mJqlAnrPg0h7g1l7sN7UCOdLErImlLGa2q5Qn1oK1elMPfTzzwmWim
+ m/MxILEcaWNx4PK5pljkizqtQNk2OKpGqLIkCarXvgeTCsPYZ4CeAWnTgBUo97fvwVmP
+ PY+Xh7YF1SKgOagRlAlTOCIQoWVYaw/gA28GpYQxzaqM8vljP65OvGDRmtChJDEqq6+r
+ y1ug==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUVolh9iRMtwVh6y7GnzvMFjP2Sc2aShJGrJdGMoAXRbmTFo0Ypzint8g/owvzF7D2HULs9rbmPevgFOkor+Pw=@lists.samba.org
+X-Gm-Message-State: AOJu0Yzse2h1j8XwX9402bKk20XQqBjFFoygahFa/qqxuHIHJubhmoo6
+ UN3bAbr8zIqXIvILICKSVQ4+7kyk3ccs4zxWA6cn9DCxGREuiYJd0/wTQTdQJOVoTpSSYU3Btvg
+ FNrQcwkhcU4ZJvGGM5q3PZPxUOgaFpLM=
+X-Gm-Gg: ASbGnctcnu9mCpTNsoyODaFL91cx3YXBVxd+ObeXqjBN0M/ecLXZ6B5GvD+qH6gvGvk
+ rBwLcloOBLYVyrkziK+UuH8msmDnX/UdBWveV3o5st9SBdo7sEdwb+rrZqbk2b/6eq7JZLMf/H1
+ vKFxXPGvIjFnPW5zouj33XPXsHbMwcRei81WdBz2JWU8EZ56t5ldzvhQktHgcsrBTT8nF8PxOEr
+ xdeFCudyJdo45OY1U3YUe2K8ItZFUc5vKxRCN3JHEb8Wo+e4dfVYL3ODdZ/7FRSBj/13BnRtvED
+ CB7S7X6h4zKkDco9yDiJi64j+qM5/r0RIpQaEfJnEOGZe/PZzS4LY1D0XfJwbUk1I0pNKFM31h8
+ 6ppkP7OGPqfSgG4mTzIn2UU/yAq4fiQTUeFK5aB+5sjpHN3MOp4CDlE4/4eKxWU01Kr/I3E6AO8
+ 8K3EYlo86zfA==
+X-Google-Smtp-Source: AGHT+IFsKkXhYMhdtsra+P/p8EP0e3W7i7D0GhBHrYUlEp2ymhejSmkE+PNaMgkvA7xkNx/rrZIboeX4ZOKJeFtVYLU=
+X-Received: by 2002:a05:6214:4903:b0:880:5279:98e9 with SMTP id
+ 6a1803df08f44-8846e131c85mr49130116d6.40.1763651088222; Thu, 20 Nov 2025
+ 07:04:48 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Breaking changes in CIFS kernel module from 6.12 to 6.16
-To: samba-technical@lists.samba.org
-Content-Language: en-US
-Organization: =?UTF-8?Q?Jaroslav_Canka=C5=99_a_syn_ATMOS?=
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
+References: <20251118022655.126994-1-rajasimandalos@gmail.com>
+ <20251118022655.126994-2-rajasimandalos@gmail.com>
+ <7mc3cpg6qojvq7hak6jvkud7xgynmaki554tgn2jic2y52onzm@ugw7wsq43wsp>
+In-Reply-To: <7mc3cpg6qojvq7hak6jvkud7xgynmaki554tgn2jic2y52onzm@ugw7wsq43wsp>
+Date: Thu, 20 Nov 2025 09:04:37 -0600
+X-Gm-Features: AWmQ_blXfBEk2RwNC6znsiMRxvr5QE5e_9rCamPn7heku5OMDZrkh4jsUebDcd4
+Message-ID: <CAH2r5msVd2Ygtfmp_9L-tuPUMT7pcW1aQxobHuOjtgYEWRgZ6A@mail.gmail.com>
+Subject: Re: [PATCH] cifs: client: enforce consistent handling of multichannel
+ and max_channels
+To: Enzo Matsumiya <ematsumiya@suse.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -65,46 +89,71 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Peter Milesson via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Peter Milesson <miles@atmos.eu>
+From: Steve French via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Steve French <smfrench@gmail.com>
+Cc: Rajasi Mandal <rajasimandal@microsoft.com>, linux-cifs@vger.kernel.org,
+ sprasad@microsoft.com, pc@manguebit.org,
+ Rajasi Mandal <rajasimandalos@gmail.com>, samba-technical@lists.samba.org,
+ linux-kernel@vger.kernel.org, sfrench@samba.org, bharathsm@microsoft.com,
+ tom@talpey.com
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi folks,
+On Tue, Nov 18, 2025 at 8:01=E2=80=AFAM Enzo Matsumiya via samba-technical
+<samba-technical@lists.samba.org> wrote:
+>
+> On 11/18, Rajasi Mandal wrote:
+> >From: Rajasi Mandal <rajasimandal@microsoft.com>
+> >
+> >Previously, the behavior of the multichannel and max_channels mount
+> >options was inconsistent and order-dependent. For example, specifying
+> >"multichannel,max_channels=3D1" would result in 2 channels, while
+> >"max_channels=3D1,multichannel" would result in 1 channel. Additionally,
+> >conflicting combinations such as "nomultichannel,max_channels=3D3" or
+> >"multichannel,max_channels=3D1" did not produce errors and could lead to
+> >unexpected channel counts.
+> >
+> >This commit introduces two new fields in smb3_fs_context to explicitly
+> >track whether multichannel and max_channels were specified during
+> >mount. The option parsing and validation logic is updated to ensure:
+> >- The outcome is no longer dependent on the order of options.
+> >- Conflicting combinations (e.g., "nomultichannel,max_channels=3D3" or
+> >  "multichannel,max_channels=3D1") are detected and result in an error.
+> >- The number of channels created is consistent with the specified
+> >  options.
+> >
+> >This improves the reliability and predictability of mount option
+> >handling for SMB3 multichannel support.
+> >
+> >Reviewed-by: Shyam Prasad N <sprasad@microsoft.com>
+> >Signed-off-by: Rajasi Mandal <rajasimandal@microsoft.com>
+>
+> It's conflicting because it's already too complex for something that
+> should've been simple.  This patch introduces a new field + unnecessary
+> logic on top if it all.
+>
+> cf. a PoC patch I sent a while ago, we can (ab)use fsparam with same key
+> name, but different key types, so we could only deal with:
+>
+> 'nomultichannel', 'multichannel=3D{0,1,off,no}' as multichannel disabled
+> 'multichannel' as ctx->max_channels=3D2 (multichannel enabled, obviously)
+> 'multichannel=3DX' as ctx->max_channels=3DX (ditto)
+>
+> Makes 0 sense to have both multichannel and max_channels mount options.
 
-OS: Debian 13
-Kernel: current 6.16.3 from Trixie backports, previous kernel 6.12.48 
-from Trixie security updates
+We can't regress customers who use common mount options without
+warning them for multiple releases that parm is going to be removed.
 
-I got the advice to post my problem here by Rowland Penny from 
-samba-users list.
+I don't object to changing Opt_max_channels parsing so
+ctx->max_channels in fs_context fgoes rom a # to a combination of
+number and something which can be mapped to on/off (for on client
+picks default on the fly while for off sets channels to 1) and
+removing ctx->multichannel - so if you specify "multichannel" it sets
+ctx->max_channels to something like -1  (or whatever max # is) and if
+you set nomultichannel it sets ctx->max_channels to 1
 
-I'm using CIFS to mount user home directories on terminals through 
-pam-mount. After successful authentication with display manager LightDM, 
-the user's home directory is mounted to /home/<user>. The window manager 
-is LXDE, and it's creating sockets under ~/.ssh/agent.
+--=20
+Thanks,
 
-This was working with the previous kernel 6.12.48.
+Steve
 
-After installation of kernel 6.16.3, the window manager terminated 
-unexpectedly, just before displaying the desktop environment. I tracked 
-down the problem, and it seems creating sockets on the mounted share is 
-no longer permitted.
-
-The CIFS mount parameters are:
-
-    dir_mode=0700,nosuid,nodev,sec=krb5i,cruid=%(USERUID),mfsymlinks,nobrl,vers=3.1.1
-
-When I changed the mount parameters to:
-
-    dir_mode=0700,nosuid,nodev,sec=krb5i,cruid=%(USERUID),sfu,nobrl,vers=3.1.1
-
-everything seemed to work as before.
-
-Is the change in behavior of mfsymlinks intentional or is it a bug? If 
-it is intentional, is using the sfu parameter as a replacement a valid 
-alternative?
-
-Best regards,
-
-Peter Milesson
