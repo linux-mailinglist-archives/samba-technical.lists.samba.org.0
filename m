@@ -2,46 +2,52 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4681BC8274D
-	for <lists+samba-technical@lfdr.de>; Mon, 24 Nov 2025 21:56:52 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1997AC827AE
+	for <lists+samba-technical@lfdr.de>; Mon, 24 Nov 2025 22:07:27 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=DzDaUiVAAH5BpoPNE9sTsPVTxgdbZhqrjVpE7NI2Pw4=; b=S2KX6Kh8hNfPs+Sr/yXVqM7MaY
-	iNkCPCD1jJbeFdANLTjNj32CU9nMblXhJNCbV20jYP4zpmeKy063QuvTIjkaITfokvqxXCVDXuplS
-	supIL+HiWRl26huSOtpfG/PWmRkzUZgNQu5+QZgp5FwLw0ES8TUC0FIzuaVfZWl0rw6uV3q931fIB
-	xAGHVTulazmKBv4mBoChYClSGvCy+qR4uAXQwGfLWKXwK62215jf7sBqWpzAP7fjmByRExOgUT+um
-	Txp1eazmUsPrJ5Vf/zVKk2LfVQ05B5D3d+KMV0boWp5bA2FpdifFpP8g0pfH8PChzZ/S7Co/M0cGD
-	lA6NPk+w==;
-Received: from ip6-localhost ([::1]:32118 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=p4Uhj2hqlAoIG3tYbLXlsV42mkOA4ZEbg7RqaiqbhJU=; b=XWmL6PVOr8xC3JjhrqJZ14BJV8
+	aOlrJzB5Krmd8TlY5fsRoVmKfrBqelsAhhHcPc0l6xXXJHHFil9EwQ0rev0QuZ1u61oZAiYJGYWbf
+	AMyxNnxANBCdXjVYpob3wHZAjaWw6QoIBiJWIgdYS311VRkQm1TYXN5VUk+V0r7KFghUWiFtrVu+r
+	8MTZ+zX1BPGUjPGNNtSGDUcYujbXWPLnSa+7GvcwIGyqWCdUUu94UZMWlFhllXAtd+PWQ9Af0SXBz
+	R2C4xK/txVJ6SoCwjxA4BxUEvEyM8dvimZqySu5xMgKacTmc3tgKmPqLWLcU/FmKp8yb2fZb5o0fN
+	9bMi/4cQ==;
+Received: from ip6-localhost ([::1]:22580 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1vNdc2-00D2Ch-6C; Mon, 24 Nov 2025 20:56:42 +0000
-Received: from mx1.manguebit.org ([143.255.12.172]:58462) 
+	id 1vNdmC-00D2I0-SH; Mon, 24 Nov 2025 21:07:12 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:62982) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vNdbw-00D2Ca-90
- for samba-technical@lists.samba.org; Mon, 24 Nov 2025 20:56:38 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=manguebit.org; s=dkim; h=Content-Type:MIME-Version:Date:References:
- In-Reply-To:Subject:Cc:To:From:Message-ID:Sender:Reply-To:
- Content-Transfer-Encoding:Content-ID:Content-Description;
- bh=DzDaUiVAAH5BpoPNE9sTsPVTxgdbZhqrjVpE7NI2Pw4=; b=zRf00BbS0KJnh0SpRYhNJ3LLrV
- l3CoUu9jGvxNl5bUm5skRBhks/F1W4eEv4MYK7A+uFMGk0JIxUeQ7nV4HKij/naL2jXHfqhoUTn1l
- /1sJ98tCNPStU/GmiRhfh2+iQXPxL+pRMDdp0BCi9hmmq+aU+sxkk/u0FIcRB2qvAHc8mSyzddqCu
- ah61Wn5HPwn+8oRf3nYOkUApIA4vCMJuqxSD2raNgex7ee10uSPvmnR6uUHyo4C9fErXJGrtfY2nf
- o33BdbkuzbzqoBX4uJStaUaulJl9NBE6PBAitdpNcp2v0FgELI5xQ2J8I9XikVTfJ0IhNip5a1Jty
- Cn+Fvz6g==;
-Received: from pc by mx1.manguebit.org with local (Exim 4.98.2)
- id 1vNdbm-00000000R50-06ZM; Mon, 24 Nov 2025 17:56:27 -0300
-Message-ID: <a5d65f2d2e7cb45bd47317b726f86568@manguebit.org>
-To: Stefan Metzmacher <metze@samba.org>, linux-cifs@vger.kernel.org,
- samba-technical@lists.samba.org
+ (Exim) id 1vNdm8-00D2Ht-Bk
+ for samba-technical@lists.samba.org; Mon, 24 Nov 2025 21:07:10 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=From:Cc:To:Date:Message-ID;
+ bh=p4Uhj2hqlAoIG3tYbLXlsV42mkOA4ZEbg7RqaiqbhJU=; b=cg318w7C3Ts8Jmmi6y+2AkCHpJ
+ R6JxWsNAuXEckDJ2ltHVyYCyu59YdawOJCAfhJ5YbfumbbCU4xFQ6ByjTmCjPUAt3Aabvz1h37ARX
+ goYmNoKRodY8bw4hUNmrJFcU7LSa9z0D6grfkO58fBp9UElRBgfu31NIfMHMAPevsoJk68gN3FLEB
+ zRtKySKoq7Jno87VcQhOzuM2F7Cr0x4lMkx489XRdORnmMQUFTdMushRLs7SUD596oMZ4lFpUQJTY
+ HnY+3bVht8ZA9JfUdt6jeBQH0qzKRNwbwObLljVtOQJ33+Id9q0NuJ8HMdpzalaratLK6eJlFFDzn
+ NbvITx9ytfdW2o617FjG88d/0yWnlQf+YfRrmoL5KcHjQWjIq/xtLtYipd8wqxadb7r/VoKj61gjs
+ pWcVV/sCvuftEMnuIn1PcZmO9Za2FfMLH+eFl9GCYdatDMuxEu8RxmFocrfgYZRu2cAdhMW+yKroS
+ cc1RczhrNys2tUM72VJq2dfr;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1vNdm7-00FSzE-1p; Mon, 24 Nov 2025 21:07:07 +0000
+Message-ID: <63d42fdd-d3d0-4d4e-98a9-bf1926cbd9d0@samba.org>
+Date: Mon, 24 Nov 2025 22:07:07 +0100
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH 0/4] smb: smbdirect/client/server: relax
  WARN_ON_ONCE(SMBDIRECT_SOCKET_*) checks
-In-Reply-To: <cover.1764016346.git.metze@samba.org>
+To: Paulo Alcantara <pc@manguebit.org>, linux-cifs@vger.kernel.org,
+ samba-technical@lists.samba.org
 References: <cover.1764016346.git.metze@samba.org>
-Date: Mon, 24 Nov 2025 17:56:26 -0300
-MIME-Version: 1.0
-Content-Type: text/plain
+ <a5d65f2d2e7cb45bd47317b726f86568@manguebit.org>
+Content-Language: en-US
+In-Reply-To: <a5d65f2d2e7cb45bd47317b726f86568@manguebit.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -55,21 +61,30 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Paulo Alcantara via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Paulo Alcantara <pc@manguebit.org>
-Cc: metze@samba.org, Steve French <smfrench@gmail.com>,
- Tom Talpey <tom@talpey.com>, Namjae Jeon <linkinjeon@kernel.org>
+From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Stefan Metzmacher <metze@samba.org>
+Cc: Tom Talpey <tom@talpey.com>, Steve French <smfrench@gmail.com>,
+ Namjae Jeon <linkinjeon@kernel.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Stefan Metzmacher <metze@samba.org> writes:
+Am 24.11.25 um 21:56 schrieb Paulo Alcantara:
+> Stefan Metzmacher <metze@samba.org> writes:
+> 
+>> The patches should relax the checks if an error happened before,
+>> they are intended for 6.18 final, as far as I can see the
+>> problem was introduced during the 6.18 cycle only.
+> 
+> Since we're late in the v6.18 cycle, I would suggest leave all this
+> churn (e.g. adding new helpers) for v6.19 and then provide a simple fix
+> for the problem instead.  This way it will get a higher chance to be
+> merged in next -rc.
 
-> The patches should relax the checks if an error happened before,
-> they are intended for 6.18 final, as far as I can see the
-> problem was introduced during the 6.18 cycle only.
+I'd actually like to leave it as I posted, if that's
+really too complex, I'd leave it alone and let 6.18.1
+pick it up via the Fixes tags. If someone else likes
+to propose and test a different patchset for 6.18 that's
+also fine for me.
 
-Since we're late in the v6.18 cycle, I would suggest leave all this
-churn (e.g. adding new helpers) for v6.19 and then provide a simple fix
-for the problem instead.  This way it will get a higher chance to be
-merged in next -rc.
+metze
 
