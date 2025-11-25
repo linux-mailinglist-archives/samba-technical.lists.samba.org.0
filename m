@@ -2,44 +2,44 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id C6B8BC8665A
-	for <lists+samba-technical@lfdr.de>; Tue, 25 Nov 2025 19:01:21 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 21B46C8667B
+	for <lists+samba-technical@lfdr.de>; Tue, 25 Nov 2025 19:01:58 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=q8WoHaLN4EH2gjfj87NxF4/nUgHoRACqI6jB3cgK+9Y=; b=slBjTSF4kUbFaMgW6L2UjFoEh7
-	ODfISjF404N+3/R0MKmFN72W8hvkJw8yopH6jkJQ5NK5HINbeEnxonRSESgSaaPUwizawC71xB+Pk
-	Cy8fiX4RReaTLP2SiZUx3r37dE92v/JF2Iefeky/Rwcn+0iOqTD/5Lx8DU82ZY9X1OZI2g4BQkuPs
-	eJTSIYAE7R7BDX1/clQc1Hy5TKzedtWwiDeA84yU2bxAeDnwZ4Ov/7vGTmK9/y0939cCda43i9Lur
-	SaC2wMg8xuSbXdPwT6ENObUcsc0CSfd0uCZyax6xoPOWqWZf9//s8S3oZky/1PVII2HnmV712X1M1
-	ChuDCWhQ==;
-Received: from ip6-localhost ([::1]:31452 helo=hr1.samba.org) 
+	bh=9HP11oIEtYNGTRt2RrGuDZbXywFyoQoFDw9ZZl7qqJQ=; b=EbSp/CAkQTorFPV3SvGb1uRgrq
+	EkSc7Tcm3yHM6q2oSI1K51sR7QjZH44KKhxD3KHML7NUg+bTHiyWoshKJroVxNKgek42Kb7YpXDDV
+	5aDWaIpfdNCy8RpRKakEH8r1ZCAPU2dTBN4dEEmHZyj5hZ8dz21A1cmGPGL2Co1PA29rdyEsY8n3u
+	NmesGJO8cJ0pOjd3Oc0VBH3UTzN5N/HZ1YsY8fGiHkzSOe4YLQWSiqR7shRL9IBnuqat9EOPofKt7
+	6qeNZghHKuopJk24p5Hd5vE7gxeKIUiuSES5bjjo/WF/LwuD+WShh2D5WtZ2KXraZZvQOBqzmqpwp
+	nX/Z/qcA==;
+Received: from ip6-localhost ([::1]:53584 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1vNxLj-00D7on-72; Tue, 25 Nov 2025 18:01:12 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:11912) 
+	id 1vNxMK-00D7zS-Df; Tue, 25 Nov 2025 18:01:48 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:11918) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vNxJ2-00D70X-Hk
- for samba-technical@lists.samba.org; Tue, 25 Nov 2025 17:58:34 +0000
+ (Exim) id 1vNxJC-00D73k-9N
+ for samba-technical@lists.samba.org; Tue, 25 Nov 2025 17:58:52 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Message-ID:Date:Cc:To:From;
- bh=q8WoHaLN4EH2gjfj87NxF4/nUgHoRACqI6jB3cgK+9Y=; b=DDkhHIGx2um3/n55o/AZ2e9xBy
- otALGoAhE050cb/rIVz1uiADfIWzyhzpVQh9kCYBIrYmLxM/X7UbT/0UgK20gcXGPaWr5UT8Nz8/7
- t7TpL0b5fpuJFT+nPdAW/lg4bi8BEZwRNMf148I1MRh1QsSascHqWFiHfAyajLcmULIt8CyhhPWa+
- TtHOcfJ35kYMnU0vXjNCCwAWlsGAJyX/CT2cxjbINToiTEw84dNJ5WqgnskmNV7/o8J6SyebPGVIJ
- ddtWRPPs/hmtIPuW1c7MmKUb9t7ysUBrMcY2lhoTuREBr3KMnFUcALLIxh+qCynkmzNlkgjSUvd6c
- Lm/mlQYJXxdMzbkz6OrgO0Xdaph10II1etENSKYM6xJc1XmHFGdDq9LNfhX+3STMArPKJSxuG2h59
- A0s1JuyVMaPiqprOywLGeaGqM0D2qXM+FgfmtFSaO/WwxTPaJOfmu9O5akYGwA4C7arEiRmq1MLr1
- OBIikNRiRdJsVyP4lRv2oeg3;
+ bh=9HP11oIEtYNGTRt2RrGuDZbXywFyoQoFDw9ZZl7qqJQ=; b=Dt0Cn38T3u5IaE5ktSMN7r6LIT
+ iRsR8P6YvqL8AQvEOtYgs4oprzocl3OFWb0G0zQd+7hDK13F0errJYBRhZw4nJZnJdJHG3udnOa2W
+ VrEtTkboXtMGRx/R7y2wbhMaUG530xB/h0bqnQ80XshFfg3rW22EZOVyXii3dOZvha4Gb9pPCUcr4
+ bALS2TDGnLdvN1pIK78wOLdtoJWvzBPJ+XjLn+sYPUK9+Auz8RNTEbEqrWKkwyycU3VRESFsBDbQm
+ pqu9iqi6kvWuYnUzNSMywkRU+C3i0fkPd93WlsCL8YZgErWgclnhyG3an4F2r76QRHdBdAYl2KxkZ
+ R5IKJj3c1dC3SucX8lkRAz6OYQjcnxYbOcpY4xFtGBpus9hKyTXqDxBG7XX4BJrJMcc1sqIeqacGo
+ JvEl7P+tix3+XFePer5knlvla8W07pny7p9ojsXj0/NATuN+WjHS3+kuTU3Z5qJOQsytpDyFjriMq
+ F/NCcDbJbJ1fjXX88cp00lfk;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vNxJ0-00Fckb-17; Tue, 25 Nov 2025 17:58:22 +0000
+ (Exim) id 1vNxJ6-00Fclf-08; Tue, 25 Nov 2025 17:58:28 +0000
 To: linux-cifs@vger.kernel.org,
 	samba-technical@lists.samba.org
-Subject: [PATCH v4 017/145] smb: smbdirect: introduce
- smbdirect_connection_reassembly_{append, first}_recv_io()
-Date: Tue, 25 Nov 2025 18:54:23 +0100
-Message-ID: <4aaf7160bc5d97d6dce6e62b8a5a5e50a4bce65b.1764091285.git.metze@samba.org>
+Subject: [PATCH v4 018/145] smb: smbdirect: introduce
+ smbdirect_connection_idle_timer_work()
+Date: Tue, 25 Nov 2025 18:54:24 +0100
+Message-ID: <218c4d55d54305c610732df83188609d09d3389d.1764091285.git.metze@samba.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1764091285.git.metze@samba.org>
 References: <cover.1764091285.git.metze@samba.org>
@@ -66,15 +66,13 @@ Cc: Tom Talpey <tom@talpey.com>, metze@samba.org,
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-These are basically copies of enqueue_reassembly() and
-[_]get_first_reassembly() of both client and server. The only difference
-is that enqueue_reassembly() of the server does not have:
-sc->statistics.enqueue_reassembly_queue++
+This is basically a copy of idle_connection_timer() in the client
+and smb_direct_idle_connection_timer() in the server.
+The only difference is that the server does not have logging.
 
-Also smbdirect_connection_reassembly_first_recv_io() makes use of
-list_first_entry_or_null() in order to simplify the code.
-
-In the next commits they will replace the existing functions.
+Currently the callers set their own timer function after
+smbdirect_socket_prepare_create(), but that will change
+in the next steps...
 
 Cc: Steve French <smfrench@gmail.com>
 Cc: Tom Talpey <tom@talpey.com>
@@ -85,57 +83,82 @@ Cc: samba-technical@lists.samba.org
 Signed-off-by: Stefan Metzmacher <metze@samba.org>
 Signed-off-by: Steve French <stfrench@microsoft.com>
 ---
- .../common/smbdirect/smbdirect_connection.c   | 40 +++++++++++++++++++
- 1 file changed, 40 insertions(+)
+ .../common/smbdirect/smbdirect_connection.c   | 31 +++++++++++++++++++
+ fs/smb/common/smbdirect/smbdirect_internal.h  |  2 ++
+ fs/smb/common/smbdirect/smbdirect_socket.c    |  3 +-
+ 3 files changed, 35 insertions(+), 1 deletion(-)
 
 diff --git a/fs/smb/common/smbdirect/smbdirect_connection.c b/fs/smb/common/smbdirect/smbdirect_connection.c
-index db807fb9e3db..aa554527f993 100644
+index aa554527f993..f3176bb35977 100644
 --- a/fs/smb/common/smbdirect/smbdirect_connection.c
 +++ b/fs/smb/common/smbdirect/smbdirect_connection.c
-@@ -52,3 +52,43 @@ static void smbdirect_connection_put_recv_io(struct smbdirect_recv_io *msg)
+@@ -92,3 +92,34 @@ smbdirect_connection_reassembly_first_recv_io(struct smbdirect_socket *sc)
  
- 	queue_work(sc->workqueue, &sc->recv_io.posted.refill_work);
+ 	return msg;
  }
 +
-+__maybe_unused /* this is temporary while this file is included in others */
-+static void smbdirect_connection_reassembly_append_recv_io(struct smbdirect_socket *sc,
-+							   struct smbdirect_recv_io *msg,
-+							   u32 data_length)
++static void smbdirect_connection_idle_timer_work(struct work_struct *work)
 +{
-+	unsigned long flags;
++	struct smbdirect_socket *sc =
++		container_of(work, struct smbdirect_socket, idle.timer_work.work);
++	const struct smbdirect_socket_parameters *sp = &sc->parameters;
++
++	if (sc->idle.keepalive != SMBDIRECT_KEEPALIVE_NONE) {
++		smbdirect_log_keep_alive(sc, SMBDIRECT_LOG_ERR,
++			"%s => timeout sc->idle.keepalive=%s\n",
++			smbdirect_socket_status_string(sc->status),
++			sc->idle.keepalive == SMBDIRECT_KEEPALIVE_SENT ?
++			"SENT" : "PENDING");
++		smbdirect_socket_schedule_cleanup(sc, -ETIMEDOUT);
++		return;
++	}
++
++	if (sc->status != SMBDIRECT_SOCKET_CONNECTED)
++		return;
 +
 +	/*
-+	 * The work should already/still be disabled
++	 * Now use the keepalive timeout (instead of keepalive interval)
++	 * in order to wait for a response
 +	 */
-+	disable_work(&msg->complex_work);
-+
-+	spin_lock_irqsave(&sc->recv_io.reassembly.lock, flags);
-+	list_add_tail(&msg->list, &sc->recv_io.reassembly.list);
-+	sc->recv_io.reassembly.queue_length++;
-+	/*
-+	 * Make sure reassembly_data_length is updated after list and
-+	 * reassembly_queue_length are updated. On the dequeue side
-+	 * reassembly_data_length is checked without a lock to determine
-+	 * if reassembly_queue_length and list is up to date
-+	 */
-+	virt_wmb();
-+	sc->recv_io.reassembly.data_length += data_length;
-+	spin_unlock_irqrestore(&sc->recv_io.reassembly.lock, flags);
-+	sc->statistics.enqueue_reassembly_queue++;
++	sc->idle.keepalive = SMBDIRECT_KEEPALIVE_PENDING;
++	mod_delayed_work(sc->workqueue, &sc->idle.timer_work,
++			 msecs_to_jiffies(sp->keepalive_timeout_msec));
++	smbdirect_log_keep_alive(sc, SMBDIRECT_LOG_INFO,
++		"schedule send of empty idle message\n");
++	queue_work(sc->workqueue, &sc->idle.immediate_work);
 +}
+diff --git a/fs/smb/common/smbdirect/smbdirect_internal.h b/fs/smb/common/smbdirect/smbdirect_internal.h
+index 93c10b4f1ed5..7465a63118bd 100644
+--- a/fs/smb/common/smbdirect/smbdirect_internal.h
++++ b/fs/smb/common/smbdirect/smbdirect_internal.h
+@@ -33,4 +33,6 @@ static void __smbdirect_socket_schedule_cleanup(struct smbdirect_socket *sc,
+ 		__func__, __LINE__, __error, &__force_status); \
+ } while (0)
+ 
++static void smbdirect_connection_idle_timer_work(struct work_struct *work);
 +
-+__maybe_unused /* this is temporary while this file is included in others */
-+static struct smbdirect_recv_io *
-+smbdirect_connection_reassembly_first_recv_io(struct smbdirect_socket *sc)
-+{
-+	struct smbdirect_recv_io *msg;
+ #endif /* __FS_SMB_COMMON_SMBDIRECT_INTERNAL_H__ */
+diff --git a/fs/smb/common/smbdirect/smbdirect_socket.c b/fs/smb/common/smbdirect/smbdirect_socket.c
+index a73162717ffe..37b483d8203b 100644
+--- a/fs/smb/common/smbdirect/smbdirect_socket.c
++++ b/fs/smb/common/smbdirect/smbdirect_socket.c
+@@ -27,6 +27,8 @@ static void smbdirect_socket_prepare_create(struct smbdirect_socket *sc,
+ 	sc->workqueue = workqueue;
+ 
+ 	INIT_WORK(&sc->disconnect_work, smbdirect_socket_cleanup_work);
 +
-+	msg = list_first_entry_or_null(&sc->recv_io.reassembly.list,
-+				       struct smbdirect_recv_io,
-+				       list);
-+
-+	return msg;
-+}
++	INIT_DELAYED_WORK(&sc->idle.timer_work, smbdirect_connection_idle_timer_work);
+ }
+ 
+ __maybe_unused /* this is temporary while this file is included in others */
+@@ -66,7 +68,6 @@ static void smbdirect_socket_wake_up_all(struct smbdirect_socket *sc)
+ 	wake_up_all(&sc->mr_io.cleanup.wait_queue);
+ }
+ 
+-__maybe_unused /* this is temporary while this file is included in others */
+ static void __smbdirect_socket_schedule_cleanup(struct smbdirect_socket *sc,
+ 						const char *macro_name,
+ 						unsigned int lvl,
 -- 
 2.43.0
 
