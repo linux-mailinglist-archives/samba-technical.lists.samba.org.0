@@ -2,44 +2,44 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 22CAEC865FA
-	for <lists+samba-technical@lfdr.de>; Tue, 25 Nov 2025 18:59:34 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 475D0C86612
+	for <lists+samba-technical@lfdr.de>; Tue, 25 Nov 2025 19:00:03 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=njbxxn/KwvlJ3DBgxw474uzlc7FEesNvYsndVO1Y2RQ=; b=tdZfEl+grFOplZN9/+OMgevs8D
-	Boy8mhVzpKEQQpMWV179B6LZGMaI2g/w/SQBKHnht2vF4oSV1py5l4TVTiP21iGctVIzMH/d1cQ7c
-	78iAYr1iioWAzuYauoQvNE9dUg3jgxFN/tNkD9KxbXROxpX1rOe0ZiEdiolQGXwLIThDJqkmIrvM9
-	SOWottc3G4ZXd1UKO614gzCgaQ38vv23cj4n6PpjcccyWFDGm6X4xMP1Zm2Sbhp3NxZ95qZMpHPV6
-	g7aw9crcH+2pR4jzeVIpSaTK3Z6s3ZGHBFALUcvvQSGWb7zkHRIjjDIWGOjK9q6Tw16qno09TkGbF
-	61SaSvCA==;
-Received: from ip6-localhost ([::1]:44758 helo=hr1.samba.org) 
+	bh=xXg/ga7QYryW4xZy2aHLO3396tv7jshh5KqEsbMMpPg=; b=GSHvTZ57DNJv8NSZ83Y/FeIhKx
+	VZu9y8rClhSt8/LySC+8dvKwL5EO5DXobRezZJEPu8juE2NKFU0LvL+8IRDdC/dVhU2/dI73bUXnR
+	sj5cwaFMPJE7Zj24/ZZ1ZcSAMyXXmNya/1t6YE15dOOCULaccTjg42j0vrhFDr3SaPgl3/hO/6teJ
+	Elj7mkfCvdiWVYjOY4QvZr2jPMVCktNKkXNRqWDk+YkQrvzQIUPx8IzV7xO2OnQNpXFrR3+lJa9mh
+	9JoSjuhLTESowlgBn/s3B5BPc0egLS5UpWtnsOYVzri6BRXqMdYgJqlGroIerWJUuHHlCgpsupnyB
+	B+6/t2jQ==;
+Received: from ip6-localhost ([::1]:37506 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1vNxK0-00D7Fu-0n; Tue, 25 Nov 2025 17:59:24 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:53318) 
+	id 1vNxKT-00D7PE-UD; Tue, 25 Nov 2025 17:59:54 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:23440) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vNxIT-00D6ph-NA
- for samba-technical@lists.samba.org; Tue, 25 Nov 2025 17:58:06 +0000
+ (Exim) id 1vNxIa-00D6ro-Gs
+ for samba-technical@lists.samba.org; Tue, 25 Nov 2025 17:58:09 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Message-ID:Date:Cc:To:From;
- bh=njbxxn/KwvlJ3DBgxw474uzlc7FEesNvYsndVO1Y2RQ=; b=YsBhvy0Xx3XZvBNo9nEwsdlTV7
- 26I0Eng2nrPeRboZYFjeqG1P4MokRYjirJUbi+sQTrlb1VQZh+qk7jEgs4KKegep7R/tp5/00Ql+L
- hYZYorXn+MeGJw/3eElHFWuGkJ2/j6lCof7msBRxsADniN6vfNG/V6kaWZKW13YOm68yRXB5RahcL
- Cm4aINJOz+JKSfXVz5tIK8fC3IrBpjnlS5SzlAoO8m0B2y6D4xTkhWmYvdGtEMSpzk6kytcxUE0+E
- izG9grjWWd7SpNgR2CiWWweqGFDcGPY7aluadwJdrgoFRwrIYvl7kZRV0Q/86eMnPjVpGOLZ6cozA
- URQ65QB9YfaBErSDyds1f6FUSacutabNj+qzzizzW5Bf1eJlFytS9r05VJjA4y/1akZA8Dp/D/2oo
- 1Aw/uytCi5HXu70nWEJvKhpIjHXNaUbnKTTzU8ZyDJxN8Xh+Zu4iTurTY8I+lh2meCZOpJq5sD/Gx
- N+v0sNPGFafOASJP8tsX43uJ;
+ bh=xXg/ga7QYryW4xZy2aHLO3396tv7jshh5KqEsbMMpPg=; b=1Bpes26wCEqIF+JALfMFx8dH3v
+ d39/BoHEAfxu4E7o+kbc8N2nZEAtv6OTiPWbDdBYh6e4FFgh98NHVqYK/Fs4U2ep0v9vT3y0lNp1U
+ Xcs7mZswylX1RIw00TeNx3Hok837d+JNFJpYGuQTcbV3d8KaxDDzqU9SHZecYw1Bf5hFAnHdyglN+
+ dl7l9tD25S0sZgqhBGLETh1Yesv8XO0jEaWfNoSj/5g3ccwQG3TYwZ9bZUFIzPja9Ztpo3Py6vI+g
+ Ygbvy9P1i/VfYShlNiY8TwyTx+nmexH3tU+JJqCiZvCxQ+sCBKidhAeeX3emXKiJwaJlJkggL65+1
+ gekmbjCIq4EE3SnswiVvhcS0xnKZeh6JWUsvvMWRccRgrbCxfOkxwUuPVJoOHtoDtc2Dtn7UeLOmW
+ jKJ1WQN4N6sVMG9PWJCCSdUqKukdzXDp0qiRoKDtc/PWfgO8E08ZfdmSw8IOkC0NVMDMjhY293Lk6
+ mO+udyWmDYLUzKrunBEPJ5Ha;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vNxIO-00Fcev-22; Tue, 25 Nov 2025 17:57:45 +0000
+ (Exim) id 1vNxIV-00FcgP-2D; Tue, 25 Nov 2025 17:57:51 +0000
 To: linux-cifs@vger.kernel.org,
 	samba-technical@lists.samba.org
-Subject: [PATCH v4 011/145] smb: smbdirect: introduce
- smbdirect_socket_set_logging()
-Date: Tue, 25 Nov 2025 18:54:17 +0100
-Message-ID: <576d7313b59f5e25455e193d78037e42d10a5191.1764091285.git.metze@samba.org>
+Subject: [PATCH v4 012/145] smb: smbdirect: introduce
+ smbdirect_socket_wake_up_all()
+Date: Tue, 25 Nov 2025 18:54:18 +0100
+Message-ID: <d570a3917fe080a7172f37646cc1015d77cc48e0.1764091285.git.metze@samba.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1764091285.git.metze@samba.org>
 References: <cover.1764091285.git.metze@samba.org>
@@ -66,8 +66,9 @@ Cc: Tom Talpey <tom@talpey.com>, metze@samba.org,
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This will be used by client and server in order to setup
-their own logging functions.
+This is a superset of smbd_disconnect_wake_up_all() in the client
+and smb_direct_disconnect_wake_up_all() in the server and will
+replace them.
 
 Cc: Steve French <smfrench@gmail.com>
 Cc: Tom Talpey <tom@talpey.com>
@@ -78,36 +79,34 @@ Cc: samba-technical@lists.samba.org
 Signed-off-by: Stefan Metzmacher <metze@samba.org>
 Signed-off-by: Steve French <stfrench@microsoft.com>
 ---
- fs/smb/common/smbdirect/smbdirect_socket.c | 20 ++++++++++++++++++++
- 1 file changed, 20 insertions(+)
+ fs/smb/common/smbdirect/smbdirect_socket.c | 18 ++++++++++++++++++
+ 1 file changed, 18 insertions(+)
 
 diff --git a/fs/smb/common/smbdirect/smbdirect_socket.c b/fs/smb/common/smbdirect/smbdirect_socket.c
-index 421a5c2c705e..6c2732496cf7 100644
+index 6c2732496cf7..a249e758379f 100644
 --- a/fs/smb/common/smbdirect/smbdirect_socket.c
 +++ b/fs/smb/common/smbdirect/smbdirect_socket.c
-@@ -24,3 +24,23 @@ static void smbdirect_socket_prepare_create(struct smbdirect_socket *sc,
- 	 */
- 	sc->workqueue = workqueue;
+@@ -44,3 +44,21 @@ static void smbdirect_socket_set_logging(struct smbdirect_socket *sc,
+ 	sc->logging.needed = needed;
+ 	sc->logging.vaprintf = vaprintf;
  }
 +
 +__maybe_unused /* this is temporary while this file is included in others */
-+static void smbdirect_socket_set_logging(struct smbdirect_socket *sc,
-+					 void *private_ptr,
-+					 bool (*needed)(struct smbdirect_socket *sc,
-+							void *private_ptr,
-+							unsigned int lvl,
-+							unsigned int cls),
-+					 void (*vaprintf)(struct smbdirect_socket *sc,
-+							  const char *func,
-+							  unsigned int line,
-+							  void *private_ptr,
-+							  unsigned int lvl,
-+							  unsigned int cls,
-+							  struct va_format *vaf))
++static void smbdirect_socket_wake_up_all(struct smbdirect_socket *sc)
 +{
-+	sc->logging.private_ptr = private_ptr;
-+	sc->logging.needed = needed;
-+	sc->logging.vaprintf = vaprintf;
++	/*
++	 * Wake up all waiters in all wait queues
++	 * in order to notice the broken connection.
++	 */
++	wake_up_all(&sc->status_wait);
++	wake_up_all(&sc->send_io.lcredits.wait_queue);
++	wake_up_all(&sc->send_io.credits.wait_queue);
++	wake_up_all(&sc->send_io.pending.dec_wait_queue);
++	wake_up_all(&sc->send_io.pending.zero_wait_queue);
++	wake_up_all(&sc->recv_io.reassembly.wait_queue);
++	wake_up_all(&sc->rw_io.credits.wait_queue);
++	wake_up_all(&sc->mr_io.ready.wait_queue);
++	wake_up_all(&sc->mr_io.cleanup.wait_queue);
 +}
 -- 
 2.43.0
