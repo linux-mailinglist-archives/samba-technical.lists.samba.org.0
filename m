@@ -2,44 +2,44 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 60B73C86B1D
-	for <lists+samba-technical@lfdr.de>; Tue, 25 Nov 2025 19:45:22 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 81F17C86949
+	for <lists+samba-technical@lfdr.de>; Tue, 25 Nov 2025 19:23:03 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=zoH+4XP8FyGpKdv2ioBMYnBqRm0WPYwl16h+r30AreI=; b=P9OBVggm8/m0xCQ20T/O04AQjd
-	sTUuocsKja4MYMOJwsKe54KtOhBO3UvcRAqvZ3ukOdtlhYshY62lmX6HAOiHKMUuESmAHwVDmJyZd
-	3PRrVzMEaMOcNLBkJIMMfMYzJH3GJz3kM2L9ex+O6Xfmde0AS94iVtrbj56EpVdHuPeojP1gTI0h0
-	EVATFFLVKHlU5N12LoxiF/U10Lj9xKDzZjEhttNAhIWAs8WqvCTKF6bXVT3j2lgtkr6AqzsNOYOXC
-	FjwCfnvvuvaPGiwqO6mqV4bUhWBvNWcBZgDAYp8TywzxFOtsEo7l8oRq2Z9+/7M0MzltJFbdJrfgs
-	VlJGy4TQ==;
-Received: from ip6-localhost ([::1]:52662 helo=hr1.samba.org) 
+	bh=sT31C4tAeKhL06V6v2TfzRVrbNatNC0ToY8SoAngLck=; b=ZAVJuhR9KpTiF32gY87e399jvK
+	dvNcJdfjMh7vxN2C77YnoIBbSpLaRdvWvP1C5tKmUuLVFUOpBZ9rVvcoPQaK6iBcQpjVp88UkkBtc
+	8To46ANnfgvtbGsm5AJ4EhKThGbmmZjO6XImmCz48fvt8bHtPjXq6WCZkBB6DBP/9peKUD3hex0Rb
+	XgvfR6KSxr0R7vOrKuPJF9bEAGmckUjrqSmdvre+1DovgNienIBiQWEebyB7k2gJmcrbawqJ5yP5N
+	YNfaYqmeZQBN2avCDF6XmI7+dZdEdGZMLbiAFv6csb9giXwcQJxxs6Yd6C2h86JF/6lwPkfg7U6ku
+	+AVccrLA==;
+Received: from ip6-localhost ([::1]:63238 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1vNy2K-00DI95-1K; Tue, 25 Nov 2025 18:45:12 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:64550) 
+	id 1vNxgh-00DEhN-QW; Tue, 25 Nov 2025 18:22:53 +0000
+Received: from hr2.samba.org ([144.76.82.148]:40694) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vNy2E-00DI8y-FO
- for samba-technical@lists.samba.org; Tue, 25 Nov 2025 18:45:09 +0000
+ (Exim) id 1vNxcj-00DDgR-AJ
+ for samba-technical@lists.samba.org; Tue, 25 Nov 2025 18:20:10 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Message-ID:Date:Cc:To:From;
- bh=zoH+4XP8FyGpKdv2ioBMYnBqRm0WPYwl16h+r30AreI=; b=dzJzxe3o3R7GpvZHlzMcxGh/Sr
- T7TMP7CKHsU6jd0OFO8o2DveIyyd1wXPWKZcUOET06p+ciAzNXDkmNsTfi38hws0smncbl0IWRugQ
- q3QiA4LNdzIcZNz7FIoOK3Yaw0nvzpMeSIXnqQZ0otcsIqUfHpuNZ318ZDRzNPLmi97r64kbgM9MY
- sTnxlqNC99w2FxRR0L9/L4WQg7knncbtbig1gobwrq9tLwRsJmHC5IPaXljdlRdszPr26jM9AaJiU
- hXhl6BTXskHixx0PrHivvvgl8aCmuCDv/sDy2iIgp8tNh286gP3zTMDew9rV3daMG5Tor2teDEiuw
- 3HWc1crQM54XaOovCrhf1I6NT98LdEcGf9ITLJV00niHsDQoHYWPzxUxAoR9iXZGgP5WmeXeGw/VE
- YU7IssihGHLqDRk7AgEpBEgSIjkdtYZeL5emz4l5fqnTPPKaD9rKGU3do1WUPweUX/WcIWAtsRI8a
- lQfOn9VdAxNWZrDd6x8KuiOj;
+ bh=sT31C4tAeKhL06V6v2TfzRVrbNatNC0ToY8SoAngLck=; b=ibEVN0szryxig3nrrKmUHZyXwh
+ ygIbaTjXcyfnkqdKIDDom1c9PKjT2E/F0u1eXOt36inYbEDbC/8Aj/Gyrb0uELC5KJP6mJ3QYbYVC
+ NC7zsBW7UiwEV5nHBMRbIrXoTo4ERbKAGa2MEahsVs6NmBzPuPDyRwPnyhXjk9tnsEDQ9KauXY7vo
+ bsJW7Li3Emybxy7E5FFiVP/1hxgi44uJ3iidV/d7J1aeklmsQWY8mXJy9gk7rAYxnPb5lED/QqjF0
+ gvy/H44jps3QtUxWYvS1lXAMB9e/OOSmnnMLR7mSBo3lfSknIOxo1uxuJ0cW8mpTs4oUQWIJTD0Nc
+ EzNXc6xt135y0PE8BeHw893e9ufhOVWWuiGFcH6tDI2Jw+hRdhWOGKwJbjU/XUGZgRLjb8/37eu6G
+ 4fEV9RKK9UjtO+Ou1wGqdp+aH/a3WYQgn7g3ImMg3FoWK9ifrDCaa7xTg4zp1fqdHNGyPOM8bTtvB
+ upzd2KmcT/YkzM65rPo8GX6q;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vNxVY-00FeMl-0j; Tue, 25 Nov 2025 18:11:21 +0000
+ (Exim) id 1vNxVg-00FeOE-0W; Tue, 25 Nov 2025 18:11:29 +0000
 To: linux-cifs@vger.kernel.org,
 	samba-technical@lists.samba.org
-Subject: [PATCH v4 105/145] smb: server: make use of
- smbdirect_connection_idle_timer_work()
-Date: Tue, 25 Nov 2025 18:55:51 +0100
-Message-ID: <fbb3d876816e20d09bd4f22cd3aa2e118af9bc39.1764091285.git.metze@samba.org>
+Subject: [PATCH v4 106/145] smb: server: make use of
+ smbdirect_frwr_is_supported()
+Date: Tue, 25 Nov 2025 18:55:52 +0100
+Message-ID: <231e4c2aa79d4ccff6661c14ffe21c6ae768c347.1764091285.git.metze@samba.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1764091285.git.metze@samba.org>
 References: <cover.1764091285.git.metze@samba.org>
@@ -66,10 +66,7 @@ Cc: metze@samba.org, Steve French <smfrench@gmail.com>,
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is basically a copy of smb_direct_idle_connection_timer().
-The only difference is that we had no logging before.
-
-Note smbdirect_socket_prepare_create() already calls INIT_DELAYED_WORK().
+This is an exact copy of rdma_frwr_is_supported().
 
 Cc: Namjae Jeon <linkinjeon@kernel.org>
 Cc: Steve French <smfrench@gmail.com>
@@ -79,53 +76,56 @@ Cc: samba-technical@lists.samba.org
 Signed-off-by: Stefan Metzmacher <metze@samba.org>
 Signed-off-by: Steve French <stfrench@microsoft.com>
 ---
- fs/smb/server/transport_rdma.c | 26 --------------------------
- 1 file changed, 26 deletions(-)
+ fs/smb/server/transport_rdma.c | 15 +++------------
+ 1 file changed, 3 insertions(+), 12 deletions(-)
 
 diff --git a/fs/smb/server/transport_rdma.c b/fs/smb/server/transport_rdma.c
-index 0b86df43449c..9ebf19c5fa80 100644
+index 9ebf19c5fa80..37c7f9524c6c 100644
 --- a/fs/smb/server/transport_rdma.c
 +++ b/fs/smb/server/transport_rdma.c
-@@ -226,30 +226,6 @@ static void smb_direct_send_immediate_work(struct work_struct *work)
- 	smb_direct_post_send_data(sc, NULL, NULL, 0, 0);
+@@ -2212,15 +2212,6 @@ static int smb_direct_connect(struct smbdirect_socket *sc)
+ 	return 0;
  }
  
--static void smb_direct_idle_connection_timer(struct work_struct *work)
+-static bool rdma_frwr_is_supported(struct ib_device_attr *attrs)
 -{
--	struct smbdirect_socket *sc =
--		container_of(work, struct smbdirect_socket, idle.timer_work.work);
--	struct smbdirect_socket_parameters *sp = &sc->parameters;
--
--	if (sc->idle.keepalive != SMBDIRECT_KEEPALIVE_NONE) {
--		smbdirect_socket_schedule_cleanup(sc, -ETIMEDOUT);
--		return;
--	}
--
--	if (sc->status != SMBDIRECT_SOCKET_CONNECTED)
--		return;
--
--	/*
--	 * Now use the keepalive timeout (instead of keepalive interval)
--	 * in order to wait for a response
--	 */
--	sc->idle.keepalive = SMBDIRECT_KEEPALIVE_PENDING;
--	mod_delayed_work(sc->workqueue, &sc->idle.timer_work,
--			 msecs_to_jiffies(sp->keepalive_timeout_msec));
--	queue_work(sc->workqueue, &sc->idle.immediate_work);
+-	if (!(attrs->device_cap_flags & IB_DEVICE_MEM_MGT_EXTENSIONS))
+-		return false;
+-	if (attrs->max_fast_reg_page_list_len == 0)
+-		return false;
+-	return true;
 -}
 -
- static struct smb_direct_transport *alloc_transport(struct rdma_cm_id *cm_id)
+ static int smb_direct_handle_connect_request(struct rdma_cm_id *new_cm_id,
+ 					     struct rdma_cm_event *event)
  {
- 	struct smb_direct_transport *t;
-@@ -292,8 +268,6 @@ static struct smb_direct_transport *alloc_transport(struct rdma_cm_id *cm_id)
+@@ -2232,7 +2223,7 @@ static int smb_direct_handle_connect_request(struct rdma_cm_id *new_cm_id,
+ 	u8 peer_responder_resources;
+ 	int ret;
  
- 	sc->ib.dev = sc->rdma.cm_id->device;
+-	if (!rdma_frwr_is_supported(&new_cm_id->device->attrs)) {
++	if (!smbdirect_frwr_is_supported(&new_cm_id->device->attrs)) {
+ 		ksmbd_debug(RDMA,
+ 			    "Fast Registration Work Requests is not supported. device capabilities=%llx\n",
+ 			    new_cm_id->device->attrs.device_cap_flags);
+@@ -2394,7 +2385,7 @@ static int smb_direct_ib_client_add(struct ib_device *ib_dev)
+ 	if (ib_dev->node_type != RDMA_NODE_IB_CA)
+ 		smb_direct_port = SMB_DIRECT_PORT_IWARP;
  
--	INIT_DELAYED_WORK(&sc->idle.timer_work, smb_direct_idle_connection_timer);
--
- 	conn = ksmbd_conn_alloc();
- 	if (!conn)
- 		goto err;
+-	if (!rdma_frwr_is_supported(&ib_dev->attrs))
++	if (!smbdirect_frwr_is_supported(&ib_dev->attrs))
+ 		return 0;
+ 
+ 	smb_dev = kzalloc(sizeof(*smb_dev), KSMBD_DEFAULT_GFP);
+@@ -2518,7 +2509,7 @@ static bool ksmbd_find_rdma_capable_netdev(struct net_device *netdev)
+ 
+ 		ibdev = ib_device_get_by_netdev(netdev, RDMA_DRIVER_UNKNOWN);
+ 		if (ibdev) {
+-			rdma_capable = rdma_frwr_is_supported(&ibdev->attrs);
++			rdma_capable = smbdirect_frwr_is_supported(&ibdev->attrs);
+ 			ib_device_put(ibdev);
+ 		}
+ 	}
 -- 
 2.43.0
 
