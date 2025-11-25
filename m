@@ -2,44 +2,44 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id AD2F5C866CF
-	for <lists+samba-technical@lfdr.de>; Tue, 25 Nov 2025 19:04:49 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id DA72FC866D2
+	for <lists+samba-technical@lfdr.de>; Tue, 25 Nov 2025 19:05:03 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=PTIkaK4R1fwbk1Dbpkhq6l3vtvHNIvp16W4tkyHP4Aw=; b=FgHNmJlU0g3zC8pIs4y9h8nYda
-	Aw9Xov5PEq0DKatFLYnxppyn+B35lxjIfDB2fOCCynt2+m+M8RGGrXWKnRKVSHwc0vGKAW5qvlnD+
-	4ck/yWS5R77hNRMezqJ6UvX02qxfE+emwCeXc8t9+yVGgjmbAIzV0Hj8H3azabVrK7o7SKkgOPClA
-	TpFOwLGn0SHMiX49bduS9cftw5HWaWZ6hOG3UlUfJz1p1UapRwi5mw2Kt8D95LqP5kIE7qfy1xto4
-	ShRxAQd1CqyfLRLHJH5dkS41Ei+MgwNrAqdJI0JAZD3UexKHBpkA0H54KR4af5rG9LtRToHvROD8u
-	1WtpiTlg==;
-Received: from ip6-localhost ([::1]:49568 helo=hr1.samba.org) 
+	bh=Ouu9OqeY5hrf0ivd9FFmXgodcF2fguTRVOP0wBn9uE8=; b=k6rqcERga8tpIfkxtpetCF45ak
+	iKJtkzSoXg1Xl66+Onm5PoQIcISkX+jibcL+7uLzY+tIARZ3CxroCeJLCzqk/XkBPI5ute+ZF3ieS
+	LsAPr1vDLmMYAARPhr7/N1btDXcsnSz5+GFqcuEXBMt+iwICBRasKaLn9AFXkUqLEsiTOS5ccLC7e
+	biz5imNtsUcFjuNrsH0KYmAwQZpdyWk1deLa9LAZB1oELNY6CD3mEn2NJpFjyQZevbCXoGvevty/z
+	e+A/p2cqXJRVCkXkZHX9Nc6weHWFwSDOcj2aGhdvSAApx41ffo1nAJ1z/PyF+0rwM/Bs4B7K8lTVZ
+	wa14mdTw==;
+Received: from ip6-localhost ([::1]:30016 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1vNxP8-00D8zW-PL; Tue, 25 Nov 2025 18:04:43 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:11078) 
+	id 1vNxPI-00D92K-4m; Tue, 25 Nov 2025 18:04:52 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:58844) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vNxKO-00D7Sl-V2
- for samba-technical@lists.samba.org; Tue, 25 Nov 2025 17:59:57 +0000
+ (Exim) id 1vNxKV-00D7Un-Nm
+ for samba-technical@lists.samba.org; Tue, 25 Nov 2025 18:00:10 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Message-ID:Date:Cc:To:From;
- bh=PTIkaK4R1fwbk1Dbpkhq6l3vtvHNIvp16W4tkyHP4Aw=; b=nN2zMW7isAONuyr7AqQKno3PVJ
- QrogCrAvT+iA9Lkt+kyFAMrcR+EhRQaqJ4JHZwvtBtbhteTr7g3Utx3tQCfyX2BWdgSdLadi2sL3P
- ypJf1b7VgWjs/vK2B2Iq1nGanJ8eHyaJyXilJu8IpmzC54jHe6l0ZB59BBlovg8EgCg0L/yKCVNnK
- l6f2D3M6Hvm8qTKSjF2aIvHQk9msfv4naFJfc6nUXEidqFCnmMYT8tJi+lk6/t6FH/k+fsdMVJu+o
- gHGcy8qQIdOyGtLflTeI9PdDO4LjVRej3fb40gy+ll9B0cCi+L+Anyba5+mh9VbUYodrf4NhRCcmh
- WgcpUeRAZ9D7O5ro6nMcciVP3PbQNTEV5VQE93TPAQa6nLH+V3gXhrifjVCJ3zLvmu2sbhmrvmti0
- OGOJpzQ66L8BNNKjyguRay/dPONykPAl7M6j4+VI6gQAKoILSAZf1trxZyOwFblJKMPSK23jKTJ+8
- /A9Fb0Vlgk5LTXYFjlCwnCcd;
+ bh=Ouu9OqeY5hrf0ivd9FFmXgodcF2fguTRVOP0wBn9uE8=; b=uEVKLodaYhAW6A6ooS7FwhM3Oj
+ /AutBe7RsRW05izeTbZYBjiXhFMFkNKL9Bj4TcPkqDwgT9KxnVla17a+PKecLQNPeLlrP3Gbot54L
+ YjwacfqHqs6t7dGabUGOQy0+N4KXhXCOKGA/9VAW/uSRlrIoyqTwoS/TeHGAoN8WB2UE/uMsizNG9
+ VnKckRIv7rItmkbsfSkss+n+Yz9zzv2ObRna1+TQKZWaU9nC2OxpNnUjiDmQjmWzEYJBAUwqgK++P
+ kkXdWOywEUdzS141tx9A0Gsf69QitNVelAfPFXnl9ym72dT4XpAzzialglw1tq2d31oREmpzmB1Qn
+ 8QaoL/yZEUmf5gITxLS1zU3FImz6YbHK5e4o2vfvFkgl1wRVapW20afR5iLDQGzgFBbypzZ3jgh8D
+ DeocXkJFy7haJKloxoB317xcYzlDuxlYqjRE9fU4pS8VzoSVJcfrbmEuslCaSyyefJI3L7hWsroY2
+ /81Z/7NEQHkZZ39vnQYWav07;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vNxKL-00Fcy7-0g; Tue, 25 Nov 2025 17:59:45 +0000
+ (Exim) id 1vNxKR-00Fcyu-0j; Tue, 25 Nov 2025 17:59:51 +0000
 To: linux-cifs@vger.kernel.org,
 	samba-technical@lists.samba.org
-Subject: [PATCH v4 031/145] smb: smbdirect: split out
- smbdirect_connection_recv_io_refill()
-Date: Tue, 25 Nov 2025 18:54:37 +0100
-Message-ID: <55deb09e9d8fd31ac7fa0993b2ec41213434f9c9.1764091285.git.metze@samba.org>
+Subject: [PATCH v4 032/145] smb: smbdirect: introduce
+ smbdirect_get_buf_page_count()
+Date: Tue, 25 Nov 2025 18:54:38 +0100
+Message-ID: <379a160360afef2a77e9dab9d45723e077a1ab10.1764091285.git.metze@samba.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1764091285.git.metze@samba.org>
 References: <cover.1764091285.git.metze@samba.org>
@@ -66,8 +66,11 @@ Cc: Tom Talpey <tom@talpey.com>, metze@samba.org,
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This will allow us to refill the recv queue in a sync way
-after negotiation.
+This is a copy of get_buf_page_count() in the server
+and will replace it soon.
+
+The only difference is that we now use size_t instead
+of int.
 
 Cc: Steve French <smfrench@gmail.com>
 Cc: Tom Talpey <tom@talpey.com>
@@ -78,83 +81,24 @@ Cc: samba-technical@lists.samba.org
 Signed-off-by: Stefan Metzmacher <metze@samba.org>
 Signed-off-by: Steve French <stfrench@microsoft.com>
 ---
- .../common/smbdirect/smbdirect_connection.c   | 36 +++++++++++++------
- 1 file changed, 25 insertions(+), 11 deletions(-)
+ fs/smb/common/smbdirect/smbdirect_socket.h | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
-diff --git a/fs/smb/common/smbdirect/smbdirect_connection.c b/fs/smb/common/smbdirect/smbdirect_connection.c
-index f260d50a561b..5c604b6bc853 100644
---- a/fs/smb/common/smbdirect/smbdirect_connection.c
-+++ b/fs/smb/common/smbdirect/smbdirect_connection.c
-@@ -683,16 +683,13 @@ static int smbdirect_connection_post_recv_io(struct smbdirect_recv_io *msg)
- 	return ret;
- }
+diff --git a/fs/smb/common/smbdirect/smbdirect_socket.h b/fs/smb/common/smbdirect/smbdirect_socket.h
+index 66582847530c..3a10e688a762 100644
+--- a/fs/smb/common/smbdirect/smbdirect_socket.h
++++ b/fs/smb/common/smbdirect/smbdirect_socket.h
+@@ -712,4 +712,10 @@ struct smbdirect_rw_io {
+ 	struct scatterlist sg_list[];
+ };
  
--__maybe_unused /* this is temporary while this file is included in others */
--static void smbdirect_connection_recv_io_refill_work(struct work_struct *work)
-+static int smbdirect_connection_recv_io_refill(struct smbdirect_socket *sc)
- {
--	struct smbdirect_socket *sc =
--		container_of(work, struct smbdirect_socket, recv_io.posted.refill_work);
- 	int missing;
- 	int posted = 0;
- 
- 	if (unlikely(sc->first_error))
--		return;
-+		return sc->first_error;
- 
- 	/*
- 	 * Find out how much smbdirect_recv_io buffers we should post.
-@@ -738,7 +735,7 @@ static void smbdirect_connection_recv_io_refill_work(struct work_struct *work)
- 				"smbdirect_connection_post_recv_io failed rc=%d (%s)\n",
- 				ret, errname(ret));
- 			smbdirect_connection_put_recv_io(recv_io);
--			return;
-+			return ret;
- 		}
- 
- 		atomic_inc(&sc->recv_io.posted.count);
-@@ -747,7 +744,7 @@ static void smbdirect_connection_recv_io_refill_work(struct work_struct *work)
- 
- 	/* If nothing was posted we're done */
- 	if (posted == 0)
--		return;
-+		return 0;
- 
- 	/*
- 	 * If we posted at least one smbdirect_recv_io buffer,
-@@ -768,11 +765,28 @@ static void smbdirect_connection_recv_io_refill_work(struct work_struct *work)
- 	 * grant the credit anyway.
- 	 */
- 	if (missing == 1 && sc->recv_io.credits.target != 1)
--		return;
-+		return 0;
- 
--	smbdirect_log_keep_alive(sc, SMBDIRECT_LOG_INFO,
--		"schedule send of an empty message\n");
--	queue_work(sc->workqueue, &sc->idle.immediate_work);
-+	return posted;
++static inline size_t smbdirect_get_buf_page_count(const void *buf, size_t size)
++{
++	return DIV_ROUND_UP((uintptr_t)buf + size, PAGE_SIZE) -
++		(uintptr_t)buf / PAGE_SIZE;
 +}
 +
-+__maybe_unused /* this is temporary while this file is included in others */
-+static void smbdirect_connection_recv_io_refill_work(struct work_struct *work)
-+{
-+	struct smbdirect_socket *sc =
-+		container_of(work, struct smbdirect_socket, recv_io.posted.refill_work);
-+	int posted;
-+
-+	posted = smbdirect_connection_recv_io_refill(sc);
-+	if (unlikely(posted < 0)) {
-+		smbdirect_socket_schedule_cleanup(sc, posted);
-+		return;
-+	}
-+	if (posted > 0) {
-+		smbdirect_log_keep_alive(sc, SMBDIRECT_LOG_INFO,
-+			"schedule send of an empty message\n");
-+		queue_work(sc->workqueue, &sc->idle.immediate_work);
-+	}
- }
- 
- static bool smbdirect_map_sges_single_page(struct smbdirect_map_sges *state,
+ #endif /* __FS_SMB_COMMON_SMBDIRECT_SMBDIRECT_SOCKET_H__ */
 -- 
 2.43.0
 
