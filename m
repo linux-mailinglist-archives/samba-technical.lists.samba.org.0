@@ -2,44 +2,44 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 761D3C8416A
-	for <lists+samba-technical@lfdr.de>; Tue, 25 Nov 2025 09:56:36 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 39CD7C84167
+	for <lists+samba-technical@lfdr.de>; Tue, 25 Nov 2025 09:56:35 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=D/JkWB35XQsNbHhZFKGF3tXGeza4iw8+rQmW/843H1k=; b=V3ZCVtYgbQ9s21FOlxJeZp7BGh
-	T76SRcvrdjv61EOy2nYQ4KAyUnGC+XXBBJ/3MT9w605Cv/tNvdEg8EelTCP5KdVYq7UJmrt3ugw2R
-	3UK1FW8QqI7zNoHsXJqnOHOiNRV7SebYme7Vaj3s6BpVsX5I8qNPRtpGiMZ1UqxBWvvRTLXnxcWfI
-	jYgRCpz//FoQhSGQHryc2s1urzNTRKwDsOBHOaRUcUQ7yMVwZvhRpAm95FbW6PY74pPsnrRGQt8cB
-	XJUD2qEMPa07yubCyU8ZFnKqTMQ8za9d28/sdMzVUw+w1Rj4mWwwZuhIxtZ4LVYUlLEiGqa8q3bRF
-	TiSs1PSQ==;
-Received: from ip6-localhost ([::1]:60040 helo=hr1.samba.org) 
+	bh=JBks4w2+a2ir27jAy7+dA8QHceTJmX14wJ2ZEbxuhr8=; b=dwyn/nzQDXwEe7Yu8/ZQyGlFk5
+	haZObS9heZh/QkSiCPDFzBeDaOGgixClgR+W+F75EtgYe8/As6bjXWYclCeLYJfOpUPHLZ6Myp8y/
+	ohVwtX60/3XMG4aOHXaUEzzhd8iOfZvUBO9fzVunLpGO+TRk3Eciq/ocl3FUegzWDeP3bBXblQU6x
+	P6LU/tYeISc2JmAYj+c2b6ppQqR7o2O9l++eIZxM+/L4EpizHusLmlbQZa8JCb/fySFblDGZdLWw4
+	zN01nhz4VxMdDre/7zy+oznO2Gn96/UZ89voButlLdDEVHJvZSoiKBrnrOyzCY+nTpQOhNjrcYOOi
+	hwVQUPPg==;
+Received: from ip6-localhost ([::1]:18954 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1vNoqM-00D3y4-6X; Tue, 25 Nov 2025 08:56:14 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:12218) 
+	id 1vNoqU-00D40M-IH; Tue, 25 Nov 2025 08:56:22 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:10292) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vNoqH-00D3xj-OQ
- for samba-technical@lists.samba.org; Tue, 25 Nov 2025 08:56:12 +0000
+ (Exim) id 1vNoqN-00D3zS-Fc
+ for samba-technical@lists.samba.org; Tue, 25 Nov 2025 08:56:18 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Message-ID:Date:Cc:To:From;
- bh=D/JkWB35XQsNbHhZFKGF3tXGeza4iw8+rQmW/843H1k=; b=iqHTczwpV+p18f7Z+S9HoxPG0V
- ma7WoJ54VwZX0Exbwy4bAt1SOJ31pFeCfEmrkcjhOUMeQ752+P8ozMyU0HAFrePr3UYBZ/anY7RbE
- ZnSYpOiePJUFsOebzqL08D7n18xobjs0J/0BLFdRrh6p3AfzyixrI90Q62y5uo5oWsMYJZVEKineX
- /jGARRcswhDAlSXSvzSAq/LOmoFKECQI3IfZ6LnJmq7lCXye4UVLEWA4d+yqWRqzbcBrVpSfvOZD3
- CPy0C5CvwAmmyH+GrTQOaVtXREgpddS7mDM+Ytmnw7mM7nHjltBfnNejbSisiOMLkLYCUwIEY4tIn
- R7tWZeInV/uvVXErxGRyq9VrLDiPB8/D5hijzFF/ymWFCV5/NLIppqkBJPZST5IPitVKYK2lyMWOX
- dXCKFJH1velj246t6Lmox6mnRMbcfcYWcgGRNUn0J7H9WVYlyl/W0fPbRyguxmjPOQqp2Rxkg8Thz
- xnpPKM9DpLwbHXrUeU0mvfoW;
+ bh=JBks4w2+a2ir27jAy7+dA8QHceTJmX14wJ2ZEbxuhr8=; b=P+Af7Nft+fd0WHuCLG8VZ3jXRk
+ WnEAZ2joar+vPQZTqBhLvQXUUUBMurhMN9hrRtZuCbOT+Rul7W3a/TDdmHYZ1i/8Dw1TDp+DLozDM
+ UGDxiCXuvRRjWJUhLzKhCW/K+HuB31av6f4PeKToWiWzKTgf4Ic9w/+sOMbFeVrm/EATRWUw9B0Uw
+ KumxSTOEe9HZXKLF4uSI9+KA8nLy21+sYxk7d3Y2h95crA3zkt6RQMTC61ynWxLwajjIdLmrPqeuc
+ tZL44UUy98vzM7utG/CJUnKFAJnNdGncRH/SPHzqnGdNvGYdInefGKclp9JD/NX4F2qBfRso3Gfee
+ uXEx8GJX/cLTsB1l3OkesJs3IZTpc7VQv/1VXO/uafm9j8tGuPvsR7giPBoiI+mDWj0Img3FSq872
+ NUjIUYbZy0QKn2LDB3Vtb+KqYzhZJ03qeShzArejZC5wuqYvX4ul6xYDQXr3iaVhkzflSO6NHSwuu
+ XfEfdFbbK1a26u/olggMCsV7;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vNoqG-00FYJU-2Z; Tue, 25 Nov 2025 08:56:08 +0000
+ (Exim) id 1vNoqM-00FYJi-0v; Tue, 25 Nov 2025 08:56:14 +0000
 To: linux-cifs@vger.kernel.org,
 	samba-technical@lists.samba.org
-Subject: [PATCH v2 1/4] smb: smbdirect: introduce SMBDIRECT_DEBUG_ERR_PTR()
- helper
-Date: Tue, 25 Nov 2025 09:55:54 +0100
-Message-ID: <d62ca3c6b59271264264e93dd3001a7c3132dd84.1764060262.git.metze@samba.org>
+Subject: [PATCH v2 2/4] smb: smbdirect: introduce SMBDIRECT_CHECK_STATUS_{WARN,
+ DISCONNECT}()
+Date: Tue, 25 Nov 2025 09:55:55 +0100
+Message-ID: <df492536dbd5a48993ab32423be7dba8b2ad58f2.1764060262.git.metze@samba.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1764060262.git.metze@samba.org>
 References: <cover.1764060262.git.metze@samba.org>
@@ -62,18 +62,19 @@ From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
 Reply-To: Stefan Metzmacher <metze@samba.org>
 Cc: Tom Talpey <tom@talpey.com>, Paulo Alcantara <pc@manguebit.org>,
  metze@samba.org, Steve French <smfrench@gmail.com>,
- Namjae Jeon <linkinjeon@kernel.org>, Steve French <stfrench@microsoft.com>
+ Namjae Jeon <linkinjeon@kernel.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This can be used like this:
+These will be used in various places in order to assert
+the current status mostly during the connect and negotiation
+phase. It will replace the WARN_ON_ONCE(sc->status != ...)
+calls, which are very useless in order to identify the
+problem that happened.
 
-  int err = somefunc();
-  pr_warn("err=%1pe\n", SMBDIRECT_DEBUG_ERR_PTR(err));
-
-This will be used in the following fixes in order
-to be prepared to identify real world problems
-more easily.
+As a start client and server will need to define their own
+__SMBDIRECT_SOCKET_DISCONNECT(__sc) macro in order to use
+SMBDIRECT_CHECK_STATUS_DISCONNECT().
 
 Cc: Steve French <smfrench@gmail.com>
 Cc: Tom Talpey <tom@talpey.com>
@@ -83,35 +84,59 @@ Cc: Paulo Alcantara <pc@manguebit.org>
 Cc: linux-cifs@vger.kernel.org
 Cc: samba-technical@lists.samba.org
 Signed-off-by: Stefan Metzmacher <metze@samba.org>
-Signed-off-by: Steve French <stfrench@microsoft.com>
 ---
- fs/smb/common/smbdirect/smbdirect_socket.h | 13 +++++++++++++
- 1 file changed, 13 insertions(+)
+ fs/smb/common/smbdirect/smbdirect_socket.h | 38 ++++++++++++++++++++++
+ 1 file changed, 38 insertions(+)
 
 diff --git a/fs/smb/common/smbdirect/smbdirect_socket.h b/fs/smb/common/smbdirect/smbdirect_socket.h
-index ee5a90d691c8..611986827a5e 100644
+index 611986827a5e..384b19177e1c 100644
 --- a/fs/smb/common/smbdirect/smbdirect_socket.h
 +++ b/fs/smb/common/smbdirect/smbdirect_socket.h
-@@ -74,6 +74,19 @@ const char *smbdirect_socket_status_string(enum smbdirect_socket_status status)
- 	return "<unknown>";
+@@ -394,6 +394,44 @@ static __always_inline void smbdirect_socket_init(struct smbdirect_socket *sc)
+ 	init_waitqueue_head(&sc->mr_io.cleanup.wait_queue);
  }
  
-+/*
-+ * This can be used with %1pe to print errors as strings or '0'
-+ * And it avoids warnings like: warn: passing zero to 'ERR_PTR'
-+ * from smatch -p=kernel --pedantic
-+ */
-+static __always_inline
-+const void * __must_check SMBDIRECT_DEBUG_ERR_PTR(long error)
-+{
-+	if (error == 0)
-+		return NULL;
-+	return ERR_PTR(error);
-+}
++#define __SMBDIRECT_CHECK_STATUS_FAILED(__sc, __expected_status, __error_cmd, __unexpected_cmd) ({ \
++	bool __failed = false; \
++	if (unlikely((__sc)->first_error)) { \
++		__failed = true; \
++		__error_cmd \
++	} else if (unlikely((__sc)->status != (__expected_status))) { \
++		__failed = true; \
++		__unexpected_cmd \
++	} \
++	__failed; \
++})
 +
- enum smbdirect_keepalive_status {
- 	SMBDIRECT_KEEPALIVE_NONE,
- 	SMBDIRECT_KEEPALIVE_PENDING,
++#define __SMBDIRECT_CHECK_STATUS_WARN(__sc, __expected_status, __unexpected_cmd) \
++	__SMBDIRECT_CHECK_STATUS_FAILED(__sc, __expected_status, \
++	, \
++	{ \
++		const struct sockaddr_storage *__src = NULL; \
++		const struct sockaddr_storage *__dst = NULL; \
++		if ((__sc)->rdma.cm_id) { \
++			__src = &(__sc)->rdma.cm_id->route.addr.src_addr; \
++			__dst = &(__sc)->rdma.cm_id->route.addr.dst_addr; \
++		} \
++		WARN_ONCE(1, \
++			"expected[%s] != %s first_error=%1pe local=%pISpsfc remote=%pISpsfc\n", \
++			smbdirect_socket_status_string(__expected_status), \
++			smbdirect_socket_status_string((__sc)->status), \
++			SMBDIRECT_DEBUG_ERR_PTR((__sc)->first_error), \
++			__src, __dst); \
++		__unexpected_cmd \
++	})
++
++#define SMBDIRECT_CHECK_STATUS_WARN(__sc, __expected_status) \
++	__SMBDIRECT_CHECK_STATUS_WARN(__sc, __expected_status, /* nothing */)
++
++#define SMBDIRECT_CHECK_STATUS_DISCONNECT(__sc, __expected_status) \
++	__SMBDIRECT_CHECK_STATUS_WARN(__sc, __expected_status, \
++		__SMBDIRECT_SOCKET_DISCONNECT(__sc);)
++
+ struct smbdirect_send_io {
+ 	struct smbdirect_socket *socket;
+ 	struct ib_cqe cqe;
 -- 
 2.43.0
 
