@@ -2,44 +2,44 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 56EC9C868C5
-	for <lists+samba-technical@lfdr.de>; Tue, 25 Nov 2025 19:18:47 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A95F2C8689E
+	for <lists+samba-technical@lfdr.de>; Tue, 25 Nov 2025 19:17:52 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=RDNV0a5XFTF/TmtAxMZm7bpnkNRznb47x1xPep6hcMc=; b=aWTdzlNX2NCxgu3RMAriXTdezn
-	Ka94HidVcpawhvKNVHzLrPXz9ZYc3h7vmQI+XwKhwNfpXLOdkv8E1BEQHIQQs0X5dWc3V+lTmok7E
-	o6V2t5q6e0DcUleZ5WrLmajcZO2rltb6B9bzIDQmrpQjXNqxpJtVqvQzcg6cl794VWG67psWbicSX
-	A+Jf4Q6DJRKpMuuJWBhS/shCRH+PNVweYk/cJoP2iFxLD68Qb67ESKG9Bh8TxhvHhKy4mnY4pvPQJ
-	kTIRNVTv6hEeXBjQ/fWmpDFbimU9I4JWCDsIY9JCdhC94Dy2NBRPxLtZWMRLyeNJ/yxVIq7Pb0/FL
-	nXmG1/AA==;
-Received: from ip6-localhost ([::1]:19084 helo=hr1.samba.org) 
+	bh=UJ606WCdffDfHpUhfMTmCdhyhR2iTTQXwNiaSGYzpVI=; b=tj5h4qD/w102pAbCtuNQ/tTZE7
+	sTem2EnUM5vaZox6nI/F35x6BgVgywZhLlxM6jZBG4CvYuD3+6e8Uoom+gtVk9uTC/jTUllWHWgev
+	ycFs4Wcl73fDHbI50VwQtVopWUYsmTUlzDf2awXHuKwsEGdT7pduEqqq4hOYmTpHAZNF3pgfUOUiK
+	1RuPt27vXBzLr3/Mqe0wSV36SeVYU0a7aHAVDlYqA8ip1GkBgJ79Q+F5FmayJ/94ZUQK/mOcRl9Xd
+	Ysp6K6zzqWLymN8Ug80SOeBbXBO1UuSlRlGs0/LSAochHyfl9Z8DnWJS8O/HSL6rqKMX8E9LLrDcx
+	qfRb76RA==;
+Received: from ip6-localhost ([::1]:60914 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1vNxcd-00DDZf-7A; Tue, 25 Nov 2025 18:18:40 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:61394) 
+	id 1vNxba-00DDEE-B0; Tue, 25 Nov 2025 18:17:34 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:61408) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vNxUY-00DAlG-6u
- for samba-technical@lists.samba.org; Tue, 25 Nov 2025 18:10:34 +0000
+ (Exim) id 1vNxUY-00DAlI-5N
+ for samba-technical@lists.samba.org; Tue, 25 Nov 2025 18:10:25 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Message-ID:Date:Cc:To:From;
- bh=RDNV0a5XFTF/TmtAxMZm7bpnkNRznb47x1xPep6hcMc=; b=v0nqWrRCHJ3ySZ7YphaO9GqpWf
- hkpki85/ttBZUIKSRl6qKYanNiKppzMezbzW/iCO7H6znrbMf98kONlXlxJmWyGOoYIsp1kbxfp3Q
- bV32nFhZ/iqtBBTzCd+oWtRj+XYMKFarpFPcKimU4YFShy+QVzvhFUfw7jqeYPVxXIf+ba6CAo7Yv
- ymLto8ncRs3a7BHXClsl3GNESwiK6Pn5G/m6+HQqtuyEPntSJYgVsWyOJ1hVltyvYuO48U1KA/CyG
- QVc5tKD3VeXnGdQZExYc769ulWhy/igtt0qmtQNQFSIOxZ92b96rCY41Rnjwk1+omWhNuMT6z7pWe
- 3bGOh+xVikWPNk0RHdZrQaaTrdDoYtGAf4AlelCZXFUXH8/FG5673tBvj5ELjlWleop28YIXxfPpZ
- 9jvFnbPI5WfhnO8E3l2V4h8mtpDC6NhX4OG6NNlPf4xG3S8jD13H+6VZRBQpUQiOJ/XOUVm0rMfDr
- NXRh3Ucfzl8EP/Ev6Q5DmvEg;
+ bh=UJ606WCdffDfHpUhfMTmCdhyhR2iTTQXwNiaSGYzpVI=; b=zl+sH/lEAhFTT7b5CxSFtqChkw
+ x+rDNE+Z0bo0z21x0k0VDL5dWkJg3yIhZxY4hu8ae3lWhb5WcIH8x3jHyGMbRDFWuyggZPgkYA2zS
+ x5sIHA5K/p60LUlS6YQkh/ahcYzFF9D51l5hkZCOB3BGxjVHxC7BeLkqoRix5xRKbIx7o2O5cqjAS
+ xRRv/OJJZvl3TYJXKf9ex+FGiHNxUUtqRlwGCLLnT7ZL2fYRKy3x/tkhBBg56JuGY/O8hT2ACYSTu
+ 16uhErex6JTRq21unc3WsMRSIkfG699JlUF1Zy8mM1DRziVg04CRpHRULNonQ3beRGI/vbnKeJOCw
+ 7cmExVlPSRxcn7UGqz6y9kUCHEVDGtCd8Lhewoi/EDfxm4GihUBQzU/2XN3E4Vcfz0NETM5XbKw7Y
+ pX1ZwfyGRVGJ3SCJBjo+wJhC//ipbDzYcJUESErgP8wT66WqEdWm4D8q1pRjTJFHbhdB3hwjTRIfm
+ y7hOE4qM2Pq80/K5f7DmQA7c;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vNxRz-00Fe08-0K; Tue, 25 Nov 2025 18:07:39 +0000
+ (Exim) id 1vNxSD-00Fe0v-1I; Tue, 25 Nov 2025 18:07:53 +0000
 To: linux-cifs@vger.kernel.org,
 	samba-technical@lists.samba.org
-Subject: [PATCH v4 086/145] smb: client: make use of
- smbdirect_connection_request_keep_alive()
-Date: Tue, 25 Nov 2025 18:55:32 +0100
-Message-ID: <67e25b892afe4b22634e42cb6bef9d432dddbd7d.1764091285.git.metze@samba.org>
+Subject: [PATCH v4 087/145] smb: client: change smbd_post_send_empty() to void
+ return
+Date: Tue, 25 Nov 2025 18:55:33 +0100
+Message-ID: <e4a3efe1810c0d9c5c647209742b4eeb0912111a.1764091285.git.metze@samba.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1764091285.git.metze@samba.org>
 References: <cover.1764091285.git.metze@samba.org>
@@ -66,7 +66,8 @@ Cc: Tom Talpey <tom@talpey.com>, metze@samba.org,
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This will help to share more common code soon.
+The caller doesn't check, so we better call
+smbdirect_socket_schedule_cleanup() to handle the error.
 
 Cc: Steve French <smfrench@gmail.com>
 Cc: Tom Talpey <tom@talpey.com>
@@ -77,55 +78,42 @@ Cc: samba-technical@lists.samba.org
 Signed-off-by: Stefan Metzmacher <metze@samba.org>
 Signed-off-by: Steve French <stfrench@microsoft.com>
 ---
- fs/smb/client/smbdirect.c | 28 +---------------------------
- 1 file changed, 1 insertion(+), 27 deletions(-)
+ fs/smb/client/smbdirect.c | 11 +++++++----
+ 1 file changed, 7 insertions(+), 4 deletions(-)
 
 diff --git a/fs/smb/client/smbdirect.c b/fs/smb/client/smbdirect.c
-index 5695ba579ea5..42f85dd42e7b 100644
+index 42f85dd42e7b..bc8c3e3f705f 100644
 --- a/fs/smb/client/smbdirect.c
 +++ b/fs/smb/client/smbdirect.c
-@@ -731,32 +731,6 @@ static int smbd_post_send_negotiate_req(struct smbdirect_socket *sc)
- 	return rc;
+@@ -23,8 +23,6 @@ const struct smbdirect_socket_parameters *smbd_get_parameters(struct smbd_connec
+ 	return &sc->parameters;
  }
  
--/*
-- * Check if we need to send a KEEP_ALIVE message
-- * The idle connection timer triggers a KEEP_ALIVE message when expires
-- * SMBDIRECT_FLAG_RESPONSE_REQUESTED is set in the message flag to have peer send
-- * back a response.
-- * return value:
-- * 1 if SMBDIRECT_FLAG_RESPONSE_REQUESTED needs to be set
-- * 0: otherwise
-- */
--static int manage_keep_alive_before_sending(struct smbdirect_socket *sc)
--{
--	struct smbdirect_socket_parameters *sp = &sc->parameters;
+-static int smbd_post_send_empty(struct smbdirect_socket *sc);
 -
--	if (sc->idle.keepalive == SMBDIRECT_KEEPALIVE_PENDING) {
--		sc->idle.keepalive = SMBDIRECT_KEEPALIVE_SENT;
--		/*
--		 * Now use the keepalive timeout (instead of keepalive interval)
--		 * in order to wait for a response
--		 */
--		mod_delayed_work(sc->workqueue, &sc->idle.timer_work,
--				 msecs_to_jiffies(sp->keepalive_timeout_msec));
--		return 1;
--	}
--	return 0;
--}
--
- /* Post the send request */
- static int smbd_post_send(struct smbdirect_socket *sc,
- 		struct smbdirect_send_io *request)
-@@ -899,7 +873,7 @@ static int smbd_post_send_iter(struct smbdirect_socket *sc,
- 	packet->credits_granted = cpu_to_le16(new_credits);
+ /* Port numbers for SMBD transport */
+ #define SMB_PORT	445
+ #define SMBD_PORT	5445
+@@ -930,12 +928,17 @@ static int smbd_post_send_iter(struct smbdirect_socket *sc,
+  * Empty message is used to extend credits to peer to for keep live
+  * while there is no upper layer payload to send at the time
+  */
+-static int smbd_post_send_empty(struct smbdirect_socket *sc)
++static void smbd_post_send_empty(struct smbdirect_socket *sc)
+ {
+ 	int remaining_data_length = 0;
++	int ret;
  
- 	packet->flags = 0;
--	if (manage_keep_alive_before_sending(sc))
-+	if (smbdirect_connection_request_keep_alive(sc))
- 		packet->flags |= cpu_to_le16(SMBDIRECT_FLAG_RESPONSE_REQUESTED);
+ 	sc->statistics.send_empty++;
+-	return smbd_post_send_iter(sc, NULL, &remaining_data_length);
++	ret = smbd_post_send_iter(sc, NULL, &remaining_data_length);
++	if (ret < 0) {
++		log_rdma_send(ERR, "smbd_post_send_iter failed ret=%d\n", ret);
++		smbdirect_socket_schedule_cleanup(sc, ret);
++	}
+ }
  
- 	packet->reserved = 0;
+ static int smbd_post_send_full_iter(struct smbdirect_socket *sc,
 -- 
 2.43.0
 
