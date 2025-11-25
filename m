@@ -2,44 +2,44 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 179C1C867AD
-	for <lists+samba-technical@lfdr.de>; Tue, 25 Nov 2025 19:10:30 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8C07DC867FE
+	for <lists+samba-technical@lfdr.de>; Tue, 25 Nov 2025 19:11:31 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=cWjktuw45N3wnmtfOqZpNWGAi4s9n5JE9rpaf+rYeC4=; b=HZAtYlK7WCtehmOzHvJx1TH0m9
-	y8EujZjYggpBTIsCodD1jLSfcPEmZ2SeJSog1CiLluhscWmQ3DWE3qRRSRGbHoen7fkX+ELhjQ1sz
-	DPynz+9yCo1jsv41ClfPUH7+44tJi5UlPTa6dHDenlNWjUUVQB5faDmPj0r2iUAOWPnUuS9VdQW1j
-	RLpk5DYwyoNITHMpSLKI8WiVymUS2z7L72urYxOjaL1F2+MWcmZnrz14epDVyGOBW+SBAQobKBXy/
-	zePQ/KZBS7Fyo7HQJHo/dJQw+dQJzq7rSvkWlx8cEp5h3xaWDWVheTbKdoSsE7EXcRTbghJs0xerF
-	WZP7GyAw==;
-Received: from ip6-localhost ([::1]:50952 helo=hr1.samba.org) 
+	bh=3rjPAjStoO1UpAydj9sXqgkjPdRrA1M364NWhOlYKRw=; b=ueCnq9VKmIuYyc6oKpXmOPaxok
+	I/RCl5L4+QrZjtx/bKmsWod/YiBfsirIcWNPnbxr6RFYa3MMhi/1jt6PEDQcvCqdKyBLMvmymlKHQ
+	wzBzMbVO1dAzGgW1Tdytm+TnOWu6YvZgkSqPlyNG2jaCx25Hzdv9SpDGtXeCHDsTeeeQzk6DJ9k0O
+	S1LNmpHAfRH7VpGtto8fTzHOuQdHUpbihQkJiTBFPeSKw29bjS5JF/qHqfIMNmQgv/AxNWgPe9czd
+	6HBfFTDCnHAr/rEjDTC3K3HQJzYV4xBCgLQbacGclrK44dvwQciDF91pQErIuy5ELW7cSei/I5F5F
+	Hp2FAlwA==;
+Received: from ip6-localhost ([::1]:23634 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1vNxUZ-00DAgw-4q; Tue, 25 Nov 2025 18:10:20 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:54418) 
+	id 1vNxVb-00DB32-NH; Tue, 25 Nov 2025 18:11:24 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:54924) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vNxN7-00D8JS-KB
- for samba-technical@lists.samba.org; Tue, 25 Nov 2025 18:02:52 +0000
+ (Exim) id 1vNxQH-00D9PV-To
+ for samba-technical@lists.samba.org; Tue, 25 Nov 2025 18:05:59 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Message-ID:Date:Cc:To:From;
- bh=cWjktuw45N3wnmtfOqZpNWGAi4s9n5JE9rpaf+rYeC4=; b=nenk8YBo8t2huQxp8e4uEb6iMC
- aiP2SxW2KqLqcy28MQV7kt8enj3ShhG79I9j+puwlP8VzIAwFDHjPmA1mcSxawIZi8dF5vmRHXEyN
- YHYp01+jHjCU+W2GhJQ3b21FgA3D563TSqwZrEFbPk6QxpH23DkbkbQ6nmqEkVxJGxESLX7yQEFfH
- 0W8UovjxP+4APrrEXuva28JcTX5nOe8LKbuDUQImnwpFJhvSqUqz4PjRdmMM8eE3Exu9VVXeDGR3F
- GTA9T2DHsR7jB8I5Fceap5kQAYOb8Dy90WtCK2T2ATYBsa4m0QNbNbBuCWGd0+90iFFzHZawXzZd6
- FvpFNrZFwkW7JWh1GHx13PgznmEpBBzyHzkRgxyGAlNBv6UGyEugw4JTNY2rRpz9+VUw5iHwZkR2n
- OICKdmFpIO1yZgUICllmdMBr80iCrQ/fyKTzqwFHxxrOBupUHTE+9vtpMHDf+lyUNJYlVdYRzUUBW
- o4UkllvagiSMSFgRe8bQN5a6;
+ bh=3rjPAjStoO1UpAydj9sXqgkjPdRrA1M364NWhOlYKRw=; b=ZJXAWawNaIwH7ErTkwc3mEO3Jq
+ 919wsgIGHn/VwTKGIQi8gu4+ZaQFpLywSm/Rl/X1PbxAbd8G8B7OZ/mw4G1LlAWeElibJekVFciTh
+ VD4KuGnwLxjc1Qct/nEXd5dEot3hxUgTeGkDIZ9gKSB7XshO/EihRjY1npm5Ff9f7uNxNx6AOgyFh
+ hJfhNuTHpcbfu+jCsN5Yb4c77qElg57F2AklTeOBsdTrA7+ii33nzPUk5HDzDtexjoElKy+bZD4vC
+ GovNWskiimAkbt0Str1CikPippd/2XUS4XxC+yTTTmfRQo91SbtAksoEsNWJri+HGqTjR9/9Q60DT
+ wXdF7jZMym73FVmdl1bQ55Ch/EQkbDkO4vH7qaP96TDTPT+xNxd/M02v12sMHNDUjmTtbzd5uO+9k
+ qfvpgjYNR5Zw3TqtTQK1AsC88lJcukQbVTQJ6N9qKSlQ+0wvF3Rx25iBzbk98x3LqitHwPgZ9edpM
+ 6oTH6HyW5MjtJLGJ2+D0iD4I;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vNxN2-00FdS9-2K; Tue, 25 Nov 2025 18:02:33 +0000
+ (Exim) id 1vNxN9-00FdX4-09; Tue, 25 Nov 2025 18:02:39 +0000
 To: linux-cifs@vger.kernel.org,
 	samba-technical@lists.samba.org
-Subject: [PATCH v4 056/145] smb: smbdirect: let smbdirect_socket.h include all
- headers for used structures
-Date: Tue, 25 Nov 2025 18:55:02 +0100
-Message-ID: <97aa13bfd745af9cbd7770bd9e7715f13a857549.1764091285.git.metze@samba.org>
+Subject: [PATCH v4 057/145] smb: smbdirect: let smbdirect_internal.h define
+ pr_fmt without SMBDIRECT_USE_INLINE_C_FILES
+Date: Tue, 25 Nov 2025 18:55:03 +0100
+Message-ID: <4cbebdbf147d38e1d6ada64aef2eea716abd03a0.1764091285.git.metze@samba.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1764091285.git.metze@samba.org>
 References: <cover.1764091285.git.metze@samba.org>
@@ -60,13 +60,17 @@ List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
 From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
 Reply-To: Stefan Metzmacher <metze@samba.org>
-Cc: metze@samba.org, Steve French <smfrench@gmail.com>,
- Tom Talpey <tom@talpey.com>, Namjae Jeon <linkinjeon@kernel.org>
+Cc: Tom Talpey <tom@talpey.com>, metze@samba.org,
+ Steve French <smfrench@gmail.com>, Namjae Jeon <linkinjeon@kernel.org>,
+ Steve French <stfrench@microsoft.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Currently they are implicitly included via client and server code,
-but this is needed when we move to an smbdirect.ko.
+When we move to smbdirect.ko we want log message prefixed with the
+module name.
+
+Note callers are still using smbdirect_socket_set_logging() in order
+to redirect the per connection logging to their own log functions.
 
 Cc: Steve French <smfrench@gmail.com>
 Cc: Tom Talpey <tom@talpey.com>
@@ -75,28 +79,26 @@ Cc: Namjae Jeon <linkinjeon@kernel.org>
 Cc: linux-cifs@vger.kernel.org
 Cc: samba-technical@lists.samba.org
 Signed-off-by: Stefan Metzmacher <metze@samba.org>
+Signed-off-by: Steve French <stfrench@microsoft.com>
 ---
- fs/smb/common/smbdirect/smbdirect_socket.h | 7 +++++++
- 1 file changed, 7 insertions(+)
+ fs/smb/common/smbdirect/smbdirect_internal.h | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/fs/smb/common/smbdirect/smbdirect_socket.h b/fs/smb/common/smbdirect/smbdirect_socket.h
-index 957685ec5857..bfa6a8907de4 100644
---- a/fs/smb/common/smbdirect/smbdirect_socket.h
-+++ b/fs/smb/common/smbdirect/smbdirect_socket.h
-@@ -6,6 +6,13 @@
- #ifndef __FS_SMB_COMMON_SMBDIRECT_SMBDIRECT_SOCKET_H__
- #define __FS_SMB_COMMON_SMBDIRECT_SMBDIRECT_SOCKET_H__
+diff --git a/fs/smb/common/smbdirect/smbdirect_internal.h b/fs/smb/common/smbdirect/smbdirect_internal.h
+index ead845948089..8ea10f8f8501 100644
+--- a/fs/smb/common/smbdirect/smbdirect_internal.h
++++ b/fs/smb/common/smbdirect/smbdirect_internal.h
+@@ -6,6 +6,10 @@
+ #ifndef __FS_SMB_COMMON_SMBDIRECT_INTERNAL_H__
+ #define __FS_SMB_COMMON_SMBDIRECT_INTERNAL_H__
  
-+#include <linux/wait.h>
-+#include <linux/workqueue.h>
-+#include <linux/kref.h>
-+#include <linux/mempool.h>
-+#include <linux/spinlock.h>
-+#include <linux/mutex.h>
-+#include <linux/completion.h>
- #include <rdma/rw.h>
- 
- enum smbdirect_socket_status {
++#ifndef SMBDIRECT_USE_INLINE_C_FILES
++#define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
++#endif /* ! SMBDIRECT_USE_INLINE_C_FILES */
++
+ #include <linux/errname.h>
+ #include "smbdirect.h"
+ #include "smbdirect_pdu.h"
 -- 
 2.43.0
 
