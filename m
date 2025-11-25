@@ -2,44 +2,44 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6F809C8682B
-	for <lists+samba-technical@lfdr.de>; Tue, 25 Nov 2025 19:12:56 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id B9918C86831
+	for <lists+samba-technical@lfdr.de>; Tue, 25 Nov 2025 19:13:06 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=nhvs8Ks+L5+0PWdzhox0gnpQcTmxDYOw68mg+HkYe2Q=; b=oG2xr5EZStDi4l12RPmNyIJocj
-	jgbsjNnxcVVOrz9IHD9nSC0Pr2pzGC6ccreSW8kCHY8EHqpiflPIv0VsD5qVCDCP5YBuBhKyW3z8E
-	Xdp9gz+x8vZW0VdW6b8T1yseyyjleJ9meK38ez+Al0noJpxVJrf+tw9CA/BwkSrGdXxINJ8jm4+r7
-	KWmsmKHlt3tvquUetLW0ZHeApw/1RmzhaVmtzZ0j9/Q5D9+4acBnUV2/rYUMhAuTrz4yi/pXRtOaf
-	//5+PzaH7DMyAU7B4QbmQVMOlYAgnMsDp15D+ccNApFtddPYym5xWywxeAeLGQB1c+u0ggV3jb04e
-	klB+4G9w==;
-Received: from ip6-localhost ([::1]:44644 helo=hr1.samba.org) 
+	bh=O5TZrCEzx9fXdVqdrnYPrOkY2ZAOv0dCwnMvKH5CJac=; b=rw26+Qdyq/0uuBsU8TmENOOBT7
+	mps5ahMsollxnETg0+tS0kjnBmrUgpS7LG1SpEZOAHjS3t7rR5tAl5XjM4sPAAtXHbkMQT3VhREHm
+	JqIiSDP5VftK1SDRNiC43lzfcllfZ43LikcH6Nd6u+YdKePa1D1/3iugHy2CFXYDXmY1ITKkcG5a5
+	eKTzktrZ9aL4mxgkyZxN3P4qjpiR/piEMPyGccmokVZL+dl6kGlaXU53sjfBQ25963PhutbINDLMG
+	TEmfzk6Lgt4PUtx8BFgTzefpsSjFE9qeSYECOCMRbJxQNk5tUfcnzkl0dDFu+11Dlutl+S/AOBPHh
+	LJIhUY1w==;
+Received: from ip6-localhost ([::1]:24962 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1vNxWz-00DBVW-LG; Tue, 25 Nov 2025 18:12:50 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:26948) 
+	id 1vNxX8-00DBaz-9D; Tue, 25 Nov 2025 18:12:58 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:26952) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vNxQr-00D9bV-Mw
- for samba-technical@lists.samba.org; Tue, 25 Nov 2025 18:06:36 +0000
+ (Exim) id 1vNxQs-00D9bv-J8
+ for samba-technical@lists.samba.org; Tue, 25 Nov 2025 18:06:38 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Message-ID:Date:Cc:To:From;
- bh=nhvs8Ks+L5+0PWdzhox0gnpQcTmxDYOw68mg+HkYe2Q=; b=PnayvQKUuJHsVAzPeEMwlgoTig
- mKGuFvYelfhaiNyKNAUsfSjWsSJAIkzqTGkvfBiYa3zwTBy5Kl+YdSf+Ua+LQrVygB0GUuxRdHgQS
- 5GmJK9L6bqaNTuEQQ/sCWYpJjy3qVD0crVr0AY3rAcVZpGSa7eAtrcNz3BxlROrtPHecI95lTf6c/
- rFlQ0sqzxZWzAHcBOMPsi5BU17I3mLoGO3nZftKZC2CROMkFVkSBHsQOP4g1zkARqpL4RoTXDhKx/
- OpCfzXoZdCU7pInQpgAMMjGvdxCJtkAChQk46KytDGAjni0Ctyp93QF2HhJWBFoMcb0O0m7kk76ev
- GZFx8YcAa39izr6MXHhOxEXQkhRShAr7vvgi7MT5S+W6DiadhPzXGjGdHC7Xi2YKNTVxQXaXw54z6
- eRGe3N2rgCykn625g+8Bzr9VG//3GYKuXTWDUQYvIBSAS5E2V5BVh1VorOiew599tlsL8iPrCFnI2
- /VcMn375O0kyddTxZ3VeGh9i;
+ bh=O5TZrCEzx9fXdVqdrnYPrOkY2ZAOv0dCwnMvKH5CJac=; b=1B20a+Q00hW0FyKVoJS7PBsToi
+ 0ZaggpSRzuAzF0Fn2XCpFhgfO7sq4OjhA6Nzd2MgfsDRzlfqtOCLphX4ChnJDWeCR7x7N/Iat/PmC
+ mCGbdSf4hC+bFhs2t8o+acCKQQlfC11xoay7hsyJlgJOfO1QWbonp4WA2EL/Q7detmegAv/AupQFD
+ 0lSOAfBs8chrEddpXWFcnO8CZJBBlc4j+goTG08jtwy3wY4N9kpwyRnoBuq4qwzj9oe0Tj1sQCsL+
+ f/e0pjWmLNCe0Oia1ShGW3mA5HGKYeKspkT0GbrRUwph6nuKltVn5YVaqZACS6QDEiiRk8Q3hMKPU
+ YF5bR4JDz4WH5EVh29be2lpRJmPF5Nhgcd5oQ0NzI3ClVkvT/ULHuYXu3uEEGlVqOBG9fGldhhJZz
+ RM0fq1RbSGNsTeIr3QtD+VEI89VQywsxwQjU24oeqZUuQK8tKkueoZVZCBVj6RomL0bviNlVCkXwi
+ JDDgfn+FGUEHD/+r851EmA0S;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vNxNo-00Fdba-0Z; Tue, 25 Nov 2025 18:03:20 +0000
+ (Exim) id 1vNxNu-00Fdbv-13; Tue, 25 Nov 2025 18:03:27 +0000
 To: linux-cifs@vger.kernel.org,
 	samba-technical@lists.samba.org
-Subject: [PATCH v4 063/145] smb: client: make use of
- smbdirect_socket_wake_up_all()
-Date: Tue, 25 Nov 2025 18:55:09 +0100
-Message-ID: <db1ab14841d3d7d108074d16054983bd3e0c6872.1764091285.git.metze@samba.org>
+Subject: [PATCH v4 064/145] smb: client: let allocate_receive_buffers()
+ initialize complex_work as disabled
+Date: Tue, 25 Nov 2025 18:55:10 +0100
+Message-ID: <09e1ec4a68cbfa5b6f3a6bf53cfed266cfc42576.1764091285.git.metze@samba.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1764091285.git.metze@samba.org>
 References: <cover.1764091285.git.metze@samba.org>
@@ -60,15 +60,15 @@ List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
 From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
 Reply-To: Stefan Metzmacher <metze@samba.org>
-Cc: Tom Talpey <tom@talpey.com>, metze@samba.org,
- Steve French <smfrench@gmail.com>, Namjae Jeon <linkinjeon@kernel.org>,
- Steve French <stfrench@microsoft.com>
+Cc: metze@samba.org, Steve French <smfrench@gmail.com>,
+ Tom Talpey <tom@talpey.com>, Namjae Jeon <linkinjeon@kernel.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is a superset of smbd_disconnect_wake_up_all() and
-calling wake_up_all(&sc->rw_io.credits.wait_queue); in addition
-should not matter as it's not used on the client anyway.
+smbdirect_recv_io.complex_work won't be used in client until
+the end of the move to common functions, but common cleanup
+code will call disable_work[_sync]() before that, so we
+better initialize it now.
 
 Cc: Steve French <smfrench@gmail.com>
 Cc: Tom Talpey <tom@talpey.com>
@@ -77,65 +77,23 @@ Cc: Namjae Jeon <linkinjeon@kernel.org>
 Cc: linux-cifs@vger.kernel.org
 Cc: samba-technical@lists.samba.org
 Signed-off-by: Stefan Metzmacher <metze@samba.org>
-Signed-off-by: Steve French <stfrench@microsoft.com>
 ---
- fs/smb/client/smbdirect.c | 22 +++-------------------
- 1 file changed, 3 insertions(+), 19 deletions(-)
+ fs/smb/client/smbdirect.c | 2 ++
+ 1 file changed, 2 insertions(+)
 
 diff --git a/fs/smb/client/smbdirect.c b/fs/smb/client/smbdirect.c
-index 3d3b6fa65781..4dae3d1eb93e 100644
+index 4dae3d1eb93e..33f3cbc0bbd9 100644
 --- a/fs/smb/client/smbdirect.c
 +++ b/fs/smb/client/smbdirect.c
-@@ -216,22 +216,6 @@ do {									\
- #define log_rdma_mr(level, fmt, args...) \
- 		log_rdma(level, LOG_RDMA_MR, fmt, ##args)
+@@ -1543,6 +1543,8 @@ static int allocate_receive_buffers(struct smbdirect_socket *sc, int num_buf)
  
--static void smbd_disconnect_wake_up_all(struct smbdirect_socket *sc)
--{
--	/*
--	 * Wake up all waiters in all wait queues
--	 * in order to notice the broken connection.
--	 */
--	wake_up_all(&sc->status_wait);
--	wake_up_all(&sc->send_io.lcredits.wait_queue);
--	wake_up_all(&sc->send_io.credits.wait_queue);
--	wake_up_all(&sc->send_io.pending.dec_wait_queue);
--	wake_up_all(&sc->send_io.pending.zero_wait_queue);
--	wake_up_all(&sc->recv_io.reassembly.wait_queue);
--	wake_up_all(&sc->mr_io.ready.wait_queue);
--	wake_up_all(&sc->mr_io.cleanup.wait_queue);
--}
--
- static void smbd_disconnect_rdma_work(struct work_struct *work)
- {
- 	struct smbdirect_socket *sc =
-@@ -288,7 +272,7 @@ static void smbd_disconnect_rdma_work(struct work_struct *work)
- 	 * Wake up all waiters in all wait queues
- 	 * in order to notice the broken connection.
- 	 */
--	smbd_disconnect_wake_up_all(sc);
-+	smbdirect_socket_wake_up_all(sc);
- }
+ 		response->socket = sc;
+ 		response->sge.length = 0;
++		INIT_WORK(&response->complex_work, __smbdirect_socket_disabled_work);
++		disable_work_sync(&response->complex_work);
+ 		list_add_tail(&response->list, &sc->recv_io.free.list);
+ 	}
  
- static void smbd_disconnect_rdma_connection(struct smbdirect_socket *sc)
-@@ -353,7 +337,7 @@ static void smbd_disconnect_rdma_connection(struct smbdirect_socket *sc)
- 	 * Wake up all waiters in all wait queues
- 	 * in order to notice the broken connection.
- 	 */
--	smbd_disconnect_wake_up_all(sc);
-+	smbdirect_socket_wake_up_all(sc);
- 
- 	queue_work(sc->workqueue, &sc->disconnect_work);
- }
-@@ -1662,7 +1646,7 @@ void smbd_destroy(struct TCP_Server_Info *server)
- 	 * Most likely this was already called via
- 	 * smbd_disconnect_rdma_work(), but call it again...
- 	 */
--	smbd_disconnect_wake_up_all(sc);
-+	smbdirect_socket_wake_up_all(sc);
- 
- 	log_rdma_event(INFO, "cancelling recv_io.posted.refill_work\n");
- 	disable_work_sync(&sc->recv_io.posted.refill_work);
 -- 
 2.43.0
 
