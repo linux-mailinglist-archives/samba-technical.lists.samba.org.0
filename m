@@ -2,44 +2,43 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0440FC865A0
-	for <lists+samba-technical@lfdr.de>; Tue, 25 Nov 2025 18:58:04 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 013A8C865A9
+	for <lists+samba-technical@lfdr.de>; Tue, 25 Nov 2025 18:58:18 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=Op+S5bVdjI3q0kJR9LDywlYCBGb1n34imLxkNJ2rr/k=; b=Pj8eykHgz6F3F/T8PrqEQEFRwv
-	w94DSpylc9znFkyPu/bxZ6GfXCPvWvUN3H/+HX1a4Yx6dHbvf840KllycJ/2aXUCwIfLAlkyQwRfa
-	EVsp0L5mHy1fMGirTntVJGdUqRSX93BD1JW2BrEhGPUVYztgHmYn/Wu+32llupX20PcOCBchPc6xc
-	bBH0KAe21ej8ty8DkQ2KBcfGe5G3gGRdEW4+qwFXVSMvHiW1rDuylz6tg/ju2Qo7UVLwfYT3XisvF
-	74vHrlAzrv05Cm2jVVa+w8qlGGCB7+8Z/C6ddpjte+rLrGF96i4zGg9Aj1B/j1rTX/C9FjMoizXzw
-	8vhj1sgg==;
-Received: from ip6-localhost ([::1]:18034 helo=hr1.samba.org) 
+	bh=g4+55J/IvWXCTgAVKmMhQ8CnIEtqfx1K9xCIW4DKDzE=; b=cRzouQxppzUkWK85F/f8agtW3v
+	Z8mdzGCgGH4mc2rN/vqL3MRMsnXJ5tXameum6E14Cw5C9W4wOuN+UfCyvozSCcx9xeuebOyiofnYy
+	Dkg2gHOHFryVlDYRYgTz3vct73qx5DtqwcRAGP1lS1oPmY8rbFNjsfr4HKiQlKxBZaIbddhUAuQbZ
+	nOVClS0Y8ZCp/glbh/viHptKjhI7eW3NGWL83YdFl5TxGKsfmxUV/IBL3nIXQowvdwhuTs4ahzFEb
+	KMIVp1mSvSA/1i62/hNQt1S+U7MGVtcPOdKcmkHQyEMPNd4h5gSq5l8/gq0a1yrUT90dJ0bNf2bKy
+	LlBNBaRw==;
+Received: from ip6-localhost ([::1]:55328 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1vNxIP-00D6di-ET; Tue, 25 Nov 2025 17:57:47 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:61634) 
+	id 1vNxIm-00D6pw-51; Tue, 25 Nov 2025 17:58:08 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:61650) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vNxHk-00D6aJ-SS
- for samba-technical@lists.samba.org; Tue, 25 Nov 2025 17:57:08 +0000
+ (Exim) id 1vNxHt-00D6dc-Bp
+ for samba-technical@lists.samba.org; Tue, 25 Nov 2025 17:57:20 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Message-ID:Date:Cc:To:From;
- bh=Op+S5bVdjI3q0kJR9LDywlYCBGb1n34imLxkNJ2rr/k=; b=xhOHWsXB7erVFEh5F6u/3z2s8R
- YEJoJy3fq5dIsKuo0oAzNecQpi1h7lbOxrV5jwabNAGnHK9W+pKfqfEHwEQqRqDyAGop2XHTvZ+zz
- 0s7W/nRZnLGOPpJ9fEN8UJJ+jpam+AWco9z7PN3p7Ndc9CBgpSEFi34UbzZhlBeqndYoxJUp9sbl1
- AAc4HpLZNzfIFTbvdESrDwV6UQ3tfMK4pPdlFFBIH7gKrmVdfbOlze+2SRoh1C0Rc1x+hB/4kQ2hC
- nfJqyaMS4GV8I0NjHzB2iYltgcTee5X+EJP1U9PWDCDZRvTRP6ZF1Cheqdxa19PpCAF18V7mem5GI
- IgA0JgYlec2Ja0G8BqXJlE6iosl09AGHgZuZX4OXoeQ7RDJvBBYqsx7pOZlWQ0CXJlxzff/dfzWuy
- nNN3MqeqNosRF1SKUN/Rl/+zhW0zfNa0HAXXayGzgl6j6Oc5rq0V/TDmnqM+Pnyn2sh0o1LcaxXyP
- 6Mbq5gMipo2ToknGHiek8Tzn;
+ bh=g4+55J/IvWXCTgAVKmMhQ8CnIEtqfx1K9xCIW4DKDzE=; b=uY5Bgx4I9RQSWUlK8w3OS9MT+q
+ pgzr91xIrdbcSYBJEehAsnYXeUQJad8nGrCvVr+A8EcmXvuqfHWI0wiL3MgnwxMe2vBtvSmNZDYM7
+ L8c3Y983xL7oZEGJqJPC1hMuTNRtjCiVyR9Btx+zRcj89BOqHf6T+u5COpNYyWLSigNOhU1V2HdYl
+ ZNDwqkIt0alEfAmKKlZrsaoMkg3A4AOOZ09Q+6HMkcipVIMUmM85dd3UtNvrYU49fCNCO3L6NzV9U
+ +fNMPGj/RTJ03xKaFL/a99vqeqJ/oon2SRoqKVFPMll8p+RKii09wMw50x71QjSfZ9Og5IQjxzFb3
+ 6Rql4D1DK7LREm2ZyE77cEt7Ga+pA9zYVVTO25E3egiRPs444qlt/gL289lW0WlWVVXCpsRQN4PfT
+ WtOFs5K6hlBroVvMFgthZZMdcRjM50y2m8VPsSlypdeVbZgzlyf0f9Erpml54w37X3D6MjRbyN0Fq
+ EdIM5dVPW251GlJR65ZoIyPC;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vNxHj-00FcTw-00; Tue, 25 Nov 2025 17:57:03 +0000
+ (Exim) id 1vNxHp-00FcUX-0D; Tue, 25 Nov 2025 17:57:09 +0000
 To: linux-cifs@vger.kernel.org,
 	samba-technical@lists.samba.org
-Subject: [PATCH v4 004/145] smb: smbdirect: introduce
- smbdirect_recv_io.complex_work
-Date: Tue, 25 Nov 2025 18:54:10 +0100
-Message-ID: <a514dbaeac0c38c77f1107c90615e53e44f839f5.1764091285.git.metze@samba.org>
+Subject: [PATCH v4 005/145] smb: smbdirect: introduce smbdirect_all_c_files.c
+Date: Tue, 25 Nov 2025 18:54:11 +0100
+Message-ID: <80afe8b6fdd1f324728fdee4daef48b496a30b10.1764091285.git.metze@samba.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1764091285.git.metze@samba.org>
 References: <cover.1764091285.git.metze@samba.org>
@@ -60,21 +59,22 @@ List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
 From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
 Reply-To: Stefan Metzmacher <metze@samba.org>
-Cc: metze@samba.org, Steve French <smfrench@gmail.com>,
- Tom Talpey <tom@talpey.com>, Namjae Jeon <linkinjeon@kernel.org>
+Cc: Tom Talpey <tom@talpey.com>, metze@samba.org,
+ Steve French <smfrench@gmail.com>, Namjae Jeon <linkinjeon@kernel.org>,
+ Steve French <stfrench@microsoft.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This will be used by client and server in order to implement
-async connect/accept logic.
+This is a very basic start in order to introduce
+common functions, which will be shared by client and server.
 
-The problems is that ib_post_recv() completions can run
-in an interrupt context, where we are not allowed to
-sleep.
+As a start smbdirect_all_c_files.c will be included in
+fs/smb/client/smbdirect.c and fs/smb/server/transport_rdma.c
+in order to allow tiny steps in the direction of moving to
+a few exported functions from an smbdirect.ko.
 
-During the negotiation phase we need to do complex things
-e.g. allocate memory, which might sleep, so we'll offload
-this to the workqueue instead.
+Step by step this will include individual c files
+with the real functions.
 
 Cc: Steve French <smfrench@gmail.com>
 Cc: Tom Talpey <tom@talpey.com>
@@ -83,29 +83,35 @@ Cc: Namjae Jeon <linkinjeon@kernel.org>
 Cc: linux-cifs@vger.kernel.org
 Cc: samba-technical@lists.samba.org
 Signed-off-by: Stefan Metzmacher <metze@samba.org>
+Signed-off-by: Steve French <stfrench@microsoft.com>
 ---
- fs/smb/common/smbdirect/smbdirect_socket.h | 8 ++++++++
- 1 file changed, 8 insertions(+)
+ fs/smb/common/smbdirect/smbdirect_all_c_files.c | 17 +++++++++++++++++
+ 1 file changed, 17 insertions(+)
+ create mode 100644 fs/smb/common/smbdirect/smbdirect_all_c_files.c
 
-diff --git a/fs/smb/common/smbdirect/smbdirect_socket.h b/fs/smb/common/smbdirect/smbdirect_socket.h
-index cf8a16d3d895..ea269f55935d 100644
---- a/fs/smb/common/smbdirect/smbdirect_socket.h
-+++ b/fs/smb/common/smbdirect/smbdirect_socket.h
-@@ -631,6 +631,14 @@ struct smbdirect_recv_io {
- #define SMBDIRECT_RECV_IO_MAX_SGE 1
- 	struct ib_sge sge;
- 
-+	/*
-+	 * We may need to handle complex
-+	 * work that might sleep and are
-+	 * not allowed to run in an interrupt
-+	 * context.
-+	 */
-+	struct work_struct complex_work;
+diff --git a/fs/smb/common/smbdirect/smbdirect_all_c_files.c b/fs/smb/common/smbdirect/smbdirect_all_c_files.c
+new file mode 100644
+index 000000000000..610556fb7931
+--- /dev/null
++++ b/fs/smb/common/smbdirect/smbdirect_all_c_files.c
+@@ -0,0 +1,17 @@
++// SPDX-License-Identifier: GPL-2.0-or-later
++/*
++ *   Copyright (c) 2025, Stefan Metzmacher
++ */
 +
- 	/* Link to free or reassembly list */
- 	struct list_head list;
- 
++/*
++ * This is a temporary solution in order
++ * to include the common smbdirect functions
++ * into .c files in order to make a transformation
++ * in tiny bisectable steps possible.
++ *
++ * It will be replaced by a smbdirect.ko with
++ * exported public functions at the end.
++ */
++#ifndef SMBDIRECT_USE_INLINE_C_FILES
++#error SMBDIRECT_USE_INLINE_C_FILES define needed
++#endif
 -- 
 2.43.0
 
