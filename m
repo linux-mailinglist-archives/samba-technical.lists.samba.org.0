@@ -2,44 +2,44 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2B194C8686D
-	for <lists+samba-technical@lfdr.de>; Tue, 25 Nov 2025 19:15:42 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 36E15C86852
+	for <lists+samba-technical@lfdr.de>; Tue, 25 Nov 2025 19:14:46 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=1jtECno2f7S4m7tdYXzM5XKkCEAHY6JhDtYPK1PtbXk=; b=SQMbaof09kMRz3bZEc2OYFDYx5
-	v9lxdqHuZbcNbsAtYGot41cb33xYPYoOQo8M4IkYpm4fwUAg9/rFeoklH0m93GdvFe+72Olz5L9KN
-	4AH120J4QHWWsmu5YhmSK1u7sjJyk2CmfCKprPX1riCU+MSJ7jtdGIciDMfpgFJ/jkwMj2eYTSwXq
-	3O64C3Aq2fwrvS8zKGQX9KPpftUf9A83v5CkDCM9RuQ1wJYC1NjGBuF7HzaBiEMtdWGfHKJoKM50Y
-	+VKqQ9jrxElvofnoOH2YeeIPjIGM21TV1sx/ZhY6CK43t4kd+9pHwGNhFBMebPUxMU4Pv22166oZN
-	CCCd5cxA==;
-Received: from ip6-localhost ([::1]:32100 helo=hr1.samba.org) 
+	bh=fqHPvtMjMkvOI+6JWcJUnocC08qNvnbm5/Vkzdae8Ws=; b=pH6ZG8Vjc9rHw5EVEPi+WOIa0t
+	nTg+VpMIYQazf9e9B9fyrSPJBGsmAbGMvcquXTnNPe8oRyr3Ai3mILDuyFOnA5hsagd8ALdhGlJNO
+	/17atXleQa+TA0NSRFTB7u5DFArm9p6JXKO+KFYo4ugpKAUxDAWEMI+D80c6D1pNFK2bP5slS1XeB
+	FMzwEVfJCWme51GkHhcErd4O5pjKq9yNbEMneZ6zn37Mg3+Gric5WL/9KVv/u5tUooBGFD8C23UB3
+	dUbyZZkNO6hpuPAAKrBx+qA5VWnyblFIMOskuIdBgMxQe4i0WbdihsPhLxo07UMOHHw730JHl7vXH
+	eo/gKUMw==;
+Received: from ip6-localhost ([::1]:39506 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1vNxZa-00DCbK-Fw; Tue, 25 Nov 2025 18:15:31 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:44094) 
+	id 1vNxYm-00DCHO-SU; Tue, 25 Nov 2025 18:14:41 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:44092) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vNxTt-00DAWq-1w
- for samba-technical@lists.samba.org; Tue, 25 Nov 2025 18:10:03 +0000
+ (Exim) id 1vNxTt-00DAWo-8p
+ for samba-technical@lists.samba.org; Tue, 25 Nov 2025 18:09:48 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Message-ID:Date:Cc:To:From;
- bh=1jtECno2f7S4m7tdYXzM5XKkCEAHY6JhDtYPK1PtbXk=; b=STwW/rs2A/u5TcDmlRZMJJhDYp
- HxKKG5S0fO/cKlkhL+FVlORrCsGegR+MRmqe8NZZXbXKHV9HErfNBEmqAJdEWfu0OpAv5a96lTRYg
- r6rU4W/4sshFuqR+YnoO271/8UvWC/edVGlgUBideiYcf37OhgQtUL4B8YBrYGzkPWPD5jQMLvZPk
- uKI/36ivam9g5lecTYocztm6cYLAQvJ39TopaVtrqaY0OJSSKFCv+XR9eWH88w4ZIFp2xuWg1NlMr
- 5HqsRIh45VtsoYzi2pZf0IJUvbbHlE+5BK6I2w6GVNNX45muiwkOINVIy2/0aBemuMmmh5B5Kz99u
- Z8vOcpJDlHSLw6w2RIIE/4a+gb+vIC7ntaRsa8u073NDBPR0EkX7y0XJpbIrQuuP+CDoYeCoTpL7O
- oP5P/3NfKNZntykK2op/Ej3oZPllWv2YF8RQSzYCLpkKbuRHwlJOWh49ZHcIiDs+8CwjV6woHfpOf
- zhp1kHTUOruhjv+iaKzQdcw9;
+ bh=fqHPvtMjMkvOI+6JWcJUnocC08qNvnbm5/Vkzdae8Ws=; b=3rgXF7QTHm3GT3WtY94R6MyasX
+ Wfug8L/42BlDr5/0ZHKMxomZUTaJ2UrjfciMK8BVCkSaKfPBmGXe2TMfva9NyXi5yFyRhQZUT0smG
+ EgbEJ1r5XGSvV6hKZcBjKRqm5lcwiuIEbCaPoqKfpXt7WgsFAmxAH4i7Uq7Mqd2kCW1JLdkrjSesX
+ ZzDLVT9BTgk3N+7AxTS8npkLgGB/af2SxDjvRlbpGIb3kuAA3MjCHXvu8gV6cdOJWLtd3lEJCQ5jV
+ htrn7F9SInfZVfFo/f8RQKR2ahm9NlxQQBKERJCRDnr0uksWscKVvrkrI6cUwV2uxMaJtj5uL6htd
+ Pev3ks9grMswSnC/PNyxC0Dyw5nMXvMldjXebhGmNMjPP+Og2kiuecEdAQpsPbA1eXigx8Ey3ZjQk
+ 7kfKMdBSHK/bs/O9lcf7qlfWtC7RroDPongKO0OxlWk/9JjAqPGfhEpfvJ4Sm2Fi+YefFQxYmjS1t
+ KUpGp/ab6OyxQolKM2qbu8Vx;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vNxQV-00Fdjj-04; Tue, 25 Nov 2025 18:06:08 +0000
+ (Exim) id 1vNxQc-00Fdk0-1O; Tue, 25 Nov 2025 18:06:14 +0000
 To: linux-cifs@vger.kernel.org,
 	samba-technical@lists.samba.org
-Subject: [PATCH v4 074/145] smb: client: make use of
- smbdirect_map_sges_from_iter()
-Date: Tue, 25 Nov 2025 18:55:20 +0100
-Message-ID: <f8604b76fec1e5e324798eaadffec1bfe2245e2a.1764091285.git.metze@samba.org>
+Subject: [PATCH v4 075/145] smb: client: make use of
+ smbdirect_connection_qp_event_handler()
+Date: Tue, 25 Nov 2025 18:55:21 +0100
+Message-ID: <8ec0819d52cbf8548594173a9129521a725b879b.1764091285.git.metze@samba.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1764091285.git.metze@samba.org>
 References: <cover.1764091285.git.metze@samba.org>
@@ -66,18 +66,10 @@ Cc: Tom Talpey <tom@talpey.com>, metze@samba.org,
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is basically a copy of smb_extract_iter_to_rdma() moved
-to common code.
+This is a copy of smbd_qp_async_error_upcall()...
 
-Before we had the inconsistency we called ib_dma_unmap_single(),
-while we mapped using ib_dma_map_page() in smb_set_sge().
-
-Now ib_dma_unmap_page() is used for consistency.
-
-It doesn't really matter as ib_dma_unmap_single() and
-ib_dma_unmap_page() both operate
-on dma_addr_t and dma_unmap_single_attrs() is just an
-alias for dma_unmap_page_attrs().
+It will allow more code to be moved to common functions
+soon.
 
 Cc: Steve French <smfrench@gmail.com>
 Cc: Tom Talpey <tom@talpey.com>
@@ -88,282 +80,49 @@ Cc: samba-technical@lists.samba.org
 Signed-off-by: Stefan Metzmacher <metze@samba.org>
 Signed-off-by: Steve French <stfrench@microsoft.com>
 ---
- fs/smb/client/smbdirect.c | 241 +-------------------------------------
- 1 file changed, 5 insertions(+), 236 deletions(-)
+ fs/smb/client/smbdirect.c | 22 +---------------------
+ 1 file changed, 1 insertion(+), 21 deletions(-)
 
 diff --git a/fs/smb/client/smbdirect.c b/fs/smb/client/smbdirect.c
-index 30a0a2cb112c..81130420434e 100644
+index 81130420434e..0d5674461058 100644
 --- a/fs/smb/client/smbdirect.c
 +++ b/fs/smb/client/smbdirect.c
-@@ -32,17 +32,6 @@ static int smbd_post_send_empty(struct smbdirect_socket *sc);
- static void destroy_mr_list(struct smbdirect_socket *sc);
- static int allocate_mr_list(struct smbdirect_socket *sc);
- 
--struct smb_extract_to_rdma {
--	struct ib_sge		*sge;
--	unsigned int		nr_sge;
--	unsigned int		max_sge;
--	struct ib_device	*device;
--	u32			local_dma_lkey;
--	enum dma_data_direction	direction;
--};
--static ssize_t smb_extract_iter_to_rdma(struct iov_iter *iter, size_t len,
--					struct smb_extract_to_rdma *rdma);
--
- /* Port numbers for SMBD transport */
- #define SMB_PORT	445
- #define SMBD_PORT	5445
-@@ -1026,9 +1015,9 @@ static int smbd_post_send_iter(struct smbdirect_socket *sc,
- 
- 	/* Fill in the data payload to find out how much data we can add */
- 	if (iter) {
--		struct smb_extract_to_rdma extract = {
--			.nr_sge		= request->num_sge,
--			.max_sge	= SMBDIRECT_SEND_IO_MAX_SGE,
-+		struct smbdirect_map_sges extract = {
-+			.num_sge	= request->num_sge,
-+			.max_sge	= ARRAY_SIZE(request->sge),
- 			.sge		= request->sge,
- 			.device		= sc->ib.dev,
- 			.local_dma_lkey	= sc->ib.pd->local_dma_lkey,
-@@ -1037,12 +1026,11 @@ static int smbd_post_send_iter(struct smbdirect_socket *sc,
- 		size_t payload_len = umin(*_remaining_data_length,
- 					  sp->max_send_size - sizeof(*packet));
- 
--		rc = smb_extract_iter_to_rdma(iter, payload_len,
--					      &extract);
-+		rc = smbdirect_map_sges_from_iter(iter, payload_len, &extract);
- 		if (rc < 0)
- 			goto err_dma;
- 		data_length = rc;
--		request->num_sge = extract.nr_sge;
-+		request->num_sge = extract.num_sge;
- 		*_remaining_data_length -= data_length;
- 	} else {
- 		data_length = 0;
-@@ -2398,222 +2386,3 @@ void smbd_deregister_mr(struct smbdirect_mr_io *mr)
- 	if (!kref_put(&mr->kref, smbd_mr_free_locked))
- 		mutex_unlock(&mr->mutex);
+@@ -343,26 +343,6 @@ static int smbd_conn_upcall(
+ 	return 0;
  }
--
--static bool smb_set_sge(struct smb_extract_to_rdma *rdma,
--			struct page *lowest_page, size_t off, size_t len)
+ 
+-/* Upcall from RDMA QP */
+-static void
+-smbd_qp_async_error_upcall(struct ib_event *event, void *context)
 -{
--	struct ib_sge *sge = &rdma->sge[rdma->nr_sge];
--	u64 addr;
+-	struct smbdirect_socket *sc = context;
 -
--	addr = ib_dma_map_page(rdma->device, lowest_page,
--			       off, len, rdma->direction);
--	if (ib_dma_mapping_error(rdma->device, addr))
--		return false;
+-	log_rdma_event(ERR, "%s on device %s socket %p\n",
+-		ib_event_msg(event->event), event->device->name, sc);
 -
--	sge->addr   = addr;
--	sge->length = len;
--	sge->lkey   = rdma->local_dma_lkey;
--	rdma->nr_sge++;
--	return true;
--}
--
--/*
-- * Extract page fragments from a BVEC-class iterator and add them to an RDMA
-- * element list.  The pages are not pinned.
-- */
--static ssize_t smb_extract_bvec_to_rdma(struct iov_iter *iter,
--					struct smb_extract_to_rdma *rdma,
--					ssize_t maxsize)
--{
--	const struct bio_vec *bv = iter->bvec;
--	unsigned long start = iter->iov_offset;
--	unsigned int i;
--	ssize_t ret = 0;
--
--	for (i = 0; i < iter->nr_segs; i++) {
--		size_t off, len;
--
--		len = bv[i].bv_len;
--		if (start >= len) {
--			start -= len;
--			continue;
--		}
--
--		len = min_t(size_t, maxsize, len - start);
--		off = bv[i].bv_offset + start;
--
--		if (!smb_set_sge(rdma, bv[i].bv_page, off, len))
--			return -EIO;
--
--		ret += len;
--		maxsize -= len;
--		if (rdma->nr_sge >= rdma->max_sge || maxsize <= 0)
--			break;
--		start = 0;
--	}
--
--	if (ret > 0)
--		iov_iter_advance(iter, ret);
--	return ret;
--}
--
--/*
-- * Extract fragments from a KVEC-class iterator and add them to an RDMA list.
-- * This can deal with vmalloc'd buffers as well as kmalloc'd or static buffers.
-- * The pages are not pinned.
-- */
--static ssize_t smb_extract_kvec_to_rdma(struct iov_iter *iter,
--					struct smb_extract_to_rdma *rdma,
--					ssize_t maxsize)
--{
--	const struct kvec *kv = iter->kvec;
--	unsigned long start = iter->iov_offset;
--	unsigned int i;
--	ssize_t ret = 0;
--
--	for (i = 0; i < iter->nr_segs; i++) {
--		struct page *page;
--		unsigned long kaddr;
--		size_t off, len, seg;
--
--		len = kv[i].iov_len;
--		if (start >= len) {
--			start -= len;
--			continue;
--		}
--
--		kaddr = (unsigned long)kv[i].iov_base + start;
--		off = kaddr & ~PAGE_MASK;
--		len = min_t(size_t, maxsize, len - start);
--		kaddr &= PAGE_MASK;
--
--		maxsize -= len;
--		do {
--			seg = min_t(size_t, len, PAGE_SIZE - off);
--
--			if (is_vmalloc_or_module_addr((void *)kaddr))
--				page = vmalloc_to_page((void *)kaddr);
--			else
--				page = virt_to_page((void *)kaddr);
--
--			if (!smb_set_sge(rdma, page, off, seg))
--				return -EIO;
--
--			ret += seg;
--			len -= seg;
--			kaddr += PAGE_SIZE;
--			off = 0;
--		} while (len > 0 && rdma->nr_sge < rdma->max_sge);
--
--		if (rdma->nr_sge >= rdma->max_sge || maxsize <= 0)
--			break;
--		start = 0;
--	}
--
--	if (ret > 0)
--		iov_iter_advance(iter, ret);
--	return ret;
--}
--
--/*
-- * Extract folio fragments from a FOLIOQ-class iterator and add them to an RDMA
-- * list.  The folios are not pinned.
-- */
--static ssize_t smb_extract_folioq_to_rdma(struct iov_iter *iter,
--					  struct smb_extract_to_rdma *rdma,
--					  ssize_t maxsize)
--{
--	const struct folio_queue *folioq = iter->folioq;
--	unsigned int slot = iter->folioq_slot;
--	ssize_t ret = 0;
--	size_t offset = iter->iov_offset;
--
--	BUG_ON(!folioq);
--
--	if (slot >= folioq_nr_slots(folioq)) {
--		folioq = folioq->next;
--		if (WARN_ON_ONCE(!folioq))
--			return -EIO;
--		slot = 0;
--	}
--
--	do {
--		struct folio *folio = folioq_folio(folioq, slot);
--		size_t fsize = folioq_folio_size(folioq, slot);
--
--		if (offset < fsize) {
--			size_t part = umin(maxsize, fsize - offset);
--
--			if (!smb_set_sge(rdma, folio_page(folio, 0), offset, part))
--				return -EIO;
--
--			offset += part;
--			ret += part;
--			maxsize -= part;
--		}
--
--		if (offset >= fsize) {
--			offset = 0;
--			slot++;
--			if (slot >= folioq_nr_slots(folioq)) {
--				if (!folioq->next) {
--					WARN_ON_ONCE(ret < iter->count);
--					break;
--				}
--				folioq = folioq->next;
--				slot = 0;
--			}
--		}
--	} while (rdma->nr_sge < rdma->max_sge && maxsize > 0);
--
--	iter->folioq = folioq;
--	iter->folioq_slot = slot;
--	iter->iov_offset = offset;
--	iter->count -= ret;
--	return ret;
--}
--
--/*
-- * Extract page fragments from up to the given amount of the source iterator
-- * and build up an RDMA list that refers to all of those bits.  The RDMA list
-- * is appended to, up to the maximum number of elements set in the parameter
-- * block.
-- *
-- * The extracted page fragments are not pinned or ref'd in any way; if an
-- * IOVEC/UBUF-type iterator is to be used, it should be converted to a
-- * BVEC-type iterator and the pages pinned, ref'd or otherwise held in some
-- * way.
-- */
--static ssize_t smb_extract_iter_to_rdma(struct iov_iter *iter, size_t len,
--					struct smb_extract_to_rdma *rdma)
--{
--	ssize_t ret;
--	int before = rdma->nr_sge;
--
--	switch (iov_iter_type(iter)) {
--	case ITER_BVEC:
--		ret = smb_extract_bvec_to_rdma(iter, rdma, len);
+-	switch (event->event) {
+-	case IB_EVENT_CQ_ERR:
+-	case IB_EVENT_QP_FATAL:
+-		smbdirect_socket_schedule_cleanup(sc, -ECONNABORTED);
 -		break;
--	case ITER_KVEC:
--		ret = smb_extract_kvec_to_rdma(iter, rdma, len);
--		break;
--	case ITER_FOLIOQ:
--		ret = smb_extract_folioq_to_rdma(iter, rdma, len);
--		break;
+-
 -	default:
--		WARN_ON_ONCE(1);
--		return -EIO;
+-		break;
 -	}
--
--	if (ret < 0) {
--		while (rdma->nr_sge > before) {
--			struct ib_sge *sge = &rdma->sge[rdma->nr_sge--];
--
--			ib_dma_unmap_single(rdma->device, sge->addr, sge->length,
--					    rdma->direction);
--			sge->addr = 0;
--		}
--	}
--
--	return ret;
 -}
+-
+ static inline void *smbdirect_send_io_payload(struct smbdirect_send_io *request)
+ {
+ 	return (void *)request->packet;
+@@ -1479,7 +1459,7 @@ static struct smbd_connection *_smbd_get_connection(
+ 	}
+ 
+ 	memset(&qp_attr, 0, sizeof(qp_attr));
+-	qp_attr.event_handler = smbd_qp_async_error_upcall;
++	qp_attr.event_handler = smbdirect_connection_qp_event_handler;
+ 	qp_attr.qp_context = sc;
+ 	qp_attr.cap = qp_cap;
+ 	qp_attr.sq_sig_type = IB_SIGNAL_REQ_WR;
 -- 
 2.43.0
 
