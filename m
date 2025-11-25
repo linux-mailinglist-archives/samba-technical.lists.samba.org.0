@@ -2,44 +2,44 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id CE3DFC86904
-	for <lists+samba-technical@lfdr.de>; Tue, 25 Nov 2025 19:21:12 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6AED6C86AFC
+	for <lists+samba-technical@lfdr.de>; Tue, 25 Nov 2025 19:42:56 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=BBlgRAmIgpvsORmw7/6n6m0OSdIW8edI3Jt9yySA3ts=; b=mWsS2MwZKL75lDnfT3Cic4dbnO
-	DNtaitn0E2/RjG6J+eWqMcT8LnpD2CTFGb2Bff/3pNf721A3OHMeDfwDuOmDqTCd/U+V7V3fN6cTL
-	5N1ufj/v+bfu6o38WLzu8sBtz60bjA7il8oT8gp3JW06L7k34here9fo380nayCsL1bWcd4huo7g0
-	JEYkRcHaeCHOazBWoy/h8yj1g/dnQr1ON+vntQ1xyy4TAnskWH8z1+7sm8ePxrAt3o9A958ZMqghn
-	vGxodrl/ZAwBYw4jJdiA0a0y/JGK5TVdaB6uawxKwUp5rQ29DdIZCmz+bMmmm1k8t2CSmszz90oJ3
-	ku2SrWAg==;
-Received: from ip6-localhost ([::1]:59070 helo=hr1.samba.org) 
+	bh=JmXw+JB7gvzJpMqxvsB+lEIlefy96D+PL/h/vMq/gRg=; b=CJqRxs+V1aXqZ6UVn4R+JX9Iby
+	NIpMjUItPnlyK7IPQ7lgsgU4cT6aKk0NEUG8yN88piLXydBNjFzopHLqLwPBnGSyDyBO1DGEBIdQp
+	WvlqgFEsSfoClae4XZkszwUBBA4RHQxDrdnSTe2SvzKWmlatagmWH9kuTak2Nremgwa4zjJCxbJ0x
+	A55QuI4EqFR8as9qIQEKTdrywGyc8coX4ifwRHol5LI1aee7nHehQCOf2ydhnzjIRa6/OIuSbhRmA
+	8Oy1Y59opJb0+OU09CUK8Lohsp44wMBC/HrkvhtXEoixTsD9aJaq11Og13WgqkAMTOVoPgONm4q5s
+	9BDuxjOw==;
+Received: from ip6-localhost ([::1]:45332 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1vNxej-00DE9d-UK; Tue, 25 Nov 2025 18:20:51 +0000
-Received: from hr2.samba.org ([144.76.82.148]:35230) 
+	id 1vNy03-00DHtT-Nt; Tue, 25 Nov 2025 18:42:51 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:64092) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vNxcY-00DDdM-8I
- for samba-technical@lists.samba.org; Tue, 25 Nov 2025 18:19:55 +0000
+ (Exim) id 1vNxzv-00DHtI-K7
+ for samba-technical@lists.samba.org; Tue, 25 Nov 2025 18:42:46 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Message-ID:Date:Cc:To:From;
- bh=BBlgRAmIgpvsORmw7/6n6m0OSdIW8edI3Jt9yySA3ts=; b=C8GeLNTzSuzr6GDJdRasGpW6MT
- tTpeZPmJqB4iMD/Tf6QuzA5mnjqWR4TGAXoX0Ie7Iw88bBrsbnJEbaopLFgO495ybGyH+RaGvUGd+
- D/sZ3vUeDz/TYVXDTzQa3VLnEPqqcSP5GA+IZ41WGkrX+1xCeVQMsBFUwT2XzcWEPGPFjpaH2gNaX
- 2mT5wydb+4tUeXxpLDKbQHbR56pirEmYHSh/4RoFcF/WpL7MP+U9LDYOnymqbn5RnTVrCYEDA/2i3
- oMk581DlA05Mg0sDfzWEioYvKc1kWFLzC5i0SwIlwMuoqg1cxq0uNJPoOx+DKMTyVlpTEX3dZezvk
- SBbLLc1DIfVMX/BFzlkYdM20r5+Z9o+JL9LzyK3dOuQOhRAJ1TU6JrfrobFoUqAMD+GHHK9EzADwX
- JYncX/CFLG05fWL+6fLAoV6noERs1TwWXd2KnUBU8gqhnS5CXWHjOBhs3o9NL8HMGqDeAqMkdIEwF
- 2VDDZ0ghW4/wln1WDIo1D0gw;
+ bh=JmXw+JB7gvzJpMqxvsB+lEIlefy96D+PL/h/vMq/gRg=; b=jepNXiQafE48EcqcRrBB8bUDCX
+ x/3cnpznEdR8QT9nTcTQD3Rc0rT6XYrtGz4WNj+/6hied6AmgTSj/Z1Ta1OymoasX32o9Ou6z5arT
+ /f4kNQyM7edemIQNFprMNd14+43zFdxUXkMPHPkNWx2I9iMeQ0YKJwLhVf+1YtoqxkOR2oa428l+U
+ raI9pwTCjj07qWsfgDx8vky5Hnp1odCo7tNlPt3qbscXqQRnjnSXXRLqaXyyPm4NsqcNm/0MAOSJu
+ 9wRZFPV2Jhom4J6LHY9Vnoi4Epmy9B2bcQZASe0BRuhg+BH7KKYL+fY/j4DLd65Lwt5X/AluuTla+
+ C8OvKbnHnS2es3n2jyB2qIrU79DRMleXM9b0MxF1anjzdz6EJ/hstx/hCdvUr8JA7POCNew1AnTPm
+ simBclPAXAOTYW8zV8ANxT8vWYsbmAcnUGuF0lBtDrIgHt1g+V59pyUx4eTDspoRdtvKYFY8k+Qyq
+ 5yMDMaH1xWhWPo1mUrENnLW1;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vNxUe-00FeEt-0B; Tue, 25 Nov 2025 18:10:24 +0000
+ (Exim) id 1vNxUk-00FeFL-0h; Tue, 25 Nov 2025 18:10:30 +0000
 To: linux-cifs@vger.kernel.org,
 	samba-technical@lists.samba.org
-Subject: [PATCH v4 097/145] smb: server: make use of
- smbdirect_socket_prepare_create()
-Date: Tue, 25 Nov 2025 18:55:43 +0100
-Message-ID: <56a65a77045d989742acba2e8ff80ff8438894c3.1764091285.git.metze@samba.org>
+Subject: [PATCH v4 098/145] smb: server: make use of
+ smbdirect_socket_set_logging()
+Date: Tue, 25 Nov 2025 18:55:44 +0100
+Message-ID: <b5c66902cfdd52c166d97b78b9fce4a6be82843a.1764091285.git.metze@samba.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1764091285.git.metze@samba.org>
 References: <cover.1764091285.git.metze@samba.org>
@@ -66,7 +66,8 @@ Cc: metze@samba.org, Steve French <smfrench@gmail.com>,
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This prepares the use of functions from smbdirect_connection.c.
+This will allow the logging to keep working as before,
+when we move to common functions in the next commits.
 
 Cc: Namjae Jeon <linkinjeon@kernel.org>
 Cc: Steve French <smfrench@gmail.com>
@@ -76,58 +77,89 @@ Cc: samba-technical@lists.samba.org
 Signed-off-by: Stefan Metzmacher <metze@samba.org>
 Signed-off-by: Steve French <stfrench@microsoft.com>
 ---
- fs/smb/server/transport_rdma.c | 28 +++++++++++++++++-----------
- 1 file changed, 17 insertions(+), 11 deletions(-)
+ fs/smb/server/transport_rdma.c | 62 ++++++++++++++++++++++++++++++++++
+ 1 file changed, 62 insertions(+)
 
 diff --git a/fs/smb/server/transport_rdma.c b/fs/smb/server/transport_rdma.c
-index d656dbf9f7ae..343e2bd7ee2a 100644
+index 343e2bd7ee2a..52cc756aa088 100644
 --- a/fs/smb/server/transport_rdma.c
 +++ b/fs/smb/server/transport_rdma.c
-@@ -404,20 +404,14 @@ static struct smb_direct_transport *alloc_transport(struct rdma_cm_id *cm_id)
- {
- 	struct smb_direct_transport *t;
- 	struct smbdirect_socket *sc;
-+	struct smbdirect_socket_parameters init_params = {};
- 	struct smbdirect_socket_parameters *sp;
- 	struct ksmbd_conn *conn;
+@@ -113,6 +113,65 @@ struct smb_direct_transport {
+ 	struct smbdirect_socket socket;
+ };
  
--	t = kzalloc(sizeof(*t), KSMBD_DEFAULT_GFP);
--	if (!t)
--		return NULL;
--	sc = &t->socket;
--	smbdirect_socket_init(sc);
--	sp = &sc->parameters;
--
--	sc->workqueue = smb_direct_wq;
--
--	INIT_WORK(&sc->disconnect_work, smb_direct_disconnect_rdma_work);
--
-+	/*
-+	 * Create the initial parameters
-+	 */
-+	sp = &init_params;
- 	sp->negotiate_timeout_msec = SMB_DIRECT_NEGOTIATE_TIMEOUT * 1000;
- 	sp->initiator_depth = SMB_DIRECT_CM_INITIATOR_DEPTH;
- 	sp->responder_resources = 1;
-@@ -430,6 +424,18 @@ static struct smb_direct_transport *alloc_transport(struct rdma_cm_id *cm_id)
- 	sp->keepalive_interval_msec = SMB_DIRECT_KEEPALIVE_SEND_INTERVAL * 1000;
- 	sp->keepalive_timeout_msec = SMB_DIRECT_KEEPALIVE_RECV_TIMEOUT * 1000;
- 
-+	t = kzalloc(sizeof(*t), KSMBD_DEFAULT_GFP);
-+	if (!t)
-+		return NULL;
-+	sc = &t->socket;
-+	smbdirect_socket_prepare_create(sc, sp, smb_direct_wq);
-+	/*
-+	 * from here we operate on the copy.
-+	 */
-+	sp = &sc->parameters;
++static bool smb_direct_logging_needed(struct smbdirect_socket *sc,
++				      void *private_ptr,
++				      unsigned int lvl,
++				      unsigned int cls)
++{
++	if (lvl <= SMBDIRECT_LOG_ERR)
++		return true;
 +
-+	INIT_WORK(&sc->disconnect_work, smb_direct_disconnect_rdma_work);
++	if (lvl > SMBDIRECT_LOG_INFO)
++		return false;
 +
- 	sc->rdma.cm_id = cm_id;
- 	cm_id->context = sc;
- 
++	switch (cls) {
++	/*
++	 * These were more or less also logged before
++	 * the move to common code.
++	 *
++	 * SMBDIRECT_LOG_RDMA_MR was not used, but
++	 * that's client only code and we should
++	 * notice if it's used on the server...
++	 */
++	case SMBDIRECT_LOG_RDMA_EVENT:
++	case SMBDIRECT_LOG_RDMA_SEND:
++	case SMBDIRECT_LOG_RDMA_RECV:
++	case SMBDIRECT_LOG_WRITE:
++	case SMBDIRECT_LOG_READ:
++	case SMBDIRECT_LOG_NEGOTIATE:
++	case SMBDIRECT_LOG_OUTGOING:
++	case SMBDIRECT_LOG_RDMA_RW:
++	case SMBDIRECT_LOG_RDMA_MR:
++		return true;
++	/*
++	 * These were not logged before the move
++	 * to common code.
++	 */
++	case SMBDIRECT_LOG_KEEP_ALIVE:
++	case SMBDIRECT_LOG_INCOMING:
++		return false;
++	}
++
++	/*
++	 * Log all unknown messages
++	 */
++	return true;
++}
++
++static void smb_direct_logging_vaprintf(struct smbdirect_socket *sc,
++					const char *func,
++					unsigned int line,
++					void *private_ptr,
++					unsigned int lvl,
++					unsigned int cls,
++					struct va_format *vaf)
++{
++	if (lvl <= SMBDIRECT_LOG_ERR)
++		pr_err("%pV", vaf);
++	else
++		ksmbd_debug(RDMA, "%pV", vaf);
++}
++
+ #define KSMBD_TRANS(t) (&(t)->transport)
+ #define SMBD_TRANS(t)	(container_of(t, \
+ 				struct smb_direct_transport, transport))
+@@ -429,6 +488,9 @@ static struct smb_direct_transport *alloc_transport(struct rdma_cm_id *cm_id)
+ 		return NULL;
+ 	sc = &t->socket;
+ 	smbdirect_socket_prepare_create(sc, sp, smb_direct_wq);
++	smbdirect_socket_set_logging(sc, NULL,
++				     smb_direct_logging_needed,
++				     smb_direct_logging_vaprintf);
+ 	/*
+ 	 * from here we operate on the copy.
+ 	 */
 -- 
 2.43.0
 
