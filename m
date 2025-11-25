@@ -2,44 +2,44 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4E59DC8662D
-	for <lists+samba-technical@lfdr.de>; Tue, 25 Nov 2025 19:00:46 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id B9840C86636
+	for <lists+samba-technical@lfdr.de>; Tue, 25 Nov 2025 19:01:03 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=rMVnQEG7bfqjHcaKD1bp+/4f5YYbvpzN230SAxGyDxs=; b=wX8Rm43EPH/qPeEh42hXG5ca3Z
-	FUvqCvrSdBcFNhbEklSCsFnbtU+BeGgPmzhjcjAimwgA2kuTSKvnLIRmoE2zTorf8Y5NJHayjc3rr
-	YX4gL08hTjMJhBTTIRjx2Hx3JcRrDwVu4j1bADgSDEjeM1hiophUBKPsbJnycrfOcTXrNftiyIeAF
-	tkJXeYnYiQUg5BDehLKsS/4gwaHISaxgUxZJyUHI7D/+TmLdFxWlZhtaC3R3xSDdoh0cyWVGGqjXl
-	vpV2pkQtWcOAToTrWGPdvn0PSHCrI1MbURQKSxKsNrolQfplHjpcIvgmOqMCRV1AXkxAINAjztJ55
-	6OJmvG0g==;
-Received: from ip6-localhost ([::1]:60754 helo=hr1.samba.org) 
+	bh=td+mDRlO4KLBe1dwcu8mq2h7nCS32fUqanVAFUTC3y4=; b=A13tVxdTff+pDKT5t0b71uZI8P
+	WX3uN2U30lW6RfJnA8JMSd+1uGk4y84Hd0Iar+q0/QeAoqEp18tTXI7QqFuEt/mH6zZvyV9FuC3uJ
+	05cAtsjRP2QkLZRUBfJm95fh2UjCfn38UiFd6n4PQCVvbahAcY5C6CVVtH7ScvmNupiRwaGk/Cs8z
+	4G06O41mz0hXGmiiJTnEicxCAUSawqWZXBfuAFASvpOuCyTxJB6iuw2T3SUBhbOq6sWxb5W3lUkit
+	nDU3EblFduaazojWo4XCHGoklhPWlunuh/ZvyXioIE9Zrgg4TdkIbOtYTV7nQhFR6O+HoQLQrj5L0
+	UZcAoYSg==;
+Received: from ip6-localhost ([::1]:38078 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1vNxL9-00D7dp-H1; Tue, 25 Nov 2025 18:00:36 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:34414) 
+	id 1vNxLQ-00D7j3-2C; Tue, 25 Nov 2025 18:00:53 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:29486) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vNxIs-00D6xJ-38
- for samba-technical@lists.samba.org; Tue, 25 Nov 2025 17:58:26 +0000
+ (Exim) id 1vNxIx-00D6z9-ET
+ for samba-technical@lists.samba.org; Tue, 25 Nov 2025 17:58:27 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Message-ID:Date:Cc:To:From;
- bh=rMVnQEG7bfqjHcaKD1bp+/4f5YYbvpzN230SAxGyDxs=; b=gLlvvbKeMUYZ8mcgGSQtG5BmdD
- 20OWWbp6vsmw9yBEYvSqX7OaG4g3oA4Svz3XNpigTXSgd1Cixq6Iw9dJ8Cjw3tc9KMud4E0Iq9Wrq
- inUstQDA4ywkmphn7PEu37XnylEH0SwQYHPh54pvQXhDUKjiAGIIrYHmekMp1PWAScPxJbSJ3mlbM
- Ys3XEVvQWiD/vULwhVoal9Dtw4oXGIg97RhSsO0CVY6h1hBdhvNaPGu/DndMzRvi4lagYcB/jISXK
- XYNm1AjTBCTJfUY/FSw183qCQ+UTZHWAzQuOm/Mo5Ft3GjnpboBGF/gj8gvkVWHnmrJrlzgHrWpL5
- AO7zlw27WoVtT0cJTehlgBv/R/wL3/eppWNZgUiL2nyy4FkJtH/cRD2PyBMKvRZugC+OYxyjQYnuP
- v47f/To5iRxedksr3Rh+b+sUJnsWC+a6jdWGY0q2bexDsf8+y+kC8gXxChjCKkk8K7bxRMYp+Gpq+
- 9nmh7uFlGw82cVYntMinLdcT;
+ bh=td+mDRlO4KLBe1dwcu8mq2h7nCS32fUqanVAFUTC3y4=; b=WwRmqayXDY8JIV2mgbToKY5z5m
+ OyOlZiJBzEUorkP356+JMdLa86dF2rybdqTpecx5vey5UvFWQHdLosIXUyu+zaVZHDxEX1ay+FKlI
+ Uo89HXnFgIpGKk01+0Wgx+b8PWmuKXHOKompToupgf76yypEjQrEYSirkQFT2incfrD0VaN+xVz80
+ /V1iQQXMaYxkC/Z8JHPRMiNGFBXw/YUCcGdus30n8aE2+mz2wbXiLWq4s6qbifpnnnHrZN7iy9ejg
+ OLvUSN0gtegbD1PNqndQYFabRb10/o01BSNStaq6knI4EBwe/jEvP3BlMa6SMcvY+gdEI8xR3l7P7
+ fZ+93oJNWGwd5gqoXjr8dzrRlnevu6HY9Sc/t3azLyHmGsBTBhbmpP3LcRcOg4v9t/ZZ9N3kazToY
+ VYwGTsf1mybnegUQUHtX5JUbJF02CaqqProdnl4UK+DGCdk2LHjElwtXAgNBe1K92oL5TdFno+N7G
+ /60nsLE5WUjzR2TPht6dQZqI;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vNxIp-00Fcib-0Z; Tue, 25 Nov 2025 17:58:11 +0000
+ (Exim) id 1vNxIu-00Fcjb-2i; Tue, 25 Nov 2025 17:58:16 +0000
 To: linux-cifs@vger.kernel.org,
 	samba-technical@lists.samba.org
-Subject: [PATCH v4 015/145] smb: smbdirect: introduce smbdirect_connection.c
- to be filled
-Date: Tue, 25 Nov 2025 18:54:21 +0100
-Message-ID: <6e3aa1c7813c9797a1fa5c7dd35ecd7acb406f0f.1764091285.git.metze@samba.org>
+Subject: [PATCH v4 016/145] smb: smbdirect: introduce
+ smbdirect_connection_{get, put}_recv_io()
+Date: Tue, 25 Nov 2025 18:54:22 +0100
+Message-ID: <df9c3bbbd8e214eebe6ea5b0e6c883fe47a874f5.1764091285.git.metze@samba.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1764091285.git.metze@samba.org>
 References: <cover.1764091285.git.metze@samba.org>
@@ -60,24 +60,24 @@ List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
 From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
 Reply-To: Stefan Metzmacher <metze@samba.org>
-Cc: metze@samba.org, Steve French <smfrench@gmail.com>,
- Tom Talpey <tom@talpey.com>, Namjae Jeon <linkinjeon@kernel.org>
+Cc: Tom Talpey <tom@talpey.com>, metze@samba.org,
+ Steve French <smfrench@gmail.com>, Namjae Jeon <linkinjeon@kernel.org>,
+ Steve French <stfrench@microsoft.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Over time smbdirect_connection.c will get more and more functions
-which will be included in fs/smb/client/smbdirect.c and
-fs/smb/server/transport_rdma.c via
-fs/smb/common/smbdirect/smbdirect_all_c_files.c
-in order to allow tiny steps in the direction of moving to
-a few exported functions from an smbdirect.ko.
-That's why __maybe_unused is added for now it will
-be removed at the end of the road to common code.
+These are basically copies of {get,put}_receive_buffer() in the client
+and they are very similar to {get_free,put}_recvmsg() in the server.
 
-Note the Copyright (C) 2017, Microsoft Corporation is added
-as a lot of functions from fs/smb/client/smbdirect.c will
-be moved into this file soon and I don't want to forget
-about adding it.
+The only difference to {get_free,put}_recvmsg() are the
+updating of the sc->statistics.*.
+
+In addition smbdirect_connection_get_recv_io() uses
+list_first_entry_or_null() in order to simplify the code.
+We also only use it on a healthy connection.
+
+smbdirect_connection_put_recv_io() uses msg->socket instead
+of an explicit argument. And it disables any complex_work.
 
 Cc: Steve French <smfrench@gmail.com>
 Cc: Tom Talpey <tom@talpey.com>
@@ -86,34 +86,66 @@ Cc: Namjae Jeon <linkinjeon@kernel.org>
 Cc: linux-cifs@vger.kernel.org
 Cc: samba-technical@lists.samba.org
 Signed-off-by: Stefan Metzmacher <metze@samba.org>
+Signed-off-by: Steve French <stfrench@microsoft.com>
 ---
- fs/smb/common/smbdirect/smbdirect_all_c_files.c | 1 +
- fs/smb/common/smbdirect/smbdirect_connection.c  | 7 +++++++
- 2 files changed, 8 insertions(+)
- create mode 100644 fs/smb/common/smbdirect/smbdirect_connection.c
+ .../common/smbdirect/smbdirect_connection.c   | 47 +++++++++++++++++++
+ 1 file changed, 47 insertions(+)
 
-diff --git a/fs/smb/common/smbdirect/smbdirect_all_c_files.c b/fs/smb/common/smbdirect/smbdirect_all_c_files.c
-index 269d8c28c92e..93098598fbdc 100644
---- a/fs/smb/common/smbdirect/smbdirect_all_c_files.c
-+++ b/fs/smb/common/smbdirect/smbdirect_all_c_files.c
-@@ -16,3 +16,4 @@
- #error SMBDIRECT_USE_INLINE_C_FILES define needed
- #endif
- #include "smbdirect_socket.c"
-+#include "smbdirect_connection.c"
 diff --git a/fs/smb/common/smbdirect/smbdirect_connection.c b/fs/smb/common/smbdirect/smbdirect_connection.c
-new file mode 100644
-index 000000000000..0a96f5db6ff3
---- /dev/null
+index 0a96f5db6ff3..db807fb9e3db 100644
+--- a/fs/smb/common/smbdirect/smbdirect_connection.c
 +++ b/fs/smb/common/smbdirect/smbdirect_connection.c
-@@ -0,0 +1,7 @@
-+// SPDX-License-Identifier: GPL-2.0-or-later
-+/*
-+ *   Copyright (C) 2017, Microsoft Corporation.
-+ *   Copyright (c) 2025, Stefan Metzmacher
-+ */
+@@ -5,3 +5,50 @@
+  */
+ 
+ #include "smbdirect_internal.h"
 +
-+#include "smbdirect_internal.h"
++__maybe_unused /* this is temporary while this file is included in others */
++static struct smbdirect_recv_io *smbdirect_connection_get_recv_io(struct smbdirect_socket *sc)
++{
++	struct smbdirect_recv_io *msg = NULL;
++	unsigned long flags;
++
++	spin_lock_irqsave(&sc->recv_io.free.lock, flags);
++	if (likely(!sc->first_error))
++		msg = list_first_entry_or_null(&sc->recv_io.free.list,
++					       struct smbdirect_recv_io,
++					       list);
++	if (likely(msg)) {
++		list_del(&msg->list);
++		sc->statistics.get_receive_buffer++;
++	}
++	spin_unlock_irqrestore(&sc->recv_io.free.lock, flags);
++
++	return msg;
++}
++
++__maybe_unused /* this is temporary while this file is included in others */
++static void smbdirect_connection_put_recv_io(struct smbdirect_recv_io *msg)
++{
++	struct smbdirect_socket *sc = msg->socket;
++	unsigned long flags;
++
++	/*
++	 * Should already be disabled anyway.
++	 */
++	disable_work(&msg->complex_work);
++
++	if (likely(msg->sge.length != 0)) {
++		ib_dma_unmap_single(sc->ib.dev,
++				    msg->sge.addr,
++				    msg->sge.length,
++				    DMA_FROM_DEVICE);
++		msg->sge.length = 0;
++	}
++
++	spin_lock_irqsave(&sc->recv_io.free.lock, flags);
++	list_add_tail(&msg->list, &sc->recv_io.free.list);
++	sc->statistics.put_receive_buffer++;
++	spin_unlock_irqrestore(&sc->recv_io.free.lock, flags);
++
++	queue_work(sc->workqueue, &sc->recv_io.posted.refill_work);
++}
 -- 
 2.43.0
 
