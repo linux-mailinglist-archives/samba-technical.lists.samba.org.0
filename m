@@ -2,44 +2,44 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3059AC86B20
-	for <lists+samba-technical@lfdr.de>; Tue, 25 Nov 2025 19:46:00 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 178E5C8695B
+	for <lists+samba-technical@lfdr.de>; Tue, 25 Nov 2025 19:24:04 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=ghht5wrUIFsWjZl0MqxftkB15/dyfPbflN3Wt3owW2I=; b=i98ntiJ/t+TceFAHPKL5th+AYg
-	cor/O15TXFyDskRrjRStFPo8lLXjyTGycLD8SkJ5n1jAXvGnZIotdLOdpZZxkJHpa3byn8JvitC9N
-	PlxBJwfMQCso47NeXO856jXsSPPZuTKb4GPOQHvrH5+cpb7y4N00aev/g2NkKKV1QcOqdAlV5B5rX
-	a3JFyYMs/FA83VuYm6DNcchNm1B646LU5Sry7fBYYdnIf+reMP33xDRUqWf/wWJNU2WaDImgRnRGy
-	ZmVQhm/y/1ebJTyDBFRQoYbyEKUVCXh6VZP4RYR4UTaqJpQZATqXher/VIq3L21rq54ij9J+00fx9
-	0UvgkrAQ==;
-Received: from ip6-localhost ([::1]:45692 helo=hr1.samba.org) 
+	bh=71f4sc2EsWZieJfYMQuL2WkXoEDx+KuNUMuN4Uwu6ss=; b=JcWw/ftERcXi4jNwQ7yNksy7jM
+	lwJT+KyWbxzqvboDtuY/hwpwZyozs18ByST4T6Ln5PN5FWU2ECDF7whs6KLH2Uls0tKEfWd+sht7C
+	+DG+44pbiSAWigXhTICo+FPkgSS+2Z85DI9Ym7R/AEVTrRuLpzrkMb/f6rDGZ5FGXSPGv+tvMpy+n
+	kj8Bcm2LbL0OtDtdGs9Jwzy7DX4j6/l4vkypuXk6iRKMpS6kFIY9j+ZaZnHJltoqm9vslQIrGKdQD
+	67LM+RATyLkjJNC9itv/IqO6jGcVKCYNIkm/MX3ogsWVLQQbn8GXWllsS/IVvgmhaBgikKZ7tcp81
+	kclHQZLA==;
+Received: from ip6-localhost ([::1]:48756 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1vNy30-00DIEc-Fi; Tue, 25 Nov 2025 18:45:54 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:33114) 
+	id 1vNxhg-00DExa-Le; Tue, 25 Nov 2025 18:23:53 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:32578) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vNy2t-00DIEF-3X
- for samba-technical@lists.samba.org; Tue, 25 Nov 2025 18:45:51 +0000
+ (Exim) id 1vNxfq-00DEXQ-OH
+ for samba-technical@lists.samba.org; Tue, 25 Nov 2025 18:22:16 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Message-ID:Date:Cc:To:From;
- bh=ghht5wrUIFsWjZl0MqxftkB15/dyfPbflN3Wt3owW2I=; b=q53zH27zWGswLUUS/cIoZvyrb6
- LGcEHuckrwUG2R+IKEz7UleY7Hkhx5C6JLjS1w9su6p/KYL000MP3X16z04IxKsR62WKX+f3FgUny
- dIidVLEgJwA+TMM8bxlydrLn0RYd859JvAaPO4bEzVpBk962aPzYXJSHk+6bt2Zy8x9Jl7GUsFpYK
- wTkOUCpCOl1xhqZEcBLbMkzirXoSyuzUcWbe16wzQKrgdEQAGKkj+WnpIEHVq/VPuoBWE7n59CM0M
- o88NJL6HQ0HCqUNCCkk1yPlIUbW2J29w1RYMv9uzR+ZfStp+o06o0JgeqH0z2Tv7RYyWXtyfde9eR
- Oujp+SBzzfw4lDHsHMQmJUIn3YmUAbxCy2Z60Q7AYplxNszVG+AMbW61xOkwrY6lUpHs6APWJW6qA
- k9l2cLiuPGRGKF1Rm6jmnZp2EgM9Q6NyD8pBa/JfUx7gdgdwvuRN/nXXoIcvaT+MwB/x7Zl/zuegY
- KpTmShG4GYMnjekcefhZaY0D;
+ bh=71f4sc2EsWZieJfYMQuL2WkXoEDx+KuNUMuN4Uwu6ss=; b=LnsqwIBEHuSeadLNik0st4r9+4
+ ON7EkzU7ujSi4ROMmPNM9oqlxCVnnImle4MgSAtyJzEpjIagfbl5v2vEbUYiLO3gtvMBm4iAX+4tD
+ aHai/j0GIxtkW3fxkV6cnlbeB8z6hmGxohA05oX1yoBtQu/RBRflg+52z9QBbdaOSuWEEaicG8gBe
+ GZQ0c6TtqT45qncpqgDJ/OjO2espIucqZNI5H8bBez1g/egi4juW0ypCtIXL5Ab0YJFP8fr3cG6m1
+ QuQ4OUJb97YO0gANfHUX9vEK+jqjv5y/ZAZqEZ4O9DmNqovY2oVgfoNo9CijNZnsu0+SS5TwKLt9c
+ DtVA1rcWbKdvLYS7q1ey4ROmScAFgD7bkaEBRlECFHNXjD2VonCvI0dTBUIn9tJcH4rLJ8Y0YDpMa
+ AU1yMfoOF7gaz9rtSHYeoFXdD89Xmss1QHnoJNd9TTmjmPza0KiQ2tHY0XbJZKE/jaGJQlWJf5/Ds
+ vHvlY/3bx0jfQqEwfIyrHsyv;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vNxWA-00FeSy-0W; Tue, 25 Nov 2025 18:11:59 +0000
+ (Exim) id 1vNxWK-00FeUe-0r; Tue, 25 Nov 2025 18:12:09 +0000
 To: linux-cifs@vger.kernel.org,
 	samba-technical@lists.samba.org
-Subject: [PATCH v4 109/145] smb: server: make use of
- smbdirect_connection_{create, destroy}_mem_pools()
-Date: Tue, 25 Nov 2025 18:55:55 +0100
-Message-ID: <acb080c1751c2ce3ec6b2e2006dadc7e38f82382.1764091285.git.metze@samba.org>
+Subject: [PATCH v4 110/145] smb: server: make use of
+ smbdirect_map_sges_from_iter()
+Date: Tue, 25 Nov 2025 18:55:56 +0100
+Message-ID: <4806bdb8079a17cb3388837296128a1639de4c15.1764091285.git.metze@samba.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1764091285.git.metze@samba.org>
 References: <cover.1764091285.git.metze@samba.org>
@@ -66,19 +66,8 @@ Cc: metze@samba.org, Steve French <smfrench@gmail.com>,
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This were based on smb_direct_{create,destroy}_pools() in the server.
-
-The main logical differences are the following:
-
-We now don't use smbdirect_connection_get_recv_io() on cleanup,
-instead it uses list_for_each_entry_safe()...
-
-We don't generate warnings if smbdirect_recv_io payload
-is copied into userspace buffers. This doesn't happen
-in the server anyway.
-
-And it uses list_add_tail() just to let me feel
-better when looking at the code...
+It will make it easier to move stuff into common code when
+both client and server use smbdirect_map_sges_from_iter().
 
 Cc: Namjae Jeon <linkinjeon@kernel.org>
 Cc: Steve French <smfrench@gmail.com>
@@ -88,126 +77,97 @@ Cc: samba-technical@lists.samba.org
 Signed-off-by: Stefan Metzmacher <metze@samba.org>
 Signed-off-by: Steve French <stfrench@microsoft.com>
 ---
- fs/smb/server/transport_rdma.c | 78 ++--------------------------------
- 1 file changed, 3 insertions(+), 75 deletions(-)
+ fs/smb/server/transport_rdma.c | 58 +++++++++++-----------------------
+ 1 file changed, 19 insertions(+), 39 deletions(-)
 
 diff --git a/fs/smb/server/transport_rdma.c b/fs/smb/server/transport_rdma.c
-index 3b324b42d009..6cbd81406e94 100644
+index 6cbd81406e94..c8839d73a7a1 100644
 --- a/fs/smb/server/transport_rdma.c
 +++ b/fs/smb/server/transport_rdma.c
-@@ -202,7 +202,6 @@ static inline int get_buf_page_count(void *buf, int size)
- 		(uintptr_t)buf / PAGE_SIZE;
+@@ -1016,18 +1016,6 @@ static int get_sg_list(void *buf, int size, struct scatterlist *sg_list, int nen
+ 	return i;
  }
  
--static void smb_direct_destroy_pools(struct smbdirect_socket *sc);
- static void smb_direct_post_recv_credits(struct work_struct *work);
- static int smb_direct_post_send_data(struct smbdirect_socket *sc,
- 				     struct smbdirect_send_batch *send_ctx,
-@@ -259,6 +258,7 @@ static struct smb_direct_transport *alloc_transport(struct rdma_cm_id *cm_id)
- 				     smb_direct_logging_needed,
- 				     smb_direct_logging_vaprintf);
- 	sc->send_io.mem.gfp_mask = KSMBD_DEFAULT_GFP;
-+	sc->recv_io.mem.gfp_mask = KSMBD_DEFAULT_GFP;
- 	/*
- 	 * from here we operate on the copy.
- 	 */
-@@ -351,7 +351,7 @@ static void free_transport(struct smb_direct_transport *t)
- 		rdma_destroy_id(sc->rdma.cm_id);
- 	}
- 
--	smb_direct_destroy_pools(sc);
-+	smbdirect_connection_destroy_mem_pools(sc);
- 	ksmbd_conn_free(KSMBD_TRANS(t)->conn);
- }
- 
-@@ -1747,78 +1747,6 @@ static int smb_direct_init_params(struct smbdirect_socket *sc)
- 	return 0;
- }
- 
--static void smb_direct_destroy_pools(struct smbdirect_socket *sc)
+-static int get_mapped_sg_list(struct ib_device *device, void *buf, int size,
+-			      struct scatterlist *sg_list, int nentries,
+-			      enum dma_data_direction dir)
 -{
--	struct smbdirect_recv_io *recvmsg;
+-	int npages;
 -
--	while ((recvmsg = smbdirect_connection_get_recv_io(sc)))
--		mempool_free(recvmsg, sc->recv_io.mem.pool);
--
--	mempool_destroy(sc->recv_io.mem.pool);
--	sc->recv_io.mem.pool = NULL;
--
--	kmem_cache_destroy(sc->recv_io.mem.cache);
--	sc->recv_io.mem.cache = NULL;
--
--	mempool_destroy(sc->send_io.mem.pool);
--	sc->send_io.mem.pool = NULL;
--
--	kmem_cache_destroy(sc->send_io.mem.cache);
--	sc->send_io.mem.cache = NULL;
+-	npages = get_sg_list(buf, size, sg_list, nentries);
+-	if (npages < 0)
+-		return -EINVAL;
+-	return ib_dma_map_sg(device, sg_list, npages, dir);
 -}
 -
--static int smb_direct_create_pools(struct smbdirect_socket *sc)
--{
--	struct smbdirect_socket_parameters *sp = &sc->parameters;
--	char name[80];
--	int i;
--	struct smbdirect_recv_io *recvmsg;
--
--	snprintf(name, sizeof(name), "smbdirect_send_io_pool_%p", sc);
--	sc->send_io.mem.cache = kmem_cache_create(name,
--					     sizeof(struct smbdirect_send_io) +
--					      sizeof(struct smbdirect_negotiate_resp),
--					     0, SLAB_HWCACHE_ALIGN, NULL);
--	if (!sc->send_io.mem.cache)
--		return -ENOMEM;
--
--	sc->send_io.mem.pool = mempool_create(sp->send_credit_target,
--					    mempool_alloc_slab, mempool_free_slab,
--					    sc->send_io.mem.cache);
--	if (!sc->send_io.mem.pool)
--		goto err;
--
--	snprintf(name, sizeof(name), "smbdirect_recv_io_pool_%p", sc);
--	sc->recv_io.mem.cache = kmem_cache_create(name,
--					     sizeof(struct smbdirect_recv_io) +
--					     sp->max_recv_size,
--					     0, SLAB_HWCACHE_ALIGN, NULL);
--	if (!sc->recv_io.mem.cache)
--		goto err;
--
--	sc->recv_io.mem.pool =
--		mempool_create(sp->recv_credit_max, mempool_alloc_slab,
--			       mempool_free_slab, sc->recv_io.mem.cache);
--	if (!sc->recv_io.mem.pool)
--		goto err;
--
--	for (i = 0; i < sp->recv_credit_max; i++) {
--		recvmsg = mempool_alloc(sc->recv_io.mem.pool, KSMBD_DEFAULT_GFP);
--		if (!recvmsg)
--			goto err;
--		recvmsg->socket = sc;
--		recvmsg->sge.length = 0;
--		INIT_WORK(&recvmsg->complex_work, __smbdirect_socket_disabled_work);
--		disable_work_sync(&recvmsg->complex_work);
--		list_add(&recvmsg->list, &sc->recv_io.free.list);
--	}
--
--	return 0;
--err:
--	smb_direct_destroy_pools(sc);
--	return -ENOMEM;
--}
--
- static u32 smb_direct_rdma_rw_send_wrs(struct ib_device *dev, const struct ib_qp_init_attr *attr)
+ static int post_sendmsg(struct smbdirect_socket *sc,
+ 			struct smbdirect_send_batch *send_ctx,
+ 			struct smbdirect_send_io *msg)
+@@ -1071,10 +1059,9 @@ static int smb_direct_post_send_data(struct smbdirect_socket *sc,
+ 				     struct kvec *iov, int niov,
+ 				     int remaining_data_length)
  {
- 	/*
-@@ -2116,7 +2044,7 @@ static int smb_direct_connect(struct smbdirect_socket *sc)
- 		return ret;
+-	int i, j, ret;
++	int i, ret;
+ 	struct smbdirect_send_io *msg;
+ 	int data_length;
+-	struct scatterlist sg[SMBDIRECT_SEND_IO_MAX_SGE - 1];
+ 
+ 	ret = wait_for_send_lcredit(sc, send_ctx);
+ 	if (ret)
+@@ -1093,34 +1080,27 @@ static int smb_direct_post_send_data(struct smbdirect_socket *sc,
+ 	if (ret)
+ 		goto header_failed;
+ 
+-	for (i = 0; i < niov; i++) {
+-		struct ib_sge *sge;
+-		int sg_cnt;
+-
+-		sg_init_table(sg, SMBDIRECT_SEND_IO_MAX_SGE - 1);
+-		sg_cnt = get_mapped_sg_list(sc->ib.dev,
+-					    iov[i].iov_base, iov[i].iov_len,
+-					    sg, SMBDIRECT_SEND_IO_MAX_SGE - 1,
+-					    DMA_TO_DEVICE);
+-		if (sg_cnt <= 0) {
+-			pr_err("failed to map buffer\n");
+-			ret = -ENOMEM;
++	if (data_length) {
++		struct smbdirect_map_sges extract = {
++			.num_sge	= msg->num_sge,
++			.max_sge	= ARRAY_SIZE(msg->sge),
++			.sge		= msg->sge,
++			.device		= sc->ib.dev,
++			.local_dma_lkey	= sc->ib.pd->local_dma_lkey,
++			.direction	= DMA_TO_DEVICE,
++		};
++		struct iov_iter iter;
++
++		iov_iter_kvec(&iter, ITER_SOURCE, iov, niov, data_length);
++
++		ret = smbdirect_map_sges_from_iter(&iter, data_length, &extract);
++		if (ret < 0)
+ 			goto err;
+-		} else if (sg_cnt + msg->num_sge > SMBDIRECT_SEND_IO_MAX_SGE) {
+-			pr_err("buffer not fitted into sges\n");
+-			ret = -E2BIG;
+-			ib_dma_unmap_sg(sc->ib.dev, sg, sg_cnt,
+-					DMA_TO_DEVICE);
++		if (WARN_ON_ONCE(ret != data_length)) {
++			ret = -EIO;
+ 			goto err;
+ 		}
+-
+-		for (j = 0; j < sg_cnt; j++) {
+-			sge = &msg->sge[msg->num_sge];
+-			sge->addr = sg_dma_address(&sg[j]);
+-			sge->length = sg_dma_len(&sg[j]);
+-			sge->lkey  = sc->ib.pd->local_dma_lkey;
+-			msg->num_sge++;
+-		}
++		msg->num_sge = extract.num_sge;
  	}
  
--	ret = smb_direct_create_pools(sc);
-+	ret = smbdirect_connection_create_mem_pools(sc);
- 	if (ret) {
- 		pr_err("Can't init RDMA pool: %d\n", ret);
- 		return ret;
+ 	ret = post_sendmsg(sc, send_ctx, msg);
 -- 
 2.43.0
 
