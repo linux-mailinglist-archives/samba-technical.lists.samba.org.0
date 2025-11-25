@@ -2,44 +2,44 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 89BEAC8681F
-	for <lists+samba-technical@lfdr.de>; Tue, 25 Nov 2025 19:12:32 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 54FB8C86822
+	for <lists+samba-technical@lfdr.de>; Tue, 25 Nov 2025 19:12:45 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=xgRkxj8MlIApNKFGbQzthm1RA/kbsz15MGuOKSS5dII=; b=zkZrxAYLWmOjiZC07O+yh6hSpf
-	k+3W1U758krc0gbCxl05OgSZ1VDf9PhTEC2zfDnxgfymjF3Mq5F8EcFapXgQMjl27/6r8MBH0fiat
-	McO1PXfsPfdUKujLMZ7cgs9KHMtMbeVNllTuMnp4X67hzWsgI/d5oWtui1dYfLsYm/UeuWizfS5qU
-	tBwN3zCVoOpm3koM9AXdm7BRI0eHJ3752zWpZYf74UHxB2ZnulULpztxPF1nLu+YhL9bMRbeZYGQ/
-	v8BSAOmbYeJ0NU0PqlR4DI21qfT0UNiWEYWyjEm9yZOPZCyBdPIXutR0Rs2usJKeei7VPhzcgeD4z
-	UA1r6REQ==;
-Received: from ip6-localhost ([::1]:31984 helo=hr1.samba.org) 
+	bh=octnfcbzKHl9HbGtvbHo3ac/1He9gMP6otpI2tm785w=; b=1WPmq6sDmYWrDdcopeJbPvWcIL
+	ovA+gS5B5aGHwOpVapZ9y5ppD5kMW1PSY/jcm5ZcTIEmZ/jjTbSiQaVjjUjaWFWlo1W3gR4xPxfj0
+	eSBr4AZ+2/t4PDRw0UrookkzKJ3frETRRkoa3Sjxwxp7nxkcZ11ZW1G1F8cTZD15wh1QuAFP48TVA
+	ukA/sMQEdWD+MYHTG0BgnHKZHR2NmyFVTu+SpU8kK3DjbGJTzBoJ+bXoE3HOTOpM9RAsMej/ipYH1
+	l4YbiIS2aGdQawexGsBNfLl1SBCOCYIMfoo6K3ibDMDZKcvfge2BNL34mmFyvun9fYwkfkaUdmrPn
+	AKGDN3IA==;
+Received: from ip6-localhost ([::1]:51946 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1vNxWa-00DBM1-RG; Tue, 25 Nov 2025 18:12:25 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:43920) 
+	id 1vNxWm-00DBQe-8K; Tue, 25 Nov 2025 18:12:37 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:43932) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vNxQd-00D9Wk-0f
- for samba-technical@lists.samba.org; Tue, 25 Nov 2025 18:06:23 +0000
+ (Exim) id 1vNxQg-00D9Xh-3p
+ for samba-technical@lists.samba.org; Tue, 25 Nov 2025 18:06:25 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Message-ID:Date:Cc:To:From;
- bh=xgRkxj8MlIApNKFGbQzthm1RA/kbsz15MGuOKSS5dII=; b=beUPiB3Syb19521SJpqzI8XTs8
- uu9powd+uu5EHd/8w2Vs3eZw+h96BaFCORscYvRfHB5VkfiL+HtY5riqxp5gO4MoWpN7koBnybeXL
- T1Vdjd1KfrRxvlx+pl4fsmmXnYMnI9o4cg+WJu69EBe6Wx8BqN8p2CNqqz9VfnJ6r7iFsAhPt1yqm
- 2gPBNgWrMV82SfVHdViyegUaahYrsTT5W5iZ5jAe7mtb7G1sBzP5YXt1V9uEgacxXrbNnW3q3vczh
- PsMStUtAQMEkAKlVpB4CM2vam7MDaDPgezx2Bpa0xjFAqZXucf8Xwz/EJ5xcYUe+4TmZ1Ttq7Zh6h
- H9W/VhpLiizu5SoPW1LfNYhglcSVpnvaTE6ak5iQH+ckmJ+QjzdseAgAhioqPi83qovjzrws5O3r+
- JrvfWz4+UUc/do7B1YoLFLFweKAUPdF9mMJ8e67QDmVw6pFvQCv5LSWnP/YhyV7eVkWG6jhO57fE1
- 4iBHcIR8HgrRTYCZpij3Ui4V;
+ bh=octnfcbzKHl9HbGtvbHo3ac/1He9gMP6otpI2tm785w=; b=tkFXeLHnBgjpGY4RWtzGW3IHfn
+ B+UvOlk/48zcYd10rCVqjtPT9jPBGnXnRP82VTNeWanM4Q2vEP65giSEM5VEOOoYn2VochghNBM8i
+ nQeNX3q3QOxRLRaN7xu+ba1qVkigOnspBh5uLtpBflGzrMQtNqpCY58RzzPsgPtiUNQQH1wQxP6+L
+ 4Gg5aH/69LeOwwgwWw40iLLpvj/NrOMkOt3hE2RosJBPyzWZzUJ4CbBaI59vBSTI8zZGfxi5EDpFO
+ DL8TfV2gEnEUG1vuSmQq7viP6ODpc15XlIXzR/YUAuzRmd5vyrtX/Q6e+uJdxUCWAytvK/zJqjqbY
+ ojf2pDC6nobbNfbMh5+O6UL3gsuyTseuPw8j1QnteEPF8aB9GC0V+7o+IFuOTVr2VuoA1n38HvPdk
+ KouxRtCOWG9JrMZ7FsAQMtlVvVFatIIQBEDJHl33exYlRf8+lnoVeK3Natkluk3/AM3LZARC4Q1UJ
+ tsjphUNegMZEPhnHk3LHLX49;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vNxNa-00FdaN-2p; Tue, 25 Nov 2025 18:03:07 +0000
+ (Exim) id 1vNxNh-00Fday-2Z; Tue, 25 Nov 2025 18:03:14 +0000
 To: linux-cifs@vger.kernel.org,
 	samba-technical@lists.samba.org
-Subject: [PATCH v4 061/145] smb: client: make use of
- smbdirect_socket_prepare_create()
-Date: Tue, 25 Nov 2025 18:55:07 +0100
-Message-ID: <6efdeba34072c02767779107b9d5b6fa3c684757.1764091285.git.metze@samba.org>
+Subject: [PATCH v4 062/145] smb: client: make use of
+ smbdirect_socket_set_logging()
+Date: Tue, 25 Nov 2025 18:55:08 +0100
+Message-ID: <d27914583422a94ad9ab48d698a7cdc0c167c0f2.1764091285.git.metze@samba.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1764091285.git.metze@samba.org>
 References: <cover.1764091285.git.metze@samba.org>
@@ -66,7 +66,8 @@ Cc: Tom Talpey <tom@talpey.com>, metze@samba.org,
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This prepares the use of functions from smbdirect_connection.c.
+This will allow the logging to keep working as before,
+when we move to common functions in the next commits.
 
 Cc: Steve French <smfrench@gmail.com>
 Cc: Tom Talpey <tom@talpey.com>
@@ -77,69 +78,65 @@ Cc: samba-technical@lists.samba.org
 Signed-off-by: Stefan Metzmacher <metze@samba.org>
 Signed-off-by: Steve French <stfrench@microsoft.com>
 ---
- fs/smb/client/smbdirect.c | 35 +++++++++++++++++++++--------------
- 1 file changed, 21 insertions(+), 14 deletions(-)
+ fs/smb/client/smbdirect.c | 38 ++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 38 insertions(+)
 
 diff --git a/fs/smb/client/smbdirect.c b/fs/smb/client/smbdirect.c
-index 320166f5d267..05ac030ab653 100644
+index 05ac030ab653..3d3b6fa65781 100644
 --- a/fs/smb/client/smbdirect.c
 +++ b/fs/smb/client/smbdirect.c
-@@ -1800,6 +1800,7 @@ static struct smbd_connection *_smbd_get_connection(
- 	int rc;
- 	struct smbd_connection *info;
- 	struct smbdirect_socket *sc;
-+	struct smbdirect_socket_parameters init_params = {};
- 	struct smbdirect_socket_parameters *sp;
- 	struct rdma_conn_param conn_param;
- 	struct ib_qp_cap qp_cap;
-@@ -1810,20 +1811,10 @@ static struct smbd_connection *_smbd_get_connection(
- 	char wq_name[80];
- 	struct workqueue_struct *workqueue;
+@@ -156,6 +156,43 @@ static void smbd_disconnect_rdma_connection(struct smbdirect_socket *sc);
+  */
+ #include "../common/smbdirect/smbdirect_all_c_files.c"
  
--	info = kzalloc(sizeof(struct smbd_connection), GFP_KERNEL);
--	if (!info)
--		return NULL;
--	sc = &info->socket;
--	scnprintf(wq_name, ARRAY_SIZE(wq_name), "smbd_%p", sc);
--	workqueue = create_workqueue(wq_name);
--	if (!workqueue)
--		goto create_wq_failed;
--	smbdirect_socket_init(sc);
--	sc->workqueue = workqueue;
--	sp = &sc->parameters;
--
--	INIT_WORK(&sc->disconnect_work, smbd_disconnect_rdma_work);
--
-+	/*
-+	 * Create the initial parameters
-+	 */
-+	sp = &init_params;
- 	sp->resolve_addr_timeout_msec = RDMA_RESOLVE_TIMEOUT;
- 	sp->resolve_route_timeout_msec = RDMA_RESOLVE_TIMEOUT;
- 	sp->rdma_connect_timeout_msec = RDMA_RESOLVE_TIMEOUT;
-@@ -1839,6 +1830,22 @@ static struct smbd_connection *_smbd_get_connection(
- 	sp->keepalive_interval_msec = smbd_keep_alive_interval * 1000;
- 	sp->keepalive_timeout_msec = KEEPALIVE_RECV_TIMEOUT * 1000;
- 
-+	info = kzalloc(sizeof(struct smbd_connection), GFP_KERNEL);
-+	if (!info)
-+		return NULL;
-+	sc = &info->socket;
-+	scnprintf(wq_name, ARRAY_SIZE(wq_name), "smbd_%p", sc);
-+	workqueue = create_workqueue(wq_name);
-+	if (!workqueue)
-+		goto create_wq_failed;
-+	smbdirect_socket_prepare_create(sc, sp, workqueue);
-+	/*
-+	 * from here we operate on the copy.
-+	 */
-+	sp = &sc->parameters;
++static bool smbd_logging_needed(struct smbdirect_socket *sc,
++				void *private_ptr,
++				unsigned int lvl,
++				unsigned int cls)
++{
++#define BUILD_BUG_SAME(x) BUILD_BUG_ON(x != SMBDIRECT_LOG_ ##x)
++	BUILD_BUG_SAME(ERR);
++	BUILD_BUG_SAME(INFO);
++#undef BUILD_BUG_SAME
++#define BUILD_BUG_SAME(x) BUILD_BUG_ON(x != SMBDIRECT_ ##x)
++	BUILD_BUG_SAME(LOG_OUTGOING);
++	BUILD_BUG_SAME(LOG_INCOMING);
++	BUILD_BUG_SAME(LOG_READ);
++	BUILD_BUG_SAME(LOG_WRITE);
++	BUILD_BUG_SAME(LOG_RDMA_SEND);
++	BUILD_BUG_SAME(LOG_RDMA_RECV);
++	BUILD_BUG_SAME(LOG_KEEP_ALIVE);
++	BUILD_BUG_SAME(LOG_RDMA_EVENT);
++	BUILD_BUG_SAME(LOG_RDMA_MR);
++#undef BUILD_BUG_SAME
 +
-+	INIT_WORK(&sc->disconnect_work, smbd_disconnect_rdma_work);
++	if (lvl <= smbd_logging_level || cls & smbd_logging_class)
++		return true;
++	return false;
++}
 +
- 	rc = smbd_ia_open(sc, dstaddr, port);
- 	if (rc) {
- 		log_rdma_event(INFO, "smbd_ia_open rc=%d\n", rc);
++static void smbd_logging_vaprintf(struct smbdirect_socket *sc,
++				  const char *func,
++				  unsigned int line,
++				  void *private_ptr,
++				  unsigned int lvl,
++				  unsigned int cls,
++				  struct va_format *vaf)
++{
++	cifs_dbg(VFS, "%s:%u %pV", func, line, vaf);
++}
++
+ #define log_rdma(level, class, fmt, args...)				\
+ do {									\
+ 	if (level <= smbd_logging_level || class & smbd_logging_class)	\
+@@ -1839,6 +1876,7 @@ static struct smbd_connection *_smbd_get_connection(
+ 	if (!workqueue)
+ 		goto create_wq_failed;
+ 	smbdirect_socket_prepare_create(sc, sp, workqueue);
++	smbdirect_socket_set_logging(sc, NULL, smbd_logging_needed, smbd_logging_vaprintf);
+ 	/*
+ 	 * from here we operate on the copy.
+ 	 */
 -- 
 2.43.0
 
