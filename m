@@ -2,44 +2,44 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 56224C86575
-	for <lists+samba-technical@lfdr.de>; Tue, 25 Nov 2025 18:57:32 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0440FC865A0
+	for <lists+samba-technical@lfdr.de>; Tue, 25 Nov 2025 18:58:04 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=bqIVzD/mSlrQC1NzWaIrNP6ys7jUNsLCqnfxEag7+w8=; b=T8JJdYgnyXei86L98T9HOfW05t
-	nF7T0byoVUPEnGo3cGpe22PvrOyO1IfK9Q1Wl9OHzgbHP5llvroPYQT+rNLK9TElKHMGW2UTP+umq
-	MeQwTF+8y+zO0T+f6XBfG0d5qDhkGt2+Lv26ZMWcVDkXQ62wMzOiPAcb4A7805jRtLsqN+qcxDwcC
-	yzi5Or0DQmxWZw/3M7WCuznVkDLtfLrG/Z2Jw7WE1XX6UmqwIBY1KRmn/zIiA4pTLXSI7HtFRFVLF
-	Q0FuidWWM0a7T6uannjmrj3fcubpC8hiQTMySF0ydzCW9Nl7rQq/XnRbElHhjUT2R8TqSvH2YFv5R
-	z+JYGPmw==;
-Received: from ip6-localhost ([::1]:59850 helo=hr1.samba.org) 
+	bh=Op+S5bVdjI3q0kJR9LDywlYCBGb1n34imLxkNJ2rr/k=; b=Pj8eykHgz6F3F/T8PrqEQEFRwv
+	w94DSpylc9znFkyPu/bxZ6GfXCPvWvUN3H/+HX1a4Yx6dHbvf840KllycJ/2aXUCwIfLAlkyQwRfa
+	EVsp0L5mHy1fMGirTntVJGdUqRSX93BD1JW2BrEhGPUVYztgHmYn/Wu+32llupX20PcOCBchPc6xc
+	bBH0KAe21ej8ty8DkQ2KBcfGe5G3gGRdEW4+qwFXVSMvHiW1rDuylz6tg/ju2Qo7UVLwfYT3XisvF
+	74vHrlAzrv05Cm2jVVa+w8qlGGCB7+8Z/C6ddpjte+rLrGF96i4zGg9Aj1B/j1rTX/C9FjMoizXzw
+	8vhj1sgg==;
+Received: from ip6-localhost ([::1]:18034 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1vNxHr-00D6at-Gh; Tue, 25 Nov 2025 17:57:12 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:32506) 
+	id 1vNxIP-00D6di-ET; Tue, 25 Nov 2025 17:57:47 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:61634) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vNxHf-00D6Yr-MI
- for samba-technical@lists.samba.org; Tue, 25 Nov 2025 17:57:03 +0000
+ (Exim) id 1vNxHk-00D6aJ-SS
+ for samba-technical@lists.samba.org; Tue, 25 Nov 2025 17:57:08 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Message-ID:Date:Cc:To:From;
- bh=bqIVzD/mSlrQC1NzWaIrNP6ys7jUNsLCqnfxEag7+w8=; b=Uo2coMEPNxAzspYE7V3YIWYZ64
- b5wwJ9J57AYowMTqlzS36/VV1iXFOUIE37ZoVqUyeXIFO6pxBokfjAQU+ejH8a8I6snshynxbobAU
- qJNhQbrTnI+Etug+CAeZeZtGcKaeyl04VNM6PktUXUPEOuI7YIbRStggoUdLTukDmxytqw6KzNkqh
- svhEM8auSugsQPxuDln2+kLt+nxT9x9QpxPHwulKN3zGKGTefQ3hlDxI5qAS5gFg4FSFXlMSM6MNK
- hqHzl/sMEdlhduUk5dtWTONt5gghZ+3qMzZxUedLaAUGE8m8EiF5SXLwO1D/zW1v+eMYGKyuUhdwW
- piEIbDW8cTkJzKD1RTVveZbg/l2tTwkDUnmo4vndNlRBVZKzLyAZrblK6xynROHPeXLKkY5ckkmGr
- KO1vy5YPqrvhyPWPHq9d7S51wgFDCY6B2LwLbY01quIw1feVU/BnebOxp3lAmrsIEL+32EEZ/jBDF
- 6G8o+hlotuDI/+lbxUdfHmfM;
+ bh=Op+S5bVdjI3q0kJR9LDywlYCBGb1n34imLxkNJ2rr/k=; b=xhOHWsXB7erVFEh5F6u/3z2s8R
+ YEJoJy3fq5dIsKuo0oAzNecQpi1h7lbOxrV5jwabNAGnHK9W+pKfqfEHwEQqRqDyAGop2XHTvZ+zz
+ 0s7W/nRZnLGOPpJ9fEN8UJJ+jpam+AWco9z7PN3p7Ndc9CBgpSEFi34UbzZhlBeqndYoxJUp9sbl1
+ AAc4HpLZNzfIFTbvdESrDwV6UQ3tfMK4pPdlFFBIH7gKrmVdfbOlze+2SRoh1C0Rc1x+hB/4kQ2hC
+ nfJqyaMS4GV8I0NjHzB2iYltgcTee5X+EJP1U9PWDCDZRvTRP6ZF1Cheqdxa19PpCAF18V7mem5GI
+ IgA0JgYlec2Ja0G8BqXJlE6iosl09AGHgZuZX4OXoeQ7RDJvBBYqsx7pOZlWQ0CXJlxzff/dfzWuy
+ nNN3MqeqNosRF1SKUN/Rl/+zhW0zfNa0HAXXayGzgl6j6Oc5rq0V/TDmnqM+Pnyn2sh0o1LcaxXyP
+ 6Mbq5gMipo2ToknGHiek8Tzn;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vNxHd-00FcTV-1S; Tue, 25 Nov 2025 17:56:57 +0000
+ (Exim) id 1vNxHj-00FcTw-00; Tue, 25 Nov 2025 17:57:03 +0000
 To: linux-cifs@vger.kernel.org,
 	samba-technical@lists.samba.org
-Subject: [PATCH v4 003/145] smb: smbdirect: add some logging to
- SMBDIRECT_CHECK_STATUS_{WARN, DISCONNECT}()
-Date: Tue, 25 Nov 2025 18:54:09 +0100
-Message-ID: <9e4f4ecefa69ad9979bb4bb5547aaacd3ddb2260.1764091285.git.metze@samba.org>
+Subject: [PATCH v4 004/145] smb: smbdirect: introduce
+ smbdirect_recv_io.complex_work
+Date: Tue, 25 Nov 2025 18:54:10 +0100
+Message-ID: <a514dbaeac0c38c77f1107c90615e53e44f839f5.1764091285.git.metze@samba.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1764091285.git.metze@samba.org>
 References: <cover.1764091285.git.metze@samba.org>
@@ -65,7 +65,16 @@ Cc: metze@samba.org, Steve French <smfrench@gmail.com>,
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This should make it easier to analyze any possible problems.
+This will be used by client and server in order to implement
+async connect/accept logic.
+
+The problems is that ib_post_recv() completions can run
+in an interrupt context, where we are not allowed to
+sleep.
+
+During the negotiation phase we need to do complex things
+e.g. allocate memory, which might sleep, so we'll offload
+this to the workqueue instead.
 
 Cc: Steve French <smfrench@gmail.com>
 Cc: Tom Talpey <tom@talpey.com>
@@ -75,48 +84,28 @@ Cc: linux-cifs@vger.kernel.org
 Cc: samba-technical@lists.samba.org
 Signed-off-by: Stefan Metzmacher <metze@samba.org>
 ---
- fs/smb/common/smbdirect/smbdirect_socket.h | 21 ++++++++++++++++++++-
- 1 file changed, 20 insertions(+), 1 deletion(-)
+ fs/smb/common/smbdirect/smbdirect_socket.h | 8 ++++++++
+ 1 file changed, 8 insertions(+)
 
 diff --git a/fs/smb/common/smbdirect/smbdirect_socket.h b/fs/smb/common/smbdirect/smbdirect_socket.h
-index f449fcd30235..cf8a16d3d895 100644
+index cf8a16d3d895..ea269f55935d 100644
 --- a/fs/smb/common/smbdirect/smbdirect_socket.h
 +++ b/fs/smb/common/smbdirect/smbdirect_socket.h
-@@ -535,7 +535,6 @@ static __always_inline void smbdirect_socket_init(struct smbdirect_socket *sc)
+@@ -631,6 +631,14 @@ struct smbdirect_recv_io {
+ #define SMBDIRECT_RECV_IO_MAX_SGE 1
+ 	struct ib_sge sge;
  
- #define __SMBDIRECT_CHECK_STATUS_WARN(__sc, __expected_status, __unexpected_cmd) \
- 	__SMBDIRECT_CHECK_STATUS_FAILED(__sc, __expected_status, \
--	, \
- 	{ \
- 		const struct sockaddr_storage *__src = NULL; \
- 		const struct sockaddr_storage *__dst = NULL; \
-@@ -543,6 +542,26 @@ static __always_inline void smbdirect_socket_init(struct smbdirect_socket *sc)
- 			__src = &(__sc)->rdma.cm_id->route.addr.src_addr; \
- 			__dst = &(__sc)->rdma.cm_id->route.addr.dst_addr; \
- 		} \
-+		smbdirect_log_rdma_event(sc, SMBDIRECT_LOG_INFO, \
-+			"expected[%s] != %s first_error=%1pe local=%pISpsfc remote=%pISpsfc\n", \
-+			smbdirect_socket_status_string(__expected_status), \
-+			smbdirect_socket_status_string((__sc)->status), \
-+			SMBDIRECT_DEBUG_ERR_PTR((__sc)->first_error), \
-+			__src, __dst); \
-+	}, \
-+	{ \
-+		const struct sockaddr_storage *__src = NULL; \
-+		const struct sockaddr_storage *__dst = NULL; \
-+		if ((__sc)->rdma.cm_id) { \
-+			__src = &(__sc)->rdma.cm_id->route.addr.src_addr; \
-+			__dst = &(__sc)->rdma.cm_id->route.addr.dst_addr; \
-+		} \
-+		smbdirect_log_rdma_event(sc, SMBDIRECT_LOG_ERR, \
-+			"expected[%s] != %s first_error=%1pe local=%pISpsfc remote=%pISpsfc\n", \
-+			smbdirect_socket_status_string(__expected_status), \
-+			smbdirect_socket_status_string((__sc)->status), \
-+			SMBDIRECT_DEBUG_ERR_PTR((__sc)->first_error), \
-+			__src, __dst); \
- 		WARN_ONCE(1, \
- 			"expected[%s] != %s first_error=%1pe local=%pISpsfc remote=%pISpsfc\n", \
- 			smbdirect_socket_status_string(__expected_status), \
++	/*
++	 * We may need to handle complex
++	 * work that might sleep and are
++	 * not allowed to run in an interrupt
++	 * context.
++	 */
++	struct work_struct complex_work;
++
+ 	/* Link to free or reassembly list */
+ 	struct list_head list;
+ 
 -- 
 2.43.0
 
