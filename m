@@ -2,44 +2,44 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4AD38C866C0
-	for <lists+samba-technical@lfdr.de>; Tue, 25 Nov 2025 19:04:14 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 35EE2C866C9
+	for <lists+samba-technical@lfdr.de>; Tue, 25 Nov 2025 19:04:33 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=3vmuNBUlxrWLshbRVDMrGBqpy/riS7SKwetM6TM8DAc=; b=J5FeoBAqlV68pIv3KAAPvQWBLu
-	m8noVOUmcuLxjiWh+mwegibErK82MbN0Qu8HCV/6kHVeJb55e9QRefeH2GzSVDT/j0u42IoYh5DFC
-	0Jt76MqnFlbeqgosIWm8Do4XmfMrXlJQws+f9mmkpCOHrI4cAKxw8QffAKfExD8T70nAKZafHTiBq
-	R/tlDbs75XDZk6fxPs9Q24Fi9ZnAqd26Acy57IsvChOTnb7JKwsL8DeD+L0PRp3doX1Mkswkf4rKQ
-	pumhjVE+uEFF1vVCefHJ6KrWHwhGmJjWAqIv6ooGNSI3NomixrOybdWT0w6l5CHR0fSVyZLn2EB04
-	maTsgFkQ==;
-Received: from ip6-localhost ([::1]:31176 helo=hr1.samba.org) 
+	bh=uKgJg9/E4iDotawwGC0HRol7AJp9JRDRoEELjviSTVk=; b=PM1o7DfMHYHrG/y64QJ3rrSvo0
+	O1LkwboayjcAQcEE0RY1aRheN86ZxVQH+z4+kyu1dwQB7rC7dDXiL2wSOUnQPNftG5rKwDfSePrN2
+	fxrhVBrd1xXp6nC0h7LXyGusYnvfUtYO8oOaklKxxtCYQrnCBPRmJ34y7xJP6rXaVmdhQPDIX8GAR
+	m5cq5B+NOqmOv2jRB94oVjZw8QAixdCH5P4KL6XOdOslHTZENnAQkvr9x8BY3/k9XfX2OomNh4f4o
+	K9Q4Fi62+842lx+ELjUwN8Ovkmw9m6aSJC1IwhvvEC/bOgliLH9xyywoFopS8bTcXYr3dA/BOt7dM
+	M7fRGQVQ==;
+Received: from ip6-localhost ([::1]:26182 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1vNxOY-00D8lm-SQ; Tue, 25 Nov 2025 18:04:07 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:26424) 
+	id 1vNxOt-00D8tJ-4R; Tue, 25 Nov 2025 18:04:27 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:26426) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vNxKC-00D7OE-4a
- for samba-technical@lists.samba.org; Tue, 25 Nov 2025 17:59:48 +0000
+ (Exim) id 1vNxKI-00D7QV-Fs
+ for samba-technical@lists.samba.org; Tue, 25 Nov 2025 17:59:55 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Message-ID:Date:Cc:To:From;
- bh=3vmuNBUlxrWLshbRVDMrGBqpy/riS7SKwetM6TM8DAc=; b=xZmvco61fepMf+tqFFO+UPaHhc
- ZLX19/OLIZeO/IhNOILaAmN3OeWFHsOVCxhWPEEAD+yFDOTtpFp654V/yMqZGiKU1xpD7gL+yvZ2L
- BQ6JtLZfiCZLAhzDR60T+7XElkjCflRXSSqzfs0XxzBIA7W0zgP4cTnXtgsfL+krWkAsvnNjlSNPD
- ixNNzYCV6siPcRGFZJax7rhFjNk6OC13mm839Ex/QQG2u7HSivpltarw/Fj5d9mHNlR2GwyqujqVA
- BrBrIDPeCYhiQ9rbLidnKrp4s+VdpJKTMYLbHUG2aGaSsl7QGp5W/kDbTSAHFeF2JuND+VorGHdpK
- 17jVgg0XnFip3Sy6lP3pLqZEMVT9zyAYy/xQbErXZ+jyKnRGZruIZcXci0LPx3DsQBw9XYn8LRsUF
- I0vz07ABFm3Ro4iNFomGJz0Mj4hJU2BfJd4SlPhP5tprOEuTKevamzoZcA+Jj4YC5iVK5ZedThUFB
- Yt2E0oc0fZRXs80EwXY2+mQH;
+ bh=uKgJg9/E4iDotawwGC0HRol7AJp9JRDRoEELjviSTVk=; b=HFfXNtFpxtPVgJy6hFPxSWobty
+ 2wsN4knMm90Zku4U3nUASKkd02EOL8S9fzpgCpEOaJsXoMbI5inEfB9/vkByDNLFsAqDrow89U/uY
+ Mu0IWCcz5cXwntFo30/Qld6A61e6Zc3xrDT6Zw2bWEUaqv75auv7ls6hyQQQwTX75Qxdiv/wk20IK
+ cbCduw5djRwVNKtN6vEsh0SXZIF8ph2ynhwPDASfEbC1VqfzCB6oIszNV4RFkZan3UOfb/trHf9cn
+ 5y7J4BJFkMbE4gKIQSmjmsUpUi3scDBynzGg6kf82N3o98Nddj0pXm5W8YpSgTZxy6Wx2hYK+Oo+s
+ CSwpd2RSmoZvC98euOfRMilEgL7eTmZExmUJBEQFgh77sFGk7K0IzIz2olLrndf4lbQSE0JgdCS4A
+ 2kRtIuNhbCk4nfiz+cuGiHe+m/+usVz+b8KPD0DddcIRnBBgCgu6cAT0LoHyEB4wB540IfGXn3iFc
+ NS0OSa14rXisEi4C7U+X2TgP;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vNxK9-00Fcwa-2d; Tue, 25 Nov 2025 17:59:33 +0000
+ (Exim) id 1vNxKF-00Fcx9-1T; Tue, 25 Nov 2025 17:59:39 +0000
 To: linux-cifs@vger.kernel.org,
 	samba-technical@lists.samba.org
-Subject: [PATCH v4 029/145] smb: smbdirect: introduce
- smbdirect_connection_post_recv_io()
-Date: Tue, 25 Nov 2025 18:54:35 +0100
-Message-ID: <d7a36ccc311060df0c73e88632dc61fcb305faac.1764091285.git.metze@samba.org>
+Subject: [PATCH v4 030/145] smb: smbdirect: introduce
+ smbdirect_connection_recv_io_refill_work()
+Date: Tue, 25 Nov 2025 18:54:36 +0100
+Message-ID: <ca94d20bd219eaf6ff1bb308cbfecea733b1145d.1764091285.git.metze@samba.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1764091285.git.metze@samba.org>
 References: <cover.1764091285.git.metze@samba.org>
@@ -66,11 +66,33 @@ Cc: Tom Talpey <tom@talpey.com>, metze@samba.org,
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is basically a copy of smbd_post_recv() in the client and
-smb_direct_post_recv() in the server.
+This is basically a copy of smbd_post_send_credits() in the client
+and smb_direct_post_recv_credits() in the server.
 
-The only difference is that this returns early if the connection
-is already broken.
+There are several improvements compared to the existing functions:
+
+1. We calculate the number of missing posted buffers by getting the
+   difference between recv_io.credits.target and recv_io.posted.count.
+
+   Instead of the difference between recv_io.credits.target
+   and recv_io.credits.count, because recv_io.credits.count is
+   only updated once a message is send to the peer.
+
+   It was not really a problem before, because we have
+   a fixed number smbdirect_recv_io buffers, so the
+   loop terminated when smbdirect_connection_get_recv_io()
+   returns NULL.
+
+   But using recv_io.posted.count makes it easier to
+   understand.
+
+2. In order to tell the peer about the newly posted buffer
+   and grant the credits, we only trigger the send immediate
+   when we're not granting only the last possible credit.
+
+   This is mostly a difference relative to the servers
+   smb_direct_post_recv_credits() implementation,
+   which should avoid useless ping pong messages.
 
 Cc: Steve French <smfrench@gmail.com>
 Cc: Tom Talpey <tom@talpey.com>
@@ -81,57 +103,107 @@ Cc: samba-technical@lists.samba.org
 Signed-off-by: Stefan Metzmacher <metze@samba.org>
 Signed-off-by: Steve French <stfrench@microsoft.com>
 ---
- .../common/smbdirect/smbdirect_connection.c   | 42 +++++++++++++++++++
- 1 file changed, 42 insertions(+)
+ .../common/smbdirect/smbdirect_connection.c   | 92 +++++++++++++++++++
+ 1 file changed, 92 insertions(+)
 
 diff --git a/fs/smb/common/smbdirect/smbdirect_connection.c b/fs/smb/common/smbdirect/smbdirect_connection.c
-index 6ac4e88da1b0..bc88cbb313ce 100644
+index bc88cbb313ce..f260d50a561b 100644
 --- a/fs/smb/common/smbdirect/smbdirect_connection.c
 +++ b/fs/smb/common/smbdirect/smbdirect_connection.c
-@@ -641,6 +641,48 @@ static void smbdirect_connection_send_io_done(struct ib_cq *cq, struct ib_wc *wc
- 	wake_up(&sc->send_io.pending.dec_wait_queue);
+@@ -683,6 +683,98 @@ static int smbdirect_connection_post_recv_io(struct smbdirect_recv_io *msg)
+ 	return ret;
  }
  
 +__maybe_unused /* this is temporary while this file is included in others */
-+static int smbdirect_connection_post_recv_io(struct smbdirect_recv_io *msg)
++static void smbdirect_connection_recv_io_refill_work(struct work_struct *work)
 +{
-+	struct smbdirect_socket *sc = msg->socket;
-+	const struct smbdirect_socket_parameters *sp = &sc->parameters;
-+	struct ib_recv_wr recv_wr = {
-+		.wr_cqe = &msg->cqe,
-+		.sg_list = &msg->sge,
-+		.num_sge = 1,
-+	};
-+	int ret;
++	struct smbdirect_socket *sc =
++		container_of(work, struct smbdirect_socket, recv_io.posted.refill_work);
++	int missing;
++	int posted = 0;
 +
 +	if (unlikely(sc->first_error))
-+		return sc->first_error;
++		return;
 +
-+	msg->sge.addr = ib_dma_map_single(sc->ib.dev,
-+					  msg->packet,
-+					  sp->max_recv_size,
-+					  DMA_FROM_DEVICE);
-+	ret = ib_dma_mapping_error(sc->ib.dev, msg->sge.addr);
-+	if (ret)
-+		return ret;
++	/*
++	 * Find out how much smbdirect_recv_io buffers we should post.
++	 *
++	 * Note that sc->recv_io.credits.target is the value
++	 * from the peer and it can in theory change over time,
++	 * but it is forced to be at least 1 and at max
++	 * sp->recv_credit_max.
++	 *
++	 * So it can happen that missing will be lower than 0,
++	 * which means the peer has recently lowered its desired
++	 * tarted, while be already granted a higher number of credits.
++	 *
++	 * Note 'posted' is the number of smbdirect_recv_io buffers
++	 * posted within this function, while sc->recv_io.posted.count
++	 * is the overall value of posted smbdirect_recv_io buffers.
++	 *
++	 * We try to post as much buffers as missing, but
++	 * this is limited if a lot of smbdirect_recv_io buffers
++	 * are still in the sc->recv_io.reassembly.list instead of
++	 * the sc->recv_io.free.list.
++	 *
++	 */
++	missing = (int)sc->recv_io.credits.target - atomic_read(&sc->recv_io.posted.count);
++	while (posted < missing) {
++		struct smbdirect_recv_io *recv_io;
++		int ret;
 +
-+	msg->sge.length = sp->max_recv_size;
-+	msg->sge.lkey = sc->ib.pd->local_dma_lkey;
++		/*
++		 * It's ok if smbdirect_connection_get_recv_io()
++		 * returns NULL, it means smbdirect_recv_io structures
++		 * are still be in the reassembly.list.
++		 */
++		recv_io = smbdirect_connection_get_recv_io(sc);
++		if (!recv_io)
++			break;
 +
-+	ret = ib_post_recv(sc->ib.qp, &recv_wr, NULL);
-+	if (ret) {
-+		smbdirect_log_rdma_recv(sc, SMBDIRECT_LOG_ERR,
-+			"ib_post_recv failed ret=%d (%s)\n",
-+			ret, errname(ret));
-+		ib_dma_unmap_single(sc->ib.dev,
-+				    msg->sge.addr,
-+				    msg->sge.length,
-+				    DMA_FROM_DEVICE);
-+		msg->sge.length = 0;
-+		smbdirect_socket_schedule_cleanup(sc, ret);
++		recv_io->first_segment = false;
++
++		ret = smbdirect_connection_post_recv_io(recv_io);
++		if (ret) {
++			smbdirect_log_rdma_recv(sc, SMBDIRECT_LOG_ERR,
++				"smbdirect_connection_post_recv_io failed rc=%d (%s)\n",
++				ret, errname(ret));
++			smbdirect_connection_put_recv_io(recv_io);
++			return;
++		}
++
++		atomic_inc(&sc->recv_io.posted.count);
++		posted += 1;
 +	}
 +
-+	return ret;
++	/* If nothing was posted we're done */
++	if (posted == 0)
++		return;
++
++	/*
++	 * If we posted at least one smbdirect_recv_io buffer,
++	 * we need to inform the peer about it and grant
++	 * additional credits.
++	 *
++	 * However there is one case where we don't want to
++	 * do that.
++	 *
++	 * If only a single credit was missing before
++	 * reaching the requested target, we should not
++	 * post an immediate send, as that would cause
++	 * endless ping pong once a keep alive exchange
++	 * is started.
++	 *
++	 * However if sc->recv_io.credits.target is only 1,
++	 * the peer has no credit left and we need to
++	 * grant the credit anyway.
++	 */
++	if (missing == 1 && sc->recv_io.credits.target != 1)
++		return;
++
++	smbdirect_log_keep_alive(sc, SMBDIRECT_LOG_INFO,
++		"schedule send of an empty message\n");
++	queue_work(sc->workqueue, &sc->idle.immediate_work);
 +}
 +
  static bool smbdirect_map_sges_single_page(struct smbdirect_map_sges *state,
