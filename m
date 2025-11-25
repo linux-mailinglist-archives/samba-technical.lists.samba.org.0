@@ -2,47 +2,45 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id D20E3C8417F
-	for <lists+samba-technical@lfdr.de>; Tue, 25 Nov 2025 09:57:15 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 39470C8562D
+	for <lists+samba-technical@lfdr.de>; Tue, 25 Nov 2025 15:22:56 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=E+qddiM0ui9g2fJ+sFz8wT1uNqLbVnBHcXLiPwcs++4=; b=w+RITND6jdkpfIeccTUm9gcAbR
-	zjfPKKcKDyUZXO4nOmVAlqsNFJpT8Swhgi/6xib33tHU8UXJZC+OzfSrAYYV2kk1g0yp/41sgiwkt
-	iO9kSJjwOITkNyXiHZmQWp3Y/Oe/BkFImJNgiXTdETG+1OXUFG9nD8+jupujRDQbbw7p2bzLc88Ao
-	ecrjw30AZQuB7rEjB0As+KN9qL4t+mkmcYvSxw+UBclid28nhDASGBIwMKOmdeq8MkFRicig6S1+4
-	iuPQG13P9e7rl+L5BfrKTxpqOKLap5bJPhvLUAXw2CBLPQ8hy81f/yRxmHwpWlG8gIal6xx9xzIdB
-	4NW/1L9w==;
-Received: from ip6-localhost ([::1]:18012 helo=hr1.samba.org) 
+	bh=bYY3AOmGiKgcZTF7Mmtp25ETkgx4F0BmYP/mA7zw7/s=; b=vlAJAhG0nH7BqI2aKUj94aody5
+	+CeY8aiQ+15riYeYburbH6AADa/kpCUeHXcp+3BVMilEVFtPn2ly74xVDAt1cWYqGirKyNp0M0msQ
+	A0dCXqG9dope4cKzulibJFMoIn07Layh7ywQS5CGtXqE8+/DCzpmqvR/T5kAosDNbgRLLbjG2o/Kj
+	kY9VlMejMLaQCX9SSbqxrP9pyKhjj2sGmlcSScVAJ96dvewOjn/57HtNIk18r5XJV8H2wqwPG8wBV
+	TKfyo9C0UkYnrp5YkBXXoxZuK/IP/vXziLB2011kx9Q2lCIeYOLSJ/JbSc8D7NPc/yNvWKWFSzUeR
+	F12VpCaw==;
+Received: from ip6-localhost ([::1]:24578 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1vNorA-00D4E7-W1; Tue, 25 Nov 2025 08:57:05 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:64238) 
+	id 1vNtvj-00D5a6-Cc; Tue, 25 Nov 2025 14:22:07 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:31416) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vNoqc-00D43u-IY
- for samba-technical@lists.samba.org; Tue, 25 Nov 2025 08:56:59 +0000
+ (Exim) id 1vNtve-00D5Zz-JV
+ for samba-technical@lists.samba.org; Tue, 25 Nov 2025 14:22:04 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Message-ID:Date:Cc:To:From;
- bh=E+qddiM0ui9g2fJ+sFz8wT1uNqLbVnBHcXLiPwcs++4=; b=CmSH6HfLT7LVQk5sgP1/Q+FAhi
- JUOOxhSl9zwFsgurDOrO9T9af90Ippsx6/TNq91YTfNcV4xe6jC/YOCsOsNfJ7Laq999CmLnnPs6g
- DZr9IeAxUZJSObpDZ6y1z94dnkkVI83+ggv/DsTII8fYi6NJxGf1Iv5rZaE4QgbS7lH7dFlN+CD3Z
- q8qqqqeOx4W5jQY4CFacx7lrZ/TX/d1xrCbbMuWnOqcF+g+Qb7HX8BSPe3wX5WpMkrUMspjQ+8Ltv
- 3wLybGTuxIW/0crgj2xD+3IT9IsMdRWwEdXZRm64QkLUGwRJPEkWWKzW5XqhmttWheQXR2yo2vq2g
- 1UgXX2WCCmfalvXZXIhB7EywRVqhDYCTT46QD2AmFerTEVADaviwtj7oY4VVWG2KpQrBnF8nqioWS
- h+lurNnIpiI08kVEnFe9hxv2/0bDbkFIrq30l+Jy1758AFRstRuinHYrQF/rwCdrOhlIETYpwg51W
- BUTODwLBwfS9qH/sgDdtQ1DZ;
+ bh=bYY3AOmGiKgcZTF7Mmtp25ETkgx4F0BmYP/mA7zw7/s=; b=d3FYnf2DkbEhUgwZTwfkOc/9BQ
+ AC9NBtFOv+24lfEAC0E5oY32VN+lcw4dQLdJfH6OOVrTcrto3Q32LQSIzDTijLCDnL6VcIFX9VKWy
+ lCxM1qq6gQ6bcnbVkT3q60UnmIQG8siFs9BoBgZhUmYvLhIbKbDm8ZO78jrNUcCB924WisG0RnB5s
+ XfMzpEd0zMe+S2agOPXs/OXZJ0avVhUMkpSTkD5Mb2RKJ8lt0uTemoTgu0WYgg+PgQA32AlbWq0cY
+ kwLPRsJILf6BTqkuFXnll+w5+nKd70QJlSVf8gOAsMwtzaCifA6EgOuzCuK9NVwIfYZADujFGrHol
+ HSkQsuUwBq1snhkRFba92Du774fWfnXHONDtaO0r8JOxRZJB+QKLIa3GXVF/1bMcTGEnZ7rMeNiFs
+ +RxSXRoDxHQUguwOjBNm0efFjaSMZ68cCvtzILDvEJ8tQWvB7di5Kzs+qSF2KhbQtrHtSHBeUvMjX
+ rACI2XawVLr6Fz/MDlxsJwo2;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vNoqX-00FYLF-1A; Tue, 25 Nov 2025 08:56:25 +0000
+ (Exim) id 1vNtvd-00Fasw-0E; Tue, 25 Nov 2025 14:22:01 +0000
 To: linux-cifs@vger.kernel.org,
 	samba-technical@lists.samba.org
-Subject: [PATCH v2 4/4] smb: client: relax WARN_ON_ONCE(SMBDIRECT_SOCKET_*)
- checks in recv_done() and smbd_conn_upcall()
-Date: Tue, 25 Nov 2025 09:55:57 +0100
-Message-ID: <e88becbe77a43949228404ff417b38b235b92a46.1764060262.git.metze@samba.org>
+Subject: [PATCH v3 0/4] smb: smbdirect/client/server: relax
+ WARN_ON_ONCE(SMBDIRECT_SOCKET_*) checks
+Date: Tue, 25 Nov 2025 15:21:50 +0100
+Message-ID: <cover.1764080338.git.metze@samba.org>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <cover.1764060262.git.metze@samba.org>
-References: <cover.1764060262.git.metze@samba.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: samba-technical@lists.samba.org
@@ -66,149 +64,45 @@ Cc: Tom Talpey <tom@talpey.com>, Paulo Alcantara <pc@manguebit.org>,
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-sc->first_error might already be set and sc->status
-is thus unexpected, so this should avoid the WARN[_ON]_ONCE()
-if sc->first_error is already set and have a usable error path.
+Hi,
 
-While there set sc->first_error as soon as possible.
+here are some small cleanups for a problem Nanjae reported,
+where two WARN_ON_ONCE(sc->status != ...) checks where triggered
+by a Windows 11 client.
 
-This is done based on a problem seen in similar places on
-the server. And there it was already very useful in order
-to find the problem when we have a meaningful WARN_ONCE()
-that prints details about the connection.
+The patches should relax the checks if an error happened before,
+they are intended for 6.18 final, as far as I can see the
+problem was introduced during the 6.18 cycle only.
 
-This is much more useful:
+Given that v1 of this patchset produced a very useful WARN_ONCE()
+message, I'd really propose to keep this for 6.18, also for the
+client where the actual problem may not exists, but if they
+exist, it will be useful to have the more useful messages
+in 6.16 final.
 
-[  309.560973] expected[NEGOTIATE_NEEDED] != RDMA_CONNECT_RUNNING
-first_error=0 local=192.168.0.200:445 remote=192.168.0.100:60445
-[  309.561034] WARNING: CPU: 2 PID: 78 at transport_rdma.c:643
-recv_done+0x2fa/0x3d0 [ksmbd]
+Thanks!
+metze
 
-than what we had before (only):
+v3: move __SMBDIRECT_SOCKET_DISCONNECT() defines before including
+    smbdirect headers in order to avoid problems with the follow
+    up changes for 6.19
 
-[  894.140316] WARNING: CPU: 1 PID: 116 at
-fs/smb/server/transport_rdma.c:642 recv_done+0x308/0x360 [ksmbd]
+v2: adjust for the case where the recv completion arrives before
+    RDMA_CM_EVENT_ESTABLISHED and improve commit messages
 
-Fixes: 58dfba8a2d4e ("smb: client/smbdirect: replace SMBDIRECT_SOCKET_CONNECTING with more detailed states")
-Cc: Steve French <smfrench@gmail.com>
-Cc: Tom Talpey <tom@talpey.com>
-Cc: Long Li <longli@microsoft.com>
-Cc: Namjae Jeon <linkinjeon@kernel.org>
-Cc: Paulo Alcantara <pc@manguebit.org>
-Cc: linux-cifs@vger.kernel.org
-Cc: samba-technical@lists.samba.org
-Signed-off-by: Stefan Metzmacher <metze@samba.org>
----
- fs/smb/client/smbdirect.c | 28 +++++++++++++++-------------
- 1 file changed, 15 insertions(+), 13 deletions(-)
+Stefan Metzmacher (4):
+  smb: smbdirect: introduce SMBDIRECT_DEBUG_ERR_PTR() helper
+  smb: smbdirect: introduce SMBDIRECT_CHECK_STATUS_{WARN,DISCONNECT}()
+  smb: server: relax WARN_ON_ONCE(SMBDIRECT_SOCKET_*) checks in
+    recv_done() and smb_direct_cm_handler()
+  smb: client: relax WARN_ON_ONCE(SMBDIRECT_SOCKET_*) checks in
+    recv_done() and smbd_conn_upcall()
 
-diff --git a/fs/smb/client/smbdirect.c b/fs/smb/client/smbdirect.c
-index c6c428c2e08d..9ee8d1048284 100644
---- a/fs/smb/client/smbdirect.c
-+++ b/fs/smb/client/smbdirect.c
-@@ -186,6 +186,9 @@ static void smbd_disconnect_rdma_work(struct work_struct *work)
- 	struct smbdirect_socket *sc =
- 		container_of(work, struct smbdirect_socket, disconnect_work);
- 
-+	if (sc->first_error == 0)
-+		sc->first_error = -ECONNABORTED;
-+
- 	/*
- 	 * make sure this and other work is not queued again
- 	 * but here we don't block and avoid
-@@ -197,9 +200,6 @@ static void smbd_disconnect_rdma_work(struct work_struct *work)
- 	disable_work(&sc->idle.immediate_work);
- 	disable_delayed_work(&sc->idle.timer_work);
- 
--	if (sc->first_error == 0)
--		sc->first_error = -ECONNABORTED;
--
- 	switch (sc->status) {
- 	case SMBDIRECT_SOCKET_NEGOTIATE_NEEDED:
- 	case SMBDIRECT_SOCKET_NEGOTIATE_RUNNING:
-@@ -240,8 +240,12 @@ static void smbd_disconnect_rdma_work(struct work_struct *work)
- 	smbd_disconnect_wake_up_all(sc);
- }
- 
-+#define __SMBDIRECT_SOCKET_DISCONNECT(__sc) smbd_disconnect_rdma_connection(__sc)
- static void smbd_disconnect_rdma_connection(struct smbdirect_socket *sc)
- {
-+	if (sc->first_error == 0)
-+		sc->first_error = -ECONNABORTED;
-+
- 	/*
- 	 * make sure other work (than disconnect_work) is
- 	 * not queued again but here we don't block and avoid
-@@ -252,9 +256,6 @@ static void smbd_disconnect_rdma_connection(struct smbdirect_socket *sc)
- 	disable_work(&sc->idle.immediate_work);
- 	disable_delayed_work(&sc->idle.timer_work);
- 
--	if (sc->first_error == 0)
--		sc->first_error = -ECONNABORTED;
--
- 	switch (sc->status) {
- 	case SMBDIRECT_SOCKET_RESOLVE_ADDR_FAILED:
- 	case SMBDIRECT_SOCKET_RESOLVE_ROUTE_FAILED:
-@@ -322,27 +323,27 @@ static int smbd_conn_upcall(
- 
- 	switch (event->event) {
- 	case RDMA_CM_EVENT_ADDR_RESOLVED:
--		WARN_ON_ONCE(sc->status != SMBDIRECT_SOCKET_RESOLVE_ADDR_RUNNING);
-+		if (SMBDIRECT_CHECK_STATUS_DISCONNECT(sc, SMBDIRECT_SOCKET_RESOLVE_ADDR_RUNNING))
-+			break;
- 		sc->status = SMBDIRECT_SOCKET_RESOLVE_ROUTE_NEEDED;
- 		wake_up(&sc->status_wait);
- 		break;
- 
- 	case RDMA_CM_EVENT_ROUTE_RESOLVED:
--		WARN_ON_ONCE(sc->status != SMBDIRECT_SOCKET_RESOLVE_ROUTE_RUNNING);
-+		if (SMBDIRECT_CHECK_STATUS_DISCONNECT(sc, SMBDIRECT_SOCKET_RESOLVE_ROUTE_RUNNING))
-+			break;
- 		sc->status = SMBDIRECT_SOCKET_RDMA_CONNECT_NEEDED;
- 		wake_up(&sc->status_wait);
- 		break;
- 
- 	case RDMA_CM_EVENT_ADDR_ERROR:
- 		log_rdma_event(ERR, "connecting failed event=%s\n", event_name);
--		WARN_ON_ONCE(sc->status != SMBDIRECT_SOCKET_RESOLVE_ADDR_RUNNING);
- 		sc->status = SMBDIRECT_SOCKET_RESOLVE_ADDR_FAILED;
- 		smbd_disconnect_rdma_work(&sc->disconnect_work);
- 		break;
- 
- 	case RDMA_CM_EVENT_ROUTE_ERROR:
- 		log_rdma_event(ERR, "connecting failed event=%s\n", event_name);
--		WARN_ON_ONCE(sc->status != SMBDIRECT_SOCKET_RESOLVE_ROUTE_RUNNING);
- 		sc->status = SMBDIRECT_SOCKET_RESOLVE_ROUTE_FAILED;
- 		smbd_disconnect_rdma_work(&sc->disconnect_work);
- 		break;
-@@ -428,7 +429,8 @@ static int smbd_conn_upcall(
- 					min_t(u8, sp->responder_resources,
- 					      peer_responder_resources);
- 
--		WARN_ON_ONCE(sc->status != SMBDIRECT_SOCKET_RDMA_CONNECT_RUNNING);
-+		if (SMBDIRECT_CHECK_STATUS_DISCONNECT(sc, SMBDIRECT_SOCKET_RDMA_CONNECT_RUNNING))
-+			break;
- 		sc->status = SMBDIRECT_SOCKET_NEGOTIATE_NEEDED;
- 		wake_up(&sc->status_wait);
- 		break;
-@@ -437,7 +439,6 @@ static int smbd_conn_upcall(
- 	case RDMA_CM_EVENT_UNREACHABLE:
- 	case RDMA_CM_EVENT_REJECTED:
- 		log_rdma_event(ERR, "connecting failed event=%s\n", event_name);
--		WARN_ON_ONCE(sc->status != SMBDIRECT_SOCKET_RDMA_CONNECT_RUNNING);
- 		sc->status = SMBDIRECT_SOCKET_RDMA_CONNECT_FAILED;
- 		smbd_disconnect_rdma_work(&sc->disconnect_work);
- 		break;
-@@ -699,7 +700,8 @@ static void recv_done(struct ib_cq *cq, struct ib_wc *wc)
- 		negotiate_done =
- 			process_negotiation_response(response, wc->byte_len);
- 		put_receive_buffer(sc, response);
--		WARN_ON_ONCE(sc->status != SMBDIRECT_SOCKET_NEGOTIATE_RUNNING);
-+		if (SMBDIRECT_CHECK_STATUS_WARN(sc, SMBDIRECT_SOCKET_NEGOTIATE_RUNNING))
-+			negotiate_done = false;
- 		if (!negotiate_done) {
- 			sc->status = SMBDIRECT_SOCKET_NEGOTIATE_FAILED;
- 			smbd_disconnect_rdma_connection(sc);
+ fs/smb/client/smbdirect.c                  | 28 ++++++------
+ fs/smb/common/smbdirect/smbdirect_socket.h | 51 ++++++++++++++++++++++
+ fs/smb/server/transport_rdma.c             | 40 +++++++++++++----
+ 3 files changed, 98 insertions(+), 21 deletions(-)
+
 -- 
 2.43.0
 
