@@ -2,51 +2,74 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2B5CEC8860C
-	for <lists+samba-technical@lfdr.de>; Wed, 26 Nov 2025 08:16:52 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id CA687C88C0D
+	for <lists+samba-technical@lfdr.de>; Wed, 26 Nov 2025 09:51:51 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=oPr6ACsBWiTdcqqUClYl1qB6tW7HDAHrkWlcUbfwm2k=; b=UopYrALucTVAiH44BKDOpYte/t
-	DCeHs8htHRsDYeIeBV+HUDT4DIeEvTg5JHnWPMH1hrgl2PQOh3IfHQ2b7lFS05TH+uQmXCEqPPUoy
-	InT2F2swJwp09chBWRR3gIdap9oqLtodC40q9RVhS57AHosO/1nh8eWF4jNKVqOclbsQloGKPYOHA
-	8lQfZC/thbFVZRKg2AxF9KeLg8gt5v3Vn2tNXN2cqrG+u4jht0dWIbQHCiZ2hO9gcVTj517cbKgyg
-	XDboAbiL2xfHcDplZ1BOycvLdfyFfjba4gTIU/ajdDAz6VORtBUlEGSyIcUEXCbx/CF8CbAlCK+uO
-	OvpnCXyw==;
-Received: from ip6-localhost ([::1]:19696 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=fH3692M1ilX9eBWXmUlT3ZP27Nw/yOe8TaeOQNbcsV8=; b=A5K4jRVemCKfdwDMkLtlbfdTdj
+	6KAzAtHRVpkHgxN4zC8NEozgvv14dPjtV2HHiURIy9euNZ2r9eHwT+dkSbyUwSSkNcOQDsiBnn23c
+	syUQNaVDfcn53rS8zKk3H/KVCXeUPmmme7m2g8oghWrKZFEXKT4pMJvpvAtQ02OtxF/8W1kXOXbqZ
+	4eJZnkvUUx72Cy6iHmNtuYcKW3c2suraY7mcy0KGFOnOmvbIdC5KFL9NMtJ3nfz3RoxpfljmU1VXX
+	p6CHfubkbDTKGF5UdvBNognrFrHBnOGNFDGMk7qytsrxq2ajaj9wLAyNgsnu6XYdFkJZZgIryiFjd
+	+RZqCFXw==;
+Received: from ip6-localhost ([::1]:57192 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1vO9lC-00DMkd-E9; Wed, 26 Nov 2025 07:16:18 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:36762) 
+	id 1vOBFA-00DMxQ-Mk; Wed, 26 Nov 2025 08:51:20 +0000
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124]:25741) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vO9l6-00DMkW-Ck
- for samba-technical@lists.samba.org; Wed, 26 Nov 2025 07:16:15 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=From:Cc:To:Date:Message-ID;
- bh=oPr6ACsBWiTdcqqUClYl1qB6tW7HDAHrkWlcUbfwm2k=; b=FLrOuAyE6aSRxiOyZGlnoKS2jW
- fSGFvqNqjRth0K/kTOQqrnyUY+yMO7AHiG6Tc1BZckBQloXv3B0y5nqXYLGGVVRrR+8xb8jMwa8n1
- /UZV+yWVNWRDPI3FQRXf1wNSNlg4TseWFYc01Z+QkGMcbozTa50g200DkiNX7PbzvkZkl9ABKdgFy
- RMbPMMwoizCPTZxDAzmMJMjySKe/8DrnUZI72Evtnkv+qQlGS1pXG4gfUkeisKoQyv9k1RY3NMnIt
- F2Zj5d3NJkRZmagwoJLkGGauV/ektKYEPjRBWcZlaSCneCyY9CHGOsjzIL/UefFVqAI0xu7ksj6oA
- Votb3Uq/x3toGRSxO6UVZrFJJirKw7S9OYoi+/fvp3N9W0cWNCoVewZsUSEHm7EcVZMpJd+wElvFa
- bySM2uuZtzPDTwaGqLhFnDb1JdH78+ILqdNZu5KbSrSEnXwJZdyIVfNri6bk3QRAPXvV+lPbICB4T
- l09AMUjtTp1NrhNjr8qwb37m;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vO9l5-00FnI4-0B; Wed, 26 Nov 2025 07:16:11 +0000
-Message-ID: <2786ee25-b543-48a8-8fff-e6c7ff341774@samba.org>
-Date: Wed, 26 Nov 2025 08:16:09 +0100
+ (Exim) id 1vOBF6-00DMxC-Ap
+ for samba-technical@lists.samba.org; Wed, 26 Nov 2025 08:51:18 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1764147072;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=fH3692M1ilX9eBWXmUlT3ZP27Nw/yOe8TaeOQNbcsV8=;
+ b=QbX3YxCuf2OQwYoZjAu26F0QHu96BU5sQlwE6GuIXzfEHL3rQ/UVgVZD6pTZVwRHYHKjsT
+ yAgTUpskYSOTyPphaZ7OljFwXWGqvhdkVbaSrV31hehCCtHsbVG1Ae+FH7pRTUG2cCXtcB
+ 8p0Es6ljjJhWnRZWR0gg4iZ4QBrbmn4=
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1764147072;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=fH3692M1ilX9eBWXmUlT3ZP27Nw/yOe8TaeOQNbcsV8=;
+ b=QbX3YxCuf2OQwYoZjAu26F0QHu96BU5sQlwE6GuIXzfEHL3rQ/UVgVZD6pTZVwRHYHKjsT
+ yAgTUpskYSOTyPphaZ7OljFwXWGqvhdkVbaSrV31hehCCtHsbVG1Ae+FH7pRTUG2cCXtcB
+ 8p0Es6ljjJhWnRZWR0gg4iZ4QBrbmn4=
+Received: from mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-587-wKo8iuMwN7mL9Dv_gbKYVA-1; Wed,
+ 26 Nov 2025 03:35:17 -0500
+X-MC-Unique: wKo8iuMwN7mL9Dv_gbKYVA-1
+X-Mimecast-MFC-AGG-ID: wKo8iuMwN7mL9Dv_gbKYVA_1764146116
+Received: from mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.12])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 79000180009D; Wed, 26 Nov 2025 08:35:15 +0000 (UTC)
+Received: from warthog.procyon.org.uk (unknown [10.42.28.14])
+ by mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
+ id C519319560A2; Wed, 26 Nov 2025 08:35:12 +0000 (UTC)
+Organization: Red Hat UK Ltd. Registered Address: Red Hat UK Ltd, Amberley
+ Place, 107-111 Peascod Street, Windsor, Berkshire, SI4 1TE, United
+ Kingdom.
+ Registered in England and Wales under Company Registration No. 3798903
+In-Reply-To: <cover.1764091285.git.metze@samba.org>
+References: <cover.1764091285.git.metze@samba.org>
+To: Stefan Metzmacher <metze@samba.org>
+Subject: Re: [PATCH v4 000/145] smb: smbdirect/client/server: moving to common
+ functions and smbdirect.ko
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 0/4] smb: smbdirect/client/server: relax
- WARN_ON_ONCE(SMBDIRECT_SOCKET_*) checks
-To: Namjae Jeon <linkinjeon@kernel.org>
-References: <cover.1764080338.git.metze@samba.org>
- <CAKYAXd_HKKBKx_B7+Z+b_jt+rHazuMkskYYPAp6BROPuy0uBfA@mail.gmail.com>
-Content-Language: en-US
-In-Reply-To: <CAKYAXd_HKKBKx_B7+Z+b_jt+rHazuMkskYYPAp6BROPuy0uBfA@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="us-ascii"
+Content-ID: <4098542.1764146111.1@warthog.procyon.org.uk>
+Date: Wed, 26 Nov 2025 08:35:11 +0000
+Message-ID: <4098543.1764146111@warthog.procyon.org.uk>
+X-Scanned-By: MIMEDefang 3.0 on 10.30.177.12
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,38 +83,23 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Stefan Metzmacher <metze@samba.org>
+From: David Howells via samba-technical <samba-technical@lists.samba.org>
+Reply-To: David Howells <dhowells@redhat.com>
 Cc: linux-cifs@vger.kernel.org, Paulo Alcantara <pc@manguebit.org>,
- samba-technical@lists.samba.org, Tom Talpey <tom@talpey.com>,
- Steve French <smfrench@gmail.com>
+ samba-technical@lists.samba.org, dhowells@redhat.com,
+ Steve French <smfrench@gmail.com>, Tom Talpey <tom@talpey.com>,
+ Namjae Jeon <linkinjeon@kernel.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Am 26.11.25 um 00:50 schrieb Namjae Jeon:
-> On Tue, Nov 25, 2025 at 11:22 PM Stefan Metzmacher <metze@samba.org> wrote:
->>
->> Hi,
->>
->> here are some small cleanups for a problem Nanjae reported,
->> where two WARN_ON_ONCE(sc->status != ...) checks where triggered
->> by a Windows 11 client.
->>
->> The patches should relax the checks if an error happened before,
->> they are intended for 6.18 final, as far as I can see the
->> problem was introduced during the 6.18 cycle only.
->>
->> Given that v1 of this patchset produced a very useful WARN_ONCE()
->> message, I'd really propose to keep this for 6.18, also for the
->> client where the actual problem may not exists, but if they
->> exist, it will be useful to have the more useful messages
->> in 6.16 final.
-> First, the warning message has been improved. Thanks.
-> However, when copying a 6-7GB file on a Windows client, the following
-> error occurs. These error messages did not occur when testing with the
-> older ksmbd rdma(https://github.com/namjaejeon/ksmbd).
+Stefan Metzmacher <metze@samba.org> wrote:
 
-With transport_rdma.* from restored from 6.17?
+> It is based on dhowells-linux-fs/cifs-cleanup
+> at commit 1bc2089694a33afb711779dfcb4bbbe10ccbe466,
 
-metze
+Btw, I applied the acks I've got to my patches on that branch if you want to
+rebase on it; if not, I'm sure Steve will cope:-).
+
+David
+
 
