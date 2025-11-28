@@ -2,68 +2,74 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8B15BC92628
-	for <lists+samba-technical@lfdr.de>; Fri, 28 Nov 2025 16:02:00 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id F08F6C92D57
+	for <lists+samba-technical@lfdr.de>; Fri, 28 Nov 2025 18:49:37 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=/szzNrYlz98R3QfGXotkgAtD3Y44xYYQjzP9HCDXiVk=; b=cFtSVtCpQYRw2KZ8JMwXrytxTz
-	ER/6/UXXwiadAr+DyrB09Az988FOvO4mOBVkAcybOdNiceJ+47vNi9pmbpKrb784yWo8wqNToJWOr
-	RUMaS1KPbBeUA1CakMxY5+Q68CIPc7W51FZiomupWPswZaI8d+1dNntdovWfoIAR+MGzspcC9cifG
-	t+lczKSX5NWUuOvXiGv1ycnjwenfbSdFk2mKoxSriWie3ZioR0n0SXQ6mTVgicmcPnGdWdIhJGfOZ
-	xc+UAn7AxCliuz10e2awcOGhEdSO2h+nbdfwP1oz1AK1yxEmsknDOGJS3qx/oddMPzsmILsf6YLs/
-	++MFXAng==;
-Received: from ip6-localhost ([::1]:20234 helo=hr1.samba.org) 
+	bh=1j+Znd9SocCfUqvoBrfqtGnxCgC6ec4iwLsr5isAxlk=; b=UzfnDa03r7Ep0ldo89fvoFPOl2
+	VrXAZ4F3OEFDsKG76dmMyLDJcLrRtrUMNt9vzP8+uRkoecqhpS4QnvavOOX4DB2nq3X7G5+qBL/2h
+	uU55S3hMShhlTKXyEVmqwPTvYHQrzWtd3LH6DLNm0I1ztGB86rWOiwsJBODxQgA7YrLQ7jBpo4n0f
+	5M4LoQS4HIFQinYucmKgXvM876C0h4ecTiFpv39R77GCgw4zyXa81Yr8hOWs/pQN9aU9Qo5h39DVi
+	DRryGjiWBTmNqBvdAz2QvrRLe7HuGJxit1nWdNefvHSrkRyd2yDGu9Ynep912JwtSDU0GHYuzW8su
+	JHhAMLXg==;
+Received: from ip6-localhost ([::1]:53194 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1vOzyU-00DWsZ-QW; Fri, 28 Nov 2025 15:01:30 +0000
-Received: from sea.source.kernel.org ([172.234.252.31]:58850) 
+	id 1vP2ai-00DXwe-6h; Fri, 28 Nov 2025 17:49:08 +0000
+Received: from mail-qv1-xf30.google.com ([2607:f8b0:4864:20::f30]:46341) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vOzyP-00DWsS-MS
- for samba-technical@lists.samba.org; Fri, 28 Nov 2025 15:01:28 +0000
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id C5320432D0
- for <samba-technical@lists.samba.org>; Fri, 28 Nov 2025 15:01:11 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A6034C16AAE
- for <samba-technical@lists.samba.org>; Fri, 28 Nov 2025 15:01:11 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1764342071;
- bh=/szzNrYlz98R3QfGXotkgAtD3Y44xYYQjzP9HCDXiVk=;
- h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
- b=dNZEbyV9tQ66RlTMpyKfSEU9OSZd3fhDhPK+ARWSBtc+LXVGICwsyvkKJ4p64l7se
- pYdXrmglCcRcyyyU/e7MJ9o0gP3TxJTBqGGTlHZMjFEmR5C17jgNOePhstHKxLoLKw
- CoXP4L1gWZQjBgsn+ZmBxHxCdHU+XzhwIUBDfc/PGo/WNyOpiB0oqgcJbcb33NDkKg
- PvLYeBgM5DsqDzzRwPZq9sceBYRbuZ+rgDKTZovyBrd+VWDUu6eLTekko4HgtAhZEb
- OTkrfxPfVsj265+Uj/9p+cau6oBQKL9SLQRPuhQxkplcVzGDkdBoXxJCw3u4enWwCS
- Xq+wGOGc01fnA==
-Received: by mail-ej1-f46.google.com with SMTP id
- a640c23a62f3a-b735487129fso280934466b.0
- for <samba-technical@lists.samba.org>; Fri, 28 Nov 2025 07:01:11 -0800 (PST)
+ (Exim) id 1vP2ac-00DXwX-Vd
+ for samba-technical@lists.samba.org; Fri, 28 Nov 2025 17:49:05 +0000
+Received: by mail-qv1-xf30.google.com with SMTP id
+ 6a1803df08f44-882379c0b14so16434626d6.1
+ for <samba-technical@lists.samba.org>; Fri, 28 Nov 2025 09:49:02 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1764352141; x=1764956941; darn=lists.samba.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=1j+Znd9SocCfUqvoBrfqtGnxCgC6ec4iwLsr5isAxlk=;
+ b=E9yRYQXeqWWIg8EcE0MsRDL3jgXkIELKN7AbE2Gg12YcALKYBHxfW2HTAHiI/FHa9i
+ nQrieOK/XvZCDDlDnmNe1a2adGFbSmxYk6frtzjtoAPfMxu7U2pzdp2A3na2ucIW/iuB
+ aDEblE7zGwwvlNtpoNL41qCnDmARL6qnUR/8r/CAlGhpzRVi53MapLKxPnxXjGdGyyM0
+ 6+CPMJd8crO1vjSnxKhlEtScGgh4FBqKKIZ4wTlYunEXcHZ/yex/6tdVDymUoECil7lb
+ G8MKOlJbTnIcW8Xs0P+UP+G4fJmoUELZDZHY5qQkma1scxYLImFWyposj107iZJILaha
+ tRwQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1764352141; x=1764956941;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=1j+Znd9SocCfUqvoBrfqtGnxCgC6ec4iwLsr5isAxlk=;
+ b=jZQnOIDumhqQMbFVO55dVntQfoIiIzdlNdMOsEJo2guFpjTX5+9tH/zx5AE+277l4s
+ 88fQFHixc5Xb6rHjVvi9tZUsyW4nG2tYUHrg6CVJQsD75Fw8fTWSKrfj1Wy3PQgHLXFE
+ lu6/EKCjZwM8vlPIZerakY14aHz0BFu94DUqQozucnh4kMNvNeO63dswWp39pRzVv8x6
+ BROTCHfy23eA9QIH+2Basr74uSa72lh0+i2a1yLNtNgeplMyS8I97aZvGwDLOqEyokno
+ yp3fUI/UJB0Ny8OIuCEv8xCK6ZaaHENQZrgJWRbejPPZrriLpHY5lrpeuH2UUNL155iD
+ uzyA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVu8ulsXNyZ7fKoEnzNISXEDve6cBKJOAhbwP75RymhLwXCj1gDtk7w6rgKnM/uHbfk7jIJ4TOUZb1qxbSzRb4=@lists.samba.org
-X-Gm-Message-State: AOJu0Yxuyaphi7dOENEGg0GXTGn6QEiGpmyLAsusf9NvasZZrmOm36fz
- zN/nJSPknKkJetd7rKP/QfTQ1k1QMSXb7lUmgMwRDIoBi9qj/xXXFZIIAxLY0PCB/Rvpyp4jtMK
- M8wIe+RpKvUcjIzIDkFaljRfUDLtePQE=
-X-Google-Smtp-Source: AGHT+IGHlZ1Es0U7rEAngTS8cZtvPlTvl4knXZuU8toy/vG2ApkMPS/LvqqgX2OzPNh3dmKI6PABZy/tw9ZtuOSzk6M=
-X-Received: by 2002:a17:907:9487:b0:b76:6020:ed2b with SMTP id
- a640c23a62f3a-b7671898fd8mr2929650466b.45.1764342070152; Fri, 28 Nov 2025
- 07:01:10 -0800 (PST)
+ AJvYcCXL/wmW4Wqfr5LqiNr8621XLO4StdThnw4PrHiD2cEzaJJr2XZP/tU0eRHghWbsMbFCGLUgoWOI5N+ICnhzVng=@lists.samba.org
+X-Gm-Message-State: AOJu0Ywzxh5EGr00FERowC9v0byVPYzsYZsKd871Pp8SZviOAGmu+vMP
+ F75M7wf9/ZR0yyLGjYlNozUKWEAxUD/lLQM0JaP2HDCc8Xkf4/nbLdfw+ftu28ZFc2fCyFce/ah
+ eEljGxmYeab1pVYNq8P8Gx8qOWty4mOY=
+X-Gm-Gg: ASbGncswkV93MtGmObNkVQ5iPIlae39GsRUiLn78BizQJqc2LqBRE1X0myLrvb7tRS5
+ qvp8fyPPtQa8t7jk7NgB5yJ/bg0X9inu+VCPcH6EyZhocKb0Sd8dwZGHURcqhgY9lD2sbDkT0T5
+ 5t4m+YyQM4khn31uMD6xzeN5tD+BV2g/xH+YcCCLYBCeOUpBCp4z0YTuphdh7Tmo7RbACWtZ2n0
+ /t/UnJcULlAobwU8oFz7rej724rNcK5/KvxNxEAekA09kyA4Q46pPFKqFmmHVUDac5pobw0/0FN
+ EQgzXO8MmNtVqBabiSNg7A2FhkfbLVmVOP4CLvem9gcXpXmFLh4RE/Xo4MB7qu6oc/go4h9pCom
+ nNC/y4WU+snXK6AOvH/UfteC4+du0CF5P0YnyuwX2t1ugggB1klsTAXnGO+b6FOmyHPXMWbHQG2
+ dnMegP2WVqUA==
+X-Google-Smtp-Source: AGHT+IGOt1OZisRoBQVo5Br6M5w5h7ScU+QFY7p8Y+qTXg2UH2aI4E1LQ4aQXw/ZMZKsrfDcfRAfJ996vJlszgzMxUQ=
+X-Received: by 2002:ad4:5c8e:0:b0:880:535d:d157 with SMTP id
+ 6a1803df08f44-8847c544e8dmr458060866d6.31.1764352140820; Fri, 28 Nov 2025
+ 09:49:00 -0800 (PST)
 MIME-Version: 1.0
-References: <cover.1764080338.git.metze@samba.org>
- <CAKYAXd_HKKBKx_B7+Z+b_jt+rHazuMkskYYPAp6BROPuy0uBfA@mail.gmail.com>
- <CAKYAXd8Nb6Ay1-J0GeDUCzRDWWYtRtcU-2FZ1LrX9p8soKpaKQ@mail.gmail.com>
- <bd2237e6-86e7-40c8-8635-8ba6c0573cbe@samba.org>
- <CAKYAXd8QhE_=zoK3pLqd0M-8Zw8M0auTw-P5yoqe6DioGXtsaQ@mail.gmail.com>
- <CAH2r5mv0BLnF9+ori1ZfoaYfBLXcscjuFkkAjggSY+aroKDRiw@mail.gmail.com>
- <b1f6271b-3c2a-493a-a404-7cdacd791acb@samba.org>
- <CAKYAXd9ykY7y0PGFcibQMUjQxb9_usEqKEJFrWJCBFuNesji1A@mail.gmail.com>
- <788d9b9e-e693-437f-bb56-1b84868b4250@samba.org>
-In-Reply-To: <788d9b9e-e693-437f-bb56-1b84868b4250@samba.org>
-Date: Sat, 29 Nov 2025 00:00:58 +0900
-X-Gmail-Original-Message-ID: <CAKYAXd9eAZieZPb3RuOpC6msi9ctjpQ8aT-V33oF7qHxvAELLA@mail.gmail.com>
-X-Gm-Features: AWmQ_bliYiHSUKajTi2xnXqj7qubxaxH6gUefndRP-u8yPXTyL9LKZBdO65mDiU
-Message-ID: <CAKYAXd9eAZieZPb3RuOpC6msi9ctjpQ8aT-V33oF7qHxvAELLA@mail.gmail.com>
-Subject: Re: [PATCH v3 0/4] smb: smbdirect/client/server: relax
- WARN_ON_ONCE(SMBDIRECT_SOCKET_*) checks
+References: <20251128134951.2331836-1-metze@samba.org>
+In-Reply-To: <20251128134951.2331836-1-metze@samba.org>
+Date: Fri, 28 Nov 2025 11:48:49 -0600
+X-Gm-Features: AWmQ_bmsnc-u3HX1k2Dmt7K5Pu8RM2fChqHU8lb56kDILHmFmHZBQwiO24VcJbU
+Message-ID: <CAH2r5msBaRVPNkaMy0iQKPq9COR+p5+UUNf-B-Fh6=v7zKNRnQ@mail.gmail.com>
+Subject: Re: [PATCH] MAINTAINERS: change git.samba.org to https
 To: Stefan Metzmacher <metze@samba.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -80,105 +86,63 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Namjae Jeon via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Namjae Jeon <linkinjeon@kernel.org>
-Cc: linux-cifs@vger.kernel.org, David Howells <dhowells@redhat.com>,
- Paulo Alcantara <pc@manguebit.org>, samba-technical@lists.samba.org,
- Tom Talpey <tom@talpey.com>, Steve French <smfrench@gmail.com>
+From: Steve French via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Steve French <smfrench@gmail.com>
+Cc: linux-cifs@vger.kernel.org, samba-technical@lists.samba.org,
+ Namjae Jeon <linkinjeon@kernel.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Fri, Nov 28, 2025 at 10:35=E2=80=AFPM Stefan Metzmacher <metze@samba.org=
-> wrote:
+On Fri, Nov 28, 2025 at 7:49=E2=80=AFAM Stefan Metzmacher <metze@samba.org>=
+ wrote:
 >
-> Am 28.11.25 um 13:11 schrieb Namjae Jeon:
-> > On Fri, Nov 28, 2025 at 7:17=E2=80=AFPM Stefan Metzmacher <metze@samba.=
-org> wrote:
-> >>
-> >> Am 28.11.25 um 05:53 schrieb Steve French:
-> >>> On Thu, Nov 27, 2025 at 9:19=E2=80=AFPM Namjae Jeon <linkinjeon@kerne=
-l.org> wrote:
-> >>>
-> >>>> On Fri, Nov 28, 2025 at 12:54=E2=80=AFAM Stefan Metzmacher <metze@sa=
-mba.org>
-> >>>> wrote:
-> >>>>>
-> >>>>> Am 26.11.25 um 02:07 schrieb Namjae Jeon:
-> >>>>>> On Wed, Nov 26, 2025 at 8:50=E2=80=AFAM Namjae Jeon <linkinjeon@ke=
-rnel.org>
-> >>>> wrote:
-> >>>>>>>
-> >>>>>>> On Tue, Nov 25, 2025 at 11:22=E2=80=AFPM Stefan Metzmacher <metze=
-@samba.org>
-> >>>> wrote:
-> >>>>>>>>
-> >>>>>>>> Hi,
-> >>>>>>>>
-> >>>>>>>> here are some small cleanups for a problem Nanjae reported,
-> >>>>>>>> where two WARN_ON_ONCE(sc->status !=3D ...) checks where trigger=
-ed
-> >>>>>>>> by a Windows 11 client.
-> >>>>>>>>
-> >>>>>>>> The patches should relax the checks if an error happened before,
-> >>>>>>>> they are intended for 6.18 final, as far as I can see the
-> >>>>>>>> problem was introduced during the 6.18 cycle only.
-> >>>>>>>>
-> >>>>>>>> Given that v1 of this patchset produced a very useful WARN_ONCE(=
-)
-> >>>>>>>> message, I'd really propose to keep this for 6.18, also for the
-> >>>>>>>> client where the actual problem may not exists, but if they
-> >>>>>>>> exist, it will be useful to have the more useful messages
-> >>>>>>>> in 6.16 final.
-> >>>>>> Anyway, Applied this patch-set to #ksmbd-for-next-next.
-> >>>>>> Please check the below issue.
-> >>>>>
-> >>>>> Steve, can you move this into ksmbd-for-next?
-> >>>> Steve, There are more patches in ksmbd-for-next-next.
-> >>>> Please apply the following 6 patches in #ksmbd-for-next-next to
-> >>>> #ksmbd-for-next.
-> >>>>
-> >>>> 3858665313f1 (HEAD -> ksmbd-for-next-next, origin/ksmbd-for-next-nex=
-t)
-> >>>> ksmbd: ipc: fix use-after-free in ipc_msg_send_request
-> >>>> b9c7d4fe6e93 smb: client: relax WARN_ON_ONCE(SMBDIRECT_SOCKET_*)
-> >>>> checks in recv_done() and smbd_conn_upcall()
-> >>>> 6c5ceb636d08 smb: server: relax WARN_ON_ONCE(SMBDIRECT_SOCKET_*)
-> >>>> checks in recv_done() and smb_direct_cm_handler()
-> >>>> d02a328304e5 smb: smbdirect: introduce
-> >>>> SMBDIRECT_CHECK_STATUS_{WARN,DISCONNECT}()
-> >>>> 340255e842d5 smb: smbdirect: introduce SMBDIRECT_DEBUG_ERR_PTR() hel=
-per
-> >>>> 01cba263d1bd ksmbd: vfs: fix race on m_flags in vfs_cache
-> >>
-> >> It seems these are the v2 patches, please use v3,
-> >> the difference is that the __SMBDIRECT_SOCKET_DISCONNECT
-> >> defines are moved up in order to let the patches on top work
-> >> with out modifications. I noticed the difference while
-> >> doing a rebase on ksmbd-for-next and get conflicts.
-> > Right, Sorry for missing v3 patches.
-> >
-> > Steve, Please apply updated 4 patches in ksmbd-for-next-next to ksmbd-f=
-or-next.
-> >
-> > fc86cca6087f (HEAD -> ksmbd-for-next-next, origin/ksmbd-for-next-next)
-> > smb: client: relax WARN_ON_ONCE(SMBDIRECT_SOCKET_*) checks in
-> > recv_done() and smbd_conn_upcall()
-> > 111b7cb1b7f6 smb: server: relax WARN_ON_ONCE(SMBDIRECT_SOCKET_*)
-> > checks in recv_done() and smb_direct_cm_handler()
-> > 12059ee95a5b smb: smbdirect: introduce
-> > SMBDIRECT_CHECK_STATUS_{WARN,DISCONNECT}()
-> > 3658d5ac7908 smb: smbdirect: introduce SMBDIRECT_DEBUG_ERR_PTR() helper
+> This is the preferred way to access the server.
+
+Are you sure that is the preferred way?  75% of the entries in
+MAINTAINERS use "git git://" not "git http://" but ... I did notice
+that for all github and gitlab ones they use "git http://"
+But maybe for samba.org there is an advantage to https?!
+
+
+> Cc: Steve French <smfrench@gmail.com>
+> Cc: Namjae Jeon <linkinjeon@kernel.org>
+> Cc: linux-cifs@vger.kernel.org
+> Cc: samba-technical@lists.samba.org
+> Signed-off-by: Stefan Metzmacher <metze@samba.org>
+> ---
+>  MAINTAINERS | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
 >
-> Given that we missed linux-next for this week anyway,
-> we could also add everything from my for-6.19/fs-smb-20251128-v5
-> branch, which is rebased on smfrench-smb3-kernel/ksmbd-for-next with
-> the top 3 commits replaced by the top 3 commits from
-> smfrench-smb3-kernel/ksmbd-for-next-next.
-> And has the patches from David's cifs-cleanup branch
-> as well as my smbdirect.ko patches.
-I have added stable tags to the top 4 patches in ksmbd-for-next-next
-so they can be applied into 6.18.
-Cc: stable@vger.kernel.org # v6.18
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index 047d242faf68..d55c1c263e71 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -6179,7 +6179,7 @@ L:        linux-cifs@vger.kernel.org
+>  L:     samba-technical@lists.samba.org (moderated for non-subscribers)
+>  S:     Supported
+>  W:     https://wiki.samba.org/index.php/LinuxCIFS
+> -T:     git git://git.samba.org/sfrench/cifs-2.6.git
+> +T:     git https://git.samba.org/sfrench/cifs-2.6.git
+>  F:     Documentation/admin-guide/cifs/
+>  F:     fs/smb/client/
+>  F:     fs/smb/common/
+> @@ -13611,7 +13611,7 @@ R:      Sergey Senozhatsky <senozhatsky@chromium.=
+org>
+>  R:     Tom Talpey <tom@talpey.com>
+>  L:     linux-cifs@vger.kernel.org
+>  S:     Maintained
+> -T:     git git://git.samba.org/ksmbd.git
+> +T:     git https://git.samba.org/ksmbd.git
+>  F:     Documentation/filesystems/smb/ksmbd.rst
+>  F:     fs/smb/common/
+>  F:     fs/smb/server/
+> --
+> 2.43.0
 >
-> metze
+
+
+--=20
+Thanks,
+
+Steve
 
