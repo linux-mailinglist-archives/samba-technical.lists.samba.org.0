@@ -2,50 +2,66 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1AC18C8FC35
-	for <lists+samba-technical@lfdr.de>; Thu, 27 Nov 2025 18:48:25 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A941FC90BEE
+	for <lists+samba-technical@lfdr.de>; Fri, 28 Nov 2025 04:20:05 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=461Vy01Zb0nwzw3ifoGzpi9dK4EZy7C3bNQOK9nUwXw=; b=XLbJhQ7ECK3O3gt+sVAS3OvsDQ
-	JWTHxtYNsW4G6CVRpyXzbHjEFwMZ+VbhEt0nLPMaP5nO+C6kU5/yWV/3qsRvahb0cuciCeTdW83jY
-	6CAWz6p8f4kSBdHLrDpsWVwWaTSiJxLWLQTm33KxvC+O1fDrJeSJqvSm/nWh/sK9zsWKTxuX7hGom
-	lYcIQda2ulmiXdaW1wJB6RjoymzMyjTVmhPFmEKzXtsGy8hnX59sKQIKHVA7DTRijDXHPGhrIHEhU
-	BiH3QgkqzuSJn4f26Ih0sWIzsiyKZRNGnfsPawM6/KHcIV9/2GERFGPs/jE+s1r3+R8F800PK1uH3
-	EyjeN02A==;
-Received: from ip6-localhost ([::1]:37528 helo=hr1.samba.org) 
+	bh=FYs/MBFp68N1iTyfSYVx6m/YYUnE4Nw9pQlanRMznfs=; b=EoPPP6lm/YsFDbkVYTo4lpTziz
+	b9jr81ND1Emq8nKFe85jlaJQqs3BVax22DUkwueJSkAp9qCUS+cLYh/B6rI/NaY/2dEgIeEqwZK4K
+	gL7aSCVuuQBzOKAoGjvvobU6jV8XGKiwOEmyuwu4l8u+xqgx/K6FdgbIStio3PLX5M19sdZDKSYOE
+	TILIf92ZOV4iHzRUUuKnoFXuPstNM7fa+RjpLne0vu4LatGEflADCcNdH1DfT5OpSCQrTVel+jD7I
+	tBUNAYw3DG6tRXMdvsvE0ssqAAt1KvZxUYLDtJfYja2zogvLpisi5hmK3EqEmzhBUsF4qPpgt2/ku
+	3xD906iQ==;
+Received: from ip6-localhost ([::1]:36154 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1vOg5x-00DSuG-Ma; Thu, 27 Nov 2025 17:47:53 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:39968) 
+	id 1vOp19-00DTqB-Ev; Fri, 28 Nov 2025 03:19:31 +0000
+Received: from tor.source.kernel.org ([2600:3c04:e001:324:0:1991:8:25]:36150) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vOg5t-00DSu9-D6
- for samba-technical@lists.samba.org; Thu, 27 Nov 2025 17:47:52 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=From:Cc:To:Date:Message-ID;
- bh=461Vy01Zb0nwzw3ifoGzpi9dK4EZy7C3bNQOK9nUwXw=; b=k9vbGoB0kfzIMMqR8vXteUGamz
- ooV5kYNXah6tFldH1rDE4Wshj5wUDlA7CLUxvd/HbcfRNo5IyFdjG8+AKEcvTPb1p6ObMXYuakp1b
- Irusrg5dlETX8KQ7MmuTaa6LwU/rwou1Q3+Xrbgj9xEnllAtDQbPqJCIjn8vsAMRG+y8175ofdQdd
- ziAGF2nQ0sqw3LluD7cn2D5PNpGENV0XNfGCbJD3ehsImK1CWZs+CTGT6zv0zzlOzB69xq4pLX1Rf
- TTZj4fgoPlaDOJ3K/4OmGZYqwAKG284x+tT9qvUlcldYl82tE8AKIAX2tN3OBjb/fhkbSp/LbjmKm
- pCyNzanGt3wWFXvyTBrmP9YyuNAT8xSWrLBhXaGpaAP20ud3nfnsaRNcl/Ix3D9IpLfHf7wLaL8qS
- BVjf9vSb1PbgYRgMHzokaEthQL6FpMQ1rev19toZDhiPJsiE/xwX/TdL/BhemSQXw8eS+Mqc28BPy
- 28mbKXm/2zIscztuxegPStsp;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vOg5r-00G22i-01; Thu, 27 Nov 2025 17:47:47 +0000
-Message-ID: <53eb849d-d5c1-4b8c-8d83-bacd18d129b1@samba.org>
-Date: Thu, 27 Nov 2025 18:47:46 +0100
+ (Exim) id 1vOp14-00DTq3-4c
+ for samba-technical@lists.samba.org; Fri, 28 Nov 2025 03:19:28 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by tor.source.kernel.org (Postfix) with ESMTP id 1223160254
+ for <samba-technical@lists.samba.org>; Fri, 28 Nov 2025 03:19:13 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id BD2B9C16AAE
+ for <samba-technical@lists.samba.org>; Fri, 28 Nov 2025 03:19:12 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1764299952;
+ bh=FYs/MBFp68N1iTyfSYVx6m/YYUnE4Nw9pQlanRMznfs=;
+ h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
+ b=qPAzVwVCTyb36oTQ/6Lx9RszqZQSsjPXJUYL9W461N7M3R8qzjeDDle7Fg/K+m4Sb
+ YcgKxAeykOyJQFz9+SEGzYSLGLxmV8gPTllwptei6L3Ljze1Z4qYPihCI1EeyQXPJi
+ yWRJjQvTEs1/XbgPUbFNS5J5h3mxxCh1VHKFQB4wZ/3CkEFwEw1/l0hgC3uesInqtS
+ 4/ZaX0QoXFfqn59HTLi+kd8sdMMc3MHh+ubOj3R2JnwqpLh1O3x931P4M76CEAvSGA
+ oGu0HsLNt/BQ4r8EY3DGjESzkSCXXrjdwfGuny7e3Yxol+mzm8hcLzL54ySmEoY7/j
+ fhIEBeOW6fhxA==
+Received: by mail-ed1-f53.google.com with SMTP id
+ 4fb4d7f45d1cf-6418b55f86dso2563472a12.1
+ for <samba-technical@lists.samba.org>; Thu, 27 Nov 2025 19:19:12 -0800 (PST)
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUITEZvnieY060gas6AaRHTgTIie1N8/VeZDFlWexCbW40tmHif1oZEalWPTdL9BSZQBJxRk0xDwoc4VUlfNW0=@lists.samba.org
+X-Gm-Message-State: AOJu0Yzt+4U/llldZphOThlAi17hQb5aWClFkpUfcLfa/XPu7YDZNJGq
+ J71naXwwmZGFlpp6norOpkOJbawWq9jt3REnCaK1ab6v94tqYfEZmy/txNsAEIFh87RHU33gKLP
+ VccNg8EhwOdww2/E7q1g2G4OBg3VGpMM=
+X-Google-Smtp-Source: AGHT+IH5XTvaMrPG4bnSmW+lhd1fqCfFmftv1P/fIwHE0EQlMuIIlNsmdaGaCSIA7xj6rEdYB18K0Qnfc5IHIy6TojA=
+X-Received: by 2002:a05:6402:42ca:b0:640:9eb3:3686 with SMTP id
+ 4fb4d7f45d1cf-64554685822mr22504773a12.19.1764299951293; Thu, 27 Nov 2025
+ 19:19:11 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] net: define IPPROTO_SMBDIRECT and SOL_SMBDIRECT constants
-To: Paolo Abeni <pabeni@redhat.com>, netdev@vger.kernel.org
-References: <20251126111407.1786854-1-metze@samba.org>
- <3dd5c950-e3e4-42b8-a40b-f0ee04feb563@redhat.com>
-Content-Language: en-US
-In-Reply-To: <3dd5c950-e3e4-42b8-a40b-f0ee04feb563@redhat.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+References: <cover.1764080338.git.metze@samba.org>
+ <CAKYAXd_HKKBKx_B7+Z+b_jt+rHazuMkskYYPAp6BROPuy0uBfA@mail.gmail.com>
+ <CAKYAXd8Nb6Ay1-J0GeDUCzRDWWYtRtcU-2FZ1LrX9p8soKpaKQ@mail.gmail.com>
+ <bd2237e6-86e7-40c8-8635-8ba6c0573cbe@samba.org>
+In-Reply-To: <bd2237e6-86e7-40c8-8635-8ba6c0573cbe@samba.org>
+Date: Fri, 28 Nov 2025 12:18:59 +0900
+X-Gmail-Original-Message-ID: <CAKYAXd8QhE_=zoK3pLqd0M-8Zw8M0auTw-P5yoqe6DioGXtsaQ@mail.gmail.com>
+X-Gm-Features: AWmQ_bl7Wo8372Rh5RdOEiNopn9S1Y4slRdqHCH2m32yeCmqPYNSAA9tLvanS2I
+Message-ID: <CAKYAXd8QhE_=zoK3pLqd0M-8Zw8M0auTw-P5yoqe6DioGXtsaQ@mail.gmail.com>
+Subject: Re: [PATCH v3 0/4] smb: smbdirect/client/server: relax
+ WARN_ON_ONCE(SMBDIRECT_SOCKET_*) checks
+To: Stefan Metzmacher <metze@samba.org>, Steve French <smfrench@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,92 +75,60 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Stefan Metzmacher <metze@samba.org>
-Cc: linux-cifs@vger.kernel.org, Willem de Bruijn <willemb@google.com>,
- Xin Long <lucien.xin@gmail.com>, linux-rdma@vger.kernel.org,
- linux-kernel@vger.kernel.org, samba-technical@lists.samba.org,
- Kuniyuki Iwashima <kuniyu@google.com>, Namjae Jeon <linkinjeon@kernel.org>,
- Tom Talpey <tom@talpey.com>, Steve French <smfrench@gmail.com>,
- Eric Dumazet <edumazet@google.com>, Simon Horman <horms@kernel.org>,
- Jakub Kicinski <kuba@kernel.org>, "David S . Miller" <davem@davemloft.net>,
- quic@lists.linux.dev
+From: Namjae Jeon via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Namjae Jeon <linkinjeon@kernel.org>
+Cc: Tom Talpey <tom@talpey.com>, linux-cifs@vger.kernel.org,
+ samba-technical@lists.samba.org, Paulo Alcantara <pc@manguebit.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi Paolo,
+On Fri, Nov 28, 2025 at 12:54=E2=80=AFAM Stefan Metzmacher <metze@samba.org=
+> wrote:
+>
+> Am 26.11.25 um 02:07 schrieb Namjae Jeon:
+> > On Wed, Nov 26, 2025 at 8:50=E2=80=AFAM Namjae Jeon <linkinjeon@kernel.=
+org> wrote:
+> >>
+> >> On Tue, Nov 25, 2025 at 11:22=E2=80=AFPM Stefan Metzmacher <metze@samb=
+a.org> wrote:
+> >>>
+> >>> Hi,
+> >>>
+> >>> here are some small cleanups for a problem Nanjae reported,
+> >>> where two WARN_ON_ONCE(sc->status !=3D ...) checks where triggered
+> >>> by a Windows 11 client.
+> >>>
+> >>> The patches should relax the checks if an error happened before,
+> >>> they are intended for 6.18 final, as far as I can see the
+> >>> problem was introduced during the 6.18 cycle only.
+> >>>
+> >>> Given that v1 of this patchset produced a very useful WARN_ONCE()
+> >>> message, I'd really propose to keep this for 6.18, also for the
+> >>> client where the actual problem may not exists, but if they
+> >>> exist, it will be useful to have the more useful messages
+> >>> in 6.16 final.
+> > Anyway, Applied this patch-set to #ksmbd-for-next-next.
+> > Please check the below issue.
+>
+> Steve, can you move this into ksmbd-for-next?
+Steve, There are more patches in ksmbd-for-next-next.
+Please apply the following 6 patches in #ksmbd-for-next-next to #ksmbd-for-=
+next.
 
-> On 11/26/25 12:14 PM, Stefan Metzmacher wrote:
->> In order to avoid conflicts with the addition of IPPROTO_QUIC,
->> the patch is based on netdev-next/main + the patch adding
->> IPPROTO_QUIC and SOL_QUIC [2].
->>
->> [2]
->> https://lore.kernel.org/quic/0cb58f6fcf35ac988660e42704dae9960744a0a7.1763994509.git.lucien.xin@gmail.com/T/#u
->>
->> As the numbers of IPPROTO_QUIC and SOL_QUIC are already used
->> in various userspace applications it would be good to have
->> this merged to netdev-next/main even if the actual
->> implementation is still waiting for review.
-> 
-> Let me start from here... Why exactly? such applications will not work
-> (or at least will not use IPPROTO_QUIC) without the actual protocol
-> implementation.
+3858665313f1 (HEAD -> ksmbd-for-next-next, origin/ksmbd-for-next-next)
+ksmbd: ipc: fix use-after-free in ipc_msg_send_request
+b9c7d4fe6e93 smb: client: relax WARN_ON_ONCE(SMBDIRECT_SOCKET_*)
+checks in recv_done() and smbd_conn_upcall()
+6c5ceb636d08 smb: server: relax WARN_ON_ONCE(SMBDIRECT_SOCKET_*)
+checks in recv_done() and smb_direct_cm_handler()
+d02a328304e5 smb: smbdirect: introduce
+SMBDIRECT_CHECK_STATUS_{WARN,DISCONNECT}()
+340255e842d5 smb: smbdirect: introduce SMBDIRECT_DEBUG_ERR_PTR() helper
+01cba263d1bd ksmbd: vfs: fix race on m_flags in vfs_cache
 
-There's the out of tree quic driver, that is used by some people
-see https://github.com/lxin/quic.
-
-And Samba 4.23 already uses the specific *_QUIC values,
-so it would be good to make sure the values are not used for
-something else, by accident.
-
-> Build time issues are much more easily solved with the usual:
-> 
-> #ifndef IPPROTO_*
-> #define IPPROTO_
-> #endif
-
-Sure, but that still only works reliable if the constants
-don't change.
-
-> that the application code should still carry for a bit of time (until
-> all the build hosts kernel headers are updated).
-
-The build hosts often don't have current kernel headers
-anyway, that's why applications have the hard coded (at least fallback values).
-
-But a host might have a newer kernel (or out of tree module)
-at runtime, which would allow the application to use the feature.
-
-> The above considerations also apply to this patch. What is the net
-> benefit? Why something like the above preprocessor's macros are not enough?
-
-It's mainly to have the constants reserved in order to avoid collisions
-at runtime.
-
-And in the current case also the merge conflict between the two patchsets,
-that's another why I thought it would be good to the _QUIC patch already
-accepted.
-
-> We need at least to see the paired implementation to accept this patch,
-
-I hope to post the first part of the _SMBDIRECT socket code next
-week, it's already working for the in kernel users cifs.ko and ksmbd.ko,
-but I want to split the relatively large commit into smaller chunks,
-for better review, the current state consists of the top 3 commits of
-https://git.samba.org/?p=metze/linux/wip.git;a=shortlog;h=refs/heads/master-ipproto-smbdirect-v0.5
-1. the addition of the socket layer above the existing code, for in kernel use only
-2. change cifs.ko to use it
-3. change ksmbd.ko to use it.
-
-Opening it for userspace will be developed in the next weeks.
-
- > and I personally think it would be better to let the IPPROTO definition
- > and the actual implementation land together.
-
-In general I'd agree with you, I'm fine with deferring this patch
-a bit and will cope if the _QUIC patch is also deferred.
-
-Anyway thanks for the feedback!
-metze
+Thanks.
+>
+> Thanks!
+> metze
+>
 
