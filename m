@@ -2,45 +2,47 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8B593C9D081
-	for <lists+samba-technical@lfdr.de>; Tue, 02 Dec 2025 22:16:39 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 597AFC9D07F
+	for <lists+samba-technical@lfdr.de>; Tue, 02 Dec 2025 22:16:37 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=gRXwD70uletccTPFHozrCt8PmOX7/Wh1rB8nIsb7Ri4=; b=dtuvZv+6NG4Jc86vdEHzOoSWhw
-	vIdn3KCEiGIG/75hUxz+uUleqr2XNT2fNmyUQu78eZ0vBUsbObTlWVmnmOUZ0mCj5xZSFEJQrAkJu
-	yfMZdzPfa3x3EnD9Gu/V6pICX5VfAQLoUQOPGZTGYi/8YK23i67Kn7ibwqm+ADKeKb8c2Qcqr+hpr
-	sGsd+btYKD70AdtBOYskcr3qu4mgka9UQQ0qyJEsG/pznzPsOkVK/Wlza0p/iMdKSqvyueFGFSQzk
-	iLdeXHY09k+TE+hRoIQjT6asxxEgSPH8MY1t0XUdk2aXEGpMt+pqxGhgSr/pSldn8F/vOV80DXELP
-	hZXnuI0g==;
-Received: from ip6-localhost ([::1]:50746 helo=hr1.samba.org) 
+	bh=nFx/LeqE9ahJ9gho311pUXSBD1x8oa7Rl1ekFX2Cs0w=; b=dSOdn7Qtwi9DQnlIRSlJUoIA2w
+	CnSrEoJYRPBUzsbMt4p3f4LaJqOTht5tc6Ty+1Em2A9LyLkN/cYFiRbCpTUFlZQfOZVRCs0VNsTU9
+	YF1zPkgDO+r5X3q0nFRgAtI8j8/xyA49BhZQEDPHirfGruSw9CNoTqXBbETRgU/LboHygnnKnEYOd
+	Ex6XcKMvpRHudRbW0cZrnhRM00Q95zCp+fFyp4Rkmo2MPKkTR1x4ZJmJHMtdGNJpfH8f3MfQwghiy
+	cyvP8JmSAiEj4xeBr1okMGAe1JqlXCLVqbItl2OYkAGrBxJa6l/pDqausJHPe2+xjkjEnK7oXYJWP
+	x75TVUoQ==;
+Received: from ip6-localhost ([::1]:50750 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1vQXiz-00FbHA-BO; Tue, 02 Dec 2025 21:15:53 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:20374) 
+	id 1vQXj3-00FbHQ-68; Tue, 02 Dec 2025 21:15:57 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:20382) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vQXiu-00FbH3-Kn
- for samba-technical@lists.samba.org; Tue, 02 Dec 2025 21:15:50 +0000
+ (Exim) id 1vQXiy-00FbHD-Qy
+ for samba-technical@lists.samba.org; Tue, 02 Dec 2025 21:15:55 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Message-ID:Date:Cc:To:From;
- bh=gRXwD70uletccTPFHozrCt8PmOX7/Wh1rB8nIsb7Ri4=; b=PMrju5s6uFH8IXzK2fJUxJdTXT
- LXz/nhCKxuBi4myiATZvnDZptIOnWVWY2tkDb/aAL8kMJhxFs370QVp0byqUJxGlit1jAxYtQjfVo
- K4hiLpqfdUtuO1FUS2BhQmlbRlJ5TpI1XGYSx3juWxYd20Q0kATr08Dvsgte+N5x0NwyUBhWMempd
- OnF8c2K5OdpIUSQtiWzhf9oKwvEXwPvXlFIOWAKHQQ3fNoDmJbrwjzcorzZIscpMqENdimS1ghYaz
- tCxn3ts9dOEO73gEgopKUgEg6QYF0VVk20SCQG7o+yhKzQhVnrGMonbRbBauHWJ0w6OmABeO6vJRW
- ieV5wQFqDtUpFsAjs8TCAj2amvGEpT9t7FvnM8lA/BSQMU25btBPibFFW+JatflbETrtP9T2D+ukk
- AI7PSR+ToYdtzLgeQBR/gzxCqG4wV9cAhM482/8hE83K/QJvD/L4CP8p4agWDRCETcvB0s7YRu28Z
- M2L2/NYYvWw/wrLP2kUVPRZM;
+ bh=nFx/LeqE9ahJ9gho311pUXSBD1x8oa7Rl1ekFX2Cs0w=; b=zRVetU2Gi8ONfTdpJMWyDkX+4D
+ mUNg9Fl1DGz57JdIw6jsBhKAPVBMzZo2UoaUOwQZqdoD/zcZP6GdTsmToKZWhStERwj4Ka91L7LNM
+ s5lFivIXoM3M0z0p4N+qz58IoPA7hswmqX9l2mQuuxXQPD0GeXjwjIituQwajFvmYcZZV0efJPT4e
+ XhFEC/Qfqzv6X8IVHMvdyt0dIjCMXizAZb9mTNE8kLFLSMhoMNIXz2BtYcu7AsyE9qbbHUjD5KbxL
+ H2zAzpeJmlljAawnXRszt6E8UDH1DzKve2RqSGicsO2/+6rg6EoMp6q26ojZzDf5WBGFbsyu2NEfo
+ ynIECMEPocnqnCYNCLhdEF19fjSz7ft5vnOtMpYjEIPcEyu2dgH8Wc0fw41blfvyDuWMjn7cLw2zj
+ B2Eh3NGnfl2qAlnVH08natoTaDyF/bSLInwffFc/K5m75yEr5PtzkPm3Xva/Peog9gU3SWr63Igin
+ AE5PP6VY3Js2m7Rb1sIBo7K/;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vQXir-00GhsP-1M; Tue, 02 Dec 2025 21:15:45 +0000
+ (Exim) id 1vQXix-00Ghsl-2Q; Tue, 02 Dec 2025 21:15:51 +0000
 To: linux-cifs@vger.kernel.org,
 	samba-technical@lists.samba.org
-Subject: [RFC PATCH 0/4] smb:smbdirect/server: introduce
- smb_direct_negotiate_recv_work
-Date: Tue,  2 Dec 2025 22:15:23 +0100
-Message-ID: <cover.1764709225.git.metze@samba.org>
+Subject: [RFC PATCH 1/4] smb: smbdirect: introduce
+ smbdirect_socket.connect.{lock, work}
+Date: Tue,  2 Dec 2025 22:15:24 +0100
+Message-ID: <bb7abd609300057a839001f2501f5e1827d825a8.1764709225.git.metze@samba.org>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <cover.1764709225.git.metze@samba.org>
+References: <cover.1764709225.git.metze@samba.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: samba-technical@lists.samba.org
@@ -63,46 +65,54 @@ Cc: metze@samba.org, Steve French <smfrench@gmail.com>,
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi,
+This will first be used by the server in order to defer
+the processing of the initial recv of the negotiation
+request.
 
-here's a patchset that implements a better solution
-to the problem that the initial recv completion might
-arrive before the RDMA_CM_EVENT_ESTABLISHED event.
+But in future it will also be used by the client in order
+to implement an async connect.
 
-The last patch is not intended to be applied, but
-it helps to see the event flow it generated,
-see the commit message.
+Cc: Steve French <smfrench@gmail.com>
+Cc: Tom Talpey <tom@talpey.com>
+Cc: Long Li <longli@microsoft.com>
+Cc: Namjae Jeon <linkinjeon@kernel.org>
+Cc: linux-cifs@vger.kernel.org
+Cc: samba-technical@lists.samba.org
+Signed-off-by: Stefan Metzmacher <metze@samba.org>
+---
+ fs/smb/common/smbdirect/smbdirect_socket.h | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
 
-This is based on the 4 smbirect patches within
-v6.19-rc-smb-fixes:
-
-dc10cf1368af8cb816dcaa2502ba7d44fff20612
-smb: client: relax WARN_ON_ONCE(SMBDIRECT_SOCKET_*) checks in recv_done() and smbd_conn_upcall()
-425c32750b48956a6e156b6a4609d281ee471359
-smb: server: relax WARN_ON_ONCE(SMBDIRECT_SOCKET_*) checks in recv_done() and smb_direct_cm_handler()
-1adb2dab9727c5beaaf253f67bf4fc2c54ae70e7
-smb: smbdirect: introduce SMBDIRECT_CHECK_STATUS_{WARN,DISCONNECT}()
-1f3fd108c5c5a9885c6c276a2489c49b60a6b90d
-smb: smbdirect: introduce SMBDIRECT_DEBUG_ERR_PTR() helper
-
-I've tested them on top of v6.18 (without the other patches
-in v6.19-rc-smb-fixes).
-
-Sadly there are still problems with Mellanox setups
-as well as irdma (in iwarp mode). I'm trying to
-prepare patches to debug this next.
-
-Stefan Metzmacher (4):
-  smb: smbdirect: introduce smbdirect_socket.connect.{lock,work}
-  smb: server: initialize recv_io->cqe.done = recv_done just once
-  smb: server: defer the initial recv completion logic to
-    smb_direct_negotiate_recv_work()
-  fs/smb/server/transport_rdma.c TMP DEBUG connect work
-
- fs/smb/common/smbdirect/smbdirect_socket.h |  12 +
- fs/smb/server/transport_rdma.c             | 321 +++++++++++++++++++--
- 2 files changed, 304 insertions(+), 29 deletions(-)
-
+diff --git a/fs/smb/common/smbdirect/smbdirect_socket.h b/fs/smb/common/smbdirect/smbdirect_socket.h
+index 384b19177e1c..ee4c2726771a 100644
+--- a/fs/smb/common/smbdirect/smbdirect_socket.h
++++ b/fs/smb/common/smbdirect/smbdirect_socket.h
+@@ -132,6 +132,14 @@ struct smbdirect_socket {
+ 
+ 	struct smbdirect_socket_parameters parameters;
+ 
++	/*
++	 * The state for connect/negotiation
++	 */
++	struct {
++		spinlock_t lock;
++		struct work_struct work;
++	} connect;
++
+ 	/*
+ 	 * The state for keepalive and timeout handling
+ 	 */
+@@ -353,6 +361,10 @@ static __always_inline void smbdirect_socket_init(struct smbdirect_socket *sc)
+ 	INIT_WORK(&sc->disconnect_work, __smbdirect_socket_disabled_work);
+ 	disable_work_sync(&sc->disconnect_work);
+ 
++	spin_lock_init(&sc->connect.lock);
++	INIT_WORK(&sc->connect.work, __smbdirect_socket_disabled_work);
++	disable_work_sync(&sc->connect.work);
++
+ 	INIT_WORK(&sc->idle.immediate_work, __smbdirect_socket_disabled_work);
+ 	disable_work_sync(&sc->idle.immediate_work);
+ 	INIT_DELAYED_WORK(&sc->idle.timer_work, __smbdirect_socket_disabled_work);
 -- 
 2.43.0
 
