@@ -2,48 +2,79 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id DB469C9D08B
-	for <lists+samba-technical@lfdr.de>; Tue, 02 Dec 2025 22:16:49 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3C10CCA26D4
+	for <lists+samba-technical@lfdr.de>; Thu, 04 Dec 2025 06:50:28 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=Ya0Qj70+kvGu9NFjwl313DaX8lRQWJMlE6wmsjNfTxM=; b=k/zh2rgD8vuFsjxigfmBZGd64e
-	VRqEhodtYcankEWLeG2ouox6Amxc70Y4Dh296T/SfnGQx2Jj6xYYHlJ0TvZzkx6SWiuUpPAdRjiEa
-	bg8qiHs8imNZmOfJ21NswEwPewqzmGTCEFxgyUB/xF1rd1hTcEP6FUZ3AJYxo3LxWiqZthUNQEOWj
-	xdNCHFtEpPhOjAHqYvMyboq/IDsiuvZ5wiV+AfXngttNVGWSUv/6OVxcxgR14OEh1V9emIKIxO0ow
-	sWcZ3pMdR0fQSPXRI+MZ3t1+wZa4LE/WrWSD8PmBcadT1UQWXMcl/apQep14uqZpNcAfUbM5ZxgoX
-	aeA8eR6Q==;
-Received: from ip6-localhost ([::1]:62592 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=7SYomATI96u/VTFhrTFGmsIeKSb/fBLFBlpYECdhpKU=; b=UlqLaALFurNRU8KOdEqCc2R/m5
+	Xbj/wMpEy7YhKcGie/KA76SfKXzviOstc1Tx7ohMeu7/YuEke07CVeuOn4CJZTU+bBeA5gaI1gsOF
+	3LG0I1DhVFHsWZGY6k9X5XnSB7DcUeEwAIjOK+k1yJY3d87AFmOKYqMrw7uTYRA4zB9c4zsuU22uV
+	BOwGTlEhP6DJ7gFW5mHca9y8Gh8CU66Ln0s66XhNwU59xggZhOolHRZWtpDEsLsPj47cqC+jlVsZb
+	jiYzM2gqcWhQPDawCXcG0m6Ir13tsUag/ijmm1XEeaqr4VSqVTcc3FdjNGno+hRdrGvWqj+zXAv8s
+	UooCZqrw==;
+Received: from ip6-localhost ([::1]:21068 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1vQXjU-00FbOC-S1; Tue, 02 Dec 2025 21:16:29 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:40342) 
+	id 1vR2Ds-00Ffpc-7J; Thu, 04 Dec 2025 05:49:48 +0000
+Received: from mail-qv1-xf31.google.com ([2607:f8b0:4864:20::f31]:54550) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vQXjF-00FbLF-CX
- for samba-technical@lists.samba.org; Tue, 02 Dec 2025 21:16:13 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Date:Cc:To:From;
- bh=Ya0Qj70+kvGu9NFjwl313DaX8lRQWJMlE6wmsjNfTxM=; b=HoWFv4xuGPaLhpFlgq8r/ZBcdC
- 8HDqb9aGvfmLOM3qdxmqp3NA0af5DAPPf4xUrRVBmldOeqkXwFksIihKNtLW57GFuDBrg6/SESJXF
- nMdBTdBmVTyh3VdhMJyycEUtRDmUAKWPRF2Ecwfusk6/TQtpxiBn0TdSvZlHaSj10DPnLBB9MGKv5
- Kk2+7ifX+ElrzW5v3vZ7senpA3s/jhlZqPHPWqRmB3xgfB72xfQvfR/z/GTHB1tDfx1cC7ChmTPVd
- BfjmBVAeatFACJt3mVQ25X8VtpRHTmu/cqogOHhsJvYHcb9GndANY7PAesdEOlaoLM/dZM6EBYm6Z
- I9PBafH9S4qy34B1ipM0JEM7sSCSi+bZ8w2UY1i60RDz8+jLhsCnWWqJapoRqmqdxCuTi+vhi4Dtz
- j4Pc3jV7A294UN5e6D/Mc47lC+9sDzdF2HoqCHOxw0+Fs+pmhupXszM8jaFNxqgU5J656qb1a7bUo
- FCN67HAP8oxVd9wF7yCYdlip;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vQXjE-00GhtZ-0g; Tue, 02 Dec 2025 21:16:08 +0000
-To: linux-cifs@vger.kernel.org,
-	samba-technical@lists.samba.org
-Subject: [RFC PATCH 4/4] fs/smb/server/transport_rdma.c TMP DEBUG connect work
-Date: Tue,  2 Dec 2025 22:15:27 +0100
-Message-ID: <53e2be7feb1149b88f2dcb6fdc5a0098cfd96067.1764709225.git.metze@samba.org>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <cover.1764709225.git.metze@samba.org>
-References: <cover.1764709225.git.metze@samba.org>
+ (Exim) id 1vR2Dn-00FfpV-45
+ for samba-technical@lists.samba.org; Thu, 04 Dec 2025 05:49:45 +0000
+Received: by mail-qv1-xf31.google.com with SMTP id
+ 6a1803df08f44-8843ebf2facso7536086d6.1
+ for <samba-technical@lists.samba.org>; Wed, 03 Dec 2025 21:49:42 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1764827381; x=1765432181; darn=lists.samba.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=7SYomATI96u/VTFhrTFGmsIeKSb/fBLFBlpYECdhpKU=;
+ b=MalE3rurAcrnEO2g4nGVJ7ljoUCribJnHA6HyRkgWhGKVwpoZzRGorVzRF36z6CEWg
+ Mm6ZqUwkp3hNfnk8Egjc6GwmoDU6BP0+KlU8UAuiUMCUvD6w/NPAt37zd5ttKRLh6WnI
+ 10Bj54SkizUMeAiHnhvtTW0FWvnW8Q71KsoDkJGLMGUJjm/JHQ0+UbPs7T/dF6of9mta
+ T0WQMKFwI5OPEC7CE/4eE2Xsr+KB/aSydsPYSbsXimrMLo3lmmfdaiV2sHxoeY1LROgn
+ 3aG/K3g7JEsIpq6+t20LkSz9nFUuMFXZjyevEuf3lKZwA+wkEGHOh/LLnmVY2Emmha6+
+ iIUA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1764827381; x=1765432181;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=7SYomATI96u/VTFhrTFGmsIeKSb/fBLFBlpYECdhpKU=;
+ b=eTQDaoqNI77yTl+YhHQU2ZKs4VB5yYJVWuJUs5uD+F6IcEZCnYi7md9MiMsSTyLaXT
+ wzrQJskN3ZWiCcszodK5WAOHIy3PAsCAjUjhoBea9JBDEuz0QX/Yk/239Ekn1qOf2Lv0
+ fy+EDsdGeT7bfwzrShNbuXUNj4waXi64qInC0m1jduWmrmmukRc+fLhPLL/rZ8fXnLWi
+ vR67sbws/odZy4KgzPJpqWR8EC4wfBVSG3AmSYuBVugTJlvVsELYXdGjGdBc1FDkAXlO
+ wud3GKt8cTFNO4qw+RAqbVaSF/mMB/WhvF7dDK2kTtEopQlu0ESP/4i3JxNiS8bzPZ2d
+ 6fXw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUwl/k5cc3jbeT6vLgTJciAsMEOtntTzG111XgP6uVKXzU88CziWYDtdrr1TX2+Ix8No193RCQmv6zTVjBxRLE=@lists.samba.org
+X-Gm-Message-State: AOJu0Yz+zzljhke31yQfxdn5FobKEv0kiB0Lo1WhYV3S9YFhbDWL8Z3B
+ GuSza9NVKiw1cxYMSrc78K4wC519AlYOT6WgCJqWIt+tmiPVl1GcAt4WQyb5slp1TF0oGNiLrrH
+ 9n0KXQZ//CgiH0Bjprv3Nh3JvKZsVS9A=
+X-Gm-Gg: ASbGncsApiwEvy2n5F6GNq1cWPJbUuq0UHZ4Xhf7SKNsT6li2EJh1coNk1e2piepM/8
+ 4+m8Pe/5zcXA4lAm4WBNGiAYE03p82601QdGWi4S1IebzgFD520gb8CMLzQfQb4Ldi6V+T8+tEx
+ pTP60Pd6Kt1cw6C3iBR0M4MdUjewVqG4v3JUQdWElYr1AzH/7MEX14oKc6y9RK6/0oPkqcUPQMn
+ T/k69si6eM5zG/7PUYWMqONMTRs+oju9H3gt+V5FX9cVXZ/3rCqABG/YRupAIM03kaDdRljri6l
+ gASMj1soprDFbNqZhAPqa59nR+TLtiTxP/93X+SpMQot+sq7HNcYy6r6nuz/wIjzllzTrZHltxX
+ 0fXcgRkxaBni+NZGUTQRqjHhfsLqlfZ1iJnsLMzO5BOm4TRVaWyDUNQCuji26VPg5cAttNJtZlj
+ gL88WZa5lCCA==
+X-Google-Smtp-Source: AGHT+IFt1TernB5P6diYBIWL/AavdCTOlaqpzrySpPeZUqcetycbtPAfnU//r8D1iw4R5PNNZoaNGJ+Rzok50eKUhPg=
+X-Received: by 2002:a05:6214:2c13:b0:882:3759:9155 with SMTP id
+ 6a1803df08f44-888194f1abcmr77833716d6.21.1764827380949; Wed, 03 Dec 2025
+ 21:49:40 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20251204045818.2590727-1-chenxiaosong.chenxiaosong@linux.dev>
+ <20251204045818.2590727-2-chenxiaosong.chenxiaosong@linux.dev>
+In-Reply-To: <20251204045818.2590727-2-chenxiaosong.chenxiaosong@linux.dev>
+Date: Wed, 3 Dec 2025 23:49:29 -0600
+X-Gm-Features: AWmQ_blsEQ4BXbbGrQMr1rTFyRAygmGD1bccTRFT_VTxGy-vBcE9rOmz8X2wpNs
+Message-ID: <CAH2r5mu25T8sBO4P25St_H0F0KMenn+5QGWx1Tfa+=6AsF6aNw@mail.gmail.com>
+Subject: Re: [PATCH 01/10] smb/client: reduce loop count in
+ map_smb2_to_linux_error() by half
+To: chenxiaosong.chenxiaosong@linux.dev
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -57,349 +88,116 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Stefan Metzmacher <metze@samba.org>
-Cc: metze@samba.org
+From: Steve French via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Steve French <smfrench@gmail.com>
+Cc: linux-cifs@vger.kernel.org,
+ samba-technical <samba-technical@lists.samba.org>,
+ linux-kernel@vger.kernel.org, linkinjeon@kernel.org,
+ chenxiaosong@chenxiaosong.com, linkinjeon@samba.org,
+ ChenXiaoSong <chenxiaosong@kylinos.cn>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-irdma in roce mode with Windows 2025 as client:
+Have merged the first three patches (see below) in this series into
+cifs-2.6.git for-next pending additional review and testing.   The
+other seven may also be ok - but want to look more carefully at them,
+more review appreciated
 
-root@rdmatest04l0:~# dmesg -e| grep 0000000010731e17
-[  +0.002358] [   T6642] ksmbd: smb_direct: smb_direct_prepare_negotiation:2121: 0000000010731e17 0 0 7 RDMA_CONNECT_NEEDED
-[  +0.002087] [   T6642] ksmbd: smb_direct: smb_direct_prepare_negotiation:2134: 0000000010731e17 0 0 8 RDMA_CONNECT_RUNNING
-[  +0.000112] [   T8824] ksmbd: smb_direct: smb_direct_prepare:2479: 0000000010731e17 0 0 8 RDMA_CONNECT_RUNNING
-[  +0.000019] [    T330] ksmbd: smb_direct: smb_direct_negotiate_recv_done: 0000000010731e17 RDMA_CONNECT_RUNNING
-[  +0.000018] [   T6642] ksmbd: smb_direct: smb_direct_cm_handler: 0000000010731e17 RDMA_CONNECT_RUNNING
-[  +0.000004] [   T6642] ksmbd: smb_direct: smb_direct_cm_handler: 0000000010731e17 NEGOTIATE_NEEDED queue_work(smb_direct_negotiate_recv_work)
-[  +0.000010] [    T561] ksmbd: smb_direct: smb_direct_negotiate_recv_work:842: 0000000010731e17 0 0 10 NEGOTIATE_NEEDED
-[  +0.000002] [    T561] ksmbd: smb_direct: smb_direct_negotiate_recv_work:854: 0000000010731e17 0 0 10 NEGOTIATE_NEEDED
-[  +0.000001] [    T561] ksmbd: smb_direct: smb_direct_negotiate_recv_work:880: 0000000010731e17 0 0 10 NEGOTIATE_NEEDED
-[  +0.000003] [    T561] ksmbd: smb_direct: smb_direct_negotiate_recv_work:892: 0000000010731e17 0 0 11 NEGOTIATE_RUNNING
-[  +0.000002] [   T8824] ksmbd: smb_direct: smb_direct_prepare:2491: 0000000010731e17 0 0 11 NEGOTIATE_RUNNING
-[  +0.000012] [   T8824] ksmbd: smb_direct: smb_direct_prepare:2505: 0000000010731e17 0 0 11 NEGOTIATE_RUNNING
-[  +0.000006] [   T8824] ksmbd: smb_direct: smb_direct_prepare:2516: 0000000010731e17 0 0 11 NEGOTIATE_RUNNING
-[  +0.000003] [   T8824] ksmbd: smb_direct: smb_direct_prepare:2536: 0000000010731e17 0 0 11 NEGOTIATE_RUNNING
-[  +0.000008] [   T8824] ksmbd: smb_direct: smb_direct_prepare:2556: 0000000010731e17 0 0 11 NEGOTIATE_RUNNING
-[  +0.000036] [   T8824] ksmbd: smb_direct: smb_direct_prepare:2579: 0000000010731e17 0 0 11 NEGOTIATE_RUNNING
-[  +0.000106] [   T8824] ksmbd: smb_direct: smb_direct_prepare:2589: 0000000010731e17 0 0 13 CONNECTED
+ba521f56912f (HEAD -> for-next, origin/for-next) smb: add two elements
+to smb2_error_map_table array
+905d8999d67d smb/client: remove unused elements from smb2_error_map_table a=
+rray
+26866d690bd1 smb/client: reduce loop count in map_smb2_to_linux_error() by =
+half
 
-root@rdmatest04l0:~# dmesg -e| grep 00000000d50d5bf5
-[  +0.002987] [   T4211] ksmbd: smb_direct: smb_direct_prepare_negotiation:2120: 00000000d50d5bf5 0 0 7 RDMA_CONNECT_NEEDED
-[  +0.002146] [   T4211] ksmbd: smb_direct: smb_direct_prepare_negotiation:2133: 00000000d50d5bf5 0 0 8 RDMA_CONNECT_RUNNING
-[  +0.000101] [   T6659] ksmbd: smb_direct: smb_direct_prepare:2478: 00000000d50d5bf5 0 0 8 RDMA_CONNECT_RUNNING
-[  +0.000012] [   T4339] ksmbd: smb_direct: smb_direct_cm_handler: 00000000d50d5bf5 RDMA_CONNECT_RUNNING
-[  +0.000011] [   T4339] ksmbd: smb_direct: smb_direct_cm_handler: 00000000d50d5bf5 NEGOTIATE_NEEDED queue_work(no-op)
-[  +0.000073] [    T239] ksmbd: smb_direct: smb_direct_negotiate_recv_done: 00000000d50d5bf5 NEGOTIATE_NEEDED
-[  +0.000023] [    T239] ksmbd: smb_direct: smb_direct_negotiate_recv_work:841: 00000000d50d5bf5 0 0 10 NEGOTIATE_NEEDED
-[  +0.000009] [    T239] ksmbd: smb_direct: smb_direct_negotiate_recv_work:853: 00000000d50d5bf5 0 0 10 NEGOTIATE_NEEDED
-[  +0.000009] [    T239] ksmbd: smb_direct: smb_direct_negotiate_recv_work:879: 00000000d50d5bf5 0 0 10 NEGOTIATE_NEEDED
-[  +0.000004] [    T239] ksmbd: smb_direct: smb_direct_negotiate_recv_work:891: 00000000d50d5bf5 0 0 11 NEGOTIATE_RUNNING
-[  +0.001212] [   T6659] ksmbd: smb_direct: smb_direct_prepare:2490: 00000000d50d5bf5 0 0 11 NEGOTIATE_RUNNING
-[  +0.000004] [   T6659] ksmbd: smb_direct: smb_direct_prepare:2504: 00000000d50d5bf5 0 0 11 NEGOTIATE_RUNNING
-[  +0.000002] [   T6659] ksmbd: smb_direct: smb_direct_prepare:2515: 00000000d50d5bf5 0 0 11 NEGOTIATE_RUNNING
-[  +0.000003] [   T6659] ksmbd: smb_direct: smb_direct_prepare:2535: 00000000d50d5bf5 0 0 11 NEGOTIATE_RUNNING
-[  +0.000005] [   T6659] ksmbd: smb_direct: smb_direct_prepare:2555: 00000000d50d5bf5 0 0 11 NEGOTIATE_RUNNING
-[  +0.000210] [   T6659] ksmbd: smb_direct: smb_direct_prepare:2578: 00000000d50d5bf5 0 0 11 NEGOTIATE_RUNNING
-[  +0.000080] [   T6659] ksmbd: smb_direct: smb_direct_prepare:2588: 00000000d50d5bf5 0 0 13 CONNECTED
----
- fs/smb/server/transport_rdma.c | 146 +++++++++++++++++++++++++++++++++
- 1 file changed, 146 insertions(+)
+On Wed, Dec 3, 2025 at 10:59=E2=80=AFPM <chenxiaosong.chenxiaosong@linux.de=
+v> wrote:
+>
+> From: ChenXiaoSong <chenxiaosong@kylinos.cn>
+>
+> The smb2_error_map_table array currently has 1740 elements. When searchin=
+g
+> for the last element and calling smb2_print_status(), 3480 comparisons
+> are needed.
+>
+> The loop in smb2_print_status() is unnecessary, smb2_print_status() can b=
+e
+> removed, and only iterate over the array once, printing the message when
+> the target status code is found.
+>
+> Signed-off-by: ChenXiaoSong <chenxiaosong@kylinos.cn>
+> ---
+>  fs/smb/client/smb2maperror.c | 30 ++++++------------------------
+>  1 file changed, 6 insertions(+), 24 deletions(-)
+>
+> diff --git a/fs/smb/client/smb2maperror.c b/fs/smb/client/smb2maperror.c
+> index 12c2b868789f..d1df6e518d21 100644
+> --- a/fs/smb/client/smb2maperror.c
+> +++ b/fs/smb/client/smb2maperror.c
+> @@ -2418,24 +2418,6 @@ static const struct status_to_posix_error smb2_err=
+or_map_table[] =3D {
+>         {0, 0, NULL}
+>  };
+>
+> -/***********************************************************************=
+******
+> - Print an error message from the status code
+> - ***********************************************************************=
+******/
+> -static void
+> -smb2_print_status(__le32 status)
+> -{
+> -       int idx =3D 0;
+> -
+> -       while (smb2_error_map_table[idx].status_string !=3D NULL) {
+> -               if ((smb2_error_map_table[idx].smb2_status) =3D=3D status=
+) {
+> -                       pr_notice("Status code returned 0x%08x %s\n", sta=
+tus,
+> -                                 smb2_error_map_table[idx].status_string=
+);
+> -               }
+> -               idx++;
+> -       }
+> -       return;
+> -}
+> -
+>  int
+>  map_smb2_to_linux_error(char *buf, bool log_err)
+>  {
+> @@ -2452,16 +2434,16 @@ map_smb2_to_linux_error(char *buf, bool log_err)
+>                 return 0;
+>         }
+>
+> -       /* mask facility */
+> -       if (log_err && (smb2err !=3D STATUS_MORE_PROCESSING_REQUIRED) &&
+> -           (smb2err !=3D STATUS_END_OF_FILE))
+> -               smb2_print_status(smb2err);
+> -       else if (cifsFYI & CIFS_RC)
+> -               smb2_print_status(smb2err);
+> +       log_err =3D (log_err && (smb2err !=3D STATUS_MORE_PROCESSING_REQU=
+IRED) &&
+> +                  (smb2err !=3D STATUS_END_OF_FILE)) ||
+> +                 (cifsFYI & CIFS_RC);
+>
+>         for (i =3D 0; i < sizeof(smb2_error_map_table) /
+>                         sizeof(struct status_to_posix_error); i++) {
+>                 if (smb2_error_map_table[i].smb2_status =3D=3D smb2err) {
+> +                       if (log_err)
+> +                               pr_notice("Status code returned 0x%08x %s=
+\n", smb2err,
+> +                                         smb2_error_map_table[i].status_=
+string);
+>                         rc =3D smb2_error_map_table[i].posix_error;
+>                         break;
+>                 }
+> --
+> 2.43.0
+>
 
-diff --git a/fs/smb/server/transport_rdma.c b/fs/smb/server/transport_rdma.c
-index f585359684d4..36be95ebcfcc 100644
---- a/fs/smb/server/transport_rdma.c
-+++ b/fs/smb/server/transport_rdma.c
-@@ -454,12 +454,28 @@ static void free_transport(struct smb_direct_transport *t)
- 	struct smbdirect_socket *sc = &t->socket;
- 	struct smbdirect_recv_io *recvmsg;
- 
-+	pr_notice("%s:%u: %p %d %1pe %d %s\n",
-+		  __func__, __LINE__,
-+		  sc,
-+		  sc->first_error,
-+		  SMBDIRECT_DEBUG_ERR_PTR(sc->first_error),
-+		  sc->status,
-+		  smbdirect_socket_status_string(sc->status));
-+
- 	disable_work_sync(&sc->disconnect_work);
- 	if (sc->status < SMBDIRECT_SOCKET_DISCONNECTING)
- 		smb_direct_disconnect_rdma_work(&sc->disconnect_work);
- 	if (sc->status < SMBDIRECT_SOCKET_DISCONNECTED)
- 		wait_event(sc->status_wait, sc->status == SMBDIRECT_SOCKET_DISCONNECTED);
- 
-+	pr_notice("%s:%u: %p %d %1pe %d %s\n",
-+		  __func__, __LINE__,
-+		  sc,
-+		  sc->first_error,
-+		  SMBDIRECT_DEBUG_ERR_PTR(sc->first_error),
-+		  sc->status,
-+		  smbdirect_socket_status_string(sc->status));
-+
- 	/*
- 	 * Wake up all waiters in all wait queues
- 	 * in order to notice the broken connection.
-@@ -474,6 +490,14 @@ static void free_transport(struct smb_direct_transport *t)
- 	disable_delayed_work_sync(&sc->idle.timer_work);
- 	disable_work_sync(&sc->idle.immediate_work);
- 
-+	pr_notice("%s:%u: %p %d %1pe %d %s\n",
-+		  __func__, __LINE__,
-+		  sc,
-+		  sc->first_error,
-+		  SMBDIRECT_DEBUG_ERR_PTR(sc->first_error),
-+		  sc->status,
-+		  smbdirect_socket_status_string(sc->status));
-+
- 	if (sc->rdma.cm_id)
- 		rdma_lock_handler(sc->rdma.cm_id);
- 
-@@ -801,6 +825,7 @@ static void smb_direct_negotiate_recv_done(struct ib_cq *cq, struct ib_wc *wc)
- 	spin_lock_irqsave(&sc->connect.lock, flags);
- 	if (!sc->first_error) {
- 		INIT_WORK(&sc->connect.work, smb_direct_negotiate_recv_work);
-+		pr_notice("%s: %p %s\n", __func__, sc, smbdirect_socket_status_string(sc->status));
- 		if (sc->status == SMBDIRECT_SOCKET_NEGOTIATE_NEEDED)
- 			queue_work(sc->workqueue, &sc->connect.work);
- 	}
-@@ -814,10 +839,25 @@ static void smb_direct_negotiate_recv_work(struct work_struct *work)
- 	const struct smbdirect_socket_parameters *sp = &sc->parameters;
- 	struct smbdirect_recv_io *recv_io;
- 
-+	pr_notice("%s:%u: %p %d %1pe %d %s\n",
-+		  __func__, __LINE__,
-+		  sc,
-+		  sc->first_error,
-+		  SMBDIRECT_DEBUG_ERR_PTR(sc->first_error),
-+		  sc->status,
-+		  smbdirect_socket_status_string(sc->status));
-+
- 	if (sc->first_error)
- 		return;
- 
- 	ksmbd_debug(RDMA, "Negotiate Recv Work running\n");
-+	pr_notice("%s:%u: %p %d %1pe %d %s\n",
-+		  __func__, __LINE__,
-+		  sc,
-+		  sc->first_error,
-+		  SMBDIRECT_DEBUG_ERR_PTR(sc->first_error),
-+		  sc->status,
-+		  smbdirect_socket_status_string(sc->status));
- 
- 	/*
- 	 * Reset timer to the keepalive interval in
-@@ -837,11 +877,25 @@ static void smb_direct_negotiate_recv_work(struct work_struct *work)
- 		return;
- 	}
- 
-+	pr_notice("%s:%u: %p %d %1pe %d %s\n",
-+		  __func__, __LINE__,
-+		  sc,
-+		  sc->first_error,
-+		  SMBDIRECT_DEBUG_ERR_PTR(sc->first_error),
-+		  sc->status,
-+		  smbdirect_socket_status_string(sc->status));
- 	if (SMBDIRECT_CHECK_STATUS_WARN(sc, SMBDIRECT_SOCKET_NEGOTIATE_NEEDED)) {
- 		smb_direct_disconnect_rdma_connection(sc);
- 		return;
- 	}
- 	sc->status = SMBDIRECT_SOCKET_NEGOTIATE_RUNNING;
-+	pr_notice("%s:%u: %p %d %1pe %d %s\n",
-+		  __func__, __LINE__,
-+		  sc,
-+		  sc->first_error,
-+		  SMBDIRECT_DEBUG_ERR_PTR(sc->first_error),
-+		  sc->status,
-+		  smbdirect_socket_status_string(sc->status));
- 	wake_up(&sc->status_wait);
- }
- 
-@@ -1816,6 +1870,14 @@ static void smb_direct_disconnect(struct ksmbd_transport *t)
- 	struct smbdirect_socket *sc = &st->socket;
- 
- 	ksmbd_debug(RDMA, "Disconnecting cm_id=%p\n", sc->rdma.cm_id);
-+	pr_notice("%s:%u: %p %d %1pe %d %s\n",
-+		  __func__, __LINE__,
-+		  sc,
-+		  sc->first_error,
-+		  SMBDIRECT_DEBUG_ERR_PTR(sc->first_error),
-+		  sc->status,
-+		  smbdirect_socket_status_string(sc->status));
-+
- 
- 	free_transport(st);
- }
-@@ -1826,6 +1888,13 @@ static void smb_direct_shutdown(struct ksmbd_transport *t)
- 	struct smbdirect_socket *sc = &st->socket;
- 
- 	ksmbd_debug(RDMA, "smb-direct shutdown cm_id=%p\n", sc->rdma.cm_id);
-+	pr_notice("%s:%u: %p %d %1pe %d %s\n",
-+		  __func__, __LINE__,
-+		  sc,
-+		  sc->first_error,
-+		  SMBDIRECT_DEBUG_ERR_PTR(sc->first_error),
-+		  sc->status,
-+		  smbdirect_socket_status_string(sc->status));
- 
- 	smb_direct_disconnect_rdma_work(&sc->disconnect_work);
- }
-@@ -1856,10 +1925,15 @@ static int smb_direct_cm_handler(struct rdma_cm_id *cm_id,
- 		 * yet. sc->connect.work is still be disabled and
- 		 * queue_work() is a no-op.
- 		 */
-+		pr_notice("%s: %p %s\n", __func__, sc, smbdirect_socket_status_string(sc->status));
- 		if (SMBDIRECT_CHECK_STATUS_DISCONNECT(sc, SMBDIRECT_SOCKET_RDMA_CONNECT_RUNNING))
- 			break;
- 		sc->status = SMBDIRECT_SOCKET_NEGOTIATE_NEEDED;
- 		spin_lock_irqsave(&sc->connect.lock, flags);
-+		pr_notice("%s: %p %s %s\n", __func__, sc, smbdirect_socket_status_string(sc->status),
-+			  sc->connect.work.func == smb_direct_negotiate_recv_work ?
-+			  "queue_work(smb_direct_negotiate_recv_work)":
-+			  "queue_work(no-op)");
- 		if (!sc->first_error)
- 			queue_work(sc->workqueue, &sc->connect.work);
- 		spin_unlock_irqrestore(&sc->connect.lock, flags);
-@@ -1869,7 +1943,9 @@ static int smb_direct_cm_handler(struct rdma_cm_id *cm_id,
- 	case RDMA_CM_EVENT_DEVICE_REMOVAL:
- 	case RDMA_CM_EVENT_DISCONNECTED: {
- 		sc->status = SMBDIRECT_SOCKET_DISCONNECTED;
-+		pr_notice("%s: %p %s\n", __func__, sc, smbdirect_socket_status_string(sc->status));
- 		smb_direct_disconnect_rdma_work(&sc->disconnect_work);
-+		pr_notice("%s: %p %s\n", __func__, sc, smbdirect_socket_status_string(sc->status));
- 		if (sc->ib.qp)
- 			ib_drain_qp(sc->ib.qp);
- 		break;
-@@ -2042,12 +2118,26 @@ static int smb_direct_prepare_negotiation(struct smbdirect_socket *sc)
- 	}
- 	recv_posted = true;
- 
-+	pr_notice("%s:%u: %p %d %1pe %d %s\n",
-+		  __func__, __LINE__,
-+		  sc,
-+		  sc->first_error,
-+		  SMBDIRECT_DEBUG_ERR_PTR(sc->first_error),
-+		  sc->status,
-+		  smbdirect_socket_status_string(sc->status));
- 	ret = smb_direct_accept_client(sc);
- 	if (ret) {
- 		pr_err("Can't accept client\n");
- 		goto out_err;
- 	}
- 
-+	pr_notice("%s:%u: %p %d %1pe %d %s\n",
-+		  __func__, __LINE__,
-+		  sc,
-+		  sc->first_error,
-+		  SMBDIRECT_DEBUG_ERR_PTR(sc->first_error),
-+		  sc->status,
-+		  smbdirect_socket_status_string(sc->status));
- 	return 0;
- out_err:
- 	/*
-@@ -2386,11 +2476,25 @@ static int smb_direct_prepare(struct ksmbd_transport *t)
- 	 * Everything else is unexpected and an error.
- 	 */
- 	ksmbd_debug(RDMA, "Waiting for SMB_DIRECT negotiate request\n");
-+	pr_notice("%s:%u: %p %d %1pe %d %s\n",
-+		  __func__, __LINE__,
-+		  sc,
-+		  sc->first_error,
-+		  SMBDIRECT_DEBUG_ERR_PTR(sc->first_error),
-+		  sc->status,
-+		  smbdirect_socket_status_string(sc->status));
- 	ret = wait_event_interruptible_timeout(sc->status_wait,
- 					sc->status != SMBDIRECT_SOCKET_RDMA_CONNECT_NEEDED &&
- 					sc->status != SMBDIRECT_SOCKET_RDMA_CONNECT_RUNNING &&
- 					sc->status != SMBDIRECT_SOCKET_NEGOTIATE_NEEDED,
- 					msecs_to_jiffies(sp->negotiate_timeout_msec));
-+	pr_notice("%s:%u: %p %d %1pe %d %s\n",
-+		  __func__, __LINE__,
-+		  sc,
-+		  sc->first_error,
-+		  SMBDIRECT_DEBUG_ERR_PTR(sc->first_error),
-+		  sc->status,
-+		  smbdirect_socket_status_string(sc->status));
- 	if (ret <= 0 || sc->status != SMBDIRECT_SOCKET_NEGOTIATE_RUNNING)
- 		return ret < 0 ? ret : -ETIMEDOUT;
- 
-@@ -2398,10 +2502,24 @@ static int smb_direct_prepare(struct ksmbd_transport *t)
- 	if (!recvmsg)
- 		return -ECONNABORTED;
- 
-+	pr_notice("%s:%u: %p %d %1pe %d %s\n",
-+		  __func__, __LINE__,
-+		  sc,
-+		  sc->first_error,
-+		  SMBDIRECT_DEBUG_ERR_PTR(sc->first_error),
-+		  sc->status,
-+		  smbdirect_socket_status_string(sc->status));
- 	ret = smb_direct_check_recvmsg(recvmsg);
- 	if (ret)
- 		goto put;
- 
-+	pr_notice("%s:%u: %p %d %1pe %d %s\n",
-+		  __func__, __LINE__,
-+		  sc,
-+		  sc->first_error,
-+		  SMBDIRECT_DEBUG_ERR_PTR(sc->first_error),
-+		  sc->status,
-+		  smbdirect_socket_status_string(sc->status));
- 	req = (struct smbdirect_negotiate_req *)recvmsg->packet;
- 	sp->max_recv_size = min_t(int, sp->max_recv_size,
- 				  le32_to_cpu(req->preferred_send_size));
-@@ -2415,6 +2533,13 @@ static int smb_direct_prepare(struct ksmbd_transport *t)
- 	sc->recv_io.credits.target = min_t(u16, sc->recv_io.credits.target, sp->recv_credit_max);
- 	sc->recv_io.credits.target = max_t(u16, sc->recv_io.credits.target, 1);
- 
-+	pr_notice("%s:%u: %p %d %1pe %d %s\n",
-+		  __func__, __LINE__,
-+		  sc,
-+		  sc->first_error,
-+		  SMBDIRECT_DEBUG_ERR_PTR(sc->first_error),
-+		  sc->status,
-+		  smbdirect_socket_status_string(sc->status));
- put:
- 	spin_lock_irqsave(&sc->recv_io.reassembly.lock, flags);
- 	sc->recv_io.reassembly.queue_length--;
-@@ -2428,6 +2553,13 @@ static int smb_direct_prepare(struct ksmbd_transport *t)
- 	if (ret)
- 		goto respond;
- 
-+	pr_notice("%s:%u: %p %d %1pe %d %s\n",
-+		  __func__, __LINE__,
-+		  sc,
-+		  sc->first_error,
-+		  SMBDIRECT_DEBUG_ERR_PTR(sc->first_error),
-+		  sc->status,
-+		  smbdirect_socket_status_string(sc->status));
- 	/*
- 	 * We negotiated with success, so we need to refill the recv queue.
- 	 * We do that with sc->idle.immediate_work still being disabled
-@@ -2444,9 +2576,23 @@ static int smb_direct_prepare(struct ksmbd_transport *t)
- 		return sc->first_error;
- 	INIT_WORK(&sc->idle.immediate_work, smb_direct_send_immediate_work);
- 
-+	pr_notice("%s:%u: %p %d %1pe %d %s\n",
-+		  __func__, __LINE__,
-+		  sc,
-+		  sc->first_error,
-+		  SMBDIRECT_DEBUG_ERR_PTR(sc->first_error),
-+		  sc->status,
-+		  smbdirect_socket_status_string(sc->status));
- respond:
- 	ret = smb_direct_send_negotiate_response(sc, ret);
- 
-+	pr_notice("%s:%u: %p %d %1pe %d %s\n",
-+		  __func__, __LINE__,
-+		  sc,
-+		  sc->first_error,
-+		  SMBDIRECT_DEBUG_ERR_PTR(sc->first_error),
-+		  sc->status,
-+		  smbdirect_socket_status_string(sc->status));
- 	return ret;
- }
- 
--- 
-2.43.0
 
+--=20
+Thanks,
+
+Steve
 
