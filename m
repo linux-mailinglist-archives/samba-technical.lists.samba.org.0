@@ -2,50 +2,47 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 59236CABAA5
-	for <lists+samba-technical@lfdr.de>; Mon, 08 Dec 2025 00:10:23 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 266C1CADA65
+	for <lists+samba-technical@lfdr.de>; Mon, 08 Dec 2025 16:50:10 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=qY/kHOyCvgJffH1Pebi2ZKnNbi2ZGZgi/gfZUcLMv9o=; b=DEFTdhFbf4mtfrBuU1W9WHjATK
-	DE6O3FXKcgpYg66aashH6JfXr9fAIJRg/YQ4/jONs/tAKa3HKg5S4YzfV2sB00hzyGe08YqTfMNbl
-	aH0r5wRfbmLEhoFTRh7MW2q9t2IX/UjQlo2XUzHxJLHH9L12CreGtQDL6Zznej0HRjAB4/S1jNzJt
-	ZPBL1y03PRQ7ggs3GJ3WtSExfHJlcvQ1Z9IwnvJ9rwMFdO+UFBIpRqGsSFirTcsMOWfPajjYn/SDp
-	mDXvgQB6haVFTJidtIwFfg/1iVm/klCj9Ft/70b2MaP1hdd9tRm/Hd8iENfH9ylDtUH7AaZdqKB0z
-	x3i9oVKA==;
-Received: from ip6-localhost ([::1]:56298 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=CiKrVI85vD3bbzXcBhDbKFazTe0ABFjTGTTal9tlVOY=; b=hH5INJHO5D67Lrd8mtU/BIYK0/
+	Yv6ISdQx1+MW5iSZBDb3eytWqXet2i/ftzJ7fMoaPy3vidM5uoTo8dhgRkNc076qUgKyqlrEDqX9c
+	M9VXVRIR+fTpD3Y88zyHZaiZ4biJ/uhxXM5XTKaNt30Q/QMke4qL7HChkHtC6wlD7dQgAKw7kiBOi
+	bTdtf8AkRe2GT1SVHUJgWSnwXA1FGnuUAKURHrRisv9j2tts9MsdCOElroavAhJjO314mL6Fsf3Nc
+	n1ZpXf/FqjffL0jI7gb3Z3YnXCzy6UthlTZvMHtXl+zr2w0KvzjmyVL/260DlchctsfOf1fFEkJvy
+	LzFpCjYg==;
+Received: from ip6-localhost ([::1]:28190 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1vSNsw-00FraD-V7; Sun, 07 Dec 2025 23:09:47 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:10884) 
+	id 1vSdUS-00FtcD-5s; Mon, 08 Dec 2025 15:49:32 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:34116) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vSNsq-00Fra6-Dm
- for samba-technical@lists.samba.org; Sun, 07 Dec 2025 23:09:43 +0000
+ (Exim) id 1vSdUN-00Ftc6-1d
+ for samba-technical@lists.samba.org; Mon, 08 Dec 2025 15:49:29 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Message-ID:From:To:CC;
- bh=qY/kHOyCvgJffH1Pebi2ZKnNbi2ZGZgi/gfZUcLMv9o=; b=3n+blOW8aO0dRxqxXAde5qGPEM
- H0Hto/p8vACK78Ko8k5ntDqYngnKhTAAZBN8J3sbzfwcsXzv3nnKgSwVhN0GxAUAGQ0IAf5ESJ9F3
- 97IIWrant0qmLuJIPEefA0e3LEj2gBIbnA6xXxMB33BGmdhio4oejlXp9nmOsf8AmSHq+pVLQ9gwL
- Uu+JtWTHxcI0B7uZ8RglvlfM2NrA1e5+v2oo613tmCE+Y+RuNj/E/cxBeS1gJRRbExEfCGXuqekWl
- FzlcMjKuNR1PuCYxUZA8Rn7H7fjq4NxnW8Z2J0Ys+LSsIse1YLZGHW9a2MOYTok10U9oVzz5mTolu
- ix74X9HmDoPX6TE2w2ddYmawPfi7eIqF6GAGAJyUqoU0lzZZ8KjH1fBYyF5hfJRlraAT62nYzOsol
- mFZRTP+veHjaQaNyVioZb3SrMpt0WCcZG5w0v2Q4Jd2HVovEEfLj3xbiXTOCbvFjeSQSuD/jl4oOT
- coQ7K7Ss2RYI/q/zQinU/yfi;
+ s=42; h=Message-ID:Date:Cc:To:From;
+ bh=CiKrVI85vD3bbzXcBhDbKFazTe0ABFjTGTTal9tlVOY=; b=IMQgl7hKwD6HCTpMYBDwu+KKlQ
+ jchSddw9z5IgIpRHGKOHcRkqD3NymoZfuZs3u+CAzVCKDiZLUxlk+6RECScEhK+7D55qp8opVGoIp
+ MlvlZq2khacm4An+PjHWgW/DScwTmi7KfFiUuLUlURjcRfNDqoaEJ2IyPhU+JwPIEWtyw5nfSsh7a
+ 68frh69d7NkPvzY0MYGmnvDmT7U2ntwF6JNgut7ey5ogF4MrEnyc5JyWkjSPY2Mt/yKxLb+mKvGwf
+ 4b9CgF9qcYzPx7+xXmzSDibOy0YgnMuvhmWGBp1P8KbzQ28Dzs5gGwtZt1QEl8B4lD3cm0sUWjRYq
+ rPty2b970THA2alk3ej3HE6W5xSxdk9U1HY0ZHws5x/y191kJi+vz6e4myCOe9cnQ7qKy14EP5YFU
+ OZsxdM5UUMWLECvZ8WDyIm07bwXe55JvYa396R36NHPcAigqnm1FCHJzub+B7oy5zr3p+N+xoEccX
+ 6m14GW2zRMSWHnJPy5+Bi/6b;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
- (TLS1.2:ECDHE_SECP256R1__ECDSA_SHA256__CHACHA20_POLY1305:256) (Exim)
- id 1vSNsp-00HJ9Y-0L; Sun, 07 Dec 2025 23:09:39 +0000
-Subject: Re: How does the SMB handshake work?
-To: JPT <j-p-t@gmx.net>, samba-technical@lists.samba.org
-References: <4c26f3d5-31ad-4932-b02b-7521855dbaff@gmx.net>
-Message-ID: <b8e60d39-b68e-5a73-b75d-7790062789e8@samba.org>
-Date: Sun, 7 Dec 2025 17:09:36 -0600
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.6.1
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1vSdUL-00HPnf-26; Mon, 08 Dec 2025 15:49:25 +0000
+To: linux-cifs@vger.kernel.org,
+	samba-technical@lists.samba.org
+Subject: [PATCH] smb: server: reset smb_direct_port =
+ SMB_DIRECT_PORT_INFINIBAND on init
+Date: Mon,  8 Dec 2025 16:49:19 +0100
+Message-ID: <20251208154919.934760-1-metze@samba.org>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-In-Reply-To: <4c26f3d5-31ad-4932-b02b-7521855dbaff@gmx.net>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,71 +56,43 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: "Christopher R. Hertel via samba-technical"
- <samba-technical@lists.samba.org>
-Reply-To: "Christopher R. Hertel" <crh@samba.org>
+From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Stefan Metzmacher <metze@samba.org>
+Cc: metze@samba.org, Steve French <smfrench@gmail.com>,
+ Tom Talpey <tom@talpey.com>, Namjae Jeon <linkinjeon@kernel.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hello.
+This allows testing with different devices (iwrap vs. non-iwarp) without
+'rmmod ksmbd && modprobe ksmbd', but instead
+'ksmbd.control -s && ksmbd.mountd' is enough.
 
-Are you familiar with Microsoft's Open Specifications docset?  The
-particular document you're looking for is [MS-SMB2].
-  [MS-SMB2]:
-https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-smb2/5606ad47-5ee0-437a-817e-70c366052962
+In the long run we want to listen on iwarp and non-iwarp at the same time,
+but requires more changes, most likely also in the rdma layer.
 
-See:
-* [MS-SMB2; 2.2.31.4] VALIDATE_NEGOTIATE_INFO Request
+Cc: Namjae Jeon <linkinjeon@kernel.org>
+Cc: Steve French <smfrench@gmail.com>
+Cc: Tom Talpey <tom@talpey.com>
+Cc: linux-cifs@vger.kernel.org
+Cc: samba-technical@lists.samba.org
+Signed-off-by: Stefan Metzmacher <metze@samba.org>
+---
+ fs/smb/server/transport_rdma.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-smb2/261ec397-d692-4e3e-8bcd-c96ce02bb969
-* [MS-SMB2; 3.3.5.15.12] Handling a Validate Negotiate Info Request
+diff --git a/fs/smb/server/transport_rdma.c b/fs/smb/server/transport_rdma.c
+index f585359684d4..05f008ea51cd 100644
+--- a/fs/smb/server/transport_rdma.c
++++ b/fs/smb/server/transport_rdma.c
+@@ -2708,6 +2708,7 @@ int ksmbd_rdma_init(void)
+ {
+ 	int ret;
+ 
++	smb_direct_port = SMB_DIRECT_PORT_INFINIBAND;
+ 	smb_direct_listener.cm_id = NULL;
+ 
+ 	ret = ib_register_client(&smb_direct_ib_client);
+-- 
+2.43.0
 
-https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-smb2/0b7803eb-d561-48a4-8654-327803f59ec6
-
-Those will be good starting points.
-
-If I recall correctly (and I haven't looked at this exchange in a while),
-this exchange is used following the negotiation of protocol parameters and
-behaviors.  It is a secured exchange, allowing the client and server to
-verify what was negotiated and assure one another that there is no
-man-in-the-middle downgrading the security of the connection.
-
-Chris -)-----
-
-On 12/7/25 11:31 AM, JPT via samba-technical wrote:
-> Hi,
-> 
-> I am currently implementing a SMB-Server using
-> https://github.com/TalAloni/SMBLibrary
-> 
-> I am slowly getting to a working server.
-> 
-> But Samba client tries to negotiate the features and I just cannot find any
-> information on what is going on.
-> 
-> samba sends:
-> 
-> INTFileStore.DeviceIOControl(handle=(null), ctlCode=0x140204(devicetype=14,
-> accessmode=0, function=81),inputLength=28, maxOutputLength=24)
-> 
-> the input buffer contains:
-> FSCTL_VALIDATE_NEGOTIATE_INFO request parsed: StructSize=0, DialectCount=0,
-> ClientSecMode=0xBE4D, ClientCaps=0x48F4C728,
-> ClientGuid=2a997584-1896-3636-0100-020002021002, Dialects=[]
-> 
-> How do I find out what this actually means?
-> 
-> The AI created an example output array, but it needs 28 bytes, while Samba
-> only gives 24.
-> The AI says it's called SMB2_VALIDATE_NEGOTIATE_INFO_RESPONSE but I just
-> cannot find anything on this name or how the output array should look like.
-> 
-> Samba does not increase the buffer size, instead it just tells
-> tree connect failed: NT_STATUS_BUFFER_TOO_SMALL
-> 
-> any help appreciated.
-> 
-> JPT
-> 
-> 
 
