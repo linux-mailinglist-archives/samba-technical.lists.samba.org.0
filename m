@@ -2,50 +2,51 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id CDDF9D01CA0
-	for <lists+samba-technical@lfdr.de>; Thu, 08 Jan 2026 10:19:02 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id EF6FFD0806F
+	for <lists+samba-technical@lfdr.de>; Fri, 09 Jan 2026 09:58:47 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=WLCNgvyKZoXQQuDrcbanc8yb4Q1uRHJ/yANy7e6VaJk=; b=TytG2mi3ja+NK+fduEF5t1FVDq
-	q09rKfyDsHzOqs6iq+np662p6AGd/sL2Y6X/Px/iqU7id1BoIrNsGhmJUwmb4NmoFxGJhI1XWUp8j
-	GLTlD7G7u+IuCAsvW+4KkCN9WhRyj0wQAuyNm+k7+W7a1uHj61LxFarelqNDQa+GRNJOqF/7fwMJ7
-	bsVSSfWcNc63IhaWykpP+l/rsM+pKGMgutm7BDE2TIxhVkzM4mt/U5VBiAf2NK4gdERMS9clcIcwL
-	hKjl4kMiZm5ep6fDufUTMDN4Nf5u6FfIElH4fi1r1u8gljrBtey2mgepRd5W02EUoi6PJDDqMDFmh
-	IEjPO68w==;
-Received: from ip6-localhost ([::1]:59836 helo=hr1.samba.org) 
+	bh=yttrd/eJ2yxcEzFLZWXppW/kffU28ZPHb/N3HOkJVzM=; b=qIoxD0eKELnylM788c8zuhlsyh
+	YRfa5jK89ScnK2IhQArwZ+hOBJe3kn45D3v1Z28iZfuhrdIgsrMvq0D6thMY9MR/h/LFnw9IgWrNn
+	29ZMuY7KDnSA/uR3J2DJoJUH5Ykge6sOzHe2hUDrlxzwUCns/ykheMaYi/nopaXG0XKmtil+z/vVF
+	Sjfqaw8OgjGyy0ooTuhZSbQpd57BsU6amF72/xSpfsanWN9/nD295ZH9LrSpeSkuONxzdCuQ7hdAU
+	b0+MNKHgIr7rJ0Eb1wCzYNE1rsa8MPuFyoUf84fuvpvc+V2bMf9nmQaiKmHxHOTOljPhywTZwZ5JO
+	M9bljiNQ==;
+Received: from ip6-localhost ([::1]:33666 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1vdm9s-001dpq-52; Thu, 08 Jan 2026 09:18:20 +0000
-Received: from bombadil.infradead.org ([2607:7c80:54:3::133]:45688) 
+	id 1ve8Hi-001iaM-4I; Fri, 09 Jan 2026 08:55:54 +0000
+Received: from bombadil.infradead.org ([2607:7c80:54:3::133]:54552) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vdWI7-001bX1-8R
- for samba-technical@lists.samba.org; Wed, 07 Jan 2026 16:21:50 +0000
+ (Exim) id 1vdn6s-001e10-50
+ for samba-technical@lists.samba.org; Thu, 08 Jan 2026 10:19:20 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=bombadil.20210309; h=In-Reply-To:Content-Type:MIME-Version
  :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
  Content-Transfer-Encoding:Content-ID:Content-Description;
- bh=WLCNgvyKZoXQQuDrcbanc8yb4Q1uRHJ/yANy7e6VaJk=; b=ALmo4XpInvUDXmNDzFfYS3DA1T
- UT8t4JKHDCrC20DJK7A7ZFgQ+htYB7V3v1IbOFzYjGrUFsk2hUMZ/rQOQbD+UJq8LF95kQMVRLOfQ
- KYkvj16k833hhUglawi0vzOH5zmaLOJuYaYWZHncpSWg9mpeoCQlhfVCjrEIvuQvbpAHF5hAmMKhN
- Fa1W7hNojDl8s5giyFl4DROryf36opwZCv97r7hosXwzDHkwDxZ6bhH7bXR2r3mU5lq2cO9FVt3MD
- xHMHglD1hksFbATlegUfImo9P6vFewRpvdNpHwokf8bOokgPns4l9nmPqw6vxz4y7CddZCdwd3d4L
- omDEzK9w==;
+ bh=yttrd/eJ2yxcEzFLZWXppW/kffU28ZPHb/N3HOkJVzM=; b=FjlRmM8nkIwznD5H8n7jrbipqI
+ ZYom57ErGnVY32s1Pzlqojdoqe7yrdCalIPZaWZ8mfSSjNB8Bpdi0n79Fjlf+9inNnE6WBBJTEdyI
+ OujX7VFQfwvvJONFqmhQFwGXWo4WIdJH0jQjXBHieogaMpw059F/4F5BtCqGqnmK9bTpLZh8E9NhP
+ txe1+QTBUDOWB54/iyTd8UJoQL1w8KDjUazbCnMg+Jm3s8rKVMZolJCIrc3uO5WEkGB58dsSQyGGU
+ MLTOpha3+UqbxXRZzeJWM1f2rEh+j3+Oq6Syf/ooyF6Tzk8kfvLzJUfz6i7w+jvJIYPzmuukYIjZr
+ IzaJW7sQ==;
 Received: from hch by bombadil.infradead.org with local (Exim 4.98.2 #2 (Red
- Hat Linux)) id 1vdVWU-0000000FB4y-1TwP;
- Wed, 07 Jan 2026 15:32:34 +0000
-Date: Wed, 7 Jan 2026 07:32:34 -0800
+ Hat Linux)) id 1vdmFn-0000000GRiW-1B3x;
+ Thu, 08 Jan 2026 09:24:27 +0000
+Date: Thu, 8 Jan 2026 01:24:27 -0800
 To: Jeff Layton <jlayton@kernel.org>
-Subject: Re: [PATCH 0/6] vfs: properly deny directory leases on filesystems
- with special lease handling
-Message-ID: <aV58kmCAicqTpFhK@infradead.org>
+Subject: Re: [PATCH 1/6] nfs: properly disallow delegation requests on
+ directories
+Message-ID: <aV93y-xeWk16s48r@infradead.org>
 References: <20260107-setlease-6-19-v1-0-85f034abcc57@kernel.org>
+ <20260107-setlease-6-19-v1-1-85f034abcc57@kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20260107-setlease-6-19-v1-0-85f034abcc57@kernel.org>
+In-Reply-To: <20260107-setlease-6-19-v1-1-85f034abcc57@kernel.org>
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
  bombadil.infradead.org. See http://www.infradead.org/rpr.html
-X-Mailman-Approved-At: Thu, 08 Jan 2026 09:18:18 +0000
+X-Mailman-Approved-At: Fri, 09 Jan 2026 08:55:52 +0000
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -79,17 +80,13 @@ Cc: Latchesar Ionkov <lucho@ionkov.net>, Jan Kara <jack@suse.cz>,
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Wed, Jan 07, 2026 at 09:20:08AM -0500, Jeff Layton wrote:
-> Long term, I think it would be best to change leases/delegations to be
-> an opt-in thing, such that leases are always denied by default if the
-> method isn't set.
+On Wed, Jan 07, 2026 at 09:20:09AM -0500, Jeff Layton wrote:
+> Checking for S_ISREG() in nfs4_setlease() is incorrect, since that op is
+> never called for directories. The right way to deny lease requests on
+> directories is to set the ->setlease() operation to simple_nosetlease()
+> in the directory file_operations.
 
-Agreed.
+This fixes generic/786 on NFSv4.2 for me, so:
 
-> That's a larger patchset though as we'd need to audit
-> all of the file_operations that currently have ->setlease() as NULL.
-
-Initially you can just wire them up everywhere.  But I guess that would
-be overkill. 
-
+Tested-by: Christoph Hellwig <hch@lst.de>
 
