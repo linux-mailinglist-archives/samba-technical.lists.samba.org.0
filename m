@@ -2,87 +2,88 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 289E7D08075
-	for <lists+samba-technical@lfdr.de>; Fri, 09 Jan 2026 09:59:13 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 42205D08070
+	for <lists+samba-technical@lfdr.de>; Fri, 09 Jan 2026 09:58:55 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=KSDIIOSgIHhRcbxi9/+AQB/pdbt9dql3OYIFgg84PNM=; b=2YOPdeA8FLzYRMK8+N0Ualj2QU
-	LT52yfXC1kwN8P5GnwY+zaEiCKUMMzHrBUL9K6kANaBmFC9TplMy7hg9X4xQ0Yj666vtsUMOeb6Ip
-	5RjFre2MeELro83C1FUnF40IR8f08XRtYJMi0nVpbgB8l/9J2h/SKP0hDRqWS5TIsc5xmhOC0PuDH
-	lQFQgRj9Ha98pv2Dt3CApijVCWzVXgqm9YaGx86ZGxyLQTdYwiOVuW6WgxIqPzC0Vy6QP4MIgfaUf
-	k0Vg17taldpFFeQ5kRwErwSw7X0VrtsqMtTpdVru4manf//4Xc2iXZC1Yxd7buq2G7Uh36Yz3QG91
-	CWfaOb7g==;
-Received: from ip6-localhost ([::1]:28460 helo=hr1.samba.org) 
+	bh=Rc9QMKouyjzH45LZUhjCbf9iU6kNH1nER3QE4i7JiDM=; b=41/juMJTX0M9rqDF7qyZhGLcvz
+	M+7HXJE+0OqGVEZT+9Lbiz5wEjx2gD8v8JBQJAPFQfozkOHhgLF/DhxbJLxklSt27HXmVbAPCj8uK
+	u4mYn/Jwm55p2uNXstwOAIGEcuGQkNoxd0AgO9BCp7meBQIIGXpceP8n4clV17/nAxhS9PcN7tx9r
+	0urU7tAeo5uf4cwML9WwSEThXLwwiFZXwNq2Q7/1XZO/pjoB8bIR1g/uNCjlFyjtUjGATuTlUQ038
+	dgG9Ic/ikh0ok1XnIGdBmW1NrHOxOLMu2JyDBWnkeb1Vd1xn0oz5uQlEWmGYHLC5SEXbisisgzQt7
+	49t/M3oA==;
+Received: from ip6-localhost ([::1]:28476 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1ve8Ho-001icY-D6; Fri, 09 Jan 2026 08:56:00 +0000
-Received: from smtp-out2.suse.de ([195.135.223.131]:48068) 
+	id 1ve8Hp-001icz-J6; Fri, 09 Jan 2026 08:56:01 +0000
+Received: from smtp-out2.suse.de ([195.135.223.131]:53026) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vdtpI-001fje-55
- for samba-technical@lists.samba.org; Thu, 08 Jan 2026 17:29:38 +0000
+ (Exim) id 1vdtrh-001fk9-Bu
+ for samba-technical@lists.samba.org; Thu, 08 Jan 2026 17:32:07 +0000
 Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
  [IPv6:2a07:de40:b281:104:10:150:64:97])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 8CF365CB97;
- Thu,  8 Jan 2026 17:29:33 +0000 (UTC)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id E02605CBAB;
+ Thu,  8 Jan 2026 17:32:02 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
- t=1767893373; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ t=1767893523; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=KSDIIOSgIHhRcbxi9/+AQB/pdbt9dql3OYIFgg84PNM=;
- b=LKLHZsveRqERTai/L93RkI2K84owBSoPVDX4PWwQdZUPnhOhUJ/E2ghFkO7TB3qTeFK4In
- hyXqDZRKe3gPdTEa2pfQUJD9r7JhY2Gxy+QwNxGBAIUcG2XYPrlvQ2GUfH/jDBAwWN0nsL
- ohZmkjATm1kB2ioRc8QTK5suspy3fCU=
+ bh=Rc9QMKouyjzH45LZUhjCbf9iU6kNH1nER3QE4i7JiDM=;
+ b=MKYplGgUyR+sE06i0JiUz8GKtJbOPqRHHpMIj+IWs303KtwqzOMjj+JFlHwHtSt7nbAUxA
+ UNp4Ll6iPK3H52aM4vFBGo0ErVRKRIPPFhbwF8eh7s2fgE1PWOm6znJF/4G+mtw+movdZo
+ 1psyKrKOcJR2WxUMmY9s6q28XLqlyTw=
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
- s=susede2_ed25519; t=1767893373;
+ s=susede2_ed25519; t=1767893523;
  h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=KSDIIOSgIHhRcbxi9/+AQB/pdbt9dql3OYIFgg84PNM=;
- b=xtHDnGn+2hOmpYwhvCDVTOBaoIs4Ao1kPHDaKuKZg7EQKiV5T+3VpS+c1qeMoAhoh6KcSh
- BVtoa2RrFhAbRIAA==
+ bh=Rc9QMKouyjzH45LZUhjCbf9iU6kNH1nER3QE4i7JiDM=;
+ b=+kISGD+BwUugn2ejyQVVgjX3pI8t3dz4nil+/amsO+obOFpkCydzCEt1LMAEaSWkfKrT23
+ PrLkTBk88AY2V7BA==
 Authentication-Results: smtp-out2.suse.de;
- dkim=pass header.d=suse.cz header.s=susede2_rsa header.b=LKLHZsve;
- dkim=pass header.d=suse.cz header.s=susede2_ed25519 header.b=xtHDnGn+
+ dkim=pass header.d=suse.cz header.s=susede2_rsa header.b=zchHYT5l;
+ dkim=pass header.d=suse.cz header.s=susede2_ed25519 header.b=v7Sxuhou
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
- t=1767893373; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ t=1767893522; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=KSDIIOSgIHhRcbxi9/+AQB/pdbt9dql3OYIFgg84PNM=;
- b=LKLHZsveRqERTai/L93RkI2K84owBSoPVDX4PWwQdZUPnhOhUJ/E2ghFkO7TB3qTeFK4In
- hyXqDZRKe3gPdTEa2pfQUJD9r7JhY2Gxy+QwNxGBAIUcG2XYPrlvQ2GUfH/jDBAwWN0nsL
- ohZmkjATm1kB2ioRc8QTK5suspy3fCU=
+ bh=Rc9QMKouyjzH45LZUhjCbf9iU6kNH1nER3QE4i7JiDM=;
+ b=zchHYT5ly7W8Ws0WGBZ/OLSaO6YePdF0ZuvnJ54B4z/6iRJB1Rmu65L8SCdhqtGnDJRxNt
+ h8hIIjb74QUVWPEDWc4b2ZIMvH4EEJ7zRjN43UvzJAdzhjiSz7WLubJqA7OtP6gQLvF0Fh
+ qsB+hXW7VQPvyvSNGU9sg0unRkW933o=
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
- s=susede2_ed25519; t=1767893373;
+ s=susede2_ed25519; t=1767893522;
  h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=KSDIIOSgIHhRcbxi9/+AQB/pdbt9dql3OYIFgg84PNM=;
- b=xtHDnGn+2hOmpYwhvCDVTOBaoIs4Ao1kPHDaKuKZg7EQKiV5T+3VpS+c1qeMoAhoh6KcSh
- BVtoa2RrFhAbRIAA==
+ bh=Rc9QMKouyjzH45LZUhjCbf9iU6kNH1nER3QE4i7JiDM=;
+ b=v7Sxuhou8fYCJendb+nuEct46VWp54XIkm6cHFo3LZWNdJd5/5Qm//MUpOHl5WjYSfdzmb
+ HPS47RhJ47XDEuBA==
 Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 76B8A3EA63;
- Thu,  8 Jan 2026 17:29:33 +0000 (UTC)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id C47143EA63;
+ Thu,  8 Jan 2026 17:32:02 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id qCj6HH3pX2kzeAAAD6G6ig
- (envelope-from <jack@suse.cz>); Thu, 08 Jan 2026 17:29:33 +0000
+ by imap1.dmz-prg2.suse.org with ESMTPSA id pu3oLxLqX2nzegAAD6G6ig
+ (envelope-from <jack@suse.cz>); Thu, 08 Jan 2026 17:32:02 +0000
 Received: by quack3.suse.cz (Postfix, from userid 1000)
- id 213A0A0B23; Thu,  8 Jan 2026 18:29:33 +0100 (CET)
-Date: Thu, 8 Jan 2026 18:29:33 +0100
+ id 3B7FAA0B23; Thu,  8 Jan 2026 18:31:54 +0100 (CET)
+Date: Thu, 8 Jan 2026 18:31:54 +0100
 To: Jeff Layton <jlayton@kernel.org>
-Subject: Re: [PATCH 20/24] udf: add setlease file operation
-Message-ID: <uyibvpewjdnrwrdyby3kr4lq244qjolgoje5bdyzpwjwndhzh6@mgp67jphmu2u>
+Subject: Re: [PATCH 19/24] tmpfs: add setlease file operation
+Message-ID: <5dtyb6by4ujjnkjz6lu4rl2x3s5km6awilvrozuzmgq2wn7bl6@cxvq3jpviunf>
 References: <20260108-setlease-6-20-v1-0-ea4dec9b67fa@kernel.org>
- <20260108-setlease-6-20-v1-20-ea4dec9b67fa@kernel.org>
+ <20260108-setlease-6-20-v1-19-ea4dec9b67fa@kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20260108-setlease-6-20-v1-20-ea4dec9b67fa@kernel.org>
+In-Reply-To: <20260108-setlease-6-20-v1-19-ea4dec9b67fa@kernel.org>
+X-Spam-Score: -2.51
 X-Spamd-Result: default: False [-2.51 / 50.00]; BAYES_HAM(-3.00)[100.00%];
  SUSPICIOUS_RECIPS(1.50)[]; NEURAL_HAM_LONG(-1.00)[-1.000];
  MID_RHS_NOT_FQDN(0.50)[];
@@ -104,13 +105,12 @@ X-Spamd-Result: default: False [-2.51 / 50.00]; BAYES_HAM(-3.00)[100.00%];
  R_RATELIMIT(0.00)[to_ip_from(RLjxstjou9w9fpr873xxxyrjcd)];
  RECEIVED_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:106:10:150:64:167:received];
  MISSING_XM_UA(0.00)[]; RCVD_VIA_SMTP_AUTH(0.00)[];
- DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:helo,
- imap1.dmz-prg2.suse.org:rdns, suse.cz:dkim, suse.cz:email]
-X-Spam-Flag: NO
-X-Spam-Score: -2.51
-X-Rspamd-Queue-Id: 8CF365CB97
+ DBL_BLOCKED_OPENRESOLVER(0.00)[suse.cz:dkim, suse.cz:email,
+ imap1.dmz-prg2.suse.org:rdns, imap1.dmz-prg2.suse.org:helo]
 X-Rspamd-Action: no action
-X-Rspamd-Server: rspamd2.dmz-prg2.suse.org
+X-Rspamd-Queue-Id: E02605CBAB
+X-Rspamd-Server: rspamd1.dmz-prg2.suse.org
+X-Spam-Flag: NO
 X-Mailman-Approved-At: Fri, 09 Jan 2026 08:55:52 +0000
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
@@ -176,10 +176,10 @@ Cc: Latchesar Ionkov <lucho@ionkov.net>, Dave Kleikamp <shaggy@kernel.org>,
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Thu 08-01-26 12:13:15, Jeff Layton wrote:
-> Add the setlease file_operation pointing to generic_setlease to the udf
-> file_operations structures. A future patch will change the default
-> behavior to reject lease attempts with -EINVAL when there is no
+On Thu 08-01-26 12:13:14, Jeff Layton wrote:
+> Add the setlease file_operation pointing to generic_setlease to the
+> tmpfs file_operations structures. A future patch will change the
+> default behavior to reject lease attempts with -EINVAL when there is no
 > setlease file operation defined. Add generic_setlease to retain the
 > ability to set leases on this filesystem.
 > 
@@ -192,48 +192,50 @@ Reviewed-by: Jan Kara <jack@suse.cz>
 								Honza
 
 > ---
->  fs/udf/dir.c  | 2 ++
->  fs/udf/file.c | 2 ++
+>  fs/libfs.c | 2 ++
+>  mm/shmem.c | 2 ++
 >  2 files changed, 4 insertions(+)
 > 
-> diff --git a/fs/udf/dir.c b/fs/udf/dir.c
-> index 5023dfe191e8088b78396997a8915bf383f7a2d2..5bf75638f3520ecb3a0a2ade2279ab56787ecd11 100644
-> --- a/fs/udf/dir.c
-> +++ b/fs/udf/dir.c
-> @@ -24,6 +24,7 @@
+> diff --git a/fs/libfs.c b/fs/libfs.c
+> index 591eb649ebbacf202ff48cd3abd64a175daa291c..697c6d5fc12786c036f0086886297fb5cd52ae00 100644
+> --- a/fs/libfs.c
+> +++ b/fs/libfs.c
+> @@ -6,6 +6,7 @@
 >  
->  #include <linux/string.h>
->  #include <linux/errno.h>
-> +#include <linux/filelock.h>
->  #include <linux/mm.h>
->  #include <linux/slab.h>
->  #include <linux/bio.h>
-> @@ -157,4 +158,5 @@ const struct file_operations udf_dir_operations = {
->  	.iterate_shared		= udf_readdir,
->  	.unlocked_ioctl		= udf_ioctl,
->  	.fsync			= generic_file_fsync,
-> +	.setlease		= generic_setlease,
->  };
-> diff --git a/fs/udf/file.c b/fs/udf/file.c
-> index 0d76c4f37b3e71ffe6a883a8d97a6c3038d2a01d..32ae7cfd72c549958b70824b449cf146f6750f44 100644
-> --- a/fs/udf/file.c
-> +++ b/fs/udf/file.c
-> @@ -28,6 +28,7 @@
->  #include <linux/string.h> /* memset */
->  #include <linux/capability.h>
->  #include <linux/errno.h>
+>  #include <linux/blkdev.h>
+>  #include <linux/export.h>
 > +#include <linux/filelock.h>
 >  #include <linux/pagemap.h>
->  #include <linux/uio.h>
->  
-> @@ -208,6 +209,7 @@ const struct file_operations udf_file_operations = {
->  	.splice_read		= filemap_splice_read,
->  	.splice_write		= iter_file_splice_write,
->  	.llseek			= generic_file_llseek,
-> +	.setlease		= generic_setlease,
+>  #include <linux/slab.h>
+>  #include <linux/cred.h>
+> @@ -570,6 +571,7 @@ const struct file_operations simple_offset_dir_operations = {
+>  	.iterate_shared	= offset_readdir,
+>  	.read		= generic_read_dir,
+>  	.fsync		= noop_fsync,
+> +	.setlease	= generic_setlease,
 >  };
 >  
->  static int udf_setattr(struct mnt_idmap *idmap, struct dentry *dentry,
+>  struct dentry *find_next_child(struct dentry *parent, struct dentry *prev)
+> diff --git a/mm/shmem.c b/mm/shmem.c
+> index ec6c01378e9d2bd47db9d7506e4d6a565e092185..88ef1fd5cd38efedbb31353da2871ab1d47e68a5 100644
+> --- a/mm/shmem.c
+> +++ b/mm/shmem.c
+> @@ -29,6 +29,7 @@
+>  #include <linux/pagemap.h>
+>  #include <linux/file.h>
+>  #include <linux/fileattr.h>
+> +#include <linux/filelock.h>
+>  #include <linux/mm.h>
+>  #include <linux/random.h>
+>  #include <linux/sched/signal.h>
+> @@ -5219,6 +5220,7 @@ static const struct file_operations shmem_file_operations = {
+>  	.splice_read	= shmem_file_splice_read,
+>  	.splice_write	= iter_file_splice_write,
+>  	.fallocate	= shmem_fallocate,
+> +	.setlease	= generic_setlease,
+>  #endif
+>  };
+>  
 > 
 > -- 
 > 2.52.0
