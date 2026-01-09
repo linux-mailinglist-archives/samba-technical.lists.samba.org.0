@@ -2,63 +2,49 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 30B63D08074
-	for <lists+samba-technical@lfdr.de>; Fri, 09 Jan 2026 09:59:10 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id F0582D0F93B
+	for <lists+samba-technical@lfdr.de>; Sun, 11 Jan 2026 19:32:16 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=o8ABr/DNoRVjWLpEG3gYzt78FrDlsrlJ7hUxCqSBKIw=; b=IevBZ3rUvASgLFmT2d4rvR6ESl
-	dyonkp8533RhQYkK/76/A6TNg7eNBU9IUrIqU++UqOvX/JzZtrIRTu7dxhEflTVyLYsiLguvOiaD8
-	etLgaHupOkLCyTyJzbJsZw2YGxEtbvSevDxz2weFFiVmxW0zpQwv0Emw2hvo7mRsY4aYz3+EIR4Qv
-	+NYhuBq6413ZKIJznCcKXOe07W8GVEq5eIKZ6jnDN5oH086fKL8db47P7GoRgXWxwgQlOhhLbBN4r
-	8Faq0l51agwplx+IK2o831VCo3uGKEvqYBre7/yjS7/j/J9K2BYiqO4Ns7DvI449I75oBxbDOAB0x
-	FKMWTRSw==;
-Received: from ip6-localhost ([::1]:50812 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=TVlnT2WiXW5nYG95M0tj3/pwuA98uZmz0fLtRU3VLPA=; b=TjKUeDn2el3DR0gmRZfmpynpdL
+	jozvZx/66VvGxg6AGIltJXf7tOpidPsVikU3KSLe8lY7bw1tpKAQkUXi+XnadyN6BYg9JS783qUkn
+	8f+cIlMWkw1gEa08qNKgq9l93o3oDClDS7lxByfVbjJU+2lC01XZWAW2CqPPtaMNR69ISaDAYa4La
+	pBVPWBu7VCqQfRC82T3SN6Th5X7Mt8i07dBxUXrOZ6+JW9Qxkg+l/ut7I2aQPnx+r9JtMKDygDk/T
+	MvxWUbhUT5SXVeEDRzUyx2jYXeP1l0l3GnGJX39M+4f8JL851am71VmOWD6egk5ZkMW68rJCr6BeW
+	DZ1/M3Rg==;
+Received: from ip6-localhost ([::1]:57378 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1ve8IH-001ijM-7e; Fri, 09 Jan 2026 08:56:33 +0000
-Received: from sea.source.kernel.org ([172.234.252.31]:33662) 
+	id 1vf0EH-001v2O-JZ; Sun, 11 Jan 2026 18:31:57 +0000
+Received: from bombadil.infradead.org ([2607:7c80:54:3::133]:43348) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vdyn5-001hGi-JR
- for samba-technical@lists.samba.org; Thu, 08 Jan 2026 22:47:42 +0000
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 13CFE44461
- for <samba-technical@lists.samba.org>; Thu,  8 Jan 2026 22:47:25 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E9652C19423
- for <samba-technical@lists.samba.org>; Thu,  8 Jan 2026 22:47:24 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1767912444;
- bh=bpLucB2OVlqnpdSgR5fVsT/9lEifzVxq4+Kg3z371KE=;
- h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
- b=kNZ/y6ld9T/Ac6XqHUpuWQ8PCKoHqDZK4KRIN0fR0qhZUAZgmdbhls/DOYhiAGX7z
- lKJXMbj5kAIa3yPHcJzWdDqHLZWZUws36K4s8WUtTHBy0kZ1G+0Jbjoh7BgoGMTVB0
- EHN+7t2qxXK5Wg9JwteHTuHVEx86cGwPSYmACkxAaR6cPMp9ZisNCP6MINj41SffBs
- rGpQYrIDRH61Pi646aQVZ+ZmxyNbNF5rChS8TKq0svn+ns7GoUEV1FIGJpWNhiL7jz
- wNVHZ83G97Pf5PZFUJN8TAkCmyWsi/CmvHe4Mf70Y4ziokGk5SSSZrPhqGGZMeQCS4
- YWE8KQUzoe6Nw==
-Received: by mail-ej1-f44.google.com with SMTP id
- a640c23a62f3a-b8010b8f078so592893666b.0
- for <samba-technical@lists.samba.org>; Thu, 08 Jan 2026 14:47:24 -0800 (PST)
-X-Forwarded-Encrypted: i=1;
- AJvYcCXdQDUji19dQD11KGgMg7bOB8Tew8Dt4ObfkU6IxAUbSTtOdRkTx4v4yiljxbbT5NSevR+QogmLasn5G7kp/XE=@lists.samba.org
-X-Gm-Message-State: AOJu0Yzp3caZNof/63z7YE6onrGCmQiXjOifasvo+Yx8LmQWNGpuiOoc
- z9L0jHR7zzngVmoO9/UwRwOmp7wXF6opSXVYj7YuoxbmffK4nLpYwQtsUwdhAt7fCgnxP8d/kur
- esVEdFyFrOlTQifyNl84P/UoCA5p6CZs=
-X-Google-Smtp-Source: AGHT+IHRRvrZk+LJHsAd5/mP4TyTtkU5XrZgqXx3MfUuP0vWFtvlehE6tE5BFAh0/XFz8o1ILqvfmo203M6g5zkxlKk=
-X-Received: by 2002:a17:907:c1e:b0:b72:c261:3ad2 with SMTP id
- a640c23a62f3a-b84451dab67mr854015966b.50.1767912442100; Thu, 08 Jan 2026
- 14:47:22 -0800 (PST)
-MIME-Version: 1.0
-References: <20260108-setlease-6-20-v1-0-ea4dec9b67fa@kernel.org>
- <20260108-setlease-6-20-v1-7-ea4dec9b67fa@kernel.org>
-In-Reply-To: <20260108-setlease-6-20-v1-7-ea4dec9b67fa@kernel.org>
-Date: Fri, 9 Jan 2026 07:47:09 +0900
-X-Gmail-Original-Message-ID: <CAKYAXd-JTE+233AwpvrXTsbfrbY+U_pvyUTQQSwz0mXh43jt=A@mail.gmail.com>
-X-Gm-Features: AQt7F2q41Fu16p_9dWtEjvrFao8uwKCSAe9mKCbLxMeS3Ih2bsPKkzatUTosKic
-Message-ID: <CAKYAXd-JTE+233AwpvrXTsbfrbY+U_pvyUTQQSwz0mXh43jt=A@mail.gmail.com>
-Subject: Re: [PATCH 07/24] exfat: add setlease file operation
+ (Exim) id 1ve6nE-001iR4-4d
+ for samba-technical@lists.samba.org; Fri, 09 Jan 2026 07:20:35 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=infradead.org; s=bombadil.20210309; h=In-Reply-To:Content-Type:MIME-Version
+ :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ Content-Transfer-Encoding:Content-ID:Content-Description;
+ bh=TVlnT2WiXW5nYG95M0tj3/pwuA98uZmz0fLtRU3VLPA=; b=nNw+ohOkHNWpQswvh+NdF9LHsu
+ PJ6XIUFJtAy/341ZJ9J92w/DrPqKhkxz3zTjI/OkCD5uCId/D9WwQgvpVYCFTlMBlisRY+uVtvIRe
+ REPMinKM/zRtj+mAGb6mG8h33I8v4EUxHd7wpMoL0MVUe5QELfPQU02i+BkEkkPD+IWuWUtmR9vj7
+ 5PESqXWBa9hJrSIyYBcnAULtN9bqZwa9ct6avHgzAt8PQ8DJwQPVi9fHlBg9V+TF/Bau3F5xfjNlp
+ 4gxLTxemKZWrMAqjEIaxZ8E5uEYuSvRgEMvz0VvHRFcwTeD7kP/g3KTcD027gjhOnTRYhsN0CtrV+
+ PA5MAVYw==;
+Received: from hch by bombadil.infradead.org with local (Exim 4.98.2 #2 (Red
+ Hat Linux)) id 1ve5Y8-00000001VCt-1XPG;
+ Fri, 09 Jan 2026 06:00:40 +0000
+Date: Thu, 8 Jan 2026 22:00:40 -0800
 To: Jeff Layton <jlayton@kernel.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Subject: Re: [PATCH 00/24] vfs: require filesystems to explicitly opt-in to
+ lease support
+Message-ID: <aWCZiFOmnY3D4oUl@infradead.org>
+References: <20260108-setlease-6-20-v1-0-ea4dec9b67fa@kernel.org>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260108-setlease-6-20-v1-0-ea4dec9b67fa@kernel.org>
+X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
+ bombadil.infradead.org. See http://www.infradead.org/rpr.html
 X-Mailman-Approved-At: Fri, 09 Jan 2026 08:55:52 +0000
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
@@ -73,8 +59,8 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Namjae Jeon via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Namjae Jeon <linkinjeon@kernel.org>
+From: Christoph Hellwig via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Christoph Hellwig <hch@infradead.org>
 Cc: Latchesar Ionkov <lucho@ionkov.net>, Dave Kleikamp <shaggy@kernel.org>,
  Alexander Aring <alex.aring@gmail.com>, Jan Kara <jack@suse.cz>,
  Paulo Alcantara <pc@manguebit.org>, Sandeep Dhavale <dhavale@google.com>,
@@ -90,7 +76,7 @@ Cc: Latchesar Ionkov <lucho@ionkov.net>, Dave Kleikamp <shaggy@kernel.org>,
  samba-technical@lists.samba.org, Richard Weinberger <richard@nod.at>,
  Mark Fasheh <mark@fasheh.com>, devel@lists.orangefs.org,
  Hugh Dickins <hughd@google.com>,
- "Matthew Wilcox \(Oracle\)" <willy@infradead.org>,
+ "Matthew Wilcox \(Oracle\)" <willy@infradead.org>, ntfs3@lists.linux.dev,
  Joseph Qi <joseph.qi@linux.alibaba.com>, linux-mm@kvack.org,
  Viacheslav Dubeyko <slava@dubeyko.com>, linux-btrfs@vger.kernel.org,
  Gao Xiang <xiang@kernel.org>, linux-ext4@vger.kernel.org,
@@ -109,11 +95,11 @@ Cc: Latchesar Ionkov <lucho@ionkov.net>, Dave Kleikamp <shaggy@kernel.org>,
  OGAWA Hirofumi <hirofumi@mail.parknet.co.jp>,
  Andreas Gruenbacher <agruenba@redhat.com>, Hans de Goede <hansg@kernel.org>,
  gfs2@lists.linux.dev, Christian Brauner <brauner@kernel.org>,
- ntfs3@lists.linux.dev, Theodore Ts'o <tytso@mit.edu>,
+ linux-f2fs-devel@lists.sourceforge.net, Theodore Ts'o <tytso@mit.edu>,
  Luis de Bethencourt <luisbg@kernel.org>, Nicolas Pitre <nico@fluxnic.net>,
  linux-erofs@lists.ozlabs.org, v9fs@lists.linux.dev,
  Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ linux-kernel@vger.kernel.org, Namjae Jeon <linkinjeon@kernel.org>,
  Steve French <sfrench@samba.org>, Chuck Lever <chuck.lever@oracle.com>,
  Hongbo Li <lihongbo22@huawei.com>, Anna Schumaker <anna@kernel.org>,
  Jan Kara <jack@suse.com>, linux-fsdevel@vger.kernel.org,
@@ -124,16 +110,20 @@ Cc: Latchesar Ionkov <lucho@ionkov.net>, Dave Kleikamp <shaggy@kernel.org>,
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Fri, Jan 9, 2026 at 2:14=E2=80=AFAM Jeff Layton <jlayton@kernel.org> wro=
-te:
->
-> Add the setlease file_operation to exfat_file_operations and
-> exfat_dir_operations, pointing to generic_setlease.  A future patch
-> will change the default behavior to reject lease attempts with -EINVAL
-> when there is no setlease file operation defined. Add generic_setlease
-> to retain the ability to set leases on this filesystem.
->
-> Signed-off-by: Jeff Layton <jlayton@kernel.org>
-Acked-by: Namjae Jeon <linkinjeon@kernel.org>
-Thanks!
+On Thu, Jan 08, 2026 at 12:12:55PM -0500, Jeff Layton wrote:
+> I mainly focused on filesystems that are NFS exportable, since NFS and
+> SMB are the main users of file leases, and they tend to end up exporting
+> the same filesystem types. Let me know if I've missed any.
+> 
+> [1]: https://lore.kernel.org/linux-fsdevel/20260107-setlease-6-19-v1-0-85f034abcc57@kernel.org/
+
+That seems reasonable, and I like the approach here (without having the
+time to review every change right now):
+
+Acked-by: Christoph Hellwig <hch@lst.de>
+
+If it turns out we have people use leases on other file systems we'll
+have to wire up a few more instance as needed, but I think your initial
+set makes sense.
+
 
