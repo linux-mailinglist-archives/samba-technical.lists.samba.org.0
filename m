@@ -2,53 +2,105 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id DD747D0F8D8
-	for <lists+samba-technical@lfdr.de>; Sun, 11 Jan 2026 19:17:41 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A3E2AD1179D
+	for <lists+samba-technical@lfdr.de>; Mon, 12 Jan 2026 10:24:54 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
-	bh=vZSjFMm/Wp5z10kB7GXwvg/1nh4GigItDf4dCDx4/uA=; b=klaSAGEW+Lc40uvl+E3aE95z1m
-	jEPBYASyL2PxP8MzIY4z5ZRtaFWAyx1avFZ/T0g6heKTXOD8TEFvyJlzay/XGp+xmdRTWojo632Qb
-	WnZFyEkxO2tKjv52Qi82i3s4NdedHlDPI7IKvietfrRYgwJC3LcUe/bTj5zrkD1wtawJOgoOnoTqv
-	2hejStEwBxJ3NVeugaJ72Z6eXL10yfINX6+0NcPPFFVI+sY7e4uqn6EthVk+aG43MRNnXSGOIl9FW
-	2yXRoNjdTNFAG7aC27zBvnsR5Nos7iOp3lgJRJqY3Uj7RrPqYLGdWmnSNHaSo2kugW8zz80sEqKx7
-	fHvZPF8w==;
-Received: from ip6-localhost ([::1]:47946 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=6ix79vpLIssdL500RHYujbFB++xsIiyUcELipWU4WwU=; b=Uc6ykdEC3bHV6Nh+m5oRAMIwwI
+	A9+hop7vZT8U6JxkXgfvqW1iEaCEZB+6TpPG49XY7+Tw2uwA7GTytU2HsvgGYy2P7ugY2Joz/wGTJ
+	6RuxJP6Ct52iv35bU/22NFN3XWgJM9wUkpi4i1QHEZAI9ZJEldiG/1eYwTuxuWEgrxccxowvI4y4h
+	8FOMU5Nv8yr7Hv0Zog2ULltd98RTEiWHG6PyTNP78Y70j02PaNB50cVYKasOZAFI2OQaErP3adubh
+	8jGMs774MfjSatQPkl3duPPWos8wzzw/UB78GvjNSeADzaSP+PTMMrH13IftJI3FPGGqrPhbwIsz4
+	tcI+cXYQ==;
+Received: from ip6-localhost ([::1]:62460 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1vezzp-001uPu-8e; Sun, 11 Jan 2026 18:17:01 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:38892) 
+	id 1vfE9o-001zTX-2S; Mon, 12 Jan 2026 09:24:16 +0000
+Received: from smtp-out1.suse.de ([195.135.223.130]:46002) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vezzi-001uP1-HU
- for samba-technical@lists.samba.org; Sun, 11 Jan 2026 18:16:58 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:To:From:Date:CC;
- bh=vZSjFMm/Wp5z10kB7GXwvg/1nh4GigItDf4dCDx4/uA=; b=B7RuxOc8WBmJP9Khuk4W7OjnSP
- V6BJByHvlg2e2qSzLzSspwsSMmxROZXrOv71ZLPQvPKBSk6xQYvSt7c2c0CkBPOB3K5xAm0l7laaM
- 78zQTph8nfwAsTWpxOEoDj6exhlfz/ax6PIpSO+2O7Hiug3G+vB6JKeuu2zWFOYhJrxuLJ/58+3yo
- XrGIPuldLUZLdqd5d+aVnAQbPz98B2PldjACoE+d2SNNIlPr46z6KFZY/M+FV9ph/U8NZaHTPYXot
- h4qblI0yCZxQpFeh88al5VICixLjh/UzKtNbUI3oQAkH4tWSqybTrryqD6jL9ZIpXUuWlcRTWheps
- H8olFIyMJwkcUoXeuEFK2/gtcm3mTMaHD2OEPC1wYFKAnOLqVM2fcF5rXHhXXHxKPUM6uU5RcxUu0
- 3ddDGqX/2KDM23konFVmliEGth3lGZqB3ezzD9bB6frfnPPHAUwunxxg2aWTnNL60EzgEnDUDxTSx
- SGCJ51EqTm50UJsQTdujrubz;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1veDCS-003dXA-2J for samba-technical@lists.samba.org;
- Fri, 09 Jan 2026 14:10:48 +0000
-Received: from bjacke by pell.int.sernet.de with local (Exim 4.93)
- (envelope-from <bjacke@sernet.de>) id 1veDCS-001y8Y-3P
- for samba-technical@lists.samba.org; Fri, 09 Jan 2026 15:10:48 +0100
-Date: Fri, 9 Jan 2026 15:10:48 +0100
-To: samba-technical@lists.samba.org
-Subject: [Release Planning 4.24] Samba 4.24.0rc1
-Message-ID: <20260109141048.GA465143@sernet.de>
-Mail-Followup-To: samba-technical@lists.samba.org
+ (Exim) id 1vf0l1-001wQ2-3h
+ for samba-technical@lists.samba.org; Sun, 11 Jan 2026 19:05:50 +0000
+Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 43CDB33820;
+ Fri,  9 Jan 2026 09:26:59 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
+ t=1767950820; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=6ix79vpLIssdL500RHYujbFB++xsIiyUcELipWU4WwU=;
+ b=KXI2iTWiAJmOz21iis4yFqf5NnYhRDof3J19rqsZwYRuWlpBv5dcGDcz+rPkZ2NFQ7sBw3
+ 6F/yzH+m9ddnb9SROmmw6miQVWUavs2Eg8AGGPV1EpMQQU6h2S4XjYW76fJh6lzGTBRt02
+ shHABFz4+AgJcXRKWJA4UpNzrHl4hCE=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
+ s=susede2_ed25519; t=1767950820;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=6ix79vpLIssdL500RHYujbFB++xsIiyUcELipWU4WwU=;
+ b=I+3h+YTMi7XyTBxg0nKsfasYi3xNLsyRViTjEJI4hA7/0Kr4xASdVvjM5NCcFY8z/BXHig
+ gtG0FCWUIYgZrHDA==
+Authentication-Results: smtp-out1.suse.de;
+	none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
+ t=1767950819; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=6ix79vpLIssdL500RHYujbFB++xsIiyUcELipWU4WwU=;
+ b=16e6TramPJH4Gs7875HDbzGuy8ICZI2BILnT1SGRvVAXeI5sQUjzAFlNaNR9kACorpHpXM
+ nei3ptJVD2BUcQ5r+hV5aj5YMzGmHUhxPPheHPPJgtr2K4a0j9TnIfXo+9hSNy8lOl3XCf
+ SJ1RxzU1924fXlBtLP3laUNrmhN+RXw=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
+ s=susede2_ed25519; t=1767950819;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=6ix79vpLIssdL500RHYujbFB++xsIiyUcELipWU4WwU=;
+ b=PGw8o01N9jcoRQmfnP+ZoeS9HgNB1q6FOHcZJKmgTM6SnO2dBelSCiHyvByrrSDNihQRUj
+ Pa0cf4D023nkzOAA==
+Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 3206F3EA65;
+ Fri,  9 Jan 2026 09:26:59 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
+ by imap1.dmz-prg2.suse.org with ESMTPSA id TGXGC+PJYGkWAgAAD6G6ig
+ (envelope-from <jack@suse.cz>); Fri, 09 Jan 2026 09:26:59 +0000
+Received: by quack3.suse.cz (Postfix, from userid 1000)
+ id D22A1A0A4F; Fri,  9 Jan 2026 10:26:58 +0100 (CET)
+Date: Fri, 9 Jan 2026 10:26:58 +0100
+To: Jeff Layton <jlayton@kernel.org>
+Subject: Re: [PATCH 00/24] vfs: require filesystems to explicitly opt-in to
+ lease support
+Message-ID: <qzdy4ipzuxl3exs26tr3kd5bloyp7lrr3fqircgcxltvoprd6k@shasgtm4zncv>
+References: <20260108-setlease-6-20-v1-0-ea4dec9b67fa@kernel.org>
+ <m3mywef74xhcakianlrovrnaadnhzhfqjfusulkcnyioforfml@j2xnk7dzkmv4>
+ <8af369636c32b868f83669c49aea708ca3b894ac.camel@kernel.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature"; boundary="7AUc2qLy4jB3hD7Z"
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-X-Q: Die Schriftsteller koennen nicht so schnell schreiben, wie die
- Regierungen Kriege machen; denn das Schreiben verlangt Denkarbeit. - Brecht
+In-Reply-To: <8af369636c32b868f83669c49aea708ca3b894ac.camel@kernel.org>
+X-Spamd-Result: default: False [-2.30 / 50.00]; BAYES_HAM(-3.00)[100.00%];
+ SUSPICIOUS_RECIPS(1.50)[]; NEURAL_HAM_LONG(-1.00)[-1.000];
+ MID_RHS_NOT_FQDN(0.50)[]; NEURAL_HAM_SHORT(-0.20)[-1.000];
+ MIME_GOOD(-0.10)[text/plain]; RCVD_VIA_SMTP_AUTH(0.00)[];
+ FUZZY_RATELIMITED(0.00)[rspamd.com]; ARC_NA(0.00)[];
+ FREEMAIL_ENVRCPT(0.00)[gmail.com]; MIME_TRACE(0.00)[0:+];
+ MISSING_XM_UA(0.00)[]; TO_DN_SOME(0.00)[]; TAGGED_RCPT(0.00)[];
+ RCVD_COUNT_THREE(0.00)[3];
+ DKIM_SIGNED(0.00)[suse.cz:s=susede2_rsa,suse.cz:s=susede2_ed25519];
+ FROM_HAS_DN(0.00)[];
+ FREEMAIL_CC(0.00)[suse.cz,kernel.org,gmail.com,fluxnic.net,infradead.org,alarsen.net,zeniv.linux.org.uk,suse.com,fb.com,linux.alibaba.com,google.com,huawei.com,vivo.com,mit.edu,dilger.ca,mail.parknet.co.jp,nod.at,dubeyko.com,paragon-software.com,fasheh.com,evilplan.org,omnibond.com,szeredi.hu,squashfs.org.uk,linux-foundation.org,samsung.com,sony.com,oracle.com,redhat.com,lwn.net,ionkov.net,codewreck.org,crudebyte.com,samba.org,manguebit.org,microsoft.com,talpey.com,vger.kernel.org,lists.ozlabs.org,lists.sourceforge.net,lists.infradead.org,lists.linux.dev,lists.orangefs.org,kvack.org,lists.samba.org];
+ R_RATELIMIT(0.00)[to_ip_from(RL6z1i6dkhnac7oamujmo9nifa)];
+ FROM_EQ_ENVFROM(0.00)[]; RCVD_TLS_LAST(0.00)[];
+ TO_MATCH_ENVRCPT_SOME(0.00)[]; RCPT_COUNT_GT_50(0.00)[86];
+ DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:helo,suse.com:email]
+X-Spam-Flag: NO
+X-Spam-Score: -2.30
+X-Mailman-Approved-At: Mon, 12 Jan 2026 09:24:13 +0000
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -62,37 +114,119 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: =?utf-8?q?Bj=C3=B6rn_JACKE_via_samba-technical?=
- <samba-technical@lists.samba.org>
-Reply-To: =?iso-8859-1?Q?Bj=F6rn?= JACKE <bjacke@samba.org>
+From: Jan Kara via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jan Kara <jack@suse.cz>
+Cc: Latchesar Ionkov <lucho@ionkov.net>, Dave Kleikamp <shaggy@kernel.org>,
+ Alexander Aring <alex.aring@gmail.com>, Jan Kara <jack@suse.cz>,
+ Paulo Alcantara <pc@manguebit.org>, Sandeep Dhavale <dhavale@google.com>,
+ Martin Brandenburg <martin@omnibond.com>, Yuezhang Mo <yuezhang.mo@sony.com>,
+ Anders Larsen <al@alarsen.net>, Amir Goldstein <amir73il@gmail.com>,
+ jfs-discussion@lists.sourceforge.net, linux-unionfs@vger.kernel.org,
+ Konstantin Komarov <almaz.alexandrovich@paragon-software.com>,
+ Chris Mason <clm@fb.com>, Andreas Dilger <adilger.kernel@dilger.ca>,
+ Chunhai Guo <guochunhai@vivo.com>, Ilya Dryomov <idryomov@gmail.com>,
+ linux-mtd@lists.infradead.org, Mike Marshall <hubcap@omnibond.com>,
+ linux-xfs@vger.kernel.org, Xiubo Li <xiubli@redhat.com>,
+ Yue Hu <zbestahu@gmail.com>, Miklos Szeredi <miklos@szeredi.hu>,
+ samba-technical@lists.samba.org, Richard Weinberger <richard@nod.at>,
+ Mark Fasheh <mark@fasheh.com>, devel@lists.orangefs.org,
+ Hugh Dickins <hughd@google.com>,
+ "Matthew Wilcox \(Oracle\)" <willy@infradead.org>, ntfs3@lists.linux.dev,
+ Joseph Qi <joseph.qi@linux.alibaba.com>, linux-mm@kvack.org,
+ Viacheslav Dubeyko <slava@dubeyko.com>, linux-btrfs@vger.kernel.org,
+ Gao Xiang <xiang@kernel.org>, linux-ext4@vger.kernel.org,
+ Salah Triki <salah.triki@gmail.com>, Carlos Maiolino <cem@kernel.org>,
+ Dominique Martinet <asmadeus@codewreck.org>,
+ Shyam Prasad N <sprasad@microsoft.com>,
+ Christian Schoenebeck <linux_oss@crudebyte.com>, linux-cifs@vger.kernel.org,
+ Chao Yu <chao@kernel.org>, linux-nfs@vger.kernel.org,
+ Tom Talpey <tom@talpey.com>, ocfs2-devel@lists.linux.dev,
+ Bharath SM <bharathsm@microsoft.com>, linux-nilfs@vger.kernel.org,
+ David Sterba <dsterba@suse.com>, Alexander Viro <viro@zeniv.linux.org.uk>,
+ Baolin Wang <baolin.wang@linux.alibaba.com>,
+ Jeffle Xu <jefflexu@linux.alibaba.com>, Jaegeuk Kim <jaegeuk@kernel.org>,
+ ceph-devel@vger.kernel.org, Eric Van Hensbergen <ericvh@kernel.org>,
+ Ryusuke Konishi <konishi.ryusuke@gmail.com>,
+ OGAWA Hirofumi <hirofumi@mail.parknet.co.jp>,
+ Andreas Gruenbacher <agruenba@redhat.com>, Hans de Goede <hansg@kernel.org>,
+ gfs2@lists.linux.dev, Christian Brauner <brauner@kernel.org>,
+ linux-f2fs-devel@lists.sourceforge.net, Theodore Ts'o <tytso@mit.edu>,
+ Luis de Bethencourt <luisbg@kernel.org>, Nicolas Pitre <nico@fluxnic.net>,
+ linux-erofs@lists.ozlabs.org, v9fs@lists.linux.dev,
+ Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org,
+ linux-kernel@vger.kernel.org, Namjae Jeon <linkinjeon@kernel.org>,
+ Steve French <sfrench@samba.org>, Chuck Lever <chuck.lever@oracle.com>,
+ Hongbo Li <lihongbo22@huawei.com>, Anna Schumaker <anna@kernel.org>,
+ Jan Kara <jack@suse.com>, linux-fsdevel@vger.kernel.org,
+ Phillip Lougher <phillip@squashfs.org.uk>,
+ Andrew Morton <akpm@linux-foundation.org>,
+ Sungjong Seo <sj1557.seo@samsung.com>, David Woodhouse <dwmw2@infradead.org>,
+ Trond Myklebust <trondmy@kernel.org>, Joel Becker <jlbec@evilplan.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
+On Thu 08-01-26 13:56:57, Jeff Layton wrote:
+> On Thu, 2026-01-08 at 18:40 +0100, Jan Kara wrote:
+> > On Thu 08-01-26 12:12:55, Jeff Layton wrote:
+> > > Yesterday, I sent patches to fix how directory delegation support is
+> > > handled on filesystems where the should be disabled [1]. That set is
+> > > appropriate for v6.19. For v7.0, I want to make lease support be more
+> > > opt-in, rather than opt-out:
+> > > 
+> > > For historical reasons, when ->setlease() file_operation is set to NULL,
+> > > the default is to use the kernel-internal lease implementation. This
+> > > means that if you want to disable them, you need to explicitly set the
+> > > ->setlease() file_operation to simple_nosetlease() or the equivalent.
+> > > 
+> > > This has caused a number of problems over the years as some filesystems
+> > > have inadvertantly allowed leases to be acquired simply by having left
+> > > it set to NULL. It would be better if filesystems had to opt-in to lease
+> > > support, particularly with the advent of directory delegations.
+> > > 
+> > > This series has sets the ->setlease() operation in a pile of existing
+> > > local filesystems to generic_setlease() and then changes
+> > > kernel_setlease() to return -EINVAL when the setlease() operation is not
+> > > set.
+> > > 
+> > > With this change, new filesystems will need to explicitly set the
+> > > ->setlease() operations in order to provide lease and delegation
+> > > support.
+> > > 
+> > > I mainly focused on filesystems that are NFS exportable, since NFS and
+> > > SMB are the main users of file leases, and they tend to end up exporting
+> > > the same filesystem types. Let me know if I've missed any.
+> > 
+> > So, what about kernfs and fuse? They seem to be exportable and don't have
+> > .setlease set...
+> > 
+> 
+> Yes, FUSE needs this too. I'll add a patch for that.
+> 
+> As far as kernfs goes: AIUI, that's basically what sysfs and resctrl
+> are built on. Do we really expect people to set leases there?
+> 
+> I guess it's technically a regression since you could set them on those
+> sorts of files earlier, but people don't usually export kernfs based
+> filesystems via NFS or SMB, and that seems like something that could be
+> used to make mischief.
 
---7AUc2qLy4jB3hD7Z
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+I agree exporting kernfs based filesystem doesn't make a huge amount of
+sense.
 
-Hi,
+> AFAICT, kernfs_export_ops is mostly to support open_by_handle_at(). See
+> commit aa8188253474 ("kernfs: add exportfs operations").
+> 
+> One idea: we could add a wrapper around generic_setlease() for
+> filesystems like this that will do a WARN_ONCE() and then call
+> generic_setlease(). That would keep leases working on them but we might
+> get some reports that would tell us who's setting leases on these files
+> and why.
 
-Samba 4.24.0rc1 is scheduled for 2026-01-20.
+Yeah, this makes sense at least for some transition period so that we
+faster learn if our judgement about sane / insane lease use was wrong.
 
-https://wiki.samba.org/index.php/Release_Planning_for_Samba_4.24
-has been updated accordingly.
-
-Bj=F6rn
-
---7AUc2qLy4jB3hD7Z
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYIAB0WIQRTh3WYB8ykhrzLAI8xQwafzsNCPwUCaWEMZAAKCRAxQwafzsNC
-P6qLAQDo1ZhdIOgjDarSEErA947n3eas/rRRLZtNWARgiuYmgAEA0MLwJjuXMGv8
-jIfwQK2odutECOreFRJhX3LjSL67YA4=
-=3oQR
------END PGP SIGNATURE-----
-
---7AUc2qLy4jB3hD7Z--
+								Honza
+-- 
+Jan Kara <jack@suse.com>
+SUSE Labs, CR
 
