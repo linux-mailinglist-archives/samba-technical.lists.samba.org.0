@@ -2,43 +2,44 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id E50ACD23335
-	for <lists+samba-technical@lfdr.de>; Thu, 15 Jan 2026 09:40:36 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id E7B5CD23337
+	for <lists+samba-technical@lfdr.de>; Thu, 15 Jan 2026 09:40:40 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=p/1eVpMenCIWXkmi+LWs4qBDeJZQRhQ1Mo2xBG1d6m0=; b=vu0dmfp0SHntZQbTWfo39igp95
-	eiVwVf1qcQNJFKGYa6QJf9rCCdPUy6fceK+Q01UfU/mTi9coZiFgCKzNU4/uqsXHCTQjwiqLkaXde
-	U3WZxDLghsfr27n2g3Yrxc3VId6QhnTHtHYWL8ESJCqFz2YQo3Vhvmwn9WnEBpnscohLv4KJV3MEq
-	wteTdSWVJ+pEzbE9oDnhYvME5vV/tPZDEB4+KzrlTayoNzfTfaaZv2m6+GcNONCQDrR+KdeM9zMl8
-	WlNTNDK+H/e7gQYmXAfAXVZUUwzHGaXPXwG8PURZwFDwWcAnAUaPZw7t/nLPezGupWySbwej0mg9p
-	v/KSij2A==;
-Received: from ip6-localhost ([::1]:29290 helo=hr1.samba.org) 
+	bh=/I/lmC8LP3DXdryYas7yQPVnLzGMCsU6bnNnqo9iZUY=; b=0z/4vbO0KAfk5zxzl8lh2LH9Uh
+	LfXiCiU0HwPLgymfF5WaKDJoLi1zD5aFFZH5287f1F0TW5f2qKA9LBUtM2ZjjRCHLXS1qQRNzDla2
+	H82ANE9/+DD/DP5/46bA9aCalyIy+TsixzsElgtZuEtAl3h0ckCDi9b4qGO/azXC6xsSlVnFZpw6P
+	c++TzT7xU2GO/Fmd7SVNpUtq7dR5bCdert8VxmMLApGXnNBrs66ysC0XZM319i6F6D9oLS4RARF3V
+	IQvEN/kCpHCzuOxNvbGACxtCvJ0V2Pp43reox2Cv1n3ZJWh93Io8w9c/rsyjrTJbhI+sOuMM5/qXc
+	ZKjKpwnQ==;
+Received: from ip6-localhost ([::1]:55502 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1vgItQ-000AA6-NA; Thu, 15 Jan 2026 08:39:48 +0000
-Received: from bombadil.infradead.org ([2607:7c80:54:3::133]:49866) 
+	id 1vgItZ-000ACC-2S; Thu, 15 Jan 2026 08:39:57 +0000
+Received: from bombadil.infradead.org ([2607:7c80:54:3::133]:36104) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vg2Rh-0007TY-5V
- for samba-technical@lists.samba.org; Wed, 14 Jan 2026 15:06:07 +0000
+ (Exim) id 1vgHec-000A1b-9D
+ for samba-technical@lists.samba.org; Thu, 15 Jan 2026 07:20:29 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=bombadil.20210309; h=In-Reply-To:Content-Type:MIME-Version
  :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
  Content-Transfer-Encoding:Content-ID:Content-Description;
- bh=p/1eVpMenCIWXkmi+LWs4qBDeJZQRhQ1Mo2xBG1d6m0=; b=2aGkR9+Gq07Pqsr81YJxBM46lt
- pC2tFopI1k2CQN/EQyBvUMbN685on8x5U4CpdjMpkFZFWeBtSU1OM84Ciw+y3szFcelfmqTyyg3Vm
- y2DbB7FtxibRk5XBq6sH9x7jaP/v3yPQ2Ob6mTE3lbJs+jMPsrwoZFGtqfkkexkKI90sVyqCbvrKN
- zpFbi2ZET+fTj2fii5dhkiKqKWNVPeKcG3n8jccbhPTVNNeRCqGKQRlyNUdLbE0ua8zYfilMENTNi
- ksLGJd1DFd0SiHbXxA8bZhed6Je0ZmYu3Fr0+QZKywruGLSgXGNe8uS3svWfCZcAVQ+74djzH6mhe
- QKhXyQqw==;
+ bh=/I/lmC8LP3DXdryYas7yQPVnLzGMCsU6bnNnqo9iZUY=; b=VGObqK5voCZEvaOS2sd8k58SOl
+ 1MKXHul0UIxtbNustQjF3TiNBO5A5DEV+7luUQDjVEmdj1o6ZXj7/RHbsW5uQ8FHghSmNa8RGSf/Z
+ lqXP7DBojYS/m9d+kpswr79pVrMANdI/lJ+/vLktuyA9+4LwMwmW4ZudctP5Nn8fgcUOpIxP4H3bZ
+ wZU+Uv2sOpV/KHIJNeQwI3FUfk0W1FapF8T8lBqL+KFM3MrFgZ4F2CMZTLhz100xPKnoPJhHW7ms9
+ sJwJmQ51fc9hgVLMQHKjPH4dx2dyuUWDE38tPmbeAdELv7G3/fIrEXIlcOTJgefaGpHmCuyNcNjpw
+ 8JLGu1tA==;
 Received: from hch by bombadil.infradead.org with local (Exim 4.98.2 #2 (Red
- Hat Linux)) id 1vg2Qx-00000009cKq-2YJq;
- Wed, 14 Jan 2026 15:05:19 +0000
-Date: Wed, 14 Jan 2026 07:05:19 -0800
-To: Amir Goldstein <amir73il@gmail.com>
+ Hat Linux)) id 1vgH4C-0000000Brtc-23Ey;
+ Thu, 15 Jan 2026 06:42:48 +0000
+Date: Wed, 14 Jan 2026 22:42:48 -0800
+To: Christian Brauner <brauner@kernel.org>
 Subject: Re: [PATCH 00/24] vfs: require filesystems to explicitly opt-in to
  lease support
-Message-ID: <aWewryHrESHgXGoL@infradead.org>
-References: <cb5d2da6-2090-4639-ad96-138342bba56d@oracle.com>
+Message-ID: <aWiMaMwI6nYGX9Bq@infradead.org>
+References: <ec78bf021fa1f6243798945943541ba171e337e7.camel@kernel.org>
+ <cb5d2da6-2090-4639-ad96-138342bba56d@oracle.com>
  <ce700ee20834631eceededc8cd15fc5d00fee28e.camel@kernel.org>
  <20260113-mondlicht-raven-82fc4eb70e9d@brauner>
  <aWZcoyQLvbJKUxDU@infradead.org>
@@ -46,15 +47,14 @@ References: <cb5d2da6-2090-4639-ad96-138342bba56d@oracle.com>
  <aWc3mwBNs8LNFN4W@infradead.org>
  <CAOQ4uxhMjitW_DC9WK9eku51gE1Ft+ENhD=qq3uehwrHO=RByA@mail.gmail.com>
  <aWeUv2UUJ_NdgozS@infradead.org>
- <c40862cd65a059ad45fa88f5473722ea5c5f70a5.camel@kernel.org>
- <CAOQ4uxhDwR7dteLaqURX+9CooGM1hA7PL6KnVmSwX11ZdKxZTA@mail.gmail.com>
+ <20260114-klarstellen-blamieren-0b7d40182800@brauner>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <CAOQ4uxhDwR7dteLaqURX+9CooGM1hA7PL6KnVmSwX11ZdKxZTA@mail.gmail.com>
+In-Reply-To: <20260114-klarstellen-blamieren-0b7d40182800@brauner>
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
  bombadil.infradead.org. See http://www.infradead.org/rpr.html
-X-Mailman-Approved-At: Thu, 15 Jan 2026 08:39:46 +0000
+X-Mailman-Approved-At: Thu, 15 Jan 2026 08:39:54 +0000
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -74,8 +74,7 @@ Cc: Latchesar Ionkov <lucho@ionkov.net>, Dave Kleikamp <shaggy@kernel.org>,
  Alexander Aring <alex.aring@gmail.com>, Jan Kara <jack@suse.cz>,
  Paulo Alcantara <pc@manguebit.org>, Sandeep Dhavale <dhavale@google.com>,
  Martin Brandenburg <martin@omnibond.com>, Yuezhang Mo <yuezhang.mo@sony.com>,
- Anders Larsen <al@alarsen.net>,
- Christian Schoenebeck <linux_oss@crudebyte.com>,
+ Anders Larsen <al@alarsen.net>, Amir Goldstein <amir73il@gmail.com>,
  jfs-discussion@lists.sourceforge.net, linux-unionfs@vger.kernel.org,
  Konstantin Komarov <almaz.alexandrovich@paragon-software.com>,
  Chris Mason <clm@fb.com>, Andreas Dilger <adilger.kernel@dilger.ca>,
@@ -83,17 +82,18 @@ Cc: Latchesar Ionkov <lucho@ionkov.net>, Dave Kleikamp <shaggy@kernel.org>,
  linux-mtd@lists.infradead.org, Mike Marshall <hubcap@omnibond.com>,
  linux-xfs@vger.kernel.org, Xiubo Li <xiubli@redhat.com>,
  Yue Hu <zbestahu@gmail.com>, Miklos Szeredi <miklos@szeredi.hu>,
- Richard Weinberger <richard@nod.at>, Mark Fasheh <mark@fasheh.com>,
- devel@lists.orangefs.org, Hugh Dickins <hughd@google.com>,
+ samba-technical@lists.samba.org, Richard Weinberger <richard@nod.at>,
+ Mark Fasheh <mark@fasheh.com>, devel@lists.orangefs.org,
+ Hugh Dickins <hughd@google.com>,
  "Matthew Wilcox \(Oracle\)" <willy@infradead.org>, ntfs3@lists.linux.dev,
  Joseph Qi <joseph.qi@linux.alibaba.com>, linux-mm@kvack.org,
  Viacheslav Dubeyko <slava@dubeyko.com>, linux-btrfs@vger.kernel.org,
  Gao Xiang <xiang@kernel.org>, linux-ext4@vger.kernel.org,
  Salah Triki <salah.triki@gmail.com>, Carlos Maiolino <cem@kernel.org>,
  Dominique Martinet <asmadeus@codewreck.org>,
- Shyam Prasad N <sprasad@microsoft.com>, samba-technical@lists.samba.org,
- linux-doc@vger.kernel.org, linux-cifs@vger.kernel.org,
- Chao Yu <chao@kernel.org>, linux-nfs@vger.kernel.org,
+ Shyam Prasad N <sprasad@microsoft.com>,
+ Christian Schoenebeck <linux_oss@crudebyte.com>, linux-doc@vger.kernel.org,
+ linux-cifs@vger.kernel.org, Chao Yu <chao@kernel.org>,
  Tom Talpey <tom@talpey.com>, ocfs2-devel@lists.linux.dev,
  Bharath SM <bharathsm@microsoft.com>, linux-nilfs@vger.kernel.org,
  David Sterba <dsterba@suse.com>, Alexander Viro <viro@zeniv.linux.org.uk>,
@@ -103,7 +103,7 @@ Cc: Latchesar Ionkov <lucho@ionkov.net>, Dave Kleikamp <shaggy@kernel.org>,
  Ryusuke Konishi <konishi.ryusuke@gmail.com>,
  OGAWA Hirofumi <hirofumi@mail.parknet.co.jp>,
  Andreas Gruenbacher <agruenba@redhat.com>, Hans de Goede <hansg@kernel.org>,
- gfs2@lists.linux.dev, Christian Brauner <brauner@kernel.org>,
+ gfs2@lists.linux.dev, linux-nfs@vger.kernel.org,
  linux-f2fs-devel@lists.sourceforge.net, Theodore Ts'o <tytso@mit.edu>,
  Luis de Bethencourt <luisbg@kernel.org>, Nicolas Pitre <nico@fluxnic.net>,
  linux-erofs@lists.ozlabs.org, v9fs@lists.linux.dev,
@@ -119,21 +119,29 @@ Cc: Latchesar Ionkov <lucho@ionkov.net>, Dave Kleikamp <shaggy@kernel.org>,
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Wed, Jan 14, 2026 at 03:14:13PM +0100, Amir Goldstein wrote:
-> Very well then.
-> How about EXPORT_OP_PERSISTENT_HANDLES?
-
-Sure.
-
-> > The problem there is that we very much do want to keep tmpfs
-> > exportable, but it doesn't have stable handles (per-se).
+On Wed, Jan 14, 2026 at 04:20:13PM +0100, Christian Brauner wrote:
+> > You're still think of it the wrong way.  If we do have file systems
+> > that break the original exportfs semantics we need to fix that, and
+> > something like a "stable handles" flag will work well for that.  But
+> > a totally arbitrary "is exportable" flag is total nonsense.
 > 
-> Thinking out loud -
-> It would be misguided to declare tmpfs as
-> EXPORT_OP_PERSISTENT_HANDLES
-> and regressing exports of tmpfs will surely not go unnoticed.
+> File handles can legitimately be conceptualized independently of
+> exporting a filesystem. If we wanted to tear those concepts apart
+> implementation wise we could.
+> 
+> It is complete nonsense to expect the kernel to support exporting any
+> arbitrary internal filesystem or to not support file handles at all.
 
-tmpfs handles are stable.  It's the tmpfs files that don't survive an
-unmount or reboot..
+You are going even further down the path of entirely missing the point
+(or the two points by now).
+
+If a file systems meets all technical requirements of being nfsd
+exportable and the users asks for it, it is not our job to make an
+arbitrary policy decision to say no.
+
+If it does not meet the technical requirements it obviously should
+not be exportable.  And it seems like the spread of file handles
+beyond nfs exporting created some ambiguity here, which we need to
+fix.
 
 
