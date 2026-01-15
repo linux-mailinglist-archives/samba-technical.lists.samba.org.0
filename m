@@ -2,77 +2,77 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 72BAED2DF1D
-	for <lists+samba-technical@lfdr.de>; Fri, 16 Jan 2026 09:22:28 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A8FF0D2DF34
+	for <lists+samba-technical@lfdr.de>; Fri, 16 Jan 2026 09:22:59 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=1HpNW/ml4xLa7Q+ZYoOd6NCigBelaQL2RtJ0aaDh9mI=; b=FBP1kUjih2aILVZVdF6uAkvb+6
-	N07sqoL1x+EgHEq1so0hpkqHueglYspGmwOi1lnMa/ZeQejuu57ADYG6+Pshr+midGTmpyP7gpYZr
-	HOAa4sSdEbOkVzmvcNUL/OHIvvGAnhgjJxiETSjGLMvc5OwPT7mB8/11CQcqDj4u+h2GhNm6+X6mZ
-	7vCNCyr53nUwNY9IqiHkNbGa6c2+zqe5mFfVpgLO+mSvIBSiFEijUxyHnAn3ASMoFmsuOW0BiuHpP
-	QSzJ5uZpF5s9muBDAXql6AtzoPdZ37sjCsi60nvZKP0fNIL1Idbv3lKjBN3DMigbMoTqhE7ecgyJ+
-	RRmv03wg==;
-Received: from ip6-localhost ([::1]:27658 helo=hr1.samba.org) 
+	bh=aDUsn+SB7H7nYSne5YCtxozzRNZ3DAEsXPNjynL2NCs=; b=t9do6XJpW/6R+SUHw9gA6+wetc
+	5wF5vN42rJQrUMUOWpn6UmXXJhait9zNnOvh6vhILowGD1D8i8Q4m6dP7+LxDJ+RBvrqkCNM8e09V
+	GwXKnDBEDFhPMihTYVgRdYCkWAhvo+seSfpSKPn8sQ0CMVxOttaO3f6cdu8MAMln2p4AwylPIRHpQ
+	ySaiCZXudfDToIV9iamGUo5jcevb2vdMQ2RfhZ1uhRUfC9T2MrEOoAGG7HvntlrMIGKIb3LsGYcDN
+	htwLHxzy/sFwx5t05TmoL+WPsaApwoEPLq+xsPxM7FoYFeURVSGLGl5QliHSuVK3brxvZ7SvUL3yV
+	DXr68M1A==;
+Received: from ip6-localhost ([::1]:62460 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1vgf5n-000Dr7-4E; Fri, 16 Jan 2026 08:22:05 +0000
-Received: from mail-ed1-x530.google.com ([2a00:1450:4864:20::530]:44514) 
+	id 1vgf6H-000Dxh-Ro; Fri, 16 Jan 2026 08:22:35 +0000
+Received: from mail-ed1-x529.google.com ([2a00:1450:4864:20::529]:47235) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vgSwM-000CH8-Ch
- for samba-technical@lists.samba.org; Thu, 15 Jan 2026 19:23:33 +0000
-Received: by mail-ed1-x530.google.com with SMTP id
- 4fb4d7f45d1cf-64b58553449so2208119a12.1
- for <samba-technical@lists.samba.org>; Thu, 15 Jan 2026 11:23:29 -0800 (PST)
+ (Exim) id 1vgSzU-000CHY-64
+ for samba-technical@lists.samba.org; Thu, 15 Jan 2026 19:26:46 +0000
+Received: by mail-ed1-x529.google.com with SMTP id
+ 4fb4d7f45d1cf-653781de668so1912027a12.2
+ for <samba-technical@lists.samba.org>; Thu, 15 Jan 2026 11:26:43 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1768505009; x=1769109809; darn=lists.samba.org;
+ d=gmail.com; s=20230601; t=1768505203; x=1769110003; darn=lists.samba.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=1HpNW/ml4xLa7Q+ZYoOd6NCigBelaQL2RtJ0aaDh9mI=;
- b=YHYPFCwvQ4D+D77caEWunbgFa1lX2IP2z845G+ikaToF5QYHZZimGi85nh0VOXcK08
- AkGDfuKq1SzN+n7hAoPLg1OhQWWUA+fZlmSxMV7G2g7BKJlPKohidzDncO5jp0sxvoia
- 7aPQ4VjIh8sF7IhkJqqSzVkZRU3ESxFxQ7PiRcalIobuEm9xnYd3XxY19m2ONU86NhgV
- LoRl4Bubx13oB4uEkV5J545tCK3MD+dmItcYuOAp7VLvXSsLTzWNCND7Kx11qILJ6gWb
- jMQUHfrzHtfJKeo7ErPiCNopjz2eDwOA+Hm/NOuSPs0+vKJSotRoP4+9IFt4bEYiLOaY
- 2/Zg==
+ bh=aDUsn+SB7H7nYSne5YCtxozzRNZ3DAEsXPNjynL2NCs=;
+ b=iYBxrOe0iHV+H/g3p7lCQB2Mx25Jrk/pYeDPmC2K2hZOSIhxy+tx+UUdvPgsTtIuFo
+ KnYFJuvtah6+JskjpxjIPlVKNLWeWHV0cV10Kfc8s5hppO0d8vt6QnoRvpeODi5y2BOK
+ AYRiMQ5OhRHpRin0/3sMt22wzx+mFHc5TSt1TswuV1PGFrpRlywufV9weFDCGUFzuDTq
+ 5K6kLk3IFDEpgY8F+DAcycTtt8trrUkK1GHS76nOAk9AAYNpG059rbKNVFRALxpfAMKT
+ FaDW34NlpDjCs8umjRsca2Yq0ptMFXqGcRWSm2yrIEYtY3wvDfWWAW9HVG/vXP/UTDSG
+ dJjQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1768505009; x=1769109809;
+ d=1e100.net; s=20230601; t=1768505203; x=1769110003;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=1HpNW/ml4xLa7Q+ZYoOd6NCigBelaQL2RtJ0aaDh9mI=;
- b=Vvjtqjg1oI+01ZdoHgux7w+MKdGLors3CSkzDYBKA8eKD8OicunTPvm07QPHco70OW
- yeGKX7e6Bm9GrHm4BUXounjFPrn3n84fBzGC/OhrVV30tvNqhNKyUmaFRIiXjPvejXsX
- t3zybs/Ur7wA/ycpnguuJ3fIEic/4uzZTngrsM71WEHlDWFDeclAvtWKH9X2KJFl1xv/
- bfIc2GbXS9p53Pe4aeHN3Yzr+TEUqQFybOz8eLusSGJSI1JWrVD4iS8vyg+2MyiR2SDh
- Zd5ojyTCLi87Mqpza95ayXC1Xz1pkjD58uNVf+Xyun8fzDVrmA37t+8JYSv+ffNcDLUj
- W7HQ==
+ bh=aDUsn+SB7H7nYSne5YCtxozzRNZ3DAEsXPNjynL2NCs=;
+ b=V5I9v9PJacfMyRDny/S3Bis1ISjXYs3cVIwj9ivZUcNEGXngbXzdz8zUEzGwJe8dRE
+ E0RUR9fTu7XjH7EqTcLghs1c9UTDBHAyPnyxU2fDvoTC/PThcFEYWQwcF8wbNGGBIhMR
+ GvuyNKwAetCjWfK/m0XqOilIUsPdizWlAl/JXE2HBC2rA7I2oCQqYXhVHt8ZDFVBb5mo
+ dbL7Udo2d90VLe+RXxAmVmMh7OV58jnfkD6tiOuAJwNpfPGDRmZBv+jfl4MQ7Vs37fiB
+ JaLH+2vQovfeIjsVxubYCkRymCVRvun1Xp6V76bSQUiz3hV6zXnaMUewUmn/e77KcNUe
+ ybwg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX+8deb2VJHPYvv01WVzWlnGKWyGeBb5MsOBGRQlq4J/9YnXKVAH+l0Saku0yXgTEN0SG/64/WkpHpYkRm05JY=@lists.samba.org
-X-Gm-Message-State: AOJu0YyGYw00uRssksTHnhIMERN/kW9bcZhPABMKiLQ/ibKj4pMMQP9A
- /mcKu6BygmIlQR9gmdpcnHsQCNf1FKoNLXYReA3lv3kZcj8DDhOInNX3O3Ilq21WK+hvVE+go85
- 7pRSi/+SLIyprUhkY2PW2WbBfEc1UDHE=
-X-Gm-Gg: AY/fxX5mcacFMIPy6LfzzLq7rapfDtWe5FKchJkvfOeYz3s8RJF6nMxQx560we9HEf9
- yQ2o82sx+GJucsA8N8dRL/LsNOZNb6MyoeLGfdEI06EI1FPYuqixnhPdTxBg8WC4IM7n7kJyXic
- ZSbmOE0BwCbf7cdSR949Dw3ncOIhasEvAKn6f0I32Wg2gtSdh5JKc8y6UXg4/F25C7Imk99tCnW
- 98mQgC2w+5OdHPEvgZWc2LYKp2CwYz+Qipa+2ppHoFkYbqSD+xZ5mZ5bq+xNC4MoRMf2RFSQWvC
- zJDOv23dBmbKMXp7xkzLNUTx/P3f2g==
-X-Received: by 2002:a17:907:3e97:b0:b73:7c3e:e17c with SMTP id
- a640c23a62f3a-b879327e30bmr63085666b.44.1768505008810; Thu, 15 Jan 2026
- 11:23:28 -0800 (PST)
+ AJvYcCUJ/nUno2dlJ+LbeVSL+cY6rMGqpXZ13WINidP1UA5aJ+B+nzTWJt30ExDoug64QG9MZ5SVaib4x8EksAQ5jWI=@lists.samba.org
+X-Gm-Message-State: AOJu0Yx2wRE0OtKoav9Ii1WFkOL29i+sP6MTVwh9Q1P1QJj4SoCLo3R2
+ 1LydwtDmGZgfAUsdjboXqFye3QFYBSUFxp2YUuPqKwXI0BRh8UbMNVE8CwDHYqibO/QjeiwmyJj
+ V6ZxgAGDbNUV7hO/dI0ChHbCiYhSibOg=
+X-Gm-Gg: AY/fxX7uNH9kKoUXcypLXgOTEyrZo843q61i5ji58RIDZUFLjKMClmm6UAcRTIE0HIJ
+ 1JhxN9Qny+hMNpR5nz36gmsqPwJTGStZ86W0ZST/cVwCGyAtSI0vx/hC5NxGkAhxtM17dNoVnR9
+ 7UfoJHRaU5lOz9QrSU8iwjnfH/vCYTk2jLICt/9Z0ePyBUl2l1yPT7R6DLhz76rEoay60zsHs7l
+ 29GErIrCCsy9QzKUsru/QXp1uRJQZWXGeja82v9DiwLKRjqk1nF3XhClqm+wCOYtg08JWW1i31n
+ BTsH7O/jVMKKRbqcAwAF6xMtaVecjg==
+X-Received: by 2002:a05:6402:4402:b0:64b:4540:6edb with SMTP id
+ 4fb4d7f45d1cf-65452ad0f58mr442903a12.22.1768505202965; Thu, 15 Jan 2026
+ 11:26:42 -0800 (PST)
 MIME-Version: 1.0
 References: <20260115-exportfs-nfsd-v1-0-8e80160e3c0c@kernel.org>
- <20260115-exportfs-nfsd-v1-29-8e80160e3c0c@kernel.org>
-In-Reply-To: <20260115-exportfs-nfsd-v1-29-8e80160e3c0c@kernel.org>
-Date: Thu, 15 Jan 2026 20:23:17 +0100
-X-Gm-Features: AZwV_Qj21qC7f0_83CWGwxMbCuhLisWPoHuSIOsZGqfnrVByhBJVGvUqJqXdQ-8
-Message-ID: <CAOQ4uxg304=s1Uoeayy3rm1e154Nf7ScOgseJHThw4uQjKwk0A@mail.gmail.com>
-Subject: Re: [PATCH 29/29] nfsd: only allow filesystems that set
- EXPORT_OP_STABLE_HANDLES
+ <20260115-exportfs-nfsd-v1-15-8e80160e3c0c@kernel.org>
+In-Reply-To: <20260115-exportfs-nfsd-v1-15-8e80160e3c0c@kernel.org>
+Date: Thu, 15 Jan 2026 20:26:31 +0100
+X-Gm-Features: AZwV_QgHlhd5AJtx9A_oESS7w6U6eCWyUuqrhH3MyU474xj2Kq62KuhGZ4o-aoc
+Message-ID: <CAOQ4uxiTE+8r+F-e91cg9wZY-fjZfSHHOeLk3RWb+2JQQZvbvA@mail.gmail.com>
+Subject: Re: [PATCH 15/29] smb/client: add EXPORT_OP_STABLE_HANDLES flag to
+ export operations
 To: Jeff Layton <jlayton@kernel.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Fri, 16 Jan 2026 08:21:29 +0000
+X-Mailman-Approved-At: Fri, 16 Jan 2026 08:22:04 +0000
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -129,42 +129,31 @@ Cc: Martin Brandenburg <martin@omnibond.com>,
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Thu, Jan 15, 2026 at 6:51=E2=80=AFPM Jeff Layton <jlayton@kernel.org> wr=
+On Thu, Jan 15, 2026 at 6:49=E2=80=AFPM Jeff Layton <jlayton@kernel.org> wr=
 ote:
 >
-> Some filesystems have grown export operations in order to provide
-> filehandles for local usage. Some of these filesystems are unsuitable
-> for use with nfsd, since their filehandles are not persistent across
-> reboots.
->
-> In __fh_verify, check whether EXPORT_OP_STABLE_HANDLES is set
-> and return nfserr_stale if it isn't.
+> Add the EXPORT_OP_STABLE_HANDLES flag to cifs export operations to indica=
+te
+> that this filesystem can be exported via NFS.
 >
 > Signed-off-by: Jeff Layton <jlayton@kernel.org>
 > ---
->  fs/nfsd/nfsfh.c | 4 ++++
->  1 file changed, 4 insertions(+)
+>  fs/smb/client/export.c | 1 +
+>  1 file changed, 1 insertion(+)
 >
-> diff --git a/fs/nfsd/nfsfh.c b/fs/nfsd/nfsfh.c
-> index ed85dd43da18e6d4c4667ff14dc035f2eacff1d6..da9d5fb2e6613c2707195da2e=
-8678b3fcb3d444d 100644
-> --- a/fs/nfsd/nfsfh.c
-> +++ b/fs/nfsd/nfsfh.c
-> @@ -334,6 +334,10 @@ __fh_verify(struct svc_rqst *rqstp,
->         dentry =3D fhp->fh_dentry;
->         exp =3D fhp->fh_export;
->
-> +       error =3D nfserr_stale;
-> +       if (!(dentry->d_sb->s_export_op->flags & EXPORT_OP_STABLE_HANDLES=
-))
-> +               goto out;
-> +
->         trace_nfsd_fh_verify(rqstp, fhp, type, access);
->
+> diff --git a/fs/smb/client/export.c b/fs/smb/client/export.c
+> index d606e8cbcb7db2b4026675bd9cbc264834687807..c1c23e21bfe610f1b5bf8d0ee=
+a64ab49e2c6ee3a 100644
+> --- a/fs/smb/client/export.c
+> +++ b/fs/smb/client/export.c
+> @@ -47,6 +47,7 @@ const struct export_operations cifs_export_ops =3D {
+>   * Following export operations are mandatory for NFS export support:
+>   *     .fh_to_dentry =3D
+>   */
+> +       .flags =3D EXPORT_OP_STABLE_HANDLES,
 
-IDGI. Don't you want  to deny the export of those fs in check_export()?
-By the same logic that check_export() checks for can_decode_fh()
-not for can_encode_fh().
+Kind of odd to have this here after the comment out of NFS export.
+Maybe add it inside the comment...
 
 Thanks,
 Amir.
