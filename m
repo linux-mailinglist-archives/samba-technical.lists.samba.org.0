@@ -2,80 +2,90 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 53517D2DF61
-	for <lists+samba-technical@lfdr.de>; Fri, 16 Jan 2026 09:23:41 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3F6F3D2DF74
+	for <lists+samba-technical@lfdr.de>; Fri, 16 Jan 2026 09:24:00 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=3/OO8RKyY0YoEvp6ZTLVXNCVFpOv1g0hFAjXGWT4AHc=; b=eODUBHbuMxgPQC5CMP2yt9c+5I
-	jmXXsW6U8rcJtwnP3lwu2daLVDXlgcBIFS+uPGAZ7nv3lpSWG74d1Uxgdxz9hkCIzW+2bYmExBrxH
-	gfUkLCJM9f8PmSpcmKz4ilClF5JEtYTQqVPjKfvICX6fmX5U6WnZt9W1UXyfj9w7BkRaven4XibXX
-	Dh76FUEILmnWwqclG/mp/eYP/lFt6z+1G9bbilXwkTWAcYhCpDjhjlK5FXGTFlpFxmib9/3vzVpYG
-	nENWughEb+OMpbEC0qAPlXpo/UhlOjgtbglmjUkQ09BMuutE68xIP25MPWQIkCKTB9UEwoeI1KxzH
-	tED3fR9Q==;
-Received: from ip6-localhost ([::1]:23388 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=9qNaS/mHG0CWRhBXyo18LMgHGDC++HAHg2FdEUDjFsI=; b=XPXJLAkEh5gkUu0F+Es6JcY2Z5
+	agLtJXgsVG+ZFYixlPMb6jblTeZaBOWnjQs/wtoLBRfzXhc59w8lCyqEUIMmgHzbQwqa3TLycBdRW
+	BWTgY/k/JOFONFLKYAhwGjTn/R6pR7Z3/CsdE02tUC7OhlynNGP2ogYSfOtzRMbsf1z1rxI9oNzKr
+	F7wN2fAIq36CavgfXacaoZNXDRzZzDLK+FVs79m8R4GqErv7PPdcBmRstniZrYFxXMItNrX2v7vX6
+	q5c1paGVBtvR5/4VeH/Nc+L9z3HqD+E/GWc3kGzk2hzcRXIFMKP6DTv26RLtpThF6fUSl5O1YJ2t5
+	lEuK+rVw==;
+Received: from ip6-localhost ([::1]:31880 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1vgf75-000E9K-BE; Fri, 16 Jan 2026 08:23:24 +0000
-Received: from mail-ed1-x52d.google.com ([2a00:1450:4864:20::52d]:51246) 
+	id 1vgf7P-000EER-FS; Fri, 16 Jan 2026 08:23:44 +0000
+Received: from mail-pf1-x442.google.com ([2607:f8b0:4864:20::442]:49451) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vgTJk-000CJ3-92
- for samba-technical@lists.samba.org; Thu, 15 Jan 2026 19:47:43 +0000
-Received: by mail-ed1-x52d.google.com with SMTP id
- 4fb4d7f45d1cf-64d4d8b3ad7so2051712a12.2
- for <samba-technical@lists.samba.org>; Thu, 15 Jan 2026 11:47:39 -0800 (PST)
+ (Exim) id 1vgUb4-000CPd-T4
+ for samba-technical@lists.samba.org; Thu, 15 Jan 2026 21:09:42 +0000
+Received: by mail-pf1-x442.google.com with SMTP id
+ d2e1a72fcca58-81e821c3d4eso1155391b3a.3
+ for <samba-technical@lists.samba.org>; Thu, 15 Jan 2026 13:09:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1768506459; x=1769111259; darn=lists.samba.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=3/OO8RKyY0YoEvp6ZTLVXNCVFpOv1g0hFAjXGWT4AHc=;
- b=YOKiemJpbt4SWfZUcS5bsXoAHOsGDPYwLb4NiZrdFKcWtNxW8HjKd+S62kXuzy73f8
- KGTR2kEKfNnI00OCiaKPaaKP4IlXYUDz39eeRiTb8o+IOcwHCMQi2nP3c0zwC1xSPy/P
- WTrjUvdrtz43NWinG0vsPH2j/yrqaaJMeYk86srOi3qWOkuE8S3gASolF9LnWEQTFzdI
- /VdE/ghhgVm/EYY8kRwA+EEr9JzboCOYnJtu06UiRrqIO6nOtTyCMGe6tK4ri904RXwS
- 3lqxcd2CFlqoAAH4ztkWUYH0PSQc8RnO4U8nNrzkI7mzznX/ihlxUJ4jb1sPiwA0vzUR
- i4OA==
+ d=fromorbit-com.20230601.gappssmtp.com; s=20230601; t=1768511376; x=1769116176;
+ darn=lists.samba.org; 
+ h=in-reply-to:content-transfer-encoding:content-disposition
+ :mime-version:references:message-id:subject:cc:to:from:date:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=9qNaS/mHG0CWRhBXyo18LMgHGDC++HAHg2FdEUDjFsI=;
+ b=lGYfid4dlFyXPsw8McAa+rIGYhGM55Xd7yegOZN4gzUmgY2aEP4nX5CxxZtss45BXy
+ 3NAYX7Ejj+dQ/n8Ie8Qv3d+0MtzyPTdWFuAUVFfIdHfnC+PpF+od+ejnXP28O8q1kpP/
+ 5bZCU4S6MmUK26i4Ce1bDq3eiJJBkLuroLcyJI4Sg4rIA3KjwjEpDPUZcZ3fu7kgr7gf
+ Usw1MMS1Z4V/SOKizGhvGfVlZhuNwav2a8KPxcc98YM/MeFJMJehS0FJ/yuO8XSsCjkV
+ hIL4xz5sIyqHiL79IWOTfgRI0Yq1ETG/Zj0MRizNIbzx3kC/IM6EPsY7opjtwJVtZive
+ CSrw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1768506459; x=1769111259;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=3/OO8RKyY0YoEvp6ZTLVXNCVFpOv1g0hFAjXGWT4AHc=;
- b=Af8QnlZDEyqbdFd9mgA1T8i4oALLdGIrKoDBktq3V0Vnj1naOivbK0ju8PvPLlrY5o
- Gvd1OeFcRRmSL2G6cAmN0x635/Xiq1RxzaRBnGgFkoKT3aRu6QOuCky/wCbSYhmaj8La
- IWZAV8I5V5dILMNDhe5ATuxlb85s9Y9M8wCq3PBr7DcOICUsZH1hYZIkj0IiMBONHMdU
- 9wyrXXhxIUuX5pOHTggZU2UxrNdjBLz9A6ZsJeWmvZ37q/pk1GSYOm3eNsPEd3YcVKnN
- eMT6zDHgjUn6dUrHrXO8WB18i+6O1c76r1tqLKzG7OvqzyRw25iAlikMggoV/KFk/EEh
- QJkw==
+ d=1e100.net; s=20230601; t=1768511376; x=1769116176;
+ h=in-reply-to:content-transfer-encoding:content-disposition
+ :mime-version:references:message-id:subject:cc:to:from:date:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=9qNaS/mHG0CWRhBXyo18LMgHGDC++HAHg2FdEUDjFsI=;
+ b=itwAVP8QMP17ftMLIqmlRNUj8BYztkVwTI+r9HuoKMU12Je766et+ZNCOBf/F/lTEz
+ QgTHxS9vmw977QFNi8BpusRcT1MTC+iw5mV+XaTIZb/Zx3aRcRtsQqfp5wvef6m+9Bho
+ 8KVNUQ/K8ZV87huGqAOJbf72KcXnK2YGnBijWw+tjBnTnVlq59bTbo/Xp0HXtpnlR3Jy
+ Mkt4HFOD+YmSWA8QmEYdteLvwVPX8w8L0Ez1Y2QC0RerexQEyMSqFl+L3MpteCeVAE++
+ 8si78Yw2SJG8lNivvXA9RpF//E7CCpoGbESyF4v1pWFPfWQWEf6heTipVOOQojyJYEk3
+ Abxw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWJtBgbueGVJzYC2e5oBzA1W8v2yICfCECFDl8ui0jCFFW+Tpx7010nbOZJC62nKscXGFAf6qhjvHIYHsihGKw=@lists.samba.org
-X-Gm-Message-State: AOJu0Yz7Umqbj2YUP5OTyaGqH4TXvFJmaTs4jXir2t7O2jD+XWCuNVmT
- NIub/G6jfVHV9thfGdmvpZz3Yju4Z8tWlb/r3VGb/7Tcre05u1rvW6YSiRNHY55z0/s+PnXYo3Q
- YvwfSMj1F6b1bxMr7+UdGoJs5fNAT7X4=
-X-Gm-Gg: AY/fxX5tSX5v2v9PbJUQ+KosCLwY36jy6nYxAT7eOJjXkq0plDXDxbIMu89BvhBsJr7
- 9VL8QayPY9jlVyAfwAKQPNqaBH5Hmbn+k1JVKENsrys37FiXmUNX1Al0MeFShZdE4py1m/Mv7hu
- EMGSm0XSQkCo2zRTk23xq+dq0j6vxIM4/vgkcD7iCLAzC0B6FF+3CmS4qVLT88zvl+Hj7CA7A3O
- UVWvxM06ep7x7VznNDX5ftyTzdwZ15rMvgoKiL88Se+u3MFunqWhyDilCSeT6rjMaM6XJPkMM6x
- YEutH95efgi6JPl55W4wNUUqFpG+WQ==
-X-Received: by 2002:a05:6402:268e:b0:64b:7231:da3d with SMTP id
- 4fb4d7f45d1cf-654b955cf01mr167575a12.9.1768506459177; Thu, 15 Jan 2026
- 11:47:39 -0800 (PST)
-MIME-Version: 1.0
+ AJvYcCW5C2HVBeY3VFmTnw6b64Z/DZfOGJPnKBfoFigAOXLmvewZobwyrGT6eT/X4iLYQyWxoeAxo2BsflBX4YbzgeA=@lists.samba.org
+X-Gm-Message-State: AOJu0Ywk+Mn7F4NOjx3utorvCJp872zkGcQ8UJUotgCzbUCFdbaSQO31
+ LDCrQLXGOHWivt0WAuOJaJPM3+0awsuTWqWWnT8auiJwPaYvcE3ws7/Yj2LGJgMRoLQ=
+X-Gm-Gg: AY/fxX6dI1edDENH+7Fscs7zz4zqQ/n83aS0nV4/IxOqNMbzsIXpMnRkXVezWZHO5yo
+ s7HsI6giSTNZ0T7LpzB9ew+B8ZQ66My57+ijaSqOvBRYoHfb/G3sPrdMvMJzIbfnXwCz0LXqKvD
+ derSRdKnrZ4zSMdt17oRQ9yRKWu2N/3kKXv8MKswHPwFO8PRfHlZvwFgLfMkjFMGN4v1+YylEIJ
+ 7DgNDz700Px2bUBOnpz9jncuGlLioU4MucrGo70dHyzjiWoerbSiHxi39RGKWu76sw8SqQTja3G
+ F95LnbaLlpQp1sPR5neRSHWFneQpSWrwBx8z3k611IbmvSlhwY5m1rFTsXoJsLkAjfYW4WH9rwf
+ IxP7onJ6FXMc2kGVvV5f/YND58BK2rWMvPg3AGWiTAPq1dgRuLDq0tr09F5ygU8rHqWAcIJqx+V
+ SPJUYBcELCi+HuJLQqkv7Cnl3fOxQ03QxaXlcw6MHzq8rWjJez3EYjFO3wsMH4EVA=
+X-Received: by 2002:a05:6a00:1c99:b0:81e:5d52:53b9 with SMTP id
+ d2e1a72fcca58-81f9f7f61bamr693898b3a.8.1768511376156; 
+ Thu, 15 Jan 2026 13:09:36 -0800 (PST)
+Received: from dread.disaster.area (pa49-180-164-75.pa.nsw.optusnet.com.au.
+ [49.180.164.75]) by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-81fa10bda5csm259171b3a.19.2026.01.15.13.09.35
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 15 Jan 2026 13:09:35 -0800 (PST)
+Received: from dave by dread.disaster.area with local (Exim 4.99.1)
+ (envelope-from <david@fromorbit.com>) id 1vgUai-00000003vHn-2AU2;
+ Fri, 16 Jan 2026 08:09:16 +1100
+Date: Fri, 16 Jan 2026 08:09:16 +1100
+To: Chuck Lever <cel@kernel.org>
+Subject: Re: [PATCH 00/29] fs: require filesystems to explicitly opt-in to
+ nfsd export support
+Message-ID: <aWlXfBImnC_jhTw4@dread.disaster.area>
 References: <20260115-exportfs-nfsd-v1-0-8e80160e3c0c@kernel.org>
  <CAOQ4uxjOJMwv_hRVTn3tJHDLMQHbeaCGsdLupiZYcwm7M2rm3g@mail.gmail.com>
  <d486fdb8-686c-4426-9fac-49b7dbc28765@app.fastmail.com>
  <CAOQ4uxhnoTC6KBmRVx2xhvTXYg1hRkCJWrq2eoBQGHKC3sv3Hw@mail.gmail.com>
  <4d9967cc-a454-46cf-909b-b8ab2d18358d@kernel.org>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 In-Reply-To: <4d9967cc-a454-46cf-909b-b8ab2d18358d@kernel.org>
-Date: Thu, 15 Jan 2026 20:47:27 +0100
-X-Gm-Features: AZwV_QhMfL4hQaeUnA-dk4TL1Qjc8lTmxpbV_QcnWyLhkyyZFquuhwL6kPGc4Cw
-Message-ID: <CAOQ4uxhtorpd6FVsaGO=NdRD72MxeDyabip84ctQYSNufobS8w@mail.gmail.com>
-Subject: Re: [PATCH 00/29] fs: require filesystems to explicitly opt-in to
- nfsd export support
-To: Chuck Lever <cel@kernel.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Fri, 16 Jan 2026 08:22:56 +0000
+X-Mailman-Approved-At: Fri, 16 Jan 2026 08:23:23 +0000
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -89,13 +99,14 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Amir Goldstein via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Amir Goldstein <amir73il@gmail.com>
+From: Dave Chinner via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Dave Chinner <david@fromorbit.com>
 Cc: Martin Brandenburg <martin@omnibond.com>,
  jfs-discussion@lists.sourceforge.net, Jan Kara <jack@suse.cz>,
  Paulo Alcantara <pc@manguebit.org>, Alex Markuze <amarkuze@redhat.com>,
  Sandeep Dhavale <dhavale@google.com>, linux-btrfs@vger.kernel.org,
- Carlos Maiolino <cem@kernel.org>, linux-unionfs@vger.kernel.org,
+ Carlos Maiolino <cem@kernel.org>, Amir Goldstein <amir73il@gmail.com>,
+ linux-unionfs@vger.kernel.org,
  Konstantin Komarov <almaz.alexandrovich@paragon-software.com>,
  Chris Mason <clm@fb.com>, Andreas Dilger <adilger.kernel@dilger.ca>,
  Chunhai Guo <guochunhai@vivo.com>, linux-mtd@lists.infradead.org,
@@ -133,83 +144,84 @@ Cc: Martin Brandenburg <martin@omnibond.com>,
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Thu, Jan 15, 2026 at 8:37=E2=80=AFPM Chuck Lever <cel@kernel.org> wrote:
->
+On Thu, Jan 15, 2026 at 02:37:09PM -0500, Chuck Lever wrote:
 > On 1/15/26 2:14 PM, Amir Goldstein wrote:
-> > On Thu, Jan 15, 2026 at 7:32=E2=80=AFPM Chuck Lever <cel@kernel.org> wr=
-ote:
+> > On Thu, Jan 15, 2026 at 7:32 PM Chuck Lever <cel@kernel.org> wrote:
 > >>
 > >>
 > >>
 > >> On Thu, Jan 15, 2026, at 1:17 PM, Amir Goldstein wrote:
-> >>> On Thu, Jan 15, 2026 at 6:48=E2=80=AFPM Jeff Layton <jlayton@kernel.o=
-rg> wrote:
+> >>> On Thu, Jan 15, 2026 at 6:48 PM Jeff Layton <jlayton@kernel.org> wrote:
 > >>>>
 > >>>> In recent years, a number of filesystems that can't present stable
 > >>>> filehandles have grown struct export_operations. They've mostly done
-> >>>> this for local use-cases (enabling open_by_handle_at() and the like)=
-.
-> >>>> Unfortunately, having export_operations is generally sufficient to m=
-ake
-> >>>> a filesystem be considered exportable via nfsd, but that requires th=
-at
+> >>>> this for local use-cases (enabling open_by_handle_at() and the like).
+> >>>> Unfortunately, having export_operations is generally sufficient to make
+> >>>> a filesystem be considered exportable via nfsd, but that requires that
 > >>>> the server present stable filehandles.
 > >>>
-> >>> Where does the term "stable file handles" come from? and what does it=
- mean?
-> >>> Why not "persistent handles", which is described in NFS and SMB specs=
-?
+> >>> Where does the term "stable file handles" come from? and what does it mean?
+> >>> Why not "persistent handles", which is described in NFS and SMB specs?
 > >>>
 > >>> Not to mention that EXPORT_OP_PERSISTENT_HANDLES was Acked
 > >>> by both Christoph and Christian:
 > >>>
-> >>> https://lore.kernel.org/linux-fsdevel/20260115-rundgang-leihgabe-1201=
-8e93c00c@brauner/
+> >>> https://lore.kernel.org/linux-fsdevel/20260115-rundgang-leihgabe-12018e93c00c@brauner/
 > >>>
 > >>> Am I missing anything?
 > >>
 > >> PERSISTENT generally implies that the file handle is saved on
 > >> persistent storage. This is not true of tmpfs.
-> >
+> > 
 > > That's one way of interpreting "persistent".
 > > Another way is "continuing to exist or occur over a prolonged period."
 > > which works well for tmpfs that is mounted for a long time.
->
+> 
 > I think we can be a lot more precise about the guarantee: The file
 > handle does not change for the life of the inode it represents. It
-> has nothing to do with whether the file system is mounted.
->
->
-> > But I am confused, because I went looking for where Jeff said that
-> > you suggested stable file handles and this is what I found that you wro=
-te:
-> >
-> > "tmpfs filehandles align quite well with the traditional definition
-> >  of persistent filehandles. tmpfs filehandles live as long as tmpfs fil=
-es do,
-> >  and that is all that is required to be considered "persistent".
->
-> I changed my mind about the name, and I let Jeff know that privately
-> when he asked me to look at these patches this morning.
->
->
-> >> The use of "stable" means that the file handle is stable for
-> >> the life of the file. This /is/ true of tmpfs.
-> >
-> > I can live with STABLE_HANDLES I don't mind as much,
-> > I understand what it means, but the definition above is invented,
-> > whereas the term persistent handles is well known and well defined.
->
-> Another reason not to adopt the same terminology as NFS is that
-> someone might come along and implement NFSv4's VOLATILE file
-> handles in Linux, and then say "OK, /now/ can we export cgroupfs?"
-> And then Linux will be stuck with overloaded terminology and we'll
-> still want to say "NO, NFS doesn't support cgroupfs".
->
-> Just a random thought.
 
-Good argument. I'm fine with stable as well :)
+<pedantic mode engaged>
 
-Thanks,
-Amir.
+File handles most definitely change over the life of a /physical/
+inode. Unlinking a file does not require ending the life of the
+physical object that provides the persistent data store for the
+file.
+
+e.g. XFS dynamically allocates physical inodes might in a life cycle
+that looks somewhat life this:
+
+	allocate physical inode
+	insert record into allocated inode index
+	mark inode as free
+
+	while (don't need to free physical inode) {
+		...
+		allocate inode for a new file
+		update persistent inode metadata to generate new filehandle
+		mark inode in use
+		...
+		unlink file
+		mark inode free
+	}
+
+	remove inode from allocated inode index
+	free physical inode
+
+i.e. a free inode is still an -allocated, indexed inode- in the
+filesystem, and until we physically remove it from the filesystem
+the inode life cycle has not ended.
+
+IOWs, the physical (persistent) inode lifetime can span the lifetime
+of -many- files. However, the filesystem guarantees that the handle
+generated for that inode is different for each file it represents
+over the whole inode life time.
+
+Hence I think that file handle stability/persistence needs to be
+defined in terms of -file lifetimes-, not the lifetimes of the
+filesystem objects implement the file's persistent data store.
+
+-Dave.
+-- 
+Dave Chinner
+david@fromorbit.com
 
