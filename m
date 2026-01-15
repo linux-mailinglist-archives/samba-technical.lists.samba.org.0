@@ -2,99 +2,77 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 45C05D2DEFD
-	for <lists+samba-technical@lfdr.de>; Fri, 16 Jan 2026 09:21:52 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 72BAED2DF1D
+	for <lists+samba-technical@lfdr.de>; Fri, 16 Jan 2026 09:22:28 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=bpVL1RB5I8PR85y4mxEedr9T/Q0DYVA2jeDelSaqSc8=; b=ly+T+Acr13orsi6E18HDLL6GPe
-	oX42pNkMKPbLTKiT9t4lmgBEqbhvdrdZxlCuvs42QB4uFRhXoCk1CLDH1MGnxHpJMj4sCow3yCEdd
-	GLz3PHJTUT5wxK3Br7fISEzaZHy0nrGHBZA0kyEKwCHq6rWVdBxHBQ8ruoTEWXBzpDcMPc02Slxau
-	mqbWuvpAwvB2pRktlr+re1zFa2jPpFFRRnByQKNLl+PdPgpzf+kGc9LZN7t6FLooopNdGBP0Y1h9X
-	HvtPD1pxedBT+SCa4eW/ynY16UXLvXdsuH3OOdeCr/MuyL8XT12P0QQ4Zf+U3jVyc9NmE87ztRbAT
-	M1oEScUA==;
-Received: from ip6-localhost ([::1]:50196 helo=hr1.samba.org) 
+	bh=1HpNW/ml4xLa7Q+ZYoOd6NCigBelaQL2RtJ0aaDh9mI=; b=FBP1kUjih2aILVZVdF6uAkvb+6
+	N07sqoL1x+EgHEq1so0hpkqHueglYspGmwOi1lnMa/ZeQejuu57ADYG6+Pshr+midGTmpyP7gpYZr
+	HOAa4sSdEbOkVzmvcNUL/OHIvvGAnhgjJxiETSjGLMvc5OwPT7mB8/11CQcqDj4u+h2GhNm6+X6mZ
+	7vCNCyr53nUwNY9IqiHkNbGa6c2+zqe5mFfVpgLO+mSvIBSiFEijUxyHnAn3ASMoFmsuOW0BiuHpP
+	QSzJ5uZpF5s9muBDAXql6AtzoPdZ37sjCsi60nvZKP0fNIL1Idbv3lKjBN3DMigbMoTqhE7ecgyJ+
+	RRmv03wg==;
+Received: from ip6-localhost ([::1]:27658 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1vgf5A-000Dks-Ba; Fri, 16 Jan 2026 08:21:24 +0000
-Received: from mail-wm1-x334.google.com ([2a00:1450:4864:20::334]:58375) 
+	id 1vgf5n-000Dr7-4E; Fri, 16 Jan 2026 08:22:05 +0000
+Received: from mail-ed1-x530.google.com ([2a00:1450:4864:20::530]:44514) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vgSnW-000CFe-3e
- for samba-technical@lists.samba.org; Thu, 15 Jan 2026 19:14:25 +0000
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-47f3b7ef761so7306665e9.0
- for <samba-technical@lists.samba.org>; Thu, 15 Jan 2026 11:14:21 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1768504461; cv=none;
- d=google.com; s=arc-20240605;
- b=ZN79jRVhRT1ncZe75YKaxooG0/fhrZpfvYgLBn/uUy2qnL4v7/PBJ6bW6VHuEDv7co
- o6uyHAswkITRarAWFuUwWxGWFMy8GWOspJr9uKdYu+EmW/bdkP3+1TS6YduOnwIkWTC/
- ++xccQmtFFpBZ8u+cgwFIdm5pyfzHLQcXJgooCJUG4m+YqDVZg/rI3SwISIWYF0ZmjPQ
- uyeTs+145gl6x1rzsvGw2PEce1Kgsd3bvSeI+YeRwwAyhUx0NwU258TIq7jD4+NZk0NO
- WOu2yv/jUh9TbpOfaSU7jNYn9Isftpj7ZaF69DAPVooIWDgcoIIr7WtcenkrUTKeb4A9
- /KCg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=bpVL1RB5I8PR85y4mxEedr9T/Q0DYVA2jeDelSaqSc8=;
- fh=sWaIPS0xSqdkEydDBjdTkNYsO+Nr10kT+6nbeiLmb3c=;
- b=TBKADdgSWtEwIJWEhfIPoZ23l+4Rmv3vJmrcN736MPFNwwGg8eWnoBC4TvtikAgD4W
- pOOx98oSGq7f1ZZrd6pA9qoWfmqqKsPxVcCor+K1RlfxaAu7qEKwsm5IvTo9vPrLz5HE
- qg0GiszQjfWHv2Xke8IM7m+Q9Aj70CsqiMCtFcBbJo9+fpC3RpeLuWglxLG90j4JPiEU
- N+QDhbY9HCnr4uFtFbo1fLRUMr5587NK79WvFZDVbhNk+D6vZ9YwhUN0LZCPES3sSuO2
- 00+YbJyFnr77VGYh/ziUKFolmDCLbmJOBf9HuVhbesbW0JV1Yp8961Pr6NA4dFt1VCm7
- cl0g==; darn=lists.samba.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ (Exim) id 1vgSwM-000CH8-Ch
+ for samba-technical@lists.samba.org; Thu, 15 Jan 2026 19:23:33 +0000
+Received: by mail-ed1-x530.google.com with SMTP id
+ 4fb4d7f45d1cf-64b58553449so2208119a12.1
+ for <samba-technical@lists.samba.org>; Thu, 15 Jan 2026 11:23:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1768504461; x=1769109261; darn=lists.samba.org;
+ d=gmail.com; s=20230601; t=1768505009; x=1769109809; darn=lists.samba.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=bpVL1RB5I8PR85y4mxEedr9T/Q0DYVA2jeDelSaqSc8=;
- b=JDC2AHV8TAa0BvuEeSQqizvQ06qUaVN38TDXdebV9blMq32c+e3KrOvm6KliDcn6GY
- /nW33cDdeHCgzubPx4uupHjF8HeXZn5K+b3OogGUXXIpSVj66JFL85/2GxfUvTiupeWv
- 7+qN7NhlL3pAA3XuSHqKpXXFtzv+Zp/TO8DqiuEaqxJF7bxNUZvEZRCZsXzE8KfVugWD
- h90eyMV/ct/rqsuMHw3OU27ZhFrtZ/EsECKIsEA1eaV6EhzUQAUKM9Q8ih7o2Fbg20PA
- DU6RevHPAhYg3nQE/sDyEFYPpZoi5prA2EriKiwJGo5PHITwrOizEhC/TdG2SEthv85B
- hWaA==
+ bh=1HpNW/ml4xLa7Q+ZYoOd6NCigBelaQL2RtJ0aaDh9mI=;
+ b=YHYPFCwvQ4D+D77caEWunbgFa1lX2IP2z845G+ikaToF5QYHZZimGi85nh0VOXcK08
+ AkGDfuKq1SzN+n7hAoPLg1OhQWWUA+fZlmSxMV7G2g7BKJlPKohidzDncO5jp0sxvoia
+ 7aPQ4VjIh8sF7IhkJqqSzVkZRU3ESxFxQ7PiRcalIobuEm9xnYd3XxY19m2ONU86NhgV
+ LoRl4Bubx13oB4uEkV5J545tCK3MD+dmItcYuOAp7VLvXSsLTzWNCND7Kx11qILJ6gWb
+ jMQUHfrzHtfJKeo7ErPiCNopjz2eDwOA+Hm/NOuSPs0+vKJSotRoP4+9IFt4bEYiLOaY
+ 2/Zg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1768504461; x=1769109261;
+ d=1e100.net; s=20230601; t=1768505009; x=1769109809;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=bpVL1RB5I8PR85y4mxEedr9T/Q0DYVA2jeDelSaqSc8=;
- b=LM/q17Q55oTivvUqkmiIVhusZn9D6mMWEwWgumft3HnalEtUzd+EFn2HH5CS3CyMMV
- SrtnzTMCd1QBosueLay1yGpnZDyZZ407Q2OPF3530A6xPtVmYR1AqhO8ZYqEkc4xCZuB
- WaSAnru6zd+b9/IETar3qiHgemIBlI7MnbkOR/AqiAWUW6KH+XXV89KFvGfdlu5lZovo
- jYMS8kv1h0JleO+7e9Si+TigfZnH2r+vKYKfseZXPipA6KbrgA/7oFdcvKbXjvddYmfU
- PhXRdDhanbhLGnz7ikIw8LZ8Sp89SbQJmS5OvrtTnVPIZFZKohvSQ+a+ukSv0vuUm6cI
- oNwg==
+ bh=1HpNW/ml4xLa7Q+ZYoOd6NCigBelaQL2RtJ0aaDh9mI=;
+ b=Vvjtqjg1oI+01ZdoHgux7w+MKdGLors3CSkzDYBKA8eKD8OicunTPvm07QPHco70OW
+ yeGKX7e6Bm9GrHm4BUXounjFPrn3n84fBzGC/OhrVV30tvNqhNKyUmaFRIiXjPvejXsX
+ t3zybs/Ur7wA/ycpnguuJ3fIEic/4uzZTngrsM71WEHlDWFDeclAvtWKH9X2KJFl1xv/
+ bfIc2GbXS9p53Pe4aeHN3Yzr+TEUqQFybOz8eLusSGJSI1JWrVD4iS8vyg+2MyiR2SDh
+ Zd5ojyTCLi87Mqpza95ayXC1Xz1pkjD58uNVf+Xyun8fzDVrmA37t+8JYSv+ffNcDLUj
+ W7HQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWhGPNXjwtVyL/lF09VA8sTrDXVv8tUyNYVnNpS7HrRZW4Dje8uHfI6oruRwB8148MJ4ejtIiFFPvNQQyQzYHc=@lists.samba.org
-X-Gm-Message-State: AOJu0Yw8FW9xGYQy7PFSUvc++9wdqtxIHOhxk4YkEWr9Y2/5qNH0H/VN
- 6MOVBNgJdDl5MsyZSNeU/HsgydDfNMHZqk90cqIc++OtkF6IfISVqes4cxKqzZGY+WsJV6LHWk2
- opL8y3fHW4orDJLdOpQbsfdvqR/xMNeg=
-X-Gm-Gg: AY/fxX6qnfjk/erKUWt5EspCDIJll4A1JqgHNw8x6Ye4IMsdGiEzbktRtsS7tJU7zly
- C8H4Ut0qsMsLJVooaetkygaLMF9IN13EbfEfv4wVPbcd/JfRDiThxf58PhZwEHtrDSeRUrgE9Rx
- xzrEgRt2t9HKJyngYVW93R4DP7AcO79mVwu7u3B5cBYDc+eTk5WPjzKcAYQWUeFjgIoWwvt3Rol
- EfcCbB0KXYIlqHD2P5box0O3LJlvQOIBXPrlwW0bCmN+elHwILdHULBzf3UMVPIF2h/xAc6xpf6
- SOvcjhH0OQdTHS2MWlxyPSl+8mFKtA==
-X-Received: by 2002:a05:600c:5487:b0:46f:d682:3c3d with SMTP id
- 5b1f17b1804b1-4801e30d482mr9929055e9.13.1768504460920; Thu, 15 Jan 2026
- 11:14:20 -0800 (PST)
+ AJvYcCX+8deb2VJHPYvv01WVzWlnGKWyGeBb5MsOBGRQlq4J/9YnXKVAH+l0Saku0yXgTEN0SG/64/WkpHpYkRm05JY=@lists.samba.org
+X-Gm-Message-State: AOJu0YyGYw00uRssksTHnhIMERN/kW9bcZhPABMKiLQ/ibKj4pMMQP9A
+ /mcKu6BygmIlQR9gmdpcnHsQCNf1FKoNLXYReA3lv3kZcj8DDhOInNX3O3Ilq21WK+hvVE+go85
+ 7pRSi/+SLIyprUhkY2PW2WbBfEc1UDHE=
+X-Gm-Gg: AY/fxX5mcacFMIPy6LfzzLq7rapfDtWe5FKchJkvfOeYz3s8RJF6nMxQx560we9HEf9
+ yQ2o82sx+GJucsA8N8dRL/LsNOZNb6MyoeLGfdEI06EI1FPYuqixnhPdTxBg8WC4IM7n7kJyXic
+ ZSbmOE0BwCbf7cdSR949Dw3ncOIhasEvAKn6f0I32Wg2gtSdh5JKc8y6UXg4/F25C7Imk99tCnW
+ 98mQgC2w+5OdHPEvgZWc2LYKp2CwYz+Qipa+2ppHoFkYbqSD+xZ5mZ5bq+xNC4MoRMf2RFSQWvC
+ zJDOv23dBmbKMXp7xkzLNUTx/P3f2g==
+X-Received: by 2002:a17:907:3e97:b0:b73:7c3e:e17c with SMTP id
+ a640c23a62f3a-b879327e30bmr63085666b.44.1768505008810; Thu, 15 Jan 2026
+ 11:23:28 -0800 (PST)
 MIME-Version: 1.0
 References: <20260115-exportfs-nfsd-v1-0-8e80160e3c0c@kernel.org>
- <CAOQ4uxjOJMwv_hRVTn3tJHDLMQHbeaCGsdLupiZYcwm7M2rm3g@mail.gmail.com>
- <d486fdb8-686c-4426-9fac-49b7dbc28765@app.fastmail.com>
-In-Reply-To: <d486fdb8-686c-4426-9fac-49b7dbc28765@app.fastmail.com>
-Date: Thu, 15 Jan 2026 20:14:09 +0100
-X-Gm-Features: AZwV_QgZJLcC_-bQ-_VIrtnGFnLgmiVjy_ytBB44u2cGVyBOwKNqVyWt_Jfm7Ds
-Message-ID: <CAOQ4uxhnoTC6KBmRVx2xhvTXYg1hRkCJWrq2eoBQGHKC3sv3Hw@mail.gmail.com>
-Subject: Re: [PATCH 00/29] fs: require filesystems to explicitly opt-in to
- nfsd export support
-To: Chuck Lever <cel@kernel.org>
+ <20260115-exportfs-nfsd-v1-29-8e80160e3c0c@kernel.org>
+In-Reply-To: <20260115-exportfs-nfsd-v1-29-8e80160e3c0c@kernel.org>
+Date: Thu, 15 Jan 2026 20:23:17 +0100
+X-Gm-Features: AZwV_Qj21qC7f0_83CWGwxMbCuhLisWPoHuSIOsZGqfnrVByhBJVGvUqJqXdQ-8
+Message-ID: <CAOQ4uxg304=s1Uoeayy3rm1e154Nf7ScOgseJHThw4uQjKwk0A@mail.gmail.com>
+Subject: Re: [PATCH 29/29] nfsd: only allow filesystems that set
+ EXPORT_OP_STABLE_HANDLES
+To: Jeff Layton <jlayton@kernel.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Fri, 16 Jan 2026 08:21:15 +0000
+X-Mailman-Approved-At: Fri, 16 Jan 2026 08:21:29 +0000
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -120,12 +98,11 @@ Cc: Martin Brandenburg <martin@omnibond.com>,
  Chunhai Guo <guochunhai@vivo.com>, linux-mtd@lists.infradead.org,
  Mike Marshall <hubcap@omnibond.com>, linux-xfs@vger.kernel.org,
  linux-nilfs@vger.kernel.org, Yue Hu <zbestahu@gmail.com>,
- Miklos Szeredi <miklos@szeredi.hu>, samba-technical@lists.samba.org,
- Richard Weinberger <richard@nod.at>, Mark Fasheh <mark@fasheh.com>,
- Hugh Dickins <hughd@google.com>, Dai Ngo <Dai.Ngo@oracle.com>,
- Ryusuke Konishi <konishi.ryusuke@gmail.com>,
+ Miklos Szeredi <miklos@szeredi.hu>, Richard Weinberger <richard@nod.at>,
+ Mark Fasheh <mark@fasheh.com>, Hugh Dickins <hughd@google.com>,
+ Dai Ngo <Dai.Ngo@oracle.com>, Ryusuke Konishi <konishi.ryusuke@gmail.com>,
  Viacheslav Dubeyko <slava@dubeyko.com>, NeilBrown <neil@brown.name>,
- Gao Xiang <xiang@kernel.org>, linux-ext4@vger.kernel.org,
+ Ilya Dryomov <idryomov@gmail.com>, linux-ext4@vger.kernel.org,
  Salah Triki <salah.triki@gmail.com>, linux-mm@kvack.org,
  devel@lists.orangefs.org, Shyam Prasad N <sprasad@microsoft.com>,
  Olga Kornievskaia <okorniev@redhat.com>, linux-cifs@vger.kernel.org,
@@ -135,13 +112,13 @@ Cc: Martin Brandenburg <martin@omnibond.com>,
  David Sterba <dsterba@suse.com>, Alexander Viro <viro@zeniv.linux.org.uk>,
  Baolin Wang <baolin.wang@linux.alibaba.com>,
  Jeffle Xu <jefflexu@linux.alibaba.com>, Jaegeuk Kim <jaegeuk@kernel.org>,
- ceph-devel@vger.kernel.org, Ilya Dryomov <idryomov@gmail.com>,
+ ceph-devel@vger.kernel.org, Gao Xiang <xiang@kernel.org>,
  OGAWA Hirofumi <hirofumi@mail.parknet.co.jp>,
  Andreas Gruenbacher <agruenba@redhat.com>, gfs2@lists.linux.dev,
- Christian Brauner <brauner@kernel.org>, Theodore Tso <tytso@mit.edu>,
+ Christian Brauner <brauner@kernel.org>, Theodore Ts'o <tytso@mit.edu>,
  Luis de Bethencourt <luisbg@kernel.org>,
  Joseph Qi <joseph.qi@linux.alibaba.com>, linux-erofs@lists.ozlabs.org,
- Jeff Layton <jlayton@kernel.org>, linux-kernel@vger.kernel.org,
+ samba-technical@lists.samba.org, linux-kernel@vger.kernel.org,
  linux-f2fs-devel@lists.sourceforge.net, Steve French <sfrench@samba.org>,
  Chuck Lever <chuck.lever@oracle.com>, Hongbo Li <lihongbo22@huawei.com>,
  Anna Schumaker <anna@kernel.org>, Jan Kara <jack@suse.com>,
@@ -152,56 +129,42 @@ Cc: Martin Brandenburg <martin@omnibond.com>,
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Thu, Jan 15, 2026 at 7:32=E2=80=AFPM Chuck Lever <cel@kernel.org> wrote:
+On Thu, Jan 15, 2026 at 6:51=E2=80=AFPM Jeff Layton <jlayton@kernel.org> wr=
+ote:
 >
+> Some filesystems have grown export operations in order to provide
+> filehandles for local usage. Some of these filesystems are unsuitable
+> for use with nfsd, since their filehandles are not persistent across
+> reboots.
 >
+> In __fh_verify, check whether EXPORT_OP_STABLE_HANDLES is set
+> and return nfserr_stale if it isn't.
 >
-> On Thu, Jan 15, 2026, at 1:17 PM, Amir Goldstein wrote:
-> > On Thu, Jan 15, 2026 at 6:48=E2=80=AFPM Jeff Layton <jlayton@kernel.org=
-> wrote:
-> >>
-> >> In recent years, a number of filesystems that can't present stable
-> >> filehandles have grown struct export_operations. They've mostly done
-> >> this for local use-cases (enabling open_by_handle_at() and the like).
-> >> Unfortunately, having export_operations is generally sufficient to mak=
-e
-> >> a filesystem be considered exportable via nfsd, but that requires that
-> >> the server present stable filehandles.
-> >
-> > Where does the term "stable file handles" come from? and what does it m=
-ean?
-> > Why not "persistent handles", which is described in NFS and SMB specs?
-> >
-> > Not to mention that EXPORT_OP_PERSISTENT_HANDLES was Acked
-> > by both Christoph and Christian:
-> >
-> > https://lore.kernel.org/linux-fsdevel/20260115-rundgang-leihgabe-12018e=
-93c00c@brauner/
-> >
-> > Am I missing anything?
+> Signed-off-by: Jeff Layton <jlayton@kernel.org>
+> ---
+>  fs/nfsd/nfsfh.c | 4 ++++
+>  1 file changed, 4 insertions(+)
 >
-> PERSISTENT generally implies that the file handle is saved on
-> persistent storage. This is not true of tmpfs.
-
-That's one way of interpreting "persistent".
-Another way is "continuing to exist or occur over a prolonged period."
-which works well for tmpfs that is mounted for a long time.
-
-But I am confused, because I went looking for where Jeff said that
-you suggested stable file handles and this is what I found that you wrote:
-
-"tmpfs filehandles align quite well with the traditional definition
- of persistent filehandles. tmpfs filehandles live as long as tmpfs files d=
-o,
- and that is all that is required to be considered "persistent".
-
+> diff --git a/fs/nfsd/nfsfh.c b/fs/nfsd/nfsfh.c
+> index ed85dd43da18e6d4c4667ff14dc035f2eacff1d6..da9d5fb2e6613c2707195da2e=
+8678b3fcb3d444d 100644
+> --- a/fs/nfsd/nfsfh.c
+> +++ b/fs/nfsd/nfsfh.c
+> @@ -334,6 +334,10 @@ __fh_verify(struct svc_rqst *rqstp,
+>         dentry =3D fhp->fh_dentry;
+>         exp =3D fhp->fh_export;
 >
-> The use of "stable" means that the file handle is stable for
-> the life of the file. This /is/ true of tmpfs.
+> +       error =3D nfserr_stale;
+> +       if (!(dentry->d_sb->s_export_op->flags & EXPORT_OP_STABLE_HANDLES=
+))
+> +               goto out;
+> +
+>         trace_nfsd_fh_verify(rqstp, fhp, type, access);
+>
 
-I can live with STABLE_HANDLES I don't mind as much,
-I understand what it means, but the definition above is invented,
-whereas the term persistent handles is well known and well defined.
+IDGI. Don't you want  to deny the export of those fs in check_export()?
+By the same logic that check_export() checks for can_decode_fh()
+not for can_encode_fh().
 
 Thanks,
 Amir.
