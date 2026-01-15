@@ -2,45 +2,43 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id E7B5CD23337
-	for <lists+samba-technical@lfdr.de>; Thu, 15 Jan 2026 09:40:40 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4AF13D23340
+	for <lists+samba-technical@lfdr.de>; Thu, 15 Jan 2026 09:40:52 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=/I/lmC8LP3DXdryYas7yQPVnLzGMCsU6bnNnqo9iZUY=; b=0z/4vbO0KAfk5zxzl8lh2LH9Uh
-	LfXiCiU0HwPLgymfF5WaKDJoLi1zD5aFFZH5287f1F0TW5f2qKA9LBUtM2ZjjRCHLXS1qQRNzDla2
-	H82ANE9/+DD/DP5/46bA9aCalyIy+TsixzsElgtZuEtAl3h0ckCDi9b4qGO/azXC6xsSlVnFZpw6P
-	c++TzT7xU2GO/Fmd7SVNpUtq7dR5bCdert8VxmMLApGXnNBrs66ysC0XZM319i6F6D9oLS4RARF3V
-	IQvEN/kCpHCzuOxNvbGACxtCvJ0V2Pp43reox2Cv1n3ZJWh93Io8w9c/rsyjrTJbhI+sOuMM5/qXc
-	ZKjKpwnQ==;
-Received: from ip6-localhost ([::1]:55502 helo=hr1.samba.org) 
+	bh=ggIby7ZJJhhdPb6y5rH3a2GAOEpyxb4btFDkRofMARo=; b=B+Q3wGwNASetlIBSedP3mLRbl4
+	DFeX6Rvq60Xw9qnEjWQ0uS0gqdEFysylWEMy2ZB/AVlsbAbmOZmOo3gfOmAsnfZB7GBbXL42gSC9G
+	LNXRvbhKzVvXcS51Cr0hBek9mgJbIcuPa8gYhhyLYcRlCNSA8GshinHNkPyz+Wdn2NZ0RPn7fUMd4
+	rFq5+mPXqF5SNKF6tXIPSsV9ZbFx1gmsSb8Qn1zIN8uBr0sTbeCLH4mDA3WChJbjvqxH/B8twAP8O
+	NlbPvRo9mT1l0I4GG6ValcuIDZ5ga/Ickj2dsQdzlIjrvtqfj7xZg/hiMXvif7dknQsYPYA6VLZqN
+	wMcS0kwg==;
+Received: from ip6-localhost ([::1]:42726 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1vgItZ-000ACC-2S; Thu, 15 Jan 2026 08:39:57 +0000
-Received: from bombadil.infradead.org ([2607:7c80:54:3::133]:36104) 
+	id 1vgIu6-000AGO-34; Thu, 15 Jan 2026 08:40:31 +0000
+Received: from bombadil.infradead.org ([2607:7c80:54:3::133]:45046) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vgHec-000A1b-9D
- for samba-technical@lists.samba.org; Thu, 15 Jan 2026 07:20:29 +0000
+ (Exim) id 1vgInX-000A8g-OK
+ for samba-technical@lists.samba.org; Thu, 15 Jan 2026 08:33:46 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=bombadil.20210309; h=In-Reply-To:Content-Type:MIME-Version
  :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
  Content-Transfer-Encoding:Content-ID:Content-Description;
- bh=/I/lmC8LP3DXdryYas7yQPVnLzGMCsU6bnNnqo9iZUY=; b=VGObqK5voCZEvaOS2sd8k58SOl
- 1MKXHul0UIxtbNustQjF3TiNBO5A5DEV+7luUQDjVEmdj1o6ZXj7/RHbsW5uQ8FHghSmNa8RGSf/Z
- lqXP7DBojYS/m9d+kpswr79pVrMANdI/lJ+/vLktuyA9+4LwMwmW4ZudctP5Nn8fgcUOpIxP4H3bZ
- wZU+Uv2sOpV/KHIJNeQwI3FUfk0W1FapF8T8lBqL+KFM3MrFgZ4F2CMZTLhz100xPKnoPJhHW7ms9
- sJwJmQ51fc9hgVLMQHKjPH4dx2dyuUWDE38tPmbeAdELv7G3/fIrEXIlcOTJgefaGpHmCuyNcNjpw
- 8JLGu1tA==;
+ bh=ggIby7ZJJhhdPb6y5rH3a2GAOEpyxb4btFDkRofMARo=; b=c+60rQr76h1PsKAd5LgZT9hsxs
+ aNKhr+6hZylxOZstJG/1DgKDn3jLBV6CLqh93j+WnurQG7htCVWPbVvx6tOOUVmORqsU2McpPOkHx
+ u9JemdngkpC4GOWQM49sG2cFmQXbWsrsABlaLCyNQvNPEl+M5kVweygSwI21MwVsu9pML78e/uHxP
+ vmIIVXx4fyMCNx3hPFAoWaY/UvrDQx3Aoog9gQ+mt7L4rBcvXKQQLFteJUrzRcG5+ThbjMMlIeFyn
+ n6rc9wHtWg+gNCftYd7qw5Q1lztuERemrK6iJ3CvqvoWgP9e6ucBOBNhWhZlZCMCcpDFLJa8qwA8J
+ WF22tmyA==;
 Received: from hch by bombadil.infradead.org with local (Exim 4.98.2 #2 (Red
- Hat Linux)) id 1vgH4C-0000000Brtc-23Ey;
- Thu, 15 Jan 2026 06:42:48 +0000
-Date: Wed, 14 Jan 2026 22:42:48 -0800
+ Hat Linux)) id 1vgImu-0000000C08y-0V2p;
+ Thu, 15 Jan 2026 08:33:04 +0000
+Date: Thu, 15 Jan 2026 00:33:04 -0800
 To: Christian Brauner <brauner@kernel.org>
 Subject: Re: [PATCH 00/24] vfs: require filesystems to explicitly opt-in to
  lease support
-Message-ID: <aWiMaMwI6nYGX9Bq@infradead.org>
-References: <ec78bf021fa1f6243798945943541ba171e337e7.camel@kernel.org>
- <cb5d2da6-2090-4639-ad96-138342bba56d@oracle.com>
- <ce700ee20834631eceededc8cd15fc5d00fee28e.camel@kernel.org>
+Message-ID: <aWimQEokuib7fXjY@infradead.org>
+References: <ce700ee20834631eceededc8cd15fc5d00fee28e.camel@kernel.org>
  <20260113-mondlicht-raven-82fc4eb70e9d@brauner>
  <aWZcoyQLvbJKUxDU@infradead.org>
  <ce418800f06aa61a7f47f0d19394988f87a3da07.camel@kernel.org>
@@ -48,13 +46,15 @@ References: <ec78bf021fa1f6243798945943541ba171e337e7.camel@kernel.org>
  <CAOQ4uxhMjitW_DC9WK9eku51gE1Ft+ENhD=qq3uehwrHO=RByA@mail.gmail.com>
  <aWeUv2UUJ_NdgozS@infradead.org>
  <20260114-klarstellen-blamieren-0b7d40182800@brauner>
+ <aWiMaMwI6nYGX9Bq@infradead.org>
+ <20260115-inspektion-kochbuch-505d8f94829e@brauner>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20260114-klarstellen-blamieren-0b7d40182800@brauner>
+In-Reply-To: <20260115-inspektion-kochbuch-505d8f94829e@brauner>
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
  bombadil.infradead.org. See http://www.infradead.org/rpr.html
-X-Mailman-Approved-At: Thu, 15 Jan 2026 08:39:54 +0000
+X-Mailman-Approved-At: Thu, 15 Jan 2026 08:40:04 +0000
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -119,29 +119,45 @@ Cc: Latchesar Ionkov <lucho@ionkov.net>, Dave Kleikamp <shaggy@kernel.org>,
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Wed, Jan 14, 2026 at 04:20:13PM +0100, Christian Brauner wrote:
-> > You're still think of it the wrong way.  If we do have file systems
-> > that break the original exportfs semantics we need to fix that, and
-> > something like a "stable handles" flag will work well for that.  But
-> > a totally arbitrary "is exportable" flag is total nonsense.
+On Thu, Jan 15, 2026 at 09:14:06AM +0100, Christian Brauner wrote:
+> On Wed, Jan 14, 2026 at 10:42:48PM -0800, Christoph Hellwig wrote:
+> > On Wed, Jan 14, 2026 at 04:20:13PM +0100, Christian Brauner wrote:
+> > > > You're still think of it the wrong way.  If we do have file systems
+> > > > that break the original exportfs semantics we need to fix that, and
+> > > > something like a "stable handles" flag will work well for that.  But
+> > > > a totally arbitrary "is exportable" flag is total nonsense.
+> > > 
+> > > File handles can legitimately be conceptualized independently of
+> > > exporting a filesystem. If we wanted to tear those concepts apart
+> > > implementation wise we could.
+> > > 
+> > > It is complete nonsense to expect the kernel to support exporting any
+> > > arbitrary internal filesystem or to not support file handles at all.
+> > 
+> > You are going even further down the path of entirely missing the point
+> > (or the two points by now).
 > 
-> File handles can legitimately be conceptualized independently of
-> exporting a filesystem. If we wanted to tear those concepts apart
-> implementation wise we could.
+> You're arguing for the sake of arguing imho. You're getting exactly what
+> we're all saying as evidenced by the last paragraph in your mail: it is
+> entirely what this whole thing is about.
+
+I can't even parse what you mean.  And no, I hate these stupid
+arguments, and I have much better things to do than dragging this on.
+
+> > If a file systems meets all technical requirements of being nfsd
+> > exportable and the users asks for it, it is not our job to make an
+> > arbitrary policy decision to say no.
 > 
-> It is complete nonsense to expect the kernel to support exporting any
-> arbitrary internal filesystem or to not support file handles at all.
+> This is an entirely irrelevant point because we're talking about
+> cgroupfs, nsfs, and pidfs. And they don't meet this criteria. cgroupfs
+> is a _local resource management filesystem_ why would we ever want to
+> support exporting it over the network. It allows to break the local
+> delegation model as I've explained. cgroupfs shows _local processes_. So
+> a server will see completely nonsensical PID identifiers listed in
+> cgroup files and it can fsck around with processes in a remote system.
 
-You are going even further down the path of entirely missing the point
-(or the two points by now).
-
-If a file systems meets all technical requirements of being nfsd
-exportable and the users asks for it, it is not our job to make an
-arbitrary policy decision to say no.
-
-If it does not meet the technical requirements it obviously should
-not be exportable.  And it seems like the spread of file handles
-beyond nfs exporting created some ambiguity here, which we need to
-fix.
+None of that is a technical argument.  The lack of stable file handles
+would be one, and I think we came to the conclusion yesterday that
+this is the case.
 
 
