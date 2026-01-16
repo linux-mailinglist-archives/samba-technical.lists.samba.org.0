@@ -2,54 +2,114 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8A95DD2DF90
-	for <lists+samba-technical@lfdr.de>; Fri, 16 Jan 2026 09:24:23 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 15C20D30D89
+	for <lists+samba-technical@lfdr.de>; Fri, 16 Jan 2026 13:06:43 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=e7+ZkXTf+cEt8COK7ZiBm7FpEGCZkXwmsqQ2YKKQgYQ=; b=yQTa5lbaJL0DIGF38pJjVZgzy3
-	P2d5dcyf+vjrXMZpp4rwrl0B1WY2wgPIBKRw0axuJpv95it6nTWF9giV82r0KtcqpHg/r2AzXgtKy
-	8kOa7fAENpMKRre2a+SbjTzQnMZ01XTq/8PflTqlCRs4nlJgZ6LyCbOW6zirjt/EQ4hwcuYBALEvf
-	GP81/0hJZ/9uttVRtPW6/qMN/tmd8eHBsmVRf2iGs71XqhrYCXXf8JXu3FV2en8sA3CMOcHdsyDsh
-	kl1bS4kiq4CXCZ72esJ9kAcQx9TjwWd0GgEXZv6zEcL9dLMB2NjALhXx1oMWTDNW34KaNDIV7F3p1
-	TZ64oDEw==;
-Received: from ip6-localhost ([::1]:59370 helo=hr1.samba.org) 
+	bh=WJuLQN1/VqCQ5MzAXUwztUOsWD7c/6Ri8BvtTGrLxeQ=; b=42eEmfImVXyIPtLJ2tpV7SDRPv
+	jai5nPWb7gPtxDR1ypVr/wgpJp8snsaytlQHPdCTkL7zxmOg/JWo5I/Zcp4fUKO3ZEDsckBlBFQCj
+	wHZY46uaSqLAm43DNrcQlsm5KU77pa8tRDAO/dwGcCXh82bCOKEbxGze4WZnY02HoAIzJPt11S1Tb
+	pjS8SBkbdlIpLUdZ3FK63chtp1WPIkrkMtRTx4JQ8GZpvM7tunIxcAkOboKp6+ZMSxQKBMLVzpPNz
+	AXM+xW5FjdFGjDJo0f85zsFMtyf2nptDz9184SY9VSL6XetCQA8mYk/nIyRqSdAesbr4WIiWSJ+9y
+	QH2lfZIw==;
+Received: from ip6-localhost ([::1]:36830 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1vgf7w-000EIp-CP; Fri, 16 Jan 2026 08:24:16 +0000
-Received: from outgoing-auth-1.mit.edu ([18.9.28.11]:34904
- helo=outgoing.mit.edu) by hr1.samba.org with esmtps
- (TLS1.2:ECDHE_SECP256R1__RSA_SHA512__AES_256_GCM:256) (Exim)
- id 1vgZgX-000CrJ-3c
- for samba-technical@lists.samba.org; Fri, 16 Jan 2026 02:35:42 +0000
-Received: from macsyma.thunk.org ([37.140.223.154]) (authenticated bits=0)
- (User authenticated as tytso@ATHENA.MIT.EDU)
- by outgoing.mit.edu (8.14.7/8.12.4) with ESMTP id 60G2M4QF012987
- (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 15 Jan 2026 21:22:06 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mit.edu; s=outgoing;
- t=1768530137; bh=e7+ZkXTf+cEt8COK7ZiBm7FpEGCZkXwmsqQ2YKKQgYQ=;
- h=Date:From:Subject:Message-ID:MIME-Version:Content-Type;
- b=CKqH0dMhvlhBzX4Ihkt/n9SLGrWfxX4mn8QeWQB6i/JMAynZ/PpZnz2J7QzS+Bs5J
- LHYjeS4eVH/+ftuv6ryVG1XbTNkEBDxBvsdirBrG5SJDvA92Anx4u3N3DTR/EiIhC5
- D7kuOYWuR+wEG+aT+6digJ4U2JgVCouMwzPvCca8UfAIhFjTH/mNpBMF8a1mqTO4TR
- J3Ca6tRIWBeIDKXxVFNRB7jtbFt4susYUTGwXkPso02XWNw91PlkdVzLKiVnspunHr
- roxMctbg4I/pbwnOXw13om2WtDRQ1218LHXRi7gxhCYQcXc4EIsE/wDw9NxL3LC14F
- SKf5FnkqXpe0Q==
-Received: by macsyma.thunk.org (Postfix, from userid 15806)
- id A12EE54D8E5B; Thu, 15 Jan 2026 17:22:03 -0900 (AKST)
-Date: Thu, 15 Jan 2026 17:22:03 -0900
+	id 1vgiZt-000ExG-S1; Fri, 16 Jan 2026 12:05:21 +0000
+Received: from smtp-out1.suse.de ([195.135.223.130]:43836) 
+ by hr1.samba.org with esmtps
+ (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1vghYx-000EiO-0r
+ for samba-technical@lists.samba.org; Fri, 16 Jan 2026 11:00:22 +0000
+Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
+ [IPv6:2a07:de40:b281:104:10:150:64:97])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id A863F336A7;
+ Fri, 16 Jan 2026 10:45:55 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
+ t=1768560355; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=WJuLQN1/VqCQ5MzAXUwztUOsWD7c/6Ri8BvtTGrLxeQ=;
+ b=NM/kSQUl/op+YKS2s6eKZXfE9Glh5kkfMDr9vCIJsC9FWe94PjEgFUboHs0ZKmqO49bUWq
+ GGnb+NiraWiGN0Yc7/GMi+PXcDAXYotsEPDcTaiNspuD+pdYjp5VDufc+cwlF6YloG+qs3
+ uSGr4retqv1mJn56UXxhwHQeZysiV4E=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
+ s=susede2_ed25519; t=1768560355;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=WJuLQN1/VqCQ5MzAXUwztUOsWD7c/6Ri8BvtTGrLxeQ=;
+ b=YPA70NjZ53LaWpg1U5dSvh7NjJzYXWZLUEwmMsCnm1ykEpF60x4KxRv4KCQctMxjo+19kZ
+ QfNXpE3F5HGTWWBA==
+Authentication-Results: smtp-out1.suse.de;
+ dkim=pass header.d=suse.cz header.s=susede2_rsa header.b="NM/kSQUl";
+ dkim=pass header.d=suse.cz header.s=susede2_ed25519 header.b=YPA70NjZ
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
+ t=1768560355; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=WJuLQN1/VqCQ5MzAXUwztUOsWD7c/6Ri8BvtTGrLxeQ=;
+ b=NM/kSQUl/op+YKS2s6eKZXfE9Glh5kkfMDr9vCIJsC9FWe94PjEgFUboHs0ZKmqO49bUWq
+ GGnb+NiraWiGN0Yc7/GMi+PXcDAXYotsEPDcTaiNspuD+pdYjp5VDufc+cwlF6YloG+qs3
+ uSGr4retqv1mJn56UXxhwHQeZysiV4E=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
+ s=susede2_ed25519; t=1768560355;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=WJuLQN1/VqCQ5MzAXUwztUOsWD7c/6Ri8BvtTGrLxeQ=;
+ b=YPA70NjZ53LaWpg1U5dSvh7NjJzYXWZLUEwmMsCnm1ykEpF60x4KxRv4KCQctMxjo+19kZ
+ QfNXpE3F5HGTWWBA==
+Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 965853EA65;
+ Fri, 16 Jan 2026 10:45:55 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
+ by imap1.dmz-prg2.suse.org with ESMTPSA id 6CqxJOMWamkVCwAAD6G6ig
+ (envelope-from <jack@suse.cz>); Fri, 16 Jan 2026 10:45:55 +0000
+Received: by quack3.suse.cz (Postfix, from userid 1000)
+ id 30814A091D; Fri, 16 Jan 2026 11:45:55 +0100 (CET)
+Date: Fri, 16 Jan 2026 11:45:55 +0100
 To: Jeff Layton <jlayton@kernel.org>
-Subject: Re: [PATCH 03/29] ext4: add EXPORT_OP_STABLE_HANDLES flag to export
- operations
-Message-ID: <20260116022203.GE19200@macsyma.local>
+Subject: Re: [PATCH 01/29] exportfs: add new EXPORT_OP_STABLE_HANDLES flag
+Message-ID: <6bajjyslarqrjr2brzyy6bgrmqrdxyhc42q7pfmz42d4y4kjtn@fod6fi4uf6qv>
 References: <20260115-exportfs-nfsd-v1-0-8e80160e3c0c@kernel.org>
- <20260115-exportfs-nfsd-v1-3-8e80160e3c0c@kernel.org>
+ <20260115-exportfs-nfsd-v1-1-8e80160e3c0c@kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20260115-exportfs-nfsd-v1-3-8e80160e3c0c@kernel.org>
-X-Warn: EHLO/HELO not verified: Remote host 18.9.28.11
- (outgoing-auth-1.mit.edu) incorrectly presented itself as outgoing.mit.edu
-X-Mailman-Approved-At: Fri, 16 Jan 2026 08:23:23 +0000
+In-Reply-To: <20260115-exportfs-nfsd-v1-1-8e80160e3c0c@kernel.org>
+X-Spam-Score: -2.51
+X-Spamd-Result: default: False [-2.51 / 50.00]; BAYES_HAM(-3.00)[100.00%];
+ SUSPICIOUS_RECIPS(1.50)[]; NEURAL_HAM_LONG(-1.00)[-1.000];
+ MID_RHS_NOT_FQDN(0.50)[];
+ R_DKIM_ALLOW(-0.20)[suse.cz:s=susede2_rsa,suse.cz:s=susede2_ed25519];
+ NEURAL_HAM_SHORT(-0.20)[-1.000]; MIME_GOOD(-0.10)[text/plain];
+ MX_GOOD(-0.01)[]; MIME_TRACE(0.00)[0:+];
+ RBL_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:104:10:150:64:97:from]; 
+ RCVD_COUNT_THREE(0.00)[3]; RCVD_TLS_LAST(0.00)[];
+ FUZZY_RATELIMITED(0.00)[rspamd.com]; ARC_NA(0.00)[];
+ DKIM_SIGNED(0.00)[suse.cz:s=susede2_rsa,suse.cz:s=susede2_ed25519];
+ FREEMAIL_ENVRCPT(0.00)[gmail.com]; DKIM_TRACE(0.00)[suse.cz:+];
+ TO_DN_SOME(0.00)[]; TO_MATCH_ENVRCPT_SOME(0.00)[];
+ DNSWL_BLOCKED(0.00)[2a07:de40:b281:104:10:150:64:97:from];
+ FROM_EQ_ENVFROM(0.00)[]; FROM_HAS_DN(0.00)[];
+ FREEMAIL_CC(0.00)[kernel.org,zeniv.linux.org.uk,oracle.com,brown.name,redhat.com,talpey.com,gmail.com,google.com,linux.alibaba.com,linux-foundation.org,mit.edu,dilger.ca,suse.com,huawei.com,vivo.com,dubeyko.com,fb.com,squashfs.org.uk,samba.org,manguebit.org,microsoft.com,szeredi.hu,omnibond.com,fasheh.com,evilplan.org,paragon-software.com,infradead.org,nod.at,suse.cz,mail.parknet.co.jp,vger.kernel.org,kvack.org,lists.ozlabs.org,lists.samba.org,lists.orangefs.org,lists.linux.dev,lists.sourceforge.net,lists.infradead.org];
+ RCPT_COUNT_GT_50(0.00)[74]; TAGGED_RCPT(0.00)[];
+ R_RATELIMIT(0.00)[to_ip_from(RLpnapcpkwxdkc5mopt1ezhhna)];
+ RECEIVED_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:106:10:150:64:167:received];
+ MISSING_XM_UA(0.00)[]; RCVD_VIA_SMTP_AUTH(0.00)[];
+ DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:rdns,
+ imap1.dmz-prg2.suse.org:helo, suse.com:email, suse.cz:dkim, suse.cz:email]
+X-Rspamd-Action: no action
+X-Rspamd-Queue-Id: A863F336A7
+X-Rspamd-Server: rspamd1.dmz-prg2.suse.org
+X-Spam-Flag: NO
+X-Mailman-Approved-At: Fri, 16 Jan 2026 12:05:20 +0000
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -63,8 +123,8 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Theodore Tso via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Theodore Tso <tytso@mit.edu>
+From: Jan Kara via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jan Kara <jack@suse.cz>
 Cc: Martin Brandenburg <martin@omnibond.com>,
  jfs-discussion@lists.sourceforge.net, Jan Kara <jack@suse.cz>,
  Paulo Alcantara <pc@manguebit.org>, Alex Markuze <amarkuze@redhat.com>,
@@ -80,7 +140,7 @@ Cc: Martin Brandenburg <martin@omnibond.com>,
  Mark Fasheh <mark@fasheh.com>, Hugh Dickins <hughd@google.com>,
  Dai Ngo <Dai.Ngo@oracle.com>, Ryusuke Konishi <konishi.ryusuke@gmail.com>,
  Viacheslav Dubeyko <slava@dubeyko.com>, NeilBrown <neil@brown.name>,
- Ilya Dryomov <idryomov@gmail.com>, linux-ext4@vger.kernel.org,
+ Gao Xiang <xiang@kernel.org>, linux-ext4@vger.kernel.org,
  Salah Triki <salah.triki@gmail.com>, linux-mm@kvack.org,
  devel@lists.orangefs.org, Shyam Prasad N <sprasad@microsoft.com>,
  Olga Kornievskaia <okorniev@redhat.com>, linux-cifs@vger.kernel.org,
@@ -90,10 +150,10 @@ Cc: Martin Brandenburg <martin@omnibond.com>,
  David Sterba <dsterba@suse.com>, Alexander Viro <viro@zeniv.linux.org.uk>,
  Baolin Wang <baolin.wang@linux.alibaba.com>,
  Jeffle Xu <jefflexu@linux.alibaba.com>, Jaegeuk Kim <jaegeuk@kernel.org>,
- ceph-devel@vger.kernel.org, Gao Xiang <xiang@kernel.org>,
+ ceph-devel@vger.kernel.org, Ilya Dryomov <idryomov@gmail.com>,
  OGAWA Hirofumi <hirofumi@mail.parknet.co.jp>,
  Andreas Gruenbacher <agruenba@redhat.com>, gfs2@lists.linux.dev,
- Christian Brauner <brauner@kernel.org>,
+ Christian Brauner <brauner@kernel.org>, Theodore Ts'o <tytso@mit.edu>,
  Luis de Bethencourt <luisbg@kernel.org>,
  Joseph Qi <joseph.qi@linux.alibaba.com>, linux-erofs@lists.ozlabs.org,
  samba-technical@lists.samba.org, linux-kernel@vger.kernel.org,
@@ -107,11 +167,41 @@ Cc: Martin Brandenburg <martin@omnibond.com>,
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Thu, Jan 15, 2026 at 12:47:34PM -0500, Jeff Layton wrote:
-> Add the EXPORT_OP_STABLE_HANDLES flag to ext4 export operations to indicate
-> that this filesystem can be exported via NFS.
+On Thu 15-01-26 12:47:32, Jeff Layton wrote:
+> At one time, nfsd could take the presence of struct export_operations to
+> be an indicator that a filesystem was exportable via NFS. Since then, a
+> lot of filesystems have grown export operations in order to provide
+> filehandle support. Some of those (e.g. kernfs, pidfs, and nsfs) are not
+> suitable for export via NFS since they lack filehandles that are
+> stable across reboot.
+> 
+> Add a new EXPORT_OP_STABLE_HANDLES flag that indicates that the
+> filesystem supports perisistent filehandles, a requirement for nfs
+> export. While in there, switch to the BIT() macro for defining these
+> flags.
+> 
+> For now, the flag is not checked anywhere. That will come later after
+> we've added it to the existing filesystems that need to remain
+> exportable.
 > 
 > Signed-off-by: Jeff Layton <jlayton@kernel.org>
 
-Acked-by: Theodore Ts'o <tytso@mit.edu>
+...
+
+> -#define EXPORT_OP_FLUSH_ON_CLOSE	(0x20) /* fs flushes file data on close */
+> -#define EXPORT_OP_NOLOCKS		(0x40) /* no file locking support */
+> +#define EXPORT_OP_FLUSH_ON_CLOSE	BIT(5) /* fs flushes file data on close */
+> +#define EXPORT_OP_NOLOCKS		BIT(6) /* no file locking support */
+> +#define EXPORT_OP_STABLE_HANDLES	BIT(7) /* required for nfsd export */
+
+The comment "required for nfsd export" doesn't quite match the name. I'd
+change the comment to something like "file handles are stable across
+reboot". Otherwise feel free to add:
+
+Reviewed-by: Jan Kara <jack@suse.cz>
+
+								Honza
+-- 
+Jan Kara <jack@suse.com>
+SUSE Labs, CR
 
