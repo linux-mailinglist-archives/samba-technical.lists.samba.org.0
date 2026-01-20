@@ -1,78 +1,69 @@
 Return-Path: <samba-technical-bounces@lists.samba.org>
-X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
+Received: from mail.lfdr.de
+	by lfdr with LMTP
+	id gBCQDAukb2n0DgAAu9opvQ
+	(envelope-from <samba-technical-bounces@lists.samba.org>)
+	for <lists+samba-technical@lfdr.de>; Tue, 20 Jan 2026 16:49:31 +0100
+X-Original-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 958B5D3C180
-	for <lists+samba-technical@lfdr.de>; Tue, 20 Jan 2026 09:12:57 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 245CE46B66
+	for <lists+samba-technical@lfdr.de>; Tue, 20 Jan 2026 16:49:31 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=t7xapJC59KqqTTsHRvPEloTsuOjJhUfycEcUpCAL4U8=; b=bsfWqOLMtxY5Ab7JnIdCBmeYHu
-	mqJfWwChyhrAWh/rvKNJCBIRPohSZID+68v84K5W64Oi1lp35NI0VZHoOM7Bol3855inznXYWZgU0
-	U8lvUj0F8y7+SUANfuEyOr0fP0Crn+wagcHd99N0nV4aEM2+xdeIC9gOOFb49ULSkGYw8h3C/XMH9
-	npguhnTvluc4mgLotFa0Rmshbr0lMbxvRItEFUOfl//gXFIeRItCZQ4w7cUCidRs88CAW4UN6+2MH
-	wbz6Sr8KZp/iiFAMH6krpQJQ7IRu7mXTUtiVB3+qxwgqZht9OR8hN5yxviQd1qc1s2xT7p7ySWpEh
-	n8vhybtg==;
-Received: from ip6-localhost ([::1]:54872 helo=hr1.samba.org) 
+	bh=8ipcNo6HCzR9Xe4A7m7WEph8shxdLCWwkiU9CBCxJus=; b=LovzfB0CXIcA8JxFIoxUw0gMiJ
+	rICYHFxZHoU79QB8A35aVUdNn5/P03GI1PZRp+tBOezJr5jbk0rL7dyOI4RYjT5y7nWS5m/n7S/mE
+	TueAVXIAARxMf0J92FtHOLs3chi1qUSkB9yvc7A+NT7kpmxR2EVM9Jy++JvhNJPDEn+CRYiPDUNbi
+	yITFz39ivnpFK5n2qoy/uc8rz2QfLjQFj2XpbeMLJeYUo+fdkIUCWNfS46xA+t1NhhrOHeRnyhWwK
+	jP5TSbPboMzfbAHiL3PKGRc2Ngb7Dla5mkyIuHQ/OK7COIoNCewm+JwSjrb9lnItgFRzWpYIgxjKO
+	VfqyaxPQ==;
+Received: from ip6-localhost ([::1]:60554 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1vi6qS-000i05-PU; Tue, 20 Jan 2026 08:12:12 +0000
-Received: from mail-ed1-x535.google.com ([2a00:1450:4864:20::535]:50680) 
+	id 1viBhZ-000jR3-0K; Tue, 20 Jan 2026 13:23:21 +0000
+Received: from sea.source.kernel.org ([172.234.252.31]:54686) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1vhsLk-000eZ6-Dl
- for samba-technical@lists.samba.org; Mon, 19 Jan 2026 16:43:35 +0000
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-64b9b0b4d5dso9321439a12.1
- for <samba-technical@lists.samba.org>; Mon, 19 Jan 2026 08:43:32 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1768841011; x=1769445811; darn=lists.samba.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=t7xapJC59KqqTTsHRvPEloTsuOjJhUfycEcUpCAL4U8=;
- b=FMQsi/6jetZilPx7NCCs29sju2yRfstA7n8YFdOGDKx50wCn6D9lbhRjpbQJ6HxuFt
- iTKVU3EicRAvE41Nlcc39R1p8nL3xwW/H7ZSEsgMhzP8FcW7W0GGszcfLzkn4PwJ2UJy
- pR6s2LbjeuIsmMxH60daKfQA09ADSNxeigo9cCJeaHF1rXAli19rE6ajDfhnTPei6qcY
- T1ak+NoScnqFbcznpEAXXQ1+FSlj5JJonQd1ECo2vjfg9D4QF0itrceCQF0nXOjuqxsX
- gLYHS0pCjBW4xtdunTUIuyOtHxGivBJRou6JObi7JBYUL0oB0CfIaZuNIV0dYzwM02mi
- T7/Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1768841011; x=1769445811;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=t7xapJC59KqqTTsHRvPEloTsuOjJhUfycEcUpCAL4U8=;
- b=ZGuQNYk4MZMdHD9Pm6XL4YAK/5+ZPgD+u27LubKXxhG0LKF4nXXam2uDe0F9zaxI3H
- 6aO/fGaFmYLZaZHJEVqC/fs2hRLid4+V/V9vrDrCX+vyvnXgOK5aiQJH9DhTjdCqRufs
- Uk8snES/lqCybK7IzwwGpVbJ/VZzjCMsWHTmUyorR4Bz1qIQlzVVOa6CL8ekkHStFfIf
- WzWNgej61BY4yg0IV1GM4QbmtqKrs5MOF6lWXOC2PveGM3PfNf3HrmLQC0MDO8BDjkpE
- 7KIUVs7seboMuhVZXSptjTKlIbg0jJpN0LfnNfAMdH6C6NAJknO89CGcaFGQqmSRLfIo
- 0jKg==
+ (Exim) id 1viBhT-000jQu-Lj
+ for samba-technical@lists.samba.org; Tue, 20 Jan 2026 13:23:18 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sea.source.kernel.org (Postfix) with ESMTP id 884E643FB6
+ for <samba-technical@lists.samba.org>; Tue, 20 Jan 2026 13:13:02 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 68D84C4AF0B
+ for <samba-technical@lists.samba.org>; Tue, 20 Jan 2026 13:13:02 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1768914782;
+ bh=tzEtq0KKqjNS4zyy1FqA0LcZcpoLgcAXtUvv1kBVNsE=;
+ h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
+ b=NQvTq4mS26alwWrwI4xhOL1ERssj3+g+hglUQDDORgSyOgLOWhJ20+UNFLMsFyAAG
+ 0c1zRjiBR4LOxPIVMY8qK2AYKLaXpCojP1AMbqbnmvImoVcZHJlB/URR2oTYy9RwVn
+ DUWaqoOetT0GQ+sFTA8KJpbWS9GfTCe7fqnFNQ1usuUHCbquRlXhfSbXyCt703yu6R
+ WNf7K2ueV/M/9f1qyzEyZ44VJuwq+ce3P7ay3s0TLUG8gQEwJrRmxiKRIIM+14b/FB
+ icgHw2W2xsq5PF7xxZKYLrgZIca6LZnuhVI3S02MSHneZOHKHfdkS201ibajDO7xpz
+ qEQKRq+CKRdmQ==
+Received: by mail-ej1-f48.google.com with SMTP id
+ a640c23a62f3a-b87693c981fso892708666b.1
+ for <samba-technical@lists.samba.org>; Tue, 20 Jan 2026 05:13:02 -0800 (PST)
 X-Forwarded-Encrypted: i=1;
- AJvYcCVMuLJKbFEMoGnh8kJ1VRuJqJiQtex3kCk8owXV6NOsa5cssH+DiEMzoycKDtngG3YjBFFXAe8jB0lR9njxJcI=@lists.samba.org
-X-Gm-Message-State: AOJu0YzFKP35cviXWyNAQDK34AX2nDd3pOgX1fcCMuHs+hfnJTznsf1k
- 58/FgOUE+EnSxWw6TZ5Bn+B2r7c2KM6axQ1R29WQw986+0GH4GInEvYXBxTLVxpQECi1HJ4BSpk
- A4wf0/2rfmZ03ognxrgL/QMoYeNJjk+k=
-X-Gm-Gg: AZuq6aLWZNoe14taUuuwy9no3SF6wRb1hRZ1yNB7CkfDjNVqNbj3m1Fh0LgL6Hmy5tG
- LtIYXDvCaZQd2HtsKwco7GJOQLySLyNHbEtt9Ym4WMUigmvr6ChOsIwb6nIDnd/UAf4CJqxU7Z8
- zQJ6V0XK3iYd7NXPuSPx2JgP0Dw4CBTz/KfyMmue3UEGk6ldxZKNDDNzFSoCM5KimmTRX8Wrz0c
- sC7H7DyQ+ZHIP8YlweLN5UYzy22i57+rteqdgFxVhnDsIKqTktSP/Fl+GOif3rsap2/BWCkxDoo
- Thoh+rEHG7sMOLOmUaGkAcoZgDwnqX8//Zf527JP
-X-Received: by 2002:a05:6402:5106:b0:64c:584c:556c with SMTP id
- 4fb4d7f45d1cf-654bb6192admr8530585a12.30.1768841011353; Mon, 19 Jan 2026
- 08:43:31 -0800 (PST)
+ AJvYcCXAyM8Ja2pcVnlla1aQqQgjPXUTQWKXYOJNB6GpILTpGzJMhq1gE5qvT+vFh/7FHZEMPQuxrjtTBVi4NtBt6+E=@lists.samba.org
+X-Gm-Message-State: AOJu0Yy6/zJhEY+gIq6Jrdg/b98t0iQfei1los7SjdszP4XmL0BME2QA
+ dt6E+WUTENuTTtLSnFgFxRuUBAyvBW0fQ5UbG5CzGj0FM0qaL8B/3fqwgu6r7tc5xMSkb7tMGf1
+ 4+3U9UKykrI9JJQwocU6j5SEHlM7BVYw=
+X-Received: by 2002:a17:907:2d8c:b0:b87:365d:26b8 with SMTP id
+ a640c23a62f3a-b8792f783e1mr1206435066b.35.1768914781032; Tue, 20 Jan 2026
+ 05:13:01 -0800 (PST)
 MIME-Version: 1.0
-References: <20260119-exportfs-nfsd-v2-0-d93368f903bd@kernel.org>
- <20260119-exportfs-nfsd-v2-27-d93368f903bd@kernel.org>
-In-Reply-To: <20260119-exportfs-nfsd-v2-27-d93368f903bd@kernel.org>
-Date: Mon, 19 Jan 2026 17:43:19 +0100
-X-Gm-Features: AZwV_QgQ6YFmczFqASwqjyOa509PoCTPsOB-sET1G173IBHOd4X5kFjH9N6z5MI
-Message-ID: <CAOQ4uxjyTdf21G1Y=_5Eox58drVPA0gAMeSQZxh=T36_yzssNw@mail.gmail.com>
-Subject: Re: [PATCH v2 27/31] fuse: add EXPORT_OP_STABLE_HANDLES flag to
- export operations
-To: Jeff Layton <jlayton@kernel.org>
+References: <20251208154919.934760-1-metze@samba.org>
+ <b5b92cae-d92a-426e-b6ad-fcaa9691b980@samba.org>
+In-Reply-To: <b5b92cae-d92a-426e-b6ad-fcaa9691b980@samba.org>
+Date: Tue, 20 Jan 2026 22:12:48 +0900
+X-Gmail-Original-Message-ID: <CAKYAXd9-BeHe7zU-xo0KZzmvzeba=BMvXOMNZnuW+yeqGcq19g@mail.gmail.com>
+X-Gm-Features: AZwV_Qh9CVKbXimtnhH0quoMTgZe0wN1lycT7JouA0RLfhB_wFmkFmEBv-PnM1U
+Message-ID: <CAKYAXd9-BeHe7zU-xo0KZzmvzeba=BMvXOMNZnuW+yeqGcq19g@mail.gmail.com>
+Subject: Re: [PATCH] smb: server: reset smb_direct_port =
+ SMB_DIRECT_PORT_INFINIBAND on init
+To: Stefan Metzmacher <metze@samba.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Tue, 20 Jan 2026 08:12:07 +0000
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -86,83 +77,104 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Amir Goldstein via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Amir Goldstein <amir73il@gmail.com>
-Cc: Martin Brandenburg <martin@omnibond.com>,
- jfs-discussion@lists.sourceforge.net, Jan Kara <jack@suse.cz>,
- Paulo Alcantara <pc@manguebit.org>, Alex Markuze <amarkuze@redhat.com>,
- Sandeep Dhavale <dhavale@google.com>, linux-btrfs@vger.kernel.org,
- Carlos Maiolino <cem@kernel.org>, Dave Chinner <david@fromorbit.com>,
- linux-unionfs@vger.kernel.org,
- Konstantin Komarov <almaz.alexandrovich@paragon-software.com>,
- Chris Mason <clm@fb.com>, Andreas Dilger <adilger.kernel@dilger.ca>,
- Chunhai Guo <guochunhai@vivo.com>, linux-mtd@lists.infradead.org,
- Mike Marshall <hubcap@omnibond.com>, linux-xfs@vger.kernel.org,
- linux-nilfs@vger.kernel.org, Yue Hu <zbestahu@gmail.com>,
- Miklos Szeredi <miklos@szeredi.hu>, Richard Weinberger <richard@nod.at>,
- Mark Fasheh <mark@fasheh.com>, linux-doc@vger.kernel.org,
- Hugh Dickins <hughd@google.com>, Dai Ngo <Dai.Ngo@oracle.com>,
- Ryusuke Konishi <konishi.ryusuke@gmail.com>,
- Viacheslav Dubeyko <slava@dubeyko.com>, NeilBrown <neil@brown.name>,
- Ilya Dryomov <idryomov@gmail.com>, linux-ext4@vger.kernel.org,
- Salah Triki <salah.triki@gmail.com>, linux-mm@kvack.org,
- devel@lists.orangefs.org, Shyam Prasad N <sprasad@microsoft.com>,
- Olga Kornievskaia <okorniev@redhat.com>, linux-cifs@vger.kernel.org,
- Dave Kleikamp <shaggy@kernel.org>, Chao Yu <chao@kernel.org>,
- linux-nfs@vger.kernel.org, Tom Talpey <tom@talpey.com>,
- ocfs2-devel@lists.linux.dev, Bharath SM <bharathsm@microsoft.com>,
- David Sterba <dsterba@suse.com>, Alexander Viro <viro@zeniv.linux.org.uk>,
- Baolin Wang <baolin.wang@linux.alibaba.com>,
- Jeffle Xu <jefflexu@linux.alibaba.com>, Jaegeuk Kim <jaegeuk@kernel.org>,
- ceph-devel@vger.kernel.org, Gao Xiang <xiang@kernel.org>,
- OGAWA Hirofumi <hirofumi@mail.parknet.co.jp>,
- Andreas Gruenbacher <agruenba@redhat.com>, gfs2@lists.linux.dev,
- Christian Brauner <brauner@kernel.org>, Theodore Ts'o <tytso@mit.edu>,
- Luis de Bethencourt <luisbg@kernel.org>,
- Joseph Qi <joseph.qi@linux.alibaba.com>, linux-erofs@lists.ozlabs.org,
- Jonathan Corbet <corbet@lwn.net>, samba-technical@lists.samba.org,
- linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- Steve French <sfrench@samba.org>, Chuck Lever <chuck.lever@oracle.com>,
- Hongbo Li <lihongbo22@huawei.com>, Anna Schumaker <anna@kernel.org>,
- Jan Kara <jack@suse.com>, linux-fsdevel@vger.kernel.org,
- Phillip Lougher <phillip@squashfs.org.uk>,
- Andrew Morton <akpm@linux-foundation.org>, ntfs3@lists.linux.dev,
- David Woodhouse <dwmw2@infradead.org>,
- David Laight <david.laight.linux@gmail.com>,
- Trond Myklebust <trondmy@kernel.org>, Joel Becker <jlbec@evilplan.org>
+From: Namjae Jeon via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Namjae Jeon <linkinjeon@kernel.org>
+Cc: Tom Talpey <tom@talpey.com>, linux-cifs@vger.kernel.org,
+ samba-technical@lists.samba.org, Steve French <smfrench@gmail.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
+X-Spamd-Result: default: False [-1.21 / 15.00];
+	DMARC_POLICY_ALLOW_WITH_FAILURES(-0.50)[];
+	R_SPF_ALLOW(-0.20)[+ip6:2a01:4f8:192:486::/64:c];
+	R_DKIM_ALLOW(-0.20)[lists.samba.org:s=2954282];
+	MAILLIST(-0.20)[mailman];
+	MIME_GOOD(-0.10)[text/plain];
+	HAS_LIST_UNSUB(-0.01)[];
+	DKIM_MIXED(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	DMARC_POLICY_ALLOW(0.00)[lists.samba.org,reject];
+	FREEMAIL_CC(0.00)[talpey.com,vger.kernel.org,lists.samba.org,gmail.com];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[talpey.com:email,samba.org:email,mail.gmail.com:mid,lists.samba.org:dkim];
+	ARC_NA(0.00)[];
+	R_DKIM_REJECT(0.00)[kernel.org:s=k20201202];
+	TO_DN_SOME(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:metze@samba.org,m:tom@talpey.com,m:linux-cifs@vger.kernel.org,m:samba-technical@lists.samba.org,m:smfrench@gmail.com,s:lists@lfdr.de];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER(0.00)[samba-technical@lists.samba.org,samba-technical-bounces@lists.samba.org];
+	FORWARDED(0.00)[samba-technical@lists.samba.org];
+	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
+	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
+	RCPT_COUNT_FIVE(0.00)[5];
+	RCVD_COUNT_FIVE(0.00)[5];
+	PREVIOUSLY_DELIVERED(0.00)[samba-technical@lists.samba.org];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[samba-technical@lists.samba.org,samba-technical-bounces@lists.samba.org];
+	DKIM_TRACE(0.00)[lists.samba.org:+,kernel.org:-];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TAGGED_RCPT(0.00)[samba-technical];
+	MISSING_XM_UA(0.00)[];
+	ASN(0.00)[asn:24940, ipnet:2a01:4f8::/32, country:DE];
+	HAS_REPLYTO(0.00)[linkinjeon@kernel.org]
+X-Rspamd-Queue-Id: 245CE46B66
+X-Rspamd-Action: no action
+X-Rspamd-Server: lfdr
 
-On Mon, Jan 19, 2026 at 5:30=E2=80=AFPM Jeff Layton <jlayton@kernel.org> wr=
-ote:
+On Tue, Jan 20, 2026 at 2:40=E2=80=AFAM Stefan Metzmacher <metze@samba.org>=
+ wrote:
 >
-> Add the EXPORT_OP_STABLE_HANDLES flag to fuse export operations to indica=
-te
-> that this filesystem can be exported via NFS.
+> Hi Namjae,
 >
-> Signed-off-by: Jeff Layton <jlayton@kernel.org>
-Reviewed-by: Amir Goldstein <amir73il@gmail.com>
-
-> ---
->  fs/fuse/inode.c | 1 +
->  1 file changed, 1 insertion(+)
+> can this be merged? It makes testing between roce and iwarp
+> much easier.
+Looks ok. Applied it to #ksmbd-for-nex-next.
 >
-> diff --git a/fs/fuse/inode.c b/fs/fuse/inode.c
-> index 819e50d666224a6201cfc7f450e0bd37bfe32810..df92414e903b200fedb9dc777=
-b913dae1e2d0741 100644
-> --- a/fs/fuse/inode.c
-> +++ b/fs/fuse/inode.c
-> @@ -1215,6 +1215,7 @@ static const struct export_operations fuse_export_o=
-perations =3D {
->         .fh_to_parent   =3D fuse_fh_to_parent,
->         .encode_fh      =3D fuse_encode_fh,
->         .get_parent     =3D fuse_get_parent,
-> +       .flags          =3D EXPORT_OP_STABLE_HANDLES,
->  };
+> I have infrastructure to listen on both iwarp and roce
+> at the same time, but I haven't written the patches for
+> ksmbd.ko to use it. I'll hopefully find the time
+> in the next days.
+I also hope it will be supported soon.
+Thanks!
 >
->  static const struct super_operations fuse_super_operations =3D {
+> Thanks!
+> metze
 >
-> --
-> 2.52.0
+>
+> Am 08.12.25 um 16:49 schrieb Stefan Metzmacher:
+> > This allows testing with different devices (iwrap vs. non-iwarp) withou=
+t
+> > 'rmmod ksmbd && modprobe ksmbd', but instead
+> > 'ksmbd.control -s && ksmbd.mountd' is enough.
+> >
+> > In the long run we want to listen on iwarp and non-iwarp at the same ti=
+me,
+> > but requires more changes, most likely also in the rdma layer.
+> >
+> > Cc: Namjae Jeon <linkinjeon@kernel.org>
+> > Cc: Steve French <smfrench@gmail.com>
+> > Cc: Tom Talpey <tom@talpey.com>
+> > Cc: linux-cifs@vger.kernel.org
+> > Cc: samba-technical@lists.samba.org
+> > Signed-off-by: Stefan Metzmacher <metze@samba.org>
+> > ---
+> >   fs/smb/server/transport_rdma.c | 1 +
+> >   1 file changed, 1 insertion(+)
+> >
+> > diff --git a/fs/smb/server/transport_rdma.c b/fs/smb/server/transport_r=
+dma.c
+> > index f585359684d4..05f008ea51cd 100644
+> > --- a/fs/smb/server/transport_rdma.c
+> > +++ b/fs/smb/server/transport_rdma.c
+> > @@ -2708,6 +2708,7 @@ int ksmbd_rdma_init(void)
+> >   {
+> >       int ret;
+> >
+> > +     smb_direct_port =3D SMB_DIRECT_PORT_INFINIBAND;
+> >       smb_direct_listener.cm_id =3D NULL;
+> >
+> >       ret =3D ib_register_client(&smb_direct_ib_client);
 >
 
